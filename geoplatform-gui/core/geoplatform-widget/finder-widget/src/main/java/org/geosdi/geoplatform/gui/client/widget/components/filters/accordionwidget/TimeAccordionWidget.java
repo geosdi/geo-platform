@@ -35,6 +35,21 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
 
+import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.event.DatePickerEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.FieldEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.DatePicker;
+import com.extjs.gxt.ui.client.widget.form.DateField;
+import com.extjs.gxt.ui.client.widget.form.LabelField;
+import com.extjs.gxt.ui.client.widget.form.MultiField;
+import com.extjs.gxt.ui.client.widget.form.Radio;
+import com.extjs.gxt.ui.client.widget.form.RadioGroup;
+import com.extjs.gxt.ui.client.widget.layout.FlowData;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import java.util.Date;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
@@ -49,16 +64,148 @@ import org.geosdi.geoplatform.gui.responce.TimeInfo;
 @CatalogFilter
 public class TimeAccordionWidget extends GeoPlatformContentPanel {
 
-    private TimeInfo temporalInfo;
+    private TimeInfo timeInfo;
+    private Radio anytimeRadio;
+    private MultiField<DateField> multiDates;
+    private DateField startDate;
+    private DateField endDate;
 
     @Inject
     public TimeAccordionWidget(CatalogFinderBean theCatalogFinder) {
-        super(false);
-        this.temporalInfo = theCatalogFinder.getTimeInfo();
+        super(true);
+        this.timeInfo = theCatalogFinder.getTimeInfo();
     }
 
     @Override
     public void addComponent() {
+        super.setLayout(new FlowLayout(5));
+
+        this.addRadioGroup();
+        this.addCalendars();
+    }
+
+    private void addRadioGroup() {
+        anytimeRadio = new Radio();
+        anytimeRadio.setBoxLabel("Anytime");
+        anytimeRadio.setValue(true); // Enabled by default
+        anytimeRadio.addListener(Events.Change, new Listener<FieldEvent>() {
+
+            @Override
+            public void handleEvent(FieldEvent be) {
+                timeInfo.setActive(false);
+                timeInfo.setStartDate(null);
+                timeInfo.setEndDate(null);
+
+                startDate.setMaxValue(null);
+                endDate.setMinValue(null);
+                multiDates.reset();
+                multiDates.disable();
+            }
+        });
+
+        final Radio temporalExtentRadio = new Radio();
+        temporalExtentRadio.setBoxLabel("Temporal Extent");
+        temporalExtentRadio.addListener(Events.Change, new Listener<FieldEvent>() {
+
+            @Override
+            public void handleEvent(FieldEvent be) {
+                timeInfo.setActive(true);
+
+                multiDates.enable();
+            }
+        });
+
+        final RadioGroup radioGroup = new RadioGroup();
+        radioGroup.setOrientation(Style.Orientation.VERTICAL);
+        radioGroup.add(anytimeRadio);
+        radioGroup.add(temporalExtentRadio);
+
+        super.add(radioGroup);
+    }
+
+    private void addCalendars() {
+        DateTimeFormat dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
+
+        startDate = new DateField();
+        startDate.setToolTip("Start date");
+        startDate.getPropertyEditor().setFormat(dtFormat);
+        startDate.setWidth(100);
+//        startDate.setFormatValue(true);
+        startDate.setAutoValidate(true);
+        startDate.setAllowBlank(false);
+        startDate.addListener(Events.Change, new Listener<FieldEvent>() {
+
+            @Override
+            public void handleEvent(FieldEvent be) {
+                if (startDate.isValid()) {
+                    Date selectedDate = startDate.getValue();
+                    System.out.println("CHANGE start: " + selectedDate);
+
+                    setStartDate(selectedDate);
+                }
+            }
+        });
+
+        DatePicker startDatePicker = startDate.getDatePicker();
+        startDatePicker.addListener(Events.Select, new Listener<DatePickerEvent>() {
+
+            @Override
+            public void handleEvent(DatePickerEvent dpe) {
+                Date selectedDate = dpe.getDate();
+                System.out.println("SELECT start: " + selectedDate);
+                setStartDate(selectedDate);
+            }
+        });
+
+        endDate = new DateField();
+        endDate.setToolTip("End date");
+        endDate.getPropertyEditor().setFormat(dtFormat);
+        endDate.setWidth(100);
+//        endDate.setFormatValue(true);
+        endDate.setAutoValidate(true);
+        endDate.setAllowBlank(false);
+        endDate.addListener(Events.Change, new Listener<FieldEvent>() {
+
+            @Override
+            public void handleEvent(FieldEvent be) {
+                if (endDate.isValid()) {
+                    setEndDate(endDate.getValue());
+                }
+            }
+        });
+
+        DatePicker endDatePicker = endDate.getDatePicker();
+        endDatePicker.addListener(Events.Select, new Listener<DatePickerEvent>() {
+
+            @Override
+            public void handleEvent(DatePickerEvent dpe) {
+                setEndDate(dpe.getDate());
+            }
+        });
+
+        multiDates = new MultiField<DateField>();
+        multiDates.setOrientation(Style.Orientation.HORIZONTAL);
+        multiDates.add(new LabelField("From:&nbsp;"));
+        multiDates.add(startDate);
+        multiDates.add(new LabelField("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;"));
+        multiDates.add(endDate);
+        multiDates.disable(); // Disabled by default
+//        multiDates.addListener(Events.Valid, new Listener<FieldEvent>() {
+//
+//            @Override
+//            public void handleEvent(FieldEvent be) {
+//                System.out.println("+++++++ valid");
+//            }
+//        });
+//        multiDates.addListener(Events.Invalid, new Listener<FieldEvent>() {
+//
+//            @Override
+//            public void handleEvent(FieldEvent be) {
+//                System.out.println("+++++++ NO valid");
+//            }
+//        });
+
+        super.add(multiDates, new FlowData(5));
     }
 
     @Override
@@ -69,9 +216,21 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
     public void setPanelProperties() {
         super.setAnimCollapse(false);
         super.setHeading("Filter by Time");
+        super.setBodyBorder(false);
     }
 
     @Override
     public void reset() {
+        anytimeRadio.setValue(true);
+    }
+
+    private void setStartDate(Date selectedDate) {
+        endDate.setMinValue(selectedDate);
+        timeInfo.setStartDate(selectedDate);
+    }
+
+    private void setEndDate(Date selectedDate) {
+        startDate.setMaxValue(selectedDate);
+        timeInfo.setEndDate(selectedDate);
     }
 }

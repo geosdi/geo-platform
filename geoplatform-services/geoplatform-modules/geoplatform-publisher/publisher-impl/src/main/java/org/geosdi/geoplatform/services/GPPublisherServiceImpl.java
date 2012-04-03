@@ -37,11 +37,11 @@ package org.geosdi.geoplatform.services;
 
 import org.geosdi.geoplatform.services.utility.PublishUtility;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
-import it.geosolutions.geoserver.rest.decoder.RESTCoverageStore;
 import it.geosolutions.geoserver.rest.decoder.RESTFeatureType;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
 import it.geosolutions.geoserver.rest.decoder.RESTFeatureType.Attribute;
@@ -51,12 +51,8 @@ import it.geosolutions.geoserver.rest.decoder.RESTStyleList;
 import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Enumeration;
-import java.util.GregorianCalendar;
+import java.util.*;
 import java.util.zip.ZipFile;
-import java.util.List;
 import java.util.zip.ZipEntry;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.InfoPreview;
@@ -64,14 +60,17 @@ import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsConfiguration;
 import org.geosdi.geoplatform.services.utility.PostGISUtility;
+import org.geotoolkit.data.query.QueryBuilder;
+import org.geotoolkit.geometry.jts.SRIDGenerator;
+import org.geotoolkit.internal.referencing.CRSUtilities;
+import org.geotoolkit.referencing.IdentifiedObjects;
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.data.DataSourceException;
-import org.geotools.data.FileDataStore;
-import org.geotools.data.FileDataStoreFinder;
-import org.geotools.data.simple.SimpleFeatureSource;
+import org.geotools.data.shapefile.ShapefileDataStoreFactory;
 import org.geotools.factory.Hints;
 import org.geotools.gce.geotiff.GeoTiffReader;
 import org.geotools.referencing.CRS;
+import org.opengis.parameter.ParameterValueGroup;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.quartz.CalendarIntervalScheduleBuilder;
@@ -81,13 +80,15 @@ import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
-@WebService(
-endpointInterface = "org.geosdi.geoplatform.services.GPPublisherService")
+@WebService(endpointInterface = "org.geosdi.geoplatform.services.GPPublisherService")
 public class GPPublisherServiceImpl implements GPPublisherService,
-        InitializingBean {
+        InitializingBean, ApplicationContextAware {
 
     private Logger logger = LoggerFactory.getLogger(
             GPPublisherServiceImpl.class);
@@ -118,6 +119,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
     //
     @Autowired
     private PostGISUtility postGISUtility;
+    private ApplicationContext appContext;
 
     public GPPublisherServiceImpl(String RESTURL, String RESTUSER, String RESTPW,
             String geoportalDir) {
@@ -128,6 +130,11 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         logger.info("GEOPORTAL DIR @@@@@@@@@@@@@@@@@@@@@ " + this.geoportalDir);
         logger.info("GEOSERVER AT: " + RESTURL + ", USER: " + RESTUSER
                 + ", PWD: " + RESTPW + ", USING DIR: " + geoportalDir);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext ac) throws BeansException {
+        appContext = ac;
     }
 
     @Override
@@ -493,15 +500,42 @@ public class GPPublisherServiceImpl implements GPPublisherService,
             String origName = shpFileName.substring(0, shpFileName.length() - 4);
             info.name = userName + "_shp_" + origName;
             File shpFile = new File(tempUserDir + shpFileName);
-            FileDataStore store = null;
-            SimpleFeatureSource featureSource = null;
+//            FileDataStore store = null;
+//            SimpleFeatureSource featureSource = null;
+            String geomTypeProvola = null;
+            org.geotoolkit.data.FeatureCollection collection = null;
             try {
-                store = FileDataStoreFinder.getDataStore(shpFile);
-                featureSource = store.getFeatureSource();
-            } catch (IOException ex) {
-                this.logger.error("Error analyzing shp list: " + ex);
+                //we must know the parameters
+                final ParameterValueGroup parameters = org.geotoolkit.data.shapefile.ShapefileDataStoreFactory.PARAMETERS_DESCRIPTOR.createValue();
+                parameters.parameter("url").setValue(shpFile.toURI().toURL());
+
+//                final Map<String, Serializable> parameters = Maps.newHashMap();
+//                parameters.put("url", shpFile.toURI().toURL().toString().replaceAll("\\/", "\\\\"));
+                org.geotoolkit.data.DataStore dataStoreGeoTK =
+                        org.geotoolkit.data.DataStoreFinder.get(parameters);
+
+//                store = FileDataStoreFinder.getDataStore(shpFile);
+//                featureSource = store.getFeatureSource();
+
+                //creating the session ---------------------------------------------------------------
+//             final org.​geotoolkit.​data.​session.Session session = dataStoreGeoTK.createSession(true);
+
+                System.out.println("Reading Features: " + shpFile.toURI().toURL().toString().replaceAll("\\/", "\\\\"));
+                System.out.println("Reading Features: " + dataStoreGeoTK.toString());
+                //reading features -------------------------------------------------------------------
+                org.opengis.feature.type.Name typeName = dataStoreGeoTK.getNames().iterator().next();
+                System.out.println("Reading collection");
+                collection = dataStoreGeoTK.createSession(true).getFeatureCollection(QueryBuilder.all(typeName));
+                System.out.println("Before collection");
+                geomTypeProvola = collection.getFeatureType().getGeometryDescriptor().getType().getName().toString();
+                System.out.println("After collection");
+//            } catch (IOException ex) {
+//                this.logger.error("Error analyzing shp list: " + ex);
+            } catch (Exception e) {
+                System.out.println("Che sorta di exception: " + e);
             }
-            String geomType = featureSource.getSchema().getGeometryDescriptor().getType().getName().toString();
+//            String geomType = featureSource.getSchema().getGeometryDescriptor().getType().getName().toString();
+            String geomType = geomTypeProvola;
             String SLDFileName = origName + ".sld";
             File fileSLD = new File(tempUserDir + SLDFileName);
             if (fileSLD.exists()) {
@@ -516,16 +550,20 @@ public class GPPublisherServiceImpl implements GPPublisherService,
                 info.sld = info.name;
             }
             logger.info("\n INFO: STYLE " + info.sld + " for " + info.name);
-            Integer code = null;
+//            Integer code = null;
+            int code = SRIDGenerator.toSRID(collection.getFeatureType().getCoordinateReferenceSystem(), SRIDGenerator.Version.V1);
             try {
+//                code = org.geotoolkit.referencing.IdentifiedObjects.lookupEpsgCode(
+//                        collection.getFeatureType().getCoordinateReferenceSystem().getCoordinateSystem(), true);
+                System.out.println("Code geotoolkit: " + code);
 //                    System.out.println("Info sull'epsg: " + featureSource.getSchema().getCoordinateReferenceSystem());
-                code = CRS.lookupEpsgCode(
-                        featureSource.getSchema().getCoordinateReferenceSystem(),
-                        true);
+//                code = CRS.lookupEpsgCode(
+//                        featureSource.getSchema().getCoordinateReferenceSystem(),
+//                        true);
             } catch (Exception e) {
             }
-            if (code != null) {
-                info.epsg = "EPSG:" + code.toString();
+            if (code != 0) {
+                info.epsg = "EPSG:" + code;
             } else {
                 info.epsg = "EPSG:4326";
             }
@@ -769,8 +807,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         // decompress the zip file in the <tmp>/shp directory, read info and create <layername>.zip files for each layer in <tmp>/zip
         // and decompress the geotiff files in user/tiff direcotry
         List<LayerInfo> infoShapeList = getInfoFromCompressedShape(userName,
-                file,
-                tempUserDir, tempUserZipDir, tempUserTifDir);
+                file, tempUserDir, tempUserZipDir, tempUserTifDir);
         if (infoShapeList.isEmpty()) {
             throw new ResourceNotFoundFault(
                     "The ZIP archive does not contain shp or geotiff files");
@@ -806,7 +843,6 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 //                        "\n INFO: STYLE TO PUBLISH " + info.sld + " NAME :" + info.name);
 //                logger.info(
 //                        "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);
-            //RESTCoverageStore store =
             boolean published = restPublisher.publishExternalGeoTIFF(userWorkspace,
                     fileName, fileInTifDir, fileName, epsg, GSResourceEncoder.ProjectionPolicy.REPROJECT_TO_DECLARED, sld);
             if (published) {

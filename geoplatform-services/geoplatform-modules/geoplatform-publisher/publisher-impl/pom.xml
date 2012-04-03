@@ -21,6 +21,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+         <!-- GEOTOOLKIT -->
+        <repository>
+            <id>geotoolkit</id>
+            <name>Geotk repository</name>
+            <url>http://maven.geotoolkit.org</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
         
 <!--        <dependency>
@@ -70,6 +82,18 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configurator</artifactId>
+        </dependency>
+        
+<!--        <dependency>
+            <groupId>org.geotoolkit.pending</groupId>
+            <artifactId>geotk-datastore-core</artifactId>
+            <version>3.x-SNAPSHOT</version>
+        </dependency>-->
+        
+        <dependency>
+            <groupId>org.geotoolkit.pending</groupId>
+            <artifactId>geotk-shapefile</artifactId>
+            <version>3.x-SNAPSHOT</version>
         </dependency>
         
         <!-- =========================================================== -->

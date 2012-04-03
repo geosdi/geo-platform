@@ -61,6 +61,7 @@ public class TypeSearchRequest extends GetRecordsRequestHandler {
         request.setConstraintLanguage("CQL");
         request.setConstraintLanguageVersion("1.1.0");
 
+        logger.debug("\n+++ Search type: {} +++", searchType);
         if (searchType == GetRecordsSearchType.COUNT) {
             request.setTypeNames("csw:Record");
 
@@ -68,7 +69,6 @@ public class TypeSearchRequest extends GetRecordsRequestHandler {
             request.setTypeNames("gmd:MD_Metadata");
             request.setElementSetName(ElementSetType.SUMMARY);
             request.setResultType(ResultType.RESULTS);
-
         }
     }
 }

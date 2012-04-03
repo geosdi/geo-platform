@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.services.responsibility;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
@@ -48,6 +50,8 @@ import org.geotoolkit.csw.GetRecordsRequest;
  */
 public class TimeSearchRequest extends GetRecordsRequestHandler {
 
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
     @Override
     protected void processGetRecordsRequest(GetRecordsSearchType searchType,
             CatalogFinderBean catalogFinder, GetRecordsRequest request)
@@ -56,11 +60,27 @@ public class TimeSearchRequest extends GetRecordsRequestHandler {
 
         TimeInfo timeInfo = catalogFinder.getTimeInfo();
         if (timeInfo != null && timeInfo.isActive()) {
-            // TODO Implement me
             Date startDate = timeInfo.getStartDate();
             Date endDate = timeInfo.getEndDate();
-            logger.trace("\n+++ {} ", startDate);
-            logger.trace("\n+++ {} ", endDate);
+            logger.debug("\n+++ From: {} - To: {} +++", startDate, endDate);
+
+            String timeConstraint = this.createCQLTimePredicate(startDate, endDate);
+            logger.trace("\n+++ Time constraint: \"{}\" +++", timeConstraint);
+
+            // TODO Wait fix from geotoolkit of FilterFactory
+//            super.addConstraint(request, timeConstraint);
         }
+    }
+
+    /**
+     * Create a string like this:
+     * dateTime DURING 2006-11-30T01:30:00Z/2006-12-31T01:30:00Z
+     */
+    private String createCQLTimePredicate(Date startDate, Date endDate) {
+        StringBuilder str = new StringBuilder("dateTime DURING ");
+        str.append(formatter.format(startDate));
+        str.append("/");
+        str.append(formatter.format(endDate));
+        return str.toString();
     }
 }

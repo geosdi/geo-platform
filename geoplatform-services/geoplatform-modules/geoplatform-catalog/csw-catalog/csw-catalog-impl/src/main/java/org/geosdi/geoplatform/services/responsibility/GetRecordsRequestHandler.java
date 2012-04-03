@@ -69,4 +69,15 @@ public abstract class GetRecordsRequestHandler {
             GetRecordsSearchType searchType, CatalogFinderBean catalogFinder,
             GetRecordsRequest request)
             throws IllegalParameterFault;
+
+    protected void addConstraint(GetRecordsRequest request,
+            String followingConstraint) {
+
+        String previousConstraint = request.getConstraint();
+        if (previousConstraint != null) {
+            request.setConstraint(previousConstraint + " AND " + followingConstraint);
+        } else {
+            request.setConstraint(followingConstraint);
+        }
+    }
 }

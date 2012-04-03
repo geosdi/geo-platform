@@ -59,16 +59,29 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
             boolean searchTitle = textInfo.isSearchTitle();
             boolean searchAbstract = textInfo.isSearchAbstract();
             boolean searchSubjects = textInfo.isSearchSubjects();
-            if (searchText != null && !searchTitle && !searchAbstract && !searchSubjects) {
-                throw new IllegalParameterFault("You need to specify where to search \"" + searchText + "\" text");
+            if (searchText != null
+                    && !searchTitle && !searchAbstract && !searchSubjects) {
+                throw new IllegalParameterFault(
+                        "You need to specify where to search \"" + searchText + "\" text");
             }
 
-            // TODO Refine search
+            logger.debug("\n+++ Search text: \"{}\" +++", searchText);
             if (searchText != null) {
-                logger.trace("\n+++ {} ", searchText);
-                request.setConstraint("AnyText like '%" + searchText + "%'");
+                if (searchTitle & searchAbstract & searchSubjects) {
+                    request.setConstraint("AnyText LIKE '%" + searchText + "%'");
+                } else {
+                    if (searchTitle) {
+                        request.setConstraint("dc:title LIKE '%" + searchText + "%'");
+                    }
+                    if (searchAbstract) {
+                        super.addConstraint(request, "dct:abstract LIKE '%" + searchText + "%'");
+                    }
+                    if (searchSubjects) {
+                        super.addConstraint(request, "dc:subject LIKE '%" + searchText + "%'");
+                    }
+                }
+                logger.trace("\n+++ Text constraint: \"{}\" +++", request.getConstraint());
             }
-
         }
     }
 }

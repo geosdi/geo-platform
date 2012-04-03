@@ -97,7 +97,7 @@ public class CSWCatalogTest {
         catalogFinder = new CatalogFinderBean();
         catalogFinder.setServerID(serverTestOurID);
         TextInfo searchInfo = new TextInfo();
-        searchInfo.setText("");
+        searchInfo.setText(null);
         searchInfo.setSearchTitle(true);
         searchInfo.setSearchAbstract(true);
         searchInfo.setSearchSubjects(true);
@@ -120,20 +120,22 @@ public class CSWCatalogTest {
         cswService.deleteServerCSW(serverTestOurID);
         cswService.deleteServerCSW(serverTestTrevisoID);
     }
-//
-//    @Test
-//    public void testGetRecordsOurCount() throws IllegalParameterFault, ResourceNotFoundFault {
-//        catalogFinder.getTextInfo().setText("land");
-//        Assert.assertEquals(4, cswService.getSummaryRecordsCount(catalogFinder));
-//    }
-//
-//    @Test
-//    public void testGetRecordsOurResult() throws IllegalParameterFault, ResourceNotFoundFault {
-//        catalogFinder.getTextInfo().setText("land");
-//        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(25, 0, catalogFinder);
-//        this.traceCollection(summaryRecords);
-//        Assert.assertEquals(4, summaryRecords.size());
-//    }
+
+    @Test
+    public void testGetRecordsOurCount() throws IllegalParameterFault, ResourceNotFoundFault {
+        catalogFinder.getTextInfo().setText("land");
+
+        Assert.assertEquals(2, cswService.getSummaryRecordsCount(catalogFinder));
+    }
+
+    @Test
+    public void testGetRecordsOurResult() throws IllegalParameterFault, ResourceNotFoundFault {
+        catalogFinder.getTextInfo().setText("land");
+
+        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(10, 1, catalogFinder);
+        this.traceCollection(summaryRecords);
+        Assert.assertEquals(2, summaryRecords.size());
+    }
 
     @Test
     public void testGetRecordsTrevisoSearchWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
@@ -171,6 +173,47 @@ public class CSWCatalogTest {
             this.traceCollection(summaryRecords);
             Assert.assertEquals(mod, summaryRecords.size());
         }
+    }
+
+    @Test
+    public void testGetRecordsTrevisoCountLimitiTextAny() throws IllegalParameterFault, ResourceNotFoundFault {
+        catalogFinder.setServerID(serverTestTrevisoID);
+        catalogFinder.getTextInfo().setText("limiti");
+
+        Assert.assertEquals(19, cswService.getSummaryRecordsCount(catalogFinder));
+    }
+
+    @Test
+    public void testGetRecordsTrevisoCountLimitiTextTitle() throws IllegalParameterFault, ResourceNotFoundFault {
+        catalogFinder.setServerID(serverTestTrevisoID);
+        catalogFinder.getTextInfo().setText("limiti");
+        catalogFinder.getTextInfo().setSearchTitle(true);
+        catalogFinder.getTextInfo().setSearchAbstract(false);
+        catalogFinder.getTextInfo().setSearchSubjects(false);
+
+        Assert.assertEquals(6, cswService.getSummaryRecordsCount(catalogFinder));
+    }
+
+    @Test
+    public void testGetRecordsTrevisoCountLimitiTextAbstract() throws IllegalParameterFault, ResourceNotFoundFault {
+        catalogFinder.setServerID(serverTestTrevisoID);
+        catalogFinder.getTextInfo().setText("limiti");
+        catalogFinder.getTextInfo().setSearchTitle(false);
+        catalogFinder.getTextInfo().setSearchAbstract(true);
+        catalogFinder.getTextInfo().setSearchSubjects(false);
+
+        Assert.assertEquals(10, cswService.getSummaryRecordsCount(catalogFinder));
+    }
+
+    @Test
+    public void testGetRecordsTrevisoCountLimitiTextSubjects() throws IllegalParameterFault, ResourceNotFoundFault {
+        catalogFinder.setServerID(serverTestTrevisoID);
+        catalogFinder.getTextInfo().setText("limiti");
+        catalogFinder.getTextInfo().setSearchTitle(false);
+        catalogFinder.getTextInfo().setSearchAbstract(false);
+        catalogFinder.getTextInfo().setSearchSubjects(true);
+
+        Assert.assertEquals(0, cswService.getSummaryRecordsCount(catalogFinder));
     }
 
     private void traceCollection(Collection collection) {

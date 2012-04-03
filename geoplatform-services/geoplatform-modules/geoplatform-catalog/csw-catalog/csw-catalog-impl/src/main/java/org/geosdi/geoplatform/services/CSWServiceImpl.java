@@ -296,12 +296,13 @@ class CSWServiceImpl {
 
     int getSummaryRecordsCount(CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault {
-        logger.debug("\n*** {}", catalogFinder);
+        logger.trace("\n*** {}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
         GetRecordsRequest request = this.createGetRecordsRequest(server.getServerUrl());
         catalogRequestManager.arrangeRequest(GetRecordsSearchType.COUNT, catalogFinder, request);
+        logger.trace("\n*** Constraint: \"{}\" ***", request.getConstraint());
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
 
@@ -311,7 +312,7 @@ class CSWServiceImpl {
     List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
             CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault {
-        logger.debug("\n*** {}", catalogFinder);
+        logger.trace("\n*** {}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
@@ -325,13 +326,11 @@ class CSWServiceImpl {
                 request.getMaxRecords(), request.getStartPosition());
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
-        logger.debug("\n*** Record matched: {} *** Record returned: {} *** Record next: {} ***", new Object[]{
+        logger.trace("\n*** Constraint: \"{}\" ***", request.getConstraint());
+        logger.debug("\n*** Records matched: {} *** Records returned: {} *** Record next: {} ***", new Object[]{
                     response.getSearchResults().getNumberOfRecordsMatched(),
                     response.getSearchResults().getNumberOfRecordsReturned(),
                     response.getSearchResults().getNextRecord()});
-//            logger.debug("+++ #record: {} +++ #jbRecord: {} ++",
-//                    response.getSearchResults().getAbstractRecord().size(),
-//                    response.getSearchResults().getJbAbstractRecord().size());
 
         if (response.getSearchResults().getNumberOfRecordsReturned()
                 != response.getSearchResults().getAbstractRecord().size()) {
@@ -343,7 +342,7 @@ class CSWServiceImpl {
 
         List<SummaryRecordType> summaryRecordList =
                 (List<SummaryRecordType>) response.getSearchResults().getAbstractRecord();
-        logger.debug("\n*** Record list size: {} ***", summaryRecordList.size());
+        logger.trace("\n*** Record list size: {} ***", summaryRecordList.size());
 
         return this.convertSummaryRecords(summaryRecordList);
     }
@@ -418,7 +417,7 @@ class CSWServiceImpl {
             throw new IllegalParameterFault("Error on parse response stream");
         } catch (ClassCastException ex) { // TODO DEL (for debug purpose)
             logger.error("### ClassCastException: " + ex.getMessage());
-            throw new IllegalParameterFault("Error on cast");
+            throw new IllegalParameterFault("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Error on cast");
         } finally {
             if (um != null) {
                 pool.release(um);

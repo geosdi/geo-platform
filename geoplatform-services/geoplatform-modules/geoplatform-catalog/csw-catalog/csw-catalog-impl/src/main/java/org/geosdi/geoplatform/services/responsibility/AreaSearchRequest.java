@@ -57,11 +57,18 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
 
         AreaInfo areaInfo = catalogFinder.getAreaInfo();
         if (areaInfo != null && areaInfo.isActive()) {
-            // TODO Implement me
             AreaSearchType areaSearchType = areaInfo.getAreaSearchType();
             BBox bBox = areaInfo.getBBox();
-            logger.trace("\n+++ {} ", areaSearchType);
-            logger.trace("\n+++ {} ", bBox);
+            logger.debug("\n+++ Search Type: {} +++", areaSearchType);
+            logger.debug("\n+++ {} +++", bBox);
+
+            String areaConstraint = "BBOX(ows:BoundingBox,"
+                    + bBox.getMinX() + "," + bBox.getMinY() + ","
+                    + bBox.getMaxX() + "," + bBox.getMinY() + ")";
+            logger.trace("\n+++ Area constraint: \"{}\" +++", areaConstraint);
+
+            // TODO Test me
+//            super.addConstraint(request, areaConstraint);
         }
     }
 }

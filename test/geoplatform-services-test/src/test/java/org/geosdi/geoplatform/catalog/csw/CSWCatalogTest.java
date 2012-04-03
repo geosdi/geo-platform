@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
+import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.junit.After;
@@ -70,6 +71,7 @@ public class CSWCatalogTest {
     //
     private GeoPlatformCSWService cswService;
     //
+    private GeoPlatformServer serverTestOur;
     private Long serverTestOurID;
     private Long serverTestTrevisoID;
     private CatalogFinderBean catalogFinder;
@@ -86,9 +88,11 @@ public class CSWCatalogTest {
         logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
 
         // Insert the servers test
-        serverTestOurID = cswService.insertServerCSW(this.createCSWServer(
-                "CSW Server WS Test",
-                "http://150.146.160.152/geonetwork/srv/en/csw"));
+        serverTestOur = this.createCSWServer("CSW Server WS Test",
+                "http://150.146.160.152/geonetwork/srv/en/csw");
+        serverTestOurID = cswService.insertServerCSW(serverTestOur);
+        serverTestOur.setId(serverTestOurID);
+
         serverTestTrevisoID = cswService.insertServerCSW(this.createCSWServer(
                 "Provincia di Treviso",
                 "http://ows.provinciatreviso.it/geonetwork/srv/it/csw"));
@@ -119,6 +123,116 @@ public class CSWCatalogTest {
         // Delete the servers test
         cswService.deleteServerCSW(serverTestOurID);
         cswService.deleteServerCSW(serverTestTrevisoID);
+    }
+
+    @Test
+    public void testInsertServer() throws ResourceNotFoundFault {
+        // Insert the server
+        GeoPlatformServer server = this.createCSWServer("server_test", "http://url.test");
+        Long serverID = cswService.insertServerCSW(server);
+
+        Assert.assertNotNull(serverID);
+
+        // Retrieve the server
+        GeoPlatformServer retrievedServer = cswService.getServerDetailCSW(serverID);
+
+        server.setId(serverID);
+        this.compareServer(server, retrievedServer);
+
+        // Delete the server
+        boolean deleted = cswService.deleteServerCSW(serverID);
+        Assert.assertTrue(deleted);
+    }
+
+    @Test
+    public void testReinsertServerOur() throws ResourceNotFoundFault {
+        // Try to reinsert the server
+        Long serverID = cswService.insertServerCSW(serverTestOur);
+
+        Assert.assertNotNull(serverID);
+        Assert.assertEquals(serverTestOurID, serverID);
+    }
+
+    @Test
+    public void testSaveServer() throws ResourceNotFoundFault, IllegalParameterFault {
+        // Save the server
+        String serverURL = "http://datigis.comune.fi.it/geonetwork/srv/it/csw";
+        ServerCSWDTO serverDTO = cswService.saveServerCSW("Firenze", serverURL);
+
+        Assert.assertNotNull(serverDTO);
+
+        // Retrieve the server
+        ServerCSWDTO retrievedServerDTO = cswService.getShortServerCSW(serverURL);
+
+        this.compareServer(serverDTO, retrievedServerDTO);
+
+        // Delete the server
+        boolean deleted = cswService.deleteServerCSW(serverDTO.getId());
+        Assert.assertTrue(deleted);
+    }
+
+    @Test
+    public void testResaveServerOur() throws ResourceNotFoundFault, IllegalParameterFault {
+        // Try to resave a server with a
+        ServerCSWDTO serverDTO = cswService.saveServerCSW("alias",
+                serverTestOur.getServerUrl());
+
+        this.compareServer(serverTestOur, serverDTO);
+    }
+
+    @Test(expected = IllegalParameterFault.class)
+    public void testSaveServerMalformedURLException() throws IllegalParameterFault {
+        cswService.saveServerCSW("Must fail", "http//url-test.fail");
+    }
+
+    @Test(expected = IllegalParameterFault.class)
+    public void testSaveServerCatalogVersionException() throws IllegalParameterFault {
+        cswService.saveServerCSW("NSDI",
+                "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw"); // Version 2.0.1
+    }
+
+    @Test
+    public void testGetServerDetailById() throws ResourceNotFoundFault {
+        GeoPlatformServer retrievedServer = cswService.getServerDetailCSW(serverTestOurID);
+
+        this.compareServer(serverTestOur, retrievedServer);
+    }
+
+    @Test(expected = ResourceNotFoundFault.class)
+    public void testGetServerDetailByIdResourceNotFoundFault() throws ResourceNotFoundFault {
+        cswService.getServerDetailCSW(Long.MAX_VALUE);
+    }
+
+    @Test
+    public void testGetServerDetailByUrl() throws ResourceNotFoundFault {
+        GeoPlatformServer retrievedServer = cswService.getServerDetailCSWByUrl(serverTestOur.getServerUrl());
+
+        this.compareServer(serverTestOur, retrievedServer);
+    }
+
+    @Test(expected = ResourceNotFoundFault.class)
+    public void testGetServerDetailByUrlResourceNotFoundFault() throws ResourceNotFoundFault {
+        cswService.getServerDetailCSWByUrl("http://not-found.fail");
+    }
+
+    @Test
+    public void testShortServerByUrl() throws ResourceNotFoundFault {
+        ServerCSWDTO retrievedServerDTO = cswService.getShortServerCSW(serverTestOur.getServerUrl());
+
+        this.compareServer(serverTestOur, retrievedServerDTO);
+    }
+
+    @Test(expected = ResourceNotFoundFault.class)
+    public void testShortServerByUrlResourceNotFoundFault() throws ResourceNotFoundFault {
+        cswService.getShortServerCSW("http://not-found.fail");
+    }
+
+    @Test
+    public void testGetAllServers() {
+        List<ServerCSWDTO> servers = cswService.getAllCSWServers();
+
+        Assert.assertNotNull(servers);
+        Assert.assertTrue(servers.size() >= 2);
     }
 
     @Test
@@ -220,5 +334,39 @@ public class CSWCatalogTest {
         for (Object object : collection) {
             logger.trace("\n*** " + object);
         }
+    }
+
+    private void compareServer(GeoPlatformServer expected,
+            GeoPlatformServer toTest) {
+
+        Assert.assertNotNull(expected);
+        Assert.assertNotNull(toTest);
+
+        Assert.assertTrue(GPCapabilityType.CSW == toTest.getServerType());
+        Assert.assertEquals(expected.getServerType(), toTest.getServerType());
+
+        Assert.assertEquals(expected.getId(), toTest.getId());
+        Assert.assertEquals(expected.getTitle(), toTest.getTitle());
+        Assert.assertEquals(expected.getServerUrl(), toTest.getServerUrl());
+    }
+
+    private void compareServer(GeoPlatformServer expected, ServerCSWDTO toTest) {
+        Assert.assertNotNull(expected);
+        Assert.assertNotNull(toTest);
+
+        Assert.assertTrue(GPCapabilityType.CSW == expected.getServerType());
+
+        Assert.assertEquals(expected.getId(), toTest.getId());
+        Assert.assertEquals(expected.getTitle(), toTest.getTitle());
+        Assert.assertEquals(expected.getServerUrl(), toTest.getServerUrl());
+    }
+
+    private void compareServer(ServerCSWDTO expected, ServerCSWDTO toTest) {
+        Assert.assertNotNull(expected);
+        Assert.assertNotNull(toTest);
+
+        Assert.assertEquals(expected.getId(), toTest.getId());
+        Assert.assertEquals(expected.getTitle(), toTest.getTitle());
+        Assert.assertEquals(expected.getServerUrl(), toTest.getServerUrl());
     }
 }

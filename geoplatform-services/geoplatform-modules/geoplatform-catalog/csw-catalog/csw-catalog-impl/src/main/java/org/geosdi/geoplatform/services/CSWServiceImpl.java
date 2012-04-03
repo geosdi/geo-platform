@@ -113,12 +113,13 @@ class CSWServiceImpl {
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
         GeoPlatformServer serverSearch = serverDao.findByServerUrl(
                 this.convertUrl(server.getServerUrl()));
-        if (serverSearch != null) {
+        if (serverSearch != null) { // If there is already a server with the specified URLs
             return serverSearch.getId();
         }
 
         server.setServerType(GPCapabilityType.CSW);
 
+        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
         serverDao.persist(server);
         return server.getId();
     }
@@ -159,7 +160,7 @@ class CSWServiceImpl {
             server.setName(capabilities.getServiceProvider().getProviderName());
 
             CSWEntityCorrectness.checkCSWServer(server); // TODO assert
-            serverDao.save(server);
+            serverDao.persist(server);
 
         } catch (MalformedURLException ex) {
             logger.error("### MalformedURLException: " + ex.getMessage());

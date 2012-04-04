@@ -108,6 +108,12 @@
             <groupId>org.geotoolkit.pending</groupId>
             <artifactId>geotk-client-csw</artifactId>
             <version>${geotk-client.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org.geotoolkit.pending</artifactId>
+                    <groupId>geotk-referencing</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         <dependency>

@@ -33,45 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.google.gwt.event.shared.EventBus;
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@CatalogFilter
-public class CatalogAccordionWidget extends GeoPlatformContentPanel {
-
-    private EventBus bus;
-    private CSWServerPaginationContainer serverWidget;
-
-    @Inject
-    public CatalogAccordionWidget(EventBus theBus,
-            CSWServerPaginationContainer theServerWidget) {
-        super(true);
-        this.bus = theBus;
-        this.serverWidget = theServerWidget;
-    }
+public class CatalogBBoxComponentProvider implements
+        Provider<CatalogBBoxComponent> {
 
     @Override
-    public void addComponent() {
-        super.add(this.serverWidget);
-    }
-
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Catalogue");
+    public CatalogBBoxComponent get() {
+        return new CatalogBBoxComponent();
     }
 }

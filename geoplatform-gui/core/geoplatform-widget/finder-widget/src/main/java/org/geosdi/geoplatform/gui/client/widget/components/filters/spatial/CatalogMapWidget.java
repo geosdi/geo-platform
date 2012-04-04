@@ -33,36 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
+package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
-import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
+import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
+import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group @email
+ * giuseppe.lascaleia@geosdi.org
  */
-@CatalogFilter
-public class CatalogAccordionWidget extends GeoPlatformContentPanel {
+@CatalogSpatialFilter
+public class CatalogMapWidget extends GeoPlatformContentPanel {
 
-    private EventBus bus;
-    private CSWServerPaginationContainer serverWidget;
+    private GeoPlatformMapFactory mapFactory;
+    private MapWidget mapWidget;
 
     @Inject
-    public CatalogAccordionWidget(EventBus theBus,
-            CSWServerPaginationContainer theServerWidget) {
+    public CatalogMapWidget(MapWidget theMapWidget) {
         super(true);
-        this.bus = theBus;
-        this.serverWidget = theServerWidget;
+        this.mapWidget = theMapWidget;
     }
 
     @Override
     public void addComponent() {
-        super.add(this.serverWidget);
+        this.initMapWidget();
+
+        super.add(this.mapWidget);
     }
 
     @Override
@@ -71,7 +72,12 @@ public class CatalogAccordionWidget extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Catalogue");
+        setHeaderVisible(false);
+    }
+
+    private void initMapWidget() {
+        LonLat center = new LonLat(13.375, 42.329);
+        center.transform("EPSG:4326", mapWidget.getMap().getProjection());
+        mapWidget.getMap().setCenter(center, 4);
     }
 }

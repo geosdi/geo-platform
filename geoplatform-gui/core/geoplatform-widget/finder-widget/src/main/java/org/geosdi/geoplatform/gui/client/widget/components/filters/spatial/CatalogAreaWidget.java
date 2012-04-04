@@ -33,36 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
+package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
-import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
+import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@CatalogFilter
-public class CatalogAccordionWidget extends GeoPlatformContentPanel {
+@CatalogSpatialFilter
+public class CatalogAreaWidget extends GeoPlatformContentPanel {
 
-    private EventBus bus;
-    private CSWServerPaginationContainer serverWidget;
+    private CatalogBBoxComponent catalogBBoxComponent;
+    private CatalogComboBoxComponent catalogComboComponent;
+    private CatalogCheckBoxComponent catalogCheckComponent;
 
     @Inject
-    public CatalogAccordionWidget(EventBus theBus,
-            CSWServerPaginationContainer theServerWidget) {
+    public CatalogAreaWidget(CatalogBBoxComponent theCatalogBBoxComponent,
+            CatalogComboBoxComponent theComboComponent,
+            CatalogCheckBoxComponent theCatalogCheckComponent) {
         super(true);
-        this.bus = theBus;
-        this.serverWidget = theServerWidget;
-    }
-
-    @Override
-    public void addComponent() {
-        super.add(this.serverWidget);
+        this.catalogBBoxComponent = theCatalogBBoxComponent;
+        this.catalogComboComponent = theComboComponent;
+        this.catalogCheckComponent = theCatalogCheckComponent;
     }
 
     @Override
@@ -71,7 +67,28 @@ public class CatalogAccordionWidget extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Catalogue");
+        setHeaderVisible(false);
+        setBodyBorder(false);
+    }
+
+    @Override
+    public void addComponent() {
+        this.addBBoxComponent();
+        this.addComboComponent();
+        this.addCheckBoxComponent();
+    }
+
+    private void addBBoxComponent() {
+        super.add(this.catalogBBoxComponent.getTopComponent());
+        super.add(this.catalogBBoxComponent.getCenterComponents());
+        super.add(this.catalogBBoxComponent.getBottomComponents());
+    }
+
+    private void addComboComponent() {
+        super.add(this.catalogComboComponent.getComboBoxComponent());
+    }
+
+    private void addCheckBoxComponent() {
+        super.add(this.catalogCheckComponent.getCheckBoxComponent());
     }
 }

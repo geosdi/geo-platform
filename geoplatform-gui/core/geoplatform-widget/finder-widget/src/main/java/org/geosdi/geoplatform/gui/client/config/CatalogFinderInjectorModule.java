@@ -39,10 +39,18 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.config.provider.BBoxInfoProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.AreaInfoProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.CatalogBBoxComponentProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.CatalogCheckBoxComponentProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.CatalogComboBoxComponentProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.CatalogFinderBeanProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.CatalogMapListenerProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.CatalogMapWidgetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.SearchInfoProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.TemporalInfoProvider;
+import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
+import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogCheckBoxComponent;
+import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogComboBoxComponent;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.MetadataTabItem;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.SearchTabItem;
 import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
@@ -51,6 +59,8 @@ import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
+import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.event.MapZoomListener;
 
 /**
  *
@@ -58,26 +68,41 @@ import org.geosdi.geoplatform.gui.responce.TimeInfo;
  * giuseppe.lascaleia@geosdi.org
  */
 public class CatalogFinderInjectorModule extends AbstractGinModule {
-
+    
     @Override
     protected void configure() {
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
-
+        
         bind(SearchTabItem.class).in(Singleton.class);
-
+        
         bind(MetadataTabItem.class).in(Singleton.class);
-
-        bind(AreaInfo.class).toProvider(BBoxInfoProvider.class).in(
+        
+        bind(AreaInfo.class).toProvider(AreaInfoProvider.class).in(
                 Singleton.class);
-
+        
         bind(TextInfo.class).toProvider(SearchInfoProvider.class).in(
                 Singleton.class);
-
+        
         bind(TimeInfo.class).toProvider(TemporalInfoProvider.class).in(
                 Singleton.class);
-
+        
+        bind(MapZoomListener.class).toProvider(CatalogMapListenerProvider.class).in(
+                Singleton.class);
+        
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
-
+        
+        bind(MapWidget.class).
+                toProvider(CatalogMapWidgetProvider.class).in(Singleton.class);
+        
+        bind(CatalogBBoxComponent.class).toProvider(
+                CatalogBBoxComponentProvider.class).in(Singleton.class);
+        
+        bind(CatalogComboBoxComponent.class).toProvider(
+                CatalogComboBoxComponentProvider.class).in(Singleton.class);
+        
+        bind(CatalogCheckBoxComponent.class).toProvider(
+                CatalogCheckBoxComponentProvider.class).in(Singleton.class);
+        
         bind(CatalogFinderBean.class).toProvider(CatalogFinderBeanProvider.class).in(
                 Singleton.class);
     }

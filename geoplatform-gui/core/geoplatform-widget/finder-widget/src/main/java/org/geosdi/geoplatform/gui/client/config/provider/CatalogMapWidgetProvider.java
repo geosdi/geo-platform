@@ -33,45 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Provider;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
+import org.geosdi.geoplatform.gui.factory.map.GPBaseLayer;
+import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@CatalogFilter
-public class CatalogAccordionWidget extends GeoPlatformContentPanel {
+public class CatalogMapWidgetProvider implements Provider<MapWidget> {
 
-    private EventBus bus;
-    private CSWServerPaginationContainer serverWidget;
+    private GeoPlatformMapFactory mapFactory;
 
     @Inject
-    public CatalogAccordionWidget(EventBus theBus,
-            CSWServerPaginationContainer theServerWidget) {
-        super(true);
-        this.bus = theBus;
-        this.serverWidget = theServerWidget;
+    public CatalogMapWidgetProvider(GeoPlatformMapFactory theMapFactory) {
+        this.mapFactory = theMapFactory;
     }
 
     @Override
-    public void addComponent() {
-        super.add(this.serverWidget);
-    }
-
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Catalogue");
+    public MapWidget get() {
+        return this.mapFactory.createMap("390px", "280px",
+                GPBaseLayer.BING_ROAD);
     }
 }

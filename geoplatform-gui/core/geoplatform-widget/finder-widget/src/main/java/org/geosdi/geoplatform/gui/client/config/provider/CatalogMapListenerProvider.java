@@ -33,45 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
+import javax.inject.Provider;
+import org.gwtopenmaps.openlayers.client.event.MapZoomListener;
+import org.gwtopenmaps.openlayers.client.event.MapZoomListener.MapZoomEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@CatalogFilter
-public class CatalogAccordionWidget extends GeoPlatformContentPanel {
+public class CatalogMapListenerProvider implements Provider<MapZoomListener> {
 
     private EventBus bus;
-    private CSWServerPaginationContainer serverWidget;
 
     @Inject
-    public CatalogAccordionWidget(EventBus theBus,
-            CSWServerPaginationContainer theServerWidget) {
-        super(true);
+    public CatalogMapListenerProvider(EventBus theBus) {
         this.bus = theBus;
-        this.serverWidget = theServerWidget;
     }
 
     @Override
-    public void addComponent() {
-        super.add(this.serverWidget);
-    }
+    public MapZoomListener get() {
+        return new MapZoomListener() {
 
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Catalogue");
+            @Override
+            public void onMapZoom(MapZoomEvent eventObject) {
+                // TODO: HERE LANCH EVENT TO DISPATCH MAP EXTENT
+            }
+        };
     }
 }

@@ -50,7 +50,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.widget.CSWServerPaginationContainer;
+import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;

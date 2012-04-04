@@ -33,20 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
-import com.google.inject.Provider;
-import org.geosdi.geoplatform.gui.responce.AreaInfo;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class BBoxInfoProvider implements Provider<AreaInfo> {
+public class CatalogCheckBoxComponent {
 
-    @Override
-    public AreaInfo get() {
-        return new AreaInfo();
+    public FlexTable getCheckBoxComponent() {
+        FlexTable table = new FlexTable();
+        table.setCellSpacing(4);
+        table.setCellPadding(1);
+
+        table.getCellFormatter().setHorizontalAlignment(2, 1,
+                HasHorizontalAlignment.ALIGN_CENTER);
+
+        CheckBox activateFilter = new CheckBox();
+        activateFilter.setBoxLabel("Activate Spatial Filter");
+
+        table.setWidget(2, 1, activateFilter);
+
+        return table;
     }
 }

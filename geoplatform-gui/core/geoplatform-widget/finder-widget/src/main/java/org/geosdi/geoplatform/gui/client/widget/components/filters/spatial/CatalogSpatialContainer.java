@@ -33,45 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
+package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
-import com.google.gwt.event.shared.EventBus;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
+import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@CatalogFilter
-public class CatalogAccordionWidget extends GeoPlatformContentPanel {
+@CatalogSpatialFilter
+public class CatalogSpatialContainer extends LayoutContainer {
 
-    private EventBus bus;
-    private CSWServerPaginationContainer serverWidget;
+    private CatalogMapWidget catalogMapWidget;
+    private CatalogAreaWidget catalogBboxWidget;
 
     @Inject
-    public CatalogAccordionWidget(EventBus theBus,
-            CSWServerPaginationContainer theServerWidget) {
-        super(true);
-        this.bus = theBus;
-        this.serverWidget = theServerWidget;
+    public CatalogSpatialContainer(CatalogMapWidget theCatalogMapWidget,
+            CatalogAreaWidget theCatalogBboxWidget) {
+        this.catalogMapWidget = theCatalogMapWidget;
+        this.catalogBboxWidget = theCatalogBboxWidget;
     }
 
     @Override
-    public void addComponent() {
-        super.add(this.serverWidget);
-    }
+    protected void onRender(Element parent, int index) {
+        super.onRender(parent, index);
+        super.setLayout(new FlowLayout(5));
 
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Catalogue");
+        super.add(this.catalogMapWidget);
+        super.add(this.catalogBboxWidget);
     }
 }

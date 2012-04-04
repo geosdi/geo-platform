@@ -42,8 +42,10 @@ import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
+import org.geosdi.geoplatform.gui.responce.TimeInfo;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
@@ -108,6 +110,8 @@ public class CSWCatalogTest {
         searchInfo.setSearchAbstract(true);
         searchInfo.setSearchSubjects(true);
         catalogFinder.setTextInfo(searchInfo);
+        catalogFinder.setAreaInfo(new AreaInfo());
+        catalogFinder.setTimeInfo(new TimeInfo());
     }
 
     private GeoPlatformServer createCSWServer(String title, String url) {
@@ -425,6 +429,32 @@ public class CSWCatalogTest {
         catalogFinder.getTextInfo().setSearchSubjects(true);
 
         Assert.assertEquals(0, cswService.getSummaryRecordsCount(catalogFinder));
+    }
+
+    @Test
+    public void testGetRecordsFirenzeCountTimeFiltering() throws ResourceNotFoundFault, IllegalParameterFault {
+        // Insert the server
+        GeoPlatformServer server = this.createCSWServer("Firenze",
+                "http://datigis.comune.fi.it/geonetwork/srv/it/csw");
+        Long serverID = cswService.insertServerCSW(server);
+
+        Assert.assertNotNull(serverID);
+
+        catalogFinder.setServerID(serverID);
+        catalogFinder.getTextInfo().setText("firenze");
+
+        Assert.assertEquals(69, cswService.getSummaryRecordsCount(catalogFinder));
+
+        // TODO Wait fix from geotoolkit of FilterFactory
+//        catalogFinder.getTimeInfo().setActive(true);
+//        catalogFinder.getTimeInfo().setStartDate(new Date(2012, Calendar.APRIL, 1));
+//        catalogFinder.getTimeInfo().setEndDate(new Date(2012, Calendar.APRIL, 3));
+//        
+//        Assert.assertEquals(5, cswService.getSummaryRecordsCount(catalogFinder));
+
+        // Delete the server
+        boolean deleted = cswService.deleteServerCSW(serverID);
+        Assert.assertTrue(deleted);
     }
 
     private void traceCollection(Collection collection) {

@@ -198,7 +198,7 @@ class CSWServiceImpl {
      */
     List<ServerCSWDTO> getAllCSWServers() {
         List<GeoPlatformServer> found = serverDao.findAll(GPCapabilityType.CSW);
-        return convertToServerList(found);
+        return convertServerList(found);
     }
 
     /**
@@ -243,8 +243,8 @@ class CSWServiceImpl {
         return new ServerCSWDTO(server);
     }
 
-    Long getCSWServersCount(SearchRequest request) {
-        System.out.println("### " + request);
+    int getCSWServersCount(SearchRequest request) {
+        logger.trace("\n*** CSWServersCount: {} ***", request);
         Search searchCriteria = new Search(GeoPlatformServer.class);
         searchCriteria.addFilterEqual("serverType", GPCapabilityType.CSW);
 
@@ -255,7 +255,7 @@ class CSWServiceImpl {
 //            Filter fUrl = Filter.ilike("serverUrl", like);
             searchCriteria.addFilterOr(fTitle, fAlias);
         }
-        return new Long(serverDao.count(searchCriteria));
+        return serverDao.count(searchCriteria);
     }
 
     List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request) {
@@ -274,17 +274,15 @@ class CSWServiceImpl {
         }
 
         List<GeoPlatformServer> serverList = serverDao.search(searchCriteria);
-        return this.convertToServerList(serverList);
+        return this.convertServerList(serverList);
     }
 
-    private List<ServerCSWDTO> convertToServerList(
-            List<GeoPlatformServer> servers) {
-        List<ServerCSWDTO> shortServers = new ArrayList<ServerCSWDTO>(
-                servers.size());
+    private List<ServerCSWDTO> convertServerList(List<GeoPlatformServer> servers) {
+        List<ServerCSWDTO> shorts = new ArrayList<ServerCSWDTO>(servers.size());
         for (GeoPlatformServer server : servers) {
-            shortServers.add(new ServerCSWDTO(server));
+            shorts.add(new ServerCSWDTO(server));
         }
-        return shortServers;
+        return shorts;
     }
 
     private String convertUrl(String serverUrl) {

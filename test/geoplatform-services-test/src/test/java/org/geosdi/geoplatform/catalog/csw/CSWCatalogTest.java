@@ -44,6 +44,8 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
@@ -233,6 +235,101 @@ public class CSWCatalogTest {
 
         Assert.assertNotNull(servers);
         Assert.assertTrue(servers.size() >= 2);
+    }
+
+    @Test
+    public void testCSWServersCountNothing() {
+        SearchRequest request = new SearchRequest("nothing");
+        int count = cswService.getCSWServersCount(request);
+
+        Assert.assertEquals(0, count);
+    }
+
+    @Test
+    public void testCSWServersCount() {
+        SearchRequest request = new SearchRequest("test"); // wrt title
+        int count = cswService.getCSWServersCount(request);
+
+        Assert.assertEquals(1, count);
+    }
+
+    @Test
+    public void testCSWServersCountTwo() throws ResourceNotFoundFault {
+        // Insert the server
+        GeoPlatformServer server = this.createCSWServer("Mock title", "http://url.mock");
+        server.setAliasName("Alias test");
+        Long serverID = cswService.insertServerCSW(server);
+
+        Assert.assertNotNull(serverID);
+
+        SearchRequest request = new SearchRequest("test"); // wrt title and alias
+        int count = cswService.getCSWServersCount(request);
+
+        Assert.assertEquals(2, count);
+
+        // Delete the server
+        boolean deleted = cswService.deleteServerCSW(serverID);
+        Assert.assertTrue(deleted);
+    }
+
+    @Test
+    public void testSearchCSWServersNothing() {
+        PaginatedSearchRequest request = new PaginatedSearchRequest("nothing", 10, 0);
+        List<ServerCSWDTO> search = cswService.searchCSWServers(request);
+
+        Assert.assertNull(search);
+    }
+
+    @Test
+    public void testSearchCSWServers() {
+        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10, 0); // wrt title
+        List<ServerCSWDTO> search = cswService.searchCSWServers(request);
+
+        Assert.assertNotNull(search);
+        Assert.assertEquals(1, search.size());
+    }
+
+    @Test
+    public void testSearchCSWServersMore() throws ResourceNotFoundFault {
+        // Insert 27 servers (only 25 for matching wrt alias)
+        Long[] serverIDs = new Long[27];
+        for (int i = 1; i <= 27; i++) {
+            GeoPlatformServer server = this.createCSWServer("Mock title " + i,
+                    "http://url.mock-" + i);
+            if (i >= 3) {
+                server.setAliasName("Alias test " + i);
+            }
+            serverIDs[i - 1] = cswService.insertServerCSW(server);
+
+            Assert.assertNotNull(serverIDs[i - 1]);
+        }
+
+        // First page
+        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10, 0); // wrt title and alias
+        List<ServerCSWDTO> search = cswService.searchCSWServers(request);
+
+        Assert.assertNotNull(search);
+        Assert.assertEquals(10, search.size());
+
+        // Second page
+        request = new PaginatedSearchRequest("test", 10, 1); // wrt title and alias
+        search = cswService.searchCSWServers(request);
+
+        Assert.assertNotNull(search);
+        Assert.assertEquals(10, search.size());
+
+        // Third page
+        request = new PaginatedSearchRequest("test", 10, 2); // wrt title and alias
+        search = cswService.searchCSWServers(request);
+
+        Assert.assertNotNull(search);
+        Assert.assertEquals(6, search.size());
+
+        // Delete the servers
+        for (Long serverID : serverIDs) {
+            boolean deleted = cswService.deleteServerCSW(serverID);
+            Assert.assertTrue(deleted);
+        }
     }
 
     @Test

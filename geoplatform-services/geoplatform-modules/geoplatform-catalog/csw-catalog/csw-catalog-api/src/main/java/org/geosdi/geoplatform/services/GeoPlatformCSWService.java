@@ -114,7 +114,7 @@ public interface GeoPlatformCSWService {
     @Get
     @HttpResource(location = "/sever/csw/count/{nameLike}")
     @WebResult(name = "ServersCSWCount")
-    Long getCSWServersCount(SearchRequest request);
+    int getCSWServersCount(SearchRequest request);
 
     @Get
     @HttpResource(location = "/server/csw/search/{num}/{page}/{nameLike}")

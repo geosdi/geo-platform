@@ -92,7 +92,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
         SearchRequest srq = new SearchRequest(searchText);
 
-        Long serversCount = geoPlatformCSWClient.getCSWServersCount(srq);
+        int serversCount = geoPlatformCSWClient.getCSWServersCount(srq);
 
         int start = config.getOffset();
         int page = start == 0 ? start : start / config.getLimit();
@@ -112,7 +112,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<GPCSWServerBeanModel>(searchUsers,
-                config.getOffset(), serversCount.intValue());
+                config.getOffset(), serversCount);
     }
 
     @Override

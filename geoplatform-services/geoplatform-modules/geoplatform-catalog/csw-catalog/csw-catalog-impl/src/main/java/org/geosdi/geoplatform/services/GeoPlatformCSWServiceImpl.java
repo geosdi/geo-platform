@@ -129,7 +129,7 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public Long getCSWServersCount(SearchRequest request) {
+    public int getCSWServersCount(SearchRequest request) {
         return cswServiceDelegate.getCSWServersCount(request);
     }
 

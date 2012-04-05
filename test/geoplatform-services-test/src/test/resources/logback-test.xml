@@ -45,6 +45,15 @@
     <logger name="org.geosdi.geoplatform.services.WMSServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.CSWServiceImpl" level="debug"/><!-- TODO info -->
     
+    <logger name="org.geosdi.geoplatform.services.responsibility.TypeSearchRequest"
+            level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.responsibility.TextSearchRequest"
+            level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.responsibility.AreaSearchRequest"
+            level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.responsibility.TimeSearchRequest"
+            level="debug"/><!-- TODO info -->
+    
     <!-- DAOs -->
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="info"/>

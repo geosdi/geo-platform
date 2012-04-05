@@ -35,13 +35,16 @@
  */
 package org.geosdi.geoplatform.catalog.csw;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 import java.util.List;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
@@ -337,14 +340,14 @@ public class CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsOurCount() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testGetRecordsOurCount() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         catalogFinder.getTextInfo().setText("land");
 
         Assert.assertEquals(2, cswService.getSummaryRecordsCount(catalogFinder));
     }
 
     @Test
-    public void testGetRecordsOurResult() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testGetRecordsOurResult() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         catalogFinder.getTextInfo().setText("land");
 
         List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(10, 1, catalogFinder);
@@ -353,7 +356,7 @@ public class CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoSearchWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testGetRecordsTrevisoSearchWMSText() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("wms");
 
@@ -391,7 +394,7 @@ public class CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoCountLimitiTextAny() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testGetRecordsTrevisoCountLimitiTextAny() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("limiti");
 
@@ -399,7 +402,7 @@ public class CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoCountLimitiTextTitle() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testGetRecordsTrevisoCountLimitiTextTitle() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("limiti");
         catalogFinder.getTextInfo().setSearchTitle(true);
@@ -410,7 +413,7 @@ public class CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoCountLimitiTextAbstract() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testGetRecordsTrevisoCountLimitiTextAbstract() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("limiti");
         catalogFinder.getTextInfo().setSearchTitle(false);
@@ -421,7 +424,7 @@ public class CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoCountLimitiTextSubjects() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testGetRecordsTrevisoCountLimitiTextSubjects() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("limiti");
         catalogFinder.getTextInfo().setSearchTitle(false);
@@ -432,25 +435,25 @@ public class CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsFirenzeCountTimeFiltering() throws ResourceNotFoundFault, IllegalParameterFault {
+    public void testGetRecordsFirenzeCountTimeFiltering() throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
         // Insert the server
-        GeoPlatformServer server = this.createCSWServer("Firenze",
-                "http://datigis.comune.fi.it/geonetwork/srv/it/csw");
+        GeoPlatformServer server = this.createCSWServer("Geomatys",
+                "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
         Long serverID = cswService.insertServerCSW(server);
 
         Assert.assertNotNull(serverID);
 
         catalogFinder.setServerID(serverID);
-        catalogFinder.getTextInfo().setText("firenze");
 
-        Assert.assertEquals(69, cswService.getSummaryRecordsCount(catalogFinder));
+        Assert.assertEquals(241, cswService.getSummaryRecordsCount(catalogFinder));
 
-        // TODO Wait fix from geotoolkit of FilterFactory
-//        catalogFinder.getTimeInfo().setActive(true);
-//        catalogFinder.getTimeInfo().setStartDate(new Date(2012, Calendar.APRIL, 1));
-//        catalogFinder.getTimeInfo().setEndDate(new Date(2012, Calendar.APRIL, 3));
-//        
-//        Assert.assertEquals(5, cswService.getSummaryRecordsCount(catalogFinder));
+        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
+        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+        catalogFinder.getTimeInfo().setActive(true);
+        catalogFinder.getTimeInfo().setStartDate(startCalendar.getTime());
+        catalogFinder.getTimeInfo().setEndDate(endCalendar.getTime());
+
+        Assert.assertEquals(76, cswService.getSummaryRecordsCount(catalogFinder));
 
         // Delete the server
         boolean deleted = cswService.deleteServerCSW(serverID);

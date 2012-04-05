@@ -43,6 +43,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
@@ -169,6 +170,9 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             logger.error("\n*** " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         } catch (ResourceNotFoundFault ex) {
+            logger.error("\n*** " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        } catch (ServerInternalFault ex) {
             logger.error("\n*** " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }

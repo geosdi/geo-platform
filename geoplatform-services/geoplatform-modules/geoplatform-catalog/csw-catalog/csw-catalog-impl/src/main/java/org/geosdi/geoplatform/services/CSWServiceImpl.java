@@ -56,6 +56,7 @@ import org.geosdi.geoplatform.cswconnector.GPCSWServerConnector;
 import org.geosdi.geoplatform.cswconnector.GeoPlatformCSWConnectorBuilder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
@@ -294,7 +295,7 @@ class CSWServiceImpl {
     }
 
     int getSummaryRecordsCount(CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault {
+            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         logger.trace("\n*** {}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
@@ -310,7 +311,7 @@ class CSWServiceImpl {
 
     List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
             CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault {
+            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         logger.trace("\n*** {}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
@@ -333,8 +334,7 @@ class CSWServiceImpl {
 
         if (response.getSearchResults().getNumberOfRecordsReturned()
                 != response.getSearchResults().getAbstractRecord().size()) {
-            // TODO DEL or change the exception (for debug purpose)
-            throw new IllegalParameterFault("Catalog return an incorrect number of records: expected "
+            throw new ServerInternalFault("CSW Catalog Server Error: incorrect number of records, expected "
                     + response.getSearchResults().getNumberOfRecordsReturned() + " but was "
                     + response.getSearchResults().getAbstractRecord().size());
         }
@@ -396,7 +396,7 @@ class CSWServiceImpl {
     }
 
     private GetRecordsResponseType createGetRecordsResponse(
-            GetRecordsRequest request) throws IllegalParameterFault {
+            GetRecordsRequest request) throws IllegalParameterFault, ServerInternalFault {
 
         GetRecordsResponseType response = null;
         try {
@@ -404,8 +404,14 @@ class CSWServiceImpl {
 
             // unmarshall the response
             InputStream is = request.getResponseStream();
-            JAXBElement element = (JAXBElement) um.unmarshal(is);
-            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) element;
+            Object content = um.unmarshal(is);
+
+            if (!(content instanceof JAXBElement)) {  // ExceptionReport
+                logger.error("\n### {}", content);
+                throw new ServerInternalFault("CSW Catalog Server Error: incorrect responce");
+            }
+
+            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
             response = elementType.getValue();
 
         } catch (JAXBException ex) {
@@ -414,9 +420,9 @@ class CSWServiceImpl {
         } catch (IOException ex) {
             logger.error("### IOException: " + ex.getMessage());
             throw new IllegalParameterFault("Error on parse response stream");
-        } catch (ClassCastException ex) { // TODO DEL (for debug purpose)
-            logger.error("### ClassCastException: " + ex.getMessage());
-            throw new IllegalParameterFault("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Error on cast");
+        } catch (IllegalArgumentException ex) { // TODO DEL (for debug purpose)
+            logger.error("### IllegalArgumentException: " + ex.getMessage());
+            throw new IllegalParameterFault("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Error on argument @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         } finally {
             if (um != null) {
                 pool.release(um);

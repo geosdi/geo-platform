@@ -33,55 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.responsibility;
+package org.geosdi.geoplatform.exception;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.TimeInfo;
-import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
-import org.geotoolkit.csw.GetRecordsRequest;
+import javax.xml.ws.WebFault;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class TimeSearchRequest extends GetRecordsRequestHandler {
+@WebFault(name = "ServerInternalFault",
+          faultBean = "org.geosdi.geoplatform.exception.ServerInternalFault")
+public class ServerInternalFault extends Exception {
 
-    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    private static final long serialVersionUID = -7788747032539948057L;
 
-    @Override
-    protected void processGetRecordsRequest(GetRecordsSearchType searchType,
-            CatalogFinderBean catalogFinder, GetRecordsRequest request)
-            throws IllegalParameterFault {
-        logger.debug("Process...");
-
-        TimeInfo timeInfo = catalogFinder.getTimeInfo();
-        if (timeInfo != null && timeInfo.isActive()) {
-            Date startDate = timeInfo.getStartDate();
-            Date endDate = timeInfo.getEndDate();
-            logger.debug("\n+++ From: {} - To: {} +++", startDate, endDate);
-
-            String timeConstraint = this.createCQLTimePredicate(startDate, endDate);
-            logger.trace("\n+++ Time constraint: \"{}\" +++", timeConstraint);
-
-            super.addConstraint(request, timeConstraint);
-        }
+    public ServerInternalFault() {
     }
 
-    /**
-     * Create a string like this:
-     * 
-     * TempExtent_begin AFTER 2006-11-30T01:30:00Z
-     * AND
-     * TempExtent_end BEFORE 2006-12-31T01:30:00Z
-     */
-    private String createCQLTimePredicate(Date startDate, Date endDate) {
-        StringBuilder str = new StringBuilder();
-        str.append("TempExtent_begin AFTER ").append(formatter.format(startDate));
-        str.append(" AND ");
-        str.append("TempExtent_end BEFORE ").append(formatter.format(endDate));
-        return str.toString();
+    public ServerInternalFault(String message) {
+        super(message);
+    }
+
+    public ServerInternalFault(String message, Throwable cause) {
+        super(message, cause);
     }
 }

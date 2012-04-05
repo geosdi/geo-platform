@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
@@ -140,14 +141,14 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
 
     @Override
     public int getSummaryRecordsCount(CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault {
+            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         return cswServiceDelegate.getSummaryRecordsCount(catalogFinder);
     }
 
     @Override
     public List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
             CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault {
+            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         return cswServiceDelegate.searchSummaryRecords(num, start, catalogFinder);
     }
 }

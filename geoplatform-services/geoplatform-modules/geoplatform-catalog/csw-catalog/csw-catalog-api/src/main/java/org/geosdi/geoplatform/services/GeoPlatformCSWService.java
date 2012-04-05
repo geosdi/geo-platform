@@ -47,6 +47,7 @@ import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
@@ -122,16 +123,16 @@ public interface GeoPlatformCSWService {
     List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request);
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Records">
+    //<editor-fold defaultstate="collapsed" desc="GetRecords request">
     // ==========================================================================
-    // === Records
+    // === GetRecords request
     // ==========================================================================    
     @Get
     @HttpResource(location = "/record/csw/count/{searchText}")
     @WebResult(name = "SummaryRecordsCount")
     int getSummaryRecordsCount(
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault;
+            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault;
 
     @Get
     @HttpResource(location = "/record/csw/search/{num}/{page}/{searchText}")
@@ -140,7 +141,8 @@ public interface GeoPlatformCSWService {
             @WebParam(name = "num") int num,
             @WebParam(name = "start") int start,
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault;
+            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault;
+    //</editor-fold>
 //
 //    @Get
 //    @HttpResource(location = "/server/csw/capabilities/{id}")
@@ -149,5 +151,4 @@ public interface GeoPlatformCSWService {
 //            @WebParam(name = "request") RequestByID request,
 //            @WebParam(name = "token") String token)
 //            throws ResourceNotFoundFault;
-    //</editor-fold>
 }

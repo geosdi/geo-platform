@@ -35,21 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.factory.map;
 
-import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.MapOptions;
-import org.gwtopenmaps.openlayers.client.MapUnits;
-import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.layer.Bing;
-import org.gwtopenmaps.openlayers.client.layer.BingOptions;
-import org.gwtopenmaps.openlayers.client.layer.BingType;
-import org.gwtopenmaps.openlayers.client.layer.GoogleV3;
-import org.gwtopenmaps.openlayers.client.layer.GoogleV3MapType;
-import org.gwtopenmaps.openlayers.client.layer.GoogleV3Options;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
-import org.gwtopenmaps.openlayers.client.layer.OSM;
-import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
-import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
+import org.gwtopenmaps.openlayers.client.*;
+import org.gwtopenmaps.openlayers.client.layer.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

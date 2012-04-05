@@ -35,9 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.FieldEvent;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
 
 /**
  *
@@ -45,6 +50,14 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class CatalogCheckBoxComponent {
+
+    private AreaInfo areaInfo;
+    private EventBus bus;
+
+    public CatalogCheckBoxComponent(AreaInfo theAreaInfo, EventBus theBus) {
+        this.areaInfo = theAreaInfo;
+        this.bus = theBus;
+    }
 
     public FlexTable getCheckBoxComponent() {
         FlexTable table = new FlexTable();
@@ -56,6 +69,13 @@ public class CatalogCheckBoxComponent {
 
         CheckBox activateFilter = new CheckBox();
         activateFilter.setBoxLabel("Activate Spatial Filter");
+
+        activateFilter.addListener(Events.Change, new Listener<FieldEvent>() {
+
+            @Override
+            public void handleEvent(FieldEvent be) {
+            }
+        });
 
         table.setWidget(2, 1, activateFilter);
 

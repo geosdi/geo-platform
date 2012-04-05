@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
+import com.extjs.gxt.ui.client.widget.Info;
+import com.google.gwt.user.client.Timer;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
@@ -45,37 +47,14 @@ import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
-import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.MapOptions;
-import org.gwtopenmaps.openlayers.client.MapUnits;
-import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature;
-import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
-import org.gwtopenmaps.openlayers.client.control.Measure;
-import org.gwtopenmaps.openlayers.client.control.MeasureOptions;
-import org.gwtopenmaps.openlayers.client.control.MousePosition;
-import org.gwtopenmaps.openlayers.client.control.ScaleLine;
+import org.gwtopenmaps.openlayers.client.*;
+import org.gwtopenmaps.openlayers.client.control.*;
 import org.gwtopenmaps.openlayers.client.event.MeasureEvent;
 import org.gwtopenmaps.openlayers.client.event.MeasureListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.handler.PathHandler;
 import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
-import org.gwtopenmaps.openlayers.client.layer.Bing;
-import org.gwtopenmaps.openlayers.client.layer.BingOptions;
-import org.gwtopenmaps.openlayers.client.layer.BingType;
-import org.gwtopenmaps.openlayers.client.layer.GoogleV3;
-import org.gwtopenmaps.openlayers.client.layer.GoogleV3MapType;
-import org.gwtopenmaps.openlayers.client.layer.GoogleV3Options;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
-import org.gwtopenmaps.openlayers.client.layer.OSM;
-import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
-import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
-
-import com.extjs.gxt.ui.client.widget.Info;
-import com.google.gwt.user.client.Timer;
+import org.gwtopenmaps.openlayers.client.layer.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

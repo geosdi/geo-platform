@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geo-platform</artifactId>
-        <version>1.3-SNAPSHOT</version>
+        <version>1.4-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <groupId>org.geosdi.geoplatform</groupId>
     <artifactId>geoplatform-ui-test</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == User Interface Module Test</name>

@@ -93,7 +93,7 @@ public class CatalogGetRecordsTest extends TestCase {
             request.setStartPosition(1);
             request.setMaxRecords(25);
             
-            logger.debug("Constraint: {}", request.getConstraint());
+            logger.info("Constraint: {}", request.getConstraint());
             
             InputStream is = request.getResponseStream();
 
@@ -115,7 +115,7 @@ public class CatalogGetRecordsTest extends TestCase {
             List<Object> metadata = searchResult.getAny();
             
             if (!metadata.isEmpty()) {
-                logger.trace(
+                logger.info(
                         "FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}", metadata.get(0));
             }
             

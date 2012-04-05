@@ -35,18 +35,12 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.geotoolkit.csw.GetRecordsRequest;
 import org.geotoolkit.csw.xml.CSWMarshallerPool;
@@ -123,71 +117,71 @@ public class CatalogGetRecordsTest extends TestCase {
         }
     }
 
-    @Test
-    public void testTemporalFilter() throws MalformedURLException, JAXBException, IOException {
-        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-                withServerUrl(new URL(FI_URL)).build();
-
-        try {
-            um = pool.acquireUnmarshaller();
-
-            GetRecordsRequest request = serverConnector.createGetRecords();
-
-            request.setTypeNames("csw:Record");
-            request.setConstraintLanguage("CQL");
-            request.setConstraintLanguageVersion("1.1.0");
-
-            // Text filter
-            StringBuilder str = new StringBuilder();
-            str.append("AnyText LIKE '%firenze%'");
-
-            // Time filter
-            Calendar startCalendar = new GregorianCalendar(2012, Calendar.APRIL, 1);
-            Calendar endCalendar = new GregorianCalendar(2012, Calendar.APRIL, 3);
-
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-            str.append(" AND ");
-//            str.append("TempExtent_begin >= ").append(formatter.format(startCalendar.getTime()));
-            str.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
-            str.append(" AND ");
-//            str.append("TempExtent_end <= ").append(formatter.format(endCalendar.getTime()));
-            str.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
-
-            request.setConstraint(str.toString());
-
-            // unmarshall the response
-            logger.info("### 0 - Constraint: {}", request.getConstraint());
-            InputStream is = request.getResponseStream();
-
-            logger.info("### 1");
-            Object content = um.unmarshal(is);
-
-            logger.info("### 2 - Content class: {}", content.getClass());
-            JAXBElement element = (JAXBElement) content;
-
-            logger.info("### 3");
-            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) element;
-
-            logger.info("### 4");
-            GetRecordsResponseType response = elementType.getValue();
-
-            logger.info("### 5 - OK");
-
-            SearchResultsType searchResult = response.getSearchResults();
-
-            logger.info(
-                    "### RECORD MATCHES {} ###", searchResult.getNumberOfRecordsMatched());
-
-        } catch (ClassCastException ex) {
-            logger.error("### ClassCastException: " + ex.getMessage());
-            ex.printStackTrace();
-            Assert.fail();
-        } finally {
-            if (um != null) {
-                pool.release(um);
-            }
-        }
-    }
+//    @Test
+//    public void testTemporalFilter() throws MalformedURLException, JAXBException, IOException {
+//        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
+//                withServerUrl(new URL(FI_URL)).build();
+//
+//        try {
+//            um = pool.acquireUnmarshaller();
+//
+//            GetRecordsRequest request = serverConnector.createGetRecords();
+//
+//            request.setTypeNames("csw:Record");
+//            request.setConstraintLanguage("CQL");
+//            request.setConstraintLanguageVersion("1.1.0");
+//
+//            // Text filter
+//            StringBuilder str = new StringBuilder();
+//            str.append("AnyText LIKE '%firenze%'");
+//
+//            // Time filter
+//            Calendar startCalendar = new GregorianCalendar(2012, Calendar.APRIL, 1);
+//            Calendar endCalendar = new GregorianCalendar(2012, Calendar.APRIL, 3);
+//
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+////            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//
+//            str.append(" AND ");
+////            str.append("TempExtent_begin >= ").append(formatter.format(startCalendar.getTime()));
+//            str.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
+//            str.append(" AND ");
+////            str.append("TempExtent_end <= ").append(formatter.format(endCalendar.getTime()));
+//            str.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
+//
+//            request.setConstraint(str.toString());
+//
+//            // unmarshall the response
+//            logger.info("### 0 - Constraint: {}", request.getConstraint());
+//            InputStream is = request.getResponseStream();
+//
+//            logger.info("### 1");
+//            Object content = um.unmarshal(is);
+//
+//            logger.info("### 2 - Content class: {}", content.getClass());
+//            JAXBElement element = (JAXBElement) content;
+//
+//            logger.info("### 3");
+//            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) element;
+//
+//            logger.info("### 4");
+//            GetRecordsResponseType response = elementType.getValue();
+//
+//            logger.info("### 5 - OK");
+//
+//            SearchResultsType searchResult = response.getSearchResults();
+//
+//            logger.info(
+//                    "### RECORD MATCHES {} ###", searchResult.getNumberOfRecordsMatched());
+//
+//        } catch (ClassCastException ex) {
+//            logger.error("### ClassCastException: " + ex.getMessage());
+//            ex.printStackTrace();
+//            Assert.fail();
+//        } finally {
+//            if (um != null) {
+//                pool.release(um);
+//            }
+//        }
+//    }
 }

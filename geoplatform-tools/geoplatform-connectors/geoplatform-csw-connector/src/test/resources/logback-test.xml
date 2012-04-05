@@ -11,7 +11,7 @@
     </appender>
 
     <root>
-        <level value="info" />
+        <level value="debug" />
         <appender-ref ref="STDOUT" />
     </root>
 

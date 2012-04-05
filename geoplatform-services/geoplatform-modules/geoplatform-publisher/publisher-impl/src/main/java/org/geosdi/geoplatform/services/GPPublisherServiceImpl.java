@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.services;
 
 import org.geosdi.geoplatform.services.utility.PublishUtility;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
@@ -51,6 +50,8 @@ import it.geosolutions.geoserver.rest.decoder.RESTStyleList;
 import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipEntry;
@@ -60,17 +61,12 @@ import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsConfiguration;
 import org.geosdi.geoplatform.services.utility.PostGISUtility;
-import org.geotoolkit.data.query.QueryBuilder;
-import org.geotoolkit.geometry.jts.SRIDGenerator;
-import org.geotoolkit.internal.referencing.CRSUtilities;
-import org.geotoolkit.referencing.IdentifiedObjects;
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.data.DataSourceException;
-import org.geotools.data.shapefile.ShapefileDataStoreFactory;
-import org.geotools.factory.Hints;
-import org.geotools.gce.geotiff.GeoTiffReader;
+import org.geotools.data.FileDataStore;
+import org.geotools.data.FileDataStoreFinder;
+import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.referencing.CRS;
-import org.opengis.parameter.ParameterValueGroup;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.quartz.CalendarIntervalScheduleBuilder;
@@ -500,42 +496,15 @@ public class GPPublisherServiceImpl implements GPPublisherService,
             String origName = shpFileName.substring(0, shpFileName.length() - 4);
             info.name = userName + "_shp_" + origName;
             File shpFile = new File(tempUserDir + shpFileName);
-//            FileDataStore store = null;
-//            SimpleFeatureSource featureSource = null;
-            String geomTypeProvola = null;
-            org.geotoolkit.data.FeatureCollection collection = null;
+            FileDataStore store = null;
+            SimpleFeatureSource featureSource = null;
             try {
-                //we must know the parameters
-                final ParameterValueGroup parameters = org.geotoolkit.data.shapefile.ShapefileDataStoreFactory.PARAMETERS_DESCRIPTOR.createValue();
-                parameters.parameter("url").setValue(shpFile.toURI().toURL());
-
-//                final Map<String, Serializable> parameters = Maps.newHashMap();
-//                parameters.put("url", shpFile.toURI().toURL().toString().replaceAll("\\/", "\\\\"));
-                org.geotoolkit.data.DataStore dataStoreGeoTK =
-                        org.geotoolkit.data.DataStoreFinder.get(parameters);
-
-//                store = FileDataStoreFinder.getDataStore(shpFile);
-//                featureSource = store.getFeatureSource();
-
-                //creating the session ---------------------------------------------------------------
-//             final org.​geotoolkit.​data.​session.Session session = dataStoreGeoTK.createSession(true);
-
-                System.out.println("Reading Features: " + shpFile.toURI().toURL().toString().replaceAll("\\/", "\\\\"));
-                System.out.println("Reading Features: " + dataStoreGeoTK.toString());
-                //reading features -------------------------------------------------------------------
-                org.opengis.feature.type.Name typeName = dataStoreGeoTK.getNames().iterator().next();
-                System.out.println("Reading collection");
-                collection = dataStoreGeoTK.createSession(true).getFeatureCollection(QueryBuilder.all(typeName));
-                System.out.println("Before collection");
-                geomTypeProvola = collection.getFeatureType().getGeometryDescriptor().getType().getName().toString();
-                System.out.println("After collection");
-//            } catch (IOException ex) {
-//                this.logger.error("Error analyzing shp list: " + ex);
-            } catch (Exception e) {
-                System.out.println("Che sorta di exception: " + e);
+                store = FileDataStoreFinder.getDataStore(shpFile);
+                featureSource = store.getFeatureSource();
+            } catch (IOException ex) {
+                this.logger.error("Error analyzing shp list: " + ex);
             }
-//            String geomType = featureSource.getSchema().getGeometryDescriptor().getType().getName().toString();
-            String geomType = geomTypeProvola;
+            String geomType = featureSource.getSchema().getGeometryDescriptor().getType().getName().toString();
             String SLDFileName = origName + ".sld";
             File fileSLD = new File(tempUserDir + SLDFileName);
             if (fileSLD.exists()) {
@@ -550,24 +519,21 @@ public class GPPublisherServiceImpl implements GPPublisherService,
                 info.sld = info.name;
             }
             logger.info("\n INFO: STYLE " + info.sld + " for " + info.name);
-//            Integer code = null;
-            int code = SRIDGenerator.toSRID(collection.getFeatureType().getCoordinateReferenceSystem(), SRIDGenerator.Version.V1);
+            Integer code = null;
             try {
-//                code = org.geotoolkit.referencing.IdentifiedObjects.lookupEpsgCode(
-//                        collection.getFeatureType().getCoordinateReferenceSystem().getCoordinateSystem(), true);
-                System.out.println("Code geotoolkit: " + code);
-//                    System.out.println("Info sull'epsg: " + featureSource.getSchema().getCoordinateReferenceSystem());
-//                code = CRS.lookupEpsgCode(
-//                        featureSource.getSchema().getCoordinateReferenceSystem(),
-//                        true);
+                logger.debug("Info TO RETRIEVE EPSG: " + featureSource.getSchema().getCoordinateReferenceSystem());
+                code = CRS.lookupEpsgCode(
+                        featureSource.getSchema().getCoordinateReferenceSystem(),
+                        true);
             } catch (Exception e) {
             }
+            logger.debug("EPSG Code retrieved: " + code);
             if (code != 0) {
                 info.epsg = "EPSG:" + code;
             } else {
                 info.epsg = "EPSG:4326";
             }
-            // fine analisi shape
+            // End shape analysis
             infoShapeList.add(info);
             PublishUtility.compressFiles(tempUserZipDir, tempUserDir,
                     info.name + ".zip",
@@ -653,18 +619,17 @@ public class GPPublisherServiceImpl implements GPPublisherService,
     private Integer getCRSFromGeotiff(File file) {
         Integer code = null;
         try {
-            GeoTiffReader geotiffReader = new GeoTiffReader(file,
-                    new Hints(Hints.FORCE_LONGITUDE_FIRST_AXIS_ORDER,
-                    Boolean.TRUE));
+            org.geotools.gce.geotiff.GeoTiffReader geotiffReader = new org.geotools.gce.geotiff.GeoTiffReader(file,
+                    new org.geotools.factory.Hints(org.geotools.factory.Hints.FORCE_LONGITUDE_FIRST_AXIS_ORDER, Boolean.TRUE));
             GridCoverage2D coverage = (GridCoverage2D) geotiffReader.read(null);
             CoordinateReferenceSystem crs = coverage.getCoordinateReferenceSystem2D();
             code = CRS.lookupEpsgCode(crs, false);
         } catch (DataSourceException ex) {
-            logger.error("Errore retrieving the crs: " + ex);
+            logger.error("Errore retrieving the crs (DataSourceException): " + ex);
         } catch (IOException ioe) {
-            logger.error("Errore retrieving the crs: " + ioe);
+            logger.error("Errore retrieving the crs (IOException): " + ioe);
         } catch (FactoryException ioe) {
-            logger.error("Errore retrieving the crs: " + ioe);
+            logger.error("Errore retrieving the crs (FactoryException): " + ioe);
         }
         return code;
     }

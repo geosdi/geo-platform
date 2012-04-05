@@ -42,7 +42,7 @@ import org.geotools.utils.imageoverviews.OverviewsEmbedder;
  * @email nazzareno.sileno@geosdi.org
  */
 public class GeoTiffOverviews {
-    
+
     public static void overviewTiff(GeoTiffOverviewsConfiguration configuration, String fileAbsolutePath) {
         // //
         // check the configuration and prepare the overviews embedder

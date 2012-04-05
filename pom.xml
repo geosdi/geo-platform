@@ -1320,7 +1320,7 @@
     </pluginRepositories>
 
     <properties>
-        <geoplatform-version>1.3-SNAPSHOT</geoplatform-version>
+        <geoplatform-version>1.4-SNAPSHOT</geoplatform-version>
         <cxf-version>2.5.2</cxf-version>
         <jaxws-version>2.2.3</jaxws-version>
         <spring-version>3.1.1.RELEASE</spring-version>

@@ -73,7 +73,7 @@ public class PostGISUtility {
         encoder.setFetchSize(1000);
         encoder.setConnectionTimeout(20);
         encoder.setValidateConnections(false);
-        encoder.setLooseBBox(true);
+        encoder.setLooseBBox(Boolean.TRUE);
         encoder.setPreparedStatements(false);
         encoder.setMaxOpenPreparedStatements(50);
         return encoder;

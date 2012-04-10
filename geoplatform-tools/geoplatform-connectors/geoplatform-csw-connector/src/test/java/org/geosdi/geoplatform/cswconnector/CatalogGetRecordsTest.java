@@ -126,60 +126,61 @@ public class CatalogGetRecordsTest extends TestCase {
         }
     }
     
-    @Test
-    public void testTemporalFilterGeomatys() throws MalformedURLException, JAXBException, IOException {
-        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-                withServerUrl(new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default")).build();
-        
-        try {
-            um = pool.acquireUnmarshaller();
-            
-            GetRecordsRequest request = serverConnector.createGetRecords();
-            
-            request.setTypeNames("csw:Record");
-            request.setConstraintLanguage("CQL");
-            request.setConstraintLanguageVersion("1.1.0");
-
-            // Text filter
-            StringBuilder str = new StringBuilder();
-            str.append("AnyText LIKE '%%'");
-
-            // Time filter
-            Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
-            Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-            
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            
-            str.append(" AND ");
-            str.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
-            str.append(" AND ");
-            str.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
-            
-            request.setConstraint(str.toString());
-
-            // unmarshall the response
-            logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}", request.getConstraint());
-            InputStream is = request.getResponseStream();
-            
-            Object content = um.unmarshal(is);
-            
-            if (!(content instanceof JAXBElement)) {
-                logger.error("\n@@@@@@@@@@@@@@@@ Geomatys ### {}", content); // ExceptionReport
-                Assert.fail();
-            }
-            
-            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
-            
-            GetRecordsResponseType response = elementType.getValue();
-            
-            SearchResultsType searchResult = response.getSearchResults();
-            
-            logger.info(
-                    "\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###", searchResult.getNumberOfRecordsMatched());
-        } finally {
-            if (um != null) {
-                pool.release(um);
-            }
-        }
-    }
+    // TODO Uncomment (commented because the "The service is not running")
+//    @Test
+//    public void testTemporalFilterGeomatys() throws MalformedURLException, JAXBException, IOException {
+//        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
+//                withServerUrl(new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default")).build();
+//        
+//        try {
+//            um = pool.acquireUnmarshaller();
+//            
+//            GetRecordsRequest request = serverConnector.createGetRecords();
+//            
+//            request.setTypeNames("csw:Record");
+//            request.setConstraintLanguage("CQL");
+//            request.setConstraintLanguageVersion("1.1.0");
+//
+//            // Text filter
+//            StringBuilder str = new StringBuilder();
+//            str.append("AnyText LIKE '%%'");
+//
+//            // Time filter
+//            Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
+//            Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+//            
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+//            
+//            str.append(" AND ");
+//            str.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
+//            str.append(" AND ");
+//            str.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
+//            
+//            request.setConstraint(str.toString());
+//
+//            // unmarshall the response
+//            logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}", request.getConstraint());
+//            InputStream is = request.getResponseStream();
+//            
+//            Object content = um.unmarshal(is);
+//            
+//            if (!(content instanceof JAXBElement)) {
+//                logger.error("\n@@@@@@@@@@@@@@@@ Geomatys ### {}", content); // ExceptionReport
+//                Assert.fail();
+//            }
+//            
+//            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
+//            
+//            GetRecordsResponseType response = elementType.getValue();
+//            
+//            SearchResultsType searchResult = response.getSearchResults();
+//            
+//            logger.info(
+//                    "\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###", searchResult.getNumberOfRecordsMatched());
+//        } finally {
+//            if (um != null) {
+//                pool.release(um);
+//            }
+//        }
+//    }
 }

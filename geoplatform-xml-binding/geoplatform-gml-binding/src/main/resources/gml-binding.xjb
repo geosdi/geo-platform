@@ -1,0 +1,33 @@
+<jxb:bindings version="2.0"    
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"    
+   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   
+   
+   <!-- Specify to treat underscore as a character rather than the default        
+       treatment as a word separator in geometryPrimitives.xsd -->
+   
+   <jxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/geometryPrimitives.xsd" node="/xs:schema">        
+       <jxb:globalBindings underscoreBinding="asCharInWord"/>        
+   </jxb:bindings>
+
+   <jxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd" node=".//xs:element[@name='TopologyStyle']">  
+        <jxb:class name="TopologyStyle_CT"/>      
+    </jxb:bindings>
+ 
+    <jxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd" node=".//xs:element[@name='GeometryStyle']">    
+        <jxb:class name="GeometryStyle_CT"/>        
+    </jxb:bindings>
+ 
+    <jxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd" node=".//xs:element[@name='GraphStyle']">        
+        <jxb:class name="GraphStyle_CT"/>        
+    </jxb:bindings>
+ 
+    <jxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd" node=".//xs:element[@name='FeatureStyle']">        
+        <jxb:class name="FeatureStyle_CT"/>
+    </jxb:bindings>
+ 
+    <jxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd" node=".//xs:element[@name='LabelStyle']">        
+        <jxb:class name="LabelStyle_CT"/>        
+    </jxb:bindings>
+
+</jxb:bindings>

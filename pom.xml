@@ -189,6 +189,7 @@
         <module>geoplatform-services</module>
         <module>geoplatform-gui</module>
         <module>geoplatform-tools</module>
+        <module>geoplatform-xml-binding</module>
         <module>test</module>
     </modules>
 

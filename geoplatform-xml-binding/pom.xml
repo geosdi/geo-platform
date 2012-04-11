@@ -18,6 +18,7 @@
     <modules>
         <module>geoplatform-gml-binding</module>
         <module>geoplatform-filter-binding</module>
+        <module>geoplatform-ows-binding</module>
         <module>csw-xml-binding</module>
     </modules>
 

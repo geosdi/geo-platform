@@ -98,6 +98,11 @@
             <artifactId>jaxb-impl</artifactId>        
         </dependency>
         
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+        </dependency>
+        
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -141,34 +146,15 @@
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.8.1</version>
 
                 <configuration>
-                    <forceRegenerate>true</forceRegenerate>
-                    <schemas>                                                                                       
+                    <schemas>
                         <schema>
                             <url>http://schemas.opengis.net/filter/1.1.0/filter.xsd</url>
                         </schema>
                     </schemas>
-                    
-                    <extension>true</extension>
-                    <args>
-<!--                        <arg>-XtoString</arg>
-                        <arg>-Xequals</arg>
-                        <arg>-XhashCode</arg>-->
-                        <arg>-Xsetters</arg>
-<!--                        <arg>-Xsetters-mode=direct</arg>-->
-                    </args>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.jvnet.jaxb2_commons</groupId>
-                            <artifactId>jaxb2-basics</artifactId>
-                            <version>0.6.3</version>
-                        </plugin>
-                    </plugins>
                 </configuration>
             </plugin>
-           
             
         </plugins>
 

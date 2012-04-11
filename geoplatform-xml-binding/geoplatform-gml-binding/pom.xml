@@ -1,6 +1,6 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
   
     <parent>
@@ -127,6 +127,11 @@
             <artifactId>jaxb-impl</artifactId>        
         </dependency>
         
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+        </dependency>
+        
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -183,23 +188,19 @@
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
             
-            <!-- ENABLE ONLY TO GENERATE THE JAVA POJO FROM XSD -->
-            
-<!--            <plugin>
-                <groupId>com.sun.tools.xjc.maven2</groupId>
-                <artifactId>maven-jaxb-plugin</artifactId>
-                <version>1.1.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>    
+            <!-- mvn jaxb2:generate -X -->
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+
                 <configuration>
-                    <extension>true</extension>
+                    <schemas>
+                        <schema>
+                            <url>http://schemas.opengis.net/gml/3.1.1/base/gml.xsd</url>
+                        </schema>
+                    </schemas>
                 </configuration>
-            </plugin>-->
+            </plugin>
             
         </plugins>
 

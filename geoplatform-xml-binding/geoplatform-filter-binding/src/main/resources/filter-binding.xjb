@@ -1,13 +1,15 @@
+
 <jxb:bindings version="2.0"    
-   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"    
-   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              xmlns:jxb="http://java.sun.com/xml/ns/jaxb"    
+              xmlns:xs="http://www.w3.org/2001/XMLSchema">
    
    
    <!-- Specify to treat underscore as a character rather than the default        
        treatment as a word separator in geometryPrimitives.xsd -->
    
-   <jxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/geometryPrimitives.xsd" node="/xs:schema">        
-       <jxb:globalBindings underscoreBinding="asCharInWord"/>        
-   </jxb:bindings>
+    <jxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/geometryPrimitives.xsd"
+                  node="/xs:schema">        
+        <jxb:globalBindings underscoreBinding="asCharInWord"/>
+    </jxb:bindings>
 
 </jxb:bindings>

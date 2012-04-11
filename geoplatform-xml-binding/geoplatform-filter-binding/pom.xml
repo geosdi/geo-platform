@@ -1,6 +1,6 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
   
     <parent>
@@ -35,6 +35,10 @@
     </developers>
 
     <dependencies>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-gml-binding</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-oxm</artifactId>
@@ -133,19 +137,35 @@
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
            
+           <!-- mvn jaxb2:generate -X -->
             <plugin>
-                <groupId>com.sun.tools.xjc.maven2</groupId>
-                <artifactId>maven-jaxb-plugin</artifactId>
-                <version>1.1.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>    
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.8.1</version>
+
                 <configuration>
+                    <forceRegenerate>true</forceRegenerate>
+                    <schemas>                                                                                       
+                        <schema>
+                            <url>http://schemas.opengis.net/filter/1.1.0/filter.xsd</url>
+                        </schema>
+                    </schemas>
+                    
                     <extension>true</extension>
+                    <args>
+<!--                        <arg>-XtoString</arg>
+                        <arg>-Xequals</arg>
+                        <arg>-XhashCode</arg>-->
+                        <arg>-Xsetters</arg>
+<!--                        <arg>-Xsetters-mode=direct</arg>-->
+                    </args>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics</artifactId>
+                            <version>0.6.3</version>
+                        </plugin>
+                    </plugins>
                 </configuration>
             </plugin>
            

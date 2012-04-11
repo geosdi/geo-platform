@@ -75,8 +75,19 @@
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>    
-        </dependencies>    
+            </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-gml-binding</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-filter-binding</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
 
     <issueManagement />

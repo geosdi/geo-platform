@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.10 at 05:35:20 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,7 +13,6 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
-
 
 /**
  * Number with a scale.  
@@ -59,6 +56,9 @@ public class MeasureType {
     @XmlSchemaType(name = "anyURI")
     protected String uom;
 
+    public MeasureType() {
+    }
+
     /**
      * Gets the value of the value property.
      * 
@@ -99,4 +99,9 @@ public class MeasureType {
         this.uom = value;
     }
 
+    @Override
+    public String toString() {
+        return "MeasureType { " + "value = " + value
+                + ", uom = " + uom + '}';
+    }
 }

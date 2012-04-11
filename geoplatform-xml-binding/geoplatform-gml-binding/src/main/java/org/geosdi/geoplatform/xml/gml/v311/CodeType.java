@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.10 at 05:35:20 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,7 +13,6 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
-
 
 /**
  * Name or code with an (optional) authority.  Text token.  
@@ -56,6 +53,9 @@ public class CodeType {
     @XmlAttribute(name = "codeSpace")
     @XmlSchemaType(name = "anyURI")
     protected String codeSpace;
+
+    public CodeType() {
+    }
 
     /**
      * Gets the value of the value property.
@@ -105,4 +105,9 @@ public class CodeType {
         this.codeSpace = value;
     }
 
+    @Override
+    public String toString() {
+        return "CodeType{" + " value = " + value 
+                + ", codeSpace = " + codeSpace + '}';
+    }
 }

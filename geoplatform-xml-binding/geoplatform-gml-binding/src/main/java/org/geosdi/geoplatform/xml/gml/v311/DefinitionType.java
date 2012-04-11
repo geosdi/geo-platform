@@ -4,15 +4,12 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.10 at 05:35:20 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-
 
 /**
  * A definition, which can be included in or referenced by a dictionary. In this extended type, the inherited "description" optional element can hold the definition whenever only text is needed. The inherited "name" elements can provide one or more brief terms for which this is the definition. The inherited "metaDataProperty" elements can be used to reference or include more information about this definition.  
@@ -58,9 +55,8 @@ import javax.xml.bind.annotation.XmlType;
     AbstractDatumBaseType.class,
     OperationMethodBaseType.class
 })
-public class DefinitionType
-    extends AbstractGMLType
-{
+public class DefinitionType extends AbstractGMLType {
 
-
+    public DefinitionType() {
+    }
 }

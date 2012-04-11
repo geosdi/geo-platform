@@ -36,7 +36,7 @@
                 <role>Project Management Committee (PMC) Member</role>
             </roles>
         </developer>
-		<developer>
+        <developer>
             <name>Nazzareno Sileno</name>
             <id>nazzareno.sileno</id>
             <email>nazzareno.sileno@geosdi.org</email>
@@ -60,22 +60,6 @@
                         <source>1.6</source>
                         <target>1.6</target>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>2.1.2</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>jar-no-fork</goal>
-                            </goals>
-                            <configuration>
-                                <attach>true</attach>
-                                <includePom>true</includePom>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -104,8 +88,8 @@
         <module>geoplatform-print</module>
         <module>geoplatform-xmpp</module>
         <module>geoplatform-featureinfo</module>
-		<module>geoplatform-gwtquery</module>
-  </modules>
+        <module>geoplatform-gwtquery</module>
+    </modules>
 
 
 </project>

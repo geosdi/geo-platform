@@ -19,7 +19,7 @@
     <jaxb:bindings schemaLocation="http://schemas.opengis.net/ows/1.0.0/owsAll.xsd"
                    node="/xsd:schema">
         <jaxb:schemaBindings>
-            <jaxb:package name="org.geosdi.geoplatform.xml.ovs.v100" />
+            <jaxb:package name="org.geosdi.geoplatform.xml.ows.v100" />
         </jaxb:schemaBindings>
     </jaxb:bindings>
 

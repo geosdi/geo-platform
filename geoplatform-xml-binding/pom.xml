@@ -88,6 +88,11 @@
                 <artifactId>geoplatform-filter-binding</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-ows-binding</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             
             <dependency>
                 <groupId>org.jvnet.jaxb2_commons</groupId>

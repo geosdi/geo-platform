@@ -14,7 +14,7 @@
     <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == FILTER XML Binding Module</name>
+    <name>Geo-Platform :: == Filter XML Binding Module</name>
     <url>http://maven.apache.org</url>
 
     <properties>

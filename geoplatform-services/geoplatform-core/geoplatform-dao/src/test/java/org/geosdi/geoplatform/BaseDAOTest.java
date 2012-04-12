@@ -249,7 +249,7 @@ public abstract class BaseDAOTest {
         this.insertBindingUserProject(viewerTest, viewerProject, BasePermission.READ.getMask());
         //
         adminTest.setDefaultProjectID(adminProject.getId());
-        userTest.setDefaultProjectID(adminProject.getId());
+        userTest.setDefaultProjectID(userProject.getId());
         viewerTest.setDefaultProjectID(viewerProject.getId());
         accountDAO.merge(adminTest, userTest, viewerTest);
     }

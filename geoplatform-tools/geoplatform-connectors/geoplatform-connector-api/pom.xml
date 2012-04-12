@@ -92,6 +92,19 @@
             <artifactId>jaxb-impl</artifactId>
         </dependency>
         
+        <!-- =========================================================== -->
+	<!-- ================== APACHE HTTPCOMPONENTS ================== -->
+	<!-- =========================================================== -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

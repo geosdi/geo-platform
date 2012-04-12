@@ -74,6 +74,23 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <geotk-client.version>3.x-SNAPSHOT</geotk-client.version>
     </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+             <!-- Apache HttpComponents -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.1.3</version>
+            </dependency>
+        
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>4.1.4</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
     <!-- logging dependencies, delegate all to slf4j and use logback -->

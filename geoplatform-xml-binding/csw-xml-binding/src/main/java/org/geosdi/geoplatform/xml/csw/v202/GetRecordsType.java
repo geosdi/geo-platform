@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.12 at 10:02:34 AM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.io.Serializable;
@@ -25,7 +23,6 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * 
@@ -69,10 +66,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "abstractQuery",
     "any"
 })
-public class GetRecordsType
-    extends RequestBaseType
-    implements Serializable, ToString
-{
+public class GetRecordsType extends RequestBaseType implements Serializable,
+                                                               ToString {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(name = "DistributedSearch")
@@ -80,7 +75,9 @@ public class GetRecordsType
     @XmlElement(name = "ResponseHandler")
     @XmlSchemaType(name = "anyURI")
     protected List<String> responseHandler;
-    @XmlElementRef(name = "AbstractQuery", namespace = "http://www.opengis.net/cat/csw/2.0.2", type = JAXBElement.class)
+    @XmlElementRef(name = "AbstractQuery",
+                   namespace = "http://www.opengis.net/cat/csw/2.0.2",
+                   type = JAXBElement.class)
     protected JAXBElement<? extends AbstractQueryType> abstractQuery;
     @XmlAnyElement(lax = true)
     protected Object any;
@@ -383,17 +380,20 @@ public class GetRecordsType
         {
             DistributedSearchType theDistributedSearch;
             theDistributedSearch = this.getDistributedSearch();
-            strategy.appendField(locator, this, "distributedSearch", buffer, theDistributedSearch);
+            strategy.appendField(locator, this, "distributedSearch", buffer,
+                    theDistributedSearch);
         }
         {
             List<String> theResponseHandler;
-            theResponseHandler = (((this.responseHandler!= null)&&(!this.responseHandler.isEmpty()))?this.getResponseHandler():null);
-            strategy.appendField(locator, this, "responseHandler", buffer, theResponseHandler);
+            theResponseHandler = (((this.responseHandler != null) && (!this.responseHandler.isEmpty())) ? this.getResponseHandler() : null);
+            strategy.appendField(locator, this, "responseHandler", buffer,
+                    theResponseHandler);
         }
         {
             JAXBElement<? extends AbstractQueryType> theAbstractQuery;
             theAbstractQuery = this.getAbstractQuery();
-            strategy.appendField(locator, this, "abstractQuery", buffer, theAbstractQuery);
+            strategy.appendField(locator, this, "abstractQuery", buffer,
+                    theAbstractQuery);
         }
         {
             Object theAny;
@@ -403,32 +403,38 @@ public class GetRecordsType
         {
             String theRequestId;
             theRequestId = this.getRequestId();
-            strategy.appendField(locator, this, "requestId", buffer, theRequestId);
+            strategy.appendField(locator, this, "requestId", buffer,
+                    theRequestId);
         }
         {
             ResultType theResultType;
             theResultType = this.getResultType();
-            strategy.appendField(locator, this, "resultType", buffer, theResultType);
+            strategy.appendField(locator, this, "resultType", buffer,
+                    theResultType);
         }
         {
             String theOutputFormat;
             theOutputFormat = this.getOutputFormat();
-            strategy.appendField(locator, this, "outputFormat", buffer, theOutputFormat);
+            strategy.appendField(locator, this, "outputFormat", buffer,
+                    theOutputFormat);
         }
         {
             String theOutputSchema;
             theOutputSchema = this.getOutputSchema();
-            strategy.appendField(locator, this, "outputSchema", buffer, theOutputSchema);
+            strategy.appendField(locator, this, "outputSchema", buffer,
+                    theOutputSchema);
         }
         {
             BigInteger theStartPosition;
             theStartPosition = this.getStartPosition();
-            strategy.appendField(locator, this, "startPosition", buffer, theStartPosition);
+            strategy.appendField(locator, this, "startPosition", buffer,
+                    theStartPosition);
         }
         {
             BigInteger theMaxRecords;
             theMaxRecords = this.getMaxRecords();
-            strategy.appendField(locator, this, "maxRecords", buffer, theMaxRecords);
+            strategy.appendField(locator, this, "maxRecords", buffer,
+                    theMaxRecords);
         }
         return buffer;
     }
@@ -438,5 +444,4 @@ public class GetRecordsType
         List<String> draftl = this.getResponseHandler();
         draftl.addAll(value);
     }
-
 }

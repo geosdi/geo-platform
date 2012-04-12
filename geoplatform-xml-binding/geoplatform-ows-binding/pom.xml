@@ -14,7 +14,7 @@
     <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == OWS XML BINDING MODULE</name>
+    <name>Geo-Platform :: == OWS XML Binding Module</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -76,36 +76,6 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-filter-binding</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-oxm</artifactId>
-        </dependency>
-		
-		 <!-- SPRING -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-oxm</artifactId>
         </dependency>
 
         <dependency>

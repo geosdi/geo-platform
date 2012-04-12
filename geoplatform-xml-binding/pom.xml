@@ -13,7 +13,7 @@
     <artifactId>geoplatform-xml-binding</artifactId>
     <version>1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Geo-Platform :: == XML BINDING MODULE</name>
+    <name>Geo-Platform :: == XML Binding Module</name>
 
     <modules>
         <module>geoplatform-gml-binding</module>
@@ -70,6 +70,7 @@
     
     <dependencyManagement>
         <dependencies>
+            
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>core</artifactId>
@@ -99,6 +100,7 @@
                 <artifactId>jaxb2-basics-runtime</artifactId>
                 <version>${jaxb2-basics-version}</version>
             </dependency>
+            
         </dependencies>
     </dependencyManagement>
     

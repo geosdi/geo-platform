@@ -36,7 +36,7 @@
         <url>http://www.geosdi.org</url>
     </organization>
     <inceptionYear>2011</inceptionYear>
-
+    
     <distributionManagement>
 		<!--.................................. -->
 		<!-- geoSDI Repository -->
@@ -263,13 +263,13 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-model</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-dao</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -277,67 +277,67 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-ws-api</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-ws-impl</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-ws-util</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-publisher-api</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-publisher-impl</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
             
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-scheduler-api</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-scheduler-impl</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
             
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geonetwork-catalog-api</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geonetwork-catalog-impl</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
             
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>csw-catalog-api</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>csw-catalog-impl</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -345,7 +345,7 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-configurator</artifactId>
-                <version>${geoplatform-version}</version>
+                <version>${project.version}</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -1093,6 +1093,7 @@
     </dependencyManagement>
 
     <build>
+        <defaultGoal>clean install</defaultGoal>
 
         <pluginManagement>
             <plugins>
@@ -1349,9 +1350,8 @@
         </pluginRepository -->
 
     </pluginRepositories>
-
+    
     <properties>
-        <geoplatform-version>1.4-SNAPSHOT</geoplatform-version>
         <cxf-version>2.5.2</cxf-version>
         <spring-version>3.1.1.RELEASE</spring-version>
 

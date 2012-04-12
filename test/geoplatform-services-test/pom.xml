@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.geosdi.geoplatform</groupId>
             <artifactId>geoplatform-ws-client</artifactId>
-            <version>${geoplatform-version}</version>
+            <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
 

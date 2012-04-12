@@ -88,7 +88,7 @@
             <groupId>org.geosdi</groupId>
             <artifactId>csw-catalog-api</artifactId>
             <classifier>sources</classifier>
-            <version>${geoplatform-version}</version>
+            <version>${project.version}</version>
         </dependency>
         
         <dependency>

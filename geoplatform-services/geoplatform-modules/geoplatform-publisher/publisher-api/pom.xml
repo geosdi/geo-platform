@@ -53,19 +53,19 @@
 <!--        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
-            <version>${geoplatform-version}</version>
+            <version>${project.version}</version>
         </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
-            <version>${geoplatform-version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
-            <version>${geoplatform-version}</version>
+            <version>${project.version}</version>
         </dependency>-->
         
         <!-- APACHE COMMONS -->

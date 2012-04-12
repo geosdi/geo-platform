@@ -81,7 +81,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-csw-connector</artifactId>
-            <version>${geoplatform-version}</version>
+            <version>${project.version}</version>
         </dependency>
 
 		<!-- logging dependencies, delegate all to slf4j and use logback -->

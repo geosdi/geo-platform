@@ -33,37 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.api;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import com.google.common.collect.Maps;
+import java.util.Map;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GeoPlatformCSWConnectorBuilder, GPCSWServerConnector> {
+@ThreadSafe
+public class GeoPlatformServerPool<C extends GPServerConnector>
+        implements IServerPoll<C> {
+
+    private Map<String, C> pool;
+    private GPPoolCapacity capacity;
 
     /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
-     * specification for a GPCSWServerConnector.
      * 
-     * @return the new GeoPlatformCSWConnectorBuilder
+     * @param capacity for HashMap
      */
-    public static GeoPlatformCSWConnectorBuilder newConnector() {
-        return new GeoPlatformCSWConnectorBuilder();
+    public GeoPlatformServerPool(GPPoolCapacity theCapacity) {
+        this.pool = Maps.newHashMapWithExpectedSize(theCapacity.getValue());
+        this.capacity = theCapacity;
     }
 
     /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
+     * TODO: MODIFY this when it must be use. Now the used approach is not synchronized
+     * There a lot of control to do
+     * 
+     * @param connector 
      */
     @Override
-    public GPCSWServerConnector build() {
-        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                clientSecurity, GPCatalogVersion.V202);
+    public synchronized void bindConnector(C connector) {
+        this.pool.put(connector.getRegistrationKey(), connector);
+    }
 
-        return cswConnector;
+    @Override
+    public synchronized void removeConnector(C connector) {
+        this.pool.remove(connector.getRegistrationKey());
+    }
+
+    @Override
+    public synchronized GPServerConnector getConnector(String key) {
+        return this.pool.get(key);
     }
 }

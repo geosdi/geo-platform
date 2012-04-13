@@ -33,37 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.jaxb;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GeoPlatformCSWConnectorBuilder, GPCSWServerConnector> {
+public interface GPConnectorJAXBContext {
+
+    /** 
+     * Create a <p>Marshaller</p> object that can be used to convert a 
+     *  java content tree into XML data.
+     *
+     * @return a <tt>Marshaller</tt> object
+     *
+     * @throws JAXBException if an error was encountered while creating the
+     *       
+     **/
+    Marshaller createMarshaller() throws JAXBException;
 
     /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
-     * specification for a GPCSWServerConnector.
-     * 
-     * @return the new GeoPlatformCSWConnectorBuilder
+     * Create an <p>Unmarshaller</p> object that can be used to convert XML
+     * data into a java content tree.
+     *
+     * @return an <tt>Unmarshaller</tt> object
+     *
+     * @throws JAXBException if an error was encountered while creating the
+     *                       <tt>Unmarshaller</tt> object
      */
-    public static GeoPlatformCSWConnectorBuilder newConnector() {
-        return new GeoPlatformCSWConnectorBuilder();
-    }
-
-    /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
-     */
-    @Override
-    public GPCSWServerConnector build() {
-        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                clientSecurity, GPCatalogVersion.V202);
-
-        return cswConnector;
-    }
+    Unmarshaller createUnmarshaller() throws JAXBException;
 }

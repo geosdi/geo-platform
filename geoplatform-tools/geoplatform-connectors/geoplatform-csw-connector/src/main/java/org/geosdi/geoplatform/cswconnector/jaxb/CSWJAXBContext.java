@@ -39,7 +39,7 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import org.geosdi.connector.jaxb.GeoPlatformJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContext;
 
 /**
  *

@@ -33,37 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.api;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import java.net.URL;
+import org.geotoolkit.security.ClientSecurity;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GeoPlatformCSWConnectorBuilder, GPCSWServerConnector> {
+public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
+        implements GeoPlatformConnectorBuilder<B> {
 
-    /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
-     * specification for a GPCSWServerConnector.
-     * 
-     * @return the new GeoPlatformCSWConnectorBuilder
-     */
-    public static GeoPlatformCSWConnectorBuilder newConnector() {
-        return new GeoPlatformCSWConnectorBuilder();
+    protected URL serverUrl;
+    protected ClientSecurity clientSecurity;
+
+    protected AbstractConnectorBuilder() {
     }
 
-    /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
-     */
     @Override
-    public GPCSWServerConnector build() {
-        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                clientSecurity, GPCatalogVersion.V202);
-
-        return cswConnector;
+    public B withClientSecurity(ClientSecurity theClientSecurity) {
+        this.clientSecurity = theClientSecurity;
+        return (B) this;
     }
+
+    @Override
+    public B withServerUrl(URL theServerUrl) {
+        this.serverUrl = theServerUrl;
+        return (B) this;
+    }
+
+    public abstract C build();
 }

@@ -39,7 +39,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.geosdi.connector.api.capabilities.model.csw.CatalogCapabilities;
+import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.cswconnector.security.CatalogSecurityConnection;
 import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
 import org.springframework.beans.factory.InitializingBean;

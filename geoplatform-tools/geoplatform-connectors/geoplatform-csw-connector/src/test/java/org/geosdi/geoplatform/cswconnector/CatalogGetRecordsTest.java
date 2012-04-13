@@ -35,18 +35,12 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.geotoolkit.csw.GetRecordsRequest;
 import org.geotoolkit.csw.xml.CSWMarshallerPool;

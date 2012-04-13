@@ -33,37 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.api;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import java.net.URL;
+import org.geotoolkit.security.ClientSecurity;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GeoPlatformCSWConnectorBuilder, GPCSWServerConnector> {
-
-    /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
-     * specification for a GPCSWServerConnector.
-     * 
-     * @return the new GeoPlatformCSWConnectorBuilder
-     */
-    public static GeoPlatformCSWConnectorBuilder newConnector() {
-        return new GeoPlatformCSWConnectorBuilder();
-    }
-
-    /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
-     */
-    @Override
-    public GPCSWServerConnector build() {
-        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                clientSecurity, GPCatalogVersion.V202);
-
-        return cswConnector;
-    }
+public interface GeoPlatformConnectorBuilder<B extends AbstractConnectorBuilder> {
+    
+    public B withServerUrl(URL theServerUrl);
+    
+    public B withClientSecurity(ClientSecurity theClientSecurity);
 }

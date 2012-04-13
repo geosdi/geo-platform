@@ -33,37 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.api.capabilities.model.csw;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import java.util.List;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GeoPlatformCSWConnectorBuilder, GPCSWServerConnector> {
+public class CatalogKeywords {
+
+    private List<AbstractCatalogKeyword> keywords;
 
     /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
-     * specification for a GPCSWServerConnector.
-     * 
-     * @return the new GeoPlatformCSWConnectorBuilder
+     * @return the keywords
      */
-    public static GeoPlatformCSWConnectorBuilder newConnector() {
-        return new GeoPlatformCSWConnectorBuilder();
+    public List<AbstractCatalogKeyword> getKeywords() {
+        return keywords;
     }
 
     /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
+     * @param keywords the keywords to set
      */
-    @Override
-    public GPCSWServerConnector build() {
-        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                clientSecurity, GPCatalogVersion.V202);
+    public void setKeywords(List<AbstractCatalogKeyword> keywords) {
+        this.keywords = keywords;
+    }
 
-        return cswConnector;
+    @Override
+    public String toString() {
+        return "CatalogKeywords{" + "keywords=" + keywords + '}';
     }
 }

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.cswconnector;
 
 import java.net.URL;
-import org.geosdi.connector.api.GPServerConnector;
+import org.geosdi.geoplatform.connector.api.GPServerConnector;
 import org.geotoolkit.csw.CatalogServicesServer;
 import org.geotoolkit.csw.DescribeRecordRequest;
 import org.geotoolkit.csw.GetCapabilitiesRequest;

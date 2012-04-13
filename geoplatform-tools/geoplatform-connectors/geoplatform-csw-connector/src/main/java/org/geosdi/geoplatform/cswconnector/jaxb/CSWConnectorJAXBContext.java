@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.cswconnector.jaxb;
 
 import javax.xml.bind.JAXBException;
-import org.geosdi.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.xml.csw.CSWContextServiceProvider;
 import org.slf4j.LoggerFactory;
 

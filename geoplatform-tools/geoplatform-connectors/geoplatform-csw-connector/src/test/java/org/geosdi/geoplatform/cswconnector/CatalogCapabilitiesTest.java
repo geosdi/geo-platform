@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.cswconnector;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import org.geosdi.connector.api.capabilities.model.csw.CatalogCapabilities;
+import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

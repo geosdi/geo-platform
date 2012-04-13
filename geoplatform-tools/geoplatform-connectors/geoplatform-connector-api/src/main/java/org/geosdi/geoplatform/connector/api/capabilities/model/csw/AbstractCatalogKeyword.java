@@ -33,37 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.api.capabilities.model.csw;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import com.thoughtworks.xstream.annotations.XStreamInclude;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GeoPlatformCSWConnectorBuilder, GPCSWServerConnector> {
+@XStreamInclude(value = {CatalogKeyword.class, CatalogKeywordType.class})
+public abstract class AbstractCatalogKeyword {
 
-    /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
-     * specification for a GPCSWServerConnector.
-     * 
-     * @return the new GeoPlatformCSWConnectorBuilder
-     */
-    public static GeoPlatformCSWConnectorBuilder newConnector() {
-        return new GeoPlatformCSWConnectorBuilder();
-    }
-
-    /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
-     */
-    @Override
-    public GPCSWServerConnector build() {
-        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                clientSecurity, GPCatalogVersion.V202);
-
-        return cswConnector;
-    }
+    public abstract String getValue();
 }

@@ -33,37 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.api.capabilities.model.csw.converter;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.converters.MarshallingContext;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
+import org.geosdi.geoplatform.connector.api.capabilities.model.csw.AbstractCatalogKeyword;
+import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogKeyword;
+import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogKeywordType;
+import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogKeywords;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GeoPlatformCSWConnectorBuilder, GPCSWServerConnector> {
+public class CatalogKeywordsConverter implements Converter {
 
-    /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
-     * specification for a GPCSWServerConnector.
-     * 
-     * @return the new GeoPlatformCSWConnectorBuilder
-     */
-    public static GeoPlatformCSWConnectorBuilder newConnector() {
-        return new GeoPlatformCSWConnectorBuilder();
+    @Override
+    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
-     */
     @Override
-    public GPCSWServerConnector build() {
-        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                clientSecurity, GPCatalogVersion.V202);
+    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+        CatalogKeywords catalogKeywords = new CatalogKeywords();
+        List<AbstractCatalogKeyword> keywords = new ArrayList<AbstractCatalogKeyword>();
+        while (reader.hasMoreChildren()) {
+            reader.moveDown();
+            if (reader.getNodeName().equals("ows:Keyword")) {
+                CatalogKeyword keyword = new CatalogKeyword();
 
-        return cswConnector;
+                keyword.setKeyword(reader.getValue());
+                keywords.add(keyword);
+            } else if (reader.getNodeName().equals("ows:Type")) {
+                CatalogKeywordType keywordType = new CatalogKeywordType();
+                keywordType.setType(reader.getValue());
+                keywords.add(keywordType);
+            }
+            reader.moveUp();
+        }
+
+        catalogKeywords.setKeywords(keywords);
+
+        return catalogKeywords;
+    }
+
+    @Override
+    public boolean canConvert(Class type) {
+        return type.equals(CatalogKeywords.class);
     }
 }

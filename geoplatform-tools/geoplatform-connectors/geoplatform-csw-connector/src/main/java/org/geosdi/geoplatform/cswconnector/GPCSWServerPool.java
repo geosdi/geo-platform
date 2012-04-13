@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
-import org.geosdi.connector.api.GPPoolCapacity;
-import org.geosdi.connector.api.GeoPlatformServerPool;
-import org.geosdi.connector.api.IServerPoll;
+import org.geosdi.geoplatform.connector.api.GPPoolCapacity;
+import org.geosdi.geoplatform.connector.api.GeoPlatformServerPool;
+import org.geosdi.geoplatform.connector.api.IServerPoll;
 
 /**
  *

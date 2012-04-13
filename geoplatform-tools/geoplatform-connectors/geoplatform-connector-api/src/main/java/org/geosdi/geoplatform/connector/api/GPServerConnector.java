@@ -33,37 +33,65 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.api;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import java.net.URI;
+import java.net.URL;
+import java.util.Date;
+import org.geotoolkit.client.AbstractServer;
+import org.geotoolkit.security.ClientSecurity;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GeoPlatformCSWConnectorBuilder, GPCSWServerConnector> {
+public abstract class GPServerConnector<T extends AbstractServer>
+        implements GeoPlatformConnector {
 
-    /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
-     * specification for a GPCSWServerConnector.
-     * 
-     * @return the new GeoPlatformCSWConnectorBuilder
-     */
-    public static GeoPlatformCSWConnectorBuilder newConnector() {
-        return new GeoPlatformCSWConnectorBuilder();
+    private Date registrationDate = new Date();
+    private int usageCounter;
+    protected T server;
+
+    @Override
+    public Date getRegistrationDate() {
+        return this.registrationDate;
     }
 
-    /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
-     */
     @Override
-    public GPCSWServerConnector build() {
-        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                clientSecurity, GPCatalogVersion.V202);
+    public void setRegistrationDate(Date date) {
+        this.registrationDate = date;
+        this.usageCounter++;
+    }
 
-        return cswConnector;
+    @Override
+    public String getRegistrationKey() {
+        return this.server.getURL().toString();
+    }
+
+    @Override
+    public int getUsageCounter() {
+        return this.usageCounter;
+    }
+
+    @Override
+    public ClientSecurity getClientSecurity() {
+        return server.getClientSecurity();
+    }
+
+    @Override
+    public URI getURI() {
+        return server.getURI();
+    }
+
+    @Override
+    public URL getURL() {
+        return server.getURL();
+    }
+
+    @Override
+    public String toString() {
+        return "GPServerConnector{" + "registrationDate=" + registrationDate
+                + ", usageCounter=" + usageCounter + '}';
     }
 }

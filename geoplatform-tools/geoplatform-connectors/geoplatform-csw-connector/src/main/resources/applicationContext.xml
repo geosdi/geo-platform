@@ -23,16 +23,16 @@
     </bean>
     
     <bean id="xStreamCatalogMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
-        <property name="annotatedClass" value="org.geosdi.connector.api.capabilities.model.csw.CatalogCapabilities" />
+        <property name="annotatedClass" value="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities" />
         <property name="omittedFields">
             <util:map>
-                <entry key="org.geosdi.connector.api.capabilities.model.csw.CatalogServiceIdentification" 
+                <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogServiceIdentification" 
                        value="ows:Fees,ows:AccessConstraints"/>
                     
-                <entry key="org.geosdi.connector.api.capabilities.model.csw.CatalogServiceProvider" 
+                <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogServiceProvider" 
                        value="ows:ProviderSite,ows:ServiceContact"/>
                     
-                <entry key="org.geosdi.connector.api.capabilities.model.csw.CatalogCapabilities" 
+                <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities" 
                        value="ows:OperationsMetadata,ogc:Filter_Capabilities"/>
             </util:map>
         </property>

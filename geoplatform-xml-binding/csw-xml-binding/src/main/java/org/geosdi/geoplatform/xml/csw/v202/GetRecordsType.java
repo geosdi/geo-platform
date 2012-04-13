@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
@@ -75,10 +76,15 @@ public class GetRecordsType extends RequestBaseType implements Serializable,
     @XmlElement(name = "ResponseHandler")
     @XmlSchemaType(name = "anyURI")
     protected List<String> responseHandler;
-    @XmlElementRef(name = "AbstractQuery",
-                   namespace = "http://www.opengis.net/cat/csw/2.0.2",
-                   type = JAXBElement.class)
-    protected JAXBElement<? extends AbstractQueryType> abstractQuery;
+    @XmlElementRefs({
+        @XmlElementRef(name = "AbstractQuery",
+                       namespace = "http://www.opengis.net/cat/csw/2.0.2",
+                       type = AbstractQueryType.class),
+        @XmlElementRef(name = "QueryType",
+                       namespace = "http://www.opengis.net/cat/csw/2.0.2",
+                       type = QueryType.class)
+    })
+    private AbstractQueryType abstractQuery;
     @XmlAnyElement(lax = true)
     protected Object any;
     @XmlAttribute(name = "requestId")
@@ -97,6 +103,28 @@ public class GetRecordsType extends RequestBaseType implements Serializable,
     @XmlAttribute(name = "maxRecords")
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger maxRecords;
+
+    public GetRecordsType() {
+    }
+
+    public GetRecordsType(DistributedSearchType distributedSearch, List<String> responseHandler,
+            AbstractQueryType abstractQuery, Object any,
+            String requestId, ResultType resultType, String outputFormat,
+            String outputSchema, BigInteger startPosition, BigInteger maxRecords,
+            String service, String version) {
+
+        super(service, version);
+        this.distributedSearch = distributedSearch;
+        this.responseHandler = responseHandler;
+        this.abstractQuery = abstractQuery;
+        this.any = any;
+        this.requestId = requestId;
+        this.resultType = resultType;
+        this.outputFormat = outputFormat;
+        this.outputSchema = outputSchema;
+        this.startPosition = startPosition;
+        this.maxRecords = maxRecords;
+    }
 
     /**
      * Gets the value of the distributedSearch property.
@@ -160,7 +188,7 @@ public class GetRecordsType extends RequestBaseType implements Serializable,
      *     {@link JAXBElement }{@code <}{@link QueryType }{@code >}
      *     
      */
-    public JAXBElement<? extends AbstractQueryType> getAbstractQuery() {
+    public AbstractQueryType getAbstractQuery() {
         return abstractQuery;
     }
 
@@ -173,7 +201,7 @@ public class GetRecordsType extends RequestBaseType implements Serializable,
      *     {@link JAXBElement }{@code <}{@link QueryType }{@code >}
      *     
      */
-    public void setAbstractQuery(JAXBElement<? extends AbstractQueryType> value) {
+    public void setAbstractQuery(AbstractQueryType value) {
         this.abstractQuery = value;
     }
 
@@ -361,6 +389,7 @@ public class GetRecordsType extends RequestBaseType implements Serializable,
         this.maxRecords = value;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -368,6 +397,7 @@ public class GetRecordsType extends RequestBaseType implements Serializable,
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -375,6 +405,7 @@ public class GetRecordsType extends RequestBaseType implements Serializable,
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
@@ -390,7 +421,7 @@ public class GetRecordsType extends RequestBaseType implements Serializable,
                     theResponseHandler);
         }
         {
-            JAXBElement<? extends AbstractQueryType> theAbstractQuery;
+            AbstractQueryType theAbstractQuery;
             theAbstractQuery = this.getAbstractQuery();
             strategy.appendField(locator, this, "abstractQuery", buffer,
                     theAbstractQuery);

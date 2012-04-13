@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.12 at 10:02:34 AM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.io.Serializable;
@@ -22,8 +20,7 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.geosdi.geoplatform.xml.elements.v1.SimpleLiteral;
-
+import org.geosdi.geoplatform.xml.purl.dc.elements._1.SimpleLiteral;
 
 /**
  * 
@@ -61,18 +58,23 @@ import org.geosdi.geoplatform.xml.elements.v1.SimpleLiteral;
     "boundingBox"
 })
 public class BriefRecordType
-    extends AbstractRecordType
-    implements Serializable, ToString
-{
+        extends AbstractRecordType
+        implements Serializable, ToString {
 
     private final static long serialVersionUID = 1L;
-    @XmlElementRef(name = "identifier", namespace = "http://purl.org/dc/elements/1.1/", type = JAXBElement.class)
+    @XmlElementRef(name = "identifier",
+                   namespace = "http://purl.org/dc/elements/1.1/",
+                   type = JAXBElement.class)
     protected List<JAXBElement<SimpleLiteral>> identifier;
-    @XmlElementRef(name = "title", namespace = "http://purl.org/dc/elements/1.1/", type = JAXBElement.class)
+    @XmlElementRef(name = "title",
+                   namespace = "http://purl.org/dc/elements/1.1/",
+                   type = JAXBElement.class)
     protected List<JAXBElement<SimpleLiteral>> title;
     @XmlElement(namespace = "http://purl.org/dc/elements/1.1/")
     protected SimpleLiteral type;
-    @XmlElementRef(name = "BoundingBox", namespace = "http://www.opengis.net/ows", type = JAXBElement.class)
+    @XmlElementRef(name = "BoundingBox",
+                   namespace = "http://www.opengis.net/ows",
+                   type = JAXBElement.class)
     protected List<JAXBElement<? extends BoundingBoxType>> boundingBox;
 
     /**
@@ -207,12 +209,13 @@ public class BriefRecordType
         super.appendFields(locator, buffer, strategy);
         {
             List<JAXBElement<SimpleLiteral>> theIdentifier;
-            theIdentifier = (((this.identifier!= null)&&(!this.identifier.isEmpty()))?this.getIdentifier():null);
-            strategy.appendField(locator, this, "identifier", buffer, theIdentifier);
+            theIdentifier = (((this.identifier != null) && (!this.identifier.isEmpty())) ? this.getIdentifier() : null);
+            strategy.appendField(locator, this, "identifier", buffer,
+                    theIdentifier);
         }
         {
             List<JAXBElement<SimpleLiteral>> theTitle;
-            theTitle = (((this.title!= null)&&(!this.title.isEmpty()))?this.getTitle():null);
+            theTitle = (((this.title != null) && (!this.title.isEmpty())) ? this.getTitle() : null);
             strategy.appendField(locator, this, "title", buffer, theTitle);
         }
         {
@@ -222,8 +225,9 @@ public class BriefRecordType
         }
         {
             List<JAXBElement<? extends BoundingBoxType>> theBoundingBox;
-            theBoundingBox = (((this.boundingBox!= null)&&(!this.boundingBox.isEmpty()))?this.getBoundingBox():null);
-            strategy.appendField(locator, this, "boundingBox", buffer, theBoundingBox);
+            theBoundingBox = (((this.boundingBox != null) && (!this.boundingBox.isEmpty())) ? this.getBoundingBox() : null);
+            strategy.appendField(locator, this, "boundingBox", buffer,
+                    theBoundingBox);
         }
         return buffer;
     }
@@ -245,5 +249,4 @@ public class BriefRecordType
         List<JAXBElement<? extends BoundingBoxType>> draftl = this.getBoundingBox();
         draftl.addAll(value);
     }
-
 }

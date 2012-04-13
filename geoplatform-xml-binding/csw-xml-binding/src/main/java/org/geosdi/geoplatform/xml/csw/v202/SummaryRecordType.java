@@ -22,7 +22,7 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-import org.geosdi.geoplatform.xml.elements.v1.SimpleLiteral;
+import org.geosdi.geoplatform.xml.purl.dc.elements._1.SimpleLiteral;
 
 
 /**

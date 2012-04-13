@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.12 at 10:02:34 AM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.io.Serializable;
@@ -15,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.xml.filter.v110.SortByType;
@@ -22,7 +21,6 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * Specifies a query to execute against instances of one or
@@ -66,10 +64,10 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "constraint",
     "sortBy"
 })
+@XmlRootElement(name = "QueryType") 
 public class QueryType
-    extends AbstractQueryType
-    implements Serializable, ToString
-{
+        extends AbstractQueryType
+        implements Serializable, ToString {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(name = "ElementSetName", defaultValue = "summary")
@@ -82,6 +80,9 @@ public class QueryType
     protected SortByType sortBy;
     @XmlAttribute(name = "typeNames", required = true)
     protected List<QName> typeNames;
+
+    public QueryType() {
+    }
 
     /**
      * Gets the value of the elementSetName property.
@@ -232,17 +233,20 @@ public class QueryType
         {
             ElementSetNameType theElementSetName;
             theElementSetName = this.getElementSetName();
-            strategy.appendField(locator, this, "elementSetName", buffer, theElementSetName);
+            strategy.appendField(locator, this, "elementSetName", buffer,
+                    theElementSetName);
         }
         {
             List<QName> theElementName;
-            theElementName = (((this.elementName!= null)&&(!this.elementName.isEmpty()))?this.getElementName():null);
-            strategy.appendField(locator, this, "elementName", buffer, theElementName);
+            theElementName = (((this.elementName != null) && (!this.elementName.isEmpty())) ? this.getElementName() : null);
+            strategy.appendField(locator, this, "elementName", buffer,
+                    theElementName);
         }
         {
             QueryConstraintType theConstraint;
             theConstraint = this.getConstraint();
-            strategy.appendField(locator, this, "constraint", buffer, theConstraint);
+            strategy.appendField(locator, this, "constraint", buffer,
+                    theConstraint);
         }
         {
             SortByType theSortBy;
@@ -251,8 +255,9 @@ public class QueryType
         }
         {
             List<QName> theTypeNames;
-            theTypeNames = (((this.typeNames!= null)&&(!this.typeNames.isEmpty()))?this.getTypeNames():null);
-            strategy.appendField(locator, this, "typeNames", buffer, theTypeNames);
+            theTypeNames = (((this.typeNames != null) && (!this.typeNames.isEmpty())) ? this.getTypeNames() : null);
+            strategy.appendField(locator, this, "typeNames", buffer,
+                    theTypeNames);
         }
         return buffer;
     }
@@ -268,5 +273,4 @@ public class QueryType
         List<QName> draftl = this.getTypeNames();
         draftl.addAll(value);
     }
-
 }

@@ -65,7 +65,7 @@ public class CapabilitiesType
      *     {@link Filter_Capabilities }
      *     
      */
-    public Filter_Capabilities getFilter_Capabilities() {
+    public Filter_Capabilities getFilterCapabilities() {
         return filterCapabilities;
     }
 
@@ -77,10 +77,11 @@ public class CapabilitiesType
      *     {@link Filter_Capabilities }
      *     
      */
-    public void setFilter_Capabilities(Filter_Capabilities value) {
+    public void setFilterCapabilities(Filter_Capabilities value) {
         this.filterCapabilities = value;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -88,6 +89,7 @@ public class CapabilitiesType
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -95,11 +97,12 @@ public class CapabilitiesType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             Filter_Capabilities theFilter_Capabilities;
-            theFilter_Capabilities = this.getFilter_Capabilities();
+            theFilter_Capabilities = this.getFilterCapabilities();
             strategy.appendField(locator, this, "filterCapabilities", buffer, theFilter_Capabilities);
         }
         return buffer;

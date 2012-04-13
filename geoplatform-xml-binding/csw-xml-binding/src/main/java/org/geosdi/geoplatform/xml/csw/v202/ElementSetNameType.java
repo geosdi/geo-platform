@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.12 at 10:02:34 AM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.io.Serializable;
@@ -21,7 +19,6 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * <p>Java class for ElementSetNameType complex type.
@@ -45,14 +42,20 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "value"
 })
 public class ElementSetNameType
-    implements Serializable, ToString
-{
+        implements Serializable, ToString {
 
     private final static long serialVersionUID = 1L;
     @XmlValue
     protected ElementSetType value;
     @XmlAttribute(name = "typeNames")
     protected List<QName> typeNames;
+
+    public ElementSetNameType() {
+    }
+
+    public ElementSetNameType(ElementSetType value) {
+        this.value = value;
+    }
 
     /**
      * Named subsets of catalogue object properties; these
@@ -131,8 +134,9 @@ public class ElementSetNameType
         }
         {
             List<QName> theTypeNames;
-            theTypeNames = (((this.typeNames!= null)&&(!this.typeNames.isEmpty()))?this.getTypeNames():null);
-            strategy.appendField(locator, this, "typeNames", buffer, theTypeNames);
+            theTypeNames = (((this.typeNames != null) && (!this.typeNames.isEmpty())) ? this.getTypeNames() : null);
+            strategy.appendField(locator, this, "typeNames", buffer,
+                    theTypeNames);
         }
         return buffer;
     }
@@ -142,5 +146,4 @@ public class ElementSetNameType
         List<QName> draftl = this.getTypeNames();
         draftl.addAll(value);
     }
-
 }

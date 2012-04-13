@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.12 at 10:02:34 AM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.io.Serializable;
@@ -18,7 +16,6 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * 
@@ -54,14 +51,21 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     GetRecordsType.class
 })
 public abstract class RequestBaseType
-    implements Serializable, ToString
-{
+        implements Serializable, ToString {
 
     private final static long serialVersionUID = 1L;
     @XmlAttribute(name = "service", required = true)
     protected String service;
     @XmlAttribute(name = "version", required = true)
     protected String version;
+
+    public RequestBaseType() {
+    }
+
+    public RequestBaseType(String service, String version) {
+        this.service = service;
+        this.version = version;
+    }
 
     /**
      * Gets the value of the service property.
@@ -146,5 +150,4 @@ public abstract class RequestBaseType
         }
         return buffer;
     }
-
 }

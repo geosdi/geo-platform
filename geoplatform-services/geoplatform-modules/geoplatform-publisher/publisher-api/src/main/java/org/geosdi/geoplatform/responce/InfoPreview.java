@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.responce;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * this kind of objects should contains a name of the datastore and the URL to the PNG associated to the preview of the datastore
+ * this kind of objects should contains a name of the datastore and the URL to
+ * the PNG associated to the preview of the datastore
  */
 @XmlRootElement(name = "InfoPreview")
 public class InfoPreview {
@@ -51,13 +52,13 @@ public class InfoPreview {
     private double upperX = 0.0d;
     private double upperY = 0.0d;
     private String crs = "";
-    private boolean isVector = true;
+    private boolean isShape;
     private String message = "ok";
     private String styleName;
 
     public InfoPreview(String url, String workspace, String layerName,
-            double minX, double minY, double maxX, double maxY, String crs, 
-            String styleName) {
+            double minX, double minY, double maxX, double maxY, String crs,
+            String styleName, boolean isShape) {
         this.dataSource = url;
         this.workspace = workspace;
         this.title = layerName;
@@ -66,7 +67,7 @@ public class InfoPreview {
         this.upperX = maxX;
         this.upperY = maxY;
         this.crs = crs;
-        this.isVector = true;
+        this.isShape = isShape;
         this.styleName = styleName;
     }
 
@@ -84,14 +85,6 @@ public class InfoPreview {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public boolean isIsVector() {
-        return isVector;
-    }
-
-    public void setIsVector(boolean isVector) {
-        this.isVector = isVector;
     }
 
     public String getUrl() {
@@ -116,6 +109,14 @@ public class InfoPreview {
 
     public void setDataStoreName(String dataStoreName) {
         this.title = dataStoreName;
+    }
+
+    public boolean isIsShape() {
+        return isShape;
+    }
+
+    public void setIsShape(boolean isShape) {
+        this.isShape = isShape;
     }
 
     public double getMaxX() {
@@ -170,5 +171,10 @@ public class InfoPreview {
      */
     public void setStyleName(String styleName) {
         this.styleName = styleName;
+    }
+
+    @Override
+    public String toString() {
+        return "InfoPreview{" + "dataSource=" + dataSource + ", workspace=" + workspace + ", title=" + title + ", lowerX=" + lowerX + ", lowerY=" + lowerY + ", upperX=" + upperX + ", upperY=" + upperY + ", crs=" + crs + ", isShape=" + isShape + ", message=" + message + ", styleName=" + styleName + '}';
     }
 }

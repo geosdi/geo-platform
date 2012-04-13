@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -56,12 +57,20 @@ import org.geosdi.geoplatform.responce.LayerAttribute;
 public interface GPPublisherService {
 
     @Get
-    @HttpResource(location = "/preview/uploadZipInPreview")
+    @HttpResource(location = "/preview/analyzeZIPEPSG")
     @WebResult(name = "Result")
-    List<InfoPreview> uploadZIPInPreview(
+    List<InfoPreview> analyzeZIPEPSG(
             @WebParam(name = "sessionID") String sessionID,
-            @WebParam(name = "username") String username,
+            @WebParam(name = "username") String userName,
             @WebParam(name = "fileName") File file)
+            throws ResourceNotFoundFault;
+    
+    @Get
+    @HttpResource(location = "/preview/processEPSGResult")
+    @WebResult(name = "Result")
+    List<InfoPreview> processEPSGResult(
+            @WebParam(name = "username") String userName,
+            @WebParam(name = "previewLayerList") ArrayList<InfoPreview> previewLayerList)
             throws ResourceNotFoundFault;
     
     @Get
@@ -101,7 +110,7 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/uploadZipInPreview")
     @WebResult(name = "Result")
-    InfoPreview uploadTIFInPreview(
+    InfoPreview analyzeTIFInPreview(
             @WebParam(name = "username") String sessionID,
             @WebParam(name = "fileName") File file,
             @WebParam(name = "overwrite") boolean overwrite)

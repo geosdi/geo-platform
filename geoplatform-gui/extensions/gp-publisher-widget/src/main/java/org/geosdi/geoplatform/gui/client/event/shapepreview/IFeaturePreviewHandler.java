@@ -42,9 +42,9 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface IUploadShapePreviewHandler extends EventHandler {
+public interface IFeaturePreviewHandler extends EventHandler {
     
-    Type<IUploadShapePreviewHandler> TYPE = new Type<IUploadShapePreviewHandler>();
+    Type<IFeaturePreviewHandler> TYPE = new Type<IFeaturePreviewHandler>();
     
     public void showLayerPreview(String jsonString);
     

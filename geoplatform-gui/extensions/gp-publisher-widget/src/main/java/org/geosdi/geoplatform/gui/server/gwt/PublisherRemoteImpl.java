@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IPublisherService;
@@ -44,7 +45,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public class PublisherRemoteImpl extends GPAutoInjectingRemoteServiceServlet
         implements PublisherRemote {
@@ -57,6 +58,11 @@ public class PublisherRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Override
     public String publishLayerPreview(List<String> layerList, boolean reloadCluster) throws GeoPlatformException {
         return publisherService.publishLayerPreview(super.getThreadLocalRequest(), layerList, reloadCluster);
+    }
+
+    @Override
+    public String processEPSGResult(List<EPSGLayerData> previewLayerList) throws GeoPlatformException {
+        return publisherService.processEPSGResult(super.getThreadLocalRequest(), previewLayerList);
     }
 
     @Override

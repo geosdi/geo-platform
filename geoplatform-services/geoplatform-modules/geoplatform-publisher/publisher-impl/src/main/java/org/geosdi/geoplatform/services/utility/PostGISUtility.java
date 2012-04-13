@@ -67,7 +67,7 @@ public class PostGISUtility {
         encoder.setSchema("public");
         encoder.setUser(userNameDBPostgisDatastore);
         encoder.setPassword(passwordDBPostgisDatastore);
-        encoder.setExposePrimaryKeys(false);
+        encoder.setExposePrimaryKeys(Boolean.FALSE);
         encoder.setMaxConnections(20);
         encoder.setMinConnections(1);
         encoder.setFetchSize(1000);

@@ -57,8 +57,7 @@ public class PreviewWidget extends GPMapPreviewWidget {
         defaultMapOptions.setUnits(MapUnits.METERS);
         defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
                 20037508, 20037508.34));
-        defaultMapOptions.setMaxResolution(
-                new Double(156543.0339).floatValue());
+        defaultMapOptions.setMaxResolution(new Double(156543.0339).floatValue());
         return defaultMapOptions;
     }
 

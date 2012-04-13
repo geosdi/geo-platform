@@ -68,7 +68,7 @@ import org.geosdi.geoplatform.responce.InfoPreview;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -97,10 +97,10 @@ public class UploadServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException, GeoPlatformException {
-        GPAccount account = null;
         HttpSession session = req.getSession();
         Object accountObj = session.getAttribute(
                 SessionProperty.LOGGED_ACCOUNT.toString());
+        GPAccount account;
         if (accountObj != null && accountObj instanceof GPAccount) {
             account = (GPAccount) accountObj;
         } else {
@@ -114,7 +114,8 @@ public class UploadServlet extends HttpServlet {
             DiskFileItemFactory factory = new DiskFileItemFactory();
             // Create a new file upload handler
            /*
-             *Set the size threshold, above which content will be stored on disk.
+             * Set the size threshold, above which content will be stored on
+             * disk.
              */
             factory.setSizeThreshold(1 * 1024 * 1024); //1 MB
 
@@ -152,7 +153,7 @@ public class UploadServlet extends HttpServlet {
                 List<InfoPreview> infoPreviews = this.manageUploadedFilePreview(uploadedFile, session.getId(), account.getStringID());
                 resp.setContentType("text/x-json;charset=UTF-8");
                 resp.setHeader("Cache-Control", "no-cache");
-                String result = this.generateJSONObjects(infoPreviews);
+                String result = PublisherFileUtils.generateJSONObjects(infoPreviews);
                 resp.getWriter().write(result);
                 //geoPlatformPublishClient.publish("previews", "dataTest", infoPreview.getDataStoreName());
             } catch (FileUploadException ex) {
@@ -171,14 +172,6 @@ public class UploadServlet extends HttpServlet {
         }
     }
 
-    private String generateJSONObjects(List<InfoPreview> infoPreview) {
-        Gson gson = new GsonBuilder().create();
-        Type listType = new TypeToken<List<InfoPreview>>() {
-        }.getType();
-        //Note: the name previewLayers must correspond to the field name in PreviewLayerList class
-        return "{\"previewLayers\":" + gson.toJson(infoPreview, listType) + "}";
-    }
-
     private List<InfoPreview> manageUploadedFilePreview(File uploadedFile, String sessionID, String username) {
         List<InfoPreview> previewList = null;
         String extension = uploadedFile.getAbsolutePath().substring(
@@ -186,16 +179,16 @@ public class UploadServlet extends HttpServlet {
         System.out.println("Extension: " + extension);
         if (extension.equalsIgnoreCase(GPExtensions.ZIP.toString())) {
             try {
-                previewList = this.geoPlatformPublishClient.getPublishService().uploadZIPInPreview(
-                        sessionID, username, uploadedFile);
+                previewList = this.geoPlatformPublishClient.getPublishService().
+                        analyzeZIPEPSG(sessionID, username, uploadedFile);
             } catch (ResourceNotFoundFault ex) {
                 logger.info("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
             }
-        } else if(extension.equalsIgnoreCase(GPExtensions.TIF.toString())){
+        } else if (extension.equalsIgnoreCase(GPExtensions.TIF.toString())) {
             try {
                 previewList = new ArrayList<InfoPreview>();
-                previewList.add(this.geoPlatformPublishClient.getPublishService().uploadTIFInPreview(
+                previewList.add(this.geoPlatformPublishClient.getPublishService().analyzeTIFInPreview(
                         username, uploadedFile, true));
             } catch (ResourceNotFoundFault ex) {
                 logger.info("Error on uploading shape: " + ex);

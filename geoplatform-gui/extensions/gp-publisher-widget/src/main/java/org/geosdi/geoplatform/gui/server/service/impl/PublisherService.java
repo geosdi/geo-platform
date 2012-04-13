@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import com.google.common.collect.Lists;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,6 +45,7 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -59,13 +61,18 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
+import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IPublisherService;
+import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.responce.InfoPreview;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -107,9 +114,9 @@ public class PublisherService implements IPublisherService {
     @PostConstruct
     public void init() {
         logger.info("Reload publisher parameters: URL CLUSTER RELOAD " + urlClusterReload
-                + " - HOST URL CLUSTER RELOAD " + hostUrlClusterReload + 
-                " - USERNAME CLUSTER RELOAD " + userNameClusterReload + 
-                " - PASSWORD CLUSTER RELOAD " + passwordClusterReload);
+                + " - HOST URL CLUSTER RELOAD " + hostUrlClusterReload
+                + " - USERNAME CLUSTER RELOAD " + userNameClusterReload
+                + " - PASSWORD CLUSTER RELOAD " + passwordClusterReload);
         localContext = new BasicHttpContext();
         this.httpclient = new DefaultHttpClient();
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
@@ -121,9 +128,41 @@ public class PublisherService implements IPublisherService {
     }
 
     @Override
+    public String processEPSGResult(HttpServletRequest httpServletRequest,
+            List<EPSGLayerData> previewLayerList) throws GeoPlatformException {
+        GPAccount account;
+        try {
+            account = sessionUtility.getLoggedAccount(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        List<InfoPreview> resultList = null;
+        try {
+            resultList = geoPlatformPublishClient.getPublishService().processEPSGResult(
+                    account.getStringID(), this.trasformPreviewLayerList(previewLayerList));
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("Error on publish shape: " + ex);
+            throw new GeoPlatformException("Error on publish shape.");
+        }
+        return PublisherFileUtils.generateJSONObjects(resultList);
+    }
+
+    private ArrayList<InfoPreview> trasformPreviewLayerList(List<EPSGLayerData> previewLayerList) {
+        ArrayList<InfoPreview> infoPreviewList = Lists.newArrayList();
+        InfoPreview infoPreview;
+        for (EPSGLayerData previewLayer : previewLayerList) {
+            infoPreview = new InfoPreview(null, null, previewLayer.getFeatureName(),
+                    0d, 0d, 0d, 0d, previewLayer.getEpsgCode(),
+                    previewLayer.getStyleName(), previewLayer.isIsShape());
+            infoPreviewList.add(infoPreview);
+            System.out.println("Layer preview transformed: " + infoPreview.toString());
+        }
+        return infoPreviewList;
+    }
+
+    @Override
     public String publishLayerPreview(HttpServletRequest httpServletRequest,
             List<String> layerList, boolean reloadCluster) throws GeoPlatformException {
-
         try {
             sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {

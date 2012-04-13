@@ -62,7 +62,6 @@ import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
 import org.geosdi.geoplatform.gui.client.event.kml.IUploadKMLPreviewHandler;
-import org.geosdi.geoplatform.gui.client.event.shapepreview.IUploadShapePreviewHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPKmlPreviewEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPKmlPreviewHandler;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;

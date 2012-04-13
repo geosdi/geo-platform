@@ -68,6 +68,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     private double upperY;
     private String message;
     private String styleName;
+    private boolean isShape;
     @Transient
     private Long id;
     @Transient
@@ -88,7 +89,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     public PreviewLayer(String label, String title, String name, String abstractText,
             String dataSource, String crs, BboxClientInfo bbox, GPLayerType layerType,
-            String styleName) {
+            String styleName, boolean isShape) {
         this.label = label;
         this.title = title;
         this.name = name;
@@ -98,6 +99,15 @@ public class PreviewLayer implements GPLayerBean, Serializable {
         this.bbox = bbox;
         this.layerType = layerType;
         this.styleName = styleName;
+        this.isShape = isShape;
+    }
+
+    public boolean isIsShape() {
+        return isShape;
+    }
+
+    public void setIsShape(boolean isShape) {
+        this.isShape = isShape;
     }
 
     /**

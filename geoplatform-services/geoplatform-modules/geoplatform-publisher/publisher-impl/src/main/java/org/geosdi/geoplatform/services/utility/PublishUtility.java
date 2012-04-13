@@ -51,9 +51,13 @@ public class PublishUtility {
 
 //    public final static String GEOPORTAL = "geoportal";
     public static String TMPDIR;
-    public final static String shpDirName = "shp";
-    public final static String tifDirName = "tif";
-    public final static String zipDirName = "zip";
+    public final static String SHP_DIR_NAME = "shp";
+    public final static String TIF_DIR_NAME = "tif";
+    public final static String ZIP_DIR_NAME = "zip";
+    public static final String FILE_NAME = "fileName";
+    public static final String FILE_PATH = "filePath";
+    public static final String USER_WORKSPACE = "userWorkSpace";
+    public static final String PUBLISHER_SERVICE = "publisher_service";
 
     static {
         TMPDIR = System.getProperty("java.io.tmpdir");
@@ -72,6 +76,11 @@ public class PublishUtility {
         return path + System.getProperty("file.separator");
     }
 
+    public static boolean deleteFile(String filePath) {
+        File file = new File(filePath);
+        return file.delete();
+    }
+
     public static boolean deleteDir(File directory) {
         if (directory.isDirectory()) {
             String[] children = directory.list();
@@ -86,13 +95,15 @@ public class PublishUtility {
         return directory.delete();
     }
 
-    /************************
+    /**
+     * **********************
      *
      * @param out the archive stream where compressing the inFile
      * @param inFile the file to compress
      * @return
      * @throws IOException this exception is raised when inFile does not exist
-     * this method at the first opens and compresses  the fileinFile, then it inserts it in the out stream
+     * this method at the first opens and compresses the fileinFile, then it
+     * inserts it in the out stream
      */
     public static ZipOutputStream compress(ZipOutputStream out, File inFile) throws IOException {
         FileInputStream inShpFil = new FileInputStream(inFile); // Stream to read file
@@ -165,7 +176,8 @@ public class PublishUtility {
         }
     }
 
-    /*****************
+    /**
+     * ***************
      *
      * @param zipFileName the name of the resulting zip file
      * @param shpFileName the name of the shp file to compress

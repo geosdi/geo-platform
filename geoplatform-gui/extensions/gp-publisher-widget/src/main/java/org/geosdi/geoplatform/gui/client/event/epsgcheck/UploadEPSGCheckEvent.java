@@ -33,38 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.gui.client.event.epsgcheck;
 
-import java.io.File;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.services.utility.PublishUtility;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PublisherShpCleanerJob implements Job {
-
-    public static final String PUBLISHER_SHP_CLEANER_JOB = "publischerShpCleanerJob";
-    public static final String LAYER_NAME = "shpList";
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+public class UploadEPSGCheckEvent extends AbstractUploadEvent<IUploadEPSGCheckHandler> {
+    
+    private String result;
 
     @Override
-    public void execute(JobExecutionContext context) throws JobExecutionException {
-        String layerName = (String) context.getTrigger().getJobDataMap().get(LAYER_NAME);
-        String userWorkspace = (String) context.getTrigger().getJobDataMap().get(PublishUtility.USER_WORKSPACE);
-        GPPublisherServiceImpl publisherService = (GPPublisherServiceImpl) context.getTrigger().getJobDataMap().get(PublishUtility.PUBLISHER_SERVICE);
-        try {
-            publisherService.removeSHPFromPreview(userWorkspace, layerName);
-        } catch (ResourceNotFoundFault re) {
-            logger.error("Error on PublisherShpCleanerJob: " + re);
-        }
-        String filePath = (String) context.getTrigger().getJobDataMap().get(PublishUtility.FILE_PATH);
-        PublishUtility.deleteFile(filePath);
+    public Type<IUploadEPSGCheckHandler> getAssociatedType() {
+        return IUploadEPSGCheckHandler.TYPE;
     }
+
+    @Override
+    protected void dispatch(IUploadEPSGCheckHandler handler) {
+        handler.showEPSGTable(this.result);
+    }
+
+    @Override
+    public void setResult(String result) {
+        this.result = result;
+    }
+    
 }

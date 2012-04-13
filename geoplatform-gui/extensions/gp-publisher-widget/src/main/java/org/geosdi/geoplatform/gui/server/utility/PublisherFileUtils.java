@@ -35,11 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.server.utility;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import org.apache.commons.io.FileUtils;
+import org.geosdi.geoplatform.responce.InfoPreview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -47,7 +53,7 @@ import org.springframework.stereotype.Component;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "publisherFileUtils")
 public class PublisherFileUtils {
@@ -60,6 +66,14 @@ public class PublisherFileUtils {
     public File createFileWithUniqueName(String fileName) {
         return new File(pbDir.getAbsolutePath() + File.separator + fileName
                 + Long.toString(System.nanoTime()));
+    }
+
+    public static String generateJSONObjects(List<InfoPreview> infoPreview) {
+        Gson gson = new GsonBuilder().create();
+        Type listType = new TypeToken<List<InfoPreview>>() {
+        }.getType();
+        //Note: the name previewLayers must correspond to the field name in PreviewLayerList class
+        return "{\"previewLayers\":" + gson.toJson(infoPreview, listType) + "}";
     }
 
     @PostConstruct

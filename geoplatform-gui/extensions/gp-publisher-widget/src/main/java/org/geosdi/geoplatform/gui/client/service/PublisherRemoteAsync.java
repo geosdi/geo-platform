@@ -37,12 +37,15 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public interface PublisherRemoteAsync {
+
+    public void processEPSGResult(List<EPSGLayerData> previewLayerList, AsyncCallback<String> callback);
 
     public void publishLayerPreview(List<String> layerList, boolean reloadCluster, AsyncCallback<String> callback);
 

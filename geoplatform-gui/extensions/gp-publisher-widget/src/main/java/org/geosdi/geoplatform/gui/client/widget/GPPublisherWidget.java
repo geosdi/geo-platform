@@ -49,14 +49,16 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.collect.Lists;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.event.shapepreview.IUploadShapePreviewHandler;
-import org.geosdi.geoplatform.gui.client.event.shapepreview.UploadShapePreviewEvent;
+import org.geosdi.geoplatform.gui.client.event.epsgcheck.UploadEPSGCheckEvent;
+import org.geosdi.geoplatform.gui.client.event.epsgcheck.IUploadEPSGCheckHandler;
+import org.geosdi.geoplatform.gui.client.event.shapepreview.IFeaturePreviewHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPPublishShapePreviewEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPPublishShapePreviewHandler;
 import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
@@ -87,8 +89,11 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @email nazzareno.sileno@geosdi.org
  */
 public class GPPublisherWidget extends GeoPlatformWindow
-        implements IUploadShapePreviewHandler, IGPPublishShapePreviewHandler {
+        implements IFeaturePreviewHandler, IGPPublishShapePreviewHandler, IUploadEPSGCheckHandler {
 
+    public final static int PUBLISHER_WIDGET_WIDTH = 600;
+    public final static int PUBLISHER_WIDGET_HEIGHT = 500;
+    
     private TreePanel tree;
 //    private boolean mapInitialized;
     private ContentPanel centralPanel;
@@ -104,12 +109,14 @@ public class GPPublisherWidget extends GeoPlatformWindow
     private Window htmlWindow = new Window();
     private Text uploadMessage = new Text("Select a file to show in preview:");
     private ToggleButton toggleButtonClusterReload;
-    private UploadShapePreviewEvent uploadPreviewEvent = new UploadShapePreviewEvent();
+    private UploadEPSGCheckEvent epsgCheckEvent = new UploadEPSGCheckEvent();
+    private EPSGTablePanel epsgTable;
 
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
         this.tree = theTree;
-        GPHandlerManager.addHandler(IUploadShapePreviewHandler.TYPE, this);
+        GPHandlerManager.addHandler(IFeaturePreviewHandler.TYPE, this);
+        GPHandlerManager.addHandler(IUploadEPSGCheckHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IGPPublishShapePreviewHandler.TYPE, this);
     }
 
@@ -122,6 +129,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
         super.setCollapsible(true);
         super.setPlain(true);
         this.htmlWindow.setHeading("Cluster Reload Result");
+        this.epsgTable = new EPSGTablePanel();
 //        this.addListener(Events.Show, new Listener<WindowEvent>() {
 //
 //            @Override
@@ -132,6 +140,35 @@ public class GPPublisherWidget extends GeoPlatformWindow
 //                }
 //            }
 //        });
+    }
+
+    @Override
+    public void showEPSGTable(String jsonString) {
+        StringBuilder layerProblems = new StringBuilder();
+        List<PreviewLayer> epsgLayerList = Lists.newArrayList();
+        PreviewLayerList previewLayers = PreviewLayerList.JSON.read(jsonString);
+        for (PreviewLayer previewLayer : previewLayers.getPreviewLayers()) {
+            if (previewLayer.getMessage().contains("Some problems")) {
+                layerProblems.append(previewLayer.getTitle()).append("\n");
+            } else {
+                epsgLayerList.add(previewLayer);
+            }
+        }
+        if (epsgLayerList.size() > 0) {
+            this.epsgTable.populateStore(epsgLayerList);
+            centralPanel.removeAll();
+            centralPanel.add(this.epsgTable);//aggiungere tabella epsg
+            this.epsgTable.layout();
+            centralPanel.layout();
+        }
+        this.manageLayerProblems(layerProblems);
+    }
+
+    private void manageLayerProblems(StringBuilder layerProblems) {
+        if (layerProblems.length() != 0) {
+            GeoPlatformMessage.alertMessage("Upload Shape Error",
+                    "Some problems occurred with following layers:\n" + layerProblems);
+        }
     }
 
     @Override
@@ -156,10 +193,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
             centralPanel.layout();
             publishButton.enable();
         }
-        if (layerProblems.length() != 0) {
-            GeoPlatformMessage.alertMessage("Upload Shape Error",
-                    "Some problems occurred with following layers:\n" + layerProblems);
-        }
+        this.manageLayerProblems(layerProblems);
     }
 
     public WMS generateLayer(PreviewLayer previewLayer) {
@@ -167,7 +201,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
         wmsParams.setFormat("image/png");
         wmsParams.setLayers(previewLayer.getName());
         wmsParams.setStyles(previewLayer.getStyleName());
-        wmsParams.setIsTransparent(true);
+        wmsParams.setTransparent(Boolean.TRUE);
 
         Double lowerX = previewLayer.getLowerX();
         Double lowerY = previewLayer.getLowerY();
@@ -310,7 +344,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
     }
 
     private void addSouthPanel() {
-        fileUploader = new GPFileUploader("UploadServlet", this.uploadPreviewEvent,
+        fileUploader = new GPFileUploader("UploadServlet", this.epsgCheckEvent,
                 GPExtensions.ZIP, GPExtensions.TIF);
         southPanel = new FieldSet();
         southPanel.setHeight(78);
@@ -349,6 +383,6 @@ public class GPPublisherWidget extends GeoPlatformWindow
     @Override
     public void initSize() {
         //Warning: changing window size will be necessary change panel's size also.
-        super.setSize(600, 500);
+        super.setSize(GPPublisherWidget.PUBLISHER_WIDGET_WIDTH, GPPublisherWidget.PUBLISHER_WIDGET_HEIGHT);
     }
 }

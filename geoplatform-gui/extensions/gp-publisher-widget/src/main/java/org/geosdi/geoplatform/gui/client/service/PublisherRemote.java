@@ -39,11 +39,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 @RemoteServiceRelativePath("PublisherRemote")
 public interface PublisherRemote extends RemoteService {
@@ -57,6 +58,8 @@ public interface PublisherRemote extends RemoteService {
             return instance;
         }
     }
+
+    public String processEPSGResult(List<EPSGLayerData> previewLayerList) throws GeoPlatformException;
 
     public String publishLayerPreview(List<String> layerList, boolean reloadCluster) throws GeoPlatformException;
 

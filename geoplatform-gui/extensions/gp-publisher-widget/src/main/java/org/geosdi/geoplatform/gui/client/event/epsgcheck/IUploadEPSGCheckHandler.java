@@ -33,32 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.event.shapepreview;
+package org.geosdi.geoplatform.gui.client.event.epsgcheck;
 
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UploadShapePreviewEvent extends AbstractUploadEvent<IUploadShapePreviewHandler> {
+public interface IUploadEPSGCheckHandler extends EventHandler {
     
-    private String result;
-
-    @Override
-    public Type<IUploadShapePreviewHandler> getAssociatedType() {
-        return IUploadShapePreviewHandler.TYPE;
-    }
-
-    @Override
-    protected void dispatch(IUploadShapePreviewHandler handler) {
-        handler.showLayerPreview(this.result);
-    }
-
-    @Override
-    public void setResult(String result) {
-        this.result = result;
-    }
+    Type<IUploadEPSGCheckHandler> TYPE = new Type<IUploadEPSGCheckHandler>();
+    
+    public void showEPSGTable(String jsonString);
     
 }

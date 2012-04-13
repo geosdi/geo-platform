@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.services.utility.PublishUtility;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -50,25 +51,20 @@ import org.slf4j.LoggerFactory;
 public class PublisherTifCleanerJob implements Job {
 
     public static final String PUBLISHER_TIF_CLEANER_JOB = "publischerTifCleanerJob";
-    public static final String USER_WORKSPACE = "userWorkSpace";
-    public static final String FILE_NAME = "fileName";
-    public static final String FILE_PATH = "filePath";
-    public static final String PUBLISHER_SERVICE = "publisher_service";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        String fileName = (String) context.getTrigger().getJobDataMap().get(FILE_NAME);
-        String userWorkspace = (String) context.getTrigger().getJobDataMap().get(USER_WORKSPACE);
+        String fileName = (String) context.getTrigger().getJobDataMap().get(PublishUtility.FILE_NAME);
+        String userWorkspace = (String) context.getTrigger().getJobDataMap().get(PublishUtility.USER_WORKSPACE);
 
-        GPPublisherServiceImpl publisherService = (GPPublisherServiceImpl) context.getTrigger().getJobDataMap().get(PUBLISHER_SERVICE);
+        GPPublisherServiceImpl publisherService = (GPPublisherServiceImpl) context.getTrigger().getJobDataMap().get(PublishUtility.PUBLISHER_SERVICE);
         try {
             publisherService.removeTIFFromPreview(userWorkspace, fileName);
         } catch (ResourceNotFoundFault re) {
             logger.error("Error on PublisherTifCleanerJob: " + re);
         }
-        String filePath = (String) context.getTrigger().getJobDataMap().get(FILE_PATH);
-        File file = new File(filePath);
-        file.delete();
+        String filePath = (String) context.getTrigger().getJobDataMap().get(PublishUtility.FILE_PATH);
+        PublishUtility.deleteFile(filePath);
     }
 }

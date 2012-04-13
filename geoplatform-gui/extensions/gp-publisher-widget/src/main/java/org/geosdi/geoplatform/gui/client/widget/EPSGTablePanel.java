@@ -89,24 +89,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         epsgTextField.setAllowBlank(Boolean.FALSE);
         epsgColumnConfig.setEditor(new CellEditor(epsgTextField));
         configs.add(epsgColumnConfig);
-//        CheckBoxSelectionModel<PreviewLayer> checkBoxSelectionModel = new CheckBoxSelectionModel<PreviewLayer>();
-//        checkBoxSelectionModel.setSelectionMode(Style.SelectionMode.MULTI);
-//        checkBoxSelectionModel.addSelectionChangedListener(new SelectionChangedListener<PreviewLayer>() {
-//
-//            @Override
-//            public void selectionChanged(SelectionChangedEvent<PreviewLayer> se) {
-//                if (se.getSelection().isEmpty()) {
-//                    deleteEntryButton.disable();
-//                } else {
-//                    deleteEntryButton.enable();
-//                }
-//            }
-//        });
-//        checkBoxSelectionModel.setLocked(Boolean.FALSE);
-//        configs.add(checkBoxSelectionModel.getColumn());
         this.grid = new EditorGrid<EPSGLayerData>(store, new ColumnModel(configs));
-//        this.grid.addPlugin(checkBoxSelectionModel);
-//        this.grid.setSelectionModel(checkBoxSelectionModel);
         grid.setBorders(Boolean.TRUE);
         grid.setStripeRows(Boolean.TRUE);
         grid.setBorders(Boolean.TRUE);
@@ -176,7 +159,6 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-//        super.simplifyPanel();
         super.setHeading("Feature EPSG Code Analisys");
         this.store.addStoreListener(new StoreListener<EPSGLayerData>() {
 

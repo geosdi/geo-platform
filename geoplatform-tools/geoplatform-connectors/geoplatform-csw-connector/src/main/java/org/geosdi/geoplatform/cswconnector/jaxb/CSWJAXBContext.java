@@ -52,6 +52,7 @@ public class CSWJAXBContext extends GeoPlatformJAXBContext {
         super(classToBeBound);
     }
 
+    
     public CSWJAXBContext(String contextPath, ClassLoader classLoader,
             Map<String, ?> properties) throws JAXBException {
         super(contextPath, classLoader, properties);

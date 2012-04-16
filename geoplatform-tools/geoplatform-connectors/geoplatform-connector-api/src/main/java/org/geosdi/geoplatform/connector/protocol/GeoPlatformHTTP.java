@@ -33,70 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.xml.csw;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.geosdi.geoplatform.connector.protocol;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CSWContextServiceProvider {
+public class GeoPlatformHTTP {
 
-    private static List<Class> allClasses;
-
-    static {
-        allClasses = new ArrayList<Class>();
-    }
-
-    /**
-     * Load All Classes for CSW JAXB Context
-     * 
-     * @return Classes[]
-     */
-    public static Class[] loadClasses() {
-        return getAllClasses();
-    }
-
-    /**
-     * 
-     * @return Context Path for CSW Context
-     */
-    public static String loadContextPath() {
-        return getFullContextPath();
-    }
-
-    private static String getFullContextPath() {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append("org.geosdi.geoplatform.xml.ows.v100");
-        builder.append(":");
-        builder.append("org.geosdi.geoplatform.xml.filter.v110");
-        builder.append(":");
-        builder.append("org.geosdi.geoplatform.xml.gml.v311");
-        builder.append(":");
-        builder.append("org.geosdi.geoplatform.xml.csw.v202");
-        builder.append(":");
-        builder.append("org.geosdi.geoplatform.xml.purl.dc.elements._1");
-        builder.append(":");
-        builder.append("org.geosdi.geoplatform.xml.purl.dc.terms");
-
-        return builder.toString();
-    }
-
-    private static Class[] getAllClasses() {
-        allClasses.add(org.geosdi.geoplatform.xml.ows.v100.ObjectFactory.class);
-        allClasses.add(
-                org.geosdi.geoplatform.xml.filter.v110.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.gml.v311.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.csw.v202.ObjectFactory.class);
-        allClasses.add(
-                org.geosdi.geoplatform.xml.purl.dc.elements._1.ObjectFactory.class);
-        allClasses.add(
-                org.geosdi.geoplatform.xml.purl.dc.terms.ObjectFactory.class);
-
-        return allClasses.toArray(new Class[allClasses.size()]);
-    }
+    public static final String CONTENT_TYPE_PARAMETER = "Content-Type";
+    //
+    /** Content type XML Definition */
+    public final static String CONTENT_TYPE_XML = "application/xml";
 }

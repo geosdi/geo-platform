@@ -77,7 +77,14 @@ public class AcceptVersionsType
 
     private final static long serialVersionUID = 1L;
     @XmlElement(name = "Version", required = true)
-    protected List<String> version;
+    private List<String> version;
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(List<String> version) {
+        this.version = version;
+    }
 
     /**
      * Gets the value of the version property.
@@ -103,11 +110,12 @@ public class AcceptVersionsType
      */
     public List<String> getVersion() {
         if (version == null) {
-            version = new ArrayList<String>();
+            setVersion(new ArrayList<String>());
         }
         return this.version;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -115,6 +123,7 @@ public class AcceptVersionsType
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -122,6 +131,7 @@ public class AcceptVersionsType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<String> theVersion;
@@ -129,11 +139,5 @@ public class AcceptVersionsType
             strategy.appendField(locator, this, "version", buffer, theVersion);
         }
         return buffer;
-    }
-
-    public void setVersion(List<String> value) {
-        this.version = null;
-        List<String> draftl = this.getVersion();
-        draftl.addAll(value);
     }
 }

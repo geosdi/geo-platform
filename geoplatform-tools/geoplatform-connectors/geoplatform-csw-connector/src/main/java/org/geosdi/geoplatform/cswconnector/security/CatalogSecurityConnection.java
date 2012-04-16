@@ -100,8 +100,8 @@ public class CatalogSecurityConnection {
 
         String userpass = user + ":" + pass;
 
-        String basicAuth = "Basic " + new String(Base64.encode(
-                userpass.getBytes()));
+        String basicAuth = "Basic " + Base64.encode(
+                userpass.getBytes());
         conn.setRequestProperty("Authorization", basicAuth);
 
         return conn;

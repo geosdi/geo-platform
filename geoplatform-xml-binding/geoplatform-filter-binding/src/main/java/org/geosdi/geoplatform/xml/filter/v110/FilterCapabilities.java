@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.11 at 05:30:35 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.filter.v110;
 
 import java.io.Serializable;
@@ -18,7 +16,6 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * <p>Java class for anonymous complex type.
@@ -48,9 +45,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "idCapabilities"
 })
 @XmlRootElement(name = "Filter_Capabilities")
-public class Filter_Capabilities
-    implements Serializable, ToString
-{
+public class FilterCapabilities implements Serializable, ToString {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(name = "Spatial_Capabilities", required = true)
@@ -132,6 +127,7 @@ public class Filter_Capabilities
         this.idCapabilities = value;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -139,6 +135,7 @@ public class Filter_Capabilities
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -146,23 +143,26 @@ public class Filter_Capabilities
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             Spatial_CapabilitiesType theSpatial_Capabilities;
             theSpatial_Capabilities = this.getSpatial_Capabilities();
-            strategy.appendField(locator, this, "spatialCapabilities", buffer, theSpatial_Capabilities);
+            strategy.appendField(locator, this, "spatialCapabilities", buffer,
+                    theSpatial_Capabilities);
         }
         {
             Scalar_CapabilitiesType theScalar_Capabilities;
             theScalar_Capabilities = this.getScalar_Capabilities();
-            strategy.appendField(locator, this, "scalarCapabilities", buffer, theScalar_Capabilities);
+            strategy.appendField(locator, this, "scalarCapabilities", buffer,
+                    theScalar_Capabilities);
         }
         {
             Id_CapabilitiesType theId_Capabilities;
             theId_Capabilities = this.getId_Capabilities();
-            strategy.appendField(locator, this, "idCapabilities", buffer, theId_Capabilities);
+            strategy.appendField(locator, this, "idCapabilities", buffer,
+                    theId_Capabilities);
         }
         return buffer;
     }
-
 }

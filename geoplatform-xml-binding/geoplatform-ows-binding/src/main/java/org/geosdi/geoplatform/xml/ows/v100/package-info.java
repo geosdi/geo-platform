@@ -34,5 +34,9 @@
  *
  */
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/ows",
+                                     xmlns = {
+    @javax.xml.bind.annotation.XmlNs(prefix = "ows",
+                                     namespaceURI = "http://www.opengis.net/ows")
+},
                                      elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package org.geosdi.geoplatform.xml.ows.v100;

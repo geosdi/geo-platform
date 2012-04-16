@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.11 at 05:30:35 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.filter.v110;
 
 import java.io.Serializable;
@@ -17,7 +15,6 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * <p>Java class for Spatial_CapabilitiesType complex type.
@@ -44,9 +41,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "geometryOperands",
     "spatialOperators"
 })
-public class Spatial_CapabilitiesType
-    implements Serializable, ToString
-{
+public class Spatial_CapabilitiesType   implements Serializable, ToString {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(name = "GeometryOperands", required = true)
@@ -102,6 +97,7 @@ public class Spatial_CapabilitiesType
         this.spatialOperators = value;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -109,6 +105,7 @@ public class Spatial_CapabilitiesType
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -116,18 +113,20 @@ public class Spatial_CapabilitiesType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             GeometryOperandsType theGeometryOperands;
             theGeometryOperands = this.getGeometryOperands();
-            strategy.appendField(locator, this, "geometryOperands", buffer, theGeometryOperands);
+            strategy.appendField(locator, this, "geometryOperands", buffer,
+                    theGeometryOperands);
         }
         {
             SpatialOperatorsType theSpatialOperators;
             theSpatialOperators = this.getSpatialOperators();
-            strategy.appendField(locator, this, "spatialOperators", buffer, theSpatialOperators);
+            strategy.appendField(locator, this, "spatialOperators", buffer,
+                    theSpatialOperators);
         }
         return buffer;
     }
-
 }

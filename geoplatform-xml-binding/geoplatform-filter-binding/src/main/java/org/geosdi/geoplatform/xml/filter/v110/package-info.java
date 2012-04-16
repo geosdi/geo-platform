@@ -4,6 +4,10 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.11 at 05:30:35 PM CEST 
 //
-
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/ogc", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/ogc",
+                                     xmlns = {
+    @javax.xml.bind.annotation.XmlNs(prefix = "ogc",
+                                     namespaceURI = "http://www.opengis.net/ogc")
+},
+                                     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package org.geosdi.geoplatform.xml.filter.v110;

@@ -138,8 +138,8 @@ public class ObjectFactory {
      * Create an instance of {@link Filter_Capabilities }
      * 
      */
-    public Filter_Capabilities createFilter_Capabilities() {
-        return new Filter_Capabilities();
+    public FilterCapabilities createFilter_Capabilities() {
+        return new FilterCapabilities();
     }
 
     /**

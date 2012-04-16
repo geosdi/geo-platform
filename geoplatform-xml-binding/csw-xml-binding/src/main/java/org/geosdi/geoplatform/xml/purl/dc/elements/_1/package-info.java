@@ -4,6 +4,10 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.12 at 06:32:12 PM CEST 
 //
-
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://purl.org/dc/elements/1.1/", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(
+namespace = "http://purl.org/dc/elements/1.1/",
+                                     xmlns = {
+    @javax.xml.bind.annotation.XmlNs(prefix = "dc",
+                                     namespaceURI = "http://purl.org/dc/elements/1.1/")},
+                                     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package org.geosdi.geoplatform.xml.purl.dc.elements._1;

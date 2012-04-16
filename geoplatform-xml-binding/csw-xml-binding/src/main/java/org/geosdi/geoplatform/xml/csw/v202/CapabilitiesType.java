@@ -4,22 +4,20 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.12 at 10:02:34 AM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.geosdi.geoplatform.xml.filter.v110.Filter_Capabilities;
+import org.geosdi.geoplatform.xml.filter.v110.FilterCapabilities;
 import org.geosdi.geoplatform.xml.ows.v100.CapabilitiesBaseType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * This type extends ows:CapabilitiesBaseType defined in OGC-05-008 
@@ -44,18 +42,18 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * 
  * 
  */
+@XmlRootElement(name = "Capabilities")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CapabilitiesType", propOrder = {
     "filterCapabilities"
 })
-public class CapabilitiesType
-    extends CapabilitiesBaseType
-    implements Serializable, ToString
-{
+public class CapabilitiesType extends CapabilitiesBaseType
+        implements Serializable, ToString {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(name = "Filter_Capabilities", namespace = "http://www.opengis.net/ogc", required = true)
-    protected Filter_Capabilities filterCapabilities;
+    @XmlElement(name = "Filter_Capabilities",
+                namespace = "http://www.opengis.net/ogc", required = true)
+    protected FilterCapabilities filterCapabilities;
 
     /**
      * Gets the value of the filter_Capabilities property.
@@ -65,7 +63,7 @@ public class CapabilitiesType
      *     {@link Filter_Capabilities }
      *     
      */
-    public Filter_Capabilities getFilterCapabilities() {
+    public FilterCapabilities getFilterCapabilities() {
         return filterCapabilities;
     }
 
@@ -77,7 +75,7 @@ public class CapabilitiesType
      *     {@link Filter_Capabilities }
      *     
      */
-    public void setFilterCapabilities(Filter_Capabilities value) {
+    public void setFilterCapabilities(FilterCapabilities value) {
         this.filterCapabilities = value;
     }
 
@@ -101,11 +99,11 @@ public class CapabilitiesType
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
-            Filter_Capabilities theFilter_Capabilities;
+            FilterCapabilities theFilter_Capabilities;
             theFilter_Capabilities = this.getFilterCapabilities();
-            strategy.appendField(locator, this, "filterCapabilities", buffer, theFilter_Capabilities);
+            strategy.appendField(locator, this, "filterCapabilities", buffer,
+                    theFilter_Capabilities);
         }
         return buffer;
     }
-
 }

@@ -4,6 +4,15 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.12 at 10:02:34 AM CEST 
 //
-
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/cat/csw/2.0.2", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(
+namespace = "http://www.opengis.net/cat/csw/2.0.2",
+                                     xmlns = {
+    @javax.xml.bind.annotation.XmlNs(prefix = "csw",
+                                     namespaceURI = "http://www.opengis.net/cat/csw/2.0.2"),
+    @javax.xml.bind.annotation.XmlNs(prefix = "xlink",
+                                     namespaceURI = "http://www.w3.org/1999/xlink"),
+    @javax.xml.bind.annotation.XmlNs(prefix = "dct",
+                                     namespaceURI = "http://purl.org/dc/terms/")
+},
+                                     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package org.geosdi.geoplatform.xml.csw.v202;

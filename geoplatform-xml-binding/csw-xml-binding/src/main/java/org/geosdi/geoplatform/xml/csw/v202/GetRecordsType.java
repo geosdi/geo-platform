@@ -107,23 +107,20 @@ public class GetRecordsType extends RequestBaseType implements Serializable,
     public GetRecordsType() {
     }
 
-    public GetRecordsType(DistributedSearchType distributedSearch, List<String> responseHandler,
-            AbstractQueryType abstractQuery, Object any,
-            String requestId, ResultType resultType, String outputFormat,
-            String outputSchema, BigInteger startPosition, BigInteger maxRecords,
-            String service, String version) {
+    public GetRecordsType(String theService, String theVersion,
+            DistributedSearchType theDistributedSearch, AbstractQueryType theAbstractQuery,
+            String theRequestId, ResultType theResultType, String theOutputFormat, String theOutputSchema,
+            BigInteger theStartPosition, BigInteger theMaxRecords) {
 
-        super(service, version);
-        this.distributedSearch = distributedSearch;
-        this.responseHandler = responseHandler;
-        this.abstractQuery = abstractQuery;
-        this.any = any;
-        this.requestId = requestId;
-        this.resultType = resultType;
-        this.outputFormat = outputFormat;
-        this.outputSchema = outputSchema;
-        this.startPosition = startPosition;
-        this.maxRecords = maxRecords;
+        super(theService, theVersion);
+        this.distributedSearch = theDistributedSearch;
+        this.abstractQuery = theAbstractQuery;
+        this.requestId = theRequestId;
+        this.resultType = theResultType;
+        this.outputFormat = theOutputFormat;
+        this.outputSchema = theOutputSchema;
+        this.startPosition = theStartPosition;
+        this.maxRecords = theMaxRecords;
     }
 
     /**

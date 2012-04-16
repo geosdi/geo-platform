@@ -35,31 +35,34 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import junit.framework.TestCase;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
+import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,7 +71,7 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogContextTest extends TestCase {
+public class CatalogCapabilitiesV202PostTest extends TestCase {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -76,78 +79,57 @@ public class CatalogContextTest extends TestCase {
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
     //
     private GPConnectorJAXBContext cswContext = CSWConnectorJAXBContext.getInstance();
-    private HttpEntity entity;
 
-    @Override
-    protected void setUp() throws Exception {
+    public void testGetCapabilitiesPostRequest() throws JAXBException {
         try {
+            HttpParams params = new BasicHttpParams();
+
+            params.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
+                    GeoPlatformHTTP.CONTENT_TYPE_XML);
+
             HttpClient client = new DefaultHttpClient();
 
-            List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-            qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
-            qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
-
             URI uri = URIUtils.createURI("http", CSW_HOST, -1, CSW_PATH,
-                    URLEncodedUtils.format(qparams, "UTF-8"), null);
+                    null, null);
 
-            HttpGet get = new HttpGet(uri);
+            HttpPost post = new HttpPost(uri);
+            post.setParams(params);
 
-            HttpResponse response = client.execute(get);
+            GetCapabilitiesType getCapType = new GetCapabilitiesType(
+                    CSWServiceEnum.CSW);
 
-            this.entity = response.getEntity();
+            Marshaller m = cswContext.createMarshaller();
+            Unmarshaller un = cswContext.createUnmarshaller();
 
+            StringWriter w = new StringWriter();
 
-        } catch (URISyntaxException ex) {
-            logger.error(
-                    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ex.getMessage());
-        } catch (ClientProtocolException ex) {
-            logger.error(
-                    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ex.getMessage());
-        } catch (IOException ex) {
-            logger.error(
-                    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ex.getMessage());
-        }
-    }
+            m.marshal(getCapType, w);
 
-    public void testJAXBContext() throws JAXBException {
-        assertNotNull(cswContext);
+            StringEntity entity = new StringEntity(w.toString(),
+                    GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
 
-        Unmarshaller m = cswContext.createUnmarshaller();
+            post.setEntity(entity);
 
-        try {
+            HttpResponse response = client.execute(post);
 
-            if (entity != null) {
-                InputStream content = entity.getContent();
+            HttpEntity responseEntity = response.getEntity();
 
-                CapabilitiesType cap = ((JAXBElement<CapabilitiesType>) m.unmarshal(
+            if (responseEntity != null) {
+                InputStream content = responseEntity.getContent();
+
+                CapabilitiesType cap = ((JAXBElement<CapabilitiesType>) un.unmarshal(
                                         content)).getValue();
 
                 logger.info(
-                        "CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap.getVersion());
+                        "CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap);
 
-                logger.info(
-                        "CSW SERVICE IDENTIFICATION @@@@@@@@@@ " + cap.getServiceIdentification());
-
-
-                String cswFile = "target/csw.xml";
-
-                Marshaller ma = cswContext.createMarshaller();
-
-                FileOutputStream fos = null;
-
-                try {
-                    fos = new FileOutputStream(cswFile);
-                    ma.marshal(cap, fos);
-                } finally {
-                    if (fos != null) {
-                        fos.close();
-                    }
-                }
-
+                EntityUtils.consume(responseEntity);
             }
-        } catch (IOException ex) {
-            logger.error(
-                    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ex.getMessage());
+
+        } catch (URISyntaxException ex) {
+            logger.error("URISyntaxException @@@@@@@@@@@@@@@@@@@@@ " + ex);
+        } catch (IOException io) {
+            logger.error("IOException @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + io);
         }
     }
 }

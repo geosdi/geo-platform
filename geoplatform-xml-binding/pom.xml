@@ -20,6 +20,7 @@
         <module>geoplatform-filter-binding</module>
         <module>geoplatform-ows-binding</module>
         <module>geoplatform-csw-binding</module>
+        <module>geoplatform-ebrim-binding</module>
     </modules>
 
     <developers>
@@ -84,14 +85,22 @@
                 <artifactId>geoplatform-gml-binding</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-filter-binding</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-ows-binding</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-csw-binding</artifactId>
                 <version>${project.version}</version>
             </dependency>
             

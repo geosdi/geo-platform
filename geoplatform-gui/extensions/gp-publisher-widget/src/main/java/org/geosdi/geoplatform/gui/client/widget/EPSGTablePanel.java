@@ -164,6 +164,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
             @Override
             public void storeUpdate(StoreEvent<EPSGLayerData> se) {
+                se.getModel().setEpsgCode(se.getModel().getEpsgCode().toUpperCase());
                 super.storeUpdate(se);
                 manageProcessEPSGButton();
             }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings jaxb:version="2.0"
+               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               jaxb:schemaLocation="
+               http://java.sun.com/xml/ns/jaxb
+               http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
+               http://www.w3.org/2001/XMLSchema
+               http://www.w3.org/2001/XMLSchema.xsd"
+               jaxb:extensionBindingPrefixes="xjc">
+
+<!--     Specify to treat underscore as a character rather than
+            the default treatment as a word separator 
+    <jaxb:globalBindings underscoreBinding="asCharInWord">
+         Force all classes implements Serializable 
+        <xjc:serializable uid="1" />
+    </jaxb:globalBindings>-->
+    
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.2.1/geometryPrimitives.xsd"
+                   node="/xsd:schema">
+         rename the value element 
+        <jaxb:bindings node=".//xsd:element[@name='rows']">
+            <jaxb:property name="rowsElement"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+    
+    <!--<jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gmd/gmd.xsd"
+                   node="/xsd:schema">        
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gmd" />
+        </jaxb:schemaBindings>
+    </jaxb:bindings>-->
+    
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gmd/gmd.xsd" 
+                   node="/xsd:schema">
+        <jaxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            typesafeEnumBase="xsd:string"
+            typesafeEnumMemberName="generateName" 
+            generateIsSetMethod="true">
+            <xjc:noValidator />
+            <xjc:noValidatingUnmarshaller />
+        </jaxb:globalBindings>
+
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gmd"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+    
+        
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gmx/gmx.xsd" 
+                   node="/xsd:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gmx"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+    
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gco/gco.xsd" 
+                   node="/xsd:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gco"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gsr/gsr.xsd" 
+                   node="/xsd:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gsr"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gss/gss.xsd" 
+                   node="/xsd:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gss"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gts/gts.xsd" 
+                   node="/xsd:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gts"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+    
+</jaxb:bindings>

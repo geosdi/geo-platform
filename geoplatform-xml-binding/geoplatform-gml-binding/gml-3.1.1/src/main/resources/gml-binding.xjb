@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings jaxb:version="2.0"
+               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               jaxb:schemaLocation="
+               http://java.sun.com/xml/ns/jaxb
+               http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
+               http://www.w3.org/2001/XMLSchema
+               http://www.w3.org/2001/XMLSchema.xsd">
+
+    <!-- Specify to treat underscore as a character rather than
+            the default treatment as a word separator -->
+    <jaxb:globalBindings underscoreBinding="asCharInWord">
+        <!-- Force all classes implements Serializable -->
+        <xjc:serializable uid="1" />
+    </jaxb:globalBindings>
+    
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
+                   node="/xsd:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.gml.v311" />
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd"
+                   node=".//xsd:element[@name='TopologyStyle']">
+        <jaxb:class name="TopologyStyle_CT" />
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd"
+                   node=".//xsd:element[@name='GeometryStyle']">
+        <jaxb:class name="GeometryStyle_CT" />
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd"
+                   node=".//xsd:element[@name='GraphStyle']">
+        <jaxb:class name="GraphStyle_CT" />
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd"
+                   node=".//xsd:element[@name='FeatureStyle']">
+        <jaxb:class name="FeatureStyle_CT" />
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd"
+                   node=".//xsd:element[@name='LabelStyle']">
+        <jaxb:class name="LabelStyle_CT" />
+    </jaxb:bindings>
+
+</jaxb:bindings>

@@ -1,87 +1,134 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings jaxb:version="2.0"
-               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-               jaxb:schemaLocation="
-               http://java.sun.com/xml/ns/jaxb
-               http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
-               http://www.w3.org/2001/XMLSchema
-               http://www.w3.org/2001/XMLSchema.xsd"
-               jaxb:extensionBindingPrefixes="xjc">
+<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+	jaxb:extensionBindingPrefixes="xjc">
 
-<!--     Specify to treat underscore as a character rather than
-            the default treatment as a word separator 
-    <jaxb:globalBindings underscoreBinding="asCharInWord">
-         Force all classes implements Serializable 
-        <xjc:serializable uid="1" />
-    </jaxb:globalBindings>-->
-    
-    <jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.2.1/geometryPrimitives.xsd"
-                   node="/xsd:schema">
-         rename the value element 
-        <jaxb:bindings node=".//xsd:element[@name='rows']">
-            <jaxb:property name="rowsElement"/>
-        </jaxb:bindings>
-    </jaxb:bindings>
-    
-    <!--<jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gmd/gmd.xsd"
-                   node="/xsd:schema">        
-        <jaxb:schemaBindings>
-            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gmd" />
-        </jaxb:schemaBindings>
-    </jaxb:bindings>-->
-    
-    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gmd/gmd.xsd" 
-                   node="/xsd:schema">
-        <jaxb:globalBindings
-            fixedAttributeAsConstantProperty="true"
-            typesafeEnumBase="xsd:string"
-            typesafeEnumMemberName="generateName" 
-            generateIsSetMethod="true">
-            <xjc:noValidator />
-            <xjc:noValidatingUnmarshaller />
-        </jaxb:globalBindings>
+	<jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gmx/gmx.xsd" 
+		node="/xs:schema">
 
-        <jaxb:schemaBindings>
-            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gmd"/>
-        </jaxb:schemaBindings>
-    </jaxb:bindings>
-    
-        
-    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gmx/gmx.xsd" 
-                   node="/xsd:schema">
-        <jaxb:schemaBindings>
-            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gmx"/>
-        </jaxb:schemaBindings>
-    </jaxb:bindings>
-    
-    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gco/gco.xsd" 
-                   node="/xsd:schema">
-        <jaxb:schemaBindings>
-            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gco"/>
-        </jaxb:schemaBindings>
-    </jaxb:bindings>
+                <jaxb:globalBindings
+			fixedAttributeAsConstantProperty="true"
+			typesafeEnumBase="xs:string"
+			typesafeEnumMemberName="generateName" 
+			generateIsSetMethod="true">
+			<xjc:noValidator />
+			<xjc:noValidatingUnmarshaller />
+		</jaxb:globalBindings>
 
-    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gsr/gsr.xsd" 
-                   node="/xsd:schema">
-        <jaxb:schemaBindings>
-            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gsr"/>
-        </jaxb:schemaBindings>
-    </jaxb:bindings>
+	</jaxb:bindings>
 
-    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gss/gss.xsd" 
-                   node="/xsd:schema">
-        <jaxb:schemaBindings>
-            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gss"/>
-        </jaxb:schemaBindings>
-    </jaxb:bindings>
+	<jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" 
+		node="/xs:schema">
 
-    <jaxb:bindings schemaLocation="http://schemas.opengis.net/iso/19139/20070417/gts/gts.xsd" 
-                   node="/xsd:schema">
-        <jaxb:schemaBindings>
-            <jaxb:package name="org.isotc211.iso19139.d_2007_04_17.gts"/>
-        </jaxb:schemaBindings>
-    </jaxb:bindings>
-    
+		<jaxb:schemaBindings>
+			<jaxb:package name="org.geosdi.geoplatform.xml.gml.v321"/>
+			<jaxb:nameXmlTransform>
+				<jaxb:elementName suffix="Element"/>
+			</jaxb:nameXmlTransform>
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
+
+	<jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.2.1/geometryPrimitives.xsd" node="/xs:schema">
+
+		<jaxb:bindings>
+			<jaxb:nameXmlTransform>
+				<jaxb:elementName suffix="Element"/>
+			</jaxb:nameXmlTransform>
+			<jaxb:bindings node="//xs:group[@name='PointGrid']/xs:sequence/xs:element[@name='rows']">
+				<jaxb:property name="Arows"/>
+			</jaxb:bindings>
+		</jaxb:bindings>
+	</jaxb:bindings>
+	
+	<jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.2.1/datums.xsd" node="/xs:schema">
+		<jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='SecondDefiningParameter']">
+				<jaxb:class name="SecondDefiningParameterUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='ImageDatum']">
+				<jaxb:class name="ImageDatumUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='GeodeticDatum']">
+				<jaxb:class name="GeodeticDatumUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='TemporalDatum']">
+				<jaxb:class name="TemporalDatumUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='Ellipsoid']">
+				<jaxb:class name="EllipsoidUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='EngineeringDatum']">
+				<jaxb:class name="EngineeringDatumUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='PrimeMeridian']">
+				<jaxb:class name="PrimeMeridianUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='VerticalDatum']">
+				<jaxb:class name="VerticalDatumUpperCase"/>
+			</jaxb:bindings>
+		</jaxb:bindings>
+	</jaxb:bindings>
+
+	<jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.2.1/coordinateSystems.xsd" node="/xs:schema">
+		<jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='UserDefinedCS']">
+				<jaxb:class name="UserDefinedCSUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='CartesianCS']">
+				<jaxb:class name="CartesianCSUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='SphericalCS']">
+				<jaxb:class name="SphericalCSUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='PolarCS']">
+				<jaxb:class name="PolarCSUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='LinearCS']">
+				<jaxb:class name="LinearCSUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='VerticalCS']">
+				<jaxb:class name="VerticalCSUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='CylindricalCS']">
+				<jaxb:class name="CylindricalCSUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='EllipsoidalCS']">
+				<jaxb:class name="EllipsoidalCSUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='AffineCS']">
+				<jaxb:class name="AffineCSUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='TimeCS']">
+				<jaxb:class name="TimeCSUpperCase"/>
+			</jaxb:bindings>
+		</jaxb:bindings>
+	</jaxb:bindings>
+	
+	<jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.2.1/coordinateOperations.xsd" node="/xs:schema">
+		<jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='coordinateOperationAccuracy']//xs:element[@ref='gmd:AbstractDQ_PositionalAccuracy']">
+				<xjc:dom/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='formulaCitation']//xs:element[@ref='gmd:CI_Citation']">
+				<xjc:dom/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='Conversion']">
+				<jaxb:class name="ConversionUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='ParameterValue']">
+				<jaxb:class name="ParameterValueUpperCase"/>
+			</jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='OperationParameter']">
+				<jaxb:class name="OperationParameterUpperCase"/>
+			</jaxb:bindings>
+		</jaxb:bindings>
+	</jaxb:bindings>
+
+	<jaxb:bindings schemaLocation="http://schemas.opengis.net/gml/3.2.1/referenceSystems.xsd" node="/xs:schema">
+		<jaxb:bindings>
+			<jaxb:bindings node="//xs:element[@name='domainOfValidity']//xs:element[@ref='gmd:EX_Extent']">
+				<xjc:dom/>
+			</jaxb:bindings>
+		</jaxb:bindings>
+	</jaxb:bindings>
 </jaxb:bindings>

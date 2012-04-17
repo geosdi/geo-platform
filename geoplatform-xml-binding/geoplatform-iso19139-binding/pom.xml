@@ -79,6 +79,11 @@
             <artifactId>jaxb-impl</artifactId>        
         </dependency>
         
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+        </dependency>
+        
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -132,12 +137,7 @@
                 <configuration>
                     <schemas>
                         <schema>
-                            <url>http://schemas.opengis.net/iso/19139/20070417/gco/gco.xsd</url>
-                            <url>http://schemas.opengis.net/iso/19139/20070417/gmd/gmd.xsd</url>
                             <url>http://schemas.opengis.net/iso/19139/20070417/gmx/gmx.xsd</url>
-                            <url>http://schemas.opengis.net/iso/19139/20070417/gsr/gsr.xsd</url>
-                            <url>http://schemas.opengis.net/iso/19139/20070417/gss/gss.xsd</url>
-                            <url>http://schemas.opengis.net/iso/19139/20070417/gts/gts.xsd</url>
                         </schema>
                     </schemas>
                 </configuration>

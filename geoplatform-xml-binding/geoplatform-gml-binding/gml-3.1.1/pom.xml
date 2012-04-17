@@ -70,11 +70,6 @@
     <dependencies>
         
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-        
-        <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>        
         </dependency>
@@ -135,11 +130,10 @@
                 <artifactId>maven-jaxb2-plugin</artifactId>
 
                 <configuration>
-                    <schemas>
-                        <schema>
-                            <url>http://schemas.opengis.net/gml/3.1.1/base/gml.xsd</url>
-                        </schema>
-                    </schemas>
+                    <schemaIncludes>
+                        <value>gml/*/base/gml.xsd</value>
+                    </schemaIncludes>
+                    <episode>false</episode>
                 </configuration>
             </plugin>
             

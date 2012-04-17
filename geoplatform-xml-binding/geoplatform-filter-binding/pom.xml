@@ -84,6 +84,11 @@
             <artifactId>jaxb-impl</artifactId>        
         </dependency>
         
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+        </dependency>
+        
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -161,6 +166,5 @@
             </resource>
         </resources>
 
-    </build>
-    
+    </build> 
 </project>

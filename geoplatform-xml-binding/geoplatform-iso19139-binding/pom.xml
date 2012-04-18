@@ -79,21 +79,9 @@
             <artifactId>jaxb2-basics-runtime</artifactId>
         </dependency>
         
-        <!-- SCOPE TEST -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-collections</groupId>
-                    <artifactId>commons-collections</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gml-3.2.1</artifactId>
         </dependency>
         
         <dependency>
@@ -130,11 +118,21 @@
                 <artifactId>maven-jaxb2-plugin</artifactId>
 
                 <configuration>
-                    <schemas>
-                        <schema>
-                            <url>http://schemas.opengis.net/iso/19139/20070417/gmx/gmx.xsd</url>
-                        </schema>
-                    </schemas>
+                    <schemaIncludes>
+                        <value>iso/19139/*/gco/gco.xsd</value>
+                        <value>iso/19139/*/gmd/gmd.xsd</value>
+                        <value>iso/19139/*/gmx/gmx.xsd</value>
+                        <value>iso/19139/*/gsr/gsr.xsd</value>
+                        <value>iso/19139/*/gss/gss.xsd</value>
+                        <value>iso/19139/*/gts/gts.xsd</value>
+                        <value>gml/3.2.1/gml.xsd</value>
+                    </schemaIncludes>
+                    <episodes>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>gml-3.2.1</artifactId>
+                        </episode>
+                    </episodes>
                 </configuration>
             </plugin>
             

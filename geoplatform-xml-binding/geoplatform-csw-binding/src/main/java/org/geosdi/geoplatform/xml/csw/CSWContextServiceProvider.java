@@ -79,9 +79,9 @@ public class CSWContextServiceProvider {
         builder.append(":");
         builder.append("org.geosdi.geoplatform.xml.csw.v202");
         builder.append(":");
-        builder.append("org.geosdi.geoplatform.xml.purl.dc.elements._1");
+        builder.append("org.geosdi.geoplatform.xml.csw.v202.dc.elements");
         builder.append(":");
-        builder.append("org.geosdi.geoplatform.xml.purl.dc.terms");
+        builder.append("org.geosdi.geoplatform.xml.csw.v202.dc.terms");
 
         return builder.toString();
     }
@@ -93,9 +93,9 @@ public class CSWContextServiceProvider {
         allClasses.add(org.geosdi.geoplatform.xml.gml.v311.ObjectFactory.class);
         allClasses.add(org.geosdi.geoplatform.xml.csw.v202.ObjectFactory.class);
         allClasses.add(
-                org.geosdi.geoplatform.xml.purl.dc.elements._1.ObjectFactory.class);
+                org.geosdi.geoplatform.xml.csw.v202.dc.elements.ObjectFactory.class);
         allClasses.add(
-                org.geosdi.geoplatform.xml.purl.dc.terms.ObjectFactory.class);
+                org.geosdi.geoplatform.xml.csw.v202.dc.terms.ObjectFactory.class);
 
         return allClasses.toArray(new Class[allClasses.size()]);
     }

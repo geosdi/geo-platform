@@ -121,7 +121,8 @@ public class CatalogCapabilitiesV202PostTest extends TestCase {
                                         content)).getValue();
 
                 logger.info(
-                        "CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap);
+                        "CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ "
+                        + cap.getVersion());
 
                 EntityUtils.consume(responseEntity);
             }
@@ -132,4 +133,41 @@ public class CatalogCapabilitiesV202PostTest extends TestCase {
             logger.error("IOException @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + io);
         }
     }
+    
+//    public void testWithURL() throws JAXBException {
+//        try {
+//            URL url = new URL("http://" + CSW_HOST + CSW_PATH);
+//
+//            URLConnection con = url.openConnection();
+//
+//            con.setDoOutput(true);
+//            con.setRequestProperty(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
+//                    GeoPlatformHTTP.CONTENT_TYPE_XML);
+//
+//            OutputStream stream = con.getOutputStream();
+//
+//            GetCapabilitiesType getCapType = new GetCapabilitiesType(
+//                    CSWServiceEnum.CSW);
+//
+//            Marshaller m = cswContext.createMarshaller();
+//            Unmarshaller un = cswContext.createUnmarshaller();
+//
+//            m.marshal(getCapType, stream);
+//
+//            stream.close();
+//
+//            InputStream content = con.getInputStream();
+//
+//            CapabilitiesType cap = ((JAXBElement<CapabilitiesType>) un.unmarshal(
+//                                    content)).getValue();
+//
+//            logger.info(
+//                    "testWithURL GET_CAP VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap);
+//
+//        } catch (MalformedURLException ex) {
+//            logger.error("MalformedURLException @@@@@@@@@@@@@ " + ex);
+//        } catch (IOException io) {
+//            logger.error("IOException @@@@@@@@@@@@@@@@@ " + io);
+//        }
+//    }
 }

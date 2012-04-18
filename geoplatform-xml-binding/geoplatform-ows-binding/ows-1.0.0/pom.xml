@@ -1,0 +1,153 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-ows-binding</artifactId>
+        <version>1.4-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.geosdi</groupId>
+    <artifactId>ows-1.0.0</artifactId>
+    <version>1.4-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Geo-Platform :: == OWS 1.0.0 XML Binding Module</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <developers>
+        <developer>
+            <name>Francesco Izzi</name>
+            <id>francesco.izzi</id>
+            <email>francesco.izzi@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Giuseppe La Scaleia</name>
+            <id>glascaleia</id>
+            <email>giuseppe.lascaleia@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Nazzareno Sileno</name>
+            <id>nazzareno.sileno</id>
+            <email>nazzareno.sileno@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Vincenzo Monteverde</name>
+            <id>vincenzo.monteverde</id>
+            <email>vincenzo.monteverde@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+            <properties>
+                <openPGP>0xB25F4B38</openPGP>
+            </properties>
+        </developer>
+    </developers>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-gml-binding</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-filter-binding</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+			<!-- tell the compiler we can use 1.6 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+
+            <!-- mvn jaxb2:generate -X -->
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+
+                <configuration>
+                    <schemas>
+                        <schema>
+                            <url>http://schemas.opengis.net/ows/1.0.0/owsAll.xsd</url>
+                        </schema>
+                    </schemas>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+		<!-- TODO: the resources stuff hardcodes paths to source + test directories,
+			we should be able to use some properties here -->
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.utf</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.serialized</include>
+                    <include>**/*.xsd</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+
+    </build>
+	
+</project>

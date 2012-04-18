@@ -83,14 +83,10 @@
             
             <dependency>
                 <groupId>org.geosdi</groupId>
-                <artifactId>geoplatform-gml-binding</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.geosdi</groupId>
                 <artifactId>gml-3.1.1</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>gml-3.2.1</artifactId>
@@ -99,13 +95,13 @@
             
             <dependency>
                 <groupId>org.geosdi</groupId>
-                <artifactId>geoplatform-filter-binding</artifactId>
+                <artifactId>filter-1.1.0</artifactId>
                 <version>${project.version}</version>
             </dependency>
             
             <dependency>
                 <groupId>org.geosdi</groupId>
-                <artifactId>geoplatform-ows-binding</artifactId>
+                <artifactId>ows-1.0.0</artifactId>
                 <version>${project.version}</version>
             </dependency>
             

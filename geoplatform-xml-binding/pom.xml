@@ -129,26 +129,26 @@
             <plugins>
                 <!-- mvn jaxb2:generate -X -->
                 <plugin>
-                    <inherited>true</inherited>
                     <groupId>org.jvnet.jaxb2.maven2</groupId>
                     <artifactId>maven-jaxb2-plugin</artifactId>
                     <version>0.8.1</version>
                     
                     <configuration>
                         <strict>false</strict>
-                        <extension>true</extension>
-                        
+                        <extension>true</extension>                    
                         <args>
                             <arg>-XtoString</arg>
+
 <!--                            <arg>-Xequals</arg>-->
 <!--                            <arg>-XhashCode</arg>-->
 <!--                            <arg>-Xcopyable</arg>-->
 <!--                            <arg>-Xmergeable</arg>-->
+
                             <arg>-Xsetters</arg>
-<!--                            <arg>-Xsetters-mode=direct</arg>-->
-<!--                            <arg>-Xwildcard</arg>-->
-<!--                            <arg>-Xinject-code</arg>-->
-<!--                            <arg>-Xinheritance</arg>-->
+
+                            <arg>-Xwildcard</arg>
+                            <arg>-Xinject-code</arg>
+                            <arg>-Xinheritance</arg>
                         </args>
                         <plugins>
                             <plugin>

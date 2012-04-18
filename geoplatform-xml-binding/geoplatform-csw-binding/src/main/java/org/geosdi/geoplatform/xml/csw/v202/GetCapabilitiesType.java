@@ -4,19 +4,18 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.18 at 12:36:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * 
@@ -40,15 +39,23 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * 
  * 
  */
+@XmlRootElement(name = "GetCapabilities")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetCapabilitiesType")
 public class GetCapabilitiesType
-    extends org.geosdi.geoplatform.xml.ows.v100.GetCapabilitiesType
-    implements ToString
-{
+        extends org.geosdi.geoplatform.xml.ows.v100.GetCapabilitiesType
+        implements ToString {
 
     @XmlAttribute(name = "service")
     protected String service;
+
+    /** FOR JAXB **/
+    GetCapabilitiesType() {
+    }
+
+    public GetCapabilitiesType(CSWServiceEnum theService) {
+        this.service = theService.toString();
+    }
 
     /**
      * Gets the value of the service property.
@@ -60,7 +67,7 @@ public class GetCapabilitiesType
      */
     public String getService() {
         if (service == null) {
-            return "http://www.opengis.net/cat/csw";
+            return "CSW";
         } else {
             return service;
         }
@@ -79,9 +86,10 @@ public class GetCapabilitiesType
     }
 
     public boolean isSetService() {
-        return (this.service!= null);
+        return (this.service != null);
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -89,6 +97,7 @@ public class GetCapabilitiesType
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -96,6 +105,7 @@ public class GetCapabilitiesType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
@@ -105,5 +115,4 @@ public class GetCapabilitiesType
         }
         return buffer;
     }
-
 }

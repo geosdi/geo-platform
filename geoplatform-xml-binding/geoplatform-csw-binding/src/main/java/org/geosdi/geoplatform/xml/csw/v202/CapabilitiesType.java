@@ -4,13 +4,12 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.18 at 12:36:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterCapabilities;
 import org.geosdi.geoplatform.xml.ows.v100.CapabilitiesBaseType;
@@ -18,7 +17,6 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * This type extends ows:CapabilitiesBaseType defined in OGC-05-008 
@@ -43,16 +41,16 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * 
  * 
  */
+@XmlRootElement(name = "Capabilities")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CapabilitiesType", propOrder = {
     "filterCapabilities"
 })
-public class CapabilitiesType
-    extends CapabilitiesBaseType
-    implements ToString
-{
+public class CapabilitiesType extends CapabilitiesBaseType
+        implements ToString {
 
-    @XmlElement(name = "Filter_Capabilities", namespace = "http://www.opengis.net/ogc", required = true)
+    @XmlElement(name = "Filter_Capabilities",
+                namespace = "http://www.opengis.net/ogc", required = true)
     protected FilterCapabilities filterCapabilities;
 
     /**
@@ -80,7 +78,7 @@ public class CapabilitiesType
     }
 
     public boolean isSetFilterCapabilities() {
-        return (this.filterCapabilities!= null);
+        return (this.filterCapabilities != null);
     }
 
     public String toString() {
@@ -102,9 +100,9 @@ public class CapabilitiesType
         {
             FilterCapabilities theFilterCapabilities;
             theFilterCapabilities = this.getFilterCapabilities();
-            strategy.appendField(locator, this, "filterCapabilities", buffer, theFilterCapabilities);
+            strategy.appendField(locator, this, "filterCapabilities", buffer,
+                    theFilterCapabilities);
         }
         return buffer;
     }
-
 }

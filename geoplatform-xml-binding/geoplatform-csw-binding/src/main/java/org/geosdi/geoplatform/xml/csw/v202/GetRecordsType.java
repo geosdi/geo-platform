@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.18 at 12:36:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.math.BigInteger;
@@ -18,13 +16,13 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * 
@@ -68,18 +66,23 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "abstractQuery",
     "any"
 })
-public class GetRecordsType
-    extends RequestBaseType
-    implements ToString
-{
+public class GetRecordsType extends RequestBaseType
+        implements ToString {
 
     @XmlElement(name = "DistributedSearch")
     protected DistributedSearchType distributedSearch;
     @XmlElement(name = "ResponseHandler")
     @XmlSchemaType(name = "anyURI")
     protected List<String> responseHandler;
-    @XmlElementRef(name = "AbstractQuery", namespace = "http://www.opengis.net/cat/csw/2.0.2", type = JAXBElement.class)
-    protected JAXBElement<? extends AbstractQueryType> abstractQuery;
+    @XmlElementRefs({
+        @XmlElementRef(name = "AbstractQuery",
+                       namespace = "http://www.opengis.net/cat/csw/2.0.2",
+                       type = AbstractQueryType.class),
+        @XmlElementRef(name = "QueryType",
+                       namespace = "http://www.opengis.net/cat/csw/2.0.2",
+                       type = QueryType.class)
+    })
+    protected AbstractQueryType abstractQuery;
     @XmlAnyElement(lax = true)
     protected Object any;
     @XmlAttribute(name = "requestId")
@@ -124,7 +127,7 @@ public class GetRecordsType
     }
 
     public boolean isSetDistributedSearch() {
-        return (this.distributedSearch!= null);
+        return (this.distributedSearch != null);
     }
 
     /**
@@ -157,7 +160,7 @@ public class GetRecordsType
     }
 
     public boolean isSetResponseHandler() {
-        return ((this.responseHandler!= null)&&(!this.responseHandler.isEmpty()));
+        return ((this.responseHandler != null) && (!this.responseHandler.isEmpty()));
     }
 
     public void unsetResponseHandler() {
@@ -173,7 +176,7 @@ public class GetRecordsType
      *     {@link JAXBElement }{@code <}{@link AbstractQueryType }{@code >}
      *     
      */
-    public JAXBElement<? extends AbstractQueryType> getAbstractQuery() {
+    public AbstractQueryType getAbstractQuery() {
         return abstractQuery;
     }
 
@@ -186,12 +189,12 @@ public class GetRecordsType
      *     {@link JAXBElement }{@code <}{@link AbstractQueryType }{@code >}
      *     
      */
-    public void setAbstractQuery(JAXBElement<? extends AbstractQueryType> value) {
+    public void setAbstractQuery(AbstractQueryType value) {
         this.abstractQuery = value;
     }
 
     public boolean isSetAbstractQuery() {
-        return (this.abstractQuery!= null);
+        return (this.abstractQuery != null);
     }
 
     /**
@@ -219,7 +222,7 @@ public class GetRecordsType
     }
 
     public boolean isSetAny() {
-        return (this.any!= null);
+        return (this.any != null);
     }
 
     /**
@@ -247,7 +250,7 @@ public class GetRecordsType
     }
 
     public boolean isSetRequestId() {
-        return (this.requestId!= null);
+        return (this.requestId != null);
     }
 
     /**
@@ -279,7 +282,7 @@ public class GetRecordsType
     }
 
     public boolean isSetResultType() {
-        return (this.resultType!= null);
+        return (this.resultType != null);
     }
 
     /**
@@ -311,7 +314,7 @@ public class GetRecordsType
     }
 
     public boolean isSetOutputFormat() {
-        return (this.outputFormat!= null);
+        return (this.outputFormat != null);
     }
 
     /**
@@ -339,7 +342,7 @@ public class GetRecordsType
     }
 
     public boolean isSetOutputSchema() {
-        return (this.outputSchema!= null);
+        return (this.outputSchema != null);
     }
 
     /**
@@ -371,7 +374,7 @@ public class GetRecordsType
     }
 
     public boolean isSetStartPosition() {
-        return (this.startPosition!= null);
+        return (this.startPosition != null);
     }
 
     /**
@@ -403,7 +406,7 @@ public class GetRecordsType
     }
 
     public boolean isSetMaxRecords() {
-        return (this.maxRecords!= null);
+        return (this.maxRecords != null);
     }
 
     public String toString() {
@@ -425,17 +428,20 @@ public class GetRecordsType
         {
             DistributedSearchType theDistributedSearch;
             theDistributedSearch = this.getDistributedSearch();
-            strategy.appendField(locator, this, "distributedSearch", buffer, theDistributedSearch);
+            strategy.appendField(locator, this, "distributedSearch", buffer,
+                    theDistributedSearch);
         }
         {
             List<String> theResponseHandler;
-            theResponseHandler = (this.isSetResponseHandler()?this.getResponseHandler():null);
-            strategy.appendField(locator, this, "responseHandler", buffer, theResponseHandler);
+            theResponseHandler = (this.isSetResponseHandler() ? this.getResponseHandler() : null);
+            strategy.appendField(locator, this, "responseHandler", buffer,
+                    theResponseHandler);
         }
         {
-            JAXBElement<? extends AbstractQueryType> theAbstractQuery;
+            AbstractQueryType theAbstractQuery;
             theAbstractQuery = this.getAbstractQuery();
-            strategy.appendField(locator, this, "abstractQuery", buffer, theAbstractQuery);
+            strategy.appendField(locator, this, "abstractQuery", buffer,
+                    theAbstractQuery);
         }
         {
             Object theAny;
@@ -445,32 +451,38 @@ public class GetRecordsType
         {
             String theRequestId;
             theRequestId = this.getRequestId();
-            strategy.appendField(locator, this, "requestId", buffer, theRequestId);
+            strategy.appendField(locator, this, "requestId", buffer,
+                    theRequestId);
         }
         {
             ResultType theResultType;
             theResultType = this.getResultType();
-            strategy.appendField(locator, this, "resultType", buffer, theResultType);
+            strategy.appendField(locator, this, "resultType", buffer,
+                    theResultType);
         }
         {
             String theOutputFormat;
             theOutputFormat = this.getOutputFormat();
-            strategy.appendField(locator, this, "outputFormat", buffer, theOutputFormat);
+            strategy.appendField(locator, this, "outputFormat", buffer,
+                    theOutputFormat);
         }
         {
             String theOutputSchema;
             theOutputSchema = this.getOutputSchema();
-            strategy.appendField(locator, this, "outputSchema", buffer, theOutputSchema);
+            strategy.appendField(locator, this, "outputSchema", buffer,
+                    theOutputSchema);
         }
         {
             BigInteger theStartPosition;
             theStartPosition = this.getStartPosition();
-            strategy.appendField(locator, this, "startPosition", buffer, theStartPosition);
+            strategy.appendField(locator, this, "startPosition", buffer,
+                    theStartPosition);
         }
         {
             BigInteger theMaxRecords;
             theMaxRecords = this.getMaxRecords();
-            strategy.appendField(locator, this, "maxRecords", buffer, theMaxRecords);
+            strategy.appendField(locator, this, "maxRecords", buffer,
+                    theMaxRecords);
         }
         return buffer;
     }
@@ -480,5 +492,4 @@ public class GetRecordsType
         List<String> draftl = this.getResponseHandler();
         draftl.addAll(value);
     }
-
 }

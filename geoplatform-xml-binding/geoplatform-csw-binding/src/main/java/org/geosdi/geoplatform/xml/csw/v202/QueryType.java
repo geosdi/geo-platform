@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.18 at 12:36:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
@@ -14,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.xml.filter.v110.SortByType;
@@ -21,7 +20,6 @@ import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
 
 /**
  * Specifies a query to execute against instances of one or
@@ -58,6 +56,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * 
  * 
  */
+@XmlRootElement(name = "QueryType")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QueryType", propOrder = {
     "elementSetName",
@@ -65,10 +64,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "constraint",
     "sortBy"
 })
-public class QueryType
-    extends AbstractQueryType
-    implements ToString
-{
+public class QueryType extends AbstractQueryType
+        implements ToString {
 
     @XmlElement(name = "ElementSetName", defaultValue = "summary")
     protected ElementSetNameType elementSetName;
@@ -106,7 +103,7 @@ public class QueryType
     }
 
     public boolean isSetElementSetName() {
-        return (this.elementSetName!= null);
+        return (this.elementSetName != null);
     }
 
     /**
@@ -139,7 +136,7 @@ public class QueryType
     }
 
     public boolean isSetElementName() {
-        return ((this.elementName!= null)&&(!this.elementName.isEmpty()));
+        return ((this.elementName != null) && (!this.elementName.isEmpty()));
     }
 
     public void unsetElementName() {
@@ -171,7 +168,7 @@ public class QueryType
     }
 
     public boolean isSetConstraint() {
-        return (this.constraint!= null);
+        return (this.constraint != null);
     }
 
     /**
@@ -199,7 +196,7 @@ public class QueryType
     }
 
     public boolean isSetSortBy() {
-        return (this.sortBy!= null);
+        return (this.sortBy != null);
     }
 
     /**
@@ -232,7 +229,7 @@ public class QueryType
     }
 
     public boolean isSetTypeNames() {
-        return ((this.typeNames!= null)&&(!this.typeNames.isEmpty()));
+        return ((this.typeNames != null) && (!this.typeNames.isEmpty()));
     }
 
     public void unsetTypeNames() {
@@ -258,17 +255,20 @@ public class QueryType
         {
             ElementSetNameType theElementSetName;
             theElementSetName = this.getElementSetName();
-            strategy.appendField(locator, this, "elementSetName", buffer, theElementSetName);
+            strategy.appendField(locator, this, "elementSetName", buffer,
+                    theElementSetName);
         }
         {
             List<QName> theElementName;
-            theElementName = (this.isSetElementName()?this.getElementName():null);
-            strategy.appendField(locator, this, "elementName", buffer, theElementName);
+            theElementName = (this.isSetElementName() ? this.getElementName() : null);
+            strategy.appendField(locator, this, "elementName", buffer,
+                    theElementName);
         }
         {
             QueryConstraintType theConstraint;
             theConstraint = this.getConstraint();
-            strategy.appendField(locator, this, "constraint", buffer, theConstraint);
+            strategy.appendField(locator, this, "constraint", buffer,
+                    theConstraint);
         }
         {
             SortByType theSortBy;
@@ -277,8 +277,9 @@ public class QueryType
         }
         {
             List<QName> theTypeNames;
-            theTypeNames = (this.isSetTypeNames()?this.getTypeNames():null);
-            strategy.appendField(locator, this, "typeNames", buffer, theTypeNames);
+            theTypeNames = (this.isSetTypeNames() ? this.getTypeNames() : null);
+            strategy.appendField(locator, this, "typeNames", buffer,
+                    theTypeNames);
         }
         return buffer;
     }
@@ -294,5 +295,4 @@ public class QueryType
         List<QName> draftl = this.getTypeNames();
         draftl.addAll(value);
     }
-
 }

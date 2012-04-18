@@ -62,7 +62,7 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>csw-xml-binding</artifactId>
+            <artifactId>geoplatform-csw-binding</artifactId>
             <version>${project.version}</version>
         </dependency>
         

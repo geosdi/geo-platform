@@ -2,8 +2,13 @@
 <jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
                xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
-               jaxb:extensionBindingPrefixes="xjc">
-
+               jaxb:extensionBindingPrefixes="xjc"
+               xs:schemaLocation="
+               http://java.sun.com/xml/ns/jaxb
+               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
+               http://www.w3.org/2001/XMLSchema
+               http://www.w3.org/2001/XMLSchema.xsd">
+                   
     <jaxb:bindings 
         schemaLocation="csw/2.0.2/CSW-publication.xsd"
         node="/xs:schema">

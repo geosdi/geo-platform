@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings jaxb:version="2.0"
-               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-               jaxb:schemaLocation="
+<jaxb:bindings version="1.0"
+               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               jaxb:extensionBindingPrefixes="xjc"
+               xs:schemaLocation="
                http://java.sun.com/xml/ns/jaxb
-               http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
+               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
                http://www.w3.org/2001/XMLSchema
                http://www.w3.org/2001/XMLSchema.xsd">
-
-    <!-- Specify to treat underscore as a character rather than
-            the default treatment as a word separator -->
-    <jaxb:globalBindings underscoreBinding="asCharInWord">
-        <!-- Force all classes implements Serializable -->
-        <xjc:serializable uid="1100" />
-    </jaxb:globalBindings>
-
+                   
+    <jaxb:bindings 
+        schemaLocation="csw/2.0.2/profiles/ebrim/1.0/csw-ebrim.xsd"
+        node="/xs:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.ebrim._3"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+    
 </jaxb:bindings>

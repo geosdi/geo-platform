@@ -71,6 +71,11 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-csw-binding</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>gml-3.1.1</artifactId>
         </dependency>
         
@@ -82,11 +87,6 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>ows-1.0.0</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-csw-binding</artifactId>
         </dependency>
 
         <dependency>
@@ -122,16 +122,28 @@
                 <artifactId>maven-jaxb2-plugin</artifactId>
 
                 <configuration>
-                    <!-- TODO with episode -->
-                    <schemas>
-                        <schema>
-                            <url>http://schemas.opengis.net/csw/2.0.2/profiles/ebrim/1.0/csw-ebrim.xsd</url>
-                        </schema>
-                        <schema>
-                            <url>http://schemas.opengis.net/csw/2.0.2/profiles/ebrim/1.0/csw-ebrim-iri.xsd</url>
-                        </schema>
-                    </schemas>
-                    
+                    <schemaIncludes>
+                        <value>csw/*/profiles/ebrim/*/csw-ebrim-iri.xsd</value>
+                        <value>csw/*/profiles/ebrim/*/csw-ebrim.xsd</value>
+                    </schemaIncludes>
+                    <episodes>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>geoplatform-csw-binding</artifactId>
+                        </episode>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>gml-3.1.1</artifactId>
+                        </episode>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>filter-1.1.0</artifactId>
+                        </episode>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>ows-1.0.0</artifactId>
+                        </episode>
+                    </episodes>
                 </configuration>
             </plugin>
         </plugins>

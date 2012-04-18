@@ -1,41 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings jaxb:version="2.0"
-               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
                jaxb:schemaLocation="
                http://java.sun.com/xml/ns/jaxb
-               http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
+               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
                http://www.w3.org/2001/XMLSchema
-               http://www.w3.org/2001/XMLSchema.xsd">
+               http://www.w3.org/2001/XMLSchema.xsd"
+               jaxb:extensionBindingPrefixes="xjc">
                    
-    <!-- Specify to treat underscore as a character rather than
-            the default treatment as a word separator -->
-    <jaxb:globalBindings underscoreBinding="asCharInWord">
-        <!-- Force all classes implements Serializable -->
-        <xjc:serializable uid="1" />
-    </jaxb:globalBindings>
-    
-    <jaxb:bindings schemaLocation="http://schemas.opengis.net/filter/1.1.0/filter.xsd"
-                   node="/xsd:schema">
+    <jaxb:bindings 
+        schemaLocation="filter/1.1.0/filter.xsd" 
+        node="/xs:schema">
+        <jaxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            typesafeEnumBase="xs:string"
+            typesafeEnumMemberName="generateName" 
+            generateIsSetMethod="true">
+            <xjc:noValidator />
+            <xjc:noValidatingUnmarshaller />
+        </jaxb:globalBindings>
+
         <jaxb:schemaBindings>
-            <jaxb:package name="org.geosdi.geoplatform.xml.filter.v110">
-                <jaxb:javadoc>
-                    <![CDATA[<body>TODO package level documentation for generated 
-                    package org.geosdi.geoplatform.xml.filter.v110</body>]]>
-                </jaxb:javadoc>
-            </jaxb:package>
-<!--            <jaxb:nameXmlTransform>
-                <jaxb:elementName prefix="GP"/>
-            </jaxb:nameXmlTransform>-->
+            <jaxb:package name="org.geosdi.geoplatform.xml.filter.v110" />
         </jaxb:schemaBindings>
-        
-<!--        <jaxb:class>
-            <jaxb:javadoc>
-                    <![CDATA[<b>TODO</b> documentation]]>
-            </jaxb:javadoc>
-        </jaxb:class>-->
-    
     </jaxb:bindings>
     
 </jaxb:bindings>

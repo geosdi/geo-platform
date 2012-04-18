@@ -86,6 +86,16 @@
                 <artifactId>geoplatform-gml-binding</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>gml-3.1.1</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>gml-3.2.1</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             
             <dependency>
                 <groupId>org.geosdi</groupId>
@@ -125,15 +135,20 @@
                     <version>0.8.1</version>
                     
                     <configuration>
-                        <forceRegenerate>true</forceRegenerate>
+                        <strict>false</strict>
                         <extension>true</extension>
                         
                         <args>
                             <arg>-XtoString</arg>
-<!--                        <arg>-Xequals</arg>-->
-<!--                        <arg>-XhashCode</arg>-->
+<!--                            <arg>-Xequals</arg>-->
+<!--                            <arg>-XhashCode</arg>-->
+<!--                            <arg>-Xcopyable</arg>-->
+<!--                            <arg>-Xmergeable</arg>-->
                             <arg>-Xsetters</arg>
-<!--                        <arg>-Xsetters-mode=direct</arg>-->
+<!--                            <arg>-Xsetters-mode=direct</arg>-->
+<!--                            <arg>-Xwildcard</arg>-->
+<!--                            <arg>-Xinject-code</arg>-->
+<!--                            <arg>-Xinheritance</arg>-->
                         </args>
                         <plugins>
                             <plugin>

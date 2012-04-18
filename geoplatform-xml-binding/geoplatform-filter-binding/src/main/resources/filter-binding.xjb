@@ -8,7 +8,7 @@
                http://www.w3.org/2001/XMLSchema
                http://www.w3.org/2001/XMLSchema.xsd"
                jaxb:extensionBindingPrefixes="xjc">
-                   
+
     <jaxb:bindings 
         schemaLocation="filter/1.1.0/filter.xsd" 
         node="/xs:schema">
@@ -22,7 +22,7 @@
         </jaxb:globalBindings>
 
         <jaxb:schemaBindings>
-            <jaxb:package name="org.geosdi.geoplatform.xml.filter.v110" />
+            <jaxb:package name="org.geosdi.geoplatform.xml.filter.v110"/>
         </jaxb:schemaBindings>
     </jaxb:bindings>
     

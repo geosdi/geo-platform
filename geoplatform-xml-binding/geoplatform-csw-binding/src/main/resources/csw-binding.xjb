@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings jaxb:version="2.0"
-               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-               jaxb:schemaLocation="
-               http://java.sun.com/xml/ns/jaxb
-               http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
-               http://www.w3.org/2001/XMLSchema
-               http://www.w3.org/2001/XMLSchema.xsd">
+<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               jaxb:extensionBindingPrefixes="xjc">
 
-    <!-- Specify to treat underscore as a character rather than
-            the default treatment as a word separator -->
-    <jaxb:globalBindings underscoreBinding="asCharInWord">
-        <!-- Force all classes implements Serializable -->
-        <xjc:serializable uid="1" />
-    </jaxb:globalBindings>
-    
-    <jaxb:bindings schemaLocation="http://schemas.opengis.net/csw/2.0.2/CSW-publication.xsd"
-                   node="/xsd:schema">
+    <jaxb:bindings 
+        schemaLocation="csw/2.0.2/CSW-publication.xsd"
+        node="/xs:schema">
+        <jaxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            typesafeEnumBase="xs:string"
+            typesafeEnumMemberName="generateName" 
+            generateIsSetMethod="true">
+            <xjc:noValidator />
+            <xjc:noValidatingUnmarshaller />
+        </jaxb:globalBindings>
         <jaxb:schemaBindings>
-            <jaxb:package name="org.geosdi.geoplatform.xml.csw.v202" />
+            <jaxb:package name="org.geosdi.geoplatform.xml.csw.v202"/>
+        </jaxb:schemaBindings>
+
+        <jaxb:bindings node="xs:complexType[@name='InsertType']//xs:any">
+            <xjc:dom/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="xs:complexType[@name='UpdateType']//xs:any">
+            <xjc:dom/>
+        </jaxb:bindings>
+
+    </jaxb:bindings>
+
+
+    <jaxb:bindings 
+        schemaLocation="csw/2.0.2/rec-dcmes.xsd"
+        node="/xs:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.csw.v202.dc.elements"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings 
+        schemaLocation="csw/2.0.2/rec-dcterms.xsd"
+        node="/xs:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.csw.v202.dc.terms"/>
         </jaxb:schemaBindings>
     </jaxb:bindings>
 

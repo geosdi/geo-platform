@@ -71,22 +71,17 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-gml-binding</artifactId>
+            <artifactId>gml-3.1.1</artifactId>
         </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-filter-binding</artifactId>
+            <artifactId>filter-1.1.0</artifactId>
         </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ows-binding</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
+            <artifactId>ows-1.0.0</artifactId>
         </dependency>
         
         <dependency>
@@ -146,11 +141,24 @@
                 <artifactId>maven-jaxb2-plugin</artifactId>
 
                 <configuration>
-                    <schemas>
-                        <schema>
-                            <url>http://schemas.opengis.net/csw/2.0.2/CSW-publication.xsd</url>
-                        </schema>
-                    </schemas>
+                    <schemaIncludes>
+                        <value>csw/*/CSW-publication.xsd</value>
+                        <value>gml/*/base/gml.xsd</value>
+                    </schemaIncludes>
+                    <episodes>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>gml-3.1.1</artifactId>
+                        </episode>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>filter-1.1.0</artifactId>
+                        </episode>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>ows-1.0.0</artifactId>
+                        </episode>
+                    </episodes>
                 </configuration>
             </plugin>
             

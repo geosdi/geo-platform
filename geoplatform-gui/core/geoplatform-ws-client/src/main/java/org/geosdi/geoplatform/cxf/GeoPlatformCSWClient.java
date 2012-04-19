@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.cxf;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
-import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -1364,15 +1364,11 @@
 
         <slf4j-version>1.6.4</slf4j-version>
 
-        <maven-assembly-plugin-version>2.2-beta-5</maven-assembly-plugin-version>
-
-        <xbean-version>3.1.0.2-fuse</xbean-version>
-
         <spring-support>2.0.8</spring-support>
         <spring-security-version>3.1.0.RELEASE</spring-security-version>
         <aspectj-version>1.5.4</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>7.5.2.v20111006</jetty-version>
+        <jetty-version>7.6.2.v20120308</jetty-version>
         <jettison-version>1.2</jettison-version>
 
         <postgresql-version>8.4-702.jdbc3</postgresql-version>

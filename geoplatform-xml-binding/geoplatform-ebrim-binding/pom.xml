@@ -133,16 +133,16 @@
                         </episode>
                         <episode>
                             <groupId>org.geosdi</groupId>
-                            <artifactId>gml-3.1.1</artifactId>
-                        </episode>
-                        <episode>
-                            <groupId>org.geosdi</groupId>
                             <artifactId>filter-1.1.0</artifactId>
                         </episode>
                         <episode>
                             <groupId>org.geosdi</groupId>
                             <artifactId>ows-1.0.0</artifactId>
                         </episode>
+<!--                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>gml-3.1.1</artifactId>
+                        </episode>-->
                     </episodes>
                 </configuration>
             </plugin>

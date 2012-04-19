@@ -17,5 +17,36 @@
             <jaxb:package name="org.geosdi.geoplatform.xml.ebrim._3"/>
         </jaxb:schemaBindings>
     </jaxb:bindings>
-    
+
+
+    <jaxb:bindings 
+        schemaLocation="gml/3.1.1/base/geometryPrimitives.xsd" 
+	node="/xs:schema">
+
+	<jaxb:bindings node="xs:element[@name='_Solid']">
+            <jaxb:class name="ASolidElement"/>
+	</jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings 
+	schemaLocation="gml/3.1.1/base/geometryBasic0d1d.xsd" 
+            node="/xs:schema">
+	<jaxb:bindings node="xs:element[@name='_Curve']">
+            <jaxb:class name="ACurveElement"/>
+	</jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings 
+	schemaLocation="gml/3.1.1/base/geometryBasic2d.xsd " 
+	node="/xs:schema">
+	
+        <jaxb:bindings node="xs:element[@name='_Surface']">
+            <jaxb:class name="ASurfaceElement"/>
+	</jaxb:bindings>
+		
+        <jaxb:bindings node="xs:element[@name='_Ring']">
+            <jaxb:class name="ARingElement"/>
+	</jaxb:bindings>
+    </jaxb:bindings>
+	
 </jaxb:bindings>

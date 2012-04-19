@@ -362,7 +362,7 @@ public class CSWCatalogTest {
 
         int num = 10;
         int recordsMatched = cswService.getSummaryRecordsCount(catalogFinder);
-        Assert.assertEquals(295, recordsMatched);
+        Assert.assertTrue(recordsMatched > 0);
         logger.debug("\n*** Records matched: {} *** Result for page: {} ***",
                 recordsMatched, num);
 

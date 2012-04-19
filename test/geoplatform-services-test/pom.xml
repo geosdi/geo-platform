@@ -187,5 +187,9 @@
         </dependency>
 
     </dependencies>
+    
+    <build>
+        <defaultGoal>test</defaultGoal>
+    </build>
 
 </project>

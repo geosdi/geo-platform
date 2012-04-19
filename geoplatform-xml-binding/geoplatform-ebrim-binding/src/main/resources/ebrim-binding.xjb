@@ -14,7 +14,15 @@
         schemaLocation="csw/2.0.2/profiles/ebrim/1.0/csw-ebrim.xsd"
         node="/xs:schema">
         <jaxb:schemaBindings>
-            <jaxb:package name="org.geosdi.geoplatform.xml.ebrim._3"/>
+            <jaxb:package name="org.geosdi.geoplatform.xml.ebrim"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings 
+        schemaLocation="csw/2.0.2/profiles/ebrim/1.0/csw-ebrim-iri.xsd"
+        node="/xs:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.ebrim"/>
         </jaxb:schemaBindings>
     </jaxb:bindings>
 

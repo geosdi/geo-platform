@@ -77,6 +77,10 @@ public class GPCatalogServiceTest {
         Assert.assertNotNull("URL of GeoNetwork is null", gpCatalogClient.getGeoNetworkServiceURL());
         Assert.assertNotNull("username of GeoNetwork is null", gpCatalogClient.getGeoNetworkUsername());
         Assert.assertNotNull("password of GeoNetwork is null", gpCatalogClient.getGeoNetworkPassword());
+        
+        logger.trace("\n*** GeoNetwork URL {} ***", gpCatalogClient.getGeoNetworkServiceURL());
+        logger.trace("\n*** GeoNetwork Username {} ***", gpCatalogClient.getGeoNetworkUsername());
+        logger.trace("\n*** GeoNetwork Password {} ***", gpCatalogClient.getGeoNetworkPassword());
     }
 
     @Test
@@ -123,7 +127,7 @@ public class GPCatalogServiceTest {
             GNClient client = gpCatalogClient.createClientWithCredentials();
             Assert.assertNotNull("GeoNetwork client is null", client);
 
-            List<GPCatalogMetadataDTO> catalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata("Strade Romane");
+            List<GPCatalogMetadataDTO> catalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata("strade");
             Assert.assertTrue("Items not found", catalogMetadataDTOList.isEmpty() == false);
 
             logger.info("@@@@@@@@@@@@@@@@@@@ Found " + catalogMetadataDTOList.size()

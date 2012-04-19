@@ -104,8 +104,7 @@ public class GPPooledPBEStringEncryptorDecoratorTest {
         String otherPlainText = "guest";
         String otherEncryptedText = this.pooledPBEStringEncryptorDecorator.encrypt(otherPlainText);
 
-        boolean result = true;
-        result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(otherEncryptedText, this.plainText);
+        boolean result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(otherEncryptedText, this.plainText);
         Assert.assertFalse("Error because decrypted and plain text matchs", result);
     }
 }

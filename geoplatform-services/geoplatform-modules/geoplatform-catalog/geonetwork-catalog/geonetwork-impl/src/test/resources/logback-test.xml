@@ -14,5 +14,8 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
+    
+    <logger name="org.geosdi.geoplatform.services.GPCatalogServiceTest"
+            level="info"/>
 
 </configuration>

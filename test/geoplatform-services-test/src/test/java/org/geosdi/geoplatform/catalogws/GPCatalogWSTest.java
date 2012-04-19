@@ -85,7 +85,7 @@ public class GPCatalogWSTest {
     @Test
     public void searchMetadata() {
         try {
-            List<GPCatalogMetadataDTO> metadataList = this.catalogClient.searchPublicMetadata("strade romane");
+            List<GPCatalogMetadataDTO> metadataList = this.catalogClient.searchPublicMetadata("strade");
             Assert.assertFalse("Items not found", metadataList.isEmpty());
 
 

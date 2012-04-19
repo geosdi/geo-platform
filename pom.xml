@@ -47,7 +47,7 @@
             <url>ftp://repo.geosdi.org/</url>
         </repository>
     </distributionManagement>
-
+ 
     <repositories>
 		<!-- geoSDI -->
         <repository>
@@ -633,11 +633,6 @@
                 <version>${cxf-version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-bindings-http</artifactId>
-                <version>${cxf-version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-transports-http</artifactId>
@@ -1352,7 +1347,7 @@
     </pluginRepositories>
     
     <properties>
-        <cxf-version>2.5.2</cxf-version>
+        <cxf-version>2.6.0</cxf-version>
         <spring-version>3.1.1.RELEASE</spring-version>
 
         <commons-io-version>1.4</commons-io-version>
@@ -1364,7 +1359,7 @@
         <commons-dbcp-version>1.2.2</commons-dbcp-version>
         <commons-codec-version>1.4</commons-codec-version>
 
-        <jaxb-api-version>2.2.5</jaxb-api-version>
+        <jaxb-api-version>2.2.6</jaxb-api-version>
         <jaxb-impl-version>2.2.5</jaxb-impl-version>
 
         <slf4j-version>1.6.4</slf4j-version>

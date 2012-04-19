@@ -419,6 +419,7 @@
         </profile>
     </profiles>
     <build>
+        <defaultGoal>jetty:run</defaultGoal>
         <!-- Name of the generated WAR file -->
         <finalName>geoplatform-service</finalName>
         <plugins>

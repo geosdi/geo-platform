@@ -39,6 +39,10 @@
         </developer>
     </developers>
     
+    <build>
+        <defaultGoal>gwt:run</defaultGoal>
+    </build>
+    
     <modules>
         <module>catalog-finder-demo</module>
     </modules>

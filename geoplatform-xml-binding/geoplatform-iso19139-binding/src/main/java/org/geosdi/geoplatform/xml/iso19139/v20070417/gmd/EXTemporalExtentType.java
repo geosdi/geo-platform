@@ -6,15 +6,15 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gmd;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gmd;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gco.AbstractObjectType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gts.TMPrimitivePropertyType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gco.AbstractObjectType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gts.TMPrimitivePropertyType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;

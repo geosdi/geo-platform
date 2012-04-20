@@ -6,7 +6,7 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gts;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gts;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -18,7 +18,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the org.geosdi.geoplatform.xml.iso19139v20070417.gts package. 
+ * generated in the org.geosdi.geoplatform.xml.iso19139.v20070417.gts package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -35,7 +35,7 @@ public class ObjectFactory {
     private final static QName _TMPeriodDuration_QNAME = new QName("http://www.isotc211.org/2005/gts", "TM_PeriodDuration");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.geosdi.geoplatform.xml.iso19139v20070417.gts
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.geosdi.geoplatform.xml.iso19139.v20070417.gts
      * 
      */
     public ObjectFactory() {

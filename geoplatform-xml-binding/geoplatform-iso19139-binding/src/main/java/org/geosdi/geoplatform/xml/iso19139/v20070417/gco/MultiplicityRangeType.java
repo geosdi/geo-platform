@@ -6,7 +6,7 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gco;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gco;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

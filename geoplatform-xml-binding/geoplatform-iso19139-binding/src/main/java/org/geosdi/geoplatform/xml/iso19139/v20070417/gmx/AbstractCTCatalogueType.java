@@ -6,7 +6,7 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gmx;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gmx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gco.AbstractObjectType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gco.CharacterStringPropertyType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gco.DatePropertyType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmd.MDCharacterSetCodePropertyType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmd.PTLocalePropertyType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gco.AbstractObjectType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gco.CharacterStringPropertyType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gco.DatePropertyType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDCharacterSetCodePropertyType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.PTLocalePropertyType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;

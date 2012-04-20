@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.isotc211.org/2005/gts", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package org.geosdi.geoplatform.xml.iso19139v20070417.gts;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gts;

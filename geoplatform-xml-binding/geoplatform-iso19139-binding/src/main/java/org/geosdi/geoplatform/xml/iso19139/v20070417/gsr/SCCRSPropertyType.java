@@ -6,7 +6,7 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gsr;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gsr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +27,14 @@ import org.geosdi.geoplatform.xml.gml.v321.ImageCRSType;
 import org.geosdi.geoplatform.xml.gml.v321.ProjectedCRSType;
 import org.geosdi.geoplatform.xml.gml.v321.TemporalCRSType;
 import org.geosdi.geoplatform.xml.gml.v321.VerticalCRSType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLCompoundCRSType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLDerivedCRSType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLEngineeringCRSType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLGeodeticCRSType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLImageCRSType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLProjectedCRSType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLTemporalCRSType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLVerticalCRSType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLCompoundCRSType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLDerivedCRSType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLEngineeringCRSType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLGeodeticCRSType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLImageCRSType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLProjectedCRSType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLTemporalCRSType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLVerticalCRSType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;

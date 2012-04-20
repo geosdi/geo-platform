@@ -6,7 +6,7 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gmd;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gmd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MXAggregateType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MXAggregateType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;

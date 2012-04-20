@@ -6,7 +6,7 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gco;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gco;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +21,10 @@ import org.geosdi.geoplatform.xml.gml.v321.BaseUnitType;
 import org.geosdi.geoplatform.xml.gml.v321.ConventionalUnitType;
 import org.geosdi.geoplatform.xml.gml.v321.DerivedUnitType;
 import org.geosdi.geoplatform.xml.gml.v321.UnitDefinitionType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLBaseUnitType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLConventionalUnitType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLDerivedUnitType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MLUnitDefinitionType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLBaseUnitType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLConventionalUnitType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLDerivedUnitType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MLUnitDefinitionType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;

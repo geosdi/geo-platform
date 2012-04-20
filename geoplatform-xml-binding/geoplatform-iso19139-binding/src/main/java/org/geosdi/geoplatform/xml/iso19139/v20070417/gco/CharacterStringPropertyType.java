@@ -6,7 +6,7 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gco;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gco;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmd.LocalisedCharacterStringType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmd.MDObligationCodeType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmd.MDPixelOrientationCodeType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmd.MDTopicCategoryCodeType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmd.PTFreeTextPropertyType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.AnchorType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.FileNameType;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gmx.MimeFileTypeType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.LocalisedCharacterStringType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDObligationCodeType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDPixelOrientationCodeType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDTopicCategoryCodeType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.PTFreeTextPropertyType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.AnchorType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.FileNameType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.MimeFileTypeType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;

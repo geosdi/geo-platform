@@ -6,19 +6,19 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gmx;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gmx;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.xml.iso19139v20070417.gco.CodeListValueType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gco.CodeListValueType;
 
 
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the org.geosdi.geoplatform.xml.iso19139v20070417.gmx package. 
+ * generated in the org.geosdi.geoplatform.xml.iso19139.v20070417.gmx package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -100,7 +100,7 @@ public class ObjectFactory {
     private final static QName _MLCodeListDictionary_QNAME = new QName("http://www.isotc211.org/2005/gmx", "ML_CodeListDictionary");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.geosdi.geoplatform.xml.iso19139v20070417.gmx
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.geosdi.geoplatform.xml.iso19139.v20070417.gmx
      * 
      */
     public ObjectFactory() {

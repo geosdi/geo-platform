@@ -6,7 +6,7 @@
 //
 
 
-package org.geosdi.geoplatform.xml.iso19139v20070417.gmd;
+package org.geosdi.geoplatform.xml.iso19139.v20070417.gmd;
 
 import java.util.ArrayList;
 import java.util.List;

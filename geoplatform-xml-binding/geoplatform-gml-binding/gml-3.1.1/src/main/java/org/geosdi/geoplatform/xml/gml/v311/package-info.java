@@ -33,10 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/gml",
-                                     xmlns = {
-    @javax.xml.bind.annotation.XmlNs(prefix = "gml",
-                                     namespaceURI = "http://www.opengis.net/gml")
-},
-                                     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema(namespace = "http://www.opengis.net/gml",
+           elementFormDefault = XmlNsForm.QUALIFIED,
+           xmlns = {@XmlNs(prefix = "gml",
+                           namespaceURI = "http://www.opengis.net/gml")})
 package org.geosdi.geoplatform.xml.gml.v311;
+
+import javax.xml.bind.annotation.XmlNs;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

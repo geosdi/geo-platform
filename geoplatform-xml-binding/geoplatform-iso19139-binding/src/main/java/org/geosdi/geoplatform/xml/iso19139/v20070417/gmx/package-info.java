@@ -4,6 +4,12 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.18 at 03:12:11 PM CEST 
 //
-
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.isotc211.org/2005/gmx", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema(namespace = "http://www.isotc211.org/2005/gmx",
+           elementFormDefault = XmlNsForm.QUALIFIED,
+           xmlns = {@XmlNs(prefix = "gmx",
+                           namespaceURI = "http://www.isotc211.org/2005/gmx")})
 package org.geosdi.geoplatform.xml.iso19139.v20070417.gmx;
+
+import javax.xml.bind.annotation.XmlNs;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

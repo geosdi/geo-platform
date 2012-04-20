@@ -33,10 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/ows",
-                                     xmlns = {
-    @javax.xml.bind.annotation.XmlNs(prefix = "ows",
-                                     namespaceURI = "http://www.opengis.net/ows")
-},
-                                     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema(namespace = "http://www.opengis.net/ows",
+           elementFormDefault = XmlNsForm.QUALIFIED,
+           xmlns = {@XmlNs(prefix = "ows",
+                           namespaceURI = "http://www.opengis.net/ows")})
 package org.geosdi.geoplatform.xml.ows.v100;
+
+import javax.xml.bind.annotation.XmlNs;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

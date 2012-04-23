@@ -17,10 +17,6 @@
     <name>Geo-Platform :: == Publish Module Implementation</name>
     <url>http://maven.apache.org</url>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <repositories>
          <!-- GEOTOOLKIT -->
         <repository>
@@ -323,7 +319,7 @@
 
     </dependencies>    
     
-     <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

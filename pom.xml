@@ -1405,6 +1405,9 @@
     </pluginRepositories>
     
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <netbeans.hint.license>geo-platform</netbeans.hint.license>
+        
         <cxf-version>2.6.0</cxf-version>
         <spring-version>3.1.1.RELEASE</spring-version>
 
@@ -1456,8 +1459,6 @@
         <jdom-version>1.1</jdom-version>
         
         <geonetwork-version>1.0-SNAPSHOT</geonetwork-version>
-
-        <netbeans.hint.license>geo-platform</netbeans.hint.license>
     </properties>
 
 </project>

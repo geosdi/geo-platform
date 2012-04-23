@@ -24,29 +24,6 @@
         </repository>
     </repositories>
     
-    <developers>
-        <developer>
-            <name>Francesco Izzi</name>
-            <id>francesco.izzi</id>
-            <email>francesco.izzi@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Giuseppe La Scaleia</name>
-            <id>glascaleia</id>
-            <email>giuseppe.lascaleia@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-    </developers>
-    
     <modules>
         <module>geoplatform-publisher</module>
         <module>geoplatform-scheduler</module>

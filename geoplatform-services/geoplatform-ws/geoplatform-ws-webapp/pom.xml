@@ -13,38 +13,7 @@
     <packaging>war</packaging>
 
     <name>Geo-Platform :: == WS WebApp</name>
-    <developers>
-        <developer>
-            <name>Francesco Izzi</name>
-            <id>francesco.izzi</id>
-            <email>francesco.izzi@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Giuseppe La Scaleia</name>
-            <id>glascaleia</id>
-            <email>giuseppe.lascaleia@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Nazzareno Sileno</name>
-            <id>nazzareno.sileno</id>
-            <email>nazzareno.sileno@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-    </developers>
+    
     <dependencies>
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -365,11 +334,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-api</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-core</artifactId>
         </dependency>
         
         <dependency>

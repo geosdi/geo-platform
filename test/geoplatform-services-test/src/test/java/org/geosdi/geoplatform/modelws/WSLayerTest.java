@@ -40,11 +40,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import junit.framework.Assert;
-import org.geosdi.geoplatform.core.model.GPBBox;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;

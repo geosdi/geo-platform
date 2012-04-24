@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.jasypt;
 
-import junit.framework.Assert;
 import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

@@ -37,10 +37,8 @@ package org.geosdi.geoplatform.oxm;
 
 import java.io.File;
 import java.io.IOException;
-
-import junit.framework.Assert;
-
 import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooGeocodeRoot;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

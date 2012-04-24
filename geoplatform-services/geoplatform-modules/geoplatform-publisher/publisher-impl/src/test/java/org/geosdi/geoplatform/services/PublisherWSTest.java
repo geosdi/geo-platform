@@ -35,13 +35,10 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.slf4j.Logger;
-
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -55,7 +52,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath:applicationContext.xml"})
-public class PublisherWSTest extends TestCase {
+public class PublisherWSTest {
 
     protected Logger logger = LoggerFactory.getLogger(org.geosdi.geoplatform.services.PublisherWSTest.class);
     //

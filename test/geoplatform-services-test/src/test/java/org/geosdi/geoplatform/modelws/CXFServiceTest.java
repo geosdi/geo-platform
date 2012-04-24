@@ -37,15 +37,13 @@ package org.geosdi.geoplatform.modelws;
 
 import java.text.ParseException;
 import java.util.Collection;
-import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-
-
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.responce.ServerDTO;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

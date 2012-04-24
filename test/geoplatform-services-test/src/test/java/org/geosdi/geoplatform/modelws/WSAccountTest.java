@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.modelws;
 
 import java.util.Iterator;
 import java.util.List;
-import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
@@ -47,6 +46,7 @@ import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**

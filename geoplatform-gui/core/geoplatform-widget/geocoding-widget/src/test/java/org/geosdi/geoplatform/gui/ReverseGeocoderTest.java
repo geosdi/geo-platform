@@ -36,12 +36,9 @@
 package org.geosdi.geoplatform.gui;
 
 import java.io.IOException;
-
-
-import junit.framework.Assert;
-
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

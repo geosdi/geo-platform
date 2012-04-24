@@ -41,7 +41,6 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import junit.framework.TestCase;
 import org.geotoolkit.csw.GetRecordsRequest;
 import org.geotoolkit.csw.xml.CSWMarshallerPool;
 import org.geotoolkit.csw.xml.ElementSetType;
@@ -58,7 +57,7 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogGetRecordsTest extends TestCase {
+public class CatalogGetRecordsTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //

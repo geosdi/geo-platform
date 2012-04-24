@@ -42,7 +42,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import junit.framework.TestCase;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -59,7 +58,7 @@ import org.junit.Test;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class CSWConnectionTest extends TestCase {
+public class CSWConnectionTest {
 
     private final static String CSW_HOST = "150.146.160.152";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";

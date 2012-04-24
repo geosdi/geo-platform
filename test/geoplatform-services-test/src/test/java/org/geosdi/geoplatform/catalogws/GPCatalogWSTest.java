@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.catalogws;
 
 import java.util.List;
-import junit.framework.Assert;
 import org.geosdi.geoplatform.catalogws.beans.GPCatalogEndPointImpl;
 import org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

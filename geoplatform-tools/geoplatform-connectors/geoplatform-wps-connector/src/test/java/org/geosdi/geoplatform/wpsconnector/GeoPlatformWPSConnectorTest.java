@@ -43,7 +43,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import junit.framework.Assert;
 import org.geotoolkit.wps.*;
 import org.geotoolkit.wps.xml.WPSMarshallerPool;
 import org.geotoolkit.wps.xml.v100.ExecuteResponse;
@@ -51,6 +50,7 @@ import org.geotoolkit.wps.xml.v100.OutputDataType;
 import org.geotoolkit.wps.xml.v100.ProcessBriefType;
 import org.geotoolkit.wps.xml.v100.WPSCapabilitiesType;
 import org.geotoolkit.xml.MarshallerPool;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -71,8 +71,8 @@ public class GeoPlatformWPSConnectorTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    @Autowired
-    private GeoPlatformWPSConnector gpWPSConnector;
+//    @Autowired
+//    private GeoPlatformWPSConnector gpWPSConnector;
     //
 //    private MarshallerPool pool = WPSMarshallerPool.getInstance();
 //    private Unmarshaller um;

@@ -33,45 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.jaxb;
+package org.geosdi.geoplatform.cswconnector;
 
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
-import org.geosdi.geoplatform.cswconnector.jaxb.CSWJAXBContext.CSWJAXBContextKey;
-import org.geosdi.geoplatform.xml.csw.CSWContextServiceProvider;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
+import org.springframework.context.annotation.Bean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CSWConnectorJAXBContext implements
-        GeoPlatformJAXBContextProvider {
+public class CatalogJAXBContextConfigurator {
 
-    static {
-        try {
-            jaxbContext = new CSWJAXBContext(
-                    CSWContextServiceProvider.loadContextPath());
-        } catch (JAXBException e) {
-            LoggerFactory.getLogger(CSWConnectorJAXBContext.class).error(
-                    "Failed to Initialize JAXBContext for Class "
-                    + CSWConnectorJAXBContext.class.getName()
-                    + ": @@@@@@@@@@@@@@@@@ " + e);
-        }
-    }
-    //
-    private static GPConnectorJAXBContext jaxbContext;
-    public static final CSWJAXBContextKey CSW_CONTEXT_KEY = new CSWJAXBContextKey();
+    /**
+     * Create an Instance for CSWConnectorJAXBContext and register it in 
+     * GeoPlatformJAXBContextRepository with the specific Key
+     * 
+     * @return CSWConnectorJAXBContext
+     */
+    public @Bean(name = "cswConnectorJAXBContext")
+    CSWConnectorJAXBContext cswConnectorJAXBContext() {
 
-    @Override
-    public GPConnectorJAXBContext getJAXBProvider() {
-        return jaxbContext;
-    }
+        CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
 
-    @Override
-    public CSWJAXBContextKey getKeyProvider() {
-        return CSWConnectorJAXBContext.CSW_CONTEXT_KEY;
+        GeoPlatformJAXBContextRepository.registerProvider(
+                cswJAXBContext.getKeyProvider(), cswJAXBContext.getJAXBProvider());
+
+        return cswJAXBContext;
     }
 }

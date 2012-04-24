@@ -40,6 +40,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
 
 /**
  *
@@ -52,7 +53,6 @@ public class CSWJAXBContext extends GeoPlatformJAXBContext {
         super(classToBeBound);
     }
 
-    
     public CSWJAXBContext(String contextPath, ClassLoader classLoader,
             Map<String, ?> properties) throws JAXBException {
         super(contextPath, classLoader, properties);
@@ -68,17 +68,26 @@ public class CSWJAXBContext extends GeoPlatformJAXBContext {
     }
 
     @Override
-    public Marshaller createMarshaller() throws JAXBException {
-        final Marshaller marshaller = this.jaxbContext.createMarshaller();
-
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-
-        return marshaller;
+    public Marshaller acquireMarshaller() throws JAXBException {
+        synchronized (this) {
+            return super.marshaller != null
+                    ? super.marshaller : super.createMarshaller();
+        }
     }
 
     @Override
-    public Unmarshaller createUnmarshaller() throws JAXBException {
-        return this.jaxbContext.createUnmarshaller();
+    public Unmarshaller acquireUnmarshaller() throws JAXBException {
+        synchronized (this) {
+            return super.unmarshaller != null
+                    ? super.unmarshaller : super.createUnmarshaller();
+        }
+    }
+
+    public static class CSWJAXBContextKey extends GeoPlatformJAXBContextKey {
+
+        @Override
+        public boolean isCompatibleValue(Object o) {
+            return o instanceof CSWJAXBContext;
+        }
     }
 }

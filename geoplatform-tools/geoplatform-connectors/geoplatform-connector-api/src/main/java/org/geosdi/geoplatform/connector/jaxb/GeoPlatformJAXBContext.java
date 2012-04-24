@@ -39,6 +39,8 @@ import java.util.Collections;
 import java.util.Map;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 /**
  * The GeoPlatform class provides the client's entry point to the 
@@ -49,9 +51,10 @@ import javax.xml.bind.JAXBException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformJAXBContext implements GPConnectorJAXBContext {
-
-    protected JAXBContext jaxbContext;
+public abstract class GeoPlatformJAXBContext extends GPConnectorJAXBContext {
+    
+    protected Marshaller marshaller;
+    protected Unmarshaller unmarshaller;
 
     /**
      * <p>
@@ -119,8 +122,7 @@ public abstract class GeoPlatformJAXBContext implements GPConnectorJAXBContext {
     public GeoPlatformJAXBContext(String contextPath, ClassLoader classLoader,
             Map<String, ?> properties) throws JAXBException {
 
-        this.jaxbContext = JAXBContext.newInstance(contextPath, classLoader,
-                properties);
+        super(contextPath, classLoader, properties);
     }
 
     /**
@@ -149,6 +151,39 @@ public abstract class GeoPlatformJAXBContext implements GPConnectorJAXBContext {
     public GeoPlatformJAXBContext(Class... classToBeBound)
             throws JAXBException {
 
-        this.jaxbContext = JAXBContext.newInstance(classToBeBound);
+        super(classToBeBound);
+    }
+
+    /** 
+     * Create a <p>Marshaller</p> object that can be used to convert a 
+     *  java content tree into XML data.
+     *
+     * @return a <tt>Marshaller</tt> object
+     *
+     * @throws JAXBException if an error was encountered while creating the
+     *       
+     **/
+    protected Marshaller createMarshaller() throws JAXBException {
+        this.marshaller = this.jaxbContext.createMarshaller();
+
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+
+        return this.marshaller;
+    }
+
+    /**
+     * Create an <p>Unmarshaller</p> object that can be used to convert XML
+     * data into a java content tree.
+     *
+     * @return an <tt>Unmarshaller</tt> object
+     *
+     * @throws JAXBException if an error was encountered while creating the
+     *                       <tt>Unmarshaller</tt> object
+     */
+    protected Unmarshaller createUnmarshaller() throws JAXBException {
+        this.unmarshaller = this.jaxbContext.createUnmarshaller();
+        
+        return this.unmarshaller;
     }
 }

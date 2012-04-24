@@ -44,7 +44,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import junit.framework.TestCase;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -58,28 +57,37 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
 import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogCapabilitiesV202PostTest extends TestCase {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+public class CatalogCapabilitiesV202PostTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private final static String CSW_HOST = "150.146.160.152";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
     //
-    private GPConnectorJAXBContext cswContext = CSWConnectorJAXBContext.getInstance();
+    private GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
+            CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
 
+    @Test
     public void testGetCapabilitiesPostRequest() throws JAXBException {
         try {
             HttpParams params = new BasicHttpParams();
@@ -98,8 +106,8 @@ public class CatalogCapabilitiesV202PostTest extends TestCase {
             GetCapabilitiesType getCapType = new GetCapabilitiesType(
                     CSWServiceEnum.CSW);
 
-            Marshaller m = cswContext.createMarshaller();
-            Unmarshaller un = cswContext.createUnmarshaller();
+            Marshaller m = cswContext.acquireMarshaller();
+            Unmarshaller un = cswContext.acquireUnmarshaller();
 
             StringWriter w = new StringWriter();
 

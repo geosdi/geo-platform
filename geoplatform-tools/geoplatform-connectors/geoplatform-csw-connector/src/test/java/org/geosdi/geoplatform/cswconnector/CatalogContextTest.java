@@ -46,7 +46,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import junit.framework.TestCase;
+import junit.framework.Assert;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -58,45 +58,54 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
 import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogContextTest extends TestCase {
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+public class CatalogContextTest {
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private final static String CSW_HOST = "150.146.160.152";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
     //
-    private GPConnectorJAXBContext cswContext = CSWConnectorJAXBContext.getInstance();
+    private GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
+            CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     private HttpEntity entity;
-
-    @Override
-    protected void setUp() throws Exception {
+    
+    @Before
+    public void setUp() throws Exception {
         try {
             HttpClient client = new DefaultHttpClient();
-
+            
             List<NameValuePair> qparams = new ArrayList<NameValuePair>();
             qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
             qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
-
+            
             URI uri = URIUtils.createURI("http", CSW_HOST, -1, CSW_PATH,
                     URLEncodedUtils.format(qparams, "UTF-8"), null);
-
+            
             HttpGet get = new HttpGet(uri);
-
+            
             HttpResponse response = client.execute(get);
-
+            
             this.entity = response.getEntity();
-
-
+            
+            
         } catch (URISyntaxException ex) {
             logger.error(
                     "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ex.getMessage());
@@ -108,33 +117,34 @@ public class CatalogContextTest extends TestCase {
                     "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ex.getMessage());
         }
     }
-
+    
+    @Test
     public void testJAXBContext() throws JAXBException {
-        assertNotNull(cswContext);
-
-        Unmarshaller m = cswContext.createUnmarshaller();
-
+        Assert.assertNotNull(cswContext);
+        
+        Unmarshaller m = cswContext.acquireUnmarshaller();
+        
         try {
-
+            
             if (entity != null) {
                 InputStream content = entity.getContent();
-
+                
                 CapabilitiesType cap = ((JAXBElement<CapabilitiesType>) m.unmarshal(
                                         content)).getValue();
-
+                
                 logger.info(
                         "CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap.getVersion());
-
+                
                 logger.info(
                         "CSW SERVICE IDENTIFICATION @@@@@@@@@@ " + cap.getServiceIdentification());
-
-
+                
+                
                 String cswFile = "target/csw.xml";
-
-                Marshaller ma = cswContext.createMarshaller();
-
+                
+                Marshaller ma = cswContext.acquireMarshaller();
+                
                 FileOutputStream fos = null;
-
+                
                 try {
                     fos = new FileOutputStream(cswFile);
                     ma.marshal(cap, fos);
@@ -143,7 +153,7 @@ public class CatalogContextTest extends TestCase {
                         fos.close();
                     }
                 }
-
+                
             }
         } catch (IOException ex) {
             logger.error(

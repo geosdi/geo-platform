@@ -2,6 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
+    <prerequisites>
+        <maven>3.0.2</maven>
+    </prerequisites>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geo-platform</artifactId>
@@ -203,6 +207,7 @@
                 <role>Java Developer</role>
                 <role>Project Management Committee (PMC) Member</role>
             </roles>
+            <timezone>+1</timezone>
         </developer>
         <developer>
             <name>Giuseppe La Scaleia</name>
@@ -213,6 +218,7 @@
                 <role>Java Developer</role>
                 <role>Project Management Committee (PMC) Member</role>
             </roles>
+            <timezone>+1</timezone>
         </developer>
         <developer>
             <name>Nazzareno Sileno</name>
@@ -223,6 +229,7 @@
                 <role>Java Developer</role>
                 <role>Project Management Committee (PMC) Member</role>
             </roles>
+            <timezone>+1</timezone>
         </developer>
         <developer>
             <name>Vincenzo Monteverde</name>
@@ -236,6 +243,7 @@
             <properties>
                 <openPGP>0xB25F4B38</openPGP>
             </properties>
+            <timezone>+1</timezone>
         </developer>
         <developer>
             <name>Michele Santomauro</name>
@@ -246,6 +254,10 @@
                 <role>Java Developer</role>
                 <role>Project Management Committee (PMC) Member</role>
             </roles>
+            <properties>
+                <active>false</active>
+            </properties>
+            <timezone>+1</timezone>
         </developer>
     </developers>
 

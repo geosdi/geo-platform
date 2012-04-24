@@ -378,10 +378,10 @@ public class WSLayerTest extends ServiceTest {
     public void testGetBBox() throws ResourceNotFoundFault {
         GPBBox bbox = gpWSClient.getBBox(idVector1);
         Assert.assertNotNull("assertNotNull bbox", bbox);
-        Assert.assertEquals("assertEquals bbox.getMaxX()", bbox.getMaxX(), 20.0);
-        Assert.assertEquals("assertEquals bbox.getMaxY()", bbox.getMaxY(), 20.0);
-        Assert.assertEquals("assertEquals bbox.getMinX()", bbox.getMinX(), 10.0);
-        Assert.assertEquals("assertEquals bbox.getMinY()", bbox.getMinY(), 10.0);
+        Assert.assertEquals("assertEquals bbox.getMaxX()", 0, Double.compare(bbox.getMaxX(), 20.0));
+        Assert.assertEquals("assertEquals bbox.getMaxY()", 0, Double.compare(bbox.getMaxY(), 20.0));
+        Assert.assertEquals("assertEquals bbox.getMinX()", 0, Double.compare(bbox.getMinX(), 10.0));
+        Assert.assertEquals("assertEquals bbox.getMinY()", 0, Double.compare(bbox.getMinY(), 10.0));
     }
 
     @Test

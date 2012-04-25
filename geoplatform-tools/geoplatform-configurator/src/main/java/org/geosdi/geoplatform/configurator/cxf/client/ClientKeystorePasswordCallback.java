@@ -6,13 +6,13 @@ import java.util.Map;
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.ws.security.WSPasswordCallback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClientKeystorePasswordCallback implements CallbackHandler {
 
-    private Log logger = LogFactory.getLog(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     
     private Map<String, String> passwords = 
         new HashMap<String, String>();
@@ -34,6 +34,7 @@ public class ClientKeystorePasswordCallback implements CallbackHandler {
      * It attempts to get the password from the private 
      * alias/passwords map.
      */
+    @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         for (int i = 0; i < callbacks.length; i++) {
             WSPasswordCallback pc = (WSPasswordCallback)callbacks[i];

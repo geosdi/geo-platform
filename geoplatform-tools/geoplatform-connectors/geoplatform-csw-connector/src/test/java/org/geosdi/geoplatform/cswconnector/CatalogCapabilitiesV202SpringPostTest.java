@@ -45,7 +45,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import junit.framework.TestCase;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -64,15 +63,21 @@ import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogCapabilitiesV202PostTest extends TestCase {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+public class CatalogCapabilitiesV202SpringPostTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -82,7 +87,8 @@ public class CatalogCapabilitiesV202PostTest extends TestCase {
     private GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
 
-    public void testGetCapabilitiesPostRequest() throws JAXBException {
+    @Test
+    public void testGetCapabilitiesSpringPostRequest() throws JAXBException {
         try {
             HttpParams params = new BasicHttpParams();
 
@@ -135,4 +141,41 @@ public class CatalogCapabilitiesV202PostTest extends TestCase {
             logger.error("IOException @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + io);
         }
     }
+    
+//    public void testWithURL() throws JAXBException {
+//        try {
+//            URL url = new URL("http://" + CSW_HOST + CSW_PATH);
+//
+//            URLConnection con = url.openConnection();
+//
+//            con.setDoOutput(true);
+//            con.setRequestProperty(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
+//                    GeoPlatformHTTP.CONTENT_TYPE_XML);
+//
+//            OutputStream stream = con.getOutputStream();
+//
+//            GetCapabilitiesType getCapType = new GetCapabilitiesType(
+//                    CSWServiceEnum.CSW);
+//
+//            Marshaller m = cswContext.createMarshaller();
+//            Unmarshaller un = cswContext.createUnmarshaller();
+//
+//            m.marshal(getCapType, stream);
+//
+//            stream.close();
+//
+//            InputStream content = con.getInputStream();
+//
+//            CapabilitiesType cap = ((JAXBElement<CapabilitiesType>) un.unmarshal(
+//                                    content)).getValue();
+//
+//            logger.info(
+//                    "testWithURL GET_CAP VERSION @@@@@@@@@@@@@@@@@@@@@@@ " + cap);
+//
+//        } catch (MalformedURLException ex) {
+//            logger.error("MalformedURLException @@@@@@@@@@@@@ " + ex);
+//        } catch (IOException io) {
+//            logger.error("IOException @@@@@@@@@@@@@@@@@ " + io);
+//        }
+//    }
 }

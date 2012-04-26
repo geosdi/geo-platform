@@ -39,6 +39,7 @@ import java.awt.RenderingHints;
 import java.util.HashMap;
 import java.util.Map;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -46,14 +47,15 @@ import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GeoPlatformJAXBContextRepository {
-    
+
     private static Map<GeoPlatformJAXBContextKey, Object> values;
-    
+
     static {
         values = new HashMap<GeoPlatformJAXBContextKey, Object>();
     }
-    
-    private GeoPlatformJAXBContextRepository() {}
+
+    private GeoPlatformJAXBContextRepository() {
+    }
 
     /**
      * Register the JAXB Context for the Specific Connector
@@ -67,7 +69,6 @@ public class GeoPlatformJAXBContextRepository {
             throw new IllegalArgumentException("The Provider : "
                     + provider + " is incompatible with Key : " + key);
         }
-        
         values.put(key, provider);
     }
 
@@ -77,21 +78,67 @@ public class GeoPlatformJAXBContextRepository {
      * @param key
      * @return GPConnectorJAXBContext Provider registered for Key
      */
-    public static <P extends GPConnectorJAXBContext> P getProvider(GeoPlatformJAXBContextKey key) {
-        return (P) values.get(key);
+    public static synchronized <P extends GPConnectorJAXBContext> P getProvider(GeoPlatformJAXBContextKey key) {
+        return (P) (values.get(key) != null ? values.get(key) : lookUpJAXBContext(
+                    key));
     }
-    
+
+    private static <P extends GPConnectorJAXBContext> P lookUpJAXBContext(GeoPlatformJAXBContextKey key) {
+        Object jaxbContext = null;
+        
+        try {
+            Class<?> classe = key.getJAXBContextClass();
+
+            jaxbContext = classe.newInstance();
+
+            if (!(jaxbContext instanceof GeoPlatformJAXBContextProvider)) {
+                throw new IllegalArgumentException(
+                        "The class " + jaxbContext.getClass().getName()
+                        + " is not an instance of GeoPlatformJAXBContextProvider");
+            }
+
+            registerProvider(key,
+                    ((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
+        } catch (InstantiationException ex) {
+            LoggerFactory.getLogger(GeoPlatformJAXBContextRepository.class).error(
+                    "Failed to Initialize JAXBContext for Class "
+                    + GeoPlatformJAXBContextRepository.class.getName()
+                    + ": @@@@@@@@@@@@@@@@@ " + ex);
+        } catch (IllegalAccessException ex) {
+            LoggerFactory.getLogger(GeoPlatformJAXBContextRepository.class).error(
+                    "Failed to Initialize JAXBContext for Class "
+                    + GeoPlatformJAXBContextRepository.class.getName()
+                    + ": @@@@@@@@@@@@@@@@@ " + ex);
+        }
+
+        return (P) (((GeoPlatformJAXBContextProvider) jaxbContext).getJAXBProvider());
+    }
+
     public abstract static class GeoPlatformJAXBContextKey
             extends RenderingHints.Key {
-        
+
         private static int val;
-        
-        public GeoPlatformJAXBContextKey() {
+        private Class<?> jaxbContextClass;
+
+        public GeoPlatformJAXBContextKey(Class<?> thejaxbContextClass) {
             super(nextVal());
+            this.jaxbContextClass = thejaxbContextClass;
         }
-        
+
         private static synchronized int nextVal() {
             return ++val;
+        }
+
+        /**
+         * @return the classe
+         */
+        public Class<?> getJAXBContextClass() {
+            return jaxbContextClass;
+        }
+
+        @Override
+        public String toString() {
+            return getClass().getName() + " : privatekey = " + super.intKey();
         }
     }
 }

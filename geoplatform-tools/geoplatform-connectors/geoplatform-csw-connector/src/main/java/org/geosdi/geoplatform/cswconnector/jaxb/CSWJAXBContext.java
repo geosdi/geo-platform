@@ -85,6 +85,10 @@ public class CSWJAXBContext extends GeoPlatformJAXBContext {
 
     public static class CSWJAXBContextKey extends GeoPlatformJAXBContextKey {
 
+        public CSWJAXBContextKey() {
+            super(CSWConnectorJAXBContext.class);
+        }
+
         @Override
         public boolean isCompatibleValue(Object o) {
             return o instanceof CSWJAXBContext;

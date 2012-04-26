@@ -62,11 +62,11 @@ public class CSWConnectorJAXBContext implements
         }
     }
     //
-    private static GPConnectorJAXBContext jaxbContext;
+    private static CSWJAXBContext jaxbContext;
     public static final CSWJAXBContextKey CSW_CONTEXT_KEY = new CSWJAXBContextKey();
 
     @Override
-    public GPConnectorJAXBContext getJAXBProvider() {
+    public CSWJAXBContext getJAXBProvider() {
         return jaxbContext;
     }
 

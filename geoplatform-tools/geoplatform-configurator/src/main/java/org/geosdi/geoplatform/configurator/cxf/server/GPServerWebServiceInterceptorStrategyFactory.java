@@ -63,7 +63,6 @@ public class GPServerWebServiceInterceptorStrategyFactory {
     private String clientPublicKeyPropertiesFile;
     private String clientKeystoreUser;
     
-
     public LoggingInInterceptor getLoggingInInterceptor() throws IllegalArgumentException {
         if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN.getValue())) {
             return new LoggingInInterceptor();
@@ -99,6 +98,8 @@ public class GPServerWebServiceInterceptorStrategyFactory {
             return createSignatureInInterceptor();
         } else if (this.securityStrategy.equals(EnumWebserviceSecurity.TIMESTAMP_SIGNATURE_ENCRYPTION.getValue())) {
             return createTimestampSignatureEncryptionInInterceptor();
+        } else if (this.securityStrategy.equals(EnumWebserviceSecurity.NONE.getValue())) {
+            return new WSS4JInInterceptor();
         }
         throw new IllegalArgumentException("Invalid parameter " + this.securityStrategy + " specified in properties file");
     }
@@ -112,6 +113,8 @@ public class GPServerWebServiceInterceptorStrategyFactory {
             return createSignatureOutInterceptor();
         } else if (this.securityStrategy.equals(EnumWebserviceSecurity.TIMESTAMP_SIGNATURE_ENCRYPTION.getValue())) {
             return createTimestampSignatureEncryptionOutInterceptor();
+        } else if (this.securityStrategy.equals(EnumWebserviceSecurity.NONE.getValue())) {
+            return new WSS4JOutInterceptor();
         }
         throw new IllegalArgumentException("Invalid parameter " + this.securityStrategy + " specified in properties file");
     }
@@ -243,5 +246,4 @@ public class GPServerWebServiceInterceptorStrategyFactory {
     public void setServerKeystoreUser(String serverKeystoreUser) {
         this.serverKeystoreUser = serverKeystoreUser;
     }
-    
 }

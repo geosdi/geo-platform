@@ -56,7 +56,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * 
  * 
  */
-@XmlRootElement(name = "QueryType")
+@XmlRootElement(name = "Query")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QueryType", propOrder = {
     "elementSetName",

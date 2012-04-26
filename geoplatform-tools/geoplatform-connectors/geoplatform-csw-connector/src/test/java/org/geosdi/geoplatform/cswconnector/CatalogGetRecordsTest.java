@@ -35,19 +35,51 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import org.geotoolkit.csw.GetRecordsRequest;
-import org.geotoolkit.csw.xml.CSWMarshallerPool;
-import org.geotoolkit.csw.xml.ElementSetType;
-import org.geotoolkit.csw.xml.ResultType;
-import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
-import org.geotoolkit.csw.xml.v202.SearchResultsType;
-import org.geotoolkit.xml.MarshallerPool;
+import javax.xml.namespace.QName;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIUtils;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
+import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
+import org.geosdi.geoplatform.xml.csw.v202.QueryType;
+import org.geosdi.geoplatform.xml.csw.v202.ResultType;
+import org.geotoolkit.csw.xml.TypeNames;
+//import org.geotoolkit.csw.GetRecordsRequest;
+//import org.geotoolkit.csw.xml.CSWMarshallerPool;
+//import org.geotoolkit.csw.xml.ElementSetType;
+//import org.geotoolkit.csw.xml.ResultType;
+//import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
+//import org.geotoolkit.csw.xml.v202.SearchResultsType;
+//import org.geotoolkit.xml.MarshallerPool;
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,6 +93,12 @@ public class CatalogGetRecordsTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
+    private final static String CSW_HOST = "150.146.160.152";
+    private final static String CSW_PATH = "/geonetwork/srv/en/csw";
+    private final static String CSW_HOST_TREVISO = "ows.provinciatreviso.it";
+    private final static String CSW_PATH_TREVISO = "/geonetwork/srv/en/csw";
+    private final GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
+            CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
 //    private MarshallerPool pool = CSWMarshallerPool.getInstance();
 //    private Unmarshaller um;
 
@@ -179,4 +217,93 @@ public class CatalogGetRecordsTest {
 //            }
 //        }
 //    }
+
+    @Test
+    public void testOwnGetRecords()
+            throws URISyntaxException, JAXBException,
+                   UnsupportedEncodingException, IOException {
+
+        HttpParams params = new BasicHttpParams();
+
+        params.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
+                GeoPlatformHTTP.CONTENT_TYPE_XML);
+
+        HttpClient client = new DefaultHttpClient();
+
+        URI uri = URIUtils.createURI("http", CSW_HOST_TREVISO, -1, CSW_PATH_TREVISO,
+                null, null);
+
+        HttpPost post = new HttpPost(uri);
+        post.setParams(params);
+
+
+        GetRecordsType req = new GetRecordsType();
+
+//        req.setStartPosition(BigInteger.ONE);
+//        req.setMaxRecords(BigInteger.valueOf(1)); //
+//        req.setMaxRecords(BigInteger.TEN);
+
+//        req.setResultType(ResultType.HITS); // count
+        // or
+        req.setResultType(ResultType.RESULTS);
+
+//        req.setOutputFormat("application/xml");
+        req.setOutputSchema("http://www.isotc211.org/2005/gmd");
+
+
+        QueryType query = new QueryType();
+
+        List<QName> typNames = new ArrayList<QName>();
+//        typNames.add(TypeNames.valueOf("csw:Recorde")); // count
+        // or
+        typNames.add(TypeNames.valueOf("gmd:MD_Metadata"));
+        query.setTypeNames(typNames);
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(ElementSetType.BRIEF);
+//        elementSetNameType.setValue(ElementSetType.SUMMARY);
+//        elementSetNameType.setValue(ElementSetType.FULL);
+        query.setElementSetName(elementSetNameType);
+
+        req.setAbstractQuery(query);
+
+        logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", req);
+
+
+        Marshaller m = cswContext.acquireMarshaller();
+        Unmarshaller un = cswContext.acquireUnmarshaller();
+
+
+        StringWriter w = new StringWriter();
+
+        m.marshal(req, w);
+
+        StringEntity entity = new StringEntity(w.toString(),
+                GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
+
+        post.setEntity(entity);
+        logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", new Scanner(post.getEntity().getContent()).useDelimiter("\\A").next());
+
+        HttpResponse response = client.execute(post);
+        HttpEntity responseEntity = response.getEntity();
+        if (responseEntity != null) {
+            InputStream is = responseEntity.getContent();
+            logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", new Scanner(is).useDelimiter("\\A").next());
+
+            // Uncomment for view the error...
+//            Object content = un.unmarshal(is); // TODO Don't fail me!
+//            if (!(content instanceof JAXBElement)) {  // ExceptionReport
+//                logger.error("\n### {}", content);
+//                Assert.fail();
+//            }
+//
+//            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
+//
+//            GetRecordsResponseType getRecords = elementType.getValue();
+//            logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", getRecords);
+
+
+            EntityUtils.consume(responseEntity);
+        }
+    }
 }

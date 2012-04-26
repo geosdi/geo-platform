@@ -4,6 +4,12 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.18 at 12:36:36 PM CEST 
 //
-
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/cat/csw/2.0.2", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema(namespace = "http://www.opengis.net/cat/csw/2.0.2",
+           elementFormDefault = XmlNsForm.QUALIFIED,
+           xmlns = {@XmlNs(prefix = "csw",
+                           namespaceURI = "http://www.opengis.net/cat/csw/2.0.2")})
 package org.geosdi.geoplatform.xml.csw.v202;
+
+import javax.xml.bind.annotation.XmlNs;
+import javax.xml.bind.annotation.XmlNsForm;
+import javax.xml.bind.annotation.XmlSchema;

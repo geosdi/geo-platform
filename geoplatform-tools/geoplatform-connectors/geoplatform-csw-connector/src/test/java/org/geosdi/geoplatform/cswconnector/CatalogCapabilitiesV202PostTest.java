@@ -45,7 +45,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import junit.framework.TestCase;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -64,6 +63,7 @@ import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,7 +72,7 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogCapabilitiesV202PostTest extends TestCase {
+public class CatalogCapabilitiesV202PostTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -82,6 +82,7 @@ public class CatalogCapabilitiesV202PostTest extends TestCase {
     private GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
 
+    @Test
     public void testGetCapabilitiesPostRequest() throws JAXBException {
         try {
             HttpParams params = new BasicHttpParams();

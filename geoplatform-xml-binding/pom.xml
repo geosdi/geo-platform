@@ -13,7 +13,7 @@
     <artifactId>geoplatform-xml-binding</artifactId>
     <version>1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Geo-Platform :: == XML Binding Module</name>
+    <name>Geo-Platform :: == Binding XML Module</name>
 
     <modules>
         <module>geoplatform-gml-binding</module>

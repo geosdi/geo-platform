@@ -14,7 +14,7 @@
     <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == ISO19139 XML Binding Module</name>
+    <name>Geo-Platform :: == Binding ISO19139 XML Module</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>

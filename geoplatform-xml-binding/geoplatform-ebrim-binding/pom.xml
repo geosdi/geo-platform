@@ -15,7 +15,7 @@
     <packaging>jar</packaging>
 
     <!-- ebRIM (Electronic Business Registry Information Model) -->
-    <name>Geo-Platform :: == ebRIM XML Binding Module</name>
+    <name>Geo-Platform :: == Binding ebRIM XML Module</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>

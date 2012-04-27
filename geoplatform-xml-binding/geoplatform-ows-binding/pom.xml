@@ -14,7 +14,7 @@
     <version>1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Geo-Platform :: == OWS XML Binding Module</name>
+    <name>Geo-Platform :: == Binding OWS XML Module</name>
     <url>http://maven.apache.org</url>
 
     <modules>

@@ -65,6 +65,7 @@ import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
 import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
@@ -96,15 +97,14 @@ public class CatalogGetRecordsTest {
     private final static String CSW_HOST = "150.146.160.152";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
     private final static String CSW_HOST_TREVISO = "ows.provinciatreviso.it";
-    private final static String CSW_PATH_TREVISO = "/geonetwork/srv/en/csw";
+    private final static String CSW_PATH_TREVISO = "/geonetwork/srv/it/csw";
+    private final static String CSW_HOST_FIRENZE = "datigis.comune.fi.it";
+    private final static String CSW_PATH_FIRENZE = "/geonetwork/srv/it/csw";
     private final GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
 //    private MarshallerPool pool = CSWMarshallerPool.getInstance();
 //    private Unmarshaller um;
 
-    @Test
-    public void testDeleteMe() {
-    }
     // TODO Uncomment (commented for geotoolkit bug  - "This operation can't be applied to values of class 'CSWVersion'.")
 //    @Test
 //    public void testWithoutConstraint() throws Exception, JAXBException {
@@ -217,7 +217,6 @@ public class CatalogGetRecordsTest {
 //            }
 //        }
 //    }
-
     @Test
     public void testOwnGetRecords()
             throws URISyntaxException, JAXBException,
@@ -236,7 +235,9 @@ public class CatalogGetRecordsTest {
         HttpPost post = new HttpPost(uri);
         post.setParams(params);
 
-
+        /**
+         * GetRecords Request
+         */
         GetRecordsType req = new GetRecordsType();
 
 //        req.setStartPosition(BigInteger.ONE);
@@ -247,27 +248,25 @@ public class CatalogGetRecordsTest {
         // or
         req.setResultType(ResultType.RESULTS);
 
-//        req.setOutputFormat("application/xml");
-        req.setOutputSchema("http://www.isotc211.org/2005/gmd");
-
+        req.setOutputFormat("application/xml");
+        req.setOutputSchema("http://www.opengis.net/cat/csw/2.0.2"); // For obtain AbstractRecord list
+//        req.setOutputSchema("http://www.isotc211.org/2005/gmd"); // For obtain Any list
 
         QueryType query = new QueryType();
 
         List<QName> typNames = new ArrayList<QName>();
-//        typNames.add(TypeNames.valueOf("csw:Recorde")); // count
+//        typNames.add(TypeNames.valueOf("csw:Record")); // count
         // or
         typNames.add(TypeNames.valueOf("gmd:MD_Metadata"));
         query.setTypeNames(typNames);
 
         ElementSetNameType elementSetNameType = new ElementSetNameType();
-        elementSetNameType.setValue(ElementSetType.BRIEF);
-//        elementSetNameType.setValue(ElementSetType.SUMMARY);
+//        elementSetNameType.setValue(ElementSetType.BRIEF);
+        elementSetNameType.setValue(ElementSetType.SUMMARY);
 //        elementSetNameType.setValue(ElementSetType.FULL);
         query.setElementSetName(elementSetNameType);
 
         req.setAbstractQuery(query);
-
-        logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", req);
 
 
         Marshaller m = cswContext.acquireMarshaller();
@@ -282,26 +281,51 @@ public class CatalogGetRecordsTest {
                 GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
 
         post.setEntity(entity);
-        logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", new Scanner(post.getEntity().getContent()).useDelimiter("\\A").next());
+        logger.debug("\n@@@@@@@@@@@@@@@@ GetRecords Request @@@@@@@@@@@@@@@@\n{}\n",
+                new Scanner(post.getEntity().getContent()).useDelimiter("\\A").next());
 
         HttpResponse response = client.execute(post);
         HttpEntity responseEntity = response.getEntity();
         if (responseEntity != null) {
             InputStream is = responseEntity.getContent();
-            logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", new Scanner(is).useDelimiter("\\A").next());
+            // TODO DON'T USE IT BECAUSE ALTER THE INPUT STREAM AND THERE IS A PARSE EXCEPTION IN UNMARSHAL PROCESS
+//            logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", new Scanner(is).useDelimiter("\\A").next());
 
-            // Uncomment for view the error...
-//            Object content = un.unmarshal(is); // TODO Don't fail me!
-//            if (!(content instanceof JAXBElement)) {  // ExceptionReport
-//                logger.error("\n### {}", content);
-//                Assert.fail();
-//            }
-//
-//            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
-//
-//            GetRecordsResponseType getRecords = elementType.getValue();
-//            logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", getRecords);
+            /**
+             * GetRecords Response
+             */
+            Object content = un.unmarshal(is);
+            if (!(content instanceof JAXBElement)) {
+                logger.error("\n#############\n{}", content);
+                Assert.fail();
+            }
 
+            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
+
+            GetRecordsResponseType getRecords = elementType.getValue();
+            logger.trace("\n@@@@@@@@@@@@@@@@ GetRecords Response @@@@@@@@@@@@@@@@\n{}\n", getRecords);
+
+            List<JAXBElement<? extends AbstractRecordType>> records = getRecords.getSearchResults().getAbstractRecord();
+            if (records != null) {
+                logger.debug("\n@@@@@@@@@@@@@@@@ AbstractRecord @@@@@@@@@@@@@@@@\n{}\n", records.size());
+                for (Object record : records) {
+                    logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", record.getClass());
+                    logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", record);
+                }
+            } else {
+                logger.debug("\n@@@@@@@@@@@@@@@@\nNO RESULT\n");
+            }
+
+            List recordsAfter = getRecords.getSearchResults().getAny();
+            if (recordsAfter != null) {
+                logger.debug("\n++++++++++++++++ Any ++++++++++++++++\n{}\n", recordsAfter.size());
+                for (Object record : recordsAfter) {
+                    logger.debug("\n++++++++++++++++\n{}\n", record.getClass());
+                    logger.debug("\n++++++++++++++++\n{}\n", record);
+                }
+            } else {
+                logger.debug("\n++++++++++++++++\nNO RESULT\n");
+            }
 
             EntityUtils.consume(responseEntity);
         }

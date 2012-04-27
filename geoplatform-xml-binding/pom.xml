@@ -66,6 +66,12 @@
             </dependency>
             
             <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-iso19139-binding</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <dependency>
                 <groupId>org.jvnet.jaxb2_commons</groupId>
                 <artifactId>jaxb2-basics-runtime</artifactId>
                 <version>${jaxb2-basics-version}</version>

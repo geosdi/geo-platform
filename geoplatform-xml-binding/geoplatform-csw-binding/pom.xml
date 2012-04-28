@@ -64,16 +64,6 @@
     
     <build>
         <plugins>
-
-			<!-- tell the compiler we can use 1.6 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
@@ -104,7 +94,6 @@
                     </episodes>
                 </configuration>
             </plugin>
-            
         </plugins>
 
 		<!-- TODO: the resources stuff hardcodes paths to source + test directories, 
@@ -127,6 +116,6 @@
                 </includes>
             </resource>
         </resources>
-
-    </build> 
+    </build>
+    
 </project>

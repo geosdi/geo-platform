@@ -15,7 +15,6 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Binding ISO19139 XML Module</name>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
         

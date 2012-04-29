@@ -15,10 +15,8 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Binding GML 3.2.1 XML Module</name>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
-        
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>        
@@ -34,7 +32,6 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
     </dependencies>
   
     <build>
@@ -60,7 +57,6 @@
                     <episode>true</episode>
                 </configuration>
             </plugin>
-            
         </plugins>
 
 		<!-- TODO: the resources stuff hardcodes paths to source + test directories, 

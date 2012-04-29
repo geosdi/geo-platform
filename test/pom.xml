@@ -15,12 +15,6 @@
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == All Tests Module</name>
- 
-    <organization>
-        <name>geoSDI</name>
-        <url>http://www.geosdi.org</url>
-    </organization>
-    <inceptionYear>2010</inceptionYear>
 
     <repositories>
 		<!-- geoSDI -->

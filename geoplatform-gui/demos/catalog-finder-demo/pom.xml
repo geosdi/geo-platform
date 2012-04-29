@@ -15,7 +15,6 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Catalog Finder Widget Demo</name>
-    <url>http://maven.apache.org</url>
   
     <dependencyManagement>
         <dependencies>

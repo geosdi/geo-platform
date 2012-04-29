@@ -15,7 +15,6 @@
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Binding Filter XML Module</name>
-    <url>http://maven.apache.org</url>
 
     <modules>
         <module>filter-1.1.0</module>

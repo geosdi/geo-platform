@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == GeoSDI Framework</name>
+    <url>http://code.google.com/p/geo-platform/</url>
 
     <scm>
         <connection>scm:svn:https://geo-platform.googlecode.com/svn/trunk</connection>

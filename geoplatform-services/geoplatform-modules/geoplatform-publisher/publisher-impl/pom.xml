@@ -15,7 +15,6 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Publish Module Implementation</name>
-    <url>http://maven.apache.org</url>
 
     <repositories>
          <!-- GEOTOOLKIT -->

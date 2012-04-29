@@ -16,10 +16,8 @@
 
     <!-- ebRIM (Electronic Business Registry Information Model) -->
     <name>Geo-Platform :: == Binding ebRIM XML Module</name>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
-        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-csw-binding</artifactId>

@@ -124,8 +124,6 @@
         <jaxb2-basics-version>0.6.3</jaxb2-basics-version>
     </properties>
 
-    <issueManagement />
-
 	<!-- This for Hudson -->
     <ciManagement />
 

@@ -262,7 +262,10 @@
         </developer>
     </developers>
 
-    <issueManagement />
+    <issueManagement>
+        <system>JIRA</system>
+        <url>http://150.146.160.64/</url>
+    </issueManagement>
 
 	<!-- This for Hudson -->
     <ciManagement />

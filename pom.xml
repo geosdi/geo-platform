@@ -267,8 +267,10 @@
         <url>http://150.146.160.64/</url>
     </issueManagement>
 
-	<!-- This for Hudson -->
-    <ciManagement />
+    <ciManagement>
+        <system>hudson</system>
+        <url>http://hudson.geosdi.org/job/geoplatform-trunk/</url>
+    </ciManagement>
 
     <dependencyManagement>
         <dependencies>

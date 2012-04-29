@@ -26,7 +26,6 @@
     
     <dependencyManagement>
         <dependencies>
-            
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>core</artifactId>
@@ -76,7 +75,6 @@
                 <artifactId>jaxb2-basics-runtime</artifactId>
                 <version>${jaxb2-basics-version}</version>
             </dependency>
-            
         </dependencies>
     </dependencyManagement>
     
@@ -115,7 +113,6 @@
                         </plugins>
                     </configuration>
                 </plugin>
-                
             </plugins>
         </pluginManagement>
     </build>
@@ -123,8 +120,5 @@
     <properties>
         <jaxb2-basics-version>0.6.3</jaxb2-basics-version>
     </properties>
-
-	<!-- This for Hudson -->
-    <ciManagement />
 
 </project>

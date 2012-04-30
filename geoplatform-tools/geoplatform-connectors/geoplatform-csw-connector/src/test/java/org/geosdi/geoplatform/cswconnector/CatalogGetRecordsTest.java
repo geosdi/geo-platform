@@ -64,6 +64,7 @@ import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
 import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
@@ -254,9 +255,9 @@ public class CatalogGetRecordsTest {
         QueryType query = new QueryType();
 
         List<QName> typNames = new ArrayList<QName>();
-//        typNames.add(TypeNames.valueOf("csw:Record")); // count
+//        typNames.add(TypeName.RECORD.getQName()); // count
         // or
-        typNames.add(TypeNames.valueOf("gmd:MD_Metadata"));
+        typNames.add(TypeName.METADATA.getQName());
         query.setTypeNames(typNames);
 
         ElementSetNameType elementSetNameType = new ElementSetNameType();
@@ -308,7 +309,7 @@ public class CatalogGetRecordsTest {
             if (records != null) {
                 logger.debug("\n@@@@@@@@@@@@@@@@ AbstractRecord @@@@@@@@@@@@@@@@\n{}\n", records.size());
                 for (Object record : records) {
-                    logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", record.getClass());
+                    logger.debug("\n@@@@@@@@@@@@@@@@ {}", record.getClass());
                     logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", record);
                 }
             } else {
@@ -319,7 +320,7 @@ public class CatalogGetRecordsTest {
             if (recordsAfter != null) {
                 logger.debug("\n++++++++++++++++ Any ++++++++++++++++\n{}\n", recordsAfter.size());
                 for (Object record : recordsAfter) {
-                    logger.debug("\n++++++++++++++++\n{}\n", record.getClass());
+                    logger.debug("\n++++++++++++++++ {}", record.getClass());
                     logger.debug("\n++++++++++++++++\n{}\n", record);
                 }
             } else {

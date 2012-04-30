@@ -37,15 +37,105 @@ package org.geosdi.geoplatform.cswconnector.server.request;
 
 import java.net.URISyntaxException;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.xml.csw.TypeName;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
+import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T> {
+public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
+        implements CatalogGetRecordsRequest {
+
+//    protected final String version;
+    // TODO Filter request
+//    private String constraint;
+//    private String constraintLanguage;
+//    private String constraintLanguageVersion;
+    private Integer maxRecords;
+    private Integer startPosition;
+    private String outputFormat;
+    private String outputSchema;
+    private ResultType resultType;
+    private ElementSetType elementSetName;
+    private TypeName typeName;
 
     public CatalogGetRecords(GPServerConnector server) throws URISyntaxException {
         super(server);
+    }
+
+    public Integer getMaxRecords() {
+        return maxRecords;
+    }
+
+    public void setMaxRecords(Integer maxRecords) {
+        this.maxRecords = maxRecords;
+    }
+
+    public Integer getStartPosition() {
+        return startPosition;
+    }
+
+    public void setStartPosition(Integer startPosition) {
+        this.startPosition = startPosition;
+    }
+
+    public String getOutputFormat() {
+        return outputFormat;
+    }
+
+    public void setOutputFormat(String outputFormat) {
+        this.outputFormat = outputFormat;
+    }
+
+    public String getOutputSchema() {
+        return outputSchema;
+    }
+
+    public void setOutputSchema(String outputSchema) {
+        this.outputSchema = outputSchema;
+    }
+
+    public ResultType getResultType() {
+        return resultType;
+    }
+
+    public void setResultType(ResultType resultType) {
+        this.resultType = resultType;
+    }
+
+    public ElementSetType getElementSetName() {
+        return elementSetName;
+    }
+
+    public void setElementSetName(ElementSetType elementSetName) {
+        this.elementSetName = elementSetName;
+    }
+
+    public TypeName getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(TypeName typeName) {
+        this.typeName = typeName;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append("{");
+//        str.append().append();
+//        str.append().append();
+//        str.append().append();
+//        str.append().append();
+        str.append("maxRecords=").append(maxRecords);
+        str.append(", startPosition=").append(startPosition);
+        str.append(", outputFormat=").append(outputFormat);
+        str.append(", outputSchema=").append(outputSchema);
+        str.append(", resultType=").append(resultType);
+        str.append(", elementSetName=").append(elementSetName);
+        str.append(", typeName=").append(typeName);
+        return str.append("}").toString();
     }
 }

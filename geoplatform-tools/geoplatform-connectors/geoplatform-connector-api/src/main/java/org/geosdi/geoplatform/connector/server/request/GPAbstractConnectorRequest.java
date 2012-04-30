@@ -38,6 +38,10 @@ package org.geosdi.geoplatform.connector.server.request;
 import java.net.URI;
 import java.net.URISyntaxException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
@@ -65,6 +69,24 @@ public abstract class GPAbstractConnectorRequest<T>
         this.clientConnection = theClientConnection;
         this.serverURI = theServerURI;
         this.securityConnector = theSecurityConnector;
+    }
+
+    /**
+     * Setting basic configuration for HttpParams
+     * <p/>
+     */
+    protected void prepareHttpParams() {
+        HttpParams httpParams = this.clientConnection.getParams();
+
+        httpParams.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
+                GeoPlatformHTTP.CONTENT_TYPE_XML);
+
+        httpParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET,
+                "UTF-8");
+
+        HttpConnectionParams.setConnectionTimeout(httpParams,
+                10);
+        HttpConnectionParams.setSoTimeout(httpParams, 10);
     }
 
     @Override

@@ -48,6 +48,6 @@ public interface GPConnectorRequest<T> {
     URI getURI();
 
     T getResponseEntity();
-    
+
     HttpClient getClientConnection();
 }

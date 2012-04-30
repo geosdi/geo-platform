@@ -60,5 +60,6 @@
     <bean id="objectIdentityDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclObjectIdentityDAOImpl" />
     <bean id="sidDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclSidDAOImpl" />
     <bean id="guiComponentDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.GuiComponentDAOImpl" />
+    <bean id="gpAccessInfoDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAccessInfoDAOImpl" />
 
 </beans>

@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
+import org.geosdi.geoplatform.core.dao.GPAccessInfoDAO;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
@@ -53,6 +54,7 @@ import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
+import org.geosdi.geoplatform.core.model.GPAccessInfo;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -127,8 +129,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private GPSchedulerService schedulerService;
     //
     private GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
+    //
+    private GPAccessInfoDAO gpAccessInfoDao;
+    
 
-    public GeoPlatformServiceImpl() {
+	public GeoPlatformServiceImpl() {
         accountServiceDelegate = new AccountServiceImpl();
         projectServiceDelegate = new ProjectServiceImpl();
         folderServiceDelegate = new FolderServiceImpl();
@@ -285,6 +290,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.gpPooledPBEStringEncryptor = gpPooledPBEStringEncryptor;
         this.accountServiceDelegate.setGpPooledPBEStringEncryptor(gpPooledPBEStringEncryptor);
     }
+    
+    public GPAccessInfoDAO getGpAccessInfoDao() {
+		return gpAccessInfoDao;
+	}
+
+	public void setGpAccessInfoDao(GPAccessInfoDAO gpAccessInfoDao) {
+		this.gpAccessInfoDao = gpAccessInfoDao;
+	}
+	
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Account">
@@ -877,4 +891,16 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         return this.aclServiceDelegate.saveRole(role);
     }
     //</editor-fold>
+
+	@Override
+	public Long insertGPAccessInfo(GPAccessInfo access) {
+		gpAccessInfoDao.persist(access);
+		return access.getId();
+	}
+
+	@Override
+	public GPAccessInfo getGPAccessInfoByLayerNameAndGsUser(String layerName,
+			String gsUser) {
+		return gpAccessInfoDao.findByLayerNameAndGsUser(layerName, gsUser);
+	}
 }

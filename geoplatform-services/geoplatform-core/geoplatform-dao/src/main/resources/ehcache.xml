@@ -85,6 +85,11 @@
 		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU" />
+    
+    <cache name="gp_access_info" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
+		memoryStoreEvictionPolicy="LRU" />
                 
 
                                 <!-- Hibernate -->

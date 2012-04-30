@@ -28,5 +28,8 @@
         <mapping  class="org.geosdi.geoplatform.core.acl.AclObjectIdentity"/>
         <mapping  class="org.geosdi.geoplatform.core.acl.AclEntry"/>
         <mapping  class="org.geosdi.geoplatform.core.acl.GuiComponent"/>
+        
+        <!-- GP ACCESS INFO -->
+        <mapping  class="org.geosdi.geoplatform.core.model.GPAccessInfo"/>
     </session-factory>
 </hibernate-configuration>

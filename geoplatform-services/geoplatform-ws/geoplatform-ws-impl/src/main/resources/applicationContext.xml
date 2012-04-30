@@ -42,6 +42,9 @@
         <property name="schedulerService" ref="schedulerService" />
         
         <property name="gpPooledPBEStringEncryptor" ref="gpPooledPBEStringEncryptor" />
+        
+        <!-- GP ACCESS INFO -->
+        <property name="gpAccessInfoDao" ref="gpAccessInfoDAO" />
     </bean>
 
 	<!--===================================================================== -->        

@@ -68,6 +68,9 @@
         <class>org.geosdi.geoplatform.core.acl.AclObjectIdentity</class>
         <class>org.geosdi.geoplatform.core.acl.AclEntry</class>
         <class>org.geosdi.geoplatform.core.acl.GuiComponent</class>
+        
+        <!-- GP ACCESS INFO  -->
+        <class>org.geosdi.geoplatform.core.model.GPAccessInfo</class> 
     </persistence-unit>
 
 </persistence>

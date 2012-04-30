@@ -41,7 +41,10 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 import javax.xml.bind.JAXBElement;
@@ -74,11 +77,6 @@ import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
-import org.geosdi.geoplatform.xml.filter.v110.FilterType;
-import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
-import org.geosdi.geoplatform.xml.filter.v110.ObjectFactory;
-import org.geosdi.geoplatform.xml.filter.v110.PropertyIsLikeType;
-import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
 //import org.geotoolkit.csw.GetRecordsRequest;
 //import org.geotoolkit.csw.xml.CSWMarshallerPool;
 //import org.geotoolkit.csw.xml.ElementSetType;
@@ -341,37 +339,47 @@ public class CatalogGetRecordsTest {
         /**
          * Filter
          */
-        FilterType filterType = new FilterType();
-
-        PropertyIsLikeType propertyIsLikeType = new PropertyIsLikeType();
-        propertyIsLikeType.setWildCard("%");
-        propertyIsLikeType.setSingleChar(".");
-        propertyIsLikeType.setEscapeChar("\\");
-
-        List<Object> nameList = new ArrayList<Object>(1);
-        nameList.add("AnyText");
-        PropertyNameType propertyNameType = new PropertyNameType();
-        propertyNameType.setContent(nameList);
-        propertyIsLikeType.setPropertyName(propertyNameType);
-
-        List<Object> literalList = new ArrayList<Object>(1);
-        literalList.add("%venezia%");
-        LiteralType literalType = new LiteralType();
-        literalType.setContent(literalList);
-        propertyIsLikeType.setLiteral(literalType);
-
-        ObjectFactory filterFactory = new ObjectFactory();
-        filterType.setComparisonOps(filterFactory.createPropertyIsLike(propertyIsLikeType));
-
+//        PropertyIsLikeType propertyIsLikeType = new PropertyIsLikeType();
+//        propertyIsLikeType.setWildCard("%");
+//        propertyIsLikeType.setSingleChar(".");
+//        propertyIsLikeType.setEscapeChar("\\");
+//
+//        List<Object> nameList = new ArrayList<Object>(1);
+//        nameList.add("AnyText");
+//        PropertyNameType propertyNameType = new PropertyNameType();
+//        propertyNameType.setContent(nameList);
+//        propertyIsLikeType.setPropertyName(propertyNameType);
+//
+//        List<Object> literalList = new ArrayList<Object>(1);
+//        literalList.add("%venezia%");
+//        LiteralType literalType = new LiteralType();
+//        literalType.setContent(literalList);
+//        propertyIsLikeType.setLiteral(literalType);
+//
+//        ObjectFactory filterFactory = new ObjectFactory();
+//        JAXBElement<PropertyIsLikeType> propertyIsLike = filterFactory.createPropertyIsLike(propertyIsLikeType);
+//
+//        FilterType filterType = new FilterType();
+//        filterType.setComparisonOps(propertyIsLike);
 //        filterType.setSpatialOps(null); // TODO
-
-
-
         QueryConstraintType queryConstraintType = new QueryConstraintType();
         queryConstraintType.setVersion("1.1.0");
-        queryConstraintType.setFilter(filterType);
-//        queryConstraintType.setCqlText("...."); //
 
+        // CONSTRAINTLANGUAGE = FILTER
+//        queryConstraintType.setFilter(filterType);
+        // or
+        // CONSTRAINTLANGUAGE = CQL_TEXT
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
+        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+
+        StringBuilder constraint = new StringBuilder();
+        constraint.append("AnyText LIKE '%venezia%'");
+        constraint.append(" AND ");
+        constraint.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
+        constraint.append(" AND ");
+        constraint.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
+        queryConstraintType.setCqlText(constraint.toString());
 
         query.setConstraint(queryConstraintType);
 

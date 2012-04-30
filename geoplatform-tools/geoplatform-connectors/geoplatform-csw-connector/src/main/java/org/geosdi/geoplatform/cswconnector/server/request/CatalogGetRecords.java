@@ -33,25 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.cswconnector.server.request;
+
+import java.net.URISyntaxException;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPCatalogVersion {
+public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T> {
 
-    V202("2.0.2");
-    //
-    private String code;
-
-    GPCatalogVersion(String theCode) {
-        this.code = theCode;
-    }
-
-    @Override
-    public String toString() {
-        return this.code.toString();
+    public CatalogGetRecords(GPServerConnector server) throws URISyntaxException {
+        super(server);
     }
 }

@@ -33,24 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server;
+package org.geosdi.geoplatform.cswconnector.server.request;
 
-import java.net.URL;
+import java.net.URISyntaxException;
+import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.GPAbstractConnectorRequest;
+import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPAbstractServer implements GPServer {
+public abstract class CatalogCSWRequest<T> extends GPAbstractConnectorRequest<T> {
 
-    protected final URL url;
-
-    protected GPAbstractServer(URL theUrl) {
-        this.url = theUrl;
+    static {
+        cswContext = GeoPlatformJAXBContextRepository.getProvider(
+                CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     }
+    //
+    protected static final GPConnectorJAXBContext cswContext;
 
-    @Override
-    public URL getURL() {
-        return url;
+    public CatalogCSWRequest(GPServerConnector server) throws URISyntaxException {
+        super(server);
     }
 }

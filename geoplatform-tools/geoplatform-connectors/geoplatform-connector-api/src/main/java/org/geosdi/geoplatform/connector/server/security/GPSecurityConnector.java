@@ -33,15 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server;
-
-import java.net.URL;
+package org.geosdi.geoplatform.connector.server.security;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
+ * 
+ * TODO : Must define all methods for this Interface based 
+ *        on HttpClients library
  */
-public interface GPServer {
-
-    URL getURL();
+public interface GPSecurityConnector {
 }

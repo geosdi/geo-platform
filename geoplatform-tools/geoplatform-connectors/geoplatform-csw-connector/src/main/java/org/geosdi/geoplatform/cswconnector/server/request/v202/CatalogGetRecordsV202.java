@@ -33,25 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.cswconnector.server.request.v202;
+
+import java.net.URISyntaxException;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecords;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPCatalogVersion {
+public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseType> {
 
-    V202("2.0.2");
-    //
-    private String code;
-
-    GPCatalogVersion(String theCode) {
-        this.code = theCode;
+    public CatalogGetRecordsV202(GPServerConnector server) throws URISyntaxException {
+        super(server);
     }
 
-    @Override
-    public String toString() {
-        return this.code.toString();
+    public GetRecordsResponseType getResponseEntity() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

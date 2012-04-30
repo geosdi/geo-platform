@@ -33,25 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.server;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import org.apache.http.client.HttpClient;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public enum GPCatalogVersion {
+public interface GPServerConnector {
 
-    V202("2.0.2");
-    //
-    private String code;
+    URL getURL();
 
-    GPCatalogVersion(String theCode) {
-        this.code = theCode;
-    }
+    URI getURI() throws URISyntaxException;
+    
+    HttpClient getClientConnection();
 
-    @Override
-    public String toString() {
-        return this.code.toString();
-    }
+    GPSecurityConnector getSecurityConnector();
 }

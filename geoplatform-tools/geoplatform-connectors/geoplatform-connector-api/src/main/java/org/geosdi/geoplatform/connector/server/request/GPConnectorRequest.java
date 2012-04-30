@@ -33,25 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.server.request;
+
+import java.net.URI;
+import org.apache.http.client.HttpClient;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPCatalogVersion {
+public interface GPConnectorRequest<T> {
 
-    V202("2.0.2");
-    //
-    private String code;
+    URI getURI();
 
-    GPCatalogVersion(String theCode) {
-        this.code = theCode;
-    }
-
-    @Override
-    public String toString() {
-        return this.code.toString();
-    }
+    T getResponseEntity();
+    
+    HttpClient getClientConnection();
 }

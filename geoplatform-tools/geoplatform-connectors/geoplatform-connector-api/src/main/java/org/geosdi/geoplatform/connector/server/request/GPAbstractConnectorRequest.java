@@ -33,25 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.server.request;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import org.apache.http.client.HttpClient;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPCatalogVersion {
+public abstract class GPAbstractConnectorRequest<T>
+        implements GPConnectorRequest<T> {
 
-    V202("2.0.2");
-    //
-    private String code;
+    protected final URI serverURI;
+    protected final GPSecurityConnector securityConnector;
+    protected final HttpClient clientConnection;
 
-    GPCatalogVersion(String theCode) {
-        this.code = theCode;
+    public GPAbstractConnectorRequest(GPServerConnector server)
+            throws URISyntaxException {
+        this(server.getClientConnection(), server.getURI(),
+                server.getSecurityConnector());
+    }
+
+    public GPAbstractConnectorRequest(HttpClient theClientConnection,
+            URI theServerURI, GPSecurityConnector theSecurityConnector) {
+
+        this.clientConnection = theClientConnection;
+        this.serverURI = theServerURI;
+        this.securityConnector = theSecurityConnector;
     }
 
     @Override
-    public String toString() {
-        return this.code.toString();
+    public URI getURI() {
+        return this.serverURI;
+    }
+
+    @Override
+    public HttpClient getClientConnection() {
+        return this.clientConnection;
     }
 }

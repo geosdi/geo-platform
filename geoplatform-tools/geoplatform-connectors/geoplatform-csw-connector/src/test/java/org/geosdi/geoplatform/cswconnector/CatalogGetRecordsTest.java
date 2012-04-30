@@ -70,9 +70,15 @@ import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
+import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
-import org.geotoolkit.csw.xml.TypeNames;
+import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
+import org.geosdi.geoplatform.xml.filter.v110.FilterType;
+import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
+import org.geosdi.geoplatform.xml.filter.v110.ObjectFactory;
+import org.geosdi.geoplatform.xml.filter.v110.PropertyIsLikeType;
+import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
 //import org.geotoolkit.csw.GetRecordsRequest;
 //import org.geotoolkit.csw.xml.CSWMarshallerPool;
 //import org.geotoolkit.csw.xml.ElementSetType;
@@ -238,36 +244,7 @@ public class CatalogGetRecordsTest {
         /**
          * GetRecords Request
          */
-        GetRecordsType req = new GetRecordsType();
-
-//        req.setStartPosition(BigInteger.ONE);
-//        req.setMaxRecords(BigInteger.valueOf(1)); //
-//        req.setMaxRecords(BigInteger.TEN);
-
-//        req.setResultType(ResultType.HITS); // count
-        // or
-        req.setResultType(ResultType.RESULTS);
-
-        req.setOutputFormat("application/xml");
-        req.setOutputSchema("http://www.opengis.net/cat/csw/2.0.2"); // For obtain AbstractRecord list
-//        req.setOutputSchema("http://www.isotc211.org/2005/gmd"); // For obtain Any list
-
-        QueryType query = new QueryType();
-
-        List<QName> typNames = new ArrayList<QName>();
-//        typNames.add(TypeName.RECORD.getQName()); // count
-        // or
-        typNames.add(TypeName.METADATA.getQName());
-        query.setTypeNames(typNames);
-
-        ElementSetNameType elementSetNameType = new ElementSetNameType();
-//        elementSetNameType.setValue(ElementSetType.BRIEF);
-        elementSetNameType.setValue(ElementSetType.SUMMARY);
-//        elementSetNameType.setValue(ElementSetType.FULL);
-        query.setElementSetName(elementSetNameType);
-
-        req.setAbstractQuery(query);
-
+        GetRecordsType req = this.createGetRequest();
 
         Marshaller m = cswContext.acquireMarshaller();
         Unmarshaller un = cswContext.acquireUnmarshaller();
@@ -308,9 +285,9 @@ public class CatalogGetRecordsTest {
             List<JAXBElement<? extends AbstractRecordType>> records = getRecords.getSearchResults().getAbstractRecord();
             if (records != null) {
                 logger.debug("\n@@@@@@@@@@@@@@@@ AbstractRecord @@@@@@@@@@@@@@@@\n{}\n", records.size());
-                for (Object record : records) {
-                    logger.debug("\n@@@@@@@@@@@@@@@@ {}", record.getClass());
-                    logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", record);
+                for (JAXBElement<? extends AbstractRecordType> record : records) {
+                    SummaryRecordType r = (SummaryRecordType) record.getValue();
+                    logger.debug("@@@@@@@@@@@@@@@@\n{}\n", r);
                 }
             } else {
                 logger.debug("\n@@@@@@@@@@@@@@@@\nNO RESULT\n");
@@ -329,5 +306,76 @@ public class CatalogGetRecordsTest {
 
             EntityUtils.consume(responseEntity);
         }
+    }
+
+    private GetRecordsType createGetRequest() {
+        GetRecordsType req = new GetRecordsType();
+
+//        req.setStartPosition(BigInteger.ONE);
+//        req.setMaxRecords(BigInteger.valueOf(1)); //
+//        req.setMaxRecords(BigInteger.TEN);
+
+//        req.setResultType(ResultType.HITS); // count
+        // or
+        req.setResultType(ResultType.RESULTS);
+
+        req.setOutputFormat("application/xml");
+        req.setOutputSchema("http://www.opengis.net/cat/csw/2.0.2"); // For obtain AbstractRecord list
+//        req.setOutputSchema("http://www.isotc211.org/2005/gmd"); // For obtain Any list
+
+        QueryType query = new QueryType();
+        req.setAbstractQuery(query);
+
+        List<QName> typNames = new ArrayList<QName>();
+//        typNames.add(TypeName.RECORD.getQName()); // count
+        // or
+        typNames.add(TypeName.METADATA.getQName());
+        query.setTypeNames(typNames);
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+//        elementSetNameType.setValue(ElementSetType.BRIEF);
+        elementSetNameType.setValue(ElementSetType.SUMMARY);
+//        elementSetNameType.setValue(ElementSetType.FULL);
+        query.setElementSetName(elementSetNameType);
+
+        /**
+         * Filter
+         */
+        FilterType filterType = new FilterType();
+
+        PropertyIsLikeType propertyIsLikeType = new PropertyIsLikeType();
+        propertyIsLikeType.setWildCard("%");
+        propertyIsLikeType.setSingleChar(".");
+        propertyIsLikeType.setEscapeChar("\\");
+
+        List<Object> nameList = new ArrayList<Object>(1);
+        nameList.add("AnyText");
+        PropertyNameType propertyNameType = new PropertyNameType();
+        propertyNameType.setContent(nameList);
+        propertyIsLikeType.setPropertyName(propertyNameType);
+
+        List<Object> literalList = new ArrayList<Object>(1);
+        literalList.add("%venezia%");
+        LiteralType literalType = new LiteralType();
+        literalType.setContent(literalList);
+        propertyIsLikeType.setLiteral(literalType);
+
+        ObjectFactory filterFactory = new ObjectFactory();
+        filterType.setComparisonOps(filterFactory.createPropertyIsLike(propertyIsLikeType));
+
+//        filterType.setSpatialOps(null); // TODO
+
+
+
+        QueryConstraintType queryConstraintType = new QueryConstraintType();
+        queryConstraintType.setVersion("1.1.0");
+        queryConstraintType.setFilter(filterType);
+//        queryConstraintType.setCqlText("...."); //
+
+
+        query.setConstraint(queryConstraintType);
+
+
+        return req;
     }
 }

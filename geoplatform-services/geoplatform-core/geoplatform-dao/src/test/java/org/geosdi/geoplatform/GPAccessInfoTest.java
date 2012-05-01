@@ -39,11 +39,14 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.geosdi.geoplatform.core.dao.GSAccountDAO;
 import org.geosdi.geoplatform.core.dao.GSResourceDAO;
+import org.geosdi.geoplatform.core.model.GPProject;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GSAccount;
 import org.geosdi.geoplatform.core.model.GSResource;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
@@ -51,8 +54,13 @@ import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
+ */
 public class GPAccessInfoTest extends BaseDAOTest {
 
+    private final String gsAccountUserName = "gsuser";
     @Autowired
     protected GSAccountDAO gsAccountDAO;
     @Autowired
@@ -61,10 +69,17 @@ public class GPAccessInfoTest extends BaseDAOTest {
     @Test
     public void insertGPAccessInfoTest() {
         this.removeAllGSAccounts();
-        GSAccount account = this.generateGSAccount("francesco");
-        GSResource resource = this.generateResource(account);
-        this.gsAccountDAO.persist(account);
+        GSAccount gsAccount = this.generateGSAccount(this.gsAccountUserName);
+        GSResource resource = this.generateResource(gsAccount);
+        GPUser gpUser = this.insertUser(this.gsAccountUserName, GPRole.ADMIN, GPRole.USER);
+        GPProject gpUserProject = this.createProject("gp_user_project", true, 0,
+                                               new Date(System.currentTimeMillis()));
+        projectDAO.persist(gpUserProject);
+        gpUser.setDefaultProjectID(gpUserProject.getId());
+        gpUser.setGsAccount(gsAccount);
+        this.gsAccountDAO.persist(gsAccount);
         this.gsResourceDAO.persist(resource);
+        accountDAO.merge(gpUser);
     }
 
     private GSAccount generateGSAccount(String userName) {

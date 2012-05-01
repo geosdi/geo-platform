@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayerBuilder;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -73,12 +72,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
     public WMS buildRaster(GPRasterBean rasterBean) {
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
-        rasterBean.getDataSource();
-        String authkey = Registry.get(GlobalRegistryEnum.AUTH_KEY.getValue());
-        String authkeyTuple = GSAuthKeyManager.getAuthKeyTuple();
-        if (!authkeyTuple.equalsIgnoreCase("")) {
-            wmsParams.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authkey);
-        }
+        this.addAuthTuple(wmsParams);
         wmsParams.setLayers(rasterBean.getName());
         if (!rasterBean.getStyles().isEmpty()) {
             wmsParams.setStyles(rasterBean.getStyles().get(0).getStyleString());
@@ -123,6 +117,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
     public WMS buildVector(GPVectorBean vectorBean) {
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
+        this.addAuthTuple(wmsParams);
         wmsParams.setLayers(vectorBean.getName());
         wmsParams.setStyles("");
         wmsParams.setIsTransparent(true);
@@ -151,5 +146,12 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         dataSource = dataSource.replaceAll("wfs", "wms");
 
         return new WMS(vectorBean.getLabel(), dataSource, wmsParams, wmsOption);
+    }
+
+    private void addAuthTuple(WMSParams wmsParams) {
+        String authkey = Registry.get(GlobalRegistryEnum.AUTH_KEY.getValue());
+        if (authkey != null) {
+            wmsParams.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authkey);
+        }
     }
 }

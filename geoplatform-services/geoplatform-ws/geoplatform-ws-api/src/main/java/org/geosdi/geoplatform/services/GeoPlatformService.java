@@ -698,7 +698,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/wms/capabilities/{id}")
     @WebResult(name = "Capabilities")
     ServerDTO getCapabilities(@WebParam(name = "request") RequestByID request,
-            @WebParam(name = "token") String token)
+            @WebParam(name = "token") String token, @WebParam(name = "authkey") String authkey)
             throws ResourceNotFoundFault;
 
     @Post

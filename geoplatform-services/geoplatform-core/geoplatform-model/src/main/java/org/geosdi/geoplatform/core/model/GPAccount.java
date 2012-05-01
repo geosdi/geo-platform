@@ -40,22 +40,11 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
@@ -94,6 +83,9 @@ public abstract class GPAccount implements Serializable {
     @Column(name = "account_non_expired")
     private boolean accountNonExpired = true;
     //
+    @ManyToOne(optional = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GSAccount gsAccount;
     @Transient
     private Boolean accountNonLocked;
     //
@@ -123,7 +115,7 @@ public abstract class GPAccount implements Serializable {
 
     /**
      * @param id
-     *            the id to set
+     * the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -138,7 +130,7 @@ public abstract class GPAccount implements Serializable {
 
     /**
      * @param enabled
-     *            the enabled to set
+     * the enabled to set
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
@@ -153,7 +145,7 @@ public abstract class GPAccount implements Serializable {
 
     /**
      * @param creationDate
-     *          the creationDate to set
+     * the creationDate to set
      */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
@@ -182,10 +174,24 @@ public abstract class GPAccount implements Serializable {
 
     /**
      * @param accountNonExpired
-     *          the accountNonExpired to set
+     * the accountNonExpired to set
      */
     public void setAccountNonExpired(boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
+    }
+
+    /**
+     * @return the gsAccount
+     */
+    public GSAccount getGsAccount() {
+        return gsAccount;
+    }
+
+    /**
+     * @param gsAccount the gsAccount to set
+     */
+    public void setGsAccount(GSAccount gsAccount) {
+        this.gsAccount = gsAccount;
     }
 
     public boolean isAccountNonLocked() {
@@ -213,7 +219,7 @@ public abstract class GPAccount implements Serializable {
 
     /**
      * @param authorities
-     *          the authorities to set
+     * the authorities to set
      */
     public void setGPAuthorities(List<GPAuthority> authorities) {
         this.authorities = authorities;
@@ -235,6 +241,7 @@ public abstract class GPAccount implements Serializable {
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -258,6 +265,7 @@ public abstract class GPAccount implements Serializable {
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -277,6 +285,7 @@ public abstract class GPAccount implements Serializable {
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override

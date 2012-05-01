@@ -74,7 +74,7 @@ import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
@@ -89,7 +89,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     /**
      * @Constructor
-     * @param theGridWidget 
+     * @param theGridWidget
      */
     public DisplayServerWidget(GridLayersWidget theGridWidget) {
         TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE, this);
@@ -198,6 +198,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     /**
      * Set the correct Status Iconn Style
+     *
      * @param status
      * @param message
      */
@@ -247,7 +248,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     }
 
     /**
-     * 
+     *
      * @param selected
      */
     private void changeSelection(GPServerBeanModel selected) {
@@ -260,8 +261,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     }
 
     /**
-     * 
-     * @param server 
+     *
+     * @param server
      */
     public void addServer(GPServerBeanModel server) {
         this.store.add(server);
@@ -270,10 +271,10 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     /**
      * Verify if the Server Url is already present in Store
-     * 
+     *
      * @param urlServer
-     * @return 
-     *         boolean
+     * @return
+     * boolean
      */
     public GPServerBeanModel containsServer(String urlServer) {
         for (GPServerBeanModel server : store.getModels()) {
@@ -292,8 +293,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     }
 
     /**
-     * 
-     * @param layers 
+     *
+     * @param layers
      */
     private void fillGrid(ArrayList<? extends GPLayerGrid> layers) {
         gridWidget.unMaskGrid();
@@ -305,7 +306,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     /**
      * Internal class
-     * 
+     *
      */
     private class PerformGetcapabilities implements IGPOAuth2CapabilitiesHandler {
 
@@ -349,8 +350,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                         }
 
                         @Override
-                        public void onSuccess(
-                                ArrayList<? extends GPLayerGrid> result) {
+                        public void onSuccess(ArrayList<? extends GPLayerGrid> result) {
                             selectedServer.setLayers(result);
                             fillGrid(result);
                         }

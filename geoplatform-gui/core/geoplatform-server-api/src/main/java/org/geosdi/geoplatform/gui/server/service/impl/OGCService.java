@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.geosdi.geoplatform.core.model.GSAccount;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -60,7 +61,7 @@ import org.springframework.stereotype.Service;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Service(value = "ogcService")
 public class OGCService implements IOGCService {
@@ -115,13 +116,19 @@ public class OGCService implements IOGCService {
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
 
             RequestByID req = new RequestByID(idServer);
-
-            ServerDTO server = geoPlatformServiceClient.getCapabilities(req, token);
+            GSAccount gsAccount = this.sessionUtility.getLoggedAccount(httpServletRequest).getGsAccount();
+            String authKey = null;
+            if (gsAccount != null) {
+                authKey = gsAccount.getAuthkey();
+            }
+            ServerDTO server = geoPlatformServiceClient.getCapabilities(req, token, authKey);
 
             return dtoServerConverter.createRasterLayerList(server.getLayerList());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error GetCapabilities: " + ex);
             throw new GeoPlatformException(ex.getMessage());
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
         }
     }
 
@@ -141,14 +148,14 @@ public class OGCService implements IOGCService {
     @Override
     public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        
+
         try {
             Long projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
             return geoPlatformServiceClient.getLayersDataSourceByProjectID(projectId);
         } catch (ResourceNotFoundFault e) {
             throw new GeoPlatformException("Error in findDistinctLayersDataSource: ResourceNotFoundFault "
                     + e);
-        } catch(GPSessionTimeout timeout) {
+        } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
     }

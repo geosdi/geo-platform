@@ -43,5 +43,5 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface MapRemoteAsync {
 
-    public void layerAuthenticate(String userName, String password, String url, AsyncCallback<String> callback);
+//    public void layerAuthenticate(String userName, String password, String url, AsyncCallback<String> callback);
 }

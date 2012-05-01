@@ -76,7 +76,7 @@ public class SecurityService implements ISecurityService {
 
     @Override
     public IGPAccountDetail userLogin(String userName, String password,
-                                      HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user = null;
         GuiComponentsPermissionMapData guiComponentPermission = null;
@@ -88,7 +88,7 @@ public class SecurityService implements ISecurityService {
                     user.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
-                         "Unable to find user with username: " + userName
+                    "Unable to find user with username: " + userName
                     + " Error: " + ex);
             throw new GeoPlatformException("Unable to find user with username: "
                     + userName);
@@ -111,8 +111,8 @@ public class SecurityService implements ISecurityService {
         }
 
         this.sessionUtility.storeLoggedAccountAndDefaultProject(user,
-                                                                user.getDefaultProjectID(),
-                                                                httpServletRequest);
+                user.getDefaultProjectID(),
+                httpServletRequest);
 
         IGPAccountDetail userDetail = this.convertAccountToDTO(user);
 
@@ -123,7 +123,7 @@ public class SecurityService implements ISecurityService {
 
     @Override
     public IGPAccountDetail applicationLogin(String appID,
-                                             HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPApplication application = null;
         GuiComponentsPermissionMapData guiComponentPermission = null;
@@ -134,7 +134,7 @@ public class SecurityService implements ISecurityService {
                     application.getAppID());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
-                         "Unable to find application with appID: " + appID
+                    "Unable to find application with appID: " + appID
                     + " Error: " + ex);
             throw new GeoPlatformException("Unable to find application with appID: "
                     + appID);
@@ -151,8 +151,8 @@ public class SecurityService implements ISecurityService {
         }
 
         this.sessionUtility.storeLoggedAccountAndDefaultProject(application,
-                                                                application.getDefaultProjectID(),
-                                                                httpServletRequest);
+                application.getDefaultProjectID(),
+                httpServletRequest);
 
         IGPAccountDetail accountDetail = this.convertAccountToDTO(application);
 
@@ -192,7 +192,7 @@ public class SecurityService implements ISecurityService {
         Long idProject = null;
         try {
             idProject = this.geoPlatformServiceClient.saveProject(account.getStringID(),
-                                                                  project, true);
+                    project, true);
             account.setDefaultProjectID(idProject);
         } catch (ResourceNotFoundFault rnf) {
             this.logger.error("Failed to save project on SecurityService: " + rnf);
@@ -211,6 +211,9 @@ public class SecurityService implements ISecurityService {
             GPUser user = (GPUser) account;
             accountDetail.setName(user.getUsername());
             accountDetail.setEmail(user.getEmailAddress());
+        }
+        if (account.getGsAccount() != null) {
+            accountDetail.setAuthkey(account.getGsAccount().getAuthkey());
         }
         return (IGPAccountDetail) accountDetail;
     }

@@ -130,7 +130,6 @@ public class LoginWidget extends GPSecurityWidget
 
                         @Override
                         public void onSuccess(IGPAccountDetail result) {
-
                             GPAccountGuiComponents.getInstance().setAccountDetail(result);
                             status.setStatus(
                                     LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
@@ -138,8 +137,7 @@ public class LoginWidget extends GPSecurityWidget
                             userScreen();
                             userLogged = userName.getValue();
                             reloginAttempts = 0;
-                            //TODO: load from services the auth key
-                            Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), "5405edf5-3043-499d-905d-562b6a6953f4");
+                            Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), result.getAuthkey());
                         }
                     });
         } else if ((this.reloginAttempts + 1) < MAX_NUMBER_ATTEMPTS) {

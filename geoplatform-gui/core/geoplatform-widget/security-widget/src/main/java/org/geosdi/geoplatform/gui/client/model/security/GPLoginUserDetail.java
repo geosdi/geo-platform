@@ -20,6 +20,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     private String username;
     private String name;
     private String email;
+    private String authkey;
     private Map<String, Boolean> componentPermission;
 
     public GPLoginUserDetail() {
@@ -38,6 +39,15 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     @Override
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String getAuthkey() {
+        return authkey;
+    }
+
+    public void setAuthkey(String authkey) {
+        this.authkey = authkey;
     }
 
     /**

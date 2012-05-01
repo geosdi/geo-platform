@@ -36,15 +36,15 @@
 package org.geosdi.geoplatform.gui.client.widget.map.legend;
 
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Html;
 import com.google.gwt.user.client.ui.Image;
+import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GPLegendWidget {
 
@@ -84,22 +84,21 @@ public class GPLegendWidget {
             Image image;
             String dataSource;
 
-            if (layerBean.getDataSource().contains(
-                    "gwc/service/wms")) {
-                dataSource = layerBean.getDataSource().replaceAll(
-                        "gwc/service/wms",
-                        "wms");
+            if (layerBean.getDataSource().contains("gwc/service/wms")) {
+                dataSource = layerBean.getDataSource().replaceAll("gwc/service/wms", "wms");
             } else if (!(layerBean.getDataSource().startsWith("http://ows"))
                     && (layerBean.getDataSource().contains("/ows"))) {
-                dataSource = layerBean.getDataSource().replaceAll("/ows",
-                        "/wms");
+                dataSource = layerBean.getDataSource().replaceAll("/ows", "/wms");
             } else {
-                dataSource = layerBean.getDataSource().replaceAll("/wfs",
-                        "/wms");
+                dataSource = layerBean.getDataSource().replaceAll("/wfs", "/wms");
             }
-
-            image = new Image(
-                    dataSource + GET_LEGEND_REQUEST + layerBean.getName() + "&scale=5000&service=WMS");
+            StringBuilder imageURL = new StringBuilder();
+            imageURL.append(dataSource).append(GET_LEGEND_REQUEST).append(layerBean.getName()).append("&scale=5000&service=WMS");
+            String authkeyTuple = GSAuthKeyManager.getAuthKeyTuple();
+            if (!authkeyTuple.equals("")) {
+                imageURL.append('&').append(authkeyTuple);
+            }
+            image = new Image(imageURL.toString());
 
             cp.add(image);
 
@@ -120,7 +119,7 @@ public class GPLegendWidget {
             this.legendsStore.layout();
         }
     }
-    
+
     public void resetLegendWidget() {
         this.legendsStore.removeAll();
     }

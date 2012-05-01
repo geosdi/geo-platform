@@ -57,5 +57,5 @@ public interface MapRemote extends RemoteService {
         }
     }
 
-    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException;
+//    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException;
 }

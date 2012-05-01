@@ -57,17 +57,17 @@ public class MapService implements IMapService {
     @Autowired
     private SessionUtility sessionUtility;
 
-    @Override
-    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException {
-        HTTPUtils hTTPUtils = new HTTPUtils(userName, password);
-        String responce = null;
-        try {
-            logger.info("Layer: " + url);
-            responce = hTTPUtils.get("http://localhost:8989/geoserver");
-            logger.info("Auth Responce: " + responce);
-        } catch (MalformedURLException mfe) {
-            System.out.println("Url tazzo: " + mfe);
-        }
-        return responce;
-    }
+//    @Override
+//    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException {
+//        HTTPUtils hTTPUtils = new HTTPUtils(userName, password);
+//        String responce = null;
+//        try {
+//            logger.info("Layer: " + url);
+//            responce = hTTPUtils.get("http://localhost:8989/geoserver");
+//            logger.info("Auth Responce: " + responce);
+//        } catch (MalformedURLException mfe) {
+//            System.out.println("Url tazzo: " + mfe);
+//        }
+//        return responce;
+//    }
 }

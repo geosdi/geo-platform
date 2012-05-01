@@ -40,7 +40,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -65,354 +64,356 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- * 
+ *
  */
 class WMSServiceImpl {
 
-	final private Logger logger = LoggerFactory.getLogger(WMSServiceImpl.class);
-	// DAO
-	private GPServerDAO serverDao;
-	private static final String GEB = "earthbuilder.google.com";
+    final private Logger logger = LoggerFactory.getLogger(WMSServiceImpl.class);
+    // DAO
+    private GPServerDAO serverDao;
+    private static final String GEB = "earthbuilder.google.com";
 
-	/**
-	 * @param serverDao
-	 *            the serverDao to set
-	 */
-	public void setServerDao(GPServerDAO serverDao) {
-		this.serverDao = serverDao;
-	}
+    /**
+     * @param serverDao
+     * the serverDao to set
+     */
+    public void setServerDao(GPServerDAO serverDao) {
+        this.serverDao = serverDao;
+    }
 
-	public Long updateServer(GeoPlatformServer server)
-			throws ResourceNotFoundFault, IllegalParameterFault {
-		GeoPlatformServer orig = serverDao.find(server.getId());
-		if (orig == null) {
-			throw new ResourceNotFoundFault("Server not found", server.getId());
-		}
-		// Update all properties
-		orig.setServerUrl(server.getServerUrl());
-		orig.setName(server.getName());
-		orig.setTitle(server.getTitle());
-		orig.setAbstractServer(server.getAbstractServer());
-		orig.setContactPerson(server.getContactPerson());
-		orig.setContactOrganization(server.getContactOrganization());
-		orig.setServerType(server.getServerType());
+    public Long updateServer(GeoPlatformServer server)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GeoPlatformServer orig = serverDao.find(server.getId());
+        if (orig == null) {
+            throw new ResourceNotFoundFault("Server not found", server.getId());
+        }
+        // Update all properties
+        orig.setServerUrl(server.getServerUrl());
+        orig.setName(server.getName());
+        orig.setTitle(server.getTitle());
+        orig.setAbstractServer(server.getAbstractServer());
+        orig.setContactPerson(server.getContactPerson());
+        orig.setContactOrganization(server.getContactOrganization());
+        orig.setServerType(server.getServerType());
 
-		serverDao.merge(orig);
-		return orig.getId();
-	}
+        serverDao.merge(orig);
+        return orig.getId();
+    }
 
-	public boolean deleteServer(Long idServer) throws ResourceNotFoundFault {
-		GeoPlatformServer server = serverDao.find(idServer);
-		if (server == null) {
-			throw new ResourceNotFoundFault("Server not found", idServer);
-		}
+    public boolean deleteServer(Long idServer) throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.find(idServer);
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found", idServer);
+        }
 
-		return serverDao.remove(server);
-	}
+        return serverDao.remove(server);
+    }
 
-	public GeoPlatformServer getServerDetail(Long idServer)
-			throws ResourceNotFoundFault {
-		GeoPlatformServer server = serverDao.find(idServer);
-		if (server == null) {
-			throw new ResourceNotFoundFault("Server not found", idServer);
-		}
+    public GeoPlatformServer getServerDetail(Long idServer)
+            throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.find(idServer);
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found", idServer);
+        }
 
-		return server;
-	}
+        return server;
+    }
 
-	public ServerDTO getShortServer(String serverUrl)
-			throws ResourceNotFoundFault {
-		GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
-		if (server == null) {
-			throw new ResourceNotFoundFault("Server not found " + serverUrl);
-		}
+    public ServerDTO getShortServer(String serverUrl)
+            throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found " + serverUrl);
+        }
 
-		return new ServerDTO(server);
-	}
+        return new ServerDTO(server);
+    }
 
-	public List<ServerDTO> getServers() {
-		List<GeoPlatformServer> found = serverDao.findAll(GPCapabilityType.WMS);
-		return convertToServerList(found);
-	}
+    public List<ServerDTO> getServers() {
+        List<GeoPlatformServer> found = serverDao.findAll(GPCapabilityType.WMS);
+        return convertToServerList(found);
+    }
 
-	public GeoPlatformServer getServerDetailByUrl(String serverUrl)
-			throws ResourceNotFoundFault {
-		GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
-		if (server == null) {
-			throw new ResourceNotFoundFault("Server not found by URL");
-		}
+    public GeoPlatformServer getServerDetailByUrl(String serverUrl)
+            throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found by URL");
+        }
 
-		return server;
-	}
+        return server;
+    }
 
-	public ServerDTO getCapabilities(RequestByID request, String token)
-			throws ResourceNotFoundFault {
-		GeoPlatformServer server = serverDao.find(request.getId());
-		if (server == null) {
-			throw new ResourceNotFoundFault("Server has been deleted",
-					request.getId());
-		}
+    public ServerDTO getCapabilities(RequestByID request, String token, String authkey)
+            throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.find(request.getId());
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server has been deleted",
+                    request.getId());
+        }
 
-		WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
-				server.getServerUrl(), token);
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
+                server.getServerUrl(), token, authkey);
 
-		// server = this.createWMSServerFromService(server,
-		// wmsCapabilities.getService());
-		// serverDao.merge(server);
+        // server = this.createWMSServerFromService(server,
+        // wmsCapabilities.getService());
+        // serverDao.merge(server);
 
-		ServerDTO serverDTO = new ServerDTO(server);
-		List<RasterLayerDTO> layers = convertToLayerList(
-				wmsCapabilities.getLayer(), server.getServerUrl());
-		serverDTO.setLayerList(layers);
+        ServerDTO serverDTO = new ServerDTO(server);
+        List<RasterLayerDTO> layers = convertToLayerList(
+                wmsCapabilities.getLayer(), server.getServerUrl());
+        serverDTO.setLayerList(layers);
 
-		return serverDTO;
-	}
+        return serverDTO;
+    }
 
-	public Long insertServer(GeoPlatformServer server) {
-		/** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
-		GeoPlatformServer serverSearch = serverDao.findByServerUrl(server
-				.getServerUrl());
-		if (serverSearch != null) {
-			return serverSearch.getId();
-		}
+    public Long insertServer(GeoPlatformServer server) {
+        /**
+         * IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER *
+         */
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
+        if (serverSearch != null) {
+            return serverSearch.getId();
+        }
 
-		serverDao.persist(server);
-		return server.getId();
-	}
+        serverDao.persist(server);
+        return server.getId();
+    }
 
-	// The ID is important if is changed the URL of a server
-	public ServerDTO saveServer(Long id, String aliasServerName,
-			String serverUrl) throws IllegalParameterFault {
-		try {
-			URL serverURL = new URL(serverUrl);
-		} catch (MalformedURLException e) {
-			logger.error("MalformedURLException: " + e);
-			throw new IllegalParameterFault("Malformed URL");
-		}
+    // The ID is important if is changed the URL of a server
+    public ServerDTO saveServer(Long id, String aliasServerName,
+            String serverUrl) throws IllegalParameterFault {
+        try {
+            URL serverURL = new URL(serverUrl);
+        } catch (MalformedURLException e) {
+            logger.error("MalformedURLException: " + e);
+            throw new IllegalParameterFault("Malformed URL");
+        }
 
-		GeoPlatformServer server = null;
-		if (id != null) { // Existent server
-			server = serverDao.find(id);
-		} else { // New server
-			if (this.isURLServerAlreadyExists(serverUrl)) {
-				throw new IllegalParameterFault("Duplicated Server URL");
-			}
-			server = new GeoPlatformServer();
-			server.setServerType(GPCapabilityType.WMS);
-		}
-		server.setAliasName(aliasServerName);
-		server.setServerUrl(serverUrl);
-		serverDao.save(server);
+        GeoPlatformServer server = null;
+        if (id != null) { // Existent server
+            server = serverDao.find(id);
+        } else { // New server
+            if (this.isURLServerAlreadyExists(serverUrl)) {
+                throw new IllegalParameterFault("Duplicated Server URL");
+            }
+            server = new GeoPlatformServer();
+            server.setServerType(GPCapabilityType.WMS);
+        }
+        server.setAliasName(aliasServerName);
+        server.setServerUrl(serverUrl);
+        serverDao.save(server);
 
-		return new ServerDTO(server);
-	}
+        return new ServerDTO(server);
+    }
 
-	private boolean isURLServerAlreadyExists(String serverUrl) {
-		return serverDao.findByServerUrl(serverUrl) == null ? false : true;
-	}
+    private boolean isURLServerAlreadyExists(String serverUrl) {
+        return serverDao.findByServerUrl(serverUrl) == null ? false : true;
+    }
 
-	private WMSCapabilities getWMSCapabilities(String serverUrl, String token)
-			throws ResourceNotFoundFault {
-		URL serverURL = null;
-		WebMapServer wms = null;
-		WMSCapabilities cap = null;
+    private WMSCapabilities getWMSCapabilities(String serverUrl, String token, String authkey)
+            throws ResourceNotFoundFault {
+        URL serverURL;
+        WebMapServer wms;
+        WMSCapabilities cap = null;
 
-		String urlServerEdited = this.editServerUrl(serverUrl, token);
-		logger.debug("\nURL Server edited: {}", urlServerEdited);
+        String urlServerEdited = this.editServerUrl(serverUrl, token, authkey);
+        logger.debug("\nURL Server edited: {}", urlServerEdited);
 
-		try {
-			serverURL = new URL(urlServerEdited);
-			wms = new WebMapServer(serverURL);
-			cap = wms.getCapabilities();
+        try {
+            serverURL = new URL(urlServerEdited);
+            wms = new WebMapServer(serverURL);
+            cap = wms.getCapabilities();
 
-		} catch (MalformedURLException e) {
-			logger.error("MalformedURLException: " + e);
-			throw new ResourceNotFoundFault("Malformed URL");
-		} catch (ServiceException e) {
-			logger.error("ServiceException: " + e);
-			throw new ResourceNotFoundFault("Invalid URL");
-		} catch (IOException e) {
-			logger.error("IOException: " + e);
-			throw new ResourceNotFoundFault("Inaccessible URL");
-		} catch (Exception e) {
-			logger.error("Exception: " + e);
-			throw new ResourceNotFoundFault("Incorrect URL");
-		}
-		return cap;
-	}
+        } catch (MalformedURLException e) {
+            logger.error("MalformedURLException: " + e);
+            throw new ResourceNotFoundFault("Malformed URL");
+        } catch (ServiceException e) {
+            logger.error("ServiceException: " + e);
+            throw new ResourceNotFoundFault("Invalid URL");
+        } catch (IOException e) {
+            logger.error("IOException: " + e);
+            throw new ResourceNotFoundFault("Inaccessible URL");
+        } catch (Exception e) {
+            logger.error("Exception: " + e);
+            throw new ResourceNotFoundFault("Incorrect URL");
+        }
+        return cap;
+    }
 
-	private String editServerUrl(String urlServer, String token) {
-		StringBuilder stringBuilder = new StringBuilder(urlServer);
-		if (!urlServer.contains("?")) {
-			stringBuilder.append("?request=GetCapabilities");
-		}
+    private String editServerUrl(String urlServer, String token, String authkey) {
+        StringBuilder stringBuilder = new StringBuilder(urlServer);
+        if (!urlServer.contains("?")) {
+            stringBuilder.append("?request=GetCapabilities");
+        }
 
-		if (urlServer.contains(GEB)) {
-			stringBuilder.append("&access_token=");
-			stringBuilder.append(token);
-		}
-		return stringBuilder.toString();
-	}
+        if (urlServer.contains(GEB)) {
+            stringBuilder.append("&access_token=").append(token);
+        }
+        if (authkey != null) {
+            stringBuilder.append("&authkey=").append(authkey);
+        }
+        return stringBuilder.toString();
+    }
 
-	private List<RasterLayerDTO> convertToLayerList(Layer layer,
-			String urlServer) {
-		List<RasterLayerDTO> shortLayers = new ArrayList<RasterLayerDTO>();
+    private List<RasterLayerDTO> convertToLayerList(Layer layer,
+            String urlServer) {
+        List<RasterLayerDTO> shortLayers = new ArrayList<RasterLayerDTO>();
 
-		RasterLayerDTO raster = this.getRasterAndSubRaster(layer, urlServer);
-		shortLayers.add(raster);
+        RasterLayerDTO raster = this.getRasterAndSubRaster(layer, urlServer);
+        shortLayers.add(raster);
 
-		return shortLayers;
-	}
+        return shortLayers;
+    }
 
-	private RasterLayerDTO getRasterAndSubRaster(Layer layer, String urlServer) {
-		RasterLayerDTO raster = this.convertLayerToRaster(layer, urlServer);
+    private RasterLayerDTO getRasterAndSubRaster(Layer layer, String urlServer) {
+        RasterLayerDTO raster = this.convertLayerToRaster(layer, urlServer);
 
-		List<Layer> subLayerList = layer.getLayerChildren();
-		List<RasterLayerDTO> subRasterList = new ArrayList<RasterLayerDTO>(
-				subLayerList.size());
-		raster.setSubLayerList(subRasterList);
+        List<Layer> subLayerList = layer.getLayerChildren();
+        List<RasterLayerDTO> subRasterList = new ArrayList<RasterLayerDTO>(
+                subLayerList.size());
+        raster.setSubLayerList(subRasterList);
 
-		// ADD subRaster
-		for (Layer layerIth : subLayerList) {
-			RasterLayerDTO rasterIth = this.getRasterAndSubRaster(layerIth,
-					urlServer);
-			subRasterList.add(rasterIth);
-		}
+        // ADD subRaster
+        for (Layer layerIth : subLayerList) {
+            RasterLayerDTO rasterIth = this.getRasterAndSubRaster(layerIth,
+                    urlServer);
+            subRasterList.add(rasterIth);
+        }
 
-		return raster;
-	}
+        return raster;
+    }
 
-	private RasterLayerDTO convertLayerToRaster(Layer layer, String urlServer) {
-		RasterLayerDTO raster = new RasterLayerDTO();
+    private RasterLayerDTO convertLayerToRaster(Layer layer, String urlServer) {
+        RasterLayerDTO raster = new RasterLayerDTO();
 
-		raster.setUrlServer(this.getUrlServer(urlServer));
-		raster.setName(layer.getName());
-		raster.setAbstractText(layer.get_abstract());
-		raster.setTitle(layer.getTitle());
-		Map<String, CRSEnvelope> additionalBounds = layer.getBoundingBoxes();
+        raster.setUrlServer(this.getUrlServer(urlServer));
+        raster.setName(layer.getName());
+        raster.setAbstractText(layer.get_abstract());
+        raster.setTitle(layer.getTitle());
+        Map<String, CRSEnvelope> additionalBounds = layer.getBoundingBoxes();
 
-		if (additionalBounds.size() > 0) {
-			if (additionalBounds.containsKey(new String("EPSG:900913"))
-					|| additionalBounds.containsKey(new String("EPSG:3857"))) {
-				CRSEnvelope env = additionalBounds
-						.get(new String("EPSG:900913"));
-				raster.setBbox(this.createBbox(env));
-				raster.setSrs(env.getEPSGCode());
-			} else {
-				raster.setBbox(this.createBbox(layer.getLatLonBoundingBox()));
-				raster.setSrs("EPSG:4326");
-			}
+        if (additionalBounds.size() > 0) {
+            if (additionalBounds.containsKey(new String("EPSG:900913"))
+                    || additionalBounds.containsKey(new String("EPSG:3857"))) {
+                CRSEnvelope env = additionalBounds.get(new String("EPSG:900913"));
+                raster.setBbox(this.createBbox(env));
+                raster.setSrs(env.getEPSGCode());
+            } else {
+                raster.setBbox(this.createBbox(layer.getLatLonBoundingBox()));
+                raster.setSrs("EPSG:4326");
+            }
 
-		}
+        }
 
-		// Set LayerInfo of Raster Ith
-		GPLayerInfo layerInfo = new GPLayerInfo();
-		layerInfo.setQueryable(layer.isQueryable());
-		if (layer.getKeywords() != null) {
-			List<String> keywordList = Arrays.asList(layer.getKeywords());
-			if (keywordList.size() > 0) {
-				layerInfo.setKeywords(keywordList);
-			}
-		}
-		raster.setLayerInfo(layerInfo);
+        // Set LayerInfo of Raster Ith
+        GPLayerInfo layerInfo = new GPLayerInfo();
+        layerInfo.setQueryable(layer.isQueryable());
+        if (layer.getKeywords() != null) {
+            List<String> keywordList = Arrays.asList(layer.getKeywords());
+            if (keywordList.size() > 0) {
+                layerInfo.setKeywords(keywordList);
+            }
+        }
+        raster.setLayerInfo(layerInfo);
 
-		// Set Styles of Raster Ith
-		List<StyleImpl> stylesImpl = layer.getStyles();
-		logger.debug(
-				"\n*** Layer \"{}\" has {} SubLayers and {} StyleImpl ***",
-				new Object[] { layer.getTitle(),
-						layer.getLayerChildren().size(), stylesImpl.size() });
+        // Set Styles of Raster Ith
+        List<StyleImpl> stylesImpl = layer.getStyles();
+        logger.debug(
+                "\n*** Layer \"{}\" has {} SubLayers and {} StyleImpl ***",
+                new Object[]{layer.getTitle(),
+                    layer.getLayerChildren().size(), stylesImpl.size()});
 
-		raster.setStyleList(this.createStyleList(stylesImpl));
+        raster.setStyleList(this.createStyleList(stylesImpl));
 
-		return raster;
-	}
+        return raster;
+    }
 
-	private List<ServerDTO> convertToServerList(
-			List<GeoPlatformServer> serverList) {
-		List<ServerDTO> shortServers = new ArrayList<ServerDTO>(
-				serverList.size());
-		ServerDTO serverDTOIth = null;
-		for (GeoPlatformServer server : serverList) {
-			serverDTOIth = new ServerDTO(server);
-			shortServers.add(serverDTOIth);
-		}
-		return shortServers;
-	}
+    private List<ServerDTO> convertToServerList(
+            List<GeoPlatformServer> serverList) {
+        List<ServerDTO> shortServers = new ArrayList<ServerDTO>(
+                serverList.size());
+        ServerDTO serverDTOIth = null;
+        for (GeoPlatformServer server : serverList) {
+            serverDTOIth = new ServerDTO(server);
+            shortServers.add(serverDTOIth);
+        }
+        return shortServers;
+    }
 
-	// private GeoPlatformServer createWMSServerFromService(
-	// GeoPlatformServer server, Service service) {
-	// server.setName(service.getName());
-	// server.setTitle(service.getTitle());
-	// server.setAbstractServer(service.get_abstract());
-	// ResponsibleParty party = service.getContactInformation();
-	// if (party != null) {
-	// Contact contact = party.getContactInfo();
-	// if (contact != null) {
-	// InternationalString is = contact.getContactInstructions();
-	// if (is != null) {
-	// server.setContactPerson(is.toString());
-	// }
-	// }
-	// InternationalString is = party.getOrganisationName();
-	// if (is != null) {
-	// server.setContactOrganization(is.toString());
-	// }
-	// }
-	// return server;
-	// }
-	private List<String> createStyleList(List<StyleImpl> stylesImpl) {
-		// List<StyleDTO> stylesDTO = new
-		// ArrayList<StyleDTO>(stylesImpl.size());
-		// for (StyleImpl style : stylesImpl) {
-		// StyleDTO styleDTO = new StyleDTO(style);
-		// stylesDTO.add(styleDTO);
-		// logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
-		// }
-		List<String> styleList = new ArrayList<String>(stylesImpl.size());
-		for (StyleImpl style : stylesImpl) {
-			styleList.add(style.getName());
-		}
-		return styleList;
-	}
+    // private GeoPlatformServer createWMSServerFromService(
+    // GeoPlatformServer server, Service service) {
+    // server.setName(service.getName());
+    // server.setTitle(service.getTitle());
+    // server.setAbstractServer(service.get_abstract());
+    // ResponsibleParty party = service.getContactInformation();
+    // if (party != null) {
+    // Contact contact = party.getContactInfo();
+    // if (contact != null) {
+    // InternationalString is = contact.getContactInstructions();
+    // if (is != null) {
+    // server.setContactPerson(is.toString());
+    // }
+    // }
+    // InternationalString is = party.getOrganisationName();
+    // if (is != null) {
+    // server.setContactOrganization(is.toString());
+    // }
+    // }
+    // return server;
+    // }
+    private List<String> createStyleList(List<StyleImpl> stylesImpl) {
+        // List<StyleDTO> stylesDTO = new
+        // ArrayList<StyleDTO>(stylesImpl.size());
+        // for (StyleImpl style : stylesImpl) {
+        // StyleDTO styleDTO = new StyleDTO(style);
+        // stylesDTO.add(styleDTO);
+        // logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
+        // }
+        List<String> styleList = new ArrayList<String>(stylesImpl.size());
+        for (StyleImpl style : stylesImpl) {
+            styleList.add(style.getName());
+        }
+        return styleList;
+    }
 
-	private GPBBox createBbox(CRSEnvelope env) {
-		return new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
-				env.getMaxY());
-	}
+    private GPBBox createBbox(CRSEnvelope env) {
+        return new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
+                env.getMaxY());
+    }
 
-	private String getUrlServer(String urlServer) {
-		int index = -1;
-		if (urlServer.contains("mapserv.exe")
-				|| urlServer.contains("mapserver")
-				|| urlServer.contains("mapserv")) {
-			index = urlServer.indexOf("&");
-		} else {
-			index = urlServer.indexOf("?");
-			// index += 1;
-		}
-		if (index != -1) {
-			String newUrl = urlServer.substring(0, index);
-			return newUrl;
-		}
-		return urlServer;
-	}
+    private String getUrlServer(String urlServer) {
+        int index = -1;
+        if (urlServer.contains("mapserv.exe")
+                || urlServer.contains("mapserver")
+                || urlServer.contains("mapserv")) {
+            index = urlServer.indexOf("&");
+        } else {
+            index = urlServer.indexOf("?");
+            // index += 1;
+        }
+        if (index != -1) {
+            String newUrl = urlServer.substring(0, index);
+            return newUrl;
+        }
+        return urlServer;
+    }
 
-	private double longToSphericalMercatorX(double x) {
-		return (x / 180.0) * 20037508.34;
-	}
+    private double longToSphericalMercatorX(double x) {
+        return (x / 180.0) * 20037508.34;
+    }
 
-	private double latToSphericalMercatorY(double y) {
-		if (y > 85.05112) {
-			y = 85.05112;
-		}
+    private double latToSphericalMercatorY(double y) {
+        if (y > 85.05112) {
+            y = 85.05112;
+        }
 
-		if (y < -85.05112) {
-			y = -85.05112;
-		}
+        if (y < -85.05112) {
+            y = -85.05112;
+        }
 
-		y = (Math.PI / 180.0) * y;
-		double tmp = Math.PI / 4.0 + y / 2.0;
-		return 20037508.34 * Math.log(Math.tan(tmp)) / Math.PI;
-	}
+        y = (Math.PI / 180.0) * y;
+        double tmp = Math.PI / 4.0 + y / 2.0;
+        return 20037508.34 * Math.log(Math.tan(tmp)) / Math.PI;
+    }
 }

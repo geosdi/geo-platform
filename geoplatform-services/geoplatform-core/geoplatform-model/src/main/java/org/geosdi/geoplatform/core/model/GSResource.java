@@ -80,7 +80,7 @@ public class GSResource implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GS_RESOURCE_SEQ")
     @SequenceGenerator(name = "GS_RESOURCE_SEQ", sequenceName = "GS_RESOURCE_SEQ")
     private Long id;
-    @ManyToOne(optional = true)
+    @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GSAccount gsAccount;
     @Column

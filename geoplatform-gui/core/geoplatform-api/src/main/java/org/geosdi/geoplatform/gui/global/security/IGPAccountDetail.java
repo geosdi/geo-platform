@@ -14,6 +14,8 @@ import java.util.Map;
 public interface IGPAccountDetail {
 
     String getStringID();
+    
+    String getAuthkey();
 
     void setComponentPermission(Map<String, Boolean> componentPermission);
 

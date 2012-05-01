@@ -824,9 +824,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ServerDTO getCapabilities(RequestByID request, String token)
+    public ServerDTO getCapabilities(RequestByID request, String token, String authkey)
             throws ResourceNotFoundFault {
-        return wmsServiceDelegate.getCapabilities(request, token);
+        return wmsServiceDelegate.getCapabilities(request, token, authkey);
     }
 
     @Override

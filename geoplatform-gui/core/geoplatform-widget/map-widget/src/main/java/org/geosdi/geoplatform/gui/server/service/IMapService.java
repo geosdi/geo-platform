@@ -43,5 +43,5 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface IMapService {
 
-    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException;
+//    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException;
 }

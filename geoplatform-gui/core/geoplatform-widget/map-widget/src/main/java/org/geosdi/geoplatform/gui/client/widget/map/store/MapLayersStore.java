@@ -94,7 +94,6 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void displayVector(GPVectorBean vectorBean) {
-        this.authenticate(vectorBean);
         displayLegend.setLayerBean(vectorBean);
         LayerHandlerManager.fireEvent(displayLegend);
         if (containsLayer(vectorBean)) {
@@ -115,7 +114,6 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void displayRaster(GPRasterBean rasterBean) {
-        this.authenticate(rasterBean);
         displayLegend.setLayerBean(rasterBean);
         LayerHandlerManager.fireEvent(displayLegend);
         if (containsLayer(rasterBean)) {
@@ -134,20 +132,20 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         }
     }
 
-    private void authenticate(GPLayerBean layer) {
-        MapRemote.Util.getInstance().layerAuthenticate("admin", "geoserver", layer.getDataSource(), new AsyncCallback<String>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                System.out.println("Maledetto fallimento: " + caught);
-            }
-
-            @Override
-            public void onSuccess(String result) {
-                System.out.println("Risultato un successo: " + result);
-            }
-        });
-    }
+//    private void authenticate(GPLayerBean layer) {
+//        MapRemote.Util.getInstance().layerAuthenticate("admin", "geoserver", layer.getDataSource(), new AsyncCallback<String>() {
+//
+//            @Override
+//            public void onFailure(Throwable caught) {
+//                System.out.println("Maledetto fallimento: " + caught);
+//            }
+//
+//            @Override
+//            public void onSuccess(String result) {
+//                System.out.println("Risultato un successo: " + result);
+//            }
+//        });
+//    }
 
     @Override
     public void hideLayer(GPLayerBean layerBean) {

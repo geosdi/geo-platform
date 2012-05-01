@@ -143,7 +143,7 @@ public class CXFServiceTest extends ServiceTest {
 
         Assert.assertNotNull(serverDTO);
 
-        serverDTO = gpWSClient.getCapabilities(new RequestByID(serverDTO.getId()), null);
+        serverDTO = gpWSClient.getCapabilities(new RequestByID(serverDTO.getId()), null, null);
         logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
     }
 

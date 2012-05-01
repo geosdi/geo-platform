@@ -33,15 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.model.enums;
+package org.geosdi.geoplatform.core.dao;
+
+import java.util.List;
+
+
+import com.googlecode.genericdao.search.ISearch;
+import org.geosdi.geoplatform.core.model.GSAccount;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- * @email francesco.izzi@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public enum GrantType {
+public interface GSAccountDAO {
 
-    ALLOW,
-    DENY,
-    LIMIT;
+    public List<GSAccount> findAll();
+
+    public GSAccount find(Long id);
+
+    public void persist(GSAccount... account);
+
+    public GSAccount merge(GSAccount account);
+
+    public GSAccount[] merge(GSAccount... account);
+
+    public boolean remove(GSAccount account);
+
+    public boolean removeById(Long id);
+
+    public List<GSAccount> search(ISearch search);
+
+    public int count(ISearch search);
+
+    public GSAccount findGSUserNameByAuthkey(String authkey);
 }

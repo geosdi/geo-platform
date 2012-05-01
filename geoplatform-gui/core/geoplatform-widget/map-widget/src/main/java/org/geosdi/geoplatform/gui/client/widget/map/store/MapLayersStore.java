@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.Iterator;
+import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -52,7 +54,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
@@ -92,6 +94,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void displayVector(GPVectorBean vectorBean) {
+        this.authenticate(vectorBean);
         displayLegend.setLayerBean(vectorBean);
         LayerHandlerManager.fireEvent(displayLegend);
         if (containsLayer(vectorBean)) {
@@ -112,6 +115,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void displayRaster(GPRasterBean rasterBean) {
+        this.authenticate(rasterBean);
         displayLegend.setLayerBean(rasterBean);
         LayerHandlerManager.fireEvent(displayLegend);
         if (containsLayer(rasterBean)) {
@@ -128,6 +132,21 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.mapWidget.getMap().addLayer(layer);
             layer.setZIndex(rasterBean.getzIndex());
         }
+    }
+
+    private void authenticate(GPLayerBean layer) {
+        MapRemote.Util.getInstance().layerAuthenticate("admin", "geoserver", layer.getDataSource(), new AsyncCallback<String>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                System.out.println("Maledetto fallimento: " + caught);
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                System.out.println("Risultato un successo: " + result);
+            }
+        });
     }
 
     @Override
@@ -182,7 +201,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.mapWidget.getMap().removeLayer(layer);
         }
         this.layers.clear();
-        
+
         LayerHandlerManager.fireEvent(cleanLegend);
     }
 }

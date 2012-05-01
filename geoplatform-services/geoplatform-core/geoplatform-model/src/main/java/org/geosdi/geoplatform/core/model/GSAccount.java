@@ -33,38 +33,68 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.dao;
+package org.geosdi.geoplatform.core.model;
 
-import java.util.List;
-
-import org.geosdi.geoplatform.core.model.GPAccessInfo;
-
-import com.googlecode.genericdao.search.ISearch;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- * @email francesco.izzi@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface GPAccessInfoDAO {
+@Entity(name = "GSAccount")
+@Table(name = "gs_account")
+@XmlRootElement(name = "GSAccount")
+@org.hibernate.annotations.Table(appliesTo = "gs_account", indexes = {
+    @Index(name = "gs_account_idx", columnNames = {"gsuser"})})
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_account")
+public class GSAccount implements Serializable {
 
-	public List<GPAccessInfo> findAll();
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GS_ACCOUNT_SEQ")
+    @SequenceGenerator(name = "GS_ACCOUNT_SEQ", sequenceName = "GS_ACCOUNT_SEQ")
+    private Long id;    
+    @Column
+    private String gsuser;    
+    @Column
+    private String authkey;
+    
 
-	public GPAccessInfo find(Long id);
+    public Long getId() {
+        return id;
+    }
 
-	public void persist(GPAccessInfo... access);
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public GPAccessInfo merge(GPAccessInfo access);
+    public String getAuthkey() {
+        return authkey;
+    }
 
-	public GPAccessInfo[] merge(GPAccessInfo... access);
+    public void setAuthkey(String authkey) {
+        this.authkey = authkey;
+    }
 
-	public boolean remove(GPAccessInfo account);
+    public String getGsuser() {
+        return gsuser;
+    }
 
-	public boolean removeById(Long id);
-
-	public List<GPAccessInfo> search(ISearch search);
-
-	public int count(ISearch search);
-	
-	public GPAccessInfo findByLayerNameAndGsUser(String layerName, String gsUser);
-
+    public void setGsuser(String gsuser) {
+        this.gsuser = gsuser;
+    }
 }

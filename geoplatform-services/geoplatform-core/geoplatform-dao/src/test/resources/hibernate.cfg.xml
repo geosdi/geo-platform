@@ -30,6 +30,7 @@
         <mapping  class="org.geosdi.geoplatform.core.acl.GuiComponent"/>
         
         <!-- GP ACCESS INFO -->
-        <mapping  class="org.geosdi.geoplatform.core.model.GPAccessInfo"/>
+        <mapping  class="org.geosdi.geoplatform.core.model.GSAccount"/>
+        <mapping  class="org.geosdi.geoplatform.core.model.GSResource"/>
     </session-factory>
 </hibernate-configuration>

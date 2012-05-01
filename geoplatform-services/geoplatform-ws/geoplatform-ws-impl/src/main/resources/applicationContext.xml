@@ -44,7 +44,8 @@
         <property name="gpPooledPBEStringEncryptor" ref="gpPooledPBEStringEncryptor" />
         
         <!-- GP ACCESS INFO -->
-        <property name="gpAccessInfoDao" ref="gpAccessInfoDAO" />
+        <property name="gsAccountDAO" ref="gsAccountDAO" />
+        <property name="gsResourceDAO" ref="gsResourceDAO" />
     </bean>
 
 	<!--===================================================================== -->        

@@ -33,15 +33,69 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.model.enums;
+package org.geosdi.geoplatform.core.dao.impl;
+
+import java.util.List;
+
+
+import com.googlecode.genericdao.search.ISearch;
+import com.googlecode.genericdao.search.Search;
+import org.geosdi.geoplatform.core.dao.GSResourceDAO;
+import org.geosdi.geoplatform.core.model.GSResource;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- * @email francesco.izzi@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public enum GrantType {
+@Transactional
+public class GSResourceDAOImpl extends BaseDAO<GSResource, Long> implements
+        GSResourceDAO {
 
-    ALLOW,
-    DENY,
-    LIMIT;
+    @Override
+    public void persist(GSResource... access) {
+        super.persist(access);
+    }
+
+    @Override
+    public GSResource merge(GSResource access) {
+        return super.merge(access);
+    }
+
+    @Override
+    public GSResource[] merge(GSResource... access) {
+        return super.merge(access);
+    }
+
+    @Override
+    public boolean remove(GSResource access) {
+        return super.remove(access);
+    }
+
+    @Override
+    public boolean removeById(Long id) {
+        return super.removeById(id);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<GSResource> search(ISearch search) {
+        return super.search(search);
+    }
+
+    @Override
+    public GSResource findByLayerNameAndGsUser(String layerName, String gsUser) {
+        Search search = new Search();
+        search.addFilterEqual("layerName", layerName);
+        search.addFilterEqual("gsAccount.gsuser", gsUser);
+        return searchUnique(search);
+    }
+
+    @Override
+    public GSResource findByWorkspaceAndGsUser(String workspace, String gsUser) {
+        Search search = new Search();
+        search.addFilterEqual("workspace", workspace);
+        search.addFilterEqual("gsAccount.gsuser", gsUser);
+        return searchUnique(search);
+    }
 }

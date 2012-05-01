@@ -33,15 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.model.enums;
+package org.geosdi.geoplatform.gui.server.service.impl;
+
+import it.geosolutions.geonetwork.util.HTTPUtils;
+import java.net.MalformedURLException;
+import org.slf4j.Logger;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.SessionUtility;
+import org.geosdi.geoplatform.gui.server.service.IMapService;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- * @email francesco.izzi@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public enum GrantType {
+@Service("mapService")
+public class MapService implements IMapService {
 
-    ALLOW,
-    DENY,
-    LIMIT;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private SessionUtility sessionUtility;
+
+    @Override
+    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException {
+        HTTPUtils hTTPUtils = new HTTPUtils(userName, password);
+        String responce = null;
+        try {
+            logger.info("Layer: " + url);
+            responce = hTTPUtils.get("http://localhost:8989/geoserver");
+            logger.info("Auth Responce: " + responce);
+        } catch (MalformedURLException mfe) {
+            System.out.println("Url tazzo: " + mfe);
+        }
+        return responce;
+    }
 }

@@ -33,15 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.model.enums;
+package org.geosdi.geoplatform.core.dao.impl;
+
+import java.util.List;
+import com.googlecode.genericdao.search.ISearch;
+import com.googlecode.genericdao.search.Search;
+import org.geosdi.geoplatform.core.dao.GSAccountDAO;
+import org.geosdi.geoplatform.core.model.GSAccount;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- * @email francesco.izzi@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public enum GrantType {
+@Transactional
+public class GSAccountDAOImpl extends BaseDAO<GSAccount, Long> implements
+        GSAccountDAO {
 
-    ALLOW,
-    DENY,
-    LIMIT;
+    @Override
+    public void persist(GSAccount... access) {
+        super.persist(access);
+    }
+
+    @Override
+    public GSAccount merge(GSAccount access) {
+        return super.merge(access);
+    }
+
+    @Override
+    public GSAccount[] merge(GSAccount... access) {
+        return super.merge(access);
+    }
+
+    @Override
+    public boolean remove(GSAccount access) {
+        return super.remove(access);
+    }
+
+    @Override
+    public boolean removeById(Long id) {
+        return super.removeById(id);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<GSAccount> search(ISearch search) {
+        return super.search(search);
+    }
+
+    @Override
+    public GSAccount findGSUserNameByAuthkey(String authkey) {
+        Search search = new Search();
+        search.addFilterEqual("authkey", authkey);
+        return searchUnique(search);
+    }
 }

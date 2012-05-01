@@ -35,18 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.google.common.collect.Maps;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -69,8 +73,8 @@ public class LoginWidget extends GPSecurityWidget
     private int reloginAttempts;
 
     /**
-     * 
-     * @param eventOnSuccess 
+     *
+     * @param eventOnSuccess
      */
     public LoginWidget(EventType eventOnSuccess) {
         super();
@@ -120,7 +124,7 @@ public class LoginWidget extends GPSecurityWidget
                                     LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
                                     LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
                             GeoPlatformMessage.infoMessage("Login Error",
-                                                           caught.getMessage());
+                                    caught.getMessage());
                             ++reloginAttempts;
                         }
 
@@ -134,6 +138,8 @@ public class LoginWidget extends GPSecurityWidget
                             userScreen();
                             userLogged = userName.getValue();
                             reloginAttempts = 0;
+                            //TODO: load from services the auth key
+                            Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), "5405edf5-3043-499d-905d-562b6a6953f4");
                         }
                     });
         } else if ((this.reloginAttempts + 1) < MAX_NUMBER_ATTEMPTS) {
@@ -159,7 +165,7 @@ public class LoginWidget extends GPSecurityWidget
                 Dispatcher.forwardEvent(
                         GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
                 GeoPlatformMessage.infoMessage("Application Logout",
-                    "A different user from the previous one is trying to connect to the application");
+                        "A different user from the previous one is trying to connect to the application");
                 userLogged = null;
                 Window.Location.reload();
             }
@@ -188,11 +194,12 @@ public class LoginWidget extends GPSecurityWidget
 
     /**
      * Set the correct Status Icon Style
+     *
      * @param status
-     * @param message  
+     * @param message
      */
     public void setStatusLoginFinder(EnumLoginStatus status,
-                                     EnumLoginStatus message) {
+            EnumLoginStatus message) {
         this.status.setIconStyle(status.getValue());
         this.status.setText(message.getValue());
         getButtonBar().enable();

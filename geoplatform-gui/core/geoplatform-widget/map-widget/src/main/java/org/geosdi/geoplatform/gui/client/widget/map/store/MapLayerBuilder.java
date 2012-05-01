@@ -35,12 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
+import com.extjs.gxt.ui.client.Registry;
+import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.AbstractMapLayerBuilder;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayerBuilder;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -50,7 +53,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implements
         GPMapLayerBuilder {
@@ -70,6 +73,12 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
     public WMS buildRaster(GPRasterBean rasterBean) {
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
+        rasterBean.getDataSource();
+        String authkey = Registry.get(GlobalRegistryEnum.AUTH_KEY.getValue());
+        String authkeyTuple = GSAuthKeyManager.getAuthKeyTuple();
+        if (!authkeyTuple.equalsIgnoreCase("")) {
+            wmsParams.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authkey);
+        }
         wmsParams.setLayers(rasterBean.getName());
         if (!rasterBean.getStyles().isEmpty()) {
             wmsParams.setStyles(rasterBean.getStyles().get(0).getStyleString());

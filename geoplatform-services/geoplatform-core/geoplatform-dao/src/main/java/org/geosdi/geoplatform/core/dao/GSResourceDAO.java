@@ -33,61 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.dao.impl;
+package org.geosdi.geoplatform.core.dao;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.core.dao.GPAccessInfoDAO;
-import org.geosdi.geoplatform.core.model.GPAccessInfo;
 
 import com.googlecode.genericdao.search.ISearch;
-import com.googlecode.genericdao.search.Search;
+import org.geosdi.geoplatform.core.model.GSResource;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- * @email francesco.izzi@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class GPAccessInfoDAOImpl extends BaseDAO<GPAccessInfo, Long> implements
-		GPAccessInfoDAO {
+public interface GSResourceDAO {
 
-	@Override
-	public void persist(GPAccessInfo... access) {
-		super.persist(access);
-	}
+    public List<GSResource> findAll();
 
-	@Override
-	public GPAccessInfo merge(GPAccessInfo access) {
-		return super.merge(access);
-	}
+    public GSResource find(Long id);
 
-	@Override
-	public GPAccessInfo[] merge(GPAccessInfo... access) {
-		return super.merge(access);
-	}
+    public void persist(GSResource... access);
 
-	@Override
-	public boolean remove(GPAccessInfo access) {
-		return super.remove(access);
-	}
+    public GSResource merge(GSResource access);
 
-	@Override
-	public boolean removeById(Long id) {
-		return super.removeById(id);
-	}
+    public GSResource[] merge(GSResource... access);
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<GPAccessInfo> search(ISearch search) {
-		return super.search(search);
-	}
+    public boolean remove(GSResource account);
 
-	@Override
-	public GPAccessInfo findByLayerNameAndGsUser(String layerName, String gsUser) {
-		Search search = new Search();
-		search.addFilterEqual("layerName", layerName);
-		search.addFilterEqual("gsuser", gsUser);
-		return searchUnique(search);
+    public boolean removeById(Long id);
 
-	}
+    public List<GSResource> search(ISearch search);
 
+    public int count(ISearch search);
+
+    public GSResource findByLayerNameAndGsUser(String layerName, String gsUser);
+
+    public GSResource findByWorkspaceAndGsUser(String workspace, String gsUser);
 }

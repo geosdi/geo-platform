@@ -105,6 +105,10 @@ public class GPAccessInfoTest extends BaseDAOTest {
         resource.setGrant(GrantType.ALLOW);
         resource.setWorkspace("topp");
         resource.setLayerName("states");
+        resource.setAttributes("STATE_NAME,MALE,FEMALE");
+        //simple cql filter accourding to Multipolygon restriction
+        resource.setCqlFilterRead("STATE_NAME='Kansas'");
+        resource.setDefaultStyle("polygon");
         resource.setGsAccount(account);
         return resource;
     }

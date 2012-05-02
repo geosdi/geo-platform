@@ -93,7 +93,7 @@ public class GSResource implements Serializable {
     private String workspace;
     //
     @Type(type = "org.hibernatespatial.GeometryUserType")
-    @Column(nullable = false)
+    @Column
     private MultiPolygon area;
     //
     @Column(name = "default_style")

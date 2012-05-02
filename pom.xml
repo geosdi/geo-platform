@@ -1209,8 +1209,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                     <debug>true</debug>
                     <encoding>UTF-8</encoding>
                     <!-- Added comment because we have some problem on Windows Vista -->
@@ -1424,7 +1424,6 @@
     </pluginRepositories>
     
     <properties>
-        <java.version>1.6</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         

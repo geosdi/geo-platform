@@ -56,23 +56,25 @@ import org.hibernate.annotations.Index;
 @Table(name = "gs_account")
 @XmlRootElement(name = "GSAccount")
 @org.hibernate.annotations.Table(appliesTo = "gs_account", indexes = {
-    @Index(name = "gs_account_idx", columnNames = {"gsuser"})})
+    @Index(name = "gs_account_idx", columnNames = {"gs_user"})})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_account")
 public class GSAccount implements Serializable {
 
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -7837443989271187279L;
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GS_ACCOUNT_SEQ")
     @SequenceGenerator(name = "GS_ACCOUNT_SEQ", sequenceName = "GS_ACCOUNT_SEQ")
-    private Long id;    
-    @Column
-    private String gsuser;    
+    private Long id;
+    //
+    @Column(name = "gs_user")
+    private String gsuser;
+    //
     @Column
     private String authkey;
-    
 
     public Long getId() {
         return id;

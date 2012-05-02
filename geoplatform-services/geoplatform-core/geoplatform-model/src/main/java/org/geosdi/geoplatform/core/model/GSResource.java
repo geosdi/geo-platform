@@ -68,38 +68,52 @@ import org.hibernate.annotations.*;
 @Table(name = "gs_resource")
 @XmlRootElement(name = "GSResource")
 @org.hibernate.annotations.Table(appliesTo = "gs_resource", indexes = {
-    @Index(name = "gs_resource_idx", columnNames = {"layerName"})})
+    @Index(name = "gs_resource_idx", columnNames = {"layer_name"})})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_resource")
 public class GSResource implements Serializable {
 
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2010157772649295820L;
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GS_RESOURCE_SEQ")
     @SequenceGenerator(name = "GS_RESOURCE_SEQ", sequenceName = "GS_RESOURCE_SEQ")
     private Long id;
+    //
     @ManyToOne
+    @JoinColumn(name = "gs_account")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GSAccount gsAccount;
-    @Column
+    //
+    @Column(name = "layer_name")
     private String layerName;
+    //
     @Column
     private String workspace;
+    //
     @Type(type = "org.hibernatespatial.GeometryUserType")
-    @Column(name = "area", nullable = false)
+    @Column(nullable = false)
     private MultiPolygon area;
-    @Column
+    //
+    @Column(name = "default_style")
     private String defaultStyle;
+    //
+    @Column(name = "cql_filter_read")
     @Type(type = "text")
     private String cqlFilterRead;
+    //
+    @Column(name = "cql_filter_write")
     @Type(type = "text")
     private String cqlFilterWrite;
+    //
     @Type(type = "text")
     private String attributes;
-    @Column
+    //
+    @Column(name = "cluster_node")
     private String clusterNode;
+    //
     @Column(name = "grant_type")
     @Enumerated(EnumType.STRING)
     private GrantType grant;

@@ -84,6 +84,7 @@ public abstract class GPAccount implements Serializable {
     private boolean accountNonExpired = true;
     //
     @ManyToOne(optional = true)
+    @JoinColumn(name = "gs_account")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GSAccount gsAccount;
     @Transient

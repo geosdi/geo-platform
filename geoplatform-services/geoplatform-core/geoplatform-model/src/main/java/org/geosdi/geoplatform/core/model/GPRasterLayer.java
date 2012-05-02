@@ -44,9 +44,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -68,7 +68,7 @@ public class GPRasterLayer extends GPLayer {
     @Column
     private float opacity = 1.0f;
     // The character , separated list of styles
-    @Column(length = 500, columnDefinition="TEXT")
+    @Column(length = 500, columnDefinition = "TEXT")
     private String styles;
     //
     @Embedded
@@ -80,6 +80,7 @@ public class GPRasterLayer extends GPLayer {
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @Index(name = "RASTER_PROJECT_ID_INDEX")
     private GPProject project;
 
     public GPRasterLayer() {
@@ -179,12 +180,12 @@ public class GPRasterLayer extends GPLayer {
     public void setProject(GPProject project) {
         this.project = project;
     }
+
     /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
      */
-
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");

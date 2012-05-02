@@ -51,6 +51,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 /**
  * @author Vincenzo Monteverde
@@ -75,6 +76,7 @@ public class GPProject implements Serializable {
     private Long id;
     //
     @Column(nullable = false)
+    @Index(name = "PROJECT_NAME_INDEX")
     private String name;
     //
     @Column(name = "number_of_elements")

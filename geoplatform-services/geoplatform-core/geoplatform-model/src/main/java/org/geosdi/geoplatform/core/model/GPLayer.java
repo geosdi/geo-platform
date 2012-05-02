@@ -51,6 +51,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.Index;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -77,6 +78,7 @@ public abstract class GPLayer implements Serializable {
     private String title;
     //
     @Column
+    @Index(name = "_LAYER_NAME_INDEX")
     private String name;
     //
     @Column(name = "alias_name")

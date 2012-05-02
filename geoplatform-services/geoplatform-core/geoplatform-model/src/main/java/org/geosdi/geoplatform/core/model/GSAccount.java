@@ -55,8 +55,6 @@ import org.hibernate.annotations.Index;
 @Entity(name = "GSAccount")
 @Table(name = "gs_account")
 @XmlRootElement(name = "GSAccount")
-@org.hibernate.annotations.Table(appliesTo = "gs_account", indexes = {
-    @Index(name = "gs_account_idx", columnNames = {"gs_user"})})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_account")
 public class GSAccount implements Serializable {
 
@@ -71,6 +69,7 @@ public class GSAccount implements Serializable {
     private Long id;
     //
     @Column(name = "gs_user")
+    @Index(name = "GS_USER_INDEX")
     private String gsuser;
     //
     @Column

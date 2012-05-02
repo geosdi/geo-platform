@@ -46,6 +46,7 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 /**
  * The <tt>AclSid</tt> (SID is an acronym for "Security Identity") domain class
@@ -81,6 +82,7 @@ public class AclSid {
      * SID stands for "Secure Identity".
      */
     @Column(nullable = false)
+    @Index(name = "ACL_SID_INDEX")
     private String sid;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor methods">

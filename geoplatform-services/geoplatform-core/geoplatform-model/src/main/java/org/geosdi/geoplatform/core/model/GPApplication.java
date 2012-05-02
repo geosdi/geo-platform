@@ -38,10 +38,10 @@ package org.geosdi.geoplatform.core.model;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 /**
  *
@@ -60,6 +60,7 @@ public class GPApplication extends GPAccount {
     private static final long serialVersionUID = 726746042410990607L;
     //
     @Column(name = "app_id", unique = true)
+    @Index(name = "APPLICATION_ID_INDEX")
     private String appID;
 
     /**

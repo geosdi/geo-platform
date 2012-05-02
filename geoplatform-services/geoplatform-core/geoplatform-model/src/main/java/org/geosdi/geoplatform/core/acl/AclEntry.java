@@ -48,6 +48,7 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 /**
  * The <tt>AclEntry</tt> domain class contains entries representing grants 
@@ -79,6 +80,7 @@ public class AclEntry {
     //
     @ManyToOne
     @JoinColumn(name = "acl_object_identity", nullable = false)
+    @Index(name = "ACL_ENTRY_OBJECT_IDENTITY_INDEX")
     private AclObjectIdentity aclObject;
     /**
      * Order wrt AclObjectIdentity
@@ -88,6 +90,7 @@ public class AclEntry {
     //
     @ManyToOne
     @JoinColumn(name = "sid", nullable = false)
+    @Index(name = "ACL_ENTRY_SID_INDEX")
     private AclSid aclSid;
     /**
      * Mask of permission type
@@ -111,7 +114,7 @@ public class AclEntry {
     }
 
     public AclEntry(AclObjectIdentity aclObjectIdentity, Integer aceOrder, AclSid aclSid,
-                    Integer mask, boolean granting) {
+            Integer mask, boolean granting) {
         this.aclObject = aclObjectIdentity;
         this.aceOrder = aceOrder;
         this.aclSid = aclSid;
@@ -122,7 +125,7 @@ public class AclEntry {
     }
 
     public AclEntry(AclObjectIdentity aclObjectIdentity, Integer aceOrder, AclSid aclSid,
-                    Integer mask, boolean granting, boolean auditSuccess, boolean auditFailure) {
+            Integer mask, boolean granting, boolean auditSuccess, boolean auditFailure) {
         this.aclObject = aclObjectIdentity;
         this.aceOrder = aceOrder;
         this.aclSid = aclSid;

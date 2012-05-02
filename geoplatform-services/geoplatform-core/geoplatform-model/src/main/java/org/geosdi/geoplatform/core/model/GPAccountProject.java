@@ -47,6 +47,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.acls.domain.BasePermission;
@@ -74,12 +75,12 @@ public class GPAccountProject implements Serializable {
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-//    @org.hibernate.annotations.Index(name = "ACCOUNT_INDEX") // TODO Uncomment
+    @Index(name = "ACCOUNT_ID_INDEX")
     private GPAccount account;
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-//    @org.hibernate.annotations.Index(name = "PROJECT_INDEX") // TODO Uncomment
+    @Index(name = "PROJECT_ID_INDEX")
     private GPProject project;
     //
     @Column(name = "permission_mask", nullable = false)

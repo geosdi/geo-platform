@@ -44,6 +44,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 /**
  * @author Vincenzo Monteverde
@@ -61,6 +62,7 @@ public class GuiComponent {
     private Long id;
     // The ID (string type) of the GUI Component
     @Column(name = "component_id", nullable = false, unique = true)
+    @Index(name = "GUI_COMPONENT_ID_INDEX")
     private String componentId;
 
     public GuiComponent() {

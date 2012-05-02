@@ -38,10 +38,10 @@ package org.geosdi.geoplatform.core.model;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -63,12 +63,14 @@ public class GPUser extends GPAccount implements UserDetails {
     private String name;
     //
     @Column(name = "user_name", unique = true)
+    @Index(name = "USER_USERNAME_INDEX")
     private String username;
     //
     @Column(name = "user_password")
     private String password;
     //
     @Column(name = "email_address", unique = true)
+    @Index(name = "USER_EMAIL_INDEX")
     private String emailAddress;
     //
     @Column(name = "send_email")

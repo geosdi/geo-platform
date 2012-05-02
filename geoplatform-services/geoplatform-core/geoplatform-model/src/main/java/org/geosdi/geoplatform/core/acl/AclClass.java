@@ -45,6 +45,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 /**
  * The <tt>AclClass</tt> domain class contains entries for the names of each
@@ -66,6 +67,7 @@ public class AclClass {
      * Fully qualified name of a class (package.className) of the secure domain object
      */
     @Column(name = "clazz", unique = true, nullable = false, length = 500)
+    @Index(name = "ACL_CLASS_INDEX")
     private String clazz;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor methods">

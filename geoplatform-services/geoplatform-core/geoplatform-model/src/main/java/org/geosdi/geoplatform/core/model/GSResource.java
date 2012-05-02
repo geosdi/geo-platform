@@ -67,8 +67,6 @@ import org.hibernate.annotations.*;
 @Entity(name = "GSResource")
 @Table(name = "gs_resource")
 @XmlRootElement(name = "GSResource")
-@org.hibernate.annotations.Table(appliesTo = "gs_resource", indexes = {
-    @Index(name = "gs_resource_idx", columnNames = {"layer_name"})})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_resource")
 public class GSResource implements Serializable {
 
@@ -88,6 +86,7 @@ public class GSResource implements Serializable {
     private GSAccount gsAccount;
     //
     @Column(name = "layer_name")
+    @Index(name = "LAYER_NAME_INDEX")
     private String layerName;
     //
     @Column

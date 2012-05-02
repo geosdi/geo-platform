@@ -48,6 +48,7 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 /**
  * The <tt>AclObjectIdentity</tt> domain class contains entries representing
@@ -75,9 +76,11 @@ public class AclObjectIdentity {
     //
     @ManyToOne
     @JoinColumn(name = "object_id_class", nullable = false)
+    @Index(name = "ACL_OBJECT_IDENTITY_CLASS_INDEX")
     private AclClass aclClass;
     //
     @Column(name = "object_id_identity", nullable = false)
+    @Index(name = "ACL_OBJECT_IDENTITY_ID_INDEX")
     private Long objectId;
     //
     @ManyToOne

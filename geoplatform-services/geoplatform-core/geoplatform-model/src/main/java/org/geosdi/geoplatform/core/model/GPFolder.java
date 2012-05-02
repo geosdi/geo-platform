@@ -49,6 +49,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -74,6 +75,7 @@ public class GPFolder implements Serializable {
     private Long id;
     //
     @Column(nullable = false)
+    @Index(name = "FOLDER_NAME_INDEX")
     private String name;
     //
     @ManyToOne(optional = true)

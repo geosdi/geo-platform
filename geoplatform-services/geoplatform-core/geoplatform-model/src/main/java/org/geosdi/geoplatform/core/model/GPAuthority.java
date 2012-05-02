@@ -46,9 +46,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
@@ -74,6 +74,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     private Long id;
     //
     @Column(name = "string_id", nullable = false)
+    @Index(name = "AUTHORITY_STRING_ID_INDEX")
     private String stringID;
     //
     @Column(nullable = false)

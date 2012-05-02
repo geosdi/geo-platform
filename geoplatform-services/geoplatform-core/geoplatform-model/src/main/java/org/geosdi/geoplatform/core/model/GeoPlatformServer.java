@@ -47,9 +47,9 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -73,9 +73,11 @@ public class GeoPlatformServer implements Serializable {
     private Long id;
     //
     @Column(name = "server_url", nullable = false, unique = true)
+    @Index(name = "SERVER_URL_INDEX")
     private String serverUrl;
     //
     @Column
+    @Index(name = "SERVER_NAME_INDEX")
     private String name;
     //
     @Column(name = "alias_name")
@@ -84,7 +86,7 @@ public class GeoPlatformServer implements Serializable {
     @Column
     private String title;
     //
-    @Column(name = "abstract", columnDefinition="TEXT")
+    @Column(name = "abstract", columnDefinition = "TEXT")
     private String abstractServer;
     //
     @Column(name = "contact_person")

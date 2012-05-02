@@ -43,9 +43,6 @@ import java.io.Serializable;
  */
 public class GeoPlatformVersionInfo implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -7280821322784906035L;
     private String name;
     private String version;

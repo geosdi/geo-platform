@@ -43,9 +43,6 @@ import java.io.Serializable;
  */
 public class CopyrightInfo implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 3539309129736218989L;
     private String key;
     private String version;

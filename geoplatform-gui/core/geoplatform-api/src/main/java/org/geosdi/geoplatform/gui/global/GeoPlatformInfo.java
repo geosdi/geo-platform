@@ -44,9 +44,6 @@ import java.util.List;
  */
 public class GeoPlatformInfo implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 6057828785239586928L;
     private GeoPlatformVersionInfo version;
     private List<CopyrightInfo> copyrightInfo;

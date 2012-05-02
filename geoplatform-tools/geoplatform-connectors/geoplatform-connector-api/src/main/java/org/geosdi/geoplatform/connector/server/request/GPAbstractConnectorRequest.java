@@ -38,11 +38,13 @@ package org.geosdi.geoplatform.connector.server.request;
 import java.net.URI;
 import java.net.URISyntaxException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.handler.ConnectorHttpRequestRetryHandler;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
@@ -52,20 +54,20 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
  */
 public abstract class GPAbstractConnectorRequest<T>
         implements GPConnectorRequest<T> {
-
+    
     protected final URI serverURI;
     protected final GPSecurityConnector securityConnector;
     protected final HttpClient clientConnection;
-
+    
     public GPAbstractConnectorRequest(GPServerConnector server)
             throws URISyntaxException {
         this(server.getClientConnection(), server.getURI(),
                 server.getSecurityConnector());
     }
-
+    
     public GPAbstractConnectorRequest(HttpClient theClientConnection,
             URI theServerURI, GPSecurityConnector theSecurityConnector) {
-
+        
         this.clientConnection = theClientConnection;
         this.serverURI = theServerURI;
         this.securityConnector = theSecurityConnector;
@@ -77,23 +79,26 @@ public abstract class GPAbstractConnectorRequest<T>
      */
     protected void prepareHttpParams() {
         HttpParams httpParams = this.clientConnection.getParams();
-
+        
         httpParams.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
                 GeoPlatformHTTP.CONTENT_TYPE_XML);
-
+        
         httpParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET,
                 "UTF-8");
-
+        
         HttpConnectionParams.setConnectionTimeout(httpParams,
                 10);
         HttpConnectionParams.setSoTimeout(httpParams, 10);
+        
+        ((DefaultHttpClient) this.clientConnection).setHttpRequestRetryHandler(
+                new ConnectorHttpRequestRetryHandler(5));
     }
-
+    
     @Override
     public URI getURI() {
         return this.serverURI;
     }
-
+    
     @Override
     public HttpClient getClientConnection() {
         return this.clientConnection;

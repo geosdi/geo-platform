@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.cswconnector.server.request;
 
 import java.net.URISyntaxException;
+import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
@@ -66,61 +67,81 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
         super(server);
     }
 
+    @Override
     public Integer getMaxRecords() {
         return maxRecords;
     }
 
+    @Override
     public void setMaxRecords(Integer maxRecords) {
         this.maxRecords = maxRecords;
     }
 
+    @Override
     public Integer getStartPosition() {
         return startPosition;
     }
 
+    @Override
     public void setStartPosition(Integer startPosition) {
         this.startPosition = startPosition;
     }
 
+    @Override
     public String getOutputFormat() {
         return outputFormat;
     }
 
+    @Override
     public void setOutputFormat(String outputFormat) {
         this.outputFormat = outputFormat;
     }
 
+    @Override
     public String getOutputSchema() {
         return outputSchema;
     }
 
+    @Override
     public void setOutputSchema(String outputSchema) {
         this.outputSchema = outputSchema;
     }
 
+    @Override
     public ResultType getResultType() {
         return resultType;
     }
 
+    @Override
     public void setResultType(ResultType resultType) {
         this.resultType = resultType;
     }
 
+    @Override
     public ElementSetType getElementSetName() {
         return elementSetName;
     }
 
+    @Override
     public void setElementSetName(ElementSetType elementSetName) {
         this.elementSetName = elementSetName;
     }
 
+    @Override
     public TypeName getTypeName() {
         return typeName;
     }
 
+    @Override
     public void setTypeName(TypeName typeName) {
         this.typeName = typeName;
     }
+
+    @Override
+    public StringEntity preparePostEntity() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
 
     @Override
     public String toString() {

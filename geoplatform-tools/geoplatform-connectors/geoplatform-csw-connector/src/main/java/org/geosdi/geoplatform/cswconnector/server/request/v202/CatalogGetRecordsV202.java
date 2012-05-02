@@ -51,6 +51,7 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
         super(server);
     }
 
+    @Override
     public GetRecordsResponseType getResponseEntity() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

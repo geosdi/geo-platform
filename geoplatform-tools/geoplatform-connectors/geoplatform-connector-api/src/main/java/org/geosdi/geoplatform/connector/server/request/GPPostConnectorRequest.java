@@ -33,30 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.server.request;
+package org.geosdi.geoplatform.connector.server.request;
 
 import java.net.URISyntaxException;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.GPPostConnectorRequest;
-import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
+public abstract class GPPostConnectorRequest<T>
+        extends GPAbstractConnectorRequest<T> {
 
-    static {
-        cswContext = GeoPlatformJAXBContextRepository.getProvider(
-                CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
-    }
-    //
-    protected static final GPConnectorJAXBContext cswContext;
+    protected HttpPost postMethod;
 
-    public CatalogCSWRequest(GPServerConnector server) throws URISyntaxException {
+    public GPPostConnectorRequest(GPServerConnector server) throws URISyntaxException {
         super(server);
     }
+
+    protected void preparePostMethod() {
+        this.postMethod = new HttpPost(super.getURI());
+    }
+    
+    public abstract StringEntity preparePostEntity();
 }

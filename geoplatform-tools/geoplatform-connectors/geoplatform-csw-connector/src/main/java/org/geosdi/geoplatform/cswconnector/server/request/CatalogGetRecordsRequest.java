@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request;
 
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
@@ -43,7 +44,7 @@ import org.geosdi.geoplatform.xml.csw.v202.ResultType;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface CatalogGetRecordsRequest {
+public interface CatalogGetRecordsRequest<T> extends GPConnectorRequest<T> {
     // TODO Filter request
 //
 //    String getConstraint();

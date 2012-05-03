@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.xml.csw.v202.ResultType;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
-        implements CatalogGetRecordsRequest {
+        implements CatalogGetRecordsRequest<T> {
 
 //    protected final String version;
     // TODO Filter request

@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform;
 
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.MultiPolygon;
+import com.vividsolutions.jts.io.WKTReader;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
@@ -51,25 +54,12 @@ import org.geotools.ows.ServiceException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
-import org.geosdi.geoplatform.core.dao.GPProjectDAO;
-import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
-import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
-import org.geosdi.geoplatform.core.model.GPLayerType;
-import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
-import org.geosdi.geoplatform.core.model.GPApplication;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.dao.*;
+import org.geosdi.geoplatform.core.model.*;
+import org.geosdi.geoplatform.core.model.enums.GrantType;
+import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -84,7 +74,7 @@ import org.xml.sax.SAXException;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-TEST.xml",
@@ -118,16 +108,25 @@ public abstract class BaseDAOTest {
     protected GPAuthorityDAO authorityDAO;
     //
     @Autowired
+    protected GSAccountDAO gsAccountDAO;
+    //
+    @Autowired
+    protected GSResourceDAO gsResourceDAO;
+    //
+    @Autowired
     protected GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
     //
     protected GPUser adminTest;
     protected GPUser userTest;
     protected GPUser viewerTest;
+    protected GPUser gsUserTest;
     protected GPProject adminProject;
     protected GPProject userProject;
     protected GPProject viewerProject;
+    protected GPProject gsUserProject;
     //
     private URL url = null;
+    private final String gsAccountUserName = "gsuser";
     private final String urlWMSGetCapabilities =
             "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 
@@ -223,6 +222,58 @@ public abstract class BaseDAOTest {
         this.insertAccount();
         this.insertProject();
         this.insertFoldersAndLayers();
+        this.insertGPAccessInfoTest();
+    }
+
+    private void insertGPAccessInfoTest() {
+        this.removeAllGSAccounts();
+        GSAccount gsAccount = this.generateGSAccount(this.gsAccountUserName);
+        GSResource resource = this.generateResource(gsAccount);
+        gsUserTest.setDefaultProjectID(gsUserProject.getId());
+        gsUserTest.setGsAccount(gsAccount);
+        this.gsAccountDAO.persist(gsAccount);
+        this.gsResourceDAO.persist(resource);
+        accountDAO.merge(gsUserTest);
+    }
+
+    private GSAccount generateGSAccount(String userName) {
+        GSAccount account = new GSAccount();
+        account.setGsuser(userName);
+        account.setAuthkey(UUID.randomUUID().toString());
+        return account;
+    }
+
+    private GSResource generateResource(GSAccount account) {
+        GSResource resource = new GSResource();
+        GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory(null);
+        WKTReader reader = new WKTReader(geometryFactory);
+        MultiPolygon multiPolygon = null;
+        try {
+            //"District of Columbia" restrictions
+            multiPolygon = (MultiPolygon) reader.read(
+                    "MULTIPOLYGON(((-77.008232 38.966557,-76.911209 38.889988,-77.045448 38.78812,-77.035248 38.813915,-77.045189 38.829365,-77.040405 38.838413,-77.039078 38.862431,-77.067886 38.886101,-77.078949 38.9156,-77.122627 38.93206,-77.042389 38.993431,-77.008232 38.966557)))");
+        } catch (com.vividsolutions.jts.io.ParseException ex) {
+            logger.error("Error to generate multipolygon: " + ex);
+        }
+        resource.setArea(multiPolygon);
+        resource.setGrant(GrantType.ALLOW);
+        resource.setWorkspace("topp");
+        resource.setLayerName("states");
+        resource.setAttributes("STATE_NAME,MALE,FEMALE");
+        //simple cql filter accourding to Multipolygon restriction
+        resource.setCqlFilterRead("STATE_NAME='Kansas'");
+        resource.setDefaultStyle("polygon");
+        resource.setGsAccount(account);
+        return resource;
+    }
+
+    private void removeAllGSAccounts() {
+        List<GSAccount> accountList = gsAccountDAO.findAll();
+        for (GSAccount account : accountList) {
+            logger.trace("\n*** GSAccount to REMOVE:\n{}\n***", account);
+            boolean removed = gsAccountDAO.remove(account);
+            Assert.assertTrue("Old GSAccount NOT removed", removed);
+        }
     }
 
     private void insertAccount() {
@@ -230,38 +281,43 @@ public abstract class BaseDAOTest {
         this.adminTest = this.insertUser("admin", GPRole.ADMIN);
         this.userTest = this.insertUser("user", GPRole.USER);
         this.viewerTest = this.insertUser("viewer", GPRole.VIEWER);
+        this.gsUserTest = this.insertUser(this.gsAccountUserName, GPRole.ADMIN);
         //
         this.insertApplication("SIGV");
     }
 
     private void insertProject() {
         this.adminProject = this.createProject("admin_project", true, 0,
-                                               new Date(System.currentTimeMillis()));
+                new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
-                                              new Date(System.currentTimeMillis() + 300 * 1000));
+                new Date(System.currentTimeMillis() + 300 * 1000));
         this.viewerProject = this.createProject("viewer_project", false, 0,
-                                                new Date(System.currentTimeMillis() + 1700 * 1000));
-        projectDAO.persist(adminProject, userProject, viewerProject);
+                new Date(System.currentTimeMillis() + 1700 * 1000));
+        this.gsUserProject = this.createProject("gp_user_project", true, 0,
+                new Date(System.currentTimeMillis()));
+        projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //
         this.insertBindingUserProject(adminTest, adminProject, BasePermission.ADMINISTRATION.getMask());
         this.insertBindingUserProject(userTest, adminProject, BasePermission.READ.getMask());
         this.insertBindingUserProject(userTest, userProject, BasePermission.ADMINISTRATION.getMask());
         this.insertBindingUserProject(viewerTest, viewerProject, BasePermission.READ.getMask());
+        this.insertBindingUserProject(gsUserTest, gsUserProject, BasePermission.ADMINISTRATION.getMask());
         //
         adminTest.setDefaultProjectID(adminProject.getId());
         userTest.setDefaultProjectID(userProject.getId());
         viewerTest.setDefaultProjectID(viewerProject.getId());
-        accountDAO.merge(adminTest, userTest, viewerTest);
+        gsUserTest.setDefaultProjectID(gsUserProject.getId());
+        accountDAO.merge(adminTest, userTest, viewerTest, gsUserTest);
     }
 
     private void insertFoldersAndLayers() {
         // Projects of admin
         for (int i = 1; i <= 41; i++) {
             GPProject projectIth = this.createProject("project_admin_k_" + i, false,
-                                                      i, new Date(System.currentTimeMillis() + i * 333));
+                    i, new Date(System.currentTimeMillis() + i * 333));
             projectDAO.persist(projectIth);
             this.insertBindingUserProject(this.adminTest, projectIth,
-                                          BasePermission.ADMINISTRATION.getMask());
+                    BasePermission.ADMINISTRATION.getMask());
         }
 
         // Project of user -> root folder: "server layer"
@@ -357,7 +413,7 @@ public abstract class BaseDAOTest {
     }
 
     protected GPFolder createFolder(String name, GPProject project,
-                                    GPFolder parent, int position) {
+            GPFolder parent, int position) {
         GPFolder folder = new GPFolder();
         folder.setName(name);
         folder.setProject(project);
@@ -367,7 +423,7 @@ public abstract class BaseDAOTest {
     }
 
     protected GPProject createProject(String name, boolean isShared,
-                                      int numberOfElements, Date creationalDate) {
+            int numberOfElements, Date creationalDate) {
         GPProject project = new GPProject();
         project.setName(name);
         project.setShared(isShared);
@@ -377,7 +433,7 @@ public abstract class BaseDAOTest {
     }
 
     protected void insertBindingUserProject(GPUser user, GPProject project,
-                                            int permissionMask) {
+            int permissionMask) {
         GPAccountProject userProjects = new GPAccountProject();
         userProjects.setAccountAndProject(user, project);
         userProjects.setPermissionMask(permissionMask);
@@ -385,7 +441,7 @@ public abstract class BaseDAOTest {
     }
 
     protected GPRasterLayer createRasterLayer(GPFolder folder, GPProject project,
-                                              int position) {
+            int position) {
         String name = "deagostini_ita_250mila";
         // GPRasterLayer
         GPRasterLayer raster = new GPRasterLayer();
@@ -470,7 +526,7 @@ public abstract class BaseDAOTest {
     }
 
     private List<GPRasterLayer> loadRasterLayer(List<Layer> layers,
-                                                GPFolder folder, GPProject project, int position) {
+            GPFolder folder, GPProject project, int position) {
         List<GPRasterLayer> rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
 
         for (int i = 0; i < layers.size(); i++) {

@@ -35,33 +35,47 @@
  */
 package org.geosdi.geoplatform.gui.featureinfo.widget.factory;
 
+import com.extjs.gxt.ui.client.Registry;
+import com.google.gwt.json.client.JSONString;
+import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
+import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
+import org.gwtopenmaps.openlayers.client.control.GetFeatureInfoVendorParam;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfoOptions;
+import org.gwtopenmaps.openlayers.client.event.BeforeGetFeatureInfoListener;
+import org.gwtopenmaps.openlayers.client.event.BeforeGetFeatureInfoListener.BeforeGetFeatureInfoEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureInfoControlFactory {
 
     /**
-     * 
+     *
      * @param urlServer
-     * @return 
+     * @return
      */
     public static WMSGetFeatureInfo createControl(String urlServer) {
         WMSGetFeatureInfoOptions options = new WMSGetFeatureInfoOptions();
 
-        /** FIX MEEEEEEEEEEEEEEEEEE **/
+        /**
+         * FIX MEEEEEEEEEEEEEEEEEE *
+         */
         if (urlServer.equalsIgnoreCase("http://10.220.154.25/geowebcache/service/wms")) {
             options.setURL("http://10.220.154.25/geoserver/wms");
         } else {
+            String authKeyValue = Registry.get(GlobalRegistryEnum.AUTH_KEY.getValue());
+            if (authKeyValue != null && !authKeyValue.equals("")) {
+                GetFeatureInfoVendorParam param = new GetFeatureInfoVendorParam();
+                param.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authKeyValue);
+                options.setVendorParams(param);
+            }
             options.setURL(urlServer);
         }
         options.setTitle("Query visible layers");
         options.setQueryVisible(true);
-        
         return new WMSGetFeatureInfo(options);
     }
 }

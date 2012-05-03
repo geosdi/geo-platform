@@ -110,13 +110,11 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
         System.out.println("Showing the info widget");
         for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
             IGPFeatureInfoElement element = it.next();
-
             if (element.isActive()) {
                 this.mainPanel.add(element.getElementPanel());
             }
         }
         this.mainPanel.layout();
-
         if (this.mainPanel.getItemCount() > 0) {
             super.show();
         } else {

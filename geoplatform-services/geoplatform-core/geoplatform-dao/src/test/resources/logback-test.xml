@@ -23,6 +23,7 @@
     <logger name="org.geosdi.geoplatform.GPDAOTest" level="info"/>
     <logger name="org.geosdi.geoplatform.ModelDAOTest" level="info"/>
     <logger name="org.geosdi.geoplatform.ServerDAOTest" level="info"/>
+    <logger name="org.geosdi.geoplatform.GPAccessInfoTest" level="info"/>
 
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="info"/>

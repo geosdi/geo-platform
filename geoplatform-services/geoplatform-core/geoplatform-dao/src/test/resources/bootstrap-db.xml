@@ -16,6 +16,21 @@
     <column>app_id</column>
     <row>
       <value>GPUser</value>
+      <value>54</value>
+      <value>true</value>
+      <value>false</value>
+      <value><![CDATA[2012-4-12 12:12:12.122]]></value>
+      <null/>
+      <value>true</value>
+      <value>gsuser@test.foo</value>
+      <value><![CDATA[Complete name of gsuser]]></value>
+      <value>zGvkHUtklPuGAU3HJ+wW8w==</value>
+      <value>true</value>
+      <value>gsuser</value>
+      <null/>
+    </row>
+    <row>
+      <value>GPUser</value>
       <value>53</value>
       <value>true</value>
       <value>false</value>
@@ -103,6 +118,12 @@
       <value>Admin</value>
       <value>SIGV</value>
       <value>53</value>
+    </row>
+    <row>
+      <value>54</value>
+      <value>Admin</value>
+      <value>gsuser</value>
+      <value>54</value>
     </row>
   </table>
 </dataset>

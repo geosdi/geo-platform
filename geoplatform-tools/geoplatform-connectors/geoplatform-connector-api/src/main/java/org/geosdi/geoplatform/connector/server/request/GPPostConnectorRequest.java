@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import javax.xml.bind.JAXBException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -57,6 +59,7 @@ public abstract class GPPostConnectorRequest<T>
     protected void preparePostMethod() {
         this.postMethod = new HttpPost(super.getURI());
     }
-    
-    public abstract StringEntity preparePostEntity();
+
+    public abstract StringEntity preparePostEntity() throws JAXBException,
+            UnsupportedEncodingException;
 }

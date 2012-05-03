@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import javax.xml.bind.JAXBException;
 import org.apache.http.client.HttpClient;
 
 /**
@@ -47,7 +49,7 @@ public interface GPConnectorRequest<T> {
 
     URI getURI();
 
-    T getResponseEntity();
+    T getResponseEntity() throws JAXBException, UnsupportedEncodingException;
 
     HttpClient getClientConnection();
 }

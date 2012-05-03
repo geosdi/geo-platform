@@ -38,14 +38,13 @@ package org.geosdi.geoplatform.services;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.io.IOException;
-import java.io.InputStream;
+import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
@@ -54,6 +53,7 @@ import org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.cswconnector.CatalogVersionException;
 import org.geosdi.geoplatform.cswconnector.GPCSWServerConnector;
 import org.geosdi.geoplatform.cswconnector.GeoPlatformCSWConnectorBuilder;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
@@ -65,13 +65,10 @@ import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
 import org.geosdi.geoplatform.services.responsibility.GetRecordsRequestManager;
 import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
-import org.geotoolkit.csw.GetRecordsRequest;
-import org.geotoolkit.csw.xml.CSWMarshallerPool;
-import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
-import org.geotoolkit.csw.xml.v202.SummaryRecordType;
-import org.geotoolkit.dublincore.xml.v2.elements.SimpleLiteral;
-import org.geotoolkit.util.StringUtilities;
-import org.geotoolkit.xml.MarshallerPool;
+import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
+import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
+import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,8 +84,6 @@ class CSWServiceImpl {
     private GPServerDAO serverDao;
     //
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
-    private MarshallerPool pool = CSWMarshallerPool.getInstance();
-    private Unmarshaller um;
     //
     private GetRecordsRequestManager catalogRequestManager = new GetRecordsRequestManager();
 
@@ -300,13 +295,13 @@ class CSWServiceImpl {
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
-        GetRecordsRequest request = this.createGetRecordsRequest(server.getServerUrl());
+        CatalogGetRecordsRequest request = this.createGetRecordsRequest(server.getServerUrl());
         catalogRequestManager.arrangeRequest(GetRecordsSearchType.COUNT, catalogFinder, request);
         logger.trace("\n*** Constraint: \"{}\" ***", request.getConstraint());
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
 
-        return response.getSearchResults().getNumberOfRecordsMatched();
+        return response.getSearchResults().getNumberOfRecordsMatched().intValue();
     }
 
     List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
@@ -316,12 +311,12 @@ class CSWServiceImpl {
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
-        GetRecordsRequest request = this.createGetRecordsRequest(server.getServerUrl());
+        CatalogGetRecordsRequest request = this.createGetRecordsRequest(server.getServerUrl());
         catalogRequestManager.arrangeRequest(GetRecordsSearchType.SEARCH, catalogFinder, request);
 
         // Pagination search
-        request.setMaxRecords(num);
-        request.setStartPosition(start);
+        request.setMaxRecords(BigInteger.valueOf(num));
+        request.setStartPosition(BigInteger.valueOf(start));
         logger.debug("\n*** Num: {} *** Start: {} ***",
                 request.getMaxRecords(), request.getStartPosition());
 
@@ -332,16 +327,22 @@ class CSWServiceImpl {
                     response.getSearchResults().getNumberOfRecordsReturned(),
                     response.getSearchResults().getNextRecord()});
 
-        if (response.getSearchResults().getNumberOfRecordsReturned()
+        if (response.getSearchResults().getNumberOfRecordsReturned().intValue()
                 != response.getSearchResults().getAbstractRecord().size()) {
             throw new ServerInternalFault("CSW Catalog Server Error: incorrect number of records, expected "
                     + response.getSearchResults().getNumberOfRecordsReturned() + " but was "
                     + response.getSearchResults().getAbstractRecord().size());
         }
 
-        List<SummaryRecordType> summaryRecordList =
-                (List<SummaryRecordType>) response.getSearchResults().getAbstractRecord();
-        logger.trace("\n*** Record list size: {} ***", summaryRecordList.size());
+        List<JAXBElement<? extends AbstractRecordType>> records =
+                response.getSearchResults().getAbstractRecord();
+        logger.trace("\n*** Record list size: {} ***", records.size());
+
+        List<SummaryRecordType> summaryRecordList = new ArrayList<SummaryRecordType>(records.size());
+        for (JAXBElement<? extends AbstractRecordType> record : records) {
+            SummaryRecordType summary = (SummaryRecordType) record.getValue();
+            summaryRecordList.add(summary);
+        }
 
         return this.convertSummaryRecords(summaryRecordList);
     }
@@ -357,14 +358,13 @@ class CSWServiceImpl {
         return server;
     }
 
-    private List<SummaryRecordDTO> convertSummaryRecords(
-            List<SummaryRecordType> summaryRecordList) {
+    private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> summaryRecordList) {
         List<SummaryRecordDTO> summaryRecordListDTO = new ArrayList<SummaryRecordDTO>(summaryRecordList.size());
         for (SummaryRecordType summaryRecord : summaryRecordList) {
             SummaryRecordDTO dto = new SummaryRecordDTO();
-            dto.setIdentifier(StringUtilities.toCommaSeparatedValues(summaryRecord.getIdentifier()));
-            dto.setTitle(StringUtilities.toCommaSeparatedValues(summaryRecord.getTitle()));
-            dto.setAbstractText(StringUtilities.toCommaSeparatedValues(summaryRecord.getAbstract()));
+            dto.setIdentifier(this.toCommaSeparatedValues(summaryRecord.getIdentifier()));
+            dto.setTitle(this.toCommaSeparatedValues(summaryRecord.getTitle()));
+            dto.setAbstractText(this.toCommaSeparatedValues(summaryRecord.getAbstract()));
             dto.setSubjects(this.convertLiteralToList(summaryRecord.getSubject()));
 
             summaryRecordListDTO.add(dto);
@@ -380,7 +380,22 @@ class CSWServiceImpl {
         return stringList;
     }
 
-    private GetRecordsRequest createGetRecordsRequest(String serverUrl) throws IllegalParameterFault {
+    private String toCommaSeparatedValues(final Collection<?> values) {
+        if (values == null || values.isEmpty()) {
+            return "";
+        }
+
+        final StringBuilder str = new StringBuilder();
+        for (Object obj : values) {
+            str.append(obj).append(",");
+        }
+        str.deleteCharAt(str.length() - 1);
+
+        return str.toString();
+    }
+
+    private CatalogGetRecordsRequest createGetRecordsRequest(String serverUrl)
+            throws IllegalParameterFault {
 
         GPCSWServerConnector serverConnector = null;
         try {
@@ -392,42 +407,21 @@ class CSWServiceImpl {
             throw new IllegalParameterFault("Malformed URL");
         }
 
-        return serverConnector.createGetRecords();
+        return serverConnector.createGetRecordsRequest();
     }
 
-    private GetRecordsResponseType createGetRecordsResponse(
-            GetRecordsRequest request) throws IllegalParameterFault, ServerInternalFault {
+    private GetRecordsResponseType createGetRecordsResponse(CatalogGetRecordsRequest request)
+            throws IllegalParameterFault, ServerInternalFault {
 
         GetRecordsResponseType response = null;
         try {
-            um = pool.acquireUnmarshaller();
-
-            // unmarshall the response
-            InputStream is = request.getResponseStream();
-            Object content = um.unmarshal(is);
-
-            if (!(content instanceof JAXBElement)) {  // ExceptionReport
-                logger.error("\n### {}", content);
-                throw new ServerInternalFault("CSW Catalog Server Error: incorrect responce");
-            }
-
-            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
-            response = elementType.getValue();
-
-        } catch (JAXBException ex) {
-            logger.error("### JAXBException: " + ex.getMessage());
-            throw new IllegalParameterFault("Error with JAXB");
+            // TODO FIX Delete downcast
+            response = (GetRecordsResponseType) request.getResponse();
         } catch (IOException ex) {
             logger.error("### IOException: " + ex.getMessage());
             throw new IllegalParameterFault("Error on parse response stream");
-        } catch (IllegalArgumentException ex) { // TODO DEL (for debug purpose)
-            logger.error("### IllegalArgumentException: " + ex.getMessage());
-            throw new IllegalParameterFault("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Error on argument @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        } finally {
-            if (um != null) {
-                pool.release(um);
-            }
         }
+
         return response;
     }
 }

@@ -37,11 +37,11 @@ package org.geosdi.geoplatform.services.responsibility;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
 import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
-import org.geotoolkit.csw.GetRecordsRequest;
 
 /**
  *
@@ -53,7 +53,7 @@ public class TimeSearchRequest extends GetRecordsRequestHandler {
 
     @Override
     protected void processGetRecordsRequest(GetRecordsSearchType searchType,
-            CatalogFinderBean catalogFinder, GetRecordsRequest request)
+            CatalogFinderBean catalogFinder, CatalogGetRecordsRequest request)
             throws IllegalParameterFault {
         logger.debug("Process...");
 

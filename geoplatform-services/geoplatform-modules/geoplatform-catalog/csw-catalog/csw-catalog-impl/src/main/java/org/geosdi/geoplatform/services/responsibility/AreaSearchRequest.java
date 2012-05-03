@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.services.responsibility;
 
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
 import org.geosdi.geoplatform.gui.responce.BBox;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
-import org.geotoolkit.csw.GetRecordsRequest;
 
 /**
  *
@@ -51,7 +51,7 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
 
     @Override
     protected void processGetRecordsRequest(GetRecordsSearchType searchType,
-            CatalogFinderBean catalogFinder, GetRecordsRequest request)
+            CatalogFinderBean catalogFinder, CatalogGetRecordsRequest request)
             throws IllegalParameterFault {
         logger.debug("Process...");
 
@@ -68,7 +68,7 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
             logger.trace("\n+++ Area constraint: \"{}\" +++", areaConstraint);
 
             // TODO Test me
-//            super.addConstraint(request, areaConstraint);
+            super.addConstraint(request, areaConstraint);
         }
     }
 }

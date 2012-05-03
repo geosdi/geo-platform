@@ -42,12 +42,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-         
-        <dependency>
-            <groupId>org.geotoolkit.pending</groupId>
-            <artifactId>geotk-clients-core</artifactId>
-            <version>${geotk-client.version}</version>
-        </dependency>
         
         <!-- =========================================================== -->
 	<!-- ============================ JAXB ========================== -->

@@ -35,10 +35,12 @@
  */
 package org.geosdi.geoplatform.services.responsibility;
 
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
-import org.geotoolkit.csw.GetRecordsRequest;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +58,7 @@ public abstract class GetRecordsRequestHandler {
     }
 
     public void forwardGetRecordsRequest(GetRecordsSearchType searchType,
-            CatalogFinderBean catalogFinder, GetRecordsRequest request)
+            CatalogFinderBean catalogFinder, CatalogGetRecordsRequest request)
             throws IllegalParameterFault {
 
         this.processGetRecordsRequest(searchType, catalogFinder, request);
@@ -67,17 +69,19 @@ public abstract class GetRecordsRequestHandler {
 
     protected abstract void processGetRecordsRequest(
             GetRecordsSearchType searchType, CatalogFinderBean catalogFinder,
-            GetRecordsRequest request)
+            CatalogGetRecordsRequest request)
             throws IllegalParameterFault;
 
-    protected void addConstraint(GetRecordsRequest request,
+    protected void addConstraint(CatalogGetRecordsRequest request,
             String followingConstraint) {
 
         String previousConstraint = request.getConstraint();
-        if (previousConstraint != null) {
-            request.setConstraint(previousConstraint + " AND " + followingConstraint);
-        } else {
+        if (previousConstraint == null) {
+            request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
+            request.setConstraintLanguageVersion(ConstraintLanguageVersion.v1_1_0);
             request.setConstraint(followingConstraint);
+        } else {
+            request.setConstraint(previousConstraint + " AND " + followingConstraint);
         }
     }
 }

@@ -16,20 +16,7 @@
 
     <name>Geo-Platform :: == Publish Module Implementation</name>
 
-    <repositories>
-         <!-- GEOTOOLKIT -->
-        <repository>
-            <id>geotoolkit</id>
-            <name>Geotk repository</name>
-            <url>http://maven.geotoolkit.org</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <dependencies>
-        
 <!--        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
@@ -78,24 +65,6 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configurator</artifactId>
         </dependency>
-        
-<!--        <dependency>
-            <groupId>org.geotoolkit.pending</groupId>
-            <artifactId>geotk-style</artifactId>
-            <version>3.x-SNAPSHOT</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geotoolkit.pending</groupId>
-            <artifactId>geotk-coverageio-store</artifactId>
-            <version>3.x-SNAPSHOT</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geotoolkit.pending</groupId>
-            <artifactId>geotk-shapefile</artifactId>
-            <version>3.x-SNAPSHOT</version>
-        </dependency>-->
         
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
@@ -315,7 +284,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
     </dependencies>    
     
     <build>
@@ -340,4 +308,5 @@
             </plugin>
         </plugins>
     </build>
+    
 </project>

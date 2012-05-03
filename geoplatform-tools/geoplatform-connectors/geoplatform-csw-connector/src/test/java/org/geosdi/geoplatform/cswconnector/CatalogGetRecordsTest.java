@@ -39,8 +39,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,6 +69,10 @@ import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
 import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
@@ -76,14 +82,8 @@ import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
+import org.geosdi.geoplatform.xml.csw.v202.SearchResultsType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
-//import org.geotoolkit.csw.GetRecordsRequest;
-//import org.geotoolkit.csw.xml.CSWMarshallerPool;
-//import org.geotoolkit.csw.xml.ElementSetType;
-//import org.geotoolkit.csw.xml.ResultType;
-//import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
-//import org.geotoolkit.csw.xml.v202.SearchResultsType;
-//import org.geotoolkit.xml.MarshallerPool;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -107,125 +107,88 @@ public class CatalogGetRecordsTest {
     private final static String CSW_PATH_FIRENZE = "/geonetwork/srv/it/csw";
     private final GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
-//    private MarshallerPool pool = CSWMarshallerPool.getInstance();
-//    private Unmarshaller um;
 
-    // TODO Uncomment (commented for geotoolkit bug  - "This operation can't be applied to values of class 'CSWVersion'.")
-//    @Test
-//    public void testWithoutConstraint() throws Exception, JAXBException {
-//        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-//                withServerUrl(new URL("http://ows.provinciatreviso.it/geonetwork/srv/it/csw")).build();
-//        
-//        try {
-//            um = pool.acquireUnmarshaller();
-//            
-//            GetRecordsRequest request = serverConnector.createGetRecords();
-//            
-//            request.setTypeNames("gmd:MD_Metadata");
-//            request.setConstraintLanguage("CQL");
-//            request.setConstraintLanguageVersion("1.1.0");
-//            
-//            request.setOutputSchema("csw:IsoRecord");
-//            request.setElementSetName(ElementSetType.FULL);
-//            
-//            request.setResultType(ResultType.RESULTS);
-//            
-//            request.setStartPosition(1);
-//            request.setMaxRecords(25);
-//            
-//            logger.info("Constraint: {}", request.getConstraint());
-//            
-//            InputStream is = request.getResponseStream();
-//
-//            // unmarshall the response
-//            GetRecordsResponseType response = ((JAXBElement<GetRecordsResponseType>) um.unmarshal(
-//                                               is)).getValue();
-//            
-//            SearchResultsType searchResult = response.getSearchResults();
-//            
-//            logger.info(
-//                    "RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", searchResult.getNumberOfRecordsMatched());
-//            
-//            logger.info(
-//                    "RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}", searchResult.getNumberOfRecordsReturned());
-//            
-//            logger.info(
-//                    "NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", searchResult.getNextRecord());
-//            
-//            List<Object> metadata = searchResult.getAny();
-//            
-//            if (!metadata.isEmpty()) {
-//                logger.info(
-//                        "FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}", metadata.get(0));
-//            }
-//            
-//        } finally {
-//            if (um != null) {
-//                pool.release(um);
-//            }
-//        }
-//    }
-    // TODO Uncomment (commented because the "The service is not running")
-//    @Test
-//    public void testTemporalFilterGeomatys() throws MalformedURLException, JAXBException, IOException {
-//        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-//                withServerUrl(new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default")).build();
-//        
-//        try {
-//            um = pool.acquireUnmarshaller();
-//            
-//            GetRecordsRequest request = serverConnector.createGetRecords();
-//            
-//            request.setTypeNames("csw:Record");
-//            request.setConstraintLanguage("CQL");
-//            request.setConstraintLanguageVersion("1.1.0");
-//
-//            // Text filter
-//            StringBuilder str = new StringBuilder();
-//            str.append("AnyText LIKE '%%'");
-//
-//            // Time filter
-//            Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
-//            Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-//            
-//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-//            
-//            str.append(" AND ");
-//            str.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
-//            str.append(" AND ");
-//            str.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
-//            
-//            request.setConstraint(str.toString());
-//
-//            // unmarshall the response
-//            logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}", request.getConstraint());
-//            InputStream is = request.getResponseStream();
-//            
-//            Object content = um.unmarshal(is);
-//            
-//            if (!(content instanceof JAXBElement)) {
-//                logger.error("\n@@@@@@@@@@@@@@@@ Geomatys ### {}", content); // ExceptionReport
-//                Assert.fail();
-//            }
-//            
-//            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
-//            
-//            GetRecordsResponseType response = elementType.getValue();
-//            
-//            SearchResultsType searchResult = response.getSearchResults();
-//            
-//            logger.info(
-//                    "\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###", searchResult.getNumberOfRecordsMatched());
-//        } finally {
-//            if (um != null) {
-//                pool.release(um);
-//            }
-//        }
-//    }
+    @Test
+    public void testWithoutConstraint() throws Exception {
+        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
+                withServerUrl(new URL("http://ows.provinciatreviso.it/geonetwork/srv/it/csw")).build();
+
+        CatalogGetRecordsRequest request = serverConnector.createGetRecordsRequest();
+
+        request.setTypeName(TypeName.METADATA);
+
+        request.setOutputSchema(OutputSchema.CSW);
+        request.setElementSetName(ElementSetType.SUMMARY);
+        request.setResultType(ResultType.RESULTS);
+
+        request.setStartPosition(BigInteger.ONE);
+        request.setMaxRecords(BigInteger.valueOf(25));
+
+        // TODO FIX Delete downcast
+        GetRecordsResponseType response = (GetRecordsResponseType) request.getResponse();
+
+        SearchResultsType searchResult = response.getSearchResults();
+
+        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}",
+                searchResult.getNumberOfRecordsMatched());
+
+        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}",
+                searchResult.getNumberOfRecordsReturned());
+
+        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}",
+                searchResult.getNextRecord());
+
+        List<JAXBElement<? extends AbstractRecordType>> metadata =
+                searchResult.getAbstractRecord();
+        if (!metadata.isEmpty()) {
+            logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
+                    (SummaryRecordType) (metadata.get(0).getValue()));
+        }
+    }
+
+    @Test
+    public void testTemporalFilterGeomatys() throws Exception {
+        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
+                withServerUrl(new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default")).build();
+
+        CatalogGetRecordsRequest request = serverConnector.createGetRecordsRequest();
+
+        request.setTypeName(TypeName.RECORD);
+
+        request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
+        request.setConstraintLanguageVersion(ConstraintLanguageVersion.v1_1_0);
+
+        // Text filter
+        StringBuilder str = new StringBuilder();
+        str.append("AnyText LIKE '%%'");
+
+        // Time filter
+        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
+        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+        str.append(" AND ");
+        str.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
+        str.append(" AND ");
+        str.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
+
+        request.setConstraint(str.toString());
+        logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}", request.getConstraint());
+
+        // TODO FIX Delete downcast
+        GetRecordsResponseType response = (GetRecordsResponseType) request.getResponse();
+
+        SearchResultsType searchResult = response.getSearchResults();
+
+        logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
+                searchResult.getNumberOfRecordsMatched());
+    }
+
     @Test
     public void testOwnGetRecords()
             throws URISyntaxException, JAXBException,
-                   UnsupportedEncodingException, IOException {
+            UnsupportedEncodingException, IOException {
 
         HttpParams params = new BasicHttpParams();
 

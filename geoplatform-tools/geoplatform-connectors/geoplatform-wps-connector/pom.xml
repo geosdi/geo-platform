@@ -15,7 +15,7 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == WPS Connector</name>
-    
+
     <repositories>
          <!-- GEOTOOLKIT -->
         <repository>
@@ -29,7 +29,6 @@
     </repositories>
 
     <dependencies>
-        
 		<!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -55,12 +54,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
         </dependency>
-        
+
         <!--GEOTOOLKIT WPS CLIENT -->
         <dependency>
             <groupId>org.geotoolkit.pending</groupId>
             <artifactId>geotk-client-wps</artifactId>
-            <version>${geotk-client.version}</version>
+            <version>3.x-SNAPSHOT</version>
         </dependency>
 
         <dependency>

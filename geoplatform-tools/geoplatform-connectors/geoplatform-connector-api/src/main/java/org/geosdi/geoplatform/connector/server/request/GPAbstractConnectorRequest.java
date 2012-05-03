@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
@@ -89,8 +88,9 @@ public abstract class GPAbstractConnectorRequest<T>
 
         httpParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, "UTF-8");
 
-        HttpConnectionParams.setConnectionTimeout(httpParams, 10);
-        HttpConnectionParams.setSoTimeout(httpParams, 10);
+        int timeout = 10000; // 10 seconds
+        HttpConnectionParams.setConnectionTimeout(httpParams, timeout);
+        HttpConnectionParams.setSoTimeout(httpParams, timeout);
 
         ((DefaultHttpClient) this.clientConnection).setHttpRequestRetryHandler(
                 new ConnectorHttpRequestRetryHandler(5));

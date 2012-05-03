@@ -79,12 +79,6 @@
         </dependency>
         
         <dependency>
-            <groupId>org.geotoolkit.pending</groupId>
-            <artifactId>geotk-client-csw</artifactId>
-            <version>${geotk-client.version}</version>
-        </dependency>
-        
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>

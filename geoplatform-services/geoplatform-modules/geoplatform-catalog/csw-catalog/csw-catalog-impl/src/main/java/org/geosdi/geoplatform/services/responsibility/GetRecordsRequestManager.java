@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.services.responsibility;
 
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
-import org.geotoolkit.csw.GetRecordsRequest;
 
 /**
  *
@@ -64,7 +64,7 @@ public class GetRecordsRequestManager {
     }
 
     public void arrangeRequest(GetRecordsSearchType searchType,
-            CatalogFinderBean catalogFinder, GetRecordsRequest request)
+            CatalogFinderBean catalogFinder, CatalogGetRecordsRequest request)
             throws IllegalParameterFault {
 
         typeSearchRequest.forwardGetRecordsRequest(searchType, catalogFinder, request);

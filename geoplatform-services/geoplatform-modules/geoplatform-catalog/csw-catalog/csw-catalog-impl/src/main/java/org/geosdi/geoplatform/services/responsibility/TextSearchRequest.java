@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.services.responsibility;
 
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
-import org.geotoolkit.csw.GetRecordsRequest;
 
 /**
  *
@@ -49,7 +49,7 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
 
     @Override
     protected void processGetRecordsRequest(GetRecordsSearchType searchType,
-            CatalogFinderBean catalogFinder, GetRecordsRequest request)
+            CatalogFinderBean catalogFinder, CatalogGetRecordsRequest request)
             throws IllegalParameterFault {
         logger.debug("Process...");
 
@@ -68,10 +68,10 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
             logger.debug("\n+++ Search text: \"{}\" +++", searchText);
             if (searchText != null) {
                 if (searchTitle & searchAbstract & searchSubjects) {
-                    request.setConstraint("AnyText LIKE '%" + searchText + "%'");
+                    super.addConstraint(request, "AnyText LIKE '%" + searchText + "%'");
                 } else {
                     if (searchTitle) {
-                        request.setConstraint("dc:title LIKE '%" + searchText + "%'");
+                        super.addConstraint(request, "dc:title LIKE '%" + searchText + "%'");
                     }
                     if (searchAbstract) {
                         super.addConstraint(request, "dct:abstract LIKE '%" + searchText + "%'");

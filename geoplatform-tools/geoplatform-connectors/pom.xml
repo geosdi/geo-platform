@@ -15,28 +15,12 @@
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Connectors</name>
-  
-    <repositories>
-         <!-- GEOTOOLKIT -->
-        <repository>
-            <id>geotoolkit</id>
-            <name>Geotk repository</name>
-            <url>http://maven.geotoolkit.org</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     
     <modules>
         <module>geoplatform-connector-api</module>
         <module>geoplatform-csw-connector</module>
         <module>geoplatform-wps-connector</module>
     </modules>
-
-    <properties>
-        <geotk-client.version>3.x-SNAPSHOT</geotk-client.version>
-    </properties>
     
     <dependencyManagement>
         <dependencies>

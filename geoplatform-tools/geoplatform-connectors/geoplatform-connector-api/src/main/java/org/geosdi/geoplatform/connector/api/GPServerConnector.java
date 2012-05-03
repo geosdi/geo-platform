@@ -36,17 +36,18 @@
 package org.geosdi.geoplatform.connector.api;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Date;
-import org.geotoolkit.client.AbstractServer;
-import org.geotoolkit.security.ClientSecurity;
+import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPServerConnector<T extends AbstractServer>
+public abstract class GPServerConnector<T extends GPAbstractServerConnector>
         implements GeoPlatformConnector {
 
     private Date registrationDate = new Date();
@@ -75,12 +76,12 @@ public abstract class GPServerConnector<T extends AbstractServer>
     }
 
     @Override
-    public ClientSecurity getClientSecurity() {
-        return server.getClientSecurity();
+    public GPSecurityConnector getSecurityConnector() {
+        return server.getSecurityConnector();
     }
 
     @Override
-    public URI getURI() {
+    public URI getURI() throws URISyntaxException {
         return server.getURI();
     }
 

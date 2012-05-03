@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.cswconnector.server.request;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -67,18 +66,17 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
     //
     protected static final GPConnectorJAXBContext cswContext;
 
-    public CatalogCSWRequest(GPServerConnector server) throws URISyntaxException {
+    public CatalogCSWRequest(GPServerConnector server) {
         super(server);
     }
 
     @Override
-    public T getResponse()
-            throws ServerInternalFault, IOException {
-
+    public T getResponse() throws ServerInternalFault, IOException {
         T request = null;
 
         try {
-            HttpResponse response = super.clientConnection.execute(super.getPostMethod());
+            HttpResponse response = super.clientConnection.execute(
+                    super.getPostMethod());
             HttpEntity responseEntity = response.getEntity();
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
@@ -87,7 +85,8 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
                 Object content = unmarshaller.unmarshal(is);
                 if (!(content instanceof JAXBElement)) { // ExceptionReport
                     logger.error("\n#############\n{}\n#############", content);
-                    throw new ServerInternalFault("CSW Catalog Server Error: incorrect responce");
+                    throw new ServerInternalFault(
+                            "CSW Catalog Server Error: incorrect responce");
                 }
 
                 JAXBElement<T> elementType = (JAXBElement<T>) content;
@@ -97,10 +96,13 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
             }
 
         } catch (JAXBException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***", ex.getMessage());
+            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
+                    ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***");
         } catch (ClientProtocolException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***", ex.getMessage());
+            logger.error(
+                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
+                    ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
         } finally {
             super.clientConnection.getConnectionManager().shutdown();

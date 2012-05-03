@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request.v202;
 
-import java.net.URISyntaxException;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecords;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
@@ -48,7 +47,7 @@ import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
  */
 public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseType> {
 
-    public CatalogGetRecordsV202(GPServerConnector server) throws URISyntaxException {
+    public CatalogGetRecordsV202(GPServerConnector server) {
         super(server);
     }
 }

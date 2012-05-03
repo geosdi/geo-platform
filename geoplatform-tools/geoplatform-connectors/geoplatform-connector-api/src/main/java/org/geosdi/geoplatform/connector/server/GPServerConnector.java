@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.server;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import org.apache.http.client.HttpClient;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -49,7 +48,7 @@ public interface GPServerConnector {
 
     URL getURL();
 
-    URI getURI() throws URISyntaxException;
+    URI getURI();
     
     HttpClient getClientConnection();
 

@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.cswconnector.server.request;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBException;
@@ -80,7 +79,7 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     private ElementSetType elementSetName;
     private TypeName typeName;
 
-    public CatalogGetRecords(GPServerConnector server) throws URISyntaxException {
+    public CatalogGetRecords(GPServerConnector server) {
         super(server);
     }
 
@@ -251,11 +250,13 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
                     break;
                 case CQL_TEXT:
                     if (constraintLanguageVersion == null) {
-                        throw new IllegalArgumentException("For 'Constraint Language' \"CQL_TEXT\", "
+                        throw new IllegalArgumentException(
+                                "For 'Constraint Language' \"CQL_TEXT\", "
                                 + "'Constraint Language Version' must not be null.");
                     }
 
-                    queryConstraintType.setVersion(constraintLanguageVersion.toString());
+                    queryConstraintType.setVersion(
+                            constraintLanguageVersion.toString());
                     queryConstraintType.setCqlText(constraint);
             }
 
@@ -275,9 +276,11 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(
+                " {");
         str.append("constraintLanguage").append(constraintLanguage);
-        str.append(", constraintLanguageVersion").append(constraintLanguageVersion);
+        str.append(", constraintLanguageVersion").append(
+                constraintLanguageVersion);
         str.append(", constraint").append(constraint);
         str.append(", maxRecords=").append(maxRecords);
         str.append(", startPosition=").append(startPosition);

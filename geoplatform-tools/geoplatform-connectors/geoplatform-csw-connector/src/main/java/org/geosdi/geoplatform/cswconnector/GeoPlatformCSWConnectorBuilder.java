@@ -62,7 +62,7 @@ public class GeoPlatformCSWConnectorBuilder
     @Override
     public GPCSWServerConnector build() {
         GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                clientSecurity, GPCatalogVersion.V202);
+                securityConnector, GPCatalogVersion.V202);
 
         return cswConnector;
     }

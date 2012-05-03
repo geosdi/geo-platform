@@ -64,8 +64,7 @@ public abstract class GPAbstractConnectorRequest<T>
     protected final GPSecurityConnector securityConnector;
     protected final HttpClient clientConnection;
 
-    public GPAbstractConnectorRequest(GPServerConnector server)
-            throws URISyntaxException {
+    public GPAbstractConnectorRequest(GPServerConnector server) {
         this(server.getClientConnection(), server.getURI(),
                 server.getSecurityConnector());
     }

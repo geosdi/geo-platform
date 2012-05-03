@@ -37,22 +37,17 @@ package org.geosdi.geoplatform.cswconnector;
 
 import java.net.URL;
 import org.geosdi.geoplatform.connector.api.GPServerConnector;
-import org.geotoolkit.csw.CatalogServicesServer;
-import org.geotoolkit.csw.DescribeRecordRequest;
-import org.geotoolkit.csw.GetCapabilitiesRequest;
-import org.geotoolkit.csw.GetDomainRequest;
-import org.geotoolkit.csw.GetRecordByIdRequest;
-import org.geotoolkit.csw.GetRecordsRequest;
-import org.geotoolkit.csw.HarvestRequest;
-import org.geotoolkit.csw.TransactionRequest;
-import org.geotoolkit.security.ClientSecurity;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.cswconnector.server.GPCatalogServerConnector;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWServerConnector extends GPServerConnector<CatalogServicesServer>
+public class GPCSWServerConnector extends GPServerConnector<GPCatalogServerConnector>
         implements GeoPlatformCSWConnector {
 
     private GPCatalogVersion version;
@@ -62,14 +57,13 @@ public class GPCSWServerConnector extends GPServerConnector<CatalogServicesServe
     }
 
     public GPCSWServerConnector(URL serverURL, GPCatalogVersion theVersion) {
-        this.server = new CatalogServicesServer(serverURL, theVersion.toString());
-        this.version = theVersion;
+        this(serverURL, null, theVersion);
     }
 
-    public GPCSWServerConnector(URL serverURL, ClientSecurity security,
+    public GPCSWServerConnector(URL serverURL, GPSecurityConnector security,
             GPCatalogVersion theVersion) {
-        this.server = new CatalogServicesServer(serverURL, security,
-                theVersion.toString());
+        this.server = new GPCatalogServerConnector(serverURL, security,
+                theVersion);
         this.version = theVersion;
     }
 
@@ -79,37 +73,12 @@ public class GPCSWServerConnector extends GPServerConnector<CatalogServicesServe
     }
 
     @Override
-    public DescribeRecordRequest createDescribeRecord() {
-        return this.server.createDescribeRecord();
+    public CatalogGetCapabilitiesRequest createGetCapabilitiesRequest() {
+        return server.createGetCapabilitiesRequest();
     }
 
     @Override
-    public GetCapabilitiesRequest createGetCapabilities() {
-        return this.server.createGetCapabilities();
-    }
-
-    @Override
-    public GetDomainRequest createGetDomain() {
-        return this.server.createGetDomain();
-    }
-
-    @Override
-    public GetRecordByIdRequest createGetRecordById() {
-        return this.server.createGetRecordById();
-    }
-
-    @Override
-    public GetRecordsRequest createGetRecords() {
-        return this.server.createGetRecords();
-    }
-
-    @Override
-    public HarvestRequest createHarvest() {
-        return this.server.createHarvest();
-    }
-
-    @Override
-    public TransactionRequest createTransaction() {
-        return this.server.createTransaction();
+    public CatalogGetRecordsRequest createGetRecordsRequest() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -40,6 +40,10 @@ import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.cswconnector.CatalogVersionException;
 import org.geosdi.geoplatform.cswconnector.GPCatalogVersion;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.cswconnector.server.request.v202.CatalogGetCapabilitiesV202;
+import org.geosdi.geoplatform.cswconnector.server.request.v202.CatalogGetRecordsV202;
 
 /**
  *
@@ -88,6 +92,37 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector {
             GPCatalogVersion theVersion) {
         super(server, securityConnector);
         this.version = theVersion;
+    }
+
+    /**
+     * Create CatalogGetCapabilitiesRequest request
+     * 
+     * @return {@link CatalogGetCapabilitiesRequest}
+     */
+    public CatalogGetCapabilitiesRequest createGetCapabilitiesRequest() {
+        switch (version) {
+            case V202:
+                return new CatalogGetCapabilitiesV202(this);
+
+            default:
+                throw new CatalogVersionException(
+                        "The Version for CSW must be 2.0.2");
+        }
+    }
+
+    /**
+     * Create CatalogGetRecordsRequest request
+     * 
+     * @return {@link CatalogGetRecordsRequest}
+     */
+    public CatalogGetRecordsRequest createGetRecordsRequest() {
+        switch (version) {
+            case V202:
+                return new CatalogGetRecordsV202(this);
+            default:
+                throw new CatalogVersionException(
+                        "The Version for CSW must be 2.0.2");
+        }
     }
 
     /**

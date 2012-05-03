@@ -36,25 +36,25 @@
 package org.geosdi.geoplatform.connector.api;
 
 import java.net.URL;
-import org.geotoolkit.security.ClientSecurity;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
         implements GeoPlatformConnectorBuilder<B> {
 
     protected URL serverUrl;
-    protected ClientSecurity clientSecurity;
+    protected GPSecurityConnector securityConnector;
 
     protected AbstractConnectorBuilder() {
     }
 
     @Override
-    public B withClientSecurity(ClientSecurity theClientSecurity) {
-        this.clientSecurity = theClientSecurity;
+    public B withClientSecurity(GPSecurityConnector theSecurityConnector) {
+        this.securityConnector = theSecurityConnector;
         return (B) this;
     }
 

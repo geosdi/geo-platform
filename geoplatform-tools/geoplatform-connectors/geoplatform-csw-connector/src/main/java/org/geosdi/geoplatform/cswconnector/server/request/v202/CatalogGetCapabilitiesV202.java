@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.cswconnector.server.request.v202;
 
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import org.apache.http.HttpEntity;
@@ -60,7 +59,7 @@ import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
 public class CatalogGetCapabilitiesV202 extends CatalogCSWRequest<CapabilitiesType>
         implements CatalogGetCapabilitiesRequest<CapabilitiesType> {
 
-    public CatalogGetCapabilitiesV202(GPServerConnector server) throws URISyntaxException {
+    public CatalogGetCapabilitiesV202(GPServerConnector server) {
         super(server);
     }
 

@@ -35,13 +35,8 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
-import org.geotoolkit.csw.DescribeRecordRequest;
-import org.geotoolkit.csw.GetCapabilitiesRequest;
-import org.geotoolkit.csw.GetDomainRequest;
-import org.geotoolkit.csw.GetRecordByIdRequest;
-import org.geotoolkit.csw.GetRecordsRequest;
-import org.geotoolkit.csw.HarvestRequest;
-import org.geotoolkit.csw.TransactionRequest;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 
 /**
  *
@@ -52,17 +47,7 @@ public interface GeoPlatformCSWConnector {
 
     GPCatalogVersion getVersion();
 
-    DescribeRecordRequest createDescribeRecord();
+    CatalogGetCapabilitiesRequest createGetCapabilitiesRequest();
 
-    GetCapabilitiesRequest createGetCapabilities();
-
-    GetDomainRequest createGetDomain();
-
-    GetRecordByIdRequest createGetRecordById();
-
-    GetRecordsRequest createGetRecords();
-
-    HarvestRequest createHarvest();
-
-    TransactionRequest createTransaction();
+    CatalogGetRecordsRequest createGetRecordsRequest();
 }

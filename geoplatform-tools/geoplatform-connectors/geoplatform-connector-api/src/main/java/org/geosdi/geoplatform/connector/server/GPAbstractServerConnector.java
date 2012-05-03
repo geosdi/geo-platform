@@ -42,6 +42,7 @@ import java.net.URL;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -50,31 +51,38 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  */
 public abstract class GPAbstractServerConnector implements GPServerConnector {
-
+    
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     protected final URL url;
     protected final GPSecurityConnector securityConnector;
-
+    
     protected GPAbstractServerConnector(URL theUrl,
             GPSecurityConnector theSecurityConnector) {
         this.url = theUrl;
         this.securityConnector = theSecurityConnector;
     }
-
+    
     @Override
     public URL getURL() {
         return url;
     }
-
+    
     @Override
     public GPSecurityConnector getSecurityConnector() {
         return this.securityConnector;
     }
-
+    
     @Override
-    public URI getURI() throws URISyntaxException {
-        return this.url.toURI();
+    public URI getURI() {
+        try {
+            return this.url.toURI();
+        } catch (URISyntaxException ex) {
+            logger.error("URISyntaxException @@@@@@@@@@@@@@@ " + ex);
+        }
+        return null;
     }
-
+    
     @Override
     public HttpClient getClientConnection() {
         return new DefaultHttpClient();
@@ -103,7 +111,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         }
         return null;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -119,14 +127,14 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         }
         return true;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 79 * hash + (this.url != null ? this.url.hashCode() : 0);
         return hash;
     }
-
+    
     @Override
     public String toString() {
         return "GPAbstractServerConnector{" + "Server Url = " + url

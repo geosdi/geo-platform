@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.api;
 
 import java.net.URL;
-import org.geotoolkit.security.ClientSecurity;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *
@@ -47,5 +47,5 @@ public interface GeoPlatformConnectorBuilder<B extends AbstractConnectorBuilder>
     
     public B withServerUrl(URL theServerUrl);
     
-    public B withClientSecurity(ClientSecurity theClientSecurity);
+    public B withClientSecurity(GPSecurityConnector theSecurityConnector);
 }

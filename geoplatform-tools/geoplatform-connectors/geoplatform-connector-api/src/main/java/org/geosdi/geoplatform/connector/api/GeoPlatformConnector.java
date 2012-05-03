@@ -36,14 +36,15 @@
 package org.geosdi.geoplatform.connector.api;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Date;
-import org.geotoolkit.security.ClientSecurity;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GeoPlatformConnector {
 
@@ -57,7 +58,7 @@ public interface GeoPlatformConnector {
 
     URL getURL();
 
-    URI getURI();
+    URI getURI() throws URISyntaxException;
 
-    ClientSecurity getClientSecurity();
+    GPSecurityConnector getSecurityConnector();
 }

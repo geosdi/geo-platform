@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request.v202;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
@@ -84,34 +85,32 @@ public class CatalogGetCapabilitiesV202 extends CatalogCSWRequest<CapabilitiesTy
 
     @Override
     public CapabilitiesType getResponseEntity() throws JAXBException,
-            UnsupportedEncodingException {
+            UnsupportedEncodingException,
+            IOException {
 
-//        try {
-//            super.prepareHttpParams();
-//            super.preparePostMethod();
-//
-//            Unmarshaller un = cswContext.acquireUnmarshaller();
-//
-//            this.postMethod.setEntity(preparePostEntity());
-//
-//            HttpResponse response = clientConnection.execute(postMethod);
-//
-//            HttpEntity responseEntity = response.getEntity();
-//
-//            if (responseEntity != null) {
-//                InputStream content = responseEntity.getContent();
-//
-//                CapabilitiesType cap = ((JAXBElement<CapabilitiesType>) un.unmarshal(
-//                                        content)).getValue();
-//
-//               
-//
-//                EntityUtils.consume(responseEntity);
-//            }
-//
-//        } finally {
-//        }
+        CapabilitiesType capabilitiesResponse = null;
 
-        return null;
+        try {
+            Unmarshaller un = cswContext.acquireUnmarshaller();
+
+            HttpResponse response = clientConnection.execute(
+                    super.getPostMethod());
+
+            HttpEntity responseEntity = response.getEntity();
+
+            if (responseEntity != null) {
+                InputStream content = responseEntity.getContent();
+
+                capabilitiesResponse = ((JAXBElement<CapabilitiesType>) un.unmarshal(
+                                        content)).getValue();
+
+                EntityUtils.consume(responseEntity);
+            }
+
+        } finally {
+            clientConnection.getConnectionManager().shutdown();
+        }
+
+        return capabilitiesResponse;
     }
 }

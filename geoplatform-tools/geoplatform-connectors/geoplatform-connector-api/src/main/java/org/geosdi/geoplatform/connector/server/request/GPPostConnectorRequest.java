@@ -37,9 +37,9 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import javax.xml.bind.JAXBException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpPost;
-import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 /**

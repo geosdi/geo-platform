@@ -79,6 +79,6 @@ public class GPCSWServerConnector extends GPServerConnector<GPCatalogServerConne
 
     @Override
     public CatalogGetRecordsRequest createGetRecordsRequest() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return server.createGetRecordsRequest();
     }
 }

@@ -261,7 +261,7 @@ public abstract class BaseDAOTest {
         resource.setLayerName("states");
         resource.setAttributes("STATE_NAME,MALE,FEMALE");
         //simple cql filter accourding to Multipolygon restriction
-        resource.setCqlFilterRead("STATE_NAME='Kansas'");
+        resource.setCqlFilterRead("STATE_NAME='Virginia'");
         resource.setDefaultStyle("polygon");
         resource.setGsAccount(account);
         return resource;

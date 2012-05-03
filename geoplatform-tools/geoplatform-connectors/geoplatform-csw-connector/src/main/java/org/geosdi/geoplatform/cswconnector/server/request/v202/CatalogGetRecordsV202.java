@@ -35,15 +35,30 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request.v202;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.util.List;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecords;
+import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
+import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseType> {
 
@@ -52,7 +67,37 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
     }
 
     @Override
-    public GetRecordsResponseType getResponseEntity() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public GetRecordsResponseType getResponseEntity() throws JAXBException,
+                                                             UnsupportedEncodingException,
+                                                             IOException,
+                                                             Exception { // TODO change exception type
+        GetRecordsResponseType getRecords = null;
+
+        HttpClient client = new DefaultHttpClient();
+
+        HttpResponse response = client.execute(super.getPostMethod());
+        HttpEntity responseEntity = response.getEntity();
+        if (responseEntity != null) {
+            InputStream is = responseEntity.getContent();
+
+            Unmarshaller unmarshaller = cswContext.acquireUnmarshaller();
+            Object content = unmarshaller.unmarshal(is);
+            if (!(content instanceof JAXBElement)) { // ExceptionReport
+                logger.error("\n#############\n{}\n#############", content);
+                throw new Exception("CSW Catalog Server Error: incorrect responce"); // TODO change exception type
+            }
+
+            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
+            getRecords = elementType.getValue();
+            logger.trace("\n@@@@@@@@ GetRecords Response @@@@@@@@\n{}\n", getRecords);
+            logger.debug("\n@@@@@@@@ AbstractRecord list size: {} @@@@@@@@",
+                    getRecords.getSearchResults().getAbstractRecord().size());
+            logger.trace("\n@@@@@@@@ Any list size: {} @@@@@@@@",
+                    getRecords.getSearchResults().getAny().size()); // TODO GMD list
+
+            EntityUtils.consume(responseEntity);
+        }
+
+        return getRecords;
     }
 }

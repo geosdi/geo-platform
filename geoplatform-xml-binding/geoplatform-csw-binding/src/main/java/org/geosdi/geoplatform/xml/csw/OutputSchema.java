@@ -33,27 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import javax.xml.bind.JAXBException;
-import org.apache.http.client.HttpClient;
+package org.geosdi.geoplatform.xml.csw;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface GPConnectorRequest<T> {
+public enum OutputSchema {
 
-    URI getURI();
+    CSW("http://www.opengis.net/cat/csw/2.0.2"), // Metadatas will be on the 'AbstractRecord' list
+    GMD("http://www.isotc211.org/2005/gmd"); // Metadatas will be on the 'Any' list // TODO GMD list
+    //
+    private String schema;
 
-    T getResponseEntity() throws JAXBException,
-                                 UnsupportedEncodingException,
-                                 IOException,
-                                 Exception; // TODO change exception type
+    OutputSchema(String schema) {
+        this.schema = schema;
+    }
 
-    HttpClient getClientConnection();
+    @Override
+    public String toString() {
+        return schema;
+    }
 }

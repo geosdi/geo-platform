@@ -93,6 +93,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class CatalogGetRecordsTest {
 
@@ -231,8 +232,6 @@ public class CatalogGetRecordsTest {
         params.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
                 GeoPlatformHTTP.CONTENT_TYPE_XML);
 
-        HttpClient client = new DefaultHttpClient();
-
         URI uri = URIUtils.createURI("http", CSW_HOST_TREVISO, -1, CSW_PATH_TREVISO,
                 null, null);
 
@@ -242,15 +241,11 @@ public class CatalogGetRecordsTest {
         /**
          * GetRecords Request
          */
-        GetRecordsType req = this.createGetRequest();
+        Marshaller marshaller = cswContext.acquireMarshaller();
 
-        Marshaller m = cswContext.acquireMarshaller();
-        Unmarshaller un = cswContext.acquireUnmarshaller();
-
-
+        GetRecordsType request = this.createGetRequest();
         StringWriter w = new StringWriter();
-
-        m.marshal(req, w);
+        marshaller.marshal(request, w);
 
         StringEntity entity = new StringEntity(w.toString(),
                 GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
@@ -259,6 +254,7 @@ public class CatalogGetRecordsTest {
         logger.debug("\n@@@@@@@@@@@@@@@@ GetRecords Request @@@@@@@@@@@@@@@@\n{}\n",
                 new Scanner(post.getEntity().getContent()).useDelimiter("\\A").next());
 
+        HttpClient client = new DefaultHttpClient();
         HttpResponse response = client.execute(post);
         HttpEntity responseEntity = response.getEntity();
         if (responseEntity != null) {
@@ -269,8 +265,9 @@ public class CatalogGetRecordsTest {
             /**
              * GetRecords Response
              */
-            Object content = un.unmarshal(is);
-            if (!(content instanceof JAXBElement)) {
+            Unmarshaller unmarshaller = cswContext.acquireUnmarshaller();
+            Object content = unmarshaller.unmarshal(is);
+            if (!(content instanceof JAXBElement)) { // ExceptionReport
                 logger.error("\n#############\n{}", content);
                 Assert.fail();
             }
@@ -317,7 +314,7 @@ public class CatalogGetRecordsTest {
         // or
         req.setResultType(ResultType.RESULTS);
 
-        req.setOutputFormat("application/xml");
+        req.setOutputFormat("application/xml"); // as HTTP content type
         req.setOutputSchema("http://www.opengis.net/cat/csw/2.0.2"); // For obtain AbstractRecord list
 //        req.setOutputSchema("http://www.isotc211.org/2005/gmd"); // For obtain Any list
 

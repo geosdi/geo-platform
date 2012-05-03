@@ -35,30 +35,47 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request;
 
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.namespace.QName;
+import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.protocol.HTTP;
+import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
+import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
+import org.geosdi.geoplatform.xml.csw.v202.QueryType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
         implements CatalogGetRecordsRequest<T> {
 
-//    protected final String version;
-    // TODO Filter request
-//    private String constraint;
-//    private String constraintLanguage;
-//    private String constraintLanguageVersion;
-    private Integer maxRecords;
-    private Integer startPosition;
+    private ConstraintLanguage constraintLanguage;
+    private ConstraintLanguageVersion constraintLanguageVersion;
+    private String constraint;
+    private BigInteger maxRecords;
+    private BigInteger startPosition;
     private String outputFormat;
-    private String outputSchema;
+    private OutputSchema outputSchema;
     private ResultType resultType;
     private ElementSetType elementSetName;
     private TypeName typeName;
@@ -68,22 +85,57 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     }
 
     @Override
-    public Integer getMaxRecords() {
+    public ConstraintLanguage getConstraintLanguage() {
+        return constraintLanguage;
+    }
+
+    @Override
+    public void setConstraintLanguage(ConstraintLanguage constraintLanguage) {
+        // TODO Support FILTER ConstraintLanguage
+        if (constraintLanguage == ConstraintLanguage.FILTER) {
+            throw new UnsupportedOperationException("FILTER constraint language is not supported yet. "
+                    + "Use CQL_TEXT constraint language.");
+        }
+        this.constraintLanguage = constraintLanguage;
+    }
+
+    @Override
+    public ConstraintLanguageVersion getConstraintLanguageVersion() {
+        return constraintLanguageVersion;
+    }
+
+    @Override
+    public String getConstraint() {
+        return constraint;
+    }
+
+    @Override
+    public void setConstraint(String constraint) {
+        this.constraint = constraint;
+    }
+
+    @Override
+    public void setConstraintLanguageVersion(ConstraintLanguageVersion constraintLanguageVersion) {
+        this.constraintLanguageVersion = constraintLanguageVersion;
+    }
+
+    @Override
+    public BigInteger getMaxRecords() {
         return maxRecords;
     }
 
     @Override
-    public void setMaxRecords(Integer maxRecords) {
+    public void setMaxRecords(BigInteger maxRecords) {
         this.maxRecords = maxRecords;
     }
 
     @Override
-    public Integer getStartPosition() {
+    public BigInteger getStartPosition() {
         return startPosition;
     }
 
     @Override
-    public void setStartPosition(Integer startPosition) {
+    public void setStartPosition(BigInteger startPosition) {
         this.startPosition = startPosition;
     }
 
@@ -94,16 +146,25 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
 
     @Override
     public void setOutputFormat(String outputFormat) {
+        if (!GeoPlatformHTTP.CONTENT_TYPE_XML.equals(outputFormat)) {
+            throw new IllegalArgumentException("The output format must be \""
+                    + GeoPlatformHTTP.CONTENT_TYPE_XML + "\"");
+        }
         this.outputFormat = outputFormat;
     }
 
     @Override
-    public String getOutputSchema() {
+    public OutputSchema getOutputSchema() {
         return outputSchema;
     }
 
     @Override
-    public void setOutputSchema(String outputSchema) {
+    public void setOutputSchema(OutputSchema outputSchema) {
+        // TODO GMD list
+        if (outputSchema != OutputSchema.CSW) {
+            throw new UnsupportedOperationException("GMD output schema is not supported yet. "
+                    + "Use CSW output schema.");
+        }
         this.outputSchema = outputSchema;
     }
 
@@ -138,19 +199,86 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     }
 
     @Override
-    public StringEntity preparePostEntity() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    protected HttpEntity preparePostEntity() throws JAXBException,
+                                                    UnsupportedEncodingException {
+        Marshaller marshaller = cswContext.acquireMarshaller();
+
+        GetRecordsType request = this.prepareGetRequest();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(request, writer);
+
+        return new StringEntity(writer.toString(),
+                GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
     }
-    
+
+    private GetRecordsType prepareGetRequest() {
+        GetRecordsType request = new GetRecordsType();
+
+        request.setResultType(resultType != null ? resultType : ResultType.HITS);
+
+        request.setOutputFormat(outputFormat != null ? outputFormat
+                : GeoPlatformHTTP.CONTENT_TYPE_XML);
+
+        request.setOutputSchema(outputSchema != null ? outputSchema.toString()
+                : OutputSchema.CSW.toString());
+
+        QueryType query = new QueryType();
+        request.setAbstractQuery(query);
+
+        List<QName> typNameList = new ArrayList<QName>();
+        typNameList.add(typeName != null ? typeName.getQName()
+                : TypeName.RECORD.getQName());
+        query.setTypeNames(typNameList);
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(elementSetName != null ? elementSetName
+                : ElementSetType.BRIEF);
+        query.setElementSetName(elementSetNameType);
+
+        if (constraint != null) {
+            if (constraintLanguage == null) {
+                throw new IllegalArgumentException("If 'Constraint' is setted, "
+                        + "'Constraint Language' must not be null.");
+            }
+
+            QueryConstraintType queryConstraintType = new QueryConstraintType();
+
+            switch (constraintLanguage) {
+                case FILTER:
+                    // TODO Support FILTER ConstraintLanguage
+                    // queryConstraintType.setFilter(this.createFilterType());
+                    break;
+                case CQL_TEXT:
+                    if (constraintLanguageVersion == null) {
+                        throw new IllegalArgumentException("For 'Constraint Language' \"CQL_TEXT\", "
+                                + "'Constraint Language Version' must not be null.");
+                    }
+
+                    queryConstraintType.setVersion(constraintLanguageVersion.toString());
+                    queryConstraintType.setCqlText(constraint);
+            }
+
+            query.setConstraint(queryConstraintType);
+        }
+
+        if (startPosition != null) {
+            request.setStartPosition(startPosition);
+        }
+
+        if (maxRecords != null) {
+            request.setMaxRecords(maxRecords);
+        }
+
+        return request;
+    }
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append("{");
-//        str.append().append();
-//        str.append().append();
-//        str.append().append();
-//        str.append().append();
-        str.append("maxRecords=").append(maxRecords);
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
+        str.append("constraintLanguage").append(constraintLanguage);
+        str.append(", constraintLanguageVersion").append(constraintLanguageVersion);
+        str.append(", constraint").append(constraint);
+        str.append(", maxRecords=").append(maxRecords);
         str.append(", startPosition=").append(startPosition);
         str.append(", outputFormat=").append(outputFormat);
         str.append(", outputSchema=").append(outputSchema);

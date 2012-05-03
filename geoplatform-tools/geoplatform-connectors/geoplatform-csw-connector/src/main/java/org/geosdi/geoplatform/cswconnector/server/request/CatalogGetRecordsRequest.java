@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request;
 
+import java.math.BigInteger;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
@@ -45,35 +49,34 @@ import org.geosdi.geoplatform.xml.csw.v202.ResultType;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface CatalogGetRecordsRequest<T> extends GPConnectorRequest<T> {
-    // TODO Filter request
-//
-//    String getConstraint();
-//
-//    void setConstraint(String constraint);
-//
-//    String getConstraintLanguage();
-//
-//    void setConstraintLanguage(String constraintLanguage);
-//
-//    String getConstraintLanguageVersion();
-//
-//    void setConstraintLanguageVersion(String constraintLanguageVersion);
 
-    Integer getMaxRecords();
+    ConstraintLanguage getConstraintLanguage();
 
-    void setMaxRecords(Integer maxRecords);
+    void setConstraintLanguage(ConstraintLanguage constraintLanguage);
 
-    Integer getStartPosition();
+    ConstraintLanguageVersion getConstraintLanguageVersion();
 
-    void setStartPosition(Integer startPosition);
+    void setConstraintLanguageVersion(ConstraintLanguageVersion constraintLanguageVersion);
+
+    String getConstraint();
+
+    void setConstraint(String constraint);
+
+    BigInteger getMaxRecords();
+
+    void setMaxRecords(BigInteger maxRecords);
+
+    BigInteger getStartPosition();
+
+    void setStartPosition(BigInteger startPosition);
 
     String getOutputFormat();
 
     void setOutputFormat(String outputFormat);
 
-    String getOutputSchema();
+    OutputSchema getOutputSchema();
 
-    void setOutputSchema(String outputSchema);
+    void setOutputSchema(OutputSchema outputSchema);
 
     ResultType getResultType();
 

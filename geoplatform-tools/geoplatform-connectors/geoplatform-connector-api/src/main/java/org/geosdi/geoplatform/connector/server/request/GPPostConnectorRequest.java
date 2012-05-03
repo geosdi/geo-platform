@@ -41,6 +41,7 @@ import javax.xml.bind.JAXBException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.exception.ServerInternalFault;
 
 /**
  *
@@ -57,22 +58,27 @@ public abstract class GPPostConnectorRequest<T>
         super(server);
     }
 
-    protected void preparePostMethod() throws JAXBException,
-            UnsupportedEncodingException {
-        super.prepareHttpParams();
-        this.postMethod = new HttpPost(super.getURI());
-        this.postMethod.setEntity(this.preparePostEntity());
-    }
-
-    protected abstract HttpEntity preparePostEntity() throws JAXBException,
-            UnsupportedEncodingException;
-
-    public HttpPost getPostMethod() throws JAXBException,
-            UnsupportedEncodingException {
+    public HttpPost getPostMethod() throws JAXBException, ServerInternalFault {
         if (postMethod == null) {
             this.preparePostMethod();
         }
 
         return postMethod;
     }
+
+    private void preparePostMethod() throws JAXBException, ServerInternalFault {
+        super.prepareHttpParams();
+        this.postMethod = new HttpPost(super.getURI());
+
+        try {
+            this.postMethod.setEntity(this.preparePostEntity());
+        } catch (UnsupportedEncodingException ex) {
+            logger.error("\n@@@@@@@@@@@@@@@@@@ UnsupportedEncodingException *** {} ***", ex.getMessage());
+            throw new ServerInternalFault("*** UnsupportedEncodingException ***");
+        }
+    }
+
+    // TODO create only CSW request into subclasses
+    protected abstract HttpEntity preparePostEntity()
+            throws JAXBException, UnsupportedEncodingException;
 }

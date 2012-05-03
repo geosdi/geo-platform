@@ -199,11 +199,12 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     }
 
     @Override
-    protected HttpEntity preparePostEntity() throws JAXBException,
-                                                    UnsupportedEncodingException {
+    protected HttpEntity preparePostEntity()
+            throws JAXBException, UnsupportedEncodingException {
+
         Marshaller marshaller = cswContext.acquireMarshaller();
 
-        GetRecordsType request = this.prepareGetRequest();
+        GetRecordsType request = this.prepareGetRecordsRequest();
         StringWriter writer = new StringWriter();
         marshaller.marshal(request, writer);
 
@@ -211,7 +212,7 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
                 GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
     }
 
-    private GetRecordsType prepareGetRequest() {
+    private GetRecordsType prepareGetRecordsRequest() {
         GetRecordsType request = new GetRecordsType();
 
         request.setResultType(resultType != null ? resultType : ResultType.HITS);

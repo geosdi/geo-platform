@@ -35,17 +35,28 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.GPPostConnectorRequest;
 import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.exception.ServerInternalFault;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
 
@@ -58,5 +69,43 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
 
     public CatalogCSWRequest(GPServerConnector server) throws URISyntaxException {
         super(server);
+    }
+
+    @Override
+    public T getResponse()
+            throws ServerInternalFault, IOException {
+
+        T request = null;
+
+        try {
+            HttpResponse response = super.clientConnection.execute(super.getPostMethod());
+            HttpEntity responseEntity = response.getEntity();
+            if (responseEntity != null) {
+                InputStream is = responseEntity.getContent();
+
+                Unmarshaller unmarshaller = cswContext.acquireUnmarshaller();
+                Object content = unmarshaller.unmarshal(is);
+                if (!(content instanceof JAXBElement)) { // ExceptionReport
+                    logger.error("\n#############\n{}\n#############", content);
+                    throw new ServerInternalFault("CSW Catalog Server Error: incorrect responce");
+                }
+
+                JAXBElement<T> elementType = (JAXBElement<T>) content;
+                request = elementType.getValue();
+
+                EntityUtils.consume(responseEntity);
+            }
+
+        } catch (JAXBException ex) {
+            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***", ex.getMessage());
+            throw new ServerInternalFault("*** JAXBException ***");
+        } catch (ClientProtocolException ex) {
+            logger.error("\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***", ex.getMessage());
+            throw new ServerInternalFault("*** ClientProtocolException ***");
+        } finally {
+            super.clientConnection.getConnectionManager().shutdown();
+        }
+
+        return request;
     }
 }

@@ -36,24 +36,21 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
-import javax.xml.bind.JAXBException;
 import org.apache.http.client.HttpClient;
+import org.geosdi.geoplatform.exception.ServerInternalFault;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface GPConnectorRequest<T> {
 
     URI getURI();
 
-    T getResponseEntity() throws JAXBException,
-            UnsupportedEncodingException,
-            IOException,
-            Exception; // TODO change exception type
+    T getResponse() throws ServerInternalFault, IOException;
 
     HttpClient getClientConnection();
 }

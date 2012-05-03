@@ -17,11 +17,15 @@
     <name>Geo-Platform :: == Connector Module Api</name>
 
     <dependencies>
-        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-oxm</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-util</artifactId>
         </dependency>
         
         <dependency>
@@ -76,4 +80,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>

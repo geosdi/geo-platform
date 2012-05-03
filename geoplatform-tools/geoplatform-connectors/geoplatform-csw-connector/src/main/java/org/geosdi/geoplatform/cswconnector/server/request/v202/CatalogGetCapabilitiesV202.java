@@ -35,20 +35,14 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request.v202;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogCSWRequest;
@@ -61,6 +55,7 @@ import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class CatalogGetCapabilitiesV202 extends CatalogCSWRequest<CapabilitiesType>
         implements CatalogGetCapabilitiesRequest<CapabilitiesType> {
@@ -70,47 +65,16 @@ public class CatalogGetCapabilitiesV202 extends CatalogCSWRequest<CapabilitiesTy
     }
 
     @Override
-    public StringEntity preparePostEntity() throws JAXBException,
-            UnsupportedEncodingException {
-        GetCapabilitiesType getCapType = new GetCapabilitiesType(
-                CSWServiceEnum.CSW);
+    public HttpEntity preparePostEntity()
+            throws JAXBException, UnsupportedEncodingException {
 
-        Marshaller m = cswContext.acquireMarshaller();
-        StringWriter w = new StringWriter();
-        m.marshal(getCapType, w);
+        Marshaller marshaller = cswContext.acquireMarshaller();
 
-        return new StringEntity(w.toString(),
+        GetCapabilitiesType request = new GetCapabilitiesType(CSWServiceEnum.CSW);
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(request, writer);
+
+        return new StringEntity(writer.toString(),
                 GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
-    }
-
-    @Override
-    public CapabilitiesType getResponseEntity() throws JAXBException,
-            UnsupportedEncodingException,
-            IOException {
-
-        CapabilitiesType capabilitiesResponse = null;
-
-        try {
-            Unmarshaller un = cswContext.acquireUnmarshaller();
-
-            HttpResponse response = clientConnection.execute(
-                    super.getPostMethod());
-
-            HttpEntity responseEntity = response.getEntity();
-
-            if (responseEntity != null) {
-                InputStream content = responseEntity.getContent();
-
-                capabilitiesResponse = ((JAXBElement<CapabilitiesType>) un.unmarshal(
-                                        content)).getValue();
-
-                EntityUtils.consume(responseEntity);
-            }
-
-        } finally {
-            clientConnection.getConnectionManager().shutdown();
-        }
-
-        return capabilitiesResponse;
     }
 }

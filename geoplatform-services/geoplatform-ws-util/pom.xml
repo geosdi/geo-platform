@@ -15,15 +15,5 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == WS Util</name>
-        
-    <dependencies>
-        
-	<!-- JUnit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
     
 </project>

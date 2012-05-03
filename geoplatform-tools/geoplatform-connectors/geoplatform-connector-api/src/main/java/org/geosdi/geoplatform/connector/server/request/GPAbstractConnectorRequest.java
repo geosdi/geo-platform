@@ -82,7 +82,7 @@ public abstract class GPAbstractConnectorRequest<T>
      * Setting basic configuration for HttpParams
      * <p/>
      */
-    protected HttpParams prepareHttpParams() {
+    protected void prepareHttpParams() {
         HttpParams httpParams = this.clientConnection.getParams();
 
         httpParams.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
@@ -95,8 +95,6 @@ public abstract class GPAbstractConnectorRequest<T>
 
         ((DefaultHttpClient) this.clientConnection).setHttpRequestRetryHandler(
                 new ConnectorHttpRequestRetryHandler(5));
-
-        return httpParams;
     }
 
     @Override

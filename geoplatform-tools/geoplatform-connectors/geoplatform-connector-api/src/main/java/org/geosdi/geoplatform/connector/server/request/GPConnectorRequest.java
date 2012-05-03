@@ -51,9 +51,9 @@ public interface GPConnectorRequest<T> {
     URI getURI();
 
     T getResponseEntity() throws JAXBException,
-                                 UnsupportedEncodingException,
-                                 IOException,
-                                 Exception; // TODO change exception type
+            UnsupportedEncodingException,
+            IOException,
+            Exception; // TODO change exception type
 
     HttpClient getClientConnection();
 }

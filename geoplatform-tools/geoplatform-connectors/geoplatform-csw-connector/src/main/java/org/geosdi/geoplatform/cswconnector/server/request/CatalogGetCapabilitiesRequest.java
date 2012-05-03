@@ -33,46 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.cswconnector.server.request;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpPost;
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GPPostConnectorRequest<T>
-        extends GPAbstractConnectorRequest<T> {
-
-    private HttpPost postMethod;
-
-    public GPPostConnectorRequest(GPServerConnector server) throws URISyntaxException {
-        super(server);
-    }
-
-    protected void preparePostMethod() throws JAXBException,
-            UnsupportedEncodingException {
-        super.prepareHttpParams();
-        this.postMethod = new HttpPost(super.getURI());
-        this.postMethod.setEntity(this.preparePostEntity());
-    }
-
-    protected abstract HttpEntity preparePostEntity() throws JAXBException,
-            UnsupportedEncodingException;
-
-    public HttpPost getPostMethod() throws JAXBException,
-            UnsupportedEncodingException {
-        if (postMethod == null) {
-            this.preparePostMethod();
-        }
-
-        return postMethod;
-    }
+public interface CatalogGetCapabilitiesRequest<T> extends GPConnectorRequest<T> {
 }

@@ -35,64 +35,83 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request.v202;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecords;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogCSWRequest;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
+import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
+import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseType> {
+public class CatalogGetCapabilitiesV202 extends CatalogCSWRequest<CapabilitiesType>
+        implements CatalogGetCapabilitiesRequest<CapabilitiesType> {
 
-    public CatalogGetRecordsV202(GPServerConnector server) throws URISyntaxException {
+    public CatalogGetCapabilitiesV202(GPServerConnector server) throws URISyntaxException {
         super(server);
     }
 
     @Override
-    public GetRecordsResponseType getResponseEntity() throws JAXBException,
-            UnsupportedEncodingException,
-            IOException,
-            Exception { // TODO change exception type
-        GetRecordsResponseType getRecords = null;
+    public StringEntity preparePostEntity() throws JAXBException,
+            UnsupportedEncodingException {
+        GetCapabilitiesType getCapType = new GetCapabilitiesType(
+                CSWServiceEnum.CSW);
 
-        HttpResponse response = clientConnection.execute(super.getPostMethod());
-        HttpEntity responseEntity = response.getEntity();
-        if (responseEntity != null) {
-            InputStream is = responseEntity.getContent();
+        Marshaller m = cswContext.acquireMarshaller();
+        StringWriter w = new StringWriter();
+        m.marshal(getCapType, w);
 
-            Unmarshaller unmarshaller = cswContext.acquireUnmarshaller();
-            Object content = unmarshaller.unmarshal(is);
-            if (!(content instanceof JAXBElement)) { // ExceptionReport
-                logger.error("\n#############\n{}\n#############", content);
-                throw new Exception(
-                        "CSW Catalog Server Error: incorrect responce"); // TODO change exception type
-            }
+        return new StringEntity(w.toString(),
+                GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
+    }
 
-            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
-            getRecords = elementType.getValue();
-            logger.trace("\n@@@@@@@@ GetRecords Response @@@@@@@@\n{}\n",
-                    getRecords);
-            logger.debug("\n@@@@@@@@ AbstractRecord list size: {} @@@@@@@@",
-                    getRecords.getSearchResults().getAbstractRecord().size());
-            logger.trace("\n@@@@@@@@ Any list size: {} @@@@@@@@",
-                    getRecords.getSearchResults().getAny().size()); // TODO GMD list
+    @Override
+    public CapabilitiesType getResponseEntity() throws JAXBException,
+            UnsupportedEncodingException {
 
-            EntityUtils.consume(responseEntity);
-        }
+//        try {
+//            super.prepareHttpParams();
+//            super.preparePostMethod();
+//
+//            Unmarshaller un = cswContext.acquireUnmarshaller();
+//
+//            this.postMethod.setEntity(preparePostEntity());
+//
+//            HttpResponse response = clientConnection.execute(postMethod);
+//
+//            HttpEntity responseEntity = response.getEntity();
+//
+//            if (responseEntity != null) {
+//                InputStream content = responseEntity.getContent();
+//
+//                CapabilitiesType cap = ((JAXBElement<CapabilitiesType>) un.unmarshal(
+//                                        content)).getValue();
+//
+//               
+//
+//                EntityUtils.consume(responseEntity);
+//            }
+//
+//        } finally {
+//        }
 
-        return getRecords;
+        return null;
     }
 }

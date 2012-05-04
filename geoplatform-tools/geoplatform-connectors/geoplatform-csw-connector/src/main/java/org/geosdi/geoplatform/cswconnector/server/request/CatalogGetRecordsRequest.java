@@ -70,10 +70,6 @@ public interface CatalogGetRecordsRequest<T> extends GPConnectorRequest<T> {
 
     void setStartPosition(BigInteger startPosition);
 
-    String getOutputFormat();
-
-    void setOutputFormat(String outputFormat);
-
     OutputSchema getOutputSchema();
 
     void setOutputSchema(OutputSchema outputSchema);

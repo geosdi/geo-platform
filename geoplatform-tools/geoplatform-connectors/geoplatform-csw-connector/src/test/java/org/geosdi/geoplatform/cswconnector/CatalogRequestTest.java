@@ -113,7 +113,6 @@ public class CatalogRequestTest {
 
         getRecords.setResultType(ResultType.HITS);
 
-        getRecords.setOutputFormat("application/xml");
         getRecords.setOutputSchema("http://www.opengis.net/cat/csw/2.0.2");
 
         QueryType query = new QueryType();
@@ -137,7 +136,6 @@ public class CatalogRequestTest {
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"hits\""));
-        assertTrue(request.contains("outputFormat=\"application/xml\""));
         assertTrue(request.contains("outputSchema=\"http://www.opengis.net/cat/csw/2.0.2\""));
 
         assertTrue(request.contains("<csw:Query typeNames=\"csw:Record\""));
@@ -234,7 +232,6 @@ public class CatalogRequestTest {
         getRecords.setStartPosition(BigInteger.ONE);
         getRecords.setMaxRecords(BigInteger.TEN);
 
-        getRecords.setOutputFormat("application/xml");
         getRecords.setOutputSchema("http://www.opengis.net/cat/csw/2.0.2");
 
         QueryType query = new QueryType();
@@ -275,7 +272,6 @@ public class CatalogRequestTest {
         assertTrue(request.contains("service=\"CSW\""));
         assertTrue(request.contains("version=\"2.0.2\""));
         assertTrue(request.contains("resultType=\"results\""));
-        assertTrue(request.contains("outputFormat=\"application/xml\""));
         assertTrue(request.contains("outputSchema=\"http://www.opengis.net/cat/csw/2.0.2\""));
         assertTrue(request.contains("startPosition=\"1\""));
         assertTrue(request.contains("maxRecords=\"10\""));

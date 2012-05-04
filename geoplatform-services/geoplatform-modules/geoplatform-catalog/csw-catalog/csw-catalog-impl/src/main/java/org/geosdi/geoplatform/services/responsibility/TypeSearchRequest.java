@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services.responsibility;
 
-import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
@@ -73,7 +72,7 @@ public class TypeSearchRequest extends GetRecordsRequestHandler {
             request.setResultType(ResultType.RESULTS);
         }
 
-        request.setOutputFormat(GeoPlatformHTTP.CONTENT_TYPE_XML);
+        // The default output format attribute is the MIME type "application/xml"
         request.setOutputSchema(OutputSchema.CSW);
     }
 }

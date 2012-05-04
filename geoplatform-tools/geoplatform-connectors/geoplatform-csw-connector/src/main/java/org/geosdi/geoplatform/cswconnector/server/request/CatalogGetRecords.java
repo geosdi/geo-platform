@@ -39,7 +39,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
@@ -66,7 +65,6 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     private String constraint;
     private BigInteger maxRecords;
     private BigInteger startPosition;
-    private String outputFormat;
     private OutputSchema outputSchema;
     private ResultType resultType;
     private ElementSetType elementSetName;
@@ -132,20 +130,6 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     }
 
     @Override
-    public String getOutputFormat() {
-        return outputFormat;
-    }
-
-    @Override
-    public void setOutputFormat(String outputFormat) {
-        if (!GeoPlatformHTTP.CONTENT_TYPE_XML.equals(outputFormat)) {
-            throw new IllegalArgumentException("The output format must be \""
-                    + GeoPlatformHTTP.CONTENT_TYPE_XML + "\"");
-        }
-        this.outputFormat = outputFormat;
-    }
-
-    @Override
     public OutputSchema getOutputSchema() {
         return outputSchema;
     }
@@ -195,9 +179,6 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
         GetRecordsType request = new GetRecordsType();
 
         request.setResultType(resultType != null ? resultType : ResultType.HITS);
-
-        request.setOutputFormat(outputFormat != null ? outputFormat
-                : GeoPlatformHTTP.CONTENT_TYPE_XML);
 
         request.setOutputSchema(outputSchema != null ? outputSchema.toString()
                 : OutputSchema.CSW.toString());
@@ -264,7 +245,6 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
         str.append(", constraint").append(constraint);
         str.append(", maxRecords=").append(maxRecords);
         str.append(", startPosition=").append(startPosition);
-        str.append(", outputFormat=").append(outputFormat);
         str.append(", outputSchema=").append(outputSchema);
         str.append(", resultType=").append(resultType);
         str.append(", elementSetName=").append(elementSetName);

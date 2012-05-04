@@ -36,14 +36,10 @@
 package org.geosdi.geoplatform.gui.featureinfo.widget.factory;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.google.gwt.json.client.JSONString;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
-import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
 import org.gwtopenmaps.openlayers.client.control.GetFeatureInfoVendorParam;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfoOptions;
-import org.gwtopenmaps.openlayers.client.event.BeforeGetFeatureInfoListener;
-import org.gwtopenmaps.openlayers.client.event.BeforeGetFeatureInfoListener.BeforeGetFeatureInfoEvent;
 
 /**
  *

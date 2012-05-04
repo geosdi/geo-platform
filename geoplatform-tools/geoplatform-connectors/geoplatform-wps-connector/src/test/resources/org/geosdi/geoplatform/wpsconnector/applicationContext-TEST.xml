@@ -10,9 +10,4 @@
 
     <context:annotation-config />
 
-<!-- TODO Uncomment (commented for geotoolkit bug  - "This operation can't be applied to values of class 'WebProcessingServer.WPSVersion'.")-->
-<!--    <bean name="gpWPSConnector" class="org.geosdi.geoplatform.wpsconnector.GeoPlatformWPSConnector">
-        <constructor-arg value="http://150.146.160.50/geoserver/ows"/>
-    </bean>-->
-
 </beans>

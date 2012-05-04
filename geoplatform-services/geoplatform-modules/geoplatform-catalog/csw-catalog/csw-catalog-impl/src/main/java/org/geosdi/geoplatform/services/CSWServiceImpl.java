@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.cswconnector.CatalogVersionException;
 import org.geosdi.geoplatform.cswconnector.GPCSWServerConnector;
-import org.geosdi.geoplatform.cswconnector.GeoPlatformCSWConnectorBuilder;
+import org.geosdi.geoplatform.cswconnector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -399,8 +399,9 @@ class CSWServiceImpl {
 
         GPCSWServerConnector serverConnector = null;
         try {
-            serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-                    withServerUrl(new URL(serverUrl)).build();
+            URL url = new URL(serverUrl);
+            serverConnector = GPCSWConnectorBuilder.newConnector().
+                    withServerUrl(url).build();
 
         } catch (MalformedURLException ex) {
             logger.error("### MalformedURLException: " + ex.getMessage());

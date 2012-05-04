@@ -35,56 +35,24 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Scanner;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.namespace.QName;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIUtils;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
-import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
-import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
-import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
-import org.geosdi.geoplatform.xml.csw.v202.QueryType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 import org.geosdi.geoplatform.xml.csw.v202.SearchResultsType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,20 +66,12 @@ import org.slf4j.LoggerFactory;
 public class CatalogGetRecordsTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private final static String CSW_HOST = "150.146.160.152";
-    private final static String CSW_PATH = "/geonetwork/srv/en/csw";
-    private final static String CSW_HOST_TREVISO = "ows.provinciatreviso.it";
-    private final static String CSW_PATH_TREVISO = "/geonetwork/srv/it/csw";
-    private final static String CSW_HOST_FIRENZE = "datigis.comune.fi.it";
-    private final static String CSW_PATH_FIRENZE = "/geonetwork/srv/it/csw";
-    private final GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
-            CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
 
     @Test
     public void testWithoutConstraint() throws Exception {
-        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-                withServerUrl(new URL("http://ows.provinciatreviso.it/geonetwork/srv/it/csw")).build();
+        URL url = new URL("http://ows.provinciatreviso.it/geonetwork/srv/it/csw");
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(url).build();
 
         CatalogGetRecordsRequest request = serverConnector.createGetRecordsRequest();
 
@@ -148,8 +108,9 @@ public class CatalogGetRecordsTest {
 
     @Test
     public void testTemporalFilterGeomatys() throws Exception {
-        GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-                withServerUrl(new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default")).build();
+        URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(url).build();
 
         CatalogGetRecordsRequest request = serverConnector.createGetRecordsRequest();
 
@@ -183,167 +144,5 @@ public class CatalogGetRecordsTest {
 
         logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
                 searchResult.getNumberOfRecordsMatched());
-    }
-
-    @Test
-    public void testOwnGetRecords()
-            throws URISyntaxException, JAXBException,
-            UnsupportedEncodingException, IOException {
-
-        HttpParams params = new BasicHttpParams();
-
-        params.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
-                GeoPlatformHTTP.CONTENT_TYPE_XML);
-
-        URI uri = URIUtils.createURI("http", CSW_HOST_TREVISO, -1, CSW_PATH_TREVISO,
-                null, null);
-
-        HttpPost post = new HttpPost(uri);
-        post.setParams(params);
-
-        /**
-         * GetRecords Request
-         */
-        Marshaller marshaller = cswContext.acquireMarshaller();
-
-        GetRecordsType request = this.createGetRequest();
-        StringWriter w = new StringWriter();
-        marshaller.marshal(request, w);
-
-        StringEntity entity = new StringEntity(w.toString(),
-                GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
-
-        post.setEntity(entity);
-        logger.debug("\n@@@@@@@@@@@@@@@@ GetRecords Request @@@@@@@@@@@@@@@@\n{}\n",
-                new Scanner(post.getEntity().getContent()).useDelimiter("\\A").next());
-
-        HttpClient client = new DefaultHttpClient();
-        HttpResponse response = client.execute(post);
-        HttpEntity responseEntity = response.getEntity();
-        if (responseEntity != null) {
-            InputStream is = responseEntity.getContent();
-            // TODO DON'T USE IT BECAUSE ALTER THE INPUT STREAM AND THERE IS A PARSE EXCEPTION IN UNMARSHAL PROCESS
-//            logger.debug("\n@@@@@@@@@@@@@@@@\n{}\n", new Scanner(is).useDelimiter("\\A").next());
-
-            /**
-             * GetRecords Response
-             */
-            Unmarshaller unmarshaller = cswContext.acquireUnmarshaller();
-            Object content = unmarshaller.unmarshal(is);
-            if (!(content instanceof JAXBElement)) { // ExceptionReport
-                logger.error("\n#############\n{}", content);
-                Assert.fail();
-            }
-
-            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) content;
-
-            GetRecordsResponseType getRecords = elementType.getValue();
-            logger.trace("\n@@@@@@@@@@@@@@@@ GetRecords Response @@@@@@@@@@@@@@@@\n{}\n", getRecords);
-
-            List<JAXBElement<? extends AbstractRecordType>> records = getRecords.getSearchResults().getAbstractRecord();
-            if (records != null) {
-                logger.debug("\n@@@@@@@@@@@@@@@@ AbstractRecord @@@@@@@@@@@@@@@@\n{}\n", records.size());
-                for (JAXBElement<? extends AbstractRecordType> record : records) {
-                    SummaryRecordType r = (SummaryRecordType) record.getValue();
-                    logger.debug("@@@@@@@@@@@@@@@@\n{}\n", r);
-                }
-            } else {
-                logger.debug("\n@@@@@@@@@@@@@@@@\nNO RESULT\n");
-            }
-
-            List recordsAfter = getRecords.getSearchResults().getAny();
-            if (recordsAfter != null) {
-                logger.debug("\n++++++++++++++++ Any ++++++++++++++++\n{}\n", recordsAfter.size());
-                for (Object record : recordsAfter) {
-                    logger.debug("\n++++++++++++++++ {}", record.getClass());
-                    logger.debug("\n++++++++++++++++\n{}\n", record);
-                }
-            } else {
-                logger.debug("\n++++++++++++++++\nNO RESULT\n");
-            }
-
-            EntityUtils.consume(responseEntity);
-        }
-    }
-
-    private GetRecordsType createGetRequest() {
-        GetRecordsType req = new GetRecordsType();
-
-//        req.setStartPosition(BigInteger.ONE);
-//        req.setMaxRecords(BigInteger.valueOf(1)); //
-//        req.setMaxRecords(BigInteger.TEN);
-
-//        req.setResultType(ResultType.HITS); // count
-        // or
-        req.setResultType(ResultType.RESULTS);
-
-        req.setOutputFormat("application/xml"); // as HTTP content type
-        req.setOutputSchema("http://www.opengis.net/cat/csw/2.0.2"); // For obtain AbstractRecord list
-//        req.setOutputSchema("http://www.isotc211.org/2005/gmd"); // For obtain Any list
-
-        QueryType query = new QueryType();
-        req.setAbstractQuery(query);
-
-        List<QName> typNames = new ArrayList<QName>();
-//        typNames.add(TypeName.RECORD.getQName()); // count
-        // or
-        typNames.add(TypeName.METADATA.getQName());
-        query.setTypeNames(typNames);
-
-        ElementSetNameType elementSetNameType = new ElementSetNameType();
-//        elementSetNameType.setValue(ElementSetType.BRIEF);
-        elementSetNameType.setValue(ElementSetType.SUMMARY);
-//        elementSetNameType.setValue(ElementSetType.FULL);
-        query.setElementSetName(elementSetNameType);
-
-        /**
-         * Filter
-         */
-//        PropertyIsLikeType propertyIsLikeType = new PropertyIsLikeType();
-//        propertyIsLikeType.setWildCard("%");
-//        propertyIsLikeType.setSingleChar(".");
-//        propertyIsLikeType.setEscapeChar("\\");
-//
-//        List<Object> nameList = new ArrayList<Object>(1);
-//        nameList.add("AnyText");
-//        PropertyNameType propertyNameType = new PropertyNameType();
-//        propertyNameType.setContent(nameList);
-//        propertyIsLikeType.setPropertyName(propertyNameType);
-//
-//        List<Object> literalList = new ArrayList<Object>(1);
-//        literalList.add("%venezia%");
-//        LiteralType literalType = new LiteralType();
-//        literalType.setContent(literalList);
-//        propertyIsLikeType.setLiteral(literalType);
-//
-//        ObjectFactory filterFactory = new ObjectFactory();
-//        JAXBElement<PropertyIsLikeType> propertyIsLike = filterFactory.createPropertyIsLike(propertyIsLikeType);
-//
-//        FilterType filterType = new FilterType();
-//        filterType.setComparisonOps(propertyIsLike);
-//        filterType.setSpatialOps(null); // TODO
-        QueryConstraintType queryConstraintType = new QueryConstraintType();
-        queryConstraintType.setVersion("1.1.0");
-
-        // CONSTRAINTLANGUAGE = FILTER
-//        queryConstraintType.setFilter(filterType);
-        // or
-        // CONSTRAINTLANGUAGE = CQL_TEXT
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
-        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-
-        StringBuilder constraint = new StringBuilder();
-        constraint.append("AnyText LIKE '%venezia%'");
-        constraint.append(" AND ");
-        constraint.append("TempExtent_begin AFTER ").append(formatter.format(startCalendar.getTime()));
-        constraint.append(" AND ");
-        constraint.append("TempExtent_end BEFORE ").append(formatter.format(endCalendar.getTime()));
-        queryConstraintType.setCqlText(constraint.toString());
-
-        query.setConstraint(queryConstraintType);
-
-
-        return req;
     }
 }

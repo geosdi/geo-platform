@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
-        implements GeoPlatformConnectorBuilder<B> {
+        implements GPConnectorBuilder<B> {
 
     protected URL serverUrl;
     protected GPSecurityConnector securityConnector;

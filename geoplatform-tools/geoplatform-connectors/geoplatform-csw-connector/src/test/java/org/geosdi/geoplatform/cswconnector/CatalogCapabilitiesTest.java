@@ -37,7 +37,10 @@ package org.geosdi.geoplatform.cswconnector;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -63,8 +66,8 @@ public class CatalogCapabilitiesTest {
     @Test
     public void testCapabilitiesV201WithoutVersionControl() {
         try {
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl("http://catalogocentrale.nsdi.it/geonetwork/srv/"
-                    + "en/csw?SERVICE");
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl(
+                    "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw?SERVICE");
 
             logger.info(
                     "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL"
@@ -80,8 +83,8 @@ public class CatalogCapabilitiesTest {
     @Test
     public void testCapabilitiesV201() {
         try {
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://catalogocentrale.nsdi.it/geonetwork/srv/"
-                    + "en/csw");
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl(
+                    "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw");
 
             logger.info(
                     "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1"
@@ -100,8 +103,8 @@ public class CatalogCapabilitiesTest {
     public void testCapabilitiesV202() throws Exception {
         try {
 
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://rsdi.regione.basilicata.it/Catalogo/srv/en/"
-                    + "csw");
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl(
+                    "http://rsdi.regione.basilicata.it/Catalogo/srv/en/csw");
 
             logger.info(
                     "CATALOG CAPABILITIES BEAN V_2.0.2 @@@@@@@@@@@"
@@ -135,5 +138,20 @@ public class CatalogCapabilitiesTest {
         } catch (CatalogVersionException ve) {
             logger.error("CatalogVersionException @@@@@@@@@@@@ " + ve);
         }
+    }
+
+    @Test
+    public void testGetCapabilitiesWithConnector() throws Exception {
+        URL url = new URL("http://150.146.160.152/geonetwork/srv/en/csw");
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(url).build();
+
+        CatalogGetCapabilitiesRequest request = serverConnector.createGetCapabilitiesRequest();
+
+        // TODO FIX Delete downcast
+        CapabilitiesType response = (CapabilitiesType) request.getResponse();
+
+        logger.info("CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
+                response.getVersion());
     }
 }

@@ -56,8 +56,6 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.GPPostConnectorRequest;
 import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
-import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
-import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
 
 /**
  *

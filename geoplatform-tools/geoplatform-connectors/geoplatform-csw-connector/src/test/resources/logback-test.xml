@@ -17,5 +17,7 @@
     
     <logger name="org.geosdi.geoplatform.cswconnector.CatalogGetRecordsTest"
             level="debug" /><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.cswconnector.CatalogRequestTest"
+            level="info" />
 
 </configuration>

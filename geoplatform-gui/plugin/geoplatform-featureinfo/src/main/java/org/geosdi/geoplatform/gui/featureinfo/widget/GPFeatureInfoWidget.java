@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureInfoHandler {
 
@@ -127,6 +127,8 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
     public void addLayersServer(String urlServers) {
         IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(urlServers);
         this.mapWidget.getMap().addControl(element.getElementControl());
-        element.getElementControl().activate();
+        if (featureCaller.isVisible()) {
+            element.getElementControl().activate();
+        }
     }
 }

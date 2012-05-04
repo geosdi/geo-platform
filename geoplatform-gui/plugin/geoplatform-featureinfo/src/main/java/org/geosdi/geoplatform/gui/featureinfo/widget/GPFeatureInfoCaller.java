@@ -60,6 +60,7 @@ import org.gwtopenmaps.openlayers.client.Map;
 public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
 
     private boolean loaded;
+    private boolean visible;
     private Map map;
     private LoadLayersDataSouceEvent dataSouceEvent = new LoadLayersDataSouceEvent();
 
@@ -99,8 +100,8 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
                         IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(string);
                         map.addControl(element.getElementControl());
                     }
-                    activateFeatureInfoControl();
                     loaded = true;
+                    load();
                     LayoutManager.getInstance().getStatusMap().setStatus("Feature Info Function loaded succesfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());
                 } else {
@@ -120,6 +121,7 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
         for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
             it.next().getElementControl().activate();
         }
+        this.visible = true;
     }
 
     /**
@@ -129,14 +131,21 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
         for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
             it.next().getElementControl().deactivate();
         }
+        this.visible = false;
     }
 
     /**
      * 
-     * @return  
-     *         boolean
+     * @return boolean
      */
     public boolean isLoaded() {
         return loaded;
+    }
+
+    /**
+     * @return the visible
+     */
+    public boolean isVisible() {
+        return visible;
     }
 }

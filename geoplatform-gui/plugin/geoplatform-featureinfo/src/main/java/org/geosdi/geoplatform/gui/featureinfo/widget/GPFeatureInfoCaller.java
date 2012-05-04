@@ -60,7 +60,7 @@ import org.gwtopenmaps.openlayers.client.Map;
 public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
 
     private boolean loaded;
-    private boolean visible;
+    private boolean activated;
     private Map map;
     private LoadLayersDataSouceEvent dataSouceEvent = new LoadLayersDataSouceEvent();
 
@@ -121,7 +121,7 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
         for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
             it.next().getElementControl().activate();
         }
-        this.visible = true;
+        this.activated = true;
     }
 
     /**
@@ -131,7 +131,7 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
         for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
             it.next().getElementControl().deactivate();
         }
-        this.visible = false;
+        this.activated = false;
     }
 
     /**
@@ -145,7 +145,7 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
     /**
      * @return the visible
      */
-    public boolean isVisible() {
-        return visible;
+    public boolean isActivated() {
+        return activated;
     }
 }

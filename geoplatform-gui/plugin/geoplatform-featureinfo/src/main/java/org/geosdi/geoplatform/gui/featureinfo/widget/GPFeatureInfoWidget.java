@@ -127,7 +127,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
     public void addLayersServer(String urlServers) {
         IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(urlServers);
         this.mapWidget.getMap().addControl(element.getElementControl());
-        if (featureCaller.isVisible()) {
+        if (featureCaller.isActivated()) {
             element.getElementControl().activate();
         }
     }

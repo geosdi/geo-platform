@@ -38,14 +38,16 @@ package org.geosdi.geoplatform.connector.jaxb.provider;
 import java.awt.RenderingHints;
 import java.util.HashMap;
 import java.util.Map;
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
+@ThreadSafe
 public class GeoPlatformJAXBContextRepository {
 
     private static Map<GeoPlatformJAXBContextKey, Object> values;
@@ -59,9 +61,9 @@ public class GeoPlatformJAXBContextRepository {
 
     /**
      * Register the JAXB Context for the Specific Connector
-     * 
+     * <p/>
      * @param key
-     * @param provider 
+     * param provider
      */
     public static void registerProvider(GeoPlatformJAXBContextKey key,
             Object provider) {
@@ -74,8 +76,11 @@ public class GeoPlatformJAXBContextRepository {
 
     /**
      * Retrieve the JAXBContext for Specific Connector registered
-     * 
+     * <p/>
      * @param key
+     * <
+     * p/>
+     * <p/>
      * @return GPConnectorJAXBContext Provider registered for Key
      */
     public static synchronized <P extends GPConnectorJAXBContext> P getProvider(GeoPlatformJAXBContextKey key) {
@@ -85,7 +90,7 @@ public class GeoPlatformJAXBContextRepository {
 
     private static <P extends GPConnectorJAXBContext> P lookUpJAXBContext(GeoPlatformJAXBContextKey key) {
         Object jaxbContext = null;
-        
+
         try {
             Class<?> classe = key.getJAXBContextClass();
 

@@ -83,6 +83,17 @@
             <artifactId>geonetwork-catalog-impl</artifactId>
         </dependency>
         <!-- =============================================================== -->
+        <!-- GEOPLATFORM CSW CATALOG FINDER -->
+        <!-- =============================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>csw-catalog-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>csw-catalog-impl</artifactId>
+        </dependency>
+        <!-- =============================================================== -->
         <!-- GEOPLATFORM WS -->
         <!-- =============================================================== -->
         <dependency>

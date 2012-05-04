@@ -40,6 +40,6 @@
     
     <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean" />
     
-    <bean id="catalogJAXBContextConfigurator" class="org.geosdi.geoplatform.cswconnector.CatalogJAXBContextConfigurator" />
+    <bean id="catalogJAXBContextConfigurator" class="org.geosdi.geoplatform.cswconnector.jaxb.CatalogJAXBContextConfigurator" />
 
 </beans>

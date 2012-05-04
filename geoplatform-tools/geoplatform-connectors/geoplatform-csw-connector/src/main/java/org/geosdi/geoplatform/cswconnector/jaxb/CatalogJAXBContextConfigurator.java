@@ -33,10 +33,9 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.cswconnector.jaxb;
 
 import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
-import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 import org.springframework.context.annotation.Bean;
 
 /**

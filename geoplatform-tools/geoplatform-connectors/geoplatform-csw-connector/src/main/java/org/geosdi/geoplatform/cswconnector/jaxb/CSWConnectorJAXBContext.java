@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CSWConnectorJAXBContext implements
         GeoPlatformJAXBContextProvider {
@@ -63,6 +63,9 @@ public class CSWConnectorJAXBContext implements
     //
     private static CSWJAXBContext jaxbContext;
     public static final CSWJAXBContextKey CSW_CONTEXT_KEY = new CSWJAXBContextKey();
+
+    protected CSWConnectorJAXBContext() {
+    }
 
     @Override
     public CSWJAXBContext getJAXBProvider() {

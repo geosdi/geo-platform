@@ -48,7 +48,7 @@ import javax.xml.bind.Unmarshaller;
  */
 public abstract class GPConnectorJAXBContext {
 
-    protected JAXBContext jaxbContext;
+    protected final JAXBContext jaxbContext;
 
     /**
      * <p>

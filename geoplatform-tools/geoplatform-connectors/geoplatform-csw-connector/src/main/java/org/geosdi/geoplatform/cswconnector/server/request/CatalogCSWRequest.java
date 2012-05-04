@@ -37,19 +37,27 @@ package org.geosdi.geoplatform.cswconnector.server.request;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.GPPostConnectorRequest;
 import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
+import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
+import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
 
 /**
  *
@@ -69,6 +77,22 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
     public CatalogCSWRequest(GPServerConnector server) {
         super(server);
     }
+
+    @Override
+    protected HttpEntity preparePostEntity()
+            throws JAXBException, UnsupportedEncodingException {
+
+        Marshaller marshaller = cswContext.acquireMarshaller();
+
+        Object request = this.createRequest();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(request, writer);
+
+        return new StringEntity(writer.toString(),
+                GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
+    }
+
+    protected abstract Object createRequest();
 
     @Override
     public T getResponse() throws ServerInternalFault, IOException {

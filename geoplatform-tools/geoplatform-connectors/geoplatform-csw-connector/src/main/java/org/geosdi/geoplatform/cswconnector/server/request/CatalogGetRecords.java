@@ -35,17 +35,10 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request;
 
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.protocol.HTTP;
 import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
@@ -198,20 +191,7 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     }
 
     @Override
-    protected HttpEntity preparePostEntity()
-            throws JAXBException, UnsupportedEncodingException {
-
-        Marshaller marshaller = cswContext.acquireMarshaller();
-
-        GetRecordsType request = this.prepareGetRecordsRequest();
-        StringWriter writer = new StringWriter();
-        marshaller.marshal(request, writer);
-
-        return new StringEntity(writer.toString(),
-                GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
-    }
-
-    private GetRecordsType prepareGetRecordsRequest() {
+    protected Object createRequest() {
         GetRecordsType request = new GetRecordsType();
 
         request.setResultType(resultType != null ? resultType : ResultType.HITS);

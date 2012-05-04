@@ -77,7 +77,6 @@ public abstract class GPPostConnectorRequest<T>
         }
     }
 
-    // TODO create only CSW request into subclasses
     protected abstract HttpEntity preparePostEntity()
             throws JAXBException, UnsupportedEncodingException;
 }

@@ -35,14 +35,6 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request.v202;
 
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.protocol.HTTP;
-import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogCSWRequest;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
@@ -64,16 +56,7 @@ public class CatalogGetCapabilitiesV202 extends CatalogCSWRequest<CapabilitiesTy
     }
 
     @Override
-    public HttpEntity preparePostEntity()
-            throws JAXBException, UnsupportedEncodingException {
-
-        Marshaller marshaller = cswContext.acquireMarshaller();
-
-        GetCapabilitiesType request = new GetCapabilitiesType(CSWServiceEnum.CSW);
-        StringWriter writer = new StringWriter();
-        marshaller.marshal(request, writer);
-
-        return new StringEntity(writer.toString(),
-                GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
+    protected Object createRequest() {
+        return new GetCapabilitiesType(CSWServiceEnum.CSW);
     }
 }

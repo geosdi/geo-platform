@@ -35,17 +35,6 @@
  */
 package org.geosdi.geoplatform.wpsconnector;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import org.geotoolkit.security.ClientSecurity;
-import org.geotoolkit.wps.DescribeProcessRequest;
-import org.geotoolkit.wps.ExecuteRequest;
-import org.geotoolkit.wps.GetCapabilitiesRequest;
-import org.geotoolkit.wps.WebProcessingServer;
-import org.geotoolkit.wps.xml.v100.WPSCapabilitiesType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group 
@@ -53,80 +42,4 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class GeoPlatformWPSConnector {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private WebProcessingServer wpsServer;
-
-    public GeoPlatformWPSConnector(String url) {
-        this(url, WPSVersionEnum.WPS_1_0_0);
-    }
-
-    /**
-     * Create a GeoPlatformWPSConnector Instance with the url to the WPS Service
-     * and WPS Version
-     *
-     * @param url
-     * @param version
-     */
-    public GeoPlatformWPSConnector(String url, WPSVersionEnum version) {
-        try {
-            this.wpsServer = new WebProcessingServer(new URL(url),
-                    version.toString());
-        } catch (MalformedURLException ex) {
-            logger.error("URL Incorrect : @@@@@@@@@@@@@@ " + ex);
-        }
-    }
-
-    /**
-     *
-     * @param url
-     * @param security
-     * @param version
-     */
-    public GeoPlatformWPSConnector(String url, ClientSecurity security,
-            WPSVersionEnum version) {
-        try {
-            this.wpsServer = new WebProcessingServer(new URL(url), security,
-                    version.toString());
-        } catch (MalformedURLException ex) {
-            logger.error("URL Incorrect : @@@@@@@@@@@@@@@ " + ex);
-        }
-    }
-
-    /**
-     * Return the GetCapabilities from WPS Server
-     *
-     * @return WPSCapabilitiesType
-     */
-    public WPSCapabilitiesType getCapabilities() {
-        return this.wpsServer.getCapabilities();
-    }
-
-    /**
-     * Create Capabilities Request
-     *
-     * @return GetCapabilitiesRequest
-     */
-    public GetCapabilitiesRequest createCapabilitiesRequest() {
-        return this.wpsServer.createGetCapabilities();
-    }
-
-    /**
-     * Create Describe Process Request
-     *
-     * @return DescribeProcessRequest
-     */
-    public DescribeProcessRequest createDescribeProcess() {
-        return this.wpsServer.createDescribeProcess();
-    }
-
-    /**
-     * Create Execute Request
-     *
-     * @return ExecuteRequest
-     */
-    public ExecuteRequest createExecuteRequest() {
-        return this.wpsServer.createExecute();
-    }
 }

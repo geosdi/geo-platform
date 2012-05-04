@@ -86,12 +86,12 @@
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU" />
     
-    <cache name="gp_account" maxElementsInMemory="10000" eternal="false"
+    <cache name="gs_account" maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU" />
                 
-    <cache name="gp_resource" maxElementsInMemory="10000" eternal="false"
+    <cache name="gs_resource" maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU" />

@@ -362,67 +362,18 @@ class CSWServiceImpl {
         List<SummaryRecordDTO> summaryRecordListDTO = new ArrayList<SummaryRecordDTO>(summaryRecordList.size());
         for (SummaryRecordType summaryRecord : summaryRecordList) {
             SummaryRecordDTO dto = new SummaryRecordDTO();
-            dto.setIdentifier(this.toCommaSeparatedValues(summaryRecord.getIdentifier()));
-            dto.setTitle(this.toCommaSeparatedValues(summaryRecord.getTitle()));
-            dto.setAbstractText(this.convertLiteralToString(summaryRecord.getAbstract()));
-            dto.setSubjects(this.convertLiteralToList(summaryRecord.getSubject()));
+            dto.setIdentifier(
+                    BindingUtility.convertLiteralListToString(summaryRecord.getIdentifier()));
+            dto.setTitle(
+                    BindingUtility.convertLiteralListToString(summaryRecord.getTitle()));
+            dto.setAbstractText(
+                    BindingUtility.convertLiteralToString(summaryRecord.getAbstract()));
+            dto.setSubjects(
+                    BindingUtility.convertLiteralToList(summaryRecord.getSubject()));
 
             summaryRecordListDTO.add(dto);
         }
         return summaryRecordListDTO;
-    }
-
-    private List<String> convertLiteralToList(List<SimpleLiteral> literalList) {
-        List<String> stringList = new ArrayList<String>(literalList.size());
-        for (SimpleLiteral sl : literalList) {
-            stringList.add(this.listToString(sl.getContent()));
-        }
-        return stringList;
-    }
-
-    private String convertLiteralToString(List<SimpleLiteral> literalList) {
-        StringBuilder str = new StringBuilder();
-        for (SimpleLiteral sl : literalList) {
-            str.append(this.listToString(sl.getContent()));
-        }
-        this.cleanStringBuilder(str);
-        return str.toString();
-    }
-
-    private String toCommaSeparatedValues(List<JAXBElement<SimpleLiteral>> values) {
-        if (values == null || values.isEmpty()) {
-            return "";
-        }
-
-        final StringBuilder str = new StringBuilder();
-        for (JAXBElement<SimpleLiteral> elem : values) {
-            str.append(this.listToString(elem.getValue().getContent()));
-            str.append(",");
-        }
-        this.cleanStringBuilder(str);
-
-        return str.toString();
-    }
-
-    private String listToString(List<String> list) {
-        final StringBuilder str = new StringBuilder();
-        for (String string : list) {
-            str.append(string);
-            str.append(",");
-        }
-        this.cleanStringBuilder(str);
-        return str.toString();
-    }
-
-    private StringBuilder cleanStringBuilder(StringBuilder str) {
-        if (str.length() == 0) {
-            return str;
-        }
-        while (str.lastIndexOf(",") == str.length() - 1
-                || str.lastIndexOf(" ") == str.length() - 1) {
-            str.deleteCharAt(str.length() - 1);
-        }
-        return str;
     }
 
     private CatalogGetRecordsRequest createGetRecordsRequest(String serverUrl)

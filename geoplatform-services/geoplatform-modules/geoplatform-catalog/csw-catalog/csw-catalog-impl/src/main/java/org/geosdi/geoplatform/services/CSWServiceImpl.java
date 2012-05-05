@@ -42,7 +42,6 @@ import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
@@ -358,13 +357,14 @@ class CSWServiceImpl {
         return server;
     }
 
+    // TODO Improvements for all cases
     private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> summaryRecordList) {
         List<SummaryRecordDTO> summaryRecordListDTO = new ArrayList<SummaryRecordDTO>(summaryRecordList.size());
         for (SummaryRecordType summaryRecord : summaryRecordList) {
             SummaryRecordDTO dto = new SummaryRecordDTO();
             dto.setIdentifier(this.toCommaSeparatedValues(summaryRecord.getIdentifier()));
             dto.setTitle(this.toCommaSeparatedValues(summaryRecord.getTitle()));
-            dto.setAbstractText(this.toCommaSeparatedValues(summaryRecord.getAbstract()));
+            dto.setAbstractText(this.convertLiteralToString(summaryRecord.getAbstract()));
             dto.setSubjects(this.convertLiteralToList(summaryRecord.getSubject()));
 
             summaryRecordListDTO.add(dto);
@@ -375,23 +375,54 @@ class CSWServiceImpl {
     private List<String> convertLiteralToList(List<SimpleLiteral> literalList) {
         List<String> stringList = new ArrayList<String>(literalList.size());
         for (SimpleLiteral sl : literalList) {
-            stringList.add(sl.toString());
+            stringList.add(this.listToString(sl.getContent()));
         }
         return stringList;
     }
 
-    private String toCommaSeparatedValues(final Collection<?> values) {
+    private String convertLiteralToString(List<SimpleLiteral> literalList) {
+        StringBuilder str = new StringBuilder();
+        for (SimpleLiteral sl : literalList) {
+            str.append(this.listToString(sl.getContent()));
+        }
+        this.cleanStringBuilder(str);
+        return str.toString();
+    }
+
+    private String toCommaSeparatedValues(List<JAXBElement<SimpleLiteral>> values) {
         if (values == null || values.isEmpty()) {
             return "";
         }
 
         final StringBuilder str = new StringBuilder();
-        for (Object obj : values) {
-            str.append(obj).append(",");
+        for (JAXBElement<SimpleLiteral> elem : values) {
+            str.append(this.listToString(elem.getValue().getContent()));
+            str.append(",");
         }
-        str.deleteCharAt(str.length() - 1);
+        this.cleanStringBuilder(str);
 
         return str.toString();
+    }
+
+    private String listToString(List<String> list) {
+        final StringBuilder str = new StringBuilder();
+        for (String string : list) {
+            str.append(string);
+            str.append(",");
+        }
+        this.cleanStringBuilder(str);
+        return str.toString();
+    }
+
+    private StringBuilder cleanStringBuilder(StringBuilder str) {
+        if (str.length() == 0) {
+            return str;
+        }
+        while (str.lastIndexOf(",") == str.length() - 1
+                || str.lastIndexOf(" ") == str.length() - 1) {
+            str.deleteCharAt(str.length() - 1);
+        }
+        return str;
     }
 
     private CatalogGetRecordsRequest createGetRecordsRequest(String serverUrl)

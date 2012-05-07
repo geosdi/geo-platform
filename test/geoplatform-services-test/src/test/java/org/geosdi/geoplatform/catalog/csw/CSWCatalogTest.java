@@ -435,7 +435,7 @@ public class CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsFirenzeCountTimeFiltering() throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
+    public void testGetRecordsGeomatysCountTimeFiltering() throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
         // Insert the server
         GeoPlatformServer server = this.createCSWServer("Geomatys",
                 "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
@@ -445,7 +445,8 @@ public class CSWCatalogTest {
 
         catalogFinder.setServerID(serverID);
 
-        Assert.assertEquals(225, cswService.getSummaryRecordsCount(catalogFinder));
+        int count = cswService.getSummaryRecordsCount(catalogFinder);
+        Assert.assertTrue(count > 0);
 
         Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
         Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
@@ -453,7 +454,7 @@ public class CSWCatalogTest {
         catalogFinder.getTimeInfo().setStartDate(startCalendar.getTime());
         catalogFinder.getTimeInfo().setEndDate(endCalendar.getTime());
 
-        Assert.assertEquals(78, cswService.getSummaryRecordsCount(catalogFinder));
+        Assert.assertTrue(count > cswService.getSummaryRecordsCount(catalogFinder));
 
         // Delete the server
         boolean deleted = cswService.deleteServerCSW(serverID);

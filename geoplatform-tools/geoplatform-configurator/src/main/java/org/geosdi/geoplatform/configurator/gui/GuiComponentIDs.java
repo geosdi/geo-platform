@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.configurator.gui;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,6 +86,7 @@ public class GuiComponentIDs {
     public static final String DRAG_FEATURE = "dragFeature";
     public static final String RESIZE_FEATURE = "resizeFeature";
     public static final String DELETE_FEATURE = "deleteFeature";
+    public static final String GOTO_XY = "gotoXY";
     //
     public static final String CLEAR_MAP = "clearMap";
     public static final String GOOGLE_REVERSE_GEOCODING = "googleReverseGeocoding";
@@ -131,7 +132,7 @@ public class GuiComponentIDs {
         /**
          * ALL
          */
-        List<String> all = new ArrayList<String>();
+        List<String> all = Lists.newArrayList();
         // Menubar
         all.add(LOAD_PROJECTS);
         all.add(INGEST_DATA);
@@ -161,6 +162,7 @@ public class GuiComponentIDs {
         all.add(DRAG_FEATURE);
         all.add(RESIZE_FEATURE);
         all.add(DELETE_FEATURE);
+        all.add(GOTO_XY);
         all.add(CLEAR_MAP);
         all.add(GOOGLE_REVERSE_GEOCODING);
         all.add(YAHOO_REVERSE_GEOCODING);
@@ -185,7 +187,7 @@ public class GuiComponentIDs {
         /**
          * USER
          */
-        Map<String, Boolean> mapUser = new HashMap<String, Boolean>();
+        Map<String, Boolean> mapUser = Maps.newHashMap();
         // Menubar
         mapUser.put(LOAD_PROJECTS, true);
         mapUser.put(INGEST_DATA, true);
@@ -213,6 +215,7 @@ public class GuiComponentIDs {
         mapUser.put(DRAG_FEATURE, true);
         mapUser.put(RESIZE_FEATURE, true);
         mapUser.put(DELETE_FEATURE, true);
+        mapUser.put(GOTO_XY, true);
         mapUser.put(CLEAR_MAP, true);
         mapUser.put(GOOGLE_REVERSE_GEOCODING, true);
         mapUser.put(YAHOO_REVERSE_GEOCODING, true);
@@ -237,7 +240,7 @@ public class GuiComponentIDs {
         /**
          * VIEWER
          */
-        Map<String, Boolean> mapViewer = new HashMap<String, Boolean>();
+        Map<String, Boolean> mapViewer = Maps.newHashMap();
         // Menubar
         mapViewer.put(LOAD_PROJECTS, false);
         mapViewer.put(ABOUT_GEOPLATFORM, true);
@@ -264,6 +267,7 @@ public class GuiComponentIDs {
         mapViewer.put(DRAG_FEATURE, true);
         mapViewer.put(RESIZE_FEATURE, true);
         mapViewer.put(DELETE_FEATURE, true);
+        mapViewer.put(GOTO_XY, true);
         mapViewer.put(CLEAR_MAP, true);
         mapViewer.put(GOOGLE_REVERSE_GEOCODING, true);
         mapViewer.put(YAHOO_REVERSE_GEOCODING, true);
@@ -288,7 +292,7 @@ public class GuiComponentIDs {
         /**
          * SIGV only
          */
-        List<String> sigv = new ArrayList<String>();
+        List<String> sigv = Lists.newArrayList();
         //
         sigv.add(COMMIT);
         //
@@ -296,7 +300,7 @@ public class GuiComponentIDs {
         /**
          * SIGV Application
          */
-        Map<String, Boolean> mapSigv = new HashMap<String, Boolean>();
+        Map<String, Boolean> mapSigv = Maps.newHashMap();
         // Menubar
         mapSigv.put(ABOUT_GEOPLATFORM, true);
         mapSigv.put(GEOCODING, true);
@@ -307,6 +311,7 @@ public class GuiComponentIDs {
         mapSigv.put(ZOOM_OUT, true);
         mapSigv.put(ZOOM_PREVIOUS, true);
         mapSigv.put(ZOOM_NEXT, true);
+        mapSigv.put(GOTO_XY, true);
         mapSigv.put(GOOGLE_REVERSE_GEOCODING, true);
         mapSigv.put(YAHOO_REVERSE_GEOCODING, true);
         mapSigv.put(COMMIT, true);

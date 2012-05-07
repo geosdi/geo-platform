@@ -65,6 +65,9 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("eraser_minus.png")
     AbstractImagePrototype erase();
+    
+    @Resource("gotoXY.png")
+    AbstractImagePrototype gotoXY();
 
     @Resource("delete.png")
     AbstractImagePrototype delete();

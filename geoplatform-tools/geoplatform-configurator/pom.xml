@@ -83,6 +83,12 @@
             </exclusions>
         </dependency>
         
+                <!-- GUAVA -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>          
+        </dependency>
+        
 		<!-- CGLIB -->
         <dependency>
             <groupId>asm</groupId>

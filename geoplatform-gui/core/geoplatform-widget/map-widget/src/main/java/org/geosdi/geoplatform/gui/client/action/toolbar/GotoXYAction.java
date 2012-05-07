@@ -33,58 +33,63 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.geosdi.geoplatform.gui.action.MapToggleAction;
+import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
 
 /**
- * @author giuseppe
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public abstract class ToolbarMapAction extends ToolbarAction {
+public class GotoXYAction extends MapToggleAction {
 
-    private Button button;
+    private GotoXYWidget gotoXYWidget = new GotoXYWidget(Boolean.TRUE, mapWidget);
 
-    public ToolbarMapAction(AbstractImagePrototype image, String tooltip) {
-        super(image, tooltip);
+    public GotoXYAction(GeoPlatformMap theMapWidget) {
+        super(theMapWidget, BasicWidgetResources.ICONS.gotoXY(), "Goto X - Y");
     }
 
     /**
-     * @return the button
-     */
-    public Button getButton() {
-        return button;
-    }
-
-    /**
-     * @param button
-     *            the button to set
-     */
-    public void setButton(Button button) {
-        this.button = button;
-    }
-
-    public Control getMapControl() {
-        return null;
-    }
-
-    public void disableControl() {
-    }
-
-    /**
+     * (non-Javadoc)
      *
-     * Enable Button associated with this action
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
-    public void enable() {
-        this.button.enable();
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        gotoXYWidget.show();
+//        ToggleButton button = (ToggleButton) ce.getSource();
+//
+//        super.changeButtonState();
+//
+//        if (button.isPressed()) {
+//            mapWidget.getButtonBar().setPressedButton(button);
+//        } else {
+//            this.mapWidget.deactivateDrawLineFeature();
+//        }
     }
 
     /**
-     * Disable Button associated with this action
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
      */
-    public void disable() {
-        this.button.disable();
+//    @Override
+//    public Control getMapControl() {
+//        return ((MapLayoutWidget) mapWidget).getDrawLineFeature();
+//    }
+    /**
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+     */
+    @Override
+    public void disableControl() {
+        getMapControl().disable();
     }
 }

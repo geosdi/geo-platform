@@ -65,4 +65,12 @@
         <property name="enabled" value="${measureArea.enabled}" />
         <property name="order" value="${measureArea.order}" />
     </bean>
+    
+    <bean name="gotoXY"
+              class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
+        <property name="id" value="${gotoXY.id}" />
+        <property name="type" value="${gotoXY.type}" />
+        <property name="enabled" value="${gotoXY.enabled}" />
+        <property name="order" value="${gotoXY.order}" />
+    </bean>
 </beans>

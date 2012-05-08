@@ -46,7 +46,7 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
     private NumberField xNumberField;
     private NumberField yNumberField;
     private Button find;
-    private Button cancel;
+    private Button close;
     private GeocodingVectorMarker geocoderMarker = new GeocodingVectorMarker();
     private GeoPlatformMap mapWidget;
 
@@ -90,7 +90,7 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
 
         epsgTextField = new TextField<String>();
         epsgTextField.setAllowBlank(false);
-        epsgTextField.setFieldLabel("EPSG code");
+        epsgTextField.setFieldLabel("SRS ID");
         fieldSet.add(epsgTextField);
 
         this.xNumberField = new NumberField();
@@ -124,16 +124,16 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
 
         formPanel.addButton(this.find);
 
-        this.cancel = new Button("Cancel",
+        this.close = new Button("Close",
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        cancel();
+                        GotoXYWidget.super.hide();
                     }
                 });
 
-        formPanel.addButton(this.cancel);
+        formPanel.addButton(this.close);
     }
 
     @Override
@@ -145,14 +145,6 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
     public void initSizeFormPanel() {
         formPanel.setHeaderVisible(false);
         formPanel.setSize(380, 200);
-    }
-
-    /**
-     * Clean all Form Fields and Erase Feature from the Map
-     *
-     */
-    public void cancel() {
-        super.hide();
     }
 
     /**

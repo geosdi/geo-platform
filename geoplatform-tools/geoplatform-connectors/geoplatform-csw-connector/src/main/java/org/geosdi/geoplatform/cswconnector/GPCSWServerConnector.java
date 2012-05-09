@@ -40,12 +40,13 @@ import org.geosdi.geoplatform.connector.api.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.cswconnector.server.GPCatalogServerConnector;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPCSWServerConnector extends GPServerConnector<GPCatalogServerConnector>
         implements GeoPlatformCSWConnector {
@@ -80,5 +81,10 @@ public class GPCSWServerConnector extends GPServerConnector<GPCatalogServerConne
     @Override
     public CatalogGetRecordsRequest createGetRecordsRequest() {
         return server.createGetRecordsRequest();
+    }
+
+    @Override
+    public CatalogGetRecordByIdRequest createGetRecordByIdRequest() {
+        return server.createGetRecordByIdRequest();
     }
 }

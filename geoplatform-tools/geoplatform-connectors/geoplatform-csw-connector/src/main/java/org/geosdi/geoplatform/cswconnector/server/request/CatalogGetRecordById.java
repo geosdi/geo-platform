@@ -33,24 +33,62 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.cswconnector.server.request;
 
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordByIdRequest;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
+import java.util.Arrays;
+import java.util.List;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformCSWConnector {
+public abstract class CatalogGetRecordById<T> extends CatalogCSWRequest<T>
+        implements CatalogGetRecordByIdRequest<T> {
 
-    GPCatalogVersion getVersion();
+    protected List<String> id;
+    protected OutputSchema outputSchema;
+    protected String elementSetType;
 
-    CatalogGetCapabilitiesRequest createGetCapabilitiesRequest();
+    public CatalogGetRecordById(GPServerConnector server) {
+        super(server);
+    }
 
-    CatalogGetRecordsRequest createGetRecordsRequest();
+    @Override
+    public List<String> getId() {
+        return this.id;
+    }
 
-    CatalogGetRecordByIdRequest createGetRecordByIdRequest();
+    @Override
+    public void setId(String... theId) {
+        this.id = Arrays.asList(theId);
+    }
+
+    @Override
+    public OutputSchema getOutputSchema() {
+        return this.outputSchema;
+    }
+
+    @Override
+    public void setOutputSchema(OutputSchema outputSchema) {
+        this.outputSchema = outputSchema;
+    }
+
+    @Override
+    public String getElementSetType() {
+        return this.elementSetType;
+    }
+
+    @Override
+    public void setElementSetType(String value) {
+        this.elementSetType = value;
+    }
+
+    @Override
+    public String toString() {
+        return "CatalogGetRecordById{" + "id = " + id + ", outputSchema = "
+                + outputSchema + ", elementSetType = " + elementSetType + '}';
+    }
 }

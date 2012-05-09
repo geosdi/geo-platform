@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.18 at 12:36:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
@@ -14,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
@@ -21,21 +20,20 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * 
- *             Convenience operation to retrieve default record representations 
- *             by identifier.
- *             Id - object identifier (a URI) that provides a reference to a 
- *                  catalogue item (or a result set if the catalogue supports 
- *                  persistent result sets).
- *             ElementSetName - one of "brief, "summary", or "full"
- *          
- * 
+ *
+ * Convenience operation to retrieve default record representations
+ * by identifier.
+ * Id - object identifier (a URI) that provides a reference to a
+ * catalogue item (or a result set if the catalogue supports
+ * persistent result sets).
+ * ElementSetName - one of "brief, "summary", or "full"
+ *
+ *
  * <p>Java class for GetRecordByIdType complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="GetRecordByIdType">
  *   &lt;complexContent>
@@ -50,18 +48,18 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
+@XmlRootElement(name = "GetRecordById")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetRecordByIdType", propOrder = {
     "id",
     "elementSetName"
 })
 public class GetRecordByIdType
-    extends RequestBaseType
-    implements ToString
-{
+        extends RequestBaseType
+        implements ToString {
 
     @XmlElement(name = "Id", required = true)
     @XmlSchemaType(name = "anyURI")
@@ -76,25 +74,26 @@ public class GetRecordByIdType
 
     /**
      * Gets the value of the id property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the id property.
-     * 
+     * This is why there is not a
+     * <CODE>set</CODE> method for the id property.
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getId().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * 
-     * 
+     *
+     *
      */
     public List<String> getId() {
         if (id == null) {
@@ -104,7 +103,7 @@ public class GetRecordByIdType
     }
 
     public boolean isSetId() {
-        return ((this.id!= null)&&(!this.id.isEmpty()));
+        return ((this.id != null) && (!this.id.isEmpty()));
     }
 
     public void unsetId() {
@@ -113,11 +112,11 @@ public class GetRecordByIdType
 
     /**
      * Gets the value of the elementSetName property.
-     * 
+     *
      * @return
-     *     possible object is
+     * possible object is
      *     {@link ElementSetNameType }
-     *     
+     *
      */
     public ElementSetNameType getElementSetName() {
         return elementSetName;
@@ -125,27 +124,27 @@ public class GetRecordByIdType
 
     /**
      * Sets the value of the elementSetName property.
-     * 
+     *
      * @param value
-     *     allowed object is
+* allowed object is
      *     {@link ElementSetNameType }
-     *     
+     *
      */
     public void setElementSetName(ElementSetNameType value) {
         this.elementSetName = value;
     }
 
     public boolean isSetElementSetName() {
-        return (this.elementSetName!= null);
+        return (this.elementSetName != null);
     }
 
     /**
      * Gets the value of the outputFormat property.
-     * 
+     *
      * @return
-     *     possible object is
+     * possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getOutputFormat() {
         if (outputFormat == null) {
@@ -157,27 +156,27 @@ public class GetRecordByIdType
 
     /**
      * Sets the value of the outputFormat property.
-     * 
+     *
      * @param value
-     *     allowed object is
+* allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setOutputFormat(String value) {
         this.outputFormat = value;
     }
 
     public boolean isSetOutputFormat() {
-        return (this.outputFormat!= null);
+        return (this.outputFormat != null);
     }
 
     /**
      * Gets the value of the outputSchema property.
-     * 
+     *
      * @return
-     *     possible object is
+     * possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getOutputSchema() {
         return outputSchema;
@@ -185,18 +184,18 @@ public class GetRecordByIdType
 
     /**
      * Sets the value of the outputSchema property.
-     * 
+     *
      * @param value
-     *     allowed object is
+* allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setOutputSchema(String value) {
         this.outputSchema = value;
     }
 
     public boolean isSetOutputSchema() {
-        return (this.outputSchema!= null);
+        return (this.outputSchema != null);
     }
 
     public String toString() {
@@ -217,23 +216,26 @@ public class GetRecordByIdType
         super.appendFields(locator, buffer, strategy);
         {
             List<String> theId;
-            theId = (this.isSetId()?this.getId():null);
+            theId = (this.isSetId() ? this.getId() : null);
             strategy.appendField(locator, this, "id", buffer, theId);
         }
         {
             ElementSetNameType theElementSetName;
             theElementSetName = this.getElementSetName();
-            strategy.appendField(locator, this, "elementSetName", buffer, theElementSetName);
+            strategy.appendField(locator, this, "elementSetName", buffer,
+                    theElementSetName);
         }
         {
             String theOutputFormat;
             theOutputFormat = this.getOutputFormat();
-            strategy.appendField(locator, this, "outputFormat", buffer, theOutputFormat);
+            strategy.appendField(locator, this, "outputFormat", buffer,
+                    theOutputFormat);
         }
         {
             String theOutputSchema;
             theOutputSchema = this.getOutputSchema();
-            strategy.appendField(locator, this, "outputSchema", buffer, theOutputSchema);
+            strategy.appendField(locator, this, "outputSchema", buffer,
+                    theOutputSchema);
         }
         return buffer;
     }
@@ -243,5 +245,4 @@ public class GetRecordByIdType
         List<String> draftl = this.getId();
         draftl.addAll(value);
     }
-
 }

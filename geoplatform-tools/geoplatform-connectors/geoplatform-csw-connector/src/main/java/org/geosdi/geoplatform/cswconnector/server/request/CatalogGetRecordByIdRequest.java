@@ -33,24 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.cswconnector.server.request;
 
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordByIdRequest;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
+import java.util.List;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformCSWConnector {
+public interface CatalogGetRecordByIdRequest<T> extends GPConnectorRequest<T> {
 
-    GPCatalogVersion getVersion();
+    void setOutputSchema(OutputSchema outputSchema);
 
-    CatalogGetCapabilitiesRequest createGetCapabilitiesRequest();
+    OutputSchema getOutputSchema();
 
-    CatalogGetRecordsRequest createGetRecordsRequest();
+    void setId(String... theId);
 
-    CatalogGetRecordByIdRequest createGetRecordByIdRequest();
+    List<String> getId();
+
+    /**
+     * The only admissible parameters are:
+     * <p>
+     * <ul>
+     * <li>brief</li>
+     * <li>summary</li>
+     * <li>full</li>
+     * </ul>
+     * <p>The default value is Summary</p>
+     * <p/>
+     * @param value
+     */
+    void setElementSetType(String value);
+
+    String getElementSetType();
 }

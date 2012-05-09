@@ -43,9 +43,9 @@ import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.*;
 import it.geosolutions.geoserver.rest.decoder.RESTFeatureType.Attribute;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
-import it.geosolutions.geoserver.rest.encoder.GSLayerEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
+import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import java.io.*;
 import java.util.*;
 import java.util.zip.ZipFile;
@@ -827,8 +827,14 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 //                        "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);
 //            RESTCoverageStore store = restPublisher.publishExternalGeoTIFF(userWorkspace, fileName, fileInTifDir, epsg, sld);
             boolean published = restPublisher.publishExternalGeoTIFF(userWorkspace,
-                    fileName, fileInTifDir, fileName, epsg, GSResourceEncoder.ProjectionPolicy.REPROJECT_TO_DECLARED, sld);
+                    fileName, fileInTifDir, fileName, epsg, GSResourceEncoder.ProjectionPolicy.FORCE_DECLARED, sld);
             if (published) {
+                RESTLayer layer = restReader.getLayer(fileName);
+                GSCoverageEncoder coverageEncoder = new GSCoverageEncoder();
+                coverageEncoder.setName(fileName);
+                coverageEncoder.setTitle(fileName);
+                this.restPublisher.configureCoverage(coverageEncoder, userWorkspace, fileName);
+                layer.getTitle();
                 logger.info(
                         fileInTifDir + " correctly published in the " + userWorkspace + " workspace");
                 infoPreview = getTIFURLByLayerName(userName, fileName);

@@ -67,7 +67,7 @@ public enum ResultType {
 
     public static ResultType fromValue(String v) {
         for (ResultType c: ResultType.values()) {
-            if (c.value.equals(v)) {
+            if (c.value.equalsIgnoreCase(v)) {
                 return c;
             }
         }

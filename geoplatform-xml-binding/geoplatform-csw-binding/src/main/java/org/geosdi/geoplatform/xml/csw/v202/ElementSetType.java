@@ -51,7 +51,7 @@ public enum ElementSetType {
 
     public static ElementSetType fromValue(String v) {
         for (ElementSetType c: ElementSetType.values()) {
-            if (c.value.equals(v)) {
+            if (c.value.equalsIgnoreCase(v)) {
                 return c;
             }
         }

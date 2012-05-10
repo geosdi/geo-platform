@@ -67,7 +67,6 @@ import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecor
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
-import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -294,7 +293,8 @@ class CSWServiceImpl {
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
-        CatalogGetRecordsRequest request = this.createGetRecordsRequest(server.getServerUrl());
+        CatalogGetRecordsRequest<GetRecordsResponseType> request =
+                this.createGetRecordsRequest(server.getServerUrl());
         catalogRequestManager.arrangeRequest(GetRecordsSearchType.COUNT, catalogFinder, request);
         logger.trace("\n*** Constraint: \"{}\" ***", request.getConstraint());
 
@@ -310,7 +310,8 @@ class CSWServiceImpl {
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
-        CatalogGetRecordsRequest request = this.createGetRecordsRequest(server.getServerUrl());
+        CatalogGetRecordsRequest<GetRecordsResponseType> request =
+                this.createGetRecordsRequest(server.getServerUrl());
         catalogRequestManager.arrangeRequest(GetRecordsSearchType.SEARCH, catalogFinder, request);
 
         // Pagination search
@@ -376,7 +377,7 @@ class CSWServiceImpl {
         return summaryRecordListDTO;
     }
 
-    private CatalogGetRecordsRequest createGetRecordsRequest(String serverUrl)
+    private CatalogGetRecordsRequest<GetRecordsResponseType> createGetRecordsRequest(String serverUrl)
             throws IllegalParameterFault {
 
         GPCSWServerConnector serverConnector = null;
@@ -389,17 +390,19 @@ class CSWServiceImpl {
             logger.error("### MalformedURLException: " + ex.getMessage());
             throw new IllegalParameterFault("Malformed URL");
         }
+        CatalogGetRecordsRequest<GetRecordsResponseType> request =
+                serverConnector.createGetRecordsRequest();
 
-        return serverConnector.createGetRecordsRequest();
+        return request;
     }
 
-    private GetRecordsResponseType createGetRecordsResponse(CatalogGetRecordsRequest request)
+    private GetRecordsResponseType createGetRecordsResponse(
+            CatalogGetRecordsRequest<GetRecordsResponseType> request)
             throws IllegalParameterFault, ServerInternalFault {
 
         GetRecordsResponseType response = null;
         try {
-            // TODO FIX Delete downcast
-            response = (GetRecordsResponseType) request.getResponse();
+            response = request.getResponse();
         } catch (IOException ex) {
             logger.error("### IOException: " + ex.getMessage());
             throw new IllegalParameterFault("Error on parse response stream");

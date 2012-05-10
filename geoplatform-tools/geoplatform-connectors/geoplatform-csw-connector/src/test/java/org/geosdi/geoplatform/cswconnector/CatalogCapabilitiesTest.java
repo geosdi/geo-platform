@@ -146,10 +146,9 @@ public class CatalogCapabilitiesTest {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
-        CatalogGetCapabilitiesRequest request = serverConnector.createGetCapabilitiesRequest();
+        CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
 
-        // TODO FIX Delete downcast
-        CapabilitiesType response = (CapabilitiesType) request.getResponse();
+        CapabilitiesType response = request.getResponse();
 
         logger.info("CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
                 response.getVersion());

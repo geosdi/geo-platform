@@ -73,19 +73,18 @@ public class CatalogGetRecordsTest {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
-        CatalogGetRecordsRequest request = serverConnector.createGetRecordsRequest();
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
         request.setTypeName(TypeName.METADATA);
 
         request.setOutputSchema(OutputSchema.CSW_V202);
-        request.setElementSetName(ElementSetType.SUMMARY);
-        request.setResultType(ResultType.RESULTS);
+        request.setElementSetName(ElementSetType.SUMMARY.toString());
+        request.setResultType(ResultType.RESULTS.toString());
 
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
 
-        // TODO FIX Delete downcast
-        GetRecordsResponseType response = (GetRecordsResponseType) request.getResponse();
+        GetRecordsResponseType response = request.getResponse();
 
         SearchResultsType searchResult = response.getSearchResults();
 
@@ -112,7 +111,7 @@ public class CatalogGetRecordsTest {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
-        CatalogGetRecordsRequest request = serverConnector.createGetRecordsRequest();
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
         request.setTypeName(TypeName.RECORD_V202);
 
@@ -137,8 +136,7 @@ public class CatalogGetRecordsTest {
         request.setConstraint(str.toString());
         logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}", request.getConstraint());
 
-        // TODO FIX Delete downcast
-        GetRecordsResponseType response = (GetRecordsResponseType) request.getResponse();
+        GetRecordsResponseType response = request.getResponse();
 
         SearchResultsType searchResult = response.getSearchResults();
 

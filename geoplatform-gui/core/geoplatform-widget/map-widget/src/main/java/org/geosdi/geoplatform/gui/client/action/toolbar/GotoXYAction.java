@@ -35,23 +35,23 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import org.geosdi.geoplatform.gui.action.MapToggleAction;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GotoXYAction extends MapToggleAction {
+public class GotoXYAction extends ToolbarMapAction {
 
-    private GotoXYWidget gotoXYWidget = new GotoXYWidget(Boolean.TRUE, mapWidget);
+    private GotoXYWidget gotoXYWidget;
 
     public GotoXYAction(GeoPlatformMap theMapWidget) {
-        super(theMapWidget, BasicWidgetResources.ICONS.gotoXY(), "Goto X - Y");
+        super(BasicWidgetResources.ICONS.gotoXY(), "Goto X - Y");
+        this.gotoXYWidget = new GotoXYWidget(Boolean.TRUE, theMapWidget);
     }
 
     /**
@@ -63,33 +63,5 @@ public class GotoXYAction extends MapToggleAction {
     @Override
     public void componentSelected(ButtonEvent ce) {
         gotoXYWidget.show();
-//        ToggleButton button = (ToggleButton) ce.getSource();
-//
-//        super.changeButtonState();
-//
-//        if (button.isPressed()) {
-//            mapWidget.getButtonBar().setPressedButton(button);
-//        } else {
-//            this.mapWidget.deactivateDrawLineFeature();
-//        }
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
-     */
-//    @Override
-//    public Control getMapControl() {
-//        return ((MapLayoutWidget) mapWidget).getDrawLineFeature();
-//    }
-    /**
-     * (non-Javadoc)
-     *
-     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
-     */
-    @Override
-    public void disableControl() {
-        getMapControl().disable();
     }
 }

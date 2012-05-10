@@ -90,7 +90,7 @@ public class UserService implements IUserService {
 
         SearchRequest srq = new SearchRequest(searchText);
 
-        Long usersCount = this.geoPlatformServiceClient.getAccountsCount(srq);
+        Long usersCount = this.geoPlatformServiceClient.getUsersCount(srq);
 
         int page = start == 0 ? start : start / config.getLimit();
 

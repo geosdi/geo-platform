@@ -230,7 +230,7 @@ class AccountServiceImpl {
     }
 
     public Long updateOwnUser(UserDTO user,
-                              String currentPlainPassword, String newPlainPassword)
+            String currentPlainPassword, String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault {
         if (user.getId() == null) {
             throw new IllegalArgumentException("User \"ID\" must be NOT NULL");
@@ -479,7 +479,17 @@ class AccountServiceImpl {
         if (request != null && request.getNameLike() != null) {
             Filter fUsername = Filter.ilike("username", request.getNameLike());
             Filter fAppId = Filter.ilike("appID", request.getNameLike());
-            searchCriteria.addFilterOr(fUsername, fAppId); // TODO check
+            searchCriteria.addFilterOr(fUsername, fAppId);
+        }
+        return new Long(accountDao.count(searchCriteria));
+    }
+
+    public Long getUsersCount(SearchRequest request) {
+        Search searchCriteria = new Search(GPAccount.class);
+        searchCriteria.addFilterNotEmpty("username");
+
+        if (request != null && request.getNameLike() != null) {
+            searchCriteria.addFilterILike("username", request.getNameLike());
         }
         return new Long(accountDao.count(searchCriteria));
     }

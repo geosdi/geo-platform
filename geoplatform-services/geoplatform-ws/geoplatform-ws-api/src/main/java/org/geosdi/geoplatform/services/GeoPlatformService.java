@@ -188,6 +188,11 @@ public interface GeoPlatformService {
     Long getAccountsCount(SearchRequest searchRequest);
 
     @Get
+    @HttpResource(location = "/users/count/{nameLike}")
+    @WebResult(name = "count")
+    Long getUsersCount(SearchRequest searchRequest);
+
+    @Get
     @HttpResource(location = "/accounts/{id}/authorities")
     @WebResult(name = "Authorities")
     List<String> getAuthorities(@WebParam(name = "accountID") Long accountID)

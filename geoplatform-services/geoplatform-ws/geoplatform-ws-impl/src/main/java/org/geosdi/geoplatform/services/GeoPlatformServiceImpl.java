@@ -388,6 +388,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public Long getUsersCount(SearchRequest request) {
+        return accountServiceDelegate.getUsersCount(request);
+    }
+
+    @Override
     public List<String> getAuthorities(Long accountID)
             throws ResourceNotFoundFault {
         return accountServiceDelegate.getAuthorities(accountID);

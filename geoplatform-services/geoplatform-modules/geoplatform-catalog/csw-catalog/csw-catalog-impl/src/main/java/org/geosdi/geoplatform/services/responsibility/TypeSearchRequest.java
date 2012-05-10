@@ -62,17 +62,17 @@ public class TypeSearchRequest extends GetRecordsRequestHandler {
 
         logger.debug("\n+++ Search type: {} +++", searchType);
         if (searchType == GetRecordsSearchType.COUNT) {
-            request.setTypeName(TypeName.RECORD);
-            request.setElementSetName(ElementSetType.BRIEF);
-            request.setResultType(ResultType.HITS);
+            request.setTypeName(TypeName.RECORD_V202);
+            request.setElementSetName(ElementSetType.BRIEF.value());
+            request.setResultType(ResultType.HITS.value());
 
         } else if (searchType == GetRecordsSearchType.SEARCH) {
             request.setTypeName(TypeName.METADATA);
-            request.setElementSetName(ElementSetType.SUMMARY);
-            request.setResultType(ResultType.RESULTS);
+            request.setElementSetName(ElementSetType.SUMMARY.value());
+            request.setResultType(ResultType.RESULTS.value());
         }
 
         // The default output format attribute is the MIME type "application/xml"
-        request.setOutputSchema(OutputSchema.CSW);
+        request.setOutputSchema(OutputSchema.CSW_V202);
     }
 }

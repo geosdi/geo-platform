@@ -77,7 +77,7 @@ public class CatalogGetRecordsTest {
 
         request.setTypeName(TypeName.METADATA);
 
-        request.setOutputSchema(OutputSchema.CSW);
+        request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.SUMMARY);
         request.setResultType(ResultType.RESULTS);
 
@@ -114,10 +114,10 @@ public class CatalogGetRecordsTest {
 
         CatalogGetRecordsRequest request = serverConnector.createGetRecordsRequest();
 
-        request.setTypeName(TypeName.RECORD);
+        request.setTypeName(TypeName.RECORD_V202);
 
         request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
-        request.setConstraintLanguageVersion(ConstraintLanguageVersion.v1_1_0);
+        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
 
         // Text filter
         StringBuilder str = new StringBuilder();

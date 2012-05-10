@@ -41,11 +41,10 @@ import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
-import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 
 /**
- *
+ * API of GetRecords CSW request
+ * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface CatalogGetRecordsRequest<T> extends GPConnectorRequest<T> {
@@ -74,13 +73,37 @@ public interface CatalogGetRecordsRequest<T> extends GPConnectorRequest<T> {
 
     void setOutputSchema(OutputSchema outputSchema);
 
-    ResultType getResultType();
+    String getResultType();
 
-    void setResultType(ResultType resultType);
+    /**
+     * The only admissible parameters are:
+     * <p>
+     * <ul>
+     * <li>results</li>
+     * <li>hits</li>
+     * <li>validate</li>
+     * </ul>
+     * <p>The default value is Hits</p>
+     * <p/>
+     * @param resultType
+     */
+    void setResultType(String resultType);
 
-    ElementSetType getElementSetName();
+    String getElementSetName();
 
-    void setElementSetName(ElementSetType elementSetName);
+    /**
+     * The only admissible parameters are:
+     * <p>
+     * <ul>
+     * <li>brief</li>
+     * <li>summary</li>
+     * <li>full</li>
+     * </ul>
+     * <p>The default value is Summary</p>
+     * <p/>
+     * @param elementSetName
+     */
+    void setElementSetName(String elementSetName);
 
     TypeName getTypeName();
 

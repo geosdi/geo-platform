@@ -46,7 +46,7 @@ public class QNameConstant {
     /**
      * QName csw:Record
      */
-    public static final QName QNAME_RECORD = new QName("http://www.opengis.net/cat/csw/2.0.2", "Record");
+    public static final QName QNAME_RECORD_V202 = new QName("http://www.opengis.net/cat/csw/2.0.2", "Record");
     /**
      * QName gmd:MD_Metadata
      */

@@ -36,23 +36,15 @@
 package org.geosdi.geoplatform.cswconnector.server.request;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
-import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
-import org.geosdi.geoplatform.xml.csw.v202.QueryType;
-import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 
 /**
- *
+ * Abstract class of GetRecords CSW request
+ * 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -60,15 +52,15 @@ import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
         implements CatalogGetRecordsRequest<T> {
 
-    private ConstraintLanguage constraintLanguage;
-    private ConstraintLanguageVersion constraintLanguageVersion;
-    private String constraint;
-    private BigInteger maxRecords;
-    private BigInteger startPosition;
-    private OutputSchema outputSchema;
-    private ResultType resultType;
-    private ElementSetType elementSetName;
-    private TypeName typeName;
+    protected ConstraintLanguage constraintLanguage;
+    protected ConstraintLanguageVersion constraintLanguageVersion;
+    protected String constraint;
+    protected BigInteger maxRecords;
+    protected BigInteger startPosition;
+    protected OutputSchema outputSchema;
+    protected String resultType;
+    protected String elementSetName;
+    protected TypeName typeName;
 
     public CatalogGetRecords(GPServerConnector server) {
         super(server);
@@ -137,7 +129,7 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     @Override
     public void setOutputSchema(OutputSchema outputSchema) {
         // TODO GMD list
-        if (outputSchema != OutputSchema.CSW) {
+        if (outputSchema != OutputSchema.CSW_V202) {
             throw new UnsupportedOperationException("GMD output schema is not supported yet. "
                     + "Use CSW output schema.");
         }
@@ -145,22 +137,22 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     }
 
     @Override
-    public ResultType getResultType() {
+    public String getResultType() {
         return resultType;
     }
 
     @Override
-    public void setResultType(ResultType resultType) {
+    public void setResultType(String resultType) {
         this.resultType = resultType;
     }
 
     @Override
-    public ElementSetType getElementSetName() {
+    public String getElementSetName() {
         return elementSetName;
     }
 
     @Override
-    public void setElementSetName(ElementSetType elementSetName) {
+    public void setElementSetName(String elementSetName) {
         this.elementSetName = elementSetName;
     }
 
@@ -175,73 +167,10 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     }
 
     @Override
-    protected Object createRequest() {
-        GetRecordsType request = new GetRecordsType();
-
-        request.setResultType(resultType != null ? resultType : ResultType.HITS);
-
-        request.setOutputSchema(outputSchema != null ? outputSchema.toString()
-                : OutputSchema.CSW.toString());
-
-        QueryType query = new QueryType();
-        request.setAbstractQuery(query);
-
-        List<QName> typNameList = new ArrayList<QName>();
-        typNameList.add(typeName != null ? typeName.getQName()
-                : TypeName.RECORD.getQName());
-        query.setTypeNames(typNameList);
-
-        ElementSetNameType elementSetNameType = new ElementSetNameType();
-        elementSetNameType.setValue(elementSetName != null ? elementSetName
-                : ElementSetType.BRIEF);
-        query.setElementSetName(elementSetNameType);
-
-        if (constraint != null) {
-            if (constraintLanguage == null) {
-                throw new IllegalArgumentException("If 'Constraint' is setted, "
-                        + "'Constraint Language' must not be null.");
-            }
-
-            QueryConstraintType queryConstraintType = new QueryConstraintType();
-
-            switch (constraintLanguage) {
-                case FILTER:
-                    // TODO Support FILTER ConstraintLanguage
-                    // queryConstraintType.setFilter(this.createFilterType());
-                    break;
-                case CQL_TEXT:
-                    if (constraintLanguageVersion == null) {
-                        throw new IllegalArgumentException(
-                                "For 'Constraint Language' \"CQL_TEXT\", "
-                                + "'Constraint Language Version' must not be null.");
-                    }
-
-                    queryConstraintType.setVersion(
-                            constraintLanguageVersion.toString());
-                    queryConstraintType.setCqlText(constraint);
-            }
-
-            query.setConstraint(queryConstraintType);
-        }
-
-        if (startPosition != null) {
-            request.setStartPosition(startPosition);
-        }
-
-        if (maxRecords != null) {
-            request.setMaxRecords(maxRecords);
-        }
-
-        return request;
-    }
-
-    @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(
-                " {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append("constraintLanguage").append(constraintLanguage);
-        str.append(", constraintLanguageVersion").append(
-                constraintLanguageVersion);
+        str.append(", constraintLanguageVersion").append(constraintLanguageVersion);
         str.append(", constraint").append(constraint);
         str.append(", maxRecords=").append(maxRecords);
         str.append(", startPosition=").append(startPosition);

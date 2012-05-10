@@ -41,7 +41,7 @@ package org.geosdi.geoplatform.xml.csw;
  */
 public enum ConstraintLanguageVersion {
 
-    v1_1_0("1.1.0");
+    V110("1.1.0");
     //
     String version;
 

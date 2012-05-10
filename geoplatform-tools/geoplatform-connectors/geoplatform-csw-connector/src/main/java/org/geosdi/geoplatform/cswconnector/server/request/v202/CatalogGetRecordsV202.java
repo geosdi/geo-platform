@@ -35,12 +35,24 @@
  */
 package org.geosdi.geoplatform.cswconnector.server.request.v202;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecords;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
+import org.geosdi.geoplatform.xml.csw.TypeName;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
+import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
+import org.geosdi.geoplatform.xml.csw.v202.QueryType;
+import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 
 /**
- *
+ * GetRecords CSW request 2.0.2 version
+ * 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -49,5 +61,67 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
 
     public CatalogGetRecordsV202(GPServerConnector server) {
         super(server);
+    }
+
+    @Override
+    protected Object createRequest() {
+        GetRecordsType request = new GetRecordsType();
+
+        request.setResultType(resultType != null
+                ? ResultType.fromValue(resultType) : ResultType.HITS);
+
+        request.setOutputSchema(outputSchema != null
+                ? outputSchema.toString() : OutputSchema.CSW_V202.toString());
+
+        QueryType query = new QueryType();
+        request.setAbstractQuery(query);
+
+        List<QName> typNameList = new ArrayList<QName>();
+        typNameList.add(typeName != null
+                ? typeName.getQName() : TypeName.RECORD_V202.getQName());
+        query.setTypeNames(typNameList);
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(elementSetName != null
+                ? ElementSetType.fromValue(elementSetName) : ElementSetType.SUMMARY);
+        query.setElementSetName(elementSetNameType);
+
+        if (constraint != null) {
+            if (constraintLanguage == null) {
+                throw new IllegalArgumentException("If 'Constraint' is setted, "
+                        + "'Constraint Language' must not be null.");
+            }
+
+            QueryConstraintType queryConstraintType = new QueryConstraintType();
+
+            switch (constraintLanguage) {
+                case FILTER:
+                    // TODO Support FILTER ConstraintLanguage
+                    // queryConstraintType.setFilter(this.createFilterType());
+                    break;
+                case CQL_TEXT:
+                    if (constraintLanguageVersion == null) {
+                        throw new IllegalArgumentException(
+                                "For 'Constraint Language' \"CQL_TEXT\", "
+                                + "'Constraint Language Version' must not be null.");
+                    }
+
+                    queryConstraintType.setVersion(
+                            constraintLanguageVersion.toString());
+                    queryConstraintType.setCqlText(constraint);
+            }
+
+            query.setConstraint(queryConstraintType);
+        }
+
+        if (startPosition != null) {
+            request.setStartPosition(startPosition);
+        }
+
+        if (maxRecords != null) {
+            request.setMaxRecords(maxRecords);
+        }
+
+        return request;
     }
 }

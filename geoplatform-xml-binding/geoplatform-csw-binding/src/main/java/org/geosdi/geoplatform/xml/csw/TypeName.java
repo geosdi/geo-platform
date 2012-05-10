@@ -43,7 +43,7 @@ import javax.xml.namespace.QName;
  */
 public enum TypeName {
 
-    RECORD(QNameConstant.QNAME_RECORD),
+    RECORD_V202(QNameConstant.QNAME_RECORD_V202),
     METADATA(QNameConstant.QNAME_METADATA);
     //
     private QName qName;

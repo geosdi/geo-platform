@@ -78,7 +78,7 @@ public abstract class GetRecordsRequestHandler {
         String previousConstraint = request.getConstraint();
         if (previousConstraint == null) {
             request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
-            request.setConstraintLanguageVersion(ConstraintLanguageVersion.v1_1_0);
+            request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
             request.setConstraint(followingConstraint);
         } else {
             request.setConstraint(previousConstraint + " AND " + followingConstraint);

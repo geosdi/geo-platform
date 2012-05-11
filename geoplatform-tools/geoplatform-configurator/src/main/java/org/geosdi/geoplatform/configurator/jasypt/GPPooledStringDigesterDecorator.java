@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.configurator.jasypt;
 
 import org.jasypt.digest.PooledStringDigester;
 import org.jasypt.digest.config.DigesterConfig;
-import org.springframework.context.annotation.Bean;
 
 /**
  *
@@ -48,14 +47,6 @@ public class GPPooledStringDigesterDecorator implements GPDigesterConfigutator {
 
     private PooledStringDigester digester;
     private DigesterConfig digesterConfig;
-
-    @Bean(name = "gpPooledStringDigester")
-    public PooledStringDigester gpPooledStringDigester() {
-        this.digester = new PooledStringDigester();
-        this.digester.setConfig(digesterConfig);
-
-        return this.digester;
-    }
 
     @Override
     public String digest(String plainText) {
@@ -72,5 +63,11 @@ public class GPPooledStringDigesterDecorator implements GPDigesterConfigutator {
      */
     public void setDigesterConfig(DigesterConfig digesterConfig) {
         this.digesterConfig = digesterConfig;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.digester = new PooledStringDigester();
+        this.digester.setConfig(digesterConfig);
     }
 }

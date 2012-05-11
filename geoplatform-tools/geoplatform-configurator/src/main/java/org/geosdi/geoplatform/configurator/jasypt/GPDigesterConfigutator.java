@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.configurator.jasypt;
 
+import org.springframework.beans.factory.InitializingBean;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPDigesterConfigutator {
+public interface GPDigesterConfigutator extends InitializingBean {
 
     String digest(String plainText);
 

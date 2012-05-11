@@ -62,7 +62,7 @@ public interface GPEncryptorConfigurator {
 
     /**
      * Method to match String encrypted with the original String
-     * 
+     *
      * @param encryptedText
      * @param plainText
      *

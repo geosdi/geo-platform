@@ -55,7 +55,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
-import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.configurator.jasypt.GPDigesterConfigutator;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
@@ -114,7 +114,7 @@ public abstract class BaseDAOTest {
     protected GSResourceDAO gsResourceDAO;
     //
     @Autowired
-    protected GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
+    protected GPDigesterConfigutator gpPooledStringDigester;
     //
     protected GPUser adminTest;
     protected GPUser userTest;
@@ -397,9 +397,9 @@ public abstract class BaseDAOTest {
         user.setEmailAddress(username + "@test.foo");
         user.setEnabled(true);
         if (username.contains("_")) {
-            user.setPassword(this.gpPooledPBEStringEncryptor.encrypt("pwd_" + username));
+            user.setPassword(this.gpPooledStringDigester.digest("pwd_" + username));
         } else { // User for GUI test
-            user.setPassword(this.gpPooledPBEStringEncryptor.encrypt(username));
+            user.setPassword(this.gpPooledStringDigester.digest(username));
         }
         user.setSendEmail(true);
         return user;

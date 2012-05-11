@@ -15,6 +15,10 @@
 
     <bean id="gpPooledPBEStringEncryptor"
           class="org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator">
+        <property name="pbeConfig" ref="gpPBEConfig" />    
+    </bean>
+    
+    <bean id="gpPBEConfig" class="org.jasypt.encryption.pbe.config.SimpleStringPBEConfig">
         <property name="poolSize" value="2" /> <!--  This would be a good value for a 2-core system -->
         <property name="password" value="$-geosdi,0x" />
         <property name="algorithm" value="PBEWithMD5AndDES" />

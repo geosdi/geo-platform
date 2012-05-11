@@ -55,9 +55,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class GPPooledPBEStringEncryptorDecoratorTest {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     @Autowired
-    protected GPPooledPBEStringEncryptorDecorator pooledPBEStringEncryptorDecorator;
+    private GPPooledPBEStringEncryptorDecorator pooledPBEStringEncryptorDecorator;
     //
     private String plainText = "anonymous";
 
@@ -65,25 +66,38 @@ public class GPPooledPBEStringEncryptorDecoratorTest {
     public void testEncryptedStringMatchs1() {
         logger.trace("\n\t@@@ testEncryptedStringMatchs1 @@@");
 
-        String encryptedText = pooledPBEStringEncryptorDecorator.encrypt(plainText);
-        boolean result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(encryptedText, this.plainText);
-        Assert.assertTrue("Error because decrypted and plain texts does not match", result);
+        String encryptedText = pooledPBEStringEncryptorDecorator.encrypt(
+                plainText);
+        boolean result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+                encryptedText, this.plainText);
+        Assert.assertTrue(
+                "Error because decrypted and plain texts does not match", result);
     }
 
     @Test
     public void testEncryptedStringMatchs2() {
         logger.trace("\n\t@@@ testEncryptedStringMatchs1 @@@");
 
-        String encryptedTextFirstStep = pooledPBEStringEncryptorDecorator.encrypt(plainText);
-        String encryptedTextSecondStep = pooledPBEStringEncryptorDecorator.encrypt(plainText);
+        String encryptedTextFirstStep = pooledPBEStringEncryptorDecorator.encrypt(
+                plainText);
+        String encryptedTextSecondStep = pooledPBEStringEncryptorDecorator.encrypt(
+                plainText);
 
-        Assert.assertFalse("Error because encryptedTextFirstStep matchs encryptedTextSecondStep", encryptedTextFirstStep.equalsIgnoreCase(encryptedTextSecondStep));
+        Assert.assertFalse(
+                "Error because encryptedTextFirstStep matchs encryptedTextSecondStep",
+                encryptedTextFirstStep.equalsIgnoreCase(encryptedTextSecondStep));
 
-        boolean resultFirstStep = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(encryptedTextFirstStep, this.plainText);
-        Assert.assertTrue("Error because decrypted and plain texts for first step does not match", resultFirstStep);
+        boolean resultFirstStep = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+                encryptedTextFirstStep, this.plainText);
+        Assert.assertTrue(
+                "Error because decrypted and plain texts for first step does not match",
+                resultFirstStep);
 
-        boolean resultSecondStep = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(encryptedTextSecondStep, this.plainText);
-        Assert.assertTrue("Error because decrypted and plain texts for second step does not match", resultSecondStep);
+        boolean resultSecondStep = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+                encryptedTextSecondStep, this.plainText);
+        Assert.assertTrue(
+                "Error because decrypted and plain texts for second step does not match",
+                resultSecondStep);
     }
 
     @Test
@@ -91,10 +105,12 @@ public class GPPooledPBEStringEncryptorDecoratorTest {
         logger.trace("\n\t@@@ testEncryptedStringNotMatchs1 @@@");
         boolean result = true;
         try {
-            result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(this.plainText, this.plainText);
+            result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+                    this.plainText, this.plainText);
             Assert.fail("Error because is possible to decrypt a plain text");
         } catch (EncryptionOperationNotPossibleException e) {
-            Assert.assertTrue("Error because decrypted and plain text matchs", result);
+            Assert.assertTrue("Error because decrypted and plain text matchs",
+                    result);
         }
     }
 
@@ -102,9 +118,12 @@ public class GPPooledPBEStringEncryptorDecoratorTest {
     public void testEncryptedStringNotMatchs2() {
         logger.trace("\n\t@@@ testEncryptedStringNotMatchs2 @@@");
         String otherPlainText = "guest";
-        String otherEncryptedText = this.pooledPBEStringEncryptorDecorator.encrypt(otherPlainText);
+        String otherEncryptedText = this.pooledPBEStringEncryptorDecorator.encrypt(
+                otherPlainText);
 
-        boolean result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(otherEncryptedText, this.plainText);
-        Assert.assertFalse("Error because decrypted and plain text matchs", result);
+        boolean result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+                otherEncryptedText, this.plainText);
+        Assert.assertFalse("Error because decrypted and plain text matchs",
+                result);
     }
 }

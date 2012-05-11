@@ -36,35 +36,29 @@
 package org.geosdi.geoplatform.configurator.jasypt;
 
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
+import org.jasypt.encryption.pbe.config.PBEConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
 public class GPPooledPBEStringEncryptorDecorator {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private PooledPBEStringEncryptor pooledPBEStringEncryptor;
     //
-    private int poolSize;
-    private String password;
-    private String algorithm;
+    private PooledPBEStringEncryptor pooledPBEStringEncryptor;
+    private PBEConfig pbeConfig;
 
-    @Bean
+    @Bean(name = "pooledPBEStringEncryptor")
     public PooledPBEStringEncryptor pooledPBEStringEncryptor() {
         this.pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
-        pooledPBEStringEncryptor.setPoolSize(this.poolSize);
-        pooledPBEStringEncryptor.setPassword(this.password);
-        pooledPBEStringEncryptor.setAlgorithm(this.algorithm);
+        this.pooledPBEStringEncryptor.setConfig(pbeConfig);
         return this.pooledPBEStringEncryptor;
     }
 
@@ -78,7 +72,8 @@ public class GPPooledPBEStringEncryptorDecorator {
 
     public boolean areEncryptedStringEquals(String originalEncryptedPassword,
             String suppliedPlainPassword) {
-        String originalPlainPassword = this.pooledPBEStringEncryptor.decrypt(originalEncryptedPassword);
+        String originalPlainPassword = this.pooledPBEStringEncryptor.decrypt(
+                originalEncryptedPassword);
         if (originalPlainPassword.equals(suppliedPlainPassword)) {
             return true;
         } else {
@@ -87,23 +82,9 @@ public class GPPooledPBEStringEncryptorDecorator {
     }
 
     /**
-     * @param poolSize the poolSize to set
+     * @param pbeConfig the pbeConfig to set
      */
-    public void setPoolSize(int poolSize) {
-        this.poolSize = poolSize;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
-     * @param algorithm the algorithm to set
-     */
-    public void setAlgorithm(String algorithm) {
-        this.algorithm = algorithm;
+    public void setPbeConfig(PBEConfig pbeConfig) {
+        this.pbeConfig = pbeConfig;
     }
 }

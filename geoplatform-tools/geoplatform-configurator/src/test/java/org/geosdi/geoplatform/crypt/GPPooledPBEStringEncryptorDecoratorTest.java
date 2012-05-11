@@ -33,9 +33,9 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.jasypt;
+package org.geosdi.geoplatform.crypt;
 
-import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import org.junit.Assert;
 import org.junit.Test;

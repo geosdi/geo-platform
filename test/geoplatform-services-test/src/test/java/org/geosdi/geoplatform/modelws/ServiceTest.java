@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.modelws;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPAuthority;

@@ -15,7 +15,7 @@
                 
     <!-- DIGESTER SECTION -->
     <bean id="gpPooledStringDigester"
-          class="org.geosdi.geoplatform.configurator.jasypt.GPPooledStringDigesterDecorator">
+          class="org.geosdi.geoplatform.configurator.crypt.GPPooledStringDigesterDecorator">
         <property name="digesterConfig" ref="gpDigesterConfig" />    
     </bean>
     
@@ -26,7 +26,7 @@
 
     <!-- ENCRYPTOR SECTION -->
     <bean id="gpPooledPBEStringEncryptor"
-          class="org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator">
+          class="org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator">
         <property name="pbeConfig" ref="gpPBEConfig" />    
     </bean>
     

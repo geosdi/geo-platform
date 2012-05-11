@@ -39,7 +39,7 @@ import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.Filter;
 import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;

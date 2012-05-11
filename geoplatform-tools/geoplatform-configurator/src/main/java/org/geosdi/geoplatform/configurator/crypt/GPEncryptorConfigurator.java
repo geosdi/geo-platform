@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.jasypt;
+package org.geosdi.geoplatform.configurator.crypt;
 
 /**
  *
@@ -68,6 +68,5 @@ public interface GPEncryptorConfigurator {
      *
      * @return Boolean
      */
-    boolean matches(String encryptedText,
-            String plainText);
+    boolean matches(String encryptedText, String plainText);
 }

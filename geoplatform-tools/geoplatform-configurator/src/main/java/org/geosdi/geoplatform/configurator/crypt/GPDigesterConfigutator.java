@@ -33,16 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.jasypt;
-
-import org.springframework.beans.factory.InitializingBean;
+package org.geosdi.geoplatform.configurator.crypt;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPDigesterConfigutator extends InitializingBean {
+public interface GPDigesterConfigutator {
 
     String digest(String plainText);
 

@@ -42,7 +42,7 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
-import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.junit.Assert;

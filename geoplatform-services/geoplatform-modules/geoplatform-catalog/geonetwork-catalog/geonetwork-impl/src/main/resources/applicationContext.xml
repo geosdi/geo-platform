@@ -19,7 +19,7 @@
 
     <context:component-scan base-package="org.geosdi.geoplatform.services.util"/>
             
-    <import resource="classpath:applicationContext-JASYPT.xml" />
+    <import resource="classpath:applicationContext-jasypt.xml" />
     
     <bean id="gpCatalogClient" class="org.geosdi.geoplatform.services.util.GPCatalogClient">
         <property name="geoNetworkServiceURL" value="${geonetwork_url}" />

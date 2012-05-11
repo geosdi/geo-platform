@@ -33,72 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.jasypt;
+package org.geosdi.geoplatform.configurator.crypt;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.springframework.util.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GPHashFunctionTest {
+public class GPDigesterSHA1 implements GPDigesterConfigutator {
 
-    private final static String plainText = "geosdi";
-    private final static String encryptedTextMD5 = "c5e78595a2c9c515c6d218549bc6873d";
-    private final static String encryptedTextSHA1 = "87f969449681b7674a7bda1a8988f413c16a16a7";
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Test
-    public void generateJavaMD5() throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest md = MessageDigest.getInstance("MD5");
+    @Override
+    public String digest(String plainText) {
+        Formatter formatter = null;
 
-        byte[] plainBytes = plainText.getBytes();
-        byte[] digest = md.digest(plainBytes);
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < digest.length; ++i) {
-            sb.append(Integer.toHexString((digest[i] & 0xFF) | 0x100).substring(1, 3));
+            byte[] plainBytes = plainText.getBytes();
+            byte[] digest = md.digest(plainBytes);
+
+            formatter = new Formatter();
+            for (byte b : digest) {
+                formatter.format("%02x", b);
+            }
+
+        } catch (NoSuchAlgorithmException ex) {
+            logger.error(ex.getMessage());
         }
 
-        final String encrypted = sb.toString();
-
-        assertEquals(encryptedTextMD5, encrypted);
+        return formatter.toString();
     }
 
-    @Test
-    public void generateSpringMD5() {
-        byte[] plainBytes = plainText.getBytes();
-        byte[] digest = DigestUtils.md5Digest(plainBytes);
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < digest.length; ++i) {
-            sb.append(Integer.toHexString((digest[i] & 0xFF) | 0x100).substring(1, 3));
-        }
-
-        final String encrypted = sb.toString();
-
-        assertEquals(encryptedTextMD5, encrypted);
-    }
-
-    @Test
-    public void generateJavaSHA1() throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-1");
-
-        byte[] plainBytes = plainText.getBytes();
-        byte[] digest = md.digest(plainBytes);
-
-        Formatter formatter = new Formatter();
-        for (byte b : digest) {
-            formatter.format("%02x", b);
-        }
-
-        String encrypted = formatter.toString();
-
-        assertEquals(encryptedTextSHA1, encrypted);
+    @Override
+    public boolean matches(String plainText, String encryptedText) {
+        return encryptedText.equals(this.digest(plainText));
     }
 }

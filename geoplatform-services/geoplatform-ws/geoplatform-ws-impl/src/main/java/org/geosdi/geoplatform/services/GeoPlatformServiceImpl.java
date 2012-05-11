@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.services;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
-import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;

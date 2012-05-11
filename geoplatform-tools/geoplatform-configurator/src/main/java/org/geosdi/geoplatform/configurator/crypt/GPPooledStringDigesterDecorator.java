@@ -33,17 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.jasypt;
+package org.geosdi.geoplatform.configurator.crypt;
 
 import org.jasypt.digest.PooledStringDigester;
 import org.jasypt.digest.config.DigesterConfig;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPPooledStringDigesterDecorator implements GPDigesterConfigutator {
+public class GPPooledStringDigesterDecorator
+        implements GPDigesterConfigutator, InitializingBean {
 
     private PooledStringDigester digester;
     private DigesterConfig digesterConfig;

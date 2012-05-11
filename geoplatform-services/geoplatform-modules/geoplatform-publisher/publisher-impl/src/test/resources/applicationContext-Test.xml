@@ -21,6 +21,6 @@
     
     <context:component-scan base-package="org.geosdi.geoplatform.services"/>
             
-    <import resource="classpath:applicationContext-JASYPT.xml" />
+    <import resource="classpath:applicationContext-jasypt.xml" />
 
 </beans>

@@ -17,7 +17,8 @@
      <!-- Scan for @Autowired annotations -->
     <context:annotation-config/>
     
-    <import resource="applicationContext-JASYPT.xml" />
+    <import resource="applicationContext-crypt.xml" />
+    <import resource="applicationContext-jasypt.xml" />
     
     <bean id="gpClientWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory">
         <property name="loggingStrategy" value="${webservice_client_logging}" />

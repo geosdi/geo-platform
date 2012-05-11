@@ -242,7 +242,7 @@ class AccountServiceImpl {
         boolean passwordChanged = false;
         if (newPlainPassword != null) {
             // Check password
-            if (!this.gpPooledPBEStringEncryptor.areEncryptedStringEquals(
+            if (!this.gpPooledPBEStringEncryptor.matches(
                     orig.getPassword(), currentPlainPassword)) {
                 throw new IllegalParameterFault("Current password was incorrect");
             }
@@ -390,7 +390,7 @@ class AccountServiceImpl {
         }
 
         // Check password
-        if (!this.gpPooledPBEStringEncryptor.areEncryptedStringEquals(user.getPassword(), plainPassword)) {
+        if (!this.gpPooledPBEStringEncryptor.matches(user.getPassword(), plainPassword)) {
             throw new IllegalParameterFault("Specified password was incorrect");
         }
 

@@ -12,7 +12,19 @@
             http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+                
+    <!-- DIGESTER SECTION -->
+    <bean id="gpPooledStringDigester"
+          class="org.geosdi.geoplatform.configurator.jasypt.GPPooledStringDigesterDecorator">
+        <property name="digesterConfig" ref="gpDigesterConfig" />    
+    </bean>
+    
+    <bean id="gpDigesterConfig" class="org.jasypt.digest.config.SimpleDigesterConfig">
+        <property name="poolSize" value="2" /> <!--  This would be a good value for a 2-core system -->
+        <property name="algorithm" value="MD5" />
+    </bean>
 
+    <!-- ENCRYPTOR SECTION -->
     <bean id="gpPooledPBEStringEncryptor"
           class="org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator">
         <property name="pbeConfig" ref="gpPBEConfig" />    

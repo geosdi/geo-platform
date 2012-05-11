@@ -35,39 +35,42 @@
  */
 package org.geosdi.geoplatform.configurator.jasypt;
 
+import org.jasypt.digest.PooledStringDigester;
+import org.jasypt.digest.config.DigesterConfig;
+import org.springframework.context.annotation.Bean;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPEncryptorConfigurator {
+public class GPPooledStringDigesterDecorator implements GPDigesterConfigutator {
+
+    private PooledStringDigester digester;
+    private DigesterConfig digesterConfig;
+
+    @Bean(name = "gpPooledStringDigester")
+    public PooledStringDigester gpPooledStringDigester() {
+        this.digester = new PooledStringDigester();
+        this.digester.setConfig(digesterConfig);
+
+        return this.digester;
+    }
+
+    @Override
+    public String digest(String plainText) {
+        return this.digester.digest(plainText);
+    }
+
+    @Override
+    public boolean matches(String plainText, String encryptedText) {
+        return this.digester.matches(plainText, encryptedText);
+    }
 
     /**
-     * Encrypt plainText using the Algoritm configured for JASYPT
-     *
-     * @param plainText
-     *
-     * @return String encrypted
+     * @param digesterConfig the digesterConfig to set
      */
-    String encrypt(String plainText);
-
-    /**
-     * Decrypt encryptedText using the Algoritm configured for JASYPT
-     *
-     * @param encryptedText
-     *
-     * @return The original String
-     */
-    String decrypt(String encryptedText);
-
-    /**
-     * Method to match String encrypted with the original String
-     * 
-     * @param encryptedText
-     * @param plainText
-     *
-     * @return Boolean
-     */
-    boolean matches(String encryptedText,
-            String plainText);
+    public void setDigesterConfig(DigesterConfig digesterConfig) {
+        this.digesterConfig = digesterConfig;
+    }
 }

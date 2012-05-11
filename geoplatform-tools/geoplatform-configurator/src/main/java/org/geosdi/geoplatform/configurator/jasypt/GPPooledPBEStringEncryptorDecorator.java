@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.configurator.jasypt;
 
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.PBEConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -51,8 +49,6 @@ import org.springframework.context.annotation.Bean;
 public class GPPooledPBEStringEncryptorDecorator implements
         GPEncryptorConfigurator {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
     private PooledPBEStringEncryptor pooledPBEStringEncryptor;
     private PBEConfig pbeConfig;
 

@@ -40,34 +40,9 @@ package org.geosdi.geoplatform.configurator.jasypt;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPEncryptorConfigurator {
+public interface GPDigesterConfigutator {
 
-    /**
-     * Encrypt plainText using the Algoritm configured for JASYPT
-     *
-     * @param plainText
-     *
-     * @return String encrypted
-     */
-    String encrypt(String plainText);
+    String digest(String plainText);
 
-    /**
-     * Decrypt encryptedText using the Algoritm configured for JASYPT
-     *
-     * @param encryptedText
-     *
-     * @return The original String
-     */
-    String decrypt(String encryptedText);
-
-    /**
-     * Method to match String encrypted with the original String
-     * 
-     * @param encryptedText
-     * @param plainText
-     *
-     * @return Boolean
-     */
-    boolean matches(String encryptedText,
-            String plainText);
+    boolean matches(String plainText, String encryptedText);
 }

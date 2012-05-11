@@ -35,57 +35,17 @@
  */
 package org.geosdi.geoplatform.configurator.jasypt;
 
-import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
-import org.jasypt.encryption.pbe.config.PBEConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
-
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPPooledPBEStringEncryptorDecorator implements
-        GPEncryptorConfigurator {
+public interface GPEncryptorConfigurator {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private PooledPBEStringEncryptor pooledPBEStringEncryptor;
-    private PBEConfig pbeConfig;
+    String encrypt(String plainText);
 
-    @Bean(name = "pooledPBEStringEncryptor")
-    public PooledPBEStringEncryptor pooledPBEStringEncryptor() {
-        this.pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
-        this.pooledPBEStringEncryptor.setConfig(pbeConfig);
-        return this.pooledPBEStringEncryptor;
-    }
+    String decrypt(String encryptedText);
 
-    @Override
-    public String encrypt(String plainText) {
-        return this.pooledPBEStringEncryptor.encrypt(plainText);
-    }
-
-    @Override
-    public String decrypt(String encryptedText) {
-        return this.pooledPBEStringEncryptor.decrypt(encryptedText);
-    }
-
-    @Override
-    public boolean matches(String encryptedText,
-            String plainText) {
-        String originalPlainPassword = this.pooledPBEStringEncryptor.decrypt(
-                encryptedText);
-
-        return originalPlainPassword.equals(plainText);
-    }
-
-    /**
-     * @param pbeConfig the pbeConfig to set
-     */
-    public void setPbeConfig(PBEConfig pbeConfig) {
-        this.pbeConfig = pbeConfig;
-    }
+    boolean matches(String encryptedText,
+            String plainText);
 }

@@ -68,7 +68,7 @@ public class GPPooledPBEStringEncryptorDecoratorTest {
 
         String encryptedText = pooledPBEStringEncryptorDecorator.encrypt(
                 plainText);
-        boolean result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+        boolean result = pooledPBEStringEncryptorDecorator.matches(
                 encryptedText, this.plainText);
         Assert.assertTrue(
                 "Error because decrypted and plain texts does not match", result);
@@ -87,13 +87,13 @@ public class GPPooledPBEStringEncryptorDecoratorTest {
                 "Error because encryptedTextFirstStep matchs encryptedTextSecondStep",
                 encryptedTextFirstStep.equalsIgnoreCase(encryptedTextSecondStep));
 
-        boolean resultFirstStep = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+        boolean resultFirstStep = pooledPBEStringEncryptorDecorator.matches(
                 encryptedTextFirstStep, this.plainText);
         Assert.assertTrue(
                 "Error because decrypted and plain texts for first step does not match",
                 resultFirstStep);
 
-        boolean resultSecondStep = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+        boolean resultSecondStep = pooledPBEStringEncryptorDecorator.matches(
                 encryptedTextSecondStep, this.plainText);
         Assert.assertTrue(
                 "Error because decrypted and plain texts for second step does not match",
@@ -105,7 +105,7 @@ public class GPPooledPBEStringEncryptorDecoratorTest {
         logger.trace("\n\t@@@ testEncryptedStringNotMatchs1 @@@");
         boolean result = true;
         try {
-            result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+            result = pooledPBEStringEncryptorDecorator.matches(
                     this.plainText, this.plainText);
             Assert.fail("Error because is possible to decrypt a plain text");
         } catch (EncryptionOperationNotPossibleException e) {
@@ -121,7 +121,7 @@ public class GPPooledPBEStringEncryptorDecoratorTest {
         String otherEncryptedText = this.pooledPBEStringEncryptorDecorator.encrypt(
                 otherPlainText);
 
-        boolean result = pooledPBEStringEncryptorDecorator.areEncryptedStringEquals(
+        boolean result = pooledPBEStringEncryptorDecorator.matches(
                 otherEncryptedText, this.plainText);
         Assert.assertFalse("Error because decrypted and plain text matchs",
                 result);

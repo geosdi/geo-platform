@@ -44,5 +44,5 @@ public interface GPDigesterConfigutator {
 
     String digest(String plainText);
 
-    boolean matches(String plainText, String encryptedText);
+    boolean matches(String encryptedText, String plainText);
 }

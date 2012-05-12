@@ -41,7 +41,7 @@
         <!-- SERVICES -->
         <property name="schedulerService" ref="schedulerService" />
         
-        <property name="gpPooledPBEStringEncryptor" ref="gpPooledPBEStringEncryptor" />
+        <property name="gpDigester" ref="gpDigesterSHA1" />
         
         <!-- GP ACCESS INFO -->
         <property name="gsAccountDAO" ref="gsAccountDAO" />

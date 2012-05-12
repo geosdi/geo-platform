@@ -70,8 +70,7 @@ public class GPPooledPBEStringEncryptorDecorator
     }
 
     @Override
-    public boolean matches(String encryptedText,
-            String plainText) {
+    public boolean matches(String encryptedText, String plainText) {
         String originalPlainPassword = this.pooledPBEStringEncryptor.decrypt(
                 encryptedText);
 

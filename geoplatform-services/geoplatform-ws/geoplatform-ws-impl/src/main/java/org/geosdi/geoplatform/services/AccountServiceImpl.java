@@ -39,7 +39,7 @@ import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.Filter;
 import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
@@ -71,8 +71,6 @@ import org.slf4j.LoggerFactory;
 class AccountServiceImpl {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
     // DAO
     private GPAccountDAO accountDao;
     private GPAccountProjectDAO accountProjectDao;
@@ -80,13 +78,15 @@ class AccountServiceImpl {
     private GPAuthorityDAO authorityDao;
     // Services
     private GPSchedulerService schedulerService;
+    //
+    private GPDigesterConfigutator gpDigester;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
-     * @param gpPooledPBEStringEncryptor the gpPooledPBEStringEncryptor to set
+     * @param gpDigester the gpDigester to set
      */
-    public void setGpPooledPBEStringEncryptor(GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor) {
-        this.gpPooledPBEStringEncryptor = gpPooledPBEStringEncryptor;
+    public void setGpDigester(GPDigesterConfigutator gpDigester) {
+        this.gpDigester = gpDigester;
     }
 
     /**
@@ -146,7 +146,7 @@ class AccountServiceImpl {
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
             plainPassword = user.getPassword();
-            user.setPassword(this.gpPooledPBEStringEncryptor.encrypt(user.getPassword()));
+            user.setPassword(this.gpDigester.digest(user.getPassword()));
         }
 
         // TODO Set to false, and after user confirmation email enabling user account
@@ -202,7 +202,7 @@ class AccountServiceImpl {
         }
         String password = user.getPassword();
         if (password != null) {
-            orig.setPassword(this.gpPooledPBEStringEncryptor.encrypt(password)); // Hash password
+            orig.setPassword(this.gpDigester.digest(password));
         }
         this.updateAccount(orig, user);
 
@@ -242,12 +242,11 @@ class AccountServiceImpl {
         boolean passwordChanged = false;
         if (newPlainPassword != null) {
             // Check password
-            if (!this.gpPooledPBEStringEncryptor.matches(
-                    orig.getPassword(), currentPlainPassword)) {
+            if (!this.gpDigester.matches(orig.getPassword(), currentPlainPassword)) {
                 throw new IllegalParameterFault("Current password was incorrect");
             }
             passwordChanged = true;
-            orig.setPassword(this.gpPooledPBEStringEncryptor.encrypt(newPlainPassword)); // Hash password
+            orig.setPassword(this.gpDigester.digest(newPlainPassword));
         }
         // Eventually update the email
         boolean emailChanged = false;
@@ -390,7 +389,7 @@ class AccountServiceImpl {
         }
 
         // Check password
-        if (!this.gpPooledPBEStringEncryptor.matches(user.getPassword(), plainPassword)) {
+        if (!this.gpDigester.matches(user.getPassword(), plainPassword)) {
             throw new IllegalParameterFault("Specified password was incorrect");
         }
 

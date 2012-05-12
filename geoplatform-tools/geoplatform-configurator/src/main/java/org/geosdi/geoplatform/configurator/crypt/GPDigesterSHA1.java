@@ -72,7 +72,7 @@ public class GPDigesterSHA1 implements GPDigesterConfigutator {
     }
 
     @Override
-    public boolean matches(String plainText, String encryptedText) {
+    public boolean matches(String encryptedText, String plainText) {
         return encryptedText.equals(this.digest(plainText));
     }
 }

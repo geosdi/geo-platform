@@ -66,6 +66,7 @@ public class GPHashFunctionTest {
 
         final String encrypted = sb.toString();
 
+        assertEquals(32, encrypted.length());
         assertEquals(encryptedTextMD5, encrypted);
     }
 
@@ -81,6 +82,7 @@ public class GPHashFunctionTest {
 
         final String encrypted = sb.toString();
 
+        assertEquals(32, encrypted.length());
         assertEquals(encryptedTextMD5, encrypted);
     }
 
@@ -98,6 +100,7 @@ public class GPHashFunctionTest {
 
         String encrypted = formatter.toString();
 
+        assertEquals(40, encrypted.length());
         assertEquals(encryptedTextSHA1, encrypted);
     }
 }

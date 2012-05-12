@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.services;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
-import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
@@ -107,7 +107,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // Services
     private GPSchedulerService schedulerService;
     //
-    private GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
+    private GPDigesterConfigutator gpDigester;
     //
     private GSResourceDAO gsResourceDAO;
     private GSAccountDAO gsAccountDAO;
@@ -262,12 +262,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param gpPooledPBEStringEncryptor the gpPooledPBEStringEncryptor to set
+     * @param gpDigester the gpDigester to set
      *
      */
-    public void setGpPooledPBEStringEncryptor(GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor) {
-        this.gpPooledPBEStringEncryptor = gpPooledPBEStringEncryptor;
-        this.accountServiceDelegate.setGpPooledPBEStringEncryptor(gpPooledPBEStringEncryptor);
+    public void setGpDigester(GPDigesterConfigutator gpDigester) {
+        this.gpDigester = gpDigester;
+        this.accountServiceDelegate.setGpDigester(gpDigester);
     }
 
     public GSAccountDAO getGsAccountDAO() {

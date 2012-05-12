@@ -38,9 +38,8 @@ package org.geosdi.geoplatform.modelws;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
-import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -79,7 +78,7 @@ public abstract class ServiceTest {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected GeoPlatformService gpWSClient; // TODO gpService
-    protected GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
+    protected GPDigesterConfigutator gpDigester;
     // Roles (default)
     protected final String ROLE_ADMIN = "Admin";
     protected final String ROLE_USER = "User";
@@ -106,9 +105,9 @@ public abstract class ServiceTest {
      * The listener will inject this dependency
      */
     public void setGeoplatformServiceClient(GeoPlatformService gpWSClient,
-                                            GPPooledPBEStringEncryptorDecorator theGPPooledPBEStringEncryptor) {
+            GPDigesterConfigutator gpDigester) {
         this.gpWSClient = gpWSClient;
-        this.gpPooledPBEStringEncryptor = theGPPooledPBEStringEncryptor;
+        this.gpDigester = gpDigester;
     }
 
     @Before
@@ -162,7 +161,7 @@ public abstract class ServiceTest {
         user.setName("Complete name of " + username);
         user.setEmailAddress(username + "@test.foo");
         user.setEnabled(true);
-        user.setPassword(this.gpPooledPBEStringEncryptor.encrypt("pwd_" + username));
+        user.setPassword(this.gpDigester.digest("pwd_" + username));
         user.setSendEmail(true);
 
         if (roles.length > 0) {
@@ -204,7 +203,7 @@ public abstract class ServiceTest {
     }
 
     protected long createAndInsertProject(String name, boolean isShared,
-                                          int numberOfElements, Date creationalDate)
+            int numberOfElements, Date creationalDate)
             throws IllegalParameterFault {
         GPProject project = this.createProject(name, isShared, numberOfElements, creationalDate);
         return gpWSClient.insertProject(project);
@@ -218,13 +217,13 @@ public abstract class ServiceTest {
     }
 
     protected long createAndInsertFolder(String folderName, GPProject project,
-                                         int position, GPFolder parent) throws ResourceNotFoundFault, IllegalParameterFault {
+            int position, GPFolder parent) throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = this.createFolder(folderName, project, position, parent);
         return gpWSClient.insertFolder(project.getId(), folder);
     }
 
     protected long createAndInsertFolder(String folderName, GPProject project,
-                                         int position, GPFolder parent, int numberOfDescendants)
+            int position, GPFolder parent, int numberOfDescendants)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = this.createFolder(folderName, project, position, parent);
         folder.setNumberOfDescendants(numberOfDescendants);
@@ -232,7 +231,7 @@ public abstract class ServiceTest {
     }
 
     protected GPProject createProject(String name, boolean isShared,
-                                      int numberOfElements, Date creationalDate) {
+            int numberOfElements, Date creationalDate) {
         GPProject project = new GPProject();
         project.setName(name);
         project.setShared(isShared);
@@ -242,7 +241,7 @@ public abstract class ServiceTest {
     }
 
     protected GPFolder createFolder(String folderName, GPProject project,
-                                    int position, GPFolder parent) {
+            int position, GPFolder parent) {
         GPFolder folder = new GPFolder();
         folder.setName(folderName);
         folder.setProject(project);
@@ -252,7 +251,7 @@ public abstract class ServiceTest {
     }
 
     protected long createAndInsertRasterLayer(GPFolder folder, String title, String name,
-                                              String abstractText, int position, String srs, String urlServer)
+            String abstractText, int position, String srs, String urlServer)
             throws IllegalParameterFault {
         GPRasterLayer rasterLayer = new GPRasterLayer();
         this.createLayer(rasterLayer, folder, title, name, abstractText, position, srs, urlServer);
@@ -267,7 +266,7 @@ public abstract class ServiceTest {
     }
 
     protected long createAndInsertVectorLayer(GPFolder folder, String title, String name,
-                                              String abstractText, int position, String srs, String urlServer)
+            String abstractText, int position, String srs, String urlServer)
             throws IllegalParameterFault {
         GPVectorLayer vectorLayer = new GPVectorLayer();
         this.createLayer(vectorLayer, folder, title, name, abstractText, position, srs, urlServer);
@@ -277,7 +276,7 @@ public abstract class ServiceTest {
     }
 
     protected void createLayer(GPLayer layer, GPFolder folder, String title, String name,
-                               String abstractText, int position, String srs, String urlServer) {
+            String abstractText, int position, String srs, String urlServer) {
         layer.setFolder(folder);
         layer.setProject(folder.getProject());
 

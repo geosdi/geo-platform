@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.crypt;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
+import org.jasypt.commons.CommonUtils;
+import org.jasypt.digest.StandardStringDigester;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.springframework.util.DigestUtils;
@@ -52,28 +54,15 @@ public class GPHashFunctionTest {
     private final static String encryptedTextMD5 = "c5e78595a2c9c515c6d218549bc6873d";
     private final static String encryptedTextSHA1 = "87f969449681b7674a7bda1a8988f413c16a16a7";
 
+    /**********
+     * Java
+     **********/
     @Test
     public void generateJavaMD5() throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
 
         byte[] plainBytes = plainText.getBytes();
         byte[] digest = md.digest(plainBytes);
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < digest.length; ++i) {
-            sb.append(Integer.toHexString((digest[i] & 0xFF) | 0x100).substring(1, 3));
-        }
-
-        final String encrypted = sb.toString();
-
-        assertEquals(32, encrypted.length());
-        assertEquals(encryptedTextMD5, encrypted);
-    }
-
-    @Test
-    public void generateSpringMD5() {
-        byte[] plainBytes = plainText.getBytes();
-        byte[] digest = DigestUtils.md5Digest(plainBytes);
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < digest.length; ++i) {
@@ -99,6 +88,56 @@ public class GPHashFunctionTest {
         }
 
         String encrypted = formatter.toString();
+
+        assertEquals(40, encrypted.length());
+        assertEquals(encryptedTextSHA1, encrypted);
+    }
+
+    /**********
+     * Spring
+     **********/
+    @Test
+    public void generateSpringMD5() {
+        byte[] plainBytes = plainText.getBytes();
+        byte[] digest = DigestUtils.md5Digest(plainBytes);
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < digest.length; ++i) {
+            sb.append(Integer.toHexString((digest[i] & 0xFF) | 0x100).substring(1, 3));
+        }
+
+        final String encrypted = sb.toString();
+
+        assertEquals(32, encrypted.length());
+        assertEquals(encryptedTextMD5, encrypted);
+    }
+
+    /**********
+     * Jasypt
+     **********/
+    @Test
+    public void generateJasyptMD5() {
+        StandardStringDigester digester = new StandardStringDigester();
+        digester.setAlgorithm("MD5");
+        digester.setSaltSizeBytes(0);
+        digester.setIterations(1);
+        digester.setStringOutputType(CommonUtils.STRING_OUTPUT_TYPE_HEXADECIMAL);
+
+        String encrypted = digester.digest(plainText).toLowerCase();
+
+        assertEquals(32, encrypted.length());
+        assertEquals(encryptedTextMD5, encrypted);
+    }
+
+    @Test
+    public void generateJasyptSHA1() {
+        StandardStringDigester digester = new StandardStringDigester();
+        digester.setAlgorithm("SHA-1");
+        digester.setSaltSizeBytes(0);
+        digester.setIterations(1);
+        digester.setStringOutputType(CommonUtils.STRING_OUTPUT_TYPE_HEXADECIMAL);
+
+        String encrypted = digester.digest(plainText).toLowerCase();
 
         assertEquals(40, encrypted.length());
         assertEquals(encryptedTextSHA1, encrypted);

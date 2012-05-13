@@ -36,11 +36,27 @@
 package org.geosdi.geoplatform.xml.csw;
 
 /**
- *
+ * Predicate language used to constrain operations based on the BNF grammar 
+ * (Backus-Naur Form or Backus Normal Form).
+ * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public enum ConstraintLanguage {
 
-    FILTER, // TODO Support FILTER ConstraintLanguage
+    /**
+     * OGC Filter
+     * <p>
+     * FILTER is an XML encoding of the BNF grammar and is normatively defined 
+     * in the Filter Encoding Implementation Specification, version 1.1.0.
+     * <p>
+     * All CSW implementations are required to support this filter syntax.
+     */
+    FILTER,
+    /**
+     * CQL expression 
+     * (Contextual Query Language, previously known as Common Query Language)
+     * <p>
+     * CQL_TEXT is a text encoding of the BNF.
+     */
     CQL_TEXT;
 }

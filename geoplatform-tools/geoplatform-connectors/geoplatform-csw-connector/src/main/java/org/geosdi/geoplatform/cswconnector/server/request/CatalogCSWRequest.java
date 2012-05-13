@@ -94,12 +94,11 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
 
     @Override
     public T getResponse() throws ServerInternalFault, IOException {
-        T request = null;
+        T response = null;
 
         try {
-            HttpResponse response = super.clientConnection.execute(
-                    super.getPostMethod());
-            HttpEntity responseEntity = response.getEntity();
+            HttpResponse httpResponse = super.clientConnection.execute(super.getPostMethod());
+            HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
 
@@ -112,7 +111,7 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
                 }
 
                 JAXBElement<T> elementType = (JAXBElement<T>) content;
-                request = elementType.getValue();
+                response = elementType.getValue();
 
                 EntityUtils.consume(responseEntity);
             }
@@ -121,15 +120,16 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
                     ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***");
+
         } catch (ClientProtocolException ex) {
-            logger.error(
-                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
+            logger.error("\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
+
         } finally {
             super.clientConnection.getConnectionManager().shutdown();
         }
 
-        return request;
+        return response;
     }
 }

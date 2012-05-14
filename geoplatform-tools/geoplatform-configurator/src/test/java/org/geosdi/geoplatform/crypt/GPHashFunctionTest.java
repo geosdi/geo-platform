@@ -38,10 +38,10 @@ package org.geosdi.geoplatform.crypt;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
+import static org.junit.Assert.assertEquals;
 import org.jasypt.commons.CommonUtils;
 import org.jasypt.digest.StandardStringDigester;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.springframework.util.DigestUtils;
 
 /**

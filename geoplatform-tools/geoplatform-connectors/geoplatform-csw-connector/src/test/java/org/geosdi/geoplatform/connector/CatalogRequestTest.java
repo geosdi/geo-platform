@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector;
 
 import java.io.StringWriter;
 import java.math.BigInteger;
@@ -315,7 +315,7 @@ public class CatalogRequestTest {
         query.setElementSetName(elementSetNameType);
 
         PropertyIsLikeType titleIsLikeType = this.createPropertyIsLikeType("dc:title", "%limiti%");
-        BinaryComparisonOpType subjectIsEqualTo = this.createPropertyIsEqualTo("dc:subject", "GEOSERVER");
+        BinaryComparisonOpType subjectIsEqualTo = this.createBinaryComparisonOpType("dc:subject", "GEOSERVER");
 
         List<JAXBElement<?>> propertyList = new ArrayList<JAXBElement<?>>(2);
         propertyList.add(filterFactory.createPropertyIsLike(titleIsLikeType));
@@ -324,10 +324,8 @@ public class CatalogRequestTest {
         BinaryLogicOpType binary = new BinaryLogicOpType();
         binary.setComparisonOpsOrSpatialOpsOrLogicOps(propertyList);
 
-        JAXBElement<BinaryLogicOpType> or = filterFactory.createOr(binary);
-
         FilterType filterType = new FilterType();
-        filterType.setLogicOps(or);
+        filterType.setLogicOps(filterFactory.createOr(binary));
 
         QueryConstraintType queryConstraintType = new QueryConstraintType();
         queryConstraintType.setVersion("1.1.0");
@@ -400,6 +398,7 @@ public class CatalogRequestTest {
         bbox.setPropertyName(propertyNameType);
 
         EnvelopeType envelope = new EnvelopeType();
+        envelope.setSrsName("EPSG:4326");
 
         DirectPositionType lower = new DirectPositionType();
         lower.setValue(Arrays.asList(18.521, 35.492)); // maxX, minY
@@ -425,7 +424,7 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", // TODO debug
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
@@ -444,12 +443,89 @@ public class CatalogRequestTest {
 
         assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
 
-        assertTrue(request.contains("<gml:Envelope>"));
+        assertTrue(request.contains("<gml:Envelope srsName=\"EPSG:4326\">"));
         assertTrue(request.contains("<gml:lowerCorner>18.521 35.492</gml:lowerCorner>"));
         assertTrue(request.contains("<gml:upperCorner>6.627 47.092</gml:upperCorner>"));
         assertTrue(request.contains("</gml:Envelope>"));
 
         assertTrue(request.contains("</ogc:BBOX>"));
+
+        assertTrue(request.contains("</ogc:Filter>"));
+
+        assertTrue(request.contains("</csw:Constraint>"));
+
+        assertTrue(request.contains("</csw:Query>"));
+
+        assertTrue(request.contains("</csw:GetRecords>"));
+    }
+
+    @Test
+    public void testGetRecordsSearchFilterTemporal() throws JAXBException {
+        GetRecordsType getRecords = new GetRecordsType();
+
+        getRecords.setResultType(ResultType.RESULTS);
+
+        QueryType query = new QueryType();
+        getRecords.setAbstractQuery(query);
+
+        query.setTypeNames(Arrays.asList(QName.valueOf("gmd:MD_Metadata")));
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(ElementSetType.SUMMARY);
+        query.setElementSetName(elementSetNameType);
+
+        BinaryComparisonOpType begi = this.createBinaryComparisonOpType("TempExtent_begin", "2000-01-01T00:00:00Z");
+        BinaryComparisonOpType end = this.createBinaryComparisonOpType("TempExtent_end", "2012-01-01T00:00:00Z");
+
+        List<JAXBElement<?>> propertyList = new ArrayList<JAXBElement<?>>(2);
+        propertyList.add(filterFactory.createPropertyIsGreaterThanOrEqualTo(begi));
+        propertyList.add(filterFactory.createPropertyIsLessThanOrEqualTo(end));
+
+        BinaryLogicOpType binary = new BinaryLogicOpType();
+        binary.setComparisonOpsOrSpatialOpsOrLogicOps(propertyList);
+
+        FilterType filterType = new FilterType();
+        filterType.setLogicOps(filterFactory.createAnd(binary));
+
+        QueryConstraintType queryConstraintType = new QueryConstraintType();
+        queryConstraintType.setVersion("1.1.0");
+        queryConstraintType.setFilter(filterType);
+
+        query.setConstraint(queryConstraintType);
+
+        Marshaller marshaller = cswContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(getRecords, writer);
+
+        String request = writer.toString();
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
+                new Scanner(request).useDelimiter("\\A").next());
+
+        assertTrue(request.contains("<csw:GetRecords"));
+        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("version=\"2.0.2\""));
+        assertTrue(request.contains("resultType=\"results\""));
+
+        assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
+        assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
+
+        assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
+
+        assertTrue(request.contains("<ogc:Filter>"));
+
+        assertTrue(request.contains("<ogc:And>"));
+
+        assertTrue(request.contains("<ogc:PropertyIsGreaterThanOrEqualTo>"));
+        assertTrue(request.contains("<ogc:PropertyName>TempExtent_begin</ogc:PropertyName>"));
+        assertTrue(request.contains("<ogc:Literal>2000-01-01T00:00:00Z</ogc:Literal>"));
+        assertTrue(request.contains("</ogc:PropertyIsGreaterThanOrEqualTo>"));
+
+        assertTrue(request.contains("<ogc:PropertyIsLessThanOrEqualTo>"));
+        assertTrue(request.contains("<ogc:PropertyName>TempExtent_end</ogc:PropertyName>"));
+        assertTrue(request.contains("<ogc:Literal>2012-01-01T00:00:00Z</ogc:Literal>"));
+        assertTrue(request.contains("</ogc:PropertyIsLessThanOrEqualTo>"));
+
+        assertTrue(request.contains("</ogc:And>"));
 
         assertTrue(request.contains("</ogc:Filter>"));
 
@@ -547,7 +623,7 @@ public class CatalogRequestTest {
         return propertyIsLikeType;
     }
 
-    private BinaryComparisonOpType createPropertyIsEqualTo(String propertyName, String literal) {
+    private BinaryComparisonOpType createBinaryComparisonOpType(String propertyName, String literal) {
 
         BinaryComparisonOpType binaryComparison = new BinaryComparisonOpType();
 

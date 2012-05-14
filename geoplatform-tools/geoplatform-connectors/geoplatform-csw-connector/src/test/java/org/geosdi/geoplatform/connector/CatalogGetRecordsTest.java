@@ -33,10 +33,8 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector;
 
-import org.geosdi.geoplatform.connector.GPCSWServerConnector;
-import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import java.math.BigInteger;
 import java.net.URL;
 import java.text.SimpleDateFormat;

@@ -33,13 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.jaxb.provider;
+package org.geosdi.geoplatform.connector.jaxb;
 
 import java.awt.RenderingHints;
 import java.util.HashMap;
 import java.util.Map;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
 import org.slf4j.LoggerFactory;
 
 /**

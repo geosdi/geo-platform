@@ -48,11 +48,11 @@ import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabi
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean;
-import org.geosdi.geoplatform.cswconnector.CatalogVersionException;
-import org.geosdi.geoplatform.cswconnector.GPCSWServerConnector;
-import org.geosdi.geoplatform.cswconnector.GPCSWConnectorBuilder;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
+import org.geosdi.geoplatform.connector.CatalogVersionException;
+import org.geosdi.geoplatform.connector.GPCSWServerConnector;
+import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;

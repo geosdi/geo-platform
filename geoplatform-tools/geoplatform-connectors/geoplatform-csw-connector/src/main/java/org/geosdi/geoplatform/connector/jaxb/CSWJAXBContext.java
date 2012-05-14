@@ -33,62 +33,64 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.server.request;
+package org.geosdi.geoplatform.connector.jaxb;
 
-import java.util.Arrays;
-import java.util.List;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.xml.csw.OutputSchema;
+import java.util.Map;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class CatalogGetRecordById<T> extends CatalogCSWRequest<T>
-        implements CatalogGetRecordByIdRequest<T> {
+public class CSWJAXBContext extends GeoPlatformJAXBContext {
 
-    protected List<String> id;
-    protected OutputSchema outputSchema;
-    protected String elementSetType;
+    public CSWJAXBContext(Class... classToBeBound) throws JAXBException {
+        super(classToBeBound);
+    }
 
-    public CatalogGetRecordById(GPServerConnector server) {
-        super(server);
+    public CSWJAXBContext(String contextPath, ClassLoader classLoader,
+            Map<String, ?> properties) throws JAXBException {
+        super(contextPath, classLoader, properties);
+    }
+
+    public CSWJAXBContext(String contextPath, ClassLoader classLoader)
+            throws JAXBException {
+        super(contextPath, classLoader);
+    }
+
+    public CSWJAXBContext(String contextPath) throws JAXBException {
+        super(contextPath);
     }
 
     @Override
-    public List<String> getId() {
-        return this.id;
+    public Marshaller acquireMarshaller() throws JAXBException {
+        synchronized (this) {
+            return super.marshaller != null
+                    ? super.marshaller : super.createMarshaller();
+        }
     }
 
     @Override
-    public void setId(String... theId) {
-        this.id = Arrays.asList(theId);
+    public Unmarshaller acquireUnmarshaller() throws JAXBException {
+        synchronized (this) {
+            return super.unmarshaller != null
+                    ? super.unmarshaller : super.createUnmarshaller();
+        }
     }
 
-    @Override
-    public OutputSchema getOutputSchema() {
-        return this.outputSchema;
-    }
+    public static class CSWJAXBContextKey extends GeoPlatformJAXBContextKey {
 
-    @Override
-    public void setOutputSchema(OutputSchema outputSchema) {
-        this.outputSchema = outputSchema;
-    }
+        public CSWJAXBContextKey() {
+            super(CSWConnectorJAXBContext.class);
+        }
 
-    @Override
-    public String getElementSetType() {
-        return this.elementSetType;
-    }
-
-    @Override
-    public void setElementSetType(String value) {
-        this.elementSetType = value;
-    }
-
-    @Override
-    public String toString() {
-        return "CatalogGetRecordById{" + "id = " + id + ", outputSchema = "
-                + outputSchema + ", elementSetType = " + elementSetType + '}';
+        @Override
+        public boolean isCompatibleValue(Object o) {
+            return o instanceof CSWJAXBContext;
+        }
     }
 }

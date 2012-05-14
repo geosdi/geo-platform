@@ -33,14 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
-import org.geosdi.geoplatform.cswconnector.security.CatalogSecurityConnection;
+import org.geosdi.geoplatform.connector.security.CatalogSecurityConnection;
 import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

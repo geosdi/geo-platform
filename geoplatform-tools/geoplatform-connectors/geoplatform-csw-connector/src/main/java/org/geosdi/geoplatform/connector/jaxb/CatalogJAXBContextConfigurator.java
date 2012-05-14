@@ -33,25 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.jaxb;
+
+import org.springframework.context.annotation.Bean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPCatalogVersion {
+public class CatalogJAXBContextConfigurator {
 
-    V202("2.0.2");
-    //
-    private String code;
+    /**
+     * Create an Instance for CSWConnectorJAXBContext and register it in
+     * GeoPlatformJAXBContextRepository with the specific Key
+     *
+     * @return CSWConnectorJAXBContext
+     */
+    public @Bean(name = "cswConnectorJAXBContext")
+    CSWConnectorJAXBContext cswConnectorJAXBContext() {
 
-    GPCatalogVersion(String theCode) {
-        this.code = theCode;
-    }
+        CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
 
-    @Override
-    public String toString() {
-        return this.code.toString();
+        GeoPlatformJAXBContextRepository.registerProvider(
+                cswJAXBContext.getKeyProvider(),
+                cswJAXBContext.getJAXBProvider());
+
+        return cswJAXBContext;
     }
 }

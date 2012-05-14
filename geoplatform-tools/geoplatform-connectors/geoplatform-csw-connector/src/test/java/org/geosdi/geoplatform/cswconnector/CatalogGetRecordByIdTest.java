@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
+import org.geosdi.geoplatform.connector.GPCSWServerConnector;
+import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import junit.framework.Assert;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordByIdRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;

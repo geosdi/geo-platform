@@ -33,65 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.jaxb;
+package org.geosdi.geoplatform.connector.server.request.v202;
 
-import java.util.Map;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordById;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class CSWJAXBContext extends GeoPlatformJAXBContext {
+public class CatalogGetRecordByIdV202 extends CatalogGetRecordById<GetRecordByIdResponseType>
+        implements CatalogGetRecordByIdRequest<GetRecordByIdResponseType> {
 
-    public CSWJAXBContext(Class... classToBeBound) throws JAXBException {
-        super(classToBeBound);
-    }
-
-    public CSWJAXBContext(String contextPath, ClassLoader classLoader,
-            Map<String, ?> properties) throws JAXBException {
-        super(contextPath, classLoader, properties);
-    }
-
-    public CSWJAXBContext(String contextPath, ClassLoader classLoader)
-            throws JAXBException {
-        super(contextPath, classLoader);
-    }
-
-    public CSWJAXBContext(String contextPath) throws JAXBException {
-        super(contextPath);
+    public CatalogGetRecordByIdV202(GPServerConnector server) {
+        super(server);
     }
 
     @Override
-    public Marshaller acquireMarshaller() throws JAXBException {
-        synchronized (this) {
-            return super.marshaller != null
-                    ? super.marshaller : super.createMarshaller();
-        }
-    }
-
-    @Override
-    public Unmarshaller acquireUnmarshaller() throws JAXBException {
-        synchronized (this) {
-            return super.unmarshaller != null
-                    ? super.unmarshaller : super.createUnmarshaller();
-        }
-    }
-
-    public static class CSWJAXBContextKey extends GeoPlatformJAXBContextKey {
-
-        public CSWJAXBContextKey() {
-            super(CSWConnectorJAXBContext.class);
+    protected Object createRequest() {
+        if (this.id == null) {
+            throw new IllegalArgumentException("Parameter ID must not be null");
         }
 
-        @Override
-        public boolean isCompatibleValue(Object o) {
-            return o instanceof CSWJAXBContext;
+        GetRecordByIdType request = new GetRecordByIdType();
+        request.setId(id);
+
+        if (this.outputSchema != null) {
+            request.setOutputSchema(this.outputSchema.toString());
         }
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(elementSetType != null ? ElementSetType.fromValue(
+                elementSetType)
+                : ElementSetType.SUMMARY);
+        request.setElementSetName(elementSetNameType);
+
+        return request;
     }
 }

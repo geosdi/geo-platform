@@ -33,40 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.server.request;
-
-import java.util.List;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
-import org.geosdi.geoplatform.xml.csw.OutputSchema;
+package org.geosdi.geoplatform.connector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface CatalogGetRecordByIdRequest<T> extends GPConnectorRequest<T> {
+public enum GPCatalogVersion {
 
-    void setOutputSchema(OutputSchema outputSchema);
+    V202("2.0.2");
+    //
+    private String code;
 
-    OutputSchema getOutputSchema();
+    GPCatalogVersion(String theCode) {
+        this.code = theCode;
+    }
 
-    void setId(String... theId);
-
-    List<String> getId();
-
-    /**
-     * The only admissible parameters are:
-     * <p>
-     * <ul>
-     * <li>brief</li>
-     * <li>summary</li>
-     * <li>full</li>
-     * </ul>
-     * <p>The default value is Summary</p>
-     * <p/>
-     * @param value
-     */
-    void setElementSetType(String value);
-
-    String getElementSetType();
+    @Override
+    public String toString() {
+        return this.code.toString();
+    }
 }

@@ -33,19 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.server;
+package org.geosdi.geoplatform.connector.server;
 
 import java.net.URL;
 import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.cswconnector.CatalogVersionException;
-import org.geosdi.geoplatform.cswconnector.GPCatalogVersion;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordByIdRequest;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
-import org.geosdi.geoplatform.cswconnector.server.request.v202.CatalogGetCapabilitiesV202;
-import org.geosdi.geoplatform.cswconnector.server.request.v202.CatalogGetRecordByIdV202;
-import org.geosdi.geoplatform.cswconnector.server.request.v202.CatalogGetRecordsV202;
+import org.geosdi.geoplatform.connector.CatalogVersionException;
+import org.geosdi.geoplatform.connector.GPCatalogVersion;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.v202.CatalogGetCapabilitiesV202;
+import org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordByIdV202;
+import org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202;
 
 /**
  *

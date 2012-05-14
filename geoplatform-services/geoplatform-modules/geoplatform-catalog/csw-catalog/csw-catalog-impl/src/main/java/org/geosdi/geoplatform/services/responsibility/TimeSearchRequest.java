@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.services.responsibility;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;

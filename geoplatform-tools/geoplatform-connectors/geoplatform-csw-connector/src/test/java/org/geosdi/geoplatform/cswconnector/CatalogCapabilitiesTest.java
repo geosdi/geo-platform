@@ -35,11 +35,15 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
+import org.geosdi.geoplatform.connector.CatalogVersionException;
+import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
+import org.geosdi.geoplatform.connector.GPCSWServerConnector;
+import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.junit.Test;
 import org.junit.runner.RunWith;

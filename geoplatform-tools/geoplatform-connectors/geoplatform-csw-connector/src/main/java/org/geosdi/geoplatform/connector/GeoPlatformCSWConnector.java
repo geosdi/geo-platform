@@ -33,29 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector;
 
-import org.geosdi.geoplatform.connector.api.GPPoolCapacity;
-import org.geosdi.geoplatform.connector.api.GeoPlatformServerPool;
-import org.geosdi.geoplatform.connector.api.IServerPoll;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWServerPool {
+public interface GeoPlatformCSWConnector {
 
-    private static IServerPoll<GPCSWServerConnector> instance;
+    GPCatalogVersion getVersion();
 
-    static {
-        instance = new GeoPlatformServerPool<GPCSWServerConnector>(GPPoolCapacity.HIGH);
-    }
+    CatalogGetCapabilitiesRequest createGetCapabilitiesRequest();
 
-    private GPCSWServerPool() {
-    }
+    CatalogGetRecordsRequest createGetRecordsRequest();
 
-    public static IServerPoll<GPCSWServerConnector> getInstance() {
-        return instance;
-    }
+    CatalogGetRecordByIdRequest createGetRecordByIdRequest();
 }

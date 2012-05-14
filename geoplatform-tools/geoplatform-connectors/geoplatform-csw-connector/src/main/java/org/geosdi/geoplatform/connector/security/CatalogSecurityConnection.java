@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.security;
+package org.geosdi.geoplatform.connector.security;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.io.IOException;

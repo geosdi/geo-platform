@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.server.request;
+package org.geosdi.geoplatform.connector.server.request;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,11 +50,10 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
 import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.GPPostConnectorRequest;
-import org.geosdi.geoplatform.cswconnector.jaxb.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
 
 /**

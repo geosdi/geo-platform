@@ -33,13 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.server.request.v202;
+package org.geosdi.geoplatform.connector.server.request.v202;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecords;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecords;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;

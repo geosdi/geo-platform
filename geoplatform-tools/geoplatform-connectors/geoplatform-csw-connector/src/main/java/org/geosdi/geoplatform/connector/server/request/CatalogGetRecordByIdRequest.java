@@ -33,47 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.jaxb;
+package org.geosdi.geoplatform.connector.server.request;
 
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
-import org.geosdi.geoplatform.cswconnector.jaxb.CSWJAXBContext.CSWJAXBContextKey;
-import org.geosdi.geoplatform.xml.csw.CSWContextServiceProvider;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CSWConnectorJAXBContext implements
-        GeoPlatformJAXBContextProvider {
+public interface CatalogGetRecordByIdRequest<T> extends GPConnectorRequest<T> {
 
-    static {
-        try {
-            jaxbContext = new CSWJAXBContext(
-                    CSWContextServiceProvider.loadContextPath());
-        } catch (JAXBException e) {
-            LoggerFactory.getLogger(CSWConnectorJAXBContext.class).error(
-                    "Failed to Initialize JAXBContext for Class "
-                    + CSWConnectorJAXBContext.class.getName()
-                    + ": @@@@@@@@@@@@@@@@@ " + e);
-        }
-    }
-    //
-    private static CSWJAXBContext jaxbContext;
-    public static final CSWJAXBContextKey CSW_CONTEXT_KEY = new CSWJAXBContextKey();
+    void setOutputSchema(OutputSchema outputSchema);
 
-    protected CSWConnectorJAXBContext() {
-    }
+    OutputSchema getOutputSchema();
 
-    @Override
-    public CSWJAXBContext getJAXBProvider() {
-        return jaxbContext;
-    }
+    void setId(String... theId);
 
-    @Override
-    public CSWJAXBContextKey getKeyProvider() {
-        return CSWConnectorJAXBContext.CSW_CONTEXT_KEY;
-    }
+    List<String> getId();
+
+    /**
+     * The only admissible parameters are:
+     * <p>
+     * <ul>
+     * <li>brief</li>
+     * <li>summary</li>
+     * <li>full</li>
+     * </ul>
+     * <p>The default value is Summary</p>
+     * <p/>
+     * @param value
+     */
+    void setElementSetType(String value);
+
+    String getElementSetType();
 }

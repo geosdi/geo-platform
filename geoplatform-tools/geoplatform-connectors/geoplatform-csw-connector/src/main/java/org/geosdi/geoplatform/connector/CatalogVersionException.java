@@ -33,79 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.server.request;
+package org.geosdi.geoplatform.connector;
 
-import java.math.BigInteger;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
-import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
-import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
-import org.geosdi.geoplatform.xml.csw.OutputSchema;
-import org.geosdi.geoplatform.xml.csw.TypeName;
+import java.io.Serializable;
 
 /**
- * API of GetRecords CSW request
- * 
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface CatalogGetRecordsRequest<T> extends GPConnectorRequest<T> {
+public class CatalogVersionException extends RuntimeException
+        implements Serializable {
 
-    ConstraintLanguage getConstraintLanguage();
+    private static final long serialVersionUID = -561213746840014232L;
 
-    void setConstraintLanguage(ConstraintLanguage constraintLanguage);
+    public CatalogVersionException() {
+    }
 
-    ConstraintLanguageVersion getConstraintLanguageVersion();
+    public CatalogVersionException(String message) {
+        super(message);
+    }
 
-    void setConstraintLanguageVersion(ConstraintLanguageVersion constraintLanguageVersion);
-
-    String getConstraint();
-
-    void setConstraint(String constraint);
-
-    BigInteger getMaxRecords();
-
-    void setMaxRecords(BigInteger maxRecords);
-
-    BigInteger getStartPosition();
-
-    void setStartPosition(BigInteger startPosition);
-
-    OutputSchema getOutputSchema();
-
-    void setOutputSchema(OutputSchema outputSchema);
-
-    String getResultType();
-
-    /**
-     * The only admissible parameters are:
-     * <p>
-     * <ul>
-     * <li>results</li>
-     * <li>hits</li>
-     * <li>validate</li>
-     * </ul>
-     * <p>The default value is Hits</p>
-     * <p/>
-     * @param resultType
-     */
-    void setResultType(String resultType);
-
-    String getElementSetName();
-
-    /**
-     * The only admissible parameters are:
-     * <p>
-     * <ul>
-     * <li>brief</li>
-     * <li>summary</li>
-     * <li>full</li>
-     * </ul>
-     * <p>The default value is Summary</p>
-     * <p/>
-     * @param elementSetName
-     */
-    void setElementSetName(String elementSetName);
-
-    TypeName getTypeName();
-
-    void setTypeName(TypeName typeName);
+    public CatalogVersionException(Throwable exception) {
+        super(exception);
+    }
 }

@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
+import org.geosdi.geoplatform.connector.GPCSWServerConnector;
+import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import java.math.BigInteger;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -42,7 +44,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;

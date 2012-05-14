@@ -38,8 +38,8 @@
         </property>
     </bean>
     
-    <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean" />
+    <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean" />
     
-    <bean id="catalogJAXBContextConfigurator" class="org.geosdi.geoplatform.cswconnector.jaxb.CatalogJAXBContextConfigurator" />
+    <bean id="catalogJAXBContextConfigurator" class="org.geosdi.geoplatform.connector.jaxb.CatalogJAXBContextConfigurator" />
 
 </beans>

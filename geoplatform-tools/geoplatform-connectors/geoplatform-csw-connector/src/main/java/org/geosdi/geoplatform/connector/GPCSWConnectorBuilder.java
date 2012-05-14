@@ -33,28 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector;
 
-import java.io.Serializable;
+import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogVersionException extends RuntimeException
-        implements Serializable {
+public class GPCSWConnectorBuilder
+        extends AbstractConnectorBuilder<GPCSWConnectorBuilder, GPCSWServerConnector> {
 
-    private static final long serialVersionUID = -561213746840014232L;
-
-    public CatalogVersionException() {
+    /**
+     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
+     * specification for a GPCSWServerConnector.
+     * 
+     * @return the new GeoPlatformCSWConnectorBuilder
+     */
+    public static GPCSWConnectorBuilder newConnector() {
+        return new GPCSWConnectorBuilder();
     }
 
-    public CatalogVersionException(String message) {
-        super(message);
-    }
+    /**
+     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
+     *  
+     */
+    @Override
+    public GPCSWServerConnector build() {
+        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
+                securityConnector, GPCatalogVersion.V202);
 
-    public CatalogVersionException(Throwable exception) {
-        super(exception);
+        return cswConnector;
     }
 }

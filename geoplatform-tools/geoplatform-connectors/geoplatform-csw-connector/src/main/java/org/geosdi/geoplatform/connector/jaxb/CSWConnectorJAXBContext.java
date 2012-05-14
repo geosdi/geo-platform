@@ -33,37 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.jaxb;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import javax.xml.bind.JAXBException;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
+import org.geosdi.geoplatform.connector.jaxb.CSWJAXBContext.CSWJAXBContextKey;
+import org.geosdi.geoplatform.xml.csw.CSWContextServiceProvider;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GPCSWConnectorBuilder, GPCSWServerConnector> {
+public final class CSWConnectorJAXBContext implements
+        GeoPlatformJAXBContextProvider {
 
-    /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
-     * specification for a GPCSWServerConnector.
-     * 
-     * @return the new GeoPlatformCSWConnectorBuilder
-     */
-    public static GPCSWConnectorBuilder newConnector() {
-        return new GPCSWConnectorBuilder();
+    static {
+        try {
+            jaxbContext = new CSWJAXBContext(
+                    CSWContextServiceProvider.loadContextPath());
+        } catch (JAXBException e) {
+            LoggerFactory.getLogger(CSWConnectorJAXBContext.class).error(
+                    "Failed to Initialize JAXBContext for Class "
+                    + CSWConnectorJAXBContext.class.getName()
+                    + ": @@@@@@@@@@@@@@@@@ " + e);
+        }
+    }
+    //
+    private static CSWJAXBContext jaxbContext;
+    public static final CSWJAXBContextKey CSW_CONTEXT_KEY = new CSWJAXBContextKey();
+
+    protected CSWConnectorJAXBContext() {
     }
 
-    /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
-     */
     @Override
-    public GPCSWServerConnector build() {
-        GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                securityConnector, GPCatalogVersion.V202);
+    public CSWJAXBContext getJAXBProvider() {
+        return jaxbContext;
+    }
 
-        return cswConnector;
+    @Override
+    public CSWJAXBContextKey getKeyProvider() {
+        return CSWConnectorJAXBContext.CSW_CONTEXT_KEY;
     }
 }

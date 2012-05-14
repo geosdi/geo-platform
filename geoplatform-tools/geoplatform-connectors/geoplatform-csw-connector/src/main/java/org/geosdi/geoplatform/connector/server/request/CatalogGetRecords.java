@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.server.request;
+package org.geosdi.geoplatform.connector.server.request;
 
 import java.math.BigInteger;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;

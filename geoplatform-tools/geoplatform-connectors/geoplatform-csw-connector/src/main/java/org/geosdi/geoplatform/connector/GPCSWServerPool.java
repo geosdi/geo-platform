@@ -33,32 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.jaxb;
+package org.geosdi.geoplatform.connector;
 
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextRepository;
-import org.springframework.context.annotation.Bean;
+import org.geosdi.geoplatform.connector.api.GPPoolCapacity;
+import org.geosdi.geoplatform.connector.api.GeoPlatformServerPool;
+import org.geosdi.geoplatform.connector.api.IServerPoll;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogJAXBContextConfigurator {
+public class GPCSWServerPool {
 
-    /**
-     * Create an Instance for CSWConnectorJAXBContext and register it in 
-     * GeoPlatformJAXBContextRepository with the specific Key
-     * 
-     * @return CSWConnectorJAXBContext
-     */
-    public @Bean(name = "cswConnectorJAXBContext")
-    CSWConnectorJAXBContext cswConnectorJAXBContext() {
+    private static IServerPoll<GPCSWServerConnector> instance;
 
-        CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
+    static {
+        instance = new GeoPlatformServerPool<GPCSWServerConnector>(GPPoolCapacity.HIGH);
+    }
 
-        GeoPlatformJAXBContextRepository.registerProvider(
-                cswJAXBContext.getKeyProvider(), cswJAXBContext.getJAXBProvider());
+    private GPCSWServerPool() {
+    }
 
-        return cswJAXBContext;
+    public static IServerPoll<GPCSWServerConnector> getInstance() {
+        return instance;
     }
 }

@@ -33,47 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector.server.request.v202;
+package org.geosdi.geoplatform.connector.server.request;
 
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordById;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordByIdRequest;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdType;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogGetRecordByIdV202 extends CatalogGetRecordById<GetRecordByIdResponseType>
-        implements CatalogGetRecordByIdRequest<GetRecordByIdResponseType> {
-
-    public CatalogGetRecordByIdV202(GPServerConnector server) {
-        super(server);
-    }
-
-    @Override
-    protected Object createRequest() {
-        if (this.id == null) {
-            throw new IllegalArgumentException("Parameter ID must not be null");
-        }
-
-        GetRecordByIdType request = new GetRecordByIdType();
-        request.setId(id);
-
-        if (this.outputSchema != null) {
-            request.setOutputSchema(this.outputSchema.toString());
-        }
-
-        ElementSetNameType elementSetNameType = new ElementSetNameType();
-        elementSetNameType.setValue(elementSetType != null ? ElementSetType.fromValue(
-                elementSetType)
-                : ElementSetType.SUMMARY);
-        request.setElementSetName(elementSetNameType);
-
-        return request;
-    }
+public interface CatalogGetCapabilitiesRequest<T> extends GPConnectorRequest<T> {
 }

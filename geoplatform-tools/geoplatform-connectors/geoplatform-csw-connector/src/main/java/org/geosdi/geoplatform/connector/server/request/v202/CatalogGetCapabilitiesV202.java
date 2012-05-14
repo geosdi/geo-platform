@@ -33,58 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.geoplatform.connector.server.request.v202;
 
-import java.net.URL;
-import org.geosdi.geoplatform.connector.api.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.cswconnector.server.GPCatalogServerConnector;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetCapabilitiesRequest;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordByIdRequest;
-import org.geosdi.geoplatform.cswconnector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.CatalogCSWRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.xml.csw.CSWServiceEnum;
+import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
+import org.geosdi.geoplatform.xml.csw.v202.GetCapabilitiesType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GPCSWServerConnector extends GPServerConnector<GPCatalogServerConnector>
-        implements GeoPlatformCSWConnector {
+public class CatalogGetCapabilitiesV202 extends CatalogCSWRequest<CapabilitiesType>
+        implements CatalogGetCapabilitiesRequest<CapabilitiesType> {
 
-    private GPCatalogVersion version;
-
-    public GPCSWServerConnector(URL serverURL) {
-        this(serverURL, GPCatalogVersion.V202);
-    }
-
-    public GPCSWServerConnector(URL serverURL, GPCatalogVersion theVersion) {
-        this(serverURL, null, theVersion);
-    }
-
-    public GPCSWServerConnector(URL serverURL, GPSecurityConnector security,
-            GPCatalogVersion theVersion) {
-        this.server = new GPCatalogServerConnector(serverURL, security,
-                theVersion);
-        this.version = theVersion;
+    public CatalogGetCapabilitiesV202(GPServerConnector server) {
+        super(server);
     }
 
     @Override
-    public GPCatalogVersion getVersion() {
-        return this.version;
-    }
-
-    @Override
-    public CatalogGetCapabilitiesRequest createGetCapabilitiesRequest() {
-        return server.createGetCapabilitiesRequest();
-    }
-
-    @Override
-    public CatalogGetRecordsRequest createGetRecordsRequest() {
-        return server.createGetRecordsRequest();
-    }
-
-    @Override
-    public CatalogGetRecordByIdRequest createGetRecordByIdRequest() {
-        return server.createGetRecordByIdRequest();
+    protected Object createRequest() {
+        return new GetCapabilitiesType(CSWServiceEnum.CSW);
     }
 }

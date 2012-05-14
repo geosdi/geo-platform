@@ -119,6 +119,7 @@ public abstract class BaseDAOTest {
     protected GPUser adminTest;
     protected GPUser userTest;
     protected GPUser viewerTest;
+    protected GPUser serviceTest;
     protected GPUser gsUserTest;
     protected GPProject adminProject;
     protected GPProject userProject;
@@ -281,6 +282,7 @@ public abstract class BaseDAOTest {
         this.adminTest = this.insertUser("admin", GPRole.ADMIN);
         this.userTest = this.insertUser("user", GPRole.USER);
         this.viewerTest = this.insertUser("viewer", GPRole.VIEWER);
+        this.serviceTest = this.insertUser("service", GPRole.ADMIN);
         this.gsUserTest = this.insertUser(this.gsAccountUserName, GPRole.ADMIN);
         //
         this.insertApplication("SIGV");

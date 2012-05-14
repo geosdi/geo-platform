@@ -2,23 +2,36 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+  
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-ws</artifactId>
+        <artifactId>geoplatform-tracking</artifactId>
         <version>1.4-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>geoplatform-ws-impl</artifactId>
+    <artifactId>geoplatform-tracking-impl</artifactId>
     <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == WS Implementation</name>
+    <name>Geo-Platform :: == Tracking Module Implementation</name>
 
     <dependencies>
-
-		<!-- APACHE COMMONS -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-tracking-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-model</artifactId>
+        </dependency>
+<!--        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configuration</artifactId>
+            <version>${project.version}</version>
+        </dependency>-->
+        
+            <!-- APACHE COMMONS -->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -28,64 +41,22 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
 
-		<!-- This dep is needed in core::dao, but seems not to be transitively 
+		<!-- This dep is needed in core::dao, but seems not to be transitively
 			imported -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
 
-		<!-- GEOPLATFORM WS -->
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
+            <artifactId>geoplatform-publisher-api</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>cglib</groupId>
                     <artifactId>cglib</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-dao</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-util</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-scheduler-api</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-tracking-api</artifactId>
         </dependency>
 
         <dependency>
@@ -93,34 +64,46 @@
             <artifactId>dom4j</artifactId>
         </dependency>
 
-        <!--dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency-->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
+        </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ======================== GUAVA =========================== -->
+	<!-- =========================================================== -->
+            
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>          
+        </dependency>
+            
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-gwt</artifactId>
+        </dependency>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-
-		<!-- GeoAPI and its dependencies 
         <dependency>
-            <groupId>org.opengis</groupId>
-            <artifactId>geoapi</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.opengis</groupId>
-            <artifactId>geoapi-dummy-pending</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.opengis</groupId>
-            <artifactId>geoapi-pending</artifactId>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
         <dependency>
             <groupId>net.java.dev.jsr-275</groupId>
             <artifactId>jsr-275</artifactId>
-        </dependency>-->
+        </dependency>
 
 		<!-- GEOTOOLS -->
         <dependency>
@@ -159,6 +142,36 @@
             <groupId>org.geotools</groupId>
             <artifactId>gt-epsg-wkt</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geotiff</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-coveragetools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-sld</artifactId>
+        </dependency>
+        
+        <!-- IGNITE REALTIME SMACK -->
+        <dependency>
+            <groupId>org.igniterealtime.smack</groupId>
+            <artifactId>smack</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.igniterealtime.smack</groupId>
+            <artifactId>smackx</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        
+        <!-- QUARTZ -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
 
 		<!-- SPRING -->
         <dependency>
@@ -188,45 +201,6 @@
             <scope>provided</scope>
         </dependency>
         
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-        </dependency>
-
-		<!-- HIBERNATE-GENERIC-DAO -->
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>dao</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search-hibernate</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search-jpa-hibernate</artifactId>
-        </dependency>
-
-		<!-- HIBERNATE-SPATIAL -->
-        <dependency>
-            <groupId>org.hibernatespatial</groupId>
-            <artifactId>hibernate-spatial-postgis</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
 		<!-- CGLIB -->
         <dependency>
             <groupId>asm</groupId>
@@ -273,57 +247,62 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
         </dependency>
-        
+		<!-- Velocity (Email templates) -->
         <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
         </dependency>
-                
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+        </dependency>
+
 		<!-- LOGGER -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
 
-    </dependencies>
-
+		<!-- SCOPE TEST -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>    
+	
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <mode>development</mode>
+                            <url>${project.url}</url>
+                            <key>value</key>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>cob</id>
-            <build>
-                <plugins>
-
-					<!-- Instrument classes -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>cobertura-maven-plugin</artifactId>
-                        <configuration>
-                            <instrumentation>
-                            </instrumentation>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>instrument_ws_impl</id>
-                                <phase>process-classes</phase>
-                                <goals>
-                                    <goal>instrument</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+	
 </project>

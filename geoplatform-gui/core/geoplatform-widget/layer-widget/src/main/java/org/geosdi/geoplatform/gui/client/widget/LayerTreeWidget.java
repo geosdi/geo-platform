@@ -68,6 +68,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPModelKeyProvider;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
@@ -116,6 +117,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
      */
     public LayerTreeWidget(ContentPanel treePanel) {
         super();
+        super.store.setKeyProvider(new GPModelKeyProvider());
         this.parentPanel = treePanel;
         TimeoutHandlerManager.addHandler(IGPBuildTreeHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IGPExpandTreeNodeHandler.TYPE, this);

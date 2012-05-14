@@ -314,6 +314,17 @@
             
             <dependency>
                 <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-tracking-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-tracking-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-scheduler-api</artifactId>
                 <version>${project.version}</version>
             </dependency>

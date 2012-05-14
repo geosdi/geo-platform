@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.model.tree;
 
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
@@ -45,7 +46,7 @@ import org.geosdi.geoplatform.gui.observable.Observable;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public abstract class GPLayerTreeModel extends GPBeanTreeModel
         implements GPLayerBean {
@@ -55,7 +56,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
      */
     private static final long serialVersionUID = -6964624685883651246L;
     /*
-     * 
+     *
      */
 
     public enum GPLayerKeyValue {
@@ -83,7 +84,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     private String crs;
     private BboxClientInfo bbox;
     private GPLayerType layerType;
-    private ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
+    private ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
     //
     private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
 
@@ -112,7 +113,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     /**
      * @param title
-     *          the title to set
+     * the title to set
      */
     @Override
     public void setTitle(String title) {
@@ -130,7 +131,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     /**
      * @param name
-     *          the name to set
+     * the name to set
      */
     @Override
     public void setName(String name) {
@@ -174,7 +175,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     /**
      * @param abstractText
-     *          the abstractText to set
+     * the abstractText to set
      */
     @Override
     public void setAbstractText(String abstractText) {
@@ -193,7 +194,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     /**
      * @param dataSource
-     *            the dataSource to set
+     * the dataSource to set
      */
     @Override
     public void setDataSource(String dataSource) {
@@ -211,7 +212,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     /**
      * @param crs
-     *            the crs to set
+     * the crs to set
      */
     @Override
     public void setCrs(String crs) {
@@ -228,7 +229,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     /**
      * @param bbox
-     *            the bbox to set
+     * the bbox to set
      */
     @Override
     public void setBbox(BboxClientInfo bbox) {
@@ -245,7 +246,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     /**
      * @param layerType
-     *            the layerType to set
+     * the layerType to set
      */
     @Override
     public void setLayerType(GPLayerType layerType) {

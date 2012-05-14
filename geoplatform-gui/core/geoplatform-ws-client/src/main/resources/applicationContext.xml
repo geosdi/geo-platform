@@ -16,6 +16,10 @@
     <bean id="geoPlatformPublishClient" class="org.geosdi.geoplatform.cxf.GeoPlatformPublishClient">
         <property name="address" value="${webservice_publisher_endpoint_address}" />
     </bean>
+    
+    <bean id="geoPlatformTrackingClient" class="org.geosdi.geoplatform.cxf.GeoPlatformPublishClient">
+        <property name="address" value="${webservice_tracking_endpoint_address}" />
+    </bean>
 
     <bean id="gpCatalogFinderClient"  class="org.geosdi.geoplatform.services.GPCatalogFinderService"
           factory-bean="catalogProxyFactory" factory-method="create" />

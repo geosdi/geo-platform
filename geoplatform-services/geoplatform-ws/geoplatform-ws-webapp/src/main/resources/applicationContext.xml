@@ -88,6 +88,31 @@
         </jaxws:outInterceptors>
     </jaxws:endpoint>
     
+    <jaxws:endpoint id="trackingServiceSOAP"
+                    implementorClass="org.geosdi.geoplatform.services.GPTrackingServiceImpl"
+                    implementor="#trackingService"
+                    address="/tracking">
+
+        <jaxws:serviceFactory>
+            <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
+                <property name="serviceConfigurations">
+                    <list>
+                        <bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration"/>
+                        <bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration"/>
+                    </list>
+                </property>
+            </bean>
+        </jaxws:serviceFactory>
+        <jaxws:inInterceptors>
+            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
+        </jaxws:inInterceptors>        
+        <jaxws:outInterceptors>
+            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
+        </jaxws:outInterceptors>
+    </jaxws:endpoint>
+    
     <jaxws:endpoint id="schedulerServiceSOAP"
                     implementorClass="org.geosdi.geoplatform.services.GPSchedulerServiceImpl"
                     implementor="#schedulerService"

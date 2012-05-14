@@ -829,12 +829,10 @@ public class GPPublisherServiceImpl implements GPPublisherService,
             boolean published = restPublisher.publishExternalGeoTIFF(userWorkspace,
                     fileName, fileInTifDir, fileName, epsg, GSResourceEncoder.ProjectionPolicy.FORCE_DECLARED, sld);
             if (published) {
-                RESTLayer layer = restReader.getLayer(fileName);
                 GSCoverageEncoder coverageEncoder = new GSCoverageEncoder();
                 coverageEncoder.setName(fileName);
                 coverageEncoder.setTitle(fileName);
                 this.restPublisher.configureCoverage(coverageEncoder, userWorkspace, fileName);
-                layer.getTitle();
                 logger.info(
                         fileInTifDir + " correctly published in the " + userWorkspace + " workspace");
                 infoPreview = getTIFURLByLayerName(userName, fileName);

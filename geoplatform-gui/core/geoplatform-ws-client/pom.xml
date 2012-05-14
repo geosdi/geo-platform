@@ -135,6 +135,13 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geonetwork-catalog-api</artifactId>
         </dependency>
+		<!-- =============================================================== -->
+		<!-- GEOPLATFORM TRACKING -->
+		<!-- =============================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-tracking-api</artifactId>
+        </dependency>
         
 		<!-- =============================================================== -->
 		<!-- GEOPLATFORM CSW -->

@@ -39,16 +39,17 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.model.UUIDGenerator;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     private static final long serialVersionUID = 2095233644130779285L;
-    //
+    private final String UUID = UUIDGenerator.uuid();
     private Long id;
     private String label;
     private int zIndex;
@@ -59,10 +60,10 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     /**
      * Constructor for a layer (raster and vector set a different label)
-     * 
+     *
      * @param id
      * @param zIndex
-     * @param checked 
+     * @param checked
      */
     protected GPBeanTreeModel(Long id, int zIndex, boolean checked) {
         this.id = id;
@@ -72,11 +73,11 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     /**
      * Constructor for a folder
-     * 
+     *
      * @param id
      * @param label
      * @param zIndex
-     * @param checked 
+     * @param checked
      */
     protected GPBeanTreeModel(Long id, String label, int zIndex, boolean checked) {
         this.id = id;
@@ -94,7 +95,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     /**
      * @param id
-     *          the id to set
+     * the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -109,7 +110,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     /**
      * @param label
-     *          the label to set
+     * the label to set
      */
     public void setLabel(String label) {
         this.label = label;
@@ -117,7 +118,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     /**
      * @param zIndex
-     *          the zIndex to set
+     * the zIndex to set
      */
     public void setzIndex(int zIndex) {
         this.zIndex = zIndex;
@@ -139,12 +140,19 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     /**
      * @param checked
-     *          the checked to set
+     * the checked to set
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
-    
+
+    /**
+     * @return the UUID
+     */
+    public String getUUID() {
+        return UUID;
+    }
+
     public abstract AbstractImagePrototype getIcon();
 
     public abstract void accept(IVisitor visitor);

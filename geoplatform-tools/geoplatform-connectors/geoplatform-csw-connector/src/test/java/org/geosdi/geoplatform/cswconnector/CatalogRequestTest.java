@@ -57,13 +57,15 @@ import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
+import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
-import org.geosdi.geoplatform.xml.filter.v110.ObjectFactory;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyIsLikeType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
+import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
+import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -80,11 +82,13 @@ public class CatalogRequestTest {
     //
     private final GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
-    private ObjectFactory filterFactory;
+    private org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
+    private org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory;
 
     @Before
     public void setUp() {
-        filterFactory = new ObjectFactory();
+        filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
+        gmlFactory = new org.geosdi.geoplatform.xml.gml.v311.ObjectFactory();
     }
 
     @Test
@@ -336,7 +340,7 @@ public class CatalogRequestTest {
         marshaller.marshal(getRecords, writer);
 
         String request = writer.toString();
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", // TODO debug
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
                 new Scanner(request).useDelimiter("\\A").next());
 
         assertTrue(request.contains("<csw:GetRecords"));
@@ -364,6 +368,88 @@ public class CatalogRequestTest {
         assertTrue(request.contains("</ogc:PropertyIsEqualTo>"));
 
         assertTrue(request.contains("</ogc:Or>"));
+
+        assertTrue(request.contains("</ogc:Filter>"));
+
+        assertTrue(request.contains("</csw:Constraint>"));
+
+        assertTrue(request.contains("</csw:Query>"));
+
+        assertTrue(request.contains("</csw:GetRecords>"));
+    }
+
+    @Test
+    public void testGetRecordsSearchFilterArea() throws JAXBException {
+        GetRecordsType getRecords = new GetRecordsType();
+
+        getRecords.setResultType(ResultType.RESULTS);
+
+        QueryType query = new QueryType();
+        getRecords.setAbstractQuery(query);
+
+        query.setTypeNames(Arrays.asList(QName.valueOf("gmd:MD_Metadata")));
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(ElementSetType.SUMMARY);
+        query.setElementSetName(elementSetNameType);
+
+        BBOXType bbox = new BBOXType();
+
+        PropertyNameType propertyNameType = new PropertyNameType();
+        propertyNameType.setContent(Arrays.<Object>asList("ows:BoundingBox"));
+        bbox.setPropertyName(propertyNameType);
+
+        EnvelopeType envelope = new EnvelopeType();
+
+        DirectPositionType lower = new DirectPositionType();
+        lower.setValue(Arrays.asList(18.521, 35.492)); // maxX, minY
+        envelope.setLowerCorner(lower);
+
+        DirectPositionType upper = new DirectPositionType();
+        upper.setValue(Arrays.asList(6.627, 47.092)); // minX, maxY
+        envelope.setUpperCorner(upper);
+
+        bbox.setEnvelope(gmlFactory.createEnvelope(envelope));
+
+        FilterType filterType = new FilterType();
+        filterType.setSpatialOps(filterFactory.createBBOX(bbox));
+
+        QueryConstraintType queryConstraintType = new QueryConstraintType();
+        queryConstraintType.setVersion("1.1.0");
+        queryConstraintType.setFilter(filterType);
+
+        query.setConstraint(queryConstraintType);
+
+        Marshaller marshaller = cswContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(getRecords, writer);
+
+        String request = writer.toString();
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", // TODO debug
+                new Scanner(request).useDelimiter("\\A").next());
+
+        assertTrue(request.contains("<csw:GetRecords"));
+        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("version=\"2.0.2\""));
+        assertTrue(request.contains("resultType=\"results\""));
+
+        assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
+        assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
+
+        assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
+
+        assertTrue(request.contains("<ogc:Filter>"));
+
+        assertTrue(request.contains("<ogc:BBOX>"));
+
+        assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
+
+        assertTrue(request.contains("<gml:Envelope>"));
+        assertTrue(request.contains("<gml:lowerCorner>18.521 35.492</gml:lowerCorner>"));
+        assertTrue(request.contains("<gml:upperCorner>6.627 47.092</gml:upperCorner>"));
+        assertTrue(request.contains("</gml:Envelope>"));
+
+        assertTrue(request.contains("</ogc:BBOX>"));
 
         assertTrue(request.contains("</ogc:Filter>"));
 

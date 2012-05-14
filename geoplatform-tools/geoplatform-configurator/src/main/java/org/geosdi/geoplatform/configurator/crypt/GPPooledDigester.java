@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.configurator.crypt;
 
-import org.jasypt.commons.CommonUtils;
-import org.jasypt.digest.StandardStringDigester;
+import org.jasypt.digest.PooledStringDigester;
+import org.jasypt.digest.config.StringDigesterConfig;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -44,18 +44,19 @@ import org.springframework.beans.factory.InitializingBean;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPDigester implements GPDigesterConfigutator, InitializingBean {
+public class GPPooledDigester implements GPDigesterConfigutator,
+                                         InitializingBean {
 
-    private final StandardStringDigester digester;
-    private String algorithm;
+    private final PooledStringDigester digester;
+    private StringDigesterConfig config;
 
-    public GPDigester() {
-        this.digester = new StandardStringDigester();
+    public GPPooledDigester() {
+        this.digester = new PooledStringDigester();
     }
 
     @Override
     public String digest(String plainText) {
-        return this.digester.digest(plainText);
+        return this.digester.digest(plainText).toLowerCase();
     }
 
     @Override
@@ -64,18 +65,14 @@ public class GPDigester implements GPDigesterConfigutator, InitializingBean {
     }
 
     /**
-     * @param algorithm the algorithm to set
+     * @param config the config to set
      */
-    public void setAlgorithm(String algorithm) {
-        this.algorithm = algorithm;
+    public void setConfig(StringDigesterConfig config) {
+        this.config = config;
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        this.digester.setAlgorithm(algorithm);
-        this.digester.setSaltSizeBytes(0);
-        this.digester.setIterations(1);
-        this.digester.setStringOutputType(
-                CommonUtils.STRING_OUTPUT_TYPE_HEXADECIMAL);
+        this.digester.setConfig(config);
     }
 }

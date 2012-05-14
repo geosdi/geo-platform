@@ -5,16 +5,16 @@
             http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
        default-autowire="byName">
     
-    <bean id="gpDigesterMD5"
-          class="org.geosdi.geoplatform.configurator.crypt.GPDigesterMD5">
+    <bean id="gpDigesterSHA1" class="org.geosdi.geoplatform.configurator.crypt.GPPooledDigester">
+        <property name="config" ref="digesterConfig" />
     </bean>
     
-    <bean id="gpDigesterSHA1"
-          class="org.geosdi.geoplatform.configurator.crypt.GPDigesterSHA1">
-    </bean>
-    
-    <bean id="gpDigester" class="org.geosdi.geoplatform.configurator.crypt.GPDigester">
+    <bean id="digesterConfig" class="org.jasypt.digest.config.SimpleStringDigesterConfig">
         <property name="algorithm" value="SHA-1" />
+        <property name="poolSize" value="2" /> <!--  This would be a good value for a 2-core system -->
+        <property name="saltSizeBytes" value="0" />
+        <property name="iterations" value="1" />
+        <property name="stringOutputType" value="hexadecimal" />
     </bean>
 
 </beans>

@@ -57,6 +57,7 @@ import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
+import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
@@ -64,6 +65,7 @@ import org.geosdi.geoplatform.xml.filter.v110.ObjectFactory;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyIsLikeType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,6 +80,12 @@ public class CatalogRequestTest {
     //
     private final GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
+    private ObjectFactory filterFactory;
+
+    @Before
+    public void setUp() {
+        filterFactory = new ObjectFactory();
+    }
 
     @Test
     public void testGetRecordsCount() throws JAXBException {
@@ -163,7 +171,6 @@ public class CatalogRequestTest {
 
         PropertyIsLikeType propertyIsLikeType = this.createPropertyIsLikeType("AnyText", "%venezia%");
 
-        ObjectFactory filterFactory = new ObjectFactory();
         JAXBElement<PropertyIsLikeType> propertyIsLike = filterFactory.createPropertyIsLike(propertyIsLikeType);
 
         FilterType filterType = new FilterType();
@@ -224,14 +231,91 @@ public class CatalogRequestTest {
         elementSetNameType.setValue(ElementSetType.SUMMARY);
         query.setElementSetName(elementSetNameType);
 
-        ObjectFactory filterFactory = new ObjectFactory();
-
         PropertyIsLikeType titleIsLikeType = this.createPropertyIsLikeType("dc:title", "%limiti%");
         PropertyIsLikeType abstractIsLikeType = this.createPropertyIsLikeType("dc:abstract", "%italia%");
 
         List<JAXBElement<?>> propertyList = new ArrayList<JAXBElement<?>>(2);
         propertyList.add(filterFactory.createPropertyIsLike(titleIsLikeType));
         propertyList.add(filterFactory.createPropertyIsLike(abstractIsLikeType));
+
+        BinaryLogicOpType binary = new BinaryLogicOpType();
+        binary.setComparisonOpsOrSpatialOpsOrLogicOps(propertyList);
+
+        JAXBElement<BinaryLogicOpType> orType = filterFactory.createOr(binary);
+
+        FilterType filterType = new FilterType();
+        filterType.setLogicOps(orType);
+
+        QueryConstraintType queryConstraintType = new QueryConstraintType();
+        queryConstraintType.setVersion("1.1.0");
+        queryConstraintType.setFilter(filterType);
+
+        query.setConstraint(queryConstraintType);
+
+        Marshaller marshaller = cswContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(getRecords, writer);
+
+        String request = writer.toString();
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
+                new Scanner(request).useDelimiter("\\A").next());
+
+        assertTrue(request.contains("<csw:GetRecords"));
+        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("version=\"2.0.2\""));
+        assertTrue(request.contains("resultType=\"results\""));
+
+        assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
+        assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
+
+        assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
+
+        assertTrue(request.contains("<ogc:Filter>"));
+
+        assertTrue(request.contains("<ogc:Or>"));
+
+        assertTrue(request.contains("<ogc:PropertyIsLike wildCard=\"%\" singleChar=\".\" escapeChar=\"\\\">"));
+        assertTrue(request.contains("<ogc:PropertyName>dc:title</ogc:PropertyName>"));
+        assertTrue(request.contains("<ogc:Literal>%limiti%</ogc:Literal>"));
+        assertTrue(request.contains("</ogc:PropertyIsLike>"));
+
+        assertTrue(request.contains("<ogc:PropertyIsLike wildCard=\"%\" singleChar=\".\" escapeChar=\"\\\">"));
+        assertTrue(request.contains("<ogc:PropertyName>dc:abstract</ogc:PropertyName>"));
+        assertTrue(request.contains("<ogc:Literal>%italia%</ogc:Literal>"));
+        assertTrue(request.contains("</ogc:PropertyIsLike>"));
+
+        assertTrue(request.contains("</ogc:Or>"));
+
+        assertTrue(request.contains("</ogc:Filter>"));
+
+        assertTrue(request.contains("</csw:Constraint>"));
+
+        assertTrue(request.contains("</csw:Query>"));
+
+        assertTrue(request.contains("</csw:GetRecords>"));
+    }
+
+    @Test
+    public void testGetRecordsSearchFilterTextTitleOrSubject() throws JAXBException {
+        GetRecordsType getRecords = new GetRecordsType();
+
+        getRecords.setResultType(ResultType.RESULTS);
+
+        QueryType query = new QueryType();
+        getRecords.setAbstractQuery(query);
+
+        query.setTypeNames(Arrays.asList(QName.valueOf("gmd:MD_Metadata")));
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(ElementSetType.SUMMARY);
+        query.setElementSetName(elementSetNameType);
+
+        PropertyIsLikeType titleIsLikeType = this.createPropertyIsLikeType("dc:title", "%limiti%");
+        BinaryComparisonOpType subjectIsEqualTo = this.createPropertyIsEqualTo("dc:subject", "GEOSERVER");
+
+        List<JAXBElement<?>> propertyList = new ArrayList<JAXBElement<?>>(2);
+        propertyList.add(filterFactory.createPropertyIsLike(titleIsLikeType));
+        propertyList.add(filterFactory.createPropertyIsEqualTo(subjectIsEqualTo));
 
         BinaryLogicOpType binary = new BinaryLogicOpType();
         binary.setComparisonOpsOrSpatialOpsOrLogicOps(propertyList);
@@ -274,10 +358,10 @@ public class CatalogRequestTest {
         assertTrue(request.contains("<ogc:Literal>%limiti%</ogc:Literal>"));
         assertTrue(request.contains("</ogc:PropertyIsLike>"));
 
-        assertTrue(request.contains("<ogc:PropertyIsLike wildCard=\"%\" singleChar=\".\" escapeChar=\"\\\">"));
-        assertTrue(request.contains("<ogc:PropertyName>dc:abstract</ogc:PropertyName>"));
-        assertTrue(request.contains("<ogc:Literal>%italia%</ogc:Literal>"));
-        assertTrue(request.contains("</ogc:PropertyIsLike>"));
+        assertTrue(request.contains("<ogc:PropertyIsEqualTo>"));
+        assertTrue(request.contains("<ogc:PropertyName>dc:subject</ogc:PropertyName>"));
+        assertTrue(request.contains("<ogc:Literal>GEOSERVER</ogc:Literal>"));
+        assertTrue(request.contains("</ogc:PropertyIsEqualTo>"));
 
         assertTrue(request.contains("</ogc:Or>"));
 
@@ -366,18 +450,32 @@ public class CatalogRequestTest {
         propertyIsLikeType.setSingleChar(".");
         propertyIsLikeType.setEscapeChar("\\");
 
-        List<Object> nameList = new ArrayList<Object>(1);
-        nameList.add(propertyName);
         PropertyNameType propertyNameType = new PropertyNameType();
-        propertyNameType.setContent(nameList);
+        propertyNameType.setContent(Arrays.<Object>asList(propertyName));
         propertyIsLikeType.setPropertyName(propertyNameType);
 
-        List<Object> literalList = new ArrayList<Object>(1);
-        literalList.add(literal);
         LiteralType literalType = new LiteralType();
-        literalType.setContent(literalList);
+        literalType.setContent(Arrays.<Object>asList(literal));
         propertyIsLikeType.setLiteral(literalType);
 
         return propertyIsLikeType;
+    }
+
+    private BinaryComparisonOpType createPropertyIsEqualTo(String propertyName, String literal) {
+
+        BinaryComparisonOpType binaryComparison = new BinaryComparisonOpType();
+
+        PropertyNameType propertyNameType = new PropertyNameType();
+        propertyNameType.setContent(Arrays.<Object>asList(propertyName));
+
+        LiteralType literalType = new LiteralType();
+        literalType.setContent(Arrays.<Object>asList(literal));
+
+        List<JAXBElement<?>> expressionList = new ArrayList<JAXBElement<?>>(2);
+        expressionList.add(filterFactory.createPropertyName(propertyNameType));
+        expressionList.add(filterFactory.createLiteral(literalType));
+        binaryComparison.setExpression(expressionList);
+
+        return binaryComparison;
     }
 }

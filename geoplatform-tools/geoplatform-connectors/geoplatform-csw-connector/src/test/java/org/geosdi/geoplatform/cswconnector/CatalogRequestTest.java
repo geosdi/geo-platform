@@ -57,6 +57,7 @@ import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
+import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
 import org.geosdi.geoplatform.xml.filter.v110.ObjectFactory;
@@ -146,7 +147,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilter() throws JAXBException {
+    public void testGetRecordsSearchFilterTextAnytext() throws JAXBException {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -160,22 +161,7 @@ public class CatalogRequestTest {
         elementSetNameType.setValue(ElementSetType.SUMMARY);
         query.setElementSetName(elementSetNameType);
 
-        PropertyIsLikeType propertyIsLikeType = new PropertyIsLikeType();
-        propertyIsLikeType.setWildCard("%");
-        propertyIsLikeType.setSingleChar(".");
-        propertyIsLikeType.setEscapeChar("\\");
-
-        List<Object> nameList = new ArrayList<Object>(1);
-        nameList.add("AnyText");
-        PropertyNameType propertyNameType = new PropertyNameType();
-        propertyNameType.setContent(nameList);
-        propertyIsLikeType.setPropertyName(propertyNameType);
-
-        List<Object> literalList = new ArrayList<Object>(1);
-        literalList.add("%venezia%");
-        LiteralType literalType = new LiteralType();
-        literalType.setContent(literalList);
-        propertyIsLikeType.setLiteral(literalType);
+        PropertyIsLikeType propertyIsLikeType = this.createPropertyIsLikeType("AnyText", "%venezia%");
 
         ObjectFactory filterFactory = new ObjectFactory();
         JAXBElement<PropertyIsLikeType> propertyIsLike = filterFactory.createPropertyIsLike(propertyIsLikeType);
@@ -213,6 +199,87 @@ public class CatalogRequestTest {
         assertTrue(request.contains("<ogc:PropertyName>AnyText</ogc:PropertyName>"));
         assertTrue(request.contains("<ogc:Literal>%venezia%</ogc:Literal>"));
         assertTrue(request.contains("</ogc:PropertyIsLike>"));
+
+        assertTrue(request.contains("</ogc:Filter>"));
+
+        assertTrue(request.contains("</csw:Constraint>"));
+
+        assertTrue(request.contains("</csw:Query>"));
+
+        assertTrue(request.contains("</csw:GetRecords>"));
+    }
+
+    @Test
+    public void testGetRecordsSearchFilterTextTitleOrAbstract() throws JAXBException {
+        GetRecordsType getRecords = new GetRecordsType();
+
+        getRecords.setResultType(ResultType.RESULTS);
+
+        QueryType query = new QueryType();
+        getRecords.setAbstractQuery(query);
+
+        query.setTypeNames(Arrays.asList(QName.valueOf("gmd:MD_Metadata")));
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(ElementSetType.SUMMARY);
+        query.setElementSetName(elementSetNameType);
+
+        ObjectFactory filterFactory = new ObjectFactory();
+
+        PropertyIsLikeType titleIsLikeType = this.createPropertyIsLikeType("dc:title", "%limiti%");
+        PropertyIsLikeType abstractIsLikeType = this.createPropertyIsLikeType("dc:abstract", "%italia%");
+
+        List<JAXBElement<?>> propertyList = new ArrayList<JAXBElement<?>>(2);
+        propertyList.add(filterFactory.createPropertyIsLike(titleIsLikeType));
+        propertyList.add(filterFactory.createPropertyIsLike(abstractIsLikeType));
+
+        BinaryLogicOpType binary = new BinaryLogicOpType();
+        binary.setComparisonOpsOrSpatialOpsOrLogicOps(propertyList);
+
+        JAXBElement<BinaryLogicOpType> or = filterFactory.createOr(binary);
+
+        FilterType filterType = new FilterType();
+        filterType.setLogicOps(or);
+
+        QueryConstraintType queryConstraintType = new QueryConstraintType();
+        queryConstraintType.setVersion("1.1.0");
+        queryConstraintType.setFilter(filterType);
+
+        query.setConstraint(queryConstraintType);
+
+        Marshaller marshaller = cswContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(getRecords, writer);
+
+        String request = writer.toString();
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", // TODO debug
+                new Scanner(request).useDelimiter("\\A").next());
+
+        assertTrue(request.contains("<csw:GetRecords"));
+        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("version=\"2.0.2\""));
+        assertTrue(request.contains("resultType=\"results\""));
+
+        assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
+        assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
+
+        assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
+
+        assertTrue(request.contains("<ogc:Filter>"));
+
+        assertTrue(request.contains("<ogc:Or>"));
+
+        assertTrue(request.contains("<ogc:PropertyIsLike wildCard=\"%\" singleChar=\".\" escapeChar=\"\\\">"));
+        assertTrue(request.contains("<ogc:PropertyName>dc:title</ogc:PropertyName>"));
+        assertTrue(request.contains("<ogc:Literal>%limiti%</ogc:Literal>"));
+        assertTrue(request.contains("</ogc:PropertyIsLike>"));
+
+        assertTrue(request.contains("<ogc:PropertyIsLike wildCard=\"%\" singleChar=\".\" escapeChar=\"\\\">"));
+        assertTrue(request.contains("<ogc:PropertyName>dc:abstract</ogc:PropertyName>"));
+        assertTrue(request.contains("<ogc:Literal>%italia%</ogc:Literal>"));
+        assertTrue(request.contains("</ogc:PropertyIsLike>"));
+
+        assertTrue(request.contains("</ogc:Or>"));
 
         assertTrue(request.contains("</ogc:Filter>"));
 
@@ -290,5 +357,27 @@ public class CatalogRequestTest {
         assertTrue(request.contains("</csw:Query>"));
 
         assertTrue(request.contains("</csw:GetRecords>"));
+    }
+
+    private PropertyIsLikeType createPropertyIsLikeType(String propertyName, String literal) {
+
+        PropertyIsLikeType propertyIsLikeType = new PropertyIsLikeType();
+        propertyIsLikeType.setWildCard("%");
+        propertyIsLikeType.setSingleChar(".");
+        propertyIsLikeType.setEscapeChar("\\");
+
+        List<Object> nameList = new ArrayList<Object>(1);
+        nameList.add(propertyName);
+        PropertyNameType propertyNameType = new PropertyNameType();
+        propertyNameType.setContent(nameList);
+        propertyIsLikeType.setPropertyName(propertyNameType);
+
+        List<Object> literalList = new ArrayList<Object>(1);
+        literalList.add(literal);
+        LiteralType literalType = new LiteralType();
+        literalType.setContent(literalList);
+        propertyIsLikeType.setLiteral(literalType);
+
+        return propertyIsLikeType;
     }
 }

@@ -60,6 +60,7 @@ import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
+import org.geosdi.geoplatform.xml.filter.v110.BinarySpatialOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyIsLikeType;
@@ -377,7 +378,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilterArea() throws JAXBException {
+    public void testGetRecordsSearchFilterAreaBBox() throws JAXBException {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -397,17 +398,7 @@ public class CatalogRequestTest {
         propertyNameType.setContent(Arrays.<Object>asList("ows:BoundingBox"));
         bbox.setPropertyName(propertyNameType);
 
-        EnvelopeType envelope = new EnvelopeType();
-        envelope.setSrsName("EPSG:4326");
-
-        DirectPositionType lower = new DirectPositionType();
-        lower.setValue(Arrays.asList(18.521, 35.492)); // maxX, minY
-        envelope.setLowerCorner(lower);
-
-        DirectPositionType upper = new DirectPositionType();
-        upper.setValue(Arrays.asList(6.627, 47.092)); // minX, maxY
-        envelope.setUpperCorner(upper);
-
+        EnvelopeType envelope = this.createEnvelopeItaly();
         bbox.setEnvelope(gmlFactory.createEnvelope(envelope));
 
         FilterType filterType = new FilterType();
@@ -460,6 +451,79 @@ public class CatalogRequestTest {
     }
 
     @Test
+    public void testGetRecordsSearchFilterAreaEncloses() throws JAXBException {
+        GetRecordsType getRecords = new GetRecordsType();
+
+        getRecords.setResultType(ResultType.RESULTS);
+
+        QueryType query = new QueryType();
+        getRecords.setAbstractQuery(query);
+
+        query.setTypeNames(Arrays.asList(QName.valueOf("gmd:MD_Metadata")));
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(ElementSetType.SUMMARY);
+        query.setElementSetName(elementSetNameType);
+
+        BinarySpatialOpType binarySpatial = new BinarySpatialOpType();
+
+        PropertyNameType propertyNameType = new PropertyNameType();
+        propertyNameType.setContent(Arrays.<Object>asList("ows:BoundingBox"));
+        binarySpatial.setPropertyName(propertyNameType);
+
+        EnvelopeType envelope = this.createEnvelopeItaly();
+        binarySpatial.setEnvelope(gmlFactory.createEnvelope(envelope));
+
+        FilterType filterType = new FilterType();
+        filterType.setSpatialOps(filterFactory.createWithin(binarySpatial));
+
+        QueryConstraintType queryConstraintType = new QueryConstraintType();
+        queryConstraintType.setVersion("1.1.0");
+        queryConstraintType.setFilter(filterType);
+
+        query.setConstraint(queryConstraintType);
+
+        Marshaller marshaller = cswContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(getRecords, writer);
+
+        String request = writer.toString();
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
+                new Scanner(request).useDelimiter("\\A").next());
+
+        assertTrue(request.contains("<csw:GetRecords"));
+        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("version=\"2.0.2\""));
+        assertTrue(request.contains("resultType=\"results\""));
+
+        assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
+        assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
+
+        assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
+
+        assertTrue(request.contains("<ogc:Filter>"));
+
+        assertTrue(request.contains("<ogc:Within>"));
+
+        assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
+
+        assertTrue(request.contains("<gml:Envelope srsName=\"EPSG:4326\">"));
+        assertTrue(request.contains("<gml:lowerCorner>18.521 35.492</gml:lowerCorner>"));
+        assertTrue(request.contains("<gml:upperCorner>6.627 47.092</gml:upperCorner>"));
+        assertTrue(request.contains("</gml:Envelope>"));
+
+        assertTrue(request.contains("</ogc:Within>"));
+
+        assertTrue(request.contains("</ogc:Filter>"));
+
+        assertTrue(request.contains("</csw:Constraint>"));
+
+        assertTrue(request.contains("</csw:Query>"));
+
+        assertTrue(request.contains("</csw:GetRecords>"));
+    }
+
+    @Test
     public void testGetRecordsSearchFilterTemporal() throws JAXBException {
         GetRecordsType getRecords = new GetRecordsType();
 
@@ -474,11 +538,13 @@ public class CatalogRequestTest {
         elementSetNameType.setValue(ElementSetType.SUMMARY);
         query.setElementSetName(elementSetNameType);
 
-        BinaryComparisonOpType begi = this.createBinaryComparisonOpType("TempExtent_begin", "2000-01-01T00:00:00Z");
-        BinaryComparisonOpType end = this.createBinaryComparisonOpType("TempExtent_end", "2012-01-01T00:00:00Z");
+        BinaryComparisonOpType begin = this.createBinaryComparisonOpType(
+                "TempExtent_begin", "2000-01-01T00:00:00Z");
+        BinaryComparisonOpType end = this.createBinaryComparisonOpType(
+                "TempExtent_end", "2012-01-01T00:00:00Z");
 
         List<JAXBElement<?>> propertyList = new ArrayList<JAXBElement<?>>(2);
-        propertyList.add(filterFactory.createPropertyIsGreaterThanOrEqualTo(begi));
+        propertyList.add(filterFactory.createPropertyIsGreaterThanOrEqualTo(begin));
         propertyList.add(filterFactory.createPropertyIsLessThanOrEqualTo(end));
 
         BinaryLogicOpType binary = new BinaryLogicOpType();
@@ -639,5 +705,20 @@ public class CatalogRequestTest {
         binaryComparison.setExpression(expressionList);
 
         return binaryComparison;
+    }
+
+    private EnvelopeType createEnvelopeItaly() {
+        EnvelopeType envelope = new EnvelopeType();
+        envelope.setSrsName("EPSG:4326");
+
+        DirectPositionType lower = new DirectPositionType();
+        lower.setValue(Arrays.asList(18.521, 35.492)); // maxX, minY
+        envelope.setLowerCorner(lower);
+
+        DirectPositionType upper = new DirectPositionType();
+        upper.setValue(Arrays.asList(6.627, 47.092)); // minX, maxY
+        envelope.setUpperCorner(upper);
+
+        return envelope;
     }
 }

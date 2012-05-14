@@ -15,9 +15,9 @@
         <appender-ref ref="STDOUT" />
     </root>
     
-    <logger name="org.geosdi.geoplatform.cswconnector.CatalogGetRecordsTest"
+    <logger name="org.geosdi.geoplatform.connector.CatalogGetRecordsTest"
             level="debug" /><!-- TODO info -->
-    <logger name="org.geosdi.geoplatform.cswconnector.CatalogRequestTest"
-            level="info" />
+    <logger name="org.geosdi.geoplatform.connector.CatalogRequestTest"
+            level="debug" /><!-- TODO info -->
 
 </configuration>

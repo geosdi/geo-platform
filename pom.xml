@@ -1461,7 +1461,7 @@
         
         <jasypt-version>1.9.0</jasypt-version>
         
-        <guava-version>12.0</guava-version>
+        <guava-version>11.0.2</guava-version>
         
         <ehcache-version>2.5.2</ehcache-version>
         

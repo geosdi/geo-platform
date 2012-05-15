@@ -167,8 +167,12 @@ public class CatalogGetRecordsTest {
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
         
-        String responseString = request.getResponseAsString();
+        GetRecordsResponseType response = request.getResponse();
         
-        logger.info("Eccola @@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + responseString);
+        List<JAXBElement<? extends AbstractRecordType>> metadata = response.getSearchResults().getAbstractRecord();
+        
+        for (JAXBElement<? extends AbstractRecordType> element : metadata) {
+            logger.info("ECCOLO @@@@@@@@@@@@@@@@@@@@@@@@@ " + element.getValue());
+        }
     }
 }

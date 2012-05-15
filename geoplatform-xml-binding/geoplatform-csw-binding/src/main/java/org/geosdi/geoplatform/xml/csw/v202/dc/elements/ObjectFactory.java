@@ -12,6 +12,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
+import org.geosdi.geoplatform.xml.csw.v202.dc.terms.URI;
 
 
 /**
@@ -47,6 +48,7 @@ public class ObjectFactory {
     private final static QName _Type_QNAME = new QName("http://purl.org/dc/elements/1.1/", "type");
     private final static QName _Contributor_QNAME = new QName("http://purl.org/dc/elements/1.1/", "contributor");
     private final static QName _Description_QNAME = new QName("http://purl.org/dc/elements/1.1/", "description");
+    private final static QName _URI_QNAME = new QName("http://purl.org/dc/elements/1.1/", "URI");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.geosdi.geoplatform.xml.csw.v202.dc.elements
@@ -213,6 +215,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://purl.org/dc/elements/1.1/", name = "description", substitutionHeadNamespace = "http://purl.org/dc/elements/1.1/", substitutionHeadName = "DC-element")
     public JAXBElement<SimpleLiteral> createDescription(SimpleLiteral value) {
         return new JAXBElement<SimpleLiteral>(_Description_QNAME, SimpleLiteral.class, null, value);
+    }
+    
+     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SimpleLiteral }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://purl.org/dc/elements/1.1/", name = "URI", substitutionHeadNamespace = "http://purl.org/dc/elements/1.1/", substitutionHeadName = "DC-element")
+    public JAXBElement<URI> createURI(URI value) {
+        return new JAXBElement<URI>(_URI_QNAME, URI.class, null, value);
     }
 
 }

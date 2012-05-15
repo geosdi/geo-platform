@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.18 at 12:36:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202;
 
 import java.util.ArrayList;
@@ -22,18 +20,17 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * 
- *             This type encapsulates all of the standard DCMI metadata terms,
- *             including the Dublin Core refinements; these terms may be mapped
- *             to the profile-specific information model.
- *          
- * 
+ *
+ * This type encapsulates all of the standard DCMI metadata terms,
+ * including the Dublin Core refinements; these terms may be mapped
+ * to the profile-specific information model.
+ *
+ *
  * <p>Java class for DCMIRecordType complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="DCMIRecordType">
  *   &lt;complexContent>
@@ -45,8 +42,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DCMIRecordType", propOrder = {
@@ -56,29 +53,31 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     RecordType.class
 })
 public class DCMIRecordType
-    extends AbstractRecordType
-    implements ToString
-{
+        extends AbstractRecordType
+        implements ToString {
 
-    @XmlElementRef(name = "DC-element", namespace = "http://purl.org/dc/elements/1.1/", type = JAXBElement.class)
-    protected List<JAXBElement<SimpleLiteral>> dcElement;
+    @XmlElementRef(name = "DC-element",
+                   namespace = "http://purl.org/dc/elements/1.1/",
+                   type = JAXBElement.class)
+    protected List<JAXBElement<? extends SimpleLiteral>> dcElement;
 
     /**
      * Gets the value of the dcElement property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dcElement property.
-     * 
+     * This is why there is not a
+     * <CODE>set</CODE> method for the dcElement property.
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getDCElement().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link SimpleLiteral }{@code >}
@@ -133,24 +132,25 @@ public class DCMIRecordType
      * {@link JAXBElement }{@code <}{@link SimpleLiteral }{@code >}
      * {@link JAXBElement }{@code <}{@link SimpleLiteral }{@code >}
      * {@link JAXBElement }{@code <}{@link SimpleLiteral }{@code >}
-     * 
-     * 
+     *
+     *
      */
-    public List<JAXBElement<SimpleLiteral>> getDCElement() {
+    public List<JAXBElement<? extends SimpleLiteral>> getDCElement() {
         if (dcElement == null) {
-            dcElement = new ArrayList<JAXBElement<SimpleLiteral>>();
+            dcElement = new ArrayList<JAXBElement<? extends SimpleLiteral>>();
         }
         return this.dcElement;
     }
 
     public boolean isSetDCElement() {
-        return ((this.dcElement!= null)&&(!this.dcElement.isEmpty()));
+        return ((this.dcElement != null) && (!this.dcElement.isEmpty()));
     }
 
     public void unsetDCElement() {
         this.dcElement = null;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -158,6 +158,7 @@ public class DCMIRecordType
         return buffer.toString();
     }
 
+    @Override
     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
@@ -165,20 +166,21 @@ public class DCMIRecordType
         return buffer;
     }
 
+    @Override
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
-            List<JAXBElement<SimpleLiteral>> theDCElement;
-            theDCElement = (this.isSetDCElement()?this.getDCElement():null);
-            strategy.appendField(locator, this, "dcElement", buffer, theDCElement);
+            List<JAXBElement<? extends SimpleLiteral>> theDCElement;
+            theDCElement = (this.isSetDCElement() ? this.getDCElement() : null);
+            strategy.appendField(locator, this, "dcElement", buffer,
+                    theDCElement);
         }
         return buffer;
     }
 
-    public void setDCElement(List<JAXBElement<SimpleLiteral>> value) {
+    public void setDCElement(List<JAXBElement<? extends SimpleLiteral>> value) {
         this.dcElement = null;
-        List<JAXBElement<SimpleLiteral>> draftl = this.getDCElement();
+        List<JAXBElement<? extends SimpleLiteral>> draftl = this.getDCElement();
         draftl.addAll(value);
     }
-
 }

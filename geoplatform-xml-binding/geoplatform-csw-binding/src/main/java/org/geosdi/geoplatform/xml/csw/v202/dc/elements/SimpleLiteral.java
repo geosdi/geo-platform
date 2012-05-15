@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.18 at 12:36:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.csw.v202.dc.elements;
 
 import java.util.ArrayList;
@@ -15,25 +13,26 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.xml.csw.v202.dc.terms.URI;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * This is the default type for all of the DC elements. It defines a 
- *       complexType SimpleLiteral which permits mixed content but disallows 
- *       child elements by use of minOcccurs/maxOccurs. However, this complexType 
- *       does permit the derivation of other types which would permit child 
- *       elements. The scheme attribute may be used as a qualifier to reference 
- *       an encoding scheme that describes the value domain for a given property.
- * 
+ * This is the default type for all of the DC elements. It defines a
+ * complexType SimpleLiteral which permits mixed content but disallows
+ * child elements by use of minOcccurs/maxOccurs. However, this complexType
+ * does permit the derivation of other types which would permit child
+ * elements. The scheme attribute may be used as a qualifier to reference
+ * an encoding scheme that describes the value domain for a given property.
+ *
  * <p>Java class for SimpleLiteral complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="SimpleLiteral">
  *   &lt;complexContent>
@@ -46,16 +45,18 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SimpleLiteral", propOrder = {
     "content"
 })
+@XmlSeeAlso({
+    URI.class
+})
 public class SimpleLiteral
-    implements ToString
-{
+        implements ToString {
 
     @XmlMixed
     protected List<String> content;
@@ -64,31 +65,32 @@ public class SimpleLiteral
     protected String scheme;
 
     /**
-     * This is the default type for all of the DC elements. It defines a 
-     *       complexType SimpleLiteral which permits mixed content but disallows 
-     *       child elements by use of minOcccurs/maxOccurs. However, this complexType 
-     *       does permit the derivation of other types which would permit child 
-     *       elements. The scheme attribute may be used as a qualifier to reference 
-     *       an encoding scheme that describes the value domain for a given property.Gets the value of the content property.
-     * 
+     * This is the default type for all of the DC elements. It defines a
+     * complexType SimpleLiteral which permits mixed content but disallows
+     * child elements by use of minOcccurs/maxOccurs. However, this complexType
+     * does permit the derivation of other types which would permit child
+     * elements. The scheme attribute may be used as a qualifier to reference
+     * an encoding scheme that describes the value domain for a given property.Gets the value of the content property.
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the content property.
-     * 
+     * This is why there is not a
+     * <CODE>set</CODE> method for the content property.
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContent().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * 
-     * 
+     *
+     *
      */
     public List<String> getContent() {
         if (content == null) {
@@ -98,7 +100,7 @@ public class SimpleLiteral
     }
 
     public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
+        return ((this.content != null) && (!this.content.isEmpty()));
     }
 
     public void unsetContent() {
@@ -107,11 +109,11 @@ public class SimpleLiteral
 
     /**
      * Gets the value of the scheme property.
-     * 
+     *
      * @return
-     *     possible object is
+     * possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getScheme() {
         return scheme;
@@ -119,18 +121,18 @@ public class SimpleLiteral
 
     /**
      * Sets the value of the scheme property.
-     * 
+     *
      * @param value
-     *     allowed object is
+* allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setScheme(String value) {
         this.scheme = value;
     }
 
     public boolean isSetScheme() {
-        return (this.scheme!= null);
+        return (this.scheme != null);
     }
 
     public String toString() {
@@ -150,7 +152,7 @@ public class SimpleLiteral
     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
         {
             List<String> theContent;
-            theContent = (this.isSetContent()?this.getContent():null);
+            theContent = (this.isSetContent() ? this.getContent() : null);
             strategy.appendField(locator, this, "content", buffer, theContent);
         }
         {
@@ -166,5 +168,4 @@ public class SimpleLiteral
         List<String> draftl = this.getContent();
         draftl.addAll(value);
     }
-
 }

@@ -35,10 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -86,9 +83,6 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
         StringWriter writer = new StringWriter();
         marshaller.marshal(request, writer);
 
-//        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", // TODO debug
-//                new Scanner(writer.toString()).useDelimiter("\\A").next());
-
         return new StringEntity(writer.toString(),
                 GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
     }
@@ -100,7 +94,8 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
         T response = null;
 
         try {
-            HttpResponse httpResponse = super.clientConnection.execute(super.getPostMethod());
+            HttpResponse httpResponse = super.clientConnection.execute(
+                    super.getPostMethod());
             HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
@@ -117,6 +112,9 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
                 response = elementType.getValue();
 
                 EntityUtils.consume(responseEntity);
+            } else {
+                throw new ServerInternalFault("CSW Catalog Server Error: Connection "
+                        + "problem");
             }
 
         } catch (JAXBException ex) {
@@ -125,7 +123,8 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
             throw new ServerInternalFault("*** JAXBException ***");
 
         } catch (ClientProtocolException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
+            logger.error(
+                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
 
@@ -134,5 +133,50 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
         }
 
         return response;
+    }
+
+    @Override
+    public String getResponseAsString() throws ServerInternalFault, IOException,
+            IllegalParameterFault {
+        Writer writer = new StringWriter();
+        try {
+            HttpResponse httpResponse = super.clientConnection.execute(
+                    super.getPostMethod());
+            HttpEntity responseEntity = httpResponse.getEntity();
+
+            if (responseEntity != null) {
+                InputStream is = responseEntity.getContent();
+
+                char[] buffer = new char[1024];
+
+                Reader reader = new BufferedReader(
+                        new InputStreamReader(is, "UTF-8"));
+                int n;
+                while ((n = reader.read(buffer)) != -1) {
+                    writer.write(buffer, 0, n);
+                }
+
+                EntityUtils.consume(responseEntity);
+            } else {
+                throw new ServerInternalFault("CSW Catalog Server Error: Connection "
+                        + "problem");
+            }
+            
+        } catch (JAXBException ex) {
+            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
+                    ex.getMessage());
+            throw new ServerInternalFault("*** JAXBException ***");
+
+        } catch (ClientProtocolException ex) {
+            logger.error(
+                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
+                    ex.getMessage());
+            throw new ServerInternalFault("*** ClientProtocolException ***");
+
+        } finally {
+            super.clientConnection.getConnectionManager().shutdown();
+        }
+
+        return writer.toString();
     }
 }

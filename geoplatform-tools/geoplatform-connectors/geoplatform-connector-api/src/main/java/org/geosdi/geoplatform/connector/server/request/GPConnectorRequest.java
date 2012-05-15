@@ -54,4 +54,14 @@ public interface GPConnectorRequest<T> {
     T getResponse() throws IllegalParameterFault, ServerInternalFault, IOException;
 
     HttpClient getClientConnection();
+
+    /**
+     * Method to generate String from a Request
+     *
+     * @return {@link String}
+     *
+     * @throws ServerInternalFault, IOException
+     */
+    String getResponseAsString() throws ServerInternalFault, IOException,
+            IllegalParameterFault;
 }

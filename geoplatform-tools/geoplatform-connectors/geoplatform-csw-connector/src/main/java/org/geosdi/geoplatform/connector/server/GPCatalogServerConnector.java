@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.connector.server;
 
 import java.net.URL;
-import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.connector.CatalogVersionException;
 import org.geosdi.geoplatform.connector.GPCatalogVersion;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
@@ -46,6 +44,7 @@ import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.request.v202.CatalogGetCapabilitiesV202;
 import org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordByIdV202;
 import org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *

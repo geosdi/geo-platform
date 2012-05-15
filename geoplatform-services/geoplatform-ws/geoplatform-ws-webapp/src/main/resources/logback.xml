@@ -39,13 +39,14 @@
     <logger name="org.geosdi.geoplatform.jobs.EmailRegistrationJob" level="debug"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.jobs.EmailModificationJob" level="debug"/><!-- TODO info -->
     
-    <logger name="org.geosdi.geoplatform.services.responsibility.TypeSearchRequest"
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202"
+            level="debug" /><!-- TODO info -->
+            
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TextSearchRequest"
             level="debug"/><!-- TODO info -->
-    <logger name="org.geosdi.geoplatform.services.responsibility.TextSearchRequest"
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.AreaSearchRequest"
             level="debug"/><!-- TODO info -->
-    <logger name="org.geosdi.geoplatform.services.responsibility.AreaSearchRequest"
-            level="debug"/><!-- TODO info -->
-    <logger name="org.geosdi.geoplatform.services.responsibility.TimeSearchRequest"
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TimeSearchRequest"
             level="debug"/><!-- TODO info -->
 
 </configuration>

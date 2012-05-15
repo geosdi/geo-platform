@@ -34,6 +34,11 @@
             <artifactId>geoplatform-ws-util</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>csw-catalog-api</artifactId>
+        </dependency>
+        
 		<!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>

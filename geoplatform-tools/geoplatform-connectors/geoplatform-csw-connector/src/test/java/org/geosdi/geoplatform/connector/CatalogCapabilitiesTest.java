@@ -35,10 +35,6 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import org.geosdi.geoplatform.connector.CatalogVersionException;
-import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
-import org.geosdi.geoplatform.connector.GPCSWServerConnector;
-import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -44,15 +44,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
+import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
+import org.geosdi.geoplatform.connector.CatalogVersionException;
+import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
+import org.geosdi.geoplatform.connector.GPCSWServerConnector;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
-import org.geosdi.geoplatform.connector.CatalogVersionException;
-import org.geosdi.geoplatform.connector.GPCSWServerConnector;
-import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
@@ -62,10 +62,14 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
-import org.geosdi.geoplatform.services.responsibility.GetRecordsRequestManager;
-import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
+import org.geosdi.geoplatform.xml.csw.OutputSchema;
+import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
+import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,8 +86,6 @@ class CSWServiceImpl {
     private GPServerDAO serverDao;
     //
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
-    //
-    private GetRecordsRequestManager catalogRequestManager = new GetRecordsRequestManager();
 
     /**
      * @param serverDao the serverDao to set
@@ -295,8 +297,15 @@ class CSWServiceImpl {
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request =
                 this.createGetRecordsRequest(server.getServerUrl());
-        catalogRequestManager.arrangeRequest(GetRecordsSearchType.COUNT, catalogFinder, request);
-        logger.trace("\n*** Constraint: \"{}\" ***", request.getConstraint());
+
+        request.setTypeName(TypeName.RECORD_V202);
+        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setElementSetName(ElementSetType.BRIEF.value());
+        request.setResultType(ResultType.HITS.value());
+
+        request.setConstraintLanguage(ConstraintLanguage.FILTER);
+        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
+        request.setCatalogFinder(catalogFinder);
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
 
@@ -312,7 +321,15 @@ class CSWServiceImpl {
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request =
                 this.createGetRecordsRequest(server.getServerUrl());
-        catalogRequestManager.arrangeRequest(GetRecordsSearchType.SEARCH, catalogFinder, request);
+
+        request.setTypeName(TypeName.METADATA);
+        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setElementSetName(ElementSetType.SUMMARY.value());
+        request.setResultType(ResultType.RESULTS.value());
+
+        request.setConstraintLanguage(ConstraintLanguage.FILTER);
+        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
+        request.setCatalogFinder(catalogFinder);
 
         // Pagination search
         request.setMaxRecords(BigInteger.valueOf(num));
@@ -358,7 +375,6 @@ class CSWServiceImpl {
         return server;
     }
 
-    // TODO Improvements for all cases
     private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> summaryRecordList) {
         List<SummaryRecordDTO> summaryRecordListDTO = new ArrayList<SummaryRecordDTO>(summaryRecordList.size());
         for (SummaryRecordType summaryRecord : summaryRecordList) {

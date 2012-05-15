@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.math.BigInteger;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
@@ -60,6 +60,10 @@ public interface CatalogGetRecordsRequest<T> extends GPConnectorRequest<T> {
     String getConstraint();
 
     void setConstraint(String constraint);
+
+    CatalogFinderBean getCatalogFinder();
+
+    void setCatalogFinder(CatalogFinderBean catalogFinder);
 
     BigInteger getMaxRecords();
 

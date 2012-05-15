@@ -37,10 +37,9 @@ package org.geosdi.geoplatform.services;
 
 import java.util.List;
 import javax.jws.WebService;
-import org.geosdi.geoplatform.core.dao.GPServerDAO;
-
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
+import org.geosdi.geoplatform.core.dao.GPServerDAO;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;

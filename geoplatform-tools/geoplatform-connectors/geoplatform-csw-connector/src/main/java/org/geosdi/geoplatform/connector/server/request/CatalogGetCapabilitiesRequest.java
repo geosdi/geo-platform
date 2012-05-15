@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -33,47 +33,42 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.jaxb;
+package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
 
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.connector.jaxb.CSWJAXBContext.CSWJAXBContextKey;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
-import org.geosdi.geoplatform.xml.csw.CSWContextServiceProvider;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
+import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
+import org.geosdi.geoplatform.gui.responce.BBox;
+import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public final class CSWConnectorJAXBContext implements
-        GeoPlatformJAXBContextProvider {
+public class AreaSearchRequest extends GetRecordsRequestHandler {
 
-    static {
-        try {
-            jaxbContext = new CSWJAXBContext(
-                    CSWContextServiceProvider.loadContextPath());
-        } catch (JAXBException e) {
-            LoggerFactory.getLogger(CSWConnectorJAXBContext.class).error(
-                    "Failed to Initialize JAXBContext for Class "
-                    + CSWConnectorJAXBContext.class.getName()
-                    + ": @@@@@@@@@@@@@@@@@ " + e);
+    @Override
+    protected void processGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
+            throws IllegalParameterFault {
+        logger.debug("Process...");
+
+        AreaInfo areaInfo = request.getCatalogFinder().getAreaInfo();
+        if (areaInfo != null && areaInfo.isActive()) {
+            AreaSearchType areaSearchType = areaInfo.getAreaSearchType();
+            BBox bBox = areaInfo.getBBox();
+            logger.debug("\n+++ Search Type: {} +++", areaSearchType);
+            logger.debug("\n+++ {} +++", bBox);
+
+            // TODO Switch wrt spatial operator to use
+            // TODO ADD constants for spatial operator and ows:BoundingBox
+            // TODO Use StringBuilder
+            String areaConstraint = "BBOX(ows:BoundingBox,"
+                    + bBox.getMinX() + "," + bBox.getMinY() + ","
+                    + bBox.getMaxX() + "," + bBox.getMinY() + ")";
+            logger.trace("\n+++ Area constraint: \"{}\" +++", areaConstraint);
+
+            super.addCQLConstraint(request, areaConstraint);
         }
-    }
-    //
-    private static CSWJAXBContext jaxbContext;
-    public static final CSWJAXBContextKey CSW_CONTEXT_KEY = new CSWJAXBContextKey();
-
-    protected CSWConnectorJAXBContext() {
-    }
-
-    @Override
-    public CSWJAXBContext getJAXBProvider() {
-        return jaxbContext;
-    }
-
-    @Override
-    public CSWJAXBContextKey getKeyProvider() {
-        return CSWConnectorJAXBContext.CSW_CONTEXT_KEY;
     }
 }

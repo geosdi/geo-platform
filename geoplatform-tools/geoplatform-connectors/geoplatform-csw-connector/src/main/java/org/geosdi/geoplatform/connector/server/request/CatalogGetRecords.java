@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import java.math.BigInteger;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
@@ -55,12 +56,14 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     protected ConstraintLanguage constraintLanguage;
     protected ConstraintLanguageVersion constraintLanguageVersion;
     protected String constraint;
+    protected CatalogFinderBean catalogFinder;
     protected BigInteger maxRecords;
     protected BigInteger startPosition;
     protected OutputSchema outputSchema;
     protected String resultType;
     protected String elementSetName;
     protected TypeName typeName;
+    // The default output format is the MIME type "application/xml"
 
     public CatalogGetRecords(GPServerConnector server) {
         super(server);
@@ -73,10 +76,14 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
 
     @Override
     public void setConstraintLanguage(ConstraintLanguage constraintLanguage) {
-        // TODO Support FILTER ConstraintLanguage
-        if (constraintLanguage == ConstraintLanguage.FILTER) {
-            throw new UnsupportedOperationException("FILTER constraint language is not supported yet. "
-                    + "Use CQL_TEXT constraint language.");
+        // TODO Move guard into createRequest method
+        // ESRI Geoportal Extension Catalog Service doesn't support CQL expression
+        // Also: TODO ESRI support only CSW output schema
+        if (constraintLanguage == ConstraintLanguage.CQL_TEXT
+                && serverURI.toString().toLowerCase().contains("geoportal")) {
+            throw new UnsupportedOperationException("CQL_TEXT constraint language is "
+                    + "not supported from ESRI Geoportal Extension Catalog Service yet. "
+                    + "Use FILTER constraint language.");
         }
         this.constraintLanguage = constraintLanguage;
     }
@@ -84,6 +91,11 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     @Override
     public ConstraintLanguageVersion getConstraintLanguageVersion() {
         return constraintLanguageVersion;
+    }
+
+    @Override
+    public void setConstraintLanguageVersion(ConstraintLanguageVersion constraintLanguageVersion) {
+        this.constraintLanguageVersion = constraintLanguageVersion;
     }
 
     @Override
@@ -97,8 +109,13 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     }
 
     @Override
-    public void setConstraintLanguageVersion(ConstraintLanguageVersion constraintLanguageVersion) {
-        this.constraintLanguageVersion = constraintLanguageVersion;
+    public CatalogFinderBean getCatalogFinder() {
+        return catalogFinder;
+    }
+
+    @Override
+    public void setCatalogFinder(CatalogFinderBean catalogFinder) {
+        this.catalogFinder = catalogFinder;
     }
 
     @Override
@@ -172,6 +189,7 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
         str.append("constraintLanguage").append(constraintLanguage);
         str.append(", constraintLanguageVersion").append(constraintLanguageVersion);
         str.append(", constraint").append(constraint);
+        str.append(", catalogFinder").append(catalogFinder);
         str.append(", maxRecords=").append(maxRecords);
         str.append(", startPosition=").append(startPosition);
         str.append(", outputSchema=").append(outputSchema);

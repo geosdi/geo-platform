@@ -40,6 +40,8 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecords;
+import org.geosdi.geoplatform.connector.server.request.v202.responsibility.GetRecordsRequestManager;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetNameType;
@@ -49,6 +51,7 @@ import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryConstraintType;
 import org.geosdi.geoplatform.xml.csw.v202.QueryType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
+import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 /**
  * GetRecords CSW request 2.0.2 version
@@ -59,12 +62,14 @@ import org.geosdi.geoplatform.xml.csw.v202.ResultType;
  */
 public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseType> {
 
+    private GetRecordsRequestManager catalogRequestManager = new GetRecordsRequestManager();
+
     public CatalogGetRecordsV202(GPServerConnector server) {
         super(server);
     }
 
     @Override
-    protected Object createRequest() {
+    protected Object createRequest() throws IllegalParameterFault {
         GetRecordsType request = new GetRecordsType();
 
         request.setResultType(resultType != null
@@ -86,29 +91,35 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
                 ? ElementSetType.fromValue(elementSetName) : ElementSetType.SUMMARY);
         query.setElementSetName(elementSetNameType);
 
-        if (constraint != null) {
+        FilterType filterType = new FilterType();
+        catalogRequestManager.filterGetRecordsRequest(this, filterType);
+
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", filterType);
+
+        if (filterType.isSetLogicOps() || filterType.isSetComparisonOps() || filterType.isSetSpatialOps()
+                || constraint != null) {
+            // TODO Check if the constraint language must be setted even if there aren't filter constraint
             if (constraintLanguage == null) {
                 throw new IllegalArgumentException("If 'Constraint' is setted, "
                         + "'Constraint Language' must not be null.");
             }
+            // TODO Check if the constraint language version must be setted for FILTER also
+            if (constraintLanguageVersion == null) {
+                throw new IllegalArgumentException(
+                        "'Constraint Language Version' must not be null.");
+            }
 
             QueryConstraintType queryConstraintType = new QueryConstraintType();
+            queryConstraintType.setVersion(constraintLanguageVersion.toString());
 
             switch (constraintLanguage) {
                 case FILTER:
-                    // TODO Support FILTER ConstraintLanguage
-                    // queryConstraintType.setFilter(this.createFilterType());
+                    queryConstraintType.setFilter(filterType);
                     break;
-                case CQL_TEXT:
-                    if (constraintLanguageVersion == null) {
-                        throw new IllegalArgumentException(
-                                "For 'Constraint Language' \"CQL_TEXT\", "
-                                + "'Constraint Language Version' must not be null.");
-                    }
 
-                    queryConstraintType.setVersion(
-                            constraintLanguageVersion.toString());
+                case CQL_TEXT:
                     queryConstraintType.setCqlText(constraint);
+                    break;
             }
 
             query.setConstraint(queryConstraintType);

@@ -33,56 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
 
-import java.io.UnsupportedEncodingException;
-import javax.xml.bind.JAXBException;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
+import org.geosdi.geoplatform.gui.responce.TimeInfo;
+import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GPPostConnectorRequest<T>
-        extends GPAbstractConnectorRequest<T> {
+public class TimeSearchRequest extends GetRecordsRequestHandler {
 
-    private HttpPost postMethod;
+    private final static String TEMP_BEGIN = "TempExtent_begin";
+    private final static String TEMP_END = "TempExtent_end";
+    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
-    public GPPostConnectorRequest(GPServerConnector server) {
-        super(server);
-    }
+    @Override
+    protected void processGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
+            throws IllegalParameterFault {
+        logger.debug("Process...");
 
-    public HttpPost getPostMethod()
-            throws IllegalParameterFault, JAXBException, ServerInternalFault {
+        TimeInfo timeInfo = request.getCatalogFinder().getTimeInfo();
+        if (timeInfo != null && timeInfo.isActive()) {
+            Date startDate = timeInfo.getStartDate();
+            Date endDate = timeInfo.getEndDate();
+            logger.debug("\n+++ From: {} - To: {} +++", startDate, endDate);
 
-        if (postMethod == null) {
-            this.preparePostMethod();
-        }
+            String timeConstraint = this.createCQLTimePredicate(startDate, endDate);
+            logger.trace("\n+++ Time constraint: \"{}\" +++", timeConstraint);
 
-        return postMethod;
-    }
-
-    private void preparePostMethod()
-            throws IllegalParameterFault, JAXBException, ServerInternalFault {
-
-        super.prepareHttpParams();
-        this.postMethod = new HttpPost(super.serverURI);
-
-        try {
-            this.postMethod.setEntity(this.preparePostEntity());
-
-        } catch (UnsupportedEncodingException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ UnsupportedEncodingException *** {} ***", ex.getMessage());
-            throw new ServerInternalFault("*** UnsupportedEncodingException ***");
+            super.addCQLConstraint(request, timeConstraint);
         }
     }
 
-    protected abstract HttpEntity preparePostEntity()
-            throws IllegalParameterFault, JAXBException, UnsupportedEncodingException;
+    /**
+     * Create a string like this:
+     * 
+     * TempExtent_begin AFTER 2006-11-30T01:30:00Z
+     * AND
+     * TempExtent_end BEFORE 2006-12-31T01:30:00Z
+     */
+    private String createCQLTimePredicate(Date startDate, Date endDate) {
+        StringBuilder str = new StringBuilder();
+        str.append(TEMP_BEGIN).append(" AFTER ").append(formatter.format(startDate));
+        str.append(" AND ");
+        str.append(TEMP_END).append(" BEFORE ").append(formatter.format(endDate));
+        return str.toString();
+    }
 }

@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.api.capabilities.model.csw;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import org.geosdi.geoplatform.connector.api.capabilities.model.csw.AbstractCatalogKeyword;
 
 /**
  *

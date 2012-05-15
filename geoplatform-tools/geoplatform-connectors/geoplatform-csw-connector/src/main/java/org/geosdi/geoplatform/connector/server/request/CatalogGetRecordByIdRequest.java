@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.util.List;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 
 /**

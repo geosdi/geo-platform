@@ -33,39 +33,54 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
+package org.geosdi.geoplatform.responce;
 
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.filter.v110.FilterType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GetRecordsRequestManager {
+@XmlRootElement(name = "URIDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class URIDTO {
 
-    private GetRecordsRequestHandler textSearchRequest; // The first ring of the chain
+    private String protocol;
+    private String name;
+    private String description;
 
-    public GetRecordsRequestManager() {
-        this.createChain();
+    public String getDescription() {
+        return description;
     }
 
-    private void createChain() {
-        textSearchRequest = new TextSearchRequest();
-        GetRecordsRequestHandler areaSearchRequest = new AreaSearchRequest();
-        GetRecordsRequestHandler timeSearchRequest = new TimeSearchRequest();
-
-        textSearchRequest.setSuccessor(areaSearchRequest);
-        areaSearchRequest.setSuccessor(timeSearchRequest);
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void filterGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
-            throws IllegalParameterFault {
+    public String getName() {
+        return name;
+    }
 
-        // Filter request iff there is a catalog finder setted
-        if (request.getCatalogFinder() != null) {
-            textSearchRequest.forwardGetRecordsRequest(request, filterType);
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("URIDTO {");
+        str.append("protocol=").append(protocol);
+        str.append(", name=").append(name);
+        str.append(", description=").append(description);
+        return str.append("}").toString();
     }
 }

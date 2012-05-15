@@ -51,6 +51,7 @@ import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 
@@ -138,6 +139,15 @@ public interface GeoPlatformCSWService {
     @HttpResource(location = "/record/csw/search/{num}/{page}/{searchText}")
     @WebResult(name = "SummaryRecords")
     List<SummaryRecordDTO> searchSummaryRecords(
+            @WebParam(name = "num") int num,
+            @WebParam(name = "start") int start,
+            @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
+            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault;
+
+    @Get
+    @HttpResource(location = "/record/csw/search/{num}/{page}/{searchText}")
+    @WebResult(name = "FullRecords")
+    List<FullRecordDTO> searchFullRecords(
             @WebParam(name = "num") int num,
             @WebParam(name = "start") int start,
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)

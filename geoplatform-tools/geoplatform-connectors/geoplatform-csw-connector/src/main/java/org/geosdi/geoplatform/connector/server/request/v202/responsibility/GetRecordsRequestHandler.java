@@ -94,6 +94,7 @@ public abstract class GetRecordsRequestHandler {
 
         String previousConstraint = request.getConstraint();
         if (previousConstraint == null) {
+            // TODO Check if the constraint language version must be setted for FILTER also
             request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
             request.setConstraint(followingConstraint);
         } else {

@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  *
@@ -48,6 +50,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "SummaryRecordDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso(FullRecordDTO.class)
 public class SummaryRecordDTO {
 
     private String identifier;
@@ -89,13 +92,26 @@ public class SummaryRecordDTO {
         this.subjects = subjects;
     }
 
+    public void addSubject(String subject) {
+        if (subjects == null) {
+            subjects = new ArrayList<String>();
+        }
+
+        subjects.add(subject);
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("SummaryRecordDTO {");
+        str.append(this.toStringBuilder(str));
+        return str.append("}").toString();
+    }
+
+    protected StringBuilder toStringBuilder(StringBuilder str) {
         str.append("identifier=").append(identifier);
         str.append(", title=").append(title);
         str.append(", abstractText=").append(abstractText);
         str.append(", subjects=").append(subjects);
-        return str.append("}").toString();
+        return str;
     }
 }

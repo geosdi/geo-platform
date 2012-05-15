@@ -65,39 +65,39 @@ import org.slf4j.LoggerFactory;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class CatalogGetRecordsTest {
-    
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+
     @Test
     public void testWithoutConstraint() throws Exception {
         URL url = new URL("http://ows.provinciatreviso.it/geonetwork/srv/it/csw");
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
-        
+
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-        
+
         request.setTypeName(TypeName.METADATA);
-        
+
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.SUMMARY.toString());
         request.setResultType(ResultType.RESULTS.toString());
-        
+
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
-        
+
         GetRecordsResponseType response = request.getResponse();
-        
+
         SearchResultsType searchResult = response.getSearchResults();
-        
+
         logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}",
                 searchResult.getNumberOfRecordsMatched());
-        
+
         logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}",
                 searchResult.getNumberOfRecordsReturned());
-        
+
         logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}",
                 searchResult.getNextRecord());
-        
+
         List<JAXBElement<? extends AbstractRecordType>> metadata =
                 searchResult.getAbstractRecord();
         if (!metadata.isEmpty()) {
@@ -105,18 +105,18 @@ public class CatalogGetRecordsTest {
                     (SummaryRecordType) (metadata.get(0).getValue()));
         }
     }
-    
+
     @Test
-    public void testTemporalFilterGeomatys() throws Exception {
+    public void testCQLTemporalFilterGeomatys() throws Exception {
         URL url = new URL(
                 "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
-        
+
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-        
+
         request.setTypeName(TypeName.RECORD_V202);
-        
+
         request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
         request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
 
@@ -127,48 +127,48 @@ public class CatalogGetRecordsTest {
         // Time filter
         Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
         Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-        
+
         SimpleDateFormat formatter = new SimpleDateFormat(
                 "yyyy-MM-dd'T'HH:mm:ss'Z'");
-        
+
         str.append(" AND ");
         str.append("TempExtent_begin AFTER ").append(formatter.format(
                 startCalendar.getTime()));
         str.append(" AND ");
         str.append("TempExtent_end BEFORE ").append(formatter.format(
                 endCalendar.getTime()));
-        
+
         request.setConstraint(str.toString());
         logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}",
                 request.getConstraint());
-        
+
         GetRecordsResponseType response = request.getResponse();
-        
+
         SearchResultsType searchResult = response.getSearchResults();
-        
+
         logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
                 searchResult.getNumberOfRecordsMatched());
     }
-    
+
     @Test
     public void testGetRecordsOutputSchema_CSW_RECORD() throws Exception {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(new URL("http://150.146.160.152/geonetwork/"
                 + "srv/en/csw")).build();
-        
+
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-        
+
         request.setTypeName(TypeName.METADATA);
-        
+
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.FULL.toString());
         request.setResultType(ResultType.RESULTS.toString());
-        
+
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
-        
+
         GetRecordsResponseType response = request.getResponse();
-        
+
         List<JAXBElement<? extends AbstractRecordType>> metadata = response.getSearchResults().getAbstractRecord();
         
         for (JAXBElement<? extends AbstractRecordType> element : metadata) {

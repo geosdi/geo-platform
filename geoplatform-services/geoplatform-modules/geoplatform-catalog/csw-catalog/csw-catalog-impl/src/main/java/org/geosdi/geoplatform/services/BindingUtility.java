@@ -38,7 +38,9 @@ package org.geosdi.geoplatform.services;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
+import org.geosdi.geoplatform.gui.responce.BBox;
 import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
+import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
 
 /**
  *
@@ -49,7 +51,7 @@ public class BindingUtility {
     private BindingUtility() {
     }
 
-    public static String convertLiteralListToString(List<JAXBElement<SimpleLiteral>> values) {
+    public static String convertJaxbLiteralListToString(List<JAXBElement<SimpleLiteral>> values) {
         if (values == null || values.isEmpty()) {
             return "";
         }
@@ -57,7 +59,7 @@ public class BindingUtility {
         final StringBuilder str = new StringBuilder();
         for (JAXBElement<SimpleLiteral> elem : values) {
             SimpleLiteral sl = elem.getValue();
-            String value = BindingUtility.stringListToString(sl.getContent());
+            String value = BindingUtility.convertStringListToString(sl.getContent());
             str.append(value).append(",");
         }
 
@@ -67,22 +69,22 @@ public class BindingUtility {
     }
 
     // TODO Tokenizer a single value wrt "," charachter
-    public static List<String> convertLiteralToList(List<SimpleLiteral> values) {
+    public static List<String> convertLiteralListToList(List<SimpleLiteral> values) {
         List<String> stringList = new ArrayList<String>(values.size());
 
         for (SimpleLiteral sl : values) {
-            String value = BindingUtility.stringListToString(sl.getContent());
+            String value = BindingUtility.convertStringListToString(sl.getContent());
             stringList.add(value);
         }
 
         return stringList;
     }
 
-    public static String convertLiteralToString(List<SimpleLiteral> literalList) {
+    public static String convertLiteralListToString(List<SimpleLiteral> values) {
         StringBuilder str = new StringBuilder();
 
-        for (SimpleLiteral sl : literalList) {
-            String value = BindingUtility.stringListToString(sl.getContent());
+        for (SimpleLiteral sl : values) {
+            String value = BindingUtility.convertStringListToString(sl.getContent());
             str.append(value);
         }
 
@@ -91,10 +93,10 @@ public class BindingUtility {
         return str.toString();
     }
 
-    private static String stringListToString(List<String> list) {
+    public static String convertStringListToString(List<String> values) {
         final StringBuilder str = new StringBuilder();
 
-        for (String string : list) {
+        for (String string : values) {
             str.append(string).append(",");
         }
 
@@ -114,5 +116,21 @@ public class BindingUtility {
         }
 
         return str;
+    }
+
+    public static BBox convertBBoxTypeToBBox(BoundingBoxType bBoxType) {
+        if (bBoxType == null) {
+            return null;
+        }
+
+        BBox bBox = new BBox();
+
+        bBox.setMaxX(bBoxType.getLowerCorner().get(0));
+        bBox.setMaxY(bBoxType.getLowerCorner().get(1));
+
+        bBox.setMinX(bBoxType.getUpperCorner().get(0));
+        bBox.setMaxY(bBoxType.getUpperCorner().get(1));
+
+        return bBox;
     }
 }

@@ -33,39 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
+package org.geosdi.geoplatform.responce;
 
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.filter.v110.FilterType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.gui.responce.BBox;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GetRecordsRequestManager {
+@XmlRootElement(name = "FullRecordDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class FullRecordDTO extends SummaryRecordDTO {
 
-    private GetRecordsRequestHandler textSearchRequest; // The first ring of the chain
+    private BBox bBox;
+    private URIDTO uri;
 
-    public GetRecordsRequestManager() {
-        this.createChain();
+    public BBox getBBox() {
+        return bBox;
     }
 
-    private void createChain() {
-        textSearchRequest = new TextSearchRequest();
-        GetRecordsRequestHandler areaSearchRequest = new AreaSearchRequest();
-        GetRecordsRequestHandler timeSearchRequest = new TimeSearchRequest();
-
-        textSearchRequest.setSuccessor(areaSearchRequest);
-        areaSearchRequest.setSuccessor(timeSearchRequest);
+    public void setBBox(BBox bBox) {
+        this.bBox = bBox;
     }
 
-    public void filterGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
-            throws IllegalParameterFault {
+    public URIDTO getUri() {
+        return uri;
+    }
 
-        // Filter request iff there is a catalog finder setted
-        if (request.getCatalogFinder() != null) {
-            textSearchRequest.forwardGetRecordsRequest(request, filterType);
-        }
+    public void setUri(URIDTO uri) {
+        this.uri = uri;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("FullRecordDTO {");
+        str.append(super.toStringBuilder(str));
+        str.append(", bBox=").append(bBox);
+        str.append(", uri=").append(uri);
+        return str.append('}').toString();
     }
 }

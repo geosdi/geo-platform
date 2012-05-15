@@ -59,8 +59,10 @@ import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
+import org.geosdi.geoplatform.responce.URIDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
@@ -69,8 +71,12 @@ import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
+import org.geosdi.geoplatform.xml.csw.v202.RecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
+import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
+import org.geosdi.geoplatform.xml.csw.v202.dc.terms.URI;
+import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -312,6 +318,9 @@ class CSWServiceImpl {
         return response.getSearchResults().getNumberOfRecordsMatched().intValue();
     }
 
+    /**
+     * TODO Factorize source code for search*Records methods.
+     */
     List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
             CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
@@ -338,7 +347,6 @@ class CSWServiceImpl {
                 request.getMaxRecords(), request.getStartPosition());
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
-        logger.trace("\n*** Constraint: \"{}\" ***", request.getConstraint());
         logger.debug("\n*** Records matched: {} *** Records returned: {} *** Record next: {} ***", new Object[]{
                     response.getSearchResults().getNumberOfRecordsMatched(),
                     response.getSearchResults().getNumberOfRecordsReturned(),
@@ -364,6 +372,64 @@ class CSWServiceImpl {
         return this.convertSummaryRecords(summaryRecordList);
     }
 
+    /**
+     * TODO Factorize source code for search*Records methods.
+     * 
+     * Changed wrt searchSummaryRecords:
+     * 1 - ElementSetType.FULL
+     * 2 - Downcast to RecordType
+     */
+    List<FullRecordDTO> searchFullRecords(int num, int start,
+            CatalogFinderBean catalogFinder)
+            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+        logger.trace("\n*** {}", catalogFinder);
+
+        GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
+
+        CatalogGetRecordsRequest<GetRecordsResponseType> request =
+                this.createGetRecordsRequest(server.getServerUrl());
+
+        request.setTypeName(TypeName.METADATA);
+        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setElementSetName(ElementSetType.FULL.value());
+        request.setResultType(ResultType.RESULTS.value());
+
+        request.setConstraintLanguage(ConstraintLanguage.FILTER);
+        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
+        request.setCatalogFinder(catalogFinder);
+
+        // Pagination search
+        request.setMaxRecords(BigInteger.valueOf(num));
+        request.setStartPosition(BigInteger.valueOf(start));
+        logger.debug("\n*** Num: {} *** Start: {} ***",
+                request.getMaxRecords(), request.getStartPosition());
+
+        GetRecordsResponseType response = this.createGetRecordsResponse(request);
+        logger.debug("\n*** Records matched: {} *** Records returned: {} *** Record next: {} ***", new Object[]{
+                    response.getSearchResults().getNumberOfRecordsMatched(),
+                    response.getSearchResults().getNumberOfRecordsReturned(),
+                    response.getSearchResults().getNextRecord()});
+
+        if (response.getSearchResults().getNumberOfRecordsReturned().intValue()
+                != response.getSearchResults().getAbstractRecord().size()) {
+            throw new ServerInternalFault("CSW Catalog Server Error: incorrect number of records, expected "
+                    + response.getSearchResults().getNumberOfRecordsReturned() + " but was "
+                    + response.getSearchResults().getAbstractRecord().size());
+        }
+
+        List<JAXBElement<? extends AbstractRecordType>> records =
+                response.getSearchResults().getAbstractRecord();
+        logger.trace("\n*** Record list size: {} ***", records.size());
+
+        List<RecordType> recordList = new ArrayList<RecordType>(records.size());
+        for (JAXBElement<? extends AbstractRecordType> r : records) {
+            RecordType record = (RecordType) r.getValue();
+            recordList.add(record);
+        }
+
+        return this.convertFullRecords(recordList);
+    }
+
     private GeoPlatformServer getCSWServerByID(Long serverID)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(serverID);
@@ -375,22 +441,73 @@ class CSWServiceImpl {
         return server;
     }
 
-    private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> summaryRecordList) {
-        List<SummaryRecordDTO> summaryRecordListDTO = new ArrayList<SummaryRecordDTO>(summaryRecordList.size());
-        for (SummaryRecordType summaryRecord : summaryRecordList) {
+    private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> recordList) {
+        List<SummaryRecordDTO> recordListDTO = new ArrayList<SummaryRecordDTO>(recordList.size());
+        for (SummaryRecordType record : recordList) {
             SummaryRecordDTO dto = new SummaryRecordDTO();
             dto.setIdentifier(
-                    BindingUtility.convertLiteralListToString(summaryRecord.getIdentifier()));
+                    BindingUtility.convertJaxbLiteralListToString(record.getIdentifier()));
             dto.setTitle(
-                    BindingUtility.convertLiteralListToString(summaryRecord.getTitle()));
+                    BindingUtility.convertJaxbLiteralListToString(record.getTitle()));
             dto.setAbstractText(
-                    BindingUtility.convertLiteralToString(summaryRecord.getAbstract()));
+                    BindingUtility.convertLiteralListToString(record.getAbstract()));
             dto.setSubjects(
-                    BindingUtility.convertLiteralToList(summaryRecord.getSubject()));
+                    BindingUtility.convertLiteralListToList(record.getSubject()));
 
-            summaryRecordListDTO.add(dto);
+            recordListDTO.add(dto);
         }
-        return summaryRecordListDTO;
+        return recordListDTO;
+    }
+
+    private List<FullRecordDTO> convertFullRecords(List<RecordType> recordList) {
+        List<FullRecordDTO> recordListDTO = new ArrayList<FullRecordDTO>(recordList.size());
+        for (RecordType record : recordList) {
+            FullRecordDTO dto = new FullRecordDTO();
+
+            List<JAXBElement<? extends SimpleLiteral>> dcElement = record.getDCElement();
+            for (JAXBElement<? extends SimpleLiteral> element : dcElement) {
+                String localPartElement = element.getName().getLocalPart();
+                List<String> contentElement = element.getValue().getContent();
+
+                if ("identifier".equals(localPartElement)) {
+                    dto.setIdentifier(
+                            BindingUtility.convertStringListToString(contentElement));
+                }
+
+                if ("title".equals(localPartElement)) {
+                    dto.setTitle(
+                            BindingUtility.convertStringListToString(contentElement));
+                }
+
+                if ("abstract".equals(localPartElement)) {
+                    dto.setAbstractText(
+                            BindingUtility.convertStringListToString(contentElement));
+                }
+
+                if ("subject".equals(localPartElement)) {
+                    dto.addSubject(
+                            BindingUtility.convertStringListToString(contentElement));
+                }
+
+                if ("URI".equals(localPartElement)) {
+                    URI uri = (URI) element.getValue();
+
+                    URIDTO uriDTO = new URIDTO();
+                    uriDTO.setProtocol(uri.getProtocol());
+                    uriDTO.setName(uri.getName());
+                    uriDTO.setDescription(uri.getDescription());
+                }
+            }
+
+            if (!record.getBoundingBox().isEmpty()) {
+                BoundingBoxType bBoxType = record.getBoundingBox().get(0).getValue();
+                dto.setBBox(BindingUtility.convertBBoxTypeToBBox(bBoxType));
+            }
+
+            recordListDTO.add(dto);
+        }
+
+        return recordListDTO;
     }
 
     private CatalogGetRecordsRequest<GetRecordsResponseType> createGetRecordsRequest(String serverUrl)

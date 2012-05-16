@@ -320,6 +320,7 @@ class CSWServiceImpl {
 
     /**
      * TODO Factorize source code for search*Records methods.
+     * TODO GMD list.
      */
     List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
             CatalogFinderBean catalogFinder)
@@ -378,6 +379,8 @@ class CSWServiceImpl {
      * Changed wrt searchSummaryRecords:
      * 1 - ElementSetType.FULL
      * 2 - Downcast to RecordType
+     * 
+     * TODO GMD list.
      */
     List<FullRecordDTO> searchFullRecords(int num, int start,
             CatalogFinderBean catalogFinder)
@@ -464,8 +467,7 @@ class CSWServiceImpl {
         for (RecordType record : recordList) {
             FullRecordDTO dto = new FullRecordDTO();
 
-            List<JAXBElement<? extends SimpleLiteral>> dcElement = record.getDCElement();
-            for (JAXBElement<? extends SimpleLiteral> element : dcElement) {
+            for (JAXBElement<? extends SimpleLiteral> element : record.getDCElement()) {
                 String localPartElement = element.getName().getLocalPart();
                 List<String> contentElement = element.getValue().getContent();
 

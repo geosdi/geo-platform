@@ -63,7 +63,6 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
     protected String resultType;
     protected String elementSetName;
     protected TypeName typeName;
-    // The default output format is the MIME type "application/xml"
 
     public CatalogGetRecords(GPServerConnector server) {
         super(server);
@@ -76,15 +75,6 @@ public abstract class CatalogGetRecords<T> extends CatalogCSWRequest<T>
 
     @Override
     public void setConstraintLanguage(ConstraintLanguage constraintLanguage) {
-        // TODO Move guard into createRequest method
-        // ESRI Geoportal Extension Catalog Service doesn't support CQL expression
-        // Also: TODO ESRI support only CSW output schema
-        if (constraintLanguage == ConstraintLanguage.CQL_TEXT
-                && serverURI.toString().toLowerCase().contains("geoportal")) {
-            throw new UnsupportedOperationException("CQL_TEXT constraint language is "
-                    + "not supported from ESRI Geoportal Extension Catalog Service yet. "
-                    + "Use FILTER constraint language.");
-        }
         this.constraintLanguage = constraintLanguage;
     }
 

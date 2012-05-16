@@ -42,7 +42,6 @@ import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
-import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
@@ -94,8 +93,6 @@ public abstract class GetRecordsRequestHandler {
 
         String previousConstraint = request.getConstraint();
         if (previousConstraint == null) {
-            // TODO Check if the constraint language version must be setted for FILTER also
-            request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
             request.setConstraint(followingConstraint);
         } else {
             request.setConstraint(previousConstraint + " AND " + followingConstraint);

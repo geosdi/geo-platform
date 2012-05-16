@@ -80,25 +80,18 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
 
             logger.debug("\n+++ Search text: \"{}\" +++", searchText);
             if (searchText != null) {
-                if (request.getConstraintLanguage() == null) {
-                    throw new IllegalArgumentException("Constraint Language must be setted.");
-                }
-
-                String constraint;
                 switch (request.getConstraintLanguage()) {
                     case FILTER:
                         this.createConstraintFilter(filterType, searchText,
                                 searchTitle, searchAbstract, searchSubjects);
-
                         break;
 
                     case CQL_TEXT:
-                        constraint = this.createConstraintCQL(searchText,
+                        String constraint = this.createConstraintCQL(searchText,
                                 searchTitle, searchAbstract, searchSubjects);
 
                         logger.trace("\n+++ Text constraint: \"{}\" +++", request.getConstraint());
                         super.addCQLConstraint(request, constraint);
-
                         break;
                 }
             }

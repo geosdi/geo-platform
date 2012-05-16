@@ -78,6 +78,8 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
         request.setOutputSchema(outputSchema != null
                 ? outputSchema.toString() : OutputSchema.CSW_V202.toString());
 
+        // The default 'output format' is the MIME type "application/xml"
+
         QueryType query = new QueryType();
         request.setAbstractQuery(query);
 
@@ -94,16 +96,16 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
         FilterType filterType = new FilterType();
         catalogRequestManager.filterGetRecordsRequest(this, filterType);
 
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}", filterType);
+        logger.debug("\n*** {} ***", filterType);
 
-        if (filterType.isSetLogicOps() || filterType.isSetComparisonOps() || filterType.isSetSpatialOps()
+        if (filterType.isSetLogicOps()
+                || filterType.isSetComparisonOps() || filterType.isSetSpatialOps()
                 || constraint != null) {
-            // TODO Check if the constraint language must be setted even if there aren't filter constraint
             if (constraintLanguage == null) {
-                throw new IllegalArgumentException("If 'Constraint' is setted, "
+                throw new IllegalArgumentException(
+                        "If there is at least one filter criteria, "
                         + "'Constraint Language' must not be null.");
             }
-            // TODO Check if the constraint language version must be setted for FILTER also
             if (constraintLanguageVersion == null) {
                 throw new IllegalArgumentException(
                         "'Constraint Language Version' must not be null.");

@@ -47,8 +47,10 @@ import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
+import org.geosdi.geoplatform.gui.responce.BBox;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.server.IGPCatalogFinderService;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -257,9 +259,24 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     private FullRecord convertFullRecordDTO(FullRecordDTO fullRecordDTO) {
         FullRecord fullRecord = this.convertRecordDTO(new FullRecord(), fullRecordDTO);
-        fullRecord.setBBox(fullRecordDTO.getBBox());
+
+        fullRecord.setBBox(this.convertBBoxDTO(fullRecordDTO.getBBox()));
         fullRecord.setUri(fullRecordDTO.getUri());
 
         return fullRecord;
+    }
+
+    private BboxClientInfo convertBBoxDTO(BBox bBox) {
+        if (bBox == null) {
+            return null;
+        }
+
+        BboxClientInfo bBoxClient = new BboxClientInfo();
+        
+        bBoxClient.setLowerLeftX(bBox.getMinX());
+        bBoxClient.setLowerLeftY(bBox.getMinY());
+        bBoxClient.setUpperRightX(bBox.getMaxX());
+        bBoxClient.setUpperRightY(bBox.getMaxY());
+        return bBoxClient;
     }
 }

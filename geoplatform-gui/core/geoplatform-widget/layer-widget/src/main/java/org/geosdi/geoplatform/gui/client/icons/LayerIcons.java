@@ -82,8 +82,17 @@ public interface LayerIcons extends ImageBundle {
     @Resource("kml.png")
     AbstractImagePrototype exportToKML();
 
-    @Resource("vector.png")
+    @Resource("tag.png")
     AbstractImagePrototype exportToGML();
+    
+    @Resource("CSV.png")
+    AbstractImagePrototype exportToCSV();
+    
+    @Resource("json.png")
+    AbstractImagePrototype exportToJSON();
+    
+    @Resource("rss.png")
+    AbstractImagePrototype exportToRSS();
 
     @Resource("pdf.png")
     AbstractImagePrototype exportToPDF();

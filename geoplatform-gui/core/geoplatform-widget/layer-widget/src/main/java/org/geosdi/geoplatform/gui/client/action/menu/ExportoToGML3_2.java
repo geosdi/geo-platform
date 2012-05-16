@@ -16,12 +16,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
-public class ExportoToGML extends MenuAction {
+public class ExportoToGML3_2 extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToGML(TreePanel treePanel) {
-        super("ExportToGML");
+    public ExportoToGML3_2(TreePanel treePanel) {
+        super("ExportToGML3_2");
         this.treePanel = treePanel;
     }
 
@@ -36,7 +36,7 @@ public class ExportoToGML extends MenuAction {
             dataSource = dataSource.replaceAll("wms", "wfs");
             String gmlUrl =
                     dataSource + "?service=WFS&version=1.0.0&request=GetFeature&typeName="
-                    + ((RasterTreeNode) item).getName();
+                    + ((RasterTreeNode) item).getName() + "&maxFeatures=50&outputFormat=text/xml;%20subtype=gml/3.2";
             Window.open(gmlUrl, gmlUrl, gmlUrl);
         }
     }

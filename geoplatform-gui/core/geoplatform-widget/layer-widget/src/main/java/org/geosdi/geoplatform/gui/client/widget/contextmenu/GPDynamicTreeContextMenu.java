@@ -35,13 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.contextmenu;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.CopyLayerAction;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToCSV;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToGML2;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToGML3_1;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToGML3_2;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToGeoJSON;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToGeoRSS;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
@@ -55,6 +56,12 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -64,6 +71,8 @@ public class GPDynamicTreeContextMenu extends Menu {
     private GPTreePanel<GPBeanTreeModel> tree;
     private Menu folderContextMenu = new Menu();
     private Menu layerContextMenu = new Menu();
+    private Menu exportMenu = new Menu();
+
 
     public GPDynamicTreeContextMenu(GPTreePanel tree) {
         this.tree = tree;
@@ -77,42 +86,75 @@ public class GPDynamicTreeContextMenu extends Menu {
         zoomToMaxExtend.setIcon(LayerResources.ICONS.zoomToMaxExtend());
         zoomToMaxExtend.addSelectionListener(new ZoomToLayerExtentAction(tree));
         layerContextMenu.add(zoomToMaxExtend);
-
+        
+        MenuItem export = new MenuItem();
+        export.setText("Export");
+        
         MenuItem exportToKML = new MenuItem();
         exportToKML.setText("Export To KML");
         exportToKML.setIcon(LayerResources.ICONS.exportToKML());
         exportToKML.addSelectionListener(new ExportoToKML(tree));
-        layerContextMenu.add(exportToKML);
+        exportMenu.add(exportToKML);
 
         MenuItem exportToPDF = new MenuItem();
         exportToPDF.setText("Export To PDF");
         exportToPDF.setIcon(LayerResources.ICONS.exportToPDF());
         exportToPDF.addSelectionListener(new ExportoToPDF(tree));
-        layerContextMenu.add(exportToPDF);
+        exportMenu.add(exportToPDF);
 
         MenuItem exportToTIFF = new MenuItem();
         exportToTIFF.setText("Export To TIFF");
         exportToTIFF.setIcon(LayerResources.ICONS.exportToTIFF());
         exportToTIFF.addSelectionListener(new ExportoToTIFF(tree));
-        layerContextMenu.add(exportToTIFF);
+        exportMenu.add(exportToTIFF);
 
 
         MenuItem exportToShpZip = new MenuItem();
         exportToShpZip.setText("Export To Shp-Zip");
         exportToShpZip.setIcon(LayerResources.ICONS.exportToShpZip());
         exportToShpZip.addSelectionListener(new ExportoToShpZip(tree));
-        layerContextMenu.add(exportToShpZip);
+        exportMenu.add(exportToShpZip);
 
         MenuItem layerProperties = new MenuItem();
         layerProperties.setText("Layer Properties");
         layerProperties.setIcon(LayerResources.ICONS.layerProperties());
         layerProperties.addSelectionListener(new ShowLayerPropertiesAction(tree));
 
-//        MenuItem exportToGML = new MenuItem();
-//        exportToGML.setText("Export To GML");
-//        exportToGML.setIcon(LayerResources.ICONS.exportToGML());
-//        exportToGML.addSelectionListener(new ExportoToGML(tree));
-//        contextMenu.add(exportToGML);
+        MenuItem exportToGML2 = new MenuItem();
+        exportToGML2.setText("Export To GML 2");
+        exportToGML2.setIcon(LayerResources.ICONS.exportToGML());
+        exportToGML2.addSelectionListener(new ExportoToGML2(tree));
+        exportMenu.add(exportToGML2);
+        
+        MenuItem exportToGML3_1 = new MenuItem();
+        exportToGML3_1.setText("Export To GML 3.1");
+        exportToGML3_1.setIcon(LayerResources.ICONS.exportToGML());
+        exportToGML3_1.addSelectionListener(new ExportoToGML3_1(tree));
+        exportMenu.add(exportToGML3_1);
+        
+        MenuItem exportToGML3_2 = new MenuItem();
+        exportToGML3_2.setText("Export To GML 3.2");
+        exportToGML3_2.setIcon(LayerResources.ICONS.exportToGML());
+        exportToGML3_2.addSelectionListener(new ExportoToGML3_2(tree));
+        exportMenu.add(exportToGML3_2);
+        
+        MenuItem exportToCSV = new MenuItem();
+        exportToCSV.setText("Export To CSV");
+        exportToCSV.setIcon(LayerResources.ICONS.exportToCSV());
+        exportToCSV.addSelectionListener(new ExportoToCSV(tree));
+        exportMenu.add(exportToCSV);
+        
+        MenuItem exportToGeoJSON = new MenuItem();
+        exportToGeoJSON.setText("Export To GeoJSON");
+        exportToGeoJSON.setIcon(LayerResources.ICONS.exportToJSON());
+        exportToGeoJSON.addSelectionListener(new ExportoToGeoJSON(tree));
+        exportMenu.add(exportToGeoJSON);
+        
+        MenuItem exportToRSS = new MenuItem();
+        exportToRSS.setText("Export To RSS");
+        exportToRSS.setIcon(LayerResources.ICONS.exportToRSS());
+        exportToRSS.addSelectionListener(new ExportoToGeoRSS(tree));
+        exportMenu.add(exportToRSS);
 
         MenuItem pasteMenuItem = new MenuItem("Paste in Folder");
         pasteMenuItem.setIcon(LayerResources.ICONS.paste());
@@ -132,6 +174,10 @@ public class GPDynamicTreeContextMenu extends Menu {
         copyMenuItem.addSelectionListener(new CopyLayerAction(tree, pasteAction, pasteMenuItem));
         layerContextMenu.add(copyMenuItem);
         layerContextMenu.add(layerProperties);
+        
+        
+        export.setSubMenu(exportMenu);
+        layerContextMenu.add(export);
 
         this.tree.setContextMenu(this.layerContextMenu);
 

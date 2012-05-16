@@ -72,42 +72,42 @@ public abstract class AbstractRecord extends GeoPlatformBeanModel {
      * @return the title
      */
     public String getTitle() {
-        return super.get(SummaryRecord.RecordKeyValue.TITLE.toString());
+        return super.get(RecordKeyValue.TITLE.toString());
     }
 
     /**
      * @param title the title to set
      */
     public void setTitle(String title) {
-        super.set(SummaryRecord.RecordKeyValue.TITLE.toString(), title);
+        super.set(RecordKeyValue.TITLE.toString(), title);
     }
 
     /**
      * @return the abstractText
      */
     public String getAbstractText() {
-        return super.get(SummaryRecord.RecordKeyValue.ABSTRACT_TEXT.toString());
+        return super.get(RecordKeyValue.ABSTRACT_TEXT.toString());
     }
 
     /**
      * @param abstractText the abstractText to set
      */
     public void setAbstractText(String abstractText) {
-        super.set(SummaryRecord.RecordKeyValue.ABSTRACT_TEXT.toString(), abstractText);
+        super.set(RecordKeyValue.ABSTRACT_TEXT.toString(), abstractText);
     }
 
     /**
      * @return the subjects
      */
     public List<String> getSubjects() {
-        return super.get(SummaryRecord.RecordKeyValue.SUBJECTS.toString());
+        return super.get(RecordKeyValue.SUBJECTS.toString());
     }
 
     /**
      * @param subjects the subjects to set
      */
     public void setSubjects(List<String> subjects) {
-        super.set(SummaryRecord.RecordKeyValue.SUBJECTS.toString(), subjects);
+        super.set(RecordKeyValue.SUBJECTS.toString(), subjects);
     }
 
     @Override
@@ -118,9 +118,9 @@ public abstract class AbstractRecord extends GeoPlatformBeanModel {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final SummaryRecord other = (SummaryRecord) obj;
-        if ((this.identifier == null) ? (other.identifier != null) : !this.identifier.equals(
-                other.identifier)) {
+        final AbstractRecord other = (AbstractRecord) obj;
+        if ((this.identifier == null) ? (other.identifier != null)
+                : !this.identifier.equals(other.identifier)) {
             return false;
         }
         return true;

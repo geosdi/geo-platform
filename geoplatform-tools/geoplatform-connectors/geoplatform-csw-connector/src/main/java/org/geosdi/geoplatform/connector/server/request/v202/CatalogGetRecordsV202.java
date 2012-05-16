@@ -79,6 +79,7 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
                 ? outputSchema.toString() : OutputSchema.CSW_V202.toString());
 
         // The default 'output format' is the MIME type "application/xml"
+        request.setOutputFormat("application/xml");
 
         QueryType query = new QueryType();
         request.setAbstractQuery(query);

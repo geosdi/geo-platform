@@ -36,10 +36,14 @@
 package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
+import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
 /**
@@ -63,11 +67,36 @@ public class TimeSearchRequest extends GetRecordsRequestHandler {
             Date endDate = timeInfo.getEndDate();
             logger.debug("\n+++ From: {} - To: {} +++", startDate, endDate);
 
-            String timeConstraint = this.createCQLTimePredicate(startDate, endDate);
-            logger.trace("\n+++ Time constraint: \"{}\" +++", timeConstraint);
+            switch (request.getConstraintLanguage()) {
+                case FILTER:
+                    List<JAXBElement<?>> timePredicate = this.createFilterTimePredicate(
+                            startDate, endDate);
 
-            super.addCQLConstraint(request, timeConstraint);
+                    logger.trace("\n+++ Time filter: \"{}\" +++", timePredicate);
+                    super.addFilterConstraint(request, filterType, timePredicate);
+                    break;
+
+                case CQL_TEXT:
+                    String timeConstraint = this.createCQLTimePredicate(startDate, endDate);
+
+                    logger.trace("\n+++ Time CQL constraint: \"{}\" +++", timeConstraint);
+                    super.addCQLConstraint(request, timeConstraint);
+                    break;
+            }
         }
+    }
+
+    private List<JAXBElement<?>> createFilterTimePredicate(Date startDate, Date endDate) {
+        BinaryComparisonOpType begin = this.createBinaryComparisonOpType(
+                "TempExtent_begin", formatter.format(startDate));
+        BinaryComparisonOpType end = this.createBinaryComparisonOpType(
+                "TempExtent_end", formatter.format(endDate));
+
+        List<JAXBElement<?>> timePredicate = new ArrayList<JAXBElement<?>>(2);
+        timePredicate.add(filterFactory.createPropertyIsGreaterThanOrEqualTo(begin));
+        timePredicate.add(filterFactory.createPropertyIsLessThanOrEqualTo(end));
+
+        return timePredicate;
     }
 
     /**

@@ -43,8 +43,6 @@ import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
-import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
-import org.geosdi.geoplatform.xml.filter.v110.ComparisonOpsType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyIsLikeType;
@@ -82,15 +80,19 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
             if (searchText != null) {
                 switch (request.getConstraintLanguage()) {
                     case FILTER:
-                        this.createConstraintFilter(filterType, searchText,
+                        List<JAXBElement<?>> textPredicate =
+                                this.createFilterTextPredicate(searchText,
                                 searchTitle, searchAbstract, searchSubjects);
+
+                        logger.trace("\n+++ Text filter: \"{}\" +++", textPredicate);
+                        super.addFilterConstraint(request, filterType, textPredicate);
                         break;
 
                     case CQL_TEXT:
-                        String constraint = this.createConstraintCQL(searchText,
+                        String constraint = this.createCQLTextPredicate(searchText,
                                 searchTitle, searchAbstract, searchSubjects);
 
-                        logger.trace("\n+++ Text constraint: \"{}\" +++", request.getConstraint());
+                        logger.trace("\n+++ Text CQL constraint: \"{}\" +++", request.getConstraint());
                         super.addCQLConstraint(request, constraint);
                         break;
                 }
@@ -98,8 +100,10 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
         }
     }
 
-    private void createConstraintFilter(FilterType filterType, String searchText,
+    private List<JAXBElement<?>> createFilterTextPredicate(String searchText,
             boolean searchTitle, boolean searchAbstract, boolean searchSubjects) {
+
+        List<JAXBElement<?>> textPredicate = new ArrayList<JAXBElement<?>>(3);
 
         String searchTextLike = "%" + searchText + "%";
 
@@ -107,42 +111,32 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
             PropertyIsLikeType anytextIsLikeType = this.createPropertyIsLikeType(
                     ANYTEXT, searchTextLike);
 
-            filterType.setComparisonOps(filterFactory.createPropertyIsLike(anytextIsLikeType));
+            textPredicate.add(filterFactory.createPropertyIsLike(anytextIsLikeType));
 
         } else {
-            List<JAXBElement<? extends ComparisonOpsType>> propertyList =
-                    new ArrayList<JAXBElement<? extends ComparisonOpsType>>(3);
-
             if (searchTitle) {
                 PropertyIsLikeType titleIsLikeType = this.createPropertyIsLikeType(
                         TITLE, searchTextLike);
 
-                propertyList.add(filterFactory.createPropertyIsLike(titleIsLikeType));
+                textPredicate.add(filterFactory.createPropertyIsLike(titleIsLikeType));
             }
 
             if (searchAbstract) {
                 PropertyIsLikeType abstractIsLikeType = this.createPropertyIsLikeType(
                         ABSTRACT, searchTextLike);
 
-                propertyList.add(filterFactory.createPropertyIsLike(abstractIsLikeType));
+                textPredicate.add(filterFactory.createPropertyIsLike(abstractIsLikeType));
             }
 
             if (searchSubjects) {
                 BinaryComparisonOpType subjectIsEqualTo = this.createBinaryComparisonOpType(
                         SUBJECT, searchText);
 
-                propertyList.add(filterFactory.createPropertyIsEqualTo(subjectIsEqualTo));
-            }
-
-            if (propertyList.size() == 1) {
-                filterType.setComparisonOps(propertyList.get(0));
-            } else {
-                BinaryLogicOpType binary = new BinaryLogicOpType();
-
-                binary.setComparisonOpsOrSpatialOpsOrLogicOps(new ArrayList<JAXBElement<?>>(propertyList));
+                textPredicate.add(filterFactory.createPropertyIsEqualTo(subjectIsEqualTo));
             }
         }
 
+        return textPredicate;
     }
 
     private PropertyIsLikeType createPropertyIsLikeType(String propertyName, String literal) {
@@ -163,7 +157,7 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
         return propertyIsLikeType;
     }
 
-    private String createConstraintCQL(String searchText,
+    private String createCQLTextPredicate(String searchText,
             boolean searchTitle, boolean searchAbstract, boolean searchSubjects) {
 
         StringBuilder constraint = new StringBuilder();

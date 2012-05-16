@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.filter.v110.BinaryComparisonOpType;
+import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
@@ -83,6 +84,26 @@ public abstract class GetRecordsRequestHandler {
     protected abstract void processGetRecordsRequest(
             CatalogGetRecordsRequest request, FilterType filterType)
             throws IllegalParameterFault;
+
+    protected void addFilterConstraint(CatalogGetRecordsRequest request,
+            FilterType filterType, List<JAXBElement<?>> filterPredicates) {
+
+        if (request.getConstraintLanguage() != ConstraintLanguage.FILTER) {
+            throw new IllegalArgumentException("Constraint Language must be CQL_TEXT.");
+        }
+
+        if (!filterType.isSetLogicOps()) {
+            BinaryLogicOpType binary = new BinaryLogicOpType();
+            binary.setComparisonOpsOrSpatialOpsOrLogicOps(filterPredicates);
+
+            filterType.setLogicOps(filterFactory.createAnd(binary));
+        } else {
+            BinaryLogicOpType binary = (BinaryLogicOpType) filterType.getLogicOps().getValue();
+            List<JAXBElement<?>> andCriteria = binary.getComparisonOpsOrSpatialOpsOrLogicOps();
+
+            andCriteria.addAll(filterPredicates);
+        }
+    }
 
     protected void addCQLConstraint(CatalogGetRecordsRequest request,
             String followingConstraint) {

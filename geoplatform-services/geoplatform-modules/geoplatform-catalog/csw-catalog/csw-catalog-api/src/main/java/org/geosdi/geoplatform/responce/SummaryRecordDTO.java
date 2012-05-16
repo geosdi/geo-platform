@@ -35,83 +35,25 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
- *
+ * Summary Record DTO for CSW request.
+ * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "SummaryRecordDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso(FullRecordDTO.class)
-public class SummaryRecordDTO {
+public class SummaryRecordDTO extends AbstractRecordDTO {
 
-    private String identifier;
-    private String title;
-    private String abstractText;
-    @XmlElementWrapper(name = "subjectList")
-    @XmlElement(name = "subject")
-    private List<String> subjects;
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAbstractText() {
-        return abstractText;
-    }
-
-    public void setAbstractText(String abstractText) {
-        this.abstractText = abstractText;
-    }
-
-    public List<String> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<String> subjects) {
-        this.subjects = subjects;
-    }
-
-    public void addSubject(String subject) {
-        if (subjects == null) {
-            subjects = new ArrayList<String>();
-        }
-
-        subjects.add(subject);
-    }
+    private static final long serialVersionUID = 5716626526434053690L;
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("SummaryRecordDTO {");
-        str.append(this.toStringBuilder(str));
+        str.append(super.toStringBuilder(str));
         return str.append("}").toString();
-    }
-
-    protected StringBuilder toStringBuilder(StringBuilder str) {
-        str.append("identifier=").append(identifier);
-        str.append(", title=").append(title);
-        str.append(", abstractText=").append(abstractText);
-        str.append(", subjects=").append(subjects);
-        return str;
     }
 }

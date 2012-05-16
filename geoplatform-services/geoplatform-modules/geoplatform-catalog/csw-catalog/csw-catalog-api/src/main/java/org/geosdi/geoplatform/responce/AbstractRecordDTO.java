@@ -35,48 +35,75 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import org.geosdi.geoplatform.gui.responce.URIDTO;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.gui.responce.BBox;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Full Record DTO for CSW request.
+ * Abstract Record DTO for CSW request.
  * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "FullRecordDTO")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class FullRecordDTO extends AbstractRecordDTO {
+@XmlTransient
+public abstract class AbstractRecordDTO implements Serializable {
 
-    private static final long serialVersionUID = -4843440136860067550L;
+    private static final long serialVersionUID = 8229785485262331251L;
     //
-    private BBox bBox;
-    private URIDTO uri;
+    private String identifier;
+    private String title;
+    private String abstractText;
+    @XmlElementWrapper(name = "subjectList")
+    @XmlElement(name = "subject")
+    private List<String> subjects;
 
-    public BBox getBBox() {
-        return bBox;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setBBox(BBox bBox) {
-        this.bBox = bBox;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
-    public URIDTO getUri() {
-        return uri;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUri(URIDTO uri) {
-        this.uri = uri;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder("FullRecordDTO {");
-        str.append(super.toStringBuilder(str));
-        str.append(", bBox=").append(bBox);
-        str.append(", uri=").append(uri);
-        return str.append('}').toString();
+    public String getAbstractText() {
+        return abstractText;
+    }
+
+    public void setAbstractText(String abstractText) {
+        this.abstractText = abstractText;
+    }
+
+    public List<String> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<String> subjects) {
+        this.subjects = subjects;
+    }
+
+    public void addSubject(String subject) {
+        if (subjects == null) {
+            subjects = new ArrayList<String>();
+        }
+
+        subjects.add(subject);
+    }
+
+    protected StringBuilder toStringBuilder(StringBuilder str) {
+        str.append("identifier=").append(identifier);
+        str.append(", title=").append(title);
+        str.append(", abstractText=").append(abstractText);
+        str.append(", subjects=").append(subjects);
+        return str;
     }
 }

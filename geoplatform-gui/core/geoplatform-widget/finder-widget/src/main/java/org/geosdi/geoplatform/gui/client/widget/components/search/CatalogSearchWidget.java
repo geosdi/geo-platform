@@ -48,7 +48,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.SummaryRecordsContainer;
+import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -63,7 +63,7 @@ public class CatalogSearchWidget extends LayoutContainer
         implements ActionEnableHandler {
 
     private TextInfo textInfo;
-    private SummaryRecordsContainer summaryRecordsContainer;
+    private RecordsContainer recordsContainer;
     private EventBus bus;
     //
     private TextField<String> searchTextField;
@@ -76,10 +76,10 @@ public class CatalogSearchWidget extends LayoutContainer
 
     @Inject
     public CatalogSearchWidget(TextInfo theTextInfo,
-            SummaryRecordsContainer theSummaryRecordsContainer,
+            RecordsContainer theRecordsContainer,
             EventBus theBus) {
         this.textInfo = theTextInfo;
-        summaryRecordsContainer = theSummaryRecordsContainer;
+        recordsContainer = theRecordsContainer;
         bus = theBus;
         bus.addHandler(ActionEnableEvent.TYPE, this);
 
@@ -143,7 +143,7 @@ public class CatalogSearchWidget extends LayoutContainer
                 textInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
                 textInfo.setSearchSubjects(subjectsCheckbox.getValue().booleanValue());
                 // Performing the search
-                summaryRecordsContainer.searchSummaryRecords();
+                recordsContainer.searchRecords();
             }
         });
         searchButton.setStyleAttribute("margin-left", "20px");
@@ -243,6 +243,6 @@ public class CatalogSearchWidget extends LayoutContainer
 
     public void reset() {
         searchTextField.clear();
-        summaryRecordsContainer.reset();
+        recordsContainer.reset();
     }
 }

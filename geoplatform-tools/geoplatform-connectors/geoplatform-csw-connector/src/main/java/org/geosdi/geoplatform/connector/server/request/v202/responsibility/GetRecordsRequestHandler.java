@@ -92,6 +92,7 @@ public abstract class GetRecordsRequestHandler {
             throw new IllegalArgumentException("Constraint Language must be CQL_TEXT.");
         }
 
+        // Add all predicats always in AND (even if there is one)
         if (!filterType.isSetLogicOps()) {
             BinaryLogicOpType binary = new BinaryLogicOpType();
             binary.setComparisonOpsOrSpatialOpsOrLogicOps(filterPredicates);

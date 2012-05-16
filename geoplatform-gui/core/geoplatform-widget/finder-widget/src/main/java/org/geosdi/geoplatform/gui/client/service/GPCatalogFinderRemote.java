@@ -41,6 +41,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
@@ -67,8 +68,8 @@ public interface GPCatalogFinderRemote extends RemoteService {
 
     ArrayList<GPCSWServerBeanModel> getAllCSWServers();
 
-    PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config,
-                                                            String searchText)
+    PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
+            PagingLoadConfig config, String searchText)
             throws GeoPlatformException;
 
     GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
@@ -77,6 +78,10 @@ public interface GPCatalogFinderRemote extends RemoteService {
     boolean deleteServerCSW(Long serverID) throws GeoPlatformException;
 
     PagingLoadResult<SummaryRecord> searchSummaryRecords(
+            PagingLoadConfig config, CatalogFinderBean catalogFinder)
+            throws GeoPlatformException;
+
+    PagingLoadResult<FullRecord> searchFullRecords(
             PagingLoadConfig config, CatalogFinderBean catalogFinder)
             throws GeoPlatformException;
 }

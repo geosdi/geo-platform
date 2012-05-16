@@ -62,7 +62,7 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
-import org.geosdi.geoplatform.responce.URIDTO;
+import org.geosdi.geoplatform.gui.responce.URIDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
 import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
@@ -295,7 +295,7 @@ class CSWServiceImpl {
         return serverUrl;
     }
 
-    int getSummaryRecordsCount(CatalogFinderBean catalogFinder)
+    int getRecordsCount(CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         logger.trace("\n*** {}", catalogFinder);
 

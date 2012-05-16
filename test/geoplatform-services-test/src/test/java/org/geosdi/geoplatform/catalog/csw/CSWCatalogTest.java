@@ -350,7 +350,7 @@ public class CSWCatalogTest {
     public void testGetRecordsOurCount() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         catalogFinder.getTextInfo().setText("land");
 
-        Assert.assertTrue(cswService.getSummaryRecordsCount(catalogFinder) > 0);
+        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
     }
 
     @Test
@@ -377,7 +377,7 @@ public class CSWCatalogTest {
         catalogFinder.getTextInfo().setText("wms");
 
         int num = 10;
-        int recordsMatched = cswService.getSummaryRecordsCount(catalogFinder);
+        int recordsMatched = cswService.getRecordsCount(catalogFinder);
         Assert.assertTrue(recordsMatched > 0);
         logger.debug("\n*** Records matched: {} *** Result for page: {} ***",
                 recordsMatched, num);
@@ -414,7 +414,7 @@ public class CSWCatalogTest {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("limiti");
 
-        Assert.assertTrue(cswService.getSummaryRecordsCount(catalogFinder) > 0);
+        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
     }
 
     @Test
@@ -425,7 +425,7 @@ public class CSWCatalogTest {
         catalogFinder.getTextInfo().setSearchAbstract(false);
         catalogFinder.getTextInfo().setSearchSubjects(false);
 
-        Assert.assertTrue(cswService.getSummaryRecordsCount(catalogFinder) > 0);
+        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
     }
 
     @Test
@@ -436,7 +436,7 @@ public class CSWCatalogTest {
         catalogFinder.getTextInfo().setSearchAbstract(true);
         catalogFinder.getTextInfo().setSearchSubjects(false);
 
-        Assert.assertTrue(cswService.getSummaryRecordsCount(catalogFinder) > 0);
+        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
     }
 
     @Test
@@ -447,7 +447,7 @@ public class CSWCatalogTest {
         catalogFinder.getTextInfo().setSearchAbstract(false);
         catalogFinder.getTextInfo().setSearchSubjects(true);
 
-        Assert.assertEquals(0, cswService.getSummaryRecordsCount(catalogFinder));
+        Assert.assertEquals(0, cswService.getRecordsCount(catalogFinder));
     }
 
     @Test
@@ -461,7 +461,7 @@ public class CSWCatalogTest {
 
         catalogFinder.setServerID(serverID);
 
-        int count = cswService.getSummaryRecordsCount(catalogFinder);
+        int count = cswService.getRecordsCount(catalogFinder);
         Assert.assertTrue(count > 0);
 
         Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
@@ -470,7 +470,7 @@ public class CSWCatalogTest {
         catalogFinder.getTimeInfo().setStartDate(startCalendar.getTime());
         catalogFinder.getTimeInfo().setEndDate(endCalendar.getTime());
 
-        Assert.assertTrue(count > cswService.getSummaryRecordsCount(catalogFinder));
+        Assert.assertTrue(count > cswService.getRecordsCount(catalogFinder));
 
         // Delete the server
         boolean deleted = cswService.deleteServerCSW(serverID);

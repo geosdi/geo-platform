@@ -41,7 +41,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.SummaryRecordsContainer;
+import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -51,14 +51,14 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class CatalogSearchResultWidget extends LayoutContainer {
 
-    private SummaryRecordsContainer summaryRecordsContainer;
+    private RecordsContainer recordsContainer;
     //
     private TreePanel<GPBeanTreeModel> tree; // TODO Inject via GIN
 
     @Inject
-    public CatalogSearchResultWidget(SummaryRecordsContainer theSummaryRecordsContainer) {
-         summaryRecordsContainer = theSummaryRecordsContainer;
-        
+    public CatalogSearchResultWidget(RecordsContainer theRecordsContainer) {
+        recordsContainer = theRecordsContainer;
+
         super.setStyleAttribute("padding", "10px");
     }
 
@@ -74,7 +74,7 @@ public class CatalogSearchResultWidget extends LayoutContainer {
 
         add(resultLabel);
 
-        add(summaryRecordsContainer);
+        add(recordsContainer);
 
         if (tree != null) {  // Widgets for add layers to the tree
             Label operationLabel = new Label("Operations with selected");

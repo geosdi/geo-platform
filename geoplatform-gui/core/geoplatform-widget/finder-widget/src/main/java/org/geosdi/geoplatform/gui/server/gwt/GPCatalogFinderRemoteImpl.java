@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.server.gwt;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -61,8 +62,7 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
 
     @Override
     public ArrayList<GPCSWServerBeanModel> getAllCSWServers() {
-        return gpCatalogFinderService.getAllCSWServers(
-                super.getThreadLocalRequest());
+        return gpCatalogFinderService.getAllCSWServers(super.getThreadLocalRequest());
     }
 
     @Override
@@ -70,27 +70,35 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
             PagingLoadConfig config, String searchText)
             throws GeoPlatformException {
         return gpCatalogFinderService.searchCSWServers(config, searchText,
-                                                       super.getThreadLocalRequest());
+                super.getThreadLocalRequest());
     }
 
     @Override
     public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
             throws GeoPlatformException {
         return gpCatalogFinderService.saveServerCSW(alias, serverUrl,
-                                                    super.getThreadLocalRequest());
+                super.getThreadLocalRequest());
     }
 
     @Override
     public boolean deleteServerCSW(Long serverID) throws GeoPlatformException {
         return gpCatalogFinderService.deleteServerCSW(serverID,
-                                                      super.getThreadLocalRequest());
+                super.getThreadLocalRequest());
     }
 
     @Override
     public PagingLoadResult<SummaryRecord> searchSummaryRecords(PagingLoadConfig config,
-                                                                CatalogFinderBean catalogFinder)
+            CatalogFinderBean catalogFinder)
             throws GeoPlatformException {
         return gpCatalogFinderService.searchSummaryRecords(config, catalogFinder,
-                                                           super.getThreadLocalRequest());
+                super.getThreadLocalRequest());
+    }
+
+    @Override
+    public PagingLoadResult<FullRecord> searchFullRecords(PagingLoadConfig config,
+            CatalogFinderBean catalogFinder)
+            throws GeoPlatformException {
+        return gpCatalogFinderService.searchFullRecords(config, catalogFinder,
+                super.getThreadLocalRequest());
     }
 }

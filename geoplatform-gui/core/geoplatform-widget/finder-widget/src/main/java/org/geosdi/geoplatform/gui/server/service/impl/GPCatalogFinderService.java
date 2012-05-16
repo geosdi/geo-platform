@@ -44,6 +44,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
+import org.geosdi.geoplatform.gui.client.model.AbstractRecord;
+import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
@@ -51,6 +53,8 @@ import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.server.IGPCatalogFinderService;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.AbstractRecordDTO;
+import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
@@ -152,7 +156,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         int recordsCount;
         ArrayList<SummaryRecord> searchRecords;
         try {
-            recordsCount = geoPlatformCSWClient.getSummaryRecordsCount(catalogFinder);
+            recordsCount = geoPlatformCSWClient.getRecordsCount(catalogFinder);
 
             List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(
                     config.getLimit(), config.getOffset() + 1, catalogFinder);
@@ -181,6 +185,44 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
                 config.getOffset(), recordsCount);
     }
 
+    @Override
+    public PagingLoadResult<FullRecord> searchFullRecords(
+            PagingLoadConfig config, CatalogFinderBean catalogFinder,
+            HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+
+        int recordsCount;
+        ArrayList<FullRecord> searchRecords;
+        try {
+            recordsCount = geoPlatformCSWClient.getRecordsCount(catalogFinder);
+
+            List<FullRecordDTO> recordList = geoPlatformCSWClient.searchFullRecords(
+                    config.getLimit(), config.getOffset() + 1, catalogFinder);
+            if (recordList == null) {
+                logger.info("\n*** No Record ***");
+                throw new GeoPlatformException("There are no results"); // TODO Create empty list
+            }
+
+            searchRecords = new ArrayList<FullRecord>(recordList.size());
+            for (FullRecordDTO recordDTO : recordList) {
+                searchRecords.add(this.convertFullRecordDTO(recordDTO));
+            }
+
+        } catch (IllegalParameterFault ex) {
+            logger.error("\n*** " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("\n*** " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        } catch (ServerInternalFault ex) {
+            logger.error("\n*** " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        }
+
+        return new BasePagingLoadResult<FullRecord>(searchRecords,
+                config.getOffset(), recordsCount);
+    }
+
     /**
      * @param geoPlatformCSWService the geoPlatformCSWService to set
      */
@@ -200,13 +242,24 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         return server;
     }
 
-    private SummaryRecord convertSummaryRecordDTO(SummaryRecordDTO summaryRecordDTO) {
-        SummaryRecord summaryRecord = new SummaryRecord();
-        summaryRecord.setIdentifier(summaryRecordDTO.getIdentifier());
-        summaryRecord.setTitle(summaryRecordDTO.getTitle());
-        summaryRecord.setAbstractText(summaryRecordDTO.getAbstractText());
-        summaryRecord.setSubjects(summaryRecordDTO.getSubjects());
+    private <R extends AbstractRecord> R convertRecordDTO(R record, AbstractRecordDTO recordDTO) {
+        record.setIdentifier(recordDTO.getIdentifier());
+        record.setTitle(recordDTO.getTitle());
+        record.setAbstractText(recordDTO.getAbstractText());
+        record.setSubjects(recordDTO.getSubjects());
 
-        return summaryRecord;
+        return record;
+    }
+
+    private SummaryRecord convertSummaryRecordDTO(SummaryRecordDTO summaryRecordDTO) {
+        return this.convertRecordDTO(new SummaryRecord(), summaryRecordDTO);
+    }
+
+    private FullRecord convertFullRecordDTO(FullRecordDTO fullRecordDTO) {
+        FullRecord fullRecord = this.convertRecordDTO(new FullRecord(), fullRecordDTO);
+        fullRecord.setBBox(fullRecordDTO.getBBox());
+        fullRecord.setUri(fullRecordDTO.getUri());
+
+        return fullRecord;
     }
 }

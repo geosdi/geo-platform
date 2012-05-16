@@ -33,54 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.gui.client.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.gui.responce.BBox;
+import org.geosdi.geoplatform.gui.responce.URIDTO;
 
 /**
- *
+ * Full Record for CSW request.
+ * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "URIDTO")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class URIDTO {
+public class FullRecord extends AbstractRecord {
 
-    private String protocol;
-    private String name;
-    private String description;
+    private static final long serialVersionUID = 7344635200928287521L;
 
-    public String getDescription() {
-        return description;
+    public enum FullRecordKeyValue {
+
+        BBOX, URI;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public BBox getBBox() {
+        return super.get(FullRecordKeyValue.BBOX.toString());
     }
 
-    public String getName() {
-        return name;
+    public void setBBox(BBox bBox) {
+        super.set(FullRecordKeyValue.BBOX.toString(), bBox);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public URIDTO getUri() {
+        return super.get(FullRecordKeyValue.URI.toString());
     }
 
-    public String getProtocol() {
-        return protocol;
-    }
-
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
+    public void setUri(URIDTO uri) {
+        super.set(FullRecordKeyValue.URI.toString(), uri);
     }
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("URIDTO {");
-        str.append("protocol=").append(protocol);
-        str.append(", name=").append(name);
-        str.append(", description=").append(description);
-        return str.append("}").toString();
+        StringBuilder str = new StringBuilder("FullRecord {");
+        str.append(super.toStringBuilder(str));
+        str.append(", bBox =").append(this.getBBox());
+        str.append(", uri =").append(this.getUri());
+        return str.append('}').toString();
     }
 }

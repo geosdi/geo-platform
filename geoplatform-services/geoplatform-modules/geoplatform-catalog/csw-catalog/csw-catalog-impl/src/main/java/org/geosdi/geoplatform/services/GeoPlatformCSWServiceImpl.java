@@ -140,9 +140,9 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public int getSummaryRecordsCount(CatalogFinderBean catalogFinder)
+    public int getRecordsCount(CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
-        return cswServiceDelegate.getSummaryRecordsCount(catalogFinder);
+        return cswServiceDelegate.getRecordsCount(catalogFinder);
     }
 
     @Override

@@ -33,50 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.gui.responce;
 
-import org.geosdi.geoplatform.gui.responce.URIDTO;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.gui.responce.BBox;
+import java.io.Serializable;
 
 /**
- * Full Record DTO for CSW request.
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "FullRecordDTO")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class FullRecordDTO extends AbstractRecordDTO {
+public class URIDTO implements Serializable {
 
-    private static final long serialVersionUID = -4843440136860067550L;
+    private static final long serialVersionUID = 595309414544566850L;
     //
-    private BBox bBox;
-    private URIDTO uri;
+    private String protocol;
+    private String name;
+    private String description;
 
-    public BBox getBBox() {
-        return bBox;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBBox(BBox bBox) {
-        this.bBox = bBox;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public URIDTO getUri() {
-        return uri;
+    public String getName() {
+        return name;
     }
 
-    public void setUri(URIDTO uri) {
-        this.uri = uri;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
     }
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("FullRecordDTO {");
-        str.append(super.toStringBuilder(str));
-        str.append(", bBox=").append(bBox);
-        str.append(", uri=").append(uri);
-        return str.append('}').toString();
+        StringBuilder str = new StringBuilder("URIDTO {");
+        str.append("protocol=").append(protocol);
+        str.append(", name=").append(name);
+        str.append(", description=").append(description);
+        return str.append("}").toString();
     }
 }

@@ -54,8 +54,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
-import org.geosdi.geoplatform.gui.client.model.SummaryRecord.SummaryRecordKeyValue;
+import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
+import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
@@ -68,16 +68,16 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class SummaryRecordsContainer
-        extends GridLayoutPaginationContainer<SummaryRecord> {
+public class RecordsContainer
+        extends GridLayoutPaginationContainer<FullRecord> {
 
     private CatalogFinderBean catalogFinder;
     //
-    private CheckBoxSelectionModel<SummaryRecord> sm;
+    private CheckBoxSelectionModel<FullRecord> records;
     private RowExpander rowExpander;
 
     @Inject
-    public SummaryRecordsContainer(CatalogFinderBean theCatalogFinder) {
+    public RecordsContainer(CatalogFinderBean theCatalogFinder) {
         super(true, 10);
         catalogFinder = theCatalogFinder;
 
@@ -92,10 +92,10 @@ public class SummaryRecordsContainer
         super.widget.getView().setForceFit(true);
 //        super.widget.setLoadMask(true);
 
-        super.widget.setSelectionModel(this.sm);
+        super.widget.setSelectionModel(this.records);
 
         super.widget.addPlugin(this.rowExpander);
-        super.widget.addPlugin(this.sm);
+        super.widget.addPlugin(this.records);
     }
 
     @Override
@@ -114,16 +114,16 @@ public class SummaryRecordsContainer
         configs.add(rowExpander);
 
         ColumnConfig titleColumn = new ColumnConfig();
-        titleColumn.setId(SummaryRecordKeyValue.TITLE.toString());
+        titleColumn.setId(RecordKeyValue.TITLE.toString());
         titleColumn.setHeader("Title");
         titleColumn.setWidth(490);
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
         configs.add(titleColumn);
 
-        this.sm = new CheckBoxSelectionModel<SummaryRecord>();
-        sm.setSelectionMode(SelectionMode.MULTI);
-        configs.add(sm.getColumn());
+        this.records = new CheckBoxSelectionModel<FullRecord>();
+        records.setSelectionMode(SelectionMode.MULTI);
+        configs.add(records.getColumn());
 
 
         return new ColumnModel(configs);
@@ -133,20 +133,20 @@ public class SummaryRecordsContainer
     public void createStore() {
         super.toolBar = new PagingToolBar(super.getPageSize());
 
-        super.proxy = new RpcProxy<PagingLoadResult<SummaryRecord>>() {
+        super.proxy = new RpcProxy<PagingLoadResult<FullRecord>>() {
 
             @Override
             protected void load(Object loadConfig,
-                    AsyncCallback<PagingLoadResult<SummaryRecord>> callback) {
-                GPCatalogFinderRemoteImpl.Util.getInstance().searchSummaryRecords(
+                    AsyncCallback<PagingLoadResult<FullRecord>> callback) {
+                GPCatalogFinderRemoteImpl.Util.getInstance().searchFullRecords(
                         (PagingLoadConfig) loadConfig, catalogFinder, callback);
             }
         };
 
-        super.loader = new BasePagingLoader<PagingLoadResult<SummaryRecord>>(proxy);
+        super.loader = new BasePagingLoader<PagingLoadResult<FullRecord>>(proxy);
         super.loader.setRemoteSort(false);
 
-        super.store = new ListStore<SummaryRecord>(loader);
+        super.store = new ListStore<FullRecord>(loader);
 //        super.store.setMonitorChanges(true);
 
         super.toolBar.bind(loader);
@@ -159,7 +159,7 @@ public class SummaryRecordsContainer
 
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
-                widget.mask("Loading Summary Records");
+                widget.mask("Loading Records");
             }
 
             @Override
@@ -169,7 +169,7 @@ public class SummaryRecordsContainer
                 }
                 widget.unmask();
                 // TODO Set status message on main windows
-                System.out.println("\n*** Summary Records correctly loaded ***");
+                System.out.println("\n*** Records correctly loaded ***");
             }
 
             @Override
@@ -187,7 +187,7 @@ public class SummaryRecordsContainer
         });
     }
 
-    public void searchSummaryRecords() {
+    public void searchRecords() {
         super.loader.load();
     }
 

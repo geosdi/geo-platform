@@ -68,42 +68,42 @@ import org.gwtopenmaps.openlayers.client.event.MapZoomListener;
  * giuseppe.lascaleia@geosdi.org
  */
 public class CatalogFinderInjectorModule extends AbstractGinModule {
-    
+
     @Override
     protected void configure() {
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
-        
+
         bind(SearchTabItem.class).in(Singleton.class);
-        
+
         bind(MetadataTabItem.class).in(Singleton.class);
-        
-        bind(AreaInfo.class).toProvider(AreaInfoProvider.class).in(
-                Singleton.class);
-        
-        bind(TextInfo.class).toProvider(SearchInfoProvider.class).in(
-                Singleton.class);
-        
-        bind(TimeInfo.class).toProvider(TemporalInfoProvider.class).in(
-                Singleton.class);
-        
-        bind(MapZoomListener.class).toProvider(CatalogMapListenerProvider.class).in(
-                Singleton.class);
-        
+
+        bind(AreaInfo.class).toProvider(AreaInfoProvider.class).
+                in(Singleton.class);
+
+        bind(TextInfo.class).toProvider(SearchInfoProvider.class).
+                in(Singleton.class);
+
+        bind(TimeInfo.class).toProvider(TemporalInfoProvider.class).
+                in(Singleton.class);
+
+        bind(MapZoomListener.class).toProvider(CatalogMapListenerProvider.class).
+                in(Singleton.class);
+
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
-        
-        bind(MapWidget.class).
-                toProvider(CatalogMapWidgetProvider.class).in(Singleton.class);
-        
+
+        bind(MapWidget.class).toProvider(
+                CatalogMapWidgetProvider.class).in(Singleton.class);
+
         bind(CatalogBBoxComponent.class).toProvider(
                 CatalogBBoxComponentProvider.class).in(Singleton.class);
-        
+
         bind(CatalogComboBoxComponent.class).toProvider(
                 CatalogComboBoxComponentProvider.class).in(Singleton.class);
-        
+
         bind(CatalogCheckBoxComponent.class).toProvider(
                 CatalogCheckBoxComponentProvider.class).in(Singleton.class);
-        
-        bind(CatalogFinderBean.class).toProvider(CatalogFinderBeanProvider.class).in(
-                Singleton.class);
+
+        bind(CatalogFinderBean.class).toProvider(
+                CatalogFinderBeanProvider.class).in(Singleton.class);
     }
 }

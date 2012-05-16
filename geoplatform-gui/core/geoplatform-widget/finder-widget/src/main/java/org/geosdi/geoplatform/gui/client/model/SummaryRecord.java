@@ -35,111 +35,20 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import java.util.List;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
-
 /**
- *
+ * Summary Record for CSW request.
+ * 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class SummaryRecord extends GeoPlatformBeanModel {
+public class SummaryRecord extends AbstractRecord {
 
     private static final long serialVersionUID = 3666223900734438298L;
-    //
-    private String identifier;
-
-    public enum SummaryRecordKeyValue {
-
-        TITLE, ABSTRACT_TEXT, SUBJECTS;
-    }
-
-    /**
-     * @return the identifier
-     */
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    /**
-     * @param identifier the identifier to set
-     */
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
-
-    /**
-     * @return the title
-     */
-    public String getTitle() {
-        return super.get(SummaryRecordKeyValue.TITLE.toString());
-    }
-
-    /**
-     * @param title the title to set
-     */
-    public void setTitle(String title) {
-        super.set(SummaryRecordKeyValue.TITLE.toString(), title);
-    }
-
-    /**
-     * @return the abstractText
-     */
-    public String getAbstractText() {
-        return super.get(SummaryRecordKeyValue.ABSTRACT_TEXT.toString());
-    }
-
-    /**
-     * @param abstractText the abstractText to set
-     */
-    public void setAbstractText(String abstractText) {
-        super.set(SummaryRecordKeyValue.ABSTRACT_TEXT.toString(), abstractText);
-    }
-
-    /**
-     * @return the subjects
-     */
-    public List<String> getSubjects() {
-        return super.get(SummaryRecordKeyValue.SUBJECTS.toString());
-    }
-
-    /**
-     * @param subjects the subjects to set
-     */
-    public void setSubjects(List<String> subjects) {
-        super.set(SummaryRecordKeyValue.SUBJECTS.toString(), subjects);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final SummaryRecord other = (SummaryRecord) obj;
-        if ((this.identifier == null) ? (other.identifier != null) : !this.identifier.equals(
-                other.identifier)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + (this.identifier != null ? this.identifier.hashCode() : 0);
-        return hash;
-    }
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("SummaryRecord {");
-        str.append("identifier = ").append(identifier);
-        str.append(", title = ").append(getTitle());
-        str.append(", abstract =").append(getAbstractText());
-        str.append(", subjects = ").append(getSubjects());
+        str.append(super.toStringBuilder(str));
         return str.append('}').toString();
     }
 }

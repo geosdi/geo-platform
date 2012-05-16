@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
@@ -52,13 +53,16 @@ public interface GPCatalogFinderRemoteAsync {
     void getAllCSWServers(AsyncCallback<ArrayList<GPCSWServerBeanModel>> callback);
 
     void searchCSWServers(PagingLoadConfig config, String searchText,
-                          AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback);
+            AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback);
 
     void saveServerCSW(String alias, String serverUrl,
-                       AsyncCallback<GPCSWServerBeanModel> callback);
+            AsyncCallback<GPCSWServerBeanModel> callback);
 
     void deleteServerCSW(Long serverID, AsyncCallback<Boolean> callback);
 
     void searchSummaryRecords(PagingLoadConfig config, CatalogFinderBean catalogFinder,
-                              AsyncCallback<PagingLoadResult<SummaryRecord>> callback);
+            AsyncCallback<PagingLoadResult<SummaryRecord>> callback);
+
+    void searchFullRecords(PagingLoadConfig config, CatalogFinderBean catalogFinder,
+            AsyncCallback<PagingLoadResult<FullRecord>> callback);
 }

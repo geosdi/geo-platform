@@ -43,7 +43,7 @@ package org.geosdi.geoplatform.gui.configuration.map.client;
 public enum GPCoordinateReferenceSystem {
 
     WGS_84("EPSG:4326"),
-    GOOGLE_MERCATOR("EPSG:900913");
+    GOOGLE_MERCATOR("EPSG:3857");
     //
     private String code;
 

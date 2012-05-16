@@ -129,7 +129,7 @@ public class MapControlManager {
         MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
                 wkt).getJSObject());
         geom.transform(new Projection("EPSG:4326"), new Projection(
-                "EPSG:900913"));
+                "EPSG:3857"));
         VectorFeature vectorFeature = new VectorFeature(geom);
         this.vector.addFeature(vectorFeature);
         this.map.zoomToExtent(geom.getBounds());

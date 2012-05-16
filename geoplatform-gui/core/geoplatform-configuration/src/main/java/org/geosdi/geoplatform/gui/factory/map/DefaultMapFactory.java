@@ -71,9 +71,9 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
     public MapWidget createMap(String width, String height, GPBaseLayer baseLayer) {
         MapOptions defaultMapOptions = new MapOptions();
 
-        defaultMapOptions.setNumZoomLevels(18);
+        defaultMapOptions.setNumZoomLevels(25);
 
-        defaultMapOptions.setProjection("EPSG:900913");
+        defaultMapOptions.setProjection("EPSG:3857");
         defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
         defaultMapOptions.setUnits(MapUnits.METERS);
 

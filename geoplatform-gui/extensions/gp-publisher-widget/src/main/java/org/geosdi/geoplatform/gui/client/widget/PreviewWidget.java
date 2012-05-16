@@ -52,7 +52,7 @@ public class PreviewWidget extends GPMapPreviewWidget {
     public MapOptions createMapPreviewOption() {
         MapOptions defaultMapOptions = new MapOptions();
         defaultMapOptions.setNumZoomLevels(18);
-        defaultMapOptions.setProjection("EPSG:900913");
+        defaultMapOptions.setProjection("EPSG:3857");
         defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
         defaultMapOptions.setUnits(MapUnits.METERS);
         defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,

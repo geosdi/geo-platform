@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.responce.BBox;
@@ -266,12 +266,12 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         return fullRecord;
     }
 
-    private BboxClientInfo convertBBoxDTO(BBox bBox) {
+    private BBoxClientInfo convertBBoxDTO(BBox bBox) {
         if (bBox == null) {
             return null;
         }
 
-        BboxClientInfo bBoxClient = new BboxClientInfo();
+        BBoxClientInfo bBoxClient = new BBoxClientInfo();
         
         bBoxClient.setLowerLeftX(bBox.getMinX());
         bBoxClient.setLowerLeftY(bBox.getMinY());

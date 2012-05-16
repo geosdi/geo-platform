@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.model.server;
 
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
@@ -80,7 +80,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     private String abstractText;
     private String dataSource;
     private String crs;
-    private BboxClientInfo bbox;
+    private BBoxClientInfo bbox;
     private GPLayerType layerType;
     private ArrayList<GPStyleStringBeanModel> styles;
 
@@ -228,7 +228,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
      * @return the bbox
      */
     @Override
-    public BboxClientInfo getBbox() {
+    public BBoxClientInfo getBbox() {
         return bbox;
     }
 
@@ -237,7 +237,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
      *          the bbox to set
      */
     @Override
-    public void setBbox(BboxClientInfo bbox) {
+    public void setBbox(BBoxClientInfo bbox) {
         this.bbox = bbox;
     }
 

@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
 import java.io.Serializable;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,7 +55,7 @@ public abstract class GPLayerClientInfo implements Serializable,
     private String abstractText;
     private String dataSource;
     private String crs;
-    private BboxClientInfo bbox;
+    private BBoxClientInfo bbox;
     private GPLayerType layerType;
     private int zIndex;
     private boolean checked;
@@ -167,7 +167,7 @@ public abstract class GPLayerClientInfo implements Serializable,
     /**
      * @return the bbox
      */
-    public BboxClientInfo getBbox() {
+    public BBoxClientInfo getBbox() {
         return bbox;
     }
 
@@ -175,7 +175,7 @@ public abstract class GPLayerClientInfo implements Serializable,
      * @param bbox
      *            the bbox to set
      */
-    public void setBbox(BboxClientInfo bbox) {
+    public void setBbox(BBoxClientInfo bbox) {
         this.bbox = bbox;
     }
 

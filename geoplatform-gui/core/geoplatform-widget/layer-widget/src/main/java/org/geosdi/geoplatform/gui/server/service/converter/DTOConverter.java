@@ -53,7 +53,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
@@ -185,8 +185,8 @@ public class DTOConverter {
         return folder;
     }
 
-    private BboxClientInfo convertBbox(GPBBox gpBbox) {
-        return new BboxClientInfo(gpBbox.getMinX(), gpBbox.getMinY(),
+    private BBoxClientInfo convertBbox(GPBBox gpBbox) {
+        return new BBoxClientInfo(gpBbox.getMinX(), gpBbox.getMinY(),
                 gpBbox.getMaxX(), gpBbox.getMaxY());
     }
 

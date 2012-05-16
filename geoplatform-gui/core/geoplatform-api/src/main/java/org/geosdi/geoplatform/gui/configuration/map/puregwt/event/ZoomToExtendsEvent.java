@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.configuration.map.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 
 /**
  *
@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientIn
 public class ZoomToExtendsEvent extends GwtEvent<GPMapToolsHandler> {
 
     private String crs;
-    private BboxClientInfo bbox;
+    private BBoxClientInfo bbox;
 
     @Override
     public Type<GPMapToolsHandler> getAssociatedType() {
@@ -63,7 +63,7 @@ public class ZoomToExtendsEvent extends GwtEvent<GPMapToolsHandler> {
     /**
      * @param bbox the bbox to set
      */
-    public void setBbox(BboxClientInfo bbox) {
+    public void setBbox(BBoxClientInfo bbox) {
         this.bbox = bbox;
     }
 

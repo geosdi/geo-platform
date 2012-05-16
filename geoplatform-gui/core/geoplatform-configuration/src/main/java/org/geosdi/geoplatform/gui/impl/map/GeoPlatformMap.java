@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.impl.map;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
@@ -53,5 +53,5 @@ public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
 
     public IGeoPlatofomMapButtonBar getButtonBar();
 
-    public void zoomToMaxExtend(BboxClientInfo bbox, String crs);
+    public void zoomToMaxExtend(BBoxClientInfo bbox, String crs);
 }

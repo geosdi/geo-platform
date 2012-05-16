@@ -42,7 +42,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.persistence.Transient;
 import name.pehl.piriti.json.client.JsonReader;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
@@ -80,7 +80,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     @Transient
     private String abstractText;
     @Transient
-    private BboxClientInfo bbox;
+    private BBoxClientInfo bbox;
     @Transient
     private GPLayerType layerType;
 
@@ -88,7 +88,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     }
 
     public PreviewLayer(String label, String title, String name, String abstractText,
-            String dataSource, String crs, BboxClientInfo bbox, GPLayerType layerType,
+            String dataSource, String crs, BBoxClientInfo bbox, GPLayerType layerType,
             String styleName, boolean isShape) {
         this.label = label;
         this.title = title;
@@ -234,15 +234,15 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     }
 
     @Override
-    public BboxClientInfo getBbox() {
+    public BBoxClientInfo getBbox() {
         if (this.bbox == null) {
-            this.bbox = new BboxClientInfo(this.lowerX, this.lowerY, this.upperX, this.upperY);
+            this.bbox = new BBoxClientInfo(this.lowerX, this.lowerY, this.upperX, this.upperY);
         }
         return this.bbox;
     }
 
     @Override
-    public void setBbox(BboxClientInfo bbox) {
+    public void setBbox(BBoxClientInfo bbox) {
         this.bbox = bbox;
     }
 

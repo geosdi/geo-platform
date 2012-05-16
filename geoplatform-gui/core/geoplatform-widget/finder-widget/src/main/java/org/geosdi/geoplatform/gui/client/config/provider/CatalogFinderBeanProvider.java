@@ -49,24 +49,24 @@ import org.geosdi.geoplatform.gui.responce.TimeInfo;
  */
 public class CatalogFinderBeanProvider implements Provider<CatalogFinderBean> {
 
-    private AreaInfo bboxInfo;
-    private TextInfo searchInfo;
-    private TimeInfo temporalInfo;
+    private AreaInfo areaInfo;
+    private TextInfo textInfo;
+    private TimeInfo timeInfo;
 
     @Inject
-    public CatalogFinderBeanProvider(AreaInfo bboxInfo, TextInfo searchInfo,
-            TimeInfo temporalInfo) {
-        this.bboxInfo = bboxInfo;
-        this.searchInfo = searchInfo;
-        this.temporalInfo = temporalInfo;
+    public CatalogFinderBeanProvider(AreaInfo areaInfo, TextInfo textInfo,
+            TimeInfo timeInfo) {
+        this.areaInfo = areaInfo;
+        this.textInfo = textInfo;
+        this.timeInfo = timeInfo;
     }
 
     @Override
     public CatalogFinderBean get() {
         CatalogFinderBean catalogFinderBean = new CatalogFinderBean();
-        catalogFinderBean.setAreaInfo(bboxInfo);
-        catalogFinderBean.setTextInfo(searchInfo);
-        catalogFinderBean.setTimeInfo(temporalInfo);
+        catalogFinderBean.setAreaInfo(areaInfo);
+        catalogFinderBean.setTextInfo(textInfo);
+        catalogFinderBean.setTimeInfo(timeInfo);
 
         return catalogFinderBean;
     }

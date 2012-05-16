@@ -40,7 +40,7 @@ import java.util.Collection;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
@@ -163,7 +163,7 @@ public class DTOServerConverter {
         raster.setLayerType(GPLayerType.RASTER);
         raster.setDataSource(layer.getUrlServer());
         if (layer.getBbox() != null) {
-            raster.setBbox(new BboxClientInfo(layer.getBbox().getMinX(),
+            raster.setBbox(new BBoxClientInfo(layer.getBbox().getMinX(),
                     layer.getBbox().getMinY(), layer.getBbox().getMaxX(),
                     layer.getBbox().getMaxY()));
             raster.setCrs(layer.getSrs());

@@ -33,7 +33,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="-180" />
                 <property name="lowerLeftY" value="-90" />
                 <property name="upperRightX" value="180" />
@@ -56,7 +56,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6.104" />
                 <property name="lowerLeftY" value="35.546" />
                 <property name="upperRightX" value="18.846" />
@@ -84,7 +84,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6" />
                 <property name="lowerLeftY" value="35" />
                 <property name="upperRightX" value="19" />
@@ -107,7 +107,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="5.267" />
                 <property name="lowerLeftY" value="33.02" />
                 <property name="upperRightX" value="22.921" />
@@ -130,7 +130,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6.256" />
                 <property name="lowerLeftY" value="34.893" />
                 <property name="upperRightX" value="20.193" />
@@ -153,7 +153,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6.342" />
                 <property name="lowerLeftY" value="35.095" />
                 <property name="upperRightX" value="19.003" />
@@ -176,7 +176,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="7.488" />
                 <property name="lowerLeftY" value="43.748" />
                 <property name="upperRightX" value="10.083" />
@@ -199,7 +199,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="13.915" />
                 <property name="lowerLeftY" value="41.349" />
                 <property name="upperRightX" value="15.167" />
@@ -222,7 +222,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="10.406" />
                 <property name="lowerLeftY" value="45.64" />
                 <property name="upperRightX" value="11.973" />
@@ -244,7 +244,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="11.413" />
                 <property name="lowerLeftY" value="40.766" />
                 <property name="upperRightX" value="14.083" />
@@ -262,7 +262,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="9.696" />
                 <property name="lowerLeftY" value="43.027" />
                 <property name="upperRightX" value="11.243" />
@@ -280,7 +280,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="9.696" />
                 <property name="lowerLeftY" value="43.027" />
                 <property name="upperRightX" value="11.243" />
@@ -298,7 +298,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="7.362" />
                 <property name="lowerLeftY" value="35.503" />
                 <property name="upperRightX" value="18.29" />
@@ -316,7 +316,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="9.696" />
                 <property name="lowerLeftY" value="43.027" />
                 <property name="upperRightX" value="11.243" />
@@ -334,7 +334,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6.682" />
                 <property name="lowerLeftY" value="36.708" />
                 <property name="upperRightX" value="18.481" />
@@ -352,7 +352,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6.634" />
                 <property name="lowerLeftY" value="36.649" />
                 <property name="upperRightX" value="18.521" />
@@ -370,7 +370,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6.628" />
                 <property name="lowerLeftY" value="36.64" />
                 <property name="upperRightX" value="18.523" />
@@ -388,7 +388,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6.626" />
                 <property name="lowerLeftY" value="35.86" />
                 <property name="upperRightX" value="18.52" />
@@ -407,7 +407,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6.627" />
                 <property name="lowerLeftY" value="35.492" />
                 <property name="upperRightX" value="18.521" />
@@ -425,7 +425,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="6.627" />
                 <property name="lowerLeftY" value="35.492" />
                 <property name="upperRightX" value="18.521" />
@@ -443,7 +443,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo">
                 <property name="lowerLeftX" value="-33.762" />
                 <property name="lowerLeftY" value="27.804" />
                 <property name="upperRightX" value="44.885" />

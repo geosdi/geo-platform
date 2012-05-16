@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -526,7 +526,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
      * @param bbox
      */
     @Override
-    public void zoomToMaxExtend(BboxClientInfo bbox, String crs) {
+    public void zoomToMaxExtend(BBoxClientInfo bbox, String crs) {
         Bounds b = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
                 bbox.getUpperRightX(), bbox.getUpperRightY());
         if (!map.getProjection().equals(crs)) {

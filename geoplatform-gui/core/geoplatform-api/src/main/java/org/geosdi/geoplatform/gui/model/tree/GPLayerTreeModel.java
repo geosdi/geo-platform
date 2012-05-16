@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.model.tree;
 
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -82,7 +82,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     private String abstractText;
     private String dataSource;
     private String crs;
-    private BboxClientInfo bbox;
+    private BBoxClientInfo bbox;
     private GPLayerType layerType;
     private ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
     //
@@ -223,7 +223,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
      * @return the bbox
      */
     @Override
-    public BboxClientInfo getBbox() {
+    public BBoxClientInfo getBbox() {
         return bbox;
     }
 
@@ -232,7 +232,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
      * the bbox to set
      */
     @Override
-    public void setBbox(BboxClientInfo bbox) {
+    public void setBbox(BBoxClientInfo bbox) {
         this.bbox = bbox;
     }
 

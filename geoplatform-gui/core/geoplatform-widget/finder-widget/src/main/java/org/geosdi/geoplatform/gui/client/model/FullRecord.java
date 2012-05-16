@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
 
 /**
@@ -52,11 +52,11 @@ public class FullRecord extends AbstractRecord {
         BBOX, URI;
     }
 
-    public BboxClientInfo getBBox() {
+    public BBoxClientInfo getBBox() {
         return super.get(FullRecordKeyValue.BBOX.toString());
     }
 
-    public void setBBox(BboxClientInfo bBox) {
+    public void setBBox(BBoxClientInfo bBox) {
         super.set(FullRecordKeyValue.BBOX.toString(), bBox);
     }
 

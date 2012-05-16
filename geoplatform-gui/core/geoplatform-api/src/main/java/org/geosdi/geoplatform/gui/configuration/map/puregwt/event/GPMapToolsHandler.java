@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.configuration.map.puregwt.event;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.model.scale.GPScaleBean;
 
 /**
@@ -52,7 +52,7 @@ public interface GPMapToolsHandler extends EventHandler {
     
     void onScaleSelectionChange(GPScaleBean value);
     
-    void onZoomToMaxExtend(BboxClientInfo bbox, String crs);
+    void onZoomToMaxExtend(BBoxClientInfo bbox, String crs);
     
     void onManageGraticuleTool(boolean activation);
 }

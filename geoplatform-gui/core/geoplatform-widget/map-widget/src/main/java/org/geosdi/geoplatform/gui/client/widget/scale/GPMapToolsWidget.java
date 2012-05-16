@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.scale;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.GPMapToolsHandler;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -70,7 +70,7 @@ public class GPMapToolsWidget implements GPMapToolsHandler {
     }
 
     @Override
-    public void onZoomToMaxExtend(BboxClientInfo bbox, String crs) {
+    public void onZoomToMaxExtend(BBoxClientInfo bbox, String crs) {
         this.geoPlatformMap.zoomToMaxExtend(bbox, crs);
     }
 

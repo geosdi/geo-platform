@@ -42,7 +42,7 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class BboxClientInfo implements Serializable {
+public class BBoxClientInfo implements Serializable {
 
     private static final long serialVersionUID = -6733851739584878237L;
     //
@@ -51,10 +51,10 @@ public class BboxClientInfo implements Serializable {
     private double upperRightX;
     private double upperRightY;
 
-    public BboxClientInfo() {
+    public BBoxClientInfo() {
     }
 
-    public BboxClientInfo(double lowerLeftX, double lowerLeftY, double upperRightX, double upperRightY) {
+    public BBoxClientInfo(double lowerLeftX, double lowerLeftY, double upperRightX, double upperRightY) {
         this.lowerLeftX = lowerLeftX;
         this.lowerLeftY = lowerLeftY;
         this.upperRightX = upperRightX;
@@ -128,7 +128,7 @@ public class BboxClientInfo implements Serializable {
      */
     @Override
     public String toString() {
-        return "BboxClientInfo [lowerLeftX=" + lowerLeftX + ", lowerLeftY="
+        return "BBoxClientInfo [lowerLeftX=" + lowerLeftX + ", lowerLeftY="
                 + lowerLeftY + ", upperRightX=" + upperRightX
                 + ", upperRightY=" + upperRightY + "]";
     }

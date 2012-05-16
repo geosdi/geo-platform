@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.model;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
@@ -80,9 +80,9 @@ public interface GPLayerBean extends ModelData {
 
     public void setCrs(String crs);
 
-    public BboxClientInfo getBbox();
+    public BBoxClientInfo getBbox();
 
-    public void setBbox(BboxClientInfo bbox);
+    public void setBbox(BBoxClientInfo bbox);
 
     public GPLayerType getLayerType();
 

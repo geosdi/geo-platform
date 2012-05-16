@@ -70,7 +70,7 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.form.WmsUrlStatus.EnumWmsUrlStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -421,10 +421,10 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         return urlEncoding.substring(0, urlEncoding.indexOf("?"));
     }
 
-    private BboxClientInfo mapBbox() {
+    private BBoxClientInfo mapBbox() {
         String[] coordinates = fieldMap.get(GetMap.BBOX.toString()).split(",");
 
-        BboxClientInfo bbox = new BboxClientInfo();
+        BBoxClientInfo bbox = new BBoxClientInfo();
         bbox.setLowerLeftX(Double.parseDouble(coordinates[0]));
         bbox.setLowerLeftY(Double.parseDouble(coordinates[1]));
         bbox.setUpperRightX(Double.parseDouble(coordinates[2]));

@@ -54,7 +54,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public interface LayerRemoteAsync {
 
@@ -119,6 +119,8 @@ public interface LayerRemoteAsync {
     void updateProject(GPClientProject project, AsyncCallback<?> callback)
             throws GeoPlatformException;
 
-    void deleteProject(Long projectID,
+    void deleteProject(Long projectID, AsyncCallback<?> callback) throws GeoPlatformException;
+
+    void setLayerRefreshTime(String layerUUID, int secondToRefresh,
             AsyncCallback<?> callback) throws GeoPlatformException;
 }

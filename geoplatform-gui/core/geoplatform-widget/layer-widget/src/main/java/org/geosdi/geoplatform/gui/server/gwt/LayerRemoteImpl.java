@@ -57,7 +57,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
         implements LayerRemote {
@@ -201,5 +201,10 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Override
     public void deleteProject(Long projectID) throws GeoPlatformException {
         this.layerService.deleteProject(projectID, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public void setLayerRefreshTime(String layerUUID, int secondToRefresh) throws GeoPlatformException {
+        this.layerService.setLayerRefreshTime(layerUUID, secondToRefresh, super.getThreadLocalRequest());
     }
 }

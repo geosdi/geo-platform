@@ -67,7 +67,7 @@ public class GeoPlatformTrackingClient implements InitializingBean {
         factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingOutInterceptor());
         factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
 
-        factory.setServiceClass(GPPublisherService.class);
+        factory.setServiceClass(GPTrackingService.class);
 
         factory.setAddress(this.address);
 
@@ -99,7 +99,7 @@ public class GeoPlatformTrackingClient implements InitializingBean {
     /**
      * @return the client
      */
-    public GPTrackingService getPublishService() {
+    public GPTrackingService getTrackingService() {
         return trackingService;
     }
 }

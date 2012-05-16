@@ -17,7 +17,7 @@
         <property name="address" value="${webservice_publisher_endpoint_address}" />
     </bean>
     
-    <bean id="geoPlatformTrackingClient" class="org.geosdi.geoplatform.cxf.GeoPlatformPublishClient">
+    <bean id="geoPlatformTrackingClient" class="org.geosdi.geoplatform.cxf.GeoPlatformTrackingClient">
         <property name="address" value="${webservice_tracking_endpoint_address}" />
     </bean>
 

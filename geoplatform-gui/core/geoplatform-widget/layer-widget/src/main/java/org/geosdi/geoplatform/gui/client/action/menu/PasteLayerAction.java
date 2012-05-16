@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
@@ -71,7 +72,7 @@ public class PasteLayerAction extends MenuAction {
     public void componentSelected(MenuEvent ce) {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         if ((!(itemSelected instanceof FolderTreeNode)) || this.layerToCopy == null) {
-            throw new IllegalArgumentException("It is possible to copy only copied layer into a Folder");
+            throw new IllegalArgumentException("It is possible to past only copied layer into a Folder");
         }
         if (!this.treePanel.isExpanded(itemSelected)) {
             this.folderExpander.checkNodeState();
@@ -81,7 +82,7 @@ public class PasteLayerAction extends MenuAction {
     }
 
     private void executePaste() {
-        List<GPLayerBean> layerList = new ArrayList<GPLayerBean>();
+        List<GPLayerBean> layerList = Lists.newArrayList();
         layerList.add(layerToCopy);
         if (layerToCopy instanceof RasterTreeNode) {
             LayerHandlerManager.fireEvent(new AddRasterFromCopyMenuEvent(layerList));

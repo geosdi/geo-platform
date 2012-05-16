@@ -216,7 +216,8 @@ public class PublisherService implements IPublisherService {
     }
 
     /**
-     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     * 
+     * @param geoPlatformPublishClient 
      */
     @Autowired
     public void setGeoPlatformPublishClient(

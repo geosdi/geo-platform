@@ -47,6 +47,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.cxf.GeoPlatformTrackingClient;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -82,7 +84,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 @Service("layerService")
 public class LayerService implements ILayerService {
@@ -90,6 +92,7 @@ public class LayerService implements ILayerService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService geoPlatformServiceClient;
+    private GeoPlatformTrackingClient geoPlatformTrackingClient;
     //
     @Autowired
     private DTOConverter dtoConverter;
@@ -104,6 +107,12 @@ public class LayerService implements ILayerService {
     public void setGeoPlatformServiceClient(
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
+
+    @Autowired
+    public void setGeoPlatformTrackingClient(
+            @Qualifier("geoPlatformTrackingClient") GeoPlatformTrackingClient geoPlatformTrackingClient) {
+        this.geoPlatformTrackingClient = geoPlatformTrackingClient;
     }
 
     @Override
@@ -681,6 +690,25 @@ public class LayerService implements ILayerService {
         } catch (ResourceNotFoundFault rnf) {
             logger.error("Failed to Delete project on SecurityService: " + rnf);
             throw new GeoPlatformException(rnf);
+        }
+    }
+
+    @Override
+    public void setLayerRefreshTime(String layerUUID, int secondToRefresh, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        try {
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            if (account instanceof GPUser) {
+                String username = ((GPUser) account).getUsername();
+                if (secondToRefresh > 0) {
+                    logger.debug("Request to subscribe layer refresh for: " + username + " - " + layerUUID);
+                    this.geoPlatformTrackingClient.getTrackingService().subscribeLayerNotification(username, layerUUID, secondToRefresh);
+                } else if (account instanceof GPUser) {
+                    logger.debug("Request to UNsubscribe layer refresh for: " + username + " - " + layerUUID);
+                    this.geoPlatformTrackingClient.getTrackingService().unscribeLayerNotification(username, layerUUID);
+                }
+            }
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
         }
     }
 }

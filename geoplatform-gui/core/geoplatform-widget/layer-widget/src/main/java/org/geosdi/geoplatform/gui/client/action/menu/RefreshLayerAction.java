@@ -1,0 +1,99 @@
+/*
+ *  geo-platform
+ *  Rich webgis framework
+ *  http://geo-platform.org
+ * ====================================================================
+ *
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
+ *
+ * ====================================================================
+ *
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ *
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
+ *
+ */
+package org.geosdi.geoplatform.gui.client.action.menu;
+
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
+import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue.LayerRefreshTimeEnum;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+
+/**
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
+ */
+public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTimeValue> {
+
+    private GPTreePanel<GPBeanTreeModel> treePanel;
+    private Menu menu;
+
+    public RefreshLayerAction(GPTreePanel<GPBeanTreeModel> treePanel, Menu layerContextMenu) {
+        this.treePanel = treePanel;
+        this.menu = layerContextMenu;
+    }
+
+    @Override
+    public void selectionChanged(SelectionChangedEvent<LayerRefreshTimeValue> se) {
+        GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
+        if (!(itemSelected instanceof GPLayerTreeModel)) {
+            throw new IllegalArgumentException("It is possible to refresh only layers");
+        }
+        final LayerRefreshTimeEnum refreshTimeEnum = se.getSelectedItem().get(LayerRefreshTimeValue.REFRESH_TIME_KEY);
+        LayerRemote.Util.getInstance().setLayerRefreshTime(itemSelected.getUUID(),
+                refreshTimeEnum.getValue(), new AsyncCallback<Object>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage("Error Reloading",
+                                "An error occurred while making the requested connection.\n"
+                                + "Verify network connections and try again."
+                                + "\nIf the problem persists contact your system administrator.");
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Error setting the reload time",
+                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                        System.out.println("Error setting the reload time for layer: " + caught.toString()
+                                + " data: " + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        "The Layer will be reloaded every " + refreshTimeEnum.getValue() + " seconds",
+                        SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                menu.hide();
+                //Cambiare icona al layer
+            }
+        });
+    }
+}

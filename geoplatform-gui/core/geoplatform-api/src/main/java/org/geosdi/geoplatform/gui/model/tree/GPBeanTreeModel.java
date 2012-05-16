@@ -48,8 +48,8 @@ import org.geosdi.geoplatform.gui.model.UUIDGenerator;
  */
 public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
-    private static final long serialVersionUID = 2095233644130779285L;
-    private final String UUID = UUIDGenerator.uuid();
+    private static final long serialVersionUID = 6717337287606067389L;
+    private String UUID = UUIDGenerator.uuid();
     private Long id;
     private String label;
     private int zIndex;

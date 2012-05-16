@@ -59,8 +59,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import org.geosdi.geoplatform.gui.client.action.menu.*;
+import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -72,7 +76,7 @@ public class GPDynamicTreeContextMenu extends Menu {
     private Menu folderContextMenu = new Menu();
     private Menu layerContextMenu = new Menu();
     private Menu exportMenu = new Menu();
-
+    private ComboBox refreshTimeComboBox;
 
     public GPDynamicTreeContextMenu(GPTreePanel tree) {
         this.tree = tree;
@@ -86,10 +90,10 @@ public class GPDynamicTreeContextMenu extends Menu {
         zoomToMaxExtend.setIcon(LayerResources.ICONS.zoomToMaxExtend());
         zoomToMaxExtend.addSelectionListener(new ZoomToLayerExtentAction(tree));
         layerContextMenu.add(zoomToMaxExtend);
-        
+
         MenuItem export = new MenuItem();
         export.setText("Export");
-        
+
         MenuItem exportToKML = new MenuItem();
         exportToKML.setText("Export To KML");
         exportToKML.setIcon(LayerResources.ICONS.exportToKML());
@@ -125,36 +129,39 @@ public class GPDynamicTreeContextMenu extends Menu {
         exportToGML2.setIcon(LayerResources.ICONS.exportToGML());
         exportToGML2.addSelectionListener(new ExportoToGML2(tree));
         exportMenu.add(exportToGML2);
-        
+
         MenuItem exportToGML3_1 = new MenuItem();
         exportToGML3_1.setText("Export To GML 3.1");
         exportToGML3_1.setIcon(LayerResources.ICONS.exportToGML());
         exportToGML3_1.addSelectionListener(new ExportoToGML3_1(tree));
         exportMenu.add(exportToGML3_1);
-        
+
         MenuItem exportToGML3_2 = new MenuItem();
         exportToGML3_2.setText("Export To GML 3.2");
         exportToGML3_2.setIcon(LayerResources.ICONS.exportToGML());
         exportToGML3_2.addSelectionListener(new ExportoToGML3_2(tree));
         exportMenu.add(exportToGML3_2);
-        
+
         MenuItem exportToCSV = new MenuItem();
         exportToCSV.setText("Export To CSV");
         exportToCSV.setIcon(LayerResources.ICONS.exportToCSV());
         exportToCSV.addSelectionListener(new ExportoToCSV(tree));
         exportMenu.add(exportToCSV);
-        
+
         MenuItem exportToGeoJSON = new MenuItem();
         exportToGeoJSON.setText("Export To GeoJSON");
         exportToGeoJSON.setIcon(LayerResources.ICONS.exportToJSON());
         exportToGeoJSON.addSelectionListener(new ExportoToGeoJSON(tree));
         exportMenu.add(exportToGeoJSON);
-        
+
         MenuItem exportToRSS = new MenuItem();
         exportToRSS.setText("Export To RSS");
         exportToRSS.setIcon(LayerResources.ICONS.exportToRSS());
         exportToRSS.addSelectionListener(new ExportoToGeoRSS(tree));
         exportMenu.add(exportToRSS);
+
+        export.setSubMenu(exportMenu);
+        layerContextMenu.add(export);
 
         MenuItem pasteMenuItem = new MenuItem("Paste in Folder");
         pasteMenuItem.setIcon(LayerResources.ICONS.paste());
@@ -173,11 +180,19 @@ public class GPDynamicTreeContextMenu extends Menu {
         copyMenuItem.setIcon(LayerResources.ICONS.copy());
         copyMenuItem.addSelectionListener(new CopyLayerAction(tree, pasteAction, pasteMenuItem));
         layerContextMenu.add(copyMenuItem);
+
+//        MenuItem refreshMenuItem = new MenuItem("Refresh Layer");
+        refreshTimeComboBox = new ComboBox();
+        refreshTimeComboBox.setEmptyText("Refresh Time");
+        ListStore<LayerRefreshTimeValue> store = new ListStore<LayerRefreshTimeValue>();
+        store.add(LayerRefreshTimeValue.getLayerRefreshTimeList());
+        refreshTimeComboBox.setStore(store);
+        refreshTimeComboBox.setDisplayField(LayerRefreshTimeValue.REFRESH_TIME_KEY);
+//        refreshMenuItem.setIcon(LayerResources.ICONS.layerRefresh());
+        refreshTimeComboBox.addSelectionChangedListener(new RefreshLayerAction(tree, layerContextMenu));
+        layerContextMenu.add(refreshTimeComboBox);
+
         layerContextMenu.add(layerProperties);
-        
-        
-        export.setSubMenu(exportMenu);
-        layerContextMenu.add(export);
 
         this.tree.setContextMenu(this.layerContextMenu);
 
@@ -191,6 +206,7 @@ public class GPDynamicTreeContextMenu extends Menu {
                 if (selectedItem instanceof FolderTreeNode) {
                     tree.setContextMenu(folderContextMenu);
                 } else if (selectedItem instanceof GPLayerTreeModel) {
+                    refreshTimeComboBox.clearSelections();
                     tree.setContextMenu(layerContextMenu);
                 } else {
                     tree.setContextMenu(emptyMenu);

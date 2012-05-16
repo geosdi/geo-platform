@@ -129,4 +129,7 @@ public interface LayerIcons extends ImageBundle {
     
     @Resource("project_delete.png")
     AbstractImagePrototype projectDelete();
+    
+    @Resource("arrow_refresh.png")
+    AbstractImagePrototype layerRefresh();
 }

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import java.io.InputStream;
 import java.math.BigInteger;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -132,11 +131,11 @@ public class CatalogGetRecordsTest {
                 "yyyy-MM-dd'T'HH:mm:ss'Z'");
 
         str.append(" AND ");
-        str.append("TempExtent_begin AFTER ").append(formatter.format(
-                startCalendar.getTime()));
+        str.append("TempExtent_begin AFTER ").append(
+                formatter.format(startCalendar.getTime()));
         str.append(" AND ");
-        str.append("TempExtent_end BEFORE ").append(formatter.format(
-                endCalendar.getTime()));
+        str.append("TempExtent_end BEFORE ").append(
+                formatter.format(endCalendar.getTime()));
 
         request.setConstraint(str.toString());
         logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}",
@@ -170,7 +169,7 @@ public class CatalogGetRecordsTest {
         GetRecordsResponseType response = request.getResponse();
 
         List<JAXBElement<? extends AbstractRecordType>> metadata = response.getSearchResults().getAbstractRecord();
-        
+
         for (JAXBElement<? extends AbstractRecordType> element : metadata) {
             logger.info("ECCOLO @@@@@@@@@@@@@@@@@@@@@@@@@ " + element.getValue());
         }

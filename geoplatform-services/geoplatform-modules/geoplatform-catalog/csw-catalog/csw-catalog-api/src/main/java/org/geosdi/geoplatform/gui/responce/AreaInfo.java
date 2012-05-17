@@ -54,7 +54,26 @@ public class AreaInfo implements Serializable {
 
     public enum AreaSearchType implements Serializable {
 
-        ENCLOSES, IS, OUTSIDE, OVERLAP;
+        /**
+         * Stored geometry fully contains the input geometry.
+         * Spatial operator: Contains
+         */
+        ENCLOSES,
+        /**
+         * Stored geometry are equal the input geometry.
+         * Spatial operator: Equals
+         */
+        IS,
+        /**
+         * Stored geometry is fully outside the input geometry.
+         * Spatial operator: Disjoint
+         */
+        OUTSIDE,
+        /**
+         * Stored geometry intersect but are not equal the input geometry.
+         * Spatial operator: Intersects
+         */
+        OVERLAP;
 
         public static List<AreaSearchType> valuesAsList() {
             return Arrays.asList(AreaSearchType.values());
@@ -62,9 +81,8 @@ public class AreaInfo implements Serializable {
 
         public static AreaSearchType fromString(String text) {
             if (text != null) {
-                text.trim();
                 for (AreaSearchType t : AreaSearchType.values()) {
-                    if (text.equalsIgnoreCase(t.toString())) {
+                    if (text.trim().equalsIgnoreCase(t.toString())) {
                         return t;
                     }
                 }

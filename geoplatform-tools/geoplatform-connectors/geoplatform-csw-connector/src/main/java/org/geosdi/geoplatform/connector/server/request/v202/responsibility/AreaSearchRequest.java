@@ -35,18 +35,33 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
 import org.geosdi.geoplatform.gui.responce.BBox;
+import org.geosdi.geoplatform.xml.filter.v110.BinarySpatialOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
+import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
+import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
+import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 
 /**
- *
+ * TODO: Test me!
+ * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class AreaSearchRequest extends GetRecordsRequestHandler {
+
+    private final static String BOUNDING_BOX = "ows:BoundingBox";
+    private final static String CONTAINS = "CONTAINS";
+    private final static String EQUALS = "EQUALS";
+    private final static String DISJOINT = "DISJOINT";
+    private final static String INTERSECTS = "INTERSECTS";
 
     @Override
     protected void processGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
@@ -60,15 +75,104 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
             logger.debug("\n+++ Search Type: {} +++", areaSearchType);
             logger.debug("\n+++ {} +++", bBox);
 
-            // TODO Switch wrt spatial operator to use
-            // TODO ADD constants for spatial operator and ows:BoundingBox
-            // TODO Use StringBuilder
-            String areaConstraint = "BBOX(ows:BoundingBox,"
-                    + bBox.getMinX() + "," + bBox.getMinY() + ","
-                    + bBox.getMaxX() + "," + bBox.getMinY() + ")";
-            logger.trace("\n+++ Area constraint: \"{}\" +++", areaConstraint);
+            switch (request.getConstraintLanguage()) {
+                case FILTER:
+                    List<JAXBElement<?>> areaPredicate = this.createFilterTimePredicate(
+                            areaSearchType, bBox);
 
-            super.addCQLConstraint(request, areaConstraint);
+                    logger.trace("\n+++ Time filter: \"{}\" +++", areaPredicate);
+                    super.addFilterConstraint(request, filterType, areaPredicate);
+                    break;
+
+                case CQL_TEXT:
+                    String areaConstraint = this.createCQLAreaPredicate(areaSearchType, bBox);
+
+                    logger.trace("\n+++ Area CQL constraint: \"{}\" +++", areaConstraint);
+                    super.addCQLConstraint(request, areaConstraint);
+                    break;
+            }
         }
+    }
+
+    private List<JAXBElement<?>> createFilterTimePredicate(
+            AreaSearchType areaSearchType, BBox bBox) {
+
+        List<JAXBElement<?>> areaPredicate = new ArrayList<JAXBElement<?>>(2);
+
+        BinarySpatialOpType binarySpatial = new BinarySpatialOpType();
+
+        PropertyNameType propertyNameType = new PropertyNameType();
+        propertyNameType.setContent(Arrays.<Object>asList(BOUNDING_BOX));
+        binarySpatial.setPropertyName(propertyNameType);
+
+        EnvelopeType envelope = this.createEnvelope(bBox);
+        binarySpatial.setEnvelope(gmlFactory.createEnvelope(envelope));
+
+        switch (areaSearchType) {
+            case ENCLOSES:
+                areaPredicate.add(filterFactory.createContains(binarySpatial));
+                break;
+
+            case IS:
+                areaPredicate.add(filterFactory.createEquals(binarySpatial));
+                break;
+
+            case OUTSIDE:
+                areaPredicate.add(filterFactory.createDisjoint(binarySpatial));
+                break;
+
+            case OVERLAP:
+                areaPredicate.add(filterFactory.createIntersects(binarySpatial));
+                break;
+        }
+
+        return areaPredicate;
+    }
+
+    private EnvelopeType createEnvelope(BBox bBox) {
+        EnvelopeType envelope = new EnvelopeType();
+        envelope.setSrsName("EPSG:4326");
+
+        DirectPositionType lower = new DirectPositionType();
+        lower.setValue(Arrays.asList(bBox.getMaxX(), bBox.getMinY()));
+        envelope.setLowerCorner(lower);
+
+        DirectPositionType upper = new DirectPositionType();
+        upper.setValue(Arrays.asList(bBox.getMinX(), bBox.getMaxY()));
+        envelope.setUpperCorner(upper);
+
+        return envelope;
+    }
+
+    private String createCQLAreaPredicate(AreaSearchType areaSearchType, BBox bBox) {
+        StringBuilder constraint = new StringBuilder();
+
+        switch (areaSearchType) {
+            case ENCLOSES:
+                constraint.append(CONTAINS);
+                break;
+
+            case IS:
+                constraint.append(EQUALS);
+                break;
+
+            case OUTSIDE:
+                constraint.append(DISJOINT);
+                break;
+
+            case OVERLAP:
+                constraint.append(INTERSECTS);
+                break;
+        }
+
+        constraint.append("(");
+        constraint.append(BOUNDING_BOX).append(",");
+        constraint.append(bBox.getMinX()).append(",");
+        constraint.append(bBox.getMinY()).append(",");
+        constraint.append(bBox.getMaxX()).append(",");
+        constraint.append(bBox.getMaxY()).append(",");
+        constraint.append(")");
+
+        return constraint.toString();
     }
 }

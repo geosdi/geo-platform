@@ -95,11 +95,6 @@ public enum OnlineResourceProtocolType {
         this.protocol = protocol;
     }
 
-    @Override
-    public String toString() {
-        return protocol;
-    }
-
     /**
      * TRUE if the protocol is suitable for WMS GetMap Request.
      */
@@ -116,5 +111,20 @@ public enum OnlineResourceProtocolType {
      */
     public static boolean isForDownload(OnlineResourceProtocolType p) {
         return !OnlineResourceProtocolType.isForWMSGetMapRequest(p);
+    }
+
+    public static OnlineResourceProtocolType fromValue(String protocol) {
+        for (OnlineResourceProtocolType p : OnlineResourceProtocolType.values()) {
+            if (p.protocol.equalsIgnoreCase(protocol)) {
+                return p;
+            }
+        }
+        
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return protocol;
     }
 }

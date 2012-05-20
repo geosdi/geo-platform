@@ -58,6 +58,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -73,6 +74,9 @@ public class SecurityService implements ISecurityService {
     //
     @Autowired
     private SessionUtility sessionUtility;
+    //
+    private @Value("${host_xmpp_server}")
+    String hostXmppServer = "xmpp.geosdi.org";
 
     @Override
     public IGPAccountDetail userLogin(String userName, String password,
@@ -117,7 +121,7 @@ public class SecurityService implements ISecurityService {
         IGPAccountDetail userDetail = this.convertAccountToDTO(user);
 
         userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
-
+        
         return userDetail;
     }
 
@@ -215,6 +219,7 @@ public class SecurityService implements ISecurityService {
         if (account.getGsAccount() != null) {
             accountDetail.setAuthkey(account.getGsAccount().getAuthkey());
         }
+        accountDetail.setHostXmppServer(hostXmppServer);
         return (IGPAccountDetail) accountDetail;
     }
 

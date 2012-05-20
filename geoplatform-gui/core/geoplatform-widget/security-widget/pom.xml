@@ -67,7 +67,11 @@
             <version>${project.version}</version>
         </dependency>
         
-        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-xmpp</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

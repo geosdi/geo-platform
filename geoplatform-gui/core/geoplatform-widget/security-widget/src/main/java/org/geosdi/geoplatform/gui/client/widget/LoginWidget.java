@@ -39,12 +39,11 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
-import com.google.common.collect.Maps;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.Map;
+import org.geosdi.geoplatform.gui.client.GPXMPPClient;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
@@ -138,6 +137,7 @@ public class LoginWidget extends GPSecurityWidget
                             userLogged = userName.getValue();
                             reloginAttempts = 0;
                             Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), result.getAuthkey());
+                            loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
                         }
                     });
         } else if ((this.reloginAttempts + 1) < MAX_NUMBER_ATTEMPTS) {
@@ -148,6 +148,11 @@ public class LoginWidget extends GPSecurityWidget
         } else {
             this.resetUserSession();
         }
+    }
+
+    private void loginXMPPClient(String username, String password, String hostXmppServer) {
+        GPXMPPClient xMPPClient = new GPXMPPClient();
+        xMPPClient.userXMPPLogin(username, password, hostXmppServer);
     }
 
     public void resetUserSession() {

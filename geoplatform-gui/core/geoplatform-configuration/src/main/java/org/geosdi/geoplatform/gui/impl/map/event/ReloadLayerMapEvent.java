@@ -33,33 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.store;
+package org.geosdi.geoplatform.gui.impl.map.event;
 
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
+
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface IMapLayersStore<T extends Layer> {
+public class ReloadLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
 
-    boolean containsLayer(GPLayerBean key);
+    private GPLayerBean layerBean;
 
-    T getLayer(GPLayerBean key);
+    public ReloadLayerMapEvent(GPLayerBean theLayerBean) {
+        this.layerBean = theLayerBean;
+    }
 
-    void displayVector(GPVectorBean vectorBean);
+    /**
+     * @return the layerBean
+     */
+    public GPLayerBean getLayerBean() {
+        return layerBean;
+    }
 
-    void displayRaster(GPRasterBean rasterBean);
-    
-    void reloadLayer(GPLayerBean layer);
+    @Override
+    public Type<LayerMapChangedHandler> getAssociatedType() {
+        return LayerMapChangedHandler.TYPE;
+    }
 
-    void hideLayer(GPLayerBean layerBean);
-
-    void removeLayer(GPLayerBean layerBean);
-    
-    void resetStore();
+    @Override
+    protected void dispatch(LayerMapChangedHandler handler) {
+        handler.onReloadLayer(this.layerBean);
+    }
 }

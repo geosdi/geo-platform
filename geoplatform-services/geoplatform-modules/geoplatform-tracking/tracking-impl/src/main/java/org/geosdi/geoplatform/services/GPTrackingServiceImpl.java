@@ -55,8 +55,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPTrackingService")
 public class GPTrackingServiceImpl implements GPTrackingService, InitializingBean {
 
-    //Valutare se sostituire con una enum
-    private final static String REFRESH_LAYER = "refreshLayer";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private XMPPConnection connection;
     private ConnectionConfiguration config;
@@ -126,7 +124,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
 //            logger.error("Failed to add user: " + user.getUsername() + " to the service roster: " + ex);
 //        }
         Message message = new Message(messageReceiver, Message.Type.normal);
-        message.setSubject(REFRESH_LAYER);
+        message.setSubject(XMPPSubjectServerEnum.LAYER_RELOAD.toString());
         message.setBody(layerUUID);
         trigger.getJobDataMap().put(SendTrackingMessageJob.MESSAGE, message);
         this.scheduleTrigger(triggerKey, trigger);

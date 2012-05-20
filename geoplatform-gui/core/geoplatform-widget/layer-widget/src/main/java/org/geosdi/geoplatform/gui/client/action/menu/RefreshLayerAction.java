@@ -45,27 +45,40 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.event.ReloadLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPSubjectClientEnum;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.event.RefreshLayerXMPPEvent;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPMessageHandler;
+import org.geosdi.geoplatform.services.XMPPSubjectServerEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTimeValue> {
+public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTimeValue>
+        implements IXMPPMessageHandler {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private Menu menu;
+    private ReloadLayerMapEvent reloadLayerEvent;
 
     public RefreshLayerAction(GPTreePanel<GPBeanTreeModel> treePanel, Menu layerContextMenu) {
         this.treePanel = treePanel;
         this.menu = layerContextMenu;
+        XMPPHandlerManager.addHandler(IXMPPMessageHandler.TYPE, this);
+        this.instantiateMessageSubjectEvent(XMPPSubjectClientEnum.LAYER_RELOAD.toString());
     }
 
     @Override
     public void selectionChanged(SelectionChangedEvent<LayerRefreshTimeValue> se) {
-        GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
+        final GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         if (!(itemSelected instanceof GPLayerTreeModel)) {
             throw new IllegalArgumentException("It is possible to refresh only layers");
         }
@@ -76,14 +89,14 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
             @Override
             public void onFailure(Throwable caught) {
                 GeoPlatformMessage.errorMessage("Error Reloading",
-                                "An error occurred while making the requested connection.\n"
-                                + "Verify network connections and try again."
-                                + "\nIf the problem persists contact your system administrator.");
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Error setting the reload time",
-                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                        System.out.println("Error setting the reload time for layer: " + caught.toString()
-                                + " data: " + caught.getMessage());
+                        "An error occurred while making the requested connection.\n"
+                        + "Verify network connections and try again."
+                        + "\nIf the problem persists contact your system administrator.");
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        "Error setting the reload time",
+                        SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                System.out.println("Error setting the reload time for layer: " + caught.toString()
+                        + " data: " + caught.getMessage());
             }
 
             @Override
@@ -95,5 +108,33 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
                 //Cambiare icona al layer
             }
         });
+    }
+
+    @Override
+    public final AbstractXMPPEvent instantiateMessageSubjectEvent(String xmppMessageSubject) {
+        return new RefreshLayerXMPPEvent(xmppMessageSubject);
+    }
+
+    @Override
+    public void handleMessageBody(final String messageBody) {
+        GPBeanTreeModel element = treePanel.getStore().findModel(messageBody);
+        if (element != null) {
+            this.reloadLayerEvent = new ReloadLayerMapEvent((GPLayerBean) element);
+            GPHandlerManager.fireEvent(this.reloadLayerEvent);
+        } else {
+            LayerRemote.Util.getInstance().setLayerRefreshTime(messageBody,
+                    0, new AsyncCallback<Object>() {
+
+                @Override
+                public void onFailure(Throwable caught) {
+//                    System.out.println("Fallita rimozione layer xmpp in ascolto: " + messageBody);
+                }
+
+                @Override
+                public void onSuccess(Object result) {
+//                    System.out.println("Rimosso layer xmpp in ascolto: " + messageBody);
+                }
+            });
+        }
     }
 }

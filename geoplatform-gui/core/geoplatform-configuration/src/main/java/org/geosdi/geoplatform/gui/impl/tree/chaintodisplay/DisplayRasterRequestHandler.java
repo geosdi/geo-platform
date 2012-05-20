@@ -43,28 +43,29 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class DisplayRasterRequestHandler extends AbstractRequestHandler {
 
-	/**
-	 * @param theStore
-	 */
-	public DisplayRasterRequestHandler(GPMapLayersStore<?, ?> theStore) {
-		super(theStore);
-	}
+    /**
+     * @param theStore
+     */
+    public DisplayRasterRequestHandler(GPMapLayersStore<?, ?> theStore) {
+        super(theStore);
+    }
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler#layerRequest(org.geosdi.geoplatform.gui.model.GPLayerBean)
-	 */
-	@Override
-	public void layerRequest(GPLayerBean layer) {
-		if (layer instanceof GPRasterBean) {
-			super.layersStore.displayRaster((GPRasterBean) layer);
-		} else
-			forwardLayerRequest(layer);
-	}
-
+    /**
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler#layerRequest(org.geosdi.geoplatform.gui.model.GPLayerBean)
+     */
+    @Override
+    public void layerRequest(GPLayerBean layer) {
+        if (layer instanceof GPRasterBean) {
+            super.layersStore.displayRaster((GPRasterBean) layer);
+        } else {
+            forwardLayerRequest(layer);
+        }
+    }
 }

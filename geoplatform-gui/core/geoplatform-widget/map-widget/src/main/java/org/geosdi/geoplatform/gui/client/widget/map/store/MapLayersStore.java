@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.Iterator;
-import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -47,6 +45,7 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
@@ -56,7 +55,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
+public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer>{
 
     private MapLayerBuilder layerBuilder;
     private DisplayLegendEvent displayLegend = new DisplayLegendEvent();
@@ -90,6 +89,18 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     @Override
     public void onRemoveLayer(GPLayerBean layerBean) {
         this.removeLayer(layerBean);
+    }
+
+    @Override
+    public void reloadLayer(GPLayerBean layer) {
+        if (containsLayer(layer)) {
+            this.removeLayer(layer);
+        }
+        if (layer instanceof GPRasterBean) {
+            displayRaster((GPRasterBean) layer);
+        } else {
+            displayVector((GPVectorBean) layer);
+        }
     }
 
     @Override
@@ -131,21 +142,6 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             layer.setZIndex(rasterBean.getzIndex());
         }
     }
-
-//    private void authenticate(GPLayerBean layer) {
-//        MapRemote.Util.getInstance().layerAuthenticate("admin", "geoserver", layer.getDataSource(), new AsyncCallback<String>() {
-//
-//            @Override
-//            public void onFailure(Throwable caught) {
-//                System.out.println("Maledetto fallimento: " + caught);
-//            }
-//
-//            @Override
-//            public void onSuccess(String result) {
-//                System.out.println("Risultato un successo: " + result);
-//            }
-//        });
-//    }
 
     @Override
     public void hideLayer(GPLayerBean layerBean) {
@@ -201,5 +197,10 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         this.layers.clear();
 
         LayerHandlerManager.fireEvent(cleanLegend);
+    }
+
+    @Override
+    public void onReloadLayer(GPLayerBean layerBean) {
+        this.reloadLayer(layerBean);
     }
 }

@@ -187,6 +187,10 @@ public class GPDynamicTreeContextMenu extends Menu {
         ListStore<LayerRefreshTimeValue> store = new ListStore<LayerRefreshTimeValue>();
         store.add(LayerRefreshTimeValue.getLayerRefreshTimeList());
         refreshTimeComboBox.setStore(store);
+        refreshTimeComboBox.setEditable(Boolean.FALSE);
+        refreshTimeComboBox.setForceSelection(Boolean.TRUE);
+        refreshTimeComboBox.setTypeAhead(Boolean.FALSE);
+        refreshTimeComboBox.setUseQueryCache(Boolean.FALSE);
         refreshTimeComboBox.setDisplayField(LayerRefreshTimeValue.REFRESH_TIME_KEY);
 //        refreshMenuItem.setIcon(LayerResources.ICONS.layerRefresh());
         refreshTimeComboBox.addSelectionChangedListener(new RefreshLayerAction(tree, layerContextMenu));

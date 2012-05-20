@@ -53,6 +53,8 @@ public class LayerRefreshTimeValue extends GeoPlatformBeanModel {
 
     static {
         refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.NO_REFRESH));
+        refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.FIVE_SECONDS));
+        refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.TEN_SECONDS));
         refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.TWENTY_SECONDS));
         refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.THIRTY_SECONDS));
         refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.FORTY_FIVE_SECONDS));
@@ -61,6 +63,8 @@ public class LayerRefreshTimeValue extends GeoPlatformBeanModel {
         refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.FIFTEEN_MINUTES));
         refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.THIRTY_MINUTES));
         refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.ONE_HOUR));
+        refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.THREE_HOUR));
+        refreshTimeList.add(new LayerRefreshTimeValue(LayerRefreshTimeEnum.SIX_HOUR));
     }
 
     public LayerRefreshTimeValue(LayerRefreshTimeEnum layerRefreshTime) {
@@ -77,11 +81,12 @@ public class LayerRefreshTimeValue extends GeoPlatformBeanModel {
 
     public enum LayerRefreshTimeEnum {
 
-        NO_REFRESH("NO REFRESH", -1), TWENTY_SECONDS("20 SECONDS", 20),
+        NO_REFRESH("NO REFRESH", -1), FIVE_SECONDS("5 SECONDS", 5),
+        TEN_SECONDS("10 SECONDS", 10), TWENTY_SECONDS("20 SECONDS", 20),
         THIRTY_SECONDS("30 SECONDS", 30), FORTY_FIVE_SECONDS("45 SECONDS", 45),
         ONE_MINUTE("1 MINUTE", 60), FIVE_MINUTES("5 MINUTES", 300),
         FIFTEEN_MINUTES("15 MINUTES", 900), THIRTY_MINUTES("30 MINUTES", 1800),
-        ONE_HOUR("1 HOUR", 3600);
+        ONE_HOUR("1 HOUR", 3600), THREE_HOUR("3 HOUR", 10800), SIX_HOUR("6 HOUR", 21600);
         private String label;
         private int value;
 

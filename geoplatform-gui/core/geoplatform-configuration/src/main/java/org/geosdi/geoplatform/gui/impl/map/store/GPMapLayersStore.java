@@ -49,7 +49,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public abstract class GPMapLayersStore<K extends GPLayerBean, T extends Layer>
         implements IMapLayersStore<T>, LayerMapChangedHandler {

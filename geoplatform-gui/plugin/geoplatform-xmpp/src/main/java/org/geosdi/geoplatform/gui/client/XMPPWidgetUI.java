@@ -33,33 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.store;
+package org.geosdi.geoplatform.gui.client;
 
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
+import com.google.gwt.core.client.EntryPoint;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface IMapLayersStore<T extends Layer> {
+public class XMPPWidgetUI implements EntryPoint {
 
-    boolean containsLayer(GPLayerBean key);
-
-    T getLayer(GPLayerBean key);
-
-    void displayVector(GPVectorBean vectorBean);
-
-    void displayRaster(GPRasterBean rasterBean);
-    
-    void reloadLayer(GPLayerBean layer);
-
-    void hideLayer(GPLayerBean layerBean);
-
-    void removeLayer(GPLayerBean layerBean);
-    
-    void resetStore();
+    @Override
+    public void onModuleLoad() {
+    }
 }

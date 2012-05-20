@@ -54,6 +54,8 @@ public interface LayerMapChangedHandler extends EventHandler {
 
     public void onHideLayer(GPLayerBean layerBean);
 
+    public void onReloadLayer(GPLayerBean layerBean);
+    
     public void onRemoveLayer(GPLayerBean layerBean);
 
     public void onChangeStyle(GPRasterBean layerBean, String newStyle);

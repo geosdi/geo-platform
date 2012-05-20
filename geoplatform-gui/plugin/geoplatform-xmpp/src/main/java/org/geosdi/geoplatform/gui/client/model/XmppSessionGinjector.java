@@ -53,7 +53,7 @@ public interface XMPPSessionGinjector extends Ginjector {
 
     XmppSession getXmppSession();
 
-    XmppBoshConnection getXmppBoshConnection();
-
     ChatManager getChatManager();
+
+    XmppBoshConnection getXmppBoshConnection();
 }

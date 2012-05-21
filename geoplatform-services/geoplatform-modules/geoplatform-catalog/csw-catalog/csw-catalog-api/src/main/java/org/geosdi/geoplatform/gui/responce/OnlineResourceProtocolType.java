@@ -133,6 +133,45 @@ public enum OnlineResourceProtocolType {
         return false;
     }
 
+    /**
+     * @see OnlineResourceProtocolType#isForWMSGetMapRequest(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType) 
+     */
+    public static boolean isForWMSGetMapRequest(String protocolString) {
+        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(protocolString);
+        if (protocol != null
+                && OnlineResourceProtocolType.isForWMSGetMapRequest(protocol)) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
+     * @see OnlineResourceProtocolType#isForDownload(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType) 
+     */
+    public static boolean isForDownload(String protocolString) {
+        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(protocolString);
+        if (protocol != null
+                && OnlineResourceProtocolType.isForDownload(protocol)) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    /**
+     * @see OnlineResourceProtocolType#isForLink(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType) 
+     */
+    public static boolean isForLink(String protocolString) {
+        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(protocolString);
+        if (protocol != null
+                && OnlineResourceProtocolType.isForLink(protocol)) {
+            return true;
+        }
+        
+        return false;
+    }
+
     public static OnlineResourceProtocolType fromValue(String protocol) {
         for (OnlineResourceProtocolType p : OnlineResourceProtocolType.values()) {
             if (p.protocol.equalsIgnoreCase(protocol)) {

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
 
 /**
@@ -65,6 +66,36 @@ public class FullRecord extends AbstractRecord {
 
     public void setUriList(List<URIDTO> uriList) {
         this.uriList = uriList;
+    }
+
+    public boolean isForWMSGetMapRequest() {
+        for (URIDTO uri : uriList) {
+            if (OnlineResourceProtocolType.isForWMSGetMapRequest(uri.getProtocol())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isForDownload() {
+        for (URIDTO uri : uriList) {
+            if (OnlineResourceProtocolType.isForDownload(uri.getProtocol())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isForLink() {
+        for (URIDTO uri : uriList) {
+            if (OnlineResourceProtocolType.isForLink(uri.getProtocol())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

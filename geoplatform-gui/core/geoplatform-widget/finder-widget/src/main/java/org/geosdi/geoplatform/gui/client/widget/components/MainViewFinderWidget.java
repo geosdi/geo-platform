@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.components;
 import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.themes.GPCatalogTheme;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.GPCatalogTabWidget;
 
@@ -49,34 +50,33 @@ import org.geosdi.geoplatform.gui.client.widget.components.tab.GPCatalogTabWidge
 @Singleton
 public class MainViewFinderWidget extends GeoPlatformContentPanel {
 
-    /** TODO : THIS NOT WORK INVESTIGATE WHY **/
-//    static {
-//        GPCatalogTheme.INSTANCE.gpCatalogFinderCss().ensureInjected();
-//    }
+    static {
+        GPCatalogTheme.INSTANCE.gpCatalogFinderCss().ensureInjected();
+    }
     /******************************************/
     private EventBus bus;
     private GPCatalogTabWidget tabWidget;
-    
+
     @Inject
     public MainViewFinderWidget(EventBus bus, GPCatalogTabWidget theTabWidget) {
         super(true);
         this.bus = bus;
         this.tabWidget = theTabWidget;
     }
-    
+
     public MainViewFinderWidget() {
         super(false);
     }
-    
+
     @Override
     public void initSize() {
     }
-    
+
     @Override
     public void setPanelProperties() {
         super.setHeaderVisible(false);
     }
-    
+
     @Override
     public void addComponent() {
 //        this.tabWidget.buildWidget();

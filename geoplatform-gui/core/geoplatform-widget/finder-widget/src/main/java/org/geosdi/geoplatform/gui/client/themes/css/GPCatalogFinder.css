@@ -5,3 +5,19 @@
     font: normal 14px tahoma, arial, helvetica, sans-serif;
 }
 
+/** TODO Generalize wrt project name */
+.x-loading-status {
+    background-image: url(catalog_finder_demo/gp-images/loading.gif);
+}
+
+.x-status-ok {
+    background-image: url(catalog_finder_demo/gp-images/ok.png);
+}
+
+.x-status-not-ok {
+    background-image: url(catalog_finder_demo/gp-images/not_found.png);
+}
+
+.x-status-error {
+    background-image: url(catalog_finder_demo/gp-images/error.png);
+}

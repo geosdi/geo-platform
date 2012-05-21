@@ -49,8 +49,8 @@ public interface GPCatalogTheme extends ClientBundle {
     public static final GPCatalogTheme INSTANCE = GWT.create(
             GPCatalogTheme.class);
 
-    @Source(value = "org/geosdi/geoplatform/gui/client/"
-    + "themws/css/GPCatalogFinder.css")
+    @Source(value = "org/geosdi/geoplatform/gui/client/themes/css/"
+            + "GPCatalogFinder.css")
     @CssResource.NotStrict
     CssResource gpCatalogFinderCss();
 }

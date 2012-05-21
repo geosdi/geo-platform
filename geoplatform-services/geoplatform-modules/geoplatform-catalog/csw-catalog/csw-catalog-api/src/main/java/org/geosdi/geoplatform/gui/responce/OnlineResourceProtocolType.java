@@ -109,8 +109,28 @@ public enum OnlineResourceProtocolType {
     /**
      * TRUE if the protocol is suitable for Download.
      */
-    public static boolean isForDownload(OnlineResourceProtocolType p) {
-        return !OnlineResourceProtocolType.isForWMSGetMapRequest(p);
+    public static boolean isForDownload(OnlineResourceProtocolType protocol) {
+        if (protocol == WWW_DOWNLOAD_1_0_FTP__DOWNLOAD
+                || protocol == WWW_DOWNLOAD_1_0_HTTP__DOWNLOAD) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * TRUE if the protocol is suitable for Hyper Link.
+     */
+    public static boolean isForLink(OnlineResourceProtocolType protocol) {
+        if (protocol == WWW_LINK_1_0_HTTP__ICAL
+                || protocol == WWW_LINK_1_0_HTTP__LINK
+                || protocol == WWW_LINK_1_0_HTTP__PARTNERS
+                || protocol == WWW_LINK_1_0_HTTP__RELATED
+                || protocol == WWW_LINK_1_0_HTTP__RSS
+                || protocol == WWW_LINK_1_0_HTTP__SAMPLES
+                || protocol == WWW_LINK_1_0_HTTP__OPENDAP) {
+            return true;
+        }
+        return false;
     }
 
     public static OnlineResourceProtocolType fromValue(String protocol) {
@@ -119,7 +139,7 @@ public enum OnlineResourceProtocolType {
                 return p;
             }
         }
-        
+
         return null;
     }
 

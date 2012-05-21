@@ -38,19 +38,19 @@ package org.geosdi.geoplatform.gui.client.themes;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
-import com.google.gwt.resources.client.CssResource.NotStrict;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPCatalogTheme extends ClientBundle {
 
     public static final GPCatalogTheme INSTANCE = GWT.create(
             GPCatalogTheme.class);
 
-    @Source(value = "css/GPCatalogFinder.css")
+    @Source(value = "org/geosdi/geoplatform/gui/client/"
+    + "themws/css/GPCatalogFinder.css")
     @CssResource.NotStrict
     CssResource gpCatalogFinderCss();
 }

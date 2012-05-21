@@ -66,9 +66,7 @@ public class CatalogBBoxComponent {
                 HasHorizontalAlignment.ALIGN_CENTER);
 
         Label maxLatLabel = new Label("Max Lat");
-        maxLatLabel.setStyleAttribute("backgroundColor", "white");
-        maxLatLabel.setStyleAttribute("font",
-                "normal 10px tahoma, arial, helvetica, sans-serif");
+        maxLatLabel.setStyleName("catalogBBOX-Label");
 
         table.setWidget(1, 1, maxLatLabel);
 
@@ -95,9 +93,7 @@ public class CatalogBBoxComponent {
                 HasHorizontalAlignment.ALIGN_CENTER);
 
         Label minLatLabel = new Label("Min Lan");
-        minLatLabel.setStyleAttribute("backgroundColor", "white");
-        minLatLabel.setStyleAttribute("font",
-                "normal 10px tahoma, arial, helvetica, sans-serif");
+        minLatLabel.setStyleName("catalogBBOX-Label");
 
         table.setWidget(1, 1, minLatLabel);
 
@@ -130,9 +126,7 @@ public class CatalogBBoxComponent {
                 HasHorizontalAlignment.ALIGN_CENTER);
 
         Label minLonLabel = new Label("Min Lon");
-        minLonLabel.setStyleAttribute("backgroundColor", "white");
-        minLonLabel.setStyleAttribute("font",
-                "normal 10px tahoma, arial, helvetica, sans-serif");
+        minLonLabel.setStyleName("catalogBBOX-Label");
 
         table.setWidget(1, 1, minLonLabel);
 
@@ -163,9 +157,7 @@ public class CatalogBBoxComponent {
                 HasHorizontalAlignment.ALIGN_CENTER);
 
         Label maxLonLabel = new Label("Max Lon");
-        maxLonLabel.setStyleAttribute("backgroundColor", "white");
-        maxLonLabel.setStyleAttribute("font",
-                "normal 10px tahoma, arial, helvetica, sans-serif");
+        maxLonLabel.setStyleName("catalogBBOX-Label");
 
         table.setWidget(1, 4, maxLonLabel);
 

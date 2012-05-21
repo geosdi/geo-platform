@@ -37,12 +37,8 @@ package org.geosdi.geoplatform.gui.client.widget.components.search.pagination;
 
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.core.XTemplate;
-import com.extjs.gxt.ui.client.data.BasePagingLoader;
-import com.extjs.gxt.ui.client.data.LoadEvent;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.extjs.gxt.ui.client.data.RpcProxy;
-import com.extjs.gxt.ui.client.event.LoadListener;
+import com.extjs.gxt.ui.client.data.*;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
@@ -65,27 +61,26 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
 public class RecordsContainer
         extends GridLayoutPaginationContainer<FullRecord> {
-
+    
     private CatalogFinderBean catalogFinder;
     //
     private CheckBoxSelectionModel<FullRecord> records;
     private RowExpander rowExpander;
-
+    
     @Inject
     public RecordsContainer(CatalogFinderBean theCatalogFinder) {
         super(true, 10);
         catalogFinder = theCatalogFinder;
-
+        
         super.setWidth(550);
-        super.setStyleAttribute("padding-top", "10px");
-        super.setStyleAttribute("padding-bottom", "10px");
+        super.setStyleName("records-Container");
     }
-
+    
     @Override
     public void setGridProperties() {
         super.widget.setHeight(250);
@@ -93,26 +88,35 @@ public class RecordsContainer
 //        super.widget.setLoadMask(true);
 
         super.widget.setSelectionModel(this.records);
-
+        
+        super.widget.addListener(Events.CellClick, new Listener<BaseEvent>() {
+            
+            @Override
+            public void handleEvent(BaseEvent be) {
+                System.out.println("ELEMENTO CLICCATO @@@@@@@@@@@ "
+                        + records.getSelectedItem());
+            }
+        });
+        
         super.widget.addPlugin(this.rowExpander);
         super.widget.addPlugin(this.records);
     }
-
+    
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-
+        
         XTemplate tpl = XTemplate.create(
                 "<p><b>Abstract:</b> {ABSTRACT_TEXT}</p><br>"
                 + "<p><b>Subjects:</b><br></p>"
                 + "<tpl for=\"SUBJECTS\">"
                 + "<div>{.}</div>"
                 + "</tpl>");
-
+        
         rowExpander = new RowExpander(tpl);
-
+        
         configs.add(rowExpander);
-
+        
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(RecordKeyValue.TITLE.toString());
         titleColumn.setHeader("Title");
@@ -120,21 +124,30 @@ public class RecordsContainer
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
         configs.add(titleColumn);
-
+        
         this.records = new CheckBoxSelectionModel<FullRecord>();
         records.setSelectionMode(SelectionMode.MULTI);
+        
+        this.records.addSelectionChangedListener(new SelectionChangedListener<FullRecord>() {
+            
+            @Override
+            public void selectionChanged(SelectionChangedEvent<FullRecord> se) {
+                System.out.println("ECCOLA @@@@@@@@@@@@@@@@@@@ " + se.getSelection());
+            }
+        });
+        
         configs.add(records.getColumn());
-
-
+        
+        
         return new ColumnModel(configs);
     }
-
+    
     @Override
     public void createStore() {
         super.toolBar = new PagingToolBar(super.getPageSize());
-
+        
         super.proxy = new RpcProxy<PagingLoadResult<FullRecord>>() {
-
+            
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<FullRecord>> callback) {
@@ -142,36 +155,40 @@ public class RecordsContainer
                         (PagingLoadConfig) loadConfig, catalogFinder, callback);
             }
         };
-
+        
         super.loader = new BasePagingLoader<PagingLoadResult<FullRecord>>(proxy);
         super.loader.setRemoteSort(false);
-
+        
         super.store = new ListStore<FullRecord>(loader);
 //        super.store.setMonitorChanges(true);
 
         super.toolBar.bind(loader);
         super.toolBar.disable();
     }
-
+    
     @Override
     public void setUpLoadListener() {
         super.loader.addLoadListener(new LoadListener() {
-
+            
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
                 widget.mask("Loading Records");
             }
-
+            
             @Override
             public void loaderLoad(LoadEvent le) {
                 if (!toolBar.isEnabled()) {
                     toolBar.enable();
                 }
                 widget.unmask();
-                // TODO Set status message on main windows
-                System.out.println("\n*** Records correctly loaded ***");
-            }
+                
+                BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
 
+                // TODO Set status message on main windows
+                System.out.println(
+                        "\n*** Records correctly loaded ***");
+            }
+            
             @Override
             public void loaderLoadException(LoadEvent le) {
                 if (le.exception instanceof GeoPlatformException) { // TODO If server not found?
@@ -186,11 +203,11 @@ public class RecordsContainer
             }
         });
     }
-
+    
     public void searchRecords() {
         super.loader.load();
     }
-
+    
     public void reset() {
         this.store.removeAll();
         this.toolBar.clear();

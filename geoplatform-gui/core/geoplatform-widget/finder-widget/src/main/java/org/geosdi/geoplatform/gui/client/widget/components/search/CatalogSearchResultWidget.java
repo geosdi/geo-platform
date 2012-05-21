@@ -59,7 +59,7 @@ public class CatalogSearchResultWidget extends LayoutContainer {
     public CatalogSearchResultWidget(RecordsContainer theRecordsContainer) {
         recordsContainer = theRecordsContainer;
 
-        super.setStyleAttribute("padding", "10px");
+        super.setStyleName("searchResult-Widget");
     }
 
     @Override
@@ -67,10 +67,7 @@ public class CatalogSearchResultWidget extends LayoutContainer {
         super.onRender(parent, index);
 
         Label resultLabel = new Label("Search Result");
-        resultLabel.setStyleAttribute("color", "#4169E1");
-        resultLabel.setStyleAttribute("font",
-                "normal 14px tahoma, arial, helvetica, sans-serif");
-        resultLabel.setStyleAttribute("padding-bottom", "5px");
+        resultLabel.setStyleName("searchResult-Label");
 
         add(resultLabel);
 

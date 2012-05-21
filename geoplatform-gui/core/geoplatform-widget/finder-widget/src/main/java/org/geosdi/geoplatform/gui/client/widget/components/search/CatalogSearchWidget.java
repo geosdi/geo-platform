@@ -95,9 +95,7 @@ public class CatalogSearchWidget extends LayoutContainer
         left.setLayout(new ColumnLayout());
 
         Label searchLabel = new Label("Search Text");
-        searchLabel.setStyleAttribute("color", "#4169E1");
-        searchLabel.setStyleAttribute("font",
-                "normal 14px tahoma, arial, helvetica, sans-serif");
+        searchLabel.setStyleName("catalogSearch-Label");
 
         left.add(searchLabel, new ColumnData(300.0));
 
@@ -157,9 +155,7 @@ public class CatalogSearchWidget extends LayoutContainer
         right.setLayout(new ColumnLayout());
 
         Label optionsLabel = new Label("Search Options");
-        optionsLabel.setStyleAttribute("color", "#4169E1");
-        optionsLabel.setStyleAttribute("font",
-                "normal 14px tahoma, arial, helvetica, sans-serif");
+        optionsLabel.setStyleName("catalogOptions-Label");
 
         right.add(optionsLabel, new ColumnData(240.0));
 

@@ -113,8 +113,8 @@ class CSWServiceImpl {
      */
     Long insertServerCSW(GeoPlatformServer server) {
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
-        GeoPlatformServer serverSearch = serverDao.findByServerUrl(
-                this.convertUrl(server.getServerUrl()));
+        String serverUrl = this.deleteQueryStringFromURL(server.getServerUrl());
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(serverUrl);
         if (serverSearch != null) { // If there is already a server with the specified URLs
             return serverSearch.getId();
         }
@@ -131,7 +131,7 @@ class CSWServiceImpl {
      */
     ServerCSWDTO saveServerCSW(String alias, String serverUrl)
             throws IllegalParameterFault {
-        serverUrl = this.convertUrl(serverUrl);
+        serverUrl = this.deleteQueryStringFromURL(serverUrl);
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server != null) { // If there is already a server with the specified URLs
             return new ServerCSWDTO(server);
@@ -287,7 +287,7 @@ class CSWServiceImpl {
         return shorts;
     }
 
-    private String convertUrl(String serverUrl) {
+    private String deleteQueryStringFromURL(String serverUrl) {
         int index = serverUrl.indexOf("?");
         if (index != -1) {
             return serverUrl.substring(0, index);

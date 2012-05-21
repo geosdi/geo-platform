@@ -363,7 +363,7 @@ public class CSWServerPaginationContainer
      */
     public GPCSWServerBeanModel containsServer(String url) {
         for (GPCSWServerBeanModel server : store.getModels()) {
-            if (server.getUrlServer().equalsIgnoreCase(url.trim())) {
+            if (server.getUrlServer().equalsIgnoreCase(url)) {
                 return server;
             }
         }

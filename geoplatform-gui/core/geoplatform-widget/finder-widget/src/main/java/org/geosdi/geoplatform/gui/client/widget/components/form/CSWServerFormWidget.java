@@ -45,13 +45,13 @@ import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
-import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
@@ -80,12 +80,12 @@ public class CSWServerFormWidget
     public void addComponentToForm() {
         this.createFieldSet();
 
-        this.saveStatus = new SaveStatus();
-        this.saveStatus.setAutoWidth(true);
+        super.saveStatus = new SaveStatus();
+        super.saveStatus.setAutoWidth(true);
 
-        this.formPanel.getButtonBar().add(this.saveStatus);
+        super.formPanel.getButtonBar().add(super.saveStatus);
 
-        formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+        super.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
         saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
                 new SelectionListener<ButtonEvent>() {
@@ -95,10 +95,8 @@ public class CSWServerFormWidget
                         execute();
                     }
                 });
-
         saveButton.setEnabled(false);
-
-        this.formPanel.addButton(saveButton);
+        super.formPanel.addButton(saveButton);
 
         Button cancelButton = new Button("Cancel",
                 BasicWidgetResources.ICONS.cancel(),
@@ -109,8 +107,7 @@ public class CSWServerFormWidget
                         hide();
                     }
                 });
-
-        this.formPanel.addButton(cancelButton);
+        super.formPanel.addButton(cancelButton);
 
         formButtonBinding = new FormButtonBinding(super.formPanel);
         formButtonBinding.addButton(saveButton);
@@ -145,8 +142,8 @@ public class CSWServerFormWidget
                 if (!value.startsWith("http://") && !value.startsWith("https://")) {
                     return "URL must be start with \"http://\" or \"https://\"";
                 }
-                // Delete all spaces & Encoding into ASCII
-                urlEncoding = URL.decodeQueryString(value.replaceAll("[ ]+", ""));
+
+                urlEncoding = deleteQueryStringFromURL(value.trim());
                 return null;
             }
         });
@@ -174,7 +171,7 @@ public class CSWServerFormWidget
         this.saveButton.disable();
         this.urlField.clear();
         this.aliasField.clear();
-        this.saveStatus.clearStatus("");
+        super.saveStatus.clearStatus("");
     }
 
     public void showForm() {
@@ -190,10 +187,11 @@ public class CSWServerFormWidget
 
         GPCSWServerBeanModel server = catalogWindget.containsServer(urlEncoding);
         if (server != null) {
-            // TODO Set status message on main windows
-            System.out.println(
+            setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
+                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
+
+            GeoPlatformMessage.alertMessage(EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue(),
                     "Server already exist, with alias \"" + server.getAlias() + "\"");
-            hide();
         } else {
             saveServer();
         }
@@ -208,29 +206,44 @@ public class CSWServerFormWidget
                     @Override
                     public void onFailure(Throwable caught) {
                         setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-                                caught.getMessage());
+                                EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
                         // TODO Set status message on main windows
-                        System.out.println(
-                                "Error on saving CSW server: " + caught.getMessage());
+                        System.out.println("Error on saving CSW server: " + caught.getMessage());
                     }
 
                     @Override
                     public void onSuccess(GPCSWServerBeanModel server) {
                         catalogWindget.addNewServer(server);
+
+                        /** TODO
+                         * Manage case when the user try to add a server with
+                         * same alias and URL wrt a DB entry previous added.
+                         * So, the server don't be added but will be returned
+                         * the DB entry early saved.
+                         */
                         if (aliasValue.equals(server.getAlias())) {
-                            setStatus(EnumSaveStatus.STATUS_SAVE.toString(),
-                                    EnumSaveStatus.STATUS_MESSAGE_SAVE.toString());
+                            setStatus(EnumSaveStatus.STATUS_SAVE.getValue(),
+                                    EnumSaveStatus.STATUS_MESSAGE_SAVE.getValue());
                             // TODO Set status message on main windows
                             System.out.println("Server correctly saved");
                         } else {
-                            setStatus(EnumSaveStatus.STATUS_NO_SAVE.toString(),
-                                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.toString() + ": server already exist");
+                            setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
+                                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
                             // TODO Set status message on main windows
-                            System.out.println(
-                                    "Server already exist, with alias \"" + server.getAlias() + "\"");
+                            System.out.println("Server already exist, with alias \""
+                                    + server.getAlias() + "\"");
                         }
+
                         hide();
                     }
                 });
+    }
+
+    private String deleteQueryStringFromURL(String serverUrl) {
+        int index = serverUrl.indexOf("?");
+        if (index != -1) {
+            return serverUrl.substring(0, index);
+        }
+        return serverUrl;
     }
 }

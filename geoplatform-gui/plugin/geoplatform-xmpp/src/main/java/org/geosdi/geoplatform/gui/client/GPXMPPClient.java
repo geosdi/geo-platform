@@ -106,16 +106,16 @@ public class GPXMPPClient {
 
             @Override
             public void onMessage(MessageEvent event) {
-                System.out.println("Message received: ");
+//                System.out.println("Message received: ");
                 Message message = event.getMessage();
-                System.out.println(message.toString());
+//                System.out.println(message.toString());
                 if (message.getSubject() != null && message.getBody() != null) {
 //                    Info.display("Message " + message.getSubject(), message.getBody());
                     AbstractXMPPEvent xmppEvent = XMPPEventRepository.getXMPPEventForSubject(message.getSubject());
                     if (xmppEvent != null) {
                         xmppEvent.setMessageBody(message.getBody());
                         XMPPHandlerManager.fireEvent(xmppEvent);
-                        System.out.println("Message fired");
+//                        System.out.println("Message fired");
                     }
                 }
             }

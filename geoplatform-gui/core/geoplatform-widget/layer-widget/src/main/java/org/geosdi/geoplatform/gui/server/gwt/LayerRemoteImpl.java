@@ -204,7 +204,7 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
-    public void setLayerRefreshTime(String layerUUID, int secondToRefresh) throws GeoPlatformException {
-        this.layerService.setLayerRefreshTime(layerUUID, secondToRefresh, super.getThreadLocalRequest());
+    public void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh) throws GeoPlatformException {
+        this.layerService.setLayerRefreshTime(emiteResource, layerUUID, secondToRefresh, super.getThreadLocalRequest());
     }
 }

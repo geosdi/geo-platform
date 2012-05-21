@@ -45,8 +45,10 @@ import com.calclab.emite.core.client.xmpp.stanzas.Presence;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPEventRepository;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
@@ -93,6 +95,7 @@ public class GPXMPPClient {
                 Presence presence = event.getPresence();
 //                System.out.println("Presence received from " + presence.getFrom() + ": " + presence.toString());
                 Info.display("XMPP Connection", "Presence received from " + presence.getFrom() + ": " + presence.toString());
+                Registry.register(GlobalRegistryEnum.EMITE_RESOURCE.getValue(), sessionXmpp.getCurrentUserURI().getResource());
             }
         });
 
@@ -103,15 +106,16 @@ public class GPXMPPClient {
 
             @Override
             public void onMessage(MessageEvent event) {
-//                System.out.println("Message received");
+                System.out.println("Message received: ");
                 Message message = event.getMessage();
+                System.out.println(message.toString());
                 if (message.getSubject() != null && message.getBody() != null) {
 //                    Info.display("Message " + message.getSubject(), message.getBody());
                     AbstractXMPPEvent xmppEvent = XMPPEventRepository.getXMPPEventForSubject(message.getSubject());
                     if (xmppEvent != null) {
                         xmppEvent.setMessageBody(message.getBody());
                         XMPPHandlerManager.fireEvent(xmppEvent);
-//                        System.out.println("Message fired");
+                        System.out.println("Message fired");
                     }
                 }
             }

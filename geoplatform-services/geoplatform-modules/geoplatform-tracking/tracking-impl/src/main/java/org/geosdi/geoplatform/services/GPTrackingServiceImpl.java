@@ -102,7 +102,8 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     }
 
     @Override
-    public void subscribeLayerNotification(String username, String layerUUID, int secondToRefresh) {
+    public void subscribeLayerNotification(String username, String emiteResource,
+            String layerUUID, int secondToRefresh) {
         TriggerKey triggerKey = new TriggerKey(username + ":" + layerUUID,
                 TrackingScheduler.TRACKING_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
@@ -117,7 +118,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
                 withMisfireHandlingInstructionFireAndProceed()).
                 build();
         trigger.getJobDataMap().put(SendTrackingMessageJob.GP_TRACKING_SERVICE, this);
-        String messageReceiver = username + "@" + this.connection.getHost();
+        String messageReceiver = username + "@" + this.connection.getHost() + '/' + emiteResource;
 //        try {
 //            connection.getRoster().createEntry(messageReceiver, user.getUsername(), null);
 //        } catch (XMPPException ex) {

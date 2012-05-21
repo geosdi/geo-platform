@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
@@ -45,6 +46,7 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.impl.map.event.ReloadLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -56,7 +58,6 @@ import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPSubjectClientEnum;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.event.RefreshLayerXMPPEvent;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPMessageHandler;
-import org.geosdi.geoplatform.services.XMPPSubjectServerEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -83,7 +84,7 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
             throw new IllegalArgumentException("It is possible to refresh only layers");
         }
         final LayerRefreshTimeEnum refreshTimeEnum = se.getSelectedItem().get(LayerRefreshTimeValue.REFRESH_TIME_KEY);
-        LayerRemote.Util.getInstance().setLayerRefreshTime(itemSelected.getUUID(),
+        LayerRemote.Util.getInstance().setLayerRefreshTime((String) Registry.get(GlobalRegistryEnum.EMITE_RESOURCE.getValue()), itemSelected.getUUID(),
                 refreshTimeEnum.getValue(), new AsyncCallback<Object>() {
 
             @Override
@@ -122,8 +123,9 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
             this.reloadLayerEvent = new ReloadLayerMapEvent((GPLayerBean) element);
             GPHandlerManager.fireEvent(this.reloadLayerEvent);
         } else {
-            LayerRemote.Util.getInstance().setLayerRefreshTime(messageBody,
-                    0, new AsyncCallback<Object>() {
+            LayerRemote.Util.getInstance().setLayerRefreshTime(
+                    (String) Registry.get(GlobalRegistryEnum.EMITE_RESOURCE.getValue()),
+                    messageBody, 0, new AsyncCallback<Object>() {
 
                 @Override
                 public void onFailure(Throwable caught) {

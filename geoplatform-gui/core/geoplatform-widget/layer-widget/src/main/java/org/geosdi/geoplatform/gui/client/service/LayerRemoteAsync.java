@@ -121,6 +121,6 @@ public interface LayerRemoteAsync {
 
     void deleteProject(Long projectID, AsyncCallback<?> callback) throws GeoPlatformException;
 
-    void setLayerRefreshTime(String layerUUID, int secondToRefresh,
+    void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh,
             AsyncCallback<?> callback) throws GeoPlatformException;
 }

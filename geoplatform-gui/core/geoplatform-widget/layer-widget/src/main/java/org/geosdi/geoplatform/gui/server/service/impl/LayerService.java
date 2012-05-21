@@ -694,14 +694,15 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public void setLayerRefreshTime(String layerUUID, int secondToRefresh, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
             if (account instanceof GPUser) {
                 String username = ((GPUser) account).getUsername();
                 if (secondToRefresh > 0) {
                     logger.debug("Request to subscribe layer refresh for: " + username + " - " + layerUUID);
-                    this.geoPlatformTrackingClient.getTrackingService().subscribeLayerNotification(username, layerUUID, secondToRefresh);
+                    this.geoPlatformTrackingClient.getTrackingService().subscribeLayerNotification(username,
+                            emiteResource, layerUUID, secondToRefresh);
                 } else if (account instanceof GPUser) {
                     logger.debug("Request to UNsubscribe layer refresh for: " + username + " - " + layerUUID);
                     this.geoPlatformTrackingClient.getTrackingService().unscribeLayerNotification(username, layerUUID);

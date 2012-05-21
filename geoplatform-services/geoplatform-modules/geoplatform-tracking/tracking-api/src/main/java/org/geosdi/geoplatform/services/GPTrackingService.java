@@ -51,6 +51,7 @@ public interface GPTrackingService {
 
     @Post
     void subscribeLayerNotification(@WebParam(name = "username") String username,
+            @WebParam(name = "emiteResource") String emiteResource,
             @WebParam(name = "layerUUID") String layerUUID,
             @WebParam(name = "time") int secondToRefresh);
 

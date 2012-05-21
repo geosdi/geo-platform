@@ -67,7 +67,7 @@ public class TestXmppMessage {
 
     @Test
     public void testMessage() {
-        trackingService.subscribeLayerNotification(this.gpUser.getUsername(), "10-45-4555", 5);
+        trackingService.subscribeLayerNotification(this.gpUser.getUsername(), "Emite44444", "10-45-4555", 5);
 //        double i = 0;
 //        while (i < 9999999999999d) {
 //            i = i + 0.000001;

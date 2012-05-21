@@ -137,6 +137,6 @@ public interface ILayerService {
     void deleteProject(Long projectID,
             HttpServletRequest httpServletRequest) throws GeoPlatformException;
     
-    void setLayerRefreshTime(String layerUUID, int secondToRefresh,
+    void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh,
             HttpServletRequest httpServletRequest) throws GeoPlatformException;
 }

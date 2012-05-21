@@ -257,5 +257,5 @@ public interface LayerRemote extends RemoteService {
      * @param secondToRefresh
      * @throws GeoPlatformException
      */
-    void setLayerRefreshTime(String layerUUID, int secondToRefresh) throws GeoPlatformException;
+    void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh) throws GeoPlatformException;
 }

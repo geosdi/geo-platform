@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
@@ -55,7 +54,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer>{
+public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     private MapLayerBuilder layerBuilder;
     private DisplayLegendEvent displayLegend = new DisplayLegendEvent();

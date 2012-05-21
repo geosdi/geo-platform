@@ -48,7 +48,7 @@ public class SummaryRecord extends AbstractRecord {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("SummaryRecord {");
-        str.append(super.toStringBuilder(str));
+        str.append(super.toString());
         return str.append('}').toString();
     }
 }

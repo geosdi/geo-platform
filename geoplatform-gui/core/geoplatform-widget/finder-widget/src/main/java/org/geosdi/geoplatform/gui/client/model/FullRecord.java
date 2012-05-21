@@ -70,7 +70,7 @@ public class FullRecord extends AbstractRecord {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("FullRecord {");
-        str.append(super.toStringBuilder(str));
+        str.append(super.toString());
         str.append(", bBox =").append(bBox);
         str.append(", uriList =").append(uriList);
         return str.append('}').toString();

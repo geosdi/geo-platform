@@ -133,11 +133,13 @@ public abstract class AbstractRecord extends GeoPlatformBeanModel {
         return hash;
     }
 
-    protected StringBuilder toStringBuilder(StringBuilder str) {
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
         str.append("identifier = ").append(identifier);
         str.append(", title = ").append(this.getTitle());
         str.append(", abstract =").append(this.getAbstractText());
         str.append(", subjects = ").append(this.getSubjects());
-        return str;
+        return str.toString();
     }
 }

@@ -498,6 +498,7 @@ class CSWServiceImpl {
                     uriDTO.setProtocol(uri.getProtocol());
                     uriDTO.setName(uri.getName());
                     uriDTO.setDescription(uri.getDescription());
+                    dto.addUri(uriDTO);
                 }
             }
 

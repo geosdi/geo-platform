@@ -35,9 +35,13 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.gui.responce.BBox;
 
@@ -53,7 +57,10 @@ public class FullRecordDTO extends AbstractRecordDTO {
     private static final long serialVersionUID = -4843440136860067550L;
     //
     private BBox bBox;
-    private URIDTO uri;
+    //
+    @XmlElementWrapper(name = "uriList")
+    @XmlElement(name = "uri")
+    private List<URIDTO> uriList = new ArrayList<URIDTO>();
 
     public BBox getBBox() {
         return bBox;
@@ -63,12 +70,16 @@ public class FullRecordDTO extends AbstractRecordDTO {
         this.bBox = bBox;
     }
 
-    public URIDTO getUri() {
-        return uri;
+    public List<URIDTO> getUriList() {
+        return uriList;
     }
 
-    public void setUri(URIDTO uri) {
-        this.uri = uri;
+    public void setUriList(List<URIDTO> uriList) {
+        this.uriList = uriList;
+    }
+
+    public void addUri(URIDTO uri) {
+        this.uriList.add(uri);
     }
 
     @Override
@@ -76,7 +87,7 @@ public class FullRecordDTO extends AbstractRecordDTO {
         StringBuilder str = new StringBuilder("FullRecordDTO {");
         str.append(super.toStringBuilder(str));
         str.append(", bBox=").append(bBox);
-        str.append(", uri=").append(uri);
+        str.append(", uri=").append(uriList);
         return str.append('}').toString();
     }
 }

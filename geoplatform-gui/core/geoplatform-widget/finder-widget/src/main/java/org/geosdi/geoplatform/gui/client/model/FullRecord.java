@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
 
@@ -46,34 +47,32 @@ import org.geosdi.geoplatform.gui.responce.URIDTO;
 public class FullRecord extends AbstractRecord {
 
     private static final long serialVersionUID = 7344635200928287521L;
-
-    public enum FullRecordKeyValue {
-
-        BBOX, URI;
-    }
+    //
+    private BBoxClientInfo bBox;
+    private List<URIDTO> uriList;
 
     public BBoxClientInfo getBBox() {
-        return super.get(FullRecordKeyValue.BBOX.toString());
+        return bBox;
     }
 
     public void setBBox(BBoxClientInfo bBox) {
-        super.set(FullRecordKeyValue.BBOX.toString(), bBox);
+        this.bBox = bBox;
     }
 
-    public URIDTO getUri() {
-        return super.get(FullRecordKeyValue.URI.toString());
+    public List<URIDTO> getUriList() {
+        return uriList;
     }
 
-    public void setUri(URIDTO uri) {
-        super.set(FullRecordKeyValue.URI.toString(), uri);
+    public void setUriList(List<URIDTO> uriList) {
+        this.uriList = uriList;
     }
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("FullRecord {");
         str.append(super.toStringBuilder(str));
-        str.append(", bBox =").append(this.getBBox());
-        str.append(", uri =").append(this.getUri());
+        str.append(", bBox =").append(bBox);
+        str.append(", uriList =").append(uriList);
         return str.append('}').toString();
     }
 }

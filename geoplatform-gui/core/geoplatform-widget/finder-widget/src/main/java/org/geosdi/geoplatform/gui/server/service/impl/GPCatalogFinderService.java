@@ -261,7 +261,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         FullRecord fullRecord = this.convertRecordDTO(new FullRecord(), fullRecordDTO);
 
         fullRecord.setBBox(this.convertBBoxDTO(fullRecordDTO.getBBox()));
-        fullRecord.setUri(fullRecordDTO.getUri());
+        fullRecord.setUriList(fullRecordDTO.getUriList());
 
         return fullRecord;
     }
@@ -272,7 +272,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         BBoxClientInfo bBoxClient = new BBoxClientInfo();
-        
+
         bBoxClient.setLowerLeftX(bBox.getMinX());
         bBoxClient.setLowerLeftY(bBox.getMinY());
         bBoxClient.setUpperRightX(bBox.getMaxX());

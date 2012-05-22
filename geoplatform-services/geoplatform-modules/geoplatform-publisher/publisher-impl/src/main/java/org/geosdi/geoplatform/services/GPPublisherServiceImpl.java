@@ -862,14 +862,13 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         InfoPreview infoPreview = null;
         String datatStoreName = info.name;
         // check if the dataStore already exists
-        if (!existsDataStore(userWorkspace, datatStoreName)) {
-            GSPostGISDatastoreEncoder encoder = postGISUtility.generateEncoder(datatStoreName);
-            restPublisher.createPostGISDatastore(userName, encoder);
-        } else {
+        if (existsDataStore(userWorkspace, datatStoreName)) {
             boolean result = restPublisher.unpublishFeatureType(userWorkspace,
                     datatStoreName, info.name);
             logger.info("Removing existing FeatureType: " + info.name + " with result: " + result);
         }
+        GSPostGISDatastoreEncoder encoder = postGISUtility.generateEncoder(datatStoreName);
+        restPublisher.createPostGISDatastore(userName, encoder);
         // create the <layername>.zip file
         String fileName = tempUserZipDir + info.name + ".zip";
         File tempFile = new File(fileName);

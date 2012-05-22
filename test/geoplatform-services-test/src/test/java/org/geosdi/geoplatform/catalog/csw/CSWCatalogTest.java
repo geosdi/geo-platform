@@ -97,7 +97,7 @@ public class CSWCatalogTest {
 
         // Insert the servers test
         serverTestOur = this.createCSWServer("CSW Server WS Test",
-                "http://150.146.160.152/geonetwork/srv/en/csw");
+                "http://catalog.geosdi.org/geonetwork/srv/en/csw");
         serverTestOurID = cswService.insertServerCSW(serverTestOur);
         serverTestOur.setId(serverTestOurID);
 
@@ -348,14 +348,14 @@ public class CSWCatalogTest {
      **************************************************************************/
     @Test
     public void testGetRecordsOurCount() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
-        catalogFinder.getTextInfo().setText("land");
+        catalogFinder.getTextInfo().setText("limiti");
 
         Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
     }
 
     @Test
     public void testGetRecordsOurResultSummary() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
-        catalogFinder.getTextInfo().setText("land");
+        catalogFinder.getTextInfo().setText("limiti");
 
         List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(10, 1, catalogFinder);
         this.traceCollection(summaryRecords);
@@ -364,11 +364,38 @@ public class CSWCatalogTest {
 
     @Test
     public void testGetRecordsOurResultFull() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
-        catalogFinder.getTextInfo().setText("land");
+        catalogFinder.getTextInfo().setText("limiti");
 
         List<FullRecordDTO> records = cswService.searchFullRecords(10, 1, catalogFinder);
         this.traceCollection(records);
         Assert.assertTrue(records.size() > 0);
+    }
+
+    @Test
+    public void testGetRecordsOurResultFullGetCapabilities() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+        String title = "Protezione Civile Web Map Service";
+        TextInfo textInfo = catalogFinder.getTextInfo();
+        textInfo.setText(title);
+        textInfo.setSearchTitle(true);
+        textInfo.setSearchAbstract(false);
+        textInfo.setSearchSubjects(false);
+
+        List<FullRecordDTO> records = cswService.searchFullRecords(10, 1, catalogFinder);
+        this.traceCollection(records);
+        Assert.assertEquals(1, records.size());
+
+        FullRecordDTO record = records.get(0);
+        Assert.assertEquals(title, record.getTitle());
+        Assert.assertEquals("9f934a9ad3bdc52f04cd8e5033a51cef9101face", record.getIdentifier());
+        Assert.assertEquals("service", record.getType());
+        Assert.assertTrue(record.getAbstractText().
+                contains("WMS Server del Dipartimento della Protezione Civile Nazionale"));
+        Assert.assertNotNull(record.getSubjects());
+        Assert.assertEquals("WFS", record.getSubjects().get(0));
+        Assert.assertEquals("WMS", record.getSubjects().get(1));
+        Assert.assertEquals("GEOSERVER", record.getSubjects().get(2));
+        Assert.assertNotNull(record.getUriMap());
+        Assert.assertEquals(0, record.getUriMap().size());
     }
 
     @Test

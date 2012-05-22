@@ -250,6 +250,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     private <R extends AbstractRecord> R convertRecordDTO(R record, AbstractRecordDTO recordDTO) {
         record.setIdentifier(recordDTO.getIdentifier());
         record.setTitle(recordDTO.getTitle());
+        record.setType(recordDTO.getType());
         record.setAbstractText(recordDTO.getAbstractText());
         record.setSubjects(recordDTO.getSubjects());
 

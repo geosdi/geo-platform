@@ -142,7 +142,7 @@ public class CatalogCapabilitiesTest {
 
     @Test
     public void testGetCapabilitiesWithConnector() throws Exception {
-        URL url = new URL("http://150.146.160.152/geonetwork/srv/en/csw");
+        URL url = new URL("http://catalog.geosdi.org/geonetwork/srv/en/csw");
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 

@@ -57,6 +57,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FullRecordDTO;
@@ -480,6 +481,11 @@ class CSWServiceImpl {
                     dto.setTitle(
                             BindingUtility.convertStringListToString(contentElement));
                 }
+                
+                if ("type".equals(localPartElement)) {
+                    dto.setType(
+                            BindingUtility.convertStringListToString(contentElement));
+                }
 
                 if ("abstract".equals(localPartElement)) {
                     dto.setAbstractText(
@@ -491,11 +497,19 @@ class CSWServiceImpl {
                             BindingUtility.convertStringListToString(contentElement));
                 }
 
-                if ("URI".equals(localPartElement)) {
+                if ("URI".equals(localPartElement)) {                    
                     URI uri = (URI) element.getValue();
+                    String protocol = uri.getProtocol();
+                    /**
+                     * If the first element URI have a GetCapabilities protocol,
+                     * break the iteration.
+                     */
+                    if(OnlineResourceProtocolType.isForGetCapabilities(protocol)){
+                        break;
+                    }
 
                     URIDTO uriDTO = new URIDTO();
-                    uriDTO.setProtocol(uri.getProtocol());
+                    uriDTO.setProtocol(protocol);
                     uriDTO.setName(uri.getName());
                     uriDTO.setDescription(uri.getDescription());
                     dto.addUri(uriDTO);

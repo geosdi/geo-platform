@@ -80,7 +80,7 @@ public class CatalogContextTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private final static String CSW_HOST = "150.146.160.152";
+    private final static String CSW_HOST = "catalog.geosdi.org";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
     //
     private GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(

@@ -107,8 +107,7 @@ public class CatalogGetRecordsTest {
 
     @Test
     public void testCQLTemporalFilterGeomatys() throws Exception {
-        URL url = new URL(
-                "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
+        URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
@@ -152,8 +151,8 @@ public class CatalogGetRecordsTest {
     @Test
     public void testGetRecordsOutputSchema_CSW_RECORD() throws Exception {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
-                withServerUrl(new URL("http://150.146.160.152/geonetwork/"
-                + "srv/en/csw")).build();
+                withServerUrl(new URL("http://catalog.geosdi.org/geonetwork/srv/en/csw")).
+                build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 

@@ -48,6 +48,7 @@ public abstract class AbstractRecord extends GeoPlatformBeanModel {
     private static final long serialVersionUID = -715748241959974761L;
     //
     protected String identifier; // For performance purpose: used for equals() and hashCode() methods
+    private String type; // It isn't for binding model-view
 
     public enum RecordKeyValue {
 
@@ -80,6 +81,20 @@ public abstract class AbstractRecord extends GeoPlatformBeanModel {
      */
     public void setTitle(String title) {
         super.set(RecordKeyValue.TITLE.toString(), title);
+    }
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -138,6 +153,7 @@ public abstract class AbstractRecord extends GeoPlatformBeanModel {
         StringBuilder str = new StringBuilder();
         str.append("identifier = ").append(identifier);
         str.append(", title = ").append(this.getTitle());
+        str.append(", type =").append(type);
         str.append(", abstract =").append(this.getAbstractText());
         str.append(", subjects = ").append(this.getSubjects());
         return str.toString();

@@ -60,7 +60,7 @@ import org.junit.Test;
  */
 public class CSWConnectionTest {
 
-    private final static String CSW_HOST = "150.146.160.152";
+    private final static String CSW_HOST = "catalog.geosdi.org";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
 //
 //    @Before

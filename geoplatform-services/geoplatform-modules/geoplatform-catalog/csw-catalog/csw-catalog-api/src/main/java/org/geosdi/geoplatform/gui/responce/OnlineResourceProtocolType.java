@@ -47,61 +47,103 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum OnlineResourceProtocolType {
 
     /**
+     * 
      * OGC Web Map Service (ver 1.1.1).
      */
     @XmlEnumValue(value = "OGC:WMS-1.1.1-http-get-map")
     OGC_WMS_1_1_1_HTTP_GET_MAP("OGC:WMS-1.1.1-http-get-map"),
     /**
+     * 
      * OGC Web Map Service (ver 1.3.0).
      */
     @XmlEnumValue(value = "OGC:WMS-1.3.0-http-get-map")
     OGC_WMS_1_3_0_HTTP_GET_MAP("OGC:WMS-1.3.0-http-get-map"),
     /**
+     * 
      * File for download through FTP.
      */
     @XmlEnumValue(value = "WWW:DOWNLOAD-1.0-ftp--download")
     WWW_DOWNLOAD_1_0_FTP__DOWNLOAD("WWW:DOWNLOAD-1.0-ftp--download"),
     /**
+     * 
      * File for download.
      */
     @XmlEnumValue(value = "WWW:DOWNLOAD-1.0-http--download")
     WWW_DOWNLOAD_1_0_HTTP__DOWNLOAD("WWW:DOWNLOAD-1.0-http--download"),
     /**
+     * 
      * iCalendar (URL).
      */
     @XmlEnumValue(value = "WWW:LINK-1.0-http--ical")
     WWW_LINK_1_0_HTTP__ICAL("WWW:LINK-1.0-http--ical"),
     /**
+     * 
      * Web address (URL).
      */
     @XmlEnumValue(value = "WWW:LINK-1.0-http--link")
     WWW_LINK_1_0_HTTP__LINK("WWW:LINK-1.0-http--link"),
     /**
+     * 
      * Partner web address (URL).
      */
     @XmlEnumValue(value = "WWW:LINK-1.0-http--partners")
     WWW_LINK_1_0_HTTP__PARTNERS("WWW:LINK-1.0-http--partners"),
     /**
+     * 
      * Related link (URL).
      */
     @XmlEnumValue(value = "WWW:LINK-1.0-http--related")
     WWW_LINK_1_0_HTTP__RELATED("WWW:LINK-1.0-http--related"),
     /**
+     * 
      * RSS News feed (URL).
      */
     @XmlEnumValue(value = "WWW:LINK-1.0-http--rss")
     WWW_LINK_1_0_HTTP__RSS("WWW:LINK-1.0-http--rss"),
     /**
+     * 
      * Showcase product (URL).
      */
     @XmlEnumValue(value = "WWW:LINK-1.0-http--samples")
     WWW_LINK_1_0_HTTP__SAMPLES("WWW:LINK-1.0-http--samples"),
     /**
+     * 
      * OPeNDAP URL.
      */
     @XmlEnumValue(value = "WWW:LINK-1.0-http--opendap")
-    WWW_LINK_1_0_HTTP__OPENDAP("WWW:LINK-1.0-http--opendap");
+    WWW_LINK_1_0_HTTP__OPENDAP("WWW:LINK-1.0-http--opendap"),
     /**
+     * 
+     * OGC-WCS Web Coverage Service (ver 1.1.0).
+     */
+    @XmlEnumValue(value = "OGC:WCS-1.1.0-http-get-capabilities")
+    OGC_WCS_1_1_0_HTTP_GET_CAPABILITIES("OGC:WCS-1.1.0-http-get-capabilities"),
+    /**
+     * 
+     * OGC-WFS Web Feature Service (ver 1.0.0).
+     */
+    @XmlEnumValue(value = "OGC:WFS-1.0.0-http-get-capabilities")
+    OGC_WFS_1_0_0_HTTP_GET_CAPABILITIES("OGC:WFS-1.0.0-http-get-capabilities"),
+    /**
+     * 
+     * OGC-WMC Web Map Context (ver 1.1).
+     */
+    @XmlEnumValue(value = "OGC:WMC-1.1.0-http-get-capabilities")
+    OGC_WMC_1_1_0_HTTP_GET_CAPABILITIES("OGC:WMC-1.1.0-http-get-capabilities"),
+    /**
+     * 
+     * OGC-WMS Capabilities service (ver 1.1.1).
+     */
+    @XmlEnumValue(value = "OGC:WMS-1.1.1-http-get-capabilities")
+    OGC_WMS_1_1_1_HTTP_GET_CAPABILITIES("OGC:WMS-1.1.1-http-get-capabilities"),
+    /**
+     * 
+     * OGC-WMS Capabilities service (ver 1.3.0).
+     */
+    @XmlEnumValue(value = "OGC:WMS-1.3.0-http-get-capabilities")
+    OGC_WMS_1_3_0_HTTP_GET_CAPABILITIES("OGC:WMS-1.3.0-http-get-capabilities");
+    /**
+     * 
      * Protocol of the OnlineResourceType.
      */
     private String protocol;
@@ -149,6 +191,20 @@ public enum OnlineResourceProtocolType {
     }
 
     /**
+     * TRUE if the protocol is suitable for GetCapabilities Request.
+     */
+    public static boolean isForGetCapabilities(OnlineResourceProtocolType protocol) {
+        if (protocol == OGC_WCS_1_1_0_HTTP_GET_CAPABILITIES
+                || protocol == OGC_WFS_1_0_0_HTTP_GET_CAPABILITIES
+                || protocol == OGC_WMC_1_1_0_HTTP_GET_CAPABILITIES
+                || protocol == OGC_WMS_1_1_1_HTTP_GET_CAPABILITIES
+                || protocol == OGC_WMS_1_3_0_HTTP_GET_CAPABILITIES) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @see OnlineResourceProtocolType#isForWMSGetMapRequest(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
      */
     public static boolean isForWMSGetMapRequest(String protocolString) {
@@ -184,6 +240,20 @@ public enum OnlineResourceProtocolType {
                 protocolString);
         if (protocol != null
                 && OnlineResourceProtocolType.isForLink(protocol)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @see OnlineResourceProtocolType#isForGetCapabilities(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
+     */
+    public static boolean isForGetCapabilities(String protocolString) {
+        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(
+                protocolString);
+        if (protocol != null
+                && OnlineResourceProtocolType.isForGetCapabilities(protocol)) {
             return true;
         }
 

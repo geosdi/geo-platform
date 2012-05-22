@@ -191,7 +191,7 @@ public class RecordsContainer
             
             @Override
             public void loaderLoadException(LoadEvent le) {
-                if (le.exception instanceof GeoPlatformException) { // TODO If server not found?
+                if (le.exception instanceof GeoPlatformException) { // TODO If record not found?
                     // No result
                     System.out.println("\n*** " + le.exception.getMessage());
                 } else {

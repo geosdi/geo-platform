@@ -116,10 +116,11 @@ public class CatalogSearchWidget extends LayoutContainer
 
             @Override
             public void componentKeyUp(ComponentEvent event) {
-                if ((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
-                        || (event.getKeyCode() == KeyCodes.KEY_DELETE)
-                        && (searchTextField.getValue() == null)) {
-                    reset();
+                if (searchTextField.getValue() == null) {
+                    if (event.getKeyCode() == KeyCodes.KEY_BACKSPACE
+                            || event.getKeyCode() == KeyCodes.KEY_DELETE) {
+                        reset();
+                    }
                 }
             }
         });

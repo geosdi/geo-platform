@@ -171,7 +171,8 @@ public class CatalogGetRecordsTest {
         List<JAXBElement<? extends AbstractRecordType>> metadata = response.getSearchResults().getAbstractRecord();
 
         for (JAXBElement<? extends AbstractRecordType> element : metadata) {
-            logger.info("ECCOLO @@@@@@@@@@@@@@@@@@@@@@@@@ " + element.getValue());
+            logger.info(
+                    "FULL RECORD @@@@@@@@@@@@@@@@@@@@@@@@@ " + element.getValue());
         }
     }
 }

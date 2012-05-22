@@ -35,56 +35,71 @@
  */
 package org.geosdi.geoplatform.gui.responce;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+
 /**
  * Some literal protocol of property OnlineResourceType.
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@XmlEnum
 public enum OnlineResourceProtocolType {
 
     /**
      * OGC Web Map Service (ver 1.1.1).
      */
+    @XmlEnumValue(value = "OGC:WMS-1.1.1-http-get-map")
     OGC_WMS_1_1_1_HTTP_GET_MAP("OGC:WMS-1.1.1-http-get-map"),
     /**
      * OGC Web Map Service (ver 1.3.0).
      */
+    @XmlEnumValue(value = "OGC:WMS-1.3.0-http-get-map")
     OGC_WMS_1_3_0_HTTP_GET_MAP("OGC:WMS-1.3.0-http-get-map"),
     /**
      * File for download through FTP.
      */
+    @XmlEnumValue(value = "WWW:DOWNLOAD-1.0-ftp--download")
     WWW_DOWNLOAD_1_0_FTP__DOWNLOAD("WWW:DOWNLOAD-1.0-ftp--download"),
     /**
      * File for download.
      */
+    @XmlEnumValue(value = "WWW:DOWNLOAD-1.0-http--download")
     WWW_DOWNLOAD_1_0_HTTP__DOWNLOAD("WWW:DOWNLOAD-1.0-http--download"),
     /**
      * iCalendar (URL).
      */
+    @XmlEnumValue(value = "WWW:LINK-1.0-http--ical")
     WWW_LINK_1_0_HTTP__ICAL("WWW:LINK-1.0-http--ical"),
     /**
      * Web address (URL).
      */
+    @XmlEnumValue(value = "WWW:LINK-1.0-http--link")
     WWW_LINK_1_0_HTTP__LINK("WWW:LINK-1.0-http--link"),
     /**
      * Partner web address (URL).
      */
+    @XmlEnumValue(value = "WWW:LINK-1.0-http--partners")
     WWW_LINK_1_0_HTTP__PARTNERS("WWW:LINK-1.0-http--partners"),
     /**
      * Related link (URL).
      */
+    @XmlEnumValue(value = "WWW:LINK-1.0-http--related")
     WWW_LINK_1_0_HTTP__RELATED("WWW:LINK-1.0-http--related"),
     /**
      * RSS News feed (URL).
      */
+    @XmlEnumValue(value = "WWW:LINK-1.0-http--rss")
     WWW_LINK_1_0_HTTP__RSS("WWW:LINK-1.0-http--rss"),
     /**
      * Showcase product (URL).
      */
+    @XmlEnumValue(value = "WWW:LINK-1.0-http--samples")
     WWW_LINK_1_0_HTTP__SAMPLES("WWW:LINK-1.0-http--samples"),
     /**
      * OPeNDAP URL.
      */
+    @XmlEnumValue(value = "WWW:LINK-1.0-http--opendap")
     WWW_LINK_1_0_HTTP__OPENDAP("WWW:LINK-1.0-http--opendap");
     /**
      * Protocol of the OnlineResourceType.
@@ -134,41 +149,44 @@ public enum OnlineResourceProtocolType {
     }
 
     /**
-     * @see OnlineResourceProtocolType#isForWMSGetMapRequest(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType) 
+     * @see OnlineResourceProtocolType#isForWMSGetMapRequest(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
      */
     public static boolean isForWMSGetMapRequest(String protocolString) {
-        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(protocolString);
+        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(
+                protocolString);
         if (protocol != null
                 && OnlineResourceProtocolType.isForWMSGetMapRequest(protocol)) {
             return true;
         }
-        
+
         return false;
     }
 
     /**
-     * @see OnlineResourceProtocolType#isForDownload(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType) 
+     * @see OnlineResourceProtocolType#isForDownload(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
      */
     public static boolean isForDownload(String protocolString) {
-        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(protocolString);
+        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(
+                protocolString);
         if (protocol != null
                 && OnlineResourceProtocolType.isForDownload(protocol)) {
             return true;
         }
-        
+
         return false;
     }
 
     /**
-     * @see OnlineResourceProtocolType#isForLink(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType) 
+     * @see OnlineResourceProtocolType#isForLink(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
      */
     public static boolean isForLink(String protocolString) {
-        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(protocolString);
+        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(
+                protocolString);
         if (protocol != null
                 && OnlineResourceProtocolType.isForLink(protocol)) {
             return true;
         }
-        
+
         return false;
     }
 

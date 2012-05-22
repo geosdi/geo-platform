@@ -107,13 +107,15 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
                 config.getLimit(), page);
 
-        List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(psr);
+        List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(
+                psr);
         if (serverList == null) {
             logger.info("\n*** No CSW server ***");
             throw new GeoPlatformException("There are no results"); // TODO Create empty list
         }
 
-        ArrayList<GPCSWServerBeanModel> searchUsers = new ArrayList<GPCSWServerBeanModel>(serverList.size());
+        ArrayList<GPCSWServerBeanModel> searchUsers = new ArrayList<GPCSWServerBeanModel>(
+                serverList.size());
         for (ServerCSWDTO serverDTO : serverList) {
             searchUsers.add(this.convertServerDTO(serverDTO));
         }
@@ -142,7 +144,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         try {
             geoPlatformCSWClient.deleteServerCSW(serverID);
         } catch (ResourceNotFoundFault ex) {
-            logger.error("The server with id " + serverID + " was not bean deleted");
+            logger.error(
+                    "The server with id " + serverID + " was not bean deleted");
             throw new GeoPlatformException("The server with id "
                     + serverID + " was not bean deleted");
         }
@@ -258,10 +261,11 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     }
 
     private FullRecord convertFullRecordDTO(FullRecordDTO fullRecordDTO) {
-        FullRecord fullRecord = this.convertRecordDTO(new FullRecord(), fullRecordDTO);
+        FullRecord fullRecord = this.convertRecordDTO(new FullRecord(),
+                fullRecordDTO);
 
         fullRecord.setBBox(this.convertBBoxDTO(fullRecordDTO.getBBox()));
-        fullRecord.setUriList(fullRecordDTO.getUriList());
+        fullRecord.setUriMap(fullRecordDTO.getUriMap());
 
         return fullRecord;
     }

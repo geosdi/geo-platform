@@ -35,19 +35,21 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.geosdi.geoplatform.gui.responce.URIDTO;
+import java.util.EnumMap;
+import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.geosdi.geoplatform.gui.responce.BBox;
+import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
+import org.geosdi.geoplatform.gui.responce.URIDTO;
+import org.geosdi.geoplatform.responce.adapter.UriMapAdapter;
 
 /**
  * Full Record DTO for CSW request.
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "FullRecordDTO")
@@ -58,9 +60,10 @@ public class FullRecordDTO extends AbstractRecordDTO {
     //
     private BBox bBox;
     //
-    @XmlElementWrapper(name = "uriList")
     @XmlElement(name = "uri")
-    private List<URIDTO> uriList = new ArrayList<URIDTO>();
+    @XmlJavaTypeAdapter(UriMapAdapter.class)
+    private Map<OnlineResourceProtocolType, URIDTO> uriMap = new EnumMap<OnlineResourceProtocolType, URIDTO>(
+            OnlineResourceProtocolType.class);
 
     public BBox getBBox() {
         return bBox;
@@ -70,16 +73,32 @@ public class FullRecordDTO extends AbstractRecordDTO {
         this.bBox = bBox;
     }
 
-    public List<URIDTO> getUriList() {
-        return uriList;
+    /**
+     * @return the uriMap
+     */
+    public Map<OnlineResourceProtocolType, URIDTO> getUriMap() {
+        return uriMap;
     }
 
-    public void setUriList(List<URIDTO> uriList) {
-        this.uriList = uriList;
+    /**
+     * @param uriMap the uriMap to set
+     */
+    public void setUriMap(Map<OnlineResourceProtocolType, URIDTO> uriMap) {
+        this.uriMap = uriMap;
     }
 
+    /**
+     * TODO FIX ME : Put in OnlineResourceProtocolType all Protocol Type
+     * to avoid null values for keys
+     *
+     * @param uri
+     */
     public void addUri(URIDTO uri) {
-        this.uriList.add(uri);
+        OnlineResourceProtocolType protocolType = OnlineResourceProtocolType.fromValue(
+                uri.getProtocol());
+        if (protocolType != null) {
+            this.uriMap.put(protocolType, uri);
+        }
     }
 
     @Override
@@ -87,7 +106,7 @@ public class FullRecordDTO extends AbstractRecordDTO {
         StringBuilder str = new StringBuilder("FullRecordDTO {");
         str.append(super.toStringBuilder(str));
         str.append(", bBox=").append(bBox);
-        str.append(", uri=").append(uriList);
+        str.append(", uri=").append(getUriMap());
         return str.append('}').toString();
     }
 }

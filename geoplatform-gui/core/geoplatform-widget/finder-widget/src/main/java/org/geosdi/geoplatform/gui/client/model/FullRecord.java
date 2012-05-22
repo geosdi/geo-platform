@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
 
 /**
  * Full Record for CSW request.
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FullRecord extends AbstractRecord {
@@ -50,7 +50,7 @@ public class FullRecord extends AbstractRecord {
     private static final long serialVersionUID = 7344635200928287521L;
     //
     private BBoxClientInfo bBox;
-    private List<URIDTO> uriList;
+    private Map<OnlineResourceProtocolType, URIDTO> uriMap;
 
     public BBoxClientInfo getBBox() {
         return bBox;
@@ -60,40 +60,49 @@ public class FullRecord extends AbstractRecord {
         this.bBox = bBox;
     }
 
-    public List<URIDTO> getUriList() {
-        return uriList;
+    /**
+     * @return the uriMap
+     */
+    public Map<OnlineResourceProtocolType, URIDTO> getUriMap() {
+        return uriMap;
     }
 
-    public void setUriList(List<URIDTO> uriList) {
-        this.uriList = uriList;
+    /**
+     * @param uriMap the uriMap to set
+     */
+    public void setUriMap(Map<OnlineResourceProtocolType, URIDTO> uriMap) {
+        this.uriMap = uriMap;
     }
+
+    
 
     public boolean isForWMSGetMapRequest() {
-        for (URIDTO uri : uriList) {
-            if (OnlineResourceProtocolType.isForWMSGetMapRequest(uri.getProtocol())) {
-                return true;
-            }
-        }
+//        for (URIDTO uri : getUriMap()) {
+//            if (OnlineResourceProtocolType.isForWMSGetMapRequest(
+//                    uri.getProtocol())) {
+//                return true;
+//            }
+//        }
 
         return false;
     }
 
     public boolean isForDownload() {
-        for (URIDTO uri : uriList) {
-            if (OnlineResourceProtocolType.isForDownload(uri.getProtocol())) {
-                return true;
-            }
-        }
+//        for (URIDTO uri : getUriMap()) {
+//            if (OnlineResourceProtocolType.isForDownload(uri.getProtocol())) {
+//                return true;
+//            }
+//        }
 
         return false;
     }
 
     public boolean isForLink() {
-        for (URIDTO uri : uriList) {
-            if (OnlineResourceProtocolType.isForLink(uri.getProtocol())) {
-                return true;
-            }
-        }
+//        for (URIDTO uri : getUriMap()) {
+//            if (OnlineResourceProtocolType.isForLink(uri.getProtocol())) {
+//                return true;
+//            }
+//        }
 
         return false;
     }
@@ -103,7 +112,7 @@ public class FullRecord extends AbstractRecord {
         StringBuilder str = new StringBuilder("FullRecord {");
         str.append(super.toString());
         str.append(", bBox =").append(bBox);
-        str.append(", uriList =").append(uriList);
+        str.append(", uriList =").append(getUriMap());
         return str.append('}').toString();
     }
 }

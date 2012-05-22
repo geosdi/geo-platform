@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.UUID;
 import javax.jws.WebService;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
@@ -73,7 +74,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
             logger.debug("Triyng to connect to the XMPP server");
             connection.connect();
             logger.debug("Triyng to login to the XMPP Server");
-            connection.login(userName, password);
+            connection.login(userName, password, UUID.randomUUID().toString());
         } catch (XMPPException ex) {
             logger.error(ex.toString());
         }

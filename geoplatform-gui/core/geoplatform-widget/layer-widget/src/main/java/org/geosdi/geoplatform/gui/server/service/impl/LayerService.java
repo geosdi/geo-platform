@@ -701,6 +701,7 @@ public class LayerService implements ILayerService {
                 String username = ((GPUser) account).getUsername();
                 if (secondToRefresh > 0) {
                     logger.debug("Request to subscribe layer refresh for: " + username + " - " + layerUUID);
+                    httpServletRequest.getSession().setMaxInactiveInterval(-1);
                     this.geoPlatformTrackingClient.getTrackingService().subscribeLayerNotification(username,
                             emiteResource, layerUUID, secondToRefresh);
                 } else if (account instanceof GPUser) {

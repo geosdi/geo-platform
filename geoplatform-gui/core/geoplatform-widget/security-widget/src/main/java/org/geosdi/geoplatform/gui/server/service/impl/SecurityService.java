@@ -76,7 +76,7 @@ public class SecurityService implements ISecurityService {
     private SessionUtility sessionUtility;
     //
     private @Value("${host_xmpp_server}")
-    String hostXmppServer = "xmpp.geosdi.org";
+    String hostXmppServer;
 
     @Override
     public IGPAccountDetail userLogin(String userName, String password,

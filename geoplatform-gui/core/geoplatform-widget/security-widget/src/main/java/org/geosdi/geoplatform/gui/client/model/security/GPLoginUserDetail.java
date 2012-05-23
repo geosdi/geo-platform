@@ -83,6 +83,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
         this.email = email;
     }
 
+    @Override
     public String getHostXmppServer() {
         return hostXmppServer;
     }

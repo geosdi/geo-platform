@@ -65,8 +65,13 @@ import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.LiteralType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyIsLikeType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
+import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
+import org.geosdi.geoplatform.xml.gml.v311.AbstractRingPropertyType;
+import org.geosdi.geoplatform.xml.gml.v311.CoordinatesType;
 import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
 import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
+import org.geosdi.geoplatform.xml.gml.v311.LinearRingType;
+import org.geosdi.geoplatform.xml.gml.v311.PolygonType;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -451,7 +456,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilterAreaEncloses() throws JAXBException {
+    public void testGetRecordsSearchFilterAreaEnclosesEnvelope() throws JAXBException {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -511,6 +516,100 @@ public class CatalogRequestTest {
         assertTrue(request.contains("<gml:lowerCorner>6.624 36.6492</gml:lowerCorner>"));
         assertTrue(request.contains("<gml:upperCorner>18.5144 47.0946</gml:upperCorner>"));
         assertTrue(request.contains("</gml:Envelope>"));
+
+        assertTrue(request.contains("</ogc:Contains>"));
+
+        assertTrue(request.contains("</ogc:Filter>"));
+
+        assertTrue(request.contains("</csw:Constraint>"));
+
+        assertTrue(request.contains("</csw:Query>"));
+
+        assertTrue(request.contains("</csw:GetRecords>"));
+    }
+
+    @Test
+    public void testGetRecordsSearchFilterAreaEnclosesPolygon() throws JAXBException {
+        GetRecordsType getRecords = new GetRecordsType();
+
+        getRecords.setResultType(ResultType.RESULTS);
+
+        QueryType query = new QueryType();
+        getRecords.setAbstractQuery(query);
+
+        query.setTypeNames(Arrays.asList(QName.valueOf("gmd:MD_Metadata")));
+
+        ElementSetNameType elementSetNameType = new ElementSetNameType();
+        elementSetNameType.setValue(ElementSetType.SUMMARY);
+        query.setElementSetName(elementSetNameType);
+
+        BinarySpatialOpType binarySpatial = new BinarySpatialOpType();
+
+        PropertyNameType propertyNameType = new PropertyNameType();
+        propertyNameType.setContent(Arrays.<Object>asList("ows:BoundingBox"));
+        binarySpatial.setPropertyName(propertyNameType);
+
+        CoordinatesType coordinatesType = new CoordinatesType();
+        // The first and last point must be the same
+        // minX minY maxX maxY minX
+        coordinatesType.setValue("6.624 36.6492 18.5144 47.0946 6.624");
+        // OR
+        // minX,minY maxX,minY maxX,maxY minX,maxY
+//        coordinatesType.setValue("6.624,36.6492 18.5144,36.6492 18.5144,47.0946 6.624,47.0946 6.624,36.6492");
+
+        LinearRingType linearRing = new LinearRingType();
+        linearRing.setCoordinates(coordinatesType);
+
+        AbstractRingPropertyType abstractRing = new AbstractRingPropertyType();
+        abstractRing.setRing(gmlFactory.createLinearRing(linearRing));
+
+        PolygonType polygon = new PolygonType();
+        polygon.setSrsName("EPSG:4326");
+        polygon.setExterior(gmlFactory.createExterior(abstractRing));
+
+        JAXBElement<? extends AbstractGeometryType> polygonElement = gmlFactory.createPolygon(polygon);
+        binarySpatial.setGeometry((JAXBElement<AbstractGeometryType>) polygonElement);
+
+        FilterType filterType = new FilterType();
+        filterType.setSpatialOps(filterFactory.createContains(binarySpatial));
+
+        QueryConstraintType queryConstraintType = new QueryConstraintType();
+        queryConstraintType.setVersion("1.1.0");
+        queryConstraintType.setFilter(filterType);
+
+        query.setConstraint(queryConstraintType);
+
+        Marshaller marshaller = cswContext.acquireMarshaller();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(getRecords, writer);
+
+        String request = writer.toString();
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n{}",
+                new Scanner(request).useDelimiter("\\A").next());
+
+        assertTrue(request.contains("<csw:GetRecords"));
+        assertTrue(request.contains("service=\"CSW\""));
+        assertTrue(request.contains("version=\"2.0.2\""));
+        assertTrue(request.contains("resultType=\"results\""));
+
+        assertTrue(request.contains("<csw:Query typeNames=\"gmd:MD_Metadata\""));
+        assertTrue(request.contains("<csw:ElementSetName>summary</csw:ElementSetName>"));
+
+        assertTrue(request.contains("<csw:Constraint version=\"1.1.0\">"));
+
+        assertTrue(request.contains("<ogc:Filter>"));
+
+        assertTrue(request.contains("<ogc:Contains>"));
+
+        assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
+
+        assertTrue(request.contains("<gml:Polygon srsName=\"EPSG:4326\">"));
+        assertTrue(request.contains("<gml:exterior>"));
+        assertTrue(request.contains("<gml:LinearRing>"));
+        assertTrue(request.contains("<gml:coordinates>6.624 36.6492 18.5144 47.0946 6.624</gml:coordinates>"));
+        assertTrue(request.contains("</gml:LinearRing>"));
+        assertTrue(request.contains("</gml:exterior>"));
+        assertTrue(request.contains("</gml:Polygon>"));
 
         assertTrue(request.contains("</ogc:Contains>"));
 

@@ -435,8 +435,8 @@ public class CatalogRequestTest {
         assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
 
         assertTrue(request.contains("<gml:Envelope srsName=\"EPSG:4326\">"));
-        assertTrue(request.contains("<gml:lowerCorner>18.521 35.492</gml:lowerCorner>"));
-        assertTrue(request.contains("<gml:upperCorner>6.627 47.092</gml:upperCorner>"));
+        assertTrue(request.contains("<gml:lowerCorner>6.624 36.6492</gml:lowerCorner>"));
+        assertTrue(request.contains("<gml:upperCorner>18.5144 47.0946</gml:upperCorner>"));
         assertTrue(request.contains("</gml:Envelope>"));
 
         assertTrue(request.contains("</ogc:BBOX>"));
@@ -475,7 +475,7 @@ public class CatalogRequestTest {
         binarySpatial.setEnvelope(gmlFactory.createEnvelope(envelope));
 
         FilterType filterType = new FilterType();
-        filterType.setSpatialOps(filterFactory.createWithin(binarySpatial));
+        filterType.setSpatialOps(filterFactory.createContains(binarySpatial));
 
         QueryConstraintType queryConstraintType = new QueryConstraintType();
         queryConstraintType.setVersion("1.1.0");
@@ -503,16 +503,16 @@ public class CatalogRequestTest {
 
         assertTrue(request.contains("<ogc:Filter>"));
 
-        assertTrue(request.contains("<ogc:Within>"));
+        assertTrue(request.contains("<ogc:Contains>"));
 
         assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
 
         assertTrue(request.contains("<gml:Envelope srsName=\"EPSG:4326\">"));
-        assertTrue(request.contains("<gml:lowerCorner>18.521 35.492</gml:lowerCorner>"));
-        assertTrue(request.contains("<gml:upperCorner>6.627 47.092</gml:upperCorner>"));
+        assertTrue(request.contains("<gml:lowerCorner>6.624 36.6492</gml:lowerCorner>"));
+        assertTrue(request.contains("<gml:upperCorner>18.5144 47.0946</gml:upperCorner>"));
         assertTrue(request.contains("</gml:Envelope>"));
 
-        assertTrue(request.contains("</ogc:Within>"));
+        assertTrue(request.contains("</ogc:Contains>"));
 
         assertTrue(request.contains("</ogc:Filter>"));
 
@@ -707,16 +707,17 @@ public class CatalogRequestTest {
         return binaryComparison;
     }
 
+    // TODO check for filter by area
     private EnvelopeType createEnvelopeItaly() {
         EnvelopeType envelope = new EnvelopeType();
         envelope.setSrsName("EPSG:4326");
 
         DirectPositionType lower = new DirectPositionType();
-        lower.setValue(Arrays.asList(18.521, 35.492)); // maxX, minY
+        lower.setValue(Arrays.asList(6.624, 36.6492)); // minX, minY
         envelope.setLowerCorner(lower);
 
         DirectPositionType upper = new DirectPositionType();
-        upper.setValue(Arrays.asList(6.627, 47.092)); // minX, maxY
+        upper.setValue(Arrays.asList(18.5144, 47.0946)); // maxX, maxY
         envelope.setUpperCorner(upper);
 
         return envelope;

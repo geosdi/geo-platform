@@ -125,10 +125,11 @@ public class BindingUtility {
 
         BBox bBox = new BBox();
 
-        bBox.setMaxX(bBoxType.getLowerCorner().get(0));
-        bBox.setMaxY(bBoxType.getLowerCorner().get(1));
+        // TODO check for filter by area
+        bBox.setMinX(bBoxType.getLowerCorner().get(0));
+        bBox.setMinY(bBoxType.getLowerCorner().get(1));
 
-        bBox.setMinX(bBoxType.getUpperCorner().get(0));
+        bBox.setMaxX(bBoxType.getUpperCorner().get(0));
         bBox.setMaxY(bBoxType.getUpperCorner().get(1));
 
         return bBox;

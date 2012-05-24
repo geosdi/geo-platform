@@ -33,38 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.puregwt.event;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.config.CatalogFinderInjector;
-import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerEnableHandler;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class WmsFromMetadataTreeAction extends ToolbarLayerTreeAction {
+public class CatalogTreeLayerEnableEvent extends GwtEvent<CatalogTreeLayerEnableHandler> {
 
-    static {
-        injector = CatalogFinderInjector.MainInjector.getInstance();
+    private boolean enable;
+
+    public CatalogTreeLayerEnableEvent() {
     }
-    private static final CatalogFinderInjector injector;
-    //
-    private CatalogFinderWidget wmsMetadataWidget;
 
-    public WmsFromMetadataTreeAction(TreePanel treePanel) {
-        super(treePanel, BasicWidgetResources.ICONS.reset(),
-                "Add WMS from Metadata");
-        this.wmsMetadataWidget = injector.getCatalogFinderWidget();
-        this.wmsMetadataWidget.setTree(tree);
+    public CatalogTreeLayerEnableEvent(boolean enable) {
+        this.enable = enable;
     }
 
     @Override
-    public void componentSelected(ButtonEvent e) {
-        wmsMetadataWidget.show();
+    public Type<CatalogTreeLayerEnableHandler> getAssociatedType() {
+        return CatalogTreeLayerEnableHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(CatalogTreeLayerEnableHandler handler) {
+        handler.onComponentEnable(enable);
+    }
+
+    /**
+     * @param enable the enable to set
+     */
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }

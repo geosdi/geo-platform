@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogComboBoxComponent {
 
@@ -73,9 +73,7 @@ public class CatalogComboBoxComponent {
                 HasHorizontalAlignment.ALIGN_CENTER);
 
         Label typeLabel = new Label("Type:");
-        typeLabel.setStyleAttribute("backgroundColor", "white");
-        typeLabel.setStyleAttribute("font",
-                "normal 12px tahoma, arial, helvetica, sans-serif");
+        typeLabel.setStyleName("comboType-Label");
 
         table.setWidget(1, 1, typeLabel);
     }
@@ -96,8 +94,6 @@ public class CatalogComboBoxComponent {
 
             @Override
             public void selectionChanged(SelectionChangedEvent<SimpleComboValue<AreaSearchType>> se) {
-                System.out.println(
-                        "ECCOLA @@@@@@@@@@@@@@@@@@@@@ " + se.getSelectedItem().getValue());
             }
         });
 

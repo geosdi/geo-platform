@@ -33,38 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.puregwt.handler;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.config.CatalogFinderInjector;
-import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class WmsFromMetadataTreeAction extends ToolbarLayerTreeAction {
+public interface CatalogTreeLayerEnableHandler extends EventHandler {
 
-    static {
-        injector = CatalogFinderInjector.MainInjector.getInstance();
-    }
-    private static final CatalogFinderInjector injector;
-    //
-    private CatalogFinderWidget wmsMetadataWidget;
+    public static final GwtEvent.Type<CatalogTreeLayerEnableHandler> TYPE = new GwtEvent.Type<CatalogTreeLayerEnableHandler>();
 
-    public WmsFromMetadataTreeAction(TreePanel treePanel) {
-        super(treePanel, BasicWidgetResources.ICONS.reset(),
-                "Add WMS from Metadata");
-        this.wmsMetadataWidget = injector.getCatalogFinderWidget();
-        this.wmsMetadataWidget.setTree(tree);
-    }
-
-    @Override
-    public void componentSelected(ButtonEvent e) {
-        wmsMetadataWidget.show();
-    }
+    void onComponentEnable(boolean enable);
 }

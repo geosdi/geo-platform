@@ -41,8 +41,10 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.puregwt.event.ActionTreePresenceEvent;
 import org.geosdi.geoplatform.gui.client.widget.components.MainViewFinderWidget;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.FiltersFinderWidget;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -69,15 +71,6 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
         this.bus = bus;
     }
 
-    public CatalogFinderWidget(boolean lazy) {
-        super(lazy);
-    }
-
-    public CatalogFinderWidget(boolean lazy, TreePanel<GPBeanTreeModel> theTree) {
-        super(lazy);
-        tree = theTree;
-    }
-
     @Override
     public void addComponent() {
         addWestWidget();
@@ -98,6 +91,35 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
         super.setPlain(true);
 
         super.setLayout(new BorderLayout());
+    }
+
+    /**
+     * @param tree the tree to set
+     */
+    public void setTree(TreePanel<GPBeanTreeModel> tree) {
+        this.tree = tree;
+    }
+
+    @Override
+    protected void onRender(Element parent, int pos) {
+        super.onRender(parent, pos);
+
+        if (this.tree != null) {
+            this.changeWindowState();
+        }
+    }
+
+    private void changeWindowState() {
+        super.setClosable(true);
+        this.notifyTreePresence();
+    }
+
+    /**
+     * Method to add in the Catalog Finder UI the section
+     * to add Metadata on GeoPlatform Tree Layers Widget
+     */
+    private void notifyTreePresence() {
+        this.bus.fireEvent(new ActionTreePresenceEvent(this.tree));
     }
 
     private void addWestWidget() {

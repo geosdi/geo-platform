@@ -36,13 +36,12 @@
 package org.geosdi.geoplatform.gui.client.widget.components.search;
 
 import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.Element;
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.ActionTreePresenceHandler;
-import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
+import org.geosdi.geoplatform.gui.client.action.button.AddLayerToTreeAction;
+import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -50,59 +49,46 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogSearchResultWidget extends LayoutContainer
-        implements ActionTreePresenceHandler {
+public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
     
-    private RecordsContainer recordsContainer;
-    private EventBus bus;
-    private Label resultLabel;
-    private TreePanel<GPBeanTreeModel> tree;
+    private Label operationLabel;
+    private Button addLayerToTreeButton;
     
-    @Inject
-    public CatalogSearchResultWidget(RecordsContainer theRecordsContainer,
-            EventBus theBus) {
-        this.recordsContainer = theRecordsContainer;
-        this.bus = theBus;
-        
-        this.addHandler();
-        this.addStyle();
+    public CatalogTreeLayerWidgetSupport(Grid<FullRecord> theGrid,
+            TreePanel<GPBeanTreeModel> theTree,
+            EventBus bus) {
+        bus.addHandler(TYPE, this);
+        this.createLabelComponent();
+        this.createButtonComponent(theTree, theGrid);
     }
     
     @Override
-    protected void onRender(Element parent, int index) {
-        super.onRender(parent, index);
-        
-        this.resultLabel = new Label("Search Result");
-        resultLabel.setStyleName("searchResult-Label");
-        
-        add(resultLabel);
-        add(recordsContainer);
-        
-        if (this.tree != null) {
-            this.addComponentsForTreePresence();
-        }
+    public Label getLabel() {
+        return this.operationLabel;
     }
     
     @Override
-    public void notifyTreePresence(TreePanel<GPBeanTreeModel> theTree) {
-        this.tree = theTree;
+    public Button getButton() {
+        return this.addLayerToTreeButton;
     }
     
-    private void addHandler() {
-        this.bus.addHandler(CatalogSearchResultWidget.TYPE, this);
+    @Override
+    public void onComponentEnable(boolean enable) {
+        this.addLayerToTreeButton.setEnabled(enable);
     }
     
-    private void addStyle() {
-        super.setStyleName("searchResult-Widget");
+    private void createLabelComponent() {
+        this.operationLabel = new Label("Operations with selected");
+        operationLabel.setStyleName("searchOperation-Label");
     }
     
-    private void addComponentsForTreePresence() {
-        GPTreeLayerWidgetSupport catalogTreeLayer = new CatalogTreeLayerWidgetSupport(
-                recordsContainer.getWidget(), tree, bus);
+    private void createButtonComponent(TreePanel<GPBeanTreeModel> tree,
+            Grid<FullRecord> grid) {
+        this.addLayerToTreeButton = new Button("Add To Layer Tree",
+                new AddLayerToTreeAction(grid, tree));
         
-        add(catalogTreeLayer.getLabel());
-        add(catalogTreeLayer.getButton());
+        this.addLayerToTreeButton.setStyleAttribute("padding-top", "10px");
         
-        this.recordsContainer.setSelectionContainer(true);
+        this.addLayerToTreeButton.setEnabled(false);
     }
 }

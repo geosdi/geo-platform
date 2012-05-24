@@ -17,7 +17,13 @@
 .searchResult-Label{
     color: #4169E1;
     font: normal 14px tahoma, arial, helvetica, sans-serif;
-    padding-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.searchOperation-Label{
+    color: #4169E1;
+    font: normal 14px tahoma, arial, helvetica, sans-serif;
 }
 
 .catalogSearch-Label{
@@ -33,4 +39,9 @@
 .catalogBBOX-Label{
     background-color: white;
     font: normal 10px tahoma, arial, helvetica, sans-serif;
+}
+
+.comboType-Label{
+    background-color: white;
+    font: normal 12px tahoma, arial, helvetica, sans-serif;
 }

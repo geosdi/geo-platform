@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.configuration.action;
 
-import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
-import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHandler;
-import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHandler;
 
 /**
  *

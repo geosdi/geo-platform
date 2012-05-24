@@ -33,76 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.search;
+package org.geosdi.geoplatform.gui.client.widget.expander;
 
-import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.Element;
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.ActionTreePresenceHandler;
-import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogSearchResultWidget extends LayoutContainer
-        implements ActionTreePresenceHandler {
-    
-    private RecordsContainer recordsContainer;
-    private EventBus bus;
-    private Label resultLabel;
-    private TreePanel<GPBeanTreeModel> tree;
-    
-    @Inject
-    public CatalogSearchResultWidget(RecordsContainer theRecordsContainer,
-            EventBus theBus) {
-        this.recordsContainer = theRecordsContainer;
-        this.bus = theBus;
-        
-        this.addHandler();
-        this.addStyle();
+public class GPCatalogExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
+
+    public GPCatalogExpander(TreePanel theTree) {
+        super(theTree);
     }
-    
+
     @Override
-    protected void onRender(Element parent, int index) {
-        super.onRender(parent, index);
-        
-        this.resultLabel = new Label("Search Result");
-        resultLabel.setStyleName("searchResult-Label");
-        
-        add(resultLabel);
-        add(recordsContainer);
-        
-        if (this.tree != null) {
-            this.addComponentsForTreePresence();
-        }
+    public boolean checkNode() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     @Override
-    public void notifyTreePresence(TreePanel<GPBeanTreeModel> theTree) {
-        this.tree = theTree;
+    public void execute() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    private void addHandler() {
-        this.bus.addHandler(CatalogSearchResultWidget.TYPE, this);
-    }
-    
-    private void addStyle() {
-        super.setStyleName("searchResult-Widget");
-    }
-    
-    private void addComponentsForTreePresence() {
-        GPTreeLayerWidgetSupport catalogTreeLayer = new CatalogTreeLayerWidgetSupport(
-                recordsContainer.getWidget(), tree, bus);
-        
-        add(catalogTreeLayer.getLabel());
-        add(catalogTreeLayer.getButton());
-        
-        this.recordsContainer.setSelectionContainer(true);
+
+    @Override
+    public void defineStatusBarCancelMessage() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -50,11 +50,11 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoPlatformBeanModel>
         extends LayoutContainer {
-    
+
     protected ListStore<T> store;
     protected C widget;
     protected RpcProxy<PagingLoadResult<T>> proxy;
@@ -63,20 +63,20 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     protected ContentPanel panel;
     private boolean initialized;
     private int pageSize = 25;
-    
+
     public LayoutPaginationContainer(boolean lazy) {
         if (!lazy) {
             this.init();
         }
     }
-    
+
     public LayoutPaginationContainer(boolean lazy, int thePageSize) {
         this.pageSize = thePageSize;
         if (!lazy) {
             this.init();
         }
     }
-    
+
     protected final void init() {
         if (!initialized) {
             initPanel();
@@ -90,12 +90,12 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
             addWidgets();
         }
     }
-    
+
     @Override
     protected void beforeRender() {
         this.init();
     }
-    
+
     @Override
     protected void onRender(Element parent, int index) {
         super.onRender(parent, index);
@@ -103,13 +103,13 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     }
 
     /**
-     * Create Store , RpcProxy and Loader 
-     * 
-     *  Code snippet:
-     * 
+     * Create Store , RpcProxy and Loader
+     *
+     * Code snippet:
+     *
      * <pre>
      *      super.toolBar = new PagingToolBar(super.getPageSize());
-     * 
+     *
      *      super.proxy = new RpcProxy<PagingLoadResult<T>>() {
      *
      *             @Override
@@ -121,39 +121,39 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
      *
      *      super.loader = new BasePagingLoader<PagingLoadResult<T>>(proxy);
      *      super.loader.setRemoteSort(false);
-     * 
+     *
      *      super.store = new ListStore<T>(loader);
-     * 
+     *
      * </pre>
      *
      */
     public abstract void createStore();
-    
+
     public abstract void initWidget();
 
     /**
      * Create Load Listener to have control on RPC Call
-     * *  Code snippet:
-     * 
+     * * Code snippet:
+     *
      * <pre>
      *      loader.addLoadListener(new LoadListener() {
      *
      *        @Override
      *        public void loaderBeforeLoad(LoadEvent le) {
-     *            
+     *
      *        }
      *
      *        @Override
      *        public void loaderLoad(LoadEvent le) {
-     *           
+     *
      *        }
      *
      *        @Override
      *        public void loaderLoadException(LoadEvent le) {
-     *              
+     *
      *        }
      *     });
-     * 
+     *
      * </pre>
      */
     public abstract void setUpLoadListener();
@@ -171,13 +171,21 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     public boolean isInitialized() {
         return initialized;
     }
-    
+
+    /**
+     *
+     * @return The Widget
+     */
+    public C getWidget() {
+        return widget;
+    }
+
     private void initPanel() {
         this.panel = new ContentPanel();
         this.panel.setHeaderVisible(false);
         this.panel.setLayout(new FitLayout());
     }
-    
+
     private void addWidgets() {
         this.panel.add(widget);
         if (this.toolBar == null) {

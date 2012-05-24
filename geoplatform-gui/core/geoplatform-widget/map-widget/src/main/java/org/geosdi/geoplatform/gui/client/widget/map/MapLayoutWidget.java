@@ -93,7 +93,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
         this.defaultMapOptions = new MapOptions();
 
-        this.defaultMapOptions.setNumZoomLevels(25);
+        this.defaultMapOptions.setNumZoomLevels(30);
 
         this.defaultMapOptions.setProjection("EPSG:3857");
         this.defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));

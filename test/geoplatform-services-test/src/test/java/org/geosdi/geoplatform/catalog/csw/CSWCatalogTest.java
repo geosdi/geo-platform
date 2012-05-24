@@ -98,7 +98,7 @@ public class CSWCatalogTest {
 
         // Insert the servers test
         serverTestOur = this.createCSWServer("CSW Server WS Test",
-                "http://150.146.160.152/geonetwork/srv/en/csw");
+                "http://catalog.geosdi.org/geonetwork/srv/en/csw");
         serverTestOurID = cswService.insertServerCSW(serverTestOur);
         serverTestOur.setId(serverTestOurID);
 
@@ -478,12 +478,10 @@ public class CSWCatalogTest {
         Assert.assertEquals(0, cswService.getRecordsCount(catalogFinder));
     }
 
-    // TODO check for filter by area
     @Test
     public void testGetRecordsOurCountAreaItaly() throws Exception {
         int tot = cswService.getRecordsCount(catalogFinder);
-        logger.info("\n\n### TOT {}", tot);
-        Assert.assertTrue(tot > 0);
+        Assert.assertEquals(358, tot);
 
         AreaInfo areaInfo = catalogFinder.getAreaInfo();
         areaInfo.setActive(true);
@@ -492,27 +490,22 @@ public class CSWCatalogTest {
 
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.ENCLOSES);
         int countEncloses = cswService.getRecordsCount(catalogFinder);
-        logger.info("\n\n### ENCLOSES {}", countEncloses);
-        Assert.assertTrue(countEncloses > 0);
-        Assert.assertTrue(countEncloses <= tot);
+        Assert.assertEquals(31, countEncloses);
 
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.IS);
         int countIs = cswService.getRecordsCount(catalogFinder);
-        logger.info("\n\n### IS {}", countIs);
-        Assert.assertTrue(countIs == 0);
-        Assert.assertTrue(countIs <= tot);
+        Assert.assertEquals(0, countIs);
 
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.OUTSIDE);
         int countOutside = cswService.getRecordsCount(catalogFinder);
-        logger.info("\n\n### OUTSIDE {}", countOutside);
-//        Assert.assertTrue(countOutside > 0); // TODO Return 0?!?
-        Assert.assertTrue(countOutside <= tot);
+//        Assert.assertEquals(15, countOutside); // TODO Return 0
 
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.OVERLAP);
         int countOverlap = cswService.getRecordsCount(catalogFinder);
-        logger.info("\n\n### OVERLAP {}", countOverlap);
-        Assert.assertTrue(countOverlap > 0);
-        Assert.assertTrue(countOverlap <= tot);
+        Assert.assertEquals(343, countOverlap);
+
+        logger.info("\n### TOT: {}\nENCLOSES: {}\nIS: {}\nOUTSIDE {}\nOVERLAP {}",
+                new Object[]{tot, countEncloses, countIs, countOutside, countOverlap});
     }
 
     @Test

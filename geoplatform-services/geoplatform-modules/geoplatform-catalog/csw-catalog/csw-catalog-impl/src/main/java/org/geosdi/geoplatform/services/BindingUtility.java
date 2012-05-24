@@ -125,7 +125,6 @@ public class BindingUtility {
 
         BBox bBox = new BBox();
 
-        // TODO check for filter by area
         bBox.setMinX(bBoxType.getLowerCorner().get(0));
         bBox.setMinY(bBoxType.getLowerCorner().get(1));
 

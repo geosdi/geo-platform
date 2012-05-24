@@ -129,10 +129,8 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
         return areaPredicate;
     }
 
-    // TODO check for filter by area
     private EnvelopeType createEnvelope(BBox bBox) {
         EnvelopeType envelope = new EnvelopeType();
-        envelope.setSrsName("EPSG:4326");
 
         DirectPositionType lower = new DirectPositionType();
         lower.setValue(Arrays.asList(bBox.getMinX(), bBox.getMinY()));

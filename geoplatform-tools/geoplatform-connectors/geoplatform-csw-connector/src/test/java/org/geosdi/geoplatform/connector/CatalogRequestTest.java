@@ -439,7 +439,7 @@ public class CatalogRequestTest {
 
         assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
 
-        assertTrue(request.contains("<gml:Envelope srsName=\"EPSG:4326\">"));
+        assertTrue(request.contains("<gml:Envelope>"));
         assertTrue(request.contains("<gml:lowerCorner>6.624 36.6492</gml:lowerCorner>"));
         assertTrue(request.contains("<gml:upperCorner>18.5144 47.0946</gml:upperCorner>"));
         assertTrue(request.contains("</gml:Envelope>"));
@@ -512,7 +512,7 @@ public class CatalogRequestTest {
 
         assertTrue(request.contains("<ogc:PropertyName>ows:BoundingBox</ogc:PropertyName>"));
 
-        assertTrue(request.contains("<gml:Envelope srsName=\"EPSG:4326\">"));
+        assertTrue(request.contains("<gml:Envelope>"));
         assertTrue(request.contains("<gml:lowerCorner>6.624 36.6492</gml:lowerCorner>"));
         assertTrue(request.contains("<gml:upperCorner>18.5144 47.0946</gml:upperCorner>"));
         assertTrue(request.contains("</gml:Envelope>"));
@@ -806,10 +806,8 @@ public class CatalogRequestTest {
         return binaryComparison;
     }
 
-    // TODO check for filter by area
     private EnvelopeType createEnvelopeItaly() {
         EnvelopeType envelope = new EnvelopeType();
-        envelope.setSrsName("EPSG:4326");
 
         DirectPositionType lower = new DirectPositionType();
         lower.setValue(Arrays.asList(6.624, 36.6492)); // minX, minY

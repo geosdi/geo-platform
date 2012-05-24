@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -62,8 +62,7 @@ public class FullRecordDTO extends AbstractRecordDTO {
     //
     @XmlElement(name = "uri")
     @XmlJavaTypeAdapter(UriMapAdapter.class)
-    private Map<OnlineResourceProtocolType, URIDTO> uriMap = new EnumMap<OnlineResourceProtocolType, URIDTO>(
-            OnlineResourceProtocolType.class);
+    private Map<OnlineResourceProtocolType, URIDTO> uriMap = new HashMap<OnlineResourceProtocolType, URIDTO>();
 
     public BBox getBBox() {
         return bBox;

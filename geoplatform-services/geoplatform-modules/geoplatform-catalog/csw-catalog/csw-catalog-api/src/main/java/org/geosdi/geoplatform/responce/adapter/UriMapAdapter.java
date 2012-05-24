@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.responce.adapter;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -58,7 +58,7 @@ public class UriMapAdapter extends XmlAdapter<UriMap, Map<OnlineResourceProtocol
 
     @Override
     public Map<OnlineResourceProtocolType, URIDTO> unmarshal(UriMap v) throws Exception {
-        Map<OnlineResourceProtocolType, URIDTO> map = new EnumMap<OnlineResourceProtocolType, URIDTO>(OnlineResourceProtocolType.class);
+        Map<OnlineResourceProtocolType, URIDTO> map = new HashMap<OnlineResourceProtocolType, URIDTO>();
         for (EntryUriMap element : v.getEntryUriMap()) {
             map.put(element.getKey(), element.getValue());
         }

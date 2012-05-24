@@ -61,79 +61,79 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class CatalogGetRecordByIdTest {
-    
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GPCSWServerConnector serverConnector;
-    
+
     @Before
     public void setUp() throws MalformedURLException {
-        URL url = new URL("http://150.146.160.152/geonetwork/srv/en/csw");
+        URL url = new URL("http://catalog.geosdi.org/geonetwork/srv/en/csw");
         this.serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
     }
-    
+
     @Test
     public void testSingleGetRecordById_SUMMARY() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
-        
-        request.setId("ab687944-e8e4-41b4-9b62-4097e264b465");
-        
+
+        request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47");
+
         GetRecordByIdResponseType response = request.getResponse();
-        
+
         Assert.assertEquals(true, response.isSetAbstractRecord());
         Assert.assertEquals(false, response.isSetAny());
-        
+
         List<JAXBElement<? extends AbstractRecordType>> abstractRecord = response.getAbstractRecord();
-        
+
         Assert.assertEquals(1, abstractRecord.size());
-        
+
         SummaryRecordType record = (SummaryRecordType) abstractRecord.get(0).getValue();
-        
+
         logger.info(
                 "SUMMARY RESULT @@@@@@@@@@@@@@@@@@ " + record);
     }
-    
+
     @Test
     public void testSingleGetRecordById_FULL() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
-        
-        request.setId("ab687944-e8e4-41b4-9b62-4097e264b465");
-        
+
+        request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47");
+
         request.setOutputSchema(OutputSchema.GMD);
         request.setElementSetType("full");
-        
+
         GetRecordByIdResponseType response = request.getResponse();
-        
+
         Assert.assertEquals(false, response.isSetAbstractRecord());
         Assert.assertEquals(true, response.isSetAny());
-        
+
         List<Object> any = response.getAny();
-        
+
         logger.info(
                 "FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ((JAXBElement) any.get(
                                                                 0)).getValue());
     }
-    
+
     @Test
     public void testDoubleGetRecordById_SUMMARY() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
-        
-        request.setId("ab687944-e8e4-41b4-9b62-4097e264b465",
-                "906cc1a1-6b7d-4840-ac2a-f2c34dd423dd");
-        
+
+        request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47",
+                "9a554857-3a16-4e03-b105-47f93e3af3c3");
+
         GetRecordByIdResponseType response = request.getResponse();
-        
+
         Assert.assertEquals(true, response.isSetAbstractRecord());
         Assert.assertEquals(false, response.isSetAny());
-        
+
         List<JAXBElement<? extends AbstractRecordType>> abstractRecord = response.getAbstractRecord();
-        
+
         Assert.assertEquals(2, abstractRecord.size());
-        
+
         for (JAXBElement element : abstractRecord) {
             logger.info(
                     "SUMMARY RECORD @@@@@@@@@@@@@@@@@@ " + element.getValue() + "\n");

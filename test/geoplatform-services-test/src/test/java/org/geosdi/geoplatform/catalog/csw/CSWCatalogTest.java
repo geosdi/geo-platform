@@ -498,7 +498,7 @@ public class CSWCatalogTest {
 
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.OUTSIDE);
         int countOutside = cswService.getRecordsCount(catalogFinder);
-//        Assert.assertEquals(15, countOutside); // TODO Return 0
+        Assert.assertEquals(15, countOutside);
 
         areaInfo.setAreaSearchType(AreaInfo.AreaSearchType.OVERLAP);
         int countOverlap = cswService.getRecordsCount(catalogFinder);

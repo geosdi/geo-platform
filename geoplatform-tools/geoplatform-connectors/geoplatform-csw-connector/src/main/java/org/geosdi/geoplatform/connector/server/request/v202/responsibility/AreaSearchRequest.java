@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.responce.BBox;
 import org.geosdi.geoplatform.xml.filter.v110.BinarySpatialOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
+import org.geosdi.geoplatform.xml.filter.v110.UnaryLogicOpType;
 import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
 import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 
@@ -118,7 +119,14 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
                 break;
 
             case OUTSIDE:
-                areaPredicate.add(filterFactory.createDisjoint(binarySpatial));
+                // Workaround for GeoNetwork bug: DISJOINT = NOT(INTERSECTS)
+                UnaryLogicOpType unary = new UnaryLogicOpType();
+                unary.setSpatialOps(filterFactory.createIntersects(binarySpatial));
+
+                areaPredicate.add(filterFactory.createNot(unary));
+
+                // TODO Use DISJOINT spatial operator
+//                areaPredicate.add(filterFactory.createDisjoint(binarySpatial));
                 break;
 
             case OVERLAP:

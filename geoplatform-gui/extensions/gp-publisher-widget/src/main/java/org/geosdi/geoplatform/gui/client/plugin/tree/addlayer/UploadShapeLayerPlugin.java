@@ -47,16 +47,16 @@ import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
  * @email nazzareno.sileno@geosdi.org
  */
 public class UploadShapeLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAction> {
+
     private static final long serialVersionUID = -2266878585213759817L;
-    
     private ToolbarLayerTreeAction action;
-    
+
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
         action.setEnabled(true);
-        return true;
+        return action.isEnabled();
     }
-    
+
     @Override
     public ToolbarLayerTreeAction getAction(TreePanel treePanel) {
         if (action == null) {
@@ -66,7 +66,7 @@ public class UploadShapeLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerT
         }
         return action;
     }
-    
+
     @Override
     public void initPlugin(TreePanel treePanel) {
         this.setImage(PublisherResources.ICONS.fromShape().getHTML());
@@ -74,7 +74,7 @@ public class UploadShapeLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerT
         action = new UploadShapeAction(treePanel);
         this.setName(action.getTooltip());
     }
-    
+
     @Override
     public String getMessageToEnable() {
         return "Ever enabled";

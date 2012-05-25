@@ -46,15 +46,15 @@ import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class AddRasterLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAction>{
-    private static final long serialVersionUID = -43864052293114766L;
+public class AddRasterLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAction> {
 
+    private static final long serialVersionUID = -43864052293114766L;
     private ToolbarLayerTreeAction action;
 
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
         action.setEnabled(true);
-        return true;
+        return action.isEnabled();
     }
 
     @Override
@@ -79,5 +79,4 @@ public class AddRasterLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTre
     public String getMessageToEnable() {
         return "Ever enabled";
     }
-    
 }

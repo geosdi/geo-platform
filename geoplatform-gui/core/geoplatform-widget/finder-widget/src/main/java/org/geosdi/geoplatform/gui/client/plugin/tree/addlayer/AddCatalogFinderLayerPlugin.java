@@ -48,12 +48,13 @@ import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
  */
 public class AddCatalogFinderLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAction> {
 
+    private static final long serialVersionUID = 7338446162070305658L;
     private ToolbarLayerTreeAction action;
 
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
         action.setEnabled(true);
-        return true;
+        return action.isEnabled();
     }
 
     @Override

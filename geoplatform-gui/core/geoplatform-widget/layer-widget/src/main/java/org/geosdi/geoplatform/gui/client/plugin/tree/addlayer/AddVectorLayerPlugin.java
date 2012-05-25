@@ -47,14 +47,14 @@ import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
  * @email nazzareno.sileno@geosdi.org
  */
 public class AddVectorLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAction> {
-    private static final long serialVersionUID = -6849571587048253135L;
 
+    private static final long serialVersionUID = -6849571587048253135L;
     private ToolbarLayerTreeAction action;
 
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
         action.setEnabled(true);
-        return true;
+        return action.isEnabled();
     }
 
     @Override

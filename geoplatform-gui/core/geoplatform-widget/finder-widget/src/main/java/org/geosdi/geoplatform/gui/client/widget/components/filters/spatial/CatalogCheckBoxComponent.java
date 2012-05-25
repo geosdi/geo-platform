@@ -53,6 +53,7 @@ public class CatalogCheckBoxComponent {
 
     private AreaInfo areaInfo;
     private EventBus bus;
+    private CheckBox activateFilter;
 
     public CatalogCheckBoxComponent(AreaInfo theAreaInfo, EventBus theBus) {
         this.areaInfo = theAreaInfo;
@@ -67,7 +68,7 @@ public class CatalogCheckBoxComponent {
         table.getCellFormatter().setHorizontalAlignment(2, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
 
-        CheckBox activateFilter = new CheckBox();
+        activateFilter = new CheckBox();
         activateFilter.setBoxLabel("Activate Spatial Filter");
 
         activateFilter.addListener(Events.Change, new Listener<FieldEvent>() {
@@ -76,9 +77,14 @@ public class CatalogCheckBoxComponent {
             public void handleEvent(FieldEvent be) {
             }
         });
+        activateFilter.setOriginalValue(Boolean.FALSE);
 
         table.setWidget(2, 1, activateFilter);
 
         return table;
+    }
+
+    public void reset() {
+        this.activateFilter.reset();
     }
 }

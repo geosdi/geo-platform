@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
 public class CatalogComboBoxComponent {
 
     private FlexTable table;
+    private SimpleComboBox<AreaSearchType> combo;
 
     public FlexTable getComboBoxComponent() {
         this.table = new FlexTable();
@@ -82,7 +83,7 @@ public class CatalogComboBoxComponent {
         table.getCellFormatter().setHorizontalAlignment(1, 2,
                 HasHorizontalAlignment.ALIGN_CENTER);
 
-        SimpleComboBox<AreaSearchType> combo = new SimpleComboBox<AreaSearchType>();
+        combo = new SimpleComboBox<AreaSearchType>();
         combo.setForceSelection(true);
         combo.setEditable(false);
 
@@ -97,8 +98,12 @@ public class CatalogComboBoxComponent {
             }
         });
 
-        combo.setSimpleValue(AreaSearchType.IS);
+        combo.setSimpleValue(AreaSearchType.OVERLAP);
 
         table.setWidget(1, 2, combo);
+    }
+
+    public void reset() {
+        combo.setSimpleValue(AreaSearchType.OVERLAP);
     }
 }

@@ -82,4 +82,9 @@ public class MainViewFinderWidget extends GeoPlatformContentPanel {
 //        this.tabWidget.buildWidget();
         super.add(this.tabWidget);
     }
+
+    @Override
+    public void reset() {
+        tabWidget.reset();
+    }
 }

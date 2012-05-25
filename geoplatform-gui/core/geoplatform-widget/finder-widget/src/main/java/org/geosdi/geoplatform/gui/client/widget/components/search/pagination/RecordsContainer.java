@@ -196,6 +196,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         this.store.removeAll();
         this.toolBar.clear();
         this.toolBar.disable();
+        // TODO Reset button for add layer to tree
     }
 
     @Override

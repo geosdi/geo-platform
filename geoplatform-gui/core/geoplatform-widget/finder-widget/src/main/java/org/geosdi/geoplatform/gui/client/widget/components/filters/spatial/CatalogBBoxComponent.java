@@ -173,4 +173,11 @@ public class CatalogBBoxComponent {
 
         table.setWidget(1, 5, maxLonField);
     }
+
+    public void reset() {
+        this.maxLatField.reset();
+        this.minLonField.reset();
+        this.maxLonField.reset();
+        this.minLatField.reset();
+    }
 }

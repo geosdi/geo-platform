@@ -52,7 +52,7 @@ public class SearchTabItem extends GeoPlatformTabItem {
 
     @Inject
     public SearchTabItem(CatalogSearchWidget theCatalogSearchWidget,
-                         CatalogSearchResultWidget theCatalogSearchResultWidget) {
+            CatalogSearchResultWidget theCatalogSearchResultWidget) {
         super("Search");
         catalogSearchWidget = theCatalogSearchWidget;
         catalogSearchResultWidget = theCatalogSearchResultWidget;
@@ -69,5 +69,10 @@ public class SearchTabItem extends GeoPlatformTabItem {
     public void addComponents() {
         super.add(catalogSearchWidget);
         super.add(catalogSearchResultWidget);
+    }
+
+    @Override
+    public void reset() {
+        this.catalogSearchWidget.reset(); // Reset also the results
     }
 }

@@ -67,4 +67,9 @@ public class CatalogSpatialContainer extends LayoutContainer {
         super.add(this.catalogMapWidget);
         super.add(this.catalogBboxWidget);
     }
+
+    public void reset() {
+        this.catalogMapWidget.reset();
+        this.catalogBboxWidget.reset();
+    }
 }

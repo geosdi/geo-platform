@@ -91,4 +91,11 @@ public class CatalogAreaWidget extends GeoPlatformContentPanel {
     private void addCheckBoxComponent() {
         super.add(this.catalogCheckComponent.getCheckBoxComponent());
     }
+
+    @Override
+    public void reset() {
+        this.catalogBBoxComponent.reset();
+        this.catalogComboComponent.reset();
+        this.catalogCheckComponent.reset();
+    }
 }

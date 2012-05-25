@@ -135,4 +135,10 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
 
         super.add(this.mainViewWidget, centerData);
     }
+
+    @Override
+    public void reset() {
+        this.filtersWidget.reset();
+        this.mainViewWidget.reset();
+    }
 }

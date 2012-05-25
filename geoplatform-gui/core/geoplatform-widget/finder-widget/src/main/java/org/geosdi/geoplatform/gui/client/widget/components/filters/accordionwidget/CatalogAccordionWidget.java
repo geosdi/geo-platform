@@ -74,4 +74,9 @@ public class CatalogAccordionWidget extends GeoPlatformContentPanel {
         super.setAnimCollapse(false);
         super.setHeading("Filter by Catalogue");
     }
+
+    @Override
+    public void reset() {
+        this.serverWidget.reset();
+    }
 }

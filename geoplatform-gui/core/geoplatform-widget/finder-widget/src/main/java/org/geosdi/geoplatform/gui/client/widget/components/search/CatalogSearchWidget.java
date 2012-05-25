@@ -119,7 +119,7 @@ public class CatalogSearchWidget extends LayoutContainer
                 if (searchTextField.getValue() == null) {
                     if (event.getKeyCode() == KeyCodes.KEY_BACKSPACE
                             || event.getKeyCode() == KeyCodes.KEY_DELETE) {
-                        reset();
+                        resetSearch();
                     }
                 }
             }
@@ -239,6 +239,11 @@ public class CatalogSearchWidget extends LayoutContainer
     }
 
     public void reset() {
+        this.resetSearch();
+        this.allSelectedCheckbox.setValue(true);
+    }
+
+    private void resetSearch() {
         searchTextField.clear();
         recordsContainer.reset();
     }

@@ -83,4 +83,9 @@ public class CatalogMapWidget extends GeoPlatformContentPanel {
         center.transform("EPSG:4326", mapWidget.getMap().getProjection());
         mapWidget.getMap().setCenter(center, 4);
     }
+
+    @Override
+    public void reset() {
+        // TODO Reset map projection
+    }
 }

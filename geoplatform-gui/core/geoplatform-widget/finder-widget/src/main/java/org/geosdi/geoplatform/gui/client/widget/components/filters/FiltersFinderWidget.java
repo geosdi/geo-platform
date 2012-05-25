@@ -90,4 +90,12 @@ public class FiltersFinderWidget extends GeoPlatformContentPanel {
         super.setBodyBorder(false);
         super.setLayout(new AccordionLayout());
     }
+
+    @Override
+    public void reset() {
+        this.catalogFilterWidget.reset();
+        this.spatialFilterWidget.reset();
+        this.timeFilterWidget.reset();
+        // TODO Reset for view the catalogFilterWidget
+    }
 }

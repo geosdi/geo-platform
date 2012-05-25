@@ -58,4 +58,8 @@ public class MetadataTabItem extends GeoPlatformTabItem {
     @Override
     public void addComponents() {
     }
+
+    @Override
+    public void reset() {
+    }
 }

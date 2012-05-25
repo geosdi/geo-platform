@@ -78,4 +78,7 @@ public abstract class GeoPlatformTabWidget extends TabPanel {
     public boolean layout() {
         return super.layout();
     }
+
+    public void reset() {
+    }
 }

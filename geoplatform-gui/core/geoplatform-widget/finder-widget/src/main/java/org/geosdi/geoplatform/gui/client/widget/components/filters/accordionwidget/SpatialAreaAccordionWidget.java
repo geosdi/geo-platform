@@ -74,5 +74,6 @@ public class SpatialAreaAccordionWidget extends GeoPlatformContentPanel {
 
     @Override
     public void reset() {
+        this.spatialContainer.reset();
     }
 }

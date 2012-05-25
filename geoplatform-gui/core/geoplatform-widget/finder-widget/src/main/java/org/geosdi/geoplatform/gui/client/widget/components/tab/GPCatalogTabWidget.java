@@ -83,4 +83,13 @@ public class GPCatalogTabWidget extends GeoPlatformTabWidget {
         super.onRender(target, index);
         super.buildWidget();
     }
+
+    @Override
+    public void reset() {
+        this.searchItem.reset();
+        this.metadataItem.reset();
+
+        // TODO Reset for view the searchItem
+//        super.setSelection(this.searchItem);
+    }
 }

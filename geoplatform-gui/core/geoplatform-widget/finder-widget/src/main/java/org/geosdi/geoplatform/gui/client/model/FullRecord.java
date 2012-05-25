@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
@@ -74,35 +75,24 @@ public class FullRecord extends AbstractRecord {
         this.uriMap = uriMap;
     }
 
-    
-
     public boolean isForWMSGetMapRequest() {
-//        for (URIDTO uri : getUriMap()) {
-//            if (OnlineResourceProtocolType.isForWMSGetMapRequest(
-//                    uri.getProtocol())) {
-//                return true;
-//            }
-//        }
-
-        return false;
+        return this.isForByProtocol(OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST);
     }
 
     public boolean isForDownload() {
-//        for (URIDTO uri : getUriMap()) {
-//            if (OnlineResourceProtocolType.isForDownload(uri.getProtocol())) {
-//                return true;
-//            }
-//        }
-
-        return false;
+        return this.isForByProtocol(OnlineResourceProtocolType.LIST_DOWNLOAD);
     }
 
     public boolean isForLink() {
-//        for (URIDTO uri : getUriMap()) {
-//            if (OnlineResourceProtocolType.isForLink(uri.getProtocol())) {
-//                return true;
-//            }
-//        }
+        return this.isForByProtocol(OnlineResourceProtocolType.LIST_LINK);
+    }
+
+    private boolean isForByProtocol(List<OnlineResourceProtocolType> protocolList) {
+        for (OnlineResourceProtocolType protocol : protocolList) {
+            if (uriMap.get(protocol) != null) {
+                return true;
+            }
+        }
 
         return false;
     }

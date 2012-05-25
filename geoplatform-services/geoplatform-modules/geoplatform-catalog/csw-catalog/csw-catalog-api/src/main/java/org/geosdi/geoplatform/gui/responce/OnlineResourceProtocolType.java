@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.responce;
 
+import com.google.common.collect.Lists;
+import java.util.Collections;
+import java.util.List;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
@@ -144,6 +147,44 @@ public enum OnlineResourceProtocolType {
     OGC_WMS_1_3_0_HTTP_GET_CAPABILITIES("OGC:WMS-1.3.0-http-get-capabilities");
     /**
      * 
+     * Lists of OnlineResourceProtocolType by type.
+     */
+    public static final List<OnlineResourceProtocolType> LIST_WMS_GET_MAP_REQUEST;
+    public static final List<OnlineResourceProtocolType> LIST_DOWNLOAD;
+    public static final List<OnlineResourceProtocolType> LIST_LINK;
+    public static final List<OnlineResourceProtocolType> LIST_GET_CAPABILITIES;
+
+    static {
+        List<OnlineResourceProtocolType> wmsGetMapRequest = Lists.newArrayList();
+        wmsGetMapRequest.add(OGC_WMS_1_1_1_HTTP_GET_MAP);
+        wmsGetMapRequest.add(OGC_WMS_1_3_0_HTTP_GET_MAP);
+        LIST_WMS_GET_MAP_REQUEST = Collections.unmodifiableList(wmsGetMapRequest);
+
+        List<OnlineResourceProtocolType> download = Lists.newArrayList();
+        download.add(WWW_DOWNLOAD_1_0_FTP__DOWNLOAD);
+        download.add(WWW_DOWNLOAD_1_0_HTTP__DOWNLOAD);
+        LIST_DOWNLOAD = Collections.unmodifiableList(download);
+
+        List<OnlineResourceProtocolType> link = Lists.newArrayList();
+        link.add(WWW_LINK_1_0_HTTP__ICAL);
+        link.add(WWW_LINK_1_0_HTTP__LINK);
+        link.add(WWW_LINK_1_0_HTTP__PARTNERS);
+        link.add(WWW_LINK_1_0_HTTP__RELATED);
+        link.add(WWW_LINK_1_0_HTTP__RSS);
+        link.add(WWW_LINK_1_0_HTTP__SAMPLES);
+        link.add(WWW_LINK_1_0_HTTP__OPENDAP);
+        LIST_LINK = Collections.unmodifiableList(link);
+
+        List<OnlineResourceProtocolType> getCapabilities = Lists.newArrayList();
+        getCapabilities.add(OGC_WCS_1_1_0_HTTP_GET_CAPABILITIES);
+        getCapabilities.add(OGC_WFS_1_0_0_HTTP_GET_CAPABILITIES);
+        getCapabilities.add(OGC_WMC_1_1_0_HTTP_GET_CAPABILITIES);
+        getCapabilities.add(OGC_WMS_1_1_1_HTTP_GET_CAPABILITIES);
+        getCapabilities.add(OGC_WMS_1_3_0_HTTP_GET_CAPABILITIES);
+        LIST_GET_CAPABILITIES = Collections.unmodifiableList(getCapabilities);
+    }
+    /**
+     * 
      * Protocol of the OnlineResourceType.
      */
     private String protocol;
@@ -156,108 +197,56 @@ public enum OnlineResourceProtocolType {
      * TRUE if the protocol is suitable for WMS GetMap Request.
      */
     public static boolean isForWMSGetMapRequest(OnlineResourceProtocolType protocol) {
-        if (protocol == OGC_WMS_1_1_1_HTTP_GET_MAP
-                || protocol == OGC_WMS_1_3_0_HTTP_GET_MAP) {
-            return true;
-        }
-        return false;
+        return isForByProtocolTypeList(protocol, LIST_WMS_GET_MAP_REQUEST);
     }
 
     /**
      * TRUE if the protocol is suitable for Download.
      */
     public static boolean isForDownload(OnlineResourceProtocolType protocol) {
-        if (protocol == WWW_DOWNLOAD_1_0_FTP__DOWNLOAD
-                || protocol == WWW_DOWNLOAD_1_0_HTTP__DOWNLOAD) {
-            return true;
-        }
-        return false;
+        return isForByProtocolTypeList(protocol, LIST_DOWNLOAD);
     }
 
     /**
      * TRUE if the protocol is suitable for Hyper Link.
      */
     public static boolean isForLink(OnlineResourceProtocolType protocol) {
-        if (protocol == WWW_LINK_1_0_HTTP__ICAL
-                || protocol == WWW_LINK_1_0_HTTP__LINK
-                || protocol == WWW_LINK_1_0_HTTP__PARTNERS
-                || protocol == WWW_LINK_1_0_HTTP__RELATED
-                || protocol == WWW_LINK_1_0_HTTP__RSS
-                || protocol == WWW_LINK_1_0_HTTP__SAMPLES
-                || protocol == WWW_LINK_1_0_HTTP__OPENDAP) {
-            return true;
-        }
-        return false;
+        return isForByProtocolTypeList(protocol, LIST_LINK);
     }
 
     /**
      * TRUE if the protocol is suitable for GetCapabilities Request.
      */
     public static boolean isForGetCapabilities(OnlineResourceProtocolType protocol) {
-        if (protocol == OGC_WCS_1_1_0_HTTP_GET_CAPABILITIES
-                || protocol == OGC_WFS_1_0_0_HTTP_GET_CAPABILITIES
-                || protocol == OGC_WMC_1_1_0_HTTP_GET_CAPABILITIES
-                || protocol == OGC_WMS_1_1_1_HTTP_GET_CAPABILITIES
-                || protocol == OGC_WMS_1_3_0_HTTP_GET_CAPABILITIES) {
-            return true;
-        }
-        return false;
+        return isForByProtocolTypeList(protocol, LIST_GET_CAPABILITIES);
     }
 
     /**
      * @see OnlineResourceProtocolType#isForWMSGetMapRequest(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
      */
-    public static boolean isForWMSGetMapRequest(String protocolString) {
-        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(
-                protocolString);
-        if (protocol != null
-                && OnlineResourceProtocolType.isForWMSGetMapRequest(protocol)) {
-            return true;
-        }
-
-        return false;
+    public static boolean isForWMSGetMapRequest(String protocol) {
+        return OnlineResourceProtocolType.isForWMSGetMapRequest(fromValue(protocol));
     }
 
     /**
      * @see OnlineResourceProtocolType#isForDownload(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
      */
-    public static boolean isForDownload(String protocolString) {
-        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(
-                protocolString);
-        if (protocol != null
-                && OnlineResourceProtocolType.isForDownload(protocol)) {
-            return true;
-        }
-
-        return false;
+    public static boolean isForDownload(String protocol) {
+        return OnlineResourceProtocolType.isForDownload(fromValue(protocol));
     }
 
     /**
      * @see OnlineResourceProtocolType#isForLink(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
      */
-    public static boolean isForLink(String protocolString) {
-        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(
-                protocolString);
-        if (protocol != null
-                && OnlineResourceProtocolType.isForLink(protocol)) {
-            return true;
-        }
-
-        return false;
+    public static boolean isForLink(String protocol) {
+        return OnlineResourceProtocolType.isForLink(fromValue(protocol));
     }
 
     /**
      * @see OnlineResourceProtocolType#isForGetCapabilities(org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType)
      */
-    public static boolean isForGetCapabilities(String protocolString) {
-        OnlineResourceProtocolType protocol = OnlineResourceProtocolType.fromValue(
-                protocolString);
-        if (protocol != null
-                && OnlineResourceProtocolType.isForGetCapabilities(protocol)) {
-            return true;
-        }
-
-        return false;
+    public static boolean isForGetCapabilities(String protocol) {
+        return OnlineResourceProtocolType.isForGetCapabilities(fromValue(protocol));
     }
 
     public static OnlineResourceProtocolType fromValue(String protocol) {
@@ -273,5 +262,18 @@ public enum OnlineResourceProtocolType {
     @Override
     public String toString() {
         return protocol;
+    }
+
+    private static boolean isForByProtocolTypeList(OnlineResourceProtocolType protocol,
+            List<OnlineResourceProtocolType> protocolTypeList) {
+        if (protocol == null) {
+            return false;
+        }
+        for (OnlineResourceProtocolType protocolType : protocolTypeList) {
+            if (protocol == protocolType) {
+                return true;
+            }
+        }
+        return false;
     }
 }

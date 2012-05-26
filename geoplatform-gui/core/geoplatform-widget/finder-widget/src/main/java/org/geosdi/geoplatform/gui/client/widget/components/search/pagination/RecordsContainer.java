@@ -68,18 +68,17 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         implements RecordsContainerSelectionListener {
 
     private CatalogFinderBean catalogFinder;
-    //
-    private CheckBoxSelectionModel<FullRecord> records;
+    private CheckBoxSelectionModel<FullRecord> selectionModel;
     private RowExpander rowExpander;
     private boolean selectionContainer;
 
     @Inject
     public RecordsContainer(CatalogFinderBean theCatalogFinder) {
         super(true, 10);
-        catalogFinder = theCatalogFinder;
-
         super.setWidth(550);
         super.setStyleName("records-Container");
+
+        this.catalogFinder = theCatalogFinder;
     }
 
     @Override
@@ -88,10 +87,10 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         super.widget.getView().setForceFit(true);
 //        super.widget.setLoadMask(true);
 
-        super.widget.setSelectionModel(this.records);
+        super.widget.setSelectionModel(this.selectionModel);
 
         super.widget.addPlugin(this.rowExpander);
-        super.widget.addPlugin(this.records);
+        super.widget.addPlugin(this.selectionModel);
     }
 
     @Override
@@ -106,7 +105,6 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
                 + "</tpl>");
 
         rowExpander = new RowExpander(tpl);
-
         configs.add(rowExpander);
 
         ColumnConfig titleColumn = new ColumnConfig();
@@ -117,11 +115,9 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         titleColumn.setResizable(false);
         configs.add(titleColumn);
 
-        this.records = new CheckBoxSelectionModel<FullRecord>();
-        records.setSelectionMode(SelectionMode.MULTI);
-
-        configs.add(records.getColumn());
-
+        selectionModel = new CheckBoxSelectionModel<FullRecord>();
+        selectionModel.setSelectionMode(SelectionMode.MULTI);
+        configs.add(selectionModel.getColumn());
 
         return new ColumnModel(configs);
     }
@@ -144,7 +140,6 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         super.loader.setRemoteSort(false);
 
         super.store = new ListStore<FullRecord>(loader);
-//        super.store.setMonitorChanges(true);
 
         super.toolBar.bind(loader);
         super.toolBar.disable();
@@ -166,11 +161,8 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
                 }
                 widget.unmask();
 
-                BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
-
                 // TODO Set status message on main windows
-                System.out.println(
-                        "\n*** Records correctly loaded ***");
+                System.out.println("\n*** Records correctly loaded ***");
             }
 
             @Override
@@ -208,22 +200,17 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     public void addRecordsContainerSelectionListener() {
         if (selectionContainer) {
-            super.widget.addListener(Events.CellClick,
-                    new Listener<BaseEvent>() {
-
-                        @Override
-                        public void handleEvent(BaseEvent be) {
-                            System.out.println("ELEMENTO CLICCATO @@@@@@@@@@@ "
-                                    + records.getSelectedItem());
-                        }
-                    });
-
-            this.records.addSelectionChangedListener(new SelectionChangedListener<FullRecord>() {
+            this.selectionModel.addListener(Events.BeforeSelect, new Listener<SelectionEvent<FullRecord>>() {
 
                 @Override
-                public void selectionChanged(SelectionChangedEvent<FullRecord> se) {
-                    System.out.println(
-                            "ECCOLA @@@@@@@@@@@@@@@@@@@ " + se.getSelection());
+                public void handleEvent(SelectionEvent<FullRecord> se) {
+                    FullRecord record = se.getModel();
+                    if (!record.isForWMSGetMapRequest()) {
+                        se.setCancelled(true);
+
+                        // TODO Set status message on main windows
+                        System.out.println("\n*** This element can't be added to the tree ***");
+                    }
                 }
             });
         }
@@ -232,5 +219,9 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     public void setSelectionContainer(boolean enable) {
         this.selectionContainer = enable;
+    }
+
+    public List<FullRecord> getSelectedRecords() {
+        return selectionModel.getSelectedItems();
     }
 }

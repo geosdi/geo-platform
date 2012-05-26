@@ -44,12 +44,12 @@ public interface RecordsContainerSelectionListener {
 
     /**
      * Add Listener to Records Container to choose Full Record which
-     * can be added on LayerTreeWidget
+     * can be added on LayerTreeWidget.
      */
     void addRecordsContainerSelectionListener();
 
     /**
-     * Enable or Disable Container Selection
+     * Enable or Disable Container Selection.
      *
      * @param enable
      */

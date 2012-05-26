@@ -42,6 +42,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.shared.EventBus;
 import org.geosdi.geoplatform.gui.client.action.button.AddLayerToTreeAction;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerEnableHandler;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -50,45 +51,45 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
-    
+
     private Label operationLabel;
     private Button addLayerToTreeButton;
-    
+
     public CatalogTreeLayerWidgetSupport(Grid<FullRecord> theGrid,
             TreePanel<GPBeanTreeModel> theTree,
             EventBus bus) {
-        bus.addHandler(TYPE, this);
         this.createLabelComponent();
         this.createButtonComponent(theTree, theGrid);
+        bus.addHandler(CatalogTreeLayerEnableHandler.TYPE, this);
     }
-    
+
     @Override
     public Label getLabel() {
         return this.operationLabel;
     }
-    
+
     @Override
     public Button getButton() {
         return this.addLayerToTreeButton;
     }
-    
+
     @Override
     public void onComponentEnable(boolean enable) {
         this.addLayerToTreeButton.setEnabled(enable);
     }
-    
+
     private void createLabelComponent() {
         this.operationLabel = new Label("Operations with selected");
-        operationLabel.setStyleName("searchOperation-Label");
+        this.operationLabel.setStyleName("searchOperation-Label");
     }
-    
+
     private void createButtonComponent(TreePanel<GPBeanTreeModel> tree,
             Grid<FullRecord> grid) {
         this.addLayerToTreeButton = new Button("Add To Layer Tree",
                 new AddLayerToTreeAction(grid, tree));
-        
+
         this.addLayerToTreeButton.setStyleAttribute("padding-top", "10px");
-        
+
         this.addLayerToTreeButton.setEnabled(false);
     }
 }

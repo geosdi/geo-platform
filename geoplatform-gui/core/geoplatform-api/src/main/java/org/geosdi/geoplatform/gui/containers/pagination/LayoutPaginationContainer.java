@@ -62,12 +62,10 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     protected PagingToolBar toolBar;
     protected ContentPanel panel;
     private boolean initialized;
-    private int pageSize = 25;
+    private int pageSize;
 
     public LayoutPaginationContainer(boolean lazy) {
-        if (!lazy) {
-            this.init();
-        }
+        this(lazy, 25);
     }
 
     public LayoutPaginationContainer(boolean lazy, int thePageSize) {

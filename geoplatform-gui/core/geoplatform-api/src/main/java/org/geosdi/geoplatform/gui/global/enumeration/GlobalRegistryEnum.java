@@ -41,7 +41,7 @@ package org.geosdi.geoplatform.gui.global.enumeration;
  */
 public enum GlobalRegistryEnum {
 
-    AUTH_KEY("authkey"), EMITE_RESOURCE("emiteResource");
+    AUTH_KEY("gsauthkey"), EMITE_RESOURCE("emiteResource");
     private String value;
 
     private GlobalRegistryEnum(String value) {

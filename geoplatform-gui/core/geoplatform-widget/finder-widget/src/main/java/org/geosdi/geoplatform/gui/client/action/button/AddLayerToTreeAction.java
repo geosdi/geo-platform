@@ -55,8 +55,9 @@ public class AddLayerToTreeAction extends GeoPlatformAction<ButtonEvent> {
 
     public AddLayerToTreeAction(Grid<FullRecord> grid,
             TreePanel<GPBeanTreeModel> tree) {
-
+        
         this.tree = tree;
+        this.catalogExpander = new GPCatalogExpander(tree, grid);
     }
 
     @Override

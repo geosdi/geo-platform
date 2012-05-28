@@ -61,7 +61,6 @@ import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.tips.QuickTip;
-import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Element;
@@ -74,6 +73,7 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.containers.pagination.GeoPlatformPagingToolBar;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
@@ -84,7 +84,7 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
 public class CSWServerPaginationContainer
@@ -161,24 +161,26 @@ public class CSWServerPaginationContainer
 
     private void createButtons() {
         super.panel.setButtonAlign(Style.HorizontalAlignment.CENTER);
-        Button newServerButton = new Button("New Server", new SelectionListener<ButtonEvent>() {
+        Button newServerButton = new Button("New Server",
+                new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                serverForm.showForm();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        serverForm.showForm();
+                    }
+                });
         newServerButton.setIcon(BasicWidgetResources.ICONS.done());
         newServerButton.setToolTip("Create a new CSW Server");
         super.panel.addButton(newServerButton);
 
-        deleteServerButton = new Button("Delete Server", new SelectionListener<ButtonEvent>() {
+        deleteServerButton = new Button("Delete Server",
+                new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                executeDeleteServer();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        executeDeleteServer();
+                    }
+                });
         deleteServerButton.setIcon(BasicWidgetResources.ICONS.delete());
         deleteServerButton.setToolTip("Delete a CSW Server selected");
         super.panel.addButton(deleteServerButton);
@@ -248,7 +250,7 @@ public class CSWServerPaginationContainer
 
     @Override
     public void createStore() {
-        super.toolBar = new PagingToolBar(super.getPageSize());
+        super.toolBar = new GeoPlatformPagingToolBar(super.getPageSize());
 
         super.proxy = new RpcProxy<PagingLoadResult<GPCSWServerBeanModel>>() {
 
@@ -260,14 +262,13 @@ public class CSWServerPaginationContainer
             }
         };
 
-        super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(proxy);
+        super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(
+                proxy);
         super.loader.setRemoteSort(false);
 
         super.store = new ListStore<GPCSWServerBeanModel>(loader);
-//        super.store.setMonitorChanges(true);
 
         super.toolBar.bind(loader);
-        super.toolBar.disable();
     }
 
     @Override
@@ -276,14 +277,12 @@ public class CSWServerPaginationContainer
 
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
+                toolBar.enableRefresh();
                 widget.mask("Loading CSW servers");
             }
 
             @Override
             public void loaderLoad(LoadEvent le) {
-                if (!toolBar.isEnabled()) {
-                    toolBar.enable();
-                }
                 widget.unmask();
                 // TODO Set status message on main windows
                 System.out.println("\n*** CSW servers correctly loaded ***");
@@ -308,7 +307,8 @@ public class CSWServerPaginationContainer
         super.widget.mask("Deleting server");
 
         final GPCSWServerBeanModel selectedServer = sm.getSelectedItem();
-        GPCatalogFinderRemoteImpl.Util.getInstance().deleteServerCSW(selectedServer.getId(),
+        GPCatalogFinderRemoteImpl.Util.getInstance().deleteServerCSW(
+                selectedServer.getId(),
                 new AsyncCallback<Boolean>() {
 
                     @Override
@@ -342,12 +342,13 @@ public class CSWServerPaginationContainer
     private void resetGrid() {
         this.store.removeAll();
         this.toolBar.clear();
-        this.toolBar.disable();
     }
 
     /**
-     * Add the server to store.
+     * TODO : MAKE IMPROVEMENT FOR PAGINATION HERE
      * 
+     * Add the server to store.
+     *
      * @param server to add
      */
     public void addNewServer(GPCSWServerBeanModel server) {
@@ -356,9 +357,9 @@ public class CSWServerPaginationContainer
 
     /**
      * Verify if the server URL is already exist into the store.
-     * 
+     *
      * @param url server URL to check
-     * 
+     *
      * @return server founded or null
      */
     public GPCSWServerBeanModel containsServer(String url) {

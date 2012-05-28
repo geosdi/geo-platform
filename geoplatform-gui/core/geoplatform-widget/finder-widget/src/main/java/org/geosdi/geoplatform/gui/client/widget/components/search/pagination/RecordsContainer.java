@@ -44,7 +44,6 @@ import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowExpander;
-import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +52,7 @@ import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.containers.pagination.GeoPlatformPagingToolBar;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
@@ -66,21 +66,21 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 @Singleton
 public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         implements RecordsContainerSelectionListener {
-
+    
     private CatalogFinderBean catalogFinder;
     private CheckBoxSelectionModel<FullRecord> selectionModel;
     private RowExpander rowExpander;
     private boolean selectionContainer;
-
+    
     @Inject
     public RecordsContainer(CatalogFinderBean theCatalogFinder) {
         super(true, 10);
         super.setWidth(550);
         super.setStyleName("records-Container");
-
+        
         this.catalogFinder = theCatalogFinder;
     }
-
+    
     @Override
     public void setGridProperties() {
         super.widget.setHeight(250);
@@ -88,25 +88,25 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 //        super.widget.setLoadMask(true);
 
         super.widget.setSelectionModel(this.selectionModel);
-
+        
         super.widget.addPlugin(this.rowExpander);
         super.widget.addPlugin(this.selectionModel);
     }
-
+    
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-
+        
         XTemplate tpl = XTemplate.create(
                 "<p><b>Abstract:</b> {ABSTRACT_TEXT}</p><br>"
                 + "<p><b>Subjects:</b><br></p>"
                 + "<tpl for=\"SUBJECTS\">"
                 + "<div>{.}</div>"
                 + "</tpl>");
-
+        
         rowExpander = new RowExpander(tpl);
         configs.add(rowExpander);
-
+        
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(RecordKeyValue.TITLE.toString());
         titleColumn.setHeader("Title");
@@ -114,20 +114,20 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
         configs.add(titleColumn);
-
+        
         selectionModel = new CheckBoxSelectionModel<FullRecord>();
         selectionModel.setSelectionMode(SelectionMode.MULTI);
         configs.add(selectionModel.getColumn());
-
+        
         return new ColumnModel(configs);
     }
-
+    
     @Override
     public void createStore() {
-        super.toolBar = new PagingToolBar(super.getPageSize());
-
+        super.toolBar = new GeoPlatformPagingToolBar(super.getPageSize());
+        
         super.proxy = new RpcProxy<PagingLoadResult<FullRecord>>() {
-
+            
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<FullRecord>> callback) {
@@ -135,36 +135,33 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
                         (PagingLoadConfig) loadConfig, catalogFinder, callback);
             }
         };
-
+        
         super.loader = new BasePagingLoader<PagingLoadResult<FullRecord>>(proxy);
         super.loader.setRemoteSort(false);
-
+        
         super.store = new ListStore<FullRecord>(loader);
-
+        
         super.toolBar.bind(loader);
-        super.toolBar.disable();
     }
-
+    
     @Override
     public void setUpLoadListener() {
         super.loader.addLoadListener(new LoadListener() {
-
+            
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
+                toolBar.enableRefresh();
                 widget.mask("Loading Records");
             }
-
+            
             @Override
             public void loaderLoad(LoadEvent le) {
-                if (!toolBar.isEnabled()) {
-                    toolBar.enable();
-                }
                 widget.unmask();
 
                 // TODO Set status message on main windows
                 System.out.println("\n*** Records correctly loaded ***");
             }
-
+            
             @Override
             public void loaderLoadException(LoadEvent le) {
                 if (le.exception instanceof GeoPlatformException) { // TODO If record not found?
@@ -179,48 +176,49 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
             }
         });
     }
-
+    
     public void searchRecords() {
         super.loader.load();
     }
-
+    
     public void reset() {
         this.store.removeAll();
         this.toolBar.clear();
-        this.toolBar.disable();
         // TODO Reset button for add layer to tree
     }
-
+    
     @Override
     protected void afterRender() {
         super.afterRender();
         this.addRecordsContainerSelectionListener();
     }
-
+    
     @Override
     public void addRecordsContainerSelectionListener() {
         if (selectionContainer) {
-            this.selectionModel.addListener(Events.BeforeSelect, new Listener<SelectionEvent<FullRecord>>() {
+            this.selectionModel.addListener(Events.BeforeSelect,
+                    new Listener<SelectionEvent<FullRecord>>() {
+                        
+                        @Override
+                        public void handleEvent(SelectionEvent<FullRecord> se) {
+                            FullRecord record = se.getModel();
+                            if (!record.isForWMSGetMapRequest()) {
+                                se.setCancelled(true);
 
-                @Override
-                public void handleEvent(SelectionEvent<FullRecord> se) {
-                    FullRecord record = se.getModel();
-                    if (!record.isForWMSGetMapRequest()) {
-                        se.setCancelled(true);
-
-                        // TODO Set status message on main windows
-                        System.out.println("\n*** This element can't be added to the tree ***");
-                    }
-                }
-            });
+                                // TODO Set status message on main windows
+                                System.out.println(
+                                        "\n*** This element can't be added to the tree ***");
+                            }
+                        }
+                    });
         }
     }
-
+    
     @Override
     public void setSelectionContainer(boolean enable) {
         this.selectionContainer = enable;
     }
-
+    
     public List<FullRecord> getSelectedRecords() {
         return selectionModel.getSelectedItems();
     }

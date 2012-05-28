@@ -33,40 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.expander;
+package org.geosdi.geoplatform.gui.containers.pagination;
 
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.client.model.FullRecord;
-import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
-import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCatalogExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
-
-    private Grid<FullRecord> grid;
-
-    public GPCatalogExpander(TreePanel theTree, Grid<FullRecord> theGrid) {
-        super(theTree);
-        this.grid = theGrid;
+public class GeoPlatformPagingToolBar extends PagingToolBar {
+    
+    public GeoPlatformPagingToolBar(int pageSize) {
+        super(pageSize);
+        this.disableComponents();
     }
-
+    
     @Override
-    public boolean checkNode() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void clear() {
+        super.clear();
+        disableComponents();
     }
-
-    @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    
+    public void enableRefresh() {
+        if (!refresh.isEnabled()) {
+            refresh.setEnabled(true);
+        }
     }
-
-    @Override
-    public void defineStatusBarCancelMessage() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    
+    private void disableComponents() {
+        first.setIcon(getImages().getFirstDisabled());
+        prev.setIcon(getImages().getPrevDisabled());
+        next.setIcon(getImages().getNextDisabled());
+        last.setIcon(getImages().getLastDisabled());
+        refresh.setEnabled(false);
     }
 }

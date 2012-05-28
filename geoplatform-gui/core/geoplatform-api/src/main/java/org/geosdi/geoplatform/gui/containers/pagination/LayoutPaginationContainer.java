@@ -42,7 +42,6 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
@@ -59,7 +58,7 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     protected C widget;
     protected RpcProxy<PagingLoadResult<T>> proxy;
     protected PagingLoader<PagingLoadResult<T>> loader;
-    protected PagingToolBar toolBar;
+    protected GeoPlatformPagingToolBar toolBar;
     protected ContentPanel panel;
     private boolean initialized;
     private int pageSize;

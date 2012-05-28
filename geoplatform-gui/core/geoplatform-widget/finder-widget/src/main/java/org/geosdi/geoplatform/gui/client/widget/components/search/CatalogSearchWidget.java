@@ -57,7 +57,7 @@ import org.geosdi.geoplatform.gui.responce.TextInfo;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogSearchWidget extends LayoutContainer
         implements ActionEnableHandler {
@@ -126,25 +126,30 @@ public class CatalogSearchWidget extends LayoutContainer
         });
         panel.add(searchTextField);
 
-        searchButton = new Button("Search", new SelectionListener<ButtonEvent>() {
+        searchButton = new Button("Search",
+                new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                String searchText = searchTextField.getValue();
-                if (searchText != null && !optionsCheckboxgroup.isValid(true)) {
-                    GeoPlatformMessage.alertMessage("Error search",
-                            "You need to specify where to search \"" + searchText + "\" text");
-                    return;
-                }
-                // Manual binding
-                textInfo.setText(searchText);
-                textInfo.setSearchTitle(titleCheckbox.getValue().booleanValue());
-                textInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
-                textInfo.setSearchSubjects(subjectsCheckbox.getValue().booleanValue());
-                // Performing the search
-                recordsContainer.searchRecords();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        String searchText = searchTextField.getValue();
+                        if (searchText != null && !optionsCheckboxgroup.isValid(
+                                true)) {
+                            GeoPlatformMessage.alertMessage("Error search",
+                                    "You need to specify where to search \"" + searchText + "\" text");
+                            return;
+                        }
+                        // Manual binding
+                        textInfo.setText(searchText);
+                        textInfo.setSearchTitle(
+                                titleCheckbox.getValue().booleanValue());
+                        textInfo.setSearchAbstract(
+                                abstractCheckbox.getValue().booleanValue());
+                        textInfo.setSearchSubjects(
+                                subjectsCheckbox.getValue().booleanValue());
+                        // Performing the search
+                        recordsContainer.searchRecords();
+                    }
+                });
         searchButton.setStyleAttribute("margin-left", "20px");
         searchButton.disable();
         panel.add(searchButton);
@@ -205,17 +210,18 @@ public class CatalogSearchWidget extends LayoutContainer
         allSelectedCheckbox = new CheckBox();
         allSelectedCheckbox.setBoxLabel("Select/Deselect all");
         allSelectedCheckbox.setValue(true); // Enabled by default
-        allSelectedCheckbox.addListener(Events.Change, new Listener<FieldEvent>() {
+        allSelectedCheckbox.addListener(Events.Change,
+                new Listener<FieldEvent>() {
 
-            @Override
-            public void handleEvent(FieldEvent fe) {
-                Boolean allSelected = (Boolean) fe.getValue();
+                    @Override
+                    public void handleEvent(FieldEvent fe) {
+                        Boolean allSelected = (Boolean) fe.getValue();
 
-                titleCheckbox.setValue(allSelected);
-                abstractCheckbox.setValue(allSelected);
-                subjectsCheckbox.setValue(allSelected);
-            }
-        });
+                        titleCheckbox.setValue(allSelected);
+                        abstractCheckbox.setValue(allSelected);
+                        subjectsCheckbox.setValue(allSelected);
+                    }
+                });
         right.add(allSelectedCheckbox);
 
         add(left, new ColumnData(0.6));

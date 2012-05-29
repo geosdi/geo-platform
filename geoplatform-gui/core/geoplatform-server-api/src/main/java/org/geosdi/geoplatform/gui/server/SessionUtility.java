@@ -81,7 +81,7 @@ public class SessionUtility {
                                    HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        session.setMaxInactiveInterval(900);
+        session.setMaxInactiveInterval(1800);
         session.setAttribute(SessionProperty.LOGGED_ACCOUNT.toString(), account);
     }
 
@@ -89,7 +89,7 @@ public class SessionUtility {
                                     HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        session.setMaxInactiveInterval(900);
+        session.setMaxInactiveInterval(1800);
         session.setAttribute(SessionProperty.DEFAULT_PROJECT.toString(), projectID);
     }
 
@@ -98,7 +98,7 @@ public class SessionUtility {
                                                     HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        session.setMaxInactiveInterval(900);
+        session.setMaxInactiveInterval(1800);
         session.setAttribute(SessionProperty.LOGGED_ACCOUNT.toString(), account);
         session.setAttribute(SessionProperty.DEFAULT_PROJECT.toString(), projectID);
     }

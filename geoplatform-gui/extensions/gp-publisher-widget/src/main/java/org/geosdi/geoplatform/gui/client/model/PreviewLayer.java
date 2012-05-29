@@ -360,4 +360,14 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public String getCqlFilter() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setCqlFilter(String cqlFilter) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

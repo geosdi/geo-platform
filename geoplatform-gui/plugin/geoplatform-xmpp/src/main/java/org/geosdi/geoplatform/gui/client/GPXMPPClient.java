@@ -123,6 +123,7 @@ public class GPXMPPClient {
 
         final ChatManager chatManager = ginjector.getChatManager();
 
+//        xmppURI = XmppURI.uri("service@" + hostXmppServer);
         final Chat chat = chatManager.open(xmppURI);
 //        chat.addMessageReceivedHandler(new MessageHandler() {
 //

@@ -40,11 +40,12 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public interface LayerMapChangedHandler extends EventHandler {
 
@@ -55,12 +56,14 @@ public interface LayerMapChangedHandler extends EventHandler {
     public void onHideLayer(GPLayerBean layerBean);
 
     public void onReloadLayer(GPLayerBean layerBean);
-    
+
     public void onRemoveLayer(GPLayerBean layerBean);
 
     public void onChangeStyle(GPRasterBean layerBean, String newStyle);
-    
+
+    public void onChangeCqlFilter(GPLayerTreeModel layerBean);
+
     public void changeOpacity(GPRasterBean layerBean);
-    
+
     public void resetStore();
 }

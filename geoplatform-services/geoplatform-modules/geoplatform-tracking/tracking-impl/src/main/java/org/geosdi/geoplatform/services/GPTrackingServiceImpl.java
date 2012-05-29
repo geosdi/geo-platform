@@ -39,9 +39,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import javax.jws.WebService;
-import org.jivesoftware.smack.ConnectionConfiguration;
-import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.packet.Message;
 import org.quartz.*;
 import org.slf4j.Logger;
@@ -119,11 +117,27 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
                 withMisfireHandlingInstructionFireAndProceed()).
                 build();
         trigger.getJobDataMap().put(SendTrackingMessageJob.GP_TRACKING_SERVICE, this);
-        String messageReceiver = username + "@" + this.connection.getHost() + '/' + emiteResource;
-//        try {
-//            connection.getRoster().createEntry(messageReceiver, user.getUsername(), null);
-//        } catch (XMPPException ex) {
-//            logger.error("Failed to add user: " + user.getUsername() + " to the service roster: " + ex);
+        String receiver = username + "@" + this.connection.getHost();
+        String messageReceiver = receiver + '/' + emiteResource;
+//        RosterGroup rosterGroup = connection.getRoster().getGroup("sitdpc-share");
+//        if (rosterGroup != null) {
+//            boolean found = false;
+//            for (RosterEntry entry : rosterGroup.getEntries()) {
+//                System.out.println("Stampa nome entry: " + entry.getUser());
+//                if (entry.getUser().equalsIgnoreCase(receiver)) {
+//                    logger.info("The RosterGroup already contains the user");
+//                    found = true;
+//                    break;
+//                }
+//            }
+//            if (!found) {
+//                try {
+//                    connection.getRoster().createEntry(receiver, username, new String[]{rosterGroup.getName()});
+//                    System.out.println("created entry");
+//                } catch (XMPPException ex) {
+//                    logger.error("Failed to add user: " + username + " to the service roster: " + ex);
+//                }
+//            }
 //        }
         Message message = new Message(messageReceiver, Message.Type.normal);
         message.setSubject(XMPPSubjectServerEnum.LAYER_RELOAD.toString());

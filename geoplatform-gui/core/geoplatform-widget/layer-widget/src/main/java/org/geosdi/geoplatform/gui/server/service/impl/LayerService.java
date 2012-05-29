@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -137,7 +138,7 @@ public class LayerService implements ILayerService {
         }
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
                 folderID);
-        ArrayList<IGPFolderElements> elements = new ArrayList<IGPFolderElements>();
+        ArrayList<IGPFolderElements> elements = Lists.newArrayList();
         try {
             folderElements.isEmpty();
             elements = this.dtoConverter.convertFolderElements(folderElements);

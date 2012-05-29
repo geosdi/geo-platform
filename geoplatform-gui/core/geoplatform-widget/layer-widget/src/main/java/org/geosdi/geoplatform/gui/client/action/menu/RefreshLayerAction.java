@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue.LayerRefreshTimeEnum;
@@ -67,12 +66,10 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
         implements IXMPPMessageHandler {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
-    private Menu menu;
     private ReloadLayerMapEvent reloadLayerEvent;
 
-    public RefreshLayerAction(GPTreePanel<GPBeanTreeModel> treePanel, Menu layerContextMenu) {
+    public RefreshLayerAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         this.treePanel = treePanel;
-        this.menu = layerContextMenu;
         XMPPHandlerManager.addHandler(IXMPPMessageHandler.TYPE, this);
         this.instantiateMessageSubjectEvent(XMPPSubjectClientEnum.LAYER_RELOAD.toString());
     }
@@ -105,7 +102,6 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "The Layer will be reloaded every " + refreshTimeEnum.getValue() + " seconds",
                         SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                menu.hide();
                 //Cambiare icona al layer
             }
         });

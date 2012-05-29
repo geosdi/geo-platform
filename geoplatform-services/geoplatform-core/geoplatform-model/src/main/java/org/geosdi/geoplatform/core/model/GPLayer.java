@@ -55,7 +55,7 @@ import org.hibernate.annotations.Index;
 
 /**
  * @author Francesco Izzi - geoSDI
- * 
+ *
  */
 @XmlTransient
 @XmlSeeAlso(value = {GPRasterLayer.class, GPVectorLayer.class})
@@ -93,6 +93,9 @@ public abstract class GPLayer implements Serializable {
     @Column
     private String srs;
     //
+    @Column
+    private String cqlFilter;
+    //
     @Embedded
     private GPBBox bbox;
     //
@@ -129,7 +132,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param id
-     *            the id to set
+     * the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -144,7 +147,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param title
-     *            the title to set
+     * the title to set
      */
     public void setTitle(String title) {
         this.title = title;
@@ -159,7 +162,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param name
-     *            the name to set
+     * the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -173,11 +176,19 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param alias 
-     *          the alias to set
+     * @param alias
+     * the alias to set
      */
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    public String getCqlFilter() {
+        return cqlFilter;
+    }
+
+    public void setCqlFilter(String cqlFilter) {
+        this.cqlFilter = cqlFilter;
     }
 
     /**
@@ -189,7 +200,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param abstractText
-     *            the abstractText to set
+     * the abstractText to set
      */
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
@@ -204,7 +215,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param urlServer
-     *            the urlServer to set
+     * the urlServer to set
      */
     public void setUrlServer(String urlServer) {
         this.urlServer = urlServer;
@@ -219,7 +230,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param srs
-     *            the srs to set
+     * the srs to set
      */
     public void setSrs(String srs) {
         this.srs = srs;
@@ -234,7 +245,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param bbox
-     *            the bbox to set
+     * the bbox to set
      */
     public void setBbox(GPBBox bbox) {
         this.bbox = bbox;
@@ -249,7 +260,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param layerType
-     *            the layerType to set
+     * the layerType to set
      */
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
@@ -264,7 +275,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param position
-     *            the position to set
+     * the position to set
      */
     public void setPosition(int position) {
         this.position = position;
@@ -279,7 +290,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param checked
-     *            the checked to set
+     * the checked to set
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
@@ -294,7 +305,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param shared
-     *            the shared to set
+     * the shared to set
      */
     public void setShared(boolean shared) {
         this.shared = shared;
@@ -309,7 +320,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @param cached
-     *            the cached to set
+     * the cached to set
      */
     public void setCached(boolean cached) {
         this.cached = cached;
@@ -336,6 +347,7 @@ public abstract class GPLayer implements Serializable {
         str.append(", checked=").append(checked);
         str.append(", shared=").append(shared);
         str.append(", cached=").append(cached);
+        str.append(", cqlFilter=").append(cqlFilter);
         if (this.getFolder() != null) {
             str.append(", folder.name=").append(this.getFolder().getName());
             str.append("(id=").append(this.getFolder().getId()).append(")");

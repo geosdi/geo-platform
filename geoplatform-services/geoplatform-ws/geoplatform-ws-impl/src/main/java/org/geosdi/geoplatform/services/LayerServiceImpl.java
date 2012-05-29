@@ -419,6 +419,7 @@ class LayerServiceImpl {
                 GPRasterLayer raster = (GPRasterLayer) layer;
                 raster.setOpacity(layerProperties.getOpacity());
                 raster.setStyles(layerProperties.getStyleList());
+                raster.setCqlFilter(layerProperties.getCqlFilter());
             } catch (IllegalArgumentException iae) {
                 throw new IllegalParameterFault(iae.getMessage());
             }

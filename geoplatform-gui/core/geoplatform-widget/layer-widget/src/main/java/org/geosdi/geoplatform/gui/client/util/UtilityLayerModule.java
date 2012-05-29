@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.util;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -48,12 +48,10 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class UtilityLayerModule {
 
     public static String getJsonFormat(List<GPBeanTreeModel> layerList) {
-        List<GPLayerBean> layers = new ArrayList<GPLayerBean>();
+        List<GPLayerBean> layers = Lists.newArrayList();
         for (Iterator iterator = layerList.iterator(); iterator.hasNext();) {
             layers.add((GPLayerBean) iterator);
         }
-
         return null;
     }
-
 }

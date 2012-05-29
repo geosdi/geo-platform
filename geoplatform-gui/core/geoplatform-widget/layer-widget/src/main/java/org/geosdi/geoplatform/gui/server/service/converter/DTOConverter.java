@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.converter;
 
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -75,10 +76,10 @@ import org.springframework.stereotype.Component;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  * Simple Class to convert Web-Services beans model in DTO beans Client
- * 
+ *
  */
 @Component(value = "dtoConverter")
 public class DTOConverter {
@@ -87,7 +88,7 @@ public class DTOConverter {
 
     public ArrayList<GPFolderClientInfo> convertOnlyFolder(
             Collection<FolderDTO> folders) {
-        ArrayList<GPFolderClientInfo> foldersClient = new ArrayList<GPFolderClientInfo>();
+        ArrayList<GPFolderClientInfo> foldersClient = Lists.newArrayList();
 
         if (folders != null) {
             for (Iterator<FolderDTO> it = folders.iterator(); it.hasNext();) {
@@ -100,7 +101,7 @@ public class DTOConverter {
 
     public ArrayList<IGPFolderElements> convertFolderElements(
             TreeFolderElements folderElements) {
-        ArrayList<IGPFolderElements> clientFolderElements = new ArrayList<IGPFolderElements>();
+        ArrayList<IGPFolderElements> clientFolderElements = Lists.newArrayList();
         Object element;
         Iterator iterator = folderElements.iterator();
         while (iterator.hasNext()) {
@@ -125,7 +126,8 @@ public class DTOConverter {
         dto.setChecked(memento.isChecked());
         dto.setId(memento.getIdBaseElement());
         dto.setOpacity(memento.getOpacity());
-        List<String> styleList = new ArrayList<String>();
+        dto.setCqlFilter(memento.getCqlFilter());
+        List<String> styleList = Lists.newArrayList();
         for (GPStyleStringBeanModel beanModel : memento.getStyleList()) {
             styleList.add(beanModel.getStyleString());
         }
@@ -140,8 +142,8 @@ public class DTOConverter {
         raster.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.RASTER);
         raster.setOpacity(rasterDTO.getOpacity());
 
-        ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
-        GPStyleStringBeanModel style = null;
+        ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
+        GPStyleStringBeanModel style;
         for (String styleString : rasterDTO.getStyleList()) {
             style = new GPStyleStringBeanModel();
             style.setStyleString(styleString);
@@ -172,6 +174,7 @@ public class DTOConverter {
         layer.setLayerName(layerDTO.getName());
         layer.setTitle(layerDTO.getTitle());
         layer.setAlias(layerDTO.getAlias());
+        layer.setCqlFilter(layerDTO.getCqlFilter());
         // layer.setzIndex(layerDTO.getPosition());
     }
 
@@ -232,8 +235,10 @@ public class DTOConverter {
 //            gpFolder.setParent(parent);
 //        }
         gpFolder.setPosition(memento.getzIndex());
-        /*TODO: Once implemented shared function you must set this property
-        gpFolder.setShared(true);*/
+        /*
+         * TODO: Once implemented shared function you must set this property
+         * gpFolder.setShared(true);
+         */
         return gpFolder;
     }
 
@@ -246,7 +251,7 @@ public class DTOConverter {
     }
 
     public ArrayList<GPLayer> convertMementoLayers(List<AbstractMementoLayer> addedLayers) {
-        ArrayList<GPLayer> layersList = new ArrayList<GPLayer>();
+        ArrayList<GPLayer> layersList = Lists.newArrayList();
         GPFolder folder = new GPFolder();
         for (AbstractMementoLayer memento : addedLayers) {
             GPLayer layer = null;
@@ -289,7 +294,7 @@ public class DTOConverter {
         dto.setProjectID(project.getId());
         dto.setProjectName(project.getName());
         dto.setDefaultProject(project.isDefaultProject());
-        
+
         return dto;
     }
 

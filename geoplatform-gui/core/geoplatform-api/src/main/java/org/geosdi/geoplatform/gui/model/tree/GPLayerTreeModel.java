@@ -85,6 +85,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     private BBoxClientInfo bbox;
     private GPLayerType layerType;
     private ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
+    private String cqlFilter;
     //
     private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
 
@@ -101,6 +102,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
         this.crs = layer.getCrs();
         this.bbox = layer.getBbox();
         this.layerType = layer.getLayerType();
+        this.cqlFilter = layer.getCqlFilter();
     }
 
     /**
@@ -251,6 +253,14 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     @Override
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
+    }
+
+    public String getCqlFilter() {
+        return cqlFilter;
+    }
+
+    public void setCqlFilter(String cqlFilter) {
+        this.cqlFilter = cqlFilter;
     }
 
     @Override

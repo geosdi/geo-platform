@@ -78,6 +78,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
             wmsParams.setStyles(rasterBean.getStyles().get(0).getStyleString());
         }
         wmsParams.setIsTransparent(true);
+        wmsParams.setCQLFilter(rasterBean.getCqlFilter());
 
         WMSOptions wmsOption = new WMSOptions();
         if (rasterBean.getBbox() != null) {
@@ -120,7 +121,8 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         this.addAuthTuple(wmsParams);
         wmsParams.setLayers(vectorBean.getName());
         wmsParams.setStyles("");
-        wmsParams.setIsTransparent(true);
+        wmsParams.setIsTransparent(Boolean.TRUE);
+        wmsParams.setCQLFilter(vectorBean.getCqlFilter());
 
         WMSOptions wmsOption = new WMSOptions();
         if (vectorBean.getBbox() != null) {

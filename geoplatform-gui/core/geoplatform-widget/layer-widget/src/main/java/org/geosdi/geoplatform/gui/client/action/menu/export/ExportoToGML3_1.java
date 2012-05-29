@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.client.action.menu.export;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
@@ -47,12 +47,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
-public class ExportoToKML extends MenuAction {
+public class ExportoToGML3_1 extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToKML(TreePanel treePanel) {
-        super("ExportToKML");
+    public ExportoToGML3_1(TreePanel treePanel) {
+        super("ExportToGML3_1");
         this.treePanel = treePanel;
     }
 
@@ -63,12 +63,12 @@ public class ExportoToKML extends MenuAction {
         if (item instanceof RasterTreeNode) {
             String dataSource = ((RasterTreeNode) item).getDataSource();
 
-            // kml preview
-            final String kmlUrl = dataSource + "/kml?layers="
-                    + ((RasterTreeNode) item).getName() + "&legend=true&format_options=kmattr:false";
-            System.out.println(kmlUrl);
-            Window.open(kmlUrl, kmlUrl, kmlUrl);
+            // gml preview (we actually want it only for vector layers)
+            dataSource = dataSource.replaceAll("wms", "wfs");
+            String gmlUrl =
+                    dataSource + "?service=WFS&version=1.0.0&request=GetFeature&typeName="
+                    + ((RasterTreeNode) item).getName() + "&maxFeatures=50&outputFormat=text/xml;%20subtype=gml/3.1.1";
+            Window.open(gmlUrl, gmlUrl, gmlUrl);
         }
-
     }
 }

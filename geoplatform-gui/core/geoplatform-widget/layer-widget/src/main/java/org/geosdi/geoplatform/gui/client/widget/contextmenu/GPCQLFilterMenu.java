@@ -33,42 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi;
+package org.geosdi.geoplatform.gui.client.widget.contextmenu;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.services.GPTrackingService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.menu.cqlfilter.AddModifyCQLFilterAction;
+import org.geosdi.geoplatform.gui.client.action.menu.cqlfilter.RemoveCQLFilterAction;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath:applicationContext.xml"})
-public class TestXmppMessage {
+public class GPCQLFilterMenu extends Menu {
 
-    @Autowired(required = true)
-    private GPTrackingService trackingService;
-    private GPUser gpUser;
-
-    @Before
-    public void setUp() {
-        this.gpUser = new GPUser();
-        this.gpUser.setUsername("user");
+    public GPCQLFilterMenu(GPTreePanel tree) {
+        this.buildMenu(tree);
     }
 
-    @Test
-    public void testMessage() {
-        trackingService.subscribeLayerNotification(this.gpUser.getUsername(), "Emite44444", "10-45-4555", 5);
-//        double i = 0;
-//        while (i < 9999999999999d) {
-//            i = i + 0.000001;
-//        }
+    private void buildMenu(GPTreePanel tree) {
+        MenuItem addModifyMenuItem = new MenuItem("Add/Modify Filter");
+        addModifyMenuItem.setIcon(LayerResources.ICONS.cqlFilter());
+        addModifyMenuItem.addSelectionListener(new AddModifyCQLFilterAction(tree));
+        super.add(addModifyMenuItem);
+        MenuItem removeCQLFilterMenuItem = new MenuItem("Remove Filter");
+        removeCQLFilterMenuItem.addSelectionListener(new RemoveCQLFilterAction(tree));
+        removeCQLFilterMenuItem.setIcon(LayerResources.ICONS.cqlFilterDelete());
+        super.add(removeCQLFilterMenuItem);
     }
 }

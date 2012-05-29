@@ -45,17 +45,17 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
         GPLayerBean {
     /*
-     * 
+     *
      */
 
     private static final long serialVersionUID = 7746607426284214904L;
     /*
-     * 
+     *
      */
 
     public enum GPLayerBeanKeyValue {
@@ -83,6 +83,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     private BBoxClientInfo bbox;
     private GPLayerType layerType;
     private ArrayList<GPStyleStringBeanModel> styles;
+    private String cqlFilter;
 
     /**
      * @return the id
@@ -94,7 +95,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
     /**
      * @param id
-     *          the id to set
+     * the id to set
      */
     @Override
     public void setId(Long id) {
@@ -111,7 +112,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
     /**
      * @param name
-     *          the name to set
+     * the name to set
      */
     @Override
     public void setName(String name) {
@@ -145,7 +146,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
     /**
      * @param label
-     *          the label to set
+     * the label to set
      */
     @Override
     public void setLabel(String label) {
@@ -164,7 +165,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
     /**
      * @param title
-     *          the title to set
+     * the title to set
      */
     @Override
     public void setTitle(String title) {
@@ -181,7 +182,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
     /**
      * @param abstractText
-     *          the abstractText to set
+     * the abstractText to set
      */
     @Override
     public void setAbstractText(String abstractText) {
@@ -200,7 +201,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
     /**
      * @param dataSource
-     *          the dataSource to set
+     * the dataSource to set
      */
     @Override
     public void setDataSource(String dataSource) {
@@ -217,7 +218,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
     /**
      * @param crs the
-     *          crs to set
+     * crs to set
      */
     @Override
     public void setCrs(String crs) {
@@ -234,7 +235,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
     /**
      * @param bbox
-     *          the bbox to set
+     * the bbox to set
      */
     @Override
     public void setBbox(BBoxClientInfo bbox) {
@@ -261,11 +262,21 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
     /**
      * @param layerType
-     *          the layerType to set
+     * the layerType to set
      */
     @Override
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
+    }
+
+    @Override
+    public String getCqlFilter() {
+        return cqlFilter;
+    }
+
+    @Override
+    public void setCqlFilter(String cqlFilter) {
+        this.cqlFilter = cqlFilter;
     }
 
     @Override

@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
@@ -175,6 +176,21 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         if ((layer != null) && (layer.isVisible())) {
             WMSParams params = new WMSParams();
             params.setStyles(newStyle);
+            layer.mergeNewParams(params);
+        }
+    }
+
+    @Override
+    public void onChangeCqlFilter(GPLayerTreeModel layerBean) {
+        WMS layer = (WMS) this.layers.get(layerBean);
+        if ((layer != null) && (layer.isVisible())) {
+            WMSParams params = new WMSParams();
+            if (layerBean.getCqlFilter() == null || layerBean.getCqlFilter().trim().equals("")) {
+                params = layer.getParams();
+                params.removeCQLFilter();
+            } else {
+                params.setCQLFilter(layerBean.getCqlFilter());
+            }
             layer.mergeNewParams(params);
         }
     }

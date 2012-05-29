@@ -59,6 +59,7 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
     private Long id;
     private String alias;
     private Boolean checked;
+    private String cqlFilter;
 
     public ShortLayerPropertiesDTO() {
     }
@@ -78,7 +79,7 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
 
     /**
      * @param id
-     *            the id to set
+     * the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -93,10 +94,18 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
 
     /**
      * @param alias
-     *          the alias to set
+     * the alias to set
      */
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    public String getCqlFilter() {
+        return cqlFilter;
+    }
+
+    public void setCqlFilter(String cqlFilter) {
+        this.cqlFilter = cqlFilter;
     }
 
     /**
@@ -108,7 +117,7 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
 
     /**
      * @param checked
-     *            the checked to set
+     * the checked to set
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
@@ -116,7 +125,7 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

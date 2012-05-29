@@ -47,18 +47,19 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
  * @email nazzareno.sileno@geosdi.org
  */
 public class MementoLayerOriginalProperties extends AbstractMementoOriginalProperties<GPLayerTreeModel> {
-
+    
     private static final long serialVersionUID = 2399513531544205577L;
     private float opacity;
+    private String cqlFilter;
     private ArrayList<GPStyleStringBeanModel> styleList;
-
+    
     public MementoLayerOriginalProperties() {
     }
-
+    
     public MementoLayerOriginalProperties(ISave saveAction) {
         super(saveAction);
     }
-
+    
     @Override
     public void convertMementoToWs() {
         super.convertMementoToWs();
@@ -66,6 +67,7 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
         super.setChecked(super.getRefBaseElement().isChecked());
         if (super.getRefBaseElement() instanceof RasterTreeNode) {
             opacity = ((RasterTreeNode) super.getRefBaseElement()).getOpacity();
+            cqlFilter = ((RasterTreeNode) super.getRefBaseElement()).getCqlFilter();
         }
     }
 
@@ -96,22 +98,37 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
     public void setStyleList(ArrayList<GPStyleStringBeanModel> styleList) {
         this.styleList = styleList;
     }
-
+    
+    public String getCqlFilter() {
+        return cqlFilter;
+    }
+    
+    public void setCqlFilter(String cqlFilter) {
+        this.cqlFilter = cqlFilter;
+    }
+    
     @Override
     public boolean isChanged() {
         boolean condition = false;
-        if ((this.getName() == null && super.getRefBaseElement() != null)
-                || !this.getName().equals(super.getRefBaseElement().getAlias())
-                || super.isChecked() != super.getRefBaseElement().isChecked()) {
-            condition = true;
-        } else if (super.getRefBaseElement() instanceof RasterTreeNode
-                && ((RasterTreeNode) super.getRefBaseElement()).getOpacity() != this.getOpacity()
-                || !((RasterTreeNode) super.getRefBaseElement()).getStyles().equals(this.getStyleList())) {
+        if (isBaseChanged() || isRasterChanged()) {
             condition = true;
         }
         return condition;
     }
-
+    
+    private boolean isRasterChanged() {
+        return (super.getRefBaseElement() instanceof RasterTreeNode
+                && ((RasterTreeNode) super.getRefBaseElement()).getOpacity() != this.getOpacity()
+                || !((RasterTreeNode) super.getRefBaseElement()).getStyles().equals(this.getStyleList())
+                || !cqlFilter.equalsIgnoreCase(super.getRefBaseElement().getCqlFilter()));
+    }
+    
+    private boolean isBaseChanged() {
+        return ((this.getName() == null && super.getRefBaseElement() != null)
+                || !this.getName().equals(super.getRefBaseElement().getAlias())
+                || super.isChecked() != super.getRefBaseElement().isChecked());
+    }
+    
     @Override
     public void copyOriginalProperties(GPBeanTreeModel bean) {
         if (bean instanceof GPLayerTreeModel) {
@@ -123,6 +140,7 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
             if (layer instanceof RasterTreeNode) {
                 this.setOpacity(((RasterTreeNode) layer).getOpacity());
                 this.setStyleList(((RasterTreeNode) layer).getStyles());
+                this.setCqlFilter(((RasterTreeNode) layer).getCqlFilter());
 //                System.out.println("Opacity setted: " + memento.getOpacity());
             }
             super.setRefBaseElement(layer);

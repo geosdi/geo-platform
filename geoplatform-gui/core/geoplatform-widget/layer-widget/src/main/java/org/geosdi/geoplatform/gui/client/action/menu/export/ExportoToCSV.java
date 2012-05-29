@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.client.action.menu.export;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
@@ -47,12 +47,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
-public class ExportoToGML3_1 extends MenuAction {
+public class ExportoToCSV extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToGML3_1(TreePanel treePanel) {
-        super("ExportToGML3_1");
+    public ExportoToCSV(TreePanel treePanel) {
+        super("ExportToCSV");
         this.treePanel = treePanel;
     }
 
@@ -67,7 +67,7 @@ public class ExportoToGML3_1 extends MenuAction {
             dataSource = dataSource.replaceAll("wms", "wfs");
             String gmlUrl =
                     dataSource + "?service=WFS&version=1.0.0&request=GetFeature&typeName="
-                    + ((RasterTreeNode) item).getName() + "&maxFeatures=50&outputFormat=text/xml;%20subtype=gml/3.1.1";
+                    + ((RasterTreeNode) item).getName() + "&maxFeatures=50&outputFormat=csv";
             Window.open(gmlUrl, gmlUrl, gmlUrl);
         }
     }

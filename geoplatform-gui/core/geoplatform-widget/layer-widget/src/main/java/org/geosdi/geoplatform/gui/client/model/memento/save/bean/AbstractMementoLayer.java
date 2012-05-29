@@ -61,7 +61,9 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel>
     private String dataSource;
     private String srs;
 //    private boolean checked;    
-    /* GPBBox elements */
+    /*
+     * GPBBox elements
+     */
     private double lowerLeftX;
     private double lowerLeftY;
     private double upperRightX;

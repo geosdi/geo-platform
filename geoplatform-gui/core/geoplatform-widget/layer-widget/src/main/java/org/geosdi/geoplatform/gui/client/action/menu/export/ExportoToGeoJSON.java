@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.client.action.menu.export;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
@@ -47,12 +47,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
-public class ExportoToTIFF extends MenuAction {
+public class ExportoToGeoJSON extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToTIFF(TreePanel treePanel) {
-        super("ExportToTIFF");
+    public ExportoToGeoJSON(TreePanel treePanel) {
+        super("ExportToGeoJSON");
         this.treePanel = treePanel;
     }
 
@@ -62,27 +62,13 @@ public class ExportoToTIFF extends MenuAction {
 
         if (item instanceof RasterTreeNode) {
             String dataSource = ((RasterTreeNode) item).getDataSource();
-            String tiffUrl = "";
-            // kml preview
-            if (dataSource.contains("geoserver")) {
-                tiffUrl = dataSource
-                        + "/reflect?&layers="
-                        + ((RasterTreeNode) item).getName()
-                        + "&width=1024&format=image/tiff&format_options=dpi:600";
-            } else {
-                tiffUrl = dataSource
-                        + "?service=WMS&request=GetMap&version=1.1.1&format=image/tiff&width=1024&height=768&srs=EPSG:4326&layers="
-                        + ((RasterTreeNode) item).getName()
-                        + "&bbox=" + ((RasterTreeNode) item).getBbox().getLowerLeftX()
-                        + "," + ((RasterTreeNode) item).getBbox().getLowerLeftY()
-                        + "," + ((RasterTreeNode) item).getBbox().getUpperRightX()
-                        + "," + ((RasterTreeNode) item).getBbox().getUpperRightY();
-            }
 
-            System.out.println(tiffUrl);
-
-            Window.open(tiffUrl, tiffUrl, tiffUrl);
+            // gml preview (we actually want it only for vector layers)
+            dataSource = dataSource.replaceAll("wms", "wfs");
+            String gmlUrl =
+                    dataSource + "?service=WFS&version=1.0.0&request=GetFeature&typeName="
+                    + ((RasterTreeNode) item).getName() + "&maxFeatures=50&outputFormat=json";
+            Window.open(gmlUrl, gmlUrl, gmlUrl);
         }
-
     }
 }

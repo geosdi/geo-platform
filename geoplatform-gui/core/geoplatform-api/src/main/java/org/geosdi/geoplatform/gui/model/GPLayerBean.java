@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public interface GPLayerBean extends ModelData {
 
@@ -93,4 +93,8 @@ public interface GPLayerBean extends ModelData {
     public ArrayList<GPStyleStringBeanModel> getStyles();
 
     public void setStyles(ArrayList<GPStyleStringBeanModel> styles);
+
+    public String getCqlFilter();
+
+    public void setCqlFilter(String cqlFilter);
 }

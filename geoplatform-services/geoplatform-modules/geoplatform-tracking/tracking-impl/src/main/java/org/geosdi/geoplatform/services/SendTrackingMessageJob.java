@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.packet.Message;
 import org.quartz.Job;
@@ -59,10 +60,16 @@ public class SendTrackingMessageJob implements Job {
         Message message = (Message) context.getTrigger().getJobDataMap().get(MESSAGE);
         GPTrackingServiceImpl trackingService = (GPTrackingServiceImpl) context.getTrigger().getJobDataMap().get(GP_TRACKING_SERVICE);
         XMPPConnection connection = trackingService.getConnection();
+//        for (RosterEntry entry : connection.getRoster().getEntries()) {
+//            System.out.println("Name in roster: " + entry.getName());
+//            System.out.println("User in roster: " + entry.getUser());
+//        }
         if (connection.getRoster().getPresence(message.getTo()).isAvailable()) {
+            logger.debug("Sending message to the user: " + message.getTo() + message.getSubject()
+                    + message.getBody());
             connection.sendPacket(message);
         } else {
-            logger.debug("Not online user: " + message.getTo());
+            logger.info("Not online user: " + message.getTo());
             trackingService.unscribeLayerNotification(context.getTrigger().getKey());
         }
     }

@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.client.action.menu.export;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
@@ -47,12 +47,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
-public class ExportoToPDF extends MenuAction {
+public class ExportoToTIFF extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToPDF(TreePanel treePanel) {
-        super("ExportToPDF");
+    public ExportoToTIFF(TreePanel treePanel) {
+        super("ExportToTIFF");
         this.treePanel = treePanel;
     }
 
@@ -62,31 +62,26 @@ public class ExportoToPDF extends MenuAction {
 
         if (item instanceof RasterTreeNode) {
             String dataSource = ((RasterTreeNode) item).getDataSource();
-
+            String tiffUrl = "";
             // kml preview
-            String pdfUrl = "";
-
-
             if (dataSource.contains("geoserver")) {
-                pdfUrl = dataSource
+                tiffUrl = dataSource
                         + "/reflect?&layers="
                         + ((RasterTreeNode) item).getName()
-                        + "&width=1024&format=application/pdf&format_options=dpi:600";
-
+                        + "&width=1024&format=image/tiff&format_options=dpi:600";
             } else {
-                pdfUrl = dataSource
-                        + "?service=WMS&request=GetMap&version=1.1.1&format=application/pdf&width=1024&height=768&srs=EPSG:4326&layers="
+                tiffUrl = dataSource
+                        + "?service=WMS&request=GetMap&version=1.1.1&format=image/tiff&width=1024&height=768&srs=EPSG:4326&layers="
                         + ((RasterTreeNode) item).getName()
-                        + "&bbox="
-                        + ((RasterTreeNode) item).getBbox().getLowerLeftX()
+                        + "&bbox=" + ((RasterTreeNode) item).getBbox().getLowerLeftX()
                         + "," + ((RasterTreeNode) item).getBbox().getLowerLeftY()
                         + "," + ((RasterTreeNode) item).getBbox().getUpperRightX()
                         + "," + ((RasterTreeNode) item).getBbox().getUpperRightY();
             }
 
-            System.out.println(pdfUrl);
+            System.out.println(tiffUrl);
 
-            Window.open(pdfUrl, pdfUrl, pdfUrl);
+            Window.open(tiffUrl, tiffUrl, tiffUrl);
         }
 
     }

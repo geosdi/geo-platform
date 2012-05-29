@@ -50,11 +50,12 @@ import org.geosdi.geoplatform.core.model.GPProject;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- * 
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"id", "name", "position", "shared", "checked",
-    "title", "alias", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached"})
+@XmlType(propOrder = {"id", "name", "position", "shared", "checked", "title",
+    "alias", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached",
+    "cqlFilter"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
@@ -66,6 +67,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     private GPLayerType layerType;
     private GPBBox bbox;
     private Boolean cached;
+    private String cqlFilter;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -89,6 +91,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
         this.layerType = layer.getLayerType();
         this.bbox = layer.getBbox();
         this.cached = layer.isCached();
+        this.cqlFilter = layer.getCqlFilter();
     }
     //</editor-fold>
 
@@ -102,7 +105,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
 
     /**
      * @param title
-     *            the title to set
+     * the title to set
      */
     public void setTitle(String title) {
         this.title = title;
@@ -117,7 +120,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
 
     /**
      * @param alias
-     *          the alias to set
+     * the alias to set
      */
     public void setAlias(String alias) {
         this.alias = alias;
@@ -132,7 +135,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
 
     /**
      * @param urlServer
-     *            the urlServer to set
+     * the urlServer to set
      */
     public void setUrlServer(String urlServer) {
         this.urlServer = urlServer;
@@ -147,10 +150,18 @@ public class ShortLayerDTO extends AbstractElementDTO {
 
     /**
      * @param srs
-     *            the srs to set
+     * the srs to set
      */
     public void setSrs(String srs) {
         this.srs = srs;
+    }
+
+    public String getCqlFilter() {
+        return cqlFilter;
+    }
+
+    public void setCqlFilter(String cqlFilter) {
+        this.cqlFilter = cqlFilter;
     }
 
     /**
@@ -162,7 +173,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
 
     /**
      * @param abstractText
-     *            the abstractText to set
+     * the abstractText to set
      */
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
@@ -177,7 +188,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
 
     /**
      * @param layerType
-     *            the layerType to set
+     * the layerType to set
      */
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
@@ -206,7 +217,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
 
     /**
      * @param cached
-     *          the cached to set
+     * the cached to set
      */
     public void setCached(Boolean cached) {
         this.cached = cached;
@@ -215,7 +226,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -226,6 +237,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
                 + ", urlServer=" + urlServer
                 + ", srs=" + srs
                 + ", abstractText=" + abstractText
+                + ", cqlFilter=" + cqlFilter
                 + ", layerType=" + layerType
                 + ", " + bbox
                 + ", cached=" + cached;
@@ -263,6 +275,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
         layer.setAbstractText(layerDTO.getAbstractText());
         layer.setLayerType(layerDTO.getLayerType());
         layer.setBbox(layerDTO.getBbox());
+        layer.setCqlFilter(layerDTO.getCqlFilter());
         if (layerDTO.isCached() != null) {
             layer.setCached(layerDTO.isCached());
         }

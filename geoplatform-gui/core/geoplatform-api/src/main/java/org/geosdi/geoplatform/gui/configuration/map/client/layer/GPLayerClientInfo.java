@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientIn
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public abstract class GPLayerClientInfo implements Serializable,
         Comparable<IGPFolderElements>, IGPFolderElements {
@@ -58,6 +58,7 @@ public abstract class GPLayerClientInfo implements Serializable,
     private BBoxClientInfo bbox;
     private GPLayerType layerType;
     private int zIndex;
+    private String cqlFilter;
     private boolean checked;
 
     /**
@@ -69,7 +70,7 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param id
-     *          the id to set
+     * the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -84,7 +85,7 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param layerName
-     *            the layerName to set
+     * the layerName to set
      */
     public void setLayerName(String layerName) {
         this.layerName = layerName;
@@ -113,7 +114,7 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param title
-     *          the title to set
+     * the title to set
      */
     public void setTitle(String title) {
         this.title = title;
@@ -128,7 +129,7 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param abstractText
-     *            the abstractText to set
+     * the abstractText to set
      */
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
@@ -143,7 +144,7 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param dataSource
-     *            the dataSource to set
+     * the dataSource to set
      */
     public void setDataSource(String dataSource) {
         this.dataSource = dataSource;
@@ -158,7 +159,7 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param crs
-     *            the crs to set
+     * the crs to set
      */
     public void setCrs(String crs) {
         this.crs = crs;
@@ -173,7 +174,7 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param bbox
-     *            the bbox to set
+     * the bbox to set
      */
     public void setBbox(BBoxClientInfo bbox) {
         this.bbox = bbox;
@@ -188,7 +189,7 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param layerType
-     *            the layerType to set
+     * the layerType to set
      */
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
@@ -204,7 +205,7 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param zIndex
-     *            the zIndex to set
+     * the zIndex to set
      */
     public void setzIndex(int zIndex) {
         this.zIndex = zIndex;
@@ -219,10 +220,18 @@ public abstract class GPLayerClientInfo implements Serializable,
 
     /**
      * @param checked
-     *            the checked to set
+     * the checked to set
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public String getCqlFilter() {
+        return cqlFilter;
+    }
+
+    public void setCqlFilter(String cqlFilter) {
+        this.cqlFilter = cqlFilter;
     }
 
     /**
@@ -242,8 +251,10 @@ public abstract class GPLayerClientInfo implements Serializable,
      */
     @Override
     public String toString() {
-        return "GPLayerClientInfo [dataSource=" + dataSource + ", crs=" + crs
+        return "GPLayerClientInfo{" + "id=" + id + ", layerName=" + layerName
+                + ", alias=" + alias + ", title=" + title + ", abstractText="
+                + abstractText + ", dataSource=" + dataSource + ", crs=" + crs
                 + ", bbox=" + bbox + ", layerType=" + layerType + ", zIndex="
-                + zIndex + "]";
+                + zIndex + ", cqlFilter=" + cqlFilter + ", checked=" + checked + '}';
     }
 }

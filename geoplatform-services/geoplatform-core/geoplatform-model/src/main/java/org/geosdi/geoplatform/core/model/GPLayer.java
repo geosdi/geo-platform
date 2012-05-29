@@ -93,7 +93,7 @@ public abstract class GPLayer implements Serializable {
     @Column
     private String srs;
     //
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String cqlFilter;
     //
     @Embedded

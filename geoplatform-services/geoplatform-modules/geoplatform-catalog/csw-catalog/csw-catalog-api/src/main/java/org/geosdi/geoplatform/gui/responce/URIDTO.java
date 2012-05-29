@@ -48,6 +48,7 @@ public class URIDTO implements Serializable {
     private String protocol;
     private String name;
     private String description;
+    private String serviceURL;
 
     public String getDescription() {
         return description;
@@ -73,12 +74,27 @@ public class URIDTO implements Serializable {
         this.protocol = protocol;
     }
 
+    /**
+     * @return the serviceURL
+     */
+    public String getServiceURL() {
+        return serviceURL;
+    }
+
+    /**
+     * @param serviceURL the serviceURL to set
+     */
+    public void setServiceURL(String serviceURL) {
+        this.serviceURL = serviceURL;
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("URIDTO {");
-        str.append("protocol=").append(protocol);
-        str.append(", name=").append(name);
-        str.append(", description=").append(description);
+        str.append("protocol = ").append(protocol);
+        str.append(", name = ").append(name);
+        str.append(", description = ").append(description);
+        str.append(", serviceURL = ").append(serviceURL);
         return str.append("}").toString();
     }
 }

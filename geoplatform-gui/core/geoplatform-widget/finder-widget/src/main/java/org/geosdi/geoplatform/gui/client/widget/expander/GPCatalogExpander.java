@@ -38,7 +38,10 @@ package org.geosdi.geoplatform.gui.client.widget.expander;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 /**
@@ -57,16 +60,29 @@ public class GPCatalogExpander extends GPTreeExpanderNotifier<AbstractFolderTree
 
     @Override
     public boolean checkNode() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ((AbstractFolderTreeNode) this.tree.getSelectionModel().getSelectedItem()).getId() == null;
     }
 
     @Override
     public void execute() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("ECCO I SELEZIONATI @@@@@@@@@@@@@@@@@@@@ "
+                + tree.getSelectionModel().getSelection());
     }
 
     @Override
     public void defineStatusBarCancelMessage() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        LayoutManager.getInstance().getStatusMap().setStatus(
+                "Add folder operation cancelled.",
+                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+    }
+
+    public void processActionRequest() {
+        if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
+            super.checkNodeState();
+        } else {
+            GeoPlatformMessage.alertMessage("GeoPlatformCatalogWidget",
+                    "You can put layers into Folders only.\n"
+                    + "Please select the correct node");
+        }
     }
 }

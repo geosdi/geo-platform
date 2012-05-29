@@ -50,18 +50,16 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class AddLayerToTreeAction extends GeoPlatformAction<ButtonEvent> {
 
-    private TreePanel<GPBeanTreeModel> tree;
     private GPCatalogExpander catalogExpander;
 
     public AddLayerToTreeAction(Grid<FullRecord> grid,
             TreePanel<GPBeanTreeModel> tree) {
-        
-        this.tree = tree;
+
         this.catalogExpander = new GPCatalogExpander(tree, grid);
     }
 
     @Override
     public void componentSelected(ButtonEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.catalogExpander.processActionRequest();
     }
 }

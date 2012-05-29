@@ -116,6 +116,16 @@ public class URI
         this.description = description;
     }
 
+    /**
+     * @return the serviceURL
+     */
+    public String getServiceURL() {
+        if (super.isSetContent()) {
+            return super.getContent().get(0);
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
@@ -149,7 +159,8 @@ public class URI
         {
             String theDescription;
             theDescription = this.getDescription();
-            strategy.appendField(locator, this, "description", buffer, theDescription);
+            strategy.appendField(locator, this, "description", buffer,
+                    theDescription);
         }
 
         return buffer;

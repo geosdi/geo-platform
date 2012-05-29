@@ -36,28 +36,13 @@
 package org.geosdi.geoplatform.gui.client.widget.components.filters.container;
 
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.data.BasePagingLoader;
-import com.extjs.gxt.ui.client.data.LoadEvent;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.extjs.gxt.ui.client.data.RpcProxy;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.LoadListener;
-import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
-import com.extjs.gxt.ui.client.event.SelectionChangedListener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.data.*;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
-import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnData;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
+import com.extjs.gxt.ui.client.widget.grid.*;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.tips.QuickTip;
@@ -272,35 +257,29 @@ public class CSWServerPaginationContainer
     }
 
     @Override
-    public void setUpLoadListener() {
-        super.loader.addLoadListener(new LoadListener() {
+    protected void onLoaderLoad(LoadEvent le) {
+        widget.unmask();
+        // TODO Set status message on main windows
+        System.out.println("\n*** CSW servers correctly loaded ***");
+    }
 
-            @Override
-            public void loaderBeforeLoad(LoadEvent le) {
-                toolBar.enableRefresh();
-                widget.mask("Loading CSW servers");
-            }
+    @Override
+    protected void onLoaderLoadException(LoadEvent le) {
+        if (le.exception instanceof GeoPlatformException) {
+            // No result
+            System.out.println("\n*** " + le.exception.getMessage());
+        } else {
+            GeoPlatformMessage.errorMessage("Connection error",
+                    "The services are down, report to the administator");
+        }
+        resetGrid();
+        widget.unmask();
+    }
 
-            @Override
-            public void loaderLoad(LoadEvent le) {
-                widget.unmask();
-                // TODO Set status message on main windows
-                System.out.println("\n*** CSW servers correctly loaded ***");
-            }
-
-            @Override
-            public void loaderLoadException(LoadEvent le) {
-                if (le.exception instanceof GeoPlatformException) {
-                    // No result
-                    System.out.println("\n*** " + le.exception.getMessage());
-                } else {
-                    GeoPlatformMessage.errorMessage("Connection error",
-                            "The services are down, report to the administator");
-                }
-                resetGrid();
-                widget.unmask();
-            }
-        });
+    @Override
+    protected void onLoaderBeforeLoad(LoadEvent le) {
+        super.onLoaderBeforeLoad(le);
+        widget.mask("Loading CSW servers");
     }
 
     private void executeDeleteServer() {
@@ -346,7 +325,7 @@ public class CSWServerPaginationContainer
 
     /**
      * TODO : MAKE IMPROVEMENT FOR PAGINATION HERE
-     * 
+     *
      * Add the server to store.
      *
      * @param server to add

@@ -35,15 +35,19 @@
  */
 package org.geosdi.geoplatform.gui.containers.pagination;
 
+import com.extjs.gxt.ui.client.data.LoadEvent;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoader;
 import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.event.LoadListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
@@ -105,7 +109,7 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
      * Code snippet:
      *
      * <pre>
-     *      super.toolBar = new PagingToolBar(super.getPageSize());
+     *      super.toolBar = new GeoPlatformPagingToolBar(super.getPageSize());
      *
      *      super.proxy = new RpcProxy<PagingLoadResult<T>>() {
      *
@@ -127,33 +131,10 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     public abstract void createStore();
 
     public abstract void initWidget();
-
-    /**
-     * Create Load Listener to have control on RPC Call
-     * * Code snippet:
-     *
-     * <pre>
-     *      loader.addLoadListener(new LoadListener() {
-     *
-     *        @Override
-     *        public void loaderBeforeLoad(LoadEvent le) {
-     *
-     *        }
-     *
-     *        @Override
-     *        public void loaderLoad(LoadEvent le) {
-     *
-     *        }
-     *
-     *        @Override
-     *        public void loaderLoadException(LoadEvent le) {
-     *
-     *        }
-     *     });
-     *
-     * </pre>
-     */
-    public abstract void setUpLoadListener();
+    
+    protected abstract void onLoaderLoad(LoadEvent le);
+    
+    protected abstract void onLoaderLoadException(LoadEvent le);
 
     /**
      * @return the pageSize
@@ -176,6 +157,10 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     public C getWidget() {
         return widget;
     }
+    
+    protected void onLoaderBeforeLoad(LoadEvent le) {
+        toolBar.enableRefresh();
+    }
 
     private void initPanel() {
         this.panel = new ContentPanel();
@@ -189,5 +174,25 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
             throw new NullPointerException("The Toolbar must not be null");
         }
         this.panel.setBottomComponent(this.toolBar);
+    }
+    
+    private void setUpLoadListener() {
+        loader.addLoadListener(new LoadListener() {
+
+            @Override
+            public void loaderBeforeLoad(LoadEvent le) {
+                onLoaderBeforeLoad(le);
+            }
+
+            @Override
+            public void loaderLoad(LoadEvent le) {
+                onLoaderLoad(le);
+            }
+
+            @Override
+            public void loaderLoadException(LoadEvent le) {
+               onLoaderLoadException(le);
+            }
+        });
     }
 }

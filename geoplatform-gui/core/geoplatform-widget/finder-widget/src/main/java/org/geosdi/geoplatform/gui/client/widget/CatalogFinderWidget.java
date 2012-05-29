@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
@@ -47,6 +48,7 @@ import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.puregwt.event.ActionTreePresenceEvent;
 import org.geosdi.geoplatform.gui.client.widget.components.MainViewFinderWidget;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.FiltersFinderWidget;
+import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -57,24 +59,27 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 @Singleton
 public class CatalogFinderWidget extends GeoPlatformWindow {
 
-    private TreePanel<GPBeanTreeModel> tree;
     private FiltersFinderWidget filtersWidget;
     private MainViewFinderWidget mainViewWidget;
+    private GPCatalogStatusBar catalogStatusBar;
     private EventBus bus;
+    private TreePanel<GPBeanTreeModel> tree;
 
     @Inject
-    public CatalogFinderWidget(FiltersFinderWidget filtersWidget,
-            MainViewFinderWidget mainViewWidget, EventBus bus) {
+    public CatalogFinderWidget(FiltersFinderWidget filtersWidget, MainViewFinderWidget mainViewWidget,
+            GPCatalogStatusBar catalogStatusBar, EventBus bus) {
         super(true);
         this.filtersWidget = filtersWidget;
         this.mainViewWidget = mainViewWidget;
         this.bus = bus;
+        this.catalogStatusBar = catalogStatusBar;
     }
 
     @Override
     public void addComponent() {
         addWestWidget();
         addCenterWidget();
+        addStatusBar();
     }
 
     @Override
@@ -136,9 +141,17 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
         super.add(this.mainViewWidget, centerData);
     }
 
+    private void addStatusBar() {
+        this.catalogStatusBar.setAutoWidth(true);
+
+        super.setButtonAlign(HorizontalAlignment.LEFT);
+        super.getButtonBar().add(this.catalogStatusBar);
+    }
+
     @Override
     public void reset() {
         this.filtersWidget.reset();
         this.mainViewWidget.reset();
+        this.catalogStatusBar.reset();
     }
 }

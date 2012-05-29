@@ -33,21 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.handler;
+package org.geosdi.geoplatform.gui.client.widget.statusbar;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import com.google.gwt.event.shared.EventBus;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogStatusBarHandler;
+import org.geosdi.geoplatform.gui.client.widget.StatusWidget;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface ActionTreePresenceHandler extends EventHandler {
+public class GPCatalogStatusBar extends StatusWidget
+        implements CatalogStatusBarHandler {
 
-    GwtEvent.Type<ActionTreePresenceHandler> TYPE = new GwtEvent.Type<ActionTreePresenceHandler>();
+    private EventBus bus;
 
-    void notifyTreePresence(TreePanel<GPBeanTreeModel> tree);
+    @Inject
+    public GPCatalogStatusBar(EventBus bus) {
+        this.bus = bus;
+        this.bus.addHandler(CatalogStatusBarHandler.TYPE, this);
+    }
+
+    @Override
+    public void setStatus(String text, GPCatalogStatusBarType iconStyle) {
+        super.setStatus(text, iconStyle.getValue());
+    }
+
+    public void reset() {
+        super.clearStatus("");
+    }
+
+    public enum GPCatalogStatusBarType {
+
+        STATUS_OK("x-status-ok"),
+        STATUS_NOT_OK("x-status-not-ok"),
+        STATUS_ERROR("x-status-error"),
+        STATUS_LOADING("x-loading-status");
+        //
+        private String value;
+
+        private GPCatalogStatusBarType(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
 }

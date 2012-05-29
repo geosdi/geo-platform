@@ -43,29 +43,29 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeoPlatformPagingToolBar extends PagingToolBar {
-    
+
     public GeoPlatformPagingToolBar(int pageSize) {
         super(pageSize);
         this.disableComponents();
     }
-    
+
     @Override
     public void clear() {
         super.clear();
         disableComponents();
     }
-    
+
     public void enableRefresh() {
         if (!refresh.isEnabled()) {
-            refresh.setEnabled(true);
+            refresh.enable();
         }
     }
-    
+
     private void disableComponents() {
         first.setIcon(getImages().getFirstDisabled());
         prev.setIcon(getImages().getPrevDisabled());
         next.setIcon(getImages().getNextDisabled());
         last.setIcon(getImages().getLastDisabled());
-        refresh.setEnabled(false);
+        refresh.disable();
     }
 }

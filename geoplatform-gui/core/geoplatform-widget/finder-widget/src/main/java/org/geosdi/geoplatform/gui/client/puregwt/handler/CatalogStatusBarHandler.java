@@ -35,19 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.client.puregwt.handler;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface ActionTreePresenceHandler extends EventHandler {
+public interface CatalogStatusBarHandler extends EventHandler {
 
-    GwtEvent.Type<ActionTreePresenceHandler> TYPE = new GwtEvent.Type<ActionTreePresenceHandler>();
+    GwtEvent.Type<CatalogStatusBarHandler> TYPE = new GwtEvent.Type<CatalogStatusBarHandler>();
 
-    void notifyTreePresence(TreePanel<GPBeanTreeModel> tree);
+    void setStatus(String text, GPCatalogStatusBarType iconStyle);
 }

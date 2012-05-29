@@ -45,12 +45,16 @@ import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
+import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
@@ -70,10 +74,13 @@ public class CSWServerFormWidget
     private TextField<String> aliasField;
     private Button saveButton;
     private String urlEncoding;
+    private EventBus bus;
 
-    public CSWServerFormWidget(CSWServerPaginationContainer catalogWindget) {
+    public CSWServerFormWidget(CSWServerPaginationContainer catalogWindget,
+            EventBus bus) {
         super(true);
         this.catalogWindget = catalogWindget;
+        this.bus = bus;
     }
 
     @Override
@@ -205,10 +212,11 @@ public class CSWServerFormWidget
 
                     @Override
                     public void onFailure(Throwable caught) {
+                        System.out.println("\n*** Error on saving server: " + caught.getMessage()); // TODO logger
                         setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
                                 EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
-                        // TODO Set status message on main windows
-                        System.out.println("Error on saving CSW server: " + caught.getMessage());
+                        bus.fireEvent(new CatalogStatusBarEvent("Error on saving server",
+                                GPCatalogStatusBarType.STATUS_ERROR));
                     }
 
                     @Override
@@ -224,14 +232,14 @@ public class CSWServerFormWidget
                         if (aliasValue.equals(server.getAlias())) {
                             setStatus(EnumSaveStatus.STATUS_SAVE.getValue(),
                                     EnumSaveStatus.STATUS_MESSAGE_SAVE.getValue());
-                            // TODO Set status message on main windows
-                            System.out.println("Server correctly saved");
+                            bus.fireEvent(new CatalogStatusBarEvent("Server correctly saved",
+                                    GPCatalogStatusBarType.STATUS_OK));
                         } else {
                             setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
                                     EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
-                            // TODO Set status message on main windows
-                            System.out.println("Server already exist, with alias \""
-                                    + server.getAlias() + "\"");
+                            bus.fireEvent(new CatalogStatusBarEvent("Server already exist, with alias \""
+                                    + server.getAlias() + "\"",
+                                    GPCatalogStatusBarType.STATUS_NOT_OK));
                         }
 
                         hide();

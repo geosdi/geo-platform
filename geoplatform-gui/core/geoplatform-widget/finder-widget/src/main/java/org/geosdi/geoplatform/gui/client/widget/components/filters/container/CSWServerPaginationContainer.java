@@ -48,14 +48,15 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.tips.QuickTip;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
+import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.containers.pagination.GeoPlatformPagingToolBar;
@@ -79,7 +80,7 @@ public class CSWServerPaginationContainer
     private EventBus bus;
     private ActionEnableEvent enableEvent = new ActionEnableEvent(false);
     //
-    private CSWServerFormWidget serverForm = new CSWServerFormWidget(this);
+    private CSWServerFormWidget serverForm;
     private CheckBoxSelectionModel<GPCSWServerBeanModel> sm;
     private TextField<String> searchField;
     private Button deleteServerButton;
@@ -90,6 +91,7 @@ public class CSWServerPaginationContainer
         super(true);
         catalogFinder = theCatalogFinder;
         bus = theBus;
+        serverForm = new CSWServerFormWidget(this, bus);
     }
 
     @Override
@@ -258,19 +260,23 @@ public class CSWServerPaginationContainer
 
     @Override
     protected void onLoaderLoad(LoadEvent le) {
+        bus.fireEvent(new CatalogStatusBarEvent("Servers correctly loaded",
+                GPCatalogStatusBarType.STATUS_OK));
         widget.unmask();
-        // TODO Set status message on main windows
-        System.out.println("\n*** CSW servers correctly loaded ***");
     }
 
     @Override
     protected void onLoaderLoadException(LoadEvent le) {
         if (le.exception instanceof GeoPlatformException) {
             // No result
-            System.out.println("\n*** " + le.exception.getMessage());
+            System.out.println("\n*** " + le.exception.getMessage()); // TODO logger
+            bus.fireEvent(new CatalogStatusBarEvent("There are no servers",
+                    GPCatalogStatusBarType.STATUS_NOT_OK));
         } else {
-            GeoPlatformMessage.errorMessage("Connection error",
-                    "The services are down, report to the administator");
+            String errorMessage = "The services are down, report to the administator";
+            GeoPlatformMessage.errorMessage("Connection error", errorMessage);
+            bus.fireEvent(new CatalogStatusBarEvent(errorMessage,
+                    GPCatalogStatusBarType.STATUS_ERROR));
         }
         resetGrid();
         widget.unmask();
@@ -292,24 +298,26 @@ public class CSWServerPaginationContainer
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        // TODO Set status message on main windows
-                        System.out.println("\n*** " + caught.getMessage());
+                        System.out.println("\n*** Error on deleting server: " + caught.getMessage()); // TODO logger
+                        bus.fireEvent(new CatalogStatusBarEvent("Error on deleting server",
+                                GPCatalogStatusBarType.STATUS_ERROR));
+
                         widget.unmask();
                     }
 
                     @Override
                     public void onSuccess(Boolean result) {
                         store.remove(selectedServer);
-                        // TODO Set status message on main windows
-                        System.out.println("\n*** Server correctly deleted ***");
+                        bus.fireEvent(new CatalogStatusBarEvent("Server correctly deleted",
+                                GPCatalogStatusBarType.STATUS_OK));
                         widget.unmask();
                     }
                 });
     }
 
     @Override
-    protected void onRender(Element parent, int index) {
-        super.onRender(parent, index);
+    protected void notifyShow() {
+        super.notifyShow();
         loader.load(0, super.getPageSize());
     }
 

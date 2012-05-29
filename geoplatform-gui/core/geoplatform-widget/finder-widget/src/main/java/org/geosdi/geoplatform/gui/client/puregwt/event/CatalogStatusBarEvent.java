@@ -33,21 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.handler;
+package org.geosdi.geoplatform.gui.client.puregwt.event;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogStatusBarHandler;
+import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface ActionTreePresenceHandler extends EventHandler {
+public class CatalogStatusBarEvent extends GwtEvent<CatalogStatusBarHandler> {
 
-    GwtEvent.Type<ActionTreePresenceHandler> TYPE = new GwtEvent.Type<ActionTreePresenceHandler>();
+    private String text;
+    private GPCatalogStatusBarType iconStyle;
 
-    void notifyTreePresence(TreePanel<GPBeanTreeModel> tree);
+    public CatalogStatusBarEvent(String text, GPCatalogStatusBarType iconStyle) {
+        this.text = text;
+        this.iconStyle = iconStyle;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public GPCatalogStatusBarType getIconStyle() {
+        return iconStyle;
+    }
+
+    @Override
+    public Type<CatalogStatusBarHandler> getAssociatedType() {
+        return CatalogStatusBarHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(CatalogStatusBarHandler handler) {
+        handler.setStatus(text, iconStyle);
+    }
 }

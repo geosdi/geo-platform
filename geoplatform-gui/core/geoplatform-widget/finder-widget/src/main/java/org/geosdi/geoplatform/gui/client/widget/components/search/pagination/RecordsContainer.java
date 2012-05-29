@@ -53,6 +53,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
+import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.containers.pagination.GeoPlatformPagingToolBar;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -153,8 +155,8 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     protected void onLoaderLoad(LoadEvent le) {
         widget.unmask();
 
-        // TODO Set status message on main windows
-        System.out.println("\n*** Records correctly loaded ***");
+        bus.fireEvent(new CatalogStatusBarEvent("Records correctly loaded",
+                GPCatalogStatusBarType.STATUS_OK));
     }
 
     @Override

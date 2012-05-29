@@ -251,7 +251,7 @@ class WMSServiceImpl {
             stringBuilder.append("&access_token=").append(token);
         }
         if (authkey != null) {
-            stringBuilder.append("&authkey=").append(authkey);
+            stringBuilder.append("&gsauthkey=").append(authkey);
         }
         return stringBuilder.toString();
     }

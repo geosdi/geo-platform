@@ -33,59 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Provider;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group 
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@CatalogSpatialFilter
-public class CatalogMapWidget extends GeoPlatformContentPanel {
+public class LonLatItalyProvider implements Provider<LonLat> {
 
-    private GeoPlatformMapFactory mapFactory;
     private MapWidget mapWidget;
-    private LonLat center;
-    private EventBus bus;
 
     @Inject
-    public CatalogMapWidget(MapWidget theMapWidget, LonLat theCenter, EventBus theBus) {
-        super(true);
+    public LonLatItalyProvider(MapWidget theMapWidget) {
         this.mapWidget = theMapWidget;
-        this.center = theCenter;
-        this.bus = theBus;
     }
 
     @Override
-    public void addComponent() {
-        this.initMapWidget();
+    public LonLat get() {
+        LonLat italy = new LonLat(13.375, 42.329);
+        italy.transform("EPSG:4326", mapWidget.getMap().getProjection());
 
-        super.add(this.mapWidget);
-    }
-
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        setHeaderVisible(false);
-    }
-
-    private void initMapWidget() {
-        this.mapWidget.getMap().setCenter(this.center, 4);
-    }
-
-    @Override
-    public void reset() {
-        this.initMapWidget();
+        return italy;
     }
 }

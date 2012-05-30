@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.client.config.provider.CatalogComboBoxComponen
 import org.geosdi.geoplatform.gui.client.config.provider.CatalogFinderBeanProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.CatalogMapListenerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.CatalogMapWidgetProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.LonLatItalyProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.SearchInfoProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.TemporalInfoProvider;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
@@ -59,6 +60,7 @@ import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
+import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.event.MapZoomListener;
 
@@ -93,6 +95,9 @@ public class CatalogFinderInjectorModule extends AbstractGinModule {
 
         bind(MapWidget.class).toProvider(
                 CatalogMapWidgetProvider.class).in(Singleton.class);
+
+        bind(LonLat.class).toProvider(
+                LonLatItalyProvider.class).in(Singleton.class);
 
         bind(CatalogBBoxComponent.class).toProvider(
                 CatalogBBoxComponentProvider.class).in(Singleton.class);

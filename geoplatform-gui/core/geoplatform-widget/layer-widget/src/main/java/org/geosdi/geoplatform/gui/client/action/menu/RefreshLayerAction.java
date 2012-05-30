@@ -115,10 +115,10 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
     @Override
     public void handleMessageBody(final String messageBody) {
         GPBeanTreeModel element = treePanel.getStore().findModel(messageBody);
-        if (element != null) {
+        if (element != null && element instanceof GPLayerTreeModel && ((GPLayerTreeModel)element).isChecked()) {
             this.reloadLayerEvent = new ReloadLayerMapEvent((GPLayerBean) element);
             GPHandlerManager.fireEvent(this.reloadLayerEvent);
-        } else {
+        } else if(element instanceof GPLayerTreeModel) {
             LayerRemote.Util.getInstance().setLayerRefreshTime(
                     (String) Registry.get(GlobalRegistryEnum.EMITE_RESOURCE.getValue()),
                     messageBody, 0, new AsyncCallback<Object>() {

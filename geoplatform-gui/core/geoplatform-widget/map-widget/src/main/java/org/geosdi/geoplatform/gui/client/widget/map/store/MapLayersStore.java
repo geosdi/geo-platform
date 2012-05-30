@@ -93,13 +93,17 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void reloadLayer(GPLayerBean layer) {
-        if (containsLayer(layer)) {
-            this.removeLayer(layer);
-        }
-        if (layer instanceof GPRasterBean) {
-            displayRaster((GPRasterBean) layer);
-        } else {
-            displayVector((GPVectorBean) layer);
+        WMS wmsLayer = (WMS) this.layers.get(layer);
+        final boolean containsLayer = containsLayer(layer);
+        if (!containsLayer || (containsLayer && wmsLayer.isVisible())) {
+            if (containsLayer) {
+                this.removeLayer(layer);
+            }
+            if (layer instanceof GPRasterBean) {
+                displayRaster((GPRasterBean) layer);
+            } else {
+                displayVector((GPVectorBean) layer);
+            }
         }
     }
 

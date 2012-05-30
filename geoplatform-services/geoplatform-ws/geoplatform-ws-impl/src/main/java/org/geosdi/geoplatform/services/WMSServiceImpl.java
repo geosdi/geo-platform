@@ -396,7 +396,8 @@ class WMSServiceImpl {
 		int index = -1;
 		if (urlServer.contains("mapserv.exe")
 				|| urlServer.contains("mapserver")
-				|| urlServer.contains("mapserv")) {
+				|| urlServer.contains("mapserv") 
+				|| urlServer.contains("usertoken")) {
 			index = urlServer.indexOf("&");
 		} else {
 			index = urlServer.indexOf("?");

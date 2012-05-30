@@ -59,7 +59,7 @@ public class ServerDAOTest extends BaseDAOTest {
         insertServers();
 
         logger.info("\n*** Number of Servers into DB: {} ***",
-                    serverDAO.findAll().size());
+                serverDAO.findAll().size());
 
         Assert.assertTrue("Error on number of total servers", serverDAO.findAll().size() >= 2);
         Assert.assertTrue("Error on number of WMS servers", serverDAO.findAll(GPCapabilityType.WMS).size() == 2);
@@ -110,7 +110,7 @@ public class ServerDAOTest extends BaseDAOTest {
 
     private GeoPlatformServer createServer1CSW() {
         GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerUrl("http://150.145.133.91:8080/geonetwork/srv/en/csw");
+        server.setServerUrl("http://catalog.geosdi.org/geonetwork/srv/en/csw");
         server.setName("csw.geosdi.org");
         server.setAliasName("CSW on geosdi");
         server.setServerType(GPCapabilityType.CSW);

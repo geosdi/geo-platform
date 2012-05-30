@@ -64,7 +64,6 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
-import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
@@ -94,7 +93,6 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     private VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
     private GPLayerExpander expander;
-    private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
     //
     private Map<String, String> fieldMap = new HashMap<String, String>(); // TODO <GetMap, String> --> booolean GetMap.valid(String field)
     private String urlEncoding = "";
@@ -314,6 +312,10 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         this.urlEncoding = URL.decodeQueryString(url); // Encoding into ASCII
 //        System.out.println("*** URL encoding:\n" + urlEncoding + "\n");
 
+        this.urlEncoding = urlEncoding.replaceAll("%26", "&");
+        this.urlEncoding = urlEncoding.replaceAll("%3d", "=");
+//        System.out.println("*** URL re-encoding:\n" + urlEncoding + "\n");
+
         if (!urlEncoding.startsWith("http://")) {
             suggestion = "URL must be start with \"http://\"";
 //        } else if (!url.contains("/wms?")) { // TODO DEL ?
@@ -438,10 +440,9 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         String stylesValue = fieldMap.get(GetMap.STYLES.toString());
         if (stylesValue != null && stylesValue.length() > 0) {
             String[] styles = stylesValue.split(",");
-            GPStyleStringBeanModel style = null;
             for (String string : styles) {
 //                System.out.println("### Style:" + string);
-                style = new GPStyleStringBeanModel();
+                GPStyleStringBeanModel style = new GPStyleStringBeanModel();
                 style.setStyleString(string);
                 styleList.add(style);
             }

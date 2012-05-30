@@ -55,6 +55,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.LoadFirstServersHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
@@ -74,7 +75,8 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
  */
 @Singleton
 public class CSWServerPaginationContainer
-        extends GridLayoutPaginationContainer<GPCSWServerBeanModel> {
+        extends GridLayoutPaginationContainer<GPCSWServerBeanModel>
+        implements LoadFirstServersHandler {
 
     private CatalogFinderBean catalogFinder;
     private EventBus bus;
@@ -92,6 +94,8 @@ public class CSWServerPaginationContainer
         catalogFinder = theCatalogFinder;
         bus = theBus;
         serverForm = new CSWServerFormWidget(this, bus);
+        
+        bus.addHandler(LoadFirstServersHandler.TYPE, this);
     }
 
     @Override
@@ -316,8 +320,7 @@ public class CSWServerPaginationContainer
     }
 
     @Override
-    protected void notifyShow() {
-        super.notifyShow();
+    public void loadFirstServers() {
         loader.load(0, super.getPageSize());
     }
 

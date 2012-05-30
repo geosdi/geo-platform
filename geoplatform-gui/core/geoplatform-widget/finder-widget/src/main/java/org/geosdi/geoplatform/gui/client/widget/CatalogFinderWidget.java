@@ -46,6 +46,7 @@ import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.puregwt.event.ActionTreePresenceEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.event.LoadFirstServersEvent;
 import org.geosdi.geoplatform.gui.client.widget.components.MainViewFinderWidget;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.FiltersFinderWidget;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar;
@@ -64,6 +65,7 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
     private GPCatalogStatusBar catalogStatusBar;
     private EventBus bus;
     private TreePanel<GPBeanTreeModel> tree;
+    private LoadFirstServersEvent loadFirstServers = new LoadFirstServersEvent();
 
     @Inject
     public CatalogFinderWidget(FiltersFinderWidget filtersWidget, MainViewFinderWidget mainViewWidget,
@@ -153,5 +155,11 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
         this.filtersWidget.reset();
         this.mainViewWidget.reset();
         this.catalogStatusBar.reset();
+    }
+
+    @Override
+    protected void notifyShow() {
+        super.notifyShow();
+        this.bus.fireEvent(loadFirstServers);
     }
 }

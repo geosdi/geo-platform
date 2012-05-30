@@ -289,7 +289,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
             String field = pair.substring(0, ind);
             String fieldValue = pair.substring(ind + 1);
 
-            fieldMap.put(field, fieldValue);
+            fieldMap.put(field.toUpperCase(), fieldValue);
         }
     }
 

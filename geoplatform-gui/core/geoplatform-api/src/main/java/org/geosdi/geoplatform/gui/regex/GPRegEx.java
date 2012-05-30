@@ -49,27 +49,27 @@ public class GPRegEx {
      * Note: the whitespace must not be present
      */
     // Query String of a WMS URL - Fields required
-    public static final RegExp RE_REQUEST = RegExp.compile(GetMap.REQUEST + "=GetMap");
-    public static final RegExp RE_VERSION = RegExp.compile(GetMap.VERSION + "=1\\.(0\\.0|1\\.0|1\\.1|3\\.0)");
-    public static final RegExp RE_LAYERS = RegExp.compile(GetMap.LAYERS + "=\\w+(,\\w+)*");
-    public static final RegExp RE_SRS = RegExp.compile(GetMap.SRS + "=\\w+(-\\w+)?:\\d+");
-    public static final RegExp RE_BBOX = RegExp.compile(GetMap.BBOX + "=-?\\d+(\\.\\d+)?(,-?\\d+(\\.\\d+)?){3}");
-    public static final RegExp RE_WIDTH = RegExp.compile(GetMap.WIDTH + "=\\d+");
-    public static final RegExp RE_HEIGHT = RegExp.compile(GetMap.HEIGHT + "=\\d+");
-    public static final RegExp RE_FORMAT = RegExp.compile(GetMap.FORMAT + "=image/(png|gif|jpeg)");
+    public static final RegExp RE_REQUEST = RegExp.compile(GetMap.REQUEST + "=GetMap", "i"); // "i" --> ignore case
+    public static final RegExp RE_VERSION = RegExp.compile(GetMap.VERSION + "=1\\.(0\\.0|1\\.0|1\\.1|3\\.0)", "i");
+    public static final RegExp RE_LAYERS = RegExp.compile(GetMap.LAYERS + "=\\w+(,\\w+)*", "i");
+    public static final RegExp RE_SRS = RegExp.compile(GetMap.SRS + "=\\w+(-\\w+)?:\\d+", "i");
+    public static final RegExp RE_BBOX = RegExp.compile(GetMap.BBOX + "=-?\\d+(\\.\\d+)?(,-?\\d+(\\.\\d+)?){3}", "i");
+    public static final RegExp RE_WIDTH = RegExp.compile(GetMap.WIDTH + "=\\d+", "i");
+    public static final RegExp RE_HEIGHT = RegExp.compile(GetMap.HEIGHT + "=\\d+", "i");
+    public static final RegExp RE_FORMAT = RegExp.compile(GetMap.FORMAT + "=image/(png|gif|jpeg)", "i");
     // KML URL
     public static final RegExp RE_FUSION_TABLES_URL = RegExp.compile("http://www\\.google\\.com/fusiontables/exporttable\\?");
     public static final RegExp RE_FUSION_TABLES_QS_QUERY = RegExp.compile("query=select[ \\+]col\\d+[ \\+]from[ \\+]\\d+[ \\+]"); // URL Encoding replace + with a space
     public static final RegExp RE_FUSION_TABLES_QS_O = RegExp.compile("o=kmllink");
     public static final RegExp RE_FUSION_TABLES_QS_G = RegExp.compile("g=col\\d+");
     // URL
-    private static final RegExp RE_FORMAT_QS = RegExp.compile("(\\?|&)", "g"); // g --> replaceAll
+    private static final RegExp RE_FORMAT_QS = RegExp.compile("(\\?|&)", "g"); // "g" --> replaceAll
     //
     private static final RegExp RE_EMPTY_STRING = RegExp.compile("^\\s*$");
     // User properties
     public static final RegExp RE_COMPLETE_NAME = RegExp.compile("[^ ]+ [^ ]+");
     public static final RegExp RE_EMAIL = RegExp.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$", "i"); // i --> case insensitive
-    public static final RegExp RE_USERNAME = RegExp.compile("[a-zA-Z0-9._-]{4,}$");    
+    public static final RegExp RE_USERNAME = RegExp.compile("[a-zA-Z0-9._-]{4,}$");
 
     private GPRegEx() {
     }

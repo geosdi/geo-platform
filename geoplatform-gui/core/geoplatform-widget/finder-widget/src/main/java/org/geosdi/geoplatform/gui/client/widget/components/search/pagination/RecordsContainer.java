@@ -55,8 +55,6 @@ import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.containers.pagination.GeoPlatformPagingToolBar;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
@@ -132,8 +130,6 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
     @Override
     public void createStore() {
-        super.toolBar = new GeoPlatformPagingToolBar(super.getPageSize());
-
         super.proxy = new RpcProxy<PagingLoadResult<FullRecord>>() {
 
             @Override
@@ -148,45 +144,48 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         super.loader.setRemoteSort(false);
 
         super.store = new ListStore<FullRecord>(loader);
-
-        super.toolBar.bind(loader);
-    }
-
-    @Override
-    protected void onLoaderLoad(LoadEvent le) {
-        widget.unmask();
-
-        bus.fireEvent(new CatalogStatusBarEvent("Records correctly loaded",
-                GPCatalogStatusBarType.STATUS_OK));
-    }
-
-    @Override
-    protected void onLoaderLoadException(LoadEvent le) {
-        if (le.exception instanceof GeoPlatformException) { // TODO If record not found?
-            // No result
-            System.out.println("\n*** " + le.exception.getMessage());
-        } else {
-            GeoPlatformMessage.errorMessage("Connection error",
-                    "The services are down, report to the administator");
-        }
-        reset();
-        widget.unmask();
     }
 
     @Override
     protected void onLoaderBeforeLoad(LoadEvent le) {
-        super.onLoaderBeforeLoad(le);
         this.metadataSelection.clearRecordsExcludedList();
         widget.mask("Loading Records");
+    }
+
+    @Override
+    protected void onLoaderLoad(LoadEvent le) {
+        BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
+
+        if (result.getTotalLength() == 0) {
+            bus.fireEvent(new CatalogStatusBarEvent("There are no records",
+                    GPCatalogStatusBarType.STATUS_NOT_OK));
+        } else {
+            bus.fireEvent(new CatalogStatusBarEvent("Records correctly loaded",
+                    GPCatalogStatusBarType.STATUS_OK));
+        }
+
+        widget.unmask();
+    }
+
+    @Override
+    protected void onLoaderLoadException(LoadEvent le) {
+        System.out.println("\n*** " + le.exception.getMessage()); // TODO logger
+        String errorMessage = "The services are down, report to the administator.";
+        GeoPlatformMessage.errorMessage("Connection error", errorMessage);
+        bus.fireEvent(new CatalogStatusBarEvent(errorMessage,
+                GPCatalogStatusBarType.STATUS_ERROR));
+
+        this.reset();
+        widget.unmask();
     }
 
     public void searchRecords() {
         super.loader.load();
     }
 
+    @Override
     public void reset() {
-        this.store.removeAll();
-        this.toolBar.clear();
+        super.reset();
         this.metadataSelection.clearRecordsExcludedList();
         // TODO Reset button for add layer to tree
     }

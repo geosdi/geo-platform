@@ -60,8 +60,8 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     protected C widget;
     protected RpcProxy<PagingLoadResult<T>> proxy;
     protected PagingLoader<PagingLoadResult<T>> loader;
-    protected GeoPlatformPagingToolBar toolBar;
     protected ContentPanel panel;
+    private GeoPlatformPagingToolBar toolBar;
     private boolean initialized;
     private int pageSize;
 
@@ -78,15 +78,12 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
 
     protected final void init() {
         if (!initialized) {
-            initPanel();
+            this.initPanel();
             createStore();
-            setUpLoadListener();
+            this.createToolBar();
+            this.setUpLoadListener();
             initWidget();
-            if (widget == null) {
-                throw new NullPointerException(
-                        "Widget must be not null (create widget into initWidget method).");
-            }
-            addWidgets();
+            this.addWidgets();
         }
     }
 
@@ -102,13 +99,11 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     }
 
     /**
-     * Create Store , RpcProxy and Loader
+     * Create Store, RpcProxy and Loader
      *
      * Code snippet:
      *
      * <pre>
-     *      super.toolBar = new GeoPlatformPagingToolBar(super.getPageSize());
-     *
      *      super.proxy = new RpcProxy<PagingLoadResult<T>>() {
      *
      *             @Override
@@ -120,18 +115,16 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
      *
      *      super.loader = new BasePagingLoader<PagingLoadResult<T>>(proxy);
      *      super.loader.setRemoteSort(false);
-     *
-     *      super.store = new ListStore<T>(loader);
-     *
      * </pre>
-     *
      */
     public abstract void createStore();
 
     public abstract void initWidget();
-    
+
+    protected abstract void onLoaderBeforeLoad(LoadEvent le);
+
     protected abstract void onLoaderLoad(LoadEvent le);
-    
+
     protected abstract void onLoaderLoadException(LoadEvent le);
 
     /**
@@ -155,10 +148,6 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     public C getWidget() {
         return widget;
     }
-    
-    protected void onLoaderBeforeLoad(LoadEvent le) {
-        toolBar.enableRefresh();
-    }
 
     private void initPanel() {
         this.panel = new ContentPanel();
@@ -166,19 +155,32 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
         this.panel.setLayout(new FitLayout());
     }
 
-    private void addWidgets() {
-        this.panel.add(widget);
-        if (this.toolBar == null) {
-            throw new NullPointerException("The Toolbar must not be null");
+    private void createToolBar() {
+        if (loader == null) {
+            throw new NullPointerException("The 'Loader' must not be null. "
+                    + "Create it into 'createStore' method.");
         }
+
+        this.toolBar = new GeoPlatformPagingToolBar(this.pageSize);
+        this.toolBar.bind(loader);
+    }
+
+    private void addWidgets() {
+        if (widget == null) {
+            throw new NullPointerException("The 'Widget' must be not null. "
+                    + "Create it into 'initWidget' method.");
+        }
+
+        this.panel.add(widget);
         this.panel.setBottomComponent(this.toolBar);
     }
-    
+
     private void setUpLoadListener() {
         loader.addLoadListener(new LoadListener() {
 
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
+                toolBar.enableRefresh();
                 onLoaderBeforeLoad(le);
             }
 
@@ -189,8 +191,13 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
 
             @Override
             public void loaderLoadException(LoadEvent le) {
-               onLoaderLoadException(le);
+                onLoaderLoadException(le);
             }
         });
+    }
+
+    public void reset() {
+        this.store.removeAll();
+        this.toolBar.clear();
     }
 }

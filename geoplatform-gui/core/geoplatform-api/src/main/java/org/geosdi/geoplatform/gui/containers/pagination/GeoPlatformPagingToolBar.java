@@ -52,7 +52,7 @@ public class GeoPlatformPagingToolBar extends PagingToolBar {
     @Override
     public void clear() {
         super.clear();
-        disableComponents();
+        this.disableComponents();
     }
 
     public void enableRefresh() {

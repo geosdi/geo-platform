@@ -60,8 +60,6 @@ import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWid
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.containers.pagination.GeoPlatformPagingToolBar;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel.GPCSWServerKeyValue;
@@ -94,7 +92,7 @@ public class CSWServerPaginationContainer
         catalogFinder = theCatalogFinder;
         bus = theBus;
         serverForm = new CSWServerFormWidget(this, bus);
-        
+
         bus.addHandler(LoadFirstServersHandler.TYPE, this);
     }
 
@@ -241,8 +239,6 @@ public class CSWServerPaginationContainer
 
     @Override
     public void createStore() {
-        super.toolBar = new GeoPlatformPagingToolBar(super.getPageSize());
-
         super.proxy = new RpcProxy<PagingLoadResult<GPCSWServerBeanModel>>() {
 
             @Override
@@ -253,43 +249,42 @@ public class CSWServerPaginationContainer
             }
         };
 
-        super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(
-                proxy);
+        super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(proxy);
         super.loader.setRemoteSort(false);
 
         super.store = new ListStore<GPCSWServerBeanModel>(loader);
+    }
 
-        super.toolBar.bind(loader);
+    @Override
+    protected void onLoaderBeforeLoad(LoadEvent le) {
+        widget.mask("Loading CSW servers");
     }
 
     @Override
     protected void onLoaderLoad(LoadEvent le) {
-        bus.fireEvent(new CatalogStatusBarEvent("Servers correctly loaded",
-                GPCatalogStatusBarType.STATUS_OK));
+        BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
+
+        if (result.getTotalLength() == 0) {
+            bus.fireEvent(new CatalogStatusBarEvent("There are no catalogs",
+                    GPCatalogStatusBarType.STATUS_NOT_OK));
+        } else {
+            bus.fireEvent(new CatalogStatusBarEvent("Catalogs correctly loaded",
+                    GPCatalogStatusBarType.STATUS_OK));
+        }
+
         widget.unmask();
     }
 
     @Override
     protected void onLoaderLoadException(LoadEvent le) {
-        if (le.exception instanceof GeoPlatformException) {
-            // No result
-            System.out.println("\n*** " + le.exception.getMessage()); // TODO logger
-            bus.fireEvent(new CatalogStatusBarEvent("There are no servers",
-                    GPCatalogStatusBarType.STATUS_NOT_OK));
-        } else {
-            String errorMessage = "The services are down, report to the administator";
-            GeoPlatformMessage.errorMessage("Connection error", errorMessage);
-            bus.fireEvent(new CatalogStatusBarEvent(errorMessage,
-                    GPCatalogStatusBarType.STATUS_ERROR));
-        }
-        resetGrid();
-        widget.unmask();
-    }
+        System.out.println("\n*** " + le.exception.getMessage()); // TODO logger
+        String errorMessage = "The services are down, report to the administator.";
+        GeoPlatformMessage.errorMessage("Connection error", errorMessage);
+        bus.fireEvent(new CatalogStatusBarEvent(errorMessage,
+                GPCatalogStatusBarType.STATUS_ERROR));
 
-    @Override
-    protected void onLoaderBeforeLoad(LoadEvent le) {
-        super.onLoaderBeforeLoad(le);
-        widget.mask("Loading CSW servers");
+        super.reset();
+        widget.unmask();
     }
 
     private void executeDeleteServer() {
@@ -314,6 +309,7 @@ public class CSWServerPaginationContainer
                         store.remove(selectedServer);
                         bus.fireEvent(new CatalogStatusBarEvent("Server correctly deleted",
                                 GPCatalogStatusBarType.STATUS_OK));
+
                         widget.unmask();
                     }
                 });
@@ -324,14 +320,10 @@ public class CSWServerPaginationContainer
         loader.load(0, super.getPageSize());
     }
 
+    @Override
     public void reset() {
+        super.reset();
         this.searchField.reset();
-        this.resetGrid();
-    }
-
-    private void resetGrid() {
-        this.store.removeAll();
-        this.toolBar.clear();
     }
 
     /**

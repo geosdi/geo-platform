@@ -108,6 +108,15 @@ public class ServerDAOTest extends BaseDAOTest {
         return server;
     }
 
+    private GeoPlatformServer createServer3WMS() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities");
+        server.setName("earthbuilder.google.com");
+        server.setAliasName("EARTHBUILDER");
+        server.setServerType(GPCapabilityType.WMS);
+        return server;
+    }
+
     private GeoPlatformServer createServer1CSW() {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl("http://catalog.geosdi.org/geonetwork/srv/en/csw");
@@ -117,20 +126,11 @@ public class ServerDAOTest extends BaseDAOTest {
         return server;
     }
 
-    private GeoPlatformServer createServer3() {
-        GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerUrl("https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities");
-        server.setName("earthbuilder.google.com");
-        server.setAliasName("EARTHBUILDER");
-        server.setServerType(GPCapabilityType.WMS);
-        return server;
-    }
-
     private void insertDummyCSWServer() {
         for (int i = 10; i <= 99; i++) {
             GeoPlatformServer server = new GeoPlatformServer();
             server.setTitle("Title_" + i);
-            server.setAliasName("Alias_" + i);
+            server.setAliasName("Z_Alias_" + i);
             server.setServerUrl("http://csw-test/" + i);
             server.setServerType(GPCapabilityType.CSW);
             serverDAO.persist(server);

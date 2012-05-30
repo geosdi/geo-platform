@@ -101,26 +101,26 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
         int serversCount = geoPlatformCSWClient.getCSWServersCount(srq);
 
-        int start = config.getOffset();
-        int page = start == 0 ? start : start / config.getLimit();
+        ArrayList<GPCSWServerBeanModel> searchServers;
+        if (serversCount == 0) {
+            logger.info("\n*** No catalog found ***");
+            searchServers = new ArrayList<GPCSWServerBeanModel>(0);
+        } else {
+            int start = config.getOffset();
+            int page = start == 0 ? start : start / config.getLimit();
 
-        PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                config.getLimit(), page);
+            PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
+                    config.getLimit(), page);
 
-        List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(
-                psr);
-        if (serverList == null) {
-            logger.info("\n*** No CSW server ***");
-            throw new GeoPlatformException("There are no results"); // TODO Create empty list
+            List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(psr);
+
+            searchServers = new ArrayList<GPCSWServerBeanModel>(serverList.size());
+            for (ServerCSWDTO serverDTO : serverList) {
+                searchServers.add(this.convertServerDTO(serverDTO));
+            }
         }
 
-        ArrayList<GPCSWServerBeanModel> searchUsers = new ArrayList<GPCSWServerBeanModel>(
-                serverList.size());
-        for (ServerCSWDTO serverDTO : serverList) {
-            searchUsers.add(this.convertServerDTO(serverDTO));
-        }
-
-        return new BasePagingLoadResult<GPCSWServerBeanModel>(searchUsers,
+        return new BasePagingLoadResult<GPCSWServerBeanModel>(searchServers,
                 config.getOffset(), serversCount);
     }
 
@@ -144,10 +144,9 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         try {
             geoPlatformCSWClient.deleteServerCSW(serverID);
         } catch (ResourceNotFoundFault ex) {
-            logger.error(
-                    "The server with id " + serverID + " was not bean deleted");
-            throw new GeoPlatformException("The server with id "
-                    + serverID + " was not bean deleted");
+            String errorMessage = "The server with id " + serverID + " was not bean deleted";
+            logger.error(errorMessage);
+            throw new GeoPlatformException(errorMessage);
         }
         return true;
     }
@@ -163,16 +162,18 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         try {
             recordsCount = geoPlatformCSWClient.getRecordsCount(catalogFinder);
 
-            List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(
-                    config.getLimit(), config.getOffset() + 1, catalogFinder);
-            if (recordList == null) {
-                logger.info("\n*** No Summary Record ***");
-                throw new GeoPlatformException("There are no results"); // TODO Create empty list
-            }
+            if (recordsCount == 0) {
+                logger.info("\n*** No Summary Record found ***");
+                searchRecords = new ArrayList<SummaryRecord>(0);
 
-            searchRecords = new ArrayList<SummaryRecord>(recordList.size());
-            for (SummaryRecordDTO recordDTO : recordList) {
-                searchRecords.add(this.convertSummaryRecordDTO(recordDTO));
+            } else {
+                List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(
+                        config.getLimit(), config.getOffset() + 1, catalogFinder);
+
+                searchRecords = new ArrayList<SummaryRecord>(recordList.size());
+                for (SummaryRecordDTO recordDTO : recordList) {
+                    searchRecords.add(this.convertSummaryRecordDTO(recordDTO));
+                }
             }
 
         } catch (IllegalParameterFault ex) {
@@ -201,16 +202,18 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         try {
             recordsCount = geoPlatformCSWClient.getRecordsCount(catalogFinder);
 
-            List<FullRecordDTO> recordList = geoPlatformCSWClient.searchFullRecords(
-                    config.getLimit(), config.getOffset() + 1, catalogFinder);
-            if (recordList == null) {
-                logger.info("\n*** No Record ***");
-                throw new GeoPlatformException("There are no results"); // TODO Create empty list
-            }
+            if (recordsCount == 0) {
+                logger.info("\n*** No Full Record found ***");
+                searchRecords = new ArrayList<FullRecord>(0);
 
-            searchRecords = new ArrayList<FullRecord>(recordList.size());
-            for (FullRecordDTO recordDTO : recordList) {
-                searchRecords.add(this.convertFullRecordDTO(recordDTO));
+            } else {
+                List<FullRecordDTO> recordList = geoPlatformCSWClient.searchFullRecords(
+                        config.getLimit(), config.getOffset() + 1, catalogFinder);
+
+                searchRecords = new ArrayList<FullRecord>(recordList.size());
+                for (FullRecordDTO recordDTO : recordList) {
+                    searchRecords.add(this.convertFullRecordDTO(recordDTO));
+                }
             }
 
         } catch (IllegalParameterFault ex) {

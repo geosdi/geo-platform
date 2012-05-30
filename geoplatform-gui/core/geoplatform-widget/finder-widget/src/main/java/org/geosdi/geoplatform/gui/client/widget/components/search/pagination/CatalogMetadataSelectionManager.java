@@ -33,20 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.search;
+package org.geosdi.geoplatform.gui.client.widget.components.search.pagination;
 
-import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.FullRecord;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPTreeLayerWidgetSupport extends CatalogTreeLayerHandler {
+public interface CatalogMetadataSelectionManager {
 
-    Label getLabel();
+    void manageSelectionChanged(SelectionChangedEvent<FullRecord> se);
 
-    Button getButton();
+    void clearRecordsExcludedList();
+
+    void addRecordExcluded(FullRecord record);
+
+    List<FullRecord> getRecordsExcluded();
+
+    boolean isRecordsExcludedSet();
+    
+    void bindContainer(RecordsContainer container);
 }

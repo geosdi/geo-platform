@@ -43,7 +43,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 /**
- * The GeoPlatform class provides the client's entry point to the 
+ * The GeoPlatformJAXBContext class provides the client's entry point to the 
  * JAXBContext. This class allows you to perform the classic operations 
  * of the marshal and unmarshal JAXBContext
  * 

@@ -36,14 +36,14 @@
 package org.geosdi.geoplatform.gui.client.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerEnableHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogTreeLayerEnableEvent extends GwtEvent<CatalogTreeLayerEnableHandler> {
+public class CatalogTreeLayerEnableEvent extends GwtEvent<CatalogTreeLayerHandler> {
 
     private boolean enable;
 
@@ -55,12 +55,12 @@ public class CatalogTreeLayerEnableEvent extends GwtEvent<CatalogTreeLayerEnable
     }
 
     @Override
-    public Type<CatalogTreeLayerEnableHandler> getAssociatedType() {
-        return CatalogTreeLayerEnableHandler.TYPE;
+    public Type<CatalogTreeLayerHandler> getAssociatedType() {
+        return CatalogTreeLayerHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(CatalogTreeLayerEnableHandler handler) {
+    protected void dispatch(CatalogTreeLayerHandler handler) {
         handler.onComponentEnable(enable);
     }
 

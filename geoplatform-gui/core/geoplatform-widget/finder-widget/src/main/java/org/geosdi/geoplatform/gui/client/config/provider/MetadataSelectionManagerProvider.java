@@ -33,19 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.handler;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Provider;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.MetadataSelectionManager;
+import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.CatalogRecordsToolTip;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface CatalogTreeLayerEnableHandler extends EventHandler {
+public class MetadataSelectionManagerProvider implements
+        Provider<MetadataSelectionManager> {
 
-    public static final GwtEvent.Type<CatalogTreeLayerEnableHandler> TYPE = new GwtEvent.Type<CatalogTreeLayerEnableHandler>();
+    private EventBus bus;
+    private CatalogRecordsToolTip recordsToolTip;
 
-    void onComponentEnable(boolean enable);
+    @Inject
+    public MetadataSelectionManagerProvider(EventBus theBus,
+            CatalogRecordsToolTip theRecordsToolTip) {
+        this.bus = theBus;
+        this.recordsToolTip = theRecordsToolTip;
+    }
+
+    @Override
+    public MetadataSelectionManager get() {
+        return new MetadataSelectionManager(this.bus,
+                this.recordsToolTip);
+    }
 }

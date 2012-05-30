@@ -33,20 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.search;
+package org.geosdi.geoplatform.gui.client.puregwt.handler;
 
-import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPTreeLayerWidgetSupport extends CatalogTreeLayerHandler {
+public interface CatalogTreeLayerHandler extends EventHandler {
 
-    Label getLabel();
+    public static final GwtEvent.Type<CatalogTreeLayerHandler> TYPE = new GwtEvent.Type<CatalogTreeLayerHandler>();
 
-    Button getButton();
+    void onComponentEnable(boolean enable);
 }

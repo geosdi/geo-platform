@@ -42,7 +42,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.shared.EventBus;
 import org.geosdi.geoplatform.gui.client.action.button.AddLayerToTreeAction;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerEnableHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -60,7 +60,7 @@ public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
             EventBus bus) {
         this.createLabelComponent();
         this.createButtonComponent(theTree, theGrid);
-        bus.addHandler(CatalogTreeLayerEnableHandler.TYPE, this);
+        bus.addHandler(CatalogTreeLayerHandler.TYPE, this);
     }
 
     @Override

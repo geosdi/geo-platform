@@ -39,19 +39,12 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.config.provider.AreaInfoProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.CatalogBBoxComponentProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.CatalogCheckBoxComponentProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.CatalogComboBoxComponentProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.CatalogFinderBeanProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.CatalogMapListenerProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.CatalogMapWidgetProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.LonLatItalyProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.SearchInfoProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.TemporalInfoProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.*;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogCheckBoxComponent;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogComboBoxComponent;
+import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.MetadataSelectionManager;
+import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.CatalogRecordsToolTip;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.MetadataTabItem;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.SearchTabItem;
 import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
@@ -107,6 +100,12 @@ public class CatalogFinderInjectorModule extends AbstractGinModule {
 
         bind(CatalogCheckBoxComponent.class).toProvider(
                 CatalogCheckBoxComponentProvider.class).in(Singleton.class);
+
+        bind(CatalogRecordsToolTip.class).toProvider(
+                CatalogRecordsToolTipProvider.class).in(Singleton.class);
+
+        bind(MetadataSelectionManager.class).toProvider(
+                MetadataSelectionManagerProvider.class).in(Singleton.class);
 
         bind(CatalogFinderBean.class).toProvider(
                 CatalogFinderBeanProvider.class).in(Singleton.class);

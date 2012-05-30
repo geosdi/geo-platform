@@ -33,10 +33,9 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.search;
+package org.geosdi.geoplatform.gui.client.puregwt.event;
 
-import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
 
 /**
@@ -44,9 +43,15 @@ import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPTreeLayerWidgetSupport extends CatalogTreeLayerHandler {
+public class RecordsToolTipShowEvent extends GwtEvent<CatalogTreeLayerHandler> {
 
-    Label getLabel();
+    @Override
+    public Type<CatalogTreeLayerHandler> getAssociatedType() {
+        return CatalogTreeLayerHandler.TYPE;
+    }
 
-    Button getButton();
+    @Override
+    protected void dispatch(CatalogTreeLayerHandler handler) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

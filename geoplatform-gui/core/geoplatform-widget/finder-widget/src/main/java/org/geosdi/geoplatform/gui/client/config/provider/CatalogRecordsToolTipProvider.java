@@ -33,20 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.search;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
+import com.google.inject.Provider;
+import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.CatalogRecordsToolTip;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPTreeLayerWidgetSupport extends CatalogTreeLayerHandler {
+public class CatalogRecordsToolTipProvider implements
+        Provider<CatalogRecordsToolTip> {
 
-    Label getLabel();
-
-    Button getButton();
+    @Override
+    public CatalogRecordsToolTip get() {
+        return new CatalogRecordsToolTip();
+    }
 }

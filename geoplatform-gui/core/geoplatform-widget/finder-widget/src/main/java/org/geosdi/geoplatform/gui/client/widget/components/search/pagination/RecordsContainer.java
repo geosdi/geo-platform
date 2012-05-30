@@ -44,7 +44,6 @@ import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowExpander;
-import com.google.common.collect.Lists;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
@@ -76,16 +75,18 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     private CheckBoxSelectionModel<FullRecord> selectionModel;
     private RowExpander rowExpander;
     private boolean selectionContainer;
-    private List<FullRecord> recordsExcluded = Lists.newArrayList();
+    private CatalogMetadataSelectionManager metadataSelection;
 
     @Inject
     public RecordsContainer(CatalogFinderBean theCatalogFinder,
+            MetadataSelectionManager theMetadataSelector,
             EventBus theBus) {
         super(true, 10);
         super.setWidth(550);
         super.setStyleName("records-Container");
 
         this.catalogFinder = theCatalogFinder;
+        this.metadataSelection = theMetadataSelector;
         this.bus = theBus;
     }
 
@@ -175,6 +176,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     protected void onLoaderBeforeLoad(LoadEvent le) {
         super.onLoaderBeforeLoad(le);
+        this.metadataSelection.clearRecordsExcludedList();
         widget.mask("Loading Records");
     }
 
@@ -185,7 +187,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     public void reset() {
         this.store.removeAll();
         this.toolBar.clear();
-        this.recordsExcluded.clear();
+        this.metadataSelection.clearRecordsExcludedList();
         // TODO Reset button for add layer to tree
     }
 
@@ -198,6 +200,8 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     public void addRecordsContainerSelectionListener() {
         if (selectionContainer) {
+            this.metadataSelection.bindContainer(this);
+
             this.selectionModel.addListener(Events.BeforeSelect,
                     new Listener<SelectionEvent<FullRecord>>() {
 
@@ -207,7 +211,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
                             if (!record.isForWMSGetMapRequest()) {
                                 se.setCancelled(true);
 
-                                recordsExcluded.add(record);
+                                metadataSelection.addRecordExcluded(record);
                             }
                         }
                     });
@@ -216,9 +220,9 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
                 @Override
                 public void selectionChanged(SelectionChangedEvent<FullRecord> se) {
-                    //TODO : HERE THE CODE AND CONTROL TO SHOW RECORDS EXCLUDED
-                    System.out.println("SelectionChangedEvent @@@@@@@@@@@@@@ "
+                    System.out.println("CODICE ESEGUITO RECORDS CONTAINER @@@@@@@@@@@"
                             + se.getSelection());
+                    metadataSelection.manageSelectionChanged(se);
                 }
             });
         }
@@ -231,20 +235,5 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
     public List<FullRecord> getSelectedRecords() {
         return selectionModel.getSelectedItems();
-    }
-
-    /**
-     * @return {@link List<FullRecord>} the recordsExcluded
-     */
-    public List<FullRecord> getRecordsExcluded() {
-        return recordsExcluded;
-    }
-
-    /**
-     *
-     * @return {@link Boolean}
-     */
-    public boolean isRecordsExcludedSet() {
-        return !(this.recordsExcluded.isEmpty());
     }
 }

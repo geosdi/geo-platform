@@ -35,14 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.message;
 
-import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
-
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.MessageBox;
@@ -50,6 +43,8 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Timer;
+import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  * @author giuseppe

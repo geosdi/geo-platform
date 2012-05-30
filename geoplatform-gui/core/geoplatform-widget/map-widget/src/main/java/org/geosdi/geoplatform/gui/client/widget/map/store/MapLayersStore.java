@@ -188,11 +188,12 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     public void onChangeCqlFilter(GPLayerTreeModel layerBean) {
         WMS layer = (WMS) this.layers.get(layerBean);
         if ((layer != null) && (layer.isVisible())) {
-            WMSParams params = new WMSParams();
+            WMSParams params;
             if (layerBean.getCqlFilter() == null || layerBean.getCqlFilter().trim().equals("")) {
                 params = layer.getParams();
                 params.removeCQLFilter();
             } else {
+                params = new WMSParams();
                 params.setCQLFilter(layerBean.getCqlFilter());
             }
             layer.mergeNewParams(params);

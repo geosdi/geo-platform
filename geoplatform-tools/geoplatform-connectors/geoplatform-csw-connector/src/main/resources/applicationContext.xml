@@ -23,7 +23,8 @@
     </bean>
     
     <bean id="xStreamCatalogMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
-        <property name="annotatedClass" value="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities" />
+        <property name="annotatedClasses" value="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities,
+                        org.geosdi.geoplatform.connector.api.capabilities.model.csw.exception.CatalogExceptionReport" />
         <property name="omittedFields">
             <util:map>
                 <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogServiceIdentification" 

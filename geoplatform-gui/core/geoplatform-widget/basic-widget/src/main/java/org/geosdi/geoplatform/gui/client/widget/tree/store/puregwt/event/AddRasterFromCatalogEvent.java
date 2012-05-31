@@ -33,33 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.button;
+package org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.client.model.FullRecord;
-import org.geosdi.geoplatform.gui.client.widget.expander.GPCatalogExpander;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import com.google.gwt.event.shared.GwtEvent;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class AddLayerToTreeAction extends GeoPlatformAction<ButtonEvent> {
+public class AddRasterFromCatalogEvent extends GwtEvent<GPTreeStoreEventHandler> {
 
-    private GPCatalogExpander catalogExpander;
+    private List<GPLayerBean> layers;
 
-    public AddLayerToTreeAction(Grid<FullRecord> grid,
-            TreePanel<GPBeanTreeModel> tree) {
-
-        this.catalogExpander = new GPCatalogExpander(tree, grid);
+    public AddRasterFromCatalogEvent(List<GPLayerBean> layers) {
+        this.layers = layers;
     }
 
     @Override
-    public void componentSelected(ButtonEvent e) {
-        this.catalogExpander.executeActionRequest();
+    public Type<GPTreeStoreEventHandler> getAssociatedType() {
+        return GPTreeStoreEventHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(GPTreeStoreEventHandler handler) {
+        handler.addRasterLayersFromCatalog(layers);
     }
 }

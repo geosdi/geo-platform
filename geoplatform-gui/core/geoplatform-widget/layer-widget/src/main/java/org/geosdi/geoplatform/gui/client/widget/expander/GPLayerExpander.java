@@ -52,28 +52,31 @@ public class GPLayerExpander extends GPTreeExpanderNotifier<IGPNode> {
 
     private GPTreeFormWidget widget;
 
-    public GPLayerExpander(GPTreeFormWidget theWidget, TreePanel tree) {
+    public GPLayerExpander(TreePanel tree, GPTreeFormWidget theWidget) {
         super(tree);
         this.widget = theWidget;
     }
 
     @Override
-    public void execute() {
+    protected void execute() {
         this.widget.show();
     }
 
     @Override
-    public void defineStatusBarCancelMessage() {
+    protected void defineStatusBarCancelMessage() {
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Add folder operation cancelled.",
+                "Add folder operation cancelled.", // TODO change message wrt widget that use this expander
+                                                   // AddFolderWidget ---> folder
+                                                   //   LoadWmsGetMapFromUrlWidget --> layer
+                                                   //   LoadKmlFromUrlWidget --> layer
                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }
 
     @Override
-    public boolean checkNode() {
+    protected boolean checkNode() {
         boolean result = false;
-        if(tree.getSelectionModel().getSelectedItem() instanceof FolderTreeNode){
-            result = ((FolderTreeNode) tree.getSelectionModel().getSelectedItem()).getId() == null;
+        if (super.selectedElement instanceof FolderTreeNode) {
+            result = ((FolderTreeNode) super.selectedElement).getId() == null;
         }
         return result;
     }

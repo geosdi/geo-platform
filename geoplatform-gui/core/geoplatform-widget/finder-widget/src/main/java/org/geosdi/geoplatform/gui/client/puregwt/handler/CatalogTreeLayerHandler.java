@@ -45,7 +45,7 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public interface CatalogTreeLayerHandler extends EventHandler {
 
-    public static final GwtEvent.Type<CatalogTreeLayerHandler> TYPE = new GwtEvent.Type<CatalogTreeLayerHandler>();
+    GwtEvent.Type<CatalogTreeLayerHandler> TYPE = new GwtEvent.Type<CatalogTreeLayerHandler>();
 
     void onComponentEnable(boolean enable);
 }

@@ -106,7 +106,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         super(true);
         this.tree = theTree;
         this.addVisitor = new VisitorAddElement();
-        this.expander = new GPLayerExpander(this, theTree);
+        this.expander = new GPLayerExpander(theTree, this);
     }
 
     @Override

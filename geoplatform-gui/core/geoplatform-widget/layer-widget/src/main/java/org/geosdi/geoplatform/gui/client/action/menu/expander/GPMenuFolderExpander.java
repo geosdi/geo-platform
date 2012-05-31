@@ -43,27 +43,26 @@ import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNoti
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPMenuFolderExpander extends GPTreeExpanderNotifier{
+public class GPMenuFolderExpander extends GPTreeExpanderNotifier {
 
     private MenuAction menuAction;
-    
+
     public GPMenuFolderExpander(TreePanel theTree, MenuAction menuAction) {
         super(theTree);
         this.menuAction = menuAction;
     }
 
     @Override
-    public boolean checkNode() {
+    protected boolean checkNode() {
         return false;
     }
 
     @Override
-    public void execute() {
+    protected void execute() {
         this.menuAction.componentSelected(null);
     }
 
     @Override
-    public void defineStatusBarCancelMessage() {
+    protected void defineStatusBarCancelMessage() {
     }
-    
 }

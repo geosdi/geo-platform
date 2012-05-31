@@ -35,16 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
-
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,9 +51,6 @@ import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
  */
 public class GPRootTreeNode extends AbstractRootTreeNode {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1765450539495169525L;
 
     public GPRootTreeNode() {

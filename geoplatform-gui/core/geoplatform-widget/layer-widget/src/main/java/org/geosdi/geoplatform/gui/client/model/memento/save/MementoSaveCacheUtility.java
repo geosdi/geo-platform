@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.model.memento.save;
 import java.util.ListIterator;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;

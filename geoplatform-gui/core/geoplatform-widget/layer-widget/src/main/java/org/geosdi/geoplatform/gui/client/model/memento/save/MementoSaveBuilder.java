@@ -35,16 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoLayer;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoSave;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoLayer;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
@@ -100,6 +100,7 @@ public class MementoSaveBuilder {
         return mementoLayerList;
     }
     
+    // TODO Mangage null list?
     private static List<String> convertStyles(ArrayList<GPStyleStringBeanModel> styles){
         List<String> stringList = new ArrayList<String>();
         for (GPStyleStringBeanModel gPStyleStringBeanModel : styles) {

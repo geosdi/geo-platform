@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
-
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,13 +49,7 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
  */
 public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 8265365333381641340L;
-    /*
-     * 
-     */
 
     public enum GPRasterKeyValue {
 
@@ -109,7 +102,6 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         set(GPRasterKeyValue.OPACITY.toString(), this.opacity);
     }
 
-
     /**
      * (non-Javadoc)
      *
@@ -132,8 +124,8 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      */
     @Override
     public String toString() {
-        return "RasterTreeNode [getLabel()=" + getLabel() +
-                ", getDataSource()=" + getDataSource()
+        return "RasterTreeNode [getLabel()=" + getLabel()
+                + ", getDataSource()=" + getDataSource()
                 + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
                 + ", getLayerType()=" + getLayerType() + ", getzIndex()="
                 + getzIndex() + "]";

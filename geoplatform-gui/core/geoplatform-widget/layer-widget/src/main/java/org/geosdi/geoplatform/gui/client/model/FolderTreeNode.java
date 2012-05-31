@@ -36,15 +36,13 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.extjs.gxt.ui.client.GXT;
-import java.util.List;
-
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
-
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorModelConverter;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 import org.geosdi.geoplatform.gui.observable.Observable;
 
@@ -55,9 +53,6 @@ import org.geosdi.geoplatform.gui.observable.Observable;
  */
 public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -3687415822526940729L;
     //
     private VisitorModelConverter visitor = new VisitorModelConverter(this);

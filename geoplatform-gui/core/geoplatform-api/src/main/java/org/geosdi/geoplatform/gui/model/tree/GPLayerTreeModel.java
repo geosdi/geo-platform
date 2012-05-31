@@ -51,13 +51,7 @@ import org.geosdi.geoplatform.gui.observable.Observable;
 public abstract class GPLayerTreeModel extends GPBeanTreeModel
         implements GPLayerBean {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -6964624685883651246L;
-    /*
-     *
-     */
 
     public enum GPLayerKeyValue {
 
@@ -255,10 +249,12 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
         this.layerType = layerType;
     }
 
+    @Override
     public String getCqlFilter() {
         return cqlFilter;
     }
 
+    @Override
     public void setCqlFilter(String cqlFilter) {
         this.cqlFilter = cqlFilter;
     }

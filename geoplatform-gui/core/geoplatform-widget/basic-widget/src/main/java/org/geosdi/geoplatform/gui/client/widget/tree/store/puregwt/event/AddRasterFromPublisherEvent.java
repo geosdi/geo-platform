@@ -61,7 +61,7 @@ public class AddRasterFromPublisherEvent extends GwtEvent<GPTreeStoreEventHandle
 
     @Override
     protected void dispatch(GPTreeStoreEventHandler handler) {
-        handler.addRasterLayersfromPublisher(layers);
+        handler.addRasterLayersFromPublisher(layers);
     }
     
 }

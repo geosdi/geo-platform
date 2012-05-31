@@ -46,9 +46,6 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 4886440607031207404L;
 
     public enum GPFolderKeyValue {
@@ -84,7 +81,7 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
         super.setLabel(label);
         super.set(GPFolderKeyValue.LABEL.toString(), label);
     }
-    
+
     /**
      * The Folder Child as a Map
      * 

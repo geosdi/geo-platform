@@ -35,15 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.search;
 
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.shared.EventBus;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
-import org.geosdi.geoplatform.gui.client.action.button.AddLayerToTreeAction;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
+import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
+import org.geosdi.geoplatform.gui.client.widget.expander.GPCatalogExpander;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -53,14 +56,19 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
 
+    private TreePanel<GPBeanTreeModel> tree;
+    private GPCatalogExpander expander;
     private Label operationLabel;
-    private Button addLayerToTreeButton;
+    private Button addLayersToTreeButton;
 
-    public CatalogTreeLayerWidgetSupport(Grid<FullRecord> theGrid,
-            TreePanel<GPBeanTreeModel> theTree,
-            EventBus bus) {
+    public CatalogTreeLayerWidgetSupport(TreePanel<GPBeanTreeModel> theTree,
+            RecordsContainer recordsContainer, EventBus bus) {
+        tree = theTree;
+        expander = new GPCatalogExpander(tree, recordsContainer);
+
         this.createLabelComponent();
-        this.createButtonComponent(theTree, theGrid);
+        this.createButtonComponent();
+
         bus.addHandler(CatalogTreeLayerHandler.TYPE, this);
     }
 
@@ -71,12 +79,12 @@ public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
 
     @Override
     public Button getButton() {
-        return this.addLayerToTreeButton;
+        return this.addLayersToTreeButton;
     }
 
     @Override
     public void onComponentEnable(boolean enable) {
-        this.addLayerToTreeButton.setEnabled(enable);
+        this.addLayersToTreeButton.setEnabled(enable);
     }
 
     private void createLabelComponent() {
@@ -84,14 +92,19 @@ public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
         this.operationLabel.setStyleName("searchOperation-Label");
     }
 
-    private void createButtonComponent(TreePanel<GPBeanTreeModel> tree,
-            Grid<FullRecord> grid) {
-        
-        this.addLayerToTreeButton = new Button("Add To Layer Tree",
-                CatalogFinderWidgetResources.ICONS.addLayer(),
-                new AddLayerToTreeAction(grid, tree));
+    private void createButtonComponent() {
+        this.addLayersToTreeButton = new Button("Add To Layers Tree",
+                CatalogFinderWidgetResources.ICONS.addLayer());
+        this.addLayersToTreeButton.setStyleAttribute("padding-top", "10px");
 
-        this.addLayerToTreeButton.setStyleAttribute("padding-top", "10px");
-        this.addLayerToTreeButton.setEnabled(false);
+        this.addLayersToTreeButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent be) {
+                expander.executeActionRequest();
+            }
+        });
+
+        this.addLayersToTreeButton.disable();
     }
 }

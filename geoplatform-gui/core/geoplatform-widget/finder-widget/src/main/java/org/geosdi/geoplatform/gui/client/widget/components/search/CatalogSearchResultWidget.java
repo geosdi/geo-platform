@@ -98,10 +98,10 @@ public class CatalogSearchResultWidget extends LayoutContainer
     
     private void addComponentsForTreePresence() {
         GPTreeLayerWidgetSupport catalogTreeLayer = new CatalogTreeLayerWidgetSupport(
-                recordsContainer.getWidget(), tree, bus);
+                tree, recordsContainer, bus);
         
-        add(catalogTreeLayer.getLabel());
-        add(catalogTreeLayer.getButton());
+        super.add(catalogTreeLayer.getLabel());
+        super.add(catalogTreeLayer.getButton());
         
         this.recordsContainer.setSelectionContainer(true);
     }

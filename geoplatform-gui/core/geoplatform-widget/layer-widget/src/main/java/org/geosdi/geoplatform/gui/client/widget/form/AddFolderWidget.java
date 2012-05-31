@@ -98,7 +98,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         super(true);
         this.tree = theTree;
         this.addVisitor = new VisitorAddElement();
-        this.expander = new GPLayerExpander(this, theTree);
+        this.expander = new GPLayerExpander(theTree, this);
     }
 
     @Override

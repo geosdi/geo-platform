@@ -60,7 +60,7 @@ public class AddVectorFromCopyMenuEvent extends GwtEvent<GPTreeStoreEventHandler
 
     @Override
     protected void dispatch(GPTreeStoreEventHandler handler) {
-        handler.addVectorLayersfromCopyMenu(layers);
+        handler.addVectorLayersFromCopyMenu(layers);
     }
     
 }

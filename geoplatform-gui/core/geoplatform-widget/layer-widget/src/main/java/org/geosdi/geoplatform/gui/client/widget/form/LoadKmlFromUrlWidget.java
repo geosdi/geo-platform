@@ -91,7 +91,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         super(true);
         tree = theTree;
         addVisitor = new VisitorAddElement();
-        expander = new GPLayerExpander(this, theTree);
+        expander = new GPLayerExpander(theTree, this);
     }
 
     public void showForm() {

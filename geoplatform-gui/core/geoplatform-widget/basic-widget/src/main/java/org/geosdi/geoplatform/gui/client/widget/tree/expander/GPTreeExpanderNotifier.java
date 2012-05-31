@@ -46,16 +46,15 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
- * @param <T> 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
 
     protected TreePanel tree;
-    protected Listener executor;
-    protected Listener<MessageBoxEvent> message;
     protected T selectedElement;
+    private Listener executor;
+    private Listener<MessageBoxEvent> message;
 
     /**
      * @Constructor
@@ -64,7 +63,7 @@ public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
      */
     public GPTreeExpanderNotifier(TreePanel theTree) {
         this.tree = theTree;
-        initListeners();
+        this.initListeners();
     }
 
     private void initListeners() {
@@ -81,27 +80,23 @@ public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
 
             @Override
             public void handleEvent(MessageBoxEvent be) {
-                if (be.getButtonClicked().getItemId().equalsIgnoreCase(
-                        Dialog.YES)) {
+                if (be.getButtonClicked().getItemId().equalsIgnoreCase(Dialog.YES)) {
                     tree.addListener(GeoPlatformEvents.GP_NODE_EXPANDED, executor);
-                    tree.setExpanded(
-                            (T) tree.getSelectionModel().getSelectedItem(),
-                            true);
+                    tree.setExpanded(selectedElement, true);
                 } else {
                     tree.removeListener(GeoPlatformEvents.GP_NODE_EXPANDED, executor);
-                    defineStatusBarCancelMessage();
+                    defineStatusBarCancelMessage(); // TODO CancelMessage .setStatus (check for GPMenuFolderExpander that haven't cancel message)
                 }
             }
         };
     }
 
     /**
-     * Check if the Selected Node is expanded or no
-     * 
+     * Check if the Selected Node is expanded or not.
      */
     public void checkNodeState() {
         this.selectedElement = (T) tree.getSelectionModel().getSelectedItem();
-        if ((!tree.isExpanded(selectedElement)) && (!(checkNode()))) {
+        if (!this.tree.isExpanded(this.selectedElement) && !checkNode()) {
             this.confirmExpandingMessage();
         } else {
             execute();
@@ -109,8 +104,7 @@ public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
     }
 
     /**
-     * Confirm Expand Operation on the Folder Element
-     * 
+     * Confirm Expand Operation on the Folder Element.
      */
     private void confirmExpandingMessage() {
         GeoPlatformMessage.confirmMessage("Expand Folder",
@@ -120,9 +114,9 @@ public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
                 this.message);
     }
 
-    public abstract boolean checkNode();
+    protected abstract boolean checkNode();
 
-    public abstract void execute();
+    protected abstract void execute();
 
-    public abstract void defineStatusBarCancelMessage();
+    protected abstract void defineStatusBarCancelMessage(); // TODO CancelMessage return String
 }

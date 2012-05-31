@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
-
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

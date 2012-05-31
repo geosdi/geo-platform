@@ -232,10 +232,6 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         this.selectionContainer = enable;
     }
 
-    /**
-     *
-     * @return {@link List<FullRecord>}
-     */
     public List<FullRecord> getSelectedRecords() {
         return selectionModel.getSelectedItems();
     }

@@ -47,16 +47,10 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
-        GPLayerBean {
-    /*
-     *
-     */
+public abstract class GPLayerGrid extends GeoPlatformBeanModel
+        implements GPLayerBean {
 
     private static final long serialVersionUID = 7746607426284214904L;
-    /*
-     *
-     */
 
     public enum GPLayerBeanKeyValue {
 

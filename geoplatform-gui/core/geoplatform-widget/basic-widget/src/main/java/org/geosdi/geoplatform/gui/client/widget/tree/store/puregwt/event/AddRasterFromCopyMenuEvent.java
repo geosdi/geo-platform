@@ -60,7 +60,7 @@ public class AddRasterFromCopyMenuEvent extends GwtEvent<GPTreeStoreEventHandler
 
     @Override
     protected void dispatch(GPTreeStoreEventHandler handler) {
-        handler.addRasterLayersfromCopyMenu(layers);
+        handler.addRasterLayersFromCopyMenu(layers);
     }
     
 }

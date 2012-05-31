@@ -42,25 +42,8 @@ package org.geosdi.geoplatform.gui.client.widget.store;
  */
 public enum GPTreeStoreOperations {
 
-    LAYERS_FROM_WMS_CAPABILITIES(0),
-    LAYERS_FROM_PUBLISHER(1),
-    LAYERS_FROM_COPY_MENU(2);
-    //
-    private Integer code;
-
-    private GPTreeStoreOperations(Integer code) {
-        this.code = code;
-    }
-
-    /**
-     * @return the code
-     */
-    public Integer getCode() {
-        return code;
-    }
-
-    @Override
-    public String toString() {
-        return code.toString();
-    }
+    LAYERS_FROM_WMS_CAPABILITIES,
+    LAYERS_FROM_PUBLISHER,
+    LAYERS_FROM_COPY_MENU,
+    LAYERS_FROM_CATALOG;
 }

@@ -61,6 +61,6 @@ public class AddVectorFromCapabilitiesEvent extends GwtEvent<GPTreeStoreEventHan
 
     @Override
     protected void dispatch(GPTreeStoreEventHandler handler) {
-        handler.addVectorLayersfromCapabilities(layers);
+        handler.addVectorLayersFromCapabilities(layers);
     }
 }

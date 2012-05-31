@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.gui.client.widget.GridLayersWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromCapabilitiesEvent;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -52,8 +53,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
 
     private GridLayersWidget gridLayers;
-    private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(
-            true);
+    private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(true);
 
     public GPServerExpander(GridLayersWidget theWidget) {
         super(theWidget.getTree());
@@ -62,7 +62,7 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     }
 
     @Override
-    public void execute() {
+    protected void execute() {
         LayerHandlerManager.fireEvent(displayEvent);
         LayerHandlerManager.fireEvent(new AddRasterFromCapabilitiesEvent(
                 this.gridLayers.getSelectedItems()));
@@ -70,14 +70,24 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     }
 
     @Override
-    public void defineStatusBarCancelMessage() {
+    protected void defineStatusBarCancelMessage() {
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Add folder operation cancelled.",
+                "Add layer operation cancelled.",
                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }
 
     @Override
-    public boolean checkNode() {
-        return ((AbstractFolderTreeNode) this.tree.getSelectionModel().getSelectedItem()).getId() == null;
+    protected boolean checkNode() {
+        return super.selectedElement.getId() == null;
+    }
+
+    public void executeActionRequest() {
+        if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
+            super.checkNodeState();
+        } else {
+            GeoPlatformMessage.alertMessage("GPCapabilitiesWidget",
+                    "You can put layers into folders only.\n"
+                    + "Please select the correct node.");
+        }
     }
 }

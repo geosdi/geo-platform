@@ -41,13 +41,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public abstract class AbstractRootTreeNode extends GPBeanTreeModel {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 7390478659972066466L;
-
-    @Override
-    public abstract AbstractImagePrototype getIcon();
 
     @Override
     public void accept(IVisitor visitor) {

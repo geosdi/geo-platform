@@ -35,8 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.model.visitor;
 
+import com.extjs.gxt.ui.client.data.ModelData;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -44,12 +48,6 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
-
-import com.extjs.gxt.ui.client.data.ModelData;
-import java.util.HashMap;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

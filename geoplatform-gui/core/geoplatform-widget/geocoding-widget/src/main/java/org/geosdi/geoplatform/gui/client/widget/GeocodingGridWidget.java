@@ -35,33 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
-import org.geosdi.geoplatform.gui.client.model.geocoding.GPGeocodingServiceBean;
-import org.geosdi.geoplatform.gui.client.model.geocoding.GPGeocodingSeviceKeyValue;
-import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
-import org.geosdi.geoplatform.gui.client.service.GeocodingRemoteAsync;
-import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
-import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingSearchEventHandler;
-import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.RegisterGeocodingLocationEvent;
-import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
-import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
-import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.geocoder.GeoCoderPerformOperation;
-import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
-
 import com.extjs.gxt.ui.client.Style.SelectionMode;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.FieldEvent;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
@@ -74,7 +49,25 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
+import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
+import org.geosdi.geoplatform.gui.client.model.geocoding.GPGeocodingServiceBean;
+import org.geosdi.geoplatform.gui.client.model.geocoding.GPGeocodingSeviceKeyValue;
+import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
+import org.geosdi.geoplatform.gui.client.service.GeocodingRemoteAsync;
+import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
+import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingSearchEventHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.RegisterGeocodingLocationEvent;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
+import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.geocoder.GeoCoderPerformOperation;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
  * 

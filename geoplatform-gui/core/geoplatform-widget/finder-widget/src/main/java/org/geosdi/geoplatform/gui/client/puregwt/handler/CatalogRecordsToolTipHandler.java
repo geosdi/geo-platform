@@ -33,22 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.puregwt.handler;
 
-import com.google.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.CatalogRecordsToolTip;
-import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.GPCatalogRecordsToolTip;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogRecordsToolTipProvider implements
-        Provider<GPCatalogRecordsToolTip> {
+public interface CatalogRecordsToolTipHandler extends EventHandler {
 
-    @Override
-    public GPCatalogRecordsToolTip get() {
-        return new CatalogRecordsToolTip();
-    }
+    public static final GwtEvent.Type<CatalogRecordsToolTipHandler> TYPE = new GwtEvent.Type<CatalogRecordsToolTipHandler>();
+    
+    void onHideToolTip();
 }

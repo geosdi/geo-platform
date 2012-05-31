@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.Catal
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogCheckBoxComponent;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogComboBoxComponent;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.MetadataSelectionManager;
-import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.CatalogRecordsToolTip;
+import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.GPCatalogRecordsToolTip;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.MetadataTabItem;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.SearchTabItem;
 import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
@@ -101,7 +101,7 @@ public class CatalogFinderInjectorModule extends AbstractGinModule {
         bind(CatalogCheckBoxComponent.class).toProvider(
                 CatalogCheckBoxComponentProvider.class).in(Singleton.class);
 
-        bind(CatalogRecordsToolTip.class).toProvider(
+        bind(GPCatalogRecordsToolTip.class).toProvider(
                 CatalogRecordsToolTipProvider.class).in(Singleton.class);
 
         bind(MetadataSelectionManager.class).toProvider(

@@ -57,4 +57,6 @@ public interface CatalogMetadataSelectionManager {
     boolean isRecordsExcludedSet();
     
     void bindContainer(RecordsContainer container);
+    
+    void fireCatalogRecordToolTip(FullRecord record);
 }

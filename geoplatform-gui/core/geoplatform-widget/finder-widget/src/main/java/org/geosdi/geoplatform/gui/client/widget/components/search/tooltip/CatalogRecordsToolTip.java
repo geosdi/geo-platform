@@ -43,7 +43,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.tips.ToolTip;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
-import com.google.gwt.user.client.Timer;
+import java.util.Arrays;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 
@@ -52,25 +52,23 @@ import org.geosdi.geoplatform.gui.client.model.FullRecord;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogRecordsToolTip extends ToolTip {
-    
-    private Timer timer;
-    
+public class CatalogRecordsToolTip extends ToolTip
+        implements GPCatalogRecordsToolTip {
+
     public CatalogRecordsToolTip() {
         super();
         this.configureToolTipConfig();
-        this.configureTimer();
     }
-    
+
     @Override
     public void initTarget(Component target) {
         if (listener == null) {
             listener = new Listener<ComponentEvent>() {
-                
+
                 @Override
                 public void handleEvent(ComponentEvent be) {
                     EventType type = be.getType();
-                    if (type == Events.Hide
+                    if (type == Events.Hide || type == Events.Clear
                             || type == Events.Detach) {
                         hide();
                     }
@@ -79,35 +77,36 @@ public class CatalogRecordsToolTip extends ToolTip {
         }
         super.initTarget(target);
     }
-    
-    public void show(List<FullRecord> records) {
-        System.out.println(
-                "CODICE ESEGUITO SHOW CON LISTA@@@@@@@@@@@@@" + records.size());
+
+    @Override
+    public void bindRecords(List<FullRecord> records) {
         if (super.isVisible()) {
-            System.out.println("CODICE ESEGUITO IS VISIBLE@@@@@@@@@@@");
             super.hide();
         }
         if (!records.isEmpty()) {
-            System.out.println("CODICE ESEGUITO RECORDS IS NOT EMPTY@@@@@@@@@@@");
             this.toolTipConfig.setTemplate(new Template(this.buildToolTipMessage(
                     records)));
             super.show();
         }
     }
-    
+
     @Override
-    public void show() {
+    public void bindRecord(FullRecord record) {
+        if (super.isVisible()) {
+            super.hide();
+        }
+
+        this.toolTipConfig.setTemplate(new Template(this.buildToolTipMessage(
+                Arrays.asList(record))));
         super.show();
-        this.timer.schedule(5000);
     }
-    
+
     @Override
-    public void hide() {
-        this.timer.cancel();
+    public void onHideToolTip() {
         super.hide();
     }
-    
-    private String buildToolTipMessage(List<FullRecord> recods) {
+
+    protected String buildToolTipMessage(List<FullRecord> recods) {
         StringBuilder builder = new StringBuilder();
         builder.append("<br/> ");
         builder.append("<p> The Following Metadata : </p>");
@@ -122,10 +121,10 @@ public class CatalogRecordsToolTip extends ToolTip {
         builder.append("Can't be added on LayerTree, because they");
         builder.append("<br/>");
         builder.append("haven't the GetMap Protocol defined.");
-        
+
         return builder.toString();
     }
-    
+
     private void configureToolTipConfig() {
         ToolTipConfig tipConfig = new ToolTipConfig();
         tipConfig.setTitle("Catalog Metadata ToolTip");
@@ -134,15 +133,5 @@ public class CatalogRecordsToolTip extends ToolTip {
         tipConfig.setMaxWidth(400);
         tipConfig.setAutoHide(false);
         super.update(tipConfig);
-    }
-    
-    private void configureTimer() {
-        this.timer = new Timer() {
-            
-            @Override
-            public void run() {
-                hide();
-            }
-        };
     }
 }

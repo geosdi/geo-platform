@@ -211,6 +211,8 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
                                 se.setCancelled(true);
 
                                 metadataSelection.addRecordExcluded(record);
+                                metadataSelection.fireCatalogRecordToolTip(
+                                        record);
                             }
                         }
                     });
@@ -219,8 +221,6 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
                 @Override
                 public void selectionChanged(SelectionChangedEvent<FullRecord> se) {
-                    System.out.println("CODICE ESEGUITO RECORDS CONTAINER @@@@@@@@@@@"
-                            + se.getSelection());
                     metadataSelection.manageSelectionChanged(se);
                 }
             });

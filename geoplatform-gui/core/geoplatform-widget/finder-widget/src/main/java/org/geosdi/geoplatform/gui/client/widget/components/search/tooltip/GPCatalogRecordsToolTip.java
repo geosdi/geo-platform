@@ -33,22 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.components.search.tooltip;
 
-import com.google.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.CatalogRecordsToolTip;
-import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.GPCatalogRecordsToolTip;
+import com.extjs.gxt.ui.client.widget.Component;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.FullRecord;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogRecordsToolTipHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogRecordsToolTipProvider implements
-        Provider<GPCatalogRecordsToolTip> {
+public interface GPCatalogRecordsToolTip extends CatalogRecordsToolTipHandler {
 
-    @Override
-    public GPCatalogRecordsToolTip get() {
-        return new CatalogRecordsToolTip();
-    }
+    void bindRecords(List<FullRecord> records);
+
+    void bindRecord(FullRecord record);
+
+    void initTarget(Component target);
 }

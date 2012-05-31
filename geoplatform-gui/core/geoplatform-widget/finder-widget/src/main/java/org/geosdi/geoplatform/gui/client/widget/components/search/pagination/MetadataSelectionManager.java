@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogTreeLayerEnableEvent;
 import org.geosdi.geoplatform.gui.client.widget.components.search.CatalogTreeLayerWidgetSupport;
 import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.CatalogRecordsToolTip;
+import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.GPCatalogRecordsToolTip;
 
 /**
  *
@@ -70,55 +71,60 @@ import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.Catalo
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class MetadataSelectionManager implements CatalogMetadataSelectionManager {
-    
+
     private EventBus bus;
-    private CatalogRecordsToolTip recordsToolTip;
+    private GPCatalogRecordsToolTip recordsToolTip;
     private CatalogTreeLayerEnableEvent event = new CatalogTreeLayerEnableEvent();
     private List<FullRecord> recordsExcluded = Lists.newArrayList();
-    
+
     public MetadataSelectionManager(EventBus theBus,
-            CatalogRecordsToolTip theRecordsToolTip) {
+            GPCatalogRecordsToolTip theRecordsToolTip) {
         this.bus = theBus;
         this.recordsToolTip = theRecordsToolTip;
     }
-    
+
     @Override
     public void clearRecordsExcludedList() {
         this.recordsExcluded.clear();
     }
-    
+
     @Override
     public void addRecordExcluded(FullRecord record) {
         if (!this.recordsExcluded.contains(record)) {
             this.recordsExcluded.add(record);
         }
     }
-    
+
     @Override
     public List<FullRecord> getRecordsExcluded() {
         return Lists.newArrayList(recordsExcluded);
     }
-    
+
     @Override
     public boolean isRecordsExcludedSet() {
         return !(this.recordsExcluded.isEmpty());
     }
-    
+
     @Override
     public void bindContainer(final RecordsContainer container) {
         container.addListener(Events.Render, new Listener<BaseEvent>() {
-            
+
             @Override
             public void handleEvent(BaseEvent be) {
                 recordsToolTip.initTarget(container.getWidget());
             }
         });
     }
-    
+
+    @Override
+    public void fireCatalogRecordToolTip(FullRecord record) {
+        this.recordsToolTip.bindRecord(record);
+    }
+
     @Override
     public void manageSelectionChanged(SelectionChangedEvent<FullRecord> se) {
         this.fireCatalogTreeLayerHandler(!(se.getSelection().isEmpty()));
-        this.fireCatalogRecordsToolTip(this.getRecordsExcluded());
+        this.fireCatalogRecordsToolTip(se.getSelection().isEmpty());
         clearRecordsExcludedList();
     }
 
@@ -137,7 +143,11 @@ public class MetadataSelectionManager implements CatalogMetadataSelectionManager
      *
      * @param records
      */
-    protected void fireCatalogRecordsToolTip(List<FullRecord> records) {
-        this.recordsToolTip.show(records);
+    protected void fireCatalogRecordsToolTip(boolean enable) {
+        if (enable) {
+            this.recordsToolTip.onHideToolTip();
+        } else {
+            this.recordsToolTip.bindRecords(this.getRecordsExcluded());
+        }
     }
 }

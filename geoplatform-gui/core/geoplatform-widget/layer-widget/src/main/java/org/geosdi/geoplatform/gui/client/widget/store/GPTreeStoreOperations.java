@@ -33,33 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.button;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.client.model.FullRecord;
-import org.geosdi.geoplatform.gui.client.widget.expander.GPCatalogExpander;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+package org.geosdi.geoplatform.gui.client.widget.store;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class AddLayerToTreeAction extends GeoPlatformAction<ButtonEvent> {
+public enum GPTreeStoreOperations {
 
-    private GPCatalogExpander catalogExpander;
+    LAYERS_FROM_WMS_CAPABILITIES(0),
+    LAYERS_FROM_PUBLISHER(1),
+    LAYERS_FROM_COPY_MENU(2);
+    //
+    private Integer code;
 
-    public AddLayerToTreeAction(Grid<FullRecord> grid,
-            TreePanel<GPBeanTreeModel> tree) {
+    private GPTreeStoreOperations(Integer code) {
+        this.code = code;
+    }
 
-        this.catalogExpander = new GPCatalogExpander(tree, grid);
+    /**
+     * @return the code
+     */
+    public Integer getCode() {
+        return code;
     }
 
     @Override
-    public void componentSelected(ButtonEvent e) {
-        this.catalogExpander.executeActionRequest();
+    public String toString() {
+        return code.toString();
     }
 }

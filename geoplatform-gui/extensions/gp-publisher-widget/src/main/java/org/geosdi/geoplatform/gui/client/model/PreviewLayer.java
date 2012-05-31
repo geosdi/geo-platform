@@ -57,7 +57,8 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     public interface PreviewLayerReader extends JsonReader<PreviewLayer> {
     }
-    public static final PreviewLayerReader JSON = GWT.create(PreviewLayerReader.class);
+    public static final PreviewLayerReader JSON = GWT.create(
+            PreviewLayerReader.class);
     private String crs;
     private String title;
     private String dataSource;
@@ -175,7 +176,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     @Override
     public String getLabel() {
-        return this.label;
+        return (this.label != null ? this.label : this.title);
     }
 
     @Override
@@ -205,7 +206,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     @Override
     public String getAbstractText() {
-        return this.abstractText;
+        return (this.abstractText != null ? this.abstractText : this.title);
     }
 
     @Override
@@ -236,7 +237,8 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     @Override
     public BBoxClientInfo getBbox() {
         if (this.bbox == null) {
-            this.bbox = new BBoxClientInfo(this.lowerX, this.lowerY, this.upperX, this.upperY);
+            this.bbox = new BBoxClientInfo(this.lowerX, this.lowerY, this.upperX,
+                    this.upperY);
         }
         return this.bbox;
     }
@@ -328,7 +330,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     @Override
     public int getzIndex() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return 0;
     }
 
     @Override

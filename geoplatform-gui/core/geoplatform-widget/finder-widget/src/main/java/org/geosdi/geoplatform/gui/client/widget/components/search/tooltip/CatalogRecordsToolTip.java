@@ -106,6 +106,13 @@ public class CatalogRecordsToolTip extends ToolTip
         super.hide();
     }
 
+    /**
+     * Create an html String from Metadata List which can't be added on 
+     * GPLayerTreeWidget
+     * 
+     * @param List<FullRecord> recods
+     * @return {@link String} html String
+     */
     protected String buildToolTipMessage(List<FullRecord> recods) {
         StringBuilder builder = new StringBuilder();
         builder.append("<br/> ");

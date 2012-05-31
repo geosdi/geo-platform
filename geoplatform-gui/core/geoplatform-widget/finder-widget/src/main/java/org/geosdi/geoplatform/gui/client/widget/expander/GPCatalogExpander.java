@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.expander;
 
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.action.button.AddLayerToTreeAction;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
@@ -49,7 +50,8 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCatalogExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
+public class GPCatalogExpander
+        extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
 
     private Grid<FullRecord> grid;
 
@@ -65,8 +67,8 @@ public class GPCatalogExpander extends GPTreeExpanderNotifier<AbstractFolderTree
 
     @Override
     public void execute() {
-        System.out.println("ECCO I SELEZIONATI @@@@@@@@@@@@@@@@@@@@ "
-                + tree.getSelectionModel().getSelection());
+        System.out.println("Here The Selected @@@@@@@@@@@@@@@@@@@@ "
+                + this.grid.getSelectionModel().getSelection());
     }
 
     @Override
@@ -76,7 +78,10 @@ public class GPCatalogExpander extends GPTreeExpanderNotifier<AbstractFolderTree
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }
 
-    public void processActionRequest() {
+    /**
+     * Execute {@link AddLayerToTreeAction} Action Request
+     */
+    public void executeActionRequest() {
         if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
             super.checkNodeState();
         } else {

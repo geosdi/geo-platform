@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.shared.EventBus;
+import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.button.AddLayerToTreeAction;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
@@ -85,11 +86,12 @@ public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
 
     private void createButtonComponent(TreePanel<GPBeanTreeModel> tree,
             Grid<FullRecord> grid) {
+        
         this.addLayerToTreeButton = new Button("Add To Layer Tree",
+                CatalogFinderWidgetResources.ICONS.addLayer(),
                 new AddLayerToTreeAction(grid, tree));
 
         this.addLayerToTreeButton.setStyleAttribute("padding-top", "10px");
-
         this.addLayerToTreeButton.setEnabled(false);
     }
 }

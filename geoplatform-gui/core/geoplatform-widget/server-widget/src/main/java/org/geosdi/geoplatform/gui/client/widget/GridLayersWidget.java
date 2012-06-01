@@ -63,7 +63,7 @@ import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid.GPLayerBeanKeyValue;
-import org.geosdi.geoplatform.gui.puregwt.grid.event.DelesectGridElementHandler;
+import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementHandler;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
@@ -74,7 +74,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
  *
  */
 public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L>
-        implements DelesectGridElementHandler {
+        implements DeselectGridElementHandler {
 
     private FormPanel formPanel;
     private TreePanel tree;
@@ -94,7 +94,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.initFormPanel();
         this.tree = theTree;
         this.expander = new GPServerExpander(this);
-        LayerHandlerManager.addHandler(DelesectGridElementHandler.TYPE, this);
+        LayerHandlerManager.addHandler(DeselectGridElementHandler.TYPE, this);
     }
 
     private void initServerWidget() {

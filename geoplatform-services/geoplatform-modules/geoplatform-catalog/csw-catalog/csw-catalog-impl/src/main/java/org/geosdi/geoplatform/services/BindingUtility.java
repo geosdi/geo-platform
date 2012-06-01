@@ -139,7 +139,7 @@ public class BindingUtility {
      * to standard CRS "EPSG:4326".
      */
     public static String convertEncodedCRS(String encodedCRS) {
-        if (encodedCRS == null) {
+        if (encodedCRS == null || "".equals(encodedCRS.trim())) {
             return null;
         }
         String[] split = encodedCRS.split(":");

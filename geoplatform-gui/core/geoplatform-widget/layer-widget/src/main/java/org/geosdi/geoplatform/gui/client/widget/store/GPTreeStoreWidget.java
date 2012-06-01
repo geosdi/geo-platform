@@ -54,7 +54,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
-import org.geosdi.geoplatform.gui.puregwt.grid.event.DelesectGridRecordEvent;
+import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridRecordEvent;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgressTextEvent;
@@ -71,7 +71,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     private FeatureInfoAddLayersServer featureInfoAddLayersEvent = new FeatureInfoAddLayersServer();
     private VisitorAddElement visitorAdd = new VisitorAddElement();
     private DeselectGridElementEvent deselectGridElement = new DeselectGridElementEvent();
-    private DelesectGridRecordEvent deselectGridRecord = new DelesectGridRecordEvent();
+    private DeselectGridRecordEvent deselectGridRecord = new DeselectGridRecordEvent();
 
     /*
      * @param theTree

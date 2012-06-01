@@ -42,9 +42,9 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface DelesectGridRecordHandler extends EventHandler {
+public interface DeselectGridRecordHandler extends EventHandler {
 
-    Type<DelesectGridRecordHandler> TYPE = new Type<DelesectGridRecordHandler>();
+    Type<DeselectGridRecordHandler> TYPE = new Type<DeselectGridRecordHandler>();
 
     void deselectRecords();
 }

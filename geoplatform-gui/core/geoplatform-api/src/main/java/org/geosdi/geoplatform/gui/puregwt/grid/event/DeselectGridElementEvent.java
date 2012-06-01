@@ -43,15 +43,15 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class DeselectGridElementEvent extends GwtEvent<DelesectGridElementHandler> {
+public class DeselectGridElementEvent extends GwtEvent<DeselectGridElementHandler> {
 
     @Override
-    public Type<DelesectGridElementHandler> getAssociatedType() {
-        return DelesectGridElementHandler.TYPE;
+    public Type<DeselectGridElementHandler> getAssociatedType() {
+        return DeselectGridElementHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(DelesectGridElementHandler handler) {
+    protected void dispatch(DeselectGridElementHandler handler) {
         handler.deselectElements();
     }
 }

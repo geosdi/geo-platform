@@ -41,15 +41,15 @@ import com.google.gwt.event.shared.GwtEvent;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class DelesectGridRecordEvent extends GwtEvent<DelesectGridRecordHandler> {
+public class DeselectGridRecordEvent extends GwtEvent<DeselectGridRecordHandler> {
 
     @Override
-    public Type<DelesectGridRecordHandler> getAssociatedType() {
-        return DelesectGridRecordHandler.TYPE;
+    public Type<DeselectGridRecordHandler> getAssociatedType() {
+        return DeselectGridRecordHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(DelesectGridRecordHandler handler) {
+    protected void dispatch(DeselectGridRecordHandler handler) {
         handler.deselectRecords();
     }
 }

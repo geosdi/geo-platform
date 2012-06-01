@@ -43,9 +43,9 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface DelesectGridElementHandler extends EventHandler {
+public interface DeselectGridElementHandler extends EventHandler {
 
-    Type<DelesectGridElementHandler> TYPE = new Type<DelesectGridElementHandler>();
+    Type<DeselectGridElementHandler> TYPE = new Type<DeselectGridElementHandler>();
 
     void deselectElements();
 }

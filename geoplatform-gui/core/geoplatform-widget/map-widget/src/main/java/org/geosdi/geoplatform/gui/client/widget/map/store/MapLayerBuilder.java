@@ -77,7 +77,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         if (!rasterBean.getStyles().isEmpty()) {
             wmsParams.setStyles(rasterBean.getStyles().get(0).getStyleString());
         }
-        wmsParams.setIsTransparent(Boolean.TRUE);
+        wmsParams.setTransparent(Boolean.TRUE);
         final String cqlFilter = rasterBean.getCqlFilter();
         if (cqlFilter != null && !cqlFilter.equals("")) {
             wmsParams.setCQLFilter(rasterBean.getCqlFilter());
@@ -124,7 +124,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         this.addAuthTuple(wmsParams);
         wmsParams.setLayers(vectorBean.getName());
         wmsParams.setStyles("");
-        wmsParams.setIsTransparent(Boolean.TRUE);
+        wmsParams.setTransparent(Boolean.TRUE);
         final String cqlFilter = vectorBean.getCqlFilter();
         if (cqlFilter != null && !cqlFilter.equals("")) {
             wmsParams.setCQLFilter(vectorBean.getCqlFilter());

@@ -269,6 +269,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
                 fullRecordDTO);
 
         fullRecord.setBBox(this.convertBBoxDTO(fullRecordDTO.getBBox()));
+        fullRecord.setCrs(fullRecordDTO.getCrs());
         fullRecord.setUriMap(fullRecordDTO.getUriMap());
 
         return fullRecord;

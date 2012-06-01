@@ -481,7 +481,7 @@ class CSWServiceImpl {
                     dto.setTitle(
                             BindingUtility.convertStringListToString(contentElement));
                 }
-                
+
                 if ("type".equals(localPartElement)) {
                     dto.setType(
                             BindingUtility.convertStringListToString(contentElement));
@@ -497,14 +497,14 @@ class CSWServiceImpl {
                             BindingUtility.convertStringListToString(contentElement));
                 }
 
-                if ("URI".equals(localPartElement)) {                    
+                if ("URI".equals(localPartElement)) {
                     URI uri = (URI) element.getValue();
                     String protocol = uri.getProtocol();
                     /**
                      * If the first element URI have a GetCapabilities protocol,
                      * break the iteration.
                      */
-                    if(OnlineResourceProtocolType.isForGetCapabilities(protocol)){
+                    if (OnlineResourceProtocolType.isForGetCapabilities(protocol)) {
                         break;
                     }
 
@@ -520,6 +520,7 @@ class CSWServiceImpl {
             if (!record.getBoundingBox().isEmpty()) {
                 BoundingBoxType bBoxType = record.getBoundingBox().get(0).getValue();
                 dto.setBBox(BindingUtility.convertBBoxTypeToBBox(bBoxType));
+                dto.setCrs(BindingUtility.convertEncodedCRS(bBoxType.getCrs()));
             }
 
             recordListDTO.add(dto);

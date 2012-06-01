@@ -51,6 +51,7 @@ public class FullRecord extends AbstractRecord {
     private static final long serialVersionUID = 7344635200928287521L;
     //
     private BBoxClientInfo bBox;
+    private String crs;
     private Map<OnlineResourceProtocolType, URIDTO> uriMap;
 
     public BBoxClientInfo getBBox() {
@@ -61,16 +62,18 @@ public class FullRecord extends AbstractRecord {
         this.bBox = bBox;
     }
 
-    /**
-     * @return the uriMap
-     */
+    public String getCrs() {
+        return crs;
+    }
+
+    public void setCrs(String crs) {
+        this.crs = crs;
+    }
+
     public Map<OnlineResourceProtocolType, URIDTO> getUriMap() {
         return uriMap;
     }
 
-    /**
-     * @param uriMap the uriMap to set
-     */
     public void setUriMap(Map<OnlineResourceProtocolType, URIDTO> uriMap) {
         this.uriMap = uriMap;
     }
@@ -102,6 +105,7 @@ public class FullRecord extends AbstractRecord {
         StringBuilder str = new StringBuilder("FullRecord {");
         str.append(super.toString());
         str.append(", bBox =").append(bBox);
+        str.append(", crs =").append(crs);
         str.append(", uriList =").append(getUriMap());
         return str.append('}').toString();
     }

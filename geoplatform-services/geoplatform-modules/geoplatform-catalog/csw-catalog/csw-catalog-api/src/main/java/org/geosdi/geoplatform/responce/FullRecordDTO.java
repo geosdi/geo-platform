@@ -59,6 +59,7 @@ public class FullRecordDTO extends AbstractRecordDTO {
     private static final long serialVersionUID = -4843440136860067550L;
     //
     private BBox bBox;
+    private String crs;
     //
     @XmlElement(name = "uri")
     @XmlJavaTypeAdapter(UriMapAdapter.class)
@@ -72,16 +73,18 @@ public class FullRecordDTO extends AbstractRecordDTO {
         this.bBox = bBox;
     }
 
-    /**
-     * @return the uriMap
-     */
+    public String getCrs() {
+        return crs;
+    }
+
+    public void setCrs(String crs) {
+        this.crs = crs;
+    }
+
     public Map<OnlineResourceProtocolType, URIDTO> getUriMap() {
         return uriMap;
     }
 
-    /**
-     * @param uriMap the uriMap to set
-     */
     public void setUriMap(Map<OnlineResourceProtocolType, URIDTO> uriMap) {
         this.uriMap = uriMap;
     }
@@ -105,6 +108,7 @@ public class FullRecordDTO extends AbstractRecordDTO {
         StringBuilder str = new StringBuilder("FullRecordDTO {");
         str.append(super.toStringBuilder(str));
         str.append(", bBox=").append(bBox);
+        str.append(", crs=").append(crs);
         str.append(", uri=").append(getUriMap());
         return str.append('}').toString();
     }

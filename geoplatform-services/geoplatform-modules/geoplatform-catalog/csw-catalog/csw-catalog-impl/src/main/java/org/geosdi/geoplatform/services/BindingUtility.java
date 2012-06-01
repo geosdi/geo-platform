@@ -133,4 +133,24 @@ public class BindingUtility {
 
         return bBox;
     }
+
+    /**
+     * Convert the encoded CRS "urn:ogc:def:crs:EPSG:6.6:4326" 
+     * to standard CRS "EPSG:4326".
+     */
+    public static String convertEncodedCRS(String encodedCRS) {
+        if (encodedCRS == null) {
+            return null;
+        }
+        String[] split = encodedCRS.split(":");
+
+        int length = split.length;
+        if (length < 3) {
+            throw new IllegalArgumentException("The encoded CRS isn't valid");
+        }
+
+        String crs = split[length - 3] + ":" + split[length - 1];
+
+        return crs;
+    }
 }

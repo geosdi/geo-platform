@@ -121,14 +121,13 @@ public class GPCatalogExpander
             GPLayerBean layer = new GPRasterLayerGrid(); // TODO Use custom raster class as MetadataRasterLayer?
 
             layer.setName(uri.getName());
-            layer.setTitle(this.getTitle(uri.getName()));
-            layer.setAlias(uri.getDescription());
+            layer.setTitle(uri.getDescription());
+            layer.setLabel(this.getLabel(uri.getName()));
             layer.setDataSource(this.getDataSource(uri.getServiceURL()));
 
             layer.setLayerType(GPLayerType.RASTER);
-            layer.setLabel(layer.getAlias());
             layer.setBbox(record.getBBox());
-//            layer.setCrs(null); // TODO Retrivie SRS from ows:BoundingBox@crs
+            layer.setCrs(record.getCrs());
             layer.setStyles(new ArrayList<GPStyleStringBeanModel>(0));
 
             layerList.add(layer);
@@ -147,7 +146,7 @@ public class GPCatalogExpander
         throw new IllegalArgumentException("FullRecord must have a URIDTO for WMS GetMap Request");
     }
 
-    private String getTitle(String name) {
+    private String getLabel(String name) {
         int ind = name.indexOf(":");
         if (ind != -1) {
             return name.substring(ind + 1);

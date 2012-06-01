@@ -54,8 +54,8 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implements
-        GPMapLayerBuilder {
+public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
+        implements GPMapLayerBuilder {
 
     public MapLayerBuilder(GeoPlatformMap theMapWidget) {
         super(theMapWidget);

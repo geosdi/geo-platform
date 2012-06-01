@@ -87,7 +87,7 @@ public class MementoSaveBuilder {
                 layer = ((RasterTreeNode) beanModel);
                 memento = new MementoRaster();
                 List<String> stringList = convertStyles(((RasterTreeNode) beanModel).getStyles());
-                ((MementoRaster)memento).setStyles(stringList);
+                ((MementoRaster) memento).setStyles(stringList);
             } else if (beanModel instanceof VectorTreeNode) {
                 layer = ((VectorTreeNode) beanModel);
                 memento = new MementoVector();
@@ -99,10 +99,9 @@ public class MementoSaveBuilder {
         System.out.println("Memento layer list size: " + mementoLayerList.size());
         return mementoLayerList;
     }
-    
-    // TODO Mangage null list?
-    private static List<String> convertStyles(ArrayList<GPStyleStringBeanModel> styles){
-        List<String> stringList = new ArrayList<String>();
+
+    private static List<String> convertStyles(ArrayList<GPStyleStringBeanModel> styles) {
+        List<String> stringList = new ArrayList<String>(styles.size());
         for (GPStyleStringBeanModel gPStyleStringBeanModel : styles) {
             stringList.add(gPStyleStringBeanModel.getStyleString());
         }

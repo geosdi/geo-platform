@@ -110,7 +110,7 @@ public class GPRasterLayer extends GPLayer {
      */
     public List<String> getStyles() {
         if (styles == null) {
-            return new ArrayList<String>();
+            return new ArrayList<String>(0);
         }
         return Arrays.asList(styles.split(","));
     }
@@ -120,7 +120,7 @@ public class GPRasterLayer extends GPLayer {
      *            the styles to set
      */
     public void setStyles(List<String> styles) {
-        if (styles == null) {
+        if (styles == null || styles.isEmpty()) {
             this.styles = null;
             return;
         }
@@ -129,6 +129,7 @@ public class GPRasterLayer extends GPLayer {
         for (String style : styles) {
             str.append(style).append(",");
         }
+        str.deleteCharAt(str.length() - 1);
         this.styles = str.toString();
     }
 

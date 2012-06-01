@@ -56,7 +56,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
-import org.geosdi.geoplatform.gui.puregwt.grid.event.DelesectGridRecordHandler;
+import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridRecordHandler;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
@@ -69,7 +69,7 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
  */
 @Singleton
 public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
-        implements RecordsContainerSelectionListener, DelesectGridRecordHandler {
+        implements RecordsContainerSelectionListener, DeselectGridRecordHandler {
 
     private EventBus bus;
     private CatalogFinderBean catalogFinder;
@@ -91,7 +91,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         this.metadataSelection = theMetadataSelector;
         this.bus = theBus;
 
-        LayerHandlerManager.addHandler(DelesectGridRecordHandler.TYPE, this);
+        LayerHandlerManager.addHandler(DeselectGridRecordHandler.TYPE, this);
     }
 
     @Override

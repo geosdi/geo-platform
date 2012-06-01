@@ -57,15 +57,13 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.regexp.shared.RegExp;
 import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid.GPLayerBeanKeyValue;
-import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
-import org.geosdi.geoplatform.gui.puregwt.grid.GPGridEventHandler;
+import org.geosdi.geoplatform.gui.puregwt.grid.event.DelesectGridElementHandler;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
@@ -76,7 +74,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
  *
  */
 public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L>
-        implements GPGridEventHandler {
+        implements DelesectGridElementHandler {
 
     private FormPanel formPanel;
     private TreePanel tree;
@@ -84,8 +82,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     private RowExpander rowExpander;
     private DisplayServerWidget displayServerWidget;
     private GPServerExpander expander;
-    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(
-            false);
+    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(false);
 
     /**
      * @param theTree
@@ -97,7 +94,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.initFormPanel();
         this.tree = theTree;
         this.expander = new GPServerExpander(this);
-        LayerHandlerManager.addHandler(GPGridEventHandler.TYPE, this);
+        LayerHandlerManager.addHandler(DelesectGridElementHandler.TYPE, this);
     }
 
     private void initServerWidget() {

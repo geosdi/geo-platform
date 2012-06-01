@@ -53,17 +53,17 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
 
     private GridLayersWidget gridLayers;
-    private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(true);
+    private DisplayLayersProgressBarEvent showProgressBar = new DisplayLayersProgressBarEvent(true);
 
     public GPServerExpander(GridLayersWidget theWidget) {
         super(theWidget.getTree());
         this.gridLayers = theWidget;
-        this.displayEvent.setMessage("Search Layers");
+        this.showProgressBar.setMessage("Search Layers");
     }
 
     @Override
     protected void execute() {
-        LayerHandlerManager.fireEvent(displayEvent);
+        LayerHandlerManager.fireEvent(showProgressBar);
         LayerHandlerManager.fireEvent(new AddRasterFromCapabilitiesEvent(
                 this.gridLayers.getSelectedItems()));
 

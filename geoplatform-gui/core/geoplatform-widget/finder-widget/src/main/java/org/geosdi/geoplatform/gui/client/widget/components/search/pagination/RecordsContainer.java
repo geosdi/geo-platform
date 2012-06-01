@@ -56,6 +56,9 @@ import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
+import org.geosdi.geoplatform.gui.puregwt.grid.event.DelesectGridRecordHandler;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 
@@ -66,7 +69,7 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
  */
 @Singleton
 public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
-        implements RecordsContainerSelectionListener {
+        implements RecordsContainerSelectionListener, DelesectGridRecordHandler {
 
     private EventBus bus;
     private CatalogFinderBean catalogFinder;
@@ -74,6 +77,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     private RowExpander rowExpander;
     private boolean selectionContainer;
     private CatalogMetadataSelectionManager metadataSelection;
+    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(false);
 
     @Inject
     public RecordsContainer(CatalogFinderBean theCatalogFinder,
@@ -86,6 +90,8 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         this.catalogFinder = theCatalogFinder;
         this.metadataSelection = theMetadataSelector;
         this.bus = theBus;
+
+        LayerHandlerManager.addHandler(DelesectGridRecordHandler.TYPE, this);
     }
 
     @Override
@@ -187,7 +193,6 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     public void reset() {
         super.reset();
         this.metadataSelection.clearRecordsExcludedList();
-        // TODO Reset button for add layer to tree
     }
 
     @Override
@@ -234,5 +239,12 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
     public List<FullRecord> getSelectedRecords() {
         return selectionModel.getSelectedItems();
+    }
+
+    @Override
+    public void deselectRecords() {
+        super.widget.getSelectionModel().deselectAll();
+
+        LayerHandlerManager.fireEvent(hideProgressBar);
     }
 }

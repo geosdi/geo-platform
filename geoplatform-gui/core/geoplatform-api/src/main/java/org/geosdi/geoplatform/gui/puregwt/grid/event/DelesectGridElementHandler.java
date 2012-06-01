@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.grid;
+package org.geosdi.geoplatform.gui.puregwt.grid.event;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -43,9 +43,9 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GPGridEventHandler extends EventHandler {
-    
-    Type<GPGridEventHandler> TYPE = new Type<GPGridEventHandler>();
-    
-    public void deselectElements();
+public interface DelesectGridElementHandler extends EventHandler {
+
+    Type<DelesectGridElementHandler> TYPE = new Type<DelesectGridElementHandler>();
+
+    void deselectElements();
 }

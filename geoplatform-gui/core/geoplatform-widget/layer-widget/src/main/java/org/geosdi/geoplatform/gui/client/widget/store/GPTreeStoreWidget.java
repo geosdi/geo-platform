@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
+import org.geosdi.geoplatform.gui.puregwt.grid.event.DelesectGridRecordEvent;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgressTextEvent;
@@ -68,8 +69,9 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     private LayersProgressTextEvent layersTextEvent = new LayersProgressTextEvent();
     private FeatureInfoAddLayersServer featureInfoAddLayersEvent = new FeatureInfoAddLayersServer();
-    private DeselectGridElementEvent deselectEvent = new DeselectGridElementEvent();
     private VisitorAddElement visitorAdd = new VisitorAddElement();
+    private DeselectGridElementEvent deselectGridElement = new DeselectGridElementEvent();
+    private DelesectGridRecordEvent deselectGridRecord = new DelesectGridRecordEvent();
 
     /*
      * @param theTree
@@ -147,7 +149,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
             this.manageUnduplicatedLayer(layerList, parentDestination,
                     layers.get(0).getDataSource());
-            fireDeselectEvent(sourceLayer);
+            this.fireDeselectEvent(sourceLayer);
             this.createAlertMessage(existingLayers);
         }
     }
@@ -283,7 +285,10 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     private void fireDeselectEvent(GPTreeStoreOperations sourceLayer) {
         switch (sourceLayer) {
             case LAYERS_FROM_WMS_CAPABILITIES:
-                LayerHandlerManager.fireEvent(deselectEvent);
+                LayerHandlerManager.fireEvent(deselectGridElement);
+                break;
+            case LAYERS_FROM_CATALOG:
+                LayerHandlerManager.fireEvent(deselectGridRecord);
                 break;
         }
     }

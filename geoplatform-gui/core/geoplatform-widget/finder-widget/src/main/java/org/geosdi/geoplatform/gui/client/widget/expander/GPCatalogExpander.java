@@ -65,17 +65,17 @@ public class GPCatalogExpander
         extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
 
     private RecordsContainer recordsContainer;
-    private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(true);
+    private DisplayLayersProgressBarEvent showProgressBar = new DisplayLayersProgressBarEvent(true);
 
     public GPCatalogExpander(TreePanel theTree, RecordsContainer recordsContainer) {
         super(theTree);
         this.recordsContainer = recordsContainer;
-        this.displayEvent.setMessage("Search Layers");
+        this.showProgressBar.setMessage("Search Layers");
     }
 
     @Override
     protected void execute() {
-//        LayerHandlerManager.fireEvent(displayEvent); // TODO Display progress bar (why the bar don't disappear?)
+        LayerHandlerManager.fireEvent(showProgressBar);
 
         List<FullRecord> records = recordsContainer.getSelectedRecords();
         List<GPLayerBean> layers = this.convert(records);

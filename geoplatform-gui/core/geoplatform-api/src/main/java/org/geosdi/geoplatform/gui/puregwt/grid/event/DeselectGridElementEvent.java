@@ -37,22 +37,21 @@ package org.geosdi.geoplatform.gui.puregwt.grid.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.puregwt.grid.GPGridEventHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class DeselectGridElementEvent extends GwtEvent<GPGridEventHandler> {
+public class DeselectGridElementEvent extends GwtEvent<DelesectGridElementHandler> {
 
     @Override
-    public Type<GPGridEventHandler> getAssociatedType() {
-        return GPGridEventHandler.TYPE;
+    public Type<DelesectGridElementHandler> getAssociatedType() {
+        return DelesectGridElementHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(GPGridEventHandler handler) {
+    protected void dispatch(DelesectGridElementHandler handler) {
         handler.deselectElements();
     }
 }

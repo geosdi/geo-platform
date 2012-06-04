@@ -33,35 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.puregwt.handler;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.AreaInfo;
+import com.google.gwt.event.shared.EventHandler;
+import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogMapWidget;
+import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogSpatialContainer;
+import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogBBoxComponentProvider implements
-        Provider<CatalogBBoxComponent> {
+public interface CatalogSpatialHandler extends EventHandler {
 
-    private GPEventBus bus;
-    private AreaInfo areaInfo;
+    /**
+     * <p>
+     * Activate {@link CatalogSpatialContainer} Container enabling :
+     * <ul>
+     * <li>
+     * The {@link MapMoveEndListener} listener on {@link CatalogMapWidget} Component
+     * </li>
+     * <li>
+     * The injection of the Bounding Box values of the Map
+     * </li>
+     * </ul>
+     * </p>
+     */
+    void activate();
 
-    @Inject
-    public CatalogBBoxComponentProvider(AreaInfo theAreaInfo,
-            GPEventBus theBus) {
-        this.bus = theBus;
-        this.areaInfo = theAreaInfo;
-    }
-
-    @Override
-    public CatalogBBoxComponent get() {
-        return new CatalogBBoxComponent(this.bus,
-                this.areaInfo);
-    }
+    /**
+     * <p>
+     * Deactivate {@link CatalogSpatialContainer} Container :
+     * <ul>
+     * <li>
+     * Disabling the {@link MapMoveEndListener} listener on {@link CatalogMapWidget} Component
+     * </li>
+     * <li>
+     * Restore Bounding Box values of the Map
+     * </li>
+     * </ul>
+     * </p>
+     */
+    void deactivate();
 }

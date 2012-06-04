@@ -40,7 +40,10 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
+import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogSpatialEnableEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogSpatialHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
@@ -49,14 +52,18 @@ import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderCompon
  */
 @CatalogSpatialFilter
 public class CatalogSpatialContainer extends LayoutContainer
-        implements GPCatalogFinderComponent {
+        implements CatalogSpatialHandler, GPCatalogFinderComponent {
 
+    private GPEventBus bus;
     private CatalogMapWidget catalogMapWidget;
     private CatalogAreaWidget catalogBboxWidget;
 
     @Inject
-    public CatalogSpatialContainer(CatalogMapWidget theCatalogMapWidget,
+    public CatalogSpatialContainer(GPEventBus theBus,
+            CatalogMapWidget theCatalogMapWidget,
             CatalogAreaWidget theCatalogBboxWidget) {
+
+        this.bus = theBus;
         this.catalogMapWidget = theCatalogMapWidget;
         this.catalogBboxWidget = theCatalogBboxWidget;
     }
@@ -71,8 +78,25 @@ public class CatalogSpatialContainer extends LayoutContainer
     }
 
     @Override
+    protected void afterRender() {
+        super.afterRender();
+
+        CatalogSpatialEnableEvent.bind(bus, this);
+    }
+
+    @Override
     public void reset() {
         this.catalogMapWidget.reset();
         this.catalogBboxWidget.reset();
+    }
+
+    @Override
+    public void activate() {
+        this.catalogMapWidget.addMapMoveListener();
+    }
+
+    @Override
+    public void deactivate() {
+        this.catalogMapWidget.removeMapMoveListener();
     }
 }

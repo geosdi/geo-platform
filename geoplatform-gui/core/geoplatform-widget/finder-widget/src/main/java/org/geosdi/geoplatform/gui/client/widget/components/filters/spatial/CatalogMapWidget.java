@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener;
 
 /**
  *
@@ -54,14 +55,17 @@ public class CatalogMapWidget extends GeoPlatformContentPanel {
     private GeoPlatformMapFactory mapFactory;
     private MapWidget mapWidget;
     private LonLat center;
+    private MapMoveEndListener listener;
     private GPEventBus bus;
 
     @Inject
     public CatalogMapWidget(MapWidget theMapWidget, LonLat theCenter,
-            GPEventBus theBus) {
+            MapMoveEndListener theListener, GPEventBus theBus) {
+
         super(true);
         this.mapWidget = theMapWidget;
         this.center = theCenter;
+        this.listener = theListener;
         this.bus = theBus;
     }
 
@@ -88,5 +92,19 @@ public class CatalogMapWidget extends GeoPlatformContentPanel {
     @Override
     public void reset() {
         this.initMapWidget();
+    }
+
+    /**
+     * Add {@link MapMoveEndListener} Listener to the Map
+     */
+    protected void addMapMoveListener() {
+        this.mapWidget.getMap().addMapMoveEndListener(this.listener);
+    }
+
+    /**
+     * Remove {@link MapMoveEndListener} Listener from the Map
+     */
+    protected void removeMapMoveListener() {
+        this.mapWidget.getMap().removeListener(this.listener);
     }
 }

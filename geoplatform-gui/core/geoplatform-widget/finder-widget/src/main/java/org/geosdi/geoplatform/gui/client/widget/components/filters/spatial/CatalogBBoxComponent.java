@@ -42,7 +42,10 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
+import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogBBoxHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 
 /**
@@ -50,137 +53,88 @@ import org.geosdi.geoplatform.gui.responce.AreaInfo;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogBBoxComponent implements GPCatalogFinderComponent{
-
+public class CatalogBBoxComponent implements GPCatalogFinderComponent,
+        CatalogBBoxHandler {
+    
     private AreaInfo areaInfo;
     private TextField<String> maxLatField;
     private TextField<String> minLonField;
     private TextField<String> maxLonField;
     private TextField<String> minLatField;
-
-    public CatalogBBoxComponent(AreaInfo theAreaInfo) {
+    
+    public CatalogBBoxComponent(GPEventBus bus,
+            AreaInfo theAreaInfo) {
         this.areaInfo = theAreaInfo;
+        
+        CatalogBBoxChangeEvent.bind(bus, this);
     }
-
+    
     public FlexTable getTopComponent() {
         FlexTable table = new FlexTable();
         table.setCellSpacing(4);
         table.setCellPadding(1);
-
+        
         table.getElement().getStyle().setMarginLeft(120, Unit.PX);
-
+        
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
-
+        
         Label maxLatLabel = new Label("Max Lat");
         maxLatLabel.setStyleName("catalogBBOX-Label");
-
+        
         table.setWidget(1, 1, maxLatLabel);
-
+        
         maxLatField = new TextField<String>();
         maxLatField.setWidth(50);
         maxLatField.disable();
-
+        
         table.getCellFormatter().setHorizontalAlignment(1, 2,
                 HasHorizontalAlignment.ALIGN_CENTER);
-
+        
         table.setWidget(1, 2, maxLatField);
-
+        
         return table;
     }
-
+    
     public FlexTable getBottomComponents() {
         FlexTable table = new FlexTable();
         table.setCellSpacing(4);
         table.setCellPadding(1);
-
+        
         table.getElement().getStyle().setMarginLeft(120, Unit.PX);
-
+        
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
-
+        
         Label minLatLabel = new Label("Min Lan");
         minLatLabel.setStyleName("catalogBBOX-Label");
-
+        
         table.setWidget(1, 1, minLatLabel);
-
+        
         table.getCellFormatter().setHorizontalAlignment(1, 2,
                 HasHorizontalAlignment.ALIGN_CENTER);
-
+        
         minLatField = new TextField<String>();
         minLatField.setWidth(50);
         minLatField.disable();
-
+        
         table.setWidget(1, 2, minLatField);
-
+        
         return table;
     }
-
+    
     public FlexTable getCenterComponents() {
         FlexTable table = new FlexTable();
         table.setCellSpacing(4);
         table.setCellPadding(1);
-
+        
         this.addLeftComponents(table);
         this.addCenterComponents(table);
         this.addRightComponents(table);
-
+        
         return table;
     }
-
-    private void addLeftComponents(FlexTable table) {
-        table.getCellFormatter().setHorizontalAlignment(1, 1,
-                HasHorizontalAlignment.ALIGN_CENTER);
-
-        Label minLonLabel = new Label("Min Lon");
-        minLonLabel.setStyleName("catalogBBOX-Label");
-
-        table.setWidget(1, 1, minLonLabel);
-
-        minLonField = new TextField<String>();
-        minLonField.setWidth(50);
-        minLonField.disable();
-
-        table.getCellFormatter().setHorizontalAlignment(1, 2,
-                HasHorizontalAlignment.ALIGN_CENTER);
-
-        table.setWidget(1, 2, minLonField);
-    }
-
-    private void addCenterComponents(FlexTable table) {
-        table.getCellFormatter().setHorizontalAlignment(1, 3,
-                HasHorizontalAlignment.ALIGN_CENTER);
-
-        Image compass = CatalogFinderWidgetResources.ICONS.compass().createImage();
-
-        table.setWidget(1, 3, compass);
-
-        table.getCellFormatter().getElement(1, 3).getStyle().setPaddingLeft(
-                40, Unit.PX);
-    }
-
-    private void addRightComponents(FlexTable table) {
-        table.getCellFormatter().setHorizontalAlignment(1, 4,
-                HasHorizontalAlignment.ALIGN_CENTER);
-
-        Label maxLonLabel = new Label("Max Lon");
-        maxLonLabel.setStyleName("catalogBBOX-Label");
-
-        table.setWidget(1, 4, maxLonLabel);
-
-        table.getCellFormatter().getElement(1, 4).getStyle().setPaddingLeft(
-                40, Unit.PX);
-
-        maxLonField = new TextField<String>();
-        maxLonField.setWidth(50);
-        maxLonField.disable();
-
-        table.getCellFormatter().setHorizontalAlignment(1, 5,
-                HasHorizontalAlignment.ALIGN_CENTER);
-
-        table.setWidget(1, 5, maxLonField);
-    }
-
+    
     @Override
     public void reset() {
         this.maxLatField.reset();
@@ -189,7 +143,68 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent{
         this.minLatField.reset();
         this.disableAllComponents();
     }
-
+    
+    @Override
+    public void onBBoxChange(CatalogBBoxChangeEvent event) {
+        this.minLatField.setValue(event.getLowerLeftX().toString());
+        this.minLonField.setValue(event.getLowerLeftY().toString());
+        this.maxLatField.setValue(event.getUpperRightX().toString());
+        this.maxLonField.setValue(event.getUpperRightY().toString());
+    }
+    
+    private void addLeftComponents(FlexTable table) {
+        table.getCellFormatter().setHorizontalAlignment(1, 1,
+                HasHorizontalAlignment.ALIGN_CENTER);
+        
+        Label minLonLabel = new Label("Min Lon");
+        minLonLabel.setStyleName("catalogBBOX-Label");
+        
+        table.setWidget(1, 1, minLonLabel);
+        
+        minLonField = new TextField<String>();
+        minLonField.setWidth(50);
+        minLonField.disable();
+        
+        table.getCellFormatter().setHorizontalAlignment(1, 2,
+                HasHorizontalAlignment.ALIGN_CENTER);
+        
+        table.setWidget(1, 2, minLonField);
+    }
+    
+    private void addCenterComponents(FlexTable table) {
+        table.getCellFormatter().setHorizontalAlignment(1, 3,
+                HasHorizontalAlignment.ALIGN_CENTER);
+        
+        Image compass = CatalogFinderWidgetResources.ICONS.compass().createImage();
+        
+        table.setWidget(1, 3, compass);
+        
+        table.getCellFormatter().getElement(1, 3).getStyle().setPaddingLeft(
+                40, Unit.PX);
+    }
+    
+    private void addRightComponents(FlexTable table) {
+        table.getCellFormatter().setHorizontalAlignment(1, 4,
+                HasHorizontalAlignment.ALIGN_CENTER);
+        
+        Label maxLonLabel = new Label("Max Lon");
+        maxLonLabel.setStyleName("catalogBBOX-Label");
+        
+        table.setWidget(1, 4, maxLonLabel);
+        
+        table.getCellFormatter().getElement(1, 4).getStyle().setPaddingLeft(
+                40, Unit.PX);
+        
+        maxLonField = new TextField<String>();
+        maxLonField.setWidth(50);
+        maxLonField.disable();
+        
+        table.getCellFormatter().setHorizontalAlignment(1, 5,
+                HasHorizontalAlignment.ALIGN_CENTER);
+        
+        table.setWidget(1, 5, maxLonField);
+    }
+    
     private void disableAllComponents() {
         this.maxLatField.disable();
         this.minLonField.disable();

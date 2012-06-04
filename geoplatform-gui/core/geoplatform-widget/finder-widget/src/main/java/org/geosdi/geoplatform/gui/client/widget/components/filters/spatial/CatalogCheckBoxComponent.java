@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogSpatialEnableEvent;
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
@@ -50,11 +51,12 @@ import org.geosdi.geoplatform.gui.responce.AreaInfo;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogCheckBoxComponent implements GPCatalogFinderComponent{
+public class CatalogCheckBoxComponent implements GPCatalogFinderComponent {
 
     private AreaInfo areaInfo;
     private GPEventBus bus;
     private CheckBox activateFilter;
+    private CatalogSpatialEnableEvent event = new CatalogSpatialEnableEvent();
 
     public CatalogCheckBoxComponent(AreaInfo theAreaInfo, GPEventBus theBus) {
         this.areaInfo = theAreaInfo;
@@ -76,6 +78,9 @@ public class CatalogCheckBoxComponent implements GPCatalogFinderComponent{
 
             @Override
             public void handleEvent(FieldEvent be) {
+                Boolean value = (Boolean) be.getValue();
+                areaInfo.setActive(value);
+                fireCatalogSpatialEnableEvent();
                 System.out.println("AREA_INFO @@@@@@@@@@@@@@@@@@@ "
                         + areaInfo);
             }
@@ -90,5 +95,10 @@ public class CatalogCheckBoxComponent implements GPCatalogFinderComponent{
     @Override
     public void reset() {
         this.activateFilter.reset();
+    }
+
+    private void fireCatalogSpatialEnableEvent() {
+        this.event.setEnable(this.areaInfo.isActive());
+        this.bus.fireEvent(this.event);
     }
 }

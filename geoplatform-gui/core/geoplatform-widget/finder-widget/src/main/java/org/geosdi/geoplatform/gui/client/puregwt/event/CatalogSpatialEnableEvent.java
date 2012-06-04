@@ -33,35 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.puregwt.event;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogSpatialHandler;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.AreaInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogBBoxComponentProvider implements
-        Provider<CatalogBBoxComponent> {
+public class CatalogSpatialEnableEvent extends GwtEvent<CatalogSpatialHandler> {
 
-    private GPEventBus bus;
-    private AreaInfo areaInfo;
+    private static final GwtEvent.Type<CatalogSpatialHandler> TYPE = new GwtEvent.Type<CatalogSpatialHandler>();
+    private boolean enable;
 
-    @Inject
-    public CatalogBBoxComponentProvider(AreaInfo theAreaInfo,
-            GPEventBus theBus) {
-        this.bus = theBus;
-        this.areaInfo = theAreaInfo;
+    public CatalogSpatialEnableEvent() {
+    }
+
+    public CatalogSpatialEnableEvent(boolean isEnable) {
+        this.enable = isEnable;
+    }
+
+    public static <T extends CatalogSpatialHandler> HandlerRegistration bind(GPEventBus bus,
+            T handler) {
+        return bus.addHandler(TYPE, handler);
     }
 
     @Override
-    public CatalogBBoxComponent get() {
-        return new CatalogBBoxComponent(this.bus,
-                this.areaInfo);
+    public Type<CatalogSpatialHandler> getAssociatedType() {
+        return TYPE;
+    }
+
+    @Override
+    protected void dispatch(CatalogSpatialHandler handler) {
+        if (enable) {
+            handler.activate();
+        } else {
+            handler.deactivate();
+        }
+    }
+
+    /**
+     * @param enable the enable to set
+     */
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }

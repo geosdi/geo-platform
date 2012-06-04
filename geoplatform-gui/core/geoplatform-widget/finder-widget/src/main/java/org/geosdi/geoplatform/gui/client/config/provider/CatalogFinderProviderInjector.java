@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.event.MapZoomListener;
+import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener;
 
 /**
  *
@@ -70,7 +70,7 @@ public class CatalogFinderProviderInjector extends AbstractGinModule {
         bind(TimeInfo.class).toProvider(TemporalInfoProvider.class).
                 in(Singleton.class);
 
-        bind(MapZoomListener.class).toProvider(CatalogMapListenerProvider.class).
+        bind(MapMoveEndListener.class).toProvider(CatalogMapMoveListenerProvider.class).
                 in(Singleton.class);
 
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);

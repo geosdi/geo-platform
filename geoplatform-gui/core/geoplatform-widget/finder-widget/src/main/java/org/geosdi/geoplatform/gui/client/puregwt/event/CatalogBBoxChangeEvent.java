@@ -33,35 +33,79 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.puregwt.event;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogBBoxHandler;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.AreaInfo;
+import org.gwtopenmaps.openlayers.client.Bounds;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogBBoxComponentProvider implements
-        Provider<CatalogBBoxComponent> {
+public class CatalogBBoxChangeEvent extends GwtEvent<CatalogBBoxHandler> {
 
-    private GPEventBus bus;
-    private AreaInfo areaInfo;
+    private static final Type<CatalogBBoxHandler> TYPE = new Type<CatalogBBoxHandler>();
+    //
+    private Double lowerLeftX;
+    private Double lowerLeftY;
+    private Double upperRightX;
+    private Double upperRightY;
 
-    @Inject
-    public CatalogBBoxComponentProvider(AreaInfo theAreaInfo,
-            GPEventBus theBus) {
-        this.bus = theBus;
-        this.areaInfo = theAreaInfo;
+    public static <T extends CatalogBBoxHandler> HandlerRegistration bind(GPEventBus bus,
+            T handler) {
+        return bus.addHandler(TYPE, handler);
+    }
+
+    /**
+     *
+     * @param extent
+     */
+    public void bind(Bounds extent) {
+        this.lowerLeftX = extent.getLowerLeftX();
+        this.lowerLeftY = extent.getLowerLeftY();
+        this.upperRightX = extent.getUpperRightX();
+        this.upperRightY = extent.getUpperRightY();
     }
 
     @Override
-    public CatalogBBoxComponent get() {
-        return new CatalogBBoxComponent(this.bus,
-                this.areaInfo);
+    public Type<CatalogBBoxHandler> getAssociatedType() {
+        return TYPE;
+    }
+
+    @Override
+    protected void dispatch(CatalogBBoxHandler handler) {
+        handler.onBBoxChange(this);
+    }
+
+    /**
+     * @return the lowerLeftX
+     */
+    public Double getLowerLeftX() {
+        return lowerLeftX;
+    }
+
+    /**
+     * @return the lowerLeftY
+     */
+    public Double getLowerLeftY() {
+        return lowerLeftY;
+    }
+
+    /**
+     * @return the upperRightX
+     */
+    public Double getUpperRightX() {
+        return upperRightX;
+    }
+
+    /**
+     * @return the upperRightY
+     */
+    public Double getUpperRightY() {
+        return upperRightY;
     }
 }

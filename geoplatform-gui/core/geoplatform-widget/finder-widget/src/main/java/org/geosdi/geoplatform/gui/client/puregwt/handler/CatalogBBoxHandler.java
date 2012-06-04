@@ -33,35 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.puregwt.handler;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.AreaInfo;
+import com.google.gwt.event.shared.EventHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogBBoxComponentProvider implements
-        Provider<CatalogBBoxComponent> {
-
-    private GPEventBus bus;
-    private AreaInfo areaInfo;
-
-    @Inject
-    public CatalogBBoxComponentProvider(AreaInfo theAreaInfo,
-            GPEventBus theBus) {
-        this.bus = theBus;
-        this.areaInfo = theAreaInfo;
-    }
-
-    @Override
-    public CatalogBBoxComponent get() {
-        return new CatalogBBoxComponent(this.bus,
-                this.areaInfo);
-    }
+public interface CatalogBBoxHandler extends EventHandler {
+    
+    void onBBoxChange(CatalogBBoxChangeEvent event);
 }

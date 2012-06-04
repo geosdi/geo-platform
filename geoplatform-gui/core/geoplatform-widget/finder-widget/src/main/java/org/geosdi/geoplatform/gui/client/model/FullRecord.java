@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
@@ -55,7 +56,8 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
     private BBoxClientInfo bBox;
     private String crs;
     private Map<OnlineResourceProtocolType, URIDTO> uriMap;
-    private URIDTO uriWMS;
+    //
+    private WMSShortLayerBean wmsLayer;
 
     @Override
     public BBoxClientInfo getBBox() {
@@ -81,6 +83,7 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
 
     public void setUriMap(Map<OnlineResourceProtocolType, URIDTO> uriMap) {
         this.uriMap = uriMap;
+        this.wmsLayer = new WMSShortLayerBean(uriMap);
     }
 
     public boolean isForWMSGetMapRequest() {
@@ -122,55 +125,74 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
 
     @Override
     public String getLayerTitle() {
-        this.retrieveURIWMS();
-        return uriWMS.getDescription();
+        return wmsLayer.getTitle();
     }
 
     @Override
     public String getLayerName() {
-        this.retrieveURIWMS();
-        return uriWMS.getName();
+        return wmsLayer.getName();
     }
 
     @Override
     public String getLayerLabel() {
-        this.retrieveURIWMS();
-        return this.retrieveLabel(uriWMS.getName());
+        return wmsLayer.getLabel();
     }
 
     @Override
     public String getLayerDataSource() {
-        this.retrieveURIWMS();
-        return this.retrieveDataSource(uriWMS.getServiceURL());
+        return wmsLayer.getDataSource();
     }
 
-    private void retrieveURIWMS() {
-        if (this.uriWMS != null) {
-            return;
+    static class WMSShortLayerBean implements Serializable {
+
+        private static final long serialVersionUID = 9072958822410211537L;
+        //
+        private URIDTO uriWMS;
+
+        WMSShortLayerBean() {
         }
-        for (OnlineResourceProtocolType wmsProtocol : OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST) {
-            URIDTO uri = this.uriMap.get(wmsProtocol);
-            if (uri != null) {
-                this.uriWMS = uri;
-                return;
+
+        WMSShortLayerBean(Map<OnlineResourceProtocolType, URIDTO> uriMap) {
+            for (OnlineResourceProtocolType wmsProtocol : OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST) {
+                URIDTO uri = uriMap.get(wmsProtocol);
+                if (uri != null) {
+                    uriWMS = uri;
+                    return;
+                }
             }
+            throw new IllegalArgumentException("FullRecord must have a URIDTO for WMS GetMap Request.");
         }
-        throw new IllegalArgumentException("FullRecord must have a URIDTO for WMS GetMap Request");
-    }
 
-    private String retrieveLabel(String name) {
-        int ind = name.indexOf(":");
-        if (ind != -1) {
-            return name.substring(ind + 1);
+        public String getTitle() {
+            return uriWMS.getDescription();
         }
-        return name;
-    }
 
-    private String retrieveDataSource(String serviceURL) {
-        int ind = serviceURL.indexOf("?");
-        if (ind != -1) {
-            return serviceURL.substring(0, ind);
+        public String getName() {
+            return uriWMS.getName();
         }
-        return serviceURL;
+
+        public String getLabel() {
+            return this.retrieveLabel(uriWMS.getName());
+        }
+
+        public String getDataSource() {
+            return this.retrieveDataSource(uriWMS.getServiceURL());
+        }
+
+        private String retrieveLabel(String name) {
+            int ind = name.indexOf(":");
+            if (ind != -1) {
+                return name.substring(ind + 1);
+            }
+            return name;
+        }
+
+        private String retrieveDataSource(String serviceURL) {
+            int ind = serviceURL.indexOf("?");
+            if (ind != -1) {
+                return serviceURL.substring(0, ind);
+            }
+            return serviceURL;
+        }
     }
 }

@@ -40,13 +40,13 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.google.common.collect.Lists;
-import com.google.gwt.event.shared.EventBus;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogTreeLayerEnableEvent;
 import org.geosdi.geoplatform.gui.client.widget.components.search.CatalogTreeLayerWidgetSupport;
 import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.CatalogRecordsToolTip;
 import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.GPCatalogRecordsToolTip;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
@@ -72,12 +72,12 @@ import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.GPCata
  */
 public class MetadataSelectionManager implements CatalogMetadataSelectionManager {
 
-    private EventBus bus;
+    private GPEventBus bus;
     private GPCatalogRecordsToolTip recordsToolTip;
     private CatalogTreeLayerEnableEvent event = new CatalogTreeLayerEnableEvent();
     private List<FullRecord> recordsExcluded = Lists.newArrayList();
 
-    public MetadataSelectionManager(EventBus theBus,
+    public MetadataSelectionManager(GPEventBus theBus,
             GPCatalogRecordsToolTip theRecordsToolTip) {
         this.bus = theBus;
         this.recordsToolTip = theRecordsToolTip;

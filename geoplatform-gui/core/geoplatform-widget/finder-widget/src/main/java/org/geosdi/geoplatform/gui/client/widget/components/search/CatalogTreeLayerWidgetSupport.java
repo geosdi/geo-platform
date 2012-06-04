@@ -39,15 +39,13 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.event.shared.EventBus;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
-import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPCatalogExpander;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
@@ -62,7 +60,7 @@ public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
     private Button addLayersToTreeButton;
 
     public CatalogTreeLayerWidgetSupport(TreePanel<GPBeanTreeModel> theTree,
-            RecordsContainer recordsContainer, EventBus bus) {
+            RecordsContainer recordsContainer, GPEventBus bus) {
         tree = theTree;
         expander = new GPCatalogExpander(tree, recordsContainer);
 

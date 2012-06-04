@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
 import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.event.MapZoomListener;
 import org.gwtopenmaps.openlayers.client.event.MapZoomListener.MapZoomEvent;
 
@@ -48,10 +48,10 @@ import org.gwtopenmaps.openlayers.client.event.MapZoomListener.MapZoomEvent;
  */
 public class CatalogMapListenerProvider implements Provider<MapZoomListener> {
 
-    private EventBus bus;
+    private GPEventBus bus;
 
     @Inject
-    public CatalogMapListenerProvider(EventBus theBus) {
+    public CatalogMapListenerProvider(GPEventBus theBus) {
         this.bus = theBus;
     }
 

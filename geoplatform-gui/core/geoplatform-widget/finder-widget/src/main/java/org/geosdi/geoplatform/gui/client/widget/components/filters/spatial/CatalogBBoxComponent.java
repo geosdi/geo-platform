@@ -42,18 +42,25 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
+import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogBBoxComponent {
+public class CatalogBBoxComponent implements GPCatalogFinderComponent{
 
+    private AreaInfo areaInfo;
     private TextField<String> maxLatField;
     private TextField<String> minLonField;
     private TextField<String> maxLonField;
     private TextField<String> minLatField;
+
+    public CatalogBBoxComponent(AreaInfo theAreaInfo) {
+        this.areaInfo = theAreaInfo;
+    }
 
     public FlexTable getTopComponent() {
         FlexTable table = new FlexTable();
@@ -174,10 +181,19 @@ public class CatalogBBoxComponent {
         table.setWidget(1, 5, maxLonField);
     }
 
+    @Override
     public void reset() {
         this.maxLatField.reset();
         this.minLonField.reset();
         this.maxLonField.reset();
         this.minLatField.reset();
+        this.disableAllComponents();
+    }
+
+    private void disableAllComponents() {
+        this.maxLatField.disable();
+        this.minLonField.disable();
+        this.maxLonField.disable();
+        this.minLatField.disable();
     }
 }

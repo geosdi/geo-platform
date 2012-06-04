@@ -36,17 +36,19 @@
 package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
+import org.geosdi.geoplatform.gui.client.config.provider.CatalogFinderProviderInjector;
 import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@GinModules(value = CatalogFinderInjectorModule.class)
+@GinModules(value = {CatalogFinderInjectorModule.class,
+    CatalogFinderProviderInjector.class})
 public interface CatalogFinderInjector extends Ginjector {
 
     public static class MainInjector {
@@ -65,7 +67,7 @@ public interface CatalogFinderInjector extends Ginjector {
         }
     }
 
-    public EventBus getEventBus();
+    public GPEventBus getEventBus();
 
     public CatalogFinderWidget getCatalogFinderWidget();
 }

@@ -35,19 +35,28 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
+import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogBBoxComponentProvider implements
         Provider<CatalogBBoxComponent> {
 
+    private AreaInfo areaInfo;
+
+    @Inject
+    public CatalogBBoxComponentProvider(AreaInfo theAreaInfo) {
+        this.areaInfo = theAreaInfo;
+    }
+
     @Override
     public CatalogBBoxComponent get() {
-        return new CatalogBBoxComponent();
+        return new CatalogBBoxComponent(this.areaInfo);
     }
 }

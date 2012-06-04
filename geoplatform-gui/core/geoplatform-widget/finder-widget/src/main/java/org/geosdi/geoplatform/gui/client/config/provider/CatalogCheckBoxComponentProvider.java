@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogCheckBoxComponent;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 
 /**
@@ -50,11 +50,11 @@ public class CatalogCheckBoxComponentProvider implements
         Provider<CatalogCheckBoxComponent> {
 
     private AreaInfo areaInfo;
-    private EventBus bus;
+    private GPEventBus bus;
 
     @Inject
     public CatalogCheckBoxComponentProvider(AreaInfo theAreaInfo,
-            EventBus theBus) {
+            GPEventBus theBus) {
         this.areaInfo = theAreaInfo;
         this.bus = theBus;
     }

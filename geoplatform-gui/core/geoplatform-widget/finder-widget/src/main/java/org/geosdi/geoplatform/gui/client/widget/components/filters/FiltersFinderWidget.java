@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.gui.client.widget.components.filters;
 
 import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
-import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget.CatalogAccordionWidget;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget.SpatialAreaAccordionWidget;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget.TimeAccordionWidget;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
@@ -52,13 +52,13 @@ import org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidg
 @Singleton
 public class FiltersFinderWidget extends GeoPlatformContentPanel {
 
-    private EventBus bus;
+    private GPEventBus bus;
     private CatalogAccordionWidget catalogFilterWidget;
     private SpatialAreaAccordionWidget spatialFilterWidget;
     private TimeAccordionWidget timeFilterWidget;
 
     @Inject
-    public FiltersFinderWidget(EventBus bus,
+    public FiltersFinderWidget(GPEventBus bus,
             CatalogAccordionWidget theCatalogFilterWidget,
             SpatialAreaAccordionWidget theSpatialFilterWidget,
             TimeAccordionWidget theTimeFilterWidget) {

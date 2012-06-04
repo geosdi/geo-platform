@@ -33,54 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.statusbar;
-
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogStatusBarHandler;
-import org.geosdi.geoplatform.gui.client.widget.StatusWidget;
-import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+package org.geosdi.geoplatform.gui.client.widget.components;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCatalogStatusBar extends StatusWidget
-        implements CatalogStatusBarHandler, GPCatalogFinderComponent {
+public interface GPCatalogFinderComponent {
 
-    private GPEventBus bus;
-
-    @Inject
-    public GPCatalogStatusBar(GPEventBus bus) {
-        this.bus = bus;
-        this.bus.addHandler(CatalogStatusBarHandler.TYPE, this);
-    }
-
-    @Override
-    public void setStatus(String text, GPCatalogStatusBarType iconStyle) {
-        super.setStatus(text, iconStyle.getValue());
-    }
-
-    @Override
-    public void reset() {
-        super.clearStatus("");
-    }
-
-    public enum GPCatalogStatusBarType {
-
-        STATUS_OK("x-status-ok"),
-        STATUS_NOT_OK("x-status-not-ok"),
-        STATUS_ERROR("x-status-error"),
-        STATUS_LOADING("x-loading-status");
-        //
-        private String value;
-
-        private GPCatalogStatusBarType(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
+    void reset();
 }

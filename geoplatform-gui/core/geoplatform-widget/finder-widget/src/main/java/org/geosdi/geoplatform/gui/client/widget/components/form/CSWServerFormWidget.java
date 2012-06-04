@@ -39,15 +39,9 @@ import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.Field;
-import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
-import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.form.Validator;
+import com.extjs.gxt.ui.client.widget.form.*;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
@@ -58,12 +52,13 @@ import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPC
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CSWServerFormWidget
         extends GeoPlatformFormWidget<GPServerBeanModel> {
@@ -74,10 +69,10 @@ public class CSWServerFormWidget
     private TextField<String> aliasField;
     private Button saveButton;
     private String urlEncoding;
-    private EventBus bus;
+    private GPEventBus bus;
 
     public CSWServerFormWidget(CSWServerPaginationContainer catalogWindget,
-            EventBus bus) {
+            GPEventBus bus) {
         super(true);
         this.catalogWindget = catalogWindget;
         this.bus = bus;
@@ -197,7 +192,8 @@ public class CSWServerFormWidget
             setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
                     EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
 
-            GeoPlatformMessage.alertMessage(EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue(),
+            GeoPlatformMessage.alertMessage(
+                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue(),
                     "Server already exist, with alias \"" + server.getAlias() + "\"");
         } else {
             saveServer();
@@ -212,10 +208,12 @@ public class CSWServerFormWidget
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        System.out.println("\n*** Error on saving server: " + caught.getMessage()); // TODO logger
+                        System.out.println(
+                                "\n*** Error on saving server: " + caught.getMessage()); // TODO logger
                         setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
                                 EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
-                        bus.fireEvent(new CatalogStatusBarEvent("Error on saving server",
+                        bus.fireEvent(new CatalogStatusBarEvent(
+                                "Error on saving server",
                                 GPCatalogStatusBarType.STATUS_ERROR));
                     }
 
@@ -223,7 +221,8 @@ public class CSWServerFormWidget
                     public void onSuccess(GPCSWServerBeanModel server) {
                         catalogWindget.addNewServer(server);
 
-                        /** TODO
+                        /**
+                         * TODO
                          * Manage case when the user try to add a server with
                          * same alias and URL wrt a DB entry previous added.
                          * So, the server don't be added but will be returned
@@ -232,7 +231,8 @@ public class CSWServerFormWidget
                         if (aliasValue.equals(server.getAlias())) {
                             setStatus(EnumSaveStatus.STATUS_SAVE.getValue(),
                                     EnumSaveStatus.STATUS_MESSAGE_SAVE.getValue());
-                            bus.fireEvent(new CatalogStatusBarEvent("Server correctly saved",
+                            bus.fireEvent(new CatalogStatusBarEvent(
+                                    "Server correctly saved",
                                     GPCatalogStatusBarType.STATUS_OK));
                         } else {
                             setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),

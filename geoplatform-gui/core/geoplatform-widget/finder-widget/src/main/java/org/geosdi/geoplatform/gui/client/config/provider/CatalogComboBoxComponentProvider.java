@@ -35,19 +35,28 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
+import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogComboBoxComponent;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogComboBoxComponentProvider implements
         Provider<CatalogComboBoxComponent> {
 
+    private AreaInfo areaInfo;
+
+    @Inject
+    public CatalogComboBoxComponentProvider(AreaInfo theAreaInfo) {
+        this.areaInfo = theAreaInfo;
+    }
+
     @Override
     public CatalogComboBoxComponent get() {
-        return new CatalogComboBoxComponent();
+        return new CatalogComboBoxComponent(this.areaInfo);
     }
 }

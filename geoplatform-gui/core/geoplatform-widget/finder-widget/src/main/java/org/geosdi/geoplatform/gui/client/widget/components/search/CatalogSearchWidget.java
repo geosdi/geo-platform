@@ -45,13 +45,14 @@ import com.extjs.gxt.ui.client.widget.form.*;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 
 /**
@@ -60,11 +61,11 @@ import org.geosdi.geoplatform.gui.responce.TextInfo;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogSearchWidget extends LayoutContainer
-        implements ActionEnableHandler {
+        implements ActionEnableHandler, GPCatalogFinderComponent {
 
     private TextInfo textInfo;
     private RecordsContainer recordsContainer;
-    private EventBus bus;
+    private GPEventBus bus;
     //
     private TextField<String> searchTextField;
     private Button searchButton;
@@ -77,7 +78,7 @@ public class CatalogSearchWidget extends LayoutContainer
     @Inject
     public CatalogSearchWidget(TextInfo theTextInfo,
             RecordsContainer theRecordsContainer,
-            EventBus theBus) {
+            GPEventBus theBus) {
         this.textInfo = theTextInfo;
         recordsContainer = theRecordsContainer;
         bus = theBus;
@@ -244,6 +245,7 @@ public class CatalogSearchWidget extends LayoutContainer
         searchButton.setEnabled(event.isEnabled());
     }
 
+    @Override
     public void reset() {
         this.resetSearch();
         this.allSelectedCheckbox.setValue(true);

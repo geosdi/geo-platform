@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
-import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @CatalogSpatialFilter
@@ -54,10 +54,11 @@ public class CatalogMapWidget extends GeoPlatformContentPanel {
     private GeoPlatformMapFactory mapFactory;
     private MapWidget mapWidget;
     private LonLat center;
-    private EventBus bus;
+    private GPEventBus bus;
 
     @Inject
-    public CatalogMapWidget(MapWidget theMapWidget, LonLat theCenter, EventBus theBus) {
+    public CatalogMapWidget(MapWidget theMapWidget, LonLat theCenter,
+            GPEventBus theBus) {
         super(true);
         this.mapWidget = theMapWidget;
         this.center = theCenter;

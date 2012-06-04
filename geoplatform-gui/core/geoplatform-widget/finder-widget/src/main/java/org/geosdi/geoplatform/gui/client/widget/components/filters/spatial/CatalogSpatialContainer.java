@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
+import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 
 /**
  *
@@ -47,7 +48,8 @@ import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @CatalogSpatialFilter
-public class CatalogSpatialContainer extends LayoutContainer {
+public class CatalogSpatialContainer extends LayoutContainer
+        implements GPCatalogFinderComponent {
 
     private CatalogMapWidget catalogMapWidget;
     private CatalogAreaWidget catalogBboxWidget;
@@ -68,6 +70,7 @@ public class CatalogSpatialContainer extends LayoutContainer {
         super.add(this.catalogBboxWidget);
     }
 
+    @Override
     public void reset() {
         this.catalogMapWidget.reset();
         this.catalogBboxWidget.reset();

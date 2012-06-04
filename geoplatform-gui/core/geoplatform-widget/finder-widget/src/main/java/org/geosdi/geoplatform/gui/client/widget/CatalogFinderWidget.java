@@ -41,7 +41,6 @@ import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -51,6 +50,7 @@ import org.geosdi.geoplatform.gui.client.widget.components.MainViewFinderWidget;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.FiltersFinderWidget;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
@@ -63,13 +63,14 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
     private FiltersFinderWidget filtersWidget;
     private MainViewFinderWidget mainViewWidget;
     private GPCatalogStatusBar catalogStatusBar;
-    private EventBus bus;
+    private GPEventBus bus;
     private TreePanel<GPBeanTreeModel> tree;
     private LoadFirstServersEvent loadFirstServers = new LoadFirstServersEvent();
 
     @Inject
-    public CatalogFinderWidget(FiltersFinderWidget filtersWidget, MainViewFinderWidget mainViewWidget,
-            GPCatalogStatusBar catalogStatusBar, EventBus bus) {
+    public CatalogFinderWidget(FiltersFinderWidget filtersWidget,
+            MainViewFinderWidget mainViewWidget,
+            GPCatalogStatusBar catalogStatusBar, GPEventBus bus) {
         super(true);
         this.filtersWidget = filtersWidget;
         this.mainViewWidget = mainViewWidget;

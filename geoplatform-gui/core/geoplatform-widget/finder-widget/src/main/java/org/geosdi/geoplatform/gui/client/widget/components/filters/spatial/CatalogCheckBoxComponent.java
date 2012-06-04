@@ -39,23 +39,24 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogCheckBoxComponent {
+public class CatalogCheckBoxComponent implements GPCatalogFinderComponent{
 
     private AreaInfo areaInfo;
-    private EventBus bus;
+    private GPEventBus bus;
     private CheckBox activateFilter;
 
-    public CatalogCheckBoxComponent(AreaInfo theAreaInfo, EventBus theBus) {
+    public CatalogCheckBoxComponent(AreaInfo theAreaInfo, GPEventBus theBus) {
         this.areaInfo = theAreaInfo;
         this.bus = theBus;
     }
@@ -75,6 +76,8 @@ public class CatalogCheckBoxComponent {
 
             @Override
             public void handleEvent(FieldEvent be) {
+                System.out.println("AREA_INFO @@@@@@@@@@@@@@@@@@@ "
+                        + areaInfo);
             }
         });
         activateFilter.setOriginalValue(Boolean.FALSE);
@@ -84,6 +87,7 @@ public class CatalogCheckBoxComponent {
         return table;
     }
 
+    @Override
     public void reset() {
         this.activateFilter.reset();
     }

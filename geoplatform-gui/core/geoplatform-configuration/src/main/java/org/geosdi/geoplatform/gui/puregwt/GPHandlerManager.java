@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.gui.puregwt;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,25 +35,25 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
 
-import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @CatalogFilter
 public class CatalogAccordionWidget extends GeoPlatformContentPanel {
 
-    private EventBus bus;
+    private GPEventBus bus;
     private CSWServerPaginationContainer serverWidget;
 
     @Inject
-    public CatalogAccordionWidget(EventBus theBus,
+    public CatalogAccordionWidget(GPEventBus theBus,
             CSWServerPaginationContainer theServerWidget) {
         super(true);
         this.bus = theBus;

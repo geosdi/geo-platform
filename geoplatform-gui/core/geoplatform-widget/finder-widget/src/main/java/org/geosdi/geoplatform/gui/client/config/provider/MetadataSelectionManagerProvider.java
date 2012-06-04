@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Provider;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.MetadataSelectionManager;
 import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.GPCatalogRecordsToolTip;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
@@ -49,11 +49,11 @@ import org.geosdi.geoplatform.gui.client.widget.components.search.tooltip.GPCata
 public class MetadataSelectionManagerProvider implements
         Provider<MetadataSelectionManager> {
 
-    private EventBus bus;
+    private GPEventBus bus;
     private GPCatalogRecordsToolTip recordsToolTip;
 
     @Inject
-    public MetadataSelectionManagerProvider(EventBus theBus,
+    public MetadataSelectionManagerProvider(GPEventBus theBus,
             GPCatalogRecordsToolTip theRecordsToolTip) {
         this.bus = theBus;
         this.recordsToolTip = theRecordsToolTip;

@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components;
 
-import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.themes.GPCatalogTheme;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.GPCatalogTabWidget;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
@@ -53,12 +53,15 @@ public class MainViewFinderWidget extends GeoPlatformContentPanel {
     static {
         GPCatalogTheme.INSTANCE.gpCatalogFinderCss().ensureInjected();
     }
-    /******************************************/
-    private EventBus bus;
+    /**
+     * ***************************************
+     */
+    private GPEventBus bus;
     private GPCatalogTabWidget tabWidget;
 
     @Inject
-    public MainViewFinderWidget(EventBus bus, GPCatalogTabWidget theTabWidget) {
+    public MainViewFinderWidget(GPEventBus bus,
+            GPCatalogTabWidget theTabWidget) {
         super(true);
         this.bus = bus;
         this.tabWidget = theTabWidget;

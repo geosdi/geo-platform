@@ -47,7 +47,6 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.tips.QuickTip;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +62,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel.GPCSWServerKeyValue;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 
@@ -77,7 +77,7 @@ public class CSWServerPaginationContainer
         implements LoadFirstServersHandler {
 
     private CatalogFinderBean catalogFinder;
-    private EventBus bus;
+    private GPEventBus bus;
     private ActionEnableEvent enableEvent = new ActionEnableEvent(false);
     //
     private CSWServerFormWidget serverForm;
@@ -87,7 +87,7 @@ public class CSWServerPaginationContainer
 
     @Inject
     public CSWServerPaginationContainer(CatalogFinderBean theCatalogFinder,
-            EventBus theBus) {
+            GPEventBus theBus) {
         super(true);
         catalogFinder = theCatalogFinder;
         bus = theBus;
@@ -249,7 +249,8 @@ public class CSWServerPaginationContainer
             }
         };
 
-        super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(proxy);
+        super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(
+                proxy);
         super.loader.setRemoteSort(false);
 
         super.store = new ListStore<GPCSWServerBeanModel>(loader);
@@ -297,8 +298,10 @@ public class CSWServerPaginationContainer
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        System.out.println("\n*** Error on deleting server: " + caught.getMessage()); // TODO logger
-                        bus.fireEvent(new CatalogStatusBarEvent("Error on deleting server",
+                        System.out.println(
+                                "\n*** Error on deleting server: " + caught.getMessage()); // TODO logger
+                        bus.fireEvent(new CatalogStatusBarEvent(
+                                "Error on deleting server",
                                 GPCatalogStatusBarType.STATUS_ERROR));
 
                         widget.unmask();
@@ -307,7 +310,8 @@ public class CSWServerPaginationContainer
                     @Override
                     public void onSuccess(Boolean result) {
                         store.remove(selectedServer);
-                        bus.fireEvent(new CatalogStatusBarEvent("Server correctly deleted",
+                        bus.fireEvent(new CatalogStatusBarEvent(
+                                "Server correctly deleted",
                                 GPCatalogStatusBarType.STATUS_OK));
 
                         widget.unmask();

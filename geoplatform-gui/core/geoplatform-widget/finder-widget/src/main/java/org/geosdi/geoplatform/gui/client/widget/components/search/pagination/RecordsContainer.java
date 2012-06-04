@@ -44,7 +44,6 @@ import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowExpander;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +55,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridRecordHandler;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
@@ -71,18 +71,19 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         implements RecordsContainerSelectionListener, DeselectGridRecordHandler {
 
-    private EventBus bus;
+    private GPEventBus bus;
     private CatalogFinderBean catalogFinder;
     private CheckBoxSelectionModel<FullRecord> selectionModel;
     private RowExpander rowExpander;
     private boolean selectionContainer;
     private CatalogMetadataSelectionManager metadataSelection;
-    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(false);
+    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(
+            false);
 
     @Inject
     public RecordsContainer(CatalogFinderBean theCatalogFinder,
             MetadataSelectionManager theMetadataSelector,
-            EventBus theBus) {
+            GPEventBus theBus) {
         super(true, 10);
         super.setWidth(550);
         super.setStyleName("records-Container");

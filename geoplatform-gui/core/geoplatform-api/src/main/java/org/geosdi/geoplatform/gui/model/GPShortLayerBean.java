@@ -33,32 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event;
+package org.geosdi.geoplatform.gui.model;
 
-import com.google.gwt.event.shared.GwtEvent;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
-import org.geosdi.geoplatform.gui.model.GPShortLayerBean;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class AddRasterFromCatalogEvent extends GwtEvent<GPTreeStoreEventHandler> {
+public interface GPShortLayerBean {
 
-    private List<GPShortLayerBean> layers;
+    GPLayerType getLayerType();
 
-    public AddRasterFromCatalogEvent(List<GPShortLayerBean> layers) {
-        this.layers = layers;
-    }
+    String getLayerTitle();
 
-    @Override
-    public Type<GPTreeStoreEventHandler> getAssociatedType() {
-        return GPTreeStoreEventHandler.TYPE;
-    }
+    String getLayerName();
 
-    @Override
-    protected void dispatch(GPTreeStoreEventHandler handler) {
-        handler.addRasterLayersFromCatalog(layers);
-    }
+    String getLayerLabel();
+
+    String getLayerDataSource();
+
+    String getCrs();
+
+    BBoxClientInfo getBBox();
 }

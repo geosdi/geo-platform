@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.model;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.model.GPShortLayerBean;
 import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
 
@@ -46,14 +48,16 @@ import org.geosdi.geoplatform.gui.responce.URIDTO;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FullRecord extends AbstractRecord {
+public class FullRecord extends AbstractRecord implements GPShortLayerBean {
 
     private static final long serialVersionUID = 7344635200928287521L;
     //
     private BBoxClientInfo bBox;
     private String crs;
     private Map<OnlineResourceProtocolType, URIDTO> uriMap;
+    private URIDTO uriWMS;
 
+    @Override
     public BBoxClientInfo getBBox() {
         return bBox;
     }
@@ -62,6 +66,7 @@ public class FullRecord extends AbstractRecord {
         this.bBox = bBox;
     }
 
+    @Override
     public String getCrs() {
         return crs;
     }
@@ -108,5 +113,64 @@ public class FullRecord extends AbstractRecord {
         str.append(", crs =").append(crs);
         str.append(", uriList =").append(getUriMap());
         return str.append('}').toString();
+    }
+
+    @Override
+    public GPLayerType getLayerType() {
+        return GPLayerType.RASTER;
+    }
+
+    @Override
+    public String getLayerTitle() {
+        this.retrieveURIWMS();
+        return uriWMS.getDescription();
+    }
+
+    @Override
+    public String getLayerName() {
+        this.retrieveURIWMS();
+        return uriWMS.getName();
+    }
+
+    @Override
+    public String getLayerLabel() {
+        this.retrieveURIWMS();
+        return this.retrieveLabel(uriWMS.getName());
+    }
+
+    @Override
+    public String getLayerDataSource() {
+        this.retrieveURIWMS();
+        return this.retrieveDataSource(uriWMS.getServiceURL());
+    }
+
+    private void retrieveURIWMS() {
+        if (this.uriWMS != null) {
+            return;
+        }
+        for (OnlineResourceProtocolType wmsProtocol : OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST) {
+            URIDTO uri = this.uriMap.get(wmsProtocol);
+            if (uri != null) {
+                this.uriWMS = uri;
+                return;
+            }
+        }
+        throw new IllegalArgumentException("FullRecord must have a URIDTO for WMS GetMap Request");
+    }
+
+    private String retrieveLabel(String name) {
+        int ind = name.indexOf(":");
+        if (ind != -1) {
+            return name.substring(ind + 1);
+        }
+        return name;
+    }
+
+    private String retrieveDataSource(String serviceURL) {
+        int ind = serviceURL.indexOf("?");
+        if (ind != -1) {
+            return serviceURL.substring(0, ind);
+        }
+        return serviceURL;
     }
 }

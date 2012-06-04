@@ -48,53 +48,53 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
  */
 public interface GPLayerBean extends ModelData {
 
-    public Long getId();
+    Long getId();
 
-    public void setId(Long id);
+    void setId(Long id);
 
-    public String getLabel();
+    String getLabel();
 
-    public void setLabel(String label);
+    void setLabel(String label);
 
-    public String getTitle();
+    String getTitle();
 
-    public void setTitle(String title);
+    void setTitle(String title);
 
-    public String getName();
+    String getName();
 
-    public void setName(String name);
+    void setName(String name);
 
-    public void setAlias(String alias);
+    void setAlias(String alias);
 
-    public String getAlias();
+    String getAlias();
 
-    public String getAbstractText();
+    String getAbstractText();
 
-    public void setAbstractText(String abstractText);
+    void setAbstractText(String abstractText);
 
-    public String getDataSource();
+    String getDataSource();
 
-    public void setDataSource(String dataSource);
+    void setDataSource(String dataSource);
 
-    public String getCrs();
+    String getCrs();
 
-    public void setCrs(String crs);
+    void setCrs(String crs);
 
-    public BBoxClientInfo getBbox();
+    BBoxClientInfo getBbox();
 
-    public void setBbox(BBoxClientInfo bbox);
+    void setBbox(BBoxClientInfo bbox);
 
-    public GPLayerType getLayerType();
+    GPLayerType getLayerType();
 
-    public void setLayerType(GPLayerType layerType);
+    void setLayerType(GPLayerType layerType);
 
-    public int getzIndex();
+    int getzIndex();
 
-    public ArrayList<GPStyleStringBeanModel> getStyles();
+    ArrayList<GPStyleStringBeanModel> getStyles();
 
-    public void setStyles(ArrayList<GPStyleStringBeanModel> styles);
+    void setStyles(ArrayList<GPStyleStringBeanModel> styles);
 
-    public String getCqlFilter();
+    String getCqlFilter();
 
-    public void setCqlFilter(String cqlFilter);
+    void setCqlFilter(String cqlFilter);
 }

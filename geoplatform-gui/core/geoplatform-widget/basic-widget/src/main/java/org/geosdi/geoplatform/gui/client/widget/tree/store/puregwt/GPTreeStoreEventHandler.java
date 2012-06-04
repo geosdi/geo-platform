@@ -39,6 +39,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import java.util.List;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPShortLayerBean;
 
 /**
  * TODO One single method for source?
@@ -78,5 +79,5 @@ public interface GPTreeStoreEventHandler extends EventHandler {
     /**
      * LAYERS_FROM_CATALOG
      */
-    public void addRasterLayersFromCatalog(List<? extends GPLayerBean> layers);
+    public void addRasterLayersFromCatalog(List<? extends GPShortLayerBean> layers);
 }

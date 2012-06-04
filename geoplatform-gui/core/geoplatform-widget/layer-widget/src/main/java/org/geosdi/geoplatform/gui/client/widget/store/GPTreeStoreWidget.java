@@ -37,7 +37,9 @@ package org.geosdi.geoplatform.gui.client.widget.store;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
@@ -50,6 +52,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidge
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPShortLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
@@ -90,6 +93,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     @Override
     public void addRasterLayersFromCapabilities(List<? extends GPLayerBean> layers) {
         this.addRasterLayers(layers, GPTreeStoreOperations.LAYERS_FROM_WMS_CAPABILITIES);
+        LayerHandlerManager.fireEvent(deselectGridElement);
     }
 
     @Override
@@ -116,42 +120,79 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     }
 
     @Override
-    public void addRasterLayersFromCatalog(List<? extends GPLayerBean> layers) {
-        this.addRasterLayers(layers, GPTreeStoreOperations.LAYERS_FROM_CATALOG);
+    public void addRasterLayersFromCatalog(List<? extends GPShortLayerBean> layers) {
+        Map<String, List<GPShortLayerBean>> layerMap = this.getLayerMapDataSource(layers);
+
+        StringBuilder existingLayers = new StringBuilder();
+        for (Map.Entry<String, List<GPShortLayerBean>> e : layerMap.entrySet()) {
+            existingLayers = this.addShortRasterLayers(e.getValue(), existingLayers);
+        }
+
+        LayerHandlerManager.fireEvent(deselectGridRecord);
+        this.createAlertMessage(existingLayers);
     }
 
     private void addRasterLayers(List<? extends GPLayerBean> layers,
             GPTreeStoreOperations sourceLayer) {
-        if (layers.size() > 0) {
-            //TODO: Check the utility of this code
-            //this.changeProgressBarMessage("Loading " + layers.size() + " Raster Layers into the Store");
-            GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
-            if (!super.tree.isExpanded(parentDestination)) {
-                super.tree.setExpanded(parentDestination, true);
-            }
-            List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
-            StringBuilder existingLayers = new StringBuilder();
-            for (GPLayerBean layer : layers) {
-                boolean duplicatedLayer = this.checkDuplicateLayer(layer, parentDestination);
-
-                if (duplicatedLayer) {
-                    if (sourceLayer == GPTreeStoreOperations.LAYERS_FROM_COPY_MENU) {
-                        String aliasForCopiedLayer = this.generateUnduplicateAliasForLayer(
-                                layer, parentDestination);
-                        layerList.add(this.duplicateRaster(layer, aliasForCopiedLayer));
-                    } else {
-                        existingLayers.append(layer.getLabel()).append("\n");
-                    }
-                } else {
-                    this.manageAddLayerFromSource(layerList, layer, sourceLayer);
-                }
-            }
-
-            this.manageUnduplicatedLayer(layerList, parentDestination,
-                    layers.get(0).getDataSource());
-            this.fireDeselectEvent(sourceLayer);
-            this.createAlertMessage(existingLayers);
+        if (layers == null || layers.isEmpty()) { // TODO assert
+            return;
         }
+
+        //TODO: Check the utility of this code
+        //this.changeProgressBarMessage("Loading " + layers.size() + " Raster Layers into the Store");
+        GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
+        // TODO The parent is always expand?
+        System.out.println("*** Parent expanded: " + super.tree.isExpanded(parentDestination));
+        if (!super.tree.isExpanded(parentDestination)) {
+            super.tree.setExpanded(parentDestination, true);
+        }
+
+        List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+        StringBuilder existingLayers = new StringBuilder();
+        for (GPLayerBean layer : layers) {
+            boolean duplicatedLayer = this.checkDuplicateLayer(layer, parentDestination);
+
+            if (duplicatedLayer) {
+                if (sourceLayer == GPTreeStoreOperations.LAYERS_FROM_COPY_MENU) {
+                    String aliasForCopiedLayer = this.generateUnduplicateAliasForLayer(
+                            layer, parentDestination);
+                    layerList.add(this.duplicateRaster(layer, aliasForCopiedLayer));
+                } else {
+                    existingLayers.append(layer.getLabel()).append("\n");
+                }
+            } else {
+                this.manageAddLayerFromSource(layerList, layer, sourceLayer);
+            }
+        }
+
+        this.manageUnduplicatedLayer(layerList, parentDestination,
+                layers.get(0).getDataSource());
+        this.createAlertMessage(existingLayers);
+    }
+
+    private StringBuilder addShortRasterLayers(List<? extends GPShortLayerBean> layers,
+            StringBuilder existingLayers) {
+        if (layers == null || layers.isEmpty()) { // TODO assert
+            return null;
+        }
+
+        GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
+        List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+
+        for (GPShortLayerBean layer : layers) {
+            boolean duplicatedLayer = this.checkDuplicateLayer(layer, parentDestination);
+
+            if (duplicatedLayer) {
+                existingLayers.append(layer.getLayerLabel()).append("\n");
+            } else {
+                layerList.add(this.generateRasterTreeNode(layer));
+            }
+        }
+
+        this.manageUnduplicatedLayer(layerList, parentDestination,
+                layers.get(0).getLayerDataSource());
+
+        return existingLayers;
     }
 
     private String generateUnduplicateAliasForLayer(GPLayerBean layer, GPBeanTreeModel parentDestination) {
@@ -202,6 +243,16 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         return false;
     }
 
+    private boolean checkDuplicateLayer(GPShortLayerBean layer, GPBeanTreeModel parentDestination) {
+        for (ModelData element : parentDestination.getChildren()) {
+            if (element != null && element instanceof GPLayerTreeModel
+                    && ((GPLayerTreeModel) element).getName().equals(layer.getLayerName())) { // TODO Title is better? (exists always)
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void manageAddLayerFromSource(List<GPBeanTreeModel> layerList,
             GPLayerBean layer, GPTreeStoreOperations sourceLayer) {
         switch (sourceLayer) {
@@ -211,7 +262,6 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
             case LAYERS_FROM_WMS_CAPABILITIES:
             case LAYERS_FROM_PUBLISHER:
-            case LAYERS_FROM_CATALOG:
                 layerList.add(this.generateRasterTreeNode(layer));
                 break;
         }
@@ -262,6 +312,22 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         return raster;
     }
 
+    private RasterTreeNode generateRasterTreeNode(GPShortLayerBean layer) {
+        RasterTreeNode raster = new RasterTreeNode();
+        raster.setLayerType(layer.getLayerType());
+        raster.setName(layer.getLayerName());
+        raster.setTitle(layer.getLayerTitle());
+        raster.setLabel(layer.getLayerLabel());
+        raster.setDataSource(layer.getLayerDataSource());
+        raster.setBbox(layer.getBBox());
+        raster.setCrs(layer.getCrs());
+
+        raster.setChecked(false);
+        raster.setOpacity(1.0f);
+        raster.setStyles(new ArrayList<GPStyleStringBeanModel>(0));
+        return raster;
+    }
+
     private RasterTreeNode duplicateRaster(GPLayerBean layer, String alias) {
         RasterTreeNode raster = this.duplicateRaster(layer);
         raster.setAlias(alias);
@@ -282,14 +348,21 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         return raster;
     }
 
-    private void fireDeselectEvent(GPTreeStoreOperations sourceLayer) {
-        switch (sourceLayer) {
-            case LAYERS_FROM_WMS_CAPABILITIES:
-                LayerHandlerManager.fireEvent(deselectGridElement);
-                break;
-            case LAYERS_FROM_CATALOG:
-                LayerHandlerManager.fireEvent(deselectGridRecord);
-                break;
+    private Map<String, List<GPShortLayerBean>> getLayerMapDataSource(List<? extends GPShortLayerBean> layers) {
+        Map<String, List<GPShortLayerBean>> layerMap = new HashMap<String, List<GPShortLayerBean>>();
+
+        for (GPShortLayerBean layer : layers) {
+            String dataSource = layer.getLayerDataSource();
+            System.out.println("### " + dataSource);
+
+            List<GPShortLayerBean> layersByDataSource = layerMap.get(dataSource);
+            if (layersByDataSource == null) {
+                layersByDataSource = new ArrayList<GPShortLayerBean>();
+                layerMap.put(dataSource, layersByDataSource);
+            }
+            layersByDataSource.add(layer);
         }
+
+        return layerMap;
     }
 }

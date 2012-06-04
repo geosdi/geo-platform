@@ -38,23 +38,17 @@ package org.geosdi.geoplatform.gui.client.widget.expander;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromCatalogEvent;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
+import org.geosdi.geoplatform.gui.model.GPShortLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
-import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
-import org.geosdi.geoplatform.gui.responce.URIDTO;
 
 /**
  *
@@ -78,7 +72,7 @@ public class GPCatalogExpander
         LayerHandlerManager.fireEvent(showProgressBar);
 
         List<FullRecord> records = recordsContainer.getSelectedRecords();
-        List<GPLayerBean> layers = this.convert(records);
+        List<GPShortLayerBean> layers = new ArrayList<GPShortLayerBean>(records);
 
         LayerHandlerManager.fireEvent(new AddRasterFromCatalogEvent(layers));
     }
@@ -103,62 +97,5 @@ public class GPCatalogExpander
                     "You can put layers into folders only.\n"
                     + "Please select the correct node.");
         }
-    }
-
-    /**
-     * TODO Think a better way for this purpose.
-     * 
-     * Here convert FullRecords to GPLayerBeans, in order to use this list into
-     * GPTreeStoreWidget: that convert GPLayerBeans to RasterTreeNode (raster layer of the tree)
-     * 
-     */
-    private List<GPLayerBean> convert(List<FullRecord> recordList) {
-        List<GPLayerBean> layerList = new ArrayList<GPLayerBean>(recordList.size());
-
-        for (FullRecord record : recordList) {
-            URIDTO uri = this.getURI(record.getUriMap());
-
-            GPLayerBean layer = new GPRasterLayerGrid(); // TODO Use custom raster class as MetadataRasterLayer?
-
-            layer.setName(uri.getName());
-            layer.setTitle(uri.getDescription());
-            layer.setLabel(this.getLabel(uri.getName()));
-            layer.setDataSource(this.getDataSource(uri.getServiceURL()));
-
-            layer.setLayerType(GPLayerType.RASTER);
-            layer.setBbox(record.getBBox());
-            layer.setCrs(record.getCrs());
-            layer.setStyles(new ArrayList<GPStyleStringBeanModel>(0));
-
-            layerList.add(layer);
-        }
-
-        return layerList;
-    }
-
-    private URIDTO getURI(Map<OnlineResourceProtocolType, URIDTO> uriMap) {
-        for (OnlineResourceProtocolType wmsProtocol : OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST) {
-            URIDTO uri = uriMap.get(wmsProtocol);
-            if (uri != null) {
-                return uri;
-            }
-        }
-        throw new IllegalArgumentException("FullRecord must have a URIDTO for WMS GetMap Request");
-    }
-
-    private String getLabel(String name) {
-        int ind = name.indexOf(":");
-        if (ind != -1) {
-            return name.substring(ind + 1);
-        }
-        return name;
-    }
-
-    private String getDataSource(String serviceURL) {
-        int ind = serviceURL.indexOf("?");
-        if (ind != -1) {
-            return serviceURL.substring(0, ind);
-        }
-        return serviceURL;
     }
 }

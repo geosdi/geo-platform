@@ -125,22 +125,22 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
 
     @Override
     public String getLayerTitle() {
-        return wmsLayer.getTitle();
+        return wmsLayer == null ? "" : wmsLayer.getTitle();
     }
 
     @Override
     public String getLayerName() {
-        return wmsLayer.getName();
+        return wmsLayer == null ? "" : wmsLayer.getName();
     }
 
     @Override
     public String getLayerLabel() {
-        return wmsLayer.getLabel();
+        return wmsLayer == null ? "" : wmsLayer.getLabel();
     }
 
     @Override
     public String getLayerDataSource() {
-        return wmsLayer.getDataSource();
+        return wmsLayer == null ? "" : wmsLayer.getDataSource();
     }
 
     static class WMSShortLayerBean implements Serializable {
@@ -160,7 +160,6 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
                     return;
                 }
             }
-            throw new IllegalArgumentException("FullRecord must have a URIDTO for WMS GetMap Request.");
         }
 
         public String getTitle() {

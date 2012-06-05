@@ -36,9 +36,7 @@
 package org.geosdi.geoplatform.gui.client.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogBBoxHandler;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.Bounds;
 
 /**
@@ -48,16 +46,19 @@ import org.gwtopenmaps.openlayers.client.Bounds;
  */
 public class CatalogBBoxChangeEvent extends GwtEvent<CatalogBBoxHandler> {
 
-    private static final Type<CatalogBBoxHandler> TYPE = new Type<CatalogBBoxHandler>();
-    //
     private Double lowerLeftX;
     private Double lowerLeftY;
     private Double upperRightX;
     private Double upperRightY;
 
-    public static <T extends CatalogBBoxHandler> HandlerRegistration bind(GPEventBus bus,
-            T handler) {
-        return bus.addHandler(TYPE, handler);
+    @Override
+    public Type<CatalogBBoxHandler> getAssociatedType() {
+        return CatalogBBoxHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(CatalogBBoxHandler handler) {
+        handler.onBBoxChange(this);
     }
 
     /**
@@ -69,16 +70,6 @@ public class CatalogBBoxChangeEvent extends GwtEvent<CatalogBBoxHandler> {
         this.lowerLeftY = extent.getLowerLeftY();
         this.upperRightX = extent.getUpperRightX();
         this.upperRightY = extent.getUpperRightY();
-    }
-
-    @Override
-    public Type<CatalogBBoxHandler> getAssociatedType() {
-        return TYPE;
-    }
-
-    @Override
-    protected void dispatch(CatalogBBoxHandler handler) {
-        handler.onBBoxChange(this);
     }
 
     /**

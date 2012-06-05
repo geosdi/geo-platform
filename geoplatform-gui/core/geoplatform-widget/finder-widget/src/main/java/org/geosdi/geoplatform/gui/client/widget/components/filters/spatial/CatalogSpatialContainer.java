@@ -92,11 +92,13 @@ public class CatalogSpatialContainer extends LayoutContainer
 
     @Override
     public void activate() {
+        // TODO set BBox values to text fields
         this.catalogMapWidget.addMapMoveListener();
     }
 
     @Override
     public void deactivate() {
+        // TODO reset BBox values to text fields
         this.catalogMapWidget.removeMapMoveListener();
     }
 }

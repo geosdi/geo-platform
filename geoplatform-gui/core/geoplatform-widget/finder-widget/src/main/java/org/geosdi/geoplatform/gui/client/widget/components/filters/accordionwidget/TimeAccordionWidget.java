@@ -49,7 +49,6 @@ import java.util.Date;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
 
 /**
@@ -67,9 +66,9 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
     private DateField endDate;
 
     @Inject
-    public TimeAccordionWidget(CatalogFinderBean theCatalogFinder) {
+    public TimeAccordionWidget(TimeInfo theTimeInfo) {
         super(true);
-        this.timeInfo = theCatalogFinder.getTimeInfo();
+        this.timeInfo = theTimeInfo;
     }
 
     @Override

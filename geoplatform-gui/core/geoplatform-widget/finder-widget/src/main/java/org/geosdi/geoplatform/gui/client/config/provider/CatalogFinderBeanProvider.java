@@ -54,18 +54,17 @@ public class CatalogFinderBeanProvider implements Provider<CatalogFinderBean> {
     private TimeInfo timeInfo;
 
     @Inject
-    public CatalogFinderBeanProvider(AreaInfo areaInfo, TextInfo textInfo,
-            TimeInfo timeInfo) {
-        this.areaInfo = areaInfo;
+    public CatalogFinderBeanProvider(TextInfo textInfo, AreaInfo areaInfo, TimeInfo timeInfo) {
         this.textInfo = textInfo;
+        this.areaInfo = areaInfo;
         this.timeInfo = timeInfo;
     }
 
     @Override
     public CatalogFinderBean get() {
         CatalogFinderBean catalogFinderBean = new CatalogFinderBean();
-        catalogFinderBean.setAreaInfo(areaInfo);
         catalogFinderBean.setTextInfo(textInfo);
+        catalogFinderBean.setAreaInfo(areaInfo);
         catalogFinderBean.setTimeInfo(timeInfo);
 
         return catalogFinderBean;

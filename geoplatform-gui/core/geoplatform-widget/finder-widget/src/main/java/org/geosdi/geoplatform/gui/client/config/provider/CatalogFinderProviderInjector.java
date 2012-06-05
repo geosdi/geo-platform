@@ -61,13 +61,16 @@ public class CatalogFinderProviderInjector extends AbstractGinModule {
 
     @Override
     protected void configure() {
+        bind(CatalogFinderBean.class).toProvider(CatalogFinderBeanProvider.class).
+                in(Singleton.class);
+
+        bind(TextInfo.class).toProvider(TextInfoProvider.class).
+                in(Singleton.class);
+
         bind(AreaInfo.class).toProvider(AreaInfoProvider.class).
                 in(Singleton.class);
 
-        bind(TextInfo.class).toProvider(SearchInfoProvider.class).
-                in(Singleton.class);
-
-        bind(TimeInfo.class).toProvider(TemporalInfoProvider.class).
+        bind(TimeInfo.class).toProvider(TimeInfoProvider.class).
                 in(Singleton.class);
 
         bind(MapMoveEndListener.class).toProvider(CatalogMapMoveListenerProvider.class).
@@ -95,8 +98,5 @@ public class CatalogFinderProviderInjector extends AbstractGinModule {
 
         bind(MetadataSelectionManager.class).toProvider(
                 MetadataSelectionManagerProvider.class).in(Singleton.class);
-
-        bind(CatalogFinderBean.class).toProvider(
-                CatalogFinderBeanProvider.class).in(Singleton.class);
     }
 }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.puregwt.handler;
 
 import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
 
 /**
@@ -44,6 +45,8 @@ import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface CatalogBBoxHandler extends EventHandler {
-    
+
+    GwtEvent.Type<CatalogBBoxHandler> TYPE = new GwtEvent.Type<CatalogBBoxHandler>();
+
     void onBBoxChange(CatalogBBoxChangeEvent event);
 }

@@ -36,18 +36,17 @@
 package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.inject.Provider;
-import org.geosdi.geoplatform.gui.responce.TextInfo;
+import org.geosdi.geoplatform.gui.responce.TimeInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class SearchInfoProvider implements Provider<TextInfo> {
+public class TimeInfoProvider implements Provider<TimeInfo> {
 
     @Override
-    public TextInfo get() {
-        return new TextInfo();
+    public TimeInfo get() {
+        return new TimeInfo();
     }
-    
 }

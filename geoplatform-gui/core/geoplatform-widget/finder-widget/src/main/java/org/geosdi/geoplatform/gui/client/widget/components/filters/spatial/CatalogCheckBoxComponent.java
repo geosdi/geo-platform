@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogSpatialEnableEvent
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
+import org.geosdi.geoplatform.gui.responce.BBox;
 
 /**
  *
@@ -78,11 +79,16 @@ public class CatalogCheckBoxComponent implements GPCatalogFinderComponent {
 
             @Override
             public void handleEvent(FieldEvent be) {
-                Boolean value = (Boolean) be.getValue();
-                areaInfo.setActive(value);
+                Boolean checked = (Boolean) be.getValue();
+                // TODO DEL if-then-else and move logic to CatalogSpatialContainer#(deactivate|activate)
+                if (checked) {
+                    areaInfo.setBBox(new BBox());
+                } else {
+                    areaInfo.setBBox(null);
+                }
+                areaInfo.setActive(checked);
+
                 fireCatalogSpatialEnableEvent();
-                System.out.println("AREA_INFO @@@@@@@@@@@@@@@@@@@ "
-                        + areaInfo);
             }
         });
         activateFilter.setOriginalValue(Boolean.FALSE);

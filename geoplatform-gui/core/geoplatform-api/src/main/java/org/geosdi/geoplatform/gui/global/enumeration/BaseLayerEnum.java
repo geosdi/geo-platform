@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -39,17 +39,9 @@ package org.geosdi.geoplatform.gui.global.enumeration;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public enum GlobalRegistryEnum {
+public enum BaseLayerEnum {
 
-    AUTH_KEY("gsauthkey"), EMITE_RESOURCE("emiteResource"),
-    BASE_LAYER("baseLayer");
-    private String value;
-
-    private GlobalRegistryEnum(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
+    BASE_LAYER, IMAGE, PROJECTION, OPEN_STREET_MAP, GOOGLE_NORMAL, GOOGLE_SATELLITE,
+    GOOGLE_HYBRID, BING_ROAD_LAYER, BING_HYBRID, BING_AERIAL, METACARTA,
+    GEOSDI_BASE, GEOSDI_NULL_BASE;
 }

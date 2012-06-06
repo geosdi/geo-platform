@@ -38,38 +38,37 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
 import org.geosdi.geoplatform.gui.client.GPXMPPClient;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
-import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.client.widget.security.GPAdvancedSecurityWidget;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginWidget extends GPSecurityWidget
-        implements ILoginManager {
+public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManager {
 
-    private final static int MAX_NUMBER_ATTEMPTS = 5;
+//    private final static int MAX_NUMBER_ATTEMPTS = 5;
     private LoginStatus status;
     private EventType eventOnSuccess;
-    private GwtEvent gwtEventOnSuccess = null;
-    private String userLogged;
-    private int reloginAttempts;
+//    private GwtEvent gwtEventOnSuccess = null;
+//    private String userLogged;
+//    private int reloginAttempts;
+    private String loginFailureMessage;
+    private SessionLoginWidget sessionLoginWidget;
 
     /**
      *
@@ -79,122 +78,158 @@ public class LoginWidget extends GPSecurityWidget
         super();
         this.eventOnSuccess = eventOnSuccess;
         this.generateLoginManager();
+        this.sessionLoginWidget = new SessionLoginWidget(eventOnSuccess);
     }
-
+    
     @Override
     public void addStatusComponent() {
         status = new LoginStatus();
         status.setAutoWidth(true);
-        getButtonBar().add(status);
-        getButtonBar().add(new FillToolItem());
+//        getButtonBar().add(status);
+//        getButtonBar().add(new FillToolItem());
     }
-
+    
     @Override
     public void reset() {
-        userName.reset();
-        password.reset();
-        userName.focus();
+        userName.setValue("");
+        password.setValue("");
+        userName.setFocus(Boolean.TRUE);
         status.clearStatus("");
     }
-
+    
     public void errorConnection() {
-        password.reset();
+        password.setValue("");
         validate();
-        userName.focus();
+        userName.setFocus(Boolean.TRUE);
         status.clearStatus("");
-        getButtonBar().enable();
+        login.setEnabled(Boolean.TRUE);
     }
-
+    
     @Override
     public void onSubmit() {
-        if (this.userLogged == null
-                || this.userLogged.equals(this.userName.getValue())) {
-            status.setBusy("please wait...");
-            getButtonBar().disable();
-            SecurityRemoteImpl.Util.getInstance().userLogin(
-                    this.userName.getValue(),
-                    this.password.getValue(),
-                    new AsyncCallback<IGPAccountDetail>() {
-
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            errorConnection();
-                            status.setStatus(
-                                    LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
-                                    LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
-                            GeoPlatformMessage.infoMessage("Login Error",
-                                    caught.getMessage());
-                            ++reloginAttempts;
-                        }
-
-                        @Override
-                        public void onSuccess(IGPAccountDetail result) {
-                            GPAccountGuiComponents.getInstance().setAccountDetail(result);
-                            status.setStatus(
-                                    LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
-                                    LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
-                            userScreen();
-                            userLogged = userName.getValue();
-                            reloginAttempts = 0;
-                            Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), result.getAuthkey());
-                            loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
-                        }
-                    });
-        } else if ((this.reloginAttempts + 1) < MAX_NUMBER_ATTEMPTS) {
-            ++this.reloginAttempts;
-            GeoPlatformMessage.infoMessage(
-                    "Number of attempts remained: " + (MAX_NUMBER_ATTEMPTS - this.reloginAttempts),
-                    "A different user from the previous one is trying to connect to the application.");
+//        if (this.userLogged == null
+//                || this.userLogged.equals(this.userName.getValue())) {
+        status.setBusy("please wait...");
+        login.setEnabled(Boolean.FALSE);
+        super.showProgressBar();
+        super.loginError.setText("");
+        SecurityRemoteImpl.Util.getInstance().userLogin(
+                this.userName.getValue(),
+                this.password.getValue(),
+                new AsyncCallback<IGPAccountDetail>() {
+                    
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        loginFailureMessage = caught.getMessage();
+                        errorConnection();
+                        status.setStatus(
+                                LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
+                                LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
+//                            GeoPlatformMessage.infoMessage("Login Error",
+//                                    caught.getMessage());
+//                            ++reloginAttempts;
+                    }
+                    
+                    @Override
+                    public void onSuccess(IGPAccountDetail result) {
+                        loginFailureMessage = "";
+                        GPAccountGuiComponents.getInstance().setAccountDetail(result);
+                        status.setStatus(
+                                LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
+                                LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
+//                            userScreen();
+//                            userLogged = userName.getValue();
+                        sessionLoginWidget.setUserLogger(userName.getValue());
+//                            reloginAttempts = 0;
+                        Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), result.getAuthkey());
+                        Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), BaseLayerEnum.GOOGLE_SATELLITE.toString());
+                        loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
+                    }
+                });
+//        } 
+//        else if ((this.reloginAttempts + 1) < MAX_NUMBER_ATTEMPTS) {
+//            ++this.reloginAttempts;
+//            GeoPlatformMessage.infoMessage(
+//                    "Number of attempts remained: " + (MAX_NUMBER_ATTEMPTS - this.reloginAttempts),
+//                    "A different user from the previous one is trying to connect to the application.");
+//        } else {
+//            this.resetUserSession();
+//        }
+    }
+    
+    @Override
+    public void loginDone() {
+        if (loginFailureMessage.equals("")) {
+            Timer t = new Timer() {
+                
+                @Override
+                public void run() {
+//                    if (eventOnSuccess != null) {
+                    Dispatcher.forwardEvent(eventOnSuccess);
+//                    } else {
+                    LayoutManager.getInstance().getViewport().unmask();
+//                        if (getGwtEventOnSuccess() != null) {
+//                            TimeoutHandlerManager.fireEvent(getGwtEventOnSuccess());
+//                        }
+//                    }
+                    //TODO verify!!
+//                    LoginWidget.super.setVisible(Boolean.FALSE);
+                    reset();
+                    LoginWidget.super.progressBar.hide();
+                }
+            };
+            t.schedule(2000);
         } else {
-            this.resetUserSession();
+            this.getElement().getStyle().clearDisplay();
+            LoginWidget.super.progressBar.hide();
+            super.loginError.setText("Nome utente o password errati");
         }
     }
-
+    
     private void loginXMPPClient(String username, String password, String hostXmppServer) {
         GPXMPPClient xMPPClient = new GPXMPPClient();
         xMPPClient.userXMPPLogin(username, password, hostXmppServer);
     }
 
-    public void resetUserSession() {
-        SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                //TODO: In case of fail... what is possible to do??
-            }
-
-            @Override
-            public void onSuccess(Object result) {
-                Dispatcher.forwardEvent(
-                        GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
-                GeoPlatformMessage.infoMessage("Application Logout",
-                        "A different user from the previous one is trying to connect to the application");
-                userLogged = null;
-                Window.Location.reload();
-            }
-        });
-    }
-
-    private void userScreen() {
-        Timer t = new Timer() {
-
-            @Override
-            public void run() {
-                if (eventOnSuccess != null) {
-                    Dispatcher.forwardEvent(eventOnSuccess);
-                } else {
-                    LayoutManager.getInstance().getViewport().unmask();
-                    if (getGwtEventOnSuccess() != null) {
-                        TimeoutHandlerManager.fireEvent(getGwtEventOnSuccess());
-                    }
-                }
-                hide();
-                reset();
-            }
-        };
-        t.schedule(100);
-    }
-
+//    public void resetUserSession() {
+//        SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
+//
+//            @Override
+//            public void onFailure(Throwable caught) {
+//                //TODO: In case of fail... what is possible to do??
+//            }
+//
+//            @Override
+//            public void onSuccess(Object result) {
+//                Dispatcher.forwardEvent(
+//                        GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
+//                GeoPlatformMessage.infoMessage("Application Logout",
+//                        "A different user from the previous one is trying to connect to the application");
+//                userLogged = null;
+//                Window.Location.reload();
+//            }
+//        });
+//    }
+//    private void userScreen() {
+//        Timer t = new Timer() {
+//
+//            @Override
+//            public void run() {
+//                if (eventOnSuccess != null) {
+//                    Dispatcher.forwardEvent(eventOnSuccess);
+//                } else {
+//                    LayoutManager.getInstance().getViewport().unmask();
+//                    if (getGwtEventOnSuccess() != null) {
+//                        TimeoutHandlerManager.fireEvent(getGwtEventOnSuccess());
+//                    }
+//                }
+//                //TODO verify!!
+//                LoginWidget.super.setVisible(Boolean.FALSE);
+//                reset();
+//            }
+//        };
+//        t.schedule(100);
+//    }
     /**
      * Set the correct Status Icon Style
      *
@@ -205,9 +240,9 @@ public class LoginWidget extends GPSecurityWidget
             EnumLoginStatus message) {
         this.status.setIconStyle(status.getValue());
         this.status.setText(message.getValue());
-        getButtonBar().enable();
+        this.login.setEnabled(Boolean.TRUE);
     }
-
+    
     @Override
     public void generateLoginManager() {
         UserLoginManager loginManager = new UserLoginManager(this);
@@ -217,21 +252,25 @@ public class LoginWidget extends GPSecurityWidget
      * @param gwtEventOnSuccess the gwtEventOnSuccess to set
      */
     public void setGwtEventOnSuccess(GwtEvent gwtEventOnSuccess) {
-        this.gwtEventOnSuccess = gwtEventOnSuccess;
-        this.eventOnSuccess = null;
+        this.sessionLoginWidget.setGwtEventOnSuccess(gwtEventOnSuccess);
+//        this.gwtEventOnSuccess = gwtEventOnSuccess;
+//        this.eventOnSuccess = null;
     }
-
-    @Override
+    
     public void show() {
-        getButtonBar().enable();
+        this.login.setEnabled(Boolean.TRUE);
         validate();
-        super.show();
+        super.setVisible(Boolean.TRUE);
+        RootPanel.get().add(this);
     }
-
-    /**
-     * @return the gwtEventOnSuccess
-     */
-    public GwtEvent getGwtEventOnSuccess() {
-        return gwtEventOnSuccess;
+    
+    public void showSessionExpiredLogin() {
+        this.sessionLoginWidget.show();
     }
+//    /**
+//     * @return the gwtEventOnSuccess
+//     */
+//    public GwtEvent getGwtEventOnSuccess() {
+//        return gwtEventOnSuccess;
+//    }
 }

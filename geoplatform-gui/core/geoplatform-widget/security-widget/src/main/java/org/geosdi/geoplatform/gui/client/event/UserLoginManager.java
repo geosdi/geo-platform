@@ -65,6 +65,6 @@ public class UserLoginManager implements GPLoginHandler {
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
         this.loginWidget.setGwtEventOnSuccess(event);
 
-        this.loginWidget.show();
+        this.loginWidget.showSessionExpiredLogin();
     }
 }

@@ -92,16 +92,19 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         maxLatField.setReadOnly(true);
 //        maxLatField.setValue("47.0946");
         maxLatField.setFireChangeEventOnSetValue(true);
-        maxLatField.addListener(Events.Change, new Listener<FieldEvent>() {
+        maxLatField.addListener(Events.Change,
+                new Listener<FieldEvent>() {
 
-            @Override
-            public void handleEvent(FieldEvent fe) {
-                BBox bBox = areaInfo.getBBox();
-                double value = Double.valueOf(fe.getValue().toString()).doubleValue();
+                    @Override
+                    public void handleEvent(FieldEvent fe) {
+                        BBox bBox = areaInfo.getBBox();
+                        double value = (fe.getValue() != null)
+                                ? Double.valueOf(fe.getValue().toString()).doubleValue()
+                                : 0;
 
-                bBox.setMaxY(value);
-            }
-        });
+                        bBox.setMaxY(value);
+                    }
+                });
 
         table.getCellFormatter().setHorizontalAlignment(1, 2,
                 HasHorizontalAlignment.ALIGN_CENTER);
@@ -121,7 +124,7 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
 
-        Label minLatLabel = new Label("Min Lan");
+        Label minLatLabel = new Label("Min Lat");
         minLatLabel.setStyleName("catalogBBOX-Label");
 
         table.setWidget(1, 1, minLatLabel);
@@ -134,16 +137,19 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         minLatField.setReadOnly(true);
 //        minLatField.setValue("36.6492");
         minLatField.setFireChangeEventOnSetValue(true);
-        minLatField.addListener(Events.Change, new Listener<FieldEvent>() {
+        minLatField.addListener(Events.Change,
+                new Listener<FieldEvent>() {
 
-            @Override
-            public void handleEvent(FieldEvent fe) {
-                BBox bBox = areaInfo.getBBox();
-                double value = Double.valueOf(fe.getValue().toString()).doubleValue();
+                    @Override
+                    public void handleEvent(FieldEvent fe) {
+                        BBox bBox = areaInfo.getBBox();
+                        double value = (fe.getValue() != null)
+                                ? Double.valueOf(fe.getValue().toString()).doubleValue()
+                                : 0;
 
-                bBox.setMinY(value);
-            }
-        });
+                        bBox.setMinY(value);
+                    }
+                });
 
         table.setWidget(1, 2, minLatField);
 
@@ -176,16 +182,19 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         minLonField.setReadOnly(true);
 //        minLonField.setValue("6.624");
         minLonField.setFireChangeEventOnSetValue(true);
-        minLonField.addListener(Events.Change, new Listener<FieldEvent>() {
+        minLonField.addListener(Events.Change,
+                new Listener<FieldEvent>() {
 
-            @Override
-            public void handleEvent(FieldEvent fe) {
-                BBox bBox = areaInfo.getBBox();
-                double value = Double.valueOf(fe.getValue().toString()).doubleValue();
+                    @Override
+                    public void handleEvent(FieldEvent fe) {
+                        BBox bBox = areaInfo.getBBox();
+                        double value = (fe.getValue() != null)
+                                ? Double.valueOf(fe.getValue().toString()).doubleValue()
+                                : 0;
 
-                bBox.setMinX(value);
-            }
-        });
+                        bBox.setMinX(value);
+                    }
+                });
 
         table.getCellFormatter().setHorizontalAlignment(1, 2,
                 HasHorizontalAlignment.ALIGN_CENTER);
@@ -222,16 +231,19 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         maxLonField.setReadOnly(true);
 //        maxLonField.setValue("18.5144");
         maxLonField.setFireChangeEventOnSetValue(true);
-        maxLonField.addListener(Events.Change, new Listener<FieldEvent>() {
+        maxLonField.addListener(Events.Change,
+                new Listener<FieldEvent>() {
 
-            @Override
-            public void handleEvent(FieldEvent fe) {
-                BBox bBox = areaInfo.getBBox();
-                double value = Double.valueOf(fe.getValue().toString()).doubleValue();
+                    @Override
+                    public void handleEvent(FieldEvent fe) {
+                        BBox bBox = areaInfo.getBBox();
+                        double value = (fe.getValue() != null)
+                                ? Double.valueOf(fe.getValue().toString()).doubleValue()
+                                : 0;
 
-                bBox.setMaxY(value);
-            }
-        });
+                        bBox.setMaxY(value);
+                    }
+                });
 
         table.getCellFormatter().setHorizontalAlignment(1, 5,
                 HasHorizontalAlignment.ALIGN_CENTER);
@@ -249,9 +261,13 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
 
     @Override
     public void onBBoxChange(CatalogBBoxChangeEvent event) {
-        this.minLatField.setValue(event.getLowerLeftX().toString());
-        this.minLonField.setValue(event.getLowerLeftY().toString());
-        this.maxLatField.setValue(event.getUpperRightX().toString());
-        this.maxLonField.setValue(event.getUpperRightY().toString());
+        this.minLatField.setValue((event.getLowerLeftX() != null)
+                ? event.getLowerLeftX().toString() : null);
+        this.minLonField.setValue((event.getLowerLeftY() != null)
+                ? event.getLowerLeftY().toString() : null);
+        this.maxLatField.setValue((event.getUpperRightX() != null)
+                ? event.getUpperRightX().toString() : null);
+        this.maxLonField.setValue((event.getUpperRightY() != null)
+                ? event.getUpperRightY().toString() : null);
     }
 }

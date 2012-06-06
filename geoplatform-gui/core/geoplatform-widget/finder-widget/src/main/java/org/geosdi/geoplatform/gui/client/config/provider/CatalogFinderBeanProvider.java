@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.responce.TimeInfo;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogFinderBeanProvider implements Provider<CatalogFinderBean> {
 
@@ -54,7 +54,8 @@ public class CatalogFinderBeanProvider implements Provider<CatalogFinderBean> {
     private TimeInfo timeInfo;
 
     @Inject
-    public CatalogFinderBeanProvider(TextInfo textInfo, AreaInfo areaInfo, TimeInfo timeInfo) {
+    public CatalogFinderBeanProvider(TextInfo textInfo, AreaInfo areaInfo,
+            TimeInfo timeInfo) {
         this.textInfo = textInfo;
         this.areaInfo = areaInfo;
         this.timeInfo = timeInfo;

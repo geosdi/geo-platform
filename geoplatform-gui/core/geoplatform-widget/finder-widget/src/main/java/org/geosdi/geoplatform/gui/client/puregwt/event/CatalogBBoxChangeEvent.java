@@ -66,10 +66,10 @@ public class CatalogBBoxChangeEvent extends GwtEvent<CatalogBBoxHandler> {
      * @param extent
      */
     public void bind(Bounds extent) {
-        this.lowerLeftX = extent.getLowerLeftX();
-        this.lowerLeftY = extent.getLowerLeftY();
-        this.upperRightX = extent.getUpperRightX();
-        this.upperRightY = extent.getUpperRightY();
+        this.lowerLeftX = (extent != null) ? extent.getLowerLeftX() : null;
+        this.lowerLeftY = (extent != null) ? extent.getLowerLeftY() : null;
+        this.upperRightX = (extent != null) ? extent.getUpperRightX() : null;
+        this.upperRightY = (extent != null) ? extent.getUpperRightY() : null;
     }
 
     /**

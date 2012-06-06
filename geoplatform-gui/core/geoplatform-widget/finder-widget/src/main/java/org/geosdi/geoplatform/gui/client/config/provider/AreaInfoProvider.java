@@ -37,16 +37,22 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.inject.Provider;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
+import org.geosdi.geoplatform.gui.responce.BBox;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class AreaInfoProvider implements Provider<AreaInfo> {
-
+    
     @Override
     public AreaInfo get() {
-        return new AreaInfo();
+        return new AreaInfo() {
+            
+            {
+                super.setBBox(new BBox());
+            }
+        };
     }
 }

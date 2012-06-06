@@ -80,13 +80,14 @@ public class CatalogMapMoveListenerProvider implements
         this.bus.fireEvent(event);
     }
 
-    protected static class CatalogMapExtentReprojector {
+    public static class CatalogMapExtentReprojector {
 
         private static final Projection dest = new Projection(
                 GPCoordinateReferenceSystem.WGS_84.getCode());
 
         public static Bounds reprojects(Projection source, Bounds input) {
-            return input.transform(source, dest);
+            return (source.getProjectionCode().equals(dest.getProjectionCode()))
+                    ? input : input.transform(source, dest);
         }
     }
 }

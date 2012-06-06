@@ -80,15 +80,11 @@ public class CatalogCheckBoxComponent implements GPCatalogFinderComponent {
             @Override
             public void handleEvent(FieldEvent be) {
                 Boolean checked = (Boolean) be.getValue();
-                // TODO DEL if-then-else and move logic to CatalogSpatialContainer#(deactivate|activate)
-                if (checked) {
-                    areaInfo.setBBox(new BBox());
-                } else {
-                    areaInfo.setBBox(null);
-                }
-                areaInfo.setActive(checked);
 
+                areaInfo.setActive(checked);
                 fireCatalogSpatialEnableEvent();
+
+                System.out.println("ECCOLO @@@@@@@@@@@@@ " + areaInfo);
             }
         });
         activateFilter.setOriginalValue(Boolean.FALSE);

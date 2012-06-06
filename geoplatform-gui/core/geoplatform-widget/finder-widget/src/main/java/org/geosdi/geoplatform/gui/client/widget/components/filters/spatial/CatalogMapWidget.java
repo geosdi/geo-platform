@@ -37,11 +37,15 @@ package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
+import org.geosdi.geoplatform.gui.client.config.provider.CatalogMapMoveListenerProvider.CatalogMapExtentReprojector;
+import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener;
 
 /**
@@ -57,6 +61,7 @@ public class CatalogMapWidget extends GeoPlatformContentPanel {
     private LonLat center;
     private MapMoveEndListener listener;
     private GPEventBus bus;
+    private CatalogBBoxChangeEvent event = new CatalogBBoxChangeEvent();
 
     @Inject
     public CatalogMapWidget(MapWidget theMapWidget, LonLat theCenter,
@@ -99,6 +104,9 @@ public class CatalogMapWidget extends GeoPlatformContentPanel {
      */
     protected void addMapMoveListener() {
         this.mapWidget.getMap().addMapMoveEndListener(this.listener);
+        this.fireCatalogBBoxChangeEvent(CatalogMapExtentReprojector.reprojects(
+                new Projection(this.mapWidget.getMap().getProjection()),
+                this.mapWidget.getMap().getExtent()));
     }
 
     /**
@@ -106,5 +114,11 @@ public class CatalogMapWidget extends GeoPlatformContentPanel {
      */
     protected void removeMapMoveListener() {
         this.mapWidget.getMap().removeListener(this.listener);
+        this.fireCatalogBBoxChangeEvent(null);
+    }
+
+    protected void fireCatalogBBoxChangeEvent(Bounds extent) {
+        this.event.bind(extent);
+        this.bus.fireEvent(event);
     }
 }

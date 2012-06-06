@@ -45,7 +45,6 @@ import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -59,8 +58,7 @@ import org.geosdi.geoplatform.gui.client.widget.progressbar.ProgressBar;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  */
-public abstract class GPAdvancedSecurityWidget extends Composite implements
-        HasText {
+public abstract class GPAdvancedSecurityWidget extends Composite {
 
     private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
 
@@ -95,40 +93,42 @@ public abstract class GPAdvancedSecurityWidget extends Composite implements
 //        userName.setReadOnly(true);
         userName.setFocus(true);
         addStatusComponent();
-        this.addKeyListener();
+        this.addKeyHandler();
     }
 
-    private void addKeyListener() {
+    private void addKeyHandler() {
         userName.addKeyUpHandler(new KeyUpHandler() {
 
             @Override
             public void onKeyUp(KeyUpEvent event) {
-                validate();
+                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER && login.isEnabled()) {
+                    onSubmit();
+                }
+
             }
         });
         userName.addKeyPressHandler(new KeyPressHandler() {
 
             @Override
             public void onKeyPress(KeyPressEvent event) {
-                if (event.getUnicodeCharCode() == KeyCodes.KEY_ENTER && login.isEnabled()) {
-                    onSubmit();
-                }
+                validate();
             }
         });
         password.addKeyUpHandler(new KeyUpHandler() {
 
             @Override
             public void onKeyUp(KeyUpEvent event) {
-                validate();
+                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER && login.isEnabled()) {
+                    onSubmit();
+                }
+
             }
         });
         password.addKeyPressHandler(new KeyPressHandler() {
 
             @Override
             public void onKeyPress(KeyPressEvent event) {
-                if (event.getUnicodeCharCode() == KeyCodes.KEY_ENTER && login.isEnabled()) {
-                    onSubmit();
-                }
+                validate();
             }
         });
     }
@@ -158,21 +158,12 @@ public abstract class GPAdvancedSecurityWidget extends Composite implements
 
     }
 
-    @Override
-    public String getText() {
-        return null;
-    }
-
     protected boolean hasValue(TextBox field) {
         return field.getValue() != null && field.getValue().length() > 0;
     }
 
     protected void validate() {
         login.setEnabled(hasValue(userName) && hasValue(password));
-    }
-
-    @Override
-    public void setText(String text) {
     }
 
     protected void showProgressBar() {

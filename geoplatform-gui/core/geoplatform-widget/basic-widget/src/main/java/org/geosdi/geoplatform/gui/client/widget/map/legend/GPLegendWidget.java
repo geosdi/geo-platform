@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.legend;
 
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Html;
 import com.google.gwt.user.client.ui.Image;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
 
 /**

@@ -1,0 +1,21 @@
+<ui:UiBinder 
+    xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  
+  <ui:style src='ProgressBar.css'/>
+
+  <g:HTMLPanel addStyleNames="{style.barContent}">
+    <g:FlowPanel addStyleNames='{style.outer}'>
+      <g:FlowPanel ui:field='runBar' styleName='{style.runBar}'>
+        <g:FlowPanel styleName='{style.runBarFiller}'/>
+      </g:FlowPanel>
+      <g:FlowPanel styleName='{style.loadBarHolder}'>
+        <g:FlowPanel ui:field='loadBar' styleName='{style.loadBar}'>
+          <g:FlowPanel styleName='{style.loadBarFiller}'/>
+        </g:FlowPanel>
+      </g:FlowPanel>
+      <g:Label ui:field='label' styleName='{style.label}'/>
+    </g:FlowPanel>
+  </g:HTMLPanel>
+
+</ui:UiBinder>

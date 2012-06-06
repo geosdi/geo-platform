@@ -36,40 +36,176 @@
 package org.geosdi.geoplatform.gui.client.widget.security;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SubmitButton;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import org.geosdi.geoplatform.gui.client.img.BasicWidgetImage;
+import org.geosdi.geoplatform.gui.client.widget.progressbar.ProgressBar;
 
 /**
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  */
-public class GPAdvancedSecurityWidget extends VerticalPanel {
+public abstract class GPAdvancedSecurityWidget extends Composite implements
+        HasText {
 
     private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
+
     //
     @UiTemplate("GPAdvancedSecurityWidget.ui.xml")
     interface LoginUiBinder extends UiBinder<Widget, GPAdvancedSecurityWidget> {
     }
+    @UiField(provided = true)
+    final BasicWidgetImage resources = BasicWidgetImage.INSTANCE;
     //
     @UiField
-    TextBox username;
+    protected TextBox userName;
     //
     @UiField
-    PasswordTextBox password;
+    protected PasswordTextBox password;
     //
     @UiField
-    Button login;
+    protected Label loginError;
     //
     @UiField
-    Button cancel;
+    protected SubmitButton login;
+    protected ProgressBar progressBar = new ProgressBar();
+    private double progres = 0;
+    private Timer timer;
 
+    //
     public GPAdvancedSecurityWidget() {
-        add(uiBinder.createAndBindUi(this));
+        initWidget(uiBinder.createAndBindUi(this));
+        login.addStyleName("g-button g-button-submit");
+        login.getElement().setId("signIn");
+//        userName.setValue("Nome Utente");
+//        userName.setReadOnly(true);
+        userName.setFocus(true);
+        addStatusComponent();
+        this.addKeyListener();
     }
+
+    private void addKeyListener() {
+        userName.addKeyUpHandler(new KeyUpHandler() {
+
+            @Override
+            public void onKeyUp(KeyUpEvent event) {
+                validate();
+            }
+        });
+        userName.addKeyPressHandler(new KeyPressHandler() {
+
+            @Override
+            public void onKeyPress(KeyPressEvent event) {
+                if (event.getUnicodeCharCode() == KeyCodes.KEY_ENTER && login.isEnabled()) {
+                    onSubmit();
+                }
+            }
+        });
+        password.addKeyUpHandler(new KeyUpHandler() {
+
+            @Override
+            public void onKeyUp(KeyUpEvent event) {
+                validate();
+            }
+        });
+        password.addKeyPressHandler(new KeyPressHandler() {
+
+            @Override
+            public void onKeyPress(KeyPressEvent event) {
+                if (event.getUnicodeCharCode() == KeyCodes.KEY_ENTER && login.isEnabled()) {
+                    onSubmit();
+                }
+            }
+        });
+    }
+
+//    @UiHandler("userName")
+//    public void onFocus(ClickEvent sender) {
+//        userName.setReadOnly(false);
+//        userName.setText("");
+//    }
+//
+//    @UiHandler("userName")
+//    public void onLostFocus(BlurEvent event) {
+//        if (userName.getValue().equals("Nome Utente")
+//                || userName.getValue().isEmpty()) {
+//            userName.setValue("Nome Utente");
+//            userName.setReadOnly(true);
+//        }
+//    }
+    @UiHandler("login")
+    void handleClick(ClickEvent e) {
+        if (userName.getValue().equals("Nome Utente")
+                || userName.getValue().isEmpty()) {
+            Window.alert("Autenticazione Richiesta !");
+        } else {
+            onSubmit();
+        }
+
+    }
+
+    @Override
+    public String getText() {
+        return null;
+    }
+
+    protected boolean hasValue(TextBox field) {
+        return field.getValue() != null && field.getValue().length() > 0;
+    }
+
+    protected void validate() {
+        login.setEnabled(hasValue(userName) && hasValue(password));
+    }
+
+    @Override
+    public void setText(String text) {
+    }
+
+    protected void showProgressBar() {
+        this.getElement().getStyle().setDisplay(Display.NONE);
+
+        progressBar.setRunProgress(0.0, "");
+        progressBar.setLoadProgress(1.0);
+
+        timer = new Timer() {
+
+            @Override
+            public void run() {
+                progres = progres + 0.1;
+                progressBar.setRunProgress(progres, userName.getValue());
+                if (progres > 1.0) {
+                    progressBar.setRunProgress(1.0, "Done");
+                    timer.cancel();
+//                    progressBar.getElement().getStyle().setDisplay(Display.NONE);
+                    loginDone();
+                }
+            }
+        };
+        timer.scheduleRepeating(300);
+        progressBar.setWidth("40%");
+        progressBar.setHeight("10px");
+        RootPanel.get().add(progressBar);
+    }
+
+    public abstract void onSubmit();
+
+    public abstract void addStatusComponent();
+
+    public abstract void reset();
+
+    public abstract void loginDone();
 }

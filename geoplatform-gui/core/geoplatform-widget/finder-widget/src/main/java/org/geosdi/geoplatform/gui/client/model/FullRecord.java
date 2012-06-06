@@ -163,19 +163,19 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
         }
 
         public String getTitle() {
-            return uriWMS.getDescription();
+            return uriWMS == null ? "" : uriWMS.getDescription();
         }
 
         public String getName() {
-            return uriWMS.getName();
+            return uriWMS == null ? "" : uriWMS.getName();
         }
 
         public String getLabel() {
-            return this.retrieveLabel(uriWMS.getName());
+            return uriWMS == null ? "" : this.retrieveLabel(uriWMS.getName());
         }
 
         public String getDataSource() {
-            return this.retrieveDataSource(uriWMS.getServiceURL());
+            return uriWMS == null ? "" : this.retrieveDataSource(uriWMS.getServiceURL());
         }
 
         private String retrieveLabel(String name) {

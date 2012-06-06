@@ -18,19 +18,19 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @mail francesco.izzi@geosdi.org
  */
 public class ZoomToLayerExtentAction extends MenuAction {
-    
+
     private TreePanel treePanel;
     private ZoomToExtendsEvent zoomToExtendsEvent = new ZoomToExtendsEvent();
-    
+
     public ZoomToLayerExtentAction(TreePanel treePanel) {
         super("ZoomToLayerExtent");
         this.treePanel = treePanel;
     }
-    
+
     @Override
     public void componentSelected(MenuEvent ce) {
         GPBeanTreeModel item = (GPBeanTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
-        
+
         if (item instanceof RasterTreeNode) {
             zoomToExtendsEvent.setBbox(((RasterTreeNode) item).getBbox());
             zoomToExtendsEvent.setCrs(((RasterTreeNode) item).getCrs());

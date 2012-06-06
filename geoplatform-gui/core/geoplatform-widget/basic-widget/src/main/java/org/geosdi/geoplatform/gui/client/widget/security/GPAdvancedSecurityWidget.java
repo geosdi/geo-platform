@@ -43,7 +43,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -89,10 +88,9 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
         initWidget(uiBinder.createAndBindUi(this));
         login.addStyleName("g-button g-button-submit");
         login.getElement().setId("signIn");
-//        userName.setValue("Nome Utente");
-//        userName.setReadOnly(true);
+
         userName.setFocus(true);
-        addStatusComponent();
+        this.addStatusComponent();
         this.addKeyHandler();
     }
 
@@ -133,29 +131,9 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
         });
     }
 
-//    @UiHandler("userName")
-//    public void onFocus(ClickEvent sender) {
-//        userName.setReadOnly(false);
-//        userName.setText("");
-//    }
-//
-//    @UiHandler("userName")
-//    public void onLostFocus(BlurEvent event) {
-//        if (userName.getValue().equals("Nome Utente")
-//                || userName.getValue().isEmpty()) {
-//            userName.setValue("Nome Utente");
-//            userName.setReadOnly(true);
-//        }
-//    }
     @UiHandler("login")
     void handleClick(ClickEvent e) {
-        if (userName.getValue().equals("Nome Utente")
-                || userName.getValue().isEmpty()) {
-            Window.alert("Autenticazione Richiesta !");
-        } else {
-            onSubmit();
-        }
-
+        onSubmit();
     }
 
     protected boolean hasValue(TextBox field) {
@@ -194,7 +172,7 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
 
     public abstract void onSubmit();
 
-    public abstract void addStatusComponent();
+    protected abstract void addStatusComponent();
 
     public abstract void reset();
 

@@ -82,7 +82,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
     }
     
     @Override
-    public void addStatusComponent() {
+    protected void addStatusComponent() {
         status = new LoginStatus();
         status.setAutoWidth(true);
 //        getButtonBar().add(status);

@@ -43,13 +43,12 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository;
-import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
@@ -83,8 +82,7 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
         StringWriter writer = new StringWriter();
         marshaller.marshal(request, writer);
 
-        return new StringEntity(writer.toString(),
-                GeoPlatformHTTP.CONTENT_TYPE_XML, HTTP.UTF_8);
+        return new StringEntity(writer.toString(), ContentType.APPLICATION_XML);
     }
 
     protected abstract Object createRequest() throws IllegalParameterFault;
@@ -161,7 +159,7 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
                 throw new ServerInternalFault("CSW Catalog Server Error: Connection "
                         + "problem");
             }
-            
+
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
                     ex.getMessage());

@@ -179,13 +179,13 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             }
             
         } catch (IllegalParameterFault ex) {
-            logger.error("\n*** " + ex.getMessage());
+            logger.error("\n*** IllegalParameterFault ***\n{}", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         } catch (ResourceNotFoundFault ex) {
-            logger.error("\n*** " + ex.getMessage());
+            logger.error("\n*** ResourceNotFoundFault ***\n{}", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         } catch (ServerInternalFault ex) {
-            logger.error("\n*** " + ex.getMessage());
+            logger.error("\n*** ServerInternalFault ***\n{}", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
         
@@ -199,6 +199,9 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         
+        logger.debug("\n--------------------------\n{}\n--------------------------\n",
+                catalogFinder);
+
         int recordsCount;
         ArrayList<FullRecord> searchRecords;
         try {
@@ -219,13 +222,13 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             }
             
         } catch (IllegalParameterFault ex) {
-            logger.error("\n*** " + ex.getMessage());
+            logger.error("\n*** IllegalParameterFault ***\n{}", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         } catch (ResourceNotFoundFault ex) {
-            logger.error("\n*** " + ex.getMessage());
+            logger.error("\n*** ResourceNotFoundFault ***\n{}", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         } catch (ServerInternalFault ex) {
-            logger.error("\n*** " + ex.getMessage());
+            logger.error("\n*** ServerInternalFault ***\n{}", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
         

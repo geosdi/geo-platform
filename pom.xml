@@ -631,10 +631,25 @@
                 <version>${commons-codec-version}</version>
 				<!-- <scope>provided</scope> -->
             </dependency>
+            
+            <!-- =========================================================== -->
+            <!-- APACHE HttpComponents -->
+            <!-- =========================================================== -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpcomponents-version}</version>
+            </dependency>
+        
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpcomponents-version}</version>
+            </dependency>
 
-			<!-- =========================================================== -->
-			<!-- APACHE CXF -->
-			<!-- =========================================================== -->
+            <!-- =========================================================== -->
+            <!-- APACHE CXF -->
+            <!-- =========================================================== -->
             <dependency>
                 <groupId>javax.xml.ws</groupId>
                 <artifactId>jaxws-api</artifactId>
@@ -1439,6 +1454,8 @@
         <commons-beanutils-version>1.7.0</commons-beanutils-version>
         <commons-dbcp-version>1.2.2</commons-dbcp-version>
         <commons-codec-version>1.4</commons-codec-version>
+        
+        <httpcomponents-version>4.2</httpcomponents-version>
 
         <jaxb-api-version>2.2.6</jaxb-api-version>
         <jaxb-impl-version>2.2.5</jaxb-impl-version>

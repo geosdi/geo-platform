@@ -21,23 +21,6 @@
         <module>geoplatform-csw-connector</module>
         <module>geoplatform-wps-connector</module>
     </modules>
-    
-    <dependencyManagement>
-        <dependencies>
-             <!-- Apache HttpComponents -->
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>4.2</version>
-            </dependency>
-        
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpcore</artifactId>
-                <version>4.2</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
     <!-- logging dependencies, delegate all to slf4j and use logback -->

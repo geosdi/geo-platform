@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogSecurityConnection {
 
@@ -112,11 +112,13 @@ public class CatalogSecurityConnection {
         public final Logger logger = LoggerFactory.getLogger(this.getClass());
 
         @Override
-        public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+        public void checkClientTrusted(X509Certificate[] arg0, String arg1)
+                throws CertificateException {
         }
 
         @Override
-        public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+        public void checkServerTrusted(X509Certificate[] arg0, String arg1)
+                throws CertificateException {
         }
 
         @Override

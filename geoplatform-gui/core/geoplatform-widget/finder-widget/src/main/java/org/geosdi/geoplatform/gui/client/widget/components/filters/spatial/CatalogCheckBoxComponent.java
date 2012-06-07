@@ -83,8 +83,6 @@ public class CatalogCheckBoxComponent implements GPCatalogFinderComponent {
 
                 areaInfo.setActive(checked);
                 fireCatalogSpatialEnableEvent();
-
-                System.out.println("ECCOLO @@@@@@@@@@@@@ " + areaInfo);
             }
         });
         activateFilter.setOriginalValue(Boolean.FALSE);

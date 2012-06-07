@@ -45,14 +45,12 @@ import org.geosdi.geoplatform.gui.responce.BBox;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class AreaInfoProvider implements Provider<AreaInfo> {
-    
+
     @Override
     public AreaInfo get() {
-        return new AreaInfo() {
-            
-            {
-                super.setBBox(new BBox());
-            }
-        };
+        AreaInfo areaInfo = new AreaInfo();
+        areaInfo.setBBox(new BBox());
+
+        return areaInfo;
     }
 }

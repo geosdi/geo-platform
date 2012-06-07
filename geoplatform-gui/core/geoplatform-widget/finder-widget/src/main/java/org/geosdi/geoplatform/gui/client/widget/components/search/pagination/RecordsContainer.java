@@ -52,6 +52,7 @@ import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
@@ -60,7 +61,6 @@ import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridRecordHandler;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 
 /**
  *
@@ -142,7 +142,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<FullRecord>> callback) {
-                GPCatalogFinderRemoteImpl.Util.getInstance().searchFullRecords(
+                GPCatalogFinderRemote.Util.getInstance().searchFullRecords(
                         (PagingLoadConfig) loadConfig, catalogFinder, callback);
             }
         };
@@ -176,7 +176,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
     @Override
     protected void onLoaderLoadException(LoadEvent le) {
-        System.out.println("\n*** " + le.exception.getMessage()); // TODO logger
+        System.out.println("\n*** " + le.exception); // TODO logger
         String errorMessage = "The services are down, report to the administator.";
         GeoPlatformMessage.errorMessage("Connection error", errorMessage);
         bus.fireEvent(new CatalogStatusBarEvent(errorMessage,

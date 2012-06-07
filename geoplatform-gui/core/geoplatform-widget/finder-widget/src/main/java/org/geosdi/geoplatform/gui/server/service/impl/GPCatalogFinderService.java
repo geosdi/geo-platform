@@ -73,11 +73,11 @@ import org.springframework.stereotype.Service;
  */
 @Service("gpCatalogFinderService")
 public class GPCatalogFinderService implements IGPCatalogFinderService {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformCSWService geoPlatformCSWClient;
-
+    
     @Override
     public ArrayList<GPCSWServerBeanModel> getAllCSWServers(
             HttpServletRequest httpServletRequest) {
@@ -88,19 +88,19 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             GPCSWServerBeanModel server = this.convertServerDTO(serverDTO);
             servers.add(server);
         }
-
+        
         return servers;
     }
-
+    
     @Override
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
             PagingLoadConfig config, String searchText, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-
+        
         SearchRequest srq = new SearchRequest(searchText);
-
+        
         int serversCount = geoPlatformCSWClient.getCSWServersCount(srq);
-
+        
         ArrayList<GPCSWServerBeanModel> searchServers;
         if (serversCount == 0) {
             logger.info("\n*** No catalog found ***");
@@ -108,22 +108,24 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         } else {
             int start = config.getOffset();
             int page = start == 0 ? start : start / config.getLimit();
-
+            
             PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
                     config.getLimit(), page);
-
-            List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(psr);
-
-            searchServers = new ArrayList<GPCSWServerBeanModel>(serverList.size());
+            
+            List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(
+                    psr);
+            
+            searchServers = new ArrayList<GPCSWServerBeanModel>(
+                    serverList.size());
             for (ServerCSWDTO serverDTO : serverList) {
                 searchServers.add(this.convertServerDTO(serverDTO));
             }
         }
-
+        
         return new BasePagingLoadResult<GPCSWServerBeanModel>(searchServers,
                 config.getOffset(), serversCount);
     }
-
+    
     @Override
     public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
             HttpServletRequest httpServletRequest)
@@ -137,7 +139,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
         return this.convertServerDTO(serverCSW);
     }
-
+    
     @Override
     public boolean deleteServerCSW(Long serverID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
@@ -150,32 +152,32 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
         return true;
     }
-
+    
     @Override
     public PagingLoadResult<SummaryRecord> searchSummaryRecords(
             PagingLoadConfig config, CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-
+        
         int recordsCount;
         ArrayList<SummaryRecord> searchRecords;
         try {
             recordsCount = geoPlatformCSWClient.getRecordsCount(catalogFinder);
-
+            
             if (recordsCount == 0) {
                 logger.info("\n*** No Summary Record found ***");
                 searchRecords = new ArrayList<SummaryRecord>(0);
-
+                
             } else {
                 List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(
                         config.getLimit(), config.getOffset() + 1, catalogFinder);
-
+                
                 searchRecords = new ArrayList<SummaryRecord>(recordList.size());
                 for (SummaryRecordDTO recordDTO : recordList) {
                     searchRecords.add(this.convertSummaryRecordDTO(recordDTO));
                 }
             }
-
+            
         } catch (IllegalParameterFault ex) {
             logger.error("\n*** " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
@@ -186,36 +188,36 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             logger.error("\n*** " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
-
+        
         return new BasePagingLoadResult<SummaryRecord>(searchRecords,
                 config.getOffset(), recordsCount);
     }
-
+    
     @Override
     public PagingLoadResult<FullRecord> searchFullRecords(
             PagingLoadConfig config, CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-
+        
         int recordsCount;
         ArrayList<FullRecord> searchRecords;
         try {
             recordsCount = geoPlatformCSWClient.getRecordsCount(catalogFinder);
-
+            
             if (recordsCount == 0) {
                 logger.info("\n*** No Full Record found ***");
                 searchRecords = new ArrayList<FullRecord>(0);
-
+                
             } else {
                 List<FullRecordDTO> recordList = geoPlatformCSWClient.searchFullRecords(
                         config.getLimit(), config.getOffset() + 1, catalogFinder);
-
+                
                 searchRecords = new ArrayList<FullRecord>(recordList.size());
                 for (FullRecordDTO recordDTO : recordList) {
                     searchRecords.add(this.convertFullRecordDTO(recordDTO));
                 }
             }
-
+            
         } catch (IllegalParameterFault ex) {
             logger.error("\n*** " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
@@ -226,7 +228,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             logger.error("\n*** " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
-
+        
         return new BasePagingLoadResult<FullRecord>(searchRecords,
                 config.getOffset(), recordsCount);
     }
@@ -239,49 +241,49 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             @Qualifier("geoPlatformCSWClient") GeoPlatformCSWService geoPlatformCSWClient) {
         this.geoPlatformCSWClient = geoPlatformCSWClient;
     }
-
+    
     private GPCSWServerBeanModel convertServerDTO(ServerCSWDTO serverDTO) {
         GPCSWServerBeanModel server = new GPCSWServerBeanModel();
         server.setId(serverDTO.getId());
         server.setUrlServer(serverDTO.getServerUrl());
         server.setTitle(serverDTO.getTitle());
         server.setAlias(serverDTO.getAlias());
-
+        
         return server;
     }
-
+    
     private <R extends AbstractRecord> R convertRecordDTO(R record, AbstractRecordDTO recordDTO) {
         record.setIdentifier(recordDTO.getIdentifier());
         record.setTitle(recordDTO.getTitle());
         record.setType(recordDTO.getType());
         record.setAbstractText(recordDTO.getAbstractText());
         record.setSubjects(recordDTO.getSubjects());
-
+        
         return record;
     }
-
+    
     private SummaryRecord convertSummaryRecordDTO(SummaryRecordDTO summaryRecordDTO) {
         return this.convertRecordDTO(new SummaryRecord(), summaryRecordDTO);
     }
-
+    
     private FullRecord convertFullRecordDTO(FullRecordDTO fullRecordDTO) {
         FullRecord fullRecord = this.convertRecordDTO(new FullRecord(),
                 fullRecordDTO);
-
+        
         fullRecord.setBBox(this.convertBBoxDTO(fullRecordDTO.getBBox()));
         fullRecord.setCrs(fullRecordDTO.getCrs());
         fullRecord.setUriMap(fullRecordDTO.getUriMap());
-
+        
         return fullRecord;
     }
-
+    
     private BBoxClientInfo convertBBoxDTO(BBox bBox) {
         if (bBox == null) {
             return null;
         }
-
+        
         BBoxClientInfo bBoxClient = new BBoxClientInfo();
-
+        
         bBoxClient.setLowerLeftX(bBox.getMinX());
         bBoxClient.setLowerLeftY(bBox.getMinY());
         bBoxClient.setUpperRightX(bBox.getMaxX());

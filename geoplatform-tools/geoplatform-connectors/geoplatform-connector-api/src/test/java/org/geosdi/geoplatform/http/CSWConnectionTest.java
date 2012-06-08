@@ -43,14 +43,25 @@ import java.util.Scanner;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -70,11 +81,9 @@ public class CSWConnectionTest {
     private final static String SITDPC_HOST = "snipc.protezionecivile.it";
     private final static String SITDPC_PATH = "geoportal/csw/discovery";
 
-    @Before
-    public void setUp() {
-//        System.setProperty("javax.net.ssl.trustStore", "\\keystore.jks");
-//        System.setProperty("javax.net.debug", "ssl");
-    }
+//    @Before
+//    public void setUp() {
+//    }
 //    
 //    @After
 //    public void tearDown() {
@@ -124,7 +133,7 @@ public class CSWConnectionTest {
             HttpGet get = new HttpGet(uri);
 
             // Workaround for HTTP authentication via header
-            String authStr = "geosdi:0x,frank,0x";
+            String authStr = "geosdi:0x,frank,0x"; // TODO Encrypt credential with jasypt
             String authEncoded = Base64.encodeBase64URLSafeString(authStr.getBytes());
             get.setHeader("Authorization", "Basic " + authEncoded);
 
@@ -142,44 +151,51 @@ public class CSWConnectionTest {
             logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@", ex.getMessage());
         }
     }
-    /**
-     * TODO Use HttpComponets API for authentication.
-     */
-//    @Test
-//    public void testGetCapabilitiesRequestHttps() {
-//        try {
-//
-//            AuthScope authScope = new AuthScope(SITDPC_HOST, 443);
-////            UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("acaralla", "Passw0rd");
-//            UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("geosdi", "0x,frank,0x");
-//
-//            CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-//            credentialsProvider.setCredentials(authScope, credentials);
-//
-//            DefaultHttpClient client = new DefaultHttpClient();
-//            client.setCredentialsProvider(credentialsProvider);
-//
-//            List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-//            qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
-//            qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
-//
-//            URI uri = URIUtils.createURI("https", SITDPC_HOST, 443, SITDPC_PATH,
-//                    URLEncodedUtils.format(qparams, Consts.UTF_8), null);
-//
-//            HttpGet get = new HttpGet(uri);
-//
-//            HttpResponse response = client.execute(get);
-//
-//            HttpEntity entity = response.getEntity();
-//            if (entity != null) {
-//                InputStream content = entity.getContent();
-//
-//                String output = new Scanner(content).useDelimiter("\\A").next();
-//                logger.info("************************* {}", output);
-//            }
-//
-//        } catch (Exception ex) {
-//            logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@", ex.getMessage());
-//        }
-//    }
+
+    @Test
+    public void testGetCapabilitiesRequestHttps() {
+        try {
+            HttpHost targetHost = new HttpHost(SITDPC_HOST, 443, "https");
+
+            CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+            credentialsProvider.setCredentials(
+                    new AuthScope(targetHost.getHostName(), targetHost.getPort()),
+                    new UsernamePasswordCredentials("geosdi", "0x,frank,0x")); // TODO Encrypt credential with jasypt
+
+            DefaultHttpClient client = new DefaultHttpClient();
+            client.setCredentialsProvider(credentialsProvider);
+
+            // Create AuthCache instance with BASIC scheme object and add it to the local
+            AuthCache authCache = new BasicAuthCache();
+            authCache.put(targetHost, new BasicScheme());
+
+            // Add AuthCache to the execution context
+            HttpContext localcontext = new BasicHttpContext();
+            localcontext.setAttribute(ClientContext.AUTH_CACHE, authCache);
+
+            // Create URI
+            List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+            qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
+            qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
+
+            URI uri = URIUtils.createURI("https", targetHost.getHostName(), targetHost.getPort(),
+                    SITDPC_PATH, URLEncodedUtils.format(qparams, Consts.UTF_8), null);
+
+            HttpGet get = new HttpGet(uri);
+
+            // HTTP GET
+            HttpResponse response = client.execute(targetHost, get, localcontext);
+
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                InputStream content = entity.getContent();
+
+                String output = new Scanner(content).useDelimiter("\\A").next();
+                logger.info("************************* {}", output);
+            }
+
+        } catch (Exception ex) {
+            logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@", ex.getMessage());
+        }
+    }
 }

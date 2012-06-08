@@ -40,7 +40,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -62,7 +61,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,14 +78,6 @@ public class CSWConnectionTest {
     //
     private final static String SITDPC_HOST = "snipc.protezionecivile.it";
     private final static String SITDPC_PATH = "geoportal/csw/discovery";
-
-//    @Before
-//    public void setUp() {
-//    }
-//    
-//    @After
-//    public void tearDown() {
-//    }
 
     @Test
     public void testGetCapabilitiesRequest() {
@@ -118,40 +108,24 @@ public class CSWConnectionTest {
         }
     }
 
-    @Test
-    public void testGetCapabilitiesRequestHttpsWorkaround() {
-        try {
-            HttpClient client = new DefaultHttpClient();
-
-            List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-            qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
-            qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
-
-            URI uri = URIUtils.createURI("https", SITDPC_HOST, 443, SITDPC_PATH,
-                    URLEncodedUtils.format(qparams, Consts.UTF_8), null);
-
-            HttpGet get = new HttpGet(uri);
-
-            // Workaround for HTTP authentication via header
-            String authStr = "geosdi:0x,frank,0x"; // TODO Encrypt credential with jasypt
-            String authEncoded = Base64.encodeBase64URLSafeString(authStr.getBytes());
-            get.setHeader("Authorization", "Basic " + authEncoded);
-
-            HttpResponse response = client.execute(get);
-
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                InputStream content = entity.getContent();
-
-                String output = new Scanner(content).useDelimiter("\\A").next();
-                logger.info("************************* {}", output);
-            }
-
-        } catch (Exception ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@", ex.getMessage());
-        }
-    }
-
+    /**
+     * HOWTO Have a GetCapabilities response.
+     * <p/>
+     * <u>1) Download the certificate authority:</u>
+     * from <tt>https://snipc.protezionecivile.it/</tt> link
+     * obtain <tt>snipc.protezionecivile.it.cer</tt> CA certificate file
+     * <br/>
+     * <u>2) Import the CA into Java Trusted Certs (default keystore):</u>
+     * the default keystore is the file <tt>cacerts</tt> locate to 
+     * <tt>%JAVA_HOME%[/jre]/lib/security</tt> folder;
+     * copy the certificate file into this folder and execute the command
+     * <code>keytool -import -trustcacerts -alias SNIPC 
+     * -file snipc.protezionecivile.it.cer -keystore cacerts</code>
+     * (the default keystore password is <tt>changeit</tt>)
+     * <p/>
+     * For list teh Trusted CA Certs execute the command
+     * <code>keytool -list -v -keystore cacerts</code>
+     */
     @Test
     public void testGetCapabilitiesRequestHttps() {
         try {

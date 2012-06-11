@@ -62,13 +62,21 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+//@PropertySource("classpath*:/gp-ws.properties")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml"})
+//@ContextConfiguration(classes = SNIPCConfig.class)
 public class CSWConnectionTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -78,9 +86,22 @@ public class CSWConnectionTest {
     //
     private final static String SITDPC_HOST = "snipc.protezionecivile.it";
     private final static String SITDPC_PATH = "geoportal/csw/discovery";
+    //
+    private @Value("${snipc_catalog_url}")
+    String snipcUrl;
+    private @Value("${snipc_catalog_username}")
+    String snipcUsername;
+    private @Value("${snipc_catalog_password}")
+    String snipcPassword;
+//    @Autowired
+//    private SNIPCConfig snipc;
 
     @Test
     public void testGetCapabilitiesRequest() {
+        logger.info("***SNIPC_URL @@@@@@@@@@@@@@@@@@@@@@@@@@@@ {} ", snipcUrl);
+        logger.info("***SNIPC_USERNAME @@@@@@@@@@@@@@@@@@@@@@@@@@@@ {} ", snipcUsername);
+        logger.info("***SNIPC_PASS @@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", snipcPassword);
+
         try {
             HttpClient client = new DefaultHttpClient();
 
@@ -104,7 +125,8 @@ public class CSWConnectionTest {
             }
 
         } catch (Exception ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@", ex.getMessage());
+            logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@",
+                    ex.getMessage());
         }
     }
 
@@ -116,10 +138,10 @@ public class CSWConnectionTest {
      * obtain <tt>snipc.protezionecivile.it.cer</tt> CA certificate file
      * <br/>
      * <u>2) Import the CA into Java Trusted Certs (default keystore):</u>
-     * the default keystore is the file <tt>cacerts</tt> locate to 
+     * the default keystore is the file <tt>cacerts</tt> locate to
      * <tt>%JAVA_HOME%[/jre]/lib/security</tt> folder;
      * copy the certificate file into this folder and execute the command
-     * <code>keytool -import -trustcacerts -alias SNIPC 
+     * <code>keytool -import -trustcacerts -alias SNIPC
      * -file snipc.protezionecivile.it.cer -keystore cacerts</code>
      * (the default keystore password is <tt>changeit</tt>)
      * <p/>
@@ -152,8 +174,10 @@ public class CSWConnectionTest {
             qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
             qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
 
-            URI uri = URIUtils.createURI("https", targetHost.getHostName(), targetHost.getPort(),
-                    SITDPC_PATH, URLEncodedUtils.format(qparams, Consts.UTF_8), null);
+            URI uri = URIUtils.createURI("https", targetHost.getHostName(),
+                    targetHost.getPort(),
+                    SITDPC_PATH, URLEncodedUtils.format(qparams, Consts.UTF_8),
+                    null);
 
             HttpGet get = new HttpGet(uri);
 
@@ -169,7 +193,8 @@ public class CSWConnectionTest {
             }
 
         } catch (Exception ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@", ex.getMessage());
+            logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@",
+                    ex.getMessage());
         }
     }
 }

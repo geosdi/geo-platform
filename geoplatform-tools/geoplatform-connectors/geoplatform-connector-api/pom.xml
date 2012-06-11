@@ -25,6 +25,11 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-util</artifactId>
         </dependency>
         
@@ -68,9 +73,16 @@
             <artifactId>httpcore</artifactId>
         </dependency>
         
+        <!-- SCOPE TEST -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

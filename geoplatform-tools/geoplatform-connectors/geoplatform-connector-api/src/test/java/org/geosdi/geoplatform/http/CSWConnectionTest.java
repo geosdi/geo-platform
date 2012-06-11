@@ -61,13 +61,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -81,37 +79,35 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class CSWConnectionTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private final static String CSW_HOST = "catalog.geosdi.org";
-    private final static String CSW_PATH = "/geonetwork/srv/en/csw";
-    //
-    private final static String SITDPC_HOST = "snipc.protezionecivile.it"; // TODO parse URL
-    private final static String SITDPC_PATH = "geoportal/csw/discovery"; // TODO parse URL
-    //
+    /**
+     * geoSDI Catalog.
+     */
+    private @Value("${geosdi_catalog_url}")
+    String geosdiUrl;
+    /**
+     * SNIPC Catalog.
+     */
     private @Value("${snipc_catalog_url}")
-    String snipcUrl; // TODO parse URL
+    String snipcUrl;
     private @Value("${snipc_catalog_username}")
     String snipcUsername;
     private @Value("${snipc_catalog_password}")
     String snipcPassword;
-    //
-    @Autowired
-    private GPPooledPBEStringEncryptorDecorator encryptor;
 
     @Test
     public void testGetCapabilitiesRequest() {
         try {
-            HttpClient client = new DefaultHttpClient();
+            URI targetURI = new URI(geosdiUrl);
 
-            List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-            qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
-            qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
+            List<NameValuePair> qparams = this.createGetCapabilitiesParams();
 
-            URI uri = URIUtils.createURI("http", CSW_HOST, -1, CSW_PATH,
-                    URLEncodedUtils.format(qparams, "UTF-8"), null);
+            URI uri = URIUtils.createURI(targetURI.getScheme(), targetURI.getHost(),
+                    targetURI.getPort(), targetURI.getPath(),
+                    URLEncodedUtils.format(qparams, Consts.UTF_8), null);
 
             HttpGet get = new HttpGet(uri);
 
+            HttpClient client = new DefaultHttpClient();
             HttpResponse response = client.execute(get);
 
             HttpEntity entity = response.getEntity();
@@ -119,12 +115,13 @@ public class CSWConnectionTest {
                 InputStream content = entity.getContent();
 
                 String output = new Scanner(content).useDelimiter("\\A").next();
-                logger.info("************************* {}", output);
+                logger.info("*************************\n{}", output);
             }
 
         } catch (Exception ex) {
             logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@",
                     ex.getMessage());
+            Assert.fail("HTTP CSW GetCapabilities Request is incorrect");
         }
     }
 
@@ -149,16 +146,18 @@ public class CSWConnectionTest {
     @Test
     public void testGetCapabilitiesRequestHttps() {
         try {
-            HttpHost targetHost = new HttpHost(SITDPC_HOST, 443, "https"); // TODO parse URL
+            URI targetURI = new URI(snipcUrl);
 
             CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(
-                    new AuthScope(targetHost.getHostName(), targetHost.getPort()),
-                    new UsernamePasswordCredentials(encryptor.decrypt(snipcUsername), encryptor.decrypt(snipcPassword)));
+                    new AuthScope(targetURI.getHost(), targetURI.getPort()),
+                    new UsernamePasswordCredentials(snipcUsername, snipcPassword));
 
             DefaultHttpClient client = new DefaultHttpClient();
             client.setCredentialsProvider(credentialsProvider);
 
+            HttpHost targetHost = URIUtils.extractHost(targetURI);
+            
             // Create AuthCache instance with BASIC scheme object and add it to the local
             AuthCache authCache = new BasicAuthCache();
             authCache.put(targetHost, new BasicScheme());
@@ -168,14 +167,11 @@ public class CSWConnectionTest {
             localcontext.setAttribute(ClientContext.AUTH_CACHE, authCache);
 
             // Create URI
-            List<NameValuePair> qparams = new ArrayList<NameValuePair>();
-            qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
-            qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
+            List<NameValuePair> qparams = this.createGetCapabilitiesParams();
 
-            URI uri = URIUtils.createURI("https", targetHost.getHostName(),
-                    targetHost.getPort(),
-                    SITDPC_PATH, URLEncodedUtils.format(qparams, Consts.UTF_8), // TODO parse URL
-                    null);
+            URI uri = URIUtils.createURI(targetURI.getScheme(), targetURI.getHost(),
+                    targetURI.getPort(), targetURI.getPath(),
+                    URLEncodedUtils.format(qparams, Consts.UTF_8), null);
 
             HttpGet get = new HttpGet(uri);
 
@@ -187,12 +183,20 @@ public class CSWConnectionTest {
                 InputStream content = entity.getContent();
 
                 String output = new Scanner(content).useDelimiter("\\A").next();
-                logger.info("************************* {}", output);
+                logger.info("*************************\n{}", output);
             }
 
         } catch (Exception ex) {
             logger.error("\n@@@@@@@@@@@@@@@@\n{}\n@@@@@@@@@@@@@@@@",
                     ex.getMessage());
+            Assert.fail("HTTPS CSW GetCapabilities Request is incorrect");
         }
+    }
+
+    private List<NameValuePair> createGetCapabilitiesParams() {
+        List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+        qparams.add(new BasicNameValuePair("SERVICE", "CSW"));
+        qparams.add(new BasicNameValuePair("REQUEST", "GetCapabilities"));
+        return qparams;
     }
 }

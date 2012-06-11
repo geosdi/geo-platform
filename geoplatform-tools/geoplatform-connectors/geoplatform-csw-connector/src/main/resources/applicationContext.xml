@@ -15,7 +15,8 @@
        default-autowire="byName">
 
     <context:annotation-config />
-   
+    
+    <import resource="classpath:applicationContext-jasypt.xml" />
     
     <bean id="xStreamCatalog" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
         <property name="marshaller" ref="xStreamCatalogMarshaller" />

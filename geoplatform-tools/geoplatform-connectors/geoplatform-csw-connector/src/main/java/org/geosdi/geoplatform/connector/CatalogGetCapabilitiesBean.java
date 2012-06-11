@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.connector.security.CatalogSecurityConnection;
 import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -54,6 +55,13 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
 
     private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW"
             + "&REQUEST=GetCapabilities";
+    /**
+     * SNIPC Catalog.
+     */
+    private @Value("${snipc_catalog_username}")
+    String snipcUsername;
+    private @Value("${snipc_catalog_password}")
+    String snipcPassword;
     //
     @Autowired
     private GeoPlatformMarshall xStreamCatalog;
@@ -77,9 +85,7 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
      * @throws CatalogVersionException 
      */
     public CatalogCapabilities bindUrl(String urlServer)
-            throws MalformedURLException,
-                   IOException,
-                   CatalogVersionException {
+            throws MalformedURLException, IOException, CatalogVersionException {
 
         CatalogCapabilities catalogGetCapabilities = connect(urlServer);
         checkCSWServerVersion(catalogGetCapabilities);
@@ -88,16 +94,14 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
     }
 
     public CatalogCapabilities bindUrlWithoutVersionControl(String urlServer)
-            throws MalformedURLException,
-                   IOException {
+            throws MalformedURLException, IOException {
 
         return connect(urlServer);
 
     }
 
     private CatalogCapabilities connect(String urlServer)
-            throws MalformedURLException,
-                   IOException {
+            throws MalformedURLException, IOException {
 
         CatalogCapabilities catalogGetCapabilities = null;
         HttpURLConnection conn = null;
@@ -109,7 +113,7 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
                 if (urlServer.equals("https://snipc.protezionecivile.it"
                         + "/geoportal/csw/discovery")) {
                     conn = this.securityConnection.getSecureConnectionWithAuth(
-                            url, "acaralla", "Passw0rd");
+                            url, snipcUsername, snipcPassword);
                 } else {
                     conn = this.securityConnection.getSecureConnection(url);
                 }

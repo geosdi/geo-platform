@@ -61,10 +61,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -73,10 +76,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-//@PropertySource("classpath*:/gp-ws.properties")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml"})
-//@ContextConfiguration(classes = SNIPCConfig.class)
 public class CSWConnectionTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -84,24 +85,21 @@ public class CSWConnectionTest {
     private final static String CSW_HOST = "catalog.geosdi.org";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
     //
-    private final static String SITDPC_HOST = "snipc.protezionecivile.it";
-    private final static String SITDPC_PATH = "geoportal/csw/discovery";
+    private final static String SITDPC_HOST = "snipc.protezionecivile.it"; // TODO parse URL
+    private final static String SITDPC_PATH = "geoportal/csw/discovery"; // TODO parse URL
     //
     private @Value("${snipc_catalog_url}")
-    String snipcUrl;
+    String snipcUrl; // TODO parse URL
     private @Value("${snipc_catalog_username}")
     String snipcUsername;
     private @Value("${snipc_catalog_password}")
     String snipcPassword;
-//    @Autowired
-//    private SNIPCConfig snipc;
+    //
+    @Autowired
+    private GPPooledPBEStringEncryptorDecorator encryptor;
 
     @Test
     public void testGetCapabilitiesRequest() {
-        logger.info("***SNIPC_URL @@@@@@@@@@@@@@@@@@@@@@@@@@@@ {} ", snipcUrl);
-        logger.info("***SNIPC_USERNAME @@@@@@@@@@@@@@@@@@@@@@@@@@@@ {} ", snipcUsername);
-        logger.info("***SNIPC_PASS @@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", snipcPassword);
-
         try {
             HttpClient client = new DefaultHttpClient();
 
@@ -151,12 +149,12 @@ public class CSWConnectionTest {
     @Test
     public void testGetCapabilitiesRequestHttps() {
         try {
-            HttpHost targetHost = new HttpHost(SITDPC_HOST, 443, "https");
+            HttpHost targetHost = new HttpHost(SITDPC_HOST, 443, "https"); // TODO parse URL
 
             CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(
                     new AuthScope(targetHost.getHostName(), targetHost.getPort()),
-                    new UsernamePasswordCredentials("geosdi", "0x,frank,0x")); // TODO Encrypt credential with jasypt
+                    new UsernamePasswordCredentials(encryptor.decrypt(snipcUsername), encryptor.decrypt(snipcPassword)));
 
             DefaultHttpClient client = new DefaultHttpClient();
             client.setCredentialsProvider(credentialsProvider);
@@ -176,7 +174,7 @@ public class CSWConnectionTest {
 
             URI uri = URIUtils.createURI("https", targetHost.getHostName(),
                     targetHost.getPort(),
-                    SITDPC_PATH, URLEncodedUtils.format(qparams, Consts.UTF_8),
+                    SITDPC_PATH, URLEncodedUtils.format(qparams, Consts.UTF_8), // TODO parse URL
                     null);
 
             HttpGet get = new HttpGet(uri);

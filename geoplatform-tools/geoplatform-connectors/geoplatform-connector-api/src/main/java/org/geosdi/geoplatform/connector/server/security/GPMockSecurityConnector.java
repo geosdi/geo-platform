@@ -45,21 +45,12 @@ import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  */
-public interface GPSecurityConnector {
+public class GPMockSecurityConnector implements GPSecurityConnector {
 
-    public static final GPMockSecurityConnector MOCK_SECURITY = new GPMockSecurityConnector();
-
-    /**
-     * Method to secure Connection
-     *
-     * @param C an instance of {@link GPConnectorRequest} class
-     * @param H an instance of {@link HttpUriRequest} class (HttpPost or HttpGet)
-     *
-     * @return HttpResponse
-     *
-     */
-    <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(C connectorRequest,
-            H httpRequest) throws ClientProtocolException, IOException;
+    @Override
+    public <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(C connectorRequest,
+            H httpRequest) throws ClientProtocolException, IOException {
+        return connectorRequest.getClientConnection().execute(httpRequest);
+    }
 }

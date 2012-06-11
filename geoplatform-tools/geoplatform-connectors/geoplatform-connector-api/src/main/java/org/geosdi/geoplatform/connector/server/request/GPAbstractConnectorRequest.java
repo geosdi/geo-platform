@@ -73,7 +73,9 @@ public abstract class GPAbstractConnectorRequest<T>
 
         this.clientConnection = theClientConnection;
         this.serverURI = theServerURI;
-        this.securityConnector = theSecurityConnector;
+        this.securityConnector = (theSecurityConnector == null
+                                  ? GPSecurityConnector.MOCK_SECURITY
+                                  : theSecurityConnector);
     }
 
     /**

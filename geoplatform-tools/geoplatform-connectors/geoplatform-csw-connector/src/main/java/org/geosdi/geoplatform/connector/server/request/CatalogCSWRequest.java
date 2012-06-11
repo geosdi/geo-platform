@@ -92,8 +92,8 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
         T response = null;
 
         try {
-            HttpResponse httpResponse = super.clientConnection.execute(
-                    super.getPostMethod());
+            HttpResponse httpResponse = super.securityConnector.secure(
+                    this, super.getPostMethod());
             HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();

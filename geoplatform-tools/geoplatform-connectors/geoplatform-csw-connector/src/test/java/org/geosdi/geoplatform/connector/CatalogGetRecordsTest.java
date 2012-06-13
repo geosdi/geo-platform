@@ -105,48 +105,49 @@ public class CatalogGetRecordsTest {
         }
     }
 
-    @Test
-    public void testCQLTemporalFilterGeomatys() throws Exception {
-        URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
-                withServerUrl(url).build();
-
-        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-
-        request.setTypeName(TypeName.RECORD_V202);
-
-        request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
-        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
-
-        // Text filter
-        StringBuilder str = new StringBuilder();
-        str.append("AnyText LIKE '%%'");
-
-        // Time filter
-        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
-        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-
-        SimpleDateFormat formatter = new SimpleDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss'Z'");
-
-        str.append(" AND ");
-        str.append("TempExtent_begin AFTER ").append(
-                formatter.format(startCalendar.getTime()));
-        str.append(" AND ");
-        str.append("TempExtent_end BEFORE ").append(
-                formatter.format(endCalendar.getTime()));
-
-        request.setConstraint(str.toString());
-        logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}",
-                request.getConstraint());
-
-        GetRecordsResponseType response = request.getResponse();
-
-        SearchResultsType searchResult = response.getSearchResults();
-
-        logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
-                searchResult.getNumberOfRecordsMatched());
-    }
+    // TODO uncomment when catalog will be up again
+//    @Test
+//    public void testCQLTemporalFilterGeomatys() throws Exception {
+//        URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
+//        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+//                withServerUrl(url).build();
+//
+//        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
+//
+//        request.setTypeName(TypeName.RECORD_V202);
+//
+//        request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
+//        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
+//
+//        // Text filter
+//        StringBuilder str = new StringBuilder();
+//        str.append("AnyText LIKE '%%'");
+//
+//        // Time filter
+//        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
+//        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+//
+//        SimpleDateFormat formatter = new SimpleDateFormat(
+//                "yyyy-MM-dd'T'HH:mm:ss'Z'");
+//
+//        str.append(" AND ");
+//        str.append("TempExtent_begin AFTER ").append(
+//                formatter.format(startCalendar.getTime()));
+//        str.append(" AND ");
+//        str.append("TempExtent_end BEFORE ").append(
+//                formatter.format(endCalendar.getTime()));
+//
+//        request.setConstraint(str.toString());
+//        logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}",
+//                request.getConstraint());
+//
+//        GetRecordsResponseType response = request.getResponse();
+//
+//        SearchResultsType searchResult = response.getSearchResults();
+//
+//        logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
+//                searchResult.getNumberOfRecordsMatched());
+//    }
 
     @Test
     public void testGetRecordsOutputSchema_CSW_RECORD() throws Exception {

@@ -63,7 +63,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class CatalogGetRecordsTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
+    /**
+     * geoSDI Catalog.
+     */
+    private @Value("${geosdi_catalog_url}")
+    String geosdiUrl;
     /**
      * SNIPC Catalog.
      */
@@ -75,8 +79,8 @@ public class CatalogGetRecordsTest {
     String snipcPassword;
 
     @Test
-    public void testWithoutConstraint() throws Exception {
-        URL url = new URL("http://ows.provinciatreviso.it/geonetwork/srv/it/csw");
+    public void testSummaryRecord() throws Exception {
+        URL url = new URL(geosdiUrl);
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
@@ -93,22 +97,43 @@ public class CatalogGetRecordsTest {
 
         GetRecordsResponseType response = request.getResponse();
 
-        SearchResultsType searchResult = response.getSearchResults();
+        SearchResultsType result = response.getSearchResults();
+        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
+        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsReturned());
+        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNextRecord());
 
-        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}",
-                searchResult.getNumberOfRecordsMatched());
-
-        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}",
-                searchResult.getNumberOfRecordsReturned());
-
-        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}",
-                searchResult.getNextRecord());
-
-        List<JAXBElement<? extends AbstractRecordType>> metadata =
-                searchResult.getAbstractRecord();
+        List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
         if (!metadata.isEmpty()) {
             logger.info("FIRST FULL METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
                     (SummaryRecordType) (metadata.get(0).getValue()));
+        }
+    }
+
+    @Test
+    public void testFullRecord() throws Exception {
+        URL url = new URL(geosdiUrl);
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(url).build();
+
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
+
+        request.setTypeName(TypeName.METADATA);
+
+        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setElementSetName(ElementSetType.FULL.toString());
+        request.setResultType(ResultType.RESULTS.toString());
+
+        request.setStartPosition(BigInteger.ONE);
+        request.setMaxRecords(BigInteger.valueOf(25));
+
+        GetRecordsResponseType response = request.getResponse();
+
+        SearchResultsType result = response.getSearchResults();
+        List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
+
+        for (JAXBElement<? extends AbstractRecordType> element : metadata) {
+            logger.info(
+                    "FULL RECORD @@@@@@@@@@@@@@@@@@@@@@@@@ " + element.getValue());
         }
     }
 
@@ -155,40 +180,13 @@ public class CatalogGetRecordsTest {
 //        logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
 //                searchResult.getNumberOfRecordsMatched());
 //    }
-    @Test
-    public void testGetRecordsOutputSchema_CSW_RECORD() throws Exception {
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
-                withServerUrl(new URL(
-                "http://catalog.geosdi.org/geonetwork/srv/en/csw")).
-                build();
-
-        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-
-        request.setTypeName(TypeName.METADATA);
-
-        request.setOutputSchema(OutputSchema.CSW_V202);
-        request.setElementSetName(ElementSetType.FULL.toString());
-        request.setResultType(ResultType.RESULTS.toString());
-
-        request.setStartPosition(BigInteger.ONE);
-        request.setMaxRecords(BigInteger.valueOf(25));
-
-        GetRecordsResponseType response = request.getResponse();
-
-        List<JAXBElement<? extends AbstractRecordType>> metadata = response.getSearchResults().getAbstractRecord();
-
-        for (JAXBElement<? extends AbstractRecordType> element : metadata) {
-            logger.info(
-                    "FULL RECORD @@@@@@@@@@@@@@@@@@@@@@@@@ " + element.getValue());
-        }
-    }
-
+//    
     @Test
     public void testSecureGetRecords() throws Exception {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
-                withServerUrl(new URL(snipcUrl)).withClientSecurity(
-                new BasicPreemptiveSecurityConnector(snipcUsername,
-                snipcPassword)).build();
+                withServerUrl(new URL(snipcUrl)).
+                withClientSecurity(new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword)).
+                build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
@@ -203,8 +201,13 @@ public class CatalogGetRecordsTest {
 
         GetRecordsResponseType response = request.getResponse();
 
-        List<JAXBElement<? extends AbstractRecordType>> metadata = response.getSearchResults().getAbstractRecord();
-        
+        SearchResultsType result = response.getSearchResults();
+        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
+        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsReturned());
+        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNextRecord());
+
+        List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
+
         if (!metadata.isEmpty()) {
             logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
                     (RecordType) (metadata.get(0).getValue()));

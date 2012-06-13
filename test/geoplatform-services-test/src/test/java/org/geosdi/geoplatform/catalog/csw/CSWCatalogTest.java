@@ -508,33 +508,34 @@ public class CSWCatalogTest {
                 new Object[]{tot, countEncloses, countIs, countOutside, countOverlap});
     }
 
-    @Test
-    public void testGetRecordsGeomatysCountTimeFiltering() throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
-        // Insert the server
-        GeoPlatformServer server = this.createCSWServer("Geomatys",
-                "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
-        Long serverID = cswService.insertServerCSW(server);
-
-        Assert.assertNotNull(serverID);
-
-        catalogFinder.setServerID(serverID);
-
-        int count = cswService.getRecordsCount(catalogFinder);
-        Assert.assertTrue(count > 0);
-
-        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
-        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-        catalogFinder.getTimeInfo().setActive(true);
-        catalogFinder.getTimeInfo().setStartDate(startCalendar.getTime());
-        catalogFinder.getTimeInfo().setEndDate(endCalendar.getTime());
-
-        Assert.assertTrue(count > cswService.getRecordsCount(catalogFinder));
-
-        // Delete the server
-        boolean deleted = cswService.deleteServerCSW(serverID);
-        Assert.assertTrue(deleted);
-    }
-
+    // TODO uncomment when catalog will be up again 
+//    @Test
+//    public void testGetRecordsGeomatysCountTimeFiltering() throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
+//        // Insert the server
+//        GeoPlatformServer server = this.createCSWServer("Geomatys",
+//                "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
+//        Long serverID = cswService.insertServerCSW(server);
+//
+//        Assert.assertNotNull(serverID);
+//
+//        catalogFinder.setServerID(serverID);
+//
+//        int count = cswService.getRecordsCount(catalogFinder);
+//        Assert.assertTrue(count > 0);
+//
+//        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
+//        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+//        catalogFinder.getTimeInfo().setActive(true);
+//        catalogFinder.getTimeInfo().setStartDate(startCalendar.getTime());
+//        catalogFinder.getTimeInfo().setEndDate(endCalendar.getTime());
+//
+//        Assert.assertTrue(count > cswService.getRecordsCount(catalogFinder));
+//
+//        // Delete the server
+//        boolean deleted = cswService.deleteServerCSW(serverID);
+//        Assert.assertTrue(deleted);
+//    }
+//
     private void traceCollection(Collection collection) {
         for (Object object : collection) {
             logger.trace("\n*** " + object);

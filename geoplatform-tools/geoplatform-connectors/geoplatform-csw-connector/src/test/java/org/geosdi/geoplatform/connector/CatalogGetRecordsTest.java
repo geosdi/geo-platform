@@ -37,25 +37,20 @@ package org.geosdi.geoplatform.connector;
 
 import java.math.BigInteger;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
-import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
-import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
+import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
-import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
-import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
-import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
-import org.geosdi.geoplatform.xml.csw.v202.ResultType;
-import org.geosdi.geoplatform.xml.csw.v202.SearchResultsType;
-import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
+import org.geosdi.geoplatform.xml.csw.v202.*;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
@@ -63,9 +58,21 @@ import org.slf4j.LoggerFactory;
  * @email giuseppe.lascaleia@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml"})
 public class CatalogGetRecordsTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    /**
+     * SNIPC Catalog.
+     */
+    private @Value("${snipc_catalog_url}")
+    String snipcUrl;
+    private @Value("${snipc_catalog_username}")
+    String snipcUsername;
+    private @Value("${snipc_catalog_password}")
+    String snipcPassword;
 
     @Test
     public void testWithoutConstraint() throws Exception {
@@ -148,11 +155,11 @@ public class CatalogGetRecordsTest {
 //        logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
 //                searchResult.getNumberOfRecordsMatched());
 //    }
-
     @Test
     public void testGetRecordsOutputSchema_CSW_RECORD() throws Exception {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
-                withServerUrl(new URL("http://catalog.geosdi.org/geonetwork/srv/en/csw")).
+                withServerUrl(new URL(
+                "http://catalog.geosdi.org/geonetwork/srv/en/csw")).
                 build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
@@ -173,6 +180,34 @@ public class CatalogGetRecordsTest {
         for (JAXBElement<? extends AbstractRecordType> element : metadata) {
             logger.info(
                     "FULL RECORD @@@@@@@@@@@@@@@@@@@@@@@@@ " + element.getValue());
+        }
+    }
+
+    @Test
+    public void testSecureGetRecords() throws Exception {
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(new URL(snipcUrl)).withClientSecurity(
+                new BasicPreemptiveSecurityConnector(snipcUsername,
+                snipcPassword)).build();
+
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
+
+        request.setTypeName(TypeName.RECORD_V202);
+
+        request.setOutputSchema(OutputSchema.CSW_V202);
+        request.setElementSetName(ElementSetType.FULL.toString());
+        request.setResultType(ResultType.RESULTS.toString());
+
+        request.setStartPosition(BigInteger.ONE);
+        request.setMaxRecords(BigInteger.valueOf(25));
+
+        GetRecordsResponseType response = request.getResponse();
+
+        List<JAXBElement<? extends AbstractRecordType>> metadata = response.getSearchResults().getAbstractRecord();
+        
+        if (!metadata.isEmpty()) {
+            logger.info("FIRST SECURE METADATA @@@@@@@@@@@@@@@@@@@@@ {}",
+                    (RecordType) (metadata.get(0).getValue()));
         }
     }
 }

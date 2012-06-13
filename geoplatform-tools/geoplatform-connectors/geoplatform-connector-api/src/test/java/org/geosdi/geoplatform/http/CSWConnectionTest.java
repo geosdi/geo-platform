@@ -101,7 +101,8 @@ public class CSWConnectionTest {
 
             List<NameValuePair> qparams = this.createGetCapabilitiesParams();
 
-            URI uri = URIUtils.createURI(targetURI.getScheme(), targetURI.getHost(),
+            URI uri = URIUtils.createURI(targetURI.getScheme(),
+                    targetURI.getHost(),
                     targetURI.getPort(), targetURI.getPath(),
                     URLEncodedUtils.format(qparams, Consts.UTF_8), null);
 
@@ -157,7 +158,7 @@ public class CSWConnectionTest {
             client.setCredentialsProvider(credentialsProvider);
 
             HttpHost targetHost = URIUtils.extractHost(targetURI);
-            
+
             // Create AuthCache instance with BASIC scheme object and add it to the local
             AuthCache authCache = new BasicAuthCache();
             authCache.put(targetHost, new BasicScheme());
@@ -169,7 +170,8 @@ public class CSWConnectionTest {
             // Create URI
             List<NameValuePair> qparams = this.createGetCapabilitiesParams();
 
-            URI uri = URIUtils.createURI(targetURI.getScheme(), targetURI.getHost(),
+            URI uri = URIUtils.createURI(targetURI.getScheme(),
+                    targetURI.getHost(),
                     targetURI.getPort(), targetURI.getPath(),
                     URLEncodedUtils.format(qparams, Consts.UTF_8), null);
 

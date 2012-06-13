@@ -40,25 +40,38 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+@ImportResource(value = {"classpath:applicationContext-jasypt.xml"})
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class CatalogCapabilitiesTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    /**
+     * SNIPC Catalog.
+     */
+    private @Value("${snipc_catalog_url}")
+    String snipcUrl;
+    private @Value("${snipc_catalog_username}")
+    String snipcUsername;
+    private @Value("${snipc_catalog_password}")
+    String snipcPassword;
     //
     @Autowired
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
@@ -151,6 +164,22 @@ public class CatalogCapabilitiesTest {
         CapabilitiesType response = request.getResponse();
 
         logger.info("CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
+                response.getVersion());
+    }
+
+    @Test
+    public void testGetCapabilitiesSecure() throws Exception {
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(new URL(snipcUrl)).withClientSecurity(
+                new BasicPreemptiveSecurityConnector(snipcUsername,
+                snipcPassword)).build();
+
+        CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
+
+        CapabilitiesType response = request.getResponse();
+
+        logger.info(
+                "CSW SECURE GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
                 response.getVersion());
     }
 }

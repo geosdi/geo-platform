@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import java.io.IOException;
 import java.net.URI;
-import org.apache.http.client.HttpClient;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
 
@@ -53,7 +54,9 @@ public interface GPConnectorRequest<T> {
 
     T getResponse() throws IllegalParameterFault, ServerInternalFault, IOException;
 
-    HttpClient getClientConnection();
+    CredentialsProvider getCredentialsProvider();
+
+    DefaultHttpClient getClientConnection();
 
     /**
      * Method to generate String from a Request

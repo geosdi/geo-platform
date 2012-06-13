@@ -39,7 +39,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.slf4j.Logger;
@@ -84,7 +83,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     }
     
     @Override
-    public HttpClient getClientConnection() {
+    public DefaultHttpClient getClientConnection() {
         return new DefaultHttpClient();
     }
 

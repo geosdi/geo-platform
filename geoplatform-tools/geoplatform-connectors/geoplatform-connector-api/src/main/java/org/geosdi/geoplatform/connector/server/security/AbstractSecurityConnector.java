@@ -33,24 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server;
+package org.geosdi.geoplatform.connector.server.security;
 
 import java.net.URI;
-import java.net.URL;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPServerConnector {
+public abstract class AbstractSecurityConnector implements GPSecurityConnector {
 
-    URL getURL();
+    private final String username;
+    private final String password;
+    private AuthScope authScope;
 
-    URI getURI();
-    
-    DefaultHttpClient getClientConnection();
+    public AbstractSecurityConnector(String theUserName, String thePassword) {
+        this.username = theUserName;
+        this.password = thePassword;
+    }
 
-    GPSecurityConnector getSecurityConnector();
+    /**
+     * Bind Credentials for {@link CredentialsProvider} class
+     *
+     * @param credentialsProvider
+     */
+    protected void bindCredentials(CredentialsProvider credentialsProvider,
+            URI targetURI) {
+        if (this.authScope == null) {
+            this.authScope = new AuthScope(targetURI.getHost(),
+                    targetURI.getPort());
+
+            credentialsProvider.setCredentials(
+                    this.authScope, new UsernamePasswordCredentials(username,
+                    password));
+        }
+    }
 }

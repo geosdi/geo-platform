@@ -33,24 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server;
+package org.geosdi.geoplatform.connector.server.security;
 
-import java.net.URI;
-import java.net.URL;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import java.io.IOException;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPServerConnector {
+public class DefaultSecurityConnector extends AbstractSecurityConnector {
 
-    URL getURL();
+    public DefaultSecurityConnector(String theUserName, String thePassword) {
+        super(theUserName, thePassword);
+    }
 
-    URI getURI();
-    
-    DefaultHttpClient getClientConnection();
+    @Override
+    public <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(C connectorRequest,
+            H httpRequest) throws ClientProtocolException, IOException {
 
-    GPSecurityConnector getSecurityConnector();
+        super.bindCredentials(
+                connectorRequest.getClientConnection().getCredentialsProvider(),
+                connectorRequest.getURI());
+
+        return connectorRequest.getClientConnection().execute(httpRequest);
+    }
 }

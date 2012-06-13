@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.net.URI;
-import org.apache.http.client.HttpClient;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpConnectionParams;
@@ -61,14 +61,14 @@ public abstract class GPAbstractConnectorRequest<T>
     //
     protected final URI serverURI;
     protected final GPSecurityConnector securityConnector;
-    protected final HttpClient clientConnection;
+    protected final DefaultHttpClient clientConnection;
 
     public GPAbstractConnectorRequest(GPServerConnector server) {
         this(server.getClientConnection(), server.getURI(),
                 server.getSecurityConnector());
     }
 
-    public GPAbstractConnectorRequest(HttpClient theClientConnection,
+    public GPAbstractConnectorRequest(DefaultHttpClient theClientConnection,
             URI theServerURI, GPSecurityConnector theSecurityConnector) {
 
         this.clientConnection = theClientConnection;
@@ -94,7 +94,7 @@ public abstract class GPAbstractConnectorRequest<T>
         HttpConnectionParams.setConnectionTimeout(httpParams, timeout);
         HttpConnectionParams.setSoTimeout(httpParams, timeout);
 
-        ((DefaultHttpClient) this.clientConnection).setHttpRequestRetryHandler(
+        this.clientConnection.setHttpRequestRetryHandler(
                 new ConnectorHttpRequestRetryHandler(5));
     }
 
@@ -104,7 +104,12 @@ public abstract class GPAbstractConnectorRequest<T>
     }
 
     @Override
-    public HttpClient getClientConnection() {
+    public DefaultHttpClient getClientConnection() {
         return this.clientConnection;
+    }
+
+    @Override
+    public CredentialsProvider getCredentialsProvider() {
+        return this.clientConnection.getCredentialsProvider();
     }
 }

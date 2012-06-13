@@ -41,8 +41,11 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
+import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
+import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
 import org.junit.Before;
@@ -50,6 +53,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -65,10 +69,24 @@ public class CatalogGetRecordByIdTest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GPCSWServerConnector serverConnector;
+    /**
+     * geoSDI Catalog.
+     */
+    private @Value("${geosdi_catalog_url}")
+    String geosdiUrl;
+    /**
+     * SNIPC Catalog.
+     */
+    private @Value("${snipc_catalog_url}")
+    String snipcUrl;
+    private @Value("${snipc_catalog_username}")
+    String snipcUsername;
+    private @Value("${snipc_catalog_password}")
+    String snipcPassword;
 
     @Before
     public void setUp() throws MalformedURLException {
-        URL url = new URL("http://catalog.geosdi.org/geonetwork/srv/en/csw");
+        URL url = new URL(geosdiUrl);
         this.serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
     }
@@ -138,5 +156,34 @@ public class CatalogGetRecordByIdTest {
             logger.info(
                     "SUMMARY RECORD @@@@@@@@@@@@@@@@@@ " + element.getValue() + "\n");
         }
+    }
+
+    @Test
+    public void testSecureGetRecordById() throws Exception {
+        URL url = new URL(snipcUrl);
+        GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword);
+        this.serverConnector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(url).
+                withClientSecurity(securityConnector).
+                build();
+
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
+                this.serverConnector.createGetRecordByIdRequest();
+
+        request.setId("PCM:901:20101021:112931");
+        request.setElementSetType(ElementSetType.FULL.toString());
+//        request.setOutputSchema(OutputSchema.CSW_V202);
+
+        GetRecordByIdResponseType response = request.getResponse();
+
+        Assert.assertEquals(true, response.isSetAbstractRecord());
+        Assert.assertEquals(false, response.isSetAny());
+
+        List<JAXBElement<? extends AbstractRecordType>> abstractRecord = response.getAbstractRecord();
+
+        Assert.assertEquals(1, abstractRecord.size());
+
+        logger.info(
+                "RECORD @@@@@@@@@@@@@@@@@@ " + abstractRecord.get(0).getValue());
     }
 }

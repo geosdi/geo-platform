@@ -124,7 +124,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         this.compareServer(serverTestOur, serverDTO);
     }
 
-    @Test
+    @Test(expected = IllegalParameterFault.class)
     public void testSaveServerNullURL() throws Exception {
         cswService.saveServerCSW("Must fail", null);
     }

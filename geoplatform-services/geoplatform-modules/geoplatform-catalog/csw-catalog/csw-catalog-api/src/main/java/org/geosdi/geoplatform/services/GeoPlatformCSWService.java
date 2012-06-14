@@ -56,12 +56,11 @@ import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 
 /**
+ * Public interface to define the service operations mapped via REST
+ * using CXF framework.
+ * 
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email  michele.santomauro@geosdi.org
- * 
- * 
- * Public interface to define the service operations mapped via REST
- * using CXF framework
  */
 @WebService(name = "GeoPlatformCSWService",
             targetNamespace = "http://csw.services.geo-platform.org/")
@@ -73,7 +72,8 @@ public interface GeoPlatformCSWService {
     // ==========================================================================
     @Put
     @HttpResource(location = "/server/csw")
-    Long insertServerCSW(@WebParam(name = "server") GeoPlatformServer server);
+    Long insertServerCSW(@WebParam(name = "server") GeoPlatformServer server)
+            throws IllegalParameterFault;
 
     @Post
     @HttpResource(location = "/server/csw")

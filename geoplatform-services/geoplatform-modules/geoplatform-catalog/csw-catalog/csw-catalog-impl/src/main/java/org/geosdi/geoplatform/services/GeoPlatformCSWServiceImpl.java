@@ -91,7 +91,7 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public Long insertServerCSW(GeoPlatformServer server) {
+    public Long insertServerCSW(GeoPlatformServer server) throws IllegalParameterFault {
         return cswServiceDelegate.insertServerCSW(server);
     }
 

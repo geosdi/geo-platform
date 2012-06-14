@@ -54,7 +54,7 @@ import org.junit.Test;
 public class CSWCatalogServerTest extends CSWCatalogTest {
 
     @Test
-    public void testInsertServer() throws ResourceNotFoundFault {
+    public void testInsertServer() throws Exception {
         // Insert the server
         GeoPlatformServer server = super.createCSWServer("server_test", "http://url.test");
         Long serverID = cswService.insertServerCSW(server);
@@ -73,7 +73,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testReinsertServerOur() throws ResourceNotFoundFault {
+    public void testReinsertServerOur() throws Exception {
         // Try to reinsert the server
         Long serverID = cswService.insertServerCSW(serverTestOur);
 
@@ -81,8 +81,24 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         Assert.assertEquals(serverTestOurID, serverID);
     }
 
+    @Test(expected = IllegalParameterFault.class)
+    public void testInsertServerNullURL() throws Exception {
+        serverTestOur.setServerUrl(null);
+
+        // Try to insert the incorrect server
+        cswService.insertServerCSW(serverTestOur);
+    }
+
+    @Test(expected = IllegalParameterFault.class)
+    public void testInsertServerNullType() throws Exception {
+        serverTestOur.setServerType(null);
+
+        // Try to insert the incorrect server
+        cswService.insertServerCSW(serverTestOur);
+    }
+
     @Test
-    public void testSaveServer() throws ResourceNotFoundFault, IllegalParameterFault {
+    public void testSaveServer() throws Exception {
         // Save the server
         String serverURL = "http://datigis.comune.fi.it/geonetwork/srv/it/csw";
         ServerCSWDTO serverDTO = cswService.saveServerCSW("Firenze", serverURL);
@@ -100,7 +116,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testResaveServerOur() throws ResourceNotFoundFault, IllegalParameterFault {
+    public void testResaveServerOur() throws Exception {
         // Try to resave a server with a
         ServerCSWDTO serverDTO = cswService.saveServerCSW("alias",
                 serverTestOur.getServerUrl());
@@ -108,50 +124,55 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         this.compareServer(serverTestOur, serverDTO);
     }
 
+    @Test
+    public void testSaveServerNullURL() throws Exception {
+        cswService.saveServerCSW("Must fail", null);
+    }
+
     @Test(expected = IllegalParameterFault.class)
-    public void testSaveServerMalformedURLException() throws IllegalParameterFault {
+    public void testSaveServerMalformedURLException() throws Exception {
         cswService.saveServerCSW("Must fail", "http//url-test.fail");
     }
 
     @Test(expected = IllegalParameterFault.class)
-    public void testSaveServerCatalogVersionException() throws IllegalParameterFault {
+    public void testSaveServerCatalogVersionException() throws Exception {
         cswService.saveServerCSW("NSDI",
                 "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw"); // Version 2.0.1
     }
 
     @Test
-    public void testGetServerDetailById() throws ResourceNotFoundFault {
+    public void testGetServerDetailById() throws Exception {
         GeoPlatformServer retrievedServer = cswService.getServerDetailCSW(serverTestOurID);
 
         this.compareServer(serverTestOur, retrievedServer);
     }
 
     @Test(expected = ResourceNotFoundFault.class)
-    public void testGetServerDetailByIdResourceNotFoundFault() throws ResourceNotFoundFault {
+    public void testGetServerDetailByIdResourceNotFoundFault() throws Exception {
         cswService.getServerDetailCSW(Long.MAX_VALUE);
     }
 
     @Test
-    public void testGetServerDetailByUrl() throws ResourceNotFoundFault {
+    public void testGetServerDetailByUrl() throws Exception {
         GeoPlatformServer retrievedServer = cswService.getServerDetailCSWByUrl(serverTestOur.getServerUrl());
 
         this.compareServer(serverTestOur, retrievedServer);
     }
 
     @Test(expected = ResourceNotFoundFault.class)
-    public void testGetServerDetailByUrlResourceNotFoundFault() throws ResourceNotFoundFault {
+    public void testGetServerDetailByUrlResourceNotFoundFault() throws Exception {
         cswService.getServerDetailCSWByUrl("http://not-found.fail");
     }
 
     @Test
-    public void testShortServerByUrl() throws ResourceNotFoundFault {
+    public void testShortServerByUrl() throws Exception {
         ServerCSWDTO retrievedServerDTO = cswService.getShortServerCSW(serverTestOur.getServerUrl());
 
         this.compareServer(serverTestOur, retrievedServerDTO);
     }
 
     @Test(expected = ResourceNotFoundFault.class)
-    public void testShortServerByUrlResourceNotFoundFault() throws ResourceNotFoundFault {
+    public void testShortServerByUrlResourceNotFoundFault() throws Exception {
         cswService.getShortServerCSW("http://not-found.fail");
     }
 
@@ -180,7 +201,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testCSWServersCountTwo() throws ResourceNotFoundFault {
+    public void testCSWServersCountTwo() throws Exception {
         // Insert the server
         GeoPlatformServer server = super.createCSWServer("Mock title", "http://url.mock");
         server.setAliasName("Alias test");
@@ -216,7 +237,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testSearchCSWServersMore() throws ResourceNotFoundFault {
+    public void testSearchCSWServersMore() throws Exception {
         // Insert 27 servers (only 25 for matching wrt alias)
         Long[] serverIDs = new Long[27];
         for (int i = 1; i <= 27; i++) {

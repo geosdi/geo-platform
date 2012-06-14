@@ -104,15 +104,16 @@ class CSWServiceImpl {
     /**
      * @param catalogCapabilitiesBean the catalogCapabilitiesBean to set
      */
-    public void setCatalogCapabilitiesBean(
-            CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
+    public void setCatalogCapabilitiesBean(CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
         this.catalogCapabilitiesBean = catalogCapabilitiesBean;
     }
 
     /**
      * @see GeoPlatformCSWService#insertServerCSW(org.geosdi.geoplatform.core.model.GeoPlatformServer)
      */
-    Long insertServerCSW(GeoPlatformServer server) {
+    Long insertServerCSW(GeoPlatformServer server) throws IllegalParameterFault {
+        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
+
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
         String serverUrl = this.deleteQueryStringFromURL(server.getServerUrl());
         GeoPlatformServer serverSearch = serverDao.findByServerUrl(serverUrl);
@@ -122,7 +123,6 @@ class CSWServiceImpl {
 
         server.setServerType(GPCapabilityType.CSW);
 
-        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
         serverDao.persist(server);
         return server.getId();
     }
@@ -132,6 +132,7 @@ class CSWServiceImpl {
      */
     ServerCSWDTO saveServerCSW(String alias, String serverUrl)
             throws IllegalParameterFault {
+
         serverUrl = this.deleteQueryStringFromURL(serverUrl);
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server != null) { // If there is already a server with the specified URLs
@@ -191,7 +192,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", serverID);
         }
-        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
+        CSWEntityCorrectness.checkCSWServerLog(server); // TODO assert
 
         return serverDao.remove(server);
     }
@@ -213,7 +214,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", serverID);
         }
-        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
+        CSWEntityCorrectness.checkCSWServerLog(server); // TODO assert
 
         return server;
     }
@@ -227,7 +228,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
-        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
+        CSWEntityCorrectness.checkCSWServerLog(server); // TODO assert
 
         return server;
     }
@@ -241,7 +242,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
-        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
+        CSWEntityCorrectness.checkCSWServerLog(server); // TODO assert
 
         return new ServerCSWDTO(server);
     }
@@ -289,6 +290,10 @@ class CSWServiceImpl {
     }
 
     private String deleteQueryStringFromURL(String serverUrl) {
+        if (serverUrl == null) {
+            return "";
+        }
+
         int index = serverUrl.indexOf("?");
         if (index != -1) {
             return serverUrl.substring(0, index);
@@ -440,7 +445,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", serverID);
         }
-        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
+        CSWEntityCorrectness.checkCSWServerLog(server); // TODO assert
 
         return server;
     }

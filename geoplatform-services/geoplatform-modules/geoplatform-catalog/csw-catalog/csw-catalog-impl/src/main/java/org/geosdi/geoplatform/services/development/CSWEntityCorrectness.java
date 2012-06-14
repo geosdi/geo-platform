@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services.development;
 
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 
 /**
  *
@@ -47,12 +48,20 @@ public class CSWEntityCorrectness {
     // ==========================================================================
     // === Server
     // ==========================================================================
-    public static void checkCSWServer(GeoPlatformServer server) {
+    public static void checkCSWServer(GeoPlatformServer server) throws IllegalParameterFault {
         if (server.getServerType() != GPCapabilityType.CSW) {
-            throw new EntityCorrectnessException("Server is not a CSW server");
+            throw new IllegalParameterFault("Server is not a CSW server");
         }
         if (server.getServerUrl() == null) {
-            throw new EntityCorrectnessException("Server URL must not be null");
+            throw new IllegalParameterFault("Server URL must not be null");
+        }
+    }
+
+    public static void checkCSWServerLog(GeoPlatformServer server) {
+        try {
+            CSWEntityCorrectness.checkCSWServer(server);
+        } catch (IllegalParameterFault ex) {
+            throw new EntityCorrectnessException(ex.getMessage());
         }
     }
 

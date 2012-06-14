@@ -520,7 +520,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.3</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -1454,7 +1454,7 @@
         <jaxb-api-version>2.2.6</jaxb-api-version>
         <jaxb-impl-version>2.2.5</jaxb-impl-version>
 
-        <slf4j-version>1.6.4</slf4j-version>
+        <slf4j-version>1.6.5</slf4j-version>
 
         <spring-support>2.0.8</spring-support>
         <spring-security-version>3.1.0.RELEASE</spring-security-version>

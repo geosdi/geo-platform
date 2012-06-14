@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.catalog.csw;
 
+import org.geosdi.geoplatform.connector.security.SnipcBeanProvider;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -61,7 +62,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
     "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {CSWListenerServices.class})
 public abstract class CSWCatalogTest {
-
+    
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected GeoPlatformCSWService cswService;
@@ -70,6 +71,15 @@ public abstract class CSWCatalogTest {
     protected Long serverTestOurID;
     protected Long serverTestTrevisoID;
     protected CatalogFinderBean catalogFinder;
+    //
+    protected SnipcBeanProvider snipcBeanProvider;
+
+    /**
+     * @param snipcBeanProvider the snipcBeanProvider to set
+     */
+    public void setSnipcBeanProvider(SnipcBeanProvider snipcBeanProvider) {
+        this.snipcBeanProvider = snipcBeanProvider;
+    }
 
     /**
      * The listener will inject this dependency.
@@ -77,17 +87,20 @@ public abstract class CSWCatalogTest {
     public void setCSWService(GeoPlatformCSWService cswService) {
         this.cswService = cswService;
     }
-
+    
     @Before
     public void setUp() throws Exception {
         logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
+        
+        logger.info(
+                "ECCOLO @@@@@@@@@@@@@@@@@@@@@@@@@@ " + this.snipcBeanProvider);
 
         // Insert the servers test
         serverTestOur = this.createCSWServer("CSW Server WS Test",
                 "http://catalog.geosdi.org/geonetwork/srv/en/csw");
         serverTestOurID = cswService.insertServerCSW(serverTestOur);
         serverTestOur.setId(serverTestOurID);
-
+        
         serverTestTrevisoID = cswService.insertServerCSW(this.createCSWServer(
                 "Provincia di Treviso",
                 "http://ows.provinciatreviso.it/geonetwork/srv/it/csw"));
@@ -104,7 +117,7 @@ public abstract class CSWCatalogTest {
         catalogFinder.setAreaInfo(new AreaInfo());
         catalogFinder.setTimeInfo(new TimeInfo());
     }
-
+    
     @After
     public void tearDown() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
@@ -113,7 +126,7 @@ public abstract class CSWCatalogTest {
         cswService.deleteServerCSW(serverTestOurID);
         cswService.deleteServerCSW(serverTestTrevisoID);
     }
-
+    
     protected GeoPlatformServer createCSWServer(String title, String url) {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerType(GPCapabilityType.CSW);

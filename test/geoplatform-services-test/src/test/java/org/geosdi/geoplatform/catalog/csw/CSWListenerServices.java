@@ -41,6 +41,7 @@ import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
+import org.geosdi.geoplatform.connector.security.SnipcBeanProvider;
 import org.geosdi.geoplatform.cxf.GeoPlatformCSWClient;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.junit.Assert;
@@ -52,70 +53,79 @@ import org.springframework.test.context.TestExecutionListener;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- * 
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
 public class CSWListenerServices implements TestExecutionListener {
-
+    
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformCSWService cswService;
     private Endpoint endpoint;
     private Bus bus;
-
+    
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ CSWListenerServices.beforeTestClass @@@");
-
-        GeoPlatformCSWClient cswClient = (GeoPlatformCSWClient) testContext.getApplicationContext().getBean("cswClient");
+        
+        GeoPlatformCSWClient cswClient = (GeoPlatformCSWClient) testContext.getApplicationContext().getBean(
+                "cswClient");
         Assert.assertNotNull("cswClient is NULL", cswClient);
         cswService = cswClient.create();
-
-        GeoPlatformCSWService geoPlatformCSWService = (GeoPlatformCSWService) testContext.getApplicationContext().getBean("cswService");
+        
+        GeoPlatformCSWService geoPlatformCSWService = (GeoPlatformCSWService) testContext.getApplicationContext().getBean(
+                "cswService");
         Assert.assertNotNull("cswService is NULL", geoPlatformCSWService);
-
+        
         Object implementor = geoPlatformCSWService;
         SpringBusFactory bf = new SpringBusFactory();
         bus = bf.createBus();
-
+        
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
-
-        GPServerWebServiceInterceptorStrategyFactory gpServerWebServiceInterceptorStrategyFactory = (GPServerWebServiceInterceptorStrategyFactory) testContext.getApplicationContext().getBean("gpServerWebServiceInterceptorStrategyFactory");
-        Assert.assertNotNull("gpServerWebServiceInterceptorStrategyFactory is NULL", gpServerWebServiceInterceptorStrategyFactory);
-
-        bus.getInInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
-        bus.getOutInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
-
+        
+        GPServerWebServiceInterceptorStrategyFactory gpServerWebServiceInterceptorStrategyFactory = (GPServerWebServiceInterceptorStrategyFactory) testContext.getApplicationContext().getBean(
+                "gpServerWebServiceInterceptorStrategyFactory");
+        Assert.assertNotNull(
+                "gpServerWebServiceInterceptorStrategyFactory is NULL",
+                gpServerWebServiceInterceptorStrategyFactory);
+        
+        bus.getInInterceptors().add(
+                gpServerWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
+        bus.getOutInterceptors().add(
+                gpServerWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
+        
         bf.setDefaultBus(bus);
         String serverAddress = cswClient.getAddress();
         endpoint = Endpoint.publish(serverAddress, implementor);
-
+        
         logger.info("\n\t@@@ Server ready... @@@");
     }
-
+    
     @Override
     public void prepareTestInstance(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ CSWListenerServices.prepareTestInstance @@@");
-
+        
         CSWCatalogTest testInstance = (CSWCatalogTest) testContext.getTestInstance();
+        testInstance.setSnipcBeanProvider(testContext.getApplicationContext().getBean(
+                SnipcBeanProvider.class));
         testInstance.setCSWService(cswService);
     }
-
+    
     @Override
     public void beforeTestMethod(TestContext testContext) throws Exception {
     }
-
+    
     @Override
     public void afterTestMethod(TestContext testContext) throws Exception {
     }
-
+    
     @Override
     public void afterTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ CSWListenerServices.afterTestClass @@@");
-
+        
         endpoint.stop();
         bus.shutdown(true);
         // Wait to be sure that the endpoint was shutdown properly

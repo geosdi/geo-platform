@@ -72,7 +72,7 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
                 connectorRequest.getCredentialsProvider(),
                 connectorRequest.getURI());
 
-        HttpHost targetHost = extractHost(connectorRequest.getURI());
+        HttpHost targetHost = this.extractHost(connectorRequest.getURI());
 
         this.preparePreemptiveParameters(targetHost);
 
@@ -89,9 +89,10 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
         }
     }
 
-    protected HttpHost extractHost(URI targetURI) {
-        return (this.httpHost = this.httpHost == null ? URIUtils.extractHost(
-                targetURI) : this.httpHost);
+    protected HttpHost extractHost(URI uri) {
+        return (this.httpHost = this.httpHost == null
+                ? new HttpHost(uri.getHost(), this.retrieveNoSetPort(uri), uri.getScheme())
+                : this.httpHost);
     }
 
     /**
@@ -100,4 +101,22 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
      * @return AuthSchemeBase
      */
     protected abstract AuthSchemeBase createScheme();
+
+    private int retrieveNoSetPort(URI uri) {
+        int port = uri.getPort();
+        if (port > 0) {
+            return port;
+        }
+
+        String scheme = uri.getScheme();
+        if ("https".equals(scheme)) {
+            port = 443;
+        } else if ("http".equals(scheme)) {
+            port = 80; // TODO Test Catalog with credentials on port 80 (insert the URL without specifying the port)
+        } else {
+            throw new IllegalArgumentException("Scheme don't recognize");
+        }
+
+        return port;
+    }
 }

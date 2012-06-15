@@ -348,7 +348,7 @@ class CSWServiceImpl {
         CatalogGetRecordsRequest<GetRecordsResponseType> request =
                 this.createGetRecordsRequest(server.getServerUrl());
 
-        request.setTypeName(TypeName.METADATA);
+        request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.SUMMARY.value());
         request.setResultType(ResultType.RESULTS.value());
@@ -408,7 +408,7 @@ class CSWServiceImpl {
         CatalogGetRecordsRequest<GetRecordsResponseType> request =
                 this.createGetRecordsRequest(server.getServerUrl());
 
-        request.setTypeName(TypeName.METADATA);
+        request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.FULL.value());
         request.setResultType(ResultType.RESULTS.value());

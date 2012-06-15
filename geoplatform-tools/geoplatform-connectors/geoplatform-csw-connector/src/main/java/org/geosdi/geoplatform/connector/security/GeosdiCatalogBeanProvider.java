@@ -43,41 +43,22 @@ import org.springframework.stereotype.Component;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "snipcBeanProvider")
-public class SnipcBeanProvider {
+@Component(value = "geosdiCatalogBeanProvider")
+public class GeosdiCatalogBeanProvider {
 
-    private @Value("${snipc_catalog_url}")
-    String snipcUrl;
-    private @Value("${snipc_catalog_username}")
-    String snipcUsername;
-    private @Value("${snipc_catalog_password}")
-    String snipcPassword;
+    private @Value("${geosdi_catalog_url}")
+    String geosdiUrl;
+//    private @Value("${geosdi_catalog_username}")
+//    String geosdiUsername;
+//    private @Value("${geosdi_catalog_password}")
+//    String geosdiPassword;
 
-    /**
-     * @return the snipcUrl
-     */
-    public String getSnipcUrl() {
-        return snipcUrl;
-    }
-
-    /**
-     * @return the snipcUsername
-     */
-    public String getSnipcUsername() {
-        return snipcUsername;
-    }
-
-    /**
-     * @return the snipcPassword
-     */
-    public String getSnipcPassword() {
-        return snipcPassword;
+    public String getGeosdiUrl() {
+        return geosdiUrl;
     }
 
     @Override
     public String toString() {
-        return "SnipcBeanProvider {" + "snipcUrl = " + snipcUrl
-                + ", snipcUsername = " + snipcUsername
-                + ", snipcPassword = " + snipcPassword + '}';
+        return "GeosdiCatalogBeanProvider{" + "geosdiUrl=" + geosdiUrl + '}';
     }
 }

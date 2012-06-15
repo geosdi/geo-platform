@@ -70,11 +70,19 @@ public interface GeoPlatformCSWService {
     // ==========================================================================
     // === CSW Server
     // ==========================================================================
+    /**
+     * Insert a server without verification (GetCapabilities request).
+     * 
+     * @deprecated only for test purpose, use saveServerCSW method for production.
+     */
     @Put
     @HttpResource(location = "/server/csw")
     Long insertServerCSW(@WebParam(name = "server") GeoPlatformServer server)
             throws IllegalParameterFault;
 
+    /**
+     * Save a server after execute a GetCapabilities request.
+     */
     @Post
     @HttpResource(location = "/server/csw")
     ServerCSWDTO saveServerCSW(

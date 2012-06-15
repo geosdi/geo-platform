@@ -37,9 +37,7 @@ package org.geosdi.geoplatform.catalog.csw;
 
 import java.util.Collection;
 import java.util.List;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.BBox;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
@@ -56,14 +54,14 @@ import org.junit.Test;
 public class CSWCatalogRecordTest extends CSWCatalogTest {
 
     @Test
-    public void testGetRecordsOurCount() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+    public void testGetRecordsOurCount() throws Exception {
         catalogFinder.getTextInfo().setText("limiti");
 
         Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
     }
 
     @Test
-    public void testGetRecordsOurResultSummary() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+    public void testGetRecordsOurResultSummary() throws Exception {
         catalogFinder.getTextInfo().setText("limiti");
 
         List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(10, 1, catalogFinder);
@@ -72,7 +70,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsOurResultFull() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+    public void testGetRecordsOurResultFull() throws Exception {
         catalogFinder.getTextInfo().setText("limiti");
 
         List<FullRecordDTO> records = cswService.searchFullRecords(10, 1, catalogFinder);
@@ -81,7 +79,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsOurResultFullGetCapabilities() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+    public void testGetRecordsOurResultFullGetCapabilities() throws Exception {
         String title = "Protezione Civile Web Map Service";
         TextInfo textInfo = catalogFinder.getTextInfo();
         textInfo.setText(title);
@@ -108,7 +106,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoSearchWMSText() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+    public void testGetRecordsTrevisoSearchWMSText() throws Exception {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("wms");
 
@@ -146,7 +144,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoCountLimitiTextAny() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+    public void testGetRecordsTrevisoCountLimitiTextAny() throws Exception {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("limiti");
 
@@ -154,7 +152,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoCountLimitiTextTitle() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+    public void testGetRecordsTrevisoCountLimitiTextTitle() throws Exception {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("limiti");
         catalogFinder.getTextInfo().setSearchTitle(true);
@@ -165,7 +163,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoCountLimitiTextAbstract() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+    public void testGetRecordsTrevisoCountLimitiTextAbstract() throws Exception {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("limiti");
         catalogFinder.getTextInfo().setSearchTitle(false);
@@ -176,7 +174,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testGetRecordsTrevisoCountLimitiTextSubjects() throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+    public void testGetRecordsTrevisoCountLimitiTextSubjects() throws Exception {
         catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getTextInfo().setText("limiti");
         catalogFinder.getTextInfo().setSearchTitle(false);
@@ -218,7 +216,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
 
     // TODO uncomment when catalog will be up again 
 //    @Test
-//    public void testGetRecordsGeomatysCountTimeFiltering() throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
+//    public void testGetRecordsGeomatysCountTimeFiltering() throws Exception {
 //        // Insert the server
 //        GeoPlatformServer server = this.createCSWServer("Geomatys",
 //                "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
@@ -244,6 +242,23 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
 //        Assert.assertTrue(deleted);
 //    }
 //
+    @Test
+    public void testGetRecordsSecureSNIPC() throws Exception {
+        // Insert the server
+        GeoPlatformServer server = this.createCSWServer("SNIPC", snipcProvider.getSnipcUrl());
+        Long serverID = cswService.insertServerCSW(server);
+
+        // Set catalog finder
+        catalogFinder.setServerID(serverID);
+
+        int count = cswService.getRecordsCount(catalogFinder);
+        Assert.assertTrue(count > 0);
+
+        // Delete the server
+        boolean deleted = cswService.deleteServerCSW(serverID);
+        Assert.assertTrue(deleted);
+    }
+
     private void traceCollection(Collection collection) {
         for (Object object : collection) {
             logger.trace("\n*** " + object);

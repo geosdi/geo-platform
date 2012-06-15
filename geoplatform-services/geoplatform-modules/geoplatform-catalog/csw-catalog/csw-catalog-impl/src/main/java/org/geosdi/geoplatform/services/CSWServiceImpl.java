@@ -49,7 +49,10 @@ import org.geosdi.geoplatform.connector.CatalogVersionException;
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCSWServerConnector;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
+import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -84,7 +87,6 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email  michele.santomauro@geosdi.org
- *
  */
 class CSWServiceImpl {
 
@@ -93,6 +95,7 @@ class CSWServiceImpl {
     private GPServerDAO serverDao;
     //
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
+    private SnipcCatalogBeanProvider snipcProvider;
 
     /**
      * @param serverDao the serverDao to set
@@ -106,6 +109,13 @@ class CSWServiceImpl {
      */
     public void setCatalogCapabilitiesBean(CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
         this.catalogCapabilitiesBean = catalogCapabilitiesBean;
+    }
+
+    /**
+     * @param snipcProvider the snipcProvider to set
+     */
+    public void setSnipcProvider(SnipcCatalogBeanProvider snipcProvider) {
+        this.snipcProvider = snipcProvider;
     }
 
     /**
@@ -540,8 +550,16 @@ class CSWServiceImpl {
         GPCSWServerConnector serverConnector = null;
         try {
             URL url = new URL(serverUrl);
-            serverConnector = GPCSWConnectorBuilder.newConnector().
-                    withServerUrl(url).build();
+
+            GPCSWConnectorBuilder builder = GPCSWConnectorBuilder.newConnector().withServerUrl(url);
+
+            if (serverUrl.contains("snipc.protezionecivile.it")) {
+                GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
+                        snipcProvider.getSnipcUsername(), snipcProvider.getSnipcPassword());
+                builder.withClientSecurity(securityConnector);
+            }
+
+            serverConnector = builder.build();
 
         } catch (MalformedURLException ex) {
             logger.error("### MalformedURLException: " + ex.getMessage());

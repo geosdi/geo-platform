@@ -25,6 +25,7 @@
           class="org.geosdi.geoplatform.services.GeoPlatformCSWServiceImpl">
         <property name="serverDao" ref="serverDAO" />
         <property name="catalogCapabilitiesBean" ref="catalogCapabilitiesBean" />
+        <property name="snipcProvider" ref="snipcCatalogBeanProvider" />
     </bean>
 
 	<!--===================================================================== -->

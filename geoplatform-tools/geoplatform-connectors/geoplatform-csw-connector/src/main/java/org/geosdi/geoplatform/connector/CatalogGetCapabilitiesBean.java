@@ -74,7 +74,7 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
     }
 
     /**
-     * Bind CSW Server Url with Control for Server Version.
+     * Bind CSW Server URL with Control for Server Version.
      * The standard CSW Server version must be 2.0.2
      * 
      * @param urlServer
@@ -87,8 +87,8 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
     public CatalogCapabilities bindUrl(String urlServer)
             throws MalformedURLException, IOException, CatalogVersionException {
 
-        CatalogCapabilities catalogGetCapabilities = connect(urlServer);
-        checkCSWServerVersion(catalogGetCapabilities);
+        CatalogCapabilities catalogGetCapabilities = this.connect(urlServer);
+        this.checkCSWServerVersion(catalogGetCapabilities);
 
         return catalogGetCapabilities;
     }
@@ -96,7 +96,7 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
     public CatalogCapabilities bindUrlWithoutVersionControl(String urlServer)
             throws MalformedURLException, IOException {
 
-        return connect(urlServer);
+        return this.connect(urlServer);
 
     }
 
@@ -106,12 +106,11 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
         CatalogCapabilities catalogGetCapabilities = null;
         HttpURLConnection conn = null;
         try {
-            URL url = new URL(convertUrl(urlServer) + CSW_CABABILITIES_REQUEST);
+            URL url = new URL(this.convertUrl(urlServer) + CSW_CABABILITIES_REQUEST);
 
             if (urlServer.startsWith("https")) {
                 /** @@@@@@@@@@@@@@@ TODO FIX ME @@@@@@@@@@@@@@@@@@@@ **/
-                if (urlServer.equals("https://snipc.protezionecivile.it"
-                        + "/geoportal/csw/discovery")) {
+                if (urlServer.contains("snipc.protezionecivile.it")) {
                     conn = this.securityConnection.getSecureConnectionWithAuth(
                             url, snipcUsername, snipcPassword);
                 } else {

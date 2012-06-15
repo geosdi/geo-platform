@@ -33,57 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.security;
 
-import java.net.URL;
-import org.geosdi.geoplatform.connector.api.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.GPCatalogServerConnector;
-import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWServerConnector extends GPServerConnector<GPCatalogServerConnector>
-        implements GeoPlatformCSWConnector {
+@Component(value = "snipcCatalogBeanProvider")
+public class SnipcCatalogBeanProvider {
 
-    private GPCatalogVersion version;
+    private @Value("${snipc_catalog_url}")
+    String snipcUrl;
+    private @Value("${snipc_catalog_username}")
+    String snipcUsername;
+    private @Value("${snipc_catalog_password}")
+    String snipcPassword;
 
-    public GPCSWServerConnector(URL serverURL) {
-        this(serverURL, GPCatalogVersion.V202);
+    /**
+     * @return the snipcUrl
+     */
+    public String getSnipcUrl() {
+        return snipcUrl;
     }
 
-    public GPCSWServerConnector(URL serverURL, GPCatalogVersion theVersion) {
-        this(serverURL, null, theVersion);
+    /**
+     * @return the snipcUsername
+     */
+    public String getSnipcUsername() {
+        return snipcUsername;
     }
 
-    public GPCSWServerConnector(URL serverURL, GPSecurityConnector security,
-            GPCatalogVersion theVersion) {
-        this.server = new GPCatalogServerConnector(serverURL, security, theVersion);
-        this.version = theVersion;
-    }
-
-    @Override
-    public GPCatalogVersion getVersion() {
-        return this.version;
-    }
-
-    @Override
-    public CatalogGetCapabilitiesRequest createGetCapabilitiesRequest() {
-        return server.createGetCapabilitiesRequest();
-    }
-
-    @Override
-    public CatalogGetRecordsRequest createGetRecordsRequest() {
-        return server.createGetRecordsRequest();
+    /**
+     * @return the snipcPassword
+     */
+    public String getSnipcPassword() {
+        return snipcPassword;
     }
 
     @Override
-    public CatalogGetRecordByIdRequest createGetRecordByIdRequest() {
-        return server.createGetRecordByIdRequest();
+    public String toString() {
+        return "SnipcBeanProvider {" + "snipcUrl = " + snipcUrl
+                + ", snipcUsername = " + snipcUsername
+                + ", snipcPassword = " + snipcPassword + '}';
     }
 }

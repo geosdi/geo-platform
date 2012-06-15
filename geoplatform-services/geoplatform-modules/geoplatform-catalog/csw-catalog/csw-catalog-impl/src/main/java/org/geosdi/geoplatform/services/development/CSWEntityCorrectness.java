@@ -52,8 +52,12 @@ public class CSWEntityCorrectness {
         if (server.getServerType() != GPCapabilityType.CSW) {
             throw new IllegalParameterFault("Server is not a CSW server");
         }
-        if (server.getServerUrl() == null) {
+        String url = server.getServerUrl();
+        if (url == null) {
             throw new IllegalParameterFault("Server URL must not be null");
+        }
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            throw new IllegalParameterFault("URL must be start with \"http://\" or \"https://\"");
         }
     }
 

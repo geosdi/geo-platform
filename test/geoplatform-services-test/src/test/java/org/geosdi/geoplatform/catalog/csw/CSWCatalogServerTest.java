@@ -141,6 +141,24 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     }
 
     @Test
+    public void testSaveSecureServerSNIPC() throws Exception {
+        // Save the server
+        String serverURL = super.snipcProvider.getSnipcUrl();
+        ServerCSWDTO serverDTO = cswService.saveServerCSW("SNIPC", serverURL);
+
+        Assert.assertNotNull(serverDTO);
+
+        // Retrieve the server
+        ServerCSWDTO retrievedServerDTO = cswService.getShortServerCSW(serverURL);
+
+        this.compareServer(serverDTO, retrievedServerDTO);
+
+        // Delete the server
+        boolean deleted = cswService.deleteServerCSW(serverDTO.getId());
+        Assert.assertTrue(deleted);
+    }
+
+    @Test
     public void testGetServerDetailById() throws Exception {
         GeoPlatformServer retrievedServer = cswService.getServerDetailCSW(serverTestOurID);
 

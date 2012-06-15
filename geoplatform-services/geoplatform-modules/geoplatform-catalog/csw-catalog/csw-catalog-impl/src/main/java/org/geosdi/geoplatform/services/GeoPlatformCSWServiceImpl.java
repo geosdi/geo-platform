@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.services;
 import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
+import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -60,12 +61,13 @@ import org.springframework.transaction.annotation.Transactional;
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformCSWService")
 public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
 
+    // Delegate
+    private CSWServiceImpl cswServiceDelegate;
     // DAO
     private GPServerDAO serverDao;
     //
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
-    // Delegate
-    private CSWServiceImpl cswServiceDelegate;
+    private SnipcCatalogBeanProvider snipcProvider;
 
     /**
      * @param cswServiceDelegate
@@ -88,6 +90,14 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     public void setCatalogCapabilitiesBean(CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
         this.catalogCapabilitiesBean = catalogCapabilitiesBean;
         this.cswServiceDelegate.setCatalogCapabilitiesBean(catalogCapabilitiesBean);
+    }
+
+    /**
+     * @param snipcProvider the snipcProvider to set
+     */
+    public void setSnipcProvider(SnipcCatalogBeanProvider snipcProvider) {
+        this.snipcProvider = snipcProvider;
+        this.cswServiceDelegate.setSnipcProvider(snipcProvider);
     }
 
     @Override

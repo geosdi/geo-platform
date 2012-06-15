@@ -61,6 +61,11 @@ public class GPCSWConnectorBuilder
      */
     @Override
     public GPCSWServerConnector build() {
+        if (serverUrl == null) {
+            throw new IllegalArgumentException("Error on CSW Server Connector build: "
+                    + "server URL cannot be null.");
+        }
+
         GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
                 securityConnector, GPCatalogVersion.V202);
 

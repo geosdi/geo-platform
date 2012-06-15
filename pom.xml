@@ -937,7 +937,7 @@
             <dependency>
                 <groupId>org.hibernatespatial</groupId>
                 <artifactId>hibernate-spatial-postgis</artifactId>
-                <version>1.1</version>
+                <version>1.1.1</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -1143,7 +1143,25 @@
                 <artifactId>guava-gwt</artifactId>
                 <version>${guava-version}</version>
             </dependency>
-
+            
+            <!-- =========================================================== -->
+            <!-- ========================= GIN ============================= -->
+	    <!-- =========================================================== -->            
+            <dependency>
+                <groupId>com.googlecode.gwt.inject</groupId>
+                <artifactId>gin</artifactId>
+                <version>1.5-post-gwt-2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${guice-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject.extensions</groupId>
+                <artifactId>guice-assistedinject</artifactId>
+                <version>${guice-version}</version>
+            </dependency>
 
             <!-- =========================================================== -->
 	    <!-- ======================== JASYPT =========================== -->
@@ -1178,6 +1196,23 @@
                 <version>r146</version>
 <!--                <scope>provided</scope>-->
             </dependency>
+            
+            <dependency>
+                <groupId>name.pehl.piriti</groupId>
+                <artifactId>piriti-core</artifactId>
+                <version>0.7b3</version>
+            </dependency>
+            <dependency>
+                <groupId>name.pehl</groupId>
+                <artifactId>totoe</artifactId>
+                <version>0.4</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
+            </dependency>
+            
         </dependencies>
     </dependencyManagement>
 
@@ -1480,6 +1515,7 @@
         <jasypt-version>1.9.0</jasypt-version>
         
         <guava-version>12.0</guava-version>
+        <guice-version>3.0</guice-version>
         
         <ehcache-version>2.5.2</ehcache-version>
         

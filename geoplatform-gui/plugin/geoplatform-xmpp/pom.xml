@@ -84,7 +84,6 @@
         <dependency>
             <groupId>com.googlecode.gwt.inject</groupId>
             <artifactId>gin</artifactId>
-            <version>1.5-post-gwt-2.2</version>
             <scope>provided</scope>
         </dependency>
         

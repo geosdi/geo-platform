@@ -33,60 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.factory.map;
+package org.geosdi.geoplatform.gui.client.images;
 
-import org.gwtopenmaps.openlayers.client.*;
-import org.gwtopenmaps.openlayers.client.layer.*;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class DefaultMapFactory implements GeoPlatformMapFactory {
+@SuppressWarnings("deprecation")
+public interface GeoPlatformImages extends ImageBundle {
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String,
-     * java.lang.String)
-     */
-    @Override
-    public MapWidget createMap(String width, String height) {
-        return new MapWidget(width, height);
-    }
+    @Resource("BingAerial.png")
+    AbstractImagePrototype bingAerial();
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String,
-     * java.lang.String, org.gwtopenmaps.openlayers.client.MapOptions)
-     */
-    @Override
-    public MapWidget createMap(String width, String height, MapOptions options) {
-        return new MapWidget(width, height, options);
-    }
+    @Resource("BingHybrid.png")
+    AbstractImagePrototype bingHybrid();
 
-    @Override
-    public MapWidget createMap(String width, String height, Layer gwtOlBaseLayer) {
-        MapOptions defaultMapOptions = new MapOptions();
+    @Resource("BingRoad.png")
+    AbstractImagePrototype bingRoad();
 
-        defaultMapOptions.setNumZoomLevels(25);
+    @Resource("Blank.png")
+    AbstractImagePrototype blank();
 
-        defaultMapOptions.setProjection("EPSG:3857");
-        defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
-        defaultMapOptions.setUnits(MapUnits.METERS);
+    @Resource("DPC.png")
+    AbstractImagePrototype DPC();
 
-        defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
-                20037508, 20037508.34));
-        defaultMapOptions.setMaxResolution(
-                new Double(156543.0339).floatValue());
+    @Resource("GoogleHybrid.png")
+    AbstractImagePrototype googleHybrid();
 
-        MapWidget mapWidget = new MapWidget(width, height, defaultMapOptions);
-        mapWidget.getMap().addLayer(gwtOlBaseLayer);
+    @Resource("GoogleNormal.png")
+    AbstractImagePrototype googleNormal();
 
-        return mapWidget;
-    }
+    @Resource("GoogleSatellite.png")
+    AbstractImagePrototype googleSatellite();
+
+    @Resource("OSM.png")
+    AbstractImagePrototype osm();
+
+    @Resource("metacartaVmap.png")
+    AbstractImagePrototype metacartaVmap();
 }

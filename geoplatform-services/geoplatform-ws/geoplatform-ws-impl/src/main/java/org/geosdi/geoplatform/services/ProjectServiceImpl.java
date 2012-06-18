@@ -385,7 +385,7 @@ class ProjectServiceImpl {
 
     public Long updateAccountProject(GPAccountProject accountProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        EntityCorrectness.checkAccountProject(null); // TODO assert
+        EntityCorrectness.checkAccountProject(accountProject); // TODO assert
 
         GPAccountProject orig = this.getAccountProjectByID(accountProject.getId());
         EntityCorrectness.checkAccountProject(orig); // TODO assert
@@ -393,6 +393,7 @@ class ProjectServiceImpl {
         // Update all properties (except the account and project reference)
         orig.setPermissionMask(accountProject.getPermissionMask());
         orig.setChecked(accountProject.isChecked());
+        orig.setBaseLayer(accountProject.getBaseLayer());
 
         accountProjectDao.merge(orig);
 

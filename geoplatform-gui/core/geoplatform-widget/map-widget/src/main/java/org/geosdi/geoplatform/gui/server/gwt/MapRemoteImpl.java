@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import org.geosdi.geoplatform.gui.client.service.MapRemote;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IMapService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +53,8 @@ public class MapRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Autowired
     private IMapService mapService;
 
-//    @Override
-//    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException {
-//        return mapService.layerAuthenticate(userName, password, url);
-//    }
+    @Override
+    public void saveBaseLayer(String baseLayer) throws GeoPlatformException {
+        mapService.saveBaseLayer(baseLayer, super.getThreadLocalRequest());
+    }
 }

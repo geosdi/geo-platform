@@ -38,10 +38,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.SOAPFaultException;
-import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPApplication;
-import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -82,14 +79,16 @@ public class SecurityService implements ISecurityService {
     public IGPAccountDetail userLogin(String userName, String password,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        GPUser user = null;
-        GuiComponentsPermissionMapData guiComponentPermission = null;
+        GPUser user;
+        GuiComponentsPermissionMapData guiComponentPermission;
+        GPAccountProject accountProject;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     userName, password);
-
             guiComponentPermission = geoPlatformServiceClient.getAccountPermission(
                     user.getId());
+            accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(user.getId(),
+                    user.getDefaultProjectID());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find user with username: " + userName
@@ -118,10 +117,9 @@ public class SecurityService implements ISecurityService {
                 user.getDefaultProjectID(),
                 httpServletRequest);
 
-        IGPAccountDetail userDetail = this.convertAccountToDTO(user);
-
+        IGPAccountDetail userDetail = this.convertAccountToDTO(user, accountProject);
         userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
-        
+
         return userDetail;
     }
 
@@ -131,11 +129,14 @@ public class SecurityService implements ISecurityService {
             throws GeoPlatformException {
         GPApplication application = null;
         GuiComponentsPermissionMapData guiComponentPermission = null;
+        GPAccountProject accountProject;
         try {
             application = geoPlatformServiceClient.getApplication(appID);
 
             guiComponentPermission = geoPlatformServiceClient.getApplicationPermission(
                     application.getAppID());
+            accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(application.getId(),
+                    application.getDefaultProjectID());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find application with appID: " + appID
@@ -158,7 +159,7 @@ public class SecurityService implements ISecurityService {
                 application.getDefaultProjectID(),
                 httpServletRequest);
 
-        IGPAccountDetail accountDetail = this.convertAccountToDTO(application);
+        IGPAccountDetail accountDetail = this.convertAccountToDTO(application, accountProject);
 
         accountDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
 
@@ -208,7 +209,7 @@ public class SecurityService implements ISecurityService {
         return idProject;
     }
 
-    private IGPAccountDetail convertAccountToDTO(GPAccount account) {
+    private IGPAccountDetail convertAccountToDTO(GPAccount account, GPAccountProject accountProject) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
         accountDetail.setUsername(account.getStringID()); // Forced representation
         if (account instanceof GPUser) {
@@ -220,6 +221,7 @@ public class SecurityService implements ISecurityService {
             accountDetail.setAuthkey(account.getGsAccount().getAuthkey());
         }
         accountDetail.setHostXmppServer(hostXmppServer);
+        accountDetail.setBaseLayer(accountProject.getBaseLayer());
         return (IGPAccountDetail) accountDetail;
     }
 

@@ -45,7 +45,6 @@ import com.google.gwt.core.client.GWT;
  */
 public class BasicWidgetResources {
 
-    public static final BasicWidgetIcons ICONS = GWT.create(
-            BasicWidgetIcons.class);
+    public static final BasicWidgetIcons ICONS = GWT.create(BasicWidgetIcons.class);
 
 }

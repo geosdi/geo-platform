@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
+import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
@@ -222,5 +223,12 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     @Override
     public void onReloadLayer(GPLayerBean layerBean) {
         this.reloadLayer(layerBean);
+    }
+    
+    @Override
+    public void onChangeBaseLayer(Projection projection){
+        for(GPLayerBean layer : super.layers.keySet()){
+            this.layerBuilder.generateBoundsTransformationFromMap(layer);
+        }
     }
 }

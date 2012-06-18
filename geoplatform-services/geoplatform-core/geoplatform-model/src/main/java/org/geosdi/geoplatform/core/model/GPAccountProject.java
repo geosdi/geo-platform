@@ -87,7 +87,10 @@ public class GPAccountProject implements Serializable {
     private int permissionMask = BasePermission.ADMINISTRATION.getMask();
     //
     @Column
-    private boolean checked = false;
+    private boolean checked = Boolean.FALSE;
+    //
+    @Column(name = "base_layer", nullable = false)
+    private String baseLayer = "GOOGLE_SATELLITE";
 
     /**
      * @return the id
@@ -157,6 +160,22 @@ public class GPAccountProject implements Serializable {
      */
     public void setPermissionMask(int permissionMask) {
         this.permissionMask = permissionMask;
+    }
+
+    /**
+     * 
+     * @return the baseLayer setted
+     */
+    public String getBaseLayer() {
+        return baseLayer;
+    }
+
+    /**
+     * 
+     * @param baseLayer 
+     */
+    public void setBaseLayer(String baseLayer) {
+        this.baseLayer = baseLayer;
     }
 
     /**

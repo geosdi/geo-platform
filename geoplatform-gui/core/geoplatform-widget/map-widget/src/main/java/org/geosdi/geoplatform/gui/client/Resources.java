@@ -36,16 +36,17 @@
 package org.geosdi.geoplatform.gui.client;
 
 import org.geosdi.geoplatform.gui.client.icons.GeoPlatformIcons;
-
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.images.GeoPlatformImages;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class Resources {
-	
-	public static final GeoPlatformIcons ICONS = GWT.create(GeoPlatformIcons.class);
 
+    public static final GeoPlatformIcons ICONS = GWT.create(GeoPlatformIcons.class);
+    
+    public static final GeoPlatformImages IMAGES = GWT.create(GeoPlatformImages.class);
 }

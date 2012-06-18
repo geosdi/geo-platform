@@ -39,6 +39,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
+/**
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
+ */
 public interface BasicWidgetImage extends ClientBundle {
 
     BasicWidgetImage INSTANCE = GWT.create(BasicWidgetImage.class);

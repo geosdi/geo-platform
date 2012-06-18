@@ -66,8 +66,8 @@ public class AddLayerWidget extends GeoPlatformWindow {
     private ContentPanel centralPanel;
 
     /**
-     *@param theTree 
-     * 
+     * @param theTree
+     *
      */
     public AddLayerWidget(TreePanel<GPBeanTreeModel> theTree) {
         super(true);
@@ -79,12 +79,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
             @Override
             protected IAddLayerPlugin prepareData(IAddLayerPlugin plugin) {
-//                Photo photo = plugin.getBean();
-//                long size = photo.getSize() / 1000;
                 plugin.set("shortName", Format.ellipse(plugin.getTooltip(), 30));
-//                plugin.set("sizeString", NumberFormat.getFormat("#0").format(size) + "k");
-//                plugin.set("dateString", DateTimeFormat.getMediumDateTimeFormat().format(photo.getDate()));
-//                plugin.set("path", GWT.getHostPageBaseURL() + photo.getPath());
                 return plugin;
             }
         };
@@ -92,7 +87,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
         listView.setItemSelector(".project-box");
         listView.setOverStyle("sample-over");
         listView.setSelectStyle("none");
-        listView.setBorders(false);
+        listView.setBorders(Boolean.FALSE);
         listView.setStore(store);
 
         listView.getSelectionModel().addSelectionChangedListener(

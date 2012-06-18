@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,16 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.factory.map;
+package org.geosdi.geoplatform.gui.client.event;
+
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.mvc.baselayer.GPBaseLayer;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public enum GPBaseLayer {
+public interface IChangeBaseLayerHandler extends EventHandler {
 
-    GOOGLE_NORMAL,
-    OPENSTREET_MAP,
-    BING_ROAD;
+    GwtEvent.Type<IChangeBaseLayerHandler> TYPE = new GwtEvent.Type<IChangeBaseLayerHandler>();
+
+    void changeBaseLayer(GPBaseLayer gpBaseLayer);
 }

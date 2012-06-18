@@ -18,6 +18,8 @@ public interface IGPAccountDetail {
     String getAuthkey();
 
     String getHostXmppServer();
+    
+    String getBaseLayer();
 
     void setComponentPermission(Map<String, Boolean> componentPermission);
 

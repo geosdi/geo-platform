@@ -52,7 +52,6 @@ import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 
 /**
@@ -61,12 +60,8 @@ import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
  */
 public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManager {
 
-//    private final static int MAX_NUMBER_ATTEMPTS = 5;
     private LoginStatus status;
     private EventType eventOnSuccess;
-//    private GwtEvent gwtEventOnSuccess = null;
-//    private String userLogged;
-//    private int reloginAttempts;
     private String loginFailureMessage;
     private SessionLoginWidget sessionLoginWidget;
 
@@ -80,15 +75,13 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         this.generateLoginManager();
         this.sessionLoginWidget = new SessionLoginWidget(eventOnSuccess);
     }
-    
+
     @Override
     protected void addStatusComponent() {
         status = new LoginStatus();
-        status.setAutoWidth(true);
-//        getButtonBar().add(status);
-//        getButtonBar().add(new FillToolItem());
+        status.setAutoWidth(Boolean.TRUE);
     }
-    
+
     @Override
     public void reset() {
         userName.setValue("");
@@ -96,7 +89,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         userName.setFocus(Boolean.TRUE);
         status.clearStatus("");
     }
-    
+
     public void errorConnection() {
         password.setValue("");
         validate();
@@ -104,11 +97,9 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         status.clearStatus("");
         login.setEnabled(Boolean.TRUE);
     }
-    
+
     @Override
     public void onSubmit() {
-//        if (this.userLogged == null
-//                || this.userLogged.equals(this.userName.getValue())) {
         status.setBusy("please wait...");
         login.setEnabled(Boolean.FALSE);
         super.showProgressBar();
@@ -117,7 +108,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                 this.userName.getValue(),
                 this.password.getValue(),
                 new AsyncCallback<IGPAccountDetail>() {
-                    
+
                     @Override
                     public void onFailure(Throwable caught) {
                         loginFailureMessage = caught.getMessage();
@@ -125,11 +116,8 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                         status.setStatus(
                                 LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
                                 LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
-//                            GeoPlatformMessage.infoMessage("Login Error",
-//                                    caught.getMessage());
-//                            ++reloginAttempts;
                     }
-                    
+
                     @Override
                     public void onSuccess(IGPAccountDetail result) {
                         loginFailureMessage = "";
@@ -137,43 +125,23 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                         status.setStatus(
                                 LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
                                 LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
-//                            userScreen();
-//                            userLogged = userName.getValue();
                         sessionLoginWidget.setUserLogger(userName.getValue());
-//                            reloginAttempts = 0;
                         Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), result.getAuthkey());
-                        Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), BaseLayerEnum.GOOGLE_SATELLITE.toString());
+                        Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), result.getBaseLayer());
                         loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
                     }
                 });
-//        } 
-//        else if ((this.reloginAttempts + 1) < MAX_NUMBER_ATTEMPTS) {
-//            ++this.reloginAttempts;
-//            GeoPlatformMessage.infoMessage(
-//                    "Number of attempts remained: " + (MAX_NUMBER_ATTEMPTS - this.reloginAttempts),
-//                    "A different user from the previous one is trying to connect to the application.");
-//        } else {
-//            this.resetUserSession();
-//        }
     }
-    
+
     @Override
     public void loginDone() {
         if (loginFailureMessage.equals("")) {
             Timer t = new Timer() {
-                
+
                 @Override
                 public void run() {
-//                    if (eventOnSuccess != null) {
                     Dispatcher.forwardEvent(eventOnSuccess);
-//                    } else {
                     LayoutManager.getInstance().getViewport().unmask();
-//                        if (getGwtEventOnSuccess() != null) {
-//                            TimeoutHandlerManager.fireEvent(getGwtEventOnSuccess());
-//                        }
-//                    }
-                    //TODO verify!!
-//                    LoginWidget.super.setVisible(Boolean.FALSE);
                     reset();
                     LoginWidget.super.progressBar.hide();
                 }
@@ -185,51 +153,12 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
             super.loginError.setText("Nome utente o password errati");
         }
     }
-    
+
     private void loginXMPPClient(String username, String password, String hostXmppServer) {
         GPXMPPClient xMPPClient = new GPXMPPClient();
         xMPPClient.userXMPPLogin(username, password, hostXmppServer);
     }
 
-//    public void resetUserSession() {
-//        SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
-//
-//            @Override
-//            public void onFailure(Throwable caught) {
-//                //TODO: In case of fail... what is possible to do??
-//            }
-//
-//            @Override
-//            public void onSuccess(Object result) {
-//                Dispatcher.forwardEvent(
-//                        GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
-//                GeoPlatformMessage.infoMessage("Application Logout",
-//                        "A different user from the previous one is trying to connect to the application");
-//                userLogged = null;
-//                Window.Location.reload();
-//            }
-//        });
-//    }
-//    private void userScreen() {
-//        Timer t = new Timer() {
-//
-//            @Override
-//            public void run() {
-//                if (eventOnSuccess != null) {
-//                    Dispatcher.forwardEvent(eventOnSuccess);
-//                } else {
-//                    LayoutManager.getInstance().getViewport().unmask();
-//                    if (getGwtEventOnSuccess() != null) {
-//                        TimeoutHandlerManager.fireEvent(getGwtEventOnSuccess());
-//                    }
-//                }
-//                //TODO verify!!
-//                LoginWidget.super.setVisible(Boolean.FALSE);
-//                reset();
-//            }
-//        };
-//        t.schedule(100);
-//    }
     /**
      * Set the correct Status Icon Style
      *
@@ -242,7 +171,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         this.status.setText(message.getValue());
         this.login.setEnabled(Boolean.TRUE);
     }
-    
+
     @Override
     public void generateLoginManager() {
         UserLoginManager loginManager = new UserLoginManager(this);
@@ -253,24 +182,16 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
      */
     public void setGwtEventOnSuccess(GwtEvent gwtEventOnSuccess) {
         this.sessionLoginWidget.setGwtEventOnSuccess(gwtEventOnSuccess);
-//        this.gwtEventOnSuccess = gwtEventOnSuccess;
-//        this.eventOnSuccess = null;
     }
-    
+
     public void show() {
         this.login.setEnabled(Boolean.TRUE);
         validate();
         super.setVisible(Boolean.TRUE);
         RootPanel.get().add(this);
     }
-    
+
     public void showSessionExpiredLogin() {
         this.sessionLoginWidget.show();
     }
-//    /**
-//     * @return the gwtEventOnSuccess
-//     */
-//    public GwtEvent getGwtEventOnSuccess() {
-//        return gwtEventOnSuccess;
-//    }
 }

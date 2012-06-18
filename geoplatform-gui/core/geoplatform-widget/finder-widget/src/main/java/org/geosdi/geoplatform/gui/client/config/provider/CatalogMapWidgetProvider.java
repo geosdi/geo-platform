@@ -37,27 +37,28 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.inject.Provider;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.factory.map.GPBaseLayer;
+import org.geosdi.geoplatform.gui.client.mvc.baselayer.BaseLayerFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogMapWidgetProvider implements Provider<MapWidget> {
-
+    
     private GeoPlatformMapFactory mapFactory;
-
+    
     @Inject
     public CatalogMapWidgetProvider(GeoPlatformMapFactory theMapFactory) {
         this.mapFactory = theMapFactory;
     }
-
+    
     @Override
     public MapWidget get() {
         return this.mapFactory.createMap("390px", "280px",
-                GPBaseLayer.OPENSTREET_MAP);
+                BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.OPEN_STREET_MAP).getGwtOlBaseLayer());
     }
 }

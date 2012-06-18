@@ -37,11 +37,12 @@ package org.geosdi.geoplatform.gui.factory.map;
 
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public interface GeoPlatformMapFactory {
 
@@ -49,5 +50,5 @@ public interface GeoPlatformMapFactory {
 
     public MapWidget createMap(String width, String height, MapOptions options);
 
-    public MapWidget createMap(String width, String height, GPBaseLayer baseLayer);
+    public MapWidget createMap(String width, String height, Layer gwtOLBaseLayer);
 }

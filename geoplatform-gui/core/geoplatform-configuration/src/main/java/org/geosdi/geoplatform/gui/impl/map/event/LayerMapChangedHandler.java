@@ -41,6 +41,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.gwtopenmaps.openlayers.client.Projection;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -64,6 +65,8 @@ public interface LayerMapChangedHandler extends EventHandler {
     public void onChangeCqlFilter(GPLayerTreeModel layerBean);
 
     public void changeOpacity(GPRasterBean layerBean);
+
+    public void onChangeBaseLayer(Projection projection);
 
     public void resetStore();
 }

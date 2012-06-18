@@ -75,7 +75,6 @@ public class MapWidgetUI implements EntryPoint {
         dispatcher = Dispatcher.get();
         dispatcher.addController(new MapController());
         addMapToolbarAction();
-        dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);
     }
 
     private void addMapToolbarAction() {

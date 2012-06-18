@@ -33,60 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.factory.map;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.gwtopenmaps.openlayers.client.*;
-import org.gwtopenmaps.openlayers.client.layer.*;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.widget.baselayer.BaseLayerWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class DefaultMapFactory implements GeoPlatformMapFactory {
+public class ChangeBaseLayerAction extends ToolbarMapAction {
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String,
-     * java.lang.String)
-     */
-    @Override
-    public MapWidget createMap(String width, String height) {
-        return new MapWidget(width, height);
+    private BaseLayerWidget baseLayerWidget;
+
+    public ChangeBaseLayerAction(GeoPlatformMap theMapWidget) {
+        super(BasicWidgetResources.ICONS.baseLayer(), "Select Base Layer");
+        this.baseLayerWidget = new BaseLayerWidget(Boolean.TRUE);
     }
 
     /**
      * (non-Javadoc)
      *
      * @see
-     * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String,
-     * java.lang.String, org.gwtopenmaps.openlayers.client.MapOptions)
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
-    public MapWidget createMap(String width, String height, MapOptions options) {
-        return new MapWidget(width, height, options);
-    }
-
-    @Override
-    public MapWidget createMap(String width, String height, Layer gwtOlBaseLayer) {
-        MapOptions defaultMapOptions = new MapOptions();
-
-        defaultMapOptions.setNumZoomLevels(25);
-
-        defaultMapOptions.setProjection("EPSG:3857");
-        defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
-        defaultMapOptions.setUnits(MapUnits.METERS);
-
-        defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
-                20037508, 20037508.34));
-        defaultMapOptions.setMaxResolution(
-                new Double(156543.0339).floatValue());
-
-        MapWidget mapWidget = new MapWidget(width, height, defaultMapOptions);
-        mapWidget.getMap().addLayer(gwtOlBaseLayer);
-
-        return mapWidget;
+    public void componentSelected(ButtonEvent ce) {
+        baseLayerWidget.show();
     }
 }

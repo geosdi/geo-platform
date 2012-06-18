@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service;
 
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -43,5 +44,6 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface IMapService {
 
-//    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException;
+    public void saveBaseLayer(String baseLayer, HttpServletRequest httpServletRequest) throws GeoPlatformException;
+
 }

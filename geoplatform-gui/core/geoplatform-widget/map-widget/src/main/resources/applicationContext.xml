@@ -73,4 +73,12 @@
         <property name="enabled" value="${gotoXY.enabled}" />
         <property name="order" value="${gotoXY.order}" />
     </bean>
+
+    <bean name="changeBaseLayer"
+              class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
+        <property name="id" value="${changeBaseLayer.id}" />
+        <property name="type" value="${changeBaseLayer.type}" />
+        <property name="enabled" value="${changeBaseLayer.enabled}" />
+        <property name="order" value="${changeBaseLayer.order}" />
+    </bean>
 </beans>

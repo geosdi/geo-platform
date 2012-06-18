@@ -35,17 +35,26 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.google.gwt.user.client.Timer;
+import org.geosdi.geoplatform.gui.client.event.IChangeBaseLayerHandler;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.client.mvc.baselayer.BaseLayerFactory;
+import org.geosdi.geoplatform.gui.client.mvc.baselayer.GPBaseLayer;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
+import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.impl.map.event.ChangeBaseLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.control.*;
@@ -54,21 +63,22 @@ import org.gwtopenmaps.openlayers.client.event.MeasureListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.handler.PathHandler;
 import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
-import org.gwtopenmaps.openlayers.client.layer.*;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class MapLayoutWidget implements GeoPlatformMap {
+public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler {
 
+    private final static String EPSG_4326 = "EPSG:4326";
+    private final static String EPSG_3857 = "EPSG:3857";
+    private final static String EPSG_900913 = "EPSG:900913";
     private MapWidget mapWidget;
-    private MapOptions defaultMapOptions;
+    private MapOptions mapOptions;
     private MapControlManager mapControl;
     private Map map;
-    private Layer layer;
-    private Layer osm;
     private GPRoutingManagerWidget routingWidget;
     private MapModel mapModel;
     private MapToolbar buttonBar;
@@ -77,64 +87,76 @@ public class MapLayoutWidget implements GeoPlatformMap {
     private boolean infoActive;
     private boolean measureActive;
     private boolean measureAreaActive;
-    
-    private final String bingKey = "Apd8EWF9Ls5tXmyHr22OuL1ay4HRJtI4JG4jgluTDVaJdUXZV6lpSBpX-TwnoRDG";
+    private ChangeBaseLayerMapEvent changeBaseLayerMapEvent;
 
     public MapLayoutWidget() {
         super();
         GPApplicationMap.getInstance().setApplicationMap(this);
-        this.createMapOption();
+        this.setBaseMapOptions();
+        this.initMapWidget();
         this.mapModel = new MapModel(this);
         this.routingWidget = new GPRoutingManagerWidget(this);
         this.mapModel.addLayerChangedHandler();
+        MapHandlerManager.addHandler(IChangeBaseLayerHandler.TYPE, this);
     }
 
-    private void createMapOption() {
+    private void setBaseMapOptions() {
+        this.mapOptions = new MapOptions();
+        this.mapOptions.setNumZoomLevels(30);
+        String baseLayerKey = Registry.get(GlobalRegistryEnum.BASE_LAYER.getValue());
+        GPBaseLayer baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
+        if (baseLayer == null) {
+            baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.OPEN_STREET_MAP);
+        }
+        if (baseLayer.getProjection().getProjectionCode().equals(EPSG_4326)) {
+            set4326MapOptions(this.mapOptions);
+        } else {
+            set3857MapOptions(this.mapOptions);
+        }
 
-        this.defaultMapOptions = new MapOptions();
+    }
 
-        this.defaultMapOptions.setNumZoomLevels(30);
+    private void set4326MapOptions(MapOptions options) {
+        options.setProjection(EPSG_4326);
+        options.setUnits(MapUnits.DEGREES);
+        options.setMaxExtent(new Bounds(-180, -90,
+                180, 83.623));
+        options.setMaxResolution(new Double(1.40625).floatValue());
+        options.setDisplayProjection(new Projection(EPSG_4326));
+    }
 
-        this.defaultMapOptions.setProjection("EPSG:3857");
-        this.defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
-        this.defaultMapOptions.setUnits(MapUnits.METERS);
-
-        this.defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
+    private void set3857MapOptions(MapOptions options) {
+        options.setProjection(EPSG_3857);
+        options.setUnits(MapUnits.METERS);
+        options.setMaxExtent(new Bounds(-20037508, -20037508,
                 20037508, 20037508.34));
-        this.defaultMapOptions.setMaxResolution(
-                new Double(156543.0339).floatValue());
-
-        initMapWidget(this.defaultMapOptions);
+        options.setMaxResolution(new Double(156543.0339).floatValue());
+        options.setDisplayProjection(new Projection(EPSG_3857));
     }
 
-    private void initMapWidget(MapOptions defaultMapOptions) {
-        mapWidget = new MapWidget("100%", "100%", defaultMapOptions);
+    private void initMapWidget() {
+        this.mapWidget = new MapWidget("100%", "100%", mapOptions);
         this.map = mapWidget.getMap();
-        this.map.addControl(new LayerSwitcher());
         this.map.addControl(new ScaleLine());
         this.map.addControl(new MousePosition());
-
-
         this.addMeasureControl();
         this.addMeasureAreaControl();
-
-        this.createOSM();
-        this.createBaseGoogleLayer();
-        this.createBingLayer();
-
+        String baseLayerKey = Registry.get(GlobalRegistryEnum.BASE_LAYER.getValue());
+        GPBaseLayer baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
+        if (baseLayer == null) {
+            baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
+        }
+        this.map.addLayer(baseLayer.getGwtOlBaseLayer());
+        baseLayer.getGwtOlBaseLayer().setZIndex(-1);
         this.mapControl = new MapControlManager(this.map);
     }
 
-	public void addMeasureControl() {
-
+    public void addMeasureControl() {
         MeasureOptions measOpts = new MeasureOptions();
-        measOpts.setPersist(true);
-        measOpts.setGeodesic(true);
-
+        measOpts.setPersist(Boolean.TRUE);
+        measOpts.setGeodesic(Boolean.TRUE);
         this.measure = new Measure(new PathHandler(), measOpts);
-
         this.map.addControl(measure);
-
         this.measure.addMeasureListener(new MeasureListener() {
 
             @Override
@@ -143,19 +165,14 @@ public class MapLayoutWidget implements GeoPlatformMap {
                         + eventObject.getUnits());
             }
         });
-
     }
 
     public void addMeasureAreaControl() {
-
         MeasureOptions measOpts = new MeasureOptions();
-        measOpts.setPersist(true);
-        measOpts.setGeodesic(true);
-
+        measOpts.setPersist(Boolean.TRUE);
+        measOpts.setGeodesic(Boolean.TRUE);
         this.measureArea = new Measure(new PolygonHandler(), measOpts);
-
         this.map.addControl(measureArea);
-
         this.measureArea.addMeasureListener(new MeasureListener() {
 
             @Override
@@ -164,12 +181,11 @@ public class MapLayoutWidget implements GeoPlatformMap {
                         + eventObject.getUnits());
             }
         });
-
     }
 
     @Override
     public void activateInfo() {
-        this.infoActive = true;
+        this.infoActive = Boolean.TRUE;
         MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive));
     }
 
@@ -203,78 +219,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.measureAreaActive = false;
     }
 
-    private void createOSM() {
-        OSMOptions osmOption = new OSMOptions();
-        // osmOption.setDisplayOutsideMaxExtent(true);
-        // osmOption.setWrapDateLine(true);
-
-        this.osm = OSM.Mapnik("OpenStreetMap", osmOption);
-        this.osm.setIsBaseLayer(true);
-        this.map.addLayer(osm);
-        this.osm.setZIndex(-1);
-    }
-
-    private void createBaseGoogleLayer() {
-        GoogleV3Options option = new GoogleV3Options();
-        option.setType(GoogleV3MapType.G_NORMAL_MAP);
-        option.setSphericalMercator(true);
-        option.setTransitionEffect(TransitionEffect.RESIZE);
-
-        layer = new GoogleV3("Google Normal", option);
-        layer.setIsBaseLayer(true);
-        this.map.addLayer(layer);
-
-        this.layer.setZIndex(-2);
-
-        GoogleV3Options opSatellite = new GoogleV3Options();
-        opSatellite.setType(GoogleV3MapType.G_SATELLITE_MAP);
-        opSatellite.setSphericalMercator(true);
-        opSatellite.setTransitionEffect(TransitionEffect.RESIZE);
-
-        Layer satellite = new GoogleV3("Google Satellite", opSatellite);
-        satellite.setIsBaseLayer(true);
-        this.map.addLayer(satellite);
-
-        satellite.setZIndex(-3);
-
-        GoogleV3Options opHybrid = new GoogleV3Options();
-        opHybrid.setType(GoogleV3MapType.G_HYBRID_MAP);
-        opHybrid.setSphericalMercator(true);
-        opHybrid.setTransitionEffect(TransitionEffect.RESIZE);
-
-        Layer hybrid = new GoogleV3("Google Hybrid", opHybrid);
-        hybrid.setIsBaseLayer(true);
-        this.map.addLayer(hybrid);
-
-        hybrid.setZIndex(-4);
-    }
-    
-    private void createBingLayer() {
-		
-    	 Bing road = new Bing(new BingOptions("Bing Road Layer",
-                 bingKey, BingType.ROAD));
-    	 road.setIsBaseLayer(true);
-    	 
-    	 this.map.addLayer(road);
-    	 road.setZIndex(-5);
-
-         Bing hybrid = new Bing(new BingOptions("Bing Hybrid Layer",
-        		 bingKey, BingType.HYBRID));
-         hybrid.setIsBaseLayer(true);
-         
-         this.map.addLayer(hybrid);
-         hybrid.setZIndex(-6);
-
-         Bing aerial = new Bing(new BingOptions("Bing Aerial Layer",
-        		 bingKey, BingType.AERIAL));
-         
-         aerial.setIsBaseLayer(true);
-         this.map.addLayer(aerial);
-         
-         aerial.setZIndex(-7);
-		
-	}
-
     /**
      * Add Map to the ContentPanel passed from Dispatcher
      *
@@ -285,7 +229,9 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
         setMapCenter();
 
-        /** OPEN SCALE WIDGET **/
+        /**
+         * OPEN SCALE WIDGET *
+         */
         if (!GPScaleWidget.isScaleWidgetEnabled()) {
             showScaleWidget();
         }
@@ -296,7 +242,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
      */
     public void setMapCenter() {
         LonLat center = new LonLat(13.375, 42.329);
-        center.transform("EPSG:4326", map.getProjection());
+        center.transform(EPSG_4326, map.getProjection());
         this.map.setCenter(center, 5);
 
         this.mapControl.clearNavigationHistory();
@@ -398,7 +344,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
     /**
      * @param buttonBar
-     *            the buttonBar to set
+     * the buttonBar to set
      */
     public void setButtonBar(MapToolbar buttonBar) {
         this.buttonBar = buttonBar;
@@ -505,16 +451,20 @@ public class MapLayoutWidget implements GeoPlatformMap {
         return measureAreaActive;
     }
 
-    /* (non-Javadoc)
-     * @see org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#activateDrawLineFeature()
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#activateDrawLineFeature()
      */
     @Override
     public void activateDrawLineFeature() {
         this.mapControl.activateDrawLineFeature();
     }
 
-    /* (non-Javadoc)
-     * @see org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#deactivateDrawLineFeature()
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#deactivateDrawLineFeature()
      */
     @Override
     public void deactivateDrawLineFeature() {
@@ -522,7 +472,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     }
 
     /**
-     * 
+     *
      * @param bbox
      */
     @Override
@@ -530,6 +480,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
         Bounds b = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
                 bbox.getUpperRightX(), bbox.getUpperRightY());
         if (!map.getProjection().equals(crs)) {
+            System.out.println("Changed projection from: " + crs
+                    + ", to: " + map.getProjection());
             b.transform(new Projection(crs),
                     new Projection(map.getProjection()));
         }
@@ -552,5 +504,41 @@ public class MapLayoutWidget implements GeoPlatformMap {
     public double getScaleForZoom(double zoom) {
         String units = this.map.getCurrentUnits();
         return this.map.getScaleForZoom(zoom, units);
+    }
+
+    @Override
+    public void changeBaseLayer(GPBaseLayer gpBaseLayer) {
+        if (!gpBaseLayer.getGwtOlBaseLayer().getName().equals(map.getBaseLayer().getName())) {
+            int zoomLevel = this.map.getZoom();
+            MapOptions options = this.mapOptions;
+            Bounds bounds = this.map.getExtent();
+            boolean projectionChanged = Boolean.FALSE;
+            if (gpBaseLayer.getProjection().getProjectionCode().equals(EPSG_4326)
+                    && !this.map.getProjection().equals(EPSG_4326)) {
+                this.set4326MapOptions(options);
+                bounds.transform(new Projection(this.map.getProjection()), new Projection(EPSG_4326));
+                projectionChanged = Boolean.TRUE;
+            } else if (gpBaseLayer.getProjection().getProjectionCode().equals(EPSG_3857)
+                    && !this.map.getProjection().equals(EPSG_3857)) {
+                this.set3857MapOptions(options);
+                bounds.transform(new Projection(this.map.getProjection()), new Projection(EPSG_900913));
+                projectionChanged = Boolean.TRUE;
+            }
+            Layer newBaseLayer = gpBaseLayer.getGwtOlBaseLayer();
+            Layer oldBaseLayer = this.map.getBaseLayer();
+            this.map.setBaseLayer(newBaseLayer);
+            this.map.addLayer(newBaseLayer);
+            this.map.removeLayer(oldBaseLayer);
+            newBaseLayer.setZIndex(-1);
+            this.map.setOptions(options);
+            if (projectionChanged) {
+                this.map.zoomToExtent(bounds);
+                this.map.zoomTo(zoomLevel);
+            }
+            this.changeBaseLayerMapEvent = new ChangeBaseLayerMapEvent(gpBaseLayer.getProjection());
+            GPHandlerManager.fireEvent(this.changeBaseLayerMapEvent);
+        } else {
+            GeoPlatformMessage.infoMessage("Base Layer", "The selected base layer is already displayed");
+        }
     }
 }

@@ -87,6 +87,7 @@ public class GuiComponentIDs {
     public static final String RESIZE_FEATURE = "resizeFeature";
     public static final String DELETE_FEATURE = "deleteFeature";
     public static final String GOTO_XY = "gotoXY";
+    public static final String CHANGE_BASE_LAYER = "changeBaseLayer";
     //
     public static final String CLEAR_MAP = "clearMap";
     public static final String GOOGLE_REVERSE_GEOCODING = "googleReverseGeocoding";
@@ -163,6 +164,7 @@ public class GuiComponentIDs {
         all.add(RESIZE_FEATURE);
         all.add(DELETE_FEATURE);
         all.add(GOTO_XY);
+        all.add(CHANGE_BASE_LAYER);
         all.add(CLEAR_MAP);
         all.add(GOOGLE_REVERSE_GEOCODING);
         all.add(YAHOO_REVERSE_GEOCODING);
@@ -216,6 +218,7 @@ public class GuiComponentIDs {
         mapUser.put(RESIZE_FEATURE, true);
         mapUser.put(DELETE_FEATURE, true);
         mapUser.put(GOTO_XY, true);
+        mapUser.put(CHANGE_BASE_LAYER, true);
         mapUser.put(CLEAR_MAP, true);
         mapUser.put(GOOGLE_REVERSE_GEOCODING, true);
         mapUser.put(YAHOO_REVERSE_GEOCODING, true);
@@ -268,6 +271,7 @@ public class GuiComponentIDs {
         mapViewer.put(RESIZE_FEATURE, true);
         mapViewer.put(DELETE_FEATURE, true);
         mapViewer.put(GOTO_XY, true);
+        mapViewer.put(CHANGE_BASE_LAYER, true);
         mapViewer.put(CLEAR_MAP, true);
         mapViewer.put(GOOGLE_REVERSE_GEOCODING, true);
         mapViewer.put(YAHOO_REVERSE_GEOCODING, true);
@@ -312,6 +316,7 @@ public class GuiComponentIDs {
         mapSigv.put(ZOOM_PREVIOUS, true);
         mapSigv.put(ZOOM_NEXT, true);
         mapSigv.put(GOTO_XY, true);
+        mapSigv.put(CHANGE_BASE_LAYER, true);
         mapSigv.put(GOOGLE_REVERSE_GEOCODING, true);
         mapSigv.put(YAHOO_REVERSE_GEOCODING, true);
         mapSigv.put(COMMIT, true);

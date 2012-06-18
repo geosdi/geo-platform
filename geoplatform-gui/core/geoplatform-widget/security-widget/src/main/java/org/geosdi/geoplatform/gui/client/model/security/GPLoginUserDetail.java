@@ -22,6 +22,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     private String email;
     private String authkey;
     private String hostXmppServer;
+    private String baseLayer;
     private Map<String, Boolean> componentPermission;
 
     public GPLoginUserDetail() {
@@ -105,5 +106,14 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     @Override
     public Boolean hasComponentPermission(String componentID) {
         return componentPermission.get(componentID);
+    }
+    
+    public void setBaseLayer(String baseLayer){
+        this.baseLayer = baseLayer;
+    }
+    
+    @Override
+    public String getBaseLayer(){
+        return baseLayer;
     }
 }

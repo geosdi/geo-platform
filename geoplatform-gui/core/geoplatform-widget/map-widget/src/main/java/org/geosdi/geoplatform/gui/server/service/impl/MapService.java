@@ -35,14 +35,20 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
-import it.geosolutions.geonetwork.util.HTTPUtils;
-import java.net.MalformedURLException;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IMapService;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -56,6 +62,7 @@ public class MapService implements IMapService {
     //
     @Autowired
     private SessionUtility sessionUtility;
+    private GeoPlatformService geoPlatformServiceClient;
 
 //    @Override
 //    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException {
@@ -70,4 +77,34 @@ public class MapService implements IMapService {
 //        }
 //        return responce;
 //    }
+    @Override
+    public void saveBaseLayer(String baseLayer, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        GPAccount account;
+        try {
+            account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        try {
+            GPAccountProject accountProject = this.geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(account.getId(),
+                    account.getDefaultProjectID());
+            accountProject.setBaseLayer(baseLayer);
+            this.geoPlatformServiceClient.updateAccountProject(accountProject);
+        } catch (ResourceNotFoundFault rnff) {
+            logger.error("Error on MapService: " + rnff);
+            throw new GeoPlatformException(rnff);
+        } catch (IllegalParameterFault ipf) {
+            logger.error("Error on MapService: " + ipf);
+            throw new GeoPlatformException(ipf);
+        }
+    }
+
+    /**
+     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     */
+    @Autowired
+    public void setGeoPlatformServiceClient(
+            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
+        this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
 }

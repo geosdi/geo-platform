@@ -84,21 +84,13 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
         }
 
         WMSOptions wmsOption = new WMSOptions();
-        if (rasterBean.getBbox() != null) {
-
-            Bounds bbox = new Bounds(rasterBean.getBbox().getLowerLeftX(),
-                    rasterBean.getBbox().getLowerLeftY(),
-                    rasterBean.getBbox().getUpperRightX(),
-                    rasterBean.getBbox().getUpperRightY());
-
-            bbox.transform(new Projection(rasterBean.getCrs()), new Projection(
-                    mapWidget.getMap().getProjection()));
-
+        Bounds bbox = this.generateBoundsTransformationFromMap(rasterBean);
+        if (bbox != null) {
             wmsOption.setMaxExtent(bbox);
         }
-        wmsOption.setIsBaseLayer(false);
-        wmsOption.setDisplayInLayerSwitcher(false);
-        wmsOption.setDisplayOutsideMaxExtent(true);
+        wmsOption.setIsBaseLayer(Boolean.FALSE);
+        wmsOption.setDisplayInLayerSwitcher(Boolean.FALSE);
+        wmsOption.setDisplayOutsideMaxExtent(Boolean.TRUE);
         wmsOption.setBuffer(0);
         wmsOption.setRatio(1);
 
@@ -108,6 +100,19 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
         layer.setOpacity(rasterBean.getOpacity());
 
         return layer;
+    }
+
+    public Bounds generateBoundsTransformationFromMap(GPLayerBean layerBean) {
+        Bounds bounds = null;
+        if (layerBean.getBbox() != null) {
+            bounds = new Bounds(layerBean.getBbox().getLowerLeftX(),
+                    layerBean.getBbox().getLowerLeftY(),
+                    layerBean.getBbox().getUpperRightX(),
+                    layerBean.getBbox().getUpperRightY());
+            bounds.transform(new Projection(layerBean.getCrs()), new Projection(
+                    mapWidget.getMap().getProjection()));
+        }
+        return bounds;
     }
 
     /*

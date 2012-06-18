@@ -45,13 +45,12 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class MapController extends GeoPlatformController {
 
     public MapController() {
-        registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-                MapWidgetEvents.ATTACH_MAP_WIDGET,
+        registerEventTypes(MapWidgetEvents.ATTACH_MAP_WIDGET,
                 MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
                 MapWidgetEvents.DRAW_FEATURE, GeoPlatformEvents.UPDATE_CENTER);
     }

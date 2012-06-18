@@ -33,15 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global.enumeration;
+package org.geosdi.geoplatform.gui.client.mvc.baselayer;
+
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
+import org.geosdi.geoplatform.gui.impl.GeoPlatformGlobal;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public enum BaseLayerEnum {
+public class GPBaseLayer extends GeoPlatformBeanModel {
 
-    BASE_LAYER, IMAGE, PROJECTION, ENUM_NAME, OPEN_STREET_MAP, GOOGLE_NORMAL, 
-    GOOGLE_SATELLITE, GOOGLE_HYBRID, BING_ROAD_LAYER, BING_HYBRID, BING_AERIAL, 
-    METACARTA, GEOSDI_BASE, GEOSDI_NULL_BASE;
+    private static final long serialVersionUID = -1326266553265622034L;
+
+//    private Layer gwtOlBaseLayer;
+//    private AbstractImagePrototype baseLayerImage;
+//    private Projection projection;
+    public GPBaseLayer(Layer gwtOlBaseLayer, AbstractImagePrototype baseLayerImage,
+            Projection projection, BaseLayerEnum enumName) {
+        super.set(BaseLayerEnum.IMAGE.toString(), baseLayerImage.getHTML());
+        super.set(GlobalRegistryEnum.BASE_LAYER.toString(), gwtOlBaseLayer);
+        super.set(BaseLayerEnum.PROJECTION.toString(), projection);
+        super.set(BaseLayerEnum.ENUM_NAME.toString(), enumName);
+        super.set(GlobalRegistryEnum.TOOLTIP.toString(), gwtOlBaseLayer.getName()
+                + " - " + projection.getProjectionCode());
+    }
+    
+    public BaseLayerEnum getBaseLayerEnumName(){
+        return super.get(BaseLayerEnum.ENUM_NAME.toString());
+    }
+
+    public String getBaseLayerImage() {
+        return super.get(BaseLayerEnum.IMAGE.toString());
+    }
+
+    public Layer getGwtOlBaseLayer() {
+        return super.get(GlobalRegistryEnum.BASE_LAYER.toString());
+    }
+
+    public Projection getProjection() {
+        return super.get(BaseLayerEnum.PROJECTION.toString());
+    }
+
+    @Override
+    public String toString() {
+        return "GPBaseLayer{" + getGwtOlBaseLayer() + " - "
+                + getProjection() + " - " + getBaseLayerImage() + '}';
+    }
 }

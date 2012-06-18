@@ -77,18 +77,18 @@ public class PointAdapter extends XmlAdapter<String, Point> {
      *
      * This method provide marshalling by value
      *
-     * @param the WKT representation of the geometry
+     * @param geom WKT representation of the geometry
      *
      */
     @Override
-    public String marshal(Point the_geom) throws ParseException {
-        if (the_geom != null) {
+    public String marshal(Point geom) throws ParseException {
+        if (geom != null) {
             WKTWriter wktWriter = new WKTWriter();
-            if (the_geom.getSRID() == 0) {
-                the_geom.setSRID(4326);
+            if (geom.getSRID() == 0) {
+                geom.setSRID(4326);
             }
 
-            return wktWriter.write(the_geom);
+            return wktWriter.write(geom);
         } else {
             throw new ParseException("Geometry obj is null.");
         }

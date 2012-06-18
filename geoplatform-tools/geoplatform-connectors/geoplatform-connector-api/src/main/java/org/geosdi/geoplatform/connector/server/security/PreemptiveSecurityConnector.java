@@ -43,7 +43,6 @@ import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.ClientContext;
-import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.auth.AuthSchemeBase;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.protocol.BasicHttpContext;
@@ -90,9 +89,10 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
     }
 
     protected HttpHost extractHost(URI uri) {
-        return (this.httpHost = this.httpHost == null
-                ? new HttpHost(uri.getHost(), this.retrieveNoSetPort(uri), uri.getScheme())
-                : this.httpHost);
+        if (this.httpHost == null) {
+            this.httpHost = new HttpHost(uri.getHost(), this.retrieveNoSetPort(uri), uri.getScheme());
+        }
+        return this.httpHost;
     }
 
     /**
@@ -102,6 +102,9 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
      */
     protected abstract AuthSchemeBase createScheme();
 
+    /**
+     * If the URI don't have e port, retrieve the standard port wrt scheme ["http" or "https"].
+     */
     private int retrieveNoSetPort(URI uri) {
         int port = uri.getPort();
         if (port > 0) {

@@ -91,14 +91,14 @@ public class GPLayerInfo implements Serializable {
      * @param keywords
      *            the keywords to set
      */
-    public void setKeywords(List<String> keys) {
-        if (keys == null || keys.isEmpty()) {
+    public void setKeywords(List<String> keywords) {
+        if (keywords == null || keywords.isEmpty()) {
             this.keywords = null;
             return;
         }
 
         StringBuilder str = new StringBuilder();
-        for (String key : keys) {
+        for (String key : keywords) {
             str.append(key).append(";");
         }
         str.deleteCharAt(str.length() - 1);

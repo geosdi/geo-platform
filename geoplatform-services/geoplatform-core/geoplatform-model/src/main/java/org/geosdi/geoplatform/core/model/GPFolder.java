@@ -159,15 +159,15 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @return the numberOfDescendant
+     * @return the numberOfDescendants
      */
     public int getNumberOfDescendants() {
         return numberOfDescendants;
     }
 
     /**
-     * @param numberOfDescendant
-     *            the numberOfDescendant to set
+     * @param numberOfDescendants
+     *            the numberOfDescendants to set
      */
     public void setNumberOfDescendants(int numberOfDescendants) {
         this.numberOfDescendants = numberOfDescendants;

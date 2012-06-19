@@ -131,7 +131,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         options.setMaxExtent(new Bounds(-20037508, -20037508,
                 20037508, 20037508.34));
         options.setMaxResolution(new Double(156543.0339).floatValue());
-        options.setDisplayProjection(new Projection(EPSG_3857));
+        options.setDisplayProjection(new Projection(EPSG_4326));
     }
 
     private void initMapWidget() {
@@ -510,6 +510,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     public void changeBaseLayer(GPBaseLayer gpBaseLayer) {
         if (!gpBaseLayer.getGwtOlBaseLayer().getName().equals(map.getBaseLayer().getName())) {
             int zoomLevel = this.map.getZoom();
+            double scale = this.map.getScale();
             MapOptions options = this.mapOptions;
             Bounds bounds = this.map.getExtent();
             boolean projectionChanged = Boolean.FALSE;
@@ -532,8 +533,10 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             newBaseLayer.setZIndex(-1);
             this.map.setOptions(options);
             if (projectionChanged) {
-                this.map.zoomToExtent(bounds);
+                this.map.zoomToMaxExtent();
+                this.map.zoomToScale((float) scale, Boolean.TRUE);
                 this.map.zoomTo(zoomLevel);
+                this.map.zoomToExtent(bounds);
             }
             this.changeBaseLayerMapEvent = new ChangeBaseLayerMapEvent(gpBaseLayer.getProjection());
             GPHandlerManager.fireEvent(this.changeBaseLayerMapEvent);

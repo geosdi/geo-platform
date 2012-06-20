@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.components.tab.MetadataTabItem;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.SearchTabItem;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
@@ -55,6 +54,6 @@ public class CatalogFinderInjectorModule extends AbstractGinModule {
 
         bind(SearchTabItem.class).in(Singleton.class);
 
-        bind(MetadataTabItem.class).in(Singleton.class);
+//        bind(MetadataTabItem.class).in(Singleton.class); // TODO Integrated view of Full Record
     }
 }

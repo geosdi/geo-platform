@@ -54,6 +54,7 @@ public abstract class AbstractRecordDTO implements Serializable {
     //
     private String identifier;
     private String title;
+    private String catalogURL;
     private String type;
     private String abstractText;
     @XmlElementWrapper(name = "subjectList")
@@ -74,6 +75,14 @@ public abstract class AbstractRecordDTO implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getCatalogURL() {
+        return catalogURL;
+    }
+
+    public void setCatalogURL(String catalogURL) {
+        this.catalogURL = catalogURL;
     }
 
     public String getType() {
@@ -111,6 +120,7 @@ public abstract class AbstractRecordDTO implements Serializable {
     protected StringBuilder toStringBuilder(StringBuilder str) {
         str.append("identifier=").append(identifier);
         str.append(", title=").append(title);
+        str.append(", catalogURL=").append(catalogURL);
         str.append(", type=").append(type);
         str.append(", abstractText=").append(abstractText);
         str.append(", subjects=").append(subjects);

@@ -49,20 +49,20 @@ import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
 public class GPCatalogTabWidget extends GeoPlatformTabWidget {
 
     private SearchTabItem searchItem;
-    private MetadataTabItem metadataItem;
+//    private MetadataTabItem metadataItem; // TODO Integrated view of Full Record
 
     @Inject
-    public GPCatalogTabWidget(SearchTabItem theSearchItem,
-            MetadataTabItem theMetadataItem) {
+    public GPCatalogTabWidget(SearchTabItem theSearchItem){
+//            MetadataTabItem theMetadataItem) { // TODO Integrated view of Full Record
         super(true);
         this.searchItem = theSearchItem;
-        this.metadataItem = theMetadataItem;
+//        this.metadataItem = theMetadataItem; // TODO Integrated view of Full Record
     }
 
     @Override
     public void addComponents() {
         super.add(this.searchItem);
-        super.add(this.metadataItem);
+//        super.add(this.metadataItem); // TODO Integrated view of Full Record
     }
 
     @Override
@@ -87,7 +87,7 @@ public class GPCatalogTabWidget extends GeoPlatformTabWidget {
     @Override
     public void reset() {
         this.searchItem.reset();
-        this.metadataItem.reset();
+//        this.metadataItem.reset(); // TODO Integrated view of Full Record
 
         // TODO Reset for view the searchItem
 //        super.setSelection(this.searchItem);

@@ -386,7 +386,7 @@ class CSWServiceImpl {
             summaryRecordList.add(summary);
         }
 
-        return this.convertSummaryRecords(summaryRecordList);
+        return this.convertSummaryRecords(summaryRecordList, server.getServerUrl());
     }
 
     /**
@@ -446,7 +446,7 @@ class CSWServiceImpl {
             recordList.add(record);
         }
 
-        return this.convertFullRecords(recordList);
+        return this.convertFullRecords(recordList, server.getServerUrl());
     }
 
     private GeoPlatformServer getCSWServerByID(Long serverID)
@@ -460,10 +460,11 @@ class CSWServiceImpl {
         return server;
     }
 
-    private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> recordList) {
+    private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> recordList, String catalogURL) {
         List<SummaryRecordDTO> recordListDTO = new ArrayList<SummaryRecordDTO>(recordList.size());
         for (SummaryRecordType record : recordList) {
             SummaryRecordDTO dto = new SummaryRecordDTO();
+            dto.setCatalogURL(catalogURL);
             dto.setIdentifier(
                     BindingUtility.convertJaxbLiteralListToString(record.getIdentifier()));
             dto.setTitle(
@@ -478,10 +479,11 @@ class CSWServiceImpl {
         return recordListDTO;
     }
 
-    private List<FullRecordDTO> convertFullRecords(List<RecordType> recordList) {
+    private List<FullRecordDTO> convertFullRecords(List<RecordType> recordList, String catalogURL) {
         List<FullRecordDTO> recordListDTO = new ArrayList<FullRecordDTO>(recordList.size());
         for (RecordType record : recordList) {
             FullRecordDTO dto = new FullRecordDTO();
+            dto.setCatalogURL(catalogURL);
 
             for (JAXBElement<? extends SimpleLiteral> element : record.getDCElement()) {
                 String localPartElement = element.getName().getLocalPart();

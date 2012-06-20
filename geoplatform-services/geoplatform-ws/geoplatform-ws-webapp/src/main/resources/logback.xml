@@ -33,6 +33,7 @@
     
     <logger name="org.geosdi.geoplatform.services.AclServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.CSWServiceImpl" level="trace"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.WMSServiceImpl" level="trace"/><!-- TODO info -->
     
     <logger name="org.geosdi.geoplatform.jobs.TempAccountExpireJob" level="info"/>
     <logger name="org.geosdi.geoplatform.jobs.EmailTask" level="debug"/><!-- TODO info -->

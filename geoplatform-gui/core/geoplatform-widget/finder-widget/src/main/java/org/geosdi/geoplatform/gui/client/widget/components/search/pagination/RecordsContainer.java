@@ -44,11 +44,14 @@ import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowExpander;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.action.toolbar.menu.ShowFullMetadataAction;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
@@ -77,8 +80,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     private RowExpander rowExpander;
     private boolean selectionContainer;
     private CatalogMetadataSelectionManager metadataSelection;
-    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(
-            false);
+    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(false);
 
     @Inject
     public RecordsContainer(CatalogFinderBean theCatalogFinder,
@@ -104,6 +106,19 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
         super.widget.addPlugin(this.rowExpander);
         super.widget.addPlugin(this.selectionModel);
+
+        super.widget.setContextMenu(this.createRecordContextMenu());
+    }
+
+    private Menu createRecordContextMenu() {
+        MenuItem fullMetadata = new MenuItem();
+        fullMetadata.setText("Read Full Metadata");
+        fullMetadata.addSelectionListener(new ShowFullMetadataAction(selectionModel));
+
+        Menu menu = new Menu();
+        menu.add(fullMetadata);
+
+        return menu;
     }
 
     @Override
@@ -217,19 +232,19 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
                                 se.setCancelled(true);
 
                                 metadataSelection.addRecordExcluded(record);
-                                metadataSelection.fireCatalogRecordToolTip(
-                                        record);
+                                metadataSelection.fireCatalogRecordToolTip(record);
                             }
                         }
                     });
 
-            this.selectionModel.addSelectionChangedListener(new SelectionChangedListener<FullRecord>() {
+            this.selectionModel.addSelectionChangedListener(
+                    new SelectionChangedListener<FullRecord>() {
 
-                @Override
-                public void selectionChanged(SelectionChangedEvent<FullRecord> se) {
-                    metadataSelection.manageSelectionChanged(se);
-                }
-            });
+                        @Override
+                        public void selectionChanged(SelectionChangedEvent<FullRecord> se) {
+                            metadataSelection.manageSelectionChanged(se);
+                        }
+                    });
         }
     }
 

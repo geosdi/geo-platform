@@ -109,7 +109,7 @@ public class FullRecordDTO extends AbstractRecordDTO {
         str.append(super.toStringBuilder(str));
         str.append(", bBox=").append(bBox);
         str.append(", crs=").append(crs);
-        str.append(", uri=").append(getUriMap());
+        str.append(", uriMap=").append(uriMap);
         return str.append('}').toString();
     }
 }

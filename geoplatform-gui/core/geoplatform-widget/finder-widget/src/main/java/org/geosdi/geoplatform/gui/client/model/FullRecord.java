@@ -112,9 +112,9 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
     public String toString() {
         StringBuilder str = new StringBuilder("FullRecord {");
         str.append(super.toString());
-        str.append(", bBox =").append(bBox);
-        str.append(", crs =").append(crs);
-        str.append(", uriList =").append(getUriMap());
+        str.append(", bBox = ").append(bBox);
+        str.append(", crs = ").append(crs);
+        str.append(", uriList = ").append(getUriMap());
         return str.append('}').toString();
     }
 

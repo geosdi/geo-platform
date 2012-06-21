@@ -90,7 +90,7 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         maxLatField = new TextField<String>();
         maxLatField.setWidth(55);
         maxLatField.setReadOnly(true);
-//        maxLatField.setValue("47.0946");
+
         maxLatField.setFireChangeEventOnSetValue(true);
         maxLatField.addListener(Events.Change,
                 new Listener<FieldEvent>() {
@@ -135,7 +135,7 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         minLatField = new TextField<String>();
         minLatField.setWidth(55);
         minLatField.setReadOnly(true);
-//        minLatField.setValue("36.6492");
+
         minLatField.setFireChangeEventOnSetValue(true);
         minLatField.addListener(Events.Change,
                 new Listener<FieldEvent>() {
@@ -180,7 +180,7 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         minLonField = new TextField<String>();
         minLonField.setWidth(55);
         minLonField.setReadOnly(true);
-//        minLonField.setValue("6.624");
+
         minLonField.setFireChangeEventOnSetValue(true);
         minLonField.addListener(Events.Change,
                 new Listener<FieldEvent>() {
@@ -229,7 +229,7 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         maxLonField = new TextField<String>();
         maxLonField.setWidth(55);
         maxLonField.setReadOnly(true);
-//        maxLonField.setValue("18.5144");
+
         maxLonField.setFireChangeEventOnSetValue(true);
         maxLonField.addListener(Events.Change,
                 new Listener<FieldEvent>() {
@@ -262,12 +262,12 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
     @Override
     public void onBBoxChange(CatalogBBoxChangeEvent event) {
         this.minLatField.setValue((event.getLowerLeftY() != null)
-                ? event.getLowerLeftX().toString() : null);
-        this.minLonField.setValue((event.getLowerLeftX() != null)
                 ? event.getLowerLeftY().toString() : null);
+        this.minLonField.setValue((event.getLowerLeftX() != null)
+                ? event.getLowerLeftX().toString() : null);
         this.maxLatField.setValue((event.getUpperRightY() != null)
-                ? event.getUpperRightX().toString() : null);
-        this.maxLonField.setValue((event.getUpperRightX() != null)
                 ? event.getUpperRightY().toString() : null);
+        this.maxLonField.setValue((event.getUpperRightX() != null)
+                ? event.getUpperRightX().toString() : null);
     }
 }

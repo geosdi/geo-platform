@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.action.toolbar.menu.ShowFullMetadataAction;
+import org.geosdi.geoplatform.gui.client.action.menu.ShowFullMetadataAction;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;

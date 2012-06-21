@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.inject.Provider;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.mvc.baselayer.BaseLayerFactory;
+import org.geosdi.geoplatform.gui.client.widget.baselayer.model.BaseLayerFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
 import org.gwtopenmaps.openlayers.client.MapWidget;

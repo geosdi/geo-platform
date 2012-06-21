@@ -36,42 +36,46 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.google.gwt.user.client.Window;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
+import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 
 /**
- *
+ * Execute a CSW GetRecordById request, for view, into a new browser tab, 
+ * the full metadata of the record selected via the grid context menu.
+ * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class ShowFullMetadataAction extends MenuAction { // TODO extends MenuBaseAction if must be added an icon
+public class ShowFullMetadataAction extends MenuBaseAction {
 
-    private CheckBoxSelectionModel<FullRecord> selectionModel;
+    private RecordsContainer rc;
 
-    public ShowFullMetadataAction(CheckBoxSelectionModel<FullRecord> selectionModel) {
-        super("ShowFullMetadata");
-        this.selectionModel = selectionModel;
+    @Inject
+    public ShowFullMetadataAction(RecordsContainer rc) {
+        super("Read Full Metadata", CatalogFinderWidgetResources.ICONS.metadata());
+
+        this.rc = rc;
     }
 
     @Override
     public void componentSelected(MenuEvent e) {
-        FullRecord record = selectionModel.getSelectedItem();
-        System.out.println(
-                "\n\n\n*** Record for GetRecordById request ***\n" + record); // TODO logger
-
+        FullRecord record = rc.getSelectedRecord();
         /**
-         * TODO
-         * Think a manner for view Full Metadata also for a record that can't be selectable.
-         *
-         * Example: search "web map" on geoSDI catalog and try to read
-         * full metadata with context menu
+         * If the record can't be selectable, retrieve the first (and only)
+         * record excluded from selection.
          */
-        if (record != null) {
-            String url = this.createRequestURL(record);
-
-            Window.open(url, "Full Metadata", "");
+        if (record == null) {
+            record = rc.getMetadataSelection().getRecordsExcluded().get(0);
         }
+//        System.out.println(
+//                "\n\n\n*** Record for GetRecordById request ***\n" + record); // TODO logger
+
+        String url = this.createRequestURL(record);
+
+        Window.open(url, "Full Metadata", "");
     }
 
     private String createRequestURL(FullRecord record) {
@@ -82,8 +86,7 @@ public class ShowFullMetadataAction extends MenuAction { // TODO extends MenuBas
         str.append("Service").append("=").append("CSW").append("&");
         str.append("Version").append("=").append("2.0.2").append("&");
         str.append("ElementSetName").append("=").append("full").append("&");
-        str.append("OutputSchema").append("=").append(
-                "http://www.isotc211.org/2005/gmd").append("&");
+        str.append("OutputSchema").append("=").append("http://www.isotc211.org/2005/gmd").append("&");
         str.append("Id").append("=").append(record.getIdentifier());
 
         return str.toString();

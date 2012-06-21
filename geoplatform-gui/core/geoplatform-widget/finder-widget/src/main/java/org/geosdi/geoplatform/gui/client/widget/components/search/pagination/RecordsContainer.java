@@ -111,9 +111,12 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     }
 
     private Menu createRecordContextMenu() {
+        ShowFullMetadataAction showFullMetadata = new ShowFullMetadataAction(this);
+
         MenuItem fullMetadata = new MenuItem();
-        fullMetadata.setText("Read Full Metadata");
-        fullMetadata.addSelectionListener(new ShowFullMetadataAction(selectionModel));
+        fullMetadata.addSelectionListener(showFullMetadata);
+        fullMetadata.setText(showFullMetadata.getTitle());
+        fullMetadata.setIcon(showFullMetadata.getImage());
 
         Menu menu = new Menu();
         menu.add(fullMetadata);
@@ -255,6 +258,14 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
     public List<FullRecord> getSelectedRecords() {
         return selectionModel.getSelectedItems();
+    }
+
+    public FullRecord getSelectedRecord() {
+        return selectionModel.getSelectedItem();
+    }
+
+    public CatalogMetadataSelectionManager getMetadataSelection() {
+        return metadataSelection;
     }
 
     @Override

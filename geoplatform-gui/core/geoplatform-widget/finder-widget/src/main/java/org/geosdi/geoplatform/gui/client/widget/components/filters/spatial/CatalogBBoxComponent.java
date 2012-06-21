@@ -241,7 +241,7 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
                                 ? Double.valueOf(fe.getValue().toString()).doubleValue()
                                 : 0;
 
-                        bBox.setMaxY(value);
+                        bBox.setMaxX(value);
                     }
                 });
 
@@ -261,13 +261,13 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
 
     @Override
     public void onBBoxChange(CatalogBBoxChangeEvent event) {
-        this.minLatField.setValue((event.getLowerLeftX() != null)
+        this.minLatField.setValue((event.getLowerLeftY() != null)
                 ? event.getLowerLeftX().toString() : null);
-        this.minLonField.setValue((event.getLowerLeftY() != null)
+        this.minLonField.setValue((event.getLowerLeftX() != null)
                 ? event.getLowerLeftY().toString() : null);
-        this.maxLatField.setValue((event.getUpperRightX() != null)
+        this.maxLatField.setValue((event.getUpperRightY() != null)
                 ? event.getUpperRightX().toString() : null);
-        this.maxLonField.setValue((event.getUpperRightY() != null)
+        this.maxLonField.setValue((event.getUpperRightX() != null)
                 ? event.getUpperRightY().toString() : null);
     }
 }

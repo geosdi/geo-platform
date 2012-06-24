@@ -81,8 +81,8 @@ public class CatalogGetRecordsTest {
     @Test
     public void testSummaryRecord() throws Exception {
         URL url = new URL(geosdiUrl);
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
-                withServerUrl(url).build();
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(
+                url).build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
@@ -98,9 +98,12 @@ public class CatalogGetRecordsTest {
         GetRecordsResponseType response = request.getResponse();
 
         SearchResultsType result = response.getSearchResults();
-        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
-        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsReturned());
-        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNextRecord());
+        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}",
+                result.getNumberOfRecordsMatched());
+        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}",
+                result.getNumberOfRecordsReturned());
+        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}",
+                result.getNextRecord());
 
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
         if (!metadata.isEmpty()) {
@@ -112,8 +115,8 @@ public class CatalogGetRecordsTest {
     @Test
     public void testFullRecord() throws Exception {
         URL url = new URL(geosdiUrl);
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
-                withServerUrl(url).build();
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(
+                url).build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
@@ -183,10 +186,9 @@ public class CatalogGetRecordsTest {
 //    
     @Test
     public void testSecureGetRecords() throws Exception {
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
-                withServerUrl(new URL(snipcUrl)).
-                withClientSecurity(new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword)).
-                build();
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(new URL(
+                snipcUrl)).withClientSecurity(new BasicPreemptiveSecurityConnector(
+                snipcUsername, snipcPassword)).build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
 
@@ -202,9 +204,12 @@ public class CatalogGetRecordsTest {
         GetRecordsResponseType response = request.getResponse();
 
         SearchResultsType result = response.getSearchResults();
-        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsMatched());
-        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNumberOfRecordsReturned());
-        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}", result.getNextRecord());
+        logger.info("RECORD MATCHES @@@@@@@@@@@@@@@@@@@@@ {}",
+                result.getNumberOfRecordsMatched());
+        logger.info("RECORDS FOUND @@@@@@@@@@@@@@@@@@@@@@ {}",
+                result.getNumberOfRecordsReturned());
+        logger.info("NEXT RECORD @@@@@@@@@@@@@@@@@@@@@@ {}",
+                result.getNextRecord());
 
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
 

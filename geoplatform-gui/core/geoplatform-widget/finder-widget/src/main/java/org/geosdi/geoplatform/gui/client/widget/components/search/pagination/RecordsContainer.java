@@ -205,7 +205,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     }
 
     public void searchRecords() {
-        super.loader.load();
+        super.loader.load(0, super.getPageSize());
     }
 
     @Override

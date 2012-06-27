@@ -81,14 +81,12 @@ public class SecurityService implements ISecurityService {
             throws GeoPlatformException {
         GPUser user;
         GuiComponentsPermissionMapData guiComponentPermission;
-        GPAccountProject accountProject;
+        GPAccountProject accountProject = null;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     userName, password);
             guiComponentPermission = geoPlatformServiceClient.getAccountPermission(
                     user.getId());
-            accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(user.getId(),
-                    user.getDefaultProjectID());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find user with username: " + userName
@@ -105,7 +103,15 @@ public class SecurityService implements ISecurityService {
             logger.error("Error on SecurityService: " + ex);
             throw new GeoPlatformException(ex.getMessage() + ", contact the administrator");
         }
-
+        //This must be executed necessarily in another try-catch block
+        try {
+            accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(user.getId(),
+                    user.getDefaultProjectID());
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("SecurityService",
+                    "Unable to find an accountProject associated the this user: " + userName
+                    + " Error: " + ex);
+        }
         if (user.getDefaultProjectID() == null) {
             GPProject project = new GPProject();
             project.setName("Default Project");
@@ -221,7 +227,9 @@ public class SecurityService implements ISecurityService {
             accountDetail.setAuthkey(account.getGsAccount().getAuthkey());
         }
         accountDetail.setHostXmppServer(hostXmppServer);
-        accountDetail.setBaseLayer(accountProject.getBaseLayer());
+        if (accountProject != null) {
+            accountDetail.setBaseLayer(accountProject.getBaseLayer());
+        }
         return (IGPAccountDetail) accountDetail;
     }
 

@@ -104,9 +104,12 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.mapOptions = new MapOptions();
         this.mapOptions.setNumZoomLevels(30);
         String baseLayerKey = Registry.get(GlobalRegistryEnum.BASE_LAYER.getValue());
-        GPBaseLayer baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
-        if (baseLayer == null) {
-            baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.OPEN_STREET_MAP);
+        GPBaseLayer baseLayer;
+        if (baseLayerKey != null) {
+            baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
+        } else {
+            baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
+            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
         }
         if (baseLayer.getProjection().getProjectionCode().equals(EPSG_4326)) {
             set4326MapOptions(this.mapOptions);

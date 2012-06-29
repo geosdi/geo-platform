@@ -394,7 +394,9 @@ class WMSServiceImpl {
 
 	private String getUrlServer(String urlServer) {
 		int index = -1;
-		if (urlServer.contains("mapserv.exe")
+		if (urlServer.contains(".map")) {
+			index = urlServer.indexOf(".map") + 4;
+		} else if (urlServer.contains("mapserv.exe")
 				|| urlServer.contains("mapserver")
 				|| urlServer.contains("mapserv") 
 				|| urlServer.contains("usertoken")) {

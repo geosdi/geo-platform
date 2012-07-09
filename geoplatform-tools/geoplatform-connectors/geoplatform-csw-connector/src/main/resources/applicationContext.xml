@@ -35,7 +35,7 @@
                        value="ows:ProviderSite,ows:ServiceContact"/>
                     
                 <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities" 
-                       value="ows:OperationsMetadata,ogc:Filter_Capabilities"/>
+                       value="ows:OperationsMetadata,ogc:Filter_Capabilities,ows:ExtendedCapabilities"/>
             </util:map>
         </property>
     </bean>

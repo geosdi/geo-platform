@@ -86,7 +86,7 @@ public class ShowFullMetadataAction extends MenuBaseAction {
         str.append("Service").append("=").append("CSW").append("&");
         str.append("Version").append("=").append("2.0.2").append("&");
         str.append("ElementSetName").append("=").append("full").append("&");
-        str.append("OutputSchema").append("=").append("http://www.isotc211.org/2005/gmd").append("&");
+        str.append("OutputSchema").append("=").append("http://www.opengis.net/cat/csw/2.0.2").append("&");
         str.append("Id").append("=").append(record.getIdentifier());
 
         return str.toString();

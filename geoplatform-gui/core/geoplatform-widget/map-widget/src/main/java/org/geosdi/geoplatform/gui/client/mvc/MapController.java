@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
+import com.extjs.gxt.ui.client.mvc.AppEvent;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

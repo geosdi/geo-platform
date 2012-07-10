@@ -50,11 +50,11 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.ChangeBaseLayerEvent;
-import org.geosdi.geoplatform.gui.client.mvc.baselayer.BaseLayerFactory;
-import org.geosdi.geoplatform.gui.client.mvc.baselayer.GPBaseLayer;
 import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
+import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
@@ -75,12 +75,11 @@ public class BaseLayerWidget extends GeoPlatformWindow {
 
     public BaseLayerWidget(boolean lazy) {
         super(lazy);
-        this.store = new ListStore<GPBaseLayer>();
     }
 
     @Override
     public void addComponent() {
-        this.store.add(BaseLayerFactory.getBaseLayerList());
+        this.store.add(GPMapBaseLayerFactory.getBaseLayerList());
         Button saveButton = new Button("Save", BasicWidgetResources.ICONS.save(), new SelectionListener<ButtonEvent>() {
 
             @Override

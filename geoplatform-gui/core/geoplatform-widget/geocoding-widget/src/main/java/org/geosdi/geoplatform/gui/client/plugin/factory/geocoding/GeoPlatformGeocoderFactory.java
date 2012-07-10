@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlug
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public class GeoPlatformGeocoderFactory implements GeocoderFactory {
@@ -63,7 +63,8 @@ public class GeoPlatformGeocoderFactory implements GeocoderFactory {
     public IGPGeocoderPluginManager getPluginManager() {
         GeoPlatformGeocoderRepository repo = GeoPlatformGeocoderRepository.getInstance();
 
-        IGPGeocoderPluginManager pluginManager = repo.findPlugin(getGeocoderPluginType());
+        IGPGeocoderPluginManager pluginManager = repo.findPlugin(
+                getGeocoderPluginType());
 
         return pluginManager != null ? pluginManager : istantiate();
     }
@@ -75,7 +76,7 @@ public class GeoPlatformGeocoderFactory implements GeocoderFactory {
 
     /**
      * Istantiate the Plugin Manager
-     * 
+     *
      * @return IGPGeocoderPluginManager
      */
     private IGPGeocoderPluginManager istantiate() {
@@ -86,10 +87,9 @@ public class GeoPlatformGeocoderFactory implements GeocoderFactory {
                 pluginManager = new SimpleGeocoderPluginManagerImpl();
                 break;
             case ADVANCED:
-                pluginManager = new AdvancedGeocoderPluginManager(GeocoderPluginType.ADVANCED);
-                break;
             case ADVANCED_WITH_GOOGLE:
-                pluginManager = new AdvancedGeocoderPluginManager(GeocoderPluginType.ADVANCED_WITH_GOOGLE);
+                pluginManager = new AdvancedGeocoderPluginManager(
+                        getGeocoderPluginType());
                 break;
             default:
                 pluginManager = new SimpleGeocoderPluginManagerImpl();

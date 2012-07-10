@@ -33,61 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.baselayer.factory;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener;
-import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener.MapMoveEndEvent;
+import com.google.common.collect.Lists;
+import java.util.EnumMap;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.adapater.MapBaseLayerAdapter;
+import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
+import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
 
 /**
- *
+
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
+ * 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogMapMoveListenerProvider implements
-        Provider<MapMoveEndListener> {
+public class GPMapBaseLayerFactory {
 
-    private GPEventBus bus;
-    private CatalogBBoxChangeEvent event = new CatalogBBoxChangeEvent();
+    static {
+        baseLayerMap = new MapBaseLayerAdapter().adapt(
+                new GPBaseLayerFactory().lookupBaseLayers());
+    }
+    //
+    private static EnumMap<BaseLayerEnum, GPBaseLayer> baseLayerMap;
 
-    @Inject
-    public CatalogMapMoveListenerProvider(GPEventBus theBus) {
-        this.bus = theBus;
+    public static List<GPBaseLayer> getBaseLayerList() {
+        return Lists.newArrayList(baseLayerMap.values());
     }
 
-    @Override
-    public MapMoveEndListener get() {
-        return new MapMoveEndListener() {
-            
-            @Override
-            public void onMapMoveEnd(MapMoveEndEvent eventObject) {
-                Map map = eventObject.getSource();
-                fireCatalogBBoxChangeEvent(CatalogMapExtentReprojector.reprojects(
-                        new Projection(map.getProjection()), map.getExtent()));
-            }
-        };
-    }
-
-    protected void fireCatalogBBoxChangeEvent(Bounds extent) {
-        this.event.bind(extent);
-        this.bus.fireEvent(event);
-    }
-
-    public static class CatalogMapExtentReprojector {
-
-        private static final Projection dest = new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode());
-
-        public static Bounds reprojects(Projection source, Bounds input) {
-            return (source.getProjectionCode().equals(dest.getProjectionCode()))
-                    ? input : input.transform(source, dest);
-        }
+    public static GPBaseLayer getGPBaseLayer(BaseLayerEnum baseLayerEnum) {
+        return baseLayerMap.get(baseLayerEnum);
     }
 }

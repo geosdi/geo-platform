@@ -39,10 +39,9 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.google.gwt.user.client.Timer;
 import org.geosdi.geoplatform.gui.client.event.IChangeBaseLayerHandler;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
-import org.geosdi.geoplatform.gui.client.mvc.baselayer.BaseLayerFactory;
-import org.geosdi.geoplatform.gui.client.mvc.baselayer.GPBaseLayer;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
+import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
+import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
@@ -50,6 +49,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientIn
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.event.ChangeBaseLayerMapEvent;
@@ -106,9 +106,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         String baseLayerKey = Registry.get(GlobalRegistryEnum.BASE_LAYER.getValue());
         GPBaseLayer baseLayer;
         if (baseLayerKey != null) {
-            baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
         } else {
-            baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
             Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
         }
         if (baseLayer.getProjection().getProjectionCode().equals(EPSG_4326)) {
@@ -145,9 +145,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.addMeasureControl();
         this.addMeasureAreaControl();
         String baseLayerKey = Registry.get(GlobalRegistryEnum.BASE_LAYER.getValue());
-        GPBaseLayer baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
+        GPBaseLayer baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
         if (baseLayer == null) {
-            baseLayer = BaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
         }
         this.map.addLayer(baseLayer.getGwtOlBaseLayer());
         baseLayer.getGwtOlBaseLayer().setZIndex(-1);

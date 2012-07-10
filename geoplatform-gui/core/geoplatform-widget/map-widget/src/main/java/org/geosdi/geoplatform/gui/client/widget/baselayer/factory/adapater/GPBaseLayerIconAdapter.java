@@ -33,61 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.baselayer.factory.adapater;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener;
-import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener.MapMoveEndEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogMapMoveListenerProvider implements
-        Provider<MapMoveEndListener> {
+public class GPBaseLayerIconAdapter {
 
-    private GPEventBus bus;
-    private CatalogBBoxChangeEvent event = new CatalogBBoxChangeEvent();
+    protected static AbstractImagePrototype adaptBaseLayerIcon(BaseLayerEnum key) {
+        switch (key) {
+            case OPEN_STREET_MAP:
+                return Resources.IMAGES.osm();
 
-    @Inject
-    public CatalogMapMoveListenerProvider(GPEventBus theBus) {
-        this.bus = theBus;
-    }
+            case GOOGLE_NORMAL:
+                return Resources.IMAGES.googleNormal();
 
-    @Override
-    public MapMoveEndListener get() {
-        return new MapMoveEndListener() {
-            
-            @Override
-            public void onMapMoveEnd(MapMoveEndEvent eventObject) {
-                Map map = eventObject.getSource();
-                fireCatalogBBoxChangeEvent(CatalogMapExtentReprojector.reprojects(
-                        new Projection(map.getProjection()), map.getExtent()));
-            }
-        };
-    }
+            case GOOGLE_HYBRID:
+                return Resources.IMAGES.googleHybrid();
 
-    protected void fireCatalogBBoxChangeEvent(Bounds extent) {
-        this.event.bind(extent);
-        this.bus.fireEvent(event);
-    }
+            case BING_ROAD_LAYER:
+                return Resources.IMAGES.bingRoad();
 
-    public static class CatalogMapExtentReprojector {
+            case BING_HYBRID:
+                return Resources.IMAGES.bingHybrid();
 
-        private static final Projection dest = new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode());
+            case BING_AERIAL:
+                return Resources.IMAGES.bingAerial();
 
-        public static Bounds reprojects(Projection source, Bounds input) {
-            return (source.getProjectionCode().equals(dest.getProjectionCode()))
-                    ? input : input.transform(source, dest);
+            case METACARTA:
+                return Resources.IMAGES.metacartaVmap();
+
+            case GEOSDI_BASE:
+                return Resources.IMAGES.DPC();
+
+            case GEOSDI_NULL_BASE:
+                return Resources.IMAGES.blank();
+
+            default:
+                return Resources.IMAGES.googleSatellite();
         }
     }
 }

@@ -33,61 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.factory.baselayer;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener;
-import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener.MapMoveEndEvent;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogMapMoveListenerProvider implements
-        Provider<MapMoveEndListener> {
+public class GPBaseLayerFactory implements BaseLayerFactory {
 
-    private GPEventBus bus;
-    private CatalogBBoxChangeEvent event = new CatalogBBoxChangeEvent();
+    public static Layer getBaseLayer(BaseLayerEnum enumLayer) {
+        GPBaseLayerFactory factory = new GPBaseLayerFactory();
 
-    @Inject
-    public CatalogMapMoveListenerProvider(GPEventBus theBus) {
-        this.bus = theBus;
+        return factory.findBaseLayer(enumLayer) != null ? factory.findBaseLayer(
+                enumLayer) : factory.getDefaultBaseLayer();
     }
 
     @Override
-    public MapMoveEndListener get() {
-        return new MapMoveEndListener() {
-            
-            @Override
-            public void onMapMoveEnd(MapMoveEndEvent eventObject) {
-                Map map = eventObject.getSource();
-                fireCatalogBBoxChangeEvent(CatalogMapExtentReprojector.reprojects(
-                        new Projection(map.getProjection()), map.getExtent()));
-            }
-        };
+    public Layer getDefaultBaseLayer() {
+        return GPBaseLayerRepository.getInstance().findBaseLayer(
+                BaseLayerEnum.GOOGLE_SATELLITE);
     }
 
-    protected void fireCatalogBBoxChangeEvent(Bounds extent) {
-        this.event.bind(extent);
-        this.bus.fireEvent(event);
+    @Override
+    public Layer findBaseLayer(BaseLayerEnum enumLayer) {
+        return GPBaseLayerRepository.getInstance().findBaseLayer(enumLayer);
     }
 
-    public static class CatalogMapExtentReprojector {
-
-        private static final Projection dest = new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode());
-
-        public static Bounds reprojects(Projection source, Bounds input) {
-            return (source.getProjectionCode().equals(dest.getProjectionCode()))
-                    ? input : input.transform(source, dest);
-        }
+    @Override
+    public Map<BaseLayerEnum, Layer> lookupBaseLayers() {
+        return GPBaseLayerRepository.getInstance().getAllBaseLayers();
     }
 }

@@ -76,41 +76,41 @@ public class CatalogCapabilitiesTest {
     @Autowired
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
 
-//    @Test
-//    public void testCapabilitiesV201WithoutVersionControl() {
-//        try {
-//            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl(
-//                    "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw?SERVICE");
-//
-//            logger.info(
-//                    "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL"
-//                    + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-//
-//        } catch (MalformedURLException ex) {
-//            logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
-//        } catch (IOException es) {
-//            logger.error("IOException @@@@@@@@@@@@@@ " + es);
-//        }
-//    }
-//
-//    @Test
-//    public void testCapabilitiesV201() {
-//        try {
-//            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl(
-//                    "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw");
-//
-//            logger.info(
-//                    "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1"
-//                    + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-//
-//        } catch (MalformedURLException ex) {
-//            logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
-//        } catch (IOException es) {
-//            logger.error("IOException @@@@@@@@@@@@@@ " + es);
-//        } catch (CatalogVersionException ve) {
-//            logger.error("CatalogVersionException @@@@@@@@@@@@ " + ve);
-//        }
-//    }
+    @Test
+    public void testCapabilitiesV201WithoutVersionControl() {
+        try {
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl(
+                    "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw?SERVICE");
+
+            logger.info(
+                    "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL"
+                    + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
+
+        } catch (MalformedURLException ex) {
+            logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
+        } catch (IOException es) {
+            logger.error("IOException @@@@@@@@@@@@@@ " + es);
+        }
+    }
+
+    @Test
+    public void testCapabilitiesV201() {
+        try {
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl(
+                    "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw");
+
+            logger.info(
+                    "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1"
+                    + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
+
+        } catch (MalformedURLException ex) {
+            logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
+        } catch (IOException es) {
+            logger.error("IOException @@@@@@@@@@@@@@ " + es);
+        } catch (CatalogVersionException ve) {
+            logger.error("CatalogVersionException @@@@@@@@@@@@ " + ve);
+        }
+    }
 
     @Test
     public void testCapabilitiesV202() throws Exception {

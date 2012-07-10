@@ -43,17 +43,16 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public interface GeoPlatformLayerFactory {
 
-	public Layer createWMS(String name, String url, WMSParams params);
+    public Layer createWMS(String name, String url, WMSParams params);
 
-	public Layer createWMS(String name, String url, WMSParams params,
-			WMSOptions layerParams);
+    public Layer createWMS(String name, String url, WMSParams params,
+            WMSOptions layerParams);
 
-	public Layer createVector(String name, VectorOptions options);
+    public Layer createVector(String name, VectorOptions options);
 
-	public Layer createVector(String name);
-
+    public Layer createVector(String name);
 }

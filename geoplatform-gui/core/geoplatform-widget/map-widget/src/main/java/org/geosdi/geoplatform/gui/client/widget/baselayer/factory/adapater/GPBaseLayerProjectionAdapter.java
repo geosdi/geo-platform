@@ -33,61 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.baselayer.factory.adapater;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.Map;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
 import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener;
-import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener.MapMoveEndEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogMapMoveListenerProvider implements
-        Provider<MapMoveEndListener> {
+public class GPBaseLayerProjectionAdapter {
 
-    private GPEventBus bus;
-    private CatalogBBoxChangeEvent event = new CatalogBBoxChangeEvent();
+    protected static Projection adaptBaseLayerProjection(BaseLayerEnum key) {
+        switch (key) {
+            case OPEN_STREET_MAP:
+            case GOOGLE_NORMAL:
+            case GOOGLE_HYBRID:
+            case BING_ROAD_LAYER:
+            case BING_HYBRID:
+            case BING_AERIAL:
+                return new Projection("EPSG:3857");
 
-    @Inject
-    public CatalogMapMoveListenerProvider(GPEventBus theBus) {
-        this.bus = theBus;
-    }
+            case METACARTA:
+            case GEOSDI_BASE:
+            case GEOSDI_NULL_BASE:
+                return new Projection("EPSG:4326");
 
-    @Override
-    public MapMoveEndListener get() {
-        return new MapMoveEndListener() {
-            
-            @Override
-            public void onMapMoveEnd(MapMoveEndEvent eventObject) {
-                Map map = eventObject.getSource();
-                fireCatalogBBoxChangeEvent(CatalogMapExtentReprojector.reprojects(
-                        new Projection(map.getProjection()), map.getExtent()));
-            }
-        };
-    }
-
-    protected void fireCatalogBBoxChangeEvent(Bounds extent) {
-        this.event.bind(extent);
-        this.bus.fireEvent(event);
-    }
-
-    public static class CatalogMapExtentReprojector {
-
-        private static final Projection dest = new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode());
-
-        public static Bounds reprojects(Projection source, Bounds input) {
-            return (source.getProjectionCode().equals(dest.getProjectionCode()))
-                    ? input : input.transform(source, dest);
+            default:
+                return new Projection("EPSG:3857");
         }
     }
 }

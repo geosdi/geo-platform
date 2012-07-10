@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin.factory.geocoding;
 
-import java.util.Map;
 import com.google.common.collect.Maps;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPluginManager;
 

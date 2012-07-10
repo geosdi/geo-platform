@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.event;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.mvc.baselayer.GPBaseLayer;
+import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

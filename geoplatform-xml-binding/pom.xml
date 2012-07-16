@@ -20,6 +20,7 @@
         <module>geoplatform-filter-binding</module>
         <module>geoplatform-ows-binding</module>
         <module>geoplatform-csw-binding</module>
+        <module>geoplatform-wps-binding</module>
         <module>geoplatform-ebrim-binding</module>
         <module>geoplatform-iso19139-binding</module>
     </modules>

@@ -18,6 +18,7 @@
 
     <modules>
         <module>ows-1.0.0</module>
+        <module>ows-1.1.0</module>
     </modules>
     
 </project>

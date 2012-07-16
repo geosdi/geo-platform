@@ -65,8 +65,8 @@ import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- * 
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
@@ -85,14 +85,14 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.search.setFieldLabel("Find User");
         this.userPropertiesWidget = new UserPropertiesWidget(super.store);
         super.addButton(1, new Button("Add User",
-                                      BasicWidgetResources.ICONS.logged_user(),
-                                      new SelectionListener<ButtonEvent>() {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                showUserPropertiesWidget(true);
-            }
-        }));
+                BasicWidgetResources.ICONS.logged_user(),
+                new SelectionListener<ButtonEvent>() {
+                    
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        showUserPropertiesWidget(true);
+                    }
+                }));
     }
 
     @Override
@@ -107,7 +107,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.setSize(600, 490);
 
         super.addWindowListener(new WindowListener() {
-
+            
             @Override
             public void windowShow(WindowEvent we) {
                 searchText = "";
@@ -121,10 +121,10 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.toolBar = new PagingToolBar(super.getPageSize());
 
         super.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
-
+            
             @Override
             protected void load(Object loadConfig,
-                                AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
+                    AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
 
                 UserRemote.Util.getInstance().searchUsers(
                         (PagingLoadConfig) loadConfig, searchText, callback);
@@ -204,7 +204,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         searchStatus.setBusy("Retrive roles");
 
         UserRemoteImpl.Util.getInstance().getAllRoles(new AsyncCallback<ArrayList<String>>() {
-
+            
             @Override
             public void onFailure(Throwable caught) {
                 setSearchStatus(
@@ -215,7 +215,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
             @Override
             public void onSuccess(ArrayList<String> result) {
                 setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
-                                SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+                        SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
 
                 GPUserManageDetail userDetail;
                 if (isNewUser) {

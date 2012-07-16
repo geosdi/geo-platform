@@ -1,0 +1,42 @@
+<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               xmlns:wildcard="http://jaxb2-commons.dev.java.net/basic/wildcard"
+               xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
+               jaxb:extensionBindingPrefixes="ci xjc wildcard">
+    
+    <jaxb:bindings schemaLocation="wps/1.0.0/wpsAll.xsd" 
+                       node="/xs:schema">
+        <jaxb:globalBindings
+            fixedAttributeAsConstantProperty="false"
+            typesafeEnumBase="xs:string"
+            typesafeEnumMemberName="generateName" 
+            generateIsSetMethod="true">
+        </jaxb:globalBindings>
+        
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.wps.v100"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+    
+    <jaxb:bindings schemaLocation="wps/1.0.0/wpsExecute_request.xsd" 
+                       node="/xs:schema">
+        <jaxb:bindings node="xs:complexType[@name='ComplexDataType']">
+            <wildcard:lax/>
+
+            <ci:code>
+                public List&lt;Object> getContent() {
+                return getAny();
+                }
+
+                public void setContent(List&lt;Object> value) {
+                setAny(value);
+                }
+            </ci:code>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:complexType[@name='ComplexDataType']">
+            <jaxb:property name="Content"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+    
+</jaxb:bindings>

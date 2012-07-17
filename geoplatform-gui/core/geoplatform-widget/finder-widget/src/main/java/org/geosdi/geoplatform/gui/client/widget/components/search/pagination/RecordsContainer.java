@@ -130,7 +130,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
         XTemplate tpl = XTemplate.create(
                 "<p><b>Abstract:</b> {ABSTRACT_TEXT}</p><br>"
-                + "<p><b>Subjects:</b><br></p>"
+                + "<p><b>Keywords:</b><br></p>"
                 + "<tpl for=\"SUBJECTS\">"
                 + "<div>{.}</div>"
                 + "</tpl>");

@@ -201,7 +201,7 @@ public class CatalogSearchWidget extends LayoutContainer
         optionsCheckboxgroup.add(abstractCheckbox);
 
         subjectsCheckbox = new CheckBox();
-        subjectsCheckbox.setBoxLabel("Subjects");
+        subjectsCheckbox.setBoxLabel("Keywords");
         subjectsCheckbox.setValue(true); // Enabled by default
         subjectsCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(subjectsCheckbox);

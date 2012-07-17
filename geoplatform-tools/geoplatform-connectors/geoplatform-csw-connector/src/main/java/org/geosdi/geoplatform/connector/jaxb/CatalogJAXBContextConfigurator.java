@@ -52,7 +52,7 @@ public class CatalogJAXBContextConfigurator {
      */
     public @Bean(name = "cswConnectorJAXBContext")
     CSWConnectorJAXBContext cswConnectorJAXBContext() {
-
+        
         CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
 
         GeoPlatformJAXBContextRepository.registerProvider(

@@ -39,6 +39,7 @@ import java.math.BigInteger;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
+import junit.framework.Assert;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
@@ -133,6 +134,9 @@ public class CatalogGetRecordsTest {
 
         SearchResultsType result = response.getSearchResults();
         List<JAXBElement<? extends AbstractRecordType>> metadata = result.getAbstractRecord();
+
+        Assert.assertEquals("The Result not contains 25 elements", 25,
+                metadata.size());
 
         for (JAXBElement<? extends AbstractRecordType> element : metadata) {
             logger.info(

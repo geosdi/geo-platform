@@ -60,27 +60,28 @@ public class GeoPlatformJAXBContextRepository {
     }
 
     /**
-     * Register the JAXB Context for the Specific Connector
-     * <p/>
-     * @param key
-     * param provider
+     * <p> Register the JAXB Context for the Specific Connector </p>
+     *
+     * @param key see also {@link GeoPlatformJAXBContextKey}
+     * @param provider {@link Object}
      */
-    public static void registerProvider(GeoPlatformJAXBContextKey key,
+    public static synchronized void registerProvider(GeoPlatformJAXBContextKey key,
             Object provider) {
         if (!key.isCompatibleValue(provider)) {
             throw new IllegalArgumentException("The Provider : "
                     + provider + " is incompatible with Key : " + key);
         }
-        values.put(key, provider);
+
+        if (!values.containsKey(key)) {
+            values.put(key, provider);
+        }
     }
 
     /**
-     * Retrieve the JAXBContext for Specific Connector registered
-     * <p/>
+     * <p> Retrieve the JAXBContext for Specific Connector registered </p>
+     *
      * @param key
-     * <
-     * p/>
-     * <p/>
+     *
      * @return GPConnectorJAXBContext Provider registered for Key
      */
     public static synchronized <P extends GPConnectorJAXBContext> P getProvider(GeoPlatformJAXBContextKey key) {

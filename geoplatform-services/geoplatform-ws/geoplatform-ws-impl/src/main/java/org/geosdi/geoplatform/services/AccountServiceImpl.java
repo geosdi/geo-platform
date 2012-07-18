@@ -281,8 +281,10 @@ class AccountServiceImpl {
         GPAccount account = this.getAccountById(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
-        authorityDao.removeAllUserAuthorities(account.getStringID());
-
+//      Unnecessary Operation 
+//      (All Authority will be removed on cascading removing GPAccount)   
+//      authorityDao.removeAllUserAuthorities(account.getStringID());
+//
         List<GPAccountProject> accountProjectList = accountProjectDao.findByOwnerAccountID(accountID);
         for (GPAccountProject accountProject : accountProjectList) {
             // Remove all AccountProject that reference (also of other accounts) by cascading            

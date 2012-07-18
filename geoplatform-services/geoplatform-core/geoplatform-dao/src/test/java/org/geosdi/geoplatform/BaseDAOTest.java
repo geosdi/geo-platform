@@ -134,11 +134,11 @@ public abstract class BaseDAOTest {
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
 //        removeAllStyles();
-        removeAllLayers();
-        removeAllFolders();
-        removeAllAccountProject();
+//        removeAllLayers();
+//        removeAllFolders();
+//        removeAllAccountProject();
         removeAllProjects();
-        removeAllAuthorities();
+//        removeAllAuthorities();
         removeAllAccounts();
     }
 

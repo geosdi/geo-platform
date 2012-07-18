@@ -87,7 +87,8 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
     }
 
     public boolean isForWMSGetMapRequest() {
-        return this.isForByProtocol(OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST);
+        return this.isForByProtocol(
+                OnlineResourceProtocolType.LIST_WMS_GET_MAP_REQUEST);
     }
 
     public boolean isForDownload() {
@@ -175,7 +176,8 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
         }
 
         public String getDataSource() {
-            return uriWMS == null ? "" : this.retrieveDataSource(uriWMS.getServiceURL());
+            return uriWMS == null ? "" : this.retrieveDataSource(
+                    uriWMS.getServiceURL());
         }
 
         private String retrieveLabel(String name) {
@@ -187,9 +189,20 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
         }
 
         private String retrieveDataSource(String serviceURL) {
-            int ind = serviceURL.indexOf("?");
+            int ind = -1;
+            if (serviceURL.contains(".map")) {
+                ind = serviceURL.indexOf(".map") + 4;
+            } else if (serviceURL.contains("mapserv.exe")
+                    || serviceURL.contains("mapserver")
+                    || serviceURL.contains("mapserv")
+                    || serviceURL.contains("usertoken")) {
+                ind = serviceURL.indexOf("&");
+            } else {
+                ind = serviceURL.indexOf("?");
+            }
             if (ind != -1) {
-                return serviceURL.substring(0, ind);
+                String newUrl = serviceURL.substring(0, ind);
+                return newUrl;
             }
             return serviceURL;
         }

@@ -60,9 +60,9 @@ public class ModelDAOTest extends BaseDAOTest {
         removeAll();
 
 //        Assert.assertEquals("All Styles doesn't REMOVED", 0, super.styleDAO.findAll().size());
-        Assert.assertEquals("All Layers doesn't REMOVED", 0, super.layerDAO.findAll().size());
-        Assert.assertEquals("All AccountProject doesn't REMOVED", 0, super.accountProjectDAO.findAll().size());
         Assert.assertEquals("All projectDAO doesn't REMOVED", 0, super.projectDAO.findAll().size());
+        Assert.assertEquals("All AccountProject doesn't REMOVED", 0, super.accountProjectDAO.findAll().size());
+        Assert.assertEquals("All Layers doesn't REMOVED", 0, super.layerDAO.findAll().size());
         Assert.assertEquals("All Folders doesn't REMOVED", 0, super.folderDAO.findAll().size());
         Assert.assertEquals("All Authorities doesn't REMOVED", 0, super.authorityDAO.findAll().size());
         Assert.assertEquals("All Accounts doesn't REMOVED", 0, super.accountDAO.findAll().size());

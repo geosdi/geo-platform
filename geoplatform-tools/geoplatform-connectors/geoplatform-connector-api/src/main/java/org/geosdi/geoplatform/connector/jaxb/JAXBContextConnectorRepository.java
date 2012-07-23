@@ -48,6 +48,9 @@ public class JAXBContextConnectorRepository {
     //
     private static final GeoPlatformJAXBContextRepository instance;
 
+    private JAXBContextConnectorRepository() {
+    }
+
     public static void registerProvider(GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey key,
             Object provider) {
         instance.registerProvider(key, provider);

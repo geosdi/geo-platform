@@ -58,7 +58,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.junit.Assert;
 import org.junit.Before;
@@ -83,7 +83,7 @@ public class CatalogContextTest {
     private final static String CSW_HOST = "catalog.geosdi.org";
     private final static String CSW_PATH = "/geonetwork/srv/en/csw";
     //
-    private GPConnectorJAXBContext cswContext = GeoPlatformJAXBContextRepository.getProvider(
+    private GPConnectorJAXBContext cswContext = JAXBContextConnectorRepository.getProvider(
             CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     private HttpEntity entity;
 

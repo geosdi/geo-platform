@@ -48,7 +48,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
@@ -62,7 +62,7 @@ import org.geosdi.geoplatform.exception.ServerInternalFault;
 public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
 
     static {
-        cswContext = GeoPlatformJAXBContextRepository.getProvider(
+        cswContext = JAXBContextConnectorRepository.getProvider(
                 CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     }
     //

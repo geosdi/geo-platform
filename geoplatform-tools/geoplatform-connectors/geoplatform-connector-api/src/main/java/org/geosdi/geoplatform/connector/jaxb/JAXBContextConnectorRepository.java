@@ -35,30 +35,25 @@
  */
 package org.geosdi.geoplatform.connector.jaxb;
 
-import org.springframework.context.annotation.Bean;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogJAXBContextConfigurator {
+public class JAXBContextConnectorRepository {
 
-    /**
-     * Create an Instance for CSWConnectorJAXBContext and register it in
-     * GeoPlatformJAXBContextRepository with the specific Key
-     *
-     * @return CSWConnectorJAXBContext
-     */
-    public @Bean(name = "cswConnectorJAXBContext")
-    CSWConnectorJAXBContext cswConnectorJAXBContext() {
+    static {
+        instance = new GeoPlatformJAXBContextRepository();
+    }
+    //
+    private static final GeoPlatformJAXBContextRepository instance;
 
-        CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
+    public static void registerProvider(GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey key,
+            Object provider) {
+        instance.registerProvider(key, provider);
+    }
 
-        JAXBContextConnectorRepository.registerProvider(
-                cswJAXBContext.getKeyProvider(),
-                cswJAXBContext.getJAXBProvider());
-
-        return cswJAXBContext;
+    public static GPConnectorJAXBContext getProvider(GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey key) {
+        return instance.getProvider(key);
     }
 }

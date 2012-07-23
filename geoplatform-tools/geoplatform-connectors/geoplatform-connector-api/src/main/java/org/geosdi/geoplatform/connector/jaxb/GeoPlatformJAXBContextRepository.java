@@ -50,13 +50,9 @@ import org.slf4j.LoggerFactory;
 @ThreadSafe
 public class GeoPlatformJAXBContextRepository {
 
-    private static Map<GeoPlatformJAXBContextKey, Object> values;
+    private final Map<GeoPlatformJAXBContextKey, Object> values = new HashMap<GeoPlatformJAXBContextKey, Object>();
 
-    static {
-        values = new HashMap<GeoPlatformJAXBContextKey, Object>();
-    }
-
-    private GeoPlatformJAXBContextRepository() {
+    public GeoPlatformJAXBContextRepository() {
     }
 
     /**
@@ -65,15 +61,17 @@ public class GeoPlatformJAXBContextRepository {
      * @param key see also {@link GeoPlatformJAXBContextKey}
      * @param provider {@link Object}
      */
-    public static synchronized void registerProvider(GeoPlatformJAXBContextKey key,
+    public void registerProvider(GeoPlatformJAXBContextKey key,
             Object provider) {
         if (!key.isCompatibleValue(provider)) {
             throw new IllegalArgumentException("The Provider : "
                     + provider + " is incompatible with Key : " + key);
         }
 
-        if (!values.containsKey(key)) {
-            values.put(key, provider);
+        synchronized (values) {
+            if (!values.containsKey(key)) {
+                values.put(key, provider);
+            }
         }
     }
 
@@ -84,12 +82,14 @@ public class GeoPlatformJAXBContextRepository {
      *
      * @return GPConnectorJAXBContext Provider registered for Key
      */
-    public static synchronized <P extends GPConnectorJAXBContext> P getProvider(GeoPlatformJAXBContextKey key) {
-        return (P) (values.get(key) != null ? values.get(key) : lookUpJAXBContext(
-                    key));
+    public <P extends GPConnectorJAXBContext> P getProvider(GeoPlatformJAXBContextKey key) {
+        synchronized (values) {
+            return (P) (values.get(key) != null ? values.get(key) : lookUpJAXBContext(
+                        key));
+        }
     }
 
-    private static <P extends GPConnectorJAXBContext> P lookUpJAXBContext(GeoPlatformJAXBContextKey key) {
+    private <P extends GPConnectorJAXBContext> P lookUpJAXBContext(GeoPlatformJAXBContextKey key) {
         Object jaxbContext = null;
 
         try {

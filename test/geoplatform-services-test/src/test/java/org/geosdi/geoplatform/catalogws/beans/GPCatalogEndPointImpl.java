@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.catalogws.beans;
 
+import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
@@ -108,6 +109,6 @@ public class GPCatalogEndPointImpl {
         endpoint.stop();
         bus.shutdown(true);
         // Wait to be sure that the endpoint was shutdown properly
-        Thread.sleep(5 * 1000);
+        Thread.sleep(TimeUnit.SECONDS.toMillis(5));
     }
 }

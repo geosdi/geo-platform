@@ -55,6 +55,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.model.*;
@@ -292,11 +293,11 @@ public abstract class BaseDAOTest {
         this.adminProject = this.createProject("admin_project", true, 0,
                 new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
-                new Date(System.currentTimeMillis() + 300 * 1000));
+                new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)));
         this.viewerProject = this.createProject("viewer_project", false, 0,
-                new Date(System.currentTimeMillis() + 1700 * 1000));
+                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)));
         this.gsUserProject = this.createProject("gp_user_project", true, 0,
-                new Date(System.currentTimeMillis()));
+                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
         projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //
         this.insertBindingUserProject(adminTest, adminProject, BasePermission.ADMINISTRATION.getMask());

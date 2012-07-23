@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.catalog.csw;
 
+import java.util.concurrent.TimeUnit;
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
@@ -132,6 +133,6 @@ public class CSWListenerServices implements TestExecutionListener {
         endpoint.stop();
         bus.shutdown(true);
         // Wait to be sure that the endpoint was shutdown properly
-        Thread.sleep(5 * 1000);
+        Thread.sleep(TimeUnit.SECONDS.toMillis(5));
     }
 }

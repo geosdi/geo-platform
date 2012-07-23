@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.crypt;
 
 import javax.annotation.Resource;
-import junit.framework.Assert;
 import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

@@ -58,8 +58,7 @@ import org.geosdi.geoplatform.gui.impl.users.options.factory.GeoPlatformMemberFa
 
 /**
  *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class UserOptionsMainPanel {
 

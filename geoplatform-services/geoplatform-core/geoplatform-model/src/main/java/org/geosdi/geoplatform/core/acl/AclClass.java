@@ -51,8 +51,7 @@ import org.hibernate.annotations.Index;
  * The <tt>AclClass</tt> domain class contains entries for the names of each
  * application domain class that has associated permissions.
  * 
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Entity
 @Table(name = "acl_class")

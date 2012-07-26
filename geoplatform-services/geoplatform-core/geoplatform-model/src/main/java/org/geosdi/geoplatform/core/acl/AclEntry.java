@@ -62,8 +62,7 @@ import org.hibernate.annotations.Index;
  * permission. auditSuccess and auditFailure determine whether to log success 
  * and/or failure events (these both default to true).
  * 
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Entity
 @Table(name = "acl_entry",

@@ -58,8 +58,7 @@ import org.hibernate.annotations.Index;
  * fields for the parent OID (parentAclObject) and owner (aclSid). There's also
  * a flag (inheriting) to indicate whether ACL entries can inherit from a parent ACL.
  * 
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Entity
 @Table(name = "acl_object_identity",

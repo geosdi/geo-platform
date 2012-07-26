@@ -80,8 +80,7 @@ import org.geosdi.geoplatform.gui.regex.GPRegEx;
 
 /**
  *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         implements ISave<MementoSaveAddedLayers> {

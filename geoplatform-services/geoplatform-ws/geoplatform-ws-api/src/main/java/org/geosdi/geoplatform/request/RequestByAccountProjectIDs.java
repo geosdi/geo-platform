@@ -38,10 +38,9 @@ package org.geosdi.geoplatform.request;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
  * A request for calls involving a single Account and a single Project.
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "RequestByAccountProjectIDs")
 public class RequestByAccountProjectIDs {

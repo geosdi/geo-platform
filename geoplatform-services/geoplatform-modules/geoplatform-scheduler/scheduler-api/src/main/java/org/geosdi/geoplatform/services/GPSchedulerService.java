@@ -41,11 +41,10 @@ import javax.jws.WebService;
 import org.geosdi.geoplatform.core.model.GPUser;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- * 
  * Public interface to define the service operations mapped via REST
- * using CXT framework
+ * using CXT framework.
+ * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebService(name = "GPSchedulerService", targetNamespace = "http://services.geo-platform.org/")
 public interface GPSchedulerService {

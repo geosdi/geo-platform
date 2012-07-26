@@ -46,8 +46,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 // NOT execute multiple instances of a given job definition - JobDetail -
 // (that refers to the given job class - Job) concurrently

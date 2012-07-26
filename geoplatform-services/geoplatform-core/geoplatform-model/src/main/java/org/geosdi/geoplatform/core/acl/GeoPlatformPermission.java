@@ -39,8 +39,7 @@ import org.springframework.security.acls.domain.AclFormattingUtils;
 import org.springframework.security.acls.model.Permission;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GeoPlatformPermission implements Permission {
 

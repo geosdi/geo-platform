@@ -47,8 +47,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 
 /**
  * @author Francesco Izzi - geoSDI
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * 
  */
 @Transactional

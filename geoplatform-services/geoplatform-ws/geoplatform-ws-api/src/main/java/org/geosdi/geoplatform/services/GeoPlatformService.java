@@ -70,14 +70,12 @@ import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
 /**
+ * Public interface to define the service operations mapped via REST using CXT
+ * framework.
+ * 
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @author Francesco Izzi - CNR IMAA - geoSDI
- *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
- * Public interface to define the service operations mapped via REST using CXT
- * framework
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {

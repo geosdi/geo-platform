@@ -40,8 +40,7 @@ import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  *
  */
 public interface GPAccountProjectDAO {

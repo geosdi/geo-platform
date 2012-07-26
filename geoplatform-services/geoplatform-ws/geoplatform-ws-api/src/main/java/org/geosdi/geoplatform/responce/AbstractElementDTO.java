@@ -38,10 +38,8 @@ package org.geosdi.geoplatform.responce;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @author Michele Santomauro
- *
  */
 @XmlTransient
 public abstract class AbstractElementDTO implements IElementDTO {

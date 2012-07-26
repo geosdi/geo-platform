@@ -58,8 +58,7 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 /**
  * TODO This widget is not used because the relative action is not registered
  * 
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class UploadKmlWidget extends GeoPlatformWindow {
 

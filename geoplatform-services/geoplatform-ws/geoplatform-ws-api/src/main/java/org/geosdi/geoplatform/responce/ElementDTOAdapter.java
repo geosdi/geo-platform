@@ -38,11 +38,10 @@ package org.geosdi.geoplatform.responce;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
+ * For handle IElementDTO inteface with JAXB.
+ * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-// For handle IElementDTO inteface with JAXB
 public class ElementDTOAdapter extends XmlAdapter<AbstractElementDTO, IElementDTO> {
 
     @Override

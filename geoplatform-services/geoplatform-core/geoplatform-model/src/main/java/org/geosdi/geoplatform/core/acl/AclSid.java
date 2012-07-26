@@ -55,8 +55,7 @@ import org.hibernate.annotations.Index;
  * GrantedAuthority (role name, where principal is false). When granting
  * permissions to a role, any user with that role receives that permission.
  * 
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Entity
 @Table(name = "acl_sid",

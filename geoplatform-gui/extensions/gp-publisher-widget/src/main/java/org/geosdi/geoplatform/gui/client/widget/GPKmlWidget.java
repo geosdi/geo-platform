@@ -76,8 +76,7 @@ import org.geosdi.geoplatform.gui.server.gwt.PublisherRemoteImpl;
 import org.gwtopenmaps.openlayers.client.Bounds;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPKmlWidget extends GeoPlatformWindow
         implements IUploadKMLPreviewHandler, IGPKmlPreviewHandler {

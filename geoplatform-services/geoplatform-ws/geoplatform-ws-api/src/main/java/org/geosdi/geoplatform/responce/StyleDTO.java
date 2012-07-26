@@ -44,11 +44,10 @@ import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geotools.data.ows.StyleImpl;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @todo for future use
+ * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @author Michele Santomauro
- *
- * TODO: for future use
  */
 @XmlRootElement(name = "StyleDTO")
 @XmlType(propOrder = {"id", "name", "title", "abstractText", "legendURL"})

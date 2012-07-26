@@ -52,32 +52,27 @@ import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- * @author Michele Santomauro
+ * Ordered collection (wrt position) without duplicates.
  *
+ * @todo Handle the case where an element is not included in the tree!
+ * Note:super.add() return boolean
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Michele Santomauro
  */
-/**
- * Ordered collection (wrt position) without duplicates
- */
-// TODO
-// !Handle the case where an element is not included in the tree!
-// Note: super.add() return boolean
 public class TreeFolderElements extends TreeSet<IElementDTO> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * @param folders
-     *            list of FolderDTO
+     * @param folders list of FolderDTO
      */
     public void addFolderCollection(List<FolderDTO> folders) {
         super.addAll(folders);
     }
 
     /**
-     * @param layerList
-     *            list of GPlayer
+     * @param layerList list of GPlayer
      */
     public void addLayerCollection(Collection<GPLayer> layerList) {
         for (GPLayer layer : layerList) {
@@ -97,8 +92,7 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
     }
 
     /**
-     * @param layers
-     *            list of ShortLayerDTO
+     * @param layers list of ShortLayerDTO
      */
     public void addLayerCollection(List<ShortLayerDTO> layers) {
         super.addAll(layers);

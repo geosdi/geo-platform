@@ -41,8 +41,7 @@ import org.geosdi.geoplatform.core.model.GPApplication;
 
 /**
  *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "ApplicationDTO")
 public class ApplicationDTO extends ShortAccountDTO {

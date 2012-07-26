@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -67,7 +68,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- * 
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
@@ -77,12 +78,15 @@ public abstract class ServiceTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    protected GeoPlatformService gpWSClient; // TODO gpService
+    protected GeoPlatformService gpWSClient;
     protected GPDigesterConfigutator gpDigester;
     // Roles (default)
     protected final String ROLE_ADMIN = "Admin";
     protected final String ROLE_USER = "User";
     protected final String ROLE_VIEWER = "Viewer";
+    // Organization
+    protected GPOrganization organizationTest;
+    protected String organizationNameTest = "geoSDI_ws_test";
     // Users
     protected final String usernameTest = "username_test_ws";
     protected final String passwordTest = "pwd_username_test_ws";
@@ -102,7 +106,7 @@ public abstract class ServiceTest {
     protected List<String> layerInfoKeywords;
 
     /**
-     * The listener will inject this dependency
+     * The listener will inject this dependency.
      */
     public void setGeoplatformServiceClient(GeoPlatformService gpWSClient,
             GPDigesterConfigutator gpDigester) {
@@ -114,8 +118,11 @@ public abstract class ServiceTest {
     public void setUp() throws Exception {
         logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
 
+        // Insert Organization
+        this.setUpOrganization();
+
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, ROLE_USER);
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, ROLE_USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
@@ -136,17 +143,22 @@ public abstract class ServiceTest {
         layerInfoKeywords.add("keyword_test");
     }
 
+    protected void setUpOrganization() throws IllegalParameterFault {
+        organizationTest = new GPOrganization(organizationNameTest);
+        organizationTest.setId(gpWSClient.insertOrganization(organizationTest));
+    }
+
     @After
     public void tearDown() {
         logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
-        // Delete user
-        this.deleteAccount(idUserTest);
+        // Delete Organization
+        this.deleteOrganization(organizationTest.getId());
     }
 
     // Create and insert a User
-    protected long createAndInsertUser(String username, String... roles)
+    protected long createAndInsertUser(String username, GPOrganization organization, String... roles)
             throws IllegalParameterFault {
-        GPUser user = this.createUser(username, roles);
+        GPUser user = this.createUser(username, organization, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
 
         long idUser = gpWSClient.insertAccount(user, false);
@@ -155,9 +167,10 @@ public abstract class ServiceTest {
         return idUser;
     }
 
-    protected GPUser createUser(String username, String... roles) {
+    protected GPUser createUser(String username, GPOrganization organization, String... roles) {
         GPUser user = new GPUser();
         user.setUsername(username);
+        user.setOrganization(organization);
         user.setName("Complete name of " + username);
         user.setEmailAddress(username + "@test.foo");
         user.setEnabled(true);
@@ -182,7 +195,9 @@ public abstract class ServiceTest {
         return authorities;
     }
 
-    // Delete (with assert) an Account
+    /**
+     * Delete (with assert) an Account.
+     */
     protected void deleteAccount(long accountID) {
         try {
             boolean check = gpWSClient.deleteAccount(accountID);
@@ -192,7 +207,21 @@ public abstract class ServiceTest {
         }
     }
 
-    // Delete (with assert) a Folder
+    /**
+     * Delete (with assert) an Organization.
+     */
+    protected void deleteOrganization(long organizationID) {
+        try {
+            boolean check = gpWSClient.deleteOrganization(organizationID);
+            Assert.assertTrue("Organization with ID = " + organizationID + " has not been eliminated", check);
+        } catch (Exception e) {
+            Assert.fail("Error while deleting Organization with ID: " + organizationID);
+        }
+    }
+
+    /**
+     * Delete (with assert) a Folder.
+     */
     protected void deleteFolder(long idFolder) {
         try {
             boolean check = gpWSClient.deleteFolder(idFolder);

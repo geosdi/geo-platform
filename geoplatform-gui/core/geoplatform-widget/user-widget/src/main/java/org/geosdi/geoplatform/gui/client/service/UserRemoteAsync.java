@@ -55,7 +55,7 @@ public interface UserRemoteAsync {
                      AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
             throws GeoPlatformException;
 
-    void insertUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)
+    void insertUser(IGPUserManageDetail userDetail, String organization, AsyncCallback<Long> callback)
             throws GeoPlatformException;
 
     void updateUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)

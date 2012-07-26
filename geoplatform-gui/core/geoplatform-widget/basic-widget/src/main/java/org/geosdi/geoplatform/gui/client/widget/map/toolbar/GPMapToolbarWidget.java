@@ -68,7 +68,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         implements IGeoPlatformToolbar {
@@ -77,7 +77,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     private List<ToolbarGenericTool> tools;
 
     public GPMapToolbarWidget(GeoPlatformMap geoPlatformMap,
-                              List<ToolbarGenericTool> tools) {
+            List<ToolbarGenericTool> tools) {
         this.geoPlatformMap = geoPlatformMap;
         setTools(tools);
         initialize();
@@ -156,13 +156,14 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
 
         this.toolBar.add(new FillToolItem());
         this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
-                                                          tool.getText()));
+                tool.getText()));
     }
 
     @Override
     public void addMenuInToolBar(MenuInToolBar tool) {
         Button buttonItem = new Button(
-                GPAccountGuiComponents.getInstance().getStringID());
+                GPAccountGuiComponents.getInstance().getStringID() + " @ "
+                + GPAccountGuiComponents.getInstance().getOrganization());
         buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
         buttonItem.setId(tool.getId());
 
@@ -196,7 +197,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     /**
      * Add FillToolItem in Toolbar so any Item added after this FillToolItem
      * will be insert in the right Toolbar Region
-     * 
+     *
      */
     @Override
     public void addFillToolItem() {
@@ -223,8 +224,8 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Retrieve the action from Register component 
-     * 
+     * Retrieve the action from Register component
+     *
      * @param id
      * @return action
      */
@@ -237,14 +238,13 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     private void prepareButton(final Button button, ToolbarAction action,
-                               ToolbarGenericTool tool) {
+            ToolbarGenericTool tool) {
         button.setId(action.getId());
         button.setToolTip(action.getTooltip());
         button.setIcon(action.getImage());
         button.addSelectionListener(action);
 
         action.addActionEnableHandler(new ActionEnableHandler() {
-
             @Override
             public void onActionEnabled(ActionEnableEvent event) {
                 button.setEnabled(event.isEnabled());
@@ -262,8 +262,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * @param tools
-     *            the tools to set
+     * @param tools the tools to set
      */
     public void setTools(List<ToolbarGenericTool> tools) {
         Collections.sort(tools);

@@ -39,6 +39,7 @@ import java.text.ParseException;
 import java.util.Collection;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestByID;
@@ -48,9 +49,8 @@ import org.junit.Test;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- * 
+ *
  */
-//@TestExecutionListeners(value = {WSListenerServices.class})
 public class CXFServiceTest extends ServiceTest {
 
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
@@ -61,19 +61,17 @@ public class CXFServiceTest extends ServiceTest {
     private long idServerGeoSDI = -1;
 //    private final String serverUrlTelespazio = "http://maps.telespazio.it/dpc/dpc-wms?service=wms&version=1.1.1&request=GetCapabilities";
 //    private long idServerTelespazio = -1;
+//    private GPOrganization organizationTest;
+//    private long idOrganizationTest;
 
     @Override
     public void setUp() throws Exception {
-        // Insert Servers
-        idServerTest = this.createAndInsertServer(serverUrlTest, GPCapabilityType.WMS);
-        idServerGeoSDI = this.createAndInsertServer(serverUrlGeoSDI, GPCapabilityType.WMS);
-    }
+        // Insert Organization
+        super.setUpOrganization();
 
-    @Override
-    public void tearDown() {
-        // Delete Server
-        this.deleteServer(idServerTest);
-        this.deleteServer(idServerGeoSDI);
+        // Insert Servers
+        idServerTest = this.createAndInsertServer(serverUrlTest, GPCapabilityType.WMS, organizationTest);
+        idServerGeoSDI = this.createAndInsertServer(serverUrlGeoSDI, GPCapabilityType.WMS, organizationTest);
     }
 
     @Test
@@ -122,7 +120,7 @@ public class CXFServiceTest extends ServiceTest {
                 totalServers >= 1); // SetUp() added 1 server
 
         // Insert new Server
-        long idNewServer = this.createAndInsertServer("map.testGetAllServer.com", GPCapabilityType.WMS);
+        long idNewServer = this.createAndInsertServer("map.testGetAllServer.com", GPCapabilityType.WMS, organizationTest);
 
         // Assert of number of Servers
         Assert.assertEquals("Total numebr of Servers is wrong after inserted new Server",
@@ -153,13 +151,13 @@ public class CXFServiceTest extends ServiceTest {
         // Server is into DB
         ServerDTO serverGeoSDI = gpWSClient.getShortServer(serverUrlGeoSDI);
         Assert.assertNotNull(serverGeoSDI);
-        ServerDTO serverDTO = gpWSClient.saveServer(serverGeoSDI.getId(), "geoSDI", serverUrlGeoSDI);
+        ServerDTO serverDTO = gpWSClient.saveServer(serverGeoSDI.getId(), "geoSDI", serverUrlGeoSDI, organizationTest.getName());
         Assert.assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
         Assert.assertEquals("ServerDTO geoSDI alias is wrong", serverDTO.getAlias(), "geoSDI");
 
         // Server is NOT into DB
         String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";
-        serverDTO = gpWSClient.saveServer(null, "Erdas", serverUrlEx);
+        serverDTO = gpWSClient.saveServer(null, "Erdas", serverUrlEx, organizationTest.getName());
         Assert.assertNotNull("ServerDTO EX is NULL", serverDTO);
 
         // Check if the server was insert
@@ -172,12 +170,10 @@ public class CXFServiceTest extends ServiceTest {
     }
 
     /**
-     * Service methods
-     * 
+     * Create and insert (with assert) a Server.
      */
-    // Create and insert (with assert) a Server
-    private long createAndInsertServer(String serverUrl, GPCapabilityType serverType) {
-        GeoPlatformServer server = this.createServer(serverUrl, serverType);
+    private long createAndInsertServer(String serverUrl, GPCapabilityType serverType, GPOrganization organization) {
+        GeoPlatformServer server = this.createServer(serverUrl, serverType, organization);
         logger.debug("\n*** GeoPlatformServer to INSERT:\n{}\n***", server);
         long idServer = gpWSClient.insertServer(server);
         logger.debug("\n*** Id ASSIGNED at the Server in the DB: {} ***", idServer);
@@ -185,7 +181,7 @@ public class CXFServiceTest extends ServiceTest {
         return idServer;
     }
 
-    private GeoPlatformServer createServer(String serverUrl, GPCapabilityType serverType) {
+    private GeoPlatformServer createServer(String serverUrl, GPCapabilityType serverType, GPOrganization organization) {
         // Create field's value from Regex on Server URL
         String serverName = serverUrl.replaceAll("http://(\\w+)\\.([^\\.]+)\\.(\\w+)", "$1.$2.$3");
         logger.trace("\n*** serverName: {} ***", serverName);
@@ -197,13 +193,14 @@ public class CXFServiceTest extends ServiceTest {
         server.setName(serverName);
         server.setTitle(labelServer);
         server.setAbstractServer("Abstract of " + labelServer);
-        server.setContactPerson("Contact Person of " + labelServer);
-        server.setContactOrganization("Contact Organization of " + labelServer);
         server.setServerType(serverType);
+        server.setOrganization(organization);
         return server;
     }
 
-    // Delete (with assert) a Server
+    /**
+     * Delete (with assert) a Server.
+     */
     private void deleteServer(long idServer) {
         try {
             boolean check = gpWSClient.deleteServer(idServer);

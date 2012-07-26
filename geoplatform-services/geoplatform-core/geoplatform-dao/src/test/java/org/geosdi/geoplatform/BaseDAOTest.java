@@ -38,19 +38,6 @@ package org.geosdi.geoplatform;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.WKTReader;
-import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
-import org.geosdi.geoplatform.core.dao.GPFolderDAO;
-import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.dao.GPServerDAO;
-import org.geosdi.geoplatform.core.dao.GPAccountDAO;
-import org.geosdi.geoplatform.core.model.GPAuthority;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geotools.data.ows.Layer;
-import org.geotools.data.ows.WMSCapabilities;
-import org.geotools.data.wms.WebMapServer;
-import org.geotools.ows.ServiceException;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -60,7 +47,11 @@ import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
+import org.geotools.data.ows.Layer;
+import org.geotools.data.ows.WMSCapabilities;
+import org.geotools.data.wms.WebMapServer;
 import org.geotools.geometry.jts.JTSFactoryFinder;
+import org.geotools.ows.ServiceException;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -76,6 +67,7 @@ import org.xml.sax.SAXException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-TEST.xml",
@@ -109,6 +101,9 @@ public abstract class BaseDAOTest {
     protected GPAuthorityDAO authorityDAO;
     //
     @Autowired
+    protected GPOrganizationDAO organizationDAO;
+    //
+    @Autowired
     protected GSAccountDAO gsAccountDAO;
     //
     @Autowired
@@ -117,6 +112,7 @@ public abstract class BaseDAOTest {
     @Autowired
     protected GPDigesterConfigutator gpDigesterSHA1;
     //
+    protected GPOrganization organizationTest;
     protected GPUser adminTest;
     protected GPUser userTest;
     protected GPUser viewerTest;
@@ -128,19 +124,22 @@ public abstract class BaseDAOTest {
     protected GPProject gsUserProject;
     //
     private URL url = null;
-    private final String gsAccountUserName = "gsuser";
+    private final String gsAccountUsername = "gsuser";
     private final String urlWMSGetCapabilities =
             "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
-//        removeAllStyles();
-//        removeAllLayers();
-//        removeAllFolders();
-//        removeAllAccountProject();
-        removeAllProjects();
-//        removeAllAuthorities();
-        removeAllAccounts();
+//        this.removeAllStyles();
+        this.removeAllLayers();
+        this.removeAllFolders();
+        this.removeAllAccountProject();
+        this.removeAllProjects();
+        this.removeAllAuthorities();
+        this.removeAllGSAccounts();
+        this.removeAllAccounts();
+        this.removeAllServers();
+        this.removeAllOrganizations();
     }
 
 //    private void removeAllStyles() {
@@ -165,7 +164,6 @@ public abstract class BaseDAOTest {
         List<GPFolder> folders = folderDAO.findAll();
         // Folders sorted in descending order (wrt position)
         Comparator comp = new Comparator() {
-
             @Override
             public int compare(Object o1, Object o2) {
                 GPFolder folder1 = (GPFolder) o1;
@@ -209,66 +207,6 @@ public abstract class BaseDAOTest {
         }
     }
 
-    protected void removeAllAccounts() {
-        List<GPAccount> accounts = accountDAO.findAll();
-        for (GPAccount account : accounts) {
-            logger.trace("\n*** Account to REMOVE:\n{}\n***", account);
-            boolean removed = accountDAO.remove(account);
-            Assert.assertTrue("Old Account NOT removed", removed);
-        }
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Insert data">
-    protected void insertData() throws ParseException {
-        this.insertAccount();
-        this.insertProject();
-        this.insertFoldersAndLayers();
-        this.insertGPAccessInfoTest();
-    }
-
-    private void insertGPAccessInfoTest() {
-        this.removeAllGSAccounts();
-        GSAccount gsAccount = this.generateGSAccount(this.gsAccountUserName);
-        GSResource resource = this.generateResource(gsAccount);
-        gsUserTest.setDefaultProjectID(gsUserProject.getId());
-        gsUserTest.setGsAccount(gsAccount);
-        this.gsAccountDAO.persist(gsAccount);
-        this.gsResourceDAO.persist(resource);
-        accountDAO.merge(gsUserTest);
-    }
-
-    private GSAccount generateGSAccount(String userName) {
-        GSAccount account = new GSAccount();
-        account.setGsuser(userName);
-        account.setAuthkey(UUID.randomUUID().toString());
-        return account;
-    }
-
-    private GSResource generateResource(GSAccount account) {
-        GSResource resource = new GSResource();
-        GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory(null);
-        WKTReader reader = new WKTReader(geometryFactory);
-        MultiPolygon multiPolygon = null;
-        try {
-            //"District of Columbia" restrictions
-            multiPolygon = (MultiPolygon) reader.read(
-                    "MULTIPOLYGON(((-77.008232 38.966557,-76.911209 38.889988,-77.045448 38.78812,-77.035248 38.813915,-77.045189 38.829365,-77.040405 38.838413,-77.039078 38.862431,-77.067886 38.886101,-77.078949 38.9156,-77.122627 38.93206,-77.042389 38.993431,-77.008232 38.966557)))");
-        } catch (com.vividsolutions.jts.io.ParseException ex) {
-            logger.error("Error to generate multipolygon: " + ex);
-        }
-        resource.setArea(multiPolygon);
-        resource.setGrant(GrantType.ALLOW);
-        resource.setWorkspace("topp");
-        resource.setLayerName("states");
-        resource.setAttributes("STATE_NAME,MALE,FEMALE");
-        //simple cql filter accourding to Multipolygon restriction
-        resource.setCqlFilterRead("STATE_NAME='Virginia'");
-        resource.setDefaultStyle("polygon");
-        resource.setGsAccount(account);
-        return resource;
-    }
-
     private void removeAllGSAccounts() {
         List<GSAccount> accountList = gsAccountDAO.findAll();
         for (GSAccount account : accountList) {
@@ -278,18 +216,129 @@ public abstract class BaseDAOTest {
         }
     }
 
-    private void insertAccount() {
+    private void removeAllAccounts() {
+        List<GPAccount> accounts = accountDAO.findAll();
+        for (GPAccount account : accounts) {
+            logger.trace("\n*** Account to REMOVE:\n{}\n***", account);
+            boolean removed = accountDAO.remove(account);
+            Assert.assertTrue("Old Account NOT removed", removed);
+        }
+    }
+
+    private void removeAllServers() {
+        List<GeoPlatformServer> servers = serverDAO.findAll();
+        for (GeoPlatformServer server : servers) {
+            logger.debug("\n*** Server to REMOVE:\n{}\n***", server);
+            boolean ret = serverDAO.remove(server);
+            Assert.assertTrue("Old Server NOT removed", ret);
+        }
+    }
+
+    protected void removeAllOrganizations() {
+        List<GPOrganization> organizations = organizationDAO.findAll();
+        for (GPOrganization organization : organizations) {
+            logger.trace("\n*** Organization to REMOVE:\n{}\n***", organization);
+            boolean removed = organizationDAO.remove(organization);
+            Assert.assertTrue("Old Organization NOT removed", removed);
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Insert data">
+    protected void insertData() throws ParseException {
+        this.insertOrganizations();
+        this.insertServers();
+        this.insertAccounts();
+        this.insertProjects();
+        this.insertFoldersAndLayers();
+        this.insertGPAccessInfoTest();
+    }
+
+    protected void insertOrganizations() {
+        organizationTest = this.createOwnOrganization();
+        organizationDAO.persist(organizationTest);
+        logger.debug("\n*** Organization SAVED:\n{}\n***", organizationTest);
+    }
+    
+    protected void insertServers() {
+        // WMS
+        GeoPlatformServer server1WMS = createServer1WMS();
+        GeoPlatformServer server2WMS = createServer2WMS();
+        serverDAO.persist(server1WMS, server2WMS);
+        logger.debug("\n*** SAVED Server:\n{}\n***", server1WMS);
+        logger.debug("\n*** SAVED Server:\n{}\n***", server2WMS);
+        // CSW
+//        GeoPlatformServer server1CSW = createServer1CSW();
+//        serverDAO.persist(server1CSW);
+//        logger.debug("\n*** SAVED Server:\n{}\n***", server1CSW);
+        //
+//        this.insertDummyCSWServer();
+    }
+
+    private GeoPlatformServer createServer1WMS() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+        server.setName("imaa.geosdi.org");
+        server.setAliasName("geoSdi on IMAA");
+        server.setServerType(GPCapabilityType.WMS);
+        server.setOrganization(organizationTest);
+        return server;
+    }
+
+    private GeoPlatformServer createServer2WMS() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("http://dpc.geosdi.org/geoserver/wms");
+        server.setName("dpc.geosdi.org");
+        server.setAliasName("DPC on geosdi");
+        server.setServerType(GPCapabilityType.WMS);
+        server.setOrganization(organizationTest);
+        return server;
+    }
+
+    private GeoPlatformServer createServer3WMS() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities");
+        server.setName("earthbuilder.google.com");
+        server.setAliasName("EARTHBUILDER");
+        server.setServerType(GPCapabilityType.WMS);
+        server.setOrganization(organizationTest);
+        return server;
+    }
+
+    private GeoPlatformServer createServer1CSW() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("http://catalog.geosdi.org/geonetwork/srv/en/csw");
+        server.setName("csw.geosdi.org");
+        server.setAliasName("CSW on geosdi");
+        server.setServerType(GPCapabilityType.CSW);
+        server.setOrganization(organizationTest);
+        return server;
+    }
+
+    private void insertDummyCSWServer() {
+        for (int i = 10; i <= 99; i++) {
+            GeoPlatformServer server = new GeoPlatformServer();
+            server.setTitle("Title_" + i);
+            server.setAliasName("Z_Alias_" + i);
+            server.setServerUrl("http://csw-test/" + i);
+            server.setServerType(GPCapabilityType.CSW);
+            server.setOrganization(organizationTest);
+            serverDAO.persist(server);
+        }
+    }
+
+    private void insertAccounts() {
         // GUI test
-        this.adminTest = this.insertUser("admin", GPRole.ADMIN);
-        this.userTest = this.insertUser("user", GPRole.USER);
-        this.viewerTest = this.insertUser("viewer", GPRole.VIEWER);
-        this.serviceTest = this.insertUser("service", GPRole.ADMIN);
-        this.gsUserTest = this.insertUser(this.gsAccountUserName, GPRole.ADMIN);
+        this.adminTest = this.insertUser("admin", organizationTest, GPRole.ADMIN);
+        this.userTest = this.insertUser("user", organizationTest, GPRole.USER);
+        this.viewerTest = this.insertUser("viewer", organizationTest, GPRole.VIEWER);
+        this.serviceTest = this.insertUser("service", organizationTest, GPRole.ADMIN);
+        this.gsUserTest = this.insertUser(this.gsAccountUsername, organizationTest, GPRole.ADMIN);
         //
         this.insertApplication("SIGV");
     }
 
-    private void insertProject() {
+    private void insertProjects() {
         this.adminProject = this.createProject("admin_project", true, 0,
                 new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
@@ -359,8 +408,58 @@ public abstract class BaseDAOTest {
         projectDAO.merge(viewerProject);
     }
 
-    protected GPUser insertUser(String name, GPRole... roles) {
-        GPUser user = this.createUser(name);
+    private void insertGPAccessInfoTest() {
+        GSAccount gsAccount = this.generateGSAccount(this.gsAccountUsername);
+        GSResource resource = this.generateResource(gsAccount);
+        gsUserTest.setDefaultProjectID(gsUserProject.getId());
+        gsUserTest.setGsAccount(gsAccount);
+        this.gsAccountDAO.persist(gsAccount);
+        this.gsResourceDAO.persist(resource);
+        accountDAO.merge(gsUserTest);
+    }
+
+    private GSAccount generateGSAccount(String userName) {
+        GSAccount account = new GSAccount();
+        account.setGsuser(userName);
+        account.setAuthkey(UUID.randomUUID().toString());
+        return account;
+    }
+
+    private GSResource generateResource(GSAccount account) {
+        GSResource resource = new GSResource();
+        GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory(null);
+        WKTReader reader = new WKTReader(geometryFactory);
+        MultiPolygon multiPolygon = null;
+        try {
+            //"District of Columbia" restrictions
+            multiPolygon = (MultiPolygon) reader.read(
+                    "MULTIPOLYGON(((-77.008232 38.966557,-76.911209 38.889988,-77.045448 38.78812,-77.035248 38.813915,-77.045189 38.829365,-77.040405 38.838413,-77.039078 38.862431,-77.067886 38.886101,-77.078949 38.9156,-77.122627 38.93206,-77.042389 38.993431,-77.008232 38.966557)))");
+        } catch (com.vividsolutions.jts.io.ParseException ex) {
+            logger.error("Error to generate multipolygon: " + ex);
+        }
+        resource.setArea(multiPolygon);
+        resource.setGrant(GrantType.ALLOW);
+        resource.setWorkspace("topp");
+        resource.setLayerName("states");
+        resource.setAttributes("STATE_NAME,MALE,FEMALE");
+        //simple cql filter accourding to Multipolygon restriction
+        resource.setCqlFilterRead("STATE_NAME='Virginia'");
+        resource.setDefaultStyle("polygon");
+        resource.setGsAccount(account);
+        return resource;
+    }
+
+    private GPOrganization createOwnOrganization() {
+        GPOrganization organization = new GPOrganization("geoSDI");
+        organization.setDescription("geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.");
+        organization.setUrl("http://www.geosdi.org");
+        organization.setTelephone("+39.0971.427305");
+        organization.setAddress("C.da S. Loja Tito Scalo (PZ) - Basilicata 85050 Italy");
+        return organization;
+    }
+
+    protected GPUser insertUser(String name, GPOrganization organization, GPRole... roles) {
+        GPUser user = this.createUser(name, organization);
         accountDAO.persist(user);
         logger.debug("\n*** User SAVED:\n{}\n***", user);
 
@@ -393,9 +492,10 @@ public abstract class BaseDAOTest {
         return authorities;
     }
 
-    private GPUser createUser(String username) {
+    private GPUser createUser(String username, GPOrganization organization) {
         GPUser user = new GPUser();
         user.setUsername(username);
+        user.setOrganization(organization);
         user.setName("Complete name of " + username);
         user.setEmailAddress(username + "@test.foo");
         user.setEnabled(true);
@@ -411,6 +511,7 @@ public abstract class BaseDAOTest {
     private GPApplication createApplication(String appID) {
         GPApplication application = new GPApplication();
         application.setAppID(appID);
+        application.setOrganization(organizationTest);
         application.setEnabled(true);
         return application;
     }

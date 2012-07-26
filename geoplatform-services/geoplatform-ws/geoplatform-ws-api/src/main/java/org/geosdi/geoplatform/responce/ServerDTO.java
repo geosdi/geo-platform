@@ -47,17 +47,18 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 @XmlRootElement(name = "ServerDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"id", "serverUrl", "name", "alias", "layerList"})
+@XmlType(propOrder = {"id", "serverUrl", "name", "alias", "layerList", "organization"})
 public class ServerDTO {
 
     private Long id;
     private String serverUrl;
     private String name;
     private String alias;
+    private String organization;
     //
     @XmlElementWrapper(name = "layerList")
     @XmlElement(name = "layer")
@@ -82,8 +83,7 @@ public class ServerDTO {
     }
 
     /**
-     * @param id
-     *          the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -97,8 +97,7 @@ public class ServerDTO {
     }
 
     /**
-     * @param serverUrl
-     *          the serverUrl to set
+     * @param serverUrl the serverUrl to set
      */
     public void setServerUrl(String serverUrl) {
         this.serverUrl = serverUrl;
@@ -112,8 +111,7 @@ public class ServerDTO {
     }
 
     /**
-     * @param name
-     *          the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -141,21 +139,37 @@ public class ServerDTO {
     }
 
     /**
-     * @param layerList
-     *          the layersDTO to set
+     * @param layerList the layersDTO to set
      */
     public void setLayerList(List<? extends ShortLayerDTO> layerList) {
         this.layerList = layerList;
     }
 
     /**
+     * @return the organization
+     */
+    public String getOrganization() {
+        return organization;
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
+
+    /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "ServerDTO{" + "id=" + id.longValue() + ", serverUrl=" + serverUrl
-                + ", alias=" + alias + ", name=" + name + '}';
+        return "ServerDTO{" + "id=" + id.longValue()
+                + ", serverUrl=" + serverUrl
+                + ", alias=" + alias
+                + ", name=" + name
+                + ", organization=" + organization + '}';
     }
 }

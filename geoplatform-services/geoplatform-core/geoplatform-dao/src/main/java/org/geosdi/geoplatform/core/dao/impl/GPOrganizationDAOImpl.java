@@ -33,54 +33,77 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.development;
+package org.geosdi.geoplatform.core.dao.impl;
 
-import org.geosdi.geoplatform.core.model.GPCapabilityType;
+import com.googlecode.genericdao.search.ISearch;
+import com.googlecode.genericdao.search.Search;
+import java.util.List;
+import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
 import org.geosdi.geoplatform.core.model.GPOrganization;
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class CSWEntityCorrectness {
+@Transactional
+public class GPOrganizationDAOImpl extends BaseDAO<GPOrganization, Long>
+        implements GPOrganizationDAO {
 
-    // ==========================================================================
-    // === Server
-    // ==========================================================================
-    public static void checkCSWServer(GeoPlatformServer server) throws IllegalParameterFault {
-        if (server.getServerType() != GPCapabilityType.CSW) {
-            throw new IllegalParameterFault("Server is not a CSW server.");
-        }
-        String url = server.getServerUrl();
-        if (url == null) {
-            throw new IllegalParameterFault("Server URL must not be null.");
-        }
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            throw new IllegalParameterFault("URL must be start with \"http://\" or \"https://\".");
-        }
-        GPOrganization organization = server.getOrganization();
-        if (organization == null) {
-            throw new IllegalParameterFault("Server Organization must not be null.");
-        }
+    @Override
+    public List<GPOrganization> findAll() {
+        return super.findAll();
     }
 
-    public static void checkCSWServerLog(GeoPlatformServer server) {
-        try {
-            CSWEntityCorrectness.checkCSWServer(server);
-        } catch (IllegalParameterFault ex) {
-            throw new EntityCorrectnessException(ex.getMessage());
-        }
+    @Override
+    public GPOrganization find(Long id) {
+        return super.find(id);
     }
 
-    //
-    // ==========================================================================
-    //
-    private static boolean empty(String value) {
-        if (value == null) {
-            return true;
-        }
-        return value.trim().equals("");
+    @Override
+    public GPOrganization[] find(Long... ids) {
+        return super.find(ids);
+    }
+
+    @Override
+    public void persist(GPOrganization... entities) {
+        super.persist(entities);
+    }
+
+    @Override
+    public GPOrganization merge(GPOrganization entity) {
+        return super.merge(entity);
+    }
+
+    @Override
+    public GPOrganization[] merge(GPOrganization... entities) {
+        return super.merge(entities);
+    }
+
+    @Override
+    public boolean remove(GPOrganization entity) {
+        return super.remove(entity);
+    }
+
+    @Override
+    public boolean removeById(Long id) {
+        return super.removeById(id);
+    }
+
+    @Override
+    public List<GPOrganization> search(ISearch search) {
+        return super.search(search);
+    }
+
+    @Override
+    public int count(ISearch search) {
+        return super.count(search);
+    }
+
+    @Override
+    public GPOrganization findByName(String name) {
+        Search search = new Search();
+        search.addFilterEqual("name", name);
+        return searchUnique(search);
     }
 }

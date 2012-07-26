@@ -58,7 +58,7 @@ public interface IGPCatalogFinderService {
             String searchText, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl, String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 

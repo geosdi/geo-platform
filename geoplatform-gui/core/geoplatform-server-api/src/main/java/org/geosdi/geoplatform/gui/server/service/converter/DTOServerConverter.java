@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
@@ -56,7 +55,7 @@ import org.springframework.stereotype.Component;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "dtoServerConverter")
 public class DTOServerConverter {
@@ -74,13 +73,14 @@ public class DTOServerConverter {
         ArrayList<GPServerBeanModel> serversDTO = new ArrayList<GPServerBeanModel>();
 
         if (serversWS != null) {
-            for (ServerDTO gpServer : serversWS) {
-                GPServerBeanModel serverDTO = new GPServerBeanModel();
-                serverDTO.setId(gpServer.getId());
-                serverDTO.setAlias(gpServer.getAlias());
-                serverDTO.setUrlServer(gpServer.getServerUrl());
-                serverDTO.setName(gpServer.getName());
-                serversDTO.add(serverDTO);
+            for (ServerDTO serverDTO : serversWS) {
+                GPServerBeanModel server = new GPServerBeanModel();
+                server.setId(serverDTO.getId());
+                server.setAlias(serverDTO.getAlias());
+                server.setUrlServer(serverDTO.getServerUrl());
+                server.setName(serverDTO.getName());
+                server.setOrganization(serverDTO.getOrganization());
+                serversDTO.add(server);
             }
         }
 
@@ -88,28 +88,28 @@ public class DTOServerConverter {
     }
 
     /**
-     * 
-     * @param gpServer
+     *
+     * @param server
      * @return
      */
-    public GPServerBeanModel getServerDetail(GeoPlatformServer gpServer) {
+    public GPServerBeanModel getServerDetail(GeoPlatformServer server) {
         GPServerBeanModel serverDTO = new GPServerBeanModel();
-        serverDTO.setId(gpServer.getId());
-        serverDTO.setName(gpServer.getName());
-        serverDTO.setUrlServer(gpServer.getServerUrl());
-        serverDTO.setTitle(gpServer.getTitle());
-        serverDTO.setAlias(gpServer.getAliasName());
-        serverDTO.setContactOrganization(gpServer.getContactOrganization());
-        serverDTO.setContactPerson(gpServer.getContactPerson());
+        serverDTO.setId(server.getId());
+        serverDTO.setName(server.getName());
+        serverDTO.setUrlServer(server.getServerUrl());
+        serverDTO.setTitle(server.getTitle());
+        serverDTO.setAlias(server.getAliasName());
+        if (server.getOrganization() != null) {
+            serverDTO.setOrganization(server.getOrganization().getName());
+        }
         return serverDTO;
     }
 
     /**
-     * 
+     *
      * @param layers
-     * 
-     * @return
-     *        ArrayList<? extends GPLayerBeanModel>
+     *
+     * @return ArrayList<? extends GPLayerBeanModel>
      */
     public ArrayList<? extends GPLayerGrid> createRasterLayerList(
             List<? extends ShortLayerDTO> layers) {
@@ -136,21 +136,21 @@ public class DTOServerConverter {
     }
 
     /**
-     * 
-     * @param serverWS
-     * 
-     * @return 
-     *        GPServerBeanModel
+     *
+     * @param serverDTO
+     *
+     * @return GPServerBeanModel
      */
-    public GPServerBeanModel convertServerWS(ServerDTO serverWS) {
-        GPServerBeanModel serverDTO = new GPServerBeanModel();
-        serverDTO.setId(serverWS.getId());
-        serverDTO.setAlias(serverWS.getAlias());
-        serverDTO.setName(serverWS.getName());
-        serverDTO.setUrlServer(serverWS.getServerUrl());
-        serverDTO.setLayers(serverWS.getLayerList() != null
-                ? this.createRasterLayerList(serverWS.getLayerList()) : null);
-        return serverDTO;
+    public GPServerBeanModel convertServerWS(ServerDTO serverDTO) {
+        GPServerBeanModel server = new GPServerBeanModel();
+        server.setId(serverDTO.getId());
+        server.setAlias(serverDTO.getAlias());
+        server.setName(serverDTO.getName());
+        server.setUrlServer(serverDTO.getServerUrl());
+        server.setLayers(serverDTO.getLayerList() != null
+                ? this.createRasterLayerList(serverDTO.getLayerList()) : null);
+        server.setOrganization(serverDTO.getOrganization());
+        return server;
     }
 
     private GPRasterLayerGrid convertToRasterLayerGrid(RasterLayerDTO layer) {
@@ -169,9 +169,8 @@ public class DTOServerConverter {
             raster.setCrs(layer.getSrs());
         }
         ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
-        GPStyleStringBeanModel style = null;
         for (String styleString : layer.getStyleList()) {
-            style = new GPStyleStringBeanModel();
+            GPStyleStringBeanModel style = new GPStyleStringBeanModel();
             style.setStyleString(styleString);
             styles.add(style);
         }

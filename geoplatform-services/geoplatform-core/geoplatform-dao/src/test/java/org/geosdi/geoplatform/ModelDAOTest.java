@@ -41,7 +41,7 @@ import org.junit.Test;
 
 /**
  * @author giuseppe
- * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class ModelDAOTest extends BaseDAOTest {
 
@@ -56,8 +56,9 @@ public class ModelDAOTest extends BaseDAOTest {
         Assert.assertNotNull("layerDAO is NULL", super.layerDAO);
 //        Assert.assertNotNull("styleDAO is NULL", super.styleDAO);
         Assert.assertNotNull("serverDAO is NULL", super.serverDAO);
+        Assert.assertNotNull("organizationDAO is NULL", super.organizationDAO);
 
-        removeAll();
+        super.removeAll();
 
 //        Assert.assertEquals("All Styles doesn't REMOVED", 0, super.styleDAO.findAll().size());
         Assert.assertEquals("All projectDAO doesn't REMOVED", 0, super.projectDAO.findAll().size());
@@ -66,7 +67,9 @@ public class ModelDAOTest extends BaseDAOTest {
         Assert.assertEquals("All Folders doesn't REMOVED", 0, super.folderDAO.findAll().size());
         Assert.assertEquals("All Authorities doesn't REMOVED", 0, super.authorityDAO.findAll().size());
         Assert.assertEquals("All Accounts doesn't REMOVED", 0, super.accountDAO.findAll().size());
+        Assert.assertEquals("All Servers doesn't REMOVED", 0, super.serverDAO.findAll().size());
+        Assert.assertEquals("All Organizations doesn't REMOVED", 0, super.organizationDAO.findAll().size());
 
-        insertData();
+        super.insertData();
     }
 }

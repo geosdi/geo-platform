@@ -39,8 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
-import org.geosdi.geoplatform.responce.ApplicationDTO;
-import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
@@ -52,10 +50,11 @@ import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
-import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
+import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
+import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
@@ -65,15 +64,15 @@ import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
+import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @author Francesco Izzi - CNR IMAA - geoSDI
  *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
@@ -91,6 +90,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private GPLayerDAO layerDao;
 //    private GPStyleDAO styleDao;
     private GPAuthorityDAO authorityDao;
+    private GPOrganizationDAO organizationDao;
     // ACL DAO
     private AclClassDAO classDao;
     private AclSidDAO sidDao;
@@ -98,6 +98,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private AclEntryDAO entryDao;
     private GuiComponentDAO guiComponentDao;
     // Delegate
+    private OrganizationServiceImpl organizationServiceDelegate;
     private AccountServiceImpl accountServiceDelegate;
     private ProjectServiceImpl projectServiceDelegate;
     private WMSServiceImpl wmsServiceDelegate;
@@ -115,6 +116,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private GSAccountDAO gsAccountDAO;
 
     public GeoPlatformServiceImpl() {
+        organizationServiceDelegate = new OrganizationServiceImpl();
         accountServiceDelegate = new AccountServiceImpl();
         projectServiceDelegate = new ProjectServiceImpl();
         viewportServiceDelegate = new ViewportServiceImpl();
@@ -129,8 +131,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === DAOs IoC
     // ==========================================================================
     /**
-     * @param accountDao
-     * the accountDao to set
+     * @param accountDao the accountDao to set
      */
     public void setAccountDao(GPAccountDAO accountDao) {
         this.accountDao = accountDao;
@@ -140,8 +141,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param accountProjectDao
-     * the accountProjectDao to set
+     * @param accountProjectDao the accountProjectDao to set
      */
     public void setAccountProjectDao(GPAccountProjectDAO accountProjectDao) {
         this.accountProjectDao = accountProjectDao;
@@ -150,8 +150,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param projectDao
-     * the projectDao to set
+     * @param projectDao the projectDao to set
      */
     public void setProjectDao(GPProjectDAO projectDao) {
         this.projectDao = projectDao;
@@ -162,8 +161,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param serverDao
-     * the serverDao to set
+     * @param serverDao the serverDao to set
      */
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
@@ -171,8 +169,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param folderDao
-     * the folderDao to set
+     * @param folderDao the folderDao to set
      */
     public void setFolderDao(GPFolderDAO folderDao) {
         this.folderDao = folderDao;
@@ -182,8 +179,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param layerDao
-     * the layerDao to set
+     * @param layerDao the layerDao to set
      */
     public void setLayerDao(GPLayerDAO layerDao) {
         this.layerDao = layerDao;
@@ -201,8 +197,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //        this.layerServiceDelegate.setStyleDao(styleDao);
 //    }
     /**
-     * @param authorityDao
-     * the authorityDao to set
+     * @param authorityDao the authorityDao to set
      */
     public void setAuthorityDao(GPAuthorityDAO authorityDao) {
         this.authorityDao = authorityDao;
@@ -211,8 +206,17 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param classDao
-     * the classDao to set
+     * @param organizationDao the organizationDao to set
+     */
+    public void setOrganizationDao(GPOrganizationDAO organizationDao) {
+        this.organizationDao = organizationDao;
+        this.organizationServiceDelegate.setOrganizationDao(organizationDao);
+        this.accountServiceDelegate.setOrganizationDao(organizationDao);
+        this.wmsServiceDelegate.setOrganizationDao(organizationDao);
+    }
+
+    /**
+     * @param classDao the classDao to set
      */
     public void setClassDao(AclClassDAO classDao) {
         this.classDao = classDao;
@@ -220,8 +224,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param sidDao
-     * the sidDao to set
+     * @param sidDao the sidDao to set
      */
     public void setSidDao(AclSidDAO sidDao) {
         this.sidDao = sidDao;
@@ -229,8 +232,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param objectIdentityDao
-     * the objectIdentityDao to set
+     * @param objectIdentityDao the objectIdentityDao to set
      */
     public void setObjectIdentityDao(AclObjectIdentityDAO objectIdentityDao) {
         this.objectIdentityDao = objectIdentityDao;
@@ -238,8 +240,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param entryDao
-     * the entryDao to set
+     * @param entryDao the entryDao to set
      */
     public void setEntryDao(AclEntryDAO entryDao) {
         this.entryDao = entryDao;
@@ -247,8 +248,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param guiComponentDao
-     * the guiComponentDao to set
+     * @param guiComponentDao the guiComponentDao to set
      */
     public void setGuiComponentDao(GuiComponentDAO guiComponentDao) {
         this.guiComponentDao = guiComponentDao;
@@ -256,8 +256,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     /**
-     * @param schedulerService
-     * the schedulerService to set
+     * @param schedulerService the schedulerService to set
      */
     public void setSchedulerService(GPSchedulerService schedulerService) {
         this.schedulerService = schedulerService;
@@ -273,32 +272,35 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.accountServiceDelegate.setGpDigester(gpDigester);
     }
 
-    public GSAccountDAO getGsAccountDAO() {
-        return gsAccountDAO;
-    }
-
     public void setGsAccountDAO(GSAccountDAO gsAccountDAO) {
         this.gsAccountDAO = gsAccountDAO;
-    }
-
-    public GSResourceDAO getGsResourceDAO() {
-        return gsResourceDAO;
     }
 
     public void setGsResourceDAO(GSResourceDAO gsResourceDAO) {
         this.gsResourceDAO = gsResourceDAO;
     }
 
-    public GPViewportDAO getViewportDAO() {
-        return viewportDAO;
-    }
-
     public void setViewportDAO(GPViewportDAO viewportDAO) {
         this.viewportDAO = viewportDAO;
         this.viewportServiceDelegate.setViewportDao(viewportDAO);
     }
-
     //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Organization">
+    // ==========================================================================
+    // === Organization
+    // ==========================================================================
+    @Override
+    public Long insertOrganization(GPOrganization organization) throws IllegalParameterFault {
+        return organizationServiceDelegate.insertOrganization(organization);
+    }
+
+    @Override
+    public boolean deleteOrganization(Long organizationID) throws ResourceNotFoundFault {
+        return organizationServiceDelegate.deleteOrganization(organizationID);
+    }
+    //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Account">
     // ==========================================================================
     // === Account
@@ -556,18 +558,18 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         projectServiceDelegate.setProjectOwner(request, true);
     }
     //</editor-fold>
-// <editor-fold defaultstate="collapsed" desc="Viewport">
+
+    //<editor-fold defaultstate="collapsed" desc="Viewport">
     // ==========================================================================
     // === Viewport
     // ==========================================================================
-
     @Override
     public GPViewport getDefaultViewport(Long accountProjectID)
             throws ResourceNotFoundFault {
         return viewportServiceDelegate.getDefaultViewport(accountProjectID);
     }
+    //</editor-fold>
 
-    // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================
     // === Folder
@@ -858,9 +860,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl)
+    public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl, String organization)
             throws IllegalParameterFault {
-        return wmsServiceDelegate.saveServer(id, aliasServerName, serverUrl);
+        return wmsServiceDelegate.saveServer(id, aliasServerName, serverUrl, organization);
     }
     //</editor-fold>
 
@@ -906,6 +908,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
     //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Access Info">
+    // ==========================================================================
+    // === Access Info
+    // ==========================================================================
     @Override
     public Long insertGSAccount(GSAccount gsAccount) {
         this.gsAccountDAO.persist(gsAccount);
@@ -933,4 +939,5 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public String getGSUserByAuthkey(String authkey) {
         return this.gsAccountDAO.findGSUserNameByAuthkey(authkey).getGsuser();
     }
+    // </editor-fold>
 }

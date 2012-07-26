@@ -44,17 +44,18 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 @XmlRootElement(name = "ServerCSWDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"id", "serverUrl", "title", "alias"})
+@XmlType(propOrder = {"id", "serverUrl", "title", "alias", "organization"})
 public class ServerCSWDTO {
 
     private Long id;
     private String serverUrl;
     private String title;
     private String alias;
+    private String organization;
 
     public ServerCSWDTO() {
     }
@@ -64,6 +65,7 @@ public class ServerCSWDTO {
         this.serverUrl = server.getServerUrl();
         this.title = server.getTitle();
         this.alias = server.getAliasName();
+        this.organization = server.getOrganization().getName(); // TODO Possibile NullPointerException
     }
 
     /**
@@ -74,8 +76,7 @@ public class ServerCSWDTO {
     }
 
     /**
-     * @param id
-     *          the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -89,8 +90,7 @@ public class ServerCSWDTO {
     }
 
     /**
-     * @param serverUrl
-     *          the serverUrl to set
+     * @param serverUrl the serverUrl to set
      */
     public void setServerUrl(String serverUrl) {
         this.serverUrl = serverUrl;
@@ -104,8 +104,7 @@ public class ServerCSWDTO {
     }
 
     /**
-     * @param title
-     *          the title to set
+     * @param title the title to set
      */
     public void setTitle(String title) {
         this.title = title;
@@ -126,8 +125,22 @@ public class ServerCSWDTO {
     }
 
     /**
+     * @return the organization
+     */
+    public String getOrganization() {
+        return organization;
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
+
+    /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -137,6 +150,7 @@ public class ServerCSWDTO {
         str.append(", serverUrl=").append(serverUrl);
         str.append(", alias=").append(alias);
         str.append(", title=").append(title);
+        str.append(", organization=").append(organization);
         return str.append("}").toString();
     }
 }

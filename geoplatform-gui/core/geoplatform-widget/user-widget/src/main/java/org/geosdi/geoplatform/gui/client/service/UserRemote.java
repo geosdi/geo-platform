@@ -78,7 +78,7 @@ public interface UserRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException 
      */
-    Long insertUser(IGPUserManageDetail userDetail) throws GeoPlatformException;
+    Long insertUser(IGPUserManageDetail userDetail, String organization) throws GeoPlatformException;
 
     /**
      * 

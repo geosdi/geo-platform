@@ -94,7 +94,7 @@ public class SecurityService implements ISecurityService {
             if (user.getDefaultProjectID() == null) {
                 GPProject project = new GPProject();
                 project.setName("Default Project");
-                project.setShared(Boolean.FALSE);
+                project.setShared(false);
                 project.setId(this.saveDefaultProject(user, project));
             }
             accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(
@@ -223,6 +223,7 @@ public class SecurityService implements ISecurityService {
             GPViewport viewport) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
         accountDetail.setUsername(account.getStringID()); // Forced representation
+        accountDetail.setOrganization(account.getOrganization().getName());
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;
             accountDetail.setName(user.getUsername());

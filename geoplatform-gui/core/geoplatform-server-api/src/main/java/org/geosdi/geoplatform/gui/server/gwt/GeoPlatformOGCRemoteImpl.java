@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import java.util.ArrayList;
-
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
@@ -48,7 +47,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingRemoteServiceServlet
         implements GeoPlatformOGCRemote {
@@ -77,9 +76,9 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingRemoteServiceServle
     }
 
     @Override
-    public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer)
-            throws GeoPlatformException {
-        return ogcService.insertServer(id, aliasServerName, urlServer);
+    public GPServerBeanModel saveServer(Long id, String aliasServerName,
+            String urlServer, String organization) throws GeoPlatformException {
+        return ogcService.saveServer(id, aliasServerName, urlServer, organization);
     }
 
     @Override

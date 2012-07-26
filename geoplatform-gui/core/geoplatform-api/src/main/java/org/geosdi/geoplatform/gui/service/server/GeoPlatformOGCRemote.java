@@ -39,7 +39,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
@@ -47,7 +46,7 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 @RemoteServiceRelativePath("GeoPlatformOGCRemote")
 public interface GeoPlatformOGCRemote extends RemoteService {
@@ -67,9 +66,10 @@ public interface GeoPlatformOGCRemote extends RemoteService {
     }
 
     /**
-     * Load Distinct layers data source
+     * Load Distinct layers data source.
+     *
      * @return
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
     public ArrayList<String> findDistinctLayersDataSource()
             throws GeoPlatformException;
@@ -77,8 +77,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
     /**
      * Load All Server from GeoPlatform Web Services
      *
-     * @return
-     *          ArrayList<GPServerBeanModel>
+     * @return ArrayList<GPServerBeanModel>
      *
      * @throws GeoPlatformException
      */
@@ -95,11 +94,12 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      */
     public GPServerBeanModel getServerDetails(Long idServer)
             throws GeoPlatformException;
+
     /**
-     * 
+     *
      * @param idServer
      * @return
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
     public Boolean deleteServer(Long idServer)
             throws GeoPlatformException;
@@ -115,13 +115,15 @@ public interface GeoPlatformOGCRemote extends RemoteService {
             throws GeoPlatformException;
 
     /**
-     * 
+     *
+     * @param id
+     * @param aliasServerName
      * @param urlServer
+     * @param organization
      * @return
-     *         GPServerDTO  
-     * 
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
-    public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer)
+    public GPServerBeanModel saveServer(Long id, String aliasServerName,
+            String urlServer, String organization)
             throws GeoPlatformException;
 }

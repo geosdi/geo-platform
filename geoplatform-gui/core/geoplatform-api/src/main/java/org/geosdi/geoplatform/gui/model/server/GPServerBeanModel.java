@@ -41,15 +41,13 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPServerBeanModel extends GeoPlatformBeanModel {
 
     public enum GPServerKeyValue {
 
-        URL_SERVER("urlServer"), NAME("name"), TITLE("title"),
-        CONTACT_PERSON("contactPerson"), ALIAS("alias"),
-        CONTACT_ORGANIZATION("contactOrganization");
+        URL_SERVER("urlServer"), NAME("name"), TITLE("title"), ALIAS("alias");
         private String value;
 
         GPServerKeyValue(String theValue) {
@@ -61,14 +59,13 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
         }
     }
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 3734113612153640102L;
     private Long id;
     private String name;
     private String title;
-    private String contactPerson;
-    private String contactOrganization;
+    private String organization;
     private ArrayList<? extends GPLayerGrid> layers;
 
     /**
@@ -144,34 +141,17 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
     }
 
     /**
-     * @return the contactPerson
+     * @return the organization
      */
-    public String getContactPerson() {
-        return contactPerson;
+    public String getOrganization() {
+        return organization;
     }
 
     /**
-     * @param contactPerson the contactPerson to set
+     * @param organization the organization to set
      */
-    public void setContactPerson(String contactPerson) {
-        this.contactPerson = contactPerson;
-        set(GPServerKeyValue.CONTACT_PERSON.getValue(), this.contactPerson);
-    }
-
-    /**
-     * @return the contactOrganization
-     */
-    public String getContactOrganization() {
-        return contactOrganization;
-    }
-
-    /**
-     * @param contactOrganization the contactOrganization to set
-     */
-    public void setContactOrganization(String contactOrganization) {
-        this.contactOrganization = contactOrganization;
-        set(GPServerKeyValue.CONTACT_ORGANIZATION.getValue(),
-                this.contactOrganization);
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 
     /**
@@ -219,9 +199,11 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
 
     @Override
     public String toString() {
-        return "GPServerDTO{" + "id = " + id + ", alias = " + getAlias()
-                + ", urlServer = " + getUrlServer() + ", name =  "
-                + name + ", title = " + title + ", contactPerson = " + contactPerson
-                + ", contactOrganization = " + contactOrganization + '}';
+        return "GPServerBeanModel{" + "id = " + id
+                + ", alias = " + getAlias()
+                + ", urlServer = " + getUrlServer()
+                + ", name =  " + name
+                + ", title = " + title
+                + ", organization = " + organization + '}';
     }
 }

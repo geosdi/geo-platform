@@ -44,12 +44,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -89,11 +92,9 @@ public class GeoPlatformServer implements Serializable {
     @Column(name = "abstract", columnDefinition = "TEXT")
     private String abstractServer;
     //
-    @Column(name = "contact_person")
-    private String contactPerson;
-    //
-    @Column(name = "contact_organization")
-    private String contactOrganization;
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPOrganization organization;
     //
     @Column(name = "capability_type", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -175,33 +176,17 @@ public class GeoPlatformServer implements Serializable {
     }
 
     /**
-     * @return the contactPerson
+     * @return the organization
      */
-    public String getContactPerson() {
-        return contactPerson;
+    public GPOrganization getOrganization() {
+        return organization;
     }
 
     /**
-     * @param contactPerson
-     *            the contactPerson to set
+     * @param organization the organization to set
      */
-    public void setContactPerson(String contactPerson) {
-        this.contactPerson = contactPerson;
-    }
-
-    /**
-     * @return the contactOrganization
-     */
-    public String getContactOrganization() {
-        return contactOrganization;
-    }
-
-    /**
-     * @param contactOrganization
-     *            the contactOrganization to set
-     */
-    public void setContactOrganization(String contactOrganization) {
-        this.contactOrganization = contactOrganization;
+    public void setOrganization(GPOrganization organization) {
+        this.organization = organization;
     }
 
     /**
@@ -248,8 +233,7 @@ public class GeoPlatformServer implements Serializable {
         str.append(", aliasName=").append(aliasName);
         str.append(", title=").append(title);
         str.append(", abstractServer=").append(abstractServer);
-        str.append(", contactPerson=").append(contactPerson);
-        str.append(", contactOrganization=").append(contactOrganization);
+        str.append(", organization=").append(organization);
         return str.append("}").toString();
     }
 }

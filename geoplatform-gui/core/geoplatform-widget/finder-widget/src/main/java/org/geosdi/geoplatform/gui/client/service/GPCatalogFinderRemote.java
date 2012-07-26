@@ -72,7 +72,7 @@ public interface GPCatalogFinderRemote extends RemoteService {
             PagingLoadConfig config, String searchText)
             throws GeoPlatformException;
 
-    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
+    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl, String organization)
             throws GeoPlatformException;
 
     boolean deleteServerCSW(Long serverID) throws GeoPlatformException;

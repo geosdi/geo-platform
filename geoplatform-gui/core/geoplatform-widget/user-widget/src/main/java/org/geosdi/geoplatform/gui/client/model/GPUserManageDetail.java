@@ -41,8 +41,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPUserManageDetail extends GeoPlatformBeanModel
         implements IGPUserManageDetail {
@@ -53,6 +52,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     private String password; // For manual binding
     private Date creationDate; // For manual operation
     private boolean expired; // For manual binding
+    private String organization;
 
     public enum GPUserManageDetailKeyValue {
 
@@ -74,8 +74,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
-     * @param id
-     *          the id to set
+     * @param id the id to set
      */
     @Override
     public void setId(Long id) {
@@ -91,8 +90,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
-     * @param username
-     *          the username to set
+     * @param username the username to set
      */
     @Override
     public void setUsername(String username) {
@@ -108,8 +106,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
-     * @param name
-     *          the name to set
+     * @param name the name to set
      */
     @Override
     public void setName(String name) {
@@ -125,8 +122,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
-     * @param email 
-     *          the email to set
+     * @param email the email to set
      */
     @Override
     public void setEmail(String email) {
@@ -142,8 +138,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
-     * @param password
-     *          the password to set
+     * @param password the password to set
      */
     @Override
     public void setPassword(String password) {
@@ -159,8 +154,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
-     * @param role
-     *          the authority to set
+     * @param role the authority to set
      */
     @Override
     public void setAuthority(String role) {
@@ -216,8 +210,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
-     * @param temporary
-     *          the temporary to set
+     * @param temporary the temporary to set
      */
     @Override
     public void setTemporary(boolean temporary) {
@@ -241,8 +234,24 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
+     * @return the organization
+     */
+    @Override
+    public String getOrganization() {
+        return organization;
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    @Override
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
+
+    /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -262,7 +271,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -274,7 +283,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -290,6 +299,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         str.append(", creationDate=").append(creationDate);
         str.append(", temporary=").append(isTemporary());
         str.append(", expired=").append(expired);
+        str.append(", organization=").append(organization);
         return str.append('}').toString();
     }
 }

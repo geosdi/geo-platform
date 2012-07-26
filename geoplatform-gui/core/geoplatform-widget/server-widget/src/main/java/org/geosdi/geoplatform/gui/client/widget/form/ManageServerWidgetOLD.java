@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -52,12 +50,15 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
 import org.geosdi.geoplatform.gui.client.widget.EnumSearchServer;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
@@ -250,9 +251,10 @@ public class ManageServerWidgetOLD extends GeoPlatformFormWidget<GPServerBeanMod
         }
 
         private void saveServer(String serverName, String serverURL) {
-            GeoPlatformOGCRemote.Util.getInstance().insertServer(
+            GeoPlatformOGCRemote.Util.getInstance().saveServer(
                     null, serverName.trim(),
                     serverURL.trim(),
+                    GPAccountGuiComponents.getInstance().getOrganization(),
                     new AsyncCallback<GPServerBeanModel>() {
 
                         @Override

@@ -64,6 +64,11 @@
 		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU" />
+		
+    <cache name="organization" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
+		memoryStoreEvictionPolicy="LRU" />
                 
                                 <!-- ACL-->
     <cache name="sid" maxElementsInMemory="10000" eternal="false"

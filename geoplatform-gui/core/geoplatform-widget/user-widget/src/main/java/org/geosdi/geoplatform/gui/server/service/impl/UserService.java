@@ -45,11 +45,13 @@ import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
@@ -67,8 +69,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Service("userService")
 public class UserService implements IUserService {
@@ -82,8 +83,8 @@ public class UserService implements IUserService {
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-                                                            String searchText, 
-                                                            HttpServletRequest httpServletRequest) {
+            String searchText,
+            HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
 
         int start = config.getOffset();
@@ -95,7 +96,7 @@ public class UserService implements IUserService {
         int page = start == 0 ? start : start / config.getLimit();
 
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                                                                config.getLimit(), page);
+                config.getLimit(), page);
 
         List<UserDTO> userList = null;
         try {
@@ -115,18 +116,20 @@ public class UserService implements IUserService {
         }
 
         return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
-                                                            config.getOffset(), usersCount.intValue());
+                config.getOffset(), usersCount.intValue());
     }
 
     @Override
-    public Long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
+    public Long insertUser(IGPUserManageDetail userDetail, String organization, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
 
-        logger.info("User to insert: " + userDetail);
+        logger.info("\nUser to insert: {}\nof the organization: {}", userDetail, organization);
         Long iserId = null;
         try {
             GPUser user = this.convertToGPUser(userDetail);
+            user.setOrganization(new GPOrganization(organization));
+
             iserId = geoPlatformServiceClient.insertAccount(user, true);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
@@ -156,9 +159,9 @@ public class UserService implements IUserService {
 
     @Override
     public Long updateOwnUser(IGPUserManageDetail userDetail,
-                              String currentPlainPassword,
-                              String newPlainPassword,
-                              HttpServletRequest httpServletRequest)
+            String currentPlainPassword,
+            String newPlainPassword,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
         this.getCheckLoggedUser(httpServletRequest);
@@ -172,10 +175,10 @@ public class UserService implements IUserService {
             userDTO.setEmailAddress(userDetail.getEmail());
 
             userID = geoPlatformServiceClient.updateOwnUser(userDTO,
-                                                            currentPlainPassword, newPlainPassword);
+                    currentPlainPassword, newPlainPassword);
 
             sessionUtility.storeLoggedAccount(this.convertToGPUser(userDetail),
-                                              httpServletRequest);
+                    httpServletRequest);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         } catch (ResourceNotFoundFault rnnf) {
@@ -216,6 +219,7 @@ public class UserService implements IUserService {
         user.setTemporary(userDTO.isTemporary());
         user.setExpired(userDTO.isExpired());
         user.setAuthority(this.convertToAuthority(userDTO.getRoles()));
+        user.setOrganization(userDTO.getOrganization());
         return user;
     }
 
@@ -239,6 +243,7 @@ public class UserService implements IUserService {
         user.setCreationDate(gpUser.getCreationDate());
         user.setTemporary(gpUser.isAccountTemporary());
         user.setAuthority(this.convertToGPAuthorities(gpUser.getGPAuthorities()));
+        user.setOrganization(gpUser.getOrganization().getName()); // TODO Possibile NullPointerException
         return user;
     }
 
@@ -294,7 +299,7 @@ public class UserService implements IUserService {
 
     @Override
     public HashMap<String, Boolean> getRolePermission(String role,
-                                                      HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         HashMap<String, Boolean> permissionMap;
 
@@ -311,8 +316,8 @@ public class UserService implements IUserService {
 
     @Override
     public boolean updateRolePermission(String role,
-                                        HashMap<String, Boolean> permissionMap,
-                                        HttpServletRequest httpServletRequest)
+            HashMap<String, Boolean> permissionMap,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GuiComponentsPermissionMapData rolePermission = new GuiComponentsPermissionMapData();
         rolePermission.setPermissionMap(permissionMap);

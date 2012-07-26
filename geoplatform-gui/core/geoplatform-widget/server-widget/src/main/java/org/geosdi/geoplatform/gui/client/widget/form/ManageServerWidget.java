@@ -35,11 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import java.util.ArrayList;
-import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
@@ -56,10 +54,13 @@ import com.extjs.gxt.ui.client.widget.grid.RowEditor;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2AddServerHandler;
@@ -323,9 +324,10 @@ public class ManageServerWidget extends Window {
         public void updateInsertServer() {
             final GPServerBeanModel server = (GPServerBeanModel) record.getModel();
 
-            GeoPlatformOGCRemote.Util.getInstance().insertServer(
+            GeoPlatformOGCRemote.Util.getInstance().saveServer(
                     server.getId(), record.get("alias").toString(),
                     record.get("urlServer").toString().trim(),
+                    GPAccountGuiComponents.getInstance().getOrganization(),
                     new AsyncCallback<GPServerBeanModel>() {
 
                         @Override

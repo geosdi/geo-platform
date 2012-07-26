@@ -48,7 +48,7 @@ import org.junit.Test;
 
 /**
  * Tests for CSW Catalog Records.
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class CSWCatalogRecordTest extends CSWCatalogTest {
@@ -245,7 +245,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     @Test
     public void testGetRecordsSecureSNIPC() throws Exception {
         // Insert the server
-        GeoPlatformServer server = this.createCSWServer("SNIPC", snipcProvider.getSnipcUrl());
+        GeoPlatformServer server = this.createCSWServer("SNIPC", snipcProvider.getSnipcUrl(), organizationTest);
         Long serverID = cswService.insertServerCSW(server);
 
         // Set catalog finder

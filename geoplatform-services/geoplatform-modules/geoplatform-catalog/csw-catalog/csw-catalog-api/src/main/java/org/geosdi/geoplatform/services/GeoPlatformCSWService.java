@@ -56,14 +56,14 @@ import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 
 /**
- * Public interface to define the service operations mapped via REST
- * using CXF framework.
- * 
+ * Public interface to define the service operations mapped via REST using CXF
+ * framework.
+ *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  */
 @WebService(name = "GeoPlatformCSWService",
-            targetNamespace = "http://csw.services.geo-platform.org/")
+targetNamespace = "http://csw.services.geo-platform.org/")
 public interface GeoPlatformCSWService {
 
     //<editor-fold defaultstate="collapsed" desc="CSW Server">
@@ -72,8 +72,9 @@ public interface GeoPlatformCSWService {
     // ==========================================================================
     /**
      * Insert a server without verification (GetCapabilities request).
-     * 
-     * @deprecated only for test purpose, use saveServerCSW method for production.
+     *
+     * @deprecated only for test purpose, use saveServerCSW method for
+     * production.
      */
     @Put
     @HttpResource(location = "/server/csw")
@@ -87,7 +88,8 @@ public interface GeoPlatformCSWService {
     @HttpResource(location = "/server/csw")
     ServerCSWDTO saveServerCSW(
             @WebParam(name = "alias") String alias,
-            @WebParam(name = "serverUrl") String serverUrl)
+            @WebParam(name = "serverUrl") String serverUrl,
+            @WebParam(name = "organization") String organization)
             throws IllegalParameterFault;
 
     @Delete

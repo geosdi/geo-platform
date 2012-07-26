@@ -38,28 +38,26 @@ package org.geosdi.geoplatform;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.core.acl.AclClass;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
 import org.geosdi.geoplatform.core.acl.AclSid;
-import org.geosdi.geoplatform.core.acl.GuiComponent;
 import org.geosdi.geoplatform.core.acl.GeoPlatformPermission;
+import org.geosdi.geoplatform.core.acl.GuiComponent;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class AclDAOTest extends BaseDAOTest {
 
@@ -78,9 +76,10 @@ public class AclDAOTest extends BaseDAOTest {
     @Autowired
     protected GuiComponentDAO guiComponentDAO;
     // ACL
-    protected final String usernameSuperUserTestAcl = "super_user_test_acl";
-    protected final String usernameAdminTestAcl = "admin_acl_test";
-    protected final String usernameUserTestAcl = "user_acl_test";
+    private final String nameOrganizationTestAcl = "geoSDI_acl";
+    private final String usernameSuperUserTestAcl = "super_user_test_acl";
+    private final String usernameAdminTestAcl = "admin_acl_test";
+    private final String usernameUserTestAcl = "user_acl_test";
     //
     private AclClass gcClass;
     private AclSid superUser;
@@ -92,6 +91,7 @@ public class AclDAOTest extends BaseDAOTest {
     @Test
     public void testCheckAclDAOs() {
         logger.trace("\n\t@@@ testCheckAclDAOs @@@");
+        Assert.assertNotNull("organizationDAO is NULL", super.organizationDAO);
         Assert.assertNotNull("accountDAO is NULL", super.accountDAO);
 //        Assert.assertNotNull("authorityDAO is NULL", super.authorityDAO);
         //
@@ -105,6 +105,7 @@ public class AclDAOTest extends BaseDAOTest {
     @Test
     public void testManageAcl() {
         logger.trace("\n\t@@@ testManageAcl @@@");
+        this.removeOrganizationByName(nameOrganizationTestAcl);
         this.removeUserByUsername(usernameSuperUserTestAcl);
         this.removeUserByUsername(usernameAdminTestAcl);
         this.removeUserByUsername(usernameUserTestAcl);
@@ -116,13 +117,24 @@ public class AclDAOTest extends BaseDAOTest {
         Assert.assertEquals("All Entries doesn't REMOVED", 0, entryDAO.findAll().size());
         Assert.assertEquals("All GuiComponents doesn't REMOVED", 0, guiComponentDAO.findAll().size());
 
+        GPOrganization organizationAclTest = new GPOrganization(nameOrganizationTestAcl);
+        organizationAclTest.setDescription("Organization for users that manage the ACL permissions.");
+        organizationDAO.persist(organizationAclTest);
+        
         // Insert Users and Authorities ACL
         // ACL Data
-        this.insertUser(usernameSuperUserTestAcl, GPRole.ADMIN, GPRole.USER);
-        this.insertUser(usernameAdminTestAcl, GPRole.ADMIN);
-        this.insertUser(usernameUserTestAcl, GPRole.USER);
+        this.insertUser(usernameSuperUserTestAcl, organizationAclTest, GPRole.ADMIN, GPRole.USER);
+        this.insertUser(usernameAdminTestAcl, organizationAclTest, GPRole.ADMIN);
+        this.insertUser(usernameUserTestAcl, organizationAclTest, GPRole.USER);
         // Insert ACL data
         this.insertGuiComponents();
+    }
+
+    private void removeOrganizationByName(String name) {
+        GPOrganization org = organizationDAO.findByName(name);
+        if (org != null) {
+            organizationDAO.remove(org);
+        }
     }
 
     private void removeUserByUsername(String username) {
@@ -265,13 +277,13 @@ public class AclDAOTest extends BaseDAOTest {
         // Admin
         for (String componentID : GuiComponentIDs.LIST_ALL) {
             entriesMap.put(GPRole.ADMIN + componentID,
-                           new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
+                    new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
         }
         // User
         for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_USER.entrySet()) {
             if (e.getValue() != null) {
                 entriesMap.put(GPRole.USER + e.getKey(),
-                               new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
+                        new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
             }
         }
         // Viewer
@@ -279,14 +291,14 @@ public class AclDAOTest extends BaseDAOTest {
             if (e.getValue() != null) {
                 // Ace Order is 3 because the entries of admin and user should be added before
                 entriesMap.put(GPRole.VIEWER + e.getKey(),
-                               new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
+                        new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
             }
         }
         // SIGV Application
         for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_APPLICATION_SIGV.entrySet()) {
             if (e.getValue() != null) {
                 entriesMap.put("SIGV" + e.getKey(),
-                               new AclEntry(objIdMap.get(e.getKey()), 4, sigv, enable, e.getValue()));
+                        new AclEntry(objIdMap.get(e.getKey()), 4, sigv, enable, e.getValue()));
             }
         }
         //

@@ -74,9 +74,9 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     }
 
     @Override
-    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
+    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl, String organization)
             throws GeoPlatformException {
-        return gpCatalogFinderService.saveServerCSW(alias, serverUrl,
+        return gpCatalogFinderService.saveServerCSW(alias, serverUrl, organization,
                 super.getThreadLocalRequest());
     }
 

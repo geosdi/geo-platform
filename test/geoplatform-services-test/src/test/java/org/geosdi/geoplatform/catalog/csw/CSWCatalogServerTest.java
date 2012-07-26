@@ -56,7 +56,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     @Test
     public void testInsertServer() throws Exception {
         // Insert the server
-        GeoPlatformServer server = super.createCSWServer("server_test", "http://url.test");
+        GeoPlatformServer server = super.createCSWServer("server_test", "http://url.test", organizationTest);
         Long serverID = cswService.insertServerCSW(server);
 
         Assert.assertNotNull(serverID);
@@ -101,7 +101,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     public void testSaveServer() throws Exception {
         // Save the server
         String serverURL = "http://datigis.comune.fi.it/geonetwork/srv/it/csw";
-        ServerCSWDTO serverDTO = cswService.saveServerCSW("Firenze", serverURL);
+        ServerCSWDTO serverDTO = cswService.saveServerCSW("Firenze", serverURL, organizationNameTest);
 
         Assert.assertNotNull(serverDTO);
 
@@ -119,32 +119,32 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     public void testResaveServerOur() throws Exception {
         // Try to resave a server with a
         ServerCSWDTO serverDTO = cswService.saveServerCSW("alias",
-                serverTestOur.getServerUrl());
+                serverTestOur.getServerUrl(), organizationNameTest);
 
         this.compareServer(serverTestOur, serverDTO);
     }
 
     @Test(expected = IllegalParameterFault.class)
     public void testSaveServerNullURL() throws Exception {
-        cswService.saveServerCSW("Must fail", null);
+        cswService.saveServerCSW("Must fail", null, organizationNameTest);
     }
 
     @Test(expected = IllegalParameterFault.class)
     public void testSaveServerMalformedURLException() throws Exception {
-        cswService.saveServerCSW("Must fail", "http//url-test.fail");
+        cswService.saveServerCSW("Must fail", "http//url-test.fail", organizationNameTest);
     }
 
     @Test(expected = IllegalParameterFault.class)
     public void testSaveServerCatalogVersionException() throws Exception {
         cswService.saveServerCSW("NSDI",
-                "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw"); // Version 2.0.1
+                "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw", organizationNameTest); // Version 2.0.1
     }
 
     @Test
     public void testSaveSecureServerSNIPC() throws Exception {
         // Save the server
         String serverURL = super.snipcProvider.getSnipcUrl();
-        ServerCSWDTO serverDTO = cswService.saveServerCSW("SNIPC", serverURL);
+        ServerCSWDTO serverDTO = cswService.saveServerCSW("SNIPC", serverURL, organizationNameTest);
 
         Assert.assertNotNull(serverDTO);
 
@@ -221,7 +221,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     @Test
     public void testCSWServersCountTwo() throws Exception {
         // Insert the server
-        GeoPlatformServer server = super.createCSWServer("Mock title", "http://url.mock");
+        GeoPlatformServer server = super.createCSWServer("Mock title", "http://url.mock", organizationTest);
         server.setAliasName("Alias test");
         Long serverID = cswService.insertServerCSW(server);
 
@@ -260,7 +260,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         Long[] serverIDs = new Long[27];
         for (int i = 1; i <= 27; i++) {
             GeoPlatformServer server = super.createCSWServer("Mock title " + i,
-                    "http://url.mock-" + i);
+                    "http://url.mock-" + i, organizationTest);
             if (i >= 3) {
                 server.setAliasName("Alias test " + i);
             }

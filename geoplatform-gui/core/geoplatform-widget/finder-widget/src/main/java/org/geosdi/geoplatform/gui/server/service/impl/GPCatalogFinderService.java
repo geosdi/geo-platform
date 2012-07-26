@@ -127,12 +127,12 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     }
 
     @Override
-    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl, String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         ServerCSWDTO serverCSW = null;
         try {
-            serverCSW = geoPlatformCSWClient.saveServerCSW(alias, serverUrl);
+            serverCSW = geoPlatformCSWClient.saveServerCSW(alias, serverUrl, organization);
         } catch (IllegalParameterFault ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());

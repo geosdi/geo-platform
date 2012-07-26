@@ -7,20 +7,20 @@
  * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
- * under the terms of the GNU General Public License as published by 
+ * under the terms of the GNU General  License as published by 
  * the Free Software Foundation, either version 3 of the License, or 
  * (at your option) any later version. This program is distributed in the 
  * hope that it will be useful, but WITHOUT ANY WARRANTY; without 
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR 
- * A PARTICULAR PURPOSE. See the GNU General Public License 
+ * A PARTICULAR PURPOSE. See the GNU General  License 
  * for more details. You should have received a copy of the GNU General 
- * Public License along with this program. If not, see http://www.gnu.org/licenses/ 
+ *  License along with this program. If not, see http://www.gnu.org/licenses/ 
  *
  * ====================================================================
  *
  * Linking this library statically or dynamically with other modules is 
  * making a combined work based on this library. Thus, the terms and 
- * conditions of the GNU General Public License cover the whole combination. 
+ * conditions of the GNU General  License cover the whole combination. 
  * 
  * As a special exception, the copyright holders of this library give you permission 
  * to link this library with independent modules to produce an executable, regardless 
@@ -33,30 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.jaxb;
+package org.geosdi.geoplatform.core.dao;
+
+import com.googlecode.genericdao.search.ISearch;
+import java.util.List;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public final class JAXBContextConnectorRepository {
+public interface GPOrganizationDAO {
 
-    static {
-        INSTANCE = new GeoPlatformJAXBContextRepository();
-    }
-    //
-    private static final GeoPlatformJAXBContextRepository INSTANCE;
+    List<GPOrganization> findAll();
 
-    private JAXBContextConnectorRepository() {
-    }
+    GPOrganization find(Long id);
 
-    public static void registerProvider(GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey key,
-            Object provider) {
-        INSTANCE.registerProvider(key, provider);
-    }
+    GPOrganization[] find(Long[] ids);
 
-    public static GPConnectorJAXBContext getProvider(GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey key) {
-        return INSTANCE.getProvider(key);
-    }
+    void persist(GPOrganization... organizations);
+
+    GPOrganization merge(GPOrganization organization);
+
+    GPOrganization[] merge(GPOrganization... organization);
+
+    boolean remove(GPOrganization organization);
+
+    boolean removeById(Long id);
+
+    List<GPOrganization> search(ISearch search);
+
+    int count(ISearch search);
+
+    GPOrganization findByName(String name);
 }

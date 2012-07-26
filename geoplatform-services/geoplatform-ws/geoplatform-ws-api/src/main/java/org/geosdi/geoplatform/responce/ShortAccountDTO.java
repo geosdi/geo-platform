@@ -46,14 +46,14 @@ import org.geosdi.geoplatform.core.model.GPAuthority;
 
 /**
  *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso(value = {UserDTO.class, ApplicationDTO.class})
 public class ShortAccountDTO {
 
     private Long id;
+    private String organization;
     private boolean enabled;
     private boolean temporary;
     private boolean expired;
@@ -65,6 +65,7 @@ public class ShortAccountDTO {
 
     public ShortAccountDTO(GPAccount account) {
         this.id = account.getId();
+        this.organization = account.getOrganization().getName(); // TODO Possibile NullPointerException
         this.enabled = account.isEnabled();
         this.temporary = account.isAccountTemporary();
         this.expired = !account.isAccountNonExpired();
@@ -86,11 +87,24 @@ public class ShortAccountDTO {
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the organization
+     */
+    public String getOrganization() {
+        return organization;
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 
     /**
@@ -101,8 +115,7 @@ public class ShortAccountDTO {
     }
 
     /**
-     * @param enabled
-     *            the enabled to set
+     * @param enabled the enabled to set
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
@@ -116,8 +129,7 @@ public class ShortAccountDTO {
     }
 
     /**
-     * @param temporary
-     *          the temporary to set
+     * @param temporary the temporary to set
      */
     public void setTemporary(boolean temporary) {
         this.temporary = temporary;
@@ -159,8 +171,7 @@ public class ShortAccountDTO {
     }
 
     /**
-     * @param roles
-     *          the roles to set
+     * @param roles the roles to set
      */
     public void setRoles(List<String> roles) {
         this.roles = roles;
@@ -168,13 +179,14 @@ public class ShortAccountDTO {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append(", id=").append(id);
+        str.append(", organization=").append(organization);
         str.append(", enabled=").append(enabled);
         str.append(", temporary=").append(temporary);
         str.append(", expired=").append(expired);

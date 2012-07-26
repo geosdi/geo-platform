@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.event.timeout.ManageUpdateUserEvent;
 import org.geosdi.geoplatform.gui.client.form.binding.UserPropertiesBinding;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
@@ -159,7 +160,9 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void manageInsertUser() {
-        UserRemoteImpl.Util.getInstance().insertUser(user, new AsyncCallback<Long>() {
+        UserRemoteImpl.Util.getInstance().insertUser(user, 
+                GPAccountGuiComponents.getInstance().getOrganization(),
+                new AsyncCallback<Long>() {
 
             @Override
             public void onFailure(Throwable caught) {

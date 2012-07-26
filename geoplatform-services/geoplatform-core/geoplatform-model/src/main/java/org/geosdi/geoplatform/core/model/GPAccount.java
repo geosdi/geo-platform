@@ -87,6 +87,7 @@ public abstract class GPAccount implements Serializable {
     @JoinColumn(name = "gs_account")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GSAccount gsAccount;
+    //
     @Transient
     private Boolean accountNonLocked;
     //
@@ -104,6 +105,10 @@ public abstract class GPAccount implements Serializable {
     //
     @Column(name = "defaultProject_id")
     private Long defaultProjectID;
+    //
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPOrganization organization;
 
     public abstract String getStringID();
 
@@ -241,6 +246,20 @@ public abstract class GPAccount implements Serializable {
     }
 
     /**
+     * @return the organization
+     */
+    public GPOrganization getOrganization() {
+        return organization;
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    public void setOrganization(GPOrganization organization) {
+        this.organization = organization;
+    }
+
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
@@ -261,6 +280,7 @@ public abstract class GPAccount implements Serializable {
             str.append(", authorities=NULL");
         }
         str.append(", defaultProjectID=").append(defaultProjectID);
+        str.append(", organization=").append(organization);
         return str.toString();
     }
 

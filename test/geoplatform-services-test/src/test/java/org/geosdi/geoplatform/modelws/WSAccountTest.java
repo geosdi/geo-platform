@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.modelws;
 import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -53,8 +54,7 @@ import org.junit.Test;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  * 
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WSAccountTest extends ServiceTest {
     // TODO check:
@@ -109,7 +109,7 @@ public class WSAccountTest extends ServiceTest {
 
     @Test(expected = IllegalParameterFault.class)
     public void testInsertUserWithNoRoles() throws IllegalParameterFault {
-        super.createAndInsertUser("user-no-roles");
+        super.createAndInsertUser("user-no-roles", organizationTest);
     }
 
     @Test
@@ -127,12 +127,16 @@ public class WSAccountTest extends ServiceTest {
     @Test
     public void testInsertUserWithMultiRole() throws IllegalParameterFault, ResourceNotFoundFault {
         String usernameMultiRole = "username-multi-role";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, ROLE_ADMIN, ROLE_VIEWER);
+        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ROLE_ADMIN, ROLE_VIEWER);
 
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole);
             Assert.assertNotNull(authorities);
             Assert.assertEquals("Number of Authorities of " + usernameMultiRole, 2, authorities.size());
+            
+            for (GPAuthority gPAuthority : authorities) {
+                System.out.println("\n\n\n\n*************** " + gPAuthority);
+            }
 
             GPAuthority authority = authorities.get(0);
             Assert.assertNotNull(authority);
@@ -151,7 +155,7 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUsername() {
-        GPUser user = super.createUser(super.usernameTest, ROLE_USER);
+        GPUser user = super.createUser(super.usernameTest, organizationTest, ROLE_USER);
         try {
             gpWSClient.insertAccount(user, false);
             Assert.fail("User already exist wrt username");
@@ -164,7 +168,7 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUEmail() {
-        GPUser user = super.createUser("duplicate-email", ROLE_USER);
+        GPUser user = super.createUser("duplicate-email", organizationTest, ROLE_USER);
         user.setEmailAddress(super.userTest.getEmailAddress());
         try {
             gpWSClient.insertAccount(user, false);
@@ -172,6 +176,21 @@ public class WSAccountTest extends ServiceTest {
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("email")) { // Must be fail for other reasons
                 Assert.fail("Not fail for User already exist wrt email, but for: " + ex.getMessage());
+            }
+        }
+    }
+
+    @Test
+    public void testInsertIncorrectUserWRTUOrganization() {
+        GPUser user = super.createUser("no-organization", 
+                new GPOrganization("organization-inexistent"), ROLE_USER);
+        
+        try {
+            gpWSClient.insertAccount(user, false);
+            Assert.fail("User incorrect wrt organization");
+        } catch (IllegalParameterFault ex) {
+            if (!ex.getMessage().toLowerCase().contains("organization")) { // Must be fail for other reasons
+                Assert.fail("Not fail for User incorrect wrt organization, but for: " + ex.getMessage());
             }
         }
     }

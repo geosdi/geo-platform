@@ -13,6 +13,8 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail {
 
@@ -21,6 +23,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     private String username;
     private String name;
     private String email;
+    private String organization;
     private String authkey;
     private String hostXmppServer;
     private String baseLayer;
@@ -43,6 +46,16 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     @Override
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String getOrganization() {
+        return this.organization;
+    }
+
+    @Override
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 
     @Override

@@ -43,6 +43,7 @@ import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -55,10 +56,9 @@ import org.springframework.security.acls.domain.BasePermission;
 
 /**
  * This test is not intended to test the business logic but only the correctness
- * of the updates on DAO
+ * of the updates on DAOs.
  * 
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPDAOTest extends BaseDAOTest {
 
@@ -66,7 +66,7 @@ public class GPDAOTest extends BaseDAOTest {
     private String usernamePositionTest = "user_position_test";
     private GPUser userPositionTest;
     // Projects
-    GPProject userPositionTestProject;
+    private GPProject userPositionTestProject;
     // Folders
     private GPFolder rootFolder;
     private GPFolder folderA;
@@ -82,7 +82,9 @@ public class GPDAOTest extends BaseDAOTest {
     @Before
     public void setUp() {
         logger.trace("\n\t@@@ " + getClass().getSimpleName() + ".setUp @@@");
-        userPositionTest = super.insertUser(usernamePositionTest);
+        organizationTest = new GPOrganization("geoSDI_dao_test");
+        organizationDAO.persist(organizationTest);
+        userPositionTest = super.insertUser(usernamePositionTest, organizationTest);
 
         endPosition = beginPosition + 930;
 
@@ -123,6 +125,8 @@ public class GPDAOTest extends BaseDAOTest {
         accountDAO.remove(userPositionTest);
         // Remove project and his folders and layers
         projectDAO.remove(userPositionTestProject);
+        // Remove organization
+        organizationDAO.remove(organizationTest);
     }
 
     @Test
@@ -346,7 +350,7 @@ public class GPDAOTest extends BaseDAOTest {
 //        Assert.assertFalse("Shift Position Layers should NOT be done", check);
     }
     //</editor-fold>
-    
+
     /**
      * Test of updateAncestorsDescendants method for Folders
      */

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.catalog.csw;
 import org.geosdi.geoplatform.connector.security.GeosdiCatalogBeanProvider;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
@@ -45,6 +46,7 @@ import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
+import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -67,8 +69,12 @@ public abstract class CSWCatalogTest {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected GeoPlatformCSWService cswService;
+    protected GeoPlatformService gpWSClient;
     protected SnipcCatalogBeanProvider snipcProvider;
     protected GeosdiCatalogBeanProvider geosdiProvider;
+    // Organization
+    protected GPOrganization organizationTest;
+    protected String organizationNameTest = "geoSDI_ws_test";
     //
     protected GeoPlatformServer serverTestOur;
     protected Long serverTestOurID;
@@ -80,6 +86,10 @@ public abstract class CSWCatalogTest {
      */
     public void setCSWService(GeoPlatformCSWService cswService) {
         this.cswService = cswService;
+    }
+
+    public void setGeoplatformService(GeoPlatformService gpWSClient) {
+        this.gpWSClient = gpWSClient;
     }
 
     public void setSnipcProvider(SnipcCatalogBeanProvider snipcProvider) {
@@ -94,15 +104,18 @@ public abstract class CSWCatalogTest {
     public void setUp() throws Exception {
         logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
 
+        organizationTest = new GPOrganization(organizationNameTest);
+        organizationTest.setId(gpWSClient.insertOrganization(organizationTest));
+
         // Insert the servers test
         serverTestOur = this.createCSWServer("CSW Server WS Test",
-                geosdiProvider.getGeosdiUrl());
+                geosdiProvider.getGeosdiUrl(), organizationTest);
         serverTestOurID = cswService.insertServerCSW(serverTestOur);
         serverTestOur.setId(serverTestOurID);
 
         serverTestTrevisoID = cswService.insertServerCSW(
                 this.createCSWServer("Provincia di Treviso",
-                "http://ows.provinciatreviso.it/geonetwork/srv/it/csw"));
+                "http://ows.provinciatreviso.it/geonetwork/srv/it/csw", organizationTest));
 
         // Create the CSW search parameters
         catalogFinder = new CatalogFinderBean();
@@ -120,17 +133,16 @@ public abstract class CSWCatalogTest {
     @After
     public void tearDown() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
-
-        // Delete the servers test
-        cswService.deleteServerCSW(serverTestOurID);
-        cswService.deleteServerCSW(serverTestTrevisoID);
+        
+        gpWSClient.deleteOrganization(organizationTest.getId());
     }
 
-    protected GeoPlatformServer createCSWServer(String title, String url) {
+    protected GeoPlatformServer createCSWServer(String title, String url, GPOrganization organization) {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerType(GPCapabilityType.CSW);
         server.setTitle(title);
         server.setServerUrl(url);
+        server.setOrganization(organization);
         return server;
     }
 }

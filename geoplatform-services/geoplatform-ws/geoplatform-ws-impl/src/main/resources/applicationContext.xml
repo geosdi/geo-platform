@@ -18,9 +18,9 @@
             http://cxf.apache.org/schemas/jaxws.xsd"
        default-autowire="byName">
 
-	<!--===================================================================== -->
-	<!-- Services -->
-	<!--===================================================================== -->
+    <!--===================================================================== -->
+    <!-- Services -->
+    <!--===================================================================== -->
 
     <bean id="geoPlatformService"
           class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">
@@ -30,26 +30,30 @@
         <property name="serverDao" ref="serverDAO" />
         <property name="folderDao" ref="folderDAO" />
         <property name="layerDao" ref="layerDAO" />
-<!--        <property name="styleDao" ref="styleDAO" />-->
+        <!--<property name="styleDao" ref="styleDAO" />-->
         <property name="authorityDao" ref="authorityDAO" />
+        <property name="organizationDao" ref="organizationDAO" />
+        
         <!-- Viewport -->
         <property name="viewportDAO" ref="viewportDAO" />
+        
         <!-- ACL -->
         <property name="classDao" ref="classDAO" />
         <property name="entryDao" ref="entryDAO" />
         <property name="objectIdentityDao" ref="objectIdentityDAO" />
         <property name="sidDao" ref="sidDAO" />
         <property name="guiComponentDao" ref="guiComponentDAO" />
-        <!-- SERVICES -->
+        
+        <!-- Access Info -->
+        <property name="gsAccountDAO" ref="gsAccountDAO" />
+        <property name="gsResourceDAO" ref="gsResourceDAO" />
+        
+        <!-- Services -->
         <property name="schedulerService" ref="schedulerService" />
         
         <property name="gpDigester" ref="gpDigesterSHA1" />
-        
-        <!-- GP ACCESS INFO -->
-        <property name="gsAccountDAO" ref="gsAccountDAO" />
-        <property name="gsResourceDAO" ref="gsResourceDAO" />
     </bean>
 
-	<!--===================================================================== -->        
+    <!--===================================================================== -->        
 
 </beans>

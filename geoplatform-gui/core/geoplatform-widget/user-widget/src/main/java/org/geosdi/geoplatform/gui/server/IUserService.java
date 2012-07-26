@@ -55,7 +55,7 @@ public interface IUserService {
                                                      String searchText,
                                                      HttpServletRequest httpServletRequest);
 
-    Long insertUser(IGPUserManageDetail userDetail,
+    Long insertUser(IGPUserManageDetail userDetail, String organization,
                     HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 

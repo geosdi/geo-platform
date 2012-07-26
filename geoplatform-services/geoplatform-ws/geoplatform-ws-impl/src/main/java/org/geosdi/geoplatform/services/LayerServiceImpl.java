@@ -63,9 +63,7 @@ import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class LayerServiceImpl {
 

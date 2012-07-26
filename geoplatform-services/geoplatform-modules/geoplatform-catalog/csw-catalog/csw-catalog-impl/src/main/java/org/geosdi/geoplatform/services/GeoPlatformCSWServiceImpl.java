@@ -39,6 +39,7 @@ import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
+import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -54,7 +55,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  *
  */
 @Transactional // Give atomicity on WS methods
@@ -65,6 +66,7 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     private CSWServiceImpl cswServiceDelegate;
     // DAO
     private GPServerDAO serverDao;
+    private GPOrganizationDAO organizationDao;
     //
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
     private SnipcCatalogBeanProvider snipcProvider;
@@ -82,6 +84,14 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
         this.cswServiceDelegate.setServerDao(serverDao);
+    }
+
+    /**
+     * @param organizationDao the organizationDao to set
+     */
+    public void setOrganizationDao(GPOrganizationDAO organizationDao) {
+        this.organizationDao = organizationDao;
+        this.cswServiceDelegate.setOrganizationDao(organizationDao);
     }
 
     /**
@@ -106,9 +116,9 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public ServerCSWDTO saveServerCSW(String alias, String serverUrl)
+    public ServerCSWDTO saveServerCSW(String alias, String serverUrl, String organization)
             throws IllegalParameterFault {
-        return cswServiceDelegate.saveServerCSW(alias, serverUrl);
+        return cswServiceDelegate.saveServerCSW(alias, serverUrl, organization);
     }
 
     @Override

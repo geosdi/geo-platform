@@ -7,9 +7,9 @@ package org.geosdi.geoplatform.gui.global.security;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPAccountGuiComponents {
+public final class GPAccountGuiComponents {
 
     private static GPAccountGuiComponents INSTANCE = new GPAccountGuiComponents();
     private IGPAccountDetail accountDetail;
@@ -29,11 +29,19 @@ public class GPAccountGuiComponents {
     }
 
     /**
-     * 
+     *
      * @return StringID
      */
     public String getStringID() {
         return this.accountDetail.getStringID();
+    }
+
+    /**
+     *
+     * @return Organization
+     */
+    public String getOrganization() {
+        return this.accountDetail.getOrganization();
     }
 
     /**

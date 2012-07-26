@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface IOGCService {
 
@@ -65,6 +65,7 @@ public interface IOGCService {
             HttpServletRequest httpServletRequest, Long idServer)
             throws GeoPlatformException;
 
-    public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer)
+    public GPServerBeanModel saveServer(Long id, String aliasServerName,
+            String urlServer, String organization)
             throws GeoPlatformException;
 }

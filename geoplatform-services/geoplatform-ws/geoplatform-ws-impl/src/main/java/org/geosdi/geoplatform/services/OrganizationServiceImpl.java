@@ -33,54 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.development;
+package org.geosdi.geoplatform.services;
 
-import org.geosdi.geoplatform.core.model.GPCapabilityType;
+import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
 import org.geosdi.geoplatform.core.model.GPOrganization;
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.services.development.EntityCorrectness;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class CSWEntityCorrectness {
+class OrganizationServiceImpl {
 
-    // ==========================================================================
-    // === Server
-    // ==========================================================================
-    public static void checkCSWServer(GeoPlatformServer server) throws IllegalParameterFault {
-        if (server.getServerType() != GPCapabilityType.CSW) {
-            throw new IllegalParameterFault("Server is not a CSW server.");
-        }
-        String url = server.getServerUrl();
-        if (url == null) {
-            throw new IllegalParameterFault("Server URL must not be null.");
-        }
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            throw new IllegalParameterFault("URL must be start with \"http://\" or \"https://\".");
-        }
-        GPOrganization organization = server.getOrganization();
+    private GPOrganizationDAO organizationDao;
+
+    /**
+     * @param organizationDao the organizationDao to set
+     */
+    void setOrganizationDao(GPOrganizationDAO organizationDao) {
+        this.organizationDao = organizationDao;
+    }
+
+    @Deprecated
+    Long insertOrganization(GPOrganization organization) throws IllegalParameterFault {
+        EntityCorrectness.checkOrganization(organization); // TODO assert
+
+        organizationDao.persist(organization);
+        return organization.getId();
+    }
+
+    @Deprecated
+    boolean deleteOrganization(Long organizationID) throws ResourceNotFoundFault {
+        GPOrganization organization = organizationDao.find(organizationID);
         if (organization == null) {
-            throw new IllegalParameterFault("Server Organization must not be null.");
+            throw new ResourceNotFoundFault("Organization not found", organizationID);
         }
-    }
+        EntityCorrectness.checkOrganizationLog(organization); // TODO assert
 
-    public static void checkCSWServerLog(GeoPlatformServer server) {
-        try {
-            CSWEntityCorrectness.checkCSWServer(server);
-        } catch (IllegalParameterFault ex) {
-            throw new EntityCorrectnessException(ex.getMessage());
-        }
-    }
-
-    //
-    // ==========================================================================
-    //
-    private static boolean empty(String value) {
-        if (value == null) {
-            return true;
-        }
-        return value.trim().equals("");
+        return organizationDao.remove(organization);
     }
 }

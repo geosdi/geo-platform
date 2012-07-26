@@ -67,9 +67,9 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
-    public Long insertUser(IGPUserManageDetail userDetail)
+    public Long insertUser(IGPUserManageDetail userDetail, String organization)
             throws GeoPlatformException {
-        return userService.insertUser(userDetail, super.getThreadLocalRequest());
+        return userService.insertUser(userDetail, organization, super.getThreadLocalRequest());
     }
 
     @Override

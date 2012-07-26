@@ -55,14 +55,15 @@
 <!--    <bean id="styleDAO" class="org.geosdi.geoplatform.core.dao.impl.GPStyleDAOImpl" />-->
     <bean id="serverDAO" class="org.geosdi.geoplatform.core.dao.impl.GPServerDAOImpl" />
     <bean id="authorityDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAuthorityDAOImpl" />
+    <bean id="organizationDAO" class="org.geosdi.geoplatform.core.dao.impl.GPOrganizationDAOImpl" />
+    <!-- Access Info -->
+    <bean id="gsAccountDAO" class="org.geosdi.geoplatform.core.dao.impl.GSAccountDAOImpl" />
+    <bean id="gsResourceDAO" class="org.geosdi.geoplatform.core.dao.impl.GSResourceDAOImpl" />
     <!-- ACL -->
     <bean id="classDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclClassDAOImpl" />
     <bean id="entryDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclEntryDAOImpl" />
     <bean id="objectIdentityDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclObjectIdentityDAOImpl" />
     <bean id="sidDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclSidDAOImpl" />
     <bean id="guiComponentDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.GuiComponentDAOImpl" />
-    <!-- GPAccessInfo -->
-    <bean id="gsAccountDAO" class="org.geosdi.geoplatform.core.dao.impl.GSAccountDAOImpl" />
-    <bean id="gsResourceDAO" class="org.geosdi.geoplatform.core.dao.impl.GSResourceDAOImpl" />
 
 </beans>

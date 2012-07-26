@@ -35,20 +35,22 @@
  */
 package org.geosdi.geoplatform.services;
 
-import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.Filter;
+import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
-import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
-import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
+import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
+import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
+import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPAuthority;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
+import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.model.GPOrganization;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.AccountLoginFault.LoginFaultType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -65,8 +67,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  *
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class AccountServiceImpl {
 
@@ -76,6 +77,7 @@ class AccountServiceImpl {
     private GPAccountProjectDAO accountProjectDao;
     private GPProjectDAO projectDao;
     private GPAuthorityDAO authorityDao;
+    private GPOrganizationDAO organizationDao;
     // Services
     private GPSchedulerService schedulerService;
     //
@@ -90,40 +92,42 @@ class AccountServiceImpl {
     }
 
     /**
-     * @param accountDao
-     *          the accountDao to set
+     * @param accountDao the accountDao to set
      */
     public void setAccountDao(GPAccountDAO accountDao) {
         this.accountDao = accountDao;
     }
 
     /**
-     * @param accountProjectDao
-     *          the accountProjecDao to set
+     * @param accountProjectDao the accountProjecDao to set
      */
     public void setAccountProjectDao(GPAccountProjectDAO accountProjectDao) {
         this.accountProjectDao = accountProjectDao;
     }
 
     /**
-     * @param projectDao
-     *          the projectDao to set
+     * @param projectDao the projectDao to set
      */
     public void setProjectDao(GPProjectDAO projectDao) {
         this.projectDao = projectDao;
     }
 
     /**
-     * @param authorityDao
-     *          the authorityDao to set
+     * @param authorityDao the authorityDao to set
      */
     public void setAuthorityDao(GPAuthorityDAO authorityDao) {
         this.authorityDao = authorityDao;
     }
 
     /**
-     * @param schedulerService
-     *          the schedulerService to set
+     * @param organizationDao the organizationDao to set
+     */
+    public void setOrganizationDao(GPOrganizationDAO organizationDao) {
+        this.organizationDao = organizationDao;
+    }
+
+    /**
+     * @param schedulerService the schedulerService to set
      */
     public void setSchedulerService(GPSchedulerService schedulerService) {
         this.schedulerService = schedulerService;
@@ -138,8 +142,14 @@ class AccountServiceImpl {
      */
     public Long insertAccount(GPAccount account, boolean sendEmail)
             throws IllegalParameterFault {
-
         EntityCorrectness.checkAccountAndAuthority(account); // TODO assert
+
+        GPOrganization org = organizationDao.findByName(account.getOrganization().getName());
+        if (org == null) {
+            throw new IllegalParameterFault("Account to save have an organization that does not exist");
+        }
+        account.setOrganization(org);
+
         this.checkDuplicateAccount(account);
 
         String plainPassword = "";
@@ -431,8 +441,8 @@ class AccountServiceImpl {
     }
 
     /**
-     * Get a set of selected Users using paging.
-     * The paging parameters are specified in the REST request
+     * Get a set of selected Users using paging. The paging parameters are
+     * specified in the REST request
      *
      * @param request the object representing the request parameters
      * @param userID the of user that will exclude from the search (logged user)
@@ -498,7 +508,7 @@ class AccountServiceImpl {
     /**
      * @param stringID of Account to retrieve authorities
      * @return Authorities in a list of String
-     * @throws ResourceNotFoundFault 
+     * @throws ResourceNotFoundFault
      */
     public List<String> getAuthorities(Long stringID) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountById(stringID);
@@ -600,7 +610,7 @@ class AccountServiceImpl {
     }
 
     /**
-     * Updates all common fields of user and application (GPAccount) 
+     * Updates all common fields of user and application (GPAccount)
      */
     private void updateAccount(GPAccount accountToUpdate, GPAccount account)
             throws IllegalParameterFault {

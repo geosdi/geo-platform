@@ -42,11 +42,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
 
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -64,21 +66,31 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class WMSServiceImpl {
 
     final private Logger logger = LoggerFactory.getLogger(WMSServiceImpl.class);
     // DAO
     private GPServerDAO serverDao;
+    private GPOrganizationDAO organizationDao;
     private static final String GEB = "earthbuilder.google.com";
 
+    //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
      * @param serverDao the serverDao to set
      */
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
     }
+
+    /**
+     * @param organizationDao the organizationDao to set
+     */
+    public void setOrganizationDao(GPOrganizationDAO organizationDao) {
+        this.organizationDao = organizationDao;
+    }
+    //</editor-fold>
 
     public Long updateServer(GeoPlatformServer server)
             throws ResourceNotFoundFault, IllegalParameterFault {
@@ -91,8 +103,7 @@ class WMSServiceImpl {
         orig.setName(server.getName());
         orig.setTitle(server.getTitle());
         orig.setAbstractServer(server.getAbstractServer());
-        orig.setContactPerson(server.getContactPerson());
-        orig.setContactOrganization(server.getContactOrganization());
+        orig.setOrganization(server.getOrganization());
         orig.setServerType(server.getServerType());
 
         serverDao.merge(orig);
@@ -170,8 +181,7 @@ class WMSServiceImpl {
         /**
          * IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER *
          */
-        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server
-                .getServerUrl());
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
         if (serverSearch != null) {
             return serverSearch.getId();
         }
@@ -182,7 +192,8 @@ class WMSServiceImpl {
 
     // The ID is important if is changed the URL of a server
     public ServerDTO saveServer(Long id, String aliasServerName,
-            String serverUrl) throws IllegalParameterFault {
+            String serverUrl, String organization)
+            throws IllegalParameterFault {
         try {
             URL serverURL = new URL(serverUrl);
         } catch (MalformedURLException e) {
@@ -190,7 +201,12 @@ class WMSServiceImpl {
             throw new IllegalParameterFault("Malformed URL");
         }
 
-        GeoPlatformServer server = null;
+        GPOrganization org = organizationDao.findByName(organization);
+        if (org == null) {
+            throw new IllegalParameterFault("Server to save have an organization that does not exist");
+        }
+
+        GeoPlatformServer server;
         if (id != null) { // Existent server
             server = serverDao.find(id);
         } else { // New server
@@ -202,6 +218,7 @@ class WMSServiceImpl {
         }
         server.setAliasName(aliasServerName);
         server.setServerUrl(serverUrl);
+        server.setOrganization(org);
         serverDao.save(server);
 
         return new ServerDTO(server);

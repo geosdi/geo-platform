@@ -76,17 +76,33 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
- * Public interface to define the service operations mapped via REST
- * using CXT framework
+ * Public interface to define the service operations mapped via REST using CXT
+ * framework
  */
 @WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
-    // <editor-fold defaultstate="collapsed"
-    // desc="Account (User and Application)">
+    // <editor-fold defaultstate="collapsed" desc="Organization">
+    // ==========================================================================
+    // === Organization
+    // ==========================================================================
+    @Put
+    @HttpResource(location = "/organization")
+    @Deprecated
+    Long insertOrganization(@WebParam(name = "organization") GPOrganization organization)
+            throws IllegalParameterFault;
+
+    @Delete
+    @HttpResource(location = "/organization/{organizationID}")
+    @Deprecated
+    boolean deleteOrganization(@WebParam(name = "organizationID") Long organizationID)
+            throws ResourceNotFoundFault;
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Account (User and Application)">
     // ==========================================================================
     // === Account
     // ==========================================================================
+
     @Put
     @HttpResource(location = "/accounts")
     Long insertAccount(@WebParam(name = "account") GPAccount account,
@@ -360,12 +376,13 @@ public interface GeoPlatformService {
     @WebResult(name = "Viewport")
     GPViewport getDefaultViewport(@WebParam(name = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
-        
+    // </editor-fold>
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================
     // === Folder
     // ==========================================================================
+
     @Put
     @HttpResource(location = "/folder")
     @Deprecated
@@ -720,7 +737,8 @@ public interface GeoPlatformService {
     @HttpResource(location = "/server")
     ServerDTO saveServer(@WebParam(name = "id") Long id,
             @WebParam(name = "aliasServerName") String aliasServerName,
-            @WebParam(name = "serverUrl") String serverUrl)
+            @WebParam(name = "serverUrl") String serverUrl,
+            @WebParam(name = "organization") String organization)
             throws IllegalParameterFault;
 
     // </editor-fold>
@@ -746,18 +764,14 @@ public interface GeoPlatformService {
     List<String> getAllGuiComponentIDs();
 
     /**
-     * Retrieve GUI Component permissions for an Application.
-     * <p>
-     * It is based only on application ID.
+     * Retrieve GUI Component permissions for an Application. <p> It is based
+     * only on application ID.
      *
      * @param appID
      *
-     * @return Map that contains GUI Components permissions, with:
-     * <ul>
-     * <li> key = ID Component </li> <li> value = Permission </li>
-     * </ul>
-     * @throws ResourceNotFoundFault
-     * if the application is not found
+     * @return Map that contains GUI Components permissions, with: <ul> <li> key
+     * = ID Component </li> <li> value = Permission </li> </ul>
+     * @throws ResourceNotFoundFault if the application is not found
      */
     @Get
     @HttpResource(location = "/permissions/application/{appID}")
@@ -767,18 +781,14 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     /**
-     * Retrieve GUI Component permissions for an Account.
-     * <p>
-     * It is based on accounts with disjoined authorities.
+     * Retrieve GUI Component permissions for an Account. <p> It is based on
+     * accounts with disjoined authorities.
      *
      * @param accountID
      *
-     * @return Map that contains GUI Components permissions, with:
-     * <ul>
-     * <li> key = ID Component </li> <li> value = Permission </li>
-     * </ul>
-     * @throws ResourceNotFoundFault
-     * if the account is not found
+     * @return Map that contains GUI Components permissions, with: <ul> <li> key
+     * = ID Component </li> <li> value = Permission </li> </ul>
+     * @throws ResourceNotFoundFault if the account is not found
      */
     @Get
     @HttpResource(location = "/permissions/account/{accountID}")
@@ -790,13 +800,11 @@ public interface GeoPlatformService {
     /**
      * Retrieve the GUI Component permissions for a Role (Authority).
      *
-     * @param role
-     * role (authority) name
+     * @param role role (authority) name
      *
      * @return Map that contains GUI Components permissions, with: key = ID
      * Component value = Permission
-     * @throws ResourceNotFoundFault
-     * if the role (authority) is not found
+     * @throws ResourceNotFoundFault if the role (authority) is not found
      */
     @Get
     @HttpResource(location = "/permissions/{role}")
@@ -807,14 +815,11 @@ public interface GeoPlatformService {
     /**
      * Update the permission of a role (authority).
      *
-     * @param role
-     * role (authority) name
-     * @param mapComponentPermission
-     * map of GuiComponents permissions to update
+     * @param role role (authority) name
+     * @param mapComponentPermission map of GuiComponents permissions to update
      *
      * @return if the update was successful
-     * @throws ResourceNotFoundFault
-     * if the role (authority) is not found
+     * @throws ResourceNotFoundFault if the role (authority) is not found
      */
     @Post
     @HttpResource(location = "/permissions/{role}")
@@ -826,12 +831,10 @@ public interface GeoPlatformService {
     /**
      * Save a new role (authority).
      *
-     * @param role
-     * role (authority) name
+     * @param role role (authority) name
      *
      * @return if the saving was successful
-     * @throws IllegalParameterFault
-     * if the role (authority) already exist
+     * @throws IllegalParameterFault if the role (authority) already exist
      */
     @Post
     @HttpResource(location = "/permissions/{role}")
@@ -839,9 +842,9 @@ public interface GeoPlatformService {
             throws IllegalParameterFault;
 
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="GP_ACCESS_INFO">
+    // <editor-fold defaultstate="collapsed" desc="Access Info">
     // ==========================================================================
-    // === GP_ACCESS_INFO
+    // === Access Info
     // ==========================================================================
     @Put
     @HttpResource(location = "/permissions/GSAccount")
@@ -865,4 +868,5 @@ public interface GeoPlatformService {
     @HttpResource(location = "/permissions/access/{authkey}")
     @WebResult(name = "GSUser")
     String getGSUserByAuthkey(@WebParam(name = "authkey") String authkey);
+    // </editor-fold>
 }

@@ -15,6 +15,7 @@
         <mapping  class="org.geosdi.geoplatform.core.model.GPAccount"/>
         <mapping  class="org.geosdi.geoplatform.core.model.GPAccountProject"/>
         <mapping  class="org.geosdi.geoplatform.core.model.GPProject"/>
+        <mapping  class="org.geosdi.geoplatform.core.model.GPViewport"/>
         <mapping  class="org.geosdi.geoplatform.core.model.GPFolder"/>
         <mapping  class="org.geosdi.geoplatform.core.model.GPLayer"/>
         <mapping  class="org.geosdi.geoplatform.core.model.GPVectorLayer"/>

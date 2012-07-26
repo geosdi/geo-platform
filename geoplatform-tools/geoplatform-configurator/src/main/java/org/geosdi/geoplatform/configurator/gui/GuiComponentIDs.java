@@ -64,6 +64,7 @@ public class GuiComponentIDs {
     public static final String ROUTING = "routing";
     public static final String LAYER_MENU = "layerMenu";
     //
+    public static final String VIEWPORT = "viewport";
     public static final String GRATICULA = "graticula";
     /**
      * Map Toolbar
@@ -146,6 +147,7 @@ public class GuiComponentIDs {
         all.add(ROUTING);
         all.add(LAYER_MENU);
         all.add(GRATICULA);
+        all.add(VIEWPORT);
         // Map Toolbar
         all.add(GEO_PLATFORM_INFO_APP);
         all.add(ZOOM_IN);
@@ -200,6 +202,7 @@ public class GuiComponentIDs {
         mapUser.put(ROUTING, true);
         mapUser.put(LAYER_MENU, true);
         mapUser.put(GRATICULA, true);
+        mapUser.put(VIEWPORT, Boolean.TRUE);
         // Map Toolbar
         mapUser.put(GEO_PLATFORM_INFO_APP, true);
         mapUser.put(ZOOM_IN, true);
@@ -253,6 +256,7 @@ public class GuiComponentIDs {
         mapViewer.put(ROUTING, true);
         mapViewer.put(LAYER_MENU, true);
         mapViewer.put(GRATICULA, true);
+        mapViewer.put(VIEWPORT, Boolean.TRUE);
         // Toolbar
         mapViewer.put(GEO_PLATFORM_INFO_APP, true);
         mapViewer.put(ZOOM_IN, true);

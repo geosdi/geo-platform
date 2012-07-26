@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPViewport;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.springframework.security.acls.domain.BasePermission;
 
@@ -176,6 +177,32 @@ public class EntityCorrectness {
     public static void checkAccountAndAuthorityLog(GPAccount account) {
         try {
             EntityCorrectness.checkAccountAndAuthority(account);
+        } catch (IllegalParameterFault ex) {
+            throw new EntityCorrectnessException(ex.getMessage());
+        }
+    }
+
+    // ==========================================================================
+    // === Viewport
+    // ==========================================================================
+    public static void checkViewport(GPViewport viewport) throws IllegalParameterFault {
+        if (viewport == null) {
+            throw new IllegalParameterFault("Viewport must be NOT NULL");
+        }
+        if (viewport.getAccountProject() == null) {
+            throw new IllegalParameterFault("Viewport \"accountProject\" must be NOT NULL");
+        }
+        if (EntityCorrectness.empty(viewport.getName())) {
+            throw new IllegalParameterFault("Viewport \"name\" must be NOT NULL or empty");
+        }
+        if (viewport.getBbox() != null) {
+            throw new IllegalParameterFault("Viewport \"BBOX\" must be NOT NULL or empty");
+        }
+    }
+
+    public static void checkViewportLog(GPViewport viewport) {
+        try {
+            EntityCorrectness.checkViewport(viewport);
         } catch (IllegalParameterFault ex) {
             throw new EntityCorrectnessException(ex.getMessage());
         }

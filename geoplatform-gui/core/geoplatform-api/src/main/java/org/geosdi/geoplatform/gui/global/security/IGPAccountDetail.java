@@ -5,6 +5,7 @@
 package org.geosdi.geoplatform.gui.global.security;
 
 import java.util.Map;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 
 /**
  *
@@ -18,8 +19,10 @@ public interface IGPAccountDetail {
     String getAuthkey();
 
     String getHostXmppServer();
-    
+
     String getBaseLayer();
+
+    GPClientViewport getViewport();
 
     void setComponentPermission(Map<String, Boolean> componentPermission);
 

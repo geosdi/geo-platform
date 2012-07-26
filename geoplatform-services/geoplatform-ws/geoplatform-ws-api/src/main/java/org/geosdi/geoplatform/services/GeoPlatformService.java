@@ -351,6 +351,16 @@ public interface GeoPlatformService {
     void forceProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
 
+    // <editor-fold defaultstate="collapsed" desc="Viewport">
+    // ==========================================================================
+    // === Viewport
+    // ==========================================================================
+    @Get
+    @HttpResource(location = "/viewports/{folderID}")
+    @WebResult(name = "Viewport")
+    GPViewport getDefaultViewport(@WebParam(name = "accountProjectID") Long accountProjectID)
+            throws ResourceNotFoundFault;
+        
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================

@@ -43,6 +43,8 @@ import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.security.GPLoginUserDetail;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
@@ -92,23 +94,16 @@ public class SecurityService implements ISecurityService {
             if (user.getDefaultProjectID() == null) {
                 GPProject project = new GPProject();
                 project.setName("Default Project");
-                project.setShared(false);
+                project.setShared(Boolean.FALSE);
                 project.setId(this.saveDefaultProject(user, project));
             }
-
             accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(
-                    user.getId(),
-                    user.getDefaultProjectID());
-
+                    user.getId(), user.getDefaultProjectID());
+            GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             this.sessionUtility.storeLoggedAccountAndDefaultProject(user,
-                    user.getDefaultProjectID(),
-                    httpServletRequest);
-
-            userDetail = this.convertAccountToDTO(user,
-                    accountProject);
-            userDetail.setComponentPermission(
-                    guiComponentPermission.getPermissionMap());
-
+                    user.getDefaultProjectID(), httpServletRequest);
+            userDetail = this.convertAccountToDTO(user, accountProject, viewport);
+            userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
             return userDetail;
 
         } catch (ResourceNotFoundFault ex) {
@@ -159,9 +154,8 @@ public class SecurityService implements ISecurityService {
             this.sessionUtility.storeLoggedAccountAndDefaultProject(application,
                     application.getDefaultProjectID(),
                     httpServletRequest);
-
-            accountDetail = this.convertAccountToDTO(application,
-                    accountProject);
+            GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
+            accountDetail = this.convertAccountToDTO(application, accountProject, viewport);
 
             accountDetail.setComponentPermission(
                     guiComponentPermission.getPermissionMap());
@@ -225,7 +219,8 @@ public class SecurityService implements ISecurityService {
         return idProject;
     }
 
-    private IGPAccountDetail convertAccountToDTO(GPAccount account, GPAccountProject accountProject) {
+    private IGPAccountDetail convertAccountToDTO(GPAccount account, GPAccountProject accountProject,
+            GPViewport viewport) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
         accountDetail.setUsername(account.getStringID()); // Forced representation
         if (account instanceof GPUser) {
@@ -239,6 +234,14 @@ public class SecurityService implements ISecurityService {
         accountDetail.setHostXmppServer(hostXmppServer);
         if (accountProject != null) {
             accountDetail.setBaseLayer(accountProject.getBaseLayer());
+        }
+        if (viewport != null) {
+            GPBBox serverBBOX = viewport.getBbox();
+            BBoxClientInfo clientBBOX = new BBoxClientInfo(serverBBOX.getMinX(), serverBBOX.getMinY(),
+                    serverBBOX.getMaxX(), serverBBOX.getMaxY());
+            GPClientViewport clientViewport = new GPClientViewport(viewport.getName(),
+                    viewport.getDescription(), clientBBOX, viewport.getZoomLevel(), viewport.isIsDefault());
+            accountDetail.setViewport(clientViewport);
         }
         return (IGPAccountDetail) accountDetail;
     }

@@ -55,6 +55,7 @@
         <class>org.geosdi.geoplatform.core.model.GPAccount</class>
         <class>org.geosdi.geoplatform.core.model.GPAccountProject</class>
         <class>org.geosdi.geoplatform.core.model.GPProject</class>
+        <class>org.geosdi.geoplatform.core.model.GPViewport</class>
         <class>org.geosdi.geoplatform.core.model.GPFolder</class>
         <class>org.geosdi.geoplatform.core.model.GPLayer</class>
         <class>org.geosdi.geoplatform.core.model.GPRasterLayer</class>

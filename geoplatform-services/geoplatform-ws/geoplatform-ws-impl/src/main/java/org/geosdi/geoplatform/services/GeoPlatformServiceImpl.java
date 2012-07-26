@@ -101,6 +101,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private AccountServiceImpl accountServiceDelegate;
     private ProjectServiceImpl projectServiceDelegate;
     private WMSServiceImpl wmsServiceDelegate;
+    private ViewportServiceImpl viewportServiceDelegate;
     private FolderServiceImpl folderServiceDelegate;
     private LayerServiceImpl layerServiceDelegate;
     private AclServiceImpl aclServiceDelegate;
@@ -109,12 +110,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     //
     private GPDigesterConfigutator gpDigester;
     //
+    private GPViewportDAO viewportDAO;
     private GSResourceDAO gsResourceDAO;
     private GSAccountDAO gsAccountDAO;
 
     public GeoPlatformServiceImpl() {
         accountServiceDelegate = new AccountServiceImpl();
         projectServiceDelegate = new ProjectServiceImpl();
+        viewportServiceDelegate = new ViewportServiceImpl();
         folderServiceDelegate = new FolderServiceImpl();
         wmsServiceDelegate = new WMSServiceImpl();
         layerServiceDelegate = new LayerServiceImpl();
@@ -284,6 +287,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     public void setGsResourceDAO(GSResourceDAO gsResourceDAO) {
         this.gsResourceDAO = gsResourceDAO;
+    }
+
+    public GPViewportDAO getViewportDAO() {
+        return viewportDAO;
+    }
+
+    public void setViewportDAO(GPViewportDAO viewportDAO) {
+        this.viewportDAO = viewportDAO;
+        this.viewportServiceDelegate.setViewportDao(viewportDAO);
     }
 
     //</editor-fold>
@@ -544,7 +556,18 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         projectServiceDelegate.setProjectOwner(request, true);
     }
     //</editor-fold>
+// <editor-fold defaultstate="collapsed" desc="Viewport">
+    // ==========================================================================
+    // === Viewport
+    // ==========================================================================
 
+    @Override
+    public GPViewport getDefaultViewport(Long accountProjectID)
+            throws ResourceNotFoundFault {
+        return viewportServiceDelegate.getDefaultViewport(accountProjectID);
+    }
+
+    // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================
     // === Folder

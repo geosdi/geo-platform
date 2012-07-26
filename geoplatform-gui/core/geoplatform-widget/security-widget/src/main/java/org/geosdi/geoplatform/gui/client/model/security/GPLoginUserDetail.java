@@ -5,6 +5,7 @@
 package org.geosdi.geoplatform.gui.client.model.security;
 
 import java.util.Map;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 
@@ -23,6 +24,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     private String authkey;
     private String hostXmppServer;
     private String baseLayer;
+    private GPClientViewport viewport;
     private Map<String, Boolean> componentPermission;
 
     public GPLoginUserDetail() {
@@ -107,13 +109,22 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     public Boolean hasComponentPermission(String componentID) {
         return componentPermission.get(componentID);
     }
-    
-    public void setBaseLayer(String baseLayer){
+
+    public void setBaseLayer(String baseLayer) {
         this.baseLayer = baseLayer;
     }
-    
+
     @Override
-    public String getBaseLayer(){
+    public String getBaseLayer() {
         return baseLayer;
+    }
+
+    public void setViewport(GPClientViewport viewport) {
+        this.viewport = viewport;
+    }
+
+    @Override
+    public GPClientViewport getViewport() {
+        return this.viewport;
     }
 }

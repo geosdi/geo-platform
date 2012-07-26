@@ -74,6 +74,17 @@
         </terracotta>
     </cache>               
 
+    <cache name="viewport" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
+		memoryStoreEvictionPolicy="LRU">
+        <terracotta clustered="true">             
+            <nonstop immediateTimeout="false" timeoutMillis="3000">                 
+                <timeoutBehavior type="localReads" />             
+            </nonstop>         
+        </terracotta>
+    </cache>
+    
     <cache name="folder" maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="false"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"

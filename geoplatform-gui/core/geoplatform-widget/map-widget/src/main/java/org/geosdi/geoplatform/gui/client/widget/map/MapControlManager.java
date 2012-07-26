@@ -42,6 +42,8 @@ import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl
 import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureOperation;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.style.VectorFeatureStyle;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
@@ -133,6 +135,12 @@ public class MapControlManager {
         VectorFeature vectorFeature = new VectorFeature(geom);
         this.vector.addFeature(vectorFeature);
         this.map.zoomToExtent(geom.getBounds());
+        
+        Projection projection = new Projection("EPSG:4326");
+        Projection mapProjection = new Projection(map.getProjection());
+        Bounds mapBounds = this.map.getExtent().transform(mapProjection, projection);
+        BBoxClientInfo bbox = new BBoxClientInfo(mapBounds.getLowerLeftX(), mapBounds.getLowerLeftY(), 
+                mapBounds.getUpperRightX(), mapBounds.getUpperRightY());
     }
 
     /**

@@ -32,6 +32,8 @@
         <property name="layerDao" ref="layerDAO" />
 <!--        <property name="styleDao" ref="styleDAO" />-->
         <property name="authorityDao" ref="authorityDAO" />
+        <!-- Viewport -->
+        <property name="viewportDAO" ref="viewportDAO" />
         <!-- ACL -->
         <property name="classDao" ref="classDAO" />
         <property name="entryDao" ref="entryDAO" />

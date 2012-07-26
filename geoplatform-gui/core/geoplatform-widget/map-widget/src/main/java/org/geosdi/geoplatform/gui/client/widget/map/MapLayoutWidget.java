@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -72,6 +73,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  */
 public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler {
 
+    public final static int NUM_ZOOM_LEVEL = 30;
     private final static String EPSG_4326 = "EPSG:4326";
     private final static String EPSG_3857 = "EPSG:3857";
     private final static String EPSG_900913 = "EPSG:900913";
@@ -102,7 +104,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
     private void setBaseMapOptions() {
         this.mapOptions = new MapOptions();
-        this.mapOptions.setNumZoomLevels(30);
+        this.mapOptions.setNumZoomLevels(MapLayoutWidget.NUM_ZOOM_LEVEL);
         String baseLayerKey = Registry.get(GlobalRegistryEnum.BASE_LAYER.getValue());
         GPBaseLayer baseLayer;
         if (baseLayerKey != null) {
@@ -161,7 +163,6 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.measure = new Measure(new PathHandler(), measOpts);
         this.map.addControl(measure);
         this.measure.addMeasureListener(new MeasureListener() {
-
             @Override
             public void onMeasure(MeasureEvent eventObject) {
                 Info.display("Distance is: ", eventObject.getMeasure() + " "
@@ -177,7 +178,6 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.measureArea = new Measure(new PolygonHandler(), measOpts);
         this.map.addControl(measureArea);
         this.measureArea.addMeasureListener(new MeasureListener() {
-
             @Override
             public void onMeasure(MeasureEvent eventObject) {
                 Info.display("Area is: ", eventObject.getMeasure() + " "
@@ -230,7 +230,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     public void onAddToCenterPanel() {
         LayoutManager.addComponentToCenter(mapWidget);
 
-        setMapCenter();
+        this.setMapCenter();
 
         /**
          * OPEN SCALE WIDGET *
@@ -244,10 +244,21 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
      * Set center of the Map on Italy
      */
     public void setMapCenter() {
-        LonLat center = new LonLat(13.375, 42.329);
-        center.transform(EPSG_4326, map.getProjection());
-        this.map.setCenter(center, 5);
-
+        GPClientViewport viewport = Registry.get(GlobalRegistryEnum.VIEWPORT.getValue());
+        LonLat center;
+        float zoomLevel = 5;
+        if (viewport != null) {
+            BBoxClientInfo bbox = viewport.getBbox();
+            Bounds bounds = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
+                    bbox.getUpperRightX(), bbox.getUpperRightY());
+            center = bounds.getCenterLonLat();
+            center.transform(EPSG_4326, map.getProjection());
+            zoomLevel = viewport.getZoomLevel();
+        } else {
+            center = new LonLat(13.375, 42.329);
+            center.transform(EPSG_4326, map.getProjection());
+        }
+        this.map.setCenter(center, (int) zoomLevel);
         this.mapControl.clearNavigationHistory();
     }
 
@@ -346,8 +357,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     }
 
     /**
-     * @param buttonBar
-     * the buttonBar to set
+     * @param buttonBar the buttonBar to set
      */
     public void setButtonBar(MapToolbar buttonBar) {
         this.buttonBar = buttonBar;
@@ -495,7 +505,6 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void showScaleWidget() {
 
         Timer t = new Timer() {
-
             @Override
             public void run() {
                 GPScaleWidget.display("Scale");

@@ -51,6 +51,7 @@
     <bean id="accountProjectDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAccountProjectDAOImpl" />
     <bean id="folderDAO" class="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" />
     <bean id="layerDAO" class="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" />
+    <bean id="viewportDAO" class="org.geosdi.geoplatform.core.dao.impl.GPViewportDAOImpl" />
 <!--    <bean id="styleDAO" class="org.geosdi.geoplatform.core.dao.impl.GPStyleDAOImpl" />-->
     <bean id="serverDAO" class="org.geosdi.geoplatform.core.dao.impl.GPServerDAOImpl" />
     <bean id="authorityDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAuthorityDAOImpl" />

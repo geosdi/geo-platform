@@ -39,17 +39,9 @@ package org.geosdi.geoplatform.gui.global.enumeration;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public enum GlobalRegistryEnum {
+public enum ViewportEnum {
 
-    AUTH_KEY("authkey"), EMITE_RESOURCE("emiteResource"),
-    BASE_LAYER("baseLayer"),  VIEWPORT("viewport"), TOOLTIP("tooltip");
-    private String value;
-
-    private GlobalRegistryEnum(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
+    NAME, DESCRIPTION, IS_DEFAULT, LOWER_LEFT_X, UPPER_RIGHT_X, UPPER_RIGHT_Y, 
+    LOWER_LEFT_Y, ZOOM_LEVEL, BBOX;
+    
 }

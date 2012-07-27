@@ -8,16 +8,18 @@ package org.geosdi.geoplatform.gui.global.security;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * 
+  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public final class GPAccountGuiComponents {
+public final class GPAccountLogged {
 
-    private static GPAccountGuiComponents INSTANCE = new GPAccountGuiComponents();
+    private static GPAccountLogged INSTANCE = new GPAccountLogged();
     private IGPAccountDetail accountDetail;
 
-    private GPAccountGuiComponents() {
+    private GPAccountLogged() {
     }
 
-    public static GPAccountGuiComponents getInstance() {
+    public static GPAccountLogged getInstance() {
         return INSTANCE;
     }
 

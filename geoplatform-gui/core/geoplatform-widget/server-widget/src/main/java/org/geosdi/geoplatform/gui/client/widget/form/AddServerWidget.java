@@ -58,7 +58,7 @@ import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
@@ -273,7 +273,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
             GeoPlatformOGCRemote.Util.getInstance().saveServer(
                     null, serverNameTextField.getValue().trim(),
                     serverUrlTextField.getValue().trim(),
-                    GPAccountGuiComponents.getInstance().getOrganization(),
+                    GPAccountLogged.getInstance().getOrganization(),
                     new AsyncCallback<GPServerBeanModel>() {
 
                         @Override

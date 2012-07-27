@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 import org.geosdi.geoplatform.gui.configuration.GenericTool;
-import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 
 /**
  *
@@ -54,7 +54,7 @@ public abstract class ToolbarGenericTool extends GenericTool {
      * @param menu 
      */
     public void buildTool(IGeoPlatformToolbar toolbar) {
-        Boolean permission = GPAccountGuiComponents.getInstance().
+        Boolean permission = GPAccountLogged.getInstance().
                 hasComponentPermission(this.getId());
         if (permission != null) {
             super.enabled &= permission;

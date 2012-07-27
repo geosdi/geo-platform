@@ -60,7 +60,7 @@ import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2AddServerHandler;
@@ -327,7 +327,7 @@ public class ManageServerWidget extends Window {
             GeoPlatformOGCRemote.Util.getInstance().saveServer(
                     server.getId(), record.get("alias").toString(),
                     record.get("urlServer").toString().trim(),
-                    GPAccountGuiComponents.getInstance().getOrganization(),
+                    GPAccountLogged.getInstance().getOrganization(),
                     new AsyncCallback<GPServerBeanModel>() {
 
                         @Override

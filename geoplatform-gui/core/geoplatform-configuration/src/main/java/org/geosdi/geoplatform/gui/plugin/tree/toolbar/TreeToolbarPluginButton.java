@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.plugin.tree.toolbar;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
 
 /**
@@ -61,7 +61,7 @@ public abstract class TreeToolbarPluginButton
     public final Button getWidget(TreePanel treePanel) {
         if (button == null) {
             String id = this.getId();
-            Boolean permission = GPAccountGuiComponents.getInstance().
+            Boolean permission = GPAccountLogged.getInstance().
                     hasComponentPermission(id);
 
             ToolbarLayerTreeAction action = this.getTreeAction(treePanel);

@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPAdvancedSecurityWidget;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
-import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
@@ -120,7 +120,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                     @Override
                     public void onSuccess(IGPAccountDetail result) {
                         loginFailureMessage = "";
-                        GPAccountGuiComponents.getInstance().setAccountDetail(result);
+                        GPAccountLogged.getInstance().setAccountDetail(result);
                         status.setStatus(
                                 LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
                                 LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());

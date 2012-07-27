@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSW
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -204,7 +204,7 @@ public class CSWServerFormWidget
     private void saveServer() {
         final String aliasValue = aliasField.getValue().trim();
         GPCatalogFinderRemoteImpl.Util.getInstance().saveServerCSW(aliasValue,
-                urlEncoding, GPAccountGuiComponents.getInstance().getOrganization(),
+                urlEncoding, GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<GPCSWServerBeanModel>() {
 
                     @Override

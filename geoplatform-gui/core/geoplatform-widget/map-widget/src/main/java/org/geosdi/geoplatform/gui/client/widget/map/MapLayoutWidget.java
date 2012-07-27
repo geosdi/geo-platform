@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.google.gwt.user.client.Timer;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.gui.client.event.IChangeBaseLayerHandler;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
@@ -45,6 +46,7 @@ import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
+import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
@@ -55,6 +57,8 @@ import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.event.ChangeBaseLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.*;
@@ -74,7 +78,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler {
 
     public final static int NUM_ZOOM_LEVEL = 30;
-    private final static String EPSG_4326 = "EPSG:4326";
+    public final static String EPSG_4326 = "EPSG:4326";
     private final static String EPSG_3857 = "EPSG:3857";
     private final static String EPSG_900913 = "EPSG:900913";
     private MapWidget mapWidget;
@@ -194,32 +198,32 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
     @Override
     public void deactivateInfo() {
-        this.infoActive = false;
+        this.infoActive = Boolean.FALSE;
         MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive));
     }
 
     @Override
     public void activateMeasure() {
         measure.activate();
-        this.measureActive = true;
+        this.measureActive = Boolean.TRUE;
     }
 
     @Override
     public void deactivateMeasure() {
         measure.deactivate();
-        this.measureActive = false;
+        this.measureActive = Boolean.FALSE;
     }
 
     @Override
     public void activateMeasureArea() {
         measureArea.activate();
-        this.measureAreaActive = true;
+        this.measureAreaActive = Boolean.TRUE;
     }
 
     @Override
     public void deactivateMeasureArea() {
         measureArea.deactivate();
-        this.measureAreaActive = false;
+        this.measureAreaActive = Boolean.FALSE;
     }
 
     /**
@@ -245,20 +249,14 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
      */
     public void setMapCenter() {
         GPClientViewport viewport = Registry.get(GlobalRegistryEnum.VIEWPORT.getValue());
-        LonLat center;
-        float zoomLevel = 5;
         if (viewport != null) {
-            BBoxClientInfo bbox = viewport.getBbox();
-            Bounds bounds = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
-                    bbox.getUpperRightX(), bbox.getUpperRightY());
-            center = bounds.getCenterLonLat();
-            center.transform(EPSG_4326, map.getProjection());
-            zoomLevel = viewport.getZoomLevel();
+            ViewportUtility.gotoViewportLocation(map, viewport);
         } else {
-            center = new LonLat(13.375, 42.329);
+            LonLat center = new LonLat(13.375, 42.329);
             center.transform(EPSG_4326, map.getProjection());
+            float zoomLevel = 5;
+            this.map.setCenter(center, (int) zoomLevel);
         }
-        this.map.setCenter(center, (int) zoomLevel);
         this.mapControl.clearNavigationHistory();
     }
 
@@ -490,8 +488,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
      */
     @Override
     public void zoomToMaxExtend(BBoxClientInfo bbox, String crs) {
-        Bounds b = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
-                bbox.getUpperRightX(), bbox.getUpperRightY());
+        Bounds b = ViewportUtility.generateBoundsFromBBOX(bbox);
         if (!map.getProjection().equals(crs)) {
             System.out.println("Changed projection from: " + crs
                     + ", to: " + map.getProjection());

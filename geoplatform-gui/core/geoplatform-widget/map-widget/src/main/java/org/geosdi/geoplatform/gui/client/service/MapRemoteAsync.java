@@ -36,6 +36,9 @@
 package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -44,5 +47,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface MapRemoteAsync {
 
     public void saveBaseLayer(String baseLayer, AsyncCallback<?> callback);
-//    public void layerAuthenticate(String userName, String password, String url, AsyncCallback<String> callback);
+
+    public void saveOrUpdateViewportList(List<GPClientViewport> viewportList, AsyncCallback<?> callback)
+            throws GeoPlatformException;
+
+    public void loadViewportElements(AsyncCallback<List<GPClientViewport>> callback) throws GeoPlatformException;
 }

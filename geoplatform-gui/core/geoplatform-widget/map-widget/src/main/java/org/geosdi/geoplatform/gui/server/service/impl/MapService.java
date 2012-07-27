@@ -35,11 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
+import org.geosdi.geoplatform.core.model.GPBBox;
+import org.geosdi.geoplatform.core.model.GPViewport;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.slf4j.Logger;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
@@ -97,6 +104,84 @@ public class MapService implements IMapService {
             logger.error("Error on MapService: " + ipf);
             throw new GeoPlatformException(ipf);
         }
+    }
+
+    @Override
+    public List<GPClientViewport> loadViewportElements(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        GPAccount account;
+        try {
+            account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        ArrayList<GPViewport> viewportListElements = null;
+        try {
+            GPAccountProject accountProject = this.geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(account.getId(),
+                    account.getDefaultProjectID());
+            viewportListElements = this.geoPlatformServiceClient.getAccountProjectViewports(accountProject.getId());
+        } catch (ResourceNotFoundFault rnff) {
+            logger.error("Error on MapService: " + rnff);
+            throw new GeoPlatformException(rnff);
+        }
+        return this.convertServerViewportToDTO(viewportListElements);
+    }
+
+    @Override
+    public void saveOrUpdateViewportList(List<GPClientViewport> viewportList, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        GPAccount account;
+        try {
+            account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        try {
+            GPAccountProject accountProject = this.geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(account.getId(),
+                    account.getDefaultProjectID());
+            this.geoPlatformServiceClient.replaceViewportList(accountProject.getId(),
+                    convertClientViewportToDTO(viewportList));
+        } catch (ResourceNotFoundFault rnff) {
+            logger.error("Error on MapService: " + rnff);
+            throw new GeoPlatformException(rnff);
+        } catch (IllegalParameterFault ipf) {
+            logger.error("Error on MapService: " + ipf);
+            throw new GeoPlatformException(ipf);
+        }
+    }
+
+    private List<GPClientViewport> convertServerViewportToDTO(ArrayList<GPViewport> viewportList) {
+        List<GPClientViewport> clientViewportList = Lists.newArrayList();
+        GPClientViewport clientViewport;
+        GPBBox serverBBOX;
+        BBoxClientInfo clientBBOX;
+        if (viewportList != null) {
+            for (GPViewport viewport : viewportList) {
+                serverBBOX = viewport.getBbox();
+                clientBBOX = new BBoxClientInfo(serverBBOX.getMinX(), serverBBOX.getMinY(),
+                        serverBBOX.getMaxX(), serverBBOX.getMaxY());
+                clientViewport = new GPClientViewport(viewport.getName(),
+                        viewport.getDescription(), clientBBOX, viewport.getZoomLevel(), viewport.isIsDefault());
+                clientViewportList.add(clientViewport);
+            }
+        }
+        return clientViewportList;
+    }
+
+    private ArrayList<GPViewport> convertClientViewportToDTO(List<GPClientViewport> viewportList) {
+        ArrayList<GPViewport> serverViewportList = Lists.newArrayList();
+        GPViewport serverViewport;
+        GPBBox serverBBOX;
+        BBoxClientInfo clientBBOX;
+        if (viewportList != null) {
+            for (GPClientViewport viewport : viewportList) {
+                clientBBOX = viewport.getBbox();
+                serverBBOX = new GPBBox(clientBBOX.getLowerLeftX(), clientBBOX.getLowerLeftY(),
+                        clientBBOX.getUpperRightX(), clientBBOX.getUpperRightY());
+                serverViewport = new GPViewport(viewport.getName(), viewport.getDescription(),
+                        viewport.getZoomLevel(), serverBBOX, viewport.isDefault());
+                serverViewportList.add(serverViewport);
+            }
+        }
+        return serverViewportList;
     }
 
     /**

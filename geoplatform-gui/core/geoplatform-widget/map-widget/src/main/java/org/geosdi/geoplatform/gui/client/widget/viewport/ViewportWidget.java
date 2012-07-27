@@ -35,172 +35,156 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.viewport;
 
-import org.geosdi.geoplatform.gui.client.widget.baselayer.*;
-import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
-import com.extjs.gxt.ui.client.event.SelectionChangedListener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.util.Format;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.ListView;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.event.ChangeBaseLayerEvent;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
-import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.CreateViewportHandler;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
-import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.gwtopenmaps.openlayers.client.Bounds;
+import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.Projection;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class ViewportWidget extends GeoPlatformWindow {
+public class ViewportWidget extends GeoPlatformWindow implements CreateViewportHandler {
 
-    private final short WIDGET_WIDTH = 485;
-    private final short WIDGET_HEIGHT = 385;
-    private ListStore<GPClientViewport> store = new ListStore<GPClientViewport>();
-    private ListView<GPBaseLayer> listView;
+    public static final short VIEWPORT_WIDGET_WIDTH = 690;
+    public static final short VIEWPORT_WIDGET_HEIGHT = 430;
     private ContentPanel centralPanel;
+    private ViewportGridFieldSet viewportGridFieldSet;
+    private Map map;
+    private GPClientViewport viewportToAdd;
 
-    public ViewportWidget(boolean lazy) {
+    public ViewportWidget(boolean lazy, Map map) {
         super(lazy);
+        this.map = map;
+        this.viewportGridFieldSet = new ViewportGridFieldSet(this.map);
+        MapHandlerManager.addHandler(CreateViewportHandler.TYPE, this);
     }
 
     @Override
     public void addComponent() {
+        this.centralPanel = new ContentPanel(new FlowLayout(0));
+        this.centralPanel.setHeaderVisible(Boolean.FALSE);
+        this.centralPanel.setFrame(Boolean.TRUE);
+        this.centralPanel.setSize(VIEWPORT_WIDGET_WIDTH - 15, VIEWPORT_WIDGET_HEIGHT - 20);
+        this.centralPanel.add(this.viewportGridFieldSet);
+        this.centralPanel.setScrollMode(Style.Scroll.NONE);
+        super.add(this.centralPanel);
 //        this.store.add(GPMapBaseLayerFactory.getBaseLayerList());
-        Button saveButton = new Button("Save", BasicWidgetResources.ICONS.save(), new SelectionListener<ButtonEvent>() {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                String baseLayer = Registry.get(GlobalRegistryEnum.BASE_LAYER.toString());
-                MapRemote.Util.getInstance().saveBaseLayer(baseLayer, new AsyncCallback<Object>() {
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage("Error saving",
-                                "An error occurred while making the requested connection.\n"
-                                + "Verify network connections and try again."
-                                + "\nIf the problem persists contact your system administrator.");
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Error saving the new base layer.",
-                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                        System.out.println("Error saving the new base layer: " + caught.toString()
-                                + " data: " + caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(Object result) {
-//                        BaseLayerWidget.super.hide();
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Base Layer successfully saved.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                    }
-                });
-            }
-        });
-        Button applyButton = new Button("Apply/Close", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-//                BaseLayerWidget.super.hide();
-            }
-        });
-        super.addButton(saveButton);
-        super.addButton(applyButton);
+//        Button saveButton = new Button("Save", BasicWidgetResources.ICONS.save(), new SelectionListener<ButtonEvent>() {
+//            @Override
+//            public void componentSelected(ButtonEvent ce) {
+//                MapRemote.Util.getInstance().saveOrUpdateViewportList(null, new AsyncCallback<Object>() {
+//                    @Override
+//                    public void onFailure(Throwable caught) {
+//                        GeoPlatformMessage.errorMessage("Error saving",
+//                                "An error occurred while making the requested connection.\n"
+//                                + "Verify network connections and try again."
+//                                + "\nIf the problem persists contact your system administrator.");
+//                        LayoutManager.getInstance().getStatusMap().setStatus(
+//                                "Error saving the viewport list.",
+//                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+//                        System.out.println("Error saving the viewport list: " + caught.toString()
+//                                + " data: " + caught.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(Object result) {
+//                        LayoutManager.getInstance().getStatusMap().setStatus(
+//                                "Succesfully saved the viewport list.",
+//                                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+//                    }
+//                });
+//            }
+//        });
+//
+//        Button applyButton = new Button("Apply/Close", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
+//            @Override
+//            public void componentSelected(ButtonEvent ce) {
+////                BaseLayerWidget.super.hide();
+//            }
+//        });
+//        super.addButton(saveButton);
+//        super.addButton(applyButton);
     }
 
     @Override
     public void initSize() {
-        setSize(WIDGET_WIDTH, WIDGET_HEIGHT);
+        setSize(VIEWPORT_WIDGET_WIDTH, VIEWPORT_WIDGET_HEIGHT);
     }
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("Base Layer Selection");
+        super.setHeading("Viewport Widget");
         super.setScrollMode(Style.Scroll.NONE);
         super.setResizable(Boolean.FALSE);
-    }
-
-    private ListView<GPBaseLayer> generateListView() {
-        listView = new ListView<GPBaseLayer>() {
-
-            @Override
-            protected GPBaseLayer prepareData(GPBaseLayer baseLayer) {
-                baseLayer.set("shortName", Format.ellipse(baseLayer.getGwtOlBaseLayer().getName(), 30));
-                return baseLayer;
-            }
-        };
-        listView.addStyleName("overview-page");
-        listView.setItemSelector(".project-box");
-        listView.setOverStyle("sample-over");
-        listView.setSelectStyle("none");
-        listView.setBorders(Boolean.FALSE);
-//        listView.setStore(store);
-
-        listView.getSelectionModel().addSelectionChangedListener(
-                new SelectionChangedListener<GPBaseLayer>() {
-
-                    ChangeBaseLayerEvent event;
-
-                    @Override
-                    public void selectionChanged(SelectionChangedEvent<GPBaseLayer> se) {
-                        GPBaseLayer selectedBaseLayer = se.getSelectedItem();
-                        if (selectedBaseLayer != null) {
-                            event = new ChangeBaseLayerEvent(selectedBaseLayer);
-                            MapHandlerManager.fireEvent(event);
-                            Registry.register(GlobalRegistryEnum.BASE_LAYER.toString(),
-                                    selectedBaseLayer.getBaseLayerEnumName().toString());
-                        }
-                        listView.getSelectionModel().deselectAll();
-                    }
-                });
-
-        setListViewProperties();
-
-        return listView;
     }
 
     @Override
     public void finalizeInitOperations() {
         super.finalizeInitOperations();
-        this.centralPanel = new ContentPanel(new FlowLayout(0));
-        this.centralPanel.setHeaderVisible(Boolean.FALSE);
-        this.centralPanel.setFrame(Boolean.TRUE);
-        this.centralPanel.setSize(WIDGET_WIDTH - 15, WIDGET_HEIGHT - 20);
-        this.centralPanel.add(this.generateListView());
-        this.centralPanel.setScrollMode(Style.Scroll.NONE);
-        super.add(this.centralPanel);
+
     }
 
-    private void setListViewProperties() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<tpl for=\".\">");
-        sb.append("<div class='project-box' style='padding-top: 4px;border: none'>");
-        sb.append("<div class='thumbd' title='{");
-        sb.append(GlobalRegistryEnum.TOOLTIP);
-        sb.append("}'>{");
-        sb.append(BaseLayerEnum.IMAGE);
-        sb.append("}</div>");
-        sb.append("<div>{");
-        sb.append(GlobalRegistryEnum.TOOLTIP);
-        sb.append("}</div></div></tpl>");
+    @Override
+    public void show() {
+        ViewportWidget.super.show();
+        this.centralPanel.mask("Loading Viewport...");
+        MapRemote.Util.getInstance().loadViewportElements(new AsyncCallback<List<GPClientViewport>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage("Error loading",
+                        "An error occurred while making the requested connection.\n"
+                        + "Verify network connections and try again."
+                        + "\nIf the problem persists contact your system administrator.");
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        "Error loading the viewport elements.",
+                        SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                System.out.println("Error saving loading the viewport elements: " + caught.toString()
+                        + " data: " + caught.getMessage());
+            }
 
-        listView.setTemplate(sb.toString());
+            @Override
+            public void onSuccess(List<GPClientViewport> result) {
+                viewportGridFieldSet.setViewportListStore(result);
+                ViewportWidget.this.centralPanel.unmask();
+                if (viewportToAdd != null) {
+                    viewportGridFieldSet.addViewportElement(viewportToAdd);
+                    viewportToAdd = null;
+                }
+            }
+        });
+    }
 
-        listView.setSize(WIDGET_WIDTH - 25, WIDGET_HEIGHT - 75);
+    @Override
+    public void onCreateViewport(List<GPLayerBean> layerList) {
+        Bounds bounds = ViewportUtility.calculateMaxBound(layerList, map);
+
+        Projection currentProjection = new Projection(MapLayoutWidget.EPSG_4326);
+        Projection destinationProjection = new Projection(map.getProjection());
+        bounds.transform(currentProjection, destinationProjection);
+
+        double zoom = map.getZoomForExtent(bounds, Boolean.FALSE);
+
+        bounds.transform(destinationProjection, currentProjection);
+
+        BBoxClientInfo bbox = ViewportUtility.generateBBOXFromBounds(bounds);
+        this.viewportToAdd = new GPClientViewport("New Viewport",
+                "Insert description", bbox, zoom, Boolean.FALSE);
+        this.show();
     }
 }

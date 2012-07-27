@@ -219,7 +219,7 @@ public class EntityCorrectness {
         if (EntityCorrectness.empty(viewport.getName())) {
             throw new IllegalParameterFault("Viewport \"name\" must be NOT NULL or empty.");
         }
-        if (viewport.getBbox() != null) {
+        if (viewport.getBbox() == null) {
             throw new IllegalParameterFault("Viewport \"BBOX\" must be NOT NULL or empty.");
         }
     }

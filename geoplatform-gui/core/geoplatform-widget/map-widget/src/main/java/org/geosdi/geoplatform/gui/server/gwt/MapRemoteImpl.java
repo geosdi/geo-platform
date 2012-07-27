@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.service.MapRemote;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IMapService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
@@ -56,5 +58,15 @@ public class MapRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Override
     public void saveBaseLayer(String baseLayer) throws GeoPlatformException {
         mapService.saveBaseLayer(baseLayer, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public List<GPClientViewport> loadViewportElements() throws GeoPlatformException {
+        return this.mapService.loadViewportElements(super.getThreadLocalRequest());
+    }
+
+    @Override
+    public void saveOrUpdateViewportList(List<GPClientViewport> viewportList) throws GeoPlatformException {
+        this.mapService.saveOrUpdateViewportList(viewportList, super.getThreadLocalRequest());
     }
 }

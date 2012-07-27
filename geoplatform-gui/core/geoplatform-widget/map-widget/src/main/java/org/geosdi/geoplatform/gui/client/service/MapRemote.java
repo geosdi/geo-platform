@@ -36,8 +36,11 @@
 package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -58,6 +61,8 @@ public interface MapRemote extends RemoteService {
     }
 
     public void saveBaseLayer(String baseLayer) throws GeoPlatformException;
-    
-//    public String layerAuthenticate(String userName, String password, String url) throws GeoPlatformException;
+
+    public void saveOrUpdateViewportList(List<GPClientViewport> viewportList) throws GeoPlatformException;
+
+    public List<GPClientViewport> loadViewportElements() throws GeoPlatformException;
 }

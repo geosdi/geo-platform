@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl
 import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureOperation;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.style.VectorFeatureStyle;
+import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Map;
@@ -58,7 +59,7 @@ import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class MapControlManager {
 
@@ -80,7 +81,7 @@ public class MapControlManager {
 
     /**
      * Create a vector layer to add to the map which defines a set of controls
-     * 
+     *
      */
     private void initVectorLayer() {
         VectorOptions vectorOption = new VectorOptions();
@@ -96,7 +97,7 @@ public class MapControlManager {
 
     /**
      * Initialize Control on Vector Layer
-     * 
+     *
      */
     private void initControl() {
         this.drawFeature = new DrawPolygonControl(vector);
@@ -109,7 +110,7 @@ public class MapControlManager {
 
     /**
      * Add Control to the Map
-     * 
+     *
      */
     private void addMapControl() {
         this.map.addControl(this.drawFeature.getControl());
@@ -124,7 +125,7 @@ public class MapControlManager {
 
     /**
      * Draw Feature on the Map
-     * 
+     *
      * @param wkt
      */
     public void drawFeatureOnMap(String wkt) {
@@ -135,16 +136,15 @@ public class MapControlManager {
         VectorFeature vectorFeature = new VectorFeature(geom);
         this.vector.addFeature(vectorFeature);
         this.map.zoomToExtent(geom.getBounds());
-        
+
         Projection projection = new Projection("EPSG:4326");
         Projection mapProjection = new Projection(map.getProjection());
         Bounds mapBounds = this.map.getExtent().transform(mapProjection, projection);
-        BBoxClientInfo bbox = new BBoxClientInfo(mapBounds.getLowerLeftX(), mapBounds.getLowerLeftY(), 
-                mapBounds.getUpperRightX(), mapBounds.getUpperRightY());
+        BBoxClientInfo bbox = ViewportUtility.generateBBOXFromBounds(mapBounds);
     }
 
     /**
-     * 
+     *
      * @param feature
      */
     public void drawFeature(VectorFeature feature) {
@@ -163,7 +163,7 @@ public class MapControlManager {
 
     /**
      * Erase Single Feature from the Map
-     * 
+     *
      * @param vf
      */
     public void eraseFeature(VectorFeature vf) {
@@ -186,7 +186,7 @@ public class MapControlManager {
     }
 
     /**
-     * 
+     *
      * @return DrawFeature
      */
     public DrawFeature getDrawFeatureControl() {
@@ -198,7 +198,7 @@ public class MapControlManager {
     }
 
     /**
-     * 
+     *
      * @return ModifyFeature
      */
     public ModifyFeature getModifyFeatureControl() {
@@ -206,7 +206,7 @@ public class MapControlManager {
     }
 
     /**
-     * 
+     *
      * @return SelectFeature
      */
     public SelectFeature getSelectFeatureControl() {

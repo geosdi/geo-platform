@@ -35,26 +35,35 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.viewport;
 
+import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
+import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.*;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
 import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Widget;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.service.MapRemote;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.fieldset.GPFieldSet;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.ViewportEnum;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.gwtopenmaps.openlayers.client.Map;
 
 /**
@@ -63,11 +72,13 @@ import org.gwtopenmaps.openlayers.client.Map;
  */
 public class ViewportGridFieldSet extends GPFieldSet {
 
-    public final static short VIEWPORT_GRID_WIDTH = 550;
     private ListStore<GPClientViewport> store = new ListStore<GPClientViewport>();
     private Map map;
     private EditorGrid<GPClientViewport> viewportGrid;
     private Button deleteViewportButton;
+    private Button gotoViewportButton;
+    private Button setDefaultViewportButton;
+    private StoreFilterField<GPClientViewport> viewportFilter;
 
     public ViewportGridFieldSet(Map map) {
         this.map = map;
@@ -76,61 +87,15 @@ public class ViewportGridFieldSet extends GPFieldSet {
 
     @Override
     public void addComponents() {
-//        store.addStoreListener(new StoreListener<GPClientViewport>() {
-//            private boolean isAceptableQuantityValue(Record record) {
-//                boolean result = Boolean.TRUE;
-////                Double oldQuantity = (Double) record.getChanges().get(ColorMapEntryKeyValue.QUANTITY.toString());
-//                Double newQuantity = (Double) record.get(ColorMapEntryKeyValue.QUANTITY.toString());
-////                System.out.println("Quantity: " + quantity + " - newQuantity: " + newQuantity);
-//                if (newQuantity == null) {
-//                    result = Boolean.FALSE;
-//                } else {
-//                    for (ColorMapEntry entry : store.getModels()) {
-//                        //the first check avoids to test the same entry
-//                        if (!entry.equals(record.getModel()) && entry.getQuantity() != null
-//                                && entry.getQuantity().equals(newQuantity)) {
-//                            result = Boolean.FALSE;
-//                            break;
-//                        }
-//                    }
-//                }
-//                return result;
-//            }
-//
-//            @Override
-//            public void storeUpdate(StoreEvent<GPClientViewport> se) {
-////                Collections.sort(store.getModels());
-//                Record record = se.getRecord();
-//                if (record != null && this.isAceptableQuantityValue(record)) {
-//                    Collections.sort(rasterSymbolizer.getColorMap().getColorMapEntryList());
-//                    super.storeUpdate(se);
-//                    viewportGrid.getStore().sort(viewportGrid.getColumnModel().getDataIndex(1), SortDir.ASC);
-//                    viewportGrid.getView().refresh(Boolean.TRUE);
-//                } else if (record != null) {
-//                    se.getModel().setQuantity((Double) record.getChanges().get(ColorMapEntryKeyValue.QUANTITY.toString()));
-//                    record.cancelEdit();
-//                    GeoPlatformMessage.errorMessage("Duplicated Quantity Value",
-//                            "The quantity value must not be duplicated or null!");
-//                }
-//            }
-//
-//            @Override
-//            public void storeRemove(StoreEvent<GPClientViewport> se) {
-//                if (!typeColorMapComboBox.getDisplayField().equals(GPTypeColorMapKeyValue.VALUES.getValue())
-//                        && store.getCount() < 2) {
-//                    store.add(SLDFactorySingleton.getInstance().generateColorMapEntry(rasterSymbolizer));
-//                }
-//                super.storeRemove(se);
-//            }
-//        });
-
+        this.add(createViewportFilter());
         this.add(this.generateGrid(), new FormData("100%"));
         ButtonBar buttonBar = new ButtonBar();
 
         Button addEntryButton = new Button("Add Viewport", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
-                //Change panel and fill using the current bbox
+                ViewportGridFieldSet.this.store.add(ViewportUtility.generateViewportFromMap(map));
+                viewportGrid.startEditing(store.getCount() - 1, 1);
             }
         });
         buttonBar.add(addEntryButton);
@@ -146,76 +111,201 @@ public class ViewportGridFieldSet extends GPFieldSet {
                                 @Override
                                 public void handleEvent(MessageBoxEvent be) {
                                     if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-//                                        rasterSymbolizer.getColorMap().getColorMapEntryList().removeAll(viewportList);
-//                                        for (ColorMapEntry colorMapEntry : viewportList) {
-//                                            store.remove(colorMapEntry);
-//                                        }
+                                        for (GPClientViewport viewport : viewportList) {
+                                            store.remove(viewport);
+                                        }
                                     }
                                 }
                             });
                 }
             }
         });
-
         deleteViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(deleteViewportButton);
-        Button saveButton = new Button("Apply", BasicWidgetResources.ICONS.gear(), new SelectionListener<ButtonEvent>() {
+
+        this.gotoViewportButton = new Button("GoTo Viewport", BasicWidgetResources.ICONS.gotoXY(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
-                store.commitChanges();
+                final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
+                if (viewportList != null && viewportList.size() == 1) {
+                    ViewportUtility.gotoViewportLocation(map, viewportList.get(0));
+                } else {
+                    GeoPlatformMessage.alertMessage("GoTo Viewport Allert", "You must select "
+                            + "only one viewport at time.");
+                }
+            }
+        });
+        gotoViewportButton.setEnabled(Boolean.FALSE);
+        buttonBar.add(gotoViewportButton);
+
+        this.setDefaultViewportButton = new Button("Set Default", BasicWidgetResources.ICONS.select(),
+                new SelectionListener<ButtonEvent>() {
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
+                        if (viewportList != null && viewportList.size() == 1) {
+                            GPClientViewport selectedViewport = viewportList.get(0);
+                            for (GPClientViewport viewport : ViewportGridFieldSet.this.store.getModels()) {
+                                if (viewport.isDefault()) {
+                                    viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.FALSE);
+                                    store.update(viewport);
+                                } else if (selectedViewport.equals(viewport)) {
+                                    viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.TRUE);
+                                    store.update(viewport);
+                                }
+                            }
+                        } else {
+                            GeoPlatformMessage.alertMessage("Set Default Viewport Allert", "You must select "
+                                    + "only one viewport at time.");
+                        }
+                    }
+                });
+        setDefaultViewportButton.setEnabled(Boolean.FALSE);
+        buttonBar.add(setDefaultViewportButton);
+        Button saveButton = new Button("Save", BasicWidgetResources.ICONS.save(), new SelectionListener<ButtonEvent>() {
+            private boolean isStoreModelCorrect() {
+                boolean check = true;
+                BBoxClientInfo bbox = null;
+                for (GPClientViewport viewport : store.getModels()) {
+                    bbox = viewport.getBbox();
+                    System.out.println("BBOXXX: " + bbox.getLowerLeftX());
+                    if (bbox == null || bbox.getLowerLeftX() == 0.0d || bbox.getLowerLeftY() == 0.0d
+                            || bbox.getUpperRightX() == 0.0d || bbox.getUpperRightY() == 0.0d
+                            || viewport.getName() == null || viewport.getName().isEmpty()
+                            || viewport.getZoomLevel() < 0) {
+                        check = false;
+                        break;
+                    }
+                }
+                return check;
+            }
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                if (isStoreModelCorrect()) {
+                    MapRemote.Util.getInstance().saveOrUpdateViewportList(store.getModels(), new AsyncCallback<Object>() {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            GeoPlatformMessage.errorMessage("Error saving",
+                                    "An error occurred while making the requested connection.\n"
+                                    + "Verify network connections and try again."
+                                    + "\nIf the problem persists contact your system administrator.");
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                    "Error saving the viewport list.",
+                                    SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                            System.out.println("Error saving the viewport list: " + caught.toString()
+                                    + " data: " + caught.getMessage());
+                        }
+
+                        @Override
+                        public void onSuccess(Object result) {
+                            store.commitChanges();
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                    "Succesfully saved the viewport list.",
+                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                        }
+                    });
+                } else {
+                    GeoPlatformMessage.errorMessage("Viewport Incorrect",
+                            "Before to save it is necessary to correct or fill "
+                            + "the: Name, zoom or BBOX values");
+                }
             }
         });
 
         buttonBar.add(saveButton);
         this.add(buttonBar, new FormData("100%"));
+        this.setScrollMode(Style.Scroll.NONE);
+    }
+
+    private Widget createViewportFilter() {
+        this.viewportFilter = new StoreFilterField<GPClientViewport>() {
+            @Override
+            protected boolean doSelect(Store<GPClientViewport> store, GPClientViewport parent,
+                    GPClientViewport record, String property, String filter) {
+                String viewportName = record.getName().toString().toLowerCase();
+                String viewportDescription = record.getDescription().toString().toLowerCase();
+                if (viewportName.contains(filter.toLowerCase()) || viewportDescription.contains(filter.toLowerCase())) {
+                    return Boolean.TRUE;
+                }
+                return Boolean.FALSE;
+            }
+        };
+        viewportFilter.setEmptyText("Type the viewport to search");
+        viewportFilter.bind(this.store);
+        viewportFilter.setFieldLabel("Filter");
+        return this.viewportFilter;
     }
 
     @Override
     public void setWidgetProperties() {
-        this.setHeading("Viewport Widget");
-        this.setWidth(VIEWPORT_GRID_WIDTH);
+        this.setWidth(ViewportWidget.VIEWPORT_WIDGET_WIDTH - 30);
+        this.setHeight(ViewportWidget.VIEWPORT_WIDGET_HEIGHT - 40);
         this.setLayout(new FormLayout());
     }
 
     private void resetComponent() {
         this.store.removeAll();
+        this.viewportFilter.clear();
     }
 
     private Grid generateGrid() {
         List<ColumnConfig> configs = Lists.newArrayList();
+        final String idIsDefaultColumn = "Default";
+        CheckColumnConfig isDefaultColumn = new CheckColumnConfig(ViewportEnum.IS_DEFAULT.toString(),
+                idIsDefaultColumn, 50);
+        configs.add(isDefaultColumn);
         final String idNameColumn = "Name";
         ColumnConfig nameColumnConfig = new ColumnConfig(ViewportEnum.NAME.toString(),
                 idNameColumn, 80);
-//        GridCellRenderer<GPClientViewport> colorCellRenderer = new GridCellRenderer<GPClientViewport>() {
-//            @Override
-//            public String render(GPClientViewport model, String property, ColumnData config, int rowIndex, int colIndex,
-//                    ListStore<GPClientViewport> store, Grid<GPClientViewport> grid) {
-//
-//                return "<span style='display: block; background-color:" + model.getColor() + "'>" + model.getColor() + "</span>";
-//            }
-//        };
-//        colorColumnConfig.setRenderer(colorCellRenderer);
+        nameColumnConfig.setEditor(new CellEditor(new TextField<String>()));
         configs.add(nameColumnConfig);
         final String idDescriptionColumn = "Description";
         ColumnConfig descriptionColumnConfig = new ColumnConfig(ViewportEnum.DESCRIPTION.toString(),
                 idDescriptionColumn, 80);
         descriptionColumnConfig.setEditor(new CellEditor(new TextField<String>()));
-//        descriptionColumnConfig.setEditor(new CellEditor(new NumberField()));
         configs.add(descriptionColumnConfig);
-
-        ColumnConfig bboxColumnConfig = new ColumnConfig(ViewportEnum.BBOX.toString(),
-                "BBOX", 120);
-        bboxColumnConfig.setEditor(new CellEditor(new TextField<String>()));
-        configs.add(bboxColumnConfig);
+        ColumnConfig minXColumnConfig = new ColumnConfig(ViewportEnum.LOWER_LEFT_X.toString(),
+                "Min X", 70);
+        minXColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
+        NumberField numberFieldBBOX = new NumberField();
+        numberFieldBBOX.setMaxValue(180);
+        numberFieldBBOX.setMinValue(-180);
+        minXColumnConfig.setEditor(new CellEditor(numberFieldBBOX));
+        configs.add(minXColumnConfig);
+        ColumnConfig minYColumnConfig = new ColumnConfig(ViewportEnum.LOWER_LEFT_Y.toString(),
+                "Min Y", 70);
+        minYColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
+        NumberField numberFieldBBOX2 = new NumberField();
+        numberFieldBBOX2.setMaxValue(90);
+        numberFieldBBOX2.setMinValue(90);
+        minYColumnConfig.setEditor(new CellEditor(numberFieldBBOX2));
+        configs.add(minYColumnConfig);
+        ColumnConfig maxXColumnConfig = new ColumnConfig(ViewportEnum.UPPER_RIGHT_X.toString(),
+                "Max X", 70);
+        maxXColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
+        NumberField numberFieldBBOX3 = new NumberField();
+        numberFieldBBOX3.setMaxValue(180);
+        numberFieldBBOX3.setMinValue(-180);
+        maxXColumnConfig.setEditor(new CellEditor(numberFieldBBOX3));
+        configs.add(maxXColumnConfig);
+        ColumnConfig maxYColumnConfig = new ColumnConfig(ViewportEnum.UPPER_RIGHT_Y.toString(),
+                "Max Y", 70);
+        maxYColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
+        NumberField numberFieldBBOX4 = new NumberField();
+        numberFieldBBOX4.setMaxValue(90);
+        numberFieldBBOX4.setMinValue(-90);
+        maxYColumnConfig.setEditor(new CellEditor(numberFieldBBOX4));
+        configs.add(maxYColumnConfig);
 
         ColumnConfig zoomLevelColumnConfig = new ColumnConfig(ViewportEnum.ZOOM_LEVEL.toString(),
-                "Zoom Level", 80);
+                "Zoom Level", 70);
         zoomLevelColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
-        NumberField numberField = new NumberField();
-        numberField.setAllowNegative(Boolean.FALSE);
-        numberField.setMaxValue(MapLayoutWidget.NUM_ZOOM_LEVEL);
-        numberField.setMinValue(0);
-        zoomLevelColumnConfig.setEditor(new CellEditor(new NumberField()));
+        NumberField numberFieldZoom = new NumberField();
+        numberFieldZoom.setAllowNegative(Boolean.FALSE);
+        numberFieldZoom.setMaxValue(MapLayoutWidget.NUM_ZOOM_LEVEL);
+        numberFieldZoom.setMinValue(0);
+        zoomLevelColumnConfig.setEditor(new CellEditor(numberFieldZoom));
         configs.add(zoomLevelColumnConfig);
         CheckBoxSelectionModel<GPClientViewport> checkBoxSelectionModel = new CheckBoxSelectionModel<GPClientViewport>();
         checkBoxSelectionModel.setSelectionMode(SelectionMode.MULTI);
@@ -224,8 +314,12 @@ public class ViewportGridFieldSet extends GPFieldSet {
             public void selectionChanged(SelectionChangedEvent<GPClientViewport> se) {
                 if (se.getSelection().isEmpty()) {
                     deleteViewportButton.disable();
+                    gotoViewportButton.disable();
+                    setDefaultViewportButton.disable();
                 } else {
                     deleteViewportButton.enable();
+                    gotoViewportButton.enable();
+                    setDefaultViewportButton.enable();
                 }
             }
         });
@@ -234,43 +328,25 @@ public class ViewportGridFieldSet extends GPFieldSet {
         this.viewportGrid = new EditorGrid<GPClientViewport>(store, new ColumnModel(configs));
         this.viewportGrid.addPlugin(checkBoxSelectionModel);
         this.viewportGrid.setSelectionModel(checkBoxSelectionModel);
-        viewportGrid.setBorders(Boolean.TRUE);
-        viewportGrid.setStripeRows(Boolean.TRUE);
-        viewportGrid.setBorders(Boolean.TRUE);
+        this.viewportGrid.setBorders(Boolean.TRUE);
+        this.viewportGrid.setStripeRows(Boolean.TRUE);
+        this.viewportGrid.setBorders(Boolean.TRUE);
         this.viewportGrid.setClicksToEdit(EditorGrid.ClicksToEdit.TWO);
         viewportGrid.setStyleAttribute("borderTop", "none");
-        viewportGrid.setAutoExpandColumn(ViewportEnum.NAME.toString());
+        viewportGrid.setAutoExpandColumn(ViewportEnum.DESCRIPTION.toString());
         viewportGrid.setAutoExpandMin(120);
         viewportGrid.setSize("250px", "300px");
-//        viewportGrid.addListener(Events.CellDoubleClick, new Listener<GridEvent<GPClientViewport>>() {
-//
-//            @Override
-//            public void handleEvent(final GridEvent<GPClientViewport> gridEvent) {
-//                if (gridEvent.getColIndex() == 0) {
-//                    try {
-//                        colorPicker.setHex(gridEvent.getModel().getColor().substring(1));
-//                    } catch (Exception ex) {
-//                    }
-////                    gridEvent.getGrid().getColumnModel().getColumn(0).getEditor().getField().focus();
-////                    gridEvent.getGrid().getSelectionModel().getSelectedItem();
-//                    colorPicker.setColorChooseListener(new Listener<ColorChooseEvent>() {
-//                        @Override
-//                        public void handleEvent(ColorChooseEvent colorChooseEvent) {
-//                            gridEvent.getGrid().getSelectionModel().getSelectedItem().setColor(
-//                                    colorChooseEvent.getChoosedColor());
-//                            gridEvent.getGrid().getStore().update(gridEvent.getGrid().getSelectionModel().getSelectedItem());
-//
-//                        }
-//                    });
-//                    colorPicker.show();
-//                }
-//            }
-//        });
         return viewportGrid;
     }
 
     public void setViewportListStore(List<GPClientViewport> viewportList) {
+        this.resetComponent();
         store.add(viewportList);
+    }
+
+    public void addViewportElement(final GPClientViewport viewport) {
+        store.add(viewport);
+        this.viewportGrid.startEditing(store.getCount() - 1, 1);
     }
 
     @Override

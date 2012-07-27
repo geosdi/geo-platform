@@ -43,9 +43,9 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  *
  */
-public interface MeasureChangeHeandler extends EventHandler {
+public interface MeasureChangeHandler extends EventHandler {
 
-    Type<MeasureChangeHeandler> TYPE = new Type<MeasureChangeHeandler>();
+    Type<MeasureChangeHandler> TYPE = new Type<MeasureChangeHandler>();
 
     public void onPositionChange(Size s);
 

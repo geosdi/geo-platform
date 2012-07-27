@@ -79,8 +79,8 @@ public class GPViewport implements Serializable {
     @Column
     private String description;
     //  
-    @Column
-    private float zoomLevel;;
+    @Column(nullable = false)
+    private double zoomLevel;
     //  
     @Column
     private boolean isDefault = false;
@@ -93,6 +93,18 @@ public class GPViewport implements Serializable {
     @Index(name = "ACCOUNT_PROJECT_ID_INDEX")
     private GPAccountProject accountProject;
 
+    public GPViewport() {
+    }
+
+    public GPViewport(String name, String description, double zoomLevel, GPBBox bbox,
+            boolean isDefault) {
+        this.name = name;
+        this.description = description;
+        this.zoomLevel = zoomLevel;
+        this.bbox = bbox;
+        this.isDefault = isDefault;
+    }
+
     /**
      * @return the id
      */
@@ -101,8 +113,7 @@ public class GPViewport implements Serializable {
     }
 
     /**
-     * @param id
-     * the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -116,8 +127,7 @@ public class GPViewport implements Serializable {
     }
 
     /**
-     * @param name
-     * the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -139,8 +149,7 @@ public class GPViewport implements Serializable {
     }
 
     /**
-     * @param bbox
-     * the bbox to set
+     * @param bbox the bbox to set
      */
     public void setBbox(GPBBox bbox) {
         this.bbox = bbox;
@@ -162,11 +171,11 @@ public class GPViewport implements Serializable {
         this.accountProject = accountProject;
     }
 
-    public float getZoomLevel() {
+    public double getZoomLevel() {
         return zoomLevel;
     }
 
-    public void setZoomLevel(float zoomLevel) {
+    public void setZoomLevel(double zoomLevel) {
         this.zoomLevel = zoomLevel;
     }
 

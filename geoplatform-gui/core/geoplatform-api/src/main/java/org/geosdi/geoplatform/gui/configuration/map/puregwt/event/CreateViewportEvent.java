@@ -36,27 +36,29 @@
 package org.geosdi.geoplatform.gui.configuration.map.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import java.util.List;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
- * @author Francesco Izzi - CNR IMAA - geoSDI Group
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class MeasureChangeEvent extends GwtEvent<MeasureChangeHandler> {
+public class CreateViewportEvent extends GwtEvent<CreateViewportHandler> {
 
-    private boolean activate;
+    private List<GPLayerBean> layerList;
 
-    public MeasureChangeEvent(boolean activate) {
-        this.activate = activate;
+    @Override
+    public Type<CreateViewportHandler> getAssociatedType() {
+        return CreateViewportHandler.TYPE;
     }
 
     @Override
-    public Type<MeasureChangeHandler> getAssociatedType() {
-        return MeasureChangeHandler.TYPE;
+    protected void dispatch(CreateViewportHandler handler) {
+        handler.onCreateViewport(layerList);
     }
 
-    @Override
-    protected void dispatch(MeasureChangeHandler handler) {
-        handler.activationMeasure(activate);
-
+    public void setLayerList(List<GPLayerBean> layerList) {
+        this.layerList = layerList;
     }
 }

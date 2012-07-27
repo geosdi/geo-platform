@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
-import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.MeasureChangeHeandler;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.MeasureChangeHandler;
 
 import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.core.XDOM;
@@ -56,7 +56,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * 
  */
 public class GPMeasureWidget extends ContentPanel implements
-		MeasureChangeHeandler {
+		MeasureChangeHandler {
 
 	private static Stack<GPMeasureWidget> infoStack = new Stack<GPMeasureWidget>();
 	private static ArrayList<GPMeasureWidget> slots = new ArrayList<GPMeasureWidget>();
@@ -74,7 +74,7 @@ public class GPMeasureWidget extends ContentPanel implements
 		setShadow(false);
 		setLayoutOnChange(true);
 
-		MapHandlerManager.addHandler(MeasureChangeHeandler.TYPE, this);
+		MapHandlerManager.addHandler(MeasureChangeHandler.TYPE, this);
 	}
 
 	@Override

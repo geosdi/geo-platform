@@ -72,7 +72,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 /**
  * Public interface to define the service operations mapped via REST using CXT
  * framework.
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -370,11 +370,44 @@ public interface GeoPlatformService {
     // === Viewport
     // ==========================================================================
     @Get
-    @HttpResource(location = "/viewports/{folderID}")
+    @HttpResource(location = "/viewport/{{accountProjectID}}")
     @WebResult(name = "Viewport")
     GPViewport getDefaultViewport(@WebParam(name = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
-    // </editor-fold>
+
+    @Get
+    @HttpResource(location = "/viewports/{{accountProjectID}}")
+    @WebResult(name = "Viewport")
+    ArrayList<GPViewport> getAccountProjectViewports(@WebParam(name = "accountProjectID") Long accountProjectID)
+            throws ResourceNotFoundFault;
+
+    @Put
+    @HttpResource(location = "/viewport")
+    Long insertViewport(@WebParam(name = "accountProjectID") Long accountProjectID,
+            @WebParam(name = "viewport") GPViewport viewport)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Put
+    @HttpResource(location = "/viewport")
+    void replaceViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
+            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Put
+    @HttpResource(location = "/viewport")
+    void saveOrUpdateViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
+            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Post
+    @HttpResource(location = "/viewport")
+    Long updateViewport(@WebParam(name = "viewport") GPViewport viewport)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Delete
+    @HttpResource(location = "/viewport/{viewportID}")
+    boolean deleteViewport(@WebParam(name = "viewportID") Long viewportID)
+            throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================

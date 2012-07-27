@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import com.extjs.gxt.ui.client.Registry;
+import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.AbstractMapLayerBuilder;
@@ -105,10 +107,8 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
     public Bounds generateBoundsTransformationFromMap(GPLayerBean layerBean) {
         Bounds bounds = null;
         if (layerBean.getBbox() != null) {
-            bounds = new Bounds(layerBean.getBbox().getLowerLeftX(),
-                    layerBean.getBbox().getLowerLeftY(),
-                    layerBean.getBbox().getUpperRightX(),
-                    layerBean.getBbox().getUpperRightY());
+            BBoxClientInfo bbox = layerBean.getBbox();
+            bounds = ViewportUtility.generateBoundsFromBBOX(bbox);
             bounds.transform(new Projection(layerBean.getCrs()), new Projection(
                     mapWidget.getMap().getProjection()));
         }
@@ -137,16 +137,13 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
 
         WMSOptions wmsOption = new WMSOptions();
         if (vectorBean.getBbox() != null) {
+            BBoxClientInfo bbox = vectorBean.getBbox();
+            Bounds bounds = ViewportUtility.generateBoundsFromBBOX(bbox);
 
-            Bounds bbox = new Bounds(vectorBean.getBbox().getLowerLeftX(),
-                    vectorBean.getBbox().getLowerLeftY(),
-                    vectorBean.getBbox().getUpperRightX(),
-                    vectorBean.getBbox().getUpperRightY());
-
-            bbox.transform(new Projection(vectorBean.getCrs()), new Projection(
+            bounds.transform(new Projection(vectorBean.getCrs()), new Projection(
                     mapWidget.getMap().getProjection()));
 
-            wmsOption.setMaxExtent(bbox);
+            wmsOption.setMaxExtent(bounds);
         }
         wmsOption.setIsBaseLayer(false);
         wmsOption.setDisplayInLayerSwitcher(false);

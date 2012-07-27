@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import com.extjs.gxt.ui.client.Registry;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
@@ -54,6 +55,8 @@ import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.AboutGPAction;
+import org.geosdi.geoplatform.gui.client.action.menu.ViewportAction;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.featureinfo.action.GetFeatureInfoAction;
 
 /**
@@ -80,7 +83,6 @@ public class MapWidgetUI implements EntryPoint {
     private void addMapToolbarAction() {
         ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_IN,
                 new ToolbarActionCreator() {
-
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                         return new ZoomInAction(mapWidget);
@@ -89,7 +91,6 @@ public class MapWidgetUI implements EntryPoint {
 
         ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_OUT,
                 new ToolbarActionCreator() {
-
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                         return new ZoomOutAction(mapWidget);
@@ -98,7 +99,6 @@ public class MapWidgetUI implements EntryPoint {
 
         ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_PREVIOUS,
                 new ToolbarActionCreator() {
-
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                         return new ZoomPreviousAction(mapWidget);
@@ -107,7 +107,6 @@ public class MapWidgetUI implements EntryPoint {
 
         ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_NEXT,
                 new ToolbarActionCreator() {
-
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                         return new ZoomNextAction(mapWidget);
@@ -116,7 +115,6 @@ public class MapWidgetUI implements EntryPoint {
 
         ToolbarActionRegistar.put(GuiComponentIDs.GET_FEATURE_INFO,
                 new ToolbarActionCreator() {
-
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                         return new GetFeatureInfoAction(mapWidget);
@@ -125,7 +123,6 @@ public class MapWidgetUI implements EntryPoint {
 
         ToolbarActionRegistar.put(GuiComponentIDs.MEASURE,
                 new ToolbarActionCreator() {
-
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                         return new MeasureAction(mapWidget);
@@ -134,7 +131,6 @@ public class MapWidgetUI implements EntryPoint {
 
         ToolbarActionRegistar.put(GuiComponentIDs.MEASURE_AREA,
                 new ToolbarActionCreator() {
-
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                         return new MeasureAreaAction(mapWidget);
@@ -143,10 +139,17 @@ public class MapWidgetUI implements EntryPoint {
 
         MenuActionRegistar.put(GuiComponentIDs.ABOUT_GEOPLATFORM,
                 new MenuActionCreator() {
-
                     @Override
                     public MenuAction createAction() {
                         return new AboutGPAction();
+                    }
+                });
+        MenuActionRegistar.put(GuiComponentIDs.VIEWPORT,
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        MapLayoutWidget mapLayoutWidget = Registry.get(MapRegistryEnum.MAP_LAYOUT_WIDGET.toString());
+                        return new ViewportAction(mapLayoutWidget.getMap());
                     }
                 });
     }

@@ -33,60 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.client;
+package org.geosdi.geoplatform.gui.client.action.menu;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.geosdi.geoplatform.gui.global.enumeration.ViewportEnum;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportWidget;
+import org.gwtopenmaps.openlayers.client.Map;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPClientViewport extends GeoPlatformBeanModel {
+public class ViewportAction extends MenuBaseAction {
 
-    private static final long serialVersionUID = 6150022822260811949L;
+    private ViewportWidget viewportWidget;
 
-    public GPClientViewport() {
-    }
-
-    public GPClientViewport(String name, String description,
-            BBoxClientInfo bbox, double zoomLevel, boolean isDefault) {
-        super.set(ViewportEnum.DESCRIPTION.toString(), description);
-        super.set(ViewportEnum.IS_DEFAULT.toString(), isDefault);
-        super.set(ViewportEnum.BBOX.toString(), bbox);
-        super.set(ViewportEnum.LOWER_LEFT_X.toString(), bbox.getLowerLeftX());
-        super.set(ViewportEnum.LOWER_LEFT_Y.toString(), bbox.getLowerLeftY());
-        super.set(ViewportEnum.UPPER_RIGHT_X.toString(), bbox.getUpperRightX());
-        super.set(ViewportEnum.UPPER_RIGHT_Y.toString(), bbox.getUpperRightY());
-        super.set(ViewportEnum.NAME.toString(), name);
-        super.set(ViewportEnum.ZOOM_LEVEL.toString(), zoomLevel);
-    }
-
-    public BBoxClientInfo getBbox() {
-        return super.get(ViewportEnum.BBOX.toString());
-    }
-
-    public String getName() {
-        return super.get(ViewportEnum.NAME.toString());
-    }
-
-    public String getDescription() {
-        return super.get(ViewportEnum.DESCRIPTION.toString());
-    }
-
-    public boolean isDefault() {
-        return (Boolean) super.get(ViewportEnum.IS_DEFAULT.toString());
-    }
-
-    public double getZoomLevel() {
-        return (Double) super.get(ViewportEnum.ZOOM_LEVEL.toString());
+    public ViewportAction(Map map) {
+        super("Viewport", BasicWidgetResources.ICONS.info());
+        this.viewportWidget = new ViewportWidget(Boolean.TRUE, map);
     }
 
     @Override
-    public String toString() {
-        return "GPViewport{" + "bbox=" + getBbox() + ", name=" + getName()
-                + ", zoomLevel=" + getZoomLevel() + ", description=" + getDescription()
-                + ", isDefault=" + isDefault() + '}';
+    public void componentSelected(MenuEvent ce) {
+        this.viewportWidget.show();
     }
 }

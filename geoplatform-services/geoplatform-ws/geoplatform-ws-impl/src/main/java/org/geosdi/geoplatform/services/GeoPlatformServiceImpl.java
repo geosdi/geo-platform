@@ -147,6 +147,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.accountProjectDao = accountProjectDao;
         this.accountServiceDelegate.setAccountProjectDao(accountProjectDao);
         this.projectServiceDelegate.setAccountProjectDao(accountProjectDao);
+        this.viewportServiceDelegate.setAccountProjectDao(accountProjectDao);
     }
 
     /**
@@ -567,6 +568,41 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public GPViewport getDefaultViewport(Long accountProjectID)
             throws ResourceNotFoundFault {
         return viewportServiceDelegate.getDefaultViewport(accountProjectID);
+    }
+
+    @Override
+    public ArrayList<GPViewport> getAccountProjectViewports(Long accountProjectID)
+            throws ResourceNotFoundFault {
+        return viewportServiceDelegate.getAccountProjectViewports(accountProjectID);
+    }
+
+    @Override
+    public Long insertViewport(Long accountProjectId, GPViewport viewport) throws
+            ResourceNotFoundFault, IllegalParameterFault {
+        return viewportServiceDelegate.insertViewport(accountProjectId, viewport);
+    }
+
+    @Override
+    public void replaceViewportList(Long accountProjectId, ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        viewportServiceDelegate.replaceViewportList(accountProjectId, viewportList);
+    }
+    
+    @Override
+    public void saveOrUpdateViewportList(Long accountProjectId, ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        viewportServiceDelegate.saveOrUpdateViewportList(accountProjectId, viewportList);
+    }
+
+    @Override
+    public Long updateViewport(GPViewport viewport)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return viewportServiceDelegate.updateViewport(viewport);
+    }
+
+    @Override
+    public boolean deleteViewport(Long viewportID) throws ResourceNotFoundFault {
+        return viewportServiceDelegate.deleteViewport(viewportID);
     }
     //</editor-fold>
 

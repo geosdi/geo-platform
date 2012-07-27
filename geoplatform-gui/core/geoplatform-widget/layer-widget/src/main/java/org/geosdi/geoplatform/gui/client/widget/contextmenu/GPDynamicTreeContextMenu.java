@@ -115,9 +115,16 @@ public class GPDynamicTreeContextMenu extends Menu {
 
         layerContextMenu.add(copyMenuItem);
 
+        MenuItem createViewport = new MenuItem();
+        createViewport.setText("Create Viewport");
+        createViewport.setIcon(LayerResources.ICONS.zoomToMaxExtend());
+        createViewport.addSelectionListener(new CreateViewportAction(tree));
+        layerContextMenu.add(createViewport);
+        createViewport.setId("folderViewport");
+        folderContextMenu.add(createViewport);
+
 //        MenuItem refreshMenuItem = new MenuItem("Refresh Layer");
         refreshTimeComboBox = new ComboBox() {
-
             @Override
             protected void onSelect(ModelData model, int index) {
                 super.onSelect(model, index);
@@ -143,7 +150,6 @@ public class GPDynamicTreeContextMenu extends Menu {
         this.tree.setContextMenu(this.layerContextMenu);
 
         this.tree.addListener(Events.OnContextMenu, new Listener() {
-
             private Menu emptyMenu = new Menu();
 
             @Override

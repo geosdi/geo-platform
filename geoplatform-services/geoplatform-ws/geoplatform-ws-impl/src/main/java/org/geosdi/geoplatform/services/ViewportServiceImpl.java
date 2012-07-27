@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.services;
 
+import com.google.common.collect.Lists;
+import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.geosdi.geoplatform.core.dao.GPViewportDAO;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPViewport;
@@ -60,8 +61,7 @@ class ViewportServiceImpl {
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
-     * @param viewportDao
-     * the viewportDao to set
+     * @param viewportDao the viewportDao to set
      */
     public void setViewportDao(GPViewportDAO viewportDao) {
         this.viewportDao = viewportDao;
@@ -76,13 +76,12 @@ class ViewportServiceImpl {
     }
 
     //</editor-fold>
-    //<editor-fold defaultstate="collapsed" desc="Folder">
+    //<editor-fold defaultstate="collapsed" desc="Viewport">
     // ==========================================================================
-    // === Folder
+    // === Viewport
     // ==========================================================================
     public Long insertViewport(Long accountProjectId, GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault {
-
         GPAccountProject accountProject = this.accountProjectDao.find(accountProjectId);
         if (accountProject == null) {
             throw new ResourceNotFoundFault("AccountProject not found", accountProjectId);
@@ -93,6 +92,42 @@ class ViewportServiceImpl {
         return viewport.getId();
     }
 
+    public void replaceViewportList(Long accountProjectId, ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPAccountProject accountProject = this.accountProjectDao.find(accountProjectId);
+        if (accountProject == null) {
+            throw new ResourceNotFoundFault("AccountProject not found", accountProjectId);
+        }
+        List<GPViewport> oldViewportList = this.viewportDao.findByAccountProjectID(accountProjectId);
+        for (GPViewport viewport : oldViewportList) {
+            this.viewportDao.remove(viewport);
+        }
+        for (GPViewport viewport : viewportList) {
+            this.insertViewport(accountProjectId, viewport);
+        }
+    }
+
+    public void saveOrUpdateViewportList(Long accountProjectId, ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPAccountProject accountProject = this.accountProjectDao.find(accountProjectId);
+        if (accountProject == null) {
+            throw new ResourceNotFoundFault("AccountProject not found", accountProjectId);
+        }
+        for (GPViewport viewport : viewportList) {
+            long idViewport = 0;
+            if (viewport != null && viewport.getId() != null) {
+                GPViewport orig = viewportDao.find(viewport.getId());
+                if (orig != null) {
+                    EntityCorrectness.checkViewport(orig); // TODO assert
+                    viewport.setAccountProject(accountProject);
+                    idViewport = this.updateAndMergeFields(orig, viewport);
+                }
+            } else if (idViewport == 0) {
+                idViewport = this.insertViewport(accountProjectId, viewport);
+            }
+        }
+    }
+
     public Long updateViewport(GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPViewport orig = viewportDao.find(viewport.getId());
@@ -100,7 +135,10 @@ class ViewportServiceImpl {
             throw new ResourceNotFoundFault("Viewport not found", viewport.getId());
         }
         EntityCorrectness.checkViewport(orig); // TODO assert
+        return updateAndMergeFields(orig, viewport);
+    }
 
+    private long updateAndMergeFields(GPViewport orig, GPViewport viewport) {
         // Update all properties (except the accountProject)
         orig.setName(viewport.getName());
         orig.setBbox(viewport.getBbox());
@@ -122,30 +160,16 @@ class ViewportServiceImpl {
         return viewportDao.remove(viewport);
     }
 
-//    public List<FolderDTO> searchFolders(PaginatedSearchRequest searchRequest) {
-//        Search searchCriteria = new Search(GPFolder.class);
-//        searchCriteria.setMaxResults(searchRequest.getNum());
-//        searchCriteria.setPage(searchRequest.getPage());
-//        searchCriteria.addSortAsc("name");
-//
-//        String like = searchRequest.getNameLike();
-//        if (like != null) {
-//            searchCriteria.addFilterILike("name", like);
-//        }
-//
-//        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-//        return FolderDTO.convertToFolderDTOList(foundFolder);
-//    }
-//    public long getFoldersCount(SearchRequest searchRequest) {
-//        Search searchCriteria = new Search(GPFolder.class);
-//        if (searchRequest != null && searchRequest.getNameLike() != null) {
-//            searchCriteria.addFilterILike("name", searchRequest.getNameLike());
-//        }
-//
-//        return folderDao.count(searchCriteria);
-//    }
     public List<GPViewport> getViewports() {
         return viewportDao.findAll();
+    }
+
+    public ArrayList<GPViewport> getAccountProjectViewports(Long accountProjectID) throws ResourceNotFoundFault {
+        List<GPViewport> viewportList = viewportDao.findByAccountProjectID(accountProjectID);
+        if (viewportList == null) {
+            throw new ResourceNotFoundFault("Viewport not found using the accountProject id", accountProjectID);
+        }
+        return Lists.newArrayList(viewportList);
     }
 
     public GPViewport getDefaultViewport(Long accountProjectID) throws ResourceNotFoundFault {

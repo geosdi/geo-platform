@@ -67,7 +67,7 @@
     </bean>
     
     <bean name="gotoXY"
-              class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
         <property name="id" value="${gotoXY.id}" />
         <property name="type" value="${gotoXY.type}" />
         <property name="enabled" value="${gotoXY.enabled}" />
@@ -75,10 +75,20 @@
     </bean>
 
     <bean name="changeBaseLayer"
-              class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
         <property name="id" value="${changeBaseLayer.id}" />
         <property name="type" value="${changeBaseLayer.type}" />
         <property name="enabled" value="${changeBaseLayer.enabled}" />
         <property name="order" value="${changeBaseLayer.order}" />
     </bean>
+    
+    
+    <bean name="viewport"
+              class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="id" value="viewport" />
+        <property name="text" value="Viewport" />
+        <property name="enabled" value="true" />
+        <property name="order" value="20" />
+    </bean>
+
 </beans>

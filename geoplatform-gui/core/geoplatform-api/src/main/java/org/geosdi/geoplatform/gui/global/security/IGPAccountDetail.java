@@ -16,7 +16,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
  */
 public interface IGPAccountDetail {
 
-    String getStringID();
+    String getName();
 
     String getOrganization();
 

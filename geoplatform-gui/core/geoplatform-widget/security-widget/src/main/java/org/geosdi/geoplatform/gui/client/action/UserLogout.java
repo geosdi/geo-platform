@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
@@ -64,10 +65,7 @@ public class UserLogout extends MenuBaseAction {
 
                     @Override
                     public void handleEvent(MessageBoxEvent be) {
-                        if (be.getButtonClicked().getText().equalsIgnoreCase(
-                                "yes")
-                                || be.getButtonClicked().getText().equalsIgnoreCase(
-                                "si")) {
+                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
                             Dispatcher.forwardEvent(
                                     GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
                             invalidateSession();

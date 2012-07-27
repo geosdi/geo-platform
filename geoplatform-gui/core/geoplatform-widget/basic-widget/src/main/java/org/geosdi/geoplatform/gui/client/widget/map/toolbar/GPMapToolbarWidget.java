@@ -54,14 +54,14 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.map.GPIconWidgetComponent;
 import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtility;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
-import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
-import org.geosdi.geoplatform.gui.configuration.toolbar.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.toolbar.MenuInToolBar;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
@@ -69,6 +69,8 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         implements IGeoPlatformToolbar {
@@ -162,7 +164,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     @Override
     public void addMenuInToolBar(MenuInToolBar tool) {
         Button buttonItem = new Button(
-                GPAccountLogged.getInstance().getStringID() + " @ "
+                GPAccountLogged.getInstance().getName() + " @ "
                 + GPAccountLogged.getInstance().getOrganization());
         buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
         buttonItem.setId(tool.getId());

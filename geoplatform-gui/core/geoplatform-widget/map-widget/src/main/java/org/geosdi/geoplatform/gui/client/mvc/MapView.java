@@ -36,25 +36,28 @@
 package org.geosdi.geoplatform.gui.client.mvc;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Controller;
+import com.extjs.gxt.ui.client.widget.Component;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
+import org.geosdi.geoplatform.gui.client.MapRegistryEnum;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
+import org.geosdi.geoplatform.gui.client.widget.map.GPGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.client.widget.scale.GPMapToolsWidget;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.mvc.Controller;
-import org.geosdi.geoplatform.gui.client.MapRegistryEnum;
-import org.geosdi.geoplatform.gui.client.widget.map.GPGeocodingWidget;
-import org.geosdi.geoplatform.gui.client.widget.scale.GPMapToolsWidget;
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class MapView extends GeoPlatformView {
 
@@ -73,9 +76,13 @@ public class MapView extends GeoPlatformView {
 
     @Override
     public void initialize() {
-        /** TODO : Think a way to have this component in Geocoding Module **/
+        /**
+         * TODO : Think a way to have this component in Geocoding Module *
+         */
         this.geocoderWidget = new GPGeocodingWidget(this.mapLayout);
-        /*******************************************************************/
+        /**
+         * ****************************************************************
+         */
         this.mapToolsWidget = new GPMapToolsWidget(this.mapLayout);
     }
 
@@ -96,21 +103,21 @@ public class MapView extends GeoPlatformView {
     }
 
     /**
-     * Activate Draw Control on Map
+     * Activate Draw Control on Map.
      */
     public void deactivateDrawControl() {
         this.mapLayout.deactivateDrawFeature();
     }
 
     /**
-     * Deactivate Draw Control on Map
+     * Deactivate Draw Control on Map.
      */
     public void activateDrawControl() {
         this.mapLayout.activateDrawFeature();
     }
 
     /**
-     * Attach GeoPlatform Toolbar to a LayoutManager
+     * Attach GeoPlatform Toolbar to a LayoutManager.
      *
      * @param event
      */
@@ -126,7 +133,7 @@ public class MapView extends GeoPlatformView {
     }
 
     /**
-     * Erase single Feature in MapLayout Vector Layer
+     * Erase single Feature in MapLayout Vector Layer.
      *
      * @param event
      */
@@ -135,14 +142,14 @@ public class MapView extends GeoPlatformView {
     }
 
     /**
-     * Update Map Size
+     * Update Map Size.
      */
     public void updateMapSize() {
         this.mapLayout.updateMapSize();
     }
 
     /**
-     * Add Layer to the Map
+     * Add Layer to the Map.
      *
      * @param layer
      */
@@ -151,18 +158,31 @@ public class MapView extends GeoPlatformView {
     }
 
     /**
-     * Redraw Vector Layer
+     * Redraw Vector Layer.
      */
     public void redrawVectorLayer() {
         this.mapLayout.redrawVectorLayer();
     }
 
     /**
-     * Draw Feature on the Map
+     * Draw Feature on the Map.
      *
      * @param feature
      */
     public void drawFeature(VectorFeature feature) {
         this.mapLayout.drawFeature(feature);
+    }
+
+    /**
+     * Update the name of the user into the toolbar.
+     *
+     * @param event contain the new name
+     */
+    public void userChangeHisName(AppEvent event) {
+        ToolBar toolBar = buttonBar.getToolBar();
+        Component component = toolBar.getItemByItemId(GuiComponentIDs.USER_MENU);
+        Button button = (Button) component;
+        String domain = button.getText();
+        button.setText(event.getData().toString() + domain.substring(domain.indexOf("@") - 1));
     }
 }

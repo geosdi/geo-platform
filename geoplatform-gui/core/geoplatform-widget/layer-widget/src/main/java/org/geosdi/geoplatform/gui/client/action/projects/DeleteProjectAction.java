@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.projects;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchWidget;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -68,8 +69,7 @@ public class DeleteProjectAction extends GeoPlatformAction<ButtonEvent> {
 
                 @Override
                 public void handleEvent(MessageBoxEvent be) {
-                    if (be.getButtonClicked().getText().equalsIgnoreCase("yes")
-                            || be.getButtonClicked().getText().equalsIgnoreCase("si")) {
+                    if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
                         searchWidget.deleteProject();
                     }
                 }

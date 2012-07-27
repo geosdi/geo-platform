@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.member;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldSetEvent;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -52,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
@@ -252,7 +254,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     @Override
     protected void manageUserData() {
         usernameField.setValue(user.getUsername());
-        roleField.setValue(user.getAuthority().toString());
+        roleField.setValue(user.getAuthority());
         nameField.setValue(user.getName());
 
         emailField.setValue(user.getEmail());
@@ -387,6 +389,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private void updateUserProperties() {
         if (newName != null) {
+            Dispatcher.forwardEvent(GeoPlatformEvents.USER_UPDATE_HIS_NAME, newName);
             user.setName(newName);
         }
         if (newEmail != null) {

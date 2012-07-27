@@ -8,8 +8,8 @@ package org.geosdi.geoplatform.gui.global.security;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
-  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public final class GPAccountLogged {
 
@@ -32,10 +32,10 @@ public final class GPAccountLogged {
 
     /**
      *
-     * @return StringID
+     * @return name
      */
-    public String getStringID() {
-        return this.accountDetail.getStringID();
+    public String getName() {
+        return this.accountDetail.getName();
     }
 
     /**

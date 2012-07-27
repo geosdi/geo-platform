@@ -51,7 +51,8 @@ public class MapController extends GeoPlatformController {
     public MapController() {
         registerEventTypes(MapWidgetEvents.ATTACH_MAP_WIDGET,
                 MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
-                MapWidgetEvents.DRAW_FEATURE, GeoPlatformEvents.UPDATE_CENTER);
+                MapWidgetEvents.DRAW_FEATURE, GeoPlatformEvents.UPDATE_CENTER,
+                GeoPlatformEvents.USER_UPDATE_HIS_NAME);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class MapController extends GeoPlatformController {
         this.view = new MapView(this);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see
@@ -78,6 +79,10 @@ public class MapController extends GeoPlatformController {
 
         if (event.getType() == MapWidgetEvents.DRAW_FEATURE) {
             onDrawFeature(event);
+        }
+
+        if (event.getType() == GeoPlatformEvents.USER_UPDATE_HIS_NAME) {
+            onUserChangeHisName(event);
         }
 
         forwardToView(view, event);
@@ -100,9 +105,16 @@ public class MapController extends GeoPlatformController {
     }
 
     /**
-     * Update Center Widget
+     * Update Center Widget.
      */
     private void onUpdateCenter() {
         ((MapView) this.view).updateMapSize();
+    }
+
+    /**
+     * Update the name of the user into the toolbar.
+     */
+    private void onUserChangeHisName(AppEvent event) {
+        ((MapView) this.view).userChangeHisName(event);
     }
 }

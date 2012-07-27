@@ -34,11 +34,6 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     }
 
     @Override
-    public String getStringID() {
-        return this.getUsername();
-    }
-
-    @Override
     public String getUsername() {
         return this.username;
     }
@@ -67,33 +62,21 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
         this.authkey = authkey;
     }
 
-    /**
-     * @return the name
-     */
     @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the email
-     */
     @Override
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
     @Override
     public void setEmail(String email) {
         this.email = email;

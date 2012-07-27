@@ -37,22 +37,23 @@ package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
-import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
  *
@@ -78,10 +79,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
 
                         @Override
                         public void handleEvent(MessageBoxEvent be) {
-                            if (be.getButtonClicked().getText().equalsIgnoreCase(
-                                    "yes")
-                                    || be.getButtonClicked().getText().equalsIgnoreCase(
-                                    "si")) {
+                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
                                 processRequest();
                             }
                         }

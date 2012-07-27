@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -79,10 +80,7 @@ public class MementoSaveCacheManager implements GPSaveCacheHandler {
 
                 @Override
                 public void handleEvent(MessageBoxEvent be) {
-                    if (be.getButtonClicked().getText().equalsIgnoreCase(
-                            "yes")
-                            || be.getButtonClicked().getText().equalsIgnoreCase(
-                            "si")) {
+                    if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
                         peekCacheEvent.setEventAfterAllSaveOperations(event);
                         LayerHandlerManager.fireEvent(peekCacheEvent);
                     } else {

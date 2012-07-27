@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.gui.client.widget.viewport;
 
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.event.*;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonBar;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
@@ -145,10 +145,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
                             new Listener<MessageBoxEvent>() {
                                 @Override
                                 public void handleEvent(MessageBoxEvent be) {
-                                    if (be.getButtonClicked().getText().equalsIgnoreCase(
-                                            "yes")
-                                            || be.getButtonClicked().getText().equalsIgnoreCase(
-                                            "si")) {
+                                    if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
 //                                        rasterSymbolizer.getColorMap().getColorMapEntryList().removeAll(viewportList);
 //                                        for (ColorMapEntry colorMapEntry : viewportList) {
 //                                            store.remove(colorMapEntry);

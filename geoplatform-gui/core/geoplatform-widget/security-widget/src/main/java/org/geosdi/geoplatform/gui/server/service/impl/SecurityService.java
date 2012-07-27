@@ -226,7 +226,7 @@ public class SecurityService implements ISecurityService {
         accountDetail.setOrganization(account.getOrganization().getName());
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;
-            accountDetail.setName(user.getUsername());
+            accountDetail.setName(user.getName());
             accountDetail.setEmail(user.getEmailAddress());
         }
         if (account.getGsAccount() != null) {

@@ -115,15 +115,18 @@ public class GPDynamicTreeContextMenu extends Menu {
 
         layerContextMenu.add(copyMenuItem);
 
-        MenuItem createViewport = new MenuItem();
-        createViewport.setText("Create Viewport");
-        createViewport.setIcon(LayerResources.ICONS.zoomToMaxExtend());
-        createViewport.addSelectionListener(new CreateViewportAction(tree));
-        layerContextMenu.add(createViewport);
-        createViewport.setId("folderViewport");
-        folderContextMenu.add(createViewport);
+        MenuItem createViewportLayerMenu = new MenuItem();
+        createViewportLayerMenu.setText("Create Viewport");
+        createViewportLayerMenu.setIcon(LayerResources.ICONS.zoomToMaxExtend());
+        createViewportLayerMenu.addSelectionListener(new CreateViewportAction(tree));
+        layerContextMenu.add(createViewportLayerMenu);
 
-//        MenuItem refreshMenuItem = new MenuItem("Refresh Layer");
+        MenuItem createViewportFolderMenu = new MenuItem();
+        createViewportFolderMenu.setText("Create Viewport");
+        createViewportFolderMenu.setIcon(LayerResources.ICONS.zoomToMaxExtend());
+        createViewportFolderMenu.addSelectionListener(new CreateViewportAction(tree));
+        folderContextMenu.add(createViewportFolderMenu);
+
         refreshTimeComboBox = new ComboBox() {
             @Override
             protected void onSelect(ModelData model, int index) {

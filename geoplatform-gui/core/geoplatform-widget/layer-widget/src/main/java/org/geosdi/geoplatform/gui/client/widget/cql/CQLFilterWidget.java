@@ -53,50 +53,49 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
  * @email nazzareno.sileno@geosdi.org
  */
 public class CQLFilterWidget extends GeoPlatformWindow {
-    
+
     private final static short WIDGET_HEIGHT = 250;
     private final static short WIDGET_WIDTH = 400;
     private final static String CQL_FILTER_HEADING = "CQL FILTER EDITOR";
     private final CQLFilterLayerMapEvent cqlFilterLayerMapEvent = new CQLFilterLayerMapEvent();
     private TextArea filterTextArea;
     private GPTreePanel<GPBeanTreeModel> treePanel;
-    
+
     public CQLFilterWidget(boolean lazy, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(lazy);
         this.treePanel = treePanel;
     }
-    
+
     @Override
     public void addComponent() {
         this.filterTextArea = new TextArea();
         super.add(this.filterTextArea);
         Button apply = new Button("Apply",
                 new SelectionListener<ButtonEvent>() {
-                    
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        GPLayerTreeModel layerElement = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-                        GPMementoSaveCache.getInstance().copyOriginalProperties(layerElement);
-                        layerElement.setCqlFilter(filterTextArea.getValue());
-                        cqlFilterLayerMapEvent.setLayerBean(layerElement);
+                        GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
+                        GPMementoSaveCache.getInstance().copyOriginalProperties(layerSelected);
+                        layerSelected.setCqlFilter(filterTextArea.getValue());
+                        cqlFilterLayerMapEvent.setLayerBean(layerSelected);
                         GPHandlerManager.fireEvent(cqlFilterLayerMapEvent);
+                        treePanel.refresh(layerSelected);
                     }
                 });
-        
+
         super.addButton(apply);
         Button close = new Button("Close",
                 new SelectionListener<ButtonEvent>() {
-                    
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         filterTextArea.clear();
                         hide();
                     }
                 });
-        
+
         super.addButton(close);
     }
-    
+
     @Override
     public void show() {
         super.show();
@@ -106,12 +105,12 @@ public class CQLFilterWidget extends GeoPlatformWindow {
             this.filterTextArea.setValue(cqlFilter);
         }
     }
-    
+
     @Override
     public void initSize() {
         super.setSize(WIDGET_WIDTH, WIDGET_HEIGHT);
     }
-    
+
     @Override
     public void setWindowProperties() {
         super.setHeading(CQL_FILTER_HEADING);

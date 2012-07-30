@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.model.state.LayerStateEnum;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 
@@ -78,11 +78,12 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      * @param label
      */
     public RasterTreeNode(ClientRasterInfo layer) {
-        super(layer);
+        super(layer, LayerStateEnum.RASTER_NO_OP.getValue());
         super.setLabel(layer.getTitle()); // Label of a vector is different
         this.setAlias(layer.getAlias());
         this.setStyles(layer.getStyles());
         this.setOpacity(layer.getOpacity());
+        this.setCqlFilter(layer.getCqlFilter());
     }
 
     /**
@@ -109,7 +110,20 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      */
     @Override
     public AbstractImagePrototype getIcon() {
-        return BasicWidgetResources.ICONS.raster();
+        return super.state.getIcon();
+    }
+
+    @Override
+    public void setRefreshTime(int refreshTime) {
+        super.state.setRefreshTime(refreshTime, this);
+    }
+
+    @Override
+    public void setCqlFilter(String cqlFilter) {
+        if (super.state != null) {
+            super.setCqlFilter(cqlFilter);
+            super.state.setCqlFilter(cqlFilter, this);
+        }
     }
 
     @Override

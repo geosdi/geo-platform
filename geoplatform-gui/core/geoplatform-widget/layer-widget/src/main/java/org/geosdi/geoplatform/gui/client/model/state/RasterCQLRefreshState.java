@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,29 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.client.model.state;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportWidget;
-import org.gwtopenmaps.openlayers.client.Map;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class ViewportAction extends MenuBaseAction {
+public class RasterCQLRefreshState implements IGPLayerTreeState {
 
-    private ViewportWidget viewportWidget;
-
-    public ViewportAction(Map map) {
-        super("Viewport", BasicWidgetResources.ICONS.viewport());
-        this.viewportWidget = new ViewportWidget(Boolean.TRUE, map);
+    @Override
+    public AbstractImagePrototype getIcon() {
+        return LayerResources.ICONS.refreshCqlLayerIcon();
     }
 
     @Override
-    public void componentSelected(MenuEvent ce) {
-        this.viewportWidget.show();
+    public void setCqlFilter(String cqlFilter, GPLayerTreeModel layer) {
+        if (cqlFilter == null || cqlFilter.isEmpty()) {
+            layer.setState(LayerStateEnum.RASTER_REFRESH_LAYER.getValue());
+        }
+    }
+
+    @Override
+    public void setRefreshTime(int refreshTime, GPLayerTreeModel layer) {
+        if (refreshTime == -1) {
+            layer.setState(LayerStateEnum.RASTER_CQL_FILTER.getValue());
+        }
     }
 }

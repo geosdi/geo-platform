@@ -54,6 +54,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.menu.*;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
 
@@ -117,14 +118,14 @@ public class GPDynamicTreeContextMenu extends Menu {
 
         MenuItem createViewportLayerMenu = new MenuItem();
         createViewportLayerMenu.setText("Create Viewport");
-        createViewportLayerMenu.setIcon(LayerResources.ICONS.zoomToMaxExtend());
-        createViewportLayerMenu.addSelectionListener(new CreateViewportAction(tree));
+        createViewportLayerMenu.setIcon(BasicWidgetResources.ICONS.viewport());
+        createViewportLayerMenu.addSelectionListener(new CreateLayerViewportAction(tree));
         layerContextMenu.add(createViewportLayerMenu);
 
         MenuItem createViewportFolderMenu = new MenuItem();
         createViewportFolderMenu.setText("Create Viewport");
-        createViewportFolderMenu.setIcon(LayerResources.ICONS.zoomToMaxExtend());
-        createViewportFolderMenu.addSelectionListener(new CreateViewportAction(tree));
+        createViewportFolderMenu.setIcon(BasicWidgetResources.ICONS.viewport());
+        createViewportFolderMenu.addSelectionListener(new CreateFolderViewportAction(tree));
         folderContextMenu.add(createViewportFolderMenu);
 
         refreshTimeComboBox = new ComboBox() {

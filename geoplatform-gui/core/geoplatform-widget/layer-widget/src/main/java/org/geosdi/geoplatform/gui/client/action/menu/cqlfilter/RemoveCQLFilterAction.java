@@ -65,10 +65,11 @@ public class RemoveCQLFilterAction extends MenuAction {
         if (itemSelected instanceof FolderTreeNode) {
             throw new IllegalArgumentException("The CQL Filter can't be applied to a folder");
         }
-        GPLayerTreeModel layerElement = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        GPMementoSaveCache.getInstance().copyOriginalProperties(layerElement);
-        layerElement.setCqlFilter("");
-        cqlFilterLayerMapEvent.setLayerBean(layerElement);
+        GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
+        GPMementoSaveCache.getInstance().copyOriginalProperties(layerSelected);
+        layerSelected.setCqlFilter("");
+        cqlFilterLayerMapEvent.setLayerBean(layerSelected);
         GPHandlerManager.fireEvent(cqlFilterLayerMapEvent);
+        treePanel.refresh(layerSelected);
     }
 }

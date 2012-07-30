@@ -26,7 +26,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class CreateViewportAction extends MenuAction {
+public class CreateFolderViewportAction extends MenuAction {
 
     private TreePanel treePanel;
     private Listener<MessageBoxEvent> message;
@@ -34,16 +34,14 @@ public class CreateViewportAction extends MenuAction {
     private FolderTreeNode selectedElement;
     private CreateViewportEvent createViewportEvent = new CreateViewportEvent();
 
-    public CreateViewportAction(final TreePanel treePanel) {
+    public CreateFolderViewportAction(final TreePanel treePanel) {
         super("CreateViewport");
         this.treePanel = treePanel;
         this.executor = new Listener() {
             @Override
             public void handleEvent(BaseEvent be) {
-                System.out.println("Gestendo l'evento");
-                execute(selectedElement.getChildren());
+                execute(selectedElement.getChildren(), selectedElement.getLabel());
                 treePanel.removeListener(GeoPlatformEvents.GP_NODE_EXPANDED, this);
-                System.out.println("Fine l'evento");
             }
         };
         this.message = new Listener<MessageBoxEvent>() {
@@ -62,19 +60,18 @@ public class CreateViewportAction extends MenuAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        List<GPLayerBean> layerList;
         GPBeanTreeModel item = (GPBeanTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
         if (item instanceof FolderTreeNode) {
-            if (!((FolderTreeNode) item).isLoaded()) {
+            FolderTreeNode selectedFolder = (FolderTreeNode) item;
+            if (!selectedFolder.isLoaded()) {
                 this.selectedElement = (FolderTreeNode) item;
                 this.confirmExpandingMessage();
             } else {
-                this.execute(((FolderTreeNode) item).getChildren());
+                this.execute(selectedFolder.getChildren(), selectedFolder.getLabel());
             }
         } else {
-            layerList = Lists.newArrayList((GPLayerBean) item);
-            createViewportEvent.setLayerList(layerList);
-            MapHandlerManager.fireEvent(createViewportEvent);
+            throw new IllegalArgumentException("The CreateFolderViewportAction can "
+                    + "take only folder and not layer");
         }
     }
 
@@ -88,8 +85,9 @@ public class CreateViewportAction extends MenuAction {
         return layerList;
     }
 
-    private void execute(List<ModelData> modelDataList) {
+    private void execute(List<ModelData> modelDataList, String folderName) {
         createViewportEvent.setLayerList(generateLayerList(modelDataList));
+        createViewportEvent.setViewportName(folderName);
         MapHandlerManager.fireEvent(createViewportEvent);
     }
 

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.viewport;
 
-import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -215,7 +214,6 @@ public class ViewportGridFieldSet extends GPFieldSet {
 
         buttonBar.add(saveButton);
         this.add(buttonBar, new FormData("100%"));
-        this.setScrollMode(Style.Scroll.NONE);
     }
 
     private Widget createViewportFilter() {

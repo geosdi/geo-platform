@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -45,7 +46,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 
@@ -101,6 +102,17 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
         return null;
     }
 
+    @Override
+    public void setRefreshTime(int refreshTime) {
+        //this.state.setRefreshTime();
+    }
+
+//    @Override
+//    public void setCqlFilter(String cqlFilter) {
+//        super.setCqlFilter(cqlFilter);
+//        this.state.setCqlFilter(cqlFilter);
+//    }
+    
     @Override
     public void accept(IVisitor visitor) {
         visitor.visitVector(this);

@@ -84,42 +84,6 @@ public class ViewportWidget extends GeoPlatformWindow implements CreateViewportH
         this.centralPanel.add(this.viewportGridFieldSet);
         this.centralPanel.setScrollMode(Style.Scroll.NONE);
         super.add(this.centralPanel);
-//        this.store.add(GPMapBaseLayerFactory.getBaseLayerList());
-//        Button saveButton = new Button("Save", BasicWidgetResources.ICONS.save(), new SelectionListener<ButtonEvent>() {
-//            @Override
-//            public void componentSelected(ButtonEvent ce) {
-//                MapRemote.Util.getInstance().saveOrUpdateViewportList(null, new AsyncCallback<Object>() {
-//                    @Override
-//                    public void onFailure(Throwable caught) {
-//                        GeoPlatformMessage.errorMessage("Error saving",
-//                                "An error occurred while making the requested connection.\n"
-//                                + "Verify network connections and try again."
-//                                + "\nIf the problem persists contact your system administrator.");
-//                        LayoutManager.getInstance().getStatusMap().setStatus(
-//                                "Error saving the viewport list.",
-//                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-//                        System.out.println("Error saving the viewport list: " + caught.toString()
-//                                + " data: " + caught.getMessage());
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Object result) {
-//                        LayoutManager.getInstance().getStatusMap().setStatus(
-//                                "Succesfully saved the viewport list.",
-//                                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-//                    }
-//                });
-//            }
-//        });
-//
-//        Button applyButton = new Button("Apply/Close", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
-//            @Override
-//            public void componentSelected(ButtonEvent ce) {
-////                BaseLayerWidget.super.hide();
-//            }
-//        });
-//        super.addButton(saveButton);
-//        super.addButton(applyButton);
     }
 
     @Override
@@ -171,7 +135,7 @@ public class ViewportWidget extends GeoPlatformWindow implements CreateViewportH
     }
 
     @Override
-    public void onCreateViewport(List<GPLayerBean> layerList) {
+    public void onCreateViewport(List<GPLayerBean> layerList, String viewportName) {
         Bounds bounds = ViewportUtility.calculateMaxBound(layerList, map);
 
         Projection currentProjection = new Projection(MapLayoutWidget.EPSG_4326);
@@ -183,7 +147,7 @@ public class ViewportWidget extends GeoPlatformWindow implements CreateViewportH
         bounds.transform(destinationProjection, currentProjection);
 
         BBoxClientInfo bbox = ViewportUtility.generateBBOXFromBounds(bounds);
-        this.viewportToAdd = new GPClientViewport("New Viewport",
+        this.viewportToAdd = new GPClientViewport(viewportName,
                 "Insert description", bbox, zoom, Boolean.FALSE);
         this.show();
     }

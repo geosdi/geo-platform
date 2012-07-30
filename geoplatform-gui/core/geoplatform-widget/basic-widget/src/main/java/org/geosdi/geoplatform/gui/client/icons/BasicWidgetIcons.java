@@ -112,4 +112,7 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("role.png")
     AbstractImagePrototype role();
+
+    @Resource("viewport.png")
+    AbstractImagePrototype viewport();
 }

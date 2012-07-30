@@ -102,8 +102,10 @@ class ViewportServiceImpl {
         for (GPViewport viewport : oldViewportList) {
             this.viewportDao.remove(viewport);
         }
-        for (GPViewport viewport : viewportList) {
-            this.insertViewport(accountProjectId, viewport);
+        if (viewportList != null) {
+            for (GPViewport viewport : viewportList) {
+                this.insertViewport(accountProjectId, viewport);
+            }
         }
     }
 

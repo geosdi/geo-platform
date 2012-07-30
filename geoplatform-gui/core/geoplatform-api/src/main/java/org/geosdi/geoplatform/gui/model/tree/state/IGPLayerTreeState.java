@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,29 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.model.tree.state;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportWidget;
-import org.gwtopenmaps.openlayers.client.Map;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class ViewportAction extends MenuBaseAction {
+public interface IGPLayerTreeState {
 
-    private ViewportWidget viewportWidget;
+    AbstractImagePrototype getIcon();
 
-    public ViewportAction(Map map) {
-        super("Viewport", BasicWidgetResources.ICONS.viewport());
-        this.viewportWidget = new ViewportWidget(Boolean.TRUE, map);
-    }
+    void setCqlFilter(String cqlFilter, GPLayerTreeModel layer);
 
-    @Override
-    public void componentSelected(MenuEvent ce) {
-        this.viewportWidget.show();
-    }
+    void setRefreshTime(int refreshTime, GPLayerTreeModel layer);
 }

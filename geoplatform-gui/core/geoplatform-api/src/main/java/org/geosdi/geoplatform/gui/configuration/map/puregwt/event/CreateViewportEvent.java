@@ -47,7 +47,8 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 public class CreateViewportEvent extends GwtEvent<CreateViewportHandler> {
 
     private List<GPLayerBean> layerList;
-
+    private String viewportName;
+    
     @Override
     public Type<CreateViewportHandler> getAssociatedType() {
         return CreateViewportHandler.TYPE;
@@ -55,10 +56,14 @@ public class CreateViewportEvent extends GwtEvent<CreateViewportHandler> {
 
     @Override
     protected void dispatch(CreateViewportHandler handler) {
-        handler.onCreateViewport(layerList);
+        handler.onCreateViewport(layerList, viewportName);
     }
 
     public void setLayerList(List<GPLayerBean> layerList) {
         this.layerList = layerList;
+    }
+
+    public void setViewportName(String viewportName) {
+        this.viewportName = viewportName;
     }
 }

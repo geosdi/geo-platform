@@ -80,8 +80,9 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
         if (!(itemSelected instanceof GPLayerTreeModel)) {
             throw new IllegalArgumentException("It is possible to refresh only layers");
         }
+        final GPLayerTreeModel layerSelected = (GPLayerTreeModel)itemSelected;
         final LayerRefreshTimeEnum refreshTimeEnum = se.getSelectedItem().get(LayerRefreshTimeValue.REFRESH_TIME_KEY);
-        LayerRemote.Util.getInstance().setLayerRefreshTime((String) Registry.get(GlobalRegistryEnum.EMITE_RESOURCE.getValue()), itemSelected.getUUID(),
+        LayerRemote.Util.getInstance().setLayerRefreshTime((String) Registry.get(GlobalRegistryEnum.EMITE_RESOURCE.getValue()), layerSelected.getUUID(),
                 refreshTimeEnum.getValue(), new AsyncCallback<Object>() {
 
             @Override
@@ -102,7 +103,8 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "The Layer will be reloaded every " + refreshTimeEnum.getValue() + " seconds",
                         SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                //Cambiare icona al layer
+                layerSelected.setRefreshTime(refreshTimeEnum.getValue());
+                treePanel.refresh(layerSelected);
             }
         });
     }

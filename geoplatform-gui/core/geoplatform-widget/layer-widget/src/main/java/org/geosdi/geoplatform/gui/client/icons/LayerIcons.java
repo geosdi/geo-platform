@@ -40,7 +40,7 @@ import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 @SuppressWarnings("deprecation")
@@ -84,13 +84,13 @@ public interface LayerIcons extends ImageBundle {
 
     @Resource("tag.png")
     AbstractImagePrototype exportToGML();
-    
+
     @Resource("CSV.png")
     AbstractImagePrototype exportToCSV();
-    
+
     @Resource("json.png")
     AbstractImagePrototype exportToJSON();
-    
+
     @Resource("rss.png")
     AbstractImagePrototype exportToRSS();
 
@@ -111,31 +111,40 @@ public interface LayerIcons extends ImageBundle {
 
     @Resource("google_earth.png")
     AbstractImagePrototype loadKmlFromURL();
-    
+
     @Resource("editFolder.png")
     AbstractImagePrototype editFolder();
-    
+
     @Resource("GPProject.png")
     AbstractImagePrototype gpProject();
-    
+
     @Resource("addLayers.png")
     AbstractImagePrototype addLayers();
-    
+
     @Resource("map_add.png")
     AbstractImagePrototype mappAdd();
-    
+
     @Resource("project_add.png")
     AbstractImagePrototype projectAdd();
-    
+
     @Resource("project_delete.png")
     AbstractImagePrototype projectDelete();
-    
+
     @Resource("arrow_refresh.png")
     AbstractImagePrototype layerRefresh();
-    
+
     @Resource("filter.png")
     AbstractImagePrototype cqlFilter();
-    
+
     @Resource("filter_delete.png")
     AbstractImagePrototype cqlFilterDelete();
+
+    @Resource("filter_layer.png")
+    AbstractImagePrototype cqlFilterLayerIcon();
+
+    @Resource("refresh_layer_cql.png")
+    AbstractImagePrototype refreshCqlLayerIcon();
+
+    @Resource("refresh_layer.png")
+    AbstractImagePrototype refreshLayerIcon();
 }

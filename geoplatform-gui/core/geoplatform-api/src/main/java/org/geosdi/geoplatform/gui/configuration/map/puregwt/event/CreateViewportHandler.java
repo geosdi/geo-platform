@@ -48,5 +48,5 @@ public interface CreateViewportHandler extends EventHandler {
 
     Type<CreateViewportHandler> TYPE = new Type<CreateViewportHandler>();
 
-    void onCreateViewport(List<GPLayerBean> layerList);
+    void onCreateViewport(List<GPLayerBean> layerList, String viewportName);
 }

@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.client.model.state.LayerStateEnum;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
@@ -78,12 +79,11 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      * @param label
      */
     public RasterTreeNode(ClientRasterInfo layer) {
-        super(layer, LayerStateEnum.RASTER_NO_OP.getValue());
+        super(layer);
         super.setLabel(layer.getTitle()); // Label of a vector is different
         this.setAlias(layer.getAlias());
         this.setStyles(layer.getStyles());
         this.setOpacity(layer.getOpacity());
-        this.setCqlFilter(layer.getCqlFilter());
     }
 
     /**
@@ -110,20 +110,26 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      */
     @Override
     public AbstractImagePrototype getIcon() {
-        return super.state.getIcon();
+        return this.getState().getIcon();
+    }
+
+    @Override
+    public IGPLayerTreeState getState() {
+        if (super.state == null) {
+            super.state = LayerStateEnum.RASTER_NO_OP.getValue();
+        }
+        return super.state;
     }
 
     @Override
     public void setRefreshTime(int refreshTime) {
-        super.state.setRefreshTime(refreshTime, this);
+        this.getState().setRefreshTime(refreshTime, this);
     }
 
     @Override
     public void setCqlFilter(String cqlFilter) {
-        if (super.state != null) {
-            super.setCqlFilter(cqlFilter);
-            super.state.setCqlFilter(cqlFilter, this);
-        }
+        super.setCqlFilter(cqlFilter);
+        this.getState().setCqlFilter(cqlFilter, this);
     }
 
     @Override

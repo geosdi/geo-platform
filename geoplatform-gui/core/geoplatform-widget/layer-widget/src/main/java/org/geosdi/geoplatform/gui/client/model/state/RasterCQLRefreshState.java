@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.client.model.state;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue.LayerRefreshTimeEnum;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 
@@ -61,7 +61,7 @@ public class RasterCQLRefreshState implements IGPLayerTreeState {
 
     @Override
     public void setRefreshTime(int refreshTime, GPLayerTreeModel layer) {
-        if (refreshTime == -1) {
+        if (refreshTime == LayerRefreshTimeEnum.NO_REFRESH.getValue()) {
             layer.setState(LayerStateEnum.RASTER_CQL_FILTER.getValue());
         }
     }

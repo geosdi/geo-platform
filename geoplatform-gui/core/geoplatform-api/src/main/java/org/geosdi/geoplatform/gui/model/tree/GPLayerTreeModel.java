@@ -51,20 +51,20 @@ import org.geosdi.geoplatform.gui.observable.Observable;
  */
 public abstract class GPLayerTreeModel extends GPBeanTreeModel
         implements GPLayerBean {
-    
+
     private static final long serialVersionUID = -6964624685883651246L;
-    
+
     public enum GPLayerKeyValue {
-        
+
         TITLE("title"), ABSTRACT("abstractText"),
         ALIAS("alias"), SERVER("dataSource");
         //
         private String value;
-        
+
         GPLayerKeyValue(String theValue) {
             this.value = theValue;
         }
-        
+
         @Override
         public String toString() {
             return this.value;
@@ -84,24 +84,10 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     protected IGPLayerTreeState state;
     //
     private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
-    
+
     protected GPLayerTreeModel() {
     }
-    
-    protected GPLayerTreeModel(GPLayerClientInfo layer, IGPLayerTreeState state) {
-        super(layer.getId(), layer.getzIndex(), layer.isChecked());
-        this.state = state;
-        setTitle(layer.getTitle());
-        this.name = layer.getLayerName();
-        setAbstractText(layer.getAbstractText());
-        setDataSource(layer.getDataSource());
-        setAlias(layer.getAlias());
-        this.crs = layer.getCrs();
-        this.bbox = layer.getBbox();
-        this.layerType = layer.getLayerType();
-        this.cqlFilter = layer.getCqlFilter();
-    }
-    
+
     protected GPLayerTreeModel(GPLayerClientInfo layer) {
         super(layer.getId(), layer.getzIndex(), layer.isChecked());
         setTitle(layer.getTitle());
@@ -112,7 +98,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
         this.crs = layer.getCrs();
         this.bbox = layer.getBbox();
         this.layerType = layer.getLayerType();
-        this.cqlFilter = layer.getCqlFilter();
+        this.setCqlFilter(layer.getCqlFilter());
     }
 
     /**
@@ -147,12 +133,12 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     public void setName(String name) {
         this.name = name;
     }
-    
+
     @Override
     public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
         this.styles = styles;
     }
-    
+
     @Override
     public ArrayList<GPStyleStringBeanModel> getStyles() {
         return this.styles;
@@ -257,46 +243,48 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
     }
-    
+
     @Override
     public String getCqlFilter() {
         return cqlFilter;
     }
-    
+
     @Override
     public void setCqlFilter(String cqlFilter) {
         this.cqlFilter = cqlFilter;
     }
-    
+
     @Override
     public void setId(Long id) {
         super.setId(id);
         observable.setChanged();
         observable.notifyObservers(id);
     }
-    
+
     @Override
     public String getLabel() {
         return ((getAlias() != null) && (!getAlias().equals("")))
                 ? getAlias() : super.getLabel();
     }
-    
+
     public void setState(IGPLayerTreeState state) {
         this.state = state;
     }
-    
+
+    public abstract IGPLayerTreeState getState();
+
     public abstract void setRefreshTime(int refreshTime);
-    
+
     public ObservableFolderTreeNode getObservable() {
         return observable;
     }
-    
+
     public void setObservable(ObservableFolderTreeNode observable) {
         this.observable = observable;
     }
-    
+
     public class ObservableFolderTreeNode extends Observable {
-        
+
         @Override
         protected synchronized void setChanged() {
             super.setChanged();

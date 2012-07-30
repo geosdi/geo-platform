@@ -41,9 +41,11 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
+import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
@@ -52,8 +54,11 @@ import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowEditor;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import com.google.common.collect.Lists;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Widget;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
@@ -81,6 +86,7 @@ public class ManageServerWidget extends Window {
     private Button deleteServerButton = new Button("Delete Server");
     private DisplayServerWidget displayServerWidget;
     private GPCheckColumnConfig checkColumn;
+    private StoreFilterField<GPServerBeanModel> serverFilter;
 
     public ManageServerWidget(DisplayServerWidget displayServerWidget, boolean lazy) {
         this.displayServerWidget = displayServerWidget;
@@ -94,7 +100,6 @@ public class ManageServerWidget extends Window {
         this.mask("Loading Servers");
         LayoutManager.getInstance().getStatusMap().setBusy("Loading Layers.....");
         GeoPlatformOGCRemote.Util.getInstance().loadServers(new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 ManageServerWidget.this.unmask();
@@ -111,10 +116,29 @@ public class ManageServerWidget extends Window {
         });
     }
 
+    private Widget createServerFilter() {
+        this.serverFilter = new StoreFilterField<GPServerBeanModel>() {
+            @Override
+            protected boolean doSelect(Store<GPServerBeanModel> store, GPServerBeanModel parent,
+                    GPServerBeanModel record, String property, String filter) {
+                String serverAlias = record.getAlias().toString().toLowerCase();
+                String serverURL = record.getUrlServer().toString().toLowerCase();
+                if (serverAlias.contains(filter.toLowerCase()) || serverURL.contains(filter.toLowerCase())) {
+                    return Boolean.TRUE;
+                }
+                return Boolean.FALSE;
+            }
+        };
+        serverFilter.setEmptyText("Type the server to search");
+        serverFilter.bind(this.store);
+        serverFilter.setFieldLabel("Filter");
+        return this.serverFilter;
+    }
+
     private void addComponentToForm() {
         super.setIcon(ServerWidgetResources.ICONS.addServer());
-        super.setLayout(new FlowLayout());
-        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        super.setLayout(new FormLayout());
+        List<ColumnConfig> configs = Lists.newArrayList();
 
         ColumnConfig aliasColumn = new ColumnConfig();
         aliasColumn.setId("alias");
@@ -146,7 +170,6 @@ public class ManageServerWidget extends Window {
         final ColumnModel columnModel = new ColumnModel(configs);
         final Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store, columnModel);
         RowEditor<GPServerBeanModel> rowEditor = new RowEditor<GPServerBeanModel>() {
-
             @Override
             protected void onEnter(ComponentEvent ce) {
                 System.out.println("Selected null: ");
@@ -170,8 +193,9 @@ public class ManageServerWidget extends Window {
         grid.addPlugin(checkColumn);
         grid.addPlugin(rowEditor);
         grid.getAriaSupport().setLabelledBy(super.getHeader().getId() + "-label");
-        grid.setHeight(300);
+        grid.setHeight(200);
         super.add(grid);
+        super.add(this.createServerFilter());
         this.addButtonsToTheWindow(rowEditor);
     }
 
@@ -179,7 +203,6 @@ public class ManageServerWidget extends Window {
         ToolBar toolBar = new ToolBar();
         Button addServerButton = new Button("Add Server");
         addServerButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 GPServerBeanModel server = new GPServerBeanModel();
@@ -196,7 +219,6 @@ public class ManageServerWidget extends Window {
         toolBar.add(addServerButton);
         deleteServerButton.setEnabled(false);
         deleteServerButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
@@ -216,16 +238,15 @@ public class ManageServerWidget extends Window {
         super.setTopComponent(toolBar);
         super.setButtonAlign(HorizontalAlignment.RIGHT);
         super.addButton(new Button("Reset", new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
                 store.rejectChanges();
+                serverFilter.clear();
                 checkColumn.manageDeleteButton();
             }
         }));
         super.addButton(new Button("Save", new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
@@ -256,7 +277,7 @@ public class ManageServerWidget extends Window {
         super.setModal(true);
         super.setHeading("Server Manager");
         super.setBorders(false);
-        super.setSize(600, 300);
+        super.setSize(600, 325);
     }
 
     @Override
@@ -276,7 +297,7 @@ public class ManageServerWidget extends Window {
 
     /**
      * Internal Class for Business Logic
-     * 
+     *
      */
     private class PerformOperation implements IGPOAuth2AddServerHandler {
 
@@ -295,7 +316,6 @@ public class ManageServerWidget extends Window {
         private void deleteServer(final GPServerBeanModel server) {
             if (server.getId() != null) {
                 GeoPlatformOGCRemote.Util.getInstance().deleteServer(server.getId(), new AsyncCallback<Boolean>() {
-
                     @Override
                     public void onFailure(Throwable caught) {
                         GeoPlatformMessage.errorMessage("Error on Deleting Server",
@@ -329,7 +349,6 @@ public class ManageServerWidget extends Window {
                     record.get("urlServer").toString().trim(),
                     GPAccountLogged.getInstance().getOrganization(),
                     new AsyncCallback<GPServerBeanModel>() {
-
                         @Override
                         public void onFailure(Throwable caught) {
                             verifyEndOperation();

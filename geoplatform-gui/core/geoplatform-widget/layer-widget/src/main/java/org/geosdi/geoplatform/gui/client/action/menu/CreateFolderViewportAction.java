@@ -86,9 +86,16 @@ public class CreateFolderViewportAction extends MenuAction {
     }
 
     private void execute(List<ModelData> modelDataList, String folderName) {
-        createViewportEvent.setLayerList(generateLayerList(modelDataList));
-        createViewportEvent.setViewportName(folderName);
-        MapHandlerManager.fireEvent(createViewportEvent);
+        List<GPLayerBean> layerList = generateLayerList(modelDataList);
+        if (layerList.size() > 0) {
+            createViewportEvent.setLayerList(generateLayerList(modelDataList));
+            createViewportEvent.setViewportName(folderName);
+            MapHandlerManager.fireEvent(createViewportEvent);
+        } else {
+            GeoPlatformMessage.errorMessage("No Layer(s)",
+                    "The selected folder does not contains layer(s).\n"
+                    + "Impossible to create a viewport without layers.");
+        }
     }
 
     /**

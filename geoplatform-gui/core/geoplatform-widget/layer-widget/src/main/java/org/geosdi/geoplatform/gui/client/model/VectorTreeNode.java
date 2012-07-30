@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
@@ -103,6 +103,12 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
     }
 
     @Override
+    public IGPLayerTreeState getState() {
+        //TODO: Change this implementation as the RasterTreeNode
+        return super.state;
+    }
+
+    @Override
     public void setRefreshTime(int refreshTime) {
         //this.state.setRefreshTime();
     }
@@ -112,7 +118,6 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 //        super.setCqlFilter(cqlFilter);
 //        this.state.setCqlFilter(cqlFilter);
 //    }
-    
     @Override
     public void accept(IVisitor visitor) {
         visitor.visitVector(this);

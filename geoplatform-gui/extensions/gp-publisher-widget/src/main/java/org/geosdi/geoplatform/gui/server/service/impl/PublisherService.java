@@ -59,13 +59,15 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
-import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IPublisherService;
@@ -118,7 +120,11 @@ public class PublisherService implements IPublisherService {
                 + " - USERNAME CLUSTER RELOAD " + userNameClusterReload
                 + " - PASSWORD CLUSTER RELOAD " + passwordClusterReload);
         localContext = new BasicHttpContext();
-        this.httpclient = new DefaultHttpClient();
+        HttpParams params = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(params, 60000);
+        HttpConnectionParams.setSoTimeout(params, 60000);
+        
+        this.httpclient = new DefaultHttpClient(params);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
         credsProvider.setCredentials(
                 new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
@@ -216,8 +222,8 @@ public class PublisherService implements IPublisherService {
     }
 
     /**
-     * 
-     * @param geoPlatformPublishClient 
+     *
+     * @param geoPlatformPublishClient
      */
     @Autowired
     public void setGeoPlatformPublishClient(

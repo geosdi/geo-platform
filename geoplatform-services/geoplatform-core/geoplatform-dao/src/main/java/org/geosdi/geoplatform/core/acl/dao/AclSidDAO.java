@@ -36,12 +36,10 @@
 package org.geosdi.geoplatform.core.acl.dao;
 
 import java.util.List;
-
 import org.geosdi.geoplatform.core.acl.AclSid;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
  */
 public interface AclSidDAO {
 
@@ -59,5 +57,7 @@ public interface AclSidDAO {
 
     public AclSid findBySid(String sid, boolean principal);
 
-    public List<AclSid> findByPrincipal(boolean principal);
+    public AclSid findBySid(String sid, boolean principal, String organization);
+
+    public List<AclSid> findByPrincipal(boolean principal, String organization);
 }

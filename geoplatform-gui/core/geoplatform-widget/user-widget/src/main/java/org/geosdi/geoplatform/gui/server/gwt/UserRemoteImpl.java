@@ -96,8 +96,8 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
-    public ArrayList<String> getAllRoles() {
-        return userService.getAllRoles(super.getThreadLocalRequest());
+    public ArrayList<String> getAllRoles(String organization) {
+        return userService.getAllRoles(organization, super.getThreadLocalRequest());
     }
 
     @Override
@@ -106,19 +106,19 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
-    public HashMap<String, Boolean> getRolePermission(String role)
+    public HashMap<String, Boolean> getRolePermission(String role, String organization)
             throws GeoPlatformException {
-        return userService.getRolePermission(role, super.getThreadLocalRequest());
+        return userService.getRolePermission(role, organization, super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean updateRolePermission(String role, HashMap<String, Boolean> permissionMap)
+    public boolean updateRolePermission(String role, String organization, HashMap<String, Boolean> permissionMap)
             throws GeoPlatformException {
-        return userService.updateRolePermission(role, permissionMap, super.getThreadLocalRequest());
+        return userService.updateRolePermission(role, organization, permissionMap, super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveRole(String role) throws GeoPlatformException {
-        return userService.saveRole(role, super.getThreadLocalRequest());
+    public boolean saveRole(String role, String organization) throws GeoPlatformException {
+        return userService.saveRole(role, organization, super.getThreadLocalRequest());
     }
 }

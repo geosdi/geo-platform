@@ -53,9 +53,11 @@ import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
+import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
@@ -72,6 +74,7 @@ class AclServiceImpl {
     // DAO
     private GPAccountDAO accountDao;
     private GPAuthorityDAO authorityDao;
+    private GPOrganizationDAO organizationDao;
     // ACL DAO
     private AclClassDAO classDao;
     private AclSidDAO sidDao;
@@ -81,56 +84,56 @@ class AclServiceImpl {
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
-     * @param accountDao
-     *          the accountDao to set
+     * @param accountDao the accountDao to set
      */
     public void setAccountDao(GPAccountDAO accountDao) {
         this.accountDao = accountDao;
     }
 
     /**
-     * @param authorityDao
-     *          the authorityDao to set
+     * @param authorityDao the authorityDao to set
      */
     public void setAuthorityDao(GPAuthorityDAO authorityDao) {
         this.authorityDao = authorityDao;
     }
 
     /**
-     * @param classDao
-     *          the classDao to set
+     * @param organizationDao the organizationDao to set
+     */
+    void setOrganizationDao(GPOrganizationDAO organizationDao) {
+        this.organizationDao = organizationDao;
+    }
+
+    /**
+     * @param classDao the classDao to set
      */
     public void setClassDao(AclClassDAO classDao) {
         this.classDao = classDao;
     }
 
     /**
-     * @param sidDao
-     *          the sidDao to set
+     * @param sidDao the sidDao to set
      */
     public void setSidDao(AclSidDAO sidDao) {
         this.sidDao = sidDao;
     }
 
     /**
-     * @param objectIdentityDao
-     *          the objectIdentityDao to set
+     * @param objectIdentityDao the objectIdentityDao to set
      */
     public void setObjectIdentityDao(AclObjectIdentityDAO objectIdentityDao) {
         this.objectIdentityDao = objectIdentityDao;
     }
 
     /**
-     * @param entryDao
-     *          the entryDao to set
+     * @param entryDao the entryDao to set
      */
     public void setEntryDao(AclEntryDAO entryDao) {
         this.entryDao = entryDao;
     }
 
     /**
-     * @param guiComponentDao
-     *          the guiComponentDao to set
+     * @param guiComponentDao the guiComponentDao to set
      */
     public void setGuiComponentDao(GuiComponentDAO guiComponentDao) {
         this.guiComponentDao = guiComponentDao;
@@ -140,8 +143,8 @@ class AclServiceImpl {
     /**
      * @see GeoPlatformService#getAllRoles()
      */
-    public List<String> getAllRoles() {
-        List<AclSid> sids = sidDao.findByPrincipal(false);
+    public List<String> getAllRoles(String organization) throws ResourceNotFoundFault {
+        List<AclSid> sids = sidDao.findByPrincipal(false, organization);
 
         List<String> roles = new ArrayList<String>(sids.size());
         for (AclSid sid : sids) {
@@ -172,7 +175,7 @@ class AclServiceImpl {
         Map<String, Boolean> permissionMap = mapComponentPermission.getPermissionMap();
 
         // Retrieve the Sid corresponding to the Application ID
-        AclSid sid = this.findSid(appID, true);
+        AclSid sid = this.findSid(appID, true, null);
         // Retrieve the ACEs of the Sid
         List<AclEntry> entries = entryDao.findBySid(sid.getId());
         logger.trace("\n*** #Entries: {} ***", entries.size());
@@ -217,7 +220,8 @@ class AclServiceImpl {
             String nameAuthority = authority.getAuthority();
             logger.trace("\n*** nameAuthority: {} ***", nameAuthority);
 
-            this.elaborateGuiComponentACEs(nameAuthority, mapComponentPermission.getPermissionMap());
+            this.elaborateGuiComponentACEs(nameAuthority, account.getOrganization().getName(),
+                                           mapComponentPermission.getPermissionMap());
         }
         return mapComponentPermission;
     }
@@ -225,20 +229,20 @@ class AclServiceImpl {
     /**
      * @see GeoPlatformService#getRolePermission(java.lang.String)
      */
-    public GuiComponentsPermissionMapData getRolePermission(String role)
+    public GuiComponentsPermissionMapData getRolePermission(String role, String organization)
             throws ResourceNotFoundFault {
         GuiComponentsPermissionMapData mapComponentPermission = new GuiComponentsPermissionMapData();
 
-        this.elaborateGuiComponentACEs(role, mapComponentPermission.getPermissionMap());
+        this.elaborateGuiComponentACEs(role, organization, mapComponentPermission.getPermissionMap());
 
         return mapComponentPermission;
     }
 
-    private void elaborateGuiComponentACEs(String sidName,
-                                           Map<String, Boolean> permissionMap)
+    private void elaborateGuiComponentACEs(String sidName, String organization,
+            Map<String, Boolean> permissionMap)
             throws ResourceNotFoundFault {
-        // Retrieve the Sid corresponding to the Role (Authority) name
-        AclSid sid = this.findSid(sidName, false);
+        // Retrieve the Sid corresponding to the Role (Authority) name and the relative organization
+        AclSid sid = this.findSid(sidName, false, organization);
         // Retrieve the ACEs of the Sid
         List<AclEntry> entries = entryDao.findBySid(sid.getId());
         logger.trace("\n*** #Entries: {} ***", entries.size());
@@ -268,14 +272,15 @@ class AclServiceImpl {
     }
 
     /**
-     * @see GeoPlatformService#updateRolePermission(java.lang.String, org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData)
+     * @see GeoPlatformService#updateRolePermission(java.lang.String,
+     * org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData)
      */
-    public boolean updateRolePermission(String role,
-                                        GuiComponentsPermissionMapData mapComponentPermission)
+    public boolean updateRolePermission(String role, String organization,
+            GuiComponentsPermissionMapData mapComponentPermission)
             throws ResourceNotFoundFault {
         logger.debug("\n*** Role: {} ***", role);
         // Retrieve the Sid corresponding to the Role (Authority) name
-        AclSid sid = this.findSid(role, false);
+        AclSid sid = this.findSid(role, false, organization);
 
         AclClass clazz = classDao.findByClass(GuiComponent.class.getName());
         Permission permission = GeoPlatformPermission.ENABLE;
@@ -307,8 +312,27 @@ class AclServiceImpl {
         return true;
     }
 
+    /**
+     * @see GeoPlatformService#saveRole(java.lang.String, java.lang.String)
+     */
+    public boolean saveRole(String role, String organization) throws IllegalParameterFault {
+        AclSid sid = sidDao.findBySid(role, false, organization);
+        if (sid != null) {
+            throw new IllegalParameterFault("Authority (Role) \"" + role + "\" already exist");
+        }
+
+        GPOrganization org = organizationDao.findByName(organization);
+        if(org == null){
+            throw new IllegalParameterFault("Organization \"" + organization + "\" not found");
+        }
+
+        sid = new AclSid(false, role, org);
+        sidDao.persist(sid);
+        return true;
+    }
+
     private boolean manageExistingEntry(List<AclEntry> aces, AclSid sid,
-                                        Permission permission, Boolean granting) {
+            Permission permission, Boolean granting) {
         for (AclEntry ace : aces) {
             if (ace.getAclSid().equals(sid)
                     && ace.getMask().equals(permission.getMask())) {
@@ -327,24 +351,19 @@ class AclServiceImpl {
         return false;
     }
 
-    private AclSid findSid(String sidName, boolean principal)
+    private AclSid findSid(String sidName, boolean principal, String organization)
             throws ResourceNotFoundFault {
-        AclSid sid = sidDao.findBySid(sidName, principal);
+        AclSid sid;
+        if (organization == null) {
+            sid = sidDao.findBySid(sidName, principal);
+        } else {
+            sid = sidDao.findBySid(sidName, principal, organization);
+        }
+
         if (sid == null) {
             throw new ResourceNotFoundFault("Authority (Role) \"" + sidName + "\" not found");
         }
         logger.trace("\n*** AclSid:\n{}\n***", sid);
         return sid;
-    }
-
-    public boolean saveRole(String role) throws IllegalParameterFault {
-        AclSid sid = sidDao.findBySid(role, false);
-        if (sid != null) {
-            throw new IllegalParameterFault("Authority (Role) \"" + role + "\" already exist");
-        }
-
-        sid = new AclSid(false, role);
-        sidDao.persist(sid);
-        return true;
     }
 }

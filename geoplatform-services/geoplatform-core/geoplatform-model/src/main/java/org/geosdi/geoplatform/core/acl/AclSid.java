@@ -40,13 +40,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * The <tt>AclSid</tt> (SID is an acronym for "Security Identity") domain class
@@ -72,8 +75,8 @@ public class AclSid {
     /**
      * Standard security concept which represents only an authenticated entity. 
      * 
-     * If Id refers to a principal name (username) will be true,
-     * if refers to a GrantedAuthority (role name) will be false
+     * If Id refers to a principal name (username) will be true.
+     * If refers to a GrantedAuthority (role name) will be false.
      */
     @Column(nullable = false)
     private boolean principal = true;
@@ -83,6 +86,10 @@ public class AclSid {
     @Column(nullable = false)
     @Index(name = "ACL_SID_INDEX")
     private String sid;
+    //
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPOrganization organization;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor methods">
     public AclSid() {
@@ -99,6 +106,21 @@ public class AclSid {
     public AclSid(boolean principal, String sid) {
         this.principal = principal;
         this.sid = sid;
+    }
+
+    /**
+     * 
+     * @param principal
+     * @param sid
+     * @param organization
+     * 
+     * @see #principal
+     * @see #sid
+     */
+    public AclSid(boolean principal, String sid, GPOrganization organization) {
+        this.principal = principal;
+        this.sid = sid;
+        this.organization = organization;
     }
     //</editor-fold>
 
@@ -152,6 +174,20 @@ public class AclSid {
     public void setSid(String sid) {
         this.sid = sid;
     }
+
+    /**
+     * @return the organization
+     */
+    public GPOrganization getOrganization() {
+        return organization;
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    public void setOrganization(GPOrganization organization) {
+        this.organization = organization;
+    }
     //</editor-fold>
 
     /**
@@ -164,8 +200,9 @@ public class AclSid {
         StringBuilder str = new StringBuilder("AclSid {");
         str.append("id=").append(id);
         str.append(", principal=").append(principal);
-        str.append(", sid=").append(sid).append('}');
-        return str.toString();
+        str.append(", sid=").append(sid);
+        str.append(", organization=").append(organization);
+        return str.append('}').toString();
     }
 
     /**

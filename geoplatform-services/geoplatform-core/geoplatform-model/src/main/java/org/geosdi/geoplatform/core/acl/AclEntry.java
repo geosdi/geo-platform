@@ -45,10 +45,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * The <tt>AclEntry</tt> domain class contains entries representing grants 
@@ -82,22 +83,23 @@ public class AclEntry {
     @Index(name = "ACL_ENTRY_OBJECT_IDENTITY_INDEX")
     private AclObjectIdentity aclObject;
     /**
-     * Order wrt AclObjectIdentity
+     * Order wrt AclObjectIdentity.
      */
     @Column(name = "ace_order", nullable = false)
     private Integer aceOrder;
     //
     @ManyToOne
     @JoinColumn(name = "sid", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @Index(name = "ACL_ENTRY_SID_INDEX")
     private AclSid aclSid;
     /**
-     * Mask of permission type
+     * Mask of permission type.
      */
     @Column(nullable = false)
     private Integer mask;
-    /*
-     * Granting of permission
+    /**
+     * Granting of permission.
      */
     @Column(nullable = false)
     private boolean granting = false;

@@ -45,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.Date;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageInsertUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageUpdateUserHandler;
@@ -159,6 +160,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void manageInsertUser() {
+        user.setCreationDate(new Date());
         UserRemoteImpl.Util.getInstance().insertUser(user, 
                 GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<Long>() {
@@ -182,7 +184,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
                 // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully added",
-                                               "<ul><li>" + user.getUsername() + "</li></ul>");
+                                               "<ul><li>" + user.getEmail() + "</li></ul>");
             }
         });
     }
@@ -207,7 +209,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
                 // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully modify",
-                                               "<ul><li>" + user.getUsername() + "</li></ul>");
+                                               "<ul><li>" + user.getEmail() + "</li></ul>");
             }
         });
     }

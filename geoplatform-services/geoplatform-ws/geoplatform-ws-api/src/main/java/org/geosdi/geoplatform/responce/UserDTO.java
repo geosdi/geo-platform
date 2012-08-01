@@ -36,22 +36,18 @@
 package org.geosdi.geoplatform.responce;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPAuthority;
-
 import org.geosdi.geoplatform.core.model.GPUser;
 
 /**
  * @author giuseppe
- * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "UserDTO")
 public class UserDTO extends ShortAccountDTO {
 
     private String name;
-    private String username;
     private String emailAddress;
     private boolean sendEmail;
 
@@ -65,7 +61,6 @@ public class UserDTO extends ShortAccountDTO {
     public UserDTO(GPUser user) {
         super(user);
         this.name = user.getName();
-        this.username = user.getUsername();
         this.emailAddress = user.getEmailAddress();
         this.sendEmail = user.isSendEmail();
     }
@@ -78,26 +73,10 @@ public class UserDTO extends ShortAccountDTO {
     }
 
     /**
-     * @param name
-     *          the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * @param username
-     *            the username to set
-     */
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     /**
@@ -108,8 +87,7 @@ public class UserDTO extends ShortAccountDTO {
     }
 
     /**
-     * @param sendEmail
-     *            the sendEmail to set
+     * @param sendEmail the sendEmail to set
      */
     public void setSendEmail(boolean sendEmail) {
         this.sendEmail = sendEmail;
@@ -123,8 +101,7 @@ public class UserDTO extends ShortAccountDTO {
     }
 
     /**
-     * @param emailAddress
-     *            the emailAddress to set
+     * @param emailAddress the emailAddress to set
      */
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
@@ -140,7 +117,6 @@ public class UserDTO extends ShortAccountDTO {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
         str.append(", name=").append(name);
-        str.append(", username=").append(username);
         str.append(", emailAddress=").append(emailAddress);
         str.append(", sendEmail=").append(sendEmail);
         return str.append("}").toString();

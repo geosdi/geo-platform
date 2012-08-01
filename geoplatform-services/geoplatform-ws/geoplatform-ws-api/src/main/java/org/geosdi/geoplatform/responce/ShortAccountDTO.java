@@ -42,7 +42,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.model.GPUser;
 
 /**
  *
@@ -50,7 +52,7 @@ import org.geosdi.geoplatform.core.model.GPAuthority;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso(value = {UserDTO.class, ApplicationDTO.class})
-public class ShortAccountDTO {
+public abstract class ShortAccountDTO {
 
     private Long id;
     private String organization;
@@ -185,7 +187,7 @@ public class ShortAccountDTO {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append(", id=").append(id);
+        str.append("id=").append(id);
         str.append(", organization=").append(organization);
         str.append(", enabled=").append(enabled);
         str.append(", temporary=").append(temporary);
@@ -203,7 +205,13 @@ public class ShortAccountDTO {
         List<ShortAccountDTO> accountsDTO = new ArrayList<ShortAccountDTO>(accounts.size());
 
         for (GPAccount account : accounts) {
-            accountsDTO.add(new ShortAccountDTO(account));
+            ShortAccountDTO shortAccount = null;
+            if (account instanceof GPUser) {
+                shortAccount = new UserDTO((GPUser) account);
+            } else if (account instanceof GPApplication) {
+                shortAccount = new ApplicationDTO((GPApplication) account);
+            }
+            accountsDTO.add(shortAccount);
         }
 
         return accountsDTO;

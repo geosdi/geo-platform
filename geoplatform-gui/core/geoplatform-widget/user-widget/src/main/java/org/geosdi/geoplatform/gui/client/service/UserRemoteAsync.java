@@ -70,18 +70,18 @@ public interface UserRemoteAsync {
 
     void getOwnUser(AsyncCallback<IGPUserManageDetail> callback);
 
-    void getAllRoles(AsyncCallback<ArrayList<String>> callback);
+    void getAllRoles(String organization, AsyncCallback<ArrayList<String>> callback);
 
     void getAllGuiComponentIDs(AsyncCallback<ArrayList<String>> callback);
 
-    void getRolePermission(String role,
+    void getRolePermission(String role, String organization,
                            AsyncCallback<HashMap<String, Boolean>> callback)
             throws GeoPlatformException;
 
-    void updateRolePermission(String role, HashMap<String, Boolean> permissionMap,
+    void updateRolePermission(String role, String organization, HashMap<String, Boolean> permissionMap,
                               AsyncCallback<Boolean> callback)
             throws GeoPlatformException;
 
-    void saveRole(String role, AsyncCallback<Boolean> callback)
+    void saveRole(String role, String organization, AsyncCallback<Boolean> callback)
             throws GeoPlatformException;
 }

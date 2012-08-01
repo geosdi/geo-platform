@@ -46,7 +46,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author giuseppe
- * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "User")
 @Entity(name = "User")
@@ -62,26 +62,27 @@ public class GPUser extends GPAccount implements UserDetails {
     @Column
     private String name;
     //
-    @Column(name = "user_name", unique = true)
-    @Index(name = "USER_USERNAME_INDEX")
-    private String username;
-    //
-    @Column(name = "user_password")
-    private String password;
-    //
     @Column(name = "email_address", unique = true)
     @Index(name = "USER_EMAIL_INDEX")
     private String emailAddress;
+    //
+    @Column(name = "user_password")
+    private String password;
     //
     @Column(name = "send_email")
     private boolean sendEmail = false;
 
     /**
-     * @return the stringID: return the username
+     * @return the stringID: return the email address
      */
     @Override
     public String getStringID() {
-        return this.getUsername();
+        return this.getEmailAddress();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getEmailAddress();
     }
 
     /**
@@ -92,27 +93,24 @@ public class GPUser extends GPAccount implements UserDetails {
     }
 
     /**
-     * @param name
-     *          the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @return the username
+     * @return the emailAddress
      */
-    @Override
-    public String getUsername() {
-        return username;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     /**
-     * @param username
-     *            the username to set
+     * @param emailAddress the emailAddress to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     /**
@@ -124,26 +122,10 @@ public class GPUser extends GPAccount implements UserDetails {
     }
 
     /**
-     * @param password
-     *            the password to set
+     * @param password the password to set
      */
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * @return the emailAddress
-     */
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    /**
-     * @param emailAddress
-     *            the emailAddress to set
-     */
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
     }
 
     /**
@@ -154,8 +136,7 @@ public class GPUser extends GPAccount implements UserDetails {
     }
 
     /**
-     * @param sendEmail
-     *            the sendEmail to set
+     * @param sendEmail the sendEmail to set
      */
     public void setSendEmail(boolean sendEmail) {
         this.sendEmail = sendEmail;
@@ -163,16 +144,16 @@ public class GPUser extends GPAccount implements UserDetails {
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
-        str.append(", username=").append(username);
-        str.append(", password=").append(password);
         str.append(", name=").append(name);
         str.append(", emailAddress=").append(emailAddress);
+        str.append(", password=").append(password);
         str.append(", sendEmail=").append(sendEmail);
         return str.append('}').toString();
     }

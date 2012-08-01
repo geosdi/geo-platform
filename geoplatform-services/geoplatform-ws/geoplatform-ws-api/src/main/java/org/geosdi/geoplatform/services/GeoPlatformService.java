@@ -37,17 +37,32 @@ package org.geosdi.geoplatform.services;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-
 import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
-import org.geosdi.geoplatform.core.model.*;
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
+import org.geosdi.geoplatform.core.model.GPApplication;
+import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.model.GPBBox;
+import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
+import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPOrganization;
+import org.geosdi.geoplatform.core.model.GPProject;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.GPViewport;
+import org.geosdi.geoplatform.core.model.GSAccount;
+import org.geosdi.geoplatform.core.model.GSResource;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -139,16 +154,15 @@ public interface GeoPlatformService {
 
     @Get
     @WebResult(name = "User")
-    GPUser getUserDetailByUsername(SearchRequest request)
+    GPUser getUserDetailByEmail(SearchRequest request)
             throws ResourceNotFoundFault;
 
     @Get
     @WebResult(name = "User")
-    GPUser getUserDetailByUsernameAndPassword(
-            @WebParam(name = "username") String username,
+    GPUser getUserDetailByEmailAndPassword(
+            @WebParam(name = "email") String email,
             @WebParam(name = "password") String password)
-            throws ResourceNotFoundFault, IllegalParameterFault,
-            AccountLoginFault;
+            throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault;
 
     @Get
     @HttpResource(location = "/applications/{applicationID}")
@@ -170,7 +184,7 @@ public interface GeoPlatformService {
 
     @Get
     @WebResult(name = "User")
-    UserDTO getShortUserByUsername(SearchRequest request)
+    UserDTO getShortUserByEmail(SearchRequest request)
             throws ResourceNotFoundFault;
 
     @Get
@@ -364,7 +378,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
     void forceProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
-
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Viewport">
     // ==========================================================================
     // === Viewport
@@ -775,14 +789,17 @@ public interface GeoPlatformService {
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="ACL">
     /**
-     * Retrieve all Roles.
+     * Retrieve all Roles wrt an organization.
+     * 
+     * @param organization organization name
      *
      * @return List of all Roles
      */
     @Get
     @HttpResource(location = "/roles")
     @WebResult(name = "Roles")
-    List<String> getAllRoles();
+    List<String> getAllRoles(@WebParam(name = "organization") String organization)
+            throws ResourceNotFoundFault;
 
     /**
      * Retrieve all GuiComponet IDs.
@@ -798,7 +815,7 @@ public interface GeoPlatformService {
      * Retrieve GUI Component permissions for an Application. <p> It is based
      * only on application ID.
      *
-     * @param appID
+     * @param appID application ID
      *
      * @return Map that contains GUI Components permissions, with: <ul> <li> key
      * = ID Component </li> <li> value = Permission </li> </ul>
@@ -815,7 +832,7 @@ public interface GeoPlatformService {
      * Retrieve GUI Component permissions for an Account. <p> It is based on
      * accounts with disjoined authorities.
      *
-     * @param accountID
+     * @param accountID account ID
      *
      * @return Map that contains GUI Components permissions, with: <ul> <li> key
      * = ID Component </li> <li> value = Permission </li> </ul>
@@ -832,6 +849,7 @@ public interface GeoPlatformService {
      * Retrieve the GUI Component permissions for a Role (Authority).
      *
      * @param role role (authority) name
+     * @param organization organization name
      *
      * @return Map that contains GUI Components permissions, with: key = ID
      * Component value = Permission
@@ -841,12 +859,15 @@ public interface GeoPlatformService {
     @HttpResource(location = "/permissions/{role}")
     @WebResult(name = "GuiComponentsPermissionMapData")
     GuiComponentsPermissionMapData getRolePermission(
-            @WebParam(name = "role") String role) throws ResourceNotFoundFault;
+            @WebParam(name = "role") String role,
+            @WebParam(name = "organization") String organization)
+            throws ResourceNotFoundFault;
 
     /**
      * Update the permission of a role (authority).
      *
      * @param role role (authority) name
+     * @param organization organization name
      * @param mapComponentPermission map of GuiComponents permissions to update
      *
      * @return if the update was successful
@@ -856,6 +877,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/permissions/{role}")
     boolean updateRolePermission(
             @WebParam(name = "role") String role,
+            @WebParam(name = "organization") String organization,
             @WebParam(name = "permissionMapData") GuiComponentsPermissionMapData mapComponentPermission)
             throws ResourceNotFoundFault;
 
@@ -863,13 +885,16 @@ public interface GeoPlatformService {
      * Save a new role (authority).
      *
      * @param role role (authority) name
+     * @param organization organization name
      *
      * @return if the saving was successful
      * @throws IllegalParameterFault if the role (authority) already exist
      */
     @Post
     @HttpResource(location = "/permissions/{role}")
-    boolean saveRole(@WebParam(name = "role") String role)
+    boolean saveRole(
+            @WebParam(name = "role") String role,
+            @WebParam(name = "organization") String organization)
             throws IllegalParameterFault;
 
     // </editor-fold>

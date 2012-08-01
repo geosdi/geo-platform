@@ -72,18 +72,19 @@ public interface IUserService {
 
     IGPUserManageDetail getOwnUser(HttpServletRequest httpServletRequest);
 
-    ArrayList<String> getAllRoles(HttpServletRequest httpServletRequest);
+    ArrayList<String> getAllRoles(String organization, HttpServletRequest httpServletRequest);
 
     ArrayList<String> getAllGuiComponentIDs(HttpServletRequest httpServletRequest);
 
-    HashMap<String, Boolean> getRolePermission(String role,
+    HashMap<String, Boolean> getRolePermission(String role, String organization,
                                                HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    boolean updateRolePermission(String role, HashMap<String, Boolean> permissionMap,
+    boolean updateRolePermission(String role, String organization, HashMap<String, Boolean> permissionMap,
                                  HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    boolean saveRole(String role, HttpServletRequest httpServletRequest)
+    boolean saveRole(String role, String organization,
+                     HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 }

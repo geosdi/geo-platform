@@ -74,6 +74,7 @@ public interface UserRemote extends RemoteService {
     /**
      * 
      * @param userDetail
+     * @param organization
      * @return
      * @throws GeoPlatformException 
      */
@@ -114,9 +115,10 @@ public interface UserRemote extends RemoteService {
 
     /**
      * 
+     * @param organization
      * @return List of roles
      */
-    ArrayList<String> getAllRoles();
+    ArrayList<String> getAllRoles(String organization);
 
     /**
      * 
@@ -127,27 +129,30 @@ public interface UserRemote extends RemoteService {
     /**
      * 
      * @param role
+     * @param organization
      * @return
      * @throws GeoPlatformException 
      */
-    HashMap<String, Boolean> getRolePermission(String role)
+    HashMap<String, Boolean> getRolePermission(String role, String organization)
             throws GeoPlatformException;
 
     /**
      * 
      * @param role
+     * @param organization
      * @param permissionMap
      * @return
      * @throws GeoPlatformException 
      */
-    boolean updateRolePermission(String role, HashMap<String, Boolean> permissionMap)
+    boolean updateRolePermission(String role, String organization, HashMap<String, Boolean> permissionMap)
             throws GeoPlatformException;
 
     /**
      * 
      * @param role
+     * @param organization
      * @return
      * @throws GeoPlatformException 
      */
-    boolean saveRole(String role) throws GeoPlatformException;
+    boolean saveRole(String role, String organization) throws GeoPlatformException;
 }

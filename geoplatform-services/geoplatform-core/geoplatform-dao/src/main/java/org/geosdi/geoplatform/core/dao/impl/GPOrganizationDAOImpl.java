@@ -71,6 +71,11 @@ public class GPOrganizationDAOImpl extends BaseDAO<GPOrganization, Long>
     }
 
     @Override
+    public GPOrganization save(GPOrganization entity) {
+        return super.save(entity);
+    }
+
+    @Override
     public GPOrganization merge(GPOrganization entity) {
         return super.merge(entity);
     }

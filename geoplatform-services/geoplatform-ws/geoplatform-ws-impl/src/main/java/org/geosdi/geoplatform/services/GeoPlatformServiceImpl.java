@@ -212,6 +212,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public void setOrganizationDao(GPOrganizationDAO organizationDao) {
         this.organizationDao = organizationDao;
         this.organizationServiceDelegate.setOrganizationDao(organizationDao);
+        this.aclServiceDelegate.setOrganizationDao(organizationDao);
         this.accountServiceDelegate.setOrganizationDao(organizationDao);
         this.wmsServiceDelegate.setOrganizationDao(organizationDao);
     }
@@ -342,15 +343,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPUser getUserDetailByUsername(SearchRequest request)
+    public GPUser getUserDetailByEmail(SearchRequest request)
             throws ResourceNotFoundFault {
-        return accountServiceDelegate.getUserDetailByUsername(request);
+        return accountServiceDelegate.getUserDetailByEmail(request);
     }
 
     @Override
-    public GPUser getUserDetailByUsernameAndPassword(String username, String password)
+    public GPUser getUserDetailByEmailAndPassword(String email, String password)
             throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
-        return accountServiceDelegate.getUserDetailByUsernameAndPassword(username, password);
+        return accountServiceDelegate.getUserDetailByEmailAndPassword(email, password);
     }
 
     @Override
@@ -370,9 +371,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public UserDTO getShortUserByUsername(SearchRequest request)
+    public UserDTO getShortUserByEmail(SearchRequest request)
             throws ResourceNotFoundFault {
-        return accountServiceDelegate.getShortUserByUsername(request);
+        return accountServiceDelegate.getShortUserByEmail(request);
     }
 
     @Override
@@ -904,8 +905,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     //<editor-fold defaultstate="collapsed" desc="ACL">
     @Override
-    public List<String> getAllRoles() {
-        return aclServiceDelegate.getAllRoles();
+    public List<String> getAllRoles(String organization) throws ResourceNotFoundFault {
+        return aclServiceDelegate.getAllRoles(organization);
     }
 
     @Override
@@ -926,21 +927,21 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GuiComponentsPermissionMapData getRolePermission(String role)
+    public GuiComponentsPermissionMapData getRolePermission(String role, String organization)
             throws ResourceNotFoundFault {
-        return this.aclServiceDelegate.getRolePermission(role);
+        return this.aclServiceDelegate.getRolePermission(role, organization);
     }
 
     @Override
-    public boolean updateRolePermission(String role,
+    public boolean updateRolePermission(String role, String organization,
             GuiComponentsPermissionMapData mapComponentPermission)
             throws ResourceNotFoundFault {
-        return this.aclServiceDelegate.updateRolePermission(role, mapComponentPermission);
+        return this.aclServiceDelegate.updateRolePermission(role, organization, mapComponentPermission);
     }
 
     @Override
-    public boolean saveRole(String role) throws IllegalParameterFault {
-        return this.aclServiceDelegate.saveRole(role);
+    public boolean saveRole(String role, String organization) throws IllegalParameterFault {
+        return this.aclServiceDelegate.saveRole(role, organization);
     }
     //</editor-fold>
 

@@ -88,6 +88,7 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
@@ -375,7 +376,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         mask("Retrieve permissions of \"" + role + "\" role");
 
         UserRemoteImpl.Util.getInstance().
-                getRolePermission(role, new AsyncCallback<HashMap<String, Boolean>>() {
+                getRolePermission(role, GPAccountLogged.getInstance().getOrganization(),
+                new AsyncCallback<HashMap<String, Boolean>>() {
 
             @Override
             public void onFailure(Throwable caught) {
@@ -426,7 +428,9 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         }
 
         mask("Saving permissions for \"" + role + "\" role");
-        UserRemoteImpl.Util.getInstance().updateRolePermission(role, permissionMap,
+        UserRemoteImpl.Util.getInstance().updateRolePermission(role,
+                                                               GPAccountLogged.getInstance().getOrganization(),
+                                                               permissionMap,
                                                                new AsyncCallback<Boolean>() {
 
             @Override
@@ -475,6 +479,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private void saveNewRole() {
         mask("Saving new role \"" + role + "\"");
         UserRemoteImpl.Util.getInstance().saveRole(role,
+                                                   GPAccountLogged.getInstance().getOrganization(),
                                                    new AsyncCallback<Boolean>() {
 
             @Override
@@ -573,7 +578,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
             public void componentSelected(ComponentEvent ce) {
                 searchStatus.setBusy("Retriving permissions of \"" + roleItem + "\" role");
                 UserRemoteImpl.Util.getInstance().
-                        getRolePermission(roleItem, new AsyncCallback<HashMap<String, Boolean>>() {
+                        getRolePermission(roleItem, GPAccountLogged.getInstance().getOrganization(),
+                        new AsyncCallback<HashMap<String, Boolean>>() {
 
                     @Override
                     public void onFailure(Throwable caught) {

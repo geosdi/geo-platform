@@ -42,7 +42,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
@@ -63,7 +62,7 @@ public class AclClass {
     @SequenceGenerator(name = "ACL_CLASS_SEQ", sequenceName = "ACL_CLASS_SEQ")
     private Long id;
     /**
-     * Fully qualified name of a class (package.className) of the secure domain object
+     * Fully qualified name of a class (package.className) of the secure domain object.
      */
     @Column(name = "clazz", unique = true, nullable = false, length = 500)
     @Index(name = "ACL_CLASS_INDEX")

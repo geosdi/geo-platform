@@ -68,7 +68,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
@@ -81,23 +81,24 @@ public abstract class ServiceTest {
     protected GeoPlatformService gpWSClient;
     protected GPDigesterConfigutator gpDigester;
     // Roles (default)
-    protected final String ROLE_ADMIN = "Admin";
-    protected final String ROLE_USER = "User";
-    protected final String ROLE_VIEWER = "Viewer";
+    protected static final String ROLE_ADMIN = "Admin";
+    protected static final String ROLE_USER = "User";
+    protected static final String ROLE_VIEWER = "Viewer";
     // Organization
+    protected static final String organizationNameTest = "geoSDI_ws_test";
     protected GPOrganization organizationTest;
-    protected String organizationNameTest = "geoSDI_ws_test";
     // Users
-    protected final String usernameTest = "username_test_ws";
-    protected final String passwordTest = "pwd_username_test_ws";
+    protected static final String domainNameTest = "geosdi-test.org";
+    protected static final String emailUserTest = "user_test_ws" + "@" + domainNameTest;
+    protected static final String passwordTest = emailUserTest;
     protected GPUser userTest;
     protected long idUserTest = -1;
     // Projects
     protected GPProject projectTest;
     protected long idProjectTest = -1;
     // Folders
-    protected final String nameRootFolderA = "rootFolderA";
-    protected final String nameRootFolderB = "rootFolderB";
+    protected static final String nameRootFolderA = "rootFolderA";
+    protected static final String nameRootFolderB = "rootFolderB";
     protected GPFolder rootFolderA;
     protected GPFolder rootFolderB;
     protected long idRootFolderA = -1;
@@ -122,9 +123,9 @@ public abstract class ServiceTest {
         this.setUpOrganization();
 
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, ROLE_USER);
-        userTest = gpWSClient.getUserDetailByUsername(
-                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
+        idUserTest = this.createAndInsertUser(emailUserTest, organizationTest, ROLE_USER);
+        userTest = gpWSClient.getUserDetailByEmail(
+                new SearchRequest(emailUserTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
         idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);
@@ -155,10 +156,12 @@ public abstract class ServiceTest {
         this.deleteOrganization(organizationTest.getId());
     }
 
-    // Create and insert a User
-    protected long createAndInsertUser(String username, GPOrganization organization, String... roles)
+    /**
+     * Create and insert a User.
+     */
+    protected long createAndInsertUser(String email, GPOrganization organization, String... roles)
             throws IllegalParameterFault {
-        GPUser user = this.createUser(username, organization, roles);
+        GPUser user = this.createUser(email, organization, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
 
         long idUser = gpWSClient.insertAccount(user, false);
@@ -167,15 +170,14 @@ public abstract class ServiceTest {
         return idUser;
     }
 
-    protected GPUser createUser(String username, GPOrganization organization, String... roles) {
+    protected GPUser createUser(String email, GPOrganization organization, String... roles) {
         GPUser user = new GPUser();
-        user.setUsername(username);
         user.setOrganization(organization);
-        user.setName("Complete name of " + username);
-        user.setEmailAddress(username + "@test.foo");
+        user.setEmailAddress(email);
+        user.setName("Complete name of " + email);
         user.setEnabled(true);
-        user.setPassword(this.gpDigester.digest("pwd_" + username));
-        user.setSendEmail(true);
+        user.setPassword(email);
+        user.setSendEmail(false);
 
         if (roles.length > 0) {
             List<GPAuthority> authorities = this.createAuthorities(roles);

@@ -52,6 +52,8 @@ public interface GPOrganizationDAO {
     GPOrganization[] find(Long[] ids);
 
     void persist(GPOrganization... organizations);
+    
+    GPOrganization save(GPOrganization organization);
 
     GPOrganization merge(GPOrganization organization);
 

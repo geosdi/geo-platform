@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.core.dao.impl;
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import java.util.List;
-
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
@@ -47,7 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 @Transactional
 public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
@@ -85,13 +84,6 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
     }
 
     @Override
-    public GPUser findByUsername(String username) {
-        Search search = new Search();
-        search.addFilterEqual("username", username);
-        return super.searchUnique(search);
-    }
-
-    @Override
     public GPUser findByEmail(String email) {
         Search search = new Search();
         search.addFilterEqual("emailAddress", email);
@@ -107,14 +99,16 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
 
     @Override
     public GPAccount findByStringID(String stringID) {
-        GPAccount account = this.findByUsername(stringID);
+        GPAccount account = this.findByEmail(stringID);
         if (account == null) {
             account = this.findByAppID(stringID);
         }
         return account;
     }
 
-    // TODO Optimize
+    /**
+     * @todo Optimize
+     */
     @Override
     public boolean resetDefaultProject(Long defaultProjectId) {
         em().createQuery("UPDATE User u SET u.defaultProjectID = null WHERE u.defaultProjectID=:defaultProjectId").

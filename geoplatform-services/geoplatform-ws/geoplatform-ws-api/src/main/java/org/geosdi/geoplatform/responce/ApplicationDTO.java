@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.responce;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
 
 /**
@@ -64,8 +63,7 @@ public class ApplicationDTO extends ShortAccountDTO {
     }
 
     /**
-     * @param appID
-     *          the appID to set
+     * @param appID the appID to set
      */
     public void setAppID(String appID) {
         this.appID = appID;

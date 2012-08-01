@@ -20,7 +20,6 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
 
     private static final long serialVersionUID = -7265573728577702116L;
     //
-    private String username;
     private String name;
     private String email;
     private String organization;
@@ -31,16 +30,6 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     private Map<String, Boolean> componentPermission;
 
     public GPLoginUserDetail() {
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    @Override
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     @Override

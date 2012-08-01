@@ -44,8 +44,8 @@ import com.google.gwt.regexp.shared.RegExp;
 public class GPRegEx {
 
     /**
-     * Regular Expressions
-     * Note: the whitespace must not be present
+     * Regular Expressions.
+     * Note: the whitespace must not be present.
      */
     // Query String of a WMS URL - Fields required
     public static final RegExp RE_REQUEST = RegExp.compile(GetMap.REQUEST + "=GetMap", "i"); // "i" --> ignore case
@@ -68,7 +68,6 @@ public class GPRegEx {
     // User properties
     public static final RegExp RE_COMPLETE_NAME = RegExp.compile("[^ ]+ [^ ]+");
     public static final RegExp RE_EMAIL = RegExp.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$", "i"); // i --> case insensitive
-    public static final RegExp RE_USERNAME = RegExp.compile("[a-zA-Z0-9._-]{4,}$");
 
     private GPRegEx() {
     }
@@ -77,8 +76,8 @@ public class GPRegEx {
         return RE_FORMAT_QS.replace(urlEncoding, "\n$1");
     }
 
-    /*
-     * Checks if value is null or empty
+    /**
+     * Checks if value is null or empty.
      * 
      * @param value
      */

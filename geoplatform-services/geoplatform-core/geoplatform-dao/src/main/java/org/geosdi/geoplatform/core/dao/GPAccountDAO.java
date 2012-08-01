@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.core.dao;
 
 import com.googlecode.genericdao.search.ISearch;
 import java.util.List;
-
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -65,8 +64,6 @@ public interface GPAccountDAO {
     public List<GPAccount> search(ISearch search);
 
     public int count(ISearch search);
-
-    public GPUser findByUsername(String username);
 
     public GPUser findByEmail(String email);
 

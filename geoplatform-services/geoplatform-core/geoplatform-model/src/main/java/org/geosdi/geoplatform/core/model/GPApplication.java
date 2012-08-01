@@ -86,6 +86,7 @@ public class GPApplication extends GPAccount {
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#toString()
      */
     @Override

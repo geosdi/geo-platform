@@ -53,6 +53,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail.GPUserManageDetailKeyValue;
@@ -60,6 +61,7 @@ import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.UserPropertiesWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.grid.GPGridSearchWidget;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
@@ -149,11 +151,11 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         nameColumn.setHeader("Name");
         configs.add(nameColumn);
 
-        ColumnConfig usernameColumn = new ColumnConfig();
-        usernameColumn.setId(GPUserManageDetailKeyValue.USERNAME.toString());
-        usernameColumn.setHeader("Username");
-        usernameColumn.setWidth(120);
-        configs.add(usernameColumn);
+        ColumnConfig emailColumn = new ColumnConfig();
+        emailColumn.setId(GPUserManageDetailKeyValue.EMAIL.toString());
+        emailColumn.setHeader("Email (username)");
+        emailColumn.setWidth(130);
+        configs.add(emailColumn);
 
         CheckColumnConfig enabledColumn = new CheckColumnConfig();
         enabledColumn.setId(GPUserManageDetailKeyValue.ENABLED.toString());
@@ -203,7 +205,8 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     private void showUserPropertiesWidget(final boolean isNewUser) {
         searchStatus.setBusy("Retrive roles");
 
-        UserRemoteImpl.Util.getInstance().getAllRoles(new AsyncCallback<ArrayList<String>>() {
+        UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
+                new AsyncCallback<ArrayList<String>>() {
             
             @Override
             public void onFailure(Throwable caught) {

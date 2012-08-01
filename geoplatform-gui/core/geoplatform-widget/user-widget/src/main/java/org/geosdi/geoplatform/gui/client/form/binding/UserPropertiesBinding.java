@@ -65,17 +65,16 @@ import org.geosdi.geoplatform.gui.regex.GPRegEx;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManageDetail> {
 
     private TextField<String> nameField;
     private TextField<String> emailField;
-    private TextField<String> usernameField;
     private TextField<String> passwordField;
     private TextField<String> passwordRepeatField;
     private CheckBox enabledField;
@@ -90,14 +89,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     //
     private GPUserManageDetail userOriginal = new GPUserManageDetail();
     private boolean updateName;
-    private boolean updateEmail;
     private boolean updatePassword;
     private boolean updateEnabled;
     private boolean updateTemporary;
     private boolean updateRole;
 
     public UserPropertiesBinding(ListStore<GPUserManageDetail> store,
-                                 Button buttonBinding) {
+            Button buttonBinding) {
         super();
         super.formBinding.setStore(store);
 
@@ -119,19 +117,12 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.emailField = new TextField<String>();
         this.emailField.setId(GPUserManageDetailKeyValue.EMAIL.toString());
-        this.emailField.setFieldLabel("Email");
+        this.emailField.setFieldLabel("Email (username)");
         this.emailField.setEmptyText("Enter a email (required)");
         this.emailField.setToolTip("Email of the user");
+        this.emailField.setAllowBlank(false);
         this.emailField.setAutoValidate(true);
-
-        this.usernameField = new TextField<String>();
-        this.usernameField.setId(GPUserManageDetailKeyValue.USERNAME.toString());
-        this.usernameField.setFieldLabel("Username");
-        this.usernameField.setEmptyText("Enter a username (required)");
-        this.usernameField.setToolTip("Username of the user");
-        this.usernameField.setAllowBlank(false);
-        this.usernameField.setAutoValidate(true);
-        this.usernameField.setMinLength(4);
+        this.emailField.setValidator(this.validatorInsertEmail());
 
         this.passwordField = new TextField<String>();
         this.passwordField.setPassword(true);
@@ -146,7 +137,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.enabledField.setId(GPUserManageDetailKeyValue.ENABLED.toString());
         this.enabledField.setToolTip("Check for enable the user");
         this.enabledField.addListener(Events.Change, new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent be) {
                 Boolean check = (Boolean) be.getValue();
@@ -169,7 +159,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.temporaryField = new CheckBox();
         this.temporaryField.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
         this.temporaryField.addListener(Events.Change, new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent be) {
                 Boolean temporary = (Boolean) be.getValue();
@@ -190,7 +179,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         tempAndExpiredFields.add(expiredLabelField);
 
         this.userRoleComboBox = new SimpleComboBox<String>() {
-
             @Override
             protected void onSelect(SimpleComboValue<String> model, int index) {
                 super.onSelect(model, index);
@@ -209,7 +197,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         fp.add(this.nameField);
         fp.add(this.emailField);
-        fp.add(this.usernameField);
         fp.add(this.passwordField);
         fp.add(this.passwordRepeatField);
         fp.add(enabledAndCreationFields);
@@ -222,7 +209,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     public void resetFields() {
         this.nameField.reset();
         this.emailField.reset();
-        this.usernameField.reset();
         this.passwordField.reset();
         this.passwordRepeatField.reset();
         this.enabledField.reset();
@@ -239,7 +225,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.formBinding.addFieldBinding(new NameFieldBinding());
         this.formBinding.addFieldBinding(new EmailFieldBinding());
-        this.formBinding.addFieldBinding(new UsernameFieldBinding());
         this.formBinding.addFieldBinding(new EnabledFieldBinding());
         this.formBinding.addFieldBinding(new TemporaryFieldBinding());
     }
@@ -254,7 +239,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         } else { // UPDATE USER
             // Copy the changeable fields
             userOriginal.setName(user.getName());
-            userOriginal.setEmail(user.getEmail());
             userOriginal.setEnabled(user.isEnabled());
             userOriginal.setTemporary(user.isTemporary());
             userOriginal.setAuthority(user.getAuthority());
@@ -267,12 +251,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private void handleFiledsInsertUser() {
         this.nameField.setValidator(this.validatorInsertName());
         this.nameField.setAllowBlank(false);
-
-        this.emailField.setValidator(this.validatorInsertEmail());
-        this.emailField.setAllowBlank(false);
-
-        this.usernameField.setValidator(this.validatorInsertUsername());
-        this.usernameField.enable();
+        
+        this.emailField.enable();
 
         this.passwordField.setFieldLabel("Password");
         this.passwordField.setToolTip("Password of the user");
@@ -304,10 +284,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.nameField.setValidator(this.validatorUpdateName());
         this.nameField.setAllowBlank(true);
 
-        this.emailField.setValidator(this.validatorUpdateEmail());
-        this.emailField.setAllowBlank(true);
-
-        this.usernameField.disable();
+        this.emailField.disable();
 
         this.passwordField.setFieldLabel("Reset password");
         this.passwordField.setToolTip("Reset password of the user");
@@ -341,11 +318,10 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     }
 
     /**
-     * Validators for Update a user
+     * Validators for Update a user.
      */
     private Validator validatorUpdateName() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(userOriginal.getName())) {
@@ -362,28 +338,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         };
     }
 
-    private Validator validatorUpdateEmail() {
-        return new Validator() {
-
-            @Override
-            public String validate(Field<?> field, String value) {
-                if (value.equals(userOriginal.getEmail())) {
-                    updateEmail(false);
-                    return null; // Pseudo-valid
-                }
-                if (!GPRegEx.RE_EMAIL.test(value)) {
-                    updateEmail(false);
-                    return "Email is not valid (example: any@foo.org)";
-                }
-                updateEmail(true);
-                return null;
-            }
-        };
-    }
-
     private Validator validatorPassword() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
@@ -398,7 +354,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
     private Validator validatorUpdateConfirmPassword() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(passwordField.getValue())) {
@@ -413,7 +368,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
     private Validator validatorUpdateRole() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 String role = userOriginal.getAuthority();
@@ -429,11 +383,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
     private void updateName(boolean updateName) {
         this.updateName = updateName;
-        this.updateUser();
-    }
-
-    private void updateEmail(boolean updateEmail) {
-        this.updateEmail = updateEmail;
         this.updateUser();
     }
 
@@ -458,8 +407,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     }
 
     private void updateUser() {
-        if (updateName || updateEmail || updatePassword
-                || updateEnabled || updateTemporary || updateRole) {
+        if (updateName || updatePassword || updateEnabled || updateTemporary || updateRole) {
             this.buttonBinding.enable();
         } else {
             this.buttonBinding.disable();
@@ -467,11 +415,10 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     }
 
     /**
-     * Validators for Insert a user
+     * Validators for Insert a user.
      */
     private Validator validatorInsertName() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (!GPRegEx.RE_COMPLETE_NAME.test(value)) {
@@ -484,7 +431,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
     private Validator validatorInsertEmail() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (!GPRegEx.RE_EMAIL.test(value)) {
@@ -495,22 +441,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         };
     }
 
-    private Validator validatorInsertUsername() {
-        return new Validator() {
-
-            @Override
-            public String validate(Field<?> field, String value) {
-                if (!GPRegEx.RE_USERNAME.test(value)) {
-                    return "Enter a valid username (example: foo.3_BE-1)";
-                }
-                return null;
-            }
-        };
-    }
-
     private Validator validatorInsertConfirmPassword() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(passwordField.getValue())) {
@@ -524,12 +456,12 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     /**
      * @author Nazzareno Sileno - CNR IMAA geoSDI Group
      * @email nazzareno.sileno@geosdi.org
-     * 
+     *
      * Internal Class to map bi-directional Binding
-     * 
-     * model-view binding: method updateField
-     * view-model binding: method setModelProperty
-     * 
+     *
+     * model-view binding: method updateField view-model binding: method
+     * setModelProperty
+     *
      */
     private class RoleComboBinding extends GPFieldBinding {
 
@@ -559,30 +491,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         @Override
         public void setRecordProperty(Record r, Object val) {
             r.set(super.property, ((SimpleComboValue<String>) val).getValue());
-        }
-    }
-
-    private class UsernameFieldBinding extends GPFieldBinding {
-
-        public UsernameFieldBinding() {
-            super(usernameField, GPUserManageDetailKeyValue.USERNAME.toString());
-        }
-
-        @Override
-        public void setModelProperty(Object val) {
-            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
-            userDetail.setUsername(val != null ? (String) val : "");
-        }
-
-        @Override
-        public void updateField(boolean updateOriginalValue) {
-            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
-            usernameField.setValue(userDetail.getUsername());
-        }
-
-        @Override
-        public void setRecordProperty(Record r, Object val) {
-            r.set(super.property, val);
         }
     }
 

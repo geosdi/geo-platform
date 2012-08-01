@@ -40,12 +40,10 @@ import java.util.List;
 import org.geosdi.geoplatform.core.acl.AclSid;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.dao.impl.BaseDAO;
-
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
  */
 @Transactional
 public class AclSidDAOImpl extends BaseDAO<AclSid, Long> implements AclSidDAO {
@@ -69,9 +67,19 @@ public class AclSidDAOImpl extends BaseDAO<AclSid, Long> implements AclSidDAO {
     }
 
     @Override
-    public List<AclSid> findByPrincipal(boolean principal) {
+    public AclSid findBySid(String sid, boolean principal, String organization) {
+        Search search = new Search();
+        search.addFilterEqual("sid", sid);
+        search.addFilterEqual("principal", principal);
+        search.addFilterEqual("organization.name", organization);
+        return searchUnique(search);
+    }
+
+    @Override
+    public List<AclSid> findByPrincipal(boolean principal, String organization) {
         Search search = new Search();
         search.addFilterEqual("principal", principal);
+        search.addFilterEqual("organization.name", organization);
         return search(search);
     }
 }

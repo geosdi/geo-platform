@@ -45,10 +45,6 @@ public interface IGPUserSimpleDetail extends Serializable {
 
     String ADMIN = "Admin";
 
-    String getUsername();
-
-    void setUsername(String username);
-
     String getName();
 
     void setName(String name);

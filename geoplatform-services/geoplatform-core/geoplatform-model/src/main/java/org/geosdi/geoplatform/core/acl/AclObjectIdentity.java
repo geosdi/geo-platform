@@ -45,10 +45,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * The <tt>AclObjectIdentity</tt> domain class contains entries representing
@@ -88,6 +89,7 @@ public class AclObjectIdentity {
     //
     @ManyToOne
     @JoinColumn(name = "owner_sid")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private AclSid aclSid;
     //
     @Column(name = "entries_inheriting", nullable = false)

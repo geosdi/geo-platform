@@ -124,8 +124,8 @@ public abstract class BaseDAOTest {
     protected GPProject gsUserProject;
     //
     private URL url = null;
-    private final String gsAccountUsername = "gsuser";
-    private final String urlWMSGetCapabilities =
+    private static final String gsAccountUsername = "gsuser";
+    private static final String urlWMSGetCapabilities =
             "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
@@ -259,7 +259,7 @@ public abstract class BaseDAOTest {
         organizationDAO.persist(organizationTest);
         logger.debug("\n*** Organization SAVED:\n{}\n***", organizationTest);
     }
-    
+
     protected void insertServers() {
         // WMS
         GeoPlatformServer server1WMS = createServer1WMS();
@@ -294,59 +294,59 @@ public abstract class BaseDAOTest {
         server.setOrganization(organizationTest);
         return server;
     }
-
-    private GeoPlatformServer createServer3WMS() {
-        GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerUrl("https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities");
-        server.setName("earthbuilder.google.com");
-        server.setAliasName("EARTHBUILDER");
-        server.setServerType(GPCapabilityType.WMS);
-        server.setOrganization(organizationTest);
-        return server;
-    }
-
-    private GeoPlatformServer createServer1CSW() {
-        GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerUrl("http://catalog.geosdi.org/geonetwork/srv/en/csw");
-        server.setName("csw.geosdi.org");
-        server.setAliasName("CSW on geosdi");
-        server.setServerType(GPCapabilityType.CSW);
-        server.setOrganization(organizationTest);
-        return server;
-    }
-
-    private void insertDummyCSWServer() {
-        for (int i = 10; i <= 99; i++) {
-            GeoPlatformServer server = new GeoPlatformServer();
-            server.setTitle("Title_" + i);
-            server.setAliasName("Z_Alias_" + i);
-            server.setServerUrl("http://csw-test/" + i);
-            server.setServerType(GPCapabilityType.CSW);
-            server.setOrganization(organizationTest);
-            serverDAO.persist(server);
-        }
-    }
-
+//
+//    private GeoPlatformServer createServer3WMS() {
+//        GeoPlatformServer server = new GeoPlatformServer();
+//        server.setServerUrl("https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities");
+//        server.setName("earthbuilder.google.com");
+//        server.setAliasName("EARTHBUILDER");
+//        server.setServerType(GPCapabilityType.WMS);
+//        server.setOrganization(organizationTest);
+//        return server;
+//    }
+//
+//    private GeoPlatformServer createServer1CSW() {
+//        GeoPlatformServer server = new GeoPlatformServer();
+//        server.setServerUrl("http://catalog.geosdi.org/geonetwork/srv/en/csw");
+//        server.setName("csw.geosdi.org");
+//        server.setAliasName("CSW on geosdi");
+//        server.setServerType(GPCapabilityType.CSW);
+//        server.setOrganization(organizationTest);
+//        return server;
+//    }
+//
+//    private void insertDummyCSWServer() {
+//        for (int i = 10; i <= 99; i++) {
+//            GeoPlatformServer server = new GeoPlatformServer();
+//            server.setTitle("Title_" + i);
+//            server.setAliasName("Z_Alias_" + i);
+//            server.setServerUrl("http://csw-test/" + i);
+//            server.setServerType(GPCapabilityType.CSW);
+//            server.setOrganization(organizationTest);
+//            serverDAO.persist(server);
+//        }
+//    }
+//
     private void insertAccounts() {
         // GUI test
         this.adminTest = this.insertUser("admin", organizationTest, GPRole.ADMIN);
         this.userTest = this.insertUser("user", organizationTest, GPRole.USER);
         this.viewerTest = this.insertUser("viewer", organizationTest, GPRole.VIEWER);
         this.serviceTest = this.insertUser("service", organizationTest, GPRole.ADMIN);
-        this.gsUserTest = this.insertUser(this.gsAccountUsername, organizationTest, GPRole.ADMIN);
+        this.gsUserTest = this.insertUser(gsAccountUsername, organizationTest, GPRole.ADMIN);
         //
         this.insertApplication("SIGV");
     }
 
     private void insertProjects() {
         this.adminProject = this.createProject("admin_project", true, 0,
-                new Date(System.currentTimeMillis()));
+                                               new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
-                new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)));
+                                              new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)));
         this.viewerProject = this.createProject("viewer_project", false, 0,
-                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)));
+                                                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)));
         this.gsUserProject = this.createProject("gp_user_project", true, 0,
-                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
+                                                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
         projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //
         this.insertBindingUserProject(adminTest, adminProject, BasePermission.ADMINISTRATION.getMask());
@@ -366,10 +366,10 @@ public abstract class BaseDAOTest {
         // Projects of admin
         for (int i = 1; i <= 41; i++) {
             GPProject projectIth = this.createProject("project_admin_k_" + i, false,
-                    i, new Date(System.currentTimeMillis() + i * 333));
+                                                      i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
             projectDAO.persist(projectIth);
             this.insertBindingUserProject(this.adminTest, projectIth,
-                    BasePermission.ADMINISTRATION.getMask());
+                                          BasePermission.ADMINISTRATION.getMask());
         }
 
         // Project of user -> root folder: "server layer"
@@ -378,7 +378,7 @@ public abstract class BaseDAOTest {
         folderServerLayer.setNumberOfDescendants(layerList.size());
         List<GPRasterLayer> layers = this.loadRasterLayer(layerList, folderServerLayer, userProject, layerList.size());
         folderDAO.persist(folderServerLayer);
-        layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
+        layerDAO.persist(layers.toArray(new GPRasterLayer[layers.size()]));
         //
         userProject.setNumberOfElements(layerList.size());
         projectDAO.merge(userProject);
@@ -409,7 +409,7 @@ public abstract class BaseDAOTest {
     }
 
     private void insertGPAccessInfoTest() {
-        GSAccount gsAccount = this.generateGSAccount(this.gsAccountUsername);
+        GSAccount gsAccount = this.generateGSAccount(gsAccountUsername);
         GSResource resource = this.generateResource(gsAccount);
         gsUserTest.setDefaultProjectID(gsUserProject.getId());
         gsUserTest.setGsAccount(gsAccount);
@@ -418,9 +418,9 @@ public abstract class BaseDAOTest {
         accountDAO.merge(gsUserTest);
     }
 
-    private GSAccount generateGSAccount(String userName) {
+    private GSAccount generateGSAccount(String username) {
         GSAccount account = new GSAccount();
-        account.setGsuser(userName);
+        account.setGsuser(username);
         account.setAuthkey(UUID.randomUUID().toString());
         return account;
     }
@@ -449,7 +449,7 @@ public abstract class BaseDAOTest {
         return resource;
     }
 
-    private GPOrganization createOwnOrganization() {
+    protected GPOrganization createOwnOrganization() {
         GPOrganization organization = new GPOrganization("geoSDI");
         organization.setDescription("geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.");
         organization.setUrl("http://www.geosdi.org");
@@ -458,8 +458,8 @@ public abstract class BaseDAOTest {
         return organization;
     }
 
-    protected GPUser insertUser(String name, GPOrganization organization, GPRole... roles) {
-        GPUser user = this.createUser(name, organization);
+    protected GPUser insertUser(String email, GPOrganization organization, GPRole... roles) {
+        GPUser user = this.createUser(email, organization);
         accountDAO.persist(user);
         logger.debug("\n*** User SAVED:\n{}\n***", user);
 
@@ -492,18 +492,20 @@ public abstract class BaseDAOTest {
         return authorities;
     }
 
-    private GPUser createUser(String username, GPOrganization organization) {
+    private GPUser createUser(String email, GPOrganization organization) {
         GPUser user = new GPUser();
-        user.setUsername(username);
         user.setOrganization(organization);
-        user.setName("Complete name of " + username);
-        user.setEmailAddress(username + "@test.foo");
-        user.setEnabled(true);
-        if (username.contains("_")) {
-            user.setPassword(this.gpDigesterSHA1.digest("pwd_" + username));
+        user.setName("Complete name of " + email);
+        if (email.contains("_")) {
+            user.setPassword(this.gpDigesterSHA1.digest("pwd_" + email));
         } else { // User for GUI test
-            user.setPassword(this.gpDigesterSHA1.digest(username));
+            user.setPassword(this.gpDigesterSHA1.digest(email));
         }
+        if (!email.contains("@")) {
+            email += "@geosdi.org";
+        }
+        user.setEmailAddress(email);
+        user.setEnabled(true);
         user.setSendEmail(true);
         return user;
     }
@@ -670,7 +672,7 @@ public abstract class BaseDAOTest {
 
         return rasterLayers;
     }
-//</editor-fold>
+    //</editor-fold>
 
     /**
      * Default roles for ACLs purpose

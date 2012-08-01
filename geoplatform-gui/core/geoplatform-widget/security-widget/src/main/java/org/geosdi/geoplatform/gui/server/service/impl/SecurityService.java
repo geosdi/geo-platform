@@ -49,7 +49,6 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
-import org.geosdi.geoplatform.gui.server.SessionUtility.SessionProperty;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -86,7 +85,7 @@ public class SecurityService implements ISecurityService {
         GPAccountProject accountProject;
         IGPAccountDetail userDetail;
         try {
-            user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
+            user = geoPlatformServiceClient.getUserDetailByEmailAndPassword(
                     userName, password);
             guiComponentPermission = geoPlatformServiceClient.getAccountPermission(
                     user.getId());
@@ -184,12 +183,12 @@ public class SecurityService implements ISecurityService {
         }
         return account;
     }
-
-    private void deleteUserFromSession(HttpServletRequest httpServletRequest) {
-        HttpSession session = httpServletRequest.getSession();
-        session.removeAttribute(SessionProperty.LOGGED_ACCOUNT.toString());
-    }
-
+//
+//    private void deleteUserFromSession(HttpServletRequest httpServletRequest) {
+//        HttpSession session = httpServletRequest.getSession();
+//        session.removeAttribute(SessionProperty.LOGGED_ACCOUNT.toString());
+//    }
+//
     @Override
     public void invalidateSession(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
@@ -222,7 +221,7 @@ public class SecurityService implements ISecurityService {
     private IGPAccountDetail convertAccountToDTO(GPAccount account, GPAccountProject accountProject,
             GPViewport viewport) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
-        accountDetail.setUsername(account.getStringID()); // Forced representation
+        accountDetail.setEmail(account.getStringID()); // Forced representation
         accountDetail.setOrganization(account.getOrganization().getName());
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;

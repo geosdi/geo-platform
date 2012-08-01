@@ -125,8 +125,12 @@ public class GPLegendWidget {
     }
 
     public void reloadLegend(GPLayerBean layerBean) {
-        this.hideLegendItem(layerBean);
-        this.addLegend(layerBean);
+        //This check verify if the legend is already visible on map otherwise 
+        //it is unnecessary to reload the legend
+        if (this.legendsStore.getItemByItemId(layerBean.getUUID()) != null) {
+            this.hideLegendItem(layerBean);
+            this.addLegend(layerBean);
+        }
     }
 
     public void resetLegendWidget() {

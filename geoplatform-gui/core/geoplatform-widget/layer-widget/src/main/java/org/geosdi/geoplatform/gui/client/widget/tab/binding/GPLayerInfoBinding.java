@@ -54,8 +54,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel.GPLayerKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
-import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
-import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
+import org.geosdi.geoplatform.gui.puregwt.layers.event.ReloadLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
@@ -115,10 +114,8 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 super.componentKeyDown(event);
                 if (event.getKeyCode() == KeyCodes.KEY_ENTER
                         && !aliasField.getValue().isEmpty()) {
-                    LayerHandlerManager.fireEvent(new HideLegendEvent(getModel()));
                     getModel().setAlias(aliasField.getValue());
-                    LayerHandlerManager.fireEvent(new DisplayLegendEvent(getModel()));
-                    //Update legend
+                    LayerHandlerManager.fireEvent(new ReloadLegendEvent(getModel()));
                 }
             }
         });

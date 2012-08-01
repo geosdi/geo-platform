@@ -70,10 +70,10 @@ public class GPLegendWidget {
      * @param layerBean
      */
     public void addLegend(GPLayerBean layerBean) {
-        if (this.legendsStore.getItemByItemId(layerBean.getTitle()) == null) {
+        if (this.legendsStore.getItemByItemId(layerBean.getUUID()) == null) {
             ContentPanel cp = new ContentPanel();
             cp.setHeading(layerBean.getLabel());
-            cp.setId(layerBean.getTitle());
+            cp.setId(layerBean.getUUID());
             cp.setHeaderVisible(false);
             cp.setBorders(false);
             cp.setBodyBorder(false);
@@ -93,7 +93,11 @@ public class GPLegendWidget {
                 dataSource = layerBean.getDataSource().replaceAll("/wfs", "/wms");
             }
             StringBuilder imageURL = new StringBuilder();
-            imageURL.append(dataSource).append(GET_LEGEND_REQUEST).append(layerBean.getName()).append("&scale=5000&service=WMS");
+            imageURL.append(dataSource).append(GET_LEGEND_REQUEST).append(layerBean.getName())
+                    .append("&scale=5000&service=WMS");
+            if (layerBean.getStyles() != null && layerBean.getStyles().size() > 0) {
+                imageURL.append("&STYLE=").append(layerBean.getStyles().get(0).getStyleString());
+            }
             String authkeyTuple = GSAuthKeyManager.getAuthKeyTuple();
             if (!authkeyTuple.equals("")) {
                 imageURL.append('&').append(authkeyTuple);
@@ -112,12 +116,17 @@ public class GPLegendWidget {
      *
      * @param layerBean
      */
-    public void hideLegenItem(GPLayerBean layerBean) {
-        if (this.legendsStore.getItemByItemId(layerBean.getTitle()) != null) {
+    public void hideLegendItem(GPLayerBean layerBean) {
+        if (this.legendsStore.getItemByItemId(layerBean.getUUID()) != null) {
             this.legendsStore.remove(this.legendsStore.getItemByItemId(
-                    layerBean.getTitle()));
+                    layerBean.getUUID()));
             this.legendsStore.layout();
         }
+    }
+
+    public void reloadLegend(GPLayerBean layerBean) {
+        this.hideLegendItem(layerBean);
+        this.addLegend(layerBean);
     }
 
     public void resetLegendWidget() {

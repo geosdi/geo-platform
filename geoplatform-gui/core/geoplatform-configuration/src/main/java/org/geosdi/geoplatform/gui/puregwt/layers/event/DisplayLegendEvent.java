@@ -42,11 +42,18 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class DisplayLegendEvent extends GwtEvent<LegendLayerHandler> {
 
     private GPLayerBean layerBean;
+
+    public DisplayLegendEvent() {
+    }
+
+    public DisplayLegendEvent(GPLayerBean layerBean) {
+        this.layerBean = layerBean;
+    }
 
     @Override
     public Type<LegendLayerHandler> getAssociatedType() {

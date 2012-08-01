@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientIn
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.geosdi.geoplatform.gui.model.UUIDGenerator;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
@@ -66,6 +67,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
             return value;
         }
     }
+    private String UUID = UUIDGenerator.uuid();
     private Long id;
     private String name;
     private String alias;
@@ -88,8 +90,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     }
 
     /**
-     * @param id
-     * the id to set
+     * @param id the id to set
      */
     @Override
     public void setId(Long id) {
@@ -105,8 +106,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     }
 
     /**
-     * @param name
-     * the name to set
+     * @param name the name to set
      */
     @Override
     public void setName(String name) {
@@ -139,8 +139,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     }
 
     /**
-     * @param label
-     * the label to set
+     * @param label the label to set
      */
     @Override
     public void setLabel(String label) {
@@ -158,8 +157,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     }
 
     /**
-     * @param title
-     * the title to set
+     * @param title the title to set
      */
     @Override
     public void setTitle(String title) {
@@ -175,8 +173,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     }
 
     /**
-     * @param abstractText
-     * the abstractText to set
+     * @param abstractText the abstractText to set
      */
     @Override
     public void setAbstractText(String abstractText) {
@@ -194,8 +191,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     }
 
     /**
-     * @param dataSource
-     * the dataSource to set
+     * @param dataSource the dataSource to set
      */
     @Override
     public void setDataSource(String dataSource) {
@@ -211,8 +207,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     }
 
     /**
-     * @param crs the
-     * crs to set
+     * @param crs the crs to set
      */
     @Override
     public void setCrs(String crs) {
@@ -228,8 +223,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     }
 
     /**
-     * @param bbox
-     * the bbox to set
+     * @param bbox the bbox to set
      */
     @Override
     public void setBbox(BBoxClientInfo bbox) {
@@ -255,8 +249,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     }
 
     /**
-     * @param layerType
-     * the layerType to set
+     * @param layerType the layerType to set
      */
     @Override
     public void setLayerType(GPLayerType layerType) {
@@ -276,6 +269,13 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     @Override
     public int getzIndex() {
         return 0;
+    }
+
+    /**
+     * @return the UUID
+     */
+    public String getUUID() {
+        return UUID;
     }
 
     /**

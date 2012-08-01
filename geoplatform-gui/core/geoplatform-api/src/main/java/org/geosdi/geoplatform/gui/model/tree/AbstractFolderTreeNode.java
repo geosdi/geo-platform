@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.model.tree;
 
 import com.extjs.gxt.ui.client.data.ModelData;
-import java.util.HashMap;
+import com.google.common.collect.Maps;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -84,13 +84,12 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
 
     /**
      * The Folder Child as a Map
-     * 
-     * @return 
-     *          Map<String, GPLayerBean>
-     * 
+     *
+     * @return Map<String, GPLayerBean>
+     *
      */
     public Map<String, GPLayerBean> getLayers() {
-        Map<String, GPLayerBean> childMap = new HashMap<String, GPLayerBean>();
+        Map<String, GPLayerBean> childMap = Maps.newHashMap();
 
         List<ModelData> childList = super.getChildren();
 

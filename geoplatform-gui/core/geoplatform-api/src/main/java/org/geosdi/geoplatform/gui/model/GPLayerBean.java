@@ -97,4 +97,6 @@ public interface GPLayerBean extends ModelData {
     String getCqlFilter();
 
     void setCqlFilter(String cqlFilter);
+
+    String getUUID();
 }

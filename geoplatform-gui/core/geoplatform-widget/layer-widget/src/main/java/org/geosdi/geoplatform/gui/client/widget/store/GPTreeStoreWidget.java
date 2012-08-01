@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.client.widget.store;
 
 import com.extjs.gxt.ui.client.data.ModelData;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -147,25 +149,22 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
             super.tree.setExpanded(parentDestination, true);
         }
 
-        List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+        List<GPBeanTreeModel> layerList = Lists.newArrayList();
         StringBuilder existingLayers = new StringBuilder();
         for (GPLayerBean layer : layers) {
-            boolean duplicatedLayer = this.checkDuplicateLayer(layer, parentDestination);
-
+            boolean duplicatedLayer = this.checkDuplicatedLayer(layer, parentDestination);
             if (duplicatedLayer) {
-                if (sourceLayer == GPTreeStoreOperations.LAYERS_FROM_COPY_MENU) {
-                    String aliasForCopiedLayer = this.generateUnduplicateAliasForLayer(
-                            layer, parentDestination);
-                    layerList.add(this.duplicateRaster(layer, aliasForCopiedLayer));
-                } else {
-                    existingLayers.append(layer.getLabel()).append("\n");
-                }
+                String aliasForCopiedLayer = this.generateUnduplicateAliasForLayer(
+                        layer, parentDestination);
+                layerList.add(this.duplicateRaster(layer, aliasForCopiedLayer));
+                existingLayers.append(layer.getLabel()).append("\n");
             } else {
                 this.manageAddLayerFromSource(layerList, layer, sourceLayer);
             }
         }
 
-        this.manageUnduplicatedLayer(layerList, parentDestination,
+        //TODO: NAZ change this
+        this.manageLayersInsertion(layerList, parentDestination,
                 layers.get(0).getDataSource());
         this.createAlertMessage(existingLayers);
     }
@@ -177,32 +176,45 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         }
 
         GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
-        List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+        List<GPBeanTreeModel> layerList = Lists.newArrayList();
 
         for (GPShortLayerBean layer : layers) {
-            boolean duplicatedLayer = this.checkDuplicateLayer(layer, parentDestination);
-
+            boolean duplicatedLayer = this.checkDuplicatedLayer(layer, parentDestination);
             if (duplicatedLayer) {
+                String aliasForCopiedLayer = this.generateUnduplicateAliasForLayer(
+                        layer, parentDestination);
+                layerList.add(this.generateRasterTreeNode(layer, aliasForCopiedLayer));
                 existingLayers.append(layer.getLayerLabel()).append("\n");
             } else {
                 layerList.add(this.generateRasterTreeNode(layer));
             }
         }
 
-        this.manageUnduplicatedLayer(layerList, parentDestination,
+        this.manageLayersInsertion(layerList, parentDestination,
                 layers.get(0).getLayerDataSource());
 
         return existingLayers;
     }
 
-    private String generateUnduplicateAliasForLayer(GPLayerBean layer, GPBeanTreeModel parentDestination) {
-        final String COPY_STRING = " - Copy (";
+    private String generateUnduplicateAliasForLayer(GPShortLayerBean layer,
+            GPBeanTreeModel parentDestination) {
+        String originalName = layer.getLayerTitle();
+        return buildAlias(originalName, parentDestination);
+    }
+
+    private String generateUnduplicateAliasForLayer(GPLayerBean layer,
+            GPBeanTreeModel parentDestination) {
         String originalName;
         if (layer.getAlias() != null) {
             originalName = layer.getAlias();
         } else {
             originalName = layer.getTitle();
         }
+        return this.buildAlias(originalName, parentDestination);
+    }
+
+    private String buildAlias(String originalName, GPBeanTreeModel parentDestination) {
+        final String COPY_STRING = " - Copy (";
         int suffix = 1;
         int copyIndex = originalName.indexOf(COPY_STRING);
         String modifiedName;
@@ -233,7 +245,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         return modifiedName;
     }
 
-    private boolean checkDuplicateLayer(GPLayerBean layer, GPBeanTreeModel parentDestination) {
+    private boolean checkDuplicatedLayer(GPLayerBean layer, GPBeanTreeModel parentDestination) {
         for (ModelData element : parentDestination.getChildren()) {
             if (element != null && element instanceof GPLayerTreeModel
                     && ((GPLayerTreeModel) element).getName().equals(layer.getName())) { // TODO Title is better? (exists always)
@@ -243,7 +255,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         return false;
     }
 
-    private boolean checkDuplicateLayer(GPShortLayerBean layer, GPBeanTreeModel parentDestination) {
+    private boolean checkDuplicatedLayer(GPShortLayerBean layer, GPBeanTreeModel parentDestination) {
         for (ModelData element : parentDestination.getChildren()) {
             if (element != null && element instanceof GPLayerTreeModel
                     && ((GPLayerTreeModel) element).getName().equals(layer.getLayerName())) { // TODO Title is better? (exists always)
@@ -272,7 +284,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         LayerHandlerManager.fireEvent(layersTextEvent);
     }
 
-    private void manageUnduplicatedLayer(List<GPBeanTreeModel> layerList,
+    private void manageLayersInsertion(List<GPBeanTreeModel> layerList,
             GPBeanTreeModel parentDestination, String urlServer) {
         if (layerList.size() > 0) {
             this.tree.getStore().insert(parentDestination, layerList, 0, true);
@@ -291,7 +303,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     private void createAlertMessage(StringBuilder existingLayers) {
         if (existingLayers.length() != 0) {
             GeoPlatformMessage.alertMessage("Add Layers Notification",
-                    "The following layers will not be added to the tree because they already exsists in this folder:"
+                    "The following layers will be renamed because they already exsists in this folder:"
                     + "\n" + existingLayers);
         }
     }
@@ -312,6 +324,12 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         return raster;
     }
 
+    private RasterTreeNode generateRasterTreeNode(GPShortLayerBean layer, String rasterAlias) {
+        RasterTreeNode rasterTreeNode = this.generateRasterTreeNode(layer);
+        rasterTreeNode.setAlias(rasterAlias);
+        return rasterTreeNode;
+    }
+
     private RasterTreeNode generateRasterTreeNode(GPShortLayerBean layer) {
         RasterTreeNode raster = new RasterTreeNode();
         raster.setLayerType(layer.getLayerType());
@@ -321,7 +339,6 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         raster.setDataSource(layer.getLayerDataSource());
         raster.setBbox(layer.getBBox());
         raster.setCrs(layer.getCrs());
-
         raster.setChecked(false);
         raster.setOpacity(1.0f);
         raster.setStyles(new ArrayList<GPStyleStringBeanModel>(0));
@@ -344,12 +361,12 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         raster.setTitle(layer.getTitle());
         raster.setBbox(layer.getBbox());
         raster.setLayerType(layer.getLayerType());
-        raster.setStyles(new ArrayList<GPStyleStringBeanModel>(layer.getStyles()));
+        raster.setStyles(Lists.newArrayList(layer.getStyles()));
         return raster;
     }
 
     private Map<String, List<GPShortLayerBean>> getLayerMapDataSource(List<? extends GPShortLayerBean> layers) {
-        Map<String, List<GPShortLayerBean>> layerMap = new HashMap<String, List<GPShortLayerBean>>();
+        Map<String, List<GPShortLayerBean>> layerMap = Maps.newHashMap();
 
         for (GPShortLayerBean layer : layers) {
             String dataSource = layer.getLayerDataSource();
@@ -357,7 +374,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
             List<GPShortLayerBean> layersByDataSource = layerMap.get(dataSource);
             if (layersByDataSource == null) {
-                layersByDataSource = new ArrayList<GPShortLayerBean>();
+                layersByDataSource = Lists.newArrayList();
                 layerMap.put(dataSource, layersByDataSource);
             }
             layersByDataSource.add(layer);

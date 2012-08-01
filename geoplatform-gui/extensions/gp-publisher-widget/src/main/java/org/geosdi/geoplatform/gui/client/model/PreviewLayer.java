@@ -52,8 +52,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
  * @email nazzareno.sileno@geosdi.org
  */
 public class PreviewLayer implements GPLayerBean, Serializable {
-
-    private static final long serialVersionUID = 1223233615230469683L;
+    private static final long serialVersionUID = -4293623361000442644L;
 
     public interface PreviewLayerReader extends JsonReader<PreviewLayer> {
     }
@@ -370,6 +369,11 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     @Override
     public void setCqlFilter(String cqlFilter) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getUUID() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

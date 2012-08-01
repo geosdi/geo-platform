@@ -35,24 +35,36 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.layers.event;
 
-import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface LegendLayerHandler extends EventHandler {
+public class ReloadLegendEvent extends GwtEvent<LegendLayerHandler> {
 
-    Type<LegendLayerHandler> TYPE = new Type<LegendLayerHandler>();
+    private GPLayerBean layerBean;
 
-    public void onDisplayLegend(GPLayerBean layerBean);
+    public ReloadLegendEvent() {
+    }
 
-    public void onHideLegend(GPLayerBean layerBean);
+    public ReloadLegendEvent(GPLayerBean layerBean) {
+        this.layerBean = layerBean;
+    }
     
-    public void onReloadLegend(GPLayerBean layerBean);
-    
-    public void cleanLegendWidget();
+    @Override
+    public Type<LegendLayerHandler> getAssociatedType() {
+        return LegendLayerHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(LegendLayerHandler handler) {
+        handler.onReloadLegend(layerBean);
+    }
+
+    public void setLayerBean(GPLayerBean layerBean) {
+        this.layerBean = layerBean;
+    }
 }

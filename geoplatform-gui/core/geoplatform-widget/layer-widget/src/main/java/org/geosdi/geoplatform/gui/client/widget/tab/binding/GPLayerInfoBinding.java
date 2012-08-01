@@ -52,13 +52,16 @@ import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel.GPLayerKeyValue;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
+import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
+import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
 
@@ -80,7 +83,6 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         titleField.setFieldLabel("Title");
 
         titleField.addListener(Events.Change, new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent be) {
                 titleField.setValue((String) be.getOldValue());
@@ -95,7 +97,6 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         abstractField.setFieldLabel("Abstract");
 
         abstractField.addListener(Events.Change, new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent be) {
                 abstractField.setValue((String) be.getOldValue());
@@ -109,13 +110,15 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         aliasField.setFieldLabel("Alias");
         aliasField.setFireChangeEventOnSetValue(true);
         aliasField.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyDown(ComponentEvent event) {
                 super.componentKeyDown(event);
                 if (event.getKeyCode() == KeyCodes.KEY_ENTER
                         && !aliasField.getValue().isEmpty()) {
+                    LayerHandlerManager.fireEvent(new HideLegendEvent(getModel()));
                     getModel().setAlias(aliasField.getValue());
+                    LayerHandlerManager.fireEvent(new DisplayLegendEvent(getModel()));
+                    //Update legend
                 }
             }
         });
@@ -128,7 +131,6 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         serverField.setFieldLabel("Server");
 
         serverField.addListener(Events.Change, new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent be) {
                 serverField.setValue((String) be.getOldValue());
@@ -148,10 +150,10 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
 
     /**
      * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
-     * @email  giuseppe.lascaleia@geosdi.org
-     * 
+     * @email giuseppe.lascaleia@geosdi.org
+     *
      * Internal Class GPLayerAliasFieldBinding to map bi-directional Binding
-     * 
+     *
      */
     private class GPLayerAliasFieldBinding extends GPFieldBinding {
 

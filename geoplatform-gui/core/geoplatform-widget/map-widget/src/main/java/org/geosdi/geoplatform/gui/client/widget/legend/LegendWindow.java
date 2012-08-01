@@ -85,7 +85,7 @@ public class LegendWindow extends Window {
      * @param layerBean
      */
     public void hideLegenItem(GPLayerBean layerBean) {
-        this.legendWidget.hideLegenItem(layerBean);
+        this.legendWidget.hideLegendItem(layerBean);
 
         if (this.legendWidget.getLegendsStore().getItemCount() == 0) {
             super.hide();

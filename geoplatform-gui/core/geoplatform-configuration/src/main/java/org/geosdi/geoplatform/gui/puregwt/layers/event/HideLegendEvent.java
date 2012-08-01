@@ -48,8 +48,15 @@ public class HideLegendEvent extends GwtEvent<LegendLayerHandler> {
 
     private GPLayerBean layerBean;
 
-    public HideLegendEvent(GPLayerBean theLayerBean) {
-        this.layerBean = theLayerBean;
+    public HideLegendEvent() {
+    }
+
+    public HideLegendEvent(GPLayerBean layerBean) {
+        this.layerBean = layerBean;
+    }
+    
+    public void setLayerBean(GPLayerBean layerBean) {
+        this.layerBean = layerBean;
     }
 
     @Override

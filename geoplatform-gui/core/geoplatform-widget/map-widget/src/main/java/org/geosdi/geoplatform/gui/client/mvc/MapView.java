@@ -68,7 +68,6 @@ public class MapView extends GeoPlatformView {
 
     public MapView(Controller controller) {
         super(controller);
-
         this.mapLayout = new MapLayoutWidget();
         Registry.register(MapRegistryEnum.MAP_LAYOUT_WIDGET.toString(), this.mapLayout);
 //        this.revGeoWidget = new ReverseGeocodingWidget(this.mapLayout);
@@ -96,7 +95,6 @@ public class MapView extends GeoPlatformView {
         if (event.getType() == MapWidgetEvents.ATTACH_MAP_WIDGET) {
             this.mapLayout.onAddToCenterPanel();
         }
-
         if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR) {
             onAttachToolbar();
         }

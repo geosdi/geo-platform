@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
+import org.geosdi.geoplatform.gui.puregwt.layers.event.ReloadLegendEvent;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -59,7 +60,9 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     private MapLayerBuilder layerBuilder;
-    private DisplayLegendEvent displayLegend = new DisplayLegendEvent();
+    final private DisplayLegendEvent displayLegendEvent = new DisplayLegendEvent();
+    final private HideLegendEvent hideLegendEvent = new HideLegendEvent();
+    final private ReloadLegendEvent reloadLegendEvent = new ReloadLegendEvent();
     private CleanLegendEvent cleanLegend = new CleanLegendEvent();
 
     public MapLayersStore(GeoPlatformMap theMapWidget) {
@@ -110,8 +113,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void displayVector(GPVectorBean vectorBean) {
-        displayLegend.setLayerBean(vectorBean);
-        LayerHandlerManager.fireEvent(displayLegend);
+        displayLegendEvent.setLayerBean(vectorBean);
+        LayerHandlerManager.fireEvent(displayLegendEvent);
         if (containsLayer(vectorBean)) {
             WMS layer = (WMS) this.layers.get(vectorBean);
             if (!layer.isVisible() || Integer.parseInt(layer.getZIndex().toString())
@@ -130,8 +133,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void displayRaster(GPRasterBean rasterBean) {
-        displayLegend.setLayerBean(rasterBean);
-        LayerHandlerManager.fireEvent(displayLegend);
+        displayLegendEvent.setLayerBean(rasterBean);
+        LayerHandlerManager.fireEvent(displayLegendEvent);
         if (containsLayer(rasterBean)) {
             WMS layer = (WMS) this.layers.get(rasterBean);
             if (!layer.isVisible() || Integer.parseInt(layer.getZIndex().toString())
@@ -154,8 +157,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         if (layer != null) {
             layer.setIsVisible(false);
         }
-
-        LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
+        this.hideLegendEvent.setLayerBean(layerBean);
+        LayerHandlerManager.fireEvent(this.hideLegendEvent);
     }
 
     /*
@@ -172,7 +175,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.mapWidget.getMap().removeLayer(layer);
         }
         this.layers.remove(layerBean);
-        LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
+        this.hideLegendEvent.setLayerBean(layerBean);
+        LayerHandlerManager.fireEvent(this.hideLegendEvent);
     }
 
     @Override
@@ -182,6 +186,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             WMSParams params = new WMSParams();
             params.setStyles(newStyle);
             layer.mergeNewParams(params);
+            this.reloadLegendEvent.setLayerBean(layerBean);
+            LayerHandlerManager.fireEvent(this.reloadLegendEvent);
         }
     }
 
@@ -224,10 +230,10 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     public void onReloadLayer(GPLayerBean layerBean) {
         this.reloadLayer(layerBean);
     }
-    
+
     @Override
-    public void onChangeBaseLayer(Projection projection){
-        for(GPLayerBean layer : super.layers.keySet()){
+    public void onChangeBaseLayer(Projection projection) {
+        for (GPLayerBean layer : super.layers.keySet()) {
             this.layerBuilder.generateBoundsTransformationFromMap(layer);
         }
     }

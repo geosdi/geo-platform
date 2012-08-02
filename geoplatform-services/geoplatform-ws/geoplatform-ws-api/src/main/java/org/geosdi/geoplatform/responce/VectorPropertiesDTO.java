@@ -41,20 +41,20 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class ShortVectorPropertiesDTO extends ShortLayerPropertiesDTO {
+public class VectorPropertiesDTO extends ShortLayerPropertiesDTO {
 
     private static final long serialVersionUID = -6960320459196147232L;
 
-    public ShortVectorPropertiesDTO() {
+    public VectorPropertiesDTO() {
     }
 
-    public ShortVectorPropertiesDTO(GPVectorLayer vector) {
+    public VectorPropertiesDTO(GPVectorLayer vector) {
         super(vector);
     }
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

@@ -77,7 +77,7 @@ import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
@@ -641,7 +641,7 @@ public interface GeoPlatformService {
     @Post
     @HttpResource(location = "/layer")
     boolean saveLayerProperties(
-            @WebParam(name = "layerProperties") ShortRasterPropertiesDTO layerProperties)
+            @WebParam(name = "layerProperties") RasterPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**

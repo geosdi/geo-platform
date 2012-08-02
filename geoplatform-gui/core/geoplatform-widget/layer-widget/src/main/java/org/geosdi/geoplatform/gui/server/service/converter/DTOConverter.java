@@ -65,7 +65,7 @@ import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -120,8 +120,8 @@ public class DTOConverter {
         return clientFolderElements;
     }
 
-    public ShortRasterPropertiesDTO convertMementoProperties(MementoLayerOriginalProperties memento) {
-        ShortRasterPropertiesDTO dto = new ShortRasterPropertiesDTO();
+    public RasterPropertiesDTO convertMementoProperties(MementoLayerOriginalProperties memento) {
+        RasterPropertiesDTO dto = new RasterPropertiesDTO();
         dto.setAlias(memento.getName());
         dto.setChecked(memento.isChecked());
         dto.setId(memento.getIdBaseElement());

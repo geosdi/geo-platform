@@ -57,7 +57,7 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
@@ -399,7 +399,7 @@ class LayerServiceImpl {
         }
     }
 
-    public boolean saveLayerProperties(ShortRasterPropertiesDTO layerProperties)
+    public boolean saveLayerProperties(RasterPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
         Long layerID = layerProperties.getId();
         if (layerID == -1) {

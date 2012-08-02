@@ -73,7 +73,7 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
-import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -447,7 +447,7 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        ShortRasterPropertiesDTO dto = this.dtoConverter.convertMementoProperties(memento);
+        RasterPropertiesDTO dto = this.dtoConverter.convertMementoProperties(memento);
         try {
             result = geoPlatformServiceClient.saveLayerProperties(dto);
         } catch (ResourceNotFoundFault ex) {

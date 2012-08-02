@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class ShortRasterPropertiesDTO extends ShortLayerPropertiesDTO {
+public class RasterPropertiesDTO extends ShortLayerPropertiesDTO {
 
     private static final long serialVersionUID = -8575603239213317626L;
     //
@@ -54,10 +54,10 @@ public class ShortRasterPropertiesDTO extends ShortLayerPropertiesDTO {
     @XmlElement(name = "style")
     private List<String> styleList;
 
-    public ShortRasterPropertiesDTO() {
+    public RasterPropertiesDTO() {
     }
 
-    public ShortRasterPropertiesDTO(GPRasterLayer layer) {
+    public RasterPropertiesDTO(GPRasterLayer layer) {
         super(layer);
         this.opacity = layer.getOpacity();
         this.styleList = layer.getStyles();
@@ -71,8 +71,7 @@ public class ShortRasterPropertiesDTO extends ShortLayerPropertiesDTO {
     }
 
     /**
-     * @param opacity
-     *              the opacity to set
+     * @param opacity the opacity to set
      */
     public void setOpacity(float opacity) {
         if (opacity < 0.0f || opacity > 1.0f) {
@@ -89,8 +88,7 @@ public class ShortRasterPropertiesDTO extends ShortLayerPropertiesDTO {
     }
 
     /**
-     * @param styleList
-     *          the styleList to set
+     * @param styleList the styleList to set
      */
     public void setStyleList(List<String> styleList) {
         this.styleList = styleList;
@@ -98,7 +96,7 @@ public class ShortRasterPropertiesDTO extends ShortLayerPropertiesDTO {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

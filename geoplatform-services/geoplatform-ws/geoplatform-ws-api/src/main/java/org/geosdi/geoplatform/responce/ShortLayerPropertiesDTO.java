@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.core.model.GPLayer;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso(value = {ShortRasterPropertiesDTO.class, ShortVectorPropertiesDTO.class})
+@XmlSeeAlso(value = {RasterPropertiesDTO.class, VectorPropertiesDTO.class})
 public abstract class ShortLayerPropertiesDTO implements Serializable {
 
     private static final long serialVersionUID = -8694480604917509968L;
@@ -77,8 +77,7 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
     }
 
     /**
-     * @param id
-     * the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -92,8 +91,7 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
     }
 
     /**
-     * @param alias
-     * the alias to set
+     * @param alias the alias to set
      */
     public void setAlias(String alias) {
         this.alias = alias;
@@ -115,8 +113,7 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
     }
 
     /**
-     * @param checked
-     * the checked to set
+     * @param checked the checked to set
      */
     public void setChecked(boolean checked) {
         this.checked = checked;

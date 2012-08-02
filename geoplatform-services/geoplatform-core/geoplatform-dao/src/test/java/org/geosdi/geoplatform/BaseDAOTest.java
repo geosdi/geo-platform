@@ -44,6 +44,18 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
+import org.geosdi.geoplatform.core.acl.AclClass;
+import org.geosdi.geoplatform.core.acl.AclEntry;
+import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
+import org.geosdi.geoplatform.core.acl.AclSid;
+import org.geosdi.geoplatform.core.acl.GeoPlatformPermission;
+import org.geosdi.geoplatform.core.acl.GuiComponent;
+import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
+import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
+import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
+import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
+import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
@@ -110,6 +122,21 @@ public abstract class BaseDAOTest {
     protected GSResourceDAO gsResourceDAO;
     //
     @Autowired
+    protected AclClassDAO classDAO;
+    //
+    @Autowired
+    protected AclSidDAO sidDAO;
+    //
+    @Autowired
+    protected AclObjectIdentityDAO objectIdentityDAO;
+    //
+    @Autowired
+    protected AclEntryDAO entryDAO;
+    //
+    @Autowired
+    protected GuiComponentDAO guiComponentDAO;
+    //
+    @Autowired
     protected GPDigesterConfigutator gpDigesterSHA1;
     //
     protected GPOrganization organizationTest;
@@ -122,13 +149,22 @@ public abstract class BaseDAOTest {
     protected GPProject userProject;
     protected GPProject viewerProject;
     protected GPProject gsUserProject;
+    // ACL
+    private static final String emailSuperUserTestAcl = "super_user_test_acl";
+    private static final String emailAdminTestAcl = "admin_acl_test";
+    private static final String emailUserTestAcl = "user_acl_test";
+    private AclClass gcClass;
+    private AclSid superUser;
+    private AclSid admin;
+    private AclSid user;
+    private AclSid viewer;
+    private AclSid sigv;
     //
     private URL url = null;
     private static final String gsAccountUsername = "gsuser";
     private static final String urlWMSGetCapabilities =
             "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 
-    //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
 //        this.removeAllStyles();
         this.removeAllLayers();
@@ -138,10 +174,12 @@ public abstract class BaseDAOTest {
         this.removeAllAuthorities();
         this.removeAllGSAccounts();
         this.removeAllAccounts();
+        this.removeAllACL();
         this.removeAllServers();
         this.removeAllOrganizations();
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Remove all data">
 //    private void removeAllStyles() {
 //        List<GPStyle> styles = styleDAO.findAll();
 //        for (GPStyle style : styles) {
@@ -244,23 +282,79 @@ public abstract class BaseDAOTest {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Insert data">
+    //<editor-fold defaultstate="collapsed" desc="Remove all ACL data">
+    private void removeAllACL() {
+        this.removeAllEntries();
+        this.removeAllObjectIdentities();
+        this.removeAllSids();
+        this.removeAllClasses();
+        this.removeAllGuiComponents();
+    }
+
+    private void removeAllEntries() {
+        List<AclEntry> entries = entryDAO.findAll();
+        for (AclEntry e : entries) {
+            logger.trace("\n*** AclEntry to REMOVE:\n{}\n***", e);
+            boolean removed = entryDAO.remove(e);
+            Assert.assertTrue("Old AclEntry NOT removed", removed);
+        }
+    }
+
+    private void removeAllObjectIdentities() {
+        List<AclObjectIdentity> objectIdentities = objectIdentityDAO.findAll();
+        for (AclObjectIdentity oi : objectIdentities) {
+            logger.trace("\n*** AclObjectIdentity to REMOVE:\n{}\n***", oi);
+            boolean removed = objectIdentityDAO.remove(oi);
+            Assert.assertTrue("Old AclObjectIdentity NOT removed", removed);
+        }
+    }
+
+    private void removeAllSids() {
+        List<AclSid> sids = sidDAO.findAll();
+        for (AclSid s : sids) {
+            logger.trace("\n*** AclSid to REMOVE:\n{}\n***", s);
+            boolean removed = sidDAO.remove(s);
+            Assert.assertTrue("Old AclSid NOT removed", removed);
+        }
+    }
+
+    private void removeAllClasses() {
+        List<AclClass> classes = classDAO.findAll();
+        for (AclClass c : classes) {
+            logger.trace("\n*** AclClass to REMOVE:\n{}\n***", c);
+            boolean removed = classDAO.remove(c);
+            Assert.assertTrue("Old AclClass NOT removed", removed);
+        }
+    }
+
+    private void removeAllGuiComponents() {
+        List<GuiComponent> guiComponents = guiComponentDAO.findAll();
+        for (GuiComponent gc : guiComponents) {
+            logger.trace("\n*** GuiComponent to REMOVE:\n{}\n***", gc);
+            boolean removed = guiComponentDAO.remove(gc);
+            Assert.assertTrue("Old GuiComponent NOT removed", removed);
+        }
+    }
+    //</editor-fold>
+
     protected void insertData() throws ParseException {
         this.insertOrganizations();
         this.insertServers();
         this.insertAccounts();
+        this.insertGuiComponents();
         this.insertProjects();
         this.insertFoldersAndLayers();
         this.insertGPAccessInfoTest();
     }
 
-    protected void insertOrganizations() {
+    //<editor-fold defaultstate="collapsed" desc="Insert data">
+    private void insertOrganizations() {
         organizationTest = this.createOwnOrganization();
         organizationDAO.persist(organizationTest);
         logger.debug("\n*** Organization SAVED:\n{}\n***", organizationTest);
     }
 
-    protected void insertServers() {
+    private void insertServers() {
         // WMS
         GeoPlatformServer server1WMS = createServer1WMS();
         GeoPlatformServer server2WMS = createServer2WMS();
@@ -327,6 +421,7 @@ public abstract class BaseDAOTest {
 //        }
 //    }
 //
+
     private void insertAccounts() {
         // GUI test
         this.adminTest = this.insertUser("admin", organizationTest, GPRole.ADMIN);
@@ -334,6 +429,10 @@ public abstract class BaseDAOTest {
         this.viewerTest = this.insertUser("viewer", organizationTest, GPRole.VIEWER);
         this.serviceTest = this.insertUser("service", organizationTest, GPRole.ADMIN);
         this.gsUserTest = this.insertUser(gsAccountUsername, organizationTest, GPRole.ADMIN);
+        // ACL
+        this.insertUser(emailSuperUserTestAcl, organizationTest, GPRole.ADMIN, GPRole.USER);
+        this.insertUser(emailAdminTestAcl, organizationTest, GPRole.ADMIN);
+        this.insertUser(emailUserTestAcl, organizationTest, GPRole.USER);
         //
         this.insertApplication("SIGV");
     }
@@ -449,7 +548,7 @@ public abstract class BaseDAOTest {
         return resource;
     }
 
-    protected GPOrganization createOwnOrganization() {
+    private GPOrganization createOwnOrganization() {
         GPOrganization organization = new GPOrganization("geoSDI");
         organization.setDescription("geoSDI realizza e distribuisce i migliori sistemi software geospaziali web based utilizzando un approccio open source.");
         organization.setUrl("http://www.geosdi.org");
@@ -459,13 +558,13 @@ public abstract class BaseDAOTest {
     }
 
     protected GPUser insertUser(String email, GPOrganization organization, GPRole... roles) {
-        GPUser user = this.createUser(email, organization);
-        accountDAO.persist(user);
-        logger.debug("\n*** User SAVED:\n{}\n***", user);
+        GPUser newUser = this.createUser(email, organization);
+        accountDAO.persist(newUser);
+        logger.debug("\n*** User SAVED:\n{}\n***", newUser);
 
         if (roles.length > 0) {
-            List<GPAuthority> authorities = this.createAuthorities(user, roles);
-            user.setGPAuthorities(authorities);
+            List<GPAuthority> authorities = this.createAuthorities(newUser, roles);
+            newUser.setGPAuthorities(authorities);
 
             for (GPAuthority authority : authorities) {
                 authorityDAO.persist(authority);
@@ -473,7 +572,7 @@ public abstract class BaseDAOTest {
             }
         }
 
-        return user;
+        return newUser;
     }
 
     protected GPApplication insertApplication(String appId) {
@@ -493,21 +592,21 @@ public abstract class BaseDAOTest {
     }
 
     private GPUser createUser(String email, GPOrganization organization) {
-        GPUser user = new GPUser();
-        user.setOrganization(organization);
-        user.setName("Complete name of " + email);
+        GPUser newUser = new GPUser();
+        newUser.setOrganization(organization);
+        newUser.setName("Complete name of " + email);
         if (email.contains("_")) {
-            user.setPassword(this.gpDigesterSHA1.digest("pwd_" + email));
+            newUser.setPassword(this.gpDigesterSHA1.digest("pwd_" + email));
         } else { // User for GUI test
-            user.setPassword(this.gpDigesterSHA1.digest(email));
+            newUser.setPassword(this.gpDigesterSHA1.digest(email));
         }
         if (!email.contains("@")) {
             email += "@geosdi.org";
         }
-        user.setEmailAddress(email);
-        user.setEnabled(true);
-        user.setSendEmail(true);
-        return user;
+        newUser.setEmailAddress(email);
+        newUser.setEnabled(true);
+        newUser.setSendEmail(true);
+        return newUser;
     }
 
     private GPApplication createApplication(String appID) {
@@ -608,7 +707,7 @@ public abstract class BaseDAOTest {
         try {
             url = new URL(urlWMSGetCapabilities);
         } catch (MalformedURLException e) {
-            logger.error("Error:" + e);
+            logger.error("Error: {}", e);
         }
 
         List<Layer> layers = null;
@@ -671,6 +770,112 @@ public abstract class BaseDAOTest {
         }
 
         return rasterLayers;
+    }
+
+    private void insertGuiComponents() {
+        // Unique class of Object Identities
+        this.gcClass = new AclClass(GuiComponent.class.getName());
+        //
+        logger.debug("\n*** AclClass to INSERT:\n{}\n***", gcClass);
+        classDAO.persist(gcClass);
+
+        this.createSids();
+
+        Map<String, GuiComponent> gcMap = this.createGuiComponents();
+
+        Map<String, AclObjectIdentity> objIdMap = this.createObjectIdentities(gcMap);
+
+        this.createEntries(objIdMap);
+    }
+
+    private void createSids() {
+        // Owner of all Object Identities
+        this.superUser = new AclSid(true, emailSuperUserTestAcl);
+        // Users of interest
+        this.admin = new AclSid(false, GPRole.ADMIN.toString(), organizationTest);
+        this.user = new AclSid(false, GPRole.USER.toString(), organizationTest);
+        this.viewer = new AclSid(false, GPRole.VIEWER.toString(), organizationTest);
+        //
+        logger.debug("\n*** AclSid to INSERT:\n{}\n***", superUser);
+        logger.debug("\n*** AclSid to INSERT:\n{}\n***", admin);
+        logger.debug("\n*** AclSid to INSERT:\n{}\n***", user);
+        logger.debug("\n*** AclSid to INSERT:\n{}\n***", viewer);
+        //
+        this.sigv = new AclSid(true, "SIGV");
+        //
+        logger.debug("\n*** AclSid to INSERT:\n{}\n***", sigv);
+        //
+        sidDAO.persist(superUser, admin, user, viewer, sigv);
+    }
+
+    private Map<String, GuiComponent> createGuiComponents() {
+        Map<String, GuiComponent> gcMap = new HashMap<String, GuiComponent>();
+        // Gui Components
+        for (String ID : GuiComponentIDs.LIST_ALL) {
+            gcMap.put(ID, new GuiComponent(ID));
+        }
+        for (String ID : GuiComponentIDs.LIST_OWN_SIGV) {
+            gcMap.put(ID, new GuiComponent(ID));
+        }
+        //
+        guiComponentDAO.persist(gcMap.values().toArray(new GuiComponent[gcMap.size()]));
+
+        return gcMap;
+    }
+
+    private Map<String, AclObjectIdentity> createObjectIdentities(Map<String, GuiComponent> gcMap) {
+        Map<String, AclObjectIdentity> objIdMap = new HashMap<String, AclObjectIdentity>();
+        // Object Identities
+        for (String componentID : GuiComponentIDs.LIST_ALL) {
+            Long id = gcMap.get(componentID).getId();
+            // SuperUser is the owner of all Object Identities
+            objIdMap.put(componentID, new AclObjectIdentity(gcClass, id, superUser));
+        }
+        for (String componentID : GuiComponentIDs.LIST_OWN_SIGV) {
+            Long id = gcMap.get(componentID).getId();
+            // SuperUser is the owner of all Object Identities
+            objIdMap.put(componentID, new AclObjectIdentity(gcClass, id, superUser));
+        }
+        //
+        objectIdentityDAO.persist(objIdMap.values().toArray(new AclObjectIdentity[objIdMap.size()]));
+
+        return objIdMap;
+    }
+
+    private void createEntries(Map<String, AclObjectIdentity> objIdMap) {
+        // ACE
+        int enable = GeoPlatformPermission.ENABLE.getMask();
+        //
+        Map<String, AclEntry> entriesMap = new HashMap<String, AclEntry>();
+        // Admin
+        for (String componentID : GuiComponentIDs.LIST_ALL) {
+            entriesMap.put(GPRole.ADMIN + componentID,
+                           new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
+        }
+        // User
+        for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_USER.entrySet()) {
+            if (e.getValue() != null) {
+                entriesMap.put(GPRole.USER + e.getKey(),
+                               new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
+            }
+        }
+        // Viewer
+        for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_VIEWER.entrySet()) {
+            if (e.getValue() != null) {
+                // Ace Order is 3 because the entries of admin and user should be added before
+                entriesMap.put(GPRole.VIEWER + e.getKey(),
+                               new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
+            }
+        }
+        // SIGV Application
+        for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_APPLICATION_SIGV.entrySet()) {
+            if (e.getValue() != null) {
+                entriesMap.put("SIGV" + e.getKey(),
+                               new AclEntry(objIdMap.get(e.getKey()), 4, sigv, enable, e.getValue()));
+            }
+        }
+        //
+        entryDAO.persist(entriesMap.values().toArray(new AclEntry[entriesMap.size()]));
     }
     //</editor-fold>
 

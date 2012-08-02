@@ -8,6 +8,8 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernatespatial.postgis.PostgisDialect</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        
+        <property name="hibernate.hbm2ddl.auto">create</property>
 <!--        <property name="hibernate.cache.provider_configuration_file_resource_path">/ehcacheTerracotta.xml</property>-->
     <!-- MAPPING MODEL RESOURCES -->
         <mapping  class="org.geosdi.geoplatform.core.model.GPUser"/>

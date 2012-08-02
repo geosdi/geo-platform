@@ -136,15 +136,20 @@ public class WSAccountTest extends ServiceTest {
             Assert.assertNotNull(authorities);
             Assert.assertEquals("Number of Authorities of " + emailMultiRole, 2, authorities.size());
 
-            GPAuthority authority = authorities.get(0);
-            Assert.assertNotNull(authority);
-            Assert.assertEquals("Authority string", ROLE_ADMIN, authority.getAuthority());
-            Assert.assertEquals("Authority email", emailMultiRole, authority.getStringID());
+            boolean isAdmin = false;
+            boolean isViewer = false;
+            for (GPAuthority authority : authorities) {
+                Assert.assertNotNull(authority);
+                Assert.assertEquals("Authority email", emailMultiRole, authority.getStringID());
+                if (ROLE_ADMIN.equals(authority.getAuthority())) {
+                    isAdmin = true;
+                } else if (ROLE_VIEWER.equals(authority.getAuthority())) {
+                    isViewer = true;
+                }
+            }
+            Assert.assertTrue("Authority ADMIN string", isAdmin);
+            Assert.assertTrue("Authority VIEWER string", isViewer);
 
-            authority = authorities.get(1);
-            Assert.assertNotNull(authority);
-            Assert.assertEquals("Authority string", ROLE_VIEWER, authority.getAuthority());
-            Assert.assertEquals("Authority email", emailMultiRole, authority.getStringID());
         } finally {
             boolean check = gpWSClient.deleteAccount(idUser);
             Assert.assertTrue(check);

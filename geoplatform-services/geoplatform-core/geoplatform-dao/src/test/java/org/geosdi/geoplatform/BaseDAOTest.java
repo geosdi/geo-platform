@@ -151,8 +151,6 @@ public abstract class BaseDAOTest {
     protected GPProject gsUserProject;
     // ACL
     private static final String emailSuperUserTestAcl = "super_user_test_acl";
-    private static final String emailAdminTestAcl = "admin_acl_test";
-    private static final String emailUserTestAcl = "user_acl_test";
     private AclClass gcClass;
     private AclSid superUser;
     private AclSid admin;
@@ -431,8 +429,8 @@ public abstract class BaseDAOTest {
         this.gsUserTest = this.insertUser(gsAccountUsername, organizationTest, GPRole.ADMIN);
         // ACL
         this.insertUser(emailSuperUserTestAcl, organizationTest, GPRole.ADMIN, GPRole.USER);
-        this.insertUser(emailAdminTestAcl, organizationTest, GPRole.ADMIN);
-        this.insertUser(emailUserTestAcl, organizationTest, GPRole.USER);
+        this.insertUser("admin_acl_test", organizationTest, GPRole.ADMIN);
+        this.insertUser("user_acl_test", organizationTest, GPRole.USER);
         //
         this.insertApplication("SIGV");
     }

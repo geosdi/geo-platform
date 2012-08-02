@@ -5,77 +5,33 @@
     <ui:with field='resources' type='org.geosdi.geoplatform.gui.client.img.BasicWidgetImage'/>
 	
     <g:HTMLPanel>
-        
-        <div class="{style.geoSDIWrapper}" >
-            <div class="{style.google-header-bar}" >
-                <div class="{style.header} {style.geoSDIContent} {style.geoSDIClearFix}">
-                    <g:Image stylePrimaryName="{style.logo}" resource='{resources.maps}'></g:Image>
-<!--                    <img class="{style.logo}" src="images/sitdpc_transp.png" alt="SITDPC" />-->
-                </div>
-            </div>
-            <div class="{style.geoSDIMain} {style.geoSDIContent} {style.geoSDIClearFix}">
-                <div class="{style.geoSDISign-in}">
-                    <div class="{style.geoSDISignin-box}">
-                        <h2>Accesso a SITDPC
-                            <strong></strong>
-                        </h2>
+        <div class="{style.geoSDISign-in}">
+            <div class="{style.geoSDISignin-box}">
+                <h2>Accesso a geoSDI
+                    <strong></strong>
+                </h2>
     
-                        <strong class="{style.geoSDIEmail-label}">
-                            <g:Label>Nome Utente</g:Label>
-                        </strong>
-                        <g:TextBox stylePrimaryName="{style.inputGeoSdi}" ui:field="userName"></g:TextBox>
-                        <p></p>
-                        <strong class="{style.geoSDIPassword-label}">
-                            <g:Label>Password</g:Label>
-                        </strong>
-                        <g:PasswordTextBox stylePrimaryName="{style.inputGeoSdi}" ui:field="password">
-                        </g:PasswordTextBox>
-                        <p></p>
-                        <p></p>
-                        <g:SubmitButton stylePrimaryName="{style.geoSDI-Button} {style.geoSDI-Button-submit}" ui:field="login">Accedi</g:SubmitButton>
-                        <g:Label stylePrimaryName="{style.loginError}" ui:field="loginError"></g:Label>
-                        <p class="{style.geosdiPromoBody}">
-                            <a href="http://www.geosdi.org/geoSDIcollect.apk" alt="Scarica l'App geoPoints" target="_blank">
-                                <g:Image stylePrimaryName="{style.geosdiPromoIcon}" resource='{resources.androidSmall}'></g:Image>
-                                Scarica
-                            </a>
-                            l'App Android per le segnalazioni.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="{style.geosdiPromo}">
-                    <g:Image stylePrimaryName="{style.geosdiPromoIcon}" resource='{resources.DPCPromo}'></g:Image>
-                    <h4>Informazioni sul sistema SITDPC</h4>
-                    <p class="{style.geosdiPromoBody}">
-                        L'utilizzo di SITDPC &egrave; ammesso esclusivamente nell'ambito delle attivit&agrave; del Servizio Nazionale di Protezione Civile, attraverso apposito account non cedibile a terzi.
-                        <br />
-                        Medesima restrizione si applica anche alle stampe dei contenuti informativi del sistema. 
-                        <br />
-                        Non &egrave; consentito divulgare a terzi dati, informazioni ed immagini contenuti nel sistema, se non esplicitamente autorizzato dal Dipartimento della Protezione Civile.
-                        <br />
-                        <br />
-                        E' disponibile un account pubblico per la sola visualizzazione dei dati: user: 
-                        <b>demo</b> - password: 
-                        <b>demo</b>
-                    </p>
-                </div>
-<!--                <div class="{style.geosdiMobileAdv}">
-                    
-                </div>-->
-                
-            </div>
-        </div>
-  
-        <div class="{style.geosdi-footer-bar}">
-            <div class="{style.geoSDI-Footer} {style.geoSDIContent} {style.geoSDIClearFix}">
-                <ul>
-                    <li>© 2011-2012 
-                        <a href="http://www.protezionecivile.it" target="_blank">Protezione Civile Nazionale</a> - Ver 1.4 Build 1708 - powered by CNR IMAA 
-                        <a href="http://www.geosdi.org" target="_blank">geoSDI</a> build with 
-                        <a href="http://code.google.com/p/geo-platform/" target="_blank">geo-platform</a>
-                    </li>
-                </ul>
+                <strong class="{style.geoSDIEmail-label}">
+                    <g:Label>Nome Utente</g:Label>
+                </strong>
+                <g:TextBox stylePrimaryName="{style.inputGeoSdi}" ui:field="userName"></g:TextBox>
+                <p></p>
+                <strong class="{style.geoSDIPassword-label}">
+                    <g:Label>Password</g:Label>
+                </strong>
+                <g:PasswordTextBox stylePrimaryName="{style.inputGeoSdi}" ui:field="password">
+                </g:PasswordTextBox>
+                <p></p>
+                <p></p>
+                <g:SubmitButton stylePrimaryName="{style.geoSDI-Button} {style.geoSDI-Button-submit}" ui:field="login">Accedi</g:SubmitButton>
+                <g:Label stylePrimaryName="{style.loginError}" ui:field="loginError"></g:Label>
+                <p class="{style.geosdiPromoBody}">
+                    <a href="http://www.geosdi.org/geoSDIcollect.apk" alt="Scarica l'App geoPoints" target="_blank">
+                        <g:Image stylePrimaryName="{style.geosdiPromoIcon}" resource='{resources.androidSmall}'></g:Image>
+                        Scarica
+                    </a>
+                    l'App Android per le segnalazioni.
+                </p>
             </div>
         </div>
     </g:HTMLPanel>

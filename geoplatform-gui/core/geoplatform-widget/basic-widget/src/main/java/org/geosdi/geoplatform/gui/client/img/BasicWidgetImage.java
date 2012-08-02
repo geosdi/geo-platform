@@ -47,21 +47,12 @@ public interface BasicWidgetImage extends ClientBundle {
 
     BasicWidgetImage INSTANCE = GWT.create(BasicWidgetImage.class);
 
-    @Source("maps.png")
-    ImageResource maps();
-
-    @Source("security.gif")
-    ImageResource securityLogin();
-
     @Source("loader.gif")
     ImageResource loader();
 
-    @Source("DPCPromo.png")
-    ImageResource DPCPromo();
-
     @Source("marker_54x80.png")
     ImageResource marker_54x80();
-    
+
     @Source("android_small.png")
     ImageResource androidSmall();
 }

@@ -36,13 +36,19 @@
 package org.geosdi.geoplatform.gui.view.event;
 
 import com.extjs.gxt.ui.client.event.EventType;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.client.UiField;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class GeoPlatformEvents {
 
+    static GeoPlatformEvents INSTANCE = GWT.create(GeoPlatformEvents.class);
+    @UiField(provided = true)
+    final GeoPlatformEvents geoPlatformEvents = GeoPlatformEvents.INSTANCE;
+    //
     public static final EventType UPDATE_CENTER = new EventType();
     public static final EventType INIT_GEO_PLATFORM = new EventType();
     public static final EventType APPLICATION_FIRST_LOGIN = new EventType();
@@ -53,4 +59,8 @@ public class GeoPlatformEvents {
     public static final EventType REMOVE_WINDOW_CLOSE_LISTENER = new EventType();
     public static final EventType COLOR_CHOOSED = new EventType();
     public static final EventType USER_UPDATE_HIS_NAME = new EventType();
+
+    public EventType getINIT_GEO_PLATFORM() {
+        return GeoPlatformEvents.INIT_GEO_PLATFORM;
+    }
 }

@@ -39,9 +39,10 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.uibinder.client.UiConstructor;
+import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
 import org.geosdi.geoplatform.gui.client.GPXMPPClient;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
@@ -68,6 +69,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
      *
      * @param eventOnSuccess
      */
+    @UiConstructor
     public LoginWidget(EventType eventOnSuccess) {
         super();
         this.eventOnSuccess = eventOnSuccess;
@@ -75,10 +77,19 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         this.sessionLoginWidget = new SessionLoginWidget(eventOnSuccess);
     }
 
+    @UiFactory
+    LoginWidget makeLoginWidget() {
+        return new LoginWidget(eventOnSuccess);
+    }
+
     @Override
     protected void addStatusComponent() {
         status = new LoginStatus();
         status.setAutoWidth(Boolean.TRUE);
+    }
+
+    public void setEventOnSuccess(EventType eventOnSuccess) {
+        this.eventOnSuccess = eventOnSuccess;
     }
 
     @Override
@@ -107,7 +118,6 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                 this.userName.getValue(),
                 this.password.getValue(),
                 new AsyncCallback<IGPAccountDetail>() {
-
                     @Override
                     public void onFailure(Throwable caught) {
                         loginFailureMessage = caught.getMessage();
@@ -137,7 +147,6 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
     public void loginDone() {
         if (loginFailureMessage.equals("")) {
             Timer t = new Timer() {
-
                 @Override
                 public void run() {
                     Dispatcher.forwardEvent(eventOnSuccess);
@@ -148,9 +157,11 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
             };
             t.schedule(2000);
         } else {
-            this.getElement().getStyle().clearDisplay();
+            this.getParent().getElement().getStyle().clearDisplay();
+//            this.getElement().getStyle().clearDisplay();
             LoginWidget.super.progressBar.hide();
             super.loginError.setText("Nome utente o password errati");
+            login.setEnabled(Boolean.TRUE);
         }
     }
 
@@ -184,13 +195,12 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         this.sessionLoginWidget.setGwtEventOnSuccess(gwtEventOnSuccess);
     }
 
-    public void show() {
-        this.login.setEnabled(Boolean.TRUE);
-        validate();
-        super.setVisible(Boolean.TRUE);
-        RootPanel.get().add(this);
-    }
-
+//    public void show() {
+//        this.login.setEnabled(Boolean.TRUE);
+//        validate();
+//        super.setVisible(Boolean.TRUE);
+//        RootPanel.get().add(this);
+//    }
     public void showSessionExpiredLogin() {
         this.sessionLoginWidget.show();
     }

@@ -96,7 +96,6 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
 
     private void addKeyHandler() {
         userName.addKeyUpHandler(new KeyUpHandler() {
-
             @Override
             public void onKeyUp(KeyUpEvent event) {
                 if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER && login.isEnabled()) {
@@ -106,14 +105,12 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
             }
         });
         userName.addKeyPressHandler(new KeyPressHandler() {
-
             @Override
             public void onKeyPress(KeyPressEvent event) {
                 validate();
             }
         });
         password.addKeyUpHandler(new KeyUpHandler() {
-
             @Override
             public void onKeyUp(KeyUpEvent event) {
                 if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER && login.isEnabled()) {
@@ -123,7 +120,6 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
             }
         });
         password.addKeyPressHandler(new KeyPressHandler() {
-
             @Override
             public void onKeyPress(KeyPressEvent event) {
                 validate();
@@ -145,13 +141,13 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
     }
 
     protected void showProgressBar() {
-        this.getElement().getStyle().setDisplay(Display.NONE);
+        this.getParent().getElement().getStyle().setDisplay(Display.NONE);
+//        this.getElement().getStyle().setDisplay(Display.NONE);
 
         progressBar.setRunProgress(0.0, "");
         progressBar.setLoadProgress(1.0);
 
         timer = new Timer() {
-
             @Override
             public void run() {
                 progres = progres + 0.1;
@@ -159,7 +155,6 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
                 if (progres > 1.0) {
                     progressBar.setRunProgress(1.0, "Done");
                     timer.cancel();
-//                    progressBar.getElement().getStyle().setDisplay(Display.NONE);
                     loginDone();
                 }
             }

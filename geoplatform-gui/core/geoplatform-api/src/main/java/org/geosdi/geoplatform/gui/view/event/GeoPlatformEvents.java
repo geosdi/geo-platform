@@ -44,8 +44,11 @@ import com.google.gwt.uibinder.client.UiField;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class GeoPlatformEvents {
+public final class GeoPlatformEvents {
 
+    protected GeoPlatformEvents() {
+    }
+    //
     public static final EventType UPDATE_CENTER = new EventType();
     public static final EventType INIT_GEO_PLATFORM = new EventType();
     public static final EventType APPLICATION_FIRST_LOGIN = new EventType();

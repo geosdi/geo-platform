@@ -14,36 +14,11 @@
     <version>1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Geo-Platform :: == Connectors</name>
+    <name>Geo-Platform :: == Connectors Module</name>
     
     <modules>
-        <module>geoplatform-connector-api</module>
-        <module>geoplatform-csw-connector</module>
-        <module>geoplatform-wps-connector</module>
+        <module>geoplatform-ogc-connectors</module>
+        <!-- module>geoplatform-ws-connectors</module -->
     </modules>
-
-    <dependencies>
-    <!-- logging dependencies, delegate all to slf4j and use logback -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-    </dependencies>
+    
 </project>

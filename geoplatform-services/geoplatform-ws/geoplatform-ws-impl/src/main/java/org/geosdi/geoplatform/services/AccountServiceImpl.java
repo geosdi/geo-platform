@@ -527,7 +527,7 @@ class AccountServiceImpl {
     private List<GPAuthority> getGPAuthorities(String stringID) throws ResourceNotFoundFault {
         List<GPAuthority> authorities = authorityDao.findShortByStringID(stringID);
         if (authorities.isEmpty()) {
-            throw new ResourceNotFoundFault("Account not found (stringID=" + stringID + ")");
+            throw new ResourceNotFoundFault("Authority not found for account (stringID=" + stringID + ")");
         }
         EntityCorrectness.checkAuthorityLog(authorities);
 

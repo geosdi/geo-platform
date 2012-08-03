@@ -63,7 +63,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "acl_sid",
        uniqueConstraints =
-@UniqueConstraint(columnNames = {"principal", "sid"}))
+@UniqueConstraint(columnNames = {"principal", "sid", "organization_id"}))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "sid")
 // TODO: implements Sid? extends PrincipalSid, GrantedAuthoritySid?
 public class AclSid {

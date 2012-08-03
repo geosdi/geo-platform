@@ -136,7 +136,7 @@ public class GeoPlatformJAXBContextRepository {
         }
 
         /**
-         * @return the classe
+         * @return the class
          */
         public Class<?> getJAXBContextClass() {
             return jaxbContextClass;

@@ -41,7 +41,7 @@ import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
+import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
 import org.geosdi.geoplatform.connector.security.GeosdiCatalogBeanProvider;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
 import org.geosdi.geoplatform.cxf.GeoPlatformCSWClient;
@@ -83,7 +83,7 @@ public class CSWListenerServices implements TestExecutionListener {
         Assert.assertNotNull("cswClient is NULL", cswClient);
         cswService = cswClient.create();
 
-        GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient");
+        GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) appContext.getBean("gpWSClient");
         Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
         gpWSClient = geoPlatformWSClient.create();
 
@@ -99,15 +99,15 @@ public class CSWListenerServices implements TestExecutionListener {
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
 
-        GPServerWebServiceInterceptorStrategyFactory gpServerWebServiceInterceptorStrategyFactory = (GPServerWebServiceInterceptorStrategyFactory) appContext.getBean(
-                "gpServerWebServiceInterceptorStrategyFactory");
-        Assert.assertNotNull("gpServerWebServiceInterceptorStrategyFactory is NULL",
-                gpServerWebServiceInterceptorStrategyFactory);
+        ServerInterceptorStrategyFactory serverInterceptorStrategyFactory = (ServerInterceptorStrategyFactory) appContext.getBean(
+                "serverInterceptorStrategyFactory");
+        Assert.assertNotNull("serverInterceptorStrategyFactory is NULL",
+                serverInterceptorStrategyFactory);
 
         bus.getInInterceptors().add(
-                gpServerWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
+                serverInterceptorStrategyFactory.getSecurityInInterceptor());
         bus.getOutInterceptors().add(
-                gpServerWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
+                serverInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         bf.setDefaultBus(bus);
 

@@ -65,8 +65,7 @@ public class ServerKeystorePasswordCallback implements CallbackHandler {
     }
 
     /**
-     * It attempts to get the password from the private 
-     * alias/passwords map.
+     * It attempts to get the password from the private alias/passwords map.
      */
     @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.cxf;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
+import org.geosdi.geoplatform.configurator.cxf.client.ClientInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,16 +50,16 @@ public class GeoPlatformCSWClient {
     String address;
     //
     @Autowired
-    private GPClientWebServiceInterceptorStrategyFactory gpClientWebServiceInterceptorStrategyFactory;
+    private ClientInterceptorStrategyFactory clientInterceptorStrategyFactory;
 
     public GeoPlatformCSWService create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
 
-        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingInInterceptor());
-        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
+        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingInInterceptor());
+        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityInInterceptor());
 
-        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingOutInterceptor());
-        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
+        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
+        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         factory.setServiceClass(GeoPlatformCSWService.class);
         factory.setAddress(this.address);
@@ -75,8 +75,7 @@ public class GeoPlatformCSWClient {
     }
 
     /**
-     * @param address
-     *          the address to set
+     * @param address the address to set
      */
     public void setAddress(String address) {
         this.address = address;

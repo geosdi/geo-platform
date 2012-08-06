@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.cxf;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
+import org.geosdi.geoplatform.configurator.cxf.client.ClientInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,8 +44,8 @@ import org.springframework.beans.factory.annotation.Value;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- * 
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
@@ -55,16 +55,16 @@ public class GeoPlatformWSClient {
     String address;
     //
     @Autowired
-    private GPClientWebServiceInterceptorStrategyFactory gpClientWebServiceInterceptorStrategyFactory;
+    private ClientInterceptorStrategyFactory clientInterceptorStrategyFactory;
 
     public GeoPlatformService create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-        
-        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingInInterceptor());
-        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
-        
-        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingOutInterceptor());
-        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
+
+        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingInInterceptor());
+        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityInInterceptor());
+
+        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
+        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         factory.setServiceClass(GeoPlatformService.class);
         factory.setAddress(this.address);
@@ -80,8 +80,7 @@ public class GeoPlatformWSClient {
     }
 
     /**
-     * @param address
-     *          the address to set
+     * @param address the address to set
      */
     public void setAddress(String address) {
         this.address = address;

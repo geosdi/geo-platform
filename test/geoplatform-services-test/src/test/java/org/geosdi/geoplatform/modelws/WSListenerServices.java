@@ -38,16 +38,17 @@ package org.geosdi.geoplatform.modelws;
 import java.util.concurrent.TimeUnit;
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
+import org.apache.cxf.BusFactory;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
+import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
-import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
 
@@ -64,23 +65,20 @@ public class WSListenerServices implements TestExecutionListener {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService gpWSClient;
-    private GPDigesterConfigutator gpDigester;
     private Endpoint endpoint;
     private Bus bus;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ WSListenerServices.beforeTestClass @@@");
+        
+        ApplicationContext appContext = testContext.getApplicationContext();
 
-        GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient");
+        GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) appContext.getBean("gpWSClient");
         Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
         gpWSClient = geoPlatformWSClient.create();
 
-        GPDigesterConfigutator theGPDigester = (GPDigesterConfigutator) testContext.getApplicationContext().getBean("gpDigesterSHA1");
-        Assert.assertNotNull("gpDigester is NULL", theGPDigester);
-        gpDigester = theGPDigester;
-
-        GeoPlatformService geoPlatformService = (GeoPlatformService) testContext.getApplicationContext().getBean("geoPlatformService");
+        GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean("geoPlatformService");
         Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
 
         Object implementor = geoPlatformService;
@@ -90,13 +88,13 @@ public class WSListenerServices implements TestExecutionListener {
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
 
-        GPServerWebServiceInterceptorStrategyFactory gpServerWebServiceInterceptorStrategyFactory = (GPServerWebServiceInterceptorStrategyFactory) testContext.getApplicationContext().getBean("gpServerWebServiceInterceptorStrategyFactory");
-        Assert.assertNotNull("gpServerWebServiceInterceptorStrategyFactory is NULL", gpServerWebServiceInterceptorStrategyFactory);
+        ServerInterceptorStrategyFactory serverInterceptorStrategyFactory = (ServerInterceptorStrategyFactory) testContext.getApplicationContext().getBean("serverInterceptorStrategyFactory");
+        Assert.assertNotNull("serverInterceptorStrategyFactory is NULL", serverInterceptorStrategyFactory);
 
-        bus.getInInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
-        bus.getOutInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
+        bus.getInInterceptors().add(serverInterceptorStrategyFactory.getSecurityInInterceptor());
+        bus.getOutInterceptors().add(serverInterceptorStrategyFactory.getSecurityOutInterceptor());
 
-        bf.setDefaultBus(bus);
+        BusFactory.setDefaultBus(bus);
         String serverAddress = geoPlatformWSClient.getAddress();
         endpoint = Endpoint.publish(serverAddress, implementor);
 
@@ -108,7 +106,7 @@ public class WSListenerServices implements TestExecutionListener {
         logger.info("\n\t@@@ WSListenerServices.prepareTestInstance @@@");
 
         ServiceTest testInstance = (ServiceTest) testContext.getTestInstance();
-        testInstance.setGeoplatformServiceClient(gpWSClient, gpDigester);
+        testInstance.setGeoplatformServiceClient(gpWSClient);
     }
 
     @Override

@@ -34,14 +34,14 @@
                   value="${webservice_endpoint_address}" />
         <property name="inInterceptors">
             <list>
-                <ref bean="geoPlatformClientLoggingInInterceptorBean"/>
-                <ref bean="geoPlatformClientSecurityInInterceptorBean"/>
+                <ref bean="clientLoggingInInterceptorBean"/>
+                <ref bean="clientSecurityInInterceptorBean"/>
             </list>
         </property>
         <property name="outInterceptors">
             <list>
-                <ref bean="geoPlatformClientLoggingOutInterceptorBean"/>
-                <ref bean="geoPlatformClientSecurityOutInterceptorBean"/>
+                <ref bean="clientLoggingOutInterceptorBean"/>
+                <ref bean="clientSecurityOutInterceptorBean"/>
             </list>
         </property>
     </bean>
@@ -53,14 +53,14 @@
                   value="${webservice_catalogfinder_endpoint_address}" />
         <property name="inInterceptors">
             <list>
-                <ref bean="geoPlatformClientLoggingInInterceptorBean"/>
-                <ref bean="geoPlatformClientSecurityInInterceptorBean"/>
+                <ref bean="clientLoggingInInterceptorBean"/>
+                <ref bean="clientSecurityInInterceptorBean"/>
             </list>
         </property>
         <property name="outInterceptors">
             <list>
-                <ref bean="geoPlatformClientLoggingOutInterceptorBean"/>
-                <ref bean="geoPlatformClientSecurityOutInterceptorBean"/>
+                <ref bean="clientLoggingOutInterceptorBean"/>
+                <ref bean="clientSecurityOutInterceptorBean"/>
             </list>
         </property>
     </bean>
@@ -72,14 +72,14 @@
                   value="${webservice_cswservice_endpoint_address}" />
         <property name="inInterceptors">
             <list>
-                <ref bean="geoPlatformClientLoggingInInterceptorBean"/>
-                <ref bean="geoPlatformClientSecurityInInterceptorBean"/>
+                <ref bean="clientLoggingInInterceptorBean"/>
+                <ref bean="clientSecurityInInterceptorBean"/>
             </list>
         </property>
         <property name="outInterceptors">
             <list>
-                <ref bean="geoPlatformClientLoggingOutInterceptorBean"/>
-                <ref bean="geoPlatformClientSecurityOutInterceptorBean"/>
+                <ref bean="clientLoggingOutInterceptorBean"/>
+                <ref bean="clientSecurityOutInterceptorBean"/>
             </list>
         </property>
     </bean>

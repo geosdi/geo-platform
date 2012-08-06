@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.modelws;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPBBox;
@@ -79,7 +78,6 @@ public abstract class ServiceTest {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected GeoPlatformService gpWSClient;
-    protected GPDigesterConfigutator gpDigester;
     // Roles (default)
     protected static final String ROLE_ADMIN = "Admin";
     protected static final String ROLE_USER = "User";
@@ -109,10 +107,8 @@ public abstract class ServiceTest {
     /**
      * The listener will inject this dependency.
      */
-    public void setGeoplatformServiceClient(GeoPlatformService gpWSClient,
-            GPDigesterConfigutator gpDigester) {
+    public void setGeoplatformServiceClient(GeoPlatformService gpWSClient) {
         this.gpWSClient = gpWSClient;
-        this.gpDigester = gpDigester;
     }
 
     @Before

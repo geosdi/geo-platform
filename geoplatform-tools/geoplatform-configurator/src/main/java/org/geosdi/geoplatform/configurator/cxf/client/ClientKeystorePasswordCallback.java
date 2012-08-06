@@ -13,10 +13,9 @@ import org.slf4j.LoggerFactory;
 public class ClientKeystorePasswordCallback implements CallbackHandler {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    private Map<String, String> passwords = 
-        new HashMap<String, String>();
-    
+    //
+    private Map<String, String> passwords = new HashMap<String, String>();
+
     public ClientKeystorePasswordCallback() {
         passwords.put("client", "clientpwd");
         passwords.put("server", "serverstorepwd");
@@ -31,13 +30,12 @@ public class ClientKeystorePasswordCallback implements CallbackHandler {
     }
 
     /**
-     * It attempts to get the password from the private 
-     * alias/passwords map.
+     * It attempts to get the password from the private alias/passwords map.
      */
     @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         for (int i = 0; i < callbacks.length; i++) {
-            WSPasswordCallback pc = (WSPasswordCallback)callbacks[i];
+            WSPasswordCallback pc = (WSPasswordCallback) callbacks[i];
 
             String pass = passwords.get(pc.getIdentifier());
             if (pass != null) {
@@ -46,12 +44,11 @@ public class ClientKeystorePasswordCallback implements CallbackHandler {
             }
         }
     }
-    
+
     /**
      * Add an alias/password pair to the callback mechanism.
      */
     public void setAliasPassword(String alias, String password) {
         passwords.put(alias, password);
     }
-    
 }

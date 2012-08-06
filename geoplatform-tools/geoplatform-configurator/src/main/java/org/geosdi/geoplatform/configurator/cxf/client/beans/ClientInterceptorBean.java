@@ -33,25 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.cxf;
+package org.geosdi.geoplatform.configurator.cxf.client.beans;
 
-import java.util.logging.Logger;
-import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.message.Message;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
+import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.geosdi.geoplatform.configurator.cxf.client.ClientInterceptorStrategyFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GPDummyLoggingInInterceptor extends LoggingInInterceptor {
+@Configuration
+public class ClientInterceptorBean {
 
-    @Override
-    protected Logger getLogger() {
-        return super.getLogger();
+    @Autowired
+    private ClientInterceptorStrategyFactory factory;
+
+    public void setFactory(ClientInterceptorStrategyFactory factory) {
+        this.factory = factory;
     }
 
-    @Override
-    public void handleMessage(Message message) throws Fault {}
-    
+    @Bean
+    public LoggingInInterceptor clientLoggingInInterceptorBean() {
+        return this.factory.getLoggingInInterceptor();
+    }
+
+    @Bean
+    public LoggingOutInterceptor clientLoggingOutInterceptorBean() {
+        return this.factory.getLoggingOutInterceptor();
+    }
+
+    @Bean
+    public WSS4JInInterceptor clientSecurityInInterceptorBean() {
+        return this.factory.getSecurityInInterceptor();
+    }
+
+    @Bean
+    public WSS4JOutInterceptor clientSecurityOutInterceptorBean() {
+        return this.factory.getSecurityOutInterceptor();
+    }
 }

@@ -33,34 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.cxf;
+package org.geosdi.geoplatform.configurator.cxf.server.beans;
+
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
+import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public enum EnumWebserviceSecurity {
-    
-    NONE("NONE"),
-    LOGGING_IN("LOGGING_IN"),
-    LOGGING_OUT("LOGGING_OUT"),
-    LOGGING_IN_OUT("LOGGING_IN_OUT"),
-    USERNAME_TOKEN("USERNAME_TOKEN"),
-    ENCRYPTION("ENCRYPTION"),
-    SIGNATURE("SIGNATURE"),
-    TIMESTAMP_SIGNATURE_ENCRYPTION("TIMESTAMP_SIGNATURE_ENCRYPTION");
-    //
-    private String value;
+@Configuration
+public class ServerInterceptorBean {
 
-    EnumWebserviceSecurity(String value) {
-        this.value = value;
+    @Autowired
+    private ServerInterceptorStrategyFactory factory;
+
+    public void setFactory(ServerInterceptorStrategyFactory factory) {
+        this.factory = factory;
     }
 
-    /**
-     * @return the value
-     */
-    public String getValue() {
-        return value;
+    @Bean
+    public LoggingInInterceptor serverLoggingInInterceptorBean() {
+        return this.factory.getLoggingInInterceptor();
     }
-    
+
+    @Bean
+    public LoggingOutInterceptor serverLoggingOutInterceptorBean() {
+        return this.factory.getLoggingOutInterceptor();
+    }
+
+    @Bean
+    public WSS4JInInterceptor serverSecurityInInterceptorBean() {
+        return this.factory.getSecurityInInterceptor();
+    }
+
+    @Bean
+    public WSS4JOutInterceptor serverSecurityOutInterceptorBean() {
+        return this.factory.getSecurityOutInterceptor();
+    }
 }

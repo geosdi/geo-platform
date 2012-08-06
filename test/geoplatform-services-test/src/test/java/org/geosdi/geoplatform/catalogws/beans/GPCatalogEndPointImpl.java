@@ -42,7 +42,7 @@ import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
+import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +68,7 @@ public class GPCatalogEndPointImpl {
     private GPCatalogFinderService gpCatalogFinderService;
     //
     @Autowired
-    private GPServerWebServiceInterceptorStrategyFactory gpServerWebServiceInterceptorStrategyFactory;
+    private ServerInterceptorStrategyFactory serverInterceptorStrategyFactory;
 
     @PostConstruct
     public void init() {
@@ -79,8 +79,8 @@ public class GPCatalogEndPointImpl {
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
 
-        bus.getInInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
-        bus.getOutInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
+        bus.getInInterceptors().add(serverInterceptorStrategyFactory.getSecurityInInterceptor());
+        bus.getOutInterceptors().add(serverInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         SpringBusFactory.setDefaultBus(bus);
         endpoint = Endpoint.create(implementor);

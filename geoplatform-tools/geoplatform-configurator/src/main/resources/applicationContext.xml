@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:util="http://www.springframework.org/schema/util"
-        xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
             http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context-3.1.xsd
@@ -12,15 +12,16 @@
             http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-3.1.xsd"
-	default-autowire="byName">
+       default-autowire="byName">
 
-     <!-- Scan for @Autowired annotations -->
+    <!-- Scan for @Autowired annotations -->
     <context:annotation-config/>
     
     <import resource="applicationContext-crypt.xml" />
     <import resource="applicationContext-jasypt.xml" />
     
-    <bean id="gpClientWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory">
+    <bean id="clientInterceptorStrategyFactory"
+          class="org.geosdi.geoplatform.configurator.cxf.client.ClientInterceptorStrategyFactory">
         <property name="loggingStrategy" value="${webservice_client_logging}" />
         <property name="securityStrategy" value="${webservice_security_strategy}" />
         <property name="usernameTokenUser" value="${webservice_username_token_user}" />
@@ -30,7 +31,8 @@
         <property name="serverKeystoreUser" value="${webservice_server_keystore_user}" />
     </bean>
     
-    <bean id="gpServerWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory">
+    <bean id="serverInterceptorStrategyFactory"
+          class="org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory">
         <property name="loggingStrategy" value="${webservice_server_logging}" />
         <property name="securityStrategy" value="${webservice_security_strategy}" />
         <property name="usernameTokenUser" value="${webservice_username_token_user}" />

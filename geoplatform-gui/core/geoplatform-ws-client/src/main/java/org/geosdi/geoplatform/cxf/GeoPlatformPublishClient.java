@@ -40,7 +40,7 @@ import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
-import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
+import org.geosdi.geoplatform.configurator.cxf.client.ClientInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeoPlatformPublishClient implements InitializingBean {
 
@@ -56,19 +56,18 @@ public class GeoPlatformPublishClient implements InitializingBean {
     private GPPublisherService publishService;
     //
     @Autowired
-    private GPClientWebServiceInterceptorStrategyFactory gpClientWebServiceInterceptorStrategyFactory;
+    private ClientInterceptorStrategyFactory clientInterceptorStrategyFactory;
 
     private void createWSClient() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-        
-        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingInInterceptor());
-        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
-        
-        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingOutInterceptor());
-        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
+
+        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingInInterceptor());
+        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityInInterceptor());
+
+        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
+        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         factory.setServiceClass(GPPublisherService.class);
-
         factory.setAddress(this.address);
 
         this.publishService = (GPPublisherService) factory.create();

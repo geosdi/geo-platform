@@ -40,8 +40,7 @@ import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
-import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
-import org.geosdi.geoplatform.services.GPPublisherService;
+import org.geosdi.geoplatform.configurator.cxf.client.ClientInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GPTrackingService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,21 +55,20 @@ public class GeoPlatformTrackingClient implements InitializingBean {
     private GPTrackingService trackingService;
     //
     @Autowired
-    private GPClientWebServiceInterceptorStrategyFactory gpClientWebServiceInterceptorStrategyFactory;
+    private ClientInterceptorStrategyFactory clientInterceptorStrategyFactory;
 
     private void createWSClient() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-        
-        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingInInterceptor());
-        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
-        
-        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingOutInterceptor());
-        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
+
+        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingInInterceptor());
+        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityInInterceptor());
+
+        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
+        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         factory.setServiceClass(GPTrackingService.class);
 
         factory.setAddress(this.address);
-
         this.trackingService = (GPTrackingService) factory.create();
 
         Client client = ClientProxy.getClient(trackingService);

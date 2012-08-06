@@ -33,44 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.cxf.server.beans;
+package org.geosdi.geoplatform.configurator.cxf;
 
-import org.apache.cxf.interceptor.LoggingInInterceptor;
+import java.util.logging.Logger;
+import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
-import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.apache.cxf.message.Message;
 
 /**
+ * Dummy Output Loggin: not handle the message.
+ * 
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-@Configuration
-public class GeoPlatformServerInterceptorBean {
+public class DummyLoggingOutInterceptor extends LoggingOutInterceptor {
 
-    @Autowired
-    private GPServerWebServiceInterceptorStrategyFactory factory;
-
-    @Bean
-    public LoggingInInterceptor geoPlatformServerLoggingInInterceptorBean() {
-        return this.factory.getLoggingInInterceptor();
+    @Override
+    protected Logger getLogger() {
+        return super.getLogger();
     }
 
-    @Bean
-    public LoggingOutInterceptor geoPlatformServerLoggingOutInterceptorBean() {
-        return this.factory.getLoggingOutInterceptor();
-    }
+    @Override
+    public void handleMessage(Message message) throws Fault {}
     
-    @Bean
-    public WSS4JInInterceptor geoPlatformServerSecurityInInterceptorBean() {
-        return this.factory.getSecurityInInterceptor();
-    }
-
-    @Bean
-    public WSS4JOutInterceptor geoPlatformServerSecurityOutInterceptorBean() {
-        return this.factory.getSecurityOutInterceptor();
-    }
 }

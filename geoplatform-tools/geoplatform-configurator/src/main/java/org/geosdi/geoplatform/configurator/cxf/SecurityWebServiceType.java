@@ -33,48 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.cxf.client.beans;
-
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
-import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+package org.geosdi.geoplatform.configurator.cxf;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@Configuration
-public class GeoPlatformClientInterceptorBean {
+public enum SecurityWebServiceType {
 
-    @Autowired
-    private GPClientWebServiceInterceptorStrategyFactory factory;
+    NONE, // TODO Manage NO secutity
+    USERNAME_TOKEN,
+    ENCRYPTION,
+    SIGNATURE,
+    TIMESTAMP_SIGNATURE_ENCRYPTION;
 
-    @Bean
-    public LoggingInInterceptor geoPlatformClientLoggingInInterceptorBean() {
-        return this.factory.getLoggingInInterceptor();
-    }
-
-    @Bean
-    public LoggingOutInterceptor geoPlatformClientLoggingOutInterceptorBean() {
-        return this.factory.getLoggingOutInterceptor();
-    }
-
-    @Bean
-    public WSS4JInInterceptor geoPlatformClientSecurityInInterceptorBean() {
-        return this.factory.getSecurityInInterceptor();
-    }
-
-    @Bean
-    public WSS4JOutInterceptor geoPlatformClientSecurityOutInterceptorBean() {
-        return this.factory.getSecurityOutInterceptor();
-    }
-
-    public void setFactory(GPClientWebServiceInterceptorStrategyFactory factory) {
-        this.factory = factory;
+    public static SecurityWebServiceType fromValue(String value) {
+        for (SecurityWebServiceType securityType : SecurityWebServiceType.values()) {
+            String security = securityType.name();
+            if (security.equalsIgnoreCase(value)) {
+                return securityType;
+            }
+        }
+        throw new IllegalArgumentException(value);
     }
 }

@@ -56,12 +56,12 @@
             </bean>
         </jaxws:serviceFactory>
         <jaxws:inInterceptors>
-            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
+            <ref bean="serverLoggingInInterceptorBean"/>
+            <ref bean="serverSecurityInInterceptorBean"/>
         </jaxws:inInterceptors>        
         <jaxws:outInterceptors>
-            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
+            <ref bean="serverLoggingOutInterceptorBean"/>
+            <ref bean="serverSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
 
@@ -80,12 +80,12 @@
             </bean>
         </jaxws:serviceFactory >
         <jaxws:inInterceptors>
-            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
+            <ref bean="serverLoggingInInterceptorBean"/>
+            <ref bean="serverSecurityInInterceptorBean"/>
         </jaxws:inInterceptors>        
         <jaxws:outInterceptors>
-            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
+            <ref bean="serverLoggingOutInterceptorBean"/>
+            <ref bean="serverSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
     
@@ -105,12 +105,12 @@
             </bean>
         </jaxws:serviceFactory>
         <jaxws:inInterceptors>
-            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
+            <ref bean="serverLoggingInInterceptorBean"/>
+            <ref bean="serverSecurityInInterceptorBean"/>
         </jaxws:inInterceptors>        
         <jaxws:outInterceptors>
-            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
+            <ref bean="serverLoggingOutInterceptorBean"/>
+            <ref bean="serverSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
     
@@ -130,12 +130,12 @@
             </bean>
         </jaxws:serviceFactory>
         <jaxws:inInterceptors>
-            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
+            <ref bean="serverLoggingInInterceptorBean"/>
+            <ref bean="serverSecurityInInterceptorBean"/>
         </jaxws:inInterceptors>        
         <jaxws:outInterceptors>
-            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
+            <ref bean="serverLoggingOutInterceptorBean"/>
+            <ref bean="serverSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
     
@@ -155,12 +155,12 @@
             </bean>
         </jaxws:serviceFactory>
         <jaxws:inInterceptors>
-            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
+            <ref bean="serverLoggingInInterceptorBean"/>
+            <ref bean="serverSecurityInInterceptorBean"/>
         </jaxws:inInterceptors>        
         <jaxws:outInterceptors>
-            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
+            <ref bean="serverLoggingOutInterceptorBean"/>
+            <ref bean="serverSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
     
@@ -180,12 +180,12 @@
             </bean>
         </jaxws:serviceFactory>
         <jaxws:inInterceptors>
-            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
+            <ref bean="serverLoggingInInterceptorBean"/>
+            <ref bean="serverSecurityInInterceptorBean"/>
         </jaxws:inInterceptors>        
         <jaxws:outInterceptors>
-            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
-            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
+            <ref bean="serverLoggingOutInterceptorBean"/>
+            <ref bean="serverSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
 

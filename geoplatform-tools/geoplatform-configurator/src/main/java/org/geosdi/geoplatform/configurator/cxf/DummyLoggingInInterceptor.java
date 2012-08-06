@@ -37,14 +37,16 @@ package org.geosdi.geoplatform.configurator.cxf;
 
 import java.util.logging.Logger;
 import org.apache.cxf.interceptor.Fault;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.message.Message;
 
 /**
+ * Dummy Input Loggin: not handle the message.
+ * 
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class GPDummyLoggingOutInterceptor extends LoggingOutInterceptor {
+public class DummyLoggingInInterceptor extends LoggingInInterceptor {
 
     @Override
     protected Logger getLogger() {
@@ -53,7 +55,5 @@ public class GPDummyLoggingOutInterceptor extends LoggingOutInterceptor {
 
     @Override
     public void handleMessage(Message message) throws Fault {}
-    
-    
     
 }

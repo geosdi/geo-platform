@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-tools</artifactId>
@@ -15,7 +15,7 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Configurator Module</name>
-    
+
     <dependencies>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->
@@ -41,7 +41,7 @@
             <artifactId>dom4j</artifactId>
         </dependency>
 
-		<!-- SPRING -->
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -71,14 +71,14 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-        
-                <!-- GUAVA -->
+
+        <!-- GUAVA -->
         <dependency>
             <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>          
+            <artifactId>guava</artifactId>
         </dependency>
-        
-		<!-- CGLIB -->
+
+        <!-- CGLIB -->
         <dependency>
             <groupId>asm</groupId>
             <artifactId>asm</artifactId>
@@ -88,28 +88,28 @@
             <artifactId>cglib-nodep</artifactId>
         </dependency>
 
-		<!-- JUnit -->
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
 
-		<!-- CXF -->
+        <!-- CXF -->
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
         </dependency>
-       
+
         <dependency>
             <groupId>org.apache.ws.security</groupId>
             <artifactId>wss4j</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-bindings-soap</artifactId>
@@ -122,7 +122,7 @@
             </exclusions>
         </dependency>
 
-		<!-- JASYPT -->
+        <!-- JASYPT -->
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
@@ -132,16 +132,16 @@
             <artifactId>jasypt-spring31</artifactId>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
         </plugins>
-        
-		<!-- TODO: the resources stuff hardcodes paths to source + test directories, 
-			we should be able to use some properties here -->
+
+        <!-- TODO: the resources stuff hardcodes paths to source + test directories,
+     			we should be able to use some properties here -->
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>
@@ -176,5 +176,5 @@
         </resources>
 
     </build>
-	
+
 </project>

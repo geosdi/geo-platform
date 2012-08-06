@@ -11,6 +11,6 @@
             http://www.springframework.org/schema/util/spring-util-3.1.xsd"
        default-autowire="byName">
 
-    <context:component-scan base-package="org.geosdi.geoplatform, org.geosdi.geoplatform.configurator.crypt" />
+    <context:component-scan base-package="org.geosdi.geoplatform" />
 
 </beans>

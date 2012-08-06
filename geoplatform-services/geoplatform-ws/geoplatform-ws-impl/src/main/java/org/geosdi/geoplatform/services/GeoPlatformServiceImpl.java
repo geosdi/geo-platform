@@ -404,8 +404,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long getUsersCount(SearchRequest request) {
-        return accountServiceDelegate.getUsersCount(request);
+    public Long getUsersCount(String organization, SearchRequest request) {
+        return accountServiceDelegate.getUsersCount(organization, request);
     }
 
     @Override

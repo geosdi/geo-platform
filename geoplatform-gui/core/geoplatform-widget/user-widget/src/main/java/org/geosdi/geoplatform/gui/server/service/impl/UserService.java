@@ -82,14 +82,14 @@ public class UserService implements IUserService {
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText, HttpServletRequest httpServletRequest) {
+            String searchText, String organization, HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
 
         int start = config.getOffset();
 
         SearchRequest srq = new SearchRequest(searchText);
 
-        Long usersCount = this.geoPlatformServiceClient.getUsersCount(srq);
+        Long usersCount = this.geoPlatformServiceClient.getUsersCount(organization, srq);
 
         int page = start == 0 ? start : start / config.getLimit();
 

@@ -45,12 +45,14 @@ import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
- * 
- * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
- * @email  giuseppe.lascaleia@geosdi.org
+ * Public interface to define the service operations mapped via REST using CXT
+ * framework.
  *
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @WebService(name = "GPCatalogFinderService",
             targetNamespace = "http://services.geo-platform.org/")

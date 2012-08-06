@@ -68,7 +68,7 @@ public interface UserRemote extends RemoteService {
      * @return 
      */
     PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-                                                     String searchText)
+                                                     String searchText, String organization)
             throws GeoPlatformException;
 
     /**

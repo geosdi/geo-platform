@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  */
 public interface UserRemoteAsync {
 
-    void searchUsers(PagingLoadConfig config, String searchText,
+    void searchUsers(PagingLoadConfig config, String searchText, String organization,
                      AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
             throws GeoPlatformException;
 

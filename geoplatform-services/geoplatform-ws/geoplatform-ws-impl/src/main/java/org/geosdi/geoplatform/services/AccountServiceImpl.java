@@ -448,7 +448,8 @@ class AccountServiceImpl {
      */
     public List<UserDTO> searchUsers(Long userID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
-        EntityCorrectness.checkAccountLog(this.getAccountById(userID)); // TODO assert
+        GPAccount user = this.getAccountById(userID);
+        EntityCorrectness.checkAccountLog(user); // TODO assert
 
         Search searchCriteria = new Search(GPAccount.class);
         searchCriteria.addFilterNotEqual("id", userID);
@@ -456,6 +457,7 @@ class AccountServiceImpl {
         searchCriteria.setPage(request.getPage());
         searchCriteria.addFilterNotEmpty("emailAddress");
         searchCriteria.addSortAsc("emailAddress");
+        searchCriteria.addFilterEqual("organization.name", user.getOrganization().getName());
 
         String like = request.getNameLike();
         if (like != null) {
@@ -493,9 +495,10 @@ class AccountServiceImpl {
         return Long.valueOf(accountDao.count(searchCriteria));
     }
 
-    public Long getUsersCount(SearchRequest request) {
+    public Long getUsersCount(String organization, SearchRequest request) {
         Search searchCriteria = new Search(GPAccount.class);
         searchCriteria.addFilterNotEmpty("emailAddress");
+        searchCriteria.addFilterEqual("organization.name", organization);
 
         if (request != null && request.getNameLike() != null) {
             searchCriteria.addFilterILike("emailAddress", request.getNameLike());

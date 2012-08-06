@@ -40,13 +40,14 @@ import javax.jws.WebService;
 import org.codehaus.jra.Post;
 
 /**
+ * Public interface to define the service operations mapped via REST using CXT
+ * framework.
+ *
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
- *
- * Public interface to define the service operations mapped via REST
- * using CXT framework
  */
-@WebService(name = "GPTrackingService", targetNamespace = "http://services.geo-platform.org/")
+@WebService(name = "GPTrackingService",
+            targetNamespace = "http://services.geo-platform.org/")
 public interface GPTrackingService {
 
     @Post

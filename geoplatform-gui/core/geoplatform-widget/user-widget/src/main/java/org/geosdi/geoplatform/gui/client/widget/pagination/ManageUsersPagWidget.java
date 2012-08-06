@@ -129,7 +129,8 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
 
                 UserRemote.Util.getInstance().searchUsers(
-                        (PagingLoadConfig) loadConfig, searchText, callback);
+                        (PagingLoadConfig) loadConfig, searchText,
+                        GPAccountLogged.getInstance().getOrganization(), callback);
             }
         };
 

@@ -63,7 +63,7 @@ import org.geosdi.geoplatform.responce.SummaryRecordDTO;
  * @email michele.santomauro@geosdi.org
  */
 @WebService(name = "GeoPlatformCSWService",
-targetNamespace = "http://csw.services.geo-platform.org/")
+            targetNamespace = "http://csw.services.geo-platform.org/")
 public interface GeoPlatformCSWService {
 
     //<editor-fold defaultstate="collapsed" desc="CSW Server">

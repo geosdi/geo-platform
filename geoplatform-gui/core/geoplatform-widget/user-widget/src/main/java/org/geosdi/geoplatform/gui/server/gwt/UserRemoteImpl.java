@@ -39,8 +39,8 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
+import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
@@ -61,8 +61,8 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-                                                            String searchText) {
-        return userService.searchUsers(config, searchText, super.getThreadLocalRequest());
+                                                            String searchText, String organization) {
+        return userService.searchUsers(config, searchText, organization, super.getThreadLocalRequest());
     }
 
     @Override

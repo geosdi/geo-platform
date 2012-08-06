@@ -49,10 +49,13 @@ import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.LayerAttribute;
 
 /**
- * Public interface to define the service operations mapped via REST
- * using CXT framework
+ * Public interface to define the service operations mapped via REST using CXT
+ * framework.
+ * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@WebService(name = "GPPublisherService", 
+@WebService(name = "GPPublisherService",
             targetNamespace = "http://services.geo-platform.org/")
 public interface GPPublisherService {
 
@@ -64,7 +67,7 @@ public interface GPPublisherService {
             @WebParam(name = "username") String userName,
             @WebParam(name = "fileName") File file)
             throws ResourceNotFoundFault;
-    
+
     @Get
     @HttpResource(location = "/preview/processEPSGResult")
     @WebResult(name = "Result")
@@ -72,7 +75,7 @@ public interface GPPublisherService {
             @WebParam(name = "username") String userName,
             @WebParam(name = "previewLayerList") ArrayList<InfoPreview> previewLayerList)
             throws ResourceNotFoundFault;
-    
+
     @Get
     @HttpResource(location = "/preview/loadStyle")
     @WebResult(name = "Result")
@@ -80,7 +83,7 @@ public interface GPPublisherService {
             @WebParam(name = "layerDatasource") String layerDatasource,
             @WebParam(name = "styleName") String styleName)
             throws ResourceNotFoundFault;
-    
+
     @Get
     @HttpResource(location = "/preview/loadStyle")
     @WebResult(name = "Result")
@@ -94,6 +97,7 @@ public interface GPPublisherService {
     boolean publishStyle(
             @WebParam(name = "styleToPublish") String styleToPublish)
             throws ResourceNotFoundFault;
+
     @Get
     @HttpResource(location = "/preview/putStyle")
     @WebResult(name = "Result")
@@ -101,12 +105,13 @@ public interface GPPublisherService {
             @WebParam(name = "styleToPublish") String styleToPublish,
             @WebParam(name = "styleName") String styleName)
             throws ResourceNotFoundFault;
+
     @Get
     @HttpResource(location = "/preview/existsStyle")
     @WebResult(name = "Result")
     public boolean existsStyle(
             @WebParam(name = "styleName") String styleName);
-    
+
     @Get
     @HttpResource(location = "/preview/uploadZipInPreview")
     @WebResult(name = "Result")
@@ -149,7 +154,7 @@ public interface GPPublisherService {
 //    @WebResult(name = "Result")
 //    boolean verifyAndDeleteSessionDir(
 //            @WebParam(name = "idSessionDestroyed") String idSessionDestroyed);
-
+//    
     @Get
     @HttpResource(location = "/preview/publish")
     @WebResult(name = "Result")
@@ -175,7 +180,7 @@ public interface GPPublisherService {
             @WebParam(name = "workspace") String workspace,
             @WebParam(name = "dataStoreName") String dataStoreName)
             throws ResourceNotFoundFault, FileNotFoundException;
-
+//    
 //    @Get
 //    @HttpResource(location = "/preview/removeFromPreview")
 //    @WebResult(name = "Result")

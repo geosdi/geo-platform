@@ -74,10 +74,10 @@ import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
+import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
@@ -92,7 +92,8 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
+@WebService(name = "GeoPlatformService",
+            targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
@@ -218,7 +219,8 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/users/count/{nameLike}")
     @WebResult(name = "count")
-    Long getUsersCount(SearchRequest searchRequest);
+    Long getUsersCount(@WebParam(name = "organization") String organization,
+            SearchRequest searchRequest);
 
     @Get
     @HttpResource(location = "/accounts/{id}/authorities")
@@ -383,6 +385,7 @@ public interface GeoPlatformService {
     // ==========================================================================
     // === Viewport
     // ==========================================================================
+
     @Get
     @HttpResource(location = "/viewport/{{accountProjectID}}")
     @WebResult(name = "Viewport")
@@ -790,7 +793,7 @@ public interface GeoPlatformService {
     // <editor-fold defaultstate="collapsed" desc="ACL">
     /**
      * Retrieve all Roles wrt an organization.
-     * 
+     *
      * @param organization organization name
      *
      * @return List of all Roles

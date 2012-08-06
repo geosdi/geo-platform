@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 public interface IUserService {
 
     PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-                                                     String searchText,
+                                                     String searchText, String organization,
                                                      HttpServletRequest httpServletRequest);
 
     Long insertUser(IGPUserManageDetail userDetail, String organization,

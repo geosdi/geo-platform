@@ -42,7 +42,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * TODO Load IDs from menubar.properties and toolbar.properties
+ * @TODO Load IDs from menubar.properties, toolbar.properties
+ * and contextmenu.properties
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */

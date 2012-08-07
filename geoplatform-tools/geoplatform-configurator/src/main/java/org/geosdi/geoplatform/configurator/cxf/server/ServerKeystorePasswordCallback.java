@@ -35,23 +35,12 @@
  */
 package org.geosdi.geoplatform.configurator.cxf.server;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import javax.security.auth.callback.Callback;
-import javax.security.auth.callback.CallbackHandler;
-import javax.security.auth.callback.UnsupportedCallbackException;
-import org.apache.ws.security.WSPasswordCallback;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.configurator.cxf.AstractKeystorePasswordCallback;
 
-public class ServerKeystorePasswordCallback implements CallbackHandler {
+public class ServerKeystorePasswordCallback extends AstractKeystorePasswordCallback {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private Map<String, String> passwords = new HashMap<String, String>();
-
-    public ServerKeystorePasswordCallback() {
+    @Override
+    protected void populatePasswords() {
         passwords.put("Alice", "ecilA");
         passwords.put("abcd", "dcba");
         passwords.put("clientx509v1", "storepassword");
@@ -62,28 +51,5 @@ public class ServerKeystorePasswordCallback implements CallbackHandler {
 ////        passwords.put("bob", "password");
         //
         passwords.put("gpagent", "gpagent");
-    }
-
-    /**
-     * It attempts to get the password from the private alias/passwords map.
-     */
-    @Override
-    public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
-        for (int i = 0; i < callbacks.length; i++) {
-            WSPasswordCallback pc = (WSPasswordCallback) callbacks[i];
-
-            String pass = passwords.get(pc.getIdentifier());
-            if (pass != null) {
-                pc.setPassword(pass);
-                return;
-            }
-        }
-    }
-
-    /**
-     * Add an alias/password pair to the callback mechanism.
-     */
-    public void setAliasPassword(String alias, String password) {
-        passwords.put(alias, password);
     }
 }

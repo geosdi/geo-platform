@@ -36,17 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.contextmenu;
 
 import com.extjs.gxt.ui.client.data.ModelData;
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.action.menu.CopyLayerAction;
-import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ShowFolderRenameAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -55,8 +44,14 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.*;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -65,6 +60,7 @@ import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
 public class GPDynamicTreeContextMenu extends Menu {
 
     private GPTreePanel<GPBeanTreeModel> tree;
+    private Menu rootContextMenu = new Menu();
     private Menu folderContextMenu = new Menu();
     private Menu layerContextMenu = new Menu();
     private ComboBox refreshTimeComboBox;
@@ -75,6 +71,13 @@ public class GPDynamicTreeContextMenu extends Menu {
     }
 
     private void buildMenu() {
+        AddFolderMenuAction addFolderAction = new AddFolderMenuAction(tree);
+        MenuItem addFolder = new MenuItem();
+        addFolder.setText(addFolderAction.getTitle());
+        addFolder.setIcon(addFolderAction.getImage());
+        addFolder.addSelectionListener(addFolderAction);
+        rootContextMenu.add(addFolder);
+
         // add zoom to max extent
         MenuItem zoomToMaxExtend = new MenuItem();
         zoomToMaxExtend.setText("Zoom to layer extend");
@@ -154,8 +157,6 @@ public class GPDynamicTreeContextMenu extends Menu {
         this.tree.setContextMenu(this.layerContextMenu);
 
         this.tree.addListener(Events.OnContextMenu, new Listener() {
-            private Menu emptyMenu = new Menu();
-
             @Override
             public void handleEvent(BaseEvent be) {
                 GPBeanTreeModel selectedItem = tree.getSelectionModel().getSelectedItem();
@@ -163,8 +164,8 @@ public class GPDynamicTreeContextMenu extends Menu {
                     tree.setContextMenu(folderContextMenu);
                 } else if (selectedItem instanceof GPLayerTreeModel) {
                     tree.setContextMenu(layerContextMenu);
-                } else {
-                    tree.setContextMenu(emptyMenu);
+                } else if (selectedItem instanceof GPRootTreeNode) {
+                    tree.setContextMenu(rootContextMenu);
                 }
             }
         });

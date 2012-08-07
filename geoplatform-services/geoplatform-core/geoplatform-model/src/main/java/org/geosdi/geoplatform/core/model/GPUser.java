@@ -80,6 +80,9 @@ public class GPUser extends GPAccount implements UserDetails {
         return this.getEmailAddress();
     }
 
+    /**
+     * @return the username: return the email address
+     */    
     @Override
     public String getUsername() {
         return this.getEmailAddress();

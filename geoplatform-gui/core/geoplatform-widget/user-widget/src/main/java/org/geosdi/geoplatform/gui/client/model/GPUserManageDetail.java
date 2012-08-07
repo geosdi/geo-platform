@@ -56,6 +56,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
 
     public enum GPUserManageDetailKeyValue {
 
+        USERNAME,
         PASSWORD,
         NAME,
         AUTORITHY,
@@ -78,6 +79,22 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the username
+     */
+    @Override
+    public String getUsername() {
+        return super.get(GPUserManageDetailKeyValue.USERNAME.toString());
+    }
+
+    /**
+     * @param username the username to set
+     */
+    @Override
+    public void setUsername(String username) {
+        super.set(GPUserManageDetailKeyValue.USERNAME.toString(), username);
     }
 
     /**
@@ -275,6 +292,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         str.append("id=").append(id);
         str.append(", name=").append(getName());
         str.append(", email=").append(getEmail());
+        str.append(", username=").append(getUsername());
         str.append(", password=").append(password);
         str.append(", authority=").append(getAuthority());
         str.append(", enabled=").append(isEnabled());

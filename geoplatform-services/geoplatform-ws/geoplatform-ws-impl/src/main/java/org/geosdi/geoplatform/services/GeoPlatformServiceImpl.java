@@ -57,10 +57,10 @@ import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
+import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
@@ -343,15 +343,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPUser getUserDetailByEmail(SearchRequest request)
+    public GPUser getUserDetailByUsername(SearchRequest request)
             throws ResourceNotFoundFault {
-        return accountServiceDelegate.getUserDetailByEmail(request);
+        return accountServiceDelegate.getUserDetailByUsername(request);
     }
 
     @Override
-    public GPUser getUserDetailByEmailAndPassword(String email, String password)
+    public GPUser getUserDetailByUsernameAndPassword(String email, String password)
             throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
-        return accountServiceDelegate.getUserDetailByEmailAndPassword(email, password);
+        return accountServiceDelegate.getUserDetailByUsernameAndPassword(email, password);
     }
 
     @Override
@@ -371,9 +371,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public UserDTO getShortUserByEmail(SearchRequest request)
+    public UserDTO getShortUserByUsername(SearchRequest request)
             throws ResourceNotFoundFault {
-        return accountServiceDelegate.getShortUserByEmail(request);
+        return accountServiceDelegate.getShortUserByUsername(request);
     }
 
     @Override
@@ -588,7 +588,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault {
         viewportServiceDelegate.replaceViewportList(accountProjectId, viewportList);
     }
-    
+
     @Override
     public void saveOrUpdateViewportList(Long accountProjectId, ArrayList<GPViewport> viewportList)
             throws ResourceNotFoundFault, IllegalParameterFault {

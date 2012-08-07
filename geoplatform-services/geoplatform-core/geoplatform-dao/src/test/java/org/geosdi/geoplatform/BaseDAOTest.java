@@ -150,7 +150,7 @@ public abstract class BaseDAOTest {
     protected GPProject viewerProject;
     protected GPProject gsUserProject;
     // ACL
-    private static final String emailSuperUserTestAcl = "super_user_test_acl";
+    private static final String usernameSuperUserTestAcl = "super_user_test_acl";
     private AclClass gcClass;
     private AclSid superUser;
     private AclSid admin;
@@ -428,7 +428,7 @@ public abstract class BaseDAOTest {
         this.serviceTest = this.insertUser("service", organizationTest, GPRole.ADMIN);
         this.gsUserTest = this.insertUser(gsAccountUsername, organizationTest, GPRole.ADMIN);
         // ACL
-        this.insertUser(emailSuperUserTestAcl, organizationTest, GPRole.ADMIN, GPRole.USER);
+        this.insertUser(usernameSuperUserTestAcl, organizationTest, GPRole.ADMIN, GPRole.USER);
         this.insertUser("admin_acl_test", organizationTest, GPRole.ADMIN);
         this.insertUser("user_acl_test", organizationTest, GPRole.USER);
         //
@@ -555,8 +555,8 @@ public abstract class BaseDAOTest {
         return organization;
     }
 
-    protected GPUser insertUser(String email, GPOrganization organization, GPRole... roles) {
-        GPUser newUser = this.createUser(email, organization);
+    protected GPUser insertUser(String username, GPOrganization organization, GPRole... roles) {
+        GPUser newUser = this.createUser(username, organization);
         accountDAO.persist(newUser);
         logger.debug("\n*** User SAVED:\n{}\n***", newUser);
 
@@ -589,19 +589,17 @@ public abstract class BaseDAOTest {
         return authorities;
     }
 
-    private GPUser createUser(String email, GPOrganization organization) {
+    private GPUser createUser(String username, GPOrganization organization) {
         GPUser newUser = new GPUser();
         newUser.setOrganization(organization);
-        newUser.setName("Complete name of " + email);
-        if (email.contains("_")) {
-            newUser.setPassword(this.gpDigesterSHA1.digest("pwd_" + email));
+        newUser.setUsername(username);
+        if (username.contains("_")) {
+            newUser.setPassword(this.gpDigesterSHA1.digest("pwd_" + username));
         } else { // User for GUI test
-            newUser.setPassword(this.gpDigesterSHA1.digest(email));
+            newUser.setPassword(this.gpDigesterSHA1.digest(username));
         }
-        if (!email.contains("@")) {
-            email += "@geosdi.org";
-        }
-        newUser.setEmailAddress(email);
+        newUser.setName("Complete name of " + username);
+        newUser.setEmailAddress(username + "@geosdi.org");
         newUser.setEnabled(true);
         newUser.setSendEmail(true);
         return newUser;
@@ -788,7 +786,7 @@ public abstract class BaseDAOTest {
 
     private void createSids() {
         // Owner of all Object Identities
-        this.superUser = new AclSid(true, emailSuperUserTestAcl);
+        this.superUser = new AclSid(true, usernameSuperUserTestAcl);
         // Users of interest
         this.admin = new AclSid(false, GPRole.ADMIN.toString(), organizationTest);
         this.user = new AclSid(false, GPRole.USER.toString(), organizationTest);

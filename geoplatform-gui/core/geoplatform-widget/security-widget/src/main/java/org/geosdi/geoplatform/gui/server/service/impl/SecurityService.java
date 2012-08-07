@@ -77,7 +77,7 @@ public class SecurityService implements ISecurityService {
     String hostXmppServer;
 
     @Override
-    public IGPAccountDetail userLogin(String userName, String password,
+    public IGPAccountDetail userLogin(String username, String password,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user;
@@ -85,10 +85,9 @@ public class SecurityService implements ISecurityService {
         GPAccountProject accountProject;
         IGPAccountDetail userDetail;
         try {
-            user = geoPlatformServiceClient.getUserDetailByEmailAndPassword(
-                    userName, password);
-            guiComponentPermission = geoPlatformServiceClient.getAccountPermission(
-                    user.getId());
+            user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
+                    username, password);
+            guiComponentPermission = geoPlatformServiceClient.getAccountPermission(user.getId());
 
             if (user.getDefaultProjectID() == null) {
                 GPProject project = new GPProject();
@@ -107,13 +106,12 @@ public class SecurityService implements ISecurityService {
 
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
-                    "Unable to find user with username: " + userName
+                    "Unable to find user with username or email: " + username
                     + " Error: " + ex);
-            throw new GeoPlatformException("Unable to find user with username: "
-                    + userName);
+            throw new GeoPlatformException("Unable to find user with username or email: "
+                    + username);
         } catch (SOAPFaultException ex) {
-            logger.error(
-                    "Error on SecurityService: " + ex + " password incorrect");
+            logger.error("Error on SecurityService: " + ex + " password incorrect");
             throw new GeoPlatformException("Password incorrect");
         } catch (IllegalParameterFault ex) {
             logger.error("Error on SecurityService: " + ex);
@@ -221,7 +219,7 @@ public class SecurityService implements ISecurityService {
     private IGPAccountDetail convertAccountToDTO(GPAccount account, GPAccountProject accountProject,
             GPViewport viewport) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
-        accountDetail.setEmail(account.getStringID()); // Forced representation
+        accountDetail.setUsername(account.getStringID()); // Forced representation
         accountDetail.setOrganization(account.getOrganization().getName());
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;

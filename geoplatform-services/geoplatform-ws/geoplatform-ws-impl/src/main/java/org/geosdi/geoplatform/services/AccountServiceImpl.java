@@ -184,6 +184,7 @@ class AccountServiceImpl {
         clonedUser.setEmailAddress(user.getEmailAddress());
         clonedUser.setName(user.getName());
         clonedUser.setSendEmail(user.isSendEmail());
+        clonedUser.setUsername(user.getUsername());
         clonedUser.setEnabled(user.isEnabled());
         clonedUser.setAccountTemporary(user.isAccountTemporary());
         clonedUser.setPassword(plainPassword);
@@ -199,22 +200,22 @@ class AccountServiceImpl {
         GPUser orig = (GPUser) this.getAccountById(user.getId());
         EntityCorrectness.checkAccountLog(orig); // TODO assert
 
-        // Set the values (except email and property not managed)
+        // Set the values (except username and property not managed)
         String name = user.getName();
         if (name != null) {
             orig.setName(name);
         }
-//        String email = user.getEmailAddress();
-//        if (email != null) {
-//            orig.setEmailAddress(email);
-//        }
+        String email = user.getEmailAddress();
+        if (email != null) {
+            orig.setEmailAddress(email);
+        }
         String password = user.getPassword();
         if (password != null) {
             orig.setPassword(this.gpDigester.digest(password));
         }
         this.updateAccount(orig, user);
 
-        this.updateAccountAuthorities(orig.getEmailAddress(), user.getGPAuthorities());
+        this.updateAccountAuthorities(orig.getUsername(), user.getGPAuthorities());
 
         accountDao.merge(orig);
         return orig.getId();
@@ -365,9 +366,9 @@ class AccountServiceImpl {
      * @return UserDTO the short User object
      * @throws ResourceNotFoundFault
      */
-    public UserDTO getShortUserByEmail(SearchRequest request)
+    public UserDTO getShortUserByUsername(SearchRequest request)
             throws ResourceNotFoundFault {
-        GPUser user = this.getUserByEmail(request.getNameLike());
+        GPUser user = this.getUserByUsername(request.getNameLike());
         EntityCorrectness.checkAccountLog(user); // TODO assert
         return new UserDTO(user);
     }
@@ -379,23 +380,34 @@ class AccountServiceImpl {
      * @return GPUser the detailed User object
      * @throws ResourceNotFoundFault
      */
-    public GPUser getUserDetailByEmail(SearchRequest request)
+    public GPUser getUserDetailByUsername(SearchRequest request)
             throws ResourceNotFoundFault {
-        GPUser user = this.getUserByEmail(request.getNameLike());
+        GPUser user = this.getUserByUsername(request.getNameLike());
         EntityCorrectness.checkAccountLog(user); // TODO assert
         return user;
     }
 
-    public GPUser getUserDetailByEmailAndPassword(String email, String plainPassword)
+    /**
+     * @see
+     * GeoPlatformService#getUserDetailByUsernameAndPassword(java.lang.String,
+     * java.lang.String)
+     */
+    public GPUser getUserDetailByUsernameAndPassword(String username, String plainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
-        GPUser user = this.getUserByEmail(email);
+        GPUser user = accountDao.findByUsername(username);
+        if (user == null) {
+            user = accountDao.findByEmail(username);
+            if (user == null) {
+                throw new ResourceNotFoundFault("User not found (username or email=" + username + ")");
+            }
+        }
         EntityCorrectness.checkAccountLog(user); // TODO assert
 
         if (!user.isAccountNonExpired()) {
-            throw new AccountLoginFault(LoginFaultType.ACCOUNT_EXPIRED, email);
+            throw new AccountLoginFault(LoginFaultType.ACCOUNT_EXPIRED, username);
         }
         if (!user.isEnabled()) {
-            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, email);
+            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, username);
         }
 
         // Check password
@@ -455,13 +467,13 @@ class AccountServiceImpl {
         searchCriteria.addFilterNotEqual("id", userID);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
-        searchCriteria.addFilterNotEmpty("emailAddress");
-        searchCriteria.addSortAsc("emailAddress");
+        searchCriteria.addFilterNotEmpty("username");
+        searchCriteria.addSortAsc("username");
         searchCriteria.addFilterEqual("organization.name", user.getOrganization().getName());
 
         String like = request.getNameLike();
         if (like != null) {
-            searchCriteria.addFilterILike("emailAddress", like);
+            searchCriteria.addFilterILike("username", like);
         }
 
         List<GPAccount> accountList = accountDao.search(searchCriteria);
@@ -488,20 +500,20 @@ class AccountServiceImpl {
         Search searchCriteria = new Search(GPAccount.class);
 
         if (request != null && request.getNameLike() != null) {
-            Filter fEmail = Filter.ilike("emailAddress", request.getNameLike());
+            Filter fUsername = Filter.ilike("username", request.getNameLike());
             Filter fAppId = Filter.ilike("appID", request.getNameLike());
-            searchCriteria.addFilterOr(fEmail, fAppId);
+            searchCriteria.addFilterOr(fUsername, fAppId);
         }
         return Long.valueOf(accountDao.count(searchCriteria));
     }
 
     public Long getUsersCount(String organization, SearchRequest request) {
         Search searchCriteria = new Search(GPAccount.class);
-        searchCriteria.addFilterNotEmpty("emailAddress");
+        searchCriteria.addFilterNotEmpty("username");
         searchCriteria.addFilterEqual("organization.name", organization);
 
         if (request != null && request.getNameLike() != null) {
-            searchCriteria.addFilterILike("emailAddress", request.getNameLike());
+            searchCriteria.addFilterILike("username", request.getNameLike());
         }
         return Long.valueOf(accountDao.count(searchCriteria));
     }
@@ -553,10 +565,10 @@ class AccountServiceImpl {
         return account;
     }
 
-    private GPUser getUserByEmail(String email) throws ResourceNotFoundFault {
-        GPUser user = accountDao.findByEmail(email);
+    private GPUser getUserByUsername(String username) throws ResourceNotFoundFault {
+        GPUser user = accountDao.findByUsername(username);
         if (user == null) {
-            throw new ResourceNotFoundFault("User not found (email=" + email + ")");
+            throw new ResourceNotFoundFault("User not found (username=" + username + ")");
         }
         return user;
     }
@@ -572,9 +584,9 @@ class AccountServiceImpl {
     private void checkDuplicateAccount(GPAccount account) throws IllegalParameterFault {
         if (account instanceof GPUser) { // User
             GPUser user = (GPUser) account;
-            if (accountDao.findByEmail(user.getEmailAddress()) != null) {
-                throw new IllegalParameterFault("User with email \""
-                        + user.getEmailAddress() + "\" already exists");
+            if (accountDao.findByUsername(user.getUsername()) != null) {
+                throw new IllegalParameterFault("User with username \""
+                        + user.getUsername() + "\" already exists");
             }
 
             if (accountDao.findByEmail(user.getEmailAddress()) != null) {

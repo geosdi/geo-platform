@@ -211,6 +211,7 @@ public class UserService implements IUserService {
         GPUserManageDetail user = new GPUserManageDetail();
         user.setId(userDTO.getId());
         user.setName(userDTO.getName());
+        user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmailAddress());
         user.setEnabled(userDTO.isEnabled());
         user.setCreationDate(userDTO.getCreationDate());
@@ -236,6 +237,7 @@ public class UserService implements IUserService {
         GPUserManageDetail user = new GPUserManageDetail();
         user.setId(gpUser.getId());
         user.setName(gpUser.getName());
+        user.setUsername(gpUser.getUsername());
         user.setEmail(gpUser.getEmailAddress());
         user.setCreationDate(gpUser.getCreationDate());
         user.setTemporary(gpUser.isAccountTemporary());
@@ -272,6 +274,7 @@ public class UserService implements IUserService {
 
         user.setName(userDetail.getName());
         user.setEmailAddress(userDetail.getEmail());
+        user.setUsername(userDetail.getUsername());
         user.setPassword(userDetail.getPassword());
         user.setEnabled(userDetail.isEnabled());
         user.setAccountTemporary(userDetail.isTemporary());
@@ -285,12 +288,13 @@ public class UserService implements IUserService {
 
     @Override
     public ArrayList<String> getAllRoles(String organization, HttpServletRequest httpServletRequest) {
+        ArrayList<String> roles = null;
         try {
-            return (ArrayList<String>) geoPlatformServiceClient.getAllRoles(organization);
+            roles = (ArrayList<String>) geoPlatformServiceClient.getAllRoles(organization);
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
         }
-        return null;
+        return roles;
     }
 
     @Override

@@ -84,6 +84,13 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
     }
 
     @Override
+    public GPUser findByUsername(String username) {
+        Search search = new Search();
+        search.addFilterEqual("username", username);
+        return super.searchUnique(search);
+    }
+
+    @Override
     public GPUser findByEmail(String email) {
         Search search = new Search();
         search.addFilterEqual("emailAddress", email);
@@ -99,7 +106,7 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
 
     @Override
     public GPAccount findByStringID(String stringID) {
-        GPAccount account = this.findByEmail(stringID);
+        GPAccount account = this.findByUsername(stringID);
         if (account == null) {
             account = this.findByAppID(stringID);
         }

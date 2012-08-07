@@ -63,7 +63,7 @@ import org.springframework.security.acls.domain.BasePermission;
 public class GPDAOTest extends BaseDAOTest {
 
     // User
-    private String emailUserPositionTest = "user_position_test";
+    private String usernameUserPositionTest = "user_position_test";
     private GPUser userPositionTest;
     // Projects
     private GPProject userPositionTestProject;
@@ -84,7 +84,7 @@ public class GPDAOTest extends BaseDAOTest {
         logger.trace("\n\t@@@ " + getClass().getSimpleName() + ".setUp @@@");
         organizationTest = new GPOrganization("geoSDI_dao_test");
         organizationDAO.persist(organizationTest);
-        userPositionTest = super.insertUser(emailUserPositionTest, organizationTest);
+        userPositionTest = super.insertUser(usernameUserPositionTest, organizationTest);
 
         endPosition = beginPosition + 930;
 
@@ -93,7 +93,7 @@ public class GPDAOTest extends BaseDAOTest {
         //
         super.insertBindingUserProject(userPositionTest, userPositionTestProject, BasePermission.ADMINISTRATION.getMask());
         //
-        rootFolder = super.createFolder("folder_of_" + emailUserPositionTest, userPositionTestProject, null, beginPosition + 900); // 333930
+        rootFolder = super.createFolder("folder_of_" + usernameUserPositionTest, userPositionTestProject, null, beginPosition + 900); // 333930
         rootFolder.setNumberOfDescendants(13);
         rootFolder.setChecked(false);
         //

@@ -80,7 +80,7 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
             public void componentSelected(ButtonEvent ce) {
 
                 GeoPlatformMessage.confirmMessage("Delete User",
-                                                  "Are you sure you want to delete the User \"" + user.getEmail() + "\" ?",
+                                                  "Are you sure you want to delete the User \"" + user.getUsername() + "\" ?",
                                                   new Listener<MessageBoxEvent>() {
 
                     @Override
@@ -120,7 +120,7 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
             public void onSuccess(Boolean result) {
                 store.remove(user);
                 GeoPlatformMessage.infoMessage("User successfully deleted",
-                                               "<ul><li>" + user.getEmail() + "</li></ul>");
+                                               "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }

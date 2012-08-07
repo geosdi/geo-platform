@@ -53,7 +53,6 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail.GPUserManageDetailKeyValue;
@@ -152,11 +151,11 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         nameColumn.setHeader("Name");
         configs.add(nameColumn);
 
-        ColumnConfig emailColumn = new ColumnConfig();
-        emailColumn.setId(GPUserManageDetailKeyValue.EMAIL.toString());
-        emailColumn.setHeader("Email (username)");
-        emailColumn.setWidth(130);
-        configs.add(emailColumn);
+        ColumnConfig usernameColumn = new ColumnConfig();
+        usernameColumn.setId(GPUserManageDetailKeyValue.USERNAME.toString());
+        usernameColumn.setHeader("Username");
+        usernameColumn.setWidth(120);
+        configs.add(usernameColumn);
 
         CheckColumnConfig enabledColumn = new CheckColumnConfig();
         enabledColumn.setId(GPUserManageDetailKeyValue.ENABLED.toString());

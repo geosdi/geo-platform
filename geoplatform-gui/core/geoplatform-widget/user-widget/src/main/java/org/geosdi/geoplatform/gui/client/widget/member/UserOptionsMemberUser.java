@@ -56,28 +56,29 @@ import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
- * TODO Manage the use case for changing the email (aka username).
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class UserOptionsMemberUser extends UserOptionsMember {
 
     private FormPanel formPanel;
     //
-    private TextField<String> emailField;
+    private TextField<String> usernameField;
     private TextField<String> roleField;
     private TextField<String> nameField;
+    //
+    private TextField<String> emailField;
     //
     private TextField<String> oldPasswordField;
     private TextField<String> newPasswordField;
     private TextField<String> newRePasswordField;
     //
     private String newName;
-//    private String newEmail;
+    private String newEmail;
     private String newPlainPassword;
     //
     private boolean validName;
-//    private boolean validEmail;
+    private boolean validEmail;
     private boolean validPassword;
 
     public UserOptionsMemberUser() {
@@ -91,7 +92,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         this.formPanel.setHeaderVisible(false);
 
         this.formPanel.add(this.createPropertiesSetting());
-//        this.formPanel.add(this.createEmailSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
+        this.formPanel.add(this.createEmailSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
         this.formPanel.add(this.createPasswordSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
 
         panel.add(formPanel);
@@ -103,11 +104,11 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         userFieldSet.setSize(400, 110);
         userFieldSet.setLayout(this.getFormLayoutTemplate());
 
-        emailField = new TextField<String>();
-        emailField.setFieldLabel("Email");
-        emailField.setEnabled(false);
+        usernameField = new TextField<String>();
+        usernameField.setFieldLabel("Username");
+        usernameField.setEnabled(false);
         
-        userFieldSet.add(emailField);
+        userFieldSet.add(usernameField);
 
         roleField = new TextField<String>();
         roleField.setFieldLabel("Role");
@@ -126,36 +127,36 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
         return userFieldSet;
     }
-//
-//    private FieldSet createEmailSetting() {
-//        FieldSet emailResultSet = new FieldSet();
-//        emailResultSet.setHeading("Change email");
-//        emailResultSet.setSize(400, 50);
-//        emailResultSet.setCheckboxToggle(true);
-//        emailResultSet.setExpanded(false);
-//        emailResultSet.setLayout(this.getFormLayoutTemplate());
-//
-//        emailField = new TextField<String>();
-//        emailField.setFieldLabel("Email");
-//        emailField.setToolTip("Your email");
-//        emailField.setAutoValidate(true);
-//        emailField.setAllowBlank(false);
-//        emailField.setValidator(validatorUpdateEmail());
-//        emailResultSet.add(emailField);
-//
-//        emailResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
-//
-//            @Override
-//            public void handleEvent(FieldSetEvent be) {
-//                updateEmail(null, true);
-//
-//                emailField.setValue(user.getEmail());
-//            }
-//        });
-//
-//        return emailResultSet;
-//    }
-//
+
+    private FieldSet createEmailSetting() {
+        FieldSet emailResultSet = new FieldSet();
+        emailResultSet.setHeading("Change email");
+        emailResultSet.setSize(400, 50);
+        emailResultSet.setCheckboxToggle(true);
+        emailResultSet.setExpanded(false);
+        emailResultSet.setLayout(this.getFormLayoutTemplate());
+
+        emailField = new TextField<String>();
+        emailField.setFieldLabel("Email");
+        emailField.setToolTip("Your email");
+        emailField.setAutoValidate(true);
+        emailField.setAllowBlank(false);
+        emailField.setValidator(validatorUpdateEmail());
+        emailResultSet.add(emailField);
+
+        emailResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
+
+            @Override
+            public void handleEvent(FieldSetEvent be) {
+                updateEmail(null, true);
+
+                emailField.setValue(user.getEmail());
+            }
+        });
+
+        return emailResultSet;
+    }
+
     private FieldSet createPasswordSetting() {
         FieldSet passwordFieldSet = new FieldSet();
         passwordFieldSet.setHeading("Change password");
@@ -238,7 +239,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 saveButton.disable();
 
                 GeoPlatformMessage.infoMessage("User successfully modify",
-                                               "<ul><li>" + user.getEmail() + "</li></ul>");
+                                               "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }
@@ -252,11 +253,12 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     @Override
     protected void manageUserData() {
-        emailField.setValue(user.getEmail());
+        usernameField.setValue(user.getUsername());
         roleField.setValue(user.getAuthority());
         nameField.setValue(user.getName());
 
-//        emailField.setValue(user.getEmail());
+        emailField.setValue(user.getEmail());
+
         oldPasswordField.reset();
         newPasswordField.reset();
         newRePasswordField.reset();
@@ -280,26 +282,26 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             }
         };
     }
-    // TODO Manage the use case for changing the email (aka username)
-//    private Validator validatorUpdateEmail() {
-//        return new Validator() {
-//
-//            @Override
-//            public String validate(Field<?> field, String value) {
-//                if (value.equals(user.getEmail())) {
-//                    updateEmail(null, true);
-//                    return null; // Pseudo-valid
-//                }
-//                if (!GPRegEx.RE_EMAIL.test(value)) {
-//                    updateEmail(null, false);
-//                    return "Email is not valid (example: any@foo.org)";
-//                }
-//                updateEmail(value, true);
-//                return null;
-//            }
-//        };
-//    }
-//
+
+    private Validator validatorUpdateEmail() {
+        return new Validator() {
+
+            @Override
+            public String validate(Field<?> field, String value) {
+                if (value.equals(user.getEmail())) {
+                    updateEmail(null, true);
+                    return null; // Pseudo-valid
+                }
+                if (!GPRegEx.RE_EMAIL.test(value)) {
+                    updateEmail(null, false);
+                    return "Email is not valid (example: any@foo.org)";
+                }
+                updateEmail(value, true);
+                return null;
+            }
+        };
+    }
+
     private Validator validatorPassword() {
         return new Validator() {
 
@@ -363,13 +365,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         this.validName = validName;
         this.manageSaveButton();
     }
-//
-//    private void updateEmail(String newEmail, boolean validEmail) {
-//        this.newEmail = newEmail;
-//        this.validEmail = validEmail;
-//        this.manageSaveButton();
-//    }
-//
+
+    private void updateEmail(String newEmail, boolean validEmail) {
+        this.newEmail = newEmail;
+        this.validEmail = validEmail;
+        this.manageSaveButton();
+    }
+
     private void updatePassword(String newPassword, boolean validPassword) {
         this.newPlainPassword = newPassword;
         this.validPassword = validPassword;
@@ -377,10 +379,8 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     }
 
     private void manageSaveButton() {
-        if (validName && validPassword
-//        if (validName && validEmail && validPassword
-                && (newName != null || newPlainPassword != null)) {
-//                && (newName != null || newEmail != null || newPlainPassword != null)) {
+        if (validName && validEmail && validPassword
+                && (newName != null || newEmail != null || newPlainPassword != null)) {
             this.saveButton.enable();
         } else {
             this.saveButton.disable();
@@ -392,8 +392,8 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             Dispatcher.forwardEvent(GeoPlatformEvents.USER_UPDATE_HIS_NAME, newName);
             user.setName(newName);
         }
-//        if (newEmail != null) {
-//            user.setEmail(newEmail);
-//        }
+        if (newEmail != null) {
+            user.setEmail(newEmail);
+        }
     }
 }

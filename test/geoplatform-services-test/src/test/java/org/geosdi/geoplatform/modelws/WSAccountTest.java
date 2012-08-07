@@ -83,7 +83,7 @@ public class WSAccountTest extends ServiceTest {
 
         // Number of Account Like
         long numAccountsLike = gpWSClient.getAccountsCount(
-                new SearchRequest(emailUserTest, LikePatternType.CONTENT_EQUALS));
+                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertEquals("Number of Account Like", 1L, numAccountsLike);
 
         // Get User from Id
@@ -96,17 +96,17 @@ public class WSAccountTest extends ServiceTest {
         Assert.assertNotNull(userFromWS);
         Assert.assertEquals("Error found GPUser from Id", idUserTest, userFromWS.getId().longValue());
 
-        // Get User from Email
-        // Get UserDTO from Email
-        userDTOFromWS = gpWSClient.getShortUserByEmail(
-                new SearchRequest(emailUserTest, LikePatternType.CONTENT_EQUALS));
+        // Get User from Username
+        // Get UserDTO from Username
+        userDTOFromWS = gpWSClient.getShortUserByUsername(
+                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertNotNull(userDTOFromWS);
-        Assert.assertEquals("Error found UserDTO from Email", idUserTest, userDTOFromWS.getId().longValue());
-        // Get GPUser from Email
-        userFromWS = gpWSClient.getUserDetailByEmail(
-                new SearchRequest(emailUserTest, LikePatternType.CONTENT_EQUALS));
+        Assert.assertEquals("Error found UserDTO from Username", idUserTest, userDTOFromWS.getId().longValue());
+        // Get GPUser from Username
+        userFromWS = gpWSClient.getUserDetailByUsername(
+                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertNotNull(userFromWS);
-        Assert.assertEquals("Error found GPUser from Email", idUserTest, userFromWS.getId().longValue());
+        Assert.assertEquals("Error found GPUser from Username", idUserTest, userFromWS.getId().longValue());
     }
 
     @Test(expected = IllegalParameterFault.class)
@@ -116,31 +116,31 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testInsertUserWithSingleRole() throws ResourceNotFoundFault {
-        List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(emailUserTest);
+        List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameTest);
         Assert.assertNotNull("Authorities null", authorities);
-        Assert.assertEquals("Number of Authorities of " + emailUserTest, 1, authorities.size());
+        Assert.assertEquals("Number of Authorities of " + usernameTest, 1, authorities.size());
 
         GPAuthority authority = authorities.get(0);
         Assert.assertNotNull(authority);
         Assert.assertEquals("Authority string", ROLE_USER, authority.getAuthority());
-        Assert.assertEquals("Authority email", emailUserTest, authority.getStringID());
+        Assert.assertEquals("Authority username", usernameTest, authority.getStringID());
     }
 
     @Test
     public void testInsertUserWithMultiRole() throws IllegalParameterFault, ResourceNotFoundFault {
-        String emailMultiRole = "user-multi-role";
-        Long idUser = super.createAndInsertUser(emailMultiRole, organizationTest, ROLE_ADMIN, ROLE_VIEWER);
+        String usernameMultiRole = "user-multi-role";
+        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ROLE_ADMIN, ROLE_VIEWER);
 
         try {
-            List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(emailMultiRole);
+            List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole);
             Assert.assertNotNull(authorities);
-            Assert.assertEquals("Number of Authorities of " + emailMultiRole, 2, authorities.size());
+            Assert.assertEquals("Number of Authorities of " + usernameMultiRole, 2, authorities.size());
 
             boolean isAdmin = false;
             boolean isViewer = false;
             for (GPAuthority authority : authorities) {
                 Assert.assertNotNull(authority);
-                Assert.assertEquals("Authority email", emailMultiRole, authority.getStringID());
+                Assert.assertEquals("Authority email", usernameMultiRole, authority.getStringID());
                 if (ROLE_ADMIN.equals(authority.getAuthority())) {
                     isAdmin = true;
                 } else if (ROLE_VIEWER.equals(authority.getAuthority())) {
@@ -153,6 +153,19 @@ public class WSAccountTest extends ServiceTest {
         } finally {
             boolean check = gpWSClient.deleteAccount(idUser);
             Assert.assertTrue(check);
+        }
+    }
+
+    @Test
+    public void testInsertDuplicateUserWRTUsername() {
+        GPUser user = super.createUser(usernameTest, organizationTest, ROLE_USER);
+        try {
+            gpWSClient.insertAccount(user, false);
+            Assert.fail("User already exist wrt username");
+        } catch (IllegalParameterFault ex) {
+            if (!ex.getMessage().toLowerCase().contains("username")) { // Must be fail for other reasons
+                Assert.fail("Not fail for User already exist wrt username, but for: " + ex.getMessage());
+            }
         }
     }
 
@@ -186,20 +199,20 @@ public class WSAccountTest extends ServiceTest {
     }
 
     @Test
-    public void testGetUserDetailByEmailAndPassword1()
+    public void testGetUserDetailByUsernameAndPassword1()
             throws IllegalParameterFault, ResourceNotFoundFault, AccountLoginFault {
-        GPUser user = gpWSClient.getUserDetailByEmailAndPassword(emailUserTest, passwordTest);
+        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
         Assert.assertNotNull("User is null", user);
     }
 
     @Test
-    public void testGetUserDetailByEmailAndPassword2()
+    public void testGetUserDetailByUsernameAndPassword2()
             throws AccountLoginFault {
         GPUser user = null;
         try {
-            String newEmail = emailUserTest + "_";
-            user = gpWSClient.getUserDetailByEmailAndPassword(newEmail, passwordTest);
-            Assert.fail("Test must fail because email is wrong");
+            String newUsername = usernameTest + "_";
+            user = gpWSClient.getUserDetailByUsernameAndPassword(newUsername, passwordTest);
+            Assert.fail("Test must fail because username is wrong");
         } catch (ResourceNotFoundFault ex) {
             Assert.assertNull("User is not null", user);
         } catch (IllegalParameterFault ex) {
@@ -208,11 +221,11 @@ public class WSAccountTest extends ServiceTest {
     }
 
     @Test
-    public void testGetUserDetailByEmailAndPassword3()
+    public void testGetUserDetailByUsernameAndPassword3()
             throws AccountLoginFault {
         GPUser user = null;
         try {
-            user = gpWSClient.getUserDetailByEmailAndPassword(emailUserTest, passwordTest + "_");
+            user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest + "_");
             Assert.fail("Test must fail because password is wrong");
         } catch (ResourceNotFoundFault ex) {
             Assert.fail(ex.getMessage());
@@ -229,7 +242,7 @@ public class WSAccountTest extends ServiceTest {
         gpWSClient.updateUser(userTest);
 
         // Must be throws AccountLoginFault because the user is disabled
-        gpWSClient.getUserDetailByEmailAndPassword(emailUserTest, passwordTest);
+        gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
     }
 
     @Test(expected = AccountLoginFault.class)
@@ -242,7 +255,7 @@ public class WSAccountTest extends ServiceTest {
         gpWSClient.forceExpiredTemporaryAccount(idUserTest);
 
         // Must be throws AccountLoginFault because the user is expired
-        gpWSClient.getUserDetailByEmailAndPassword(emailUserTest, passwordTest);
+        gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
     }
 
     @Test(expected = IllegalParameterFault.class)

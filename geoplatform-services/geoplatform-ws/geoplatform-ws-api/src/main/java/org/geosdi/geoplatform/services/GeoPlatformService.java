@@ -155,13 +155,17 @@ public interface GeoPlatformService {
 
     @Get
     @WebResult(name = "User")
-    GPUser getUserDetailByEmail(SearchRequest request)
+    GPUser getUserDetailByUsername(SearchRequest request)
             throws ResourceNotFoundFault;
 
+    /**
+     * Return the user authenticated wrt username and passowrd, otherwise throws
+     * an exception. The username can contain the email also.
+     */
     @Get
     @WebResult(name = "User")
-    GPUser getUserDetailByEmailAndPassword(
-            @WebParam(name = "email") String email,
+    GPUser getUserDetailByUsernameAndPassword(
+            @WebParam(name = "username") String username,
             @WebParam(name = "password") String password)
             throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault;
 
@@ -185,7 +189,7 @@ public interface GeoPlatformService {
 
     @Get
     @WebResult(name = "User")
-    UserDTO getShortUserByEmail(SearchRequest request)
+    UserDTO getShortUserByUsername(SearchRequest request)
             throws ResourceNotFoundFault;
 
     @Get

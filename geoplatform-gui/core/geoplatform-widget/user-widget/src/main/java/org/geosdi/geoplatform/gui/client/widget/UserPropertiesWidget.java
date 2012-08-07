@@ -184,7 +184,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
                 // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully added",
-                                               "<ul><li>" + user.getEmail() + "</li></ul>");
+                                               "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }
@@ -209,7 +209,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
                 // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully modify",
-                                               "<ul><li>" + user.getEmail() + "</li></ul>");
+                                               "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }

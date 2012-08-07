@@ -87,8 +87,9 @@ public abstract class ServiceTest {
     protected GPOrganization organizationTest;
     // Users
     protected static final String domainNameTest = "geosdi-test.org";
-    protected static final String emailUserTest = "user_test_ws" + "@" + domainNameTest;
-    protected static final String passwordTest = emailUserTest;
+    protected static final String usernameTest = "user_test_ws";
+    protected static final String passwordTest = usernameTest;
+    protected static final String emailTest = usernameTest + "@" + domainNameTest;
     protected GPUser userTest;
     protected long idUserTest = -1;
     // Projects
@@ -119,9 +120,9 @@ public abstract class ServiceTest {
         this.setUpOrganization();
 
         // Insert User
-        idUserTest = this.createAndInsertUser(emailUserTest, organizationTest, ROLE_USER);
-        userTest = gpWSClient.getUserDetailByEmail(
-                new SearchRequest(emailUserTest, LikePatternType.CONTENT_EQUALS));
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, ROLE_USER);
+        userTest = gpWSClient.getUserDetailByUsername(
+                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
         idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);
@@ -155,9 +156,9 @@ public abstract class ServiceTest {
     /**
      * Create and insert a User.
      */
-    protected long createAndInsertUser(String email, GPOrganization organization, String... roles)
+    protected long createAndInsertUser(String username, GPOrganization organization, String... roles)
             throws IllegalParameterFault {
-        GPUser user = this.createUser(email, organization, roles);
+        GPUser user = this.createUser(username, organization, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
 
         long idUser = gpWSClient.insertAccount(user, false);
@@ -166,13 +167,14 @@ public abstract class ServiceTest {
         return idUser;
     }
 
-    protected GPUser createUser(String email, GPOrganization organization, String... roles) {
+    protected GPUser createUser(String username, GPOrganization organization, String... roles) {
         GPUser user = new GPUser();
         user.setOrganization(organization);
-        user.setEmailAddress(email);
-        user.setName("Complete name of " + email);
+        user.setUsername(username);
+        user.setEmailAddress(username + "@" + domainNameTest);
+        user.setName("Complete name of " + username);
         user.setEnabled(true);
-        user.setPassword(email);
+        user.setPassword(username);
         user.setSendEmail(false);
 
         if (roles.length > 0) {

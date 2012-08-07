@@ -65,6 +65,8 @@ public interface GPAccountDAO {
 
     public int count(ISearch search);
 
+    public GPUser findByUsername(String username);
+
     public GPUser findByEmail(String email);
 
     public GPApplication findByAppID(String appID);

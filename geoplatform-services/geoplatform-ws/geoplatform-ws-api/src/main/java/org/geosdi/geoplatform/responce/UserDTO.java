@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 public class UserDTO extends ShortAccountDTO {
 
     private String name;
+    private String username;
     private String emailAddress;
     private boolean sendEmail;
 
@@ -61,6 +62,7 @@ public class UserDTO extends ShortAccountDTO {
     public UserDTO(GPUser user) {
         super(user);
         this.name = user.getName();
+        this.username = user.getUsername();
         this.emailAddress = user.getEmailAddress();
         this.sendEmail = user.isSendEmail();
     }
@@ -77,6 +79,20 @@ public class UserDTO extends ShortAccountDTO {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
     }
 
     /**
@@ -117,6 +133,7 @@ public class UserDTO extends ShortAccountDTO {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
         str.append(", name=").append(name);
+        str.append(", username=").append(username);
         str.append(", emailAddress=").append(emailAddress);
         str.append(", sendEmail=").append(sendEmail);
         return str.append("}").toString();

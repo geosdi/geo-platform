@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.client.widget.form.AddFolderWidget;
  */
 public class AddFolderTreeAction extends ToolbarLayerTreeAction {
 
-    private AddFolderWidget addFolder;
+    private AddFolderWidget addFolder; // TODO Inject a singleton instace with Gin
 
     public AddFolderTreeAction(TreePanel theTree) {
         super(theTree, LayerResources.ICONS.addFolder(), "Add Folder");

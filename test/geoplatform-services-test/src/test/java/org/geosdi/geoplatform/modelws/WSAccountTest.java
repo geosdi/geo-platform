@@ -199,39 +199,38 @@ public class WSAccountTest extends ServiceTest {
     }
 
     @Test
-    public void testGetUserDetailByUsernameAndPassword1()
-            throws IllegalParameterFault, ResourceNotFoundFault, AccountLoginFault {
+    public void testAuthorizationCorrectUsername() throws Exception {
         GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
         Assert.assertNotNull("User is null", user);
+        Assert.assertEquals(usernameTest, user.getUsername());
     }
 
     @Test
-    public void testGetUserDetailByUsernameAndPassword2()
-            throws AccountLoginFault {
-        GPUser user = null;
-        try {
-            String newUsername = usernameTest + "_";
-            user = gpWSClient.getUserDetailByUsernameAndPassword(newUsername, passwordTest);
-            Assert.fail("Test must fail because username is wrong");
-        } catch (ResourceNotFoundFault ex) {
-            Assert.assertNull("User is not null", user);
-        } catch (IllegalParameterFault ex) {
-            Assert.fail(ex.getMessage());
-        }
+    public void testAuthorizationCorrectEmail() throws Exception {
+        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(emailTest, passwordTest);
+        Assert.assertNotNull("User is null", user);
+        Assert.assertEquals(emailTest, user.getEmailAddress());
     }
 
-    @Test
-    public void testGetUserDetailByUsernameAndPassword3()
-            throws AccountLoginFault {
-        GPUser user = null;
-        try {
-            user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest + "_");
-            Assert.fail("Test must fail because password is wrong");
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail(ex.getMessage());
-        } catch (IllegalParameterFault ex) {
-            Assert.assertNull("User is not null", user);
-        }
+    @Test(expected = ResourceNotFoundFault.class)
+    public void testAuthorizationIncorrectUsername() throws Exception {
+        String wrongUsername = usernameTest + "_";
+        gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername, passwordTest);
+        Assert.fail("Test must fail because username is wrong");
+    }
+
+    @Test(expected = ResourceNotFoundFault.class)
+    public void testAuthorizationIncorrectEmail() throws Exception {
+        String wrongEmail = emailTest + "_";
+        gpWSClient.getUserDetailByUsernameAndPassword(wrongEmail, passwordTest);
+        Assert.fail("Test must fail because email is wrong");
+    }
+
+    @Test(expected = IllegalParameterFault.class)
+    public void testAuthorizationIncorrectPassword() throws Exception {
+        String wrongPassword = passwordTest + "_";
+        gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, wrongPassword);
+        Assert.fail("Test must fail because password is wrong");
     }
 
     @Test(expected = AccountLoginFault.class)

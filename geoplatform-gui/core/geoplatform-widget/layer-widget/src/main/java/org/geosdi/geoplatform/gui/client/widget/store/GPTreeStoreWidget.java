@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
@@ -163,7 +162,6 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
             }
         }
 
-        //TODO: NAZ change this
         this.manageLayersInsertion(layerList, parentDestination,
                 layers.get(0).getDataSource());
         this.createAlertMessage(existingLayers);
@@ -248,7 +246,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     private boolean checkDuplicatedLayer(GPLayerBean layer, GPBeanTreeModel parentDestination) {
         for (ModelData element : parentDestination.getChildren()) {
             if (element != null && element instanceof GPLayerTreeModel
-                    && ((GPLayerTreeModel) element).getName().equals(layer.getName())) { // TODO Title is better? (exists always)
+                    && ((GPLayerTreeModel) element).getTitle().equals(layer.getTitle())) {
                 return true;
             }
         }
@@ -258,7 +256,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     private boolean checkDuplicatedLayer(GPShortLayerBean layer, GPBeanTreeModel parentDestination) {
         for (ModelData element : parentDestination.getChildren()) {
             if (element != null && element instanceof GPLayerTreeModel
-                    && ((GPLayerTreeModel) element).getName().equals(layer.getLayerName())) { // TODO Title is better? (exists always)
+                    && ((GPLayerTreeModel) element).getTitle().equals(layer.getLayerTitle())) {
                 return true;
             }
         }

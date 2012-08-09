@@ -39,6 +39,7 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.apache.ws.security.handler.WSHandlerConstants;
 
 /**
  *
@@ -91,7 +92,9 @@ public abstract class AbstractInterceptorStrategyFactory {
             case TIMESTAMP_SIGNATURE_ENCRYPTION:
                 return createTimestampSignatureEncryptionInInterceptor();
             case NONE:
-                return new WSS4JInInterceptor(); // TODO Try to return null
+                WSS4JInInterceptor in = new WSS4JInInterceptor();
+                in.setProperty(WSHandlerConstants.ACTION, WSHandlerConstants.NO_SECURITY);
+                return in;
             default:
                 return null;
         }
@@ -116,8 +119,10 @@ public abstract class AbstractInterceptorStrategyFactory {
                 return createSignatureOutInterceptor();
             case TIMESTAMP_SIGNATURE_ENCRYPTION:
                 return createTimestampSignatureEncryptionOutInterceptor();
-            case NONE: // TODO Try to return null
-                return new WSS4JOutInterceptor();
+            case NONE:
+                WSS4JOutInterceptor out = new WSS4JOutInterceptor();
+                out.setProperty(WSHandlerConstants.ACTION, WSHandlerConstants.NO_SECURITY);
+                return out;
             default:
                 return null;
         }

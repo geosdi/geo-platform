@@ -329,20 +329,6 @@
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt-spring31</artifactId>
         </dependency>
-        
-        <!-- =============================================================== -->
-        <!-- GEOPLATFORM SCHEDULER -->
-        <!-- =============================================================== -->
-        <!-- TODO Delete
-        SCHEDULER is used into AccountServiceImpl delegate of GeoPlatformServiceImpl for send email -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-scheduler-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-scheduler-impl</artifactId>
-        </dependency>
 
     </dependencies>
     
@@ -352,6 +338,12 @@
         <!-- =============================================================== -->
         <profile>
             <id>publisher</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>full</name>
+                </property>
+            </activation>
             <dependencies>
                 <dependency>
                     <groupId>org.geosdi</groupId>
@@ -380,6 +372,12 @@
         <!-- =============================================================== -->
         <profile>
             <id>tracking</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>full</name>
+                </property>
+            </activation>
             <dependencies>
                 <dependency>
                     <groupId>org.geosdi</groupId>
@@ -394,10 +392,16 @@
         <!-- =============================================================== -->
         <!-- GEOPLATFORM SCHEDULER -->
         <!-- =============================================================== -->
-        <!-- TODO Uncomment
-        SCHEDULER is used into AccountServiceImpl delegate of GeoPlatformServiceImpl for send email -->
-        <!--        <profile>
+        <profile>
             <id>scheduler</id>
+            <activation>
+                <!-- TODO false
+                SCHEDULER is used into AccountServiceImpl delegate of GeoPlatformServiceImpl for send emails -->
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>full</name>
+                </property>
+            </activation>
             <dependencies>        
                 <dependency>
                     <groupId>org.geosdi</groupId>
@@ -408,12 +412,18 @@
                     <artifactId>geoplatform-scheduler-impl</artifactId>
                 </dependency>
             </dependencies>
-        </profile>-->
+        </profile>
         <!-- =============================================================== -->
         <!-- GEOPLATFORM GEONETWORK FINDER -->
         <!-- =============================================================== -->
         <profile>
             <id>finder</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>full</name>
+                </property>
+            </activation>
             <dependencies>
                 <dependency>
                     <groupId>org.geosdi</groupId>
@@ -430,6 +440,12 @@
         <!-- =============================================================== -->
         <profile>
             <id>csw</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>full</name>
+                </property>
+            </activation>
             <dependencies>
                 <dependency>
                     <groupId>org.geosdi</groupId>

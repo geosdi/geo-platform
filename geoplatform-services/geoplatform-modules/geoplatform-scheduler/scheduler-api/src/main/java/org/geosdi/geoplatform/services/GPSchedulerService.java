@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.codehaus.jra.Post;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.core.model.GPUser;
 
 /**

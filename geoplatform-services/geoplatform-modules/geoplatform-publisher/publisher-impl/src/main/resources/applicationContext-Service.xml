@@ -19,6 +19,8 @@
 
     <context:annotation-config />
     
+    <context:component-scan base-package="org.geosdi.geoplatform.services"/>
+    
     <jaxws:endpoint id="publisherServiceSOAP"
                     implementorClass="org.geosdi.geoplatform.services.GPPublisherServiceImpl"
                     implementor="#publisherService"

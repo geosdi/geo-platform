@@ -21,9 +21,7 @@
     <!-- ====================================================================-->
     <!-- ====================================================================-->
 
-    <context:component-scan base-package="org.geosdi.geoplatform.configurator.cxf.server,
-        org.geosdi.geoplatform.services, org.geosdi.geoplatform.cache,
-        org.geosdi.geoplatform.connector.security "/>
+    <context:component-scan base-package="org.geosdi.geoplatform.configurator.cxf.server"/>
 
 	<!-- Load CXF modules from cxf.jar -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
@@ -74,9 +72,9 @@
     	bindingUri="http://apache.org/cxf/binding/http"  >
 
         <jaxws:serviceFactory>
-              		    <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
-                 		    	<property name="wrapped" value="true" />
-              		    </bean>
+                      		    <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
+                                 		    	<property name="wrapped" value="true" />
+                      		    </bean>
        	</jaxws:serviceFactory>
     </jaxws:endpoint-->
 

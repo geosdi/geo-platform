@@ -35,23 +35,20 @@
  */
 package org.geosdi.geoplatform.gui.client.action.application;
 
-import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class GeoPlatformInfoApp extends ToolbarApplicationAction {
 
-	public GeoPlatformInfoApp() {
-		super("geoSDI", null, null);
-	}
+    public GeoPlatformInfoApp() {
+        super("geoSDI", null, null);
+    }
 
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		
-	}
-
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+    }
 }

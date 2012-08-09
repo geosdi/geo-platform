@@ -19,6 +19,8 @@
 
     <context:annotation-config />
     
+    <context:component-scan base-package="org.geosdi.geoplatform.services"/>
+    
     <jaxws:endpoint id="trackingServiceSOAP"
                     implementorClass="org.geosdi.geoplatform.services.GPTrackingServiceImpl"
                     implementor="#trackingService"

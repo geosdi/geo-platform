@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.geosdi.geoplatform.services.utility.PublishUtility;
 import java.io.File;
 import javax.annotation.PreDestroy;
+import org.geosdi.geoplatform.services.utility.PublishUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

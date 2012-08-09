@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.configurator.cxf;
 
+import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.message.Message;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.handler.WSHandlerConstants;
@@ -63,7 +65,12 @@ public abstract class AbstractInterceptorStrategyFactory {
                 || loggingType == LoggingWebServiceType.LOGGING_IN_OUT) {
             return new LoggingInInterceptor();
         } else {
-            return new DummyLoggingInInterceptor();
+            // Dummy Input Loggin: not handle the message.
+            return new LoggingInInterceptor() {
+                @Override
+                public void handleMessage(Message message) throws Fault {
+                }
+            };
         }
     }
 
@@ -73,7 +80,12 @@ public abstract class AbstractInterceptorStrategyFactory {
                 || loggingType == LoggingWebServiceType.LOGGING_IN_OUT) {
             return new LoggingOutInterceptor();
         } else {
-            return new DummyLoggingOutInterceptor();
+            // Dummy Output Loggin: not handle the message.
+            return new LoggingOutInterceptor() {
+                @Override
+                public void handleMessage(Message message) throws Fault {
+                }
+            };
         }
     }
 

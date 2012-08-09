@@ -145,7 +145,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
 
     @Override
     public void loginDone() {
-        if (loginFailureMessage.equals("")) {
+        if (loginFailureMessage != null && loginFailureMessage.equals("")) {
             Timer t = new Timer() {
                 @Override
                 public void run() {

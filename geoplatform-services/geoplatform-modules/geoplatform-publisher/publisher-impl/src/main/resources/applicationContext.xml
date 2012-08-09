@@ -5,13 +5,13 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:cxf="http://cxf.apache.org/core"
        xmlns:jaxws="http://cxf.apache.org/jaxws"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context-3.1.xsd
-            http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop
             http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
-            http://cxf.apache.org/core             
+            http://cxf.apache.org/core
             http://cxf.apache.org/schemas/core.xsd
             http://cxf.apache.org/jaxws
             http://cxf.apache.org/schemas/jaxws.xsd"
@@ -19,17 +19,17 @@
 
     <context:annotation-config />
 
-	<!--===================================================================== -->
-	<!-- Services -->
-	<!--===================================================================== -->
+    <!--===================================================================== -->
+    <!-- Services -->
+    <!--===================================================================== -->
 
     <bean id="publisherService" class="org.geosdi.geoplatform.services.GPPublisherServiceImpl">
         <!-- the server to connect -->
         <constructor-arg type="java.lang.String" value="${geoserver_url}"/>
-      <!-- the login and the password of the REST geoserver instance -->
+        <!-- the login and the password of the REST geoserver instance -->
         <constructor-arg type="java.lang.String" value="${geoserver_username}"/>
         <constructor-arg type="java.lang.String" value="${geoserver_password}"/>
-      <!-- the workspace where publishing the shapefiles to preview -->
+        <!-- the workspace where publishing the shapefiles to preview -->
         <constructor-arg type="java.lang.String" value="${geoportal_dir_path}"/>
     </bean>
     
@@ -47,6 +47,6 @@
         <constructor-arg type="java.lang.String" value="${geoserver_password}"/>
     </bean>
 
-	<!--===================================================================== -->
+    <!--===================================================================== -->
 
 </beans>

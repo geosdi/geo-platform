@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="services" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
       http://java.sun.com/xml/ns/javaee  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     
     <!-- Adding the Spring Context Listener. It will help to init Spring Context -->
@@ -11,7 +11,10 @@
     
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:applicationContext.xml</param-value>
+        <param-value>
+            classpath*:applicationContext.xml
+            classpath*:applicationContext-Service.xml
+        </param-value>
     </context-param>
   
     <!-- CXF Servlet -->

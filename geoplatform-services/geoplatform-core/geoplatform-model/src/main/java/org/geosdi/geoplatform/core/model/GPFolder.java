@@ -55,7 +55,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * @author Francesco Izzi - geoSDI
- * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "Folder")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -93,10 +93,13 @@ public class GPFolder implements Serializable {
     private int position = -1;
     //    
     @Column
-    private boolean checked = false;
+    private boolean checked;
     //
     @Column
-    private boolean shared = false;
+    private boolean shared;
+    //
+    @Column
+    private boolean expanded;
 
     /**
      * @return the id
@@ -106,8 +109,7 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -121,8 +123,7 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -136,8 +137,7 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @param parent
-     *            the parent to set
+     * @param parent the parent to set
      */
     public void setParent(GPFolder parent) {
         this.parent = parent;
@@ -151,8 +151,7 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @param project
-     *            the project to set
+     * @param project the project to set
      */
     public void setProject(GPProject project) {
         this.project = project;
@@ -166,8 +165,7 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @param numberOfDescendants
-     *            the numberOfDescendants to set
+     * @param numberOfDescendants the numberOfDescendants to set
      */
     public void setNumberOfDescendants(int numberOfDescendants) {
         this.numberOfDescendants = numberOfDescendants;
@@ -195,8 +193,7 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @param checked
-     *            the checked to set
+     * @param checked the checked to set
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
@@ -214,6 +211,20 @@ public class GPFolder implements Serializable {
      */
     public void setShared(boolean shared) {
         this.shared = shared;
+    }
+
+    /**
+     * @return the expanded
+     */
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    /**
+     * @param expanded the expanded to set
+     */
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 
     /**
@@ -242,11 +253,13 @@ public class GPFolder implements Serializable {
         str.append(", position=").append(position);
         str.append(", checked=").append(checked);
         str.append(", shared=").append(shared);
+        str.append(", expanded=").append(expanded);
         return str.append("}").toString();
     }
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -266,6 +279,7 @@ public class GPFolder implements Serializable {
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override

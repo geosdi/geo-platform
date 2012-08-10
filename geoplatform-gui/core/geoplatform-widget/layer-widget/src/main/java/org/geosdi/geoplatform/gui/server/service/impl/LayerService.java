@@ -63,11 +63,11 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayer
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
@@ -136,16 +136,13 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
-                folderID);
-        ArrayList<IGPFolderElements> elements = Lists.newArrayList();
+        TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(folderID);
         try {
-            folderElements.isEmpty();
-            elements = this.dtoConverter.convertFolderElements(folderElements);
+            return this.dtoConverter.convertFolderElements(folderElements);
         } catch (Exception e) {
             logger.debug("Returning no elements: " + e);
         }
-        return elements;
+        return Lists.newArrayListWithCapacity(0);
     }
 
     @Override

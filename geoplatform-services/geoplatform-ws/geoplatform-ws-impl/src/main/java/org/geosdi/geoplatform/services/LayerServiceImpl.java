@@ -38,9 +38,6 @@ package org.geosdi.geoplatform.services;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
@@ -56,11 +53,13 @@ import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -178,7 +177,7 @@ class LayerServiceImpl {
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
-        EntityCorrectness.checkProject(project); // TODO assert
+        EntityCorrectness.checkProjectLog(project); // TODO assert
         layer.setProject(project);
 
         GPFolder parent = folderDao.find(parentId);
@@ -199,7 +198,7 @@ class LayerServiceImpl {
         layerDao.persist(layer);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        this.updateNumberOfElements(layer, increment);
+        this.updateNumberOfElements(project, increment);
 
         return layer.getId();
     }
@@ -212,6 +211,7 @@ class LayerServiceImpl {
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
+        EntityCorrectness.checkProjectLog(project); // TODO assert
 
         // Folder Parent
         GPFolder parent = folderDao.find(parentId);
@@ -243,7 +243,7 @@ class LayerServiceImpl {
         }
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        this.updateNumberOfElements(layers.get(0), increment);
+        this.updateNumberOfElements(project, increment);
 
         return arrayList;
     }
@@ -261,13 +261,13 @@ class LayerServiceImpl {
         boolean result = layerDao.remove(layer);
 
         int decrement = -1;
-        Long projectId = layer.getProject().getId();
+        GPProject project = layer.getProject();
         // Shift positions
-        layerDao.updatePositionsLowerBound(projectId, oldPosition, decrement);
-        folderDao.updatePositionsLowerBound(projectId, oldPosition, decrement);
+        layerDao.updatePositionsLowerBound(project.getId(), oldPosition, decrement);
+        folderDao.updatePositionsLowerBound(project.getId(), oldPosition, decrement);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        this.updateNumberOfElements(layer, decrement);
+        this.updateNumberOfElements(project, decrement);
 
         return result;
     }
@@ -594,14 +594,7 @@ class LayerServiceImpl {
         return true;
     }
 
-    private void updateNumberOfElements(GPLayer layer, int delta)
-            throws ResourceNotFoundFault {
-        Long projectId = layer.getProject().getId();
-        GPProject project = projectDao.find(projectId);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", projectId);
-        }
-
+    private void updateNumberOfElements(GPProject project, int delta) {
         project.deltaToNumberOfElements(delta);
         projectDao.merge(project);
     }

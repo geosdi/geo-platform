@@ -35,24 +35,18 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.geosdi.geoplatform.request.PaginatedSearchRequest;
-import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.geosdi.geoplatform.core.dao.GPFolderDAO;
-import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
-import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
+import org.geosdi.geoplatform.core.dao.GPFolderDAO;
+import org.geosdi.geoplatform.core.dao.GPLayerDAO;
+import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -60,6 +54,8 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
@@ -68,11 +64,14 @@ import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
+import org.geosdi.geoplatform.services.development.EntityCorrectness;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Michele Santomauro
  * @email michele.santomauro@geosdi.org
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class ProjectServiceImpl {
@@ -90,40 +89,35 @@ class ProjectServiceImpl {
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
-     * @param projectDao
-     *            the projectDao to set
+     * @param projectDao the projectDao to set
      */
     public void setProjectDao(GPProjectDAO projectDao) {
         this.projectDao = projectDao;
     }
 
     /**
-     * @param accountDao
-     *            the accountDao to set
+     * @param accountDao the accountDao to set
      */
     public void setAccountDao(GPAccountDAO accountDao) {
         this.accountDao = accountDao;
     }
 
     /**
-     * @param accountProjectDao
-     *          the accountProjectDao to set
+     * @param accountProjectDao the accountProjectDao to set
      */
     public void setAccountProjectDao(GPAccountProjectDAO accountProjectDao) {
         this.accountProjectDao = accountProjectDao;
     }
 
     /**
-     * @param folderDao 
-     *            the folderDao to set
+     * @param folderDao the folderDao to set
      */
     public void setFolderDao(GPFolderDAO folderDao) {
         this.folderDao = folderDao;
     }
 
     /**
-     * @param layerDao
-     *            the layerDao to set
+     * @param layerDao the layerDao to set
      */
     public void setLayerDao(GPLayerDAO layerDao) {
         this.layerDao = layerDao;
@@ -207,7 +201,7 @@ class ProjectServiceImpl {
     }
 
     /**
-     * 
+     *
      * @param projectID
      * @return root folders of a project
      */
@@ -223,7 +217,7 @@ class ProjectServiceImpl {
 
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
-        logger.debug("\n*** rootFolders:\n" + rootFolders);
+        logger.debug("\n*** rootFolders:\n{}", rootFolders);
 
         List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
         projectDTO.setRootFolders(rootFoldersDTO);
@@ -242,7 +236,7 @@ class ProjectServiceImpl {
         Map<String, GPFolder> subFoldersMap = new HashMap<String, GPFolder>(subFolders.size());
         for (GPFolder folder : subFolders) {
             String key = this.createParentChildKey(folder.getParent(), folder);
-            logger.debug("\n*** key: " + key + "\n*** subFolder ***\n" + folder);
+            logger.debug("\n*** key: {}\n*** subFolder ***\n{}", key, folder);
             subFoldersMap.put(key, folder);
         }
 
@@ -260,7 +254,7 @@ class ProjectServiceImpl {
                 throw new ResourceNotFoundFault("Parent folder not found", layer.getFolder().getId());
             }
 
-            ShortLayerDTO layerDTO = null;
+            ShortLayerDTO layerDTO;
             if (layer instanceof GPRasterLayer) {
                 layerDTO = new RasterLayerDTO((GPRasterLayer) layer);
             } else {
@@ -482,14 +476,14 @@ class ProjectServiceImpl {
     }
 
     /**
-     * 
+     *
      * @param accountProjectProperties
-     * 
-     * @return True only if the project is a candidate to be the default
-     *         False Otherwise
-     * 
+     *
+     * @return True only if the project is a candidate to be the default, False
+     * Otherwise
+     *
      * @throws ResourceNotFoundFault
-     * @throws IllegalParameterFault 
+     * @throws IllegalParameterFault
      */
     public boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
@@ -541,12 +535,12 @@ class ProjectServiceImpl {
     }
 
     private Map<Long, FolderDTO> fillProjectFolders(List<FolderDTO> folders,
-                                                    Map<String, GPFolder> mapRemaining, Map<Long, FolderDTO> mapAll) {
-        logger.debug("\n*** fillFolderList - Map size: " + mapRemaining.size());
+            Map<String, GPFolder> mapRemaining, Map<Long, FolderDTO> mapAll) {
+        logger.debug("\n*** fillFolderList - Map size: {}", mapRemaining.size());
         if (!mapRemaining.isEmpty()) {
-            List<FolderDTO> childsDTO = null;
+            List<FolderDTO> childsDTO;
             for (FolderDTO folder : folders) {
-                logger.debug("\n*** fillFolderList - folder: " + folder);
+                logger.debug("\n*** fillFolderList - folder: {}", folder);
                 List<GPFolder> childs = this.getChilds(folder.getId(), mapRemaining);
                 if (childs.size() > 0) {
                     childsDTO = FolderDTO.convertToFolderDTOList(childs);
@@ -570,7 +564,7 @@ class ProjectServiceImpl {
         for (Map.Entry<String, GPFolder> entry : map.entrySet()) {
             String key = entry.getKey();
             if (key.startsWith(parentID.toString())) {
-                logger.debug("*** getChilds - HIT: " + key);
+                logger.debug("*** getChilds - HIT: {}", key);
                 childsKeyHit.add(key);
                 GPFolder childFolder = map.get(key);
                 childs.add(childFolder);
@@ -586,7 +580,7 @@ class ProjectServiceImpl {
     }
 
     private int persistElementList(GPProject project, GPFolder parent,
-                                   List<IElementDTO> elementList) throws IllegalParameterFault {
+            List<IElementDTO> elementList) throws IllegalParameterFault {
         int numberOfDescendants = 0;
 
         for (int i = elementList.size() - 1; i >= 0; i--) {
@@ -634,5 +628,60 @@ class ProjectServiceImpl {
         }
         logger.trace("\n@@@ ELEMENT {}  ---  DESCENDANTS = {} @@@\n\n\n", parent.getName(), numberOfDescendants);
         return numberOfDescendants;
+    }
+
+    public ProjectDTO getExpandedElementsByProjectID(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+        ProjectDTO projectDTO = new ProjectDTO(project);
+
+        // Root Folders
+        List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
+        logger.debug("\n*** rootFolders:\n{}", rootFolders);
+
+        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
+        projectDTO.setRootFolders(rootFoldersDTO);
+
+        this.fillProjectExpandedFolders(projectID, rootFoldersDTO);
+
+        return projectDTO;
+    }
+
+    private void fillProjectExpandedFolders(Long projectID, List<FolderDTO> folders) {
+        logger.debug("\n*** fillExpandedFolder - size: {}", folders.size());
+
+        List<FolderDTO> childsDTO;
+        for (FolderDTO folder : folders) {
+            logger.debug("\n*** fillExpandedFolder - folder: {}", folder);
+            if (folder.isExpanded()) {
+                // Sub Layers
+                Search searchCriteria = new Search(GPLayer.class);
+                searchCriteria.addFilterEqual("project.id", projectID);
+                searchCriteria.addFilterEqual("folder.id", folder.getId());
+                List<GPLayer> subLayers = layerDao.search(searchCriteria);
+
+                for (GPLayer layer : subLayers) {
+                    ShortLayerDTO layerDTO;
+                    if (layer instanceof GPRasterLayer) {
+                        layerDTO = new RasterLayerDTO((GPRasterLayer) layer);
+                    } else {
+                        layerDTO = new VectorLayerDTO((GPVectorLayer) layer);
+                    }
+                    folder.addLayer(layerDTO);
+                }
+
+                // Sub folders
+                searchCriteria = new Search(GPFolder.class);
+                searchCriteria.addFilterEqual("project.id", projectID);
+                searchCriteria.addFilterEqual("parent.id", folder.getId());
+                List<GPFolder> childs = folderDao.search(searchCriteria);
+                if (childs.size() > 0) {
+                    childsDTO = FolderDTO.convertToFolderDTOList(childs);
+                    folder.addFolders(childsDTO);
+
+                    this.fillProjectExpandedFolders(projectID, childsDTO);
+                }
+            }
+        }
     }
 }

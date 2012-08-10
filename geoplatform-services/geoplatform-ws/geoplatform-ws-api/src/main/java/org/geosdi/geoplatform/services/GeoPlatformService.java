@@ -384,6 +384,13 @@ public interface GeoPlatformService {
     @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
     void forceProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/project/{projectID}")
+    @WebResult(name = "TreeElements")
+    ProjectDTO getExpandedElementsByProjectID(
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Viewport">
     // ==========================================================================

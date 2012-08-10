@@ -64,8 +64,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -226,8 +226,9 @@ public class DTOConverter {
     public GPFolder convertMementoFolder(MementoFolder memento) {
         GPFolder gpFolder = new GPFolder();
         gpFolder.setName(memento.getFolderName());
-        gpFolder.setChecked(memento.isChecked());
         gpFolder.setId(memento.getIdBaseElement());
+        gpFolder.setChecked(memento.isChecked());
+        gpFolder.setExpanded(memento.isExpanded());
         gpFolder.setNumberOfDescendants(memento.getNumberOfDescendants());
 //        if (memento.getIdParent() != null) {
 //            GPFolder parent = new GPFolder();

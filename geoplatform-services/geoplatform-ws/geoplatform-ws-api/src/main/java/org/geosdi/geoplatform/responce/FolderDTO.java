@@ -43,18 +43,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPProject;
 
 /**
  * @author giuseppe
- * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "FolderDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FolderDTO extends AbstractElementDTO {
 
+    private Boolean expanded;
     private Integer numberOfDescendants;
     //
     @XmlElementWrapper(name = "elementList")
@@ -62,21 +62,36 @@ public class FolderDTO extends AbstractElementDTO {
     private List<IElementDTO> elementList;
 
     /**
-     * Default constructor
+     * Default constructor. NOTE: elementList is NULL.
      */
     public FolderDTO() {
-        // NOTE: elementList is NULL
     }
 
     /**
-     * Constructor with GPFolder as arg
+     * Constructor with GPFolder as arg.
+     *
      * @param folder
      */
     public FolderDTO(GPFolder folder) {
         super(folder.getId(), folder.getName(), folder.getPosition(),
-                folder.isShared(), folder.isChecked());
+              folder.isShared(), folder.isChecked());
+        this.expanded = folder.isExpanded();
         this.numberOfDescendants = folder.getNumberOfDescendants();
         this.elementList = new ArrayList<IElementDTO>();
+    }
+
+    /**
+     * @return the expanded
+     */
+    public Boolean isExpanded() {
+        return expanded;
+    }
+
+    /**
+     * @param expanded the expanded to set
+     */
+    public void setExpanded(Boolean expanded) {
+        this.expanded = expanded;
     }
 
     /**
@@ -118,12 +133,13 @@ public class FolderDTO extends AbstractElementDTO {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "FolderDTO [" + super.toString()
+                + ", expanded=" + expanded
                 + ", numberOfDescendants=" + numberOfDescendants + "]";
     }
 
@@ -141,7 +157,7 @@ public class FolderDTO extends AbstractElementDTO {
     public static GPFolder convertToGPFolder(GPProject project, GPFolder parent,
             FolderDTO folderDTO) {
         GPFolder folder = new GPFolder();
-        
+
         folder.setProject(project);
         folder.setParent(parent);
         // Set all properties except "id" and "shared"
@@ -153,6 +169,9 @@ public class FolderDTO extends AbstractElementDTO {
             folder.setChecked(folderDTO.isChecked());
         }
         // Specific properties of a folder
+        if (folderDTO.isExpanded() != null) {
+            folder.setExpanded(folderDTO.isExpanded());
+        }
         if (folderDTO.getNumberOfDescendants() != null) {
             folder.setNumberOfDescendants(folderDTO.getNumberOfDescendants());
         }

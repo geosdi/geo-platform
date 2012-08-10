@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import com.vividsolutions.jts.geom.MultiPolygon;
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -44,21 +44,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import org.geosdi.geoplatform.core.model.adapter.MultiPolygonAdapter;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
-
-import com.vividsolutions.jts.geom.MultiPolygon;
-import javax.persistence.*;
-import org.hibernate.annotations.*;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

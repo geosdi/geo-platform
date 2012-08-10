@@ -49,8 +49,9 @@ public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
     private int zIndex;
     private Long idParent;
     private transient FolderTreeNode refParent;
-    private boolean checked;
     private int numberOfDescendants;
+    private boolean checked;
+    private boolean expanded;
 
     public MementoFolder() {
     }
@@ -125,5 +126,13 @@ public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
      */
     public void setIdParent(Long idParent) {
         this.idParent = idParent;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 }

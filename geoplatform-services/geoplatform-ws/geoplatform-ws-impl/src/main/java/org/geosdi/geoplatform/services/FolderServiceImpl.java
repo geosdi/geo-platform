@@ -37,9 +37,6 @@ package org.geosdi.geoplatform.services;
 
 import com.googlecode.genericdao.search.Search;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
@@ -55,10 +52,12 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author giuseppe
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class FolderServiceImpl {
@@ -71,24 +70,21 @@ class FolderServiceImpl {
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
-     * @param folderDao
-     *            the folderDao to set
+     * @param folderDao the folderDao to set
      */
     public void setFolderDao(GPFolderDAO folderDao) {
         this.folderDao = folderDao;
     }
 
     /**
-     * @param layerDao
-     *            the layerDao to set
+     * @param layerDao the layerDao to set
      */
     public void setLayerDao(GPLayerDAO layerDao) {
         this.layerDao = layerDao;
     }
 
     /**
-     * @param projectDao
-     *            the projectDao to set
+     * @param projectDao the projectDao to set
      */
     public void setProjectDao(GPProjectDAO projectDao) {
         this.projectDao = projectDao;
@@ -107,6 +103,8 @@ class FolderServiceImpl {
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
         folder.setProject(project);
         EntityCorrectness.checkFolder(folder); // TODO assert
 
@@ -122,15 +120,18 @@ class FolderServiceImpl {
         if (orig == null) {
             throw new ResourceNotFoundFault("Folder not found", folder.getId());
         }
-        EntityCorrectness.checkFolder(orig); // TODO assert
+        EntityCorrectness.checkFolderLog(orig); // TODO assert
 
         // Update all properties (except the project)
         orig.setName(folder.getName());
         orig.setPosition(folder.getPosition());
         orig.setNumberOfDescendants(folder.getNumberOfDescendants());
         orig.setChecked(folder.isChecked());
+        orig.setExpanded(folder.isExpanded());
         orig.setShared(folder.isShared());
         orig.setParent(folder.getParent());
+
+        EntityCorrectness.checkFolder(orig); // TODO assert
 
         folderDao.merge(orig);
         return orig.getId();
@@ -153,7 +154,7 @@ class FolderServiceImpl {
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", folderID);
         }
-        EntityCorrectness.checkFolder(folder); // TODO assert
+        EntityCorrectness.checkFolderLog(folder); // TODO assert
 
         if (name == null || name.trim().length() == 0) {
             throw new IllegalParameterFault("Folder \"name\" cannot be null or empty");
@@ -173,7 +174,7 @@ class FolderServiceImpl {
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
-        EntityCorrectness.checkProject(project); // TODO assert
+        EntityCorrectness.checkProjectLog(project); // TODO assert
         folder.setProject(project);
 
         if (parentId != null) {
@@ -185,7 +186,7 @@ class FolderServiceImpl {
             if (parentFolder == null) {
                 throw new ResourceNotFoundFault("Folder parent not found", parentId);
             }
-            EntityCorrectness.checkFolder(parentFolder); // TODO assert
+            EntityCorrectness.checkFolderLog(parentFolder); // TODO assert
             folder.setParent(parentFolder);
         }
         EntityCorrectness.checkFolder(folder); // TODO assert
@@ -241,11 +242,12 @@ class FolderServiceImpl {
 
     /**
      * @param idFolderMoved
-     * @param idNewParent: set conventionally 0 if idFolderMoved is refer to a folder of root
+     * @param idNewParent: set conventionally 0 if idFolderMoved is refer to a
+     * folder of root
      * @param newPosition
      * @param descendantsMapData
      * @return
-     * @throws ResourceNotFoundFault 
+     * @throws ResourceNotFoundFault
      */
     public boolean saveDragAndDropFolderModifications(Long idFolderMoved, Long idNewParent,
             int newPosition, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
@@ -262,9 +264,10 @@ class FolderServiceImpl {
             if (folderParent == null) {
                 throw new ResourceNotFoundFault("New Parent not found", idNewParent);
             }
+            EntityCorrectness.checkFolderLog(folderParent); // TODO assert
             folderMoved.setParent(folderParent);
         } else {
-            logger.trace("*** Folder will be the root folder");
+            logger.trace("*** Folder will be a root folder");
             folderMoved.setParent(null);
         }
 
@@ -435,8 +438,7 @@ class FolderServiceImpl {
     }
     //</editor-fold>
 
-    private void updateNumberOfElements(GPProject project, int delta)
-            throws ResourceNotFoundFault {
+    private void updateNumberOfElements(GPProject project, int delta) {
         project.deltaToNumberOfElements(delta);
         projectDao.merge(project);
     }

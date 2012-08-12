@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.gui;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -63,8 +62,8 @@ public class GeoPlatformInfoTest {
 	public void test() {
 		assertNotNull(geoPlatformInfo);
 
-		logger.info("GeoPlatformInfo ********************************* "
-				+ this.geoPlatformInfo.toString());
+		logger.info("GeoPlatformInfo ********************************* {}",
+				this.geoPlatformInfo.toString());
 	}
 
 }

@@ -62,7 +62,7 @@ public class GeoPlatformLayersTest {
     @Test
     public void test() {
         for (GPFolderClientInfo folder : folderStore.getFolders()) {
-            logger.info("FOLDER  ***************** " + folder);
+            logger.info("FOLDER  ***************** {}", folder);
         }
     }
 }

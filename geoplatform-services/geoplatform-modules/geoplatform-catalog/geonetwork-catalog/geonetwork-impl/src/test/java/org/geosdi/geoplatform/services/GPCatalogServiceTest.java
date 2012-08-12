@@ -130,8 +130,7 @@ public class GPCatalogServiceTest {
             List<GPCatalogMetadataDTO> catalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata("strade");
             Assert.assertTrue("Items not found", catalogMetadataDTOList.isEmpty() == false);
 
-            logger.info("@@@@@@@@@@@@@@@@@@@ Found " + catalogMetadataDTOList.size()
-                    + " Metadata @@@@@@@@@@@@@@@");
+            logger.info("@@@@@@@@@@@@@@@@@@@ Found {} Metadata @@@@@@@@@@@@@@@", catalogMetadataDTOList.size());
         } catch (GPCatalogException ex) {
             Assert.fail(ex.getMessage());
         }

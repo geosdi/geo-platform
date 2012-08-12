@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.gui;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.geosdi.geoplatform.gui.configuration.menubar.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -65,7 +64,7 @@ public class MenuBarTest {
         assertNotNull(menuBarContainerTool);
 
         for (MenuBarCategory category : menuBarContainerTool.getCategories()) {
-            logger.info("MENU ******************** " + category.toString());
+            logger.info("MENU ******************** {}", category.toString());
         }
     }
 }

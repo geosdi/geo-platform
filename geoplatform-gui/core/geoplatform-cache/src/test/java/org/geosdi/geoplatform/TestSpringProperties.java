@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform;
 
-import org.junit.Test;
 import org.geosdi.geoplatform.cache.GPCacheManager;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,6 @@ public class TestSpringProperties {
 
     @Test
     public void testGPCacheManager() {
-        logger.info("Beaninstance: " + this.cacheManager.getDiskStorePath());
+        logger.info("Beaninstance: {}", this.cacheManager.getDiskStorePath());
     }
 }

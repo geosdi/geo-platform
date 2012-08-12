@@ -71,12 +71,12 @@ public class ReverseGeocoderTest {
         try {
             bean = this.googleReverseGeoding.findLocation(40.6372425, 15.8022214);
         } catch (IOException e) {
-            logger.error("IOException " + e);
+            logger.error("IOException {}", e);
         }
 
         Assert.assertNotNull(bean);
 
-        logger.info("Locations ***************** " + bean.getDescription());
+        logger.info("Locations ***************** {}", bean.getDescription());
     }
 
     @Test
@@ -85,11 +85,11 @@ public class ReverseGeocoderTest {
         try {
             bean = this.yahooReverseGeoding.findLocation(40.6372425, 15.8022214);
         } catch (IOException e) {
-            logger.error("IOException " + e);
+            logger.error("IOException {}", e);
         }
 
         Assert.assertNotNull(bean);
 
-        logger.info("Locations ***************** " + bean.getDescription());
+        logger.info("Locations ***************** {}", bean.getDescription());
     }
 }

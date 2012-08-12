@@ -89,7 +89,7 @@ public class GPCatalogWSTest {
             Assert.assertFalse("Items not found", metadataList.isEmpty());
 
 
-            logger.info("FOUND " + metadataList.size() + " ELEMENTS @@@@@@@@@@@@");
+            logger.info("FOUND {} ELEMENTS @@@@@@@@@@@@", metadataList.size());
         } catch (GPCatalogException ex) {
             Assert.fail(ex.getMessage());
         }

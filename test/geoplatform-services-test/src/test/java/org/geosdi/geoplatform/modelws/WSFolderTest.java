@@ -452,7 +452,9 @@ public class WSFolderTest extends ServiceTest {
         Assert.assertEquals("Position of folder 5 - " + info, positions[6], folder5.getPosition());
     }
 
-    // Check if a Folder was eliminated
+    /**
+     * Check if a folder was eliminated.
+     */
     private void checkFolderDeleted(long idFolder) {
         try {
             gpWSClient.getFolderDetail(idFolder);

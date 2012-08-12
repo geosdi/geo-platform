@@ -265,11 +265,6 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertEquals("V-B", nameVector + nameRootFolderB, childRootFolderB.get(0).getName());
     }
 
-    // TODO
-//    @Test
-//    public void testProjectDeep() {         
-//    }
-//
     @Test
     public void testImportProject() throws IllegalParameterFault, ResourceNotFoundFault {
         // Create ProjectDTO to import

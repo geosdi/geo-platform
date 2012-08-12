@@ -87,7 +87,7 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
         ClassToXMLMap castorMap = (ClassToXMLMap) castor.loadFromXML(castorFile);
         assertNotNull(castorMap);
 
-        logger.info("CASTOR BEAN  ******************** " + castorMap);
+        logger.info("CASTOR BEAN  ******************** {}", castorMap);
 
     }
 
@@ -99,7 +99,7 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
         ClassToXMLMap jaxbMap = (ClassToXMLMap) jax.loadFromXML(jaxbFile);
         assertNotNull(jaxbMap);
 
-        logger.info("JAX BEAN ***************** " + jaxbMap);
+        logger.info("JAX BEAN ***************** {}", jaxbMap);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
         ClassToXMLMap xstreamMap = (ClassToXMLMap) xtream.loadFromXML(xtreamFile);
         assertNotNull(xtream.loadFromXML(xtreamFile));
 
-        logger.info("XSTREAM BEAN *************** " + xstreamMap);
+        logger.info("XSTREAM BEAN *************** {}", xstreamMap);
     }
     
     @Test
@@ -121,7 +121,7 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
         ClassToXMLMap jibxMap = (ClassToXMLMap) jibx.loadFromXML(jibxFile);
         assertNotNull(jibx.loadFromXML(jibxFile));
 
-        logger.info("JIXB BEAN *************** " + jibxMap);
+        logger.info("JIXB BEAN *************** {}", jibxMap);
     }
 
     @Override

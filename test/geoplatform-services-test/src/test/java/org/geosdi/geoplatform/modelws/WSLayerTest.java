@@ -40,10 +40,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
@@ -56,6 +52,9 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
@@ -64,29 +63,29 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  */
 public class WSLayerTest extends ServiceTest {
 
-    private final String urlServer = "http://www.geosdi.org/test";
-    private final String newUrlServer = "http://www.geosdi.org/newtest";
-    private final String spatialReferenceSystem = "Geographic coordinate system";
+    private static final String urlServer = "http://www.geosdi.org/test";
+    private static final String newUrlServer = "http://www.geosdi.org/newtest";
+    private static final String spatialReferenceSystem = "Geographic coordinate system";
     // Raster Layer 1
-    private final String titleRaster1 = "raster_1";
+    private static final String titleRaster1 = "raster_1";
     private GPRasterLayer raster1 = null;
     private long idRaster1 = -1;
     // Vector Layer 1
-    private final String titleVector1 = "vector_1";
+    private static final String titleVector1 = "vector_1";
     private GPVectorLayer vector1 = null;
     private long idVector1 = -1;
     // Raster Layer 2
-    private final String titleRaster2 = "raster_2";
+    private static final String titleRaster2 = "raster_2";
     private GPRasterLayer raster2 = null;
     private long idRaster2 = -1;
     // Vector Layer 2
-    private final String titleVector2 = "vector_2";
+    private static final String titleVector2 = "vector_2";
     private GPVectorLayer vector2 = null;
     private long idVector2 = -1;
     // Raster Layer 3
-    private final String titleRaster3 = "raster_3";
+    private static final String titleRaster3 = "raster_3";
     // Vector Layer 3
-    private final String titleVector3 = "vector_3";
+    private static final String titleVector3 = "vector_3";
 
     @Before
     public void setUp() throws Exception {
@@ -173,10 +172,6 @@ public class WSLayerTest extends ServiceTest {
         Assert.assertEquals("assertEquals layerUpdated.getTitle()", titleLayerUpdated, layerUpdated.getTitle());
     }
 
-//    // TODO
-//    @Test
-//    public void testUpdateVectorLayer() {
-//    }
     @Test
     public void testDeleteLayer() throws ResourceNotFoundFault {
         // Assert total number of folders stored into DB before delete            
@@ -512,10 +507,12 @@ public class WSLayerTest extends ServiceTest {
         Assert.assertEquals("Position of vector layer 2 - " + info, positions[5], vector2.getPosition());
     }
 
-    // Check if a folder was eliminated
+    /**
+     * Check if a layer was eliminated.
+     */
     private void checkLayerDeleted(long idLayer) {
         try {
-            ShortLayerDTO layer = gpWSClient.getShortLayer(idLayer);
+            gpWSClient.getShortLayer(idLayer);
             Assert.fail("Layer with id \"" + idLayer + "\" was NOT deleted");
         } catch (ResourceNotFoundFault rnnf) {
             logger.trace("Layer with id {} was deleted", idLayer);

@@ -76,7 +76,7 @@ public class YahooModelTest {
             GPYahooGeocodeRoot geocode = (GPYahooGeocodeRoot) geocoderYahooJaxbMarshaller.loadFromFile(source);
             Assert.assertNotNull("The geocode is null", geocode);
 
-            logger.info("\n\n\t GeoPlatform Yahoo geocoding OXM parsing : " + geocode + "\n\n");
+            logger.info("\n\n\t GeoPlatform Yahoo geocoding OXM parsing : {}\n\n", geocode);
         } catch (IOException ex) {
             Assert.fail(ex.getMessage());
         }
@@ -96,7 +96,7 @@ public class YahooModelTest {
             GPYahooGeocodeRoot geocode = (GPYahooGeocodeRoot) geocoderYahooJaxbMarshaller.loadFromFile(source);
             Assert.assertNotNull("The geocode is null", geocode);
 
-            logger.info("\n\n\t GeoPlatform Yahoo reverse geocoding OXM parsing : " + geocode + "\n\n");
+            logger.info("\n\n\t GeoPlatform Yahoo reverse geocoding OXM parsing : {}\n\n", geocode);
         } catch (IOException ex) {
             Assert.fail(ex.getMessage());
         }

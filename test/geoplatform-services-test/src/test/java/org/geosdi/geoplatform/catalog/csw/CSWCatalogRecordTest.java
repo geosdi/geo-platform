@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -106,86 +107,86 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         Assert.assertNotNull(record.getUriMap());
         Assert.assertEquals(0, record.getUriMap().size());
     }
-//
-//    @Test
-//    public void testGetRecordsTrevisoSearchWMSText() throws Exception {
-//        catalogFinder.setServerID(serverTestTrevisoID);
-//        catalogFinder.getTextInfo().setText("wms");
-//
-//        int num = 10;
-//        int recordsMatched = cswService.getRecordsCount(catalogFinder);
-//        Assert.assertTrue(recordsMatched > 0);
-//        logger.debug("\n*** Records matched: {} *** Result for page: {} ***",
-//                recordsMatched, num);
-//
-//        List<SummaryRecordDTO> summaryRecords;
-//        int pages = (recordsMatched / num);
-//        int mod = recordsMatched % num;
-//        if (mod > 0) {
-//            pages++;
-//        }
-//        logger.debug("\n*** Pages: {} *** Module: {} ***", pages, mod);
-//
-//        int start;
-//        for (int i = 1; i < pages; i++) {
-//            start = (num * (i - 1)) + 1;
-//            logger.debug("\n*** page: {} *** start: {} ***", i, start);
-//
-//            summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
-//            this.traceCollection(summaryRecords);
-//            Assert.assertEquals(num, summaryRecords.size());
-//        }
-//
-//        // Last page
-//        if (mod > 0) {
-//            start = (num * (pages - 1)) + 1;
-//            summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
-//            this.traceCollection(summaryRecords);
-//            Assert.assertEquals(mod, summaryRecords.size());
-//        }
-//    }
-//
-//    @Test
-//    public void testGetRecordsTrevisoCountLimitiTextAny() throws Exception {
-//        catalogFinder.setServerID(serverTestTrevisoID);
-//        catalogFinder.getTextInfo().setText("limiti");
-//
-//        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
-//    }
-//
-//    @Test
-//    public void testGetRecordsTrevisoCountLimitiTextTitle() throws Exception {
-//        catalogFinder.setServerID(serverTestTrevisoID);
-//        catalogFinder.getTextInfo().setText("limiti");
-//        catalogFinder.getTextInfo().setSearchTitle(true);
-//        catalogFinder.getTextInfo().setSearchAbstract(false);
-//        catalogFinder.getTextInfo().setSearchSubjects(false);
-//
-//        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
-//    }
-//
-//    @Test
-//    public void testGetRecordsTrevisoCountLimitiTextAbstract() throws Exception {
-//        catalogFinder.setServerID(serverTestTrevisoID);
-//        catalogFinder.getTextInfo().setText("limiti");
-//        catalogFinder.getTextInfo().setSearchTitle(false);
-//        catalogFinder.getTextInfo().setSearchAbstract(true);
-//        catalogFinder.getTextInfo().setSearchSubjects(false);
-//
-//        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
-//    }
-//
-//    @Test
-//    public void testGetRecordsTrevisoCountLimitiTextSubjects() throws Exception {
-//        catalogFinder.setServerID(serverTestTrevisoID);
-//        catalogFinder.getTextInfo().setText("limiti");
-//        catalogFinder.getTextInfo().setSearchTitle(false);
-//        catalogFinder.getTextInfo().setSearchAbstract(false);
-//        catalogFinder.getTextInfo().setSearchSubjects(true);
-//
-//        Assert.assertEquals(0, cswService.getRecordsCount(catalogFinder));
-//    }
-//
+
+    @Test
+    public void testGetRecordsTrevisoSearchWMSText() throws Exception {
+        catalogFinder.setServerID(serverTestTrevisoID);
+        catalogFinder.getTextInfo().setText("wms");
+
+        int num = 10;
+        int recordsMatched = cswService.getRecordsCount(catalogFinder);
+        Assert.assertTrue(recordsMatched > 0);
+        logger.debug("\n*** Records matched: {} *** Result for page: {} ***",
+                recordsMatched, num);
+
+        List<SummaryRecordDTO> summaryRecords;
+        int pages = (recordsMatched / num);
+        int mod = recordsMatched % num;
+        if (mod > 0) {
+            pages++;
+        }
+        logger.debug("\n*** Pages: {} *** Module: {} ***", pages, mod);
+
+        int start;
+        for (int i = 1; i < pages; i++) {
+            start = (num * (i - 1)) + 1;
+            logger.debug("\n*** page: {} *** start: {} ***", i, start);
+
+            summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+            this.traceCollection(summaryRecords);
+            Assert.assertEquals(num, summaryRecords.size());
+        }
+
+        // Last page
+        if (mod > 0) {
+            start = (num * (pages - 1)) + 1;
+            summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+            this.traceCollection(summaryRecords);
+            Assert.assertEquals(mod, summaryRecords.size());
+        }
+    }
+
+    @Test
+    public void testGetRecordsTrevisoCountLimitiTextAny() throws Exception {
+        catalogFinder.setServerID(serverTestTrevisoID);
+        catalogFinder.getTextInfo().setText("limiti");
+
+        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
+    }
+
+    @Test
+    public void testGetRecordsTrevisoCountLimitiTextTitle() throws Exception {
+        catalogFinder.setServerID(serverTestTrevisoID);
+        catalogFinder.getTextInfo().setText("limiti");
+        catalogFinder.getTextInfo().setSearchTitle(true);
+        catalogFinder.getTextInfo().setSearchAbstract(false);
+        catalogFinder.getTextInfo().setSearchSubjects(false);
+
+        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
+    }
+
+    @Test
+    public void testGetRecordsTrevisoCountLimitiTextAbstract() throws Exception {
+        catalogFinder.setServerID(serverTestTrevisoID);
+        catalogFinder.getTextInfo().setText("limiti");
+        catalogFinder.getTextInfo().setSearchTitle(false);
+        catalogFinder.getTextInfo().setSearchAbstract(true);
+        catalogFinder.getTextInfo().setSearchSubjects(false);
+
+        Assert.assertTrue(cswService.getRecordsCount(catalogFinder) > 0);
+    }
+
+    @Test
+    public void testGetRecordsTrevisoCountLimitiTextSubjects() throws Exception {
+        catalogFinder.setServerID(serverTestTrevisoID);
+        catalogFinder.getTextInfo().setText("limiti");
+        catalogFinder.getTextInfo().setSearchTitle(false);
+        catalogFinder.getTextInfo().setSearchAbstract(false);
+        catalogFinder.getTextInfo().setSearchSubjects(true);
+
+        Assert.assertEquals(0, cswService.getRecordsCount(catalogFinder));
+    }
+
     @Test
     public void testGetRecordsOurCountAreaItaly() throws Exception {
         int tot = cswService.getRecordsCount(catalogFinder);
@@ -216,34 +217,34 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
                 new Object[]{tot, countEncloses, countIs, countOutside, countOverlap});
     }
 
-    // TODO uncomment when catalog will be up again 
-//    @Test
-//    public void testGetRecordsGeomatysCountTimeFiltering() throws Exception {
-//        // Insert the server
-//        GeoPlatformServer server = super.createCSWServer("Geomatys",
-//                "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default", organizationTest);
-//        Long serverID = cswService.insertServerCSW(server);
-//
-//        Assert.assertNotNull(serverID);
-//
-//        catalogFinder.setServerID(serverID);
-//
-//        int count = cswService.getRecordsCount(catalogFinder);
-//        Assert.assertTrue(count > 0);
-//
-//        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
-//        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-//        catalogFinder.getTimeInfo().setActive(true);
-//        catalogFinder.getTimeInfo().setStartDate(startCalendar.getTime());
-//        catalogFinder.getTimeInfo().setEndDate(endCalendar.getTime());
-//
-//        Assert.assertTrue(count > cswService.getRecordsCount(catalogFinder));
-//
-//        // Delete the server
-//        boolean deleted = cswService.deleteServerCSW(serverID);
-//        Assert.assertTrue(deleted);
-//    }
-//
+    @Ignore("Catalog is down")
+    @Test
+    public void testGetRecordsGeomatysCountTimeFiltering() throws Exception {
+        // Insert the server
+        GeoPlatformServer server = super.createCSWServer("Geomatys",
+                "http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default", organizationTest);
+        Long serverID = cswService.insertServerCSW(server);
+
+        Assert.assertNotNull(serverID);
+
+        catalogFinder.setServerID(serverID);
+
+        int count = cswService.getRecordsCount(catalogFinder);
+        Assert.assertTrue(count > 0);
+
+        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
+        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+        catalogFinder.getTimeInfo().setActive(true);
+        catalogFinder.getTimeInfo().setStartDate(startCalendar.getTime());
+        catalogFinder.getTimeInfo().setEndDate(endCalendar.getTime());
+
+        Assert.assertTrue(count > cswService.getRecordsCount(catalogFinder));
+
+        // Delete the server
+        boolean deleted = cswService.deleteServerCSW(serverID);
+        Assert.assertTrue(deleted);
+    }
+
     @Test
     public void testGetRecordsSecureSNIPC() throws Exception {
         // Insert the server

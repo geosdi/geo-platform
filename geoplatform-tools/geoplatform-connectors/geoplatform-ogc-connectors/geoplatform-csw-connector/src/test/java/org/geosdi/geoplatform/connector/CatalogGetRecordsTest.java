@@ -37,14 +37,20 @@ package org.geosdi.geoplatform.connector;
 
 import java.math.BigInteger;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguage;
+import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.*;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -144,50 +150,50 @@ public class CatalogGetRecordsTest {
         }
     }
 
-    // TODO uncomment when catalog will be up again
-//    @Test
-//    public void testCQLTemporalFilterGeomatys() throws Exception {
-//        URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
-//        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
-//                withServerUrl(url).build();
-//
-//        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
-//
-//        request.setTypeName(TypeName.RECORD_V202);
-//
-//        request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
-//        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
-//
-//        // Text filter
-//        StringBuilder str = new StringBuilder();
-//        str.append("AnyText LIKE '%%'");
-//
-//        // Time filter
-//        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
-//        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
-//
-//        SimpleDateFormat formatter = new SimpleDateFormat(
-//                "yyyy-MM-dd'T'HH:mm:ss'Z'");
-//
-//        str.append(" AND ");
-//        str.append("TempExtent_begin AFTER ").append(
-//                formatter.format(startCalendar.getTime()));
-//        str.append(" AND ");
-//        str.append("TempExtent_end BEFORE ").append(
-//                formatter.format(endCalendar.getTime()));
-//
-//        request.setConstraint(str.toString());
-//        logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}",
-//                request.getConstraint());
-//
-//        GetRecordsResponseType response = request.getResponse();
-//
-//        SearchResultsType searchResult = response.getSearchResults();
-//
-//        logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
-//                searchResult.getNumberOfRecordsMatched());
-//    }
-//    
+    @Ignore("Catalog is down")
+    @Test
+    public void testCQLTemporalFilterGeomatys() throws Exception {
+        URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
+        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(url).build();
+
+        CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
+
+        request.setTypeName(TypeName.RECORD_V202);
+
+        request.setConstraintLanguage(ConstraintLanguage.CQL_TEXT);
+        request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
+
+        // Text filter
+        StringBuilder str = new StringBuilder();
+        str.append("AnyText LIKE '%%'");
+
+        // Time filter
+        Calendar startCalendar = new GregorianCalendar(2000, Calendar.JANUARY, 1);
+        Calendar endCalendar = new GregorianCalendar(2012, Calendar.JANUARY, 1);
+
+        SimpleDateFormat formatter = new SimpleDateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+        str.append(" AND ");
+        str.append("TempExtent_begin AFTER ").append(
+                formatter.format(startCalendar.getTime()));
+        str.append(" AND ");
+        str.append("TempExtent_end BEFORE ").append(
+                formatter.format(endCalendar.getTime()));
+
+        request.setConstraint(str.toString());
+        logger.debug("\n@@@@@@@@@@@@@@@@ Geomatys ### Constraint: {}",
+                request.getConstraint());
+
+        GetRecordsResponseType response = request.getResponse();
+
+        SearchResultsType searchResult = response.getSearchResults();
+
+        logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
+                searchResult.getNumberOfRecordsMatched());
+    }
+    
     @Test
     public void testSecureGetRecords() throws Exception {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(new URL(

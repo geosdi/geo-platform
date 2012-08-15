@@ -5,20 +5,24 @@
   
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-tools</artifactId>
+        <artifactId>geoplatform-connectors</artifactId>
         <version>1.4-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>geoplatform-connectors</artifactId>
+    <artifactId>geoplatform-ws-connectors</artifactId>
     <version>1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Geo-Platform :: == Connectors Module</name>
+    <name>Geo-Platform :: == WS Connectors Module</name>
     
     <modules>
-        <module>geoplatform-ogc-connectors</module>
-        <module>geoplatform-ws-connectors</module>
+        <module>geoplatform-ws-api-connector</module>
+        <module>geoplatform-ws-basic-connector</module>
+        <module>geoplatform-ws-catalog-connector</module>
+        <module>geoplatform-ws-csw-connector</module>
+        <module>geoplatform-ws-publish-connector</module>
+        <module>geoplatform-ws-tracking-connector</module>
     </modules>
-    
+
 </project>

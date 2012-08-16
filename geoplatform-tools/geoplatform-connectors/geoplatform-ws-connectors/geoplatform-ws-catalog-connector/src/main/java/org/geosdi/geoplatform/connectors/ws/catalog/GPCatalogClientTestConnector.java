@@ -49,6 +49,10 @@ public class GPCatalogClientTestConnector extends GPAbstractWSClientConnector<GP
     private @Value("${webservice_test_catalogfinder_endpoint_address}")
     String address;
 
+    public GPCatalogClientTestConnector() {
+        super(GPCatalogFinderService.class);
+    }
+
     @Override
     public String getAddress() {
         return this.address;

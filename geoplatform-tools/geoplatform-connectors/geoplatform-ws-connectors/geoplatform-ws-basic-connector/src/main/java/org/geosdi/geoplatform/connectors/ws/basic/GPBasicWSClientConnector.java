@@ -49,6 +49,10 @@ public class GPBasicWSClientConnector extends GPAbstractWSClientConnector<GeoPla
     private @Value("${webservice_endpoint_address}")
     String address;
 
+    public GPBasicWSClientConnector() {
+        super(GeoPlatformService.class);
+    }
+
     @Override
     public String getAddress() {
         return this.address;

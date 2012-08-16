@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.catalog.csw.beans;
 
-import org.geosdi.geoplatform.cxf.GeoPlatformCSWClient;
+import org.geosdi.geoplatform.connectors.ws.csw.GPCSWClientTestConnector;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.geosdi.geoplatform.services.GeoPlatformCSWServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -49,8 +49,8 @@ import org.springframework.context.annotation.Configuration;
 public class CSWCatalogTestBeans {
 
     @Bean
-    public GeoPlatformCSWClient cswClient() {
-        return new GeoPlatformCSWClient();
+    public GPCSWClientTestConnector cswClient() {
+        return new GPCSWClientTestConnector();
     }
 
     @Bean

@@ -50,6 +50,10 @@ public class GPBasicWSClientTestConnector extends GPAbstractWSClientConnector<Ge
     private @Value("${webservice_test_endpoint_address}")
     String address;
 
+    public GPBasicWSClientTestConnector() {
+        super(GeoPlatformService.class);
+    }
+
     @Override
     public String getAddress() {
         return this.address;

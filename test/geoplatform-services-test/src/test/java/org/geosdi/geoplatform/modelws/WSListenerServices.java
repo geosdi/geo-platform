@@ -43,7 +43,7 @@ import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
-import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
+import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.Assert;
 import org.slf4j.Logger;
@@ -74,9 +74,9 @@ public class WSListenerServices implements TestExecutionListener {
         
         ApplicationContext appContext = testContext.getApplicationContext();
 
-        GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) appContext.getBean("gpWSClient");
+        GPBasicWSClientTestConnector geoPlatformWSClient = (GPBasicWSClientTestConnector) appContext.getBean("gpWSClient");
         Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
-        gpWSClient = geoPlatformWSClient.create();
+        gpWSClient = geoPlatformWSClient.getEndpointService();
 
         GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean("geoPlatformService");
         Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);

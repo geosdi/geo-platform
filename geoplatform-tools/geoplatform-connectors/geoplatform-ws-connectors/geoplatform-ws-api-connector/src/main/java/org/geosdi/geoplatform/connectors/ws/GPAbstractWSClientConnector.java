@@ -53,6 +53,11 @@ public abstract class GPAbstractWSClientConnector<E> implements
     @Autowired
     private ClientInterceptorStrategyFactory clientInterceptorStrategyFactory;
     private E endpointService;
+    private Class<E> serviceClass;
+
+    public GPAbstractWSClientConnector(Class<E> theServiceClass) {
+        this.serviceClass = theServiceClass;
+    }
 
     protected void create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
@@ -63,7 +68,11 @@ public abstract class GPAbstractWSClientConnector<E> implements
         factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
         factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
 
-        factory.setServiceClass(endpointService.getClass());
+        if (serviceClass == null) {
+            throw new IllegalArgumentException("The Parameter Service Class can't be null.");
+        }
+
+        factory.setServiceClass(this.serviceClass);
 
         if (getAddress() == null) {
             throw new IllegalArgumentException("The Parameter Address can't be null.");

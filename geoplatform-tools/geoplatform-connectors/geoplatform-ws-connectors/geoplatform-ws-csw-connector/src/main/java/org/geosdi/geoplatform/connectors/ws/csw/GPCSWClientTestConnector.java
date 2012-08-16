@@ -49,6 +49,10 @@ public class GPCSWClientTestConnector extends GPAbstractWSClientConnector<GeoPla
     private @Value("${webservice_test_cswservice_endpoint_address}")
     String address;
 
+    public GPCSWClientTestConnector() {
+        super(GeoPlatformCSWService.class);
+    }
+
     /**
      * @return the address
      */

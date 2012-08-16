@@ -53,6 +53,10 @@ public class GPTrackingClientConnector extends GPAbstractWSClientConnector<GPTra
     private @Value("${webservice_tracking_endpoint_address}")
     String address;
 
+    public GPTrackingClientConnector() {
+        super(GPTrackingService.class);
+    }
+
     @Override
     protected void create() {
         super.create();

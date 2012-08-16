@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.catalogws.beans;
 
-import org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient;
+import org.geosdi.geoplatform.connectors.ws.catalog.GPCatalogClientTestConnector;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.geosdi.geoplatform.services.GPCatalogFinderServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -44,14 +44,14 @@ import org.springframework.context.annotation.Configuration;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 public class GPCatalogWSConfiguration {
 
     @Bean
-    public GeoPlatformCatalogFinderClient gpCatalogWSClient() {
-        GeoPlatformCatalogFinderClient catalogWS = new GeoPlatformCatalogFinderClient();
+    public GPCatalogClientTestConnector gpCatalogWSClient() {
+        GPCatalogClientTestConnector catalogWS = new GPCatalogClientTestConnector();
 
         return catalogWS;
     }

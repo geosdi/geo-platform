@@ -49,6 +49,10 @@ public class GPCatalogClientConnector extends GPAbstractWSClientConnector<GPCata
     private @Value("${webservice_catalogfinder_endpoint_address}")
     String address;
 
+    public GPCatalogClientConnector() {
+        super(GPCatalogFinderService.class);
+    }
+
     @Override
     public String getAddress() {
         return this.address;

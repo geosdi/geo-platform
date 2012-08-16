@@ -44,8 +44,8 @@ import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
 import org.geosdi.geoplatform.connector.security.GeosdiCatalogBeanProvider;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
-import org.geosdi.geoplatform.cxf.GeoPlatformCSWClient;
-import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
+import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
+import org.geosdi.geoplatform.connectors.ws.csw.GPCSWClientTestConnector;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.Assert;
@@ -79,13 +79,13 @@ public class CSWListenerServices implements TestExecutionListener {
 
         ApplicationContext appContext = testContext.getApplicationContext();
 
-        GeoPlatformCSWClient cswClient = (GeoPlatformCSWClient) appContext.getBean("cswClient");
+        GPCSWClientTestConnector cswClient = (GPCSWClientTestConnector) appContext.getBean("cswClient");
         Assert.assertNotNull("cswClient is NULL", cswClient);
-        cswService = cswClient.create();
+        cswService = cswClient.getEndpointService();
 
-        GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) appContext.getBean("gpWSClient");
+        GPBasicWSClientTestConnector geoPlatformWSClient = (GPBasicWSClientTestConnector) appContext.getBean("gpWSClient");
         Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
-        gpWSClient = geoPlatformWSClient.create();
+        gpWSClient = geoPlatformWSClient.getEndpointService();
 
         GeoPlatformCSWService geoPlatformCSWService = (GeoPlatformCSWService) appContext.getBean("cswService");
         Assert.assertNotNull("cswService is NULL", geoPlatformCSWService);

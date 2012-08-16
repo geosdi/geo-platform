@@ -49,6 +49,10 @@ public class GPCSWClientConnector extends GPAbstractWSClientConnector<GeoPlatfor
     private @Value("${webservice_cswservice_endpoint_address}")
     String address;
 
+    public GPCSWClientConnector() {
+        super(GeoPlatformCSWService.class);
+    }
+
     @Override
     public String getAddress() {
         return this.address;

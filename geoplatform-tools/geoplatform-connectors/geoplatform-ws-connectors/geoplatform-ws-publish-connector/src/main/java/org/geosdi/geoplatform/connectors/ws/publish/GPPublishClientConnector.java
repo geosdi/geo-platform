@@ -53,6 +53,10 @@ public class GPPublishClientConnector extends GPAbstractWSClientConnector<GPPubl
     private @Value("${webservice_publisher_endpoint_address}")
     String address;
 
+    public GPPublishClientConnector() {
+        super(GPPublisherService.class);
+    }
+
     @Override
     protected void create() {
         super.create();

@@ -24,10 +24,24 @@
             <artifactId>bcprov-jdk16</artifactId>
             <version>1.46</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-csw-connector</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
 
         <dependency>
-            <groupId>org.geosdi.geoplatform</groupId>
-            <artifactId>geoplatform-ws-client</artifactId>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-basic-connector</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-catalog-connector</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
@@ -69,8 +83,8 @@
         </dependency>
         
         <!-- =============================================================== -->
-	<!-- ==================== GEOPLATFORM CATALOG ====================== -->
-	<!-- =============================================================== -->
+        <!-- ==================== GEOPLATFORM CATALOG ====================== -->
+        <!-- =============================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geonetwork-catalog-api</artifactId>
@@ -82,8 +96,8 @@
         </dependency>
         
         <!-- =============================================================== -->
-	<!-- ==================== CSW CATALOG ====================== -->
-	<!-- =============================================================== -->
+        <!-- ==================== CSW CATALOG ====================== -->
+        <!-- =============================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>csw-catalog-api</artifactId>
@@ -94,7 +108,7 @@
             <artifactId>csw-catalog-impl</artifactId>
         </dependency>
 
-                <!-- JETTY -->
+        <!-- JETTY -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
@@ -142,7 +156,7 @@
             <version>${jetty-version}</version>
         </dependency>
 
-          <!-- 4J UTILS
+        <!-- 4J UTILS
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -152,7 +166,7 @@
             <artifactId>log4j</artifactId>
         </dependency -->
 
-         <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -170,13 +184,13 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
         
-		<!-- SCOPE TEST -->
+        <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
 
-		<!-- JUnit -->
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

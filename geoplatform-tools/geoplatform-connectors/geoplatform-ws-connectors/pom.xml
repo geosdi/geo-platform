@@ -19,7 +19,7 @@
     <modules>
         <module>geoplatform-ws-api-connector</module>
         <module>geoplatform-ws-basic-connector</module>
-        <module>geoplatform-ws-catalog-connector</module>
+        <module>geoplatform-ws-geonetwork-connector</module>
         <module>geoplatform-ws-csw-connector</module>
         <module>geoplatform-ws-publish-connector</module>
         <module>geoplatform-ws-tracking-connector</module>

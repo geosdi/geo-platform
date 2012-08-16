@@ -41,7 +41,7 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-catalog-connector</artifactId>
+            <artifactId>geoplatform-ws-geonetwork-connector</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>

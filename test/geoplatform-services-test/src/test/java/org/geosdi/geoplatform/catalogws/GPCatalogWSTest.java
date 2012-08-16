@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.catalogws;
 
 import java.util.List;
 import org.geosdi.geoplatform.catalogws.beans.GPCatalogEndPointImpl;
-import org.geosdi.geoplatform.connectors.ws.catalog.GPCatalogClientTestConnector;
+import org.geosdi.geoplatform.connectors.ws.catalog.GPGeonetworkClientTestConnector;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
@@ -65,7 +65,7 @@ public class GPCatalogWSTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    private GPCatalogClientTestConnector gpCatalogWSClient;
+    private GPGeonetworkClientTestConnector gpCatalogWSClient;
     //
     @Autowired
     private GPCatalogEndPointImpl gpCatalogEndPointImpl;

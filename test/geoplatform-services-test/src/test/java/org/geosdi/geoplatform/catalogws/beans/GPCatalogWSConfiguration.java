@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.catalogws.beans;
 
-import org.geosdi.geoplatform.connectors.ws.catalog.GPCatalogClientTestConnector;
+import org.geosdi.geoplatform.connectors.ws.catalog.GPGeonetworkClientTestConnector;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.geosdi.geoplatform.services.GPCatalogFinderServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -50,8 +50,8 @@ import org.springframework.context.annotation.Configuration;
 public class GPCatalogWSConfiguration {
 
     @Bean
-    public GPCatalogClientTestConnector gpCatalogWSClient() {
-        GPCatalogClientTestConnector catalogWS = new GPCatalogClientTestConnector();
+    public GPGeonetworkClientTestConnector gpCatalogWSClient() {
+        GPGeonetworkClientTestConnector catalogWS = new GPGeonetworkClientTestConnector();
 
         return catalogWS;
     }

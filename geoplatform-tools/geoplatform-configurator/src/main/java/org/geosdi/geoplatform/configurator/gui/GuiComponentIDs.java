@@ -42,8 +42,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @TODO Load IDs from menubar.properties, toolbar.properties
- * and contextmenu.properties
+ * @TODO Load IDs from menubar.properties, toolbar.properties and
+ * contextmenu.properties
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
@@ -292,8 +292,9 @@ public class GuiComponentIDs {
         mapViewer.put(DELETE_ELEMENT, true);
         mapViewer.put(SAVE_TREE, false);
         mapViewer.put(PRINT_LAYERS, true);
-        mapViewer.put(EXPORT_PROJECT, true);
-        mapViewer.put(IMPORT_PROJECT, true);
+        // Import/Export because Viewer must not save projects
+        mapViewer.put(EXPORT_PROJECT, false);
+        mapViewer.put(IMPORT_PROJECT, false);
         mapViewer.put(PREVIEW_KML, true);
         mapViewer.put(LAYER_STYLER, true);
         //

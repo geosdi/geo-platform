@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-ws</artifactId>
-        <version>1.4-SNAPSHOT</version>
+        <version>1.5-SNAPSHOT</version>
     </parent>
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-ws-webapp</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.5-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>Geo-Platform :: == WS WebApp</name>

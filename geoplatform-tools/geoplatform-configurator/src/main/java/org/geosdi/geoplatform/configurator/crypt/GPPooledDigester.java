@@ -43,7 +43,6 @@ import org.springframework.beans.factory.InitializingBean;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
  */
 public class GPPooledDigester implements GPDigesterConfigutator,
                                          InitializingBean {

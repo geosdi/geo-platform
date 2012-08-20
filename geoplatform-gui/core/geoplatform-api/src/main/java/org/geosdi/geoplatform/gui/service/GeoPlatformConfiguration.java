@@ -35,15 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.service;
 
-import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 @RemoteServiceRelativePath("GeoPlatformConfiguration")
 public interface GeoPlatformConfiguration extends RemoteService {
@@ -55,22 +54,20 @@ public interface GeoPlatformConfiguration extends RemoteService {
         public static GeoPlatformConfigurationAsync getInstance() {
             if (instance == null) {
                 instance = (GeoPlatformConfigurationAsync) GWT.create(GeoPlatformConfiguration.class);
-//				ServiceDefTarget target = (ServiceDefTarget) instance;
-//				target.setServiceEntryPoint(GWT.getModuleBaseURL()
-//						+ "GeoPlatformConfiguration");
             }
+
             return instance;
         }
     }
 
     public IGeoPlatformGlobal initGeoPlatformConfiguration();
-    
-     /**
-     * 
+
+    /**
+     *
      * @param beanName
-     *          
-     *          The Bean Name defined in Spring applicationContext 
-     * 
+     *
+     * The Bean Name defined in Spring applicationContext
+     *
      * @return IGeoPlatformGlobal
      */
     public IGeoPlatformGlobal initGPConfigurationForBeanName(String beanName);

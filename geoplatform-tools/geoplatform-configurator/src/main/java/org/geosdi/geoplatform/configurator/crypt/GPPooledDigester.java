@@ -45,7 +45,7 @@ import org.springframework.beans.factory.InitializingBean;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPPooledDigester implements GPDigesterConfigutator,
-                                         InitializingBean {
+        InitializingBean {
 
     private final PooledStringDigester digester;
     private StringDigesterConfig config;

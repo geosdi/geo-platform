@@ -1,11 +1,6 @@
-geo-platform
-============
+Introducing Geo Platform
+========================
 
-The first pure java opensource framework webgis oriented
+The fast webgis framework
 
-TODO: add documentation
-============
-
-ADD Examples
-
-TEST REBASE
+Geo-Plaform is a framework to develop Rich Web GIS Application.

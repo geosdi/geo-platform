@@ -344,6 +344,7 @@
 
     </dependencies>
     
+    <!-- "mvn -Dfull" is equal to "mvn -P publisher,tracking,finder,csw"  -->
     <profiles>
         <!-- =============================================================== -->
         <!-- GEOPLATFORM PUBLISHER -->

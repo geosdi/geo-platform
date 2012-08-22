@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.observable.Observable;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
 
@@ -57,8 +57,9 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
     //
     private VisitorModelConverter visitor = new VisitorModelConverter(this);
     private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
-    private boolean loaded = false;
-    private boolean loading = false;
+    private boolean loaded = Boolean.FALSE;
+    private boolean loading = Boolean.FALSE;
+    private boolean expanded = Boolean.FALSE;
     private int numberOfDescendants = 0;
 
     public FolderTreeNode() {
@@ -71,6 +72,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
     public FolderTreeNode(GPFolderClientInfo folder) {
         super(folder);
         this.numberOfDescendants = folder.getNumberOfDescendants();
+        this.expanded = folder.isExpanded();
         this.modelConverter(folder.getFolderElements());
     }
 
@@ -131,6 +133,14 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
 
     public void setLoading(boolean loading) {
         this.loading = loading;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 
     @Override

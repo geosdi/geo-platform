@@ -89,13 +89,11 @@ public class DTOConverter {
     public ArrayList<GPFolderClientInfo> convertOnlyFolder(
             Collection<FolderDTO> folders) {
         ArrayList<GPFolderClientInfo> foldersClient = Lists.newArrayList();
-
         if (folders != null) {
             for (Iterator<FolderDTO> it = folders.iterator(); it.hasNext();) {
                 foldersClient.add(this.convertFolderElement(it.next()));
             }
         }
-
         return foldersClient;
     }
 
@@ -137,11 +135,9 @@ public class DTOConverter {
 
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
-
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
         raster.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.RASTER);
         raster.setOpacity(rasterDTO.getOpacity());
-
         ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
         GPStyleStringBeanModel style;
         for (String styleString : rasterDTO.getStyleList()) {
@@ -150,17 +146,14 @@ public class DTOConverter {
             styles.add(style);
         }
         raster.setStyles(styles);
-
         return raster;
     }
 
     private ClientVectorInfo convertVectorElement(VectorLayerDTO vectorDTO) {
         ClientVectorInfo vector = new ClientVectorInfo();
-
         this.convertToLayerElementFromLayerDTO(vector, vectorDTO);
         this.setVectorLayerType(vector, vectorDTO.getLayerType());
         vector.setFeatureType(vectorDTO.getName());
-
         return vector;
     }
 
@@ -185,6 +178,7 @@ public class DTOConverter {
         // folder.setzIndex(folderDTO.getPosition());
         folder.setNumberOfDescendants(folderDTO.getNumberOfDescendants());
         folder.setChecked(folderDTO.isChecked());
+        folder.setExpanded(folderDTO.isExpanded());
         return folder;
     }
 
@@ -225,10 +219,8 @@ public class DTOConverter {
 
     public GPFolder convertMementoFolder(MementoFolder memento) {
         GPFolder gpFolder = new GPFolder();
-        gpFolder.setName(memento.getFolderName());
         gpFolder.setId(memento.getIdBaseElement());
-        gpFolder.setChecked(memento.isChecked());
-        gpFolder.setExpanded(memento.isExpanded());
+        gpFolder.setName(memento.getFolderName());
         gpFolder.setNumberOfDescendants(memento.getNumberOfDescendants());
 //        if (memento.getIdParent() != null) {
 //            GPFolder parent = new GPFolder();
@@ -256,26 +248,20 @@ public class DTOConverter {
         GPFolder folder = new GPFolder();
         for (AbstractMementoLayer memento : addedLayers) {
             GPLayer layer = null;
-
             if (memento instanceof MementoRaster) {
 //                MementoRaster mementoRaster = (MementoRaster) memento;
-
                 layer = new GPRasterLayer();
                 layer.setLayerType(GPLayerType.RASTER);
                 ((GPRasterLayer) layer).setStyles(((MementoRaster) memento).getStyles());
                 // layer.setLayerInfo();???
             } else if (memento instanceof MementoVector) {
 //                MementoVector mementoVector = (MementoVector) memento;
-
                 layer = new GPVectorLayer();
                 // layer.setGeometry()???
             }
-
             this.convertToLayerElementFromMementoLayer(layer, memento);
-
             folder.setId(memento.getIdFolderParent());
             layer.setFolder(folder);
-
             layersList.add(layer);
         }
         return layersList;
@@ -295,7 +281,6 @@ public class DTOConverter {
         dto.setProjectID(project.getId());
         dto.setProjectName(project.getName());
         dto.setDefaultProject(project.isDefaultProject());
-
         return dto;
     }
 

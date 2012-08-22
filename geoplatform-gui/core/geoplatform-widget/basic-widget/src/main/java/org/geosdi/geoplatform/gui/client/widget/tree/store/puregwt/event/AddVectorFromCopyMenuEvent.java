@@ -39,17 +39,17 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class AddVectorFromCopyMenuEvent extends GwtEvent<GPTreeStoreEventHandler> {
-    
-    private List<? extends GPLayerBean> layers;
-    
-    public AddVectorFromCopyMenuEvent(List<? extends GPLayerBean> theLayers) {
+
+    private List<GPVectorBean> layers;
+
+    public AddVectorFromCopyMenuEvent(List<GPVectorBean> theLayers) {
         this.layers = theLayers;
     }
 
@@ -62,5 +62,4 @@ public class AddVectorFromCopyMenuEvent extends GwtEvent<GPTreeStoreEventHandler
     protected void dispatch(GPTreeStoreEventHandler handler) {
         handler.addVectorLayersFromCopyMenu(layers);
     }
-    
 }

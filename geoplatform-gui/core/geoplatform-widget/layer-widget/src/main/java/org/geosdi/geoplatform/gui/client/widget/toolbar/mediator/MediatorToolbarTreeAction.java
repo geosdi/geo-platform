@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.toolbar.mediator;
 
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -47,7 +48,7 @@ import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public class MediatorToolbarTreeAction {
 
@@ -77,10 +78,10 @@ public class MediatorToolbarTreeAction {
 
     /**
      *
-     * @param element
+     * @param elements
      */
-    public void elementChanged(GPBeanTreeModel element) {
-        TreeStatusEnum status = this.calculateTreeStatus(element);
+    public void elementChanged(List<GPBeanTreeModel> elements) {
+        TreeStatusEnum status = this.calculateTreeStatus(elements);
         for (ITreeToolbarPlugin plugin : TreeToolbarPluginManager.getToolbarPlugin()) {
             plugin.setEnabledByStatus(status);
         }
@@ -95,23 +96,29 @@ public class MediatorToolbarTreeAction {
         }
     }
 
-    public void manageAddLayerPluginAction(GPBeanTreeModel element) {
+    public void manageAddLayerPluginAction(List<GPBeanTreeModel> elements) {
         if (addLayerVisible) {
-            TreeStatusEnum status = this.calculateTreeStatus(element);
+            TreeStatusEnum status = this.calculateTreeStatus(elements);
             this.manageAddLayerPluginAction(status);
         }
     }
 
-    private TreeStatusEnum calculateTreeStatus(GPBeanTreeModel element) {
+    private TreeStatusEnum calculateTreeStatus(List<GPBeanTreeModel> elements) {
         TreeStatusEnum status = null;
-        if (element == null) {
+        final GPBeanTreeModel element;
+        if (elements == null || elements.isEmpty()) {
             status = TreeStatusEnum.NO_SELECTION;
-        } else if (element instanceof FolderTreeNode) {
-            status = TreeStatusEnum.FOLDER_SELECTED;
-        } else if (element instanceof GPRootTreeNode) {
-            status = TreeStatusEnum.ROOT_SELECTED;
-        } else if (element instanceof RasterTreeNode) {
-            status = TreeStatusEnum.RASTER_SELECTED;
+        } else {
+            element = elements.get(0);
+            if (elements.size() > 1) {
+                status = TreeStatusEnum.MULTI_SELECTION;
+            } else if (element instanceof FolderTreeNode) {
+                status = TreeStatusEnum.FOLDER_SELECTED;
+            } else if (element instanceof GPRootTreeNode) {
+                status = TreeStatusEnum.ROOT_SELECTED;
+            } else if (element instanceof RasterTreeNode) {
+                status = TreeStatusEnum.RASTER_SELECTED;
+            }
         }
         return status;
     }

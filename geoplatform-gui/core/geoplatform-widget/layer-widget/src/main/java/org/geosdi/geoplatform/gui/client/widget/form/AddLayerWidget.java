@@ -163,7 +163,8 @@ public class AddLayerWidget extends GeoPlatformWindow {
     public void show() {
         super.show();
         MediatorToolbarTreeAction.getInstance().setAddLayerVisible(true);
-        MediatorToolbarTreeAction.getInstance().manageAddLayerPluginAction(tree.getSelectionModel().getSelectedItem());
+        MediatorToolbarTreeAction.getInstance().manageAddLayerPluginAction(
+                tree.getSelectionModel().getSelectedItems());
     }
 
     @Override

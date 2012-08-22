@@ -53,7 +53,9 @@ import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidge
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPShortLayerBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
@@ -92,13 +94,13 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     }
 
     @Override
-    public void addRasterLayersFromCapabilities(List<? extends GPLayerBean> layers) {
+    public void addRasterLayersFromCapabilities(List<GPRasterBean> layers) {
         this.addRasterLayers(layers, GPTreeStoreOperations.LAYERS_FROM_WMS_CAPABILITIES);
         LayerHandlerManager.fireEvent(deselectGridElement);
     }
 
     @Override
-    public void addVectorLayersFromCapabilities(List<? extends GPLayerBean> layers) {
+    public void addVectorLayersFromCapabilities(List<GPVectorBean> layers) {
         this.changeProgressBarMessage("Load Vector Layers in the Store");
     }
 
@@ -108,16 +110,37 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     }
 
     @Override
-    public void addVectorLayersFromPublisher(List<? extends GPLayerBean> layers) {
+    public void addVectorLayersFromPublisher(List<GPVectorBean> layers) {
+        throw new UnsupportedOperationException("You need to implement this functionality");
     }
 
     @Override
-    public void addRasterLayersFromCopyMenu(List<? extends GPLayerBean> layers) {
+    public void addLayersFromCopyMenu(List<? extends GPLayerBean> layers) {
+        List<GPRasterBean> rasterBeanList = Lists.newArrayList();
+        List<GPVectorBean> vectorBeanList = Lists.newArrayList();
+        for (GPLayerBean layer : layers) {
+            if (layer instanceof GPRasterBean) {
+                rasterBeanList.add((GPRasterBean) layer);
+            } else if (layer instanceof GPVectorBean) {
+                vectorBeanList.add((GPVectorBean) layer);
+            }
+        }
+        if (!rasterBeanList.isEmpty()) {
+            this.addRasterLayersFromCopyMenu(rasterBeanList);
+        }
+        if (!vectorBeanList.isEmpty()) {
+            this.addVectorLayersFromCopyMenu(vectorBeanList);
+        }
+    }
+
+    @Override
+    public void addRasterLayersFromCopyMenu(List<GPRasterBean> layers) {
         this.addRasterLayers(layers, GPTreeStoreOperations.LAYERS_FROM_COPY_MENU);
     }
 
     @Override
-    public void addVectorLayersFromCopyMenu(List<? extends GPLayerBean> layers) {
+    public void addVectorLayersFromCopyMenu(List<GPVectorBean> layers) {
+        throw new UnsupportedOperationException("You need to implement this functionality");
     }
 
     @Override

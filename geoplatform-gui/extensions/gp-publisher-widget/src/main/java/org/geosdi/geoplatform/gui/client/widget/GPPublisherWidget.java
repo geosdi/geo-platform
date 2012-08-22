@@ -73,6 +73,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -93,7 +94,6 @@ public class GPPublisherWidget extends GeoPlatformWindow
 
     public final static int PUBLISHER_WIDGET_WIDTH = 600;
     public final static int PUBLISHER_WIDGET_HEIGHT = 500;
-    
     private TreePanel tree;
 //    private boolean mapInitialized;
     private ContentPanel centralPanel;
@@ -103,7 +103,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
     private Image centralImage;
     private Bounds bounds;
     private GPPublishShapePreviewEvent publishShapePreviewEvent = new GPPublishShapePreviewEvent();
-    private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>();
+    private List<PreviewLayer> layerList = Lists.newArrayList();
     private Button publishButton;
     private HTML htmlPanel;
     private Window htmlWindow = new Window();
@@ -253,7 +253,6 @@ public class GPPublisherWidget extends GeoPlatformWindow
         this.addSouthPanel();
         publishButton = new Button("Add on Tree", BasicWidgetResources.ICONS.done());
         publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
@@ -265,7 +264,6 @@ public class GPPublisherWidget extends GeoPlatformWindow
                     boolean reloadCluster = toggleButtonClusterReload.isPressed();
                     PublisherRemote.Util.getInstance().publishLayerPreview(layersName, reloadCluster,
                             new AsyncCallback<String>() {
-
                                 @Override
                                 public void onFailure(Throwable caught) {
                                     if (caught.getCause() instanceof GPSessionTimeout) {
@@ -323,7 +321,6 @@ public class GPPublisherWidget extends GeoPlatformWindow
         super.addButton(publishButton);
         Button resetButton = new Button("Reset", BasicWidgetResources.ICONS.cancel());
         resetButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 reset();

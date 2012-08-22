@@ -33,51 +33,33 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
+package org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event;
 
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-import com.extjs.gxt.ui.client.widget.Dialog;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class DeleteRequestManager {
-    
-    private TreePanel<GPBeanTreeModel> tree;
-    private DeleteRequestHandler deleteFolder;
-    private DeleteRequestHandler deleteLayer;
-    
-    public DeleteRequestManager(TreePanel theTree) {
-        this.tree = theTree;
-        initChain();
+public class AddLayersFromCopyMenuEvent extends GwtEvent<GPTreeStoreEventHandler> {
+
+    private List<? extends GPLayerBean> layers;
+
+    public AddLayersFromCopyMenuEvent(List<? extends GPLayerBean> theLayers) {
+        this.layers = theLayers;
     }
-    
-    public void processRequest() {
-        GeoPlatformMessage.confirmMessage("Delete Layer",
-                "Are you sure you want to delete the selected element(s)?",
-                new Listener<MessageBoxEvent>() {
-                    @Override
-                    public void handleEvent(MessageBoxEvent be) {
-                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                            for (GPBeanTreeModel model :
-                                    DeleteRequestManager.this.tree.getSelectionModel().getSelectedItems()) {
-                                DeleteRequestManager.this.deleteFolder.deleteRequest(model);
-                            }
-                        }
-                    }
-                });
-        
+
+    @Override
+    public Type<GPTreeStoreEventHandler> getAssociatedType() {
+        return GPTreeStoreEventHandler.TYPE;
     }
-    
-    private void initChain() {
-        this.deleteFolder = new DeleteFolderHandler(tree);
-        this.deleteLayer = new DeleteLayerHandler(tree);
-        this.deleteFolder.setSuperiorRequestHandler(deleteLayer);
+
+    @Override
+    protected void dispatch(GPTreeStoreEventHandler handler) {
+        handler.addLayersFromCopyMenu(layers);
     }
 }

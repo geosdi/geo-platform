@@ -63,6 +63,8 @@ public class GPDynamicTreeContextMenu extends Menu {
     private Menu rootContextMenu = new Menu();
     private Menu folderContextMenu = new Menu();
     private Menu layerContextMenu = new Menu();
+    private Menu multipleSelectionContextMenu = new Menu();
+    private MenuItem copyMultiLayers;
     private ComboBox refreshTimeComboBox;
 
     public GPDynamicTreeContextMenu(GPTreePanel tree) {
@@ -71,6 +73,13 @@ public class GPDynamicTreeContextMenu extends Menu {
     }
 
     private void buildMenu() {
+        DeleteElementsMenuAction deleteElementsMenuAction = new DeleteElementsMenuAction(tree);
+        MenuItem deleteElements = new MenuItem();
+        deleteElements.setText(deleteElementsMenuAction.getTitle());
+        deleteElements.setIcon(deleteElementsMenuAction.getImage());
+        deleteElements.addSelectionListener(deleteElementsMenuAction);
+        multipleSelectionContextMenu.add(deleteElements);
+
         AddFolderMenuAction addFolderAction = new AddFolderMenuAction(tree);
         MenuItem addFolder = new MenuItem();
         addFolder.setText(addFolderAction.getTitle());
@@ -112,6 +121,10 @@ public class GPDynamicTreeContextMenu extends Menu {
         folderRename.setIcon(LayerResources.ICONS.editFolder());
         folderRename.addSelectionListener(new ShowFolderRenameAction(tree));
         folderContextMenu.add(folderRename);
+
+        this.copyMultiLayers = new MenuItem("Copy Layers");
+        copyMultiLayers.setIcon(LayerResources.ICONS.copy());
+        copyMultiLayers.addSelectionListener(new CopyLayerAction(tree, pasteAction, pasteMenuItem));
 
         MenuItem copyMenuItem = new MenuItem("Copy Layer");
         copyMenuItem.setIcon(LayerResources.ICONS.copy());
@@ -159,13 +172,30 @@ public class GPDynamicTreeContextMenu extends Menu {
         this.tree.addListener(Events.OnContextMenu, new Listener() {
             @Override
             public void handleEvent(BaseEvent be) {
-                GPBeanTreeModel selectedItem = tree.getSelectionModel().getSelectedItem();
-                if (selectedItem instanceof FolderTreeNode) {
-                    tree.setContextMenu(folderContextMenu);
-                } else if (selectedItem instanceof GPLayerTreeModel) {
-                    tree.setContextMenu(layerContextMenu);
-                } else if (selectedItem instanceof GPRootTreeNode) {
-                    tree.setContextMenu(rootContextMenu);
+                if (tree.getSelectionModel().getSelectedItems().size() > 1) {
+                    tree.setContextMenu(multipleSelectionContextMenu);
+                    boolean isOnlyLayers = Boolean.TRUE;
+                    for (GPBeanTreeModel element : tree.getSelectionModel().getSelectedItems()) {
+                        if (!(element instanceof GPLayerTreeModel)) {
+                            isOnlyLayers = Boolean.FALSE;
+                            break;
+                        }
+                    }
+                    if (isOnlyLayers) {
+                        multipleSelectionContextMenu.add(GPDynamicTreeContextMenu.this.copyMultiLayers);
+                    } else if (multipleSelectionContextMenu.getItems().contains(
+                            GPDynamicTreeContextMenu.this.copyMultiLayers)) {
+                        multipleSelectionContextMenu.remove(GPDynamicTreeContextMenu.this.copyMultiLayers);
+                    }
+                } else {
+                    GPBeanTreeModel selectedItem = tree.getSelectionModel().getSelectedItem();
+                    if (selectedItem instanceof FolderTreeNode) {
+                        tree.setContextMenu(folderContextMenu);
+                    } else if (selectedItem instanceof GPLayerTreeModel) {
+                        tree.setContextMenu(layerContextMenu);
+                    } else if (selectedItem instanceof GPRootTreeNode) {
+                        tree.setContextMenu(rootContextMenu);
+                    }
                 }
             }
         });

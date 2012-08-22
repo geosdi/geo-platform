@@ -48,6 +48,7 @@ public abstract class AbstractMementoOriginalProperties<T extends GPBeanTreeMode
     private static final long serialVersionUID = -5677029546026289913L;
     private String name;
     private boolean checked;
+    private boolean expanded;
 
     public AbstractMementoOriginalProperties() {
     }
@@ -86,5 +87,13 @@ public abstract class AbstractMementoOriginalProperties<T extends GPBeanTreeMode
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 }

@@ -128,7 +128,6 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
      */
     private void setTreePresenter() {
         this.tree.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
-
             @Override
             public AbstractImagePrototype getIcon(GPBeanTreeModel model) {
                 return model.getIcon();
@@ -136,20 +135,18 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
         });
 
         this.tree.setLabelProvider(new ModelStringProvider<GPBeanTreeModel>() {
-
             @Override
             public String getStringValue(GPBeanTreeModel model, String property) {
                 return model.getLabel();
             }
         });
 
-        this.tree.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        this.tree.getSelectionModel().setSelectionMode(SelectionMode.MULTI);
 
         this.tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<GPBeanTreeModel>() {
-
             @Override
             public void selectionChanged(SelectionChangedEvent<GPBeanTreeModel> se) {
-                MediatorToolbarTreeAction.getInstance().elementChanged(se.getSelectedItem());
+                MediatorToolbarTreeAction.getInstance().elementChanged(se.getSelection());
             }
         });
 
@@ -164,7 +161,6 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     private void enableCheckChange() {
         this.tree.addListener(Events.CheckChange,
                 new Listener<TreePanelEvent<GPBeanTreeModel>>() {
-
                     @Override
                     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
                         //System.out.println("Events.CheckChange from: " + be.getItem().getLabel());
@@ -180,20 +176,19 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     private void enableDDSupport() {
         TreePanelDragSource dragSource = new TreePanelDragSource(super.tree);
         dragSource.addDNDListener(new DNDListener() {
-
             @Override
             public void dragStart(DNDEvent e) {
                 ModelData sel = tree.getSelectionModel().getSelectedItem();
-                if (sel != null
-                        && sel == tree.getStore().getRootItems().get(0)) {
+                if (tree.getSelectionModel().getSelectedItems().size() > 1
+                        || (sel != null && sel == tree.getStore().getRootItems().get(0))) {
                     e.setCancelled(true);
                     e.getStatus().setStatus(false);
-                    return;
+                } else {
+                    super.dragStart(e);
+                    ((TreePanelDragSource) e.getSource()).fireEvent(
+                            LayerEvents.GP_DRAG_START, new TreeStoreEvent<GPBeanTreeModel>(
+                            tree.getStore()));
                 }
-                super.dragStart(e);
-                ((TreePanelDragSource) e.getSource()).fireEvent(
-                        LayerEvents.GP_DRAG_START, new TreeStoreEvent<GPBeanTreeModel>(
-                        tree.getStore()));
             }
         });
 
@@ -203,7 +198,6 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
 
         //Listener for launch Drag Lost Events
         Listener listenerDragLost = new Listener() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 ((TreePanelDragSource) be.getSource()).fireEvent(
@@ -256,7 +250,6 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     public TreeLoader<GPBeanTreeModel> generateTreeLoader() {
         TreeLoader<GPBeanTreeModel> treeLoader = new BaseTreeLoader<GPBeanTreeModel>(
                 proxy) {
-
             @Override
             public boolean hasChildren(GPBeanTreeModel element) {
                 boolean condition = false;

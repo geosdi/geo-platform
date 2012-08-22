@@ -465,7 +465,8 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folder/{folderID}")
     Long saveFolderProperties(@WebParam(name = "folderID") Long folderID,
             @WebParam(name = "folderName") String folderName,
-            @WebParam(name = "checked") boolean checked)
+            @WebParam(name = "checked") boolean checked,
+            @WebParam(name = "expanded") boolean expanded)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Put

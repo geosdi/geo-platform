@@ -76,8 +76,7 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         }
     }
 
-    protected void delete() {
-        GPBeanTreeModel element = (GPBeanTreeModel) tree.getSelectionModel().getSelectedItem();
+    protected void delete(GPBeanTreeModel element) {
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         this.visitorDispalyHide.removeVisibleLayers(element);
         IMemento<ISave> precedingMemento = null;
@@ -102,7 +101,7 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         displayMessage();
     }
 
-    public abstract void processRequest();
+    public abstract void processRequest(GPBeanTreeModel model);
 
     public abstract void displayMessage();
 }

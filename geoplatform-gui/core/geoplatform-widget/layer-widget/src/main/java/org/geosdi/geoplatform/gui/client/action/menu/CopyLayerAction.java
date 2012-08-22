@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import com.google.common.collect.Lists;
+import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -62,11 +64,16 @@ public class CopyLayerAction extends MenuAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
-        if (itemSelected instanceof FolderTreeNode) {
-            throw new IllegalArgumentException("Folder copy is not allowed");
+        final List<GPBeanTreeModel> selectedItems = this.treePanel.getSelectionModel().getSelectedItems();
+        final List<GPLayerTreeModel> selectedLayers = Lists.newArrayList();
+        for (GPBeanTreeModel element : selectedItems) {
+            if (element instanceof FolderTreeNode) {
+                throw new IllegalArgumentException("Folder copy is not allowed");
+            } else if (element instanceof GPLayerTreeModel) {
+                selectedLayers.add((GPLayerTreeModel) element);
+            }
         }
-        this.pasteAction.setLayerToCopy((GPLayerTreeModel) itemSelected);
-        this.pasteMenuItem.setEnabled(true);
+        this.pasteAction.setLayerToCopy(selectedLayers);
+        this.pasteMenuItem.setEnabled(Boolean.TRUE);
     }
 }

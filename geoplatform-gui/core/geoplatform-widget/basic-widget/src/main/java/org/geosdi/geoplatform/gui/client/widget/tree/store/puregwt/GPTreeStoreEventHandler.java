@@ -39,7 +39,9 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import java.util.List;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPShortLayerBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 
 /**
  * TODO One single method for source?
@@ -58,23 +60,25 @@ public interface GPTreeStoreEventHandler extends EventHandler {
     /**
      * LAYERS_FROM_WMS_CAPABILITIES
      */
-    public void addRasterLayersFromCapabilities(List<? extends GPLayerBean> layers);
+    public void addRasterLayersFromCapabilities(List<GPRasterBean> layers);
 
-    public void addVectorLayersFromCapabilities(List<? extends GPLayerBean> layers);
+    public void addVectorLayersFromCapabilities(List<GPVectorBean> layers);
 
     /**
      * LAYERS_FROM_PUBLISHER
      */
     public void addRasterLayersFromPublisher(List<? extends GPLayerBean> layers);
 
-    public void addVectorLayersFromPublisher(List<? extends GPLayerBean> layers);
+    public void addVectorLayersFromPublisher(List<GPVectorBean> layers);
 
     /**
      * LAYERS_FROM_COPY_MENU
      */
-    public void addRasterLayersFromCopyMenu(List<? extends GPLayerBean> layers);
+    public void addRasterLayersFromCopyMenu(List<GPRasterBean> layers);
 
-    public void addVectorLayersFromCopyMenu(List<? extends GPLayerBean> layers);
+    public void addVectorLayersFromCopyMenu(List<GPVectorBean> layers);
+    
+    public void addLayersFromCopyMenu(List<? extends GPLayerBean> layers);
 
     /**
      * LAYERS_FROM_CATALOG

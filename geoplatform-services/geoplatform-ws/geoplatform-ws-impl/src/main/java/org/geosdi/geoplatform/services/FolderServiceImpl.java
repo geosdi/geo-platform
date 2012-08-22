@@ -61,7 +61,7 @@ import org.slf4j.LoggerFactory;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class FolderServiceImpl {
-
+    
     final private static Logger logger = LoggerFactory.getLogger(FolderServiceImpl.class);
     // DAO
     private GPFolderDAO folderDao;
@@ -98,7 +98,7 @@ class FolderServiceImpl {
     @Deprecated
     public Long insertFolder(Long projectId, GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault {
-
+        
         GPProject project = projectDao.find(projectId);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
@@ -111,11 +111,11 @@ class FolderServiceImpl {
         folderDao.persist(folder);
         return folder.getId();
     }
-
+    
     @Deprecated
     public Long updateFolder(GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault {
-
+        
         GPFolder orig = folderDao.find(folder.getId());
         if (orig == null) {
             throw new ResourceNotFoundFault("Folder not found", folder.getId());
@@ -130,13 +130,13 @@ class FolderServiceImpl {
         orig.setExpanded(folder.isExpanded());
         orig.setShared(folder.isShared());
         orig.setParent(folder.getParent());
-
+        
         EntityCorrectness.checkFolder(orig); // TODO assert
 
         folderDao.merge(orig);
         return orig.getId();
     }
-
+    
     @Deprecated
     public boolean deleteFolder(Long folderID) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderID);
@@ -147,8 +147,9 @@ class FolderServiceImpl {
 
         return folderDao.remove(folder);
     }
-
-    public Long saveFolderProperties(Long folderID, String name, boolean checked)
+    
+    public Long saveFolderProperties(Long folderID, String name, boolean checked,
+            boolean expanded)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = folderDao.find(folderID);
         if (folder == null) {
@@ -159,14 +160,15 @@ class FolderServiceImpl {
         if (name == null || name.trim().length() == 0) {
             throw new IllegalParameterFault("Folder \"name\" cannot be null or empty");
         }
-
+        
         folder.setName(name);
         folder.setChecked(checked);
-
+        folder.setExpanded(expanded);
+        
         folderDao.merge(folder);
         return folder.getId();
     }
-
+    
     public Long saveAddedFolderAndTreeModifications(Long projectId, Long parentId,
             GPFolder folder, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
@@ -176,12 +178,12 @@ class FolderServiceImpl {
         }
         EntityCorrectness.checkProjectLog(project); // TODO assert
         folder.setProject(project);
-
+        
         if (parentId != null) {
             if (descendantsMapData.getDescendantsMap().isEmpty()) { // TODO assert
                 throw new IllegalParameterFault("descendantsMapData must have one or more entries if the folder has a parent");
             }
-
+            
             GPFolder parentFolder = folderDao.find(parentId);
             if (parentFolder == null) {
                 throw new ResourceNotFoundFault("Folder parent not found", parentId);
@@ -196,15 +198,15 @@ class FolderServiceImpl {
         // Shift positions
         folderDao.updatePositionsLowerBound(projectId, newPosition, increment);
         layerDao.updatePositionsLowerBound(projectId, newPosition, increment);
-
+        
         folderDao.persist(folder);
-
+        
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         this.updateNumberOfElements(project, increment);
-
+        
         return folder.getId();
     }
-
+    
     public boolean saveDeletedFolderAndTreeModifications(Long folderID, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderID);
@@ -215,20 +217,20 @@ class FolderServiceImpl {
 
         int oldPosition = folder.getPosition();
         int decrement = -(folder.getNumberOfDescendants() + 1);
-
+        
         boolean result = folderDao.remove(folder);
-
+        
         GPProject project = folder.getProject();
         // Shift positions (shift must be done only after removing folder)
         folderDao.updatePositionsLowerBound(project.getId(), oldPosition, decrement);
         layerDao.updatePositionsLowerBound(project.getId(), oldPosition, decrement);
-
+        
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         this.updateNumberOfElements(project, decrement);
-
+        
         return result;
     }
-
+    
     public boolean saveCheckStatusFolderAndTreeModifications(Long folderID, boolean checked)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderID);
@@ -270,7 +272,7 @@ class FolderServiceImpl {
             logger.trace("*** Folder will be a root folder");
             folderMoved.setParent(null);
         }
-
+        
         int startFirstRange = 0, endFirstRange = 0;
         if (folderMoved.getPosition() < newPosition) {
             logger.trace("*** Drag & Drop to top");
@@ -284,21 +286,21 @@ class FolderServiceImpl {
         int startSecondRange = folderMoved.getPosition();
         int endSecondRange = folderMoved.getPosition() - folderMoved.getNumberOfDescendants();
         int shiftValue = folderMoved.getNumberOfDescendants() + 1;
-
+        
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", endFirstRange).
                 addFilterLessOrEqual("position", startFirstRange);
         search.addFilterEqual("project.id", folderMoved.getProject().getId());
         List<GPFolder> matchingFoldersFirstRange = folderDao.search(search);
         List<GPLayer> matchingLayersFirstRange = layerDao.search(search);
-
+        
         search.clear();
         search.addFilterGreaterOrEqual("position", endSecondRange).
                 addFilterLessOrEqual("position", startSecondRange);
         search.addFilterEqual("project.id", folderMoved.getProject().getId());
         List<GPFolder> matchingFoldersSecondRange = folderDao.search(search);
         List<GPLayer> matchingLayersSecondRange = layerDao.search(search);
-
+        
         logger.trace("Range: " + startFirstRange + " - " + endFirstRange + " - "
                 + startSecondRange + " - " + endSecondRange + " - ");
 //        System.out.println("### matchingFoldersFirstRange.size(): " + matchingFoldersFirstRange.size());
@@ -323,32 +325,32 @@ class FolderServiceImpl {
             this.executeFoldersModifications(matchingFoldersSecondRange, -moveValue);
             this.executeLayersModifications(matchingLayersSecondRange, -moveValue);
         }
-
+        
         folderDao.merge(matchingFoldersFirstRange.toArray(new GPFolder[matchingFoldersFirstRange.size()]));
         folderDao.merge(matchingFoldersSecondRange.toArray(new GPFolder[matchingFoldersSecondRange.size()]));
         layerDao.merge(matchingLayersFirstRange.toArray(new GPLayer[matchingLayersFirstRange.size()]));
         layerDao.merge(matchingLayersSecondRange.toArray(new GPLayer[matchingLayersSecondRange.size()]));
         folderMoved.setPosition(newPosition);
         folderDao.merge(folderMoved);
-
+        
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-
+        
         return true;
     }
-
+    
     private void executeLayersModifications(List<GPLayer> elements, int value) {
         for (GPLayer layer : elements) {
             layer.setPosition(layer.getPosition() + value);
         }
     }
-
+    
     private void executeFoldersModifications(List<GPFolder> elements, int value) {
         for (GPFolder folder : elements) {
             EntityCorrectness.checkFolderLog(folder); // TODO assert
             folder.setPosition(folder.getPosition() + value);
         }
     }
-
+    
     public FolderDTO getShortFolder(Long folderID) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderID);
         if (folder == null) {
@@ -359,7 +361,7 @@ class FolderServiceImpl {
         FolderDTO folderDTO = new FolderDTO(folder);
         return folderDTO;
     }
-
+    
     public GPFolder getFolderDetail(Long folderID) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderID);
         if (folder == null) {
@@ -369,71 +371,71 @@ class FolderServiceImpl {
 
         return folder;
     }
-
+    
     public List<FolderDTO> searchFolders(PaginatedSearchRequest searchRequest) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(searchRequest.getNum());
         searchCriteria.setPage(searchRequest.getPage());
         searchCriteria.addSortAsc("name");
-
+        
         String like = searchRequest.getNameLike();
         if (like != null) {
             searchCriteria.addFilterILike("name", like);
         }
-
+        
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return FolderDTO.convertToFolderDTOList(foundFolder);
     }
-
+    
     public List<FolderDTO> getFolders() {
         List<GPFolder> found = folderDao.findAll();
         return FolderDTO.convertToFolderDTOList(found);
     }
-
+    
     public long getFoldersCount(SearchRequest searchRequest) {
         Search searchCriteria = new Search(GPFolder.class);
         if (searchRequest != null && searchRequest.getNameLike() != null) {
             searchCriteria.addFilterILike("name", searchRequest.getNameLike());
         }
-
+        
         return folderDao.count(searchCriteria);
     }
-
+    
     public List<FolderDTO> getChildrenFoldersByRequest(RequestByID request) {
         Search searchCriteria = new Search(GPFolder.class);
-
+        
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
         searchCriteria.addSortAsc("name");
         searchCriteria.addFilterEqual("parent.id", request.getId());
-
+        
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return FolderDTO.convertToFolderDTOList(foundFolder);
     }
-
+    
     public List<FolderDTO> getChildrenFolders(Long folderID) {
         Search searchCriteria = new Search(GPFolder.class);
-
+        
         searchCriteria.addSortAsc("name");
         searchCriteria.addFilterEqual("parent.id", folderID);
-
+        
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return FolderDTO.convertToFolderDTOList(foundFolder);
     }
-
+    
     public TreeFolderElements getChildrenElements(Long folderID) {
         TreeFolderElements tree = new TreeFolderElements();
-
+        
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addFilterEqual("parent.id", folderID);
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         tree.addFolderCollection(FolderDTO.convertToFolderDTOList(foundFolder));
-
+        
         searchCriteria = new Search(GPLayer.class);
         searchCriteria.addFilterEqual("folder.id", folderID);
         List<GPLayer> foundLayer = layerDao.search(searchCriteria);
         tree.addLayerCollection(foundLayer);
-
+        
         return tree;
     }
     //</editor-fold>

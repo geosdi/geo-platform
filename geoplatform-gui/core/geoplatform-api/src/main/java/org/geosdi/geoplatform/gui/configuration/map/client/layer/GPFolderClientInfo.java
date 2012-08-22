@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GPFolderClientInfo implements Serializable,
         Comparable<IGPFolderElements>, IGPFolderElements, IGPParentElement {
@@ -60,6 +60,15 @@ public class GPFolderClientInfo implements Serializable,
     private int numberOfDescendants;
     private boolean checked;
     private Long id;
+    private boolean expanded;
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
 
     public boolean isChecked() {
         return checked;
@@ -93,8 +102,7 @@ public class GPFolderClientInfo implements Serializable,
     }
 
     /**
-     * @param label
-     *            the label to set
+     * @param label the label to set
      */
     public void setLabel(String label) {
         this.label = label;
@@ -108,8 +116,7 @@ public class GPFolderClientInfo implements Serializable,
     }
 
     /**
-     * @param elements
-     *            the elements to set
+     * @param elements the elements to set
      */
     public void setFolderElements(List<IGPFolderElements> folderElements) {
         Collections.sort(folderElements);
@@ -123,8 +130,7 @@ public class GPFolderClientInfo implements Serializable,
      */
     @Override
     public String toString() {
-        return "GPFolderClientInfo [label=" + label + ", zIndex=" + zIndex
-                + ", layers=" + folderElements + "]";
+        return "GPFolderClientInfo{" + "label=" + label + ", zIndex=" + zIndex + ", folderElements=" + folderElements + ", parent=" + parent + ", numberOfDescendants=" + numberOfDescendants + ", checked=" + checked + ", id=" + id + ", expanded=" + expanded + '}';
     }
 
     @Override

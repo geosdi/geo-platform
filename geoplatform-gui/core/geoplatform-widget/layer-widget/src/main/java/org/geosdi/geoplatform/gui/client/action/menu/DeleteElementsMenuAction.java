@@ -33,51 +33,29 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
+package org.geosdi.geoplatform.gui.client.action.menu;
 
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-import com.extjs.gxt.ui.client.widget.Dialog;
+import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.action.toolbar.responsibility.DeleteRequestManager;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class DeleteRequestManager {
-    
-    private TreePanel<GPBeanTreeModel> tree;
-    private DeleteRequestHandler deleteFolder;
-    private DeleteRequestHandler deleteLayer;
-    
-    public DeleteRequestManager(TreePanel theTree) {
-        this.tree = theTree;
-        initChain();
+public class DeleteElementsMenuAction extends MenuBaseAction {
+
+    private DeleteRequestManager deleteManager;
+
+    public DeleteElementsMenuAction(TreePanel theTree) {
+        super("Delete Selected Elements", BasicWidgetResources.ICONS.delete());
+        this.deleteManager = new DeleteRequestManager(theTree);
     }
-    
-    public void processRequest() {
-        GeoPlatformMessage.confirmMessage("Delete Layer",
-                "Are you sure you want to delete the selected element(s)?",
-                new Listener<MessageBoxEvent>() {
-                    @Override
-                    public void handleEvent(MessageBoxEvent be) {
-                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                            for (GPBeanTreeModel model :
-                                    DeleteRequestManager.this.tree.getSelectionModel().getSelectedItems()) {
-                                DeleteRequestManager.this.deleteFolder.deleteRequest(model);
-                            }
-                        }
-                    }
-                });
-        
-    }
-    
-    private void initChain() {
-        this.deleteFolder = new DeleteFolderHandler(tree);
-        this.deleteLayer = new DeleteLayerHandler(tree);
-        this.deleteFolder.setSuperiorRequestHandler(deleteLayer);
+
+    @Override
+    public void componentSelected(MenuEvent e) {
+        this.deleteManager.processRequest();
     }
 }

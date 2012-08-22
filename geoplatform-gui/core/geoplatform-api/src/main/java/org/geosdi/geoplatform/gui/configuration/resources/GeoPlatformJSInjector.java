@@ -33,57 +33,54 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components;
+package org.geosdi.geoplatform.gui.configuration.resources;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.resources.CatalogResourcesConfigurator;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.tab.GPCatalogTabWidget;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.HeadElement;
+import com.google.gwt.dom.client.ScriptElement;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class MainViewFinderWidget extends GeoPlatformContentPanel {
+public class GeoPlatformJSInjector extends GPAbstractInjector {
 
-    private GPEventBus bus;
-    private GPCatalogTabWidget tabWidget;
+    public static void inject(String... javascripts) {
+        assert javascripts != null : "The element passed must not be null";
 
-    @Inject
-    public MainViewFinderWidget(GPEventBus bus,
-            GPCatalogTabWidget theTabWidget,
-            CatalogResourcesConfigurator resourcesConfigurator) {
-        super(true);
-        this.bus = bus;
-        this.tabWidget = theTabWidget;
-        resourcesConfigurator.configure();
+        for (String javascript : javascripts) {
+            GeoPlatformJSInjector.inject(javascript);
+        }
     }
 
-    public MainViewFinderWidget() {
-        super(false);
+    /**
+     * <p> Create
+     * {@code <script type="text/javascript" language="javascript">...</script>}
+     * element in the Document Header. </p>
+     *
+     * @param javascript
+     */
+    public static void inject(String javascript) {
+        assert (javascript != null && !javascript.equals("")) : "Javascript must not be null or Empty String";
+
+        HeadElement head = getHead();
+        ScriptElement element = createScriptElement();
+        element.setText(javascript);
+        head.appendChild(element);
     }
 
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setHeaderVisible(false);
-    }
-
-    @Override
-    public void addComponent() {
-//        this.tabWidget.buildWidget();
-        super.add(this.tabWidget);
-    }
-
-    @Override
-    public void reset() {
-        tabWidget.reset();
+    private static ScriptElement createScriptElement() {
+        ScriptElement script = Document.get().createScriptElement();
+        script.setAttribute(
+                ScriptKeywordEnum.SCRIPT_LANGUAGE.getValue().getKey(),
+                ScriptKeywordEnum.SCRIPT_LANGUAGE.getValue().getValue());
+        script.setAttribute(
+                ScriptKeywordEnum.SCRIPT_TYPE.getValue().getKey(),
+                ScriptKeywordEnum.SCRIPT_TYPE.getValue().getValue());
+        script.setAttribute(
+                ScriptKeywordEnum.SCRIPT_CHARSET.getValue().getKey(),
+                ScriptKeywordEnum.SCRIPT_CHARSET.getValue().getValue());
+        return script;
     }
 }

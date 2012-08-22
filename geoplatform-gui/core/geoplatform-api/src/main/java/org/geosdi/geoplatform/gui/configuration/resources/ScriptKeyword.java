@@ -33,57 +33,65 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.resources.CatalogResourcesConfigurator;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.tab.GPCatalogTabWidget;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+package org.geosdi.geoplatform.gui.configuration.resources;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class MainViewFinderWidget extends GeoPlatformContentPanel {
+public class ScriptKeyword {
 
-    private GPEventBus bus;
-    private GPCatalogTabWidget tabWidget;
+    private String key;
+    private String value;
 
-    @Inject
-    public MainViewFinderWidget(GPEventBus bus,
-            GPCatalogTabWidget theTabWidget,
-            CatalogResourcesConfigurator resourcesConfigurator) {
-        super(true);
-        this.bus = bus;
-        this.tabWidget = theTabWidget;
-        resourcesConfigurator.configure();
+    public ScriptKeyword(String theKey, String theValue) {
+        this.key = theKey;
+        this.value = theValue;
     }
 
-    public MainViewFinderWidget() {
-        super(false);
+    /**
+     * @return the key
+     */
+    public String getKey() {
+        return key;
     }
 
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setHeaderVisible(false);
+    /**
+     * @return the value
+     */
+    public String getValue() {
+        return value;
     }
 
     @Override
-    public void addComponent() {
-//        this.tabWidget.buildWidget();
-        super.add(this.tabWidget);
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + (this.key != null ? this.key.hashCode() : 0);
+        hash = 37 * hash + (this.value != null ? this.value.hashCode() : 0);
+        return hash;
     }
 
     @Override
-    public void reset() {
-        tabWidget.reset();
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ScriptKeyword other = (ScriptKeyword) obj;
+        if ((this.key == null) ? (other.key != null) : !this.key.equals(other.key)) {
+            return false;
+        }
+        if ((this.value == null) ? (other.value != null) : !this.value.equals(other.value)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ScriptKeyword{ " + "key = " + key + ", value = " + value + '}';
     }
 }

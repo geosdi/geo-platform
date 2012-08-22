@@ -33,14 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components;
+package org.geosdi.geoplatform.gui.client.resources;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.resources.CatalogResourcesConfigurator;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.tab.GPCatalogTabWidget;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.configuration.resources.GPResourcesConfigurator;
 
 /**
  *
@@ -48,42 +45,15 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class MainViewFinderWidget extends GeoPlatformContentPanel {
-
-    private GPEventBus bus;
-    private GPCatalogTabWidget tabWidget;
+public class CatalogResourcesConfigurator extends GPResourcesConfigurator<GPCatalogConfigurator> {
 
     @Inject
-    public MainViewFinderWidget(GPEventBus bus,
-            GPCatalogTabWidget theTabWidget,
-            CatalogResourcesConfigurator resourcesConfigurator) {
-        super(true);
-        this.bus = bus;
-        this.tabWidget = theTabWidget;
-        resourcesConfigurator.configure();
-    }
-
-    public MainViewFinderWidget() {
-        super(false);
+    public CatalogResourcesConfigurator(GPCatalogConfigurator theConfigurator) {
+        super(theConfigurator);
     }
 
     @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setHeaderVisible(false);
-    }
-
-    @Override
-    public void addComponent() {
-//        this.tabWidget.buildWidget();
-        super.add(this.tabWidget);
-    }
-
-    @Override
-    public void reset() {
-        tabWidget.reset();
+    public void configure() {
+        super.injectCss(configurator.getResources().gpCatalogFinderCss());
     }
 }

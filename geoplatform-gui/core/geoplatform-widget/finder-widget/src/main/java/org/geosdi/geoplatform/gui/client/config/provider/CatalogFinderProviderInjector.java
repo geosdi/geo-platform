@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.resources.GPCatalogConfigurator;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogBBoxComponent;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogCheckBoxComponent;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogComboBoxComponent;
@@ -73,7 +74,8 @@ public class CatalogFinderProviderInjector extends AbstractGinModule {
         bind(TimeInfo.class).toProvider(TimeInfoProvider.class).
                 in(Singleton.class);
 
-        bind(MapMoveEndListener.class).toProvider(CatalogMapMoveListenerProvider.class).
+        bind(MapMoveEndListener.class).toProvider(
+                CatalogMapMoveListenerProvider.class).
                 in(Singleton.class);
 
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
@@ -98,5 +100,8 @@ public class CatalogFinderProviderInjector extends AbstractGinModule {
 
         bind(MetadataSelectionManager.class).toProvider(
                 MetadataSelectionManagerProvider.class).in(Singleton.class);
+        
+        bind(GPCatalogConfigurator.class).toProvider(
+                GPCatalogConfiguratorProvider.class).in(Singleton.class);
     }
 }

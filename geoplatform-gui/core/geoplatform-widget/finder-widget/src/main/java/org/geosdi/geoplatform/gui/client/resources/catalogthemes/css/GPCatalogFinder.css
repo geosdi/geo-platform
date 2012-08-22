@@ -1,0 +1,47 @@
+/** Add css rules here for your application. */
+
+.catalog-Label {
+    color: #4169E1;
+    font: normal 14px tahoma, arial, helvetica, sans-serif;
+}
+
+.records-Container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.searchResult-Widget{
+    padding: 10px;
+}
+
+.searchResult-Label{
+    color: #4169E1;
+    font: normal 14px tahoma, arial, helvetica, sans-serif;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.searchOperation-Label{
+    color: #4169E1;
+    font: normal 14px tahoma, arial, helvetica, sans-serif;
+}
+
+.catalogSearch-Label{
+    color: #4169E1;
+    font: normal 14px tahoma, arial, helvetica, sans-serif;
+}
+
+.catalogOptions-Label{
+    color: #4169E1;
+    font: normal 14px tahoma, arial, helvetica, sans-serif;
+}
+
+.catalogBBOX-Label{
+    background-color: white;
+    font: normal 10px tahoma, arial, helvetica, sans-serif;
+}
+
+.comboType-Label{
+    background-color: white;
+    font: normal 12px tahoma, arial, helvetica, sans-serif;
+}

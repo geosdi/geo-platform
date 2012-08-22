@@ -33,57 +33,63 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components;
+package org.geosdi.geoplatform.gui.configuration.resources;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.resources.CatalogResourcesConfigurator;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.tab.GPCatalogTabWidget;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.LinkElement;
+import com.google.gwt.dom.client.StyleInjector;
+import com.google.gwt.resources.client.TextResource;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class MainViewFinderWidget extends GeoPlatformContentPanel {
+public class GeoPlatformStyleInjector extends GPAbstractInjector {
 
-    private GPEventBus bus;
-    private GPCatalogTabWidget tabWidget;
-
-    @Inject
-    public MainViewFinderWidget(GPEventBus bus,
-            GPCatalogTabWidget theTabWidget,
-            CatalogResourcesConfigurator resourcesConfigurator) {
-        super(true);
-        this.bus = bus;
-        this.tabWidget = theTabWidget;
-        resourcesConfigurator.configure();
+    public static void injectCss(String cssName) {
+        assert cssName != null : "The Css must not be null.";
+        StyleInjector.inject(cssName);
     }
 
-    public MainViewFinderWidget() {
-        super(false);
+    public static void injectCssFile(String cssFileName) {
+        assert cssFileName != null : "Css File Name must not be null";
+
+        LinkElement linkElem = Document.get().createLinkElement();
+        linkElem.setRel("stylesheet");
+        linkElem.setType("text/css");
+        linkElem.setHref(GWT.getModuleName() + cssFileName);
+        getHead().appendChild(linkElem);
     }
 
-    @Override
-    public void initSize() {
+    public static void injectCss(String... css) {
+        assert css != null : "The Css Parameter must not be null.";
+        
+        for (String cssName : css) {
+            injectCss(cssName);
+        }
     }
 
-    @Override
-    public void setPanelProperties() {
-        super.setHeaderVisible(false);
-    }
+    public static void injectCssFile(String... cssFileNames) {
+        assert cssFileNames != null : "Parameter Css File Names must not be null.";
 
-    @Override
-    public void addComponent() {
-//        this.tabWidget.buildWidget();
-        super.add(this.tabWidget);
+        for (String cssFileName : cssFileNames) {
+            injectCssFile(cssFileName);
+        }
     }
-
-    @Override
-    public void reset() {
-        tabWidget.reset();
+    
+    public static void injectCss(TextResource resource) {
+        assert resource != null : "Parameter Resource must not be null";
+        
+        injectCss(resource.getText());
+    }
+    
+    public static void injectCss(TextResource... resources) {
+        assert resources != null : "Parameter Resources must not be null";
+        
+        for (TextResource textResource : resources) {
+            injectCss(textResource.getText());
+        }
     }
 }

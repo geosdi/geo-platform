@@ -33,57 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components;
+package org.geosdi.geoplatform.gui.configuration.resources;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.resources.CatalogResourcesConfigurator;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.tab.GPCatalogTabWidget;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import com.google.gwt.resources.client.TextResource;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class MainViewFinderWidget extends GeoPlatformContentPanel {
+public abstract class GPResourcesConfigurator<C extends GPConfigurator> implements
+        ClientResourcesConfigurator<TextResource> {
+    
+    protected C configurator;
 
-    private GPEventBus bus;
-    private GPCatalogTabWidget tabWidget;
-
-    @Inject
-    public MainViewFinderWidget(GPEventBus bus,
-            GPCatalogTabWidget theTabWidget,
-            CatalogResourcesConfigurator resourcesConfigurator) {
-        super(true);
-        this.bus = bus;
-        this.tabWidget = theTabWidget;
-        resourcesConfigurator.configure();
-    }
-
-    public MainViewFinderWidget() {
-        super(false);
+    public GPResourcesConfigurator(C theConfigurator) {
+        this.configurator = theConfigurator;
     }
 
     @Override
-    public void initSize() {
+    public void injectCss(TextResource resource) {
+        GeoPlatformStyleInjector.injectCss(resource.getText());
     }
 
     @Override
-    public void setPanelProperties() {
-        super.setHeaderVisible(false);
+    public void injectCss(TextResource... resources) {
+        GeoPlatformStyleInjector.injectCss(resources);
     }
 
     @Override
-    public void addComponent() {
-//        this.tabWidget.buildWidget();
-        super.add(this.tabWidget);
+    public void injectJavascript(TextResource resource) {
+        GeoPlatformJSInjector.inject(resource.getText());
     }
 
     @Override
-    public void reset() {
-        tabWidget.reset();
+    public void injectJavascript(TextResource... resources) {
+        for (TextResource textResource : resources) {
+            GeoPlatformJSInjector.inject(textResource.getText());
+        }
     }
+
+    public abstract void configure();
 }

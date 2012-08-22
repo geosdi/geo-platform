@@ -385,7 +385,6 @@ class ProjectServiceImpl {
 
         // Update all properties (except the account and project reference)
         orig.setPermissionMask(accountProject.getPermissionMask());
-        orig.setChecked(accountProject.isChecked());
         orig.setBaseLayer(accountProject.getBaseLayer());
 
         accountProjectDao.merge(orig);

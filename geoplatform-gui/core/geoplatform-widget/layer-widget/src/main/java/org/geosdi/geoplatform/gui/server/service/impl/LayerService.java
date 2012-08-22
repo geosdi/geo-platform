@@ -467,7 +467,7 @@ public class LayerService implements ILayerService {
         }
         try {
             geoPlatformServiceClient.saveFolderProperties(memento.getIdBaseElement(),
-                    memento.getName(), memento.isChecked());
+                    memento.getName(), memento.isChecked(), memento.isExpanded());
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);

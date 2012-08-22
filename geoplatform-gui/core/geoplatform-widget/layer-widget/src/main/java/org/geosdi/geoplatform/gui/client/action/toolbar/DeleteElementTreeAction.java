@@ -52,7 +52,7 @@ public class DeleteElementTreeAction extends ToolbarLayerTreeAction {
 
     public DeleteElementTreeAction(TreePanel theTree) {
         super(theTree, BasicWidgetResources.ICONS.delete(),
-                "Delete Selected Element");
+                "Delete Selected Elements");
         this.deleteManager = new DeleteRequestManager(theTree);
     }
 

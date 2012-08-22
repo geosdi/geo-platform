@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -58,7 +55,7 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class DeleteFolderHandler extends DeleteRequestHandler {
 
@@ -71,27 +68,15 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
     @Override
     public void deleteRequest(GPBeanTreeModel model) {
         if (model instanceof FolderTreeNode) {
-            GeoPlatformMessage.confirmMessage("Delete Folder",
-                    "Are you sure you want to delete the Folder "
-                    + ((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem()).getLabel()
-                    + " ?",
-                    new Listener<MessageBoxEvent>() {
-
-                        @Override
-                        public void handleEvent(MessageBoxEvent be) {
-                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                                processRequest();
-                            }
-                        }
-                    });
+            this.processRequest(model);
         } else {
-            forwardDeleteRequest(model);
+            super.forwardDeleteRequest(model);
         }
     }
 
     @Override
-    public void processRequest() {
-        super.delete();
+    public void processRequest(GPBeanTreeModel model) {
+        super.delete(model);
     }
 
     @Override
@@ -106,7 +91,6 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
         memento.convertMementoToWs();
         LayerRemote.Util.getInstance().saveDeletedFolderAndTreeModifications(
                 memento, new AsyncCallback<Boolean>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {

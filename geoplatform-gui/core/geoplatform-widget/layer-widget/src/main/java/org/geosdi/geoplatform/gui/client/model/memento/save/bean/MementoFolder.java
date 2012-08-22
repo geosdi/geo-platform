@@ -50,8 +50,6 @@ public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
     private Long idParent;
     private transient FolderTreeNode refParent;
     private int numberOfDescendants;
-    private boolean checked;
-    private boolean expanded;
 
     public MementoFolder() {
     }
@@ -74,14 +72,6 @@ public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
 
     public void setFolderName(String folderName) {
         this.folderName = folderName;
-    }
-
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
     }
 
     public int getNumberOfDescendants() {
@@ -126,13 +116,5 @@ public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
      */
     public void setIdParent(Long idParent) {
         this.idParent = idParent;
-    }
-
-    public boolean isExpanded() {
-        return expanded;
-    }
-
-    public void setExpanded(boolean expanded) {
-        this.expanded = expanded;
     }
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -69,20 +70,18 @@ public class MementoSaveBuilder {
             memento.setRefBaseElement(folder);
             folder.getObservable().addObserver(memento);
         }
-        memento.setFolderName(folder.getLabel());
         memento.setRefParent((folder.getParent() instanceof FolderTreeNode) ? (FolderTreeNode) folder.getParent() : null);
-        memento.setChecked(folder.isChecked());
         memento.setNumberOfDescendants(folder.getNumberOfDescendants());
         memento.setzIndex(folder.getzIndex());
+        memento.setFolderName(folder.getLabel());
         return memento;
     }
 
     public static List<AbstractMementoLayer> generateMementoLayerList(List<GPBeanTreeModel> layers) {
-        List<AbstractMementoLayer> mementoLayerList = new ArrayList<AbstractMementoLayer>();
+        List<AbstractMementoLayer> mementoLayerList = Lists.newArrayList();
         for (GPBeanTreeModel beanModel : layers) {
             GPLayerTreeModel layer = null;
             AbstractMementoLayer memento = null;
-
             if (beanModel instanceof RasterTreeNode) {
                 layer = ((RasterTreeNode) beanModel);
                 memento = new MementoRaster();
@@ -93,7 +92,6 @@ public class MementoSaveBuilder {
                 memento = new MementoVector();
             }
             MementoSaveBuilder.convertToMementoLayerFromLayerModel(memento, layer);
-
             mementoLayerList.add(memento);
         }
         System.out.println("Memento layer list size: " + mementoLayerList.size());
@@ -101,7 +99,7 @@ public class MementoSaveBuilder {
     }
 
     private static List<String> convertStyles(ArrayList<GPStyleStringBeanModel> styles) {
-        List<String> stringList = new ArrayList<String>(styles.size());
+        List<String> stringList = Lists.newArrayList();
         for (GPStyleStringBeanModel gPStyleStringBeanModel : styles) {
             stringList.add(gPStyleStringBeanModel.getStyleString());
         }

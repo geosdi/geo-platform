@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -74,7 +75,7 @@ public class FolderDTO extends AbstractElementDTO {
      */
     public FolderDTO(GPFolder folder) {
         super(folder.getId(), folder.getName(), folder.getPosition(),
-              folder.isShared(), folder.isChecked());
+                folder.isShared(), folder.isChecked());
         this.expanded = folder.isExpanded();
         this.numberOfDescendants = folder.getNumberOfDescendants();
         this.elementList = new ArrayList<IElementDTO>();
@@ -144,7 +145,7 @@ public class FolderDTO extends AbstractElementDTO {
     }
 
     public static List<FolderDTO> convertToFolderDTOList(List<GPFolder> folders) {
-        List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folders.size());
+        List<FolderDTO> foldersDTO = Lists.newArrayListWithCapacity(folders.size());
 
         for (GPFolder folder : folders) {
             FolderDTO folderDTO = new FolderDTO(folder);

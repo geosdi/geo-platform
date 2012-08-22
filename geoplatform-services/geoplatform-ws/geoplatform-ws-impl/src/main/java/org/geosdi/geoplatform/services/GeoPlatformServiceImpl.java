@@ -635,9 +635,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long saveFolderProperties(Long folderID, String name, boolean checked)
+    public Long saveFolderProperties(Long folderID, String name, boolean checked,
+            boolean expanded)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.saveFolderProperties(folderID, name, checked);
+        return folderServiceDelegate.saveFolderProperties(folderID, name,
+                checked, expanded);
     }
 
     @Override

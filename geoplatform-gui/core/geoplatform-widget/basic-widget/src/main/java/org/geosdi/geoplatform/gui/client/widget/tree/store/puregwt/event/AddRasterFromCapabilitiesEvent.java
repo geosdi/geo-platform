@@ -39,7 +39,7 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
  *
@@ -48,9 +48,9 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  */
 public class AddRasterFromCapabilitiesEvent extends GwtEvent<GPTreeStoreEventHandler> {
     
-    private List<GPLayerBean> layers;
+    private List<GPRasterBean> layers;
     
-    public AddRasterFromCapabilitiesEvent(List<GPLayerBean> theLayers) {
+    public AddRasterFromCapabilitiesEvent(List<GPRasterBean> theLayers) {
         this.layers = theLayers;
     }
 

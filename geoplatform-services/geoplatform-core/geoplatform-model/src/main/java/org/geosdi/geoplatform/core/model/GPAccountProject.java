@@ -84,9 +84,6 @@ public class GPAccountProject implements Serializable {
     @Column(name = "permission_mask", nullable = false)
     private int permissionMask = BasePermission.ADMINISTRATION.getMask();
     //
-    @Column
-    private boolean checked = Boolean.FALSE;
-    //
     @Column(name = "base_layer", nullable = false)
     private String baseLayer = "GOOGLE_SATELLITE";
 
@@ -98,8 +95,7 @@ public class GPAccountProject implements Serializable {
     }
 
     /**
-     * @param id
-     *          the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -127,18 +123,15 @@ public class GPAccountProject implements Serializable {
     }
 
     /**
-     * @param project
-     *          the project to set
+     * @param project the project to set
      */
     public void setProject(GPProject project) {
         this.project = project;
     }
 
     /**
-     * @param account
-     *          the account to set
-     * @param project
-     *          the project to set
+     * @param account the account to set
+     * @param project the project to set
      */
     public void setAccountAndProject(GPAccount account, GPProject project) {
         this.account = account;
@@ -153,15 +146,14 @@ public class GPAccountProject implements Serializable {
     }
 
     /**
-     * @param permissionMask
-     *          the permissionMask to set
+     * @param permissionMask the permissionMask to set
      */
     public void setPermissionMask(int permissionMask) {
         this.permissionMask = permissionMask;
     }
 
     /**
-     * 
+     *
      * @return the baseLayer setted
      */
     public String getBaseLayer() {
@@ -169,26 +161,11 @@ public class GPAccountProject implements Serializable {
     }
 
     /**
-     * 
-     * @param baseLayer 
+     *
+     * @param baseLayer
      */
     public void setBaseLayer(String baseLayer) {
         this.baseLayer = baseLayer;
-    }
-
-    /**
-     * @return the checked
-     */
-    public boolean isChecked() {
-        return checked;
-    }
-
-    /**
-     * @param checked
-     *            the checked to set
-     */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
     }
 
     /**
@@ -211,12 +188,12 @@ public class GPAccountProject implements Serializable {
             str.append(", project=NULL");
         }
         str.append(", permission=").append(permissionMask);
-        str.append(", checked=").append(checked);
         return str.append("}").toString();
     }
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -238,6 +215,7 @@ public class GPAccountProject implements Serializable {
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override

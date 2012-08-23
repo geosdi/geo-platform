@@ -4,3 +4,4 @@ target
 .project
 *.class
 *.pyc
+/geoplatform-gui/demos/catalog-finder-demo/war/WEB-INF/classes/

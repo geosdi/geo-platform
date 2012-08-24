@@ -13,8 +13,9 @@
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-3.1.xsd"
        default-autowire="byName">
-
-    <!-- Scan for @Autowired and @PostConstruct Annotations-->
+    
     <context:annotation-config/>
+    
+    <context:component-scan base-package="org.geosdi.geoplatform.connectors.ws"/>
 
 </beans>

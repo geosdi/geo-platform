@@ -173,10 +173,10 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                 @Override
                 public void onSuccess(ArrayList<GPFolderClientInfo> result) {
                     root.modelConverter(result);
-                    store.add(root, true);
+                    store.add(root, Boolean.TRUE);
                     visitorDisplay.enableCheckedComponent(root);
-                    initialized = true;
-                    tree.setExpanded(root, true);
+                    initialized = Boolean.TRUE;
+                    tree.setExpanded(root, Boolean.TRUE);
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Tree elements loaded successfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());

@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.impl.users.options.UserTreeOptions;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
@@ -187,6 +188,7 @@ public class SecurityService implements ISecurityService {
 //        session.removeAttribute(SessionProperty.LOGGED_ACCOUNT.toString());
 //    }
 //
+
     @Override
     public void invalidateSession(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
@@ -219,8 +221,11 @@ public class SecurityService implements ISecurityService {
     private IGPAccountDetail convertAccountToDTO(GPAccount account, GPAccountProject accountProject,
             GPViewport viewport) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
+        UserTreeOptions usertreeOptions = new UserTreeOptions();
         accountDetail.setUsername(account.getStringID()); // Forced representation
         accountDetail.setOrganization(account.getOrganization().getName());
+        usertreeOptions.setLoadExpandedFolder(account.isLoadExpandedFolder());
+        accountDetail.setTreeOptions(usertreeOptions);
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;
             accountDetail.setName(user.getName());

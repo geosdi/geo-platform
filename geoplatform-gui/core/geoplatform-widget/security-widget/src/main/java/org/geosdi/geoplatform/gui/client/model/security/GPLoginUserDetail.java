@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.model.security;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 
 /**
@@ -60,6 +61,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     private String baseLayer;
     private GPClientViewport viewport;
     private Map<String, Boolean> componentPermission;
+    private IGPTreeOptions treeOptions;
 
     public GPLoginUserDetail() {
     }
@@ -153,5 +155,14 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     @Override
     public GPClientViewport getViewport() {
         return this.viewport;
+    }
+
+    @Override
+    public IGPTreeOptions getTreeOptions() {
+        return this.treeOptions;
+    }
+
+    public void setTreeOptions(IGPTreeOptions treeOptions) {
+        this.treeOptions = treeOptions;
     }
 }

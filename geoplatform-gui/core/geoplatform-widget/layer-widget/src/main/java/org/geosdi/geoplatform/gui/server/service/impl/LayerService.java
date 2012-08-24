@@ -119,13 +119,23 @@ public class LayerService implements ILayerService {
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         Long projectId = null;
+        GPAccount account;
         try {
+            account = this.sessionUtility.getLoggedAccount(httpServletRequest);
             projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
-            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        List<FolderDTO> folderList = geoPlatformServiceClient.getRootFoldersByProjectID(projectId);
+        List<FolderDTO> folderList = Lists.newArrayList();
+        if (account.isLoadExpandedFolder()) {
+            try {
+                geoPlatformServiceClient.getExpandedElementsByProjectID(projectId);
+            } catch (ResourceNotFoundFault rnf) {
+                logger.debug("Returning no elements: " + rnf);
+            }
+        } else {
+            folderList = geoPlatformServiceClient.getRootFoldersByProjectID(projectId);
+        }
         return this.dtoConverter.convertOnlyFolder(folderList);
     }
 
@@ -137,12 +147,13 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(timeout);
         }
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(folderID);
+        ArrayList<IGPFolderElements> elementsToReturn = Lists.newArrayListWithCapacity(0);
         try {
-            return this.dtoConverter.convertFolderElements(folderElements);
+            elementsToReturn = this.dtoConverter.convertFolderElements(folderElements);
         } catch (Exception e) {
             logger.debug("Returning no elements: " + e);
         }
-        return Lists.newArrayListWithCapacity(0);
+        return elementsToReturn;
     }
 
     @Override

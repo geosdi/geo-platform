@@ -56,6 +56,7 @@ public class ProjectDTO {
     private String name;
     private Integer numberOfElements;
     private Integer version;
+    private Boolean shared;
     //
     @XmlElementWrapper(name = "rootFolders")
     @XmlElement(name = "folder")
@@ -77,6 +78,7 @@ public class ProjectDTO {
         this.name = project.getName();
         this.numberOfElements = project.getNumberOfElements();
         this.version = project.getVersion();
+        this.shared = project.isShared();
     }
 
     /**
@@ -136,6 +138,20 @@ public class ProjectDTO {
     }
 
     /**
+     * @return the shared
+     */
+    public Boolean getShared() {
+        return shared;
+    }
+
+    /**
+     * @param shared the shared to set
+     */
+    public void setShared(Boolean shared) {
+        this.shared = shared;
+    }
+
+    /**
      * @param rootFolders to set
      */
     public List<FolderDTO> getRootFolders() {
@@ -153,15 +169,16 @@ public class ProjectDTO {
     public String toString() {
         return "ProjectDTO{"
                 + "id=" + id
-                + ", version=" + version
                 + ", name=" + name
                 + ", numberOfElements=" + numberOfElements
+                + ", version=" + version
+                + ", shared=" + shared
                 + ", rootFolders=" + rootFolders + '}';
     }
 
     /**
      * Convert an instance of ProjectDTO to {@link GPProject}: will convert all
-     * fields unless version field.
+     * fields unless version and shared fields.
      */
     public static GPProject convertToGPProject(ProjectDTO projectDTO) {
         GPProject project = new GPProject();

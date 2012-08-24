@@ -55,25 +55,30 @@ public class ProjectDTO {
     private Long id;
     private String name;
     private Integer numberOfElements;
+    private Integer version;
+    private Boolean shared;
     //
     @XmlElementWrapper(name = "rootFolders")
     @XmlElement(name = "folder")
     private List<FolderDTO> rootFolders;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public ProjectDTO() {
     }
 
     /**
-     * Constructor with GPProject as arg
+     * Constructor with GPProject as arg.
+     *
      * @param project
      */
     public ProjectDTO(GPProject project) {
         this.id = project.getId();
         this.name = project.getName();
         this.numberOfElements = project.getNumberOfElements();
+        this.version = project.getVersion();
+        this.shared = project.isShared();
     }
 
     /**
@@ -84,8 +89,7 @@ public class ProjectDTO {
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -115,8 +119,36 @@ public class ProjectDTO {
     /**
      * @param numberOfElements to set
      */
-    public void setNumberOfElements(int numberOfElements) {
+    public void setNumberOfElements(Integer numberOfElements) {
         this.numberOfElements = numberOfElements;
+    }
+
+    /**
+     * @return the version
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    /**
+     * @return the shared
+     */
+    public Boolean getShared() {
+        return shared;
+    }
+
+    /**
+     * @param shared the shared to set
+     */
+    public void setShared(Boolean shared) {
+        this.shared = shared;
     }
 
     /**
@@ -127,7 +159,7 @@ public class ProjectDTO {
     }
 
     /**
-     * @param rootFolders to set
+     * @param rootFolders the rootFolders to set
      */
     public void setRootFolders(List<FolderDTO> rootFolders) {
         this.rootFolders = rootFolders;
@@ -139,9 +171,15 @@ public class ProjectDTO {
                 + "id=" + id
                 + ", name=" + name
                 + ", numberOfElements=" + numberOfElements
+                + ", version=" + version
+                + ", shared=" + shared
                 + ", rootFolders=" + rootFolders + '}';
     }
 
+    /**
+     * Convert an instance of ProjectDTO to {@link GPProject}: will convert all
+     * fields unless version and shared fields.
+     */
     public static GPProject convertToGPProject(ProjectDTO projectDTO) {
         GPProject project = new GPProject();
         project.setId(projectDTO.getId());
@@ -155,7 +193,7 @@ public class ProjectDTO {
     public static List<ProjectDTO> convertToProjectDTOList(List<GPProject> projects) {
         List<ProjectDTO> projectsDTO = new ArrayList<ProjectDTO>(projects.size());
 
-        for (GPProject project : projects) {            
+        for (GPProject project : projects) {
             projectsDTO.add(new ProjectDTO(project));
         }
 

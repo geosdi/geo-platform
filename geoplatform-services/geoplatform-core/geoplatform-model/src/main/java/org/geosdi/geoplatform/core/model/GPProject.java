@@ -85,6 +85,9 @@ public class GPProject implements Serializable {
     private Date creationDate = new Date(System.currentTimeMillis());
     //
     @Column
+    private int version;
+    //
+    @Column
     private boolean shared = false; // TODO Manage the sharing wrt permission into GPAccountProject
 
     /**
@@ -95,8 +98,7 @@ public class GPProject implements Serializable {
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -110,8 +112,7 @@ public class GPProject implements Serializable {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -125,16 +126,14 @@ public class GPProject implements Serializable {
     }
 
     /**
-     * @param numberOfElements
-     *          the numberOfElements to set
+     * @param numberOfElements the numberOfElements to set
      */
     public void setNumberOfElements(int numberOfElements) {
         this.numberOfElements = numberOfElements;
     }
 
     /**
-     * @param delta
-     *          the delta to set
+     * @param delta the delta to set
      */
     public void deltaToNumberOfElements(int delta) {
         this.numberOfElements += delta;
@@ -148,11 +147,24 @@ public class GPProject implements Serializable {
     }
 
     /**
-     * @param creationDate
-     *          the creationDate to set
+     * @param creationDate the creationDate to set
      */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    /**
+     * @return the version
+     */
+    public int getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     /**
@@ -171,6 +183,7 @@ public class GPProject implements Serializable {
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -178,9 +191,10 @@ public class GPProject implements Serializable {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append("id=").append(id);
         str.append(", name=").append(name);
-        str.append(", shared=").append(shared);
         str.append(", numberOfElements=").append(numberOfElements);
         str.append(", creationDate=").append(creationDate);
+        str.append(", version=").append(version);
+        str.append(", shared=").append(shared);
         return str.append('}').toString();
     }
 }

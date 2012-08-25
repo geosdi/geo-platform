@@ -1,77 +1,191 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Geo-platform : The first pure java opensource framework webgis oriented" />
+    <meta charset="utf-8">
+    <title>Geo-Platform Framework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/docs.css" rel="stylesheet">
+    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
 
-    <title>Geo-Platform</title>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-182438-10']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/geosdi/geo-platform">View on GitHub</a>
-
-          <h1 id="project_title">Geo-Platform</h1>
-          <h2 id="project_tagline">The first pure java opensource framework webgis oriented</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/geosdi/geo-platform/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/geosdi/geo-platform/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="brand">
+          <ul class="bs-docs-social-buttons">
+      <li>
+        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=geosdi&repo=geo-platform&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+      </li>
+      <li>
+        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=geosdi&repo=geo-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
+      </li>
+      <li class="follow-btn">
+        <a href="https://twitter.com/geosdi" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @geosdi</a>
+      </li>
+      <li class="tweet-btn">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://twitter.github.com/geo-platform/" data-count="horizontal" data-via="geosdi" data-related="mdo:Creator of Twitter Geo Platform">Tweet</a>
+      </li>
+    </ul></div>
+          
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">
+                <a href="./index.html">Home</a>
+              </li>
+              <!--<li class="">
+                <a href="./getting-started.html">Get started</a>
+              </li>-->
+           </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GeoPlatform.</h3>
 
-<p>Geo-Platform is geoSDI framework for the creation and the development of geoportals. Geo-Platform five pillars are :</p>
-<pre><code>Simplicity | Modularity | Flexibility, through widgets | Scalability | Power</code></pre>
+<div class="jumbotron masthead">
+  <div class="container">
+    <h1>geo-platform</h1>
+    <p>Sleek, intuitive, and powerful webgis framework for faster and easier webgis development.</p>
+    <p><a href="assets/bootstrap.zip" class="btn btn-primary btn-large" onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Download', 'Download 1.4.1']);">Download geo-platform</a></p>
+    <ul class="masthead-links">
+      <li><a href="http://github.com/geosdi/geo-platform" onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Jumbotron links', 'GitHub project']);">GitHub project</a></li>
+      <li><a href="./extend.html" onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Jumbotron links', 'Extend']);">Extend</a></li>
+    </ul>
+  </div>
+</div>
 
+<!--<div class="bs-docs-social">
+  <div class="container">
+    <ul class="bs-docs-social-buttons">
+      <li>
+        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=geosdi&repo=geo-platform&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+      </li>
+      <li>
+        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=geosdi&repo=geo-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
+      </li>
+      <li class="follow-btn">
+        <a href="https://twitter.com/geosdi" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @geosdi</a>
+      </li>
+      <li class="tweet-btn">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://twitter.github.com/geo-platform/" data-count="horizontal" data-via="geosdi" data-related="mdo:Creator of Twitter Geo Platform">Tweet</a>
+      </li>
+    </ul>
+  </div>-->
+</div>
 
-<p>Geo-Platform offers skills on a wide basis, to be expanded according to specific requirements, taking advantage of the development of tailor-made widgets. Its components are two big modules, which make it scalable and powerful:</p>
+<div class="container">
 
-<p><strong>Geo-Platform Services</strong> allow the business logic to be separated from the user’s interface. As far as concerns the cluster, Geo-platform can be scaled according to several needs. An API client allows the connection with the interface.</p>
+  <div class="marketing">
 
-<p><strong>Geo-Platform GUI</strong> is the structure taking care of whatever concerns the interface and the stack of services. GUI section contains several under-modules offering functions on different levels.</p>
+    <h1>Introducing geo-plaform.</h1>
+    <p class="marketing-byline">The first opensource framework webgis oriented. Pure Java.</p>
 
-<h3>Fork geosdi/geo-platform.git</h3>
-
-<p>Go to https://github.com/geosdi/geo-platform and fork the repo</p>
-
-<pre><code>$ git clone git@github.com:&lt;your account&gt;/geo-platform.git geo-platform
-</code></pre>
-
-<h3>Compile framework</h3>
-
-<pre><code>$ mvn clean install
-</code></pre>
-
-<h3>On IRC</h3>
-
-<pre><code>irc.freenode.net #geo-platform</code></pre>
-
-
-      </section>
+    <div class="row-fluid">
+      <div class="span4">
+        <!--<img src="assets/img/bs-docs-twitter-github.png">-->
+        <h2>Widgets, more widgets.</h2>
+        <p>Main strength of Geo-Platform is its modular structure. Actually the framework was conceived in order to have an application created throughout widgets, meaning through bonding elements which fulfil specific requirements.</p>
+      </div>
+      <div class="span4">
+        <!--<img src="assets/img/bs-docs-responsive-illustrations.png">-->
+        <h2>Service Oriented.</h2>
+        <p>Allow the business logic to be separated from the user’s interface. As far as concerns the cluster, Geo-platform can be scaled according to several needs. An API client allows the connection with the interface.</p>
+      </div>
+      <div class="span4">
+        <!--<img src="assets/img/bs-docs-bootstrap-features.png">-->
+        <h2>Enterprise framework.</h2>
+        <p>GeoPlatform is ideal for development in an enterprise environment, is meant for any project especially large. Try it now.</p>
+      </div>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Geo-platform maintained by <a href="https://github.com/geosdi">geosdi</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
     
+    <h1>Documentation is coming!</h1>
+
+    <hr class="soften">
+
+  </div>
+
+</div>
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>geo-platform is a geoSDI framework.</p>
+        <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">GPLv3+CE</a>.</p>
+        <ul class="footer-links">
+          <li><a href="http://www.geosdi.org/index.php/en/blog">Read the blog</a></li>
+          <li><a href="https://github.com/geosdi/geo-platform/issues?state=open">Submit issues</a></li>
+        </ul>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/google-code-prettify/prettify.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="assets/js/bootstrap-affix.js"></script>
+    <script src="assets/js/application.js"></script>
+
 
   </body>
 </html>

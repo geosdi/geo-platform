@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.catalogws;
 
 import java.util.List;
 import org.geosdi.geoplatform.catalogws.beans.GPCatalogEndPointImpl;
-import org.geosdi.geoplatform.connectors.ws.catalog.GPGeonetworkClientTestConnector;
+import org.geosdi.geoplatform.connectors.ws.geonetwork.GPGeonetworkClientTestConnector;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
@@ -49,17 +49,19 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
+@ActiveProfiles(profiles = {"dev"})
 public class GPCatalogWSTest {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -85,7 +87,8 @@ public class GPCatalogWSTest {
     @Test
     public void searchMetadata() {
         try {
-            List<GPCatalogMetadataDTO> metadataList = this.catalogClient.searchPublicMetadata("strade");
+            List<GPCatalogMetadataDTO> metadataList = this.catalogClient.searchPublicMetadata(
+                    "strade");
             Assert.assertFalse("Items not found", metadataList.isEmpty());
 
 

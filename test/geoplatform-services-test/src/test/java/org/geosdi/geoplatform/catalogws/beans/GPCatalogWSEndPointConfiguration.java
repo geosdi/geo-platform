@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.catalogws.beans;
 
+import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -44,6 +45,7 @@ import org.springframework.context.annotation.Configuration;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 @Configuration
+@Develop
 public class GPCatalogWSEndPointConfiguration {
 
     @Bean

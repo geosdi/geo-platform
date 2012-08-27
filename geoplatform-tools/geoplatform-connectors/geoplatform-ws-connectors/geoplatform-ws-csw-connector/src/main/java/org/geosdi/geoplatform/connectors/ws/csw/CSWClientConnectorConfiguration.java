@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connectors.ws.csw;
 
 import javax.annotation.Resource;
+import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +47,7 @@ import org.springframework.context.annotation.Configuration;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
+@Production
 public class CSWClientConnectorConfiguration {
     
     @Resource

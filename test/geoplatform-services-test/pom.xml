@@ -64,11 +64,11 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
+        <!--        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-tracking-impl</artifactId>
             <scope>runtime</scope>
-        </dependency>
+        </dependency> -->
         
         <dependency>
             <groupId>org.geosdi</groupId>

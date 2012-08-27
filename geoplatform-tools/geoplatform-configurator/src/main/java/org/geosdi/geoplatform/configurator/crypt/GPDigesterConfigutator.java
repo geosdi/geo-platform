@@ -38,12 +38,9 @@ package org.geosdi.geoplatform.configurator.crypt;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org 
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPDigesterConfigutator {
-    
-    
-    
 
     String digest(String plainText);
 

@@ -33,56 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws.tracking;
+package org.geosdi.geoplatform.connectors.ws.publish;
 
-import org.apache.cxf.endpoint.Client;
-import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.transport.http.HTTPConduit;
-import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
+import javax.annotation.Resource;
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
-import org.geosdi.geoplatform.services.GPTrackingService;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.geosdi.geoplatform.services.GPPublisherService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "geoPlatformTrackingClient")
+@Configuration
 @Production
-public class GPTrackingClientConnector extends GPAbstractWSClientConnector<GPTrackingService> {
+public class PublishClientConnectorConfiguration {
 
-    private @Value("${webservice_tracking_endpoint_address}")
-    String address;
+    @Resource
+    private GPPublishClientConnector gpPublishClientConnector;
 
-    public GPTrackingClientConnector() {
-        super(GPTrackingService.class);
-    }
-
-    @Override
-    protected void create() {
-        super.create();
-
-        Client client = ClientProxy.getClient(super.getEndpointService());
-
-        HTTPConduit http = (HTTPConduit) client.getConduit();
-
-        HTTPClientPolicy httpClientPolicy = new HTTPClientPolicy();
-        httpClientPolicy.setAllowChunking(false);
-        httpClientPolicy.setReceiveTimeout(0);
-
-        http.setClient(httpClientPolicy);
-    }
-
-    @Override
-    public String getAddress() {
-        return this.address;
-    }
-
-    @Override
-    public void setAddress(String theAddress) {
-        this.address = theAddress;
+    @Bean
+    public GPPublisherService geoPlatformPublishClient() {
+        return this.gpPublishClientConnector.getEndpointService();
     }
 }

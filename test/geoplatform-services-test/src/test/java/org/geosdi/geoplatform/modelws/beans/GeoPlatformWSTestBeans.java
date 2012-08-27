@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.modelws.beans;
 
+import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.geosdi.geoplatform.services.GeoPlatformServiceImpl;
@@ -46,6 +47,7 @@ import org.springframework.context.annotation.Configuration;
  * @email michele.santomauro@geosdi.org
  */
 @Configuration
+@Develop
 public class GeoPlatformWSTestBeans {
 
     @Bean

@@ -126,17 +126,18 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        List<FolderDTO> folderList = Lists.newArrayList();
+        List<FolderDTO> folderList = null;
         if (account.isLoadExpandedFolder()) {
             try {
-                geoPlatformServiceClient.getExpandedElementsByProjectID(projectId);
+                ProjectDTO project = geoPlatformServiceClient.getExpandedElementsByProjectID(projectId);
+                folderList = project.getRootFolders();
             } catch (ResourceNotFoundFault rnf) {
                 logger.debug("Returning no elements: " + rnf);
             }
         } else {
             folderList = geoPlatformServiceClient.getRootFoldersByProjectID(projectId);
         }
-        return this.dtoConverter.convertOnlyFolder(folderList);
+        return this.dtoConverter.convertOnlyFolders(folderList);
     }
 
     @Override

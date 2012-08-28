@@ -52,7 +52,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -60,6 +59,7 @@ import org.geosdi.geoplatform.gui.server.SessionUtility.SessionProperty;
 import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.geoplatform.responce.InfoPreview;
+import org.geosdi.geoplatform.services.GPPublisherService;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -73,14 +73,15 @@ public class UploadServlet extends HttpServlet {
     private static final long serialVersionUID = -1464439864247709647L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private PublisherFileUtils publisherFileUtils;
-    private GeoPlatformPublishClient geoPlatformPublishClient;
+    private GPPublisherService geoPlatformPublishClient;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.geoPlatformPublishClient = (GeoPlatformPublishClient) GeoPlatformContextUtil.getInstance().getBean(
+        this.geoPlatformPublishClient = (GPPublisherService) GeoPlatformContextUtil.getInstance().getBean(
                 "geoPlatformPublishClient");
-        this.publisherFileUtils = (PublisherFileUtils) GeoPlatformContextUtil.getInstance().getBean(PublisherFileUtils.class);
+        this.publisherFileUtils = (PublisherFileUtils) GeoPlatformContextUtil.getInstance().getBean(
+                PublisherFileUtils.class);
     }
 
     @Override
@@ -132,7 +133,8 @@ public class UploadServlet extends HttpServlet {
                     }
 
                     try {
-                        uploadedFile = this.publisherFileUtils.createFileWithUniqueName(fileName);
+                        uploadedFile = this.publisherFileUtils.createFileWithUniqueName(
+                                fileName);
                         item.write(uploadedFile);
                     } catch (Exception ex) {
                         logger.info("ERRORE : " + ex);
@@ -146,10 +148,12 @@ public class UploadServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_CREATED);
                     resp.flushBuffer();
                 }
-                List<InfoPreview> infoPreviews = this.manageUploadedFilePreview(uploadedFile, session.getId(), account.getStringID());
+                List<InfoPreview> infoPreviews = this.manageUploadedFilePreview(
+                        uploadedFile, session.getId(), account.getStringID());
                 resp.setContentType("text/x-json;charset=UTF-8");
                 resp.setHeader("Cache-Control", "no-cache");
-                String result = PublisherFileUtils.generateJSONObjects(infoPreviews);
+                String result = PublisherFileUtils.generateJSONObjects(
+                        infoPreviews);
                 resp.getWriter().write(result);
                 //geoPlatformPublishClient.publish("previews", "dataTest", infoPreview.getDataStoreName());
             } catch (FileUploadException ex) {
@@ -168,14 +172,16 @@ public class UploadServlet extends HttpServlet {
         }
     }
 
-    private List<InfoPreview> manageUploadedFilePreview(File uploadedFile, String sessionID, String username) {
+    private List<InfoPreview> manageUploadedFilePreview(File uploadedFile,
+            String sessionID, String username) {
         List<InfoPreview> previewList = null;
         String extension = uploadedFile.getAbsolutePath().substring(
-                uploadedFile.getAbsolutePath().lastIndexOf(".") + 1, uploadedFile.getAbsolutePath().lastIndexOf(".") + 4);
+                uploadedFile.getAbsolutePath().lastIndexOf(".") + 1,
+                uploadedFile.getAbsolutePath().lastIndexOf(".") + 4);
         System.out.println("Extension: " + extension);
         if (extension.equalsIgnoreCase(GPExtensions.ZIP.toString())) {
             try {
-                previewList = this.geoPlatformPublishClient.getPublishService().
+                previewList = this.geoPlatformPublishClient.
                         analyzeZIPEPSG(sessionID, username, uploadedFile);
             } catch (ResourceNotFoundFault ex) {
                 logger.info("Error on uploading shape: " + ex);
@@ -184,7 +190,7 @@ public class UploadServlet extends HttpServlet {
         } else if (extension.equalsIgnoreCase(GPExtensions.TIF.toString())) {
             try {
                 previewList = new ArrayList<InfoPreview>();
-                previewList.add(this.geoPlatformPublishClient.getPublishService().analyzeTIFInPreview(
+                previewList.add(this.geoPlatformPublishClient.analyzeTIFInPreview(
                         username, uploadedFile, true));
             } catch (ResourceNotFoundFault ex) {
                 logger.info("Error on uploading shape: " + ex);

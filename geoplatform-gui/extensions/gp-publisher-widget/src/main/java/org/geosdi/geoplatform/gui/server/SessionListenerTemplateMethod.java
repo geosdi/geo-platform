@@ -39,8 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.geosdi.geoplatform.services.GPPublisherService;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -57,7 +57,7 @@ public class SessionListenerTemplateMethod implements HttpSessionListener {
     @Override//This is the template method
     public void sessionDestroyed(HttpSessionEvent hse) {
         System.out.println("A new session destroyed");
-        GeoPlatformPublishClient geoPlatformPublishClient = (GeoPlatformPublishClient) GeoPlatformContextUtil.getInstance().getBean(
+        GPPublisherService geoPlatformPublishClient = (GPPublisherService) GeoPlatformContextUtil.getInstance().getBean(
                 "geoPlatformPublishClient");
 //        geoPlatformPublishClient.getPublishService().verifyAndDeleteSessionDir(hse.getSession().getId());
     }

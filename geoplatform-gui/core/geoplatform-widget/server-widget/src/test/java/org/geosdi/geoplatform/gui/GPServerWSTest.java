@@ -40,16 +40,18 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"applicationContext-Test.xml","classpath*:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath*:applicationContext.xml"})
+@ActiveProfiles(profiles = {"prod"})
 public class GPServerWSTest {
 
     @Autowired

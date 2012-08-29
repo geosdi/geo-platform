@@ -63,6 +63,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElemen
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -86,36 +87,46 @@ public class DTOConverter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public ArrayList<GPFolderClientInfo> convertOnlyFolder(
-            Collection<FolderDTO> folders) {
+    public ArrayList<GPFolderClientInfo> convertOnlyFolders(Collection<FolderDTO> folders) {
         ArrayList<GPFolderClientInfo> foldersClient = Lists.newArrayList();
         if (folders != null) {
             for (Iterator<FolderDTO> it = folders.iterator(); it.hasNext();) {
-                foldersClient.add(this.convertFolderElement(it.next()));
+                GPFolderClientInfo folder = this.convertFolderElement(it.next());
+                foldersClient.add(folder);
             }
         }
         return foldersClient;
     }
 
-    public ArrayList<IGPFolderElements> convertFolderElements(
-            TreeFolderElements folderElements) {
+    private ArrayList<IGPFolderElements> convertFolderElements(List<IElementDTO> folderElements) {
         ArrayList<IGPFolderElements> clientFolderElements = Lists.newArrayList();
-        Object element;
-        Iterator iterator = folderElements.iterator();
+        Iterator<IElementDTO> iterator = folderElements.iterator();
         while (iterator.hasNext()) {
-            element = iterator.next();
-            if (element instanceof RasterLayerDTO) {
-                clientFolderElements.add(this.convertRasterElement(
-                        (RasterLayerDTO) element));
-            } else if (element instanceof VectorLayerDTO) {
-                clientFolderElements.add(this.convertVectorElement(
-                        (VectorLayerDTO) element));
-            } else if (element instanceof FolderDTO) {
-                clientFolderElements.add(this.convertFolderElement(
-                        (FolderDTO) element));
-            }
+            clientFolderElements.add(this.convertElement(iterator.next()));
         }
         return clientFolderElements;
+    }
+
+    public ArrayList<IGPFolderElements> convertFolderElements(TreeFolderElements folderElements) {
+        ArrayList<IGPFolderElements> clientFolderElements = Lists.newArrayList();
+        Iterator<IElementDTO> iterator = folderElements.iterator();
+        while (iterator.hasNext()) {
+            clientFolderElements.add(this.convertElement(iterator.next()));
+        }
+        return clientFolderElements;
+    }
+
+    private IGPFolderElements convertElement(IElementDTO element) {
+        IGPFolderElements folderElement = null;
+        if (element instanceof RasterLayerDTO) {
+            folderElement = this.convertRasterElement((RasterLayerDTO) element);
+        } else if (element instanceof VectorLayerDTO) {
+            folderElement = this.convertVectorElement(
+                    (VectorLayerDTO) element);
+        } else if (element instanceof FolderDTO) {
+            folderElement = this.convertFolderElement((FolderDTO) element);
+        }
+        return folderElement;
     }
 
     public RasterPropertiesDTO convertMementoProperties(MementoLayerOriginalProperties memento) {
@@ -179,6 +190,7 @@ public class DTOConverter {
         folder.setNumberOfDescendants(folderDTO.getNumberOfDescendants());
         folder.setChecked(folderDTO.isChecked());
         folder.setExpanded(folderDTO.isExpanded());
+        folder.setFolderElements(this.convertFolderElements(folderDTO.getElementList()));
         return folder;
     }
 

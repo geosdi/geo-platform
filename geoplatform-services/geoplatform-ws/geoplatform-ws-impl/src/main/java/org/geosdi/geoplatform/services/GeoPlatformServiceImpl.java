@@ -119,6 +119,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         organizationServiceDelegate = new OrganizationServiceImpl();
         accountServiceDelegate = new AccountServiceImpl();
         projectServiceDelegate = new ProjectServiceImpl();
+        projectServiceDelegate.setAccountService(accountServiceDelegate);
         viewportServiceDelegate = new ViewportServiceImpl();
         folderServiceDelegate = new FolderServiceImpl();
         wmsServiceDelegate = new WMSServiceImpl();

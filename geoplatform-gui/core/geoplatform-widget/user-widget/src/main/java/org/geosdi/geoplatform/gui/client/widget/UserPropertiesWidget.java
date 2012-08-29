@@ -64,11 +64,11 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class UserPropertiesWidget extends GeoPlatformWindow
         implements IManageInsertUserHandler, IManageUpdateUserHandler {
@@ -97,9 +97,8 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
     private void addCentralPanel() {
         this.centralPanel = new ContentPanel(new FlowLayout());
-        this.centralPanel.setHeaderVisible(false);
+        this.centralPanel.setHeaderVisible(Boolean.FALSE);
         this.saveButton = new Button("Save", new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (store.contains(user)) {
@@ -117,7 +116,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
         this.userPropertiesBinding = new UserPropertiesBinding(store, saveButton);
 
         Button closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 hide();
@@ -144,13 +142,12 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     @Override
     public void setWindowProperties() {
         super.setHeading("User Properties");
-        super.setResizable(false);
+        super.setResizable(Boolean.FALSE);
         super.setLayout(new BorderLayout());
-        super.setModal(true);
-        super.setCollapsible(false);
-        super.setPlain(true);
+        super.setModal(Boolean.TRUE);
+        super.setCollapsible(Boolean.FALSE);
+        super.setPlain(Boolean.TRUE);
         this.addWindowListener(new WindowListener() {
-
             @Override
             public void windowShow(WindowEvent we) {
                 userPropertiesBinding.bindModel(user);
@@ -161,38 +158,36 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     @Override
     public void manageInsertUser() {
         user.setCreationDate(new Date());
-        UserRemoteImpl.Util.getInstance().insertUser(user, 
+        UserRemoteImpl.Util.getInstance().insertUser(user,
                 GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<Long>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        if (caught.getCause() instanceof GPSessionTimeout) {
+                            GPHandlerManager.fireEvent(new GPLoginEvent(manageInsertUserEvent));
+                        } else {
+                            GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                        }
+                    }
 
-            @Override
-            public void onFailure(Throwable caught) {
-                if (caught.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(manageInsertUserEvent));
-                } else {
-                    GeoPlatformMessage.errorMessage("Error", caught.getMessage());
-                }
-            }
+                    @Override
+                    public void onSuccess(Long result) {
+                        user.setId(result);
+                        store.insert(user, 0);
+                        store.commitChanges();
 
-            @Override
-            public void onSuccess(Long result) {
-                user.setId(result);
-                store.insert(user, 0);
-                store.commitChanges();
+                        hide();
 
-                hide();
-
-                // TODO statusbar...
-                GeoPlatformMessage.infoMessage("User successfully added",
-                                               "<ul><li>" + user.getUsername() + "</li></ul>");
-            }
-        });
+                        // TODO statusbar...
+                        GeoPlatformMessage.infoMessage("User successfully added",
+                                "<ul><li>" + user.getUsername() + "</li></ul>");
+                    }
+                });
     }
 
     @Override
     public void manageUpdateUser() {
         UserRemoteImpl.Util.getInstance().updateUser(user, new AsyncCallback<Long>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
@@ -209,7 +204,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
                 // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully modify",
-                                               "<ul><li>" + user.getUsername() + "</li></ul>");
+                        "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }

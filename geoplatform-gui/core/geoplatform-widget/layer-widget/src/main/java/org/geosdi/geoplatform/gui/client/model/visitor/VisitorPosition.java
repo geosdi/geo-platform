@@ -201,7 +201,7 @@ public class VisitorPosition extends AbstractVisitTree
             this.tmpElement = (GPBeanTreeModel) childrens.get(i);
             if (this.endPosition != null && this.isPreorderExitCondition()) {
                 this.tmpElement = this.getPrecedingElement(this.endPosition);
-                this.stopIterating = true;
+                this.stopIterating = Boolean.TRUE;
                 return;
             }
             this.tmpElement.accept(this);

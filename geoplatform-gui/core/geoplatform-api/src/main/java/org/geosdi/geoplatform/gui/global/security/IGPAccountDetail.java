@@ -11,7 +11,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface IGPAccountDetail {
@@ -27,6 +27,8 @@ public interface IGPAccountDetail {
     String getBaseLayer();
 
     GPClientViewport getViewport();
+
+    IGPTreeOptions getTreeOptions();
 
     void setComponentPermission(Map<String, Boolean> componentPermission);
 

@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
@@ -51,7 +52,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 public interface UserRemoteAsync {
 
     void searchUsers(PagingLoadConfig config, String searchText, String organization,
-                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
+            AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
             throws GeoPlatformException;
 
     void insertUser(IGPUserManageDetail userDetail, String organization, AsyncCallback<Long> callback)
@@ -60,9 +61,12 @@ public interface UserRemoteAsync {
     void updateUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)
             throws GeoPlatformException;
 
+    void updateUserTreeOptions(IGPTreeOptions userTreeOptions, AsyncCallback<Long> callback)
+            throws GeoPlatformException;
+
     void updateOwnUser(IGPUserManageDetail userDetail,
-                       String currentPlainPassword, String newPlainPassword,
-                       AsyncCallback<Long> callback)
+            String currentPlainPassword, String newPlainPassword,
+            AsyncCallback<Long> callback)
             throws GeoPlatformException;
 
     void deleteUser(Long userID, AsyncCallback<Boolean> callback)
@@ -75,11 +79,11 @@ public interface UserRemoteAsync {
     void getAllGuiComponentIDs(AsyncCallback<ArrayList<String>> callback);
 
     void getRolePermission(String role, String organization,
-                           AsyncCallback<HashMap<String, Boolean>> callback)
+            AsyncCallback<HashMap<String, Boolean>> callback)
             throws GeoPlatformException;
 
     void updateRolePermission(String role, String organization, HashMap<String, Boolean> permissionMap,
-                              AsyncCallback<Boolean> callback)
+            AsyncCallback<Boolean> callback)
             throws GeoPlatformException;
 
     void saveRole(String role, String organization, AsyncCallback<Boolean> callback)

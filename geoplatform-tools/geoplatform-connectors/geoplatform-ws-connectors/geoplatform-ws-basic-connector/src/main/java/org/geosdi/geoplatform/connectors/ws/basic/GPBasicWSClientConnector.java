@@ -35,15 +35,19 @@
  */
 package org.geosdi.geoplatform.connectors.ws.basic;
 
+import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Component(value = "gpBasicWSClientConnector")
+@Production
 public class GPBasicWSClientConnector extends GPAbstractWSClientConnector<GeoPlatformService> {
 
     private @Value("${webservice_endpoint_address}")

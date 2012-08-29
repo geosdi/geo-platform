@@ -55,50 +55,10 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-server-api</artifactId>
         </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-server-api</artifactId>
-            <classifier>sources</classifier>
-            <version>${project.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
-        </dependency>
-
-		<!-- GeoPlatform-WS-Client -->
-
-        <dependency>
-            <groupId>org.geosdi.geoplatform</groupId>
-            <artifactId>geoplatform-ws-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-	<!-- =============================================================== -->
-                    <!-- GEOPLATFORM WS -->
-	<!-- =============================================================== -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
 		<!-- SPRING -->
@@ -149,7 +109,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
+        
 		<!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>

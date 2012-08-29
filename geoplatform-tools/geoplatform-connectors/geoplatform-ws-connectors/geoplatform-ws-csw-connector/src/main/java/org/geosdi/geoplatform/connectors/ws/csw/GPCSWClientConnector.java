@@ -35,15 +35,19 @@
  */
 package org.geosdi.geoplatform.connectors.ws.csw;
 
+import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Component(value = "gpCSWClientConnector")
+@Production
 public class GPCSWClientConnector extends GPAbstractWSClientConnector<GeoPlatformCSWService> {
 
     private @Value("${webservice_cswservice_endpoint_address}")

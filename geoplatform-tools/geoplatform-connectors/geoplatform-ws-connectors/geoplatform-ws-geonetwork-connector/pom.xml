@@ -28,7 +28,7 @@
         
         
         <!-- =============================================================== -->
-        <!-- GEOPLATFORM CATALOG -->
+        <!--            GEOPLATFORM CATALOG BASED ON GEONETWORK              -->
         <!-- =============================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>

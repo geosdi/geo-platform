@@ -33,17 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws.catalog;
+package org.geosdi.geoplatform.connectors.ws.geonetwork;
 
+import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Component(value = "gpGeonetworkClientConnector")
+@Production
 public class GPGeonetworkClientConnector extends GPAbstractWSClientConnector<GPCatalogFinderService> {
 
     private @Value("${webservice_catalogfinder_endpoint_address}")

@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws.catalog;
+package org.geosdi.geoplatform.connectors.ws.geonetwork;
 
 import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;

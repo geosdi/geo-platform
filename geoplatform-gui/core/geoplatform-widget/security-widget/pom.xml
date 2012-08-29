@@ -57,14 +57,6 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-server-api</artifactId>
         </dependency>
-
-        <!-- GeoPlatform-WS-Client -->
-        
-        <dependency>
-            <groupId>org.geosdi.geoplatform</groupId>
-            <artifactId>geoplatform-ws-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>

@@ -52,6 +52,7 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -64,6 +65,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {CSWListenerServices.class})
+@ActiveProfiles(profiles = {"dev"})
 public abstract class CSWCatalogTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -115,7 +117,8 @@ public abstract class CSWCatalogTest {
 
         serverTestTrevisoID = cswService.insertServerCSW(
                 this.createCSWServer("Provincia di Treviso",
-                "http://ows.provinciatreviso.it/geonetwork/srv/it/csw", organizationTest));
+                "http://ows.provinciatreviso.it/geonetwork/srv/it/csw",
+                organizationTest));
 
         // Create the CSW search parameters
         catalogFinder = new CatalogFinderBean();
@@ -133,11 +136,12 @@ public abstract class CSWCatalogTest {
     @After
     public void tearDown() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
-        
+
         gpWSClient.deleteOrganization(organizationTest.getId());
     }
 
-    protected GeoPlatformServer createCSWServer(String title, String url, GPOrganization organization) {
+    protected GeoPlatformServer createCSWServer(String title, String url,
+            GPOrganization organization) {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerType(GPCapabilityType.CSW);
         server.setTitle(title);

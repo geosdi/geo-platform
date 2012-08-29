@@ -307,7 +307,11 @@ class WMSServiceImpl {
         raster.setUrlServer(this.getUrlServer(urlServer));
         raster.setName(layer.getName());
         raster.setAbstractText(layer.get_abstract());
-        raster.setTitle(layer.getTitle());
+        if (layer.getTitle() == null || layer.getTitle().trim().equals("")) {
+            raster.setTitle(layer.getName());
+        } else {
+            raster.setTitle(layer.getTitle());
+        }
         Map<String, CRSEnvelope> additionalBounds = layer.getBoundingBoxes();
 
         System.out.println(additionalBounds.toString());

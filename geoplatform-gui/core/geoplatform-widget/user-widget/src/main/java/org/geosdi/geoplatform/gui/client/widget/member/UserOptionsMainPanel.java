@@ -109,7 +109,6 @@ public class UserOptionsMainPanel {
             vBoxData.setFlex(1);
 
             IGPMemberOptionManager memberManager = GeoPlatformMemberFactory.getDefaultMemberManager(GPMemberOptionType.SIMPLE_PROPERTIES);
-
             for (GeoPlatformOptionsMember member : (List<GeoPlatformOptionsMember>) memberManager.getMembers()) {
                 member.setLayoutContainer(panelCenter);
                 member.setOwnUser((IGPUserManageDetail) Registry.get(UserSessionEnum.USER_IN_SESSION.toString()));

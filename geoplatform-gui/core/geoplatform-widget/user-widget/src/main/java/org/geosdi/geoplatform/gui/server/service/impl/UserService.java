@@ -51,6 +51,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
@@ -94,7 +95,7 @@ public class UserService implements IUserService {
         int page = start == 0 ? start : start / config.getLimit();
 
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                                                                config.getLimit(), page);
+                config.getLimit(), page);
 
         List<UserDTO> userList = null;
         try {
@@ -114,7 +115,7 @@ public class UserService implements IUserService {
         }
 
         return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
-                                                            config.getOffset(), usersCount.intValue());
+                config.getOffset(), usersCount.intValue());
     }
 
     @Override
@@ -157,6 +158,23 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public Long updateUserTreeOptions(IGPTreeOptions userTreeOptions, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        GPUser gPUser = this.getCheckLoggedUser(httpServletRequest);
+        logger.debug("\nUserTreeOptions to UPDATE:\n{}", userTreeOptions);
+        Long accountProjectID = null;
+        try {
+            gPUser.setLoadExpandedFolder(userTreeOptions.isLoadExpandedFolder());
+            accountProjectID = geoPlatformServiceClient.updateUser(gPUser);
+        } catch (IllegalParameterFault ipf) {
+            throw new GeoPlatformException(ipf.getMessage());
+        } catch (ResourceNotFoundFault rnnf) {
+            throw new GeoPlatformException(rnnf.getMessage());
+        }
+        return accountProjectID;
+    }
+
+    @Override
     public Long updateOwnUser(IGPUserManageDetail userDetail,
             String currentPlainPassword,
             String newPlainPassword,
@@ -174,10 +192,10 @@ public class UserService implements IUserService {
             userDTO.setEmailAddress(userDetail.getEmail());
 
             userID = geoPlatformServiceClient.updateOwnUser(userDTO,
-                                                            currentPlainPassword, newPlainPassword);
+                    currentPlainPassword, newPlainPassword);
 
             sessionUtility.storeLoggedAccount(this.convertToGPUser(userDetail),
-                                              httpServletRequest);
+                    httpServletRequest);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         } catch (ResourceNotFoundFault rnnf) {

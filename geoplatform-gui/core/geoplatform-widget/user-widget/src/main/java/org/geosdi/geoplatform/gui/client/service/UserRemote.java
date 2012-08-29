@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
@@ -63,96 +64,104 @@ public interface UserRemote extends RemoteService {
     }
 
     /**
-     * 
+     *
      * @param request
-     * @return 
+     * @return
      */
     PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-                                                     String searchText, String organization)
+            String searchText, String organization)
             throws GeoPlatformException;
 
     /**
-     * 
+     *
      * @param userDetail
      * @param organization
      * @return
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
     Long insertUser(IGPUserManageDetail userDetail, String organization) throws GeoPlatformException;
 
     /**
-     * 
+     *
      * @param userDetail
      * @return
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
     Long updateUser(IGPUserManageDetail userDetail) throws GeoPlatformException;
 
     /**
-     * 
+     *
+     * @param userTreeOptions
+     * @return
+     * @throws GeoPlatformException
+     */
+    Long updateUserTreeOptions(IGPTreeOptions userTreeOptions) throws GeoPlatformException;
+
+    /**
+     *
      * @param userDetail
      * @param currentPlainPassword
      * @return
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
     Long updateOwnUser(IGPUserManageDetail userDetail,
-                       String currentPlainPassword, String newPlainPassword)
+            String currentPlainPassword, String newPlainPassword)
             throws GeoPlatformException;
 
     /**
-     * 
+     *
      * @param request
      * @return
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
     boolean deleteUser(Long userID) throws GeoPlatformException;
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     IGPUserManageDetail getOwnUser();
 
     /**
-     * 
+     *
      * @param organization
      * @return List of roles
      */
     ArrayList<String> getAllRoles(String organization);
 
     /**
-     * 
+     *
      * @return List of GuiComponet IDs
      */
     ArrayList<String> getAllGuiComponentIDs();
 
     /**
-     * 
+     *
      * @param role
      * @param organization
      * @return
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
     HashMap<String, Boolean> getRolePermission(String role, String organization)
             throws GeoPlatformException;
 
     /**
-     * 
+     *
      * @param role
      * @param organization
      * @param permissionMap
      * @return
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
     boolean updateRolePermission(String role, String organization, HashMap<String, Boolean> permissionMap)
             throws GeoPlatformException;
 
     /**
-     * 
+     *
      * @param role
      * @param organization
      * @return
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
     boolean saveRole(String role, String organization) throws GeoPlatformException;
 }

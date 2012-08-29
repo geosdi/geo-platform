@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPAdvancedSecurityWidget;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
@@ -138,6 +139,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                         Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), result.getAuthkey());
                         Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), result.getBaseLayer());
                         Registry.register(GlobalRegistryEnum.VIEWPORT.getValue(), result.getViewport());
+                        Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), result.getTreeOptions());
                         loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
                     }
                 });

@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.global.security;
 
+import java.io.Serializable;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface IGPTreeOptions {
+public interface IGPTreeOptions extends Serializable {
 
     boolean isLoadExpandedFolder();
 }

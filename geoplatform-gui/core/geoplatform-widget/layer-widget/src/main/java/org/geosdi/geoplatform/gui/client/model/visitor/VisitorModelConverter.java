@@ -60,7 +60,7 @@ public class VisitorModelConverter implements IVisitorClient {
 
     @Override
     public void visitFolder(GPFolderClientInfo clientFolder) {
-        FolderTreeNode node = new FolderTreeNode(clientFolder);
+        FolderTreeNode node = new FolderTreeNode(clientFolder, Boolean.FALSE);
         this.folder.add(node);
         node.setParent(this.folder);
     }

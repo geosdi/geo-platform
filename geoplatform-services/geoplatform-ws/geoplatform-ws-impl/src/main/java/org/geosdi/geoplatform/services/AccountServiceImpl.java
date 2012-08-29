@@ -210,7 +210,7 @@ class AccountServiceImpl {
             orig.setEmailAddress(email);
         }
         String password = user.getPassword();
-        if (password != null) {
+        if (password != null && !password.equals(orig.getPassword())) {
             orig.setPassword(this.gpDigester.digest(password));
         }
         this.updateAccount(orig, user);
@@ -628,12 +628,12 @@ class AccountServiceImpl {
     private void updateAccount(GPAccount accountToUpdate, GPAccount account)
             throws IllegalParameterFault {
         accountToUpdate.setEnabled(account.isEnabled());
+        accountToUpdate.setLoadExpandedFolder(account.isLoadExpandedFolder());
 
         if (!accountToUpdate.isAccountTemporary() && account.isAccountTemporary()) {
             throw new IllegalParameterFault("A standard account cannot be changed to temporary account");
         }
         accountToUpdate.setAccountTemporary(account.isAccountTemporary());
-
         Long defaultProjectID = account.getDefaultProjectID();
         if (defaultProjectID != null) {
             accountToUpdate.setDefaultProjectID(defaultProjectID);

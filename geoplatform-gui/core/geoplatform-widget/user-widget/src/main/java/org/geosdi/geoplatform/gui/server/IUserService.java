@@ -42,6 +42,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
@@ -51,20 +52,24 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 public interface IUserService {
 
     PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-                                                     String searchText, String organization,
-                                                     HttpServletRequest httpServletRequest);
+            String searchText, String organization,
+            HttpServletRequest httpServletRequest);
 
     Long insertUser(IGPUserManageDetail userDetail, String organization,
-                    HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    Long updateUserTreeOptions(IGPTreeOptions userTreeOptions,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     Long updateUser(IGPUserManageDetail userDetail,
-                    HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     Long updateOwnUser(IGPUserManageDetail userDetail,
-                       String currentPlainPassword, String newPlainPassword,
-                       HttpServletRequest httpServletRequest)
+            String currentPlainPassword, String newPlainPassword,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     boolean deleteUser(Long userID, HttpServletRequest httpServletRequest)
@@ -77,14 +82,14 @@ public interface IUserService {
     ArrayList<String> getAllGuiComponentIDs(HttpServletRequest httpServletRequest);
 
     HashMap<String, Boolean> getRolePermission(String role, String organization,
-                                               HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     boolean updateRolePermission(String role, String organization, HashMap<String, Boolean> permissionMap,
-                                 HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     boolean saveRole(String role, String organization,
-                     HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 }

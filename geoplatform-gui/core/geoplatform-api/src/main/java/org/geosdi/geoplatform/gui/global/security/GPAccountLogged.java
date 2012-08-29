@@ -35,6 +35,7 @@ public final class GPAccountLogged {
      * @return name
      */
     public String getName() {
+        assert (accountDetail != null) : "accountDetail must not be null.";
         return this.accountDetail.getName();
     }
 
@@ -43,6 +44,7 @@ public final class GPAccountLogged {
      * @return Organization
      */
     public String getOrganization() {
+        assert (accountDetail != null) : "accountDetail must not be null.";
         return this.accountDetail.getOrganization();
     }
 
@@ -50,6 +52,7 @@ public final class GPAccountLogged {
      * @see IGPAccountDetail#hasComponentPermission(java.lang.String)
      */
     public Boolean hasComponentPermission(String componentID) {
+        assert (accountDetail != null) : "accountDetail must not be null.";
         return accountDetail.hasComponentPermission(componentID);
     }
 }

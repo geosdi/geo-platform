@@ -412,7 +412,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     private String mapTitle(String rasterString) {
-        if (rasterString.indexOf(":") != -1) { // workspace:title
+        if (rasterString.indexOf(":") != -1) { // workspace:name
             return rasterString.substring(rasterString.indexOf(":") + 1);
         }
         return rasterString;

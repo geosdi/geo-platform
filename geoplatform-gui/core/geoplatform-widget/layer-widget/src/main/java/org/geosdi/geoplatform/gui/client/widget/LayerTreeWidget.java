@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.client.listener.GPDNDListener;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.ModelIconProvider;
 import com.extjs.gxt.ui.client.data.ModelStringProvider;
@@ -103,9 +102,9 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         implements IGPBuildTreeHandler, IGPExpandTreeNodeHandler {
 
+    private final VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
     private GPTreeStoreWidget treeStore;
     private GPLayerTreeDecorator treeDecorator;
-    private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
     private TreePanelDragSource dragSource;
     private GPRootTreeNode root;
     private boolean initialized;
@@ -173,10 +172,11 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                 @Override
                 public void onSuccess(ArrayList<GPFolderClientInfo> result) {
                     root.modelConverter(result);
-                    store.add(root, true);
+                    store.add(root, Boolean.TRUE);
                     visitorDisplay.enableCheckedComponent(root);
-                    initialized = true;
-                    tree.setExpanded(root, true);
+                    initialized = Boolean.TRUE;
+                    tree.setExpanded(root, Boolean.TRUE);
+                    LayerTreeWidget.this.insertElementsOfTheRootFolders(result);
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Tree elements loaded successfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());
@@ -311,7 +311,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                 if ((be.getItem() instanceof FolderTreeNode)
                         && (!((FolderTreeNode) be.getItem()).isLoaded())
                         && (((FolderTreeNode) be.getItem()).getId() != null)) {
-                    final VisitorPosition visitorPosition = new VisitorPosition();
                     final FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
                     parentFolder.setLoading(Boolean.TRUE);
                     LayoutManager.getInstance().getStatusMap().setBusy(
@@ -339,20 +338,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
 
                         @Override
                         public void onSuccess(ArrayList<IGPFolderElements> result) {
-                            parentFolder.modelConverter(result);
-                            List<GPBeanTreeModel> childrenList = Lists.newArrayList();
-                            visitorPosition.assignTmpIndex(parentFolder);
-                            for (Iterator<ModelData> it = parentFolder.getChildren().iterator(); it.hasNext();) {
-                                GPBeanTreeModel element = (GPBeanTreeModel) it.next();
-                                element.accept(visitorPosition);
-                                childrenList.add(element);
-                            }
-                            tree.getStore().insert(parentFolder, childrenList, 0, Boolean.TRUE);
-                            visitorDisplay.enableCheckedComponent(parentFolder);
-                            parentFolder.setLoading(Boolean.FALSE);
-                            parentFolder.setLoaded(Boolean.TRUE);
-                            tree.refreshIcon(parentFolder);
-                            tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
+                            LayerTreeWidget.this.insertElementsOnTree(parentFolder, result);
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Tree elements loaded successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());
@@ -372,11 +358,11 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                 } else if (be.getItem() instanceof FolderTreeNode
                         && (((FolderTreeNode) be.getItem()).isLoaded())) {
                     tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
-                } 
+                }
                 if (be.getItem() instanceof FolderTreeNode) {
                     GPMementoSaveCache.getInstance().copyOriginalProperties(
                             (GPBeanTreeModel) be.getItem());
-                    ((FolderTreeNode)be.getItem()).setExpanded(Boolean.TRUE);
+                    ((FolderTreeNode) be.getItem()).setExpanded(Boolean.TRUE);
                 }
             }
         });
@@ -385,9 +371,53 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
             public void handleEvent(TreePanelEvent<ModelData> be) {
                 GPMementoSaveCache.getInstance().copyOriginalProperties(
                         (GPBeanTreeModel) be.getItem());
-                ((FolderTreeNode)be.getItem()).setExpanded(Boolean.FALSE);
+                ((FolderTreeNode) be.getItem()).setExpanded(Boolean.FALSE);
             }
         });
+    }
+
+    private void insertElementsOnTree(FolderTreeNode parentFolder, List<IGPFolderElements> folderElements) {
+        final VisitorPosition visitorPosition = new VisitorPosition();
+        parentFolder.modelConverter(folderElements);
+        List<GPBeanTreeModel> childrenList = Lists.newArrayList();
+        visitorPosition.assignTmpIndex(parentFolder);
+        for (Iterator<ModelData> it = parentFolder.getChildren().iterator(); it.hasNext();) {
+            GPBeanTreeModel element = (GPBeanTreeModel) it.next();
+            element.accept(visitorPosition);
+            childrenList.add(element);
+        }
+        tree.getStore().insert(parentFolder, childrenList, 0, Boolean.TRUE);
+        visitorDisplay.enableCheckedComponent(parentFolder);
+        parentFolder.setLoading(Boolean.FALSE);
+        parentFolder.setLoaded(Boolean.TRUE);
+        tree.refreshIcon(parentFolder);
+        tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
+    }
+
+    private void insertElementsOfTheRootFolders(List<GPFolderClientInfo> folderClientList) {
+        int i = 0;
+        for (GPFolderClientInfo folderElement : folderClientList) {
+            if (folderElement instanceof GPFolderClientInfo) {
+                this.insertElementsOnTree((FolderTreeNode) this.root.getChild(i), (GPFolderClientInfo) folderElement);
+            }
+            i++;
+        }
+    }
+
+    private void insertElementsOnTree(FolderTreeNode parentFolder, GPFolderClientInfo folderClientInfo) {
+        if (!folderClientInfo.getFolderElements().isEmpty()) {
+            this.insertElementsOnTree(parentFolder, folderClientInfo.getFolderElements());
+            if (parentFolder.isExpanded()) {
+                tree.setExpanded(parentFolder, Boolean.TRUE);
+            }
+            int i = 0;
+            for (IGPFolderElements folderElement : folderClientInfo.getFolderElements()) {
+                if (folderElement instanceof GPFolderClientInfo) {
+                    this.insertElementsOnTree((FolderTreeNode) parentFolder.getChild(i), ((GPFolderClientInfo) folderElement));
+                }
+                i++;
+            }
+        }
     }
 
     @Override

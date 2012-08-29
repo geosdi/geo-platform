@@ -70,17 +70,20 @@ public abstract class GPAccount implements Serializable {
     private Long id;
     //
     @Column(name = "is_enabled", nullable = false)
-    private boolean enabled = false;
+    private boolean enabled = Boolean.FALSE;
     //
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate = new Date(System.currentTimeMillis());
     //    
     @Column(name = "account_temporary")
-    private boolean accountTemporary = false;
+    private boolean accountTemporary = Boolean.FALSE;
     //
     @Column(name = "account_non_expired")
-    private boolean accountNonExpired = true;
+    private boolean accountNonExpired = Boolean.TRUE;
+    //This option must be replaced by an AccountOption table
+    @Column(name = "load_expanded_folder")
+    private boolean loadExpandedFolder = Boolean.FALSE;
     //
     @ManyToOne(optional = true)
     @JoinColumn(name = "gs_account")
@@ -242,6 +245,14 @@ public abstract class GPAccount implements Serializable {
      */
     public void setDefaultProjectID(Long defaultProjectID) {
         this.defaultProjectID = defaultProjectID;
+    }
+
+    public boolean isLoadExpandedFolder() {
+        return loadExpandedFolder;
+    }
+
+    public void setLoadExpandedFolder(boolean loadExpandedFolder) {
+        this.loadExpandedFolder = loadExpandedFolder;
     }
 
     /**

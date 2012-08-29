@@ -33,49 +33,15 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.model.visitor;
+package org.geosdi.geoplatform.gui.global.security;
 
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
+import java.io.Serializable;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
- *
  */
-public class VisitorModelConverter implements IVisitorClient {
+public interface IGPTreeOptions extends Serializable {
 
-    private VisitorModelConverter() {
-    }
-    private FolderTreeNode folder;
-
-    public VisitorModelConverter(FolderTreeNode folder) {
-        this.folder = folder;
-    }
-
-    @Override
-    public void visitFolder(GPFolderClientInfo clientFolder) {
-        FolderTreeNode node = new FolderTreeNode(clientFolder, Boolean.FALSE);
-        this.folder.add(node);
-        node.setParent(this.folder);
-    }
-
-    @Override
-    public void visitVector(ClientVectorInfo clientVector) {
-        VectorTreeNode vector = new VectorTreeNode(clientVector);
-        this.folder.add(vector);
-        vector.setParent(this.folder);
-    }
-
-    @Override
-    public void visitRaster(ClientRasterInfo clientRaster) {
-        RasterTreeNode raster = new RasterTreeNode(clientRaster);
-        this.folder.add(raster);
-        raster.setParent(this.folder);
-    }
+    boolean isLoadExpandedFolder();
 }

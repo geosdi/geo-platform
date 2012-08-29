@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.client.GPXMPPClient;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
@@ -111,7 +112,6 @@ public class SessionLoginWidget extends GPSecurityWidget {
                     this.userName.getValue(),
                     this.password.getValue(),
                     new AsyncCallback<IGPAccountDetail>() {
-
                         @Override
                         public void onFailure(Throwable caught) {
                             errorConnection();
@@ -133,6 +133,9 @@ public class SessionLoginWidget extends GPSecurityWidget {
                             userLogged = userName.getValue();
                             reloginAttempts = 0;
                             Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), result.getAuthkey());
+                            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), result.getBaseLayer());
+                            Registry.register(GlobalRegistryEnum.VIEWPORT.getValue(), result.getViewport());
+                            Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), result.getTreeOptions());
                             loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
                         }
                     });
@@ -153,7 +156,6 @@ public class SessionLoginWidget extends GPSecurityWidget {
 
     public void resetUserSession() {
         SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 //TODO: In case of fail... what is possible to do??
@@ -173,7 +175,6 @@ public class SessionLoginWidget extends GPSecurityWidget {
 
     private void userScreen() {
         Timer t = new Timer() {
-
             @Override
             public void run() {
                 if (eventOnSuccess != null) {

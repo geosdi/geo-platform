@@ -33,66 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.impl.users.options;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class GPRootTreeNode extends AbstractRootTreeNode {
+public class UserTreeOptions implements IGPTreeOptions {
 
-    private static final long serialVersionUID = 1765450539495169525L;
+    private static final long serialVersionUID = -5099354521754438146L;
+    private boolean loadExpandedFolder;
 
-    public GPRootTreeNode() {
+    public void setLoadExpandedFolder(boolean loadExpandedFolder) {
+        this.loadExpandedFolder = loadExpandedFolder;
     }
 
-    public GPRootTreeNode(TreePanel<GPBeanTreeModel> theTree) {
-        super.setLabel("Geo-Platform Tree");
-    }
-
-    /**
-     *
-     * @param children
-     */
-    public void addElements(List<FolderTreeNode> children) {
-//        for(FolderTreeNode child: children) {
-//            super.add(child);
-//        }
-        VisitorPosition visitor = new VisitorPosition();
-        this.accept(visitor);
-    }
-
-    /**
-     *
-     * @param clientFolders
-     */
-    public void modelConverter(List<GPFolderClientInfo> clientFolders) {
-        for (GPFolderClientInfo folder : clientFolders) {
-            FolderTreeNode folderTreeNode = new FolderTreeNode(folder, Boolean.FALSE);
-            folderTreeNode.setParent(this);
-            super.add(folderTreeNode);
-        }
-        VisitorPosition visitor = new VisitorPosition();
-        this.accept(visitor);
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
-     */
     @Override
-    public AbstractImagePrototype getIcon() {
-        return LayerResources.ICONS.geoPlatform();
+    public boolean isLoadExpandedFolder() {
+        return this.loadExpandedFolder;
     }
 }

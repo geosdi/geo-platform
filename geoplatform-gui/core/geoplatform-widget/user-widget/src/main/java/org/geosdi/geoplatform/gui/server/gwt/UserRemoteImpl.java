@@ -42,6 +42,7 @@ import java.util.HashMap;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
@@ -61,7 +62,7 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-                                                            String searchText, String organization) {
+            String searchText, String organization) {
         return userService.searchUsers(config, searchText, organization, super.getThreadLocalRequest());
     }
 
@@ -78,11 +79,17 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
+    public Long updateUserTreeOptions(IGPTreeOptions userTreeOptions)
+            throws GeoPlatformException {
+        return userService.updateUserTreeOptions(userTreeOptions, super.getThreadLocalRequest());
+    }
+
+    @Override
     public Long updateOwnUser(IGPUserManageDetail userDetail,
-                              String currentPlainPassword, String newPlainPassword)
+            String currentPlainPassword, String newPlainPassword)
             throws GeoPlatformException {
         return userService.updateOwnUser(userDetail, currentPlainPassword,
-                                         newPlainPassword, super.getThreadLocalRequest());
+                newPlainPassword, super.getThreadLocalRequest());
     }
 
     @Override

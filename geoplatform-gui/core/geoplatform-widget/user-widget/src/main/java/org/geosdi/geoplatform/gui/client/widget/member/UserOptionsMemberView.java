@@ -35,12 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.member;
 
-import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.Registry;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
+import org.geosdi.geoplatform.gui.impl.users.options.UserTreeOptions;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
  *
@@ -48,20 +60,68 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  */
 public class UserOptionsMemberView extends UserOptionsMember {
 
+    private CheckBox startupStrategyCheckBox;
+
     public UserOptionsMemberView() {
         super("View");
     }
 
     @Override
     protected void creteLayoutData(ContentPanel panel) {
-        VBoxLayoutData layoutData = new VBoxLayoutData(new Margins(0, 0, 5, 0));
-        panel.add(new Label("Set GARTICULA"), layoutData);
-        panel.add(new Label("Set SCALE"), layoutData);
+//        VBoxLayoutData layoutData = new VBoxLayoutData(new Margins(0, 0, 5, 0));
+//        panel.add(new Label("Set GRATICULA"), layoutData);
+//        panel.add(new Label("Set SCALE"), layoutData);
+        UserTreeOptions userTreeOptions = Registry.get(UserSessionEnum.USER_TREE_OPTIONS.name());
+        FormPanel formPanel = new FormPanel();
+        startupStrategyCheckBox = new CheckBox();
+        startupStrategyCheckBox.setFieldLabel("Load expanded folders at start-up");
+        startupStrategyCheckBox.addListener(Events.Change, new Listener<BaseEvent>() {
+            @Override
+            public void handleEvent(BaseEvent be) {
+                UserOptionsMemberView.super.saveButton.enable();
+            }
+        });
+        startupStrategyCheckBox.setValue(userTreeOptions.isLoadExpandedFolder());
+        formPanel.add(startupStrategyCheckBox);
+        formPanel.setHeaderVisible(Boolean.FALSE);
+        formPanel.setBodyBorder(Boolean.FALSE);
+        formPanel.setBorders(Boolean.FALSE);
+        formPanel.setWidth(400);
+        panel.add(formPanel);
     }
 
     @Override
     public void saveOptions() {
-        GeoPlatformMessage.infoMessage("ToDo", "<ul><li>Work in progress</li></ul>");
+        this.startupStrategyCheckBox.getValue();
+        UserTreeOptions userTreeOptions = Registry.get(UserSessionEnum.USER_TREE_OPTIONS.name());
+        userTreeOptions.setLoadExpandedFolder(startupStrategyCheckBox.getValue());
+        UserRemoteImpl.Util.getInstance().updateUserTreeOptions(userTreeOptions, new AsyncCallback<Long>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(null));
+                } else {
+                    GeoPlatformMessage.errorMessage("Error saving",
+                            "An error occurred while making the requested connection.\n"
+                            + "Verify network connections and try again."
+                            + "\nIf the problem persists contact your system administrator.");
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            "Error saving view options.",
+                            SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    System.out.println("Error saving view options: " + caught.toString()
+                            + " data: " + caught.getMessage());
+                }
+            }
+
+            @Override
+            public void onSuccess(Long result) {
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        "View options saved succesfully.",
+                        SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+            }
+        });
+
+
     }
 
     @Override

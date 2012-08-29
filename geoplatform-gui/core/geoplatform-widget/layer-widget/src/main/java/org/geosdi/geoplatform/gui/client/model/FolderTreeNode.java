@@ -69,20 +69,22 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
         super.setLabel(label);
     }
 
-    public FolderTreeNode(GPFolderClientInfo folder) {
+    public FolderTreeNode(GPFolderClientInfo folder, boolean addChildrens) {
         super(folder);
         this.numberOfDescendants = folder.getNumberOfDescendants();
         this.expanded = folder.isExpanded();
-        this.modelConverter(folder.getFolderElements());
+        if (addChildrens) {
+            this.modelConverter(folder.getFolderElements());
+        }
     }
 
     /**
      *
      * @param layersClientInfo
      */
-    public void modelConverter(List<IGPFolderElements> layersClientInfo) {
-        for (IGPFolderElements layer : layersClientInfo) {
-            layer.accept(this.visitor);
+    public final void modelConverter(List<IGPFolderElements> layersClientInfo) {
+        for (IGPFolderElements element : layersClientInfo) {
+            element.accept(this.visitor);
         }
     }
 

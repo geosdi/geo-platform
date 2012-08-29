@@ -47,10 +47,12 @@ import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
+import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -86,6 +88,7 @@ class ProjectServiceImpl {
     //
 //    private int numberOfElements;
     private int position;
+    private AccountServiceImpl accountServiceDelegate;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -241,7 +244,7 @@ class ProjectServiceImpl {
         }
 
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                                                    subFoldersMap, mapProjectFolders);
+                subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);
@@ -386,6 +389,14 @@ class ProjectServiceImpl {
         // Update all properties (except the account and project reference)
         orig.setPermissionMask(accountProject.getPermissionMask());
         orig.setBaseLayer(accountProject.getBaseLayer());
+
+        GPAccount account = accountProject.getAccount();
+        if (account instanceof GPUser) {
+            this.accountServiceDelegate.updateUser((GPUser)account);
+        } else if(account instanceof GPApplication){
+            this.accountServiceDelegate.updateApplication((GPApplication)account);
+        }
+        this.updateProject(accountProject.getProject());
 
         accountProjectDao.merge(orig);
 
@@ -588,7 +599,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                                                              folderDTO);
+                        folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -610,10 +621,10 @@ class ProjectServiceImpl {
                 GPLayer layer = null;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                                                                  (RasterLayerDTO) element);
+                            (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                                                                  (VectorLayerDTO) element);
+                            (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);
@@ -682,5 +693,9 @@ class ProjectServiceImpl {
                 }
             }
         }
+    }
+
+    protected void setAccountService(AccountServiceImpl accountServiceDelegate) {
+        this.accountServiceDelegate = accountServiceDelegate;
     }
 }

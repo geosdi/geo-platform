@@ -66,14 +66,13 @@ public class UserOptionsWidget extends GeoPlatformWindow {
     @Override
     public void setWindowProperties() {
         super.setHeading("User Options");
-        super.setResizable(false);
+        super.setResizable(Boolean.FALSE);
         super.setLayout(new BorderLayout());
-        super.setModal(true);
-        super.setCollapsible(false);
-        super.setPlain(true);
+        super.setModal(Boolean.TRUE);
+        super.setCollapsible(Boolean.FALSE);
+        super.setPlain(Boolean.TRUE);
 
         super.addListener(Events.Show, new Listener<WindowEvent>() {
-
             @Override
             public void handleEvent(WindowEvent be) {
                 optionsMainPanel.createMembers();
@@ -89,13 +88,12 @@ public class UserOptionsWidget extends GeoPlatformWindow {
 
     private void addButtons() {
         Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
-                                  new SelectionListener<ButtonEvent>() {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                hide();
-            }
-        });
+                new SelectionListener<ButtonEvent>() {
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        hide();
+                    }
+                });
 
         super.setButtonAlign(HorizontalAlignment.RIGHT);
         super.addButton(close);

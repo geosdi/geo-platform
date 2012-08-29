@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.catalogws.beans;
 
-import org.geosdi.geoplatform.connectors.ws.catalog.GPGeonetworkClientTestConnector;
+import org.geosdi.geoplatform.configurator.bootstrap.Develop;
+import org.geosdi.geoplatform.connectors.ws.geonetwork.GPGeonetworkClientTestConnector;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.geosdi.geoplatform.services.GPCatalogFinderServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -47,6 +48,7 @@ import org.springframework.context.annotation.Configuration;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
+@Develop
 public class GPCatalogWSConfiguration {
 
     @Bean

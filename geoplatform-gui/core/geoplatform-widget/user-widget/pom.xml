@@ -18,7 +18,7 @@
 		
     <dependencies>
 
-<!-- GeoPlatform -->
+        <!-- GeoPlatform -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
@@ -48,38 +48,8 @@
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
         </dependency>				
-		
-<!-- GeoPlatform-Core -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-<!-- GeoPlatform-WS -->
-        <dependency>
-            <groupId>org.geosdi.geoplatform</groupId>
-            <artifactId>geoplatform-ws-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-<!-- GWT -->
+        <!-- GWT -->
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
@@ -98,13 +68,13 @@
             <scope>provided</scope>
         </dependency>
 
-<!-- GXT -->
+        <!-- GXT -->
         <dependency>
             <groupId>com.extjs</groupId>
             <artifactId>gxt</artifactId>
         </dependency>
 		
-<!-- SPRING -->
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -130,7 +100,7 @@
             <artifactId>spring-expression</artifactId>
         </dependency>
   
-<!-- logging dependencies, delegate all to slf4j and use logback -->
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -148,7 +118,7 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
 	
-<!-- SCOPE TEST -->
+        <!-- SCOPE TEST -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -164,13 +134,13 @@
     <build>
 		
         <plugins>
-	<!-- ... or ask the plugin to detect them based on gwt modules files and 
-			copy the required java sources -->
+            <!-- ... or ask the plugin to detect them based on gwt modules files and 
+         			copy the required java sources -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <executions>
-	<!-- GWT version detected from dependencyManagement -->
+                    <!-- GWT version detected from dependencyManagement -->
                     <execution>
                         <goals>
                             <goal>resources</goal>
@@ -190,7 +160,7 @@
         </plugins>
 
         <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
-                we should be able to use some properties here -->
+        we should be able to use some properties here -->
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>

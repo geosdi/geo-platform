@@ -39,15 +39,19 @@ import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
+import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Component(value = "gpPublishClientConnector")
+@Production
 public class GPPublishClientConnector extends GPAbstractWSClientConnector<GPPublisherService> {
 
     private @Value("${webservice_publisher_endpoint_address}")

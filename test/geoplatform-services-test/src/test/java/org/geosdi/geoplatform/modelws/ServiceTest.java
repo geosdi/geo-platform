@@ -61,6 +61,7 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -73,6 +74,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {WSListenerServices.class})
+@ActiveProfiles(profiles = {"dev"})
 public abstract class ServiceTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -120,20 +122,24 @@ public abstract class ServiceTest {
         this.setUpOrganization();
 
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, ROLE_USER);
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest,
+                ROLE_USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
-        idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
+        idProjectTest = this.createAndInsertProject("project_test_ws", false, 2,
+                new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);
         // Insert UserProject
         this.createAndInsertUserProject(userTest, projectTest);
 
         // Create root folders for the user
-        idRootFolderA = this.createAndInsertFolder(nameRootFolderA, projectTest, 2, null);
+        idRootFolderA = this.createAndInsertFolder(nameRootFolderA, projectTest,
+                2, null);
         rootFolderA = gpWSClient.getFolderDetail(idRootFolderA);
 
-        idRootFolderB = this.createAndInsertFolder(nameRootFolderB, projectTest, 1, null);
+        idRootFolderB = this.createAndInsertFolder(nameRootFolderB, projectTest,
+                1, null);
         rootFolderB = gpWSClient.getFolderDetail(idRootFolderB);
 
         // Set the list of keywords (for raster layer)
@@ -156,7 +162,8 @@ public abstract class ServiceTest {
     /**
      * Create and insert a User.
      */
-    protected long createAndInsertUser(String username, GPOrganization organization, String... roles)
+    protected long createAndInsertUser(String username,
+            GPOrganization organization, String... roles)
             throws IllegalParameterFault {
         GPUser user = this.createUser(username, organization, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
@@ -167,7 +174,8 @@ public abstract class ServiceTest {
         return idUser;
     }
 
-    protected GPUser createUser(String username, GPOrganization organization, String... roles) {
+    protected GPUser createUser(String username, GPOrganization organization,
+            String... roles) {
         GPUser user = new GPUser();
         user.setOrganization(organization);
         user.setUsername(username);
@@ -201,7 +209,9 @@ public abstract class ServiceTest {
     protected void deleteAccount(long accountID) {
         try {
             boolean check = gpWSClient.deleteAccount(accountID);
-            Assert.assertTrue("Account with ID = " + accountID + " has not been eliminated", check);
+            Assert.assertTrue(
+                    "Account with ID = " + accountID + " has not been eliminated",
+                    check);
         } catch (Exception e) {
             Assert.fail("Error while deleting Account with ID: " + accountID);
         }
@@ -213,9 +223,12 @@ public abstract class ServiceTest {
     protected void deleteOrganization(long organizationID) {
         try {
             boolean check = gpWSClient.deleteOrganization(organizationID);
-            Assert.assertTrue("Organization with ID = " + organizationID + " has not been eliminated", check);
+            Assert.assertTrue(
+                    "Organization with ID = " + organizationID + " has not been eliminated",
+                    check);
         } catch (Exception e) {
-            Assert.fail("Error while deleting Organization with ID: " + organizationID);
+            Assert.fail(
+                    "Error while deleting Organization with ID: " + organizationID);
         }
     }
 
@@ -225,7 +238,9 @@ public abstract class ServiceTest {
     protected void deleteFolder(long idFolder) {
         try {
             boolean check = gpWSClient.deleteFolder(idFolder);
-            Assert.assertTrue("Folder with id = " + idFolder + " has not been eliminated", check);
+            Assert.assertTrue(
+                    "Folder with id = " + idFolder + " has not been eliminated",
+                    check);
         } catch (Exception e) {
             Assert.fail("Error while deleting Folder with Id: " + idFolder);
         }
@@ -234,7 +249,8 @@ public abstract class ServiceTest {
     protected long createAndInsertProject(String name, boolean isShared,
             int numberOfElements, Date creationalDate)
             throws IllegalParameterFault {
-        GPProject project = this.createProject(name, isShared, numberOfElements, creationalDate);
+        GPProject project = this.createProject(name, isShared, numberOfElements,
+                creationalDate);
         return gpWSClient.insertProject(project);
     }
 
@@ -247,14 +263,16 @@ public abstract class ServiceTest {
 
     protected long createAndInsertFolder(String folderName, GPProject project,
             int position, GPFolder parent) throws ResourceNotFoundFault, IllegalParameterFault {
-        GPFolder folder = this.createFolder(folderName, project, position, parent);
+        GPFolder folder = this.createFolder(folderName, project, position,
+                parent);
         return gpWSClient.insertFolder(project.getId(), folder);
     }
 
     protected long createAndInsertFolder(String folderName, GPProject project,
             int position, GPFolder parent, int numberOfDescendants)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        GPFolder folder = this.createFolder(folderName, project, position, parent);
+        GPFolder folder = this.createFolder(folderName, project, position,
+                parent);
         folder.setNumberOfDescendants(numberOfDescendants);
         return gpWSClient.insertFolder(project.getId(), folder);
     }
@@ -279,11 +297,13 @@ public abstract class ServiceTest {
         return folder;
     }
 
-    protected long createAndInsertRasterLayer(GPFolder folder, String title, String name,
+    protected long createAndInsertRasterLayer(GPFolder folder, String title,
+            String name,
             String abstractText, int position, String srs, String urlServer)
             throws IllegalParameterFault {
         GPRasterLayer rasterLayer = new GPRasterLayer();
-        this.createLayer(rasterLayer, folder, title, name, abstractText, position, srs, urlServer);
+        this.createLayer(rasterLayer, folder, title, name, abstractText,
+                position, srs, urlServer);
 
         GPLayerInfo layerInfo = new GPLayerInfo();
         layerInfo.setKeywords(layerInfoKeywords);
@@ -294,17 +314,20 @@ public abstract class ServiceTest {
         return gpWSClient.insertLayer(rasterLayer);
     }
 
-    protected long createAndInsertVectorLayer(GPFolder folder, String title, String name,
+    protected long createAndInsertVectorLayer(GPFolder folder, String title,
+            String name,
             String abstractText, int position, String srs, String urlServer)
             throws IllegalParameterFault {
         GPVectorLayer vectorLayer = new GPVectorLayer();
-        this.createLayer(vectorLayer, folder, title, name, abstractText, position, srs, urlServer);
+        this.createLayer(vectorLayer, folder, title, name, abstractText,
+                position, srs, urlServer);
 
         vectorLayer.setLayerType(GPLayerType.POLYGON);
         return gpWSClient.insertLayer(vectorLayer);
     }
 
-    protected void createLayer(GPLayer layer, GPFolder folder, String title, String name,
+    protected void createLayer(GPLayer layer, GPFolder folder, String title,
+            String name,
             String abstractText, int position, String srs, String urlServer) {
         layer.setFolder(folder);
         layer.setProject(folder.getProject());

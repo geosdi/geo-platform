@@ -65,7 +65,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -75,6 +74,7 @@ import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.responce.InfoPreview;
+import org.geosdi.geoplatform.services.GPPublisherService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -89,7 +89,7 @@ public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private GeoPlatformPublishClient geoPlatformPublishClient;
+    private GPPublisherService geoPlatformPublishClient;
     private HttpGet httpget;
     private DefaultHttpClient httpclient;
     private HttpContext localContext;
@@ -123,7 +123,7 @@ public class PublisherService implements IPublisherService {
         HttpParams params = new BasicHttpParams();
         HttpConnectionParams.setConnectionTimeout(params, 60000);
         HttpConnectionParams.setSoTimeout(params, 60000);
-        
+
         this.httpclient = new DefaultHttpClient(params);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
         credsProvider.setCredentials(
@@ -144,8 +144,9 @@ public class PublisherService implements IPublisherService {
         }
         List<InfoPreview> resultList = null;
         try {
-            resultList = geoPlatformPublishClient.getPublishService().processEPSGResult(
-                    account.getStringID(), this.trasformPreviewLayerList(previewLayerList));
+            resultList = geoPlatformPublishClient.processEPSGResult(
+                    account.getStringID(), this.trasformPreviewLayerList(
+                    previewLayerList));
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);
             throw new GeoPlatformException("Error on publish shape.");
@@ -153,15 +154,18 @@ public class PublisherService implements IPublisherService {
         return PublisherFileUtils.generateJSONObjects(resultList);
     }
 
-    private ArrayList<InfoPreview> trasformPreviewLayerList(List<EPSGLayerData> previewLayerList) {
+    private ArrayList<InfoPreview> trasformPreviewLayerList(
+            List<EPSGLayerData> previewLayerList) {
         ArrayList<InfoPreview> infoPreviewList = Lists.newArrayList();
         InfoPreview infoPreview;
         for (EPSGLayerData previewLayer : previewLayerList) {
-            infoPreview = new InfoPreview(null, null, previewLayer.getFeatureName(),
+            infoPreview = new InfoPreview(null, null,
+                    previewLayer.getFeatureName(),
                     0d, 0d, 0d, 0d, previewLayer.getEpsgCode(),
                     previewLayer.getStyleName(), previewLayer.isIsShape());
             infoPreviewList.add(infoPreview);
-            System.out.println("Layer preview transformed: " + infoPreview.toString());
+            System.out.println(
+                    "Layer preview transformed: " + infoPreview.toString());
         }
         return infoPreviewList;
     }
@@ -176,7 +180,7 @@ public class PublisherService implements IPublisherService {
         }
         String result = null;
         try {
-            geoPlatformPublishClient.getPublishService().publishAll(
+            geoPlatformPublishClient.publishAll(
                     httpServletRequest.getSession().getId(), "previews",
                     "dataTest", layerList);
 
@@ -207,10 +211,12 @@ public class PublisherService implements IPublisherService {
             throw new GeoPlatformException("Error on publish shape.");
         } catch (MalformedURLException e) {
             logger.error("Error on cluster url: " + e);
-            throw new GeoPlatformException(new GPReloadURLException("Error on cluster url."));
+            throw new GeoPlatformException(new GPReloadURLException(
+                    "Error on cluster url."));
         } catch (IOException e) {
             logger.error("Error on reloading cluster: " + e);
-            throw new GeoPlatformException(new GPReloadURLException("Error on reloading cluster."));
+            throw new GeoPlatformException(new GPReloadURLException(
+                    "Error on reloading cluster."));
         }
         return result;
     }
@@ -227,7 +233,7 @@ public class PublisherService implements IPublisherService {
      */
     @Autowired
     public void setGeoPlatformPublishClient(
-            @Qualifier("geoPlatformPublishClient") GeoPlatformPublishClient geoPlatformPublishClient) {
+            @Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
         this.geoPlatformPublishClient = geoPlatformPublishClient;
     }
 }

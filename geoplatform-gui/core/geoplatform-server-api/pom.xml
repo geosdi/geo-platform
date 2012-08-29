@@ -31,26 +31,15 @@
         </dependency>
         
         <!-- =========================================================== -->
-        <!-- ======================== GUAVA =========================== -->
-	<!-- =========================================================== -->
+        <!-- ======================== GUAVA ============================ -->
+        <!-- =========================================================== -->
             
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>          
         </dependency>
-            
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava-gwt</artifactId>
-        </dependency>
 
-		<!-- GXT -->
-        <dependency>
-            <groupId>com.extjs</groupId>
-            <artifactId>gxt</artifactId>
-        </dependency>
-
-		<!-- SPRING -->
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -76,7 +65,7 @@
             <artifactId>spring-expression</artifactId>
         </dependency>
 
-		<!-- logging dependencies, delegate all to slf4j and use logback -->
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -93,63 +82,22 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
-		<!-- SCOPE TEST -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-        </dependency>
         
-        	<!-- =============================================================== -->
-		<!-- GEOPLATFORM WS -->
-		<!-- =============================================================== -->
+        <!-- ============================================================== -->
+        <!-- =============== GEOPLATFORM WS BASIC CONNECTOR =============== -->
+        <!-- ============================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>geoplatform-ws-basic-connector</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
     </dependencies>
   
     <build>
 
         <plugins>
             
-            <!-- ... or ask the plugin to detect them based on gwt modules files and 
-			copy the required java sources -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <executions>
-            <!-- GWT version detected from dependencyManagement -->
-                    <execution>
-                        <goals>
-                            <goal>resources</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -161,7 +109,7 @@
         </plugins>
         
         <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
-			we should be able to use some properties here -->
+     			we should be able to use some properties here -->
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>

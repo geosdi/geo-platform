@@ -35,14 +35,12 @@
  */
 package org.geosdi.geoplatform.modelws;
 
-import java.text.ParseException;
 import java.util.Collection;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -134,16 +132,6 @@ public class CXFServiceTest extends ServiceTest {
                 gpWSClient.getAllServers().size(), totalServers);
     }
 
-    @Test
-    public void testGetCapabilities() throws ParseException,
-            ResourceNotFoundFault {
-        ServerDTO serverDTO = gpWSClient.getShortServer(serverUrlGeoSDI);
-
-        Assert.assertNotNull(serverDTO);
-
-        serverDTO = gpWSClient.getCapabilities(new RequestByID(serverDTO.getId()), null, null);
-        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
-    }
 
     @Test
     public void testSaveServer() throws ResourceNotFoundFault, IllegalParameterFault {

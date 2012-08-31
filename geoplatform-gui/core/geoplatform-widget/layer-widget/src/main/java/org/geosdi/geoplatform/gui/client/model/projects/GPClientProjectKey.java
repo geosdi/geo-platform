@@ -36,13 +36,14 @@
 package org.geosdi.geoplatform.gui.client.model.projects;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public enum GPClientProjectKey {
 
     PROJECT_NAME("name"), PROJECT_IMAGE("image"),
     PROJECT_ELEMENTS("numberOfElements"), DEFAULT_PROJECT("defaultProject"),
+    PROJECT_VERSION("version"), PROJECT_SHARED("shared"),
     DEFAULT_PROJECT_MESSAGE("Default Project : "),
     DEFAULT_PROJECT_KEY_MESSAGE("message");
     //

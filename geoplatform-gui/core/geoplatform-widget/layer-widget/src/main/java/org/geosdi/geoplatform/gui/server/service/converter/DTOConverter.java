@@ -292,6 +292,7 @@ public class DTOConverter {
         dto.setAccountID(accountID);
         dto.setProjectID(project.getId());
         dto.setProjectName(project.getName());
+        dto.setProjectVersion(project.getVersion());
         dto.setDefaultProject(project.isDefaultProject());
         return dto;
     }

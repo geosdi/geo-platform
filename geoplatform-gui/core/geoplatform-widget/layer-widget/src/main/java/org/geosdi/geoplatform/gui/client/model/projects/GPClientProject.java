@@ -40,7 +40,8 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPClientProject extends GeoPlatformBeanModel {
 
@@ -50,6 +51,8 @@ public class GPClientProject extends GeoPlatformBeanModel {
     private String name;
     private String image;
     private int numberOfElements;
+    private int version;
+    private boolean shared;
     private boolean defaultProject;
     private String message;
 
@@ -110,6 +113,36 @@ public class GPClientProject extends GeoPlatformBeanModel {
     }
 
     /**
+     * @return the version
+     */
+    public int getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(int version) {
+        this.version = version;
+        set(GPClientProjectKey.PROJECT_VERSION.toString(), this.version);
+    }
+
+    /**
+     * @return the shared
+     */
+    public boolean isShared() {
+        return shared;
+    }
+
+    /**
+     * @param shared the shared to set
+     */
+    public void setShared(boolean shared) {
+        this.shared = shared;
+        set(GPClientProjectKey.PROJECT_SHARED.toString(), this.shared);
+    }
+
+    /**
      * @return the defaultProject
      */
     public boolean isDefaultProject() {
@@ -166,8 +199,13 @@ public class GPClientProject extends GeoPlatformBeanModel {
 
     @Override
     public String toString() {
-        return "GPClientProject{" + "id = " + id + ", name = "
-                + name + ", numberOfElements = " + numberOfElements
-                + ", isDefaultProject = " + defaultProject + " }";
+        return "GPClientProject{" + "id=" + id
+                + ", name=" + name
+                + ", image=" + image
+                + ", numberOfElements=" + numberOfElements
+                + ", version=" + version
+                + ", shared=" + shared
+                + ", defaultProject=" + defaultProject
+                + ", message=" + message + '}';
     }
 }

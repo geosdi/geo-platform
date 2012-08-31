@@ -19,8 +19,6 @@
 
     <context:annotation-config />
     
-    <context:component-scan base-package="org.geosdi.geoplatform.services"/>
-    
     <jaxws:endpoint id="wmsServiceSOAP"
                     implementorClass="org.geosdi.geoplatform.services.GPWMSServiceImpl"
                     implementor="#wmsService"

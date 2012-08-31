@@ -19,8 +19,6 @@
 
     <context:annotation-config />
     
-    <context:component-scan base-package="org.geosdi.geoplatform.services"/>
-    
     <jaxws:endpoint id="wfsServiceSOAP"
                     implementorClass="org.geosdi.geoplatform.services.GPWFSServiceImpl"
                     implementor="#wfsService"

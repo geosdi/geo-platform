@@ -43,7 +43,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import javax.jws.WebService;
-import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
@@ -60,25 +59,23 @@ import org.geotools.data.wms.WebMapServer;
 import org.geotools.ows.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWMSService")
-public class GPWMSServiceImpl implements GPWMSService,
-        InitializingBean {
+public class GPWMSServiceImpl implements GPWMSService {
 
     private Logger logger = LoggerFactory.getLogger(
             GPWMSServiceImpl.class);
-    
     // DAO
     private GPServerDAO serverDao;
     private static final String GEB = "earthbuilder.google.com";
 
+    @Override
     public ServerDTO getCapabilities(RequestByID request, String token,
-            String authkey) throws ResourceNotFoundFault {
+                                     String authkey) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(request.getId());
         if (server == null) {
             throw new ResourceNotFoundFault("Server has been deleted",
-                    request.getId());
+                                            request.getId());
         }
 
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
@@ -95,7 +92,8 @@ public class GPWMSServiceImpl implements GPWMSService,
 
         return serverDTO;
     }
-    
+
+    @Override
     public ServerDTO getShortServer(String serverUrl)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
@@ -111,7 +109,7 @@ public class GPWMSServiceImpl implements GPWMSService,
     }
 
     private WMSCapabilities getWMSCapabilities(String serverUrl, String token,
-            String authkey) throws ResourceNotFoundFault {
+                                               String authkey) throws ResourceNotFoundFault {
         URL serverURL;
         WebMapServer wms;
         WMSCapabilities cap = null;
@@ -156,7 +154,7 @@ public class GPWMSServiceImpl implements GPWMSService,
     }
 
     private List<RasterLayerDTO> convertToLayerList(Layer layer,
-            String urlServer) {
+                                                    String urlServer) {
         List<RasterLayerDTO> shortLayers = new ArrayList<RasterLayerDTO>();
 
         RasterLayerDTO raster = this.getRasterAndSubRaster(layer, urlServer);
@@ -176,7 +174,7 @@ public class GPWMSServiceImpl implements GPWMSService,
         // ADD subRaster
         for (Layer layerIth : subLayerList) {
             RasterLayerDTO rasterIth = this.getRasterAndSubRaster(layerIth,
-                    urlServer);
+                                                                  urlServer);
             subRasterList.add(rasterIth);
         }
 
@@ -291,7 +289,7 @@ public class GPWMSServiceImpl implements GPWMSService,
 
     private GPBBox createBbox(CRSEnvelope env) {
         return new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
-                env.getMaxY());
+                          env.getMaxY());
     }
 
     private String getUrlServer(String urlServer) {
@@ -332,13 +330,7 @@ public class GPWMSServiceImpl implements GPWMSService,
         return 20037508.34 * Math.log(Math.tan(tmp)) / Math.PI;
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        
-    }
-
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
     }
-    
 }

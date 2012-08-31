@@ -78,8 +78,8 @@ public class WSListenerWMSServices implements TestExecutionListener {
         Assert.assertNotNull("geoPlatformWMSWSClient is NULL", geoPlatformWMSWSClient);
         gpWMSClient = geoPlatformWMSWSClient.getEndpointService();
 
-        GPWMSService geoPlatformWMSService = (GPWMSService) appContext.getBean("geoPlatformWMSService");
-        Assert.assertNotNull("geoPlatformService is NULL", geoPlatformWMSService);
+        GPWMSService geoPlatformWMSService = (GPWMSService) appContext.getBean("wmsService");
+        Assert.assertNotNull("geoPlatformWMSService is NULL", geoPlatformWMSService);
 
         Object implementor = geoPlatformWMSService;
         SpringBusFactory bf = new SpringBusFactory();

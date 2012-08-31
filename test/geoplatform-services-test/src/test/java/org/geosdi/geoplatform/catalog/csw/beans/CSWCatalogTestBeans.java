@@ -37,13 +37,11 @@ package org.geosdi.geoplatform.catalog.csw.beans;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.connectors.ws.csw.GPCSWClientTestConnector;
-import org.geosdi.geoplatform.services.GeoPlatformCSWService;
-import org.geosdi.geoplatform.services.GeoPlatformCSWServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Configuration
@@ -53,10 +51,5 @@ public class CSWCatalogTestBeans {
     @Bean
     public GPCSWClientTestConnector cswClient() {
         return new GPCSWClientTestConnector();
-    }
-
-    @Bean
-    public GeoPlatformCSWService cswService() {
-        return new GeoPlatformCSWServiceImpl();
     }
 }

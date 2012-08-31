@@ -94,7 +94,8 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-wms-api</artifactId>
+            <artifactId>geoplatform-ws-wms-connector</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

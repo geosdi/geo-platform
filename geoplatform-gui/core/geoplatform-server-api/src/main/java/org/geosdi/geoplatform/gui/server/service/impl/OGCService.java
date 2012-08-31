@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.geosdi.geoplatform.services.GPWMSService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +68,12 @@ import org.springframework.stereotype.Service;
 public class OGCService implements IOGCService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
+    // core
     private GeoPlatformService geoPlatformServiceClient;
+    
+    // wms
+    private GPWMSService geoPlatformWMSServiceClient;
+    
     //
     @Autowired
     private DTOServerConverter dtoServerConverter;
@@ -121,7 +126,7 @@ public class OGCService implements IOGCService {
             if (gsAccount != null) {
                 authKey = gsAccount.getAuthkey();
             }
-            ServerDTO server = geoPlatformServiceClient.getCapabilities(req, token, authKey);
+            ServerDTO server = geoPlatformWMSServiceClient.getCapabilities(req, token, authKey);
 
             return dtoServerConverter.createRasterLayerList(server.getLayerList());
         } catch (ResourceNotFoundFault ex) {
@@ -167,5 +172,13 @@ public class OGCService implements IOGCService {
     @Autowired
     public void setGeoPlatformServiceClient(GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
+    
+    /**
+     * @param geoPlatformWMSServiceClient the geoPlatformWMSServiceClient to set
+     */
+    @Autowired
+    public void setGeoPlatformWMSServiceClient(GPWMSService geoPlatformWMSServiceClient) {
+        this.geoPlatformWMSServiceClient = geoPlatformWMSServiceClient;
     }
 }

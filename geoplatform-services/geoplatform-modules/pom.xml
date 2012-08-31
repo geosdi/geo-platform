@@ -27,7 +27,8 @@
         <module>geoplatform-publisher</module>
         <module>geoplatform-scheduler</module>
         <module>geoplatform-catalog</module>
-		<module>geoplatform-tracking</module>
+	<module>geoplatform-tracking</module>
+	<module>geoplatform-ogc</module>
     </modules>
     
 </project>

@@ -23,6 +23,7 @@
         <module>geoplatform-ws-csw-connector</module>
         <module>geoplatform-ws-publish-connector</module>
         <module>geoplatform-ws-tracking-connector</module>
+	<module>geoplatform-ws-wms-connector</module>
     </modules>
 
 </project>

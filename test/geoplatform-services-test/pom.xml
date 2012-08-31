@@ -45,16 +45,35 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-
+        
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-api</artifactId>
+            <artifactId>geoplatform-ws-wms-connector</artifactId>
+            <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-impl</artifactId>
+            <artifactId>geoplatform-ws-core-api</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-core-impl</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-wms-api</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-wms-impl</artifactId>
             <scope>runtime</scope>
         </dependency>
         

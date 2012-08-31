@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.modelws.beans;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
+import org.geosdi.geoplatform.connectors.ws.wms.GPWMSClientTestConnector;
+import org.geosdi.geoplatform.services.GPWMSService;
+import org.geosdi.geoplatform.services.GPWMSServiceImpl;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.geosdi.geoplatform.services.GeoPlatformServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -62,5 +65,17 @@ public class GeoPlatformWSTestBeans {
         GeoPlatformService geoPlatformService = new GeoPlatformServiceImpl();
 
         return geoPlatformService;
+    }
+    
+    @Bean
+    public GPWMSService geoPlatformWMSService() {
+        GPWMSService geoPlatformWMSService = new GPWMSServiceImpl();
+        return geoPlatformWMSService;
+    }
+    
+    @Bean
+    public GPWMSClientTestConnector gpWMSClient() {
+        GPWMSClientTestConnector gpWMSClient = new GPWMSClientTestConnector();
+        return gpWMSClient;
     }
 }

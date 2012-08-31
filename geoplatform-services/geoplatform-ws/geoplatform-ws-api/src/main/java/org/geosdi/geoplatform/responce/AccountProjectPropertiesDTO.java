@@ -55,8 +55,8 @@ public class AccountProjectPropertiesDTO {
     //
     @XmlElement(required = true)
     private Long projectID;
-    //
     private String projectName;
+    private Integer projectVersion;
     private boolean defaultProject;
 
     /**
@@ -67,6 +67,7 @@ public class AccountProjectPropertiesDTO {
 
     /**
      * Constructor with GPAccount and GPProject as args
+     *
      * @param account
      * @param project
      * @param defaultProject for set the project as default for the account
@@ -76,6 +77,7 @@ public class AccountProjectPropertiesDTO {
         this.accountID = account.getId();
         this.projectID = project.getId();
         this.projectName = project.getName();
+        this.projectVersion = project.getVersion();
         this.defaultProject = defaultProject;
     }
 
@@ -122,6 +124,20 @@ public class AccountProjectPropertiesDTO {
     }
 
     /**
+     * @return the projectVersion
+     */
+    public Integer getProjectVersion() {
+        return projectVersion;
+    }
+
+    /**
+     * @param projectVersion the projectVersion to set
+     */
+    public void setProjectVersion(Integer projectVersion) {
+        this.projectVersion = projectVersion;
+    }
+
+    /**
      * @return the defaultProject
      */
     public boolean isDefaultProject() {
@@ -137,6 +153,7 @@ public class AccountProjectPropertiesDTO {
 
     /**
      * (non-Javadoc)
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -145,6 +162,7 @@ public class AccountProjectPropertiesDTO {
         str.append(" accountID=").append(accountID);
         str.append(", projectID=").append(projectID);
         str.append(", projectName=").append(projectName);
+        str.append(", projectVersion=").append(projectVersion);
         str.append(", defaultProject=").append(defaultProject);
         return str.append('}').toString();
     }

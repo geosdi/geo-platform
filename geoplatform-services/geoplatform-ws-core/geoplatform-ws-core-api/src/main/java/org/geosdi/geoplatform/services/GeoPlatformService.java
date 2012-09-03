@@ -339,7 +339,21 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/accounts")
     @WebResult(name = "Accounts")
-    List<ShortAccountDTO> getAccounts();
+    List<ShortAccountDTO> getAllAccounts();
+
+    /**
+     * Retrieve all Accounts within an Organization.
+     *
+     * @param organization the Organization name
+     * @return the list of Accounts
+     * @throws ResourceNotFoundFault if Organization not found
+     */
+    @Get
+    @HttpResource(location = "/accounts/{}")
+    @WebResult(name = "Accounts")
+    List<ShortAccountDTO> getAccounts(
+            @WebParam(name = "organization") String organization)
+            throws ResourceNotFoundFault;
 
     /**
      * Retrieve the number of Accounts found by search request.
@@ -500,11 +514,26 @@ public interface GeoPlatformService {
             @WebParam(name = "accountProjectProperties") AccountProjectPropertiesDTO accountProjectProperties)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    /**
+     * Retrieve Users of a shared Project, except the administration of the
+     * Project.
+     *
+     * @param sharedProjectID the shared Project ID
+     * @return the list of Users to which the Project is shared
+     * @throws ResourceNotFoundFault if Project not found
+     * @throws IllegalParameterFault if Project is not shared
+     */
+    @Get
+    @WebResult(name = "DefaultProject")
+    List<ShortAccountDTO> getAccountsBySharedProjectID(
+            @WebParam(name = "sharedProjectID") Long sharedProjectID)
+            throws ResourceNotFoundFault, IllegalParameterFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================
     // === Project
     // ==========================================================================
+
     @Put
     @HttpResource(location = "/project")
     Long saveProject(@WebParam(name = "stringID") String stringID,

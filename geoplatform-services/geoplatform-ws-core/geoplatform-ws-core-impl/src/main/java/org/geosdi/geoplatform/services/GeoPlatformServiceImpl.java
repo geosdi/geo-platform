@@ -392,8 +392,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ShortAccountDTO> getAccounts() {
-        return accountServiceDelegate.getAccounts();
+    public List<ShortAccountDTO> getAllAccounts() {
+        return accountServiceDelegate.getAllAccounts();
+    }
+
+    @Override
+    public List<ShortAccountDTO> getAccounts(String organization)
+            throws ResourceNotFoundFault {
+        return accountServiceDelegate.getAccounts(organization);
     }
 
     @Override
@@ -498,6 +504,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return this.projectServiceDelegate.saveAccountProjectProperties(accountProjectProperties);
+    }
+
+    @Override
+    public List<ShortAccountDTO> getAccountsBySharedProjectID(Long sharedProjectID)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return this.projectServiceDelegate.getAccountsBySharedProjectID(sharedProjectID);
     }
     //</editor-fold>
 

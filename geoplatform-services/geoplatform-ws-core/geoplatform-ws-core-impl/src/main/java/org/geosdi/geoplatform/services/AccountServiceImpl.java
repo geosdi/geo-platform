@@ -467,10 +467,25 @@ class AccountServiceImpl {
     }
 
     /**
-     * @see GeoPlatformService#getAccounts()
+     * @see GeoPlatformService#getAllAccounts()
      */
-    List<ShortAccountDTO> getAccounts() {
+    List<ShortAccountDTO> getAllAccounts() {
         List<GPAccount> accountList = accountDao.findAll();
+        EntityCorrectness.checkAccountListLog(accountList); // TODO assert
+        return ShortAccountDTO.convertToShortAccountDTOList(accountList);
+    }
+
+    /**
+     * @see GeoPlatformService#getAccounts(java.lang.String)
+     */
+    List<ShortAccountDTO> getAccounts(String organization)
+            throws ResourceNotFoundFault {
+        GPOrganization org = organizationDao.findByName(organization);
+        if (org == null) {
+            throw new ResourceNotFoundFault("Organization \"" + organization + "\" not found.");
+        }
+
+        List<GPAccount> accountList = accountDao.findByOrganization(organization);
         EntityCorrectness.checkAccountListLog(accountList); // TODO assert
         return ShortAccountDTO.convertToShortAccountDTOList(accountList);
     }

@@ -54,14 +54,13 @@ import org.junit.Test;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WSAccountTest extends ServiceTest {
 
     @Test
-    public void testAccountsDB() {
-        List<ShortAccountDTO> accountList = gpWSClient.getAccounts();
+    public void testAllAccounts() {
+        List<ShortAccountDTO> accountList = gpWSClient.getAllAccounts();
         Assert.assertNotNull(accountList);
         logger.info("\n*** Number of Accounts into DB: {} ***", accountList.size());
         for (Iterator<ShortAccountDTO> it = accountList.iterator(); it.hasNext();) {
@@ -75,12 +74,45 @@ public class WSAccountTest extends ServiceTest {
     }
 
     @Test
-    public void testRetrieveUser() throws ResourceNotFoundFault {
-        // Number of Accounts
-        List<ShortAccountDTO> accountList = gpWSClient.getAccounts();
+    public void testAllOrganizationAccounts() throws Exception {
+        // Initial test
+        List<ShortAccountDTO> accountList = gpWSClient.getAccounts(organizationNameTest);
         Assert.assertNotNull(accountList);
-        Assert.assertTrue("Number of Accounts stored into database", accountList.size() >= 1); // super.SetUp() added 1 user
+        int numAccounts = accountList.size();
+        logger.info("\n*** Number of Accounts for Organization \"{}\": {} ***",
+                    organizationNameTest, numAccounts);
+        for (ShortAccountDTO account : accountList) {
+            Assert.assertEquals(organizationNameTest, account.getOrganization());
+        }
 
+        // Insert User of the organization for test
+        this.createAndInsertUser("to_search", organizationTest, ROLE_USER);
+
+        // Insert the other Organization and a User for it
+        GPOrganization otherOrganization = new GPOrganization("other_organization_ws_test");
+        Long otherOrganizationID = gpWSClient.insertOrganization(otherOrganization);
+        this.createAndInsertUser("none_search", otherOrganization, ROLE_USER);
+
+        // Final test
+        accountList = gpWSClient.getAccounts(organizationNameTest);
+        Assert.assertNotNull(accountList);
+        Assert.assertEquals(numAccounts + 1, accountList.size());
+        for (ShortAccountDTO account : accountList) {
+            Assert.assertEquals(organizationNameTest, account.getOrganization());
+        }
+
+        // Delete the other Organization
+        gpWSClient.deleteOrganization(otherOrganizationID);
+    }
+
+    @Test(expected = ResourceNotFoundFault.class)
+    public void testAllOrganizationAccountsIncorrect() throws Exception {
+        String wrongOrganizationName = organizationNameTest + "_";
+        gpWSClient.getAccounts(wrongOrganizationName);
+    }
+
+    @Test
+    public void testRetrieveUser() throws ResourceNotFoundFault {
         // Number of Account Like
         long numAccountsLike = gpWSClient.getAccountsCount(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
@@ -216,21 +248,18 @@ public class WSAccountTest extends ServiceTest {
     public void testAuthorizationIncorrectUsername() throws Exception {
         String wrongUsername = usernameTest + "_";
         gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername, passwordTest);
-        Assert.fail("Test must fail because username is wrong");
     }
 
     @Test(expected = ResourceNotFoundFault.class)
     public void testAuthorizationIncorrectEmail() throws Exception {
         String wrongEmail = emailTest + "_";
         gpWSClient.getUserDetailByUsernameAndPassword(wrongEmail, passwordTest);
-        Assert.fail("Test must fail because email is wrong");
     }
 
     @Test(expected = IllegalParameterFault.class)
     public void testAuthorizationIncorrectPassword() throws Exception {
         String wrongPassword = passwordTest + "_";
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, wrongPassword);
-        Assert.fail("Test must fail because password is wrong");
     }
 
     @Test(expected = AccountLoginFault.class)

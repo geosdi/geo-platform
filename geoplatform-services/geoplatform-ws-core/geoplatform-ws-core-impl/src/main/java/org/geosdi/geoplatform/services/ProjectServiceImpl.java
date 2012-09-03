@@ -64,6 +64,7 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
+import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
@@ -244,7 +245,7 @@ class ProjectServiceImpl {
         }
 
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                subFoldersMap, mapProjectFolders);
+                                                    subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);
@@ -392,9 +393,9 @@ class ProjectServiceImpl {
 
         GPAccount account = accountProject.getAccount();
         if (account instanceof GPUser) {
-            this.accountServiceDelegate.updateUser((GPUser)account);
-        } else if(account instanceof GPApplication){
-            this.accountServiceDelegate.updateApplication((GPApplication)account);
+            this.accountServiceDelegate.updateUser((GPUser) account);
+        } else if (account instanceof GPApplication) {
+            this.accountServiceDelegate.updateApplication((GPApplication) account);
         }
         this.updateProject(accountProject.getProject());
 
@@ -513,6 +514,29 @@ class ProjectServiceImpl {
         }
         return false;
     }
+
+    /**
+     * @see GeoPlatformService#getAccountsBySharedProjectID(java.lang.Long)
+     */
+    List<ShortAccountDTO> getAccountsBySharedProjectID(Long sharedProjectID)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPProject project = this.getProjectByID(sharedProjectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        if (!project.isShared()) {
+            throw new IllegalParameterFault(
+                    "The project with ID \"" + sharedProjectID + "\" is not shared.");
+        }
+
+        List<GPAccountProject> accoutProjectList = accountProjectDao.findNotOwnerByProjectID(sharedProjectID);
+
+        List<GPAccount> accountList = new ArrayList<GPAccount>(accoutProjectList.size());
+        for (GPAccountProject accountProject : accoutProjectList) {
+            GPAccount account = accountProject.getAccount();
+            accountList.add(account);
+        }
+        return ShortAccountDTO.convertToShortAccountDTOList(accountList);
+    }
     //</editor-fold>
 
     private GPProject getProjectByID(Long projectID) throws ResourceNotFoundFault {
@@ -599,7 +623,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                        folderDTO);
+                                                              folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -621,10 +645,10 @@ class ProjectServiceImpl {
                 GPLayer layer = null;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                            (RasterLayerDTO) element);
+                                                                  (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                            (VectorLayerDTO) element);
+                                                                  (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);

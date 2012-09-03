@@ -46,7 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author giuseppe
- *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Transactional
 public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
@@ -80,6 +80,13 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
     @SuppressWarnings("unchecked")
     @Override
     public List<GPAccount> search(ISearch search) {
+        return super.search(search);
+    }
+
+    @Override
+    public List<GPAccount> findByOrganization(String organization) {
+        Search search = new Search();
+        search.addFilterEqual("organization.name", organization);
         return super.search(search);
     }
 

@@ -347,6 +347,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     private RasterTreeNode generateRasterTreeNode(GPShortLayerBean layer, String rasterAlias) {
         RasterTreeNode rasterTreeNode = this.generateRasterTreeNode(layer);
+        GPMementoSaveCache.getInstance().copyOriginalProperties(rasterTreeNode);
         rasterTreeNode.setAlias(rasterAlias);
         return rasterTreeNode;
     }
@@ -368,6 +369,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     private RasterTreeNode duplicateRaster(GPLayerBean layer, String alias) {
         RasterTreeNode raster = this.duplicateRaster(layer);
+        GPMementoSaveCache.getInstance().copyOriginalProperties(raster);
         raster.setAlias(alias);
         return raster;
     }

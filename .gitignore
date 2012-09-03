@@ -1,7 +1,10 @@
-target
+# ignore target artifact folders
+target/
+
+# ignore /geoplatform-gui/demos/catalog-finder-demo/war/WEB-INF/classes/ artifact folder
+classes/
+
+# ignore IDE artifacts
 .settings
 .classpath
 .project
-*.class
-*.pyc
-/geoplatform-gui/demos/catalog-finder-demo/war/WEB-INF/classes/

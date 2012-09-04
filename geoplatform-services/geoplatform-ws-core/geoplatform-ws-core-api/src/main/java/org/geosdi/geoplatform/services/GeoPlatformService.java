@@ -833,7 +833,8 @@ public interface GeoPlatformService {
     @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "RootFolders")
     List<FolderDTO> getRootFoldersByProjectID(
-            @WebParam(name = "projectID") Long projectID);
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
 
     /**
      * Retrieve a Project. Retrieve also the root folders (top-level folders)

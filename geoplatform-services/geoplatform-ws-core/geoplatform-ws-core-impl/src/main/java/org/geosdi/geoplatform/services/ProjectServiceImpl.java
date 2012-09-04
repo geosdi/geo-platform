@@ -154,7 +154,7 @@ class ProjectServiceImpl {
             accountDao.merge(account);
         }
 
-        return project.getId(); // Remark: return only the entity ID of Project
+        return project.getId();
     }
 
     @Deprecated
@@ -204,12 +204,8 @@ class ProjectServiceImpl {
         return project.getNumberOfElements();
     }
 
-    /**
-     *
-     * @param projectID
-     * @return root folders of a project
-     */
-    public List<FolderDTO> getRootFoldersByProjectID(Long projectID) {
+    public List<FolderDTO> getRootFoldersByProjectID(Long projectID)
+            throws ResourceNotFoundFault {
         List<GPFolder> foundAccountFolders = folderDao.searchRootFolders(projectID);
         return FolderDTO.convertToFolderDTOList(foundAccountFolders);
     }

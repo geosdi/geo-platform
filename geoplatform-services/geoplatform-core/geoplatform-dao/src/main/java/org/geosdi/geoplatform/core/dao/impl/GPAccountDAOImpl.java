@@ -46,7 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author giuseppe
- *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Transactional
 public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
@@ -84,6 +84,13 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
     }
 
     @Override
+    public List<GPAccount> findByOrganization(String organization) {
+        Search search = new Search();
+        search.addFilterEqual("organization.name", organization);
+        return super.search(search);
+    }
+
+    @Override
     public GPUser findByUsername(String username) {
         Search search = new Search();
         search.addFilterEqual("username", username);
@@ -113,14 +120,9 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
         return account;
     }
 
-    /**
-     * @todo Optimize
-     */
     @Override
     public boolean resetDefaultProject(Long defaultProjectId) {
-        em().createQuery("UPDATE User u SET u.defaultProjectID = null WHERE u.defaultProjectID=:defaultProjectId").
-                setParameter("defaultProjectId", defaultProjectId).executeUpdate();
-        em().createQuery("UPDATE Application a SET a.defaultProjectID = null WHERE a.defaultProjectID=:defaultProjectId").
+        em().createQuery("UPDATE Account a SET a.defaultProjectID = null WHERE a.defaultProjectID=:defaultProjectId").
                 setParameter("defaultProjectId", defaultProjectId).executeUpdate();
         return true;
     }

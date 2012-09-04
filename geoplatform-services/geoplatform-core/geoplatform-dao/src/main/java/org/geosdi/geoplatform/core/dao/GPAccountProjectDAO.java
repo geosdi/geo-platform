@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
  */
 public interface GPAccountProjectDAO {
 
@@ -74,6 +73,10 @@ public interface GPAccountProjectDAO {
     public List<GPAccountProject> findByOwnerAccountID(Long accountID);
 
     public List<GPAccountProject> findByProjectID(Long projectID);
+
+    public GPAccountProject findOwnerByProjectID(Long projectID);
+
+    public List<GPAccountProject> findNotOwnerByProjectID(Long projectID);
 
     public GPAccountProject find(Long accountID, Long projectID);
 }

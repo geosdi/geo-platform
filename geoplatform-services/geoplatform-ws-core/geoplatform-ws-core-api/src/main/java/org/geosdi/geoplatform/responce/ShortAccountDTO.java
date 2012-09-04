@@ -201,6 +201,10 @@ public abstract class ShortAccountDTO {
         return str.toString();
     }
 
+    /**
+     * TODO Each entity class will call the appropriate DTO for the conversion.
+     * E.g. GPUser will have the method public UserDTO getDTO()
+     */
     public static List<ShortAccountDTO> convertToShortAccountDTOList(List<GPAccount> accounts) {
         List<ShortAccountDTO> accountsDTO = new ArrayList<ShortAccountDTO>(accounts.size());
 

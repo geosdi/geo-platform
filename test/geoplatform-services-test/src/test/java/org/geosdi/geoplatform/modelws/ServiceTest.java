@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.modelws;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPBBox;
@@ -61,6 +62,8 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.security.acls.model.Permission;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -123,23 +126,23 @@ public abstract class ServiceTest {
 
         // Insert User
         idUserTest = this.createAndInsertUser(usernameTest, organizationTest,
-                ROLE_USER);
+                                              ROLE_USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
         idProjectTest = this.createAndInsertProject("project_test_ws", false, 2,
-                new Date(System.currentTimeMillis()));
+                                                    new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);
-        // Insert UserProject
-        this.createAndInsertUserProject(userTest, projectTest);
+        // Insert the Account as the owner of Project
+        this.createAndInsertAccountProject(userTest, projectTest, BasePermission.ADMINISTRATION);
 
         // Create root folders for the user
         idRootFolderA = this.createAndInsertFolder(nameRootFolderA, projectTest,
-                2, null);
+                                                   2, null);
         rootFolderA = gpWSClient.getFolderDetail(idRootFolderA);
 
         idRootFolderB = this.createAndInsertFolder(nameRootFolderB, projectTest,
-                1, null);
+                                                   1, null);
         rootFolderB = gpWSClient.getFolderDetail(idRootFolderB);
 
         // Set the list of keywords (for raster layer)
@@ -246,25 +249,25 @@ public abstract class ServiceTest {
         }
     }
 
-    protected long createAndInsertProject(String name, boolean isShared,
+    protected long createAndInsertProject(String name, boolean shared,
             int numberOfElements, Date creationalDate)
             throws IllegalParameterFault {
-        GPProject project = this.createProject(name, isShared, numberOfElements,
-                creationalDate);
+        GPProject project = this.createProject(name, shared, numberOfElements,
+                                               creationalDate);
         return gpWSClient.insertProject(project);
     }
 
-    protected long createAndInsertUserProject(GPUser user, GPProject project)
-            throws IllegalParameterFault {
+    protected long createAndInsertAccountProject(GPAccount account, GPProject project,
+            Permission permission) throws IllegalParameterFault {
         GPAccountProject userProject = new GPAccountProject();
-        userProject.setAccountAndProject(user, project);
+        userProject.setAccountAndProject(account, project);
+        userProject.setPermissionMask(permission.getMask());
         return gpWSClient.insertAccountProject(userProject);
     }
 
     protected long createAndInsertFolder(String folderName, GPProject project,
             int position, GPFolder parent) throws ResourceNotFoundFault, IllegalParameterFault {
-        GPFolder folder = this.createFolder(folderName, project, position,
-                parent);
+        GPFolder folder = this.createFolder(folderName, project, position, parent);
         return gpWSClient.insertFolder(project.getId(), folder);
     }
 
@@ -272,16 +275,16 @@ public abstract class ServiceTest {
             int position, GPFolder parent, int numberOfDescendants)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = this.createFolder(folderName, project, position,
-                parent);
+                                            parent);
         folder.setNumberOfDescendants(numberOfDescendants);
         return gpWSClient.insertFolder(project.getId(), folder);
     }
 
-    protected GPProject createProject(String name, boolean isShared,
+    protected GPProject createProject(String name, boolean shared,
             int numberOfElements, Date creationalDate) {
         GPProject project = new GPProject();
         project.setName(name);
-        project.setShared(isShared);
+        project.setShared(shared);
         project.setNumberOfElements(numberOfElements);
         project.setCreationDate(creationalDate);
         return project;
@@ -303,7 +306,7 @@ public abstract class ServiceTest {
             throws IllegalParameterFault {
         GPRasterLayer rasterLayer = new GPRasterLayer();
         this.createLayer(rasterLayer, folder, title, name, abstractText,
-                position, srs, urlServer);
+                         position, srs, urlServer);
 
         GPLayerInfo layerInfo = new GPLayerInfo();
         layerInfo.setKeywords(layerInfoKeywords);
@@ -320,7 +323,7 @@ public abstract class ServiceTest {
             throws IllegalParameterFault {
         GPVectorLayer vectorLayer = new GPVectorLayer();
         this.createLayer(vectorLayer, folder, title, name, abstractText,
-                position, srs, urlServer);
+                         position, srs, urlServer);
 
         vectorLayer.setLayerType(GPLayerType.POLYGON);
         return gpWSClient.insertLayer(vectorLayer);

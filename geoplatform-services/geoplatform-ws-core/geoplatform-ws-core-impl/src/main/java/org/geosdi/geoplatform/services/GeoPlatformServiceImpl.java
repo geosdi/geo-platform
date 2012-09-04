@@ -569,12 +569,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throws ResourceNotFoundFault {
         projectServiceDelegate.setProjectOwner(request, true);
     }
-
-    @Override
-    public ProjectDTO getExpandedElementsByProjectID(Long projectID)
-            throws ResourceNotFoundFault {
-        return projectServiceDelegate.getExpandedElementsByProjectID(projectID);
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Viewport">
@@ -722,6 +716,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public List<FolderDTO> getRootFoldersByProjectID(Long projectID) {
         return projectServiceDelegate.getRootFoldersByProjectID(projectID);
+    }
+
+    @Override
+    public ProjectDTO getExpandedElementsByProjectID(Long projectID)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.getExpandedElementsByProjectID(projectID);
     }
 
     @Override

@@ -187,7 +187,7 @@ public interface GeoPlatformService {
      * the reference to shared Project.
      *
      * @param accountID the Account ID
-     * @return the result boolean operations
+     * @return true if the Account was deleted
      * @throws ResourceNotFoundFault if Account not found
      */
     @Delete
@@ -534,6 +534,18 @@ public interface GeoPlatformService {
     // === Project
     // ==========================================================================
 
+    /**
+     * Save a Project and its Account owner.
+     *
+     * @param stringID the string ID of the Account (username for User and appID
+     * for Application) owner of the Project
+     * @param project the Project to save
+     * @param defaultProject flag for save the Project as default for the
+     * Account
+     * @return the Project ID
+     * @throws ResourceNotFoundFault if the Account not found
+     * @throws IllegalParameterFault if the Project is not valid
+     */
     @Put
     @HttpResource(location = "/project")
     Long saveProject(@WebParam(name = "stringID") String stringID,
@@ -541,54 +553,104 @@ public interface GeoPlatformService {
             @WebParam(name = "defaultProject") boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    /**
+     * Save a Project.
+     *
+     * @param project the Project to save.
+     * @return the Project ID
+     * @throws IllegalParameterFault if the Project is not valid
+     * @deprecated only for test purpose
+     * @see #saveProject(java.lang.String,
+     * org.geosdi.geoplatform.core.model.GPProject, boolean)
+     */
     @Put
     @HttpResource(location = "/project")
     @Deprecated
     Long insertProject(@WebParam(name = "project") GPProject project)
             throws IllegalParameterFault;
 
+    /**
+     * Update a Project.
+     *
+     * @param project the Project to update
+     * @return the Project ID
+     * @throws ResourceNotFoundFault if the Project not found
+     * @throws IllegalParameterFault if the Project is not valid
+     */
     @Post
     @HttpResource(location = "/project")
     Long updateProject(@WebParam(name = "project") GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    /**
+     * Delete a Project.
+     *
+     * @param project the Project to delete
+     * @return true if the Project was deleted
+     * @throws ResourceNotFoundFault if the Project not found
+     */
     @Delete
     @HttpResource(location = "/projects/{projectID}")
     boolean deleteProject(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve a Project.
+     *
+     * @param projectID the Project ID
+     * @return the Project to retrieve
+     * @throws ResourceNotFoundFault if the Project not found
+     */
     @Get
     @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "Project")
     GPProject getProjectDetail(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve the number of elements of a Project.
+     *
+     * @param projectID the Project ID
+     * @return the number of elements to retrieve
+     * @throws ResourceNotFoundFault if Project not found
+     */
     @Get
     @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "Project")
     int getNumberOfElementsProject(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Set a Project as shared.
+     *
+     * @param projectID the Project ID
+     * @throws ResourceNotFoundFault if Project not found
+     */
     @Post
     @HttpResource(location = "/project/{projectID}/shared")
     void setProjectShared(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Set an Account owner for a Project.
+     *
+     * @param request the request that wrap Project ID and Account ID
+     * @throws ResourceNotFoundFault if Project or Account not found
+     */
     @Post
     @HttpResource(location = "/project/{projectID}/owner/{accountID}")
     boolean setProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
 
+    /**
+     * Force an Account owner for a Project.
+     *
+     * @param request the request that wrap Project ID and Account ID
+     * @throws ResourceNotFoundFault if Project or Account not found
+     */
     @Post
     @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
     void forceProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault;
-
-    @Get
-    @HttpResource(location = "/project/{projectID}")
-    @WebResult(name = "TreeElements")
-    ProjectDTO getExpandedElementsByProjectID(
-            @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Viewport">
@@ -760,18 +822,61 @@ public interface GeoPlatformService {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Folder / Project">
+    /**
+     * Retrieve only the root folders (top-level folders) of a Project.
+     *
+     * @param projectID the Project ID
+     * @return the root folders
+     * @throws ResourceNotFoundFault if Project not found
+     */
     @Get
-    // @HttpResource(location = "/projects/{projectID}")
+    @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "RootFolders")
     List<FolderDTO> getRootFoldersByProjectID(
             @WebParam(name = "projectID") Long projectID);
 
+    /**
+     * Retrieve a Project. Retrieve also the root folders (top-level folders)
+     * with content (sub-folders and layers), so all expanded folders (at any
+     * level) in cascade.
+     *
+     * @todo rename to getExpandedFoldersByProjectID because only the folder can
+     * be expanded.
+     *
+     * @param projectID the Project ID
+     * @return the Project to retrieve
+     * @throws ResourceNotFoundFault if Project not found
+     */
     @Get
-    // @HttpResource(location = "/projects/{projectID}")
+    @HttpResource(location = "/projects/{projectID}")
+    @WebResult(name = "TreeElements")
+    ProjectDTO getExpandedElementsByProjectID(
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Export a Project with its contents (folders and layers).
+     *
+     * @param projectID the Project ID
+     * @return the Project to export
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Get
+    @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "Project")
     ProjectDTO exportProject(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Import a Project with its contents (folders and layers) for an Account
+     * owner.
+     *
+     * @param projectDTO the Project to import
+     * @param accountID the Account owner ID of the Project
+     * @return the Project ID
+     * @throws IllegalParameterFault if Project and its contents is not valid
+     * @throws ResourceNotFoundFault if Account not found
+     */
     @Put
     @HttpResource(location = "/project")
     Long importProject(@WebParam(name = "projectDTO") ProjectDTO projectDTO,

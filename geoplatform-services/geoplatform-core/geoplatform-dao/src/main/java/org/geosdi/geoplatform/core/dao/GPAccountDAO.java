@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 
 /**
  * @author giuseppe
- *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface GPAccountDAO {
 
@@ -64,6 +64,8 @@ public interface GPAccountDAO {
     public List<GPAccount> search(ISearch search);
 
     public int count(ISearch search);
+
+    public List<GPAccount> findByOrganization(String organization);
 
     public GPUser findByUsername(String username);
 

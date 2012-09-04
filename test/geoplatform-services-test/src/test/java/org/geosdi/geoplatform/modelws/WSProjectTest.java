@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -50,10 +51,12 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
+import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.security.acls.domain.BasePermission;
 
 /**
  *
@@ -385,7 +388,7 @@ public class WSProjectTest extends ServiceTest {
         super.rootFolderB.setExpanded(true);
         folder1A.setExpanded(true);
         folder2C.setExpanded(true);
-        
+
         gpWSClient.updateFolder(super.rootFolderA);
         gpWSClient.updateFolder(super.rootFolderB);
         gpWSClient.updateFolder(folder1A);
@@ -427,5 +430,39 @@ public class WSProjectTest extends ServiceTest {
         List<IElementDTO> childRootFolderB = rootFolders.get(1).getElementList();
         Assert.assertEquals("#B", 1, childRootFolderB.size());
         Assert.assertEquals("V-B", nameVector + nameRootFolderB, childRootFolderB.get(0).getName());
+    }
+
+    @Test
+    public void testAccountsBySharedProjectID() throws Exception {
+        // Set shared the Project test
+        projectTest.setShared(true);
+        projectTest.setName("shared_project_test_ws");
+        gpWSClient.updateProject(projectTest);
+
+        // Initial test
+        List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsBySharedProjectID(idProjectTest);
+        Assert.assertNull(accountsToShare);
+
+        // Insert Users to which the Project is shared
+        Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, ROLE_USER);
+        Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, ROLE_VIEWER);
+
+        GPUser firstUser = gpWSClient.getUserDetail(firstUserID);
+        GPUser latterUser = gpWSClient.getUserDetail(latterUserID);
+
+        // Insert the Users as viewers of Project
+        this.createAndInsertAccountProject(firstUser, projectTest, BasePermission.READ);
+        this.createAndInsertAccountProject(latterUser, projectTest, BasePermission.READ);
+
+        // Final test
+        accountsToShare = gpWSClient.getAccountsBySharedProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(2, accountsToShare.size());
+    }
+
+    @Test(expected = IllegalParameterFault.class)
+    public void testAccountsBySharedProjectIDIncorrect() throws Exception {
+        // Projet test is not shared
+        gpWSClient.getAccountsBySharedProjectID(idProjectTest);
     }
 }

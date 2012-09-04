@@ -85,7 +85,7 @@ public class GPProject implements Serializable {
     private Date creationDate = new Date(System.currentTimeMillis());
     //
     @Column
-    private int version;
+    private int version = 1;
     //
     @Column
     private boolean shared = false; // TODO Manage the sharing wrt permission into GPAccountProject

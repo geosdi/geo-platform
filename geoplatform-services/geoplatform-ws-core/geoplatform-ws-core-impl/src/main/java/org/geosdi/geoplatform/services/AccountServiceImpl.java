@@ -631,7 +631,7 @@ class AccountServiceImpl {
     private void updateAccount(GPAccount accountToUpdate, GPAccount account)
             throws IllegalParameterFault {
         accountToUpdate.setEnabled(account.isEnabled());
-        accountToUpdate.setLoadExpandedFolder(account.isLoadExpandedFolder());
+        accountToUpdate.setLoadExpandedFolders(account.isLoadExpandedFolders());
 
         if (!accountToUpdate.isAccountTemporary() && account.isAccountTemporary()) {
             throw new IllegalParameterFault("A standard account cannot be changed to temporary account");

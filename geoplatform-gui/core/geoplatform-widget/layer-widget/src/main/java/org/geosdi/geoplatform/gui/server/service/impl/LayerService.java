@@ -125,7 +125,7 @@ public class LayerService implements ILayerService {
 
         List<FolderDTO> folderList = null;
         try {
-            if (account.isLoadExpandedFolder()) {
+            if (account.isLoadExpandedFolders()) {
                 ProjectDTO project = geoPlatformServiceClient.getExpandedElementsByProjectID(projectId);
                 folderList = project.getRootFolders();
             } else {

@@ -81,7 +81,7 @@ public class UserOptionsMemberView extends UserOptionsMember {
                 UserOptionsMemberView.super.saveButton.enable();
             }
         });
-        startupStrategyCheckBox.setValue(userTreeOptions.isLoadExpandedFolder());
+        startupStrategyCheckBox.setValue(userTreeOptions.isLoadExpandedFolders());
         formPanel.add(startupStrategyCheckBox);
         formPanel.setHeaderVisible(Boolean.FALSE);
         formPanel.setBodyBorder(Boolean.FALSE);
@@ -94,7 +94,7 @@ public class UserOptionsMemberView extends UserOptionsMember {
     public void saveOptions() {
         this.startupStrategyCheckBox.getValue();
         UserTreeOptions userTreeOptions = Registry.get(UserSessionEnum.USER_TREE_OPTIONS.name());
-        userTreeOptions.setLoadExpandedFolder(startupStrategyCheckBox.getValue());
+        userTreeOptions.setLoadExpandedFolders(startupStrategyCheckBox.getValue());
         UserRemoteImpl.Util.getInstance().updateUserTreeOptions(userTreeOptions, new AsyncCallback<Long>() {
             @Override
             public void onFailure(Throwable caught) {

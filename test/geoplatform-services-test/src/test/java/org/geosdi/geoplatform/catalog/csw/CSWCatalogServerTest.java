@@ -142,6 +142,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
                 "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw", organizationNameTest); // Version 2.0.1
     }
 
+    @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureSaveServerSNIPC() throws Exception {
         // Save the server

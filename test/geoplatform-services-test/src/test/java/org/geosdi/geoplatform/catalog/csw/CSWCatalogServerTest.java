@@ -143,7 +143,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testSaveSecureServerSNIPC() throws Exception {
+    public void testSecureSaveServerSNIPC() throws Exception {
         // Save the server
         String serverURL = super.snipcProvider.getSnipcUrl();
         ServerCSWDTO serverDTO = cswService.saveServerCSW("SNIPC", serverURL, organizationNameTest);

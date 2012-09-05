@@ -245,8 +245,9 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         Assert.assertTrue(deleted);
     }
 
+    @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
-    public void testGetRecordsSecureSNIPC() throws Exception {
+    public void testSecureGetRecordsSNIPC() throws Exception {
         // Insert the server
         GeoPlatformServer server = this.createCSWServer("SNIPC", snipcProvider.getSnipcUrl(), organizationTest);
         Long serverID = cswService.insertServerCSW(server);

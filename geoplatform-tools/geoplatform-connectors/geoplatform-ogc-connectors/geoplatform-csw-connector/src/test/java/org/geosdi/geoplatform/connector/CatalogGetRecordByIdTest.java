@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -158,6 +159,7 @@ public class CatalogGetRecordByIdTest {
         }
     }
 
+    @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureGetRecordById() throws Exception {
         URL url = new URL(snipcUrl);

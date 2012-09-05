@@ -6,7 +6,7 @@
     <column>account_non_expired</column>
     <column>account_temporary</column>
     <column>creation_date</column>
-    <column>defaultproject_id</column>
+    <column>default_project_id</column>
     <column>is_enabled</column>
     <column>email_address</column>
     <column>name</column>

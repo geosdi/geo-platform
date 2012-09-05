@@ -43,5 +43,5 @@ import java.io.Serializable;
  */
 public interface IGPTreeOptions extends Serializable {
 
-    boolean isLoadExpandedFolder();
+    boolean isLoadExpandedFolders();
 }

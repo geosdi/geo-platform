@@ -42,6 +42,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -79,16 +80,17 @@ public class GPViewport implements Serializable {
     @Column
     private String description;
     //  
-    @Column(nullable = false)
+    @Column(name = "zoom_level", nullable = false)
     private double zoomLevel;
     //  
-    @Column
+    @Column(name = "is_default")
     private boolean isDefault = false;
     //
     @Embedded
     private GPBBox bbox;
     //
     @ManyToOne(optional = true)
+    @JoinColumn(name = "account_project_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Index(name = "ACCOUNT_PROJECT_ID_INDEX")
     private GPAccountProject accountProject;
@@ -181,7 +183,13 @@ public class GPViewport implements Serializable {
 
     @Override
     public String toString() {
-        return "GPViewport{" + "id=" + id + ", name=" + name + ", description=" + description + ", zoomLevel=" + zoomLevel + ", isDefault=" + isDefault + ", bbox=" + bbox + ", accountProject=" + accountProject + '}';
+        return "GPViewport{" + "id=" + id
+                + ", name=" + name
+                + ", description=" + description
+                + ", zoomLevel=" + zoomLevel
+                + ", isDefault=" + isDefault
+                + ", bbox=" + bbox
+                + ", accountProject=" + accountProject + '}';
     }
 
     @Override

@@ -36,12 +36,13 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 
 import javax.persistence.Embeddable;
 
 /**
  * @author Francesco Izzi - geoSDI
- * 
+ *
  */
 @Embeddable
 public class GPBBox implements Serializable {
@@ -51,9 +52,16 @@ public class GPBBox implements Serializable {
      */
     private static final long serialVersionUID = 2795112852068645206L;
     //
+    @Column(name = "min_x")
     private double minX;
+    //
+    @Column(name = "min_y")
     private double minY;
+    //
+    @Column(name = "max_x")
     private double maxX;
+    //
+    @Column(name = "max_y")
     private double maxY;
 
     public GPBBox(double minX, double minY, double maxX, double maxY) {
@@ -74,8 +82,7 @@ public class GPBBox implements Serializable {
     }
 
     /**
-     * @param minX
-     *            the minX to set
+     * @param minX the minX to set
      */
     public void setMinX(double minX) {
         this.minX = minX;
@@ -89,8 +96,7 @@ public class GPBBox implements Serializable {
     }
 
     /**
-     * @param minY
-     *            the minY to set
+     * @param minY the minY to set
      */
     public void setMinY(double minY) {
         this.minY = minY;
@@ -104,8 +110,7 @@ public class GPBBox implements Serializable {
     }
 
     /**
-     * @param maxX
-     *            the maxX to set
+     * @param maxX the maxX to set
      */
     public void setMaxX(double maxX) {
         this.maxX = maxX;
@@ -119,8 +124,7 @@ public class GPBBox implements Serializable {
     }
 
     /**
-     * @param maxY
-     *            the maxY to set
+     * @param maxY the maxY to set
      */
     public void setMaxY(double maxY) {
         this.maxY = maxY;
@@ -137,7 +141,7 @@ public class GPBBox implements Serializable {
         str.append("minX=").append(minX);
         str.append(", minY=").append(minY);
         str.append(", maxX=").append(maxX);
-        str.append(", maxY=").append(maxY).append('}');
-        return str.toString();
+        str.append(", maxY=").append(maxY);
+        return str.append('}').toString();
     }
 }

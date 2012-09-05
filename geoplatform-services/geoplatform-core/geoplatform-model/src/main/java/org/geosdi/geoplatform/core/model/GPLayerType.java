@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -52,7 +51,6 @@ public enum GPLayerType implements Serializable {
     MULTILINESTRING(6),
     MULTIPOLYGON(7);
     //
-    @Column(name = "layer_type")
     private int code;
 
     private GPLayerType() {

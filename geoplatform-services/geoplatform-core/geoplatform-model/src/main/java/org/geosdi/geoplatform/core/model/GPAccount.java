@@ -56,7 +56,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity(name = "Account")
 @Table(name = "gp_account")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "GP_ACCOUNT_TYPE", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "gp_account_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class GPAccount implements Serializable {
 
     /**

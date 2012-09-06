@@ -33,30 +33,73 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.services;
-
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import org.codehaus.jra.Get;
-import org.codehaus.jra.HttpResource;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.responce.LayerSchemaDTO;
+package org.geosdi.geoplatform.responce;
 
 /**
- * Public interface to define the service operations mapped via REST using CXT
- * framework.
- *
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  */
-@WebService(name = "GPWFSService",
-            targetNamespace = "http://services.geo-platform.org/")
-public interface GPWFSService {
+
+
+public class ShortAttributeDTO {
+            
+    private String name;
+    private String localName;
+    private String defaultValue;
+    private String type;
+    private int minOccurs;
+    private int maxOccurs;
+
+    public ShortAttributeDTO() {
+        super();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLocalName() {
+        return localName;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getMinOccurs() {
+        return minOccurs;
+    }
+
+    public int getMaxOccurs() {
+        return maxOccurs;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLocalName(String localName) {
+        this.localName = localName;
+    }
+
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setMinOccurs(int minOccurs) {
+        this.minOccurs = minOccurs;
+    }
+
+    public void setMaxOccurs(int maxOccurs) {
+        this.maxOccurs = maxOccurs;
+    }
     
-    @Get
-    @HttpResource(location = "/wfs/describeFeatureType/{typeName}")
-    @WebResult(name = "DescribeFeatureType")
-    LayerSchemaDTO describeFeatureType(@WebParam(name = "urlServer") String urlServer, @WebParam(name = "typeName") String typeName)
-            throws ResourceNotFoundFault;
 }

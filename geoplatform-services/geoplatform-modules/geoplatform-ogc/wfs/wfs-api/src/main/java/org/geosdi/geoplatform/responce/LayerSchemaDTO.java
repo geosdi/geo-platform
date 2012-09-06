@@ -33,30 +33,50 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.responce;
 
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import org.codehaus.jra.Get;
-import org.codehaus.jra.HttpResource;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.responce.LayerSchemaDTO;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
- * Public interface to define the service operations mapped via REST using CXT
- * framework.
- *
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  */
-@WebService(name = "GPWFSService",
-            targetNamespace = "http://services.geo-platform.org/")
-public interface GPWFSService {
+
+@XmlRootElement(name = "LayerSchemaDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"schemaNamespaceURI","attributes"})
+public class LayerSchemaDTO {
     
-    @Get
-    @HttpResource(location = "/wfs/describeFeatureType/{typeName}")
-    @WebResult(name = "DescribeFeatureType")
-    LayerSchemaDTO describeFeatureType(@WebParam(name = "urlServer") String urlServer, @WebParam(name = "typeName") String typeName)
-            throws ResourceNotFoundFault;
+    private String schemaNamespaceURI;
+    
+    @XmlElementWrapper(name = "attributes")
+    @XmlElement(name = "attribute")
+    private List<? extends ShortAttributeDTO> attributes;
+
+    public LayerSchemaDTO() {
+        super();
+    }
+
+    public void setSchemaNamespaceURI(String schemaNamespaceURI) {
+        this.schemaNamespaceURI = schemaNamespaceURI;
+    }
+
+    public void setAttributes(List<? extends ShortAttributeDTO> attributes) {
+        this.attributes = attributes;
+    }
+
+    public String getSchemaNamespaceURI() {
+        return schemaNamespaceURI;
+    }
+
+    public List<? extends ShortAttributeDTO> getAttributes() {
+        return attributes;
+    }
+    
 }

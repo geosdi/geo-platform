@@ -567,17 +567,12 @@ class ProjectServiceImpl {
     /**
      * @see GeoPlatformService#getAccountsBySharedProjectID(java.lang.Long)
      */
-    List<ShortAccountDTO> getAccountsBySharedProjectID(Long sharedProjectID)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        GPProject project = this.getProjectByID(sharedProjectID);
+    List<ShortAccountDTO> getAccountsBySharedProjectID(Long projectID)
+            throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        if (!project.isShared()) {
-            throw new IllegalParameterFault(
-                    "The project with ID \"" + sharedProjectID + "\" is not shared.");
-        }
-
-        List<GPAccountProject> accoutProjectList = accountProjectDao.findByProjectID(sharedProjectID);
+        List<GPAccountProject> accoutProjectList = accountProjectDao.findByProjectID(projectID);
 
         List<GPAccount> accountList = new ArrayList<GPAccount>(accoutProjectList.size());
         for (GPAccountProject accountProject : accoutProjectList) {
@@ -588,8 +583,7 @@ class ProjectServiceImpl {
     }
 
     /**
-     * @see
-     * GeoPlatformService#getAccountsToShareByProjectID(java.lang.Long)
+     * @see GeoPlatformService#getAccountsToShareByProjectID(java.lang.Long)
      */
     List<ShortAccountDTO> getAccountsToShareByProjectID(Long projectID)
             throws ResourceNotFoundFault {

@@ -443,7 +443,7 @@ public class WSProjectTest extends ServiceTest {
         gpWSClient.updateProject(projectTest);
 
         // Initial test
-        List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsBySharedProjectID(idProjectTest);
+        List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(1, accountsToShare.size());
         Assert.assertEquals(usernameTest, ((UserDTO) accountsToShare.get(0)).getUsername());
@@ -460,15 +460,9 @@ public class WSProjectTest extends ServiceTest {
         this.createAndInsertAccountProject(latterUser, projectTest, BasePermission.READ);
 
         // Final test
-        accountsToShare = gpWSClient.getAccountsBySharedProjectID(idProjectTest);
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(3, accountsToShare.size());
-    }
-
-    @Test(expected = IllegalParameterFault.class)
-    public void testAccountsBySharedProjectIDIncorrect() throws Exception {
-        // Projet test is not shared
-        gpWSClient.getAccountsBySharedProjectID(idProjectTest);
     }
 
     @Test

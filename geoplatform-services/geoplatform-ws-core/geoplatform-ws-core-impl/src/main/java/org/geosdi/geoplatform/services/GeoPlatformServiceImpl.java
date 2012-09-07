@@ -524,9 +524,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ShortAccountDTO> getAccountsBySharedProjectID(Long sharedProjectID)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return this.projectServiceDelegate.getAccountsBySharedProjectID(sharedProjectID);
+    public List<ShortAccountDTO> getAccountsByProjectID(Long projectID)
+            throws ResourceNotFoundFault {
+        return this.projectServiceDelegate.getAccountsBySharedProjectID(projectID);
     }
 
     @Override

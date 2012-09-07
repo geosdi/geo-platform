@@ -42,6 +42,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPProject;
 
 /**
@@ -57,6 +58,7 @@ public class ProjectDTO {
     private Integer numberOfElements;
     private Integer version;
     private Boolean shared;
+    private ShortAccountDTO owner;
     //
     @XmlElementWrapper(name = "rootFolders")
     @XmlElement(name = "folder")
@@ -69,9 +71,9 @@ public class ProjectDTO {
     }
 
     /**
-     * Constructor with GPProject as arg.
+     * Convert a Project entity into a Project DTO.
      *
-     * @param project
+     * @param project the Project entity to convert
      */
     public ProjectDTO(GPProject project) {
         this.id = project.getId();
@@ -79,6 +81,17 @@ public class ProjectDTO {
         this.numberOfElements = project.getNumberOfElements();
         this.version = project.getVersion();
         this.shared = project.isShared();
+    }
+
+    /**
+     * Convert a Project entity into a Project DTO, with its Account owner.
+     *
+     * @param project the Project entity to convert
+     * @param owner the Account owner of the Project
+     */
+    public ProjectDTO(GPProject project, GPAccount owner) {
+        this(project);
+        this.owner = ShortAccountDTO.convertToShortAccountDTO(owner);
     }
 
     /**
@@ -140,7 +153,7 @@ public class ProjectDTO {
     /**
      * @return the shared
      */
-    public Boolean getShared() {
+    public Boolean isShared() {
         return shared;
     }
 
@@ -149,6 +162,20 @@ public class ProjectDTO {
      */
     public void setShared(Boolean shared) {
         this.shared = shared;
+    }
+
+    /**
+     * @return the owner
+     */
+    public ShortAccountDTO getOwner() {
+        return owner;
+    }
+
+    /**
+     * @param owner the owner to set
+     */
+    public void setOwner(ShortAccountDTO owner) {
+        this.owner = owner;
     }
 
     /**
@@ -173,6 +200,7 @@ public class ProjectDTO {
                 + ", numberOfElements=" + numberOfElements
                 + ", version=" + version
                 + ", shared=" + shared
+                + ", owner=" + owner
                 + ", rootFolders=" + rootFolders + '}';
     }
 

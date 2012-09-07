@@ -491,6 +491,23 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public boolean setProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.setProjectOwner(request, false);
+    }
+
+    @Override
+    public void forceProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault {
+        projectServiceDelegate.setProjectOwner(request, true);
+    }
+
+    @Override
+    public GPAccount getProjectOwner(Long projectID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.getProjectOwner(projectID);
+    }
+
+    @Override
     public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
         return projectServiceDelegate.getDefaultProject(accountID);
     }
@@ -556,18 +573,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public void setProjectShared(Long projectID)
             throws ResourceNotFoundFault {
         projectServiceDelegate.setProjectShared(projectID);
-    }
-
-    @Override
-    public boolean setProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault {
-        return projectServiceDelegate.setProjectOwner(request, false);
-    }
-
-    @Override
-    public void forceProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault {
-        projectServiceDelegate.setProjectOwner(request, true);
     }
     //</editor-fold>
 

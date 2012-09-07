@@ -70,6 +70,7 @@ import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.acls.domain.BasePermission;
 
 /**
  * @author Michele Santomauro
@@ -325,16 +326,53 @@ class ProjectServiceImpl {
         GPProject project = this.getProjectByID(request.getProjectID());
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        GPAccount account = this.getAccountByID(request.getAccountID());
-        EntityCorrectness.checkAccountLog(account); // TODO assert
+        GPAccount owner = this.getAccountByID(request.getAccountID());
+        EntityCorrectness.checkAccountLog(owner); // TODO assert
 
-        // TODO: implement the logic described in this method's javadoc
+        // Reset the owner
+        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(project.getId());
+        EntityCorrectness.checkAccountProjectLog(accountOwner); // TODO assert
+        accountOwner.setPermissionMask(BasePermission.READ.getMask());
+        accountProjectDao.merge(accountOwner);
 
-        project.setShared(false);
+        // Set the new owner
+        List<GPAccountProject> accounts = accountProjectDao.findNotOwnersByProjectID(project.getId());
+        boolean exist = false;
+        for (GPAccountProject accountProject : accounts) {
+            EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
+            if (owner.equals(accountProject.getAccount())) {
+                accountProject.setPermissionMask(BasePermission.ADMINISTRATION.getMask());
+                exist = true;
+                break;
+            }
+        }
+        accountProjectDao.merge(accounts.toArray(new GPAccountProject[accounts.size()]));
 
-        projectDao.merge(project);
+        if (!exist) {
+            GPAccountProject ownerProject = new GPAccountProject();
+            ownerProject.setAccount(owner);
+            ownerProject.setProject(project);
+            ownerProject.setPermissionMask(BasePermission.ADMINISTRATION.getMask());
+            accountProjectDao.persist(ownerProject);
+        }
 
         return true;
+    }
+
+    /**
+     * @see GeoPlatformService#getProjectOwner(java.lang.Long)
+     */
+    public GPAccount getProjectOwner(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(projectID);
+        EntityCorrectness.checkAccountProjectLog(accountOwner); // TODO assert
+
+        GPAccount owner = accountOwner.getAccount();
+        EntityCorrectness.checkAccountLog(owner); // TODO assert
+
+        return owner; // TODO
     }
 
     public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
@@ -455,6 +493,10 @@ class ProjectServiceImpl {
         return Long.valueOf(accountProjectDao.count(searchCriteria));
     }
 
+    /**
+     * @see GeoPlatformService#searchAccountProjects(java.lang.Long,
+     * org.geosdi.geoplatform.request.PaginatedSearchRequest)
+     */
     public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
@@ -480,7 +522,16 @@ class ProjectServiceImpl {
         }
         EntityCorrectness.checkProjectListLog(projects); // TODO assert
 
-        return ProjectDTO.convertToProjectDTOList(projects);
+        List<ProjectDTO> projectDTO = ProjectDTO.convertToProjectDTOList(projects);
+        for (ProjectDTO project : projectDTO) {
+            if (project.isShared()) {
+                GPAccount owner = accountProjectDao.findOwnerByProjectID(accountID).getAccount();
+                ShortAccountDTO ownerDTO = ShortAccountDTO.convertToShortAccountDTO(owner);
+                project.setOwner(ownerDTO);
+            }
+        }
+
+        return projectDTO;
     }
 
     /**

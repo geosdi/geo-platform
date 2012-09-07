@@ -39,6 +39,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -47,6 +48,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
@@ -99,23 +101,10 @@ public class WSProjectTest extends ServiceTest {
     /**
      * Tree structure to test
      *
-     * A -|
-     *    + raster-A
-     *    + 1A ---------|
-     *                  + 2A -------|
-     *                              + 3A -------|
-     *                                          + vector-3A
-     *                              + 3B
-     *                              + 3C
-     *                  + 2B
-     *                  + 2C -------|
-     *                              + raster-2C
+     * A -| + raster-A + 1A ---------| + 2A -------| + 3A -------| + vector-3A +
+     * 3B + 3C + 2B + 2C -------| + raster-2C
      *
-     *    + 1B ---------|
-     *                  + raster-1B
-     *    + 1C
-     * B -|
-     *    + vector-B
+     * + 1B ---------| + raster-1B + 1C B -| + vector-B
      */
     @Override
     public void setUp() throws Exception {
@@ -467,5 +456,53 @@ public class WSProjectTest extends ServiceTest {
     public void testAccountsBySharedProjectIDIncorrect() throws Exception {
         // Projet test is not shared
         gpWSClient.getAccountsBySharedProjectID(idProjectTest);
+    }
+
+    @Test
+    public void testProjectOwner() throws Exception {
+        // Set shared the Project test
+        projectTest.setShared(true);
+        projectTest.setName("shared_project_owner_test_ws");
+        gpWSClient.updateProject(projectTest);
+
+        // Insert a User to which the Project is shared as viewer
+        Long newOwnerID = this.createAndInsertUser("user_to_share_project", organizationTest, ROLE_USER);
+        GPUser newOwner = gpWSClient.getUserDetail(newOwnerID);
+        this.createAndInsertAccountProject(newOwner, projectTest, BasePermission.READ);
+
+        // Initial test
+        GPAccount owner = gpWSClient.getProjectOwner(idProjectTest);
+        Assert.assertNotNull(owner);
+        Assert.assertEquals(userTest, owner);
+
+        // Change the Account owner
+        RequestByAccountProjectIDs request = new RequestByAccountProjectIDs(newOwnerID, idProjectTest);
+        boolean result = gpWSClient.setProjectOwner(request);
+        Assert.assertTrue(result);
+
+        // Final test
+        owner = gpWSClient.getProjectOwner(idProjectTest);
+        Assert.assertNotNull(owner);
+        Assert.assertEquals(newOwnerID, owner.getId());
+    }
+
+    @Test
+    public void testProjectNewOwner() throws Exception {
+        // Initial test
+        GPAccount owner = gpWSClient.getProjectOwner(idProjectTest);
+        Assert.assertNotNull(owner);
+        Assert.assertEquals(userTest, owner);
+
+        // Change the Account owner
+        Long newOwnerID = this.createAndInsertUser("new_owner", organizationTest, ROLE_ADMIN);
+
+        RequestByAccountProjectIDs request = new RequestByAccountProjectIDs(newOwnerID, idProjectTest);
+        boolean result = gpWSClient.setProjectOwner(request);
+        Assert.assertTrue(result);
+
+        // Final test
+        owner = gpWSClient.getProjectOwner(idProjectTest);
+        Assert.assertNotNull(owner);
+        Assert.assertEquals(newOwnerID, owner.getId());
     }
 }

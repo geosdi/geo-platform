@@ -202,22 +202,31 @@ public abstract class ShortAccountDTO {
     }
 
     /**
-     * TODO Each entity class will call the appropriate DTO for the conversion.
-     * E.g. GPUser will have the method public UserDTO getDTO()
+     * TODO Use a Factory pattern.
      */
     public static List<ShortAccountDTO> convertToShortAccountDTOList(List<GPAccount> accounts) {
         List<ShortAccountDTO> accountsDTO = new ArrayList<ShortAccountDTO>(accounts.size());
 
         for (GPAccount account : accounts) {
-            ShortAccountDTO shortAccount = null;
-            if (account instanceof GPUser) {
-                shortAccount = new UserDTO((GPUser) account);
-            } else if (account instanceof GPApplication) {
-                shortAccount = new ApplicationDTO((GPApplication) account);
-            }
+            ShortAccountDTO shortAccount = convertToShortAccountDTO(account);
             accountsDTO.add(shortAccount);
         }
 
         return accountsDTO;
+    }
+
+    /**
+     * TODO Each entity class will call the appropriate DTO for the conversion.
+     * E.g. GPUser will have the method public UserDTO getDTO()
+     */
+    public static ShortAccountDTO convertToShortAccountDTO(GPAccount account) {
+        ShortAccountDTO shortAccount = null;
+        if (account instanceof GPUser) {
+            shortAccount = new UserDTO((GPUser) account);
+        } else if (account instanceof GPApplication) {
+            shortAccount = new ApplicationDTO((GPApplication) account);
+        }
+
+        return shortAccount;
     }
 }

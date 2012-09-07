@@ -489,12 +489,61 @@ public interface GeoPlatformService {
     Long getAccountProjectsCount(@WebParam(name = "accountID") Long accountID,
             SearchRequest request) throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve, in paginated way, all the Account Projects. There are two
+     * Project type, first that the Account is the owner, and latter related at
+     * a shared Project.
+     * <p/>
+     * Each Project result, if shared, contain the own Account owner.
+     *
+     * @param accountID the Account ID
+     * @param request the request that wrap Project ID, Project name and Account
+     * ID
+     * @return all Projects of the Account
+     * @throws ResourceNotFoundFault if Account not found
+     */
     @Get
     @HttpResource(location = "/accounts/search/{num}/{page}/{nameLike}")
-    @WebResult(name = "Projects")
+    @WebResult(name = "Project")
     List<ProjectDTO> searchAccountProjects(
             @WebParam(name = "accountID") Long accountID,
             PaginatedSearchRequest request) throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve the Account owner of a Project.
+     *
+     * @param projectID the Project ID
+     * @return the Account owner
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Post
+    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
+    GPAccount getProjectOwner(@WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Set an Account owner for a Project.
+     *
+     * @param request the request that wrap Project ID and Account ID
+     * @return true if the Account owner was changed
+     * @throws ResourceNotFoundFault if Project or Account not found
+     */
+    @Post
+    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
+    boolean setProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Force an Account owner for a Project.
+     *
+     * @param request the request that wrap Project ID and Account ID
+     * @return true if the Account owner was forced
+     * @throws ResourceNotFoundFault if Project or Account not found
+     */
+    @Post
+    @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
+    void forceProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/account/{accountID}")
@@ -631,33 +680,11 @@ public interface GeoPlatformService {
     void setProjectShared(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
-    /**
-     * Set an Account owner for a Project.
-     *
-     * @param request the request that wrap Project ID and Account ID
-     * @throws ResourceNotFoundFault if Project or Account not found
-     */
-    @Post
-    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
-    boolean setProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault;
-
-    /**
-     * Force an Account owner for a Project.
-     *
-     * @param request the request that wrap Project ID and Account ID
-     * @throws ResourceNotFoundFault if Project or Account not found
-     */
-    @Post
-    @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
-    void forceProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Viewport">
     // ==========================================================================
     // === Viewport
     // ==========================================================================
-
     @Get
     @HttpResource(location = "/viewport/{{accountProjectID}}")
     @WebResult(name = "Viewport")

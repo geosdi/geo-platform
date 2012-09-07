@@ -589,6 +589,13 @@ public interface GeoPlatformService {
     List<ShortAccountDTO> getAccountsToShareByProjectID(
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
+
+    @Post
+    @WebResult(name = "Account")
+    boolean updateAccountsProjectSharing(
+            @WebParam(name = "projectID") Long projectID,
+            @WebParam(name = "accountIDsProject") List<Long> accountIDsProject)
+            throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================

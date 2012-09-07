@@ -610,6 +610,67 @@ class ProjectServiceImpl {
 
         return accountsDTO;
     }
+
+    /**
+     * @todo Optimize SQL queries
+     *
+     * @see GeoPlatformService#updateAccountsProjectSharing(java.lang.Long,
+     * java.util.List)
+     */
+    boolean updateAccountsProjectSharing(Long projectID, List<Long> accountIDsProject)
+            throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        if (accountIDsProject == null || accountIDsProject.isEmpty()) {
+            if (project.isShared()) {
+                logger.debug("\n*** Delete all relations of sharing");
+                List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
+                for (GPAccountProject accountProject : accountProjectList) {
+                    accountProjectDao.remove(accountProject);
+                }
+
+                project.setShared(false);
+                projectDao.merge(project);
+            }
+        } else {
+            logger.debug("\n*** Update all relations of sharing");
+            List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
+            Map<Long, GPAccountProject> sharingMap = new HashMap<Long, GPAccountProject>(accountProjectList.size());
+            for (GPAccountProject accountProject : accountProjectList) {
+                sharingMap.put(accountProject.getAccount().getId(), accountProject);
+            }
+
+            for (Long accountID : accountIDsProject) {
+                GPAccountProject accountProject = sharingMap.remove(accountID);
+                // Create a new relation of sharing
+                if (accountProject == null) {
+                    GPAccount newAccount = this.getAccountByID(accountID);
+
+                    GPAccountProject newAccountProject = new GPAccountProject();
+                    newAccountProject.setAccountAndProject(newAccount, project);
+                    newAccountProject.setPermissionMask(BasePermission.READ.getMask());
+                    logger.debug("\n*** Create a new relation of sharing for Account \"{}\"",
+                                 newAccount.getStringID());
+                    accountProjectDao.persist(newAccountProject);
+                }
+            }
+
+            // Delete the remaining relations of sharing
+            for (Map.Entry<Long, GPAccountProject> e : sharingMap.entrySet()) {
+                logger.debug("\n*** Delete the relation of sharing for Account \"{}\"",
+                             e.getValue().getAccount().getStringID());
+                accountProjectDao.remove(e.getValue());
+            }
+
+            if (!project.isShared()) {
+                project.setShared(true);
+                projectDao.merge(project);
+            }
+        }
+
+        return true;
+    }
     //</editor-fold>
 
     private GPProject getProjectByID(Long projectID) throws ResourceNotFoundFault {

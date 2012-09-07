@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.modelws;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +55,6 @@ import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
-import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Assert;
@@ -446,7 +446,7 @@ public class WSProjectTest extends ServiceTest {
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(1, accountsToShare.size());
-        Assert.assertEquals(usernameTest, ((UserDTO) accountsToShare.get(0)).getUsername());
+        Assert.assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
 
         // Insert Users to which the Project is shared
         Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, ROLE_USER);
@@ -537,5 +537,154 @@ public class WSProjectTest extends ServiceTest {
         owner = gpWSClient.getProjectOwner(idProjectTest);
         Assert.assertNotNull(owner);
         Assert.assertEquals(newOwnerID, owner.getId());
+    }
+
+    @Test
+    public void testUpdateAccountsProjectSharingCreate() throws Exception {
+        // Initial test
+        GPProject project = gpWSClient.getProjectDetail(idProjectTest);
+        Assert.assertFalse(project.isShared());
+
+        List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(1, accountsToShare.size());
+        Assert.assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
+
+        // Insert User to which the Project will be share
+        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, ROLE_USER);
+
+        // Test add user for sharing
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, Arrays.asList(newUserID));
+        Assert.assertTrue(result);
+
+        project = gpWSClient.getProjectDetail(idProjectTest);
+        Assert.assertTrue(project.isShared());
+
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(2, accountsToShare.size());
+        boolean check = false;
+        for (ShortAccountDTO accountDTO : accountsToShare) {
+            if (newUserID.equals(accountDTO.getId())) {
+                check = true;
+                break;
+            }
+        }
+        Assert.assertTrue(check);
+    }
+
+    @Test
+    public void testUpdateAccountsProjectSharingRemoveAll() throws Exception {
+        // Insert a User to which the Project is shared as viewer
+        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, ROLE_USER);
+        GPUser newUser = gpWSClient.getUserDetail(newUserID);
+        this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
+
+        // Set the Project as share
+        projectTest.setShared(true);
+        gpWSClient.updateProject(projectTest);
+
+        // Initial test
+        GPProject project = gpWSClient.getProjectDetail(idProjectTest);
+        Assert.assertTrue(project.isShared());
+
+        List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(2, accountsToShare.size());
+        Assert.assertEquals(2, accountsToShare.size());
+        boolean check = false;
+        for (ShortAccountDTO accountDTO : accountsToShare) {
+            if (newUserID.equals(accountDTO.getId())) {
+                check = true;
+                break;
+            }
+        }
+        Assert.assertTrue(check);
+
+        // Test delete user for sharing
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, new ArrayList<Long>(0));
+        Assert.assertTrue(result);
+
+        project = gpWSClient.getProjectDetail(idProjectTest);
+        Assert.assertFalse(project.isShared());
+
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(1, accountsToShare.size());
+        Assert.assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
+    }
+
+    @Test
+    public void testUpdateAccountsProjectSharingManage() throws Exception {
+        // Insert a User to which the Project is shared as viewer
+        Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, ROLE_USER);
+        Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, ROLE_VIEWER);
+        GPUser newUser = gpWSClient.getUserDetail(firstUserID);
+        this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
+
+        // Set the Project as share
+        projectTest.setShared(true);
+        gpWSClient.updateProject(projectTest);
+
+        // Initial test
+        GPProject project = gpWSClient.getProjectDetail(idProjectTest);
+        Assert.assertTrue(project.isShared());
+
+        List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(2, accountsToShare.size());
+        Assert.assertEquals(2, accountsToShare.size());
+        boolean checkFirst = false;
+        for (ShortAccountDTO accountDTO : accountsToShare) {
+            if (firstUserID.equals(accountDTO.getId())) {
+                checkFirst = true;
+                break;
+            }
+        }
+        Assert.assertTrue(checkFirst);
+
+        // Test add latter user for sharing
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
+                                                                 Arrays.asList(firstUserID, latterUserID));
+        Assert.assertTrue(result);
+
+        project = gpWSClient.getProjectDetail(idProjectTest);
+        Assert.assertTrue(project.isShared());
+
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(3, accountsToShare.size());
+        checkFirst = false;
+        boolean checkLatter = false;
+        for (ShortAccountDTO accountDTO : accountsToShare) {
+            if (firstUserID.equals(accountDTO.getId())) {
+                checkFirst = true;
+            }
+            if (latterUserID.equals(accountDTO.getId())) {
+                checkLatter = true;
+            }
+        }
+        Assert.assertTrue(checkFirst);
+        Assert.assertTrue(checkLatter);
+
+        // Test delete first user for sharing
+        result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
+                                                         Arrays.asList(latterUserID));
+        Assert.assertTrue(result);
+
+        project = gpWSClient.getProjectDetail(idProjectTest);
+        Assert.assertTrue(project.isShared());
+
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(2, accountsToShare.size());
+        checkLatter = false;
+        for (ShortAccountDTO accountDTO : accountsToShare) {
+            if (latterUserID.equals(accountDTO.getId())) {
+                checkLatter = true;
+                break;
+            }
+        }
+        Assert.assertTrue(checkLatter);
     }
 }

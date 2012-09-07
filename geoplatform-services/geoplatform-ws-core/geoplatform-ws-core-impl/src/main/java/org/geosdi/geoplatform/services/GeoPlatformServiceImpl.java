@@ -534,8 +534,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throws ResourceNotFoundFault {
         return this.projectServiceDelegate.getAccountsToShareByProjectID(projectID);
     }
-    //</editor-fold>
 
+    @Override
+    public boolean updateAccountsProjectSharing(Long projectID, List<Long> accountIDsProject)
+            throws ResourceNotFoundFault {
+        return this.projectServiceDelegate.updateAccountsProjectSharing(projectID, accountIDsProject);
+    }
+
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================
     // === Project

@@ -271,7 +271,7 @@ public abstract class GPAccount implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName());
+        StringBuilder str = new StringBuilder();
         str.append(" id=").append(id);
         str.append(", enabled=").append(enabled);
         str.append(", creationDate=").append(creationDate);

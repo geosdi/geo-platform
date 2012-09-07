@@ -452,7 +452,7 @@ class ProjectServiceImpl {
             searchCriteria.addFilterILike("project.name", request.getNameLike());
         }
 
-        return new Long(accountProjectDao.count(searchCriteria));
+        return Long.valueOf(accountProjectDao.count(searchCriteria));
     }
 
     public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request)
@@ -462,12 +462,13 @@ class ProjectServiceImpl {
 
         Search searchCriteria = new Search(GPAccountProject.class);
         searchCriteria.addFilterEqual("account.id", accountID);
-        searchCriteria.setMaxResults(request.getNum());
-        searchCriteria.setPage(request.getPage());
+        if (request != null) {
+            searchCriteria.setMaxResults(request.getNum());
+            searchCriteria.setPage(request.getPage());
 
-        if (request != null && request.getNameLike() != null) {
-            searchCriteria.addFilterILike("project.name", request.getNameLike());
-//        searchCriteria.addSortAsc("project.name");
+            if (request.getNameLike() != null) {
+                searchCriteria.addFilterILike("project.name", request.getNameLike());
+            }
         }
 
         List<GPAccountProject> accountProjectList = accountProjectDao.search(searchCriteria);
@@ -638,7 +639,7 @@ class ProjectServiceImpl {
                 numberOfDescendants += descendantsIth + 1;
 
             } else { // Layer
-                GPLayer layer = null;
+                GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
                                                                   (RasterLayerDTO) element);

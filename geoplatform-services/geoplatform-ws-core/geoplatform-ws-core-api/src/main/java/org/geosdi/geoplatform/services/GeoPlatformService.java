@@ -515,11 +515,11 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
-     * Retrieve Users of a shared Project, except the administration of the
-     * Project.
+     * Retrieve all Accounts of a shared Project.
      *
      * @param sharedProjectID the shared Project ID
-     * @return the list of Users to which the Project is shared
+     * @return the Accounts to which the Project is shared and the Account owner
+     * of the Project
      * @throws ResourceNotFoundFault if Project not found
      * @throws IllegalParameterFault if Project is not shared
      */

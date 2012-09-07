@@ -170,7 +170,7 @@ public class GPAccountProjectDAOImpl extends BaseDAO<GPAccountProject, Long>
     }
 
     @Override
-    public List<GPAccountProject> findNotOwnerByProjectID(Long projectID) {
+    public List<GPAccountProject> findNotOwnersByProjectID(Long projectID) {
         Search search = new Search();
         search.addFilterEqual("project.id", projectID);
         search.addFilterNotEqual("permissionMask", BasePermission.ADMINISTRATION.getMask());

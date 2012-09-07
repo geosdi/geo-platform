@@ -52,6 +52,7 @@ import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
+import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Assert;
@@ -441,7 +442,9 @@ public class WSProjectTest extends ServiceTest {
 
         // Initial test
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsBySharedProjectID(idProjectTest);
-        Assert.assertNull(accountsToShare);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(1, accountsToShare.size());
+        Assert.assertEquals(super.usernameTest, ((UserDTO) accountsToShare.get(0)).getUsername());
 
         // Insert Users to which the Project is shared
         Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, ROLE_USER);
@@ -457,7 +460,7 @@ public class WSProjectTest extends ServiceTest {
         // Final test
         accountsToShare = gpWSClient.getAccountsBySharedProjectID(idProjectTest);
         Assert.assertNotNull(accountsToShare);
-        Assert.assertEquals(2, accountsToShare.size());
+        Assert.assertEquals(3, accountsToShare.size());
     }
 
     @Test(expected = IllegalParameterFault.class)

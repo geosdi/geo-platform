@@ -525,7 +525,7 @@ class ProjectServiceImpl {
                     "The project with ID \"" + sharedProjectID + "\" is not shared.");
         }
 
-        List<GPAccountProject> accoutProjectList = accountProjectDao.findNotOwnerByProjectID(sharedProjectID);
+        List<GPAccountProject> accoutProjectList = accountProjectDao.findByProjectID(sharedProjectID);
 
         List<GPAccount> accountList = new ArrayList<GPAccount>(accoutProjectList.size());
         for (GPAccountProject accountProject : accoutProjectList) {

@@ -76,7 +76,7 @@ public interface GPAccountProjectDAO {
 
     public GPAccountProject findOwnerByProjectID(Long projectID);
 
-    public List<GPAccountProject> findNotOwnerByProjectID(Long projectID);
+    public List<GPAccountProject> findNotOwnersByProjectID(Long projectID);
 
     public GPAccountProject find(Long accountID, Long projectID);
 }

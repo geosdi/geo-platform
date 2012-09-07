@@ -101,10 +101,23 @@ public class WSProjectTest extends ServiceTest {
     /**
      * Tree structure to test
      *
-     * A -| + raster-A + 1A ---------| + 2A -------| + 3A -------| + vector-3A +
-     * 3B + 3C + 2B + 2C -------| + raster-2C
+     * A -|
+     *    + raster-A
+     *    + 1A ---------|
+     *                  + 2A -------|
+     *                              + 3A -------|
+     *                                          + vector-3A
+     *                              + 3B
+     *                              + 3C
+     *                  + 2B
+     *                  + 2C -------|
+     *                              + raster-2C
      *
-     * + 1B ---------| + raster-1B + 1C B -| + vector-B
+     *    + 1B ---------|
+     *                  + raster-1B
+     *    + 1C
+     * B -|
+     *    + vector-B
      */
     @Override
     public void setUp() throws Exception {
@@ -433,7 +446,7 @@ public class WSProjectTest extends ServiceTest {
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsBySharedProjectID(idProjectTest);
         Assert.assertNotNull(accountsToShare);
         Assert.assertEquals(1, accountsToShare.size());
-        Assert.assertEquals(super.usernameTest, ((UserDTO) accountsToShare.get(0)).getUsername());
+        Assert.assertEquals(usernameTest, ((UserDTO) accountsToShare.get(0)).getUsername());
 
         // Insert Users to which the Project is shared
         Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, ROLE_USER);
@@ -456,6 +469,32 @@ public class WSProjectTest extends ServiceTest {
     public void testAccountsBySharedProjectIDIncorrect() throws Exception {
         // Projet test is not shared
         gpWSClient.getAccountsBySharedProjectID(idProjectTest);
+    }
+
+    @Test
+    public void testAccountsToShareByProjectID() throws Exception {
+        // Set shared the Project test
+        projectTest.setShared(true);
+        projectTest.setName("shared_project_to_share_test_ws");
+        gpWSClient.updateProject(projectTest);
+
+        // Initial test
+        List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsToShareByProjectID(idProjectTest);
+        Assert.assertNull(accountsToShare);
+
+        // Insert a User to which the Project is shared as viewer
+        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, ROLE_USER);
+        GPUser newUser = gpWSClient.getUserDetail(newUserID);
+        this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
+
+        // Insert Users to which it possible to share the Project
+        this.createAndInsertUser("first_possible_to_share_project", organizationTest, ROLE_USER);
+        this.createAndInsertUser("latter_possible_to_share_project", organizationTest, ROLE_VIEWER);
+
+        // Final test
+        accountsToShare = gpWSClient.getAccountsToShareByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(2, accountsToShare.size());
     }
 
     @Test

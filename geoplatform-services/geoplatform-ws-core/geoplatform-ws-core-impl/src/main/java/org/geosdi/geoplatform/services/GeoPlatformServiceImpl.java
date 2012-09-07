@@ -528,6 +528,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault {
         return this.projectServiceDelegate.getAccountsBySharedProjectID(sharedProjectID);
     }
+
+    @Override
+    public List<ShortAccountDTO> getAccountsToShareByProjectID(Long projectID)
+            throws ResourceNotFoundFault {
+        return this.projectServiceDelegate.getAccountsToShareByProjectID(projectID);
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Project">

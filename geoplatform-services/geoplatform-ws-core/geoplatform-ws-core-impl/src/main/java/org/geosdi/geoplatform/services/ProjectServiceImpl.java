@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -584,6 +585,36 @@ class ProjectServiceImpl {
             accountList.add(account);
         }
         return ShortAccountDTO.convertToShortAccountDTOList(accountList);
+    }
+
+    /**
+     * @see
+     * GeoPlatformService#getAccountsToShareByProjectID(java.lang.Long)
+     */
+    List<ShortAccountDTO> getAccountsToShareByProjectID(Long projectID)
+            throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        // Retrieve info for obtain Accounts of shared Projects
+        List<GPAccountProject> accountProjects = accountProjectDao.findByProjectID(projectID);
+        EntityCorrectness.checkAccountProjectListLog(accountProjects); // TODO assert
+
+        // Retrieve the Organization related to the shared Project
+        // Note: a Project will have at least one Account, the owner of the Project
+        GPOrganization organization = accountProjects.get(0).getAccount().getOrganization();
+
+        // Retrieve all Accounts of the Organization
+        List<GPAccount> accounts = accountDao.findByOrganization(organization.getName());
+        EntityCorrectness.checkAccountListLog(accounts); // TODO assert
+
+        // Retrieve the Accounts to share the Project
+        for (GPAccountProject accountProject : accountProjects) {
+            accounts.remove(accountProject.getAccount());
+        }
+        List<ShortAccountDTO> accountsDTO = ShortAccountDTO.convertToShortAccountDTOList(accounts);
+
+        return accountsDTO;
     }
     //</editor-fold>
 

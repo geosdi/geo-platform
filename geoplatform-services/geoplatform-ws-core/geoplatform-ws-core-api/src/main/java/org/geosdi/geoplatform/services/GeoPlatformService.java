@@ -573,10 +573,23 @@ public interface GeoPlatformService {
      * @throws IllegalParameterFault if Project is not shared
      */
     @Get
-    @WebResult(name = "DefaultProject")
+    @WebResult(name = "Account")
     List<ShortAccountDTO> getAccountsBySharedProjectID(
             @WebParam(name = "sharedProjectID") Long sharedProjectID)
             throws ResourceNotFoundFault, IllegalParameterFault;
+
+    /**
+     * Retrieve all Accounts to which it is possible to share a Project.
+     *
+     * @param projectID the Project ID
+     * @return the Accounts to which the Project is not shared
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Get
+    @WebResult(name = "Account")
+    List<ShortAccountDTO> getAccountsToShareByProjectID(
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================

@@ -214,7 +214,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         Assert.assertEquals(351, countOverlap);
 
         logger.info("\n### TOT: {}\nENCLOSES: {}\nIS: {}\nOUTSIDE {}\nOVERLAP {}",
-                new Object[]{tot, countEncloses, countIs, countOutside, countOverlap});
+                tot, countEncloses, countIs, countOutside, countOverlap);
     }
 
     @Ignore("Catalog is down")

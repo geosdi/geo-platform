@@ -46,9 +46,9 @@ import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public class ProjectCheckFieldBinding extends GPFieldBinding {
+public class ProjectDefaultFieldBinding extends GPFieldBinding {
 
-    public ProjectCheckFieldBinding(CheckBox field, String property) {
+    public ProjectDefaultFieldBinding(CheckBox field, String property) {
         super(field, property);
     }
 

@@ -52,7 +52,7 @@ public class GuiComponentIDs {
     /**
      * Menubar
      */
-    public static final String LOAD_PROJECTS = "loadProjects";
+    public static final String MANAGE_PROJECTS = "manageProjects";
     public static final String INGEST_DATA = "ingestData";
     public static final String MANAGE_USERS = "manageUsers";
     public static final String MANAGE_ROLES = "manageRoles";
@@ -137,7 +137,7 @@ public class GuiComponentIDs {
          */
         List<String> all = Lists.newArrayList();
         // Menubar
-        all.add(LOAD_PROJECTS);
+        all.add(MANAGE_PROJECTS);
         all.add(INGEST_DATA);
         all.add(MANAGE_USERS);
         all.add(MANAGE_ROLES);
@@ -194,54 +194,54 @@ public class GuiComponentIDs {
          */
         Map<String, Boolean> mapUser = Maps.newHashMap();
         // Menubar
-        mapUser.put(LOAD_PROJECTS, true);
-        mapUser.put(INGEST_DATA, true);
-        mapUser.put(ABOUT_GEOPLATFORM, true);
-        mapUser.put(SEARCH_AOE, true);
-        mapUser.put(CLEAR_AOE, true);
-        mapUser.put(GEOCODING, true);
-        mapUser.put(ROUTING, true);
-        mapUser.put(LAYER_MENU, true);
-        mapUser.put(GRATICULA, true);
+        mapUser.put(MANAGE_PROJECTS, Boolean.TRUE);
+        mapUser.put(INGEST_DATA, Boolean.TRUE);
+        mapUser.put(ABOUT_GEOPLATFORM, Boolean.TRUE);
+        mapUser.put(SEARCH_AOE, Boolean.TRUE);
+        mapUser.put(CLEAR_AOE, Boolean.TRUE);
+        mapUser.put(GEOCODING, Boolean.TRUE);
+        mapUser.put(ROUTING, Boolean.TRUE);
+        mapUser.put(LAYER_MENU, Boolean.TRUE);
+        mapUser.put(GRATICULA, Boolean.TRUE);
         mapUser.put(VIEWPORT, Boolean.TRUE);
         // Map Toolbar
-        mapUser.put(GEO_PLATFORM_INFO_APP, true);
-        mapUser.put(ZOOM_IN, true);
-        mapUser.put(ZOOM_OUT, true);
-        mapUser.put(ZOOM_PREVIOUS, true);
-        mapUser.put(ZOOM_NEXT, true);
-        mapUser.put(GET_FEATURE_INFO, true);
-        mapUser.put(MEASURE, true);
-        mapUser.put(MEASURE_AREA, true);
-        mapUser.put(DRAW_FEATURE, true);
-        mapUser.put(DRAW_LINE_FEATURE, true);
-        mapUser.put(DRAW_POINT_FEATURE, true);
-        mapUser.put(RESHAPE_FEATURE, true);
-        mapUser.put(ROTATE_FEATURE, true);
-        mapUser.put(DRAG_FEATURE, true);
-        mapUser.put(RESIZE_FEATURE, true);
-        mapUser.put(DELETE_FEATURE, true);
-        mapUser.put(GOTO_XY, true);
-        mapUser.put(CHANGE_BASE_LAYER, true);
-        mapUser.put(CLEAR_MAP, true);
-        mapUser.put(GOOGLE_REVERSE_GEOCODING, true);
-        mapUser.put(YAHOO_REVERSE_GEOCODING, true);
-        mapUser.put(REVERSE_GEOCODING_WPS, true);
-        mapUser.put(GOOGLE_ICON, true);
-        mapUser.put(USER_MENU, true);
-        mapUser.put(GOOGLE_SIGN_ON_BUTTON, true);
-        mapUser.put(USER_OPTIONS_BUTTON, true);
-        mapUser.put(USER_LOGOUT, true);
+        mapUser.put(GEO_PLATFORM_INFO_APP, Boolean.TRUE);
+        mapUser.put(ZOOM_IN, Boolean.TRUE);
+        mapUser.put(ZOOM_OUT, Boolean.TRUE);
+        mapUser.put(ZOOM_PREVIOUS, Boolean.TRUE);
+        mapUser.put(ZOOM_NEXT, Boolean.TRUE);
+        mapUser.put(GET_FEATURE_INFO, Boolean.TRUE);
+        mapUser.put(MEASURE, Boolean.TRUE);
+        mapUser.put(MEASURE_AREA, Boolean.TRUE);
+        mapUser.put(DRAW_FEATURE, Boolean.TRUE);
+        mapUser.put(DRAW_LINE_FEATURE, Boolean.TRUE);
+        mapUser.put(DRAW_POINT_FEATURE, Boolean.TRUE);
+        mapUser.put(RESHAPE_FEATURE, Boolean.TRUE);
+        mapUser.put(ROTATE_FEATURE, Boolean.TRUE);
+        mapUser.put(DRAG_FEATURE, Boolean.TRUE);
+        mapUser.put(RESIZE_FEATURE, Boolean.TRUE);
+        mapUser.put(DELETE_FEATURE, Boolean.TRUE);
+        mapUser.put(GOTO_XY, Boolean.TRUE);
+        mapUser.put(CHANGE_BASE_LAYER, Boolean.TRUE);
+        mapUser.put(CLEAR_MAP, Boolean.TRUE);
+        mapUser.put(GOOGLE_REVERSE_GEOCODING, Boolean.TRUE);
+        mapUser.put(YAHOO_REVERSE_GEOCODING, Boolean.TRUE);
+        mapUser.put(REVERSE_GEOCODING_WPS, Boolean.TRUE);
+        mapUser.put(GOOGLE_ICON, Boolean.TRUE);
+        mapUser.put(USER_MENU, Boolean.TRUE);
+        mapUser.put(GOOGLE_SIGN_ON_BUTTON, Boolean.TRUE);
+        mapUser.put(USER_OPTIONS_BUTTON, Boolean.TRUE);
+        mapUser.put(USER_LOGOUT, Boolean.TRUE);
         //
-        mapUser.put(ADD_FOLDER, true);
-        mapUser.put(ADD_LAYERS, true);
-        mapUser.put(DELETE_ELEMENT, true);
-        mapUser.put(SAVE_TREE, true);
-        mapUser.put(PRINT_LAYERS, true);
-        mapUser.put(EXPORT_PROJECT, true);
-        mapUser.put(IMPORT_PROJECT, true);
-        mapUser.put(PREVIEW_KML, true);
-        mapUser.put(LAYER_STYLER, true);
+        mapUser.put(ADD_FOLDER, Boolean.TRUE);
+        mapUser.put(ADD_LAYERS, Boolean.TRUE);
+        mapUser.put(DELETE_ELEMENT, Boolean.TRUE);
+        mapUser.put(SAVE_TREE, Boolean.TRUE);
+        mapUser.put(PRINT_LAYERS, Boolean.TRUE);
+        mapUser.put(EXPORT_PROJECT, Boolean.TRUE);
+        mapUser.put(IMPORT_PROJECT, Boolean.TRUE);
+        mapUser.put(PREVIEW_KML, Boolean.TRUE);
+        mapUser.put(LAYER_STYLER, Boolean.TRUE);
         //
         MAP_USER = Collections.unmodifiableMap(mapUser);
         /**
@@ -249,54 +249,54 @@ public class GuiComponentIDs {
          */
         Map<String, Boolean> mapViewer = Maps.newHashMap();
         // Menubar
-        mapViewer.put(LOAD_PROJECTS, false);
-        mapViewer.put(ABOUT_GEOPLATFORM, true);
-        mapViewer.put(SEARCH_AOE, true);
-        mapViewer.put(CLEAR_AOE, true);
-        mapViewer.put(GEOCODING, true);
-        mapViewer.put(ROUTING, true);
-        mapViewer.put(LAYER_MENU, true);
-        mapViewer.put(GRATICULA, true);
+        mapViewer.put(MANAGE_PROJECTS, Boolean.FALSE);
+        mapViewer.put(ABOUT_GEOPLATFORM, Boolean.TRUE);
+        mapViewer.put(SEARCH_AOE, Boolean.TRUE);
+        mapViewer.put(CLEAR_AOE, Boolean.TRUE);
+        mapViewer.put(GEOCODING, Boolean.TRUE);
+        mapViewer.put(ROUTING, Boolean.TRUE);
+        mapViewer.put(LAYER_MENU, Boolean.TRUE);
+        mapViewer.put(GRATICULA, Boolean.TRUE);
         mapViewer.put(VIEWPORT, Boolean.TRUE);
         // Toolbar
-        mapViewer.put(GEO_PLATFORM_INFO_APP, true);
-        mapViewer.put(ZOOM_IN, true);
-        mapViewer.put(ZOOM_OUT, true);
-        mapViewer.put(ZOOM_PREVIOUS, true);
-        mapViewer.put(ZOOM_NEXT, true);
-        mapViewer.put(GET_FEATURE_INFO, true);
-        mapViewer.put(MEASURE, true);
-        mapViewer.put(MEASURE_AREA, true);
-        mapViewer.put(DRAW_FEATURE, true);
-        mapViewer.put(DRAW_LINE_FEATURE, true);
-        mapViewer.put(DRAW_POINT_FEATURE, true);
-        mapViewer.put(RESHAPE_FEATURE, true);
-        mapViewer.put(ROTATE_FEATURE, true);
-        mapViewer.put(DRAG_FEATURE, true);
-        mapViewer.put(RESIZE_FEATURE, true);
-        mapViewer.put(DELETE_FEATURE, true);
-        mapViewer.put(GOTO_XY, true);
-        mapViewer.put(CHANGE_BASE_LAYER, true);
-        mapViewer.put(CLEAR_MAP, true);
-        mapViewer.put(GOOGLE_REVERSE_GEOCODING, true);
-        mapViewer.put(YAHOO_REVERSE_GEOCODING, true);
-        mapViewer.put(REVERSE_GEOCODING_WPS, true);
-        mapViewer.put(GOOGLE_ICON, true);
-        mapViewer.put(USER_MENU, true);
-        mapViewer.put(GOOGLE_SIGN_ON_BUTTON, true);
-        mapViewer.put(USER_OPTIONS_BUTTON, true);
-        mapViewer.put(USER_LOGOUT, true);
+        mapViewer.put(GEO_PLATFORM_INFO_APP, Boolean.TRUE);
+        mapViewer.put(ZOOM_IN, Boolean.TRUE);
+        mapViewer.put(ZOOM_OUT, Boolean.TRUE);
+        mapViewer.put(ZOOM_PREVIOUS, Boolean.TRUE);
+        mapViewer.put(ZOOM_NEXT, Boolean.TRUE);
+        mapViewer.put(GET_FEATURE_INFO, Boolean.TRUE);
+        mapViewer.put(MEASURE, Boolean.TRUE);
+        mapViewer.put(MEASURE_AREA, Boolean.TRUE);
+        mapViewer.put(DRAW_FEATURE, Boolean.TRUE);
+        mapViewer.put(DRAW_LINE_FEATURE, Boolean.TRUE);
+        mapViewer.put(DRAW_POINT_FEATURE, Boolean.TRUE);
+        mapViewer.put(RESHAPE_FEATURE, Boolean.TRUE);
+        mapViewer.put(ROTATE_FEATURE, Boolean.TRUE);
+        mapViewer.put(DRAG_FEATURE, Boolean.TRUE);
+        mapViewer.put(RESIZE_FEATURE, Boolean.TRUE);
+        mapViewer.put(DELETE_FEATURE, Boolean.TRUE);
+        mapViewer.put(GOTO_XY, Boolean.TRUE);
+        mapViewer.put(CHANGE_BASE_LAYER, Boolean.TRUE);
+        mapViewer.put(CLEAR_MAP, Boolean.TRUE);
+        mapViewer.put(GOOGLE_REVERSE_GEOCODING, Boolean.TRUE);
+        mapViewer.put(YAHOO_REVERSE_GEOCODING, Boolean.TRUE);
+        mapViewer.put(REVERSE_GEOCODING_WPS, Boolean.TRUE);
+        mapViewer.put(GOOGLE_ICON, Boolean.TRUE);
+        mapViewer.put(USER_MENU, Boolean.TRUE);
+        mapViewer.put(GOOGLE_SIGN_ON_BUTTON, Boolean.TRUE);
+        mapViewer.put(USER_OPTIONS_BUTTON, Boolean.TRUE);
+        mapViewer.put(USER_LOGOUT, Boolean.TRUE);
         //
-        mapViewer.put(ADD_FOLDER, true);
-        mapViewer.put(ADD_LAYERS, true);
-        mapViewer.put(DELETE_ELEMENT, true);
-        mapViewer.put(SAVE_TREE, false);
-        mapViewer.put(PRINT_LAYERS, true);
+        mapViewer.put(ADD_FOLDER, Boolean.TRUE);
+        mapViewer.put(ADD_LAYERS, Boolean.TRUE);
+        mapViewer.put(DELETE_ELEMENT, Boolean.TRUE);
+        mapViewer.put(SAVE_TREE, Boolean.FALSE);
+        mapViewer.put(PRINT_LAYERS, Boolean.TRUE);
         // Import/Export because Viewer must not save projects
-        mapViewer.put(EXPORT_PROJECT, false);
-        mapViewer.put(IMPORT_PROJECT, false);
-        mapViewer.put(PREVIEW_KML, true);
-        mapViewer.put(LAYER_STYLER, true);
+        mapViewer.put(EXPORT_PROJECT, Boolean.FALSE);
+        mapViewer.put(IMPORT_PROJECT, Boolean.FALSE);
+        mapViewer.put(PREVIEW_KML, Boolean.TRUE);
+        mapViewer.put(LAYER_STYLER, Boolean.TRUE);
         //
         MAP_VIEWER = Collections.unmodifiableMap(mapViewer);
         /**
@@ -312,26 +312,26 @@ public class GuiComponentIDs {
          */
         Map<String, Boolean> mapSigv = Maps.newHashMap();
         // Menubar
-        mapSigv.put(ABOUT_GEOPLATFORM, true);
-        mapSigv.put(GEOCODING, true);
-        mapSigv.put(LAYER_MENU, true);
+        mapSigv.put(ABOUT_GEOPLATFORM, Boolean.TRUE);
+        mapSigv.put(GEOCODING, Boolean.TRUE);
+        mapSigv.put(LAYER_MENU, Boolean.TRUE);
         // Toolbar
-        mapSigv.put(GEO_PLATFORM_INFO_APP, true);
-        mapSigv.put(ZOOM_IN, true);
-        mapSigv.put(ZOOM_OUT, true);
-        mapSigv.put(ZOOM_PREVIOUS, true);
-        mapSigv.put(ZOOM_NEXT, true);
-        mapSigv.put(GOTO_XY, true);
-        mapSigv.put(CHANGE_BASE_LAYER, true);
-        mapSigv.put(GOOGLE_REVERSE_GEOCODING, true);
-        mapSigv.put(YAHOO_REVERSE_GEOCODING, true);
-        mapSigv.put(COMMIT, true);
+        mapSigv.put(GEO_PLATFORM_INFO_APP, Boolean.TRUE);
+        mapSigv.put(ZOOM_IN, Boolean.TRUE);
+        mapSigv.put(ZOOM_OUT, Boolean.TRUE);
+        mapSigv.put(ZOOM_PREVIOUS, Boolean.TRUE);
+        mapSigv.put(ZOOM_NEXT, Boolean.TRUE);
+        mapSigv.put(GOTO_XY, Boolean.TRUE);
+        mapSigv.put(CHANGE_BASE_LAYER, Boolean.TRUE);
+        mapSigv.put(GOOGLE_REVERSE_GEOCODING, Boolean.TRUE);
+        mapSigv.put(YAHOO_REVERSE_GEOCODING, Boolean.TRUE);
+        mapSigv.put(COMMIT, Boolean.TRUE);
         //
-        mapSigv.put(ADD_FOLDER, true);
-        mapSigv.put(ADD_LAYERS, true);
-        mapSigv.put(DELETE_ELEMENT, true);
-//        mapSigv.put(SAVE_TREE, true);
-        mapSigv.put(PRINT_LAYERS, true);
+        mapSigv.put(ADD_FOLDER, Boolean.TRUE);
+        mapSigv.put(ADD_LAYERS, Boolean.TRUE);
+        mapSigv.put(DELETE_ELEMENT, Boolean.TRUE);
+//        mapSigv.put(SAVE_TREE, Boolean.TRUE);
+        mapSigv.put(PRINT_LAYERS, Boolean.TRUE);
         //
         MAP_APPLICATION_SIGV = Collections.unmodifiableMap(mapSigv);
     }

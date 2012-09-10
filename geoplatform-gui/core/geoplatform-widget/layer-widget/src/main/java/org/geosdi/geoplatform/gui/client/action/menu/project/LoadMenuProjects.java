@@ -38,19 +38,19 @@ package org.geosdi.geoplatform.gui.client.action.menu.project;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchWidget;
+import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class LoadMenuProjects extends MenuBaseAction {
-    
-    private GPProjectSearchWidget searchWidget = new GPProjectSearchWidget();
+
+    private GPProjectManagementWidget searchWidget = new GPProjectManagementWidget(Boolean.TRUE);
 
     public LoadMenuProjects() {
-        super("Open Project", BasicWidgetResources.ICONS.loadProjects());
+        super("Open Project", BasicWidgetResources.ICONS.manageProjects());
     }
 
     @Override

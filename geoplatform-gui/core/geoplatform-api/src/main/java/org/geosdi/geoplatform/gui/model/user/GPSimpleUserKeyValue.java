@@ -33,46 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.projects;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-import com.extjs.gxt.ui.client.widget.Dialog;
-import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+package org.geosdi.geoplatform.gui.model.user;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class DeleteProjectAction extends GeoPlatformAction<ButtonEvent> {
+public enum GPSimpleUserKeyValue {
 
-    private GPProjectSearchPanel searchPanel;
-
-    public DeleteProjectAction(GPProjectSearchPanel theSearchPanel) {
-        this.searchPanel = theSearchPanel;
-    }
-
-    @Override
-    public void componentSelected(ButtonEvent ce) {
-        if (searchPanel.isDefaultSelectedProject()) {
-            GeoPlatformMessage.alertMessage("Delete Project",
-                    "Attention you could not delete Default Project.");
-        } else {
-            GeoPlatformMessage.confirmMessage("Delete Project",
-                    "Are you sure you want to delete the Selected Project ?",
-                    new Listener<MessageBoxEvent>() {
-                        @Override
-                        public void handleEvent(MessageBoxEvent be) {
-                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                                searchPanel.deleteProject();
-                            }
-                        }
-                    });
-        }
-    }
+    ID, USERNAME, NAME, ORGANIZATION, EMAIL;
 }

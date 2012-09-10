@@ -156,7 +156,7 @@ class ProjectServiceImpl {
             accountDao.merge(account);
         }
 
-        return project.getId();
+        return project.getId(); // Remark: return only the entity ID of Project
     }
 
     @Deprecated
@@ -243,7 +243,7 @@ class ProjectServiceImpl {
         }
 
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                                                    subFoldersMap, mapProjectFolders);
+                subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);
@@ -551,6 +551,7 @@ class ProjectServiceImpl {
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
         project.setName(accountProjectProperties.getProjectName());
+        project.setShared(accountProjectProperties.isShared());
         projectDao.merge(project);
 
         if (accountProjectProperties.isDefaultProject()) {
@@ -764,7 +765,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                                                              folderDTO);
+                        folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -786,10 +787,10 @@ class ProjectServiceImpl {
                 GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                                                                  (RasterLayerDTO) element);
+                            (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                                                                  (VectorLayerDTO) element);
+                            (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);

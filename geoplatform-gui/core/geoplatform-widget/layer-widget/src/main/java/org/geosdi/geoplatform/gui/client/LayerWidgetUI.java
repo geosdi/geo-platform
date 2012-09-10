@@ -94,7 +94,7 @@ public class LayerWidgetUI implements EntryPoint {
             }
         });
 
-        MenuActionRegistar.put(GuiComponentIDs.LOAD_PROJECTS,
+        MenuActionRegistar.put(GuiComponentIDs.MANAGE_PROJECTS,
                                new MenuActionCreator() {
 
             @Override

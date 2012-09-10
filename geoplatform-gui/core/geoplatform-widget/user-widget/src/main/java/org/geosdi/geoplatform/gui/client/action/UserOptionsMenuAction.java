@@ -60,7 +60,7 @@ public class UserOptionsMenuAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        if (Registry.get(UserSessionEnum.USER_IN_SESSION.toString()) != null) {
+        if (Registry.get(UserSessionEnum.USER_MANAGE_DETAIL_IN_SESSION.toString()) != null) {
             userOptionsWidget.show();
         } else {
             retrievesUserFromSession();
@@ -80,7 +80,7 @@ public class UserOptionsMenuAction extends MenuBaseAction {
 
             @Override
             public void onSuccess(IGPUserManageDetail user) {
-                Registry.register(UserSessionEnum.USER_IN_SESSION.toString(), user);
+                Registry.register(UserSessionEnum.USER_MANAGE_DETAIL_IN_SESSION.toString(), user);
                 userOptionsWidget.show();
             }
         });

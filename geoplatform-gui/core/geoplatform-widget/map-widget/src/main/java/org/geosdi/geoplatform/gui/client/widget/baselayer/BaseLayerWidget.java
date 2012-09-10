@@ -57,8 +57,10 @@ import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayer
 import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 /**
@@ -81,12 +83,11 @@ public class BaseLayerWidget extends GeoPlatformWindow {
     public void addComponent() {
         this.store.add(GPMapBaseLayerFactory.getBaseLayerList());
         Button saveButton = new Button("Save", BasicWidgetResources.ICONS.save(), new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
-                String baseLayer = Registry.get(GlobalRegistryEnum.BASE_LAYER.toString());
+                IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                String baseLayer = accountDetail.getBaseLayer();
                 MapRemote.Util.getInstance().saveBaseLayer(baseLayer, new AsyncCallback<Object>() {
-
                     @Override
                     public void onFailure(Throwable caught) {
                         GeoPlatformMessage.errorMessage("Error saving",
@@ -111,7 +112,6 @@ public class BaseLayerWidget extends GeoPlatformWindow {
             }
         });
         Button applyButton = new Button("Apply/Close", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 BaseLayerWidget.super.hide();
@@ -135,7 +135,6 @@ public class BaseLayerWidget extends GeoPlatformWindow {
 
     private ListView<GPBaseLayer> generateListView() {
         listView = new ListView<GPBaseLayer>() {
-
             @Override
             protected GPBaseLayer prepareData(GPBaseLayer baseLayer) {
                 baseLayer.set("shortName", Format.ellipse(baseLayer.getGwtOlBaseLayer().getName(), 30));
@@ -151,7 +150,6 @@ public class BaseLayerWidget extends GeoPlatformWindow {
 
         listView.getSelectionModel().addSelectionChangedListener(
                 new SelectionChangedListener<GPBaseLayer>() {
-
                     ChangeBaseLayerEvent event;
 
                     @Override
@@ -160,8 +158,10 @@ public class BaseLayerWidget extends GeoPlatformWindow {
                         if (selectedBaseLayer != null) {
                             event = new ChangeBaseLayerEvent(selectedBaseLayer);
                             MapHandlerManager.fireEvent(event);
-                            Registry.register(GlobalRegistryEnum.BASE_LAYER.toString(),
-                                    selectedBaseLayer.getBaseLayerEnumName().toString());
+                            IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                            accountDetail.setBaseLayer(selectedBaseLayer.getBaseLayerEnumName().toString());
+//                            Registry.register(GlobalRegistryEnum.BASE_LAYER.toString(),
+//                                    selectedBaseLayer.getBaseLayerEnumName().toString());
                         }
                         listView.getSelectionModel().deselectAll();
                     }

@@ -43,10 +43,6 @@ import java.util.Date;
  */
 public interface IGPUserManageDetail extends IGPUserSimpleDetail {
 
-    Long getId();
-
-    void setId(Long id);
-
     String getPassword();
 
     void setPassword(String password);

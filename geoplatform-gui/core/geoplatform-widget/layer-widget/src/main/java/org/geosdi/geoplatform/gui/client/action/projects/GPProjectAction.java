@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public class GPProjectAction extends GeoPlatformAction<ButtonEvent> {
@@ -57,10 +57,10 @@ public class GPProjectAction extends GeoPlatformAction<ButtonEvent> {
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-       if(ce.getButton().getText().equalsIgnoreCase("Add")) {
-           this.bindingProject.showForm(true);
-       } else {
-           this.bindingProject.showForm(false);
-       }
+        if (ce.getButton().getText().equalsIgnoreCase("Add")) {
+            this.bindingProject.showForm(Boolean.TRUE);
+        } else {
+            this.bindingProject.showForm(Boolean.FALSE);
+        }
     }
 }

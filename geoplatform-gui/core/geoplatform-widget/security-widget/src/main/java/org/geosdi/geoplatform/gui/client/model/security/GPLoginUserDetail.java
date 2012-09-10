@@ -52,6 +52,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
 
     private static final long serialVersionUID = -7265573728577702116L;
     //
+    private long id;
     private String username;
     private String name;
     private String email;
@@ -139,6 +140,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
         return componentPermission.get(componentID);
     }
 
+    @Override
     public void setBaseLayer(String baseLayer) {
         this.baseLayer = baseLayer;
     }
@@ -164,5 +166,15 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
 
     public void setTreeOptions(IGPTreeOptions treeOptions) {
         this.treeOptions = treeOptions;
+    }
+
+    @Override
+    public Long getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 }

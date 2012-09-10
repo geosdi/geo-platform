@@ -50,9 +50,10 @@ import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
-import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.event.ChangeBaseLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -106,13 +107,15 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void setBaseMapOptions() {
         this.mapOptions = new MapOptions();
         this.mapOptions.setNumZoomLevels(MapLayoutWidget.NUM_ZOOM_LEVEL);
-        String baseLayerKey = Registry.get(GlobalRegistryEnum.BASE_LAYER.getValue());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        String baseLayerKey = accountDetail.getBaseLayer();
         GPBaseLayer baseLayer;
         if (baseLayerKey != null) {
             baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
         } else {
             baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
-            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
+            accountDetail.setBaseLayer(baseLayer.getBaseLayerEnumName().toString());
+//            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
         }
         if (baseLayer.getProjection().getProjectionCode().equals(EPSG_4326)) {
             set4326MapOptions(this.mapOptions);
@@ -147,7 +150,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.map.addControl(new MousePosition());
         this.addMeasureControl();
         this.addMeasureAreaControl();
-        String baseLayerKey = Registry.get(GlobalRegistryEnum.BASE_LAYER.getValue());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        String baseLayerKey = accountDetail.getBaseLayer();
         GPBaseLayer baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
         if (baseLayer == null) {
             baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
@@ -245,7 +249,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
      * Set center of the Map on Italy
      */
     public void setMapCenter() {
-        GPClientViewport viewport = Registry.get(GlobalRegistryEnum.VIEWPORT.getValue());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        GPClientViewport viewport = accountDetail.getViewport();
         if (viewport != null) {
             ViewportUtility.gotoViewportLocation(map, viewport);
         } else {

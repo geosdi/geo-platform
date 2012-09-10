@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
@@ -51,6 +52,7 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -58,53 +60,60 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface LayerRemoteAsync {
 
-    public void loadUserFolders(AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
+    void shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject, AsyncCallback<Boolean> callback);
 
-    public void loadFolderElements(Long folderID,
+    void getOrganizationUsersToShareProject(long projectId, AsyncCallback<ArrayList<GPSimpleUser>> callback);
+
+    void getOrganizationUsers(AsyncCallback<ArrayList<GPSimpleUser>> callback);
+
+    void getAccountsFromSharedProject(long idSharedProject, AsyncCallback<ArrayList<GPSimpleUser>> callback);
+
+    void loadUserFolders(AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
+
+    void loadFolderElements(Long folderID,
             AsyncCallback<ArrayList<IGPFolderElements>> callback);
 
-    public void saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento,
+    void saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento,
             AsyncCallback<Long> callback);
 
-    public void saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento,
+    void saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento,
             AsyncCallback<ArrayList<Long>> callback);
 
-    public void saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
+    void saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
             AsyncCallback<Boolean> callback);
 
-    public void saveDeletedLayerAndTreeModifications(MementoSaveRemove memento,
+    void saveDeletedLayerAndTreeModifications(MementoSaveRemove memento,
             AsyncCallback<Boolean> callback);
 
-    public void saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento,
+    void saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento,
             AsyncCallback<Boolean> callback);
 
-    public void saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento,
+    void saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento,
             AsyncCallback<Boolean> callback);
 
-    public void saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento,
+    void saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento,
             AsyncCallback<Boolean> callback);
 
-    public void saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento,
+    void saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento,
             AsyncCallback<Boolean> callback);
 
-    public void saveLayerProperties(MementoLayerOriginalProperties memento,
+    void saveLayerProperties(MementoLayerOriginalProperties memento,
             AsyncCallback<Boolean> callback);
 
-    public void saveFolderProperties(MementoFolderOriginalProperties memento,
+    void saveFolderProperties(MementoFolderOriginalProperties memento,
             AsyncCallback<Boolean> callback);
 
-    public void saveFolderForUser(String folderName, int position, int numberOfDescendants,
+    void saveFolderForUser(String folderName, int position, int numberOfDescendants,
             boolean isChecked, AsyncCallback<Long> callback);
 
-    public void saveFolder(Long idParentFolder, String folderName, int position,
+    void saveFolder(Long idParentFolder, String folderName, int position,
             int numberOfDescendants, boolean isChecked, AsyncCallback<Long> callback);
 
-    public void deleteElement(Long id, TreeElement elementType,
-            AsyncCallback<?> callback);
+    void deleteElement(Long id, TreeElement elementType, AsyncCallback<?> callback);
 
-    public void checkWmsGetMapUrl(String url, AsyncCallback<Boolean> callback);
+    void checkWmsGetMapUrl(String url, AsyncCallback<Boolean> callback);
 
-    public void checkKmlUrl(String url, AsyncCallback<Boolean> callback);
+    void checkKmlUrl(String url, AsyncCallback<Boolean> callback);
 
     void searchProjects(PagingLoadConfig config, String searchText, String imageURL,
             AsyncCallback<PagingLoadResult<GPClientProject>> callback)

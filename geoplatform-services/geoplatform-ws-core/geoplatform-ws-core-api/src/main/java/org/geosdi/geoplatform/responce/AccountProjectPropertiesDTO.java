@@ -58,6 +58,7 @@ public class AccountProjectPropertiesDTO {
     private String projectName;
     private Integer projectVersion;
     private boolean defaultProject;
+    private boolean shared;
 
     /**
      * Default constructor
@@ -121,6 +122,14 @@ public class AccountProjectPropertiesDTO {
      */
     public void setProjectName(String projectName) {
         this.projectName = projectName;
+    }
+
+    public boolean isShared() {
+        return shared;
+    }
+
+    public void setShared(boolean shared) {
+        this.shared = shared;
     }
 
     /**

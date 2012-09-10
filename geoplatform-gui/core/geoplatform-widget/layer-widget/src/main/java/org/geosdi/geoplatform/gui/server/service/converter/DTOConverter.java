@@ -61,12 +61,16 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
+import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
+import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
+import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -294,6 +298,7 @@ public class DTOConverter {
         dto.setProjectName(project.getName());
         dto.setProjectVersion(project.getVersion());
         dto.setDefaultProject(project.isDefaultProject());
+        dto.setShared(project.isShared());
         return dto;
     }
 
@@ -310,5 +315,40 @@ public class DTOConverter {
 //        layer.setChecked(memento.isChecked());
 //        layer.setAlias(memento.getAlias());
 //        layer.setShared(mementoLayer.isShared());
+    }
+
+    public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
+            String imageURL) {
+        GPClientProject clientProject = new GPClientProject();
+        clientProject.setId(projectDTO.getId());
+        clientProject.setName(projectDTO.getName());
+        clientProject.setImage(imageURL);
+        clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
+        clientProject.setShared(projectDTO.isShared());
+        ShortAccountDTO owner = projectDTO.getOwner();
+        if (owner != null && owner instanceof UserDTO) {
+            this.convertToGPSimpleUser((UserDTO) owner);
+        }
+        return clientProject;
+    }
+
+    public List<GPSimpleUser> convertToGPSimpleUser(List<ShortAccountDTO> shortAccountList) {
+        List<GPSimpleUser> listSimpleUser = Lists.newArrayList();
+        for (ShortAccountDTO shortAccont : shortAccountList) {
+            if (shortAccont instanceof UserDTO) {
+                listSimpleUser.add(this.convertToGPSimpleUser((UserDTO) shortAccont));
+            }
+        }
+        return listSimpleUser;
+    }
+
+    private GPSimpleUser convertToGPSimpleUser(UserDTO userDTO) {
+        GPSimpleUser user = new GPSimpleUser();
+        user.setId(userDTO.getId());
+        user.setOrganization(userDTO.getOrganization());
+        user.setName(userDTO.getName());
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmailAddress());
+        return user;
     }
 }

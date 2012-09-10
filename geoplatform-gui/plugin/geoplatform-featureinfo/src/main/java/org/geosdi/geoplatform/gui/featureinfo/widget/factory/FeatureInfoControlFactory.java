@@ -36,7 +36,9 @@
 package org.geosdi.geoplatform.gui.featureinfo.widget.factory;
 
 import com.extjs.gxt.ui.client.Registry;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.gwtopenmaps.openlayers.client.control.GetFeatureInfoVendorParam;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfoOptions;
@@ -62,7 +64,8 @@ public class FeatureInfoControlFactory {
         if (urlServer.equalsIgnoreCase("http://10.220.154.25/geowebcache/service/wms")) {
             options.setURL("http://10.220.154.25/geoserver/wms");
         } else {
-            String authKeyValue = Registry.get(GlobalRegistryEnum.AUTH_KEY.getValue());
+            IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+            String authKeyValue = accountDetail.getAuthkey();
             if (authKeyValue != null && !authKeyValue.equals("")) {
                 GetFeatureInfoVendorParam param = new GetFeatureInfoVendorParam();
                 param.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authKeyValue);

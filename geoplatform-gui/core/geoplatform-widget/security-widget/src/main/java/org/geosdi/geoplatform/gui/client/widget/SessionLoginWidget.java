@@ -48,7 +48,6 @@ import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -132,10 +131,8 @@ public class SessionLoginWidget extends GPSecurityWidget {
                             userScreen();
                             userLogged = userName.getValue();
                             reloginAttempts = 0;
-                            Registry.register(GlobalRegistryEnum.AUTH_KEY.getValue(), result.getAuthkey());
-                            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), result.getBaseLayer());
-                            Registry.register(GlobalRegistryEnum.VIEWPORT.getValue(), result.getViewport());
                             Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), result.getTreeOptions());
+                            Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), result);
                             loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
                         }
                     });

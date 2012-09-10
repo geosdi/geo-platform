@@ -33,84 +33,95 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview;
+package org.geosdi.geoplatform.gui.model.user;
 
-import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
-import com.extjs.gxt.ui.client.event.SelectionChangedListener;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.ListView;
-import com.extjs.gxt.ui.client.widget.ListViewSelectionModel;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWidget;
+import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GPListViewSearchWidget<T extends GeoPlatformBeanModel>
-        extends GeoPlatformSearchWidget<ListView<T>, T> {
+public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleDetail {
+    private static final long serialVersionUID = 6888698454407152018L;
 
-    public GPListViewSearchWidget(boolean lazy) {
-        super(lazy);
-    }
-
-    public GPListViewSearchWidget(boolean lazy, int pageSize) {
-        super(lazy, pageSize);
-    }
-
+    /**
+     * @return the id
+     */
     @Override
-    public void initWidget() {
-        super.widget = new ListView<T>();
-        super.widget.addStyleName("overview-page");
-        super.widget.setItemSelector(".project-box");
-        super.widget.setOverStyle("sample-over");
-        super.widget.setSelectStyle("project-box-select");
-        super.widget.setBorders(Boolean.FALSE);
-        super.widget.setStore(store);
-
-        super.widget.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<T>() {
-            @Override
-            public void selectionChanged(SelectionChangedEvent<T> se) {
-                changeSelection(se);
-            }
-        });
-
-        setListViewProperties();
+    public Long getId() {
+        return super.get(GPSimpleUserKeyValue.ID.toString());
     }
 
     /**
-     *
-     * @param T element
+     * @param id the id to set
      */
-    public void addElement(T element) {
-        this.store.insert(element, 0);
+    @Override
+    public void setId(Long id) {
+        super.set(GPSimpleUserKeyValue.ID.toString(), id);
     }
 
     /**
-     *
-     * @return ListViewSelectionModel<T>
+     * @return the username
      */
-    public ListViewSelectionModel<T> getSelectionModel() {
-        return super.widget.getSelectionModel();
+    @Override
+    public String getUsername() {
+        return super.get(GPSimpleUserKeyValue.USERNAME.toString());
     }
 
     /**
-     *
-     * @return ListStore<T>
+     * @param username the username to set
      */
-    public ListStore<T> getStore() {
-        return this.store;
+    @Override
+    public void setUsername(String username) {
+        super.set(GPSimpleUserKeyValue.USERNAME.toString(), username);
     }
 
     /**
-     * @return the listView
+     * @return the name
      */
-    public ListView<T> getListView() {
-        return super.widget;
+    @Override
+    public String getName() {
+        return super.get(GPSimpleUserKeyValue.NAME.toString());
     }
 
-    public abstract void changeSelection(SelectionChangedEvent<T> se);
+    /**
+     * @param name the name to set
+     */
+    @Override
+    public void setName(String name) {
+        super.set(GPSimpleUserKeyValue.NAME.toString(), name);
+    }
 
-    public abstract void setListViewProperties();
+    /**
+     * @return the email
+     */
+    @Override
+    public String getEmail() {
+        return super.get(GPSimpleUserKeyValue.EMAIL.toString());
+    }
+
+    /**
+     * @param email the email to set
+     */
+    @Override
+    public void setEmail(String email) {
+        super.set(GPSimpleUserKeyValue.EMAIL.toString(), email);
+    }
+
+    /**
+     * @return the organization
+     */
+    @Override
+    public String getOrganization() {
+        return super.get(GPSimpleUserKeyValue.ORGANIZATION.toString());
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    @Override
+    public void setOrganization(String organization) {
+        super.set(GPSimpleUserKeyValue.ORGANIZATION.toString(), organization);
+    }
 }

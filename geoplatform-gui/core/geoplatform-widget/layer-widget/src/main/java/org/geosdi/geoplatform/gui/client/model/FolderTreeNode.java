@@ -36,13 +36,16 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.extjs.gxt.ui.client.GXT;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFactory;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorModelConverter;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 import org.geosdi.geoplatform.gui.observable.Observable;
 
@@ -158,6 +161,11 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
 
     public void setObservable(ObservableFolderTreeNode observable) {
         this.observable = observable;
+    }
+
+    @Override
+    public Menu getTreeContextMenu() {
+        return TreeContextMenuFactory.getFolderContextMenu();
     }
 
     public class ObservableFolderTreeNode extends Observable {

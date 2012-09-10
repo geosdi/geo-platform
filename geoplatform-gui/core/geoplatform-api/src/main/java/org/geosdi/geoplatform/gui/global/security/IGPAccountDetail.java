@@ -26,6 +26,8 @@ public interface IGPAccountDetail {
 
     String getBaseLayer();
 
+    void setBaseLayer(String baseLayer);
+
     GPClientViewport getViewport();
 
     IGPTreeOptions getTreeOptions();

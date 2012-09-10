@@ -1520,7 +1520,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         
-        <cxf-version>2.6.2</cxf-version>
+        <cxf-version>2.6.1</cxf-version>
         <spring-version>3.1.2.RELEASE</spring-version>
 
         <httpcomponents-version>4.2.1</httpcomponents-version>
@@ -1557,7 +1557,7 @@
         <guava-version>11.0.2</guava-version>
         <guice-version>3.0</guice-version>
         
-        <ehcache-version>2.5.2</ehcache-version>
+        <ehcache-version>2.5.4</ehcache-version>
         
         <jdom-version>1.1</jdom-version>
         

@@ -20,6 +20,6 @@ public class TestSpringProperties {
 
     @Test
     public void testGPCacheManager() {
-        logger.info("Beaninstance: {}", this.cacheManager.getDiskStorePath());
+        logger.info("Beaninstance: {}", this.cacheManager.getDiskStorePathManager());
     }
 }

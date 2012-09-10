@@ -1,25 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="ehcache.xsd" name="gpCacheManager">
-
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         name="gpCacheManager">
+    
     <diskStore path="java.io.tmpdir" />
 
-    <defaultCache maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
-		memoryStoreEvictionPolicy="LRU">
+    <defaultCache maxElementsInMemory="10000" 
+                  eternal="false"
+                  timeToIdleSeconds="120"
+                  timeToLiveSeconds="120"
+                  diskExpiryThreadIntervalSeconds="120"
+                  memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
     </defaultCache>
     
-    <cache name="oxmCache" maxElementsInMemory="10000" 
-                eternal="false" overflowToDisk="true" 
-                timeToIdleSeconds="300" timeToLiveSeconds="600" 
-                memoryStoreEvictionPolicy="LFU">
+    <cache name="oxmCache"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="300"
+           memoryStoreEvictionPolicy="LFU">
+        
+        <persistence strategy="localTempSwap"/>
     </cache>
     
-    <cache name="publisherCache" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="false"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU">
-    </cache>
+
+    
+    <cache name="publisherCache"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>>
 
 </ehcache>

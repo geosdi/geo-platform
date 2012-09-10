@@ -1,118 +1,213 @@
 
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
-
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+    
     <diskStore path="java.io.tmpdir" />
 
-    <defaultCache maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
-		memoryStoreEvictionPolicy="LRU" />
+    <defaultCache maxElementsInMemory="10000"
+                  eternal="false"
+                  timeToIdleSeconds="120" 
+                  timeToLiveSeconds="120" 
+                  diskExpiryThreadIntervalSeconds="120"
+                  memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </defaultCache>
 
-                                <!-- Model -->
-    <cache name="user" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <!-- Model -->
+    <cache name="user"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
                 
-    <cache name="application" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="application"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
                 
-    <cache name="project" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="project"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
                 
-    <cache name="account_project" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />                
+    <cache name="account_project"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">                
+        <persistence strategy="localTempSwap" />
+    </cache>
 
-    <cache name="viewport" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="viewport"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
     
-    <cache name="folder" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="folder"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240"
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
 
-    <cache name="raster_layer" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="raster_layer"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
 
-    <cache name="vector_layer" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="vector_layer"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
 
-    <!--cache name="style" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" /-->
-
-    <cache name="server" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="server"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
 		
-    <cache name="authority" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="authority"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
 		
-    <cache name="organization" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="organization"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
                 
-                                <!-- ACL-->
-    <cache name="sid" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <!-- ACL-->
+    <cache name="sid"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
                 
-    <cache name="class" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="class" 
+           maxElementsInMemory="10000"
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240"
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
 
-    <cache name="object_identity" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="object_identity" 
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
                 
-    <cache name="entry" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="entry" 
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
 
-    <cache name="gui_component" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="gui_component"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
     
-    <cache name="gs_account" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="gs_account" 
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
                 
-    <cache name="gs_resource" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+    <cache name="gs_resource" 
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
                 
 
-                                <!-- Hibernate -->
+    <!-- Hibernate -->
     <cache name="org.hibernate.cache.StandardQueryCache"
-		maxElementsInMemory="200" eternal="false" timeToLiveSeconds="120"
-		diskPersistent="true" overflowToDisk="true" />
+           maxElementsInMemory="200" 
+           eternal="false" 
+           timeToLiveSeconds="120">
+        <persistence strategy="localTempSwap" />
+    </cache>
 
     <cache name="org.hibernate.cache.UpdateTimestampsCache"
-		maxElementsInMemory="5000" eternal="true" overflowToDisk="true" />
+           maxElementsInMemory="5000" 
+           eternal="true">
+        <persistence strategy="localTempSwap" />
+    </cache>
 
 </ehcache>

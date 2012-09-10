@@ -67,23 +67,20 @@ public class WSListenerServices implements TestExecutionListener {
 
         ApplicationContext appContext = testContext.getApplicationContext();
 
-        GPBasicWSClientTestConnector geoPlatformWSClient = (GPBasicWSClientTestConnector) appContext.getBean(
+        GPBasicWSClientTestConnector wsClientConnector = (GPBasicWSClientTestConnector) appContext.getBean(
                 "gpWSClient");
-        Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
-        gpWSClient = geoPlatformWSClient.getEndpointService();
+        Assert.assertNotNull("geoPlatformWSClient is NULL", wsClientConnector);
+        gpWSClient = wsClientConnector.getEndpointService();
 
         GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean(
                 "geoPlatformService");
         Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
 
-        Object implementor = geoPlatformService;
-
-        String serverAddress = geoPlatformWSClient.getAddress();
-
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
 
-        EndpointImpl endpoint = new EndpointImpl(implementor);
-        endpoint.setAddress(serverAddress);
+        String wsServerAddress = wsClientConnector.getAddress();
+        EndpointImpl endpoint = new EndpointImpl(geoPlatformService);
+        endpoint.setAddress(wsServerAddress);
 
         if (!endpoint.isPublished()) {
             endpoint.publish();

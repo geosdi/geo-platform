@@ -73,15 +73,15 @@ public class CSWListenerServices implements TestExecutionListener {
 
         ApplicationContext appContext = testContext.getApplicationContext();
 
-        GPCSWClientTestConnector cswClient = (GPCSWClientTestConnector) appContext.getBean(
+        GPCSWClientTestConnector cswClientConnector = (GPCSWClientTestConnector) appContext.getBean(
                 "cswClient");
-        Assert.assertNotNull("cswClient is NULL", cswClient);
-        cswService = cswClient.getEndpointService();
+        Assert.assertNotNull("cswClient is NULL", cswClientConnector);
+        cswService = cswClientConnector.getEndpointService();
 
-        GPBasicWSClientTestConnector geoPlatformWSClient = (GPBasicWSClientTestConnector) appContext.getBean(
+        GPBasicWSClientTestConnector wsClientConnector = (GPBasicWSClientTestConnector) appContext.getBean(
                 "gpWSClient");
-        Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
-        gpWSClient = geoPlatformWSClient.getEndpointService();
+        Assert.assertNotNull("geoPlatformWSClient is NULL", wsClientConnector);
+        gpWSClient = wsClientConnector.getEndpointService();
 
         GeoPlatformCSWService geoPlatformCSWService = (GeoPlatformCSWService) appContext.getBean(
                 "cswService");
@@ -93,13 +93,11 @@ public class CSWListenerServices implements TestExecutionListener {
 
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
 
-        String serverCSWAddress = cswClient.getAddress();
-        Endpoint.publish(serverCSWAddress,
-                         geoPlatformCSWService);
+        String cswServerAddress = cswClientConnector.getAddress();
+        Endpoint.publish(cswServerAddress, geoPlatformCSWService);
 
-        String serverGPAddress = geoPlatformWSClient.getAddress();
-        Endpoint.publish(serverGPAddress,
-                         geoPlatformService);
+        String wsServerAddress = wsClientConnector.getAddress();
+        Endpoint.publish(wsServerAddress, geoPlatformService);
 
         logger.info("\n\t@@@ Server ready... @@@");
     }

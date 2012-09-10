@@ -67,17 +67,17 @@ public class WSListenerWMSServices implements TestExecutionListener {
 
         ApplicationContext appContext = testContext.getApplicationContext();
 
-        GPWMSClientTestConnector geoPlatformWMSWSClient = (GPWMSClientTestConnector) appContext.getBean("gpWMSClient");
-        Assert.assertNotNull("geoPlatformWMSWSClient is NULL", geoPlatformWMSWSClient);
-        gpWMSClient = geoPlatformWMSWSClient.getEndpointService();
+        GPWMSClientTestConnector wmsClientConnector = (GPWMSClientTestConnector) appContext.getBean("gpWMSClient");
+        Assert.assertNotNull("geoPlatformWMSWSClient is NULL", wmsClientConnector);
+        gpWMSClient = wmsClientConnector.getEndpointService();
 
         GPWMSService geoPlatformWMSService = (GPWMSService) appContext.getBean("wmsService");
         Assert.assertNotNull("geoPlatformWMSService is NULL", geoPlatformWMSService);
 
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
 
-        String serverAddress = geoPlatformWMSWSClient.getAddress();
-        Endpoint.publish(serverAddress, geoPlatformWMSService);
+        String wmsServerAddress = wmsClientConnector.getAddress();
+        Endpoint.publish(wmsServerAddress, geoPlatformWMSService);
 
         logger.info("\n\t@@@ Server ready... @@@");
     }

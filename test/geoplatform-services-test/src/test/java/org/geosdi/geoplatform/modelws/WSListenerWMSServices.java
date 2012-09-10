@@ -37,13 +37,8 @@ package org.geosdi.geoplatform.modelws;
 
 import java.util.concurrent.TimeUnit;
 import javax.xml.ws.Endpoint;
-import org.apache.cxf.Bus;
-import org.apache.cxf.BusFactory;
-import org.apache.cxf.bus.spring.SpringBusFactory;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
 import org.geosdi.geoplatform.connectors.ws.wms.GPWMSClientTestConnector;
+import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.junit.Assert;
 import org.slf4j.Logger;
@@ -55,8 +50,8 @@ import org.springframework.test.context.TestExecutionListener;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- * 
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
@@ -65,13 +60,11 @@ public class WSListenerWMSServices implements TestExecutionListener {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GPWMSService gpWMSClient;
-    private Endpoint endpoint;
-    private Bus bus;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
-        logger.info("\n\t@@@ WSListenerServices.beforeTestClass @@@");
-        
+        logger.info("\n\t@@@ WSListenerWMSServices.beforeTestClass @@@");
+
         ApplicationContext appContext = testContext.getApplicationContext();
 
         GPWMSClientTestConnector geoPlatformWMSWSClient = (GPWMSClientTestConnector) appContext.getBean("gpWMSClient");
@@ -81,29 +74,17 @@ public class WSListenerWMSServices implements TestExecutionListener {
         GPWMSService geoPlatformWMSService = (GPWMSService) appContext.getBean("wmsService");
         Assert.assertNotNull("geoPlatformWMSService is NULL", geoPlatformWMSService);
 
-        Object implementor = geoPlatformWMSService;
-        SpringBusFactory bf = new SpringBusFactory();
-        bus = bf.createBus();
+        appContext.getBean(GPSpringBusConfigurator.class).createBus();
 
-        bus.getInInterceptors().add(new LoggingInInterceptor());
-        bus.getOutInterceptors().add(new LoggingOutInterceptor());
-
-        ServerInterceptorStrategyFactory serverInterceptorStrategyFactory = (ServerInterceptorStrategyFactory) testContext.getApplicationContext().getBean("serverInterceptorStrategyFactory");
-        Assert.assertNotNull("serverInterceptorStrategyFactory is NULL", serverInterceptorStrategyFactory);
-
-        bus.getInInterceptors().add(serverInterceptorStrategyFactory.getSecurityInInterceptor());
-        bus.getOutInterceptors().add(serverInterceptorStrategyFactory.getSecurityOutInterceptor());
-
-        BusFactory.setDefaultBus(bus);
         String serverAddress = geoPlatformWMSWSClient.getAddress();
-        endpoint = Endpoint.publish(serverAddress, implementor);
+        Endpoint.publish(serverAddress, geoPlatformWMSService);
 
         logger.info("\n\t@@@ Server ready... @@@");
     }
 
     @Override
     public void prepareTestInstance(TestContext testContext) throws Exception {
-        logger.info("\n\t@@@ WSWMSListenerWMSServices.prepareTestInstance @@@");
+        logger.info("\n\t@@@ WSListenerWMSServices.prepareTestInstance @@@");
 
         ServiceWMSTest testInstance = (ServiceWMSTest) testContext.getTestInstance();
         testInstance.setGpWMSClient(gpWMSClient);
@@ -121,8 +102,6 @@ public class WSListenerWMSServices implements TestExecutionListener {
     public void afterTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ WSListenerWMSServices.afterTestClass @@@");
 
-        endpoint.stop();
-        bus.shutdown(true);
         // Wait to be sure that the endpoint was shutdown properly
         Thread.sleep(TimeUnit.SECONDS.toMillis(5));
     }

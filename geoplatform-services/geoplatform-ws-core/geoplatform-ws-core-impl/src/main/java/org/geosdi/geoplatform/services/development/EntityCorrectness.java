@@ -190,6 +190,12 @@ public class EntityCorrectness {
         }
     }
 
+    public static void checkAccountListLog(List<GPAccount> accounts) {
+        for (GPAccount account : accounts) {
+            EntityCorrectness.checkAccountLog(account);
+        }
+    }
+
     public static void checkAuthorityLog(List<GPAuthority> authorities) {
         try {
             EntityCorrectness.checkAuthority(authorities);

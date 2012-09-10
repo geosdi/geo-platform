@@ -214,7 +214,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         Assert.assertEquals(351, countOverlap);
 
         logger.info("\n### TOT: {}\nENCLOSES: {}\nIS: {}\nOUTSIDE {}\nOVERLAP {}",
-                new Object[]{tot, countEncloses, countIs, countOutside, countOverlap});
+                tot, countEncloses, countIs, countOutside, countOverlap);
     }
 
     @Ignore("Catalog is down")
@@ -245,8 +245,9 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         Assert.assertTrue(deleted);
     }
 
+    @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
-    public void testGetRecordsSecureSNIPC() throws Exception {
+    public void testSecureGetRecordsSNIPC() throws Exception {
         // Insert the server
         GeoPlatformServer server = this.createCSWServer("SNIPC", snipcProvider.getSnipcUrl(), organizationTest);
         Long serverID = cswService.insertServerCSW(server);

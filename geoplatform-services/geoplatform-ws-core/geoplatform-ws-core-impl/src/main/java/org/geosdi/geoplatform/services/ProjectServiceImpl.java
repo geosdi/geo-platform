@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -64,11 +65,13 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
+import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.acls.domain.BasePermission;
 
 /**
  * @author Michele Santomauro
@@ -153,7 +156,7 @@ class ProjectServiceImpl {
             accountDao.merge(account);
         }
 
-        return project.getId(); // Remark: return only the entity ID of Project
+        return project.getId();
     }
 
     @Deprecated
@@ -203,12 +206,8 @@ class ProjectServiceImpl {
         return project.getNumberOfElements();
     }
 
-    /**
-     *
-     * @param projectID
-     * @return root folders of a project
-     */
-    public List<FolderDTO> getRootFoldersByProjectID(Long projectID) {
+    public List<FolderDTO> getRootFoldersByProjectID(Long projectID)
+            throws ResourceNotFoundFault {
         List<GPFolder> foundAccountFolders = folderDao.searchRootFolders(projectID);
         return FolderDTO.convertToFolderDTOList(foundAccountFolders);
     }
@@ -244,7 +243,7 @@ class ProjectServiceImpl {
         }
 
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                subFoldersMap, mapProjectFolders);
+                                                    subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);
@@ -328,16 +327,53 @@ class ProjectServiceImpl {
         GPProject project = this.getProjectByID(request.getProjectID());
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        GPAccount account = this.getAccountByID(request.getAccountID());
-        EntityCorrectness.checkAccountLog(account); // TODO assert
+        GPAccount owner = this.getAccountByID(request.getAccountID());
+        EntityCorrectness.checkAccountLog(owner); // TODO assert
 
-        // TODO: implement the logic described in this method's javadoc
+        // Reset the owner
+        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(project.getId());
+        EntityCorrectness.checkAccountProjectLog(accountOwner); // TODO assert
+        accountOwner.setPermissionMask(BasePermission.READ.getMask());
+        accountProjectDao.merge(accountOwner);
 
-        project.setShared(false);
+        // Set the new owner
+        List<GPAccountProject> accounts = accountProjectDao.findNotOwnersByProjectID(project.getId());
+        boolean exist = false;
+        for (GPAccountProject accountProject : accounts) {
+            EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
+            if (owner.equals(accountProject.getAccount())) {
+                accountProject.setPermissionMask(BasePermission.ADMINISTRATION.getMask());
+                exist = true;
+                break;
+            }
+        }
+        accountProjectDao.merge(accounts.toArray(new GPAccountProject[accounts.size()]));
 
-        projectDao.merge(project);
+        if (!exist) {
+            GPAccountProject ownerProject = new GPAccountProject();
+            ownerProject.setAccount(owner);
+            ownerProject.setProject(project);
+            ownerProject.setPermissionMask(BasePermission.ADMINISTRATION.getMask());
+            accountProjectDao.persist(ownerProject);
+        }
 
         return true;
+    }
+
+    /**
+     * @see GeoPlatformService#getProjectOwner(java.lang.Long)
+     */
+    public GPAccount getProjectOwner(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(projectID);
+        EntityCorrectness.checkAccountProjectLog(accountOwner); // TODO assert
+
+        GPAccount owner = accountOwner.getAccount();
+        EntityCorrectness.checkAccountLog(owner); // TODO assert
+
+        return owner; // TODO
     }
 
     public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
@@ -392,9 +428,9 @@ class ProjectServiceImpl {
 
         GPAccount account = accountProject.getAccount();
         if (account instanceof GPUser) {
-            this.accountServiceDelegate.updateUser((GPUser)account);
-        } else if(account instanceof GPApplication){
-            this.accountServiceDelegate.updateApplication((GPApplication)account);
+            this.accountServiceDelegate.updateUser((GPUser) account);
+        } else if (account instanceof GPApplication) {
+            this.accountServiceDelegate.updateApplication((GPApplication) account);
         }
         this.updateProject(accountProject.getProject());
 
@@ -455,9 +491,13 @@ class ProjectServiceImpl {
             searchCriteria.addFilterILike("project.name", request.getNameLike());
         }
 
-        return new Long(accountProjectDao.count(searchCriteria));
+        return Long.valueOf(accountProjectDao.count(searchCriteria));
     }
 
+    /**
+     * @see GeoPlatformService#searchAccountProjects(java.lang.Long,
+     * org.geosdi.geoplatform.request.PaginatedSearchRequest)
+     */
     public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
@@ -465,12 +505,13 @@ class ProjectServiceImpl {
 
         Search searchCriteria = new Search(GPAccountProject.class);
         searchCriteria.addFilterEqual("account.id", accountID);
-        searchCriteria.setMaxResults(request.getNum());
-        searchCriteria.setPage(request.getPage());
+        if (request != null) {
+            searchCriteria.setMaxResults(request.getNum());
+            searchCriteria.setPage(request.getPage());
 
-        if (request != null && request.getNameLike() != null) {
-            searchCriteria.addFilterILike("project.name", request.getNameLike());
-//        searchCriteria.addSortAsc("project.name");
+            if (request.getNameLike() != null) {
+                searchCriteria.addFilterILike("project.name", request.getNameLike());
+            }
         }
 
         List<GPAccountProject> accountProjectList = accountProjectDao.search(searchCriteria);
@@ -482,7 +523,16 @@ class ProjectServiceImpl {
         }
         EntityCorrectness.checkProjectListLog(projects); // TODO assert
 
-        return ProjectDTO.convertToProjectDTOList(projects);
+        List<ProjectDTO> projectDTO = ProjectDTO.convertToProjectDTOList(projects);
+        for (ProjectDTO project : projectDTO) {
+            if (project.isShared()) {
+                GPAccount owner = accountProjectDao.findOwnerByProjectID(accountID).getAccount();
+                ShortAccountDTO ownerDTO = ShortAccountDTO.convertToShortAccountDTO(owner);
+                project.setOwner(ownerDTO);
+            }
+        }
+
+        return projectDTO;
     }
 
     /**
@@ -512,6 +562,114 @@ class ProjectServiceImpl {
             return true;
         }
         return false;
+    }
+
+    /**
+     * @see GeoPlatformService#getAccountsBySharedProjectID(java.lang.Long)
+     */
+    List<ShortAccountDTO> getAccountsBySharedProjectID(Long projectID)
+            throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        List<GPAccountProject> accoutProjectList = accountProjectDao.findByProjectID(projectID);
+
+        List<GPAccount> accountList = new ArrayList<GPAccount>(accoutProjectList.size());
+        for (GPAccountProject accountProject : accoutProjectList) {
+            GPAccount account = accountProject.getAccount();
+            accountList.add(account);
+        }
+        return ShortAccountDTO.convertToShortAccountDTOList(accountList);
+    }
+
+    /**
+     * @see GeoPlatformService#getAccountsToShareByProjectID(java.lang.Long)
+     */
+    List<ShortAccountDTO> getAccountsToShareByProjectID(Long projectID)
+            throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        // Retrieve info for obtain Accounts of shared Projects
+        List<GPAccountProject> accountProjects = accountProjectDao.findByProjectID(projectID);
+        EntityCorrectness.checkAccountProjectListLog(accountProjects); // TODO assert
+
+        // Retrieve the Organization related to the shared Project
+        // Note: a Project will have at least one Account, the owner of the Project
+        GPOrganization organization = accountProjects.get(0).getAccount().getOrganization();
+
+        // Retrieve all Accounts of the Organization
+        List<GPAccount> accounts = accountDao.findByOrganization(organization.getName());
+        EntityCorrectness.checkAccountListLog(accounts); // TODO assert
+
+        // Retrieve the Accounts to share the Project
+        for (GPAccountProject accountProject : accountProjects) {
+            accounts.remove(accountProject.getAccount());
+        }
+        List<ShortAccountDTO> accountsDTO = ShortAccountDTO.convertToShortAccountDTOList(accounts);
+
+        return accountsDTO;
+    }
+
+    /**
+     * @todo Optimize SQL queries
+     *
+     * @see GeoPlatformService#updateAccountsProjectSharing(java.lang.Long,
+     * java.util.List)
+     */
+    boolean updateAccountsProjectSharing(Long projectID, List<Long> accountIDsProject)
+            throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        if (accountIDsProject == null || accountIDsProject.isEmpty()) {
+            if (project.isShared()) {
+                logger.debug("\n*** Delete all relations of sharing");
+                List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
+                for (GPAccountProject accountProject : accountProjectList) {
+                    accountProjectDao.remove(accountProject);
+                }
+
+                project.setShared(false);
+                projectDao.merge(project);
+            }
+        } else {
+            logger.debug("\n*** Update all relations of sharing");
+            List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
+            Map<Long, GPAccountProject> sharingMap = new HashMap<Long, GPAccountProject>(accountProjectList.size());
+            for (GPAccountProject accountProject : accountProjectList) {
+                sharingMap.put(accountProject.getAccount().getId(), accountProject);
+            }
+
+            for (Long accountID : accountIDsProject) {
+                GPAccountProject accountProject = sharingMap.remove(accountID);
+                // Create a new relation of sharing
+                if (accountProject == null) {
+                    GPAccount newAccount = this.getAccountByID(accountID);
+
+                    GPAccountProject newAccountProject = new GPAccountProject();
+                    newAccountProject.setAccountAndProject(newAccount, project);
+                    newAccountProject.setPermissionMask(BasePermission.READ.getMask());
+                    logger.debug("\n*** Create a new relation of sharing for Account \"{}\"",
+                                 newAccount.getStringID());
+                    accountProjectDao.persist(newAccountProject);
+                }
+            }
+
+            // Delete the remaining relations of sharing
+            for (Map.Entry<Long, GPAccountProject> e : sharingMap.entrySet()) {
+                logger.debug("\n*** Delete the relation of sharing for Account \"{}\"",
+                             e.getValue().getAccount().getStringID());
+                accountProjectDao.remove(e.getValue());
+            }
+
+            if (!project.isShared()) {
+                project.setShared(true);
+                projectDao.merge(project);
+            }
+        }
+
+        return true;
     }
     //</editor-fold>
 
@@ -599,7 +757,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                        folderDTO);
+                                                              folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -618,13 +776,13 @@ class ProjectServiceImpl {
                 numberOfDescendants += descendantsIth + 1;
 
             } else { // Layer
-                GPLayer layer = null;
+                GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                            (RasterLayerDTO) element);
+                                                                  (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                            (VectorLayerDTO) element);
+                                                                  (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);

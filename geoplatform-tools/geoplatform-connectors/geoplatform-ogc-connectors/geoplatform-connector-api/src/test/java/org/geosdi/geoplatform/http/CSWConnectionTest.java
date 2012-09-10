@@ -145,9 +145,9 @@ public class CSWConnectionTest {
      * For list teh Trusted CA Certs execute the command
      * <code>keytool -list -v -keystore cacerts</code>
      */
-    @Ignore("Ignore for comunity success build") 
+    @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
-    public void testGetCapabilitiesRequestHttps() {
+    public void testSecureGetCapabilitiesRequest() {
         try {
             URI targetURI = new URI(snipcUrl);
 

@@ -117,17 +117,48 @@ public interface GeoPlatformService {
     // === Account
     // ==========================================================================
 
+    /**
+     * Insert an Account (User or Application).
+     *
+     * @param account the Account to insert
+     * @param sendEmail the flag for send to new User a registration email (not
+     * for Applications)
+     * @return the Account ID
+     * @throws IllegalParameterFault if the account not have an Organization or
+     * there is a duplicate Account
+     */
     @Put
     @HttpResource(location = "/accounts")
     Long insertAccount(@WebParam(name = "account") GPAccount account,
             @WebParam(name = "sendEmail") boolean sendEmail)
             throws IllegalParameterFault;
 
+    /**
+     * Update a User and his Authorities.
+     *
+     * @param user the User to update
+     * @return the User ID
+     * @throws ResourceNotFoundFault if User not found
+     * @throws IllegalParameterFault if User ID is null or update a standard
+     * User to a temporary User
+     */
     @Post
     @HttpResource(location = "/users")
     Long updateUser(@WebParam(name = "User") GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    /**
+     * Update a User, also his password. If password or email is changed will be
+     * sent an email for modification.
+     *
+     * @param user the User to update
+     * @param currentPlainPassword the plaintext password of the User
+     * @param newPlainPassword the new plaintext password of the User
+     * @return the User ID
+     * @throws ResourceNotFoundFault if User not found
+     * @throws IllegalParameterFault if User ID is null or the
+     * currentPlainPassword is wrong
+     */
     @Post
     @HttpResource(location = "/users")
     Long updateOwnUser(
@@ -136,39 +167,83 @@ public interface GeoPlatformService {
             @WebParam(name = "newPlainPassword") String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    /**
+     * Update an Application and his Authorities.
+     *
+     * @param application the Application to update
+     * @return the Application ID
+     * @throws ResourceNotFoundFault if Application not found
+     * @throws IllegalParameterFault if Application ID is null or update a
+     * standard Application to a temporary Application
+     */
     @Post
     @HttpResource(location = "/applications")
     Long updateApplication(
             @WebParam(name = "application") GPApplication application)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    /**
+     * Delete an Account by ID. Delete his Authorities, the owner Project and
+     * the reference to shared Project.
+     *
+     * @param accountID the Account ID
+     * @return true if the Account was deleted
+     * @throws ResourceNotFoundFault if Account not found
+     */
     @Delete
     @HttpResource(location = "/accounts/{accountID}")
     boolean deleteAccount(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve a User by ID.
+     *
+     * @param userID the User ID
+     * @return the User to retrieve
+     * @throws ResourceNotFoundFault if User not found
+     */
     @Get
     @HttpResource(location = "/users/{userID}")
     @WebResult(name = "User")
     GPUser getUserDetail(@WebParam(name = "userID") Long userID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve a User by username.
+     *
+     * @param request the request that wrap the username
+     * @return the User to retrieve
+     * @throws ResourceNotFoundFault if User not found
+     */
     @Get
     @WebResult(name = "User")
     GPUser getUserDetailByUsername(SearchRequest request)
             throws ResourceNotFoundFault;
 
     /**
-     * Return the user authenticated wrt username and passowrd, otherwise throws
-     * an exception. The username can contain the email also.
+     * Retrieve a User by username (or email) and password to authenticate it.
+     *
+     * @param username the username or the email of the User
+     * @param plainPassword the plaintext password of the User
+     * @return the User to retrieve
+     * @throws ResourceNotFoundFault if User not found or not have Authorities
+     * @throws IllegalParameterFault if the password is wrong
+     * @throws AccountLoginFault if User is disabled or expired
      */
     @Get
     @WebResult(name = "User")
     GPUser getUserDetailByUsernameAndPassword(
             @WebParam(name = "username") String username,
-            @WebParam(name = "password") String password)
+            @WebParam(name = "plainPassword") String plainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault;
 
+    /**
+     * Retrieve an Application by ID.
+     *
+     * @param applicationID the Application ID
+     * @return the Application to retrieve
+     * @throws ResourceNotFoundFault if Application not found
+     */
     @Get
     @HttpResource(location = "/applications/{applicationID}")
     @WebResult(name = "Application")
@@ -176,22 +251,51 @@ public interface GeoPlatformService {
             @WebParam(name = "applicationID") Long applicationID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve an Application by string ID.
+     *
+     * @param appID the Application string ID
+     * @return the Application to retrieve
+     * @throws ResourceNotFoundFault if Application not found
+     * @throws AccountLoginFault if Application is disabled or expired
+     */
     @Get
     @WebResult(name = "Application")
     GPApplication getApplication(@WebParam(name = "appID") String appID)
             throws ResourceNotFoundFault, AccountLoginFault;
 
+    /**
+     * Retrieve a User by ID.
+     *
+     * @param userID the User ID
+     * @return the User to retrieve
+     * @throws ResourceNotFoundFault if User not found
+     */
     @Get
     @HttpResource(location = "/users/{userID}")
     @WebResult(name = "User")
     UserDTO getShortUser(@WebParam(name = "userID") Long userID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve a User by username.
+     *
+     * @param the request that wrap the username
+     * @return the User to retrieve
+     * @throws ResourceNotFoundFault if User not found
+     */
     @Get
     @WebResult(name = "User")
     UserDTO getShortUserByUsername(SearchRequest request)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve an Application by ID.
+     *
+     * @param applicationID the Application ID
+     * @return the Application to retrieve
+     * @throws ResourceNotFoundFault if Application not found
+     */
     @Get
     @HttpResource(location = "/applications/{applicationID}")
     @WebResult(name = "Application")
@@ -199,50 +303,130 @@ public interface GeoPlatformService {
             @WebParam(name = "applicationID") Long applicationID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve an Application by string ID.
+     *
+     * @param request the request that wrap the string ID
+     * @return the Application to retrieve
+     * @throws ResourceNotFoundFault if Application not found
+     */
     @Get
     @WebResult(name = "Application")
     ApplicationDTO getShortApplicationByAppID(SearchRequest request)
             throws ResourceNotFoundFault;
 
+    /**
+     * Search Users and their Authorities of the Organization of the User
+     * retrieved by userID. The Users are searched by name like of username.
+     *
+     * @param userID the User ID that will exclude from the search (logged user)
+     * @param request the request that wrap the search parameters
+     * @return the paginate list of Users found
+     * @throws ResourceNotFoundFault if User not found or a searched User not
+     * have Authorities
+     */
     @Get
     @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
     @WebResult(name = "Users")
     List<UserDTO> searchUsers(@WebParam(name = "userID") Long userID,
-            PaginatedSearchRequest searchRequest) throws ResourceNotFoundFault;
+            PaginatedSearchRequest request) throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve all Accounts.
+     *
+     * @return the list of Accounts
+     */
     @Get
     @HttpResource(location = "/accounts")
     @WebResult(name = "Accounts")
-    List<ShortAccountDTO> getAccounts();
+    List<ShortAccountDTO> getAllAccounts();
 
+    /**
+     * Retrieve all Accounts within an Organization.
+     *
+     * @param organization the Organization name
+     * @return the list of Accounts
+     * @throws ResourceNotFoundFault if Organization not found
+     */
+    @Get
+    @HttpResource(location = "/accounts/{}")
+    @WebResult(name = "Accounts")
+    List<ShortAccountDTO> getAccounts(
+            @WebParam(name = "organization") String organization)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve the number of Accounts found by search request.
+     *
+     * @param request the request that wrap the username (for User) or the
+     * string ID (for Application)
+     * @return the number of Accounts found
+     */
     @Get
     @HttpResource(location = "/accounts/count/{nameLike}")
     @WebResult(name = "count")
-    Long getAccountsCount(SearchRequest searchRequest);
+    Long getAccountsCount(SearchRequest request);
 
+    /**
+     * Retrieve the number of Users of an Organization found by search request.
+     *
+     * @param organization the Organization name
+     * @param request the request that wrap the username
+     * @return the number of Users found
+     */
     @Get
     @HttpResource(location = "/users/count/{nameLike}")
     @WebResult(name = "count")
     Long getUsersCount(@WebParam(name = "organization") String organization,
-            SearchRequest searchRequest);
+            SearchRequest request);
 
+    /**
+     * Retrieve the Authorities of an Account.
+     *
+     * @param accountID the Account ID
+     * @return the list of string Authorities
+     * @throws ResourceNotFoundFault if Account not found or Account not have
+     * Authorities
+     */
     @Get
     @HttpResource(location = "/accounts/{id}/authorities")
     @WebResult(name = "Authorities")
     List<String> getAuthorities(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve the Authorities of an Account.
+     *
+     * @param stringID the username (for User) or the string ID (for
+     * Application)
+     * @return the list of Authorities
+     * @throws ResourceNotFoundFault if Account not found or Account not have
+     * Authorities
+     */
     @HttpResource(location = "/accounts/{id}/authorities")
     @WebResult(name = "Authorities")
     List<GPAuthority> getAuthoritiesDetail(
             @WebParam(name = "stringID") String stringID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Set an Account as temporary.
+     *
+     * @param accountID the Account ID
+     * @throws ResourceNotFoundFault if Account not found
+     */
     @Post
     @HttpResource(location = "/accounts/{accountID}")
     void forceTemporaryAccount(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Set a temporary Account as expired.
+     *
+     * @param accountID the Account ID
+     * @throws ResourceNotFoundFault if Account not found
+     * @throws IllegalParameterFault if Account is not temporary
+     */
     @Post
     @HttpResource(location = "/accounts/{accountID}")
     void forceExpiredTemporaryAccount(
@@ -305,12 +489,61 @@ public interface GeoPlatformService {
     Long getAccountProjectsCount(@WebParam(name = "accountID") Long accountID,
             SearchRequest request) throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve, in paginated way, all the Account Projects. There are two
+     * Project type, first that the Account is the owner, and latter related at
+     * a shared Project.
+     * <p/>
+     * Each Project result, if shared, contain the own Account owner.
+     *
+     * @param accountID the Account ID
+     * @param request the request that wrap Project ID, Project name and Account
+     * ID
+     * @return all Projects of the Account
+     * @throws ResourceNotFoundFault if Account not found
+     */
     @Get
     @HttpResource(location = "/accounts/search/{num}/{page}/{nameLike}")
-    @WebResult(name = "Projects")
+    @WebResult(name = "Project")
     List<ProjectDTO> searchAccountProjects(
             @WebParam(name = "accountID") Long accountID,
             PaginatedSearchRequest request) throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve the Account owner of a Project.
+     *
+     * @param projectID the Project ID
+     * @return the Account owner
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Post
+    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
+    GPAccount getProjectOwner(@WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Set an Account owner for a Project.
+     *
+     * @param request the request that wrap Project ID and Account ID
+     * @return true if the Account owner was changed
+     * @throws ResourceNotFoundFault if Project or Account not found
+     */
+    @Post
+    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
+    boolean setProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Force an Account owner for a Project.
+     *
+     * @param request the request that wrap Project ID and Account ID
+     * @return true if the Account owner was forced
+     * @throws ResourceNotFoundFault if Project or Account not found
+     */
+    @Post
+    @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
+    void forceProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/account/{accountID}")
@@ -330,11 +563,57 @@ public interface GeoPlatformService {
             @WebParam(name = "accountProjectProperties") AccountProjectPropertiesDTO accountProjectProperties)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    /**
+     * Retrieve all Accounts of a (shared) Project.
+     *
+     * @param projectID the Project ID
+     * @return the Account owner and of the Accounts to which the Project is
+     * shared
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Get
+    @WebResult(name = "Account")
+    List<ShortAccountDTO> getAccountsByProjectID(
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve all Accounts to which it is possible to share a Project.
+     *
+     * @param projectID the Project ID
+     * @return the Accounts to which the Project is not shared
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Get
+    @WebResult(name = "Account")
+    List<ShortAccountDTO> getAccountsToShareByProjectID(
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
+
+    @Post
+    @WebResult(name = "Account")
+    boolean updateAccountsProjectSharing(
+            @WebParam(name = "projectID") Long projectID,
+            @WebParam(name = "accountIDsProject") List<Long> accountIDsProject)
+            throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================
     // === Project
     // ==========================================================================
+
+    /**
+     * Save a Project and its Account owner.
+     *
+     * @param stringID the string ID of the Account (username for User and appID
+     * for Application) owner of the Project
+     * @param project the Project to save
+     * @param defaultProject flag for save the Project as default for the
+     * Account
+     * @return the Project ID
+     * @throws ResourceNotFoundFault if the Account not found
+     * @throws IllegalParameterFault if the Project is not valid
+     */
     @Put
     @HttpResource(location = "/project")
     Long saveProject(@WebParam(name = "stringID") String stringID,
@@ -342,61 +621,89 @@ public interface GeoPlatformService {
             @WebParam(name = "defaultProject") boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    /**
+     * Save a Project.
+     *
+     * @param project the Project to save.
+     * @return the Project ID
+     * @throws IllegalParameterFault if the Project is not valid
+     * @deprecated only for test purpose
+     * @see #saveProject(java.lang.String,
+     * org.geosdi.geoplatform.core.model.GPProject, boolean)
+     */
     @Put
     @HttpResource(location = "/project")
     @Deprecated
     Long insertProject(@WebParam(name = "project") GPProject project)
             throws IllegalParameterFault;
 
+    /**
+     * Update a Project.
+     *
+     * @param project the Project to update
+     * @return the Project ID
+     * @throws ResourceNotFoundFault if the Project not found
+     * @throws IllegalParameterFault if the Project is not valid
+     */
     @Post
     @HttpResource(location = "/project")
     Long updateProject(@WebParam(name = "project") GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    /**
+     * Delete a Project.
+     *
+     * @param project the Project to delete
+     * @return true if the Project was deleted
+     * @throws ResourceNotFoundFault if the Project not found
+     */
     @Delete
     @HttpResource(location = "/projects/{projectID}")
     boolean deleteProject(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve a Project.
+     *
+     * @param projectID the Project ID
+     * @return the Project to retrieve
+     * @throws ResourceNotFoundFault if the Project not found
+     */
     @Get
     @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "Project")
     GPProject getProjectDetail(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve the number of elements of a Project.
+     *
+     * @param projectID the Project ID
+     * @return the number of elements to retrieve
+     * @throws ResourceNotFoundFault if Project not found
+     */
     @Get
     @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "Project")
     int getNumberOfElementsProject(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Set a Project as shared.
+     *
+     * @param projectID the Project ID
+     * @throws ResourceNotFoundFault if Project not found
+     */
     @Post
     @HttpResource(location = "/project/{projectID}/shared")
     void setProjectShared(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
-    @Post
-    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
-    boolean setProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault;
-
-    @Post
-    @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
-    void forceProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault;
-
-    @Get
-    @HttpResource(location = "/project/{projectID}")
-    @WebResult(name = "TreeElements")
-    ProjectDTO getExpandedElementsByProjectID(
-            @WebParam(name = "projectID") Long projectID)
-            throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Viewport">
     // ==========================================================================
     // === Viewport
     // ==========================================================================
-
     @Get
     @HttpResource(location = "/viewport/{{accountProjectID}}")
     @WebResult(name = "Viewport")
@@ -561,18 +868,62 @@ public interface GeoPlatformService {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Folder / Project">
+    /**
+     * Retrieve only the root folders (top-level folders) of a Project.
+     *
+     * @param projectID the Project ID
+     * @return the root folders
+     * @throws ResourceNotFoundFault if Project not found
+     */
     @Get
-    // @HttpResource(location = "/projects/{projectID}")
+    @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "RootFolders")
     List<FolderDTO> getRootFoldersByProjectID(
-            @WebParam(name = "projectID") Long projectID);
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve a Project. Retrieve also the root folders (top-level folders)
+     * with content (sub-folders and layers), so all expanded folders (at any
+     * level) in cascade.
+     *
+     * @todo rename to getExpandedFoldersByProjectID because only the folder can
+     * be expanded.
+     *
+     * @param projectID the Project ID
+     * @return the Project to retrieve
+     * @throws ResourceNotFoundFault if Project not found
+     */
     @Get
-    // @HttpResource(location = "/projects/{projectID}")
+    @HttpResource(location = "/projects/{projectID}")
+    @WebResult(name = "TreeElements")
+    ProjectDTO getExpandedElementsByProjectID(
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Export a Project with its contents (folders and layers).
+     *
+     * @param projectID the Project ID
+     * @return the Project to export
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Get
+    @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "Project")
     ProjectDTO exportProject(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Import a Project with its contents (folders and layers) for an Account
+     * owner.
+     *
+     * @param projectDTO the Project to import
+     * @param accountID the Account owner ID of the Project
+     * @return the Project ID
+     * @throws IllegalParameterFault if Project and its contents is not valid
+     * @throws ResourceNotFoundFault if Account not found
+     */
     @Put
     @HttpResource(location = "/project")
     Long importProject(@WebParam(name = "projectDTO") ProjectDTO projectDTO,
@@ -745,6 +1096,9 @@ public interface GeoPlatformService {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="ACL">
+    // ==========================================================================
+    // === ACL
+    // ==========================================================================
     /**
      * Retrieve all Roles wrt an organization.
      *
@@ -855,9 +1209,9 @@ public interface GeoPlatformService {
             throws IllegalParameterFault;
 
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="SERVER">
+    // <editor-fold defaultstate="collapsed" desc="Server">
     // ==========================================================================
-    // === SERVER
+    // === Server
     // ==========================================================================
     @Put
     @HttpResource(location = "/server")
@@ -906,7 +1260,6 @@ public interface GeoPlatformService {
             throws IllegalParameterFault;
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Access Info">
     // ==========================================================================
     // === Access Info

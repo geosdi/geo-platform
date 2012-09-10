@@ -83,7 +83,7 @@ public class GPAccountProject implements Serializable {
     //
     @Column(name = "permission_mask", nullable = false)
     private int permissionMask = BasePermission.ADMINISTRATION.getMask();
-    //
+    // TODO REF Move to AccountOption entity
     @Column(name = "base_layer", nullable = false)
     private String baseLayer = "GOOGLE_SATELLITE";
 

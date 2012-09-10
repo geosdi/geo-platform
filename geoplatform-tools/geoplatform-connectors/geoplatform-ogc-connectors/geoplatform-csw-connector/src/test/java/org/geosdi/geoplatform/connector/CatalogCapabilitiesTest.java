@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabi
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -167,8 +168,9 @@ public class CatalogCapabilitiesTest {
                 response.getVersion());
     }
 
+    @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
-    public void testGetCapabilitiesSecure() throws Exception {
+    public void testSecureGetCapabilities() throws Exception {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(new URL(snipcUrl)).withClientSecurity(
                 new BasicPreemptiveSecurityConnector(snipcUsername,

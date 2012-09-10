@@ -44,14 +44,14 @@ import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 public class UserTreeOptions implements IGPTreeOptions {
 
     private static final long serialVersionUID = -5099354521754438146L;
-    private boolean loadExpandedFolder;
+    private boolean loadExpandedFolders;
 
-    public void setLoadExpandedFolder(boolean loadExpandedFolder) {
-        this.loadExpandedFolder = loadExpandedFolder;
+    public void setLoadExpandedFolders(boolean loadExpandedFolders) {
+        this.loadExpandedFolders = loadExpandedFolders;
     }
 
     @Override
-    public boolean isLoadExpandedFolder() {
-        return this.loadExpandedFolder;
+    public boolean isLoadExpandedFolders() {
+        return this.loadExpandedFolders;
     }
 }

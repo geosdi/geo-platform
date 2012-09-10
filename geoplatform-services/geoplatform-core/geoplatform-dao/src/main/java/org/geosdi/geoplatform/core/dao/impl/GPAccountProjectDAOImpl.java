@@ -35,19 +35,17 @@
  */
 package org.geosdi.geoplatform.core.dao.impl;
 
-import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
-
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import java.util.List;
 import javax.persistence.Query;
+import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
  */
 @Transactional
 public class GPAccountProjectDAOImpl extends BaseDAO<GPAccountProject, Long>
@@ -160,6 +158,22 @@ public class GPAccountProjectDAOImpl extends BaseDAO<GPAccountProject, Long>
     public List<GPAccountProject> findByProjectID(Long projectID) {
         Search search = new Search();
         search.addFilterEqual("project.id", projectID);
+        return search(search);
+    }
+
+    @Override
+    public GPAccountProject findOwnerByProjectID(Long projectID) {
+        Search search = new Search();
+        search.addFilterEqual("project.id", projectID);
+        search.addFilterEqual("permissionMask", BasePermission.ADMINISTRATION.getMask());
+        return searchUnique(search);
+    }
+
+    @Override
+    public List<GPAccountProject> findNotOwnersByProjectID(Long projectID) {
+        Search search = new Search();
+        search.addFilterEqual("project.id", projectID);
+        search.addFilterNotEqual("permissionMask", BasePermission.ADMINISTRATION.getMask());
         return search(search);
     }
 

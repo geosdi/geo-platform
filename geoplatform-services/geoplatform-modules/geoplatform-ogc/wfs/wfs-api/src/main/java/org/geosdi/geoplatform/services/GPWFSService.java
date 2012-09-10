@@ -35,7 +35,13 @@
  */
 package org.geosdi.geoplatform.services;
 
+import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
+import org.codehaus.jra.Get;
+import org.codehaus.jra.HttpResource;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.LayerSchemaDTO;
 
 /**
  * Public interface to define the service operations mapped via REST using CXT
@@ -47,4 +53,10 @@ import javax.jws.WebService;
 @WebService(name = "GPWFSService",
             targetNamespace = "http://services.geo-platform.org/")
 public interface GPWFSService {
+    
+    @Get
+    @HttpResource(location = "/wfs/describeFeatureType/{typeName}")
+    @WebResult(name = "DescribeFeatureType")
+    LayerSchemaDTO describeFeatureType(@WebParam(name = "urlServer") String urlServer, @WebParam(name = "typeName") String typeName)
+            throws ResourceNotFoundFault;
 }

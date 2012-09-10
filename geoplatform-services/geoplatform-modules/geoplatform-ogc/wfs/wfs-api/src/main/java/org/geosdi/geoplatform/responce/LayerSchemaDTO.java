@@ -33,50 +33,50 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.core.dao;
+package org.geosdi.geoplatform.responce;
 
-import com.googlecode.genericdao.search.ISearch;
 import java.util.List;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Francesco Izzi - CNR IMAA geoSDI Group
+ * @email francesco.izzi@geosdi.org
  */
-public interface GPAccountProjectDAO {
 
-    public List<GPAccountProject> findAll();
+@XmlRootElement(name = "LayerSchemaDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"schemaNamespaceURI","attributes"})
+public class LayerSchemaDTO {
+    
+    private String schemaNamespaceURI;
+    
+    @XmlElementWrapper(name = "attributes")
+    @XmlElement(name = "attribute")
+    private List<? extends ShortAttributeDTO> attributes;
 
-    public GPAccountProject find(Long id);
+    public LayerSchemaDTO() {
+        super();
+    }
 
-    public GPAccountProject[] find(Long[] ids);
+    public void setSchemaNamespaceURI(String schemaNamespaceURI) {
+        this.schemaNamespaceURI = schemaNamespaceURI;
+    }
 
-    public void persist(GPAccountProject... accountsProjects);
+    public void setAttributes(List<? extends ShortAttributeDTO> attributes) {
+        this.attributes = attributes;
+    }
 
-    public GPAccountProject merge(GPAccountProject accountProject);
+    public String getSchemaNamespaceURI() {
+        return schemaNamespaceURI;
+    }
 
-    public GPAccountProject[] merge(GPAccountProject... accountsProjects);
-
-    public boolean remove(GPAccountProject accountProject);
-
-    public boolean removeById(Long id);
-
-    public boolean removeByAccountID(Long accountID);
-
-    public boolean removeByProjectID(Long projectID);
-
-    public List<GPAccountProject> search(ISearch search);
-
-    public int count(ISearch search);
-
-    public List<GPAccountProject> findByAccountID(Long accountID);
-
-    public List<GPAccountProject> findByOwnerAccountID(Long accountID);
-
-    public List<GPAccountProject> findByProjectID(Long projectID);
-
-    public GPAccountProject findOwnerByProjectID(Long projectID);
-
-    public List<GPAccountProject> findNotOwnersByProjectID(Long projectID);
-
-    public GPAccountProject find(Long accountID, Long projectID);
+    public List<? extends ShortAttributeDTO> getAttributes() {
+        return attributes;
+    }
+    
 }

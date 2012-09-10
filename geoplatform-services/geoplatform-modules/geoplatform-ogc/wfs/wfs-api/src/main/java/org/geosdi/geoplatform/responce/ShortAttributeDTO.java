@@ -33,50 +33,73 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.core.dao;
-
-import com.googlecode.genericdao.search.ISearch;
-import java.util.List;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
+package org.geosdi.geoplatform.responce;
 
 /**
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Francesco Izzi - CNR IMAA geoSDI Group
+ * @email francesco.izzi@geosdi.org
  */
-public interface GPAccountProjectDAO {
 
-    public List<GPAccountProject> findAll();
 
-    public GPAccountProject find(Long id);
+public class ShortAttributeDTO {
+            
+    private String name;
+    private String localName;
+    private String defaultValue;
+    private String type;
+    private int minOccurs;
+    private int maxOccurs;
 
-    public GPAccountProject[] find(Long[] ids);
+    public ShortAttributeDTO() {
+        super();
+    }
 
-    public void persist(GPAccountProject... accountsProjects);
+    public String getName() {
+        return name;
+    }
 
-    public GPAccountProject merge(GPAccountProject accountProject);
+    public String getLocalName() {
+        return localName;
+    }
 
-    public GPAccountProject[] merge(GPAccountProject... accountsProjects);
+    public String getDefaultValue() {
+        return defaultValue;
+    }
 
-    public boolean remove(GPAccountProject accountProject);
+    public String getType() {
+        return type;
+    }
 
-    public boolean removeById(Long id);
+    public int getMinOccurs() {
+        return minOccurs;
+    }
 
-    public boolean removeByAccountID(Long accountID);
+    public int getMaxOccurs() {
+        return maxOccurs;
+    }
 
-    public boolean removeByProjectID(Long projectID);
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public List<GPAccountProject> search(ISearch search);
+    public void setLocalName(String localName) {
+        this.localName = localName;
+    }
 
-    public int count(ISearch search);
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+    }
 
-    public List<GPAccountProject> findByAccountID(Long accountID);
+    public void setType(String type) {
+        this.type = type;
+    }
 
-    public List<GPAccountProject> findByOwnerAccountID(Long accountID);
+    public void setMinOccurs(int minOccurs) {
+        this.minOccurs = minOccurs;
+    }
 
-    public List<GPAccountProject> findByProjectID(Long projectID);
-
-    public GPAccountProject findOwnerByProjectID(Long projectID);
-
-    public List<GPAccountProject> findNotOwnersByProjectID(Long projectID);
-
-    public GPAccountProject find(Long accountID, Long projectID);
+    public void setMaxOccurs(int maxOccurs) {
+        this.maxOccurs = maxOccurs;
+    }
+    
 }

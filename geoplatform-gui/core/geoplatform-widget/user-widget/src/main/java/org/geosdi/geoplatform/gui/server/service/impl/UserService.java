@@ -164,7 +164,7 @@ public class UserService implements IUserService {
         logger.debug("\nUserTreeOptions to UPDATE:\n{}", userTreeOptions);
         Long accountProjectID = null;
         try {
-            gPUser.setLoadExpandedFolder(userTreeOptions.isLoadExpandedFolder());
+            gPUser.setLoadExpandedFolders(userTreeOptions.isLoadExpandedFolders());
             accountProjectID = geoPlatformServiceClient.updateUser(gPUser);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());

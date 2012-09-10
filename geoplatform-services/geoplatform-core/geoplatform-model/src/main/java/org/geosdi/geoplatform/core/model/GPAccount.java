@@ -56,7 +56,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity(name = "Account")
 @Table(name = "gp_account")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "GP_ACCOUNT_TYPE", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "gp_account_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class GPAccount implements Serializable {
 
     /**
@@ -81,9 +81,9 @@ public abstract class GPAccount implements Serializable {
     //
     @Column(name = "account_non_expired")
     private boolean accountNonExpired = Boolean.TRUE;
-    //This option must be replaced by an AccountOption table
-    @Column(name = "load_expanded_folder")
-    private boolean loadExpandedFolder = Boolean.FALSE;
+    // TODO REF Move to AccountOption entity
+    @Column(name = "load_expanded_folders")
+    private boolean loadExpandedFolders = Boolean.FALSE;
     //
     @ManyToOne(optional = true)
     @JoinColumn(name = "gs_account")
@@ -105,7 +105,7 @@ public abstract class GPAccount implements Serializable {
 //        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
 //    private List<GPAccountProject> accountProjects = new LinkedList<GPAccountProject>();
     //
-    @Column(name = "defaultProject_id")
+    @Column(name = "default_project_id")
     private Long defaultProjectID;
     //
     @ManyToOne(optional = false)
@@ -122,8 +122,7 @@ public abstract class GPAccount implements Serializable {
     }
 
     /**
-     * @param id
-     * the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -137,8 +136,7 @@ public abstract class GPAccount implements Serializable {
     }
 
     /**
-     * @param enabled
-     * the enabled to set
+     * @param enabled the enabled to set
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
@@ -152,8 +150,7 @@ public abstract class GPAccount implements Serializable {
     }
 
     /**
-     * @param creationDate
-     * the creationDate to set
+     * @param creationDate the creationDate to set
      */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
@@ -181,8 +178,7 @@ public abstract class GPAccount implements Serializable {
     }
 
     /**
-     * @param accountNonExpired
-     * the accountNonExpired to set
+     * @param accountNonExpired the accountNonExpired to set
      */
     public void setAccountNonExpired(boolean accountNonExpired) {
         this.accountNonExpired = accountNonExpired;
@@ -226,8 +222,7 @@ public abstract class GPAccount implements Serializable {
     }
 
     /**
-     * @param authorities
-     * the authorities to set
+     * @param authorities the authorities to set
      */
     public void setGPAuthorities(List<GPAuthority> authorities) {
         this.authorities = authorities;
@@ -247,12 +242,12 @@ public abstract class GPAccount implements Serializable {
         this.defaultProjectID = defaultProjectID;
     }
 
-    public boolean isLoadExpandedFolder() {
-        return loadExpandedFolder;
+    public boolean isLoadExpandedFolders() {
+        return loadExpandedFolders;
     }
 
-    public void setLoadExpandedFolder(boolean loadExpandedFolder) {
-        this.loadExpandedFolder = loadExpandedFolder;
+    public void setLoadExpandedFolders(boolean loadExpandedFolders) {
+        this.loadExpandedFolders = loadExpandedFolders;
     }
 
     /**
@@ -276,7 +271,7 @@ public abstract class GPAccount implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName());
+        StringBuilder str = new StringBuilder();
         str.append(" id=").append(id);
         str.append(", enabled=").append(enabled);
         str.append(", creationDate=").append(creationDate);
@@ -291,6 +286,7 @@ public abstract class GPAccount implements Serializable {
         }
         str.append(", defaultProjectID=").append(defaultProjectID);
         str.append(", organization=").append(organization);
+        str.append(", loadExpandedFolders=").append(loadExpandedFolders);
         return str.toString();
     }
 

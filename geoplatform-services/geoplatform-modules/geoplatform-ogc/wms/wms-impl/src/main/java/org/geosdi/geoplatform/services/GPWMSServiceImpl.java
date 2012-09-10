@@ -231,8 +231,7 @@ public class GPWMSServiceImpl implements GPWMSService {
         List<StyleImpl> stylesImpl = layer.getStyles();
         logger.debug(
                 "\n*** Layer \"{}\" has {} SubLayers and {} StyleImpl ***",
-                new Object[]{layer.getTitle(),
-                    layer.getLayerChildren().size(), stylesImpl.size()});
+                layer.getTitle(), layer.getLayerChildren().size(), stylesImpl.size());
 
         raster.setStyleList(this.createStyleList(stylesImpl));
 

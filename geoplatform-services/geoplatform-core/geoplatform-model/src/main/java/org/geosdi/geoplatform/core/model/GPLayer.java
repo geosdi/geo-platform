@@ -93,13 +93,13 @@ public abstract class GPLayer implements Serializable {
     @Column
     private String srs;
     //
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "cql_filter", columnDefinition = "TEXT")
     private String cqlFilter;
     //
     @Embedded
     private GPBBox bbox;
     //
-    @Column(nullable = false)
+    @Column(name = "layer_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
     //    
@@ -131,8 +131,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param id
-     * the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -146,8 +145,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param title
-     * the title to set
+     * @param title the title to set
      */
     public void setTitle(String title) {
         this.title = title;
@@ -161,8 +159,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param name
-     * the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -176,8 +173,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param alias
-     * the alias to set
+     * @param alias the alias to set
      */
     public void setAlias(String alias) {
         this.alias = alias;
@@ -199,8 +195,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param abstractText
-     * the abstractText to set
+     * @param abstractText the abstractText to set
      */
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
@@ -214,8 +209,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param urlServer
-     * the urlServer to set
+     * @param urlServer the urlServer to set
      */
     public void setUrlServer(String urlServer) {
         this.urlServer = urlServer;
@@ -229,8 +223,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param srs
-     * the srs to set
+     * @param srs the srs to set
      */
     public void setSrs(String srs) {
         this.srs = srs;
@@ -244,8 +237,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param bbox
-     * the bbox to set
+     * @param bbox the bbox to set
      */
     public void setBbox(GPBBox bbox) {
         this.bbox = bbox;
@@ -259,8 +251,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param layerType
-     * the layerType to set
+     * @param layerType the layerType to set
      */
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
@@ -274,8 +265,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param position
-     * the position to set
+     * @param position the position to set
      */
     public void setPosition(int position) {
         this.position = position;
@@ -289,8 +279,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param checked
-     * the checked to set
+     * @param checked the checked to set
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
@@ -304,8 +293,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param shared
-     * the shared to set
+     * @param shared the shared to set
      */
     public void setShared(boolean shared) {
         this.shared = shared;
@@ -319,8 +307,7 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param cached
-     * the cached to set
+     * @param cached the cached to set
      */
     public void setCached(boolean cached) {
         this.cached = cached;

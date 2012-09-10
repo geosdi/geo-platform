@@ -35,7 +35,21 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
 import javax.jws.WebService;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.responce.ShortAttributeDTO;
+import org.geotools.data.DataStore;
+import org.geotools.data.DataStoreFinder;
+import org.geotools.data.wfs.WFSDataStoreFactory;
+import org.opengis.feature.simple.SimpleFeatureType;
+import org.opengis.feature.type.AttributeDescriptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -51,7 +65,47 @@ public class GPWFSServiceImpl implements GPWFSService, InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
- 
     }
-    
+
+    @Override
+    public LayerSchemaDTO describeFeatureType(String urlServer, String typeName) throws ResourceNotFoundFault {
+        
+        LayerSchemaDTO layerSchema = new LayerSchemaDTO();
+            List<ShortAttributeDTO> attributes = new ArrayList<ShortAttributeDTO>();
+        try {
+            
+            urlServer += "?REQUEST=GetCapabilities&version=1.0.0";
+            
+            Map connectionParameters = new HashMap();
+            connectionParameters.put(WFSDataStoreFactory.URL.key, urlServer);
+
+            DataStore data = DataStoreFinder.getDataStore(connectionParameters);
+            SimpleFeatureType schema = data.getSchema(typeName);
+
+            layerSchema.setSchemaNamespaceURI(schema.getName().getNamespaceURI());
+
+            for (AttributeDescriptor desk : schema.getAttributeDescriptors()) {
+                ShortAttributeDTO attribute = new ShortAttributeDTO();
+
+                attribute.setName(desk.getName().toString());
+                attribute.setLocalName(desk.getLocalName());
+                attribute.setDefaultValue((String)desk.getDefaultValue());
+                attribute.setType(desk.getType().getBinding().getSimpleName());
+                attribute.setMinOccurs(desk.getMinOccurs());
+                attribute.setMaxOccurs(desk.getMaxOccurs());
+
+                attributes.add(attribute);
+
+            }
+            
+            layerSchema.setAttributes(attributes);
+
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(GPWFSServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        return layerSchema;
+
+    }
 }

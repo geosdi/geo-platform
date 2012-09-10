@@ -373,10 +373,9 @@ class CSWServiceImpl {
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
                 "\n*** Records matched: {} *** Records returned: {} *** Record next: {} ***",
-                new Object[]{
                     response.getSearchResults().getNumberOfRecordsMatched(),
                     response.getSearchResults().getNumberOfRecordsReturned(),
-                    response.getSearchResults().getNextRecord()});
+                    response.getSearchResults().getNextRecord());
 
         if (response.getSearchResults().getNumberOfRecordsReturned().intValue()
                 != response.getSearchResults().getAbstractRecord().size()) {
@@ -437,10 +436,9 @@ class CSWServiceImpl {
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
                 "\n*** Records matched: {} *** Records returned: {} *** Record next: {} ***",
-                new Object[]{
                     response.getSearchResults().getNumberOfRecordsMatched(),
                     response.getSearchResults().getNumberOfRecordsReturned(),
-                    response.getSearchResults().getNextRecord()});
+                    response.getSearchResults().getNextRecord());
 
         if (response.getSearchResults().getNumberOfRecordsReturned().intValue()
                 != response.getSearchResults().getAbstractRecord().size()) {

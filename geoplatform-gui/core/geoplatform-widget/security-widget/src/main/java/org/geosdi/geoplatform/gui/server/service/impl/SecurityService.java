@@ -224,7 +224,7 @@ public class SecurityService implements ISecurityService {
         UserTreeOptions usertreeOptions = new UserTreeOptions();
         accountDetail.setUsername(account.getStringID()); // Forced representation
         accountDetail.setOrganization(account.getOrganization().getName());
-        usertreeOptions.setLoadExpandedFolder(account.isLoadExpandedFolder());
+        usertreeOptions.setLoadExpandedFolders(account.isLoadExpandedFolders());
         accountDetail.setTreeOptions(usertreeOptions);
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;

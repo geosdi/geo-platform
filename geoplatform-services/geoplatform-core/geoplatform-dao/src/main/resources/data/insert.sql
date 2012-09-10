@@ -3,7 +3,7 @@
 -------------
 INSERT INTO gp_account(
             gp_account_type, id, account_non_expired, account_temporary, 
-            creation_date, defaultproject_id, is_enabled, email_address, 
+            creation_date, default_project_id, is_enabled, email_address, 
             "name", user_password, send_email, user_name, app_id)
     VALUES ('GPUser', 0, true, false, 
             '2011-11-23 11:06:54.004', null, true, 'admin@test.foo', 
@@ -11,14 +11,14 @@ INSERT INTO gp_account(
 
 INSERT INTO gp_account(
             gp_account_type, id, account_non_expired, account_temporary, 
-            creation_date, defaultproject_id, is_enabled, email_address, 
+            creation_date, default_project_id, is_enabled, email_address, 
             "name", user_password, send_email, user_name, app_id)
     VALUES ('GPUser', 1, true, false, 
             '2011-11-23 11:06:54.108', null, true, 'user@test.foo', 
             'Complete name of user', '3bpykEs9BFCGLQSkVqMDuQ==', true, 'user', null);
 INSERT INTO gp_account(
             gp_account_type, id, account_non_expired, account_temporary, 
-            creation_date, defaultproject_id, is_enabled, email_address, 
+            creation_date, default_project_id, is_enabled, email_address, 
             "name", user_password, send_email, user_name, app_id)
     VALUES ('GPUser', 2, true, false, 
             '2011-11-23 11:06:54.134', null, true, 'viewer@test.foo', 

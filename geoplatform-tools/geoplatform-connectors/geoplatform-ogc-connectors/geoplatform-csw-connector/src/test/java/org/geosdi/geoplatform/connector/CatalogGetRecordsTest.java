@@ -193,7 +193,8 @@ public class CatalogGetRecordsTest {
         logger.info("\n@@@@@@@@@@@@@@@@ Geomatys ### RECORD MATCHES {} ###",
                 searchResult.getNumberOfRecordsMatched());
     }
-    
+
+    @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureGetRecords() throws Exception {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(new URL(

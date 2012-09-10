@@ -37,15 +37,12 @@ package org.geosdi.geoplatform.catalog.csw;
 
 import java.util.concurrent.TimeUnit;
 import javax.xml.ws.Endpoint;
-import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
 import org.geosdi.geoplatform.connector.security.GeosdiCatalogBeanProvider;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
 import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
 import org.geosdi.geoplatform.connectors.ws.csw.GPCSWClientTestConnector;
+import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.Assert;
@@ -69,9 +66,6 @@ public class CSWListenerServices implements TestExecutionListener {
     //
     private GeoPlatformCSWService cswService;
     private GeoPlatformService gpWSClient;
-    private Endpoint endpointCSW;
-    private Endpoint endpointGP;
-    private Bus bus;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
@@ -79,43 +73,33 @@ public class CSWListenerServices implements TestExecutionListener {
 
         ApplicationContext appContext = testContext.getApplicationContext();
 
-        GPCSWClientTestConnector cswClient = (GPCSWClientTestConnector) appContext.getBean("cswClient");
+        GPCSWClientTestConnector cswClient = (GPCSWClientTestConnector) appContext.getBean(
+                "cswClient");
         Assert.assertNotNull("cswClient is NULL", cswClient);
         cswService = cswClient.getEndpointService();
 
-        GPBasicWSClientTestConnector geoPlatformWSClient = (GPBasicWSClientTestConnector) appContext.getBean("gpWSClient");
+        GPBasicWSClientTestConnector geoPlatformWSClient = (GPBasicWSClientTestConnector) appContext.getBean(
+                "gpWSClient");
         Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
         gpWSClient = geoPlatformWSClient.getEndpointService();
 
-        GeoPlatformCSWService geoPlatformCSWService = (GeoPlatformCSWService) appContext.getBean("cswService");
+        GeoPlatformCSWService geoPlatformCSWService = (GeoPlatformCSWService) appContext.getBean(
+                "cswService");
         Assert.assertNotNull("cswService is NULL", geoPlatformCSWService);
 
-        GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean("geoPlatformService");
+        GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean(
+                "geoPlatformService");
         Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
 
-        SpringBusFactory bf = new SpringBusFactory();
-        bus = bf.createBus();
-
-        bus.getInInterceptors().add(new LoggingInInterceptor());
-        bus.getOutInterceptors().add(new LoggingOutInterceptor());
-
-        ServerInterceptorStrategyFactory serverInterceptorStrategyFactory = (ServerInterceptorStrategyFactory) appContext.getBean(
-                "serverInterceptorStrategyFactory");
-        Assert.assertNotNull("serverInterceptorStrategyFactory is NULL",
-                serverInterceptorStrategyFactory);
-
-        bus.getInInterceptors().add(
-                serverInterceptorStrategyFactory.getSecurityInInterceptor());
-        bus.getOutInterceptors().add(
-                serverInterceptorStrategyFactory.getSecurityOutInterceptor());
-
-        bf.setDefaultBus(bus);
+        appContext.getBean(GPSpringBusConfigurator.class).createBus();
 
         String serverCSWAddress = cswClient.getAddress();
-        endpointCSW = Endpoint.publish(serverCSWAddress, geoPlatformCSWService);
+        Endpoint.publish(serverCSWAddress,
+                         geoPlatformCSWService);
 
         String serverGPAddress = geoPlatformWSClient.getAddress();
-        endpointGP = Endpoint.publish(serverGPAddress, geoPlatformService);
+        Endpoint.publish(serverGPAddress,
+                         geoPlatformService);
 
         logger.info("\n\t@@@ Server ready... @@@");
     }
@@ -129,8 +113,10 @@ public class CSWListenerServices implements TestExecutionListener {
         testInstance.setGeoplatformService(gpWSClient);
 
         ApplicationContext appContext = testContext.getApplicationContext();
-        testInstance.setSnipcProvider(appContext.getBean(SnipcCatalogBeanProvider.class));
-        testInstance.setGeosdiProvider(appContext.getBean(GeosdiCatalogBeanProvider.class));
+        testInstance.setSnipcProvider(appContext.getBean(
+                SnipcCatalogBeanProvider.class));
+        testInstance.setGeosdiProvider(appContext.getBean(
+                GeosdiCatalogBeanProvider.class));
     }
 
     @Override
@@ -145,9 +131,6 @@ public class CSWListenerServices implements TestExecutionListener {
     public void afterTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ CSWListenerServices.afterTestClass @@@");
 
-        endpointCSW.stop();
-        endpointGP.stop();
-        bus.shutdown(true);
         // Wait to be sure that the endpoint was shutdown properly
         Thread.sleep(TimeUnit.SECONDS.toMillis(5));
     }

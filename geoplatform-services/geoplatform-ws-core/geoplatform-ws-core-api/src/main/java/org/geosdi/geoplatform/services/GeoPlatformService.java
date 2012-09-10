@@ -590,6 +590,17 @@ public interface GeoPlatformService {
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Update all at once the relations of sharing for a Project. The Account
+     * owner ID relation for the Project will be ignored.
+     *
+     * @param projectID the Project ID
+     * @param accountIDsProject the Account IDs which will be updated the
+     * relation of sharing
+     * @return true if the relations of sharing are updated
+     * @throws ResourceNotFoundFault if Project not found or an Account not
+     * found
+     */
     @Post
     @WebResult(name = "Account")
     boolean updateAccountsProjectSharing(

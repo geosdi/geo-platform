@@ -1557,7 +1557,7 @@
         <guava-version>11.0.2</guava-version>
         <guice-version>3.0</guice-version>
         
-        <ehcache-version>2.5.2</ehcache-version>
+        <ehcache-version>2.5.4</ehcache-version>
         
         <jdom-version>1.1</jdom-version>
         

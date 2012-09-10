@@ -687,4 +687,28 @@ public class WSProjectTest extends ServiceTest {
         }
         Assert.assertTrue(checkLatter);
     }
+
+    @Test
+    public void testUpdateAccountsProjectSharingOwner() throws Exception {
+        // Initial test
+        GPProject project = gpWSClient.getProjectDetail(idProjectTest);
+        Assert.assertFalse(project.isShared());
+
+        List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(1, accountsToShare.size());
+        Assert.assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
+
+        // Test pass owner
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, Arrays.asList(idUserTest));
+        Assert.assertTrue(result);
+
+        project = gpWSClient.getProjectDetail(idProjectTest);
+        Assert.assertFalse(project.isShared());
+
+        accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest);
+        Assert.assertNotNull(accountsToShare);
+        Assert.assertEquals(1, accountsToShare.size());
+        Assert.assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
+    }
 }

@@ -622,19 +622,13 @@ class ProjectServiceImpl {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        if (accountIDsProject == null || accountIDsProject.isEmpty()) {
-            if (project.isShared()) {
-                logger.debug("\n*** Delete all relations of sharing");
-                List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
-                for (GPAccountProject accountProject : accountProjectList) {
-                    accountProjectDao.remove(accountProject);
-                }
+        if (accountIDsProject != null && !accountIDsProject.isEmpty()) {
+            // The Account owner relation's project will not be managed
+            Long ownerID = accountProjectDao.findOwnerByProjectID(projectID).getAccount().getId();
+            accountIDsProject.remove(ownerID);
 
-                project.setShared(false);
-                projectDao.merge(project);
-            }
-        } else {
             logger.debug("\n*** Update all relations of sharing");
+
             List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
             Map<Long, GPAccountProject> sharingMap = new HashMap<Long, GPAccountProject>(accountProjectList.size());
             for (GPAccountProject accountProject : accountProjectList) {
@@ -663,8 +657,21 @@ class ProjectServiceImpl {
                 accountProjectDao.remove(e.getValue());
             }
 
-            if (!project.isShared()) {
+            if (!project.isShared() && !accountIDsProject.isEmpty()) {
                 project.setShared(true);
+                projectDao.merge(project);
+            }
+
+        } else {
+            if (project.isShared()) {
+                logger.debug("\n*** Delete all relations of sharing");
+
+                List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
+                for (GPAccountProject accountProject : accountProjectList) {
+                    accountProjectDao.remove(accountProject);
+                }
+
+                project.setShared(false);
                 projectDao.merge(project);
             }
         }

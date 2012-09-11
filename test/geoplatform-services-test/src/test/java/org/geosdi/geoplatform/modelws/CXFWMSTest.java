@@ -50,26 +50,24 @@ public class CXFWMSTest extends ServiceWMSTest {
 
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
     // Servers
-    
     private final String serverUrlGeoSDI = "http://dpc.geosdi.org/geoserver/wms";
-    
 
     @Override
     public void setUp() throws Exception {
-       
-       
     }
 
     @Test
-    public void testGetCapabilities() throws ParseException,
-            ResourceNotFoundFault {
+    public void testFixture() {
+        Assert.assertNotNull(gpWMSClient);
+    }
+
+    @Test
+    public void testGetCapabilities() throws ParseException, ResourceNotFoundFault {
         ServerDTO serverDTO = gpWMSClient.getShortServer(serverUrlGeoSDI);
-        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^ SERVER___DTO ^^^^^^^^^^^^^^^^^^ " + serverDTO);
+        logger.info("^^^^^^^^^^^^^^^^^^^^^^^^^ SERVER___DTO ^^^^^^^^^^^^^^^^^^\n{}", serverDTO);
         Assert.assertNotNull(serverDTO);
 
         serverDTO = gpWMSClient.getCapabilities(new RequestByID(serverDTO.getId()), null, null);
         logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
     }
-
-    
 }

@@ -58,26 +58,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public abstract class ServiceWMSTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
     //
     protected GPWMSService gpWMSClient;
-
-   
 
     public void setGpWMSClient(GPWMSService gpWMSClient) {
         this.gpWMSClient = gpWMSClient;
     }
-    
 
     @Before
     public void setUp() throws Exception {
-       
     }
 
     @After
     public void tearDown() {
         logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
     }
-
-    
 }

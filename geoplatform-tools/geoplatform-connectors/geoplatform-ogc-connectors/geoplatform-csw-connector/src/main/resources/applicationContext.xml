@@ -16,6 +16,8 @@
 
     <context:annotation-config />
     
+    <context:component-scan base-package="org.geosdi.geoplatform.connector.security"/>
+    
     <import resource="classpath:applicationContext-jasypt.xml" />
     
     <bean id="xStreamCatalog" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">

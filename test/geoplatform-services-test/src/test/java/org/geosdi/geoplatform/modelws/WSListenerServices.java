@@ -36,14 +36,9 @@
 package org.geosdi.geoplatform.modelws;
 
 import java.util.concurrent.TimeUnit;
-import javax.xml.ws.Endpoint;
-import org.apache.cxf.Bus;
-import org.apache.cxf.BusFactory;
-import org.apache.cxf.bus.spring.SpringBusFactory;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.configurator.cxf.server.ServerInterceptorStrategyFactory;
+import org.apache.cxf.jaxws.EndpointImpl;
 import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
+import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.Assert;
 import org.slf4j.Logger;
@@ -55,8 +50,8 @@ import org.springframework.test.context.TestExecutionListener;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- * 
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
@@ -65,38 +60,31 @@ public class WSListenerServices implements TestExecutionListener {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService gpWSClient;
-    private Endpoint endpoint;
-    private Bus bus;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ WSListenerServices.beforeTestClass @@@");
-        
+
         ApplicationContext appContext = testContext.getApplicationContext();
 
-        GPBasicWSClientTestConnector geoPlatformWSClient = (GPBasicWSClientTestConnector) appContext.getBean("gpWSClient");
-        Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
-        gpWSClient = geoPlatformWSClient.getEndpointService();
+        GPBasicWSClientTestConnector wsClientConnector = (GPBasicWSClientTestConnector) appContext.getBean(
+                "gpWSClient");
+        Assert.assertNotNull("geoPlatformWSClient is NULL", wsClientConnector);
+        gpWSClient = wsClientConnector.getEndpointService();
 
-        GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean("geoPlatformService");
+        GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean(
+                "geoPlatformService");
         Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
 
-        Object implementor = geoPlatformService;
-        SpringBusFactory bf = new SpringBusFactory();
-        bus = bf.createBus();
+        appContext.getBean(GPSpringBusConfigurator.class).createBus();
 
-        bus.getInInterceptors().add(new LoggingInInterceptor());
-        bus.getOutInterceptors().add(new LoggingOutInterceptor());
+        String wsServerAddress = wsClientConnector.getAddress();
+        EndpointImpl endpoint = new EndpointImpl(geoPlatformService);
+        endpoint.setAddress(wsServerAddress);
 
-        ServerInterceptorStrategyFactory serverInterceptorStrategyFactory = (ServerInterceptorStrategyFactory) testContext.getApplicationContext().getBean("serverInterceptorStrategyFactory");
-        Assert.assertNotNull("serverInterceptorStrategyFactory is NULL", serverInterceptorStrategyFactory);
-
-        bus.getInInterceptors().add(serverInterceptorStrategyFactory.getSecurityInInterceptor());
-        bus.getOutInterceptors().add(serverInterceptorStrategyFactory.getSecurityOutInterceptor());
-
-        BusFactory.setDefaultBus(bus);
-        String serverAddress = geoPlatformWSClient.getAddress();
-        endpoint = Endpoint.publish(serverAddress, implementor);
+        if (!endpoint.isPublished()) {
+            endpoint.publish();
+        }
 
         logger.info("\n\t@@@ Server ready... @@@");
     }
@@ -121,8 +109,6 @@ public class WSListenerServices implements TestExecutionListener {
     public void afterTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ WSListenerServices.afterTestClass @@@");
 
-        endpoint.stop();
-        bus.shutdown(true);
         // Wait to be sure that the endpoint was shutdown properly
         Thread.sleep(TimeUnit.SECONDS.toMillis(5));
     }

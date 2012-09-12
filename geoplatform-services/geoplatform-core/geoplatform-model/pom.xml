@@ -76,6 +76,17 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-acl</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-terracotta</artifactId>
+        </dependency>
+        
     </dependencies>
 
     <build>

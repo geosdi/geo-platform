@@ -84,7 +84,7 @@ public class WSMessageTest extends ServiceTest {
         message.setCreationDate(new Date(System.currentTimeMillis()));
         message.setRead(false);
         message.setText("Foo message.");
-        message.setCommand(GPMessageCommandType.NONE);
+        message.addCommand(GPMessageCommandType.NONE);
     }
 
     @Test
@@ -101,8 +101,25 @@ public class WSMessageTest extends ServiceTest {
         Assert.assertNotNull(messageDetail.getRecipient());
         Assert.assertEquals(message.getRecipient().getId(), messageDetail.getRecipient().getId());
         Assert.assertEquals(message.getText(), messageDetail.getText());
-        Assert.assertEquals(message.getCommand(), messageDetail.getCommand());
+        Assert.assertEquals(message.getCommands(), messageDetail.getCommands());
         Assert.assertFalse(messageDetail.isRead());
+    }
+
+    @Test
+    public void testInsertMessageMultiCommand() throws Exception {
+        // Insert message
+        message.addCommand(GPMessageCommandType.OPEN_PROJECT);
+        Long messageID = gpWSClient.insertMessage(message);
+        Assert.assertNotNull(messageID);
+
+        // Test
+        GPMessage messageDetail = gpWSClient.getMessageDetail(messageID);
+        Assert.assertNotNull(messageDetail);
+        List<GPMessageCommandType> commands = messageDetail.getCommands();
+        Assert.assertNotNull(commands);
+        Assert.assertEquals(2, commands.size());
+        Assert.assertTrue(commands.contains(GPMessageCommandType.NONE));
+        Assert.assertTrue(commands.contains(GPMessageCommandType.OPEN_PROJECT));
     }
 
     @Test

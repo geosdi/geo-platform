@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -66,8 +67,10 @@ public class MessageDTO {
     private Date creationDate;
     private String text;
     private Boolean read;
-    // TODO List of commands
-    private GPMessageCommandType command;
+    //
+    @XmlElementWrapper(name = "commandList")
+    @XmlElement(name = "command")
+    private List<GPMessageCommandType> commands;
 
     /**
      * Default constructor.
@@ -87,7 +90,13 @@ public class MessageDTO {
         this.creationDate = message.getCreationDate();
         this.text = message.getText();
         this.read = message.isRead();
-        this.command = message.getCommand();
+
+        if (message.getCommands() != null) {
+            commands = new ArrayList<GPMessageCommandType>(message.getCommands().size());
+            for (GPMessageCommandType command : message.getCommands()) {
+                commands.add(command);
+            }
+        }
     }
 
     /**
@@ -175,17 +184,28 @@ public class MessageDTO {
     }
 
     /**
-     * @return the command
+     * @return the commands
      */
-    public GPMessageCommandType getCommand() {
-        return command;
+    public List<GPMessageCommandType> getCommands() {
+        return commands;
     }
 
     /**
-     * @param command the command to set
+     * @param commands the commands to set
      */
-    public void setCommand(GPMessageCommandType command) {
-        this.command = command;
+    public void setCommands(List<GPMessageCommandType> commands) {
+        this.commands = commands;
+    }
+
+    /**
+     * @param command the command to add
+     */
+    public void addCommands(GPMessageCommandType command) {
+        assert (command != null) : "command must be NOT NULL.";
+        if (this.commands == null) {
+            this.commands = new ArrayList<GPMessageCommandType>();
+        }
+        this.commands.add(command);
     }
 
     @Override
@@ -196,7 +216,7 @@ public class MessageDTO {
                 + ", creationDate=" + creationDate
                 + ", text=" + text
                 + ", read=" + read
-                + ", command=" + command + '}';
+                + ", commands=" + commands + '}';
     }
 
     /**
@@ -216,8 +236,9 @@ public class MessageDTO {
                 ? new Date(System.currentTimeMillis()) : messageDTO.getCreationDate());
         message.setRead(messageDTO.isRead() == null
                 ? false : messageDTO.isRead());
-        message.setCommand(messageDTO.getCommand() == null
-                ? GPMessageCommandType.NONE : messageDTO.getCommand());
+        if (messageDTO.getCommands() != null) {
+            message.setCommands(messageDTO.getCommands());
+        }
         return message;
     }
 }

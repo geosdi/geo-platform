@@ -36,11 +36,12 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -95,9 +96,9 @@ public class GPMessage implements Serializable {
     //
     @Column(name = "is_read")
     private boolean isRead = false;
-    // TODO Use Hibernate custom type for list of commands
-    @Enumerated(EnumType.STRING)
-    private GPMessageCommandType command;
+    //
+    @Column
+    private String commands;
 
     public Long getId() {
         return id;
@@ -147,12 +148,42 @@ public class GPMessage implements Serializable {
         this.isRead = read;
     }
 
-    public GPMessageCommandType getCommand() {
-        return command;
+    public List<GPMessageCommandType> getCommands() {
+        if (commands == null) {
+            return new ArrayList<GPMessageCommandType>(0);
+        }
+
+        List<String> mcString = Arrays.asList(commands.split(";"));
+        List<GPMessageCommandType> mcList = new ArrayList<GPMessageCommandType>(mcString.size());
+        for (String string : mcString) {
+            GPMessageCommandType mc = GPMessageCommandType.valueOf(string);
+            mcList.add(mc);
+        }
+        return mcList;
     }
 
-    public void setCommand(GPMessageCommandType command) {
-        this.command = command;
+    public void setCommands(List<GPMessageCommandType> commands) {
+        if (commands == null || commands.isEmpty()) {
+            this.commands = null;
+            return;
+        }
+
+        StringBuilder str = new StringBuilder();
+        for (GPMessageCommandType mc : commands) {
+            assert (mc != null) : "command ith must be NOT NULL.";
+            str.append(mc.name()).append(";");
+        }
+        str.deleteCharAt(str.length() - 1);
+        this.commands = str.toString();
+    }
+
+    public void addCommand(GPMessageCommandType command) {
+        assert (command != null) : "command must be NOT NULL.";
+        if (commands != null) {
+            commands += ";" + command.name();
+            return;
+        }
+        commands = command.name();
     }
 
     @Override
@@ -164,7 +195,7 @@ public class GPMessage implements Serializable {
         str.append(", creationDate=").append(creationDate);
         str.append(", text=").append(text);
         str.append(", isRead=").append(isRead);
-        str.append(", command=").append(command);
+        str.append(", commands=").append(commands);
         return str.append('}').toString();
     }
 

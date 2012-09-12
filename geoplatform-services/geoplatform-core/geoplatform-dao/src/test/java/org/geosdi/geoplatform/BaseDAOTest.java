@@ -481,7 +481,7 @@ public abstract class BaseDAOTest {
         message.setRead(false);
         message.setText("\"" + adminTest.getName() + "\" shared with you the \""
                 + adminProject.getName() + "\" project.");
-        message.setCommand(GPMessageCommandType.OPEN_PROJECT);
+        message.addCommand(GPMessageCommandType.OPEN_PROJECT);
 
         messageDAO.persist(message);
     }

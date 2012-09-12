@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -54,6 +55,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
@@ -73,6 +75,7 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
@@ -327,7 +330,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
-    @WebResult(name = "Users")
+    @WebResult(name = "User")
     List<UserDTO> searchUsers(@WebParam(name = "userID") Long userID,
             PaginatedSearchRequest request) throws ResourceNotFoundFault;
 
@@ -338,7 +341,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/accounts")
-    @WebResult(name = "Accounts")
+    @WebResult(name = "Account")
     List<ShortAccountDTO> getAllAccounts();
 
     /**
@@ -350,7 +353,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/accounts/{}")
-    @WebResult(name = "Accounts")
+    @WebResult(name = "Account")
     List<ShortAccountDTO> getAccounts(
             @WebParam(name = "organization") String organization)
             throws ResourceNotFoundFault;
@@ -390,7 +393,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/accounts/{id}/authorities")
-    @WebResult(name = "Authorities")
+    @WebResult(name = "Authority")
     List<String> getAuthorities(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
@@ -404,7 +407,7 @@ public interface GeoPlatformService {
      * Authorities
      */
     @HttpResource(location = "/accounts/{id}/authorities")
-    @WebResult(name = "Authorities")
+    @WebResult(name = "Authority")
     List<GPAuthority> getAuthoritiesDetail(
             @WebParam(name = "stringID") String stringID)
             throws ResourceNotFoundFault;
@@ -888,7 +891,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/projects/{projectID}")
-    @WebResult(name = "RootFolders")
+    @WebResult(name = "RootFolder")
     List<FolderDTO> getRootFoldersByProjectID(
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -977,6 +980,7 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layers/{descendantsMap}")
+    @WebResult(name = "LayerID")
     ArrayList<Long> saveAddedLayersAndTreeModifications(
             @WebParam(name = "projectID") Long projectID,
             @WebParam(name = "parentFolderID") Long parentFolderID,
@@ -1046,7 +1050,7 @@ public interface GeoPlatformService {
      * @return Styles of a layer.
      */
     @Get
-    @WebResult(name = "LayerStyles")
+    @WebResult(name = "LayerStyle")
     List<StyleDTO> getLayerStyles(@WebParam(name = "layerID") Long layerID);
 
     /**
@@ -1077,7 +1081,7 @@ public interface GeoPlatformService {
     // * @return Styles of a layer.
     // */
     // @Get
-    // @WebResult(name = "LayerStyles")
+    // @WebResult(name = "LayerStyle")
     // List<StyleDTO> getLayerStyles(@WebParam(name = "layerID") Long layerID);
     //
     // /**
@@ -1100,7 +1104,7 @@ public interface GeoPlatformService {
      * @return layer data source of given owner.
      */
     @Get
-    @WebResult(name = "LayerDataSources")
+    @WebResult(name = "LayerDataSource")
     ArrayList<String> getLayersDataSourceByProjectID(
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -1119,7 +1123,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/roles")
-    @WebResult(name = "Roles")
+    @WebResult(name = "Role")
     List<String> getAllRoles(@WebParam(name = "organization") String organization)
             throws ResourceNotFoundFault;
 
@@ -1130,7 +1134,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/permissions/ids")
-    @WebResult(name = "GuiComponentIDs")
+    @WebResult(name = "GuiComponentID")
     List<String> getAllGuiComponentIDs();
 
     /**
@@ -1271,10 +1275,116 @@ public interface GeoPlatformService {
             throws IllegalParameterFault;
 
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Message">
+    // ==========================================================================
+    // === Message
+    // ==========================================================================
+    /**
+     * Insert a Message.
+     *
+     * @param message the Message to insert
+     * @return the Message ID
+     * @throws ResourceNotFoundFault if the Account recipient or sender not
+     * found
+     * @throws IllegalParameterFault if Message is not valid
+     */
+    @Put
+    Long insertMessage(@WebParam(name = "message") GPMessage message)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    /**
+     * Insert a same Message for each Account recipient.
+     *
+     * @param messageDTO the Message to insert for each Account recipient
+     * @return true if the Messages was added
+     * @throws ResourceNotFoundFault if Account sender or one Account recipient
+     * not found
+     */
+    @Put
+    boolean insertMultiMessage(@WebParam(name = "messageDTO") MessageDTO messageDTO)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Delete a Message by ID.
+     *
+     * @param messageID the Message ID
+     * @return true if the Message was deleted
+     * @throws ResourceNotFoundFault if Message not found
+     */
+    @Delete
+    boolean deleteMessage(@WebParam(name = "messageID") Long messageID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve a Message by ID.
+     *
+     * @param messageID the Message ID
+     * @return the Message to retrieve
+     * @throws ResourceNotFoundFault if Message not found
+     */
+    @Get
+    GPMessage getMessageDetail(@WebParam(name = "messageID") Long messageID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve all Messages of an Account recipient, sorted in descending order
+     * by creation date.
+     *
+     * @param recipientID the Account recipient ID
+     * @return list of all Messages
+     * @throws ResourceNotFoundFault if Account recipient not found
+     */
+    @Get
+    @WebResult(name = "Message")
+    List<GPMessage> getAllMessagesByRecipient(
+            @WebParam(name = "recipientID") Long recipientID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve unread Messages of an Account recipient, sorted in descending
+     * order by creation date.
+     *
+     * @param recipientID the Account recipient ID
+     * @return list of unread Messages
+     * @throws ResourceNotFoundFault if Account recipient not found
+     */
+    @Get
+    @WebResult(name = "Message")
+    List<GPMessage> getUnreadMessagesByRecipient(
+            @WebParam(name = "recipientID") Long recipientID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Mark all Messages of an Account recipient as read.
+     *
+     * @param recipientID the Account recipient ID
+     * @return true if the Messages was marked
+     * @throws ResourceNotFoundFault if Account recipient not found
+     */
+    @Post
+    boolean markAllMessagesAsReadByRecipient(
+            @WebParam(name = "recipientID") Long recipientID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Mark all unread Messages, until a date, of an Account recipient as read.
+     *
+     * @param recipientID the Account recipient ID
+     * @param toDate the date to search unread Messages until this date
+     * @return true if the Messages was marked
+     * @throws ResourceNotFoundFault if Account recipient not found
+     */
+    @Post
+    boolean markMessagesAsRead(
+            @WebParam(name = "recipientID") Long recipientID,
+            @WebParam(name = "toDate") Date toDate)
+            throws ResourceNotFoundFault;
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Access Info">
     // ==========================================================================
     // === Access Info
     // ==========================================================================
+
     @Put
     @HttpResource(location = "/permissions/GSAccount")
     Long insertGSAccount(@WebParam(name = "GSAccount") GSAccount gsAccount);

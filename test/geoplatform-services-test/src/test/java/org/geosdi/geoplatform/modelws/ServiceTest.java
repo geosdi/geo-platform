@@ -125,8 +125,7 @@ public abstract class ServiceTest {
         this.setUpOrganization();
 
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest,
-                                              ROLE_USER);
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, ROLE_USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project

@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -273,7 +274,7 @@ public class EntityCorrectness {
     public static void checkLayerComplete(GPLayer layer) throws IllegalParameterFault {
         EntityCorrectness.checkLayer(layer);
         if (layer.getProject() == null) {
-            throw new IllegalParameterFault("Layer \"project\" must be NOT NULL");
+            throw new IllegalParameterFault("Layer \"project\" must be NOT NULL.");
         }
     }
 
@@ -293,19 +294,19 @@ public class EntityCorrectness {
 
     public static void checkLayer(GPLayer layer) throws IllegalParameterFault {
         if (layer == null) {
-            throw new IllegalParameterFault("Layer must be NOT NULL");
+            throw new IllegalParameterFault("Layer must be NOT NULL.");
         }
         if (layer.getFolder() == null) {
-            throw new IllegalParameterFault("Layer \"folder\" must be NOT NULL");
+            throw new IllegalParameterFault("Layer \"folder\" must be NOT NULL.");
         }
         if (layer.getTitle() == null) {
-            throw new IllegalParameterFault("Layer \"title\" must be NOT NULL");
+            throw new IllegalParameterFault("Layer \"title\" must be NOT NULL.");
         }
         if (layer.getLayerType() == null) {
-            throw new IllegalParameterFault("Layer \"layerType\" must be NOT NULL");
+            throw new IllegalParameterFault("Layer \"layerType\" must be NOT NULL.");
         }
         if (layer.getPosition() < 1) {
-            throw new IllegalParameterFault("Layer \"position\" must be greater or equal 1");
+            throw new IllegalParameterFault("Layer \"position\" must be greater or equal 1.");
         }
     }
 
@@ -318,6 +319,58 @@ public class EntityCorrectness {
     public static void checkLayerLog(GPLayer layer) {
         try {
             EntityCorrectness.checkLayer(layer);
+        } catch (IllegalParameterFault ex) {
+            throw new EntityCorrectnessException(ex.getMessage());
+        }
+    }
+
+    // ==========================================================================
+    // === Message
+    // ==========================================================================
+    public static void checkMessage(GPMessage message) throws IllegalParameterFault {
+        if (message == null) {
+            throw new IllegalParameterFault("Message must be NOT NULL.");
+        }
+        if (message.getRecipient() == null) {
+            throw new IllegalParameterFault("Message \"recipient\" must be NOT NULL.");
+        }
+        Long recipientID = message.getRecipient().getId();
+        if (recipientID == null) {
+            throw new IllegalParameterFault("Message \"recipient.id\" must be NOT NULL and.");
+        }
+        if (recipientID < 1) {
+            throw new IllegalParameterFault("Message \"recipient.id\" must be greater or equal 1.");
+        }
+        if (message.getSender().getId() == null) {
+            throw new IllegalParameterFault("Message \"sender.id\" must be NOT NULL.");
+        }
+        Long senderID = message.getSender().getId();
+        if (senderID == null) {
+            throw new IllegalParameterFault("Message \"sender\" must be NOT NULL.");
+        }
+        if (senderID < 1) {
+            throw new IllegalParameterFault("Message \"sender.id\" must be greater or equal 1.");
+        }
+        if (message.getCreationDate() == null) {
+            throw new IllegalParameterFault("Message \"creationDate\" must be NOT NULL.");
+        }
+        if (message.getCommand() == null) {
+            throw new IllegalParameterFault("Message \"command\" must be NOT NULL.");
+        }
+        if (EntityCorrectness.empty(message.getText())) {
+            throw new IllegalParameterFault("Message \"text\" must be NOT NULL or empty.");
+        }
+    }
+
+    public static void checkMessageListLog(List<GPMessage> messages) {
+        for (GPMessage message : messages) {
+            EntityCorrectness.checkMessageLog(message);
+        }
+    }
+
+    public static void checkMessageLog(GPMessage message) {
+        try {
+            EntityCorrectness.checkMessage(message);
         } catch (IllegalParameterFault ex) {
             throw new EntityCorrectnessException(ex.getMessage());
         }

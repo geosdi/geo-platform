@@ -45,7 +45,7 @@ import org.junit.Test;
 public class BootstrapDAOTest extends BaseDAOTest {
 
     /**
-     * Put the DB into a consistate state.
+     * Put the DB into a substantial state.
      */
     @Test
     public void testBootstrap() {
@@ -60,6 +60,7 @@ public class BootstrapDAOTest extends BaseDAOTest {
 //        Assert.assertNotNull("styleDAO is NULL", styleDAO);
         Assert.assertNotNull("serverDAO is NULL", serverDAO);
         Assert.assertNotNull("organizationDAO is NULL", organizationDAO);
+        Assert.assertNotNull("messageDAO is NULL", messageDAO);
         // ACL
         Assert.assertNotNull("classDAO is NULL", classDAO);
         Assert.assertNotNull("sidDAO is NULL", sidDAO);
@@ -78,6 +79,7 @@ public class BootstrapDAOTest extends BaseDAOTest {
         Assert.assertEquals("All Accounts doesn't REMOVED", 0, accountDAO.findAll().size());
         Assert.assertEquals("All Servers doesn't REMOVED", 0, serverDAO.findAll().size());
         Assert.assertEquals("All Organizations doesn't REMOVED", 0, organizationDAO.findAll().size());
+        Assert.assertEquals("All Messages doesn't REMOVED", 0, messageDAO.findAll().size());
         // ACL
         Assert.assertEquals("All Classes doesn't REMOVED", 0, classDAO.findAll().size());
         Assert.assertEquals("All Sids doesn't REMOVED", 0, sidDAO.findAll().size());

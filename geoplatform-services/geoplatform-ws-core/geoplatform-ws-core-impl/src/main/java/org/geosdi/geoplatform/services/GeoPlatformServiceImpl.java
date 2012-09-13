@@ -527,6 +527,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public ProjectDTO getDefaultProjectDTO(Long accountID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.getDefaultProjectDTO(accountID);
+    }
+
+    @Override
     public void updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
         this.projectServiceDelegate.updateDefaultProject(accountID, projectID);
     }
@@ -578,26 +583,22 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteProject(Long projectID)
-            throws ResourceNotFoundFault {
+    public boolean deleteProject(Long projectID) throws ResourceNotFoundFault {
         return projectServiceDelegate.deleteProject(projectID);
     }
 
     @Override
-    public GPProject getProjectDetail(Long projectID)
-            throws ResourceNotFoundFault {
+    public GPProject getProjectDetail(Long projectID) throws ResourceNotFoundFault {
         return projectServiceDelegate.getProjectDetail(projectID);
     }
 
     @Override
-    public int getNumberOfElementsProject(Long projectID)
-            throws ResourceNotFoundFault {
+    public int getNumberOfElementsProject(Long projectID) throws ResourceNotFoundFault {
         return projectServiceDelegate.getNumberOfElementsProject(projectID);
     }
 
     @Override
-    public void setProjectShared(Long projectID)
-            throws ResourceNotFoundFault {
+    public void setProjectShared(Long projectID) throws ResourceNotFoundFault {
         projectServiceDelegate.setProjectShared(projectID);
     }
     //</editor-fold>
@@ -1027,13 +1028,18 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public boolean markMessageAsRead(Long recipientID) throws ResourceNotFoundFault {
+        return messageServiceDelegate.markMessageAsRead(recipientID);
+    }
+
+    @Override
     public boolean markAllMessagesAsReadByRecipient(Long recipientID) throws ResourceNotFoundFault {
         return messageServiceDelegate.markAllMessagesAsReadByRecipient(recipientID);
     }
 
     @Override
-    public boolean markMessagesAsRead(Long recipientID, Date toDate) throws ResourceNotFoundFault {
-        return messageServiceDelegate.markMessagesAsRead(recipientID, toDate);
+    public boolean markMessagesAsReadByDate(Long recipientID, Date toDate) throws ResourceNotFoundFault {
+        return messageServiceDelegate.markMessagesAsReadByDate(recipientID, toDate);
     }
     // </editor-fold>
 

@@ -159,6 +159,21 @@ public class WSMessageTest extends ServiceTest {
     }
 
     @Test
+    public void testMarkMessageAsRead() throws Exception {
+        // Insert message
+        Long messageID = gpWSClient.insertMessage(message);
+        Assert.assertNotNull(messageID);
+
+        // Test
+        boolean result = gpWSClient.markMessageAsRead(messageID);
+        Assert.assertTrue(result);
+
+        GPMessage messageDetail = gpWSClient.getMessageDetail(messageID);
+        Assert.assertNotNull(messageDetail);
+        Assert.assertTrue(messageDetail.isRead());
+    }
+
+    @Test
     public void testRetrieveMessages() throws Exception {
         this.insertMessagesSorted();
 
@@ -190,7 +205,7 @@ public class WSMessageTest extends ServiceTest {
     }
 
     @Test
-    public void testMarkAsReadAllMessage() throws Exception {
+    public void testMarkAllMessageAsRead() throws Exception {
         this.insertMessagesSorted();
 
         // Test unread messages intial
@@ -208,7 +223,7 @@ public class WSMessageTest extends ServiceTest {
     }
 
     @Test
-    public void testMarkAsReadMessage() throws Exception {
+    public void testMarkPreviousMessagesAsRead() throws Exception {
         this.insertMessagesSorted();
 
         // Test unread messages intial
@@ -218,7 +233,7 @@ public class WSMessageTest extends ServiceTest {
 
         // Test mark messages as read
         Date toDate = new GregorianCalendar(2012, Calendar.JANUARY, 12 - 1).getTime();
-        boolean result = gpWSClient.markMessagesAsRead(firstRecipientID, toDate);
+        boolean result = gpWSClient.markMessagesAsReadByDate(firstRecipientID, toDate);
         Assert.assertTrue(result);
 
         // Test unread messages final

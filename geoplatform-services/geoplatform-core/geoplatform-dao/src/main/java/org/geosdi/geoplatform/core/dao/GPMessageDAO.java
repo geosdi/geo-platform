@@ -72,7 +72,9 @@ public interface GPMessageDAO {
 
     List<GPMessage> findUnreadMessagesByRecipient(Long recipientID);
 
+    boolean markMessageAsRead(Long messageID);
+
     boolean markAllMessagesAsReadByRecipient(Long recipientID);
 
-    boolean markMessagesAsRead(Long recipientID, Date toDate);
+    boolean markMessagesAsReadByDate(Long recipientID, Date toDate);
 }

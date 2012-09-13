@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.core.dao.impl;
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import java.util.List;
+import javax.persistence.Query;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
@@ -122,8 +123,13 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
 
     @Override
     public boolean resetDefaultProject(Long defaultProjectId) {
-        em().createQuery("UPDATE Account a SET a.defaultProjectID = null WHERE a.defaultProjectID=:defaultProjectId").
-                setParameter("defaultProjectId", defaultProjectId).executeUpdate();
+        Query query = em().createQuery("UPDATE Account a SET a.defaultProjectID = null WHERE a.defaultProjectID=:defaultProjectId").
+                setParameter("defaultProjectId", defaultProjectId);
+        int recordsUpdated = query.executeUpdate();
+
+        if (recordsUpdated != 1) {
+            return false;
+        }
         return true;
     }
 }

@@ -45,8 +45,6 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -159,6 +157,15 @@ public class MessageServiceImpl {
     }
 
     /**
+     * @see GeoPlatformService#markMessageAsRead(java.lang.Long)
+     */
+    public boolean markMessageAsRead(Long messageID)
+            throws ResourceNotFoundFault {
+//        GPMessage message = messageDao.markMessageAsRead(messageID);
+        return messageDao.markMessageAsRead(messageID);
+    }
+
+    /**
      * @see GeoPlatformService#markAllMessagesAsReadByRecipient(java.lang.Long)
      */
     public boolean markAllMessagesAsReadByRecipient(Long recipientID)
@@ -170,15 +177,15 @@ public class MessageServiceImpl {
     }
 
     /**
-     * @see GeoPlatformService#markMessagesAsRead(java.lang.Long,
+     * @see GeoPlatformService#markMessagesAsReadByDate(java.lang.Long,
      * java.util.Date)
      */
-    public boolean markMessagesAsRead(Long recipientID, Date toDate)
+    public boolean markMessagesAsReadByDate(Long recipientID, Date toDate)
             throws ResourceNotFoundFault {
         GPAccount recipient = this.getAccountById(recipientID);
         EntityCorrectness.checkAccountLog(recipient); // TODO assert
 
-        return messageDao.markMessagesAsRead(recipientID, toDate);
+        return messageDao.markMessagesAsReadByDate(recipientID, toDate);
     }
 
     /**

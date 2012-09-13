@@ -548,10 +548,31 @@ public interface GeoPlatformService {
     void forceProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve the default Project of an Account.
+     *
+     * @param accountID the Account ID
+     * @return the default Project
+     * @throws ResourceNotFoundFault if Account not found
+     */
     @Get
     @HttpResource(location = "/account/{accountID}")
     @WebResult(name = "DefaultProject")
     GPProject getDefaultProject(@WebParam(name = "accountID") Long accountID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve the default Project of an Account. The Project result, if
+     * shared, contain the own Account owner.
+     *
+     * @param accountID the Account ID
+     * @return the default Project
+     * @throws ResourceNotFoundFault if Account not found
+     */
+    @Get
+    @HttpResource(location = "/account/{accountID}")
+    @WebResult(name = "DefaultProjectDTO")
+    ProjectDTO getDefaultProjectDTO(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     @Post
@@ -1355,6 +1376,16 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     /**
+     * Mark a Message as read.
+     *
+     * @param messageID the Message ID
+     * @return true if the Message was marked
+     * @throws ResourceNotFoundFault if Message not found
+     */
+    boolean markMessageAsRead(@WebParam(name = "messageID") Long messageID)
+            throws ResourceNotFoundFault;
+
+    /**
      * Mark all Messages of an Account recipient as read.
      *
      * @param recipientID the Account recipient ID
@@ -1375,7 +1406,7 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Account recipient not found
      */
     @Post
-    boolean markMessagesAsRead(
+    boolean markMessagesAsReadByDate(
             @WebParam(name = "recipientID") Long recipientID,
             @WebParam(name = "toDate") Date toDate)
             throws ResourceNotFoundFault;

@@ -39,6 +39,7 @@ import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Query;
 import org.geosdi.geoplatform.core.dao.GPMessageDAO;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.springframework.transaction.annotation.Transactional;
@@ -124,6 +125,18 @@ public class GPMessageDAOImpl extends BaseDAO<GPMessage, Long>
     }
 
     @Override
+    public boolean markMessageAsRead(Long messageID) {
+        Query query = em().createQuery("UPDATE Message m SET m.isRead = true WHERE m.id=:messageID").
+                setParameter("messageID", messageID);
+        int recordsUpdated = query.executeUpdate();
+
+        if (recordsUpdated != 1) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean markAllMessagesAsReadByRecipient(Long recipientID) {
         Search search = new Search();
         search.addFilterEqual("recipient.id", recipientID);
@@ -139,7 +152,7 @@ public class GPMessageDAOImpl extends BaseDAO<GPMessage, Long>
     }
 
     @Override
-    public boolean markMessagesAsRead(Long recipientID, Date toDate) {
+    public boolean markMessagesAsReadByDate(Long recipientID, Date toDate) {
         Search search = new Search();
         search.addFilterEqual("recipient.id", recipientID);
         search.addFilterLessOrEqual("creationDate", toDate);

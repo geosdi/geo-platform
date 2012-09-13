@@ -376,6 +376,9 @@ class ProjectServiceImpl {
         return owner; // TODO
     }
 
+    /**
+     * @see GeoPlatformService#getDefaultProject(java.lang.Long)
+     */
     public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
@@ -389,6 +392,24 @@ class ProjectServiceImpl {
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
         return project;
+    }
+
+    /**
+     * @see GeoPlatformService#getDefaultProjectDTO(java.lang.Long)
+     */
+    public ProjectDTO getDefaultProjectDTO(Long accountID) throws ResourceNotFoundFault {
+        GPProject project = this.getDefaultProject(accountID);
+        ProjectDTO projectDTO = new ProjectDTO(project);
+
+        if (projectDTO.isShared()) {
+            GPAccount owner = accountProjectDao.findOwnerByProjectID(projectDTO.getId())
+                    .getAccount();
+
+            ShortAccountDTO ownerDTO = ShortAccountDTO.convertToShortAccountDTO(owner);
+            projectDTO.setOwner(ownerDTO);
+        }
+
+        return projectDTO;
     }
 
     public void updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {

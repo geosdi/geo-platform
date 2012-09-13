@@ -56,6 +56,7 @@
     <bean id="serverDAO" class="org.geosdi.geoplatform.core.dao.impl.GPServerDAOImpl" />
     <bean id="authorityDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAuthorityDAOImpl" />
     <bean id="organizationDAO" class="org.geosdi.geoplatform.core.dao.impl.GPOrganizationDAOImpl" />
+    <bean id="messageDAO" class="org.geosdi.geoplatform.core.dao.impl.GPMessageDAOImpl" />
     <!-- Access Info -->
     <bean id="gsAccountDAO" class="org.geosdi.geoplatform.core.dao.impl.GSAccountDAOImpl" />
     <bean id="gsResourceDAO" class="org.geosdi.geoplatform.core.dao.impl.GSResourceDAOImpl" />

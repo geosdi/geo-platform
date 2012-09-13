@@ -224,6 +224,11 @@ class AccountServiceImpl {
         return orig.getId();
     }
 
+    /**
+     * @see
+     * GeoPlatformService#updateOwnUser(org.geosdi.geoplatform.responce.UserDTO,
+     * java.lang.String, java.lang.String)
+     */
     Long updateOwnUser(UserDTO user,
             String currentPlainPassword, String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault {
@@ -537,6 +542,38 @@ class AccountServiceImpl {
         return this.getGPAuthorities(stringID);
     }
 
+    /**
+     * @see GeoPlatformService#forceTemporaryAccount(java.lang.Long)
+     */
+    void forceTemporaryAccount(Long accountID)
+            throws ResourceNotFoundFault {
+        GPAccount account = this.getAccountById(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+
+        account.setAccountTemporary(true);
+        accountDao.merge(account);
+    }
+
+    /**
+     * @see GeoPlatformService#forceExpiredTemporaryAccount(java.lang.Long)
+     */
+    void forceExpiredTemporaryAccount(Long accountID)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPAccount account = this.getAccountById(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+
+        if (!account.isAccountTemporary()) {
+            throw new IllegalParameterFault(
+                    "The account must be temporary (ID = " + accountID + ")");
+        }
+
+        account.setAccountNonExpired(false);
+        accountDao.merge(account);
+    }
+
+    /**
+     ***************************************************************************
+     */
     private List<String> getAuthorities(String stringID) throws ResourceNotFoundFault {
         List<GPAuthority> authorities = this.getGPAuthorities(stringID);
         return this.convertAuthorities(authorities);
@@ -641,34 +678,5 @@ class AccountServiceImpl {
         if (defaultProjectID != null) {
             accountToUpdate.setDefaultProjectID(defaultProjectID);
         }
-    }
-
-    /**
-     * @see GeoPlatformService#forceTemporaryAccount(java.lang.Long)
-     */
-    void forceTemporaryAccount(Long accountID)
-            throws ResourceNotFoundFault {
-        GPAccount account = this.getAccountById(accountID);
-        EntityCorrectness.checkAccountLog(account); // TODO assert
-
-        account.setAccountTemporary(true);
-        accountDao.merge(account);
-    }
-
-    /**
-     * @see GeoPlatformService#forceExpiredTemporaryAccount(java.lang.Long)
-     */
-    void forceExpiredTemporaryAccount(Long accountID)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        GPAccount account = this.getAccountById(accountID);
-        EntityCorrectness.checkAccountLog(account); // TODO assert
-
-        if (!account.isAccountTemporary()) {
-            throw new IllegalParameterFault(
-                    "The account must be temporary (ID = " + accountID + ")");
-        }
-
-        account.setAccountNonExpired(false);
-        accountDao.merge(account);
     }
 }

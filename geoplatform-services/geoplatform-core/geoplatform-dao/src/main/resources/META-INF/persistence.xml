@@ -37,9 +37,9 @@
  */
  -->
 <persistence version="1.0" 
-    xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd ">
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd ">
 
     <persistence-unit name="geoplatform" transaction-type="RESOURCE_LOCAL">
 <!--        <properties>
@@ -49,7 +49,7 @@
             <property name="hibernate.cache.use_second_level_cache" value="true" />   
             <property name="hibernate.generate_statistics" value="true" />  
         </properties> -->
-    <!-- when adding/removing classes, please also keep aligned the src/test/resource/hibernate.cfg.xml file -->
+        <!-- when adding/removing classes, please also keep aligned the src/test/resource/hibernate.cfg.xml file -->
         <class>org.geosdi.geoplatform.core.model.GPUser</class>
         <class>org.geosdi.geoplatform.core.model.GPApplication</class>
         <class>org.geosdi.geoplatform.core.model.GPAccount</class>
@@ -64,6 +64,7 @@
         <class>org.geosdi.geoplatform.core.model.GPAuthority</class>
         <class>org.geosdi.geoplatform.core.model.GeoPlatformServer</class>        
         <class>org.geosdi.geoplatform.core.model.GPOrganization</class>        
+        <class>org.geosdi.geoplatform.core.model.GPMessage</class>
         <!-- ACL -->
         <class>org.geosdi.geoplatform.core.acl.AclSid</class>
         <class>org.geosdi.geoplatform.core.acl.AclClass</class>

@@ -40,22 +40,21 @@ import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.ListViewSelectionModel;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWidget;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWindow;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public abstract class GPListViewSearchWidget<T extends GeoPlatformBeanModel>
-        extends GeoPlatformSearchWidget<ListView<T>, T> {
+public abstract class GPListViewSearchWindow<T extends GeoPlatformBeanModel>
+        extends GeoPlatformSearchWindow<ListView<T>, T> {
 
-    public GPListViewSearchWidget(boolean lazy) {
+    public GPListViewSearchWindow(boolean lazy) {
         super(lazy);
     }
 
-    public GPListViewSearchWidget(boolean lazy, int pageSize) {
+    public GPListViewSearchWindow(boolean lazy, int pageSize) {
         super(lazy, pageSize);
     }
 

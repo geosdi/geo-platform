@@ -775,4 +775,20 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
+
+    @Override
+    public GPClientProject loadDefaultProject(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        ProjectDTO projectDTO = null;
+        try {
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            projectDTO = this.geoPlatformServiceClient.getDefaultProjectDTO(account.getId());
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("An Error Occured : " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        }
+        return this.dtoConverter.convertToGPCLientProject(projectDTO);
+    }
 }

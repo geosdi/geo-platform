@@ -229,4 +229,9 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     public boolean shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject) throws GeoPlatformException {
         return this.layerService.shareProjectToUsers(idSharedProject, accountIDsProject, super.getThreadLocalRequest());
     }
+
+    @Override
+    public GPClientProject loadDefaultProject() throws GeoPlatformException {
+        return this.layerService.loadDefaultProject(super.getThreadLocalRequest());
+    }
 }

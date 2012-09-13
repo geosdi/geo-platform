@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.AddFolderMenuAction;
@@ -49,6 +50,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.CreateLayerViewportAction;
 import org.geosdi.geoplatform.gui.client.action.menu.DeleteElementsMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
 import org.geosdi.geoplatform.gui.client.action.menu.RefreshLayerAction;
+import org.geosdi.geoplatform.gui.client.action.menu.ShareProjectMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFolderRenameAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
@@ -64,6 +66,9 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class TreeContextMenuFactory {
 
+    @Inject
+    static ShareProjectMenuAction shareProjectMenuAction;
+    //
     private static Menu rootContextMenu;
     private static Menu folderContextMenu;
     private static Menu layerContextMenu;
@@ -114,6 +119,11 @@ public class TreeContextMenuFactory {
             addFolder.setIcon(addFolderAction.getImage());
             addFolder.addSelectionListener(addFolderAction);
             rootContextMenu.add(addFolder);
+            MenuItem shareProject = new MenuItem();
+            shareProject.setText(shareProjectMenuAction.getTitle());
+            shareProject.setIcon(shareProjectMenuAction.getImage());
+            shareProject.addSelectionListener(shareProjectMenuAction);
+            rootContextMenu.add(shareProject);
         }
         return rootContextMenu;
     }

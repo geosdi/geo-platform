@@ -33,17 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.config;
 
-import org.geosdi.geoplatform.gui.client.icons.BasicWidgetIcons;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.inject.client.GinModules;
+import com.google.gwt.inject.client.Ginjector;
+import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
 
 /**
- * @author giuseppe
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class BasicWidgetResources {
+@GinModules(value = {LayerModuleGinConfigurator.class})
+public interface LayerModuleInjector extends Ginjector {
 
-    public static final BasicWidgetIcons ICONS = GWT.create(BasicWidgetIcons.class);
+    public static class MainInjector {
 
+        private static LayerModuleInjector instance;
+
+        private MainInjector() {
+        }
+
+        public static LayerModuleInjector getInstance() {
+            if (instance == null) {
+                instance = GWT.create(LayerModuleInjector.class);
+            }
+
+            return instance;
+        }
+    }
+
+    public LoadMenuProjects getLoadMenuProject();
 }

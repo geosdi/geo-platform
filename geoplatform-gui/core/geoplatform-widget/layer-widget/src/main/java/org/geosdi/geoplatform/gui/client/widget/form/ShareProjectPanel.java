@@ -110,11 +110,26 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         this.organizationLabel.setStyleAttribute("font-size", "13");
         fieldSet.add(ownerLabel, new MarginData(10));
         fieldSet.add(organizationLabel, new MarginData(10));
+        verticalPanel.add(fieldSet);
+        //
+        LayoutContainer labelListContainer = new LayoutContainer(new BorderLayout());
+        labelListContainer.setHeight(20);
+        labelListContainer.setStyleAttribute("background-color", "white");
+        labelListContainer.setWidth(GPProjectManagementWidget.COMPONENT_WIDTH - 25);
+        Label organizationUserLabel = new Label("Organization Users:");
+        organizationUserLabel.setStyleAttribute("font-size", "13");
+        organizationUserLabel.setStyleAttribute("font-weight", "bold");
+        labelListContainer.add(organizationUserLabel, new BorderLayoutData(Style.LayoutRegion.WEST));
+        Label projectSharedUserLabel = new Label("Project Shared Users:");
+        projectSharedUserLabel.setStyleAttribute("font-size", "13");
+        projectSharedUserLabel.setStyleAttribute("font-weight", "bold");
+        labelListContainer.add(projectSharedUserLabel, new BorderLayoutData(Style.LayoutRegion.EAST));
+        verticalPanel.add(labelListContainer);
+        //
         final DualListField<GPSimpleUser> lists = new DualListField<GPSimpleUser>();
         lists.setMode(Mode.INSERT);
         lists.setHeight("" + GPProjectManagementWidget.COMPONENT_HEIGHT / 1.75);
         lists.setStyleAttribute("margin-left", "11px");
-//        lists.setFieldLabel("Users");
         lists.setHideLabel(Boolean.TRUE);
 
         ListField<GPSimpleUser> from = lists.getFromList();
@@ -125,7 +140,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         to.setDisplayField(GPSimpleUserKeyValue.NAME.toString());
         this.toStore = new ListStore<GPSimpleUser>();
         to.setStore(this.toStore);
-        Button cancelButton = new Button("Cancel", BasicWidgetResources.ICONS.delete(),
+        Button cancelButton = new Button("GoTo Search Project", BasicWidgetResources.ICONS.gear(),
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
@@ -161,7 +176,6 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                     }
                 });
         super.addButton(saveButton);
-        verticalPanel.add(fieldSet);
         super.add(verticalPanel);
         super.add(lists, new FormData("98%"));
         LayoutContainer filterContainer = new LayoutContainer(new BorderLayout());
@@ -177,8 +191,6 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
     public void reset() {
         this.fromStore.removeAll();
         this.toStore.removeAll();
-//        this.fromFilter.clear();
-//        this.toFilter.clear();
     }
 
     private StoreFilterField<GPSimpleUser> createServerFilter(StoreFilterField<GPSimpleUser> storeFilterField,
@@ -202,11 +214,12 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
 
     public void loadData(GPClientProject project) {
         super.init();
+        this.reset();
         this.project = project;
         LayerRemote.Util.getInstance().getOrganizationUsersToShareProject(project.getId(), new AsyncCallback<ArrayList<GPSimpleUser>>() {
             @Override
             public void onFailure(Throwable caught) {
-                throw new UnsupportedOperationException("Not supported yet.");
+                System.out.println("Failled to load Organization Users to Share Project: " + caught);
             }
 
             @Override
@@ -218,7 +231,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 project.getId(), new AsyncCallback<ArrayList<GPSimpleUser>>() {
             @Override
             public void onFailure(Throwable caught) {
-                throw new UnsupportedOperationException("Not supported yet.");
+                System.out.println("Failled to load Share Project's Accounts: " + caught);
             }
 
             @Override
@@ -245,6 +258,5 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         super.setBorders(Boolean.FALSE);
         super.setBodyBorder(Boolean.FALSE);
         super.setLayout(new FormLayout());
-//        super.setStyleAttribute("margin", "10px");
     }
 }

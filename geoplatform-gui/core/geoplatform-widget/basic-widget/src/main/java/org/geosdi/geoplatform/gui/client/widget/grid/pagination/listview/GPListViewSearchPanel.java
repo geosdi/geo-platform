@@ -33,66 +33,82 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.grid.pagination.grid;
+package org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview;
 
-import com.extjs.gxt.ui.client.Style.SelectionMode;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWindow;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.ListView;
+import com.extjs.gxt.ui.client.widget.ListViewSelectionModel;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchPanel;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public abstract class GPGridSearchWidget<T extends GeoPlatformBeanModel>
-        extends GeoPlatformSearchWindow<Grid<T>, T> {
-
-    public GPGridSearchWidget(boolean lazy) {
+public abstract class GPListViewSearchPanel<T extends GeoPlatformBeanModel>
+        extends GeoPlatformSearchPanel<ListView<T>, T> {
+    
+    public GPListViewSearchPanel(boolean lazy) {
         super(lazy);
     }
-
-    public GPGridSearchWidget(boolean lazy, int pageSize) {
+    
+    public GPListViewSearchPanel(boolean lazy, int pageSize) {
         super(lazy, pageSize);
     }
-
+    
     @Override
     public void initWidget() {
-        ColumnModel cm = prepareColumnModel();
-
-        super.widget = new Grid<T>(store, cm);
-        super.widget.setBorders(true);
-
-        super.widget.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-        super.widget.addListener(Events.CellClick, new Listener<BaseEvent>() {
-
+        super.widget = new ListView<T>();
+        super.widget.addStyleName("overview-page");
+        super.widget.setItemSelector(".project-box");
+        super.widget.setOverStyle("sample-over");
+        super.widget.setSelectStyle("project-box-select");
+        super.widget.setBorders(Boolean.FALSE);
+        super.widget.setStore(store);
+        super.widget.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<T>() {
             @Override
-            public void handleEvent(BaseEvent be) {
-                if (widget.getSelectionModel().getSelection().size() > 0) {
-                    selectButton.enable();
-                } else {
-                    selectButton.disable();
-                }
+            public void selectionChanged(SelectionChangedEvent<T> se) {
+                changeSelection(se);
             }
         });
-
-        super.widget.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
-
-            @Override
-            public void handleEvent(BaseEvent be) {
-                executeSelect();
-            }
-        });
-
-        setGridProperties();
+        
+        setListViewProperties();
     }
 
-    public abstract void setGridProperties();
+    /**
+     *
+     * @param T element
+     */
+    public void addElement(T element) {
+        this.store.insert(element, 0);
+    }
 
-    public abstract ColumnModel prepareColumnModel();
+    /**
+     *
+     * @return ListViewSelectionModel<T>
+     */
+    public ListViewSelectionModel<T> getSelectionModel() {
+        return super.widget.getSelectionModel();
+    }
+
+    /**
+     *
+     * @return ListStore<T>
+     */
+    public ListStore<T> getStore() {
+        return this.store;
+    }
+
+    /**
+     * @return the listView
+     */
+    public ListView<T> getListView() {
+        return super.widget;
+    }
+    
+    public abstract void changeSelection(SelectionChangedEvent<T> se);
+    
+    public abstract void setListViewProperties();
 }

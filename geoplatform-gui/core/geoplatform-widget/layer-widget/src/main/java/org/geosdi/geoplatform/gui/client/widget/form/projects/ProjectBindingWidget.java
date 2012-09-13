@@ -59,7 +59,7 @@ import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSea
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectDefaultFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectNameFieldBinding;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchWidget;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 
@@ -71,14 +71,14 @@ import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
  */
 public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> {
 
-    private GPListViewSearchWidget<GPClientProject> searchWidget;
+    private GPListViewSearchPanel<GPClientProject> searchWidget;
     private TextField<String> projectFieldName;
     private CheckBox projectDefaultCheck;
     private Button save;
     private Button cancel;
     private FormButtonBinding buttonBinding;
 
-    public ProjectBindingWidget(GPListViewSearchWidget<GPClientProject> theWidget) {
+    public ProjectBindingWidget(GPListViewSearchPanel<GPClientProject> theWidget) {
         super();
         this.searchWidget = theWidget;
         super.addWindowListener(new WindowListener() {

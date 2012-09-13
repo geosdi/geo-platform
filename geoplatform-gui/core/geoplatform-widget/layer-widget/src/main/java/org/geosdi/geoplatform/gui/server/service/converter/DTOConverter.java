@@ -317,18 +317,23 @@ public class DTOConverter {
 //        layer.setShared(mementoLayer.isShared());
     }
 
-    public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
-            String imageURL) {
+    public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO) {
         GPClientProject clientProject = new GPClientProject();
         clientProject.setId(projectDTO.getId());
         clientProject.setName(projectDTO.getName());
-        clientProject.setImage(imageURL);
         clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
         clientProject.setShared(projectDTO.isShared());
         ShortAccountDTO owner = projectDTO.getOwner();
         if (owner != null && owner instanceof UserDTO) {
             this.convertToGPSimpleUser((UserDTO) owner);
         }
+        return clientProject;
+    }
+    
+    public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
+            String imageURL) {
+        GPClientProject clientProject = this.convertToGPCLientProject(projectDTO);
+        clientProject.setImage(imageURL);
         return clientProject;
     }
 

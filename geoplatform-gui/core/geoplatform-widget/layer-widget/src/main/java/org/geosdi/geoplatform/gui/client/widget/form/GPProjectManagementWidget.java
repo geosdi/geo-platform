@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
-import com.extjs.gxt.ui.client.widget.Component;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
@@ -45,22 +45,25 @@ import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSea
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Singleton
 public class GPProjectManagementWidget extends GeoPlatformWindow {
 
-    public final static int COMPONENT_WIDTH = 686;
-    public final static int COMPONENT_HEIGHT = 533;
+    public final static int COMPONENT_WIDTH = 664;
+    public final static int COMPONENT_HEIGHT = 510;
     private GPProjectSearchPanel projectSearchPanel;
     private ShareProjectPanel shareProjectPanel;
 
-    public GPProjectManagementWidget(boolean lazy) {
-        super(lazy);
+    public GPProjectManagementWidget() {
+        super(Boolean.TRUE);
     }
 
     @Override
     public void show() {
-        super.init();
-        this.showSearchProjectPanel();
-        super.show();
+        if (!super.isVisible()) {
+            super.show();
+        } else {
+            super.doLayout(Boolean.TRUE);
+        }
     }
 
     @Override
@@ -69,33 +72,19 @@ public class GPProjectManagementWidget extends GeoPlatformWindow {
     }
 
     public void showSharingPanel(GPClientProject clientProject) {
-//        if (this.indexOf(shareProjectPanel) != -1) {
-//            this.remove(projectSearchPanel);
-//            System.out.println("Removed elemento");
-//        }
-//        super.removeAll();
-        Component itemToRemove = super.getItemByItemId(this.projectSearchPanel.getItemId());
-        if (itemToRemove != null) {
-            super.remove(itemToRemove);
-        }
+        super.init();
+        super.removeAll();
         super.add(this.shareProjectPanel);
         this.shareProjectPanel.loadData(clientProject);
-        super.doLayout(Boolean.TRUE);
+        this.show();
     }
 
     public void showSearchProjectPanel() {
-//        if (this.indexOf(shareProjectPanel) != -1) {
-//            this.remove(shareProjectPanel);
-//            System.out.println("Removed elemento");
-//        }
-//        super.removeAll();
-        Component itemToRemove = super.getItemByItemId(this.shareProjectPanel.getItemId());
-        if (itemToRemove != null) {
-            super.remove(itemToRemove);
-        }
+        super.init();
+        super.removeAll();
         super.add(this.projectSearchPanel);
         this.projectSearchPanel.loadData();
-        super.doLayout(Boolean.TRUE);
+        this.show();
     }
 
     @Override
@@ -111,6 +100,6 @@ public class GPProjectManagementWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        super.setSize(700, 565);
+        super.setSize(678, 542);
     }
 }

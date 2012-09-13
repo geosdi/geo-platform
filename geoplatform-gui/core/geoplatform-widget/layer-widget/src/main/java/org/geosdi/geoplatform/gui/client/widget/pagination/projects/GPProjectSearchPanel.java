@@ -51,9 +51,8 @@ import org.geosdi.geoplatform.gui.client.action.projects.GPProjectAction;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchWidget;
-import org.geosdi.geoplatform.gui.client.widget.pagination.projects.EnumProjectMessage;
 import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
@@ -63,7 +62,7 @@ import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPProjectSearchPanel extends GPListViewSearchWidget<GPClientProject> {
+public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject> {
 
     private GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
     private GPDefaultProjectSelector selector;
@@ -122,13 +121,10 @@ public class GPProjectSearchPanel extends GPListViewSearchWidget<GPClientProject
     }
 
     @Override
-    public void setWindowProperties() {
+    public void setPanelProperties() {
         super.setHeaderVisible(Boolean.FALSE);
-        super.setBorders(Boolean.FALSE);
-        super.setBodyBorder(Boolean.FALSE);
         super.setSize(GPProjectManagementWidget.COMPONENT_WIDTH,
                 GPProjectManagementWidget.COMPONENT_HEIGHT);
-//        super.setSize(700, 565);
     }
 
     public void loadData() {
@@ -226,27 +222,26 @@ public class GPProjectSearchPanel extends GPListViewSearchWidget<GPClientProject
         private void selectDefaultProject() {
             searchStatus.setBusy("Setting Default Project");
             LayerRemote.Util.getInstance().setDefaultProject(getListView().getSelectionModel().
-                    getSelectedItem().getId(),
-                    new AsyncCallback<Object>() {
-                        /**
-                         * TODO MANAGE FOR SESSION TIMEOUT EXCEPTION *
-                         */
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            GeoPlatformMessage.errorMessage("Setting Default"
-                                    + " Project Error",
-                                    caught.getMessage());
-                        }
+                    getSelectedItem().getId(), new AsyncCallback<Object>() {
+                /**
+                 * TODO MANAGE FOR SESSION TIMEOUT EXCEPTION *
+                 */
+                @Override
+                public void onFailure(Throwable caught) {
+                    GeoPlatformMessage.errorMessage("Setting Default"
+                            + " Project Error",
+                            caught.getMessage());
+                }
 
-                        @Override
-                        public void onSuccess(Object result) {
-                            setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                                    EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
+                @Override
+                public void onSuccess(Object result) {
+                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                            EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
 //                            store.commitChanges();
-                            hide();
-                            TimeoutHandlerManager.fireEvent(defaultProjectEvent);
-                        }
-                    });
+                    loadData();
+                    TimeoutHandlerManager.fireEvent(defaultProjectEvent);
+                }
+            });
         }
     }
 }

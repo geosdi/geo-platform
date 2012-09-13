@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.projects;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchWidget;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
 /**
@@ -51,7 +51,7 @@ public class GPProjectAction extends GeoPlatformAction<ButtonEvent> {
 
     private ProjectBindingWidget bindingProject;
 
-    public GPProjectAction(GPListViewSearchWidget<GPClientProject> searchWidget) {
+    public GPProjectAction(GPListViewSearchPanel<GPClientProject> searchWidget) {
         this.bindingProject = new ProjectBindingWidget(searchWidget);
     }
 

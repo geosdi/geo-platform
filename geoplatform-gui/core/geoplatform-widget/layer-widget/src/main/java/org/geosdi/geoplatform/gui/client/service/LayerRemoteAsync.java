@@ -60,6 +60,8 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
  */
 public interface LayerRemoteAsync {
 
+    void loadDefaultProject(AsyncCallback<GPClientProject> callback);
+
     void shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject, AsyncCallback<Boolean> callback);
 
     void getOrganizationUsersToShareProject(long projectId, AsyncCallback<ArrayList<GPSimpleUser>> callback);

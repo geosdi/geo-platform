@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import javax.inject.Inject;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
@@ -60,10 +61,12 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class LayerWidgetUI implements EntryPoint {
 
+    @Inject
+    static LoadMenuProjects loadMenuProjects;
     private Dispatcher dispatcher;
 
     /**
@@ -86,22 +89,20 @@ public class LayerWidgetUI implements EntryPoint {
 
     private void addLayerWidgetAction() {
         MenuActionRegistar.put(GuiComponentIDs.LAYER_MENU,
-                               new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new LayerMenuAction();
-            }
-        });
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return new LayerMenuAction();
+                    }
+                });
 
         MenuActionRegistar.put(GuiComponentIDs.MANAGE_PROJECTS,
-                               new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new LoadMenuProjects();
-            }
-        });
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return loadMenuProjects;
+                    }
+                });
 
     }
 

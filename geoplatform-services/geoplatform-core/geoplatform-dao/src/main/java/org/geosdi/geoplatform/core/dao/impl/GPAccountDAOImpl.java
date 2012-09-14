@@ -113,23 +113,11 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
     }
 
     @Override
-    public GPAccount findByStringID(String stringID) {
-        GPAccount account = this.findByUsername(stringID);
+    public GPAccount findByNaturalID(String naturalID) {
+        GPAccount account = this.findByUsername(naturalID);
         if (account == null) {
-            account = this.findByAppID(stringID);
+            account = this.findByAppID(naturalID);
         }
         return account;
-    }
-
-    @Override
-    public boolean resetDefaultProject(Long defaultProjectId) {
-        Query query = em().createQuery("UPDATE Account a SET a.defaultProjectID = null WHERE a.defaultProjectID=:defaultProjectId").
-                setParameter("defaultProjectId", defaultProjectId);
-        int recordsUpdated = query.executeUpdate();
-
-        if (recordsUpdated != 1) {
-            return false;
-        }
-        return true;
     }
 }

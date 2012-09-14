@@ -144,8 +144,8 @@ public class EntityCorrectness {
         if (account == null) {
             throw new IllegalParameterFault("Account must be NOT NULL.");
         }
-        if (EntityCorrectness.empty(account.getStringID())) {
-            throw new IllegalParameterFault("Account \"stringID\" (i.e. \"username\" for User"
+        if (EntityCorrectness.empty(account.getNaturalID())) {
+            throw new IllegalParameterFault("Account \"naturalID\" (i.e. \"username\" for User"
                     + " or \"appID\" for Application) must be NOT NULL or empty.");
         }
         GPOrganization organization = account.getOrganization();

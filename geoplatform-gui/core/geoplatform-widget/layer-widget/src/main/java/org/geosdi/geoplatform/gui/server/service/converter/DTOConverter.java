@@ -286,7 +286,7 @@ public class DTOConverter {
     public GPProject convertToGProject(GPClientProject clientProject) {
         GPProject project = new GPProject();
         project.setName(clientProject.getName());
-        project.setShared(false);
+        project.setShared(clientProject.isShared());
         return project;
     }
 
@@ -317,22 +317,27 @@ public class DTOConverter {
 //        layer.setShared(mementoLayer.isShared());
     }
 
-    public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO) {
+    public GPClientProject convertToGPClientProject(ProjectDTO projectDTO) {
         GPClientProject clientProject = new GPClientProject();
         clientProject.setId(projectDTO.getId());
         clientProject.setName(projectDTO.getName());
         clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
-        clientProject.setShared(projectDTO.isShared());
+        if(projectDTO.isDefault() != null){
+            clientProject.setDefaultProject(projectDTO.isDefault());
+        }
+        if(projectDTO.isShared() != null){
+            clientProject.setShared(projectDTO.isShared());
+        }
         ShortAccountDTO owner = projectDTO.getOwner();
         if (owner != null && owner instanceof UserDTO) {
-            this.convertToGPSimpleUser((UserDTO) owner);
+            clientProject.setOwner(this.convertToGPSimpleUser((UserDTO) owner));
         }
         return clientProject;
     }
     
     public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
             String imageURL) {
-        GPClientProject clientProject = this.convertToGPCLientProject(projectDTO);
+        GPClientProject clientProject = this.convertToGPClientProject(projectDTO);
         clientProject.setImage(imageURL);
         return clientProject;
     }

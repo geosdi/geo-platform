@@ -49,7 +49,7 @@ public class AccountLoginFault extends Exception {
     //
     private LoginFaultType faultType;
     private Long accountID;
-    private String stringID;
+    private String naturalID;
 
     public enum LoginFaultType {
 
@@ -81,10 +81,10 @@ public class AccountLoginFault extends Exception {
         this.accountID = accountID;
     }
 
-    public AccountLoginFault(LoginFaultType faultType, String stringID) {
+    public AccountLoginFault(LoginFaultType faultType, String naturalID) {
         super(faultType.toString());
         this.faultType = faultType;
-        this.stringID = stringID;
+        this.naturalID = naturalID;
     }
 
     public AccountLoginFault(LoginFaultType faultType, Throwable cause) {
@@ -108,20 +108,20 @@ public class AccountLoginFault extends Exception {
         this.accountID = accountID;
     }
 
-    public String getStringID() {
-        return stringID;
+    public String getNaturalID() {
+        return naturalID;
     }
 
-    public void setStringID(String stringID) {
-        this.stringID = stringID;
+    public void setNaturalID(String naturalID) {
+        this.naturalID = naturalID;
     }
 
     @Override
     public String getMessage() {
         if (accountID != null) {
             return faultType + " (ID = " + accountID + ")";
-        } else if (stringID != null) {
-            return faultType + " (String ID = " + stringID + ")";
+        } else if (naturalID != null) {
+            return faultType + " (Natural ID = " + naturalID + ")";
         }
         return super.getMessage();
     }

@@ -460,16 +460,17 @@ public abstract class BaseDAOTest {
                                                 new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
         projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //
-        this.insertBindingUserProject(adminTest, adminProject, BasePermission.ADMINISTRATION.getMask());
-        this.insertBindingUserProject(userTest, adminProject, BasePermission.READ.getMask());
-        this.insertBindingUserProject(userTest, userProject, BasePermission.ADMINISTRATION.getMask());
-        this.insertBindingUserProject(viewerTest, viewerProject, BasePermission.READ.getMask());
-        this.insertBindingUserProject(gsUserTest, gsUserProject, BasePermission.ADMINISTRATION.getMask());
+        this.insertBindingUserProject(adminTest, adminProject,
+                                      BasePermission.ADMINISTRATION.getMask(), true);
+        this.insertBindingUserProject(userTest, adminProject,
+                                      BasePermission.READ.getMask(), false);
+        this.insertBindingUserProject(userTest, userProject,
+                                      BasePermission.ADMINISTRATION.getMask(), true);
+        this.insertBindingUserProject(viewerTest, viewerProject,
+                                      BasePermission.READ.getMask(), true);
+        this.insertBindingUserProject(gsUserTest, gsUserProject,
+                                      BasePermission.ADMINISTRATION.getMask(), true);
         //
-        adminTest.setDefaultProjectID(adminProject.getId());
-        userTest.setDefaultProjectID(userProject.getId());
-        viewerTest.setDefaultProjectID(viewerProject.getId());
-        gsUserTest.setDefaultProjectID(gsUserProject.getId());
         accountDAO.merge(adminTest, userTest, viewerTest, gsUserTest);
     }
 
@@ -492,8 +493,8 @@ public abstract class BaseDAOTest {
             GPProject projectIth = this.createProject("project_admin_k_" + i, false,
                                                       i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
             projectDAO.persist(projectIth);
-            this.insertBindingUserProject(this.adminTest, projectIth,
-                                          BasePermission.ADMINISTRATION.getMask());
+            this.insertBindingUserProject(adminTest, projectIth,
+                                          BasePermission.ADMINISTRATION.getMask(), false);
         }
 
         // Project of user -> root folder: "server layer"
@@ -536,7 +537,6 @@ public abstract class BaseDAOTest {
     private void insertGPAccessInfoTest() {
         GSAccount gsAccount = this.generateGSAccount(gsAccountUsername);
         GSResource resource = this.generateResource(gsAccount);
-        gsUserTest.setDefaultProjectID(gsUserProject.getId());
         gsUserTest.setGsAccount(gsAccount);
         this.gsAccountDAO.persist(gsAccount);
         this.gsResourceDAO.persist(resource);
@@ -662,10 +662,11 @@ public abstract class BaseDAOTest {
     }
 
     protected void insertBindingUserProject(GPUser user, GPProject project,
-            int permissionMask) {
+            int permissionMask, boolean defaultProject) {
         GPAccountProject userProjects = new GPAccountProject();
         userProjects.setAccountAndProject(user, project);
         userProjects.setPermissionMask(permissionMask);
+        userProjects.setDefaultProject(defaultProject);
         accountProjectDAO.persist(userProjects);
     }
 

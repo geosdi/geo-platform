@@ -499,6 +499,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public GPAccountProject getDefaultAccountProject(Long accountID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.getDefaultAccountProject(accountID);
+    }
+
+    @Override
     public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
         return projectServiceDelegate.searchAccountProjects(accountID, request);
@@ -532,8 +537,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public void updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
-        this.projectServiceDelegate.updateDefaultProject(accountID, projectID);
+    public boolean updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.updateDefaultProject(accountID, projectID);
     }
 
     @Override

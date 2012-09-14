@@ -85,22 +85,27 @@ public class SecurityService implements ISecurityService {
         GuiComponentsPermissionMapData guiComponentPermission;
         GPAccountProject accountProject;
         IGPAccountDetail userDetail;
+        GPProject project;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     username, password);
             guiComponentPermission = geoPlatformServiceClient.getAccountPermission(user.getId());
 
-            if (user.getDefaultProjectID() == null) {
-                GPProject project = new GPProject();
+            accountProject = geoPlatformServiceClient.getDefaultAccountProject(user.getId());
+            if (accountProject == null) {
+                project = new GPProject();
                 project.setName("Default Project");
                 project.setShared(false);
                 project.setId(this.saveDefaultProject(user, project));
+            } else {
+                project = accountProject.getProject();
             }
-            accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(
-                    user.getId(), user.getDefaultProjectID());
-            GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
+
             this.sessionUtility.storeLoggedAccountAndDefaultProject(user,
-                    user.getDefaultProjectID(), httpServletRequest);
+                                                                    project.getId(),
+                                                                    httpServletRequest);
+
+            GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             userDetail = this.convertAccountToDTO(user, accountProject, viewport);
             userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
             return userDetail;
@@ -132,26 +137,29 @@ public class SecurityService implements ISecurityService {
         GuiComponentsPermissionMapData guiComponentPermission;
         GPAccountProject accountProject;
         IGPAccountDetail accountDetail;
+        GPProject project;
         try {
             application = geoPlatformServiceClient.getApplication(appID);
 
             guiComponentPermission = geoPlatformServiceClient.getApplicationPermission(
                     application.getAppID());
 
-            if (application.getDefaultProjectID() == null) {
-                GPProject project = new GPProject();
+            accountProject = geoPlatformServiceClient.getDefaultAccountProject(application.getId());
+            if (accountProject == null) {
+                project = new GPProject();
                 project.setName("Default Project");
                 project.setShared(false);
                 project.setId(this.saveDefaultProject(application, project));
+            } else {
+                project = accountProject.getProject();
             }
 
-            accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(
-                    application.getId(),
-                    application.getDefaultProjectID());
+            accountProject = geoPlatformServiceClient.getDefaultAccountProject(application.getId());
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(application,
-                    application.getDefaultProjectID(),
-                    httpServletRequest);
+                                                                    project.getId(),
+                                                                    httpServletRequest);
+
             GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             accountDetail = this.convertAccountToDTO(application, accountProject, viewport);
 
@@ -206,7 +214,6 @@ public class SecurityService implements ISecurityService {
             idProject = this.geoPlatformServiceClient.saveProject(
                     account.getNaturalID(),
                     project, true);
-            account.setDefaultProjectID(idProject);
         } catch (ResourceNotFoundFault rnf) {
             this.logger.error(
                     "Failed to save project on SecurityService: " + rnf);

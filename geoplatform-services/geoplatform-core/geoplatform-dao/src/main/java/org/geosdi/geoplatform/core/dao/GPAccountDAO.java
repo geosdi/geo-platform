@@ -74,6 +74,4 @@ public interface GPAccountDAO {
     public GPApplication findByAppID(String appID);
 
     public GPAccount findByNaturalID(String naturalID);
-
-    public boolean resetDefaultProject(Long defaultProjectID);
 }

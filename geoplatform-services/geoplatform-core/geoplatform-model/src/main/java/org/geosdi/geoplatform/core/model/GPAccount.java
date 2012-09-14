@@ -70,20 +70,17 @@ public abstract class GPAccount implements Serializable {
     private Long id;
     //
     @Column(name = "is_enabled", nullable = false)
-    private boolean enabled = Boolean.FALSE;
+    private boolean enabled = false;
     //
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate = new Date(System.currentTimeMillis());
     //    
     @Column(name = "account_temporary")
-    private boolean accountTemporary = Boolean.FALSE;
+    private boolean accountTemporary = false;
     //
     @Column(name = "account_non_expired")
-    private boolean accountNonExpired = Boolean.TRUE;
-    // TODO REF Move to AccountOption entity
-    @Column(name = "load_expanded_folders")
-    private boolean loadExpandedFolders = Boolean.FALSE;
+    private boolean accountNonExpired = true;
     //
     @ManyToOne(optional = true)
     @JoinColumn(name = "gs_account")
@@ -105,12 +102,12 @@ public abstract class GPAccount implements Serializable {
 //        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
 //    private List<GPAccountProject> accountProjects = new LinkedList<GPAccountProject>();
     //
-    @Column(name = "default_project_id")
-    private Long defaultProjectID;
-    //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPOrganization organization;
+    // TODO REF Move to AccountOption entity
+    @Column(name = "load_expanded_folders")
+    private boolean loadExpandedFolders = false;
 
     public abstract String getNaturalID();
 
@@ -229,28 +226,6 @@ public abstract class GPAccount implements Serializable {
     }
 
     /**
-     * @return the defaultProjectID
-     */
-    public Long getDefaultProjectID() {
-        return defaultProjectID;
-    }
-
-    /**
-     * @param defaultProjectID the defaultProjectID to set
-     */
-    public void setDefaultProjectID(Long defaultProjectID) {
-        this.defaultProjectID = defaultProjectID;
-    }
-
-    public boolean isLoadExpandedFolders() {
-        return loadExpandedFolders;
-    }
-
-    public void setLoadExpandedFolders(boolean loadExpandedFolders) {
-        this.loadExpandedFolders = loadExpandedFolders;
-    }
-
-    /**
      * @return the organization
      */
     public GPOrganization getOrganization() {
@@ -262,6 +237,14 @@ public abstract class GPAccount implements Serializable {
      */
     public void setOrganization(GPOrganization organization) {
         this.organization = organization;
+    }
+
+    public boolean isLoadExpandedFolders() {
+        return loadExpandedFolders;
+    }
+
+    public void setLoadExpandedFolders(boolean loadExpandedFolders) {
+        this.loadExpandedFolders = loadExpandedFolders;
     }
 
     /**
@@ -284,7 +267,6 @@ public abstract class GPAccount implements Serializable {
         } else {
             str.append(", authorities=NULL");
         }
-        str.append(", defaultProjectID=").append(defaultProjectID);
         str.append(", organization=").append(organization);
         str.append(", loadExpandedFolders=").append(loadExpandedFolders);
         return str.toString();

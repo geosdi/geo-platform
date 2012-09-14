@@ -559,7 +559,6 @@ public class LayerService implements ILayerService {
         }
 
         int start = config.getOffset();
-
         SearchRequest srq = new SearchRequest(searchText);
         try {
             Long projectsCount = this.geoPlatformServiceClient.getAccountProjectsCount(account.getId(), srq);
@@ -579,13 +578,6 @@ public class LayerService implements ILayerService {
 
             for (ProjectDTO projectDTO : projectsDTO) {
                 GPClientProject clientProject = this.convertToGPCLientProject(projectDTO, imageURL);
-                if (account.getDefaultProjectID() != null) {
-                    if (account.getDefaultProjectID().equals(clientProject.getId())) {
-                        clientProject.setDefaultProject(true);
-                    } else {
-                        clientProject.setDefaultProject(false);
-                    }
-                }
                 clientProjects.add(clientProject);
             }
 
@@ -605,6 +597,12 @@ public class LayerService implements ILayerService {
         clientProject.setName(projectDTO.getName());
         clientProject.setImage(imageURL);
         clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
+        if(projectDTO.isDefault() != null){
+            clientProject.setDefaultProject(projectDTO.isDefault());
+        }
+        if(projectDTO.isShared() != null){
+            clientProject.setShared(projectDTO.isShared());
+        }
         return clientProject;
     }
 
@@ -615,8 +613,6 @@ public class LayerService implements ILayerService {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
 
             this.geoPlatformServiceClient.updateDefaultProject(account.getId(), projectID);
-
-            account.setDefaultProjectID(projectID);
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(account, projectID,
                     httpServletRequest);
@@ -633,29 +629,28 @@ public class LayerService implements ILayerService {
     public Long saveProject(GPClientProject project,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
 
+        Long projectId = null;
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
-            Long projectId = this.geoPlatformServiceClient.saveProject(account.getNaturalID(),
+            projectId = this.geoPlatformServiceClient.saveProject(account.getNaturalID(),
                     this.dtoConverter.convertToGProject(project), project.isDefaultProject());
-
-            account.setDefaultProjectID(projectId);
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(account, projectId,
                     httpServletRequest);
 
-            return projectId;
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
 
         } catch (ResourceNotFoundFault rnf) {
-            this.logger.error("Failed to save project on SecurityService: " + rnf);
+            this.logger.error("Failed to save project on SecurityService: {}", rnf);
             throw new GeoPlatformException(rnf);
 
         } catch (IllegalParameterFault ilg) {
-            logger.error(
-                    "Error on SecurityService: " + ilg);
+            logger.error("Error on SecurityService: {}", ilg);
             throw new GeoPlatformException("Parameter incorrect on saveProject");
         }
+        
+        return projectId;
     }
 
     @Override
@@ -669,7 +664,6 @@ public class LayerService implements ILayerService {
                     project);
 
             if (this.geoPlatformServiceClient.saveAccountProjectProperties(dto)) {
-                account.setDefaultProjectID(project.getId());
                 this.sessionUtility.storeLoggedAccountAndDefaultProject(account, project.getId(),
                         httpServletRequest);
             }

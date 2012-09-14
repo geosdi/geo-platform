@@ -61,8 +61,6 @@ import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
@@ -70,7 +68,7 @@ import org.slf4j.LoggerFactory;
  */
 class AccountServiceImpl {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private Logger logger = LoggerFactory.getLogger(this.getClass());
     // DAO
     private GPAccountDAO accountDao;
     private GPAccountProjectDAO accountProjectDao;
@@ -674,9 +672,5 @@ class AccountServiceImpl {
             throw new IllegalParameterFault("A standard account cannot be changed to temporary account");
         }
         accountToUpdate.setAccountTemporary(account.isAccountTemporary());
-        Long defaultProjectID = account.getDefaultProjectID();
-        if (defaultProjectID != null) {
-            accountToUpdate.setDefaultProjectID(defaultProjectID);
-        }
     }
 }

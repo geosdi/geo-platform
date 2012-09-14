@@ -488,9 +488,22 @@ public interface GeoPlatformService {
 
     @Get
     @HttpResource(location = "/account/{accountID}")
-    @WebResult(name = "AccountProject")
     Long getAccountProjectsCount(@WebParam(name = "accountID") Long accountID,
             SearchRequest request) throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve the default AccountProject of an Account, or null if the Account
+     * don't have a default Project.
+     *
+     * @param accountID the Account ID
+     * @return the AccountProject to retrieve or null
+     * @throws ResourceNotFoundFault if Account not found
+     */
+    @Get
+    @HttpResource(location = "/account/{accountID}")
+    GPAccountProject getDefaultAccountProject(
+            @WebParam(name = "accountID") Long accountID)
+            throws ResourceNotFoundFault;
 
     /**
      * Retrieve, in paginated way, all the Account Projects. There are two
@@ -549,10 +562,11 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     /**
-     * Retrieve the default Project of an Account.
+     * Retrieve the default Project of an Account. If the Account don't have a
+     * default Project, return null.
      *
      * @param accountID the Account ID
-     * @return the default Project
+     * @return the default Project or null
      * @throws ResourceNotFoundFault if Account not found
      */
     @Get
@@ -563,10 +577,11 @@ public interface GeoPlatformService {
 
     /**
      * Retrieve the default Project of an Account. The Project result, if
-     * shared, contain the own Account owner.
+     * shared, contain the own Account owner. If the Account don't have a
+     * default Project, return null.
      *
      * @param accountID the Account ID
-     * @return the default Project
+     * @return the default Project or null
      * @throws ResourceNotFoundFault if Account not found
      */
     @Get
@@ -577,7 +592,7 @@ public interface GeoPlatformService {
 
     @Post
     @HttpResource(location = "/account/defaultProject")
-    void updateDefaultProject(@WebParam(name = "accountID") Long accountID,
+    boolean updateDefaultProject(@WebParam(name = "accountID") Long accountID,
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
@@ -640,8 +655,8 @@ public interface GeoPlatformService {
     /**
      * Save a Project and its Account owner.
      *
-     * @param accountNaturalID the string ID of the Account (username for User and
-     * appID for Application) owner of the Project
+     * @param accountNaturalID the string ID of the Account (username for User
+     * and appID for Application) owner of the Project
      * @param project the Project to save
      * @param defaultProject flag for save the Project as default for the
      * Account

@@ -282,7 +282,7 @@ public class DTOConverter {
     public GPProject convertToGProject(GPClientProject clientProject) {
         GPProject project = new GPProject();
         project.setName(clientProject.getName());
-        project.setShared(false);
+        project.setShared(clientProject.isShared());
         return project;
     }
 

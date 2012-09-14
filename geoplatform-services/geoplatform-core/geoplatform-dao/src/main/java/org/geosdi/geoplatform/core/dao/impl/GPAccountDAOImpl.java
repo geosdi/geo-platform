@@ -120,16 +120,4 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
         }
         return account;
     }
-
-    @Override
-    public boolean resetDefaultProject(Long defaultProjectId) {
-        Query query = em().createQuery("UPDATE Account a SET a.defaultProjectID = null WHERE a.defaultProjectID=:defaultProjectId").
-                setParameter("defaultProjectId", defaultProjectId);
-        int recordsUpdated = query.executeUpdate();
-
-        if (recordsUpdated != 1) {
-            return false;
-        }
-        return true;
-    }
 }

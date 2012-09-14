@@ -433,9 +433,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<GPAuthority> getAuthoritiesDetail(String stringID)
+    public List<GPAuthority> getAuthoritiesDetail(String accountNaturalID)
             throws ResourceNotFoundFault {
-        return accountServiceDelegate.getAuthoritiesDetail(stringID);
+        return accountServiceDelegate.getAuthoritiesDetail(accountNaturalID);
     }
 
     @Override
@@ -499,6 +499,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public GPAccountProject getDefaultAccountProject(Long accountID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.getDefaultAccountProject(accountID);
+    }
+
+    @Override
     public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
         return projectServiceDelegate.searchAccountProjects(accountID, request);
@@ -532,8 +537,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public void updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
-        this.projectServiceDelegate.updateDefaultProject(accountID, projectID);
+    public boolean updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.updateDefaultProject(accountID, projectID);
     }
 
     @Override
@@ -566,9 +571,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Project
     // ==========================================================================
     @Override
-    public Long saveProject(String stringID, GPProject project, boolean defaultProject)
+    public Long saveProject(String accountNaturalID, GPProject project, boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return this.projectServiceDelegate.saveProject(stringID, project, defaultProject);
+        return this.projectServiceDelegate.saveProject(accountNaturalID, project, defaultProject);
     }
 
     @Override

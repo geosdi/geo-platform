@@ -65,8 +65,8 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
     }
 
     @Override
-    public void removeAllUserAuthorities(String stringID) {
-        List<GPAuthority> authorities = this.findByStringID(stringID);
+    public void removeAllUserAuthorities(String accountNaturalID) {
+        List<GPAuthority> authorities = this.findByAccountNaturalID(accountNaturalID);
         super.remove(authorities.toArray(new GPAuthority[authorities.size()]));
     }
 
@@ -77,24 +77,24 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
     }
 
     @Override
-    public List<GPAuthority> findByStringID(String stringID) {
+    public List<GPAuthority> findByAccountNaturalID(String accountNaturalID) {
         Search search = new Search();
-        search.addFilterEqual("stringID", stringID);
+        search.addFilterEqual("accountNaturalID", accountNaturalID);
         return super.search(search);
     }
 
     @Override
-    public List<GPAuthority> findShortByStringID(String stringID) {
+    public List<GPAuthority> findShortByAccountNaturalID(String accountNaturalID) {
         Search search = new Search();
 
         List<Field> fields = new ArrayList<Field>();
         fields.add(new Field("id"));
-        fields.add(new Field("stringID"));
+        fields.add(new Field("accountNaturalID"));
         fields.add(new Field("authority"));
         search.setFields(fields);
         search.setResultMode(Search.RESULT_LIST);
 
-        search.addFilterEqual("stringID", stringID);
+        search.addFilterEqual("accountNaturalID", accountNaturalID);
         List<Object> columnsSelected = super.search(search);
 
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
@@ -103,7 +103,7 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
             String[] s = (column.substring(1, column.length() - 1)).split(",");
             GPAuthority authority = new GPAuthority();
             authority.setId(new Long(s[0].trim()));
-            authority.setStringID(s[1].trim());
+            authority.setAccountNaturalID(s[1].trim());
             authority.setAuthority(s[2].trim());
             authorities.add(authority);
         }

@@ -83,7 +83,10 @@ public class GPAccountProject implements Serializable {
     //
     @Column(name = "permission_mask", nullable = false)
     private int permissionMask = BasePermission.ADMINISTRATION.getMask();
-    // TODO REF Move to AccountOption entity
+    //
+    @Column(name = "default_project")
+    private boolean defaultProject;
+    // TODO REF Move to ProjectOption entity
     @Column(name = "base_layer", nullable = false)
     private String baseLayer = "GOOGLE_SATELLITE";
 
@@ -153,8 +156,22 @@ public class GPAccountProject implements Serializable {
     }
 
     /**
+     * @return the defaultProject
+     */
+    public boolean isDefaultProject() {
+        return defaultProject;
+    }
+
+    /**
+     * @param defaultProject the defaultProject to set
+     */
+    public void setDefaultProject(boolean defaultProject) {
+        this.defaultProject = defaultProject;
+    }
+
+    /**
      *
-     * @return the baseLayer setted
+     * @return the baseLayer
      */
     public String getBaseLayer() {
         return baseLayer;
@@ -162,7 +179,7 @@ public class GPAccountProject implements Serializable {
 
     /**
      *
-     * @param baseLayer
+     * @param baseLayer the baseLayer to set
      */
     public void setBaseLayer(String baseLayer) {
         this.baseLayer = baseLayer;
@@ -188,6 +205,8 @@ public class GPAccountProject implements Serializable {
             str.append(", project=NULL");
         }
         str.append(", permission=").append(permissionMask);
+        str.append(", defaultProject=").append(defaultProject);
+        str.append(", baseLayer=").append(baseLayer);
         return str.append("}").toString();
     }
 

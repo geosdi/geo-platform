@@ -213,7 +213,7 @@ class AclServiceImpl {
         GuiComponentsPermissionMapData mapComponentPermission = new GuiComponentsPermissionMapData();
 
         // Retrieve the Authorities of the Account
-        List<GPAuthority> authorities = authorityDao.findByStringID(account.getStringID());
+        List<GPAuthority> authorities = authorityDao.findByAccountNaturalID(account.getNaturalID());
         logger.trace("\n*** #Authorities: {} ***", authorities.size());
         // For each Autorities (disjoined)
         for (GPAuthority authority : authorities) {

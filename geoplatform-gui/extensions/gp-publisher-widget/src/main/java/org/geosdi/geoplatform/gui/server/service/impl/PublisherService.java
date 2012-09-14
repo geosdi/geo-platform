@@ -145,7 +145,7 @@ public class PublisherService implements IPublisherService {
         List<InfoPreview> resultList = null;
         try {
             resultList = geoPlatformPublishClient.processEPSGResult(
-                    account.getStringID(), this.trasformPreviewLayerList(
+                    account.getNaturalID(), this.trasformPreviewLayerList(
                     previewLayerList));
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);

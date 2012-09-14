@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
@@ -54,6 +55,7 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+@Singleton
 public class ShareProjectMenuAction extends MenuBaseAction {
 
     private GPProjectManagementWidget projectManagementWidget;

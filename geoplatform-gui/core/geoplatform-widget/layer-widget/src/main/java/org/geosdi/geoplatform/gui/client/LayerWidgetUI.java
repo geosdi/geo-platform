@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
@@ -44,6 +45,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.LayerMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.mvc.LayerController;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
 import org.geosdi.geoplatform.gui.client.plugin.PrintLayersTreeToolbarPlugin;
@@ -76,6 +78,7 @@ public class LayerWidgetUI implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
+        this.initInjection();
         dispatcher = Dispatcher.get();
 
         dispatcher.addController(new LayerController());
@@ -85,6 +88,10 @@ public class LayerWidgetUI implements EntryPoint {
         addTreeToolbarComponents();
 
         dispatcher.fireEvent(GeoPlatformEvents.INIT_OGC_MODULES_WIDGET);
+    }
+
+    private void initInjection() {
+        GWT.create(LayerModuleInjector.class);
     }
 
     private void addLayerWidgetAction() {

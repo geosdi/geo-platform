@@ -1,6 +1,8 @@
-  <!-- Inherit the core Web Toolkit stuff. -->
+  
+<!-- Inherit the core Web Toolkit stuff. -->
 <module>
     <inherits name='name.pehl.piriti.json.JSON' />
+    <!--<inherits name="com.google.gwt.inject.Inject"/>-->
     
     <source path="client" />
     

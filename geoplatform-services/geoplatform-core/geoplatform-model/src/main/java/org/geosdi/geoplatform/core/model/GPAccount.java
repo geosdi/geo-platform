@@ -112,7 +112,7 @@ public abstract class GPAccount implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPOrganization organization;
 
-    public abstract String getStringID();
+    public abstract String getNaturalID();
 
     /**
      * @return the id

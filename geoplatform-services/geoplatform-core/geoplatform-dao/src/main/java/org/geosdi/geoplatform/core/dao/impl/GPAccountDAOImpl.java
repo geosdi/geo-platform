@@ -113,10 +113,10 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
     }
 
     @Override
-    public GPAccount findByStringID(String stringID) {
-        GPAccount account = this.findByUsername(stringID);
+    public GPAccount findByNaturalID(String naturalID) {
+        GPAccount account = this.findByUsername(naturalID);
         if (account == null) {
-            account = this.findByAppID(stringID);
+            account = this.findByAppID(naturalID);
         }
         return account;
     }

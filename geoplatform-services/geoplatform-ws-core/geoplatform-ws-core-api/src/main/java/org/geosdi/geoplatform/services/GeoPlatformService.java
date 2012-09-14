@@ -400,7 +400,7 @@ public interface GeoPlatformService {
     /**
      * Retrieve the Authorities of an Account.
      *
-     * @param stringID the username (for User) or the string ID (for
+     * @param accountNaturalID the username (for User) or the appID (for
      * Application)
      * @return the list of Authorities
      * @throws ResourceNotFoundFault if Account not found or Account not have
@@ -409,7 +409,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/accounts/{id}/authorities")
     @WebResult(name = "Authority")
     List<GPAuthority> getAuthoritiesDetail(
-            @WebParam(name = "stringID") String stringID)
+            @WebParam(name = "accountNaturalID") String accountNaturalID)
             throws ResourceNotFoundFault;
 
     /**
@@ -640,8 +640,8 @@ public interface GeoPlatformService {
     /**
      * Save a Project and its Account owner.
      *
-     * @param stringID the string ID of the Account (username for User and appID
-     * for Application) owner of the Project
+     * @param accountNaturalID the string ID of the Account (username for User and
+     * appID for Application) owner of the Project
      * @param project the Project to save
      * @param defaultProject flag for save the Project as default for the
      * Account
@@ -651,7 +651,7 @@ public interface GeoPlatformService {
      */
     @Put
     @HttpResource(location = "/project")
-    Long saveProject(@WebParam(name = "stringID") String stringID,
+    Long saveProject(@WebParam(name = "accountNaturalID") String accountNaturalID,
             @WebParam(name = "project") GPProject project,
             @WebParam(name = "defaultProject") boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault;

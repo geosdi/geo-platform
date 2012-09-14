@@ -433,9 +433,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<GPAuthority> getAuthoritiesDetail(String stringID)
+    public List<GPAuthority> getAuthoritiesDetail(String accountNaturalID)
             throws ResourceNotFoundFault {
-        return accountServiceDelegate.getAuthoritiesDetail(stringID);
+        return accountServiceDelegate.getAuthoritiesDetail(accountNaturalID);
     }
 
     @Override
@@ -566,9 +566,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Project
     // ==========================================================================
     @Override
-    public Long saveProject(String stringID, GPProject project, boolean defaultProject)
+    public Long saveProject(String accountNaturalID, GPProject project, boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return this.projectServiceDelegate.saveProject(stringID, project, defaultProject);
+        return this.projectServiceDelegate.saveProject(accountNaturalID, project, defaultProject);
     }
 
     @Override

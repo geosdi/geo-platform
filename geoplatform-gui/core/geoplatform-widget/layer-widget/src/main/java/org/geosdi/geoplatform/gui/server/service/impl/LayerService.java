@@ -635,7 +635,7 @@ public class LayerService implements ILayerService {
 
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
-            Long projectId = this.geoPlatformServiceClient.saveProject(account.getStringID(),
+            Long projectId = this.geoPlatformServiceClient.saveProject(account.getNaturalID(),
                     this.dtoConverter.convertToGProject(project), project.isDefaultProject());
 
             account.setDefaultProjectID(projectId);

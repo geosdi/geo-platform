@@ -204,7 +204,7 @@ public class SecurityService implements ISecurityService {
         Long idProject = null;
         try {
             idProject = this.geoPlatformServiceClient.saveProject(
-                    account.getStringID(),
+                    account.getNaturalID(),
                     project, true);
             account.setDefaultProjectID(idProject);
         } catch (ResourceNotFoundFault rnf) {
@@ -222,7 +222,7 @@ public class SecurityService implements ISecurityService {
             GPViewport viewport) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
         UserTreeOptions usertreeOptions = new UserTreeOptions();
-        accountDetail.setUsername(account.getStringID()); // Forced representation
+        accountDetail.setUsername(account.getNaturalID()); // Forced representation
         accountDetail.setOrganization(account.getOrganization().getName());
         usertreeOptions.setLoadExpandedFolders(account.isLoadExpandedFolders());
         accountDetail.setTreeOptions(usertreeOptions);

@@ -155,7 +155,7 @@ public class WSAccountTest extends ServiceTest {
         GPAuthority authority = authorities.get(0);
         Assert.assertNotNull(authority);
         Assert.assertEquals("Authority string", ROLE_USER, authority.getAuthority());
-        Assert.assertEquals("Authority username", usernameTest, authority.getStringID());
+        Assert.assertEquals("Authority username", usernameTest, authority.getAccountNaturalID());
     }
 
     @Test
@@ -172,7 +172,7 @@ public class WSAccountTest extends ServiceTest {
             boolean isViewer = false;
             for (GPAuthority authority : authorities) {
                 Assert.assertNotNull(authority);
-                Assert.assertEquals("Authority email", usernameMultiRole, authority.getStringID());
+                Assert.assertEquals("Authority email", usernameMultiRole, authority.getAccountNaturalID());
                 if (ROLE_ADMIN.equals(authority.getAuthority())) {
                     isAdmin = true;
                 } else if (ROLE_VIEWER.equals(authority.getAuthority())) {

@@ -134,13 +134,13 @@ class ProjectServiceImpl {
     // ==========================================================================
     // === Project
     // ==========================================================================
-    public Long saveProject(String stringID, GPProject project, boolean defaultProject)
+    public Long saveProject(String accountNaturalID, GPProject project, boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
         EntityCorrectness.checkProject(project); // TODO assert
 
-        GPAccount account = accountDao.findByStringID(stringID);
+        GPAccount account = accountDao.findByNaturalID(accountNaturalID);
         if (account == null) {
-            throw new ResourceNotFoundFault("Account with stringID \"" + stringID + "\" not found");
+            throw new ResourceNotFoundFault("Account with naturalID \"" + accountNaturalID + "\" not found");
         }
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
@@ -666,7 +666,7 @@ class ProjectServiceImpl {
                     newAccountProject.setAccountAndProject(newAccount, project);
                     newAccountProject.setPermissionMask(BasePermission.READ.getMask());
                     logger.debug("\n*** Create a new relation of sharing for Account \"{}\"",
-                                 newAccount.getStringID());
+                                 newAccount.getNaturalID());
                     accountProjectDao.persist(newAccountProject);
                 }
             }
@@ -674,7 +674,7 @@ class ProjectServiceImpl {
             // Delete the remaining relations of sharing
             for (Map.Entry<Long, GPAccountProject> e : sharingMap.entrySet()) {
                 logger.debug("\n*** Delete the relation of sharing for Account \"{}\"",
-                             e.getValue().getAccount().getStringID());
+                             e.getValue().getAccount().getNaturalID());
                 accountProjectDao.remove(e.getValue());
             }
 

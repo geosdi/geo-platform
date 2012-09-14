@@ -77,10 +77,10 @@ public class GPUser extends GPAccount implements UserDetails {
     private boolean sendEmail = false;
 
     /**
-     * @return the stringID: return the username
+     * @return the naturalID: return the username
      */
     @Override
-    public String getStringID() {
+    public String getNaturalID() {
         return this.getUsername();
     }
 

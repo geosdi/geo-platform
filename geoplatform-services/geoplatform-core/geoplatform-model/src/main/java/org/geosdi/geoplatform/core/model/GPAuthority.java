@@ -54,8 +54,10 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * @author Francesco Izzi - CNR IMAA - geoSDI Group
+ * @todo Analyze deletion of accountNaturalID field or account field.
  * 
+ * @author Francesco Izzi - CNR IMAA - geoSDI Group
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "Authority")
 @Entity(name = "Authority")
@@ -73,12 +75,12 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     @SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")
     private Long id;
     //
-    @Column(name = "string_id", nullable = false)
-    @Index(name = "AUTHORITY_STRING_ID_INDEX")
-    private String stringID;
-    //
     @Column(nullable = false)
     private String authority;
+    //
+    @Column(name = "account_natural_id", nullable = false)
+    @Index(name = "AUTHORITY_ACCOUNT_NATURAL_ID_INDEX")
+    private String accountNaturalID;
     //
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -89,7 +91,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
 
     public GPAuthority(GPAccount account, String authority) {
         this.account = account;
-        this.stringID = account.getStringID();
+        this.accountNaturalID = account.getNaturalID();
         this.authority = authority;
     }
 
@@ -108,20 +110,6 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     }
 
     /**
-     * @return the stringID
-     */
-    public String getStringID() {
-        return stringID;
-    }
-
-    /**
-     * @param stringID the stringID to set
-     */
-    public void setStringID(String stringID) {
-        this.stringID = stringID;
-    }
-
-    /**
      * @return authority
      */
     @Override
@@ -134,6 +122,20 @@ public class GPAuthority implements GrantedAuthority, Serializable {
      */
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    /**
+     * @return the accountNaturalID
+     */
+    public String getAccountNaturalID() {
+        return accountNaturalID;
+    }
+
+    /**
+     * @param accountNaturalID the accountNaturalID to set
+     */
+    public void setAccountNaturalID(String accountNaturalID) {
+        this.accountNaturalID = accountNaturalID;
     }
 
     /**
@@ -159,8 +161,8 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append("id=").append(id);
-        str.append(", stringID=").append(stringID);
         str.append(", authority=").append(authority);
+        str.append(", accountNaturalID=").append(accountNaturalID);
         str.append(", account=").append(account);
         return str.append("}").toString();
     }

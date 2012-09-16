@@ -20,4 +20,11 @@
         <module>geoplatform-model</module>
         <module>geoplatform-dao</module>
     </modules>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-sharing</artifactId>
+        </dependency>
+    </dependencies>
 </project>

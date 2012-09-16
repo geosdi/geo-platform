@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
@@ -56,13 +57,13 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
  * @email nazzareno.sileno@geosdi.org
  */
 @Singleton
-public class ShareProjectMenuAction extends MenuBaseAction {
+public class ShareProjectMenuAction extends MenuBaseSecureAction {
 
     private GPProjectManagementWidget projectManagementWidget;
 
     @Inject
     public ShareProjectMenuAction(GPProjectManagementWidget projectManagementWidget) {
-        super("Share Project", LayerResources.ICONS.arrowRefresh());
+        super("Share Project", LayerResources.ICONS.arrowRefresh(), GPRole.ADMIN);
         this.projectManagementWidget = projectManagementWidget;
     }
 

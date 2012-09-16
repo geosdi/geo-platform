@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleDetail {
+
     private static final long serialVersionUID = 6888698454407152018L;
 
     /**
@@ -123,5 +124,31 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
     @Override
     public void setOrganization(String organization) {
         super.set(GPSimpleUserKeyValue.ORGANIZATION.toString(), organization);
+    }
+
+    /**
+     * @return the authority
+     */
+    @Override
+    public String getAuthority() {
+        return super.get(GPSimpleUserKeyValue.AUTORITHY.toString());
+    }
+
+    /**
+     * @param role the authority to set
+     */
+    @Override
+    public void setAuthority(String role) {
+        super.set(GPSimpleUserKeyValue.AUTORITHY.toString(), role.toString());
+    }
+
+    @Override
+    public int getUserLevel() {
+        return super.get(GPSimpleUserKeyValue.USER_LEVEL.toString(), 0);
+    }
+
+    @Override
+    public void setUserLevel(int userLevel) {
+        super.set(GPSimpleUserKeyValue.USER_LEVEL.toString(), userLevel);
     }
 }

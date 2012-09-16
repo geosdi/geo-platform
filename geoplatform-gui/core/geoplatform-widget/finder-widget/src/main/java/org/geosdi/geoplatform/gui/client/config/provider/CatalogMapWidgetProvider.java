@@ -39,7 +39,7 @@ import com.google.inject.Provider;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
@@ -59,6 +59,6 @@ public class CatalogMapWidgetProvider implements Provider<MapWidget> {
     @Override
     public MapWidget get() {
         return this.mapFactory.createMap("390px", "280px",
-                GPBaseLayerFactory.getBaseLayer(BaseLayerEnum.OPEN_STREET_MAP));
+                GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
     }
 }

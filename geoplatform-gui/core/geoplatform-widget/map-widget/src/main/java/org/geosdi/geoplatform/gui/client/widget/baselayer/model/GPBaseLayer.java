@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.baselayer.model;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.gwtopenmaps.openlayers.client.Projection;
@@ -50,12 +50,19 @@ public class GPBaseLayer extends GeoPlatformBeanModel {
 
     private static final long serialVersionUID = -1326266553265622034L;
 
+    public enum BaseLayerKey {
+
+        IMAGE,
+        PROJECTION,
+        ENUM_NAME;
+    }
+
     public GPBaseLayer(Layer gwtOlBaseLayer, AbstractImagePrototype baseLayerImage,
-            Projection projection, BaseLayerEnum enumName) {
-        super.set(BaseLayerEnum.IMAGE.toString(), baseLayerImage.getHTML());
+            Projection projection, BaseLayerValue enumName) {
+        super.set(BaseLayerKey.IMAGE.toString(), baseLayerImage.getHTML());
         super.set(GlobalRegistryEnum.BASE_LAYER.toString(), gwtOlBaseLayer);
-        super.set(BaseLayerEnum.PROJECTION.toString(), projection);
-        super.set(BaseLayerEnum.ENUM_NAME.toString(), enumName);
+        super.set(BaseLayerKey.PROJECTION.toString(), projection);
+        super.set(BaseLayerKey.ENUM_NAME.toString(), enumName);
         super.set(GlobalRegistryEnum.TOOLTIP.toString(),
                 gwtOlBaseLayer.getName()
                 + " - " + projection.getProjectionCode());
@@ -65,8 +72,8 @@ public class GPBaseLayer extends GeoPlatformBeanModel {
      *
      * @return BaseLayerEnum
      */
-    public BaseLayerEnum getBaseLayerEnumName() {
-        return super.get(BaseLayerEnum.ENUM_NAME.toString());
+    public BaseLayerValue getBaseLayerEnumName() {
+        return super.get(BaseLayerKey.ENUM_NAME.toString());
     }
 
     /**
@@ -74,7 +81,7 @@ public class GPBaseLayer extends GeoPlatformBeanModel {
      * @return String representing BaseLayer Image
      */
     public String getBaseLayerImage() {
-        return super.get(BaseLayerEnum.IMAGE.toString());
+        return super.get(BaseLayerKey.IMAGE.toString());
     }
 
     /**
@@ -90,7 +97,7 @@ public class GPBaseLayer extends GeoPlatformBeanModel {
      * @return Projection
      */
     public Projection getProjection() {
-        return super.get(BaseLayerEnum.PROJECTION.toString());
+        return super.get(BaseLayerKey.PROJECTION.toString());
     }
 
     @Override

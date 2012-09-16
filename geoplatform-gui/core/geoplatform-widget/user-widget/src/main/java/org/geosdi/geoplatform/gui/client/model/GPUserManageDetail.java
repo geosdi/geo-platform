@@ -57,7 +57,6 @@ public class GPUserManageDetail extends GPSimpleUser
     public enum GPUserManageDetailKeyValue {
 
         PASSWORD,
-        AUTORITHY,
         ENABLED,
         TEMPORARY;
     }
@@ -76,22 +75,6 @@ public class GPUserManageDetail extends GPSimpleUser
     @Override
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * @return the authority
-     */
-    @Override
-    public String getAuthority() {
-        return super.get(GPUserManageDetailKeyValue.AUTORITHY.toString());
-    }
-
-    /**
-     * @param role the authority to set
-     */
-    @Override
-    public void setAuthority(String role) {
-        super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), role.toString());
     }
 
     /**

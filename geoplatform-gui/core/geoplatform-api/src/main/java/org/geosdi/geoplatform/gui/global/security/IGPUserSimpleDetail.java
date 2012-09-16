@@ -43,8 +43,6 @@ import java.io.Serializable;
  */
 public interface IGPUserSimpleDetail extends Serializable {
 
-    String ADMIN = "Admin";
-
     Long getId();
 
     void setId(Long id);
@@ -64,4 +62,16 @@ public interface IGPUserSimpleDetail extends Serializable {
     String getOrganization();
 
     void setOrganization(String organization);
+
+//    List<String> getAuthorities();
+//
+//    void setAuthorities(List<String> roles);
+//  
+    String getAuthority();
+
+    void setAuthority(String role);
+
+    int getUserLevel();
+
+    void setUserLevel(int userLevel);
 }

@@ -37,19 +37,21 @@ package org.geosdi.geoplatform.gui.client.action.projects;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class AddProjectAction extends GeoPlatformAction<ButtonEvent> {
+public class AddProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     private ProjectBindingWidget widget;
 
-    public AddProjectAction(ProjectBindingWidget theWidget) {
+    public AddProjectAction(ProjectBindingWidget theWidget, GPRole role) {
+        super(role);
         this.widget = theWidget;
     }
 

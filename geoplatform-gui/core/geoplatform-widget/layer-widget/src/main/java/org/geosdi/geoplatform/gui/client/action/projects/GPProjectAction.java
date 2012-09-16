@@ -39,7 +39,8 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  *
@@ -47,11 +48,12 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class GPProjectAction extends GeoPlatformAction<ButtonEvent> {
+public class GPProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     private ProjectBindingWidget bindingProject;
 
-    public GPProjectAction(GPListViewSearchPanel<GPClientProject> searchWidget) {
+    public GPProjectAction(GPListViewSearchPanel<GPClientProject> searchWidget, GPRole role) {
+        super(role);
         this.bindingProject = new ProjectBindingWidget(searchWidget);
     }
 

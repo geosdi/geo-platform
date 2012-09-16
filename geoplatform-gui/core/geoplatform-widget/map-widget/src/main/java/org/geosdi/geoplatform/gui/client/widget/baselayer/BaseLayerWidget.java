@@ -47,21 +47,19 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.action.baselayer.SaveBaseLayerAction;
 import org.geosdi.geoplatform.gui.client.event.ChangeBaseLayerEvent;
-import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -74,6 +72,7 @@ public class BaseLayerWidget extends GeoPlatformWindow {
     private ListStore<GPBaseLayer> store = new ListStore<GPBaseLayer>();
     private ListView<GPBaseLayer> listView;
     private ContentPanel centralPanel;
+    private GPSecureButton saveButton;
 
     public BaseLayerWidget(boolean lazy) {
         super(lazy);
@@ -82,35 +81,9 @@ public class BaseLayerWidget extends GeoPlatformWindow {
     @Override
     public void addComponent() {
         this.store.add(GPMapBaseLayerFactory.getBaseLayerList());
-        Button saveButton = new Button("Save", BasicWidgetResources.ICONS.save(), new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                String baseLayer = accountDetail.getBaseLayer();
-                MapRemote.Util.getInstance().saveBaseLayer(baseLayer, new AsyncCallback<Object>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage("Error saving",
-                                "An error occurred while making the requested connection.\n"
-                                + "Verify network connections and try again."
-                                + "\nIf the problem persists contact your system administrator.");
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Error saving the new base layer.",
-                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                        System.out.println("Error saving the new base layer: " + caught.toString()
-                                + " data: " + caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(Object result) {
-                        BaseLayerWidget.super.hide();
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Base Layer successfully saved.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                    }
-                });
-            }
-        });
+        GeoPlatformSecureAction saveBaseLayerAction = new SaveBaseLayerAction(GPRole.USER, this);
+        this.saveButton = new GPSecureButton("Save", BasicWidgetResources.ICONS.save(), saveBaseLayerAction);
+        this.saveButton.disable();
         Button applyButton = new Button("Apply/Close", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -164,6 +137,7 @@ public class BaseLayerWidget extends GeoPlatformWindow {
 //                                    selectedBaseLayer.getBaseLayerEnumName().toString());
                         }
                         listView.getSelectionModel().deselectAll();
+                        BaseLayerWidget.this.saveButton.enable();
                     }
                 });
 
@@ -191,7 +165,7 @@ public class BaseLayerWidget extends GeoPlatformWindow {
         sb.append("<div class='thumbd' title='{");
         sb.append(GlobalRegistryEnum.TOOLTIP);
         sb.append("}'>{");
-        sb.append(BaseLayerEnum.IMAGE);
+        sb.append(GPBaseLayer.BaseLayerKey.IMAGE);
         sb.append("}</div>");
         sb.append("<div>{");
         sb.append(GlobalRegistryEnum.TOOLTIP);
@@ -200,5 +174,11 @@ public class BaseLayerWidget extends GeoPlatformWindow {
         listView.setTemplate(sb.toString());
 
         listView.setSize(WIDGET_WIDTH - 25, WIDGET_HEIGHT - 75);
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
+        this.saveButton.disable();
     }
 }

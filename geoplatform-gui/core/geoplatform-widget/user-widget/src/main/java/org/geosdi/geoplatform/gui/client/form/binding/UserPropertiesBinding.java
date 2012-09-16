@@ -195,7 +195,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 roleComboBinding.updateModel();
             }
         };
-        this.userRoleComboBox.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
+        this.userRoleComboBox.setId(GPSimpleUserKeyValue.AUTORITHY.toString());
         this.userRoleComboBox.setFieldLabel("Role");
         this.userRoleComboBox.setEmptyText("Select a role... (required)");
         this.userRoleComboBox.setToolTip("Role of the user");
@@ -523,7 +523,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private class RoleComboBinding extends GPFieldBinding {
 
         public RoleComboBinding() {
-            super(userRoleComboBox, GPUserManageDetailKeyValue.AUTORITHY.toString());
+            super(userRoleComboBox, GPSimpleUserKeyValue.AUTORITHY.toString());
         }
 
         @Override

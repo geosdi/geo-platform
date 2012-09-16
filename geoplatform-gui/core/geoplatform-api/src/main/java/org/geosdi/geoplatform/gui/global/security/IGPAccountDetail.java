@@ -26,6 +26,10 @@ public interface IGPAccountDetail {
 
     String getBaseLayer();
 
+    int getUserLevel();
+
+    String getAuthority();
+
     void setBaseLayer(String baseLayer);
 
     GPClientViewport getViewport();

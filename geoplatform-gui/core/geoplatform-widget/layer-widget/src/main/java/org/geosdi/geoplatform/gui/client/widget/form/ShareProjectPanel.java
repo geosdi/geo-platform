@@ -74,7 +74,8 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
  */
 public class ShareProjectPanel extends GeoPlatformContentPanel {
 
-    private final static String OWNER_LABEL = "Project Owner: ";
+    private final static String PROJECT_NAME_LABEL = "Project: ";
+    private final static String OWNER_LABEL = "Owner: ";
     private final static String ORGANIZATION_LABEL = "Organization: ";
     private ListStore<GPSimpleUser> fromStore;
     private ListStore<GPSimpleUser> toStore;
@@ -82,6 +83,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
     private GPProjectManagementWidget projectManagementWidget;
     private StoreFilterField<GPSimpleUser> toFilter;
     private StoreFilterField<GPSimpleUser> fromFilter;
+    private Label projectNameLabel;
     private Label ownerLabel;
     private Label organizationLabel;
 
@@ -104,10 +106,13 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         FieldSet fieldSet = new FieldSet();
         fieldSet.setHeading("Share Project to Users");
         fieldSet.setWidth(GPProjectManagementWidget.COMPONENT_WIDTH - 25);
+        this.projectNameLabel = new Label();
+        this.projectNameLabel.setStyleAttribute("font-size", "13");
         this.ownerLabel = new Label();
         this.ownerLabel.setStyleAttribute("font-size", "13");
         this.organizationLabel = new Label();
         this.organizationLabel.setStyleAttribute("font-size", "13");
+        fieldSet.add(this.projectNameLabel, new MarginData(10));
         fieldSet.add(ownerLabel, new MarginData(10));
         fieldSet.add(organizationLabel, new MarginData(10));
         verticalPanel.add(fieldSet);
@@ -244,6 +249,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
 
     private void updateLabels() {
         IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        this.projectNameLabel.setText(PROJECT_NAME_LABEL + this.project.getName());
         if (project.getOwner() != null) {
             this.ownerLabel.setText(OWNER_LABEL + project.getOwner().getName());
         } else {

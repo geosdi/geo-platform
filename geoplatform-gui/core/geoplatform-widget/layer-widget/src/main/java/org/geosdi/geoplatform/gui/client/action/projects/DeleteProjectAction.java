@@ -40,8 +40,9 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  *
@@ -49,11 +50,12 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class DeleteProjectAction extends GeoPlatformAction<ButtonEvent> {
+public class DeleteProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     private GPProjectSearchPanel searchPanel;
 
-    public DeleteProjectAction(GPProjectSearchPanel theSearchPanel) {
+    public DeleteProjectAction(GPProjectSearchPanel theSearchPanel, GPRole role) {
+        super(role);
         this.searchPanel = theSearchPanel;
     }
 

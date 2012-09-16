@@ -49,19 +49,21 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
+import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.projects.AddProjectAction;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectDefaultFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectNameFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
+import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  *
@@ -74,7 +76,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     private GPListViewSearchPanel<GPClientProject> searchWidget;
     private TextField<String> projectFieldName;
     private CheckBox projectDefaultCheck;
-    private Button save;
+    private GPSecureButton save;
     private Button cancel;
     private FormButtonBinding buttonBinding;
 
@@ -186,8 +188,8 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     private void addButtons() {
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
-        this.save = new Button("Save", BasicWidgetResources.ICONS.save(),
-                new AddProjectAction(this));
+        this.save = new GPSecureButton("Save", BasicWidgetResources.ICONS.save(),
+                new AddProjectAction(this, GPRole.ADMIN));
         formPanel.addButton(save);
         buttonBinding = new FormButtonBinding(formPanel);
         buttonBinding.addButton(save);

@@ -28,7 +28,7 @@
 
     <dependencies>             
 
-		<!-- APACHE COMMONS -->
+        <!-- APACHE COMMONS -->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -38,16 +38,16 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
 
-		<!-- CHECK THIS!!! without it, it will work on local test, but will fail 
-			in dependant modules -->
+        <!-- CHECK THIS!!! without it, it will work on local test, but will fail 
+     			in dependant modules -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-			<!-- <scope>runtime</scope> -->
+            <!-- <scope>runtime</scope> -->
         </dependency>
 
 
-		<!-- GEOPLATFORM WS -->
+        <!-- GEOPLATFORM WS -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
@@ -63,8 +63,13 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configurator</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-sharing</artifactId>
+        </dependency>
 
-		<!-- JASYPT -->
+        <!-- JASYPT -->
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
@@ -97,14 +102,14 @@
             <artifactId>dom4j</artifactId>
         </dependency>
 
-		<!-- AOP -->
+        <!-- AOP -->
         <dependency>
             <groupId>aopalliance</groupId>
             <artifactId>aopalliance</artifactId>
             <version>1.0</version>
         </dependency>
 
-		<!-- SPRING -->
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -150,13 +155,13 @@
             <artifactId>spring-beans</artifactId>
         </dependency>
 
-                <!-- HIBERNATE JAVAX PERSISTENCE -->
+        <!-- HIBERNATE JAVAX PERSISTENCE -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>
         </dependency>
 
-		<!-- HIBERNATE-GENERIC-DAO -->
+        <!-- HIBERNATE-GENERIC-DAO -->
         <dependency>
             <groupId>com.googlecode.genericdao</groupId>
             <artifactId>dao</artifactId>
@@ -178,7 +183,7 @@
             <artifactId>search-jpa-hibernate</artifactId>
         </dependency>
 
-		<!-- POSTGRES - POSTGIS -->
+        <!-- POSTGRES - POSTGIS -->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
@@ -192,7 +197,7 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
-        	<!-- GeoAPI and its dependencies 
+        <!-- GeoAPI and its dependencies 
         <dependency>
             <groupId>org.opengis</groupId>
             <artifactId>geoapi</artifactId>
@@ -210,7 +215,7 @@
             <artifactId>jsr-275</artifactId>
         </dependency>-->
 
-		<!-- GEOTOOLS -->
+        <!-- GEOTOOLS -->
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-main</artifactId>
@@ -257,7 +262,7 @@
             <scope>test</scope>
         </dependency>
 
-		<!-- HIBERNATE -->
+        <!-- HIBERNATE -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -268,13 +273,13 @@
             <artifactId>hibernate-core</artifactId>
         </dependency>        
 
-		<!-- HIBERNATE-SPATIAL -->
+        <!-- HIBERNATE-SPATIAL -->
         <dependency>
             <groupId>org.hibernatespatial</groupId>
             <artifactId>hibernate-spatial-postgis</artifactId>
         </dependency>
         
-		<!-- CGLIB -->
+        <!-- CGLIB -->
         <dependency>
             <groupId>asm</groupId>
             <artifactId>asm</artifactId>
@@ -298,7 +303,7 @@
             <artifactId>spring-test</artifactId>
         </dependency>
 
-		<!-- JUnit -->
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -382,7 +387,7 @@
                 </configuration>
             </plugin>
 
-			<!-- Attach sources ============================================ -->
+            <!-- Attach sources ============================================ -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>

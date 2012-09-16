@@ -55,7 +55,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  * @todo Analyze deletion of accountNaturalID field or account field.
- * 
+ *
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
@@ -78,6 +78,9 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     @Column(nullable = false)
     private String authority;
     //
+    @Column(name = "user_level", nullable = false)
+    private int userLevel;
+    //
     @Column(name = "account_natural_id", nullable = false)
     @Index(name = "AUTHORITY_ACCOUNT_NATURAL_ID_INDEX")
     private String accountNaturalID;
@@ -89,8 +92,9 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     public GPAuthority() {
     }
 
-    public GPAuthority(GPAccount account, String authority) {
+    public GPAuthority(GPAccount account, String authority, int userLevel) {
         this.account = account;
+        this.userLevel = userLevel;
         this.accountNaturalID = account.getNaturalID();
         this.authority = authority;
     }
@@ -107,6 +111,14 @@ public class GPAuthority implements GrantedAuthority, Serializable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(int userLevel) {
+        this.userLevel = userLevel;
     }
 
     /**

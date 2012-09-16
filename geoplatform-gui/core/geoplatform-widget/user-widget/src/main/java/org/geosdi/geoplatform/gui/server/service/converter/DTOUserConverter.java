@@ -109,18 +109,18 @@ public class DTOUserConverter {
         user.setEmail(gpUser.getEmailAddress());
         user.setCreationDate(gpUser.getCreationDate());
         user.setTemporary(gpUser.isAccountTemporary());
-        user.setAuthority(this.convertToGPAuthorities(gpUser.getGPAuthorities()));
+        this.extractGPAuthoritiesInToUser(user, gpUser.getGPAuthorities());
         user.setOrganization(gpUser.getOrganization().getName());
         return user;
     }
 
     // NOTE: Now a user must have at most one role
-    private String convertToGPAuthorities(List<GPAuthority> authorities) {
+    private void extractGPAuthoritiesInToUser(GPUserManageDetail user, List<GPAuthority> authorities) {
         Iterator<GPAuthority> iterator = authorities.iterator();
-        String authority = null;
         if (iterator.hasNext()) {
-            authority = iterator.next().getAuthority();
+            GPAuthority gPAuthority = iterator.next();
+            user.setAuthority(gPAuthority.getAuthority());
+            user.setUserLevel(gPAuthority.getUserLevel());
         }
-        return authority;
     }
 }

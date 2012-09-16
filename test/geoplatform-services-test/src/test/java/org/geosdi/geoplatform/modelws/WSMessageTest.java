@@ -42,7 +42,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPMessage;
-import org.geosdi.geoplatform.core.model.GPMessageCommandType;
+import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.MessageDTO;

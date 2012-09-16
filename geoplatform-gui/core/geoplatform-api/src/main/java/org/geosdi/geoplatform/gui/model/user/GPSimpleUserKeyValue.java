@@ -41,5 +41,5 @@ package org.geosdi.geoplatform.gui.model.user;
  */
 public enum GPSimpleUserKeyValue {
 
-    ID, USERNAME, NAME, ORGANIZATION, EMAIL;
+    ID, USERNAME, NAME, ORGANIZATION, EMAIL, AUTORITHY, USER_LEVEL;
 }

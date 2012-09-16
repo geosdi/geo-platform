@@ -249,7 +249,7 @@ public class GuiComponentIDs {
          */
         Map<String, Boolean> mapViewer = Maps.newHashMap();
         // Menubar
-        mapViewer.put(MANAGE_PROJECTS, Boolean.FALSE);
+        mapViewer.put(MANAGE_PROJECTS, Boolean.TRUE);
         mapViewer.put(ABOUT_GEOPLATFORM, Boolean.TRUE);
         mapViewer.put(SEARCH_AOE, Boolean.TRUE);
         mapViewer.put(CLEAR_AOE, Boolean.TRUE);

@@ -170,7 +170,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         configs.add(tempColumn);
 
         ColumnConfig roleColumn = new ColumnConfig();
-        roleColumn.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
+        roleColumn.setId(GPSimpleUserKeyValue.AUTORITHY.toString());
         roleColumn.setHeader("Role");
         roleColumn.setWidth(80);
         configs.add(roleColumn);

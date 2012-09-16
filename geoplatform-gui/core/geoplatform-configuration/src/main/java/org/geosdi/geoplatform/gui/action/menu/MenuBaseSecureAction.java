@@ -33,16 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.model;
+package org.geosdi.geoplatform.gui.action.menu;
+
+import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeIconHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
+import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
- * Command associated to a {@link GPMessage}.
+ * @author giuseppe
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-//@Embeddable
-//@XmlAccessorType(XmlAccessType.FIELD)
-public enum GPMessageCommandType {
+public abstract class MenuBaseSecureAction extends MenuSecureAction
+        implements HasMenuActionChangeIconHandler {
 
-    OPEN_PROJECT, NONE;
+    private AbstractImagePrototype image;
+
+    public MenuBaseSecureAction(String title, AbstractImagePrototype image, GPRole role) {
+        super(title, role);
+        this.image = image;
+    }
+
+    /**
+     * @return the image
+     */
+    public AbstractImagePrototype getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(AbstractImagePrototype image) {
+        this.image = image;
+        this.handlerManager.fireEvent(new MenuActionChangeIconEvent(image));
+    }
+
+    @Override
+    public HandlerRegistration addMenuActionChangeIconHandler(MenuActionChangeIconHandler actionHandler) {
+        return this.handlerManager.addHandler(MenuActionChangeIconEvent.TYPE, actionHandler);
+    }
 }

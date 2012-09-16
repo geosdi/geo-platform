@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.event.ChangeBaseLayerMapEvent;
@@ -111,9 +111,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         String baseLayerKey = accountDetail.getBaseLayer();
         GPBaseLayer baseLayer;
         if (baseLayerKey != null) {
-            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.valueOf(baseLayerKey));
         } else {
-            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.GOOGLE_SATELLITE);
             accountDetail.setBaseLayer(baseLayer.getBaseLayerEnumName().toString());
 //            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
         }
@@ -152,9 +152,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.addMeasureAreaControl();
         IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         String baseLayerKey = accountDetail.getBaseLayer();
-        GPBaseLayer baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.valueOf(baseLayerKey));
+        GPBaseLayer baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.valueOf(baseLayerKey));
         if (baseLayer == null) {
-            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerEnum.GOOGLE_SATELLITE);
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.GOOGLE_SATELLITE);
         }
         this.map.addLayer(baseLayer.getGwtOlBaseLayer());
         baseLayer.getGwtOlBaseLayer().setZIndex(-1);

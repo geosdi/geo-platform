@@ -48,7 +48,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
- * 
+ *
  */
 @Transactional
 public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
@@ -91,6 +91,7 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
         fields.add(new Field("id"));
         fields.add(new Field("accountNaturalID"));
         fields.add(new Field("authority"));
+        fields.add(new Field("userLevel"));
         search.setFields(fields);
         search.setResultMode(Search.RESULT_LIST);
 
@@ -105,6 +106,7 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
             authority.setId(new Long(s[0].trim()));
             authority.setAccountNaturalID(s[1].trim());
             authority.setAuthority(s[2].trim());
+            authority.setUserLevel(Integer.parseInt(s[3].trim()));
             authorities.add(authority);
         }
 

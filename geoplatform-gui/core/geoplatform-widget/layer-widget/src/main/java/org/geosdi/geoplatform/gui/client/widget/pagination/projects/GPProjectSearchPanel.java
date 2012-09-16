@@ -37,17 +37,16 @@ package org.geosdi.geoplatform.gui.client.widget.pagination.projects;
 
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.*;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.projects.DeleteProjectAction;
 import org.geosdi.geoplatform.gui.client.action.projects.GPProjectAction;
+import org.geosdi.geoplatform.gui.client.action.projects.ShareProjectAction;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -56,6 +55,7 @@ import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListV
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  *
@@ -63,48 +63,42 @@ import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject> {
-
+    
     private GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
     private GPDefaultProjectSelector selector;
-    private Button deleteButton;
-    private Button editButton;
-    private Button shareButton;
+    //Protect this
+    private GPSecureButton deleteButton;
+    private GPSecureButton editButton;
+    private GPSecureButton shareButton;
+    //
     private GPProjectManagementWidget projectManagementWidget;
-
+    
     public GPProjectSearchPanel(GPProjectManagementWidget projectManagementWidget) {
         super(true, 10);
         this.projectManagementWidget = projectManagementWidget;
         this.selector = new GPDefaultProjectSelector();
     }
-
+    
     @Override
     public void finalizeInitOperations() {
         super.finalizeInitOperations();
-        selectButton.setText("Load on Tree");
+        super.selectButton.setText("Load on Tree");
         super.search.setFieldLabel("Find Project");
-        GPProjectAction action = new GPProjectAction(this);
-        super.addButton(1, new Button("Add", LayerResources.ICONS.projectAdd(),
-                action));
-        this.editButton = new Button("Edit", BasicWidgetResources.ICONS.edit(),
+        GPProjectAction action = new GPProjectAction(this, GPRole.ADMIN);
+        GPSecureButton addProjectButton = new GPSecureButton("Add", LayerResources.ICONS.projectAdd(),
                 action);
-        this.editButton.disable();
+        super.addButton(1, addProjectButton);
+        this.editButton = new GPSecureButton("Edit", BasicWidgetResources.ICONS.edit(),
+                action);
         super.addButton(2, this.editButton);
-        this.deleteButton = new Button("Delete", LayerResources.ICONS.projectDelete(),
-                new DeleteProjectAction(this));
-        this.deleteButton.disable();
+        this.deleteButton = new GPSecureButton("Delete", LayerResources.ICONS.projectDelete(),
+                new DeleteProjectAction(this, GPRole.ADMIN));
         super.addButton(3, this.deleteButton);
-        this.shareButton = new Button("Share", LayerResources.ICONS.arrowRefresh());
-        this.shareButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                GPClientProject clientProject = getSelectionModel().getSelectedItem();
-                projectManagementWidget.showSharingPanel(clientProject);
-            }
-        });
-        this.shareButton.disable();
+        ShareProjectAction shareProjectAction = new ShareProjectAction(this, GPRole.ADMIN);
+        this.shareButton = new GPSecureButton("Share", LayerResources.ICONS.arrowRefresh(), shareProjectAction);
         super.addButton(4, this.shareButton);
     }
-
+    
     @Override
     public void setListViewProperties() {
         StringBuilder sb = new StringBuilder();
@@ -119,20 +113,20 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         getListView().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         getListView().setSize(630, 340);
     }
-
+    
     @Override
     public void setPanelProperties() {
         super.setHeaderVisible(Boolean.FALSE);
         super.setSize(GPProjectManagementWidget.COMPONENT_WIDTH,
                 GPProjectManagementWidget.COMPONENT_HEIGHT);
     }
-
+    
     public void loadData() {
         super.init();
         searchText = "";
         loader.load(0, getPageSize());
     }
-
+    
     @Override
     public void createStore() {
         super.toolBar = new PagingToolBar(super.getPageSize());
@@ -140,7 +134,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPClientProject>> callback) {
-
+                
                 LayerRemote.Util.getInstance().searchProjects(
                         (PagingLoadConfig) loadConfig,
                         searchText, LayerResources.ICONS.gpProject().getHTML(),
@@ -153,7 +147,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         super.store.setMonitorChanges(true);
         super.toolBar.bind(loader);
     }
-
+    
     @Override
     public void executeSelect() {
         if (getListView().getSelectionModel().getSelectedItem().isDefaultProject()) {
@@ -165,7 +159,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
             selector.selectDefaultProject();
         }
     }
-
+    
     @Override
     public void changeSelection(SelectionChangedEvent<GPClientProject> se) {
         if (se.getSelectedItem() != null) {
@@ -195,14 +189,14 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     public boolean isDefaultSelectedProject() {
         return this.getSelectionModel().getSelectedItem().isDefaultProject();
     }
-
+    
     public void deleteProject() {
         LayerRemote.Util.getInstance().deleteProject(getSelectionModel().getSelectedItem().getId(),
                 new AsyncCallback<Object>() {
                     @Override
                     public void onFailure(Throwable caught) {
                     }
-
+                    
                     @Override
                     public void onSuccess(Object result) {
                         GeoPlatformMessage.infoMessage("Delete Project",
@@ -212,13 +206,17 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                     }
                 });
     }
+    
+    public void shareProject(GPClientProject clientProject) {
+        projectManagementWidget.showSharingPanel(clientProject);
+    }
 
     /**
      * Internal Class Delegate to Select Default Project and Rebuild GPTreePanel
      *
      */
     private class GPDefaultProjectSelector {
-
+        
         private void selectDefaultProject() {
             searchStatus.setBusy("Setting Default Project");
             LayerRemote.Util.getInstance().setDefaultProject(getListView().getSelectionModel().
@@ -232,7 +230,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                             + " Project Error",
                             caught.getMessage());
                 }
-
+                
                 @Override
                 public void onSuccess(Object result) {
                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH,

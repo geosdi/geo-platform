@@ -123,6 +123,7 @@ public class TreeContextMenuFactory {
             shareProject.setText(shareProjectMenuAction.getTitle());
             shareProject.setIcon(shareProjectMenuAction.getImage());
             shareProject.addSelectionListener(shareProjectMenuAction);
+            shareProject.setEnabled(shareProjectMenuAction.isEnabled());
             rootContextMenu.add(shareProject);
         }
         return rootContextMenu;

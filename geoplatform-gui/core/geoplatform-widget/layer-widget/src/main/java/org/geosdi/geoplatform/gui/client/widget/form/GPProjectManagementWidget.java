@@ -72,19 +72,22 @@ public class GPProjectManagementWidget extends GeoPlatformWindow {
     }
 
     public void showSharingPanel(GPClientProject clientProject) {
-        super.init();
-        super.removeAll();
+        this.preparePanel();
         super.add(this.shareProjectPanel);
         this.shareProjectPanel.loadData(clientProject);
         this.show();
     }
 
     public void showSearchProjectPanel() {
-        super.init();
-        super.removeAll();
+        this.preparePanel();
         super.add(this.projectSearchPanel);
         this.projectSearchPanel.loadData();
         this.show();
+    }
+    
+    private void preparePanel(){
+        super.init();
+        super.removeAll();
     }
 
     @Override

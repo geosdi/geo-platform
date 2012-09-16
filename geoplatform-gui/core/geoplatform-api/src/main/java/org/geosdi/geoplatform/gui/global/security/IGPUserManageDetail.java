@@ -47,14 +47,6 @@ public interface IGPUserManageDetail extends IGPUserSimpleDetail {
 
     void setPassword(String password);
 
-//    List<String> getAuthorities();
-//
-//    void setAuthorities(List<String> roles);
-//    
-    String getAuthority();
-
-    void setAuthority(String role);
-
     boolean isEnabled();
 
     void setEnabled(boolean enabled);

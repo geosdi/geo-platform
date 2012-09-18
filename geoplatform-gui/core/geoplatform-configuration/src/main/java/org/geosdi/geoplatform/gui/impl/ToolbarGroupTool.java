@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.impl;
 
 import java.util.List;
-
 import org.geosdi.geoplatform.gui.configuration.toolbar.IToolbarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 

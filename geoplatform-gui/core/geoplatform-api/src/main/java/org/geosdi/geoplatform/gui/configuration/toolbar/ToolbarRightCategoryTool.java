@@ -33,50 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.button;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
-import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
-import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPSecureButton extends Button {
+public class ToolbarRightCategoryTool extends ToolbarCategoryTool {
 
-    private GeoPlatformSecureAction<ButtonEvent> secureAction;
-
-    public GPSecureButton(String text, AbstractImagePrototype icon, GeoPlatformSecureAction<ButtonEvent> action) {
-        super(text, icon, action);
-        this.initializeSecureAction(action);
-    }
-
-    public GPSecureButton(String text, GeoPlatformSecureAction<ButtonEvent> action) {
-        super(text, action);
-        this.initializeSecureAction(action);
-    }
-
-    private void initializeSecureAction(GeoPlatformSecureAction<ButtonEvent> action) {
-        action.addActionEnableHandler(new ActionEnableHandler() {
-            @Override
-            public void onActionEnabled(ActionEnableEvent event) {
-                if (event.isEnabled()) {
-                    GPSecureButton.super.enable();
-                } else {
-                    GPSecureButton.super.disable();
-                }
-            }
-        });
-        this.secureAction = action;
-        this.enable();
-    }
+    private static final long serialVersionUID = 8095739330935579021L;
 
     @Override
-    public void enable() {
-        this.secureAction.setEnabled(Boolean.TRUE);
+    public void buildTool(IGeoPlatformToolbar toolbar) {
+        toolbar.addFillToolItem();
+        super.buildTool(toolbar);
     }
 }

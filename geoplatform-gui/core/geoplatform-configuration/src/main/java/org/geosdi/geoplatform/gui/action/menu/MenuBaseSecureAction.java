@@ -35,16 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.action.menu;
 
-import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeIconHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
+import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeIconHandler;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
- * @author giuseppe
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
 public abstract class MenuBaseSecureAction extends MenuSecureAction
         implements HasMenuActionChangeIconHandler {

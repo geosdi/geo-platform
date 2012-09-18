@@ -146,6 +146,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void initMapWidget() {
         this.mapWidget = new MapWidget("100%", "100%", mapOptions);
         this.map = mapWidget.getMap();
+        this.mapWidget.getElement().getFirstChildElement().getStyle().setZIndex(0);
         this.map.addControl(new ScaleLine());
         this.map.addControl(new MousePosition());
         this.addMeasureControl();

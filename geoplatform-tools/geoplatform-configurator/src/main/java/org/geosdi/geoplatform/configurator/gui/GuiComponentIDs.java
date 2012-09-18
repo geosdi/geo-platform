@@ -95,6 +95,7 @@ public class GuiComponentIDs {
     public static final String GOOGLE_REVERSE_GEOCODING = "googleReverseGeocoding";
     public static final String YAHOO_REVERSE_GEOCODING = "yahooReverseGeocoding";
     public static final String REVERSE_GEOCODING_WPS = "reverseGeocodingWPS";
+    public static final String NOTIFICATION_MENU = "notificationMenu";
     // via MenuUtility
     public static final String GOOGLE_ICON = "GOOGLE_ICON";
     public static final String USER_MENU = "USER_MENU";
@@ -172,6 +173,7 @@ public class GuiComponentIDs {
         all.add(GOOGLE_REVERSE_GEOCODING);
         all.add(YAHOO_REVERSE_GEOCODING);
         all.add(REVERSE_GEOCODING_WPS);
+        all.add(NOTIFICATION_MENU);
         all.add(GOOGLE_ICON);
         all.add(USER_MENU);
         all.add(GOOGLE_SIGN_ON_BUTTON);
@@ -227,6 +229,7 @@ public class GuiComponentIDs {
         mapUser.put(GOOGLE_REVERSE_GEOCODING, Boolean.TRUE);
         mapUser.put(YAHOO_REVERSE_GEOCODING, Boolean.TRUE);
         mapUser.put(REVERSE_GEOCODING_WPS, Boolean.TRUE);
+        mapUser.put(NOTIFICATION_MENU, Boolean.TRUE);
         mapUser.put(GOOGLE_ICON, Boolean.TRUE);
         mapUser.put(USER_MENU, Boolean.TRUE);
         mapUser.put(GOOGLE_SIGN_ON_BUTTON, Boolean.TRUE);
@@ -281,6 +284,7 @@ public class GuiComponentIDs {
         mapViewer.put(GOOGLE_REVERSE_GEOCODING, Boolean.TRUE);
         mapViewer.put(YAHOO_REVERSE_GEOCODING, Boolean.TRUE);
         mapViewer.put(REVERSE_GEOCODING_WPS, Boolean.TRUE);
+        mapViewer.put(NOTIFICATION_MENU, Boolean.TRUE);
         mapViewer.put(GOOGLE_ICON, Boolean.TRUE);
         mapViewer.put(USER_MENU, Boolean.TRUE);
         mapViewer.put(GOOGLE_SIGN_ON_BUTTON, Boolean.TRUE);

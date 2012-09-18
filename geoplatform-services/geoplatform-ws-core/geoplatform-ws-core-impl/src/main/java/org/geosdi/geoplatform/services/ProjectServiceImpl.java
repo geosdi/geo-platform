@@ -238,7 +238,7 @@ class ProjectServiceImpl {
         }
 
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                                                    subFoldersMap, mapProjectFolders);
+                subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);
@@ -557,7 +557,7 @@ class ProjectServiceImpl {
 
             ProjectDTO projectDTO;
             if (project.isShared()) {
-                GPAccount owner = accountProjectDao.findOwnerByProjectID(accountID).getAccount();
+                GPAccount owner = accountProjectDao.findOwnerByProjectID(project.getId()).getAccount();
                 projectDTO = new ProjectDTO(project, accountProject.isDefaultProject(), owner);
             } else {
                 projectDTO = new ProjectDTO(project, accountProject.isDefaultProject());
@@ -677,7 +677,7 @@ class ProjectServiceImpl {
                     newAccountProject.setAccountAndProject(newAccount, project);
                     newAccountProject.setPermissionMask(BasePermission.READ.getMask());
                     logger.debug("\n*** Create a new relation of sharing for Account \"{}\"",
-                                 newAccount.getNaturalID());
+                            newAccount.getNaturalID());
                     accountProjectDao.persist(newAccountProject);
                 }
             }
@@ -685,7 +685,7 @@ class ProjectServiceImpl {
             // Delete the remaining relations of sharing
             for (Map.Entry<Long, GPAccountProject> e : sharingMap.entrySet()) {
                 logger.debug("\n*** Delete the relation of sharing for Account \"{}\"",
-                             e.getValue().getAccount().getNaturalID());
+                        e.getValue().getAccount().getNaturalID());
                 accountProjectDao.remove(e.getValue());
             }
 
@@ -796,7 +796,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                                                              folderDTO);
+                        folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -818,10 +818,10 @@ class ProjectServiceImpl {
                 GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                                                                  (RasterLayerDTO) element);
+                            (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                                                                  (VectorLayerDTO) element);
+                            (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);

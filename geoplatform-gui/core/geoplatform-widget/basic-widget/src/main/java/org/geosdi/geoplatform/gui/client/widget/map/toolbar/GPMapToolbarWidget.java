@@ -69,7 +69,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
@@ -151,12 +151,9 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         this.toolBar.add(button);
     }
 
-    // TODO Generalize Introducing ToolbarRightGroupTool concept
     @Override
     public void addIconInToolbar(IconInToolbar tool) {
         GPIconWidgetComponent widgetIcon = new GPIconWidgetComponent(this.toolBar);
-
-        this.toolBar.add(new FillToolItem());
         this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
                 tool.getText()));
     }

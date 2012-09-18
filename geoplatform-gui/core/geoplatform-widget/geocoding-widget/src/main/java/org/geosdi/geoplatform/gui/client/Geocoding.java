@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
@@ -52,13 +54,10 @@ import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOp
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.users.options.factory.GeoPlatformMemberFactory;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class Geocoding implements EntryPoint {
 
@@ -83,31 +82,28 @@ public class Geocoding implements EntryPoint {
 
     private void addReverseGeocodingAction() {
         MenuActionRegistar.put(GuiComponentIDs.GEOCODING,
-                               new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new GeocodingMenuAction();
-            }
-        });
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return new GeocodingMenuAction();
+                    }
+                });
 
         ToolbarActionRegistar.put(GuiComponentIDs.GOOGLE_REVERSE_GEOCODING,
-                                  new ToolbarActionCreator() {
-
-            @Override
-            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                return new GoogleReverseGeocodingAction(mapWidget);
-            }
-        });
+                new ToolbarActionCreator() {
+                    @Override
+                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                        return new GoogleReverseGeocodingAction(mapWidget);
+                    }
+                });
 
         ToolbarActionRegistar.put(GuiComponentIDs.YAHOO_REVERSE_GEOCODING,
-                                  new ToolbarActionCreator() {
-
-            @Override
-            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                return new YahooReverseGeocodingAction(mapWidget);
-            }
-        });
+                new ToolbarActionCreator() {
+                    @Override
+                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                        return new YahooReverseGeocodingAction(mapWidget);
+                    }
+                });
     }
 
     /**

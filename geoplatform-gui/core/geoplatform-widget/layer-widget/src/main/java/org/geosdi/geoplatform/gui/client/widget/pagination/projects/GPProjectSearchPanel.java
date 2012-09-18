@@ -63,7 +63,7 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject> {
-    
+
     private GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
     private GPDefaultProjectSelector selector;
     //Protect this
@@ -72,13 +72,13 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     private GPSecureButton shareButton;
     //
     private GPProjectManagementWidget projectManagementWidget;
-    
+
     public GPProjectSearchPanel(GPProjectManagementWidget projectManagementWidget) {
         super(true, 10);
         this.projectManagementWidget = projectManagementWidget;
         this.selector = new GPDefaultProjectSelector();
     }
-    
+
     @Override
     public void finalizeInitOperations() {
         super.finalizeInitOperations();
@@ -98,7 +98,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         this.shareButton = new GPSecureButton("Share", LayerResources.ICONS.arrowRefresh(), shareProjectAction);
         super.addButton(4, this.shareButton);
     }
-    
+
     @Override
     public void setListViewProperties() {
         StringBuilder sb = new StringBuilder();
@@ -113,20 +113,20 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         getListView().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         getListView().setSize(630, 340);
     }
-    
+
     @Override
     public void setPanelProperties() {
         super.setHeaderVisible(Boolean.FALSE);
         super.setSize(GPProjectManagementWidget.COMPONENT_WIDTH,
                 GPProjectManagementWidget.COMPONENT_HEIGHT);
     }
-    
+
     public void loadData() {
         super.init();
         searchText = "";
         loader.load(0, getPageSize());
     }
-    
+
     @Override
     public void createStore() {
         super.toolBar = new PagingToolBar(super.getPageSize());
@@ -134,7 +134,6 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPClientProject>> callback) {
-                
                 LayerRemote.Util.getInstance().searchProjects(
                         (PagingLoadConfig) loadConfig,
                         searchText, LayerResources.ICONS.gpProject().getHTML(),
@@ -147,7 +146,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         super.store.setMonitorChanges(true);
         super.toolBar.bind(loader);
     }
-    
+
     @Override
     public void executeSelect() {
         if (getListView().getSelectionModel().getSelectedItem().isDefaultProject()) {
@@ -159,7 +158,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
             selector.selectDefaultProject();
         }
     }
-    
+
     @Override
     public void changeSelection(SelectionChangedEvent<GPClientProject> se) {
         if (se.getSelectedItem() != null) {
@@ -189,14 +188,14 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     public boolean isDefaultSelectedProject() {
         return this.getSelectionModel().getSelectedItem().isDefaultProject();
     }
-    
+
     public void deleteProject() {
         LayerRemote.Util.getInstance().deleteProject(getSelectionModel().getSelectedItem().getId(),
                 new AsyncCallback<Object>() {
                     @Override
                     public void onFailure(Throwable caught) {
                     }
-                    
+
                     @Override
                     public void onSuccess(Object result) {
                         GeoPlatformMessage.infoMessage("Delete Project",
@@ -206,7 +205,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                     }
                 });
     }
-    
+
     public void shareProject(GPClientProject clientProject) {
         projectManagementWidget.showSharingPanel(clientProject);
     }
@@ -216,7 +215,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
      *
      */
     private class GPDefaultProjectSelector {
-        
+
         private void selectDefaultProject() {
             searchStatus.setBusy("Setting Default Project");
             LayerRemote.Util.getInstance().setDefaultProject(getListView().getSelectionModel().
@@ -230,7 +229,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                             + " Project Error",
                             caught.getMessage());
                 }
-                
+
                 @Override
                 public void onSuccess(Object result) {
                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH,

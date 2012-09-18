@@ -88,14 +88,18 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         GPSecureButton addProjectButton = new GPSecureButton("Add", LayerResources.ICONS.projectAdd(),
                 action);
         super.addButton(1, addProjectButton);
+        addProjectButton.disable();
         this.editButton = new GPSecureButton("Edit", BasicWidgetResources.ICONS.edit(),
                 action);
+        this.editButton.disable();
         super.addButton(2, this.editButton);
         this.deleteButton = new GPSecureButton("Delete", LayerResources.ICONS.projectDelete(),
                 new DeleteProjectAction(this, GPRole.ADMIN));
+        this.deleteButton.disable();
         super.addButton(3, this.deleteButton);
         ShareProjectAction shareProjectAction = new ShareProjectAction(this, GPRole.ADMIN);
         this.shareButton = new GPSecureButton("Share", LayerResources.ICONS.arrowRefresh(), shareProjectAction);
+        this.shareButton.disable();
         super.addButton(4, this.shareButton);
     }
 

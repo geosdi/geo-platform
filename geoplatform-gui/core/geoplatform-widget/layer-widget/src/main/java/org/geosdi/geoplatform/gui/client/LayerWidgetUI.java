@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.LayerMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.mvc.LayerController;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
@@ -95,7 +96,8 @@ public class LayerWidgetUI implements EntryPoint {
     }
 
     private void addLayerWidgetAction() {
-        MenuActionRegistar.put(GuiComponentIDs.LAYER_MENU,
+        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+        menuRegistar.put(GuiComponentIDs.LAYER_MENU,
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {
@@ -103,7 +105,7 @@ public class LayerWidgetUI implements EntryPoint {
                     }
                 });
 
-        MenuActionRegistar.put(GuiComponentIDs.MANAGE_PROJECTS,
+        menuRegistar.put(GuiComponentIDs.MANAGE_PROJECTS,
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {

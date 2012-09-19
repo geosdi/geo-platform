@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.ManageRolesMenuAction;
 import org.geosdi.geoplatform.gui.client.action.ManageUsersMenuAction;
 import org.geosdi.geoplatform.gui.client.action.UserOptionsMenuAction;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberDisk;
 import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberUser;
 import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberView;
@@ -57,6 +58,8 @@ import org.geosdi.geoplatform.gui.impl.users.options.factory.GeoPlatformMemberFa
  */
 public class UserWidgetUI implements EntryPoint {
 
+    private MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+
     /**
      * (non-Javadoc)
      *
@@ -70,34 +73,31 @@ public class UserWidgetUI implements EntryPoint {
     }
 
     private void addUserWidgetAction() {
-        MenuActionRegistar.put(GuiComponentIDs.MANAGE_USERS,
-                               new MenuActionCreator() {
+        menuRegistar.put(GuiComponentIDs.MANAGE_USERS,
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return new ManageUsersMenuAction();
+                    }
+                });
 
-            @Override
-            public MenuAction createAction() {
-                return new ManageUsersMenuAction();
-            }
-        });
-
-        MenuActionRegistar.put(GuiComponentIDs.USER_OPTIONS_BUTTON,
-                               new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new UserOptionsMenuAction();
-            }
-        });
+        menuRegistar.put(GuiComponentIDs.USER_OPTIONS_BUTTON,
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return new UserOptionsMenuAction();
+                    }
+                });
     }
 
     private void addRoleWidgetAction() {
-        MenuActionRegistar.put(GuiComponentIDs.MANAGE_ROLES,
-                               new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new ManageRolesMenuAction();
-            }
-        });
+        menuRegistar.put(GuiComponentIDs.MANAGE_ROLES,
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return new ManageRolesMenuAction();
+                    }
+                });
     }
 
     /**

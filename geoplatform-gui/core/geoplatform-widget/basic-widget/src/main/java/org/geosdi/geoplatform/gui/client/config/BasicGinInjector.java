@@ -33,48 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.config;
 
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.inject.client.GinModules;
+import com.google.gwt.inject.client.Ginjector;
+import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public final class ToolbarActionRegistar
-        extends GeoPlatformActionRegistar<ToolbarActionCreator> {
+@GinModules(value = {BasicGinConfigurator.class})
+public interface BasicGinInjector extends Ginjector {
 
-    /**
-     * Insert a Toolbar Action into Registar.
-     *
-     * @param key
-     * @param toolActionCreator
-     */
-    public void put(String key, ToolbarActionCreator toolActionCreator) {
-        if (key != null && toolActionCreator != null) {
-            super.getRegistry().put(key, toolActionCreator);
+    public static class MainInjector {
+
+        private static BasicGinInjector instance;
+
+        private MainInjector() {
+        }
+
+        public static BasicGinInjector getInstance() {
+            if (instance == null) {
+                instance = GWT.create(BasicGinInjector.class);
+            }
+
+            return instance;
         }
     }
 
-    /**
-     * Return a Toolbar Action into Registar, otherwise null. Set the action's
-     * ID to key.
-     *
-     * @param key key with the action is registered
-     * @param mapWidget map which will contains the toolAction
-     *
-     * @return null or the ToolbarAction registered
-     */
-    public ToolbarAction get(String key, GeoPlatformMap mapWidget) {
-        ToolbarActionCreator toolActionCreator = super.getRegistry().get(key);
-        if (toolActionCreator == null) {
-            return null;
-        }
-        ToolbarAction toolbarAction = toolActionCreator.createActionTool(mapWidget);
-        toolbarAction.setId(key);
-        return toolbarAction;
-    }
+    public ToolbarActionRegistar getToolbarActionRegistar();
+    
+    public MenuActionRegistar getMenuActionRegistar();
 }

@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.GeocodingMenuAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.GoogleReverseGeocodingAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.YahooReverseGeocodingAction;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.mvc.GeocodingController;
 import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberGeocoding;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
@@ -81,7 +82,8 @@ public class Geocoding implements EntryPoint {
     }
 
     private void addReverseGeocodingAction() {
-        MenuActionRegistar.put(GuiComponentIDs.GEOCODING,
+        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+        menuRegistar.put(GuiComponentIDs.GEOCODING,
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {
@@ -89,7 +91,8 @@ public class Geocoding implements EntryPoint {
                     }
                 });
 
-        ToolbarActionRegistar.put(GuiComponentIDs.GOOGLE_REVERSE_GEOCODING,
+        ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
+        toolbarRegistar.put(GuiComponentIDs.GOOGLE_REVERSE_GEOCODING,
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -97,7 +100,7 @@ public class Geocoding implements EntryPoint {
                     }
                 });
 
-        ToolbarActionRegistar.put(GuiComponentIDs.YAHOO_REVERSE_GEOCODING,
+        toolbarRegistar.put(GuiComponentIDs.YAHOO_REVERSE_GEOCODING,
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {

@@ -36,47 +36,32 @@
 package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.DecoratedPopupPanel;
-import com.google.gwt.user.client.ui.PopupPanel;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.BinderDeckLayout;
-import org.geosdi.geoplatform.gui.client.event.EventShowNotification;
-import org.geosdi.geoplatform.gui.client.style.CenterStyle;
+import org.geosdi.geoplatform.gui.client.NotificationPopupPanel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class NotificationCenterMenuAction extends ToolbarMapAction {
+public class NotificationCenterAction extends ToolbarMapAction {
 
-    private PopupPanel popupPanel = new DecoratedPopupPanel(true);
-    private BinderDeckLayout binderDeckLayout = new BinderDeckLayout();
-    @UiField
-    private CenterStyle style;
+    private NotificationPopupPanel notificationPopupPanel;
 
-    public NotificationCenterMenuAction() {
+    public NotificationCenterAction(NotificationPopupPanel notificationPopupPanel) {
         super(BasicWidgetResources.ICONS.info(), "Notification Center");
+        this.notificationPopupPanel = notificationPopupPanel;
     }
 
     @Override
     public void componentSelected(ButtonEvent e) {
-        EventShowNotification eventHShowPopUp = new EventShowNotification();
-        eventHShowPopUp.setAbsoluteLeft(e.getTarget().getAbsoluteLeft());
-        eventHShowPopUp.setAbsoluteTop(e.getTarget().getAbsoluteTop());
-        eventHShowPopUp.setOffsetHeight(e.getTarget().getOffsetHeight());
-        eventHShowPopUp.setOffsetWidth(e.getTarget().getOffsetWidth());
-        eventHShowPopUp.setBooleanShow(Boolean.TRUE);
 //        RootLayoutPanel.get().add(new BinderDeckLayout());
 //        this.binderDeckLayout.setVisible(Boolean.TRUE);
-        
+
 //        popupPanel.setStyleName(style.notifypopup());
-        
-        popupPanel.setPopupPosition(eventHShowPopUp.getAbsoluteLeft() - (170),
-                eventHShowPopUp.getAbsoluteTop() + (20));
-        popupPanel.add(new BinderDeckLayout().asWidget());
-        popupPanel.setPixelSize(402, 302);
-        popupPanel.show();
+
+        notificationPopupPanel.setPopupPosition(e.getTarget().getAbsoluteLeft() - (170),
+                e.getTarget().getAbsoluteTop() + (20));
+        notificationPopupPanel.show();
     }
 }

@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.widget.map.GPIconWidgetComponent;
 import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtility;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
@@ -231,8 +232,9 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      */
     private Menu createMenu(List<ToolbarActionTool> actionTools) {
         Menu menu = new Menu();
+        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
         for (ToolbarActionTool actionTool : actionTools) {
-            MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(
+            MenuBaseAction action = (MenuBaseAction) menuRegistar.get(
                     actionTool.getId());
 
             MenuItem item = new MenuItem(action.getTitle());
@@ -250,7 +252,8 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      * @return the Action joined
      */
     private ToolbarAction getAction(String id) {
-        ToolbarAction action = ToolbarActionRegistar.get(id, geoPlatformMap);
+        ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
+        ToolbarAction action = toolbarRegistar.get(id, geoPlatformMap);
         if (action == null) {
             throw new NullPointerException("The action with ID " + id + " is non existent");
         }

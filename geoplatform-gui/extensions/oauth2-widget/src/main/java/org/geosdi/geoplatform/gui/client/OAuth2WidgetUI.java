@@ -41,10 +41,11 @@ import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.GoogleSignOnAction;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  *
  */
 public class OAuth2WidgetUI implements EntryPoint {
@@ -60,13 +61,13 @@ public class OAuth2WidgetUI implements EntryPoint {
     }
 
     private void addGoogleLoginAction() {
-        MenuActionRegistar.put(GuiComponentIDs.GOOGLE_SIGN_ON_BUTTON,
-                               new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new GoogleSignOnAction();
-            }
-        });
+        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+        menuRegistar.put(GuiComponentIDs.GOOGLE_SIGN_ON_BUTTON,
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return new GoogleSignOnAction();
+                    }
+                });
     }
 }

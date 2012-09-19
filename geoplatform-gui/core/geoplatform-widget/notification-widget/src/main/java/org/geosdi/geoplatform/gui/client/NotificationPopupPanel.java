@@ -35,12 +35,29 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.style.CenterStyle;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Singleton
-public class NotificationPopupPanel {
+public class NotificationPopupPanel extends DecoratedPopupPanel {
+
+    @UiField
+    private CenterStyle style;
+
+    public NotificationPopupPanel() {
+        this.initialize();
+    }
+
+    private void initialize() {
+        super.setAutoHideEnabled(Boolean.TRUE);
+        super.setAnimationEnabled(Boolean.TRUE);
+        super.add(new BinderDeckLayout().asWidget());
+        super.setPixelSize(402, 302);
+    }
 }

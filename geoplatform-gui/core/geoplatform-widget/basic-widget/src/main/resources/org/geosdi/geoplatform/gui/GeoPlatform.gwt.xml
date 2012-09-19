@@ -10,7 +10,7 @@
     <inherits name="com.google.common.collect.Collect"/>
     
     <!-- ADDING GIN MODULE -->
-    <!--<inherits name="com.google.gwt.inject.Inject"/>-->
+    <inherits name="com.google.gwt.inject.Inject"/>
     
     <inherits name='org.gwtopenmaps.openlayers.OpenLayers' />
 	

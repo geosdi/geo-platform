@@ -82,6 +82,7 @@ import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.model.GuiComponentDetail;
 import org.geosdi.geoplatform.gui.client.model.GuiComponentDetail.GuiComponentDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.model.GuiPermission;
@@ -508,7 +509,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 //        gc.setDescription(action.get....()); // TODO Manage description
 
         // TODO Manage icon
-        GeoPlatformAction action = MenuActionRegistar.get(componentId);
+        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+        GeoPlatformAction action = menuRegistar.get(componentId);
         if (action != null) {
             if (action instanceof MenuBaseAction) {
                 AbstractImagePrototype image = ((MenuBaseAction) action).getImage();

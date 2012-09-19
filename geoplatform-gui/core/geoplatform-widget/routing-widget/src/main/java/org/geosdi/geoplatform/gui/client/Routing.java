@@ -44,10 +44,11 @@ import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class Routing implements EntryPoint {
 
@@ -70,13 +71,13 @@ public class Routing implements EntryPoint {
     }
 
     private void addRoutingMenuAction() {
-        MenuActionRegistar.put(GuiComponentIDs.ROUTING,
-                               new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new RoutingMenuAction();
-            }
-        });
+        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+        menuRegistar.put(GuiComponentIDs.ROUTING,
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return new RoutingMenuAction();
+                    }
+                });
     }
 }

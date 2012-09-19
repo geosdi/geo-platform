@@ -39,16 +39,12 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- * 
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public final class MenuActionRegistar
         extends GeoPlatformActionRegistar<MenuActionCreator> {
-
-    private static MenuActionRegistar INSTANCE = new MenuActionRegistar();
-
-    private MenuActionRegistar() { }
 
     /**
      * Insert a Menu Action into Registar.
@@ -56,22 +52,22 @@ public final class MenuActionRegistar
      * @param key
      * @param menuActionCreator
      */
-    public static void put(String key, MenuActionCreator menuActionCreator) {
+    public void put(String key, MenuActionCreator menuActionCreator) {
         if (key != null && menuActionCreator != null) {
-            INSTANCE.getRegistry().put(key, menuActionCreator);
+            super.getRegistry().put(key, menuActionCreator);
         }
     }
 
     /**
-     * Return a Menu Action into Registar, otherwise null.
-     * Set the action's ID to key.
+     * Return a Menu Action into Registar, otherwise null. Set the action's ID
+     * to key.
      *
      * @param key key with the action is registered
-     * 
+     *
      * @return null or the MenuAction registered
      */
-    public static MenuAction get(String key) {
-        MenuActionCreator menuActionCreator = INSTANCE.getRegistry().get(key);
+    public MenuAction get(String key) {
+        MenuActionCreator menuActionCreator = super.getRegistry().get(key);
         if (menuActionCreator == null) {
             return null;
         }

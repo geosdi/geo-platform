@@ -72,6 +72,23 @@
             <artifactId>geocoding-widget</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <!-- GIN -->
+        <dependency>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
+        
+        <!-- GUAVA -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>          
+        </dependency>
 
         <!-- SPRING -->
         <dependency>

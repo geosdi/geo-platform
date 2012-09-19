@@ -33,61 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.button;
+package org.geosdi.geoplatform.gui.client;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
-import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
-import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+import javax.inject.Singleton;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPSecureButton extends Button {
-
-    private GeoPlatformSecureAction<ButtonEvent> secureAction;
-
-    private GPSecureButton() {
-    }
-
-    private GPSecureButton(String text) {
-        super(text);
-    }
-
-    private GPSecureButton(String text, AbstractImagePrototype icon) {
-        super(text, icon);
-    }
-
-    public GPSecureButton(String text, AbstractImagePrototype icon, GeoPlatformSecureAction<ButtonEvent> action) {
-        super(text, icon, action);
-        this.initializeSecureAction(action);
-    }
-
-    public GPSecureButton(String text, GeoPlatformSecureAction<ButtonEvent> action) {
-        super(text, action);
-        this.initializeSecureAction(action);
-    }
-
-    private void initializeSecureAction(GeoPlatformSecureAction<ButtonEvent> action) {
-        action.addActionEnableHandler(new ActionEnableHandler() {
-            @Override
-            public void onActionEnabled(ActionEnableEvent event) {
-                if (event.isEnabled()) {
-                    GPSecureButton.super.enable();
-                } else {
-                    GPSecureButton.super.disable();
-                }
-            }
-        });
-        this.secureAction = action;
-        this.enable();
-    }
-
-    @Override
-    public void enable() {
-        this.secureAction.setEnabled(Boolean.TRUE);
-    }
+@Singleton
+public class NotificationPopupPanel {
 }

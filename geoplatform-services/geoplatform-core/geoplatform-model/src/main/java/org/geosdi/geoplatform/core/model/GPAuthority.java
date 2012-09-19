@@ -78,6 +78,9 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     @Column(nullable = false)
     private String authority;
     //
+    @Column(name = "user_level", nullable = false)
+    private int userLevel;
+    //
     @Column(name = "account_natural_id", nullable = false)
     @Index(name = "AUTHORITY_ACCOUNT_NATURAL_ID_INDEX")
     private String accountNaturalID;
@@ -89,8 +92,9 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     public GPAuthority() {
     }
 
-    public GPAuthority(GPAccount account, String authority) {
+    public GPAuthority(GPAccount account, String authority, int userLevel) {
         this.account = account;
+        this.userLevel = userLevel;
         this.accountNaturalID = account.getNaturalID();
         this.authority = authority;
     }
@@ -109,19 +113,26 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         this.id = id;
     }
 
-    /**
-     * @return authority
-     */
-    @Override
-    public String getAuthority() {
-        return authority;
+    public int getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(int userLevel) {
+        this.userLevel = userLevel;
     }
 
     /**
-     * @param authority the authority to set
+     * @return the accountNaturalID
      */
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public String getAccountNaturalID() {
+        return accountNaturalID;
+    }
+
+    /**
+     * @param accountNaturalID the accountNaturalID to set
+     */
+    public void setAccountNaturalID(String accountNaturalID) {
+        this.accountNaturalID = accountNaturalID;
     }
 
     /**

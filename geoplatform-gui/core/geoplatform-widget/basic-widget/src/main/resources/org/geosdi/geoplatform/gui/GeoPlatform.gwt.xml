@@ -9,9 +9,14 @@
     <!-- ADDING GOOGLE-GUAVA MODULE -->
     <inherits name="com.google.common.collect.Collect"/>
     
+    <!-- ADDING GIN MODULE -->
+    <!--<inherits name="com.google.gwt.inject.Inject"/>-->
+    
     <inherits name='org.gwtopenmaps.openlayers.OpenLayers' />
 	
     <source path="client" />
+    
+    <source path="shared" />
 	
     <source path="configuration" />
     <source path="configuration/mvc" />

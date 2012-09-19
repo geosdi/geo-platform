@@ -52,6 +52,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
 
     private static final long serialVersionUID = -7265573728577702116L;
     //
+    private long id;
     private String username;
     private String name;
     private String email;
@@ -59,6 +60,8 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     private String authkey;
     private String hostXmppServer;
     private String baseLayer;
+    private String role;
+    private int userLevel;
     private GPClientViewport viewport;
     private Map<String, Boolean> componentPermission;
     private IGPTreeOptions treeOptions;
@@ -84,6 +87,22 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     @Override
     public void setOrganization(String organization) {
         this.organization = organization;
+    }
+
+    /**
+     * @return the authority
+     */
+    @Override
+    public String getAuthority() {
+        return this.role;
+    }
+
+    /**
+     * @param role the authority to set
+     */
+    @Override
+    public void setAuthority(String role) {
+        this.role = role;
     }
 
     @Override
@@ -139,6 +158,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
         return componentPermission.get(componentID);
     }
 
+    @Override
     public void setBaseLayer(String baseLayer) {
         this.baseLayer = baseLayer;
     }
@@ -164,5 +184,25 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
 
     public void setTreeOptions(IGPTreeOptions treeOptions) {
         this.treeOptions = treeOptions;
+    }
+
+    @Override
+    public Long getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public int getUserLevel() {
+        return this.userLevel;
+    }
+
+    @Override
+    public void setUserLevel(int userLevel) {
+        this.userLevel = userLevel;
     }
 }

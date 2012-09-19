@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFactory;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -100,6 +102,11 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
                 return LayerResources.ICONS.shape();
         }
         return null;
+    }
+
+    @Override
+    public Menu getTreeContextMenu() {
+        return TreeContextMenuFactory.getLayerContextMenu();
     }
 
     @Override

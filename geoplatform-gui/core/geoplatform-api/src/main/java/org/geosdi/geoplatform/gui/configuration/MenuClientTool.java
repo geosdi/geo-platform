@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.configuration;
 
-import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool;
 import java.util.Collections;
 import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 
 /**
  * @author giuseppe

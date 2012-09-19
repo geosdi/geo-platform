@@ -61,6 +61,7 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.UserPropertiesWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.grid.GPGridSearchWidget;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
+import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
@@ -88,7 +89,6 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.addButton(1, new Button("Add User",
                 BasicWidgetResources.ICONS.logged_user(),
                 new SelectionListener<ButtonEvent>() {
-                    
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         showUserPropertiesWidget(true);
@@ -108,7 +108,6 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.setSize(600, 490);
 
         super.addWindowListener(new WindowListener() {
-            
             @Override
             public void windowShow(WindowEvent we) {
                 searchText = "";
@@ -122,7 +121,6 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.toolBar = new PagingToolBar(super.getPageSize());
 
         super.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
-            
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
@@ -147,12 +145,12 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
         ColumnConfig nameColumn = new ColumnConfig();
-        nameColumn.setId(GPUserManageDetailKeyValue.NAME.toString());
+        nameColumn.setId(GPSimpleUserKeyValue.NAME.toString());
         nameColumn.setHeader("Name");
         configs.add(nameColumn);
 
         ColumnConfig usernameColumn = new ColumnConfig();
-        usernameColumn.setId(GPUserManageDetailKeyValue.USERNAME.toString());
+        usernameColumn.setId(GPSimpleUserKeyValue.USERNAME.toString());
         usernameColumn.setHeader("Username");
         usernameColumn.setWidth(120);
         configs.add(usernameColumn);
@@ -172,7 +170,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         configs.add(tempColumn);
 
         ColumnConfig roleColumn = new ColumnConfig();
-        roleColumn.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
+        roleColumn.setId(GPSimpleUserKeyValue.AUTORITHY.toString());
         roleColumn.setHeader("Role");
         roleColumn.setWidth(80);
         configs.add(roleColumn);
@@ -193,8 +191,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     @Override
     public void setGridProperties() {
         super.widget.setSize(530, 250);
-        super.widget.setAutoExpandColumn(
-                GPUserManageDetailKeyValue.NAME.toString());
+        super.widget.setAutoExpandColumn(GPSimpleUserKeyValue.NAME.toString());
     }
 
     @Override
@@ -207,27 +204,26 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
         UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<ArrayList<String>>() {
-            
-            @Override
-            public void onFailure(Throwable caught) {
-                setSearchStatus(
-                        SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
-                        "Error retrieving roles");
-            }
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        setSearchStatus(
+                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                "Error retrieving roles");
+                    }
 
-            @Override
-            public void onSuccess(ArrayList<String> result) {
-                setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
-                        SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+                    @Override
+                    public void onSuccess(ArrayList<String> result) {
+                        setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
+                                SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
 
-                GPUserManageDetail userDetail;
-                if (isNewUser) {
-                    userDetail = new GPUserManageDetail();
-                } else {
-                    userDetail = widget.getSelectionModel().getSelectedItem();
-                }
-                userPropertiesWidget.show(userDetail, result);
-            }
-        });
+                        GPUserManageDetail userDetail;
+                        if (isNewUser) {
+                            userDetail = new GPUserManageDetail();
+                        } else {
+                            userDetail = widget.getSelectionModel().getSelectedItem();
+                        }
+                        userPropertiesWidget.show(userDetail, result);
+                    }
+                });
     }
 }

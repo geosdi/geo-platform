@@ -37,13 +37,13 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import java.util.Date;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GPUserManageDetail extends GeoPlatformBeanModel
+public class GPUserManageDetail extends GPSimpleUser
         implements IGPUserManageDetail {
 
     private static final long serialVersionUID = 53423038411470538L;
@@ -56,77 +56,9 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
 
     public enum GPUserManageDetailKeyValue {
 
-        USERNAME,
         PASSWORD,
-        NAME,
-        AUTORITHY,
-        EMAIL,
         ENABLED,
         TEMPORARY;
-    }
-
-    /**
-     * @return the id
-     */
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the username
-     */
-    @Override
-    public String getUsername() {
-        return super.get(GPUserManageDetailKeyValue.USERNAME.toString());
-    }
-
-    /**
-     * @param username the username to set
-     */
-    @Override
-    public void setUsername(String username) {
-        super.set(GPUserManageDetailKeyValue.USERNAME.toString(), username);
-    }
-
-    /**
-     * @return the name
-     */
-    @Override
-    public String getName() {
-        return super.get(GPUserManageDetailKeyValue.NAME.toString());
-    }
-
-    /**
-     * @param name the name to set
-     */
-    @Override
-    public void setName(String name) {
-        super.set(GPUserManageDetailKeyValue.NAME.toString(), name);
-    }
-
-    /**
-     * @return the email
-     */
-    @Override
-    public String getEmail() {
-        return super.get(GPUserManageDetailKeyValue.EMAIL.toString());
-    }
-
-    /**
-     * @param email the email to set
-     */
-    @Override
-    public void setEmail(String email) {
-        super.set(GPUserManageDetailKeyValue.EMAIL.toString(), email);
     }
 
     /**
@@ -143,22 +75,6 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * @return the authority
-     */
-    @Override
-    public String getAuthority() {
-        return super.get(GPUserManageDetailKeyValue.AUTORITHY.toString());
-    }
-
-    /**
-     * @param role the authority to set
-     */
-    @Override
-    public void setAuthority(String role) {
-        super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), role.toString());
     }
 
     /**
@@ -231,22 +147,6 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setExpired(boolean expired) {
         this.expired = expired;
-    }
-
-    /**
-     * @return the organization
-     */
-    @Override
-    public String getOrganization() {
-        return organization;
-    }
-
-    /**
-     * @param organization the organization to set
-     */
-    @Override
-    public void setOrganization(String organization) {
-        this.organization = organization;
     }
 
     /**

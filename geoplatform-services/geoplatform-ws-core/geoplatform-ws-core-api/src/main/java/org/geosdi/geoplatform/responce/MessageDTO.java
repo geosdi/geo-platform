@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPMessage;
-import org.geosdi.geoplatform.core.model.GPMessageCommandType;
+import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 
 /**
  *

@@ -41,6 +41,7 @@
         <module>geocoding-widget</module>
         <module>layer-widget</module>
         <module>map-widget</module>
+        <module>notification-widget</module>
         <module>routing-widget</module>		
         <module>security-widget</module>
         <module>server-widget</module>

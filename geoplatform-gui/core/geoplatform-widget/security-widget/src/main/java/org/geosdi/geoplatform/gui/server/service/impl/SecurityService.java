@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.SOAPFaultException;
@@ -102,8 +104,8 @@ public class SecurityService implements ISecurityService {
             }
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(user,
-                                                                    project.getId(),
-                                                                    httpServletRequest);
+                    project.getId(),
+                    httpServletRequest);
 
             GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             userDetail = this.convertAccountToDTO(user, accountProject, viewport);
@@ -157,8 +159,8 @@ public class SecurityService implements ISecurityService {
             accountProject = geoPlatformServiceClient.getDefaultAccountProject(application.getId());
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(application,
-                                                                    project.getId(),
-                                                                    httpServletRequest);
+                    project.getId(),
+                    httpServletRequest);
 
             GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             accountDetail = this.convertAccountToDTO(application, accountProject, viewport);
@@ -232,6 +234,7 @@ public class SecurityService implements ISecurityService {
         accountDetail.setUsername(account.getNaturalID()); // Forced representation
         accountDetail.setOrganization(account.getOrganization().getName());
         usertreeOptions.setLoadExpandedFolders(account.isLoadExpandedFolders());
+        this.extractGPAuthoritiesInToUser(accountDetail, account.getGPAuthorities());
         accountDetail.setTreeOptions(usertreeOptions);
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;
@@ -254,6 +257,16 @@ public class SecurityService implements ISecurityService {
             accountDetail.setViewport(clientViewport);
         }
         return (IGPAccountDetail) accountDetail;
+    }
+
+    // NOTE: Now a user must have at most one role
+    private void extractGPAuthoritiesInToUser(GPLoginUserDetail userDetail, List<GPAuthority> authorities) {
+        Iterator<GPAuthority> iterator = authorities.iterator();
+        if (iterator.hasNext()) {
+            GPAuthority gPAuthority = iterator.next();
+            userDetail.setAuthority(gPAuthority.getAuthority());
+            userDetail.setUserLevel(gPAuthority.getUserLevel());
+        }
     }
 
     /**

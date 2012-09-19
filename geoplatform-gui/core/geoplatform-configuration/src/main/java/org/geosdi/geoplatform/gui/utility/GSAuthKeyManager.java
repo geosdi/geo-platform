@@ -36,17 +36,20 @@
 package org.geosdi.geoplatform.gui.utility;
 
 import com.extjs.gxt.ui.client.Registry;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class GSAuthKeyManager {
-    
+
     public static String getAuthKeyTuple() {
         StringBuilder tuple = new StringBuilder();
-        String authKeyValue = Registry.get(GlobalRegistryEnum.AUTH_KEY.getValue());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        String authKeyValue = accountDetail.getAuthkey();
         if (authKeyValue != null) {
             tuple.append(GlobalRegistryEnum.AUTH_KEY.getValue()).append('=').append(authKeyValue);
         }

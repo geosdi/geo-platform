@@ -37,12 +37,15 @@ package org.geosdi.geoplatform.gui.client;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import javax.inject.Inject;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.LayerMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.mvc.LayerController;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
 import org.geosdi.geoplatform.gui.client.plugin.PrintLayersTreeToolbarPlugin;
@@ -60,10 +63,12 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class LayerWidgetUI implements EntryPoint {
 
+    @Inject
+    static LoadMenuProjects loadMenuProjects;
     private Dispatcher dispatcher;
 
     /**
@@ -73,6 +78,7 @@ public class LayerWidgetUI implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
+        this.initInjection();
         dispatcher = Dispatcher.get();
 
         dispatcher.addController(new LayerController());
@@ -84,24 +90,26 @@ public class LayerWidgetUI implements EntryPoint {
         dispatcher.fireEvent(GeoPlatformEvents.INIT_OGC_MODULES_WIDGET);
     }
 
+    private void initInjection() {
+        GWT.create(LayerModuleInjector.class);
+    }
+
     private void addLayerWidgetAction() {
         MenuActionRegistar.put(GuiComponentIDs.LAYER_MENU,
-                               new MenuActionCreator() {
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return new LayerMenuAction();
+                    }
+                });
 
-            @Override
-            public MenuAction createAction() {
-                return new LayerMenuAction();
-            }
-        });
-
-        MenuActionRegistar.put(GuiComponentIDs.LOAD_PROJECTS,
-                               new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new LoadMenuProjects();
-            }
-        });
+        MenuActionRegistar.put(GuiComponentIDs.MANAGE_PROJECTS,
+                new MenuActionCreator() {
+                    @Override
+                    public MenuAction createAction() {
+                        return loadMenuProjects;
+                    }
+                });
 
     }
 

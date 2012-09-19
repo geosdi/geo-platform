@@ -33,32 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.form.projects.binding;
+package org.geosdi.geoplatform.gui.client.config;
 
-import com.extjs.gxt.ui.client.store.Record;
-import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.inject.client.GinModules;
+import com.google.gwt.inject.client.Ginjector;
+import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class ProjectCheckFieldBinding extends GPFieldBinding {
+@GinModules(value = {LayerModuleGinConfigurator.class})
+public interface LayerModuleInjector extends Ginjector {
 
-    public ProjectCheckFieldBinding(CheckBox field, String property) {
-        super(field, property);
+    public static class MainInjector {
+
+        private static LayerModuleInjector instance;
+
+        private MainInjector() {
+        }
+
+        public static LayerModuleInjector getInstance() {
+            if (instance == null) {
+                instance = GWT.create(LayerModuleInjector.class);
+            }
+
+            return instance;
+        }
     }
 
-    @Override
-    public void setModelProperty(Object val) {
-        ((GPClientProject) model).setDefaultProject((Boolean) val);
-    }
-
-    @Override
-    public void setRecordProperty(Record r, Object val) {
-        r.set(property, (Boolean) val);
-    }
+    public LoadMenuProjects getLoadMenuProject();
 }

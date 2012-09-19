@@ -131,7 +131,7 @@ public interface LayerIcons extends ImageBundle {
     AbstractImagePrototype projectDelete();
 
     @Resource("arrow_refresh.png")
-    AbstractImagePrototype layerRefresh();
+    AbstractImagePrototype arrowRefresh();
 
     @Resource("filter.png")
     AbstractImagePrototype cqlFilter();

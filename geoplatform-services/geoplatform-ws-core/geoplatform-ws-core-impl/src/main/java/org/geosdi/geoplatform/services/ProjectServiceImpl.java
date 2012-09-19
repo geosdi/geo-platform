@@ -544,6 +544,7 @@ class ProjectServiceImpl {
         String projectName = accountProjectProperties.getProjectName();
         EntityCorrectness.ckeckString(projectName, "project name"); // TODO assert
         project.setName(projectName);
+        project.setShared(accountProjectProperties.isShared());
         projectDao.merge(project);
 
         if (accountProjectProperties.isDefaultProject()) {
@@ -902,7 +903,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                                                              folderDTO);
+                        folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -924,10 +925,10 @@ class ProjectServiceImpl {
                 GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                                                                  (RasterLayerDTO) element);
+                            (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                                                                  (VectorLayerDTO) element);
+                            (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);

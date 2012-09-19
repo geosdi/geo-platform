@@ -102,6 +102,19 @@
                 <artifactId>geoplatform-resources</artifactId>
                 <version>1.2.12</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-sharing</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-sharing</artifactId>
+                <classifier>sources</classifier>
+                <version>${project.version}</version>
+            </dependency>
         
         </dependencies>
     </dependencyManagement>

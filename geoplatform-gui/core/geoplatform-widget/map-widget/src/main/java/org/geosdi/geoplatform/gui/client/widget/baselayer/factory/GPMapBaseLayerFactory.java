@@ -41,7 +41,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.adapater.MapBaseLayerAdapter;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
 import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 
 /**
 
@@ -58,13 +58,13 @@ public class GPMapBaseLayerFactory {
                 new GPBaseLayerFactory().lookupBaseLayers());
     }
     //
-    private static EnumMap<BaseLayerEnum, GPBaseLayer> baseLayerMap;
+    private static EnumMap<BaseLayerValue, GPBaseLayer> baseLayerMap;
 
     public static List<GPBaseLayer> getBaseLayerList() {
         return Lists.newArrayList(baseLayerMap.values());
     }
 
-    public static GPBaseLayer getGPBaseLayer(BaseLayerEnum baseLayerEnum) {
+    public static GPBaseLayer getGPBaseLayer(BaseLayerValue baseLayerEnum) {
         return baseLayerMap.get(baseLayerEnum);
     }
 }

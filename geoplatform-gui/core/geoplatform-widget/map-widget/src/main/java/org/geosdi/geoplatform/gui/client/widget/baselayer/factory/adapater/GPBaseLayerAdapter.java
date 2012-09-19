@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.baselayer.factory.adapater;
 import java.util.EnumMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
@@ -55,7 +55,7 @@ public interface GPBaseLayerAdapter {
      * @param baseLayerMap
      * @return
      */
-    EnumMap<BaseLayerEnum, GPBaseLayer> adapt(Map<BaseLayerEnum, Layer> baseLayerMap);
+    EnumMap<BaseLayerValue, GPBaseLayer> adapt(Map<BaseLayerValue, Layer> baseLayerMap);
 
-    GPBaseLayer adaptBaseLayer(BaseLayerEnum key, Layer value);
+    GPBaseLayer adaptBaseLayer(BaseLayerValue key, Layer value);
 }

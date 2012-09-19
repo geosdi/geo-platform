@@ -33,16 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.model;
+package org.geosdi.geoplatform.gui.action.button;
+
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 
 /**
- * Command associated to a {@link GPMessage}.
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-//@Embeddable
-//@XmlAccessorType(XmlAccessType.FIELD)
-public enum GPMessageCommandType {
+public class GPSecureButton extends Button {
 
-    OPEN_PROJECT, NONE;
+    private GeoPlatformSecureAction<ButtonEvent> secureAction;
+
+    public GPSecureButton(String text, AbstractImagePrototype icon, GeoPlatformSecureAction<ButtonEvent> action) {
+        super(text, icon, action);
+        this.initializeSecureAction(action);
+    }
+
+    public GPSecureButton(String text, GeoPlatformSecureAction<ButtonEvent> action) {
+        super(text, action);
+        this.initializeSecureAction(action);
+    }
+
+    private void initializeSecureAction(GeoPlatformSecureAction<ButtonEvent> action) {
+        action.addActionEnableHandler(new ActionEnableHandler() {
+            @Override
+            public void onActionEnabled(ActionEnableEvent event) {
+                if (event.isEnabled()) {
+                    GPSecureButton.super.enable();
+                } else {
+                    GPSecureButton.super.disable();
+                }
+            }
+        });
+        this.secureAction = action;
+        this.enable();
+    }
+
+    @Override
+    public void enable() {
+        this.secureAction.setEnabled(Boolean.TRUE);
+    }
 }

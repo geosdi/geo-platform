@@ -39,7 +39,7 @@ import com.google.common.collect.Maps;
 import java.util.EnumMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
@@ -50,15 +50,15 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 public class MapBaseLayerAdapter implements GPBaseLayerAdapter {
 
     @Override
-    public EnumMap<BaseLayerEnum, GPBaseLayer> adapt(Map<BaseLayerEnum, Layer> baseLayerMap) {
+    public EnumMap<BaseLayerValue, GPBaseLayer> adapt(Map<BaseLayerValue, Layer> baseLayerMap) {
         if (baseLayerMap == null) {
             throw new IllegalArgumentException("The Map passed must not be null");
         }
 
-        EnumMap<BaseLayerEnum, GPBaseLayer> adapterMap = Maps.newEnumMap(
-                BaseLayerEnum.class);
+        EnumMap<BaseLayerValue, GPBaseLayer> adapterMap = Maps.newEnumMap(
+                BaseLayerValue.class);
 
-        for (Map.Entry<BaseLayerEnum, Layer> entry : baseLayerMap.entrySet()) {
+        for (Map.Entry<BaseLayerValue, Layer> entry : baseLayerMap.entrySet()) {
             adapterMap.put(entry.getKey(), adaptBaseLayer(entry.getKey(),
                     entry.getValue()));
         }
@@ -67,7 +67,7 @@ public class MapBaseLayerAdapter implements GPBaseLayerAdapter {
     }
 
     @Override
-    public GPBaseLayer adaptBaseLayer(BaseLayerEnum key, Layer value) {
+    public GPBaseLayer adaptBaseLayer(BaseLayerValue key, Layer value) {
         return new GPBaseLayer(value,
                 GPBaseLayerIconAdapter.adaptBaseLayerIcon(key),
                 GPBaseLayerProjectionAdapter.adaptBaseLayerProjection(key), key);

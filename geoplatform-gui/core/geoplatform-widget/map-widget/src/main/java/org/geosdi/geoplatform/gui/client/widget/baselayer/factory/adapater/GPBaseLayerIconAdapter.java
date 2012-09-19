@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.baselayer.factory.adapater;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 
 /**
  *
@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
  */
 public class GPBaseLayerIconAdapter {
 
-    protected static AbstractImagePrototype adaptBaseLayerIcon(BaseLayerEnum key) {
+    protected static AbstractImagePrototype adaptBaseLayerIcon(BaseLayerValue key) {
         switch (key) {
             case OPEN_STREET_MAP:
                 return Resources.IMAGES.osm();

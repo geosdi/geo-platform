@@ -16,8 +16,9 @@
     <url>http://code.google.com/p/geo-platform/</url>
 
     <scm>
-        <connection>scm:svn:https://geo-platform.googlecode.com/svn/trunk</connection>
-        <url>https://geo-platform.googlecode.com/svn/trunk</url>
+        <url>https://github.com/geosdi/geo-platform</url>
+        <connection>scm:git:git://github.com/geosdi/geo-platform.git</connection>
+        <developerConnection>scm:git:git@github.com:geosdi/geo-platform.git</developerConnection>
     </scm>
     
     <mailingLists>
@@ -1302,7 +1303,8 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-
+            
+            <!-- test -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

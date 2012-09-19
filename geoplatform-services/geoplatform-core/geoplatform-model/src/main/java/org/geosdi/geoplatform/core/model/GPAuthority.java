@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +54,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  * @todo Analyze deletion of accountNaturalID field or account field.
- * 
+ *
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
@@ -122,17 +121,18 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     }
 
     /**
-     * @return the accountNaturalID
+     * @return authority
      */
-    public String getAccountNaturalID() {
-        return accountNaturalID;
+    @Override
+    public String getAuthority() {
+        return authority;
     }
 
     /**
-     * @param accountNaturalID the accountNaturalID to set
+     * @param authority the authority to set
      */
-    public void setAccountNaturalID(String accountNaturalID) {
-        this.accountNaturalID = accountNaturalID;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
     /**

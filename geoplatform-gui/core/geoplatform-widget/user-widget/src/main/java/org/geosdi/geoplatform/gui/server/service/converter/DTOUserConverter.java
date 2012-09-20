@@ -124,7 +124,7 @@ public class DTOUserConverter {
         if (iterator.hasNext()) {
             GPAuthority authority = iterator.next();
             user.setAuthority(authority.getAuthority());
-            user.setTrustedLevel(authority.getTrustedLevel().ordinal());
+            user.setTrustedLevel(authority.getTrustedLevel());
         }
     }
 }

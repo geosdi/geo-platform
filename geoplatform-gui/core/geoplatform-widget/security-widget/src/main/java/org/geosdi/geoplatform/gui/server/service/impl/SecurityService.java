@@ -269,7 +269,7 @@ public class SecurityService implements ISecurityService {
         if (iterator.hasNext()) {
             GPAuthority authority = iterator.next();
             userDetail.setAuthority(authority.getAuthority());
-            userDetail.setTrustedLevel(authority.getTrustedLevel().ordinal());
+            userDetail.setTrustedLevel(authority.getTrustedLevel());
         }
     }
 

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.model.user;
 
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -143,12 +144,12 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
     }
 
     @Override
-    public int getTrustedLevel() {
-        return super.get(GPSimpleUserKeyValue.USER_LEVEL.toString(), 0);
+    public GPTrustedLevel getTrustedLevel() {
+        return super.get(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
     }
 
     @Override
-    public void setTrustedLevel(int userLevel) {
-        super.set(GPSimpleUserKeyValue.USER_LEVEL.toString(), userLevel);
+    public void setTrustedLevel(GPTrustedLevel trustedLevel) {
+        super.set(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString(), trustedLevel);
     }
 }

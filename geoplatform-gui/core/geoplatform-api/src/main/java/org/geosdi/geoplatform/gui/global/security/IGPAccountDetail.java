@@ -6,6 +6,7 @@ package org.geosdi.geoplatform.gui.global.security;
 
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -26,7 +27,7 @@ public interface IGPAccountDetail {
 
     String getBaseLayer();
 
-    int getTrustedLevel();
+    GPTrustedLevel getTrustedLevel();
 
     String getAuthority();
 

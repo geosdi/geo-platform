@@ -15,8 +15,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 public class BinderOtherPanel extends Composite {
 
-    private static BinderOtherPanelUiBinder uiBinder = GWT
-            .create(BinderOtherPanelUiBinder.class);
+    private static BinderOtherPanelUiBinder uiBinder = GWT.create(BinderOtherPanelUiBinder.class);
 
     interface BinderOtherPanelUiBinder extends
             UiBinder<Widget, BinderOtherPanel> {

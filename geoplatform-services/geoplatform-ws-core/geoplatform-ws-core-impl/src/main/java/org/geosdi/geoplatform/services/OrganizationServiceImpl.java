@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 
 /**
+ * Organization service delegate.
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
@@ -52,20 +53,25 @@ class OrganizationServiceImpl {
     /**
      * @param organizationDao the organizationDao to set
      */
-    void setOrganizationDao(GPOrganizationDAO organizationDao) {
+    public void setOrganizationDao(GPOrganizationDAO organizationDao) {
         this.organizationDao = organizationDao;
     }
 
-    @Deprecated
-    Long insertOrganization(GPOrganization organization) throws IllegalParameterFault {
+    /**
+     * @see
+     * GeoPlatformService#insertOrganization(org.geosdi.geoplatform.core.model.GPOrganization)
+     */
+    public Long insertOrganization(GPOrganization organization) throws IllegalParameterFault {
         EntityCorrectness.checkOrganization(organization); // TODO assert
 
         organizationDao.persist(organization);
         return organization.getId();
     }
 
-    @Deprecated
-    boolean deleteOrganization(Long organizationID) throws ResourceNotFoundFault {
+    /**
+     * @see GeoPlatformService#deleteOrganization(java.lang.Long)
+     */
+    public boolean deleteOrganization(Long organizationID) throws ResourceNotFoundFault {
         GPOrganization organization = organizationDao.find(organizationID);
         if (organization == null) {
             throw new ResourceNotFoundFault("Organization not found", organizationID);

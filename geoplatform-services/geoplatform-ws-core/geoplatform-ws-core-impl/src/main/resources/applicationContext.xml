@@ -34,9 +34,10 @@
         <property name="authorityDao" ref="authorityDAO" />
         <property name="organizationDao" ref="organizationDAO" />
         <property name="messageDao" ref="messageDAO" />
-        
-        <!-- Viewport -->
         <property name="viewportDAO" ref="viewportDAO" />
+        <!-- Access Info -->
+        <property name="gsAccountDAO" ref="gsAccountDAO" />
+        <property name="gsResourceDAO" ref="gsResourceDAO" />
         
         <!-- ACL -->
         <property name="classDao" ref="classDAO" />
@@ -45,13 +46,10 @@
         <property name="sidDao" ref="sidDAO" />
         <property name="guiComponentDao" ref="guiComponentDAO" />
         
-        <!-- Access Info -->
-        <property name="gsAccountDAO" ref="gsAccountDAO" />
-        <property name="gsResourceDAO" ref="gsResourceDAO" />
-        
         <!-- Services -->
         <property name="schedulerService" ref="schedulerService" />
         
+        <!-- Utility -->
         <property name="gpDigester" ref="gpDigesterSHA1" />
     </bean>
 

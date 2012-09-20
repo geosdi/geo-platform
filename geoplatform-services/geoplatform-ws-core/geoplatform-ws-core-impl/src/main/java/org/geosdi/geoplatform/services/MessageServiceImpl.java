@@ -47,23 +47,32 @@ import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 
 /**
+ * Message service delegate.
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class MessageServiceImpl {
+class MessageServiceImpl {
 
-//    private Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private static final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GPMessageDAO messageDao;
     private GPAccountDAO accountDao;
 
+    //<editor-fold defaultstate="collapsed" desc="Setter methods">
+    /**
+     * @param messageDao the messageDao to set
+     */
     public void setMessageDao(GPMessageDAO messageDao) {
         this.messageDao = messageDao;
     }
 
+    /**
+     * @param accountDao the accountDao to set
+     */
     public void setAccountDao(GPAccountDAO accountDao) {
         this.accountDao = accountDao;
     }
+    //</editor-fold>
 
     /**
      * @see

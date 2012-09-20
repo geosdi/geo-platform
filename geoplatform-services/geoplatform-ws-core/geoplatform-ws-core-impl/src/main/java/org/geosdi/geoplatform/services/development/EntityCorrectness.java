@@ -55,15 +55,15 @@ import org.springframework.security.acls.domain.BasePermission;
  */
 public class EntityCorrectness {
 
-    // ==========================================================================
+    // =========================================================================
     // === Organization
-    // ==========================================================================
+    // =========================================================================
     public static void checkOrganization(GPOrganization organization) throws IllegalParameterFault {
         if (organization == null) {
             throw new IllegalParameterFault("Organization must be NOT NULL.");
         }
         if (EntityCorrectness.empty(organization.getName())) {
-            throw new IllegalParameterFault("Organization \"name\" must be NOT NULL or empty.");
+            throw new IllegalParameterFault("Organization \"name\" must be NOT NULL or NOT empty.");
         }
     }
 
@@ -75,15 +75,15 @@ public class EntityCorrectness {
         }
     }
 
-    // ==========================================================================
+    // =========================================================================
     // === Project
-    // ==========================================================================
+    // =========================================================================
     public static void checkProject(GPProject project) throws IllegalParameterFault {
         if (project == null) {
             throw new IllegalParameterFault("Project must be NOT NULL.");
         }
         if (EntityCorrectness.empty(project.getName())) {
-            throw new IllegalParameterFault("Project \"name\" must be NOT NULL or empty.");
+            throw new IllegalParameterFault("Project \"name\" must be NOT NULL or NOT empty.");
         }
         if (project.getNumberOfElements() < 0) {
             throw new IllegalParameterFault("Project \"numberOfElements\" must be greater or equal 0.");
@@ -104,9 +104,9 @@ public class EntityCorrectness {
         }
     }
 
-    // ==========================================================================
+    // =========================================================================
     // === AccountProject
-    // ==========================================================================
+    // =========================================================================
     public static void checkAccountProject(GPAccountProject accountProject) throws IllegalParameterFault {
         if (accountProject == null) {
             throw new IllegalParameterFault("AccountProject must be NOT NULL.");
@@ -137,16 +137,16 @@ public class EntityCorrectness {
         }
     }
 
-    // ==========================================================================
+    // =========================================================================
     // === Account and Authorities
-    // ==========================================================================
+    // =========================================================================
     public static void checkAccount(GPAccount account) throws IllegalParameterFault {
         if (account == null) {
             throw new IllegalParameterFault("Account must be NOT NULL.");
         }
         if (EntityCorrectness.empty(account.getNaturalID())) {
             throw new IllegalParameterFault("Account \"naturalID\" (i.e. \"username\" for User"
-                    + " or \"appID\" for Application) must be NOT NULL or empty.");
+                    + " or \"appID\" for Application) must be NOT NULL or NOT empty.");
         }
         GPOrganization organization = account.getOrganization();
         if (organization == null) {
@@ -159,10 +159,10 @@ public class EntityCorrectness {
 
     private static void checkUser(GPUser user) throws IllegalParameterFault {
         if (EntityCorrectness.empty(user.getName())) {
-            throw new IllegalParameterFault("User \"name\" must be NOT NULL or empty.");
+            throw new IllegalParameterFault("User \"name\" must be NOT NULL or NOT empty.");
         }
         if (EntityCorrectness.empty(user.getPassword())) {
-            throw new IllegalParameterFault("User \"password\" must be NOT NULL or empty.");
+            throw new IllegalParameterFault("User \"password\" must be NOT NULL or NOT empty.");
         }
     }
 
@@ -173,7 +173,7 @@ public class EntityCorrectness {
         for (GPAuthority authority : authorities) {
             String role = authority.getAuthority();
             if (EntityCorrectness.empty(role)) {
-                throw new IllegalParameterFault("Authority is null or empty.");
+                throw new IllegalParameterFault("Authority is null or NOT empty.");
             }
         }
     }
@@ -213,9 +213,9 @@ public class EntityCorrectness {
         }
     }
 
-    // ==========================================================================
+    // =========================================================================
     // === Viewport
-    // ==========================================================================
+    // =========================================================================
     public static void checkViewport(GPViewport viewport) throws IllegalParameterFault {
         if (viewport == null) {
             throw new IllegalParameterFault("Viewport must be NOT NULL.");
@@ -224,10 +224,10 @@ public class EntityCorrectness {
             throw new IllegalParameterFault("Viewport \"accountProject\" must be NOT NULL.");
         }
         if (EntityCorrectness.empty(viewport.getName())) {
-            throw new IllegalParameterFault("Viewport \"name\" must be NOT NULL or empty.");
+            throw new IllegalParameterFault("Viewport \"name\" must be NOT NULL or NOT empty.");
         }
         if (viewport.getBbox() == null) {
-            throw new IllegalParameterFault("Viewport \"BBOX\" must be NOT NULL or empty.");
+            throw new IllegalParameterFault("Viewport \"BBOX\" must be NOT NULL or NOT empty.");
         }
     }
 
@@ -239,9 +239,9 @@ public class EntityCorrectness {
         }
     }
 
-    // ==========================================================================
+    // =========================================================================
     // === Folder
-    // ==========================================================================
+    // =========================================================================
     public static void checkFolder(GPFolder folder) throws IllegalParameterFault {
         if (folder == null) {
             throw new IllegalParameterFault("Folder must be NOT NULL.");
@@ -250,7 +250,7 @@ public class EntityCorrectness {
             throw new IllegalParameterFault("Folder \"project\" must be NOT NULL.");
         }
         if (EntityCorrectness.empty(folder.getName())) {
-            throw new IllegalParameterFault("Folder \"name\" must be NOT NULL or empty.");
+            throw new IllegalParameterFault("Folder \"name\" must be NOT NULL or NOT empty.");
         }
         if (folder.getNumberOfDescendants() < 0) {
             throw new IllegalParameterFault("Folder \"numberOfDescendants\" must be greater or equal 0.");
@@ -268,9 +268,9 @@ public class EntityCorrectness {
         }
     }
 
-    // ==========================================================================
+    // =========================================================================
     // === Layer
-    // ==========================================================================
+    // =========================================================================
     public static void checkLayerComplete(GPLayer layer) throws IllegalParameterFault {
         EntityCorrectness.checkLayer(layer);
         if (layer.getProject() == null) {
@@ -324,9 +324,9 @@ public class EntityCorrectness {
         }
     }
 
-    // ==========================================================================
+    // =========================================================================
     // === Message
-    // ==========================================================================
+    // =========================================================================
     public static void checkMessage(GPMessage message) throws IllegalParameterFault {
         if (message == null) {
             throw new IllegalParameterFault("Message must be NOT NULL.");
@@ -355,7 +355,7 @@ public class EntityCorrectness {
             throw new IllegalParameterFault("Message \"creationDate\" must be NOT NULL.");
         }
         if (EntityCorrectness.empty(message.getText())) {
-            throw new IllegalParameterFault("Message \"text\" must be NOT NULL or empty.");
+            throw new IllegalParameterFault("Message \"text\" must be NOT NULL or NOT empty.");
         }
     }
 
@@ -373,8 +373,25 @@ public class EntityCorrectness {
         }
     }
 
+    // =========================================================================
+    // === String
+    // =========================================================================    
+    public static void ckeckString(String value, String field) throws IllegalParameterFault {
+        if (EntityCorrectness.empty(value)) {
+            throw new IllegalParameterFault("\"" + field + "\" must be NOT NULL or NOT empty.");
+        }
+    }
+
+    public static void ckeckStringLog(String value, String field) {
+        try {
+            EntityCorrectness.ckeckString(value, field);
+        } catch (IllegalParameterFault ex) {
+            throw new EntityCorrectnessException(ex.getMessage());
+        }
+    }
+
     //
-    // ==========================================================================
+    // =========================================================================
     //
     private static boolean empty(String value) {
         if (value == null) {

@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.toolbar;
 
+import com.extjs.gxt.ui.client.widget.WidgetComponent;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
+import com.google.gwt.user.client.ui.Image;
 import java.util.Collections;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
@@ -67,10 +69,18 @@ import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
+ * Create all items of the Map Toolbar.
+ * <p/>
+ * Each kind of item is builded in different way, through a distinct method of
+ * {@link IGeoPlatformToolbar} interface.
+ * <p/>
+ * The build phase was started into this constructor, calling for every item
+ * {@link ToolbarGenericTool} the buildTool methods passing this reference
+ * object. <br /> So the item inside the create method call the respective
+ * method in GPMapToolbarWidget for the final build.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
@@ -94,7 +104,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Add a Vertical Line in the Toolbar
+     * Add a vertical line into Toolbar.
      */
     @Override
     public void addSeparator() {
@@ -102,8 +112,8 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Add a new Application Button to the Toolbar. An Application Button is a
-     * kind of button that configure a particular action for the Application.
+     * Add an Application Button into Toolbar, that configure a particular
+     * action for the Application.
      *
      * @param tool component UI binded at the action
      */
@@ -119,8 +129,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Add a new Map Button to the Toolbar. A Map Button is a kind of button
-     * that interacts with the map.
+     * Add a Button into Toolbar, that interacts with the map.
      *
      * @param tool component UI binded at the action
      */
@@ -136,8 +145,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Add a new Map ToggleButton to the Toolbar. A Map ToggleButton is a kind
-     * of button that interacts with the map.
+     * Add a ToggleButton Item into Toolbar, that interacts with the map.
      *
      * @param tool component UI binded at the action
      */
@@ -152,13 +160,26 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         this.toolBar.add(button);
     }
 
+    /**
+     * Add a Icon Item into Toolbar.
+     *
+     * @param tool component UI binded at the action
+     */
     @Override
     public void addIconInToolbar(IconInToolbar tool) {
-        GPIconWidgetComponent widgetIcon = new GPIconWidgetComponent(this.toolBar);
-        this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
-                tool.getText()));
+        GPIconWidgetComponent gpWidgetIcon = new GPIconWidgetComponent(this.toolBar);
+
+        Image image = BasicWidgetResources.ICONS.googleWhite().createImage();
+        WidgetComponent widgetComponent = gpWidgetIcon.createWidgetComponent(image, tool.getText());
+
+        this.toolBar.add(widgetComponent);
     }
 
+    /**
+     * Add a Button Item into Toolbar with a Menu.
+     *
+     * @param tool component UI binded at the action
+     */
     @Override
     public void addMenuInToolBar(MenuInToolBar tool) {
         Button buttonItem = new Button(
@@ -175,7 +196,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Create a Button with a Menu
+     * Add a Button Item into Toolbar with a Menu list.
      *
      * @param tool component UI binded at the action
      */
@@ -195,9 +216,8 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Add FillToolItem in Toolbar so any Item added after this FillToolItem
-     * will be insert in the right Toolbar Region
-     *
+     * Add a separator Item into Toolbar, so any Item added after will be insert
+     * in the right Toolbar region.
      */
     @Override
     public void addFillToolItem() {
@@ -205,9 +225,10 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
+     * Create a Menu with an Item from each Action.
      *
-     * @param actionTools
-     * @return Menu
+     * @param actionTools the list of Action
+     * @return the Menu
      */
     private Menu createMenu(List<ToolbarActionTool> actionTools) {
         Menu menu = new Menu();
@@ -225,10 +246,10 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Retrieve the action from Register component
+     * Retrieve the Action with a unique ID.
      *
-     * @param id
-     * @return action
+     * @param id the Action ID
+     * @return the Action joined
      */
     private ToolbarAction getAction(String id) {
         ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
@@ -239,6 +260,13 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         return action;
     }
 
+    /**
+     * Prepare a Button from a Item and set an enable handler Action.
+     *
+     * @param button the Button to prepare
+     * @param action the enable Action
+     * @param tool the Item of reference
+     */
     private void prepareButton(final Button button, ToolbarAction action,
             ToolbarGenericTool tool) {
         button.setId(action.getId());

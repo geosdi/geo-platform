@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.SOAPFaultException;
@@ -85,22 +87,27 @@ public class SecurityService implements ISecurityService {
         GuiComponentsPermissionMapData guiComponentPermission;
         GPAccountProject accountProject;
         IGPAccountDetail userDetail;
+        GPProject project;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     username, password);
             guiComponentPermission = geoPlatformServiceClient.getAccountPermission(user.getId());
 
-            if (user.getDefaultProjectID() == null) {
-                GPProject project = new GPProject();
+            accountProject = geoPlatformServiceClient.getDefaultAccountProject(user.getId());
+            if (accountProject == null) {
+                project = new GPProject();
                 project.setName("Default Project");
                 project.setShared(false);
                 project.setId(this.saveDefaultProject(user, project));
+            } else {
+                project = accountProject.getProject();
             }
-            accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(
-                    user.getId(), user.getDefaultProjectID());
-            GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
+
             this.sessionUtility.storeLoggedAccountAndDefaultProject(user,
-                    user.getDefaultProjectID(), httpServletRequest);
+                    project.getId(),
+                    httpServletRequest);
+
+            GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             userDetail = this.convertAccountToDTO(user, accountProject, viewport);
             userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
             return userDetail;
@@ -132,26 +139,29 @@ public class SecurityService implements ISecurityService {
         GuiComponentsPermissionMapData guiComponentPermission;
         GPAccountProject accountProject;
         IGPAccountDetail accountDetail;
+        GPProject project;
         try {
             application = geoPlatformServiceClient.getApplication(appID);
 
             guiComponentPermission = geoPlatformServiceClient.getApplicationPermission(
                     application.getAppID());
 
-            if (application.getDefaultProjectID() == null) {
-                GPProject project = new GPProject();
+            accountProject = geoPlatformServiceClient.getDefaultAccountProject(application.getId());
+            if (accountProject == null) {
+                project = new GPProject();
                 project.setName("Default Project");
                 project.setShared(false);
                 project.setId(this.saveDefaultProject(application, project));
+            } else {
+                project = accountProject.getProject();
             }
 
-            accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(
-                    application.getId(),
-                    application.getDefaultProjectID());
+            accountProject = geoPlatformServiceClient.getDefaultAccountProject(application.getId());
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(application,
-                    application.getDefaultProjectID(),
+                    project.getId(),
                     httpServletRequest);
+
             GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             accountDetail = this.convertAccountToDTO(application, accountProject, viewport);
 
@@ -204,9 +214,8 @@ public class SecurityService implements ISecurityService {
         Long idProject = null;
         try {
             idProject = this.geoPlatformServiceClient.saveProject(
-                    account.getStringID(),
+                    account.getNaturalID(),
                     project, true);
-            account.setDefaultProjectID(idProject);
         } catch (ResourceNotFoundFault rnf) {
             this.logger.error(
                     "Failed to save project on SecurityService: " + rnf);
@@ -222,9 +231,10 @@ public class SecurityService implements ISecurityService {
             GPViewport viewport) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
         UserTreeOptions usertreeOptions = new UserTreeOptions();
-        accountDetail.setUsername(account.getStringID()); // Forced representation
+        accountDetail.setUsername(account.getNaturalID()); // Forced representation
         accountDetail.setOrganization(account.getOrganization().getName());
         usertreeOptions.setLoadExpandedFolders(account.isLoadExpandedFolders());
+        this.extractGPAuthoritiesInToUser(accountDetail, account.getGPAuthorities());
         accountDetail.setTreeOptions(usertreeOptions);
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;
@@ -247,6 +257,16 @@ public class SecurityService implements ISecurityService {
             accountDetail.setViewport(clientViewport);
         }
         return (IGPAccountDetail) accountDetail;
+    }
+
+    // NOTE: Now a user must have at most one role
+    private void extractGPAuthoritiesInToUser(GPLoginUserDetail userDetail, List<GPAuthority> authorities) {
+        Iterator<GPAuthority> iterator = authorities.iterator();
+        if (iterator.hasNext()) {
+            GPAuthority gPAuthority = iterator.next();
+            userDetail.setAuthority(gPAuthority.getAuthority());
+            userDetail.setUserLevel(gPAuthority.getUserLevel());
+        }
     }
 
     /**

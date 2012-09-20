@@ -42,6 +42,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPProject;
 
 /**
@@ -58,6 +59,9 @@ public class ProjectDTO {
     private Integer version;
     private Boolean shared;
     //
+    private Boolean defaultProject;
+    private ShortAccountDTO owner;
+    //
     @XmlElementWrapper(name = "rootFolders")
     @XmlElement(name = "folder")
     private List<FolderDTO> rootFolders;
@@ -69,9 +73,9 @@ public class ProjectDTO {
     }
 
     /**
-     * Constructor with GPProject as arg.
+     * Convert a Project entity into a Project DTO.
      *
-     * @param project
+     * @param project the Project entity to convert
      */
     public ProjectDTO(GPProject project) {
         this.id = project.getId();
@@ -79,6 +83,40 @@ public class ProjectDTO {
         this.numberOfElements = project.getNumberOfElements();
         this.version = project.getVersion();
         this.shared = project.isShared();
+    }
+
+    /**
+     * Convert a Project entity into a Project DTO, and set is default.
+     *
+     * @param project the Project entity to convert
+     * @param defaultProject if the Project is the default Project
+     */
+    public ProjectDTO(GPProject project, Boolean defaultProject) {
+        this(project);
+        this.defaultProject = defaultProject;
+    }
+
+    /**
+     * Convert a Project entity into a Project DTO, with its Account owner.
+     *
+     * @param project the Project entity to convert
+     * @param owner the Account owner of the Project
+     */
+    public ProjectDTO(GPProject project, GPAccount owner) {
+        this(project);
+        this.owner = ShortAccountDTO.convertToShortAccountDTO(owner);
+    }
+
+    /**
+     * Convert a Project entity into a Project DTO, with its Account owner.
+     *
+     * @param project the Project entity to convert
+     * @param defaultProject if the Project is the default Project
+     * @param owner the Account owner of the Project
+     */
+    public ProjectDTO(GPProject project, Boolean defaultProject, GPAccount owner) {
+        this(project, owner);
+        this.defaultProject = defaultProject;
     }
 
     /**
@@ -140,7 +178,7 @@ public class ProjectDTO {
     /**
      * @return the shared
      */
-    public Boolean getShared() {
+    public Boolean isShared() {
         return shared;
     }
 
@@ -149,6 +187,34 @@ public class ProjectDTO {
      */
     public void setShared(Boolean shared) {
         this.shared = shared;
+    }
+
+    /**
+     * @return the default
+     */
+    public Boolean isDefault() {
+        return defaultProject;
+    }
+
+    /**
+     * @param default the defaultProject to set
+     */
+    public void setDefault(Boolean defaultProject) {
+        this.defaultProject = defaultProject;
+    }
+
+    /**
+     * @return the owner
+     */
+    public ShortAccountDTO getOwner() {
+        return owner;
+    }
+
+    /**
+     * @param owner the owner to set
+     */
+    public void setOwner(ShortAccountDTO owner) {
+        this.owner = owner;
     }
 
     /**
@@ -173,6 +239,8 @@ public class ProjectDTO {
                 + ", numberOfElements=" + numberOfElements
                 + ", version=" + version
                 + ", shared=" + shared
+                + ", default=" + defaultProject
+                + ", owner=" + owner
                 + ", rootFolders=" + rootFolders + '}';
     }
 

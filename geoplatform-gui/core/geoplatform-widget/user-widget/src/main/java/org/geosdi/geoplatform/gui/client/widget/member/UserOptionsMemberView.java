@@ -87,6 +87,7 @@ public class UserOptionsMemberView extends UserOptionsMember {
         formPanel.setBodyBorder(Boolean.FALSE);
         formPanel.setBorders(Boolean.FALSE);
         formPanel.setWidth(400);
+        super.saveButton.disable();
         panel.add(formPanel);
     }
 

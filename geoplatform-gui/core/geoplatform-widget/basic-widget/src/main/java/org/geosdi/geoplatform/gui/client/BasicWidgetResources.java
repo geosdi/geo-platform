@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client;
 
 import org.geosdi.geoplatform.gui.client.icons.BasicWidgetIcons;
-
 import com.google.gwt.core.client.GWT;
 
 /**

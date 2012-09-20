@@ -38,29 +38,31 @@ package org.geosdi.geoplatform.gui.client.action.projects;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchWidget;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class GPProjectAction extends GeoPlatformAction<ButtonEvent> {
+public class GPProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     private ProjectBindingWidget bindingProject;
 
-    public GPProjectAction(GPListViewSearchWidget<GPClientProject> searchWidget) {
+    public GPProjectAction(GPListViewSearchPanel<GPClientProject> searchWidget, GPRole role) {
+        super(role);
         this.bindingProject = new ProjectBindingWidget(searchWidget);
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-       if(ce.getButton().getText().equalsIgnoreCase("Add")) {
-           this.bindingProject.showForm(true);
-       } else {
-           this.bindingProject.showForm(false);
-       }
+        if (ce.getButton().getText().equalsIgnoreCase("Add")) {
+            this.bindingProject.showForm(Boolean.TRUE);
+        } else {
+            this.bindingProject.showForm(Boolean.FALSE);
+        }
     }
 }

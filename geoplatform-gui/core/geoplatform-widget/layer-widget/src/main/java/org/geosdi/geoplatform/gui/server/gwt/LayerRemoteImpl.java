@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.server.gwt;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
@@ -51,6 +52,7 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -206,5 +208,30 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Override
     public void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh) throws GeoPlatformException {
         this.layerService.setLayerRefreshTime(emiteResource, layerUUID, secondToRefresh, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public ArrayList<GPSimpleUser> getOrganizationUsers() throws GeoPlatformException {
+        return this.layerService.getOrganizationUsers(super.getThreadLocalRequest());
+    }
+
+    @Override
+    public ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(long projectId) throws GeoPlatformException {
+        return this.layerService.getOrganizationUsersToShareProject(projectId, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public ArrayList<GPSimpleUser> getAccountsFromSharedProject(long idSharedProject) throws GeoPlatformException {
+        return this.layerService.getAccountsFromSharedProject(idSharedProject, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public boolean shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject) throws GeoPlatformException {
+        return this.layerService.shareProjectToUsers(idSharedProject, accountIDsProject, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public GPClientProject loadDefaultProject() throws GeoPlatformException {
+        return this.layerService.loadDefaultProject(super.getThreadLocalRequest());
     }
 }

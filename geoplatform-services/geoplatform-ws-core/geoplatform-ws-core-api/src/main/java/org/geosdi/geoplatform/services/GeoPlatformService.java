@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -54,6 +55,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
@@ -73,6 +75,7 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
@@ -327,7 +330,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
-    @WebResult(name = "Users")
+    @WebResult(name = "User")
     List<UserDTO> searchUsers(@WebParam(name = "userID") Long userID,
             PaginatedSearchRequest request) throws ResourceNotFoundFault;
 
@@ -338,7 +341,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/accounts")
-    @WebResult(name = "Accounts")
+    @WebResult(name = "Account")
     List<ShortAccountDTO> getAllAccounts();
 
     /**
@@ -350,7 +353,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/accounts/{}")
-    @WebResult(name = "Accounts")
+    @WebResult(name = "Account")
     List<ShortAccountDTO> getAccounts(
             @WebParam(name = "organization") String organization)
             throws ResourceNotFoundFault;
@@ -390,23 +393,23 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/accounts/{id}/authorities")
-    @WebResult(name = "Authorities")
+    @WebResult(name = "Authority")
     List<String> getAuthorities(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
      * Retrieve the Authorities of an Account.
      *
-     * @param stringID the username (for User) or the string ID (for
+     * @param accountNaturalID the username (for User) or the appID (for
      * Application)
      * @return the list of Authorities
      * @throws ResourceNotFoundFault if Account not found or Account not have
      * Authorities
      */
     @HttpResource(location = "/accounts/{id}/authorities")
-    @WebResult(name = "Authorities")
+    @WebResult(name = "Authority")
     List<GPAuthority> getAuthoritiesDetail(
-            @WebParam(name = "stringID") String stringID)
+            @WebParam(name = "accountNaturalID") String accountNaturalID)
             throws ResourceNotFoundFault;
 
     /**
@@ -485,26 +488,111 @@ public interface GeoPlatformService {
 
     @Get
     @HttpResource(location = "/account/{accountID}")
-    @WebResult(name = "AccountProject")
     Long getAccountProjectsCount(@WebParam(name = "accountID") Long accountID,
             SearchRequest request) throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve the default AccountProject of an Account, or null if the Account
+     * don't have a default Project.
+     *
+     * @param accountID the Account ID
+     * @return the AccountProject to retrieve or null
+     * @throws ResourceNotFoundFault if Account not found
+     */
+    @Get
+    @HttpResource(location = "/account/{accountID}")
+    GPAccountProject getDefaultAccountProject(
+            @WebParam(name = "accountID") Long accountID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve, in paginated way, all the Account Projects. There are two
+     * Project type, first that the Account is the owner, and latter related at
+     * a shared Project.
+     * <p/>
+     * Each Project result, if shared, contain the own Account owner.
+     *
+     * @param accountID the Account ID
+     * @param request the request that wrap Project ID, Project name and Account
+     * ID
+     * @return all Projects of the Account
+     * @throws ResourceNotFoundFault if Account not found
+     */
     @Get
     @HttpResource(location = "/accounts/search/{num}/{page}/{nameLike}")
-    @WebResult(name = "Projects")
+    @WebResult(name = "Project")
     List<ProjectDTO> searchAccountProjects(
             @WebParam(name = "accountID") Long accountID,
             PaginatedSearchRequest request) throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve the Account owner of a Project.
+     *
+     * @param projectID the Project ID
+     * @return the Account owner
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Post
+    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
+    GPAccount getProjectOwner(@WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Set an Account owner for a Project.
+     *
+     * @param request the request that wrap Project ID and Account ID
+     * @return true if the Account owner was changed
+     * @throws ResourceNotFoundFault if Project or Account not found
+     */
+    @Post
+    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
+    boolean setProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Force an Account owner for a Project.
+     *
+     * @param request the request that wrap Project ID and Account ID
+     * @return true if the Account owner was forced
+     * @throws ResourceNotFoundFault if Project or Account not found
+     */
+    @Post
+    @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
+    void forceProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve the default Project of an Account. If the Account don't have a
+     * default Project, return null.
+     *
+     * @param accountID the Account ID
+     * @return the default Project or null
+     * @throws ResourceNotFoundFault if Account not found
+     */
     @Get
     @HttpResource(location = "/account/{accountID}")
     @WebResult(name = "DefaultProject")
     GPProject getDefaultProject(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
+    /**
+     * Retrieve the default Project of an Account. The Project result, if
+     * shared, contain the own Account owner. If the Account don't have a
+     * default Project, return null.
+     *
+     * @param accountID the Account ID
+     * @return the default Project or null
+     * @throws ResourceNotFoundFault if Account not found
+     */
+    @Get
+    @HttpResource(location = "/account/{accountID}")
+    @WebResult(name = "DefaultProjectDTO")
+    ProjectDTO getDefaultProjectDTO(@WebParam(name = "accountID") Long accountID)
+            throws ResourceNotFoundFault;
+
     @Post
     @HttpResource(location = "/account/defaultProject")
-    void updateDefaultProject(@WebParam(name = "accountID") Long accountID,
+    boolean updateDefaultProject(@WebParam(name = "accountID") Long accountID,
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
@@ -515,19 +603,49 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
-     * Retrieve Users of a shared Project, except the administration of the
-     * Project.
+     * Retrieve all Accounts of a (shared) Project.
      *
-     * @param sharedProjectID the shared Project ID
-     * @return the list of Users to which the Project is shared
+     * @param projectID the Project ID
+     * @return the Account owner and of the Accounts to which the Project is
+     * shared
      * @throws ResourceNotFoundFault if Project not found
-     * @throws IllegalParameterFault if Project is not shared
      */
     @Get
-    @WebResult(name = "DefaultProject")
-    List<ShortAccountDTO> getAccountsBySharedProjectID(
-            @WebParam(name = "sharedProjectID") Long sharedProjectID)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    @WebResult(name = "Account")
+    List<ShortAccountDTO> getAccountsByProjectID(
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve all Accounts to which it is possible to share a Project.
+     *
+     * @param projectID the Project ID
+     * @return the Accounts to which the Project is not shared
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Get
+    @WebResult(name = "Account")
+    List<ShortAccountDTO> getAccountsToShareByProjectID(
+            @WebParam(name = "projectID") Long projectID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Update all at once the relations of sharing for a Project. The Account
+     * owner ID relation for the Project will be ignored.
+     *
+     * @param projectID the Project ID
+     * @param accountIDsProject the Account IDs which will be updated the
+     * relation of sharing
+     * @return true if the relations of sharing are updated
+     * @throws ResourceNotFoundFault if Project not found or an Account not
+     * found
+     */
+    @Post
+    @WebResult(name = "Account")
+    boolean updateAccountsProjectSharing(
+            @WebParam(name = "projectID") Long projectID,
+            @WebParam(name = "accountIDsProject") List<Long> accountIDsProject)
+            throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================
@@ -537,8 +655,8 @@ public interface GeoPlatformService {
     /**
      * Save a Project and its Account owner.
      *
-     * @param stringID the string ID of the Account (username for User and appID
-     * for Application) owner of the Project
+     * @param accountNaturalID the string ID of the Account (username for User
+     * and appID for Application) owner of the Project
      * @param project the Project to save
      * @param defaultProject flag for save the Project as default for the
      * Account
@@ -548,7 +666,7 @@ public interface GeoPlatformService {
      */
     @Put
     @HttpResource(location = "/project")
-    Long saveProject(@WebParam(name = "stringID") String stringID,
+    Long saveProject(@WebParam(name = "accountNaturalID") String accountNaturalID,
             @WebParam(name = "project") GPProject project,
             @WebParam(name = "defaultProject") boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -631,33 +749,11 @@ public interface GeoPlatformService {
     void setProjectShared(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
-    /**
-     * Set an Account owner for a Project.
-     *
-     * @param request the request that wrap Project ID and Account ID
-     * @throws ResourceNotFoundFault if Project or Account not found
-     */
-    @Post
-    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
-    boolean setProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault;
-
-    /**
-     * Force an Account owner for a Project.
-     *
-     * @param request the request that wrap Project ID and Account ID
-     * @throws ResourceNotFoundFault if Project or Account not found
-     */
-    @Post
-    @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
-    void forceProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Viewport">
     // ==========================================================================
     // === Viewport
     // ==========================================================================
-
     @Get
     @HttpResource(location = "/viewport/{{accountProjectID}}")
     @WebResult(name = "Viewport")
@@ -831,7 +927,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/projects/{projectID}")
-    @WebResult(name = "RootFolders")
+    @WebResult(name = "RootFolder")
     List<FolderDTO> getRootFoldersByProjectID(
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -920,6 +1016,7 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layers/{descendantsMap}")
+    @WebResult(name = "LayerID")
     ArrayList<Long> saveAddedLayersAndTreeModifications(
             @WebParam(name = "projectID") Long projectID,
             @WebParam(name = "parentFolderID") Long parentFolderID,
@@ -989,7 +1086,7 @@ public interface GeoPlatformService {
      * @return Styles of a layer.
      */
     @Get
-    @WebResult(name = "LayerStyles")
+    @WebResult(name = "LayerStyle")
     List<StyleDTO> getLayerStyles(@WebParam(name = "layerID") Long layerID);
 
     /**
@@ -1020,7 +1117,7 @@ public interface GeoPlatformService {
     // * @return Styles of a layer.
     // */
     // @Get
-    // @WebResult(name = "LayerStyles")
+    // @WebResult(name = "LayerStyle")
     // List<StyleDTO> getLayerStyles(@WebParam(name = "layerID") Long layerID);
     //
     // /**
@@ -1043,7 +1140,7 @@ public interface GeoPlatformService {
      * @return layer data source of given owner.
      */
     @Get
-    @WebResult(name = "LayerDataSources")
+    @WebResult(name = "LayerDataSource")
     ArrayList<String> getLayersDataSourceByProjectID(
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
@@ -1062,7 +1159,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/roles")
-    @WebResult(name = "Roles")
+    @WebResult(name = "Role")
     List<String> getAllRoles(@WebParam(name = "organization") String organization)
             throws ResourceNotFoundFault;
 
@@ -1073,7 +1170,7 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/permissions/ids")
-    @WebResult(name = "GuiComponentIDs")
+    @WebResult(name = "GuiComponentID")
     List<String> getAllGuiComponentIDs();
 
     /**
@@ -1214,10 +1311,126 @@ public interface GeoPlatformService {
             throws IllegalParameterFault;
 
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Message">
+    // ==========================================================================
+    // === Message
+    // ==========================================================================
+    /**
+     * Insert a Message.
+     *
+     * @param message the Message to insert
+     * @return the Message ID
+     * @throws ResourceNotFoundFault if the Account recipient or sender not
+     * found
+     * @throws IllegalParameterFault if Message is not valid
+     */
+    @Put
+    Long insertMessage(@WebParam(name = "message") GPMessage message)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    /**
+     * Insert a same Message for each Account recipient.
+     *
+     * @param messageDTO the Message to insert for each Account recipient
+     * @return true if the Messages was added
+     * @throws ResourceNotFoundFault if Account sender or one Account recipient
+     * not found
+     */
+    @Put
+    boolean insertMultiMessage(@WebParam(name = "messageDTO") MessageDTO messageDTO)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Delete a Message by ID.
+     *
+     * @param messageID the Message ID
+     * @return true if the Message was deleted
+     * @throws ResourceNotFoundFault if Message not found
+     */
+    @Delete
+    boolean deleteMessage(@WebParam(name = "messageID") Long messageID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve a Message by ID.
+     *
+     * @param messageID the Message ID
+     * @return the Message to retrieve
+     * @throws ResourceNotFoundFault if Message not found
+     */
+    @Get
+    GPMessage getMessageDetail(@WebParam(name = "messageID") Long messageID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve all Messages of an Account recipient, sorted in descending order
+     * by creation date.
+     *
+     * @param recipientID the Account recipient ID
+     * @return list of all Messages
+     * @throws ResourceNotFoundFault if Account recipient not found
+     */
+    @Get
+    @WebResult(name = "Message")
+    List<GPMessage> getAllMessagesByRecipient(
+            @WebParam(name = "recipientID") Long recipientID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve unread Messages of an Account recipient, sorted in descending
+     * order by creation date.
+     *
+     * @param recipientID the Account recipient ID
+     * @return list of unread Messages
+     * @throws ResourceNotFoundFault if Account recipient not found
+     */
+    @Get
+    @WebResult(name = "Message")
+    List<GPMessage> getUnreadMessagesByRecipient(
+            @WebParam(name = "recipientID") Long recipientID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Mark a Message as read.
+     *
+     * @param messageID the Message ID
+     * @return true if the Message was marked
+     * @throws ResourceNotFoundFault if Message not found
+     */
+    boolean markMessageAsRead(@WebParam(name = "messageID") Long messageID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Mark all Messages of an Account recipient as read.
+     *
+     * @param recipientID the Account recipient ID
+     * @return true if the Messages was marked
+     * @throws ResourceNotFoundFault if Account recipient not found
+     */
+    @Post
+    boolean markAllMessagesAsReadByRecipient(
+            @WebParam(name = "recipientID") Long recipientID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Mark all unread Messages, until a date, of an Account recipient as read.
+     *
+     * @param recipientID the Account recipient ID
+     * @param toDate the date to search unread Messages until this date
+     * @return true if the Messages was marked
+     * @throws ResourceNotFoundFault if Account recipient not found
+     */
+    @Post
+    boolean markMessagesAsReadByDate(
+            @WebParam(name = "recipientID") Long recipientID,
+            @WebParam(name = "toDate") Date toDate)
+            throws ResourceNotFoundFault;
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Access Info">
     // ==========================================================================
     // === Access Info
     // ==========================================================================
+
     @Put
     @HttpResource(location = "/permissions/GSAccount")
     Long insertGSAccount(@WebParam(name = "GSAccount") GSAccount gsAccount);

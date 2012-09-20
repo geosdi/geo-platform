@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model.projects;
 
+import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
@@ -55,6 +56,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     private boolean shared;
     private boolean defaultProject;
     private String message;
+    private IGPUserSimpleDetail owner;
 
     /**
      * @return the id
@@ -127,6 +129,14 @@ public class GPClientProject extends GeoPlatformBeanModel {
         set(GPClientProjectKey.PROJECT_VERSION.toString(), this.version);
     }
 
+    public IGPUserSimpleDetail getOwner() {
+        return owner;
+    }
+
+    public void setOwner(IGPUserSimpleDetail owner) {
+        this.owner = owner;
+    }
+
     /**
      * @return the shared
      */
@@ -134,12 +144,16 @@ public class GPClientProject extends GeoPlatformBeanModel {
         return shared;
     }
 
+    public String getSharedLabel() {
+        return shared ? "Shared" : "";
+    }
+
     /**
      * @param shared the shared to set
      */
     public void setShared(boolean shared) {
         this.shared = shared;
-        set(GPClientProjectKey.PROJECT_SHARED.toString(), this.shared);
+        set(GPClientProjectKey.PROJECT_SHARED.toString(), this.getSharedLabel());
     }
 
     /**
@@ -149,32 +163,32 @@ public class GPClientProject extends GeoPlatformBeanModel {
         return defaultProject;
     }
 
+    public String getDefaultProjectLabel() {
+        return defaultProject ? "DEFAULT PROJECT" : "";
+    }
+
     /**
      * @param defaultProject the defaultProject to set
      */
     public void setDefaultProject(boolean defaultProject) {
         this.defaultProject = defaultProject;
         set(GPClientProjectKey.DEFAULT_PROJECT.toString(), this.defaultProject);
-        this.setMessage(this.defaultProject ? GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString()
-                + "Yes" : GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString()
-                + "No");
+        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.getDefaultProjectLabel());
     }
 
-    /**
-     * @return the message
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * @param message the message to set
-     */
-    public void setMessage(String message) {
-        this.message = message;
-        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.message);
-    }
-
+//    /**
+//     * @return the message
+//     */
+//    public String getMessage() {
+//        return message;
+//    }
+//    /**
+//     * @param message the message to set
+//     */
+//    public void setMessage(String message) {
+//        this.message = message;
+//        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.message);
+//    }
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

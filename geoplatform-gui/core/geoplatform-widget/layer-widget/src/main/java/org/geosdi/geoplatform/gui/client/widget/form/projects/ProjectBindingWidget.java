@@ -49,6 +49,7 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
+import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.projects.AddProjectAction;
@@ -56,34 +57,33 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
-import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectCheckFieldBinding;
+import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectDefaultFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectNameFieldBinding;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchWidget;
-import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchWidget;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
+import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> {
 
-    private GPListViewSearchWidget<GPClientProject> searchWidget;
+    private GPListViewSearchPanel<GPClientProject> searchWidget;
     private TextField<String> projectFieldName;
     private CheckBox projectDefaultCheck;
-    private Button save;
+    private GPSecureButton save;
     private Button cancel;
     private FormButtonBinding buttonBinding;
 
-    public ProjectBindingWidget(GPListViewSearchWidget<GPClientProject> theWidget) {
+    public ProjectBindingWidget(GPListViewSearchPanel<GPClientProject> theWidget) {
         super();
         this.searchWidget = theWidget;
-
         super.addWindowListener(new WindowListener() {
-
             @Override
             public void windowShow(WindowEvent we) {
                 manageComponents();
@@ -96,7 +96,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
         this.formBinding.setStore(this.searchWidget.getStore());
         super.formBinding.addFieldBinding(new ProjectNameFieldBinding(projectFieldName,
                 GPClientProjectKey.PROJECT_NAME.toString()));
-        super.formBinding.addFieldBinding(new ProjectCheckFieldBinding(projectDefaultCheck,
+        super.formBinding.addFieldBinding(new ProjectDefaultFieldBinding(projectDefaultCheck,
                 GPClientProjectKey.DEFAULT_PROJECT.toString()));
     }
 
@@ -108,27 +108,20 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
         layout.setLabelWidth(120);
         layout.setLabelPad(5);
         fieldSet.setLayout(layout);
-
         this.projectFieldName = new TextField<String>();
         this.projectFieldName.setAllowBlank(false);
         this.projectFieldName.setEmptyText("Insert Name for Project (required)");
         this.projectFieldName.setName(GPClientProjectKey.PROJECT_NAME.name());
         this.projectFieldName.setFieldLabel("Project Name");
-
         fieldSet.add(this.projectFieldName);
-
         this.projectDefaultCheck = new CheckBox();
         this.projectDefaultCheck.setBoxLabel("Is Default");
         this.projectDefaultCheck.setName(GPClientProjectKey.DEFAULT_PROJECT.toString());
-
         CheckBoxGroup checkGroup = new CheckBoxGroup();
         checkGroup.setFieldLabel("Project State");
         checkGroup.add(this.projectDefaultCheck);
-
         fieldSet.add(checkGroup);
-
         this.formPanel.add(fieldSet);
-
         this.addButtons();
     }
 
@@ -140,7 +133,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     @Override
     public void initSizeFormPanel() {
-        super.formPanel.setHeaderVisible(false);
+        super.formPanel.setHeaderVisible(Boolean.FALSE);
         super.formPanel.setSize(420, 200);
     }
 
@@ -154,10 +147,9 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     }
 
     /**
-     * 
-     * @param boolean useNewEntity 
-     *         TRUE to use a new Instance of GPClientProject
-     *         FALSE to use selected item in the store
+     *
+     * @param boolean useNewEntity TRUE to use a new Instance of GPClientProject
+     * FALSE to use selected item in the store
      */
     public void showForm(boolean useNewEntity) {
         if (useNewEntity) {
@@ -172,8 +164,8 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     }
 
     /**
-     * Important method to ensure the proper functioning
-     *  of the GXT Model binding
+     * Important method to ensure the proper functioning of the GXT Model
+     * binding
      */
     public void storeRejectChanges() {
         this.searchWidget.getStore().rejectChanges();
@@ -196,18 +188,13 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     private void addButtons() {
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
-
-        this.save = new Button("Save", BasicWidgetResources.ICONS.save(),
-                new AddProjectAction(this));
-
+        this.save = new GPSecureButton("Save", BasicWidgetResources.ICONS.save(),
+                new AddProjectAction(this, GPRole.ADMIN));
         formPanel.addButton(save);
-
         buttonBinding = new FormButtonBinding(formPanel);
         buttonBinding.addButton(save);
-
         this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         storeRejectChanges();
@@ -221,7 +208,6 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     private void insertProject() {
         LayerRemote.Util.getInstance().saveProject(entity,
                 new AsyncCallback<Long>() {
-
                     @Override
                     public void onFailure(Throwable caught) {
                         GeoPlatformMessage.errorMessage("Add Project Error",
@@ -232,20 +218,16 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
                     public void onSuccess(Long result) {
                         entity.setId(result);
                         searchWidget.getStore().insert(entity, 0);
-
                         if (entity.isDefaultProject()) {
                             changeDefaultProject();
                         }
-
                         searchWidget.getStore().commitChanges();
-
                         GeoPlatformMessage.infoMessage("Project successfully added",
                                 "<ul><li>" + entity.getName() + "</li></ul>");
 
                         if (entity.isDefaultProject()) {
-                            TimeoutHandlerManager.fireEvent(((GPProjectSearchWidget) searchWidget).getDefaultProjectEvent());
+                            TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
                         }
-
                         hide();
                     }
                 });
@@ -254,7 +236,6 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     private void updateProject() {
         LayerRemote.Util.getInstance().updateProject(entity,
                 new AsyncCallback<Object>() {
-
                     @Override
                     public void onFailure(Throwable caught) {
                         GeoPlatformMessage.errorMessage("Update Project Error",
@@ -265,18 +246,14 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
                     public void onSuccess(Object result) {
                         searchWidget.getStore().remove(entity);
                         searchWidget.getStore().insert(entity, 0);
-
                         if (entity.isDefaultProject()) {
                             changeDefaultProject();
                         }
-
                         searchWidget.getStore().commitChanges();
-
                         GeoPlatformMessage.infoMessage("Project successfully Updated",
                                 "<ul><li>" + entity.getName() + "</li></ul>");
-
                         if (entity.isDefaultProject()) {
-                            TimeoutHandlerManager.fireEvent(((GPProjectSearchWidget) searchWidget).getDefaultProjectEvent());
+                            TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
                         }
 
                         hide();
@@ -286,11 +263,10 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     private void changeDefaultProject() {
         List<GPClientProject> projects = this.searchWidget.getStore().getModels();
-
         for (int i = 1; i < projects.size(); i++) {
             GPClientProject gPClientProject = projects.get(i);
             if (gPClientProject.isDefaultProject()) {
-                gPClientProject.setDefaultProject(false);
+                gPClientProject.setDefaultProject(Boolean.FALSE);
                 return;
             }
         }

@@ -37,8 +37,10 @@ package org.geosdi.geoplatform.gui.model.tree;
 
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-
+/**
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
+ */
 public abstract class AbstractRootTreeNode extends GPBeanTreeModel {
 
     private static final long serialVersionUID = 7390478659972066466L;

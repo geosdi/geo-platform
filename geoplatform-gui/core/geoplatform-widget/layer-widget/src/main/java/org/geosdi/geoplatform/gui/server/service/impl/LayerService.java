@@ -64,6 +64,7 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
@@ -74,6 +75,7 @@ import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -559,7 +561,6 @@ public class LayerService implements ILayerService {
         }
 
         int start = config.getOffset();
-
         SearchRequest srq = new SearchRequest(searchText);
         try {
             Long projectsCount = this.geoPlatformServiceClient.getAccountProjectsCount(account.getId(), srq);
@@ -578,14 +579,7 @@ public class LayerService implements ILayerService {
             ArrayList<GPClientProject> clientProjects = new ArrayList<GPClientProject>();
 
             for (ProjectDTO projectDTO : projectsDTO) {
-                GPClientProject clientProject = this.convertToGPCLientProject(projectDTO, imageURL);
-                if (account.getDefaultProjectID() != null) {
-                    if (account.getDefaultProjectID().equals(clientProject.getId())) {
-                        clientProject.setDefaultProject(true);
-                    } else {
-                        clientProject.setDefaultProject(false);
-                    }
-                }
+                GPClientProject clientProject = this.dtoConverter.convertToGPCLientProject(projectDTO, imageURL);
                 clientProjects.add(clientProject);
             }
 
@@ -598,16 +592,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    private GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
-            String imageURL) {
-        GPClientProject clientProject = new GPClientProject();
-        clientProject.setId(projectDTO.getId());
-        clientProject.setName(projectDTO.getName());
-        clientProject.setImage(imageURL);
-        clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
-        return clientProject;
-    }
-
     @Override
     public void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
@@ -615,8 +599,6 @@ public class LayerService implements ILayerService {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
 
             this.geoPlatformServiceClient.updateDefaultProject(account.getId(), projectID);
-
-            account.setDefaultProjectID(projectID);
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(account, projectID,
                     httpServletRequest);
@@ -633,29 +615,28 @@ public class LayerService implements ILayerService {
     public Long saveProject(GPClientProject project,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
 
+        Long projectId = null;
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
-            Long projectId = this.geoPlatformServiceClient.saveProject(account.getStringID(),
+            projectId = this.geoPlatformServiceClient.saveProject(account.getNaturalID(),
                     this.dtoConverter.convertToGProject(project), project.isDefaultProject());
-
-            account.setDefaultProjectID(projectId);
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(account, projectId,
                     httpServletRequest);
 
-            return projectId;
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
 
         } catch (ResourceNotFoundFault rnf) {
-            this.logger.error("Failed to save project on SecurityService: " + rnf);
+            this.logger.error("Failed to save project on SecurityService: {}", rnf);
             throw new GeoPlatformException(rnf);
 
         } catch (IllegalParameterFault ilg) {
-            logger.error(
-                    "Error on SecurityService: " + ilg);
+            logger.error("Error on SecurityService: {}", ilg);
             throw new GeoPlatformException("Parameter incorrect on saveProject");
         }
+        
+        return projectId;
     }
 
     @Override
@@ -669,7 +650,6 @@ public class LayerService implements ILayerService {
                     project);
 
             if (this.geoPlatformServiceClient.saveAccountProjectProperties(dto)) {
-                account.setDefaultProjectID(project.getId());
                 this.sessionUtility.storeLoggedAccountAndDefaultProject(account, project.getId(),
                         httpServletRequest);
             }
@@ -719,5 +699,84 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
+    }
+
+    @Override
+    public ArrayList<GPSimpleUser> getOrganizationUsers(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        ArrayList<GPSimpleUser> simpleUserList = null;
+        try {
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccounts(account.getOrganization().getName());
+            simpleUserList = Lists.newArrayList(this.dtoConverter.convertToGPSimpleUser(accounts));
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        } catch (ResourceNotFoundFault rnf) {
+            logger.error("Failed to load Organization Users on SecurityService: " + rnf);
+            throw new GeoPlatformException(rnf);
+        }
+        return simpleUserList;
+    }
+
+    @Override
+    public ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(long projectId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        ArrayList<GPSimpleUser> simpleUserList = null;
+        try {
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccountsToShareByProjectID(projectId);
+            simpleUserList = Lists.newArrayList(this.dtoConverter.convertToGPSimpleUser(accounts));
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        } catch (ResourceNotFoundFault rnf) {
+            logger.error("Failed to load Organization Users on SecurityService: " + rnf);
+            throw new GeoPlatformException(rnf);
+        }
+        return simpleUserList;
+    }
+
+    @Override
+    public ArrayList<GPSimpleUser> getAccountsFromSharedProject(long idSharedProject, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        ArrayList<GPSimpleUser> simpleUserList = null;
+        try {
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccountsByProjectID(idSharedProject);
+            simpleUserList = Lists.newArrayList(this.dtoConverter.convertToGPSimpleUser(accounts));
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        } catch (ResourceNotFoundFault rnf) {
+            logger.error("Failed to load Accounts for Shared Project with id: " + idSharedProject + "on SecurityService: " + rnf);
+            throw new GeoPlatformException(rnf);
+        }
+        return simpleUserList;
+    }
+
+    @Override
+    public boolean shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        boolean result = false;
+        try {
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            result = this.geoPlatformServiceClient.updateAccountsProjectSharing(idSharedProject, accountIDsProject);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        } catch (ResourceNotFoundFault rnf) {
+            logger.error("Failed to save Shared project to Accounts for Shared Project with id: " + idSharedProject + "on SecurityService: " + rnf);
+            throw new GeoPlatformException(rnf);
+        }
+        return result;
+    }
+
+    @Override
+    public GPClientProject loadDefaultProject(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        ProjectDTO projectDTO = null;
+        try {
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            projectDTO = this.geoPlatformServiceClient.getDefaultProjectDTO(account.getId());
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("An Error Occured : " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        }
+        return this.dtoConverter.convertToGPClientProject(projectDTO);
     }
 }

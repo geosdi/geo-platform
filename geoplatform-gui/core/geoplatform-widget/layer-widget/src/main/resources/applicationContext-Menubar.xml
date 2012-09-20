@@ -17,10 +17,10 @@
         <property name="order" value="30" />
     </bean>
     
-    <bean id="loadProjects"
+    <bean id="manageProjects"
           class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-        <property name="id" value="loadProjects" />
-        <property name="text" value="Load Projects" />
+        <property name="id" value="manageProjects" />
+        <property name="text" value="Manage Projects" />
         <property name="enabled" value="true" />
         <property name="order" value="5" />
     </bean>

@@ -58,17 +58,17 @@ public interface GPAuthorityDAO {
 
     public boolean removeById(Long id);
 
-    public void removeAllUserAuthorities(String stringID);
+    public void removeAllUserAuthorities(String accountNaturalID);
 
     public List<GPAuthority> search(ISearch search);
 
     public int count(ISearch search);
 
-    public List<GPAuthority> findByStringID(String stringID);
+    public List<GPAuthority> findByAccountNaturalID(String accountNaturalID);
     
     /**
-     * @param stringID
+     * @param accountNaturalID
      * @return List of authorities less ref to account entity
      */
-    public List<GPAuthority> findShortByStringID(String stringID);
+    public List<GPAuthority> findShortByAccountNaturalID(String accountNaturalID);
 }

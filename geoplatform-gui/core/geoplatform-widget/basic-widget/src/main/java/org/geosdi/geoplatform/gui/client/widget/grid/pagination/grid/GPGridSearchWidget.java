@@ -41,7 +41,7 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWidget;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWindow;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPGridSearchWidget<T extends GeoPlatformBeanModel>
-        extends GeoPlatformSearchWidget<Grid<T>, T> {
+        extends GeoPlatformSearchWindow<Grid<T>, T> {
 
     public GPGridSearchWidget(boolean lazy) {
         super(lazy);

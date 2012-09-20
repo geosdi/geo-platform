@@ -42,7 +42,7 @@ package org.geosdi.geoplatform.gui.global.enumeration;
 public enum GlobalRegistryEnum {
 
     AUTH_KEY("authkey"), EMITE_RESOURCE("emiteResource"),
-    BASE_LAYER("baseLayer"),  VIEWPORT("viewport"), TOOLTIP("tooltip");
+    BASE_LAYER("baseLayer"), TOOLTIP("tooltip");
     private String value;
 
     private GlobalRegistryEnum(String value) {

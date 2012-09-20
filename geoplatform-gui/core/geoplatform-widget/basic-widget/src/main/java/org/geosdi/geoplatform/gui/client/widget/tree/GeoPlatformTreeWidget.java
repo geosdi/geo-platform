@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree;
 
+import com.extjs.gxt.ui.client.Registry;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import com.extjs.gxt.ui.client.store.TreeStore;
@@ -44,10 +45,11 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
 
+    public static final String TREE_PANEL = "treePanel";
     protected TreeStore<T> store;
     protected GPTreePanel<T> tree;
 
@@ -58,13 +60,13 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
     public GeoPlatformTreeWidget() {
         this.store = new TreeStore<T>();
         this.tree = this.createTreePanel(store);
+        Registry.register(TREE_PANEL, tree);
     }
 
     /**
      * True to highlight nodes when the mouse is over (defaults to true).
      *
-     * @param trackMouseOver
-     *            true to highlight nodes on mouse over
+     * @param trackMouseOver true to highlight nodes on mouse over
      */
     public void setTrackMouseOver(boolean trackMouseOver) {
         this.tree.setTrackMouseOver(trackMouseOver);
@@ -73,8 +75,7 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
     /**
      * Sets whether check boxes are used in the tree.
      *
-     * @param checkable
-     *            true for check boxes
+     * @param checkable true for check boxes
      */
     public void setCheckable(boolean checkable) {
         this.tree.setCheckable(checkable);
@@ -84,17 +85,11 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
      * Sets the cascading behavior for check tree (defaults to PARENTS). When
      * using CHILDREN, it is important to note that the cascade will only be
      * applied to rendered nodes. {@link #setAutoLoad(boolean)} can be used to
-     * fully render the tree on render.
-     * <p>
-     * Valid values are:
-     * <ul>
-     * <li>NONE - no cascading</li>
-     * <li>PARENTS - cascade to parents</li>
-     * <li>CHILDREN - cascade to children</li>
-     * </ul>
+     * fully render the tree on render. <p> Valid values are: <ul> <li>NONE - no
+     * cascading</li> <li>PARENTS - cascade to parents</li> <li>CHILDREN -
+     * cascade to children</li> </ul>
      *
-     * @param checkStyle
-     *            the child style
+     * @param checkStyle the child style
      */
     public void setCheckStyle(CheckCascade checkStyle) {
         this.tree.setCheckStyle(checkStyle);
@@ -110,8 +105,7 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
     }
 
     /**
-     * @param store
-     *            the store to set
+     * @param store the store to set
      */
     public void setStore(TreeStore<T> store) {
         this.store = store;
@@ -125,8 +119,7 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
     }
 
     /**
-     * @param tree
-     *            the tree to set
+     * @param tree the tree to set
      */
     public void setTree(GPTreePanel<T> tree) {
         this.tree = tree;

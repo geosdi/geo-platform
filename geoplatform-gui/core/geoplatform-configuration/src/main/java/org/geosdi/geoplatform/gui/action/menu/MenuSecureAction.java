@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -47,8 +47,8 @@ public abstract class MenuSecureAction extends GeoPlatformSecureAction<MenuEvent
 
     private String title;
 
-    public MenuSecureAction(String title, GPRole role) {
-        super(role);
+    public MenuSecureAction(GPTrustedLevel trustedLevel, String title) {
+        super(trustedLevel);
         this.title = title;
     }
 

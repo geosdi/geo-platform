@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.core.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,6 +47,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
@@ -77,8 +80,9 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     @Column(nullable = false)
     private String authority;
     //
-    @Column(name = "user_level", nullable = false)
-    private int userLevel;
+    @Column(name = "trusted_level", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private GPTrustedLevel trustedLevel;
     //
     @Column(name = "account_natural_id", nullable = false)
     @Index(name = "AUTHORITY_ACCOUNT_NATURAL_ID_INDEX")
@@ -91,9 +95,9 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     public GPAuthority() {
     }
 
-    public GPAuthority(GPAccount account, String authority, int userLevel) {
+    public GPAuthority(GPAccount account, String authority, GPTrustedLevel trustedLevel) {
         this.account = account;
-        this.userLevel = userLevel;
+        this.trustedLevel = trustedLevel;
         this.accountNaturalID = account.getNaturalID();
         this.authority = authority;
     }
@@ -112,14 +116,6 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         this.id = id;
     }
 
-    public int getUserLevel() {
-        return userLevel;
-    }
-
-    public void setUserLevel(int userLevel) {
-        this.userLevel = userLevel;
-    }
-
     /**
      * @return authority
      */
@@ -133,6 +129,20 @@ public class GPAuthority implements GrantedAuthority, Serializable {
      */
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    /**
+     * @return the trustedLevel
+     */
+    public GPTrustedLevel getTrustedLevel() {
+        return trustedLevel;
+    }
+
+    /**
+     * @param trustedLevel the trustedLevel to set
+     */
+    public void setTrustedLevel(GPTrustedLevel trustedLevel) {
+        this.trustedLevel = trustedLevel;
     }
 
     /**
@@ -173,6 +183,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append("id=").append(id);
         str.append(", authority=").append(authority);
+        str.append(", trustedLevel=").append(trustedLevel);
         str.append(", accountNaturalID=").append(accountNaturalID);
         str.append(", account=").append(account);
         return str.append("}").toString();

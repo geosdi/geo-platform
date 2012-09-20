@@ -26,7 +26,7 @@ public interface IGPAccountDetail {
 
     String getBaseLayer();
 
-    int getUserLevel();
+    int getTrustedLevel();
 
     String getAuthority();
 

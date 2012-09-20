@@ -197,12 +197,12 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     }
 
     @Override
-    public int getUserLevel() {
+    public int getTrustedLevel() {
         return this.userLevel;
     }
 
     @Override
-    public void setUserLevel(int userLevel) {
-        this.userLevel = userLevel;
+    public void setTrustedLevel(int trustedLevel) {
+        this.userLevel = trustedLevel;
     }
 }

@@ -36,28 +36,35 @@
 package org.geosdi.geoplatform.gui.shared;
 
 /**
+ * Default roles of the ACLs.
+ * <p/>
+ * The <u>role</u> denote the authority for access to a use case, meantime the
+ * <u>trusted level</u> denote the execution permissions for a use case.
+ *
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public enum GPRole {
 
-    /**
-     * Default roles for ACLs purpose
-     */
-    ADMIN("Admin", 99999),
-    USER("User", 50000),
-    VIEWER("Viewer", 10000);
+    ADMIN("Admin", GPTrustedLevel.FULL),
+    USER("User", GPTrustedLevel.RESTRICT),
+    VIEWER("Viewer", GPTrustedLevel.NONE);
     //
     private String role;
-    private int userLevel;
+    private GPTrustedLevel trustedLevel;
 
-    private GPRole(String role, int userLevel) {
+    private GPRole(String role, GPTrustedLevel trustedLevel) {
         this.role = role;
-        this.userLevel = userLevel;
+        this.trustedLevel = trustedLevel;
     }
 
-    public int getUserLevel() {
-        return this.userLevel;
+    public String getRole() {
+        return role;
+    }
+
+    public GPTrustedLevel getTrustedLevel() {
+        return this.trustedLevel;
     }
 
     @Override

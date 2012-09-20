@@ -108,7 +108,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private ContentPanel mainPanel;
     private SplitButton allPermissionsButton;
     private Button copyPermissionsButton;
-    private TextField<Integer> userLevelTextField;
+    private TextField<Integer> trustedLevelTextField;
     private Menu copyPermissionsMenu;
     private SearchStatus searchStatus;
     private Button resetButton;

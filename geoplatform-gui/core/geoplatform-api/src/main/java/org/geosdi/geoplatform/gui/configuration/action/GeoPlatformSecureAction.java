@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -48,16 +48,16 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
 public abstract class GeoPlatformSecureAction<X extends ComponentEvent>
         extends GeoPlatformAction<X> {
 
-    private GPRole gpRole;
+    private GPTrustedLevel trustedLevel;
 
-    public GeoPlatformSecureAction(GPRole gprole) {
-        this.gpRole = gprole;
+    public GeoPlatformSecureAction(GPTrustedLevel trustedLevel) {
+        this.trustedLevel = trustedLevel;
     }
 
     @Override
     public boolean isEnabled() {
         IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        return accountDetail.getUserLevel() >= this.gpRole.getUserLevel();
+        return accountDetail.getTrustedLevel() >= this.trustedLevel.ordinal();
     }
 
     /**

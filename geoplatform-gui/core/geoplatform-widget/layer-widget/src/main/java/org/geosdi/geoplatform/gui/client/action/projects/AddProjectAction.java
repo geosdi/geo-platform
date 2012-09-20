@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.projects;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -50,8 +50,8 @@ public class AddProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     private ProjectBindingWidget widget;
 
-    public AddProjectAction(ProjectBindingWidget theWidget, GPRole role) {
-        super(role);
+    public AddProjectAction(GPTrustedLevel trustedLevel, ProjectBindingWidget theWidget) {
+        super(trustedLevel);
         this.widget = theWidget;
     }
 

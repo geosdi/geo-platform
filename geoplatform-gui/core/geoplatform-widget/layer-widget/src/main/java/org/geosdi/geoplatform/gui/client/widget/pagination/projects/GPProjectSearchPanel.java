@@ -55,7 +55,7 @@ import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListV
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -84,7 +84,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         super.finalizeInitOperations();
         super.selectButton.setText("Load on Tree");
         super.search.setFieldLabel("Find Project");
-        GPProjectAction action = new GPProjectAction(this, GPRole.ADMIN);
+        GPProjectAction action = new GPProjectAction(GPTrustedLevel.HIGH, this);
         GPSecureButton addProjectButton = new GPSecureButton("Add", LayerResources.ICONS.projectAdd(),
                 action);
         super.addButton(1, addProjectButton);
@@ -94,10 +94,10 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         this.editButton.disable();
         super.addButton(2, this.editButton);
         this.deleteButton = new GPSecureButton("Delete", LayerResources.ICONS.projectDelete(),
-                new DeleteProjectAction(this, GPRole.ADMIN));
+                new DeleteProjectAction(GPTrustedLevel.FULL, this));
         this.deleteButton.disable();
         super.addButton(3, this.deleteButton);
-        ShareProjectAction shareProjectAction = new ShareProjectAction(this, GPRole.ADMIN);
+        ShareProjectAction shareProjectAction = new ShareProjectAction(GPTrustedLevel.HIGH, this);
         this.shareButton = new GPSecureButton("Share", LayerResources.ICONS.arrowRefresh(), shareProjectAction);
         this.shareButton.disable();
         super.addButton(4, this.shareButton);

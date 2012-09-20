@@ -71,7 +71,7 @@ public interface IGPUserSimpleDetail extends Serializable {
 
     void setAuthority(String role);
 
-    int getUserLevel();
+    int getTrustedLevel();
 
-    void setUserLevel(int userLevel);
+    void setTrustedLevel(int trustedLevel);
 }

@@ -143,12 +143,12 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
     }
 
     @Override
-    public int getUserLevel() {
+    public int getTrustedLevel() {
         return super.get(GPSimpleUserKeyValue.USER_LEVEL.toString(), 0);
     }
 
     @Override
-    public void setUserLevel(int userLevel) {
+    public void setTrustedLevel(int userLevel) {
         super.set(GPSimpleUserKeyValue.USER_LEVEL.toString(), userLevel);
     }
 }

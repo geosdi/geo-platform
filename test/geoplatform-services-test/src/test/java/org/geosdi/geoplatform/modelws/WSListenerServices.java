@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.modelws;
 
 import java.util.concurrent.TimeUnit;
-import org.apache.cxf.jaxws.EndpointImpl;
+import javax.xml.ws.Endpoint;
 import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -79,12 +79,7 @@ public class WSListenerServices implements TestExecutionListener {
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
 
         String wsServerAddress = wsClientConnector.getAddress();
-        EndpointImpl endpoint = new EndpointImpl(geoPlatformService);
-        endpoint.setAddress(wsServerAddress);
-
-        if (!endpoint.isPublished()) {
-            endpoint.publish();
-        }
+        Endpoint.publish(wsServerAddress, geoPlatformService);
 
         logger.info("\n\t@@@ Server ready... @@@");
     }

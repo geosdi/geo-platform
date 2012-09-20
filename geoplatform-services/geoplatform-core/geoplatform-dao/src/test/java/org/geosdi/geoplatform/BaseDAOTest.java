@@ -463,15 +463,15 @@ public abstract class BaseDAOTest {
         projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //
         this.insertBindingUserProject(adminTest, adminProject,
-                BasePermission.ADMINISTRATION.getMask(), true);
+                                      BasePermission.ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(userTest, adminProject,
-                BasePermission.READ.getMask(), false);
+                                      BasePermission.READ.getMask(), false);
         this.insertBindingUserProject(userTest, userProject,
-                BasePermission.ADMINISTRATION.getMask(), true);
+                                      BasePermission.ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(viewerTest, viewerProject,
-                BasePermission.READ.getMask(), true);
+                                      BasePermission.READ.getMask(), true);
         this.insertBindingUserProject(gsUserTest, gsUserProject,
-                BasePermission.ADMINISTRATION.getMask(), true);
+                                      BasePermission.ADMINISTRATION.getMask(), true);
         //
         accountDAO.merge(adminTest, userTest, viewerTest, gsUserTest);
     }
@@ -496,7 +496,7 @@ public abstract class BaseDAOTest {
                     i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
             projectDAO.persist(projectIth);
             this.insertBindingUserProject(adminTest, projectIth,
-                    BasePermission.ADMINISTRATION.getMask(), false);
+                                          BasePermission.ADMINISTRATION.getMask(), false);
         }
 
         // Project of user -> root folder: "server layer"

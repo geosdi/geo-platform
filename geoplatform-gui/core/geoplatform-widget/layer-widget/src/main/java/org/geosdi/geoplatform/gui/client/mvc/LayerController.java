@@ -35,16 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
+import com.extjs.gxt.ui.client.mvc.AppEvent;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class LayerController extends GeoPlatformController {
 
@@ -52,8 +50,8 @@ public class LayerController extends GeoPlatformController {
      * @Constructor
      */
     public LayerController() {
-        registerEventTypes(GeoPlatformEvents.INIT_OGC_MODULES_WIDGET,
-                LayerEvents.SHOW_LAYER_WIDGET, LayerEvents.HIDE_LAYER_WIDGET);
+        registerEventTypes(LayerEvents.SHOW_LAYER_WIDGET,
+                           LayerEvents.HIDE_LAYER_WIDGET);
     }
 
     /**
@@ -69,11 +67,11 @@ public class LayerController extends GeoPlatformController {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     public void handleEvent(AppEvent event) {
         super.handleEvent(event);
     }
-
 }

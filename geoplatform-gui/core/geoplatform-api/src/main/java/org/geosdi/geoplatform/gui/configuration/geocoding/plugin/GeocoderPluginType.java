@@ -38,10 +38,22 @@ package org.geosdi.geoplatform.gui.configuration.geocoding.plugin;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public enum GeocoderPluginType {
 
-    SIMPLE, ADVANCED, ADVANCED_WITH_GOOGLE;
+    /**
+     * Only to have Google and Yahoo GeoCoder
+     */
+    SIMPLE,
+    /**
+     * To have an Implementation for a Particular GeoCoder
+     */
+    ADVANCED,
+    /**
+     * To have both Google, Yahoo and a particular implementation for a GeoCoder
+     * plugin
+     */
+    ADVANCED_WITH_GOOGLE;
 }

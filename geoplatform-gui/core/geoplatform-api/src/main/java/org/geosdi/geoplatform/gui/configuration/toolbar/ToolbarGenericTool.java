@@ -49,9 +49,8 @@ public abstract class ToolbarGenericTool extends GenericTool {
     /**
      * Check the permission of the user logged and call the method for creation.
      * If the permission was not found the tool will not be created.
-     * 
-     * @param menubar
-     * @param menu 
+     *
+     * @param toolbar
      */
     public void buildTool(IGeoPlatformToolbar toolbar) {
         Boolean permission = GPAccountLogged.getInstance().
@@ -64,8 +63,8 @@ public abstract class ToolbarGenericTool extends GenericTool {
 
     /**
      * Each component will be added into toolbar itself
-     * 
-     * @param toolbar 
+     *
+     * @param toolbar
      */
     protected abstract void create(IGeoPlatformToolbar toolbar);
 }

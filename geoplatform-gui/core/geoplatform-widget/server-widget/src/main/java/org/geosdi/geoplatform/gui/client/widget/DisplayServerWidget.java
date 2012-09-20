@@ -55,7 +55,6 @@ import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHa
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
@@ -68,6 +67,7 @@ import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2GEBLoginEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.ServerRemoteImpl;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 
@@ -88,8 +88,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     private PerformGetcapabilities loadCapabilities;
 
     /**
-     * @Constructor
-     * @param theGridWidget
+     * @Constructor @param theGridWidget
      */
     public DisplayServerWidget(GridLayersWidget theGridWidget) {
         TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE, this);
@@ -117,7 +116,6 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         comboServer.setTriggerAction(TriggerAction.ALL);
 
         this.comboServer.addSelectionChangedListener(new SelectionChangedListener<GPServerBeanModel>() {
-
             @Override
             public void selectionChanged(
                     SelectionChangedEvent<GPServerBeanModel> se) {
@@ -128,7 +126,6 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         this.manageServersButton = new Button("Manage Servers",
                 ServerWidgetResources.ICONS.addServer(),
                 new SelectionListener<ButtonEvent>() {
-
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         manageServersWidget.show();
@@ -140,7 +137,6 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     @Override
     public void activateManageServersButton() {
         ServerRemoteImpl.Util.getInstance().getUserAuthorities(new AsyncCallback<List<String>>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
@@ -164,7 +160,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                 manageServersButton.disable();
                 for (String role : result) {
                     System.out.println("Role: " + role);
-                    if (role.equals(IGPUserSimpleDetail.ADMIN)) {
+                    if (role.equals(GPRole.ADMIN.toString())) {
                         manageServersButton.enable();
                         return;
                     }
@@ -189,12 +185,12 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @return String
      */
     private native String getTemplate() /*-{
-    return  [
-    '<tpl for=".">',
-    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{alias}</div>',
-    '</tpl>'
-    ].join("");
-    }-*/;
+     return  [
+     '<tpl for=".">',
+     '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{alias}</div>',
+     '</tpl>'
+     ].join("");
+     }-*/;
 
     /**
      * Set the correct Status Iconn Style
@@ -216,7 +212,6 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         this.comboServer.clear();
         this.gridWidget.cleanStore();
         GeoPlatformOGCRemote.Util.getInstance().loadServers(new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
@@ -273,8 +268,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * Verify if the Server Url is already present in Store
      *
      * @param urlServer
-     * @return
-     * boolean
+     * @return boolean
      */
     public GPServerBeanModel containsServer(String urlServer) {
         for (GPServerBeanModel server : store.getModels()) {
@@ -331,7 +325,6 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         public void loadCapabilitiesFromWS() {
             GeoPlatformOGCRemote.Util.getInstance().getCapabilities(selectedServer.getId(),
                     new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
-
                         @Override
                         public void onFailure(Throwable caught) {
                             gridWidget.unMaskGrid();

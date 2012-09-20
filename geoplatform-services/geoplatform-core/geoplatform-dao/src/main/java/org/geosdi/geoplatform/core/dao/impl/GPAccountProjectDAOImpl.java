@@ -140,6 +140,42 @@ public class GPAccountProjectDAOImpl extends BaseDAO<GPAccountProject, Long>
     }
 
     @Override
+    public GPAccountProject find(Long accountID, Long projectID) {
+        Search search = new Search();
+        search.addFilterEqual("account.id", accountID);
+        search.addFilterEqual("project.id", projectID);
+        return searchUnique(search);
+    }
+
+    @Override
+    public GPAccountProject findDefaultProjectByAccountID(Long accountID) {
+        Search search = new Search();
+        search.addFilterEqual("account.id", accountID);
+        search.addFilterEqual("defaultProject", true);
+        return searchUnique(search);
+    }
+
+    @Override
+    public GPAccountProject forceAsDefaultProject(Long accountID, Long projectID) {
+        GPAccountProject oldDefault = this.findDefaultProjectByAccountID(accountID);
+        if (oldDefault != null) {
+            oldDefault.setDefaultProject(false);
+            this.merge(oldDefault);
+        }
+
+        Search search = new Search();
+        search.addFilterEqual("account.id", accountID);
+        search.addFilterEqual("project.id", projectID);
+        GPAccountProject newDefault = searchUnique(search);
+        if (newDefault == null) {
+            return null;
+        }
+
+        newDefault.setDefaultProject(true);
+        return this.merge(newDefault);
+    }
+
+    @Override
     public List<GPAccountProject> findByAccountID(Long accountID) {
         Search search = new Search();
         search.addFilterEqual("account.id", accountID);
@@ -170,18 +206,10 @@ public class GPAccountProjectDAOImpl extends BaseDAO<GPAccountProject, Long>
     }
 
     @Override
-    public List<GPAccountProject> findNotOwnerByProjectID(Long projectID) {
+    public List<GPAccountProject> findNotOwnersByProjectID(Long projectID) {
         Search search = new Search();
         search.addFilterEqual("project.id", projectID);
         search.addFilterNotEqual("permissionMask", BasePermission.ADMINISTRATION.getMask());
         return search(search);
-    }
-
-    @Override
-    public GPAccountProject find(Long accountID, Long projectID) {
-        Search search = new Search();
-        search.addFilterEqual("account.id", accountID);
-        search.addFilterEqual("project.id", projectID);
-        return searchUnique(search);
     }
 }

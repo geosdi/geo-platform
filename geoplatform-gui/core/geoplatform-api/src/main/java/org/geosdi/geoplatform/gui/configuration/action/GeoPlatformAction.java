@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHand
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GeoPlatformAction<X extends ComponentEvent>
         extends SelectionListener<X>
@@ -78,8 +78,7 @@ public abstract class GeoPlatformAction<X extends ComponentEvent>
     }
 
     /**
-     * @param enabled
-     *            the enabled to set
+     * @param enabled the enabled to set
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
@@ -94,7 +93,8 @@ public abstract class GeoPlatformAction<X extends ComponentEvent>
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public abstract void componentSelected(X e);

@@ -22,5 +22,13 @@
         <module>geoplatform-ws-core</module>
         <module>geoplatform-ws-util</module>
     </modules>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-sharing</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

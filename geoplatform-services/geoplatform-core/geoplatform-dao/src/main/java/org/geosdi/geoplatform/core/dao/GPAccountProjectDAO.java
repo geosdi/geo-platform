@@ -68,6 +68,12 @@ public interface GPAccountProjectDAO {
 
     public int count(ISearch search);
 
+    public GPAccountProject find(Long accountID, Long projectID);
+
+    public GPAccountProject findDefaultProjectByAccountID(Long accountID);
+
+    public GPAccountProject forceAsDefaultProject(Long accountID, Long projectID);
+
     public List<GPAccountProject> findByAccountID(Long accountID);
 
     public List<GPAccountProject> findByOwnerAccountID(Long accountID);
@@ -76,7 +82,5 @@ public interface GPAccountProjectDAO {
 
     public GPAccountProject findOwnerByProjectID(Long projectID);
 
-    public List<GPAccountProject> findNotOwnerByProjectID(Long projectID);
-
-    public GPAccountProject find(Long accountID, Long projectID);
+    public List<GPAccountProject> findNotOwnersByProjectID(Long projectID);
 }

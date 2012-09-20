@@ -97,6 +97,11 @@
             <artifactId>geoplatform-ws-wms-connector</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-sharing</artifactId>
+        </dependency>
 
     </dependencies>
   

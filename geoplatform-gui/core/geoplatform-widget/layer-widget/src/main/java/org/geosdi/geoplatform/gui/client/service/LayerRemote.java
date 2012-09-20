@@ -41,6 +41,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
@@ -53,6 +54,7 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -70,13 +72,23 @@ public interface LayerRemote extends RemoteService {
         }
     }
 
+    GPClientProject loadDefaultProject() throws GeoPlatformException;
+
+    boolean shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject) throws GeoPlatformException;
+
+    ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(long projectId) throws GeoPlatformException;
+
+    ArrayList<GPSimpleUser> getOrganizationUsers() throws GeoPlatformException;
+
+    ArrayList<GPSimpleUser> getAccountsFromSharedProject(long idSharedProject) throws GeoPlatformException;
+
     /**
      *
      * @param userName
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<GPFolderClientInfo> loadUserFolders() throws GeoPlatformException;
+    ArrayList<GPFolderClientInfo> loadUserFolders() throws GeoPlatformException;
 
     /**
      *
@@ -84,7 +96,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<IGPFolderElements> loadFolderElements(Long folderID) throws GeoPlatformException;
+    ArrayList<IGPFolderElements> loadFolderElements(Long folderID) throws GeoPlatformException;
 
     /**
      *
@@ -92,7 +104,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException;
+    Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException;
 
     /**
      *
@@ -100,7 +112,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException;
+    ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException;
 
     /**
      *
@@ -108,7 +120,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException;
+    boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException;
 
     /**
      *
@@ -116,7 +128,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException;
+    boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException;
 
     /**
      *
@@ -124,7 +136,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException;
+    boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException;
 
     /**
      *
@@ -132,7 +144,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException;
+    boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException;
 
     /**
      *
@@ -140,7 +152,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException;
+    boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException;
 
     /**
      *
@@ -148,7 +160,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException;
+    boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException;
 
     /**
      *
@@ -156,7 +168,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean saveLayerProperties(MementoLayerOriginalProperties memento) throws GeoPlatformException;
+    boolean saveLayerProperties(MementoLayerOriginalProperties memento) throws GeoPlatformException;
 
     /**
      *
@@ -164,7 +176,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean saveFolderProperties(MementoFolderOriginalProperties memento) throws GeoPlatformException;
+    boolean saveFolderProperties(MementoFolderOriginalProperties memento) throws GeoPlatformException;
 
     /**
      *
@@ -173,7 +185,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public Long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
+    Long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
 
     /**
      *
@@ -183,7 +195,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public Long saveFolder(Long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
+    Long saveFolder(Long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
 
     /**
      *
@@ -191,7 +203,7 @@ public interface LayerRemote extends RemoteService {
      * @param elementType
      * @throws GeoPlatformException
      */
-    public void deleteElement(Long id, TreeElement elementType) throws GeoPlatformException;
+    void deleteElement(Long id, TreeElement elementType) throws GeoPlatformException;
 
     /**
      *
@@ -199,7 +211,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean checkWmsGetMapUrl(String url) throws GeoPlatformException;
+    boolean checkWmsGetMapUrl(String url) throws GeoPlatformException;
 
     /**
      *
@@ -207,14 +219,13 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public boolean checkKmlUrl(String url) throws GeoPlatformException;
+    boolean checkKmlUrl(String url) throws GeoPlatformException;
 
     /**
      *
      * @param config
      * @param searchText
-     * @return
-     * PagingLoadResult<GPClientProject>
+     * @return PagingLoadResult<GPClientProject>
      *
      * @throws GeoPlatformException
      */

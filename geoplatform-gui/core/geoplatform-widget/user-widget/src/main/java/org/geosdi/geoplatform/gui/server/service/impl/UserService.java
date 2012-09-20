@@ -39,12 +39,9 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -55,6 +52,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
+import org.geosdi.geoplatform.gui.server.service.converter.DTOUserConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
@@ -80,6 +78,8 @@ public class UserService implements IUserService {
     //
     @Autowired
     private SessionUtility sessionUtility;
+    @Autowired
+    private DTOUserConverter dtoUserConverter;
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
@@ -110,7 +110,7 @@ public class UserService implements IUserService {
 
         ArrayList<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
         for (UserDTO userDTO : userList) {
-            GPUserManageDetail userDetail = this.convertToGPUserManageDetail(userDTO);
+            GPUserManageDetail userDetail = this.dtoUserConverter.convertToGPUserManageDetail(userDTO);
             searchUsers.add(userDetail);
         }
 
@@ -127,7 +127,7 @@ public class UserService implements IUserService {
         logger.debug("\nUser to INSERT (of the organization \"{}\"):\n{}", organization, userDetail);
         Long iserId = null;
         try {
-            GPUser user = this.convertToGPUser(userDetail);
+            GPUser user = this.dtoUserConverter.convertToGPUser(userDetail);
             user.setOrganization(new GPOrganization(organization));
 
             iserId = geoPlatformServiceClient.insertAccount(user, true);
@@ -146,7 +146,7 @@ public class UserService implements IUserService {
         logger.debug("\nUser to UPDATE:\n{}", userDetail);
         Long userID = null;
         try {
-            GPUser user = this.convertToGPUser(userDetail);
+            GPUser user = this.dtoUserConverter.convertToGPUser(userDetail);
             userID = geoPlatformServiceClient.updateUser(user);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
@@ -194,7 +194,7 @@ public class UserService implements IUserService {
             userID = geoPlatformServiceClient.updateOwnUser(userDTO,
                     currentPlainPassword, newPlainPassword);
 
-            sessionUtility.storeLoggedAccount(this.convertToGPUser(userDetail),
+            sessionUtility.storeLoggedAccount(this.dtoUserConverter.convertToGPUser(userDetail),
                     httpServletRequest);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
@@ -221,57 +221,7 @@ public class UserService implements IUserService {
     @Override
     public IGPUserManageDetail getOwnUser(HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
-        return this.convertToGPUserManageDetail(user);
-    }
-
-    // All properties unless the password
-    private GPUserManageDetail convertToGPUserManageDetail(UserDTO userDTO) {
-        GPUserManageDetail user = new GPUserManageDetail();
-        user.setId(userDTO.getId());
-        user.setName(userDTO.getName());
-        user.setUsername(userDTO.getUsername());
-        user.setEmail(userDTO.getEmailAddress());
-        user.setEnabled(userDTO.isEnabled());
-        user.setCreationDate(userDTO.getCreationDate());
-        user.setTemporary(userDTO.isTemporary());
-        user.setExpired(userDTO.isExpired());
-        user.setAuthority(this.convertToAuthority(userDTO.getRoles()));
-        user.setOrganization(userDTO.getOrganization());
-        return user;
-    }
-
-    // NOTE: Now a user must have at most one role
-    private String convertToAuthority(List<String> roles) {
-        Iterator<String> iterator = roles.iterator();
-        String authority = null;
-        if (iterator.hasNext()) {
-            authority = iterator.next();
-        }
-        return authority;
-    }
-
-    // All properties unless the password
-    private GPUserManageDetail convertToGPUserManageDetail(GPUser gpUser) {
-        GPUserManageDetail user = new GPUserManageDetail();
-        user.setId(gpUser.getId());
-        user.setName(gpUser.getName());
-        user.setUsername(gpUser.getUsername());
-        user.setEmail(gpUser.getEmailAddress());
-        user.setCreationDate(gpUser.getCreationDate());
-        user.setTemporary(gpUser.isAccountTemporary());
-        user.setAuthority(this.convertToGPAuthorities(gpUser.getGPAuthorities()));
-        user.setOrganization(gpUser.getOrganization().getName());
-        return user;
-    }
-
-    // NOTE: Now a user must have at most one role
-    private String convertToGPAuthorities(List<GPAuthority> authorities) {
-        Iterator<GPAuthority> iterator = authorities.iterator();
-        String authority = null;
-        if (iterator.hasNext()) {
-            authority = iterator.next().getAuthority();
-        }
-        return authority;
+        return this.dtoUserConverter.convertToGPUserManageDetail(user);
     }
 
     private GPUser getCheckLoggedUser(HttpServletRequest httpServletRequest) {
@@ -280,28 +230,6 @@ public class UserService implements IUserService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-    }
-
-    private GPUser convertToGPUser(IGPUserManageDetail userDetail) {
-        GPUser user = new GPUser();
-
-        if (userDetail.getId() != null) {
-            user.setId(userDetail.getId());
-            user.setEnabled(true);
-        }
-
-        user.setName(userDetail.getName());
-        user.setEmailAddress(userDetail.getEmail());
-        user.setUsername(userDetail.getUsername());
-        user.setPassword(userDetail.getPassword());
-        user.setEnabled(userDetail.isEnabled());
-        user.setAccountTemporary(userDetail.isTemporary());
-
-        GPAuthority authority = new GPAuthority();
-        authority.setAuthority(userDetail.getAuthority());
-        user.setGPAuthorities(Arrays.asList(authority));
-
-        return user;
     }
 
     @Override

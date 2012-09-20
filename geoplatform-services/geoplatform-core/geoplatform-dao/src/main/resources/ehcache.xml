@@ -123,6 +123,16 @@
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap" />
     </cache>
+		
+    <cache name="message"
+           maxElementsInMemory="10000" 
+           eternal="false"
+           timeToIdleSeconds="240" 
+           timeToLiveSeconds="240" 
+           diskExpiryThreadIntervalSeconds="240"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap" />
+    </cache>
                 
     <!-- ACL-->
     <cache name="sid"

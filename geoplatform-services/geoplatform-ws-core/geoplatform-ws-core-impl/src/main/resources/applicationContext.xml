@@ -33,6 +33,7 @@
         <!--<property name="styleDao" ref="styleDAO" />-->
         <property name="authorityDao" ref="authorityDAO" />
         <property name="organizationDao" ref="organizationDAO" />
+        <property name="messageDao" ref="messageDAO" />
         
         <!-- Viewport -->
         <property name="viewportDAO" ref="viewportDAO" />

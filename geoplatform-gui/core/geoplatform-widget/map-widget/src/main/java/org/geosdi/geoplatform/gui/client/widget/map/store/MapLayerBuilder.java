@@ -38,7 +38,9 @@ package org.geosdi.geoplatform.gui.client.widget.map.store;
 import com.extjs.gxt.ui.client.Registry;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.AbstractMapLayerBuilder;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayerBuilder;
@@ -159,7 +161,8 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
     }
 
     private void addAuthTuple(WMSParams wmsParams) {
-        String authkey = Registry.get(GlobalRegistryEnum.AUTH_KEY.getValue());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        String authkey = accountDetail.getAuthkey();
         if (authkey != null) {
             wmsParams.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authkey);
         }

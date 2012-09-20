@@ -109,17 +109,10 @@
             <version>${project.version}</version>
         </dependency>
         
+        <!-- GIN -->
         <dependency>
-            <groupId>com.googlecode.gwt.inject</groupId>
+            <groupId>com.google.gwt.inject</groupId>
             <artifactId>gin</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-assistedinject</artifactId>
         </dependency>
         
         <dependency>

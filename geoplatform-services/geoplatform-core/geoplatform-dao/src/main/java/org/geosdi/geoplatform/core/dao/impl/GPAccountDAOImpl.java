@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.core.dao.impl;
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import java.util.List;
+import javax.persistence.Query;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
@@ -112,18 +113,11 @@ public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
     }
 
     @Override
-    public GPAccount findByStringID(String stringID) {
-        GPAccount account = this.findByUsername(stringID);
+    public GPAccount findByNaturalID(String naturalID) {
+        GPAccount account = this.findByUsername(naturalID);
         if (account == null) {
-            account = this.findByAppID(stringID);
+            account = this.findByAppID(naturalID);
         }
         return account;
-    }
-
-    @Override
-    public boolean resetDefaultProject(Long defaultProjectId) {
-        em().createQuery("UPDATE Account a SET a.defaultProjectID = null WHERE a.defaultProjectID=:defaultProjectId").
-                setParameter("defaultProjectId", defaultProjectId).executeUpdate();
-        return true;
     }
 }

@@ -36,25 +36,30 @@
 package org.geosdi.geoplatform.gui.client.action.menu.project;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchWidget;
+import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
+@Singleton
 public class LoadMenuProjects extends MenuBaseAction {
-    
-    private GPProjectSearchWidget searchWidget = new GPProjectSearchWidget();
 
-    public LoadMenuProjects() {
-        super("Open Project", BasicWidgetResources.ICONS.loadProjects());
+    private GPProjectManagementWidget searchWidget;
+
+    @Inject
+    public LoadMenuProjects(GPProjectManagementWidget searchWidget) {
+        super("Open Project", BasicWidgetResources.ICONS.manageProjects());
+        this.searchWidget = searchWidget;
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        this.searchWidget.show();
+        this.searchWidget.showSearchProjectPanel();
     }
 }

@@ -61,11 +61,10 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPlatformBeanModel>
+public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPlatformBeanModel>
         extends Window {
 
     private VerticalPanel vp;
@@ -87,13 +86,13 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
      *
      * @param lazy
      */
-    public GeoPlatformSearchWidget(boolean lazy) {
+    public GeoPlatformSearchWindow(boolean lazy) {
         if (!lazy) {
             init();
         }
     }
 
-    public GeoPlatformSearchWidget(boolean lazy, int pageSize) {
+    public GeoPlatformSearchWindow(boolean lazy, int pageSize) {
         this.pageSize = pageSize;
         if (!lazy) {
             init();

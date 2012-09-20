@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class MementoFolderOriginalProperties extends AbstractMementoOriginalProperties<FolderTreeNode> {
 
     private static final long serialVersionUID = 4900306329179765474L;
+    private boolean expanded;
 
     public MementoFolderOriginalProperties() {
     }
@@ -59,15 +60,15 @@ public class MementoFolderOriginalProperties extends AbstractMementoOriginalProp
         super.convertMementoToWs();
         super.setName(super.getRefBaseElement().getLabel());
         super.setChecked(super.getRefBaseElement().isChecked());
-        super.setExpanded(super.getRefBaseElement().isExpanded());
+        this.setExpanded(super.getRefBaseElement().isExpanded());
     }
 
     @Override
     public boolean isChanged() {
         boolean condition = Boolean.FALSE;
-        if (!this.getName().equals(super.getRefBaseElement().getLabel()) ||
-                super.isChecked() != super.getRefBaseElement().isChecked() ||
-                super.isExpanded() != super.getRefBaseElement().isExpanded()) {
+        if (!this.getName().equals(super.getRefBaseElement().getLabel())
+                || super.isChecked() != super.getRefBaseElement().isChecked()
+                || this.isExpanded() != super.getRefBaseElement().isExpanded()) {
             condition = Boolean.TRUE;
         }
         return condition;
@@ -78,8 +79,8 @@ public class MementoFolderOriginalProperties extends AbstractMementoOriginalProp
         if (bean instanceof FolderTreeNode) {
             FolderTreeNode folder = (FolderTreeNode) bean;
             super.setName(folder.getLabel());
-            super.setChecked(folder.isChecked());      
-            super.setExpanded(folder.isExpanded());      
+            super.setChecked(folder.isChecked());
+            this.setExpanded(folder.isExpanded());
             super.setRefBaseElement(folder);
         } else {
             throw new IllegalArgumentException("The method copyOriginalProperties "
@@ -87,4 +88,11 @@ public class MementoFolderOriginalProperties extends AbstractMementoOriginalProp
         }
     }
 
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
 }

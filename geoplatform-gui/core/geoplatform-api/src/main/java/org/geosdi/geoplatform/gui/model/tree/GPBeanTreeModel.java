@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.model.tree;
 
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
-
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.model.UUIDGenerator;
 
@@ -94,8 +94,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
     }
 
     /**
-     * @param id
-     * the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -109,16 +108,14 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
     }
 
     /**
-     * @param label
-     * the label to set
+     * @param label the label to set
      */
     public void setLabel(String label) {
         this.label = label;
     }
 
     /**
-     * @param zIndex
-     * the zIndex to set
+     * @param zIndex the zIndex to set
      */
     public void setzIndex(int zIndex) {
         this.zIndex = zIndex;
@@ -139,8 +136,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
     }
 
     /**
-     * @param checked
-     * the checked to set
+     * @param checked the checked to set
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
@@ -154,6 +150,8 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
     }
 
     public abstract AbstractImagePrototype getIcon();
+
+    public abstract Menu getTreeContextMenu();
 
     public abstract void accept(IVisitor visitor);
 }

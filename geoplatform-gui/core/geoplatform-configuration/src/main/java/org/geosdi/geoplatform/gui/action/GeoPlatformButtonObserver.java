@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.action;
 
-import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
-
 import com.extjs.gxt.ui.client.widget.button.Button;
+import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
 
 /**
  * @author giuseppe

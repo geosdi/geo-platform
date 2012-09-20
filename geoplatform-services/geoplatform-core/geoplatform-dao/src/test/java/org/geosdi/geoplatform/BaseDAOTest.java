@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform;
 
+import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.WKTReader;
@@ -59,6 +60,7 @@ import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
@@ -137,6 +139,9 @@ public abstract class BaseDAOTest {
     protected GuiComponentDAO guiComponentDAO;
     //
     @Autowired
+    protected GPMessageDAO messageDAO;
+    //
+    @Autowired
     protected GPDigesterConfigutator gpDigesterSHA1;
     //
     protected GPOrganization organizationTest;
@@ -169,6 +174,7 @@ public abstract class BaseDAOTest {
         this.removeAllFolders();
         this.removeAllAccountProject();
         this.removeAllProjects();
+        this.removeAllMessages();
         this.removeAllAuthorities();
         this.removeAllGSAccounts();
         this.removeAllAccounts();
@@ -231,6 +237,15 @@ public abstract class BaseDAOTest {
             logger.trace("\n*** project to REMOVE:\n{}\n***", project);
             boolean removed = projectDAO.remove(project);
             Assert.assertTrue("Old project NOT removed", removed);
+        }
+    }
+
+    private void removeAllMessages() {
+        List<GPMessage> messages = messageDAO.findAll();
+        for (GPMessage message : messages) {
+            logger.trace("\n*** message to REMOVE:\n{}\n***", message);
+            boolean removed = messageDAO.remove(message);
+            Assert.assertTrue("Old message NOT removed", removed);
         }
     }
 
@@ -341,6 +356,7 @@ public abstract class BaseDAOTest {
         this.insertAccounts();
         this.insertGuiComponents();
         this.insertProjects();
+        this.insertMessages();
         this.insertFoldersAndLayers();
         this.insertGPAccessInfoTest();
     }
@@ -437,48 +453,63 @@ public abstract class BaseDAOTest {
 
     private void insertProjects() {
         this.adminProject = this.createProject("admin_project", true, 0,
-                                               new Date(System.currentTimeMillis()));
+                new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
-                                              new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)));
+                new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)));
         this.viewerProject = this.createProject("viewer_project", false, 0,
-                                                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)));
+                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)));
         this.gsUserProject = this.createProject("gp_user_project", true, 0,
-                                                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
+                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
         projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //
-        this.insertBindingUserProject(adminTest, adminProject, BasePermission.ADMINISTRATION.getMask());
-        this.insertBindingUserProject(userTest, adminProject, BasePermission.READ.getMask());
-        this.insertBindingUserProject(userTest, userProject, BasePermission.ADMINISTRATION.getMask());
-        this.insertBindingUserProject(viewerTest, viewerProject, BasePermission.READ.getMask());
-        this.insertBindingUserProject(gsUserTest, gsUserProject, BasePermission.ADMINISTRATION.getMask());
+        this.insertBindingUserProject(adminTest, adminProject,
+                BasePermission.ADMINISTRATION.getMask(), true);
+        this.insertBindingUserProject(userTest, adminProject,
+                BasePermission.READ.getMask(), false);
+        this.insertBindingUserProject(userTest, userProject,
+                BasePermission.ADMINISTRATION.getMask(), true);
+        this.insertBindingUserProject(viewerTest, viewerProject,
+                BasePermission.READ.getMask(), true);
+        this.insertBindingUserProject(gsUserTest, gsUserProject,
+                BasePermission.ADMINISTRATION.getMask(), true);
         //
-        adminTest.setDefaultProjectID(adminProject.getId());
-        userTest.setDefaultProjectID(userProject.getId());
-        viewerTest.setDefaultProjectID(viewerProject.getId());
-        gsUserTest.setDefaultProjectID(gsUserProject.getId());
         accountDAO.merge(adminTest, userTest, viewerTest, gsUserTest);
+    }
+
+    private void insertMessages() {
+        GPMessage message = new GPMessage();
+        message.setRecipient(userTest);
+        message.setSender(adminTest);
+        message.setCreationDate(new Date(System.currentTimeMillis()));
+        message.setRead(false);
+        message.setText("\"" + adminTest.getName() + "\" shared with you the \""
+                + adminProject.getName() + "\" project.");
+        message.addCommand(GPMessageCommandType.OPEN_PROJECT);
+
+        messageDAO.persist(message);
     }
 
     private void insertFoldersAndLayers() {
         // Projects of admin
         for (int i = 1; i <= 41; i++) {
             GPProject projectIth = this.createProject("project_admin_k_" + i, false,
-                                                      i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
+                    i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
             projectDAO.persist(projectIth);
-            this.insertBindingUserProject(this.adminTest, projectIth,
-                                          BasePermission.ADMINISTRATION.getMask());
+            this.insertBindingUserProject(adminTest, projectIth,
+                    BasePermission.ADMINISTRATION.getMask(), false);
         }
 
         // Project of user -> root folder: "server layer"
-        List<Layer> layerList = this.loadLayersFromServer();
-        GPFolder folderServerLayer = this.createFolder("server layer", userProject, null, layerList.size() + 1);
-        folderServerLayer.setNumberOfDescendants(layerList.size());
-        List<GPRasterLayer> layers = this.loadRasterLayer(layerList, folderServerLayer, userProject, layerList.size());
-        folderDAO.persist(folderServerLayer);
-        layerDAO.persist(layers.toArray(new GPRasterLayer[layers.size()]));
-        //
-        userProject.setNumberOfElements(layerList.size());
-        projectDAO.merge(userProject);
+        // TODO Uncomment for exception: java.lang.Object; cannot be cast to org.geotools.data.ows.Capabilities
+//        List<Layer> layerList = this.loadLayersFromServer();
+//        GPFolder folderServerLayer = this.createFolder("server layer", userProject, null, layerList.size() + 1);
+//        folderServerLayer.setNumberOfDescendants(layerList.size());
+//        List<GPRasterLayer> layers = this.loadRasterLayer(layerList, folderServerLayer, userProject, layerList.size());
+//        folderDAO.persist(folderServerLayer);
+//        layerDAO.persist(layers.toArray(new GPRasterLayer[layers.size()]));
+//        //
+//        userProject.setNumberOfElements(layerList.size());
+//        projectDAO.merge(userProject);
 
         // Project of viewer -> root folders: "only folders, layers"
         GPFolder onlyFolders = this.createFolder("only folders", viewerProject, null, 6);
@@ -508,7 +539,6 @@ public abstract class BaseDAOTest {
     private void insertGPAccessInfoTest() {
         GSAccount gsAccount = this.generateGSAccount(gsAccountUsername);
         GSResource resource = this.generateResource(gsAccount);
-        gsUserTest.setDefaultProjectID(gsUserProject.getId());
         gsUserTest.setGsAccount(gsAccount);
         this.gsAccountDAO.persist(gsAccount);
         this.gsResourceDAO.persist(resource);
@@ -584,7 +614,7 @@ public abstract class BaseDAOTest {
     private List<GPAuthority> createAuthorities(GPAccount account, GPRole... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
         for (GPRole role : roles) {
-            authorities.add(new GPAuthority(account, role.toString()));
+            authorities.add(new GPAuthority(account, role.toString(), role.getUserLevel()));
         }
         return authorities;
     }
@@ -634,10 +664,11 @@ public abstract class BaseDAOTest {
     }
 
     protected void insertBindingUserProject(GPUser user, GPProject project,
-            int permissionMask) {
+            int permissionMask, boolean defaultProject) {
         GPAccountProject userProjects = new GPAccountProject();
         userProjects.setAccountAndProject(user, project);
         userProjects.setPermissionMask(permissionMask);
+        userProjects.setDefaultProject(defaultProject);
         accountProjectDAO.persist(userProjects);
     }
 
@@ -846,13 +877,13 @@ public abstract class BaseDAOTest {
         // Admin
         for (String componentID : GuiComponentIDs.LIST_ALL) {
             entriesMap.put(GPRole.ADMIN + componentID,
-                           new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
+                    new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
         }
         // User
         for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_USER.entrySet()) {
             if (e.getValue() != null) {
                 entriesMap.put(GPRole.USER + e.getKey(),
-                               new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
+                        new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
             }
         }
         // Viewer
@@ -860,39 +891,18 @@ public abstract class BaseDAOTest {
             if (e.getValue() != null) {
                 // Ace Order is 3 because the entries of admin and user should be added before
                 entriesMap.put(GPRole.VIEWER + e.getKey(),
-                               new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
+                        new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
             }
         }
         // SIGV Application
         for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_APPLICATION_SIGV.entrySet()) {
             if (e.getValue() != null) {
                 entriesMap.put("SIGV" + e.getKey(),
-                               new AclEntry(objIdMap.get(e.getKey()), 4, sigv, enable, e.getValue()));
+                        new AclEntry(objIdMap.get(e.getKey()), 4, sigv, enable, e.getValue()));
             }
         }
         //
         entryDAO.persist(entriesMap.values().toArray(new AclEntry[entriesMap.size()]));
     }
     //</editor-fold>
-
-    /**
-     * Default roles for ACLs purpose
-     */
-    protected enum GPRole {
-
-        ADMIN("Admin"),
-        USER("User"),
-        VIEWER("Viewer");
-        //
-        private String role;
-
-        private GPRole(String role) {
-            this.role = role;
-        }
-
-        @Override
-        public String toString() {
-            return role;
-        }
-    }
 }

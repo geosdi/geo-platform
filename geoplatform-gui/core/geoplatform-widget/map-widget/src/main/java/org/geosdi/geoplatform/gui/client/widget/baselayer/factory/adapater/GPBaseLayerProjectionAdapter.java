@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.baselayer.factory.adapater;
 
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.Projection;
 
 /**
@@ -45,7 +45,7 @@ import org.gwtopenmaps.openlayers.client.Projection;
  */
 public class GPBaseLayerProjectionAdapter {
 
-    protected static Projection adaptBaseLayerProjection(BaseLayerEnum key) {
+    protected static Projection adaptBaseLayerProjection(BaseLayerValue key) {
         switch (key) {
             case OPEN_STREET_MAP:
             case GOOGLE_NORMAL:

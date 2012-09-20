@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.factory.baselayer;
 
 import java.util.Map;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
@@ -46,7 +46,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  */
 public class GPBaseLayerFactory implements BaseLayerFactory {
 
-    public static Layer getBaseLayer(BaseLayerEnum enumLayer) {
+    public static Layer getBaseLayer(BaseLayerValue enumLayer) {
         GPBaseLayerFactory factory = new GPBaseLayerFactory();
 
         return factory.findBaseLayer(enumLayer) != null ? factory.findBaseLayer(
@@ -56,16 +56,16 @@ public class GPBaseLayerFactory implements BaseLayerFactory {
     @Override
     public Layer getDefaultBaseLayer() {
         return GPBaseLayerRepository.getInstance().findBaseLayer(
-                BaseLayerEnum.GOOGLE_SATELLITE);
+                BaseLayerValue.GOOGLE_SATELLITE);
     }
 
     @Override
-    public Layer findBaseLayer(BaseLayerEnum enumLayer) {
+    public Layer findBaseLayer(BaseLayerValue enumLayer) {
         return GPBaseLayerRepository.getInstance().findBaseLayer(enumLayer);
     }
 
     @Override
-    public Map<BaseLayerEnum, Layer> lookupBaseLayers() {
+    public Map<BaseLayerValue, Layer> lookupBaseLayers() {
         return GPBaseLayerRepository.getInstance().getAllBaseLayers();
     }
 }

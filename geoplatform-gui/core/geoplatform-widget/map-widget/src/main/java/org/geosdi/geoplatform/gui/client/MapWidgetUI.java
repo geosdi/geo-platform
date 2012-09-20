@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.AboutGPAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ViewportAction;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.featureinfo.action.GetFeatureInfoAction;
 
@@ -80,7 +81,8 @@ public class MapWidgetUI implements EntryPoint {
     }
 
     private void addMapToolbarAction() {
-        ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_IN,
+        ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
+        toolbarRegistar.put(GuiComponentIDs.ZOOM_IN,
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -88,7 +90,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_OUT,
+        toolbarRegistar.put(GuiComponentIDs.ZOOM_OUT,
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -96,7 +98,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_PREVIOUS,
+        toolbarRegistar.put(GuiComponentIDs.ZOOM_PREVIOUS,
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -104,7 +106,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_NEXT,
+        toolbarRegistar.put(GuiComponentIDs.ZOOM_NEXT,
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -112,7 +114,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarActionRegistar.put(GuiComponentIDs.GET_FEATURE_INFO,
+        toolbarRegistar.put(GuiComponentIDs.GET_FEATURE_INFO,
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -120,7 +122,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarActionRegistar.put(GuiComponentIDs.MEASURE,
+        toolbarRegistar.put(GuiComponentIDs.MEASURE,
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -128,7 +130,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarActionRegistar.put(GuiComponentIDs.MEASURE_AREA,
+        toolbarRegistar.put(GuiComponentIDs.MEASURE_AREA,
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -136,14 +138,15 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        MenuActionRegistar.put(GuiComponentIDs.ABOUT_GEOPLATFORM,
+        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+        menuRegistar.put(GuiComponentIDs.ABOUT_GEOPLATFORM,
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {
                         return new AboutGPAction();
                     }
                 });
-        MenuActionRegistar.put(GuiComponentIDs.VIEWPORT,
+        menuRegistar.put(GuiComponentIDs.VIEWPORT,
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {

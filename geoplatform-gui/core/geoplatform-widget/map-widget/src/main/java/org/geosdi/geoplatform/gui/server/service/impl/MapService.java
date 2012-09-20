@@ -47,12 +47,12 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.slf4j.Logger;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IMapService;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -87,14 +87,16 @@ public class MapService implements IMapService {
     @Override
     public void saveBaseLayer(String baseLayer, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
+        Long projectID;
         try {
             account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            projectID = this.sessionUtility.getDefaultProject(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
         try {
-            GPAccountProject accountProject = this.geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(account.getId(),
-                    account.getDefaultProjectID());
+            GPAccountProject accountProject = this.geoPlatformServiceClient.
+                    getAccountProjectByAccountAndProjectIDs(account.getId(), projectID);
             accountProject.setBaseLayer(baseLayer);
             this.geoPlatformServiceClient.updateAccountProject(accountProject);
         } catch (ResourceNotFoundFault rnff) {
@@ -109,15 +111,18 @@ public class MapService implements IMapService {
     @Override
     public List<GPClientViewport> loadViewportElements(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
+        Long projectID;
         try {
             account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            projectID = this.sessionUtility.getDefaultProject(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
+        
         ArrayList<GPViewport> viewportListElements = null;
         try {
-            GPAccountProject accountProject = this.geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(account.getId(),
-                    account.getDefaultProjectID());
+            GPAccountProject accountProject = this.geoPlatformServiceClient
+                    .getAccountProjectByAccountAndProjectIDs(account.getId(), projectID);
             viewportListElements = this.geoPlatformServiceClient.getAccountProjectViewports(accountProject.getId());
         } catch (ResourceNotFoundFault rnff) {
             logger.error("Error on MapService: " + rnff);
@@ -129,14 +134,16 @@ public class MapService implements IMapService {
     @Override
     public void saveOrUpdateViewportList(List<GPClientViewport> viewportList, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
+        Long projectID;
         try {
             account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            projectID = this.sessionUtility.getDefaultProject(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
         try {
-            GPAccountProject accountProject = this.geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(account.getId(),
-                    account.getDefaultProjectID());
+            GPAccountProject accountProject = this.geoPlatformServiceClient.
+                    getAccountProjectByAccountAndProjectIDs(account.getId(), projectID);
             this.geoPlatformServiceClient.replaceViewportList(accountProject.getId(),
                     convertClientViewportToDTO(viewportList));
         } catch (ResourceNotFoundFault rnff) {

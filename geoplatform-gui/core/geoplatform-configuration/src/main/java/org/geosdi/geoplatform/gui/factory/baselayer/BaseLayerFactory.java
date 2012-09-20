@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.factory.baselayer;
 
 import java.util.Map;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
@@ -48,7 +48,7 @@ public interface BaseLayerFactory {
 
     <B extends Layer> B getDefaultBaseLayer();
 
-    <B extends Layer> B findBaseLayer(BaseLayerEnum enumLayer);
+    <B extends Layer> B findBaseLayer(BaseLayerValue enumLayer);
     
-    Map<BaseLayerEnum, Layer> lookupBaseLayers();
+    Map<BaseLayerValue, Layer> lookupBaseLayers();
 }

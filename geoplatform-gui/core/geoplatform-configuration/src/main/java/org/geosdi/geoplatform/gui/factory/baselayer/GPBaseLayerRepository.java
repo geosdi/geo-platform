@@ -39,7 +39,7 @@ import com.google.common.collect.Maps;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerEnum;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.Size;
 import org.gwtopenmaps.openlayers.client.layer.Bing;
 import org.gwtopenmaps.openlayers.client.layer.BingOptions;
@@ -64,8 +64,8 @@ class GPBaseLayerRepository {
 
     private final String bingKey = "Apd8EWF9Ls5tXmyHr22O"
             + "uL1ay4HRJtI4JG4jgluTDVaJdUXZV6lpSBpX-TwnoRDG";
-    private EnumMap<BaseLayerEnum, Layer> baseLayerMap = Maps.newEnumMap(
-            BaseLayerEnum.class);
+    private EnumMap<BaseLayerValue, Layer> baseLayerMap = Maps.newEnumMap(
+            BaseLayerValue.class);
     private static GPBaseLayerRepository instance;
 
     private GPBaseLayerRepository() {
@@ -80,7 +80,7 @@ class GPBaseLayerRepository {
         return instance;
     }
 
-    public Layer findBaseLayer(BaseLayerEnum enumLayer) {
+    public Layer findBaseLayer(BaseLayerValue enumLayer) {
         return baseLayerMap.get(enumLayer);
     }
 
@@ -89,25 +89,25 @@ class GPBaseLayerRepository {
      *
      * @return Map<BaseLayerEnum, Layer>
      */
-    public Map<BaseLayerEnum, Layer> getAllBaseLayers() {
+    public Map<BaseLayerValue, Layer> getAllBaseLayers() {
         return Collections.unmodifiableMap(baseLayerMap);
     }
 
     private void lookupBaseLayers() {
-        baseLayerMap.put(BaseLayerEnum.OPEN_STREET_MAP, createOSMBaseLayer());
-        baseLayerMap.put(BaseLayerEnum.GOOGLE_NORMAL,
+        baseLayerMap.put(BaseLayerValue.OPEN_STREET_MAP, createOSMBaseLayer());
+        baseLayerMap.put(BaseLayerValue.GOOGLE_NORMAL,
                 createGoogleNormalBaseLayer());
-        baseLayerMap.put(BaseLayerEnum.GOOGLE_SATELLITE,
+        baseLayerMap.put(BaseLayerValue.GOOGLE_SATELLITE,
                 createGoogleSatelliteBaseLayer());
-        baseLayerMap.put(BaseLayerEnum.GOOGLE_HYBRID,
+        baseLayerMap.put(BaseLayerValue.GOOGLE_HYBRID,
                 createGoogleHybridBaseLayer());
-        baseLayerMap.put(BaseLayerEnum.BING_ROAD_LAYER,
+        baseLayerMap.put(BaseLayerValue.BING_ROAD_LAYER,
                 createBingRoadBaseLayer());
-        baseLayerMap.put(BaseLayerEnum.BING_HYBRID, createBingHybridBaseLayer());
-        baseLayerMap.put(BaseLayerEnum.BING_AERIAL, createBingAerialBaseLayer());
-        baseLayerMap.put(BaseLayerEnum.METACARTA, createMetacartaBaseLayer());
-        baseLayerMap.put(BaseLayerEnum.GEOSDI_BASE, createGeoSdiBaseLayer());
-        baseLayerMap.put(BaseLayerEnum.GEOSDI_NULL_BASE,
+        baseLayerMap.put(BaseLayerValue.BING_HYBRID, createBingHybridBaseLayer());
+        baseLayerMap.put(BaseLayerValue.BING_AERIAL, createBingAerialBaseLayer());
+        baseLayerMap.put(BaseLayerValue.METACARTA, createMetacartaBaseLayer());
+        baseLayerMap.put(BaseLayerValue.GEOSDI_BASE, createGeoSdiBaseLayer());
+        baseLayerMap.put(BaseLayerValue.GEOSDI_NULL_BASE,
                 createGeoSdiNullMapBaseLayer());
     }
 

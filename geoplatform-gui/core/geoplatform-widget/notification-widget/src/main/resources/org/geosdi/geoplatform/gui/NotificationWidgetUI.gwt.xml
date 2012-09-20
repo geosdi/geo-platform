@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <inherits name="com.google.gwt.inject.Inject"/>
+    
+    <source path="client" />
+
+    <entry-point class="org.geosdi.geoplatform.gui.client.NotificationWidgetUI" />
+
+</module>

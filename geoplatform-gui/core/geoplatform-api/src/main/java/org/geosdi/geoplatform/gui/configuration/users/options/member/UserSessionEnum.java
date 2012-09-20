@@ -42,6 +42,6 @@ package org.geosdi.geoplatform.gui.configuration.users.options.member;
  */
 public enum UserSessionEnum {
     
-    USER_IN_SESSION, USER_TREE_OPTIONS;
+    USER_MANAGE_DETAIL_IN_SESSION, USER_TREE_OPTIONS, ACCOUNT_DETAIL_IN_SESSION;
     
 }

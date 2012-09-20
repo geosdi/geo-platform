@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.checkb
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.widget.CheckBoxListView;
-import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWidget;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWindow;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPCheckBoxListViewSearchWidget<T extends GeoPlatformBeanModel>
-        extends GeoPlatformSearchWidget<CheckBoxListView<T>, T> {
+        extends GeoPlatformSearchWindow<CheckBoxListView<T>, T> {
 
     public GPCheckBoxListViewSearchWidget(boolean lazy, int pageSize) {
         super(lazy, pageSize);

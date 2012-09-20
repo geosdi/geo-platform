@@ -1,0 +1,52 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style type="org.geosdi.geoplatform.gui.client.style.CenterStyle">
+        .dockLayout {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        }
+		
+        .dialogBox {
+			
+        }
+		
+        .notifypopup {
+        <!-- 			position: absolute; -->
+        <!-- 			top: 100px; -->
+        <!--  			left: 50px; -->
+        }
+		
+        .table {
+        vertical-align: middle;
+        text-align: center;
+        }
+		
+        .border {
+	
+        border: 1px solid Black;
+        background-color: white;
+        }
+		
+        .provaFlex {
+        height: 60px;
+        }
+		
+        .opacity {
+        opacity: 0.5;
+        }
+        
+        <!--        .border {
+        border: 1px solid rgba(0, 0, 0, .4);
+                             			position: absolute; 
+                             			top: 100px; 
+                             			right: 15px; 
+        }-->
+    </ui:style>
+    <!-- 	<g:VerticalPanel width="100%" height="100%"> -->
+    <g:VerticalPanel height="300px" width="400px"
+                     styleName="{style.border}" ui:field="deckPanel">
+    </g:VerticalPanel>
+    <!-- 	</g:VerticalPanel> -->
+</ui:UiBinder> 

@@ -52,19 +52,17 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
 import com.google.gwt.i18n.client.NumberFormat;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import java.util.List;
+import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.service.MapRemote;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.client.action.viewport.SaveViewportAction;
 import org.geosdi.geoplatform.gui.client.widget.fieldset.GPFieldSet;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.ViewportEnum;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.gwtopenmaps.openlayers.client.Map;
 
 /**
@@ -72,43 +70,44 @@ import org.gwtopenmaps.openlayers.client.Map;
  * @email nazzareno.sileno@geosdi.org
  */
 public class ViewportGridFieldSet extends GPFieldSet {
-    
+
     private ListStore<GPClientViewport> store = new ListStore<GPClientViewport>();
     private Map map;
     private EditorGrid<GPClientViewport> viewportGrid;
     private Button deleteViewportButton;
     private Button gotoViewportButton;
-    private Button saveButton;
+    private GPSecureButton saveButton;
     private Button setDefaultViewportButton;
     private StoreFilterField<GPClientViewport> viewportFilter;
-    
+
     public ViewportGridFieldSet(Map map) {
         this.map = map;
         this.subclassCallToInit();
     }
-    
+
     @Override
     public void addComponents() {
         store.addStoreListener(new StoreListener<GPClientViewport>() {
             @Override
             public void storeUpdate(StoreEvent<GPClientViewport> se) {
                 super.storeUpdate(se);
-                ViewportGridFieldSet.this.saveButton.setEnabled(Boolean.TRUE);
+                ViewportGridFieldSet.this.saveButton.enable();
             }
         });
         this.add(createViewportFilter());
         this.add(this.generateGrid(), new FormData("100%"));
         ButtonBar buttonBar = new ButtonBar();
-        
+
         Button addEntryButton = new Button("Add Viewport", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 ViewportGridFieldSet.this.store.add(ViewportUtility.generateViewportFromMap(map));
                 viewportGrid.startEditing(store.getCount() - 1, 1);
+                ViewportGridFieldSet.this.saveButton.enable();
             }
         });
         buttonBar.add(addEntryButton);
-        
+
         this.deleteViewportButton = new Button("Delete Viewport", BasicWidgetResources.ICONS.delete(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -122,6 +121,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
                                     if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
                                         for (GPClientViewport viewport : viewportList) {
                                             store.remove(viewport);
+                                            ViewportGridFieldSet.this.saveButton.enable();
                                         }
                                     }
                                 }
@@ -131,7 +131,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
         });
         deleteViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(deleteViewportButton);
-        
+
         this.gotoViewportButton = new Button("GoTo Viewport", BasicWidgetResources.ICONS.gotoXY(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -146,7 +146,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
         });
         gotoViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(gotoViewportButton);
-        
+
         this.setDefaultViewportButton = new Button("Set Default", BasicWidgetResources.ICONS.select(),
                 new SelectionListener<ButtonEvent>() {
                     @Override
@@ -171,62 +171,12 @@ public class ViewportGridFieldSet extends GPFieldSet {
                 });
         setDefaultViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(setDefaultViewportButton);
-        this.saveButton = new Button("Save", BasicWidgetResources.ICONS.save(), new SelectionListener<ButtonEvent>() {
-            private boolean isStoreModelCorrect() {
-                boolean check = true;
-                BBoxClientInfo bbox = null;
-                for (GPClientViewport viewport : store.getModels()) {
-                    bbox = viewport.getBbox();
-                    System.out.println("BBOXXX: " + bbox.getLowerLeftX());
-                    if (bbox == null || bbox.getLowerLeftX() == 0.0d || bbox.getLowerLeftY() == 0.0d
-                            || bbox.getUpperRightX() == 0.0d || bbox.getUpperRightY() == 0.0d
-                            || viewport.getName() == null || viewport.getName().isEmpty()
-                            || viewport.getZoomLevel() < 0) {
-                        check = false;
-                        break;
-                    }
-                }
-                return check;
-            }
-            
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                if (isStoreModelCorrect()) {
-                    MapRemote.Util.getInstance().saveOrUpdateViewportList(store.getModels(), new AsyncCallback<Object>() {
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            GeoPlatformMessage.errorMessage("Error saving",
-                                    "An error occurred while making the requested connection.\n"
-                                    + "Verify network connections and try again."
-                                    + "\nIf the problem persists contact your system administrator.");
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Error saving the viewport list.",
-                                    SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                            System.out.println("Error saving the viewport list: " + caught.toString()
-                                    + " data: " + caught.getMessage());
-                        }
-                        
-                        @Override
-                        public void onSuccess(Object result) {
-                            store.commitChanges();
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Succesfully saved the viewport list.",
-                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                        }
-                    });
-                } else {
-                    GeoPlatformMessage.errorMessage("Viewport Incorrect",
-                            "Before to save it is necessary to correct or fill "
-                            + "the: Name, zoom or BBOX values");
-                }
-            }
-        });
-        
-        saveButton.setEnabled(Boolean.FALSE);
-        buttonBar.add(saveButton);
+        SaveViewportAction saveViewportAction = new SaveViewportAction(GPRole.USER, this.store);
+        this.saveButton = new GPSecureButton("Save", BasicWidgetResources.ICONS.save(), saveViewportAction);
+        buttonBar.add(this.saveButton);
         this.add(buttonBar, new FormData("100%"));
     }
-    
+
     private Widget createViewportFilter() {
         this.viewportFilter = new StoreFilterField<GPClientViewport>() {
             @Override
@@ -245,20 +195,20 @@ public class ViewportGridFieldSet extends GPFieldSet {
         viewportFilter.setFieldLabel("Filter");
         return this.viewportFilter;
     }
-    
+
     @Override
     public void setWidgetProperties() {
         this.setWidth(ViewportWidget.VIEWPORT_WIDGET_WIDTH - 30);
         this.setHeight(ViewportWidget.VIEWPORT_WIDGET_HEIGHT - 40);
         this.setLayout(new FormLayout());
     }
-    
+
     private void resetComponent() {
         this.store.removeAll();
         this.viewportFilter.clear();
-        this.saveButton.setEnabled(Boolean.FALSE);
+        this.saveButton.disable();
     }
-    
+
     private Grid generateGrid() {
         List<ColumnConfig> configs = Lists.newArrayList();
         final String idIsDefaultColumn = "Default";
@@ -307,7 +257,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
         numberFieldBBOX4.setMinValue(-90);
         maxYColumnConfig.setEditor(new CellEditor(numberFieldBBOX4));
         configs.add(maxYColumnConfig);
-        
+
         ColumnConfig zoomLevelColumnConfig = new ColumnConfig(ViewportEnum.ZOOM_LEVEL.toString(),
                 "Zoom Level", 70);
         zoomLevelColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
@@ -348,18 +298,18 @@ public class ViewportGridFieldSet extends GPFieldSet {
         viewportGrid.setSize("250px", "300px");
         return viewportGrid;
     }
-    
+
     public void setViewportListStore(List<GPClientViewport> viewportList) {
         this.resetComponent();
         store.add(viewportList);
     }
-    
+
     public void addViewportElement(final GPClientViewport viewport) {
         store.add(viewport);
+        this.saveButton.enable();
         this.viewportGrid.startEditing(store.getCount() - 1, 1);
-        this.saveButton.setEnabled(Boolean.TRUE);
     }
-    
+
     @Override
     public final void subclassCallToInit() {
         super.init();

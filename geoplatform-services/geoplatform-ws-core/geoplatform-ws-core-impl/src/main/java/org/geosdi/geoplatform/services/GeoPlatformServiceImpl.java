@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
@@ -56,6 +57,7 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
@@ -91,6 +93,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //    private GPStyleDAO styleDao;
     private GPAuthorityDAO authorityDao;
     private GPOrganizationDAO organizationDao;
+    private GPMessageDAO messageDao;
     // ACL DAO
     private AclClassDAO classDao;
     private AclSidDAO sidDao;
@@ -106,6 +109,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private LayerServiceImpl layerServiceDelegate;
     private AclServiceImpl aclServiceDelegate;
     private ServerServiceImpl serverServiceDelegate;
+    private MessageServiceImpl messageServiceDelegate;
     // Services
     private GPSchedulerService schedulerService;
     //
@@ -125,6 +129,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         layerServiceDelegate = new LayerServiceImpl();
         aclServiceDelegate = new AclServiceImpl();
         serverServiceDelegate = new ServerServiceImpl();
+        messageServiceDelegate = new MessageServiceImpl();
     }
 
     //<editor-fold defaultstate="collapsed" desc="DAOs IoC">
@@ -139,6 +144,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.accountServiceDelegate.setAccountDao(accountDao);
         this.projectServiceDelegate.setAccountDao(accountDao);
         this.aclServiceDelegate.setAccountDao(accountDao);
+        this.messageServiceDelegate.setAccountDao(accountDao);
     }
 
     public void setServerDao(GPServerDAO serverDao) {
@@ -213,6 +219,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.aclServiceDelegate.setOrganizationDao(organizationDao);
         this.accountServiceDelegate.setOrganizationDao(organizationDao);
         this.serverServiceDelegate.setOrganizationDao(organizationDao);
+    }
+
+    /**
+     * @param messageDao the messageDao to set
+     */
+    public void setMessageDao(GPMessageDAO messageDao) {
+        this.messageDao = messageDao;
+        this.messageServiceDelegate.setMessageDao(messageDao);
     }
 
     /**
@@ -419,9 +433,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<GPAuthority> getAuthoritiesDetail(String stringID)
+    public List<GPAuthority> getAuthoritiesDetail(String accountNaturalID)
             throws ResourceNotFoundFault {
-        return accountServiceDelegate.getAuthoritiesDetail(stringID);
+        return accountServiceDelegate.getAuthoritiesDetail(accountNaturalID);
     }
 
     @Override
@@ -485,9 +499,31 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public GPAccountProject getDefaultAccountProject(Long accountID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.getDefaultAccountProject(accountID);
+    }
+
+    @Override
     public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
         return projectServiceDelegate.searchAccountProjects(accountID, request);
+    }
+
+    @Override
+    public boolean setProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.setProjectOwner(request, false);
+    }
+
+    @Override
+    public void forceProjectOwner(RequestByAccountProjectIDs request)
+            throws ResourceNotFoundFault {
+        projectServiceDelegate.setProjectOwner(request, true);
+    }
+
+    @Override
+    public GPAccount getProjectOwner(Long projectID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.getProjectOwner(projectID);
     }
 
     @Override
@@ -496,8 +532,13 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public void updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
-        this.projectServiceDelegate.updateDefaultProject(accountID, projectID);
+    public ProjectDTO getDefaultProjectDTO(Long accountID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.getDefaultProjectDTO(accountID);
+    }
+
+    @Override
+    public boolean updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+        return projectServiceDelegate.updateDefaultProject(accountID, projectID);
     }
 
     @Override
@@ -507,20 +548,32 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ShortAccountDTO> getAccountsBySharedProjectID(Long sharedProjectID)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return this.projectServiceDelegate.getAccountsBySharedProjectID(sharedProjectID);
+    public List<ShortAccountDTO> getAccountsByProjectID(Long projectID)
+            throws ResourceNotFoundFault {
+        return this.projectServiceDelegate.getAccountsBySharedProjectID(projectID);
+    }
+
+    @Override
+    public List<ShortAccountDTO> getAccountsToShareByProjectID(Long projectID)
+            throws ResourceNotFoundFault {
+        return this.projectServiceDelegate.getAccountsToShareByProjectID(projectID);
+    }
+
+    @Override
+    public boolean updateAccountsProjectSharing(Long projectID, List<Long> accountIDsProject)
+            throws ResourceNotFoundFault {
+        return this.projectServiceDelegate.updateAccountsProjectSharing(projectID, accountIDsProject);
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================
     // === Project
-    // ==========================================================================    
+    // ==========================================================================
     @Override
-    public Long saveProject(String stringID, GPProject project, boolean defaultProject)
+    public Long saveProject(String accountNaturalID, GPProject project, boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return this.projectServiceDelegate.saveProject(stringID, project, defaultProject);
+        return this.projectServiceDelegate.saveProject(accountNaturalID, project, defaultProject);
     }
 
     @Override
@@ -535,39 +588,23 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteProject(Long projectID)
-            throws ResourceNotFoundFault {
+    public boolean deleteProject(Long projectID) throws ResourceNotFoundFault {
         return projectServiceDelegate.deleteProject(projectID);
     }
 
     @Override
-    public GPProject getProjectDetail(Long projectID)
-            throws ResourceNotFoundFault {
+    public GPProject getProjectDetail(Long projectID) throws ResourceNotFoundFault {
         return projectServiceDelegate.getProjectDetail(projectID);
     }
 
     @Override
-    public int getNumberOfElementsProject(Long projectID)
-            throws ResourceNotFoundFault {
+    public int getNumberOfElementsProject(Long projectID) throws ResourceNotFoundFault {
         return projectServiceDelegate.getNumberOfElementsProject(projectID);
     }
 
     @Override
-    public void setProjectShared(Long projectID)
-            throws ResourceNotFoundFault {
+    public void setProjectShared(Long projectID) throws ResourceNotFoundFault {
         projectServiceDelegate.setProjectShared(projectID);
-    }
-
-    @Override
-    public boolean setProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault {
-        return projectServiceDelegate.setProjectOwner(request, false);
-    }
-
-    @Override
-    public void forceProjectOwner(RequestByAccountProjectIDs request)
-            throws ResourceNotFoundFault {
-        projectServiceDelegate.setProjectOwner(request, true);
     }
     //</editor-fold>
 
@@ -960,6 +997,56 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         return serverServiceDelegate.saveServer(id, aliasServerName, serverUrl, organization);
     }
     //</editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Message">
+    // ==========================================================================
+    // === Message
+    // ==========================================================================
+    @Override
+    public Long insertMessage(GPMessage message) throws ResourceNotFoundFault, IllegalParameterFault {
+        return messageServiceDelegate.insertMessage(message);
+    }
+
+    @Override
+    public boolean insertMultiMessage(MessageDTO messageDTO) throws ResourceNotFoundFault {
+        return messageServiceDelegate.insertMultiMessage(messageDTO);
+    }
+
+    @Override
+    public boolean deleteMessage(Long messageID) throws ResourceNotFoundFault {
+        return messageServiceDelegate.deleteMessage(messageID);
+    }
+
+    @Override
+    public GPMessage getMessageDetail(Long messageID) throws ResourceNotFoundFault {
+        return messageServiceDelegate.getMessageDetail(messageID);
+    }
+
+    @Override
+    public List<GPMessage> getAllMessagesByRecipient(Long recipientID) throws ResourceNotFoundFault {
+        return messageServiceDelegate.getAllMessagesByRecipient(recipientID);
+    }
+
+    @Override
+    public List<GPMessage> getUnreadMessagesByRecipient(Long recipientID) throws ResourceNotFoundFault {
+        return messageServiceDelegate.getUnreadMessagesByRecipient(recipientID);
+    }
+
+    @Override
+    public boolean markMessageAsRead(Long recipientID) throws ResourceNotFoundFault {
+        return messageServiceDelegate.markMessageAsRead(recipientID);
+    }
+
+    @Override
+    public boolean markAllMessagesAsReadByRecipient(Long recipientID) throws ResourceNotFoundFault {
+        return messageServiceDelegate.markAllMessagesAsReadByRecipient(recipientID);
+    }
+
+    @Override
+    public boolean markMessagesAsReadByDate(Long recipientID, Date toDate) throws ResourceNotFoundFault {
+        return messageServiceDelegate.markMessagesAsReadByDate(recipientID, toDate);
+    }
+    // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Access Info">
     // ==========================================================================

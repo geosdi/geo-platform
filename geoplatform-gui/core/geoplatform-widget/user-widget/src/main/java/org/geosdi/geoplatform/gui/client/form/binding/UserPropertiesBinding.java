@@ -60,6 +60,7 @@ import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
+import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
 
 /**
@@ -111,21 +112,21 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         fp.setHeaderVisible(false);
 
         this.nameField = new TextField<String>();
-        this.nameField.setId(GPUserManageDetailKeyValue.NAME.toString());
+        this.nameField.setId(GPSimpleUserKeyValue.NAME.toString());
         this.nameField.setFieldLabel("Name");
         this.nameField.setEmptyText("Enter a complete name (required)");
         this.nameField.setToolTip("Complete name of the user");
         this.nameField.setAutoValidate(true);
 
         this.emailField = new TextField<String>();
-        this.emailField.setId(GPUserManageDetailKeyValue.EMAIL.toString());
+        this.emailField.setId(GPSimpleUserKeyValue.EMAIL.toString());
         this.emailField.setFieldLabel("Email");
         this.emailField.setEmptyText("Enter a email (required)");
         this.emailField.setToolTip("Email of the user");
         this.emailField.setAutoValidate(true);
 
         this.usernameField = new TextField<String>();
-        this.usernameField.setId(GPUserManageDetailKeyValue.USERNAME.toString());
+        this.usernameField.setId(GPSimpleUserKeyValue.USERNAME.toString());
         this.usernameField.setFieldLabel("Username");
         this.usernameField.setEmptyText("Enter a username (required)");
         this.usernameField.setToolTip("Username of the user");
@@ -194,7 +195,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 roleComboBinding.updateModel();
             }
         };
-        this.userRoleComboBox.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
+        this.userRoleComboBox.setId(GPSimpleUserKeyValue.AUTORITHY.toString());
         this.userRoleComboBox.setFieldLabel("Role");
         this.userRoleComboBox.setEmptyText("Select a role... (required)");
         this.userRoleComboBox.setToolTip("Role of the user");
@@ -522,7 +523,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private class RoleComboBinding extends GPFieldBinding {
 
         public RoleComboBinding() {
-            super(userRoleComboBox, GPUserManageDetailKeyValue.AUTORITHY.toString());
+            super(userRoleComboBox, GPSimpleUserKeyValue.AUTORITHY.toString());
         }
 
         @Override
@@ -553,7 +554,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private class UsernameFieldBinding extends GPFieldBinding {
 
         public UsernameFieldBinding() {
-            super(usernameField, GPUserManageDetailKeyValue.USERNAME.toString());
+            super(usernameField, GPSimpleUserKeyValue.USERNAME.toString());
         }
 
         @Override
@@ -577,7 +578,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private class NameFieldBinding extends GPFieldBinding {
 
         public NameFieldBinding() {
-            super(nameField, GPUserManageDetailKeyValue.NAME.toString());
+            super(nameField, GPSimpleUserKeyValue.NAME.toString());
         }
 
         @Override
@@ -601,7 +602,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private class EmailFieldBinding extends GPFieldBinding {
 
         public EmailFieldBinding() {
-            super(emailField, GPUserManageDetailKeyValue.EMAIL.toString());
+            super(emailField, GPSimpleUserKeyValue.EMAIL.toString());
         }
 
         @Override

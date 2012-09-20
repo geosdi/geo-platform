@@ -39,41 +39,42 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
-import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchWidget;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
+import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class DeleteProjectAction extends GeoPlatformAction<ButtonEvent> {
+public class DeleteProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
-    private GPProjectSearchWidget searchWidget;
+    private GPProjectSearchPanel searchPanel;
 
-    public DeleteProjectAction(GPProjectSearchWidget theSearchWidget) {
-        this.searchWidget = theSearchWidget;
+    public DeleteProjectAction(GPProjectSearchPanel theSearchPanel, GPRole role) {
+        super(role);
+        this.searchPanel = theSearchPanel;
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if (searchWidget.isDefaultSelectedProject()) {
+        if (searchPanel.isDefaultSelectedProject()) {
             GeoPlatformMessage.alertMessage("Delete Project",
-                                            "Attention you could not delete Default Project.");
+                    "Attention you could not delete Default Project.");
         } else {
             GeoPlatformMessage.confirmMessage("Delete Project",
-                                              "Are you sure you want to delete the Selected Project ?",
-                                              new Listener<MessageBoxEvent>() {
-
-                @Override
-                public void handleEvent(MessageBoxEvent be) {
-                    if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                        searchWidget.deleteProject();
-                    }
-                }
-            });
+                    "Are you sure you want to delete the Selected Project ?",
+                    new Listener<MessageBoxEvent>() {
+                        @Override
+                        public void handleEvent(MessageBoxEvent be) {
+                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                                searchPanel.deleteProject();
+                            }
+                        }
+                    });
         }
     }
 }

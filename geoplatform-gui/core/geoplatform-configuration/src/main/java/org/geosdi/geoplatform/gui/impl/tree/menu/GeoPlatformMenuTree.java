@@ -35,25 +35,26 @@
  */
 package org.geosdi.geoplatform.gui.impl.tree.menu;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GeoPlatformMenuTree {
 
-    public void buildMenu();
-
-    public Menu getMenu();
-
+//    public void buildMenu();
+//
+//    public Menu getMenu();
     public void show(AbstractRootTreeNode root);
 
     public void show(AbstractFolderTreeNode folder);
 
-    public void showLeaf(GPLayerBean leaf);
+    public void show(GPRasterBean leaf);
+
+    public void show(GPVectorBean leaf);
 }

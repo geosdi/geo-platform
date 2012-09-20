@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.impl;
 
 import java.util.Collections;
 import java.util.List;
-
 import org.geosdi.geoplatform.gui.configuration.menubar.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
 

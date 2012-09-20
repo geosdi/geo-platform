@@ -140,14 +140,20 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
      */
     @Override
     public void setAuthority(String role) {
-        super.set(GPSimpleUserKeyValue.AUTORITHY.toString(), role.toString());
+        super.set(GPSimpleUserKeyValue.AUTORITHY.toString(), role);
     }
 
+    /**
+     * @return the trustedLevel
+     */    
     @Override
     public GPTrustedLevel getTrustedLevel() {
         return super.get(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
     }
 
+    /**
+     * @param trustedLevel the trustedLevel to set
+     */    
     @Override
     public void setTrustedLevel(GPTrustedLevel trustedLevel) {
         super.set(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString(), trustedLevel);

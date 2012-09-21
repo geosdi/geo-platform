@@ -63,6 +63,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.ViewportEnum;
 import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.gwtopenmaps.openlayers.client.Map;
 
 /**
@@ -171,7 +172,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
                 });
         setDefaultViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(setDefaultViewportButton);
-        SaveViewportAction saveViewportAction = new SaveViewportAction(GPRole.USER, this.store);
+        SaveViewportAction saveViewportAction = new SaveViewportAction(GPTrustedLevel.LOW, this.store);
         this.saveButton = new GPSecureButton("Save", BasicWidgetResources.ICONS.save(), saveViewportAction);
         buttonBar.add(this.saveButton);
         this.add(buttonBar, new FormData("100%"));

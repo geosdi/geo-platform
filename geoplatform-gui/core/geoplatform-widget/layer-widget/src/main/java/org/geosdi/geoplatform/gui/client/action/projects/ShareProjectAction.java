@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -51,8 +51,8 @@ public class ShareProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     private GPProjectSearchPanel widget;
 
-    public ShareProjectAction(GPProjectSearchPanel theWidget, GPRole role) {
-        super(role);
+    public ShareProjectAction(GPTrustedLevel trustedLevel, GPProjectSearchPanel theWidget) {
+        super(trustedLevel);
         this.widget = theWidget;
     }
 

@@ -60,6 +60,7 @@ import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSession
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -67,8 +68,8 @@ import org.geosdi.geoplatform.gui.shared.GPRole;
  */
 public class BaseLayerWidget extends GeoPlatformWindow {
 
-    private final short WIDGET_WIDTH = 485;
-    private final short WIDGET_HEIGHT = 385;
+    private static final short WIDGET_WIDTH = 485;
+    private static final short WIDGET_HEIGHT = 385;
     private ListStore<GPBaseLayer> store = new ListStore<GPBaseLayer>();
     private ListView<GPBaseLayer> listView;
     private ContentPanel centralPanel;
@@ -81,7 +82,7 @@ public class BaseLayerWidget extends GeoPlatformWindow {
     @Override
     public void addComponent() {
         this.store.add(GPMapBaseLayerFactory.getBaseLayerList());
-        GeoPlatformSecureAction saveBaseLayerAction = new SaveBaseLayerAction(GPRole.USER, this);
+        GeoPlatformSecureAction saveBaseLayerAction = new SaveBaseLayerAction(GPTrustedLevel.LOW, this);
         this.saveButton = new GPSecureButton("Save", BasicWidgetResources.ICONS.save(), saveBaseLayerAction);
         this.saveButton.disable();
         Button applyButton = new Button("Apply/Close", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {

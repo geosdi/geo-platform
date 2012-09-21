@@ -77,7 +77,7 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
     public void addLayerCollection(Collection<GPLayer> layerList) {
         for (GPLayer layer : layerList) {
             GPLayerType layerType = layer.getLayerType();
-            if (layerType.equals(GPLayerType.RASTER)) {
+            if (layerType == GPLayerType.RASTER) {
                 GPRasterLayer rasterLayer = (GPRasterLayer) layer;
                 RasterLayerDTO rasterLayerDTO = new RasterLayerDTO(rasterLayer);
                 logger.debug("\n### RasterLayerDTO ###\n" + rasterLayerDTO + "\n###\t###\t###");

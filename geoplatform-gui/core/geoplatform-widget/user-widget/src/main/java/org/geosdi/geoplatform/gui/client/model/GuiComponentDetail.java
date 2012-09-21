@@ -115,7 +115,7 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -136,7 +136,7 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -148,7 +148,7 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

@@ -43,6 +43,7 @@ import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.MessageDTO;
@@ -67,14 +68,14 @@ public class WSMessageTest extends ServiceTest {
         this.setUpOrganization();
 
         // Insert Users
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, ROLE_USER);
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, GPRole.USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
 
-        firstRecipientID = this.createAndInsertUser("first_recipient", organizationTest, ROLE_USER);
+        firstRecipientID = this.createAndInsertUser("first_recipient", organizationTest, GPRole.USER);
         firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
 
-        latterRecipientID = this.createAndInsertUser("latter_recipient", organizationTest, ROLE_VIEWER);
+        latterRecipientID = this.createAndInsertUser("latter_recipient", organizationTest, GPRole.VIEWER);
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);
 
         // Create message
@@ -83,6 +84,7 @@ public class WSMessageTest extends ServiceTest {
         message.setSender(userTest);
         message.setCreationDate(new Date(System.currentTimeMillis()));
         message.setRead(false);
+        message.setSubject("Foo subject");
         message.setText("Foo message.");
         message.addCommand(GPMessageCommandType.NONE);
     }
@@ -100,6 +102,7 @@ public class WSMessageTest extends ServiceTest {
         Assert.assertEquals(message.getSender().getId(), messageDetail.getSender().getId());
         Assert.assertNotNull(messageDetail.getRecipient());
         Assert.assertEquals(message.getRecipient().getId(), messageDetail.getRecipient().getId());
+        Assert.assertEquals(message.getSubject(), messageDetail.getSubject());
         Assert.assertEquals(message.getText(), messageDetail.getText());
         Assert.assertEquals(message.getCommands(), messageDetail.getCommands());
         Assert.assertFalse(messageDetail.isRead());

@@ -42,7 +42,7 @@ import com.extjs.gxt.ui.client.widget.Dialog;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -54,8 +54,8 @@ public class DeleteProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     private GPProjectSearchPanel searchPanel;
 
-    public DeleteProjectAction(GPProjectSearchPanel theSearchPanel, GPRole role) {
-        super(role);
+    public DeleteProjectAction(GPTrustedLevel trustedLevel, GPProjectSearchPanel theSearchPanel) {
+        super(trustedLevel);
         this.searchPanel = theSearchPanel;
     }
 

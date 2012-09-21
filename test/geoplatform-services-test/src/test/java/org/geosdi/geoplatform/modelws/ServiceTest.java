@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -83,10 +84,6 @@ public abstract class ServiceTest {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected GeoPlatformService gpWSClient;
-    // Roles (default)
-    protected static final String ROLE_ADMIN = "Admin";
-    protected static final String ROLE_USER = "User";
-    protected static final String ROLE_VIEWER = "Viewer";
     // Organization
     protected static final String organizationNameTest = "geoSDI_ws_test";
     protected GPOrganization organizationTest;
@@ -125,7 +122,7 @@ public abstract class ServiceTest {
         this.setUpOrganization();
 
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, ROLE_USER);
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, GPRole.USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
@@ -165,7 +162,7 @@ public abstract class ServiceTest {
      * Create and insert a User.
      */
     protected long createAndInsertUser(String username,
-            GPOrganization organization, String... roles)
+            GPOrganization organization, GPRole... roles)
             throws IllegalParameterFault {
         GPUser user = this.createUser(username, organization, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
@@ -177,7 +174,7 @@ public abstract class ServiceTest {
     }
 
     protected GPUser createUser(String username, GPOrganization organization,
-            String... roles) {
+            GPRole... roles) {
         GPUser user = new GPUser();
         user.setOrganization(organization);
         user.setUsername(username);
@@ -194,11 +191,12 @@ public abstract class ServiceTest {
         return user;
     }
 
-    private List<GPAuthority> createAuthorities(String... roles) {
+    private List<GPAuthority> createAuthorities(GPRole... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
-        for (String role : roles) {
+        for (GPRole role : roles) {
             GPAuthority authority = new GPAuthority();
-            authority.setAuthority(role);
+            authority.setAuthority(role.getRole());
+            authority.setTrustedLevel(role.getTrustedLevel());
 
             authorities.add(authority);
         }

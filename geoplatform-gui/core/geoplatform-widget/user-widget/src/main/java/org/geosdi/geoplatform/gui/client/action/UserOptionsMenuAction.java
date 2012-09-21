@@ -72,7 +72,6 @@ public class UserOptionsMenuAction extends MenuBaseAction {
      */
     private void retrievesUserFromSession() {
         UserRemoteImpl.Util.getInstance().getOwnUser(new AsyncCallback<IGPUserManageDetail>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 GeoPlatformMessage.errorMessage("Error", caught.getMessage());

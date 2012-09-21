@@ -35,14 +35,21 @@
  */
 package org.geosdi.geoplatform;
 
-import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.WKTReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
@@ -60,6 +67,7 @@ import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
+import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
@@ -205,7 +213,7 @@ public abstract class BaseDAOTest {
     private void removeAllFolders() {
         List<GPFolder> folders = folderDAO.findAll();
         // Folders sorted in descending order (wrt position)
-        Comparator comp = new Comparator() {
+        final Comparator comp = new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
                 GPFolder folder1 = (GPFolder) o1;
@@ -614,7 +622,7 @@ public abstract class BaseDAOTest {
     private List<GPAuthority> createAuthorities(GPAccount account, GPRole... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
         for (GPRole role : roles) {
-            authorities.add(new GPAuthority(account, role.toString(), role.getUserLevel()));
+            authorities.add(new GPAuthority(account, role.toString(), role.getTrustedLevel()));
         }
         return authorities;
     }

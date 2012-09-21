@@ -89,7 +89,7 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
             String currentPlainPassword, String newPlainPassword)
             throws GeoPlatformException {
         return userService.updateOwnUser(userDetail, currentPlainPassword,
-                newPlainPassword, super.getThreadLocalRequest());
+                                         newPlainPassword, super.getThreadLocalRequest());
     }
 
     @Override

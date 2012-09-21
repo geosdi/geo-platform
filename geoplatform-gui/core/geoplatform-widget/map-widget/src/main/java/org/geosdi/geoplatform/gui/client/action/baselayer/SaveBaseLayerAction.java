@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSession
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -56,8 +57,8 @@ public class SaveBaseLayerAction extends GeoPlatformSecureAction<ComponentEvent>
 
     private BaseLayerWidget widget;
 
-    public SaveBaseLayerAction(GPRole gprole, BaseLayerWidget widget) {
-        super(gprole);
+    public SaveBaseLayerAction(GPTrustedLevel trustedLevel, BaseLayerWidget widget) {
+        super(trustedLevel);
         this.widget = widget;
     }
 

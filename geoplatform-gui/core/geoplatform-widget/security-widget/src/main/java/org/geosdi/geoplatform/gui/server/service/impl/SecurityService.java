@@ -259,13 +259,17 @@ public class SecurityService implements ISecurityService {
         return (IGPAccountDetail) accountDetail;
     }
 
-    // NOTE: Now a user must have at most one role
+    /**
+     * A User must have at most one role.
+     *
+     * @todo user can have more roles
+     */
     private void extractGPAuthoritiesInToUser(GPLoginUserDetail userDetail, List<GPAuthority> authorities) {
         Iterator<GPAuthority> iterator = authorities.iterator();
         if (iterator.hasNext()) {
-            GPAuthority gPAuthority = iterator.next();
-            userDetail.setAuthority(gPAuthority.getAuthority());
-            userDetail.setUserLevel(gPAuthority.getUserLevel());
+            GPAuthority authority = iterator.next();
+            userDetail.setAuthority(authority.getAuthority());
+            userDetail.setTrustedLevel(authority.getTrustedLevel());
         }
     }
 

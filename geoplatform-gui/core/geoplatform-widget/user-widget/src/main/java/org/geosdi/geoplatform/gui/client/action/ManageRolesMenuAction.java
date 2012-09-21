@@ -65,7 +65,6 @@ public class ManageRolesMenuAction extends MenuBaseAction {
     private void retrieveRoles() {
         UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
                                                       new AsyncCallback<ArrayList<String>>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 GeoPlatformMessage.errorMessage("Error retrieving roles",
@@ -86,7 +85,6 @@ public class ManageRolesMenuAction extends MenuBaseAction {
 
     private void retrieveGuiComponentIDs() {
         UserRemoteImpl.Util.getInstance().getAllGuiComponentIDs(new AsyncCallback<ArrayList<String>>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 GeoPlatformMessage.errorMessage("Error retrieving permissions IDs",

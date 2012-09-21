@@ -354,6 +354,9 @@ public class EntityCorrectness {
         if (message.getCreationDate() == null) {
             throw new IllegalParameterFault("Message \"creationDate\" must be NOT NULL.");
         }
+        if (EntityCorrectness.empty(message.getSubject())) {
+            throw new IllegalParameterFault("Message \"subject\" must be NOT NULL or NOT empty.");
+        }
         if (EntityCorrectness.empty(message.getText())) {
             throw new IllegalParameterFault("Message \"text\" must be NOT NULL or NOT empty.");
         }

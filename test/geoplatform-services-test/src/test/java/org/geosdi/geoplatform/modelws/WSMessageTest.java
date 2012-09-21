@@ -83,6 +83,7 @@ public class WSMessageTest extends ServiceTest {
         message.setSender(userTest);
         message.setCreationDate(new Date(System.currentTimeMillis()));
         message.setRead(false);
+        message.setSubject("Foo subject");
         message.setText("Foo message.");
         message.addCommand(GPMessageCommandType.NONE);
     }
@@ -100,6 +101,7 @@ public class WSMessageTest extends ServiceTest {
         Assert.assertEquals(message.getSender().getId(), messageDetail.getSender().getId());
         Assert.assertNotNull(messageDetail.getRecipient());
         Assert.assertEquals(message.getRecipient().getId(), messageDetail.getRecipient().getId());
+        Assert.assertEquals(message.getSubject(), messageDetail.getSubject());
         Assert.assertEquals(message.getText(), messageDetail.getText());
         Assert.assertEquals(message.getCommands(), messageDetail.getCommands());
         Assert.assertFalse(messageDetail.isRead());

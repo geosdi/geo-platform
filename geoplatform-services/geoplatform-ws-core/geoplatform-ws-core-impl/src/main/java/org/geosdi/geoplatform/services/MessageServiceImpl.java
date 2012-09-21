@@ -170,7 +170,6 @@ class MessageServiceImpl {
      */
     public boolean markMessageAsRead(Long messageID)
             throws ResourceNotFoundFault {
-//        GPMessage message = messageDao.markMessageAsRead(messageID);
         return messageDao.markMessageAsRead(messageID);
     }
 

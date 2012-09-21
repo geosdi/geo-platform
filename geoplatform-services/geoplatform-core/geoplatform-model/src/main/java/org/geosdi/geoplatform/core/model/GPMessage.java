@@ -92,6 +92,9 @@ public class GPMessage implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     //
+    @Column(length = 100)
+    private String subject;
+    //
     @Column(columnDefinition = "TEXT")
     private String text;
     //
@@ -131,6 +134,14 @@ public class GPMessage implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getText() {
@@ -194,6 +205,7 @@ public class GPMessage implements Serializable {
         str.append(", recipient=").append(recipient);
         str.append(", sender=").append(sender);
         str.append(", creationDate=").append(creationDate);
+        str.append(", subject=").append(subject);
         str.append(", text=").append(text);
         str.append(", isRead=").append(isRead);
         str.append(", commands=").append(commands);

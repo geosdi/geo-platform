@@ -107,13 +107,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         usernameField = new TextField<String>();
         usernameField.setFieldLabel("Username");
         usernameField.setEnabled(false);
-        
+
         userFieldSet.add(usernameField);
 
         roleField = new TextField<String>();
         roleField.setFieldLabel("Role");
         roleField.setEnabled(false);
-        
+
         userFieldSet.add(roleField);
 
         nameField = new TextField<String>();
@@ -145,7 +145,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         emailResultSet.add(emailField);
 
         emailResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
-
             @Override
             public void handleEvent(FieldSetEvent be) {
                 updateEmail(null, true);
@@ -195,7 +194,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         passwordFieldSet.add(newRePasswordField);
 
         passwordFieldSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
-
             @Override
             public void handleEvent(FieldSetEvent be) {
                 updatePassword(null, true);
@@ -209,7 +207,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             }
         });
         passwordFieldSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
-
             @Override
             public void handleEvent(FieldSetEvent be) {
                 updatePassword(null, false);
@@ -228,7 +225,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         UserRemoteImpl.Util.getInstance().updateOwnUser(user,
                                                         currentPlainPassword, newPlainPassword,
                                                         new AsyncCallback<Long>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 GeoPlatformMessage.errorMessage("Error", caught.getMessage());
@@ -266,7 +262,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private Validator validatorUpdateName() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(user.getName())) {
@@ -285,7 +280,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private Validator validatorUpdateEmail() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(user.getEmail())) {
@@ -304,7 +298,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private Validator validatorPassword() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
@@ -325,7 +318,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private Validator validatorUpdatePassword() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
@@ -347,7 +339,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private Validator validatorUpdateConfirmPassword() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(newPasswordField.getValue())) {

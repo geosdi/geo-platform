@@ -87,13 +87,13 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.search.setFieldLabel("Find User");
         this.userPropertiesWidget = new UserPropertiesWidget(super.store);
         super.addButton(1, new Button("Add User",
-                BasicWidgetResources.ICONS.logged_user(),
-                new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        showUserPropertiesWidget(true);
-                    }
-                }));
+                                      BasicWidgetResources.ICONS.logged_user(),
+                                      new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                showUserPropertiesWidget(true);
+            }
+        }));
     }
 
     @Override
@@ -203,27 +203,27 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         searchStatus.setBusy("Retrive roles");
 
         UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
-                new AsyncCallback<ArrayList<String>>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        setSearchStatus(
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                "Error retrieving roles");
-                    }
+                                                      new AsyncCallback<ArrayList<String>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                setSearchStatus(
+                        SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
+                        "Error retrieving roles");
+            }
 
-                    @Override
-                    public void onSuccess(ArrayList<String> result) {
-                        setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
+            @Override
+            public void onSuccess(ArrayList<String> result) {
+                setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
                                 SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
 
-                        GPUserManageDetail userDetail;
-                        if (isNewUser) {
-                            userDetail = new GPUserManageDetail();
-                        } else {
-                            userDetail = widget.getSelectionModel().getSelectedItem();
-                        }
-                        userPropertiesWidget.show(userDetail, result);
-                    }
-                });
+                GPUserManageDetail userDetail;
+                if (isNewUser) {
+                    userDetail = new GPUserManageDetail();
+                } else {
+                    userDetail = widget.getSelectionModel().getSelectedItem();
+                }
+                userPropertiesWidget.show(userDetail, result);
+            }
+        });
     }
 }

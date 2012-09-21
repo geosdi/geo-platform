@@ -65,6 +65,7 @@ public class MessageDTO {
     private List<Long> recipientIDs;
     //
     private Date creationDate;
+    private String subject;
     private String text;
     private Boolean read;
     //
@@ -88,6 +89,7 @@ public class MessageDTO {
         this.senderID = message.getSender().getId();
         this.recipientIDs = Arrays.asList(message.getRecipient().getId());
         this.creationDate = message.getCreationDate();
+        this.subject = message.getSubject();
         this.text = message.getText();
         this.read = message.isRead();
 
@@ -156,6 +158,20 @@ public class MessageDTO {
     }
 
     /**
+     * @return the subject
+     */
+    public String getSubject() {
+        return subject;
+    }
+
+    /**
+     * @param subject the subject to set
+     */
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    /**
      * @return the text
      */
     public String getText() {
@@ -214,6 +230,7 @@ public class MessageDTO {
                 + ", senderID=" + senderID
                 + ", recipientIDs=" + recipientIDs
                 + ", creationDate=" + creationDate
+                + ", subject=" + subject
                 + ", text=" + text
                 + ", read=" + read
                 + ", commands=" + commands + '}';
@@ -231,6 +248,7 @@ public class MessageDTO {
         message.setId(messageDTO.getId());
         message.setSender(sender);
         message.setRecipient(recipient);
+        message.setSubject(messageDTO.getSubject());
         message.setText(messageDTO.getText());
         message.setCreationDate(messageDTO.getCreationDate() == null
                 ? new Date(System.currentTimeMillis()) : messageDTO.getCreationDate());

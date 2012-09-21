@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
@@ -63,7 +63,7 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
 
     @Inject
     public ShareProjectMenuAction(GPProjectManagementWidget projectManagementWidget) {
-        super("Share Project", LayerResources.ICONS.arrowRefresh(), GPRole.ADMIN);
+        super(GPTrustedLevel.HIGH, "Share Project", LayerResources.ICONS.arrowRefresh());
         this.projectManagementWidget = projectManagementWidget;
     }
 

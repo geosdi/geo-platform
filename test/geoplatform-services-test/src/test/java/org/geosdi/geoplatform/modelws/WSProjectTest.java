@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
@@ -449,8 +450,8 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
 
         // Insert Users to which the Project is shared
-        Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, ROLE_USER);
-        Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, ROLE_VIEWER);
+        Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, GPRole.USER);
+        Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, GPRole.VIEWER);
 
         GPUser firstUser = gpWSClient.getUserDetail(firstUserID);
         GPUser latterUser = gpWSClient.getUserDetail(latterUserID);
@@ -477,13 +478,13 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertNull(accountsToShare);
 
         // Insert a User to which the Project is shared as viewer
-        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, ROLE_USER);
+        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER);
         GPUser newUser = gpWSClient.getUserDetail(newUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
 
         // Insert Users to which it possible to share the Project
-        this.createAndInsertUser("first_possible_to_share_project", organizationTest, ROLE_USER);
-        this.createAndInsertUser("latter_possible_to_share_project", organizationTest, ROLE_VIEWER);
+        this.createAndInsertUser("first_possible_to_share_project", organizationTest, GPRole.USER);
+        this.createAndInsertUser("latter_possible_to_share_project", organizationTest, GPRole.VIEWER);
 
         // Final test
         accountsToShare = gpWSClient.getAccountsToShareByProjectID(idProjectTest);
@@ -499,7 +500,7 @@ public class WSProjectTest extends ServiceTest {
         gpWSClient.updateProject(projectTest);
 
         // Insert a User to which the Project is shared as viewer
-        Long newOwnerID = this.createAndInsertUser("user_to_share_project", organizationTest, ROLE_USER);
+        Long newOwnerID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER);
         GPUser newOwner = gpWSClient.getUserDetail(newOwnerID);
         this.createAndInsertAccountProject(newOwner, projectTest, BasePermission.READ);
 
@@ -527,7 +528,7 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertEquals(userTest, owner);
 
         // Change the Account owner
-        Long newOwnerID = this.createAndInsertUser("new_owner", organizationTest, ROLE_ADMIN);
+        Long newOwnerID = this.createAndInsertUser("new_owner", organizationTest, GPRole.ADMIN);
 
         RequestByAccountProjectIDs request = new RequestByAccountProjectIDs(newOwnerID, idProjectTest);
         boolean result = gpWSClient.setProjectOwner(request);
@@ -551,7 +552,7 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
 
         // Insert User to which the Project will be share
-        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, ROLE_USER);
+        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER);
 
         // Test add user for sharing
         boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, Arrays.asList(newUserID));
@@ -576,7 +577,7 @@ public class WSProjectTest extends ServiceTest {
     @Test
     public void testUpdateAccountsProjectSharingRemoveAll() throws Exception {
         // Insert a User to which the Project is shared as viewer
-        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, ROLE_USER);
+        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER);
         GPUser newUser = gpWSClient.getUserDetail(newUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
 
@@ -617,8 +618,8 @@ public class WSProjectTest extends ServiceTest {
     @Test
     public void testUpdateAccountsProjectSharingManage() throws Exception {
         // Insert a User to which the Project is shared as viewer
-        Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, ROLE_USER);
-        Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, ROLE_VIEWER);
+        Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, GPRole.USER);
+        Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, GPRole.VIEWER);
         GPUser newUser = gpWSClient.getUserDetail(firstUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
 

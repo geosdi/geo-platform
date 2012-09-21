@@ -159,30 +159,30 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     public void manageInsertUser() {
         user.setCreationDate(new Date());
         UserRemoteImpl.Util.getInstance().insertUser(user,
-                GPAccountLogged.getInstance().getOrganization(),
-                new AsyncCallback<Long>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        if (caught.getCause() instanceof GPSessionTimeout) {
-                            GPHandlerManager.fireEvent(new GPLoginEvent(manageInsertUserEvent));
-                        } else {
-                            GeoPlatformMessage.errorMessage("Error", caught.getMessage());
-                        }
-                    }
+                                                     GPAccountLogged.getInstance().getOrganization(),
+                                                     new AsyncCallback<Long>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(manageInsertUserEvent));
+                } else {
+                    GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                }
+            }
 
-                    @Override
-                    public void onSuccess(Long result) {
-                        user.setId(result);
-                        store.insert(user, 0);
-                        store.commitChanges();
+            @Override
+            public void onSuccess(Long result) {
+                user.setId(result);
+                store.insert(user, 0);
+                store.commitChanges();
 
-                        hide();
+                hide();
 
-                        // TODO statusbar...
-                        GeoPlatformMessage.infoMessage("User successfully added",
-                                "<ul><li>" + user.getUsername() + "</li></ul>");
-                    }
-                });
+                // TODO statusbar...
+                GeoPlatformMessage.infoMessage("User successfully added",
+                                               "<ul><li>" + user.getUsername() + "</li></ul>");
+            }
+        });
     }
 
     @Override
@@ -204,7 +204,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
                 // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully modify",
-                        "<ul><li>" + user.getUsername() + "</li></ul>");
+                                               "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }

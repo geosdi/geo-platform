@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -55,8 +55,8 @@ public class SaveViewportAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     private ListStore<GPClientViewport> store;
 
-    public SaveViewportAction(GPRole gprole, ListStore<GPClientViewport> store) {
-        super(gprole);
+    public SaveViewportAction(GPTrustedLevel trustedLevel, ListStore<GPClientViewport> store) {
+        super(trustedLevel);
         this.store = store;
     }
 

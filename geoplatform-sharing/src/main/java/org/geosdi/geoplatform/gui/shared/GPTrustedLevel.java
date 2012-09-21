@@ -33,46 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.menu;
-
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
-import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeIconHandler;
-import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
-import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+package org.geosdi.geoplatform.gui.shared;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * A <b>Trusted Level</b> denote a restricted area of permissions.
+ * <p/>
+ * Each trusted level denote a different subset of all permissions. <br/> The
+ * trusted level <u>NONE</u> denote not any permission. <br/> The trusted level
+ * <u>FULL</u> denote all permissions.
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class MenuBaseSecureAction extends MenuSecureAction
-        implements HasMenuActionChangeIconHandler {
+public enum GPTrustedLevel {
 
-    private AbstractImagePrototype image;
-
-    public MenuBaseSecureAction(GPTrustedLevel trustedLevel, String title, AbstractImagePrototype image) {
-        super(trustedLevel, title);
-        this.image = image;
-    }
-
-    /**
-     * @return the image
-     */
-    public AbstractImagePrototype getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(AbstractImagePrototype image) {
-        this.image = image;
-        this.handlerManager.fireEvent(new MenuActionChangeIconEvent(image));
-    }
-
-    @Override
-    public HandlerRegistration addMenuActionChangeIconHandler(MenuActionChangeIconHandler actionHandler) {
-        return this.handlerManager.addHandler(MenuActionChangeIconEvent.TYPE, actionHandler);
-    }
+    NONE,
+    LOW,
+    RESTRICT,
+    HIGH,
+    FULL;
 }

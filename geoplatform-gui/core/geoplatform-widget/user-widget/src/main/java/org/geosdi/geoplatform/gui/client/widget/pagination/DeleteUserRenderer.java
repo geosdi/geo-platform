@@ -72,17 +72,15 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
 
     @Override
     public Object render(final GPUserManageDetail user, String property, ColumnData config, final int rowIndex,
-                         final int colIndex, final ListStore<GPUserManageDetail> store, Grid<GPUserManageDetail> grid) {
+            final int colIndex, final ListStore<GPUserManageDetail> store, Grid<GPUserManageDetail> grid) {
 
         Button button = new Button("", new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
 
                 GeoPlatformMessage.confirmMessage("Delete User",
                                                   "Are you sure you want to delete the User \"" + user.getUsername() + "\" ?",
                                                   new Listener<MessageBoxEvent>() {
-
                     @Override
                     public void handleEvent(MessageBoxEvent be) {
                         if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
@@ -101,10 +99,9 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
 
     @Override
     public void manageDeleteUser(final GPUserManageDetail user,
-                                 final ListStore<GPUserManageDetail> store) {
+            final ListStore<GPUserManageDetail> store) {
 
         UserRemoteImpl.Util.getInstance().deleteUser(user.getId(), new AsyncCallback<Boolean>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {

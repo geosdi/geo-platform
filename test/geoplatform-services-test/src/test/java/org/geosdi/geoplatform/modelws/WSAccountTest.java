@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
@@ -86,12 +87,12 @@ public class WSAccountTest extends ServiceTest {
         }
 
         // Insert User of the organization for test
-        this.createAndInsertUser("to_search", organizationTest, ROLE_USER);
+        this.createAndInsertUser("to_search", organizationTest, GPRole.USER);
 
         // Insert the other Organization and a User for it
         GPOrganization otherOrganization = new GPOrganization("other_organization_ws_test");
         Long otherOrganizationID = gpWSClient.insertOrganization(otherOrganization);
-        this.createAndInsertUser("none_search", otherOrganization, ROLE_USER);
+        this.createAndInsertUser("none_search", otherOrganization, GPRole.USER);
 
         // Final test
         accountList = gpWSClient.getAccounts(organizationNameTest);
@@ -154,14 +155,15 @@ public class WSAccountTest extends ServiceTest {
 
         GPAuthority authority = authorities.get(0);
         Assert.assertNotNull(authority);
-        Assert.assertEquals("Authority string", ROLE_USER, authority.getAuthority());
+        Assert.assertEquals("Authority string", GPRole.USER.getRole(), authority.getAuthority());
+        Assert.assertEquals("Authority level", GPRole.USER.getTrustedLevel(), authority.getTrustedLevel());
         Assert.assertEquals("Authority username", usernameTest, authority.getAccountNaturalID());
     }
 
     @Test
     public void testInsertUserWithMultiRole() throws IllegalParameterFault, ResourceNotFoundFault {
         String usernameMultiRole = "user-multi-role";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ROLE_ADMIN, ROLE_VIEWER);
+        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, GPRole.ADMIN, GPRole.VIEWER);
 
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole);
@@ -173,9 +175,9 @@ public class WSAccountTest extends ServiceTest {
             for (GPAuthority authority : authorities) {
                 Assert.assertNotNull(authority);
                 Assert.assertEquals("Authority email", usernameMultiRole, authority.getAccountNaturalID());
-                if (ROLE_ADMIN.equals(authority.getAuthority())) {
+                if (GPRole.ADMIN.getRole().equals(authority.getAuthority())) {
                     isAdmin = true;
-                } else if (ROLE_VIEWER.equals(authority.getAuthority())) {
+                } else if (GPRole.VIEWER.getRole().equals(authority.getAuthority())) {
                     isViewer = true;
                 }
             }
@@ -190,7 +192,7 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUsername() {
-        GPUser user = super.createUser(usernameTest, organizationTest, ROLE_USER);
+        GPUser user = super.createUser(usernameTest, organizationTest, GPRole.USER);
         try {
             gpWSClient.insertAccount(user, false);
             Assert.fail("User already exist wrt username");
@@ -203,7 +205,7 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTEmail() {
-        GPUser user = super.createUser("duplicate-email", organizationTest, ROLE_USER);
+        GPUser user = super.createUser("duplicate-email", organizationTest, GPRole.USER);
         user.setEmailAddress(super.userTest.getEmailAddress());
         try {
             gpWSClient.insertAccount(user, false);
@@ -218,7 +220,7 @@ public class WSAccountTest extends ServiceTest {
     @Test
     public void testInsertIncorrectUserWRTUOrganization() {
         GPUser user = super.createUser("no-organization",
-                                       new GPOrganization("organization-inexistent"), ROLE_USER);
+                                       new GPOrganization("organization-inexistent"), GPRole.USER);
 
         try {
             gpWSClient.insertAccount(user, false);

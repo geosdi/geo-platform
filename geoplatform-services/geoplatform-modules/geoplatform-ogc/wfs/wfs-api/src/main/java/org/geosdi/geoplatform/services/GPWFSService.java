@@ -59,4 +59,12 @@ public interface GPWFSService {
     @WebResult(name = "DescribeFeatureType")
     LayerSchemaDTO describeFeatureType(@WebParam(name = "urlServer") String urlServer, @WebParam(name = "typeName") String typeName)
             throws ResourceNotFoundFault;
+    
+    @Get
+    @HttpResource(location = "/wfs/features/{featureId}")
+    @WebResult(name = "DescribeFeatureType")
+    LayerSchemaDTO getFeature(@WebParam(name = "featureId") String featureId)
+            throws ResourceNotFoundFault;
+    
+    
 }

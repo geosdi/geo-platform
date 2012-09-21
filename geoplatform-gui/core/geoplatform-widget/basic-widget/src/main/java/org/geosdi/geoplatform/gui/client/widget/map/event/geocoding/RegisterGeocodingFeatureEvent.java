@@ -33,53 +33,40 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
+package org.geosdi.geoplatform.gui.client.widget.map.event.geocoding;
 
-import com.google.gwt.core.client.GWT;
-import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
-import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.widget.map.GPGeoCoderProvider;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeocodingVectorMarker extends GPVectorMarkerLayer {
+public class RegisterGeocodingFeatureEvent extends GwtEvent<GeocodingEventHandler> {
 
-    private Object provider;
-    private ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
+    private IGeoPlatformLocation bean;
+    private GPCoordinateReferenceSystem crs;
+    private GPGeoCoderProvider provider;
 
-    @Override
-    public void setIconStyle() {
-        style.setExternalGraphic(GWT.getModuleBaseURL()
-                + "/gp-images/vector_marker.png");
+    public RegisterGeocodingFeatureEvent(IGeoPlatformLocation theBean,
+            GPCoordinateReferenceSystem theCRS,
+            GPGeoCoderProvider theProvider) {
+        this.bean = theBean;
+        this.crs = theCRS;
+        this.provider = theProvider;
     }
 
     @Override
-    public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPGeocoding-Marker-Vector-Layer");
-        this.markerLayer.setZIndex(982);
+    public Type<GeocodingEventHandler> getAssociatedType() {
+        return GeocodingEventHandler.TYPE;
     }
 
     @Override
-    public void addMarker(LonLat lonlat, Map map) {
-        //map.setCenter(lonlat, 16);
-        super.drawFeature(lonlat);
-    }
-
-    @Override
-    public void featureDragged(LonLat ll) {
-        updateEvent.setLonLat(ll);
-        GPGeocodingHandlerManager.fireEventFromSource(updateEvent, provider);
-    }
-
-    /**
-     * @param provider the provider to set
-     */
-    public void setProvider(Object provider) {
-        this.provider = provider;
+    protected void dispatch(GeocodingEventHandler handler) {
+        handler.onRegisterGeocodingFeature(bean, crs, provider.getProvider());
     }
 }

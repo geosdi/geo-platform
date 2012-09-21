@@ -33,41 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.model;
+package org.geosdi.geoplatform.gui.client.widget.map.feature;
+
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
- * @author Giuseppe La Scaleia - geoSDI
- * @mail giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
- * @author Francesco Izzi - geoSDI
- * @mail francesco.izzi@geosdi.org
- *
  */
-public interface IGeoPlatformLocation {
+public abstract class GPGenericFeatureLayer
+        implements IGPFeatureLayer {
 
-    public double getLon();
-
-    public void setLon(double lon);
-
-    public double getLat();
-
-    public void setLat(double lat);
-
-    public String getDescription();
-
-    public String getCountry();
-
-    public String getDistrict();
-
-    public String getCity();
-
-    public String getAddress();
-
-    public String getStreetNumber();
-
-    public String getPostalCode();
+    protected Layer featureLayer;
+    protected String layerName;
     
-    public String getWkt();
-    
-    public String getGeometryType();
+    public GPGenericFeatureLayer(String theLayerName) {
+        this.layerName = theLayerName;
+        buildFeatureLayer();
+    }
+
+    public GPGenericFeatureLayer() {
+        buildFeatureLayer();
+    }
+
+    /**
+     * @return the markerLayer
+     */
+    public Layer geFeatureLayer() {
+        return featureLayer;
+    }
 }

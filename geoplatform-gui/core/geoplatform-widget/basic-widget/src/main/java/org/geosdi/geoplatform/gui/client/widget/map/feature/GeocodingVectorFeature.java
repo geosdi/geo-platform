@@ -33,47 +33,38 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
+package org.geosdi.geoplatform.gui.client.widget.map.feature;
 
+import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.*;
 import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Markers;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeocodingVectorMarker extends GPVectorMarkerLayer {
+public class GeocodingVectorFeature extends GPVectorFeatureLayer {
 
     private Object provider;
-    private ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
 
     @Override
-    public void setIconStyle() {
-        style.setExternalGraphic(GWT.getModuleBaseURL()
-                + "/gp-images/vector_marker.png");
+    public void buildFeatureLayer() {
+        this.featureLayer = new Vector("GPGeocoding-Feature-Vector-Layer");
+        this.featureLayer.setZIndex(983);
     }
 
     @Override
-    public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPGeocoding-Marker-Vector-Layer");
-        this.markerLayer.setZIndex(982);
-    }
+    public void addFeature(VectorFeature feature, Map map) {
+        map.zoomToExtent(feature.getGeometry().getBounds());
+        super.drawFeature(feature);
 
-    @Override
-    public void addMarker(LonLat lonlat, Map map) {
-        //map.setCenter(lonlat, 16);
-        super.drawFeature(lonlat);
-    }
-
-    @Override
-    public void featureDragged(LonLat ll) {
-        updateEvent.setLonLat(ll);
-        GPGeocodingHandlerManager.fireEventFromSource(updateEvent, provider);
     }
 
     /**
@@ -81,5 +72,17 @@ public class GeocodingVectorMarker extends GPVectorMarkerLayer {
      */
     public void setProvider(Object provider) {
         this.provider = provider;
+    }
+
+    @Override
+    public void removeFeature() {
+        if (this.feature != null) {
+            ((Vector) this.featureLayer).removeFeature(feature);
+        }
+    }
+
+    @Override
+    public void clearFeature() {
+        ((Vector) this.featureLayer).eraseFeatures();
     }
 }

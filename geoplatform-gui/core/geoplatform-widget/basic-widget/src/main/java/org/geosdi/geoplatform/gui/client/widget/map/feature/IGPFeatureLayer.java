@@ -33,53 +33,24 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
+package org.geosdi.geoplatform.gui.client.widget.map.feature;
 
-import com.google.gwt.core.client.GWT;
-import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
-import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeocodingVectorMarker extends GPVectorMarkerLayer {
+public interface IGPFeatureLayer {
 
-    private Object provider;
-    private ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
+    void buildFeatureLayer();
 
-    @Override
-    public void setIconStyle() {
-        style.setExternalGraphic(GWT.getModuleBaseURL()
-                + "/gp-images/vector_marker.png");
-    }
+    void addFeature(VectorFeature feature, Map map);
 
-    @Override
-    public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPGeocoding-Marker-Vector-Layer");
-        this.markerLayer.setZIndex(982);
-    }
-
-    @Override
-    public void addMarker(LonLat lonlat, Map map) {
-        //map.setCenter(lonlat, 16);
-        super.drawFeature(lonlat);
-    }
-
-    @Override
-    public void featureDragged(LonLat ll) {
-        updateEvent.setLonLat(ll);
-        GPGeocodingHandlerManager.fireEventFromSource(updateEvent, provider);
-    }
-
-    /**
-     * @param provider the provider to set
-     */
-    public void setProvider(Object provider) {
-        this.provider = provider;
-    }
+    void removeFeature();
+    
+    void clearFeature();
 }

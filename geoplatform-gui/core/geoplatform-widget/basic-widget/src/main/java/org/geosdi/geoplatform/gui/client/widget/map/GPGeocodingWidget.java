@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.map;
 
 import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingEventHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.feature.GeocodingVectorFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
@@ -45,18 +46,26 @@ import org.geosdi.geoplatform.gui.puregwt.GPToolbarActionHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.event.UpdateModelAndButtonEvent;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPGeocodingWidget implements GeocodingEventHandler {
 
     private GeoPlatformMap mapWidget;
     private PopupMapWidget popupWidget = new PopupMapWidget("GP-GeoCoder-Popup");
-    /** TODO : Think a way to have this in configuration **/
+    private VectorFeature vectorFeature;
+    /**
+     * TODO : Think a way to have this in configuration *
+     */
     private GeocodingVectorMarker geocoderMarker = new GeocodingVectorMarker(); //new GeocodingMarker();
+    private GeocodingVectorFeature geocoderFeature = new GeocodingVectorFeature();
 
     public GPGeocodingWidget(GeoPlatformMap theMapWidget) {
         this.mapWidget = theMapWidget;
@@ -66,6 +75,7 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
     @Override
     public void register() {
         this.mapWidget.getMap().addLayer(geocoderMarker.getMarkerLayer());
+        this.mapWidget.getMap().addLayer(geocoderFeature.geFeatureLayer());
         this.geocoderMarker.addControl(this.mapWidget.getMap());
     }
 
@@ -73,6 +83,7 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
     public void unregister() {
         this.geocoderMarker.removeControl(this.mapWidget.getMap());
         this.geocoderMarker.removeMarker();
+        this.geocoderFeature.removeFeature();
         this.mapWidget.getMap().removeLayer(this.geocoderMarker.getMarkerLayer());
         this.mapWidget.getMap().removePopup(popupWidget.getPopup());
     }
@@ -92,8 +103,31 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
     }
 
     @Override
+    public void onRegisterGeocodingFeature(IGeoPlatformLocation bean,
+            GPCoordinateReferenceSystem crs, Object provider) {
+        
+        this.mapWidget.getMap().removeLayer(this.geocoderFeature.geFeatureLayer());
+        
+        geocoderFeature = new GeocodingVectorFeature();
+        this.mapWidget.getMap().addLayer(this.geocoderFeature.geFeatureLayer());
+        MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(bean.getWkt()).getJSObject());
+
+
+        if (!crs.getCode().equals(this.mapWidget.getMap().getProjection())) {
+            geom.transform(new Projection(crs.getCode()), new Projection(this.mapWidget.getMap().getProjection()));
+        }
+
+        this.geocoderFeature.setProvider(provider);
+
+        vectorFeature = new VectorFeature(geom);
+        vectorFeature.setFeatureId("geocoding-" + bean.getCity());
+        this.geocoderFeature.addFeature(vectorFeature, this.mapWidget.getMap());
+    }
+
+    @Override
     public void removeMarker() {
         this.geocoderMarker.removeMarker();
+        this.geocoderFeature.removeFeature();
     }
 
     @Override

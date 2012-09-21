@@ -33,41 +33,56 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.utility;
+package org.geosdi.geoplatform.gui.client.widget.map.feature;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.DPI;
-import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.*;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Markers;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class PrintUtility {
+public class GeocodingVectorFeature extends GPVectorFeatureLayer {
 
-    public static List<DPI> getDPI() {
-        List<DPI> dpi = new ArrayList<DPI>();
+    private Object provider;
 
-        dpi.add(new DPI("72"));
-        dpi.add(new DPI("127"));
-        dpi.add(new DPI("190"));
-        dpi.add(new DPI("254"));
-        dpi.add(new DPI("300"));
-        dpi.add(new DPI("600"));
-
-        return dpi;
+    @Override
+    public void buildFeatureLayer() {
+        this.featureLayer = new Vector("GPGeocoding-Feature-Vector-Layer");
+        this.featureLayer.setZIndex(983);
     }
-    
-    public static List<PrintTemplate> getTemplate() {
-        List<PrintTemplate> templates = new ArrayList<PrintTemplate>();
 
-        templates.add(new PrintTemplate("A4 Portrait"));
-        templates.add(new PrintTemplate("A3 Portrait"));
-        templates.add(new PrintTemplate("A2 Portrait"));
-        templates.add(new PrintTemplate("A1 Portrait"));
-        templates.add(new PrintTemplate("A0 Portrait"));
-        return templates;
+    @Override
+    public void addFeature(VectorFeature feature, Map map) {
+        map.zoomToExtent(feature.getGeometry().getBounds());
+        super.drawFeature(feature);
+
+    }
+
+    /**
+     * @param provider the provider to set
+     */
+    public void setProvider(Object provider) {
+        this.provider = provider;
+    }
+
+    @Override
+    public void removeFeature() {
+        if (this.feature != null) {
+            ((Vector) this.featureLayer).removeFeature(feature);
+        }
+    }
+
+    @Override
+    public void clearFeature() {
+        ((Vector) this.featureLayer).eraseFeatures();
     }
 }

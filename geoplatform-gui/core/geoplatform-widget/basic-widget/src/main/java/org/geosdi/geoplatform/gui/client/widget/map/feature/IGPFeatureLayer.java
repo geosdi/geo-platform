@@ -33,41 +33,24 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.utility;
+package org.geosdi.geoplatform.gui.client.widget.map.feature;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.DPI;
-import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class PrintUtility {
+public interface IGPFeatureLayer {
 
-    public static List<DPI> getDPI() {
-        List<DPI> dpi = new ArrayList<DPI>();
+    void buildFeatureLayer();
 
-        dpi.add(new DPI("72"));
-        dpi.add(new DPI("127"));
-        dpi.add(new DPI("190"));
-        dpi.add(new DPI("254"));
-        dpi.add(new DPI("300"));
-        dpi.add(new DPI("600"));
+    void addFeature(VectorFeature feature, Map map);
 
-        return dpi;
-    }
+    void removeFeature();
     
-    public static List<PrintTemplate> getTemplate() {
-        List<PrintTemplate> templates = new ArrayList<PrintTemplate>();
-
-        templates.add(new PrintTemplate("A4 Portrait"));
-        templates.add(new PrintTemplate("A3 Portrait"));
-        templates.add(new PrintTemplate("A2 Portrait"));
-        templates.add(new PrintTemplate("A1 Portrait"));
-        templates.add(new PrintTemplate("A0 Portrait"));
-        return templates;
-    }
+    void clearFeature();
 }

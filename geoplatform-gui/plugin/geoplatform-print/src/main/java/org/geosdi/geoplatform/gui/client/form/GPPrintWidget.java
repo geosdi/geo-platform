@@ -31,6 +31,7 @@ import org.geosdi.geoplatform.gui.client.form.binding.PrintTitleFieldBinding;
 import org.geosdi.geoplatform.gui.client.model.DPI;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean.GPPrintEnumBean;
+import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
 import org.geosdi.geoplatform.gui.client.model.Scale;
 import org.geosdi.geoplatform.gui.client.utility.LayerComparable;
 import org.geosdi.geoplatform.gui.client.utility.PrintUtility;
@@ -47,7 +48,9 @@ import org.gwtopenmaps.openlayers.client.LonLat;
 public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private ListStore<DPI> storeDPI;
+    private ListStore<PrintTemplate> storeTemplate;
     private ComboBox<DPI> comboDPI;
+    private ComboBox<PrintTemplate> comboTemplate;
     private TextField<String> title;
     private TextField<String> mapTitle;
     private TextArea comments;
@@ -70,19 +73,20 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     public void addComponentToForm() {
         addEditPrintSettings();
         addComboDPI();
+        addComboTemplate();
         addButtons();
     }
 
     @Override
     public void initSize() {
         super.setHeading("GeoPlatform Print Widget");
-        setSize(400, 450);
+        setSize(400, 500);
     }
 
     @Override
     public void initSizeFormPanel() {
         formPanel.setHeaderVisible(false);
-        formPanel.setSize(400, 450);
+        formPanel.setSize(400, 500);
     }
 
     @Override
@@ -116,7 +120,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                 }
             }
 
-            layers = layers.concat("],\"layout\":\"A3 portrait\",\"srs\":\"EPSG:4326\",\"dpi\":"
+            System.out.println(comboTemplate.getValue().getTemplate());
+            layers = layers.concat("],\"layout\":\""+comboTemplate.getValue().getTemplate()+"\",\"srs\":\"EPSG:4326\",\"dpi\":"
                     + comboDPI.getValue().getDpi() + ",\"units\":\"degrees\"}");
 
             String url = GWT.getHostPageBaseURL() + GWT.getModuleName() + "/pdf/print.pdf?spec="
@@ -224,6 +229,34 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         this.comboDPI.setStore(this.storeDPI);
 
         fieldSet.add(this.comboDPI);
+
+        super.formPanel.add(fieldSet);
+    }
+    
+     private void addComboTemplate() {
+        fieldSet = new FieldSet();
+        fieldSet.setHeading("Template");
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(100);
+        layout.setLabelPad(5);
+        fieldSet.setLayout(layout);
+
+        this.storeTemplate = new ListStore<PrintTemplate>();
+        this.storeTemplate.add(PrintUtility.getTemplate());
+
+        this.comboTemplate = new ComboBox<PrintTemplate>();
+        this.comboTemplate.setFieldLabel("Select Template");
+        this.comboTemplate.setEmptyText("Choose Template....");
+        this.comboTemplate.setDisplayField(PrintTemplate.PrintEnumTemplate.TEMPLATE.getValue());
+        this.comboTemplate.setEditable(false);
+        this.comboTemplate.setAllowBlank(false);
+        this.comboTemplate.setForceSelection(true);
+        this.comboTemplate.setTypeAhead(true);
+        this.comboTemplate.setTriggerAction(TriggerAction.ALL);
+
+        this.comboTemplate.setStore(this.storeTemplate);
+
+        fieldSet.add(this.comboTemplate);
 
         super.formPanel.add(fieldSet);
     }

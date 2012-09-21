@@ -33,41 +33,48 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.utility;
+package org.geosdi.geoplatform.gui.client.widget.map.feature;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.DPI;
-import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class PrintUtility {
+public abstract class GPVectorFeatureLayer extends GPGenericFeatureLayer {
 
-    public static List<DPI> getDPI() {
-        List<DPI> dpi = new ArrayList<DPI>();
+    protected VectorFeature feature;
 
-        dpi.add(new DPI("72"));
-        dpi.add(new DPI("127"));
-        dpi.add(new DPI("190"));
-        dpi.add(new DPI("254"));
-        dpi.add(new DPI("300"));
-        dpi.add(new DPI("600"));
-
-        return dpi;
+    public GPVectorFeatureLayer(String layerName) {
+        super(layerName);
     }
-    
-    public static List<PrintTemplate> getTemplate() {
-        List<PrintTemplate> templates = new ArrayList<PrintTemplate>();
 
-        templates.add(new PrintTemplate("A4 Portrait"));
-        templates.add(new PrintTemplate("A3 Portrait"));
-        templates.add(new PrintTemplate("A2 Portrait"));
-        templates.add(new PrintTemplate("A1 Portrait"));
-        templates.add(new PrintTemplate("A0 Portrait"));
-        return templates;
+    /**
+     *
+     */
+    public GPVectorFeatureLayer() {
+        super();
+    }
+
+    protected void drawFeature(VectorFeature feature) {
+        if (feature != null && ((Vector) featureLayer).getNumberOfFeatures() >= 1) {
+            for (VectorFeature vf : ((Vector) featureLayer).getFeatures()) {
+                System.out.println("Removing features ... " + feature.getFeatureId());
+                ((Vector) featureLayer).removeFeature(feature);
+            }
+        }
+
+        ((Vector) featureLayer).addFeature(feature);
+
+        ((Vector) featureLayer).redraw();
+    }
+
+    /**
+     * @return the feature
+     */
+    public VectorFeature getFeature() {
+        return feature;
     }
 }

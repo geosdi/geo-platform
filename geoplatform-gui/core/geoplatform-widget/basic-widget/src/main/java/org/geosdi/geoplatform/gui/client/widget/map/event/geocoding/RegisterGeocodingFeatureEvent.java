@@ -33,41 +33,40 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.utility;
+package org.geosdi.geoplatform.gui.client.widget.map.event.geocoding;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.DPI;
-import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.widget.map.GPGeoCoderProvider;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class PrintUtility {
+public class RegisterGeocodingFeatureEvent extends GwtEvent<GeocodingEventHandler> {
 
-    public static List<DPI> getDPI() {
-        List<DPI> dpi = new ArrayList<DPI>();
+    private IGeoPlatformLocation bean;
+    private GPCoordinateReferenceSystem crs;
+    private GPGeoCoderProvider provider;
 
-        dpi.add(new DPI("72"));
-        dpi.add(new DPI("127"));
-        dpi.add(new DPI("190"));
-        dpi.add(new DPI("254"));
-        dpi.add(new DPI("300"));
-        dpi.add(new DPI("600"));
-
-        return dpi;
+    public RegisterGeocodingFeatureEvent(IGeoPlatformLocation theBean,
+            GPCoordinateReferenceSystem theCRS,
+            GPGeoCoderProvider theProvider) {
+        this.bean = theBean;
+        this.crs = theCRS;
+        this.provider = theProvider;
     }
-    
-    public static List<PrintTemplate> getTemplate() {
-        List<PrintTemplate> templates = new ArrayList<PrintTemplate>();
 
-        templates.add(new PrintTemplate("A4 Portrait"));
-        templates.add(new PrintTemplate("A3 Portrait"));
-        templates.add(new PrintTemplate("A2 Portrait"));
-        templates.add(new PrintTemplate("A1 Portrait"));
-        templates.add(new PrintTemplate("A0 Portrait"));
-        return templates;
+    @Override
+    public Type<GeocodingEventHandler> getAssociatedType() {
+        return GeocodingEventHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(GeocodingEventHandler handler) {
+        handler.onRegisterGeocodingFeature(bean, crs, provider.getProvider());
     }
 }

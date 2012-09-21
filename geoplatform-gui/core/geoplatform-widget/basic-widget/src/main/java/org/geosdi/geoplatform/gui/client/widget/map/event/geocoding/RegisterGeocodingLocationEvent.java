@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class RegisterGeocodingLocationEvent extends GwtEvent<GeocodingEventHandler> {
 

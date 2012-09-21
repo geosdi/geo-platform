@@ -88,12 +88,12 @@ public class UserOptionsWidget extends GeoPlatformWindow {
 
     private void addButtons() {
         Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
-                new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        hide();
-                    }
-                });
+                                  new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                hide();
+            }
+        });
 
         super.setButtonAlign(HorizontalAlignment.RIGHT);
         super.addButton(close);

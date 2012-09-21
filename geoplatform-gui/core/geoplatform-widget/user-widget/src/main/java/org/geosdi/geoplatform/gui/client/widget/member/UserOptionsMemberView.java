@@ -103,7 +103,7 @@ public class UserOptionsMemberView extends UserOptionsMember {
                     GPHandlerManager.fireEvent(new GPLoginEvent(null));
                 } else {
                     GeoPlatformMessage.errorMessage("Error saving",
-                            "An error occurred while making the requested connection.\n"
+                                                    "An error occurred while making the requested connection.\n"
                             + "Verify network connections and try again."
                             + "\nIf the problem persists contact your system administrator.");
                     LayoutManager.getInstance().getStatusMap().setStatus(

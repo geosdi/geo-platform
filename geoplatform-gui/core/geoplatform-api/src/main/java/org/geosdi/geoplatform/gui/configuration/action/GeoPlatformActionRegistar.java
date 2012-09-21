@@ -40,18 +40,13 @@ import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- * 
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class GeoPlatformActionRegistar<A extends GeoPlatformActionCreator> {
 
-    private Map<String, A> registry = Maps.newHashMap();
+    protected Map<String, A> registry = Maps.newHashMap();
 
-    /**
-     * @return the registry
-     */
-    protected Map<String, A> getRegistry() {
-        return registry;
-    }
+    public abstract void put(String key, A toolActionCreator);
 }

@@ -44,11 +44,11 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class ServerView extends GeoPlatformView {
 
-    private GPCapabilitiesWidget serverWidget = new GPCapabilitiesWidget(true);;
+    private GPCapabilitiesWidget serverWidget = new GPCapabilitiesWidget(true);
 
     /**
      * @Constructor

@@ -53,9 +53,10 @@ public final class ToolbarActionRegistar
      * @param key
      * @param toolActionCreator
      */
+    @Override
     public void put(String key, ToolbarActionCreator toolActionCreator) {
         if (key != null && toolActionCreator != null) {
-            super.getRegistry().put(key, toolActionCreator);
+            super.registry.put(key, toolActionCreator);
         }
     }
 
@@ -69,7 +70,7 @@ public final class ToolbarActionRegistar
      * @return null or the ToolbarAction registered
      */
     public ToolbarAction get(String key, GeoPlatformMap mapWidget) {
-        ToolbarActionCreator toolActionCreator = super.getRegistry().get(key);
+        ToolbarActionCreator toolActionCreator = super.registry.get(key);
         if (toolActionCreator == null) {
             return null;
         }

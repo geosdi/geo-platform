@@ -52,9 +52,10 @@ public final class MenuActionRegistar
      * @param key
      * @param menuActionCreator
      */
+    @Override
     public void put(String key, MenuActionCreator menuActionCreator) {
         if (key != null && menuActionCreator != null) {
-            super.getRegistry().put(key, menuActionCreator);
+            super.registry.put(key, menuActionCreator);
         }
     }
 
@@ -67,7 +68,7 @@ public final class MenuActionRegistar
      * @return null or the MenuAction registered
      */
     public MenuAction get(String key) {
-        MenuActionCreator menuActionCreator = super.getRegistry().get(key);
+        MenuActionCreator menuActionCreator = super.registry.get(key);
         if (menuActionCreator == null) {
             return null;
         }

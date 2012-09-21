@@ -59,7 +59,6 @@ import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.DeleteElementTreeTo
 import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.SaveTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginManager;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -87,8 +86,6 @@ public class LayerWidgetUI implements EntryPoint {
 
         addLayerWidgetAction();
         addTreeToolbarComponents();
-
-        dispatcher.fireEvent(GeoPlatformEvents.INIT_OGC_MODULES_WIDGET);
     }
 
     private void initInjection() {

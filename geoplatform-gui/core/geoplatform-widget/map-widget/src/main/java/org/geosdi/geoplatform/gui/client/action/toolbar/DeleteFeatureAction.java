@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
+import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.control.crud.OperationType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +48,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.security.GPLoginUserDetail;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.message.GPClientMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.users.options.UserTreeOptions;
@@ -80,8 +82,7 @@ public class SecurityService implements ISecurityService {
     String hostXmppServer;
 
     @Override
-    public IGPAccountDetail userLogin(String username, String password,
-            HttpServletRequest httpServletRequest)
+    public IGPAccountDetail userLogin(String username, String password, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user;
         GuiComponentsPermissionMapData guiComponentPermission;
@@ -110,6 +111,19 @@ public class SecurityService implements ISecurityService {
             GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             userDetail = this.convertAccountToDTO(user, accountProject, viewport);
             userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
+
+            List<GPMessage> messages = geoPlatformServiceClient.getUnreadMessagesByRecipient(user.getId());
+            if (messages != null) {
+                List<GPClientMessage> unreadMessages = new ArrayList<GPClientMessage>(messages.size());
+                for (GPMessage message : messages) {
+                    GPClientMessage clientMessage = this.convertMessage(message);
+                    unreadMessages.add(clientMessage);
+                    logger.info("\n*** {}", clientMessage);
+                }
+                // TODO Set up the unread messages
+                // ? account.setMessages(unreadMessages);
+            }
+
             return userDetail;
 
         } catch (ResourceNotFoundFault ex) {
@@ -132,8 +146,7 @@ public class SecurityService implements ISecurityService {
     }
 
     @Override
-    public IGPAccountDetail applicationLogin(String appID,
-            HttpServletRequest httpServletRequest)
+    public IGPAccountDetail applicationLogin(String appID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPApplication application;
         GuiComponentsPermissionMapData guiComponentPermission;
@@ -257,6 +270,22 @@ public class SecurityService implements ISecurityService {
             accountDetail.setViewport(clientViewport);
         }
         return (IGPAccountDetail) accountDetail;
+    }
+
+    private GPClientMessage convertMessage(GPMessage message) {
+        GPClientMessage clientMessage = new GPClientMessage();
+
+        clientMessage.setId(message.getId());
+        clientMessage.setSender(message.getSender().getNaturalID());
+        clientMessage.setRecipient(message.getRecipient().getNaturalID());
+        clientMessage.setCreationDate(message.getCreationDate());
+        clientMessage.setSubject(message.getSubject());
+        clientMessage.setText(message.getText());
+        clientMessage.setRead(message.isRead());
+        clientMessage.setCommands(message.getCommands());
+        clientMessage.setCommandsProperties(message.getCommandsProperties());
+
+        return clientMessage;
     }
 
     /**

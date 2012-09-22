@@ -8,7 +8,7 @@
        default-autowire="byName">
 
     <!--bean name="layerMenu"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
+        class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
         <property name="id" value="layerMenu" />
         <property name="text" value="Layers" />
         <property name="checked" value="false" />

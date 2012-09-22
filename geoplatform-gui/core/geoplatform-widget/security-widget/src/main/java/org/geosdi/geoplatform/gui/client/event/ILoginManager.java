@@ -40,7 +40,6 @@ package org.geosdi.geoplatform.gui.client.event;
  * @email nazzareno.sileno@geosdi.org
  */
 public interface ILoginManager {
-    
+
     public void generateLoginManager();
-    
 }

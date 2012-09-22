@@ -46,7 +46,4 @@ public class SecurityController extends GeoPlatformController {
     public SecurityController() {
         registerEventTypes();
     }
-    
-    
-    
 }

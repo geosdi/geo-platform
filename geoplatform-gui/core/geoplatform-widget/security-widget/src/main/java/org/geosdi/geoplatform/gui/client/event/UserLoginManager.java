@@ -62,7 +62,7 @@ public class UserLoginManager implements GPLoginHandler {
                 "Session Timeout.",
                 EnumSearchStatus.STATUS_NO_SEARCH.toString());
         LayoutManager.getInstance().getViewport().mask("Session Timeout",
-                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                                       SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
         this.loginWidget.setGwtEventOnSuccess(event);
 
         this.loginWidget.showSessionExpiredLogin();

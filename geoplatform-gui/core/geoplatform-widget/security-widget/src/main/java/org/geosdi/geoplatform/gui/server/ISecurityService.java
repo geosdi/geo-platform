@@ -46,11 +46,11 @@ import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 public interface ISecurityService {
 
     IGPAccountDetail userLogin(String userName, String password,
-                               HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     IGPAccountDetail applicationLogin(String appID,
-                                      HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     void invalidateSession(HttpServletRequest httpServletRequest)

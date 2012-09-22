@@ -104,8 +104,8 @@ public class SecurityService implements ISecurityService {
             }
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(user,
-                    project.getId(),
-                    httpServletRequest);
+                                                                    project.getId(),
+                                                                    httpServletRequest);
 
             GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             userDetail = this.convertAccountToDTO(user, accountProject, viewport);
@@ -114,7 +114,7 @@ public class SecurityService implements ISecurityService {
 
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
-                    "Unable to find user with username or email: " + username
+                         "Unable to find user with username or email: " + username
                     + " Error: " + ex);
             throw new GeoPlatformException("Unable to find user with username or email: "
                     + username);
@@ -159,8 +159,8 @@ public class SecurityService implements ISecurityService {
             accountProject = geoPlatformServiceClient.getDefaultAccountProject(application.getId());
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(application,
-                    project.getId(),
-                    httpServletRequest);
+                                                                    project.getId(),
+                                                                    httpServletRequest);
 
             GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
             accountDetail = this.convertAccountToDTO(application, accountProject, viewport);
@@ -171,7 +171,7 @@ public class SecurityService implements ISecurityService {
             return accountDetail;
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
-                    "Unable to find application with appID: " + appID
+                         "Unable to find application with appID: " + appID
                     + " Error: " + ex);
             throw new GeoPlatformException("Unable to find application with appID: "
                     + appID);
@@ -251,9 +251,9 @@ public class SecurityService implements ISecurityService {
         if (viewport != null) {
             GPBBox serverBBOX = viewport.getBbox();
             BBoxClientInfo clientBBOX = new BBoxClientInfo(serverBBOX.getMinX(), serverBBOX.getMinY(),
-                    serverBBOX.getMaxX(), serverBBOX.getMaxY());
+                                                           serverBBOX.getMaxX(), serverBBOX.getMaxY());
             GPClientViewport clientViewport = new GPClientViewport(viewport.getName(),
-                    viewport.getDescription(), clientBBOX, viewport.getZoomLevel(), viewport.isIsDefault());
+                                                                   viewport.getDescription(), clientBBOX, viewport.getZoomLevel(), viewport.isIsDefault());
             accountDetail.setViewport(clientViewport);
         }
         return (IGPAccountDetail) accountDetail;

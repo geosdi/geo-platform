@@ -39,7 +39,7 @@
                                      horizontalAlignment="ALIGN_RIGHT" width="100%" height="100%">
                         <g:VerticalPanel verticalAlignment="ALIGN_MIDDLE"
                                          horizontalAlignment="ALIGN_RIGHT" styleName="{style.cursor}">
-                            <g:Hyperlink ui:field="plusLabel">Google +</g:Hyperlink>
+                            <!--                            <g:Hyperlink ui:field="plusLabel">Google +</g:Hyperlink>-->
                         </g:VerticalPanel>
                     </g:VerticalPanel>
                 </g:east>

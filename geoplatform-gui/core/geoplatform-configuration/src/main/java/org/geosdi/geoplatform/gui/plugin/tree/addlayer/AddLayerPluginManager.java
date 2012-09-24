@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.plugin.tree.addlayer;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 
 /**
@@ -44,7 +44,7 @@ import java.util.List;
  */
 public class AddLayerPluginManager {
 
-    private static List<IAddLayerPlugin> windowPlugins = new ArrayList<IAddLayerPlugin>();
+    private static List<IAddLayerPlugin> windowPlugins = Lists.newArrayList();
 
     /**
      * @return the toolBarPlugin

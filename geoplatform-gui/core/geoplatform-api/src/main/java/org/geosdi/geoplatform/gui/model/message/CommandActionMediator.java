@@ -33,31 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.model.message;
 
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.DecoratedPopupPanel;
+import java.util.HashMap;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.style.CenterStyle;
+import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Singleton
-public class NotificationPopupPanel extends DecoratedPopupPanel {
+public class CommandActionMediator<X extends GPMessageCommandType, Y extends ICommandAction>
+        extends HashMap<X, Y> {
 
-    @UiField
-    private CenterStyle style;
+    private static final long serialVersionUID = 2664324873399353891L;
 
-    public NotificationPopupPanel() {
-        this.initialize();
-    }
-
-    private void initialize() {
-        super.setAutoHideEnabled(Boolean.TRUE);
-        super.setAnimationEnabled(Boolean.TRUE);
-        super.add(new BinderDeckLayout().asWidget());
-        super.setPixelSize(402, 302);
+    @Override
+    public String toString() {
+        return "CommandActionMediator{" + super.entrySet().size() + '}';
     }
 }

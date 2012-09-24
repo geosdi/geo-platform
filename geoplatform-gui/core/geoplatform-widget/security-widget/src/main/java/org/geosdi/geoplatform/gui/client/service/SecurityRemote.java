@@ -58,10 +58,10 @@ public interface SecurityRemote extends RemoteService {
     }
 
     /**
-     * 
-     * @param userName 
-     * @param password 
-     * 
+     *
+     * @param userName
+     * @param password
+     *
      * @return IGPAccountDetail
      * @throws GeoPlatformException
      */
@@ -79,9 +79,9 @@ public interface SecurityRemote extends RemoteService {
             throws GeoPlatformException;
 
     /**
-     * 
+     *
      * @param appID
-     * 
+     *
      * @return IGPAccountDetail
      * @throws GeoPlatformException
      */

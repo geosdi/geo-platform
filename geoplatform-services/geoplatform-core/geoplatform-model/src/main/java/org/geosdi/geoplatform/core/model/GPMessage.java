@@ -103,6 +103,9 @@ public class GPMessage implements Serializable {
     //
     @Column
     private String commands;
+    //
+    @Column
+    private String commandsProperties;
 
     public Long getId() {
         return id;
@@ -198,6 +201,14 @@ public class GPMessage implements Serializable {
         commands = command.name();
     }
 
+    public String getCommandsProperties() {
+        return commandsProperties;
+    }
+
+    public void setCommandsProperties(String commandsProperties) {
+        this.commandsProperties = commandsProperties;
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
@@ -209,6 +220,7 @@ public class GPMessage implements Serializable {
         str.append(", text=").append(text);
         str.append(", isRead=").append(isRead);
         str.append(", commands=").append(commands);
+        str.append(", commandsProperties=").append(commandsProperties);
         return str.append('}').toString();
     }
 

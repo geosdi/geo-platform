@@ -74,7 +74,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     private GPProjectManagementWidget projectManagementWidget;
 
     public GPProjectSearchPanel(GPProjectManagementWidget projectManagementWidget) {
-        super(true, 10);
+        super(true, 12);
         this.projectManagementWidget = projectManagementWidget;
         this.selector = new GPDefaultProjectSelector();
     }

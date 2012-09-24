@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.NotificationPopupPanel;
+import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
 import org.geosdi.geoplatform.gui.client.action.NotificationCenterAction;
 
 /**

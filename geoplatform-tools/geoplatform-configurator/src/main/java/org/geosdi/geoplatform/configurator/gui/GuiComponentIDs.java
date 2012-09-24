@@ -57,6 +57,7 @@ public class GuiComponentIDs {
     public static final String MANAGE_USERS = "manageUsers";
     public static final String MANAGE_ROLES = "manageRoles";
     public static final String ABOUT_GEOPLATFORM = "aboutGeoPlatform";
+    public static final String SDI_MANAGEMENT = "sdiManagement";
     //
     public static final String SEARCH_AOE = "searchAOE";
     public static final String CLEAR_AOE = "clearAOE";
@@ -67,6 +68,10 @@ public class GuiComponentIDs {
     //
     public static final String VIEWPORT = "viewport";
     public static final String GRATICULA = "graticula";
+    //
+    public static final String EXTERNAL_LINKS = "externalLinks";
+    
+    
     /**
      * Map Toolbar
      */
@@ -152,6 +157,8 @@ public class GuiComponentIDs {
         all.add(VIEWPORT);
         // Map Toolbar
         all.add(GEO_PLATFORM_INFO_APP);
+        all.add(EXTERNAL_LINKS);
+        all.add(SDI_MANAGEMENT);
         all.add(ZOOM_IN);
         all.add(ZOOM_OUT);
         all.add(ZOOM_PREVIOUS);

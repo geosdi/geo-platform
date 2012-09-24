@@ -55,7 +55,7 @@ public class AboutGPAction extends MenuBaseAction {
     public AboutGPAction() {
         super("About GeoPlatform", BasicWidgetResources.ICONS.info());
         Frame frame = new Frame("http://www.geosdi.org/aboutGeoPlatform.html");
-        frame.setSize("" + ABOUT_WIDTH, "480" + ABOUT_HEIGHT);
+        frame.setSize("100%","100%");
         htmlWindow.setHeading("About Geo-Platform");
         htmlWindow.add(frame);
         htmlWindow.setSize(ABOUT_WIDTH + 10, ABOUT_HEIGHT + 10);

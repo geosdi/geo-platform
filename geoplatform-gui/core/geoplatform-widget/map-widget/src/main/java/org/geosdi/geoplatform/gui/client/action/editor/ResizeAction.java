@@ -33,36 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
-
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.action.toolbar.ModifyFeatureAction;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class ClearMapAction extends ToolbarMapAction {
+public class ResizeAction extends ModifyFeatureAction {
 
-    private GeoPlatformMap mapWidget;
-
-    public ClearMapAction(GeoPlatformMap theMapWidget) {
-        super(Resources.ICONS.clearMap(), "Clear Map");
-        this.mapWidget = theMapWidget;
+    public ResizeAction(GeoPlatformMap mapWidget) {
+        super(mapWidget, Resources.ICONS.resize(), "Resize");
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        ((MapLayoutWidget) mapWidget).clearMap();
+        if (this.editorOberver.isButtonPressed()) {
+            super.changeButtonState();
+        }
+
+        if (mapWidget.isFeatureOperationEnable()) {
+            mapWidget.deactivateFeatureOperation();
+        }
+
+        // if (!mapWidget.isModifyFeatureEnable())
+        mapWidget.deactivateModifyFeature();
+        mapWidget.activateModifyFeature();
+
+        this.control.setMode(ModifyFeature.RESIZE);
     }
 }

@@ -37,25 +37,45 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
+import org.geosdi.geoplatform.gui.action.ToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
+import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.NotificationCenterAction;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
+import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class NotificationCenterActionProvider implements Provider<NotificationCenterAction> {
+public class NotificationCenterActionProvider implements
+        Provider<NotificationCenterAction> {
 
+    private ToolbarActionRegistar registar = BasicGinInjector.MainInjector.
+            getInstance().getToolbarActionRegistar();
     private NotificationPopupPanel notificationPopupPanel;
 
     @Inject
-    public NotificationCenterActionProvider(NotificationPopupPanel notificationPopupPanel) {
+    public NotificationCenterActionProvider(
+            NotificationPopupPanel notificationPopupPanel) {
         this.notificationPopupPanel = notificationPopupPanel;
     }
 
     @Override
     public NotificationCenterAction get() {
-        NotificationCenterAction action = new NotificationCenterAction(this.notificationPopupPanel);
+        final NotificationCenterAction action = new NotificationCenterAction(
+                this.notificationPopupPanel);
+
+        this.registar.put(GuiComponentIDs.NOTIFICATION_MENU,
+                          new ToolbarActionCreator() {
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap map) {
+                return action;
+            }
+        });
+
         return action;
     }
 }

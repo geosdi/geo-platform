@@ -35,16 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.client.GeocodingResources;
-
-import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import org.geosdi.geoplatform.gui.client.GeocodingResources;
 import org.geosdi.geoplatform.gui.client.widget.google.ReverseGeoCoderGoogleWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEventHandler;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**

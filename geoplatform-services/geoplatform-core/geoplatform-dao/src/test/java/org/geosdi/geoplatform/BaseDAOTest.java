@@ -69,6 +69,7 @@ import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
@@ -461,13 +462,13 @@ public abstract class BaseDAOTest {
 
     private void insertProjects() {
         this.adminProject = this.createProject("admin_project", true, 0,
-                new Date(System.currentTimeMillis()));
+                                               new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
-                new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)));
+                                              new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)));
         this.viewerProject = this.createProject("viewer_project", false, 0,
-                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)));
+                                                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)));
         this.gsUserProject = this.createProject("gp_user_project", true, 0,
-                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
+                                                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
         projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //
         this.insertBindingUserProject(adminTest, adminProject,
@@ -501,7 +502,7 @@ public abstract class BaseDAOTest {
         // Projects of admin
         for (int i = 1; i <= 41; i++) {
             GPProject projectIth = this.createProject("project_admin_k_" + i, false,
-                    i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
+                                                      i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
             projectDAO.persist(projectIth);
             this.insertBindingUserProject(adminTest, projectIth,
                                           BasePermission.ADMINISTRATION.getMask(), false);
@@ -622,9 +623,23 @@ public abstract class BaseDAOTest {
     private List<GPAuthority> createAuthorities(GPAccount account, GPRole... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
         for (GPRole role : roles) {
-            authorities.add(new GPAuthority(account, role.toString(), role.getTrustedLevel()));
+            GPTrustedLevel trustedLevel = this.getTrustedLevelByRole(role);
+            authorities.add(new GPAuthority(account, trustedLevel, role.getRole()));
         }
         return authorities;
+    }
+
+    private GPTrustedLevel getTrustedLevelByRole(GPRole role) {
+        switch (role) {
+            case ADMIN:
+                return GPTrustedLevel.FULL;
+            case USER:
+                return GPTrustedLevel.RESTRICT;
+            case VIEWER:
+                return GPTrustedLevel.NONE;
+            default:
+                return GPTrustedLevel.NONE;
+        }
     }
 
     private GPUser createUser(String username, GPOrganization organization) {
@@ -827,9 +842,9 @@ public abstract class BaseDAOTest {
         // Owner of all Object Identities
         this.superUser = new AclSid(true, usernameSuperUserTestAcl);
         // Users of interest
-        this.admin = new AclSid(false, GPRole.ADMIN.toString(), organizationTest);
-        this.user = new AclSid(false, GPRole.USER.toString(), organizationTest);
-        this.viewer = new AclSid(false, GPRole.VIEWER.toString(), organizationTest);
+        this.admin = new AclSid(false, GPRole.ADMIN.getRole(), organizationTest);
+        this.user = new AclSid(false, GPRole.USER.getRole(), organizationTest);
+        this.viewer = new AclSid(false, GPRole.VIEWER.getRole(), organizationTest);
         //
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", superUser);
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", admin);
@@ -885,13 +900,13 @@ public abstract class BaseDAOTest {
         // Admin
         for (String componentID : GuiComponentIDs.LIST_ALL) {
             entriesMap.put(GPRole.ADMIN + componentID,
-                    new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
+                           new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
         }
         // User
         for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_USER.entrySet()) {
             if (e.getValue() != null) {
                 entriesMap.put(GPRole.USER + e.getKey(),
-                        new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
+                               new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
             }
         }
         // Viewer
@@ -899,14 +914,14 @@ public abstract class BaseDAOTest {
             if (e.getValue() != null) {
                 // Ace Order is 3 because the entries of admin and user should be added before
                 entriesMap.put(GPRole.VIEWER + e.getKey(),
-                        new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
+                               new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
             }
         }
         // SIGV Application
         for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_APPLICATION_SIGV.entrySet()) {
             if (e.getValue() != null) {
                 entriesMap.put("SIGV" + e.getKey(),
-                        new AclEntry(objIdMap.get(e.getKey()), 4, sigv, enable, e.getValue()));
+                               new AclEntry(objIdMap.get(e.getKey()), 4, sigv, enable, e.getValue()));
             }
         }
         //

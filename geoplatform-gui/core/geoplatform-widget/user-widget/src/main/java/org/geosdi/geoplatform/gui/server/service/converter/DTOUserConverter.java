@@ -69,6 +69,7 @@ public class DTOUserConverter {
 
         GPAuthority authority = new GPAuthority();
         authority.setAuthority(userDetail.getAuthority());
+        authority.setTrustedLevel(userDetail.getTrustedLevel());
         user.setGPAuthorities(Arrays.asList(authority));
 
         return user;
@@ -87,6 +88,7 @@ public class DTOUserConverter {
         user.setExpired(userDTO.isExpired());
         user.setAuthority(this.convertToAuthority(userDTO.getRoles()));
         user.setOrganization(userDTO.getOrganization());
+        user.setTrustedLevel(userDTO.getTrustedLevel());
         return user;
     }
 

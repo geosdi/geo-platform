@@ -60,7 +60,7 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     public IGPAccountDetail userLogin(String userName, String password) throws GeoPlatformException {
         return this.securityService.userLogin(userName, password, super.getThreadLocalRequest());
     }
-    
+
     @Override
     public IGPAccountDetail ssoLogin(String userName) throws GeoPlatformException {
         return this.securityService.ssoLogin(userName, super.getThreadLocalRequest());

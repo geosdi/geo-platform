@@ -72,6 +72,8 @@ public class MessageDTO {
     @XmlElementWrapper(name = "commandList")
     @XmlElement(name = "command")
     private List<GPMessageCommandType> commands;
+    //
+    private String commandsProperties;
 
     /**
      * Default constructor.
@@ -99,6 +101,7 @@ public class MessageDTO {
                 commands.add(command);
             }
         }
+        this.commandsProperties = message.getCommandsProperties();
     }
 
     /**
@@ -224,6 +227,20 @@ public class MessageDTO {
         this.commands.add(command);
     }
 
+    /**
+     * @return the commandsProperties
+     */
+    public String getCommandsProperties() {
+        return commandsProperties;
+    }
+
+    /**
+     * @param commandsProperties the commandsProperties to set
+     */
+    public void setCommandsProperties(String commandsProperties) {
+        this.commandsProperties = commandsProperties;
+    }
+
     @Override
     public String toString() {
         return "MessageDTO{" + "id=" + id
@@ -233,7 +250,8 @@ public class MessageDTO {
                 + ", subject=" + subject
                 + ", text=" + text
                 + ", read=" + read
-                + ", commands=" + commands + '}';
+                + ", commands=" + commands
+                + ", commandsProperties=" + commandsProperties + '}';
     }
 
     /**
@@ -257,6 +275,7 @@ public class MessageDTO {
         if (messageDTO.getCommands() != null) {
             message.setCommands(messageDTO.getCommands());
         }
+        message.setCommandsProperties(messageDTO.getCommandsProperties());
         return message;
     }
 }

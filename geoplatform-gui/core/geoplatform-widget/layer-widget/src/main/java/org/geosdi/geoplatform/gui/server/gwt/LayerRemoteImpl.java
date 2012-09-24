@@ -75,6 +75,11 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
+    public ArrayList<GPFolderClientInfo> loadProject(long projectId) throws GeoPlatformException {
+        return this.layerService.loadProject(projectId, super.getThreadLocalRequest());
+    }
+
+    @Override
     public ArrayList<IGPFolderElements> loadFolderElements(Long folderID)
             throws GeoPlatformException {
         return this.layerService.loadFolderElements(folderID, super.getThreadLocalRequest());

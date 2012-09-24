@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
@@ -43,5 +42,4 @@ import com.google.gwt.user.client.ui.ImageBundle;
  * @email nazzareno.sileno@geosdi.org
  */
 public interface SecurityWidgetIcons extends ImageBundle {
-
 }

@@ -33,21 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.message;
+package org.geosdi.geoplatform.gui.impl.message;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.Date;
-import java.util.List;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.geosdi.geoplatform.gui.model.message.IGPClientMessage;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 
 /**
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class GPClientMessage extends GeoPlatformBeanModel {
+public class GPClientMessage implements IGPClientMessage, IsSerializable {
 
-    private static final long serialVersionUID = 3869338219274540179L;
-    //
     private Long id;
     private String sender;
     private String recipient;
@@ -55,9 +53,13 @@ public class GPClientMessage extends GeoPlatformBeanModel {
     private String subject;
     private String text;
     private boolean read;
-    private List<GPMessageCommandType> commands;
-    private String commandsProperties;
+    private GPMessageCommandType command;
+    private String commandProperties;
 
+    public GPClientMessage() {
+    }
+
+    @Override
     public Long getId() {
         return id;
     }
@@ -66,6 +68,7 @@ public class GPClientMessage extends GeoPlatformBeanModel {
         this.id = id;
     }
 
+    @Override
     public String getSender() {
         return sender;
     }
@@ -74,6 +77,7 @@ public class GPClientMessage extends GeoPlatformBeanModel {
         this.sender = sender;
     }
 
+    @Override
     public String getRecipient() {
         return recipient;
     }
@@ -82,65 +86,68 @@ public class GPClientMessage extends GeoPlatformBeanModel {
         this.recipient = recipient;
     }
 
+    @Override
     public Date getCreationDate() {
-        return creationDate;
+        return this.creationDate;
     }
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
+    @Override
     public String getSubject() {
-        return subject;
+        return this.subject;
     }
 
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
+    @Override
     public String getText() {
-        return text;
+        return this.text;
     }
 
     public void setText(String text) {
         this.text = text;
     }
 
+    @Override
     public boolean isRead() {
-        return read;
+        return this.read;
     }
 
+    @Override
     public void setRead(boolean read) {
         this.read = read;
     }
 
-    public List<GPMessageCommandType> getCommands() {
-        return commands;
+    @Override
+    public GPMessageCommandType getCommand() {
+        return this.command;
     }
 
-    public void setCommands(List<GPMessageCommandType> commands) {
-        this.commands = commands;
+    public void setCommand(GPMessageCommandType command) {
+        this.command = command;
     }
 
-    public String getCommandsProperties() {
-        return commandsProperties;
+    @Override
+    public String getCommandProperties() {
+        return this.commandProperties;
     }
 
-    public void setCommandsProperties(String commandsProperties) {
-        this.commandsProperties = commandsProperties;
+    public void setCommandProperties(String commandProperties) {
+        this.commandProperties = commandProperties;
+    }
+
+    @Override
+    public int compareTo(IGPClientMessage o) {
+        return o.getCreationDate().compareTo(this.creationDate);
     }
 
     @Override
     public String toString() {
-        return "GPClientMessage{"
-                + "id=" + id
-                + ", sender=" + sender
-                + ", recipient=" + recipient
-                + ", creationDate=" + creationDate
-                + ", subject=" + subject
-                + ", text=" + text
-                + ", read=" + read
-                + ", commands=" + commands
-                + ", commandsProperties=" + commandsProperties + '}';
+        return super.toString() + " ------- kkkk";
     }
 }

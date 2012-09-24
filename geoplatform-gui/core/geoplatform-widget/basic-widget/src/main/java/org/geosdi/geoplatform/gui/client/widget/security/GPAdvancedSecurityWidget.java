@@ -85,13 +85,15 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
 
     //
     public GPAdvancedSecurityWidget() {
-        initWidget(uiBinder.createAndBindUi(this));
-        login.addStyleName("g-button g-button-submit");
-        login.getElement().setId("signIn");
+        if (!checkSSO()) {
+            initWidget(uiBinder.createAndBindUi(this));
+            login.addStyleName("g-button g-button-submit");
+            login.getElement().setId("signIn");
 
-        userName.setFocus(true);
-        this.addStatusComponent();
-        this.addKeyHandler();
+            userName.setFocus(true);
+            this.addStatusComponent();
+            this.addKeyHandler();
+        }
     }
 
     private void addKeyHandler() {
@@ -172,4 +174,6 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
     public abstract void reset();
 
     public abstract void loginDone();
+
+    public abstract boolean checkSSO();
 }

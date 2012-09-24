@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.model.security;
 
+import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
+import org.geosdi.geoplatform.gui.model.message.IGPClientMessage;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
@@ -66,6 +68,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     private GPClientViewport viewport;
     private Map<String, Boolean> componentPermission;
     private IGPTreeOptions treeOptions;
+    private List<IGPClientMessage> unreadMessages;
 
     public GPLoginUserDetail() {
     }
@@ -205,5 +208,14 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     @Override
     public void setTrustedLevel(GPTrustedLevel trustedLevel) {
         this.trustedLevel = trustedLevel;
+    }
+
+    public void setUnreadMessages(List<IGPClientMessage> unreadMessages) {
+        this.unreadMessages = unreadMessages;
+    }
+
+    @Override
+    public List<IGPClientMessage> getUnreadMessages() {
+        return this.unreadMessages;
     }
 }

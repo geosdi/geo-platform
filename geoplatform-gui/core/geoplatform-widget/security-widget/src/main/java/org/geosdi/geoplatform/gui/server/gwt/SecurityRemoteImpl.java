@@ -45,6 +45,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ * @author Francesco Izzi - CNR IMAA geoSDI Group
+ * @email francesco.izzi@geosdi.org
  */
 public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
         implements SecurityRemote {
@@ -58,7 +60,12 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     public IGPAccountDetail userLogin(String userName, String password) throws GeoPlatformException {
         return this.securityService.userLogin(userName, password, super.getThreadLocalRequest());
     }
-    
+
+    @Override
+    public IGPAccountDetail ssoLogin() throws GeoPlatformException {
+        return this.securityService.ssoLogin(super.getThreadLocalRequest());
+    }
+
     @Override
     public IGPAccountDetail applicationLogin(String appID) throws GeoPlatformException {
         return this.securityService.applicationLogin(appID, super.getThreadLocalRequest());

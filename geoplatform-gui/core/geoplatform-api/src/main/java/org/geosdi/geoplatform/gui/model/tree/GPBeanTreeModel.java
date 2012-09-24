@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.model.tree;
 
-import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.model.UUIDGenerator;
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

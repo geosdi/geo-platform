@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -196,11 +197,26 @@ public abstract class ServiceTest {
         for (GPRole role : roles) {
             GPAuthority authority = new GPAuthority();
             authority.setAuthority(role.getRole());
-            authority.setTrustedLevel(role.getTrustedLevel());
+
+            GPTrustedLevel trustedLevel = this.getTrustedLevelByRole(role);
+            authority.setTrustedLevel(trustedLevel);
 
             authorities.add(authority);
         }
         return authorities;
+    }
+
+    protected GPTrustedLevel getTrustedLevelByRole(GPRole role) {
+        switch (role) {
+            case ADMIN:
+                return GPTrustedLevel.FULL;
+            case USER:
+                return GPTrustedLevel.RESTRICT;
+            case VIEWER:
+                return GPTrustedLevel.NONE;
+            default:
+                return GPTrustedLevel.NONE;
+        }
     }
 
     /**
@@ -209,9 +225,7 @@ public abstract class ServiceTest {
     protected void deleteAccount(long accountID) {
         try {
             boolean check = gpWSClient.deleteAccount(accountID);
-            Assert.assertTrue(
-                    "Account with ID = " + accountID + " has not been eliminated",
-                    check);
+            Assert.assertTrue("Account with ID = " + accountID + " has not been eliminated", check);
         } catch (Exception e) {
             Assert.fail("Error while deleting Account with ID: " + accountID);
         }
@@ -223,9 +237,7 @@ public abstract class ServiceTest {
     protected void deleteOrganization(long organizationID) {
         try {
             boolean check = gpWSClient.deleteOrganization(organizationID);
-            Assert.assertTrue(
-                    "Organization with ID = " + organizationID + " has not been eliminated",
-                    check);
+            Assert.assertTrue("Organization with ID = " + organizationID + " has not been eliminated", check);
         } catch (Exception e) {
             Assert.fail(
                     "Error while deleting Organization with ID: " + organizationID);
@@ -238,9 +250,7 @@ public abstract class ServiceTest {
     protected void deleteFolder(long idFolder) {
         try {
             boolean check = gpWSClient.deleteFolder(idFolder);
-            Assert.assertTrue(
-                    "Folder with id = " + idFolder + " has not been eliminated",
-                    check);
+            Assert.assertTrue("Folder with id = " + idFolder + " has not been eliminated", check);
         } catch (Exception e) {
             Assert.fail("Error while deleting Folder with Id: " + idFolder);
         }

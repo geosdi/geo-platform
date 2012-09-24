@@ -11,9 +11,6 @@
         background-color: #F0F0F0;
         border-top: 1px solid rgba(0, 0, 0, .4);
         }
-		
-
-
     </ui:style>
     <!-- <g:VerticalPanel> -->
     <g:DockLayoutPanel width="400px" height="300px" unit="PX" >
@@ -21,21 +18,21 @@
             <g:DockLayoutPanel unit="PX">
                 <g:west size="200">
                     <g:VerticalPanel verticalAlignment="ALIGN_MIDDLE"
-                                                         horizontalAlignment="ALIGN_LEFT" width="100%" height="100%">
+                                     horizontalAlignment="ALIGN_LEFT" width="100%" height="100%">
                         <g:VerticalPanel verticalAlignment="ALIGN_MIDDLE"
-                                                                 horizontalAlignment="ALIGN_RIGHT" styleName="{style.cursor}">
-                            <g:Hyperlink ui:field="indietroLabel" styleName="{style.cursor}">Indietro</g:Hyperlink>
+                                         horizontalAlignment="ALIGN_RIGHT" styleName="{style.cursor}">
+                            <g:Hyperlink ui:field="homeLabel" styleName="{style.cursor}">@Home</g:Hyperlink>
                         </g:VerticalPanel>
                     </g:VerticalPanel>
                 </g:west>
                 <g:east size="200">
                     <g:VerticalPanel verticalAlignment="ALIGN_MIDDLE"
-                                                         horizontalAlignment="ALIGN_RIGHT" width="100%" height="100%">
+                                     horizontalAlignment="ALIGN_RIGHT" width="100%" height="100%">
                         <g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE"
-                                                                   horizontalAlignment="ALIGN_RIGHT">
-                            <g:Hyperlink ui:field="nuoveLabel" styleName="{style.cursor}">Nuove</g:Hyperlink>
-                            <g:Label>|</g:Label>
-                            <g:Hyperlink ui:field="vecchieLabel" styleName="{style.cursor}">Vecchie</g:Hyperlink>
+                                           horizontalAlignment="ALIGN_RIGHT">
+                            <g:Hyperlink ui:field="backLabel" styleName="{style.cursor}">&lt; Back</g:Hyperlink>
+                            <g:Label>&brvbar;</g:Label>
+                            <g:Hyperlink ui:field="nextLabel" styleName="{style.cursor}">Next &gt;</g:Hyperlink>
                         </g:HorizontalPanel>
                         <!-- <g:VerticalPanel verticalAlignment="ALIGN_MIDDLE" -->
                         <!-- horizontalAlignment="ALIGN_RIGHT" styleName="{style.cursor}"> -->

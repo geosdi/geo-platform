@@ -118,6 +118,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
      */
     public LayerTreeWidget(ContentPanel contentPanel) {
         super();
+        //Assigning a dynamic context menu to the tree
+        TreeContextMenuFactory.setTreePanel(super.tree);
         super.store.setKeyProvider(new GPModelKeyProvider());
         this.contentPanel = contentPanel;
         TimeoutHandlerManager.addHandler(IGPBuildTreeHandler.TYPE, this);
@@ -126,8 +128,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         this.setTreePanelProperties();
         this.treeStore = new GPTreeStoreWidget(super.tree);
         this.treeDecorator = new GPLayerTreeDecorator(super.tree);
-        //Assigning a dynamic context menu to the tree
-        TreeContextMenuFactory.setTreePanel(super.tree);
     }
 
     /*
@@ -190,7 +190,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
      * Set Tree Properties
      */
     @Override
-    public void setTreePanelProperties() {
+    public final void setTreePanelProperties() {
         this.addExpandListener();
         this.setTreePresenter();
         this.enableDDSupport();

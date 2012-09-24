@@ -358,6 +358,8 @@ class AccountServiceImpl {
     public GPUser getUserDetailByUsername(SearchRequest request)
             throws ResourceNotFoundFault {
         GPUser user = this.getUserByUsername(request.getNameLike());
+        // Set authorities
+        user.setGPAuthorities(this.getGPAuthorities(user.getNaturalID()));
         EntityCorrectness.checkAccountLog(user); // TODO assert
         return user;
     }

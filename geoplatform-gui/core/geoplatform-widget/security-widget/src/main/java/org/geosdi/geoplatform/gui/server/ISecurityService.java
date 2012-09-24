@@ -48,6 +48,12 @@ public interface ISecurityService {
     IGPAccountDetail userLogin(String userName, String password,
                                HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
+    
+    IGPAccountDetail ssoLogin(String userName, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+    
+    String getIVUser(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 
     IGPAccountDetail applicationLogin(String appID,
                                       HttpServletRequest httpServletRequest)

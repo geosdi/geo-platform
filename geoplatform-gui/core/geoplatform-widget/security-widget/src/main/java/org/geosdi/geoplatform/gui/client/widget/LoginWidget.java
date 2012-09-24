@@ -62,8 +62,9 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
 
     private LoginStatus status;
     private EventType eventOnSuccess;
-    private String loginFailureMessage;
+    private String loginFailureMessage = "";
     private SessionLoginWidget sessionLoginWidget;
+    private String ivUser = "";
 
     /**
      *
@@ -106,6 +107,50 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         userName.setFocus(Boolean.TRUE);
         status.clearStatus("");
         login.setEnabled(Boolean.TRUE);
+    }
+
+    @Override
+    public void checkSSO() {
+
+        SecurityRemoteImpl.Util.getInstance().getIVUser(new AsyncCallback<String>() {
+            @Override
+            public void onFailure(Throwable caught) {
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                ivUser = result;
+                System.out.println("iv-user: " + ivUser);
+                if (!ivUser.equals("")) {
+//                    status.setBusy("please wait...");
+//                    login.setEnabled(Boolean.FALSE);
+                    showProgressBar();
+                    loginError.setText("");
+                    SecurityRemoteImpl.Util.getInstance().ssoLogin(ivUser, new AsyncCallback<IGPAccountDetail>() {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            System.out.println("FAIL "+caught.getMessage());
+                        }
+
+                        @Override
+                        public void onSuccess(IGPAccountDetail resultDetails) {
+                            loginFailureMessage = "";
+                            GPAccountLogged.getInstance().setAccountDetail(resultDetails);
+                            status.setStatus(
+                                    LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
+                                    LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
+                            sessionLoginWidget.setUserLogger(ivUser);
+                            Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), resultDetails.getTreeOptions());
+                            Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), resultDetails);
+                            //loginXMPPClient(ivUser, password.getValue(), result.getHostXmppServer());
+                            loginDone();
+                        }
+                    });
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -156,6 +201,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
             };
             t.schedule(2000);
         } else {
+            System.out.println("Login failure message: " + loginFailureMessage);
             this.getParent().getElement().getStyle().clearDisplay();
 //            this.getElement().getStyle().clearDisplay();
             LoginWidget.super.progressBar.hide();

@@ -53,6 +53,8 @@ import org.geosdi.geoplatform.gui.impl.users.options.UserTreeOptions;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.request.LikePatternType;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -128,6 +130,68 @@ public class SecurityService implements ISecurityService {
             logger.error("Error on SecurityService: " + ex);
             throw new GeoPlatformException(
                     ex.getMessage() + ", contact the administrator");
+        }
+    }
+
+    @Override
+    public String getIVUser(HttpServletRequest httpServletRequest) {
+        return httpServletRequest.getHeader("iv-user");
+    }
+
+    @Override
+    public IGPAccountDetail ssoLogin(String ivUser,
+            HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        GPUser user;
+        GuiComponentsPermissionMapData guiComponentPermission;
+        GPAccountProject accountProject;
+        IGPAccountDetail userDetail;
+        GPProject project;
+        try {
+            System.out.println("************ USer Dettail : ");
+            user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(ivUser, LikePatternType.CONTENT_EQUALS));
+            System.out.println("************ USer Dettail 2 : " + user);
+            guiComponentPermission = geoPlatformServiceClient.getAccountPermission(user.getId());
+            System.out.println("************ USer guiComponentPermission 1 : " + guiComponentPermission);
+            accountProject = geoPlatformServiceClient.getDefaultAccountProject(user.getId());
+            System.out.println("************ USer accountProject 1 : " + accountProject);
+            if (accountProject == null) {
+                project = new GPProject();
+                project.setName("Default Project");
+                project.setShared(false);
+                project.setId(this.saveDefaultProject(user, project));
+            } else {
+                project = accountProject.getProject();
+            }
+
+            this.sessionUtility.storeLoggedAccountAndDefaultProject(user,
+                    project.getId(),
+                    httpServletRequest);
+
+            System.out.println("************ Viewport : ");
+            
+            
+            GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
+            System.out.println("************ Viewport : " + viewport);
+            
+            
+            userDetail = this.convertAccountToDTO(user, accountProject, viewport);
+            
+            System.out.println("************ userDetail : " + userDetail);
+            userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
+
+            System.out.println(userDetail);
+            return userDetail;
+
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("SecurityService",
+                    "Unable to find user with username or email: " + ivUser
+                    + " Error: " + ex);
+            throw new GeoPlatformException("Unable to find user with username or email: "
+                    + ivUser);
+        } catch (SOAPFaultException ex) {
+            logger.error("Error on SecurityService: " + ex + " password incorrect");
+            throw new GeoPlatformException("Password incorrect");
         }
     }
 

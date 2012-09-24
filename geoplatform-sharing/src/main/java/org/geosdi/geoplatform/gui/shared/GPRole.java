@@ -47,24 +47,18 @@ package org.geosdi.geoplatform.gui.shared;
  */
 public enum GPRole {
 
-    ADMIN("Admin", GPTrustedLevel.FULL),
-    USER("User", GPTrustedLevel.RESTRICT),
-    VIEWER("Viewer", GPTrustedLevel.NONE);
+    ADMIN("Admin"),
+    USER("User"),
+    VIEWER("Viewer");
     //
     private String role;
-    private GPTrustedLevel trustedLevel;
 
-    private GPRole(String role, GPTrustedLevel trustedLevel) {
+    private GPRole(String role) {
         this.role = role;
-        this.trustedLevel = trustedLevel;
     }
 
     public String getRole() {
         return role;
-    }
-
-    public GPTrustedLevel getTrustedLevel() {
-        return this.trustedLevel;
     }
 
     @Override

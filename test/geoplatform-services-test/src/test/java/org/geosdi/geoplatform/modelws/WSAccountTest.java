@@ -156,7 +156,7 @@ public class WSAccountTest extends ServiceTest {
         GPAuthority authority = authorities.get(0);
         Assert.assertNotNull(authority);
         Assert.assertEquals("Authority string", GPRole.USER.getRole(), authority.getAuthority());
-        Assert.assertEquals("Authority level", GPRole.USER.getTrustedLevel(), authority.getTrustedLevel());
+        Assert.assertEquals("Authority level", super.getTrustedLevelByRole(GPRole.USER), authority.getTrustedLevel());
         Assert.assertEquals("Authority username", usernameTest, authority.getAccountNaturalID());
     }
 

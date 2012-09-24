@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPViewport;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.springframework.security.acls.domain.BasePermission;
 
 /**
@@ -174,6 +175,10 @@ public class EntityCorrectness {
             String role = authority.getAuthority();
             if (EntityCorrectness.empty(role)) {
                 throw new IllegalParameterFault("Authority is null or NOT empty.");
+            }
+            GPTrustedLevel trustedLevel = authority.getTrustedLevel();
+            if (trustedLevel == null) {
+                throw new IllegalParameterFault("Trusted Level is null.");
             }
         }
     }

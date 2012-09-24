@@ -122,7 +122,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             }
         });
         this.centralPanel.add(this.userPropertiesBinding.getWidget());
-        this.centralPanel.setSize(325, 315);
+        this.centralPanel.setSize(325, 335);
         super.add(this.centralPanel);
         super.getButtonBar().add(saveButton);
         super.getButtonBar().add(closeButton);
@@ -136,17 +136,17 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void initSize() {
-        super.setSize(340, 330);
+        super.setSize(340, 350);
     }
 
     @Override
     public void setWindowProperties() {
         super.setHeading("User Properties");
-        super.setResizable(Boolean.FALSE);
         super.setLayout(new BorderLayout());
-        super.setModal(Boolean.TRUE);
-        super.setCollapsible(Boolean.FALSE);
-        super.setPlain(Boolean.TRUE);
+        super.setResizable(false);
+        super.setModal(true);
+        super.setCollapsible(false);
+        super.setPlain(true);
         this.addWindowListener(new WindowListener() {
             @Override
             public void windowShow(WindowEvent we) {

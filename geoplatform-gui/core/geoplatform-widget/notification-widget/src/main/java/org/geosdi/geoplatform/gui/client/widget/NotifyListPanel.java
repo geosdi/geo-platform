@@ -33,8 +33,6 @@ public class NotifyListPanel extends Composite {
     @UiField
     VerticalPanel centerPanel;
     @UiField
-    Hyperlink plusLabel;
-    @UiField
     Hyperlink viewLabel;
     @UiField
     NotifyStyle style;

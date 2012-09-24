@@ -48,12 +48,8 @@ public interface SecurityRemoteAsync {
     void userLogin(String userName, String password,
             AsyncCallback<IGPAccountDetail> callback)
             throws GeoPlatformException;
-    
-    void ssoLogin(String ivUser,
-                   AsyncCallback<IGPAccountDetail> callback)
-            throws GeoPlatformException;
-    
-    void getIVUser(AsyncCallback<String> callback)
+
+    void ssoLogin(AsyncCallback<IGPAccountDetail> callback)
             throws GeoPlatformException;
 
     void applicationLogin(String appID,

@@ -67,16 +67,13 @@ public interface SecurityRemote extends RemoteService {
      */
     IGPAccountDetail userLogin(String userName, String password)
             throws GeoPlatformException;
-    
+
     /**
-     * 
-     * @param userName
-     * 
+     *
      * @return IGPAccountDetail
      * @throws GeoPlatformException
      */
-    IGPAccountDetail ssoLogin(String ivUser)
-            throws GeoPlatformException;
+    IGPAccountDetail ssoLogin() throws GeoPlatformException;
 
     /**
      *
@@ -89,6 +86,4 @@ public interface SecurityRemote extends RemoteService {
             throws GeoPlatformException;
 
     void invalidateSession() throws GeoPlatformException;
-    
-    String getIVUser() throws GeoPlatformException;
 }

@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,15 +43,11 @@ import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.client.model.security.GPLoginUserDetail;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.message.GPClientMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.impl.users.options.UserTreeOptions;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
+import org.geosdi.geoplatform.gui.server.service.converter.DTOSecurityConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -61,7 +55,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -78,8 +71,8 @@ public class SecurityService implements ISecurityService {
     @Autowired
     private SessionUtility sessionUtility;
     //
-    private @Value("${host_xmpp_server}")
-    String hostXmppServer;
+    @Autowired
+    private DTOSecurityConverter dtoConverter;
 
     @Override
     public IGPAccountDetail userLogin(String username, String password, HttpServletRequest httpServletRequest)
@@ -105,30 +98,18 @@ public class SecurityService implements ISecurityService {
             }
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(user,
-                                                                    project.getId(),
-                                                                    httpServletRequest);
+                    project.getId(),
+                    httpServletRequest);
 
             GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
-            userDetail = this.convertAccountToDTO(user, accountProject, viewport);
+            List<GPMessage> unreadMessages = geoPlatformServiceClient.getUnreadMessagesByRecipient(user.getId());
+            userDetail = this.dtoConverter.convertAccountToDTO(user, accountProject, viewport, unreadMessages);
             userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
-
-            List<GPMessage> messages = geoPlatformServiceClient.getUnreadMessagesByRecipient(user.getId());
-            if (messages != null) {
-                List<GPClientMessage> unreadMessages = new ArrayList<GPClientMessage>(messages.size());
-                for (GPMessage message : messages) {
-                    GPClientMessage clientMessage = this.convertMessage(message);
-                    unreadMessages.add(clientMessage);
-                    logger.info("\n*** {}", clientMessage);
-                }
-                // TODO Set up the unread messages
-                // ? account.setMessages(unreadMessages);
-            }
-
             return userDetail;
 
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
-                         "Unable to find user with username or email: " + username
+                    "Unable to find user with username or email: " + username
                     + " Error: " + ex);
             throw new GeoPlatformException("Unable to find user with username or email: "
                     + username);
@@ -172,11 +153,12 @@ public class SecurityService implements ISecurityService {
             accountProject = geoPlatformServiceClient.getDefaultAccountProject(application.getId());
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(application,
-                                                                    project.getId(),
-                                                                    httpServletRequest);
+                    project.getId(),
+                    httpServletRequest);
 
             GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
-            accountDetail = this.convertAccountToDTO(application, accountProject, viewport);
+            List<GPMessage> unreadMessages = geoPlatformServiceClient.getUnreadMessagesByRecipient(accountProject.getId());
+            accountDetail = this.dtoConverter.convertAccountToDTO(application, accountProject, viewport, unreadMessages);
 
             accountDetail.setComponentPermission(
                     guiComponentPermission.getPermissionMap());
@@ -184,7 +166,7 @@ public class SecurityService implements ISecurityService {
             return accountDetail;
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
-                         "Unable to find application with appID: " + appID
+                    "Unable to find application with appID: " + appID
                     + " Error: " + ex);
             throw new GeoPlatformException("Unable to find application with appID: "
                     + appID);
@@ -238,68 +220,6 @@ public class SecurityService implements ISecurityService {
             throw new GeoPlatformException("Parameter incorrect on saveProject");
         }
         return idProject;
-    }
-
-    private IGPAccountDetail convertAccountToDTO(GPAccount account, GPAccountProject accountProject,
-            GPViewport viewport) {
-        GPLoginUserDetail accountDetail = new GPLoginUserDetail();
-        UserTreeOptions usertreeOptions = new UserTreeOptions();
-        accountDetail.setUsername(account.getNaturalID()); // Forced representation
-        accountDetail.setOrganization(account.getOrganization().getName());
-        usertreeOptions.setLoadExpandedFolders(account.isLoadExpandedFolders());
-        this.extractGPAuthoritiesInToUser(accountDetail, account.getGPAuthorities());
-        accountDetail.setTreeOptions(usertreeOptions);
-        if (account instanceof GPUser) {
-            GPUser user = (GPUser) account;
-            accountDetail.setName(user.getName());
-            accountDetail.setEmail(user.getEmailAddress());
-        }
-        if (account.getGsAccount() != null) {
-            accountDetail.setAuthkey(account.getGsAccount().getAuthkey());
-        }
-        accountDetail.setHostXmppServer(hostXmppServer);
-        if (accountProject != null) {
-            accountDetail.setBaseLayer(accountProject.getBaseLayer());
-        }
-        if (viewport != null) {
-            GPBBox serverBBOX = viewport.getBbox();
-            BBoxClientInfo clientBBOX = new BBoxClientInfo(serverBBOX.getMinX(), serverBBOX.getMinY(),
-                                                           serverBBOX.getMaxX(), serverBBOX.getMaxY());
-            GPClientViewport clientViewport = new GPClientViewport(viewport.getName(),
-                                                                   viewport.getDescription(), clientBBOX, viewport.getZoomLevel(), viewport.isIsDefault());
-            accountDetail.setViewport(clientViewport);
-        }
-        return (IGPAccountDetail) accountDetail;
-    }
-
-    private GPClientMessage convertMessage(GPMessage message) {
-        GPClientMessage clientMessage = new GPClientMessage();
-
-        clientMessage.setId(message.getId());
-        clientMessage.setSender(message.getSender().getNaturalID());
-        clientMessage.setRecipient(message.getRecipient().getNaturalID());
-        clientMessage.setCreationDate(message.getCreationDate());
-        clientMessage.setSubject(message.getSubject());
-        clientMessage.setText(message.getText());
-        clientMessage.setRead(message.isRead());
-        clientMessage.setCommands(message.getCommands());
-        clientMessage.setCommandsProperties(message.getCommandsProperties());
-
-        return clientMessage;
-    }
-
-    /**
-     * A User must have at most one role.
-     *
-     * @todo user can have more roles
-     */
-    private void extractGPAuthoritiesInToUser(GPLoginUserDetail userDetail, List<GPAuthority> authorities) {
-        Iterator<GPAuthority> iterator = authorities.iterator();
-        if (iterator.hasNext()) {
-            GPAuthority authority = iterator.next();
-            userDetail.setAuthority(authority.getAuthority());
-            userDetail.setTrustedLevel(authority.getTrustedLevel());
-        }
     }
 
     /**

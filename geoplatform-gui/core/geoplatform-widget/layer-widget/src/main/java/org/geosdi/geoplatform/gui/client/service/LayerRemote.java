@@ -90,6 +90,8 @@ public interface LayerRemote extends RemoteService {
      */
     ArrayList<GPFolderClientInfo> loadUserFolders() throws GeoPlatformException;
 
+    ArrayList<GPFolderClientInfo> loadProject(long projectId) throws GeoPlatformException;
+
     /**
      *
      * @param folderID

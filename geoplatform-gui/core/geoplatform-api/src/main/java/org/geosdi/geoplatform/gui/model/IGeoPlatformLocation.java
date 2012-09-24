@@ -36,8 +36,12 @@
 package org.geosdi.geoplatform.gui.model;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - geoSDI
+ * @mail giuseppe.lascaleia@geosdi.org
  * 
+ * @author Francesco Izzi - geoSDI
+ * @mail francesco.izzi@geosdi.org
+ *
  */
 public interface IGeoPlatformLocation {
 
@@ -48,9 +52,9 @@ public interface IGeoPlatformLocation {
     public double getLat();
 
     public void setLat(double lat);
-    
+
     public String getDescription();
-    
+
     public String getCountry();
 
     public String getDistrict();
@@ -58,8 +62,12 @@ public interface IGeoPlatformLocation {
     public String getCity();
 
     public String getAddress();
+
+    public String getStreetNumber();
+
+    public String getPostalCode();
     
-	public String getStreetNumber();
+    public String getWkt();
     
-	public String getPostalCode();
+    public String getGeometryType();
 }

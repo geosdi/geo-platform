@@ -48,11 +48,9 @@ public class GPUserManageDetail extends GPSimpleUser
 
     private static final long serialVersionUID = 53423038411470538L;
     //
-    private Long id; // For performance purpose: used for equals() and hashCode() methods
     private String password; // For manual binding
     private Date creationDate; // For manual operation
     private boolean expired; // For manual binding
-    private String organization;
 
     public enum GPUserManageDetailKeyValue {
 
@@ -152,44 +150,12 @@ public class GPUserManageDetail extends GPSimpleUser
     /**
      * (non-Javadoc)
      *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GPUserManageDetail other = (GPUserManageDetail) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
-        return hash;
-    }
-
-    /**
-     * (non-Javadoc)
-     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("GPUserManageDetail {");
-        str.append("id=").append(id);
+        str.append("id=").append(getId());
         str.append(", name=").append(getName());
         str.append(", email=").append(getEmail());
         str.append(", username=").append(getUsername());
@@ -199,7 +165,8 @@ public class GPUserManageDetail extends GPSimpleUser
         str.append(", creationDate=").append(creationDate);
         str.append(", temporary=").append(isTemporary());
         str.append(", expired=").append(expired);
-        str.append(", organization=").append(organization);
+        str.append(", organization=").append(getOrganization());
+        str.append(", trustedLevel=").append(getTrustedLevel());
         return str.append('}').toString();
     }
 }

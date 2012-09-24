@@ -160,7 +160,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                 manageServersButton.disable();
                 for (String role : result) {
                     System.out.println("Role: " + role);
-                    if (role.equals(GPRole.ADMIN.toString())) {
+                    if (role.equals(GPRole.ADMIN.getRole())) { // TODO SecureButton
                         manageServersButton.enable();
                         return;
                     }

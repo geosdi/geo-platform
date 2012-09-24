@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -61,6 +62,7 @@ public abstract class ShortAccountDTO {
     private boolean expired;
     private Date creationDate;
     private List<String> roles;
+    private GPTrustedLevel trustedLevel;
 
     public ShortAccountDTO() {
     }
@@ -77,6 +79,11 @@ public abstract class ShortAccountDTO {
             roles = new ArrayList<String>(account.getGPAuthorities().size());
             for (GPAuthority authority : account.getGPAuthorities()) {
                 roles.add(authority.getAuthority());
+
+                if (this.trustedLevel == null
+                        || this.trustedLevel.ordinal() < authority.getTrustedLevel().ordinal()) {
+                    this.trustedLevel = authority.getTrustedLevel();
+                }
             }
         }
     }
@@ -180,6 +187,20 @@ public abstract class ShortAccountDTO {
     }
 
     /**
+     * @return the trustedLevel
+     */
+    public GPTrustedLevel getTrustedLevel() {
+        return trustedLevel;
+    }
+
+    /**
+     * @param trustedLevel the trustedLevel to set
+     */
+    public void setTrustedLevel(GPTrustedLevel trustedLevel) {
+        this.trustedLevel = trustedLevel;
+    }
+
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
@@ -198,6 +219,7 @@ public abstract class ShortAccountDTO {
         } else {
             str.append(", roles=NULL");
         }
+        str.append(", trustedLevel=").append(trustedLevel);
         return str.toString();
     }
 

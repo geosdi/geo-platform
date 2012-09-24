@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.client.LayerWidgetUI;
 import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFactory;
+import org.geosdi.geoplatform.gui.client.action.projects.ShareProjectCommandAction;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -49,5 +50,6 @@ public class LayerModuleGinConfigurator extends AbstractGinModule {
     protected void configure() {
         requestStaticInjection(TreeContextMenuFactory.class);
         requestStaticInjection(LayerWidgetUI.class);
+        bind(ShareProjectCommandAction.class).asEagerSingleton();
     }
 }

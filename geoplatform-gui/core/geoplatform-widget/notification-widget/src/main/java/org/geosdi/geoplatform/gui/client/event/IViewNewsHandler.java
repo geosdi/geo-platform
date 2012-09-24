@@ -1,16 +1,17 @@
 package org.geosdi.geoplatform.gui.client.event;
 
-import java.util.ArrayList;
-
-import org.geosdi.geoplatform.gui.client.SingleComponent;
-
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.SingleNotify;
 
-public interface IViewNewsHandler extends EventHandler{
-	
-	Type<IViewNewsHandler> TYPE = new Type<IViewNewsHandler>();
+/**
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
+ */
+public interface IViewNewsHandler extends EventHandler {
 
-	public void onClickListComponent(ArrayList<SingleComponent> listComponent);
+    Type<IViewNewsHandler> TYPE = new Type<IViewNewsHandler>();
 
+    public void onClickListComponent(List<SingleNotify> listComponent);
 }

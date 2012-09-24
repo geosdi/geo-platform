@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.utility;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.DPI;
+import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
 
 /**
  *
@@ -57,5 +58,16 @@ public class PrintUtility {
         dpi.add(new DPI("600"));
 
         return dpi;
+    }
+    
+    public static List<PrintTemplate> getTemplate() {
+        List<PrintTemplate> templates = new ArrayList<PrintTemplate>();
+
+        templates.add(new PrintTemplate("A4 Portrait"));
+        templates.add(new PrintTemplate("A3 Portrait"));
+        templates.add(new PrintTemplate("A2 Portrait"));
+        templates.add(new PrintTemplate("A1 Portrait"));
+        templates.add(new PrintTemplate("A0 Portrait"));
+        return templates;
     }
 }

@@ -51,4 +51,7 @@ public interface GeocodingEventHandler extends GPGeocodingMarkerHandler {
 
     void onRegisterGeocodingLocation(IGeoPlatformLocation bean,
             GPCoordinateReferenceSystem crs, Object provider);
+    
+    void onRegisterGeocodingFeature(IGeoPlatformLocation bean,
+            GPCoordinateReferenceSystem crs, Object provider);
 }

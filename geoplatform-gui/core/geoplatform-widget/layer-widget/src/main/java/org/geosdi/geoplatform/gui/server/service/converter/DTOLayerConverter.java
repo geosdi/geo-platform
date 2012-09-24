@@ -86,8 +86,8 @@ import org.springframework.stereotype.Component;
  * Simple Class to convert Web-Services beans model in DTO beans Client
  *
  */
-@Component(value = "dtoConverter")
-public class DTOConverter {
+@Component(value = "dtoLayerConverter")
+public class DTOLayerConverter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -322,10 +322,10 @@ public class DTOConverter {
         clientProject.setId(projectDTO.getId());
         clientProject.setName(projectDTO.getName());
         clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
-        if(projectDTO.isDefault() != null){
+        if (projectDTO.isDefault() != null) {
             clientProject.setDefaultProject(projectDTO.isDefault());
         }
-        if(projectDTO.isShared() != null){
+        if (projectDTO.isShared() != null) {
             clientProject.setShared(projectDTO.isShared());
         }
         ShortAccountDTO owner = projectDTO.getOwner();
@@ -334,7 +334,7 @@ public class DTOConverter {
         }
         return clientProject;
     }
-    
+
     public GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
             String imageURL) {
         GPClientProject clientProject = this.convertToGPClientProject(projectDTO);

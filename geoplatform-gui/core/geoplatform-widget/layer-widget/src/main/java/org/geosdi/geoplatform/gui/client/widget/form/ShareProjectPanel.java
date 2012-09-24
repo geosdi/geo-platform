@@ -158,7 +158,6 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        //ADD: Code to save
                         toStore.commitChanges();
                         List<Long> accountIDsProject = Lists.newArrayListWithCapacity(toStore.getModels().size());
                         for (GPSimpleUser user : toStore.getModels()) {

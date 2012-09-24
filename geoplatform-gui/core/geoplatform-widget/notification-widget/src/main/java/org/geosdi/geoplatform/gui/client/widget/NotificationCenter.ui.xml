@@ -46,7 +46,7 @@
     </ui:style>
     <!-- 	<g:VerticalPanel width="100%" height="100%"> -->
     <g:VerticalPanel height="300px" width="400px"
-                     styleName="{style.border}" ui:field="deckPanel">
+                     styleName="{style.border}" ui:field="verticalPanel">
     </g:VerticalPanel>
     <!-- 	</g:VerticalPanel> -->
 </ui:UiBinder> 

@@ -35,10 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.action;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import java.util.List;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.NotificationPopupPanel;
+import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.model.message.IGPClientMessage;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -57,11 +62,36 @@ public class NotificationCenterAction extends ToolbarMapAction {
     public void componentSelected(ButtonEvent e) {
 //        RootLayoutPanel.get().add(new BinderDeckLayout());
 //        this.binderDeckLayout.setVisible(Boolean.TRUE);
-
-//        popupPanel.setStyleName(style.notifypopup());
-
+//        notificationPopupPanel.setStyleName(style.notifypopup());
         notificationPopupPanel.setPopupPosition(e.getTarget().getAbsoluteLeft() - (170),
                 e.getTarget().getAbsoluteTop() + (20));
         notificationPopupPanel.show();
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        List<IGPClientMessage> messageList = accountDetail.getUnreadMessages();
+        //TODO: verifica errore in salvataggio dei messaggi letti
+//        if (messageList != null && !messageList.isEmpty()) {
+//            NotificationRemote.Util.getInstance().markMessagesAsRead(new AsyncCallback<Boolean>() {
+//                @Override
+//                public void onFailure(Throwable caught) {
+//                    if (caught.getCause() instanceof GPSessionTimeout) {
+//                        GPHandlerManager.fireEvent(new GPLoginEvent(null));
+//                    } else {
+//                        GeoPlatformMessage.errorMessage("Error Saving the read messages",
+//                                "An error occurred while making the requested connection.\n"
+//                                + "Verify network connections and try again."
+//                                + "\nIf the problem persists contact your system administrator.");
+//                        LayoutManager.getInstance().getStatusMap().setStatus(
+//                                "Error Saving the read messages",
+//                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+//                        System.out.println("Error Saving the read messages: " + caught.toString()
+//                                + " data: " + caught.getMessage());
+//                    }
+//                }
+//
+//                @Override
+//                public void onSuccess(Boolean result) {
+//                }
+//            });
+//        }
     }
 }

@@ -53,7 +53,7 @@ import org.geosdi.geoplatform.services.development.EntityCorrectness;
  */
 class MessageServiceImpl {
 
-//    private static final Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
     //
     private GPMessageDAO messageDao;
     private GPAccountDAO accountDao;
@@ -108,6 +108,12 @@ class MessageServiceImpl {
         GPMessage[] messages = new GPMessage[recipientNumber];
         for (int i = 0; i < recipientNumber; i++) {
             Long recipientID = message.getRecipientIDs().get(i);
+
+            // Ignore message where sender and recipiet are the same
+            if (recipientID.equals(sender.getId())) {
+                continue;
+            }
+
             GPAccount recipient = this.getAccountById(recipientID);
             EntityCorrectness.checkAccountLog(sender); // TODO assert
 

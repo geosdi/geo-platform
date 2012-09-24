@@ -1628,7 +1628,8 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
-     * Insert a same Message for each Account recipient.
+     * Insert a same Message for each Account recipient. Ignore message where
+     * sender and recipient are the same.
      *
      * @param messageDTO the Message to insert for each Account recipient
      * @return true if the Messages was added

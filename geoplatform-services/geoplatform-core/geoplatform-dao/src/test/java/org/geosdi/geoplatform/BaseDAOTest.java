@@ -491,6 +491,7 @@ public abstract class BaseDAOTest {
         message.setSender(adminTest);
         message.setCreationDate(new Date(System.currentTimeMillis()));
         message.setRead(false);
+        message.setSubject("Project Shared");
         message.setText("\"" + adminTest.getName() + "\" shared with you the \""
                 + adminProject.getName() + "\" project.");
         message.addCommand(GPMessageCommandType.OPEN_PROJECT);

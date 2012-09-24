@@ -328,7 +328,7 @@ class ProjectServiceImpl {
 
         ProjectDTO projectDTO = null;
         if (project.isShared()) {
-            GPAccountProject ownerProject = accountProjectDao.findOwnerByProjectID(projectDTO.getId());
+            GPAccountProject ownerProject = accountProjectDao.findOwnerByProjectID(project.getId());
             GPAccount owner = ownerProject.getAccount();
 
             projectDTO = new ProjectDTO(project, true, owner);

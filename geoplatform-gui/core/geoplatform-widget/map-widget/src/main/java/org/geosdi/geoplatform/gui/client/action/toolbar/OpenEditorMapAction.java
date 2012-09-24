@@ -33,32 +33,60 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.toolbar;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import java.util.List;
+import org.geosdi.geoplatform.gui.action.IOpenEditorMapAction;
+import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.widget.editor.basic.BasicEditorWidget;
+import org.geosdi.geoplatform.gui.configuration.widget.EditorActionTool;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
+ * <p>This Class is a Basic Action for Toggle Button that open
+ * {@link BasicEditorWidget} class</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformToolbar {
+public class OpenEditorMapAction extends MapToggleAction
+        implements IOpenEditorMapAction {
 
-    void addSeparator();
+    private BasicEditorWidget editorWidget = new BasicEditorWidget();
+    private List<EditorActionTool> actionTools;
 
-    void addApplicationButton(ToolbarActionTool tool);
+    public OpenEditorMapAction(GeoPlatformMap theMapWidget) {
+        super(theMapWidget, Resources.ICONS.editorAOE(),
+              "Open Basic Map Editor");
+    }
 
-    void addMapButton(ToolbarActionTool tool);
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        ToggleButton button = (ToggleButton) ce.getSource();
 
-    void addMapToggleButton(ToolbarActionTool tool);
+        super.changeButtonState();
 
-    void addMapToogleButton(ToolbarActionEditorTool tool);
+        if (button.isPressed()) {
+            mapWidget.getButtonBar().setPressedButton(button);
+            this.editorWidget.show(actionTools, mapWidget);
+        } else {
+            this.editorWidget.hide();
+        }
+    }
 
-    void addIconInToolbar(IconInToolbar tool);
+    @Override
+    public void disableControl() {
+        this.editorWidget.hide();
+    }
 
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
-
-    void addFillToolItem();
+    /**
+     * @param actionTools the actionTools to set
+     */
+    @Override
+    public void setActionTools(List<EditorActionTool> actionTools) {
+        this.actionTools = actionTools;
+    }
 }

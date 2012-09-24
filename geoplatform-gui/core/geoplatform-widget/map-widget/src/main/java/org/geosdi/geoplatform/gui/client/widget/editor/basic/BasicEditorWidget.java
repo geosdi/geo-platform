@@ -33,32 +33,66 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.toolbar;
+package org.geosdi.geoplatform.gui.client.widget.editor.basic;
 
-import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
+import org.geosdi.geoplatform.gui.configuration.widget.EditorActionTool;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
+ * <p> This is a Basic Editor to manage Areas of Interest or Emergency Areas.
+ * <br/> This Editor not use standard OGC WFS but simple draw Line, Point or
+ * Polygon on a OL Vector Layer. With this Widget is possible : <ul> <li>
+ * <strong>Rotate Feature</strong> <strong>Resize Feature</strong> <strong>Drag
+ * Feature</strong> <strong>Delete Feature</strong> </li> </ul> </p>
+ *
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformToolbar {
+public class BasicEditorWidget extends GeoPlatformWindow {
 
-    void addSeparator();
+    private BasicEditorPanel editorPanel = new BasicEditorPanel();
 
-    void addApplicationButton(ToolbarActionTool tool);
+    public BasicEditorWidget() {
+        super(true);
+    }
 
-    void addMapButton(ToolbarActionTool tool);
+    public void show(List<EditorActionTool> actionTools,
+            GeoPlatformMap geoPlatformMap) {
+        if (!super.isInitialized()) {
+            this.editorPanel.injectValues(actionTools, geoPlatformMap);
+        }
+        super.show();
+    }
 
-    void addMapToggleButton(ToolbarActionTool tool);
+    @Override
+    public void addComponent() {
+        super.add(this.editorPanel);
+    }
 
-    void addMapToogleButton(ToolbarActionEditorTool tool);
+    @Override
+    public void initSize() {
+        super.setAutoWidth(true);
+        super.setHeight(235);
+    }
 
-    void addIconInToolbar(IconInToolbar tool);
+    @Override
+    public void setWindowProperties() {
+        super.setResizable(false);
+        super.setLayout(new FlowLayout());
+        super.setModal(false);
+        super.setCollapsible(false);
+        super.setPlain(true);
 
-    void addMenuInToolBar(MenuInToolBar tool);
+        super.setScrollMode(Style.Scroll.AUTOY);
+    }
 
-    void addMenuButton(MenuClientTool tool);
-
-    void addFillToolItem();
+    @Override
+    public void reset() {
+        this.editorPanel.resetEditorObserver();
+    }
 }

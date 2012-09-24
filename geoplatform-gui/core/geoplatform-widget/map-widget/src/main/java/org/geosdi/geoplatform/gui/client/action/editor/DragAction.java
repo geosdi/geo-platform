@@ -33,34 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
-
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
+package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.action.toolbar.ModifyFeatureAction;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class ResizeAction extends ModifyFeatureAction {
+public class DragAction extends ModifyFeatureAction {
 
-    public ResizeAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, Resources.ICONS.resize(), "Resize");
+    public DragAction(GeoPlatformMap mapWidget) {
+        super(mapWidget, Resources.ICONS.drag(), "Drag");
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if (this.mapWidget.getButtonBar().isTogglePressed()) {
-            mapWidget.getButtonBar().changeButtonState();
+        if (this.editorOberver.isButtonPressed()) {
+            super.changeButtonState();
         }
 
         if (mapWidget.isFeatureOperationEnable()) {
@@ -71,6 +72,6 @@ public class ResizeAction extends ModifyFeatureAction {
         mapWidget.deactivateModifyFeature();
         mapWidget.activateModifyFeature();
 
-        this.control.setMode(ModifyFeature.RESIZE);
+        this.control.setMode(ModifyFeature.DRAG);
     }
 }

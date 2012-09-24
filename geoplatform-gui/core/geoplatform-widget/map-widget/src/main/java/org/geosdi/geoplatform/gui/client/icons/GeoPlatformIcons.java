@@ -40,7 +40,7 @@ import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 @SuppressWarnings("deprecation")
 public interface GeoPlatformIcons extends ImageBundle {
@@ -89,4 +89,7 @@ public interface GeoPlatformIcons extends ImageBundle {
 
     @Resource("ruler_square.png")
     AbstractImagePrototype measureArea();
+
+    @Resource("editor-aoe.png")
+    AbstractImagePrototype editorAOE();
 }

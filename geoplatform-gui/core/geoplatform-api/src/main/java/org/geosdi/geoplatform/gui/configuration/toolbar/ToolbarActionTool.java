@@ -35,40 +35,32 @@
  */
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
+import org.geosdi.geoplatform.gui.configuration.ActionToolType;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
+
 /**
- * @author giuseppe
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class ToolbarActionTool extends ToolbarGenericTool {
+public class ToolbarActionTool extends WidgetGenericTool<IGeoPlatformToolbar> {
 
     private static final long serialVersionUID = 1096150448864737345L;
     //
-    private ToolbarActionToolType type;
+    private ActionToolType type;
 
     /**
      * @return the type
      */
-    public ToolbarActionToolType getType() {
+    public ActionToolType getType() {
         return type;
     }
 
     /**
-     * @param type
-     *            the type to set
+     * @param type the type to set
      */
-    public void setType(ToolbarActionToolType type) {
+    public void setType(ActionToolType type) {
         this.type = type;
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "ToolbarActionTool{" + super.toString()
-                + ", type=" + type + '}';
     }
 
     @Override
@@ -84,5 +76,16 @@ public class ToolbarActionTool extends ToolbarGenericTool {
                 toolbar.addApplicationButton(this);
                 break;
         }
+    }
+
+    /**
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ToolbarActionTool{" + super.toString()
+                + ", type=" + type + '}';
     }
 }

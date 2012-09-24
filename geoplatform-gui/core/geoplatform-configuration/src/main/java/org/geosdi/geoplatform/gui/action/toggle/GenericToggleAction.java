@@ -33,38 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.toolbar;
+package org.geosdi.geoplatform.gui.action.toggle;
 
-import org.geosdi.geoplatform.gui.configuration.GenericTool;
-import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class ToolbarGenericTool extends GenericTool {
+public abstract class GenericToggleAction extends ToolbarMapAction {
 
-    private static final long serialVersionUID = -1736620819230416390L;
+    protected GeoPlatformMap mapWidget;
 
-    /**
-     * Check the permission of the user logged and call the method for creation.
-     * If the permission was not found the tool will not be created.
-     *
-     * @param toolbar
-     */
-    public void buildTool(IGeoPlatformToolbar toolbar) {
-        Boolean permission = GPAccountLogged.getInstance().
-                hasComponentPermission(this.getId());
-        if (permission != null) {
-            super.enabled &= permission;
-            this.create(toolbar);
-        }
+    public GenericToggleAction(GeoPlatformMap mapWidget,
+            AbstractImagePrototype image, String tooltip) {
+        super(image, tooltip);
+        this.mapWidget = mapWidget;
     }
 
     /**
-     * Each component will be added into toolbar itself
+     * Method to change State when a Toogle Button is pressed
      *
-     * @param toolbar
      */
-    protected abstract void create(IGeoPlatformToolbar toolbar);
+    protected abstract void changeButtonState();
 }

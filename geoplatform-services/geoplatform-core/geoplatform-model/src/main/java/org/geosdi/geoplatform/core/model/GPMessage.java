@@ -213,8 +213,8 @@ public class GPMessage implements Serializable {
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(" id=").append(id);
-        str.append(", recipient=").append(recipient);
-        str.append(", sender=").append(sender);
+        str.append(", recipient=").append(recipient.getNaturalID());
+        str.append(", sender=").append(sender.getNaturalID());
         str.append(", creationDate=").append(creationDate);
         str.append(", subject=").append(subject);
         str.append(", text=").append(text);

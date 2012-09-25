@@ -33,38 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.event;
+package org.geosdi.geoplatform.gui.client.config;
 
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.widget.LoginWidget;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
-import org.geosdi.geoplatform.gui.impl.map.event.GPLoginHandler;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.inject.client.GinModules;
+import com.google.gwt.inject.client.Ginjector;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UserLoginManager implements GPLoginHandler {
+@GinModules(value = {SecurityGinConfigurator.class})
+public interface SecurityGinInjector extends Ginjector {
 
-    private LoginWidget loginWidget;
+    public static class MainInjector {
 
-    public UserLoginManager(LoginWidget loginWidget) {
-        this.loginWidget = loginWidget;
-        GPHandlerManager.addHandler(TYPE, this);
-    }
+        private static SecurityGinInjector instance;
 
-    @Override
-    public void showUserLogin(GwtEvent event) {
-        LayoutManager.getInstance().getStatusMap().setStatus(
-                "Session Timeout.",
-                EnumSearchStatus.STATUS_NO_SEARCH.toString());
-        LayoutManager.getInstance().getViewport().mask("Session Timeout",
-                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-        this.loginWidget.setGwtEventOnSuccess(event);
+        private MainInjector() {
+        }
 
-        this.loginWidget.showSessionExpiredLogin();
+        public static SecurityGinInjector getInstance() {
+            if (instance == null) {
+                instance = GWT.create(SecurityGinInjector.class);
+            }
+            return instance;
+        }
     }
 }

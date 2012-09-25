@@ -120,21 +120,13 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
 
             @Override
             public void onSuccess(IGPAccountDetail resultDetails) {
+                boolean result = false;
                 if (resultDetails != null) {
-                    loginFailureMessage = "";
-                    loginError.setText("");
-                    showProgressBar();
-                    GPAccountLogged.getInstance().setAccountDetail(resultDetails);
-                    status.setStatus(
-                            LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
-                            LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
-                    sessionLoginWidget.setUserLogger(resultDetails.getName());
-                    Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), resultDetails.getTreeOptions());
-                    Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), resultDetails);
+                    executeLoginOperations(resultDetails);
+                    result = true;
                     //loginXMPPClient(ivUser, password.getValue(), result.getHostXmppServer());
-                    loginDone();
-                    checkSSO = true;
                 }
+                LoginWidget.super.continueLoginProcesFromSSo(result);
             }
         });
         return checkSSO;
@@ -162,16 +154,21 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                     @Override
                     public void onSuccess(IGPAccountDetail result) {
                         loginFailureMessage = "";
-                        GPAccountLogged.getInstance().setAccountDetail(result);
-                        status.setStatus(
-                                LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
-                                LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
-                        sessionLoginWidget.setUserLogger(userName.getValue());
-                        Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), result.getTreeOptions());
-                        Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), result);
+                        showProgressBar();
+                        executeLoginOperations(result);
                         loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
                     }
                 });
+    }
+
+    private void executeLoginOperations(IGPAccountDetail resultDetails) {
+        status.setStatus(
+                LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
+                LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
+        GPAccountLogged.getInstance().setAccountDetail(resultDetails);
+        sessionLoginWidget.setUserLogger(resultDetails.getName());
+        Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), resultDetails.getTreeOptions());
+        Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), resultDetails);
     }
 
     @Override

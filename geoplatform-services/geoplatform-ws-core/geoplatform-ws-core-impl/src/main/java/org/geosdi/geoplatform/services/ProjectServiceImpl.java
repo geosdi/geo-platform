@@ -677,18 +677,28 @@ class ProjectServiceImpl {
     // === Folder / Project
     // =========================================================================
     /**
-     * @see GeoPlatformService#getRootFoldersByProjectID(java.lang.Long)
+     * @see GeoPlatformService#getProjectWithRootFolders(java.lang.Long)
      */
-    public List<FolderDTO> getRootFoldersByProjectID(Long projectID)
+    public ProjectDTO getProjectWithRootFolders(Long projectID)
             throws ResourceNotFoundFault {
-        List<GPFolder> foundAccountFolders = folderDao.searchRootFolders(projectID);
-        return FolderDTO.convertToFolderDTOList(foundAccountFolders);
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+        ProjectDTO projectDTO = new ProjectDTO(project);
+
+        // Root Folders
+        List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
+        logger.debug("\n*** rootFolders:\n{}", rootFolders);
+
+        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
+        projectDTO.setRootFolders(rootFoldersDTO);
+
+        return projectDTO;
     }
 
     /**
-     * @see GeoPlatformService#getExpandedElementsByProjectID(java.lang.Long)
+     * @see GeoPlatformService#getProjectWithExpandedElements(java.lang.Long)
      */
-    public ProjectDTO getExpandedElementsByProjectID(Long projectID) throws ResourceNotFoundFault {
+    public ProjectDTO getProjectWithExpandedElements(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
         ProjectDTO projectDTO = new ProjectDTO(project);
@@ -903,7 +913,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                        folderDTO);
+                                                              folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -925,10 +935,10 @@ class ProjectServiceImpl {
                 GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                            (RasterLayerDTO) element);
+                                                                  (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                            (VectorLayerDTO) element);
+                                                                  (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);

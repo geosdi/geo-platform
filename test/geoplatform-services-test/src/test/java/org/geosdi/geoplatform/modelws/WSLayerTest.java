@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -59,7 +60,7 @@ import org.junit.Test;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class WSLayerTest extends ServiceTest {
 
@@ -93,11 +94,11 @@ public class WSLayerTest extends ServiceTest {
 
         // "rootFolderA" ---> "rasterLayer1"
         idRaster1 = createAndInsertRasterLayer(rootFolderA, titleRaster1, "name_" + titleRaster1,
-                "abstract_" + titleRaster1, 5, spatialReferenceSystem, urlServer);
+                                               "abstract_" + titleRaster1, 5, spatialReferenceSystem, urlServer);
         raster1 = gpWSClient.getRasterLayer(idRaster1);
         // "rootFolderA" ---> "vectorLayer1"
         idVector1 = createAndInsertVectorLayer(rootFolderA, titleVector1, "name_" + titleVector1,
-                "abstract_" + titleVector1, 4, spatialReferenceSystem, urlServer);
+                                               "abstract_" + titleVector1, 4, spatialReferenceSystem, urlServer);
         vector1 = gpWSClient.getVectorLayer(idVector1);
         //
         rootFolderA.setPosition(6);
@@ -106,11 +107,11 @@ public class WSLayerTest extends ServiceTest {
 
         // "rootFolderB" ---> "rasterLayer2"
         idRaster2 = createAndInsertRasterLayer(rootFolderB, titleRaster2, "name_" + titleRaster2,
-                "abstract_" + titleRaster2, 2, spatialReferenceSystem, urlServer);
+                                               "abstract_" + titleRaster2, 2, spatialReferenceSystem, urlServer);
         raster2 = gpWSClient.getRasterLayer(idRaster2);
         // "rootFolderB" ---> "vectorLayer2"
         idVector2 = createAndInsertVectorLayer(rootFolderB, titleVector2, "name_" + titleVector2,
-                "abstract_" + titleVector2, 1, spatialReferenceSystem, urlServer);
+                                               "abstract_" + titleVector2, 1, spatialReferenceSystem, urlServer);
         vector2 = gpWSClient.getVectorLayer(idVector2);
         //
         rootFolderB.setPosition(3);
@@ -183,8 +184,11 @@ public class WSLayerTest extends ServiceTest {
         boolean erased = gpWSClient.deleteLayer(idRaster1);
         Assert.assertTrue("Deletion of the layer rasterLayer1", erased);
 
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest);
+        Assert.assertNotNull("projectWithRootFolders null", projectWithRootFolders);
+
         // Get root folders for project
-        List<FolderDTO> folderList = gpWSClient.getRootFoldersByProjectID(idProjectTest);
+        List<FolderDTO> folderList = projectWithRootFolders.getRootFolders();
 
         // Assert on the structure of project's folders
         Assert.assertEquals("assertEquals folderList.getList().size()", folderList.size(), 2);
@@ -225,12 +229,12 @@ public class WSLayerTest extends ServiceTest {
 
         int totalElementsOfProject = gpWSClient.getNumberOfElementsProject(idProjectTest);
         Assert.assertEquals("Initial totalElementsOfProject",
-                6, totalElementsOfProject);  // SetUp() added 2 folders + 4 layers
+                            6, totalElementsOfProject);  // SetUp() added 2 folders + 4 layers
 
         String titleLayerToTest = "layerToTest";
         GPRasterLayer layerToTest = new GPRasterLayer();
         super.createLayer(layerToTest, rootFolderB, titleLayerToTest, "name_" + titleLayerToTest,
-                "abstract_" + titleLayerToTest, 3, spatialReferenceSystem, urlServer);
+                          "abstract_" + titleLayerToTest, 3, spatialReferenceSystem, urlServer);
 
         GPLayerInfo layerInfo = new GPLayerInfo();
         layerInfo.setKeywords(layerInfoKeywords);
@@ -242,10 +246,10 @@ public class WSLayerTest extends ServiceTest {
 
         // Adding new layer to user's root folder B
         long idLayerToTest = gpWSClient.saveAddedLayerAndTreeModifications(projectTest.getId(),
-                rootFolderB.getId(), layerToTest, descendantsMapData);
+                                                                           rootFolderB.getId(), layerToTest, descendantsMapData);
 
         Assert.assertEquals("totalElementsOfProject after added",
-                totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
+                            totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
 
         this.checkState(new int[]{7, 6, 5, 4, 2, 1}, new int[]{2, 3}, "before removing");
 
@@ -255,7 +259,7 @@ public class WSLayerTest extends ServiceTest {
         gpWSClient.saveDeletedLayerAndTreeModifications(idLayerToTest, descendantsMapData);
 
         Assert.assertEquals("totalElementsOfProject after deleted",
-                totalElementsOfProject, gpWSClient.getNumberOfElementsProject(idProjectTest));
+                            totalElementsOfProject, gpWSClient.getNumberOfElementsProject(idProjectTest));
 
         this.checkInitialState("after removing");
     }
@@ -322,9 +326,9 @@ public class WSLayerTest extends ServiceTest {
         try {
             GPRasterLayer raster = new GPRasterLayer();
             super.createLayer(raster, rootFolderA, null, "", "",
-                    5, spatialReferenceSystem, urlServer); // Title must be NOT NULL
+                              5, spatialReferenceSystem, urlServer); // Title must be NOT NULL
             gpWSClient.saveAddedLayerAndTreeModifications(projectTest.getId(),
-                    rootFolderA.getId(), raster, descendantsMapData);
+                                                          rootFolderA.getId(), raster, descendantsMapData);
             Assert.fail("Add layer must fail because title value is null");
         } catch (Exception e) {
             this.checkInitialState("transaction test");
@@ -346,9 +350,9 @@ public class WSLayerTest extends ServiceTest {
 
             GPRasterLayer raster = new GPRasterLayer();
             super.createLayer(raster, rootFolderA, null, "", "",
-                    5, spatialReferenceSystem, urlServer); // Title must be NOT NULL
+                              5, spatialReferenceSystem, urlServer); // Title must be NOT NULL
             gpWSClient.saveAddedLayerAndTreeModifications(projectTest.getId(),
-                    rootFolderA.getId(), raster, descendantsMapData);
+                                                          rootFolderA.getId(), raster, descendantsMapData);
             Assert.fail("Add layer must fail because title value is null");
         } catch (IllegalParameterFault e) {
             try {
@@ -426,7 +430,7 @@ public class WSLayerTest extends ServiceTest {
         // "rootFolderA" ---> "rasterLayer3"
         GPRasterLayer rasterLayer3 = new GPRasterLayer();
         super.createLayer(rasterLayer3, rootFolderA, titleRaster3, "", "",
-                7, spatialReferenceSystem, newUrlServer);
+                          7, spatialReferenceSystem, newUrlServer);
         GPLayerInfo layerInfo = new GPLayerInfo();
         layerInfo.setKeywords(layerInfoKeywords);
         layerInfo.setQueryable(false);
@@ -435,7 +439,7 @@ public class WSLayerTest extends ServiceTest {
         GPVectorLayer vectorLayer3 = new GPVectorLayer();
         vectorLayer3.setLayerType(GPLayerType.POINT);
         super.createLayer(vectorLayer3, rootFolderA, titleVector3, "", "",
-                6, spatialReferenceSystem, newUrlServer);
+                          6, spatialReferenceSystem, newUrlServer);
         //
         ArrayList<GPLayer> arrayList = new ArrayList<GPLayer>();
         arrayList.add(rasterLayer3);
@@ -447,7 +451,7 @@ public class WSLayerTest extends ServiceTest {
         descendantsMapData.setDescendantsMap(map);
 
         return gpWSClient.saveAddedLayersAndTreeModifications(projectTest.getId(),
-                rootFolderA.getId(), arrayList, descendantsMapData);
+                                                              rootFolderA.getId(), arrayList, descendantsMapData);
     }
 
     private void checkInitialState(String info)

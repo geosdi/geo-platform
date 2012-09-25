@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import org.geosdi.geoplatform.gui.client.icons.GeoPlatformIcons;
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.icons.GeoPlatformIcons;
 import org.geosdi.geoplatform.gui.client.images.GeoPlatformImages;
 
 /**

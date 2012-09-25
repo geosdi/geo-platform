@@ -33,37 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.action.editor;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.geosdi.geoplatform.gui.action.EditorMapAction;
+import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureOperation;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.control.SelectFeature;
-
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public abstract class GenericFeatureAction extends ToolbarMapAction {
+public class ClearMapAction extends EditorMapAction {
 
-    protected GeoPlatformMap mapWidget;
-    protected GenericFeatureOperation featureOperation;
+    private GeoPlatformMap mapWidget;
 
-    public GenericFeatureAction(GeoPlatformMap theMapWidget,
-                                AbstractImagePrototype image, String tooltip) {
-        super(image, tooltip);
-
+    public ClearMapAction(GeoPlatformMap theMapWidget) {
+        super(Resources.ICONS.clearMap(), "Clear Map");
         this.mapWidget = theMapWidget;
-
-        this.featureOperation = ((MapLayoutWidget) this.mapWidget).getMapControl().getFeatureOperation();
     }
 
+    /**
+     * (non-Javadoc)
+     *
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     */
     @Override
-    public SelectFeature getMapControl() {
-        return this.featureOperation.getControl();
+    public void componentSelected(ButtonEvent ce) {
+        ((MapLayoutWidget) mapWidget).clearMap();
     }
 }

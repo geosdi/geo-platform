@@ -35,13 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
+
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  *
  */
-public class IconInToolbar extends ToolbarGenericTool {
-
+public class IconInToolbar extends WidgetGenericTool<IGeoPlatformToolbar> {
+    
     private static final long serialVersionUID = 1982533388514947046L;
     //
     private String text;
@@ -70,7 +72,7 @@ public class IconInToolbar extends ToolbarGenericTool {
         return "IconInToolbar{" + super.toString()
                 + ", text=" + text + '}';
     }
-
+    
     @Override
     protected void create(IGeoPlatformToolbar toolbar) {
         toolbar.addIconInToolbar(this);

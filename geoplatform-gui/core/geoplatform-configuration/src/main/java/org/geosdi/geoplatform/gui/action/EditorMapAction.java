@@ -33,32 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.toolbar;
+package org.geosdi.geoplatform.gui.action;
 
-import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformToolbar {
+public abstract class EditorMapAction extends ToolbarMapAction implements
+        IEditorMapAction {
 
-    void addSeparator();
+    protected GeoPlatformButtonObserver editorOberver;
 
-    void addApplicationButton(ToolbarActionTool tool);
+    public EditorMapAction(AbstractImagePrototype image, String tooltip) {
+        super(image, tooltip);
+    }
 
-    void addMapButton(ToolbarActionTool tool);
+    protected void changeButtonState() {
+        if ((editorOberver.isButtonPressed())
+                && (!editorOberver.getButtonPressed().getId().equals(
+                getButton().getId()))) {
+            editorOberver.changeButtonState();
+        }
+    }
 
-    void addMapToggleButton(ToolbarActionTool tool);
-
-    void addMapToogleButton(ToolbarActionEditorTool tool);
-
-    void addIconInToolbar(IconInToolbar tool);
-
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
-
-    void addFillToolItem();
+    @Override
+    public void setEditorObserver(GeoPlatformButtonObserver theEditorObserver) {
+        this.editorOberver = theEditorObserver;
+    }
 }

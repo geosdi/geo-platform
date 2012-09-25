@@ -35,18 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.featureinfo.action;
 
-import org.geosdi.geoplatform.gui.action.MapToggleAction;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.featureinfo.widget.GPFeatureInfoWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GetFeatureInfoAction extends MapToggleAction {
 
@@ -60,7 +59,8 @@ public class GetFeatureInfoAction extends MapToggleAction {
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
@@ -80,7 +80,7 @@ public class GetFeatureInfoAction extends MapToggleAction {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
      */
     @Override

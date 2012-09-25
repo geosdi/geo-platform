@@ -33,44 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.client.widget.map.control.crud.OperationType;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.action.toolbar.ModifyFeatureAction;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class DeleteFeatureAction extends GenericFeatureAction {
+public class ReshapeAction extends ModifyFeatureAction {
 
-    public DeleteFeatureAction(GeoPlatformMap theMapWidget) {
-        super(theMapWidget, BasicWidgetResources.ICONS.erase(), "Delete Feature");
+    public ReshapeAction(GeoPlatformMap mapWidget) {
+        super(mapWidget, Resources.ICONS.shape(), "Reshape");
     }
 
+    /**
+     * (non-Javadoc)
+     *
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if (((MapLayoutWidget) this.mapWidget).getFeaturesNumber() == 0) {
-            GeoPlatformMessage.alertMessage("Feaures Service",
-                                            "There are no Features to erase.");
-            return;
+        if (this.editorOberver.isButtonPressed()) {
+            super.changeButtonState();
         }
 
-        if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed()) {
-            ((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
+        if (mapWidget.isFeatureOperationEnable()) {
+            mapWidget.deactivateFeatureOperation();
         }
 
-        ((MapLayoutWidget) mapWidget).deactivateModifyFeature();
+        // if (!mapWidget.isModifyFeatureEnable())
+        mapWidget.deactivateModifyFeature();
+        mapWidget.activateModifyFeature();
 
-        if (!((MapLayoutWidget) mapWidget).isFeatureOperationEnable()) {
-            ((MapLayoutWidget) mapWidget).activateFeatureOperation();
-        }
-
-        this.featureOperation.setOperation(OperationType.DELETE);
+        this.control.setMode(ModifyFeature.RESHAPE);
     }
 }

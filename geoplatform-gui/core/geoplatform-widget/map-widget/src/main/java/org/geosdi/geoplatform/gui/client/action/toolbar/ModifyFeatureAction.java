@@ -35,25 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.action.EditorMapAction;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public abstract class ModifyFeatureAction extends ToolbarMapAction {
+public abstract class ModifyFeatureAction extends EditorMapAction {
 
     protected GeoPlatformMap mapWidget;
     protected ModifyFeature control;
 
     public ModifyFeatureAction(GeoPlatformMap mapWidget,
-                               AbstractImagePrototype image, String tooltip) {
+            AbstractImagePrototype image, String tooltip) {
         super(image, tooltip);
 
         this.mapWidget = mapWidget;

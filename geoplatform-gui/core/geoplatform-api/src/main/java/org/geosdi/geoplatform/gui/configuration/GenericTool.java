@@ -40,7 +40,7 @@ import java.io.Serializable;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GenericTool
         implements Serializable, Comparable<GenericTool> {
@@ -59,8 +59,7 @@ public abstract class GenericTool
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(String id) {
         this.id = id;
@@ -74,8 +73,7 @@ public abstract class GenericTool
     }
 
     /**
-     * @param enabled
-     *            the enabled to set
+     * @param enabled the enabled to set
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
@@ -89,28 +87,21 @@ public abstract class GenericTool
     }
 
     /**
-     * @param order
-     *            the order to set
+     * @param order the order to set
      */
     public void setOrder(int order) {
         this.order = order;
     }
 
-    /**
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        return "id=" + id
-                + ", enabled=" + enabled
-                + ", order=" + order;
+        return "GenericTool{ " + "id = " + id + ", enabled = " + enabled
+                + ", order = " + order + '}';
     }
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override

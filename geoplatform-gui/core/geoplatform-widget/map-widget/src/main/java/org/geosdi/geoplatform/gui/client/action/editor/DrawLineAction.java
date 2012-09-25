@@ -33,44 +33,68 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
-
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
+package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import org.geosdi.geoplatform.gui.action.toggle.editor.EditorMapToggleAction;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.control.Control;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class RotateAction extends ModifyFeatureAction {
+public class DrawLineAction extends EditorMapToggleAction {
 
-    public RotateAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, Resources.ICONS.rotate(), "Rotate");
+    /**
+     * @param theMapWidget
+     *
+     */
+    public DrawLineAction(GeoPlatformMap theMapWidget) {
+        super(theMapWidget, Resources.ICONS.drawLineFeature(), "Draw Line");
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if (this.mapWidget.getButtonBar().isTogglePressed()) {
-            mapWidget.getButtonBar().changeButtonState();
+        ToggleButton button = (ToggleButton) ce.getSource();
+
+        super.changeButtonState();
+
+        if (button.isPressed()) {
+            editorOberver.setButtonPressed(button);
+            this.mapWidget.activateDrawLineFeature();
+        } else {
+            this.mapWidget.deactivateDrawLineFeature();
         }
+    }
 
-        if (mapWidget.isFeatureOperationEnable()) {
-            mapWidget.deactivateFeatureOperation();
-        }
+    /**
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
+     */
+    @Override
+    public Control getMapControl() {
+        return ((MapLayoutWidget) mapWidget).getDrawLineFeature();
+    }
 
-        // if (!mapWidget.isModifyFeatureEnable())
-        mapWidget.deactivateModifyFeature();
-        mapWidget.activateModifyFeature();
-
-        this.control.setMode(ModifyFeature.ROTATE);
+    /**
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+     */
+    @Override
+    public void disableControl() {
+        getMapControl().disable();
     }
 }

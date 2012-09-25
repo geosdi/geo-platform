@@ -33,32 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.toolbar;
+package org.geosdi.geoplatform.gui.action;
 
-import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.widget.EditorActionTool;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformToolbar {
+public interface IOpenEditorMapAction {
 
-    void addSeparator();
-
-    void addApplicationButton(ToolbarActionTool tool);
-
-    void addMapButton(ToolbarActionTool tool);
-
-    void addMapToggleButton(ToolbarActionTool tool);
-
-    void addMapToogleButton(ToolbarActionEditorTool tool);
-
-    void addIconInToolbar(IconInToolbar tool);
-
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
-
-    void addFillToolItem();
+    void setActionTools(List<EditorActionTool> actionTools);
 }

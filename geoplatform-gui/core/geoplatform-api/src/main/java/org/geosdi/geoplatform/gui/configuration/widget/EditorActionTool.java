@@ -33,32 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.toolbar;
+package org.geosdi.geoplatform.gui.configuration.widget;
 
-import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import org.geosdi.geoplatform.gui.configuration.ActionToolType;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformToolbar {
+public class EditorActionTool extends WidgetGenericTool<IGeoPlatformEditor> {
 
-    void addSeparator();
+    private static final long serialVersionUID = 2955451820569371624L;
+    //
+    private ActionToolType type;
 
-    void addApplicationButton(ToolbarActionTool tool);
+    /**
+     * @return the type
+     */
+    public ActionToolType getType() {
+        return type;
+    }
 
-    void addMapButton(ToolbarActionTool tool);
+    /**
+     * @param type the type to set
+     */
+    public void setType(ActionToolType type) {
+        this.type = type;
+    }
 
-    void addMapToggleButton(ToolbarActionTool tool);
+    @Override
+    protected void create(IGeoPlatformEditor container) {
+        switch (type) {
+            case BUTTON:
+                container.addButton(this);
+                break;
+            case TOGGLE:
+                container.addToogleButton(this);
+                break;
+        }
+    }
 
-    void addMapToogleButton(ToolbarActionEditorTool tool);
-
-    void addIconInToolbar(IconInToolbar tool);
-
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
-
-    void addFillToolItem();
+    @Override
+    public String toString() {
+        return "PanelActionTool {" + super.toString()
+                + "type = " + type + '}';
+    }
 }

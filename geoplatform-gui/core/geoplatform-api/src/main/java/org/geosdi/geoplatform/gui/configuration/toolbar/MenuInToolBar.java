@@ -37,14 +37,15 @@ package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 import java.util.Collections;
 import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
 
 /**
  * @author giuseppe
  *
  */
-public class MenuInToolBar extends ToolbarGenericTool {
-
+public class MenuInToolBar extends WidgetGenericTool<IGeoPlatformToolbar> {
+    
     private static final long serialVersionUID = -6673336990643383453L;
     //
     private String text;
@@ -58,8 +59,7 @@ public class MenuInToolBar extends ToolbarGenericTool {
     }
 
     /**
-     * @param text
-     *            the text to set
+     * @param text the text to set
      */
     public void setText(String text) {
         this.text = text;
@@ -73,8 +73,7 @@ public class MenuInToolBar extends ToolbarGenericTool {
     }
 
     /**
-     * @param tools
-     *            the tools to set
+     * @param tools the tools to set
      */
     public void setTools(List<MenuBarClientTool> tools) {
         Collections.sort(tools);
@@ -91,7 +90,7 @@ public class MenuInToolBar extends ToolbarGenericTool {
         return "MenuInToolBar{" + super.toString()
                 + ", text=" + text + '}';
     }
-
+    
     @Override
     protected void create(IGeoPlatformToolbar toolbar) {
         toolbar.addMenuInToolBar(this);

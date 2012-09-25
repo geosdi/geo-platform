@@ -39,8 +39,9 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeoPlatformButtonObserver {
 
@@ -54,8 +55,7 @@ public class GeoPlatformButtonObserver {
     }
 
     /**
-     * @param buttonPressed
-     *            the buttonPressed to set
+     * @param buttonPressed the buttonPressed to set
      */
     public void setButtonPressed(Button buttonPressed) {
         this.buttonPressed = buttonPressed;
@@ -79,6 +79,7 @@ public class GeoPlatformButtonObserver {
     }
 
     public boolean isSameButton(String buttonId) {
-        return this.buttonPressed != null ? this.buttonPressed.getId().equalsIgnoreCase(buttonId) : false;
+        return this.buttonPressed != null ? this.buttonPressed.getId().equalsIgnoreCase(
+                buttonId) : false;
     }
 }

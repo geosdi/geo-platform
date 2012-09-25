@@ -33,27 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
-
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+package org.geosdi.geoplatform.gui.action.toggle;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public abstract class MapToggleAction extends ToolbarMapAction {
+public abstract class MapToggleAction extends GenericToggleAction {
 
-    protected GeoPlatformMap mapWidget;
-
-    public MapToggleAction(GeoPlatformMap theMapWidget,
-                           AbstractImagePrototype image, String tooltip) {
-        super(image, tooltip);
-        this.mapWidget = theMapWidget;
+    public MapToggleAction(GeoPlatformMap mapWidget,
+            AbstractImagePrototype image, String tooltip) {
+        super(mapWidget, image, tooltip);
     }
 
+    @Override
     protected void changeButtonState() {
         if ((mapWidget.getButtonBar().isTogglePressed())
                 && (!mapWidget.getButtonBar().getPressedButton().getId().equals(

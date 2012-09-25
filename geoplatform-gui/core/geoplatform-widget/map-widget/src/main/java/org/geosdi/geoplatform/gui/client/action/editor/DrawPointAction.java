@@ -33,11 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-import org.geosdi.geoplatform.gui.action.MapToggleAction;
+import org.geosdi.geoplatform.gui.action.toggle.editor.EditorMapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -46,9 +46,9 @@ import org.gwtopenmaps.openlayers.client.control.Control;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class DrawPointAction extends MapToggleAction {
+public class DrawPointAction extends EditorMapToggleAction {
 
     public DrawPointAction(GeoPlatformMap mapWidget) {
         super(mapWidget, Resources.ICONS.drawPointFeature(), "Draw Point");
@@ -57,7 +57,8 @@ public class DrawPointAction extends MapToggleAction {
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
@@ -66,7 +67,7 @@ public class DrawPointAction extends MapToggleAction {
         super.changeButtonState();
 
         if (button.isPressed()) {
-            mapWidget.getButtonBar().setPressedButton(button);
+            editorOberver.setButtonPressed(button);
             this.mapWidget.activateDrawPointFeature();
         } else {
             this.mapWidget.deactivateDrawPointFeature();
@@ -85,7 +86,7 @@ public class DrawPointAction extends MapToggleAction {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
      */
     @Override

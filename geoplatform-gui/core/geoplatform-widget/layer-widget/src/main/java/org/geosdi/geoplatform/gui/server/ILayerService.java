@@ -60,6 +60,8 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
  */
 public interface ILayerService {
 
+    boolean isCurrentProjectShared(HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    
     GPClientProject loadDefaultProject(HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
     boolean shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject, HttpServletRequest httpServletRequest) throws GeoPlatformException;

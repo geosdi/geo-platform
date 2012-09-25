@@ -42,7 +42,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -148,10 +147,7 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
     }
 
     protected void showProgressBar() {
-        Element element = this.getParent().getElement();
-        if (element != null) {
-            element.getStyle().setDisplay(Display.NONE);
-        }
+        this.getParent().getElement().getStyle().setDisplay(Display.NONE);
 //        this.getElement().getStyle().setDisplay(Display.NONE);
 
         progressBar.setRunProgress(0.0, "");
@@ -160,7 +156,7 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
         timer = new Timer() {
             @Override
             public void run() {
-                progres = progres + 0.1;
+                progres += 0.1;
                 progressBar.setRunProgress(progres, userName.getValue());
                 if (progres > 1.0) {
                     progressBar.setRunProgress(1.0, "Done");

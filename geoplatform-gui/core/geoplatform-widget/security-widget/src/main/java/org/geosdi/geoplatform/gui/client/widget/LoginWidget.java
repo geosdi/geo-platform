@@ -154,7 +154,6 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                     @Override
                     public void onSuccess(IGPAccountDetail result) {
                         loginFailureMessage = "";
-                        showProgressBar();
                         executeLoginOperations(result);
                         loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
                     }
@@ -174,7 +173,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
     @Override
     public void loginDone() {
         if (loginFailureMessage != null && loginFailureMessage.equals("")) {
-            Timer t = new Timer() {
+            final Timer t = new Timer() {
                 @Override
                 public void run() {
                     Dispatcher.forwardEvent(eventOnSuccess);

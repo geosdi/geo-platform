@@ -36,8 +36,9 @@
 package org.geosdi.geoplatform.gui.impl;
 
 import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IToolbarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 
 /**
  * @author giuseppe
@@ -47,25 +48,28 @@ public class ToolbarGroupTool implements IToolbarContainerTool {
 
     private static final long serialVersionUID = 3032280115406824191L;
     //
-    private List<ToolbarGenericTool> groupTools;
+    private List<WidgetGenericTool<IGeoPlatformToolbar>> groupTools;
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.configuration.IToolbarGroupTool#getGroupTools() 
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.IToolbarGroupTool#getGroupTools()
      */
     @Override
-    public List<ToolbarGenericTool> getGroupTools() {
+    public List<WidgetGenericTool<IGeoPlatformToolbar>> getGroupTools() {
         return groupTools;
     }
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.configuration.IToolbarGroupTool#setGroupTools(java.util.List) 
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.IToolbarGroupTool#setGroupTools(java.util.List)
      */
     @Override
-    public void setGroupTools(List<ToolbarGenericTool> groupTools) {
+    public void setGroupTools(
+            List<WidgetGenericTool<IGeoPlatformToolbar>> groupTools) {
         this.groupTools = groupTools;
     }
 }

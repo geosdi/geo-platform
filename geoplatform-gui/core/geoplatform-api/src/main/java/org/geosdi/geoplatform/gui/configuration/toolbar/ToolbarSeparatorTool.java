@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
+
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class ToolbarSeparatorTool extends ToolbarGenericTool {
+public class ToolbarSeparatorTool extends WidgetGenericTool<IGeoPlatformToolbar> {
 
     private static final long serialVersionUID = 833485478615943744L;
     //

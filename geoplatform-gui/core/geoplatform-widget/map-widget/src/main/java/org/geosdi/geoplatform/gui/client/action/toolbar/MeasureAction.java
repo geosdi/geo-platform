@@ -35,16 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.action.MapToggleAction;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
- * 
+ *
  */
 public class MeasureAction extends MapToggleAction {
 
@@ -55,7 +54,8 @@ public class MeasureAction extends MapToggleAction {
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
@@ -76,7 +76,7 @@ public class MeasureAction extends MapToggleAction {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
      */
     @Override

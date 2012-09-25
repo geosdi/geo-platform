@@ -33,32 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.toolbar;
-
-import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+package org.geosdi.geoplatform.gui.configuration.widget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformToolbar {
+public interface IGeoPlatformEditor {
 
-    void addSeparator();
+    void addButton(EditorActionTool tool);
 
-    void addApplicationButton(ToolbarActionTool tool);
-
-    void addMapButton(ToolbarActionTool tool);
-
-    void addMapToggleButton(ToolbarActionTool tool);
-
-    void addMapToogleButton(ToolbarActionEditorTool tool);
-
-    void addIconInToolbar(IconInToolbar tool);
-
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
-
-    void addFillToolItem();
+    void addToogleButton(EditorActionTool tool);
 }

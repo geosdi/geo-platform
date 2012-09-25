@@ -33,68 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.action.editor;
 
-import org.geosdi.geoplatform.gui.action.MapToggleAction;
-import org.geosdi.geoplatform.gui.client.Resources;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.action.EditorMapAction;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureOperation;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.control.Control;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import org.gwtopenmaps.openlayers.client.control.SelectFeature;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class DrawLineAction extends MapToggleAction {
+public abstract class EditorFeatureAction extends EditorMapAction {
 
-    /**
-     * @param theMapWidget
-     * 
-     */
-    public DrawLineAction(GeoPlatformMap theMapWidget) {
-        super(theMapWidget, Resources.ICONS.drawLineFeature(), "Draw Line");
+    protected GeoPlatformMap mapWidget;
+    protected GenericFeatureOperation featureOperation;
+
+    public EditorFeatureAction(GeoPlatformMap theMapWidget,
+            AbstractImagePrototype image, String tooltip) {
+        super(image, tooltip);
+
+        this.mapWidget = theMapWidget;
+
+        this.featureOperation = ((MapLayoutWidget) this.mapWidget).getMapControl().getFeatureOperation();
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
-     */
     @Override
-    public void componentSelected(ButtonEvent ce) {
-        ToggleButton button = (ToggleButton) ce.getSource();
-
-        super.changeButtonState();
-
-        if (button.isPressed()) {
-            mapWidget.getButtonBar().setPressedButton(button);
-            this.mapWidget.activateDrawLineFeature();
-        } else {
-            this.mapWidget.deactivateDrawLineFeature();
-        }
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
-     */
-    @Override
-    public Control getMapControl() {
-        return ((MapLayoutWidget) mapWidget).getDrawLineFeature();
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
-     */
-    @Override
-    public void disableControl() {
-        getMapControl().disable();
+    public SelectFeature getMapControl() {
+        return this.featureOperation.getControl();
     }
 }

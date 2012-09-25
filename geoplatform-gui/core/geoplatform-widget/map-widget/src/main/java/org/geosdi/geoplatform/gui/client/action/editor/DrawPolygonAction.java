@@ -33,25 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.action.editor;
 
-import org.geosdi.geoplatform.gui.action.MapToggleAction;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import org.geosdi.geoplatform.gui.action.toggle.editor.EditorMapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.action.annotation.PersistButton;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.control.Control;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 @PersistButton(persist = true)
-public class DrawPolygonAction extends MapToggleAction {
+public class DrawPolygonAction extends EditorMapToggleAction {
 
     public DrawPolygonAction(GeoPlatformMap mapWidget) {
         super(mapWidget, Resources.ICONS.drawFeature(), "Draw Polygon");
@@ -60,7 +59,8 @@ public class DrawPolygonAction extends MapToggleAction {
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
@@ -69,7 +69,7 @@ public class DrawPolygonAction extends MapToggleAction {
         super.changeButtonState();
 
         if (button.isPressed()) {
-            mapWidget.getButtonBar().setPressedButton(button);
+            editorOberver.setButtonPressed(button);
             this.mapWidget.activateDrawFeature();
         } else {
             this.mapWidget.deactivateDrawFeature();

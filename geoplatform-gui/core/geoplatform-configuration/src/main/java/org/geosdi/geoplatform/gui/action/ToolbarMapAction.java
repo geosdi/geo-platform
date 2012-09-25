@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.action;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.gwtopenmaps.openlayers.client.control.Control;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public abstract class ToolbarMapAction extends ToolbarAction {

@@ -35,30 +35,54 @@
  */
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
-import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import java.util.Collections;
+import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.ActionToolType;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
+import org.geosdi.geoplatform.gui.configuration.widget.EditorActionTool;
 
 /**
+ * <p> This class is a particular {@link  WidgetGenericTool<IGeoPlatformToolbar>}
+ * which will always create a Toogle Button in the Toolbar with a particular
+ * action that will open a Editor Widget with all actions presente in
+ * {@link List<EditorActionTool>} </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformToolbar {
+public class ToolbarActionEditorTool extends ToolbarActionTool {
+    
+    private static final long serialVersionUID = 7506943119091753064L;
+    //
+    private List<EditorActionTool> tools;
+    
+    public ToolbarActionEditorTool() {
+        super.setType(ActionToolType.TOGGLE);
+    }
+    
+    @Override
+    protected void create(IGeoPlatformToolbar container) {
+        container.addMapToogleButton(this);
+    }
 
-    void addSeparator();
+    /**
+     * @return the tools
+     */
+    public List<EditorActionTool> getTools() {
+        return tools;
+    }
 
-    void addApplicationButton(ToolbarActionTool tool);
-
-    void addMapButton(ToolbarActionTool tool);
-
-    void addMapToggleButton(ToolbarActionTool tool);
-
-    void addMapToogleButton(ToolbarActionEditorTool tool);
-
-    void addIconInToolbar(IconInToolbar tool);
-
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
-
-    void addFillToolItem();
+    /**
+     * @param tools the tools to set
+     */
+    public void setTools(List<EditorActionTool> tools) {
+        Collections.sort(tools);
+        this.tools = tools;
+    }
+    
+    @Override
+    public String toString() {
+        return "ToolbarActionPanelTool{ " + super.toString()
+                + "tools = " + tools + '}';
+    }
 }

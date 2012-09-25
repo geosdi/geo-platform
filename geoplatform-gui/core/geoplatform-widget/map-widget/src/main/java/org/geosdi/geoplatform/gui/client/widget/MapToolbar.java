@@ -41,12 +41,13 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.action.GeoPlatformButtonObserver;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.toolbar.GPMapToolbarWidget;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
 import org.geosdi.geoplatform.gui.impl.map.IGeoPlatofomMapButtonBar;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class MapToolbar extends GPMapToolbarWidget
         implements IGeoPlatofomMapButtonBar {
@@ -57,10 +58,10 @@ public class MapToolbar extends GPMapToolbarWidget
      * Constructor
      *
      * @param mapLayoutWidget
-     * @param tools  
+     * @param tools
      */
     public MapToolbar(MapLayoutWidget mapLayoutWidget,
-                      List<ToolbarGenericTool> tools) {
+            List<WidgetGenericTool<IGeoPlatformToolbar>> tools) {
         super(mapLayoutWidget, tools);
         ((MapLayoutWidget) this.geoPlatformMap).setButtonBar(this);
         this.buttonObserver = new GeoPlatformButtonObserver();
@@ -96,7 +97,7 @@ public class MapToolbar extends GPMapToolbarWidget
     }
 
     /**
-     * 
+     *
      * @return Toolbar Elements Number
      */
     public int getItemsCount() {

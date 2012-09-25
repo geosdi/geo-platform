@@ -33,32 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.toolbar;
+package org.geosdi.geoplatform.gui.configuration;
 
-import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface IGeoPlatformToolbar {
+public abstract class WidgetGenericTool<C> extends GenericTool {
 
-    void addSeparator();
+    private static final long serialVersionUID = -436437354541234763L;
 
-    void addApplicationButton(ToolbarActionTool tool);
+    /**
+     * Check the permission of the user logged and call the method for creation.
+     * If the permission was not found the tool will not be created.
+     *
+     * @param toolbar
+     */
+    public void buildTool(C container) {
+        Boolean permission = GPAccountLogged.getInstance().
+                hasComponentPermission(this.getId());
+        if (permission != null) {
+            super.enabled &= permission;
+            this.create(container);
+        }
+    }
 
-    void addMapButton(ToolbarActionTool tool);
-
-    void addMapToggleButton(ToolbarActionTool tool);
-
-    void addMapToogleButton(ToolbarActionEditorTool tool);
-
-    void addIconInToolbar(IconInToolbar tool);
-
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
-
-    void addFillToolItem();
+    /**
+     * Each component will be added into Container itself
+     *
+     * @param C container
+     */
+    protected abstract void create(C container);
 }

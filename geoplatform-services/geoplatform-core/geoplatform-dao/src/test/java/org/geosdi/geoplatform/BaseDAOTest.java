@@ -478,7 +478,7 @@ public abstract class BaseDAOTest {
         this.insertBindingUserProject(userTest, userProject,
                                       BasePermission.ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(viewerTest, viewerProject,
-                                      BasePermission.READ.getMask(), true);
+                                      BasePermission.ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(gsUserTest, gsUserProject,
                                       BasePermission.ADMINISTRATION.getMask(), true);
         //

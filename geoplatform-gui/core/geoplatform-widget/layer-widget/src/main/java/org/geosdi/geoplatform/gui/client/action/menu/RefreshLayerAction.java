@@ -105,7 +105,7 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
                             SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
                 } else {
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "The Layer will not be reloaded " + refreshTimeEnum.getValue() + " seconds",
+                            "The Layer will not be reloaded any more",
                             SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
                 }
                 layerSelected.setRefreshTime(refreshTimeEnum.getValue());

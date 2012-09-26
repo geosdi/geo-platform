@@ -118,7 +118,7 @@ public class SessionLoginWidget extends GPSecurityWidget {
                                     LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
                                     LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
                             GeoPlatformMessage.infoMessage("Login Error",
-                                                           caught.getMessage());
+                                    caught.getMessage());
                             ++reloginAttempts;
                         }
 
@@ -163,7 +163,7 @@ public class SessionLoginWidget extends GPSecurityWidget {
                 Dispatcher.forwardEvent(
                         GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
                 GeoPlatformMessage.infoMessage("Application Logout",
-                                               "A different user from the previous one is trying to connect to the application");
+                        "A different user from the previous one is trying to connect to the application");
                 userLogged = null;
                 Window.Location.reload();
             }

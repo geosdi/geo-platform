@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.editor.basic;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.util.Point;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
@@ -62,10 +63,12 @@ public class BasicEditorWidget extends GeoPlatformWindow {
     }
 
     public void show(List<EditorActionTool> actionTools,
-            GeoPlatformMap geoPlatformMap) {
+            GeoPlatformMap geoPlatformMap, Point p) {
         if (!super.isInitialized()) {
             this.editorPanel.injectValues(actionTools, geoPlatformMap);
+            super.setPagePosition(p.x, p.y + 25);
         }
+
         super.show();
     }
 

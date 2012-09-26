@@ -71,7 +71,9 @@ public class OpenEditorMapAction extends MapToggleAction
 
         if (button.isPressed()) {
             mapWidget.getButtonBar().setPressedButton(button);
-            this.editorWidget.show(actionTools, mapWidget);
+            
+            this.editorWidget.show(actionTools, mapWidget, button.getPosition(
+                    false));
         } else {
             this.editorWidget.hide();
         }

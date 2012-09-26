@@ -68,11 +68,11 @@ public class PrintUtility {
         templates.add(new PrintTemplate("A2 Portrait"));
         templates.add(new PrintTemplate("A1 Portrait"));
         templates.add(new PrintTemplate("A0 Portrait"));
-        templates.add(new PrintTemplate("A4 Paysage"));
-        templates.add(new PrintTemplate("A3 Paysage"));
-        templates.add(new PrintTemplate("A2 Paysage"));
-        templates.add(new PrintTemplate("A1 Paysage"));
-        templates.add(new PrintTemplate("A0 Paysage"));
+        templates.add(new PrintTemplate("A4 Landscape"));
+        templates.add(new PrintTemplate("A3 Landscape"));
+        templates.add(new PrintTemplate("A2 Landscape"));
+        templates.add(new PrintTemplate("A1 Landscape"));
+        templates.add(new PrintTemplate("A0 Landscape"));
         return templates;
     }
 }

@@ -47,8 +47,9 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  * <p> This is a Basic Editor to manage Areas of Interest or Emergency Areas.
  * <br/> This Editor not use standard OGC WFS but simple draw Line, Point or
  * Polygon on a OL Vector Layer. With this Widget is possible : <ul> <li>
- * <strong>Rotate Feature</strong> <strong>Resize Feature</strong> <strong>Drag
- * Feature</strong> <strong>Delete Feature</strong> </li> </ul> </p>
+ * <strong>Rotate Feature</strong> </li> <li> <strong>Resize Feature</strong>
+ * </li> <li> <strong>Drag Feature</strong> </li> <li> <strong>Delete
+ * Feature</strong> </li> </ul> </p>
  *
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

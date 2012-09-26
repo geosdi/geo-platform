@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -35,40 +35,31 @@
  */
 package org.geosdi;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.services.GPTrackingService;
-import org.junit.Before;
+import junit.framework.Assert;
+import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
-public class TestXmppMessage {
-
-    @Autowired(required = true)
-    private GPTrackingService trackingService;
-    private GPUser gpUser;
-
-    @Before
-    public void setUp() {
-        this.gpUser = new GPUser();
-        this.gpUser.setUsername("user");
-    }
-
+@ActiveProfiles(profiles = {"dev"})
+public class DAOInjectionTest {
+    
+    @Autowired
+    private GPAccountDAO accountDAO;
+    
     @Test
-    public void testMessage() {
-        trackingService.subscribeLayerNotification(this.gpUser.getUsername(), "Emite44444", "10-45-4555", 5);
-//        double i = 0;
-//        while (i < 9999999999999d) {
-//            i = i + 0.000001;
-//        }
+    public void testInjection() {
+        Assert.assertNotNull(accountDAO);
     }
 }

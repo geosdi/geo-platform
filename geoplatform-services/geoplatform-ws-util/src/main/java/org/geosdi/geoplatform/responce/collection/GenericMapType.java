@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,42 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi;
+package org.geosdi.geoplatform.responce.collection;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.services.GPTrackingService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
-public class TestXmppMessage {
+public class GenericMapType<K, V> {
 
-    @Autowired(required = true)
-    private GPTrackingService trackingService;
-    private GPUser gpUser;
+    private List<GenericEntryType<K, V>> entry = new ArrayList<GenericEntryType<K, V>>();
 
-    @Before
-    public void setUp() {
-        this.gpUser = new GPUser();
-        this.gpUser.setUsername("user");
+    public GenericMapType() {
     }
 
-    @Test
-    public void testMessage() {
-        trackingService.subscribeLayerNotification(this.gpUser.getUsername(), "Emite44444", "10-45-4555", 5);
-//        double i = 0;
-//        while (i < 9999999999999d) {
-//            i = i + 0.000001;
-//        }
+    public GenericMapType(Map<K, V> map) {
+        for (Map.Entry<K, V> e : map.entrySet()) {
+            entry.add(new GenericEntryType<K, V>(e));
+        }
+    }
+
+    public List<GenericEntryType<K, V>> getEntry() {
+        return entry;
+    }
+
+    public void setEntry(List<GenericEntryType<K, V>> entry) {
+        this.entry = entry;
     }
 }

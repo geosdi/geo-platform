@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,42 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi;
+package org.geosdi.geoplatform.responce.collection;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.services.GPTrackingService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import java.util.HashMap;
+import java.util.Map;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
-public class TestXmppMessage {
+public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapType<K, V>, Map<K, V>> {
 
-    @Autowired(required = true)
-    private GPTrackingService trackingService;
-    private GPUser gpUser;
+    @Override
+    public Map<K, V> unmarshal(GenericMapType<K, V> v) throws Exception {
+        HashMap<K, V> map = new HashMap<K, V>();
 
-    @Before
-    public void setUp() {
-        this.gpUser = new GPUser();
-        this.gpUser.setUsername("user");
+        for (GenericEntryType<K, V> entryType : v.getEntry()) {
+            map.put(entryType.getKey(), entryType.getValue());
+        }
+        return map;
     }
 
-    @Test
-    public void testMessage() {
-        trackingService.subscribeLayerNotification(this.gpUser.getUsername(), "Emite44444", "10-45-4555", 5);
-//        double i = 0;
-//        while (i < 9999999999999d) {
-//            i = i + 0.000001;
-//        }
+    @Override
+    public GenericMapType<K, V> marshal(Map<K, V> v) throws Exception {
+        GenericMapType<K, V> mapType = new GenericMapType<K, V>();
+
+        for (Map.Entry<K, V> entry : v.entrySet()) {
+            GenericEntryType<K, V> entryType = new GenericEntryType<K, V>();
+            entryType.setKey(entry.getKey());
+            entryType.setValue(entry.getValue());
+            mapType.getEntry().add(entryType);
+        }
+        return mapType;
     }
 }

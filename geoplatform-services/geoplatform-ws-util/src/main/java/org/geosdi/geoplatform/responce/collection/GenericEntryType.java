@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,42 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi;
+package org.geosdi.geoplatform.responce.collection;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.services.GPTrackingService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import java.util.Map;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
-public class TestXmppMessage {
+@XmlAccessorType(XmlAccessType.PROPERTY)
+public class GenericEntryType<K, V> {
 
-    @Autowired(required = true)
-    private GPTrackingService trackingService;
-    private GPUser gpUser;
+    private K key;
+    private V value;
 
-    @Before
-    public void setUp() {
-        this.gpUser = new GPUser();
-        this.gpUser.setUsername("user");
+    public GenericEntryType() {
     }
 
-    @Test
-    public void testMessage() {
-        trackingService.subscribeLayerNotification(this.gpUser.getUsername(), "Emite44444", "10-45-4555", 5);
-//        double i = 0;
-//        while (i < 9999999999999d) {
-//            i = i + 0.000001;
-//        }
+    public GenericEntryType(Map.Entry<K, V> e) {
+        key = e.getKey();
+        value = e.getValue();
+    }
+
+    @XmlElement
+    public K getKey() {
+        return key;
+    }
+
+    public void setKey(K key) {
+        this.key = key;
+    }
+
+    @XmlElement
+    public V getValue() {
+        return value;
+    }
+
+    public void setValue(V value) {
+        this.value = value;
     }
 }

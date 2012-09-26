@@ -35,29 +35,48 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
+import com.extjs.gxt.ui.client.Registry;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.action.NotificationCenterAction;
-import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
+import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveShared;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.ObservableGPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Singleton
-public class NotificationCenterActionProvider implements Provider<NotificationCenterAction> {
+public class IMementoSaveProvider implements Provider<IMementoSave> {
 
-    private NotificationPopupPanel notificationPopupPanel;
+    private IMementoSave mementoSave;
+    private boolean savedShareStatus;
+    private ObservableGPLayerSaveCache observable;
+    private PeekCacheEvent peekCacheEvent;
 
     @Inject
-    public NotificationCenterActionProvider(
-            NotificationPopupPanel notificationPopupPanel) {
-        this.notificationPopupPanel = notificationPopupPanel;
+    public IMementoSaveProvider(ObservableGPLayerSaveCache observable, PeekCacheEvent peekCacheEvent) {
+        this.observable = observable;
+        this.peekCacheEvent = peekCacheEvent;
     }
 
     @Override
-    public NotificationCenterAction get() {
-        return new NotificationCenterAction(this.notificationPopupPanel);
+    public IMementoSave get() {
+        GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.IS_CURRENT_PROJECT_SHARED.name());
+        if (this.mementoSave == null || clientProject == null || this.savedShareStatus != clientProject.isShared()) {
+            if (clientProject == null) {
+                this.mementoSave = new GPMementoSaveCache(observable);
+            } else {
+                this.savedShareStatus = clientProject.isShared();
+                this.mementoSave = clientProject.isShared() ? new GPMementoSaveShared(observable, peekCacheEvent)
+                        : new GPMementoSaveCache(observable);
+            }
+        }
+        return this.mementoSave;
     }
 }

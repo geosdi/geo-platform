@@ -39,11 +39,13 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -77,8 +79,10 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
         element.accept(this.visitorDisplay);
         if (isCacheable && !(element instanceof GPRootTreeNode)) {
             be.getItem().setChecked(!element.isChecked());
-            GPMementoSaveCache.getInstance().copyOriginalProperties(element);
+            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(element);
             be.getItem().setChecked(!element.isChecked());
+            mementoSave.putOriginalPropertiesInCache(memento);
         }
     }
 
@@ -87,7 +91,6 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
         memento.convertMementoToWs();
         if (memento.getRefBaseElement() instanceof FolderTreeNode) {
             LayerRemote.Util.getInstance().saveCheckStatusFolderAndTreeModifications(memento, new AsyncCallback<Boolean>() {
-
                 @Override
                 public void onFailure(Throwable caught) {
                     if (caught.getCause() instanceof GPSessionTimeout) {
@@ -101,7 +104,8 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
 
                 @Override
                 public void onSuccess(Boolean result) {
-                    GPMementoSaveCache.getInstance().remove(memento);
+                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    mementoSave.remove(memento);
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Save Check Folder Operation completed successfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());

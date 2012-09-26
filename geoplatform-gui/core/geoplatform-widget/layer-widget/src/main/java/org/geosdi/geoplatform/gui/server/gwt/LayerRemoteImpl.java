@@ -70,8 +70,8 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     private ILayerService layerService;
 
     @Override
-    public ArrayList<GPFolderClientInfo> loadUserFolders() throws GeoPlatformException {
-        return this.layerService.loadUserFolders(super.getThreadLocalRequest());
+    public GPClientProject loadDefaulProjectElements() throws GeoPlatformException {
+        return this.layerService.loadDefaulProjectElements(super.getThreadLocalRequest());
     }
 
     @Override

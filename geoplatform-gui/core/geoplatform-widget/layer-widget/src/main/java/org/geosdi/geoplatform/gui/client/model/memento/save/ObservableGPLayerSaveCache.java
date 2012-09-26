@@ -33,31 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.model.memento.save;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.action.NotificationCenterAction;
-import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Singleton
-public class NotificationCenterActionProvider implements Provider<NotificationCenterAction> {
-
-    private NotificationPopupPanel notificationPopupPanel;
-
-    @Inject
-    public NotificationCenterActionProvider(
-            NotificationPopupPanel notificationPopupPanel) {
-        this.notificationPopupPanel = notificationPopupPanel;
-    }
+public class ObservableGPLayerSaveCache extends Observable {
 
     @Override
-    public NotificationCenterAction get() {
-        return new NotificationCenterAction(this.notificationPopupPanel);
+    protected synchronized void setChanged() {
+        super.setChanged();
+    }
+
+    public void notifyObservers(LayerEvents o) {
+        super.notifyObservers(o);
     }
 }

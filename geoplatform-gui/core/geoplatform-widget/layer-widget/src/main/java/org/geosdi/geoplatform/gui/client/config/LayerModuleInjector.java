@@ -39,6 +39,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -49,19 +50,17 @@ public interface LayerModuleInjector extends Ginjector {
 
     public static class MainInjector {
 
-        private static LayerModuleInjector instance;
+        private static LayerModuleInjector instance = GWT.create(LayerModuleInjector.class);
 
         private MainInjector() {
         }
 
         public static LayerModuleInjector getInstance() {
-            if (instance == null) {
-                instance = GWT.create(LayerModuleInjector.class);
-            }
-
             return instance;
         }
     }
 
     public LoadMenuProjects getLoadMenuProject();
+
+    public IMementoSave getMementoSave();
 }

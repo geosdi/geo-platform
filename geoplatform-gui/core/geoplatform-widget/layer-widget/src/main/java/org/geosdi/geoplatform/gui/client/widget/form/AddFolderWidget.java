@@ -50,13 +50,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
@@ -204,7 +205,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                 this.entity));
         mementoSaveAdd.setDescendantMap(this.addVisitor.getFolderDescendantMap());
 
-        GPMementoSaveCache.getInstance().add(mementoSaveAdd);
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        mementoSave.add(mementoSaveAdd);
 
         clearComponents();
         LayoutManager.getInstance().getStatusMap().setStatus(
@@ -224,8 +226,6 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         if (!isInitialized()) {
             super.init();
         }
-        System.out.println("Tree status: " + this.tree);
-        System.out.println("Tree selection Model: " + this.tree.getSelectionModel());
         GPBeanTreeModel selectedItem = this.tree.getSelectionModel().getSelectedItem();
         if (selectedItem instanceof GPRootTreeNode) {
             this.tree.setExpanded(selectedItem, true, false);
@@ -266,7 +266,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
                     @Override
                     public void onSuccess(Long result) {
-                        GPMementoSaveCache.getInstance().remove(memento);
+                        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                        mementoSave.remove(memento);
                         LayoutManager.getInstance().getStatusMap().setStatus(
                                 "Folders saved successfully.",
                                 EnumSearchStatus.STATUS_SEARCH.toString());

@@ -59,8 +59,9 @@ import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
@@ -98,8 +99,8 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     private String suggestion = "";
 
     /**
-     *@param theTree 
-     * 
+     * @param theTree
+     *
      */
     public LoadWmsGetMapFromUrlWidget(TreePanel<GPBeanTreeModel> theTree) {
         super(true);
@@ -135,7 +136,6 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         this.save = new Button("Add", LayerResources.ICONS.addRasterLayer(),
                 new SelectionListener<ButtonEvent>() {
-
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         execute();
@@ -148,7 +148,6 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         clearComponents();
@@ -162,7 +161,6 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
     private void addListenerToUrlText() {
         this.urlText.addListener(Events.OnPaste, new Listener() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 if (checkUrl()) {
@@ -177,7 +175,6 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         });
 
         this.urlText.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (urlText.getValue() == null) {
@@ -235,7 +232,8 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
         mementoSaveLayer.setAddedLayers(MementoSaveBuilder.generateMementoLayerList(rasterList));
         mementoSaveLayer.setDescendantMap(this.addVisitor.getFolderDescendantMap());
-        GPMementoSaveCache.getInstance().add(mementoSaveLayer);
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        mementoSave.add(mementoSaveLayer);
 
         clearComponents();
         LayoutManager.getInstance().getStatusMap().setStatus(
@@ -346,7 +344,6 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
     private void verifyUrl(final boolean runExecute) {
         LayerRemoteImpl.Util.getInstance().checkWmsGetMapUrl(this.urlEncoding, new AsyncCallback<Boolean>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 save.disable();

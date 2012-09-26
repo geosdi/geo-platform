@@ -37,9 +37,10 @@ package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -105,7 +106,8 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
 
             @Override
             public void onSuccess(Boolean result) {
-                GPMementoSaveCache.getInstance().remove(memento);
+                IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                mementoSave.remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "Elements deleted successfully.",
                         EnumSearchStatus.STATUS_SEARCH.toString());

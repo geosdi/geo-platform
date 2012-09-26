@@ -553,7 +553,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+    public GPProject updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
         return projectServiceDelegate.updateDefaultProject(accountID, projectID);
     }
 
@@ -696,7 +696,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             boolean expanded)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.saveFolderProperties(folderID, name,
-                                                          checked, expanded);
+                checked, expanded);
     }
 
     @Override

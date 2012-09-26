@@ -42,11 +42,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
@@ -314,7 +316,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
             MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
             mementoSaveLayer.setAddedLayers(MementoSaveBuilder.generateMementoLayerList(layerList));
             mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
-            GPMementoSaveCache.getInstance().add(mementoSaveLayer);
+            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            mementoSave.add(mementoSaveLayer);
 
             this.featureInfoAddLayersEvent.setUrlServers(urlServer);
             MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
@@ -347,8 +350,10 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     private RasterTreeNode generateRasterTreeNode(GPShortLayerBean layer, String rasterAlias) {
         RasterTreeNode rasterTreeNode = this.generateRasterTreeNode(layer);
-        GPMementoSaveCache.getInstance().copyOriginalProperties(rasterTreeNode);
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(rasterTreeNode);
         rasterTreeNode.setAlias(rasterAlias);
+        mementoSave.putOriginalPropertiesInCache(memento);
         return rasterTreeNode;
     }
 
@@ -369,8 +374,10 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     private RasterTreeNode duplicateRaster(GPLayerBean layer, String alias) {
         RasterTreeNode raster = this.duplicateRaster(layer);
-        GPMementoSaveCache.getInstance().copyOriginalProperties(raster);
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(raster);
         raster.setAlias(alias);
+        mementoSave.putOriginalPropertiesInCache(memento);
         return raster;
     }
 

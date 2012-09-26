@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.model.memento.save;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
@@ -65,7 +66,6 @@ public class MementoSaveOperations {
         memento.convertMementoToWs();
         LayerRemote.Util.getInstance().saveAddedLayersAndTreeModifications(memento,
                 new AsyncCallback<ArrayList<Long>>() {
-
                     @Override
                     public void onFailure(Throwable caught) {
                         if (caught.getCause() instanceof GPSessionTimeout) {
@@ -81,7 +81,8 @@ public class MementoSaveOperations {
 
                     @Override
                     public void onSuccess(ArrayList<Long> result) {
-                        GPMementoSaveCache.getInstance().remove(memento);
+                        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                        mementoSave.remove(memento);
                         LayoutManager.getInstance().getStatusMap().setStatus(messageOk,
                                 EnumSearchStatus.STATUS_SEARCH.toString());
                         List<AbstractMementoLayer> listMementoLayers = memento.getAddedLayers();

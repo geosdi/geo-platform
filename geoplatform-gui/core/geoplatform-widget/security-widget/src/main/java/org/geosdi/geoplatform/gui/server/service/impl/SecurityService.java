@@ -144,8 +144,7 @@ public class SecurityService implements ISecurityService {
         } else {
             project = accountProject.getProject();
         }
-        this.sessionUtility.storeLoggedAccountAndDefaultProject(account, project.getId(),
-                httpServletRequest);
+        this.sessionUtility.storeLoggedAccountAndDefaultProject(account, project.getId(), httpServletRequest);
         GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
         List<GPMessage> unreadMessages = geoPlatformServiceClient.getUnreadMessagesByRecipient(account.getId());
         userDetail = this.dtoConverter.convertAccountToDTO(account, accountProject, viewport, unreadMessages);

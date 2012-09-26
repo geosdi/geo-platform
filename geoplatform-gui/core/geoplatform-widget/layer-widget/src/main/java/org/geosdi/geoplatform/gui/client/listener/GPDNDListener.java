@@ -11,10 +11,11 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -68,7 +69,8 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
             mementoSaveDND.setNewZIndex(changedElement.getzIndex());
             mementoSaveDND.setRefNewParent((parentDestination instanceof FolderTreeNode) ? (FolderTreeNode) parentDestination : null);
             mementoSaveDND.setDescendantMap(this.visitor.getFolderDescendantMap());
-            GPMementoSaveCache.getInstance().add(mementoSaveDND);
+            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            mementoSave.add(mementoSaveDND);
             this.isActiveDrop = false;
             this.isFolderDrop = false;
             this.checkerVisitor.realignViewState(changedElement);
@@ -91,7 +93,6 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
         if (memento.getRefBaseElement() instanceof FolderTreeNode) {
             LayerRemote.Util.getInstance().saveDragAndDropFolderAndTreeModifications(memento,
                     new AsyncCallback<Boolean>() {
-
                         @Override
                         public void onFailure(Throwable caught) {
                             if (caught.getCause() instanceof GPSessionTimeout) {
@@ -105,7 +106,8 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
 
                         @Override
                         public void onSuccess(Boolean result) {
-                            GPMementoSaveCache.getInstance().remove(memento);
+                            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                            mementoSave.remove(memento);
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Folder Drag&Drop operation saved successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());
@@ -115,7 +117,6 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
         } else if (memento.getRefBaseElement() instanceof GPLayerBean) {
             LayerRemote.Util.getInstance().saveDragAndDropLayerAndTreeModifications(memento,
                     new AsyncCallback<Boolean>() {
-
                         @Override
                         public void onFailure(Throwable caught) {
                             if (caught.getCause() instanceof GPSessionTimeout) {
@@ -129,7 +130,8 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
 
                         @Override
                         public void onSuccess(Boolean result) {
-                            GPMementoSaveCache.getInstance().remove(memento);
+                            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                            mementoSave.remove(memento);
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Layer Drag&Drop operation saved successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());

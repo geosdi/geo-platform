@@ -49,8 +49,10 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.SliderField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode.GPRasterKeyValue;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.binding.field.GPSliderField;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
@@ -63,7 +65,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean> {
 
@@ -86,7 +88,6 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         opacityFieldSet.setCollapsible(true);
 
         opacityFieldSet.addListener(Events.Collapse, new Listener<ComponentEvent>() {
-
             @Override
             public void handleEvent(ComponentEvent be) {
                 ((DisplayLayersTabItem) opacityFieldSet.getParent().getParent()).updateWindowSize();
@@ -114,7 +115,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
     /**
      * Create and set Slider Properties
-     * 
+     *
      */
     private void setSliderProperties() {
         this.slider = new Slider();
@@ -125,7 +126,6 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         slider.setMessage("{0}% opacity");
 
         slider.addListener(Events.Change, new Listener<SliderEvent>() {
-
             @Override
             public void handleEvent(SliderEvent be) {
                 opacityFieldBinding.setModelProperty(be.getNewValue());
@@ -137,16 +137,14 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
     /**
      * Create Plugin for Slider
-     * 
+     *
      * @return ComponentPlugin
      */
     private ComponentPlugin createSliderPlugin() {
         ComponentPlugin plugin = new ComponentPlugin() {
-
             @Override
             public void init(Component component) {
                 component.addListener(Events.Render, new Listener<ComponentEvent>() {
-
                     @Override
                     public void handleEvent(ComponentEvent be) {
                         El elem = sliderField.el();
@@ -163,10 +161,10 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
     /**
      * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
-     * @email  giuseppe.lascaleia@geosdi.org
-     * 
+     * @email giuseppe.lascaleia@geosdi.org
+     *
      * Internal Class GPLayerAliasFieldBinding to map bi-directional Binding
-     * 
+     *
      */
     private class GPRasterOpacityFieldBinding extends GPFieldBinding {
 
@@ -177,16 +175,19 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         @Override//From view to model
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel) GPLayerDisplayBinding.this.getModel());
+            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((GPLayerTreeModel) GPLayerDisplayBinding.this.getModel());
             ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).setOpacity(((Integer) val).floatValue() / 100);
+            mementoSave.putOriginalPropertiesInCache(memento);
             opacityEvent.setLayerBean((GPRasterBean) GPLayerDisplayBinding.this.getModel());
             GPHandlerManager.fireEvent(opacityEvent);
         }
 
         /**
-         * Updates the field's value and original value with the model value. Updating
-         * the original value will reset the field to a non-dirty state.
-         * 
+         * Updates the field's value and original value with the model value.
+         * Updating the original value will reset the field to a non-dirty
+         * state.
+         *
          * @param updateOriginalValue true to update the original value
          */
         @Override//From model to view

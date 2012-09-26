@@ -33,31 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.model.memento.save;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.action.NotificationCenterAction;
-import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
+import java.util.ListIterator;
+import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
+import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@Singleton
-public class NotificationCenterActionProvider implements Provider<NotificationCenterAction> {
+public interface IMementoSave {
 
-    private NotificationPopupPanel notificationPopupPanel;
+    boolean add(IMemento<ISave> memento);
 
-    @Inject
-    public NotificationCenterActionProvider(
-            NotificationPopupPanel notificationPopupPanel) {
-        this.notificationPopupPanel = notificationPopupPanel;
-    }
+    void cleanOperationsRefToDeletedElement(GPBeanTreeModel gpBeanTreeModel);
 
-    @Override
-    public NotificationCenterAction get() {
-        return new NotificationCenterAction(this.notificationPopupPanel);
-    }
+    void clear();
+
+    AbstractMementoOriginalProperties copyOriginalProperties(GPBeanTreeModel element);
+
+    void putOriginalPropertiesInCache(AbstractMementoOriginalProperties memento);
+
+    ObservableGPLayerSaveCache getObservable();
+
+    void setObservable(ObservableGPLayerSaveCache observable);
+
+    boolean isEmpty();
+
+    IMemento<ISave> peek();
+
+    IMemento<ISave> peekLast();
+
+    IMemento<ISave> poll();
+
+    ListIterator<IMemento<ISave>> listIterator();
+
+    boolean remove(Object o);
 }

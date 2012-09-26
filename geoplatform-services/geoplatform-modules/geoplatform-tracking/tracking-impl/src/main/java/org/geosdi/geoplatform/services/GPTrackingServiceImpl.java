@@ -39,6 +39,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import javax.jws.WebService;
+import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.packet.Message;
 import org.quartz.*;
@@ -59,8 +60,12 @@ public class GPTrackingServiceImpl implements GPTrackingService,
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private XMPPConnection connection;
     private ConnectionConfiguration config;
+    //
     @Autowired
     private TrackingScheduler scheduler;
+    // 
+    @Autowired
+    private GPAccountDAO accountDao;
 
     public GPTrackingServiceImpl(String host_xmpp_server,
             String port_xmpp_server,

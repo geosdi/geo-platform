@@ -51,8 +51,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@WebService(endpointInterface = "org.geosdi.geoplatform.services.GPTrackingService")
-public class GPTrackingServiceImpl implements GPTrackingService, InitializingBean {
+@WebService(endpointInterface = "org.geosdi.geoplatform."
++ "services.GPTrackingService")
+public class GPTrackingServiceImpl implements GPTrackingService,
+        InitializingBean {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private XMPPConnection connection;
@@ -60,9 +62,11 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     @Autowired
     private TrackingScheduler scheduler;
 
-    public GPTrackingServiceImpl(String host_xmpp_server, String port_xmpp_server,
+    public GPTrackingServiceImpl(String host_xmpp_server,
+            String port_xmpp_server,
             String username_xmpp_server, String password_xmpp_server) {
-        config = new ConnectionConfiguration(host_xmpp_server, Integer.parseInt(port_xmpp_server));
+        config = new ConnectionConfiguration(host_xmpp_server, Integer.parseInt(
+                port_xmpp_server));
         connection = new XMPPConnection(config);
         this.login(username_xmpp_server, password_xmpp_server);
     }
@@ -85,7 +89,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     @Override
     public boolean unscribeLayerNotification(String username, String layerUUID) {
         TriggerKey triggerKey = new TriggerKey(username + ":" + layerUUID,
-                TrackingScheduler.TRACKING_GROUP);
+                                               TrackingScheduler.TRACKING_GROUP);
         return this.unscribeLayerNotification(triggerKey);
     }
 
@@ -104,7 +108,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     public void subscribeLayerNotification(String username, String emiteResource,
             String layerUUID, int secondToRefresh) {
         TriggerKey triggerKey = new TriggerKey(username + ":" + layerUUID,
-                TrackingScheduler.TRACKING_GROUP);
+                                               TrackingScheduler.TRACKING_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.add(Calendar.SECOND, secondToRefresh);
         Trigger trigger = TriggerBuilder.newTrigger().forJob(
@@ -116,7 +120,8 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
                 withIntervalInSeconds(secondToRefresh).
                 withMisfireHandlingInstructionFireAndProceed()).
                 build();
-        trigger.getJobDataMap().put(SendTrackingMessageJob.GP_TRACKING_SERVICE, this);
+        trigger.getJobDataMap().put(SendTrackingMessageJob.GP_TRACKING_SERVICE,
+                                    this);
         String receiver = username + "@" + this.connection.getHost();
         String messageReceiver = receiver + '/' + emiteResource;
 //        RosterGroup rosterGroup = connection.getRoster().getGroup("sitdpc-share");

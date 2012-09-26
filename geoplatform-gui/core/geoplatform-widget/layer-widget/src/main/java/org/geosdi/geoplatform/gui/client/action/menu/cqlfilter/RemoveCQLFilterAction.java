@@ -37,8 +37,10 @@ package org.geosdi.geoplatform.gui.client.action.menu.cqlfilter;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.impl.map.event.CQLFilterLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -66,8 +68,10 @@ public class RemoveCQLFilterAction extends MenuAction {
             throw new IllegalArgumentException("The CQL Filter can't be applied to a folder");
         }
         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        GPMementoSaveCache.getInstance().copyOriginalProperties(layerSelected);
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
         layerSelected.setCqlFilter("");
+        mementoSave.putOriginalPropertiesInCache(memento);
         cqlFilterLayerMapEvent.setLayerBean(layerSelected);
         GPHandlerManager.fireEvent(cqlFilterLayerMapEvent);
         treePanel.refresh(layerSelected);

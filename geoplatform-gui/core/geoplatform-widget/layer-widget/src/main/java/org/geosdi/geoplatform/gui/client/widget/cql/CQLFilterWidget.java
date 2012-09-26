@@ -40,7 +40,9 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.impl.map.event.CQLFilterLayerMapEvent;
@@ -75,8 +77,10 @@ public class CQLFilterWidget extends GeoPlatformWindow {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-                        GPMementoSaveCache.getInstance().copyOriginalProperties(layerSelected);
+                        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
                         layerSelected.setCqlFilter(filterTextArea.getValue());
+                        mementoSave.putOriginalPropertiesInCache(memento);
                         cqlFilterLayerMapEvent.setLayerBean(layerSelected);
                         GPHandlerManager.fireEvent(cqlFilterLayerMapEvent);
                         treePanel.refresh(layerSelected);

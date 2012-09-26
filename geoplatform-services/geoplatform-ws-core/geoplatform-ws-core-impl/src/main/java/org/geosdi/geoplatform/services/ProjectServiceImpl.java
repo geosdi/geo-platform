@@ -343,7 +343,7 @@ class ProjectServiceImpl {
      * @see GeoPlatformService#updateDefaultProject(java.lang.Long,
      * java.lang.Long)
      */
-    public boolean updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+    public GPProject updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
@@ -352,9 +352,9 @@ class ProjectServiceImpl {
 
         GPAccountProject defaultAccountProject = accountProjectDao.forceAsDefaultProject(accountID, projectID);
         if (defaultAccountProject == null) {
-            return false;
+            return null;
         }
-        return true;
+        return project;
     }
     //</editor-fold>
 
@@ -637,7 +637,7 @@ class ProjectServiceImpl {
                     newAccountProject.setAccountAndProject(newAccount, project);
                     newAccountProject.setPermissionMask(BasePermission.READ.getMask());
                     logger.debug("\n*** Create a new relation of sharing for Account \"{}\"",
-                                 newAccount.getNaturalID());
+                            newAccount.getNaturalID());
                     accountProjectDao.persist(newAccountProject);
                 }
             }
@@ -645,7 +645,7 @@ class ProjectServiceImpl {
             // Delete the remaining relations of sharing
             for (Map.Entry<Long, GPAccountProject> e : sharingMap.entrySet()) {
                 logger.debug("\n*** Delete the relation of sharing for Account \"{}\"",
-                             e.getValue().getAccount().getNaturalID());
+                        e.getValue().getAccount().getNaturalID());
                 accountProjectDao.remove(e.getValue());
             }
 
@@ -749,7 +749,7 @@ class ProjectServiceImpl {
         }
 
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                                                    subFoldersMap, mapProjectFolders);
+                subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);

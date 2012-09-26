@@ -332,6 +332,7 @@ public class DTOLayerConverter {
         if (owner != null && owner instanceof UserDTO) {
             clientProject.setOwner(this.convertToGPSimpleUser((UserDTO) owner));
         }
+        clientProject.setRootFolders(this.convertOnlyFolders(projectDTO.getRootFolders()));
         return clientProject;
     }
 

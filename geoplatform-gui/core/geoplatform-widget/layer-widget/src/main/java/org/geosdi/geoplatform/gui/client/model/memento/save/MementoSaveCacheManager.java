@@ -39,6 +39,8 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.event.shared.GwtEvent;
+import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -53,13 +55,13 @@ import org.geosdi.geoplatform.gui.puregwt.savecache.SaveCacheHandlerManager;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+@Singleton
 public class MementoSaveCacheManager implements GPSaveCacheHandler {
 
     private final String MESSAGE = "There are unsaved operations on tree.\n"
             + "Do you want to save your changes before proceed?";
-
     private static PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
-    
+
     public MementoSaveCacheManager() {
         GPHandlerManager.addHandler(TYPE, this);
     }
@@ -67,7 +69,8 @@ public class MementoSaveCacheManager implements GPSaveCacheHandler {
 //    public void processCache(GwtEvent event, MessageBox messageBox) {
     @Override
     public void processCache(final GwtEvent event) {
-        if (GPMementoSaveCache.getInstance().isEmpty()) {
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        if (mementoSave.isEmpty()) {
             SaveCacheHandlerManager.fireEvent(event);
         } else {
 //            messageBox.show();
@@ -77,7 +80,6 @@ public class MementoSaveCacheManager implements GPSaveCacheHandler {
             LayoutManager.getInstance().getViewport().mask("Unsaved Operations",
                     SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
             GeoPlatformMessage.confirmMessage("Unsaved Operations", MESSAGE, new Listener<MessageBoxEvent>() {
-
                 @Override
                 public void handleEvent(MessageBoxEvent be) {
                     if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {

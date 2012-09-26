@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import java.util.ListIterator;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
@@ -47,24 +48,25 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
- * 
+ *
  * This class is usefull on sync application version to delete the add operation
  * from cache after a remove operation that interest the same object
  */
 public class MementoSaveCacheUtility {
 
     /**
-     * 
+     *
      * @return true if a creational memento was removed
      */
     public static boolean cleanCacheFromSaveAddOperation(GPBeanTreeModel element) {
         boolean condition = false;
-        IMemento<ISave> memento = null;
-        for (ListIterator<IMemento<ISave>> it = GPMementoSaveCache.getInstance().listIterator(); it.hasNext();) {
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMemento<ISave> memento;
+        for (ListIterator<IMemento<ISave>> it = mementoSave.listIterator(); it.hasNext();) {
             memento = it.next();
             if (verifyCondition(element, memento)) {
                 System.out.println("Ho trovato la creazione");
-                GPMementoSaveCache.getInstance().remove(memento);
+                mementoSave.remove(memento);
                 condition = true;
                 break;
             }
@@ -85,8 +87,8 @@ public class MementoSaveCacheUtility {
     private static boolean verifyLayerCondition(GPLayerTreeModel layer, IMemento<ISave> memento) {
         boolean condition = false;
         if (memento instanceof MementoSaveAddedLayers
-                && ((MementoSaveAddedLayers) memento).getAddedLayers().size() == 1 &&
-                ((MementoSaveAddedLayers) memento).getAddedLayers().get(0).getRefBaseElement().equals(layer)) {
+                && ((MementoSaveAddedLayers) memento).getAddedLayers().size() == 1
+                && ((MementoSaveAddedLayers) memento).getAddedLayers().get(0).getRefBaseElement().equals(layer)) {
             condition = true;
         }
         return condition;

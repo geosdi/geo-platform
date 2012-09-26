@@ -92,6 +92,9 @@ public class GPMessage implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     //
+    @Column(length = 100)
+    private String subject;
+    //
     @Column(columnDefinition = "TEXT")
     private String text;
     //
@@ -100,6 +103,9 @@ public class GPMessage implements Serializable {
     //
     @Column
     private String commands;
+    //
+    @Column
+    private String commandsProperties;
 
     public Long getId() {
         return id;
@@ -131,6 +137,14 @@ public class GPMessage implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getText() {
@@ -187,16 +201,26 @@ public class GPMessage implements Serializable {
         commands = command.name();
     }
 
+    public String getCommandsProperties() {
+        return commandsProperties;
+    }
+
+    public void setCommandsProperties(String commandsProperties) {
+        this.commandsProperties = commandsProperties;
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(" id=").append(id);
-        str.append(", recipient=").append(recipient);
-        str.append(", sender=").append(sender);
+        str.append(", recipient=").append(recipient.getNaturalID());
+        str.append(", sender=").append(sender.getNaturalID());
         str.append(", creationDate=").append(creationDate);
+        str.append(", subject=").append(subject);
         str.append(", text=").append(text);
         str.append(", isRead=").append(isRead);
         str.append(", commands=").append(commands);
+        str.append(", commandsProperties=").append(commandsProperties);
         return str.append('}').toString();
     }
 

@@ -40,7 +40,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
 import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeIconHandler;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -51,8 +51,8 @@ public abstract class MenuBaseSecureAction extends MenuSecureAction
 
     private AbstractImagePrototype image;
 
-    public MenuBaseSecureAction(String title, AbstractImagePrototype image, GPRole role) {
-        super(title, role);
+    public MenuBaseSecureAction(GPTrustedLevel trustedLevel, String title, AbstractImagePrototype image) {
+        super(trustedLevel, title);
         this.image = image;
     }
 

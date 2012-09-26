@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.toolbar;
 
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
@@ -85,7 +86,7 @@ public class LayerTreeToolbar extends GPTreeToolbar {
     }
     
     private void addElementsByRegion(TreeToolbarRegion region) {
-        List<ITreeToolbarPlugin> pluginsExcluded = new ArrayList<ITreeToolbarPlugin>();
+        List<ITreeToolbarPlugin> pluginsExcluded = Lists.newArrayList();
         
         for (ITreeToolbarPlugin element : TreeToolbarPluginManager.getToolbarPluginByRegion(region)) {
             String id = element.getId();

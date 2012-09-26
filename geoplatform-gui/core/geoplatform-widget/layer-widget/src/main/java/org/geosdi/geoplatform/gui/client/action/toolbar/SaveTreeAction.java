@@ -43,8 +43,9 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.SaveTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
@@ -78,7 +79,8 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
         Boolean permission = GPAccountLogged.getInstance().
                 hasComponentPermission(savePlugin.getId());
         if (permission) { // Observ only if there are the pemission to true
-            GPMementoSaveCache.getInstance().getObservable().addObserver(this);
+            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            mementoSave.getObservable().addObserver(this);
         }
     }
 
@@ -99,8 +101,9 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
     }
 
     public void peek() {
-        if (GPMementoSaveCache.getInstance().peek() != null) {
-            IMemento<ISave> memento = GPMementoSaveCache.getInstance().peek();
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        if (mementoSave.peek() != null) {
+            IMemento<ISave> memento = mementoSave.peek();
             memento.getAction().executeSave(memento);
         } else {
             this.displayEvent.setVisible(false);

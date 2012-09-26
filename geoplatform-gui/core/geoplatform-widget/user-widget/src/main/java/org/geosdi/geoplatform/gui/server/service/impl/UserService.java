@@ -86,16 +86,15 @@ public class UserService implements IUserService {
             String searchText, String organization, HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
 
-        int start = config.getOffset();
-
         SearchRequest srq = new SearchRequest(searchText);
 
         Long usersCount = this.geoPlatformServiceClient.getUsersCount(organization, srq);
 
+        int start = config.getOffset();
         int page = start == 0 ? start : start / config.getLimit();
 
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                config.getLimit(), page);
+                                                                config.getLimit(), page);
 
         List<UserDTO> userList = null;
         try {
@@ -105,7 +104,6 @@ public class UserService implements IUserService {
             }
         } catch (ResourceNotFoundFault rnnf) {
             throw new GeoPlatformException(rnnf.getMessage()); // TODO Better message
-
         }
 
         ArrayList<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
@@ -115,7 +113,7 @@ public class UserService implements IUserService {
         }
 
         return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
-                config.getOffset(), usersCount.intValue());
+                                                            config.getOffset(), usersCount.intValue());
     }
 
     @Override
@@ -192,10 +190,10 @@ public class UserService implements IUserService {
             userDTO.setEmailAddress(userDetail.getEmail());
 
             userID = geoPlatformServiceClient.updateOwnUser(userDTO,
-                    currentPlainPassword, newPlainPassword);
+                                                            currentPlainPassword, newPlainPassword);
 
             sessionUtility.storeLoggedAccount(this.dtoUserConverter.convertToGPUser(userDetail),
-                    httpServletRequest);
+                                              httpServletRequest);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         } catch (ResourceNotFoundFault rnnf) {

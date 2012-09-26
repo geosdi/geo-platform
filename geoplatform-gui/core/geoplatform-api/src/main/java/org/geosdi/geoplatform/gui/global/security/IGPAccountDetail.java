@@ -4,8 +4,11 @@
  */
 package org.geosdi.geoplatform.gui.global.security;
 
+import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.model.message.IGPClientMessage;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -17,6 +20,8 @@ import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 public interface IGPAccountDetail {
 
     String getName();
+    
+    String getUsername();
 
     String getOrganization();
 
@@ -26,7 +31,7 @@ public interface IGPAccountDetail {
 
     String getBaseLayer();
 
-    int getUserLevel();
+    GPTrustedLevel getTrustedLevel();
 
     String getAuthority();
 
@@ -49,4 +54,6 @@ public interface IGPAccountDetail {
      * otherwise null i.e. the component will not be visible
      */
     Boolean hasComponentPermission(String componentID);
+
+    public List<IGPClientMessage> getUnreadMessages();
 }

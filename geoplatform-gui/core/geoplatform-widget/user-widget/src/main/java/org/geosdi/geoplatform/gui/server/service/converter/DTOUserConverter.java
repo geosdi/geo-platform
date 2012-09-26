@@ -69,6 +69,7 @@ public class DTOUserConverter {
 
         GPAuthority authority = new GPAuthority();
         authority.setAuthority(userDetail.getAuthority());
+        authority.setTrustedLevel(userDetail.getTrustedLevel());
         user.setGPAuthorities(Arrays.asList(authority));
 
         return user;
@@ -87,6 +88,7 @@ public class DTOUserConverter {
         user.setExpired(userDTO.isExpired());
         user.setAuthority(this.convertToAuthority(userDTO.getRoles()));
         user.setOrganization(userDTO.getOrganization());
+        user.setTrustedLevel(userDTO.getTrustedLevel());
         return user;
     }
 
@@ -114,13 +116,17 @@ public class DTOUserConverter {
         return user;
     }
 
-    // NOTE: Now a user must have at most one role
+    /**
+     * A User must have at most one role.
+     *
+     * @todo user can have more roles
+     */
     private void extractGPAuthoritiesInToUser(GPUserManageDetail user, List<GPAuthority> authorities) {
         Iterator<GPAuthority> iterator = authorities.iterator();
         if (iterator.hasNext()) {
-            GPAuthority gPAuthority = iterator.next();
-            user.setAuthority(gPAuthority.getAuthority());
-            user.setUserLevel(gPAuthority.getUserLevel());
+            GPAuthority authority = iterator.next();
+            user.setAuthority(authority.getAuthority());
+            user.setTrustedLevel(authority.getTrustedLevel());
         }
     }
 }

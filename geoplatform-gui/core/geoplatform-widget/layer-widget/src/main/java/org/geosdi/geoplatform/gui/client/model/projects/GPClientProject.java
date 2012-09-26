@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.model.projects;
 
+import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
@@ -49,14 +51,10 @@ public class GPClientProject extends GeoPlatformBeanModel {
     private static final long serialVersionUID = 607645430816968379L;
     //
     private Long id;
-    private String name;
-    private String image;
-    private int numberOfElements;
-    private int version;
     private boolean shared;
-    private boolean defaultProject;
     private String message;
     private IGPUserSimpleDetail owner;
+    private List<GPFolderClientInfo> rootFolders;
 
     /**
      * @return the id
@@ -76,57 +74,53 @@ public class GPClientProject extends GeoPlatformBeanModel {
      * @return the name
      */
     public String getName() {
-        return name;
+        return super.get(GPClientProjectKey.PROJECT_NAME.toString());
     }
 
     /**
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
-        set(GPClientProjectKey.PROJECT_NAME.toString(), this.name);
+        set(GPClientProjectKey.PROJECT_NAME.toString(), name);
     }
 
     /**
      * @return the image
      */
     public String getImage() {
-        return image;
+        return super.get(GPClientProjectKey.PROJECT_IMAGE.toString());
     }
 
     public void setImage(String image) {
-        this.image = image;
-        set(GPClientProjectKey.PROJECT_IMAGE.toString(), this.image);
+        set(GPClientProjectKey.PROJECT_IMAGE.toString(), image);
     }
 
     /**
      * @return the numberOfElements
      */
     public int getNumberOfElements() {
-        return numberOfElements;
+        return (Integer) super.get(GPClientProjectKey.PROJECT_ELEMENTS.toString());
     }
 
     /**
      * @param numberOfElements the numberOfElements to set
      */
     public void setNumberOfElements(int numberOfElements) {
-        this.numberOfElements = numberOfElements;
-        set(GPClientProjectKey.PROJECT_ELEMENTS.toString(), this.numberOfElements);
+        set(GPClientProjectKey.PROJECT_ELEMENTS.toString(), numberOfElements);
     }
 
     /**
      * @return the version
      */
     public int getVersion() {
-        return version;
+        return (Integer) super.get(GPClientProjectKey.PROJECT_VERSION.toString());
     }
 
     /**
      * @param version the version to set
      */
     public void setVersion(int version) {
-        this.version = version;
-        set(GPClientProjectKey.PROJECT_VERSION.toString(), this.version);
+        set(GPClientProjectKey.PROJECT_VERSION.toString(), version);
     }
 
     public IGPUserSimpleDetail getOwner() {
@@ -160,19 +154,26 @@ public class GPClientProject extends GeoPlatformBeanModel {
      * @return the defaultProject
      */
     public boolean isDefaultProject() {
-        return defaultProject;
+        return (Boolean) super.get(GPClientProjectKey.DEFAULT_PROJECT.toString());
     }
 
     public String getDefaultProjectLabel() {
-        return defaultProject ? "DEFAULT PROJECT" : "";
+        return this.isDefaultProject() ? "DEFAULT PROJECT" : "";
+    }
+
+    public List<GPFolderClientInfo> getRootFolders() {
+        return rootFolders;
+    }
+
+    public void setRootFolders(List<GPFolderClientInfo> rootFolders) {
+        this.rootFolders = rootFolders;
     }
 
     /**
      * @param defaultProject the defaultProject to set
      */
     public void setDefaultProject(boolean defaultProject) {
-        this.defaultProject = defaultProject;
-        set(GPClientProjectKey.DEFAULT_PROJECT.toString(), this.defaultProject);
+        set(GPClientProjectKey.DEFAULT_PROJECT.toString(), defaultProject);
         set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.getDefaultProjectLabel());
     }
 
@@ -213,13 +214,10 @@ public class GPClientProject extends GeoPlatformBeanModel {
 
     @Override
     public String toString() {
-        return "GPClientProject{" + "id=" + id
-                + ", name=" + name
-                + ", image=" + image
-                + ", numberOfElements=" + numberOfElements
-                + ", version=" + version
-                + ", shared=" + shared
-                + ", defaultProject=" + defaultProject
-                + ", message=" + message + '}';
+        return "GPClientProject{" + "id=" + id + ", name=" + this.getName()
+                + ", image=" + this.getImage() + ", numberOfElements=" + this.getNumberOfElements()
+                + ", version=" + this.getVersion() + ", shared=" + shared
+                + ", defaultProject=" + this.isDefaultProject() + ", message="
+                + message + ", owner=" + owner + ", rootFolders=" + rootFolders + '}';
     }
 }

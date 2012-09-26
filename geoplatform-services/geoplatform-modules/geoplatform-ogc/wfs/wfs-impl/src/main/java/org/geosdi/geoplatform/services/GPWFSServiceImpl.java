@@ -108,4 +108,9 @@ public class GPWFSServiceImpl implements GPWFSService, InitializingBean {
         return layerSchema;
 
     }
+
+    @Override
+    public LayerSchemaDTO getFeature(String featureId) throws ResourceNotFoundFault {
+        return null;
+    }
 }

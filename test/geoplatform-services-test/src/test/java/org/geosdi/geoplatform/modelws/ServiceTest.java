@@ -53,6 +53,8 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -83,10 +85,6 @@ public abstract class ServiceTest {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected GeoPlatformService gpWSClient;
-    // Roles (default)
-    protected static final String ROLE_ADMIN = "Admin";
-    protected static final String ROLE_USER = "User";
-    protected static final String ROLE_VIEWER = "Viewer";
     // Organization
     protected static final String organizationNameTest = "geoSDI_ws_test";
     protected GPOrganization organizationTest;
@@ -125,7 +123,7 @@ public abstract class ServiceTest {
         this.setUpOrganization();
 
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, ROLE_USER);
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, GPRole.USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
@@ -165,7 +163,7 @@ public abstract class ServiceTest {
      * Create and insert a User.
      */
     protected long createAndInsertUser(String username,
-            GPOrganization organization, String... roles)
+            GPOrganization organization, GPRole... roles)
             throws IllegalParameterFault {
         GPUser user = this.createUser(username, organization, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
@@ -177,7 +175,7 @@ public abstract class ServiceTest {
     }
 
     protected GPUser createUser(String username, GPOrganization organization,
-            String... roles) {
+            GPRole... roles) {
         GPUser user = new GPUser();
         user.setOrganization(organization);
         user.setUsername(username);
@@ -194,15 +192,31 @@ public abstract class ServiceTest {
         return user;
     }
 
-    private List<GPAuthority> createAuthorities(String... roles) {
+    private List<GPAuthority> createAuthorities(GPRole... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
-        for (String role : roles) {
+        for (GPRole role : roles) {
             GPAuthority authority = new GPAuthority();
-            authority.setAuthority(role);
+            authority.setAuthority(role.getRole());
+
+            GPTrustedLevel trustedLevel = this.getTrustedLevelByRole(role);
+            authority.setTrustedLevel(trustedLevel);
 
             authorities.add(authority);
         }
         return authorities;
+    }
+
+    protected GPTrustedLevel getTrustedLevelByRole(GPRole role) {
+        switch (role) {
+            case ADMIN:
+                return GPTrustedLevel.FULL;
+            case USER:
+                return GPTrustedLevel.RESTRICT;
+            case VIEWER:
+                return GPTrustedLevel.NONE;
+            default:
+                return GPTrustedLevel.NONE;
+        }
     }
 
     /**
@@ -211,9 +225,7 @@ public abstract class ServiceTest {
     protected void deleteAccount(long accountID) {
         try {
             boolean check = gpWSClient.deleteAccount(accountID);
-            Assert.assertTrue(
-                    "Account with ID = " + accountID + " has not been eliminated",
-                    check);
+            Assert.assertTrue("Account with ID = " + accountID + " has not been eliminated", check);
         } catch (Exception e) {
             Assert.fail("Error while deleting Account with ID: " + accountID);
         }
@@ -225,9 +237,7 @@ public abstract class ServiceTest {
     protected void deleteOrganization(long organizationID) {
         try {
             boolean check = gpWSClient.deleteOrganization(organizationID);
-            Assert.assertTrue(
-                    "Organization with ID = " + organizationID + " has not been eliminated",
-                    check);
+            Assert.assertTrue("Organization with ID = " + organizationID + " has not been eliminated", check);
         } catch (Exception e) {
             Assert.fail(
                     "Error while deleting Organization with ID: " + organizationID);
@@ -240,9 +250,7 @@ public abstract class ServiceTest {
     protected void deleteFolder(long idFolder) {
         try {
             boolean check = gpWSClient.deleteFolder(idFolder);
-            Assert.assertTrue(
-                    "Folder with id = " + idFolder + " has not been eliminated",
-                    check);
+            Assert.assertTrue("Folder with id = " + idFolder + " has not been eliminated", check);
         } catch (Exception e) {
             Assert.fail("Error while deleting Folder with Id: " + idFolder);
         }

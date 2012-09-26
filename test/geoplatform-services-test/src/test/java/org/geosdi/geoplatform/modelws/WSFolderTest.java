@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Assert;
@@ -154,7 +155,10 @@ public class WSFolderTest extends ServiceTest {
         Assert.assertEquals("Number of all folders of ProjectTest before deleted",
                             7, totalFolders); // SetUp() added 2+5 folders
         //
-        List<FolderDTO> rootFolderList = gpWSClient.getRootFoldersByProjectID(idProjectTest);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest);
+        Assert.assertNotNull("projectWithRootFolders null", projectWithRootFolders);
+        
+        List<FolderDTO> rootFolderList = projectWithRootFolders.getRootFolders();
         Assert.assertNotNull("List of root folders is null", rootFolderList);
         Assert.assertEquals("Number of root folders of ProjectTest before deleted",
                             2, rootFolderList.size());
@@ -163,7 +167,10 @@ public class WSFolderTest extends ServiceTest {
         gpWSClient.deleteFolder(idRootFolderB);
 
         // "rootFolderA" ---> "folder1" & "folder2"
-        rootFolderList = gpWSClient.getRootFoldersByProjectID(idProjectTest);
+        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest);
+        Assert.assertNotNull("projectWithRootFolders null", projectWithRootFolders);
+        
+        rootFolderList = projectWithRootFolders.getRootFolders();
         Assert.assertNotNull("List of mod root folders is null", rootFolderList);
         Assert.assertEquals("Number of root folders of ProjectTest after deleted",
                             1, rootFolderList.size());

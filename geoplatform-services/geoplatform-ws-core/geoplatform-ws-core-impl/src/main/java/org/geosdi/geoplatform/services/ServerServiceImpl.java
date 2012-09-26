@@ -51,19 +51,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Server service delegate.
  *
  * @author Francesco Izzi - geoSDI
- * @email  francesco.izzi@geosdi.org
+ * @email francesco.izzi@geosdi.org
  */
-
-
 class ServerServiceImpl {
-    
+
+    private static final Logger logger = LoggerFactory.getLogger(ServerServiceImpl.class);
+    //
     private GPServerDAO serverDao;
     private GPOrganizationDAO organizationDao;
-    
-    final private static Logger logger = LoggerFactory.getLogger(ServerServiceImpl.class);
-    
+
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
      * @param serverDao the serverDao to set
@@ -79,8 +78,7 @@ class ServerServiceImpl {
         this.organizationDao = organizationDao;
     }
     //</editor-fold>
-    
-    
+
     public Long insertServer(GeoPlatformServer server) {
         /**
          * IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER *
@@ -155,7 +153,7 @@ class ServerServiceImpl {
 
         return server;
     }
-    
+
     private List<ServerDTO> convertToServerList(
             List<GeoPlatformServer> serverList) {
         List<ServerDTO> shortServers = new ArrayList<ServerDTO>(
@@ -167,8 +165,8 @@ class ServerServiceImpl {
         }
         return shortServers;
     }
-    
-     // The ID is important if is changed the URL of a server
+
+    // The ID is important if is changed the URL of a server
     public ServerDTO saveServer(Long id, String aliasServerName,
             String serverUrl, String organization)
             throws IllegalParameterFault {
@@ -201,11 +199,11 @@ class ServerServiceImpl {
 
         return new ServerDTO(server);
     }
-    
+
+    /**
+     ***************************************************************************
+     */
     private boolean isURLServerAlreadyExists(String serverUrl) {
         return serverDao.findByServerUrl(serverUrl) == null ? false : true;
     }
-    
-    
-    
 }

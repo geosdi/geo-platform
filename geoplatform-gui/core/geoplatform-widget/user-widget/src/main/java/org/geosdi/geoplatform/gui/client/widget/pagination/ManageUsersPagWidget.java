@@ -87,13 +87,13 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.search.setFieldLabel("Find User");
         this.userPropertiesWidget = new UserPropertiesWidget(super.store);
         super.addButton(1, new Button("Add User",
-                BasicWidgetResources.ICONS.logged_user(),
-                new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        showUserPropertiesWidget(true);
-                    }
-                }));
+                                      BasicWidgetResources.ICONS.logged_user(),
+                                      new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                showUserPropertiesWidget(true);
+            }
+        }));
     }
 
     @Override
@@ -105,7 +105,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     @Override
     public void setWindowProperties() {
         super.setHeading("GeoPlatform Users Management");
-        super.setSize(600, 490);
+        super.setSize(670, 490);
 
         super.addWindowListener(new WindowListener() {
             @Override
@@ -174,6 +174,12 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         roleColumn.setHeader("Role");
         roleColumn.setWidth(80);
         configs.add(roleColumn);
+        
+        ColumnConfig trustedLevelColumn = new ColumnConfig();
+        trustedLevelColumn.setId(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
+        trustedLevelColumn.setHeader("Trusted");
+        trustedLevelColumn.setWidth(70);
+        configs.add(trustedLevelColumn);
 
         ColumnConfig delColumn = new ColumnConfig();
         delColumn.setId("delColumn");
@@ -190,7 +196,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
     @Override
     public void setGridProperties() {
-        super.widget.setSize(530, 250);
+        super.widget.setSize(600, 250);
         super.widget.setAutoExpandColumn(GPSimpleUserKeyValue.NAME.toString());
     }
 
@@ -203,27 +209,27 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         searchStatus.setBusy("Retrive roles");
 
         UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
-                new AsyncCallback<ArrayList<String>>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        setSearchStatus(
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                "Error retrieving roles");
-                    }
+                                                      new AsyncCallback<ArrayList<String>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                setSearchStatus(
+                        SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
+                        "Error retrieving roles");
+            }
 
-                    @Override
-                    public void onSuccess(ArrayList<String> result) {
-                        setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
+            @Override
+            public void onSuccess(ArrayList<String> result) {
+                setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
                                 SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
 
-                        GPUserManageDetail userDetail;
-                        if (isNewUser) {
-                            userDetail = new GPUserManageDetail();
-                        } else {
-                            userDetail = widget.getSelectionModel().getSelectedItem();
-                        }
-                        userPropertiesWidget.show(userDetail, result);
-                    }
-                });
+                GPUserManageDetail userDetail;
+                if (isNewUser) {
+                    userDetail = new GPUserManageDetail();
+                } else {
+                    userDetail = widget.getSelectionModel().getSelectedItem();
+                }
+                userPropertiesWidget.show(userDetail, result);
+            }
+        });
     }
 }

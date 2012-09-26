@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.model.user;
 
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -45,13 +46,15 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleDetail {
 
     private static final long serialVersionUID = 6888698454407152018L;
+    //
+    private Long id; // For performance purpose: used for equals() and hashCode() methods
 
     /**
      * @return the id
      */
     @Override
     public Long getId() {
-        return super.get(GPSimpleUserKeyValue.ID.toString());
+        return this.id;
     }
 
     /**
@@ -59,7 +62,7 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
      */
     @Override
     public void setId(Long id) {
-        super.set(GPSimpleUserKeyValue.ID.toString(), id);
+        this.id = id;
     }
 
     /**
@@ -139,16 +142,54 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
      */
     @Override
     public void setAuthority(String role) {
-        super.set(GPSimpleUserKeyValue.AUTORITHY.toString(), role.toString());
+        super.set(GPSimpleUserKeyValue.AUTORITHY.toString(), role);
     }
 
+    /**
+     * @return the trustedLevel
+     */
     @Override
-    public int getUserLevel() {
-        return super.get(GPSimpleUserKeyValue.USER_LEVEL.toString(), 0);
+    public GPTrustedLevel getTrustedLevel() {
+        return super.get(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
     }
 
+    /**
+     * @param trustedLevel the trustedLevel to set
+     */
     @Override
-    public void setUserLevel(int userLevel) {
-        super.set(GPSimpleUserKeyValue.USER_LEVEL.toString(), userLevel);
+    public void setTrustedLevel(GPTrustedLevel trustedLevel) {
+        super.set(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString(), trustedLevel);
+    }
+
+    /**
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GPSimpleUser other = (GPSimpleUser) obj;
+        if (id == null || !this.id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
     }
 }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.global.security;
 
 import java.io.Serializable;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -71,7 +72,7 @@ public interface IGPUserSimpleDetail extends Serializable {
 
     void setAuthority(String role);
 
-    int getUserLevel();
+    GPTrustedLevel getTrustedLevel();
 
-    void setUserLevel(int userLevel);
+    void setTrustedLevel(GPTrustedLevel trustedLevel);
 }

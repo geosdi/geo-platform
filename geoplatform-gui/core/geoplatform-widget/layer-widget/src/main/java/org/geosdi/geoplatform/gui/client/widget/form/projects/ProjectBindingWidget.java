@@ -63,7 +63,7 @@ import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListV
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -189,7 +189,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     private void addButtons() {
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
         this.save = new GPSecureButton("Save", BasicWidgetResources.ICONS.save(),
-                new AddProjectAction(this, GPRole.ADMIN));
+                new AddProjectAction(GPTrustedLevel.HIGH, this));
         formPanel.addButton(save);
         buttonBinding = new FormButtonBinding(formPanel);
         buttonBinding.addButton(save);

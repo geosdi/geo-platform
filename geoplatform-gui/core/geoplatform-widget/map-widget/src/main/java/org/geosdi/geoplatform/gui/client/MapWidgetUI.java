@@ -36,28 +36,28 @@
 package org.geosdi.geoplatform.gui.client;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.menu.AboutGPAction;
+import org.geosdi.geoplatform.gui.client.action.menu.ViewportAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.MeasureAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.MeasureAreaAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomNextAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomOutAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomPreviousAction;
-import org.geosdi.geoplatform.gui.client.mvc.MapController;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.menu.AboutGPAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ViewportAction;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
+import org.geosdi.geoplatform.gui.client.mvc.MapController;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.featureinfo.action.GetFeatureInfoAction;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

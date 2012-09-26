@@ -41,7 +41,7 @@ package org.geosdi.geoplatform.gui.client.model;
  */
 public enum GeocodingKeyValue {
 
-    ID("id"), VISIBLE("visible"), DESCRIPTION("description"), ZERO_RESULTS(
+    ID("id"), VISIBLE("visible"), DESCRIPTION("description"), CITY("city"), COUNTRY("county"), ZERO_RESULTS(
     "ZERO_RESULTS");
 
     private String value;

@@ -74,30 +74,30 @@ public class UserWidgetUI implements EntryPoint {
 
     private void addUserWidgetAction() {
         menuRegistar.put(GuiComponentIDs.MANAGE_USERS,
-                new MenuActionCreator() {
-                    @Override
-                    public MenuAction createAction() {
-                        return new ManageUsersMenuAction();
-                    }
-                });
+                         new MenuActionCreator() {
+            @Override
+            public MenuAction createAction() {
+                return new ManageUsersMenuAction();
+            }
+        });
 
         menuRegistar.put(GuiComponentIDs.USER_OPTIONS_BUTTON,
-                new MenuActionCreator() {
-                    @Override
-                    public MenuAction createAction() {
-                        return new UserOptionsMenuAction();
-                    }
-                });
+                         new MenuActionCreator() {
+            @Override
+            public MenuAction createAction() {
+                return new UserOptionsMenuAction();
+            }
+        });
     }
 
     private void addRoleWidgetAction() {
         menuRegistar.put(GuiComponentIDs.MANAGE_ROLES,
-                new MenuActionCreator() {
-                    @Override
-                    public MenuAction createAction() {
-                        return new ManageRolesMenuAction();
-                    }
-                });
+                         new MenuActionCreator() {
+            @Override
+            public MenuAction createAction() {
+                return new ManageRolesMenuAction();
+            }
+        });
     }
 
     /**

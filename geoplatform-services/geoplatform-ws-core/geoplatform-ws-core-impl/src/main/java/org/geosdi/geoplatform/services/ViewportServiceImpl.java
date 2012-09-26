@@ -49,12 +49,14 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 
 /**
+ * Viewport service delegate.
+ *
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 class ViewportServiceImpl {
 
-    final private static Logger logger = LoggerFactory.getLogger(ViewportServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ViewportServiceImpl.class);
     // DAO
     private GPViewportDAO viewportDao;
     private GPAccountProjectDAO accountProjectDao;
@@ -68,23 +70,26 @@ class ViewportServiceImpl {
     }
 
     /**
-     *
-     * @param accountProjectDao
+     * @param accountProjectDao the accountProjectDao to set
      */
     public void setAccountProjectDao(GPAccountProjectDAO accountProjectDao) {
         this.accountProjectDao = accountProjectDao;
     }
-
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Viewport">
-    // ==========================================================================
+    // =========================================================================
     // === Viewport
-    // ==========================================================================
-    public Long insertViewport(Long accountProjectId, GPViewport viewport)
+    // =========================================================================
+    /**
+     * @see GeoPlatformService#insertViewport(java.lang.Long,
+     * org.geosdi.geoplatform.core.model.GPViewport)
+     */
+    public Long insertViewport(Long accountProjectID, GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        GPAccountProject accountProject = this.accountProjectDao.find(accountProjectId);
+        GPAccountProject accountProject = this.accountProjectDao.find(accountProjectID);
         if (accountProject == null) {
-            throw new ResourceNotFoundFault("AccountProject not found", accountProjectId);
+            throw new ResourceNotFoundFault("AccountProject not found", accountProjectID);
         }
         viewport.setAccountProject(accountProject);
         EntityCorrectness.checkViewport(viewport);
@@ -92,28 +97,36 @@ class ViewportServiceImpl {
         return viewport.getId();
     }
 
-    public void replaceViewportList(Long accountProjectId, ArrayList<GPViewport> viewportList)
+    /**
+     * @see GeoPlatformService#replaceViewportList(java.lang.Long,
+     * java.util.ArrayList)
+     */
+    public void replaceViewportList(Long accountProjectID, ArrayList<GPViewport> viewportList)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        GPAccountProject accountProject = this.accountProjectDao.find(accountProjectId);
+        GPAccountProject accountProject = this.accountProjectDao.find(accountProjectID);
         if (accountProject == null) {
-            throw new ResourceNotFoundFault("AccountProject not found", accountProjectId);
+            throw new ResourceNotFoundFault("AccountProject not found", accountProjectID);
         }
-        List<GPViewport> oldViewportList = this.viewportDao.findByAccountProjectID(accountProjectId);
+        List<GPViewport> oldViewportList = this.viewportDao.findByAccountProjectID(accountProjectID);
         for (GPViewport viewport : oldViewportList) {
             this.viewportDao.remove(viewport);
         }
         if (viewportList != null) {
             for (GPViewport viewport : viewportList) {
-                this.insertViewport(accountProjectId, viewport);
+                this.insertViewport(accountProjectID, viewport);
             }
         }
     }
 
-    public void saveOrUpdateViewportList(Long accountProjectId, ArrayList<GPViewport> viewportList)
+    /**
+     * @see GeoPlatformService#saveOrUpdateViewportList(java.lang.Long,
+     * java.util.ArrayList)
+     */
+    public void saveOrUpdateViewportList(Long accountProjectID, ArrayList<GPViewport> viewportList)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        GPAccountProject accountProject = this.accountProjectDao.find(accountProjectId);
+        GPAccountProject accountProject = this.accountProjectDao.find(accountProjectID);
         if (accountProject == null) {
-            throw new ResourceNotFoundFault("AccountProject not found", accountProjectId);
+            throw new ResourceNotFoundFault("AccountProject not found", accountProjectID);
         }
         for (GPViewport viewport : viewportList) {
             long idViewport = 0;
@@ -125,11 +138,15 @@ class ViewportServiceImpl {
                     idViewport = this.updateAndMergeFields(orig, viewport);
                 }
             } else if (idViewport == 0) {
-                idViewport = this.insertViewport(accountProjectId, viewport);
+                idViewport = this.insertViewport(accountProjectID, viewport);
             }
         }
     }
 
+    /**
+     * @see
+     * GeoPlatformService#updateViewport(org.geosdi.geoplatform.core.model.GPViewport)
+     */
     public Long updateViewport(GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPViewport orig = viewportDao.find(viewport.getId());
@@ -140,18 +157,9 @@ class ViewportServiceImpl {
         return updateAndMergeFields(orig, viewport);
     }
 
-    private long updateAndMergeFields(GPViewport orig, GPViewport viewport) {
-        // Update all properties (except the accountProject)
-        orig.setName(viewport.getName());
-        orig.setBbox(viewport.getBbox());
-        orig.setDescription(viewport.getDescription());
-        orig.setIsDefault(viewport.isIsDefault());
-        orig.setZoomLevel(viewport.getZoomLevel());
-
-        viewportDao.merge(orig);
-        return orig.getId();
-    }
-
+    /**
+     * @see GeoPlatformService#deleteViewport(java.lang.Long)
+     */
     public boolean deleteViewport(Long viewportID) throws ResourceNotFoundFault {
         GPViewport viewport = viewportDao.find(viewportID);
         if (viewport == null) {
@@ -162,10 +170,9 @@ class ViewportServiceImpl {
         return viewportDao.remove(viewport);
     }
 
-    public List<GPViewport> getViewports() {
-        return viewportDao.findAll();
-    }
-
+    /**
+     * @see GeoPlatformService#getAccountProjectViewports(java.lang.Long)
+     */
     public ArrayList<GPViewport> getAccountProjectViewports(Long accountProjectID) throws ResourceNotFoundFault {
         List<GPViewport> viewportList = viewportDao.findByAccountProjectID(accountProjectID);
         if (viewportList == null) {
@@ -174,6 +181,9 @@ class ViewportServiceImpl {
         return Lists.newArrayList(viewportList);
     }
 
+    /**
+     * @see GeoPlatformService#getDefaultViewport(java.lang.Long)
+     */
     public GPViewport getDefaultViewport(Long accountProjectID) throws ResourceNotFoundFault {
         List<GPViewport> viewportList = viewportDao.findByAccountProjectID(accountProjectID);
         if (viewportList == null) {
@@ -189,4 +199,19 @@ class ViewportServiceImpl {
         return viewport;
     }
     //</editor-fold>
+
+    /**
+     ***************************************************************************
+     */
+    private long updateAndMergeFields(GPViewport orig, GPViewport viewport) {
+        // Update all properties (except the accountProject)
+        orig.setName(viewport.getName());
+        orig.setBbox(viewport.getBbox());
+        orig.setDescription(viewport.getDescription());
+        orig.setIsDefault(viewport.isIsDefault());
+        orig.setZoomLevel(viewport.getZoomLevel());
+
+        viewportDao.merge(orig);
+        return orig.getId();
+    }
 }

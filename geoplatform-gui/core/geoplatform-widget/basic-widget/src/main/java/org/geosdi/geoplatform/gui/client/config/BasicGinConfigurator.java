@@ -49,8 +49,5 @@ public class BasicGinConfigurator extends AbstractGinModule {
     protected void configure() {
         bind(ToolbarActionRegistar.class).asEagerSingleton();
         bind(MenuActionRegistar.class).asEagerSingleton();
-//        bind(NotificationCenterAction.class).toProvider(NotificationCenterActionProvider.class)
-//                .in(Singleton.class);
-//        requestStaticInjection(TreeContextMenuFactory.class);
     }
 }

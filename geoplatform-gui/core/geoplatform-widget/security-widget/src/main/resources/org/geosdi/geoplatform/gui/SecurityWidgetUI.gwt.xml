@@ -1,4 +1,4 @@
-  <!-- Inherit the core Web Toolkit stuff. -->
+<!-- Inherit the core Web Toolkit stuff. -->
 <module>
     <source path="client" />
 

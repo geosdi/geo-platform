@@ -38,9 +38,6 @@ package org.geosdi.geoplatform.responce.collection;
 import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
@@ -50,6 +47,8 @@ import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Ordered collection (wrt position) without duplicates.
@@ -62,7 +61,8 @@ import org.geosdi.geoplatform.responce.VectorLayerDTO;
  */
 public class TreeFolderElements extends TreeSet<IElementDTO> {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final long serialVersionUID = -2893259943610436517L;
+    private transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * @param folders list of FolderDTO
@@ -77,7 +77,7 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
     public void addLayerCollection(Collection<GPLayer> layerList) {
         for (GPLayer layer : layerList) {
             GPLayerType layerType = layer.getLayerType();
-            if (layerType.equals(GPLayerType.RASTER)) {
+            if (layerType == GPLayerType.RASTER) {
                 GPRasterLayer rasterLayer = (GPRasterLayer) layer;
                 RasterLayerDTO rasterLayerDTO = new RasterLayerDTO(rasterLayer);
                 logger.debug("\n### RasterLayerDTO ###\n" + rasterLayerDTO + "\n###\t###\t###");

@@ -35,13 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.toolbar;
 
+import com.extjs.gxt.ui.client.widget.WidgetComponent;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
+import com.google.gwt.user.client.ui.Image;
 import java.util.Collections;
 import java.util.List;
+import org.geosdi.geoplatform.gui.action.IOpenEditorMapAction;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
@@ -50,51 +53,61 @@ import org.geosdi.geoplatform.gui.action.button.GeoPlatformButton;
 import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.toggle.editor.EditorMapToggleAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.widget.map.GPIconWidgetComponent;
 import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtility;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.toolbar.MenuInToolBar;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionEditorTool;
 import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
+ * Create all items of the Map Toolbar.
+ * <p/>
+ * Each kind of item is builded in different way, through a distinct method of
+ * {@link IGeoPlatformToolbar} interface.
+ * <p/>
+ * The build phase was started into this constructor, calling for every item
+ * {@link ToolbarGenericTool} the buildTool methods passing this reference
+ * object. <br /> So the item inside the create method call the respective
+ * method in GPMapToolbarWidget for the final build.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         implements IGeoPlatformToolbar {
-
+    
     protected GeoPlatformMap geoPlatformMap;
-    private List<ToolbarGenericTool> tools;
-
+    private List<WidgetGenericTool<IGeoPlatformToolbar>> tools;
+    
     public GPMapToolbarWidget(GeoPlatformMap geoPlatformMap,
-            List<ToolbarGenericTool> tools) {
+            List<WidgetGenericTool<IGeoPlatformToolbar>> tools) {
         this.geoPlatformMap = geoPlatformMap;
         setTools(tools);
         initialize();
     }
-
+    
     @Override
     public void initialize() {
-        for (ToolbarGenericTool tool : tools) {
+        for (WidgetGenericTool<IGeoPlatformToolbar> tool : tools) {
             tool.buildTool(this);
         }
     }
 
     /**
-     * Add a Vertical Line in the Toolbar
+     * Add a vertical line into Toolbar.
      */
     @Override
     public void addSeparator() {
@@ -102,63 +115,77 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Add a new Application Button to the Toolbar. An Application Button is a
-     * kind of button that configure a particular action for the Application.
+     * Add an Application Button into Toolbar, that configure a particular
+     * action for the Application.
      *
      * @param tool component UI binded at the action
      */
     @Override
     public void addApplicationButton(ToolbarActionTool tool) {
-        ToolbarApplicationAction action = (ToolbarApplicationAction) this.getAction(tool.getId());
-
+        ToolbarApplicationAction action = (ToolbarApplicationAction) this.getAction(
+                tool.getId());
+        
         final Button button = new Button();
         button.setText(action.getButtonName());
         this.prepareButton(button, action, tool);
-
+        
         this.toolBar.add(button);
     }
 
     /**
-     * Add a new Map Button to the Toolbar. A Map Button is a kind of button
-     * that interacts with the map.
+     * Add a Button into Toolbar, that interacts with the map.
      *
      * @param tool component UI binded at the action
      */
     @Override
     public void addMapButton(ToolbarActionTool tool) {
         ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
-
+        
         final GeoPlatformButton button = new GeoPlatformButton();
         button.setAction(action);
         this.prepareButton(button, action, tool);
-
+        
         this.toolBar.add(button);
     }
 
     /**
-     * Add a new Map ToggleButton to the Toolbar. A Map ToggleButton is a kind
-     * of button that interacts with the map.
+     * Add a ToggleButton Item into Toolbar, that interacts with the map.
      *
      * @param tool component UI binded at the action
      */
     @Override
     public void addMapToggleButton(ToolbarActionTool tool) {
         ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
-
+        
         final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
         button.setAction(action);
         this.prepareButton(button, action, tool);
-
+        
         this.toolBar.add(button);
     }
 
+    /**
+     * Add a Icon Item into Toolbar.
+     *
+     * @param tool component UI binded at the action
+     */
     @Override
     public void addIconInToolbar(IconInToolbar tool) {
-        GPIconWidgetComponent widgetIcon = new GPIconWidgetComponent(this.toolBar);
-        this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
-                tool.getText()));
+        GPIconWidgetComponent gpWidgetIcon = new GPIconWidgetComponent(
+                this.toolBar);
+        
+        Image image = BasicWidgetResources.ICONS.googleWhite().createImage();
+        WidgetComponent widgetComponent = gpWidgetIcon.createWidgetComponent(
+                image, tool.getText());
+        
+        this.toolBar.add(widgetComponent);
     }
 
+    /**
+     * Add a Button Item into Toolbar with a Menu.
+     *
+     * @param tool component UI binded at the action
+     */
     @Override
     public void addMenuInToolBar(MenuInToolBar tool) {
         Button buttonItem = new Button(
@@ -166,38 +193,37 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
                 + GPAccountLogged.getInstance().getOrganization());
         buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
         buttonItem.setId(tool.getId());
-
+        
         Menu menu = new Menu();
         MenuUtility.getIstance().buildTools(menu, tool.getTools());
         buttonItem.setMenu(menu);
-
+        
         this.toolBar.add(buttonItem);
     }
 
     /**
-     * Create a Button with a Menu
+     * Add a Button Item into Toolbar with a Menu list.
      *
      * @param tool component UI binded at the action
      */
     @Override
     public void addMenuButton(MenuClientTool tool) {
         ToolbarAction action = this.getAction(tool.getId());
-
+        
         Button button = new Button();
         button.setId(tool.getId());
 //        button.setText(action.getButtonName());
         button.setIcon(action.getImage());
         button.setEnabled(tool.isEnabled());
-
+        
         button.setMenu(this.createMenu(tool.getActionTools()));
-
+        
         toolBar.add(button);
     }
 
     /**
-     * Add FillToolItem in Toolbar so any Item added after this FillToolItem
-     * will be insert in the right Toolbar Region
-     *
+     * Add a separator Item into Toolbar, so any Item added after will be insert
+     * in the right Toolbar region.
      */
     @Override
     public void addFillToolItem() {
@@ -206,8 +232,26 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
 
     /**
      *
-     * @param actionTools
-     * @return Menu
+     * @param ToolbarActionEditorTool tool
+     */
+    @Override
+    public void addMapToogleButton(ToolbarActionEditorTool tool) {
+        ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
+        
+        final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
+        button.setAction(action);
+        this.prepareButton(button, action, tool);
+        
+        ((IOpenEditorMapAction) action).setActionTools(tool.getTools());
+        
+        this.toolBar.add(button);
+    }
+
+    /**
+     * Create a Menu with an Item from each Action.
+     *
+     * @param actionTools the list of Action
+     * @return the Menu
      */
     private Menu createMenu(List<ToolbarActionTool> actionTools) {
         Menu menu = new Menu();
@@ -215,7 +259,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         for (ToolbarActionTool actionTool : actionTools) {
             MenuBaseAction action = (MenuBaseAction) menuRegistar.get(
                     actionTool.getId());
-
+            
             MenuItem item = new MenuItem(action.getTitle());
             item.addSelectionListener(action);
             item.setIcon(action.getImage());
@@ -225,48 +269,56 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
-     * Retrieve the action from Register component
+     * Retrieve the Action with a unique ID.
      *
-     * @param id
-     * @return action
+     * @param id the Action ID
+     * @return the Action joined
      */
     private ToolbarAction getAction(String id) {
         ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
         ToolbarAction action = toolbarRegistar.get(id, geoPlatformMap);
         if (action == null) {
-            throw new NullPointerException("The action with ID " + id + " is non existent");
+            throw new NullPointerException(
+                    "The action with ID " + id + " is non existent");
         }
         return action;
     }
 
+    /**
+     * Prepare a Button from a Item and set an enable handler Action.
+     *
+     * @param button the Button to prepare
+     * @param action the enable Action
+     * @param tool the Item of reference
+     */
     private void prepareButton(final Button button, ToolbarAction action,
-            ToolbarGenericTool tool) {
+            WidgetGenericTool<IGeoPlatformToolbar> tool) {
         button.setId(action.getId());
         button.setToolTip(action.getTooltip());
         button.setIcon(action.getImage());
         button.addSelectionListener(action);
-
+        
         action.addActionEnableHandler(new ActionEnableHandler() {
             @Override
             public void onActionEnabled(ActionEnableEvent event) {
                 button.setEnabled(event.isEnabled());
             }
         });
-
+        
         action.setEnabled(tool.isEnabled());
     }
 
     /**
      * @return the tools
      */
-    public List<ToolbarGenericTool> getTools() {
+    public List<WidgetGenericTool<IGeoPlatformToolbar>> getTools() {
         return tools;
     }
 
     /**
      * @param tools the tools to set
      */
-    public void setTools(List<ToolbarGenericTool> tools) {
+    public void setTools(List<WidgetGenericTool<IGeoPlatformToolbar>> tools) {
         Collections.sort(tools);
         this.tools = tools;
     }

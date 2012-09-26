@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
-import org.geosdi.geoplatform.gui.shared.GPRole;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  *
@@ -52,8 +52,8 @@ public class GPProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     private ProjectBindingWidget bindingProject;
 
-    public GPProjectAction(GPListViewSearchPanel<GPClientProject> searchWidget, GPRole role) {
-        super(role);
+    public GPProjectAction(GPTrustedLevel trustedLevel, GPListViewSearchPanel<GPClientProject> searchWidget) {
+        super(trustedLevel);
         this.bindingProject = new ProjectBindingWidget(searchWidget);
     }
 

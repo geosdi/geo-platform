@@ -41,10 +41,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
- * @author Michele Santomauro
- * @email michele.santomauro@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWebServiceMapData<T,E> {
+public class GPWebServiceMapData<T, E> {
 
     private Map<T, E> map = new HashMap<T, E>();
 

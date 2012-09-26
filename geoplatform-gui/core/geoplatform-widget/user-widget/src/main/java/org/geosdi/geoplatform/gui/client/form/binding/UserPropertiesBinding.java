@@ -54,6 +54,7 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
@@ -62,6 +63,7 @@ import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -85,6 +87,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private LabelField expiredLabelField;
     private SimpleComboBox<String> userRoleComboBox;
     private RoleComboBinding roleComboBinding;
+    private SimpleComboBox<GPTrustedLevel> trustedLevelComboBox;
+    private TrustedLevelComboBinding trustedLevelComboBinding;
     //
     private FormButtonBinding formButtonBinding; // Monitors the valid state of a form and enabled / disabled all buttons.
     private Button buttonBinding;
@@ -96,6 +100,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private boolean updateEnabled;
     private boolean updateTemporary;
     private boolean updateRole;
+    private boolean updateTrustedLevel;
 
     public UserPropertiesBinding(ListStore<GPUserManageDetail> store,
             Button buttonBinding) {
@@ -205,6 +210,18 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.userRoleComboBox.setMaxHeight(150);
         this.userRoleComboBox.setTriggerAction(TriggerAction.ALL);
 
+        this.trustedLevelComboBox = new SimpleComboBox<GPTrustedLevel>();
+        this.trustedLevelComboBox.setId(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
+        this.trustedLevelComboBox.setFieldLabel("Trusted level");
+        this.trustedLevelComboBox.setEmptyText("Select a trusted level... (required)");
+        this.trustedLevelComboBox.setToolTip("Trusted level of the execution permissions for a use case");
+        this.trustedLevelComboBox.setEditable(false);
+        this.trustedLevelComboBox.setTypeAhead(true);
+        this.trustedLevelComboBox.setAllowBlank(false);
+        this.trustedLevelComboBox.setMaxHeight(200);
+        this.trustedLevelComboBox.setTriggerAction(TriggerAction.ALL);
+        this.trustedLevelComboBox.add(Arrays.asList(GPTrustedLevel.values()));
+
         fp.add(this.nameField);
         fp.add(this.emailField);
         fp.add(this.usernameField);
@@ -213,6 +230,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         fp.add(enabledAndCreationFields);
         fp.add(tempAndExpiredFields);
         fp.add(this.userRoleComboBox);
+        fp.add(this.trustedLevelComboBox);
 
         return fp;
     }
@@ -228,12 +246,15 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.temporaryField.reset();
         this.expiredLabelField.reset();
         this.userRoleComboBox.reset();
+        this.trustedLevelComboBox.reset();
     }
 
     @Override
     public void addFieldsBinding() {
         this.roleComboBinding = new RoleComboBinding();
+        this.trustedLevelComboBinding = new TrustedLevelComboBinding(); // TODO Only iff necessary
         this.formBinding.addFieldBinding(this.roleComboBinding);
+        this.formBinding.addFieldBinding(this.trustedLevelComboBinding);
 
         this.formBinding.addFieldBinding(new NameFieldBinding());
         this.formBinding.addFieldBinding(new EmailFieldBinding());
@@ -256,6 +277,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
             userOriginal.setEnabled(user.isEnabled());
             userOriginal.setTemporary(user.isTemporary());
             userOriginal.setAuthority(user.getAuthority());
+            userOriginal.setTrustedLevel(user.getTrustedLevel());
             //
             this.formButtonBinding.stopMonitoring(); // NOTE FormButtonBinding is always start auto-magically
             this.handleFieldsUpdateUser();
@@ -294,6 +316,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.expiredLabelField.setText("Will be disabled in 10 days");
 
         this.userRoleComboBox.setValidator(null);
+        this.trustedLevelComboBox.setValidator(null);
     }
 
     private void handleFieldsUpdateUser() {
@@ -336,6 +359,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         }
 
         this.userRoleComboBox.setValidator(this.validatorUpdateRole());
+        this.trustedLevelComboBox.setValidator(this.validatorUpdateTrustedLevel());
     }
 
     /**
@@ -420,6 +444,21 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         };
     }
 
+    private Validator validatorUpdateTrustedLevel() {
+        return new Validator() {
+            @Override
+            public String validate(Field<?> field, String value) {
+                GPTrustedLevel trustedLevel = userOriginal.getTrustedLevel();
+                if (trustedLevel != null && value.equals(trustedLevel.name())) {
+                    updateTrustedLevel(false);
+                    return null; // Pseudo-valid
+                }
+                updateTrustedLevel(true);
+                return null;
+            }
+        };
+    }
+
     private void updateName(boolean updateName) {
         this.updateName = updateName;
         this.updateUser();
@@ -450,9 +489,14 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.updateUser();
     }
 
+    private void updateTrustedLevel(boolean updateTrustedLevel) {
+        this.updateTrustedLevel = updateTrustedLevel;
+        this.updateUser();
+    }
+
     private void updateUser() {
-        if (updateName || updateEmail || updatePassword
-                || updateEnabled || updateTemporary || updateRole) {
+        if (updateName || updateEmail || updatePassword || updateEnabled
+                || updateTemporary || updateRole || updateTrustedLevel) {
             this.buttonBinding.enable();
         } else {
             this.buttonBinding.disable();
@@ -548,6 +592,37 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         @Override
         public void setRecordProperty(Record r, Object val) {
             r.set(super.property, ((SimpleComboValue<String>) val).getValue());
+        }
+    }
+
+    private class TrustedLevelComboBinding extends GPFieldBinding {
+
+        public TrustedLevelComboBinding() {
+            super(trustedLevelComboBox, GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
+        }
+
+        @Override
+        public void updateField(boolean updateOriginalValue) {
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
+            if (userDetail.getTrustedLevel() != null) {
+                trustedLevelComboBox.setValue(trustedLevelComboBox.findModel(userDetail.getTrustedLevel()));
+            }
+        }
+
+        @Override
+        public void setModelProperty(Object val) {
+            if (val != null && val instanceof SimpleComboValue) {
+                SimpleComboValue<GPTrustedLevel> trustedLevel = (SimpleComboValue) val;
+                GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
+                if (trustedLevel.getValue() != userDetail.getTrustedLevel()) {
+                    userDetail.setTrustedLevel(trustedLevel.getValue());
+                }
+            }
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
+            r.set(super.property, ((SimpleComboValue<GPTrustedLevel>) val).getValue());
         }
     }
 

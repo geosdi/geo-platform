@@ -66,11 +66,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.acls.model.Permission;
 
 /**
+ * ACL service delegate.
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class AclServiceImpl {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(AclServiceImpl.class);
     // DAO
     private GPAccountDAO accountDao;
     private GPAuthorityDAO authorityDao;
@@ -238,39 +240,6 @@ class AclServiceImpl {
         return mapComponentPermission;
     }
 
-    private void elaborateGuiComponentACEs(String sidName, String organization,
-            Map<String, Boolean> permissionMap)
-            throws ResourceNotFoundFault {
-        // Retrieve the Sid corresponding to the Role (Authority) name and the relative organization
-        AclSid sid = this.findSid(sidName, false, organization);
-        // Retrieve the ACEs of the Sid
-        List<AclEntry> entries = entryDao.findBySid(sid.getId());
-        logger.trace("\n*** #Entries: {} ***", entries.size());
-        // For each ACEs
-        // (ACL has a single ACE for Role+GuiComponent,
-        // because there is a singe Permission)
-        for (AclEntry entry : entries) {
-            logger.trace("\n*** AclEntry:\n{}\n***", entry);
-            if (entry.getMask().equals(GeoPlatformPermission.ENABLE.getMask())) {
-                AclObjectIdentity objectIdentity = entry.getAclObject();
-                logger.trace("\n*** AclObjectIdentity:\n{}\n***", objectIdentity);
-                GuiComponent gc = guiComponentDao.find(objectIdentity.getObjectId());
-                logger.trace("\n*** GuiComponent:\n{}\n***", gc);
-                logger.debug("\n*** ComponentId: {} ***\n*** Granting: {} ***",
-                             gc.getComponentId(), entry.isGranting());
-
-                permissionMap.put(gc.getComponentId(), entry.isGranting());
-            }
-        }
-
-        for (String componentID : GuiComponentIDs.LIST_ALL) {
-            if (!permissionMap.containsKey(componentID)) {
-                logger.debug("\n*** NONE added: {} ***", componentID);
-                permissionMap.put(componentID, null);
-            }
-        }
-    }
-
     /**
      * @see GeoPlatformService#updateRolePermission(java.lang.String,
      * org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData)
@@ -322,13 +291,49 @@ class AclServiceImpl {
         }
 
         GPOrganization org = organizationDao.findByName(organization);
-        if(org == null){
+        if (org == null) {
             throw new IllegalParameterFault("Organization \"" + organization + "\" not found");
         }
 
         sid = new AclSid(false, role, org);
         sidDao.persist(sid);
         return true;
+    }
+
+    /**
+     ***************************************************************************
+     */
+    private void elaborateGuiComponentACEs(String sidName, String organization,
+            Map<String, Boolean> permissionMap)
+            throws ResourceNotFoundFault {
+        // Retrieve the Sid corresponding to the Role (Authority) name and the relative organization
+        AclSid sid = this.findSid(sidName, false, organization);
+        // Retrieve the ACEs of the Sid
+        List<AclEntry> entries = entryDao.findBySid(sid.getId());
+        logger.trace("\n*** #Entries: {} ***", entries.size());
+        // For each ACEs
+        // (ACL has a single ACE for Role+GuiComponent,
+        // because there is a singe Permission)
+        for (AclEntry entry : entries) {
+            logger.trace("\n*** AclEntry:\n{}\n***", entry);
+            if (entry.getMask().equals(GeoPlatformPermission.ENABLE.getMask())) {
+                AclObjectIdentity objectIdentity = entry.getAclObject();
+                logger.trace("\n*** AclObjectIdentity:\n{}\n***", objectIdentity);
+                GuiComponent gc = guiComponentDao.find(objectIdentity.getObjectId());
+                logger.trace("\n*** GuiComponent:\n{}\n***", gc);
+                logger.debug("\n*** ComponentId: {} ***\n*** Granting: {} ***",
+                             gc.getComponentId(), entry.isGranting());
+
+                permissionMap.put(gc.getComponentId(), entry.isGranting());
+            }
+        }
+
+        for (String componentID : GuiComponentIDs.LIST_ALL) {
+            if (!permissionMap.containsKey(componentID)) {
+                logger.debug("\n*** NONE added: {} ***", componentID);
+                permissionMap.put(componentID, null);
+            }
+        }
     }
 
     private boolean manageExistingEntry(List<AclEntry> aces, AclSid sid,

@@ -46,11 +46,14 @@ import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 public interface SecurityRemoteAsync {
 
     void userLogin(String userName, String password,
-                   AsyncCallback<IGPAccountDetail> callback)
+            AsyncCallback<IGPAccountDetail> callback)
+            throws GeoPlatformException;
+
+    void ssoLogin(AsyncCallback<IGPAccountDetail> callback)
             throws GeoPlatformException;
 
     void applicationLogin(String appID,
-                          AsyncCallback<IGPAccountDetail> callback)
+            AsyncCallback<IGPAccountDetail> callback)
             throws GeoPlatformException;
 
     void invalidateSession(AsyncCallback<?> callback) throws GeoPlatformException;

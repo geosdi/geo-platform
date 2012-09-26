@@ -37,14 +37,16 @@ package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 import java.io.Serializable;
 import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public interface IToolbarContainerTool extends Serializable {
 
-    public List<ToolbarGenericTool> getGroupTools();
+    public List<WidgetGenericTool<IGeoPlatformToolbar>> getGroupTools();
 
-    public void setGroupTools(List<ToolbarGenericTool> groupTools);
+    public void setGroupTools(
+            List<WidgetGenericTool<IGeoPlatformToolbar>> groupTools);
 }

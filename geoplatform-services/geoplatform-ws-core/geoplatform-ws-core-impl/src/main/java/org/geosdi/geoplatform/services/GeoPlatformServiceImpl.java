@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import com.vividsolutions.jts.geom.Geometry;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +64,6 @@ import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
@@ -71,11 +71,11 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * Web Service implementation of {@link GeoPlatformService} endpoint.
+ *
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @author Francesco Izzi - CNR IMAA - geoSDI
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
@@ -94,6 +94,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private GPAuthorityDAO authorityDao;
     private GPOrganizationDAO organizationDao;
     private GPMessageDAO messageDao;
+    private GPViewportDAO viewportDAO;
+    // Access Info DAO
+    private GSResourceDAO gsResourceDAO;
+    private GSAccountDAO gsAccountDAO;
     // ACL DAO
     private AclClassDAO classDao;
     private AclSidDAO sidDao;
@@ -112,13 +116,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private MessageServiceImpl messageServiceDelegate;
     // Services
     private GPSchedulerService schedulerService;
-    //
+    // Utility
     private GPDigesterConfigutator gpDigester;
-    //
-    private GPViewportDAO viewportDAO;
-    private GSResourceDAO gsResourceDAO;
-    private GSAccountDAO gsAccountDAO;
 
+    /**
+     * Default constructor create each service delegate.
+     */
     public GeoPlatformServiceImpl() {
         organizationServiceDelegate = new OrganizationServiceImpl();
         accountServiceDelegate = new AccountServiceImpl();
@@ -133,9 +136,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     //<editor-fold defaultstate="collapsed" desc="DAOs IoC">
-    // ==========================================================================
+    // =========================================================================
     // === DAOs IoC
-    // ==========================================================================
+    // =========================================================================
     /**
      * @param accountDao the accountDao to set
      */
@@ -147,6 +150,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.messageServiceDelegate.setAccountDao(accountDao);
     }
 
+    /**
+     * @param serverDao the serverDao to set
+     */
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
         this.serverServiceDelegate.setServerDao(serverDao);
@@ -192,7 +198,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.layerServiceDelegate.setLayerDao(layerDao);
         this.projectServiceDelegate.setLayerDao(layerDao);
     }
-
+//
 //    /**
 //     * @param styleDao
 //     *            the styleDao to set
@@ -201,6 +207,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //        this.styleDao = styleDao;
 //        this.layerServiceDelegate.setStyleDao(styleDao);
 //    }
+
     /**
      * @param authorityDao the authorityDao to set
      */
@@ -286,24 +293,33 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.accountServiceDelegate.setGpDigester(gpDigester);
     }
 
-    public void setGsAccountDAO(GSAccountDAO gsAccountDAO) {
-        this.gsAccountDAO = gsAccountDAO;
-    }
-
-    public void setGsResourceDAO(GSResourceDAO gsResourceDAO) {
-        this.gsResourceDAO = gsResourceDAO;
-    }
-
+    /**
+     * @param viewportDAO the viewportDAO to set
+     */
     public void setViewportDAO(GPViewportDAO viewportDAO) {
         this.viewportDAO = viewportDAO;
         this.viewportServiceDelegate.setViewportDao(viewportDAO);
     }
+
+    /**
+     * @param gsAccountDAO the gsAccountDAO to set
+     */
+    public void setGsAccountDAO(GSAccountDAO gsAccountDAO) {
+        this.gsAccountDAO = gsAccountDAO;
+    }
+
+    /**
+     * @param gsResourceDAO the gsResourceDAO to set
+     */
+    public void setGsResourceDAO(GSResourceDAO gsResourceDAO) {
+        this.gsResourceDAO = gsResourceDAO;
+    }
     //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
-    // ==========================================================================
+    // =========================================================================
     // === Organization
-    // ==========================================================================
+    // =========================================================================
     @Override
     public Long insertOrganization(GPOrganization organization) throws IllegalParameterFault {
         return organizationServiceDelegate.insertOrganization(organization);
@@ -316,9 +332,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Account (User and Application)">
-    // ==========================================================================
+    // =========================================================================
     // === Account
-    // ==========================================================================
+    // =========================================================================
     @Override
     public Long insertAccount(GPAccount account, boolean sendEmail)
             throws IllegalParameterFault {
@@ -452,9 +468,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="AccountProject">
-    // ==========================================================================
+    // =========================================================================
     // === AccountProject
-    // ==========================================================================
+    // =========================================================================
     @Override
     public Long insertAccountProject(GPAccountProject accountProject) throws IllegalParameterFault {
         return projectServiceDelegate.insertAccountProject(accountProject);
@@ -537,48 +553,48 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+    public GPProject updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
         return projectServiceDelegate.updateDefaultProject(accountID, projectID);
     }
 
     @Override
     public boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return this.projectServiceDelegate.saveAccountProjectProperties(accountProjectProperties);
+        return projectServiceDelegate.saveAccountProjectProperties(accountProjectProperties);
     }
 
     @Override
     public List<ShortAccountDTO> getAccountsByProjectID(Long projectID)
             throws ResourceNotFoundFault {
-        return this.projectServiceDelegate.getAccountsBySharedProjectID(projectID);
+        return projectServiceDelegate.getAccountsBySharedProjectID(projectID);
     }
 
     @Override
     public List<ShortAccountDTO> getAccountsToShareByProjectID(Long projectID)
             throws ResourceNotFoundFault {
-        return this.projectServiceDelegate.getAccountsToShareByProjectID(projectID);
+        return projectServiceDelegate.getAccountsToShareByProjectID(projectID);
     }
 
     @Override
     public boolean updateAccountsProjectSharing(Long projectID, List<Long> accountIDsProject)
             throws ResourceNotFoundFault {
-        return this.projectServiceDelegate.updateAccountsProjectSharing(projectID, accountIDsProject);
+        return projectServiceDelegate.updateAccountsProjectSharing(projectID, accountIDsProject);
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Project">
-    // ==========================================================================
+    // =========================================================================
     // === Project
-    // ==========================================================================
+    // =========================================================================
     @Override
     public Long saveProject(String accountNaturalID, GPProject project, boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return this.projectServiceDelegate.saveProject(accountNaturalID, project, defaultProject);
+        return projectServiceDelegate.saveProject(accountNaturalID, project, defaultProject);
     }
 
     @Override
     public Long insertProject(GPProject project) throws IllegalParameterFault {
-        return this.projectServiceDelegate.insertProject(project);
+        return projectServiceDelegate.insertProject(project);
     }
 
     @Override
@@ -609,9 +625,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Viewport">
-    // ==========================================================================
+    // =========================================================================
     // === Viewport
-    // ==========================================================================
+    // =========================================================================
     @Override
     public GPViewport getDefaultViewport(Long accountProjectID)
             throws ResourceNotFoundFault {
@@ -625,21 +641,21 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long insertViewport(Long accountProjectId, GPViewport viewport) throws
+    public Long insertViewport(Long accountProjectID, GPViewport viewport) throws
             ResourceNotFoundFault, IllegalParameterFault {
-        return viewportServiceDelegate.insertViewport(accountProjectId, viewport);
+        return viewportServiceDelegate.insertViewport(accountProjectID, viewport);
     }
 
     @Override
-    public void replaceViewportList(Long accountProjectId, ArrayList<GPViewport> viewportList)
+    public void replaceViewportList(Long accountProjectID, ArrayList<GPViewport> viewportList)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        viewportServiceDelegate.replaceViewportList(accountProjectId, viewportList);
+        viewportServiceDelegate.replaceViewportList(accountProjectID, viewportList);
     }
 
     @Override
-    public void saveOrUpdateViewportList(Long accountProjectId, ArrayList<GPViewport> viewportList)
+    public void saveOrUpdateViewportList(Long accountProjectID, ArrayList<GPViewport> viewportList)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        viewportServiceDelegate.saveOrUpdateViewportList(accountProjectId, viewportList);
+        viewportServiceDelegate.saveOrUpdateViewportList(accountProjectID, viewportList);
     }
 
     @Override
@@ -655,9 +671,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Folder">
-    // ==========================================================================
+    // =========================================================================
     // === Folder
-    // ==========================================================================
+    // =========================================================================
     @Override
     public Long insertFolder(Long projectID, GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault {
@@ -680,7 +696,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             boolean expanded)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.saveFolderProperties(folderID, name,
-                                                          checked, expanded);
+                checked, expanded);
     }
 
     @Override
@@ -702,10 +718,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDragAndDropFolderAndTreeModifications(Long idFolderMoved, Long idNewParent, int newPosition,
+    public boolean saveDragAndDropFolderAndTreeModifications(Long folderMovedID, Long newParentID, int newPosition,
             GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
-        return folderServiceDelegate.saveDragAndDropFolderModifications(idFolderMoved, idNewParent, newPosition, descendantsMapData);
+        return folderServiceDelegate.saveDragAndDropFolderModifications(folderMovedID, newParentID, newPosition, descendantsMapData);
     }
 
     @Override
@@ -751,15 +767,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     //<editor-fold defaultstate="collapsed" desc="Folder / Project">
     @Override
-    public List<FolderDTO> getRootFoldersByProjectID(Long projectID)
+    public ProjectDTO getProjectWithRootFolders(Long projectID)
             throws ResourceNotFoundFault {
-        return projectServiceDelegate.getRootFoldersByProjectID(projectID);
+        return projectServiceDelegate.getProjectWithRootFolders(projectID);
     }
 
     @Override
-    public ProjectDTO getExpandedElementsByProjectID(Long projectID)
+    public ProjectDTO getProjectWithExpandedElements(Long projectID)
             throws ResourceNotFoundFault {
-        return projectServiceDelegate.getExpandedElementsByProjectID(projectID);
+        return projectServiceDelegate.getProjectWithExpandedElements(projectID);
     }
 
     @Override
@@ -775,9 +791,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Layer (Raster and Vector)">
-    // ==========================================================================
+    // =========================================================================
     // === Layer
-    // ==========================================================================
+    // =========================================================================
     @Override
     public Long insertLayer(GPLayer layer) throws IllegalParameterFault {
         return layerServiceDelegate.insertLayer(layer);
@@ -833,16 +849,21 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDragAndDropLayerAndTreeModifications(Long idLayerMoved, Long idNewParent, int newPosition,
+    public boolean saveDragAndDropLayerAndTreeModifications(Long layerMovedID, Long newParentID, int newPosition,
             GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveDragAndDropLayerModifications(idLayerMoved, idNewParent, newPosition, descendantsMapData);
+        return layerServiceDelegate.saveDragAndDropLayerModifications(layerMovedID, newParentID, newPosition, descendantsMapData);
     }
 
     @Override
     public boolean saveLayerProperties(RasterPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveLayerProperties(layerProperties);
+    }
+
+    @Override
+    public GPLayer getLayerDetail(Long layerID) throws ResourceNotFoundFault {
+        return layerServiceDelegate.getLayerDetail(layerID);
     }
 
     @Override
@@ -863,11 +884,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<StyleDTO> getLayerStyles(Long layerID) {
-        return layerServiceDelegate.getLayerStyles(layerID);
-    }
-
-    @Override
     public GPBBox getBBox(Long layerID) throws ResourceNotFoundFault {
         return layerServiceDelegate.getBBox(layerID);
     }
@@ -876,17 +892,21 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public GPLayerInfo getLayerInfo(Long layerID) throws ResourceNotFoundFault {
         return layerServiceDelegate.getLayerInfo(layerID);
     }
-
+//
 //    @Override
 //    public List<StyleDTO> getLayerStyles(Long layerID) {
 //        return layerServiceDelegate.getLayerStyles(layerID);
 //    }    
-//
 //    @Override
-//    public Point getGeometry(Long layerID) throws ResourceNotFoundFault {
-//        return layerServiceDelegate.getGeometry(layerID);
-//    }
-//    
+//    public List<StyleDTO> getLayerStyles(Long layerID) {
+//        return layerServiceDelegate.getLayerStyles(layerID);
+//    }    
+
+    @Override
+    public Geometry getGeometry(Long layerID) throws ResourceNotFoundFault {
+        return layerServiceDelegate.getGeometry(layerID);
+    }
+
     @Override
     public ShortLayerDTO getShortLayer(Long layerID) throws ResourceNotFoundFault {
         return layerServiceDelegate.getShortLayer(layerID);
@@ -905,9 +925,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ACL">
-    // ==========================================================================
+    // =========================================================================
     // === ACL
-    // ==========================================================================    
+    // =========================================================================    
     @Override
     public List<String> getAllRoles(String organization) throws ResourceNotFoundFault {
         return aclServiceDelegate.getAllRoles(organization);
@@ -933,26 +953,26 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public GuiComponentsPermissionMapData getRolePermission(String role, String organization)
             throws ResourceNotFoundFault {
-        return this.aclServiceDelegate.getRolePermission(role, organization);
+        return aclServiceDelegate.getRolePermission(role, organization);
     }
 
     @Override
     public boolean updateRolePermission(String role, String organization,
             GuiComponentsPermissionMapData mapComponentPermission)
             throws ResourceNotFoundFault {
-        return this.aclServiceDelegate.updateRolePermission(role, organization, mapComponentPermission);
+        return aclServiceDelegate.updateRolePermission(role, organization, mapComponentPermission);
     }
 
     @Override
     public boolean saveRole(String role, String organization) throws IllegalParameterFault {
-        return this.aclServiceDelegate.saveRole(role, organization);
+        return aclServiceDelegate.saveRole(role, organization);
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Server">
-    // ==========================================================================
+    // =========================================================================
     // === Server
-    // ==========================================================================
+    // =========================================================================
     @Override
     public Long insertServer(GeoPlatformServer server) {
         return serverServiceDelegate.insertServer(server);
@@ -999,9 +1019,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Message">
-    // ==========================================================================
+    // =========================================================================
     // === Message
-    // ==========================================================================
+    // =========================================================================
     @Override
     public Long insertMessage(GPMessage message) throws ResourceNotFoundFault, IllegalParameterFault {
         return messageServiceDelegate.insertMessage(message);
@@ -1049,9 +1069,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Access Info">
-    // ==========================================================================
+    // =========================================================================
     // === Access Info
-    // ==========================================================================
+    // =========================================================================
     @Override
     public Long insertGSAccount(GSAccount gsAccount) {
         this.gsAccountDAO.persist(gsAccount);

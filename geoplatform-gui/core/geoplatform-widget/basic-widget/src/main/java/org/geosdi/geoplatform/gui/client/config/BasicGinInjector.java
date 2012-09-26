@@ -40,6 +40,7 @@ import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.model.message.CommandActionMediator;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -65,6 +66,8 @@ public interface BasicGinInjector extends Ginjector {
     }
 
     public ToolbarActionRegistar getToolbarActionRegistar();
-    
+
     public MenuActionRegistar getMenuActionRegistar();
+
+    public CommandActionMediator getCommandActionMediator();
 }

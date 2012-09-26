@@ -88,10 +88,16 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
         initWidget(uiBinder.createAndBindUi(this));
         login.addStyleName("g-button g-button-submit");
         login.getElement().setId("signIn");
-
         userName.setFocus(true);
         this.addStatusComponent();
         this.addKeyHandler();
+        this.checkSSO();
+    }
+
+    protected void continueLoginProcesFromSSo(boolean isSSO) {
+        if (isSSO) {
+            this.showProgressBar();
+        }
     }
 
     private void addKeyHandler() {
@@ -150,7 +156,7 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
         timer = new Timer() {
             @Override
             public void run() {
-                progres = progres + 0.1;
+                progres += 0.1;
                 progressBar.setRunProgress(progres, userName.getValue());
                 if (progres > 1.0) {
                     progressBar.setRunProgress(1.0, "Done");
@@ -172,4 +178,6 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
     public abstract void reset();
 
     public abstract void loginDone();
+
+    public abstract boolean checkSSO();
 }

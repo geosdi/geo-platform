@@ -35,45 +35,43 @@
  */
 package org.geosdi.geoplatform.gui.action.button;
 
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeoPlatformToggleButton extends ToggleButton {
 
-	private ToolbarMapAction action;
+    private ToolbarMapAction action;
 
-	public GeoPlatformToggleButton() {
-		super();
-	}
+    public GeoPlatformToggleButton() {
+        super();
+    }
 
-	/**
-	 * Toggle the Button and Deactivate the Map Control Associated with this
-	 * Button
-	 */
-	public void disableControl() {
-		super.toggle(false);
-		action.disableControl();
-	}
+    /**
+     * Toggle the Button and Deactivate the Map Control Associated with this
+     * Button
+     */
+    public void disableControl() {
+        super.toggle(false);
+        action.disableControl();
+    }
 
-	/**
-	 * @return the action
-	 */
-	public ToolbarMapAction getAction() {
-		return action;
-	}
+    /**
+     * @return the action
+     */
+    public ToolbarMapAction getAction() {
+        return action;
+    }
 
-	/**
-	 * @param action
-	 *            the action to set
-	 */
-	public void setAction(ToolbarMapAction action) {
-		this.action = action;
-		this.action.setButton(this);
-	}
-
+    /**
+     * @param action the action to set
+     */
+    public void setAction(ToolbarMapAction action) {
+        this.action = action;
+        this.action.setButton(this);
+    }
 }

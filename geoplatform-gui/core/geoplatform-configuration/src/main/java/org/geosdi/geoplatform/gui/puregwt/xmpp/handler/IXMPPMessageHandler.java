@@ -47,7 +47,7 @@ public interface IXMPPMessageHandler extends EventHandler {
 
     Type<IXMPPMessageHandler> TYPE = new Type<IXMPPMessageHandler>();
 
-    public AbstractXMPPEvent instantiateMessageSubjectEvent(String xmppMessageSubject);
+    AbstractXMPPEvent instantiateMessageSubjectEvent(String xmppMessageSubject);
 
-    public void handleMessageBody(String messageBody);
+    void handleMessageBody(String messageBody);
 }

@@ -95,7 +95,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebService(name = "GeoPlatformService",
-            targetNamespace = "http://services.geo-platform.org/")
+targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
@@ -645,7 +645,7 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Account or Project not found
      */
     @Post
-    boolean updateDefaultProject(@WebParam(name = "accountID") Long accountID,
+    GPProject updateDefaultProject(@WebParam(name = "accountID") Long accountID,
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 

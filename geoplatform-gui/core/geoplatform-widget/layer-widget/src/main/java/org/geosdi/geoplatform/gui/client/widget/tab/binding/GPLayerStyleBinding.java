@@ -43,14 +43,15 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.impl.map.event.StyleLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel.GPStyleStringKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
@@ -71,7 +72,6 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         fp.setFrame(true);
 
         this.comboBox = new ComboBox<GPStyleStringBeanModel>() {
-
             @Override
             protected void onSelect(GPStyleStringBeanModel model, int index) {
                 super.onSelect(model, index);
@@ -141,11 +141,13 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 GPStyleStringBeanModel styleString = (GPStyleStringBeanModel) val;
                 RasterTreeNode raster = (RasterTreeNode) model;
                 if (!styleString.equals(raster.getStyles().get(0))) {
-                    GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel) model);
+                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(raster);
                     ArrayList<GPStyleStringBeanModel> rasterList = raster.getStyles();
                     rasterList.remove(styleString);
                     rasterList.add(0, styleString);
                     raster.setStyles(rasterList);
+                    mementoSave.putOriginalPropertiesInCache(memento);
                     comboBoxStore.removeAll();
                     comboBoxStore.add(raster.getStyles());
                     styleEvent.setStyle(styleString.getStyleString());

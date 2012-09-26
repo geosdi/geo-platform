@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -62,7 +63,6 @@ public class SaveFoldersPropertiesAction implements ISave<MementoFolderOriginalP
         //Warning: the conversion update the memento fields on the last refBean properties
         memento.convertMementoToWs();
         LayerRemote.Util.getInstance().saveFolderProperties(memento, new AsyncCallback<Boolean>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
@@ -76,7 +76,8 @@ public class SaveFoldersPropertiesAction implements ISave<MementoFolderOriginalP
 
             @Override
             public void onSuccess(Boolean result) {
-                GPMementoSaveCache.getInstance().remove(memento);
+                IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                mementoSave.remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "Save Folder Properties Operation completed successfully.",
                         EnumSearchStatus.STATUS_SEARCH.toString());

@@ -37,17 +37,19 @@ package org.geosdi.geoplatform.gui.client.model.memento.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
+@Singleton
 public class PeekCacheEvent extends GwtEvent<GPPeekCacheEventHandler> {
 
     private GwtEvent eventAfterAllSaveOperations;
-    
+
     @Override
     public Type<GPPeekCacheEventHandler> getAssociatedType() {
         return GPPeekCacheEventHandler.TYPE;

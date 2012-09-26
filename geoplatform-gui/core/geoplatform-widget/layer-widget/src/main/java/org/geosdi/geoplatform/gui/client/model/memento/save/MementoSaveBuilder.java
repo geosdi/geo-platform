@@ -140,7 +140,8 @@ public class MementoSaveBuilder {
             memento = new MementoFolderOriginalProperties(saveFoldersPropertiesAction);
         } else {
             throw new IllegalArgumentException("The method copyOriginalProperties "
-                    + "in MementoSaveBuilder class does not accepts your instance");
+                    + "in MementoSaveBuilder class does not accepts your instance: "
+                    + element);
         }
         return memento;
     }

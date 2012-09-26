@@ -43,8 +43,10 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.KeyCodes;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
@@ -71,12 +73,11 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
         labelField.setFieldLabel("Label");
         labelField.setFireChangeEventOnSetValue(true);
         labelField.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyDown(ComponentEvent event) {
                 super.componentKeyDown(event);
-                if (event.getKeyCode() == KeyCodes.KEY_ENTER &&
-                        !labelField.getValue().isEmpty()) {
+                if (event.getKeyCode() == KeyCodes.KEY_ENTER
+                        && !labelField.getValue().isEmpty()) {
                     getModel().setLabel(labelField.getValue());
                 }
             }
@@ -98,9 +99,9 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
     /**
      * @author Nazzareno Sileno - CNR IMAA geoSDI Group
      * @email nazzareno.sileno@geosdi.org
-     * 
+     *
      * Internal Class GPFolderNameFieldBinding to map bi-directional Binding
-     * 
+     *
      */
     private class GPFolderNameFieldBinding extends GPFieldBinding {
 
@@ -111,8 +112,10 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
         @Override
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            GPMementoSaveCache.getInstance().copyOriginalProperties((FolderTreeNode) model);
+            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((FolderTreeNode) model);
             ((FolderTreeNode) model).setLabel(val != null ? (String) val : "");
+            mementoSave.putOriginalPropertiesInCache(memento);
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
         }
 
@@ -125,7 +128,6 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
 
         @Override
         public void setRecordProperty(Record r, Object val) {
-            
         }
     }
 }

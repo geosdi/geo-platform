@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.xmpp;
 
-import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerRegistration;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

@@ -41,6 +41,7 @@ import com.calclab.emite.core.client.bosh.XmppBoshConnection;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.im.client.ImModule;
 import com.calclab.emite.im.client.chat.ChatManager;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 
@@ -56,4 +57,6 @@ public interface XMPPSessionGinjector extends Ginjector {
     ChatManager getChatManager();
 
     XmppBoshConnection getXmppBoshConnection();
+
+    XmppRoster getRoster();
 }

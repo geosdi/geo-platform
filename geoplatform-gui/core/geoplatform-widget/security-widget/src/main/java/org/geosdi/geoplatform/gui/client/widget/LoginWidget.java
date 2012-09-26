@@ -165,7 +165,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                 LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
                 LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
         GPAccountLogged.getInstance().setAccountDetail(resultDetails);
-        sessionLoginWidget.setUserLogger(resultDetails.getName());
+        sessionLoginWidget.setUserLogger(resultDetails.getUsername());
         Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), resultDetails.getTreeOptions());
         Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), resultDetails);
     }

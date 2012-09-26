@@ -35,9 +35,12 @@
  */
 package org.geosdi.geoplatform.services;
 
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectServerEnum;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import org.codehaus.jra.Post;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
 
 /**
  * Public interface to define the service operations mapped via REST using CXT
@@ -59,4 +62,22 @@ public interface GPTrackingService {
     @Post
     boolean unscribeLayerNotification(@WebParam(name = "username") String username,
             @WebParam(name = "layerUUID") String layerUUID);
+
+    /**
+     * Send a Message XMPP for every online Account to which the Project is
+     * shared.
+     *
+     * @param projectID the Project ID
+     * @param subject the Message subject
+     * @param text the Message text (aka body)
+     * @param attributesMap the Message attributes (aka properties)
+     * @throws ResourceNotFoundFault if Project not found
+     */
+    @Post
+    void sendSharedProjectNotification(
+            @WebParam(name = "projectID") Long projectID,
+            @WebParam(name = "subject") XMPPSubjectServerEnum subject,
+            @WebParam(name = "text") String text,
+            @WebParam(name = "attributesMap") XmppAttributesMap attributesMap)
+            throws ResourceNotFoundFault;
 }

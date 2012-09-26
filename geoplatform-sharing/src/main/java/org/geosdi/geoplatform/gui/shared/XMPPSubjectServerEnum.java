@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.gui.shared;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -41,5 +41,5 @@ package org.geosdi.geoplatform.services;
  */
 public enum XMPPSubjectServerEnum {
 
-    LAYER_RELOAD;
+    LAYER_RELOAD, SHARED_PROJECT;
 }

@@ -679,12 +679,19 @@ class ProjectServiceImpl {
     /**
      * @see GeoPlatformService#getProjectWithRootFolders(java.lang.Long)
      */
-    public ProjectDTO getProjectWithRootFolders(Long projectID)
+    public ProjectDTO getProjectWithRootFolders(Long projectID, Long accountID)
             throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
-        ProjectDTO projectDTO = new ProjectDTO(project);
-
+        GPAccount account = this.getAccountByID(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+        ProjectDTO projectDTO;
+        GPAccount owner = this.getProjectOwner(projectID);
+        if (this.getProjectOwner(projectID).getId().equals(accountID)) {
+            projectDTO = new ProjectDTO(project);
+        } else {
+            projectDTO = new ProjectDTO(project, owner);
+        }
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
@@ -698,11 +705,18 @@ class ProjectServiceImpl {
     /**
      * @see GeoPlatformService#getProjectWithExpandedElements(java.lang.Long)
      */
-    public ProjectDTO getProjectWithExpandedElements(Long projectID) throws ResourceNotFoundFault {
+    public ProjectDTO getProjectWithExpandedElements(Long projectID, Long accountID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
-        ProjectDTO projectDTO = new ProjectDTO(project);
-
+        GPAccount account = this.getAccountByID(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+        ProjectDTO projectDTO;
+        GPAccount owner = this.getProjectOwner(projectID);
+        if (this.getProjectOwner(projectID).getId().equals(accountID)) {
+            projectDTO = new ProjectDTO(project);
+        } else {
+            projectDTO = new ProjectDTO(project, owner);
+        }
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
@@ -913,7 +927,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                                                              folderDTO);
+                        folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -935,10 +949,10 @@ class ProjectServiceImpl {
                 GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                                                                  (RasterLayerDTO) element);
+                            (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                                                                  (VectorLayerDTO) element);
+                            (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);

@@ -46,6 +46,8 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.ObservableGPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -67,14 +69,18 @@ public class IMementoSaveProvider implements Provider<IMementoSave> {
 
     @Override
     public IMementoSave get() {
-        GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.IS_CURRENT_PROJECT_SHARED.name());
+        GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
         if (this.mementoSave == null || clientProject == null || this.savedShareStatus != clientProject.isShared()) {
             if (clientProject == null) {
                 this.mementoSave = new GPMementoSaveCache(observable);
             } else {
                 this.savedShareStatus = clientProject.isShared();
-                this.mementoSave = clientProject.isShared() ? new GPMementoSaveShared(observable, peekCacheEvent)
-                        : new GPMementoSaveCache(observable);
+                IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                if (clientProject.isShared() && !GPRole.VIEWER.toString().equalsIgnoreCase(accountInSession.getAuthority())) {
+                    this.mementoSave = new GPMementoSaveShared(observable, peekCacheEvent);
+                } else {
+                    this.mementoSave = new GPMementoSaveCache(observable);
+                }
             }
         }
         return this.mementoSave;

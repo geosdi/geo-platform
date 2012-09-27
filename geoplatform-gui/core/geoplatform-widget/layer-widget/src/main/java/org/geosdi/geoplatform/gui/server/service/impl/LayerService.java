@@ -46,7 +46,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.connectors.ws.tracking.GPTrackingClientConnector;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -142,9 +141,11 @@ public class LayerService implements ILayerService {
         try {
             GPProject project = this.geoPlatformServiceClient.getProjectDetail(projectId);
             if (account.isLoadExpandedFolders() || project.isShared()) {
-                projectDTO = this.geoPlatformServiceClient.getProjectWithExpandedElements(projectId);
+                projectDTO = this.geoPlatformServiceClient.
+                        getProjectWithExpandedElements(projectId, account.getId());
             } else {
-                projectDTO = geoPlatformServiceClient.getProjectWithRootFolders(projectId);
+                projectDTO = geoPlatformServiceClient.
+                        getProjectWithRootFolders(projectId, account.getId());
             }
         } catch (ResourceNotFoundFault rnf) {
             logger.debug("Returning no elements: " + rnf);
@@ -165,9 +166,11 @@ public class LayerService implements ILayerService {
         try {
             ProjectDTO project;
             if (account.isLoadExpandedFolders()) {
-                project = geoPlatformServiceClient.getProjectWithExpandedElements(projectId);
+                project = geoPlatformServiceClient.
+                        getProjectWithExpandedElements(projectId, account.getId());
             } else {
-                project = geoPlatformServiceClient.getProjectWithRootFolders(projectId);
+                project = geoPlatformServiceClient.
+                        getProjectWithRootFolders(projectId, account.getId());
             }
             folderList = project.getRootFolders();
         } catch (ResourceNotFoundFault rnf) {

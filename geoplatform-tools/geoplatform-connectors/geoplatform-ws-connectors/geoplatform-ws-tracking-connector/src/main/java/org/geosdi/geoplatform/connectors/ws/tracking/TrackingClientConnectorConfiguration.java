@@ -33,21 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.xmpp.handler;
+package org.geosdi.geoplatform.connectors.ws.tracking;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
+import javax.annotation.Resource;
+import org.geosdi.geoplatform.configurator.bootstrap.Production;
+import org.geosdi.geoplatform.services.GPTrackingService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface IXMPPMessageHandler extends EventHandler {
+@Configuration
+@Production
+public class TrackingClientConnectorConfiguration {
 
-    Type<IXMPPMessageHandler> TYPE = new Type<IXMPPMessageHandler>();
+    @Resource
+    private GPTrackingClientConnector gpTrackingClientConnector;
 
-    AbstractXMPPEvent instantiateMessageSubjectEvent(String xmppMessageSubject);
-
-    void handleMessageBody(String messageBody);
+    @Bean
+    public GPTrackingService geoPlatformTrackingClient() {
+        return this.gpTrackingClientConnector.getEndpointService();
+    }
 }

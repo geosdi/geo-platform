@@ -82,6 +82,7 @@ import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.geosdi.geoplatform.services.GPTrackingService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,8 +101,7 @@ public class LayerService implements ILayerService {
     //
     private GeoPlatformService geoPlatformServiceClient;
     //
-    @Autowired
-    private GPTrackingClientConnector geoPlatformTrackingClient;
+    private GPTrackingService geoPlatformTrackingClient;
     //
     @Autowired
     private DTOLayerConverter dtoConverter;
@@ -116,6 +116,16 @@ public class LayerService implements ILayerService {
     public void setGeoPlatformServiceClient(
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
+
+    /**
+     *
+     * @param geoPlatformTrackingClient the geoPlatformTrackingClient to set
+     */
+    @Autowired
+    public void setGeoPlatformTrackingClient(
+            @Qualifier("geoPlatformTrackingClient") GPTrackingService geoPlatformTrackingClient) {
+        this.geoPlatformTrackingClient = geoPlatformTrackingClient;
     }
 
     @Override
@@ -712,11 +722,11 @@ public class LayerService implements ILayerService {
                 if (secondToRefresh > 0) {
                     logger.debug("Request to subscribe layer refresh for: " + username + " - " + layerUUID);
                     httpServletRequest.getSession().setMaxInactiveInterval(-1);
-                    this.geoPlatformTrackingClient.getEndpointService().subscribeLayerNotification(username,
+                    this.geoPlatformTrackingClient.subscribeLayerNotification(username,
                             emiteResource, layerUUID, secondToRefresh);
                 } else if (account instanceof GPUser) {
                     logger.debug("Request to UNsubscribe layer refresh for: " + username + " - " + layerUUID);
-                    this.geoPlatformTrackingClient.getEndpointService().unscribeLayerNotification(username, layerUUID);
+                    this.geoPlatformTrackingClient.unscribeLayerNotification(username, layerUUID);
                 }
             }
         } catch (GPSessionTimeout timeout) {

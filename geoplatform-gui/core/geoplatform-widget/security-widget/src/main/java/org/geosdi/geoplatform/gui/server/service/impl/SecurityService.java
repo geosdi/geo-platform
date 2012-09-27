@@ -83,7 +83,8 @@ public class SecurityService implements ISecurityService {
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     username, password);
-            return this.executeLoginOnGPAccount(user, httpServletRequest);
+            return this.executeLoginOnGPAccount(user, geoPlatformServiceClient.getAccountPermission(user.getId()),
+                    httpServletRequest);
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find user with username or email: " + username
@@ -113,7 +114,8 @@ public class SecurityService implements ISecurityService {
             GPUser user;
             try {
                 user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(ivUser, LikePatternType.CONTENT_EQUALS));
-                accountDetail = this.executeLoginOnGPAccount(user, httpServletRequest);
+                accountDetail = this.executeLoginOnGPAccount(user,
+                        geoPlatformServiceClient.getAccountPermission(user.getId()), httpServletRequest);
             } catch (ResourceNotFoundFault ex) {
                 logger.error("SecurityService", "Unable to find user with username or email: " + ivUser
                         + " Error: " + ex);
@@ -127,15 +129,11 @@ public class SecurityService implements ISecurityService {
         return accountDetail;
     }
 
-    private IGPAccountDetail executeLoginOnGPAccount(GPAccount account,
+    private IGPAccountDetail executeLoginOnGPAccount(GPAccount account, GuiComponentsPermissionMapData guiComponentPermission,
             HttpServletRequest httpServletRequest) throws ResourceNotFoundFault,
             SOAPFaultException {
-        GuiComponentsPermissionMapData guiComponentPermission;
-        GPAccountProject accountProject;
-        IGPAccountDetail userDetail;
+        GPAccountProject accountProject = geoPlatformServiceClient.getDefaultAccountProject(account.getId());
         GPProject project;
-        guiComponentPermission = geoPlatformServiceClient.getAccountPermission(account.getId());
-        accountProject = geoPlatformServiceClient.getDefaultAccountProject(account.getId());
         if (accountProject == null) {
             project = new GPProject();
             project.setName("Default Project");
@@ -147,7 +145,7 @@ public class SecurityService implements ISecurityService {
         this.sessionUtility.storeLoggedAccountAndDefaultProject(account, project.getId(), httpServletRequest);
         GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
         List<GPMessage> unreadMessages = geoPlatformServiceClient.getUnreadMessagesByRecipient(account.getId());
-        userDetail = this.dtoConverter.convertAccountToDTO(account, accountProject, viewport, unreadMessages);
+        IGPAccountDetail userDetail = this.dtoConverter.convertAccountToDTO(account, accountProject, viewport, unreadMessages);
         userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
         return userDetail;
     }
@@ -159,7 +157,9 @@ public class SecurityService implements ISecurityService {
         GPApplication application;
         try {
             application = geoPlatformServiceClient.getApplication(appID);
-            return this.executeLoginOnGPAccount(application, httpServletRequest);
+            return this.executeLoginOnGPAccount(application,
+                    geoPlatformServiceClient.getApplicationPermission(application.getAppID()),
+                    httpServletRequest);
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find application with appID: " + appID

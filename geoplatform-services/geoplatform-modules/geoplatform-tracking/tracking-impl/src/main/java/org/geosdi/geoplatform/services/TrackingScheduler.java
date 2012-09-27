@@ -58,10 +58,8 @@ public class TrackingScheduler implements InitializingBean {
     private JobDetail sendMessageJobDetail;
 
     private void generateTrackingJobs() {
-        this.sendMessageJobDetail = JobBuilder.newJob(
-                SendTrackingMessageJob.class).
-                withIdentity(SendTrackingMessageJob.SEND_TRACKING_MESSAGE_JOB,
-                             TrackingScheduler.TRACKING_GROUP).
+        this.sendMessageJobDetail = JobBuilder.newJob(SendTrackingMessageJob.class).
+                withIdentity(SendTrackingMessageJob.SEND_TRACKING_MESSAGE_JOB, TrackingScheduler.TRACKING_GROUP).
                 withDescription("Sends the message using the created connection").
                 storeDurably(Boolean.TRUE).
                 requestRecovery().

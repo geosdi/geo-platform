@@ -16,4 +16,21 @@
 
     <name>Geo-Platform :: == WS Util</name>
     
+    <!-- Dependencies only for EntityCorrectness.java -->
+    <dependencies>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-sharing</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-acl</artifactId>
+        </dependency>
+    </dependencies>
+    
 </project>

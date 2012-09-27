@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.geosdi.geoplatform.gui.shared.XMPPSubjectServerEnum;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectServerEnum;
 import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
 
 /**

@@ -50,7 +50,7 @@ import org.springframework.stereotype.Component;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "geoPlatformTrackingClient")
+@Component(value = "gpTrackingClientConnector")
 @Production
 public class GPTrackingClientConnector extends GPAbstractWSClientConnector<GPTrackingService> {
 

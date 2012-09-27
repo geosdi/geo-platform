@@ -35,19 +35,19 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.geosdi.geoplatform.gui.shared.XMPPSubjectServerEnum;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import javax.jws.WebService;
-import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectServerEnum;
 import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.geosdi.geoplatform.services.development.EntityCorrectnessException;
@@ -80,9 +80,6 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     //
     @Autowired
     private TrackingScheduler scheduler;
-    // 
-    @Autowired
-    private GPAccountDAO accountDao;
     // 
     @Autowired
     private GPProjectDAO projectDao;
@@ -256,8 +253,9 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
         message.setSubject(subject.toString());
         message.setBody(text);
 
-        // TODO Set up properties
-//        message.setProperty(, );
+        for (Map.Entry<String, String> entry : attributesMap.getAttributesMap().entrySet()) {
+            message.setProperty(entry.getKey(), entry.getValue());
+        }
 
         return message;
     }

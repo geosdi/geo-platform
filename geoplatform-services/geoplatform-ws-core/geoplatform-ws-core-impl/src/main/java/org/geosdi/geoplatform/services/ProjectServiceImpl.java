@@ -163,6 +163,15 @@ class ProjectServiceImpl {
         accountProject.setProject(project);
         accountProject.setDefaultProject(defaultProject);
 
+        // Reset default project
+        if (defaultProject) {
+            GPAccountProject oldDefault = accountProjectDao.findDefaultProjectByAccountID(account.getId());
+            if (oldDefault != null) {
+                oldDefault.setDefaultProject(false);
+                accountProjectDao.merge(oldDefault);
+            }
+        }
+
         projectDao.persist(project);
         accountProjectDao.persist(accountProject);
 

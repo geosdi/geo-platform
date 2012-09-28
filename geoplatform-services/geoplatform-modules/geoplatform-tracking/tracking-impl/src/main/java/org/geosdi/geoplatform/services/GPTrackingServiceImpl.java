@@ -254,6 +254,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
         message.setBody(text);
 
         for (Map.Entry<String, String> entry : attributesMap.getAttributesMap().entrySet()) {
+            logger.trace("Attribute - {}: {}", entry.getKey(), entry.getValue());
             message.setProperty(entry.getKey(), entry.getValue());
         }
 

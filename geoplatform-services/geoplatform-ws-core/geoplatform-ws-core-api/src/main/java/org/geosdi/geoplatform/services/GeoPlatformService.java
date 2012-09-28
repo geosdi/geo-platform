@@ -1087,7 +1087,8 @@ public interface GeoPlatformService {
     @Get
     @WebResult(name = "project")
     ProjectDTO getProjectWithRootFolders(
-            @WebParam(name = "projectID") Long projectID)
+            @WebParam(name = "projectID") Long projectID,
+            @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1105,7 +1106,8 @@ public interface GeoPlatformService {
     @Get
     @WebResult(name = "project")
     ProjectDTO getProjectWithExpandedElements(
-            @WebParam(name = "projectID") Long projectID)
+            @WebParam(name = "projectID") Long projectID,
+            @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**

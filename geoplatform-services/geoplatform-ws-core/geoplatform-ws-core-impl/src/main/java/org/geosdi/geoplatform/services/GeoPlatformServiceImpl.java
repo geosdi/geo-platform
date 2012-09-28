@@ -767,15 +767,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     //<editor-fold defaultstate="collapsed" desc="Folder / Project">
     @Override
-    public ProjectDTO getProjectWithRootFolders(Long projectID)
+    public ProjectDTO getProjectWithRootFolders(Long projectID, Long accountId)
             throws ResourceNotFoundFault {
-        return projectServiceDelegate.getProjectWithRootFolders(projectID);
+        return projectServiceDelegate.getProjectWithRootFolders(projectID, accountId);
     }
 
     @Override
-    public ProjectDTO getProjectWithExpandedElements(Long projectID)
+    public ProjectDTO getProjectWithExpandedElements(Long projectID, Long accountId)
             throws ResourceNotFoundFault {
-        return projectServiceDelegate.getProjectWithExpandedElements(projectID);
+        return projectServiceDelegate.getProjectWithExpandedElements(projectID, accountId);
     }
 
     @Override

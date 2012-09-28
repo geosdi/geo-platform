@@ -141,9 +141,11 @@ public class LayerService implements ILayerService {
         try {
             GPProject project = this.geoPlatformServiceClient.getProjectDetail(projectId);
             if (account.isLoadExpandedFolders() || project.isShared()) {
-                projectDTO = this.geoPlatformServiceClient.getProjectWithExpandedElements(projectId);
+                projectDTO = this.geoPlatformServiceClient.
+                        getProjectWithExpandedElements(projectId, account.getId());
             } else {
-                projectDTO = geoPlatformServiceClient.getProjectWithRootFolders(projectId);
+                projectDTO = geoPlatformServiceClient.
+                        getProjectWithRootFolders(projectId, account.getId());
             }
         } catch (ResourceNotFoundFault rnf) {
             logger.debug("Returning no elements: " + rnf);
@@ -164,9 +166,11 @@ public class LayerService implements ILayerService {
         try {
             ProjectDTO project;
             if (account.isLoadExpandedFolders()) {
-                project = geoPlatformServiceClient.getProjectWithExpandedElements(projectId);
+                project = geoPlatformServiceClient.
+                        getProjectWithExpandedElements(projectId, account.getId());
             } else {
-                project = geoPlatformServiceClient.getProjectWithRootFolders(projectId);
+                project = geoPlatformServiceClient.
+                        getProjectWithRootFolders(projectId, account.getId());
             }
             folderList = project.getRootFolders();
         } catch (ResourceNotFoundFault rnf) {

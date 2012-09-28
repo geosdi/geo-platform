@@ -64,12 +64,12 @@ import org.springframework.stereotype.Component;
  */
 @Component(value = "dtoSecurityConverter")
 public class DTOSecurityConverter {
-
+    
     private @Value("${host_xmpp_server}")
     String hostXmppServer;
     //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    
     public GPClientMessage convertMessage(GPMessage message) {
         GPClientMessage clientMessage = new GPClientMessage();
         clientMessage.setId(message.getId());
@@ -83,11 +83,12 @@ public class DTOSecurityConverter {
         clientMessage.setCommandProperties(message.getCommandsProperties());
         return clientMessage;
     }
-
+    
     public IGPAccountDetail convertAccountToDTO(GPAccount account, GPAccountProject accountProject,
             GPViewport viewport, List<GPMessage> messages) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
         UserTreeOptions usertreeOptions = new UserTreeOptions();
+        accountDetail.setId(account.getId());
         accountDetail.setUsername(account.getNaturalID()); // Forced representation
         accountDetail.setOrganization(account.getOrganization().getName());
         usertreeOptions.setLoadExpandedFolders(account.isLoadExpandedFolders());

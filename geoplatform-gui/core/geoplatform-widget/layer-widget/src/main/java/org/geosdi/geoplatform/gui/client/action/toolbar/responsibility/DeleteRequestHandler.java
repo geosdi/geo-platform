@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
@@ -88,8 +89,8 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         boolean isAllowedNewMemento = true;
         mementoSave.cleanOperationsRefToDeletedElement(element);
         MementoSaveRemove mementoSaveRemove = null;
-        Boolean sharedProjectStatus = (Boolean) Registry.get(UserSessionEnum.IS_CURRENT_PROJECT_SHARED.name());
-        if (!sharedProjectStatus && precedingMemento != null && precedingMemento instanceof MementoSaveAddedFolder
+        GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+        if (!clientProject.isShared() && precedingMemento != null && precedingMemento instanceof MementoSaveAddedFolder
                 && ((MementoSaveAddedFolder) precedingMemento).getAddedFolder().getRefBaseElement().equals(element)) {
             mementoSave.remove(precedingMemento);
             isAllowedNewMemento = false;

@@ -20,7 +20,9 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 public interface IGPAccountDetail {
 
     String getName();
-    
+
+    Long getId();
+
     String getUsername();
 
     String getOrganization();

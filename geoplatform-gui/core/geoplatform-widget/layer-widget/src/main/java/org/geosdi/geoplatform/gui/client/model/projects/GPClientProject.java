@@ -124,7 +124,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     }
 
     public IGPUserSimpleDetail getOwner() {
-        return owner;
+        return this.owner;
     }
 
     public void setOwner(IGPUserSimpleDetail owner) {

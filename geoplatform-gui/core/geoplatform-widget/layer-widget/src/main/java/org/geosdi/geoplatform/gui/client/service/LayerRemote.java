@@ -42,6 +42,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
@@ -55,6 +56,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -265,4 +267,14 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh) throws GeoPlatformException;
+
+    /**
+     * @param projectId
+     * @param subject
+     * @param text
+     * @param attributesMap
+     * @throws GeoPlatformException
+     */
+    void sendSharedProjectNotification(Long projectId, XMPPSubjectEnum subject,
+            String text, Map<String, String> attributesMap) throws GeoPlatformException;
 }

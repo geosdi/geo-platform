@@ -45,6 +45,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -70,6 +71,7 @@ import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOLayerConverter;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
@@ -81,6 +83,7 @@ import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
 import org.geosdi.geoplatform.services.GPTrackingService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -757,7 +760,7 @@ public class LayerService implements ILayerService {
     public ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(long projectId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         ArrayList<GPSimpleUser> simpleUserList = null;
         try {
-            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
             List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccountsToShareByProjectID(projectId);
             simpleUserList = Lists.newArrayList(this.dtoConverter.convertToGPSimpleUser(accounts));
         } catch (GPSessionTimeout timeout) {
@@ -773,7 +776,7 @@ public class LayerService implements ILayerService {
     public ArrayList<GPSimpleUser> getAccountsFromSharedProject(long idSharedProject, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         ArrayList<GPSimpleUser> simpleUserList = null;
         try {
-            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
             List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccountsByProjectID(idSharedProject);
             simpleUserList = Lists.newArrayList(this.dtoConverter.convertToGPSimpleUser(accounts));
         } catch (GPSessionTimeout timeout) {
@@ -833,5 +836,23 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(ex.getMessage());
         }
         return this.dtoConverter.convertToGPClientProject(projectDTO);
+    }
+
+    @Override
+    public void sendSharedProjectNotification(Long projectId, XMPPSubjectEnum subject,
+            String text, Map<String, String> attributesMap,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        try {
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
+            logger.debug("Request to send shared project message for projectID: "
+                    + projectId + " - with subject: " + subject);
+            this.geoPlatformTrackingClient.sendSharedProjectNotification(projectId,
+                    subject, text, new XmppAttributesMap(attributesMap));
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        } catch (ResourceNotFoundFault rnff) {
+            logger.error("An Error Occured on sendSharedProjectNotification: " + rnff);
+            throw new GeoPlatformException(rnff);
+        }
     }
 }

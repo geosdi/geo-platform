@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.packet.Message;
 import org.quartz.Job;

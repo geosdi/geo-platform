@@ -33,25 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.xmpp;
-
-import com.google.common.collect.Maps;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
+package org.geosdi.geoplatform.gui.shared;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class XMPPEventRepository {
+public enum XMPPSubjectEnum {
 
-    private static Map<String, AbstractXMPPEvent> xmppEventMap = Maps.newHashMap();
-
-    public static void putEventMapping(String messageSubject, AbstractXMPPEvent xmppEvent) {
-        xmppEventMap.put(messageSubject, xmppEvent);
-    }
-
-    public static AbstractXMPPEvent getXMPPEventForSubject(String messageSubject) {
-        return xmppEventMap.get(messageSubject);
-    }
+    LAYER_RELOAD, SHARED_PROJECT;
 }

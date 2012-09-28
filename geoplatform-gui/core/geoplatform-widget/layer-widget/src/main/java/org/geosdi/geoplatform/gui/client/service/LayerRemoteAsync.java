@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
@@ -53,6 +54,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -136,4 +138,7 @@ public interface LayerRemoteAsync {
 
     void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh,
             AsyncCallback<?> callback) throws GeoPlatformException;
+
+    void sendSharedProjectNotification(Long projectId, XMPPSubjectEnum subject,
+            String text, Map<String, String> attributesMap, AsyncCallback<?> callback) throws GeoPlatformException;
 }

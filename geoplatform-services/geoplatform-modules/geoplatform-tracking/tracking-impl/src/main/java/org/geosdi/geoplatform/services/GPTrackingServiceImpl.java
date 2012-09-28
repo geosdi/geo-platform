@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.shared.XMPPSubjectServerEnum;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.geosdi.geoplatform.services.development.EntityCorrectnessException;
@@ -168,7 +168,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
 //            }
 //        }
         Message message = new Message(messageReceiver, Message.Type.normal);
-        message.setSubject(XMPPSubjectServerEnum.LAYER_RELOAD.toString());
+        message.setSubject(XMPPSubjectEnum.LAYER_RELOAD.toString());
         message.setBody(layerUUID);
         trigger.getJobDataMap().put(SendTrackingMessageJob.MESSAGE, message);
         this.scheduleTrigger(triggerKey, trigger);
@@ -199,7 +199,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
      * org.geosdi.geoplatform.responce.collection.XmppAttributesMap)
      */
     @Override
-    public void sendSharedProjectNotification(Long projectID, XMPPSubjectServerEnum subject,
+    public void sendSharedProjectNotification(Long projectID, XMPPSubjectEnum subject,
             String text, XmppAttributesMap attributesMap) throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectID);
         if (project == null) {
@@ -244,7 +244,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     /**
      * Create an XMPP Message less than recipient.
      */
-    private Message createUnknowMessage(XMPPSubjectServerEnum subject, String text,
+    private Message createUnknowMessage(XMPPSubjectEnum subject, String text,
             XmppAttributesMap attributesMap) {
 
         Message message = new Message();

@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
@@ -55,6 +56,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -213,6 +215,13 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Override
     public void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh) throws GeoPlatformException {
         this.layerService.setLayerRefreshTime(emiteResource, layerUUID, secondToRefresh, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public void sendSharedProjectNotification(Long projectId, XMPPSubjectEnum subject,
+            String text, Map<String, String> attributesMap) throws GeoPlatformException {
+        this.layerService.sendSharedProjectNotification(projectId, subject, text, attributesMap,
+                super.getThreadLocalRequest());
     }
 
     @Override

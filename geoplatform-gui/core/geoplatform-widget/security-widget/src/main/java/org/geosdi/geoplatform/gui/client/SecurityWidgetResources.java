@@ -46,5 +46,4 @@ public class SecurityWidgetResources {
 
     public static final SecurityWidgetIcons ICONS = GWT.create(
             SecurityWidgetIcons.class);
-
 }

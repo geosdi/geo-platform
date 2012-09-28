@@ -105,7 +105,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     @Override
     public void setWindowProperties() {
         super.setHeading("GeoPlatform Users Management");
-        super.setSize(600, 490);
+        super.setSize(670, 490);
 
         super.addWindowListener(new WindowListener() {
             @Override
@@ -174,6 +174,12 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         roleColumn.setHeader("Role");
         roleColumn.setWidth(80);
         configs.add(roleColumn);
+        
+        ColumnConfig trustedLevelColumn = new ColumnConfig();
+        trustedLevelColumn.setId(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
+        trustedLevelColumn.setHeader("Trusted");
+        trustedLevelColumn.setWidth(70);
+        configs.add(trustedLevelColumn);
 
         ColumnConfig delColumn = new ColumnConfig();
         delColumn.setId("delColumn");
@@ -190,7 +196,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
     @Override
     public void setGridProperties() {
-        super.widget.setSize(530, 250);
+        super.widget.setSize(600, 250);
         super.widget.setAutoExpandColumn(GPSimpleUserKeyValue.NAME.toString());
     }
 

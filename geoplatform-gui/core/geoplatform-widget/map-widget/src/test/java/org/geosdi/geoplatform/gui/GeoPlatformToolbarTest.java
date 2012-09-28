@@ -36,8 +36,9 @@
 package org.geosdi.geoplatform.gui;
 
 import java.util.Collections;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IToolbarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -48,21 +49,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"applicationContext-Test.xml"})
 public class GeoPlatformToolbarTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     private IToolbarContainerTool toolbarContainerTool;
 
     @Test
     public void test() {
         Collections.sort(toolbarContainerTool.getGroupTools());
-        for (ToolbarGenericTool tool : toolbarContainerTool.getGroupTools()) {
+        for (WidgetGenericTool<IGeoPlatformToolbar> tool : toolbarContainerTool.getGroupTools()) {
             logger.info("TOOL ITEM: {}", tool.toString());
         }
     }

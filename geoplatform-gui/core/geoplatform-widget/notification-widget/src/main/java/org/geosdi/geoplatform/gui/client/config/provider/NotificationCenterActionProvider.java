@@ -37,25 +37,27 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.NotificationPopupPanel;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.action.NotificationCenterAction;
+import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+@Singleton
 public class NotificationCenterActionProvider implements Provider<NotificationCenterAction> {
 
     private NotificationPopupPanel notificationPopupPanel;
 
     @Inject
-    public NotificationCenterActionProvider(NotificationPopupPanel notificationPopupPanel) {
+    public NotificationCenterActionProvider(
+            NotificationPopupPanel notificationPopupPanel) {
         this.notificationPopupPanel = notificationPopupPanel;
     }
 
     @Override
     public NotificationCenterAction get() {
-        NotificationCenterAction action = new NotificationCenterAction(this.notificationPopupPanel);
-        return action;
+        return new NotificationCenterAction(this.notificationPopupPanel);
     }
 }

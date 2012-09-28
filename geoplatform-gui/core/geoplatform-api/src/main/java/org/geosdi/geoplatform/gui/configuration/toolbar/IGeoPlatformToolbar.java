@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface IGeoPlatformToolbar {
 
@@ -52,11 +52,13 @@ public interface IGeoPlatformToolbar {
 
     void addMapToggleButton(ToolbarActionTool tool);
 
+    void addMapToogleButton(ToolbarActionEditorTool tool);
+
     void addIconInToolbar(IconInToolbar tool);
 
     void addMenuInToolBar(MenuInToolBar tool);
 
     void addMenuButton(MenuClientTool tool);
-    
+
     void addFillToolItem();
 }

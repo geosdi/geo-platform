@@ -44,12 +44,13 @@ import org.geosdi.geoplatform.gui.client.action.NotificationCenterAction;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@GinModules(value = {NotificationGinConfigurator.class, BasicGinConfigurator.class})
+@GinModules(value = {NotificationGinConfigurator.class})
 public interface NotificationGinInjector extends Ginjector {
 
     public static class MainInjector {
 
-        private static NotificationGinInjector instance = GWT.create(NotificationGinInjector.class);
+        private static NotificationGinInjector instance = GWT.create(
+                NotificationGinInjector.class);
 
         private MainInjector() {
         }

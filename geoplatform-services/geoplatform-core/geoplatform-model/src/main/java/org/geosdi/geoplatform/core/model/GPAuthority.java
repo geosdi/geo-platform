@@ -95,10 +95,10 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     public GPAuthority() {
     }
 
-    public GPAuthority(GPAccount account, String authority, GPTrustedLevel trustedLevel) {
+    public GPAuthority(GPAccount account, GPTrustedLevel trustedLevel, String authority) {
         this.account = account;
-        this.trustedLevel = trustedLevel;
         this.accountNaturalID = account.getNaturalID();
+        this.trustedLevel = trustedLevel;
         this.authority = authority;
     }
 

@@ -74,7 +74,8 @@ public final class ToolbarActionRegistar
         if (toolActionCreator == null) {
             return null;
         }
-        ToolbarAction toolbarAction = toolActionCreator.createActionTool(mapWidget);
+        ToolbarAction toolbarAction = toolActionCreator.createActionTool(
+                mapWidget);
         toolbarAction.setId(key);
         return toolbarAction;
     }

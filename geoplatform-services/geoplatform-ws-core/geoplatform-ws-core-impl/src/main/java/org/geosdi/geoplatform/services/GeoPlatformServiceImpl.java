@@ -553,7 +553,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+    public GPProject updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
         return projectServiceDelegate.updateDefaultProject(accountID, projectID);
     }
 
@@ -696,7 +696,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             boolean expanded)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.saveFolderProperties(folderID, name,
-                                                          checked, expanded);
+                checked, expanded);
     }
 
     @Override
@@ -767,15 +767,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     //<editor-fold defaultstate="collapsed" desc="Folder / Project">
     @Override
-    public List<FolderDTO> getRootFoldersByProjectID(Long projectID)
+    public ProjectDTO getProjectWithRootFolders(Long projectID, Long accountId)
             throws ResourceNotFoundFault {
-        return projectServiceDelegate.getRootFoldersByProjectID(projectID);
+        return projectServiceDelegate.getProjectWithRootFolders(projectID, accountId);
     }
 
     @Override
-    public ProjectDTO getExpandedElementsByProjectID(Long projectID)
+    public ProjectDTO getProjectWithExpandedElements(Long projectID, Long accountId)
             throws ResourceNotFoundFault {
-        return projectServiceDelegate.getExpandedElementsByProjectID(projectID);
+        return projectServiceDelegate.getProjectWithExpandedElements(projectID, accountId);
     }
 
     @Override

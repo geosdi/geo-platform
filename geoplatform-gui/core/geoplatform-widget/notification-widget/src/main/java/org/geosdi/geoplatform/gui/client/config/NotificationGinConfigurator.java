@@ -50,6 +50,5 @@ public class NotificationGinConfigurator extends AbstractGinModule {
     protected void configure() {
         bind(NotificationCenterAction.class).toProvider(NotificationCenterActionProvider.class)
                 .in(Singleton.class);
-//        requestStaticInjection(TreeContextMenuFactory.class);
     }
 }

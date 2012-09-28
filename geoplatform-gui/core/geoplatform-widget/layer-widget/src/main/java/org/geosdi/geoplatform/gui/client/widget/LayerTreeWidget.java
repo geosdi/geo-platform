@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Registry;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.store.TreeStore;
@@ -68,9 +69,12 @@ import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFactory;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPModelKeyProvider;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.IGPExpandTreeNodeHandler;
@@ -84,6 +88,7 @@ import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbar
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.ResetMapStoreEvent;
@@ -118,6 +123,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
      */
     public LayerTreeWidget(ContentPanel contentPanel) {
         super();
+        //Assigning a dynamic context menu to the tree
+        TreeContextMenuFactory.setTreePanel(super.tree);
         super.store.setKeyProvider(new GPModelKeyProvider());
         this.contentPanel = contentPanel;
         TimeoutHandlerManager.addHandler(IGPBuildTreeHandler.TYPE, this);
@@ -126,8 +133,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         this.setTreePanelProperties();
         this.treeStore = new GPTreeStoreWidget(super.tree);
         this.treeDecorator = new GPLayerTreeDecorator(super.tree);
-        //Assigning a dynamic context menu to the tree
-        TreeContextMenuFactory.setTreePanel(super.tree);
     }
 
     /*
@@ -152,7 +157,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
 
             LayoutManager.getInstance().getStatusMap().setBusy(
                     "Loading tree elements: please, wait untill contents fully loads.");
-            LayerRemote.Util.getInstance().loadUserFolders(new AsyncCallback<ArrayList<GPFolderClientInfo>>() {
+            LayerRemote.Util.getInstance().loadDefaulProjectElements(new AsyncCallback<GPClientProject>() {
                 @Override
                 public void onFailure(Throwable caught) {
                     if (caught.getCause() instanceof GPSessionTimeout) {
@@ -171,13 +176,14 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                 }
 
                 @Override
-                public void onSuccess(ArrayList<GPFolderClientInfo> result) {
-                    root.modelConverter(result);
+                public void onSuccess(GPClientProject result) {
+                    Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), result);;
+                    root.modelConverter(result.getRootFolders());
                     store.add(root, Boolean.TRUE);
                     visitorDisplay.enableCheckedComponent(root);
                     initialized = Boolean.TRUE;
                     LayerTreeWidget.super.tree.setExpanded(root, Boolean.TRUE);
-                    LayerTreeWidget.this.insertElementsOfTheRootFolders(result);
+                    LayerTreeWidget.this.insertElementsOfTheRootFolders(result.getRootFolders());
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Tree elements loaded successfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());
@@ -190,7 +196,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
      * Set Tree Properties
      */
     @Override
-    public void setTreePanelProperties() {
+    public final void setTreePanelProperties() {
         this.addExpandListener();
         this.setTreePresenter();
         this.enableDDSupport();
@@ -362,18 +368,22 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                     tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
                 }
                 if (be.getItem() instanceof FolderTreeNode) {
-                    GPMementoSaveCache.getInstance().copyOriginalProperties(
-                            (GPBeanTreeModel) be.getItem());
+                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((GPBeanTreeModel) be.getItem());
                     ((FolderTreeNode) be.getItem()).setExpanded(Boolean.TRUE);
+                    mementoSave.putOriginalPropertiesInCache(memento);
                 }
             }
         });
         super.tree.addListener(Events.Collapse, new Listener<TreePanelEvent<ModelData>>() {
             @Override
             public void handleEvent(TreePanelEvent<ModelData> be) {
-                GPMementoSaveCache.getInstance().copyOriginalProperties(
-                        (GPBeanTreeModel) be.getItem());
-                ((FolderTreeNode) be.getItem()).setExpanded(Boolean.FALSE);
+                if (be.getItem() instanceof FolderTreeNode) {
+                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((GPBeanTreeModel) be.getItem());
+                    ((FolderTreeNode) be.getItem()).setExpanded(Boolean.FALSE);
+                    mementoSave.putOriginalPropertiesInCache(memento);
+                }
             }
         });
     }
@@ -432,7 +442,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     @Override
     public void rebuildTree() {
         this.initialized = Boolean.FALSE;
-        GPMementoSaveCache.getInstance().clear();
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        mementoSave.clear();
         GPHandlerManager.fireEvent(new ResetMapStoreEvent());
         this.root.removeAll();
         this.store.removeAll();

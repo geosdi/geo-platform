@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-  <!-- Inherit our applications main module.                      -->
-  <inherits name='org.geosdi.geoplatform.gui.NewsPopUpWindows' />
+    <!-- ADDING GIN MODULE -->
+    <inherits name="com.google.gwt.inject.Inject"/>
+    <!-- Inherit our applications main module.                      -->
+    <inherits name='org.geosdi.geoplatform.gui.NewsPopUpWindows' />
 
-  <!-- Specify the path to any remote services.                   -->
-  <servlet path="/NewsPopUpWindows/greet" class="org.geosdi.geoplatform.gui.server.GreetingServiceImpl" />
+    <!-- Specify the path to any remote services.                   -->
+    <servlet path="/NewsPopUpWindows/greet" class="org.geosdi.geoplatform.gui.server.GreetingServiceImpl" />
 
 </module>

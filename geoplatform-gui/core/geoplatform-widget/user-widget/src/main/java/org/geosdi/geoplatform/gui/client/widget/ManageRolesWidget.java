@@ -392,7 +392,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
                 // Iff for ADMIN role, we will remove MANAGE_ROLES
                 // i.e. MANAGE_ROLES will not be modified for a ADMIN role
-                if (role.equals(GPRole.ADMIN.toString())) {
+                if (role.equals(GPRole.ADMIN.getRole())) {
                     for (GuiComponentDetail gc : guiComponents) {
                         if (gc.getComponentId().equals(GuiComponentIDs.MANAGE_ROLES)) {
                             ManageRolesWidget.this.store.remove(gc);

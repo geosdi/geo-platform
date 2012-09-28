@@ -86,12 +86,11 @@ public class UserService implements IUserService {
             String searchText, String organization, HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
 
-        int start = config.getOffset();
-
         SearchRequest srq = new SearchRequest(searchText);
 
         Long usersCount = this.geoPlatformServiceClient.getUsersCount(organization, srq);
 
+        int start = config.getOffset();
         int page = start == 0 ? start : start / config.getLimit();
 
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
@@ -105,7 +104,6 @@ public class UserService implements IUserService {
             }
         } catch (ResourceNotFoundFault rnnf) {
             throw new GeoPlatformException(rnnf.getMessage()); // TODO Better message
-
         }
 
         ArrayList<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();

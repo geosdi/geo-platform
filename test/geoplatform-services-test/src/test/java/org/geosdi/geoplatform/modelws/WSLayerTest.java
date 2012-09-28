@@ -184,7 +184,7 @@ public class WSLayerTest extends ServiceTest {
         boolean erased = gpWSClient.deleteLayer(idRaster1);
         Assert.assertTrue("Deletion of the layer rasterLayer1", erased);
 
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, super.idUserTest);
         Assert.assertNotNull("projectWithRootFolders null", projectWithRootFolders);
 
         // Get root folders for project

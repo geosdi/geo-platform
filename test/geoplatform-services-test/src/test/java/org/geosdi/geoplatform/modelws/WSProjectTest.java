@@ -310,7 +310,7 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertEquals("project name", super.projectTest.getName(), projectAdded.getName());
         Assert.assertEquals("project elements", super.projectTest.getNumberOfElements(), projectAdded.getNumberOfElements());
 
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(projectID);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(projectID, super.idUserTest);
         Assert.assertNotNull("projectWithRootFolders null", projectWithRootFolders);
 
         rootFoldersDTO = projectWithRootFolders.getRootFolders();
@@ -401,7 +401,7 @@ public class WSProjectTest extends ServiceTest {
         gpWSClient.updateFolder(folder1A);
         gpWSClient.updateFolder(folder2C);
 
-        ProjectDTO project = gpWSClient.getProjectWithExpandedElements(super.idProjectTest);
+        ProjectDTO project = gpWSClient.getProjectWithExpandedElements(super.idProjectTest, super.idUserTest);
 
         Assert.assertEquals("project name", super.projectTest.getName(), project.getName());
         Assert.assertEquals("project elements", super.projectTest.getNumberOfElements(), project.getNumberOfElements().intValue());

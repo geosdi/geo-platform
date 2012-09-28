@@ -155,7 +155,7 @@ public class WSFolderTest extends ServiceTest {
         Assert.assertEquals("Number of all folders of ProjectTest before deleted",
                             7, totalFolders); // SetUp() added 2+5 folders
         //
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, super.idUserTest);
         Assert.assertNotNull("projectWithRootFolders null", projectWithRootFolders);
         
         List<FolderDTO> rootFolderList = projectWithRootFolders.getRootFolders();
@@ -167,7 +167,7 @@ public class WSFolderTest extends ServiceTest {
         gpWSClient.deleteFolder(idRootFolderB);
 
         // "rootFolderA" ---> "folder1" & "folder2"
-        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest);
+        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, super.idUserTest);
         Assert.assertNotNull("projectWithRootFolders null", projectWithRootFolders);
         
         rootFolderList = projectWithRootFolders.getRootFolders();

@@ -144,7 +144,7 @@ public class LayerService implements ILayerService {
         try {
             GPProject project = this.geoPlatformServiceClient.getProjectDetail(projectId);
             if (account.isLoadExpandedFolders() || project.isShared()) {
-                projectDTO = this.geoPlatformServiceClient.getProjectWithExpandedFoldersojectWithExpandedElements(projectId, account.getId());
+                projectDTO = this.geoPlatformServiceClient.getProjectWithExpandedFolders(projectId, account.getId());
             } else {
                 projectDTO = geoPlatformServiceClient.
                         getProjectWithRootFolders(projectId, account.getId());
@@ -168,7 +168,7 @@ public class LayerService implements ILayerService {
         try {
             ProjectDTO project;
             if (account.isLoadExpandedFolders()) {
-                project = geoPlatformServiceClient.getProjectWithExpandedFoldersojectWithExpandedElements(projectId, account.getId());
+                project = geoPlatformServiceClient.getProjectWithExpandedFolders(projectId, account.getId());
             } else {
                 project = geoPlatformServiceClient.
                         getProjectWithRootFolders(projectId, account.getId());

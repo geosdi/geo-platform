@@ -154,7 +154,16 @@ public class GPClientProject extends GeoPlatformBeanModel {
      * @return the defaultProject
      */
     public boolean isDefaultProject() {
-        return (Boolean) super.get(GPClientProjectKey.DEFAULT_PROJECT.toString());
+        Boolean isDefault = (Boolean) super.get(GPClientProjectKey.DEFAULT_PROJECT.toString());
+        return (isDefault == null) ? false : isDefault.booleanValue();
+    }
+
+    /**
+     * @param defaultProject the defaultProject to set
+     */
+    public void setDefaultProject(boolean defaultProject) {
+        set(GPClientProjectKey.DEFAULT_PROJECT.toString(), defaultProject);
+        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.getDefaultProjectLabel());
     }
 
     public String getDefaultProjectLabel() {
@@ -167,14 +176,6 @@ public class GPClientProject extends GeoPlatformBeanModel {
 
     public void setRootFolders(List<GPFolderClientInfo> rootFolders) {
         this.rootFolders = rootFolders;
-    }
-
-    /**
-     * @param defaultProject the defaultProject to set
-     */
-    public void setDefaultProject(boolean defaultProject) {
-        set(GPClientProjectKey.DEFAULT_PROJECT.toString(), defaultProject);
-        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.getDefaultProjectLabel());
     }
 
 //    /**

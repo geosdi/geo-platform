@@ -614,58 +614,55 @@ class ProjectServiceImpl {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        if (accountIDsProject != null && !accountIDsProject.isEmpty()) {
-            // The Account owner relation's project will not be managed
-            Long ownerID = accountProjectDao.findOwnerByProjectID(projectID).getAccount().getId();
-            accountIDsProject.remove(ownerID);
+        if (accountIDsProject == null || accountIDsProject.isEmpty()) {
+            logger.trace("\n*** There aren't relations of sharing to update");
+            return false;
+        }
 
-            logger.debug("\n*** Update all relations of sharing");
+        Long ownerID = accountProjectDao.findOwnerByProjectID(projectID).getAccount().getId();
 
-            List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
-            Map<Long, GPAccountProject> sharingMap = new HashMap<Long, GPAccountProject>(accountProjectList.size());
-            for (GPAccountProject accountProject : accountProjectList) {
-                sharingMap.put(accountProject.getAccount().getId(), accountProject);
+        // The Account owner relation's project will not be managed
+        boolean checkOwner = accountIDsProject.remove(ownerID);
+        // Unshare project if the Account owner is not present
+        if (!checkOwner || accountIDsProject.isEmpty()) {
+            logger.trace("\n*** The project will be unshare");
+            this.unshareProject(project);
+            return true;
+        }
+
+        logger.debug("\n*** Update all relations of sharing");
+
+        List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
+        Map<Long, GPAccountProject> sharingMap = new HashMap<Long, GPAccountProject>(accountProjectList.size());
+        for (GPAccountProject accountProject : accountProjectList) {
+            sharingMap.put(accountProject.getAccount().getId(), accountProject);
+        }
+
+        for (Long accountID : accountIDsProject) {
+            GPAccountProject accountProject = sharingMap.remove(accountID);
+            // Create a new relation of sharing
+            if (accountProject == null) {
+                GPAccount newAccount = this.getAccountByID(accountID);
+
+                GPAccountProject newAccountProject = new GPAccountProject();
+                newAccountProject.setAccountAndProject(newAccount, project);
+                newAccountProject.setPermissionMask(BasePermission.READ.getMask());
+                logger.trace("\n*** Create a new relation of sharing for Account \"{}\"",
+                             newAccount.getNaturalID());
+                accountProjectDao.persist(newAccountProject);
             }
+        }
 
-            for (Long accountID : accountIDsProject) {
-                GPAccountProject accountProject = sharingMap.remove(accountID);
-                // Create a new relation of sharing
-                if (accountProject == null) {
-                    GPAccount newAccount = this.getAccountByID(accountID);
+        // Delete the remaining relations of sharing
+        for (Map.Entry<Long, GPAccountProject> e : sharingMap.entrySet()) {
+            logger.trace("\n*** Delete the relation of sharing for Account \"{}\"",
+                         e.getValue().getAccount().getNaturalID());
+            accountProjectDao.remove(e.getValue());
+        }
 
-                    GPAccountProject newAccountProject = new GPAccountProject();
-                    newAccountProject.setAccountAndProject(newAccount, project);
-                    newAccountProject.setPermissionMask(BasePermission.READ.getMask());
-                    logger.debug("\n*** Create a new relation of sharing for Account \"{}\"",
-                            newAccount.getNaturalID());
-                    accountProjectDao.persist(newAccountProject);
-                }
-            }
-
-            // Delete the remaining relations of sharing
-            for (Map.Entry<Long, GPAccountProject> e : sharingMap.entrySet()) {
-                logger.debug("\n*** Delete the relation of sharing for Account \"{}\"",
-                        e.getValue().getAccount().getNaturalID());
-                accountProjectDao.remove(e.getValue());
-            }
-
-            if (!project.isShared() && !accountIDsProject.isEmpty()) {
-                project.setShared(true);
-                projectDao.merge(project);
-            }
-
-        } else {
-            if (project.isShared()) {
-                logger.debug("\n*** Delete all relations of sharing");
-
-                List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
-                for (GPAccountProject accountProject : accountProjectList) {
-                    accountProjectDao.remove(accountProject);
-                }
-
-                project.setShared(false);
-                projectDao.merge(project);
-            }
+        if (!project.isShared() && !accountIDsProject.isEmpty()) {
+            project.setShared(true);
+            projectDao.merge(project);
         }
 
         return true;
@@ -763,7 +760,7 @@ class ProjectServiceImpl {
         }
 
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                subFoldersMap, mapProjectFolders);
+                                                    subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);
@@ -927,7 +924,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                        folderDTO);
+                                                              folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -949,10 +946,10 @@ class ProjectServiceImpl {
                 GPLayer layer;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                            (RasterLayerDTO) element);
+                                                                  (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                            (VectorLayerDTO) element);
+                                                                  (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);
@@ -1003,6 +1000,20 @@ class ProjectServiceImpl {
                     this.fillProjectExpandedFolders(projectID, childsDTO);
                 }
             }
+        }
+    }
+
+    private void unshareProject(GPProject project) {
+        if (project.isShared()) {
+            logger.debug("\n*** Delete all relations of sharing");
+
+            List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(project.getId());
+            for (GPAccountProject accountProject : accountProjectList) {
+                accountProjectDao.remove(accountProject);
+            }
+
+            project.setShared(false);
+            projectDao.merge(project);
         }
     }
 }

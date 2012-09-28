@@ -95,7 +95,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebService(name = "GeoPlatformService",
-targetNamespace = "http://services.geo-platform.org/")
+            targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
@@ -693,7 +693,7 @@ public interface GeoPlatformService {
 
     /**
      * Update all at once the relations of sharing for a Project. The Account
-     * owner ID relation for the Project will be ignored.
+     * owner ID relation must be present, otherwise the Project will be unshare.
      *
      * @param projectID the Project ID
      * @param accountIDsProject the Account IDs which will be updated the

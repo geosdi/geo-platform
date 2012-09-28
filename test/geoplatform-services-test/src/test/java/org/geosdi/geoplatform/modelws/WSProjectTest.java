@@ -558,7 +558,8 @@ public class WSProjectTest extends ServiceTest {
         Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER);
 
         // Test add user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, Arrays.asList(newUserID));
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
+                                                                 Arrays.asList(idUserTest, newUserID));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
@@ -606,7 +607,8 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertTrue(check);
 
         // Test delete user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, new ArrayList<Long>(0));
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
+                                                                 Arrays.asList(idUserTest));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
@@ -649,7 +651,7 @@ public class WSProjectTest extends ServiceTest {
 
         // Test add latter user for sharing
         boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
-                                                                 Arrays.asList(firstUserID, latterUserID));
+                                                                 Arrays.asList(idUserTest, firstUserID, latterUserID));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
@@ -673,7 +675,7 @@ public class WSProjectTest extends ServiceTest {
 
         // Test delete first user for sharing
         result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
-                                                         Arrays.asList(latterUserID));
+                                                         Arrays.asList(idUserTest, latterUserID));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
@@ -704,7 +706,8 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
 
         // Test pass owner
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, Arrays.asList(idUserTest));
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, 
+                                                                 Arrays.asList(idUserTest));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);

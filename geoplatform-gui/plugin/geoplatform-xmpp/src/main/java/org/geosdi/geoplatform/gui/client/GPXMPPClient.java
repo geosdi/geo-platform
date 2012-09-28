@@ -35,19 +35,28 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import org.geosdi.geoplatform.gui.client.model.XMPPSessionGinjector;
 import com.calclab.emite.core.client.bosh.XmppBoshConnection;
 import com.calclab.emite.core.client.conn.ConnectionSettings;
-import com.calclab.emite.core.client.events.*;
+import com.calclab.emite.core.client.events.MessageEvent;
+import com.calclab.emite.core.client.events.MessageHandler;
+import com.calclab.emite.core.client.events.PresenceEvent;
+import com.calclab.emite.core.client.events.PresenceHandler;
+import com.calclab.emite.core.client.events.StateChangedEvent;
+import com.calclab.emite.core.client.events.StateChangedHandler;
+import com.calclab.emite.core.client.xmpp.session.SessionStates;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.Chat;
 import com.calclab.emite.im.client.chat.ChatManager;
+import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.im.client.roster.XmppRoster;
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.widget.Info;
 import com.google.gwt.core.client.GWT;
+import java.util.Collection;
+import org.geosdi.geoplatform.gui.client.model.XMPPSessionGinjector;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPEventRepository;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
@@ -60,7 +69,7 @@ import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
 public class GPXMPPClient {
 
     public void userXMPPLogin(String username, String password, String hostXmppServer) {
-//        System.out.println("Executing xmpp code for: " + hostXmppServer);
+        System.out.println("Executing xmpp code for: " + hostXmppServer);
         final XMPPSessionGinjector ginjector = GWT.create(XMPPSessionGinjector.class);
         final XmppSession sessionXmpp = ginjector.getXmppSession();
 
@@ -70,31 +79,29 @@ public class GPXMPPClient {
         XmppURI xmppURI = XmppURI.uri(username + '@' + hostXmppServer);
         sessionXmpp.login(xmppURI, password);
 
-//        Usefull to debug the code
-//        sessionXmpp.addSessionStateChangedHandler(true, new StateChangedHandler() {
-//
-//            @Override
-//            public void onStateChanged(StateChangedEvent event) {
-//                if (event.is(SessionStates.loggedIn)) {
-//                    System.out.println("We are now online");
-//                } else if (event.is(SessionStates.disconnected)) {
-//                    System.out.println("We are now offline");
-//                } else {
-//                    System.out.println("Current state: " + event.getState());
-//                }
-//            }
-//        });
+        // Usefull to debug the code
+        sessionXmpp.addSessionStateChangedHandler(true, new StateChangedHandler() {
+            @Override
+            public void onStateChanged(StateChangedEvent event) {
+                if (event.is(SessionStates.loggedIn)) {
+                    System.out.println("We are now online");
+                } else if (event.is(SessionStates.disconnected)) {
+                    System.out.println("We are now offline");
+                } else {
+                    System.out.println("Current state: " + event.getState());
+                }
+            }
+        });
 
         /*
          * We show (log) every incoming presence stanzas
          */
         sessionXmpp.addPresenceReceivedHandler(new PresenceHandler() {
-
             @Override
             public void onPresence(PresenceEvent event) {
                 Presence presence = event.getPresence();
-//                System.out.println("Presence received from " + presence.getFrom() + ": " + presence.toString());
-                Info.display("XMPP Connection", "Presence received from " + presence.getFrom() + ": " + presence.toString());
+                System.out.println("Presence received from " + presence.getFrom() + ": " + presence.toString());
+                GeoPlatformMessage.infoMessage("XMPP Connection", "Presence received from " + presence.getFrom() + ": " + presence.toString());
                 Registry.register(GlobalRegistryEnum.EMITE_RESOURCE.getValue(), sessionXmpp.getCurrentUserURI().getResource());
             }
         });
@@ -103,21 +110,34 @@ public class GPXMPPClient {
          * We show every incoming message in the GWT log console
          */
         sessionXmpp.addMessageReceivedHandler(new MessageHandler() {
-
             @Override
             public void onMessage(MessageEvent event) {
-//                System.out.println("Message received: ");
                 Message message = event.getMessage();
-//                System.out.println(message.toString());
+//                message.getAttribute(null);
+                System.out.println("Message received: " + message.toString());
+
+                XmppRoster roster = ginjector.getRoster();
+
+                Collection<RosterItem> items = roster.getItems();
+                System.out.println("**** ROSTER ALL ITEMS: " + items.size());
+                for (RosterItem rosterItem : items) {
+//                    System.out.println("*** " + rosterItem.toString() + " [" + rosterItem.getName() + "]");
+                    if (rosterItem.isAvailable()) {
+                        System.out.println("### AVAILABLE ### " + rosterItem.getJID() + " [" + rosterItem.getName() + "]");
+                    }
+                }
+
                 if (message.getSubject() != null && message.getBody() != null) {
-//                    Info.display("Message " + message.getSubject(), message.getBody());
                     AbstractXMPPEvent xmppEvent = XMPPEventRepository.getXMPPEventForSubject(message.getSubject());
                     if (xmppEvent != null) {
                         xmppEvent.setMessageBody(message.getBody());
                         XMPPHandlerManager.fireEvent(xmppEvent);
-//                        System.out.println("Message fired");
+                        System.out.println("Message fired");
                     }
                 }
+
+                String subject = message.getSubject() == null ? "NEW Message" : message.getSubject();
+                GeoPlatformMessage.infoMessage(subject, message.getBody());
             }
         });
 
@@ -126,10 +146,9 @@ public class GPXMPPClient {
 //        xmppURI = XmppURI.uri("service@" + hostXmppServer);
         final Chat chat = chatManager.open(xmppURI);
 //        chat.addMessageReceivedHandler(new MessageHandler() {
-//
 //            @Override
 //            public void onMessage(final MessageEvent event) {
-//                System.out.println("Message received: " + event.getMessage().getBody());
+//                System.out.println("CHAT Message received: " + event.getMessage().getBody());
 //            }
 //        });
 

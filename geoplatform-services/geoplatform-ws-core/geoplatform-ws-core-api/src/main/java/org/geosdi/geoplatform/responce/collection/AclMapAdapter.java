@@ -35,76 +35,11 @@
  */
 package org.geosdi.geoplatform.responce.collection;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-import org.geosdi.geoplatform.responce.collection.AclMapAdapter.AclMap;
-
 /**
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class AclMapAdapter extends XmlAdapter<AclMap, Map<String, Boolean>> {
-
-    @Override
-    public AclMap marshal(Map<String, Boolean> v) throws Exception {
-        AclMap aclMap = new AclMap();
-        List<EntryAclMap> entries = aclMap.getEntryAclMap();
-        for (Map.Entry<String, Boolean> e : v.entrySet()) {
-            entries.add(new EntryAclMap(e.getKey(), e.getValue()));
-        }
-        return aclMap;
-    }
-
-    @Override
-    public Map<String, Boolean> unmarshal(AclMap v) throws Exception {
-        Map<String, Boolean> map = new HashMap<String, Boolean>();
-        for (EntryAclMap e : v.getEntryAclMap()) {
-            map.put(e.getKey(), e.getValue());
-        }
-        return map;
-    }
-
-    @XmlAccessorType(XmlAccessType.FIELD)
-    public static class AclMap {
-
-        @XmlElement(name = "EntryAclMap", required = true, nillable = false)
-        private final List<EntryAclMap> entryMap = new ArrayList<EntryAclMap>();
-
-        public List<EntryAclMap> getEntryAclMap() {
-            return this.entryMap;
-        }
-    }
-
-    @XmlAccessorType(XmlAccessType.FIELD)
-    public static class EntryAclMap {
-
-        @XmlAttribute(name = "key", required = true)
-        private final String key;
-        @XmlElement(name = "value", required = true, nillable = false)
-        private final Boolean value;
-
-        public EntryAclMap(String key, Boolean value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        public EntryAclMap() {
-            this.key = null;
-            this.value = null;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public Boolean getValue() {
-            return value;
-        }
-    }
+public class AclMapAdapter extends GenericMapAdapter<String, Boolean> {
 }

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import com.extjs.gxt.ui.client.data.ModelData;
-import java.util.HashMap;
+import com.google.common.collect.Maps;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
@@ -45,41 +45,50 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMeme
 import org.geosdi.geoplatform.gui.model.memento.GPCache;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
+public class GPMementoSaveCache extends GPCache<IMemento<ISave>> implements IMementoSave {
 
     private static final long serialVersionUID = -5458269761345444182L;
     //
-    private static GPMementoSaveCache instance = new GPMementoSaveCache();
-    private ObservableGPLayerSaveCache observable = new ObservableGPLayerSaveCache();
-    private Map<GPBeanTreeModel, AbstractMementoOriginalProperties> modifiedLayersMap = new HashMap<GPBeanTreeModel, AbstractMementoOriginalProperties>();
+    private ObservableGPLayerSaveCache observable;
+    private Map<GPBeanTreeModel, AbstractMementoOriginalProperties> modifiedLayersMap =
+            Maps.newHashMap();
 
-    public static GPMementoSaveCache getInstance() {
-        return instance;
+    public GPMementoSaveCache(ObservableGPLayerSaveCache observable) {
+        this.observable = observable;
     }
 
-    private GPMementoSaveCache() {
-        //This is necessary to manage the events associated to the saveCache
-        MementoSaveCacheManager manager = new MementoSaveCacheManager();
-    }
-
-    //The properties are copied only the first time, in this way we can save
-    //only the layers effectively modified from the original one
-    public void copyOriginalProperties(GPBeanTreeModel element) {
+    /**
+     * The properties are copied only the first time, in this way we can save
+     * only the layers effectively modified from the original one
+     */
+    @Override
+    public AbstractMementoOriginalProperties copyOriginalProperties(GPBeanTreeModel element) {
+        AbstractMementoOriginalProperties mementoOriginalProperties = null;
         if (!this.modifiedLayersMap.containsKey(element)) {
-            AbstractMementoOriginalProperties memento = MementoSaveBuilder.generateMementoOriginalProperties(element);
-            memento.copyOriginalProperties(element);
-            this.modifiedLayersMap.put(element, memento);
+            mementoOriginalProperties = MementoSaveBuilder.generateMementoOriginalProperties(element);
+            mementoOriginalProperties.copyOriginalProperties(element);
+        }
+        return mementoOriginalProperties;
+    }
+
+    /**
+     * The properties are copied only the first time, in this way we can save
+     * only the layers effectively modified from the original one
+     */
+    @Override
+    public void putOriginalPropertiesInCache(AbstractMementoOriginalProperties memento) {
+        if (memento != null && !this.modifiedLayersMap.containsKey(memento.getRefBaseElement())) {
+            this.modifiedLayersMap.put(memento.getRefBaseElement(), memento);
             if (super.peek() == null) {
                 this.observable.setChanged();
                 this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
                 /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
-                + this.observable.countObservers() + " observers");*/
+                 + this.observable.countObservers() + " observers");*/
             }
         }
     }
@@ -91,7 +100,7 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
             this.observable.setChanged();
             this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
             /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
-            + this.observable.countObservers() + " observers");*/
+             + this.observable.countObservers() + " observers");*/
         }
 //        System.out.println("GPLayerSaveCache: added " + memento.getClass().getName());
         return condition;
@@ -108,8 +117,9 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
     public void clear() {
         super.clear();
         this.modifiedLayersMap.clear();
+        this.verifyEmptyCache();
     }
-    
+
     @Override
     public IMemento<ISave> peek() {
         this.verifyEmptyCache();
@@ -130,19 +140,22 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
                 && this.countLayerPropertiesModified() > 0)) {
             result = false;
         }
+        System.out.println("Empty: " + result);
         return result;
     }
 
     private int countLayerPropertiesModified() {
         int count = 0;
+        System.out.println("Memento Counting: ");
+        System.out.println("Memento Counting: " + this.modifiedLayersMap.values());
         for (AbstractMementoOriginalProperties memento : this.modifiedLayersMap.values()) {
+            System.out.println("Memento changed: " + memento.isChanged());
             if (memento.isChanged()) {
                 count++;
             }
         }
         return count;
     }
-    
 
     private void verifyEmptyCache() {
         if (super.peek() == null) {
@@ -150,7 +163,7 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
                 this.observable.setChanged();
                 this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
                 /*System.out.println("Event SAVE_CACHE_EMPTY notified to "
-                + this.observable.countObservers() + " observers");*/
+                 + this.observable.countObservers() + " observers");*/
             } else {
                 this.prepareLayerPropertiesModified();
                 this.verifyEmptyCache();
@@ -158,6 +171,7 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
         }
     }
 
+    @Override
     public void cleanOperationsRefToDeletedElement(GPBeanTreeModel gpBeanTreeModel) {
         this.modifiedLayersMap.remove(gpBeanTreeModel);
         if (gpBeanTreeModel instanceof FolderTreeNode) {
@@ -177,19 +191,13 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
         this.modifiedLayersMap.clear();
     }
 
+    @Override
     public ObservableGPLayerSaveCache getObservable() {
         return this.observable;
     }
 
-    public class ObservableGPLayerSaveCache extends Observable {
-
-        @Override
-        protected synchronized void setChanged() {
-            super.setChanged();
-        }
-
-        public void notifyObservers(LayerEvents o) {
-            super.notifyObservers(o);
-        }
+    @Override
+    public void setObservable(ObservableGPLayerSaveCache observable) {
+        this.observable = observable;
     }
 }

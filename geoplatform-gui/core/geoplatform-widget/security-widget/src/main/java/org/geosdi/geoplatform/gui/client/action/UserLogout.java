@@ -61,22 +61,20 @@ public class UserLogout extends MenuBaseAction {
     @Override
     public void componentSelected(MenuEvent ce) {
         GeoPlatformMessage.confirmMessage("Log-out message", "Do you really want to leave the application?",
-                new Listener<MessageBoxEvent>() {
-
-                    @Override
-                    public void handleEvent(MessageBoxEvent be) {
-                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                            Dispatcher.forwardEvent(
-                                    GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
-                            invalidateSession();
-                        }
-                    }
-                });
+                                          new Listener<MessageBoxEvent>() {
+            @Override
+            public void handleEvent(MessageBoxEvent be) {
+                if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                    Dispatcher.forwardEvent(
+                            GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
+                    invalidateSession();
+                }
+            }
+        });
     }
 
     private void invalidateSession() {
         SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 //TODO: In case of fail... what is possible to do??

@@ -70,8 +70,6 @@ public class GuiComponentIDs {
     public static final String GRATICULA = "graticula";
     //
     public static final String EXTERNAL_LINKS = "externalLinks";
-    
-    
     /**
      * Map Toolbar
      */
@@ -85,6 +83,7 @@ public class GuiComponentIDs {
     public static final String MEASURE = "Measure";
     public static final String MEASURE_AREA = "MeasureArea";
     //
+    public static final String EDITOR_AOE = "editorAOE";
     public static final String DRAW_FEATURE = "drawFeature";
     public static final String DRAW_LINE_FEATURE = "drawLineFeature";
     public static final String DRAW_POINT_FEATURE = "drawPointFeature";
@@ -166,6 +165,7 @@ public class GuiComponentIDs {
         all.add(GET_FEATURE_INFO);
         all.add(MEASURE);
         all.add(MEASURE_AREA);
+        all.add(EDITOR_AOE);
         all.add(DRAW_FEATURE);
         all.add(DRAW_LINE_FEATURE);
         all.add(DRAW_POINT_FEATURE);
@@ -222,6 +222,7 @@ public class GuiComponentIDs {
         mapUser.put(GET_FEATURE_INFO, Boolean.TRUE);
         mapUser.put(MEASURE, Boolean.TRUE);
         mapUser.put(MEASURE_AREA, Boolean.TRUE);
+        mapUser.put(EDITOR_AOE, Boolean.TRUE);
         mapUser.put(DRAW_FEATURE, Boolean.TRUE);
         mapUser.put(DRAW_LINE_FEATURE, Boolean.TRUE);
         mapUser.put(DRAW_POINT_FEATURE, Boolean.TRUE);
@@ -277,6 +278,7 @@ public class GuiComponentIDs {
         mapViewer.put(GET_FEATURE_INFO, Boolean.TRUE);
         mapViewer.put(MEASURE, Boolean.TRUE);
         mapViewer.put(MEASURE_AREA, Boolean.TRUE);
+        mapViewer.put(EDITOR_AOE, Boolean.TRUE);
         mapViewer.put(DRAW_FEATURE, Boolean.TRUE);
         mapViewer.put(DRAW_LINE_FEATURE, Boolean.TRUE);
         mapViewer.put(DRAW_POINT_FEATURE, Boolean.TRUE);

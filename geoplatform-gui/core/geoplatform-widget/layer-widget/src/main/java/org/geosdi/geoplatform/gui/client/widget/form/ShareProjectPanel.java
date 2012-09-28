@@ -83,6 +83,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
     private GPProjectManagementWidget projectManagementWidget;
     private StoreFilterField<GPSimpleUser> toFilter;
     private StoreFilterField<GPSimpleUser> fromFilter;
+    private Button saveButton;
     private Label projectNameLabel;
     private Label ownerLabel;
     private Label organizationLabel;
@@ -154,11 +155,10 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                     }
                 });
         super.addButton(cancelButton);
-        Button saveButton = new Button("Save", BasicWidgetResources.ICONS.save(),
+        saveButton = new Button("Save", BasicWidgetResources.ICONS.save(),
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        //ADD: Code to save
                         toStore.commitChanges();
                         List<Long> accountIDsProject = Lists.newArrayListWithCapacity(toStore.getModels().size());
                         for (GPSimpleUser user : toStore.getModels()) {
@@ -244,6 +244,12 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 toStore.add(result);
             }
         });
+        boolean enableMenu = false;
+        IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        if (project.getOwner() == null || project.getOwner().getId().equals(accountInSession.getId())) {
+            enableMenu = true;
+        }
+        saveButton.setEnabled(enableMenu);
         this.updateLabels();
     }
 

@@ -37,29 +37,31 @@ package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 import java.util.Collections;
 import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class ToolbarCategoryTool extends ToolbarGenericTool {
+public class ToolbarCategoryTool extends WidgetGenericTool<IGeoPlatformToolbar> {
 
     private static final long serialVersionUID = 7923252355202378906L;
     //
-    private List<? extends ToolbarGenericTool> tools;
+    private List<? extends WidgetGenericTool<IGeoPlatformToolbar>> tools;
 
     /**
      * @return the tools
      */
-    public List<? extends ToolbarGenericTool> getTools() {
+    public List<? extends WidgetGenericTool<IGeoPlatformToolbar>> getTools() {
         return tools;
     }
 
     /**
      * @param tools the tools to set
      */
-    public void setTools(List<? extends ToolbarGenericTool> tools) {
+    public void setTools(
+            List<? extends WidgetGenericTool<IGeoPlatformToolbar>> tools) {
         Collections.sort(tools);
         this.tools = tools;
     }
@@ -72,7 +74,7 @@ public class ToolbarCategoryTool extends ToolbarGenericTool {
     @Override
     protected void create(IGeoPlatformToolbar toolbar) {
         if (this.tools != null) {
-            for (ToolbarGenericTool tool : this.tools) {
+            for (WidgetGenericTool<IGeoPlatformToolbar> tool : this.tools) {
                 tool.buildTool(toolbar);
             }
         }

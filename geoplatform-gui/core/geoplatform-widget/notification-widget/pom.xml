@@ -69,8 +69,7 @@
 
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geocoding-widget</artifactId>
-            <version>${project.version}</version>
+            <artifactId>geoplatform-server-api</artifactId>
         </dependency>
         
         <!-- GIN -->

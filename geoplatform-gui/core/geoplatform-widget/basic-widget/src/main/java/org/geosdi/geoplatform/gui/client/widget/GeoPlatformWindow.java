@@ -42,7 +42,7 @@ import com.extjs.gxt.ui.client.widget.Window;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GeoPlatformWindow extends Window {
 
@@ -52,6 +52,11 @@ public abstract class GeoPlatformWindow extends Window {
         if (!lazy) {
             this.init();
         }
+    }
+
+    @Override
+    protected void beforeRender() {
+        this.init();
     }
 
     /**
@@ -73,7 +78,6 @@ public abstract class GeoPlatformWindow extends Window {
         this.initSize();
 
         addWindowListener(new WindowListener() {
-
             @Override
             public void windowHide(WindowEvent we) {
                 reset();
@@ -92,16 +96,9 @@ public abstract class GeoPlatformWindow extends Window {
 
     public abstract void setWindowProperties();
 
-    @Override
-    public void show() {
-        this.init();
-        super.show();
-    }
-
     /**
-     * 
-     * @return 
-     *          Component State for Initialization of All Components
+     *
+     * @return Component State for Initialization of All Components
      */
     public boolean isInitialized() {
         return initialized;

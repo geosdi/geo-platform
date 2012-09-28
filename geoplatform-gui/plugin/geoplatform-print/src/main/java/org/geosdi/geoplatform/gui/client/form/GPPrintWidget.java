@@ -9,6 +9,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
@@ -36,8 +37,12 @@ import org.geosdi.geoplatform.gui.client.model.Scale;
 import org.geosdi.geoplatform.gui.client.utility.LayerComparable;
 import org.geosdi.geoplatform.gui.client.utility.PrintUtility;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
+import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.gwtopenmaps.openlayers.client.LonLat;
 
 /**
@@ -51,6 +56,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private ListStore<PrintTemplate> storeTemplate;
     private ComboBox<DPI> comboDPI;
     private ComboBox<PrintTemplate> comboTemplate;
+    private CheckBox checkPrintBaseMap;
     private TextField<String> title;
     private TextField<String> mapTitle;
     private TextArea comments;
@@ -74,19 +80,20 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         addEditPrintSettings();
         addComboDPI();
         addComboTemplate();
+        addCheckPrintBaseMap();
         addButtons();
     }
 
     @Override
     public void initSize() {
         super.setHeading("GeoPlatform Print Widget");
-        setSize(400, 500);
+        setSize(400, 560);
     }
 
     @Override
     public void initSizeFormPanel() {
         formPanel.setHeaderVisible(false);
-        formPanel.setSize(400, 500);
+        formPanel.setSize(400, 560);
     }
 
     @Override
@@ -109,11 +116,23 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                     + ",\"rotation\":0,\"mapTitle\":\"" + mapTitle.getValue()
                     + "\",\"comment\":\"" + comments.getValue() + "\"}],\"layers\":[";
 
+
             layerList = buildLayerList(tree.getCheckedSelection());
 
             Collections.sort(layerList, new LayerComparable());
 
+            GPLayerBean baseMap = new GPRasterLayerGrid();
+
+            baseMap.setName("Mappa_di_Base");
+            baseMap.setDataSource("http://dpc.geosdi.org/geoserver/wms");
+            baseMap.setLayerType(GPLayerType.RASTER);
+
+            if (this.checkPrintBaseMap.getValue()) {
+                layers = layers.concat(buildLayersOrderList(baseMap));
+            }
+            
             for (int i = 0; i < layerList.size(); i++) {
+                System.out.println(layerList.get(i));
                 if (layerList.get(i) instanceof GPLayerBean) {
                     GPLayerBean layer = (GPLayerBean) layerList.get(i);
                     layers = layers.concat(buildLayersOrderList(layer));
@@ -121,7 +140,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             }
 
             System.out.println(comboTemplate.getValue().getTemplate());
-            layers = layers.concat("],\"layout\":\""+comboTemplate.getValue().getTemplate()+"\",\"srs\":\"EPSG:4326\",\"dpi\":"
+            layers = layers.concat("],\"layout\":\"" + comboTemplate.getValue().getTemplate() + "\",\"srs\":\"EPSG:4326\",\"dpi\":"
                     + comboDPI.getValue().getDpi() + ",\"units\":\"degrees\"}");
 
             String url = GWT.getHostPageBaseURL() + GWT.getModuleName() + "/pdf/print.pdf?spec="
@@ -232,8 +251,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         super.formPanel.add(fieldSet);
     }
-    
-     private void addComboTemplate() {
+
+    private void addComboTemplate() {
         fieldSet = new FieldSet();
         fieldSet.setHeading("Template");
         FormLayout layout = new FormLayout();
@@ -261,12 +280,25 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         super.formPanel.add(fieldSet);
     }
 
+    private void addCheckPrintBaseMap() {
+        fieldSet = new FieldSet();
+        fieldSet.setHeading("Base Map");
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(100);
+        layout.setLabelPad(5);
+        fieldSet.setLayout(layout);
+        this.checkPrintBaseMap = new CheckBox();
+        this.checkPrintBaseMap.setFieldLabel("Print Base Map");
+        this.checkPrintBaseMap.setToolTip("Warning: only for 4326 base map!");
+        fieldSet.add(this.checkPrintBaseMap);
+        super.formPanel.add(fieldSet);
+    }
+
     private void addButtons() {
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
         print = new Button("Print", PrintResources.ICONS.print(),
                 new SelectionListener<ButtonEvent>() {
-
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         execute();
@@ -277,7 +309,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         hide();

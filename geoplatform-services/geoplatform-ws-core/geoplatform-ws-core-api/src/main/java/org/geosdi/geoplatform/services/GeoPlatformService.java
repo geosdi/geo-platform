@@ -95,7 +95,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebService(name = "GeoPlatformService",
-            targetNamespace = "http://services.geo-platform.org/")
+targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
@@ -645,7 +645,7 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Account or Project not found
      */
     @Post
-    boolean updateDefaultProject(@WebParam(name = "accountID") Long accountID,
+    GPProject updateDefaultProject(@WebParam(name = "accountID") Long accountID,
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
@@ -1085,9 +1085,10 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Project not found
      */
     @Get
-    @WebResult(name = "rootFolder")
-    List<FolderDTO> getRootFoldersByProjectID(
-            @WebParam(name = "projectID") Long projectID)
+    @WebResult(name = "project")
+    ProjectDTO getProjectWithRootFolders(
+            @WebParam(name = "projectID") Long projectID,
+            @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1103,9 +1104,10 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if Project not found
      */
     @Get
-    @WebResult(name = "treeElements")
-    ProjectDTO getExpandedElementsByProjectID(
-            @WebParam(name = "projectID") Long projectID)
+    @WebResult(name = "project")
+    ProjectDTO getProjectWithExpandedElements(
+            @WebParam(name = "projectID") Long projectID,
+            @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     /**
@@ -1628,7 +1630,8 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
-     * Insert a same Message for each Account recipient.
+     * Insert a same Message for each Account recipient. Ignore message where
+     * sender and recipient are the same.
      *
      * @param messageDTO the Message to insert for each Account recipient
      * @return true if the Messages was added

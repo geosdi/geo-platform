@@ -45,4 +45,7 @@ package org.geosdi.geoplatform.gui.shared;
 public enum GPMessageCommandType {
 
     OPEN_PROJECT, NONE;
+
+    GPMessageCommandType() {
+    }
 }

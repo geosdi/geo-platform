@@ -17,14 +17,15 @@ public class NotificationWidgetUI implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+//        NotificationGinInjector.MainInjector.getInstance().getNotificationCenterMenuAction();
         ToolbarActionRegistar registar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
         registar.put(GuiComponentIDs.NOTIFICATION_MENU,
-                new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap map) {
-                        return NotificationGinInjector.MainInjector.getInstance().
-                                getNotificationCenterMenuAction();
-                    }
-                });
+                     new ToolbarActionCreator() {
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap map) {
+                return NotificationGinInjector.MainInjector.getInstance().
+                        getNotificationCenterMenuAction();
+            }
+        });
     }
 }

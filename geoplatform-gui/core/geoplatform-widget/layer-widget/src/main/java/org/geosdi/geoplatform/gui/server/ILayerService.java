@@ -70,7 +70,10 @@ public interface ILayerService {
 
     ArrayList<GPSimpleUser> getAccountsFromSharedProject(long idSharedProject, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest)
+    ArrayList<GPFolderClientInfo> loadProject(long projectId, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    GPClientProject loadDefaulProjectElements(HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     ArrayList<IGPFolderElements> loadFolderElements(Long folderID,

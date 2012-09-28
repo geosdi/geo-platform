@@ -76,7 +76,7 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
     protected PagingLoader<PagingLoadResult<ModelData>> loader;
     protected PagingToolBar toolBar;
     protected Button selectButton;
-    protected Button cancelButton;
+    protected Button closeButton;
     protected SearchStatus searchStatus;
     protected String searchText;
     private boolean initialized;
@@ -127,7 +127,7 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
             @Override
             public void windowHide(WindowEvent we) {
-                executeCancel();
+                executeClose();
             }
         });
 
@@ -213,17 +213,17 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
         formPanel.addButton(this.selectButton);
 
-        cancelButton = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+        closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                executeCancel();
+                executeClose();
             }
         });
 
-        cancelButton.setIcon(BasicWidgetResources.ICONS.cancel());
+        closeButton.setIcon(BasicWidgetResources.ICONS.cancel());
 
-        formPanel.addButton(cancelButton);
+        formPanel.addButton(closeButton);
 
         formPanel.setBottomComponent(this.toolBar);
 
@@ -233,7 +233,7 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
     /**
      * Remove all beans from the Store and after Hide the window
      */
-    public void executeCancel() {
+    public void executeClose() {
         super.hide();
         reset();
     }

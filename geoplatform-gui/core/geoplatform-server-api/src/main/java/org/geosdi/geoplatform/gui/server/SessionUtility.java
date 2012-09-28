@@ -48,6 +48,8 @@ import org.springframework.stereotype.Service;
 @Service("sessionUtility")
 public class SessionUtility {
 
+    private final int SESSIONE_EXPIRATION = 1800;
+
     public enum SessionProperty {
 
         LOGGED_ACCOUNT, DEFAULT_PROJECT;
@@ -78,27 +80,26 @@ public class SessionUtility {
     }
 
     public void storeLoggedAccount(GPAccount account,
-                                   HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        session.setMaxInactiveInterval(1800);
+        session.setMaxInactiveInterval(SESSIONE_EXPIRATION);
         session.setAttribute(SessionProperty.LOGGED_ACCOUNT.toString(), account);
     }
 
     public void storeDefaultProject(Long projectID,
-                                    HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        session.setMaxInactiveInterval(1800);
+        session.setMaxInactiveInterval(SESSIONE_EXPIRATION);
         session.setAttribute(SessionProperty.DEFAULT_PROJECT.toString(), projectID);
     }
 
     public void storeLoggedAccountAndDefaultProject(GPAccount account,
-                                                    Long projectID,
-                                                    HttpServletRequest httpServletRequest) {
+            Long projectID, HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        session.setMaxInactiveInterval(1800);
+        session.setMaxInactiveInterval(SESSIONE_EXPIRATION);
         session.setAttribute(SessionProperty.LOGGED_ACCOUNT.toString(), account);
         session.setAttribute(SessionProperty.DEFAULT_PROJECT.toString(), projectID);
     }

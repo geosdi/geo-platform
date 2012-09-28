@@ -35,20 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
 
@@ -79,14 +83,16 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
     protected void delete(GPBeanTreeModel element) {
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         this.visitorDispalyHide.removeVisibleLayers(element);
-        IMemento<ISave> precedingMemento = null;
-        precedingMemento = GPMementoSaveCache.getInstance().peekLast();
+        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMemento<ISave> precedingMemento;
+        precedingMemento = mementoSave.peekLast();
         boolean isAllowedNewMemento = true;
-        GPMementoSaveCache.getInstance().cleanOperationsRefToDeletedElement(element);
+        mementoSave.cleanOperationsRefToDeletedElement(element);
         MementoSaveRemove mementoSaveRemove = null;
-        if (precedingMemento != null && precedingMemento instanceof MementoSaveAddedFolder
+        GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+        if (!clientProject.isShared() && precedingMemento != null && precedingMemento instanceof MementoSaveAddedFolder
                 && ((MementoSaveAddedFolder) precedingMemento).getAddedFolder().getRefBaseElement().equals(element)) {
-            GPMementoSaveCache.getInstance().remove(precedingMemento);
+            mementoSave.remove(precedingMemento);
             isAllowedNewMemento = false;
         } else {
             mementoSaveRemove = new MementoSaveRemove(this);
@@ -96,7 +102,7 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         this.tree.getStore().remove(element);
         if (isAllowedNewMemento) {
             mementoSaveRemove.setDescendantMap(this.deleteVisitor.getFolderDescendantMap());
-            GPMementoSaveCache.getInstance().add(mementoSaveRemove);
+            mementoSave.add(mementoSaveRemove);
         }
         displayMessage();
     }

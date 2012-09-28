@@ -49,6 +49,7 @@ public class LayerRefreshTimeValue extends GeoPlatformBeanModel {
     public final static List<LayerRefreshTimeValue> refreshTimeList = Lists.newArrayList();
 //    public final static String REFRESH_TIME_KEY_LABEL = "refreshTimeKeyLabel";
     public final static String REFRESH_TIME_KEY = "refreshTimeKey";
+    public final static int NO_REFRESH_VALUE = -1;
     public final static int unscribeLayerNotification = 0;
 
     static {
@@ -81,7 +82,7 @@ public class LayerRefreshTimeValue extends GeoPlatformBeanModel {
 
     public enum LayerRefreshTimeEnum {
 
-        NO_REFRESH("NO REFRESH", -1), FIVE_SECONDS("5 SECONDS", 5),
+        NO_REFRESH("NO REFRESH", NO_REFRESH_VALUE), FIVE_SECONDS("5 SECONDS", 5),
         TEN_SECONDS("10 SECONDS", 10), TWENTY_SECONDS("20 SECONDS", 20),
         THIRTY_SECONDS("30 SECONDS", 30), FORTY_FIVE_SECONDS("45 SECONDS", 45),
         ONE_MINUTE("1 MINUTE", 60), FIVE_MINUTES("5 MINUTES", 300),

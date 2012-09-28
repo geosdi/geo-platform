@@ -38,43 +38,44 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.action.MapToggleAction;
+import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class ReverseGeocodingAction extends MapToggleAction {
-    
+
     protected ReverseGeocodingWidget widget;
-    
+
     public ReverseGeocodingAction(GeoPlatformMap theMapWidget,
             AbstractImagePrototype image, String tooltip) {
         super(theMapWidget, image, tooltip);
-        
+
         this.widget = createWidget(theMapWidget);
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
         ToggleButton button = (ToggleButton) ce.getSource();
-        
+
         super.changeButtonState();
-        
+
         this.deactivateAllMapControl();
-        
+
         if (button.isPressed()) {
             mapWidget.getButtonBar().setPressedButton(button);
         }
-        
+
         this.widget.activateComponent(button.isPressed());
     }
 
@@ -87,28 +88,29 @@ public abstract class ReverseGeocodingAction extends MapToggleAction {
     public void disableControl() {
         this.widget.unregister();
     }
-    
+
     private void deactivateAllMapControl() {
         if (mapWidget.isFeatureOperationEnable()) {
             mapWidget.deactivateFeatureOperation();
         }
-        
+
         if (mapWidget.isModifyFeatureEnable()) {
             mapWidget.deactivateModifyFeature();
         }
-        
+
         if (mapWidget.isInfoActive()) {
             mapWidget.deactivateInfo();
         }
-        
+
         if (mapWidget.isMeasureActive()) {
             mapWidget.deactivateMeasure();
         }
-        
+
         if (mapWidget.isMeasureAreaActive()) {
             mapWidget.deactivateMeasureArea();
         }
     }
-    
-    public abstract ReverseGeocodingWidget createWidget(GeoPlatformMap theMapWidget);
+
+    public abstract ReverseGeocodingWidget createWidget(
+            GeoPlatformMap theMapWidget);
 }

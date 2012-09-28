@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.pagination.projects;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.*;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
@@ -53,6 +54,8 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
@@ -74,7 +77,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     private GPProjectManagementWidget projectManagementWidget;
 
     public GPProjectSearchPanel(GPProjectManagementWidget projectManagementWidget) {
-        super(true, 10);
+        super(true, 12);
         this.projectManagementWidget = projectManagementWidget;
         this.selector = new GPDefaultProjectSelector();
     }
@@ -165,11 +168,19 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
 
     @Override
     public void changeSelection(SelectionChangedEvent<GPClientProject> se) {
-        if (se.getSelectedItem() != null) {
-            selectButton.enable();
-            deleteButton.enable();
-            editButton.enable();
-            this.shareButton.enable();
+        GPClientProject clientProject = se.getSelectedItem();
+        if (clientProject != null) {
+            super.selectButton.enable();
+            IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+            if (clientProject.getOwner() == null || clientProject.getOwner().getId().equals(accountInSession.getId())) {
+                deleteButton.enable();
+                this.editButton.enable();
+                this.shareButton.enable();
+            } else {
+                this.shareButton.disable();
+                this.editButton.disable();
+                deleteButton.disable();
+            }
         } else {
             selectButton.disable();
             deleteButton.disable();

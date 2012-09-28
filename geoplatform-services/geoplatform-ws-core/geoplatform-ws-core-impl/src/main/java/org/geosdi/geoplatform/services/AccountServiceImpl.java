@@ -655,10 +655,12 @@ class AccountServiceImpl {
                 throw new UnsupportedOperationException("Not supported the update of multi-authorities: persisted authorities have more than one authority");
             }
 
-            String stringAuthority = authorities.get(0).getAuthority();
+            GPAuthority authority = authorities.get(0);
             GPAuthority origAuthority = origAuthorities.get(0);
-            if (!stringAuthority.equals(origAuthority.getAuthority())) {
-                origAuthority.setAuthority(stringAuthority);
+            if (!authority.getAuthority().equals(origAuthority.getAuthority())
+                    || authority.getTrustedLevel() != origAuthority.getTrustedLevel()) {
+                origAuthority.setAuthority(authority.getAuthority());
+                origAuthority.setTrustedLevel(authority.getTrustedLevel());
                 authorityDao.merge(origAuthority);
             }
         }

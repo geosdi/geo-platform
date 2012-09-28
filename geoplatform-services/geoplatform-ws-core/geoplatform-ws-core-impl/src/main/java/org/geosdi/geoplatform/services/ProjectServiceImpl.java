@@ -328,7 +328,7 @@ class ProjectServiceImpl {
 
         ProjectDTO projectDTO = null;
         if (project.isShared()) {
-            GPAccountProject ownerProject = accountProjectDao.findOwnerByProjectID(projectDTO.getId());
+            GPAccountProject ownerProject = accountProjectDao.findOwnerByProjectID(project.getId());
             GPAccount owner = ownerProject.getAccount();
 
             projectDTO = new ProjectDTO(project, true, owner);
@@ -343,7 +343,7 @@ class ProjectServiceImpl {
      * @see GeoPlatformService#updateDefaultProject(java.lang.Long,
      * java.lang.Long)
      */
-    public boolean updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+    public GPProject updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
@@ -352,9 +352,9 @@ class ProjectServiceImpl {
 
         GPAccountProject defaultAccountProject = accountProjectDao.forceAsDefaultProject(accountID, projectID);
         if (defaultAccountProject == null) {
-            return false;
+            return null;
         }
-        return true;
+        return project;
     }
     //</editor-fold>
 
@@ -637,7 +637,7 @@ class ProjectServiceImpl {
                     newAccountProject.setAccountAndProject(newAccount, project);
                     newAccountProject.setPermissionMask(BasePermission.READ.getMask());
                     logger.debug("\n*** Create a new relation of sharing for Account \"{}\"",
-                                 newAccount.getNaturalID());
+                            newAccount.getNaturalID());
                     accountProjectDao.persist(newAccountProject);
                 }
             }
@@ -645,7 +645,7 @@ class ProjectServiceImpl {
             // Delete the remaining relations of sharing
             for (Map.Entry<Long, GPAccountProject> e : sharingMap.entrySet()) {
                 logger.debug("\n*** Delete the relation of sharing for Account \"{}\"",
-                             e.getValue().getAccount().getNaturalID());
+                        e.getValue().getAccount().getNaturalID());
                 accountProjectDao.remove(e.getValue());
             }
 
@@ -677,22 +677,46 @@ class ProjectServiceImpl {
     // === Folder / Project
     // =========================================================================
     /**
-     * @see GeoPlatformService#getRootFoldersByProjectID(java.lang.Long)
+     * @see GeoPlatformService#getProjectWithRootFolders(java.lang.Long)
      */
-    public List<FolderDTO> getRootFoldersByProjectID(Long projectID)
+    public ProjectDTO getProjectWithRootFolders(Long projectID, Long accountID)
             throws ResourceNotFoundFault {
-        List<GPFolder> foundAccountFolders = folderDao.searchRootFolders(projectID);
-        return FolderDTO.convertToFolderDTOList(foundAccountFolders);
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+        GPAccount account = this.getAccountByID(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+        ProjectDTO projectDTO;
+        GPAccount owner = this.getProjectOwner(projectID);
+        if (this.getProjectOwner(projectID).getId().equals(accountID)) {
+            projectDTO = new ProjectDTO(project);
+        } else {
+            projectDTO = new ProjectDTO(project, owner);
+        }
+        // Root Folders
+        List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
+        logger.debug("\n*** rootFolders:\n{}", rootFolders);
+
+        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
+        projectDTO.setRootFolders(rootFoldersDTO);
+
+        return projectDTO;
     }
 
     /**
-     * @see GeoPlatformService#getExpandedElementsByProjectID(java.lang.Long)
+     * @see GeoPlatformService#getProjectWithExpandedElements(java.lang.Long)
      */
-    public ProjectDTO getExpandedElementsByProjectID(Long projectID) throws ResourceNotFoundFault {
+    public ProjectDTO getProjectWithExpandedElements(Long projectID, Long accountID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
-        ProjectDTO projectDTO = new ProjectDTO(project);
-
+        GPAccount account = this.getAccountByID(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+        ProjectDTO projectDTO;
+        GPAccount owner = this.getProjectOwner(projectID);
+        if (this.getProjectOwner(projectID).getId().equals(accountID)) {
+            projectDTO = new ProjectDTO(project);
+        } else {
+            projectDTO = new ProjectDTO(project, owner);
+        }
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
@@ -739,7 +763,7 @@ class ProjectServiceImpl {
         }
 
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                                                    subFoldersMap, mapProjectFolders);
+                subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);

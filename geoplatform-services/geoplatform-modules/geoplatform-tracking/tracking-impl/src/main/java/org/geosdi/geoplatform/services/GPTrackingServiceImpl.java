@@ -37,11 +37,31 @@ package org.geosdi.geoplatform.services;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import javax.jws.WebService;
-import org.jivesoftware.smack.*;
+import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
+import org.geosdi.geoplatform.core.dao.GPProjectDAO;
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
+import org.geosdi.geoplatform.core.model.GPProject;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectServerEnum;
+import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
+import org.geosdi.geoplatform.services.development.EntityCorrectness;
+import org.geosdi.geoplatform.services.development.EntityCorrectnessException;
+import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
-import org.quartz.*;
+import org.jivesoftware.smack.packet.Presence;
+import org.quartz.CalendarIntervalScheduleBuilder;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.TriggerKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -57,12 +77,20 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private XMPPConnection connection;
     private ConnectionConfiguration config;
+    //
     @Autowired
     private TrackingScheduler scheduler;
+    // 
+    @Autowired
+    private GPProjectDAO projectDao;
+    // 
+    @Autowired
+    private GPAccountProjectDAO accountProjectDao;
 
     public GPTrackingServiceImpl(String host_xmpp_server, String port_xmpp_server,
             String username_xmpp_server, String password_xmpp_server) {
-        config = new ConnectionConfiguration(host_xmpp_server, Integer.parseInt(port_xmpp_server));
+        int xmppPort = Integer.parseInt(port_xmpp_server);
+        config = new ConnectionConfiguration(host_xmpp_server, xmppPort);
         connection = new XMPPConnection(config);
         this.login(username_xmpp_server, password_xmpp_server);
     }
@@ -85,7 +113,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     @Override
     public boolean unscribeLayerNotification(String username, String layerUUID) {
         TriggerKey triggerKey = new TriggerKey(username + ":" + layerUUID,
-                TrackingScheduler.TRACKING_GROUP);
+                                               TrackingScheduler.TRACKING_GROUP);
         return this.unscribeLayerNotification(triggerKey);
     }
 
@@ -104,7 +132,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     public void subscribeLayerNotification(String username, String emiteResource,
             String layerUUID, int secondToRefresh) {
         TriggerKey triggerKey = new TriggerKey(username + ":" + layerUUID,
-                TrackingScheduler.TRACKING_GROUP);
+                                               TrackingScheduler.TRACKING_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.add(Calendar.SECOND, secondToRefresh);
         Trigger trigger = TriggerBuilder.newTrigger().forJob(
@@ -163,5 +191,73 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
 
     protected XMPPConnection getConnection() {
         return this.connection;
+    }
+
+    /**
+     * @see GPTrackingService#sendSharedProjectNotification(java.lang.Long,
+     * org.geosdi.geoplatform.services.XMPPSubjectServerEnum, java.lang.String,
+     * org.geosdi.geoplatform.responce.collection.XmppAttributesMap)
+     */
+    @Override
+    public void sendSharedProjectNotification(Long projectID, XMPPSubjectServerEnum subject,
+            String text, XmppAttributesMap attributesMap) throws ResourceNotFoundFault {
+        GPProject project = projectDao.find(projectID);
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", projectID);
+        }
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+        if (!project.isShared()) { // TODO assert
+            throw new EntityCorrectnessException("The Project must be shared.");
+        }
+
+        List<GPAccountProject> accounts = accountProjectDao.findNotOwnersByProjectID(projectID);
+        EntityCorrectness.checkAccountProjectListLog(accounts); // TODO assert
+
+        Roster roster = this.connection.getRoster();
+        Message message = this.createUnknowMessage(subject, text, attributesMap);
+        for (GPAccountProject accountProject : accounts) {
+            GPAccount account = accountProject.getAccount();
+            EntityCorrectness.checkAccountLog(account); // TODO assert
+
+            String naturalID = account.getNaturalID(); // Username for User
+            String recipient = this.createXmppUri(naturalID);
+            logger.trace("\n*** Recipient XMPP uri: {} ***", recipient);
+
+            Presence presence = roster.getPresence(recipient);
+            if (presence.isAvailable()) {
+                logger.info("\n*** Send Message to online user \"{}\" ***", naturalID);
+                message.setTo(recipient);
+                connection.sendPacket(message);
+            }
+        }
+    }
+
+    /**
+     * Create an XMPP URI (node@domain).
+     *
+     * @todo '/' + resource is necessary?
+     */
+    private String createXmppUri(String username) {
+        return username + "@" + this.connection.getHost();
+    }
+
+    /**
+     * Create an XMPP Message less than recipient.
+     */
+    private Message createUnknowMessage(XMPPSubjectServerEnum subject, String text,
+            XmppAttributesMap attributesMap) {
+
+        Message message = new Message();
+        message.setType(Message.Type.normal);
+//        message.setFrom(text); // TODO Is this necessary?
+        message.setSubject(subject.toString());
+        message.setBody(text);
+
+        for (Map.Entry<String, String> entry : attributesMap.getAttributesMap().entrySet()) {
+            logger.trace("Attribute - {}: {}", entry.getKey(), entry.getValue());
+            message.setProperty(entry.getKey(), entry.getValue());
+        }
+
+        return message;
     }
 }

@@ -290,12 +290,7 @@ class ProjectServiceImpl {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(projectID);
-        EntityCorrectness.checkAccountProjectLog(accountOwner); // TODO assert
-
-        GPAccount owner = accountOwner.getAccount();
-        EntityCorrectness.checkAccountLog(owner); // TODO assert
-
+        GPAccount owner = this.retrieveProjectOwner(projectID);
         return owner;
     }
 
@@ -326,7 +321,7 @@ class ProjectServiceImpl {
             return null;
         }
 
-        ProjectDTO projectDTO = null;
+        ProjectDTO projectDTO;
         if (project.isShared()) {
             GPAccountProject ownerProject = accountProjectDao.findOwnerByProjectID(project.getId());
             GPAccount owner = ownerProject.getAccount();
@@ -674,21 +669,13 @@ class ProjectServiceImpl {
     // === Folder / Project
     // =========================================================================
     /**
-     * @see GeoPlatformService#getProjectWithRootFolders(java.lang.Long)
+     * @see GeoPlatformService#getProjectWithRootFolders(java.lang.Long,
+     * java.lang.Long)
      */
     public ProjectDTO getProjectWithRootFolders(Long projectID, Long accountID)
             throws ResourceNotFoundFault {
-        GPProject project = this.getProjectByID(projectID);
-        EntityCorrectness.checkProjectLog(project); // TODO assert
-        GPAccount account = this.getAccountByID(accountID);
-        EntityCorrectness.checkAccountLog(account); // TODO assert
-        ProjectDTO projectDTO;
-        GPAccount owner = this.getProjectOwner(projectID);
-        if (this.getProjectOwner(projectID).getId().equals(accountID)) {
-            projectDTO = new ProjectDTO(project);
-        } else {
-            projectDTO = new ProjectDTO(project, owner);
-        }
+        ProjectDTO projectDTO = this.retrieveProjectDTO(projectID, accountID);
+
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
@@ -700,20 +687,13 @@ class ProjectServiceImpl {
     }
 
     /**
-     * @see GeoPlatformService#getProjectWithExpandedElements(java.lang.Long)
+     * @see GeoPlatformService#getProjectWithExpandedFolders(java.lang.Long,
+     * java.lang.Long)
      */
-    public ProjectDTO getProjectWithExpandedElements(Long projectID, Long accountID) throws ResourceNotFoundFault {
-        GPProject project = this.getProjectByID(projectID);
-        EntityCorrectness.checkProjectLog(project); // TODO assert
-        GPAccount account = this.getAccountByID(accountID);
-        EntityCorrectness.checkAccountLog(account); // TODO assert
-        ProjectDTO projectDTO;
-        GPAccount owner = this.getProjectOwner(projectID);
-        if (this.getProjectOwner(projectID).getId().equals(accountID)) {
-            projectDTO = new ProjectDTO(project);
-        } else {
-            projectDTO = new ProjectDTO(project, owner);
-        }
+    public ProjectDTO getProjectWithExpandedFolders(Long projectID, Long accountID)
+            throws ResourceNotFoundFault {
+        ProjectDTO projectDTO = this.retrieveProjectDTO(projectID, accountID);
+
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
@@ -1015,5 +995,37 @@ class ProjectServiceImpl {
             project.setShared(false);
             projectDao.merge(project);
         }
+    }
+
+    private GPAccount retrieveProjectOwner(Long projectID) {
+        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(projectID);
+        EntityCorrectness.checkAccountProjectLog(accountOwner); // TODO assert
+
+        GPAccount owner = accountOwner.getAccount();
+        EntityCorrectness.checkAccountLog(owner); // TODO assert
+
+        return owner;
+    }
+
+    private ProjectDTO retrieveProjectDTO(Long projectID, Long accountID)
+            throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+        logger.trace("\n*** The project to retrieve is {}", project.getName());
+
+        GPAccount account = this.getAccountByID(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+        logger.trace("\n*** The account that retrieve the project is {}", account.getNaturalID());
+
+        GPAccount owner = this.retrieveProjectOwner(projectID);
+        logger.trace("\n*** The account owner of the project is {}", owner.getNaturalID());
+
+        ProjectDTO projectDTO;
+        if (accountID.equals(owner.getId())) {
+            projectDTO = new ProjectDTO(project);
+        } else {
+            projectDTO = new ProjectDTO(project, owner);
+        }
+        return projectDTO;
     }
 }

@@ -1079,6 +1079,9 @@ public interface GeoPlatformService {
 
     /**
      * Retrieve only the root folders (top-level folders) of a Project.
+     * <p/>
+     * Return the Account owner only if the Account that load the project is not
+     * the Account owner.
      *
      * @param projectID the Project ID
      * @return the root folders
@@ -1095,9 +1098,9 @@ public interface GeoPlatformService {
      * Retrieve a Project. Retrieve also the root folders (top-level folders)
      * with content (sub-folders and layers), so all expanded folders (at any
      * level) in cascade.
-     *
-     * @todo rename to getExpandedFoldersByProjectID because only the folder can
-     * be expanded.
+     * <p/>
+     * Return the Account owner only if the Account that load the project is not
+     * the Account owner.
      *
      * @param projectID the Project ID
      * @return the Project to retrieve
@@ -1105,7 +1108,7 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "project")
-    ProjectDTO getProjectWithExpandedElements(
+    ProjectDTO getProjectWithExpandedFolders(
             @WebParam(name = "projectID") Long projectID,
             @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
@@ -1488,8 +1491,9 @@ public interface GeoPlatformService {
     List<String> getAllGuiComponentIDs();
 
     /**
-     * Retrieve GUI Component permissions for an Application. <p> It is based
-     * only on application ID.
+     * Retrieve GUI Component permissions for an Application.
+     * <p/>
+     * It is based only on application ID.
      *
      * @param appID application ID
      *
@@ -1504,8 +1508,9 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     /**
-     * Retrieve GUI Component permissions for an Account. <p> It is based on
-     * accounts with disjoined authorities.
+     * Retrieve GUI Component permissions for an Account.
+     * <p/>
+     * It is based on accounts with disjoined authorities.
      *
      * @param accountID account ID
      *

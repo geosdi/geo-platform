@@ -401,7 +401,7 @@ public class WSProjectTest extends ServiceTest {
         gpWSClient.updateFolder(folder1A);
         gpWSClient.updateFolder(folder2C);
 
-        ProjectDTO project = gpWSClient.getProjectWithExpandedElements(super.idProjectTest, super.idUserTest);
+        ProjectDTO project = gpWSClient.getProjectWithExpandedFolders(super.idProjectTest, super.idUserTest);
 
         Assert.assertEquals("project name", super.projectTest.getName(), project.getName());
         Assert.assertEquals("project elements", super.projectTest.getNumberOfElements(), project.getNumberOfElements().intValue());

@@ -78,7 +78,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     public final static int NUM_ZOOM_LEVEL = 30;
     public final static String EPSG_4326 = "EPSG:4326";
     private final static String EPSG_3857 = "EPSG:3857";
-    private final static String EPSG_900913 = "EPSG:900913";
+    private final static String EPSG_GOOGLE = "EPSG:900913";
     private MapWidget mapWidget;
     private MapOptions mapOptions;
     private MapControlManager mapControl;
@@ -107,6 +107,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void setBaseMapOptions() {
         this.mapOptions = new MapOptions();
         this.mapOptions.setNumZoomLevels(MapLayoutWidget.NUM_ZOOM_LEVEL);
+        this.mapOptions.setDisplayProjection(new Projection(EPSG_4326));
         IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         String baseLayerKey = accountDetail.getBaseLayer();
         GPBaseLayer baseLayer;
@@ -118,29 +119,26 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 //            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
         }
         if (baseLayer.getProjection().getProjectionCode().equals(EPSG_4326)) {
-            set4326MapOptions(this.mapOptions);
+            set4326MapOptions();
         } else {
-            set3857MapOptions(this.mapOptions);
+            set3857MapOptions();
+
         }
 
     }
 
-    private void set4326MapOptions(MapOptions options) {
-        options.setProjection(EPSG_4326);
-        options.setUnits(MapUnits.DEGREES);
-        options.setMaxExtent(new Bounds(-180, -90,
+    private void set4326MapOptions() {
+        this.mapOptions.setUnits(MapUnits.DEGREES);
+        this.mapOptions.setMaxExtent(new Bounds(-180, -90,
                 180, 83.623));
-        options.setMaxResolution(new Double(1.40625).floatValue());
-        options.setDisplayProjection(new Projection(EPSG_4326));
+        this.mapOptions.setMaxResolution(new Double(1.40625).floatValue());
     }
 
-    private void set3857MapOptions(MapOptions options) {
-        options.setProjection(EPSG_3857);
-        options.setUnits(MapUnits.METERS);
-        options.setMaxExtent(new Bounds(-20037508, -20037508,
+    private void set3857MapOptions() {
+        this.mapOptions.setUnits(MapUnits.METERS);
+        this.mapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
                 20037508, 20037508.34));
-        options.setMaxResolution(new Double(156543.0339).floatValue());
-        options.setDisplayProjection(new Projection(EPSG_4326));
+        this.mapOptions.setMaxResolution(new Double(156543.0339).floatValue());
     }
 
     private void initMapWidget() {
@@ -157,9 +155,15 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         if (baseLayer == null) {
             baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.GOOGLE_SATELLITE);
         }
+
+        System.out.println("Base layer projection: " + baseLayer.getProjection().getProjectionCode());
         this.map.addLayer(baseLayer.getGwtOlBaseLayer());
         baseLayer.getGwtOlBaseLayer().setZIndex(-1);
         this.mapControl = new MapControlManager(this.map);
+        
+        this.map.setOptions(this.mapOptions);
+        System.out.println("Map Projection " + this.map.getProjection());
+        
     }
 
     public void addMeasureControl() {
@@ -256,7 +260,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             ViewportUtility.gotoViewportLocation(map, viewport);
         } else {
             LonLat center = new LonLat(13.375, 42.329);
-            center.transform(EPSG_4326, map.getProjection());
+            if (map.getProjection().equals(EPSG_3857)) {
+                center.transform(EPSG_4326, EPSG_GOOGLE);
+            }
             float zoomLevel = 5;
             this.map.setCenter(center, (int) zoomLevel);
         }
@@ -491,12 +497,16 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
      */
     @Override
     public void zoomToMaxExtend(BBoxClientInfo bbox, String crs) {
+        System.out.println("BboxClientInfo" + bbox);
+        System.out.println("CRS" + crs);
         Bounds b = ViewportUtility.generateBoundsFromBBOX(bbox);
         if (!map.getProjection().equals(crs)) {
-            System.out.println("Changed projection from: " + crs
+            System.out.println(">> Changed projection from: " + crs
                     + ", to: " + map.getProjection());
-            b.transform(new Projection(crs),
-                    new Projection(map.getProjection()));
+            if (map.getProjection().equals(EPSG_3857)) {
+                b.transform(new Projection(crs),
+                        new Projection(EPSG_GOOGLE));
+            }
         }
 
         this.map.zoomToExtent(b);
@@ -523,18 +533,18 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         if (!gpBaseLayer.getGwtOlBaseLayer().getName().equals(map.getBaseLayer().getName())) {
             int zoomLevel = this.map.getZoom();
             double scale = this.map.getScale();
-            MapOptions options = this.mapOptions;
+            
             Bounds bounds = this.map.getExtent();
             boolean projectionChanged = Boolean.FALSE;
             if (gpBaseLayer.getProjection().getProjectionCode().equals(EPSG_4326)
                     && !this.map.getProjection().equals(EPSG_4326)) {
-                this.set4326MapOptions(options);
-                bounds.transform(new Projection(this.map.getProjection()), new Projection(EPSG_4326));
+                this.set4326MapOptions();
+                bounds.transform(new Projection(EPSG_GOOGLE), new Projection(EPSG_4326));
                 projectionChanged = Boolean.TRUE;
             } else if (gpBaseLayer.getProjection().getProjectionCode().equals(EPSG_3857)
                     && !this.map.getProjection().equals(EPSG_3857)) {
-                this.set3857MapOptions(options);
-                bounds.transform(new Projection(this.map.getProjection()), new Projection(EPSG_900913));
+                this.set3857MapOptions();
+                bounds.transform(new Projection(EPSG_4326), new Projection(EPSG_GOOGLE));
                 projectionChanged = Boolean.TRUE;
             }
             Layer newBaseLayer = gpBaseLayer.getGwtOlBaseLayer();
@@ -543,7 +553,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             this.map.addLayer(newBaseLayer);
             this.map.removeLayer(oldBaseLayer);
             newBaseLayer.setZIndex(-1);
-            this.map.setOptions(options);
+            this.map.setOptions(this.mapOptions);
             if (projectionChanged) {
                 this.map.zoomToMaxExtent();
                 this.map.zoomToScale((float) scale, Boolean.TRUE);
@@ -551,6 +561,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
                 this.map.zoomToExtent(bounds);
             }
             this.changeBaseLayerMapEvent = new ChangeBaseLayerMapEvent(gpBaseLayer.getProjection());
+
+            System.out.println("Map Projection " + this.map.getProjection());
+
             GPHandlerManager.fireEvent(this.changeBaseLayerMapEvent);
         } else {
             GeoPlatformMessage.infoMessage("Base Layer", "The selected base layer is already displayed");

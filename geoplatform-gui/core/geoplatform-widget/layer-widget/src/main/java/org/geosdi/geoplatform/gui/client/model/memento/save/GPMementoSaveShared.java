@@ -114,8 +114,8 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
         //per inviare il messaggio di notifica per lo share
         AbstractMementoSave mementoSave = (AbstractMementoSave) o;
         GPClientProject project = Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-        LayerRemote.Util.getInstance().sendSharedProjectNotification(project.getId(),
-                XMPPSubjectEnum.SHARED_PROJECT, null, null, null);
+//        LayerRemote.Util.getInstance().sendSharedProjectNotification(project.getId(),
+//                XMPPSubjectEnum.SHARED_PROJECT, null, null, null);
         boolean operation = super.remove(o);
         return operation;
     }

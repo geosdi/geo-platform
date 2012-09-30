@@ -61,6 +61,8 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
     private GeoPlatformMap mapWidget;
     private PopupMapWidget popupWidget = new PopupMapWidget("GP-GeoCoder-Popup");
     private VectorFeature vectorFeature;
+    private final String EPSG_GOOGLE = "EPSG:900913";
+    private final String EPSG_3857 = "EPSG:3857";
     /**
      * TODO : Think a way to have this in configuration *
      */
@@ -93,8 +95,8 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
             GPCoordinateReferenceSystem crs, Object provider) {
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
 
-        if (!crs.getCode().equals(this.mapWidget.getMap().getProjection())) {
-            center.transform(crs.getCode(), this.mapWidget.getMap().getProjection());
+        if (this.mapWidget.getMap().getProjection().equals(EPSG_3857)) {
+            center.transform(crs.getCode(), EPSG_GOOGLE);
         }
 
         this.geocoderMarker.setProvider(provider);
@@ -106,14 +108,16 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
     public void onRegisterGeocodingFeature(IGeoPlatformLocation bean,
             GPCoordinateReferenceSystem crs, Object provider) {
 
-        this.clearFeature();
-                
+
+        removeMarker();
+
+
         this.mapWidget.getMap().addLayer(this.geocoderFeature.geFeatureLayer());
         MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(bean.getWkt()).getJSObject());
 
 
-        if (!crs.getCode().equals(this.mapWidget.getMap().getProjection())) {
-            geom.transform(new Projection(crs.getCode()), new Projection(this.mapWidget.getMap().getProjection()));
+        if (this.mapWidget.getMap().getProjection().equals(EPSG_3857)) {
+            geom.transform(new Projection(crs.getCode()), new Projection(EPSG_GOOGLE));
         }
 
         this.geocoderFeature.setProvider(provider);
@@ -130,6 +134,7 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
 
     @Override
     public void removeMarker() {
+        this.geocoderFeature.removeFeature();
         this.geocoderMarker.removeMarker();
         this.clearFeature();
     }

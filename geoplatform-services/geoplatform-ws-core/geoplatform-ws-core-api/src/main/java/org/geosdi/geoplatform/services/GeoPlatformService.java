@@ -826,16 +826,6 @@ public interface GeoPlatformService {
             @WebParam(name = "viewport") GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
-    @Put
-    void replaceViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
-            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
-            throws ResourceNotFoundFault, IllegalParameterFault;
-
-    @Put
-    void saveOrUpdateViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
-            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
-            throws ResourceNotFoundFault, IllegalParameterFault;
-
     @Post
     Long updateViewport(@WebParam(name = "viewport") GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -843,6 +833,16 @@ public interface GeoPlatformService {
     @Delete
     boolean deleteViewport(@WebParam(name = "viewportID") Long viewportID)
             throws ResourceNotFoundFault;
+
+    @Put
+    void saveOrUpdateViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
+            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Put
+    void replaceViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
+            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================

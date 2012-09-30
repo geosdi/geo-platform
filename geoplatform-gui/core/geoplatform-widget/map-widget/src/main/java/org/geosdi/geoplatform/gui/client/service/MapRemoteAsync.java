@@ -48,7 +48,7 @@ public interface MapRemoteAsync {
 
     public void saveBaseLayer(String baseLayer, AsyncCallback<?> callback);
 
-    public void saveOrUpdateViewportList(List<GPClientViewport> viewportList, AsyncCallback<?> callback)
+    public void replaceViewportList(List<GPClientViewport> viewportList, AsyncCallback<?> callback)
             throws GeoPlatformException;
 
     public void loadViewportElements(AsyncCallback<List<GPClientViewport>> callback) throws GeoPlatformException;

@@ -132,7 +132,7 @@ public class MapService implements IMapService {
     }
 
     @Override
-    public void saveOrUpdateViewportList(List<GPClientViewport> viewportList, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public void replaceViewportList(List<GPClientViewport> viewportList, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
         Long projectID;
         try {

@@ -66,7 +66,7 @@ public class MapRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
-    public void saveOrUpdateViewportList(List<GPClientViewport> viewportList) throws GeoPlatformException {
-        this.mapService.saveOrUpdateViewportList(viewportList, super.getThreadLocalRequest());
+    public void replaceViewportList(List<GPClientViewport> viewportList) throws GeoPlatformException {
+        this.mapService.replaceViewportList(viewportList, super.getThreadLocalRequest());
     }
 }

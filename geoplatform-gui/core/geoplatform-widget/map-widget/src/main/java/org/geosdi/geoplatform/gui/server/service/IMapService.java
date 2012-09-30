@@ -48,7 +48,7 @@ public interface IMapService {
 
     public void saveBaseLayer(String baseLayer, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    public void saveOrUpdateViewportList(List<GPClientViewport> viewportList, HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    public void replaceViewportList(List<GPClientViewport> viewportList, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
     public List<GPClientViewport> loadViewportElements(HttpServletRequest httpServletRequest)
             throws GeoPlatformException;

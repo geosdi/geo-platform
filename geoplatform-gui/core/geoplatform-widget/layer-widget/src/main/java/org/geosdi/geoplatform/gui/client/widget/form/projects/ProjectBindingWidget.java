@@ -224,7 +224,6 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
                         searchWidget.getStore().commitChanges();
                         GeoPlatformMessage.infoMessage("Project successfully added",
                                 "<ul><li>" + entity.getName() + "</li></ul>");
-
                         if (entity.isDefaultProject()) {
                             TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
                         }

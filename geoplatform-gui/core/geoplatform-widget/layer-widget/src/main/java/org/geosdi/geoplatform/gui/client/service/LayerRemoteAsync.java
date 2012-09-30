@@ -72,7 +72,7 @@ public interface LayerRemoteAsync {
 
     void getAccountsFromSharedProject(long idSharedProject, AsyncCallback<ArrayList<GPSimpleUser>> callback);
 
-    void loadDefaulProjectElements(AsyncCallback<GPClientProject> callback);
+    void loadDefaultProjectElements(AsyncCallback<GPClientProject> callback);
 
     void loadProject(long projectId, AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
 

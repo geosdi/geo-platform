@@ -84,7 +84,7 @@ public interface LayerRemote extends RemoteService {
 
     ArrayList<GPSimpleUser> getAccountsFromSharedProject(long idSharedProject) throws GeoPlatformException;
 
-    GPClientProject loadDefaulProjectElements() throws GeoPlatformException;
+    GPClientProject loadDefaultProjectElements() throws GeoPlatformException;
 
     ArrayList<GPFolderClientInfo> loadProject(long projectId) throws GeoPlatformException;
 

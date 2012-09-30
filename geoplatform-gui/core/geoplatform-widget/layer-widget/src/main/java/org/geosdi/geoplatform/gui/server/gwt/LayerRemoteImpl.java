@@ -72,8 +72,8 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     private ILayerService layerService;
 
     @Override
-    public GPClientProject loadDefaulProjectElements() throws GeoPlatformException {
-        return this.layerService.loadDefaulProjectElements(super.getThreadLocalRequest());
+    public GPClientProject loadDefaultProjectElements() throws GeoPlatformException {
+        return this.layerService.loadDefaultProjectElements(super.getThreadLocalRequest());
     }
 
     @Override

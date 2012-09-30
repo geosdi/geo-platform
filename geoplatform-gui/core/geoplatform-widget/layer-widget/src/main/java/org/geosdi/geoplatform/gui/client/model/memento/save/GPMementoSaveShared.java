@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.HashMap;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
@@ -114,8 +116,18 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
         //per inviare il messaggio di notifica per lo share
         AbstractMementoSave mementoSave = (AbstractMementoSave) o;
         GPClientProject project = Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-//        LayerRemote.Util.getInstance().sendSharedProjectNotification(project.getId(),
-//                XMPPSubjectEnum.SHARED_PROJECT, null, null, null);
+        LayerRemote.Util.getInstance().sendSharedProjectNotification(project.getId(),
+                XMPPSubjectEnum.SHARED_PROJECT, "Reload proj", new HashMap<String, String>(), new AsyncCallback<Object>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                System.out.println("Send shared project notification On Fail");
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                System.out.println("Send shared project notification On success");
+            }
+        });
         boolean operation = super.remove(o);
         return operation;
     }

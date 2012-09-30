@@ -131,7 +131,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public GPClientProject loadDefaulProjectElements(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public GPClientProject loadDefaultProjectElements(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         Long projectId = null;
         GPAccount account;
         try {

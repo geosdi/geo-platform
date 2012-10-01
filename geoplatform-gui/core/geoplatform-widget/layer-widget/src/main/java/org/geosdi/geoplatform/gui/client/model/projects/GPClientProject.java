@@ -99,7 +99,9 @@ public class GPClientProject extends GeoPlatformBeanModel {
      * @return the numberOfElements
      */
     public int getNumberOfElements() {
-        return (Integer) super.get(GPClientProjectKey.PROJECT_ELEMENTS.toString());
+        Integer numberOfElements = (Integer) super.get(
+                GPClientProjectKey.PROJECT_ELEMENTS.toString());
+        return (numberOfElements != null) ? numberOfElements.intValue() : 0;
     }
 
     /**
@@ -113,7 +115,9 @@ public class GPClientProject extends GeoPlatformBeanModel {
      * @return the version
      */
     public int getVersion() {
-        return (Integer) super.get(GPClientProjectKey.PROJECT_VERSION.toString());
+        Integer version = (Integer) super.get(
+                GPClientProjectKey.PROJECT_VERSION.toString());
+        return (version != null) ? version.intValue() : 0;
     }
 
     /**
@@ -154,7 +158,8 @@ public class GPClientProject extends GeoPlatformBeanModel {
      * @return the defaultProject
      */
     public boolean isDefaultProject() {
-        Boolean isDefault = (Boolean) super.get(GPClientProjectKey.DEFAULT_PROJECT.toString());
+        Boolean isDefault = (Boolean) super.get(
+                GPClientProjectKey.DEFAULT_PROJECT.toString());
         return (isDefault == null) ? false : isDefault.booleanValue();
     }
 
@@ -163,7 +168,8 @@ public class GPClientProject extends GeoPlatformBeanModel {
      */
     public void setDefaultProject(boolean defaultProject) {
         set(GPClientProjectKey.DEFAULT_PROJECT.toString(), defaultProject);
-        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.getDefaultProjectLabel());
+        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(),
+            this.getDefaultProjectLabel());
     }
 
     public String getDefaultProjectLabel() {

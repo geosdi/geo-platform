@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.xmpp.event;
 
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import java.util.HashMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPEventRepository;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPMessageHandler;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractXMPPEvent extends GwtEvent<IXMPPMessageHandler> {
+public abstract class AbstractXMPPEvent<T extends EventHandler> extends GwtEvent<T> {
 
     private final String messageSubject;
     private String messageBody;

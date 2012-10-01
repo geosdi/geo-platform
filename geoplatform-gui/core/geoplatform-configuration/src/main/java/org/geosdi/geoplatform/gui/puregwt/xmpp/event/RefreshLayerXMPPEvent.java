@@ -35,27 +35,26 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.xmpp.event;
 
-import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPMessageHandler;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPRefreshLayerHandler;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class RefreshLayerXMPPEvent extends AbstractXMPPEvent {
+public class RefreshLayerXMPPEvent extends AbstractXMPPEvent<IXMPPRefreshLayerHandler> {
 
-    public RefreshLayerXMPPEvent(String messageSubject) {
-        super(messageSubject);
+    public RefreshLayerXMPPEvent() {
+        super(XMPPSubjectEnum.LAYER_RELOAD.toString());
     }
 
     @Override
-    protected void dispatch(IXMPPMessageHandler handler) {
+    protected void dispatch(IXMPPRefreshLayerHandler handler) {
         handler.handleMessageBody(super.getMessageBody());
     }
 
     @Override
-    public Type<IXMPPMessageHandler> getAssociatedType() {
-        return IXMPPMessageHandler.TYPE;
+    public Type<IXMPPRefreshLayerHandler> getAssociatedType() {
+        return IXMPPRefreshLayerHandler.TYPE;
     }
-
-
 }

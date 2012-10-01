@@ -33,13 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.shared;
+package org.geosdi.geoplatform.gui.puregwt.xmpp.event;
+
+import org.geosdi.geoplatform.gui.puregwt.layers.IGPBuildTreeHandler;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public enum XMPPSubjectEnum {
+public class ReloadTreeXMPPEvent extends AbstractXMPPEvent<IGPBuildTreeHandler> {
 
-    LAYER_RELOAD, SHARED_PROJECT, RELOAD_TREE;
+    public ReloadTreeXMPPEvent() {
+        super(XMPPSubjectEnum.RELOAD_TREE.toString());
+    }
+
+    @Override
+    protected void dispatch(IGPBuildTreeHandler handler) {
+        handler.rebuildTree();
+    }
+
+    @Override
+    public Type<IGPBuildTreeHandler> getAssociatedType() {
+        return IGPBuildTreeHandler.TYPE;
+    }
 }

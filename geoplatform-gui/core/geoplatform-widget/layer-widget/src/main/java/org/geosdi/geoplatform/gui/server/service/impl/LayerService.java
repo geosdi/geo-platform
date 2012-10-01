@@ -138,6 +138,7 @@ public class LayerService implements ILayerService {
             account = this.sessionUtility.getLoggedAccount(httpServletRequest);
             projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
+//            System.out.println("Session timeout on loadDefaultProjectElements");
             throw new GeoPlatformException(timeout);
         }
         ProjectDTO projectDTO = null;
@@ -679,29 +680,24 @@ public class LayerService implements ILayerService {
     @Override
     public void updateProject(GPClientProject project,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
-
             AccountProjectPropertiesDTO dto = this.dtoConverter.convertToAccountProjectPropertiesDTO(account.getId(),
                     project);
-
             if (this.geoPlatformServiceClient.saveAccountProjectProperties(dto)) {
                 this.sessionUtility.storeLoggedAccountAndDefaultProject(account,
                         project.getId(), httpServletRequest);
             }
-
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-
         } catch (ResourceNotFoundFault rnf) {
             logger.error("Failed to update project on SecurityService: " + rnf);
             throw new GeoPlatformException(rnf);
-
         } catch (IllegalParameterFault ilg) {
             logger.error(
                     "Error on SecurityService: " + ilg);
             throw new GeoPlatformException("Parameter incorrect on saveProject");
+        } catch (GPSessionTimeout timeout) {
+            System.out.println("Session timeout");
+            throw new GeoPlatformException(timeout);
         }
 
     }

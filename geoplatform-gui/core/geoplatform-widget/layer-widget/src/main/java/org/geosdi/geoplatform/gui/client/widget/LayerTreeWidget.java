@@ -97,6 +97,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.IGPBuildTreeHandler;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -127,6 +128,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         TreeContextMenuFactory.setTreePanel(super.tree);
         super.store.setKeyProvider(new GPModelKeyProvider());
         this.contentPanel = contentPanel;
+        XMPPHandlerManager.addHandler(IGPBuildTreeHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IGPBuildTreeHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IGPExpandTreeNodeHandler.TYPE, this);
         this.buildRoot();
@@ -155,6 +157,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
 //            store.add(root, true);
 //            initialized = true;
 
+            Registry.register(UserSessionEnum.TREE_LOADED.name(), initialized);
             LayoutManager.getInstance().getStatusMap().setBusy(
                     "Loading tree elements: please, wait untill contents fully loads.");
             LayerRemote.Util.getInstance().loadDefaultProjectElements(new AsyncCallback<GPClientProject>() {
@@ -187,6 +190,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Tree elements loaded successfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());
+                    Registry.register(UserSessionEnum.TREE_LOADED.name(), initialized);
                 }
             });
         }

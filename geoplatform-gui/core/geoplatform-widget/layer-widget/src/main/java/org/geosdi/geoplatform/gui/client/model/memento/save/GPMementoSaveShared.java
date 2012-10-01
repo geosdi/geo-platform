@@ -78,15 +78,22 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
 
     @Override
     public void putOriginalPropertiesInCache(AbstractMementoOriginalProperties memento) {
-        super.add(memento);
-        LayerHandlerManager.fireEvent(peekCacheEvent);
+        boolean treeInitialized = (Boolean) Registry.get(UserSessionEnum.TREE_LOADED.name());
+        if (treeInitialized) {
+            super.add(memento);
+            LayerHandlerManager.fireEvent(peekCacheEvent);
+        }
     }
 
     @Override
     public boolean add(IMemento<ISave> memento) {
-        boolean condition = super.add(memento);
-        if (condition) {
-            LayerHandlerManager.fireEvent(peekCacheEvent);
+        boolean treeInitialized = (Boolean) Registry.get(UserSessionEnum.TREE_LOADED.name());
+        boolean condition = false;
+        if (treeInitialized) {
+            condition = super.add(memento);
+            if (condition) {
+                LayerHandlerManager.fireEvent(peekCacheEvent);
+            }
         }
         return condition;
     }
@@ -117,7 +124,7 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
         AbstractMementoSave mementoSave = (AbstractMementoSave) o;
         GPClientProject project = Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
         LayerRemote.Util.getInstance().sendSharedProjectNotification(project.getId(),
-                XMPPSubjectEnum.SHARED_PROJECT, "Reload proj", new HashMap<String, String>(), new AsyncCallback<Object>() {
+                XMPPSubjectEnum.RELOAD_TREE, "Reload proj", new HashMap<String, String>(), new AsyncCallback<Object>() {
             @Override
             public void onFailure(Throwable caught) {
                 System.out.println("Send shared project notification On Fail");

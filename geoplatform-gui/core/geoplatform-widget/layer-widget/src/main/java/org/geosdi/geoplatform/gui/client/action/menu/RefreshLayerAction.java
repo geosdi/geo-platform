@@ -53,10 +53,10 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPSubjectClientEnum;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.event.RefreshLayerXMPPEvent;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPMessageHandler;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -71,7 +71,7 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
     public RefreshLayerAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         this.treePanel = treePanel;
         XMPPHandlerManager.addHandler(IXMPPMessageHandler.TYPE, this);
-        this.instantiateMessageSubjectEvent(XMPPSubjectClientEnum.LAYER_RELOAD.toString());
+        this.instantiateMessageSubjectEvent(XMPPSubjectEnum.LAYER_RELOAD.toString());
     }
 
     @Override

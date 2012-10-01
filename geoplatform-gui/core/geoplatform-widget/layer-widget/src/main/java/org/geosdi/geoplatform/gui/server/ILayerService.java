@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
@@ -53,6 +54,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -73,7 +75,7 @@ public interface ILayerService {
     ArrayList<GPFolderClientInfo> loadProject(long projectId, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    GPClientProject loadDefaulProjectElements(HttpServletRequest httpServletRequest)
+    GPClientProject loadDefaultProjectElements(HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     ArrayList<IGPFolderElements> loadFolderElements(Long folderID,
@@ -153,5 +155,9 @@ public interface ILayerService {
             HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
     void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException;
+
+    void sendSharedProjectNotification(Long projectId, XMPPSubjectEnum subject,
+            String text, Map<String, String> attributesMap,
             HttpServletRequest httpServletRequest) throws GeoPlatformException;
 }

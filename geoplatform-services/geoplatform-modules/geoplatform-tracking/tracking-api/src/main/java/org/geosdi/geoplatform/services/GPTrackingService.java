@@ -39,7 +39,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.shared.XMPPSubjectServerEnum;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
 
 /**
@@ -76,7 +76,7 @@ public interface GPTrackingService {
     @Post
     void sendSharedProjectNotification(
             @WebParam(name = "projectID") Long projectID,
-            @WebParam(name = "subject") XMPPSubjectServerEnum subject,
+            @WebParam(name = "subject") XMPPSubjectEnum subject,
             @WebParam(name = "text") String text,
             @WebParam(name = "attributesMap") XmppAttributesMap attributesMap)
             throws ResourceNotFoundFault;

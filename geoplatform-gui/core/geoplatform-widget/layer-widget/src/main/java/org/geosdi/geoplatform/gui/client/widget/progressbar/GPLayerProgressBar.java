@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.LayersProgressBarEv
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPLayerProgressBar extends GeoPlatformProgressBar implements
         LayersProgressBarEventHandler {
@@ -53,21 +53,22 @@ public class GPLayerProgressBar extends GeoPlatformProgressBar implements
     @Override
     public void showProgressBar(String message) {
         super.createProgressBar("GPLayer ProgressBar", message, "Loading...");
-        this.box.show();
+//        System.out.println("Show progressbar");
+        super.show();
     }
 
     @Override
     public void closeProgressBar() {
-        this.box.close();
+//        System.out.println("Close progressbar");
+        super.close();
     }
 
     @Override
     public void updateProgressBarText(String message) {
-        if (super.box == null) {
+        if (super.initialized == false) {
             super.createProgressBar("GPLayer ProgressBar", message, "Loading...");
         } else {
-            //Here there is a problem
-            this.box.updateText(message);
+            super.updateText(message);
         }
     }
 }

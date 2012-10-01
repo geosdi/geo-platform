@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.model.memento.IMemento;
  * @email nazzareno.sileno@geosdi.org
  */
 public interface ISave<T extends IMemento> {
-    
-    public void executeSave(T memento);
-    
+
+    void executeSave(T memento);
 }

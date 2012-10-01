@@ -62,7 +62,7 @@ public interface MapRemote extends RemoteService {
 
     public void saveBaseLayer(String baseLayer) throws GeoPlatformException;
 
-    public void saveOrUpdateViewportList(List<GPClientViewport> viewportList) throws GeoPlatformException;
+    public void replaceViewportList(List<GPClientViewport> viewportList) throws GeoPlatformException;
 
     public List<GPClientViewport> loadViewportElements() throws GeoPlatformException;
 }

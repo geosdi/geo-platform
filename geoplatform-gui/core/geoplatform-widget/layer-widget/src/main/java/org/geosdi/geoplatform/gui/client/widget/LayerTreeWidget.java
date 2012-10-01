@@ -157,7 +157,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
 
             LayoutManager.getInstance().getStatusMap().setBusy(
                     "Loading tree elements: please, wait untill contents fully loads.");
-            LayerRemote.Util.getInstance().loadDefaulProjectElements(new AsyncCallback<GPClientProject>() {
+            LayerRemote.Util.getInstance().loadDefaultProjectElements(new AsyncCallback<GPClientProject>() {
                 @Override
                 public void onFailure(Throwable caught) {
                     if (caught.getCause() instanceof GPSessionTimeout) {

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.responce.collection;
 
-import java.util.HashMap;
 import java.util.Map;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -44,9 +43,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 public class XmppAttributesMap {
 
-    private Map<String, String> map = new HashMap<String, String>();
+    private Map<String, String> map;
 
     public XmppAttributesMap() {
+    }
+
+    public XmppAttributesMap(Map<String, String> map) {
+        this.map = map;
     }
 
     @XmlJavaTypeAdapter(XmppAttributesMapAdapter.class)

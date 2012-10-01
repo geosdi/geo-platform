@@ -41,18 +41,18 @@ import com.extjs.gxt.ui.client.widget.MessageBox.MessageBoxType;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformProgressBar {
+public abstract class GeoPlatformProgressBar extends MessageBox {
 
-    protected MessageBox box;
+    protected boolean initialized;
 
     public void createProgressBar(String title, String msg, String progressText) {
-        this.box = new MessageBox();
-        box.setTitle(title);
-        box.setMessage(msg);
-        box.setType(MessageBoxType.WAIT);
-        box.setProgressText(progressText);
-        box.setButtons("");
+        super.setTitle(title);
+        super.setMessage(msg);
+        super.setType(MessageBoxType.WAIT);
+        super.setProgressText(progressText);
+        super.setButtons("");
+        this.initialized = true;
     }
 }

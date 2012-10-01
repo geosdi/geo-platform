@@ -48,7 +48,7 @@ import org.springframework.stereotype.Service;
 @Service("sessionUtility")
 public class SessionUtility {
 
-    private final int SESSIONE_EXPIRATION = 1800;
+    private static final int SESSIONE_EXPIRATION = 1800;
 
     public enum SessionProperty {
 
@@ -62,6 +62,7 @@ public class SessionUtility {
         if (projectId != null) {
             return projectId;
         } else {
+            System.out.println("\n*** Session Project ID null ***");
             throw new GPSessionTimeout("Session Timeout");
         }
     }
@@ -74,6 +75,7 @@ public class SessionUtility {
         if (accountObj != null && accountObj instanceof GPAccount) {
             account = (GPAccount) accountObj;
         } else {
+            System.out.println("\n*** Session Account null ***");
             throw new GPSessionTimeout("Session Timeout");
         }
         return account;

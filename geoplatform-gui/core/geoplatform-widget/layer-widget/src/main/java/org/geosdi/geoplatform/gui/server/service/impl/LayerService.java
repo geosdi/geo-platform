@@ -150,7 +150,7 @@ public class LayerService implements ILayerService {
                         getProjectWithRootFolders(projectId, account.getId());
             }
         } catch (ResourceNotFoundFault rnf) {
-            logger.debug("Returning no elements: " + rnf);
+            logger.error("Returning no elements: " + rnf);
         }
         return this.dtoConverter.convertToGPClientProject(projectDTO);
     }
@@ -659,7 +659,7 @@ public class LayerService implements ILayerService {
                     this.dtoConverter.convertToGProject(project), project.isDefaultProject());
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(account,
-                    project.getId(), httpServletRequest);
+                    projectId, httpServletRequest);
 
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.common.collect.Maps;
 import java.util.Map;
@@ -42,6 +43,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.model.memento.GPCache;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -82,27 +84,34 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> implements IMem
      */
     @Override
     public void putOriginalPropertiesInCache(AbstractMementoOriginalProperties memento) {
-        if (memento != null && !this.modifiedLayersMap.containsKey(memento.getRefBaseElement())) {
-            this.modifiedLayersMap.put(memento.getRefBaseElement(), memento);
-            if (super.peek() == null) {
-                this.observable.setChanged();
-                this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
-                /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
-                 + this.observable.countObservers() + " observers");*/
+        boolean treeInitialized = (Boolean) Registry.get(UserSessionEnum.TREE_LOADED.name());
+        if (treeInitialized) {
+            if (memento != null && !this.modifiedLayersMap.containsKey(memento.getRefBaseElement())) {
+                this.modifiedLayersMap.put(memento.getRefBaseElement(), memento);
+                if (super.peek() == null) {
+                    this.observable.setChanged();
+                    this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
+                    /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
+                     + this.observable.countObservers() + " observers");*/
+                }
             }
         }
     }
 
     @Override
     public boolean add(IMemento<ISave> memento) {
-        boolean condition = super.add(memento);
-        if (condition && super.size() == 1) {
-            this.observable.setChanged();
-            this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
-            /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
-             + this.observable.countObservers() + " observers");*/
-        }
+        boolean treeInitialized = (Boolean) Registry.get(UserSessionEnum.TREE_LOADED.name());
+        boolean condition = false;
+        if (treeInitialized) {
+            condition = super.add(memento);
+            if (condition && super.size() == 1) {
+                this.observable.setChanged();
+                this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
+                /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
+                 + this.observable.countObservers() + " observers");*/
+            }
 //        System.out.println("GPLayerSaveCache: added " + memento.getClass().getName());
+        }
         return condition;
     }
 

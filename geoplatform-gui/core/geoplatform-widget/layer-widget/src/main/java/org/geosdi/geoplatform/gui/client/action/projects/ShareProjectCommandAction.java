@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.action.projects;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.img.LayerWidgetImage;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -55,7 +54,6 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@Singleton
 public class ShareProjectCommandAction<X extends ButtonEvent> extends AbstractCommandAction<X> {
 
     public ShareProjectCommandAction() {

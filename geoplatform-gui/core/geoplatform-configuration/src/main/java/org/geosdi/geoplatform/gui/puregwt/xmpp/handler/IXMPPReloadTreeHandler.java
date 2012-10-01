@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,13 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.shared;
+package org.geosdi.geoplatform.gui.puregwt.xmpp.handler;
+
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public enum XMPPSubjectEnum {
+public interface IXMPPReloadTreeHandler extends EventHandler {
 
-    LAYER_RELOAD, SHARED_PROJECT, RELOAD_TREE;
+    Type<IXMPPReloadTreeHandler> TYPE = new Type<IXMPPReloadTreeHandler>();
+
+    void handleMessageBody(String messageBody);
 }

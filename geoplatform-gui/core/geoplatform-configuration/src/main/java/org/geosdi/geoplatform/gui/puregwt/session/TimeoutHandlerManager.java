@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public class TimeoutHandlerManager {
 

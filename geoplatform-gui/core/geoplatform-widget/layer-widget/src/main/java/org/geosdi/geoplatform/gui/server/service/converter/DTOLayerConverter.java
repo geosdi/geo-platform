@@ -141,8 +141,10 @@ public class DTOLayerConverter {
         dto.setOpacity(memento.getOpacity());
         dto.setCqlFilter(memento.getCqlFilter());
         List<String> styleList = Lists.newArrayList();
-        for (GPStyleStringBeanModel beanModel : memento.getStyleList()) {
-            styleList.add(beanModel.getStyleString());
+        if (memento.getStyleList() != null) {
+            for (GPStyleStringBeanModel beanModel : memento.getStyleList()) {
+                styleList.add(beanModel.getStyleString());
+            }
         }
         dto.setStyleList(styleList);
         return dto;

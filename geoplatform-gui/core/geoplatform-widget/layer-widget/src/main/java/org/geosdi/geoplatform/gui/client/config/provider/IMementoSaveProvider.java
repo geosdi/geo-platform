@@ -41,6 +41,7 @@ import javax.inject.Provider;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveDummy;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveShared;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.ObservableGPLayerSaveCache;
@@ -76,7 +77,9 @@ public class IMementoSaveProvider implements Provider<IMementoSave> {
             } else {
                 this.savedShareStatus = clientProject.isShared();
                 IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                if (clientProject.isShared() && !GPRole.VIEWER.toString().equalsIgnoreCase(accountInSession.getAuthority())) {
+                if (GPRole.VIEWER.toString().equalsIgnoreCase(accountInSession.getAuthority())) {
+                    this.mementoSave = new GPMementoSaveDummy();
+                } else if (clientProject.isShared()) {
                     this.mementoSave = new GPMementoSaveShared(observable, peekCacheEvent);
                 } else {
                     this.mementoSave = new GPMementoSaveCache(observable);

@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.shared.XMPPSubjectServerEnum;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import org.geosdi.geoplatform.services.development.EntityCorrectnessException;
@@ -168,7 +168,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
 //            }
 //        }
         Message message = new Message(messageReceiver, Message.Type.normal);
-        message.setSubject(XMPPSubjectServerEnum.LAYER_RELOAD.toString());
+        message.setSubject(XMPPSubjectEnum.LAYER_RELOAD.toString());
         message.setBody(layerUUID);
         trigger.getJobDataMap().put(SendTrackingMessageJob.MESSAGE, message);
         this.scheduleTrigger(triggerKey, trigger);
@@ -199,7 +199,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
      * org.geosdi.geoplatform.responce.collection.XmppAttributesMap)
      */
     @Override
-    public void sendSharedProjectNotification(Long projectID, XMPPSubjectServerEnum subject,
+    public void sendSharedProjectNotification(Long projectID, XMPPSubjectEnum subject,
             String text, XmppAttributesMap attributesMap) throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectID);
         if (project == null) {
@@ -219,15 +219,20 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
             GPAccount account = accountProject.getAccount();
             EntityCorrectness.checkAccountLog(account); // TODO assert
 
-            String naturalID = account.getNaturalID(); // Username for User
-            String recipient = this.createXmppUri(naturalID);
-            logger.trace("\n*** Recipient XMPP uri: {} ***", recipient);
+            // If user have this project as default
+            if (accountProject.isDefaultProject()) {
 
-            Presence presence = roster.getPresence(recipient);
-            if (presence.isAvailable()) {
-                logger.info("\n*** Send Message to online user \"{}\" ***", naturalID);
-                message.setTo(recipient);
-                connection.sendPacket(message);
+                String naturalID = account.getNaturalID(); // Username for User
+                String recipient = this.createXmppUri(naturalID);
+                logger.trace("\n\n*** Recipient XMPP uri: {} ***", recipient);
+
+                // If user is online send the message
+                Presence presence = roster.getPresence(recipient);
+                if (presence.isAvailable()) {
+                    logger.info("\n*** Send Message to online user \"{}\" ***", naturalID);
+                    message.setTo(recipient);
+                    connection.sendPacket(message);
+                }
             }
         }
     }
@@ -244,7 +249,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     /**
      * Create an XMPP Message less than recipient.
      */
-    private Message createUnknowMessage(XMPPSubjectServerEnum subject, String text,
+    private Message createUnknowMessage(XMPPSubjectEnum subject, String text,
             XmppAttributesMap attributesMap) {
 
         Message message = new Message();

@@ -80,7 +80,7 @@ public class SaveViewportAction extends GeoPlatformSecureAction<ButtonEvent> {
     @Override
     public void componentSelected(ButtonEvent ce) {
         if (isStoreModelCorrect()) {
-            MapRemote.Util.getInstance().saveOrUpdateViewportList(store.getModels(), new AsyncCallback<Object>() {
+            MapRemote.Util.getInstance().replaceViewportList(store.getModels(), new AsyncCallback<Object>() {
                 @Override
                 public void onFailure(Throwable caught) {
                     GeoPlatformMessage.errorMessage("Error saving",

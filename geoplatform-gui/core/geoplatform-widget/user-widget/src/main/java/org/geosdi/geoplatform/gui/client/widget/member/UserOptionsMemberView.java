@@ -116,6 +116,8 @@ public class UserOptionsMemberView extends UserOptionsMember {
 
             @Override
             public void onSuccess(Long result) {
+                UserOptionsMemberView.super.saveButton.disable();
+                
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "View options saved succesfully.",
                         SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());

@@ -95,7 +95,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebService(name = "GeoPlatformService",
-targetNamespace = "http://services.geo-platform.org/")
+            targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
@@ -693,7 +693,7 @@ public interface GeoPlatformService {
 
     /**
      * Update all at once the relations of sharing for a Project. The Account
-     * owner ID relation for the Project will be ignored.
+     * owner ID relation must be present, otherwise the Project will be unshare.
      *
      * @param projectID the Project ID
      * @param accountIDsProject the Account IDs which will be updated the
@@ -826,16 +826,6 @@ public interface GeoPlatformService {
             @WebParam(name = "viewport") GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
-    @Put
-    void replaceViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
-            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
-            throws ResourceNotFoundFault, IllegalParameterFault;
-
-    @Put
-    void saveOrUpdateViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
-            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
-            throws ResourceNotFoundFault, IllegalParameterFault;
-
     @Post
     Long updateViewport(@WebParam(name = "viewport") GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -843,6 +833,16 @@ public interface GeoPlatformService {
     @Delete
     boolean deleteViewport(@WebParam(name = "viewportID") Long viewportID)
             throws ResourceNotFoundFault;
+
+    @Put
+    void saveOrUpdateViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
+            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Put
+    void replaceViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
+            @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
+            throws ResourceNotFoundFault, IllegalParameterFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================
@@ -1079,6 +1079,9 @@ public interface GeoPlatformService {
 
     /**
      * Retrieve only the root folders (top-level folders) of a Project.
+     * <p/>
+     * Return the Account owner only if the Account that load the project is not
+     * the Account owner.
      *
      * @param projectID the Project ID
      * @return the root folders
@@ -1095,9 +1098,9 @@ public interface GeoPlatformService {
      * Retrieve a Project. Retrieve also the root folders (top-level folders)
      * with content (sub-folders and layers), so all expanded folders (at any
      * level) in cascade.
-     *
-     * @todo rename to getExpandedFoldersByProjectID because only the folder can
-     * be expanded.
+     * <p/>
+     * Return the Account owner only if the Account that load the project is not
+     * the Account owner.
      *
      * @param projectID the Project ID
      * @return the Project to retrieve
@@ -1105,7 +1108,7 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "project")
-    ProjectDTO getProjectWithExpandedElements(
+    ProjectDTO getProjectWithExpandedFolders(
             @WebParam(name = "projectID") Long projectID,
             @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
@@ -1488,8 +1491,9 @@ public interface GeoPlatformService {
     List<String> getAllGuiComponentIDs();
 
     /**
-     * Retrieve GUI Component permissions for an Application. <p> It is based
-     * only on application ID.
+     * Retrieve GUI Component permissions for an Application.
+     * <p/>
+     * It is based only on application ID.
      *
      * @param appID application ID
      *
@@ -1504,8 +1508,9 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     /**
-     * Retrieve GUI Component permissions for an Account. <p> It is based on
-     * accounts with disjoined authorities.
+     * Retrieve GUI Component permissions for an Account.
+     * <p/>
+     * It is based on accounts with disjoined authorities.
      *
      * @param accountID account ID
      *

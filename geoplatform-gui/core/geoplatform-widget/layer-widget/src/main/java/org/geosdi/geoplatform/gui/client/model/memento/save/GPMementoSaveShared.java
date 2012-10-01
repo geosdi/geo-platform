@@ -35,14 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
+import com.extjs.gxt.ui.client.Registry;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.HashMap;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.model.memento.GPCache;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -71,21 +79,16 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
     @Override
     public void putOriginalPropertiesInCache(AbstractMementoOriginalProperties memento) {
         super.add(memento);
-        this.saveAndSendXmppMessage();
+        LayerHandlerManager.fireEvent(peekCacheEvent);
     }
 
     @Override
     public boolean add(IMemento<ISave> memento) {
         boolean condition = super.add(memento);
         if (condition) {
-            this.saveAndSendXmppMessage();
+            LayerHandlerManager.fireEvent(peekCacheEvent);
         }
         return condition;
-    }
-
-    private void saveAndSendXmppMessage() {
-        //TODO: Add code to send XMPP message
-        LayerHandlerManager.fireEvent(peekCacheEvent);
     }
 
     @Override
@@ -99,6 +102,9 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
         super.clear();
     }
 
+    /**
+     * @see super.peek()
+     */
     @Override
     public IMemento<ISave> peek() {
         return super.peek();
@@ -106,6 +112,22 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
 
     @Override
     public boolean remove(Object o) {
+        //TODO: fare in modo che il memento dia tutte le proprietà necessarie
+        //per inviare il messaggio di notifica per lo share
+        AbstractMementoSave mementoSave = (AbstractMementoSave) o;
+        GPClientProject project = Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+        LayerRemote.Util.getInstance().sendSharedProjectNotification(project.getId(),
+                XMPPSubjectEnum.SHARED_PROJECT, "Reload proj", new HashMap<String, String>(), new AsyncCallback<Object>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                System.out.println("Send shared project notification On Fail");
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                System.out.println("Send shared project notification On success");
+            }
+        });
         boolean operation = super.remove(o);
         return operation;
     }

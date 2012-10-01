@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.modelws;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -102,30 +101,17 @@ public class WSProjectTest extends ServiceTest {
     /**
      * Tree structure to test
      *
-     * A -|
-     *    + raster-A
-     *    + 1A ---------|
-     *                  + 2A -------|
-     *                              + 3A -------|
-     *                                          + vector-3A
-     *                              + 3B
-     *                              + 3C
-     *                  + 2B
-     *                  + 2C -------|
-     *                              + raster-2C
+     * A -| + raster-A + 1A ---------| + 2A -------| + 3A -------| + vector-3A +
+     * 3B + 3C + 2B + 2C -------| + raster-2C
      *
-     *    + 1B ---------|
-     *                  + raster-1B
-     *    + 1C
-     * B -|
-     *    + vector-B
+     * + 1B ---------| + raster-1B + 1C B -| + vector-B
      */
     @Override
     public void setUp() throws Exception {
         super.setUp();
 
         Long idRasterRootFolderA = super.createAndInsertRasterLayer(super.rootFolderA, titleRaster + nameRootFolderA,
-                                                                    nameRaster + nameRootFolderA, "", 15, "", "");
+                nameRaster + nameRootFolderA, "", 15, "", "");
         rasterRootFolderA = gpWSClient.getRasterLayer(idRasterRootFolderA);
         this.fixture.put(rasterRootFolderA.getName(), rasterRootFolderA);
         // "rootFolderA" ---> "folder1(A|B|C)"
@@ -138,7 +124,7 @@ public class WSProjectTest extends ServiceTest {
         this.fixture.put(folder1B.getName(), folder1B);
         //
         Long idRasterFolder1B = super.createAndInsertRasterLayer(folder1B, titleRaster + nameFolder1B,
-                                                                 nameRaster + nameFolder1B, "", 4, "", "");
+                nameRaster + nameFolder1B, "", 4, "", "");
         rasterFolder1B = gpWSClient.getRasterLayer(idRasterFolder1B);
         this.fixture.put(rasterFolder1B.getName(), rasterFolder1B);
         //
@@ -160,7 +146,7 @@ public class WSProjectTest extends ServiceTest {
         this.fixture.put(folder2C.getName(), folder2C);
         //
         Long idRasterFolder2C = super.createAndInsertRasterLayer(folder2C, titleRaster + nameFolder2C,
-                                                                 nameRaster + nameFolder2C, "", 6, "", "");
+                nameRaster + nameFolder2C, "", 6, "", "");
         rasterFolder2C = gpWSClient.getRasterLayer(idRasterFolder2C);
         this.fixture.put(rasterFolder2C.getName(), rasterFolder2C);
         //
@@ -170,7 +156,7 @@ public class WSProjectTest extends ServiceTest {
         this.fixture.put(folder3A.getName(), folder3A);
         //
         Long idVectorFolder3A = super.createAndInsertVectorLayer(folder3A, titleVector + nameFolder3A,
-                                                                 nameVector + nameFolder3A, "", 11, "", "");
+                nameVector + nameFolder3A, "", 11, "", "");
         vectorFolder3A = gpWSClient.getVectorLayer(idVectorFolder3A);
         this.fixture.put(vectorFolder3A.getName(), vectorFolder3A);
         //
@@ -188,7 +174,7 @@ public class WSProjectTest extends ServiceTest {
 
 
         Long idVectorRootFolderB = super.createAndInsertVectorLayer(super.rootFolderB, titleVector + nameRootFolderB,
-                                                                    nameVector + nameRootFolderB, "", 1, "", "");
+                nameVector + nameRootFolderB, "", 1, "", "");
         vectorRootFolderB = gpWSClient.getVectorLayer(idVectorRootFolderB);
         this.fixture.put(vectorRootFolderB.getName(), vectorRootFolderB);
         //
@@ -401,7 +387,7 @@ public class WSProjectTest extends ServiceTest {
         gpWSClient.updateFolder(folder1A);
         gpWSClient.updateFolder(folder2C);
 
-        ProjectDTO project = gpWSClient.getProjectWithExpandedElements(super.idProjectTest, super.idUserTest);
+        ProjectDTO project = gpWSClient.getProjectWithExpandedFolders(super.idProjectTest, super.idUserTest);
 
         Assert.assertEquals("project name", super.projectTest.getName(), project.getName());
         Assert.assertEquals("project elements", super.projectTest.getNumberOfElements(), project.getNumberOfElements().intValue());
@@ -558,7 +544,8 @@ public class WSProjectTest extends ServiceTest {
         Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER);
 
         // Test add user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, Arrays.asList(newUserID));
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
+                Arrays.asList(idUserTest, newUserID));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
@@ -606,7 +593,8 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertTrue(check);
 
         // Test delete user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, new ArrayList<Long>(0));
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
+                Arrays.asList(idUserTest));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
@@ -649,7 +637,7 @@ public class WSProjectTest extends ServiceTest {
 
         // Test add latter user for sharing
         boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
-                                                                 Arrays.asList(firstUserID, latterUserID));
+                Arrays.asList(idUserTest, firstUserID, latterUserID));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
@@ -673,7 +661,7 @@ public class WSProjectTest extends ServiceTest {
 
         // Test delete first user for sharing
         result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
-                                                         Arrays.asList(latterUserID));
+                Arrays.asList(idUserTest, latterUserID));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
@@ -704,7 +692,8 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
 
         // Test pass owner
-        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest, Arrays.asList(idUserTest));
+        boolean result = gpWSClient.updateAccountsProjectSharing(idProjectTest,
+                Arrays.asList(idUserTest));
         Assert.assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);

@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
+import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 
 /**
  *

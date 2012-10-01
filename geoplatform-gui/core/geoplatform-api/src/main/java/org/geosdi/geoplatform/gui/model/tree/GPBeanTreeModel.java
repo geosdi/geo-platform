@@ -152,6 +152,8 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
     public abstract AbstractImagePrototype getIcon();
 
     public abstract Menu getTreeContextMenu();
+    
+    public abstract TreeStatusEnum getTreeStatus();
 
     public abstract void accept(IVisitor visitor);
 }

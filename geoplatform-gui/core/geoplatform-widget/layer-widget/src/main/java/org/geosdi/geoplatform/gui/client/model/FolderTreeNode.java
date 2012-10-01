@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElemen
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.IGPNode;
+import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
@@ -166,6 +167,11 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
     @Override
     public Menu getTreeContextMenu() {
         return TreeContextMenuFactory.getFolderContextMenu();
+    }
+
+    @Override
+    public TreeStatusEnum getTreeStatus() {
+        return TreeStatusEnum.FOLDER_SELECTED;
     }
 
     public class ObservableFolderTreeNode extends Observable {

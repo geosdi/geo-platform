@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFact
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
@@ -128,6 +129,11 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
     @Override
     public void accept(IVisitor visitor) {
         visitor.visitVector(this);
+    }
+
+    @Override
+    public TreeStatusEnum getTreeStatus() {
+        return TreeStatusEnum.VECTOR_SELECTED;
     }
 
     /**

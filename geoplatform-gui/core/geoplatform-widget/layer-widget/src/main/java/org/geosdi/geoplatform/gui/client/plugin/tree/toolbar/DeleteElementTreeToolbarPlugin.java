@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.DeleteElementTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
+import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginButton;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 

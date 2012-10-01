@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.plugin.tree;
+package org.geosdi.geoplatform.gui.model.tree;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -45,6 +45,7 @@ public enum TreeStatusEnum {
     ROOT_SELECTED,
     FOLDER_SELECTED,
     RASTER_SELECTED,
+    VECTOR_SELECTED,
     MULTI_SELECTION,
     SAVE_CACHE_EMPTY,
     SAVE_CACHE_NOT_EMPTY;

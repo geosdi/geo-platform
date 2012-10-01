@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -80,7 +81,8 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
      */
     public void modelConverter(List<GPFolderClientInfo> clientFolders) {
         for (GPFolderClientInfo folder : clientFolders) {
-            FolderTreeNode folderTreeNode = new FolderTreeNode(folder, Boolean.FALSE);
+            FolderTreeNode folderTreeNode = new FolderTreeNode(folder,
+                                                               Boolean.FALSE);
             folderTreeNode.setParent(this);
             super.add(folderTreeNode);
         }
@@ -101,5 +103,10 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
     @Override
     public Menu getTreeContextMenu() {
         return TreeContextMenuFactory.getRootContextMenu();
+    }
+
+    @Override
+    public TreeStatusEnum getTreeStatus() {
+        return TreeStatusEnum.ROOT_SELECTED;
     }
 }

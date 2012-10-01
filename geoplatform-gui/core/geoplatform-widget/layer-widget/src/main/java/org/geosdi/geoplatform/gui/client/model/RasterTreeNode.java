@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.client.model.state.LayerStateEnum;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
@@ -137,6 +138,11 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     @Override
     public Menu getTreeContextMenu() {
         return TreeContextMenuFactory.getLayerContextMenu();
+    }
+
+    @Override
+    public TreeStatusEnum getTreeStatus() {
+        return TreeStatusEnum.RASTER_SELECTED;
     }
 
     @Override

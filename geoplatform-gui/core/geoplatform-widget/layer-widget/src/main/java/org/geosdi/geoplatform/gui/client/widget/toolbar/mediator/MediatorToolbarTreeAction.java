@@ -39,11 +39,14 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginManager;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.IAddLayerPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
 
 /**
@@ -104,22 +107,8 @@ public class MediatorToolbarTreeAction {
     }
 
     private TreeStatusEnum calculateTreeStatus(List<GPBeanTreeModel> elements) {
-        TreeStatusEnum status = null;
-        final GPBeanTreeModel element;
-        if (elements == null || elements.isEmpty()) {
-            status = TreeStatusEnum.NO_SELECTION;
-        } else {
-            element = elements.get(0);
-            if (elements.size() > 1) {
-                status = TreeStatusEnum.MULTI_SELECTION;
-            } else if (element instanceof FolderTreeNode) {
-                status = TreeStatusEnum.FOLDER_SELECTED;
-            } else if (element instanceof GPRootTreeNode) {
-                status = TreeStatusEnum.ROOT_SELECTED;
-            } else if (element instanceof RasterTreeNode) {
-                status = TreeStatusEnum.RASTER_SELECTED;
-            }
-        }
-        return status;
+        return (elements == null || elements.isEmpty())
+                ? TreeStatusEnum.NO_SELECTION : (elements.size() > 1)
+                ? TreeStatusEnum.MULTI_SELECTION : elements.get(0).getTreeStatus();
     }
 }

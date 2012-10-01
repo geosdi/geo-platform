@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.plugin.tree.toolbar;
 
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
+import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

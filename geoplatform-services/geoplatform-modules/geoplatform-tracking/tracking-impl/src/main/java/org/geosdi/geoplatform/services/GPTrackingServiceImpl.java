@@ -219,15 +219,20 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
             GPAccount account = accountProject.getAccount();
             EntityCorrectness.checkAccountLog(account); // TODO assert
 
-            String naturalID = account.getNaturalID(); // Username for User
-            String recipient = this.createXmppUri(naturalID);
-            logger.trace("\n*** Recipient XMPP uri: {} ***", recipient);
+            // If user have this project as default
+            if (accountProject.isDefaultProject()) {
 
-            Presence presence = roster.getPresence(recipient);
-            if (presence.isAvailable()) {
-                logger.info("\n*** Send Message to online user \"{}\" ***", naturalID);
-                message.setTo(recipient);
-                connection.sendPacket(message);
+                String naturalID = account.getNaturalID(); // Username for User
+                String recipient = this.createXmppUri(naturalID);
+                logger.trace("\n\n*** Recipient XMPP uri: {} ***", recipient);
+
+                // If user is online send the message
+                Presence presence = roster.getPresence(recipient);
+                if (presence.isAvailable()) {
+                    logger.info("\n*** Send Message to online user \"{}\" ***", naturalID);
+                    message.setTo(recipient);
+                    connection.sendPacket(message);
+                }
             }
         }
     }

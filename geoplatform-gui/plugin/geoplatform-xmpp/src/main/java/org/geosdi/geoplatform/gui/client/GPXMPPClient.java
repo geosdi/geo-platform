@@ -114,7 +114,7 @@ public class GPXMPPClient {
             public void onMessage(MessageEvent event) {
                 Message message = event.getMessage();
 //                message.getAttribute(null);
-                System.out.println("Message received: " + message.toString());
+                System.out.println("Message received: " + message.getSubject());
 
                 XmppRoster roster = ginjector.getRoster();
 

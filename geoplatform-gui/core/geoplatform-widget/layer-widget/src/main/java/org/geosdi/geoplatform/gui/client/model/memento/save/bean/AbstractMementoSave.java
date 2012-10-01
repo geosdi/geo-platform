@@ -149,4 +149,9 @@ public abstract class AbstractMementoSave<T extends GPBeanTreeModel>
         //System.out.println("Memento received observable notify");
         this.idBaseElement = ((Long) arg);
     }
+
+    @Override
+    public String toString() {
+        return "AbstractMementoSave{" + "saveAction=" + saveAction + ", refBaseElement=" + refBaseElement + ", idBaseElement=" + idBaseElement + ", descendantMap=" + descendantMap + ", wsDescendantMap=" + wsDescendantMap + '}';
+    }
 }

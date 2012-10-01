@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.event.RefreshLayerXMPPEvent;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.event.ReloadTreeXMPPEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -47,6 +49,8 @@ public class BasicGinConfigurator extends AbstractGinModule {
 
     @Override
     protected void configure() {
+        bind(ReloadTreeXMPPEvent.class).asEagerSingleton();
+        bind(RefreshLayerXMPPEvent.class).asEagerSingleton();
         bind(ToolbarActionRegistar.class).asEagerSingleton();
         bind(MenuActionRegistar.class).asEagerSingleton();
     }

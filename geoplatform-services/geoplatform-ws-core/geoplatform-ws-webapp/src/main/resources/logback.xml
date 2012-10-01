@@ -49,6 +49,7 @@
             level="debug"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TimeSearchRequest"
             level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.GPTrackingServiceImpl" level="trace"/>
 
     <logger name="org.geosdi.geoplatform.services.GPTrackingServiceImpl" level="trace"/><!-- TODO info -->
     

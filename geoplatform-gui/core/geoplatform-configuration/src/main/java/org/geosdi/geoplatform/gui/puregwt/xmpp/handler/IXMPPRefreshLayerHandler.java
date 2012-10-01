@@ -37,17 +37,14 @@ package org.geosdi.geoplatform.gui.puregwt.xmpp.handler;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface IXMPPMessageHandler extends EventHandler {
+public interface IXMPPRefreshLayerHandler extends EventHandler {
 
-    Type<IXMPPMessageHandler> TYPE = new Type<IXMPPMessageHandler>();
-
-    AbstractXMPPEvent instantiateMessageSubjectEvent(String xmppMessageSubject);
+    Type<IXMPPRefreshLayerHandler> TYPE = new Type<IXMPPRefreshLayerHandler>();
 
     void handleMessageBody(String messageBody);
 }

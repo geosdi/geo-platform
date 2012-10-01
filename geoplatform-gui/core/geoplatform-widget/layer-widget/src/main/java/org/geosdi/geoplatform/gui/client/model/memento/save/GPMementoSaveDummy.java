@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,13 +33,70 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.shared;
+package org.geosdi.geoplatform.gui.client.model.memento.save;
+
+import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
+import org.geosdi.geoplatform.gui.model.memento.GPCache;
+import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public enum XMPPSubjectEnum {
+public class GPMementoSaveDummy extends GPCache<IMemento<ISave>> implements IMementoSave {
 
-    LAYER_RELOAD, SHARED_PROJECT, RELOAD_TREE;
+    private static final long serialVersionUID = 2586462448675810690L;
+
+    @Override
+    public AbstractMementoOriginalProperties copyOriginalProperties(GPBeanTreeModel element) {
+        return null;
+    }
+
+    @Override
+    public void putOriginalPropertiesInCache(AbstractMementoOriginalProperties memento) {
+    }
+
+    @Override
+    public boolean add(IMemento<ISave> memento) {
+        return false;
+    }
+
+    @Override
+    public IMemento<ISave> poll() {
+        return null;
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    @Override
+    public IMemento<ISave> peek() {
+        return null;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return true;
+    }
+
+    @Override
+    public void cleanOperationsRefToDeletedElement(GPBeanTreeModel gpBeanTreeModel) {
+    }
+
+    @Override
+    public ObservableGPLayerSaveCache getObservable() {
+        return null;
+    }
+
+    @Override
+    public void setObservable(ObservableGPLayerSaveCache observable) {
+    }
 }

@@ -113,7 +113,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     @Override
     public boolean unscribeLayerNotification(String username, String layerUUID) {
         TriggerKey triggerKey = new TriggerKey(username + ":" + layerUUID,
-                                               TrackingScheduler.TRACKING_GROUP);
+                TrackingScheduler.TRACKING_GROUP);
         return this.unscribeLayerNotification(triggerKey);
     }
 
@@ -132,7 +132,7 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
     public void subscribeLayerNotification(String username, String emiteResource,
             String layerUUID, int secondToRefresh) {
         TriggerKey triggerKey = new TriggerKey(username + ":" + layerUUID,
-                                               TrackingScheduler.TRACKING_GROUP);
+                TrackingScheduler.TRACKING_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.add(Calendar.SECOND, secondToRefresh);
         Trigger trigger = TriggerBuilder.newTrigger().forJob(
@@ -239,8 +239,6 @@ public class GPTrackingServiceImpl implements GPTrackingService, InitializingBea
 
     /**
      * Create an XMPP URI (node@domain).
-     *
-     * @todo '/' + resource is necessary?
      */
     private String createXmppUri(String username) {
         return username + "@" + this.connection.getHost();

@@ -53,25 +53,21 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.event.RefreshLayerXMPPEvent;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPMessageHandler;
-import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPRefreshLayerHandler;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTimeValue>
-        implements IXMPPMessageHandler {
+        implements IXMPPRefreshLayerHandler {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private ReloadLayerMapEvent reloadLayerEvent;
 
     public RefreshLayerAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         this.treePanel = treePanel;
-        XMPPHandlerManager.addHandler(IXMPPMessageHandler.TYPE, this);
-        this.instantiateMessageSubjectEvent(XMPPSubjectEnum.LAYER_RELOAD.toString());
+        XMPPHandlerManager.addHandler(IXMPPRefreshLayerHandler.TYPE, this);
     }
 
     @Override
@@ -112,11 +108,6 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
                 treePanel.refresh(layerSelected);
             }
         });
-    }
-
-    @Override
-    public final AbstractXMPPEvent instantiateMessageSubjectEvent(String xmppMessageSubject) {
-        return new RefreshLayerXMPPEvent(xmppMessageSubject);
     }
 
     @Override

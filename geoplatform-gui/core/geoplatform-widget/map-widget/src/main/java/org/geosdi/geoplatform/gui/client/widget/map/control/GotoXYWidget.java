@@ -25,12 +25,16 @@ import org.geosdi.geoplatform.gui.client.widget.form.IGeoPlatformForm;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import org.geosdi.geoplatform.gui.client.util.EPSGTemplate;
+import org.geosdi.geoplatform.gui.client.util.EPSGUtility;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.LonLat;
@@ -50,6 +54,10 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
     private GeocodingVectorMarker geocoderMarker = new GeocodingVectorMarker();
     private GeoPlatformMap mapWidget;
 
+    private ListStore<EPSGTemplate> storeEPSG;
+    private ComboBox<EPSGTemplate> comboEPSG;
+    
+    
     public GotoXYWidget(Boolean lazy, GeoPlatformMap mapWidget) {
         super(lazy);
         this.mapWidget = mapWidget;
@@ -64,9 +72,15 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
     // @Override
     @Override
     public void execute() {
+        String epsgCode = "";
+        
+        if(comboEPSG.getValue() != null){
+            epsgCode = comboEPSG.getValue().getEpsg();
+        } else {
+            epsgCode = "EPSG:" + epsgTextField.getValue();
+        }
         LonLat center = new LonLat(xNumberField.getValue().doubleValue(), yNumberField.getValue().doubleValue());
-        //TODO: we must verify the epsg code!
-        String epsgCode = "EPSG:" + epsgTextField.getValue();
+
         if (!epsgCode.equals(this.mapWidget.getMap().getProjection())) {
             center.transform(epsgCode, this.mapWidget.getMap().getProjection());
         }
@@ -87,9 +101,28 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         fieldSet.setLayout(layout);
+        
+        
+        this.storeEPSG = new ListStore<EPSGTemplate>();
+        this.storeEPSG.add(EPSGUtility.getCommonEPSG());
+        
+        this.comboEPSG = new ComboBox<EPSGTemplate>();
+        this.comboEPSG.setFieldLabel("Common EPSG");
+        this.comboEPSG.setEmptyText("Choose EPSG...");
+        this.comboEPSG.setDisplayField(EPSGTemplate.EPSGEnum.EPSG_DESCRIPTION.getValue());
+        this.comboEPSG.setEditable(false);
+        this.comboEPSG.setAllowBlank(true);
+        this.comboEPSG.setForceSelection(true);
+        this.comboEPSG.setTypeAhead(true);
+        this.comboEPSG.setTriggerAction(ComboBox.TriggerAction.ALL);
+        
+        this.comboEPSG.setStore(this.storeEPSG);
+        
+        fieldSet.add(this.comboEPSG);
+        
 
         epsgTextField = new TextField<String>();
-        epsgTextField.setAllowBlank(false);
+        epsgTextField.setAllowBlank(true);
         epsgTextField.setFieldLabel("SRS ID");
         fieldSet.add(epsgTextField);
 
@@ -138,13 +171,13 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
 
     @Override
     public void initSize() {
-        setSize(400, 215);
+        setSize(400, 275);
     }
 
     @Override
     public void initSizeFormPanel() {
         formPanel.setHeaderVisible(false);
-        formPanel.setSize(380, 200);
+        formPanel.setSize(380, 250);
     }
 
     /**
@@ -157,6 +190,7 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
         this.xNumberField.reset();
         this.yNumberField.reset();
         this.saveStatus.clearStatus("");
+        this.comboEPSG.reset();
     }
 
     @Override

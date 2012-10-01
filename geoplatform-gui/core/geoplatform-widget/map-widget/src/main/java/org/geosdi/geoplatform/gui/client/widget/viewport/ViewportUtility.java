@@ -39,6 +39,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
@@ -55,7 +56,10 @@ public class ViewportUtility {
         BBoxClientInfo bbox = viewport.getBbox();
         Bounds bounds = generateBoundsFromBBOX(bbox);
         LonLat center = bounds.getCenterLonLat();
-        center.transform(MapLayoutWidget.EPSG_4326, map.getProjection());
+        if (GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection().equals("EPSG:3857")) {
+            center.transform(MapLayoutWidget.EPSG_4326, "EPSG:900913");
+        }
+        
         double zoomLevel = viewport.getZoomLevel();
         map.setCenter(center, (int) zoomLevel);
     }

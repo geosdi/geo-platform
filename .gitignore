@@ -1,8 +1,9 @@
 # ignore target artifact folders
 target/
 
-# ignore /geoplatform-gui/demos/catalog-finder-demo/war/WEB-INF/classes/ artifact folder
-classes/
+# ignore Catalog Finder demo artifact folders (in geoplatform-gui/demos)
+catalog_finder_demo/
+WEB-INF/
 
 # ignore IDE artifacts
 .settings

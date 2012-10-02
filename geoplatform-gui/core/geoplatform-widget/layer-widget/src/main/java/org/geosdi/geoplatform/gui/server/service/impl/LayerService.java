@@ -613,7 +613,7 @@ public class LayerService implements ILayerService {
 
             List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchAccountProjects(account.getId(), psr);
 
-            if (projectsDTO.isEmpty()) {
+            if (projectsDTO == null) {
                 throw new GeoPlatformException("There are no results");
             }
 

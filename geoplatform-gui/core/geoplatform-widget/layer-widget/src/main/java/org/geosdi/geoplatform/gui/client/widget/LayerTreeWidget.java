@@ -89,6 +89,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.ResetMapStoreEvent;
@@ -99,6 +100,7 @@ import org.geosdi.geoplatform.gui.puregwt.layers.IGPBuildTreeHandler;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**

@@ -180,7 +180,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
 
                 @Override
                 public void onSuccess(GPClientProject result) {
-                    Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), result);;
+                    Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), result);
                     root.modelConverter(result.getRootFolders());
                     store.add(root, Boolean.TRUE);
                     visitorDisplay.enableCheckedComponent(root);

@@ -10,6 +10,12 @@
         <param-value>classpath*:applicationContext.xml</param-value>
     </context-param>
     
+    <!-- Activate @Production Spring Profile -->
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>prod</param-value>
+    </context-param>
+    
     <servlet>
         <servlet-name>GeoPlatformConfiguration</servlet-name>
         <servlet-class>org.geosdi.geoplatform.gui.server.gwt.GeoPlatformConfigurationImpl</servlet-class>
@@ -20,7 +26,7 @@
         <url-pattern>/catalog_finder_demo/GeoPlatformConfiguration</url-pattern>
     </servlet-mapping>
 
-	<!-- spring context loader -->
+    <!-- spring context loader -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

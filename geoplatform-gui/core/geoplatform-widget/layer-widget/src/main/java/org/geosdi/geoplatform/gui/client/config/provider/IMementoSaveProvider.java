@@ -61,6 +61,7 @@ public class IMementoSaveProvider implements Provider<IMementoSave> {
     private boolean savedShareStatus;
     private ObservableGPLayerSaveCache observable;
     private PeekCacheEvent peekCacheEvent;
+    private long projID;
 
     @Inject
     public IMementoSaveProvider(ObservableGPLayerSaveCache observable, PeekCacheEvent peekCacheEvent) {
@@ -70,8 +71,17 @@ public class IMementoSaveProvider implements Provider<IMementoSave> {
 
     @Override
     public IMementoSave get() {
+//        System.out.println("Trying to get the project from provider");
         GPClientProject clientProject = (GPClientProject) Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-        if (this.mementoSave == null || clientProject == null || this.savedShareStatus != clientProject.isShared()) {
+//        System.out.println("Client proj saved shared: " + this.savedShareStatus);
+//        System.out.println("Client proj saved id: " + this.projID);
+//        if (clientProject != null) {
+//            System.out.println("Client proj name: " + clientProject.getName());
+//            System.out.println("Client proj shared: " + clientProject.isShared());
+//            System.out.println("Client proj id: " + clientProject.getId());
+//        }
+        if (this.mementoSave == null || clientProject == null || this.projID != clientProject.getId()
+                || this.savedShareStatus != clientProject.isShared()) {
             if (clientProject == null) {
                 this.mementoSave = new GPMementoSaveCache(observable);
             } else {
@@ -84,6 +94,7 @@ public class IMementoSaveProvider implements Provider<IMementoSave> {
                 } else {
                     this.mementoSave = new GPMementoSaveCache(observable);
                 }
+                this.projID = clientProject.getId();
             }
         }
         return this.mementoSave;

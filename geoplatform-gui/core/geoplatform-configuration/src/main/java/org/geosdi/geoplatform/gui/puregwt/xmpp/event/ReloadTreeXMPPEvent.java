@@ -67,7 +67,7 @@ public class ReloadTreeXMPPEvent extends AbstractXMPPEvent<IGPBuildTreeHandler> 
                 ReloadTreeXMPPEvent.this.scheduleReload(handler);
             }
         };
-        boolean treeIsLoaded = Registry.get(UserSessionEnum.TREE_LOADED.name());
+        boolean treeIsLoaded = (Boolean)Registry.get(UserSessionEnum.TREE_LOADED.name());
         if (treeIsLoaded) {
             this.isWaiting = Boolean.FALSE;
             handler.rebuildTree();

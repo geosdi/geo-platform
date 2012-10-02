@@ -65,13 +65,6 @@ public class RoutingBoxes extends GeoPlatformBoxesWidget {
     public void init() {
         this.bounds = new Bounds(6.627, 35.492, 18.521, 47.092);
         this.layer = new Boxes("Geo-Platform Routing Boxes Layer");
-
-        this.marker = new Box(this.bounds.transform(
-                new Projection("EPSG:4326"), new Projection(geoPlatformMap.getMap().getProjection())));
-
-        this.layer.addMarker(marker);
-
-        this.marker.setZIndex(949);
     }
 
     /**
@@ -80,6 +73,19 @@ public class RoutingBoxes extends GeoPlatformBoxesWidget {
      */
     @Override
     public void activate() {
+        if(geoPlatformMap.getMap().getProjection().equals("EPSG:3857")){
+            this.marker = new Box(this.bounds.transform(
+                new Projection("EPSG:4326"), new Projection("EPSG:900913")));
+        } else {
+            this.marker = new Box(this.bounds);
+        }
+        
+
+        this.layer.addMarker(marker);
+
+        this.marker.setZIndex(949);
+        
+        
         this.geoPlatformMap.getMap().addLayer(this.layer);
         this.geoPlatformMap.getMap().zoomToExtent(this.marker.getBounds());
     }

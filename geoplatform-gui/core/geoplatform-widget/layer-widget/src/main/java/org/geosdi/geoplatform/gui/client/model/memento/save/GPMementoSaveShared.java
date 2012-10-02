@@ -81,7 +81,9 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
         boolean treeInitialized = (Boolean) Registry.get(UserSessionEnum.TREE_LOADED.name());
         if (treeInitialized) {
             super.add(memento);
-            LayerHandlerManager.fireEvent(peekCacheEvent);
+            if (super.size() == 1) {
+                LayerHandlerManager.fireEvent(peekCacheEvent);
+            }
         }
     }
 
@@ -91,7 +93,7 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
         boolean condition = false;
         if (treeInitialized) {
             condition = super.add(memento);
-            if (condition) {
+            if (condition && super.size() == 1) {
                 LayerHandlerManager.fireEvent(peekCacheEvent);
             }
         }

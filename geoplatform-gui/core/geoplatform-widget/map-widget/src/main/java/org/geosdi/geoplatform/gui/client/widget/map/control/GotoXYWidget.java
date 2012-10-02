@@ -1,13 +1,12 @@
 /**
- * ------------------------------------------------------------------
- * -- Copyright <Creation_date>-<Last modification date> SELEX Sistemi
- * -- Integrati S.p.A. all rights reserved.
- * -- This software is the property of SELEX Sistemi Integrati S.p.A.
- * -- and can not be reproduced, used to prepare Derivative Works of,
- * -- publicly displayed, publicly performed, sublicensed, and it
- * -- cannot be distributed as the Work itself and such Derivative
- * -- Works in Source or Object form except under a license agreement
- * -- granted by SELEX Sistemi Integrati S.p.A.
+ * ------------------------------------------------------------------ --
+ * Copyright <Creation_date>-<Last modification date> SELEX Sistemi -- Integrati
+ * S.p.A. all rights reserved. -- This software is the property of SELEX Sistemi
+ * Integrati S.p.A. -- and can not be reproduced, used to prepare Derivative
+ * Works of, -- publicly displayed, publicly performed, sublicensed, and it --
+ * cannot be distributed as the Work itself and such Derivative -- Works in
+ * Source or Object form except under a license agreement -- granted by SELEX
+ * Sistemi Integrati S.p.A.
  * ------------------------------------------------------------------
  *
  * @file AddAOEWidget.java
@@ -24,6 +23,11 @@ import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.IGeoPlatformForm;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ColorPaletteEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -33,6 +37,8 @@ import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import org.geosdi.geoplatform.gui.client.util.EPSGTemplate;
 import org.geosdi.geoplatform.gui.client.util.EPSGUtility;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
@@ -53,11 +59,9 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
     private Button close;
     private GeocodingVectorMarker geocoderMarker = new GeocodingVectorMarker();
     private GeoPlatformMap mapWidget;
-
     private ListStore<EPSGTemplate> storeEPSG;
     private ComboBox<EPSGTemplate> comboEPSG;
-    
-    
+
     public GotoXYWidget(Boolean lazy, GeoPlatformMap mapWidget) {
         super(lazy);
         this.mapWidget = mapWidget;
@@ -73,12 +77,8 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
     @Override
     public void execute() {
         String epsgCode = "";
-        
-        if(comboEPSG.getValue() != null){
-            epsgCode = comboEPSG.getValue().getEpsg();
-        } else {
-            epsgCode = "EPSG:" + epsgTextField.getValue();
-        }
+        epsgCode = epsgTextField.getValue();
+
         LonLat center = new LonLat(xNumberField.getValue().doubleValue(), yNumberField.getValue().doubleValue());
 
         if (!epsgCode.equals(this.mapWidget.getMap().getProjection())) {
@@ -101,11 +101,11 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         fieldSet.setLayout(layout);
-        
-        
+
+
         this.storeEPSG = new ListStore<EPSGTemplate>();
         this.storeEPSG.add(EPSGUtility.getCommonEPSG());
-        
+
         this.comboEPSG = new ComboBox<EPSGTemplate>();
         this.comboEPSG.setFieldLabel("Common EPSG");
         this.comboEPSG.setEmptyText("Choose EPSG...");
@@ -115,15 +115,30 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
         this.comboEPSG.setForceSelection(true);
         this.comboEPSG.setTypeAhead(true);
         this.comboEPSG.setTriggerAction(ComboBox.TriggerAction.ALL);
-        
+
         this.comboEPSG.setStore(this.storeEPSG);
-        
+
+        this.comboEPSG.addSelectionChangedListener(new SelectionChangedListener<EPSGTemplate>() {
+            @Override
+            public void selectionChanged(SelectionChangedEvent<EPSGTemplate> se) {
+                epsgTextField.setValue(se.getSelectedItem().getEpsg());
+            }
+        });
+
         fieldSet.add(this.comboEPSG);
-        
+
 
         epsgTextField = new TextField<String>();
-        epsgTextField.setAllowBlank(true);
-        epsgTextField.setFieldLabel("SRS ID");
+        epsgTextField.setAllowBlank(false);
+        epsgTextField.setFieldLabel("EPSG");
+
+        KeyListener keyListener = new KeyListener() {
+            public void componentKeyUp(ComponentEvent event) {
+                comboEPSG.reset();
+            }
+        };
+
+        epsgTextField.addKeyListener(keyListener);
         fieldSet.add(epsgTextField);
 
         this.xNumberField = new NumberField();
@@ -146,7 +161,6 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
         formPanel.getButtonBar().add(new FillToolItem());
 
         this.find = new Button("Find", new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (formPanel.isValid()) {
@@ -159,7 +173,6 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
 
         this.close = new Button("Close",
                 new SelectionListener<ButtonEvent>() {
-
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         GotoXYWidget.super.hide();

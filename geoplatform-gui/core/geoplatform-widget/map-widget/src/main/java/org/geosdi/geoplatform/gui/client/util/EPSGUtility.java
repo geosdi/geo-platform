@@ -48,6 +48,7 @@ public class EPSGUtility {
     public static List<EPSGTemplate> getCommonEPSG() {
         List<EPSGTemplate> epsg = new ArrayList<EPSGTemplate>();
 
+        epsg.add(new EPSGTemplate("EPSG:0", "Choose EPSG..."));
         epsg.add(new EPSGTemplate("EPSG:4326", "WGS 84"));
         epsg.add(new EPSGTemplate("EPSG:32632", "WGS 84 / UTM zone 32N"));
         epsg.add(new EPSGTemplate("EPSG:32633", "WGS 84 / UTM zone 33N"));

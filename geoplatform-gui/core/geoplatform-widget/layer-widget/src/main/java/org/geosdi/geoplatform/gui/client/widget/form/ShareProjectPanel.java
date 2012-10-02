@@ -161,9 +161,15 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                     public void componentSelected(ButtonEvent ce) {
                         toStore.commitChanges();
                         List<Long> accountIDsProject = Lists.newArrayListWithCapacity(toStore.getModels().size());
+                        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                        boolean test = false;
                         for (GPSimpleUser user : toStore.getModels()) {
+                            if (user.getId().equals(accountDetail.getId())) {
+                                test = true;
+                            }
                             accountIDsProject.add(user.getId());
                         }
+                        final boolean isShared = test;
                         ShareProjectPanel.this.reset();
                         LayerRemote.Util.getInstance().shareProjectToUsers(project.getId(),
                                 accountIDsProject, new AsyncCallback<Boolean>() {
@@ -174,6 +180,15 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
 
                             @Override
                             public void onSuccess(Boolean result) {
+//                                System.out.println("Project is Shared: " + isShared);
+                                if (project.isDefaultProject()) {
+                                    GPClientProject projInSession = Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+                                    if (isShared) {
+                                        projInSession.setShared(Boolean.TRUE);
+                                    } else {
+                                        projInSession.setShared(Boolean.FALSE);
+                                    }
+                                }
                                 project.setShared(Boolean.TRUE);
                                 loadData(project);
                             }

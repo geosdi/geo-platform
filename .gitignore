@@ -3,9 +3,11 @@ target/
 
 # ignore Catalog Finder demo artifact folders (in geoplatform-gui/demos)
 catalog_finder_demo/
-WEB-INF/
+WEB-INF/classes
 
 # ignore IDE artifacts
 .settings
 .classpath
 .project
+!/geoplatform-gui/demos/catalog-finder-demo/war/WEB-INF/web.xml
+/geoplatform-gui/demos/catalog-finder-demo/war/WEB-INF/classes/

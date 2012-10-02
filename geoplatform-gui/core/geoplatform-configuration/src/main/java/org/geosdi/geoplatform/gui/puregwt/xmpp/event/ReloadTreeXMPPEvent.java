@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.xmpp.event;
 
+import com.extjs.gxt.ui.client.Registry;
+import com.google.gwt.user.client.Timer;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.puregwt.layers.IGPBuildTreeHandler;
 import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
@@ -44,13 +47,34 @@ import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
  */
 public class ReloadTreeXMPPEvent extends AbstractXMPPEvent<IGPBuildTreeHandler> {
 
+    private boolean isWaiting;
+
     public ReloadTreeXMPPEvent() {
         super(XMPPSubjectEnum.RELOAD_TREE.toString());
     }
 
     @Override
-    protected void dispatch(IGPBuildTreeHandler handler) {
-        handler.rebuildTree();
+    protected void dispatch(final IGPBuildTreeHandler handler) {
+        if (!isWaiting) {
+            this.scheduleReload(handler);
+        }
+    }
+
+    private void scheduleReload(final IGPBuildTreeHandler handler) {
+        Timer timer = new Timer() {
+            @Override
+            public void run() {
+                ReloadTreeXMPPEvent.this.scheduleReload(handler);
+            }
+        };
+        boolean treeIsLoaded = Registry.get(UserSessionEnum.TREE_LOADED.name());
+        if (treeIsLoaded) {
+            this.isWaiting = Boolean.FALSE;
+            handler.rebuildTree();
+        } else {
+            this.isWaiting = Boolean.TRUE;
+            timer.schedule(3000);
+        }
     }
 
     @Override

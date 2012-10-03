@@ -23,7 +23,6 @@ import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.IGeoPlatformForm;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ColorPaletteEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
@@ -37,8 +36,6 @@ import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
 import org.geosdi.geoplatform.gui.client.util.EPSGTemplate;
 import org.geosdi.geoplatform.gui.client.util.EPSGUtility;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
@@ -61,6 +58,7 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
     private GeoPlatformMap mapWidget;
     private ListStore<EPSGTemplate> storeEPSG;
     private ComboBox<EPSGTemplate> comboEPSG;
+    private SelectionChangedListener<EPSGTemplate> comboEpsgListener;
 
     public GotoXYWidget(Boolean lazy, GeoPlatformMap mapWidget) {
         super(lazy);
@@ -118,12 +116,12 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
 
         this.comboEPSG.setStore(this.storeEPSG);
 
-        this.comboEPSG.addSelectionChangedListener(new SelectionChangedListener<EPSGTemplate>() {
+        this.comboEpsgListener = new SelectionChangedListener<EPSGTemplate>() {
             @Override
             public void selectionChanged(SelectionChangedEvent<EPSGTemplate> se) {
                 epsgTextField.setValue(se.getSelectedItem().getEpsg());
             }
-        });
+        };
 
         fieldSet.add(this.comboEPSG);
 
@@ -175,7 +173,7 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        GotoXYWidget.super.hide();
+                        GotoXYWidget.this.hide(GotoXYWidget.this.close);
                     }
                 });
 
@@ -203,6 +201,7 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
         this.xNumberField.reset();
         this.yNumberField.reset();
         this.saveStatus.clearStatus("");
+        this.comboEPSG.removeSelectionListener(this.comboEpsgListener);
         this.comboEPSG.reset();
     }
 
@@ -210,6 +209,7 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
     public void show() {
         super.init();
         this.registerMark();
+        this.comboEPSG.addSelectionChangedListener(this.comboEpsgListener);
         super.show();
     }
 

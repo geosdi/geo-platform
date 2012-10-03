@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.demos.catalog.client;
 import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.client.config.CatalogFinderInjector;
 import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 
 /**
  *
@@ -53,5 +55,9 @@ public class CatalogFinderDemoUI implements EntryPoint {
 
         catalogWidget.setClosable(false);
         catalogWidget.show();
+
+        // Required for retrieve organization name in the save catalog server operation
+        IGPAccountDetail account = new AccountDetailDummy();
+        GPAccountLogged.getInstance().setAccountDetail(account);
     }
 }

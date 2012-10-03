@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPSecurityWidget extends Dialog {
 
@@ -81,7 +81,6 @@ public abstract class GPSecurityWidget extends Dialog {
         setClosable(false);
 
         KeyListener keyListener = new KeyListener() {
-
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if (event.getKeyCode() == KeyCodes.KEY_ENTER && login.isEnabled()) {
@@ -113,12 +112,11 @@ public abstract class GPSecurityWidget extends Dialog {
     @Override
     protected void createButtons() {
         super.createButtons();
-       
+
         addStatusComponent();
 
         reset = new Button("Reset", BasicWidgetResources.ICONS.cancel());
         reset.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 reset();
@@ -128,7 +126,6 @@ public abstract class GPSecurityWidget extends Dialog {
         login = new Button("Login", BasicWidgetResources.ICONS.login());
         login.disable();
         login.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 onSubmit();
@@ -148,7 +145,7 @@ public abstract class GPSecurityWidget extends Dialog {
     }
 
     public abstract void onSubmit();
-    
+
     public abstract void addStatusComponent();
 
     public abstract void reset();

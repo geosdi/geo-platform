@@ -86,8 +86,9 @@ public class ShowFullMetadataAction extends MenuBaseAction {
         str.append("ElementSetName").append("=").append("full").append("&");
         /**
          * Not specify OutputSchema because there are interoperability problems
-         * with the value of the elementSetName, also id specified into
-         * getCapabilities request!
+         * with the value of the elementSetName, also if specified into
+         * getCapabilities request! Will be used the default OutputSchema: the
+         * first present into getCapabilities request.
          */
         str.append("Id").append("=").append(record.getIdentifier());
 

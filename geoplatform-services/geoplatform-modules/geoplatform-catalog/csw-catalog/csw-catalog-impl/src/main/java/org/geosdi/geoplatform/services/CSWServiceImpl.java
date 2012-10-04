@@ -317,7 +317,7 @@ class CSWServiceImpl {
 
     int getRecordsCount(CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
-        logger.trace("\n*** {}", catalogFinder);
+        logger.trace("\n*** getRecordsCount ***\n{}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(
                 catalogFinder.getServerID());
@@ -347,7 +347,7 @@ class CSWServiceImpl {
     List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
             CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
-        logger.trace("\n*** {}", catalogFinder);
+        logger.trace("\n*** searchSummaryRecords ***\n{}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(
                 catalogFinder.getServerID());
@@ -373,9 +373,9 @@ class CSWServiceImpl {
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
                 "\n*** Records matched: {} *** Records returned: {} *** Record next: {} ***",
-                    response.getSearchResults().getNumberOfRecordsMatched(),
-                    response.getSearchResults().getNumberOfRecordsReturned(),
-                    response.getSearchResults().getNextRecord());
+                response.getSearchResults().getNumberOfRecordsMatched(),
+                response.getSearchResults().getNumberOfRecordsReturned(),
+                response.getSearchResults().getNextRecord());
 
         if (response.getSearchResults().getNumberOfRecordsReturned().intValue()
                 != response.getSearchResults().getAbstractRecord().size()) {
@@ -410,7 +410,7 @@ class CSWServiceImpl {
     List<FullRecordDTO> searchFullRecords(int num, int start,
             CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
-        logger.trace("\n*** {}", catalogFinder);
+        logger.trace("\n*** searchFullRecords ***\n{}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(
                 catalogFinder.getServerID());
@@ -436,9 +436,9 @@ class CSWServiceImpl {
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
                 "\n*** Records matched: {} *** Records returned: {} *** Record next: {} ***",
-                    response.getSearchResults().getNumberOfRecordsMatched(),
-                    response.getSearchResults().getNumberOfRecordsReturned(),
-                    response.getSearchResults().getNextRecord());
+                response.getSearchResults().getNumberOfRecordsMatched(),
+                response.getSearchResults().getNumberOfRecordsReturned(),
+                response.getSearchResults().getNextRecord());
 
         if (response.getSearchResults().getNumberOfRecordsReturned().intValue()
                 != response.getSearchResults().getAbstractRecord().size()) {

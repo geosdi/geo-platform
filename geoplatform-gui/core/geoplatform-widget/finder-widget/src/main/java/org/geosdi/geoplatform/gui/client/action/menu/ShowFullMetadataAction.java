@@ -44,9 +44,9 @@ import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 
 /**
- * Execute a CSW GetRecordById request, for view, into a new browser tab, 
- * the full metadata of the record selected via the grid context menu.
- * 
+ * Execute a CSW GetRecordById request, for view, into a new browser tab, the
+ * full metadata of the record selected via the grid context menu.
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class ShowFullMetadataAction extends MenuBaseAction {
@@ -70,8 +70,6 @@ public class ShowFullMetadataAction extends MenuBaseAction {
         if (record == null) {
             record = rc.getMetadataSelection().getRecordsExcluded().get(0);
         }
-//        System.out.println(
-//                "\n\n\n*** Record for GetRecordById request ***\n" + record); // TODO logger
 
         String url = this.createRequestURL(record);
 
@@ -86,7 +84,11 @@ public class ShowFullMetadataAction extends MenuBaseAction {
         str.append("Service").append("=").append("CSW").append("&");
         str.append("Version").append("=").append("2.0.2").append("&");
         str.append("ElementSetName").append("=").append("full").append("&");
-        str.append("OutputSchema").append("=").append("http://www.opengis.net/cat/csw/2.0.2").append("&");
+        /**
+         * Not specify OutputSchema because there are interoperability problems
+         * with the value of the elementSetName, also id specified into
+         * getCapabilities request!
+         */
         str.append("Id").append("=").append(record.getIdentifier());
 
         return str.toString();

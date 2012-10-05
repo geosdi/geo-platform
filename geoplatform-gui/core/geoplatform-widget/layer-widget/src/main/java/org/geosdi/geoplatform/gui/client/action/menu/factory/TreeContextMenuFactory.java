@@ -61,6 +61,9 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
+ * @TODO : Think of a way to make more efficient generation of the menu tree
+ * from the configuration file
+ *
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
@@ -91,7 +94,8 @@ public class TreeContextMenuFactory {
     public static Menu getMultiSelectionMenu(boolean isOnlyLayers) {
         if (multipleSelectionContextMenu == null) {
             multipleSelectionContextMenu = new Menu();
-            DeleteElementsMenuAction deleteElementsMenuAction = new DeleteElementsMenuAction(treePanel);
+            DeleteElementsMenuAction deleteElementsMenuAction = new DeleteElementsMenuAction(
+                    treePanel);
             MenuItem deleteElements = new MenuItem();
             deleteElements.setText(deleteElementsMenuAction.getTitle());
             deleteElements.setIcon(deleteElementsMenuAction.getImage());
@@ -99,12 +103,14 @@ public class TreeContextMenuFactory {
             multipleSelectionContextMenu.add(deleteElements);
             copyMultiLayers = new MenuItem("Copy Layers");
             copyMultiLayers.setIcon(LayerResources.ICONS.copy());
-            copyMultiLayers.addSelectionListener(new CopyLayerAction(treePanel,
-                    pasteAction, pasteMenuItem));
+            copyMultiLayers.addSelectionListener(
+                    new CopyLayerAction(treePanel,
+                                        pasteAction, pasteMenuItem));
         }
         if (isOnlyLayers) {
             multipleSelectionContextMenu.add(copyMultiLayers);
-        } else if (multipleSelectionContextMenu.getItems().contains(copyMultiLayers)) {
+        } else if (multipleSelectionContextMenu.getItems().contains(
+                copyMultiLayers)) {
             multipleSelectionContextMenu.remove(copyMultiLayers);
         }
         return multipleSelectionContextMenu;
@@ -113,7 +119,8 @@ public class TreeContextMenuFactory {
     public static Menu getRootContextMenu() {
         if (rootContextMenu == null) {
             rootContextMenu = new Menu();
-            AddFolderMenuAction addFolderAction = new AddFolderMenuAction(treePanel);
+            AddFolderMenuAction addFolderAction = new AddFolderMenuAction(
+                    treePanel);
             MenuItem addFolder = new MenuItem();
             addFolder.setText(addFolderAction.getTitle());
             addFolder.setIcon(addFolderAction.getImage());
@@ -136,7 +143,8 @@ public class TreeContextMenuFactory {
             MenuItem zoomToMaxExtend = new MenuItem();
             zoomToMaxExtend.setText("Zoom to layer extend");
             zoomToMaxExtend.setIcon(LayerResources.ICONS.zoomToMaxExtend());
-            zoomToMaxExtend.addSelectionListener(new ZoomToLayerExtentAction(treePanel));
+            zoomToMaxExtend.addSelectionListener(new ZoomToLayerExtentAction(
+                    treePanel));
             layerContextMenu.add(zoomToMaxExtend);
 
             MenuItem exportMenuItem = new MenuItem();
@@ -152,18 +160,23 @@ public class TreeContextMenuFactory {
             MenuItem layerProperties = new MenuItem();
             layerProperties.setText("Layer Properties");
             layerProperties.setIcon(LayerResources.ICONS.layerProperties());
-            layerProperties.addSelectionListener(new ShowLayerPropertiesAction(treePanel));
+            layerProperties.addSelectionListener(new ShowLayerPropertiesAction(
+                    treePanel));
 
             MenuItem copyMenuItem = new MenuItem("Copy Layer");
             copyMenuItem.setIcon(LayerResources.ICONS.copy());
-            copyMenuItem.addSelectionListener(new CopyLayerAction(treePanel, pasteAction, pasteMenuItem));
+            copyMenuItem.addSelectionListener(new CopyLayerAction(treePanel,
+                                                                  pasteAction,
+                                                                  pasteMenuItem));
 
             layerContextMenu.add(copyMenuItem);
 
             MenuItem createViewportLayerMenu = new MenuItem();
             createViewportLayerMenu.setText("Create Viewport");
-            createViewportLayerMenu.setIcon(BasicWidgetResources.ICONS.viewport());
-            createViewportLayerMenu.addSelectionListener(new CreateLayerViewportAction(treePanel));
+            createViewportLayerMenu.setIcon(
+                    BasicWidgetResources.ICONS.viewport());
+            createViewportLayerMenu.addSelectionListener(new CreateLayerViewportAction(
+                    treePanel));
             layerContextMenu.add(createViewportLayerMenu);
 
             refreshTimeComboBox = new ComboBox() {
@@ -182,9 +195,11 @@ public class TreeContextMenuFactory {
             refreshTimeComboBox.setForceSelection(Boolean.TRUE);
             refreshTimeComboBox.setTypeAhead(Boolean.FALSE);
             refreshTimeComboBox.setUseQueryCache(Boolean.FALSE);
-            refreshTimeComboBox.setDisplayField(LayerRefreshTimeValue.REFRESH_TIME_KEY);
+            refreshTimeComboBox.setDisplayField(
+                    LayerRefreshTimeValue.REFRESH_TIME_KEY);
 //        refreshMenuItem.setIcon(LayerResources.ICONS.layerRefresh());
-            refreshTimeComboBox.addSelectionChangedListener(new RefreshLayerAction(treePanel));
+            refreshTimeComboBox.addSelectionChangedListener(new RefreshLayerAction(
+                    treePanel));
             layerContextMenu.add(refreshTimeComboBox);
 
             layerContextMenu.add(layerProperties);
@@ -200,13 +215,16 @@ public class TreeContextMenuFactory {
             MenuItem folderRename = new MenuItem();
             folderRename.setText("Rename Folder");
             folderRename.setIcon(LayerResources.ICONS.editFolder());
-            folderRename.addSelectionListener(new ShowFolderRenameAction(treePanel));
+            folderRename.addSelectionListener(new ShowFolderRenameAction(
+                    treePanel));
             folderContextMenu.add(folderRename);
 
             MenuItem createViewportFolderMenu = new MenuItem();
             createViewportFolderMenu.setText("Create Viewport");
-            createViewportFolderMenu.setIcon(BasicWidgetResources.ICONS.viewport());
-            createViewportFolderMenu.addSelectionListener(new CreateFolderViewportAction(treePanel));
+            createViewportFolderMenu.setIcon(
+                    BasicWidgetResources.ICONS.viewport());
+            createViewportFolderMenu.addSelectionListener(new CreateFolderViewportAction(
+                    treePanel));
             folderContextMenu.add(createViewportFolderMenu);
         }
         return folderContextMenu;

@@ -41,7 +41,6 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
-import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -77,7 +76,6 @@ public interface GeoPlatformCSWService {
      * production.
      */
     @Put
-    @HttpResource(location = "/server/csw")
     Long insertServerCSW(@WebParam(name = "server") GeoPlatformServer server)
             throws IllegalParameterFault;
 
@@ -85,7 +83,6 @@ public interface GeoPlatformCSWService {
      * Save a server after execute a GetCapabilities request.
      */
     @Post
-    @HttpResource(location = "/server/csw")
     ServerCSWDTO saveServerCSW(
             @WebParam(name = "alias") String alias,
             @WebParam(name = "serverUrl") String serverUrl,
@@ -93,45 +90,38 @@ public interface GeoPlatformCSWService {
             throws IllegalParameterFault;
 
     @Delete
-    @HttpResource(location = "/server/csw/{serverID}")
     boolean deleteServerCSW(@WebParam(name = "serverID") Long serverID)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/server/csw/all/{organizationName}")
-    @WebResult(name = "ServersCSW")
+    @WebResult(name = "ServerCSW")
     List<ServerCSWDTO> getAllCSWServers(
             @WebParam(name = "organizationName") String organizationName)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/server/csw/{serverID}")
     @WebResult(name = "ServerCSW")
     GeoPlatformServer getServerDetailCSW(
             @WebParam(name = "serverID") Long serverID)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/server/csw/{serverUrl}")
     @WebResult(name = "ServerCSW")
     ServerCSWDTO getShortServerCSW(
             @WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/server/csw")
     @WebResult(name = "ServerCSW")
     GeoPlatformServer getServerDetailCSWByUrl(
             @WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/sever/csw/count/{nameLike}")
     @WebResult(name = "ServersCSWCount")
     int getCSWServersCount(SearchRequest request);
 
     @Get
-    @HttpResource(location = "/server/csw/search/{num}/{page}/{nameLike}")
     @WebResult(name = "ServersCSW")
     List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request);
     //</editor-fold>
@@ -141,15 +131,13 @@ public interface GeoPlatformCSWService {
     // === GetRecords request
     // ==========================================================================    
     @Get
-    @HttpResource(location = "/record/csw/count/{searchText}")
     @WebResult(name = "RecordsCount")
     int getRecordsCount(
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault;
 
     @Get
-    @HttpResource(location = "/record/csw/search/{num}/{page}/{searchText}")
-    @WebResult(name = "SummaryRecords")
+    @WebResult(name = "SummaryRecord")
     List<SummaryRecordDTO> searchSummaryRecords(
             @WebParam(name = "num") int num,
             @WebParam(name = "start") int start,
@@ -157,8 +145,7 @@ public interface GeoPlatformCSWService {
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault;
 
     @Get
-    @HttpResource(location = "/record/csw/search/{num}/{page}/{searchText}")
-    @WebResult(name = "FullRecords")
+    @WebResult(name = "FullRecord")
     List<FullRecordDTO> searchFullRecords(
             @WebParam(name = "num") int num,
             @WebParam(name = "start") int start,
@@ -167,7 +154,6 @@ public interface GeoPlatformCSWService {
     //</editor-fold>
 //
 //    @Get
-//    @HttpResource(location = "/server/csw/capabilities/{id}")
 //    @WebResult(name = "Capabilities")
 //    ServerDTO getCapabilities(
 //            @WebParam(name = "request") RequestByID request,

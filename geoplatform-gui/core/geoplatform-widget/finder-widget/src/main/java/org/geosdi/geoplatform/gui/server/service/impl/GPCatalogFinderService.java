@@ -101,13 +101,13 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config, String searchText,
+            PagingLoadConfig config, String searchText, String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
         SearchRequest srq = new SearchRequest(searchText);
 
-        int serversCount = geoPlatformCSWClient.getCSWServersCount(srq);
+        int serversCount = geoPlatformCSWClient.getCSWServersCount(srq, organization);
 
         ArrayList<GPCSWServerBeanModel> searchServers;
         if (serversCount == 0) {
@@ -122,7 +122,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
                                                                     page);
 
             List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(
-                    psr);
+                    psr, organization);
 
             searchServers = new ArrayList<GPCSWServerBeanModel>(
                     serverList.size());

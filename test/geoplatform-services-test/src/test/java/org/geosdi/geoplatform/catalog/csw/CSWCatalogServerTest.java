@@ -220,7 +220,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     @Test
     public void testCSWServersCountNothing() {
         SearchRequest request = new SearchRequest("nothing");
-        int count = cswService.getCSWServersCount(request);
+        int count = cswService.getCSWServersCount(request, super.organizationNameTest);
 
         Assert.assertEquals(0, count);
     }
@@ -228,7 +228,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     @Test
     public void testCSWServersCount() {
         SearchRequest request = new SearchRequest("test"); // wrt title
-        int count = cswService.getCSWServersCount(request);
+        int count = cswService.getCSWServersCount(request, super.organizationNameTest);
 
         Assert.assertEquals(1, count);
     }
@@ -245,7 +245,7 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         Assert.assertNotNull(serverID);
 
         SearchRequest request = new SearchRequest("test"); // wrt title and alias
-        int count = cswService.getCSWServersCount(request);
+        int count = cswService.getCSWServersCount(request, super.organizationNameTest);
 
         Assert.assertEquals(2, count);
 
@@ -256,18 +256,16 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
 
     @Test
     public void testSearchCSWServersNothing() {
-        PaginatedSearchRequest request = new PaginatedSearchRequest("nothing",
-                                                                    10, 0);
-        List<ServerCSWDTO> search = cswService.searchCSWServers(request);
+        PaginatedSearchRequest request = new PaginatedSearchRequest("nothing", 10, 0);
+        List<ServerCSWDTO> search = cswService.searchCSWServers(request, super.organizationNameTest);
 
         Assert.assertNull(search);
     }
 
     @Test
     public void testSearchCSWServers() {
-        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10,
-                                                                    0); // wrt title
-        List<ServerCSWDTO> search = cswService.searchCSWServers(request);
+        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10, 0); // wrt title
+        List<ServerCSWDTO> search = cswService.searchCSWServers(request, super.organizationNameTest);
 
         Assert.assertNotNull(search);
         Assert.assertEquals(1, search.size());
@@ -290,23 +288,22 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         }
 
         // First page
-        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10,
-                                                                    0); // wrt title and alias
-        List<ServerCSWDTO> search = cswService.searchCSWServers(request);
+        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10, 0); // wrt title and alias
+        List<ServerCSWDTO> search = cswService.searchCSWServers(request, super.organizationNameTest);
 
         Assert.assertNotNull(search);
         Assert.assertEquals(10, search.size());
 
         // Second page
         request = new PaginatedSearchRequest("test", 10, 1); // wrt title and alias
-        search = cswService.searchCSWServers(request);
+        search = cswService.searchCSWServers(request, super.organizationNameTest);
 
         Assert.assertNotNull(search);
         Assert.assertEquals(10, search.size());
 
         // Third page
         request = new PaginatedSearchRequest("test", 10, 2); // wrt title and alias
-        search = cswService.searchCSWServers(request);
+        search = cswService.searchCSWServers(request, super.organizationNameTest);
 
         Assert.assertNotNull(search);
         Assert.assertEquals(6, search.size());

@@ -59,6 +59,7 @@ import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWid
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel.GPCSWServerKeyValue;
@@ -245,7 +246,8 @@ public class CSWServerPaginationContainer
             protected void load(Object loadConfig, AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback) {
                 String searchText = searchField.getValue() == null ? "" : searchField.getValue();
                 GPCatalogFinderRemoteImpl.Util.getInstance().searchCSWServers(
-                        (PagingLoadConfig) loadConfig, searchText, callback);
+                        (PagingLoadConfig) loadConfig, searchText, 
+                        GPAccountLogged.getInstance().getOrganization(), callback);
             }
         };
 

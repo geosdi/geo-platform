@@ -56,8 +56,8 @@ public interface IGPCatalogFinderService {
             throws GeoPlatformException;
 
     PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config,
-            String searchText, HttpServletRequest httpServletRequest)
+            PagingLoadConfig config, String searchText, String organization, 
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,

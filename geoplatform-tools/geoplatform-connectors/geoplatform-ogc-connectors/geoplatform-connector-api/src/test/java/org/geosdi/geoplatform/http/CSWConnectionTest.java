@@ -142,8 +142,10 @@ public class CSWConnectionTest {
      * -file snipc.protezionecivile.it.cer -keystore cacerts</code>
      * (the default keystore password is <tt>changeit</tt>)
      * <p/>
-     * For list teh Trusted CA Certs execute the command
+     * For list the Trusted CA Certs execute the command
      * <code>keytool -list -v -keystore cacerts</code>
+     * <p/>
+     * Use -Djavax.net.debug=ssl for more execution information.
      */
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test

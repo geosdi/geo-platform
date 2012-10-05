@@ -119,11 +119,13 @@ public interface GeoPlatformCSWService {
 
     @Get
     @WebResult(name = "ServersCSWCount")
-    int getCSWServersCount(SearchRequest request);
+    int getCSWServersCount(SearchRequest request,
+            @WebParam(name = "organization") String organization);
 
     @Get
     @WebResult(name = "ServersCSW")
-    List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request);
+    List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request,
+            @WebParam(name = "organization") String organization);
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="GetRecords request">

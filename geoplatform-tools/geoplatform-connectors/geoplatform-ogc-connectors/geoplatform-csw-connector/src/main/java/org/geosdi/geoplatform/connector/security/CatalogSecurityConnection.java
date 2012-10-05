@@ -109,8 +109,6 @@ public class CatalogSecurityConnection {
 
     private static class DefaultTrustManager implements X509TrustManager {
 
-        public final Logger logger = LoggerFactory.getLogger(this.getClass());
-
         @Override
         public void checkClientTrusted(X509Certificate[] arg0, String arg1)
                 throws CertificateException {

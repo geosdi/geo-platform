@@ -55,7 +55,7 @@ public interface GPCatalogFinderRemoteAsync {
             AsyncCallback<ArrayList<GPCSWServerBeanModel>> callback)
             throws GeoPlatformException;
 
-    void searchCSWServers(PagingLoadConfig config, String searchText,
+    void searchCSWServers(PagingLoadConfig config, String searchText, String organization,
             AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback);
 
     void saveServerCSW(String alias, String serverUrl, String organization,

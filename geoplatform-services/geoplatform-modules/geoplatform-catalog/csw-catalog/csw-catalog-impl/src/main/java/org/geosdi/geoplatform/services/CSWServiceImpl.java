@@ -275,10 +275,11 @@ class CSWServiceImpl {
         return new ServerCSWDTO(server);
     }
 
-    int getCSWServersCount(SearchRequest request) {
+    int getCSWServersCount(SearchRequest request, String organization) {
         logger.trace("\n*** CSWServersCount: {} ***", request);
         Search searchCriteria = new Search(GeoPlatformServer.class);
         searchCriteria.addFilterEqual("serverType", GPCapabilityType.CSW);
+        searchCriteria.addFilterEqual("organization.name", organization);
 
         String like = request.getNameLike();
         if (like != null) {
@@ -290,9 +291,10 @@ class CSWServiceImpl {
         return serverDao.count(searchCriteria);
     }
 
-    List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request) {
+    List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request, String organization) {
         Search searchCriteria = new Search(GeoPlatformServer.class);
         searchCriteria.addFilterEqual("serverType", GPCapabilityType.CSW);
+        searchCriteria.addFilterEqual("organization.name", organization);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
         searchCriteria.addSortAsc("aliasName");

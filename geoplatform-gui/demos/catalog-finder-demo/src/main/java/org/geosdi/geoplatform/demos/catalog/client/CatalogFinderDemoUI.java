@@ -50,14 +50,14 @@ public class CatalogFinderDemoUI implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+        // Required for retrieve organization name in the save catalog server operation
+        IGPAccountDetail account = new AccountDetailDummy();
+        GPAccountLogged.getInstance().setAccountDetail(account);
+        
         CatalogFinderInjector injector = CatalogFinderInjector.MainInjector.getInstance();
         CatalogFinderWidget catalogWidget = injector.getCatalogFinderWidget();
 
         catalogWidget.setClosable(false);
         catalogWidget.show();
-
-        // Required for retrieve organization name in the save catalog server operation
-        IGPAccountDetail account = new AccountDetailDummy();
-        GPAccountLogged.getInstance().setAccountDetail(account);
     }
 }

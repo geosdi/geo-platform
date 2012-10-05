@@ -44,13 +44,14 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public interface GPServerDAO {
 
     public List<GeoPlatformServer> findAll();
 
-    public List<GeoPlatformServer> findAll(GPCapabilityType type);
+    public List<GeoPlatformServer> findAll(Long idOrganization,
+            GPCapabilityType type);
 
     public GeoPlatformServer find(Long id);
 

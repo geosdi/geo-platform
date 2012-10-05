@@ -57,13 +57,16 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     @Test
     public void testInsertServer() throws Exception {
         // Insert the server
-        GeoPlatformServer server = super.createCSWServer("server_test", "http://url.test", organizationTest);
+        GeoPlatformServer server = super.createCSWServer("server_test",
+                                                         "http://url.test",
+                                                         organizationTest);
         Long serverID = cswService.insertServerCSW(server);
 
         Assert.assertNotNull(serverID);
 
         // Retrieve the server
-        GeoPlatformServer retrievedServer = cswService.getServerDetailCSW(serverID);
+        GeoPlatformServer retrievedServer = cswService.getServerDetailCSW(
+                serverID);
 
         server.setId(serverID);
         this.compareServer(server, retrievedServer);
@@ -103,7 +106,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     public void testSaveServer() throws Exception {
         // Save the server
         String serverURL = "http://datigis.comune.fi.it/geonetwork/srv/it/csw";
-        ServerCSWDTO serverDTO = cswService.saveServerCSW("Firenze", serverURL, organizationNameTest);
+        ServerCSWDTO serverDTO = cswService.saveServerCSW("Firenze", serverURL,
+                                                          organizationNameTest);
 
         Assert.assertNotNull(serverDTO);
 
@@ -121,7 +125,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     public void testResaveServerOur() throws Exception {
         // Try to resave a server with a
         ServerCSWDTO serverDTO = cswService.saveServerCSW("alias",
-                serverTestOur.getServerUrl(), organizationNameTest);
+                                                          serverTestOur.getServerUrl(),
+                                                          organizationNameTest);
 
         this.compareServer(serverTestOur, serverDTO);
     }
@@ -133,13 +138,15 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
 
     @Test(expected = IllegalParameterFault.class)
     public void testSaveServerMalformedURLException() throws Exception {
-        cswService.saveServerCSW("Must fail", "http//url-test.fail", organizationNameTest);
+        cswService.saveServerCSW("Must fail", "http//url-test.fail",
+                                 organizationNameTest);
     }
 
     @Test(expected = IllegalParameterFault.class)
     public void testSaveServerCatalogVersionException() throws Exception {
         cswService.saveServerCSW("NSDI",
-                "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw", organizationNameTest); // Version 2.0.1
+                                 "http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw",
+                                 organizationNameTest); // Version 2.0.1
     }
 
     @Ignore("Require to add the SNIPC certificate into default keystore")
@@ -147,7 +154,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     public void testSecureSaveServerSNIPC() throws Exception {
         // Save the server
         String serverURL = super.snipcProvider.getSnipcUrl();
-        ServerCSWDTO serverDTO = cswService.saveServerCSW("SNIPC", serverURL, organizationNameTest);
+        ServerCSWDTO serverDTO = cswService.saveServerCSW("SNIPC", serverURL,
+                                                          organizationNameTest);
 
         Assert.assertNotNull(serverDTO);
 
@@ -163,7 +171,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
 
     @Test
     public void testGetServerDetailById() throws Exception {
-        GeoPlatformServer retrievedServer = cswService.getServerDetailCSW(serverTestOurID);
+        GeoPlatformServer retrievedServer = cswService.getServerDetailCSW(
+                serverTestOurID);
 
         this.compareServer(serverTestOur, retrievedServer);
     }
@@ -175,7 +184,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
 
     @Test
     public void testGetServerDetailByUrl() throws Exception {
-        GeoPlatformServer retrievedServer = cswService.getServerDetailCSWByUrl(serverTestOur.getServerUrl());
+        GeoPlatformServer retrievedServer = cswService.getServerDetailCSWByUrl(
+                serverTestOur.getServerUrl());
 
         this.compareServer(serverTestOur, retrievedServer);
     }
@@ -187,7 +197,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
 
     @Test
     public void testShortServerByUrl() throws Exception {
-        ServerCSWDTO retrievedServerDTO = cswService.getShortServerCSW(serverTestOur.getServerUrl());
+        ServerCSWDTO retrievedServerDTO = cswService.getShortServerCSW(
+                serverTestOur.getServerUrl());
 
         this.compareServer(serverTestOur, retrievedServerDTO);
     }
@@ -198,8 +209,9 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     }
 
     @Test
-    public void testGetAllServers() {
-        List<ServerCSWDTO> servers = cswService.getAllCSWServers();
+    public void testGetAllServers() throws ResourceNotFoundFault {
+        List<ServerCSWDTO> servers = cswService.getAllCSWServers(
+                organizationNameTest);
 
         Assert.assertNotNull(servers);
         Assert.assertTrue(servers.size() >= 2);
@@ -224,7 +236,9 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     @Test
     public void testCSWServersCountTwo() throws Exception {
         // Insert the server
-        GeoPlatformServer server = super.createCSWServer("Mock title", "http://url.mock", organizationTest);
+        GeoPlatformServer server = super.createCSWServer("Mock title",
+                                                         "http://url.mock",
+                                                         organizationTest);
         server.setAliasName("Alias test");
         Long serverID = cswService.insertServerCSW(server);
 
@@ -242,7 +256,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
 
     @Test
     public void testSearchCSWServersNothing() {
-        PaginatedSearchRequest request = new PaginatedSearchRequest("nothing", 10, 0);
+        PaginatedSearchRequest request = new PaginatedSearchRequest("nothing",
+                                                                    10, 0);
         List<ServerCSWDTO> search = cswService.searchCSWServers(request);
 
         Assert.assertNull(search);
@@ -250,7 +265,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
 
     @Test
     public void testSearchCSWServers() {
-        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10, 0); // wrt title
+        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10,
+                                                                    0); // wrt title
         List<ServerCSWDTO> search = cswService.searchCSWServers(request);
 
         Assert.assertNotNull(search);
@@ -263,7 +279,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         Long[] serverIDs = new Long[27];
         for (int i = 1; i <= 27; i++) {
             GeoPlatformServer server = super.createCSWServer("Mock title " + i,
-                    "http://url.mock-" + i, organizationTest);
+                                                             "http://url.mock-" + i,
+                                                             organizationTest);
             if (i >= 3) {
                 server.setAliasName("Alias test " + i);
             }
@@ -273,7 +290,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         }
 
         // First page
-        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10, 0); // wrt title and alias
+        PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10,
+                                                                    0); // wrt title and alias
         List<ServerCSWDTO> search = cswService.searchCSWServers(request);
 
         Assert.assertNotNull(search);
@@ -300,7 +318,8 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         }
     }
 
-    private void compareServer(GeoPlatformServer expected, GeoPlatformServer toTest) {
+    private void compareServer(GeoPlatformServer expected,
+            GeoPlatformServer toTest) {
 
         Assert.assertNotNull(expected);
         Assert.assertNotNull(toTest);

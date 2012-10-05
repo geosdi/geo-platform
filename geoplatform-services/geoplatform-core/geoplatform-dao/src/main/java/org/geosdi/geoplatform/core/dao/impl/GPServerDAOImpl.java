@@ -47,19 +47,20 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 @Transactional
 public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long>
         implements GPServerDAO {
 
     @Override
-    public List<GeoPlatformServer>  findAll() {
+    public List<GeoPlatformServer> findAll() {
         return super.findAll();
     }
 
     @Override
-    public List<GeoPlatformServer>  findAll(GPCapabilityType type) {
+    public List<GeoPlatformServer> findAll(Long idOrganization,
+            GPCapabilityType type) {
         Search search = new Search();
         search.addFilterEqual("serverType", type);
         return super.search(search);
@@ -89,7 +90,8 @@ public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long>
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerName(java.lang.String)
+     * @see
+     * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerName(java.lang.String)
      */
     @Override
     public List<GeoPlatformServer> findByServerName(String serverName) {
@@ -101,7 +103,8 @@ public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long>
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerUrl(java.lang.String)
+     * @see
+     * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerUrl(java.lang.String)
      */
     @Override
     public GeoPlatformServer findByServerUrl(String serverUrl) {

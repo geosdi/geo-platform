@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GSAccount;
@@ -80,16 +81,23 @@ public class OGCService implements IOGCService {
     private SessionUtility sessionUtility;
 
     @Override
-    public ArrayList<GPServerBeanModel> loadServers()
+    public ArrayList<GPServerBeanModel> loadServers(String organizationName)
             throws GeoPlatformException {
-        return dtoServerConverter.convertServer(geoPlatformServiceClient.getAllServers());
+        try {
+            return dtoServerConverter.convertServer(
+                    geoPlatformServiceClient.getAllServers(organizationName));
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("OGCService Error : " + ex);
+            throw new GeoPlatformException(ex);
+        }
     }
 
     @Override
     public GPServerBeanModel getServerDetails(Long idServer)
             throws GeoPlatformException {
         try {
-            GeoPlatformServer serverWS = geoPlatformServiceClient.getServerDetail(idServer);
+            GeoPlatformServer serverWS = geoPlatformServiceClient.getServerDetail(
+                    idServer);
             return dtoServerConverter.getServerDetail(serverWS);
         } catch (ResourceNotFoundFault ex) {
             logger.error("The server with id " + idServer + " was bean deleted.");
@@ -103,7 +111,8 @@ public class OGCService implements IOGCService {
         try {
             geoPlatformServiceClient.deleteServer(idServer);
         } catch (ResourceNotFoundFault ex) {
-            logger.error("The server with id " + idServer + " was not bean deleted.");
+            logger.error(
+                    "The server with id " + idServer + " was not bean deleted.");
             throw new GeoPlatformException(
                     "The server with id " + idServer + " was not bean deleted.");
         }
@@ -119,14 +128,18 @@ public class OGCService implements IOGCService {
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
 
             RequestByID req = new RequestByID(idServer);
-            GSAccount gsAccount = this.sessionUtility.getLoggedAccount(httpServletRequest).getGsAccount();
+            GSAccount gsAccount = this.sessionUtility.getLoggedAccount(
+                    httpServletRequest).getGsAccount();
             String authKey = null;
             if (gsAccount != null) {
                 authKey = gsAccount.getAuthkey();
             }
-            ServerDTO server = geoPlatformWMSServiceClient.getCapabilities(req, token, authKey);
+            ServerDTO server = geoPlatformWMSServiceClient.getCapabilities(req,
+                                                                           token,
+                                                                           authKey);
 
-            return dtoServerConverter.createRasterLayerList(server.getLayerList());
+            return dtoServerConverter.createRasterLayerList(
+                    server.getLayerList());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error GetCapabilities: " + ex);
             throw new GeoPlatformException(ex.getMessage());
@@ -141,7 +154,9 @@ public class OGCService implements IOGCService {
             throws GeoPlatformException {
         ServerDTO serverWS = null;
         try {
-            serverWS = geoPlatformServiceClient.saveServer(id, aliasServerName, urlServer, organization);
+            serverWS = geoPlatformServiceClient.saveServer(id, aliasServerName,
+                                                           urlServer,
+                                                           organization);
         } catch (IllegalParameterFault ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
@@ -150,12 +165,15 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest)
+    public ArrayList<String> findDistinctLayersDataSource(
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
         try {
-            Long projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
-            return geoPlatformServiceClient.getLayersDataSourceByProjectID(projectId);
+            Long projectId = this.sessionUtility.getDefaultProject(
+                    httpServletRequest);
+            return geoPlatformServiceClient.getLayersDataSourceByProjectID(
+                    projectId);
         } catch (ResourceNotFoundFault e) {
             throw new GeoPlatformException("Error in findDistinctLayersDataSource: ResourceNotFoundFault "
                     + e);

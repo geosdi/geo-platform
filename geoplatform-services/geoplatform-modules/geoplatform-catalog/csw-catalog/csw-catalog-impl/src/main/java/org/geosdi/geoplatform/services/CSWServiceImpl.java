@@ -117,7 +117,8 @@ class CSWServiceImpl {
     /**
      * @param catalogCapabilitiesBean the catalogCapabilitiesBean to set
      */
-    public void setCatalogCapabilitiesBean(CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
+    public void setCatalogCapabilitiesBean(
+            CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
         this.catalogCapabilitiesBean = catalogCapabilitiesBean;
     }
 
@@ -154,7 +155,8 @@ class CSWServiceImpl {
      * @see GeoPlatformCSWService#saveServerCSW(java.lang.String,
      * java.lang.String)
      */
-    ServerCSWDTO saveServerCSW(String alias, String serverUrl, String organization)
+    ServerCSWDTO saveServerCSW(String alias, String serverUrl,
+            String organization)
             throws IllegalParameterFault {
 
         serverUrl = this.deleteQueryStringFromURL(serverUrl);
@@ -165,11 +167,13 @@ class CSWServiceImpl {
 
         GPOrganization org = organizationDao.findByName(organization);
         if (org == null) {
-            throw new IllegalParameterFault("CSW Server to save have an organization that does not exist");
+            throw new IllegalParameterFault(
+                    "CSW Server to save have an organization that does not exist");
         }
 
         try {
-            CatalogCapabilities capabilities = catalogCapabilitiesBean.bindUrl(serverUrl);
+            CatalogCapabilities capabilities = catalogCapabilitiesBean.bindUrl(
+                    serverUrl);
 
             server = new GeoPlatformServer();
             server.setServerType(GPCapabilityType.CSW);
@@ -178,7 +182,8 @@ class CSWServiceImpl {
             server.setOrganization(org);
 
             server.setTitle(capabilities.getServiceIdentification().getTitle());
-            server.setAbstractServer(capabilities.getServiceIdentification().getAbstractText());
+            server.setAbstractServer(
+                    capabilities.getServiceIdentification().getAbstractText());
             server.setName(capabilities.getServiceProvider().getProviderName());
 
             CSWEntityCorrectness.checkCSWServer(server); // TODO assert
@@ -214,8 +219,17 @@ class CSWServiceImpl {
     /**
      * @see GeoPlatformCSWService#getAllCSWServers()
      */
-    List<ServerCSWDTO> getAllCSWServers() {
-        List<GeoPlatformServer> found = serverDao.findAll(GPCapabilityType.CSW);
+    List<ServerCSWDTO> getAllCSWServers(String organizationName) throws ResourceNotFoundFault {
+        GPOrganization organization = organizationDao.findByName(
+                organizationName);
+
+        if (organization == null) {
+            throw new ResourceNotFoundFault("Organization with name "
+                    + organizationName + "was not found.");
+        }
+
+        List<GeoPlatformServer> found = serverDao.findAll(organization.getId(),
+                                                          GPCapabilityType.CSW);
         return convertServerList(found);
     }
 
@@ -368,7 +382,7 @@ class CSWServiceImpl {
         request.setMaxRecords(BigInteger.valueOf(num));
         request.setStartPosition(BigInteger.valueOf(start));
         logger.debug("\n*** Num: {} *** Start: {} ***",
-                request.getMaxRecords(), request.getStartPosition());
+                     request.getMaxRecords(), request.getStartPosition());
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
@@ -396,7 +410,7 @@ class CSWServiceImpl {
         }
 
         return this.convertSummaryRecords(summaryRecordList,
-                server.getServerUrl());
+                                          server.getServerUrl());
     }
 
     /**
@@ -431,7 +445,7 @@ class CSWServiceImpl {
         request.setMaxRecords(BigInteger.valueOf(num));
         request.setStartPosition(BigInteger.valueOf(start));
         logger.debug("\n*** Num: {} *** Start: {} ***",
-                request.getMaxRecords(), request.getStartPosition());
+                     request.getMaxRecords(), request.getStartPosition());
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
@@ -451,13 +465,15 @@ class CSWServiceImpl {
                 response.getSearchResults().getAbstractRecord();
         logger.trace("\n*** Record list size: {} ***", records.size());
 
-        List<RecordType> recordList = new ArrayList<RecordType>(records.size());
+        List<FullRecordDTO> recordListDTO = new ArrayList<FullRecordDTO>(
+                records.size());
         for (JAXBElement<? extends AbstractRecordType> r : records) {
             RecordType record = (RecordType) r.getValue();
-            recordList.add(record);
+            recordListDTO.add(this.convertFullRecords(record,
+                                                      server.getServerUrl()));
         }
 
-        return this.convertFullRecords(recordList, server.getServerUrl());
+        return recordListDTO;
     }
 
     private GeoPlatformServer getCSWServerByID(Long serverID)
@@ -471,7 +487,8 @@ class CSWServiceImpl {
         return server;
     }
 
-    private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> recordList, String catalogURL) {
+    private List<SummaryRecordDTO> convertSummaryRecords(
+            List<SummaryRecordType> recordList, String catalogURL) {
         List<SummaryRecordDTO> recordListDTO = new ArrayList<SummaryRecordDTO>(
                 recordList.size());
         for (SummaryRecordType record : recordList) {
@@ -494,80 +511,78 @@ class CSWServiceImpl {
         return recordListDTO;
     }
 
-    private List<FullRecordDTO> convertFullRecords(List<RecordType> recordList, String catalogURL) {
-        List<FullRecordDTO> recordListDTO = new ArrayList<FullRecordDTO>(
-                recordList.size());
-        for (RecordType record : recordList) {
-            FullRecordDTO dto = new FullRecordDTO();
-            dto.setCatalogURL(catalogURL);
+    private FullRecordDTO convertFullRecords(RecordType record,
+            String catalogURL) {
 
-            for (JAXBElement<? extends SimpleLiteral> element : record.getDCElement()) {
-                String localPartElement = element.getName().getLocalPart();
-                List<String> contentElement = element.getValue().getContent();
+        FullRecordDTO dto = new FullRecordDTO();
+        dto.setCatalogURL(catalogURL);
 
-                if ("identifier".equals(localPartElement)) {
-                    dto.setIdentifier(
-                            BindingUtility.convertStringListToString(
-                            contentElement));
-                }
+        for (JAXBElement<? extends SimpleLiteral> element : record.getDCElement()) {
+            String localPartElement = element.getName().getLocalPart();
+            List<String> contentElement = element.getValue().getContent();
 
-                if ("title".equals(localPartElement)) {
-                    dto.setTitle(
-                            BindingUtility.convertStringListToString(
-                            contentElement));
-                }
-
-                if ("type".equals(localPartElement)) {
-                    dto.setType(
-                            BindingUtility.convertStringListToString(
-                            contentElement));
-                }
-
-                if ("abstract".equals(localPartElement)) {
-                    dto.setAbstractText(
-                            BindingUtility.convertStringListToString(
-                            contentElement));
-                }
-
-                if ("subject".equals(localPartElement)) {
-                    dto.addSubject(
-                            BindingUtility.convertStringListToString(
-                            contentElement));
-                }
-
-                if ("URI".equals(localPartElement)) {
-                    URI uri = (URI) element.getValue();
-                    String protocol = uri.getProtocol();
-                    /**
-                     * If the first element URI have a GetCapabilities protocol,
-                     * break the iteration.
-                     */
-                    if (OnlineResourceProtocolType.isForGetCapabilities(protocol)) {
-                        break;
-                    }
-
-                    URIDTO uriDTO = new URIDTO();
-                    uriDTO.setProtocol(protocol);
-                    uriDTO.setName(uri.getName());
-                    uriDTO.setDescription(uri.getDescription());
-                    uriDTO.setServiceURL(uri.getServiceURL());
-                    dto.addUri(uriDTO);
-                }
+            if ("identifier".equals(localPartElement)) {
+                dto.setIdentifier(
+                        BindingUtility.convertStringListToString(
+                        contentElement));
             }
 
-            if (!record.getBoundingBox().isEmpty()) {
-                BoundingBoxType bBoxType = record.getBoundingBox().get(0).getValue();
-                dto.setBBox(BindingUtility.convertBBoxTypeToBBox(bBoxType));
-                dto.setCrs(BindingUtility.convertEncodedCRS(bBoxType.getCrs()));
+            if ("title".equals(localPartElement)) {
+                dto.setTitle(
+                        BindingUtility.convertStringListToString(
+                        contentElement));
             }
 
-            recordListDTO.add(dto);
+            if ("type".equals(localPartElement)) {
+                dto.setType(
+                        BindingUtility.convertStringListToString(
+                        contentElement));
+            }
+
+            if ("abstract".equals(localPartElement)) {
+                dto.setAbstractText(
+                        BindingUtility.convertStringListToString(
+                        contentElement));
+            }
+
+            if ("subject".equals(localPartElement)) {
+                dto.addSubject(
+                        BindingUtility.convertStringListToString(
+                        contentElement));
+            }
+
+            if ("URI".equals(localPartElement)) {
+                URI uri = (URI) element.getValue();
+                String protocol = uri.getProtocol();
+                /**
+                 * If the first element URI have a GetCapabilities protocol,
+                 * break the iteration.
+                 */
+                if (OnlineResourceProtocolType.isForGetCapabilities(protocol)) {
+                    break;
+                }
+
+                URIDTO uriDTO = new URIDTO();
+                uriDTO.setProtocol(protocol);
+                uriDTO.setName(uri.getName());
+                uriDTO.setDescription(uri.getDescription());
+                uriDTO.setServiceURL(uri.getServiceURL());
+                dto.addUri(uriDTO);
+            }
         }
 
-        return recordListDTO;
+        if (!record.getBoundingBox().isEmpty()) {
+            BoundingBoxType bBoxType = record.getBoundingBox().get(0).getValue();
+            dto.setBBox(BindingUtility.convertBBoxTypeToBBox(bBoxType));
+            dto.setCrs(BindingUtility.convertEncodedCRS(bBoxType.getCrs()));
+        }
+
+
+        return dto;
     }
 
-    private CatalogGetRecordsRequest<GetRecordsResponseType> createGetRecordsRequest(String serverUrl)
+    private CatalogGetRecordsRequest<GetRecordsResponseType> createGetRecordsRequest(
+            String serverUrl)
             throws IllegalParameterFault {
 
         GPCSWServerConnector serverConnector = null;

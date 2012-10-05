@@ -59,7 +59,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Transactional // Give atomicity on WS methods
-@WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformCSWService")
+@WebService(
+endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformCSWService")
 public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
 
     // Delegate
@@ -97,9 +98,11 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     /**
      * @param catalogCapabilitiesBean the catalogCapabilitiesBean to set
      */
-    public void setCatalogCapabilitiesBean(CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
+    public void setCatalogCapabilitiesBean(
+            CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
         this.catalogCapabilitiesBean = catalogCapabilitiesBean;
-        this.cswServiceDelegate.setCatalogCapabilitiesBean(catalogCapabilitiesBean);
+        this.cswServiceDelegate.setCatalogCapabilitiesBean(
+                catalogCapabilitiesBean);
     }
 
     /**
@@ -116,7 +119,8 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public ServerCSWDTO saveServerCSW(String alias, String serverUrl, String organization)
+    public ServerCSWDTO saveServerCSW(String alias, String serverUrl,
+            String organization)
             throws IllegalParameterFault {
         return cswServiceDelegate.saveServerCSW(alias, serverUrl, organization);
     }
@@ -127,8 +131,9 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public List<ServerCSWDTO> getAllCSWServers() {
-        return cswServiceDelegate.getAllCSWServers();
+    public List<ServerCSWDTO> getAllCSWServers(String organizationName)
+            throws ResourceNotFoundFault {
+        return cswServiceDelegate.getAllCSWServers(organizationName);
     }
 
     @Override

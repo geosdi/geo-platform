@@ -112,7 +112,8 @@ public interface GeoPlatformService {
      */
     @Put
     @Deprecated
-    Long insertOrganization(@WebParam(name = "organization") GPOrganization organization)
+    Long insertOrganization(
+            @WebParam(name = "organization") GPOrganization organization)
             throws IllegalParameterFault;
 
     /**
@@ -125,7 +126,8 @@ public interface GeoPlatformService {
      */
     @Delete
     @Deprecated
-    boolean deleteOrganization(@WebParam(name = "organizationID") Long organizationID)
+    boolean deleteOrganization(
+            @WebParam(name = "organizationID") Long organizationID)
             throws ResourceNotFoundFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Account (User and Application)">
@@ -727,7 +729,8 @@ public interface GeoPlatformService {
      * @throws IllegalParameterFault if the Project is not valid
      */
     @Put
-    Long saveProject(@WebParam(name = "accountNaturalID") String accountNaturalID,
+    Long saveProject(
+            @WebParam(name = "accountNaturalID") String accountNaturalID,
             @WebParam(name = "project") GPProject project,
             @WebParam(name = "defaultProject") boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -822,7 +825,8 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     @Put
-    Long insertViewport(@WebParam(name = "accountProjectID") Long accountProjectID,
+    Long insertViewport(
+            @WebParam(name = "accountProjectID") Long accountProjectID,
             @WebParam(name = "viewport") GPViewport viewport)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -835,12 +839,14 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     @Put
-    void saveOrUpdateViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
+    void saveOrUpdateViewportList(
+            @WebParam(name = "accountProjectID") Long accountProjectID,
             @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Put
-    void replaceViewportList(@WebParam(name = "accountProjectID") Long accountProjectID,
+    void replaceViewportList(
+            @WebParam(name = "accountProjectID") Long accountProjectID,
             @WebParam(name = "viewportList") ArrayList<GPViewport> viewportList)
             throws ResourceNotFoundFault, IllegalParameterFault;
     // </editor-fold>
@@ -1478,7 +1484,8 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "role")
-    List<String> getAllRoles(@WebParam(name = "organization") String organization)
+    List<String> getAllRoles(
+            @WebParam(name = "organization") String organization)
             throws ResourceNotFoundFault;
 
     /**
@@ -1591,7 +1598,9 @@ public interface GeoPlatformService {
 
     @Get
     @WebResult(name = "server")
-    List<ServerDTO> getAllServers();
+    List<ServerDTO> getAllServers(
+            @WebParam(name = "organizazionName") String organizazionName)
+            throws ResourceNotFoundFault;
 
     @Get
     @WebResult(name = "server")
@@ -1644,7 +1653,8 @@ public interface GeoPlatformService {
      * not found
      */
     @Put
-    boolean insertMultiMessage(@WebParam(name = "messageDTO") MessageDTO messageDTO)
+    boolean insertMultiMessage(
+            @WebParam(name = "messageDTO") MessageDTO messageDTO)
             throws ResourceNotFoundFault;
 
     /**

@@ -52,13 +52,16 @@ import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
  */
 public interface IGPCatalogFinderService {
 
-    ArrayList<GPCSWServerBeanModel> getAllCSWServers(HttpServletRequest httpServletRequest);
+    ArrayList<GPCSWServerBeanModel> getAllCSWServers(String organizationName)
+            throws GeoPlatformException;
 
-    PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config,
+    PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
+            PagingLoadConfig config,
             String searchText, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl, String organization,
+    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+            String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
@@ -66,10 +69,12 @@ public interface IGPCatalogFinderService {
             throws GeoPlatformException;
 
     PagingLoadResult<SummaryRecord> searchSummaryRecords(PagingLoadConfig config,
-            CatalogFinderBean catalogFinder, HttpServletRequest httpServletRequest)
+            CatalogFinderBean catalogFinder,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     PagingLoadResult<FullRecord> searchFullRecords(PagingLoadConfig config,
-            CatalogFinderBean catalogFinder, HttpServletRequest httpServletRequest)
+            CatalogFinderBean catalogFinder,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 }

@@ -194,7 +194,7 @@ public class CatalogGetRecordsTest {
                 searchResult.getNumberOfRecordsMatched());
     }
 
-    @Ignore("Require to add the SNIPC certificate into default keystore")
+//    @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureGetRecords() throws Exception {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(new URL(

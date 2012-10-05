@@ -109,9 +109,9 @@ public class CXFServiceTest extends ServiceTest {
     }
 
     @Test
-    public void testGetAllServer() {
+    public void testGetAllServer() throws ResourceNotFoundFault {
         // Number of Servers
-        Collection<ServerDTO> servers = gpWSClient.getAllServers();
+        Collection<ServerDTO> servers = gpWSClient.getAllServers(organizationNameTest);
         Assert.assertNotNull(servers);
         int totalServers = servers.size();
         Assert.assertTrue("Number of Servers stored into database",
@@ -122,14 +122,14 @@ public class CXFServiceTest extends ServiceTest {
 
         // Assert of number of Servers
         Assert.assertEquals("Total numebr of Servers is wrong after inserted new Server",
-                gpWSClient.getAllServers().size(), totalServers + 1);
+                gpWSClient.getAllServers(organizationNameTest).size(), totalServers + 1);
 
         // Delete new Server
         this.deleteServer(idNewServer);
 
         // Assert of number of Servers
         Assert.assertEquals("Total numebr of Servers is wrong after deleted new Server",
-                gpWSClient.getAllServers().size(), totalServers);
+                gpWSClient.getAllServers(organizationNameTest).size(), totalServers);
     }
 
 

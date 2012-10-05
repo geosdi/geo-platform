@@ -48,7 +48,8 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
  */
 public interface GeoPlatformOGCRemoteAsync {
 
-    public void loadServers(AsyncCallback<ArrayList<GPServerBeanModel>> callback)
+    public void loadServers(String organizationName,
+            AsyncCallback<ArrayList<GPServerBeanModel>> callback)
             throws GeoPlatformException;
 
     public void getServerDetails(Long idServer,
@@ -64,6 +65,7 @@ public interface GeoPlatformOGCRemoteAsync {
             String organization, AsyncCallback<GPServerBeanModel> callback)
             throws GeoPlatformException;
 
-    public void findDistinctLayersDataSource(AsyncCallback<ArrayList<String>> callback)
+    public void findDistinctLayersDataSource(
+            AsyncCallback<ArrayList<String>> callback)
             throws GeoPlatformException;
 }

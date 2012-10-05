@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  */
 @RemoteServiceRelativePath("GPCatalogFinderRemote")
 public interface GPCatalogFinderRemote extends RemoteService {
@@ -60,19 +60,22 @@ public interface GPCatalogFinderRemote extends RemoteService {
 
         public static GPCatalogFinderRemoteAsync getInstance() {
             if (instance == null) {
-                instance = (GPCatalogFinderRemoteAsync) GWT.create(GPCatalogFinderRemote.class);
+                instance = (GPCatalogFinderRemoteAsync) GWT.create(
+                        GPCatalogFinderRemote.class);
             }
             return instance;
         }
     }
 
-    ArrayList<GPCSWServerBeanModel> getAllCSWServers();
+    ArrayList<GPCSWServerBeanModel> getAllCSWServers(String organizationName)
+            throws GeoPlatformException;
 
     PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
             PagingLoadConfig config, String searchText)
             throws GeoPlatformException;
 
-    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl, String organization)
+    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+            String organization)
             throws GeoPlatformException;
 
     boolean deleteServerCSW(Long serverID) throws GeoPlatformException;

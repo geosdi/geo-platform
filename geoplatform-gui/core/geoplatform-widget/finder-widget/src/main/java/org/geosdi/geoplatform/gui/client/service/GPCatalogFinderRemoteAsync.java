@@ -41,16 +41,19 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  */
 public interface GPCatalogFinderRemoteAsync {
 
-    void getAllCSWServers(AsyncCallback<ArrayList<GPCSWServerBeanModel>> callback);
+    void getAllCSWServers(String organizationName,
+            AsyncCallback<ArrayList<GPCSWServerBeanModel>> callback)
+            throws GeoPlatformException;
 
     void searchCSWServers(PagingLoadConfig config, String searchText,
             AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback);
@@ -60,9 +63,11 @@ public interface GPCatalogFinderRemoteAsync {
 
     void deleteServerCSW(Long serverID, AsyncCallback<Boolean> callback);
 
-    void searchSummaryRecords(PagingLoadConfig config, CatalogFinderBean catalogFinder,
+    void searchSummaryRecords(PagingLoadConfig config,
+            CatalogFinderBean catalogFinder,
             AsyncCallback<PagingLoadResult<SummaryRecord>> callback);
 
-    void searchFullRecords(PagingLoadConfig config, CatalogFinderBean catalogFinder,
+    void searchFullRecords(PagingLoadConfig config,
+            CatalogFinderBean catalogFinder,
             AsyncCallback<PagingLoadResult<FullRecord>> callback);
 }

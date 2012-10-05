@@ -98,9 +98,11 @@ public interface GeoPlatformCSWService {
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/server/csw/all")
+    @HttpResource(location = "/server/csw/all/{organizationName}")
     @WebResult(name = "ServersCSW")
-    List<ServerCSWDTO> getAllCSWServers();
+    List<ServerCSWDTO> getAllCSWServers(
+            @WebParam(name = "organizationName") String organizationName)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/server/csw/{serverID}")

@@ -53,7 +53,6 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.RowEditor;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.common.collect.Lists;
@@ -88,7 +87,8 @@ public class ManageServerWidget extends Window {
     private GPCheckColumnConfig checkColumn;
     private StoreFilterField<GPServerBeanModel> serverFilter;
 
-    public ManageServerWidget(DisplayServerWidget displayServerWidget, boolean lazy) {
+    public ManageServerWidget(DisplayServerWidget displayServerWidget,
+            boolean lazy) {
         this.displayServerWidget = displayServerWidget;
         this.store = displayServerWidget.getStore();
         if (!lazy) {
@@ -99,31 +99,36 @@ public class ManageServerWidget extends Window {
     private void loadServers() {
         this.mask("Loading Servers");
         LayoutManager.getInstance().getStatusMap().setBusy("Loading Layers.....");
-        GeoPlatformOGCRemote.Util.getInstance().loadServers(new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                ManageServerWidget.this.unmask();
-                GeoPlatformMessage.errorMessage("Server Service",
-                        "An Error occured loading Servers.");
-            }
 
-            @Override
-            public void onSuccess(ArrayList<GPServerBeanModel> result) {
-                ManageServerWidget.this.unmask();
-                store.removeAll();
-                store.add(result);
-            }
-        });
+        GeoPlatformOGCRemote.Util.getInstance().loadServers(
+                GPAccountLogged.getInstance().getOrganization(),
+                new AsyncCallback<ArrayList<GPServerBeanModel>>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        ManageServerWidget.this.unmask();
+                        GeoPlatformMessage.errorMessage("Server Service",
+                                                        "An Error occured loading Servers.");
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<GPServerBeanModel> result) {
+                        ManageServerWidget.this.unmask();
+                        store.removeAll();
+                        store.add(result);
+                    }
+                });
     }
 
     private Widget createServerFilter() {
         this.serverFilter = new StoreFilterField<GPServerBeanModel>() {
             @Override
-            protected boolean doSelect(Store<GPServerBeanModel> store, GPServerBeanModel parent,
+            protected boolean doSelect(Store<GPServerBeanModel> store,
+                    GPServerBeanModel parent,
                     GPServerBeanModel record, String property, String filter) {
                 String serverAlias = record.getAlias().toString().toLowerCase();
                 String serverURL = record.getUrlServer().toString().toLowerCase();
-                if (serverAlias.contains(filter.toLowerCase()) || serverURL.contains(filter.toLowerCase())) {
+                if (serverAlias.contains(filter.toLowerCase()) || serverURL.contains(
+                        filter.toLowerCase())) {
                     return Boolean.TRUE;
                 }
                 return Boolean.FALSE;
@@ -162,19 +167,22 @@ public class ManageServerWidget extends Window {
         configs.add(urlColumn);
 
         checkColumn = new GPCheckColumnConfig("delete",
-                "Delete", 55, store, this.deleteServerButton);
+                                              "Delete", 55, store,
+                                              this.deleteServerButton);
         CellEditor checkBoxEditor = new CellEditor(new CheckBox());
         checkColumn.setEditor(checkBoxEditor);
         //This is very important: add checkColumn to the zero position!
         configs.add(0, checkColumn);
         final ColumnModel columnModel = new ColumnModel(configs);
-        final Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store, columnModel);
+        final Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store,
+                                                                         columnModel);
         RowEditor<GPServerBeanModel> rowEditor = new RowEditor<GPServerBeanModel>() {
             @Override
             protected void onEnter(ComponentEvent ce) {
                 System.out.println("Selected null: ");
                 System.out.println(grid.getSelectionModel().getSelectedItem());
-                Record record = store.getRecord(grid.getSelectionModel().getSelectedItem());
+                Record record = store.getRecord(
+                        grid.getSelectionModel().getSelectedItem());
                 record.reject(true);
                 super.onEnter(ce);
             }
@@ -199,7 +207,8 @@ public class ManageServerWidget extends Window {
         this.addButtonsToTheWindow(rowEditor);
     }
 
-    private void addButtonsToTheWindow(final RowEditor<GPServerBeanModel> rowEditor) {
+    private void addButtonsToTheWindow(
+            final RowEditor<GPServerBeanModel> rowEditor) {
         ToolBar toolBar = new ToolBar();
         Button addServerButton = new Button("Add Server");
         addServerButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
@@ -225,7 +234,8 @@ public class ManageServerWidget extends Window {
                 List<GPServerBeanModel> serverList = store.getModels();
                 int i = 0;
                 for (GPServerBeanModel gPServerBeanModel : serverList) {
-                    String check = checkColumn.getCheckState(gPServerBeanModel, "delete", i, 0);
+                    String check = checkColumn.getCheckState(gPServerBeanModel,
+                                                             "delete", i, 0);
                     if (check.equals("-on")) {
                         operation.deleteServer(gPServerBeanModel);
                     }
@@ -237,7 +247,8 @@ public class ManageServerWidget extends Window {
         toolBar.add(deleteServerButton);
         super.setTopComponent(toolBar);
         super.setButtonAlign(HorizontalAlignment.RIGHT);
-        super.addButton(new Button("Reset", new SelectionListener<ButtonEvent>() {
+        super.addButton(new Button("Reset",
+                                   new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
@@ -246,7 +257,8 @@ public class ManageServerWidget extends Window {
                 checkColumn.manageDeleteButton();
             }
         }));
-        super.addButton(new Button("Save", new SelectionListener<ButtonEvent>() {
+        super.addButton(new Button("Save",
+                                   new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
@@ -269,7 +281,7 @@ public class ManageServerWidget extends Window {
             this.displayServerWidget.loadServers();
         } else {
             GeoPlatformMessage.alertMessage("Warning",
-                    "There are unsaved changes, save or reset before exit.");
+                                            "There are unsaved changes, save or reset before exit.");
         }
     }
 
@@ -315,11 +327,14 @@ public class ManageServerWidget extends Window {
 
         private void deleteServer(final GPServerBeanModel server) {
             if (server.getId() != null) {
-                GeoPlatformOGCRemote.Util.getInstance().deleteServer(server.getId(), new AsyncCallback<Boolean>() {
+                GeoPlatformOGCRemote.Util.getInstance().deleteServer(
+                        server.getId(), new AsyncCallback<Boolean>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage("Error on Deleting Server",
-                                "Error " + caught.getMessage() + " on server url: " + server.get("urlServer").toString());
+                        GeoPlatformMessage.errorMessage(
+                                "Error on Deleting Server",
+                                "Error " + caught.getMessage() + " on server url: " + server.get(
+                                "urlServer").toString());
                         LayoutManager.getInstance().getStatusMap().setStatus(
                                 "Delete Server Error. " + caught.getMessage(),
                                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
@@ -330,7 +345,8 @@ public class ManageServerWidget extends Window {
                         store.remove(server);
                         checkColumn.manageDeleteButton();
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Server deleted succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
+                                "Server deleted succesfully",
+                                EnumSearchStatus.STATUS_SEARCH.toString());
                         //TODO: refresh the displayServerWidget
                         //displayServerWidget.addServer(server);
                     }
@@ -352,11 +368,16 @@ public class ManageServerWidget extends Window {
                         @Override
                         public void onFailure(Throwable caught) {
                             verifyEndOperation();
-                            if (server.getUrlServer().contains(EnumOAuth2.GEB_STRING.getValue())) {
-                                GeoPlatformMessage.infoMessage("Google sign on required", "Is necessary to sign on Google account for access the Google Earth Builder functionality");
-                                OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(EnumOAuth2.ADD_SERVER.getValue()));
+                            if (server.getUrlServer().contains(
+                                    EnumOAuth2.GEB_STRING.getValue())) {
+                                GeoPlatformMessage.infoMessage(
+                                        "Google sign on required",
+                                        "Is necessary to sign on Google account for access the Google Earth Builder functionality");
+                                OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(
+                                        EnumOAuth2.ADD_SERVER.getValue()));
                             } else {
-                                GeoPlatformMessage.errorMessage("Error on Saving Server",
+                                GeoPlatformMessage.errorMessage(
+                                        "Error on Saving Server",
                                         caught.getMessage());
                                 LayoutManager.getInstance().getStatusMap().setStatus(
                                         "Save Server Error. " + caught.getMessage(),
@@ -370,7 +391,8 @@ public class ManageServerWidget extends Window {
                             store.remove(server);
                             store.insert(serverSaved, 0);
                             LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Server added succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
+                                    "Server added succesfully",
+                                    EnumSearchStatus.STATUS_SEARCH.toString());
                         }
                     });
         }

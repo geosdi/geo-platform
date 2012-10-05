@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
@@ -55,6 +56,9 @@ import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHa
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
@@ -91,7 +95,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @Constructor @param theGridWidget
      */
     public DisplayServerWidget(GridLayersWidget theGridWidget) {
-        TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE, this);
+        TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE,
+                                         this);
         init();
         this.gridWidget = theGridWidget;
         this.manageServersWidget = new ManageServerWidget(this, true);
@@ -124,13 +129,13 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         });
 
         this.manageServersButton = new Button("Manage Servers",
-                ServerWidgetResources.ICONS.addServer(),
-                new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        manageServersWidget.show();
-                    }
-                });
+                                              ServerWidgetResources.ICONS.addServer(),
+                                              new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                manageServersWidget.show();
+            }
+        });
         this.activateManageServersButton();
     }
 
@@ -140,11 +145,12 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(new DisplayGetCapabilitiesEvent()));
+                    GPHandlerManager.fireEvent(new GPLoginEvent(
+                            new DisplayGetCapabilitiesEvent()));
                 } else {
                     manageServersButton.setEnabled(false);
                     GeoPlatformMessage.errorMessage("Error",
-                            "An error occurred while making the requested operation.\n"
+                                                    "An error occurred while making the requested operation.\n"
                             + "Verify network connections and try again."
                             + "\nIf the problem persists contact your system administrator.");
                     LayoutManager.getInstance().getStatusMap().setStatus(
@@ -211,29 +217,32 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         this.store.removeAll();
         this.comboServer.clear();
         this.gridWidget.cleanStore();
-        GeoPlatformOGCRemote.Util.getInstance().loadServers(new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                        EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
-                GeoPlatformMessage.errorMessage("Server Service",
-                        "An Error occured loading Servers.");
-            }
 
-            @Override
-            public void onSuccess(ArrayList<GPServerBeanModel> result) {
-                if (result.isEmpty()) {
-                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
-                    GeoPlatformMessage.alertMessage("Server Service",
-                            "There are no Servers.");
-                } else {
-                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                            EnumSearchServer.STATUS_MESSAGE_LOAD);
-                    store.add(result);
-                }
-            }
-        });
+        GeoPlatformOGCRemote.Util.getInstance().loadServers(
+                GPAccountLogged.getInstance().getOrganization(),
+                new AsyncCallback<ArrayList<GPServerBeanModel>>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                        EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
+                        GeoPlatformMessage.errorMessage("Server Service",
+                                                        "An Error occured loading Servers.");
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<GPServerBeanModel> result) {
+                        if (result.isEmpty()) {
+                            setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
+                                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
+                            GeoPlatformMessage.alertMessage("Server Service",
+                                                            "There are no Servers.");
+                        } else {
+                            setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                                            EnumSearchServer.STATUS_MESSAGE_LOAD);
+                            store.add(result);
+                        }
+                    }
+                });
     }
 
     public void resetComponents() {
@@ -307,7 +316,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         private GPServerBeanModel selectedServer;
 
         public PerformGetcapabilities() {
-            OAuth2HandlerManager.addHandler(IGPOAuth2CapabilitiesHandler.TYPE, this);
+            OAuth2HandlerManager.addHandler(IGPOAuth2CapabilitiesHandler.TYPE,
+                                            this);
         }
 
         private void checkSelectedServer(GPServerBeanModel selected) {
@@ -323,19 +333,25 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
         @Override
         public void loadCapabilitiesFromWS() {
-            GeoPlatformOGCRemote.Util.getInstance().getCapabilities(selectedServer.getId(),
+            GeoPlatformOGCRemote.Util.getInstance().getCapabilities(
+                    selectedServer.getId(),
                     new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
                         @Override
                         public void onFailure(Throwable caught) {
                             gridWidget.unMaskGrid();
-                            LayoutManager.getInstance().getStatusMap().clearStatus("");
+                            LayoutManager.getInstance().getStatusMap().clearStatus(
+                                    "");
 
-                            if (selectedServer.getUrlServer().contains(EnumOAuth2.GEB_STRING.getValue())) {
-                                GeoPlatformMessage.infoMessage("Google sign on required", "Is necessary to sign on Google account for access the Google Earth Builder functionality");
-                                OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(EnumOAuth2.LOAD_CAPABILITIES.getValue()));
+                            if (selectedServer.getUrlServer().contains(
+                                    EnumOAuth2.GEB_STRING.getValue())) {
+                                GeoPlatformMessage.infoMessage(
+                                        "Google sign on required",
+                                        "Is necessary to sign on Google account for access the Google Earth Builder functionality");
+                                OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(
+                                        EnumOAuth2.LOAD_CAPABILITIES.getValue()));
                             } else {
                                 GeoPlatformMessage.errorMessage("Server Service",
-                                        caught.getMessage());
+                                                                caught.getMessage());
                                 LayoutManager.getInstance().getStatusMap().setStatus(
                                         "Server Error. " + caught.getMessage(),
                                         EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
@@ -343,7 +359,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                         }
 
                         @Override
-                        public void onSuccess(ArrayList<? extends GPLayerGrid> result) {
+                        public void onSuccess(
+                                ArrayList<? extends GPLayerGrid> result) {
                             selectedServer.setLayers(result);
                             fillGrid(result);
                         }

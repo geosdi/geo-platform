@@ -58,7 +58,8 @@ import org.slf4j.LoggerFactory;
  */
 class ServerServiceImpl {
 
-    private static final Logger logger = LoggerFactory.getLogger(ServerServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            ServerServiceImpl.class);
     //
     private GPServerDAO serverDao;
     private GPOrganizationDAO organizationDao;
@@ -83,7 +84,8 @@ class ServerServiceImpl {
         /**
          * IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER *
          */
-        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(
+                server.getServerUrl());
         if (serverSearch != null) {
             return serverSearch.getId();
         }
@@ -139,8 +141,17 @@ class ServerServiceImpl {
         return new ServerDTO(server);
     }
 
-    public List<ServerDTO> getServers() {
-        List<GeoPlatformServer> found = serverDao.findAll(GPCapabilityType.WMS);
+    public List<ServerDTO> getServers(String organizationName) throws ResourceNotFoundFault {
+        GPOrganization organization = organizationDao.findByName(
+                organizationName);
+        if (organization == null) {
+            throw new ResourceNotFoundFault("Organization with name "
+                    + organizationName + "was not found.");
+        }
+
+        List<GeoPlatformServer> found = serverDao.findAll(organization.getId(),
+                                                          GPCapabilityType.WMS);
+
         return convertToServerList(found);
     }
 
@@ -179,7 +190,8 @@ class ServerServiceImpl {
 
         GPOrganization org = organizationDao.findByName(organization);
         if (org == null) {
-            throw new IllegalParameterFault("Server to save have an organization that does not exist");
+            throw new IllegalParameterFault(
+                    "Server to save have an organization that does not exist");
         }
 
         GeoPlatformServer server;

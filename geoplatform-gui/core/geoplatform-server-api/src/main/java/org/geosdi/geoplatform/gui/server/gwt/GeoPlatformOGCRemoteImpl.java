@@ -58,9 +58,9 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingRemoteServiceServle
     private IOGCService ogcService;
 
     @Override
-    public ArrayList<GPServerBeanModel> loadServers()
+    public ArrayList<GPServerBeanModel> loadServers(String organizationName)
             throws GeoPlatformException {
-        return ogcService.loadServers();
+        return ogcService.loadServers(organizationName);
     }
 
     @Override
@@ -72,19 +72,22 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingRemoteServiceServle
     @Override
     public ArrayList<? extends GPLayerGrid> getCapabilities(Long idServer)
             throws GeoPlatformException {
-        return ogcService.getCapabilities(super.getThreadLocalRequest(), idServer);
+        return ogcService.getCapabilities(super.getThreadLocalRequest(),
+                                          idServer);
     }
 
     @Override
     public GPServerBeanModel saveServer(Long id, String aliasServerName,
             String urlServer, String organization) throws GeoPlatformException {
-        return ogcService.saveServer(id, aliasServerName, urlServer, organization);
+        return ogcService.saveServer(id, aliasServerName, urlServer,
+                                     organization);
     }
 
     @Override
     public ArrayList<String> findDistinctLayersDataSource()
             throws GeoPlatformException {
-        return ogcService.findDistinctLayersDataSource(this.getThreadLocalRequest());
+        return ogcService.findDistinctLayersDataSource(
+                this.getThreadLocalRequest());
     }
 
     @Override

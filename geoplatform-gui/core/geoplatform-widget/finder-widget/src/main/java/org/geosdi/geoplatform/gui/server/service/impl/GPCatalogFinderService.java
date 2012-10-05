@@ -80,13 +80,20 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public ArrayList<GPCSWServerBeanModel> getAllCSWServers(
-            HttpServletRequest httpServletRequest) {
-        List<ServerCSWDTO> serversDTO = geoPlatformCSWClient.getAllCSWServers();
-        ArrayList<GPCSWServerBeanModel> servers = new ArrayList<GPCSWServerBeanModel>(
-                serversDTO.size());
-        for (ServerCSWDTO serverDTO : serversDTO) {
-            GPCSWServerBeanModel server = this.convertServerDTO(serverDTO);
-            servers.add(server);
+            String organizationName) throws GeoPlatformException {
+
+        ArrayList<GPCSWServerBeanModel> servers = new ArrayList<GPCSWServerBeanModel>();
+
+        try {
+            List<ServerCSWDTO> serversDTO = geoPlatformCSWClient.getAllCSWServers(
+                    organizationName);
+            for (ServerCSWDTO serverDTO : serversDTO) {
+                GPCSWServerBeanModel server = this.convertServerDTO(serverDTO);
+                servers.add(server);
+            }
+        } catch (ResourceNotFoundFault fault) {
+            logger.error("GET ALL CSW SERVERS EXCEPTION : " + fault);
+            throw new GeoPlatformException(fault);
         }
 
         return servers;
@@ -94,7 +101,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config, String searchText, HttpServletRequest httpServletRequest)
+            PagingLoadConfig config, String searchText,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
         SearchRequest srq = new SearchRequest(searchText);
@@ -110,7 +118,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             int page = start == 0 ? start : start / config.getLimit();
 
             PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                    config.getLimit(), page);
+                                                                    config.getLimit(),
+                                                                    page);
 
             List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(
                     psr);
@@ -123,16 +132,19 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<GPCSWServerBeanModel>(searchServers,
-                config.getOffset(), serversCount);
+                                                              config.getOffset(),
+                                                              serversCount);
     }
 
     @Override
-    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl, String organization,
+    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+            String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         ServerCSWDTO serverCSW = null;
         try {
-            serverCSW = geoPlatformCSWClient.saveServerCSW(alias, serverUrl, organization);
+            serverCSW = geoPlatformCSWClient.saveServerCSW(alias, serverUrl,
+                                                           organization);
         } catch (IllegalParameterFault ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
@@ -141,7 +153,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     }
 
     @Override
-    public boolean deleteServerCSW(Long serverID, HttpServletRequest httpServletRequest)
+    public boolean deleteServerCSW(Long serverID,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         try {
             geoPlatformCSWClient.deleteServerCSW(serverID);
@@ -190,7 +203,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<SummaryRecord>(searchRecords,
-                config.getOffset(), recordsCount);
+                                                       config.getOffset(),
+                                                       recordsCount);
     }
 
     @Override
@@ -199,7 +213,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
-        logger.debug("\n--------------------------\n{}\n--------------------------\n",
+        logger.debug(
+                "\n--------------------------\n{}\n--------------------------\n",
                 catalogFinder);
 
         int recordsCount;
@@ -233,7 +248,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<FullRecord>(searchRecords,
-                config.getOffset(), recordsCount);
+                                                    config.getOffset(),
+                                                    recordsCount);
     }
 
     /**
@@ -255,7 +271,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         return server;
     }
 
-    private <R extends AbstractRecord> R convertRecordDTO(R record, AbstractRecordDTO recordDTO) {
+    private <R extends AbstractRecord> R convertRecordDTO(R record,
+            AbstractRecordDTO recordDTO) {
         record.setIdentifier(recordDTO.getIdentifier());
         record.setTitle(recordDTO.getTitle());
         record.setCatalogURL(recordDTO.getCatalogURL());
@@ -266,12 +283,14 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         return record;
     }
 
-    private SummaryRecord convertSummaryRecordDTO(SummaryRecordDTO summaryRecordDTO) {
+    private SummaryRecord convertSummaryRecordDTO(
+            SummaryRecordDTO summaryRecordDTO) {
         return this.convertRecordDTO(new SummaryRecord(), summaryRecordDTO);
     }
 
     private FullRecord convertFullRecordDTO(FullRecordDTO fullRecordDTO) {
-        FullRecord fullRecord = this.convertRecordDTO(new FullRecord(), fullRecordDTO);
+        FullRecord fullRecord = this.convertRecordDTO(new FullRecord(),
+                                                      fullRecordDTO);
 
         fullRecord.setBBox(this.convertBBoxDTO(fullRecordDTO.getBBox()));
         fullRecord.setCrs(fullRecordDTO.getCrs());

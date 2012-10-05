@@ -81,7 +81,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      *
      * @throws GeoPlatformException
      */
-    public ArrayList<GPServerBeanModel> loadServers()
+    public ArrayList<GPServerBeanModel> loadServers(String organizationName)
             throws GeoPlatformException;
 
     /**

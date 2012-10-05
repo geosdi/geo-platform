@@ -47,8 +47,8 @@ import org.slf4j.LoggerFactory;
  */
 public class GPCatalogClient {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     private String geoNetworkServiceURL;
     private String geoNetworkUsername;
     private String geoNetworkPassword;
@@ -68,9 +68,10 @@ public class GPCatalogClient {
         boolean logged = client.login(geoNetworkUsername, geoNetworkPassword);
 
         if (!logged) {
-            throw new GPCatalogLoginException("Could not log in to GeoNetwork service");
+            logger.error("Could not login to GeoNetwork service");
+            throw new GPCatalogLoginException("Could not login to GeoNetwork service");
         }
-        
+
         return client;
     }
 

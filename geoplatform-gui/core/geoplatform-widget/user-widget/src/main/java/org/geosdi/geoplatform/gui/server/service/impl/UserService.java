@@ -106,7 +106,7 @@ public class UserService implements IUserService {
             throw new GeoPlatformException(rnnf.getMessage()); // TODO Better message
         }
 
-        ArrayList<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
+        List<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
         for (UserDTO userDTO : userList) {
             GPUserManageDetail userDetail = this.dtoUserConverter.convertToGPUserManageDetail(userDTO);
             searchUsers.add(userDetail);

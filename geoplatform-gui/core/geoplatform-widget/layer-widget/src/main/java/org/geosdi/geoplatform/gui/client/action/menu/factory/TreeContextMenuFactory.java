@@ -57,6 +57,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
 import org.geosdi.geoplatform.gui.client.widget.contextmenu.GPCQLFilterMenu;
 import org.geosdi.geoplatform.gui.client.widget.contextmenu.GPExportMenu;
+import org.geosdi.geoplatform.gui.client.widget.contextmenu.GPTimeFilterMenu;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -156,6 +157,11 @@ public class TreeContextMenuFactory {
             cqlFilterMenuItem.setText("CQL Filter");
             cqlFilterMenuItem.setSubMenu(new GPCQLFilterMenu(treePanel));
             layerContextMenu.add(cqlFilterMenuItem);
+            
+            MenuItem timeFilterMenuItem = new MenuItem();
+            timeFilterMenuItem.setText("TIME Filter");
+            timeFilterMenuItem.setSubMenu(new GPTimeFilterMenu(treePanel));
+            layerContextMenu.add(timeFilterMenuItem);
 
             MenuItem layerProperties = new MenuItem();
             layerProperties.setText("Layer Properties");

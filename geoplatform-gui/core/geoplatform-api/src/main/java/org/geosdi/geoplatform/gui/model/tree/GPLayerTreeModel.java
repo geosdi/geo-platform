@@ -81,6 +81,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     private GPLayerType layerType;
     private ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
     private String cqlFilter;
+    private String timeFilter;
     protected IGPLayerTreeState state;
     //
     private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
@@ -99,6 +100,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
         this.bbox = layer.getBbox();
         this.layerType = layer.getLayerType();
         this.setCqlFilter(layer.getCqlFilter());
+        this.setTimeFilter(layer.getTimeFilter());
     }
 
     /**
@@ -253,6 +255,16 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     public void setCqlFilter(String cqlFilter) {
         this.cqlFilter = cqlFilter;
     }
+
+    public String getTimeFilter() {
+        return timeFilter;
+    }
+
+    public void setTimeFilter(String timeFilter) {
+        this.timeFilter = timeFilter;
+    }
+    
+    
 
     @Override
     public void setId(Long id) {

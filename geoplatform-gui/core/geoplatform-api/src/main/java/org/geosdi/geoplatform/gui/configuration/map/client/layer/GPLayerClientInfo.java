@@ -59,6 +59,7 @@ public abstract class GPLayerClientInfo implements Serializable,
     private GPLayerType layerType;
     private int zIndex;
     private String cqlFilter;
+    private String timeFilter;
     private boolean checked;
 
     /**
@@ -233,6 +234,16 @@ public abstract class GPLayerClientInfo implements Serializable,
     public void setCqlFilter(String cqlFilter) {
         this.cqlFilter = cqlFilter;
     }
+
+    public String getTimeFilter() {
+        return timeFilter;
+    }
+
+    public void setTimeFilter(String timeFilter) {
+        this.timeFilter = timeFilter;
+    }
+    
+    
 
     /**
      * (non-Javadoc)

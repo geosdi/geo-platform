@@ -401,6 +401,7 @@ class LayerServiceImpl {
                 raster.setOpacity(layerProperties.getOpacity());
                 raster.setStyles(layerProperties.getStyleList());
                 raster.setCqlFilter(layerProperties.getCqlFilter());
+                raster.setTimeFilter(layerProperties.getTimeFilter());
             } catch (IllegalArgumentException iae) {
                 throw new IllegalParameterFault(iae.getMessage());
             }

@@ -80,6 +80,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     private GPLayerType layerType;
     private ArrayList<GPStyleStringBeanModel> styles;
     private String cqlFilter;
+    private String timeFilter;
 
     /**
      * @return the id
@@ -259,6 +260,14 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     @Override
     public String getCqlFilter() {
         return cqlFilter;
+    }
+
+    public String getTimeFilter() {
+        return timeFilter;
+    }
+
+    public void setTimeFilter(String timeFilter) {
+        this.timeFilter = timeFilter;
     }
 
     @Override

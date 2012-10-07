@@ -51,6 +51,7 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
     private static final long serialVersionUID = 2399513531544205577L;
     private float opacity;
     private String cqlFilter;
+    private String timeFilter;
     private ArrayList<GPStyleStringBeanModel> styleList;
 
     public MementoLayerOriginalProperties() {
@@ -68,6 +69,7 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
         if (super.getRefBaseElement() instanceof RasterTreeNode) {
             opacity = ((RasterTreeNode) super.getRefBaseElement()).getOpacity();
             cqlFilter = ((RasterTreeNode) super.getRefBaseElement()).getCqlFilter();
+            timeFilter = ((RasterTreeNode) super.getRefBaseElement()).getTimeFilter();
         }
     }
 
@@ -107,6 +109,14 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
         this.cqlFilter = cqlFilter;
     }
 
+    public String getTimeFilter() {
+        return timeFilter;
+    }
+
+    public void setTimeFilter(String timeFilter) {
+        this.timeFilter = timeFilter;
+    }
+
     @Override
     public boolean isChanged() {
         boolean condition = false;
@@ -120,7 +130,8 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
         return (super.getRefBaseElement() instanceof RasterTreeNode
                 && ((RasterTreeNode) super.getRefBaseElement()).getOpacity() != this.getOpacity()
                 || !((RasterTreeNode) super.getRefBaseElement()).getStyles().equals(this.getStyleList())
-                || !cqlFilter.equalsIgnoreCase(super.getRefBaseElement().getCqlFilter()));
+                || !cqlFilter.equalsIgnoreCase(super.getRefBaseElement().getCqlFilter())
+                || !timeFilter.equalsIgnoreCase(super.getRefBaseElement().getTimeFilter()));
     }
 
     private boolean isBaseChanged() {
@@ -142,6 +153,7 @@ public class MementoLayerOriginalProperties extends AbstractMementoOriginalPrope
                 this.setOpacity(raster.getOpacity());
                 this.setStyleList(raster.getStyles());
                 this.setCqlFilter(raster.getCqlFilter());
+                this.setTimeFilter(raster.getTimeFilter());
 //                System.out.println("Opacity setted: " + memento.getOpacity());
             }
             super.setRefBaseElement(layer);

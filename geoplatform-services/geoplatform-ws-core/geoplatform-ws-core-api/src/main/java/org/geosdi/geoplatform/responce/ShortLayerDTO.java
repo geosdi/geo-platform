@@ -55,7 +55,7 @@ import org.geosdi.geoplatform.core.model.GPProject;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id", "name", "position", "shared", "checked", "title",
     "alias", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached",
-    "cqlFilter"})
+    "cqlFilter", "timeFilter"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
@@ -68,6 +68,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     private GPBBox bbox;
     private Boolean cached;
     private String cqlFilter;
+    private String timeFilter;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -92,6 +93,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
         this.bbox = layer.getBbox();
         this.cached = layer.isCached();
         this.cqlFilter = layer.getCqlFilter();
+        this.timeFilter = layer.getTimeFilter();
     }
     //</editor-fold>
 
@@ -162,6 +164,14 @@ public class ShortLayerDTO extends AbstractElementDTO {
 
     public void setCqlFilter(String cqlFilter) {
         this.cqlFilter = cqlFilter;
+    }
+
+    public String getTimeFilter() {
+        return timeFilter;
+    }
+
+    public void setTimeFilter(String timeFilter) {
+        this.timeFilter = timeFilter;
     }
 
     /**
@@ -238,6 +248,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
                 + ", srs=" + srs
                 + ", abstractText=" + abstractText
                 + ", cqlFilter=" + cqlFilter
+                + ", timeFilter=" + timeFilter
                 + ", layerType=" + layerType
                 + ", " + bbox
                 + ", cached=" + cached;
@@ -276,6 +287,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
         layer.setLayerType(layerDTO.getLayerType());
         layer.setBbox(layerDTO.getBbox());
         layer.setCqlFilter(layerDTO.getCqlFilter());
+        layer.setTimeFilter(layerDTO.getTimeFilter());
         if (layerDTO.isCached() != null) {
             layer.setCached(layerDTO.isCached());
         }

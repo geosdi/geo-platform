@@ -256,10 +256,12 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
         this.cqlFilter = cqlFilter;
     }
 
+    @Override
     public String getTimeFilter() {
         return timeFilter;
     }
 
+    @Override
     public void setTimeFilter(String timeFilter) {
         this.timeFilter = timeFilter;
     }

@@ -140,6 +140,7 @@ public class DTOLayerConverter {
         dto.setId(memento.getIdBaseElement());
         dto.setOpacity(memento.getOpacity());
         dto.setCqlFilter(memento.getCqlFilter());
+        dto.setTimeFilter(memento.getTimeFilter());
         List<String> styleList = Lists.newArrayList();
         if (memento.getStyleList() != null) {
             for (GPStyleStringBeanModel beanModel : memento.getStyleList()) {
@@ -185,6 +186,7 @@ public class DTOLayerConverter {
         layer.setTitle(layerDTO.getTitle());
         layer.setAlias(layerDTO.getAlias());
         layer.setCqlFilter(layerDTO.getCqlFilter());
+        layer.setTimeFilter(layerDTO.getTimeFilter());
         // layer.setzIndex(layerDTO.getPosition());
     }
 

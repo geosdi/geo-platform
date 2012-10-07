@@ -86,6 +86,11 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
         if (cqlFilter != null && !cqlFilter.equals("")) {
             wmsParams.setCQLFilter(rasterBean.getCqlFilter());
         }
+        
+        final String timeFilter = rasterBean.getTimeFilter();
+        if (timeFilter != null && !timeFilter.equals("")) {
+            wmsParams.setTimeFilter(rasterBean.getTimeFilter());
+        }
 
         WMSOptions wmsOption = new WMSOptions();
         Bounds bbox = this.generateBoundsTransformationFromMap(rasterBean);

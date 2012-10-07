@@ -96,6 +96,9 @@ public abstract class GPLayer implements Serializable {
     @Column(name = "cql_filter", columnDefinition = "TEXT")
     private String cqlFilter;
     //
+    @Column(name = "time_filter", columnDefinition = "TEXT")
+    private String timeFilter;
+    //
     @Embedded
     private GPBBox bbox;
     //
@@ -185,6 +188,14 @@ public abstract class GPLayer implements Serializable {
 
     public void setCqlFilter(String cqlFilter) {
         this.cqlFilter = cqlFilter;
+    }
+
+    public String getTimeFilter() {
+        return timeFilter;
+    }
+
+    public void setTimeFilter(String timeFilter) {
+        this.timeFilter = timeFilter;
     }
 
     /**
@@ -335,6 +346,7 @@ public abstract class GPLayer implements Serializable {
         str.append(", shared=").append(shared);
         str.append(", cached=").append(cached);
         str.append(", cqlFilter=").append(cqlFilter);
+        str.append(", timeFilter=").append(timeFilter);
         if (this.getFolder() != null) {
             str.append(", folder.name=").append(this.getFolder().getName());
             str.append("(id=").append(this.getFolder().getId()).append(")");

@@ -371,6 +371,16 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     public void setCqlFilter(String cqlFilter) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    @Override
+    public String getTimeFilter() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setTimeFilter(String timeFilter) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     @Override
     public String getUUID() {

@@ -59,6 +59,7 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
     private String alias;
     private Boolean checked;
     private String cqlFilter;
+    private String timeFilter;
 
     public ShortLayerPropertiesDTO() {
     }
@@ -103,6 +104,14 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
 
     public void setCqlFilter(String cqlFilter) {
         this.cqlFilter = cqlFilter;
+    }
+
+    public String getTimeFilter() {
+        return timeFilter;
+    }
+
+    public void setTimeFilter(String timeFilter) {
+        this.timeFilter = timeFilter;
     }
 
     /**

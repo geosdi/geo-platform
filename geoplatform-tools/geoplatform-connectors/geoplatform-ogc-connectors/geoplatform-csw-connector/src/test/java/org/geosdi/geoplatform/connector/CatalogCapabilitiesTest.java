@@ -38,10 +38,13 @@ package org.geosdi.geoplatform.connector;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
+import org.geosdi.geoplatform.xml.ows.v100.DomainType;
+import org.geosdi.geoplatform.xml.ows.v100.Operation;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -163,9 +166,26 @@ public class CatalogCapabilitiesTest {
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
 
         CapabilitiesType response = request.getResponse();
-
         logger.info("CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
-                response.getVersion());
+                    response.getVersion());
+
+        List<Operation> operationList = response.getOperationsMetadata().getOperation();
+        for (Operation operation : operationList) {
+            String operationName = operation.getName();
+            if ("GetRecordById".equals(operationName)) {
+                List<DomainType> parameterList = operation.getParameter();
+                for (DomainType parameter : parameterList) {
+                    String parameterName = parameter.getName();
+                    if ("outputSchema".equals(parameterName)) {
+                        List<String> valueList = parameter.getValue();
+                        logger.info("\n########################### outputSchema");
+                        for (String value : valueList) {
+                            logger.info("\n*** {}", value);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Ignore("Require to add the SNIPC certificate into default keystore")
@@ -174,7 +194,7 @@ public class CatalogCapabilitiesTest {
         GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(new URL(snipcUrl)).withClientSecurity(
                 new BasicPreemptiveSecurityConnector(snipcUsername,
-                snipcPassword)).build();
+                                                     snipcPassword)).build();
 
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
 

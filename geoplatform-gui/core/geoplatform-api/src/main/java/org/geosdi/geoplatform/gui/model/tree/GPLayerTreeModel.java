@@ -115,7 +115,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
      * @param title the title to set
      */
     @Override
-    public void setTitle(String title) {
+    public final void setTitle(String title) {
         this.title = title;
         super.set(GPLayerKeyValue.TITLE.toString(), this.title);
     }
@@ -158,7 +158,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
      * @param alias the alias to set
      */
     @Override
-    public void setAlias(String alias) {
+    public final void setAlias(String alias) {
         this.alias = alias;
         super.set(GPLayerKeyValue.ALIAS.toString(), this.alias);
     }
@@ -175,7 +175,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
      * @param abstractText the abstractText to set
      */
     @Override
-    public void setAbstractText(String abstractText) {
+    public final void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
         super.set(GPLayerKeyValue.ABSTRACT.toString(),
                 this.abstractText != null ? this.abstractText : "");
@@ -193,7 +193,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
      * @param dataSource the dataSource to set
      */
     @Override
-    public void setDataSource(String dataSource) {
+    public final void setDataSource(String dataSource) {
         this.dataSource = dataSource;
         super.set(GPLayerKeyValue.SERVER.toString(), this.dataSource);
     }
@@ -265,8 +265,6 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     public void setTimeFilter(String timeFilter) {
         this.timeFilter = timeFilter;
     }
-    
-    
 
     @Override
     public void setId(Long id) {

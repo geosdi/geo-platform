@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.factory.map;
 
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.layer.*;
 
@@ -75,8 +76,8 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
 
         defaultMapOptions.setNumZoomLevels(25);
 
-        defaultMapOptions.setProjection("EPSG:3857");
-        defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
+        defaultMapOptions.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        defaultMapOptions.setDisplayProjection(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()));
         defaultMapOptions.setUnits(MapUnits.METERS);
 
         defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,

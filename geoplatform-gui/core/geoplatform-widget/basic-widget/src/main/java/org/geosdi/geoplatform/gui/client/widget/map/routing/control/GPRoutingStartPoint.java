@@ -48,11 +48,12 @@ import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GPRoutingStartPoint extends GenericRoutingPoint implements
         StartRoutingPointEventHandler, RemoveStartRoutingPointEventHandler {
@@ -61,17 +62,17 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
      * @param theLayer
      */
     public GPRoutingStartPoint(Vector theLayer,
-                               GeoPlatformBoxesWidget boxesWidget, GeoPlatformMap geoPlatformMap) {
+            GeoPlatformBoxesWidget boxesWidget, GeoPlatformMap geoPlatformMap) {
         super(theLayer, boxesWidget, geoPlatformMap);
 
         RoutingHandlerManager.addHandler(StartRoutingPointEventHandler.TYPE,
-                                         this);
+                this);
         RoutingHandlerManager.addHandler(
                 RemoveStartRoutingPointEventHandler.TYPE, this);
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void setIconStyle() {
@@ -81,16 +82,17 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.StartRoutingPointEventHandler#drawFeature(org.geosdi.geoplatform.gui.model.IGeoPlatformLocation)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.puregwt.routing.event.StartRoutingPointEventHandler#drawFeature(org.geosdi.geoplatform.gui.model.IGeoPlatformLocation)
      */
     @Override
     public void drawFeature(IGeoPlatformLocation location) {
         LonLat ll = new LonLat(location.getLon(), location.getLat());
-        ll.transform("EPSG:4326", geoPlatformMap.getMap().getProjection());
+        ll.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), geoPlatformMap.getMap().getProjection());
         if (!this.boxesWidget.containsLonLat(ll)) {
             GeoPlatformMessage.errorMessage("GeoPlatform Routing",
-                                            "The chosen location is out of Range.");
+                    "The chosen location is out of Range.");
             return;
         }
 
@@ -106,8 +108,9 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveStartRoutingPointEventHandler#removePoint()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveStartRoutingPointEventHandler#removePoint()
      */
     @Override
     public void removePoint() {

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
-import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
 
 /**
  * @author giuseppe
@@ -208,8 +207,6 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     public void setGeometryType(String geometryType) {
         this.geometryType = geometryType;
     }
-    
-    
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()

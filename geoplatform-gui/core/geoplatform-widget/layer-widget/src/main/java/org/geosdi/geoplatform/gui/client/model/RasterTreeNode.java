@@ -101,7 +101,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      * @param opacity the opacity to set
      */
     @Override
-    public void setOpacity(float opacity) {
+    public final void setOpacity(float opacity) {
         this.opacity = opacity;
         set(GPRasterKeyValue.OPACITY.toString(), this.opacity);
     }
@@ -133,6 +133,12 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     public void setCqlFilter(String cqlFilter) {
         super.setCqlFilter(cqlFilter);
         this.getState().setCqlFilter(cqlFilter, this);
+    }
+
+    @Override
+    public void setTimeFilter(String timeFilter) {
+        super.setTimeFilter(timeFilter);
+        this.getState().setTimeFilter(timeFilter, this);
     }
 
     @Override

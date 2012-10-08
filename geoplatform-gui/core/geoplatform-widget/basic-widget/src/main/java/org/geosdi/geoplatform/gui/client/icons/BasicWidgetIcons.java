@@ -118,4 +118,7 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("viewport.png")
     AbstractImagePrototype viewport();
+
+    @Resource("wps_add.png")
+    AbstractImagePrototype wpsAdd();
 }

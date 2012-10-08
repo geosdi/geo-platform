@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
 
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
 import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
@@ -48,7 +49,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GPRoutingLine extends GPRoutingControl implements
         TraceRoutingLineEventHandler {
@@ -60,13 +61,14 @@ public class GPRoutingLine extends GPRoutingControl implements
         super(theLayer, geoPlatformMap);
 
         RoutingHandlerManager.addHandler(TraceRoutingLineEventHandler.TYPE,
-                                         this);
+                this);
     }
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle()
      */
     @Override
     public void createStyle() {
@@ -77,8 +79,9 @@ public class GPRoutingLine extends GPRoutingControl implements
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.TraceRoutingLineEventHandler#drawLine(java.lang.String)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.puregwt.routing.event.TraceRoutingLineEventHandler#drawLine(java.lang.String)
      */
     @Override
     public void drawLine(String wkt) {
@@ -88,8 +91,8 @@ public class GPRoutingLine extends GPRoutingControl implements
 
         MultiLineString geometry = MultiLineString.narrowToMultiLineString(Geometry.fromWKT(wkt).getJSObject());
 
-        geometry.transform(new Projection("EPSG:4326"), new Projection(
-                geoPlatformMap.getMap().getProjection()));
+        geometry.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()),
+                new Projection(geoPlatformMap.getMap().getProjection()));
 
         this.feature = new VectorFeature(geometry);
         this.feature.setStyle(style);

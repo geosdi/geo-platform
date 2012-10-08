@@ -142,6 +142,9 @@ public interface LayerIcons extends ImageBundle {
     @Resource("filter_layer.png")
     AbstractImagePrototype cqlFilterLayerIcon();
 
+    @Resource("time_filter.png")
+    AbstractImagePrototype timeFilterLayerIcon();
+
     @Resource("refresh_layer_cql.png")
     AbstractImagePrototype refreshCqlLayerIcon();
 

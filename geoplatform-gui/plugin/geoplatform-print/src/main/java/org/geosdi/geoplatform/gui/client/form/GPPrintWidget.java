@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.gui.client.model.Scale;
 import org.geosdi.geoplatform.gui.client.utility.LayerComparable;
 import org.geosdi.geoplatform.gui.client.utility.PrintUtility;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -110,8 +111,9 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
             LonLat center = new LonLat(lon, lat);
             if (GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection().equals(
-                    "EPSG:3857")) {
-                center.transform("EPSG:900913", "EPSG:4326");
+                    GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+                center.transform(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode(),
+                        GPCoordinateReferenceSystem.WGS_84.getCode());
             }
 
             Double scaleDouble = new Double(
@@ -180,16 +182,16 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     public void addFieldsBinding() {
         this.formBinding.addFieldBinding(
                 new PrintTitleFieldBinding(title,
-                                           GPPrintEnumBean.GPPRINT_TITLE.toString()));
+                GPPrintEnumBean.GPPRINT_TITLE.toString()));
         this.formBinding.addFieldBinding(
                 new MapTitleFieldBinding(mapTitle,
-                                         GPPrintEnumBean.GPPRINT_MAP_TITLE.toString()));
+                GPPrintEnumBean.GPPRINT_MAP_TITLE.toString()));
         this.formBinding.addFieldBinding(
                 new MapCommentFieldBinding(comments,
-                                           GPPrintEnumBean.GPPRINT_COMMENTS.toString()));
+                GPPrintEnumBean.GPPRINT_COMMENTS.toString()));
         this.formBinding.addFieldBinding(
                 new GPComboBoxFieldBinding(comboDPI,
-                                           GPPrintEnumBean.GPPRINT_DPI.toString()));
+                GPPrintEnumBean.GPPRINT_DPI.toString()));
     }
 
     @Override
@@ -310,22 +312,22 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
         print = new Button("Print", PrintResources.ICONS.print(),
-                           new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                execute();
-            }
-        });
+                new SelectionListener<ButtonEvent>() {
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        execute();
+                    }
+                });
 
         this.formPanel.addButton(print);
 
         this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
-                                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                hide();
-            }
-        });
+                new SelectionListener<ButtonEvent>() {
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        hide();
+                    }
+                });
 
         this.formPanel.addButton(cancel);
     }

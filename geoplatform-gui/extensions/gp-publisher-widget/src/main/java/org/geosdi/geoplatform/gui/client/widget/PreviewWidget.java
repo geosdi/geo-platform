@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import org.geosdi.geoplatform.gui.client.widget.form.GPMapPreviewWidget;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
@@ -52,8 +53,8 @@ public class PreviewWidget extends GPMapPreviewWidget {
     public MapOptions createMapPreviewOption() {
         MapOptions defaultMapOptions = new MapOptions();
         defaultMapOptions.setNumZoomLevels(18);
-        defaultMapOptions.setProjection("EPSG:3857");
-        defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
+        defaultMapOptions.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        defaultMapOptions.setDisplayProjection(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()));
         defaultMapOptions.setUnits(MapUnits.METERS);
         defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
                 20037508, 20037508.34));

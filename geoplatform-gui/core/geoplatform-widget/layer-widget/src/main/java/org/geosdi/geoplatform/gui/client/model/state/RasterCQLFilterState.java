@@ -54,7 +54,7 @@ public class RasterCQLFilterState implements IGPLayerTreeState {
 
     @Override
     public void setCqlFilter(String cqlFilter, GPLayerTreeModel layer) {
-        if (cqlFilter != null && cqlFilter.isEmpty()) {
+        if (cqlFilter == null || cqlFilter.isEmpty()) {
             layer.setState(LayerStateEnum.RASTER_NO_OP.getValue());
         }
     }
@@ -63,6 +63,13 @@ public class RasterCQLFilterState implements IGPLayerTreeState {
     public void setRefreshTime(int refreshTime, GPLayerTreeModel layer) {
         if (refreshTime != LayerRefreshTimeEnum.NO_REFRESH.getValue()) {
             layer.setState(LayerStateEnum.RASTER_CQL_REFRESH.getValue());
+        }
+    }
+
+    @Override
+    public void setTimeFilter(String timeFilter, GPLayerTreeModel layer) {
+        if (timeFilter != null && !timeFilter.isEmpty()) {
+            layer.setState(LayerStateEnum.RASTER_CQL_TIME.getValue());
         }
     }
 }

@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureO
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.style.VectorFeatureStyle;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Map;
@@ -131,13 +132,13 @@ public class MapControlManager {
     public void drawFeatureOnMap(String wkt) {
         MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
                 wkt).getJSObject());
-        geom.transform(new Projection("EPSG:4326"), new Projection(
-                "EPSG:900913"));
+        geom.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()), new Projection(
+                GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
         VectorFeature vectorFeature = new VectorFeature(geom);
         this.vector.addFeature(vectorFeature);
         this.map.zoomToExtent(geom.getBounds());
 
-        Projection projection = new Projection("EPSG:4326");
+        Projection projection = new Projection(GPCoordinateReferenceSystem.WGS_84.getCode());
         Projection mapProjection = new Projection(map.getProjection());
         Bounds mapBounds = this.map.getExtent().transform(mapProjection, projection);
         BBoxClientInfo bbox = ViewportUtility.generateBBOXFromBounds(mapBounds);

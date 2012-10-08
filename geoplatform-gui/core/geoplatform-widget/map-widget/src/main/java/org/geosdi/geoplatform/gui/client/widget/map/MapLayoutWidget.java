@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidg
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -76,9 +77,6 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler {
 
     public final static int NUM_ZOOM_LEVEL = 30;
-    public final static String EPSG_4326 = "EPSG:4326";
-    private final static String EPSG_3857 = "EPSG:3857";
-    private final static String EPSG_GOOGLE = "EPSG:900913";
     private MapWidget mapWidget;
     private MapOptions mapOptions;
     private MapControlManager mapControl;
@@ -107,7 +105,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void setBaseMapOptions() {
         this.mapOptions = new MapOptions();
         this.mapOptions.setNumZoomLevels(MapLayoutWidget.NUM_ZOOM_LEVEL);
-        this.mapOptions.setDisplayProjection(new Projection(EPSG_4326));
+        this.mapOptions.setDisplayProjection(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()));
         IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         String baseLayerKey = accountDetail.getBaseLayer();
         GPBaseLayer baseLayer;
@@ -118,7 +116,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             accountDetail.setBaseLayer(baseLayer.getBaseLayerEnumName().toString());
 //            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
         }
-        if (baseLayer.getProjection().getProjectionCode().equals(EPSG_4326)) {
+        if (baseLayer.getProjection().getProjectionCode().equals(GPCoordinateReferenceSystem.WGS_84.getCode())) {
             set4326MapOptions();
         } else {
             set3857MapOptions();
@@ -160,10 +158,10 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.map.addLayer(baseLayer.getGwtOlBaseLayer());
         baseLayer.getGwtOlBaseLayer().setZIndex(-1);
         this.mapControl = new MapControlManager(this.map);
-        
+
         this.map.setOptions(this.mapOptions);
         System.out.println("Map Projection " + this.map.getProjection());
-        
+
     }
 
     public void addMeasureControl() {
@@ -260,8 +258,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             ViewportUtility.gotoViewportLocation(map, viewport);
         } else {
             LonLat center = new LonLat(13.375, 42.329);
-            if (map.getProjection().equals(EPSG_3857)) {
-                center.transform(EPSG_4326, EPSG_GOOGLE);
+            if (map.getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+                center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
+                        GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
             }
             float zoomLevel = 5;
             this.map.setCenter(center, (int) zoomLevel);
@@ -503,9 +502,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         if (!map.getProjection().equals(crs)) {
             System.out.println(">> Changed projection from: " + crs
                     + ", to: " + map.getProjection());
-            if (map.getProjection().equals(EPSG_3857)) {
+            if (map.getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
                 b.transform(new Projection(crs),
-                        new Projection(EPSG_GOOGLE));
+                        new Projection(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
             }
         }
 
@@ -533,18 +532,22 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         if (!gpBaseLayer.getGwtOlBaseLayer().getName().equals(map.getBaseLayer().getName())) {
             int zoomLevel = this.map.getZoom();
             double scale = this.map.getScale();
-            
+
             Bounds bounds = this.map.getExtent();
             boolean projectionChanged = Boolean.FALSE;
-            if (gpBaseLayer.getProjection().getProjectionCode().equals(EPSG_4326)
-                    && !this.map.getProjection().equals(EPSG_4326)) {
+            if (gpBaseLayer.getProjection().getProjectionCode().equals(
+                    GPCoordinateReferenceSystem.WGS_84.getCode())
+                    && !this.map.getProjection().equals(GPCoordinateReferenceSystem.WGS_84.getCode())) {
                 this.set4326MapOptions();
-                bounds.transform(new Projection(EPSG_GOOGLE), new Projection(EPSG_4326));
+                bounds.transform(new Projection(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()),
+                        new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()));
                 projectionChanged = Boolean.TRUE;
-            } else if (gpBaseLayer.getProjection().getProjectionCode().equals(EPSG_3857)
-                    && !this.map.getProjection().equals(EPSG_3857)) {
+            } else if (gpBaseLayer.getProjection().getProjectionCode().equals(
+                    GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())
+                    && !this.map.getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
                 this.set3857MapOptions();
-                bounds.transform(new Projection(EPSG_4326), new Projection(EPSG_GOOGLE));
+                bounds.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()),
+                        new Projection(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
                 projectionChanged = Boolean.TRUE;
             }
             Layer newBaseLayer = gpBaseLayer.getGwtOlBaseLayer();

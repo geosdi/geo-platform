@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.inject.Provider;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
@@ -56,7 +57,7 @@ public class LonLatItalyProvider implements Provider<LonLat> {
     @Override
     public LonLat get() {
         LonLat italy = new LonLat(13.375, 42.329);
-        italy.transform("EPSG:4326", mapWidget.getMap().getProjection());
+        italy.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), mapWidget.getMap().getProjection());
 
         return italy;
     }

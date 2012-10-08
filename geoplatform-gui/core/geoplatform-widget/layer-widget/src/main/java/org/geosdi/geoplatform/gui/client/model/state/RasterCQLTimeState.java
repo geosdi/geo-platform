@@ -33,36 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.baselayer.factory.adapater;
+package org.geosdi.geoplatform.gui.client.model.state;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
-import org.gwtopenmaps.openlayers.client.Projection;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class GPBaseLayerProjectionAdapter {
+public class RasterCQLTimeState implements IGPLayerTreeState {
 
-    protected static Projection adaptBaseLayerProjection(BaseLayerValue key) {
-        switch (key) {
-            case OPEN_STREET_MAP:
-            case GOOGLE_NORMAL:
-            case GOOGLE_HYBRID:
-            case BING_ROAD_LAYER:
-            case BING_HYBRID:
-            case BING_AERIAL:
-                return new Projection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+    @Override
+    public AbstractImagePrototype getIcon() {
+        return LayerResources.ICONS.refreshCqlLayerIcon();
+    }
 
-            case METACARTA:
-            case GEOSDI_BASE:
-            case GEOSDI_NULL_BASE:
-                return new Projection(GPCoordinateReferenceSystem.WGS_84.getCode());
+    @Override
+    public void setCqlFilter(String cqlFilter, GPLayerTreeModel layer) {
+        if (cqlFilter == null || cqlFilter.isEmpty()) {
+            layer.setState(LayerStateEnum.RASTER_TIME_FILTER.getValue());
+        }
+    }
 
-            default:
-                return new Projection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+    @Override
+    public void setRefreshTime(int refreshTime, GPLayerTreeModel layer) {
+        if (refreshTime != LayerRefreshTimeValue.NO_REFRESH_VALUE) {
+            layer.setState(LayerStateEnum.RASTER_TIME_CQL_REFRESH.getValue());
+        }
+    }
+
+    @Override
+    public void setTimeFilter(String timeFilter, GPLayerTreeModel layer) {
+        if (timeFilter == null || timeFilter.isEmpty()) {
+            layer.setState(LayerStateEnum.RASTER_CQL_FILTER.getValue());
         }
     }
 }

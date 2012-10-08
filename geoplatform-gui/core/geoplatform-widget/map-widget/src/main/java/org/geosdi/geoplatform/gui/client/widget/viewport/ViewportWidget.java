@@ -43,8 +43,8 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.CreateViewportHandler;
@@ -138,7 +138,7 @@ public class ViewportWidget extends GeoPlatformWindow implements CreateViewportH
     public void onCreateViewport(List<GPLayerBean> layerList, String viewportName) {
         Bounds bounds = ViewportUtility.calculateMaxBound(layerList, map);
 
-        Projection currentProjection = new Projection(MapLayoutWidget.EPSG_4326);
+        Projection currentProjection = new Projection(GPCoordinateReferenceSystem.WGS_84.getCode());
         Projection destinationProjection = new Projection(map.getProjection());
         bounds.transform(currentProjection, destinationProjection);
 

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.feature;
 
-import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 

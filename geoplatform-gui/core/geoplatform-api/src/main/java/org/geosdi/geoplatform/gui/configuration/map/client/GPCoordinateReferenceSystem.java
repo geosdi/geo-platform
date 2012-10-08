@@ -38,12 +38,13 @@ package org.geosdi.geoplatform.gui.configuration.map.client;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public enum GPCoordinateReferenceSystem {
 
     WGS_84("EPSG:4326"),
-    GOOGLE_MERCATOR("EPSG:3857");
+    GOOGLE_MERCATOR("EPSG:3857"),
+    EPSG_GOOGLE("EPSG:900913");
     //
     private String code;
 

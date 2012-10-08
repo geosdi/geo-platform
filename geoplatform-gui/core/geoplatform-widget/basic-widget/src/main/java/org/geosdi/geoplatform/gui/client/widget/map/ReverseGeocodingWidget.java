@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.Rever
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.ReverseGeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.template.PopupTemplate;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 import org.geosdi.geoplatform.gui.puregwt.GPToolbarActionHandlerManager;
@@ -51,16 +51,18 @@ import org.gwtopenmaps.openlayers.client.event.MapClickListener;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
- * 
+ *
  */
 public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
     protected GeoPlatformMap mapWidget;
     protected ReverseGeocodingDispatch dispatcher;
-    /** TODO : Think a way to have this in configuration **/
+    /**
+     * TODO : Think a way to have this in configuration *
+     */
     private ReverseGeocodingVectorMarker rGMarker; //new ReverseGeocodingMarker();
     private PopupMapWidget popupWidget = new PopupMapWidget("GP-Reverse-GeoCoder-Popup");
     private MapClickListener listener;
@@ -68,10 +70,10 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
     private boolean busy;
 
     /**
-     * 
+     *
      * @param theMapWidget
      * @param layerName
-     * @param source 
+     * @param source
      */
     public ReverseGeocodingWidget(GeoPlatformMap theMapWidget, String layerName,
             GPGeoCoderProvider source) {
@@ -116,7 +118,7 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
     /**
      * Clear Widget : 1) Remove Marker Layer from Map 2) MapClickListener from
      * Map 3) Popup from Map 4) Marker from rGMarcker
-     * 
+     *
      */
     public void clearWidgetStatus() {
         this.removeMapElements();
@@ -126,7 +128,7 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
     }
 
     /**
-     * 
+     *
      * @param bean
      */
     public void onRequestSuccess(IGeoPlatformLocation theBean) {
@@ -147,7 +149,7 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
     }
 
     /**
-     * 
+     *
      * @param message
      */
     public void onRequestFailure(String message) {
@@ -157,28 +159,24 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
     }
 
     /**
-     * This method must be implemented in subClass to create the Dispatcher 
-     * to forward Request for Reverse Geocoding.
-     * 
-     * @return 
+     * This method must be implemented in subClass to create the Dispatcher to
+     * forward Request for Reverse Geocoding.
+     *
+     * @return
      */
     public abstract ReverseGeocodingDispatch createDispatcher();
 
     /**
-     * This method must be implemented by subclass for:
-     * <ul>
-     *      <li>Display A message after Widget is registered</li>
-     *      <li>Add Control to the Map</li>
+     * This method must be implemented by subclass for: <ul> <li>Display A
+     * message after Widget is registered</li> <li>Add Control to the Map</li>
      * </ul>
      */
     public abstract void registerChild();
 
     /**
-     * This method must be implemented by subclass for:
-     * <ul>
-     *      <li>Display A message after Widget is unregistered</li>
-     *      <li>Remove Control to the Map</li>
-     * </ul>
+     * This method must be implemented by subclass for: <ul> <li>Display A
+     * message after Widget is unregistered</li> <li>Remove Control to the
+     * Map</li> </ul>
      */
     public abstract void unregisterChild();
 
@@ -194,7 +192,6 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
 
     private void createListener() {
         this.listener = new MapClickListener() {
-
             @Override
             public void onClick(MapClickEvent mapClickEvent) {
                 lonlat = mapClickEvent.getLonLat();
@@ -259,12 +256,12 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
      */
     public LonLat getLonlat() {
         LonLat lt = new LonLat(this.lonlat.lon(), this.lonlat.lat());
-        lt.transform(this.mapWidget.getMap().getProjection(), "EPSG:4326");
+        lt.transform(this.mapWidget.getMap().getProjection(), GPCoordinateReferenceSystem.WGS_84.getCode());
         return lt;
     }
 
     /**
-     * 
+     *
      * @return PopupMapWidget
      */
     public PopupMapWidget getPopupWidget() {

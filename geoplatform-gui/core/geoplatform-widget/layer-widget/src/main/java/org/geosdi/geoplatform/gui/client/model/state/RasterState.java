@@ -45,23 +45,30 @@ import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
  * @email nazzareno.sileno@geosdi.org
  */
 public class RasterState implements IGPLayerTreeState {
-    
+
     @Override
     public AbstractImagePrototype getIcon() {
         return BasicWidgetResources.ICONS.raster();
     }
-    
+
     @Override
     public void setCqlFilter(String cqlFilter, GPLayerTreeModel layer) {
         if (cqlFilter != null && !cqlFilter.isEmpty()) {
             layer.setState(LayerStateEnum.RASTER_CQL_FILTER.getValue());
         }
     }
-    
+
     @Override
     public void setRefreshTime(int refreshTime, GPLayerTreeModel layer) {
         if (refreshTime != 0) {
             layer.setState(LayerStateEnum.RASTER_REFRESH_LAYER.getValue());
+        }
+    }
+
+    @Override
+    public void setTimeFilter(String timeFilter, GPLayerTreeModel layer) {
+        if (timeFilter != null && !timeFilter.isEmpty()) {
+            layer.setState(LayerStateEnum.RASTER_TIME_FILTER.getValue());
         }
     }
 }

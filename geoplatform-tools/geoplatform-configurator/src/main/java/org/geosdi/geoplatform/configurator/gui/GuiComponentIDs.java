@@ -94,6 +94,7 @@ public class GuiComponentIDs {
     public static final String DELETE_FEATURE = "deleteFeature";
     public static final String GOTO_XY = "gotoXY";
     public static final String CHANGE_BASE_LAYER = "changeBaseLayer";
+    public static final String WPS_OPERATIONS_BUTTON = "wpsOperationsButton";
     //
     public static final String CLEAR_MAP = "clearMap";
     public static final String GOOGLE_REVERSE_GEOCODING = "googleReverseGeocoding";
@@ -176,6 +177,7 @@ public class GuiComponentIDs {
         all.add(DELETE_FEATURE);
         all.add(GOTO_XY);
         all.add(CHANGE_BASE_LAYER);
+        all.add(WPS_OPERATIONS_BUTTON);
         all.add(CLEAR_MAP);
         all.add(GOOGLE_REVERSE_GEOCODING);
         all.add(YAHOO_REVERSE_GEOCODING);

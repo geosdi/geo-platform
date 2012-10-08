@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.viewport;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -56,8 +57,10 @@ public class ViewportUtility {
         BBoxClientInfo bbox = viewport.getBbox();
         Bounds bounds = generateBoundsFromBBOX(bbox);
         LonLat center = bounds.getCenterLonLat();
-        if (GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection().equals("EPSG:3857")) {
-            center.transform(MapLayoutWidget.EPSG_4326, "EPSG:900913");
+        if (GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection().equals(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+            center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), 
+                    GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
         }
         
         double zoomLevel = viewport.getZoomLevel();
@@ -66,7 +69,8 @@ public class ViewportUtility {
 
     public static GPClientViewport generateViewportFromMap(Map map) {
         Projection currentProjection = new Projection(map.getProjection());
-        Projection destinationProjection = new Projection(MapLayoutWidget.EPSG_4326);
+        Projection destinationProjection = new Projection(
+                GPCoordinateReferenceSystem.WGS_84.getCode());
         Bounds bounds = map.getExtent().transform(currentProjection, destinationProjection);
         BBoxClientInfo bbox = generateBBOXFromBounds(bounds);
         GPClientViewport viewport = new GPClientViewport("New Viewport",
@@ -80,7 +84,8 @@ public class ViewportUtility {
             BBoxClientInfo bbox = layerList.get(0).getBbox();
             bound = generateBoundsFromBBOX(bbox);
             Projection currentProjection = new Projection(layerList.get(0).getCrs());
-            Projection destinationProjection = new Projection(MapLayoutWidget.EPSG_4326);
+            Projection destinationProjection = new Projection(
+                    GPCoordinateReferenceSystem.WGS_84.getCode());
             bound.transform(currentProjection, destinationProjection);
             for (GPLayerBean layerBean : layerList) {
                 bbox = layerBean.getBbox();

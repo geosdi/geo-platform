@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.routing;
 
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformBoxesWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Boxes;
@@ -45,7 +46,7 @@ import org.gwtopenmaps.openlayers.client.marker.Box;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class RoutingBoxes extends GeoPlatformBoxesWidget {
 
@@ -69,30 +70,31 @@ public class RoutingBoxes extends GeoPlatformBoxesWidget {
 
     /**
      * Add the layer to the Map
-     * 
+     *
      */
     @Override
     public void activate() {
-        if(geoPlatformMap.getMap().getProjection().equals("EPSG:3857")){
+        if (geoPlatformMap.getMap().getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
             this.marker = new Box(this.bounds.transform(
-                new Projection("EPSG:4326"), new Projection("EPSG:900913")));
+                    new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()),
+                    new Projection(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode())));
         } else {
             this.marker = new Box(this.bounds);
         }
-        
+
 
         this.layer.addMarker(marker);
 
         this.marker.setZIndex(949);
-        
-        
+
+
         this.geoPlatformMap.getMap().addLayer(this.layer);
         this.geoPlatformMap.getMap().zoomToExtent(this.marker.getBounds());
     }
 
     /**
      * Remove Layer from Map
-     * 
+     *
      */
     @Override
     public void deactivate() {

@@ -63,6 +63,9 @@ import org.slf4j.LoggerFactory;
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWMSService")
 public class GPWMSServiceImpl implements GPWMSService {
 
+    private final static String EPSG_4326 = "EPSG:4326";
+    private final static String EPSG_3857 = "EPSG:3857";
+    private final static String EPSG_GOOGLE = "EPSG:900913";
     private Logger logger = LoggerFactory.getLogger(
             GPWMSServiceImpl.class);
     // DAO
@@ -71,11 +74,11 @@ public class GPWMSServiceImpl implements GPWMSService {
 
     @Override
     public ServerDTO getCapabilities(RequestByID request, String token,
-                                     String authkey) throws ResourceNotFoundFault {
+            String authkey) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(request.getId());
         if (server == null) {
             throw new ResourceNotFoundFault("Server has been deleted",
-                                            request.getId());
+                    request.getId());
         }
 
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
@@ -109,7 +112,7 @@ public class GPWMSServiceImpl implements GPWMSService {
     }
 
     private WMSCapabilities getWMSCapabilities(String serverUrl, String token,
-                                               String authkey) throws ResourceNotFoundFault {
+            String authkey) throws ResourceNotFoundFault {
         URL serverURL;
         WebMapServer wms;
         WMSCapabilities cap = null;
@@ -154,7 +157,7 @@ public class GPWMSServiceImpl implements GPWMSService {
     }
 
     private List<RasterLayerDTO> convertToLayerList(Layer layer,
-                                                    String urlServer) {
+            String urlServer) {
         List<RasterLayerDTO> shortLayers = new ArrayList<RasterLayerDTO>();
 
         RasterLayerDTO raster = this.getRasterAndSubRaster(layer, urlServer);
@@ -174,7 +177,7 @@ public class GPWMSServiceImpl implements GPWMSService {
         // ADD subRaster
         for (Layer layerIth : subLayerList) {
             RasterLayerDTO rasterIth = this.getRasterAndSubRaster(layerIth,
-                                                                  urlServer);
+                    urlServer);
             subRasterList.add(rasterIth);
         }
 
@@ -197,22 +200,22 @@ public class GPWMSServiceImpl implements GPWMSService {
         System.out.println(additionalBounds.toString());
 
         if (additionalBounds.size() > 0) {
-            if (additionalBounds.containsKey(new String("EPSG:900913"))
-                    || additionalBounds.containsKey(new String("EPSG:3857"))) {
+            if (additionalBounds.containsKey(EPSG_GOOGLE)
+                    || additionalBounds.containsKey(EPSG_3857)) {
                 CRSEnvelope env = additionalBounds
-                        .get(new String("EPSG:900913"));
+                        .get(EPSG_GOOGLE);
                 raster.setBbox(this.createBbox(env));
                 raster.setSrs(env.getEPSGCode());
             } else {
                 raster.setBbox(this.createBbox(layer.getLatLonBoundingBox()));
-                raster.setSrs("EPSG:4326");
+                raster.setSrs(EPSG_4326);
             }
 
         }
 
         if (urlServer.contains(GEB)) {
             raster.setBbox(this.createBbox(layer.getLatLonBoundingBox()));
-            raster.setSrs("EPSG:4326");
+            raster.setSrs(EPSG_4326);
 
         }
 
@@ -288,7 +291,7 @@ public class GPWMSServiceImpl implements GPWMSService {
 
     private GPBBox createBbox(CRSEnvelope env) {
         return new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
-                          env.getMaxY());
+                env.getMaxY());
     }
 
     private String getUrlServer(String urlServer) {

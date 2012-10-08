@@ -49,4 +49,6 @@ public interface IGPLayerTreeState {
     void setCqlFilter(String cqlFilter, GPLayerTreeModel layer);
 
     void setRefreshTime(int refreshTime, GPLayerTreeModel layer);
+
+    void setTimeFilter(String timeFilter, GPLayerTreeModel layer);
 }

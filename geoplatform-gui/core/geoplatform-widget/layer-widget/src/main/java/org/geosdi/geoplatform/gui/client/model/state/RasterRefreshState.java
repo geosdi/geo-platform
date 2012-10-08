@@ -65,4 +65,11 @@ public class RasterRefreshState implements IGPLayerTreeState {
             layer.setState(LayerStateEnum.RASTER_NO_OP.getValue());
         }
     }
+
+    @Override
+    public void setTimeFilter(String timeFilter, GPLayerTreeModel layer) {
+        if (timeFilter != null && !timeFilter.isEmpty()) {
+            layer.setState(LayerStateEnum.RASTER_TIME_REFRESH.getValue());
+        }
+    }
 }

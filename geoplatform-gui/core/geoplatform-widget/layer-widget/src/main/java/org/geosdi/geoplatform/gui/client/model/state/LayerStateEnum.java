@@ -44,7 +44,10 @@ import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 public enum LayerStateEnum {
 
     RASTER_NO_OP(new RasterState()), RASTER_REFRESH_LAYER(new RasterRefreshState()),
-    RASTER_CQL_FILTER(new RasterCQLFilterState()), RASTER_CQL_REFRESH(new RasterCQLRefreshState());
+    RASTER_CQL_FILTER(new RasterCQLFilterState()), RASTER_CQL_REFRESH(new RasterCQLRefreshState()),
+    RASTER_TIME_FILTER(new RasterTimeFilterState()), RASTER_CQL_TIME(new RasterCQLTimeState()),
+    RASTER_TIME_CQL_REFRESH(new RasterTimeFilterState()),
+    RASTER_TIME_REFRESH(new RasterTimeRefreshState());
     private IGPLayerTreeState state;
 
     private LayerStateEnum(IGPLayerTreeState state) {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+               xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+               jaxb:schemaLocation="
+               http://java.sun.com/xml/ns/jaxb
+               http://java.sun.com/xml/ns/jaxb/bindingschema_1_0.xsd
+               http://www.w3.org/2001/XMLSchema
+               http://www.w3.org/2001/XMLSchema.xsd"
+               jaxb:extensionBindingPrefixes="xjc">
+
+    <jaxb:bindings schemaLocation="gfc/gfc.xsd" 
+                       node="/xs:schema">
+        <jaxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            typesafeEnumBase="xs:string"
+            typesafeEnumMemberName="generateName" 
+            generateIsSetMethod="true">
+            <xjc:noValidator />
+            <xjc:noValidatingUnmarshaller />
+        </jaxb:globalBindings>
+
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.gfc"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+        
+    <jaxb:bindings schemaLocation="iso/19139/20070417/gmd/gmd.xsd" 
+                       node="/xs:schema">
+
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gmd"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="iso/19139/20070417/gco/gco.xsd" 
+                       node="/xs:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gco"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="iso/19139/20070417/gmx/gmx.xsd" 
+                       node="/xs:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gmx"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="iso/19139/20070417/gsr/gsr.xsd" 
+                       node="/xs:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gsr"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="iso/19139/20070417/gss/gss.xsd" 
+                       node="/xs:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gss"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="iso/19139/20070417/gts/gts.xsd" 
+                       node="/xs:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.geosdi.geoplatform.xml.iso19139.v20070417.gts"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>

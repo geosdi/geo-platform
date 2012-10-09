@@ -72,6 +72,7 @@
                             <artifactId>gml-3.2.1</artifactId>
                         </episode>
                     </episodes>
+                    <episode>true</episode>
                 </configuration>
             </plugin>
         </plugins>

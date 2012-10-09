@@ -60,7 +60,7 @@
                 <version>${project.version}</version>
             </dependency>
             
-             <dependency>
+            <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>ows-1.1.0</artifactId>
                 <version>${project.version}</version>
@@ -75,6 +75,12 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-iso19139-binding</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-feature-catalogue-binding</artifactId>
                 <version>${project.version}</version>
             </dependency>
             

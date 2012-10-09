@@ -41,7 +41,7 @@ import java.util.List;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CSWContextServiceProvider {
 
@@ -53,7 +53,7 @@ public class CSWContextServiceProvider {
 
     /**
      * Load All Classes for CSW JAXB Context
-     * 
+     *
      * @return Classes[]
      */
     public static Class[] loadClasses() {
@@ -61,7 +61,7 @@ public class CSWContextServiceProvider {
     }
 
     /**
-     * 
+     *
      * @return Context Path for CSW Context
      */
     public static String loadContextPath() {
@@ -76,21 +76,31 @@ public class CSWContextServiceProvider {
         builder.append("org.geosdi.geoplatform.xml.filter.v110");
         builder.append(":");
         builder.append("org.geosdi.geoplatform.xml.gml.v311").append(":");
-        builder.append("org.geosdi.geoplatform.xml.gml.w3._2001.smil20").append(":");
+        builder.append("org.geosdi.geoplatform.xml.gml.w3._2001.smil20").append(
+                ":");
         builder.append("org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language");
         builder.append(":");
         builder.append("org.geosdi.geoplatform.xml.csw.v202").append(":");
-        builder.append("org.geosdi.geoplatform.xml.csw.v202.dc.elements").append(":");
+        builder.append("org.geosdi.geoplatform.xml.csw.v202.dc.elements").append(
+                ":");
         builder.append("org.geosdi.geoplatform.xml.csw.v202.dc.terms");
         builder.append(":");
         builder.append("org.geosdi.geoplatform.xml.gml.v321");
         builder.append(":");
-        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gco").append(":");
-        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gmd").append(":");
-        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gmx").append(":");
-        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gsr").append(":");
-        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gss").append(":");
+        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gco").append(
+                ":");
+        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gmd").append(
+                ":");
+        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gmx").append(
+                ":");
+        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gsr").append(
+                ":");
+        builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gss").append(
+                ":");
         builder.append("org.geosdi.geoplatform.xml.iso19139.v20070417.gts");
+        builder.append(":");
+        // ISO 19110
+        builder.append("org.geosdi.geoplatform.xml.gfc");
 
         return builder.toString();
     }
@@ -98,24 +108,37 @@ public class CSWContextServiceProvider {
     private static Class[] getAllClasses() {
         allClasses.add(org.geosdi.geoplatform.xml.ows.v100.ObjectFactory.class);
 
-        allClasses.add(org.geosdi.geoplatform.xml.filter.v110.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.filter.v110.ObjectFactory.class);
 
         allClasses.add(org.geosdi.geoplatform.xml.gml.v311.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.gml.w3._2001.smil20.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.gml.w3._2001.smil20.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language.ObjectFactory.class);
 
         allClasses.add(org.geosdi.geoplatform.xml.csw.v202.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.csw.v202.dc.elements.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.csw.v202.dc.terms.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.csw.v202.dc.elements.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.csw.v202.dc.terms.ObjectFactory.class);
 
         allClasses.add(org.geosdi.geoplatform.xml.gml.v321.ObjectFactory.class);
 
-        allClasses.add(org.geosdi.geoplatform.xml.iso19139.v20070417.gco.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.iso19139.v20070417.gsr.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.iso19139.v20070417.gss.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.iso19139.v20070417.gts.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.iso19139.v20070417.gco.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.iso19139.v20070417.gmx.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.iso19139.v20070417.gsr.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.iso19139.v20070417.gss.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.iso19139.v20070417.gts.ObjectFactory.class);
+
+        allClasses.add(org.geosdi.geoplatform.xml.gfc.ObjectFactory.class);
 
         return allClasses.toArray(new Class[allClasses.size()]);
     }

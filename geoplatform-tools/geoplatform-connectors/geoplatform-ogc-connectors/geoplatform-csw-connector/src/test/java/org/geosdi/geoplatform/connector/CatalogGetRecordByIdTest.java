@@ -157,7 +157,8 @@ public class CatalogGetRecordByIdTest {
         Assert.assertEquals(2, abstractRecord.size());
 
         for (JAXBElement element : abstractRecord) {
-            logger.info("SUMMARY RECORD @@@@@@@@@@@@@@@@@@ {}\n", element.getValue());
+            logger.info("SUMMARY RECORD @@@@@@@@@@@@@@@@@@ {}\n",
+                        element.getValue());
         }
     }
 
@@ -234,7 +235,8 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testSecureSnipc() throws Exception {
         URL url = new URL(snipcUrl);
-        GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword);
+        GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
+                snipcUsername, snipcPassword);
         this.serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).
                 withClientSecurity(securityConnector).
@@ -256,14 +258,16 @@ public class CatalogGetRecordByIdTest {
 
         Assert.assertEquals(1, abstractRecord.size());
 
-        logger.info("RECORD @@@@@@@@@@@@@@@@@@ {}", abstractRecord.get(0).getValue());
+        logger.info("RECORD @@@@@@@@@@@@@@@@@@ {}",
+                    abstractRecord.get(0).getValue());
     }
 
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureOutputOriginalSnipc() throws Exception {
         URL url = new URL(snipcUrl);
-        GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword);
+        GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
+                snipcUsername, snipcPassword);
         this.serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).
                 withClientSecurity(securityConnector).
@@ -272,13 +276,14 @@ public class CatalogGetRecordByIdTest {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
 
-        request.setId("PCM:901:20101021:112931");
+        request.setId("{3DEE88CB-A0DB-4794-941A-FD8119621A2F}");
         request.setElementSetType(ElementSetType.FULL.toString());
         request.setOutputSchema(OutputSchema.ORIGINAL);
 
-        Object o = request.getResponse();
-        MDMetadataType metadata = (MDMetadataType) o;
-        Assert.assertNotNull(metadata);
-        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", metadata);
+//        Object o = request.getResponse();
+//        MDMetadataType metadata = (MDMetadataType) o;
+//        Assert.assertNotNull(metadata);
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                    request.getResponseAsString());
     }
 }

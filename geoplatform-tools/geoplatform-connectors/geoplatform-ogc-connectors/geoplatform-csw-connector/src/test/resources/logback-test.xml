@@ -19,5 +19,7 @@
             level="debug" /><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.connector.CatalogRequestTest"
             level="debug" /><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.connector.CatalogGetRecordByIdTest"
+            level="trace" /><!-- TODO info -->
 
 </configuration>

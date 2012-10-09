@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
+import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDMetadataType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -84,6 +85,10 @@ public class CatalogGetRecordByIdTest {
     String snipcUsername;
     private @Value("${snipc_catalog_password}")
     String snipcPassword;
+    /**
+     * ISPRA Catalog.
+     */
+    private static final String ISPRA_URL = "http://sgi.isprambiente.it/geoportal/csw/discovery";
 
     @Before
     public void setUp() throws MalformedURLException {
@@ -93,7 +98,7 @@ public class CatalogGetRecordByIdTest {
     }
 
     @Test
-    public void testSingleGetRecordById_SUMMARY() throws Exception {
+    public void testTypeSummary() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
 
@@ -110,12 +115,11 @@ public class CatalogGetRecordByIdTest {
 
         SummaryRecordType record = (SummaryRecordType) abstractRecord.get(0).getValue();
 
-        logger.info(
-                "SUMMARY RESULT @@@@@@@@@@@@@@@@@@ " + record);
+        logger.info("SUMMARY RESULT @@@@@@@@@@@@@@@@@@ " + record);
     }
 
     @Test
-    public void testSingleGetRecordById_FULL() throws Exception {
+    public void testTypeFull() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
 
@@ -131,18 +135,17 @@ public class CatalogGetRecordByIdTest {
 
         List<Object> any = response.getAny();
 
-        logger.info(
-                "FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ " + ((JAXBElement) any.get(
-                                                                0)).getValue());
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                    ((JAXBElement) any.get(0)).getValue());
     }
 
     @Test
-    public void testDoubleGetRecordById_SUMMARY() throws Exception {
+    public void testDoubleRequest() throws Exception {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
 
         request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47",
-                "9a554857-3a16-4e03-b105-47f93e3af3c3");
+                      "9a554857-3a16-4e03-b105-47f93e3af3c3");
 
         GetRecordByIdResponseType response = request.getResponse();
 
@@ -154,14 +157,82 @@ public class CatalogGetRecordByIdTest {
         Assert.assertEquals(2, abstractRecord.size());
 
         for (JAXBElement element : abstractRecord) {
-            logger.info(
-                    "SUMMARY RECORD @@@@@@@@@@@@@@@@@@ " + element.getValue() + "\n");
+            logger.info("SUMMARY RECORD @@@@@@@@@@@@@@@@@@ {}\n", element.getValue());
         }
+    }
+
+    @Test
+    public void testOutputGmd() throws Exception {
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
+                this.serverConnector.createGetRecordByIdRequest();
+
+        request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47");
+        request.setElementSetType(ElementSetType.FULL.value());
+        request.setOutputSchema(OutputSchema.GMD);
+
+        GetRecordByIdResponseType response = request.getResponse();
+
+        Assert.assertEquals(false, response.isSetAbstractRecord());
+        Assert.assertEquals(true, response.isSetAny());
+
+        List<Object> any = response.getAny();
+        Assert.assertEquals(1, any.size());
+
+        JAXBElement element = ((JAXBElement) any.get(0));
+        MDMetadataType metadata = (MDMetadataType) element.getValue();
+        Assert.assertNotNull(metadata);
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", metadata);
+    }
+
+    @Test
+    public void testOutputGmdIspra() throws Exception {
+        URL url = new URL(ISPRA_URL);
+        GPCSWServerConnector connector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(url).build();
+
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
+                connector.createGetRecordByIdRequest();
+
+        request.setId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}");
+        request.setElementSetType(ElementSetType.FULL.value());
+        request.setOutputSchema(OutputSchema.GMD);
+
+        GetRecordByIdResponseType response = request.getResponse();
+
+        Assert.assertEquals(false, response.isSetAbstractRecord());
+        Assert.assertEquals(true, response.isSetAny());
+
+        List<Object> any = response.getAny();
+        Assert.assertEquals(1, any.size());
+
+        JAXBElement element = ((JAXBElement) any.get(0));
+        MDMetadataType metadata = (MDMetadataType) element.getValue();
+        Assert.assertNotNull(metadata);
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", metadata);
+    }
+
+    @Test
+    public void testOutputOriginalIspra() throws Exception {
+        URL url = new URL(ISPRA_URL);
+        GPCSWServerConnector connector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(url).build();
+
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
+                connector.createGetRecordByIdRequest();
+
+        request.setId("{D499D5B8-13A5-43B2-B4FA-9FD2AA519F90}");
+        request.setElementSetType(ElementSetType.FULL.value());
+        request.setOutputSchema(OutputSchema.ORIGINAL);
+
+        Object o = request.getResponse();
+        MDMetadataType metadata = (MDMetadataType) o;
+        Assert.assertNotNull(metadata);
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", metadata);
     }
 
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
-    public void testSecureGetRecordById() throws Exception {
+    public void testSecureSnipc() throws Exception {
         URL url = new URL(snipcUrl);
         GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword);
         this.serverConnector = GPCSWConnectorBuilder.newConnector().
@@ -185,7 +256,29 @@ public class CatalogGetRecordByIdTest {
 
         Assert.assertEquals(1, abstractRecord.size());
 
-        logger.info(
-                "RECORD @@@@@@@@@@@@@@@@@@ " + abstractRecord.get(0).getValue());
+        logger.info("RECORD @@@@@@@@@@@@@@@@@@ {}", abstractRecord.get(0).getValue());
+    }
+
+    @Ignore("Require to add the SNIPC certificate into default keystore")
+    @Test
+    public void testSecureOutputOriginalSnipc() throws Exception {
+        URL url = new URL(snipcUrl);
+        GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword);
+        this.serverConnector = GPCSWConnectorBuilder.newConnector().
+                withServerUrl(url).
+                withClientSecurity(securityConnector).
+                build();
+
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
+                this.serverConnector.createGetRecordByIdRequest();
+
+        request.setId("PCM:901:20101021:112931");
+        request.setElementSetType(ElementSetType.FULL.toString());
+        request.setOutputSchema(OutputSchema.ORIGINAL);
+
+        Object o = request.getResponse();
+        MDMetadataType metadata = (MDMetadataType) o;
+        Assert.assertNotNull(metadata);
+        logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", metadata);
     }
 }

@@ -69,8 +69,8 @@ public class CatalogGetRecordByIdV202 extends CatalogGetRecordById<GetRecordById
         }
 
         ElementSetNameType elementSetNameType = new ElementSetNameType();
-        elementSetNameType.setValue(elementSetType != null ? ElementSetType.fromValue(
-                elementSetType)
+        elementSetNameType.setValue(elementSetType != null
+                ? ElementSetType.fromValue(elementSetType)
                 : ElementSetType.SUMMARY);
         request.setElementSetName(elementSetNameType);
 

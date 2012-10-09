@@ -42,7 +42,8 @@ package org.geosdi.geoplatform.xml.csw;
 public enum OutputSchema {
 
     CSW_V202("http://www.opengis.net/cat/csw/2.0.2"), // Metadatas will be on the 'AbstractRecord' list
-    GMD("http://www.isotc211.org/2005/gmd"); // Metadatas will be on the 'Any' list // TODO GMD list
+    GMD("http://www.isotc211.org/2005/gmd"), // Metadatas will be on the 'Any' list // TODO GMD list
+    ORIGINAL("original"); // Metadata will be the response
     //
     private String schema;
 

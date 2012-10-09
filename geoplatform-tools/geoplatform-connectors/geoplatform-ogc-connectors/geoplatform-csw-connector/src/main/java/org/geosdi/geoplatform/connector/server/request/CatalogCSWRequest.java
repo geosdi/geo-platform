@@ -117,7 +117,7 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
 
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                    ex.getMessage());
+                         ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***");
 
         } catch (ClientProtocolException ex) {
@@ -138,8 +138,8 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
             IllegalParameterFault {
         Writer writer = new StringWriter();
         try {
-            HttpResponse httpResponse = super.clientConnection.execute(
-                    super.getPostMethod());
+            HttpResponse httpResponse = super.securityConnector.secure(
+                    this, super.getPostMethod());
             HttpEntity responseEntity = httpResponse.getEntity();
 
             if (responseEntity != null) {
@@ -162,7 +162,7 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
 
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                    ex.getMessage());
+                         ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***");
 
         } catch (ClientProtocolException ex) {
@@ -176,5 +176,15 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
         }
 
         return writer.toString();
+    }
+
+    @Override
+    public Marshaller getMarshaller() throws JAXBException {
+        return cswContext.acquireMarshaller();
+    }
+
+    @Override
+    public Unmarshaller getUnmarshaller() throws JAXBException {
+        return cswContext.acquireUnmarshaller();
     }
 }

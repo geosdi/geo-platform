@@ -47,31 +47,31 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
 public abstract class GPAbstractServerConnector implements GPServerConnector {
-    
+
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected final URL url;
     protected final GPSecurityConnector securityConnector;
-    
+
     protected GPAbstractServerConnector(URL theUrl,
             GPSecurityConnector theSecurityConnector) {
         this.url = theUrl;
         this.securityConnector = theSecurityConnector;
     }
-    
+
     @Override
     public URL getURL() {
         return url;
     }
-    
+
     @Override
     public GPSecurityConnector getSecurityConnector() {
         return this.securityConnector;
     }
-    
+
     @Override
     public URI getURI() {
         try {
@@ -81,20 +81,18 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         }
         return null;
     }
-    
+
     @Override
     public DefaultHttpClient getClientConnection() {
         return new DefaultHttpClient();
     }
 
     /**
-     * Analyzes the url of the server by eliminating everything that comes after
-     * the ? character
+     * <p> Analyzes the url of the server by eliminating everything that comes
+     * after the ? character </p>
      *
      * @param urlServer
-     * <
-     * p/>
-     * <p/>
+     *
      * @return String
      */
     protected static URL analyzesServerURL(String urlServer) {
@@ -110,7 +108,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         }
         return null;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -121,19 +119,19 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         }
         final GPAbstractServerConnector other = (GPAbstractServerConnector) obj;
         if (this.url != other.url && (this.url == null || !this.url.equals(
-                                      other.url))) {
+                other.url))) {
             return false;
         }
         return true;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 79 * hash + (this.url != null ? this.url.hashCode() : 0);
         return hash;
     }
-    
+
     @Override
     public String toString() {
         return "GPAbstractServerConnector{" + "Server Url = " + url

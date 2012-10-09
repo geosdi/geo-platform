@@ -23,6 +23,7 @@
         <module>geoplatform-wps-binding</module>
         <module>geoplatform-ebrim-binding</module>
         <module>geoplatform-iso19139-binding</module>
+        <module>geoplatform-feature-catalogue-binding</module>
     </modules>
     
     <dependencyManagement>

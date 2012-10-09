@@ -56,48 +56,54 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector {
     private GPCatalogVersion version;
 
     /**
-     * Create an Instance of {@link GPCatalogServerConnector} with the server url
-     * and the specific version.
+     * <p> Create an Instance of {@link GPCatalogServerConnector} with the
+     * server url and the specific version.
      * <p/>
+     *
      * @param urlServer the String that represent CSW server Url
-     * @param version   the value of CSW version. Must be 2.0.2
+     * @param version the value of CSW version. Must be 2.0.2
      */
     public GPCatalogServerConnector(String urlServer, String version) {
         this(urlServer, null, version);
     }
 
     /**
-     * Create an instance of {@link GPCatalogServerConnector} with the server url,
-     * {@link GPSecurityConnector} for security and version
+     * <p> Create an instance of {@link GPCatalogServerConnector} with the
+     * server url, {@link GPSecurityConnector} for security and version
      * <p/>
-     * @param urlServer         the String that represent CSW server Url
+     *
+     * @param urlServer the String that represent CSW server Url
      * @param securityConnector {@link GPSecurityConnector}
-     * @param version           the value of CSW version. Must be 2.0.2
+     * @param version the value of CSW version. Must be 2.0.2
      */
-    public GPCatalogServerConnector(String urlServer, GPSecurityConnector securityConnector,
+    public GPCatalogServerConnector(String urlServer,
+            GPSecurityConnector securityConnector,
             String version) {
         this(analyzesServerURL(urlServer), securityConnector, toCSWVersion(
                 version));
     }
 
     /**
-     * Create an instance of {@link GPCatalogServerConnector} with the {@link URL}
-     * server url, {@link GPSecurityConnector} security context and {@link GPCatalogVersion}
-     * csw version.
+     * <p> Create an instance of {@link GPCatalogServerConnector} with the
+     * {@link URL} server url, {@link GPSecurityConnector} security context and
+     * {@link GPCatalogVersion} csw version.
      * <p/>
-     * @param server            {@link URL} server url
+     *
+     * @param server {@link URL} server url
      * @param securityConnector {@link GPSecurityConnector}
-     * @param theVersion        {@link GPCatalogVersion} CSW version. Must be 2.0.2
+     * @param theVersion {@link GPCatalogVersion} CSW version. Must be 2.0.2
      */
-    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector,
+    public GPCatalogServerConnector(URL server,
+            GPSecurityConnector securityConnector,
             GPCatalogVersion theVersion) {
         super(server, securityConnector);
         this.version = theVersion;
     }
 
     /**
-     * Create CatalogGetCapabilitiesRequest request
+     * <p> Create CatalogGetCapabilitiesRequest request
      * <p/>
+     *
      * @return {@link CatalogGetCapabilitiesRequest}
      */
     public CatalogGetCapabilitiesRequest createGetCapabilitiesRequest() {
@@ -111,8 +117,9 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector {
     }
 
     /**
-     * Create CatalogGetRecordsRequest request
+     * <p> Create CatalogGetRecordsRequest request
      * <p/>
+     *
      * @return {@link CatalogGetRecordsRequest}
      */
     public CatalogGetRecordsRequest createGetRecordsRequest() {
@@ -126,7 +133,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector {
     }
 
     /**
-     * Create CatalogGetRecordByIdRequest request
+     * <p> Create CatalogGetRecordByIdRequest request </p>
      *
      * @return {@link CatalogGetRecordByIdRequest}
      */
@@ -141,7 +148,8 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector {
     }
 
     /**
-     * Method that convert String version in {@link GPCatalogVersion} instance
+     * <p> Method that convert String version in {@link GPCatalogVersion}
+     * instance </p>
      *
      * @param version
      *

@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import java.io.IOException;
 import java.net.URI;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -67,4 +70,20 @@ public interface GPConnectorRequest<T> {
      */
     String getResponseAsString() throws ServerInternalFault, IOException,
             IllegalParameterFault;
+
+    /**
+     *
+     * @return Marshaller
+     *
+     * @throws JAXBException
+     */
+    Marshaller getMarshaller() throws JAXBException;
+
+    /**
+     *
+     * @return Unmarshaller
+     *
+     * @throws JAXBException
+     */
+    Unmarshaller getUnmarshaller() throws JAXBException;
 }

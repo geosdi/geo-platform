@@ -99,7 +99,7 @@
                 <plugin>
                     <groupId>org.jvnet.jaxb2.maven2</groupId>
                     <artifactId>maven-jaxb2-plugin</artifactId>
-                    <version>0.8.1</version>
+                    <version>0.8.2</version>
                     
                     <configuration>
                         <strict>false</strict>
@@ -132,7 +132,7 @@
     </build>
     
     <properties>
-        <jaxb2-basics-version>0.6.3</jaxb2-basics-version>
+        <jaxb2-basics-version>0.6.4</jaxb2-basics-version>
     </properties>
 
 </project>

@@ -52,8 +52,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFullMetadataAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ShowFullMetadataActionGMD;
-import org.geosdi.geoplatform.gui.client.action.menu.ShowFullMetadataActionOriginal;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
@@ -114,29 +112,15 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
     private Menu createRecordContextMenu() {
         ShowFullMetadataAction showFullMetadata = new ShowFullMetadataAction(this);
-        // TODO For test purpose
-        ShowFullMetadataActionGMD showFullMetadataGMD = new ShowFullMetadataActionGMD(this);
-        ShowFullMetadataActionOriginal showFullMetadataOriginal = new ShowFullMetadataActionOriginal(this);
 
         MenuItem fullMetadata = new MenuItem();
         fullMetadata.addSelectionListener(showFullMetadata);
         fullMetadata.setText(showFullMetadata.getTitle());
         fullMetadata.setIcon(showFullMetadata.getImage());
         MenuItem fullMetadataGMD = new MenuItem();
-        // TODO For test purpose
-        fullMetadataGMD.addSelectionListener(showFullMetadataGMD);
-        fullMetadataGMD.setText(showFullMetadataGMD.getTitle());
-        fullMetadataGMD.setIcon(showFullMetadataGMD.getImage());
-        MenuItem fullMetadataOriginal = new MenuItem();
-        fullMetadataOriginal.addSelectionListener(showFullMetadataOriginal);
-        fullMetadataOriginal.setText(showFullMetadataOriginal.getTitle());
-        fullMetadataOriginal.setIcon(showFullMetadataOriginal.getImage());
 
         Menu menu = new Menu();
         menu.add(fullMetadata);
-        // TODO For test purpose
-        menu.add(fullMetadataGMD);
-        menu.add(fullMetadataOriginal);
 
         return menu;
     }

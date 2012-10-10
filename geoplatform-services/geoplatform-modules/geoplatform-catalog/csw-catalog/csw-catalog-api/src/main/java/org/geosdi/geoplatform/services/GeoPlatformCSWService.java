@@ -60,6 +60,7 @@ import org.geosdi.geoplatform.responce.SummaryRecordDTO;
  *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebService(name = "GeoPlatformCSWService",
             targetNamespace = "http://csw.services.geo-platform.org/")
@@ -131,7 +132,7 @@ public interface GeoPlatformCSWService {
     //<editor-fold defaultstate="collapsed" desc="GetRecords request">
     // ==========================================================================
     // === GetRecords request
-    // ==========================================================================    
+    // ==========================================================================
     @Get
     @WebResult(name = "RecordsCount")
     int getRecordsCount(
@@ -154,7 +155,18 @@ public interface GeoPlatformCSWService {
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault;
     //</editor-fold>
-//
+
+    //<editor-fold defaultstate="collapsed" desc="GetRecordById request">
+    // ==========================================================================
+    // === GetRecordById request
+    // ==========================================================================
+    @Get
+    @WebResult(name = "Metadata")
+    String getRecordById(
+            @WebParam(name = "serverID") Long serverID,
+            @WebParam(name = "identifier") String identifier)
+            throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault;
+    //</editor-fold>
 //    @Get
 //    @WebResult(name = "Capabilities")
 //    ServerDTO getCapabilities(

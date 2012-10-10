@@ -56,7 +56,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
- *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Transactional // Give atomicity on WS methods
 @WebService(
@@ -182,5 +182,11 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
             CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         return cswServiceDelegate.searchFullRecords(num, start, catalogFinder);
+    }
+
+    @Override
+    public String getRecordById(Long serverID, String identifier)
+            throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
+        return cswServiceDelegate.getRecordById(serverID, identifier);
     }
 }

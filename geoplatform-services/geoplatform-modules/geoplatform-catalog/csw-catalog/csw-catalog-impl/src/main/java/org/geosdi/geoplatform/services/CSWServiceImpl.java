@@ -50,6 +50,8 @@ import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCSWServerConnector;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -75,7 +77,9 @@ import org.geosdi.geoplatform.xml.csw.ConstraintLanguageVersion;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.TypeName;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
+import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.RecordType;
 import org.geosdi.geoplatform.xml.csw.v202.ResultType;
@@ -83,12 +87,15 @@ import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
 import org.geosdi.geoplatform.xml.csw.v202.dc.elements.SimpleLiteral;
 import org.geosdi.geoplatform.xml.csw.v202.dc.terms.URI;
 import org.geosdi.geoplatform.xml.ows.v100.BoundingBoxType;
+import org.geosdi.geoplatform.xml.ows.v100.DomainType;
+import org.geosdi.geoplatform.xml.ows.v100.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class CSWServiceImpl {
 
@@ -190,13 +197,13 @@ class CSWServiceImpl {
             serverDao.persist(server);
 
         } catch (MalformedURLException ex) {
-            logger.error("### MalformedURLException: " + ex.getMessage());
+            logger.error("### MalformedURLException: {}", ex.getMessage());
             throw new IllegalParameterFault("Malformed URL");
         } catch (IOException ex) {
-            logger.error("### IOException: " + ex.getMessage());
+            logger.error("### IOException: {}", ex.getMessage());
             throw new IllegalParameterFault("Error on parse response stream");
         } catch (CatalogVersionException ex) {
-            logger.error("### CatalogVersionException: " + ex.getMessage());
+            logger.error("### CatalogVersionException: {}", ex.getMessage());
             throw new IllegalParameterFault("The catalog version must be 2.0.2");
         }
 
@@ -604,7 +611,7 @@ class CSWServiceImpl {
             serverConnector = builder.build();
 
         } catch (MalformedURLException ex) {
-            logger.error("### MalformedURLException: " + ex.getMessage());
+            logger.error("### MalformedURLException: {}", ex.getMessage());
             throw new IllegalParameterFault("Malformed URL");
         }
         CatalogGetRecordsRequest<GetRecordsResponseType> request =
@@ -621,10 +628,175 @@ class CSWServiceImpl {
         try {
             response = request.getResponse();
         } catch (IOException ex) {
+            logger.error("### IOException: {}", ex.getMessage());
+            throw new IllegalParameterFault("Error on parse response stream");
+        }
+
+        return response;
+    }
+
+    public String getRecordById(Long serverID, String identifier)
+            throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
+        logger.trace("\n*** GetRecordById ***\n");
+
+        GeoPlatformServer server = this.getCSWServerByID(serverID);
+
+        // TODO Use a unique serverConnector
+//        GPCSWServerConnector serverConnector = this.createServerConnector(server.getServerUrl());
+
+        OutputSchema outputSchema = this.retrieveGetRecordByIdOutputSchema(this.createServerConnector(server.getServerUrl()));
+
+        CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
+                this.createServerConnector(server.getServerUrl()).createGetRecordByIdRequest();
+        request.setId(identifier);
+        request.setElementSetType(ElementSetType.FULL.value());
+        request.setOutputSchema(outputSchema);
+
+        String response = this.createGetRecordByIdResponseAsString(request);
+
+        String responseXSL = this.insertStylesheet(outputSchema, response);
+
+        return responseXSL;
+    }
+
+    private GPCSWServerConnector createServerConnector(String serverUrl) throws IllegalParameterFault {
+        GPCSWServerConnector serverConnector;
+        try {
+            URL url = new URL(serverUrl);
+            GPCSWConnectorBuilder builder = GPCSWConnectorBuilder.newConnector()
+                    .withServerUrl(url);
+
+            if (serverUrl.contains("snipc.protezionecivile.it")) {
+                GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
+                        snipcProvider.getSnipcUsername(),
+                        snipcProvider.getSnipcPassword());
+                builder.withClientSecurity(securityConnector);
+            }
+
+            serverConnector = builder.build();
+        } catch (MalformedURLException ex) {
+            logger.error("### MalformedURLException: {}", ex.getMessage());
+            throw new IllegalParameterFault("Malformed URL");
+        }
+        return serverConnector;
+    }
+
+    /**
+     * Retrieve the best OutputSchema for GetRecordById request.
+     */
+    private OutputSchema retrieveGetRecordByIdOutputSchema(GPCSWServerConnector serverConnector)
+            throws IllegalParameterFault, ServerInternalFault {
+        List<String> schemas = this.retrieveGetRecordByIdOutputSchemas(serverConnector);
+
+        OutputSchema outputSchema = null;
+        if (schemas.contains(OutputSchema.GMD.toString())) {
+            outputSchema = OutputSchema.GMD;
+        } else if (schemas.contains(OutputSchema.ORIGINAL.toString())) {
+            outputSchema = OutputSchema.ORIGINAL;
+        }
+
+        logger.debug("\n*** OutputSchema: {}", outputSchema);
+        return outputSchema;
+    }
+
+    /**
+     * Retrieve for a Catalog server the OutputSchema supported from
+     * GetRecordById operation. This information in present into GetCapabilities
+     * request.
+     */
+    private List<String> retrieveGetRecordByIdOutputSchemas(GPCSWServerConnector serverConnector)
+            throws IllegalParameterFault, ServerInternalFault {
+        List<String> schemas = null;
+        try {
+            CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
+
+            CapabilitiesType response = request.getResponse();
+
+            List<Operation> operationList = response.getOperationsMetadata().getOperation();
+            for (Operation operation : operationList) {
+
+                if ("GetRecordById".equals(operation.getName())) {
+                    List<DomainType> parameterList = operation.getParameter();
+                    schemas = new ArrayList<String>(parameterList.size());
+                    for (DomainType parameter : parameterList) {
+                        if ("outputSchema".equals(parameter.getName())) {
+                            for (String outputSchemaValue : parameter.getValue()) {
+                                logger.trace("\n*** outputSchema available: {}", outputSchemaValue);
+                                schemas.add(outputSchemaValue.trim());
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            logger.error("### IOException: {}", ex.getMessage());
+            throw new IllegalParameterFault("Error on parse response stream");
+        }
+
+        return schemas;
+    }
+//
+//    private GetRecordByIdResponseType createGetRecordByIdResponse(
+//            CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request)
+//            throws IllegalParameterFault, ServerInternalFault {
+//
+//        GetRecordByIdResponseType response = null;
+//        try {
+//            response = request.getResponse();
+//        } catch (IOException ex) {
+//            logger.error("### IOException: " + ex.getMessage());
+//            throw new IllegalParameterFault("Error on parse response stream");
+//        }
+//
+//        return response;
+//    }
+
+    private String createGetRecordByIdResponseAsString(
+            CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request)
+            throws IllegalParameterFault, ServerInternalFault {
+
+        String response = null;
+        try {
+            response = request.getResponseAsString();
+        } catch (IOException ex) {
             logger.error("### IOException: " + ex.getMessage());
             throw new IllegalParameterFault("Error on parse response stream");
         }
 
         return response;
+    }
+
+    /**
+     * Insert into XML response the processing instruction related to stylesheet
+     * wrt the OutputSchema.
+     */
+    private String insertStylesheet(OutputSchema outputSchema, String response) {
+        String responseXSL = response;
+
+        String stylesheet = this.retrieveStylesheet(outputSchema);
+        if (stylesheet != null) {
+            int ind = response.lastIndexOf("?>");
+            responseXSL = responseXSL.substring(0, ind + 2)
+                    + "\n<?xml-stylesheet type=\"text/xsl\" href=\"" + stylesheet + "\"?>"
+                    + responseXSL.substring(ind + 3);
+        }
+
+        return responseXSL;
+    }
+
+    /**
+     * retrieve stylesheet of the OutputSchema desired, if available, otherwise
+     * null.
+     *
+     * @todo Manage others OutputSchemas.
+     */
+    private String retrieveStylesheet(OutputSchema outputSchema) {
+        String stylesheet = null;
+        if (outputSchema == OutputSchema.ORIGINAL) {
+            stylesheet = "catalog-snipc.xsl";
+        }
+        return stylesheet;
     }
 }

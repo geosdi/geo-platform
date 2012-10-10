@@ -65,7 +65,8 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
     }
 
     @Override
-    public <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(C connectorRequest,
+    public <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(
+            C connectorRequest,
             H httpRequest) throws ClientProtocolException, IOException {
         super.bindCredentials(
                 connectorRequest.getCredentialsProvider(),
@@ -76,7 +77,8 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
         this.preparePreemptiveParameters(targetHost);
 
         return connectorRequest.getClientConnection().execute(targetHost,
-                httpRequest, localcontext);
+                                                              httpRequest,
+                                                              localcontext);
     }
 
     protected void preparePreemptiveParameters(HttpHost targetHost) {
@@ -84,13 +86,14 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
             this.authCache = new BasicAuthCache();
             this.authCache.put(targetHost, createScheme());
             this.localcontext.setAttribute(ClientContext.AUTH_CACHE,
-                    this.authCache);
+                                           this.authCache);
         }
     }
 
     protected HttpHost extractHost(URI uri) {
         if (this.httpHost == null) {
-            this.httpHost = new HttpHost(uri.getHost(), this.retrieveNoSetPort(uri), uri.getScheme());
+            this.httpHost = new HttpHost(uri.getHost(), this.retrieveNoSetPort(
+                    uri), uri.getScheme());
         }
         return this.httpHost;
     }
@@ -103,7 +106,8 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
     protected abstract AuthSchemeBase createScheme();
 
     /**
-     * If the URI don't have e port, retrieve the standard port wrt scheme ["http" or "https"].
+     * If the URI don't have e port, retrieve the standard port wrt scheme
+     * ["http" or "https"].
      */
     private int retrieveNoSetPort(URI uri) {
         int port = uri.getPort();

@@ -118,7 +118,7 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
                          ex.getMessage());
-            throw new ServerInternalFault("*** JAXBException ***");
+            throw new ServerInternalFault("*** JAXBException ***" + ex);
 
         } catch (ClientProtocolException ex) {
             logger.error(

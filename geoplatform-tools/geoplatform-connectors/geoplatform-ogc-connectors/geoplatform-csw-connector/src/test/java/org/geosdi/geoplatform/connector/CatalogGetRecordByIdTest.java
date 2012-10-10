@@ -35,18 +35,22 @@
  */
 package org.geosdi.geoplatform.connector;
 
+import java.io.FileOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 import org.geosdi.geoplatform.xml.csw.v202.AbstractRecordType;
+import org.geosdi.geoplatform.xml.csw.v202.CapabilitiesType;
 import org.geosdi.geoplatform.xml.csw.v202.ElementSetType;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordByIdResponseType;
 import org.geosdi.geoplatform.xml.csw.v202.SummaryRecordType;
+import org.geosdi.geoplatform.xml.gfc.FCFeatureCatalogueType;
 import org.geosdi.geoplatform.xml.iso19139.v20070417.gmd.MDMetadataType;
 import org.junit.Assert;
 import org.junit.Before;
@@ -262,6 +266,13 @@ public class CatalogGetRecordByIdTest {
                     abstractRecord.get(0).getValue());
     }
 
+    /**
+     * <p> SNIPC catalogue is ambiguous so we can't know the OUTPUT SCHEMA and
+     * the returned Object. For ISO - 19110 the Obeject is
+     * {@link FCFeatureCatalogueType}. For ISO - 19139 the Object is
+     * {@link MDMetadataType} </p>
+     *
+     */
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureOutputOriginalSnipc() throws Exception {
@@ -273,6 +284,13 @@ public class CatalogGetRecordByIdTest {
                 withClientSecurity(securityConnector).
                 build();
 
+        CatalogGetCapabilitiesRequest<CapabilitiesType> requestGetCap =
+                this.serverConnector.createGetCapabilitiesRequest();
+
+        logger.info("GetCapabilities SNIPC @@@@@@@@@@@@@@@@@@@"
+                + "@@@@@ " + requestGetCap.getResponse());
+
+
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
 
@@ -280,10 +298,24 @@ public class CatalogGetRecordByIdTest {
         request.setElementSetType(ElementSetType.FULL.toString());
         request.setOutputSchema(OutputSchema.ORIGINAL);
 
-//        Object o = request.getResponse();
+        Object o = request.getResponse();
 //        MDMetadataType metadata = (MDMetadataType) o;
 //        Assert.assertNotNull(metadata);
         logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
                     request.getResponseAsString());
+
+        String snipcGetRecordById = "target/snipcGetRecordById.xml";
+
+
+        FileOutputStream fos = null;
+
+        try {
+            fos = new FileOutputStream(snipcGetRecordById);
+            request.getMarshaller().marshal(o, fos);
+        } finally {
+            if (fos != null) {
+                fos.close();
+            }
+        }
     }
 }

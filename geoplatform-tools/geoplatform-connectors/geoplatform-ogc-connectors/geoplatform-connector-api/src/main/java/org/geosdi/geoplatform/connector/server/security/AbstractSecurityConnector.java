@@ -65,10 +65,11 @@ public abstract class AbstractSecurityConnector implements GPSecurityConnector {
             URI targetURI) {
         if (this.authScope == null) {
             this.authScope = new AuthScope(targetURI.getHost(),
-                    targetURI.getPort());
-
-            credentialsProvider.setCredentials(this.authScope,
-                    new UsernamePasswordCredentials(username, password));
+                                           targetURI.getPort());
         }
+
+        credentialsProvider.setCredentials(authScope,
+                                           new UsernamePasswordCredentials(
+                username, password));
     }
 }

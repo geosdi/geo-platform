@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.server;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
@@ -52,7 +53,8 @@ import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
  */
 public interface IGPCatalogFinderService {
 
-    ArrayList<GPCSWServerBeanModel> getAllCSWServers(String organizationName)
+    ArrayList<GPCSWServerBeanModel> getAllCSWServers(String organizationName,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
@@ -77,4 +79,7 @@ public interface IGPCatalogFinderService {
             CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
+    
+    SafeHtml getRecordById(Long serverID, String identifier,
+            HttpServletRequest httpServletRequest);
 }

@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -80,7 +82,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public ArrayList<GPCSWServerBeanModel> getAllCSWServers(
-            String organizationName) throws GeoPlatformException {
+            String organizationName, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
 
         ArrayList<GPCSWServerBeanModel> servers = new ArrayList<GPCSWServerBeanModel>();
 
@@ -160,7 +163,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             geoPlatformCSWClient.deleteServerCSW(serverID);
         } catch (ResourceNotFoundFault ex) {
             String errorMessage = "The server with id " + serverID + " was not bean deleted";
-            logger.error(errorMessage);
+            logger.error("### {} - {}", ex.getMessage(), errorMessage);
             throw new GeoPlatformException(errorMessage);
         }
         return true;
@@ -252,6 +255,29 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
                                                     recordsCount);
     }
 
+    @Override
+    public SafeHtml getRecordById(Long serverID, String identifier,
+            HttpServletRequest httpServletRequest) {
+        SafeHtml responseHtml = null;
+        try {
+            String recordById = geoPlatformCSWClient.getRecordById(serverID, identifier);
+
+            responseHtml = this.createHtmlResponse(recordById);
+
+        } catch (IllegalParameterFault ex) {
+            logger.error("\n*** IllegalParameterFault ***\n{}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("\n*** ResourceNotFoundFault ***\n{}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        } catch (ServerInternalFault ex) {
+            logger.error("\n*** ServerInternalFault ***\n{}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        }
+
+        return responseHtml;
+    }
+
     /**
      * @param geoPlatformCSWService the geoPlatformCSWService to set
      */
@@ -311,5 +337,19 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         bBoxClient.setUpperRightX(bBox.getMaxX());
         bBoxClient.setUpperRightY(bBox.getMaxY());
         return bBoxClient;
+    }
+
+    private SafeHtml createHtmlResponse(final String recordById) {
+        return new SafeHtml() {
+            private static final long serialVersionUID = -6271884299162721L;
+
+            @Override
+            public String asString() {
+                // TODO Check path of stylesheet
+                String replace = "type=\"text/xsl\" href=\"";
+                return recordById.replace(replace,
+                                          replace + GWT.getModuleName() + "/csw-template/");
+            }
+        };
     }
 }

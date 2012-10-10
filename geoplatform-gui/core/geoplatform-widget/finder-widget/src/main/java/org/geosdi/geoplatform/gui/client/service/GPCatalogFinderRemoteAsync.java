@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
@@ -70,4 +71,7 @@ public interface GPCatalogFinderRemoteAsync {
     void searchFullRecords(PagingLoadConfig config,
             CatalogFinderBean catalogFinder,
             AsyncCallback<PagingLoadResult<FullRecord>> callback);
+    
+    void getRecordById(Long serverID, String identifier,
+            AsyncCallback<SafeHtml> callback);
 }

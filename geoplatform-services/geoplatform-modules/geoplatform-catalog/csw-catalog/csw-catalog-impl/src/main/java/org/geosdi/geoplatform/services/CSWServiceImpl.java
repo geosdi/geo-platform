@@ -641,13 +641,12 @@ class CSWServiceImpl {
 
         GeoPlatformServer server = this.getCSWServerByID(serverID);
 
-        // TODO Use a unique serverConnector
-//        GPCSWServerConnector serverConnector = this.createServerConnector(server.getServerUrl());
+        GPCSWServerConnector serverConnector = this.createServerConnector(server.getServerUrl());
 
-        OutputSchema outputSchema = this.retrieveGetRecordByIdOutputSchema(this.createServerConnector(server.getServerUrl()));
+        OutputSchema outputSchema = this.retrieveGetRecordByIdOutputSchema(serverConnector);
 
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
-                this.createServerConnector(server.getServerUrl()).createGetRecordByIdRequest();
+                serverConnector.createGetRecordByIdRequest();
         request.setId(identifier);
         request.setElementSetType(ElementSetType.FULL.value());
         request.setOutputSchema(outputSchema);

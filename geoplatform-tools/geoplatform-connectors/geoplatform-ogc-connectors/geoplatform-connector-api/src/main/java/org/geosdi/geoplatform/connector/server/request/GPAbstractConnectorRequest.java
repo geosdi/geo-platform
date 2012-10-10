@@ -65,7 +65,7 @@ public abstract class GPAbstractConnectorRequest<T>
 
     public GPAbstractConnectorRequest(GPServerConnector server) {
         this(server.getClientConnection(), server.getURI(),
-                server.getSecurityConnector());
+             server.getSecurityConnector());
     }
 
     public GPAbstractConnectorRequest(DefaultHttpClient theClientConnection,
@@ -74,8 +74,8 @@ public abstract class GPAbstractConnectorRequest<T>
         this.clientConnection = theClientConnection;
         this.serverURI = theServerURI;
         this.securityConnector = (theSecurityConnector == null
-                                  ? GPSecurityConnector.MOCK_SECURITY
-                                  : theSecurityConnector);
+                ? GPSecurityConnector.MOCK_SECURITY
+                : theSecurityConnector);
     }
 
     /**
@@ -86,7 +86,7 @@ public abstract class GPAbstractConnectorRequest<T>
         HttpParams httpParams = this.clientConnection.getParams();
 
         httpParams.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
-                GeoPlatformHTTP.CONTENT_TYPE_XML);
+                                GeoPlatformHTTP.CONTENT_TYPE_XML);
 
         httpParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, "UTF-8");
 
@@ -111,5 +111,10 @@ public abstract class GPAbstractConnectorRequest<T>
     @Override
     public CredentialsProvider getCredentialsProvider() {
         return this.clientConnection.getCredentialsProvider();
+    }
+
+    @Override
+    public void shutdown() {
+        this.clientConnection.getConnectionManager().shutdown();
     }
 }

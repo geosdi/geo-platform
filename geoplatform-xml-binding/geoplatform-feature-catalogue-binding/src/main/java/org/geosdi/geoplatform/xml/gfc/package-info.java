@@ -6,5 +6,9 @@
 //
 @javax.xml.bind.annotation.XmlSchema(
 namespace = "http://www.isotc211.org/2005/gfc",
-                                     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+                                     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+                                     xmlns = {@XmlNs(prefix = "gfc",
+                                                     namespaceURI = "http://www.isotc211.org/2005/gfc")})
 package org.geosdi.geoplatform.xml.gfc;
+
+import javax.xml.bind.annotation.XmlNs;

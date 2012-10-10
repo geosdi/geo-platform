@@ -43,7 +43,7 @@ public class ObjectFactory {
             "http://www.isotc211.org/2005/gfc", "FC_BoundAssociationRole");
     private final static QName _AbstractFCCarrierOfCharacteristics_QNAME = new QName(
             "http://www.isotc211.org/2005/gfc",
-                                                                                     "AbstractFC_CarrierOfCharacteristics");
+            "AbstractFC_CarrierOfCharacteristics");
     private final static QName _FCConstraint_QNAME = new QName(
             "http://www.isotc211.org/2005/gfc", "FC_Constraint");
     private final static QName _FCBoundFeatureAttribute_QNAME = new QName(
@@ -346,7 +346,7 @@ public class ObjectFactory {
             FCFeatureAssociationType value) {
         return new JAXBElement<FCFeatureAssociationType>(
                 _FCFeatureAssociation_QNAME, FCFeatureAssociationType.class,
-                                                         null, value);
+                null, value);
     }
 
     /**
@@ -362,7 +362,7 @@ public class ObjectFactory {
             AbstractFCPropertyTypeType value) {
         return new JAXBElement<AbstractFCPropertyTypeType>(
                 _AbstractFCPropertyType_QNAME, AbstractFCPropertyTypeType.class,
-                                                           null, value);
+                null, value);
     }
 
     /**
@@ -440,7 +440,7 @@ public class ObjectFactory {
             FCBoundAssociationRoleType value) {
         return new JAXBElement<FCBoundAssociationRoleType>(
                 _FCBoundAssociationRole_QNAME, FCBoundAssociationRoleType.class,
-                                                           null, value);
+                null, value);
     }
 
     /**
@@ -454,9 +454,9 @@ public class ObjectFactory {
             AbstractFCCarrierOfCharacteristicsType value) {
         return new JAXBElement<AbstractFCCarrierOfCharacteristicsType>(
                 _AbstractFCCarrierOfCharacteristics_QNAME,
-                                                                       AbstractFCCarrierOfCharacteristicsType.class,
-                                                                       null,
-                                                                       value);
+                AbstractFCCarrierOfCharacteristicsType.class,
+                null,
+                value);
     }
 
     /**
@@ -486,8 +486,8 @@ public class ObjectFactory {
             FCBoundFeatureAttributeType value) {
         return new JAXBElement<FCBoundFeatureAttributeType>(
                 _FCBoundFeatureAttribute_QNAME,
-                                                            FCBoundFeatureAttributeType.class,
-                                                            null, value);
+                FCBoundFeatureAttributeType.class,
+                null, value);
     }
 
     /**
@@ -543,7 +543,7 @@ public class ObjectFactory {
             FCInheritanceRelationType value) {
         return new JAXBElement<FCInheritanceRelationType>(
                 _FCInheritanceRelation_QNAME, FCInheritanceRelationType.class,
-                                                          null, value);
+                null, value);
     }
 
     /**
@@ -557,7 +557,7 @@ public class ObjectFactory {
             FCDefinitionReferenceType value) {
         return new JAXBElement<FCDefinitionReferenceType>(
                 _FCDefinitionReference_QNAME, FCDefinitionReferenceType.class,
-                                                          null, value);
+                null, value);
     }
 
     /**

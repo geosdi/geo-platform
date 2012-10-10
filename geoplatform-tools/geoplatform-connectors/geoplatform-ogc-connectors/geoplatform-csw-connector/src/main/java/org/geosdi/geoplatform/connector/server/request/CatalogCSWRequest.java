@@ -126,8 +126,6 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
 
-        } finally {
-            super.clientConnection.getConnectionManager().shutdown();
         }
 
         return response;
@@ -171,8 +169,6 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
 
-        } finally {
-            super.clientConnection.getConnectionManager().shutdown();
         }
 
         return writer.toString();

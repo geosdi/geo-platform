@@ -86,4 +86,10 @@ public interface GPConnectorRequest<T> {
      * @throws JAXBException
      */
     Unmarshaller getUnmarshaller() throws JAXBException;
+
+    /**
+     * <p>Shuts down this connection manager and releases allocated
+     * resources.</p>
+     */
+    void shutdown();
 }

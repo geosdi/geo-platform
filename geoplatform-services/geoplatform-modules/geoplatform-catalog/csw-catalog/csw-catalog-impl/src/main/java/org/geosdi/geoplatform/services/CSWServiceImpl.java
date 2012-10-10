@@ -654,7 +654,7 @@ class CSWServiceImpl {
 
         String response = this.createGetRecordByIdResponseAsString(request);
 
-        String responseXSL = this.insertStylesheet(outputSchema, response);
+        String responseXSL = this.insertStylesheet(response, outputSchema, server.getServerUrl());
 
         return responseXSL;
     }
@@ -770,12 +770,12 @@ class CSWServiceImpl {
 
     /**
      * Insert into XML response the processing instruction related to stylesheet
-     * wrt the OutputSchema.
+     * wrt the OutputSchema and catalog URL.
      */
-    private String insertStylesheet(OutputSchema outputSchema, String response) {
+    private String insertStylesheet(String response, OutputSchema outputSchema, String serverUrl) {
         String responseXSL = response;
 
-        String stylesheet = this.retrieveStylesheet(outputSchema);
+        String stylesheet = this.retrieveStylesheet(outputSchema, serverUrl);
         if (stylesheet != null) {
             int ind = response.lastIndexOf("?>");
             responseXSL = responseXSL.substring(0, ind + 2)
@@ -787,14 +787,15 @@ class CSWServiceImpl {
     }
 
     /**
-     * retrieve stylesheet of the OutputSchema desired, if available, otherwise
-     * null.
+     * Retrieve stylesheet of the OutputSchema (and catalog URL) desired, if
+     * available, otherwise null.
      *
      * @todo Manage others OutputSchemas.
      */
-    private String retrieveStylesheet(OutputSchema outputSchema) {
+    private String retrieveStylesheet(OutputSchema outputSchema, String serverUrl) {
         String stylesheet = null;
-        if (outputSchema == OutputSchema.ORIGINAL) {
+        if (outputSchema == OutputSchema.ORIGINAL
+                && serverUrl.contains("snipc.protezionecivile.it")) {
             stylesheet = "catalog-snipc.xsl";
         }
         return stylesheet;

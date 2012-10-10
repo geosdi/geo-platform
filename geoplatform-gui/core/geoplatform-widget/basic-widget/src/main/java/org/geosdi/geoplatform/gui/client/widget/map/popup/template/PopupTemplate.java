@@ -40,18 +40,17 @@ import com.google.gwt.core.client.GWT;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public enum PopupTemplate {
 
-    IMAGE_LOADING("<img src=" + GWT.getModuleName()
-    + "/gp-images/loading.gif />"),
+    IMAGE_LOADING("<img src=" + GWT.getModuleName() + "/gp-images/loading.gif />"),
     MESSAGE_LOADING("<br />Loading Location....."),
-    IMAGE_RESULT_FOUND("<img src=" + GWT.getModuleName() + "/gp-images/ok.png" + " />"),
-    IMAGE_RESULT_NOT_FOUND("<img src=" + GWT.getModuleName()
-    + "/gp-images/not_found.png />"),
+    IMAGE_RESULT_FOUND("<img src=" + GWT.getModuleName() + "/gp-images/ok.png />"),
+    IMAGE_RESULT_NOT_FOUND("<img src=" + GWT.getModuleName() + "/gp-images/not_found.png />"),
     ZERO_RESULTS("ZERO_RESULTS"),
-    IMAGE_SERVICE_ERROR("<img src=" + GWT.getModuleName() + "/gp-images/error.png" + " />");
+    IMAGE_SERVICE_ERROR("<img src=" + GWT.getModuleName() + "/gp-images/error.png />");
+    //
     private String value;
 
     PopupTemplate(String theValue) {

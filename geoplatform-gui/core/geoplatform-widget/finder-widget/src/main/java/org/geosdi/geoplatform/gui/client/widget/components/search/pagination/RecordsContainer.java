@@ -117,7 +117,6 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         fullMetadata.addSelectionListener(showFullMetadata);
         fullMetadata.setText(showFullMetadata.getTitle());
         fullMetadata.setIcon(showFullMetadata.getImage());
-        MenuItem fullMetadataGMD = new MenuItem();
 
         Menu menu = new Menu();
         menu.add(fullMetadata);

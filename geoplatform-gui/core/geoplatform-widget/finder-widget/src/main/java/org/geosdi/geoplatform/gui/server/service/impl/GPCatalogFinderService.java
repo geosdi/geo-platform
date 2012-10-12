@@ -82,7 +82,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public ArrayList<GPCSWServerBeanModel> getAllCSWServers(
-            String organizationName, HttpServletRequest httpServletRequest)
+            String organizationName,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
         ArrayList<GPCSWServerBeanModel> servers = new ArrayList<GPCSWServerBeanModel>();
@@ -104,13 +105,16 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config, String searchText, String organization,
+            PagingLoadConfig config,
+            String searchText,
+            String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
         SearchRequest srq = new SearchRequest(searchText);
 
-        int serversCount = geoPlatformCSWClient.getCSWServersCount(srq, organization);
+        int serversCount = geoPlatformCSWClient.getCSWServersCount(srq,
+                                                                   organization);
 
         ArrayList<GPCSWServerBeanModel> searchServers;
         if (serversCount == 0) {
@@ -140,7 +144,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     }
 
     @Override
-    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+    public GPCSWServerBeanModel saveServerCSW(String alias,
+            String serverUrl,
             String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
@@ -171,7 +176,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public PagingLoadResult<SummaryRecord> searchSummaryRecords(
-            PagingLoadConfig config, CatalogFinderBean catalogFinder,
+            PagingLoadConfig config,
+            CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
@@ -212,7 +218,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public PagingLoadResult<FullRecord> searchFullRecords(
-            PagingLoadConfig config, CatalogFinderBean catalogFinder,
+            PagingLoadConfig config,
+            CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
@@ -256,13 +263,13 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     }
 
     @Override
-    public SafeHtml getRecordById(Long serverID, String identifier,
+    public String getRecordById(Long serverID,
+            String identifier,
             HttpServletRequest httpServletRequest) {
-        SafeHtml responseHtml = null;
-        try {
-            String recordById = geoPlatformCSWClient.getRecordById(serverID, identifier);
 
-            responseHtml = this.createHtmlResponse(recordById);
+        try {
+
+            return geoPlatformCSWClient.getRecordById(serverID, identifier);
 
         } catch (IllegalParameterFault ex) {
             logger.error("\n*** IllegalParameterFault ***\n{}", ex.getMessage());
@@ -274,8 +281,6 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             logger.error("\n*** ServerInternalFault ***\n{}", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
-
-        return responseHtml;
     }
 
     /**
@@ -300,6 +305,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     private <R extends AbstractRecord> R convertRecordDTO(R record,
             AbstractRecordDTO recordDTO) {
         record.setIdentifier(recordDTO.getIdentifier());
+        record.setIdCatalog(recordDTO.getIdCatalog());
         record.setTitle(recordDTO.getTitle());
         record.setCatalogURL(recordDTO.getCatalogURL());
         record.setType(recordDTO.getType());

@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Abstract Record DTO for CSW request.
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlTransient
@@ -52,6 +52,7 @@ public abstract class AbstractRecordDTO implements Serializable {
 
     private static final long serialVersionUID = 8229785485262331251L;
     //
+    protected Long idCatalog;
     private String identifier;
     private String title;
     private String catalogURL;
@@ -60,6 +61,20 @@ public abstract class AbstractRecordDTO implements Serializable {
     @XmlElementWrapper(name = "subjectList")
     @XmlElement(name = "subject")
     private List<String> subjects;
+
+    /**
+     * @return the idCatalog
+     */
+    public Long getIdCatalog() {
+        return idCatalog;
+    }
+
+    /**
+     * @param theIdCatalog the idCatalog to set
+     */
+    public void setIdCatalog(Long theIdCatalog) {
+        this.idCatalog = theIdCatalog;
+    }
 
     public String getIdentifier() {
         return identifier;

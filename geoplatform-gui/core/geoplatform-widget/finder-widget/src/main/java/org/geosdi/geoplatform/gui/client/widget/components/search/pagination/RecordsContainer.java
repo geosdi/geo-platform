@@ -74,7 +74,7 @@ import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         implements RecordsContainerSelectionListener, DeselectGridRecordHandler {
 
-    private GPEventBus bus;
+    protected GPEventBus bus;
     private CatalogFinderBean catalogFinder;
     private CheckBoxSelectionModel<FullRecord> selectionModel;
     private RowExpander rowExpander;
@@ -182,10 +182,10 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
 
         if (result.getTotalLength() == 0) {
-            bus.fireEvent(new CatalogStatusBarEvent("There are no records",
+            getBus().fireEvent(new CatalogStatusBarEvent("There are no records",
                     GPCatalogStatusBarType.STATUS_NOT_OK));
         } else {
-            bus.fireEvent(new CatalogStatusBarEvent("Records correctly loaded",
+            getBus().fireEvent(new CatalogStatusBarEvent("Records correctly loaded",
                     GPCatalogStatusBarType.STATUS_OK));
         }
 
@@ -197,7 +197,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         System.out.println("\n*** " + le.exception); // TODO logger
         String errorMessage = "The services are down, report to the administator.";
         GeoPlatformMessage.errorMessage("Connection error", errorMessage);
-        bus.fireEvent(new CatalogStatusBarEvent(errorMessage,
+        getBus().fireEvent(new CatalogStatusBarEvent(errorMessage,
                 GPCatalogStatusBarType.STATUS_ERROR));
 
         this.reset();
@@ -273,5 +273,12 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         super.widget.getSelectionModel().deselectAll();
 
         LayerHandlerManager.fireEvent(hideProgressBar);
+    }
+
+    /**
+     * @return the bus
+     */
+    public GPEventBus getBus() {
+        return bus;
     }
 }

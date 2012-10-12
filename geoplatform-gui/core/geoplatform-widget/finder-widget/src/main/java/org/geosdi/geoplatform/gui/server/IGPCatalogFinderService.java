@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
@@ -58,16 +57,20 @@ public interface IGPCatalogFinderService {
             throws GeoPlatformException;
 
     PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config, String searchText, String organization, 
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
-
-    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+            PagingLoadConfig config,
+            String searchText,
             String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    boolean deleteServerCSW(Long serverID, HttpServletRequest httpServletRequest)
+    GPCSWServerBeanModel saveServerCSW(String alias,
+            String serverUrl,
+            String organization,
+            HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    boolean deleteServerCSW(Long serverID,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     PagingLoadResult<SummaryRecord> searchSummaryRecords(PagingLoadConfig config,
@@ -79,7 +82,8 @@ public interface IGPCatalogFinderService {
             CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
-    
-    SafeHtml getRecordById(Long serverID, String identifier,
+
+    String getRecordById(Long serverID,
+            String identifier,
             HttpServletRequest httpServletRequest);
 }

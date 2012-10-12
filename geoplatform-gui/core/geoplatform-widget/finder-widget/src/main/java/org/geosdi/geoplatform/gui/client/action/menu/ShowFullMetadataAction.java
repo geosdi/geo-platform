@@ -36,12 +36,16 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
-import javax.inject.Inject;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
+import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
+import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 
 /**
  * Execute a CSW GetRecordById request, for view, into a new browser tab, the
@@ -53,9 +57,9 @@ public class ShowFullMetadataAction extends MenuBaseAction {
 
     private RecordsContainer rc;
 
-    @Inject
     public ShowFullMetadataAction(RecordsContainer rc) {
-        super("Read Full Metadata", CatalogFinderWidgetResources.ICONS.metadata());
+        super("Read Full Metadata",
+              CatalogFinderWidgetResources.ICONS.metadata());
 
         this.rc = rc;
     }
@@ -71,9 +75,35 @@ public class ShowFullMetadataAction extends MenuBaseAction {
             record = rc.getMetadataSelection().getRecordsExcluded().get(0);
         }
 
-        String url = this.createRequestURL(record);
+        this.rc.getBus().fireEvent(
+                new CatalogStatusBarEvent("Loading GetRecordByIdRequest "
+                + "for " + record.getTitle(),
+                                          GPCatalogStatusBarType.STATUS_LOADING));
 
-        Window.open(url, "Full Metadata", "");
+        GPCatalogFinderRemote.Util.getInstance().getRecordById(
+                record.getIdCatalog(),
+                record.getIdentifier(),
+                new AsyncCallback<String>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        System.out.println("ERRORE @@@@@@@@@@@@@@@@ " + caught);
+                    }
+
+                    @Override
+                    public void onSuccess(String result) {
+                        String replace = "type=\"text/xsl\" href=\"";
+                        String res = result.replace(replace,
+                                                    replace
+                                + GWT.getModuleBaseURL()
+                                + "/csw-template/");
+
+                        System.out.println("ECCOLA @@@@@@@@@@@@@@ " + res);
+                    }
+                });
+
+//        String url = this.createRequestURL(record);
+//
+//        Window.open(url, "Full Metadata", "");
     }
 
     private String createRequestURL(FullRecord record) {

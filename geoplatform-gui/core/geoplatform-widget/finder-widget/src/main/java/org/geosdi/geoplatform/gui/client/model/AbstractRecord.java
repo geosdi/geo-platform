@@ -40,13 +40,14 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  * Abstract Record for CSW request.
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class AbstractRecord extends GeoPlatformBeanModel {
 
     private static final long serialVersionUID = -715748241959974761L;
     //
+    protected Long idCatalog; // Only to optimize the request GetRecordById
     protected String identifier; // For performance purpose: used for equals() and hashCode() methods
     private String catalogURL; // It isn't for binding model-view
     private String type; // It isn't for binding model-view
@@ -54,6 +55,20 @@ public abstract class AbstractRecord extends GeoPlatformBeanModel {
     public enum RecordKeyValue {
 
         TITLE, ABSTRACT_TEXT, SUBJECTS;
+    }
+
+    /**
+     * @return the idCatalog
+     */
+    public Long getIdCatalog() {
+        return idCatalog;
+    }
+
+    /**
+     * @param idCatalog the idCatalog to set
+     */
+    public void setIdCatalog(Long idCatalog) {
+        this.idCatalog = idCatalog;
     }
 
     /**
@@ -141,6 +156,16 @@ public abstract class AbstractRecord extends GeoPlatformBeanModel {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + (this.idCatalog != null
+                ? this.idCatalog.hashCode() : 0);
+        hash = 83 * hash + (this.identifier != null
+                ? this.identifier.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -149,18 +174,15 @@ public abstract class AbstractRecord extends GeoPlatformBeanModel {
             return false;
         }
         final AbstractRecord other = (AbstractRecord) obj;
+        if (this.idCatalog != other.idCatalog && (this.idCatalog == null
+                || !this.idCatalog.equals(other.idCatalog))) {
+            return false;
+        }
         if ((this.identifier == null) ? (other.identifier != null)
                 : !this.identifier.equals(other.identifier)) {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + (this.identifier != null ? this.identifier.hashCode() : 0);
-        return hash;
     }
 
     @Override

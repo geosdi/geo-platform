@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
@@ -56,13 +55,18 @@ public interface GPCatalogFinderRemoteAsync {
             AsyncCallback<ArrayList<GPCSWServerBeanModel>> callback)
             throws GeoPlatformException;
 
-    void searchCSWServers(PagingLoadConfig config, String searchText, String organization,
+    void searchCSWServers(PagingLoadConfig config,
+            String searchText,
+            String organization,
             AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback);
 
-    void saveServerCSW(String alias, String serverUrl, String organization,
+    void saveServerCSW(String alias,
+            String serverUrl,
+            String organization,
             AsyncCallback<GPCSWServerBeanModel> callback);
 
-    void deleteServerCSW(Long serverID, AsyncCallback<Boolean> callback);
+    void deleteServerCSW(Long serverID,
+            AsyncCallback<Boolean> callback);
 
     void searchSummaryRecords(PagingLoadConfig config,
             CatalogFinderBean catalogFinder,
@@ -71,7 +75,8 @@ public interface GPCatalogFinderRemoteAsync {
     void searchFullRecords(PagingLoadConfig config,
             CatalogFinderBean catalogFinder,
             AsyncCallback<PagingLoadResult<FullRecord>> callback);
-    
-    void getRecordById(Long serverID, String identifier,
-            AsyncCallback<SafeHtml> callback);
+
+    void getRecordById(Long serverID,
+            String identifier,
+            AsyncCallback<String> callback);
 }

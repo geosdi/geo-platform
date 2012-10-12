@@ -50,22 +50,12 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
- * <p>
- * MetadataSelectionManager class Manage All Operations
- * for Metadata Selection:
- * <ul>
- * <li>
- * Operation to activate {@link CatalogTreeLayerWidgetSupport} button
- * to add Metadata on GPLayerTreeWidget
- * </li>
- * <li>
- * Operation to manage Metadata which can't be added as WMS Resource on Tree
- * </li>
- * <li>
- * Operation to clear {@link List<FullRecord>} recordsExcluded
- * </li>
- * </ul>
- * </p>
+ * <p> MetadataSelectionManager class Manage All Operations for Metadata
+ * Selection: <ul> <li> Operation to activate
+ * {@link CatalogTreeLayerWidgetSupport} button to add Metadata on
+ * GPLayerTreeWidget </li> <li> Operation to manage Metadata which can't be
+ * added as WMS Resource on Tree </li> <li> Operation to clear
+ * {@link List<FullRecord>} recordsExcluded </li> </ul> </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -108,7 +98,6 @@ public class MetadataSelectionManager implements CatalogMetadataSelectionManager
     @Override
     public void bindContainer(final RecordsContainer container) {
         container.addListener(Events.Render, new Listener<BaseEvent>() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 recordsToolTip.initTarget(container.getWidget());
@@ -131,7 +120,8 @@ public class MetadataSelectionManager implements CatalogMetadataSelectionManager
     /**
      * Activate Button to add Metadata on GPTreeLayerWidget
      *
-     * @param {@} enable
+     * @param {
+     * @} enable
      */
     protected void fireCatalogTreeLayerHandler(boolean enable) {
         this.event.setEnable(enable);

@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
@@ -57,8 +56,9 @@ public interface GPCatalogFinderRemote extends RemoteService {
 
     public static class Util {
 
-        private static GPCatalogFinderRemoteAsync instance = 
-                (GPCatalogFinderRemoteAsync) GWT.create(GPCatalogFinderRemote.class);
+        private static GPCatalogFinderRemoteAsync instance =
+                (GPCatalogFinderRemoteAsync) GWT.create(
+                GPCatalogFinderRemote.class);
 
         public static GPCatalogFinderRemoteAsync getInstance() {
             return instance;
@@ -69,22 +69,28 @@ public interface GPCatalogFinderRemote extends RemoteService {
             throws GeoPlatformException;
 
     PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config, String searchText, String organization)
+            PagingLoadConfig config,
+            String searchText,
+            String organization)
             throws GeoPlatformException;
 
-    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
-            String organization)
+    GPCSWServerBeanModel saveServerCSW(String alias,
+                                       String serverUrl,
+                                       String organization)
             throws GeoPlatformException;
 
     boolean deleteServerCSW(Long serverID) throws GeoPlatformException;
 
     PagingLoadResult<SummaryRecord> searchSummaryRecords(
-            PagingLoadConfig config, CatalogFinderBean catalogFinder)
+            PagingLoadConfig config,
+            CatalogFinderBean catalogFinder)
             throws GeoPlatformException;
 
     PagingLoadResult<FullRecord> searchFullRecords(
-            PagingLoadConfig config, CatalogFinderBean catalogFinder)
+            PagingLoadConfig config,
+            CatalogFinderBean catalogFinder)
             throws GeoPlatformException;
 
-    SafeHtml getRecordById(Long serverID, String identifier);
+    String getRecordById(Long serverID,
+                         String identifier);
 }

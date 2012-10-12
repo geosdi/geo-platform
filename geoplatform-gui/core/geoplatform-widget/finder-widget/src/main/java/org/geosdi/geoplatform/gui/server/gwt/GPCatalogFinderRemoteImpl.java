@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
@@ -72,7 +71,8 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
             PagingLoadConfig config, String searchText, String organization)
             throws GeoPlatformException {
-        return gpCatalogFinderService.searchCSWServers(config, searchText, organization,
+        return gpCatalogFinderService.searchCSWServers(config, searchText,
+                                                       organization,
                                                        super.getThreadLocalRequest());
     }
 
@@ -110,10 +110,8 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     }
 
     @Override
-    public SafeHtml getRecordById(Long serverID, String identifier) {
-        return gpCatalogFinderService.getRecordById(serverID, identifier, 
+    public String getRecordById(Long serverID, String identifier) {
+        return gpCatalogFinderService.getRecordById(serverID, identifier,
                                                     super.getThreadLocalRequest());
     }
-    
-    
 }

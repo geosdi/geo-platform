@@ -38,8 +38,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.safehtml.shared.SafeHtml;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -269,6 +268,24 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
         try {
 
+            /**
+             * @TODO : Create a file and copy inside the String returned from
+             * geoPlatformCSWClient.getRecordById request
+             */
+            String url = httpServletRequest.getSession().getServletContext().getRealPath(
+                    "/catalog_finder_demo/csw-template");
+
+            logger.info("PATH @@@@@@@@@@@@@@@@@@ " + url);
+
+            File folder = new File(url);
+
+            File[] files = folder.listFiles();
+
+            for (File file : files) {
+                logger.info("Ecco il nome del File @@@@@@@@@@@"
+                        + "@@@@@@@@@ " + file.getName());
+            }
+
             return geoPlatformCSWClient.getRecordById(serverID, identifier);
 
         } catch (IllegalParameterFault ex) {
@@ -343,19 +360,5 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         bBoxClient.setUpperRightX(bBox.getMaxX());
         bBoxClient.setUpperRightY(bBox.getMaxY());
         return bBoxClient;
-    }
-
-    private SafeHtml createHtmlResponse(final String recordById) {
-        return new SafeHtml() {
-            private static final long serialVersionUID = -6271884299162721L;
-
-            @Override
-            public String asString() {
-                // TODO Check path of stylesheet
-                String replace = "type=\"text/xsl\" href=\"";
-                return recordById.replace(replace,
-                                          replace + GWT.getModuleName() + "/csw-template/");
-            }
-        };
     }
 }

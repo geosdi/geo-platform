@@ -92,7 +92,9 @@ public class ShowFullMetadataAction extends MenuBaseAction {
 
                     @Override
                     public void onSuccess(String result) {
-                        Window.open(result, "Full Metadata", "");
+                        Window.open(
+                                GWT.getModuleBaseURL() + "/csw-template/" + result,
+                                    "Full Metadata", "");
                     }
                 });
     }

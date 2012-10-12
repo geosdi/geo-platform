@@ -274,24 +274,16 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
                     .getRealPath("/" + moduleName + "/csw-template");
             logger.info("PATH @@@@@@@@@@@@@@@@@@ {}", url);
 
-//            File folder = new File(url);
-//
-//            File[] files = folder.listFiles();
-//
-//            for (File file : files) {
-//                logger.info("Ecco il nome del File @@@@@@@@@@@"
-//                        + "@@@@@@@@@ " + file.getName());
-//            }
-
-            String response = geoPlatformCSWClient.getRecordById(serverID, identifier);
+            String response = geoPlatformCSWClient.getRecordById(serverID,
+                                                                 identifier);
             String fileName = url + "/" + System.currentTimeMillis() + "-" + identifier + ".xml";
             File file = new File(fileName);
             FileUtils.writeStringToFile(file, response);
 
-            String fileNameUri = "file:///" + fileName;
-            logger.info("PATH FILE @@@@@@@@@@@@@@@@@@ {}", fileNameUri);
+            logger.info("Name FILE Created  @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                        file.getName());
 
-            return fileNameUri;
+            return file.getName();
 
         } catch (IOException ex) {
             logger.error("\n*** IOException ***\n{}", ex.getMessage());

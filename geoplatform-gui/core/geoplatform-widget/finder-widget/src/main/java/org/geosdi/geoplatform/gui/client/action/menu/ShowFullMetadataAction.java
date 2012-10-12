@@ -76,9 +76,8 @@ public class ShowFullMetadataAction extends MenuBaseAction {
         }
 
         this.rc.getBus().fireEvent(
-                new CatalogStatusBarEvent("Loading GetRecordByIdRequest "
-                + "for " + record.getTitle(),
-                                          GPCatalogStatusBarType.STATUS_LOADING));
+                new CatalogStatusBarEvent("Loading GetRecordById Request for "
+                + record.getTitle(), GPCatalogStatusBarType.STATUS_LOADING));
 
         GPCatalogFinderRemote.Util.getInstance().getRecordById(
                 record.getIdCatalog(),
@@ -88,13 +87,19 @@ public class ShowFullMetadataAction extends MenuBaseAction {
                     @Override
                     public void onFailure(Throwable caught) {
                         System.out.println("Error @@@@@@@@@@@@@@@@ " + caught);
+                        rc.getBus().fireEvent(
+                                new CatalogStatusBarEvent("GetRecordById Request error",
+                                                          GPCatalogStatusBarType.STATUS_ERROR));
                     }
 
                     @Override
                     public void onSuccess(String result) {
                         Window.open(
-                                GWT.getModuleBaseURL() + "/csw-template/" + result,
-                                    "Full Metadata", "");
+                                GWT.getModuleBaseURL() + "csw-template/" + result,
+                                "Full Metadata", "");
+                        rc.getBus().fireEvent(
+                                new CatalogStatusBarEvent("GetRecordById Request executed",
+                                                          GPCatalogStatusBarType.STATUS_OK));
                     }
                 });
     }

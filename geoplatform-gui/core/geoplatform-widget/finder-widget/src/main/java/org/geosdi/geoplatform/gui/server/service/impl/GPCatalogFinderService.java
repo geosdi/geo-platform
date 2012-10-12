@@ -40,8 +40,10 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.io.File;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -264,24 +266,24 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     }
 
     @Override
-    public String getRecordById(Long serverID,
-            String identifier,
-            String moduleName,
+    public String getRecordById(Long serverID, String identifier, String moduleName,
             HttpServletRequest httpServletRequest) {
 
         try {
             String url = httpServletRequest.getSession().getServletContext()
                     .getRealPath("/" + moduleName + "/csw-template");
-            logger.info("PATH @@@@@@@@@@@@@@@@@@ {}", url);
+            logger.trace("PATH @@@@@@@@@@@@@@@@@@ {}", url);
 
             String response = geoPlatformCSWClient.getRecordById(serverID,
                                                                  identifier);
+            response = this.deAccent(response);
+
             String fileName = url + "/" + System.currentTimeMillis() + "-" + identifier + ".xml";
             File file = new File(fileName);
             FileUtils.writeStringToFile(file, response);
 
-            logger.info("Name FILE Created  @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                        file.getName());
+            logger.debug("Name FILE Created  @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                         file.getName());
 
             return file.getName();
 
@@ -360,5 +362,11 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         bBoxClient.setUpperRightX(bBox.getMaxX());
         bBoxClient.setUpperRightY(bBox.getMaxY());
         return bBoxClient;
+    }
+
+    public String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("'");
     }
 }

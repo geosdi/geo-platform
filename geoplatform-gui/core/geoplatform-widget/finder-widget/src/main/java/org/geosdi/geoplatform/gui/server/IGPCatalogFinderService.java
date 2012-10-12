@@ -85,5 +85,6 @@ public interface IGPCatalogFinderService {
 
     String getRecordById(Long serverID,
             String identifier,
+            String moduleName,
             HttpServletRequest httpServletRequest);
 }

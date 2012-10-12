@@ -75,8 +75,8 @@ public interface GPCatalogFinderRemote extends RemoteService {
             throws GeoPlatformException;
 
     GPCSWServerBeanModel saveServerCSW(String alias,
-                                       String serverUrl,
-                                       String organization)
+            String serverUrl,
+            String organization)
             throws GeoPlatformException;
 
     boolean deleteServerCSW(Long serverID) throws GeoPlatformException;
@@ -92,5 +92,6 @@ public interface GPCatalogFinderRemote extends RemoteService {
             throws GeoPlatformException;
 
     String getRecordById(Long serverID,
-                         String identifier);
+            String identifier,
+            String moduleName);
 }

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
@@ -83,6 +82,7 @@ public class ShowFullMetadataAction extends MenuBaseAction {
         GPCatalogFinderRemote.Util.getInstance().getRecordById(
                 record.getIdCatalog(),
                 record.getIdentifier(),
+                GWT.getModuleName(),
                 new AsyncCallback<String>() {
                     @Override
                     public void onFailure(Throwable caught) {

@@ -264,6 +264,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     @Override
     public String getRecordById(Long serverID,
             String identifier,
+            String moduleName,
             HttpServletRequest httpServletRequest) {
 
         try {
@@ -273,7 +274,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
              * geoPlatformCSWClient.getRecordById request
              */
             String url = httpServletRequest.getSession().getServletContext().getRealPath(
-                    "/catalog_finder_demo/csw-template");
+                    "/" + moduleName + "/csw-template");
 
             logger.info("PATH @@@@@@@@@@@@@@@@@@ " + url);
 

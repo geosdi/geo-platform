@@ -78,5 +78,6 @@ public interface GPCatalogFinderRemoteAsync {
 
     void getRecordById(Long serverID,
             String identifier,
+            String moduleName,
             AsyncCallback<String> callback);
 }

@@ -69,7 +69,9 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
 
     @Override
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config, String searchText, String organization)
+            PagingLoadConfig config,
+            String searchText,
+            String organization)
             throws GeoPlatformException {
         return gpCatalogFinderService.searchCSWServers(config, searchText,
                                                        organization,
@@ -77,7 +79,8 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     }
 
     @Override
-    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+    public GPCSWServerBeanModel saveServerCSW(String alias,
+            String serverUrl,
             String organization)
             throws GeoPlatformException {
         return gpCatalogFinderService.saveServerCSW(alias, serverUrl,
@@ -110,8 +113,11 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     }
 
     @Override
-    public String getRecordById(Long serverID, String identifier) {
+    public String getRecordById(Long serverID,
+            String identifier,
+            String moduleName) {
         return gpCatalogFinderService.getRecordById(serverID, identifier,
+                                                    moduleName,
                                                     super.getThreadLocalRequest());
     }
 }

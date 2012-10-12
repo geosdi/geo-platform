@@ -35,14 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.feature;
 
-import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.*;
-import com.google.gwt.core.client.GWT;
-import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
-import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
-import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Markers;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**

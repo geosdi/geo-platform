@@ -18,9 +18,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.control;
 
-import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
-import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
-import org.geosdi.geoplatform.gui.client.widget.form.IGeoPlatformForm;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
@@ -38,6 +35,9 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import org.geosdi.geoplatform.gui.client.util.EPSGTemplate;
 import org.geosdi.geoplatform.gui.client.util.EPSGUtility;
+import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
+import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
+import org.geosdi.geoplatform.gui.client.widget.form.IGeoPlatformForm;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.LonLat;

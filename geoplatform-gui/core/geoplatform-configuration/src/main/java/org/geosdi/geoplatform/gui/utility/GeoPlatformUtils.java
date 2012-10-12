@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.utility;
 
+import java.util.Collections;
+import java.util.List;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 
 /**
@@ -59,10 +61,13 @@ public class GeoPlatformUtils {
     }
 
     /**
-     * @param globalConfiguration
-     *            the globalConfiguration to set
+     * @param globalConfiguration the globalConfiguration to set
      */
     public void setGlobalConfiguration(IGeoPlatformGlobal globalConfiguration) {
         this.globalConfiguration = globalConfiguration;
+    }
+
+    public static <T> List<T> safeList(List<T> list) {
+        return list == null ? Collections.EMPTY_LIST : list;
     }
 }

@@ -39,9 +39,11 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FileUtils;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
@@ -268,27 +270,32 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             HttpServletRequest httpServletRequest) {
 
         try {
+            String url = httpServletRequest.getSession().getServletContext()
+                    .getRealPath("/" + moduleName + "/csw-template");
+            logger.info("PATH @@@@@@@@@@@@@@@@@@ {}", url);
 
-            /**
-             * @TODO : Create a file and copy inside the String returned from
-             * geoPlatformCSWClient.getRecordById request
-             */
-            String url = httpServletRequest.getSession().getServletContext().getRealPath(
-                    "/" + moduleName + "/csw-template");
+//            File folder = new File(url);
+//
+//            File[] files = folder.listFiles();
+//
+//            for (File file : files) {
+//                logger.info("Ecco il nome del File @@@@@@@@@@@"
+//                        + "@@@@@@@@@ " + file.getName());
+//            }
 
-            logger.info("PATH @@@@@@@@@@@@@@@@@@ " + url);
+            String response = geoPlatformCSWClient.getRecordById(serverID, identifier);
+            String fileName = url + "/" + System.currentTimeMillis() + "-" + identifier + ".xml";
+            File file = new File(fileName);
+            FileUtils.writeStringToFile(file, response);
 
-            File folder = new File(url);
+            String fileNameUri = "file:///" + fileName;
+            logger.info("PATH FILE @@@@@@@@@@@@@@@@@@ {}", fileNameUri);
 
-            File[] files = folder.listFiles();
+            return fileNameUri;
 
-            for (File file : files) {
-                logger.info("Ecco il nome del File @@@@@@@@@@@"
-                        + "@@@@@@@@@ " + file.getName());
-            }
-
-            return geoPlatformCSWClient.getRecordById(serverID, identifier);
-
+        } catch (IOException ex) {
+            logger.error("\n*** IOException ***\n{}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
         } catch (IllegalParameterFault ex) {
             logger.error("\n*** IllegalParameterFault ***\n{}", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());

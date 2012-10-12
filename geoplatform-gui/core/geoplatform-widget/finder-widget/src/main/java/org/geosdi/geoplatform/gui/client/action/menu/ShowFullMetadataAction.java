@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
@@ -86,42 +87,13 @@ public class ShowFullMetadataAction extends MenuBaseAction {
                 new AsyncCallback<String>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        System.out.println("ERRORE @@@@@@@@@@@@@@@@ " + caught);
+                        System.out.println("Error @@@@@@@@@@@@@@@@ " + caught);
                     }
 
                     @Override
                     public void onSuccess(String result) {
-                        String replace = "type=\"text/xsl\" href=\"";
-                        String res = result.replace(replace,
-                                                    replace
-                                + GWT.getModuleBaseURL()
-                                + "/csw-template/");
-
-                        System.out.println("ECCOLA @@@@@@@@@@@@@@ " + res);
+                        Window.open(result, "Full Metadata", "");
                     }
                 });
-
-//        String url = this.createRequestURL(record);
-//
-//        Window.open(url, "Full Metadata", "");
-    }
-
-    private String createRequestURL(FullRecord record) {
-        StringBuilder str = new StringBuilder();
-
-        str.append(record.getCatalogURL()).append("?");
-        str.append("Request").append("=").append("GetRecordById").append("&");
-        str.append("Service").append("=").append("CSW").append("&");
-        str.append("Version").append("=").append("2.0.2").append("&");
-        str.append("ElementSetName").append("=").append("full").append("&");
-        /**
-         * Not specify OutputSchema because there are interoperability problems
-         * with the value of the elementSetName, also if specified into
-         * getCapabilities request! Will be used the default OutputSchema: the
-         * first present into getCapabilities request.
-         */
-        str.append("Id").append("=").append(record.getIdentifier());
-
-        return str.toString();
     }
 }

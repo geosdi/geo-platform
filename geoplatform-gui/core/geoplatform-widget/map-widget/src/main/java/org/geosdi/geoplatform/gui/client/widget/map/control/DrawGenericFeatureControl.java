@@ -45,7 +45,7 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public abstract class DrawGenericFeatureControl extends MapControl {
 
@@ -57,8 +57,9 @@ public abstract class DrawGenericFeatureControl extends MapControl {
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#activateControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#activateControl()
      */
     @Override
     public void activateControl() {
@@ -67,12 +68,11 @@ public abstract class DrawGenericFeatureControl extends MapControl {
     }
 
     /**
-     * 
+     *
      * @return FeatureAddedListener
      */
     public FeatureAddedListener createFeatureAddedListener() {
         return new FeatureAddedListener() {
-
             @Override
             public void onFeatureAdded(VectorFeature vf) {
 
@@ -84,8 +84,9 @@ public abstract class DrawGenericFeatureControl extends MapControl {
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#deactivateControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#deactivateControl()
      */
     @Override
     public void deactivateControl() {

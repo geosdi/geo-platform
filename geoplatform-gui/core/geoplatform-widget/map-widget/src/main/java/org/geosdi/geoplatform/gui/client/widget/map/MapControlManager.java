@@ -134,6 +134,7 @@ public class MapControlManager {
                 wkt).getJSObject());
         geom.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()), new Projection(
                 GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
+
         VectorFeature vectorFeature = new VectorFeature(geom);
         this.vector.addFeature(vectorFeature);
         this.map.zoomToExtent(geom.getBounds());

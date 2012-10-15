@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.event.EventType;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class MapWidgetEvents {
 

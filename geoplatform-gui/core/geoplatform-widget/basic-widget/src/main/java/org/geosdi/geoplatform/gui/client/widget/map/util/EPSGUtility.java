@@ -33,23 +33,23 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.util;
+package org.geosdi.geoplatform.gui.client.widget.map.util;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
 public class EPSGUtility {
 
     public static List<EPSGTemplate> getCommonEPSG() {
-        List<EPSGTemplate> epsg = new ArrayList<EPSGTemplate>();
+        List<EPSGTemplate> epsg = Lists.newArrayList();
 
         epsg.add(new EPSGTemplate("EPSG:0", "Choose EPSG..."));
         epsg.add(new EPSGTemplate("EPSG:4326", "WGS 84"));
+        epsg.add(new EPSGTemplate("EPSG:3857", "Google Mercator"));
         epsg.add(new EPSGTemplate("EPSG:32632", "WGS 84 / UTM zone 32N"));
         epsg.add(new EPSGTemplate("EPSG:32633", "WGS 84 / UTM zone 33N"));
         epsg.add(new EPSGTemplate("EPSG:23032", "ED50 / UTM zone 32N"));

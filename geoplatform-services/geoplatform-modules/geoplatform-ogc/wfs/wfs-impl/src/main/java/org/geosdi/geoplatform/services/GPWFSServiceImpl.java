@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import javax.jws.WebService;
+import org.geosdi.geoplatform.configurator.wfs.GPWFSConfigurator;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.responce.ShortAttributeDTO;
@@ -52,30 +53,30 @@ import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.AttributeDescriptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWFSService")
-public class GPWFSServiceImpl implements GPWFSService, InitializingBean {
+public class GPWFSServiceImpl implements GPWFSService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private GPWFSConfigurator wfsConfigurator;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-    }
+    public LayerSchemaDTO describeFeatureType(String urlServer,
+            String typeName) throws ResourceNotFoundFault {
 
-    @Override
-    public LayerSchemaDTO describeFeatureType(String urlServer, String typeName) throws ResourceNotFoundFault {
-        
         LayerSchemaDTO layerSchema = new LayerSchemaDTO();
-            List<ShortAttributeDTO> attributes = new ArrayList<ShortAttributeDTO>();
+        List<ShortAttributeDTO> attributes = new ArrayList<ShortAttributeDTO>();
         try {
-            
+
             urlServer += "?REQUEST=GetCapabilities&version=1.0.0";
-            
+
             Map connectionParameters = new HashMap();
             connectionParameters.put(WFSDataStoreFactory.URL.key, urlServer);
 
@@ -89,7 +90,7 @@ public class GPWFSServiceImpl implements GPWFSService, InitializingBean {
 
                 attribute.setName(desk.getName().toString());
                 attribute.setLocalName(desk.getLocalName());
-                attribute.setDefaultValue((String)desk.getDefaultValue());
+                attribute.setDefaultValue((String) desk.getDefaultValue());
                 attribute.setType(desk.getType().getBinding().getSimpleName());
                 attribute.setMinOccurs(desk.getMinOccurs());
                 attribute.setMaxOccurs(desk.getMaxOccurs());
@@ -97,11 +98,12 @@ public class GPWFSServiceImpl implements GPWFSService, InitializingBean {
                 attributes.add(attribute);
 
             }
-            
+
             layerSchema.setAttributes(attributes);
 
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(GPWFSServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GPWFSServiceImpl.class.getName()).log(
+                    Level.SEVERE, null, ex);
         }
 
 

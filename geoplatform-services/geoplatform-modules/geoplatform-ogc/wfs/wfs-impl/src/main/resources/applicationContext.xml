@@ -23,9 +23,7 @@
     <!-- Services -->
     <!--===================================================================== -->
     
-    <bean id="wfsService" class="org.geosdi.geoplatform.services.GPWFSServiceImpl">
-    
-    </bean>
+    <bean id="wfsService" class="org.geosdi.geoplatform.services.GPWFSServiceImpl" />
 
     <!--===================================================================== -->
 

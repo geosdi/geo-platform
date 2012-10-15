@@ -40,11 +40,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import javax.jws.WebService;
+import org.geosdi.geoplatform.configurator.wfs.GPWFSConfigurator;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.responce.ShortAttributeDTO;
+import org.geosdi.geoplatform.responce.AttributeDTO;
 import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFinder;
 import org.geotools.data.wfs.WFSDataStoreFactory;
@@ -52,56 +52,56 @@ import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.AttributeDescriptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWFSService")
-public class GPWFSServiceImpl implements GPWFSService, InitializingBean {
+public class GPWFSServiceImpl implements GPWFSService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private GPWFSConfigurator wfsConfigurator;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-    }
+    public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
+            throws ResourceNotFoundFault {
 
-    @Override
-    public LayerSchemaDTO describeFeatureType(String urlServer, String typeName) throws ResourceNotFoundFault {
-        
         LayerSchemaDTO layerSchema = new LayerSchemaDTO();
-            List<ShortAttributeDTO> attributes = new ArrayList<ShortAttributeDTO>();
+        List<AttributeDTO> attributeList = new ArrayList<AttributeDTO>();
         try {
-            
-            urlServer += "?REQUEST=GetCapabilities&version=1.0.0";
-            
+
+            serverUrl += "?service=WFS&version=1.0.0&request=GetCapabilities";
+
             Map connectionParameters = new HashMap();
-            connectionParameters.put(WFSDataStoreFactory.URL.key, urlServer);
+            connectionParameters.put(WFSDataStoreFactory.URL.key, serverUrl);
 
             DataStore data = DataStoreFinder.getDataStore(connectionParameters);
             SimpleFeatureType schema = data.getSchema(typeName);
 
-            layerSchema.setSchemaNamespaceURI(schema.getName().getNamespaceURI());
+            layerSchema.setTargetNamespace(schema.getName().getNamespaceURI());
 
+            // Populate only the geometry attribute (always is the first)
+            // Use a list of attributes for future uses
             for (AttributeDescriptor desk : schema.getAttributeDescriptors()) {
-                ShortAttributeDTO attribute = new ShortAttributeDTO();
+                if ("the_geom".equals(desk.getLocalName())) {
+                    AttributeDTO attribute = new AttributeDTO();
 
-                attribute.setName(desk.getName().toString());
-                attribute.setLocalName(desk.getLocalName());
-                attribute.setDefaultValue((String)desk.getDefaultValue());
-                attribute.setType(desk.getType().getBinding().getSimpleName());
-                attribute.setMinOccurs(desk.getMinOccurs());
-                attribute.setMaxOccurs(desk.getMaxOccurs());
+                    attribute.setName(desk.getLocalName());
+                    attribute.setValue(desk.getType().getBinding().getSimpleName());
 
-                attributes.add(attribute);
-
+                    attributeList.add(attribute);
+                    break;
+                }
             }
-            
-            layerSchema.setAttributes(attributes);
+
+            layerSchema.setAttributes(attributeList);
 
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(GPWFSServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error("\n### IOException: {} ###", ex.getMessage());
         }
 
 
@@ -110,7 +110,8 @@ public class GPWFSServiceImpl implements GPWFSService, InitializingBean {
     }
 
     @Override
-    public LayerSchemaDTO getFeature(String featureId) throws ResourceNotFoundFault {
+    public LayerSchemaDTO getFeature(String featureID) throws ResourceNotFoundFault {
+        // TODO
         return null;
     }
 }

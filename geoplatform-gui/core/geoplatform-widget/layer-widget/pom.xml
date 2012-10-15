@@ -101,11 +101,16 @@
         </dependency>
         
         <!-- ============================================================= -->
-        <!-- ============= GEOPLATFORM WS TRACKING CONNECTOR ============= -->
+        <!-- ============= GEOPLATFORM WS CONNECTORS ============= -->
         <!-- ============================================================= -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-tracking-connector</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-wfs-connector</artifactId>
             <version>${project.version}</version>
         </dependency>
         

@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-ws-connectors</artifactId>
+        <version>1.5-SNAPSHOT</version>
+    </parent>
+    
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-ws-wfs-connector</artifactId>
+    <version>1.5-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    
+    <name>Geo-Platform :: == WS WFS Connector Module</name>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-api-connector</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-wfs-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>

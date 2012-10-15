@@ -46,37 +46,35 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-
 @XmlRootElement(name = "LayerSchemaDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"schemaNamespaceURI","attributes"})
+@XmlType(propOrder = {"targetNamespace", "attributes"})
 public class LayerSchemaDTO {
-    
-    private String schemaNamespaceURI;
-    
+
+    private String targetNamespace;
+    //
     @XmlElementWrapper(name = "attributes")
     @XmlElement(name = "attribute")
-    private List<? extends ShortAttributeDTO> attributes;
+    private List<AttributeDTO> attributes;
 
     public LayerSchemaDTO() {
-        super();
     }
 
-    public void setSchemaNamespaceURI(String schemaNamespaceURI) {
-        this.schemaNamespaceURI = schemaNamespaceURI;
+    public String getTargetNamespace() {
+        return targetNamespace;
     }
 
-    public void setAttributes(List<? extends ShortAttributeDTO> attributes) {
+    public void setTargetNamespace(String targetNamespace) {
+        this.targetNamespace = targetNamespace;
+    }
+
+    public void setAttributes(List<AttributeDTO> attributes) {
         this.attributes = attributes;
     }
 
-    public String getSchemaNamespaceURI() {
-        return schemaNamespaceURI;
-    }
-
-    public List<? extends ShortAttributeDTO> getAttributes() {
+    public List<AttributeDTO> getAttributes() {
         return attributes;
     }
-    
 }

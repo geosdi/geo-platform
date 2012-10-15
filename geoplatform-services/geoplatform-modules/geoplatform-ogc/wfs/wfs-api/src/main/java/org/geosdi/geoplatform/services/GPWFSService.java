@@ -39,7 +39,6 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import org.codehaus.jra.Get;
-import org.codehaus.jra.HttpResource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.LayerSchemaDTO;
 
@@ -53,18 +52,16 @@ import org.geosdi.geoplatform.responce.LayerSchemaDTO;
 @WebService(name = "GPWFSService",
             targetNamespace = "http://services.geo-platform.org/")
 public interface GPWFSService {
-    
+
     @Get
-    @HttpResource(location = "/wfs/describeFeatureType/{typeName}")
     @WebResult(name = "DescribeFeatureType")
-    LayerSchemaDTO describeFeatureType(@WebParam(name = "urlServer") String urlServer, @WebParam(name = "typeName") String typeName)
+    LayerSchemaDTO describeFeatureType(
+            @WebParam(name = "serverUrl") String serverUrl,
+            @WebParam(name = "typeName") String typeName)
             throws ResourceNotFoundFault;
-    
+
     @Get
-    @HttpResource(location = "/wfs/features/{featureId}")
     @WebResult(name = "DescribeFeatureType")
-    LayerSchemaDTO getFeature(@WebParam(name = "featureId") String featureId)
+    LayerSchemaDTO getFeature(@WebParam(name = "featureID") String featureID)
             throws ResourceNotFoundFault;
-    
-    
 }

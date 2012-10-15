@@ -38,68 +38,29 @@ package org.geosdi.geoplatform.responce;
 /**
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+public class AttributeDTO {
 
-
-public class ShortAttributeDTO {
-            
     private String name;
-    private String localName;
-    private String defaultValue;
-    private String type;
-    private int minOccurs;
-    private int maxOccurs;
+    private String value;
 
-    public ShortAttributeDTO() {
-        super();
+    public AttributeDTO() {
     }
 
     public String getName() {
         return name;
     }
 
-    public String getLocalName() {
-        return localName;
-    }
-
-    public String getDefaultValue() {
-        return defaultValue;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public int getMinOccurs() {
-        return minOccurs;
-    }
-
-    public int getMaxOccurs() {
-        return maxOccurs;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setLocalName(String localName) {
-        this.localName = localName;
+    public String getValue() {
+        return value;
     }
 
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
+    public void setValue(String value) {
+        this.value = value;
     }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setMinOccurs(int minOccurs) {
-        this.minOccurs = minOccurs;
-    }
-
-    public void setMaxOccurs(int maxOccurs) {
-        this.maxOccurs = maxOccurs;
-    }
-    
 }

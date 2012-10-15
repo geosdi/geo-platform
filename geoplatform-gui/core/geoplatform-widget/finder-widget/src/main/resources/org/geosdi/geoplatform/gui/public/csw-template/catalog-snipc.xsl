@@ -17,15 +17,15 @@
     <xsl:template match="/">
         <html>
             <body>
-                <h2 align="center">GetRecordById Request</h2>
-                <h3 align="center">Full Metadata</h3>
+                <h2>GetRecordById Request</h2>
+                <h3>Full Metadata</h3>
                 <xsl:apply-templates/>
             </body>
         </html>
     </xsl:template>
 
     <xsl:template match="*">        
-        <table border="1" align="center">
+        <table border="1">
             <tr bgcolor="#9acd32">
                 <th>
                     <xsl:value-of select="name()"/>

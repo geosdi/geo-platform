@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.configurator.wfs.GPWFSConfigurator;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -68,17 +67,17 @@ public class GPWFSServiceImpl implements GPWFSService {
     private GPWFSConfigurator wfsConfigurator;
 
     @Override
-    public LayerSchemaDTO describeFeatureType(String urlServer,
-            String typeName) throws ResourceNotFoundFault {
+    public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
+            throws ResourceNotFoundFault {
 
         LayerSchemaDTO layerSchema = new LayerSchemaDTO();
         List<ShortAttributeDTO> attributes = new ArrayList<ShortAttributeDTO>();
         try {
 
-            urlServer += "?REQUEST=GetCapabilities&version=1.0.0";
+            serverUrl += "?REQUEST=GetCapabilities&version=1.0.0";
 
             Map connectionParameters = new HashMap();
-            connectionParameters.put(WFSDataStoreFactory.URL.key, urlServer);
+            connectionParameters.put(WFSDataStoreFactory.URL.key, serverUrl);
 
             DataStore data = DataStoreFinder.getDataStore(connectionParameters);
             SimpleFeatureType schema = data.getSchema(typeName);
@@ -102,8 +101,7 @@ public class GPWFSServiceImpl implements GPWFSService {
             layerSchema.setAttributes(attributes);
 
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(GPWFSServiceImpl.class.getName()).log(
-                    Level.SEVERE, null, ex);
+            logger.error("\n### IOException: {} ###", ex.getMessage());
         }
 
 
@@ -112,7 +110,8 @@ public class GPWFSServiceImpl implements GPWFSService {
     }
 
     @Override
-    public LayerSchemaDTO getFeature(String featureId) throws ResourceNotFoundFault {
+    public LayerSchemaDTO getFeature(String featureID) throws ResourceNotFoundFault {
+        // TODO
         return null;
     }
 }

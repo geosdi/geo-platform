@@ -98,7 +98,7 @@ import org.slf4j.LoggerFactory;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 class CSWServiceImpl {
-    
+
     final private Logger logger = LoggerFactory.getLogger(CSWServiceImpl.class);
     // DAO
     private GPServerDAO serverDao;
@@ -151,9 +151,9 @@ class CSWServiceImpl {
         if (serverSearch != null) { // If there is already a server with the specified URLs
             return serverSearch.getId();
         }
-        
+
         server.setServerType(GPCapabilityType.CSW);
-        
+
         serverDao.persist(server);
         return server.getId();
     }
@@ -165,37 +165,37 @@ class CSWServiceImpl {
     ServerCSWDTO saveServerCSW(String alias, String serverUrl,
             String organization)
             throws IllegalParameterFault {
-        
+
         serverUrl = this.deleteQueryStringFromURL(serverUrl);
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server != null) { // If there is already a server with the specified URLs
             return new ServerCSWDTO(server);
         }
-        
+
         GPOrganization org = organizationDao.findByName(organization);
         if (org == null) {
             throw new IllegalParameterFault(
                     "CSW Server to save have an organization that does not exist");
         }
-        
+
         try {
             CatalogCapabilities capabilities = catalogCapabilitiesBean.bindUrl(
                     serverUrl);
-            
+
             server = new GeoPlatformServer();
             server.setServerType(GPCapabilityType.CSW);
             server.setServerUrl(serverUrl);
             server.setAliasName(alias);
             server.setOrganization(org);
-            
+
             server.setTitle(capabilities.getServiceIdentification().getTitle());
             server.setAbstractServer(
                     capabilities.getServiceIdentification().getAbstractText());
             server.setName(capabilities.getServiceProvider().getProviderName());
-            
+
             CSWEntityCorrectness.checkCSWServer(server); // TODO assert
             serverDao.persist(server);
-            
+
         } catch (MalformedURLException ex) {
             logger.error("### MalformedURLException: {}", ex.getMessage());
             throw new IllegalParameterFault("Malformed URL");
@@ -206,7 +206,7 @@ class CSWServiceImpl {
             logger.error("### CatalogVersionException: {}", ex.getMessage());
             throw new IllegalParameterFault("The catalog version must be 2.0.2");
         }
-        
+
         return new ServerCSWDTO(server);
     }
 
@@ -229,12 +229,12 @@ class CSWServiceImpl {
     List<ServerCSWDTO> getAllCSWServers(String organizationName) throws ResourceNotFoundFault {
         GPOrganization organization = organizationDao.findByName(
                 organizationName);
-        
+
         if (organization == null) {
             throw new ResourceNotFoundFault("Organization with name "
                     + organizationName + "was not found.");
         }
-        
+
         List<GeoPlatformServer> found = serverDao.findAll(organization.getId(),
                                                           GPCapabilityType.CSW);
         return convertServerList(found);
@@ -281,13 +281,13 @@ class CSWServiceImpl {
 
         return new ServerCSWDTO(server);
     }
-    
+
     int getCSWServersCount(SearchRequest request, String organization) {
         logger.trace("\n*** CSWServersCount: {} ***", request);
         Search searchCriteria = new Search(GeoPlatformServer.class);
         searchCriteria.addFilterEqual("serverType", GPCapabilityType.CSW);
         searchCriteria.addFilterEqual("organization.name", organization);
-        
+
         String like = request.getNameLike();
         if (like != null) {
             Filter fTitle = Filter.ilike("title", like);
@@ -297,7 +297,7 @@ class CSWServiceImpl {
         }
         return serverDao.count(searchCriteria);
     }
-    
+
     List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request,
             String organization) {
         Search searchCriteria = new Search(GeoPlatformServer.class);
@@ -306,7 +306,7 @@ class CSWServiceImpl {
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
         searchCriteria.addSortAsc("aliasName");
-        
+
         String like = request.getNameLike();
         if (like != null) {
             Filter fTitle = Filter.ilike("title", like);
@@ -314,11 +314,11 @@ class CSWServiceImpl {
 //            Filter fUrl = Filter.ilike("serverUrl", like);
             searchCriteria.addFilterOr(fTitle, fAlias);
         }
-        
+
         List<GeoPlatformServer> serverList = serverDao.search(searchCriteria);
         return this.convertServerList(serverList);
     }
-    
+
     private List<ServerCSWDTO> convertServerList(List<GeoPlatformServer> servers) {
         List<ServerCSWDTO> shorts = new ArrayList<ServerCSWDTO>(servers.size());
         for (GeoPlatformServer server : servers) {
@@ -326,40 +326,40 @@ class CSWServiceImpl {
         }
         return shorts;
     }
-    
+
     private String deleteQueryStringFromURL(String serverUrl) {
         if (serverUrl == null) {
             return "";
         }
-        
+
         int index = serverUrl.indexOf("?");
         if (index != -1) {
             return serverUrl.substring(0, index);
         }
         return serverUrl;
     }
-    
+
     int getRecordsCount(CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         logger.trace("\n*** getRecordsCount ***\n{}", catalogFinder);
-        
+
         GeoPlatformServer server = this.getCSWServerByID(
                 catalogFinder.getServerID());
-        
+
         CatalogGetRecordsRequest<GetRecordsResponseType> request =
                 this.createGetRecordsRequest(server.getServerUrl());
-        
+
         request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.BRIEF.value());
         request.setResultType(ResultType.HITS.value());
-        
+
         request.setConstraintLanguage(ConstraintLanguage.FILTER);
         request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
         request.setCatalogFinder(catalogFinder);
-        
+
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
-        
+
         return response.getSearchResults().getNumberOfRecordsMatched().intValue();
     }
 
@@ -372,18 +372,18 @@ class CSWServiceImpl {
             CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         logger.trace("\n*** searchSummaryRecords ***\n{}", catalogFinder);
-        
+
         GeoPlatformServer server = this.getCSWServerByID(
                 catalogFinder.getServerID());
-        
+
         CatalogGetRecordsRequest<GetRecordsResponseType> request =
                 this.createGetRecordsRequest(server.getServerUrl());
-        
+
         request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.SUMMARY.value());
         request.setResultType(ResultType.RESULTS.value());
-        
+
         request.setConstraintLanguage(ConstraintLanguage.FILTER);
         request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
         request.setCatalogFinder(catalogFinder);
@@ -393,32 +393,32 @@ class CSWServiceImpl {
         request.setStartPosition(BigInteger.valueOf(start));
         logger.debug("\n*** Num: {} *** Start: {} ***",
                      request.getMaxRecords(), request.getStartPosition());
-        
+
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
                 "\n*** Records matched: {} *** Records returned: {} *** Record next: {} ***",
                 response.getSearchResults().getNumberOfRecordsMatched(),
                 response.getSearchResults().getNumberOfRecordsReturned(),
                 response.getSearchResults().getNextRecord());
-        
+
         if (response.getSearchResults().getNumberOfRecordsReturned().intValue()
                 != response.getSearchResults().getAbstractRecord().size()) {
             throw new ServerInternalFault("CSW Catalog Server Error: incorrect number of records, expected "
                     + response.getSearchResults().getNumberOfRecordsReturned() + " but was "
                     + response.getSearchResults().getAbstractRecord().size());
         }
-        
+
         List<JAXBElement<? extends AbstractRecordType>> records =
                 response.getSearchResults().getAbstractRecord();
         logger.trace("\n*** Record list size: {} ***", records.size());
-        
+
         List<SummaryRecordDTO> recordListDTO = new ArrayList<SummaryRecordDTO>(
                 records.size());
         for (JAXBElement<? extends AbstractRecordType> record : records) {
             SummaryRecordType summary = (SummaryRecordType) record.getValue();
             recordListDTO.add(this.convertSummaryRecords(summary, server));
         }
-        
+
         return recordListDTO;
     }
 
@@ -434,18 +434,18 @@ class CSWServiceImpl {
             CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         logger.trace("\n*** searchFullRecords ***\n{}", catalogFinder);
-        
+
         GeoPlatformServer server = this.getCSWServerByID(
                 catalogFinder.getServerID());
-        
+
         CatalogGetRecordsRequest<GetRecordsResponseType> request =
                 this.createGetRecordsRequest(server.getServerUrl());
-        
+
         request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.FULL.value());
         request.setResultType(ResultType.RESULTS.value());
-        
+
         request.setConstraintLanguage(ConstraintLanguage.FILTER);
         request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
         request.setCatalogFinder(catalogFinder);
@@ -455,35 +455,35 @@ class CSWServiceImpl {
         request.setStartPosition(BigInteger.valueOf(start));
         logger.debug("\n*** Num: {} *** Start: {} ***",
                      request.getMaxRecords(), request.getStartPosition());
-        
+
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
                 "\n*** Records matched: {} *** Records returned: {} *** Record next: {} ***",
                 response.getSearchResults().getNumberOfRecordsMatched(),
                 response.getSearchResults().getNumberOfRecordsReturned(),
                 response.getSearchResults().getNextRecord());
-        
+
         if (response.getSearchResults().getNumberOfRecordsReturned().intValue()
                 != response.getSearchResults().getAbstractRecord().size()) {
             throw new ServerInternalFault("CSW Catalog Server Error: incorrect number of records, expected "
                     + response.getSearchResults().getNumberOfRecordsReturned() + " but was "
                     + response.getSearchResults().getAbstractRecord().size());
         }
-        
+
         List<JAXBElement<? extends AbstractRecordType>> records =
                 response.getSearchResults().getAbstractRecord();
         logger.trace("\n*** Record list size: {} ***", records.size());
-        
+
         List<FullRecordDTO> recordListDTO = new ArrayList<FullRecordDTO>(
                 records.size());
         for (JAXBElement<? extends AbstractRecordType> r : records) {
             RecordType record = (RecordType) r.getValue();
             recordListDTO.add(this.convertFullRecords(record, server));
         }
-        
+
         return recordListDTO;
     }
-    
+
     private GeoPlatformServer getCSWServerByID(Long serverID)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(serverID);
@@ -494,10 +494,10 @@ class CSWServiceImpl {
 
         return server;
     }
-    
+
     private SummaryRecordDTO convertSummaryRecords(
             SummaryRecordType record, GeoPlatformServer server) {
-        
+
         SummaryRecordDTO dto = new SummaryRecordDTO();
         dto.setIdCatalog(server.getId());
         dto.setCatalogURL(server.getServerUrl());
@@ -512,51 +512,51 @@ class CSWServiceImpl {
                 record.getAbstract()));
         dto.setSubjects(
                 BindingUtility.convertLiteralListToList(record.getSubject()));
-        
+
         return dto;
     }
-    
+
     private FullRecordDTO convertFullRecords(RecordType record,
             GeoPlatformServer server) {
-        
+
         FullRecordDTO dto = new FullRecordDTO();
         dto.setIdCatalog(server.getId());
         dto.setCatalogURL(server.getServerUrl());
-        
+
         for (JAXBElement<? extends SimpleLiteral> element : record.getDCElement()) {
             String localPartElement = element.getName().getLocalPart();
             List<String> contentElement = element.getValue().getContent();
-            
+
             if ("identifier".equals(localPartElement)) {
                 dto.setIdentifier(
                         BindingUtility.convertStringListToString(
                         contentElement));
             }
-            
+
             if ("title".equals(localPartElement)) {
                 dto.setTitle(
                         BindingUtility.convertStringListToString(
                         contentElement));
             }
-            
+
             if ("type".equals(localPartElement)) {
                 dto.setType(
                         BindingUtility.convertStringListToString(
                         contentElement));
             }
-            
+
             if ("abstract".equals(localPartElement)) {
                 dto.setAbstractText(
                         BindingUtility.convertStringListToString(
                         contentElement));
             }
-            
+
             if ("subject".equals(localPartElement)) {
                 dto.addSubject(
                         BindingUtility.convertStringListToString(
                         contentElement));
             }
-            
+
             if ("URI".equals(localPartElement)) {
                 URI uri = (URI) element.getValue();
                 String protocol = uri.getProtocol();
@@ -567,7 +567,7 @@ class CSWServiceImpl {
                 if (OnlineResourceProtocolType.isForGetCapabilities(protocol)) {
                     break;
                 }
-                
+
                 URIDTO uriDTO = new URIDTO();
                 uriDTO.setProtocol(protocol);
                 uriDTO.setName(uri.getName());
@@ -576,51 +576,51 @@ class CSWServiceImpl {
                 dto.addUri(uriDTO);
             }
         }
-        
+
         if (!record.getBoundingBox().isEmpty()) {
             BoundingBoxType bBoxType = record.getBoundingBox().get(0).getValue();
             dto.setBBox(BindingUtility.convertBBoxTypeToBBox(bBoxType));
             dto.setCrs(BindingUtility.convertEncodedCRS(bBoxType.getCrs()));
         }
-        
-        
+
+
         return dto;
     }
-    
+
     private CatalogGetRecordsRequest<GetRecordsResponseType> createGetRecordsRequest(
             String serverUrl)
             throws IllegalParameterFault {
-        
+
         GPCSWServerConnector serverConnector = null;
         try {
             URL url = new URL(serverUrl);
-            
+
             GPCSWConnectorBuilder builder = GPCSWConnectorBuilder.newConnector().withServerUrl(
                     url);
-            
+
             if (serverUrl.contains("snipc.protezionecivile.it")) {
                 GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
                         snipcProvider.getSnipcUsername(),
                         snipcProvider.getSnipcPassword());
                 builder.withClientSecurity(securityConnector);
             }
-            
+
             serverConnector = builder.build();
-            
+
         } catch (MalformedURLException ex) {
             logger.error("### MalformedURLException: {}", ex.getMessage());
             throw new IllegalParameterFault("Malformed URL");
         }
         CatalogGetRecordsRequest<GetRecordsResponseType> request =
                 serverConnector.createGetRecordsRequest();
-        
+
         return request;
     }
-    
+
     private GetRecordsResponseType createGetRecordsResponse(
             CatalogGetRecordsRequest<GetRecordsResponseType> request)
             throws IllegalParameterFault, ServerInternalFault {
-        
+
         GetRecordsResponseType response = null;
         try {
             response = request.getResponse();
@@ -628,50 +628,49 @@ class CSWServiceImpl {
             logger.error("### IOException: {}", ex.getMessage());
             throw new IllegalParameterFault("Error on parse response stream");
         }
-        
+
         return response;
     }
-    
+
     public String getRecordById(Long serverID, String identifier)
             throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
         logger.trace("\n*** GetRecordById ***\n");
-        
+
         GeoPlatformServer server = this.getCSWServerByID(serverID);
-        
+
         GPCSWServerConnector serverConnector = this.createServerConnector(
                 server.getServerUrl());
-        
+
         OutputSchema outputSchema = this.retrieveGetRecordByIdOutputSchema(
                 serverConnector);
-        
+
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 serverConnector.createGetRecordByIdRequest();
         request.setId(identifier);
         request.setElementSetType(ElementSetType.FULL.value());
         request.setOutputSchema(outputSchema);
-        
+
         String response = this.createGetRecordByIdResponseAsString(request);
-        
-        String responseXSL = this.insertStylesheet(response, outputSchema,
-                                                   server.getServerUrl());
-        
+
+        String responseXSL = this.insertStylesheet(response);
+
         return responseXSL;
     }
-    
+
     private GPCSWServerConnector createServerConnector(String serverUrl) throws IllegalParameterFault {
         GPCSWServerConnector serverConnector;
         try {
             URL url = new URL(serverUrl);
             GPCSWConnectorBuilder builder = GPCSWConnectorBuilder.newConnector()
                     .withServerUrl(url);
-            
+
             if (serverUrl.contains("snipc.protezionecivile.it")) {
                 GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
                         snipcProvider.getSnipcUsername(),
                         snipcProvider.getSnipcPassword());
                 builder.withClientSecurity(securityConnector);
             }
-            
+
             serverConnector = builder.build();
         } catch (MalformedURLException ex) {
             logger.error("### MalformedURLException: {}", ex.getMessage());
@@ -688,14 +687,14 @@ class CSWServiceImpl {
             throws IllegalParameterFault, ServerInternalFault {
         List<String> schemas = this.retrieveGetRecordByIdOutputSchemas(
                 serverConnector);
-        
+
         OutputSchema outputSchema = null;
         if (schemas.contains(OutputSchema.GMD.toString())) {
             outputSchema = OutputSchema.GMD;
         } else if (schemas.contains(OutputSchema.ORIGINAL.toString())) {
             outputSchema = OutputSchema.ORIGINAL;
         }
-        
+
         logger.debug("\n*** OutputSchema: {}", outputSchema);
         return outputSchema;
     }
@@ -711,12 +710,12 @@ class CSWServiceImpl {
         List<String> schemas = null;
         try {
             CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
-            
+
             CapabilitiesType response = request.getResponse();
-            
+
             List<Operation> operationList = response.getOperationsMetadata().getOperation();
             for (Operation operation : operationList) {
-                
+
                 if ("GetRecordById".equals(operation.getName())) {
                     List<DomainType> parameterList = operation.getParameter();
                     schemas = new ArrayList<String>(parameterList.size());
@@ -737,7 +736,7 @@ class CSWServiceImpl {
             logger.error("### IOException: {}", ex.getMessage());
             throw new IllegalParameterFault("Error on parse response stream");
         }
-        
+
         return schemas;
     }
 //
@@ -759,7 +758,7 @@ class CSWServiceImpl {
     private String createGetRecordByIdResponseAsString(
             CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request)
             throws IllegalParameterFault, ServerInternalFault {
-        
+
         String response = null;
         try {
             response = request.getResponseAsString();
@@ -767,7 +766,7 @@ class CSWServiceImpl {
             logger.error("### IOException: " + ex.getMessage());
             throw new IllegalParameterFault("Error on parse response stream");
         }
-        
+
         return response;
     }
 
@@ -775,34 +774,15 @@ class CSWServiceImpl {
      * Insert into XML response the processing instruction related to stylesheet
      * wrt the OutputSchema and catalog URL.
      */
-    private String insertStylesheet(String response, OutputSchema outputSchema,
-            String serverUrl) {
+    private String insertStylesheet(String response) {
         String responseXSL = response;
-        
-        String stylesheet = this.retrieveStylesheet(outputSchema, serverUrl);
-        if (stylesheet != null) {
-            int ind = response.lastIndexOf("?>");
-            responseXSL = responseXSL.substring(0, ind + 2)
-                    + "\n<?xml-stylesheet type=\"text/xsl\" href=\"" + stylesheet + "\"?>"
-                    + responseXSL.substring(ind + 3);
-        }
-        
-        return responseXSL;
-    }
 
-    /**
-     * Retrieve stylesheet of the OutputSchema (and catalog URL) desired, if
-     * available, otherwise null.
-     *
-     * @todo Manage others OutputSchemas.
-     */
-    private String retrieveStylesheet(OutputSchema outputSchema,
-            String serverUrl) {
-        String stylesheet = null;
-        if (outputSchema == OutputSchema.ORIGINAL
-                && serverUrl.contains("snipc.protezionecivile.it")) {
-            stylesheet = "catalog-snipc.xsl";
-        }
-        return stylesheet;
+        String stylesheet = "catalog-snipc.xsl";
+        int ind = response.lastIndexOf("?>");
+        responseXSL = responseXSL.substring(0, ind + 2)
+                + "\n<?xml-stylesheet type=\"text/xsl\" href=\"" + stylesheet + "\"?>"
+                + responseXSL.substring(ind + 3);
+
+        return responseXSL;
     }
 }

@@ -67,8 +67,7 @@ public class GPWFSServiceImpl implements GPWFSService {
     private GPWFSConfigurator wfsConfigurator;
 
     @Override
-    public LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName)
+    public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
             throws ResourceNotFoundFault {
 
         if (!this.wfsConfigurator.matchDefaultDataSource(serverUrl)) {
@@ -107,12 +106,16 @@ public class GPWFSServiceImpl implements GPWFSService {
 
             layerSchema.setAttributes(attributeList);
 
+        } catch (NullPointerException ex) {
+            // data.getSchema(typeName) throws this exception
+            // if the the layer is not a feature
+            logger.error("\n### NullPointerException: {} ###", ex.getMessage());
+            return null;
         } catch (IOException ex) {
             logger.error("\n### IOException: {} ###", ex.getMessage());
-            throw new ResourceNotFoundFault("The Layer " + typeName + ""
-                    + " is not a vector");
+            throw new ResourceNotFoundFault(
+                    "Error to execute the WFS DescribeFeatureType for the layer " + typeName);
         }
-
 
         return layerSchema;
 

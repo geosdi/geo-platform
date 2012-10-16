@@ -52,7 +52,6 @@ import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
-import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
@@ -83,6 +82,7 @@ import org.geosdi.geoplatform.gui.client.widget.decorator.GPLayerTreeDecorator;
 import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
@@ -308,7 +308,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     }
     
     @Override
-    public GPTreePanel<GPBeanTreeModel> createTreePanel(TreeStore store) {
+    public GPTreePanel<GPBeanTreeModel> createTreePanel(GPTreeStore store) {
         return new GPTreePanel(store) {
             @Override
             protected boolean hasChildren(ModelData model) {

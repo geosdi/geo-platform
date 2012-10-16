@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree;
 
-import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeCheckDecorator;
 import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeIconDecorator;
@@ -50,8 +49,19 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
         implements GPTreeLabelDecorator<T>, GPTreeIconDecorator<T>,
         GPTreeCheckDecorator<T> {
 
-    public GPTreePanel(TreeStore<T> store) {
+    public GPTreePanel(GPTreeStore<T> store) {
         super(store);
+    }
+
+    /**
+     * Swap Old Model with New Model
+     *
+     * @param oldModel
+     * @param newModel
+     */
+    public void swapModelInstance(T oldModel,
+            T newModel) {
+        ((GPTreeStore) this.store).swapModelInstance(oldModel, newModel);
     }
 
     @Override

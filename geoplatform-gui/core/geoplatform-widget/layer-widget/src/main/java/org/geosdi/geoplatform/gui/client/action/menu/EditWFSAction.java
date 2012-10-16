@@ -68,6 +68,10 @@ public class EditWFSAction extends MenuBaseAction {
                 "Checking if " + item.getName() + " is a feauture.",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
+        executeDescribeFeatureTypeRequest(item);
+    }
+
+    void executeDescribeFeatureTypeRequest(final GPLayerTreeModel item) {
         LayerRemote.Util.getInstance().describeFeatureType(
                 item.getDataSource(), item.getName(),
                 new AsyncCallback<LayerSchemaDTO>() {

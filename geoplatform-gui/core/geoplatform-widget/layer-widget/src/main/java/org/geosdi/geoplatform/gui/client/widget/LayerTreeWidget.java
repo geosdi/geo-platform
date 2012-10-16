@@ -414,9 +414,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     private void insertElementsOfTheRootFolders(List<GPFolderClientInfo> folderClientList) {
         int i = 0;
         for (GPFolderClientInfo folderElement : folderClientList) {
-            if (folderElement instanceof GPFolderClientInfo) {
-                this.insertElementsOnTree((FolderTreeNode) this.root.getChild(i), (GPFolderClientInfo) folderElement);
-            }
+            this.insertElementsOnTree((FolderTreeNode) this.root.getChild(i), folderElement);
             i++;
         }
     }

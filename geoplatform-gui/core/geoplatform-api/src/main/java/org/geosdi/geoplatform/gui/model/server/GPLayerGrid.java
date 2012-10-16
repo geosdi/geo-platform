@@ -262,10 +262,12 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
         return cqlFilter;
     }
 
+    @Override
     public String getTimeFilter() {
         return timeFilter;
     }
 
+    @Override
     public void setTimeFilter(String timeFilter) {
         this.timeFilter = timeFilter;
     }
@@ -283,6 +285,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
     /**
      * @return the UUID
      */
+    @Override
     public String getUUID() {
         return UUID;
     }

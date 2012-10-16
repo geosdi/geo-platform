@@ -207,9 +207,8 @@ public class DTOLayerConverter {
                 gpBbox.getMaxX(), gpBbox.getMaxY());
     }
 
-    private void setVectorLayerType(ClientVectorInfo vector,
-            GPLayerType gPLayerType) {
-        switch (gPLayerType) {
+    private void setVectorLayerType(ClientVectorInfo vector, GPLayerType layerType) {
+        switch (layerType) {
             case POINT:
                 vector.setLayerType(
                         org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.POINT);
@@ -234,6 +233,8 @@ public class DTOLayerConverter {
                 vector.setLayerType(
                         org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTIPOLYGON);
                 break;
+            default:
+                System.out.println("### No Layer Type ###");
         }
     }
 

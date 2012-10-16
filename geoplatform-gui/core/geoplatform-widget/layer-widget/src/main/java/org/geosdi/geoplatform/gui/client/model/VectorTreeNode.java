@@ -88,7 +88,7 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
      */
     @Override
     public AbstractImagePrototype getIcon() {
-        switch (getLayerType()) {
+        switch (super.getLayerType()) {
             case POINT:
                 return LayerResources.ICONS.point();
             case MULTIPOINT:
@@ -118,6 +118,7 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 
     @Override
     public void setRefreshTime(int refreshTime) {
+        // TODO
         //this.state.setRefreshTime();
     }
 

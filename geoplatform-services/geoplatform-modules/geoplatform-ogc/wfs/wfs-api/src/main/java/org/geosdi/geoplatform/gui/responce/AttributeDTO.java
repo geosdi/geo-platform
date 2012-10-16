@@ -35,13 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.responce;
 
+import java.io.Serializable;
+
 /**
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class AttributeDTO {
+public class AttributeDTO implements Serializable {
 
+    private static final long serialVersionUID = 4000281402477022477L;
+    //
     private String name;
     private String value;
 
@@ -62,5 +66,10 @@ public class AttributeDTO {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "AttributeDTO{ " + "name = " + name + ", value = " + value + '}';
     }
 }

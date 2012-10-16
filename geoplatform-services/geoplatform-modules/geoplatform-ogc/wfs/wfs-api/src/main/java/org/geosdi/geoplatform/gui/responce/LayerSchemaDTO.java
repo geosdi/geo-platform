@@ -80,4 +80,10 @@ public class LayerSchemaDTO implements Serializable {
     public List<AttributeDTO> getAttributes() {
         return attributes;
     }
+
+    @Override
+    public String toString() {
+        return "LayerSchemaDTO{ " + "targetNamespace = " + targetNamespace
+                + ", attributes = " + attributes + '}';
+    }
 }

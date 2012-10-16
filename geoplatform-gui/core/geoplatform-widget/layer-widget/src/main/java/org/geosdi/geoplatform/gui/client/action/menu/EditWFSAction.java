@@ -64,7 +64,8 @@ public class EditWFSAction extends MenuBaseAction {
     public void componentSelected(MenuEvent e) {
         GPBeanTreeModel item = this.treePanel.getSelectionModel().getSelectedItem();
         if (!(item instanceof RasterTreeNode)) {
-            GeoPlatformMessage.infoMessage("Impossible to complete the operation",
+            GeoPlatformMessage.infoMessage(
+                    "Impossible to complete the operation",
                                            item.getLabel() + " is not a Raster");
             return;
         }
@@ -77,14 +78,14 @@ public class EditWFSAction extends MenuBaseAction {
                     @Override
                     public void onFailure(Throwable caught) {
                         String errorString = "Error on WFS DescribeFeatureType request";
-                        System.out.println("\n### " + errorString + ": " + caught.getMessage());
-                        throw new GeoPlatformException(errorString);
+                        System.out.println(
+                                "\n### " + errorString + ": " + caught);
                     }
 
                     @Override
                     public void onSuccess(LayerSchemaDTO result) {
                         // TODO
-                        System.out.println("\n*** " + result.getTargetNamespace() + " : " + result.getAttributes());
+                        System.out.println("\n*** " + result);
                     }
                 });
     }

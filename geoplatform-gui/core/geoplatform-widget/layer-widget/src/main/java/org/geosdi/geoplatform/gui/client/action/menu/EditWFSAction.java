@@ -37,14 +37,19 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
@@ -68,10 +73,10 @@ public class EditWFSAction extends MenuBaseAction {
                 "Checking if " + item.getName() + " is a feauture.",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
-        executeDescribeFeatureTypeRequest(item);
+        this.executeDescribeFeatureTypeRequest(item);
     }
 
-    void executeDescribeFeatureTypeRequest(final GPLayerTreeModel item) {
+    private void executeDescribeFeatureTypeRequest(final GPLayerTreeModel item) {
         LayerRemote.Util.getInstance().describeFeatureType(
                 item.getDataSource(), item.getName(),
                 new AsyncCallback<LayerSchemaDTO>() {
@@ -94,11 +99,50 @@ public class EditWFSAction extends MenuBaseAction {
                                     SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                             return;
                         }
+
                         // TODO
+                        VectorTreeNode vector = createVectorLayer(result, (RasterTreeNode) item);
+                        System.out.println("\n*** " + vector);
+                        treePanel.swapModelInstance(item, vector);
+                        treePanel.refreshIcon(vector);
+
                         LayoutManager.getInstance().getStatusMap().setStatus(
                                 "The Layer " + item.getName() + " is a WFS layer.",
                                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
                     }
                 });
+    }
+
+    private VectorTreeNode createVectorLayer(LayerSchemaDTO schema, RasterTreeNode raster) {
+        VectorTreeNode vector = this.convertRasterToVector(raster);
+
+        vector.setFeatureNameSpace(schema.getTargetNamespace());
+        List<AttributeDTO> attributeList = schema.getAttributes();
+        for (AttributeDTO attribute : attributeList) {
+            if ("the_geom".equals(attribute.getName())) {
+                String value = attribute.getValue().toUpperCase();
+                vector.setLayerType(GPLayerType.valueOf(value));
+                break;
+            }
+        }
+        return vector;
+    }
+
+    private VectorTreeNode convertRasterToVector(RasterTreeNode raster) {
+        VectorTreeNode vector = new VectorTreeNode();
+        vector.setAbstractText(raster.getAbstractText());
+        vector.setAlias(raster.getAlias());
+        vector.setBbox(raster.getBbox());
+        vector.setChecked(raster.isChecked());
+        vector.setCqlFilter(raster.getCqlFilter());
+        vector.setCrs(raster.getCrs());
+        vector.setDataSource(raster.getDataSource());
+        vector.setId(raster.getId());
+        vector.setLabel(raster.getLabel());
+        vector.setName(raster.getName());
+        vector.setTimeFilter(raster.getTimeFilter());
+        vector.setTitle(raster.getTitle());
+        vector.setzIndex(raster.getzIndex());
+        return vector;
     }
 }

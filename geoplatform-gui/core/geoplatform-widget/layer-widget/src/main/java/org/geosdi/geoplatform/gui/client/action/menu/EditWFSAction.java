@@ -129,7 +129,7 @@ public class EditWFSAction extends MenuBaseAction {
     }
 
     private VectorTreeNode convertRasterToVector(RasterTreeNode raster) {
-        VectorTreeNode vector = new VectorTreeNode();
+        VectorTreeNode vector = new VectorTreeNode(raster.getUUID());
         vector.setAbstractText(raster.getAbstractText());
         vector.setAlias(raster.getAlias());
         vector.setBbox(raster.getBbox());

@@ -71,6 +71,15 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
         this.setFeatureNameSpace(layer.getFeatureNameSpace());
     }
 
+    /**
+     * @Constructor
+     * 
+     * @param UUID 
+     */    
+    public VectorTreeNode(String UUID) {
+        super.setUUID(UUID);
+    }
+
     @Override
     public String getFeatureNameSpace() {
         return featureNameSpace;

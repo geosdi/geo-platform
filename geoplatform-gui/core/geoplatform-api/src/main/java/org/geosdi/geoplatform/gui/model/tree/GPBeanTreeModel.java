@@ -149,6 +149,13 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
         return UUID;
     }
 
+    /**
+     * @param UUID the UUID to set
+     */
+    protected void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
     public abstract AbstractImagePrototype getIcon();
 
     public abstract Menu getTreeContextMenu();

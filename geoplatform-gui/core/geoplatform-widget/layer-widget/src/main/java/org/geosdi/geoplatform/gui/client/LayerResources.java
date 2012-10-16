@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import org.geosdi.geoplatform.gui.client.icons.LayerIcons;
-
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.icons.LayerIcons;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

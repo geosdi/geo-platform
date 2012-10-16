@@ -62,8 +62,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
-import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridRecordEvent;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
+import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridRecordEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgressTextEvent;
 
@@ -167,7 +167,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         //TODO: Check the utility of this code
         //this.changeProgressBarMessage("Loading " + layers.size() + " Raster Layers into the Store");
         GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
-        // TODO The parent is always expand?
+        // TODO The parent is always expanded?
         System.out.println("*** Parent expanded: " + super.tree.isExpanded(parentDestination));
         if (!super.tree.isExpanded(parentDestination)) {
             super.tree.setExpanded(parentDestination, true);
@@ -299,6 +299,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
             case LAYERS_FROM_PUBLISHER:
                 layerList.add(this.generateRasterTreeNode(layer));
                 break;
+            default:
+                System.out.println("### No Tree Store Operation ###");
         }
     }
 

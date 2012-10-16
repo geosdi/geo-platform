@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.CreateLayerViewportAction;
 import org.geosdi.geoplatform.gui.client.action.menu.DeleteElementsMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
 import org.geosdi.geoplatform.gui.client.action.menu.RefreshLayerAction;
+import org.geosdi.geoplatform.gui.client.action.menu.EditWFSAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShareProjectMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFolderRenameAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
@@ -157,7 +158,7 @@ public class TreeContextMenuFactory {
             cqlFilterMenuItem.setText("CQL Filter");
             cqlFilterMenuItem.setSubMenu(new GPCQLFilterMenu(treePanel));
             layerContextMenu.add(cqlFilterMenuItem);
-            
+
             MenuItem timeFilterMenuItem = new MenuItem();
             timeFilterMenuItem.setText("TIME Filter");
             timeFilterMenuItem.setSubMenu(new GPTimeFilterMenu(treePanel));
@@ -184,6 +185,13 @@ public class TreeContextMenuFactory {
             createViewportLayerMenu.addSelectionListener(new CreateLayerViewportAction(
                     treePanel));
             layerContextMenu.add(createViewportLayerMenu);
+
+            EditWFSAction editFeatureAction = new EditWFSAction(treePanel);
+            MenuItem editFeature = new MenuItem();
+            editFeature.setText(editFeatureAction.getTitle());
+            editFeature.setIcon(editFeatureAction.getImage());
+            editFeature.addSelectionListener(editFeatureAction);
+            layerContextMenu.add(editFeature);
 
             refreshTimeComboBox = new ComboBox() {
                 @Override

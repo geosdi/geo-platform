@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.responce;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -51,8 +52,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "LayerSchemaDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"targetNamespace", "attributes"})
-public class LayerSchemaDTO {
+public class LayerSchemaDTO implements Serializable {
 
+    private static final long serialVersionUID = -1361873282045310490L;
+    //
     private String targetNamespace;
     //
     @XmlElementWrapper(name = "attributes")

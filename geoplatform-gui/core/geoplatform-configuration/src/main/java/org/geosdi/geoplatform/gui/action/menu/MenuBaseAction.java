@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.action.menu;
 
-import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeIconHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
+import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeIconHandler;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
 
 /**

@@ -69,6 +69,8 @@ public class GPWFSServiceImpl implements GPWFSService {
     @Override
     public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
             throws ResourceNotFoundFault {
+        
+        serverUrl = serverUrl.replace("wms", "wfs");
 
         if (!this.wfsConfigurator.matchDefaultDataSource(serverUrl)) {
             throw new ResourceNotFoundFault("Edit Mode can not be applied "

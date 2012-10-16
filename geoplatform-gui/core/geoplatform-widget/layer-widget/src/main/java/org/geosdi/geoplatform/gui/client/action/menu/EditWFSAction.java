@@ -39,14 +39,12 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
@@ -64,46 +62,37 @@ public class EditWFSAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent e) {
-        GPBeanTreeModel item = this.treePanel.getSelectionModel().getSelectedItem();
-        if (!(item instanceof RasterTreeNode)) {
-            LayoutManager.getInstance().getStatusMap().setStatus(
-                    "Impossible to complete the operation: " + item.getLabel() + " is not a WMS layer.",
-                    SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-            return;
-        }
+        final GPLayerTreeModel item = (GPLayerTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
 
-        final RasterTreeNode raster = (RasterTreeNode) item;
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Checking if " + raster.getName() + " is a feauture.",
+                "Checking if " + item.getName() + " is a feauture.",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
-        String serverUrl = raster.getDataSource().replace("wms", "wfs"); // TODO Is always correct?
         LayerRemote.Util.getInstance().describeFeatureType(
-                serverUrl, raster.getName(),
+                item.getDataSource(), item.getName(),
                 new AsyncCallback<LayerSchemaDTO>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         String errorMessage = "Error on WFS DescribeFeatureType request";
-                        System.out.println("\n### " + errorMessage + ": " + caught);
+
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for " + raster.getName() + " layer.",
+                                errorMessage + " for " + item.getName() + " layer.",
                                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                     }
 
                     @Override
                     public void onSuccess(LayerSchemaDTO result) {
                         if (result == null) {
-                            String alertMessage = "The Layer " + raster.getName() + " isn't a feauture";
-                            System.out.println("\n*** " + alertMessage);
+                            String alertMessage = "The Layer " + item.getName()
+                                    + " isn't a feauture";
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     alertMessage + ".",
                                     SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                             return;
                         }
                         // TODO
-                        System.out.println("\n*** " + result);
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "The Layer " + raster.getName() + " is a WFS layer.",
+                                "The Layer " + item.getName() + " is a WFS layer.",
                                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
                     }
                 });

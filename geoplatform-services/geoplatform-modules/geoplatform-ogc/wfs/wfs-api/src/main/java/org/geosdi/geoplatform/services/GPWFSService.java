@@ -40,7 +40,7 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import org.codehaus.jra.Get;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  * Public interface to define the service operations mapped via REST using CXT

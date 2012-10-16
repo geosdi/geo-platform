@@ -43,8 +43,8 @@ import java.util.Map;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.configurator.wfs.GPWFSConfigurator;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.responce.AttributeDTO;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFinder;
 import org.geotools.data.wfs.WFSDataStoreFactory;
@@ -67,8 +67,14 @@ public class GPWFSServiceImpl implements GPWFSService {
     private GPWFSConfigurator wfsConfigurator;
 
     @Override
-    public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
+    public LayerSchemaDTO describeFeatureType(String serverUrl,
+            String typeName)
             throws ResourceNotFoundFault {
+
+        if (!this.wfsConfigurator.matchDefaultDataSource(serverUrl)) {
+            throw new ResourceNotFoundFault("Edit Mode can not be applied "
+                    + "to the server with url " + serverUrl);
+        }
 
         LayerSchemaDTO layerSchema = new LayerSchemaDTO();
         List<AttributeDTO> attributeList = new ArrayList<AttributeDTO>();
@@ -91,7 +97,8 @@ public class GPWFSServiceImpl implements GPWFSService {
                     AttributeDTO attribute = new AttributeDTO();
 
                     attribute.setName(desk.getLocalName());
-                    attribute.setValue(desk.getType().getBinding().getSimpleName());
+                    attribute.setValue(
+                            desk.getType().getBinding().getSimpleName());
 
                     attributeList.add(attribute);
                     break;
@@ -102,6 +109,8 @@ public class GPWFSServiceImpl implements GPWFSService {
 
         } catch (IOException ex) {
             logger.error("\n### IOException: {} ###", ex.getMessage());
+            throw new ResourceNotFoundFault("The Layer " + typeName + ""
+                    + " is not a vector");
         }
 
 

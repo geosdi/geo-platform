@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
@@ -64,17 +65,22 @@ public interface LayerRemoteAsync {
 
     void loadDefaultProject(AsyncCallback<GPClientProject> callback);
 
-    void shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject, AsyncCallback<Boolean> callback);
+    void shareProjectToUsers(long idSharedProject,
+            List<Long> accountIDsProject,
+            AsyncCallback<Boolean> callback);
 
-    void getOrganizationUsersToShareProject(long projectId, AsyncCallback<ArrayList<GPSimpleUser>> callback);
+    void getOrganizationUsersToShareProject(long projectId,
+            AsyncCallback<ArrayList<GPSimpleUser>> callback);
 
     void getOrganizationUsers(AsyncCallback<ArrayList<GPSimpleUser>> callback);
 
-    void getAccountsFromSharedProject(long idSharedProject, AsyncCallback<ArrayList<GPSimpleUser>> callback);
+    void getAccountsFromSharedProject(long idSharedProject,
+            AsyncCallback<ArrayList<GPSimpleUser>> callback);
 
     void loadDefaultProjectElements(AsyncCallback<GPClientProject> callback);
 
-    void loadProject(long projectId, AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
+    void loadProject(long projectId,
+            AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
 
     void loadFolderElements(Long folderID,
             AsyncCallback<ArrayList<IGPFolderElements>> callback);
@@ -109,36 +115,62 @@ public interface LayerRemoteAsync {
     void saveFolderProperties(MementoFolderOriginalProperties memento,
             AsyncCallback<Boolean> callback);
 
-    void saveFolderForUser(String folderName, int position, int numberOfDescendants,
-            boolean isChecked, AsyncCallback<Long> callback);
+    void saveFolderForUser(String folderName,
+            int position,
+            int numberOfDescendants,
+            boolean isChecked,
+            AsyncCallback<Long> callback);
 
-    void saveFolder(Long idParentFolder, String folderName, int position,
-            int numberOfDescendants, boolean isChecked, AsyncCallback<Long> callback);
+    void saveFolder(Long idParentFolder,
+            String folderName,
+            int position,
+            int numberOfDescendants,
+            boolean isChecked,
+            AsyncCallback<Long> callback);
 
-    void deleteElement(Long id, TreeElement elementType, AsyncCallback<?> callback);
+    void deleteElement(Long id,
+            TreeElement elementType,
+            AsyncCallback<?> callback);
 
-    void checkWmsGetMapUrl(String url, AsyncCallback<Boolean> callback);
+    void checkWmsGetMapUrl(String url,
+            AsyncCallback<Boolean> callback);
 
-    void checkKmlUrl(String url, AsyncCallback<Boolean> callback);
+    void checkKmlUrl(String url,
+            AsyncCallback<Boolean> callback);
 
-    void searchProjects(PagingLoadConfig config, String searchText, String imageURL,
+    void searchProjects(PagingLoadConfig config,
+            String searchText,
+            String imageURL,
             AsyncCallback<PagingLoadResult<GPClientProject>> callback)
             throws GeoPlatformException;
 
-    void setDefaultProject(Long projectID, AsyncCallback<?> callback)
+    void setDefaultProject(Long projectID,
+            AsyncCallback<?> callback)
             throws GeoPlatformException;
 
-    void saveProject(GPClientProject project, AsyncCallback<Long> callback)
+    void saveProject(GPClientProject project,
+            AsyncCallback<Long> callback)
             throws GeoPlatformException;
 
-    void updateProject(GPClientProject project, AsyncCallback<?> callback)
+    void updateProject(GPClientProject project,
+            AsyncCallback<?> callback)
             throws GeoPlatformException;
 
-    void deleteProject(Long projectID, AsyncCallback<?> callback) throws GeoPlatformException;
-
-    void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh,
+    void deleteProject(Long projectID,
             AsyncCallback<?> callback) throws GeoPlatformException;
 
-    void sendSharedProjectNotification(Long projectId, XMPPSubjectEnum subject,
-            String text, Map<String, String> attributesMap, AsyncCallback<?> callback) throws GeoPlatformException;
+    void setLayerRefreshTime(String emiteResource,
+            String layerUUID,
+            int secondToRefresh,
+            AsyncCallback<?> callback) throws GeoPlatformException;
+
+    void sendSharedProjectNotification(Long projectId,
+            XMPPSubjectEnum subject,
+            String text,
+            Map<String, String> attributesMap,
+            AsyncCallback<?> callback) throws GeoPlatformException;
+
+    void describeFeatureType(String serverUrl,
+            String typeName,
+            AsyncCallback<LayerSchemaDTO> callback) throws GeoPlatformException;
 }

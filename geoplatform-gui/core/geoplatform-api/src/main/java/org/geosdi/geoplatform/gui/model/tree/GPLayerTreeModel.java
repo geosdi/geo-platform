@@ -178,7 +178,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     public final void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
         super.set(GPLayerKeyValue.ABSTRACT.toString(),
-                this.abstractText != null ? this.abstractText : "");
+                  this.abstractText != null ? this.abstractText : "");
     }
 
     /**
@@ -293,6 +293,13 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     public void setObservable(ObservableFolderTreeNode observable) {
         this.observable = observable;
+    }
+
+    @Override
+    public String toString() {
+        return "GPLayerTreeModel{ " + super.toString() + "dataSource = "
+                + dataSource + ", crs = " + crs + ", bbox = " + bbox
+                + ", layerType = " + layerType + '}';
     }
 
     public class ObservableFolderTreeNode extends Observable {

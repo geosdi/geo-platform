@@ -73,9 +73,9 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 
     /**
      * @Constructor
-     * 
-     * @param UUID 
-     */    
+     *
+     * @param UUID
+     */
     public VectorTreeNode(String UUID) {
         super.setUUID(UUID);
     }
@@ -146,17 +146,9 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
         return TreeStatusEnum.VECTOR_SELECTED;
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        return "VectorTreeNode [featureNameSpace=" + featureNameSpace
-                + ", getDataSource()=" + getDataSource() + ", getCrs()="
-                + getCrs() + ", getBbox()=" + getBbox() + ", getLayerType()="
-                + getLayerType() + ", getzIndex()=" + getzIndex()
-                + ", getLabel()=" + getLabel() + "]";
+        return "VectorTreeNode{ " + super.toString() + "featureNameSpace = "
+                + featureNameSpace + '}';
     }
 }

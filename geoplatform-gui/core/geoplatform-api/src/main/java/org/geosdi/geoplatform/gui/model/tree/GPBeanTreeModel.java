@@ -65,7 +65,9 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
      * @param zIndex
      * @param checked
      */
-    protected GPBeanTreeModel(Long id, int zIndex, boolean checked) {
+    protected GPBeanTreeModel(Long id,
+            int zIndex,
+            boolean checked) {
         this.id = id;
         this.zIndex = zIndex;
         this.checked = checked;
@@ -79,7 +81,10 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
      * @param zIndex
      * @param checked
      */
-    protected GPBeanTreeModel(Long id, String label, int zIndex, boolean checked) {
+    protected GPBeanTreeModel(Long id,
+            String label,
+            int zIndex,
+            boolean checked) {
         this.id = id;
         this.label = label;
         this.zIndex = zIndex;
@@ -156,10 +161,16 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
         this.UUID = UUID;
     }
 
+    @Override
+    public String toString() {
+        return "GPBeanTreeModel {" + "label = " + label
+                + ", zIndex = " + zIndex + '}';
+    }
+
     public abstract AbstractImagePrototype getIcon();
 
     public abstract Menu getTreeContextMenu();
-    
+
     public abstract TreeStatusEnum getTreeStatus();
 
     public abstract void accept(IVisitor visitor);

@@ -40,12 +40,12 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPVectorLayerGrid extends GPLayerGrid implements GPVectorBean {
 
     private static final long serialVersionUID = 211533898795409938L;
-
+    //
     private String featureNameSpace;
 
     @Override

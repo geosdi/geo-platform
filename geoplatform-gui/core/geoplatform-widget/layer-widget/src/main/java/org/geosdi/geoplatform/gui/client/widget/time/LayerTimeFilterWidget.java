@@ -57,6 +57,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
+import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -68,6 +69,8 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
@@ -77,10 +80,12 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
  */
 public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
+    public final static String LAYER_TIME_DELIMITER = " - [";
     private final static short WIDGET_HEIGHT = 200;
     private final static short WIDGET_WIDTH = 350;
     private final static String TIME_FILTER_HEADING = "TIME FILTER EDITOR";
     private final TimeFilterLayerMapEvent timeFilterLayerMapEvent = new TimeFilterLayerMapEvent();
+    private final GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
     private NumberField filterTextField;
     private ComboBox<DimensionData> dimensionComboBox;
     private ListStore<DimensionData> store;
@@ -157,9 +162,19 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
                         IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
                         AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
+                        String layerName;
+                        if (layerSelected.getAlias() != null
+                                && layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER) != -1) {
+                            layerName = layerSelected.getAlias().substring(0,
+                                    layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER));
+                        } else {
+                            layerName = layerSelected.getLabel();
+                        }
                         if (fixedDimensionRadio.getValue()) {
                             layerSelected.setTimeFilter((String) dimensionComboBox.getValue().get(DimensionData.DIMENSION_KEY));
                             layerSelected.setVariableTimeFilter(null);
+                            layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getTimeFilter() + "]");
+                            WidgetPropertiesHandlerManager.fireEvent(labelEvent);
                         } else {
                             int value = filterTextField.getValue().intValue();
                             if (value < 0 || value > store.getModels().size()) {
@@ -167,6 +182,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                             } else {
                                 layerSelected.setTimeFilter("" + filterTextField.getValue().intValue());
                                 layerSelected.setVariableTimeFilter((String) store.getModels().get(store.getModels().size() - value - 1).get(DimensionData.DIMENSION_KEY));
+                                layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getVariableTimeFilter() + "]");
+                                WidgetPropertiesHandlerManager.fireEvent(labelEvent);
                             }
                         }
                         mementoSave.putOriginalPropertiesInCache(memento);

@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
+import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
@@ -197,6 +198,16 @@ public class DTOLayerConverter {
             String dimension = this.geoserverRestReader.getDimensions(layerDTO.getTitle());
             List<String> dimensionList = Lists.newArrayList(dimension.split(","));
             layer.setVariableTimeFilter(dimensionList.get(dimensionList.size() - dimensionPosition - 1));
+            String layerAlias;
+            if (layerDTO.getAlias() != null
+                    && layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
+                layerAlias = layerDTO.getAlias().substring(0,
+                        layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+            } else {
+                layerAlias = layerDTO.getName();
+            }
+            layer.setAlias(layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
+                    + layer.getVariableTimeFilter() + "]");
         } catch (NumberFormatException nfe) {
         } catch (MalformedURLException nfe) {
             logger.error("Impossible to retrieve time filter executing call with "

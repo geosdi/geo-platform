@@ -36,20 +36,15 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.store.TreeStore;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
+import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -63,12 +58,12 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 public class EditWFSAction extends MenuBaseAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
-    private VisitorDeleteElement deleteVisitor = new VisitorDeleteElement();
-    private VisitorAddElement visitorAdd = new VisitorAddElement();
+    private FeatureWidget featureWidget;
 
     public EditWFSAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         super("Edit WFS Mode", LayerResources.ICONS.vector());
         this.treePanel = treePanel;
+        this.featureWidget = FeatureInjector.MainInjector.getInstance().getFeatureWidget();
     }
 
     @Override
@@ -106,71 +101,22 @@ public class EditWFSAction extends MenuBaseAction {
                             return;
                         }
 
-                        if (layer instanceof RasterTreeNode) {
-                            RasterTreeNode raster = (RasterTreeNode) layer;
-                            FolderTreeNode parent = (FolderTreeNode) raster.getParent();
-                            int layerIndex = parent.indexOf(raster);
-                            VectorTreeNode vector = createVectorLayer(result, raster);
-                            vector.setParent(parent);
-                            System.out.println("\n*** " + vector);
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                "The Layer " + layer.getName() + " is a WFS layer of "
+                                + getGeometryString(result.getAttributes()) + " geometry type.",
+                                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
-                            // TODO Re-test swap raster to vector: if fail delete GPTreeStore
-//                        treePanel.swapModelInstance(item, vector);
-//                        treePanel.refreshIcon(vector);
-                            
-                            TreeStore<GPBeanTreeModel> store = treePanel.getStore();
-
-                            deleteVisitor.deleteElement(raster, parent, layerIndex);
-                            store.remove(raster);
-
-                            store.insert(parent, vector, layerIndex, false);
-                            visitorAdd.insertElement(vector, parent, layerIndex);
-
-                            treePanel.setExpanded(parent, true);
-
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "The Layer " + vector.getName() + " is a WFS layer.",
-                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                        }else{
-                            // TODO Manage swap Vector to Raster
-                            System.out.println("\n######### TODO Manage swap Vector to Raster #########");
-                        }
+                        featureWidget.show();
                     }
                 });
     }
 
-    private VectorTreeNode createVectorLayer(LayerSchemaDTO schema, RasterTreeNode raster) {
-        VectorTreeNode vector = this.convertRasterToVector(raster);
-
-        vector.setFeatureNameSpace(schema.getTargetNamespace());
-        List<AttributeDTO> attributeList = schema.getAttributes();
+    private String getGeometryString(List<AttributeDTO> attributeList) {
         for (AttributeDTO attribute : attributeList) {
             if ("the_geom".equals(attribute.getName())) {
-                String value = attribute.getValue().toUpperCase();
-                vector.setLayerType(GPLayerType.valueOf(value));
-                break;
+                return attribute.getValue();
             }
         }
-        return vector;
-    }
-
-    private VectorTreeNode convertRasterToVector(RasterTreeNode raster) {
-        // TODO Re-test swap raster to vector: if fail delete constructor
-        // with UUID argument and protected setUUID in super class
-        VectorTreeNode vector = new VectorTreeNode(raster.getUUID());
-        vector.setAbstractText(raster.getAbstractText());
-        vector.setAlias(raster.getAlias());
-        vector.setBbox(raster.getBbox());
-        vector.setChecked(raster.isChecked());
-        vector.setCqlFilter(raster.getCqlFilter());
-        vector.setCrs(raster.getCrs());
-        vector.setDataSource(raster.getDataSource());
-        vector.setId(raster.getId());
-        vector.setLabel(raster.getLabel());
-        vector.setName(raster.getName());
-        vector.setTimeFilter(raster.getTimeFilter());
-        vector.setTitle(raster.getTitle());
-        vector.setzIndex(raster.getzIndex());
-        return vector;
+        return "unknow";
     }
 }

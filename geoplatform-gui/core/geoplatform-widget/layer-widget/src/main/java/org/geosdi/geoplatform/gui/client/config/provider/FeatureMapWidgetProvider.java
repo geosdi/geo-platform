@@ -33,41 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.event;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.gwtopenmaps.openlayers.client.Projection;
+import com.google.inject.Provider;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
+import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
+import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface LayerMapChangedHandler extends EventHandler {
+public class FeatureMapWidgetProvider implements Provider<MapWidget> {
 
-    Type<LayerMapChangedHandler> TYPE = new Type<LayerMapChangedHandler>();
+    private GeoPlatformMapFactory mapFactory;
 
-    public void onDisplayLayer(GPLayerBean layerBean);
+    @Inject
+    public FeatureMapWidgetProvider(GeoPlatformMapFactory theMapFactory) {
+        this.mapFactory = theMapFactory;
+    }
 
-    public void onHideLayer(GPLayerBean layerBean);
-
-    public void onReloadLayer(GPLayerBean layerBean);
-
-    public void onRemoveLayer(GPLayerBean layerBean);
-
-    public void onChangeStyle(GPRasterBean layerBean, String newStyle);
-
-    public void onChangeCqlFilter(GPLayerTreeModel layerBean);
-    
-    public void onChangeTimeFilter(GPLayerTreeModel layerBean);
-
-    public void changeOpacity(GPRasterBean layerBean);
-
-    public void onChangeBaseLayer(Projection projection);
-
-    public void resetStore();
+    @Override
+    public MapWidget get() {
+        return this.mapFactory.createMap("390px", "280px",
+                                         GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
+    }
 }

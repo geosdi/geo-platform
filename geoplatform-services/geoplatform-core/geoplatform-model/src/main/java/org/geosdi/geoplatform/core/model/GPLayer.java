@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -51,6 +50,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.hibernate.annotations.Index;
 
 /**

@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu;
 
-import org.geosdi.geoplatform.gui.client.LayerEvents;
-
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

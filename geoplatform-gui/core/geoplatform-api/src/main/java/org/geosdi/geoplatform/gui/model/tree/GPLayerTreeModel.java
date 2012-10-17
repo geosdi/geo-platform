@@ -39,10 +39,10 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 import org.geosdi.geoplatform.gui.observable.Observable;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -180,7 +180,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     public final void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
         super.set(GPLayerKeyValue.ABSTRACT.toString(),
-                this.abstractText != null ? this.abstractText : "");
+                  this.abstractText != null ? this.abstractText : "");
     }
 
     /**
@@ -305,6 +305,13 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     public void setObservable(ObservableFolderTreeNode observable) {
         this.observable = observable;
+    }
+
+    @Override
+    public String toString() {
+        return "GPLayerTreeModel{ " + super.toString() + "dataSource = "
+                + dataSource + ", crs = " + crs + ", bbox = " + bbox
+                + ", layerType = " + layerType + '}';
     }
 
     public class ObservableFolderTreeNode extends Observable {

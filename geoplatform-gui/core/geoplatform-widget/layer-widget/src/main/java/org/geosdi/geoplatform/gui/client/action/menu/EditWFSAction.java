@@ -40,12 +40,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
+import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -59,10 +58,12 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 public class EditWFSAction extends MenuBaseAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
+    private FeatureWidget featureWidget;
 
     public EditWFSAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         super("Edit WFS Mode", LayerResources.ICONS.vector());
         this.treePanel = treePanel;
+        this.featureWidget = FeatureInjector.MainInjector.getInstance().getFeatureWidget();
     }
 
     @Override
@@ -76,23 +77,23 @@ public class EditWFSAction extends MenuBaseAction {
         this.executeDescribeFeatureTypeRequest(item);
     }
 
-    private void executeDescribeFeatureTypeRequest(final GPLayerTreeModel item) {
+    private void executeDescribeFeatureTypeRequest(final GPLayerTreeModel layer) {
         LayerRemote.Util.getInstance().describeFeatureType(
-                item.getDataSource(), item.getName(),
+                layer.getDataSource(), layer.getName(),
                 new AsyncCallback<LayerSchemaDTO>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         String errorMessage = "Error on WFS DescribeFeatureType request";
 
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for " + item.getName() + " layer.",
+                                errorMessage + " for " + layer.getName() + " layer.",
                                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                     }
 
                     @Override
                     public void onSuccess(LayerSchemaDTO result) {
                         if (result == null) {
-                            String alertMessage = "The Layer " + item.getName()
+                            String alertMessage = "The Layer " + layer.getName()
                                     + " isn't a feauture";
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     alertMessage + ".",
@@ -100,49 +101,22 @@ public class EditWFSAction extends MenuBaseAction {
                             return;
                         }
 
-                        // TODO
-                        VectorTreeNode vector = createVectorLayer(result, (RasterTreeNode) item);
-                        System.out.println("\n*** " + vector);
-                        treePanel.swapModelInstance(item, vector);
-                        treePanel.refreshIcon(vector);
-
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "The Layer " + item.getName() + " is a WFS layer.",
+                                "The Layer " + layer.getName() + " is a WFS layer of "
+                                + getGeometryString(result.getAttributes()) + " geometry type.",
                                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+
+                        featureWidget.show();
                     }
                 });
     }
 
-    private VectorTreeNode createVectorLayer(LayerSchemaDTO schema, RasterTreeNode raster) {
-        VectorTreeNode vector = this.convertRasterToVector(raster);
-
-        vector.setFeatureNameSpace(schema.getTargetNamespace());
-        List<AttributeDTO> attributeList = schema.getAttributes();
+    private String getGeometryString(List<AttributeDTO> attributeList) {
         for (AttributeDTO attribute : attributeList) {
             if ("the_geom".equals(attribute.getName())) {
-                String value = attribute.getValue().toUpperCase();
-                vector.setLayerType(GPLayerType.valueOf(value));
-                break;
+                return attribute.getValue();
             }
         }
-        return vector;
-    }
-
-    private VectorTreeNode convertRasterToVector(RasterTreeNode raster) {
-        VectorTreeNode vector = new VectorTreeNode(raster.getUUID());
-        vector.setAbstractText(raster.getAbstractText());
-        vector.setAlias(raster.getAlias());
-        vector.setBbox(raster.getBbox());
-        vector.setChecked(raster.isChecked());
-        vector.setCqlFilter(raster.getCqlFilter());
-        vector.setCrs(raster.getCrs());
-        vector.setDataSource(raster.getDataSource());
-        vector.setId(raster.getId());
-        vector.setLabel(raster.getLabel());
-        vector.setName(raster.getName());
-        vector.setTimeFilter(raster.getTimeFilter());
-        vector.setTitle(raster.getTitle());
-        vector.setzIndex(raster.getzIndex());
-        return vector;
+        return "unknow";
     }
 }

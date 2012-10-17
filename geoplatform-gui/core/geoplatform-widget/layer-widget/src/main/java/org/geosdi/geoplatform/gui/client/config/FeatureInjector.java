@@ -33,22 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.client.layer;
+package org.geosdi.geoplatform.gui.client.config;
 
-import java.io.Serializable;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.inject.client.GinModules;
+import com.google.gwt.inject.client.Ginjector;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public enum GPLayerType implements Serializable {
+@GinModules(value = {FeatureInjectorModule.class})
+public interface FeatureInjector extends Ginjector {
 
-    RASTER,
-    POINT,
-    LINESTRING,
-    POLYGON,
-    MULTIPOINT,
-    MULTILINESTRING,
-    MULTIPOLYGON;
+    public static class MainInjector {
+
+        private static FeatureInjector INSTANCE = GWT.create(FeatureInjector.class);
+
+        private MainInjector() {
+        }
+
+        public static FeatureInjector getInstance() {
+            return INSTANCE;
+        }
+    }
+
+    GPEventBus getEventBus();
+
+    FeatureWidget getFeatureWidget();
 }

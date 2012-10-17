@@ -33,41 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.event;
-
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.gwtopenmaps.openlayers.client.Projection;
+package org.geosdi.geoplatform.gui.shared;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface LayerMapChangedHandler extends EventHandler {
+public enum GPLayerType {
 
-    Type<LayerMapChangedHandler> TYPE = new Type<LayerMapChangedHandler>();
-
-    public void onDisplayLayer(GPLayerBean layerBean);
-
-    public void onHideLayer(GPLayerBean layerBean);
-
-    public void onReloadLayer(GPLayerBean layerBean);
-
-    public void onRemoveLayer(GPLayerBean layerBean);
-
-    public void onChangeStyle(GPRasterBean layerBean, String newStyle);
-
-    public void onChangeCqlFilter(GPLayerTreeModel layerBean);
-    
-    public void onChangeTimeFilter(GPLayerTreeModel layerBean);
-
-    public void changeOpacity(GPRasterBean layerBean);
-
-    public void onChangeBaseLayer(Projection projection);
-
-    public void resetStore();
+    /**
+     * Web Map Service
+     */
+    WMS,
+    /**
+     * Raster
+     */
+    RASTER,
+    /**
+     * Vector
+     */
+    POINT,
+    LINESTRING,
+    POLYGON,
+    MULTIPOINT,
+    MULTILINESTRING,
+    MULTIPOLYGON;
 }

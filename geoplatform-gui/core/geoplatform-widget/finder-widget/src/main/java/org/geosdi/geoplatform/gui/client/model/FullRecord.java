@@ -39,10 +39,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPShortLayerBean;
 import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  * Full Record for CSW request.

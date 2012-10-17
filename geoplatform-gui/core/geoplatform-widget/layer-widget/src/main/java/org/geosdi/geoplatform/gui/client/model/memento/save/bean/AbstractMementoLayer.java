@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

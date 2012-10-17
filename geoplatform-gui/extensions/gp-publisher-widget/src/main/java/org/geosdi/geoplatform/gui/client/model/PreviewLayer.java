@@ -43,9 +43,9 @@ import java.util.Map;
 import javax.persistence.Transient;
 import name.pehl.piriti.json.client.JsonReader;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

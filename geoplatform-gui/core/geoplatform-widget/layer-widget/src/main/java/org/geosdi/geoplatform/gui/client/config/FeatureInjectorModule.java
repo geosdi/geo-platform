@@ -33,41 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.event;
+package org.geosdi.geoplatform.gui.client.config;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.gwtopenmaps.openlayers.client.Projection;
+import com.google.gwt.inject.client.AbstractGinModule;
+import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.config.provider.FeatureMapWidgetProvider;
+import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
+import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface LayerMapChangedHandler extends EventHandler {
+public class FeatureInjectorModule extends AbstractGinModule {
 
-    Type<LayerMapChangedHandler> TYPE = new Type<LayerMapChangedHandler>();
+    @Override
+    protected void configure() {
+        bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
+        
+        bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
 
-    public void onDisplayLayer(GPLayerBean layerBean);
-
-    public void onHideLayer(GPLayerBean layerBean);
-
-    public void onReloadLayer(GPLayerBean layerBean);
-
-    public void onRemoveLayer(GPLayerBean layerBean);
-
-    public void onChangeStyle(GPRasterBean layerBean, String newStyle);
-
-    public void onChangeCqlFilter(GPLayerTreeModel layerBean);
-    
-    public void onChangeTimeFilter(GPLayerTreeModel layerBean);
-
-    public void changeOpacity(GPRasterBean layerBean);
-
-    public void onChangeBaseLayer(Projection projection);
-
-    public void resetStore();
+        bind(MapWidget.class).toProvider(FeatureMapWidgetProvider.class)
+                .in(Singleton.class);
+    }
 }

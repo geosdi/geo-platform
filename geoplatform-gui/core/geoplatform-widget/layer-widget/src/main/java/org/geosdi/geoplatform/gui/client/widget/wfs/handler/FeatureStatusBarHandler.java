@@ -33,17 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.shared;
+package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
 
-import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class SharingWidgetUI implements EntryPoint {
+public interface FeatureStatusBarHandler extends EventHandler {
 
-    @Override
-    public void onModuleLoad() {
-    }
+    Type<FeatureStatusBarHandler> TYPE = new Type<FeatureStatusBarHandler>();
+
+    void setStatus(String text, FeatureStatusBarType iconStyle);
+
+    void reset();
 }

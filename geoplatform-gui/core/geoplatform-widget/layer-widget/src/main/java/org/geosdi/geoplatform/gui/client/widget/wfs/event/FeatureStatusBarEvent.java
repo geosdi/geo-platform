@@ -33,41 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.event;
+package org.geosdi.geoplatform.gui.client.widget.wfs.event;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.gwtopenmaps.openlayers.client.Projection;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureStatusBarHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface LayerMapChangedHandler extends EventHandler {
+public class FeatureStatusBarEvent extends GwtEvent<FeatureStatusBarHandler> {
 
-    Type<LayerMapChangedHandler> TYPE = new Type<LayerMapChangedHandler>();
+    private String text;
+    private FeatureStatusBarType iconStyle;
 
-    public void onDisplayLayer(GPLayerBean layerBean);
+    public FeatureStatusBarEvent(String text, FeatureStatusBarType iconStyle) {
+        this.text = text;
+        this.iconStyle = iconStyle;
+    }
 
-    public void onHideLayer(GPLayerBean layerBean);
+    public String getText() {
+        return text;
+    }
 
-    public void onReloadLayer(GPLayerBean layerBean);
+    public FeatureStatusBarType getIconStyle() {
+        return iconStyle;
+    }
 
-    public void onRemoveLayer(GPLayerBean layerBean);
+    @Override
+    public Type<FeatureStatusBarHandler> getAssociatedType() {
+        return FeatureStatusBarHandler.TYPE;
+    }
 
-    public void onChangeStyle(GPRasterBean layerBean, String newStyle);
-
-    public void onChangeCqlFilter(GPLayerTreeModel layerBean);
-    
-    public void onChangeTimeFilter(GPLayerTreeModel layerBean);
-
-    public void changeOpacity(GPRasterBean layerBean);
-
-    public void onChangeBaseLayer(Projection projection);
-
-    public void resetStore();
+    @Override
+    protected void dispatch(FeatureStatusBarHandler handler) {
+        handler.setStatus(text, iconStyle);
+    }
 }

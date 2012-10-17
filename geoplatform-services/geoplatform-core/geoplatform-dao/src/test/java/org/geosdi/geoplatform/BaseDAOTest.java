@@ -67,6 +67,7 @@ import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;

@@ -86,9 +86,10 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
         if (cqlFilter != null && !cqlFilter.equals("")) {
             wmsParams.setCQLFilter(rasterBean.getCqlFilter());
         }
-        
-        final String timeFilter = rasterBean.getTimeFilter();
-        if (timeFilter != null && !timeFilter.equals("")) {
+
+        if (rasterBean.getVariableTimeFilter() != null) {
+            wmsParams.setTimeFilter(rasterBean.getVariableTimeFilter());
+        } else {
             wmsParams.setTimeFilter(rasterBean.getTimeFilter());
         }
 

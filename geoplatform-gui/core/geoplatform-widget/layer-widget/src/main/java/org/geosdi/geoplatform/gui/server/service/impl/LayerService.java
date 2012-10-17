@@ -39,7 +39,9 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.common.collect.Lists;
+import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -113,6 +115,8 @@ public class LayerService implements ILayerService {
     //
     @Autowired
     private SessionUtility sessionUtility;
+    @Autowired
+    private GeoServerRESTReader geoserverRestReader;
 
     /**
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
@@ -860,6 +864,18 @@ public class LayerService implements ILayerService {
         } catch (ResourceNotFoundFault rnff) {
             logger.error("An Error Occured on sendSharedProjectNotification: " + rnff);
             throw new GeoPlatformException(rnff);
+        }
+    }
+
+    @Override
+    public String getLayerDimension(String layerName, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        try {
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
+            return this.geoserverRestReader.getDimensions(layerName);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        } catch (MalformedURLException ex) {
+            throw new GeoPlatformException(ex);
         }
     }
 }

@@ -64,7 +64,6 @@ import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.factory.Hints;
 import org.geotools.gce.geotiff.GeoTiffReader;
 import org.geotools.referencing.CRS;
-import org.jdom.Element;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.quartz.CalendarIntervalScheduleBuilder;

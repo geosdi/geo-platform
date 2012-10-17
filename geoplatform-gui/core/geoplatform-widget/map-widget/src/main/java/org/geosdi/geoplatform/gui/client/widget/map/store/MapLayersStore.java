@@ -206,7 +206,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             layer.mergeNewParams(params);
         }
     }
-    
+
     @Override
     public void onChangeTimeFilter(GPLayerTreeModel layerBean) {
         WMS layer = (WMS) this.layers.get(layerBean);
@@ -217,7 +217,11 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                 params.removeTimeFilter();
             } else {
                 params = new WMSParams();
-                params.setTimeFilter(layerBean.getTimeFilter());
+                if (layerBean.getVariableTimeFilter() != null) {
+                    params.setTimeFilter(layerBean.getVariableTimeFilter());
+                } else {
+                    params.setTimeFilter(layerBean.getTimeFilter());
+                }
             }
             layer.mergeNewParams(params);
         }

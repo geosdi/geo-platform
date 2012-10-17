@@ -160,4 +160,7 @@ public interface ILayerService {
     void sendSharedProjectNotification(Long projectId, XMPPSubjectEnum subject,
             String text, Map<String, String> attributesMap,
             HttpServletRequest httpServletRequest) throws GeoPlatformException;
+
+    String getLayerDimension(String layerName,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException;
 }

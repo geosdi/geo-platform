@@ -43,6 +43,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.user.client.Element;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
@@ -92,7 +93,7 @@ public class GPEPSGContentPanel extends GeoPlatformContentPanel {
             }
         };
 
-        super.add(this.comboEPSG);
+        super.add(this.comboEPSG, new FormData("100%"));
 
         epsgTextField = new TextField<String>();
         epsgTextField.setAllowBlank(false);
@@ -106,7 +107,7 @@ public class GPEPSGContentPanel extends GeoPlatformContentPanel {
         };
 
         epsgTextField.addKeyListener(keyListener);
-        super.add(epsgTextField);
+        super.add(epsgTextField, new FormData("100%"));
     }
 
     @Override

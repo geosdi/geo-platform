@@ -12,4 +12,11 @@
 	
     <import resource="applicationContext-Menubar.xml" />
 
+    <bean id="geoserverRestReader" class="it.geosolutions.geoserver.rest.GeoServerRESTReader">
+        <constructor-arg type="java.lang.String" value="${geoserver_url}"/>
+        <!-- the login and the password of the REST geoserver instance -->
+        <constructor-arg type="java.lang.String" value="${geoserver_username}"/>
+        <constructor-arg type="java.lang.String" value="${geoserver_password}"/>
+    </bean>
+    
 </beans>

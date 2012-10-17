@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.server.service.converter;
 
 import com.google.common.collect.Lists;
+import it.geosolutions.geoserver.rest.GeoServerRESTReader;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -76,6 +78,7 @@ import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -89,6 +92,8 @@ import org.springframework.stereotype.Component;
 @Component(value = "dtoLayerConverter")
 public class DTOLayerConverter {
 
+    @Autowired
+    private GeoServerRESTReader geoserverRestReader;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public ArrayList<GPFolderClientInfo> convertOnlyFolders(Collection<FolderDTO> folders) {
@@ -187,6 +192,16 @@ public class DTOLayerConverter {
         layer.setAlias(layerDTO.getAlias());
         layer.setCqlFilter(layerDTO.getCqlFilter());
         layer.setTimeFilter(layerDTO.getTimeFilter());
+        try {
+            int dimensionPosition = Integer.parseInt(layerDTO.getTimeFilter());
+            String dimension = this.geoserverRestReader.getDimensions(layerDTO.getTitle());
+            List<String> dimensionList = Lists.newArrayList(dimension.split(","));
+            layer.setVariableTimeFilter(dimensionList.get(dimensionList.size() - dimensionPosition - 1));
+        } catch (NumberFormatException nfe) {
+        } catch (MalformedURLException nfe) {
+            logger.error("Impossible to retrieve time filter executing call with "
+                    + "geoServerManager: " + nfe);
+        }
         // layer.setzIndex(layerDTO.getPosition());
     }
 

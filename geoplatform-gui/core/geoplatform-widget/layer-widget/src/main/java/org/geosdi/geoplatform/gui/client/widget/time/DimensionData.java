@@ -33,78 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.model;
+package org.geosdi.geoplatform.gui.client.widget.time;
 
-import com.extjs.gxt.ui.client.data.ModelData;
-import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
-import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface GPLayerBean extends ModelData {
+public class DimensionData extends GeoPlatformBeanModel{
+    private static final long serialVersionUID = -7345485982241780502L;
 
-    Long getId();
-
-    void setId(Long id);
-
-    String getLabel();
-
-    void setLabel(String label);
-
-    String getTitle();
-
-    void setTitle(String title);
-
-    String getName();
-
-    void setName(String name);
-
-    void setAlias(String alias);
-
-    String getAlias();
-
-    String getAbstractText();
-
-    void setAbstractText(String abstractText);
-
-    String getDataSource();
-
-    void setDataSource(String dataSource);
-
-    String getCrs();
-
-    void setCrs(String crs);
-
-    BBoxClientInfo getBbox();
-
-    void setBbox(BBoxClientInfo bbox);
-
-    GPLayerType getLayerType();
-
-    void setLayerType(GPLayerType layerType);
-
-    int getzIndex();
-
-    ArrayList<GPStyleStringBeanModel> getStyles();
-
-    void setStyles(ArrayList<GPStyleStringBeanModel> styles);
-
-    String getCqlFilter();
-
-    void setCqlFilter(String timeFilter);
+    public final static String DIMENSION_KEY = "dimensionKey";
     
-    String getTimeFilter();
-
-    void setTimeFilter(String timeFilter);
-
-    String getUUID();
-
-    String getVariableTimeFilter();
-
-    void setVariableTimeFilter(String variableTimeFilter);
+    public DimensionData(String dimension) {
+        super.set(DIMENSION_KEY, dimension);
+    }
+    
 }

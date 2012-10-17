@@ -66,6 +66,11 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-server-api</artifactId>
         </dependency>
 
@@ -119,6 +124,12 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-wfs-connector</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>it.geosolutions</groupId>
+            <artifactId>geoserver-manager</artifactId>
+            <version>1.4-SNAPSHOT</version>
         </dependency>
         
         <!-- GIN -->

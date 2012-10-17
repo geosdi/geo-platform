@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
 import org.geosdi.geoplatform.gui.client.config.provider.CatalogMapMoveListenerProvider.CatalogMapExtentReprojector;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogBBoxChangeEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
@@ -56,7 +55,6 @@ import org.gwtopenmaps.openlayers.client.event.MapMoveEndListener;
 @CatalogSpatialFilter
 public class CatalogMapWidget extends GeoPlatformContentPanel {
 
-    private GeoPlatformMapFactory mapFactory;
     private MapWidget mapWidget;
     private LonLat center;
     private MapMoveEndListener listener;

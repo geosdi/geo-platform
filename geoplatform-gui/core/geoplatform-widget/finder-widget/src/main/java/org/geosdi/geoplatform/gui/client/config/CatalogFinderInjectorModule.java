@@ -53,7 +53,5 @@ public class CatalogFinderInjectorModule extends AbstractGinModule {
         bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
 
         bind(SearchTabItem.class).in(Singleton.class);
-
-//        bind(MetadataTabItem.class).in(Singleton.class); // TODO Integrated view of Full Record
     }
 }

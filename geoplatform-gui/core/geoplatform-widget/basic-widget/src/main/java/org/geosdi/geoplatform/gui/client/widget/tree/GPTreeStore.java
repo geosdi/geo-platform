@@ -42,6 +42,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * 
+ * @todo Re-test swap raster to vector: if fail delete GPTreeStore
  */
 public class GPTreeStore<T extends GPBeanTreeModel> extends TreeStore<T> {
 

@@ -36,12 +36,16 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.store.TreeStore;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -59,6 +63,8 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 public class EditWFSAction extends MenuBaseAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
+    private VisitorDeleteElement deleteVisitor = new VisitorDeleteElement();
+    private VisitorAddElement visitorAdd = new VisitorAddElement();
 
     public EditWFSAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         super("Edit WFS Mode", LayerResources.ICONS.vector());
@@ -76,23 +82,23 @@ public class EditWFSAction extends MenuBaseAction {
         this.executeDescribeFeatureTypeRequest(item);
     }
 
-    private void executeDescribeFeatureTypeRequest(final GPLayerTreeModel item) {
+    private void executeDescribeFeatureTypeRequest(final GPLayerTreeModel layer) {
         LayerRemote.Util.getInstance().describeFeatureType(
-                item.getDataSource(), item.getName(),
+                layer.getDataSource(), layer.getName(),
                 new AsyncCallback<LayerSchemaDTO>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         String errorMessage = "Error on WFS DescribeFeatureType request";
 
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for " + item.getName() + " layer.",
+                                errorMessage + " for " + layer.getName() + " layer.",
                                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                     }
 
                     @Override
                     public void onSuccess(LayerSchemaDTO result) {
                         if (result == null) {
-                            String alertMessage = "The Layer " + item.getName()
+                            String alertMessage = "The Layer " + layer.getName()
                                     + " isn't a feauture";
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     alertMessage + ".",
@@ -100,15 +106,35 @@ public class EditWFSAction extends MenuBaseAction {
                             return;
                         }
 
-                        // TODO
-                        VectorTreeNode vector = createVectorLayer(result, (RasterTreeNode) item);
-                        System.out.println("\n*** " + vector);
-                        treePanel.swapModelInstance(item, vector);
-                        treePanel.refreshIcon(vector);
+                        if (layer instanceof RasterTreeNode) {
+                            RasterTreeNode raster = (RasterTreeNode) layer;
+                            FolderTreeNode parent = (FolderTreeNode) raster.getParent();
+                            int layerIndex = parent.indexOf(raster);
+                            VectorTreeNode vector = createVectorLayer(result, raster);
+                            vector.setParent(parent);
+                            System.out.println("\n*** " + vector);
 
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "The Layer " + item.getName() + " is a WFS layer.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                            // TODO Re-test swap raster to vector: if fail delete GPTreeStore
+//                        treePanel.swapModelInstance(item, vector);
+//                        treePanel.refreshIcon(vector);
+                            
+                            TreeStore<GPBeanTreeModel> store = treePanel.getStore();
+
+                            deleteVisitor.deleteElement(raster, parent, layerIndex);
+                            store.remove(raster);
+
+                            store.insert(parent, vector, layerIndex, false);
+                            visitorAdd.insertElement(vector, parent, layerIndex);
+
+                            treePanel.setExpanded(parent, true);
+
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                    "The Layer " + vector.getName() + " is a WFS layer.",
+                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                        }else{
+                            // TODO Manage swap Vector to Raster
+                            System.out.println("\n######### TODO Manage swap Vector to Raster #########");
+                        }
                     }
                 });
     }
@@ -129,6 +155,8 @@ public class EditWFSAction extends MenuBaseAction {
     }
 
     private VectorTreeNode convertRasterToVector(RasterTreeNode raster) {
+        // TODO Re-test swap raster to vector: if fail delete constructor
+        // with UUID argument and protected setUUID in super class
         VectorTreeNode vector = new VectorTreeNode(raster.getUUID());
         vector.setAbstractText(raster.getAbstractText());
         vector.setAlias(raster.getAlias());

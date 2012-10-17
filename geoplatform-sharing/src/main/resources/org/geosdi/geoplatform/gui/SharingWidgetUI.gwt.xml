@@ -2,6 +2,4 @@
 <module>
     <source path="shared" />
 
-    <entry-point class='org.geosdi.geoplatform.gui.shared.SharingWidgetUI' />
-
 </module>

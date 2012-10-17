@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.menu.time;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.widget.time.TimeFilterWidget;
+import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -49,12 +49,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class AddModifyTimeFilterAction extends MenuAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
-    private TimeFilterWidget timeFilterWidget;
+    private LayerTimeFilterWidget timeFilterWidget;
 
     public AddModifyTimeFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         super("AddModifyCQLFilter");
         this.treePanel = treePanel;
-        this.timeFilterWidget = new TimeFilterWidget(Boolean.TRUE, treePanel);
+        this.timeFilterWidget = new LayerTimeFilterWidget(Boolean.TRUE, treePanel);
     }
 
     @Override

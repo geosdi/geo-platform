@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
 import java.io.Serializable;
-
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

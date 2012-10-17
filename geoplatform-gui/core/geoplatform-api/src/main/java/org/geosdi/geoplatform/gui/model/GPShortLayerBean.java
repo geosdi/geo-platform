@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.model;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  *

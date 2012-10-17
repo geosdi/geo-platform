@@ -44,7 +44,6 @@ import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
@@ -62,6 +61,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientIn
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
@@ -154,7 +154,7 @@ public class DTOLayerConverter {
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
-        raster.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.RASTER);
+        raster.setLayerType(org.geosdi.geoplatform.gui.shared.GPLayerType.RASTER);
         raster.setOpacity(rasterDTO.getOpacity());
         ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
         GPStyleStringBeanModel style;
@@ -211,27 +211,27 @@ public class DTOLayerConverter {
         switch (layerType) {
             case POINT:
                 vector.setLayerType(
-                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.POINT);
+                        org.geosdi.geoplatform.gui.shared.GPLayerType.POINT);
                 break;
             case LINESTRING:
                 vector.setLayerType(
-                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.LINESTRING);
+                        org.geosdi.geoplatform.gui.shared.GPLayerType.LINESTRING);
                 break;
             case POLYGON:
                 vector.setLayerType(
-                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.POLYGON);
+                        org.geosdi.geoplatform.gui.shared.GPLayerType.POLYGON);
                 break;
             case MULTIPOINT:
                 vector.setLayerType(
-                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTIPOINT);
+                        org.geosdi.geoplatform.gui.shared.GPLayerType.MULTIPOINT);
                 break;
             case MULTILINESTRING:
                 vector.setLayerType(
-                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTILINESTRING);
+                        org.geosdi.geoplatform.gui.shared.GPLayerType.MULTILINESTRING);
                 break;
             case MULTIPOLYGON:
                 vector.setLayerType(
-                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTIPOLYGON);
+                        org.geosdi.geoplatform.gui.shared.GPLayerType.MULTIPOLYGON);
                 break;
             default:
                 System.out.println("### No Layer Type ###");

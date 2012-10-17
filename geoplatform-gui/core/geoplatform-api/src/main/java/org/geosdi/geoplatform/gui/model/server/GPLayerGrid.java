@@ -37,11 +37,11 @@ package org.geosdi.geoplatform.gui.model.server;
 
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.geosdi.geoplatform.gui.model.UUIDGenerator;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  *

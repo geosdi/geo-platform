@@ -42,11 +42,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.core.model.GPBBox;
-
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPProject;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI

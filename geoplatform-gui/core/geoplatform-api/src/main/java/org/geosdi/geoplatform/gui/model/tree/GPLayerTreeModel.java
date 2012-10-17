@@ -39,10 +39,10 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 import org.geosdi.geoplatform.gui.observable.Observable;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

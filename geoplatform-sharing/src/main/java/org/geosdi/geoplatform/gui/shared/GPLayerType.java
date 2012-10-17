@@ -33,18 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.client.layer;
-
-import java.io.Serializable;
+package org.geosdi.geoplatform.gui.shared;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public enum GPLayerType implements Serializable {
+public enum GPLayerType {
 
+    /**
+     * Web Map Service
+     */
+    WMS,
+    /**
+     * Raster
+     */
     RASTER,
+    /**
+     * Vector
+     */
     POINT,
     LINESTRING,
     POLYGON,

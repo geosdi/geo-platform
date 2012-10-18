@@ -35,33 +35,33 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
 
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class LayerTypeHandlerManager {
+public class RasterTypeHandler extends LayerTypeHandler {
 
-    private LayerTypeHandler describeFeature;
-    private LayerTypeHandler featureType;
-    private LayerTypeHandler rasterType;
+    @Override
+    public void layerType(GPLayerTreeModel layer) {
+        if (layer.getLayerType() == GPLayerType.RASTER) {
+            String alertMessage = "The Layer " + layer.getName()
+                    + " isn't a Vector.";
+            LayoutManager.getInstance().getStatusMap().setStatus(
+                    alertMessage,
+                    SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
 
-    public LayerTypeHandlerManager(LayerTypeHandler theDescribeFeature,
-            LayerTypeHandler theFeatureType, LayerTypeHandler theRasterType) {
-        this.describeFeature = theDescribeFeature;
-        this.featureType = theFeatureType;
-        this.rasterType = theRasterType;
-        createChainElements();
-    }
-
-    public void forwardLayerType(GPLayerTreeModel layer) {
-        this.rasterType.layerType(layer);
-    }
-
-    private void createChainElements() {
-        this.rasterType.setSuccessor(featureType);
-        this.featureType.setSuccessor(describeFeature);
+            GeoPlatformMessage.alertMessage(
+                    "DescribeFeatureType Service",
+                    alertMessage);
+        } else {
+            super.forwardLayerType(layer);
+        }
     }
 }

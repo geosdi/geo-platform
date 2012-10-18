@@ -64,8 +64,6 @@ public class EditWFSAction extends MenuBaseAction {
     @Override
     public void componentSelected(MenuEvent e) {
         final GPLayerTreeModel item = (GPLayerTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
-        
-        System.out.println("ECCOLO @@@@@@@@@@@@@@@ " + item.getLayerType());
 
         LayoutManager.getInstance().getStatusMap().setStatus(
                 "Checking if " + item.getName() + " is a Vector Layer.",

@@ -33,35 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.RasterTypeHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class LayerTypeHandlerManager {
+public class RasterTypeHandlerProvider implements Provider<RasterTypeHandler> {
 
-    private LayerTypeHandler describeFeature;
-    private LayerTypeHandler featureType;
-    private LayerTypeHandler rasterType;
-
-    public LayerTypeHandlerManager(LayerTypeHandler theDescribeFeature,
-            LayerTypeHandler theFeatureType, LayerTypeHandler theRasterType) {
-        this.describeFeature = theDescribeFeature;
-        this.featureType = theFeatureType;
-        this.rasterType = theRasterType;
-        createChainElements();
-    }
-
-    public void forwardLayerType(GPLayerTreeModel layer) {
-        this.rasterType.layerType(layer);
-    }
-
-    private void createChainElements() {
-        this.rasterType.setSuccessor(featureType);
-        this.featureType.setSuccessor(describeFeature);
+    @Override
+    public RasterTypeHandler get() {
+        return new RasterTypeHandler();
     }
 }

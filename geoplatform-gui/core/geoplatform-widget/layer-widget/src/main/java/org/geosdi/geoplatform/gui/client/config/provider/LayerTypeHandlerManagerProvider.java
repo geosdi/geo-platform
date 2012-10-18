@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.Describ
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.FeatureTypeHandler;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandler;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.RasterTypeHandler;
 
 /**
  *
@@ -52,17 +53,20 @@ public class LayerTypeHandlerManagerProvider implements
 
     private FeatureTypeHandler describeFeature;
     private DescribeFeatureTypeHandler featureType;
+    private RasterTypeHandler rasterType;
 
     @Inject
     public LayerTypeHandlerManagerProvider(FeatureTypeHandler theDescribeFeature,
-            DescribeFeatureTypeHandler theFeatureType) {
+            DescribeFeatureTypeHandler theFeatureType,
+            RasterTypeHandler theRasterType) {
         this.describeFeature = theDescribeFeature;
         this.featureType = theFeatureType;
+        this.rasterType = theRasterType;
     }
 
     @Override
     public LayerTypeHandlerManager get() {
         return new LayerTypeHandlerManager(this.describeFeature,
-                                           this.featureType);
+                                           this.featureType, this.rasterType);
     }
 }

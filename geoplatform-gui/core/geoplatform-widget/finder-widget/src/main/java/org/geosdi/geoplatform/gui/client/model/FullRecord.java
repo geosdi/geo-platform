@@ -121,7 +121,7 @@ public class FullRecord extends AbstractRecord implements GPShortLayerBean {
 
     @Override
     public GPLayerType getLayerType() {
-        return GPLayerType.RASTER;
+        return GPLayerType.WMS;
     }
 
     @Override

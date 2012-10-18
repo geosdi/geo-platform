@@ -160,7 +160,7 @@ public class DTOLayerConverter {
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
-        raster.setLayerType(org.geosdi.geoplatform.gui.shared.GPLayerType.RASTER);
+        raster.setLayerType(org.geosdi.geoplatform.gui.shared.GPLayerType.WMS);
         raster.setOpacity(rasterDTO.getOpacity());
         ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
         GPStyleStringBeanModel style;
@@ -298,7 +298,7 @@ public class DTOLayerConverter {
             if (memento instanceof MementoRaster) {
 //                MementoRaster mementoRaster = (MementoRaster) memento;
                 layer = new GPRasterLayer();
-                layer.setLayerType(GPLayerType.RASTER);
+                layer.setLayerType(GPLayerType.WMS);
                 ((GPRasterLayer) layer).setStyles(((MementoRaster) memento).getStyles());
                 // layer.setLayerInfo();???
             } else if (memento instanceof MementoVector) {

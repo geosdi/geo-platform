@@ -147,7 +147,7 @@ public class GPKmlWidget extends GeoPlatformWindow
 //        PreviewLayerList previewLayers = PreviewLayerList.JSON.read(jsonString);
 //        for (PreviewLayer previewLayer : previewLayers.getPreviewLayers()) {
 //            if (!previewLayer.getMessage().contains("Some problems")) {
-//                previewLayer.setLayerType(GPLayerType.RASTER);
+//                previewLayer.setLayerType(GPLayerType.WMS);
 //                layerList.add(previewLayer);
 //                WMS wmsLayer = this.generateLayer(previewLayer);
 //                shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);

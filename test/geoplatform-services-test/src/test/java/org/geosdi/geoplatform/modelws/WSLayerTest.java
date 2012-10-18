@@ -147,7 +147,7 @@ public class WSLayerTest extends ServiceTest {
         Assert.assertEquals("assertEquals shortRasterLayer1.getPosition()", 5, shortRasterLayer1.getPosition().intValue());
         Assert.assertEquals("assertEquals shortRasterLayer1.getSrs()", spatialReferenceSystem, shortRasterLayer1.getSrs());
         Assert.assertEquals("assertEquals shortRasterLayer1.getUrlServer()", urlServer, shortRasterLayer1.getUrlServer());
-        Assert.assertEquals("assertEquals shortRasterLayer1.getLayerType()", GPLayerType.RASTER, shortRasterLayer1.getLayerType());
+        Assert.assertEquals("assertEquals shortRasterLayer1.getLayerType()", GPLayerType.WMS, shortRasterLayer1.getLayerType());
 
         ShortLayerDTO shortVectorLayer1 = gpWSClient.getShortLayer(idVector1);
         Assert.assertNotNull("assertNotNull shortVectorLayer1", shortVectorLayer1);

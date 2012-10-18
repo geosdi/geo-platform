@@ -85,7 +85,7 @@ public class GPRasterLayer extends GPLayer {
     private GPProject project;
 
     public GPRasterLayer() {
-        super.setLayerType(GPLayerType.RASTER);
+        super.setLayerType(GPLayerType.WMS);
     }
 
     /**

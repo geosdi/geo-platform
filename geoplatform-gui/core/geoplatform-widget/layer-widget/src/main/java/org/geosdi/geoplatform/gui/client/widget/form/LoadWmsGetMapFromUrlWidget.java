@@ -398,7 +398,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         raster.setName(rasterString);
         raster.setTitle(this.mapTitle(rasterString));
         raster.setLabel(raster.getTitle());
-        raster.setLayerType(GPLayerType.RASTER);
+        raster.setLayerType(GPLayerType.WMS);
         raster.setDataSource(this.mapDataSource());
         raster.setCrs(fieldMap.get(GetMap.SRS.toString()));
         raster.setBbox(this.mapBbox());

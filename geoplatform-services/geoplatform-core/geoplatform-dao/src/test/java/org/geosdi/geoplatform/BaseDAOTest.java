@@ -711,7 +711,7 @@ public abstract class BaseDAOTest {
         raster.setSrs("EPSG:4326");
         raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
         raster.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
-        raster.setLayerType(GPLayerType.RASTER);
+        raster.setLayerType(GPLayerType.WMS);
         // GPLayerInfo
         GPLayerInfo info = new GPLayerInfo();
         List<String> keywords = new ArrayList<String>();
@@ -813,7 +813,7 @@ public abstract class BaseDAOTest {
             raster.setFolder(folder);
             raster.setProject(project);
             raster.setPosition(position--);
-            raster.setLayerType(GPLayerType.RASTER);
+            raster.setLayerType(GPLayerType.WMS);
             raster.setUrlServer("http://imaa.geosdi.org/geoserver/wms");
             if (i < 5) {
                 raster.setChecked(true);

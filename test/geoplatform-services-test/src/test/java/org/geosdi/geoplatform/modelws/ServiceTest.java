@@ -320,7 +320,7 @@ public abstract class ServiceTest {
         layerInfo.setQueryable(false);
         rasterLayer.setLayerInfo(layerInfo);
 
-        rasterLayer.setLayerType(GPLayerType.RASTER);
+        rasterLayer.setLayerType(GPLayerType.WMS);
         return gpWSClient.insertLayer(rasterLayer);
     }
 

@@ -40,10 +40,12 @@ import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.FeatureTypeHandler;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.RasterTypeHandler;
 import org.geosdi.geoplatform.gui.client.config.provider.DescribeFeatureTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureMapWidgetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.LayerTypeHandlerManagerProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.RasterTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -73,5 +75,8 @@ public class FeatureInjectorModule extends AbstractGinModule {
         
         bind(DescribeFeatureTypeHandler.class).toProvider(
                 DescribeFeatureTypeHandlerProvider.class).in(Singleton.class);
+        
+        bind(RasterTypeHandler.class).toProvider(RasterTypeHandlerProvider.class).in(
+                Singleton.class);
     }
 }

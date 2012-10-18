@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
@@ -64,7 +65,8 @@ public class DescribeFeatureTypeHandler extends LayerTypeHandler {
     @Override
     public void layerType(GPLayerTreeModel layer) {
         if (layer.getLayerType() == GPLayerType.WMS) {
-            System.out.println("DescribeFeatureTypeHandler @@@@@@@@@@@@@@@@@@@@@@@@");
+            System.out.println(
+                    "DescribeFeatureTypeHandler @@@@@@@@@@@@@@@@@@@@@@@@");
             executeDescribeFeatureTypeRequest(layer);
         } else {
             super.forwardLayerType(layer);
@@ -79,6 +81,10 @@ public class DescribeFeatureTypeHandler extends LayerTypeHandler {
                     public void onFailure(Throwable caught) {
                         String errorMessage = "Error on WFS DescribeFeatureType request";
 
+                        GeoPlatformMessage.errorMessage(
+                                "DescribeFetureType Service Error",
+                                errorMessage + " - " + caught.getMessage());
+
                         LayoutManager.getInstance().getStatusMap().setStatus(
                                 errorMessage + " for " + layer.getName() + " layer.",
                                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
@@ -89,6 +95,10 @@ public class DescribeFeatureTypeHandler extends LayerTypeHandler {
                         if (result == null) {
                             String alertMessage = "The Layer " + layer.getName()
                                     + " isn't a Vector.";
+                            GeoPlatformMessage.alertMessage(
+                                    "DescribeFeatureType Service",
+                                                            alertMessage);
+
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     alertMessage + ".",
                                     SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());

@@ -53,14 +53,14 @@ public class LayerTypeHandlerManager {
         this.describeFeature = theDescribeFeature;
         this.featureType = theFeatureType;
         this.rasterType = theRasterType;
-        createChainElements();
+        setUpChainElements();
     }
 
     public void forwardLayerType(GPLayerTreeModel layer) {
         this.rasterType.layerType(layer);
     }
 
-    private void createChainElements() {
+    private void setUpChainElements() {
         this.rasterType.setSuccessor(featureType);
         this.featureType.setSuccessor(describeFeature);
     }

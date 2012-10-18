@@ -36,13 +36,20 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
@@ -51,30 +58,37 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
 @Singleton
 public class FeatureWidget extends GeoPlatformWindow {
 
-    private MapWidget mapWidget;
-    private FeatureStatusBar featureStatusBar;
+    private FeatureMapWidget mapWidget;
+    private FeatureAttributesWidget attributesWidget;
+    private FeatureStatusBar statusBar;
     private GPEventBus bus;
+    //
+    private Button saveButton;
+    private Button resetButton;
 
     @Inject
-    public FeatureWidget(MapWidget mapWidget, FeatureStatusBar featureStatusBar,
-            GPEventBus bus) {
+    public FeatureWidget(
+            FeatureMapWidget mapWidget, FeatureAttributesWidget attributesWidget,
+            FeatureStatusBar statusBar, GPEventBus bus) {
         super(true);
         this.mapWidget = mapWidget;
-        this.featureStatusBar = featureStatusBar;
+        this.attributesWidget = attributesWidget;
+        this.statusBar = statusBar;
         this.bus = bus;
     }
 
     @Override
     public void addComponent() {
-//        addEstWidget(); // TODO Panel for attributes
-//        addCenterWidget();
-        addStatusBar();
+        addCenterWidget();
+        addEastWidget();
+        createButtons();
     }
 
     @Override
     public void initSize() {
-        super.setSize(1000, 675);
+        super.setSize(1000, 650);
         super.setHeading("GeoPlatform Feature UI");
+        super.setIcon(LayerResources.ICONS.vector());
     }
 
     @Override
@@ -87,24 +101,76 @@ public class FeatureWidget extends GeoPlatformWindow {
         super.setLayout(new BorderLayout());
     }
 
-    private void addEstWidget() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
     private void addCenterWidget() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        BorderLayoutData data = new BorderLayoutData(Style.LayoutRegion.CENTER);
+        data.setMargins(new Margins(0));
+
+        super.add(this.mapWidget, data);
     }
 
-    private void addStatusBar() {
-        this.featureStatusBar.setAutoWidth(true);
+    private void addEastWidget() {
+        BorderLayoutData data = new BorderLayoutData(Style.LayoutRegion.EAST, 300);
+        data.setMargins(new Margins(0));
 
-        super.setButtonAlign(Style.HorizontalAlignment.LEFT);
-        super.getButtonBar().add(this.featureStatusBar);
+        super.add(this.attributesWidget, data);
     }
 
     @Override
     public void reset() {
-        // TODO
-        this.featureStatusBar.reset();
+        this.mapWidget.reset();
+        this.attributesWidget.reset();
+        this.statusBar.reset();
+    }
+
+    private void createButtons() {
+        super.setButtonAlign(Style.HorizontalAlignment.RIGHT);
+        super.getButtonBar().add(this.statusBar);
+
+        resetButton = new Button("Reset", BasicWidgetResources.ICONS.delete(),
+                                 new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+//                grid.stopEditing(true);
+//                store.rejectChanges();
+//                disableGridButtons();
+            }
+        });
+        super.addButton(resetButton);
+
+        this.saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
+                                     new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+//                saveAttributes();
+            }
+        });
+        super.addButton(saveButton);
+        this.disableButtons();
+
+        Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
+                                  new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                hide();
+            }
+        });
+        super.addButton(close);
+    }
+
+    private void disableButtons() {
+        resetButton.disable();
+        saveButton.disable();
+    }
+
+    private void enableButtons() {
+        resetButton.enable();
+        saveButton.enable();
+    }
+    
+    @Override
+    public void show(){
+        super.show();
+        // Use BaseLayer wrt the BaseLayer viewed
+        statusBar.setStatus("...", FeatureStatusBarType.STATUS_OK);
     }
 }

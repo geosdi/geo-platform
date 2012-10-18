@@ -33,31 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs;
 
-import com.google.inject.Provider;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
-import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureMapWidgetProvider implements Provider<MapWidget> {
+public class FeatureAttributesWidget extends GeoPlatformContentPanel {
 
-    private GeoPlatformMapFactory mapFactory;
+    private GPEventBus bus;
 
     @Inject
-    public FeatureMapWidgetProvider(GeoPlatformMapFactory theMapFactory) {
-        this.mapFactory = theMapFactory;
+    public FeatureAttributesWidget(GPEventBus bus) {
+        super(true);
+        this.bus = bus;
     }
 
     @Override
-    public MapWidget get() {
-        return this.mapFactory.createMap("700px", "640px",
-                                         GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
+    public void addComponent() {
+    }
+
+    @Override
+    public void initSize() {
+    }
+
+    @Override
+    public void setPanelProperties() {
+        super.setHeaderVisible(false);
+    }
+
+    @Override
+    public void reset() {
+        // TODO
+//                grid.stopEditing(true);
+//                store.rejectChanges();
     }
 }

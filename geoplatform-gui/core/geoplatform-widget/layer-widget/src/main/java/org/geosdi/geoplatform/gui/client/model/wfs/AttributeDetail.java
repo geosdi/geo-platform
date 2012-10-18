@@ -33,31 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.model.wfs;
 
-import com.google.inject.Provider;
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
-import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
-import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureMapWidgetProvider implements Provider<MapWidget> {
+public class AttributeDetail extends GeoPlatformBeanModel {
 
-    private GeoPlatformMapFactory mapFactory;
+    private static final long serialVersionUID = 7214348729445121136L;
 
-    @Inject
-    public FeatureMapWidgetProvider(GeoPlatformMapFactory theMapFactory) {
-        this.mapFactory = theMapFactory;
+    public enum AttributeDetailKeyValue {
+
+        NAME, VALUE;
+    }
+
+    public String getName() {
+        return super.get(AttributeDetailKeyValue.NAME.toString());
+    }
+
+    public void setName(String name) {
+        super.set(AttributeDetailKeyValue.NAME.toString(), name);
+    }
+
+    public String getValue() {
+        return super.get(AttributeDetailKeyValue.VALUE.toString());
+    }
+
+    public void setValue(String value) {
+        super.set(AttributeDetailKeyValue.VALUE.toString(), value);
     }
 
     @Override
-    public MapWidget get() {
-        return this.mapFactory.createMap("700px", "640px",
-                                         GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
+    public String toString() {
+        StringBuilder str = new StringBuilder("AttributeDetail {");
+        str.append("name=").append(this.getName());
+        str.append(", value=").append(this.getValue());
+        return str.append('}').toString();
     }
 }

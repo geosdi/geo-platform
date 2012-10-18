@@ -33,64 +33,57 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.factory.map;
+package org.geosdi.geoplatform.gui.client.widget.wfs;
 
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.MapOptions;
-import org.gwtopenmaps.openlayers.client.MapUnits;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class DefaultMapFactory implements GeoPlatformMapFactory {
+public class FeatureMapWidget extends GeoPlatformContentPanel {
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String,
-     * java.lang.String)
-     */
-    @Override
-    public MapWidget createMap(String width, String height) {
-        return new MapWidget(width, height);
-    }
+    private MapWidget mapWidget;
+    private GPEventBus bus;
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String,
-     * java.lang.String, org.gwtopenmaps.openlayers.client.MapOptions)
-     */
-    @Override
-    public MapWidget createMap(String width, String height, MapOptions options) {
-        return new MapWidget(width, height, options);
+    @Inject
+    public FeatureMapWidget(MapWidget mapWidget, GPEventBus bus) {
+        super(true);
+        this.mapWidget = mapWidget;
+        this.bus = bus;
     }
 
     @Override
-    public MapWidget createMap(String width, String height, Layer gwtOlBaseLayer) {
-        MapOptions defaultMapOptions = new MapOptions();
+    public void addComponent() {
+        this.initMapWidget();
 
-        defaultMapOptions.setNumZoomLevels(25);
+        super.add(this.mapWidget);
+    }
 
-        defaultMapOptions.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
-        defaultMapOptions.setDisplayProjection(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()));
-        defaultMapOptions.setUnits(MapUnits.METERS);
+    @Override
+    public void initSize() {
+    }
 
-        defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
-                                                  20037508, 20037508.34));
-        defaultMapOptions.setMaxResolution(156543.0339F);
+    @Override
+    public void setPanelProperties() {
+        super.setHeaderVisible(false);
+    }
 
-        MapWidget mapWidget = new MapWidget(width, height, defaultMapOptions);
-        mapWidget.getMap().addLayer(gwtOlBaseLayer);
+    private void initMapWidget() {
+        // TODO Receive LonLat from EditWFSAction
+        LonLat italy = new LonLat(13.375, 42.329);
+        italy.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), mapWidget.getMap().getProjection());
 
-        return mapWidget;
+        this.mapWidget.getMap().setCenter(italy, 4);
+    }
+
+    @Override
+    public void reset() {
+        this.initMapWidget();
     }
 }

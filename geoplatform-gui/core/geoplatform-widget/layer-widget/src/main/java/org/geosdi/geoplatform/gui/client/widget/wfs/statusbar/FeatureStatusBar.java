@@ -50,6 +50,11 @@ public class FeatureStatusBar extends StatusWidget
     @Inject
     public FeatureStatusBar(GPEventBus bus) {
         bus.addHandler(FeatureStatusBarHandler.TYPE, this);
+        this.setProperties();
+    }
+
+    private void setProperties() {
+        super.setAutoWidth(true);
     }
 
     @Override

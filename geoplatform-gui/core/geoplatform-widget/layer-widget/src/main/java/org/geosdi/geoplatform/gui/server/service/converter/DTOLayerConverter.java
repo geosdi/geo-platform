@@ -204,7 +204,7 @@ public class DTOLayerConverter {
                 layerAlias = layerDTO.getAlias().substring(0,
                         layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
             } else {
-                layerAlias = layerDTO.getName();
+                layerAlias = layerDTO.getTitle();
             }
             layer.setAlias(layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
                     + layer.getVariableTimeFilter() + "]");

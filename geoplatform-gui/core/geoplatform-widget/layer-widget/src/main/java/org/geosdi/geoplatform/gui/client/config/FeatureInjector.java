@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
@@ -50,7 +50,8 @@ public interface FeatureInjector extends Ginjector {
 
     public static class MainInjector {
 
-        private static FeatureInjector INSTANCE = GWT.create(FeatureInjector.class);
+        private static FeatureInjector INSTANCE = GWT.create(
+                FeatureInjector.class);
 
         private MainInjector() {
         }
@@ -62,5 +63,5 @@ public interface FeatureInjector extends Ginjector {
 
     GPEventBus getEventBus();
 
-    FeatureWidget getFeatureWidget();
+    LayerTypeHandlerManager getLayerTypeHandlerManager();
 }

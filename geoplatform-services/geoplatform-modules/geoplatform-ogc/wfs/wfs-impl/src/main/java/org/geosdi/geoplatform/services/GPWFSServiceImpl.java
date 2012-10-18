@@ -49,7 +49,6 @@ import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFinder;
 import org.geotools.data.wfs.WFSDataStoreFactory;
 import org.opengis.feature.simple.SimpleFeatureType;
-import org.opengis.feature.type.AttributeDescriptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,70 +59,67 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWFSService")
 public class GPWFSServiceImpl implements GPWFSService {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
     private GPWFSConfigurator wfsConfigurator;
-
+    
     @Override
-    public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
+    public LayerSchemaDTO describeFeatureType(String serverUrl,
+            String typeName)
             throws ResourceNotFoundFault {
         
         serverUrl = serverUrl.replace("wms", "wfs");
-
+        
         if (!this.wfsConfigurator.matchDefaultDataSource(serverUrl)) {
             throw new ResourceNotFoundFault("Edit Mode can not be applied "
                     + "to the server with url " + serverUrl);
         }
-
+        
         LayerSchemaDTO layerSchema = new LayerSchemaDTO();
         List<AttributeDTO> attributeList = new ArrayList<AttributeDTO>();
         try {
-
+            
             serverUrl += "?service=WFS&version=1.0.0&request=GetCapabilities";
-
+            
             Map connectionParameters = new HashMap();
             connectionParameters.put(WFSDataStoreFactory.URL.key, serverUrl);
-
+            
             DataStore data = DataStoreFinder.getDataStore(connectionParameters);
             SimpleFeatureType schema = data.getSchema(typeName);
-
+            
             layerSchema.setTargetNamespace(schema.getName().getNamespaceURI());
 
             // Populate only the geometry attribute (always is the first)
             // Use a list of attributes for future uses
-            for (AttributeDescriptor desk : schema.getAttributeDescriptors()) {
-                if ("the_geom".equals(desk.getLocalName())) {
-                    AttributeDTO attribute = new AttributeDTO();
-
-                    attribute.setName(desk.getLocalName());
-                    attribute.setValue(
-                            desk.getType().getBinding().getSimpleName());
-
-                    attributeList.add(attribute);
-                    break;
-                }
-            }
-
+            AttributeDTO geometryAttribute = new AttributeDTO();
+            geometryAttribute.setName(
+                    schema.getGeometryDescriptor().getLocalName());
+            geometryAttribute.setValue(
+                    schema.getGeometryDescriptor().getType().getBinding().getSimpleName());
+            
+            attributeList.add(geometryAttribute);
+            
             layerSchema.setAttributes(attributeList);
-
+            
         } catch (NullPointerException ex) {
             // data.getSchema(typeName) throws this exception
             // if the layer is not a feature
-            logger.error("\n### NullPointerException - the layer isn't a feature: {} ###", 
-                         ex.getMessage());
+            logger.error(
+                    "\n### NullPointerException - the layer isn't a feature: {} ###",                    
+                    ex.getMessage());
             return null;
         } catch (IOException ex) {
             logger.error("\n### IOException: {} ###", ex.getMessage());
             throw new ResourceNotFoundFault(
                     "Error to execute the WFS DescribeFeatureType for the layer " + typeName);
         }
-
+        
         return layerSchema;
-
+        
     }
-
+    
     @Override
     public LayerSchemaDTO getFeature(String featureID) throws ResourceNotFoundFault {
         // TODO

@@ -33,23 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.client.action.menu.edit;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  *
@@ -58,65 +53,24 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 public class EditWFSAction extends MenuBaseAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
-    private FeatureWidget featureWidget;
+    private LayerTypeHandlerManager layerTypeHandlerManager;
 
     public EditWFSAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         super("Edit WFS Mode", LayerResources.ICONS.vector());
         this.treePanel = treePanel;
-        this.featureWidget = FeatureInjector.MainInjector.getInstance().getFeatureWidget();
+        this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();
     }
 
     @Override
     public void componentSelected(MenuEvent e) {
         final GPLayerTreeModel item = (GPLayerTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
+        
+        System.out.println("ECCOLO @@@@@@@@@@@@@@@ " + item.getLayerType());
 
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Checking if " + item.getName() + " is a feauture.",
+                "Checking if " + item.getName() + " is a Vector Layer.",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
-        this.executeDescribeFeatureTypeRequest(item);
-    }
-
-    private void executeDescribeFeatureTypeRequest(final GPLayerTreeModel layer) {
-        LayerRemote.Util.getInstance().describeFeatureType(
-                layer.getDataSource(), layer.getName(),
-                new AsyncCallback<LayerSchemaDTO>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        String errorMessage = "Error on WFS DescribeFeatureType request";
-
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for " + layer.getName() + " layer.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                    }
-
-                    @Override
-                    public void onSuccess(LayerSchemaDTO result) {
-                        if (result == null) {
-                            String alertMessage = "The Layer " + layer.getName()
-                                    + " isn't a feauture";
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    alertMessage + ".",
-                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                            return;
-                        }
-
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "The Layer " + layer.getName() + " is a WFS layer of "
-                                + getGeometryString(result.getAttributes()) + " geometry type.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-
-                        featureWidget.show();
-                    }
-                });
-    }
-
-    private String getGeometryString(List<AttributeDTO> attributeList) {
-        for (AttributeDTO attribute : attributeList) {
-            if ("the_geom".equals(attribute.getName())) {
-                return attribute.getValue();
-            }
-        }
-        return "unknow";
+        this.layerTypeHandlerManager.forwardLayerType(item);
     }
 }

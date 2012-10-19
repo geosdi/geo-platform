@@ -51,18 +51,25 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement(name = "LayerSchemaDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"targetNamespace", "attributes"})
+@XmlType(propOrder = {"typeName", "targetNamespace", "geometry", "attributes"})
 public class LayerSchemaDTO implements Serializable {
 
     private static final long serialVersionUID = -1361873282045310490L;
     //
+    private String typeName;
     private String targetNamespace;
+    private String geometry;
     //
     @XmlElementWrapper(name = "attributes")
     @XmlElement(name = "attribute")
     private List<AttributeDTO> attributes;
 
-    public LayerSchemaDTO() {
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
     public String getTargetNamespace() {
@@ -71,6 +78,14 @@ public class LayerSchemaDTO implements Serializable {
 
     public void setTargetNamespace(String targetNamespace) {
         this.targetNamespace = targetNamespace;
+    }
+
+    public String getGeometry() {
+        return geometry;
+    }
+
+    public void setGeometry(String geometry) {
+        this.geometry = geometry;
     }
 
     public void setAttributes(List<AttributeDTO> attributes) {
@@ -83,7 +98,9 @@ public class LayerSchemaDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "LayerSchemaDTO{ " + "targetNamespace = " + targetNamespace
-                + ", attributes = " + attributes + '}';
+        return "LayerSchemaDTO{"
+                + "targetNamespace=" + targetNamespace
+                + ", geometry=" + geometry
+                + ", attributes=" + attributes + '}';
     }
 }

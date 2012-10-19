@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
@@ -100,19 +99,17 @@ public class DescribeFeatureTypeHandler extends LayerTypeHandler {
                                                             alertMessage);
 
                             LayoutManager.getInstance().getStatusMap().setStatus(
-                                    alertMessage + ".",
+                                    alertMessage,
                                     SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                             layer.setLayerType(GPLayerType.RASTER);
                         } else {
-                            AttributeDTO geometryAttribue = result.getAttributes().get(
-                                    0);
-                            layer.setLayerType(GPLayerType.valueOf(
-                                    geometryAttribue.getValue().toUpperCase()));
-
+                            String geometry = result.getGeometry();
+                            String geometryType = geometry.substring(geometry.lastIndexOf(".") + 1);
+                            layer.setLayerType(GPLayerType.valueOf(geometryType.toUpperCase()));
 
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "The Layer " + layer.getName() + " is a WFS layer of "
-                                    + geometryAttribue.getValue() + " geometry type.",
+                                    + geometryType + " geometry type.",
                                     SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
                             if (layer instanceof VectorTreeNode) {

@@ -47,7 +47,7 @@ public class AttributeDetail extends GeoPlatformBeanModel {
 
     public enum AttributeDetailKeyValue {
 
-        NAME, VALUE;
+        NAME, VALUE, TYPE;
     }
 
     public String getName() {
@@ -66,11 +66,20 @@ public class AttributeDetail extends GeoPlatformBeanModel {
         super.set(AttributeDetailKeyValue.VALUE.toString(), value);
     }
 
+    public String getType() {
+        return super.get(AttributeDetailKeyValue.TYPE.toString());
+    }
+
+    public void setType(String type) {
+        super.set(AttributeDetailKeyValue.TYPE.toString(), type);
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("AttributeDetail {");
         str.append("name=").append(this.getName());
         str.append(", value=").append(this.getValue());
+        str.append(", type=").append(this.getType());
         return str.append('}').toString();
     }
 }

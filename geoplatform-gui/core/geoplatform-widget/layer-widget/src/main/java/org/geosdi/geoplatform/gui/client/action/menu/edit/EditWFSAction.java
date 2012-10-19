@@ -63,12 +63,13 @@ public class EditWFSAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent e) {
-        final GPLayerTreeModel item = (GPLayerTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
+        final GPLayerTreeModel layer = (GPLayerTreeModel) 
+                this.treePanel.getSelectionModel().getSelectedItem();
 
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Checking if " + item.getName() + " is a Vector Layer.",
+                "Checking if " + layer.getName() + " is a Vector Layer.",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
-        this.layerTypeHandlerManager.forwardLayerType(item);
+        this.layerTypeHandlerManager.forwardLayerType(layer);
     }
 }

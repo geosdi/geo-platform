@@ -46,10 +46,19 @@ public class AttributeDTO implements Serializable {
 
     private static final long serialVersionUID = 4000281402477022477L;
     //
+    private String type;
     private String name;
     private String value;
 
     public AttributeDTO() {
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getName() {
@@ -70,6 +79,10 @@ public class AttributeDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "AttributeDTO{ " + "name = " + name + ", value = " + value + '}';
+        StringBuilder str = new StringBuilder("AttributeDTO {");
+        str.append("name=").append(name);
+        str.append(", value=").append(value);
+        str.append(", type=").append(type);
+        return str.append("}").toString();
     }
 }

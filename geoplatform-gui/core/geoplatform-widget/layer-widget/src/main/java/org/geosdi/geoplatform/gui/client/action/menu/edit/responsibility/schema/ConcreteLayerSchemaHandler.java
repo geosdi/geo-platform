@@ -33,31 +33,60 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
+import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DescribeFeatureTypeHandlerProvider implements
-        Provider<DescribeFeatureTypeHandler> {
+public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
 
-    private GPDescribeFeatureDispatcher featureDispatcher;
+    private FeatureWidget featureWidget;
 
     @Inject
-    public DescribeFeatureTypeHandlerProvider(
-            GPDescribeFeatureDispatcher featureDispatcher) {
-        this.featureDispatcher = featureDispatcher;
+    public ConcreteLayerSchemaHandler(FeatureWidget theFeatureWidget) {
+        this.featureWidget = theFeatureWidget;
     }
 
     @Override
-    public DescribeFeatureTypeHandler get() {
-        return new DescribeFeatureTypeHandler(this.featureDispatcher);
+    public void layerSchemaParser(LayerSchemaDTO schemaDTO,
+            GPLayerTreeModel layer) {
+        if (schemaDTO != null) {
+            showFeatureWidget(schemaDTO, layer);
+        } else {
+            super.forwardLayerSchema(schemaDTO, layer);
+        }
+    }
+
+    private void showFeatureWidget(LayerSchemaDTO result,
+            GPLayerTreeModel layer) {
+        String geometryType = result.getGeometry();
+
+        layer.setLayerType(GPLayerType.valueOf(
+                geometryType.toUpperCase()));
+
+        LayoutManager.getInstance().getStatusMap().setStatus(
+                "The Layer " + layer.getName() + " is a WFS layer of "
+                + geometryType + " geometry type.",
+                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+
+        if (layer instanceof VectorTreeNode) {
+            ((VectorTreeNode) layer).setFeatureNameSpace(
+                    result.getTargetNamespace());
+            // Open the Window
+            featureWidget.show();
+        } else {
+            featureWidget.show();
+        }
     }
 }

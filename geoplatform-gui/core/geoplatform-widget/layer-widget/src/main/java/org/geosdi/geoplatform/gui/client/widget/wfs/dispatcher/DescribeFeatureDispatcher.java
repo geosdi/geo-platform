@@ -33,31 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DescribeFeatureTypeHandlerProvider implements
-        Provider<DescribeFeatureTypeHandler> {
+public interface DescribeFeatureDispatcher {
 
-    private GPDescribeFeatureDispatcher featureDispatcher;
-
-    @Inject
-    public DescribeFeatureTypeHandlerProvider(
-            GPDescribeFeatureDispatcher featureDispatcher) {
-        this.featureDispatcher = featureDispatcher;
-    }
-
-    @Override
-    public DescribeFeatureTypeHandler get() {
-        return new DescribeFeatureTypeHandler(this.featureDispatcher);
-    }
+    void dispatchDescribeFeatureRequest(GPLayerTreeModel layer);
 }

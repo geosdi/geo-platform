@@ -70,7 +70,8 @@ public class GPWFSServiceImpl implements GPWFSService {
     private GPWFSConfigurator wfsConfigurator;
 
     @Override
-    public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
+    public LayerSchemaDTO describeFeatureType(String serverUrl,
+            String typeName)
             throws ResourceNotFoundFault {
         logger.debug("\n*** WFS DescribeFeatureType for layer {} ***", typeName);
         serverUrl = serverUrl.replace("wms", "wfs");
@@ -94,7 +95,8 @@ public class GPWFSServiceImpl implements GPWFSService {
             SimpleFeatureType schema = data.getSchema(typeName);
 
             layerSchema.setTargetNamespace(schema.getName().getNamespaceURI());
-            layerSchema.setGeometry(schema.getGeometryDescriptor().getType().getBinding().getName());
+            layerSchema.setGeometry(schema.getGeometryDescriptor().getType()
+                    .getBinding().getSimpleName());
 
             attributeList = this.createAttributes(schema);
             layerSchema.setAttributes(attributeList);
@@ -120,7 +122,8 @@ public class GPWFSServiceImpl implements GPWFSService {
      * Create the Feature attributes, except the geometry attribute.
      */
     private List<AttributeDTO> createAttributes(SimpleFeatureType schema) {
-        List<AttributeDTO> attributes = new ArrayList<AttributeDTO>(schema.getAttributeCount() - 1);
+        List<AttributeDTO> attributes = new ArrayList<AttributeDTO>(
+                schema.getAttributeCount() - 1);
 
         List<AttributeDescriptor> attributeDescriptors = schema.getAttributeDescriptors();
         for (AttributeDescriptor attributeDescriptor : attributeDescriptors) {

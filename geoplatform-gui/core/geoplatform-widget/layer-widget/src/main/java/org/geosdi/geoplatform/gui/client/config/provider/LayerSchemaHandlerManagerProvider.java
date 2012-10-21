@@ -37,27 +37,31 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.ConcreteLayerSchemaHandler;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.LayerSchemaHandlerManager;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.NullLayerSchemaHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DescribeFeatureTypeHandlerProvider implements
-        Provider<DescribeFeatureTypeHandler> {
+public class LayerSchemaHandlerManagerProvider implements
+        Provider<LayerSchemaHandlerManager> {
 
-    private GPDescribeFeatureDispatcher featureDispatcher;
+    private NullLayerSchemaHandler nullHandler;
+    private ConcreteLayerSchemaHandler concreteHandler;
 
     @Inject
-    public DescribeFeatureTypeHandlerProvider(
-            GPDescribeFeatureDispatcher featureDispatcher) {
-        this.featureDispatcher = featureDispatcher;
+    public LayerSchemaHandlerManagerProvider(
+            NullLayerSchemaHandler theNullHandler,
+            ConcreteLayerSchemaHandler theConcreteHandler) {
+        this.nullHandler = theNullHandler;
+        this.concreteHandler = theConcreteHandler;
     }
 
     @Override
-    public DescribeFeatureTypeHandler get() {
-        return new DescribeFeatureTypeHandler(this.featureDispatcher);
+    public LayerSchemaHandlerManager get() {
+        return new LayerSchemaHandlerManager(nullHandler, concreteHandler);
     }
 }

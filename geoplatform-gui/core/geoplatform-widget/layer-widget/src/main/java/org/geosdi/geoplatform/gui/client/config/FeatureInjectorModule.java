@@ -41,11 +41,17 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.Describ
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.FeatureTypeHandler;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.RasterTypeHandler;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.ConcreteLayerSchemaHandler;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.LayerSchemaHandlerManager;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.LayerSchemaParserHandler;
 import org.geosdi.geoplatform.gui.client.config.provider.DescribeFeatureTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureMapWidgetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureTypeHandlerProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.LayerSchemaHandlerManagerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.LayerTypeHandlerManagerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.RasterTypeHandlerProvider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.DescribeFeatureDispatcher;
+import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -78,5 +84,14 @@ public class FeatureInjectorModule extends AbstractGinModule {
         
         bind(RasterTypeHandler.class).toProvider(RasterTypeHandlerProvider.class).in(
                 Singleton.class);
+        
+        bind(DescribeFeatureDispatcher.class).to(
+                GPDescribeFeatureDispatcher.class).in(Singleton.class);
+        
+        bind(LayerSchemaParserHandler.class).to(ConcreteLayerSchemaHandler.class).in(
+                Singleton.class);
+        
+        bind(LayerSchemaHandlerManager.class).toProvider(
+                LayerSchemaHandlerManagerProvider.class).in(Singleton.class);
     }
 }

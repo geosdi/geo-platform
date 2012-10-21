@@ -33,31 +33,42 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DescribeFeatureTypeHandlerProvider implements
-        Provider<DescribeFeatureTypeHandler> {
-
-    private GPDescribeFeatureDispatcher featureDispatcher;
-
-    @Inject
-    public DescribeFeatureTypeHandlerProvider(
-            GPDescribeFeatureDispatcher featureDispatcher) {
-        this.featureDispatcher = featureDispatcher;
-    }
+public class NullLayerSchemaHandler extends LayerSchemaParserHandler {
 
     @Override
-    public DescribeFeatureTypeHandler get() {
-        return new DescribeFeatureTypeHandler(this.featureDispatcher);
+    public void layerSchemaParser(LayerSchemaDTO schemaDTO,
+            GPLayerTreeModel layer) {
+        if (schemaDTO == null) {
+            showAlertMessage(layer);
+        } else {
+            super.forwardLayerSchema(schemaDTO, layer);
+        }
+    }
+
+    private void showAlertMessage(GPLayerTreeModel layer) {
+        String alertMessage = "The Layer " + layer.getName()
+                + " isn't a Vector.";
+        GeoPlatformMessage.alertMessage(
+                "DescribeFeatureType Service",
+                alertMessage);
+
+        LayoutManager.getInstance().getStatusMap().setStatus(
+                alertMessage,
+                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+        layer.setLayerType(GPLayerType.RASTER);
     }
 }

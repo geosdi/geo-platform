@@ -33,31 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DescribeFeatureTypeHandlerProvider implements
-        Provider<DescribeFeatureTypeHandler> {
+public abstract class LayerSchemaParserHandler {
 
-    private GPDescribeFeatureDispatcher featureDispatcher;
+    protected LayerSchemaParserHandler successor;
 
-    @Inject
-    public DescribeFeatureTypeHandlerProvider(
-            GPDescribeFeatureDispatcher featureDispatcher) {
-        this.featureDispatcher = featureDispatcher;
+    /**
+     * @param theSuccessor the successor to set
+     */
+    public void setSuccessor(LayerSchemaParserHandler theSuccessor) {
+        this.successor = theSuccessor;
     }
 
-    @Override
-    public DescribeFeatureTypeHandler get() {
-        return new DescribeFeatureTypeHandler(this.featureDispatcher);
+    public abstract void layerSchemaParser(LayerSchemaDTO schemaDTO,
+            GPLayerTreeModel layer);
+
+    protected void forwardLayerSchema(LayerSchemaDTO schemaDTO,
+            GPLayerTreeModel layer) {
+        if (successor != null) {
+            successor.layerSchemaParser(schemaDTO, layer);
+        }
     }
 }

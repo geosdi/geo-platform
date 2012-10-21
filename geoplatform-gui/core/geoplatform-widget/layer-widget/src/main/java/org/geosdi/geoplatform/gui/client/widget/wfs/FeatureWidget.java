@@ -67,9 +67,10 @@ public class FeatureWidget extends GeoPlatformWindow {
     private Button resetButton;
 
     @Inject
-    public FeatureWidget(
-            FeatureMapWidget mapWidget, FeatureAttributesWidget attributesWidget,
-            FeatureStatusBar statusBar, GPEventBus bus) {
+    public FeatureWidget(FeatureMapWidget mapWidget,
+            FeatureAttributesWidget attributesWidget,
+            FeatureStatusBar statusBar,
+            GPEventBus bus) {
         super(true);
         this.mapWidget = mapWidget;
         this.attributesWidget = attributesWidget;
@@ -109,7 +110,8 @@ public class FeatureWidget extends GeoPlatformWindow {
     }
 
     private void addEastWidget() {
-        BorderLayoutData data = new BorderLayoutData(Style.LayoutRegion.EAST, 300);
+        BorderLayoutData data = new BorderLayoutData(Style.LayoutRegion.EAST,
+                                                     300);
         data.setMargins(new Margins(0));
 
         super.add(this.attributesWidget, data);
@@ -166,9 +168,9 @@ public class FeatureWidget extends GeoPlatformWindow {
         resetButton.enable();
         saveButton.enable();
     }
-    
+
     @Override
-    public void show(){
+    public void show() {
         super.show();
         // Use BaseLayer wrt the BaseLayer viewed
         statusBar.setStatus("...", FeatureStatusBarType.STATUS_OK);

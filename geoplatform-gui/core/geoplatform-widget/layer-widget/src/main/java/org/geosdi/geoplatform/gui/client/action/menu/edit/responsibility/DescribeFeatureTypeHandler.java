@@ -35,15 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
@@ -55,10 +48,11 @@ import org.geosdi.geoplatform.gui.shared.GPLayerType;
  */
 public class DescribeFeatureTypeHandler extends LayerTypeHandler {
 
-    private FeatureWidget featureWidget;
+    private GPDescribeFeatureDispatcher featureDispatcher;
 
-    public DescribeFeatureTypeHandler(FeatureWidget theFeatureWidget) {
-        this.featureWidget = theFeatureWidget;
+    public DescribeFeatureTypeHandler(
+            GPDescribeFeatureDispatcher theFeatureDispatcher) {
+        this.featureDispatcher = theFeatureDispatcher;
     }
 
     @Override
@@ -66,65 +60,9 @@ public class DescribeFeatureTypeHandler extends LayerTypeHandler {
         if (layer.getLayerType() == GPLayerType.WMS) {
             System.out.println(
                     "DescribeFeatureTypeHandler @@@@@@@@@@@@@@@@@@@@@@@@");
-            executeDescribeFeatureTypeRequest(layer);
+            this.featureDispatcher.dispatchDescribeFeatureRequest(layer);
         } else {
             super.forwardLayerType(layer);
         }
-    }
-
-    private void executeDescribeFeatureTypeRequest(final GPLayerTreeModel layer) {
-        LayerRemote.Util.getInstance().describeFeatureType(
-                layer.getDataSource(), layer.getName(),
-                new AsyncCallback<LayerSchemaDTO>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        String errorMessage = "Error on WFS DescribeFeatureType request";
-
-                        GeoPlatformMessage.errorMessage(
-                                "DescribeFetureType Service Error",
-                                errorMessage + " - " + caught.getMessage());
-
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for " + layer.getName() + " layer.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                    }
-
-                    @Override
-                    public void onSuccess(LayerSchemaDTO result) {
-                        if (result == null) {
-                            String alertMessage = "The Layer " + layer.getName()
-                                    + " isn't a Vector.";
-                            GeoPlatformMessage.alertMessage(
-                                    "DescribeFeatureType Service",
-                                                            alertMessage);
-
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    alertMessage,
-                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                            layer.setLayerType(GPLayerType.RASTER);
-                        } else {
-                            String geometry = result.getGeometry();
-                            String geometryType = geometry.substring(geometry.lastIndexOf(".") + 1);
-                            layer.setLayerType(GPLayerType.valueOf(geometryType.toUpperCase()));
-
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "The Layer " + layer.getName() + " is a WFS layer of "
-                                    + geometryType + " geometry type.",
-                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-
-                            if (layer instanceof VectorTreeNode) {
-                                ((VectorTreeNode) layer).setFeatureNameSpace(
-                                        result.getTargetNamespace());
-                                // Open the Window
-                                featureWidget.show();
-                            } else {
-                                featureWidget.show();
-                            }
-
-                            //TODO here must be opened the widget to manage Edit Mode
-                        }
-
-                    }
-                });
     }
 }

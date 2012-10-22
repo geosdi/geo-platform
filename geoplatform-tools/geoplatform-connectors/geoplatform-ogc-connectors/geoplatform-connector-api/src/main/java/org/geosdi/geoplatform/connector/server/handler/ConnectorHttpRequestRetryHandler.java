@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.connector.server.handler;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
-import javax.annotation.concurrent.Immutable;
 import javax.net.ssl.SSLException;
+import net.jcip.annotations.Immutable;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
 import org.apache.http.NoHttpResponseException;
@@ -103,8 +103,8 @@ public class ConnectorHttpRequestRetryHandler implements HttpRequestRetryHandler
 
         HttpRequest request = (HttpRequest) context.getAttribute(
                 ExecutionContext.HTTP_REQUEST);
-        
-        if(processIdempotent(request)) {
+
+        if (processIdempotent(request)) {
             return true;
         }
 

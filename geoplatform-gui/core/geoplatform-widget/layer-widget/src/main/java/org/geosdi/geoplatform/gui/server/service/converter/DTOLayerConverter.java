@@ -160,7 +160,7 @@ public class DTOLayerConverter {
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
-        raster.setLayerType(org.geosdi.geoplatform.gui.shared.GPLayerType.WMS);
+        raster.setLayerType(GPLayerType.WMS);
         raster.setOpacity(rasterDTO.getOpacity());
         ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
         GPStyleStringBeanModel style;
@@ -192,26 +192,35 @@ public class DTOLayerConverter {
         layer.setTitle(layerDTO.getTitle());
         layer.setAlias(layerDTO.getAlias());
         layer.setCqlFilter(layerDTO.getCqlFilter());
-        layer.setTimeFilter(layerDTO.getTimeFilter());
-        try {
-            int dimensionPosition = Integer.parseInt(layerDTO.getTimeFilter());
-            String dimension = this.geoserverRestReader.getDimensions(layerDTO.getTitle());
-            List<String> dimensionList = Lists.newArrayList(dimension.split(","));
-            layer.setVariableTimeFilter(dimensionList.get(dimensionList.size() - dimensionPosition - 1));
-            String layerAlias;
-            if (layerDTO.getAlias() != null
-                    && layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
-                layerAlias = layerDTO.getAlias().substring(0,
-                        layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
-            } else {
-                layerAlias = layerDTO.getTitle();
+        if (layerDTO.getTimeFilter() != null) {
+            layer.setTimeFilter(layerDTO.getTimeFilter());
+            try {
+                String[] timeFilterSplitted = layerDTO.getTimeFilter().split("/");
+                int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);
+
+                String dimension = this.geoserverRestReader.getDimensions(layerDTO.getTitle());
+                List<String> dimensionList = Lists.newArrayList(dimension.split(","));
+                String variableTimeFilter = dimensionList.get(dimensionList.size() - startDimensionPosition - 1);
+                if (timeFilterSplitted.length > 1) {
+                    int endDimensionPosition = Integer.parseInt(timeFilterSplitted[1]);
+                    variableTimeFilter += "/" + dimensionList.get(dimensionList.size() - endDimensionPosition - 1);
+                }
+                layer.setVariableTimeFilter(variableTimeFilter);
+                String layerAlias;
+                if (layerDTO.getAlias() != null
+                        && layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
+                    layerAlias = layerDTO.getAlias().substring(0,
+                            layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+                } else {
+                    layerAlias = layerDTO.getTitle();
+                }
+                layer.setAlias(layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
+                        + layer.getVariableTimeFilter() + "]");
+            } catch (NumberFormatException nfe) {
+            } catch (MalformedURLException nfe) {
+                logger.error("Impossible to retrieve time filter executing call with "
+                        + "geoServerManager: " + nfe);
             }
-            layer.setAlias(layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
-                    + layer.getVariableTimeFilter() + "]");
-        } catch (NumberFormatException nfe) {
-        } catch (MalformedURLException nfe) {
-            logger.error("Impossible to retrieve time filter executing call with "
-                    + "geoServerManager: " + nfe);
         }
         // layer.setzIndex(layerDTO.getPosition());
     }
@@ -236,28 +245,22 @@ public class DTOLayerConverter {
     private void setVectorLayerType(ClientVectorInfo vector, GPLayerType layerType) {
         switch (layerType) {
             case POINT:
-                vector.setLayerType(
-                        org.geosdi.geoplatform.gui.shared.GPLayerType.POINT);
+                vector.setLayerType(GPLayerType.POINT);
                 break;
             case LINESTRING:
-                vector.setLayerType(
-                        org.geosdi.geoplatform.gui.shared.GPLayerType.LINESTRING);
+                vector.setLayerType(GPLayerType.LINESTRING);
                 break;
             case POLYGON:
-                vector.setLayerType(
-                        org.geosdi.geoplatform.gui.shared.GPLayerType.POLYGON);
+                vector.setLayerType(GPLayerType.POLYGON);
                 break;
             case MULTIPOINT:
-                vector.setLayerType(
-                        org.geosdi.geoplatform.gui.shared.GPLayerType.MULTIPOINT);
+                vector.setLayerType(GPLayerType.MULTIPOINT);
                 break;
             case MULTILINESTRING:
-                vector.setLayerType(
-                        org.geosdi.geoplatform.gui.shared.GPLayerType.MULTILINESTRING);
+                vector.setLayerType(GPLayerType.MULTILINESTRING);
                 break;
             case MULTIPOLYGON:
-                vector.setLayerType(
-                        org.geosdi.geoplatform.gui.shared.GPLayerType.MULTIPOLYGON);
+                vector.setLayerType(GPLayerType.MULTIPOLYGON);
                 break;
             default:
                 System.out.println("### No Layer Type ###");

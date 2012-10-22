@@ -35,107 +35,59 @@
  */
 package org.geosdi.geoplatform.gui.featureinfo.widget;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
-import java.util.Iterator;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import java.util.List;
 import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
-import org.geosdi.geoplatform.gui.featureinfo.event.timeout.ILoadLayersDataSourceHandler;
-import org.geosdi.geoplatform.gui.featureinfo.event.timeout.LoadLayersDataSouceEvent;
-import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
+public class GPFeatureInfoCaller {
 
     private boolean loaded;
     private boolean activated;
     private Map map;
-    private LoadLayersDataSouceEvent dataSouceEvent = new LoadLayersDataSouceEvent();
 
     public GPFeatureInfoCaller(Map theMap) {
         this.map = theMap;
-        TimeoutHandlerManager.addHandler(ILoadLayersDataSourceHandler.TYPE, this);
     }
 
-    public void load() {
-        if (!isLoaded()) {
-            this.loadUserServers();
-        } else {
-            activateFeatureInfoControl();
+    public void load(List<Layer> layerList) {
+        for (Layer layer : GeoPlatformUtils.safeList(layerList)) {
+            IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(layer);
+            map.addControl(element.getElementControl());
         }
+        activateFeatureInfoControl();
     }
 
-    @Override
-    public void loadUserServers() {
-        LayoutManager.getInstance().getStatusMap().setStatus("Loading Feature Info Data Sources.",
-                EnumSearchStatus.STATUS_SEARCH.toString());
-        GeoPlatformOGCRemote.Util.getInstance().findDistinctLayersDataSource(new AsyncCallback<ArrayList<String>>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                if (caught.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(dataSouceEvent));
-                } else {
-                    GeoPlatformMessage.errorMessage("Get Feature Info Error",
-                            "Problems to perform Get Feature Info");
-                }
-            }
-
-            @Override
-            public void onSuccess(ArrayList<String> result) {
-                if (result != null) {
-                    for (String string : result) {
-                        IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(string);
-                        map.addControl(element.getElementControl());
-                    }
-                    loaded = true;
-                    load();
-                    LayoutManager.getInstance().getStatusMap().setStatus("Feature Info Function loaded succesfully.",
-                            EnumSearchStatus.STATUS_SEARCH.toString());
-                } else {
-                    GeoPlatformMessage.alertMessage("GPFeature Info Module",
-                            "There are no layers on the Server for the Current "
-                            + "Project. Please Save the Project and Re Click on "
-                            + "Feature Info Button.");
-                }
-            }
-        });
-    }
-
-    /**
-     * 
-     */
     public void activateFeatureInfoControl() {
-        for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
-            it.next().getElementControl().activate();
+        for (IGPFeatureInfoElement featureInfoElement :
+                GeoPlatformUtils.safeCollection(FeatureInfoFlyWeight.getInstance().getCollection())) {
+            featureInfoElement.getElementControl().activate();
         }
-        this.activated = true;
+        this.activated = Boolean.TRUE;
     }
 
     /**
-     * 
+     *
      */
     public void deactivateFeatureInfoControl() {
-        for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
-            it.next().getElementControl().deactivate();
+        for (IGPFeatureInfoElement featureInfoElement :
+                GeoPlatformUtils.safeCollection(FeatureInfoFlyWeight.getInstance().getCollection())) {
+            map.removeControl(featureInfoElement.getElementControl());
+            featureInfoElement.getElementControl().deactivate();
         }
-        this.activated = false;
+        FeatureInfoFlyWeight.getInstance().cleanCache();
+        this.activated = Boolean.FALSE;
     }
 
     /**
-     * 
+     *
      * @return boolean
      */
     public boolean isLoaded() {

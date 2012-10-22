@@ -37,9 +37,9 @@ package org.geosdi.geoplatform.gui.featureinfo.cache;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.google.common.collect.Maps;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.featureinfo.widget.factory.FeatureInfoControlFactory;
@@ -50,23 +50,24 @@ import org.gwtopenmaps.openlayers.client.event.GetFeatureInfoListener;
 import org.gwtopenmaps.openlayers.client.event.GetFeatureInfoListener.GetFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.event.NoGetFeatureInfoListener;
 import org.gwtopenmaps.openlayers.client.event.NoGetFeatureInfoListener.NoGetFeatureInfoEvent;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureInfoFlyWeight {
 
     private static FeatureInfoFlyWeight instance = new FeatureInfoFlyWeight();
-    
-    private Map<String, IGPFeatureInfoElement> cache = new HashMap<String, IGPFeatureInfoElement>();
+    private Map<String, IGPFeatureInfoElement> cache = Maps.newHashMap();
     private FeatureInfoShowWidgetEvent event = new FeatureInfoShowWidgetEvent();
     private int count = 0;
-    
-    private FeatureInfoFlyWeight(){}
-    
-    public static FeatureInfoFlyWeight getInstance(){
+
+    private FeatureInfoFlyWeight() {
+    }
+
+    public static FeatureInfoFlyWeight getInstance() {
         return instance;
     }
 
@@ -77,30 +78,42 @@ public class FeatureInfoFlyWeight {
         }
     }
 
-    public IGPFeatureInfoElement get(String key) {
-        IGPFeatureInfoElement element = null;
-        if (this.cache.containsKey(key)) {
-            element = this.cache.get(key);
+    public IGPFeatureInfoElement get(Layer layer) {
+        IGPFeatureInfoElement element;
+        if (this.cache.containsKey(layer.getId())) {
+            element = this.cache.get(layer.getId());
         } else {
-            element = new GPFeatureInfoElement(key);
-            this.cache.put(key, element);
+            element = new GPFeatureInfoElement(layer);
+            this.cache.put(layer.getId(), element);
         }
         return element;
+    }
+
+    public void cleanCache() {
+        this.cache.clear();
+    }
+
+    public void remove(Layer layer) {
+        this.cache.remove(layer.getId());
     }
 
     public Collection<IGPFeatureInfoElement> getCollection() {
         return this.cache.values();
     }
 
+    public boolean contains(Layer layer) {
+        return this.cache.containsKey(layer.getId());
+    }
+
     private class GPFeatureInfoElement implements IGPFeatureInfoElement {
 
-        private String urlServer;
+        private Layer layer;
         private WMSGetFeatureInfo infoControl;
         private ContentPanel infoPanel;
         private boolean isActive;
 
-        public GPFeatureInfoElement(String theUrlServer) {
-            this.urlServer = theUrlServer;
+        public GPFeatureInfoElement(Layer layer) {
+            this.layer = layer;
             this.createComponents();
         }
 
@@ -120,16 +133,15 @@ public class FeatureInfoFlyWeight {
         }
 
         private void createComponents() {
-            this.infoControl = FeatureInfoControlFactory.createControl(urlServer);
-            this.infoPanel = FeatureInfoPanelFactory.createPanel(urlServer,
-                    urlServer);
+            this.infoControl = FeatureInfoControlFactory.createControl(layer);
+            this.infoPanel = FeatureInfoPanelFactory.createPanel(layer.getId(),
+                    layer.getName());
             this.infoPanel.setScrollMode(Scroll.AUTOX);
             addFeatureListener();
         }
 
         private void addFeatureListener() {
             this.infoControl.addGetFeatureListener(new GetFeatureInfoListener() {
-
                 @Override
                 public void onGetFeatureInfo(GetFeatureInfoEvent eventObject) {
                     infoPanel.removeAll();
@@ -140,7 +152,6 @@ public class FeatureInfoFlyWeight {
             });
 
             this.infoControl.addNoGetFeatureListener(new NoGetFeatureInfoListener() {
-
                 @Override
                 public void onNoGetFeatureInfo(NoGetFeatureInfoEvent eventObject) {
                     infoPanel.removeAll();

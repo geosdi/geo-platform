@@ -37,21 +37,25 @@ package org.geosdi.geoplatform.gui.puregwt.featureinfo;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import java.util.List;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPFeatureInfoHandler extends EventHandler {
-    
+
     Type<GPFeatureInfoHandler> TYPE = new Type<GPFeatureInfoHandler>();
-    
-    public void activateHandler();
-    
+
+    public void activateHandler(List<Layer> layerList);
+
     public void deactivateHandler();
-    
+
     public void showInfoWidget();
-    
-    public void addLayersServer(String urlServers);
+
+    public void addModifyLayer(Layer layer);
+
+    public void removeLayer(Layer layer);
 }

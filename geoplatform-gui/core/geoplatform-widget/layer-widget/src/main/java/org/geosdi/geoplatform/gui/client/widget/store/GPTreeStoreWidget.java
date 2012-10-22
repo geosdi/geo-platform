@@ -52,7 +52,6 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMeme
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
-import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
@@ -61,7 +60,6 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
-import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridRecordEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -76,7 +74,6 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         implements ISave<MementoSaveAddedLayers> {
 
     private LayersProgressTextEvent layersTextEvent = new LayersProgressTextEvent();
-    private FeatureInfoAddLayersServer featureInfoAddLayersEvent = new FeatureInfoAddLayersServer();
     private VisitorAddElement visitorAdd = new VisitorAddElement();
     private DeselectGridElementEvent deselectGridElement = new DeselectGridElementEvent();
     private DeselectGridRecordEvent deselectGridRecord = new DeselectGridRecordEvent();
@@ -320,9 +317,6 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
             mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
             IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
             mementoSave.add(mementoSaveLayer);
-
-            this.featureInfoAddLayersEvent.setUrlServers(urlServer);
-            MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
         }
     }
 

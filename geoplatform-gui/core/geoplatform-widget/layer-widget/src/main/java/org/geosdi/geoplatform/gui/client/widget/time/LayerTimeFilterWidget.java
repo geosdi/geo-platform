@@ -39,6 +39,8 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Label;
@@ -81,14 +83,17 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
     public final static String LAYER_TIME_DELIMITER = " - [";
-    private final static short WIDGET_HEIGHT = 200;
-    private final static short WIDGET_WIDTH = 350;
+    private final static short WIDGET_HEIGHT = 230;
+    private final static short WIDGET_WIDTH = 360;
     private final static String TIME_FILTER_HEADING = "TIME FILTER EDITOR";
     private final TimeFilterLayerMapEvent timeFilterLayerMapEvent = new TimeFilterLayerMapEvent();
     private final GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
-    private NumberField filterTextField;
-    private ComboBox<DimensionData> dimensionComboBox;
-    private ListStore<DimensionData> store;
+    private NumberField startFilterTextField;
+    private NumberField endFilterTextField;
+    private ComboBox<DimensionData> startDimensionComboBox;
+    private ComboBox<DimensionData> endDimensionComboBox;
+    private ListStore<DimensionData> startStore;
+    private ListStore<DimensionData> endStore;
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private Label dimensionSizeLabel;
     private final Radio fixedDimensionRadio = new Radio();
@@ -133,25 +138,53 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
             }
         });
 
-        this.store = new ListStore<DimensionData>();
-        this.dimensionComboBox = new ComboBox<DimensionData>();
-        this.dimensionComboBox.setFieldLabel("Fixed dimension");
-        this.dimensionComboBox.setStore(this.store);
-        this.dimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
+        this.startStore = new ListStore<DimensionData>();
+        this.startDimensionComboBox = new ComboBox<DimensionData>();
+        this.startDimensionComboBox.setFieldLabel("Start Fixed dimension");
+        this.startDimensionComboBox.setStore(this.startStore);
+        this.startDimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
+        this.startDimensionComboBox.addSelectionChangedListener(new SelectionChangedListener<DimensionData>() {
+            @Override
+            public void selectionChanged(SelectionChangedEvent<DimensionData> se) {
+                if (se.getSelectedItem() != null) {
+                    endStore.removeAll();
+                    int indexStart = startStore.getModels().indexOf(se.getSelectedItem()) + 1;
+//                    System.out.println("Sublist start: " + indexStart);
+//                    System.out.println("Sublist end: " + (startStore.getModels().size() - 1));
+                    if (indexStart < startStore.getModels().size()) {
+                        endDimensionComboBox.enable();
+                        endStore.add(startStore.getModels().subList(
+                                startStore.indexOf(se.getSelectedItem()) + 1,
+                                startStore.getModels().size()));
+                    } else {
+                        endDimensionComboBox.disable();
+                    }
+                }
+            }
+        });
+        this.endStore = new ListStore<DimensionData>();
+        this.endDimensionComboBox = new ComboBox<DimensionData>();
+        this.endDimensionComboBox.setFieldLabel("End Fixed dimension");
+        this.endDimensionComboBox.setStore(this.endStore);
+        this.endDimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
+        this.endDimensionComboBox.disable();
         dimensionSizeLabel = new Label();
         dimensionSizeLabel.setStyleAttribute("font-size", "12px");
-        this.filterTextField = new NumberField();
-        this.filterTextField.setFieldLabel("Dimension to Display");
+        this.startFilterTextField = new NumberField();
+        this.startFilterTextField.setFieldLabel("Start Dimension to Display");
+        this.endFilterTextField = new NumberField();
+        this.endFilterTextField.setFieldLabel("End Dimension to Display");
         FormPanel panel = new FormPanel();
         panel.setHeaderVisible(Boolean.FALSE);
         panel.setFrame(Boolean.TRUE);
         panel.setBorders(Boolean.FALSE);
         panel.setHeight(WIDGET_HEIGHT - 67);
-        panel.add(this.filterTextField, new FormData("100%"));
         panel.add(this.dimensionRadioGroup);
         this.variableDimensionContainer.add(dimensionSizeLabel, new FormData("100%"));
-        this.variableDimensionContainer.add(this.filterTextField);
-        this.fixedDimensionContainer.add(this.dimensionComboBox);
+        this.variableDimensionContainer.add(this.startFilterTextField);
+        this.variableDimensionContainer.add(this.endFilterTextField);
+        this.fixedDimensionContainer.add(this.startDimensionComboBox);
+        this.fixedDimensionContainer.add(this.endDimensionComboBox);
         panel.add(this.fixedDimensionContainer, new FormData("100%"));
         panel.add(this.variableDimensionContainer, new FormData("100%"));
         super.add(panel);
@@ -171,17 +204,32 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                             layerName = layerSelected.getLabel();
                         }
                         if (fixedDimensionRadio.getValue()) {
-                            layerSelected.setTimeFilter((String) dimensionComboBox.getValue().get(DimensionData.DIMENSION_KEY));
+                            String timeFilter = (String) startDimensionComboBox.getValue().get(DimensionData.DIMENSION_KEY);
+                            if (endDimensionComboBox.getValue() != null) {
+                                timeFilter += "/" + (String) endDimensionComboBox.getValue().get(DimensionData.DIMENSION_KEY);
+                            }
+                            layerSelected.setTimeFilter(timeFilter);
                             layerSelected.setVariableTimeFilter(null);
                             layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getTimeFilter() + "]");
                             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
                         } else {
-                            int value = filterTextField.getValue().intValue();
-                            if (value < 0 || value > store.getModels().size()) {
+                            int startFilter = startFilterTextField.getValue().intValue();
+                            Number endFilter = endFilterTextField.getValue();
+//                            System.out.println("End filter: " + endFilter);
+                            if (startFilter < 0 || startFilter > startStore.getModels().size() - 1
+                                    || (endFilter != null && (endFilter.intValue() <= startFilter
+                                    || endFilter.intValue() > startStore.getModels().size() - 1))) {
                                 GeoPlatformMessage.errorMessage("Time Filter Error", "Incorrect Position time, you must specify a valid position in size range");
+                                return;
                             } else {
-                                layerSelected.setTimeFilter("" + filterTextField.getValue().intValue());
-                                layerSelected.setVariableTimeFilter((String) store.getModels().get(store.getModels().size() - value - 1).get(DimensionData.DIMENSION_KEY));
+                                String timeFilter = "" + startFilterTextField.getValue().intValue();
+                                String variableTimeFilter = (String) startStore.getModels().get(startStore.getModels().size() - startFilter - 1).get(DimensionData.DIMENSION_KEY);
+                                if (endFilterTextField.getValue() != null) {
+                                    timeFilter += "/" + endFilterTextField.getValue().intValue();
+                                    variableTimeFilter += "/" + (String) startStore.getModels().get(startStore.getModels().size() - endFilter.intValue() - 1).get(DimensionData.DIMENSION_KEY);
+                                }
+                                layerSelected.setTimeFilter(timeFilter);
+                                layerSelected.setVariableTimeFilter(variableTimeFilter);
                                 layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getVariableTimeFilter() + "]");
                                 WidgetPropertiesHandlerManager.fireEvent(labelEvent);
                             }
@@ -198,7 +246,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                 new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        filterTextField.clear();
+                        startFilterTextField.clear();
+                        endFilterTextField.clear();
                         hide();
                     }
                 });
@@ -231,9 +280,10 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                     public void onSuccess(String result) {
                         List<String> dimensionList = Lists.newArrayList(result.split(","));
                         dimensionSizeLabel.setText("Dimension Size: " + dimensionList.size());
-                        store.removeAll();
+                        startStore.removeAll();
+                        endStore.removeAll();
                         for (String dimension : GeoPlatformUtils.safeList(dimensionList)) {
-                            store.add(new DimensionData(dimension));
+                            startStore.add(new DimensionData(dimension));
                         }
                     }
                 });
@@ -248,13 +298,23 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         String variableTimeFilter = layerElement.getVariableTimeFilter();
         if (variableTimeFilter != null) {
             try {
-                int integerTimeFilter = Integer.parseInt(timeFilter);
-                this.filterTextField.setValue(integerTimeFilter);
+                String[] variableTimeFilterSplitted = timeFilter.split("/");
+                int integerTimeFilter = Integer.parseInt(variableTimeFilterSplitted[0]);
+                this.startFilterTextField.setValue(integerTimeFilter);
                 this.dimensionRadioGroup.setValue(this.variableDimensionRadio);
+                if (variableTimeFilterSplitted.length > 1) {
+                    integerTimeFilter = Integer.parseInt(variableTimeFilterSplitted[1]);
+                    this.endFilterTextField.setValue(integerTimeFilter);
+                }
             } catch (NumberFormatException nfe) {
             }
         } else if (timeFilter != null) {
-            this.dimensionComboBox.setValueField(timeFilter);
+            String[] timeFilterSplitted = timeFilter.split("/");
+            this.startDimensionComboBox.setValue(new DimensionData(timeFilterSplitted[0]));
+            if (timeFilterSplitted.length > 1) {
+                this.endDimensionComboBox.enable();
+                this.endDimensionComboBox.setValue(new DimensionData(timeFilterSplitted[1]));
+            }
             this.dimensionRadioGroup.setValue(this.fixedDimensionRadio);
         }
     }

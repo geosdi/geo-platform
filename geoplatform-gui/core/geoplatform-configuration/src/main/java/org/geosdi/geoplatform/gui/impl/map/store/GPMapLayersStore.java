@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.impl.map.store;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
-
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.impl.tree.DisplayLayersManager;
@@ -55,7 +54,7 @@ public abstract class GPMapLayersStore<K extends GPLayerBean, T extends Layer>
         implements IMapLayersStore<T>, LayerMapChangedHandler {
 
     protected GeoPlatformMap mapWidget;
-    protected Map<K, T> layers = new HashMap<K, T>();
+    protected Map<K, T> layers = Maps.newHashMap();
     private DisplayLayersManager displayLayers;
 
     /**
@@ -81,6 +80,6 @@ public abstract class GPMapLayersStore<K extends GPLayerBean, T extends Layer>
      * @return List<T>
      */
     public List<T> getLayers() {
-        return new ArrayList<T>(this.layers.values());
+        return Lists.newArrayList(this.layers.values());
     }
 }

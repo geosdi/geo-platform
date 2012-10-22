@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.Info;
+import com.google.common.collect.Lists;
 import com.google.gwt.user.client.Timer;
 import org.geosdi.geoplatform.gui.client.event.IChangeBaseLayerHandler;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
@@ -59,9 +60,17 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.event.ChangeBaseLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddModifyLayer;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoRemoveLayer;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.*;
 import org.gwtopenmaps.openlayers.client.control.*;
+import org.gwtopenmaps.openlayers.client.event.MapLayerAddedListener;
+import org.gwtopenmaps.openlayers.client.event.MapLayerAddedListener.MapLayerAddedEvent;
+import org.gwtopenmaps.openlayers.client.event.MapLayerChangedListener;
+import org.gwtopenmaps.openlayers.client.event.MapLayerChangedListener.MapLayerChangedEvent;
+import org.gwtopenmaps.openlayers.client.event.MapLayerRemovedListener;
+import org.gwtopenmaps.openlayers.client.event.MapLayerRemovedListener.MapLayerRemovedEvent;
 import org.gwtopenmaps.openlayers.client.event.MeasureEvent;
 import org.gwtopenmaps.openlayers.client.event.MeasureListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -90,6 +99,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private boolean measureActive;
     private boolean measureAreaActive;
     private ChangeBaseLayerMapEvent changeBaseLayerMapEvent;
+    private MapLayerAddedListener featureInfoLayerAddedListener;
+    private MapLayerChangedListener featureInfoLayerChangedListener;
+    private MapLayerRemovedListener featureInfoLayerRemovedListener;
 
     public MapLayoutWidget() {
         super();
@@ -154,14 +166,31 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.GOOGLE_SATELLITE);
         }
 
-        System.out.println("Base layer projection: " + baseLayer.getProjection().getProjectionCode());
+//        System.out.println("Base layer projection: " + baseLayer.getProjection().getProjectionCode());
         this.map.addLayer(baseLayer.getGwtOlBaseLayer());
         baseLayer.getGwtOlBaseLayer().setZIndex(-1);
         this.mapControl = new MapControlManager(this.map);
 
         this.map.setOptions(this.mapOptions);
-        System.out.println("Map Projection " + this.map.getProjection());
-
+//        System.out.println("Map Projection " + this.map.getProjection());
+        this.featureInfoLayerAddedListener = new MapLayerAddedListener() {
+            @Override
+            public void onLayerAdded(MapLayerAddedEvent eventObject) {
+                MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(eventObject.getLayer()));
+            }
+        };
+        this.featureInfoLayerRemovedListener = new MapLayerRemovedListener() {
+            @Override
+            public void onLayerRemoved(MapLayerRemovedEvent eventObject) {
+                MapHandlerManager.fireEvent(new FeatureInfoRemoveLayer(eventObject.getLayer()));
+            }
+        };
+        this.featureInfoLayerChangedListener = new MapLayerChangedListener() {
+            @Override
+            public void onLayerChanged(MapLayerChangedEvent eventObject) {
+                MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(eventObject.getLayer()));
+            }
+        };
     }
 
     public void addMeasureControl() {
@@ -197,12 +226,21 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     @Override
     public void activateInfo() {
         this.infoActive = Boolean.TRUE;
-        MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive));
+//        System.out.println("Activate info");
+        this.map.addMapLayerAddedListener(this.featureInfoLayerAddedListener);
+        this.map.addMapLayerChangedListener(this.featureInfoLayerChangedListener);
+        this.map.addMapLayerRemovedListener(this.featureInfoLayerRemovedListener);
+        MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive,
+                Lists.newArrayList(map.getLayers())));
     }
 
     @Override
     public void deactivateInfo() {
         this.infoActive = Boolean.FALSE;
+//        System.out.println("De-Activate info");
+        this.map.removeListener(this.featureInfoLayerAddedListener);
+        this.map.removeListener(this.featureInfoLayerChangedListener);
+        this.map.removeListener(this.featureInfoLayerRemovedListener);
         MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive));
     }
 

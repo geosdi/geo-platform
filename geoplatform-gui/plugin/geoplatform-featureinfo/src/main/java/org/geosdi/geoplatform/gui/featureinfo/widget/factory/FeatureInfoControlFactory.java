@@ -36,12 +36,18 @@
 package org.geosdi.geoplatform.gui.featureinfo.widget.factory;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.google.common.collect.Lists;
+import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.control.GetFeatureInfoVendorParam;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfoOptions;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 /**
  *
@@ -55,24 +61,31 @@ public class FeatureInfoControlFactory {
      * @param urlServer
      * @return
      */
-    public static WMSGetFeatureInfo createControl(String urlServer) {
+    public static WMSGetFeatureInfo createControl(Layer layer) {
         WMSGetFeatureInfoOptions options = new WMSGetFeatureInfoOptions();
-
-        /**
-         * FIX MEEEEEEEEEEEEEEEEEE *
-         */
-        if (urlServer.equalsIgnoreCase("http://10.220.154.25/geowebcache/service/wms")) {
-            options.setURL("http://10.220.154.25/geoserver/wms");
-        } else {
-            IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-            String authKeyValue = accountDetail.getAuthkey();
-            if (authKeyValue != null && !authKeyValue.equals("")) {
-                GetFeatureInfoVendorParam param = new GetFeatureInfoVendorParam();
-                param.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authKeyValue);
-                options.setVendorParams(param);
-            }
-            options.setURL(urlServer);
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        String authKeyValue = accountDetail.getAuthkey();
+        GetFeatureInfoVendorParam param = new GetFeatureInfoVendorParam();
+        if (authKeyValue != null && !authKeyValue.equals("")) {
+            param.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authKeyValue);
         }
+        WMS wms = WMS.narrowToWMS(layer.getJSObject());
+        WMSParams params = wms.getParams();
+        List<String> propertyNameList = Lists.newArrayList(params.getJSObject().getPropertyNames().split(","));
+        List<String> propertyValueList = Lists.newArrayList(params.getJSObject().getPropertyValues().split(","));
+        int i = 0;
+        for (String propertyName : GeoPlatformUtils.safeList(propertyNameList)) {
+            String propertyValue = propertyValueList.get(i);
+            if (propertyName != null && !propertyName.isEmpty() && !propertyName.equalsIgnoreCase("REQUEST")
+                    && propertyValue != null && !propertyValue.isEmpty() && !propertyValue.equalsIgnoreCase("null")) {
+                param.setParameter(propertyName, propertyValue);
+//                System.out.println("Setted parameter: " + propertyName + " - "
+//                        + propertyValue);
+            }
+            i++;
+        }
+        options.setVendorParams(param);
+        options.setLayers(new WMS[]{wms});
         options.setTitle("Query visible layers");
         options.setQueryVisible(true);
         return new WMSGetFeatureInfo(options);

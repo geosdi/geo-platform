@@ -37,16 +37,24 @@ package org.geosdi.geoplatform.gui.puregwt.featureinfo.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import java.util.List;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPFeatureInfoEvent extends GwtEvent<GPFeatureInfoHandler> {
 
     private boolean activate;
+    private List<Layer> layerList;
+
+    public GPFeatureInfoEvent(boolean activate, List<Layer> layerList) {
+        this.activate = activate;
+        this.layerList = layerList;
+    }
 
     public GPFeatureInfoEvent(boolean activate) {
         this.activate = activate;
@@ -64,7 +72,7 @@ public class GPFeatureInfoEvent extends GwtEvent<GPFeatureInfoHandler> {
     @Override
     protected void dispatch(GPFeatureInfoHandler handler) {
         if (activate) {
-            handler.activateHandler();
+            handler.activateHandler(this.layerList);
         } else {
             handler.deactivateHandler();
         }

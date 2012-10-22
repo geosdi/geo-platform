@@ -36,16 +36,19 @@
 package org.geosdi.geoplatform.gui.featureinfo.widget;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.event.ScrollListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import java.util.Iterator;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
@@ -82,17 +85,42 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
     public void setWindowProperties() {
         super.setClosable(true);
         super.setScrollMode(Scroll.AUTO);
-
         super.setResizable(true);
         super.setPlain(true);
         super.setModal(true);
-
         super.setHeading("Get Feature Info");
     }
 
     @Override
-    public void activateHandler() {
-        this.featureCaller.load();
+    public void removeLayer(Layer layer) {
+//        System.out.println("On remove layer: " + layer);
+        if (FeatureInfoFlyWeight.getInstance().contains(layer)) {
+            Map map = GPApplicationMap.getInstance().getApplicationMap().getMap();
+            IGPFeatureInfoElement featureInfoElement = FeatureInfoFlyWeight.getInstance().get(layer);
+            featureInfoElement.getElementControl().deactivate();
+            map.removeControl(featureInfoElement.getElementControl());
+            FeatureInfoFlyWeight.getInstance().remove(layer);
+//            System.out.println("layer removed");
+        }
+    }
+
+    @Override
+    public void addModifyLayer(Layer layer) {
+//        System.out.println("On addModifyLayer: " + layer);
+        this.removeLayer(layer);
+        if (layer.isVisible()) {
+            IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(layer);
+            Map map = GPApplicationMap.getInstance().getApplicationMap().getMap();
+            map.addControl(element.getElementControl());
+            element.getElementControl().activate();
+//            System.out.println("Added layer");
+        }
+    }
+
+    @Override
+    public void activateHandler(List<Layer> layerList) {
+//        System.out.println("On activate handler");
+        this.featureCaller.load(layerList);
     }
 
     @Override
@@ -107,11 +135,11 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
 
     @Override
     public void showInfoWidget() {
-        System.out.println("Showing the info widget");
-        for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
-            IGPFeatureInfoElement element = it.next();
-            if (element.isActive()) {
-                this.mainPanel.add(element.getElementPanel());
+//        System.out.println("Showing the info widget");
+        for (IGPFeatureInfoElement featureInfoElement : GeoPlatformUtils.safeCollection(
+                FeatureInfoFlyWeight.getInstance().getCollection())) {
+            if (featureInfoElement.isActive()) {
+                this.mainPanel.add(featureInfoElement.getElementPanel());
             }
         }
         this.mainPanel.layout();
@@ -120,15 +148,6 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
         } else {
             GeoPlatformMessage.alertMessage("GeoPlatform Feature Widget",
                     "There are no layers to show Info.");
-        }
-    }
-
-    @Override
-    public void addLayersServer(String urlServers) {
-        IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(urlServers);
-        this.mapWidget.getMap().addControl(element.getElementControl());
-        if (featureCaller.isActivated()) {
-            element.getElementControl().activate();
         }
     }
 }

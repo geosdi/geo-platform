@@ -33,19 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.featureinfo.event.timeout;
+package org.geosdi.geoplatform.gui.puregwt.featureinfo.event;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface ILoadLayersDataSourceHandler extends EventHandler{
+public class FeatureInfoAddModifyLayer extends GwtEvent<GPFeatureInfoHandler> {
     
-    Type<ILoadLayersDataSourceHandler> TYPE = new Type<ILoadLayersDataSourceHandler>();
+    private Layer layer;
     
-    public void loadUserServers();
+    public FeatureInfoAddModifyLayer(Layer layer) {
+        this.layer = layer;
+    }
     
+    @Override
+    public Type<GPFeatureInfoHandler> getAssociatedType() {
+        return GPFeatureInfoHandler.TYPE;
+    }
+    
+    @Override
+    protected void dispatch(GPFeatureInfoHandler handler) {
+        handler.addModifyLayer(layer);
+    }
 }

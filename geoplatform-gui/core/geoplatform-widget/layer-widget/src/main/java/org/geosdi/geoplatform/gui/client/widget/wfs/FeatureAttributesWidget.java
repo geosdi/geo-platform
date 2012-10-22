@@ -35,7 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
+import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.store.StoreEvent;
+import com.extjs.gxt.ui.client.store.StoreListener;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.grid.CellEditor;
+import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
+import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail.AttributeDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -46,6 +63,15 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 public class FeatureAttributesWidget extends GeoPlatformContentPanel {
 
     private GPEventBus bus;
+    //
+    private String featureID;
+    private List<AttributeDetail> attributes;
+    //
+    private ListStore<AttributeDetail> store;
+    private EditorGrid<AttributeDetail> grid;
+    //
+    private Button saveButton;
+    private Button resetButton;
 
     @Inject
     public FeatureAttributesWidget(GPEventBus bus) {
@@ -53,8 +79,21 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel {
         this.bus = bus;
     }
 
+    public void setFeatureID(String featureID) {
+        assert (featureID != null) : "FeatureID must not bu null.";
+        this.featureID = featureID;
+    }
+
+    public void setAttributes(List<AttributeDetail> attributes) {
+        assert (attributes != null) : "Attributes must not bu null.";
+        this.attributes = attributes;
+    }
+
     @Override
     public void addComponent() {
+        this.createStore();
+        this.createEditorGrid();
+        this.createButtons();
     }
 
     @Override
@@ -63,13 +102,122 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-        super.setHeaderVisible(false);
+        super.head.setText("Feature Attributes");
+        super.head.setStyleAttribute("textAlign", "center");
     }
 
     @Override
     public void reset() {
-        // TODO
-//                grid.stopEditing(true);
-//                store.rejectChanges();
+        store.removeAll();
+        disableButtons();
+        // TODO reset status bar
+    }
+
+    private void createStore() {
+        store = new ListStore<AttributeDetail>();
+        store.addStoreListener(new StoreListener<AttributeDetail>() {
+            @Override
+            public void storeClear(StoreEvent<AttributeDetail> se) {
+                disableButtons();
+            }
+
+            @Override
+            public void storeUpdate(StoreEvent<AttributeDetail> se) {
+                enableButtons();
+            }
+        });
+    }
+
+    private void createEditorGrid() {
+        grid = new EditorGrid<AttributeDetail>(store, this.prepareColumnModel());
+        grid.setBorders(true);
+        grid.setStripeRows(true);
+        grid.setAutoExpandColumn(AttributeDetailKeyValue.NAME.toString());
+
+        super.add(grid);
+    }
+
+    public ColumnModel prepareColumnModel() {
+        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+
+        ColumnConfig nameColumn = new ColumnConfig();
+        nameColumn.setId(AttributeDetailKeyValue.NAME.toString());
+        nameColumn.setHeader("Name");
+        nameColumn.setFixed(true);
+        configs.add(nameColumn);
+
+        TextField<String> valueTextField = new TextField<String>();
+        valueTextField.setAllowBlank(false);
+        CellEditor valueEditor = new CellEditor(valueTextField) {
+            @Override
+            public Object preProcessValue(Object value) { // TODO DEL
+                if (value == null) {
+                    return value;
+                }
+                // TODO Obtain the type of the value
+                // Information aviable into DescribeFeatureType [XMLSchema]
+                System.out.println("\n................. " + value.getClass());
+                return value;
+            }
+
+            @Override
+            public Object postProcessValue(Object value) {
+                if (value == null) {
+                    return value;
+                }
+                // TODO Validate the value wrt the type
+                System.out.println("\n................. " + value.getClass());
+                return value;
+            }
+        };
+
+        ColumnConfig valueColumn = new ColumnConfig();
+        valueColumn.setId(AttributeDetailKeyValue.VALUE.toString());
+        valueColumn.setHeader("Value");
+        valueColumn.setWidth(150);
+        valueColumn.setFixed(true);
+        valueColumn.setEditor(valueEditor);
+        configs.add(valueColumn);
+
+        return new ColumnModel(configs);
+    }
+
+    private void createButtons() {
+        super.setButtonAlign(Style.HorizontalAlignment.CENTER);
+
+        resetButton = new Button("Reset", BasicWidgetResources.ICONS.delete(),
+                                 new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                grid.stopEditing(true);
+                store.rejectChanges();
+                disableButtons();
+            }
+        });
+        super.addButton(resetButton);
+
+        this.saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
+                                     new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                saveAttributes();
+            }
+        });
+        super.addButton(saveButton);
+        this.disableButtons();
+    }
+
+    public void disableButtons() {
+        resetButton.disable();
+        saveButton.disable();
+    }
+
+    public void enableButtons() {
+        resetButton.enable();
+        saveButton.enable();
+    }
+
+    private void saveAttributes() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

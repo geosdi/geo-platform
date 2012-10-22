@@ -55,7 +55,6 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
@@ -108,7 +107,6 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private ContentPanel mainPanel;
     private SplitButton allPermissionsButton;
     private Button copyPermissionsButton;
-    private TextField<Integer> trustedLevelTextField;
     private Menu copyPermissionsMenu;
     private SearchStatus searchStatus;
     private Button resetButton;

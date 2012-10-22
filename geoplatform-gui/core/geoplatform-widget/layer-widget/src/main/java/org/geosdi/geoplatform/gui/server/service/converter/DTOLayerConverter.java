@@ -83,12 +83,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * Simple Class to convert Web-Services beans model in DTO beans Client.
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
- * Simple Class to convert Web-Services beans model in DTO beans Client
- *
  */
 @Component(value = "dtoLayerConverter")
 public class DTOLayerConverter {

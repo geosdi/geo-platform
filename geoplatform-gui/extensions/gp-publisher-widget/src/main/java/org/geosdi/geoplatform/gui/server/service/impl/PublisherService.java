@@ -164,8 +164,7 @@ public class PublisherService implements IPublisherService {
                     0d, 0d, 0d, 0d, previewLayer.getEpsgCode(),
                     previewLayer.getStyleName(), previewLayer.isIsShape());
             infoPreviewList.add(infoPreview);
-            System.out.println(
-                    "Layer preview transformed: " + infoPreview.toString());
+            logger.info("Layer preview transformed: " + infoPreview.toString());
         }
         return infoPreviewList;
     }

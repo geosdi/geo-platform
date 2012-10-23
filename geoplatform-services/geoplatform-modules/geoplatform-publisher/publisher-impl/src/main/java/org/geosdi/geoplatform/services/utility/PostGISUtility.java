@@ -35,7 +35,15 @@
  */
 package org.geosdi.geoplatform.services.utility;
 
-import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
+import it.geosolutions.geoserver.rest.GeoServerRESTReader;
+import it.geosolutions.geoserver.rest.decoder.RESTDataStore;
+import it.geosolutions.geoserver.rest.encoder.datastore.GSPostGISDatastoreEncoder;
+import it.geosolutions.geoserver.rest.manager.GeoServerRESTDatastoreManager;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +54,14 @@ import org.springframework.stereotype.Service;
 @Service("postGISUtility")
 public class PostGISUtility {
 
+    @Autowired
+    private GeoServerRESTReader reader;
+    private @Value("${geoserver_url}")
+    String geoserverUrl;
+    private @Value("${geoserver_username}")
+    String geoserverUser;
+    private @Value("${geoserver_password}")
+    String geoserverPassword;
     private @Value("${host_postgis_datastore_publisher}")
     String hostPostgisDatastore;
     private @Value("${port_postgis_datastore_publisher}")
@@ -57,28 +73,61 @@ public class PostGISUtility {
     private @Value("${password_db_postgis_datastore_publisher}")
     String passwordDBPostgisDatastore;
 
-    public GSPostGISDatastoreEncoder generateEncoder(String storeName) {
-        GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder();
-        encoder.setName(storeName);
-        encoder.setEnabled(true);
-        encoder.setHost(hostPostgisDatastore);
-        encoder.setPort(portPostgisDatastore);
-        encoder.setDatabase(dbNamePostgisDatastore);
-        encoder.setSchema("public");
-        encoder.setUser(userNameDBPostgisDatastore);
-        encoder.setPassword(passwordDBPostgisDatastore);
-        encoder.setExposePrimaryKeys(Boolean.FALSE);
-        encoder.setMaxConnections(20);
-        encoder.setMinConnections(1);
-        encoder.setFetchSize(1000);
-        encoder.setConnectionTimeout(20);
-        encoder.setValidateConnections(false);
-        encoder.setLooseBBox(Boolean.TRUE);
-        encoder.setPreparedStatements(false);
-        encoder.setMaxOpenPreparedStatements(50);
-        return encoder;
+    public GeoServerRESTDatastoreManager generateEncoder(String storeName, String workspace) {
+        RESTDataStore store = reader.getDatastore(workspace, storeName);
+//        System.out.println("************ Store Retrieved: ");
+//        System.out.println(store);
+        GeoServerRESTDatastoreManager manager = null;
+        if (store == null) {
+            try {
+                manager = new GeoServerRESTDatastoreManager(
+                        new URL(geoserverUrl), geoserverUser, geoserverPassword);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(PostGISUtility.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder(storeName);
+            encoder.setEnabled(true);
+            encoder.setHost(hostPostgisDatastore);
+            encoder.setPort(portPostgisDatastore);
+            encoder.setDatabase(dbNamePostgisDatastore);
+            encoder.setSchema("public");
+            encoder.setUser(userNameDBPostgisDatastore);
+            encoder.setPassword(passwordDBPostgisDatastore);
+            encoder.setExposePrimaryKeys(Boolean.FALSE);
+            encoder.setMaxConnections(20);
+            encoder.setMinConnections(1);
+            encoder.setFetchSize(1000);
+            encoder.setConnectionTimeout(20);
+            encoder.setValidateConnections(false);
+            encoder.setLooseBBox(Boolean.TRUE);
+            encoder.setPreparedStatements(false);
+            encoder.setMaxOpenPreparedStatements(50);
+            manager.create(workspace, encoder);
+        }
+        return manager;
     }
 
+//    public GSPostGISDatastoreEncoder generateEncoder(String storeName) {
+//        GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder();
+//        encoder.setName(storeName);
+//        encoder.setEnabled(true);
+//        encoder.setHost(hostPostgisDatastore);
+//        encoder.setPort(portPostgisDatastore);
+//        encoder.setDatabase(dbNamePostgisDatastore);
+//        encoder.setSchema("public");
+//        encoder.setUser(userNameDBPostgisDatastore);
+//        encoder.setPassword(passwordDBPostgisDatastore);
+//        encoder.setExposePrimaryKeys(Boolean.FALSE);
+//        encoder.setMaxConnections(20);
+//        encoder.setMinConnections(1);
+//        encoder.setFetchSize(1000);
+//        encoder.setConnectionTimeout(20);
+//        encoder.setValidateConnections(false);
+//        encoder.setLooseBBox(Boolean.TRUE);
+//        encoder.setPreparedStatements(false);
+//        encoder.setMaxOpenPreparedStatements(50);
+//        return encoder;
+//    }
     @Override
     public String toString() {
         return "PostGISUtility{ " + " hostPostgisDatastore = " + hostPostgisDatastore

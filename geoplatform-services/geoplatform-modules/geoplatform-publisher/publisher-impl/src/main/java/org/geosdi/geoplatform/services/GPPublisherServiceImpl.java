@@ -43,7 +43,6 @@ import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.*;
 import it.geosolutions.geoserver.rest.decoder.RESTFeatureType.Attribute;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
-import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import java.io.*;
@@ -300,7 +299,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         RESTLayer layer = restReader.getLayer(layerName);
         RESTFeatureType featureType = restReader.getFeatureType(layer);
         String userWorkspace = getWorkspace(userName);
-        InfoPreview info = null;
+        InfoPreview infoPreview = null;
         try {
             logger.info("Parameters: userWorkspace: " + userWorkspace + " - layerName: " + layerName
                     + " - featureType: " + featureType + " - layer: " + layer + " - RESTURL: " + RESTURL);
@@ -308,10 +307,15 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 //            parametersMap.put("url", layerName);
 //            featureType = DataStoreFinder.getDataStore(parametersMap).getFeatureSource(layerName);
 //            System.out.println("" + CRS.getGeographicBoundingBox());
-            info = new InfoPreview(RESTURL, userWorkspace, layerName,
+            Integer code = this.getEPSGCode(featureType.getCRS());
+            String epsgCode = null;
+            if (code != null) {
+                epsgCode = "EPSG:" + code.toString();
+            }
+            infoPreview = new InfoPreview(RESTURL, userWorkspace, layerName,
                     featureType.getMinX(), featureType.getMinY(),
                     featureType.getMaxX(), featureType.getMaxY(),
-                    featureType.getCRS(), layer.getDefaultStyle(), Boolean.TRUE);
+                    epsgCode, layer.getDefaultStyle(), Boolean.TRUE);
         } catch (Exception e) {
             final String error = "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info. " + e;
             logger.error(error);
@@ -319,7 +323,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 //            info = new InfoPreview(layerName,
 //                    "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info");
         }
-        return info;
+        return infoPreview;
     }
 
     /**
@@ -358,16 +362,16 @@ public class GPPublisherServiceImpl implements GPPublisherService,
             String tempUserDir, String tempUserZipDir, String tempUserTifDir) {
         logger.info("Call to getInfoFromCompressedShape");
         System.setProperty("org.geotools.referencing.forceXY", "true");
-        List<String> shpEntryNameList = new ArrayList<String>();
-        List<String> tifEntryNameList = new ArrayList<String>();
-        List<ZipEntry> sldEntryList = new ArrayList<ZipEntry>();
-        List<LayerInfo> infoShapeList = new ArrayList<LayerInfo>();
+        List<String> shpEntryNameList = Lists.newArrayList();
+        List<String> tifEntryNameList = Lists.newArrayList();
+        List<ZipEntry> sldEntryList = Lists.newArrayList();
+        List<LayerInfo> infoShapeList = Lists.newArrayList();
         ZipFile zipSrc = null;
         try {
             // decomprime il contenuto di file nella cartella <tmp>/geoportal/shp
             zipSrc = new ZipFile(file);
             Enumeration<? extends ZipEntry> entries = zipSrc.entries();
-            String destinationDir = null;
+            String destinationDir;
             while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
                 String entryName = entry.getName();
@@ -379,7 +383,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
                 //    logger.info("\n ********** INFO:"+entryName);
 
                 int lastIndex = entryName.lastIndexOf('/');
-                entryName = entryName.substring(lastIndex + 1);
+                entryName = entryName.substring(lastIndex + 1).toLowerCase();
                 destinationDir = tempUserDir;
                 if (entryName.equals("")) {
                     continue;
@@ -402,7 +406,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
                 int lastIndex = sldEntry.getName().lastIndexOf('/');
                 int endNamePos = sldEntry.getName().lastIndexOf('.');
                 String sldEntryName = sldEntry.getName().substring(lastIndex + 1, endNamePos);
-                System.out.println("sldEntryName: " + sldEntryName);
+                logger.info("sldEntryName: " + sldEntryName);
                 if (this.isDuplicatedName(sldEntryName, tifEntryNameList)) {//geotiff sld
                     logger.info("in geotiff sld");
                     PublishUtility.extractEntryToFile(sldEntry, zipSrc, tempUserTifDir);
@@ -493,11 +497,25 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         return featureSource;
     }
 
+    private Integer getEPSGCode(String crs) {
+        CoordinateReferenceSystem coordinateReferenceSystem = null;
+        try {
+            coordinateReferenceSystem = CRS.parseWKT(crs);
+        } catch (FactoryException fe) {
+            logger.error("Failed to extract CoordinateReferenceSystem from String: " + fe);
+        }
+        return this.getEPSGCode(coordinateReferenceSystem);
+    }
+
     private Integer getEPSGCode(SimpleFeatureSource featureSource) {
+        return this.getEPSGCode(featureSource.getSchema().getCoordinateReferenceSystem());
+    }
+
+    private Integer getEPSGCode(CoordinateReferenceSystem coordinateReferenceSystem) {
         Integer code = null;
         try {
-            logger.info("Info for EPSG calculation: " + featureSource.getSchema().getCoordinateReferenceSystem());
-            code = CRS.lookupEpsgCode(featureSource.getSchema().getCoordinateReferenceSystem(), true);
+            logger.info("Info for EPSG calculation: " + coordinateReferenceSystem);
+            code = CRS.lookupEpsgCode(coordinateReferenceSystem, true);
         } catch (FactoryException e) {
             logger.error("Failed to retrieve EPSG code: " + e);
         }
@@ -782,6 +800,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
     public List<InfoPreview> analyzeZIPEPSG(String sessionID, String userName, File file) throws ResourceNotFoundFault {
         logger.info("Call to analyzeZIPInPreview");
         reload();
+        file = PublishUtility.getFileNameToLowerCase(file);
         String tempUserDir = PublishUtility.createDir(
                 this.geoportalDir + userName);
         String tempUserZipDir = PublishUtility.createDir(
@@ -818,7 +837,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 
     private InfoPreview publishTifInPreview(String userName, String userWorkspace,
             File fileInTifDir, String fileName, String epsg, String sld) {
-        InfoPreview infoPreview = null;
+        InfoPreview infoPreview;
         GeoTiffOverviews.overviewTiff(overviewsConfiguration, fileInTifDir.getAbsolutePath());
         try {
 //                logger.info(
@@ -867,8 +886,9 @@ public class GPPublisherServiceImpl implements GPPublisherService,
                     datatStoreName, info.name);
             logger.info("Removing existing FeatureType: " + info.name + " with result: " + result);
         }
-        GSPostGISDatastoreEncoder encoder = postGISUtility.generateEncoder(datatStoreName);
-        restPublisher.createPostGISDatastore(userName, encoder);
+        postGISUtility.generateEncoder(datatStoreName, userWorkspace);
+//        restPublisher.createPostGISDatastore(userName, encoder);
+
         // create the <layername>.zip file
         String fileName = tempUserZipDir + info.name + ".zip";
         File tempFile = new File(fileName);
@@ -876,7 +896,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         logger.info("\n INFO: STYLE TO PUBLISH " + info.sld + " NAME: " + info.name);
         logger.info("\n INFO: CREATE DATASTORE " + userWorkspace + " NAME: " + info.name);
         try {
-            System.out.println("########################################## INFO EPSG: " + info.epsg);
+            logger.info("INFO EPSG: " + info.epsg);
             boolean published = restPublisher.publishShp(userWorkspace, datatStoreName, info.name, tempFile, info.epsg, info.sld);
 //            boolean published = restPublisher.publishDBLayer(userWorkspace, datatStoreName, info.name, tempFile, info.epsg, info.sld);
             if (published) {

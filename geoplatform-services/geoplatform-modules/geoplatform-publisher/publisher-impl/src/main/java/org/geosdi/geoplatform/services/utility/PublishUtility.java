@@ -39,7 +39,7 @@ import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-import org.geosdi.geoplatform.services.GPPublisherServiceImpl;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,6 +49,8 @@ import org.slf4j.LoggerFactory;
  */
 public class PublishUtility {
 
+    private static Logger logger = LoggerFactory.getLogger(
+            PublishUtility.class);
 //    public final static String GEOPORTAL = "geoportal";
     public static String TMPDIR;
     public final static String SHP_DIR_NAME = "shp";
@@ -65,8 +67,6 @@ public class PublishUtility {
             TMPDIR += System.getProperty("file.separator");
         }
     }
-    private static Logger logger = LoggerFactory.getLogger(
-            GPPublisherServiceImpl.class);
 
     public static String createDir(String path) {
         File dir = new File(path);
@@ -121,7 +121,7 @@ public class PublishUtility {
     public static File generateGeoPortalDirInUserHome() {
         String geoportalDir = System.getProperty("user.home") + System.getProperty("file.separator")
                 + "Geoportal" + System.getProperty("file.separator");
-        System.out.println("Geoportal dir: " + geoportalDir);
+        logger.info("Geoportal dir: " + geoportalDir);
         File geoportalDirFile = new File(geoportalDir);
         geoportalDirFile.mkdir();
         return geoportalDirFile;
@@ -151,8 +151,15 @@ public class PublishUtility {
         return destination;
     }
 
+    public static File getFileNameToLowerCase(File file) {
+        File fileToReturn = new File(FilenameUtils.getFullPath(file.getAbsolutePath())
+                + file.getName().toLowerCase());
+        file.renameTo(fileToReturn);
+        return file;
+    }
+
     public static void extractEntryToFile(ZipEntry entry, ZipFile zipSrc, String tempUserDir) {
-        String entryName = null;
+        String entryName;
         FileOutputStream fileoutputstream = null;
         InputStream zipinputstream = null;
         try {
@@ -160,7 +167,7 @@ public class PublishUtility {
             int lastIndex = entry.getName().lastIndexOf('/');
             entryName = entry.getName().substring(lastIndex + 1).toLowerCase();
             logger.info("INFO: Found file " + entryName);
-            fileoutputstream = new FileOutputStream(tempUserDir + entryName);
+            fileoutputstream = new FileOutputStream(tempUserDir + entryName.toLowerCase());
             byte[] buf = new byte[1024];
             int n;
             while ((n = zipinputstream.read(buf, 0, 1024)) > -1) {
@@ -187,8 +194,7 @@ public class PublishUtility {
     public static ZipOutputStream compressFiles(String tempUserZipDir,
             String tempUserDir, String zipFileName, String origName,
             String destName) {
-        ZipOutputStream out = null;
-
+        ZipOutputStream out;
         try {
             out = new ZipOutputStream(new FileOutputStream(
                     tempUserZipDir + zipFileName));
@@ -226,7 +232,7 @@ public class PublishUtility {
             }
             out.close();
         } catch (Exception ex) {
-            logger.info("\n Exception compressing " + zipFileName);
+            logger.info("Exception compressing: " + zipFileName + " - " + ex);
             return null;
         }
         return out;

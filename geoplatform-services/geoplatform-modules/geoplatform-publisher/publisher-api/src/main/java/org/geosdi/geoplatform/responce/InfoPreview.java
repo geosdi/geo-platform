@@ -99,7 +99,7 @@ public class InfoPreview {
         return crs;
     }
 
-    public void setCrs(String crs) {
+    public void setCrs(final String crs) {
         this.crs = crs;
     }
 

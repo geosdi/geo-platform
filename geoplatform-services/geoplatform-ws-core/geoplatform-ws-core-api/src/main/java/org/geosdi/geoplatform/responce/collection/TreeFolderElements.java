@@ -77,15 +77,17 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
     public void addLayerCollection(Collection<GPLayer> layerList) {
         for (GPLayer layer : layerList) {
             GPLayerType layerType = layer.getLayerType();
-            if (layerType == GPLayerType.WMS) {
+            if ((layerType == GPLayerType.WMS) || (layerType == GPLayerType.RASTER)) {
                 GPRasterLayer rasterLayer = (GPRasterLayer) layer;
                 RasterLayerDTO rasterLayerDTO = new RasterLayerDTO(rasterLayer);
-                logger.debug("\n### RasterLayerDTO ###\n" + rasterLayerDTO + "\n###\t###\t###");
+                logger.debug(
+                        "\n### RasterLayerDTO ###\n" + rasterLayerDTO + "\n###\t###\t###");
                 super.add(rasterLayerDTO);
             } else { // More LayerType match a GPVectorLayer
                 GPVectorLayer vectorLayer = (GPVectorLayer) layer;
                 VectorLayerDTO vectorLayerDTO = new VectorLayerDTO(vectorLayer);
-                logger.debug("\n### VectorLayerDTO ###\n" + vectorLayerDTO + "\n###\t###\t###");
+                logger.debug(
+                        "\n### VectorLayerDTO ###\n" + vectorLayerDTO + "\n###\t###\t###");
                 super.add(vectorLayerDTO);
             }
         }

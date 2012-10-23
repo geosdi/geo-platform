@@ -44,13 +44,17 @@ import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
+import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
@@ -81,8 +85,8 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
 
     @Override
     public void addComponent() {
-        this.addCenterWidget();
-        this.addEastWidget();
+        this.addMapWidget();
+        this.addAttributesWidget();
         this.createStatusBar();
     }
 
@@ -103,18 +107,20 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
         super.setLayout(new BorderLayout());
     }
 
-    private void addCenterWidget() {
-        BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
-        data.setMargins(new Margins(0));
+    private void addMapWidget() {
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST, 700);
+        layoutData.setMargins(new Margins(0));
 
-        super.add(this.mapWidget, data);
+        super.add(this.mapWidget, layoutData);
     }
 
-    private void addEastWidget() {
-        BorderLayoutData data = new BorderLayoutData(LayoutRegion.EAST, 300);
-        data.setMargins(new Margins(0));
+    private void addAttributesWidget() {
+        // The notifyShow method is called 1 times at the first show 
+        // only in the center region, otherwise 2 times.
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER);
+        layoutData.setMargins(new Margins(0));
 
-        super.add(this.attributesWidget, data);
+        super.add(this.attributesWidget, layoutData);
     }
 
     private void createStatusBar() {
@@ -139,23 +145,23 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     }
 
     @Override
-    public void showWidget(GPLayerBean layer,
-            LayerSchemaDTO schema) {
+    public void showWidget(GPLayerBean layer, LayerSchemaDTO schema) {
         if (layer instanceof GPVectorBean) {
-            ((GPVectorBean) layer).setFeatureNameSpace(
-                    schema.getTargetNamespace());
-            ((GPVectorBean) layer).setGeometryName(
-                    schema.getGeometry().getName());
+            GPVectorBean vector = (GPVectorBean) layer;
+            vector.setFeatureNameSpace(schema.getTargetNamespace());
+            vector.setGeometryName(schema.getGeometry().getName());
         }
 
         this.mapWidget.bind(layer, schema);
+        
+        List<AttributeDetail> attributes = FeatureConverter.convertDTOs(schema.getAttributes());
+        this.attributesWidget.setAttributes(attributes);
 
         super.show();
     }
 
     @Override
-    protected void endDrag(DragEvent de,
-            boolean canceled) {
+    protected void endDrag(DragEvent de, boolean canceled) {
         super.endDrag(de, canceled);
 
         this.mapWidget.updateSize();

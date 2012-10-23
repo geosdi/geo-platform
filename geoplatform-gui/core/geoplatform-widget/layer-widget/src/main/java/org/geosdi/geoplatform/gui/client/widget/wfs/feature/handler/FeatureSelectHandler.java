@@ -35,10 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler;
 
+import com.google.common.collect.Maps;
 import java.util.List;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureAttributeValuesEvent;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.event.EventObject;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.util.Attributes;
 
 /**
  *
@@ -47,25 +52,31 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public class FeatureSelectHandler extends AbastractFeatureHandler {
 
-    public FeatureSelectHandler(Vector theVectorLayer) {
-        super(theVectorLayer);
+    private FeatureAttributeValuesEvent attributeValuesEvent = new FeatureAttributeValuesEvent();
+
+    public FeatureSelectHandler(Vector theVectorLayer, GPEventBus bus) {
+        super(theVectorLayer, bus);
     }
 
     @Override
     public void onHandle(EventObject eventObject) {
-        System.out.println("CODICE ESEGUITO FeatureSelectHandler @@@@@@@@@@@@@@@@");
-        
+        System.out.println("FeatureSelectHandler @@@@@@@@@@@@@@@@");
+
         VectorFeature vectorFeature = super.getFeatureFromEventObject(
                 eventObject);
 
         vectorLayer.addFeature(vectorFeature);
 
-        List<String> attributesList = vectorFeature.getAttributes().getAttributeNames();
+        Attributes attributes = vectorFeature.getAttributes();
+        List<String> attributeNames = attributes.getAttributeNames();
 
-        for (String string : attributesList) {
-            System.out.println("Attribute : " + string + " - Value : "
-                    + vectorFeature.getAttributes().getAttributeAsString(
-                    string) + "\n");
+        Map<String, String> attributeMap = Maps.<String, String>newHashMapWithExpectedSize(attributeNames.size());
+        for (String name : attributeNames) {
+            String value = attributes.getAttributeAsString(name);
+            attributeMap.put(name, value);
         }
+
+        this.attributeValuesEvent.setAttributeValues(attributeMap);
+        super.bus.fireEvent(this.attributeValuesEvent);
     }
 }

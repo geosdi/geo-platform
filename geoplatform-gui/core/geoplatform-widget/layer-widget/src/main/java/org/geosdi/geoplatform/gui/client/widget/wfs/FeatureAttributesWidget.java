@@ -49,18 +49,21 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail.AttributeDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributeValuesHandler;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureAttributesWidget extends GeoPlatformContentPanel {
+public class FeatureAttributesWidget extends GeoPlatformContentPanel
+        implements FeatureAttributeValuesHandler {
 
     private GPEventBus bus;
     //
@@ -77,10 +80,11 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel {
     public FeatureAttributesWidget(GPEventBus bus) {
         super(true);
         this.bus = bus;
+        this.bus.addHandler(FeatureAttributeValuesHandler.TYPE, this);
     }
 
     public void setFeatureID(String featureID) {
-        assert (featureID != null) : "FeatureID must not bu null.";
+        assert (featureID != null) : "FeatureID must not be null.";
         this.featureID = featureID;
     }
 
@@ -110,7 +114,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel {
     public void reset() {
         store.removeAll();
         disableButtons();
-        // TODO reset status bar
     }
 
     private void createStore() {
@@ -130,24 +133,28 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel {
 
     private void createEditorGrid() {
         grid = new EditorGrid<AttributeDetail>(store, this.prepareColumnModel());
+        grid.setAutoExpandColumn(AttributeDetailKeyValue.NAME.toString());
         grid.setBorders(true);
         grid.setStripeRows(true);
-        grid.setAutoExpandColumn(AttributeDetailKeyValue.NAME.toString());
+//    grid.setColumnLines(true);
+//    grid.setColumnResize(false);
+//    grid.setSelectionModel(new CellSelectionModel<AttributeDetail>());
 
         super.add(grid);
     }
 
-    public ColumnModel prepareColumnModel() {
+    private ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
         ColumnConfig nameColumn = new ColumnConfig();
         nameColumn.setId(AttributeDetailKeyValue.NAME.toString());
         nameColumn.setHeader("Name");
+        nameColumn.setWidth(150);
         nameColumn.setFixed(true);
         configs.add(nameColumn);
 
         TextField<String> valueTextField = new TextField<String>();
-        valueTextField.setAllowBlank(false);
+//        valueTextField.setAllowBlank(false);
         CellEditor valueEditor = new CellEditor(valueTextField) {
             @Override
             public Object preProcessValue(Object value) { // TODO DEL
@@ -207,17 +214,61 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel {
         this.disableButtons();
     }
 
-    public void disableButtons() {
+    private void disableButtons() {
         resetButton.disable();
         saveButton.disable();
     }
 
-    public void enableButtons() {
+    private void enableButtons() {
         resetButton.enable();
         saveButton.enable();
     }
 
     private void saveAttributes() {
+        // TODO
+//        store.commitChanges();
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    protected void notifyShow() {
+        super.notifyShow();
+        this.populateStore();
+    }
+
+    private void populateStore() {
+        assert (attributes != null) : "Attributes must not be null.";
+        // TODO Attributes must be load every time
+        System.out.println("------------------------");
+        for (AttributeDetail attributeDetail : attributes) {
+            System.out.println("...." + attributeDetail);
+        }
+        System.out.println("------------------------\n\n");
+
+        mask("Retrieve feature attributes");
+        store.removeAll(); //
+        store.add(this.attributes);
+        unmask();
+    }
+
+    @Override
+    public void setAttributeValues(Map<String, String> attributeValues) {
+        assert (attributeValues != null) : "Attribute Values must not be null.";
+        assert (attributes != null) : "Attributes must not be null.";
+
+        mask("Retrieve feature attributes");
+        grid.stopEditing(true);
+
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
+        for (AttributeDetail attribute : this.store.getModels()) {
+            String value = attributeValues.get(attribute.getName());
+            attribute.setValue(value);
+            System.out.println("...." + attribute);
+//            this.store.getRecord(attribute)
+        }
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+
+        enableButtons();
+        unmask();
     }
 }

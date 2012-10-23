@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -49,14 +50,16 @@ public class FeatureUnSelectHandlerProvider implements
         Provider<FeatureUnSelectHandler> {
 
     private Vector vectorLayer;
+    private GPEventBus bus;
 
     @Inject
-    public FeatureUnSelectHandlerProvider(Vector theVectorLayer) {
+    public FeatureUnSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
         this.vectorLayer = theVectorLayer;
+        this.bus = bus;
     }
 
     @Override
     public FeatureUnSelectHandler get() {
-        return new FeatureUnSelectHandler(vectorLayer);
+        return new FeatureUnSelectHandler(vectorLayer, bus);
     }
 }

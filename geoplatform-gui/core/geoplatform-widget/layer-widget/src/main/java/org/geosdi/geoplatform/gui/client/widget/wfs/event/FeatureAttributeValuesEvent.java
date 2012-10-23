@@ -33,53 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.service.converter;
+package org.geosdi.geoplatform.gui.client.widget.wfs.event;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import com.google.gwt.event.shared.GwtEvent;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributeValuesHandler;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureConverter {
+public class FeatureAttributeValuesEvent extends GwtEvent<FeatureAttributeValuesHandler> {
 
-    private FeatureConverter() {
+    private Map<String, String> attributeValues;
+
+    public Map<String, String> getAttributeValues() {
+        return attributeValues;
     }
 
-    public static AttributeDetail convert(AttributeDTO attributeDTO) {
-        AttributeDetail attribute = new AttributeDetail();
-        attribute.setName(attributeDTO.getName());
-        attribute.setValue(attributeDTO.getValue());
-        attribute.setType(attributeDTO.getType());
-        return attribute;
+    public void setAttributeValues(Map<String, String> attributeValues) {
+        this.attributeValues = attributeValues;
     }
 
-    public static AttributeDTO convert(AttributeDetail attribute) {
-        AttributeDTO attributeDTO = new AttributeDTO();
-        attributeDTO.setName(attribute.getName());
-        attributeDTO.setValue(attribute.getValue());
-        attributeDTO.setType(attribute.getType());
-        return attributeDTO;
+    @Override
+    public Type<FeatureAttributeValuesHandler> getAssociatedType() {
+        return FeatureAttributeValuesHandler.TYPE;
     }
 
-    public static List<AttributeDetail> convertDTOs(List<AttributeDTO> attributesDTO) {
-        assert (attributesDTO != null) : "Attributes DTO must be not null.";
-        List<AttributeDetail> attributes = new ArrayList<AttributeDetail>(attributesDTO.size());
-        for (AttributeDTO attributeDTO : attributesDTO) {
-            attributes.add(FeatureConverter.convert(attributeDTO));
-        }
-        return attributes;
-    }
-
-    public static List<AttributeDTO> convertDetails(List<AttributeDetail> attributes) {
-        assert (attributes != null) : "Attributes must be not null.";
-        List<AttributeDTO> attributesDTO = new ArrayList<AttributeDTO>(attributes.size());
-        for (AttributeDetail attribute : attributes) {
-            attributesDTO.add(FeatureConverter.convert(attribute));
-        }
-        return attributesDTO;
+    @Override
+    protected void dispatch(FeatureAttributeValuesHandler handler) {
+        handler.setAttributeValues(attributeValues);
     }
 }

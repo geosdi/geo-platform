@@ -37,53 +37,147 @@ package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.wfs.builder.FeatureMapLayerBuilder;
+import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
+import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureSelectHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureUnSelectHandler;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.control.GetFeature;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.layer.WMS;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureMapWidget extends GeoPlatformContentPanel {
-
+public class FeatureMapWidget extends GeoPlatformContentPanel implements
+        IFeatureMapWidget {
+    
     private MapWidget mapWidget;
+    private FeatureMapLayerBuilder mapLayerBuilder;
+    private Vector vectorLayer;
+    private Layer wms;
+    private GetFeature controlFeature;
+    private GetFeatureControlBuilder featureControlBuilder;
+    private FeatureSelectHandler selectFeature;
+    private FeatureUnSelectHandler unSelectFeature;
     private GPEventBus bus;
-
+    
     @Inject
-    public FeatureMapWidget(MapWidget mapWidget, GPEventBus bus) {
+    public FeatureMapWidget(MapWidget mapWidget,
+            FeatureMapLayerBuilder theMapLayerBuilder,
+            Vector theVectorLayer,
+            FeatureSelectHandler theSelectFeature,
+            FeatureUnSelectHandler theUnSelectFeature,
+            GetFeatureControlBuilder theFeatureControlBuilder,
+            GPEventBus bus) {
         super(true);
         this.mapWidget = mapWidget;
+        this.mapLayerBuilder = theMapLayerBuilder;
+        this.vectorLayer = theVectorLayer;
+        this.selectFeature = theSelectFeature;
+        this.unSelectFeature = theUnSelectFeature;
+        this.featureControlBuilder = theFeatureControlBuilder;
         this.bus = bus;
     }
-
+    
     @Override
     public void addComponent() {
-        this.initMapWidget();
-
         super.add(this.mapWidget);
     }
-
+    
     @Override
     public void initSize() {
     }
-
+    
     @Override
     public void setPanelProperties() {
         super.setHeaderVisible(false);
     }
-
-    private void initMapWidget() {
-        // TODO Receive LonLat from EditWFSAction
+    
+    private void resetMapWidget() {
+        // REMOVE CONTROL GETFEATURE
+        this.controlFeature.deactivate();
+        this.mapWidget.getMap().removeControl(controlFeature);
+        
+        if (wms != null) {
+            this.mapWidget.getMap().removeLayer(wms);
+        }
+        
+        this.mapWidget.getMap().removeLayer(vectorLayer);
+        
         LonLat italy = new LonLat(13.375, 42.329);
-        italy.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), mapWidget.getMap().getProjection());
-
+        italy.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
+                        mapWidget.getMap().getProjection());
+        
         this.mapWidget.getMap().setCenter(italy, 4);
     }
-
+    
     @Override
     public void reset() {
-        this.initMapWidget();
+        this.resetMapWidget();
+    }
+    
+    @Override
+    public void bind(final GPLayerBean layer,
+            final LayerSchemaDTO schema) {
+        
+        this.wms = this.mapLayerBuilder.buildLayer(layer);
+        
+        this.controlFeature = this.featureControlBuilder.buildControl(new GetFeatureModel() {
+            @Override
+            public String getFeatureNameSpace() {
+                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).getFeatureNameSpace()
+                        : schema.getTargetNamespace();
+            }
+            
+            @Override
+            public String getFeatureType() {
+                int pos = layer.getName().indexOf(":");
+                
+                return pos > 0 ? layer.getName().substring(pos + 1,
+                                                           layer.getName().length()) : layer.getName();
+            }
+            
+            @Override
+            public String getSrsName() {
+                return layer.getCrs();
+            }
+            
+            @Override
+            public String getGeometryName() {
+                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).getGeometryName()
+                        : schema.getGeometry().getName();
+            }
+            
+            @Override
+            public WMS getWMSLayer() {
+                return (WMS) wms;
+            }
+        });
+        
+        this.mapWidget.getMap().addLayer(wms);
+        this.mapWidget.getMap().addLayer(vectorLayer);
+        
+        this.mapWidget.getMap().addControl(controlFeature);
+        
+        controlFeature.getEvents().register("featureselected", this.wms,
+                                            this.selectFeature);
+        
+        controlFeature.getEvents().register("featureunselected", this.wms,
+                                            this.unSelectFeature);
+        
+        this.mapWidget.getMap().zoomToExtent(this.mapLayerBuilder.generateBoundsTransformationFromMap(
+                layer));
+        
+        this.controlFeature.activate();
     }
 }

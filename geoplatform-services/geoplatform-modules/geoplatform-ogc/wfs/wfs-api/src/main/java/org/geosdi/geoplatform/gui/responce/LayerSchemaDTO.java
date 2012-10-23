@@ -58,7 +58,7 @@ public class LayerSchemaDTO implements Serializable {
     //
     private String typeName;
     private String targetNamespace;
-    private String geometry;
+    private AttributeDTO geometry;
     //
     @XmlElementWrapper(name = "attributes")
     @XmlElement(name = "attribute")
@@ -80,11 +80,11 @@ public class LayerSchemaDTO implements Serializable {
         this.targetNamespace = targetNamespace;
     }
 
-    public String getGeometry() {
+    public AttributeDTO getGeometry() {
         return geometry;
     }
 
-    public void setGeometry(String geometry) {
+    public void setGeometry(AttributeDTO geometry) {
         this.geometry = geometry;
     }
 

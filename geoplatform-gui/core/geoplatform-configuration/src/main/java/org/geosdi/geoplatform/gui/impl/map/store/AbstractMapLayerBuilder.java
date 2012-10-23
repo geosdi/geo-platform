@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.impl.map.store;
 
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
@@ -49,9 +49,9 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 public abstract class AbstractMapLayerBuilder<T extends GPLayerBean> implements
         GPMapLayerBuilder {
 
-    protected GeoPlatformMap mapWidget;
+    protected MapWidget mapWidget;
 
-    public AbstractMapLayerBuilder(GeoPlatformMap theMapWidget) {
+    public AbstractMapLayerBuilder(MapWidget theMapWidget) {
         this.mapWidget = theMapWidget;
     }
 

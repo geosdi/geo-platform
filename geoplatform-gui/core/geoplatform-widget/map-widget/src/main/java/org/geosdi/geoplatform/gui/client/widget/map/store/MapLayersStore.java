@@ -67,7 +67,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     public MapLayersStore(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
-        this.layerBuilder = new MapLayerBuilder(theMapWidget);
+        this.layerBuilder = new MapLayerBuilder(theMapWidget.getMapWidget());
     }
 
     @Override
@@ -117,7 +117,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         LayerHandlerManager.fireEvent(displayLegendEvent);
         if (containsLayer(vectorBean)) {
             WMS layer = (WMS) this.layers.get(vectorBean);
-            if (!layer.isVisible() || Integer.parseInt(layer.getZIndex().toString())
+            if (!layer.isVisible() || Integer.parseInt(
+                    layer.getZIndex().toString())
                     != vectorBean.getzIndex()) {
                 layer.setZIndex(vectorBean.getzIndex());
                 layer.setIsVisible(true);
@@ -137,7 +138,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         LayerHandlerManager.fireEvent(displayLegendEvent);
         if (containsLayer(rasterBean)) {
             WMS layer = (WMS) this.layers.get(rasterBean);
-            if (!layer.isVisible() || Integer.parseInt(layer.getZIndex().toString())
+            if (!layer.isVisible() || Integer.parseInt(
+                    layer.getZIndex().toString())
                     != rasterBean.getzIndex()) {
                 layer.setZIndex(rasterBean.getzIndex());
                 layer.setIsVisible(true);
@@ -180,7 +182,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     }
 
     @Override
-    public void onChangeStyle(GPRasterBean layerBean, String newStyle) {
+    public void onChangeStyle(GPRasterBean layerBean,
+            String newStyle) {
         WMS layer = (WMS) this.layers.get(layerBean);
         if ((layer != null) && (layer.isVisible())) {
             WMSParams params = new WMSParams();
@@ -196,7 +199,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         WMS layer = (WMS) this.layers.get(layerBean);
         if ((layer != null) && (layer.isVisible())) {
             WMSParams params;
-            if (layerBean.getCqlFilter() == null || layerBean.getCqlFilter().trim().equals("")) {
+            if (layerBean.getCqlFilter() == null || layerBean.getCqlFilter().trim().equals(
+                    "")) {
                 params = layer.getParams();
                 params.removeCQLFilter();
             } else {
@@ -212,7 +216,8 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         WMS layer = (WMS) this.layers.get(layerBean);
         if ((layer != null) && (layer.isVisible())) {
             WMSParams params;
-            if (layerBean.getTimeFilter() == null || layerBean.getTimeFilter().trim().equals("")) {
+            if (layerBean.getTimeFilter() == null || layerBean.getTimeFilter().trim().equals(
+                    "")) {
                 params = layer.getParams();
                 params.removeTimeFilter();
             } else {

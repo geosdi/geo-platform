@@ -33,52 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
+package org.geosdi.geoplatform.gui.client.widget.wfs;
 
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
+public interface IFeatureMapWidget {
 
-    private FeatureWidget featureWidget;
-
-    @Inject
-    public ConcreteLayerSchemaHandler(FeatureWidget theFeatureWidget) {
-        this.featureWidget = theFeatureWidget;
-    }
-
-    @Override
-    public void layerSchemaParser(LayerSchemaDTO schemaDTO,
-            GPLayerTreeModel layer) {
-        if (schemaDTO != null) {
-            showFeatureWidget(schemaDTO, layer);
-        } else {
-            super.forwardLayerSchema(schemaDTO, layer);
-        }
-    }
-
-    private void showFeatureWidget(LayerSchemaDTO result,
-            GPLayerTreeModel layer) {
-        String geometryType = result.getGeometry().getType();
-
-        layer.setLayerType(GPLayerType.valueOf(
-                geometryType.toUpperCase()));
-
-        LayoutManager.getInstance().getStatusMap().setStatus(
-                "The Layer " + layer.getName() + " is a WFS layer of "
-                + geometryType + " geometry type.",
-                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-        
-        featureWidget.showWidget(layer, result);
-    }
+    /**
+     * Build WMS from {@link GPLayerBean} passed
+     *
+     * @param layer
+     * @param schema
+     */
+    void bind(GPLayerBean layer,
+            LayerSchemaDTO schema);
 }

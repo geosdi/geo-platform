@@ -56,6 +56,7 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
     private static final long serialVersionUID = -2445765797861311204L;
     //
     private String featureNameSpace;
+    private String geometryName;
 
     public VectorTreeNode() {
     }
@@ -147,8 +148,18 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
     }
 
     @Override
+    public void setGeometryName(String geometryName) {
+        this.geometryName = geometryName;
+    }
+
+    @Override
+    public String getGeometryName() {
+        return this.geometryName;
+    }
+
+    @Override
     public String toString() {
-        return "VectorTreeNode{ " + super.toString() + "featureNameSpace = "
-                + featureNameSpace + '}';
+        return "VectorTreeNode{ " + "featureNameSpace = " + featureNameSpace
+                + ", geometryName = " + geometryName + '}';
     }
 }

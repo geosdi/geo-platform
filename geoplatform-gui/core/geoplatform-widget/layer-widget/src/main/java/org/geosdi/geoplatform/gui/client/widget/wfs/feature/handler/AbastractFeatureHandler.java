@@ -33,52 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
+package org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler;
 
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.gui.shared.GPLayerType;
+import org.gwtopenmaps.openlayers.client.event.EventHandler;
+import org.gwtopenmaps.openlayers.client.event.EventObject;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
+public abstract class AbastractFeatureHandler extends EventHandler {
 
-    private FeatureWidget featureWidget;
+    protected Vector vectorLayer;
 
-    @Inject
-    public ConcreteLayerSchemaHandler(FeatureWidget theFeatureWidget) {
-        this.featureWidget = theFeatureWidget;
+    public AbastractFeatureHandler(Vector theVectorLayer) {
+        this.vectorLayer = theVectorLayer;
     }
 
-    @Override
-    public void layerSchemaParser(LayerSchemaDTO schemaDTO,
-            GPLayerTreeModel layer) {
-        if (schemaDTO != null) {
-            showFeatureWidget(schemaDTO, layer);
-        } else {
-            super.forwardLayerSchema(schemaDTO, layer);
-        }
-    }
-
-    private void showFeatureWidget(LayerSchemaDTO result,
-            GPLayerTreeModel layer) {
-        String geometryType = result.getGeometry().getType();
-
-        layer.setLayerType(GPLayerType.valueOf(
-                geometryType.toUpperCase()));
-
-        LayoutManager.getInstance().getStatusMap().setStatus(
-                "The Layer " + layer.getName() + " is a WFS layer of "
-                + geometryType + " geometry type.",
-                SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-        
-        featureWidget.showWidget(layer, result);
+    protected VectorFeature getFeatureFromEventObject(EventObject eventObject) {
+        return VectorFeature.narrowToVectorFeature(eventObject.getJSObject().getProperty(
+                "feature"));
     }
 }

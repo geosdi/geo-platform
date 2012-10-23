@@ -43,11 +43,11 @@ import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.AbstractMapLayerBuilder;
-import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayerBuilder;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.gwtopenmaps.openlayers.client.Bounds;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
@@ -58,10 +58,9 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
-        implements GPMapLayerBuilder {
+public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
 
-    public MapLayerBuilder(GeoPlatformMap theMapWidget) {
+    public MapLayerBuilder(MapWidget theMapWidget) {
         super(theMapWidget);
     }
 
@@ -166,6 +165,11 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
         return new WMS(vectorBean.getLabel(), dataSource, wmsParams, wmsOption);
     }
 
+    /**
+     * TODO : MORE CONTROL HERE
+     * 
+     * @param wmsParams 
+     */
     private void addAuthTuple(WMSParams wmsParams) {
         IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         String authkey = accountDetail.getAuthkey();

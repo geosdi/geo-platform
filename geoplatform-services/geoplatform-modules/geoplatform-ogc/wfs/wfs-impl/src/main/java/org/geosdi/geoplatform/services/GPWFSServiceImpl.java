@@ -63,44 +63,49 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWFSService")
 public class GPWFSServiceImpl implements GPWFSService {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
     private GPWFSConfigurator wfsConfigurator;
-
+    
     @Override
     public LayerSchemaDTO describeFeatureType(String serverUrl,
             String typeName)
             throws ResourceNotFoundFault {
         logger.debug("\n*** WFS DescribeFeatureType for layer {} ***", typeName);
         serverUrl = serverUrl.replace("wms", "wfs");
-
+        
         if (!this.wfsConfigurator.matchDefaultDataSource(serverUrl)) {
             throw new ResourceNotFoundFault("Edit Mode can not be applied "
                     + "to the server with url " + serverUrl);
         }
-
+        
         LayerSchemaDTO layerSchema = new LayerSchemaDTO();
         layerSchema.setTypeName(typeName);
         List<AttributeDTO> attributeList;
         try {
-
+            
             serverUrl += "?service=WFS&version=1.0.0&request=GetCapabilities";
-
+            
             Map connectionParameters = new HashMap();
             connectionParameters.put(WFSDataStoreFactory.URL.key, serverUrl);
-
+            
             DataStore data = DataStoreFinder.getDataStore(connectionParameters);
             SimpleFeatureType schema = data.getSchema(typeName);
-
+            
             layerSchema.setTargetNamespace(schema.getName().getNamespaceURI());
-            layerSchema.setGeometry(schema.getGeometryDescriptor().getType()
+            AttributeDTO geometryAttribute = new AttributeDTO();
+            geometryAttribute.setType(schema.getGeometryDescriptor().getType()
                     .getBinding().getSimpleName());
-
+            geometryAttribute.setName(
+                    schema.getGeometryDescriptor().getLocalName());
+            
+            layerSchema.setGeometry(geometryAttribute);
+            
             attributeList = this.createAttributes(schema);
             layerSchema.setAttributes(attributeList);
-
+            
         } catch (NullPointerException ex) {
             // data.getSchema(typeName) throws this exception
             // if the layer is not a feature
@@ -113,9 +118,9 @@ public class GPWFSServiceImpl implements GPWFSService {
             throw new ResourceNotFoundFault(
                     "Error to execute the WFS DescribeFeatureType for the layer " + typeName);
         }
-
+        
         return layerSchema;
-
+        
     }
 
     /**
@@ -124,7 +129,7 @@ public class GPWFSServiceImpl implements GPWFSService {
     private List<AttributeDTO> createAttributes(SimpleFeatureType schema) {
         List<AttributeDTO> attributes = new ArrayList<AttributeDTO>(
                 schema.getAttributeCount() - 1);
-
+        
         List<AttributeDescriptor> attributeDescriptors = schema.getAttributeDescriptors();
         for (AttributeDescriptor attributeDescriptor : attributeDescriptors) {
             AttributeType type = attributeDescriptor.getType();
@@ -135,12 +140,12 @@ public class GPWFSServiceImpl implements GPWFSService {
             att.setName(attributeDescriptor.getLocalName());
             att.setType(type.getBinding().getName());
             logger.debug("\n*** {} is of type {}", att.getName(), type);
-
+            
             attributes.add(att);
         }
         return attributes;
     }
-
+    
     @Override
     public LayerSchemaDTO getFeature(String featureID) throws ResourceNotFoundFault {
         // TODO

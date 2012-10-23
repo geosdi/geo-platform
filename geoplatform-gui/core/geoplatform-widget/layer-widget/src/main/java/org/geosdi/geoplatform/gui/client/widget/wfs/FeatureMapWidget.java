@@ -182,4 +182,9 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
 
         this.controlFeature.activate();
     }
+
+    @Override
+    public void updateSize() {
+        this.mapWidget.getMap().updateSize();
+    }
 }

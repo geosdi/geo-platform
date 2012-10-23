@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
@@ -54,4 +55,10 @@ public interface IFeatureMapWidget {
      */
     void bind(GPLayerBean layer,
             LayerSchemaDTO schema);
+
+    /**
+     * <p>This Method call {@link MapWidget} updateSize() to prevent problem
+     * when the {@link FeatureWidget} is Moved</p>
+     */
+    void updateSize();
 }

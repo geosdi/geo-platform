@@ -290,7 +290,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         super.addButton(close);
     }
 
-    public ColumnModel prepareColumnModel() {
+    private ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
         ColumnConfig iconColumn = new ColumnConfig();

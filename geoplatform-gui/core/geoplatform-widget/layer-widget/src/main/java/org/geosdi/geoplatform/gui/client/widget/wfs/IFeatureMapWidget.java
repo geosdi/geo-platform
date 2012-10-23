@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.widget.wfs;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *

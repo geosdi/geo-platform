@@ -99,7 +99,8 @@ public class LayerSchemaDTO implements Serializable {
     @Override
     public String toString() {
         return "LayerSchemaDTO{"
-                + "targetNamespace=" + targetNamespace
+                + "typeName=" + typeName
+                + ", targetNamespace=" + targetNamespace
                 + ", geometry=" + geometry
                 + ", attributes=" + attributes + '}';
     }

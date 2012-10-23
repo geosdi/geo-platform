@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler;
 
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.event.EventObject;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
@@ -46,8 +47,8 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public class FeatureUnSelectHandler extends AbastractFeatureHandler {
 
-    public FeatureUnSelectHandler(Vector theVectorLayer) {
-        super(theVectorLayer);
+    public FeatureUnSelectHandler(Vector theVectorLayer, GPEventBus bus) {
+        super(theVectorLayer, bus);
     }
 
     @Override

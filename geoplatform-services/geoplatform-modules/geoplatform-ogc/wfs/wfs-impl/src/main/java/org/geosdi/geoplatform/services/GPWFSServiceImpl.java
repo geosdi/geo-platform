@@ -110,7 +110,7 @@ public class GPWFSServiceImpl implements GPWFSService {
             // data.getSchema(typeName) throws this exception
             // if the layer is not a feature
             logger.error(
-                    "\n### NullPointerException - the layer isn't a feature: {} ###",
+                    "\n### NullPointerException - The layer isn't a feature: {} ###",
                     ex.getMessage());
             return null;
         } catch (IOException ex) {

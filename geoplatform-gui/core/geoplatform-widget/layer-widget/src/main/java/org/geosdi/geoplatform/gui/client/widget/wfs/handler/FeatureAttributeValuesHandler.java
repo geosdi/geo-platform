@@ -33,41 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu.edit;
+package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
-import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import java.util.Map;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class EditWFSAction extends MenuBaseAction {
+public interface FeatureAttributeValuesHandler extends EventHandler {
 
-    private GPTreePanel<GPBeanTreeModel> treePanel;
-    private LayerTypeHandlerManager layerTypeHandlerManager;
+    Type<FeatureAttributeValuesHandler> TYPE = new Type<FeatureAttributeValuesHandler>();
 
-    public EditWFSAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("Edit WFS Mode", LayerResources.ICONS.vector());
-        this.treePanel = treePanel;
-        this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();
-    }
-
-    @Override
-    public void componentSelected(MenuEvent e) {
-        final GPLayerTreeModel layer = (GPLayerTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
-
-        LayoutManager.getInstance().getStatusMap().setBusy(
-                "Checking if " + layer.getName() + " is a Vector Layer.");
-
-        this.layerTypeHandlerManager.forwardLayerType(layer);
-        System.out.println("\n################### LAYER TYPE retrieved: " + layer.getLayerType());
-    }
+    void setAttributeValues(Map<String, String> attributeValues);
 }

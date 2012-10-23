@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureSelectHandler;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -49,14 +50,16 @@ public class FeatureSelectHandlerProvider implements
         Provider<FeatureSelectHandler> {
 
     private Vector vectorLayer;
+    private GPEventBus bus;
 
     @Inject
-    public FeatureSelectHandlerProvider(Vector theVectorLayer) {
+    public FeatureSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
         this.vectorLayer = theVectorLayer;
+        this.bus = bus;
     }
 
     @Override
     public FeatureSelectHandler get() {
-        return new FeatureSelectHandler(vectorLayer);
+        return new FeatureSelectHandler(vectorLayer, bus);
     }
 }

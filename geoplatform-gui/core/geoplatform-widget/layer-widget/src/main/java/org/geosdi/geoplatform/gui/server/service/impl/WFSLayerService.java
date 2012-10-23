@@ -50,7 +50,7 @@ import org.springframework.stereotype.Service;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  * @since 1.5.SNAPSHOT Move this class in the WFS-Editor Module
  */
 @Service(value = "wfsLayerService")
@@ -69,8 +69,7 @@ public class WFSLayerService implements IWFSLayerService {
             return this.geoPlatformWFSClient.describeFeatureType(serverUrl,
                                                                  typeName);
         } catch (ResourceNotFoundFault ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@@@@@",
-                         ex);
+            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
             throw new GeoPlatformException(ex.getMessage());
         }
     }

@@ -33,41 +33,54 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu.edit;
+package org.geosdi.geoplatform.gui.client.util;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
-import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import java.util.ArrayList;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class EditWFSAction extends MenuBaseAction {
+public class FeatureConverter {
 
-    private GPTreePanel<GPBeanTreeModel> treePanel;
-    private LayerTypeHandlerManager layerTypeHandlerManager;
-
-    public EditWFSAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("Edit WFS Mode", LayerResources.ICONS.vector());
-        this.treePanel = treePanel;
-        this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();
+    private FeatureConverter() {
     }
 
-    @Override
-    public void componentSelected(MenuEvent e) {
-        final GPLayerTreeModel layer = (GPLayerTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
+    public static AttributeDetail convert(AttributeDTO attributeDTO) {
+        AttributeDetail attribute = new AttributeDetail();
+        attribute.setName(attributeDTO.getName());
+        attribute.setValue(attributeDTO.getValue() == null
+                ? "" : attributeDTO.getValue());
+        attribute.setType(attributeDTO.getType());
+        return attribute;
+    }
 
-        LayoutManager.getInstance().getStatusMap().setBusy(
-                "Checking if " + layer.getName() + " is a Vector Layer.");
+    public static AttributeDTO convert(AttributeDetail attribute) {
+        AttributeDTO attributeDTO = new AttributeDTO();
+        attributeDTO.setName(attribute.getName());
+        attributeDTO.setValue(attribute.getValue());
+        attributeDTO.setType(attribute.getType());
+        return attributeDTO;
+    }
 
-        this.layerTypeHandlerManager.forwardLayerType(layer);
-        System.out.println("\n################### LAYER TYPE retrieved: " + layer.getLayerType());
+    public static List<AttributeDetail> convertDTOs(List<AttributeDTO> attributesDTO) {
+        assert (attributesDTO != null) : "Attributes DTO must be not null.";
+        List<AttributeDetail> attributes = new ArrayList<AttributeDetail>(attributesDTO.size());
+        for (AttributeDTO attributeDTO : attributesDTO) {
+            attributes.add(FeatureConverter.convert(attributeDTO));
+        }
+        return attributes;
+    }
+
+    public static List<AttributeDTO> convertDetails(List<AttributeDetail> attributes) {
+        assert (attributes != null) : "Attributes must be not null.";
+        List<AttributeDTO> attributesDTO = new ArrayList<AttributeDTO>(attributes.size());
+        for (AttributeDetail attribute : attributes) {
+            attributesDTO.add(FeatureConverter.convert(attribute));
+        }
+        return attributesDTO;
     }
 }

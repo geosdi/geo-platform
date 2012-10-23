@@ -47,6 +47,7 @@ public class GPVectorLayerGrid extends GPLayerGrid implements GPVectorBean {
     private static final long serialVersionUID = 211533898795409938L;
     //
     private String featureNameSpace;
+    private String geometryName;
 
     @Override
     public String getFeatureNameSpace() {
@@ -59,7 +60,18 @@ public class GPVectorLayerGrid extends GPLayerGrid implements GPVectorBean {
     }
 
     @Override
+    public void setGeometryName(String geometryName) {
+        this.geometryName = geometryName;
+    }
+
+    @Override
+    public String getGeometryName() {
+        return this.geometryName;
+    }
+
+    @Override
     public String toString() {
-        return "GPVectorBeanModel{" + "featureNameSpace=" + featureNameSpace + '}';
+        return "GPVectorLayerGrid{ " + "featureNameSpace = " + featureNameSpace
+                + ", geometryName = " + geometryName + '}';
     }
 }

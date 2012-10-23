@@ -45,4 +45,8 @@ public interface GPVectorBean extends GPLayerBean {
     public String getFeatureNameSpace();
 
     public void setFeatureNameSpace(String featureNameSpace);
+    
+    public void setGeometryName(String geometryName);
+    
+    public String getGeometryName();
 }

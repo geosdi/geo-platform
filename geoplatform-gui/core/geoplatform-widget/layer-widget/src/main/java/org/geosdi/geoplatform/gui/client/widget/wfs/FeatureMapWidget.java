@@ -60,7 +60,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
  */
 public class FeatureMapWidget extends GeoPlatformContentPanel implements
         IFeatureMapWidget {
-    
+
     private MapWidget mapWidget;
     private FeatureMapLayerBuilder mapLayerBuilder;
     private Vector vectorLayer;
@@ -70,7 +70,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
     private FeatureSelectHandler selectFeature;
     private FeatureUnSelectHandler unSelectFeature;
     private GPEventBus bus;
-    
+
     @Inject
     public FeatureMapWidget(MapWidget mapWidget,
             FeatureMapLayerBuilder theMapLayerBuilder,
@@ -88,96 +88,98 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
         this.featureControlBuilder = theFeatureControlBuilder;
         this.bus = bus;
     }
-    
+
     @Override
     public void addComponent() {
         super.add(this.mapWidget);
     }
-    
+
     @Override
     public void initSize() {
     }
-    
+
     @Override
     public void setPanelProperties() {
         super.setHeaderVisible(false);
     }
-    
+
     private void resetMapWidget() {
         // REMOVE CONTROL GETFEATURE
         this.controlFeature.deactivate();
         this.mapWidget.getMap().removeControl(controlFeature);
-        
+
+        this.vectorLayer.destroyFeatures();
+
         if (wms != null) {
             this.mapWidget.getMap().removeLayer(wms);
         }
-        
+
         this.mapWidget.getMap().removeLayer(vectorLayer);
-        
+
         LonLat italy = new LonLat(13.375, 42.329);
         italy.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
                         mapWidget.getMap().getProjection());
-        
+
         this.mapWidget.getMap().setCenter(italy, 4);
     }
-    
+
     @Override
     public void reset() {
         this.resetMapWidget();
     }
-    
+
     @Override
     public void bind(final GPLayerBean layer,
             final LayerSchemaDTO schema) {
-        
+
         this.wms = this.mapLayerBuilder.buildLayer(layer);
-        
+
         this.controlFeature = this.featureControlBuilder.buildControl(new GetFeatureModel() {
             @Override
             public String getFeatureNameSpace() {
                 return layer instanceof GPVectorBean ? ((GPVectorBean) layer).getFeatureNameSpace()
                         : schema.getTargetNamespace();
             }
-            
+
             @Override
             public String getFeatureType() {
                 int pos = layer.getName().indexOf(":");
-                
+
                 return pos > 0 ? layer.getName().substring(pos + 1,
                                                            layer.getName().length()) : layer.getName();
             }
-            
+
             @Override
             public String getSrsName() {
                 return layer.getCrs();
             }
-            
+
             @Override
             public String getGeometryName() {
                 return layer instanceof GPVectorBean ? ((GPVectorBean) layer).getGeometryName()
                         : schema.getGeometry().getName();
             }
-            
+
             @Override
             public WMS getWMSLayer() {
                 return (WMS) wms;
             }
         });
-        
+
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
-        
+
         this.mapWidget.getMap().addControl(controlFeature);
-        
+
         controlFeature.getEvents().register("featureselected", this.wms,
                                             this.selectFeature);
-        
+
         controlFeature.getEvents().register("featureunselected", this.wms,
                                             this.unSelectFeature);
-        
+
         this.mapWidget.getMap().zoomToExtent(this.mapLayerBuilder.generateBoundsTransformationFromMap(
                 layer));
-        
+
         this.controlFeature.activate();
     }
 }

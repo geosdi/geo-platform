@@ -38,8 +38,6 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.FeatureTypeHandler;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandler;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.RasterTypeHandler;
 
@@ -51,22 +49,19 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.RasterT
 public class LayerTypeHandlerManagerProvider implements
         Provider<LayerTypeHandlerManager> {
 
-    private FeatureTypeHandler describeFeature;
-    private DescribeFeatureTypeHandler featureType;
+    private DescribeFeatureTypeHandler describeType;
     private RasterTypeHandler rasterType;
 
     @Inject
-    public LayerTypeHandlerManagerProvider(FeatureTypeHandler theDescribeFeature,
-            DescribeFeatureTypeHandler theFeatureType,
+    public LayerTypeHandlerManagerProvider(
+            DescribeFeatureTypeHandler theDescribeFeature,
             RasterTypeHandler theRasterType) {
-        this.describeFeature = theDescribeFeature;
-        this.featureType = theFeatureType;
+        this.describeType = theDescribeFeature;
         this.rasterType = theRasterType;
     }
 
     @Override
     public LayerTypeHandlerManager get() {
-        return new LayerTypeHandlerManager(this.describeFeature,
-                                           this.featureType, this.rasterType);
+        return new LayerTypeHandlerManager(this.describeType, this.rasterType);
     }
 }

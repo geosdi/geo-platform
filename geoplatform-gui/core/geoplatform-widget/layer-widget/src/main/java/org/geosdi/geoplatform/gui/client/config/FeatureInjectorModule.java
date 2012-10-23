@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.DescribeFeatureTypeHandler;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.FeatureTypeHandler;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.RasterTypeHandler;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.ConcreteLayerSchemaHandler;
@@ -47,7 +46,6 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.
 import org.geosdi.geoplatform.gui.client.config.provider.DescribeFeatureTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureMapWidgetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureSelectHandlerProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.FeatureTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureUnSelectHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.LayerSchemaHandlerManagerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.LayerTypeHandlerManagerProvider;
@@ -81,9 +79,6 @@ public class FeatureInjectorModule extends AbstractGinModule {
 
         bind(LayerTypeHandlerManager.class).toProvider(
                 LayerTypeHandlerManagerProvider.class).in(Singleton.class);
-
-        bind(FeatureTypeHandler.class).toProvider(
-                FeatureTypeHandlerProvider.class).in(Singleton.class);
 
         bind(DescribeFeatureTypeHandler.class).toProvider(
                 DescribeFeatureTypeHandlerProvider.class).in(Singleton.class);

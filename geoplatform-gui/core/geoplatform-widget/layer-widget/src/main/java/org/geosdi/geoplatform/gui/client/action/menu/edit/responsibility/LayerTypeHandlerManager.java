@@ -45,13 +45,11 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 public class LayerTypeHandlerManager {
 
     private LayerTypeHandler describeFeature;
-    private LayerTypeHandler featureType;
     private LayerTypeHandler rasterType;
 
     public LayerTypeHandlerManager(LayerTypeHandler theDescribeFeature,
-            LayerTypeHandler theFeatureType, LayerTypeHandler theRasterType) {
+            LayerTypeHandler theRasterType) {
         this.describeFeature = theDescribeFeature;
-        this.featureType = theFeatureType;
         this.rasterType = theRasterType;
         setUpChainElements();
     }
@@ -61,7 +59,6 @@ public class LayerTypeHandlerManager {
     }
 
     private void setUpChainElements() {
-        this.rasterType.setSuccessor(featureType);
-        this.featureType.setSuccessor(describeFeature);
+        this.rasterType.setSuccessor(describeFeature);
     }
 }

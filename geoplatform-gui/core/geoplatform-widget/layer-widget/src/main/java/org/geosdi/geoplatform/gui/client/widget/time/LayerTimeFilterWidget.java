@@ -36,8 +36,10 @@
 package org.geosdi.geoplatform.gui.client.widget.time;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
+import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
@@ -143,6 +145,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.startDimensionComboBox.setFieldLabel("Start Fixed dimension");
         this.startDimensionComboBox.setStore(this.startStore);
         this.startDimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
+        this.startDimensionComboBox.setEditable(Boolean.FALSE);
         this.startDimensionComboBox.addSelectionChangedListener(new SelectionChangedListener<DimensionData>() {
             @Override
             public void selectionChanged(SelectionChangedEvent<DimensionData> se) {
@@ -168,12 +171,36 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.endDimensionComboBox.setStore(this.endStore);
         this.endDimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
         this.endDimensionComboBox.disable();
+        this.endDimensionComboBox.setEditable(Boolean.FALSE);
         dimensionSizeLabel = new Label();
         dimensionSizeLabel.setStyleAttribute("font-size", "12px");
         this.startFilterTextField = new NumberField();
-        this.startFilterTextField.setFieldLabel("Start Dimension to Display");
+        this.startFilterTextField.setFieldLabel("From Dimension to Display");
+        this.startFilterTextField.addKeyListener(new KeyListener() {
+            @Override
+            public void componentKeyUp(ComponentEvent event) {
+                super.componentKeyUp(event);
+                Number number = startFilterTextField.getValue();
+                if (number != null) {
+                    int fromFilter = number.intValue();
+                    String tooltip = (String) startStore.getModels().get(startStore.getModels().size() - fromFilter - 1).get(DimensionData.DIMENSION_KEY);
+                    startFilterTextField.setToolTip(tooltip);
+                }
+            }
+        });
         this.endFilterTextField = new NumberField();
-        this.endFilterTextField.setFieldLabel("End Dimension to Display");
+        this.endFilterTextField.setFieldLabel("To Dimension to Display");
+        this.endFilterTextField.addKeyListener(new KeyListener() {
+            @Override
+            public void componentKeyUp(ComponentEvent event) {
+                super.componentKeyUp(event);
+                Number toFilter = endFilterTextField.getValue();
+                if (toFilter != null) {
+                    String tooltip = (String) startStore.getModels().get(startStore.getModels().size() - toFilter.intValue() - 1).get(DimensionData.DIMENSION_KEY);
+                    endFilterTextField.setToolTip(tooltip);
+                }
+            }
+        });
         FormPanel panel = new FormPanel();
         panel.setHeaderVisible(Boolean.FALSE);
         panel.setFrame(Boolean.TRUE);
@@ -213,20 +240,20 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                             layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getTimeFilter() + "]");
                             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
                         } else {
-                            int startFilter = startFilterTextField.getValue().intValue();
-                            Number endFilter = endFilterTextField.getValue();
+                            int fromFilter = startFilterTextField.getValue().intValue();
+                            Number toFilter = endFilterTextField.getValue();
 //                            System.out.println("End filter: " + endFilter);
-                            if (startFilter < 0 || startFilter > startStore.getModels().size() - 1
-                                    || (endFilter != null && (endFilter.intValue() <= startFilter
-                                    || endFilter.intValue() > startStore.getModels().size() - 1))) {
+                            if (fromFilter < 0 || fromFilter > startStore.getModels().size() - 1
+                                    || (toFilter != null && (toFilter.intValue() >= fromFilter
+                                    || toFilter.intValue() < 0))) {
                                 GeoPlatformMessage.errorMessage("Time Filter Error", "Incorrect Position time, you must specify a valid position in size range");
                                 return;
                             } else {
                                 String timeFilter = "" + startFilterTextField.getValue().intValue();
-                                String variableTimeFilter = (String) startStore.getModels().get(startStore.getModels().size() - startFilter - 1).get(DimensionData.DIMENSION_KEY);
+                                String variableTimeFilter = (String) startStore.getModels().get(startStore.getModels().size() - fromFilter - 1).get(DimensionData.DIMENSION_KEY);
                                 if (endFilterTextField.getValue() != null) {
                                     timeFilter += "/" + endFilterTextField.getValue().intValue();
-                                    variableTimeFilter += "/" + (String) startStore.getModels().get(startStore.getModels().size() - endFilter.intValue() - 1).get(DimensionData.DIMENSION_KEY);
+                                    variableTimeFilter += "/" + (String) startStore.getModels().get(startStore.getModels().size() - toFilter.intValue() - 1).get(DimensionData.DIMENSION_KEY);
                                 }
                                 layerSelected.setTimeFilter(timeFilter);
                                 layerSelected.setVariableTimeFilter(variableTimeFilter);

@@ -141,14 +141,14 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.mapOptions.setUnits(MapUnits.DEGREES);
         this.mapOptions.setMaxExtent(new Bounds(-180, -90,
                 180, 83.623));
-        this.mapOptions.setMaxResolution(new Double(1.40625).floatValue());
+        this.mapOptions.setMaxResolution(1.40625F);
     }
 
     private void set3857MapOptions() {
         this.mapOptions.setUnits(MapUnits.METERS);
         this.mapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
                 20037508, 20037508.34));
-        this.mapOptions.setMaxResolution(new Double(156543.0339).floatValue());
+        this.mapOptions.setMaxResolution(156543.0339F);
     }
 
     private void initMapWidget() {

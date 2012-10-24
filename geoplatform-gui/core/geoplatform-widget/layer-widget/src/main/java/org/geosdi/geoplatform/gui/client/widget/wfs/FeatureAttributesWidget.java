@@ -226,8 +226,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     private void saveAttributes() {
         // TODO
-//        store.commitChanges();
-        throw new UnsupportedOperationException("Not yet implemented");
+        store.commitChanges();
+        disableButtons();
     }
 
     private void populateStore() {
@@ -250,7 +250,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         this.populateStore();
 
-        enableButtons();
         grid.unmask();
     }
 }

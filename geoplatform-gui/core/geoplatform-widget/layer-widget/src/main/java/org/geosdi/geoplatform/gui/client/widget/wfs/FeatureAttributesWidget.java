@@ -47,7 +47,7 @@ import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -133,21 +133,21 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     private void createEditorGrid() {
         grid = new EditorGrid<AttributeDetail>(store, this.prepareColumnModel());
-        grid.setAutoExpandColumn(AttributeDetailKeyValue.NAME.toString());
+        grid.setAutoExpandColumn(AttributeDetailKeyValue.NAME.name());
         grid.setBorders(true);
         grid.setStripeRows(true);
-//    grid.setColumnLines(true);
-//    grid.setColumnResize(false);
-//    grid.setSelectionModel(new CellSelectionModel<AttributeDetail>());
+        grid.setColumnLines(true);
+        grid.setColumnResize(false);
+        grid.setHeight(600);
 
         super.add(grid);
     }
 
     private ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        List<ColumnConfig> configs = Lists.newArrayListWithCapacity(2);
 
         ColumnConfig nameColumn = new ColumnConfig();
-        nameColumn.setId(AttributeDetailKeyValue.NAME.toString());
+        nameColumn.setId(AttributeDetailKeyValue.NAME.name());
         nameColumn.setHeader("Name");
         nameColumn.setWidth(150);
         nameColumn.setFixed(true);
@@ -179,7 +179,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         };
 
         ColumnConfig valueColumn = new ColumnConfig();
-        valueColumn.setId(AttributeDetailKeyValue.VALUE.toString());
+        valueColumn.setId(AttributeDetailKeyValue.VALUE.name());
         valueColumn.setHeader("Value");
         valueColumn.setWidth(150);
         valueColumn.setFixed(true);
@@ -238,17 +238,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     private void populateStore() {
         assert (attributes != null) : "Attributes must not be null.";
-        // TODO Attributes must be load every time
-        System.out.println("------------------------");
-        for (AttributeDetail attributeDetail : attributes) {
-            System.out.println("...." + attributeDetail);
-        }
-        System.out.println("------------------------\n\n");
-
-        mask("Retrieve feature attributes");
-        store.removeAll(); //
+        store.removeAll(); // TODO It is executed into reset -> notifyHide
         store.add(this.attributes);
-        unmask();
     }
 
     @Override
@@ -266,6 +257,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             System.out.println("...." + attribute);
 //            this.store.getRecord(attribute)
         }
+//        store.commitChanges();
+        grid.getView().layout();
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@\n\n");
 
         enableButtons();

@@ -51,27 +51,27 @@ public class AttributeDetail extends GeoPlatformBeanModel {
     }
 
     public String getName() {
-        return super.get(AttributeDetailKeyValue.NAME.toString());
+        return super.get(AttributeDetailKeyValue.NAME.name());
     }
 
     public void setName(String name) {
-        super.set(AttributeDetailKeyValue.NAME.toString(), name);
+        super.set(AttributeDetailKeyValue.NAME.name(), name);
     }
 
     public String getValue() {
-        return super.get(AttributeDetailKeyValue.VALUE.toString());
+        return super.get(AttributeDetailKeyValue.VALUE.name());
     }
 
     public void setValue(String value) {
-        super.set(AttributeDetailKeyValue.VALUE.toString(), value);
+        super.set(AttributeDetailKeyValue.VALUE.name(), value);
     }
 
     public String getType() {
-        return super.get(AttributeDetailKeyValue.TYPE.toString());
+        return super.get(AttributeDetailKeyValue.TYPE.name());
     }
 
     public void setType(String type) {
-        super.set(AttributeDetailKeyValue.TYPE.toString(), type);
+        super.set(AttributeDetailKeyValue.TYPE.name(), type);
     }
 
     @Override

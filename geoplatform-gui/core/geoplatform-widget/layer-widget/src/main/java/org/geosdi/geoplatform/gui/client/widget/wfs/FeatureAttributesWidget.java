@@ -230,12 +230,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    @Override
-    protected void notifyShow() {
-        super.notifyShow();
-        this.populateStore();
-    }
-
     private void populateStore() {
         assert (attributes != null) : "Attributes must not be null.";
         store.removeAll(); // TODO It is executed into reset -> notifyHide
@@ -247,21 +241,16 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         assert (attributeValues != null) : "Attribute Values must not be null.";
         assert (attributes != null) : "Attributes must not be null.";
 
-        mask("Retrieve feature attributes");
-        grid.stopEditing(true);
+        grid.mask("Retrieve feature attributes");
 
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
-        for (AttributeDetail attribute : this.store.getModels()) {
+        for (AttributeDetail attribute : this.attributes) {
             String value = attributeValues.get(attribute.getName());
             attribute.setValue(value);
-            System.out.println("...." + attribute);
-//            this.store.getRecord(attribute)
         }
-//        store.commitChanges();
-        grid.getView().layout();
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+
+        this.populateStore();
 
         enableButtons();
-        unmask();
+        grid.unmask();
     }
 }

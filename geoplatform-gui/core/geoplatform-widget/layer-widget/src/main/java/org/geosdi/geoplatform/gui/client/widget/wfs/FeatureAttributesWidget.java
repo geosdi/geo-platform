@@ -42,7 +42,9 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
@@ -55,7 +57,11 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail.AttributeDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.validator.TypeValidator;
+import org.geosdi.geoplatform.gui.client.widget.validator.TypeValidatorController;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributeValuesHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
@@ -154,26 +160,16 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         configs.add(nameColumn);
 
         TextField<String> valueTextField = new TextField<String>();
-//        valueTextField.setAllowBlank(false);
+        valueTextField.setValidator(this.attributeValuesValidator());
+        valueTextField.setAutoValidate(true);
         CellEditor valueEditor = new CellEditor(valueTextField) {
-            @Override
-            public Object preProcessValue(Object value) { // TODO DEL
-                if (value == null) {
-                    return value;
-                }
-                // TODO Obtain the type of the value
-                // Information aviable into DescribeFeatureType [XMLSchema]
-                System.out.println("\n................. " + value.getClass());
-                return value;
-            }
-
             @Override
             public Object postProcessValue(Object value) {
                 if (value == null) {
                     return value;
                 }
-                // TODO Validate the value wrt the type
-                System.out.println("\n................. " + value.getClass());
+                bus.fireEvent(new FeatureStatusBarEvent(
+                        "The value \"" + value + "\" is correct", FeatureStatusBarType.STATUS_OK));
                 return value;
             }
         };
@@ -251,5 +247,25 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.populateStore();
 
         grid.unmask();
+    }
+
+    private Validator attributeValuesValidator() {
+        return new Validator() {
+            @Override
+            public String validate(Field<?> field, String value) {
+                AttributeDetail selectedItem = grid.getSelectionModel().getSelectedItem();
+                String type = selectedItem.getType();
+                String typeName = type.substring(type.lastIndexOf(".") + 1);
+//                System.out.println("*** " + typeName + " - value: " + value);
+                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(type);
+                if (!validator.validateType(value)) {
+                    String errorValidation = "The value must be of " + typeName + " type";
+                    bus.fireEvent(new FeatureStatusBarEvent(
+                            errorValidation, FeatureStatusBarType.STATUS_ERROR));
+                    return errorValidation;
+                }
+                return null;
+            }
+        };
     }
 }

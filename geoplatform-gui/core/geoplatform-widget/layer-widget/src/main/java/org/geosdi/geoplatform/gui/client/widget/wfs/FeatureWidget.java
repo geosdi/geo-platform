@@ -124,8 +124,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     }
 
     private void createStatusBar() {
-        super.setButtonAlign(Style.HorizontalAlignment.RIGHT);
-        super.getButtonBar().add(this.statusBar);
+        super.setButtonAlign(Style.HorizontalAlignment.LEFT);
 
         Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
                                   new SelectionListener<ButtonEvent>() {
@@ -135,6 +134,8 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
             }
         });
         super.addButton(close);
+
+        super.getButtonBar().add(this.statusBar);
     }
 
     @Override
@@ -153,7 +154,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
         }
 
         this.mapWidget.bind(layer, schema);
-        
+
         List<AttributeDetail> attributes = FeatureConverter.convertDTOs(schema.getAttributes());
         this.attributesWidget.setAttributes(attributes);
 

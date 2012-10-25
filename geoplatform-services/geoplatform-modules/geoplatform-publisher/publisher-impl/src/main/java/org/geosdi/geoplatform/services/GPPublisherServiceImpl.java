@@ -272,10 +272,15 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         String userWorkspace = getWorkspace(userName);
         InfoPreview info = null;
         try {
+            Integer code = this.getEPSGCode(featureType.getCRS());
+            String epsgCode = null;
+            if (code != null) {
+                epsgCode = "EPSG:" + code.toString();
+            }
             info = new InfoPreview(RESTURL, userWorkspace, layerName,
                     featureType.getMinX(), featureType.getMinY(),
                     featureType.getMaxX(), featureType.getMaxY(),
-                    featureType.getCRS(), layer.getDefaultStyle(), Boolean.FALSE);
+                    epsgCode, layer.getDefaultStyle(), Boolean.FALSE);
         } catch (Exception e) {
             final String error = "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info. " + e;
             logger.error(error);
@@ -885,8 +890,9 @@ public class GPPublisherServiceImpl implements GPPublisherService,
             boolean result = restPublisher.unpublishFeatureType(userWorkspace,
                     datatStoreName, info.name);
             logger.info("Removing existing FeatureType: " + info.name + " with result: " + result);
+        } else {
+            postGISUtility.generateEncoder(datatStoreName, userWorkspace);
         }
-        postGISUtility.generateEncoder(datatStoreName, userWorkspace);
 //        restPublisher.createPostGISDatastore(userName, encoder);
 
         // create the <layername>.zip file

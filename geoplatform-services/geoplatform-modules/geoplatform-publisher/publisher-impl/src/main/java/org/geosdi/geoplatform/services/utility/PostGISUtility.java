@@ -74,11 +74,11 @@ public class PostGISUtility {
     String passwordDBPostgisDatastore;
 
     public GeoServerRESTDatastoreManager generateEncoder(String storeName, String workspace) {
-        RESTDataStore store = reader.getDatastore(workspace, storeName);
+//        RESTDataStore store = reader.getDatastore(workspace, storeName);
 //        System.out.println("************ Store Retrieved: ");
 //        System.out.println(store);
         GeoServerRESTDatastoreManager manager = null;
-        if (store == null) {
+//        if (store == null) {
             try {
                 manager = new GeoServerRESTDatastoreManager(
                         new URL(geoserverUrl), geoserverUser, geoserverPassword);
@@ -103,7 +103,7 @@ public class PostGISUtility {
             encoder.setPreparedStatements(false);
             encoder.setMaxOpenPreparedStatements(50);
             manager.create(workspace, encoder);
-        }
+//        }
         return manager;
     }
 

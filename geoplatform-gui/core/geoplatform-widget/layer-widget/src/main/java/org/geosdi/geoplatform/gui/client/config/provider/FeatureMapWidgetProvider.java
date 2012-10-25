@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
@@ -58,7 +59,7 @@ public class FeatureMapWidgetProvider implements Provider<MapWidget> {
     @Override
     public MapWidget get() {
         return this.mapFactory.createMap("700px", "640px",
-                                         GPBaseLayerFactory.getBaseLayer(
-                BaseLayerValue.BING_ROAD_LAYER));
+                GPBaseLayerFactory.getBaseLayer(
+                BaseLayerValue.BING_ROAD_LAYER).clone());
     }
 }

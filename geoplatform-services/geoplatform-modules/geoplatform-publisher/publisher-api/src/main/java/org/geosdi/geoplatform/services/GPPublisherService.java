@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -51,12 +50,12 @@ import org.geosdi.geoplatform.responce.LayerAttribute;
 /**
  * Public interface to define the service operations mapped via REST using CXT
  * framework.
- * 
+ *
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @WebService(name = "GPPublisherService",
-            targetNamespace = "http://services.geo-platform.org/")
+targetNamespace = "http://services.geo-platform.org/")
 public interface GPPublisherService {
 
     @Get
@@ -73,7 +72,7 @@ public interface GPPublisherService {
     @WebResult(name = "Result")
     List<InfoPreview> processEPSGResult(
             @WebParam(name = "username") String userName,
-            @WebParam(name = "previewLayerList") ArrayList<InfoPreview> previewLayerList)
+            @WebParam(name = "previewLayerList") List<InfoPreview> previewLayerList)
             throws ResourceNotFoundFault;
 
     @Get

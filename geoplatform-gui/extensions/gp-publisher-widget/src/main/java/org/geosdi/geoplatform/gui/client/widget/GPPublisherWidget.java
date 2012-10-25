@@ -209,13 +209,13 @@ public class GPPublisherWidget extends GeoPlatformWindow
 
         Bounds layerBounds = new Bounds(lowerX, lowerY, upperX, upperY);
 
-        System.out.println("layerBounds.toString(): " + layerBounds.toString());
+//        System.out.println("layerBounds.toString(): " + layerBounds.toString());
 
-        System.out.println("layer crs: " + previewLayer.getCrs());
+//        System.out.println("layer crs: " + previewLayer.getCrs());
 
         layerBounds.transform(new Projection(previewLayer.getCrs()), new Projection(
                 shpPreviewWidget.getMapPreview().getMap().getProjection()));
-        System.out.println("layer bounds transformated: " + layerBounds);
+//        System.out.println("layer bounds transformated: " + layerBounds);
 
         WMSOptions wmsOption = new WMSOptions();
         wmsOption.setMaxExtent(layerBounds);

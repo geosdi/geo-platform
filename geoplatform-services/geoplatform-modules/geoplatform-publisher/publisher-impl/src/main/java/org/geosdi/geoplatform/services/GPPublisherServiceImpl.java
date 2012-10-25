@@ -341,7 +341,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
     @Override
     public List<InfoPreview> getPreviewDataStores(String userName) throws ResourceNotFoundFault {
         reload();
-        List<InfoPreview> listPreviews = new ArrayList<InfoPreview>();
+        List<InfoPreview> listPreviews = Lists.newArrayList();
         String userWorkspace = getWorkspace(userName);
         RESTDataStoreList list = restReader.getDatastores(userWorkspace);
         for (NameLinkElem element : list) {
@@ -454,7 +454,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 
     private List<LayerInfo> analyzeTifList(List<String> tifEntryNameList, String userName,
             String tempUserTifDir) {
-        List<LayerInfo> infoTifList = new ArrayList<LayerInfo>();
+        List<LayerInfo> infoTifList = Lists.newArrayList();
         for (String tifFileName : tifEntryNameList) {
             LayerInfo info = new LayerInfo();
             info.isShp = false;
@@ -529,7 +529,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 
     private List<LayerInfo> analyzeShpList(List<String> shpEntryNameList, String userName,
             String tempUserDir, String tempUserZipDir) {
-        List<LayerInfo> infoShapeList = new ArrayList<LayerInfo>();
+        List<LayerInfo> infoShapeList = Lists.newArrayList();
         for (String shpFileName : shpEntryNameList) {
             // start analizing shape
             logger.info("Extracting info from " + shpFileName);
@@ -764,12 +764,12 @@ public class GPPublisherServiceImpl implements GPPublisherService,
     }
 
     @Override
-    public List<InfoPreview> processEPSGResult(String userName, ArrayList<InfoPreview> previewLayerList) throws ResourceNotFoundFault {
+    public List<InfoPreview> processEPSGResult(String userName, List<InfoPreview> previewLayerList) throws ResourceNotFoundFault {
         String tempUserDir = PublishUtility.createDir(this.geoportalDir + userName);
         String tempUserZipDir = PublishUtility.createDir(tempUserDir + PublishUtility.ZIP_DIR_NAME);
         String tempUserTifDir = PublishUtility.createDir(tempUserDir + PublishUtility.TIF_DIR_NAME);
         String userWorkspace = getWorkspace(userName);
-        List<InfoPreview> infoPreviewList = new ArrayList<InfoPreview>();
+        List<InfoPreview> infoPreviewList = Lists.newArrayList();
         for (InfoPreview infoPreview : previewLayerList) {
             LayerInfo info = new LayerInfo();
             info.epsg = infoPreview.getCrs();

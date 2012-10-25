@@ -351,7 +351,7 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
+        List<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
 

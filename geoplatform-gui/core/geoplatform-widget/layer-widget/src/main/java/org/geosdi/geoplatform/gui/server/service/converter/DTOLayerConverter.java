@@ -106,8 +106,8 @@ public class DTOLayerConverter {
         return foldersClient;
     }
 
-    private ArrayList<IGPFolderElements> convertFolderElements(List<IElementDTO> folderElements) {
-        ArrayList<IGPFolderElements> clientFolderElements = Lists.newArrayList();
+    private List<IGPFolderElements> convertFolderElements(List<IElementDTO> folderElements) {
+        List<IGPFolderElements> clientFolderElements = Lists.newArrayList();
         Iterator<IElementDTO> iterator = folderElements.iterator();
         while (iterator.hasNext()) {
             clientFolderElements.add(this.convertElement(iterator.next()));
@@ -193,27 +193,30 @@ public class DTOLayerConverter {
         if (layerDTO.getTimeFilter() != null) {
             layer.setTimeFilter(layerDTO.getTimeFilter());
             try {
-                String[] timeFilterSplitted = layerDTO.getTimeFilter().split("/");
-                int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);
-
                 String dimension = this.geoserverRestReader.getDimensions(layerDTO.getTitle());
-                List<String> dimensionList = Lists.newArrayList(dimension.split(","));
-                String variableTimeFilter = dimensionList.get(dimensionList.size() - startDimensionPosition - 1);
-                if (timeFilterSplitted.length > 1) {
-                    int endDimensionPosition = Integer.parseInt(timeFilterSplitted[1]);
-                    variableTimeFilter += "/" + dimensionList.get(dimensionList.size() - endDimensionPosition - 1);
+                if (!dimension.contains("<h2>")) {
+                    List<String> dimensionList = Lists.newArrayList(dimension.split(","));
+
+                    String[] timeFilterSplitted = layerDTO.getTimeFilter().split("/");
+                    int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);
+
+                    String variableTimeFilter = dimensionList.get(dimensionList.size() - startDimensionPosition - 1);
+                    if (timeFilterSplitted.length > 1) {
+                        int endDimensionPosition = Integer.parseInt(timeFilterSplitted[1]);
+                        variableTimeFilter += "/" + dimensionList.get(dimensionList.size() - endDimensionPosition - 1);
+                    }
+                    layer.setVariableTimeFilter(variableTimeFilter);
+                    String layerAlias;
+                    if (layerDTO.getAlias() != null
+                            && layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
+                        layerAlias = layerDTO.getAlias().substring(0,
+                                layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+                    } else {
+                        layerAlias = layerDTO.getTitle();
+                    }
+                    layer.setAlias(layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
+                            + layer.getVariableTimeFilter() + "]");
                 }
-                layer.setVariableTimeFilter(variableTimeFilter);
-                String layerAlias;
-                if (layerDTO.getAlias() != null
-                        && layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
-                    layerAlias = layerDTO.getAlias().substring(0,
-                            layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
-                } else {
-                    layerAlias = layerDTO.getTitle();
-                }
-                layer.setAlias(layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
-                        + layer.getVariableTimeFilter() + "]");
             } catch (NumberFormatException nfe) {
             } catch (MalformedURLException nfe) {
                 logger.error("Impossible to retrieve time filter executing call with "
@@ -291,8 +294,8 @@ public class DTOLayerConverter {
         return wsMap;
     }
 
-    public ArrayList<GPLayer> convertMementoLayers(List<AbstractMementoLayer> addedLayers) {
-        ArrayList<GPLayer> layersList = Lists.newArrayList();
+    public List<GPLayer> convertMementoLayers(List<AbstractMementoLayer> addedLayers) {
+        List<GPLayer> layersList = Lists.newArrayList();
         GPFolder folder = new GPFolder();
         for (AbstractMementoLayer memento : addedLayers) {
             GPLayer layer = null;

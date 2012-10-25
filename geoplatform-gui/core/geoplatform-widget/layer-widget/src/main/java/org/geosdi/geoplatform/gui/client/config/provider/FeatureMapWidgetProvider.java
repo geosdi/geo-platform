@@ -60,6 +60,6 @@ public class FeatureMapWidgetProvider implements Provider<MapWidget> {
     public MapWidget get() {
         return this.mapFactory.createMap("700px", "640px",
                 GPBaseLayerFactory.getBaseLayer(
-                BaseLayerValue.BING_ROAD_LAYER).clone());
+                BaseLayerValue.OPEN_STREET_MAP).clone());
     }
 }

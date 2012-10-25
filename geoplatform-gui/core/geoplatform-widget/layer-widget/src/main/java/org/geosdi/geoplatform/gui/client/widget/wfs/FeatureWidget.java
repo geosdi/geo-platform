@@ -169,10 +169,4 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
 
         this.mapWidget.updateSize();
     }
-
-    @Override
-    protected void notifyShow() {
-        super.notifyShow();
-        this.mapWidget.resetMapWidget();
-    }
 }

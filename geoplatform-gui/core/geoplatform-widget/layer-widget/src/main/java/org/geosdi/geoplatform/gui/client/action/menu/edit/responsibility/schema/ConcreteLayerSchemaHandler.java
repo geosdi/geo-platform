@@ -78,8 +78,7 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
                 "The Layer " + layer.getName() + " is a WFS layer of "
                 + geometryType + " geometry type.",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-        
-//        featureWidget.showWidget(layer, result);
-        this.featureWidget.show();
+
+        featureWidget.showWidget(layer, result);
     }
 }

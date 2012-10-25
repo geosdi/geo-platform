@@ -57,5 +57,8 @@ public class FeatureUnSelectHandler extends AbastractFeatureHandler {
                 eventObject);
 
         vectorLayer.removeFeature(vectorFeature);
+
+        this.attributeValuesEvent.setAttributeValues(null);
+        super.bus.fireEvent(this.attributeValuesEvent);
     }
 }

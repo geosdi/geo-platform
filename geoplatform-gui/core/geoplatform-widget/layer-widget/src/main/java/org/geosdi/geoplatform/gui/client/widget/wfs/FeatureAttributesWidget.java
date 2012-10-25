@@ -36,9 +36,11 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -222,6 +224,15 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     private void saveAttributes() {
         // TODO
+        List<Record> modifiedRecords = store.getModifiedRecords();
+        List<AttributeDetail> modifiedAttribute =
+                Lists.newArrayListWithCapacity(modifiedRecords.size());
+        for (Record record : modifiedRecords) {
+            ModelData model = record.getModel();
+            AttributeDetail attribute = (AttributeDetail) model;
+            modifiedAttribute.add(attribute);
+        }
+
         store.commitChanges();
         disableButtons();
     }
@@ -234,7 +245,11 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void setAttributeValues(Map<String, String> attributeValues) {
-        assert (attributeValues != null) : "Attribute Values must not be null.";
+        if (attributeValues == null) {
+            this.reset();
+            return;
+        }
+
         assert (attributes != null) : "Attributes must not be null.";
 
         grid.mask("Retrieve feature attributes");

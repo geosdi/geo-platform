@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler;
 import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureAttributeValuesEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.event.EventObject;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -51,8 +50,6 @@ import org.gwtopenmaps.openlayers.client.util.Attributes;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureSelectHandler extends AbastractFeatureHandler {
-
-    private FeatureAttributeValuesEvent attributeValuesEvent = new FeatureAttributeValuesEvent();
 
     public FeatureSelectHandler(Vector theVectorLayer, GPEventBus bus) {
         super(theVectorLayer, bus);

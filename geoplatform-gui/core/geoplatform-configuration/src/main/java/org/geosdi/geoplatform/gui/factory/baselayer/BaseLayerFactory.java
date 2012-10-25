@@ -50,5 +50,5 @@ public interface BaseLayerFactory {
 
     <B extends Layer> B findBaseLayer(BaseLayerValue enumLayer);
     
-    Map<BaseLayerValue, Layer> lookupBaseLayers();
+    Map<BaseLayerValue, GPBaseLayerCreator> lookupBaseLayers();
 }

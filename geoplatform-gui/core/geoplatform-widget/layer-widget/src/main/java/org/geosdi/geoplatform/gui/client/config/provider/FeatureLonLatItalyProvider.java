@@ -33,32 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.wfs;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import javax.inject.Inject;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "gpWFSConfigurator")
-public class GPWFSConfiguratorImpl implements GPWFSConfigurator {
+public class FeatureLonLatItalyProvider implements Provider<LonLat> {
 
-    protected @Value("${default_wfs_datasource}")
-    String defaultWFSDataSource;
+    private MapWidget mapWidget;
 
-    @Override
-    public boolean matchDefaultDataSource(String dataSource) {
-        return getDefaultWFSDataSource().equalsIgnoreCase(dataSource);
+    @Inject
+    public FeatureLonLatItalyProvider(MapWidget theMapWidget) {
+        this.mapWidget = theMapWidget;
     }
 
-    /**
-     * @return the defaultWFSDataSource
-     */
     @Override
-    public String getDefaultWFSDataSource() {
-        return defaultWFSDataSource;
+    public LonLat get() {
+        LonLat italy = new LonLat(13.375, 42.329);
+        italy.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
+                        mapWidget.getMap().getProjection());
+
+        return italy;
     }
 }

@@ -65,7 +65,7 @@ class GPBaseLayerRepository {
 
     private final String bingKey = "Apd8EWF9Ls5tXmyHr22O"
             + "uL1ay4HRJtI4JG4jgluTDVaJdUXZV6lpSBpX-TwnoRDG";
-    private EnumMap<BaseLayerValue, Layer> baseLayerMap = Maps.newEnumMap(
+    private EnumMap<BaseLayerValue, GPBaseLayerCreator> baseLayerMap = Maps.newEnumMap(
             BaseLayerValue.class);
     private static GPBaseLayerRepository instance;
 
@@ -82,39 +82,91 @@ class GPBaseLayerRepository {
     }
 
     public Layer findBaseLayer(BaseLayerValue enumLayer) {
-        return baseLayerMap.get(enumLayer);
+        return baseLayerMap.get(enumLayer).createBaseLayer();
     }
 
     /**
      * Return all Base Layers registered in the Repository
      *
-     * @return Map<BaseLayerEnum, Layer>
+     * @return Map<BaseLayerEnum, GPBaseLayerCreator>
      */
-    public Map<BaseLayerValue, Layer> getAllBaseLayers() {
+    public Map<BaseLayerValue, GPBaseLayerCreator> getAllBaseLayers() {
         return Collections.unmodifiableMap(baseLayerMap);
     }
 
     private void lookupBaseLayers() {
-        baseLayerMap.put(BaseLayerValue.OPEN_STREET_MAP, createOSMBaseLayer());
+        baseLayerMap.put(BaseLayerValue.OPEN_STREET_MAP,
+                         new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createOSMBaseLayer();
+            }
+        });
         baseLayerMap.put(BaseLayerValue.GOOGLE_NORMAL,
-                createGoogleNormalBaseLayer());
+                         new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createGoogleNormalBaseLayer();
+            }
+        });
         baseLayerMap.put(BaseLayerValue.GOOGLE_SATELLITE,
-                createGoogleSatelliteBaseLayer());
+                         new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createGoogleSatelliteBaseLayer();
+            }
+        });
         baseLayerMap.put(BaseLayerValue.GOOGLE_HYBRID,
-                createGoogleHybridBaseLayer());
+                         new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createGoogleHybridBaseLayer();
+            }
+        });
         baseLayerMap.put(BaseLayerValue.BING_ROAD_LAYER,
-                createBingRoadBaseLayer());
-        baseLayerMap.put(BaseLayerValue.BING_HYBRID, createBingHybridBaseLayer());
-        baseLayerMap.put(BaseLayerValue.BING_AERIAL, createBingAerialBaseLayer());
-        baseLayerMap.put(BaseLayerValue.METACARTA, createMetacartaBaseLayer());
-        baseLayerMap.put(BaseLayerValue.GEOSDI_BASE, createGeoSdiBaseLayer());
+                         new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createBingRoadBaseLayer();
+            }
+        });
+        baseLayerMap.put(BaseLayerValue.BING_HYBRID, new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createBingHybridBaseLayer();
+            }
+        });
+        baseLayerMap.put(BaseLayerValue.BING_AERIAL, new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createBingAerialBaseLayer();
+            }
+        });
+        baseLayerMap.put(BaseLayerValue.METACARTA, new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createMetacartaBaseLayer();
+            }
+        });
+        baseLayerMap.put(BaseLayerValue.GEOSDI_BASE, new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createGeoSdiBaseLayer();
+            }
+        });
         baseLayerMap.put(BaseLayerValue.GEOSDI_NULL_BASE,
-                createGeoSdiNullMapBaseLayer());
+                         new GPBaseLayerCreator() {
+            @Override
+            public Layer createBaseLayer() {
+                return createGeoSdiNullMapBaseLayer();
+            }
+        });
     }
 
     private Layer createOSMBaseLayer() {
         OSMOptions osmOption = new OSMOptions();
-        osmOption.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        osmOption.setProjection(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Layer osm = OSM.Mapnik("OpenStreetMap", osmOption);
         osm.setIsBaseLayer(Boolean.TRUE);
         return osm;
@@ -126,10 +178,11 @@ class GPBaseLayerRepository {
         wmsParams.setLayers("Mappa_di_Base");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
-        wmsLayerParams.setProjection(GPCoordinateReferenceSystem.WGS_84.getCode());
+        wmsLayerParams.setProjection(
+                GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
         Layer geoSdi = new WMS("geoSdi", "http://dpc.geosdi.org/geoserver/wms",
-                wmsParams, wmsLayerParams);
+                               wmsParams, wmsLayerParams);
         geoSdi.setIsBaseLayer(Boolean.TRUE);
 
         return geoSdi;
@@ -141,11 +194,12 @@ class GPBaseLayerRepository {
         wmsParams.setLayers("StratiDiBase:nullMap");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
-        wmsLayerParams.setProjection(GPCoordinateReferenceSystem.WGS_84.getCode());
+        wmsLayerParams.setProjection(
+                GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
         WMS geoSdi = new WMS("geoSdi No Map",
-                "http://dpc.geosdi.org/geoserver/wms",
-                wmsParams, wmsLayerParams);
+                             "http://dpc.geosdi.org/geoserver/wms",
+                             wmsParams, wmsLayerParams);
         geoSdi.setIsBaseLayer(Boolean.TRUE);
 
         return geoSdi;
@@ -157,11 +211,12 @@ class GPBaseLayerRepository {
         wmsParams.setLayers("basic");
         wmsParams.setStyles("");
         WMSOptions wmsLayerParams = new WMSOptions();
-        wmsLayerParams.setProjection(GPCoordinateReferenceSystem.WGS_84.getCode());
+        wmsLayerParams.setProjection(
+                GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
         WMS metacarta = new WMS("Metacarta",
-                "http://labs.metacarta.com/wms/vmap0",
-                wmsParams, wmsLayerParams);
+                                "http://labs.metacarta.com/wms/vmap0",
+                                wmsParams, wmsLayerParams);
         metacarta.setIsBaseLayer(Boolean.TRUE);
 
         return metacarta;
@@ -172,7 +227,8 @@ class GPBaseLayerRepository {
         option.setType(GoogleV3MapType.G_NORMAL_MAP);
         option.setSphericalMercator(Boolean.TRUE);
         option.setTransitionEffect(TransitionEffect.RESIZE);
-        option.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        option.setProjection(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Layer google = new GoogleV3("Google Normal", option);
         google.setIsBaseLayer(Boolean.TRUE);
 
@@ -184,7 +240,8 @@ class GPBaseLayerRepository {
         opSatellite.setType(GoogleV3MapType.G_SATELLITE_MAP);
         opSatellite.setSphericalMercator(Boolean.TRUE);
         opSatellite.setTransitionEffect(TransitionEffect.RESIZE);
-        opSatellite.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        opSatellite.setProjection(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Layer satellite = new GoogleV3("Google Satellite", opSatellite);
         satellite.setIsBaseLayer(Boolean.TRUE);
 
@@ -197,7 +254,8 @@ class GPBaseLayerRepository {
         opHybrid.setType(GoogleV3MapType.G_HYBRID_MAP);
         opHybrid.setSphericalMercator(Boolean.TRUE);
         opHybrid.setTransitionEffect(TransitionEffect.RESIZE);
-        opHybrid.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+        opHybrid.setProjection(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Layer hybrid = new GoogleV3("Google Hybrid", opHybrid);
         hybrid.setIsBaseLayer(Boolean.TRUE);
 
@@ -206,8 +264,9 @@ class GPBaseLayerRepository {
 
     private Layer createBingRoadBaseLayer() {
         BingOptions bingOption = new BingOptions("Bing Road Layer", bingKey,
-                BingType.ROAD);
-        bingOption.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+                                                 BingType.ROAD);
+        bingOption.setProjection(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Bing road = new Bing(bingOption);
         road.setIsBaseLayer(Boolean.TRUE);
 
@@ -216,8 +275,9 @@ class GPBaseLayerRepository {
 
     private Layer createBingHybridBaseLayer() {
         BingOptions bingOption = new BingOptions("Bing Hybrid Layer", bingKey,
-                BingType.HYBRID);
-        bingOption.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+                                                 BingType.HYBRID);
+        bingOption.setProjection(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Bing hybrid = new Bing(bingOption);
         hybrid.setIsBaseLayer(Boolean.TRUE);
 
@@ -226,8 +286,9 @@ class GPBaseLayerRepository {
 
     private Layer createBingAerialBaseLayer() {
         BingOptions bingOption = new BingOptions("Bing Aerial Layer", bingKey,
-                BingType.AERIAL);
-        bingOption.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
+                                                 BingType.AERIAL);
+        bingOption.setProjection(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Bing aerial = new Bing(bingOption);
         aerial.setIsBaseLayer(Boolean.TRUE);
 

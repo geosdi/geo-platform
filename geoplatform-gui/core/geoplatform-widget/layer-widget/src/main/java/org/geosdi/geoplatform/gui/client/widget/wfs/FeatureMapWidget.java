@@ -35,18 +35,21 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
+import com.google.gwt.user.client.Timer;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.FeatureMapLayerBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureSelectHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureUnSelectHandler;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.control.GetFeature;
@@ -69,6 +72,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
     private GetFeatureControlBuilder featureControlBuilder;
     private FeatureSelectHandler selectFeature;
     private FeatureUnSelectHandler unSelectFeature;
+    private LonLat italyLonLat;
     private GPEventBus bus;
 
     @Inject
@@ -78,6 +82,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
             FeatureSelectHandler theSelectFeature,
             FeatureUnSelectHandler theUnSelectFeature,
             GetFeatureControlBuilder theFeatureControlBuilder,
+            LonLat theItalyLonLat,
             GPEventBus bus) {
         super(true);
         this.mapWidget = mapWidget;
@@ -86,11 +91,14 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
         this.selectFeature = theSelectFeature;
         this.unSelectFeature = theUnSelectFeature;
         this.featureControlBuilder = theFeatureControlBuilder;
+        this.italyLonLat = theItalyLonLat;
         this.bus = bus;
     }
 
     @Override
     public void addComponent() {
+        this.initMapWidget();
+
         super.add(this.mapWidget);
     }
 
@@ -116,11 +124,11 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
 
         this.mapWidget.getMap().removeLayer(vectorLayer);
 
-        LonLat italy = new LonLat(13.375, 42.329);
-        italy.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
-                        mapWidget.getMap().getProjection());
+        this.initMapWidget();
+    }
 
-        this.mapWidget.getMap().setCenter(italy, 4);
+    private void initMapWidget() {
+        this.mapWidget.getMap().setCenter(italyLonLat, 4);
     }
 
     @Override
@@ -166,6 +174,23 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
             }
         });
 
+        Timer t = new Timer() {
+            @Override
+            public void run() {
+                loadLayerOnMap();
+                notifyStatus();
+            }
+        };
+
+        t.schedule(1000);
+    }
+
+    @Override
+    public void updateSize() {
+        this.mapWidget.getMap().updateSize();
+    }
+
+    private void loadLayerOnMap() {
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
 
@@ -177,14 +202,16 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
         controlFeature.getEvents().register("featureunselected", this.wms,
                                             this.unSelectFeature);
 
-        this.mapWidget.getMap().zoomToExtent(this.mapLayerBuilder.generateBoundsTransformationFromMap(
-                layer));
+        Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
+
+        this.mapWidget.getMap().zoomToExtent(bb);
 
         this.controlFeature.activate();
     }
 
-    @Override
-    public void updateSize() {
-        this.mapWidget.getMap().updateSize();
+    private void notifyStatus() {
+        this.bus.fireEvent(
+                new FeatureStatusBarEvent("WFS Layer loaded",
+                                          FeatureStatusBarType.STATUS_OK));
     }
 }

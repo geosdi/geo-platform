@@ -45,6 +45,6 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  */
 public interface IFeatureWidget {
 
-    void showWidget(GPLayerBean layer,
-            LayerSchemaDTO schema);
+    void bind(GPLayerBean theSelectedLayer,
+            LayerSchemaDTO theSchemaDTO);
 }

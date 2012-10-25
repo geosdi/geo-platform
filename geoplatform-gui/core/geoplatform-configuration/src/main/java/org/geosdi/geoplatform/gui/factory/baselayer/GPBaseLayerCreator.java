@@ -33,32 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.wfs;
+package org.geosdi.geoplatform.gui.factory.baselayer;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "gpWFSConfigurator")
-public class GPWFSConfiguratorImpl implements GPWFSConfigurator {
+public interface GPBaseLayerCreator {
 
-    protected @Value("${default_wfs_datasource}")
-    String defaultWFSDataSource;
-
-    @Override
-    public boolean matchDefaultDataSource(String dataSource) {
-        return getDefaultWFSDataSource().equalsIgnoreCase(dataSource);
-    }
-
-    /**
-     * @return the defaultWFSDataSource
-     */
-    @Override
-    public String getDefaultWFSDataSource() {
-        return defaultWFSDataSource;
-    }
+    Layer createBaseLayer();
 }

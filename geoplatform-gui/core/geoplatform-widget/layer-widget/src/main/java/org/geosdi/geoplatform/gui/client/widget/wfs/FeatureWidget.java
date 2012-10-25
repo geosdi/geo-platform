@@ -44,6 +44,7 @@ import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import java.util.List;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -67,6 +68,8 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     private FeatureAttributesWidget attributesWidget;
     private FeatureStatusBar statusBar;
     private GPEventBus bus;
+    private GPLayerBean selectedLayer;
+    private LayerSchemaDTO schemaDTO;
 
     @Inject
     public FeatureWidget(FeatureMapWidget mapWidget,
@@ -124,6 +127,10 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     private void createStatusBar() {
         super.setButtonAlign(Style.HorizontalAlignment.LEFT);
 
+        super.getButtonBar().add(this.statusBar);
+
+        super.getButtonBar().add(new FillToolItem());
+
         Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
                                   new SelectionListener<ButtonEvent>() {
             @Override
@@ -132,8 +139,6 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
             }
         });
         super.addButton(close);
-
-        super.getButtonBar().add(this.statusBar);
     }
 
     @Override
@@ -144,22 +149,22 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     }
 
     @Override
-    public void showWidget(GPLayerBean layer,
-            LayerSchemaDTO schema) {
-        if (layer instanceof GPVectorBean) {
-            GPVectorBean vector = (GPVectorBean) layer;
-            vector.setFeatureNameSpace(schema.getTargetNamespace());
-            vector.setGeometryName(schema.getGeometry().getName());
+    public void show() {
+        if ((this.selectedLayer == null) || (this.schemaDTO == null)) {
+            throw new IllegalArgumentException(
+                    "Both SchemaDTO and GPLayerBean must not be null");
         }
 
-        this.mapWidget.bind(layer, schema);
-
-        List<AttributeDetail> attributes = FeatureConverter.convertDTOs(
-                schema.getAttributes());
-
-        this.attributesWidget.setAttributes(attributes);
-
         super.show();
+    }
+
+    @Override
+    protected void afterShow() {
+        super.afterShow();
+        
+        this.statusBar.setBusy("Loading Layer AS WFS");
+
+        this.mapWidget.bind(selectedLayer, schemaDTO);
     }
 
     @Override
@@ -168,5 +173,23 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
         super.endDrag(de, canceled);
 
         this.mapWidget.updateSize();
+    }
+
+    @Override
+    public void bind(GPLayerBean theSelectedLayer,
+            LayerSchemaDTO theSchemaDTO) {
+        this.selectedLayer = theSelectedLayer;
+        this.schemaDTO = theSchemaDTO;
+
+        if (this.selectedLayer instanceof GPVectorBean) {
+            GPVectorBean vector = (GPVectorBean) this.selectedLayer;
+            vector.setFeatureNameSpace(this.schemaDTO.getTargetNamespace());
+            vector.setGeometryName(this.schemaDTO.getGeometry().getName());
+        }
+
+        List<AttributeDetail> attributes = FeatureConverter.convertDTOs(
+                this.schemaDTO.getAttributes());
+
+        this.attributesWidget.setAttributes(attributes);
     }
 }

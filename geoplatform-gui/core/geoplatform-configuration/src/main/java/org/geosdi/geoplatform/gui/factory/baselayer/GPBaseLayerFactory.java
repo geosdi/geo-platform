@@ -65,7 +65,7 @@ public class GPBaseLayerFactory implements BaseLayerFactory {
     }
 
     @Override
-    public Map<BaseLayerValue, Layer> lookupBaseLayers() {
+    public Map<BaseLayerValue, GPBaseLayerCreator> lookupBaseLayers() {
         return GPBaseLayerRepository.getInstance().getAllBaseLayers();
     }
 }

@@ -51,4 +51,6 @@ public interface GPWFSConfigurator {
      * @return boolean
      */
     boolean matchDefaultDataSource(String dataSource);
+
+    String getDefaultWFSDataSource();
 }

@@ -59,6 +59,7 @@ public class CatalogMapWidgetProvider implements Provider<MapWidget> {
     @Override
     public MapWidget get() {
         return this.mapFactory.createMap("390px", "280px",
-                GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP).clone());
+                                         GPBaseLayerFactory.getBaseLayer(
+                BaseLayerValue.OPEN_STREET_MAP));
     }
 }

@@ -79,6 +79,7 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
                 + geometryType + " geometry type.",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
-        featureWidget.showWidget(layer, result);
+        featureWidget.bind(layer, result);
+        featureWidget.show();
     }
 }

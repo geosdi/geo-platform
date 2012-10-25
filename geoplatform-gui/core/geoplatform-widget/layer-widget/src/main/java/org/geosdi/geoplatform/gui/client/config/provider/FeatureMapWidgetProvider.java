@@ -58,6 +58,7 @@ public class FeatureMapWidgetProvider implements Provider<MapWidget> {
     @Override
     public MapWidget get() {
         return this.mapFactory.createMap("700px", "640px",
-                                         GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
+                                         GPBaseLayerFactory.getBaseLayer(
+                BaseLayerValue.BING_ROAD_LAYER));
     }
 }

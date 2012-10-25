@@ -46,7 +46,6 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import java.util.List;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
@@ -54,7 +53,6 @@ import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
@@ -63,7 +61,6 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@Singleton
 public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
 
     private FeatureMapWidget mapWidget;
@@ -108,7 +105,8 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     }
 
     private void addMapWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST, 700);
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST,
+                                                           700);
         layoutData.setMargins(new Margins(0));
 
         super.add(this.mapWidget, layoutData);
@@ -145,7 +143,8 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     }
 
     @Override
-    public void showWidget(GPLayerBean layer, LayerSchemaDTO schema) {
+    public void showWidget(GPLayerBean layer,
+            LayerSchemaDTO schema) {
         if (layer instanceof GPVectorBean) {
             GPVectorBean vector = (GPVectorBean) layer;
             vector.setFeatureNameSpace(schema.getTargetNamespace());
@@ -153,17 +152,25 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
         }
 
         this.mapWidget.bind(layer, schema);
-        
-        List<AttributeDetail> attributes = FeatureConverter.convertDTOs(schema.getAttributes());
+
+        List<AttributeDetail> attributes = FeatureConverter.convertDTOs(
+                schema.getAttributes());
         this.attributesWidget.setAttributes(attributes);
 
         super.show();
     }
 
     @Override
-    protected void endDrag(DragEvent de, boolean canceled) {
+    protected void endDrag(DragEvent de,
+            boolean canceled) {
         super.endDrag(de, canceled);
 
         this.mapWidget.updateSize();
+    }
+
+    @Override
+    protected void notifyShow() {
+        super.notifyShow();
+        this.mapWidget.resetMapWidget();
     }
 }

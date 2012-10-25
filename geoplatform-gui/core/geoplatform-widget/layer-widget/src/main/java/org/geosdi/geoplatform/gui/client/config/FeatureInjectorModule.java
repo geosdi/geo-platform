@@ -51,6 +51,8 @@ import org.geosdi.geoplatform.gui.client.config.provider.LayerSchemaHandlerManag
 import org.geosdi.geoplatform.gui.client.config.provider.LayerTypeHandlerManagerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.RasterTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.VectorLayerProvider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.IFeatureWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.DescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureSelectHandler;
@@ -67,41 +69,43 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureInjectorModule extends AbstractGinModule {
-
+    
     @Override
     protected void configure() {
         bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
-
+        
+        bind(IFeatureWidget.class).to(FeatureWidget.class).in(Singleton.class);
+        
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
-
+        
         bind(MapWidget.class).toProvider(FeatureMapWidgetProvider.class)
                 .in(Singleton.class);
-
+        
         bind(LayerTypeHandlerManager.class).toProvider(
                 LayerTypeHandlerManagerProvider.class).in(Singleton.class);
-
+        
         bind(DescribeFeatureTypeHandler.class).toProvider(
                 DescribeFeatureTypeHandlerProvider.class).in(Singleton.class);
-
+        
         bind(RasterTypeHandler.class).toProvider(RasterTypeHandlerProvider.class).in(
                 Singleton.class);
-
+        
         bind(DescribeFeatureDispatcher.class).to(
                 GPDescribeFeatureDispatcher.class).in(Singleton.class);
-
+        
         bind(LayerSchemaParserHandler.class).to(ConcreteLayerSchemaHandler.class).in(
                 Singleton.class);
-
+        
         bind(LayerSchemaHandlerManager.class).toProvider(
                 LayerSchemaHandlerManagerProvider.class).in(Singleton.class);
-
+        
         bind(Vector.class).toProvider(VectorLayerProvider.class).in(
                 Singleton.class);
-
+        
         bind(FeatureSelectHandler.class).toProvider(
                 FeatureSelectHandlerProvider.class).in(
                 Singleton.class);
-
+        
         bind(FeatureUnSelectHandler.class).toProvider(
                 FeatureUnSelectHandlerProvider.class).in(
                 Singleton.class);

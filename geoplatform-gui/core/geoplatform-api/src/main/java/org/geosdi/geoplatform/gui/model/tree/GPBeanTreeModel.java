@@ -163,8 +163,10 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     @Override
     public String toString() {
-        return "GPBeanTreeModel {" + "label = " + label
-                + ", zIndex = " + zIndex + '}';
+        return "id = " + id
+                + ", label = " + label
+                + ", zIndex = " + zIndex
+                + ", checked = " + checked;
     }
 
     public abstract AbstractImagePrototype getIcon();

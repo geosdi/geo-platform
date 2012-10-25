@@ -88,11 +88,11 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         this.setStyles(layer.getStyles());
         this.setOpacity(layer.getOpacity());
     }
-    
+
     /**
      * @Constructor
-     * 
-     * @param UUID 
+     *
+     * @param UUID
      */
     public RasterTreeNode(String UUID) {
         super.setUUID(UUID);
@@ -172,10 +172,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      */
     @Override
     public String toString() {
-        return "RasterTreeNode [getLabel()=" + getLabel()
-                + ", getDataSource()=" + getDataSource()
-                + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
-                + ", getLayerType()=" + getLayerType() + ", getzIndex()="
-                + getzIndex() + "]";
+        return "RasterTreeNode {" + super.toString()
+                + ", opacity = " + opacity + "}";
     }
 }

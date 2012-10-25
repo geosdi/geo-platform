@@ -309,9 +309,18 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
 
     @Override
     public String toString() {
-        return "GPLayerTreeModel{ " + super.toString() + "dataSource = "
-                + dataSource + ", crs = " + crs + ", bbox = " + bbox
-                + ", layerType = " + layerType + '}';
+        return super.toString()
+                + ", title = " + title
+                + ", name = " + name
+                + ", alias = " + alias
+                + ", abstractText = " + abstractText
+                + ", dataSource = " + dataSource
+                + ", crs = " + crs
+                + ", bbox = " + bbox
+                + ", layerType = " + layerType
+                + ", cqlFilter = " + cqlFilter
+                + ", timeFilter = " + timeFilter
+                + ", variableTimeFilter = " + variableTimeFilter;
     }
 
     public class ObservableFolderTreeNode extends Observable {

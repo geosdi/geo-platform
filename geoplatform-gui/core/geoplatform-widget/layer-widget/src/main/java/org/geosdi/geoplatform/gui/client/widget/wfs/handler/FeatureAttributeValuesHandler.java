@@ -48,4 +48,6 @@ public interface FeatureAttributeValuesHandler extends EventHandler {
     Type<FeatureAttributeValuesHandler> TYPE = new Type<FeatureAttributeValuesHandler>();
 
     void setAttributeValues(Map<String, String> attributeValues);
+    
+    void resetAttributeValues();
 }

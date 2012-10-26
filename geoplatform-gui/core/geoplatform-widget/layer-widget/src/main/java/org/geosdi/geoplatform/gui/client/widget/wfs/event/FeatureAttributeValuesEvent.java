@@ -62,6 +62,10 @@ public class FeatureAttributeValuesEvent extends GwtEvent<FeatureAttributeValues
 
     @Override
     protected void dispatch(FeatureAttributeValuesHandler handler) {
-        handler.setAttributeValues(attributeValues);
+        if (attributeValues == null) {
+            handler.resetAttributeValues();
+        } else {
+            handler.setAttributeValues(attributeValues);
+        }
     }
 }

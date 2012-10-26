@@ -70,8 +70,7 @@ public class GPWFSServiceImpl implements GPWFSService {
     private GPWFSConfigurator wfsConfigurator;
 
     @Override
-    public LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName)
+    public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
             throws ResourceNotFoundFault {
         logger.debug("\n*** WFS DescribeFeatureType for layer {} ***", typeName);
         serverUrl = serverUrl.replace("wms", "wfs");
@@ -87,7 +86,7 @@ public class GPWFSServiceImpl implements GPWFSService {
         List<AttributeDTO> attributeList;
         try {
 
-            serverUrl += "?service=WFS&version=1.0.0&request=GetCapabilities";
+            serverUrl += "?service=WFS&version=1.1.0&request=GetCapabilities";
 
             Map connectionParameters = new HashMap();
             connectionParameters.put(WFSDataStoreFactory.URL.key, serverUrl);

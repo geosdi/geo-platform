@@ -245,11 +245,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void setAttributeValues(Map<String, String> attributeValues) {
-        if (attributeValues == null) {
-            this.reset();
-            return;
-        }
-
+        assert (attributeValues != null) : "Attribute values must not be null.";
         assert (attributes != null) : "Attributes must not be null.";
 
         grid.mask("Retrieve feature attributes");
@@ -262,6 +258,11 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.populateStore();
 
         grid.unmask();
+    }
+
+    @Override
+    public void resetAttributeValues() {
+        this.reset();
     }
 
     private Validator attributeValuesValidator() {

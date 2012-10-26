@@ -1,5 +1,6 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
@@ -16,14 +17,15 @@
     <name>Geo-Platform :: == Binding XML Module</name>
 
     <modules>
-        <module>geoplatform-gml-binding</module>
-        <module>geoplatform-filter-binding</module>
-        <module>geoplatform-ows-binding</module>
         <module>geoplatform-csw-binding</module>
-        <module>geoplatform-wps-binding</module>
         <module>geoplatform-ebrim-binding</module>
-        <module>geoplatform-iso19139-binding</module>
         <module>geoplatform-feature-catalogue-binding</module>
+        <module>geoplatform-filter-binding</module>
+        <module>geoplatform-gml-binding</module>
+        <module>geoplatform-iso19139-binding</module>
+        <module>geoplatform-ows-binding</module>
+        <module>geoplatform-wfs-binding</module>
+        <module>geoplatform-wps-binding</module>
     </modules>
     
     <dependencyManagement>

@@ -35,10 +35,29 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class App {
-    
+public class WFSVersionException extends RuntimeException
+        implements Serializable {
+
+    private static final long serialVersionUID = 6963970153136205442L;
+
+    public WFSVersionException() {
+    }
+
+    public WFSVersionException(String message) {
+        super(message);
+    }
+
+    public WFSVersionException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public WFSVersionException(Throwable cause) {
+        super(cause);
+    }
 }

@@ -33,32 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.jaxb;
+package org.geosdi.geoplatform.connector.wfs.jaxb;
 
-import org.springframework.context.annotation.Bean;
+import javax.xml.bind.JAXBException;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
+import org.geosdi.geoplatform.connector.wfs.jaxb.WFSJAXBContext.WFSJAXBContextKey;
+import org.geosdi.geoplatform.xml.wfs.WFSContextServiceProvider;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogJAXBContextConfigurator {
+public final class WFSConnectorJAXBContext implements
+        GeoPlatformJAXBContextProvider {
 
-    /**
-     * Create an Instance for CSWConnectorJAXBContext and register it in
-     * GeoPlatformJAXBContextRepository with the specific Key.
-     *
-     * @return CSWConnectorJAXBContext
-     */
-    public @Bean(name = "cswConnectorJAXBContext")
-    CSWConnectorJAXBContext cswConnectorJAXBContext() {
+    static {
+        try {
+            jaxbContext = new WFSJAXBContext(
+                    WFSContextServiceProvider.loadContextPath());
+        } catch (JAXBException e) {
+            LoggerFactory.getLogger(WFSConnectorJAXBContext.class).error(
+                    "Failed to Initialize JAXBContext for Class "
+                    + WFSConnectorJAXBContext.class.getName()
+                    + ": @@@@@@@@@@@@@@@@@ " + e);
+        }
+    }
+    //
+    private static WFSJAXBContext jaxbContext;
+    public static final WFSJAXBContextKey WFS_CONTEXT_KEY = new WFSJAXBContextKey();
 
-        CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
+    protected WFSConnectorJAXBContext() {
+    }
 
-        JAXBContextConnectorRepository.registerProvider(
-                cswJAXBContext.getKeyProvider(),
-                cswJAXBContext.getJAXBProvider());
+    @Override
+    public WFSJAXBContext getJAXBProvider() {
+        return jaxbContext;
+    }
 
-        return cswJAXBContext;
+    @Override
+    public WFSJAXBContextKey getKeyProvider() {
+        return WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
     }
 }

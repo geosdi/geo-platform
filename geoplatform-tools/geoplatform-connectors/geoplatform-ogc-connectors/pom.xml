@@ -1,5 +1,6 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
   
@@ -19,11 +20,12 @@
     <modules>
         <module>geoplatform-connector-api</module>
         <module>geoplatform-csw-connector</module>
+        <module>geoplatform-wfs-connector</module>
         <module>geoplatform-wps-connector</module>
     </modules>
 
     <dependencies>
-    <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

@@ -33,8 +33,9 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.jaxb;
+package org.geosdi.geoplatform.connector.wfs.jaxb;
 
+import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -42,23 +43,23 @@ import org.springframework.context.annotation.Bean;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogJAXBContextConfigurator {
+public class WFSJAXBContextConfigurator {
 
     /**
-     * Create an Instance for CSWConnectorJAXBContext and register it in
+     * Create an Instance for WFSConnectorJAXBContext and register it in
      * GeoPlatformJAXBContextRepository with the specific Key.
      *
-     * @return CSWConnectorJAXBContext
+     * @return WFSConnectorJAXBContext
      */
-    public @Bean(name = "cswConnectorJAXBContext")
-    CSWConnectorJAXBContext cswConnectorJAXBContext() {
+    public @Bean(name = "WFSConnectorJAXBContext")
+    WFSConnectorJAXBContext WFSConnectorJAXBContext() {
 
-        CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
+        WFSConnectorJAXBContext wfsJAXBContext = new WFSConnectorJAXBContext();
 
         JAXBContextConnectorRepository.registerProvider(
-                cswJAXBContext.getKeyProvider(),
-                cswJAXBContext.getJAXBProvider());
+                wfsJAXBContext.getKeyProvider(),
+                wfsJAXBContext.getJAXBProvider());
 
-        return cswJAXBContext;
+        return wfsJAXBContext;
     }
 }

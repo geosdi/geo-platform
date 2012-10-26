@@ -33,32 +33,68 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.jaxb;
+package org.geosdi.geoplatform.xml.wfs;
 
-import org.springframework.context.annotation.Bean;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogJAXBContextConfigurator {
+public class WFSContextServiceProvider {
+
+    private static List<Class> allClasses;
+
+    static {
+        allClasses = new ArrayList<Class>();
+    }
 
     /**
-     * Create an Instance for CSWConnectorJAXBContext and register it in
-     * GeoPlatformJAXBContextRepository with the specific Key.
+     * Load All Classes for CSW JAXB Context
      *
-     * @return CSWConnectorJAXBContext
+     * @return Classes[]
      */
-    public @Bean(name = "cswConnectorJAXBContext")
-    CSWConnectorJAXBContext cswConnectorJAXBContext() {
+    public static Class[] loadClasses() {
+        return getAllClasses();
+    }
 
-        CSWConnectorJAXBContext cswJAXBContext = new CSWConnectorJAXBContext();
+    /**
+     *
+     * @return Context Path for CSW Context
+     */
+    public static String loadContextPath() {
+        return getFullContextPath();
+    }
 
-        JAXBContextConnectorRepository.registerProvider(
-                cswJAXBContext.getKeyProvider(),
-                cswJAXBContext.getJAXBProvider());
+    private static String getFullContextPath() {
+        StringBuilder builder = new StringBuilder();
 
-        return cswJAXBContext;
+        builder.append("org.geosdi.geoplatform.xml.ows.v100");
+        builder.append(":");
+        builder.append("org.geosdi.geoplatform.xml.filter.v110");
+        builder.append(":");
+        builder.append("org.geosdi.geoplatform.xml.gml.v311").append(":");
+        builder.append("org.geosdi.geoplatform.xml.gml.w3._2001.smil20").append(":");
+        builder.append("org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language");
+        builder.append(":");
+        builder.append("org.geosdi.geoplatform.xml.wfs.v110");
+
+        return builder.toString();
+    }
+
+    private static Class[] getAllClasses() {
+        allClasses.add(org.geosdi.geoplatform.xml.ows.v100.ObjectFactory.class);
+
+        allClasses.add(org.geosdi.geoplatform.xml.filter.v110.ObjectFactory.class);
+
+        allClasses.add(org.geosdi.geoplatform.xml.gml.v311.ObjectFactory.class);
+        allClasses.add(org.geosdi.geoplatform.xml.gml.w3._2001.smil20.ObjectFactory.class);
+        allClasses.add(org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language.ObjectFactory.class);
+
+        allClasses.add(org.geosdi.geoplatform.xml.wfs.v110.ObjectFactory.class);
+
+        return allClasses.toArray(new Class[allClasses.size()]);
     }
 }

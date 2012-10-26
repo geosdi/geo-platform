@@ -38,15 +38,14 @@ package org.geosdi.geoplatform.connector.jaxb.provider;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
 
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GeoPlatformJAXBContextProvider {
-    
-    public <P extends GPConnectorJAXBContext> P getJAXBProvider();
 
-    public <K extends GeoPlatformJAXBContextKey> K getKeyProvider();
+    <P extends GPConnectorJAXBContext> P getJAXBProvider();
+
+    <K extends GeoPlatformJAXBContextKey> K getKeyProvider();
 }

@@ -38,10 +38,10 @@ package org.geosdi.geoplatform.connector.wfs.server;
 import java.net.URL;
 import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.connector.wfs.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.wfs.WFSVersion;
 import org.geosdi.geoplatform.connector.wfs.WFSVersionException;
 import org.geosdi.geoplatform.connector.wfs.server.request.WFSDescribeFeatureTypeRequest;
+import org.geosdi.geoplatform.connector.wfs.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.wfs.server.request.WFSGetFeatureRequest;
 
 /**

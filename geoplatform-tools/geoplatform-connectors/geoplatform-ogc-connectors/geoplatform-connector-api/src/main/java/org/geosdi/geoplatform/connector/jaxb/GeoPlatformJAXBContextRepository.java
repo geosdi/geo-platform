@@ -82,14 +82,21 @@ public class GeoPlatformJAXBContextRepository {
      *
      * @return GPConnectorJAXBContext Provider registered for Key
      */
-    public <P extends GPConnectorJAXBContext> P getProvider(GeoPlatformJAXBContextKey key) {
+    public <P extends GPConnectorJAXBContext> P getProvider(
+            GeoPlatformJAXBContextKey key) {
+        if (key == null) {
+            throw new IllegalArgumentException(
+                    "GeoPlatformJAXBContextKey must not be null.");
+        }
+
         synchronized (values) {
             return (P) (values.get(key) != null ? values.get(key) : lookUpJAXBContext(
-                        key));
+                    key));
         }
     }
 
-    private <P extends GPConnectorJAXBContext> P lookUpJAXBContext(GeoPlatformJAXBContextKey key) {
+    private <P extends GPConnectorJAXBContext> P lookUpJAXBContext(
+            GeoPlatformJAXBContextKey key) {
         Object jaxbContext = null;
 
         try {

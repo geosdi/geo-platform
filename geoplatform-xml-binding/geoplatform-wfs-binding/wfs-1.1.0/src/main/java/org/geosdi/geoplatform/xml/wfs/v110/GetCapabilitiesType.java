@@ -4,38 +4,36 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.10.26 at 03:16:42 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.wfs.v110;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * 
- *           Request to a WFS to perform the GetCapabilities operation.
- *           This operation allows a client to retrieve a Capabilities
- *           XML document providing metadata for the specific WFS server.
- * 
- *           The GetCapapbilities element is used to request that a Web Feature
- *           Service generate an XML document describing the organization
- *           providing the service, the WFS operations that the service
- *           supports, a list of feature types that the service can operate
- *           on and list of filtering capabilities that the service support.
- *           Such an XML document is called a capabilities document.
- *        
- * 
+ *
+ * Request to a WFS to perform the GetCapabilities operation. This operation
+ * allows a client to retrieve a Capabilities XML document providing metadata
+ * for the specific WFS server.
+ *
+ * The GetCapapbilities element is used to request that a Web Feature Service
+ * generate an XML document describing the organization providing the service,
+ * the WFS operations that the service supports, a list of feature types that
+ * the service can operate on and list of filtering capabilities that the
+ * service support. Such an XML document is called a capabilities document.
+ *
+ *
  * <p>Java class for GetCapabilitiesType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="GetCapabilitiesType">
  *   &lt;complexContent>
@@ -45,26 +43,27 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
+@XmlRootElement(name = "GetCapabilities")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetCapabilitiesType")
 public class GetCapabilitiesType
-    extends org.geosdi.geoplatform.xml.ows.v100.GetCapabilitiesType
-    implements ToString
-{
+        extends org.geosdi.geoplatform.xml.ows.v100.GetCapabilitiesType
+        implements ToString {
 
     @XmlAttribute(name = "service")
     protected String service;
 
+    public GetCapabilitiesType() {
+    }
+
     /**
      * Gets the value of the service property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getService() {
         if (service == null) {
@@ -76,11 +75,9 @@ public class GetCapabilitiesType
 
     /**
      * Sets the value of the service property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setService(String value) {
         this.service = value;
@@ -93,14 +90,18 @@ public class GetCapabilitiesType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             String theService;
@@ -109,5 +110,4 @@ public class GetCapabilitiesType
         }
         return buffer;
     }
-
 }

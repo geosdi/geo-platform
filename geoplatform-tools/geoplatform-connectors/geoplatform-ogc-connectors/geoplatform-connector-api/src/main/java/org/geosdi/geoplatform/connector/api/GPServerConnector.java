@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPServerConnector<T extends GPAbstractServerConnector>
         implements GeoPlatformConnector {
@@ -53,6 +53,10 @@ public abstract class GPServerConnector<T extends GPAbstractServerConnector>
     private Date registrationDate = new Date();
     private int usageCounter;
     protected T server;
+
+    public GPServerConnector(T theServer) {
+        this.server = theServer;
+    }
 
     @Override
     public Date getRegistrationDate() {

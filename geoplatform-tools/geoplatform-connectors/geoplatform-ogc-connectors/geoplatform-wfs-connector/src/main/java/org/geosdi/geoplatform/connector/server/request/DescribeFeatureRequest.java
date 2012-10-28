@@ -33,43 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector.server.request;
 
-import java.net.URL;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import java.util.List;
+import javax.xml.namespace.QName;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
-        implements GPConnectorBuilder<B> {
+public interface DescribeFeatureRequest<T> extends GPConnectorRequest<T> {
 
-    protected URL serverUrl;
-    protected GPSecurityConnector securityConnector;
-    protected String version;
+    /**
+     * Set the value of the typeName property
+     *
+     * @param typeName
+     */
+    void setTypeName(List<QName> typeName);
 
-    protected AbstractConnectorBuilder() {
-    }
+    /**
+     * Gets the value of the typeName property.
+     *
+     * @return {@link  List<QName>}
+     */
+    List<QName> getTypeName();
 
-    @Override
-    public B withClientSecurity(GPSecurityConnector theSecurityConnector) {
-        this.securityConnector = theSecurityConnector;
-        return (B) this;
-    }
-
-    @Override
-    public B withServerUrl(URL theServerUrl) {
-        this.serverUrl = theServerUrl;
-        return (B) this;
-    }
-
-    @Override
-    public B withVersion(String theVersion) {
-        this.version = theVersion;
-        return (B) this;
-    }
-
-    public abstract C build();
+    /**
+     * Set the value of the outputFormat property
+     *
+     * @param outputFormat
+     */
+    void setOutputFormat(String outputFormat);
+    
+    /**
+     * Gets the value of the outputFormat property
+     * 
+     * <p>Default value is "text/xml; subtype=gml/3.1.1" </p>
+     * 
+     * @return {@link String}
+     */
+    String getOutputFormat();
 }

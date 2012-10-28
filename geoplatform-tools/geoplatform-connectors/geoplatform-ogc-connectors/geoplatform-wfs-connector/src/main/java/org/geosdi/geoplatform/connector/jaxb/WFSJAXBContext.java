@@ -33,43 +33,65 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector.jaxb;
 
-import java.net.URL;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import java.util.Map;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
-        implements GPConnectorBuilder<B> {
+public class WFSJAXBContext extends GeoPlatformJAXBContext {
 
-    protected URL serverUrl;
-    protected GPSecurityConnector securityConnector;
-    protected String version;
+    public WFSJAXBContext(Class... classToBeBound) throws JAXBException {
+        super(classToBeBound);
+    }
 
-    protected AbstractConnectorBuilder() {
+    public WFSJAXBContext(String contextPath, ClassLoader classLoader,
+            Map<String, ?> properties) throws JAXBException {
+        super(contextPath, classLoader, properties);
+    }
+
+    public WFSJAXBContext(String contextPath, ClassLoader classLoader)
+            throws JAXBException {
+        super(contextPath, classLoader);
+    }
+
+    public WFSJAXBContext(String contextPath) throws JAXBException {
+        super(contextPath);
     }
 
     @Override
-    public B withClientSecurity(GPSecurityConnector theSecurityConnector) {
-        this.securityConnector = theSecurityConnector;
-        return (B) this;
+    public Marshaller acquireMarshaller() throws JAXBException {
+        synchronized (this) {
+            return super.marshaller != null
+                    ? super.marshaller : super.createMarshaller();
+        }
     }
 
     @Override
-    public B withServerUrl(URL theServerUrl) {
-        this.serverUrl = theServerUrl;
-        return (B) this;
+    public Unmarshaller acquireUnmarshaller() throws JAXBException {
+        synchronized (this) {
+            return super.unmarshaller != null
+                    ? super.unmarshaller : super.createUnmarshaller();
+        }
     }
 
-    @Override
-    public B withVersion(String theVersion) {
-        this.version = theVersion;
-        return (B) this;
-    }
+    public static class WFSJAXBContextKey extends GeoPlatformJAXBContextKey {
 
-    public abstract C build();
+        public WFSJAXBContextKey() {
+            super(WFSConnectorJAXBContext.class);
+        }
+
+        @Override
+        public boolean isCompatibleValue(Object o) {
+            return o instanceof WFSJAXBContext;
+        }
+    }
 }

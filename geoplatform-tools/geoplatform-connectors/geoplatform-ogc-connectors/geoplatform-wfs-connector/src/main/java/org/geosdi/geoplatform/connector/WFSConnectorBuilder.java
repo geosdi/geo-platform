@@ -33,65 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs.jaxb;
+package org.geosdi.geoplatform.connector;
 
-import java.util.Map;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey;
+import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSJAXBContext extends GeoPlatformJAXBContext {
+public class WFSConnectorBuilder
+        extends AbstractConnectorBuilder<WFSConnectorBuilder, GPWFSConnector> {
 
-    public WFSJAXBContext(Class... classToBeBound) throws JAXBException {
-        super(classToBeBound);
-    }
-
-    public WFSJAXBContext(String contextPath, ClassLoader classLoader,
-            Map<String, ?> properties) throws JAXBException {
-        super(contextPath, classLoader, properties);
-    }
-
-    public WFSJAXBContext(String contextPath, ClassLoader classLoader)
-            throws JAXBException {
-        super(contextPath, classLoader);
-    }
-
-    public WFSJAXBContext(String contextPath) throws JAXBException {
-        super(contextPath);
+    /**
+     * Create a new GeoPlatform WFSConnectorBuilder with which to define a
+     * specification for a GPWFSConnector.
+     *
+     * @return the new GeoPlatformCSWConnectorBuilder
+     */
+    public static WFSConnectorBuilder newConnector() {
+        return new WFSConnectorBuilder();
     }
 
     @Override
-    public Marshaller acquireMarshaller() throws JAXBException {
-        synchronized (this) {
-            return super.marshaller != null
-                    ? super.marshaller : super.createMarshaller();
-        }
-    }
-
-    @Override
-    public Unmarshaller acquireUnmarshaller() throws JAXBException {
-        synchronized (this) {
-            return super.unmarshaller != null
-                    ? super.unmarshaller : super.createUnmarshaller();
-        }
-    }
-
-    public static class WFSJAXBContextKey extends GeoPlatformJAXBContextKey {
-
-        public WFSJAXBContextKey() {
-            super(WFSConnectorJAXBContext.class);
+    public GPWFSConnector build() {
+        if (serverUrl == null) {
+            throw new IllegalArgumentException("Error on WFS Server Connector build: "
+                    + "server URL cannot be null.");
         }
 
-        @Override
-        public boolean isCompatibleValue(Object o) {
-            return o instanceof WFSJAXBContext;
-        }
+        WFSVersion v = WFSVersion.fromString(version);
+
+        return new GPWFSConnector(serverUrl,
+                securityConnector, v);
     }
 }

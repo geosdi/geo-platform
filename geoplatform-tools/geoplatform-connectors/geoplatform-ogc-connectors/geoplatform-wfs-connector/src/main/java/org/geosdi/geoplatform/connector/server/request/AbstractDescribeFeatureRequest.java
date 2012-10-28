@@ -33,43 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector.server.request;
 
-import java.net.URL;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import java.util.List;
+import javax.xml.namespace.QName;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
-        implements GPConnectorBuilder<B> {
+public abstract class AbstractDescribeFeatureRequest<T> extends WFSRequest<T>
+        implements DescribeFeatureRequest<T> {
 
-    protected URL serverUrl;
-    protected GPSecurityConnector securityConnector;
-    protected String version;
+    protected List<QName> typeName;
+    protected String outputFormat;
 
-    protected AbstractConnectorBuilder() {
+    public AbstractDescribeFeatureRequest(GPServerConnector server) {
+        super(server);
     }
 
     @Override
-    public B withClientSecurity(GPSecurityConnector theSecurityConnector) {
-        this.securityConnector = theSecurityConnector;
-        return (B) this;
+    public void setTypeName(List<QName> typeName) {
+        this.typeName = typeName;
     }
 
     @Override
-    public B withServerUrl(URL theServerUrl) {
-        this.serverUrl = theServerUrl;
-        return (B) this;
+    public List<QName> getTypeName() {
+        return this.typeName;
     }
 
     @Override
-    public B withVersion(String theVersion) {
-        this.version = theVersion;
-        return (B) this;
+    public void setOutputFormat(String outputFormat) {
+        this.outputFormat = outputFormat;
     }
 
-    public abstract C build();
+    @Override
+    public String getOutputFormat() {
+        return this.outputFormat;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractDescribeFeatureRequest{ " + "typeName = " + typeName
+                + ", outputFormat = " + outputFormat + '}';
+    }
 }

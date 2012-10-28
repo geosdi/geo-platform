@@ -33,18 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs.server.request;
+package org.geosdi.geoplatform.connector.server.request.v110;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
+import org.geosdi.geoplatform.connector.server.request.AbstractDescribeFeatureRequest;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.xml.wfs.v110.DescribeFeatureTypeType;
+import org.geosdi.geoplatform.xml.wfs.v110.FeatureTypeListType;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSGetFeatureRequest extends WFSRequest<GetFeatureType> {
+public class WFSDescribeFeatureTypeRequestV110
+        extends AbstractDescribeFeatureRequest<FeatureTypeListType> {
 
-    public WFSGetFeatureRequest(GPServerConnector server) {
+    public WFSDescribeFeatureTypeRequestV110(GPServerConnector server) {
         super(server);
+    }
+
+    @Override
+    protected Object createRequest() throws IllegalParameterFault {
+        DescribeFeatureTypeType request = new DescribeFeatureTypeType();
+
+        if ((typeName == null) || (typeName.isEmpty())) {
+            throw new IllegalArgumentException(
+                    "Parameter TypeName must not be empty.");
+        }
+
+        request.setTypeName(typeName);
+
+        if ((outputFormat != null) && (!outputFormat.equals(""))) {
+            request.setOutputFormat(outputFormat);
+        }
+
+        return request;
     }
 }

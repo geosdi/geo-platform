@@ -33,43 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector.jaxb;
 
-import java.net.URL;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import javax.xml.bind.JAXBException;
+import org.geosdi.geoplatform.connector.jaxb.WFSJAXBContext.WFSJAXBContextKey;
+import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
+import org.geosdi.geoplatform.xml.wfs.WFSContextServiceProvider;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
-        implements GPConnectorBuilder<B> {
+public final class WFSConnectorJAXBContext implements
+        GeoPlatformJAXBContextProvider {
 
-    protected URL serverUrl;
-    protected GPSecurityConnector securityConnector;
-    protected String version;
+    static {
+        try {
+            jaxbContext = new WFSJAXBContext(
+                    WFSContextServiceProvider.loadContextPath());
+        } catch (JAXBException e) {
+            LoggerFactory.getLogger(WFSConnectorJAXBContext.class).error(
+                    "Failed to Initialize JAXBContext for Class "
+                    + WFSConnectorJAXBContext.class.getName()
+                    + ": @@@@@@@@@@@@@@@@@ " + e);
+        }
+    }
+    //
+    private static WFSJAXBContext jaxbContext;
+    public static final WFSJAXBContextKey WFS_CONTEXT_KEY = new WFSJAXBContextKey();
 
-    protected AbstractConnectorBuilder() {
+    protected WFSConnectorJAXBContext() {
     }
 
     @Override
-    public B withClientSecurity(GPSecurityConnector theSecurityConnector) {
-        this.securityConnector = theSecurityConnector;
-        return (B) this;
+    public WFSJAXBContext getJAXBProvider() {
+        return jaxbContext;
     }
 
     @Override
-    public B withServerUrl(URL theServerUrl) {
-        this.serverUrl = theServerUrl;
-        return (B) this;
+    public WFSJAXBContextKey getKeyProvider() {
+        return WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
     }
-
-    @Override
-    public B withVersion(String theVersion) {
-        this.version = theVersion;
-        return (B) this;
-    }
-
-    public abstract C build();
 }

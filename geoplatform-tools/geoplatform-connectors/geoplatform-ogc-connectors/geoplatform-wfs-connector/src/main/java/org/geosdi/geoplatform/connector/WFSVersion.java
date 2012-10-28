@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs;
+package org.geosdi.geoplatform.connector;
 
 /**
  *
@@ -51,5 +51,17 @@ public enum WFSVersion {
 
     public String getVersion() {
         return version;
+    }
+
+    public static WFSVersion fromString(String version) {
+        if ((version != null) && (!version.equals(""))) {
+            for (WFSVersion v : WFSVersion.values()) {
+                if (v.version.equalsIgnoreCase(version)) {
+                    return v;
+                }
+            }
+        }
+
+        return WFSVersion.V110;
     }
 }

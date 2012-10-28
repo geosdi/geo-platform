@@ -4,13 +4,12 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.10.26 at 03:16:42 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.wfs.v110;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterCapabilities;
 import org.geosdi.geoplatform.xml.ows.v100.CapabilitiesBaseType;
@@ -19,28 +18,26 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * 
- *             XML encoded WFS GetCapabilities operation response. This
- *             document provides clients with service metadata about a
- *             specific service instance, including metadata about the
- *             tightly-coupled data served. If the server does not implement
- *             the updateSequence parameter, the server shall always return
- *             the complete Capabilities document, without the updateSequence
- *             parameter. When the server implements the updateSequence
- *             parameter and the GetCapabilities operation request included
- *             the updateSequence parameter with the current value, the server
- *             shall return this element with only the "version" and
- *             "updateSequence" attributes. Otherwise, all optional elements
- *             shall be included or not depending on the actual value of the
- *             Contents parameter in the GetCapabilities operation request.
- *          
- * 
+ *
+ * XML encoded WFS GetCapabilities operation response. This document provides
+ * clients with service metadata about a specific service instance, including
+ * metadata about the tightly-coupled data served. If the server does not
+ * implement the updateSequence parameter, the server shall always return the
+ * complete Capabilities document, without the updateSequence parameter. When
+ * the server implements the updateSequence parameter and the GetCapabilities
+ * operation request included the updateSequence parameter with the current
+ * value, the server shall return this element with only the "version" and
+ * "updateSequence" attributes. Otherwise, all optional elements shall be
+ * included or not depending on the actual value of the Contents parameter in
+ * the GetCapabilities operation request.
+ *
+ *
  * <p>Java class for WFS_CapabilitiesType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="WFS_CapabilitiesType">
  *   &lt;complexContent>
@@ -55,9 +52,10 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
+@XmlRootElement(name = "WFS_Capabilities")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "WFS_CapabilitiesType", propOrder = {
     "featureTypeList",
@@ -65,10 +63,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "supportsGMLObjectTypeList",
     "filterCapabilities"
 })
-public class WFSCapabilitiesType
-    extends CapabilitiesBaseType
-    implements ToString
-{
+public class WFSCapabilitiesType extends CapabilitiesBaseType
+        implements ToString {
 
     @XmlElement(name = "FeatureTypeList")
     protected FeatureTypeListType featureTypeList;
@@ -76,16 +72,18 @@ public class WFSCapabilitiesType
     protected GMLObjectTypeListType servesGMLObjectTypeList;
     @XmlElement(name = "SupportsGMLObjectTypeList")
     protected GMLObjectTypeListType supportsGMLObjectTypeList;
-    @XmlElement(name = "Filter_Capabilities", namespace = "http://www.opengis.net/ogc", required = true)
+    @XmlElement(name = "Filter_Capabilities",
+                namespace = "http://www.opengis.net/ogc", required = true)
     protected FilterCapabilities filterCapabilities;
+
+    public WFSCapabilitiesType() {
+    }
 
     /**
      * Gets the value of the featureTypeList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FeatureTypeListType }
-     *     
+     *
+     * @return possible object is {@link FeatureTypeListType }
+     *
      */
     public FeatureTypeListType getFeatureTypeList() {
         return featureTypeList;
@@ -93,11 +91,9 @@ public class WFSCapabilitiesType
 
     /**
      * Sets the value of the featureTypeList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FeatureTypeListType }
-     *     
+     *
+     * @param value allowed object is {@link FeatureTypeListType }
+     *
      */
     public void setFeatureTypeList(FeatureTypeListType value) {
         this.featureTypeList = value;
@@ -105,11 +101,9 @@ public class WFSCapabilitiesType
 
     /**
      * Gets the value of the servesGMLObjectTypeList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GMLObjectTypeListType }
-     *     
+     *
+     * @return possible object is {@link GMLObjectTypeListType }
+     *
      */
     public GMLObjectTypeListType getServesGMLObjectTypeList() {
         return servesGMLObjectTypeList;
@@ -117,11 +111,9 @@ public class WFSCapabilitiesType
 
     /**
      * Sets the value of the servesGMLObjectTypeList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GMLObjectTypeListType }
-     *     
+     *
+     * @param value allowed object is {@link GMLObjectTypeListType }
+     *
      */
     public void setServesGMLObjectTypeList(GMLObjectTypeListType value) {
         this.servesGMLObjectTypeList = value;
@@ -129,11 +121,9 @@ public class WFSCapabilitiesType
 
     /**
      * Gets the value of the supportsGMLObjectTypeList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GMLObjectTypeListType }
-     *     
+     *
+     * @return possible object is {@link GMLObjectTypeListType }
+     *
      */
     public GMLObjectTypeListType getSupportsGMLObjectTypeList() {
         return supportsGMLObjectTypeList;
@@ -141,11 +131,9 @@ public class WFSCapabilitiesType
 
     /**
      * Sets the value of the supportsGMLObjectTypeList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GMLObjectTypeListType }
-     *     
+     *
+     * @param value allowed object is {@link GMLObjectTypeListType }
+     *
      */
     public void setSupportsGMLObjectTypeList(GMLObjectTypeListType value) {
         this.supportsGMLObjectTypeList = value;
@@ -153,11 +141,9 @@ public class WFSCapabilitiesType
 
     /**
      * Gets the value of the filterCapabilities property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FilterCapabilities }
-     *     
+     *
+     * @return possible object is {@link FilterCapabilities }
+     *
      */
     public FilterCapabilities getFilterCapabilities() {
         return filterCapabilities;
@@ -165,11 +151,9 @@ public class WFSCapabilitiesType
 
     /**
      * Sets the value of the filterCapabilities property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FilterCapabilities }
-     *     
+     *
+     * @param value allowed object is {@link FilterCapabilities }
+     *
      */
     public void setFilterCapabilities(FilterCapabilities value) {
         this.filterCapabilities = value;
@@ -182,36 +166,43 @@ public class WFSCapabilitiesType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             FeatureTypeListType theFeatureTypeList;
             theFeatureTypeList = this.getFeatureTypeList();
-            strategy.appendField(locator, this, "featureTypeList", buffer, theFeatureTypeList);
+            strategy.appendField(locator, this, "featureTypeList", buffer,
+                    theFeatureTypeList);
         }
         {
             GMLObjectTypeListType theServesGMLObjectTypeList;
             theServesGMLObjectTypeList = this.getServesGMLObjectTypeList();
-            strategy.appendField(locator, this, "servesGMLObjectTypeList", buffer, theServesGMLObjectTypeList);
+            strategy.appendField(locator, this, "servesGMLObjectTypeList",
+                    buffer, theServesGMLObjectTypeList);
         }
         {
             GMLObjectTypeListType theSupportsGMLObjectTypeList;
             theSupportsGMLObjectTypeList = this.getSupportsGMLObjectTypeList();
-            strategy.appendField(locator, this, "supportsGMLObjectTypeList", buffer, theSupportsGMLObjectTypeList);
+            strategy.appendField(locator, this, "supportsGMLObjectTypeList",
+                    buffer, theSupportsGMLObjectTypeList);
         }
         {
             FilterCapabilities theFilterCapabilities;
             theFilterCapabilities = this.getFilterCapabilities();
-            strategy.appendField(locator, this, "filterCapabilities", buffer, theFilterCapabilities);
+            strategy.appendField(locator, this, "filterCapabilities", buffer,
+                    theFilterCapabilities);
         }
         return buffer;
     }
-
 }

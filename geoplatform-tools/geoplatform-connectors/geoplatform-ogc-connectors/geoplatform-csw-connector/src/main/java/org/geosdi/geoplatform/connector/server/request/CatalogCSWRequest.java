@@ -35,23 +35,19 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import java.io.*;
-import javax.xml.bind.JAXBElement;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
 
 /**
  *
@@ -66,7 +62,7 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
                 CSWConnectorJAXBContext.CSW_CONTEXT_KEY);
     }
     //
-    protected static final GPConnectorJAXBContext cswContext;
+    private static final GPConnectorJAXBContext cswContext;
 
     public CatalogCSWRequest(GPServerConnector server) {
         super(server);
@@ -76,7 +72,7 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
     protected HttpEntity preparePostEntity()
             throws IllegalParameterFault, JAXBException, UnsupportedEncodingException {
 
-        Marshaller marshaller = cswContext.acquireMarshaller();
+        Marshaller marshaller = getMarshaller();
 
         Object request = this.createRequest();
         StringWriter writer = new StringWriter();
@@ -86,93 +82,6 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
     }
 
     protected abstract Object createRequest() throws IllegalParameterFault;
-
-    @Override
-    public T getResponse() throws IllegalParameterFault, ServerInternalFault, IOException {
-        T response = null;
-
-        try {
-            HttpResponse httpResponse = super.securityConnector.secure(
-                    this, super.getPostMethod());
-            HttpEntity responseEntity = httpResponse.getEntity();
-            if (responseEntity != null) {
-                InputStream is = responseEntity.getContent();
-
-                Unmarshaller unmarshaller = cswContext.acquireUnmarshaller();
-                Object content = unmarshaller.unmarshal(is);
-                if (!(content instanceof JAXBElement)) { // ExceptionReport
-                    logger.error("\n#############\n{}\n#############", content);
-                    throw new ServerInternalFault(
-                            "CSW Catalog Server Error: incorrect responce");
-                }
-
-                JAXBElement<T> elementType = (JAXBElement<T>) content;
-                response = elementType.getValue();
-
-                EntityUtils.consume(responseEntity);
-            } else {
-                throw new ServerInternalFault("CSW Catalog Server Error: Connection "
-                        + "problem");
-            }
-
-        } catch (JAXBException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                         ex.getMessage());
-            throw new ServerInternalFault("*** JAXBException ***" + ex);
-
-        } catch (ClientProtocolException ex) {
-            logger.error(
-                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
-                    ex.getMessage());
-            throw new ServerInternalFault("*** ClientProtocolException ***");
-
-        }
-
-        return response;
-    }
-
-    @Override
-    public String getResponseAsString() throws ServerInternalFault, IOException,
-            IllegalParameterFault {
-        Writer writer = new StringWriter();
-        try {
-            HttpResponse httpResponse = super.securityConnector.secure(
-                    this, super.getPostMethod());
-            HttpEntity responseEntity = httpResponse.getEntity();
-
-            if (responseEntity != null) {
-                InputStream is = responseEntity.getContent();
-
-                char[] buffer = new char[1024];
-
-                Reader reader = new BufferedReader(
-                        new InputStreamReader(is, "UTF-8"));
-                int n;
-                while ((n = reader.read(buffer)) != -1) {
-                    writer.write(buffer, 0, n);
-                }
-
-                EntityUtils.consume(responseEntity);
-            } else {
-                throw new ServerInternalFault("CSW Catalog Server Error: Connection "
-                        + "problem");
-            }
-
-        } catch (JAXBException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                         ex.getMessage());
-            throw new ServerInternalFault("*** JAXBException ***");
-
-        } catch (ClientProtocolException ex) {
-            logger.error(
-                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
-                    ex.getMessage());
-            throw new ServerInternalFault("*** ClientProtocolException ***");
-
-        }
-
-        return writer.toString();
-    }
 
     @Override
     public Marshaller getMarshaller() throws JAXBException {

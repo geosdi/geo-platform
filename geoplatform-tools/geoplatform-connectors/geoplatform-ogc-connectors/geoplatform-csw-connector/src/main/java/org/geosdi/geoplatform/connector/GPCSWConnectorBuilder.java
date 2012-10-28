@@ -40,15 +40,15 @@ import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPCSWConnectorBuilder
         extends AbstractConnectorBuilder<GPCSWConnectorBuilder, GPCSWServerConnector> {
 
     /**
-     * Create a new GeoPlatformCSWConnectorBuilder with which to define a 
+     * Create a new GeoPlatform CSWConnectorBuilder with which to define a
      * specification for a GPCSWServerConnector.
-     * 
+     *
      * @return the new GeoPlatformCSWConnectorBuilder
      */
     public static GPCSWConnectorBuilder newConnector() {
@@ -57,7 +57,7 @@ public class GPCSWConnectorBuilder
 
     /**
      * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *  
+     *
      */
     @Override
     public GPCSWServerConnector build() {
@@ -66,8 +66,10 @@ public class GPCSWConnectorBuilder
                     + "server URL cannot be null.");
         }
 
+        GPCatalogVersion v = GPCatalogVersion.fromString(version);
+
         GPCSWServerConnector cswConnector = new GPCSWServerConnector(serverUrl,
-                securityConnector, GPCatalogVersion.V202);
+                securityConnector, v);
 
         return cswConnector;
     }

@@ -33,43 +33,68 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector.wfs;
 
-import java.net.URL;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import java.io.FileOutputStream;
+import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
+import org.geosdi.geoplatform.xml.wfs.v110.WFSCapabilitiesType;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
-        implements GPConnectorBuilder<B> {
+public class WFSGetCapabilitiesTest extends WFSTestConfigurator {
 
-    protected URL serverUrl;
-    protected GPSecurityConnector securityConnector;
-    protected String version;
+    @Ignore
+    @Test
+    public void testWFSGetCapabilitiesV110() throws Exception {
+        WFSGetCapabilitiesRequest<WFSCapabilitiesType> request = this.serverConnector.createGetCapabilitiesRequest();
 
-    protected AbstractConnectorBuilder() {
+        WFSCapabilitiesType o = request.getResponse();
+
+        logger.info("WFS GetCapabilities @@@@@@@@@@@@@@@@@@@@@@@ "
+                + request.getResponseAsString());
+
+        String wfsCapFile = "target/wfsGetCapabilitiesv110.xml";
+
+
+        FileOutputStream fos = null;
+
+        try {
+            fos = new FileOutputStream(wfsCapFile);
+            request.getMarshaller().marshal(o, fos);
+        } finally {
+            if (fos != null) {
+                fos.close();
+            }
+        }
     }
 
-    @Override
-    public B withClientSecurity(GPSecurityConnector theSecurityConnector) {
-        this.securityConnector = theSecurityConnector;
-        return (B) this;
-    }
+    @Ignore
+    @Test
+    public void testSecureWFSGetCapabilitiesV110() throws Exception {
+        WFSGetCapabilitiesRequest<WFSCapabilitiesType> request = this.secureServerConnector.createGetCapabilitiesRequest();
 
-    @Override
-    public B withServerUrl(URL theServerUrl) {
-        this.serverUrl = theServerUrl;
-        return (B) this;
-    }
+        WFSCapabilitiesType o = request.getResponse();
 
-    @Override
-    public B withVersion(String theVersion) {
-        this.version = theVersion;
-        return (B) this;
-    }
+        logger.info("WFS Secure GetCapabilities @@@@@@@@@@@@@@@@@@@@@@@ "
+                + request.getResponseAsString());
 
-    public abstract C build();
+        String wfsSecureCapFile = "target/wfsSecureGetCapabilitiesv110.xml";
+
+
+        FileOutputStream fos = null;
+
+        try {
+            fos = new FileOutputStream(wfsSecureCapFile);
+            request.getMarshaller().marshal(o, fos);
+        } finally {
+            if (fos != null) {
+                fos.close();
+            }
+        }
+    }
 }

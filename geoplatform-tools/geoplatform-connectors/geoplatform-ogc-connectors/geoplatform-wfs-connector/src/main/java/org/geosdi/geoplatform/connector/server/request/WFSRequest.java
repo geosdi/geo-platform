@@ -33,31 +33,62 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs;
+package org.geosdi.geoplatform.connector.server.request;
 
-import java.io.Serializable;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository;
+import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
+import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSVersionException extends RuntimeException
-        implements Serializable {
+public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
 
-    private static final long serialVersionUID = 6963970153136205442L;
+    static {
+        wfsContext = JAXBContextConnectorRepository.getProvider(
+                WFSConnectorJAXBContext.WFS_CONTEXT_KEY);
+    }
+    //
+    private static final GPConnectorJAXBContext wfsContext;
 
-    public WFSVersionException() {
+    public WFSRequest(GPServerConnector server) {
+        super(server);
     }
 
-    public WFSVersionException(String message) {
-        super(message);
+    @Override
+    protected HttpEntity preparePostEntity()
+            throws IllegalParameterFault, JAXBException, UnsupportedEncodingException {
+
+        Marshaller marshaller = this.getMarshaller();
+
+        Object request = this.createRequest();
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(request, writer);
+
+        return new StringEntity(writer.toString(), ContentType.APPLICATION_XML);
     }
 
-    public WFSVersionException(String message, Throwable cause) {
-        super(message, cause);
+    protected abstract Object createRequest() throws IllegalParameterFault;
+
+    @Override
+    public Marshaller getMarshaller() throws JAXBException {
+        return wfsContext.acquireMarshaller();
     }
 
-    public WFSVersionException(Throwable cause) {
-        super(cause);
+    @Override
+    public Unmarshaller getUnmarshaller() throws JAXBException {
+        return wfsContext.acquireUnmarshaller();
     }
 }

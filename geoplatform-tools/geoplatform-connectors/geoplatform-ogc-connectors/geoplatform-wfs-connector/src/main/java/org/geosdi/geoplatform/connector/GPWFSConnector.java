@@ -33,47 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs.jaxb;
+package org.geosdi.geoplatform.connector;
 
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.connector.jaxb.provider.GeoPlatformJAXBContextProvider;
-import org.geosdi.geoplatform.connector.wfs.jaxb.WFSJAXBContext.WFSJAXBContextKey;
-import org.geosdi.geoplatform.xml.wfs.WFSContextServiceProvider;
-import org.slf4j.LoggerFactory;
+import java.net.URL;
+import org.geosdi.geoplatform.connector.api.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.WFSServerConnector;
+import org.geosdi.geoplatform.connector.server.request.DescribeFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequestV110;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class WFSConnectorJAXBContext implements
-        GeoPlatformJAXBContextProvider {
+public class GPWFSConnector extends GPServerConnector<WFSServerConnector>
+        implements WFSConnector {
 
-    static {
-        try {
-            jaxbContext = new WFSJAXBContext(
-                    WFSContextServiceProvider.loadContextPath());
-        } catch (JAXBException e) {
-            LoggerFactory.getLogger(WFSConnectorJAXBContext.class).error(
-                    "Failed to Initialize JAXBContext for Class "
-                    + WFSConnectorJAXBContext.class.getName()
-                    + ": @@@@@@@@@@@@@@@@@ " + e);
-        }
+    public GPWFSConnector(URL serverURL) {
+        this(serverURL, null);
     }
-    //
-    private static WFSJAXBContext jaxbContext;
-    public static final WFSJAXBContextKey WFS_CONTEXT_KEY = new WFSJAXBContextKey();
 
-    protected WFSConnectorJAXBContext() {
+    public GPWFSConnector(URL serverURL,
+            WFSVersion theVersion) {
+        this(serverURL, null, theVersion);
+    }
+
+    public GPWFSConnector(URL serverURL,
+            GPSecurityConnector security,
+            WFSVersion theVersion) {
+        super(new WFSServerConnector(serverURL, security, theVersion));
     }
 
     @Override
-    public WFSJAXBContext getJAXBProvider() {
-        return jaxbContext;
+    public WFSVersion getVersion() {
+        return server.getVersion();
     }
 
     @Override
-    public WFSJAXBContextKey getKeyProvider() {
-        return WFSConnectorJAXBContext.WFS_CONTEXT_KEY;
+    public WFSGetCapabilitiesRequest createGetCapabilitiesRequest() {
+        return server.createGetCapabilitiesRequest();
+    }
+
+    @Override
+    public DescribeFeatureRequest createDescribeFeatureTypeRequest() {
+        return server.createDescribeFeatureTypeRequest();
+    }
+
+    @Override
+    public WFSGetFeatureRequestV110 createGetFeatureRequest() {
+        return server.createGetFeatureRequest();
     }
 }

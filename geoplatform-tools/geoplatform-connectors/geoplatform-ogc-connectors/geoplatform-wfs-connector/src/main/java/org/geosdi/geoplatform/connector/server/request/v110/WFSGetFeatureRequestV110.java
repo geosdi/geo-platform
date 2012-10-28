@@ -33,18 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs.server.request;
+package org.geosdi.geoplatform.connector.server.request.v110;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.xml.wfs.v110.DescribeFeatureTypeType;
+import org.geosdi.geoplatform.connector.server.request.WFSRequest;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSDescribeFeatureTypeRequest extends WFSRequest<DescribeFeatureTypeType> {
+public class WFSGetFeatureRequestV110 extends WFSRequest<GetFeatureType> {
 
-    public WFSDescribeFeatureTypeRequest(GPServerConnector server) {
+    public WFSGetFeatureRequestV110(GPServerConnector server) {
         super(server);
+    }
+
+    @Override
+    protected Object createRequest() throws IllegalParameterFault {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

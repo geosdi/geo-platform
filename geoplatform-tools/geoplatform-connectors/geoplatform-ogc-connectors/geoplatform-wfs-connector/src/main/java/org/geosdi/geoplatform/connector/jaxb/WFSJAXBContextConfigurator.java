@@ -33,43 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector.jaxb;
 
-import java.net.URL;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.springframework.context.annotation.Bean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
-        implements GPConnectorBuilder<B> {
+public class WFSJAXBContextConfigurator {
 
-    protected URL serverUrl;
-    protected GPSecurityConnector securityConnector;
-    protected String version;
+    /**
+     * Create an Instance for WFSConnectorJAXBContext and register it in
+     * GeoPlatformJAXBContextRepository with the specific Key.
+     *
+     * @return WFSConnectorJAXBContext
+     */
+    public @Bean(name = "WFSConnectorJAXBContext")
+    WFSConnectorJAXBContext WFSConnectorJAXBContext() {
 
-    protected AbstractConnectorBuilder() {
+        WFSConnectorJAXBContext wfsJAXBContext = new WFSConnectorJAXBContext();
+
+        JAXBContextConnectorRepository.registerProvider(
+                wfsJAXBContext.getKeyProvider(),
+                wfsJAXBContext.getJAXBProvider());
+
+        return wfsJAXBContext;
     }
-
-    @Override
-    public B withClientSecurity(GPSecurityConnector theSecurityConnector) {
-        this.securityConnector = theSecurityConnector;
-        return (B) this;
-    }
-
-    @Override
-    public B withServerUrl(URL theServerUrl) {
-        this.serverUrl = theServerUrl;
-        return (B) this;
-    }
-
-    @Override
-    public B withVersion(String theVersion) {
-        this.version = theVersion;
-        return (B) this;
-    }
-
-    public abstract C build();
 }

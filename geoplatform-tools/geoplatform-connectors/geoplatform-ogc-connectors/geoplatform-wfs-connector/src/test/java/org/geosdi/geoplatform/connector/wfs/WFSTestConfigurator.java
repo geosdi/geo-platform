@@ -33,43 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector.wfs;
 
+import java.net.MalformedURLException;
 import java.net.URL;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.connector.GPWFSConnector;
+import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
+import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
+import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.services.GPWFSService;
+import org.junit.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GPServerConnector>
-        implements GPConnectorBuilder<B> {
+public class WFSTestConfigurator {
 
-    protected URL serverUrl;
-    protected GPSecurityConnector securityConnector;
-    protected String version;
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private final String wfsURL = "http://150.145.133.87:8080/geoserver/wfs";
+    //
+    private final String wfsSecureURL = "http://dpc.geosdi.org/geoserver/wfs";
+    protected GPConnectorJAXBContext wfsContext = JAXBContextConnectorRepository.getProvider(
+            WFSConnectorJAXBContext.WFS_CONTEXT_KEY);
+    protected GPWFSConnector serverConnector;
+    protected GPWFSConnector secureServerConnector;
 
-    protected AbstractConnectorBuilder() {
+    @Before
+    public void setUp() throws MalformedURLException {
+        this.serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
+                new URL(wfsURL)).build();
+
+        this.secureServerConnector = WFSConnectorBuilder.newConnector().withServerUrl(
+                new URL(wfsSecureURL)).withClientSecurity(new BasicPreemptiveSecurityConnector(
+                "dpcadmin", "geoserverdpc")).build();
     }
-
-    @Override
-    public B withClientSecurity(GPSecurityConnector theSecurityConnector) {
-        this.securityConnector = theSecurityConnector;
-        return (B) this;
-    }
-
-    @Override
-    public B withServerUrl(URL theServerUrl) {
-        this.serverUrl = theServerUrl;
-        return (B) this;
-    }
-
-    @Override
-    public B withVersion(String theVersion) {
-        this.version = theVersion;
-        return (B) this;
-    }
-
-    public abstract C build();
 }

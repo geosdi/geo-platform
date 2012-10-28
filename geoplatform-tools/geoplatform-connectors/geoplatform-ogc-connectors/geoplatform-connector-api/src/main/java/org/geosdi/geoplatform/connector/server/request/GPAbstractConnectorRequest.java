@@ -65,12 +65,12 @@ public abstract class GPAbstractConnectorRequest<T>
 
     public GPAbstractConnectorRequest(GPServerConnector server) {
         this(server.getClientConnection(), server.getURI(),
-             server.getSecurityConnector());
+                server.getSecurityConnector());
     }
 
     public GPAbstractConnectorRequest(DefaultHttpClient theClientConnection,
-            URI theServerURI, GPSecurityConnector theSecurityConnector) {
-
+            URI theServerURI,
+            GPSecurityConnector theSecurityConnector) {
         this.clientConnection = theClientConnection;
         this.serverURI = theServerURI;
         this.securityConnector = (theSecurityConnector == null
@@ -86,7 +86,7 @@ public abstract class GPAbstractConnectorRequest<T>
         HttpParams httpParams = this.clientConnection.getParams();
 
         httpParams.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
-                                GeoPlatformHTTP.CONTENT_TYPE_XML);
+                GeoPlatformHTTP.CONTENT_TYPE_XML);
 
         httpParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, "UTF-8");
 

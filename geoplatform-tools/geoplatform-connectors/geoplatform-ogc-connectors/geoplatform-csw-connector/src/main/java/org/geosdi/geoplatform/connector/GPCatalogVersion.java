@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public enum GPCatalogVersion {
 
@@ -53,5 +53,17 @@ public enum GPCatalogVersion {
     @Override
     public String toString() {
         return this.code.toString();
+    }
+
+    public static GPCatalogVersion fromString(String version) {
+        if ((version != null) && (!version.equals(""))) {
+            for (GPCatalogVersion v : GPCatalogVersion.values()) {
+                if (v.code.equalsIgnoreCase(version)) {
+                    return v;
+                }
+            }
+        }
+
+        return GPCatalogVersion.V202;
     }
 }

@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.10.26 at 03:16:42 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.util.ArrayList;
@@ -19,16 +17,16 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * 
- *             A list of feature types available from  this server.
- *          
- * 
+ *
+ * A list of feature types available from this server.
+ *
+ *
  * <p>Java class for FeatureTypeListType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="FeatureTypeListType">
  *   &lt;complexContent>
@@ -41,8 +39,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FeatureTypeListType", propOrder = {
@@ -50,8 +48,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "featureType"
 })
 public class FeatureTypeListType
-    implements ToString
-{
+        implements ToString {
 
     @XmlElement(name = "Operations")
     protected OperationsType operations;
@@ -60,11 +57,9 @@ public class FeatureTypeListType
 
     /**
      * Gets the value of the operations property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OperationsType }
-     *     
+     *
+     * @return possible object is {@link OperationsType }
+     *
      */
     public OperationsType getOperations() {
         return operations;
@@ -72,11 +67,9 @@ public class FeatureTypeListType
 
     /**
      * Sets the value of the operations property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OperationsType }
-     *     
+     *
+     * @param value allowed object is {@link OperationsType }
+     *
      */
     public void setOperations(OperationsType value) {
         this.operations = value;
@@ -84,25 +77,22 @@ public class FeatureTypeListType
 
     /**
      * Gets the value of the featureType property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the featureType property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the featureType property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getFeatureType().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link FeatureTypeType }
-     * 
-     * 
+     *
+     *
      */
     public List<FeatureTypeType> getFeatureType() {
         if (featureType == null) {
@@ -118,23 +108,29 @@ public class FeatureTypeListType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             OperationsType theOperations;
             theOperations = this.getOperations();
-            strategy.appendField(locator, this, "operations", buffer, theOperations);
+            strategy.appendField(locator, this, "operations", buffer,
+                    theOperations);
         }
         {
             List<FeatureTypeType> theFeatureType;
-            theFeatureType = (((this.featureType!= null)&&(!this.featureType.isEmpty()))?this.getFeatureType():null);
-            strategy.appendField(locator, this, "featureType", buffer, theFeatureType);
+            theFeatureType = (((this.featureType != null) && (!this.featureType.isEmpty())) ? this.getFeatureType() : null);
+            strategy.appendField(locator, this, "featureType", buffer,
+                    theFeatureType);
         }
         return buffer;
     }
@@ -144,5 +140,4 @@ public class FeatureTypeListType
         List<FeatureTypeType> draftl = this.getFeatureType();
         draftl.addAll(value);
     }
-
 }

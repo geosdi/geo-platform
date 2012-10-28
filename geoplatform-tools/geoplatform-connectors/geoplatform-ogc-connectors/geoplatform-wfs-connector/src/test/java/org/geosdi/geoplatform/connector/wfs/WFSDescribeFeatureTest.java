@@ -33,33 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs.jaxb;
+package org.geosdi.geoplatform.connector.wfs;
 
-import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
-import org.springframework.context.annotation.Bean;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.namespace.QName;
+import org.geosdi.geoplatform.connector.server.request.DescribeFeatureRequest;
+import org.geosdi.geoplatform.xml.wfs.v110.FeatureTypeListType;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSJAXBContextConfigurator {
+public class WFSDescribeFeatureTest extends WFSTestConfigurator {
 
-    /**
-     * Create an Instance for WFSConnectorJAXBContext and register it in
-     * GeoPlatformJAXBContextRepository with the specific Key.
-     *
-     * @return WFSConnectorJAXBContext
-     */
-    public @Bean(name = "WFSConnectorJAXBContext")
-    WFSConnectorJAXBContext WFSConnectorJAXBContext() {
+    @Ignore
+    @Test
+    public void testDescribeFeatureV110() throws Exception {
+        DescribeFeatureRequest<FeatureTypeListType> request = super.serverConnector.createDescribeFeatureTypeRequest();
 
-        WFSConnectorJAXBContext wfsJAXBContext = new WFSConnectorJAXBContext();
+        List<QName> typeName = new ArrayList<QName>();
 
-        JAXBContextConnectorRepository.registerProvider(
-                wfsJAXBContext.getKeyProvider(),
-                wfsJAXBContext.getJAXBProvider());
+        QName name = new QName("topp:states");
 
-        return wfsJAXBContext;
+        typeName.add(name);
+
+        request.setTypeName(typeName);
+
+        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
+                + request.getResponse());
     }
 }

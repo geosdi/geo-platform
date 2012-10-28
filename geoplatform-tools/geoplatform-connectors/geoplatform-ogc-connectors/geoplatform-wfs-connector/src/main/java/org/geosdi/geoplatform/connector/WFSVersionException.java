@@ -33,64 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs.server.request;
+package org.geosdi.geoplatform.connector;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import org.apache.http.HttpEntity;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.GPPostConnectorRequest;
-import org.geosdi.geoplatform.connector.wfs.jaxb.WFSConnectorJAXBContext;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
+import java.io.Serializable;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
+public class WFSVersionException extends RuntimeException
+        implements Serializable {
 
-    static {
-        cswContext = JAXBContextConnectorRepository.getProvider(
-                WFSConnectorJAXBContext.WFS_CONTEXT_KEY);
-    }
-    //
-    protected static final GPConnectorJAXBContext cswContext;
+    private static final long serialVersionUID = 6963970153136205442L;
 
-    public WFSRequest(GPServerConnector server) {
-        super(server);
+    public WFSVersionException() {
     }
 
-    @Override
-    public Marshaller getMarshaller() throws JAXBException {
-        return cswContext.acquireMarshaller();
+    public WFSVersionException(String message) {
+        super(message);
     }
 
-    @Override
-    public Unmarshaller getUnmarshaller() throws JAXBException {
-        return cswContext.acquireUnmarshaller();
+    public WFSVersionException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    @Override
-    protected HttpEntity preparePostEntity()
-            throws IllegalParameterFault, JAXBException, UnsupportedEncodingException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public T getResponse()
-            throws IllegalParameterFault, ServerInternalFault, IOException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String getResponseAsString()
-            throws ServerInternalFault, IOException, IllegalParameterFault {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public WFSVersionException(Throwable cause) {
+        super(cause);
     }
 }

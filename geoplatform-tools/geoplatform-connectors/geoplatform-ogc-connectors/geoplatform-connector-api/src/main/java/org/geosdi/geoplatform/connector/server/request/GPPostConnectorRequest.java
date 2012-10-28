@@ -35,10 +35,23 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.util.EntityUtils;
+import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
@@ -78,9 +91,100 @@ public abstract class GPPostConnectorRequest<T>
             this.postMethod.setEntity(this.preparePostEntity());
 
         } catch (UnsupportedEncodingException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ UnsupportedEncodingException *** {} ***", ex.getMessage());
+            logger.error(
+                    "\n@@@@@@@@@@@@@@@@@@ UnsupportedEncodingException *** {} ***",
+                    ex.getMessage());
             throw new ServerInternalFault("*** UnsupportedEncodingException ***");
         }
+    }
+
+    @Override
+    public T getResponse()
+            throws IllegalParameterFault, ServerInternalFault, IOException {
+        T response = null;
+
+        try {
+            HttpResponse httpResponse = super.securityConnector.secure(
+                    this, this.getPostMethod());
+            HttpEntity responseEntity = httpResponse.getEntity();
+            if (responseEntity != null) {
+                InputStream is = responseEntity.getContent();
+
+                Unmarshaller unmarshaller = getUnmarshaller();
+                Object content = unmarshaller.unmarshal(is);
+                if (!(content instanceof JAXBElement)) { // ExceptionReport
+                    logger.error("\n#############\n{}\n#############", content);
+                    throw new ServerInternalFault(
+                            "Connector Server Error: incorrect responce");
+                }
+
+                JAXBElement<T> elementType = (JAXBElement<T>) content;
+
+                response = elementType.getValue();
+
+                EntityUtils.consume(responseEntity);
+            } else {
+                throw new ServerInternalFault("Connector Server Error: Connection "
+                        + "problem");
+            }
+
+        } catch (JAXBException ex) {
+            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
+                    ex.getMessage());
+            throw new ServerInternalFault("*** JAXBException ***" + ex);
+
+        } catch (ClientProtocolException ex) {
+            logger.error(
+                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
+                    ex.getMessage());
+            throw new ServerInternalFault("*** ClientProtocolException ***");
+
+        }
+
+        return response;
+    }
+
+    @Override
+    public String getResponseAsString() throws ServerInternalFault, IOException,
+            IllegalParameterFault {
+        Writer writer = new StringWriter();
+        try {
+            HttpResponse httpResponse = super.securityConnector.secure(
+                    this, this.getPostMethod());
+            HttpEntity responseEntity = httpResponse.getEntity();
+
+            if (responseEntity != null) {
+                InputStream is = responseEntity.getContent();
+
+                char[] buffer = new char[1024];
+
+                Reader reader = new BufferedReader(
+                        new InputStreamReader(is, "UTF-8"));
+                int n;
+                while ((n = reader.read(buffer)) != -1) {
+                    writer.write(buffer, 0, n);
+                }
+
+                EntityUtils.consume(responseEntity);
+            } else {
+                throw new ServerInternalFault("Connector Server Error: Connection "
+                        + "problem");
+            }
+
+        } catch (JAXBException ex) {
+            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
+                    ex.getMessage());
+            throw new ServerInternalFault("*** JAXBException ***");
+
+        } catch (ClientProtocolException ex) {
+            logger.error(
+                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
+                    ex.getMessage());
+            throw new ServerInternalFault("*** ClientProtocolException ***");
+
+        }
+
+        return writer.toString();
     }
 
     protected abstract HttpEntity preparePostEntity()

@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.10.26 at 03:16:42 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.wfs.v110;
 
 import java.math.BigInteger;
@@ -21,20 +19,19 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * 
- *             This type defines a container for the response to a 
- *             GetFeature or GetFeatureWithLock request.  If the
- *             request is GetFeatureWithLock, the lockId attribute
- *             must be populated.  The lockId attribute can otherwise
- *             be safely ignored.
- *          
- * 
+ *
+ * This type defines a container for the response to a GetFeature or
+ * GetFeatureWithLock request. If the request is GetFeatureWithLock, the lockId
+ * attribute must be populated. The lockId attribute can otherwise be safely
+ * ignored.
+ *
+ *
  * <p>Java class for FeatureCollectionType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="FeatureCollectionType">
  *   &lt;complexContent>
@@ -46,15 +43,14 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FeatureCollectionType")
 public class FeatureCollectionType
-    extends AbstractFeatureCollectionType
-    implements ToString
-{
+        extends AbstractFeatureCollectionType
+        implements ToString {
 
     @XmlAttribute(name = "lockId")
     protected String lockId;
@@ -67,11 +63,9 @@ public class FeatureCollectionType
 
     /**
      * Gets the value of the lockId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getLockId() {
         return lockId;
@@ -79,11 +73,9 @@ public class FeatureCollectionType
 
     /**
      * Sets the value of the lockId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setLockId(String value) {
         this.lockId = value;
@@ -91,11 +83,9 @@ public class FeatureCollectionType
 
     /**
      * Gets the value of the timeStamp property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is {@link XMLGregorianCalendar }
+     *
      */
     public XMLGregorianCalendar getTimeStamp() {
         return timeStamp;
@@ -103,11 +93,9 @@ public class FeatureCollectionType
 
     /**
      * Sets the value of the timeStamp property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is {@link XMLGregorianCalendar }
+     *
      */
     public void setTimeStamp(XMLGregorianCalendar value) {
         this.timeStamp = value;
@@ -115,11 +103,9 @@ public class FeatureCollectionType
 
     /**
      * Gets the value of the numberOfFeatures property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is {@link BigInteger }
+     *
      */
     public BigInteger getNumberOfFeatures() {
         return numberOfFeatures;
@@ -127,11 +113,9 @@ public class FeatureCollectionType
 
     /**
      * Sets the value of the numberOfFeatures property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is {@link BigInteger }
+     *
      */
     public void setNumberOfFeatures(BigInteger value) {
         this.numberOfFeatures = value;
@@ -144,14 +128,18 @@ public class FeatureCollectionType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             String theLockId;
@@ -161,14 +149,15 @@ public class FeatureCollectionType
         {
             XMLGregorianCalendar theTimeStamp;
             theTimeStamp = this.getTimeStamp();
-            strategy.appendField(locator, this, "timeStamp", buffer, theTimeStamp);
+            strategy.appendField(locator, this, "timeStamp", buffer,
+                    theTimeStamp);
         }
         {
             BigInteger theNumberOfFeatures;
             theNumberOfFeatures = this.getNumberOfFeatures();
-            strategy.appendField(locator, this, "numberOfFeatures", buffer, theNumberOfFeatures);
+            strategy.appendField(locator, this, "numberOfFeatures", buffer,
+                    theNumberOfFeatures);
         }
         return buffer;
     }
-
 }

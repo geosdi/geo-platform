@@ -33,16 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs.server;
+package org.geosdi.geoplatform.connector.server;
 
 import java.net.URL;
-import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
+import org.geosdi.geoplatform.connector.WFSVersion;
+import org.geosdi.geoplatform.connector.WFSVersionException;
+import org.geosdi.geoplatform.connector.server.request.DescribeFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.v110.WFSDescribeFeatureTypeRequestV110;
+import org.geosdi.geoplatform.connector.server.request.v110.WFSGetCapabilitiesRequestV110;
+import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequestV110;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.connector.wfs.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.wfs.WFSVersion;
-import org.geosdi.geoplatform.connector.wfs.WFSVersionException;
-import org.geosdi.geoplatform.connector.wfs.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.wfs.server.request.WFSGetFeatureRequest;
 
 /**
  *
@@ -104,9 +105,9 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @return {@link WFSGetCapabilitiesRequest}
      */
     public WFSGetCapabilitiesRequest createGetCapabilitiesRequest() {
-        switch (version) {
+        switch (getVersion()) {
             case V110:
-                return new WFSGetCapabilitiesRequest(this);
+                return new WFSGetCapabilitiesRequestV110(this);
             default:
                 throw new WFSVersionException(
                         "The version for WFS must be 1.1.0");
@@ -119,10 +120,10 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      *
      * @return {@link WFSDescribeFeatureTypeRequest}
      */
-    public WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest() {
-        switch (version) {
+    public DescribeFeatureRequest createDescribeFeatureTypeRequest() {
+        switch (getVersion()) {
             case V110:
-                return new WFSDescribeFeatureTypeRequest(this);
+                return new WFSDescribeFeatureTypeRequestV110(this);
             default:
                 throw new WFSVersionException(
                         "The version for WFS must be 1.1.0");
@@ -135,14 +136,21 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      *
      * @return {@link WFSGetFeatureRequest}
      */
-    public WFSGetFeatureRequest createGetFeatureRequest() {
-        switch (version) {
+    public WFSGetFeatureRequestV110 createGetFeatureRequest() {
+        switch (getVersion()) {
             case V110:
-                return new WFSGetFeatureRequest(this);
+                return new WFSGetFeatureRequestV110(this);
             default:
                 throw new WFSVersionException(
                         "The version for WFS must be 1.1.0");
         }
+    }
+
+    /**
+     * @return the version
+     */
+    public WFSVersion getVersion() {
+        return version;
     }
 
     /**

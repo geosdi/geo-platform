@@ -33,11 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs;
+package org.geosdi.geoplatform.connector;
 
-import org.geosdi.geoplatform.connector.wfs.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.wfs.server.request.WFSGetFeatureRequest;
-import org.geosdi.geoplatform.connector.wfs.server.request.WFSGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.DescribeFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequestV110;
 
 /**
  *
@@ -45,11 +45,11 @@ import org.geosdi.geoplatform.connector.wfs.server.request.WFSGetCapabilitiesReq
  */
 public interface WFSConnector {
 
-    WFSConnector getVersion();
+    WFSVersion getVersion();
 
     WFSGetCapabilitiesRequest createGetCapabilitiesRequest();
 
-    WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest();
+    DescribeFeatureRequest createDescribeFeatureTypeRequest();
 
-    WFSGetFeatureRequest createGetFeatureRequest();
+    WFSGetFeatureRequestV110 createGetFeatureRequest();
 }

@@ -51,25 +51,24 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 public class GPCSWServerConnector extends GPServerConnector<GPCatalogServerConnector>
         implements GeoPlatformCSWConnector {
 
-    private GPCatalogVersion version;
-
     public GPCSWServerConnector(URL serverURL) {
-        this(serverURL, GPCatalogVersion.V202);
+        this(serverURL, null);
     }
 
-    public GPCSWServerConnector(URL serverURL, GPCatalogVersion theVersion) {
+    public GPCSWServerConnector(URL serverURL,
+            GPCatalogVersion theVersion) {
         this(serverURL, null, theVersion);
     }
 
-    public GPCSWServerConnector(URL serverURL, GPSecurityConnector security,
+    public GPCSWServerConnector(URL serverURL,
+            GPSecurityConnector security,
             GPCatalogVersion theVersion) {
-        this.server = new GPCatalogServerConnector(serverURL, security, theVersion);
-        this.version = theVersion;
+        super(new GPCatalogServerConnector(serverURL, security, theVersion));
     }
 
     @Override
     public GPCatalogVersion getVersion() {
-        return this.version;
+        return server.getVersion();
     }
 
     @Override

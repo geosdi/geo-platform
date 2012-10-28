@@ -120,6 +120,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void reset() {
+        grid.stopEditing(true);
         store.removeAll();
         disableButtons();
     }

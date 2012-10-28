@@ -68,6 +68,5 @@ public class EditWFSAction extends MenuBaseAction {
                 "Checking if " + layer.getName() + " is a Vector Layer.");
 
         this.layerTypeHandlerManager.forwardLayerType(layer);
-        System.out.println("\n################### LAYER TYPE retrieved: " + layer.getLayerType());
     }
 }

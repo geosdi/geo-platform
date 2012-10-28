@@ -61,7 +61,8 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @param urlServer the String that represent WFS server URL
      * @param version the value of WFS version. Must be 1.1.0
      */
-    public WFSServerConnector(String urlServer, String version) {
+    public WFSServerConnector(String urlServer,
+            String version) {
         this(urlServer, null, version);
     }
 

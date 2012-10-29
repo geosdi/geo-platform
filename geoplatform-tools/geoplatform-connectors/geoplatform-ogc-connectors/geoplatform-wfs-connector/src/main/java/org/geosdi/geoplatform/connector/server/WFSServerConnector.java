@@ -106,7 +106,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @return {@link WFSGetCapabilitiesRequest}
      */
     public WFSGetCapabilitiesRequest createGetCapabilitiesRequest() {
-        switch (getVersion()) {
+        switch (version) {
             case V110:
                 return new WFSGetCapabilitiesRequestV110(this);
             default:
@@ -122,7 +122,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @return {@link WFSDescribeFeatureTypeRequest}
      */
     public DescribeFeatureRequest createDescribeFeatureTypeRequest() {
-        switch (getVersion()) {
+        switch (version) {
             case V110:
                 return new WFSDescribeFeatureTypeRequestV110(this);
             default:
@@ -138,7 +138,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @return {@link WFSGetFeatureRequest}
      */
     public WFSGetFeatureRequestV110 createGetFeatureRequest() {
-        switch (getVersion()) {
+        switch (version) {
             case V110:
                 return new WFSGetFeatureRequestV110(this);
             default:

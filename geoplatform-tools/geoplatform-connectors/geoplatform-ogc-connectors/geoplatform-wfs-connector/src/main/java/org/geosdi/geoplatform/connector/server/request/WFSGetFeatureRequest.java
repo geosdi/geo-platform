@@ -36,12 +36,25 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.math.BigInteger;
+import javax.xml.namespace.QName;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
+
+    /**
+     *
+     * @return
+     */
+    QName getTypeName();
+
+    /**
+     *
+     * @param typeName
+     */
+    void setTypeName(QName typeName);
 
     /**
      * Gets the value of the query property.
@@ -65,7 +78,7 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
      *
      * <ul> <li>results</li> <li>hits</li> </ul>
      *
-     * <p>The default value is results.</p>
+     * <p>Default value is "results".</p>
      */
     void setResultType(String resultType);
 
@@ -88,6 +101,10 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
 
     /**
      * Sets the value of the maxFeatures property.
+     *
+     * <p>There is no default value defined and the absence of the attribute
+     * means that all feature type instances in the result should should be
+     * returned to the client.</p>
      */
     void setMaxFeatures(BigInteger value);
 }

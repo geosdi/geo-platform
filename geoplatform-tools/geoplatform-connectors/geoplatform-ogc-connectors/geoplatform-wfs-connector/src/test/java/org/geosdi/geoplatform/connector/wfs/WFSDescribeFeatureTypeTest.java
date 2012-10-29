@@ -50,14 +50,14 @@ import org.junit.Test;
  */
 public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
 
-    @Ignore
+    @Ignore("WFS")
     @Test
     public void testDescribeFeatureV110() throws Exception {
         WFSDescribeFeatureTypeRequest<FeatureTypeListType> request = super.serverConnector.createDescribeFeatureTypeRequest();
 
         List<QName> typeName = new ArrayList<QName>();
 
-        QName name = new QName("topp:states");
+        QName name = new QName("http://www.openplans.org/topp", "states");
 
         typeName.add(name);
 

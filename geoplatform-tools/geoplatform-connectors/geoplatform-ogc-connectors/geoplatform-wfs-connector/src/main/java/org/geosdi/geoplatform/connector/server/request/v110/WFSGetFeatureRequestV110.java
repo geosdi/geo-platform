@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110;
 
+import java.util.Arrays;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
+import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 
 /**
@@ -55,7 +57,15 @@ public class WFSGetFeatureRequestV110
 
     @Override
     protected Object createRequest() throws IllegalParameterFault {
+        if (typeName == null) {
+            throw new IllegalArgumentException("typeName must not be null.");
+        }
+
         GetFeatureType request = new GetFeatureType();
+
+        QueryType query = new QueryType();
+        query.setTypeName(Arrays.asList(typeName));
+        request.getQuery().add(query);
 
         if (resultType != null) {
             request.setResultType(ResultTypeType.fromValue(resultType));
@@ -68,6 +78,8 @@ public class WFSGetFeatureRequestV110
         if (maxFeatures != null) {
             request.setMaxFeatures(maxFeatures);
         }
+        
+//        logger.info("\n\n\n{}\n\n\n", request);
 
         return request;
     }

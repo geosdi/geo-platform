@@ -48,7 +48,7 @@ import org.junit.Test;
  */
 public class WFSGetCapabilitiesTest extends WFSTestConfigurator {
 
-    @Ignore
+    @Ignore("WFS")
     @Test
     public void testWFSGetCapabilitiesV110() throws Exception {
         WFSGetCapabilitiesRequest<WFSCapabilitiesType> request = this.serverConnector.createGetCapabilitiesRequest();
@@ -73,7 +73,7 @@ public class WFSGetCapabilitiesTest extends WFSTestConfigurator {
         }
     }
 
-    @Ignore
+    @Ignore("WFS")
     @Test
     public void testSecureWFSGetCapabilitiesV110() throws Exception {
         WFSGetCapabilitiesRequest<WFSCapabilitiesType> request = this.secureServerConnector.createGetCapabilitiesRequest();

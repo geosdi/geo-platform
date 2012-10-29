@@ -33,74 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.wfs;
 
-import java.math.BigInteger;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T>
-        implements WFSGetFeatureRequest<T> {
+public class WFSGetFeatureTest extends WFSTestConfigurator {
 
-    protected QName typeName;
-    protected String resultType;
-    protected String outputFormat;
-    protected BigInteger maxFeatures;
+    @Ignore("WFS")
+    @Test
+    public void getFeatureSingle() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request =
+                super.serverConnector.createGetFeatureRequest();
+        
+        QName typeName = new QName("http://www.openplans.org/topp", "states");
+        request.setTypeName(typeName);
 
-    public AbstractGetFeatureRequest(GPServerConnector server) {
-        super(server);
-    }
-
-    @Override
-    public QName getTypeName() {
-        return typeName;
-    }
-
-    @Override
-    public void setTypeName(QName typeName) {
-        this.typeName = typeName;
-    }
-
-    @Override
-    public String getResultType() {
-        return resultType;
-    }
-
-    @Override
-    public void setResultType(String resultType) {
-        this.resultType = resultType;
-    }
-
-    @Override
-    public String getOutputFormat() {
-        return outputFormat;
-    }
-
-    @Override
-    public void setOutputFormat(String outputFormat) {
-        this.outputFormat = outputFormat;
-    }
-
-    @Override
-    public BigInteger getMaxFeatures() {
-        return maxFeatures;
-    }
-
-    @Override
-    public void setMaxFeatures(BigInteger maxFeatures) {
-        this.maxFeatures = maxFeatures;
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractGetFeatureRequest{"
-                + "typeName=" + typeName
-                + ", resultType=" + resultType
-                + ", outputFormat=" + outputFormat
-                + ", maxFeatures=" + maxFeatures + '}';
+        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                    request.getResponseAsString());
     }
 }

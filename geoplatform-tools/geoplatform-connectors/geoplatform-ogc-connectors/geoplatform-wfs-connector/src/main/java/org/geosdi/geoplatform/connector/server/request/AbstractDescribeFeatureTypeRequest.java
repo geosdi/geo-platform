@@ -37,41 +37,46 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import java.util.List;
 import javax.xml.namespace.QName;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface DescribeFeatureRequest<T> extends GPConnectorRequest<T> {
+public abstract class AbstractDescribeFeatureTypeRequest<T> extends WFSRequest<T>
+        implements WFSDescribeFeatureTypeRequest<T> {
 
-    /**
-     * Set the value of the typeName property
-     *
-     * @param typeName
-     */
-    void setTypeName(List<QName> typeName);
+    protected List<QName> typeName;
+    protected String outputFormat;
 
-    /**
-     * Gets the value of the typeName property.
-     *
-     * @return {@link  List<QName>}
-     */
-    List<QName> getTypeName();
+    public AbstractDescribeFeatureTypeRequest(GPServerConnector server) {
+        super(server);
+    }
 
-    /**
-     * Set the value of the outputFormat property
-     *
-     * @param outputFormat
-     */
-    void setOutputFormat(String outputFormat);
-    
-    /**
-     * Gets the value of the outputFormat property
-     * 
-     * <p>Default value is "text/xml; subtype=gml/3.1.1" </p>
-     * 
-     * @return {@link String}
-     */
-    String getOutputFormat();
+    @Override
+    public void setTypeName(List<QName> typeName) {
+        this.typeName = typeName;
+    }
+
+    @Override
+    public List<QName> getTypeName() {
+        return this.typeName;
+    }
+
+    @Override
+    public void setOutputFormat(String outputFormat) {
+        this.outputFormat = outputFormat;
+    }
+
+    @Override
+    public String getOutputFormat() {
+        return this.outputFormat;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractDescribeFeatureRequest{ " + "typeName = " + typeName
+                + ", outputFormat = " + outputFormat + '}';
+    }
 }

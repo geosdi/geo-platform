@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request.v110;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.AbstractDescribeFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.AbstractDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.wfs.v110.DescribeFeatureTypeType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureTypeListType;
@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.xml.wfs.v110.FeatureTypeListType;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class WFSDescribeFeatureTypeRequestV110
-        extends AbstractDescribeFeatureRequest<FeatureTypeListType> {
+        extends AbstractDescribeFeatureTypeRequest<FeatureTypeListType> {
 
     public WFSDescribeFeatureTypeRequestV110(GPServerConnector server) {
         super(server);

@@ -33,37 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs;
+package org.geosdi.geoplatform.connector.server.request;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.server.request.DescribeFeatureRequest;
-import org.geosdi.geoplatform.xml.wfs.v110.FeatureTypeListType;
-import org.junit.Ignore;
-import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSDescribeFeatureTest extends WFSTestConfigurator {
+public interface WFSDescribeFeatureTypeRequest<T> extends GPConnectorRequest<T> {
 
-    @Ignore
-    @Test
-    public void testDescribeFeatureV110() throws Exception {
-        DescribeFeatureRequest<FeatureTypeListType> request = super.serverConnector.createDescribeFeatureTypeRequest();
+    /**
+     * Set the value of the typeName property.
+     *
+     * @param typeName
+     */
+    void setTypeName(List<QName> typeName);
 
-        List<QName> typeName = new ArrayList<QName>();
+    /**
+     * Gets the value of the typeName property.
+     *
+     * @return {@link  List<QName>}
+     */
+    List<QName> getTypeName();
 
-        QName name = new QName("topp:states");
-
-        typeName.add(name);
-
-        request.setTypeName(typeName);
-
-        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                + request.getResponse());
-    }
+    /**
+     * Set the value of the outputFormat property.
+     *
+     * @param outputFormat
+     */
+    void setOutputFormat(String outputFormat);
+    
+    /**
+     * Gets the value of the outputFormat property.
+     * 
+     * <p>Default value is "text/xml; subtype=gml/3.1.1".</p>
+     * 
+     * @return {@link String}
+     */
+    String getOutputFormat();
 }

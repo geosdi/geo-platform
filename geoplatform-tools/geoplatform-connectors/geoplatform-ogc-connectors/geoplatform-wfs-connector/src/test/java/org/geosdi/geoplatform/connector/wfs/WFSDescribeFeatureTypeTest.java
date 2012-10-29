@@ -33,50 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.wfs;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
+import org.geosdi.geoplatform.xml.wfs.v110.FeatureTypeListType;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractDescribeFeatureRequest<T> extends WFSRequest<T>
-        implements DescribeFeatureRequest<T> {
+public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
 
-    protected List<QName> typeName;
-    protected String outputFormat;
+    @Ignore
+    @Test
+    public void testDescribeFeatureV110() throws Exception {
+        WFSDescribeFeatureTypeRequest<FeatureTypeListType> request = super.serverConnector.createDescribeFeatureTypeRequest();
 
-    public AbstractDescribeFeatureRequest(GPServerConnector server) {
-        super(server);
-    }
+        List<QName> typeName = new ArrayList<QName>();
 
-    @Override
-    public void setTypeName(List<QName> typeName) {
-        this.typeName = typeName;
-    }
+        QName name = new QName("topp:states");
 
-    @Override
-    public List<QName> getTypeName() {
-        return this.typeName;
-    }
+        typeName.add(name);
 
-    @Override
-    public void setOutputFormat(String outputFormat) {
-        this.outputFormat = outputFormat;
-    }
+        request.setTypeName(typeName);
 
-    @Override
-    public String getOutputFormat() {
-        return this.outputFormat;
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractDescribeFeatureRequest{ " + "typeName = " + typeName
-                + ", outputFormat = " + outputFormat + '}';
+        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
+                + request.getResponse());
     }
 }

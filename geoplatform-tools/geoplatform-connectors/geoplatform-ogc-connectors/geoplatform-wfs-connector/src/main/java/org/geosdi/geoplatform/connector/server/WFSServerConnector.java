@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.server;
 import java.net.URL;
 import org.geosdi.geoplatform.connector.WFSVersion;
 import org.geosdi.geoplatform.connector.WFSVersionException;
-import org.geosdi.geoplatform.connector.server.request.DescribeFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSDescribeFeatureTypeRequestV110;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSGetCapabilitiesRequestV110;
@@ -106,7 +106,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @return {@link WFSGetCapabilitiesRequest}
      */
     public WFSGetCapabilitiesRequest createGetCapabilitiesRequest() {
-        switch (getVersion()) {
+        switch (version) {
             case V110:
                 return new WFSGetCapabilitiesRequestV110(this);
             default:
@@ -121,8 +121,8 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      *
      * @return {@link WFSDescribeFeatureTypeRequest}
      */
-    public DescribeFeatureRequest createDescribeFeatureTypeRequest() {
-        switch (getVersion()) {
+    public WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest() {
+        switch (version) {
             case V110:
                 return new WFSDescribeFeatureTypeRequestV110(this);
             default:
@@ -138,7 +138,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @return {@link WFSGetFeatureRequest}
      */
     public WFSGetFeatureRequestV110 createGetFeatureRequest() {
-        switch (getVersion()) {
+        switch (version) {
             case V110:
                 return new WFSGetFeatureRequestV110(this);
             default:

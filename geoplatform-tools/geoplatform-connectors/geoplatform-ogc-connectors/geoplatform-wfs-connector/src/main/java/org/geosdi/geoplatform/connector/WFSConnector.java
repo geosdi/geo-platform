@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import org.geosdi.geoplatform.connector.server.request.DescribeFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequestV110;
 
@@ -49,7 +49,7 @@ public interface WFSConnector {
 
     WFSGetCapabilitiesRequest createGetCapabilitiesRequest();
 
-    DescribeFeatureRequest createDescribeFeatureTypeRequest();
+    WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest();
 
     WFSGetFeatureRequestV110 createGetFeatureRequest();
 }

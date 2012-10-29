@@ -54,7 +54,7 @@ public enum WFSVersion {
     }
 
     public static WFSVersion fromString(String version) {
-        if ((version != null) && (!version.equals(""))) {
+        if ((version != null) && (!version.trim().equals(""))) {
             for (WFSVersion v : WFSVersion.values()) {
                 if (v.version.equalsIgnoreCase(version)) {
                     return v;

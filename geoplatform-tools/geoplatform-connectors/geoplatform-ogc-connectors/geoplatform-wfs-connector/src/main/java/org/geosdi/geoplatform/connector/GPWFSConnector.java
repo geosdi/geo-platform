@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector;
 import java.net.URL;
 import org.geosdi.geoplatform.connector.api.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.WFSServerConnector;
-import org.geosdi.geoplatform.connector.server.request.DescribeFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequestV110;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -77,7 +77,7 @@ public class GPWFSConnector extends GPServerConnector<WFSServerConnector>
     }
 
     @Override
-    public DescribeFeatureRequest createDescribeFeatureTypeRequest() {
+    public WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest() {
         return server.createDescribeFeatureTypeRequest();
     }
 

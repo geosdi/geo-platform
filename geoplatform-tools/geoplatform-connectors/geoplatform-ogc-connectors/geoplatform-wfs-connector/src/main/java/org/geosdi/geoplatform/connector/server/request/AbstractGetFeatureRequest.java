@@ -33,42 +33,61 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v110;
+package org.geosdi.geoplatform.connector.server.request;
 
+import java.math.BigInteger;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
-import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
-import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSGetFeatureRequestV110
-        extends AbstractGetFeatureRequest<FeatureCollectionType> {
+public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T>
+        implements WFSGetFeatureRequest<T> {
 
-    public WFSGetFeatureRequestV110(GPServerConnector server) {
+    protected String resultType;
+    protected String outputFormat;
+    protected BigInteger maxFeatures;
+
+    public AbstractGetFeatureRequest(GPServerConnector server) {
         super(server);
     }
 
     @Override
-    protected Object createRequest() throws IllegalParameterFault {
-        GetFeatureType request = new GetFeatureType();
+    public String getResultType() {
+        return resultType;
+    }
 
-        if (resultType != null) {
-            request.setResultType(ResultTypeType.fromValue(resultType));
-        }
+    @Override
+    public void setResultType(String resultType) {
+        this.resultType = resultType;
+    }
 
-        if (outputFormat != null) {
-            request.setOutputFormat(outputFormat);
-        }
+    @Override
+    public String getOutputFormat() {
+        return outputFormat;
+    }
 
-        if (maxFeatures != null) {
-            request.setMaxFeatures(maxFeatures);
-        }
+    @Override
+    public void setOutputFormat(String outputFormat) {
+        this.outputFormat = outputFormat;
+    }
 
-        return request;
+    @Override
+    public BigInteger getMaxFeatures() {
+        return maxFeatures;
+    }
+
+    @Override
+    public void setMaxFeatures(BigInteger maxFeatures) {
+        this.maxFeatures = maxFeatures;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractGetFeatureRequest{"
+                + "resultType=" + resultType
+                + ", outputFormat=" + outputFormat
+                + ", maxFeatures=" + maxFeatures + '}';
     }
 }

@@ -33,42 +33,61 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v110;
+package org.geosdi.geoplatform.connector.server.request;
 
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
-import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
-import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
+import java.math.BigInteger;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSGetFeatureRequestV110
-        extends AbstractGetFeatureRequest<FeatureCollectionType> {
+public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
 
-    public WFSGetFeatureRequestV110(GPServerConnector server) {
-        super(server);
-    }
+    /**
+     * Gets the value of the query property.
+     */
+//    List<QueryType> getQuery();
+//    
+    /**
+     * Sets the value of the query property.
+     */
+//    void setQuery(List<QueryType> value);
+//    
+    /**
+     * Gets the value of the resultType property.
+     */
+    String getResultType();
 
-    @Override
-    protected Object createRequest() throws IllegalParameterFault {
-        GetFeatureType request = new GetFeatureType();
+    /**
+     * Sets the value of the resultType property.
+     *
+     * The only admissible parameters are:
+     *
+     * <ul> <li>results</li> <li>hits</li> </ul>
+     *
+     * <p>The default value is results.</p>
+     */
+    void setResultType(String resultType);
 
-        if (resultType != null) {
-            request.setResultType(ResultTypeType.fromValue(resultType));
-        }
+    /**
+     * Gets the value of the outputFormat property.
+     */
+    String getOutputFormat();
 
-        if (outputFormat != null) {
-            request.setOutputFormat(outputFormat);
-        }
+    /**
+     * Sets the value of the outputFormat property.
+     *
+     * <p>Default value is "text/xml; subtype=gml/3.1.1".</p>
+     */
+    void setOutputFormat(String outputFormat);
 
-        if (maxFeatures != null) {
-            request.setMaxFeatures(maxFeatures);
-        }
+    /**
+     * Gets the value of the maxFeatures property.
+     */
+    BigInteger getMaxFeatures();
 
-        return request;
-    }
+    /**
+     * Sets the value of the maxFeatures property.
+     */
+    void setMaxFeatures(BigInteger value);
 }

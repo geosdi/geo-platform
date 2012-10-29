@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.api.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.WFSServerConnector;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequestV110;
+import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
@@ -82,7 +82,7 @@ public class GPWFSConnector extends GPServerConnector<WFSServerConnector>
     }
 
     @Override
-    public WFSGetFeatureRequestV110 createGetFeatureRequest() {
+    public WFSGetFeatureRequest createGetFeatureRequest() {
         return server.createGetFeatureRequest();
     }
 }

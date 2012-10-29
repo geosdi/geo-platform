@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.connector.WFSVersion;
 import org.geosdi.geoplatform.connector.WFSVersionException;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSDescribeFeatureTypeRequestV110;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSGetCapabilitiesRequestV110;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequestV110;
@@ -137,7 +138,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      *
      * @return {@link WFSGetFeatureRequest}
      */
-    public WFSGetFeatureRequestV110 createGetFeatureRequest() {
+    public WFSGetFeatureRequest createGetFeatureRequest() {
         switch (version) {
             case V110:
                 return new WFSGetFeatureRequestV110(this);

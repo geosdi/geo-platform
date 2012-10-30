@@ -33,50 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler;
+package org.geosdi.geoplatform.gui.client.widget.wfs.event;
 
-import com.google.common.collect.Maps;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.event.EventObject;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.util.Attributes;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributeValuesHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureSelectHandler extends AbastractFeatureHandler {
-    
-    public FeatureSelectHandler(Vector theVectorLayer,
-            GPEventBus bus) {
-        super(theVectorLayer, bus);
-    }
-    
+public class FeatureTransactionEvent extends GwtEvent<FeatureAttributeValuesHandler> {
+
     @Override
-    public void onHandle(EventObject eventObject) {
-        System.out.println("FeatureSelectHandler @@@@@@@@@@@@@@@@");
-        
-        VectorFeature vectorFeature = super.getFeatureFromEventObject(
-                eventObject);
-        
-        vectorLayer.addFeature(vectorFeature);
-        
-        Attributes attributes = vectorFeature.getAttributes();
-        List<String> attributeNames = attributes.getAttributeNames();
-        
-        Map<String, String> attributeMap = Maps.<String, String>newHashMapWithExpectedSize(
-                attributeNames.size());
-        for (String name : attributeNames) {
-            String value = attributes.getAttributeAsString(name);
-            attributeMap.put(name, value);
-        }
-        
-        this.attributeValuesEvent.setAttributeValues(attributeMap);
-        this.attributeValuesEvent.setFeature(vectorFeature);
-        super.bus.fireEvent(this.attributeValuesEvent);
+    public Type<FeatureAttributeValuesHandler> getAssociatedType() {
+        return FeatureAttributeValuesHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(FeatureAttributeValuesHandler handler) {
+        handler.successfulTransaction();
     }
 }

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.event;
 import com.google.gwt.event.shared.GwtEvent;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributeValuesHandler;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
  *
@@ -45,14 +46,18 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributeValu
  */
 public class FeatureAttributeValuesEvent extends GwtEvent<FeatureAttributeValuesHandler> {
 
-    private Map<String, String> attributeValues;
-
-    public Map<String, String> getAttributeValues() {
-        return attributeValues;
-    }
+    private Map<String, String> values;
+    protected VectorFeature feature;
 
     public void setAttributeValues(Map<String, String> attributeValues) {
-        this.attributeValues = attributeValues;
+        this.values = attributeValues;
+    }
+
+    /**
+     * @param feature the feature to set
+     */
+    public void setFeature(VectorFeature feature) {
+        this.feature = feature;
     }
 
     @Override
@@ -62,10 +67,10 @@ public class FeatureAttributeValuesEvent extends GwtEvent<FeatureAttributeValues
 
     @Override
     protected void dispatch(FeatureAttributeValuesHandler handler) {
-        if (attributeValues == null) {
+        if (values == null) {
             handler.resetAttributeValues();
         } else {
-            handler.setAttributeValues(attributeValues);
+            handler.setValues(values, feature);
         }
     }
 }

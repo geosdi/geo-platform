@@ -48,6 +48,8 @@ import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolOptions;
  */
 public abstract class AbstractGetFeatureControlBuilder {
 
+    protected WFSProtocol wfsProtocol;
+
     public GetFeature buildControl(GetFeatureModel featureModel) {
         GetFeatureOptions gfo = new GetFeatureOptions();
 
@@ -63,12 +65,19 @@ public abstract class AbstractGetFeatureControlBuilder {
 
 
         wfsProtocolOptions.setGeometryName(featureModel.getGeometryName());
-        WFSProtocol wfsProtocol = new WFSProtocol(featureModel.getWMSLayer(),
-                                                  wfsProtocolOptions);
+        this.wfsProtocol = new WFSProtocol(featureModel.getWMSLayer(),
+                wfsProtocolOptions);
 
 
-        gfo.setProtocol(wfsProtocol);
+        gfo.setProtocol(getWfsProtocol());
         return new GetFeature(gfo);
+    }
+
+    /**
+     * @return the wfsProtocol
+     */
+    public WFSProtocol getWfsProtocol() {
+        return wfsProtocol;
     }
 
     /**

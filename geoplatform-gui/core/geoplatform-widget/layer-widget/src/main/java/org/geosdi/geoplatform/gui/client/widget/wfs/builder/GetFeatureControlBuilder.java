@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.builder;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.impl.map.control.feature.AbstractGetFeatureControlBuilder;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
@@ -44,6 +45,7 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Singleton
 public class GetFeatureControlBuilder extends AbstractGetFeatureControlBuilder {
 
     private MapWidget mapWidget;

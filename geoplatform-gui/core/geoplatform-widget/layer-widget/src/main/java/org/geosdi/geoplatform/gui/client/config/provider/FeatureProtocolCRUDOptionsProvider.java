@@ -33,50 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import com.google.common.collect.Maps;
-import java.util.List;
-import java.util.Map;
+import javax.inject.Inject;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureTransactionEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.event.EventObject;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.util.Attributes;
+import org.gwtopenmaps.openlayers.client.protocol.CRUDOptions;
+import org.gwtopenmaps.openlayers.client.protocol.Response;
+import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureSelectHandler extends AbastractFeatureHandler {
-    
-    public FeatureSelectHandler(Vector theVectorLayer,
-            GPEventBus bus) {
-        super(theVectorLayer, bus);
+public class FeatureProtocolCRUDOptionsProvider implements
+        Provider<WFSProtocolCRUDOptions> {
+
+    private GPEventBus bus;
+    private FeatureTransactionEvent transactionEvent = new FeatureTransactionEvent();
+
+    @Inject
+    public FeatureProtocolCRUDOptionsProvider(GPEventBus theBus) {
+        this.bus = theBus;
     }
-    
+
     @Override
-    public void onHandle(EventObject eventObject) {
-        System.out.println("FeatureSelectHandler @@@@@@@@@@@@@@@@");
-        
-        VectorFeature vectorFeature = super.getFeatureFromEventObject(
-                eventObject);
-        
-        vectorLayer.addFeature(vectorFeature);
-        
-        Attributes attributes = vectorFeature.getAttributes();
-        List<String> attributeNames = attributes.getAttributeNames();
-        
-        Map<String, String> attributeMap = Maps.<String, String>newHashMapWithExpectedSize(
-                attributeNames.size());
-        for (String name : attributeNames) {
-            String value = attributes.getAttributeAsString(name);
-            attributeMap.put(name, value);
-        }
-        
-        this.attributeValuesEvent.setAttributeValues(attributeMap);
-        this.attributeValuesEvent.setFeature(vectorFeature);
-        super.bus.fireEvent(this.attributeValuesEvent);
+    public WFSProtocolCRUDOptions get() {
+        return new WFSProtocolCRUDOptions(new CRUDOptions.Callback() {
+            @Override
+            public void computeResponse(Response response) {
+                if (response.success()) {
+                    bus.fireEvent(transactionEvent);
+                } else {
+                    bus.fireEvent(new FeatureStatusBarEvent(
+                            "Transaction Error",
+                            FeatureStatusBar.FeatureStatusBarType.STATUS_NOT_OK));
+                }
+            }
+        });
     }
 }

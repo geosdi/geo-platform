@@ -46,19 +46,21 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureUnSelectHandler extends AbastractFeatureHandler {
-
-    public FeatureUnSelectHandler(Vector theVectorLayer, GPEventBus bus) {
+    
+    public FeatureUnSelectHandler(Vector theVectorLayer,
+            GPEventBus bus) {
         super(theVectorLayer, bus);
     }
-
+    
     @Override
     public void onHandle(EventObject eventObject) {
         VectorFeature vectorFeature = super.getFeatureFromEventObject(
                 eventObject);
-
+        
         vectorLayer.removeFeature(vectorFeature);
-
+        
         this.attributeValuesEvent.setAttributeValues(null);
+        this.attributeValuesEvent.setFeature(null);
         super.bus.fireEvent(this.attributeValuesEvent);
     }
 }

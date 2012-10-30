@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import java.util.Map;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
  *
@@ -47,7 +48,10 @@ public interface FeatureAttributeValuesHandler extends EventHandler {
 
     Type<FeatureAttributeValuesHandler> TYPE = new Type<FeatureAttributeValuesHandler>();
 
-    void setAttributeValues(Map<String, String> attributeValues);
-    
+    void setValues(Map<String, String> attributeValues,
+            VectorFeature feature);
+
     void resetAttributeValues();
+
+    void successfulTransaction();
 }

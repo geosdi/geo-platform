@@ -52,6 +52,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.Timer;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -61,10 +62,13 @@ import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail.AttributeDeta
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.validator.TypeValidator;
 import org.geosdi.geoplatform.gui.client.widget.validator.TypeValidatorController;
+import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributeValuesHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 
 /**
  *
@@ -83,11 +87,19 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     //
     private Button saveButton;
     private Button resetButton;
+    private VectorFeature feature;
+    private GetFeatureControlBuilder featureControlBuilder;
+    private WFSProtocolCRUDOptions featureCRUDProtocol;
 
     @Inject
-    public FeatureAttributesWidget(GPEventBus bus) {
+    public FeatureAttributesWidget(GPEventBus bus,
+            GetFeatureControlBuilder theFeatureControlBuilder,
+            WFSProtocolCRUDOptions theFeatureCRUDProtocol) {
         super(true);
         this.bus = bus;
+        this.featureControlBuilder = theFeatureControlBuilder;
+        this.featureCRUDProtocol = theFeatureCRUDProtocol;
+
         this.bus.addHandler(FeatureAttributeValuesHandler.TYPE, this);
     }
 
@@ -122,6 +134,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     public void reset() {
         grid.stopEditing(true);
         store.removeAll();
+        this.feature = null;
         disableButtons();
     }
 
@@ -172,7 +185,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                     return value;
                 }
                 bus.fireEvent(new FeatureStatusBarEvent(
-                        "The value \"" + value + "\" is correct", FeatureStatusBarType.STATUS_OK));
+                        "The value \"" + value + "\" is correct",
+                        FeatureStatusBarType.STATUS_OK));
                 return value;
             }
         };
@@ -192,23 +206,23 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         super.setButtonAlign(Style.HorizontalAlignment.CENTER);
 
         resetButton = new Button("Reset", BasicWidgetResources.ICONS.delete(),
-                                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                grid.stopEditing(true);
-                store.rejectChanges();
-                disableButtons();
-            }
-        });
+                new SelectionListener<ButtonEvent>() {
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        grid.stopEditing(true);
+                        store.rejectChanges();
+                        disableButtons();
+                    }
+                });
         super.addButton(resetButton);
 
         this.saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
-                                     new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                saveAttributes();
-            }
-        });
+                new SelectionListener<ButtonEvent>() {
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        saveAttributes();
+                    }
+                });
         super.addButton(saveButton);
         this.disableButtons();
     }
@@ -223,19 +237,37 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         saveButton.enable();
     }
 
-    private void saveAttributes() {
-        // TODO
-        List<Record> modifiedRecords = store.getModifiedRecords();
-        List<AttributeDetail> modifiedAttribute =
-                Lists.newArrayListWithCapacity(modifiedRecords.size());
-        for (Record record : modifiedRecords) {
-            ModelData model = record.getModel();
-            AttributeDetail attribute = (AttributeDetail) model;
-            modifiedAttribute.add(attribute);
-        }
+    @Override
+    public void successfulTransaction() {
+        this.bus.fireEvent(new FeatureStatusBarEvent("Successful Transaction",
+                FeatureStatusBarType.STATUS_OK));
 
         store.commitChanges();
         disableButtons();
+    }
+
+    private void saveAttributes() {
+        for (Record record : store.getModifiedRecords()) {
+            ModelData model = record.getModel();
+            AttributeDetail attribute = (AttributeDetail) model;
+            feature.getAttributes().setAttribute(attribute.getName(),
+                    attribute.getValue());
+        }
+
+        this.feature.toState(VectorFeature.State.Update);
+
+        this.bus.fireEvent(new FeatureStatusBarEvent("Transaction in Progress",
+                FeatureStatusBarType.STATUS_LOADING));
+
+        Timer t = new Timer() {
+            @Override
+            public void run() {
+                featureControlBuilder.getWfsProtocol().commit(feature,
+                        featureCRUDProtocol);
+            }
+        };
+
+        t.schedule(2000);
     }
 
     private void populateStore() {
@@ -245,9 +277,12 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     @Override
-    public void setAttributeValues(Map<String, String> attributeValues) {
+    public void setValues(Map<String, String> attributeValues,
+            VectorFeature feature) {
         assert (attributeValues != null) : "Attribute values must not be null.";
         assert (attributes != null) : "Attributes must not be null.";
+
+        this.feature = feature;
 
         grid.mask("Retrieve feature attributes");
 
@@ -269,12 +304,14 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     private Validator attributeValuesValidator() {
         return new Validator() {
             @Override
-            public String validate(Field<?> field, String value) {
+            public String validate(Field<?> field,
+                    String value) {
                 AttributeDetail selectedItem = grid.getSelectionModel().getSelectedItem();
                 String type = selectedItem.getType();
                 String typeName = type.substring(type.lastIndexOf(".") + 1);
 //                System.out.println("*** " + typeName + " - value: " + value);
-                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(type);
+                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(
+                        type);
                 if (!validator.validateType(value)) {
                     String errorValidation = "The value must be of " + typeName + " type";
                     bus.fireEvent(new FeatureStatusBarEvent(

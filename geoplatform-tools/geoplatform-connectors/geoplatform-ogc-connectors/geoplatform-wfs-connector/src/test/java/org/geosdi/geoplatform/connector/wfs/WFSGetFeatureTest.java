@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -68,7 +67,6 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         Assert.assertEquals(49, response.getNumberOfFeatures().intValue());
     }
 
-//    @Ignore("WFS")
     @Test
     public void statesResults() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request =

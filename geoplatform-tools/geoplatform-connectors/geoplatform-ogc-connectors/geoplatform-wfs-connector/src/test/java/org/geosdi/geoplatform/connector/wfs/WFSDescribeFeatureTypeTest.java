@@ -38,32 +38,33 @@ package org.geosdi.geoplatform.connector.wfs;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
+import org.geosdi.geoplatform.configurator.category.WFSTest;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureTypeListType;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Category(WFSTest.class)
 public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
 
-    @Ignore("WFS")
     @Test
-    public void testDescribeFeatureV110() throws Exception {
+    public void testV110() throws Exception {
         WFSDescribeFeatureTypeRequest<FeatureTypeListType> request = super.serverConnector.createDescribeFeatureTypeRequest();
 
         List<QName> typeName = new ArrayList<QName>();
 
-        QName name = new QName("http://www.openplans.org/topp", "states");
+        QName name = new QName("topp:states");
 
         typeName.add(name);
 
         request.setTypeName(typeName);
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                + request.getResponse());
+                + request.getResponseAsString());
     }
 }

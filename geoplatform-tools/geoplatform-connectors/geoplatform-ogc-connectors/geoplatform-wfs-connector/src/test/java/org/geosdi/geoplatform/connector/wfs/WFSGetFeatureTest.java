@@ -35,28 +35,61 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
+import java.math.BigInteger;
 import javax.xml.namespace.QName;
+import junit.framework.Assert;
+import org.geosdi.geoplatform.configurator.category.WFSTest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
+import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@Category(WFSTest.class)
 public class WFSGetFeatureTest extends WFSTestConfigurator {
 
-    @Ignore("WFS")
+    private QName statesName = new QName("topp:states");
+
     @Test
-    public void getFeatureSingle() throws Exception {
+    public void statesHits() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request =
                 super.serverConnector.createGetFeatureRequest();
-        
-        QName typeName = new QName("http://www.openplans.org/topp", "states");
-        request.setTypeName(typeName);
+
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setTypeName(statesName);
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(49, response.getNumberOfFeatures().intValue());
+    }
+
+//    @Ignore("WFS")
+    @Test
+    public void statesResults() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request =
+                super.serverConnector.createGetFeatureRequest();
+
+        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setTypeName(statesName);
+        request.setMaxFeatures(BigInteger.ONE);
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
                     request.getResponseAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        logger.info("xxxxxxxxxxx {}", response.getNumberOfFeatures());
+        logger.info("xxxxxxxxxxx {}", response.getTimeStamp());
+
+        FeatureArrayPropertyType featureMembers = response.getFeatureMembers();
+        logger.info("----------- {}", featureMembers.isSetFeature());
+        logger.info("----------- {}", featureMembers.getFeature());
+        logger.info("----------- {}", featureMembers.getFeature().size());
+        logger.info("+++++++++++ {}", response.getFeatureMember());
+        logger.info("+++++++++++ {}", response.getFeatureMember().size());
     }
 }

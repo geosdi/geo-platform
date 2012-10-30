@@ -1306,15 +1306,37 @@
             </plugin>
             
             <!-- test -->
+            <!-- mvn test (single test: -D test=XXX) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.8.1</version>
+                <version>2.12.4</version>
                 <configuration>
                     <skipTests>false</skipTests>
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=512m</argLine>
+                    <excludedGroups>org.geosdi.geoplatform.configurator.category.WFSTest</excludedGroups>
                 </configuration>
             </plugin>
+            <!-- mvn verify (single test: -D it.test=XXX) -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <groups>org.geosdi.geoplatform.configurator.category.WFSTest</groups>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/*.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> 
             <!-- code coverage -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -1567,5 +1589,5 @@
         
         <geonetwork-version>1.0-SNAPSHOT</geonetwork-version>
     </properties>
-
+    
 </project>

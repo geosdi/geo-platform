@@ -36,21 +36,22 @@
 package org.geosdi.geoplatform.connector.wfs;
 
 import java.io.FileOutputStream;
+import org.geosdi.geoplatform.configurator.category.WFSTest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.xml.wfs.v110.WFSCapabilitiesType;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Category(WFSTest.class)
 public class WFSGetCapabilitiesTest extends WFSTestConfigurator {
 
-    @Ignore("WFS")
     @Test
-    public void testWFSGetCapabilitiesV110() throws Exception {
+    public void testV110() throws Exception {
         WFSGetCapabilitiesRequest<WFSCapabilitiesType> request = this.serverConnector.createGetCapabilitiesRequest();
 
         WFSCapabilitiesType o = request.getResponse();
@@ -73,9 +74,8 @@ public class WFSGetCapabilitiesTest extends WFSTestConfigurator {
         }
     }
 
-    @Ignore("WFS")
     @Test
-    public void testSecureWFSGetCapabilitiesV110() throws Exception {
+    public void testSecureV110() throws Exception {
         WFSGetCapabilitiesRequest<WFSCapabilitiesType> request = this.secureServerConnector.createGetCapabilitiesRequest();
 
         WFSCapabilitiesType o = request.getResponse();

@@ -52,8 +52,6 @@ import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
 import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 
 /**
- * TODO: Test me!
- * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class AreaSearchRequest extends GetRecordsRequestHandler {
@@ -78,7 +76,7 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
 
             switch (request.getConstraintLanguage()) {
                 case FILTER:
-                    List<JAXBElement<?>> areaPredicate = this.createFilterTimePredicate(
+                    List<JAXBElement<?>> areaPredicate = this.createFilterAreaPredicate(
                             areaSearchType, bBox);
 
                     logger.trace("\n+++ Time filter: \"{}\" +++", areaPredicate);
@@ -95,7 +93,7 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
         }
     }
 
-    private List<JAXBElement<?>> createFilterTimePredicate(
+    private List<JAXBElement<?>> createFilterAreaPredicate(
             AreaSearchType areaSearchType, BBox bBox) {
 
         List<JAXBElement<?>> areaPredicate = new ArrayList<JAXBElement<?>>(2);

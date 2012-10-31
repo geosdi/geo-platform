@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
-import org.geosdi.geoplatform.services.GPWFSService;
 import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +56,7 @@ public class WFSTestConfigurator {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private final String wfsURL = "http://150.145.133.87:8080/geoserver/wfs";
+    private final String wfsURL = "http://150.146.160.92/geoserver/wfs";
     //
     private final String wfsSecureURL = "http://dpc.geosdi.org/geoserver/wfs";
     protected GPConnectorJAXBContext wfsContext = JAXBContextConnectorRepository.getProvider(

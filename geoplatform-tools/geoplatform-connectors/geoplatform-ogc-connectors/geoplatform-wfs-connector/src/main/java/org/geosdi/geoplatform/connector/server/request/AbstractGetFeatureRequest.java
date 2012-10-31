@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.math.BigInteger;
+import java.util.List;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
@@ -47,6 +48,7 @@ public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T>
         implements WFSGetFeatureRequest<T> {
 
     protected QName typeName;
+    protected List<String> featureIDs;
     protected String resultType;
     protected String outputFormat;
     protected BigInteger maxFeatures;
@@ -63,6 +65,16 @@ public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T>
     @Override
     public void setTypeName(QName typeName) {
         this.typeName = typeName;
+    }
+
+    @Override
+    public List<String> getFeatureIDs() {
+        return featureIDs;
+    }
+
+    @Override
+    public void setFeatureIDs(List<String> featureIDs) {
+        this.featureIDs = featureIDs;
     }
 
     @Override

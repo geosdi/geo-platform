@@ -36,9 +36,12 @@
 package org.geosdi.geoplatform.connector.server.request.v110;
 
 import java.util.Arrays;
+import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.xml.filter.v110.FilterType;
+import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
@@ -51,8 +54,11 @@ import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 public class WFSGetFeatureRequestV110
         extends AbstractGetFeatureRequest<FeatureCollectionType> {
 
+    protected org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
+
     public WFSGetFeatureRequestV110(GPServerConnector server) {
         super(server);
+        filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
     }
 
     @Override
@@ -67,6 +73,29 @@ public class WFSGetFeatureRequestV110
         query.setTypeName(Arrays.asList(typeName));
         request.getQuery().add(query);
 
+        if (featureIDs != null && !featureIDs.isEmpty()) {
+            FilterType filter = new FilterType();
+
+            for (String featureID : featureIDs) {
+                // Chech featureID (only one single query is permitted)
+                int ind = featureID.lastIndexOf(".");
+                String title = featureID.substring(0, ind - 1);
+//                System.out.println("\n*** Layer title (from featureID): " + title);
+                if (!typeName.getLocalPart().contains(title)) {
+                    throw new IllegalArgumentException("featureID must be referer to typeName (one single query).");
+                }
+
+                // Add featureID to filter
+                GmlObjectIdType obj = new GmlObjectIdType();
+                obj.setId(featureID);
+
+                JAXBElement<GmlObjectIdType> gmlObjectId = filterFactory.createGmlObjectId(obj);
+                filter.getId().add(gmlObjectId);
+            }
+
+            query.setFilter(filter);
+        }
+
         if (resultType != null) {
             request.setResultType(ResultTypeType.fromValue(resultType));
         }
@@ -78,7 +107,7 @@ public class WFSGetFeatureRequestV110
         if (maxFeatures != null) {
             request.setMaxFeatures(maxFeatures);
         }
-        
+
 //        logger.info("\n\n\n{}\n\n\n", request);
 
         return request;

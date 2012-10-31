@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.wfs;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import javax.xml.namespace.QName;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.configurator.category.WFSTest;
@@ -89,5 +90,22 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("----------- {}", featureMembers.getFeature().size());
         logger.info("+++++++++++ {}", response.getFeatureMember());
         logger.info("+++++++++++ {}", response.getFeatureMember().size());
+    }
+
+    @Test
+    public void statesFeatureIDs() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request =
+                super.serverConnector.createGetFeatureRequest();
+
+        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setTypeName(statesName);
+
+        request.setFeatureIDs(Arrays.asList("states.1", "states.49"));
+
+        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                    request.getResponseAsString());
+
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(2, response.getNumberOfFeatures().intValue());
     }
 }

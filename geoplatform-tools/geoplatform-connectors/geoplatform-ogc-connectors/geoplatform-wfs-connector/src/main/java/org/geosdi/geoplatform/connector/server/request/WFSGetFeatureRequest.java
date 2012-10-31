@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.math.BigInteger;
+import java.util.List;
 import javax.xml.namespace.QName;
 
 /**
@@ -45,16 +46,24 @@ import javax.xml.namespace.QName;
 public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
 
     /**
-     *
-     * @return
+     * Gets the value of the type name query property.
      */
     QName getTypeName();
 
     /**
-     *
-     * @param typeName
+     * Sets the value of the type name query property.
      */
     void setTypeName(QName typeName);
+
+    /**
+     * Gets the value of the feature ID query property.
+     */
+    List<String> getFeatureIDs();
+
+    /**
+     * Sets the value of the feature ID query property.
+     */
+    void setFeatureIDs(List<String> FeatureIDs);
 
     /**
      * Gets the value of the query property.

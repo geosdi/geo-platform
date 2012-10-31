@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.services;
 
 import com.googlecode.genericdao.search.Search;
-import com.vividsolutions.jts.geom.Geometry;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
@@ -512,12 +511,11 @@ class LayerServiceImpl {
 //        return StyleDTO.convertToStyleDTOList(foundStyle);
 //    }
 //  
-
-    public Geometry getGeometry(Long layerID) throws ResourceNotFoundFault {
-        GPLayer layer = this.getLayerDetail(layerID);
-        GPVectorLayer vector = this.vectorLayer(layer);
-        return vector.getGeometry();
-    }
+//    public GeometryDTO getGeometry(Long layerID) throws ResourceNotFoundFault {
+//        GPLayer layer = this.getLayerDetail(layerID);
+//        GPVectorLayer vector = this.vectorLayer(layer);
+//        return new GeometryDTO(vector.getGeometry());
+//    }
 
     /**
      * @see GeoPlatformService#getLayerType(java.lang.Long)

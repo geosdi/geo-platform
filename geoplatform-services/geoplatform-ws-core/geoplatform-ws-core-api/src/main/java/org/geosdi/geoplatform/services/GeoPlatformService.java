@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import com.vividsolutions.jts.geom.Geometry;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -1440,10 +1439,10 @@ public interface GeoPlatformService {
      * @return the Geometry
      * @throws ResourceNotFoundFault if Layer not found
      */
-    @Get
-    @WebResult(name = "geometry")
-    Geometry getGeometry(@WebParam(name = "layerID") Long layerID)
-            throws ResourceNotFoundFault;
+//    @Get
+//    @WebResult(name = "geometry")
+//    GeometryDTO getGeometry(@WebParam(name = "layerID") Long layerID)
+//            throws ResourceNotFoundFault;
 
     /**
      * Retrieve the type of a Layer.

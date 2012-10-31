@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import com.vividsolutions.jts.geom.Geometry;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -948,11 +947,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //    public List<StyleDTO> getLayerStyles(Long layerID) {
 //        return layerServiceDelegate.getLayerStyles(layerID);
 //    }    
-
-    @Override
-    public Geometry getGeometry(Long layerID) throws ResourceNotFoundFault {
-        return layerServiceDelegate.getGeometry(layerID);
-    }
+//
+//    @Override
+//    public GeometryDTO getGeometry(Long layerID) throws ResourceNotFoundFault {
+//        return layerServiceDelegate.getGeometry(layerID);
+//    }
 
     @Override
     public ShortLayerDTO getShortLayer(Long layerID) throws ResourceNotFoundFault {

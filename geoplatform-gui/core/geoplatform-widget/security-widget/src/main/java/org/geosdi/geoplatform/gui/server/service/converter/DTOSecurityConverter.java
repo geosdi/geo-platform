@@ -64,12 +64,12 @@ import org.springframework.stereotype.Component;
  */
 @Component(value = "dtoSecurityConverter")
 public class DTOSecurityConverter {
-    
+
     private @Value("${host_xmpp_server}")
     String hostXmppServer;
     //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+
     public GPClientMessage convertMessage(GPMessage message) {
         GPClientMessage clientMessage = new GPClientMessage();
         clientMessage.setId(message.getId());
@@ -83,7 +83,7 @@ public class DTOSecurityConverter {
         clientMessage.setCommandProperties(message.getCommandsProperties());
         return clientMessage;
     }
-    
+
     public IGPAccountDetail convertAccountToDTO(GPAccount account, GPAccountProject accountProject,
             GPViewport viewport, List<GPMessage> messages) {
         GPLoginUserDetail accountDetail = new GPLoginUserDetail();
@@ -92,12 +92,12 @@ public class DTOSecurityConverter {
         accountDetail.setUsername(account.getNaturalID()); // Forced representation
         accountDetail.setOrganization(account.getOrganization().getName());
         usertreeOptions.setLoadExpandedFolders(account.isLoadExpandedFolders());
-        this.extractGPAuthoritiesInToUser(accountDetail, account.getGPAuthorities());
         accountDetail.setTreeOptions(usertreeOptions);
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;
             accountDetail.setName(user.getName());
             accountDetail.setEmail(user.getEmailAddress());
+            this.extractGPAuthoritiesInToUser(accountDetail, account.getGPAuthorities());
         }
         if (account.getGsAccount() != null) {
             accountDetail.setAuthkey(account.getGsAccount().getAuthkey());
@@ -133,6 +133,7 @@ public class DTOSecurityConverter {
      * @todo user can have more roles
      */
     private void extractGPAuthoritiesInToUser(GPLoginUserDetail userDetail, List<GPAuthority> authorities) {
+        assert (authorities != null) : "Authorities must be not null";
         Iterator<GPAuthority> iterator = authorities.iterator();
         if (iterator.hasNext()) {
             GPAuthority authority = iterator.next();

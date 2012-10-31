@@ -57,7 +57,13 @@ public abstract class GeoPlatformSecureAction<X extends ComponentEvent>
     @Override
     public boolean isEnabled() {
         IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        return accountDetail.getTrustedLevel().ordinal() >= this.trustedLevel.ordinal();
+        // Application has neither an authority nor a trusted level
+        GPTrustedLevel accountTrustedLevel = accountDetail.getTrustedLevel();
+        if (accountTrustedLevel == null) {
+            return false;
+        } else {
+            return accountTrustedLevel.ordinal() >= this.trustedLevel.ordinal();
+        }
     }
 
     /**

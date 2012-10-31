@@ -129,9 +129,10 @@ public class SecurityService implements ISecurityService {
         return accountDetail;
     }
 
-    private IGPAccountDetail executeLoginOnGPAccount(GPAccount account, GuiComponentsPermissionMapData guiComponentPermission,
-            HttpServletRequest httpServletRequest) throws ResourceNotFoundFault,
-            SOAPFaultException {
+    private IGPAccountDetail executeLoginOnGPAccount(GPAccount account, 
+            GuiComponentsPermissionMapData guiComponentPermission,
+            HttpServletRequest httpServletRequest)
+            throws ResourceNotFoundFault, SOAPFaultException {
         GPAccountProject accountProject = geoPlatformServiceClient.getDefaultAccountProject(account.getId());
         GPProject project;
         if (accountProject == null) {

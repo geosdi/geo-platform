@@ -76,10 +76,13 @@ public class WFSContextServiceProvider {
         builder.append("org.geosdi.geoplatform.xml.filter.v110");
         builder.append(":");
         builder.append("org.geosdi.geoplatform.xml.gml.v311").append(":");
-        builder.append("org.geosdi.geoplatform.xml.gml.w3._2001.smil20").append(":");
+        builder.append("org.geosdi.geoplatform.xml.gml.w3._2001.smil20").append(
+                ":");
         builder.append("org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language");
         builder.append(":");
         builder.append("org.geosdi.geoplatform.xml.wfs.v110");
+        builder.append(":");
+        builder.append("org.geosdi.geoplatform.xml.xsd.v2001");
 
         return builder.toString();
     }
@@ -87,13 +90,18 @@ public class WFSContextServiceProvider {
     private static Class[] getAllClasses() {
         allClasses.add(org.geosdi.geoplatform.xml.ows.v100.ObjectFactory.class);
 
-        allClasses.add(org.geosdi.geoplatform.xml.filter.v110.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.filter.v110.ObjectFactory.class);
 
         allClasses.add(org.geosdi.geoplatform.xml.gml.v311.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.gml.w3._2001.smil20.ObjectFactory.class);
-        allClasses.add(org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.gml.w3._2001.smil20.ObjectFactory.class);
+        allClasses.add(
+                org.geosdi.geoplatform.xml.gml.w3._2001.smil20.language.ObjectFactory.class);
 
         allClasses.add(org.geosdi.geoplatform.xml.wfs.v110.ObjectFactory.class);
+
+        allClasses.add(org.geosdi.geoplatform.xml.xsd.v2001.ObjectFactory.class);
 
         return allClasses.toArray(new Class[allClasses.size()]);
     }

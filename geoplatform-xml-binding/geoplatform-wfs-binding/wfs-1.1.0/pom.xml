@@ -41,6 +41,12 @@
             <groupId>org.geosdi</groupId>
             <artifactId>ows-1.0.0</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-w3c-xsd-binding</artifactId>
+            <version>1.5-SNAPSHOT</version>
+        </dependency>
     </dependencies>
   
     <build>

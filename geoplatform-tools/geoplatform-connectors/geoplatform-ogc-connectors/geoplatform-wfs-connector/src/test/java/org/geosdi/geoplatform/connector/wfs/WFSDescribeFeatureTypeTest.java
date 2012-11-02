@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.configurator.category.WFSTest;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.xml.wfs.v110.FeatureTypeListType;
+import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -54,7 +55,7 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
 
     @Test
     public void testV110() throws Exception {
-        WFSDescribeFeatureTypeRequest<FeatureTypeListType> request = super.serverConnector.createDescribeFeatureTypeRequest();
+        WFSDescribeFeatureTypeRequest<Schema> request = super.serverConnector.createDescribeFeatureTypeRequest();
 
         List<QName> typeName = new ArrayList<QName>();
 
@@ -63,8 +64,25 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
         typeName.add(name);
 
         request.setTypeName(typeName);
+        
+        Schema s = request.getResponse();
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                + request.getResponseAsString());
+                + s);
+
+
+        String wfsDescribeFeatureFile = "target/wfsDescribeFeaturev110.xml";
+
+
+        FileOutputStream fos = null;
+
+        try {
+            fos = new FileOutputStream(wfsDescribeFeatureFile);
+            request.getMarshaller().marshal(s, fos);
+        } finally {
+            if (fos != null) {
+                fos.close();
+            }
+        }
     }
 }

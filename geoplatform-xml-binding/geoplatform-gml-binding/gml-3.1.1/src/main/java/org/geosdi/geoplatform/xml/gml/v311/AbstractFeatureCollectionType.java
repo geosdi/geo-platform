@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -19,14 +17,14 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
  * A feature collection contains zero or more features.
- * 
+ *
  * <p>Java class for AbstractFeatureCollectionType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="AbstractFeatureCollectionType">
  *   &lt;complexContent>
@@ -39,8 +37,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractFeatureCollectionType", propOrder = {
@@ -51,34 +49,33 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     FeatureCollectionType.class
 })
 public abstract class AbstractFeatureCollectionType
-    extends AbstractFeatureType
-    implements ToString
-{
+        extends AbstractFeatureType
+        implements ToString {
 
     protected List<FeaturePropertyType> featureMember;
     protected FeatureArrayPropertyType featureMembers;
 
+    public AbstractFeatureCollectionType() {
+    }
+
     /**
      * Gets the value of the featureMember property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the featureMember property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the featureMember property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getFeatureMember().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link FeaturePropertyType }
-     * 
-     * 
+     *
+     *
      */
     public List<FeaturePropertyType> getFeatureMember() {
         if (featureMember == null) {
@@ -88,7 +85,7 @@ public abstract class AbstractFeatureCollectionType
     }
 
     public boolean isSetFeatureMember() {
-        return ((this.featureMember!= null)&&(!this.featureMember.isEmpty()));
+        return ((this.featureMember != null) && (!this.featureMember.isEmpty()));
     }
 
     public void unsetFeatureMember() {
@@ -97,11 +94,9 @@ public abstract class AbstractFeatureCollectionType
 
     /**
      * Gets the value of the featureMembers property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FeatureArrayPropertyType }
-     *     
+     *
+     * @return possible object is {@link FeatureArrayPropertyType }
+     *
      */
     public FeatureArrayPropertyType getFeatureMembers() {
         return featureMembers;
@@ -109,18 +104,16 @@ public abstract class AbstractFeatureCollectionType
 
     /**
      * Sets the value of the featureMembers property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FeatureArrayPropertyType }
-     *     
+     *
+     * @param value allowed object is {@link FeatureArrayPropertyType }
+     *
      */
     public void setFeatureMembers(FeatureArrayPropertyType value) {
         this.featureMembers = value;
     }
 
     public boolean isSetFeatureMembers() {
-        return (this.featureMembers!= null);
+        return (this.featureMembers != null);
     }
 
     public String toString() {
@@ -130,24 +123,30 @@ public abstract class AbstractFeatureCollectionType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<FeaturePropertyType> theFeatureMember;
-            theFeatureMember = (this.isSetFeatureMember()?this.getFeatureMember():null);
-            strategy.appendField(locator, this, "featureMember", buffer, theFeatureMember);
+            theFeatureMember = (this.isSetFeatureMember() ? this.getFeatureMember() : null);
+            strategy.appendField(locator, this, "featureMember", buffer,
+                    theFeatureMember);
         }
         {
             FeatureArrayPropertyType theFeatureMembers;
             theFeatureMembers = this.getFeatureMembers();
-            strategy.appendField(locator, this, "featureMembers", buffer, theFeatureMembers);
+            strategy.appendField(locator, this, "featureMembers", buffer,
+                    theFeatureMembers);
         }
         return buffer;
     }
@@ -157,5 +156,4 @@ public abstract class AbstractFeatureCollectionType
         List<FeaturePropertyType> draftl = this.getFeatureMember();
         draftl.addAll(value);
     }
-
 }

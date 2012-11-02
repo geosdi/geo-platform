@@ -63,6 +63,9 @@ public class FeatureCollectionType
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger numberOfFeatures;
 
+    public FeatureCollectionType() {
+    }
+
     /**
      * Gets the value of the lockId property.
      *

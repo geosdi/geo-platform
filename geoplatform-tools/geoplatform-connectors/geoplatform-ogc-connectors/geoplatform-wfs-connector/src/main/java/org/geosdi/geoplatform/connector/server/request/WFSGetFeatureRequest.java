@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.server.request;
 import java.math.BigInteger;
 import java.util.List;
 import javax.xml.namespace.QName;
+import org.geosdi.geoplatform.responce.BBox;
 
 /**
  *
@@ -64,6 +65,16 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
      * Sets the value of the feature ID query property.
      */
     void setFeatureIDs(List<String> FeatureIDs);
+
+    /**
+     * Gets the value of the BBox query property.
+     */
+    BBox getBBox();
+
+    /**
+     * Sets the value of the BBox query property.
+     */
+    void setBBox(BBox bBox);
 
     /**
      * Gets the value of the query property.

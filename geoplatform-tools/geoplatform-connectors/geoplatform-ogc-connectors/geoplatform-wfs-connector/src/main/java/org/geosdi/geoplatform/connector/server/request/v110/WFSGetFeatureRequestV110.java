@@ -40,8 +40,13 @@ import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.responce.BBox;
+import org.geosdi.geoplatform.xml.filter.v110.BinarySpatialOpType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
+import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
+import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
+import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
@@ -55,10 +60,12 @@ public class WFSGetFeatureRequestV110
         extends AbstractGetFeatureRequest<FeatureCollectionType> {
 
     protected org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
+    protected org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory;
 
     public WFSGetFeatureRequestV110(GPServerConnector server) {
         super(server);
         filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
+        gmlFactory = new org.geosdi.geoplatform.xml.gml.v311.ObjectFactory();
     }
 
     @Override
@@ -68,6 +75,8 @@ public class WFSGetFeatureRequestV110
         }
 
         GetFeatureType request = new GetFeatureType();
+        request.setService("WFS");
+        request.setVersion("1.1.0");
 
         QueryType query = new QueryType();
         query.setTypeName(Arrays.asList(typeName));
@@ -96,6 +105,17 @@ public class WFSGetFeatureRequestV110
             query.setFilter(filter);
         }
 
+        if (bBox != null) {
+            JAXBElement<BinarySpatialOpType> areaOperator = this.createAreaOperator(bBox);
+
+            FilterType filter = query.getFilter();
+            if (filter == null) {
+                filter = new FilterType();
+                query.setFilter(filter);
+            }
+            filter.setSpatialOps(areaOperator);
+        }
+
         if (resultType != null) {
             request.setResultType(ResultTypeType.fromValue(resultType));
         }
@@ -108,8 +128,35 @@ public class WFSGetFeatureRequestV110
             request.setMaxFeatures(maxFeatures);
         }
 
-//        logger.info("\n\n\n{}\n\n\n", request);
-
         return request;
+    }
+
+    private JAXBElement<BinarySpatialOpType> createAreaOperator(BBox bBox) {
+        logger.debug("\n+++ {} +++", bBox);
+
+        BinarySpatialOpType binarySpatial = new BinarySpatialOpType();
+
+        PropertyNameType propertyNameType = new PropertyNameType();
+        propertyNameType.setContent(Arrays.<Object>asList(NAME_GEOMETRY));
+        binarySpatial.setPropertyName(propertyNameType);
+
+        EnvelopeType envelope = this.createEnvelope(bBox);
+        binarySpatial.setEnvelope(gmlFactory.createBoundingBox(envelope));
+
+        return filterFactory.createContains(binarySpatial);
+    }
+
+    private EnvelopeType createEnvelope(BBox bBox) {
+        EnvelopeType envelope = new EnvelopeType();
+
+        DirectPositionType lower = new DirectPositionType();
+        lower.setValue(Arrays.asList(bBox.getMinX(), bBox.getMinY()));
+        envelope.setLowerCorner(lower);
+
+        DirectPositionType upper = new DirectPositionType();
+        upper.setValue(Arrays.asList(bBox.getMaxX(), bBox.getMaxY()));
+        envelope.setUpperCorner(upper);
+
+        return envelope;
     }
 }

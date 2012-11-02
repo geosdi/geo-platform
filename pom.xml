@@ -1285,6 +1285,7 @@
                                 <goal>integration-test</goal>
                             </goals>
                             <configuration>
+                                <encoding>UTF-8</encoding>
                                 <includes>
                                     <include>**/*.class</include>
                                 </includes>
@@ -1328,6 +1329,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12.4</version>
                 <configuration>
+                    <encoding>UTF-8</encoding>
                     <skipTests>false</skipTests>
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=512m</argLine>
                 </configuration>

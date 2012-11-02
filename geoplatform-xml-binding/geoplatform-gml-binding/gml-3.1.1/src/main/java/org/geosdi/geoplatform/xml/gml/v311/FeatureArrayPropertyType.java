@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -20,14 +18,14 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
  * Container for features - follow gml:ArrayAssociationType pattern.
- * 
+ *
  * <p>Java class for FeatureArrayPropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="FeatureArrayPropertyType">
  *   &lt;complexContent>
@@ -39,39 +37,38 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FeatureArrayPropertyType", propOrder = {
     "feature"
 })
 public class FeatureArrayPropertyType
-    implements ToString
-{
+        implements ToString {
 
-    @XmlElementRef(name = "_Feature", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
+    public FeatureArrayPropertyType() {
+    }
+    //
+    @XmlElementRef(name = "_Feature", namespace = "http://www.opengis.net/gml",
+                   type = JAXBElement.class)
     protected List<JAXBElement<? extends AbstractFeatureType>> feature;
 
     /**
      * Gets the value of the feature property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the feature property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the feature property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getFeature().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link MultiSolidCoverageType }{@code >}
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list null     {@link JAXBElement }{@code <}{@link MultiSolidCoverageType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractCoverageType }{@code >}
      * {@link JAXBElement }{@code <}{@link MultiSurfaceCoverageType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractFeatureType }{@code >}
@@ -86,8 +83,8 @@ public class FeatureArrayPropertyType
      * {@link JAXBElement }{@code <}{@link AbstractContinuousCoverageType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractDiscreteCoverageType }{@code >}
      * {@link JAXBElement }{@code <}{@link ObservationType }{@code >}
-     * 
-     * 
+     *
+     *
      */
     public List<JAXBElement<? extends AbstractFeatureType>> getFeature() {
         if (feature == null) {
@@ -97,7 +94,7 @@ public class FeatureArrayPropertyType
     }
 
     public boolean isSetFeature() {
-        return ((this.feature!= null)&&(!this.feature.isEmpty()));
+        return ((this.feature != null) && (!this.feature.isEmpty()));
     }
 
     public void unsetFeature() {
@@ -111,26 +108,30 @@ public class FeatureArrayPropertyType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             List<JAXBElement<? extends AbstractFeatureType>> theFeature;
-            theFeature = (this.isSetFeature()?this.getFeature():null);
+            theFeature = (this.isSetFeature() ? this.getFeature() : null);
             strategy.appendField(locator, this, "feature", buffer, theFeature);
         }
         return buffer;
     }
 
-    public void setFeature(List<JAXBElement<? extends AbstractFeatureType>> value) {
+    public void setFeature(
+            List<JAXBElement<? extends AbstractFeatureType>> value) {
         this.feature = null;
         List<JAXBElement<? extends AbstractFeatureType>> draftl = this.getFeature();
         draftl.addAll(value);
     }
-
 }

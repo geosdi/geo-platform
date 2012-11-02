@@ -89,7 +89,7 @@ public abstract class GetRecordsRequestHandler {
             FilterType filterType, List<JAXBElement<?>> filterPredicates) {
 
         if (request.getConstraintLanguage() != ConstraintLanguage.FILTER) {
-            throw new IllegalArgumentException("Constraint Language must be CQL_TEXT.");
+            throw new IllegalArgumentException("Constraint Language must be FILTER.");
         }
 
         // Add all predicats always in AND (even if there is one)

@@ -41,6 +41,7 @@ import javax.xml.namespace.QName;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.configurator.category.WFSTest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.responce.BBox;
 import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
@@ -107,5 +108,21 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
         FeatureCollectionType response = request.getResponse();
         Assert.assertEquals(2, response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
+    public void statesBBox() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request =
+                super.serverConnector.createGetFeatureRequest();
+
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setTypeName(statesName);
+        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+
+        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                    request.getResponseAsString());
+
+//        FeatureCollectionType response = request.getResponse();
+//        Assert.assertEquals(4, response.getNumberOfFeatures().intValue());
     }
 }

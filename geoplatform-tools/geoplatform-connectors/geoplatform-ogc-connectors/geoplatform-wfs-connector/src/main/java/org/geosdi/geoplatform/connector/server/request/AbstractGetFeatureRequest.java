@@ -39,6 +39,7 @@ import java.math.BigInteger;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.responce.BBox;
 
 /**
  *
@@ -47,8 +48,11 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T>
         implements WFSGetFeatureRequest<T> {
 
+    protected static final String NAME_GEOMETRY = "the_geom"; // TODO name property geometry is always "the_geom"?
+    //
     protected QName typeName;
     protected List<String> featureIDs;
+    protected BBox bBox;
     protected String resultType;
     protected String outputFormat;
     protected BigInteger maxFeatures;
@@ -75,6 +79,16 @@ public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T>
     @Override
     public void setFeatureIDs(List<String> featureIDs) {
         this.featureIDs = featureIDs;
+    }
+
+    @Override
+    public BBox getBBox() {
+        return bBox;
+    }
+
+    @Override
+    public void setBBox(BBox bBox) {
+        this.bBox = bBox;
     }
 
     @Override
@@ -109,8 +123,10 @@ public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T>
 
     @Override
     public String toString() {
-        return "AbstractGetFeatureRequest{"
+        return this.getClass().getSimpleName() + "{"
                 + "typeName=" + typeName
+                + ", featureIDs=" + featureIDs
+                + ", bBox=" + bBox
                 + ", resultType=" + resultType
                 + ", outputFormat=" + outputFormat
                 + ", maxFeatures=" + maxFeatures + '}';

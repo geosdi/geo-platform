@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.namespace.QName;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
@@ -112,7 +113,8 @@ public class Schema
     @XmlID
     @XmlSchemaType(name = "ID")
     protected String id;
-    @XmlAttribute(name = "lang", namespace = "http://www.w3.org/XML/1998/namespace")
+    @XmlAttribute(name = "lang",
+                  namespace = "http://www.w3.org/XML/1998/namespace")
     protected String lang;
 
     /**
@@ -129,7 +131,8 @@ public class Schema
      * </pre>
      *
      *
-     * <p> Objects of the following type(s) are allowed in the list      {@link Include }
+     * <p> Objects of the following type(s) are allowed in the list null null
+     * null null null null null null null null     {@link Include }
      * {@link Import }
      * {@link Redefine }
      * {@link Annotation }
@@ -165,7 +168,8 @@ public class Schema
      * </pre>
      *
      *
-     * <p> Objects of the following type(s) are allowed in the list      {@link TopLevelSimpleType }
+     * <p> Objects of the following type(s) are allowed in the list null null
+     * null null null null null null null null     {@link TopLevelSimpleType }
      * {@link TopLevelComplexType }
      * {@link NamedGroup }
      * {@link NamedAttributeGroup }
@@ -411,6 +415,52 @@ public class Schema
         return (this.lang != null);
     }
 
+    /**
+     * Returns all {@link TopLevelElement} elements
+     *
+     * @return {@link List<TopLevelElement>}
+     */
+    public List<TopLevelElement> getTopLevelElements() {
+        List<TopLevelElement> topElements = new ArrayList<TopLevelElement>();
+        for (OpenAttrs o : getSimpleTypeOrComplexTypeOrGroup()) {
+            if (o instanceof TopLevelElement) {
+                topElements.add((TopLevelElement) o);
+            }
+        }
+        return topElements;
+    }
+
+    /**
+     * Return {@link TopLevelComplexType} type by {@link QName} localPart
+     *
+     * @param name
+     *
+     * @return {@link TopLevelComplexType} type
+     */
+    public TopLevelComplexType getTopLevelComplexType(QName name) {
+        if (name != null) {
+            for (OpenAttrs openAttrs : getSimpleTypeOrComplexTypeOrGroup()) {
+                if ((openAttrs instanceof TopLevelComplexType)
+                        && ((TopLevelComplexType) openAttrs).getName().equalsIgnoreCase(
+                        name.getLocalPart())) {
+                    return (TopLevelComplexType) openAttrs;
+                }
+            }
+        }
+        return null;
+    }
+
+    public List<TopLevelComplexType> getTopLevelComplexTypeElements() {
+        List<TopLevelComplexType> elements = new ArrayList<TopLevelComplexType>();
+        for (OpenAttrs openAttrs : getSimpleTypeOrComplexTypeOrGroup()) {
+            if (openAttrs instanceof TopLevelComplexType) {
+                elements.add((TopLevelComplexType) openAttrs);
+            }
+        }
+        return elements;
+    }
+
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -418,29 +468,38 @@ public class Schema
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<OpenAttrs> theIncludeOrImportOrRedefine;
             theIncludeOrImportOrRedefine = (this.isSetIncludeOrImportOrRedefine() ? this.getIncludeOrImportOrRedefine() : null);
-            strategy.appendField(locator, this, "includeOrImportOrRedefine", buffer, theIncludeOrImportOrRedefine);
+            strategy.appendField(locator, this, "includeOrImportOrRedefine",
+                    buffer, theIncludeOrImportOrRedefine);
         }
         {
             List<OpenAttrs> theSimpleTypeOrComplexTypeOrGroup;
             theSimpleTypeOrComplexTypeOrGroup = (this.isSetSimpleTypeOrComplexTypeOrGroup() ? this.getSimpleTypeOrComplexTypeOrGroup() : null);
-            strategy.appendField(locator, this, "simpleTypeOrComplexTypeOrGroup", buffer, theSimpleTypeOrComplexTypeOrGroup);
+            strategy.appendField(locator, this, "simpleTypeOrComplexTypeOrGroup",
+                    buffer, theSimpleTypeOrComplexTypeOrGroup);
         }
         {
             String theTargetNamespace;
             theTargetNamespace = this.getTargetNamespace();
-            strategy.appendField(locator, this, "targetNamespace", buffer, theTargetNamespace);
+            strategy.appendField(locator, this, "targetNamespace", buffer,
+                    theTargetNamespace);
         }
         {
             String theVersion;
@@ -450,22 +509,26 @@ public class Schema
         {
             List<String> theFinalDefault;
             theFinalDefault = (this.isSetFinalDefault() ? this.getFinalDefault() : null);
-            strategy.appendField(locator, this, "finalDefault", buffer, theFinalDefault);
+            strategy.appendField(locator, this, "finalDefault", buffer,
+                    theFinalDefault);
         }
         {
             List<String> theBlockDefault;
             theBlockDefault = (this.isSetBlockDefault() ? this.getBlockDefault() : null);
-            strategy.appendField(locator, this, "blockDefault", buffer, theBlockDefault);
+            strategy.appendField(locator, this, "blockDefault", buffer,
+                    theBlockDefault);
         }
         {
             FormChoice theAttributeFormDefault;
             theAttributeFormDefault = this.getAttributeFormDefault();
-            strategy.appendField(locator, this, "attributeFormDefault", buffer, theAttributeFormDefault);
+            strategy.appendField(locator, this, "attributeFormDefault", buffer,
+                    theAttributeFormDefault);
         }
         {
             FormChoice theElementFormDefault;
             theElementFormDefault = this.getElementFormDefault();
-            strategy.appendField(locator, this, "elementFormDefault", buffer, theElementFormDefault);
+            strategy.appendField(locator, this, "elementFormDefault", buffer,
+                    theElementFormDefault);
         }
         {
             String theId;

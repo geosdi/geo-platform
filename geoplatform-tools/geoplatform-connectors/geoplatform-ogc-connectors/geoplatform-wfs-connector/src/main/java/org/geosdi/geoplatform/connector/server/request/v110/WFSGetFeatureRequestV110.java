@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.responce.BBox;
-import org.geosdi.geoplatform.xml.filter.v110.BinarySpatialOpType;
+import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
 import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
@@ -106,7 +106,7 @@ public class WFSGetFeatureRequestV110
         }
 
         if (bBox != null) {
-            JAXBElement<BinarySpatialOpType> areaOperator = this.createAreaOperator(bBox);
+            JAXBElement<BBOXType> areaOperator = this.createAreaOperator(bBox);
 
             FilterType filter = query.getFilter();
             if (filter == null) {
@@ -131,19 +131,20 @@ public class WFSGetFeatureRequestV110
         return request;
     }
 
-    private JAXBElement<BinarySpatialOpType> createAreaOperator(BBox bBox) {
+    private JAXBElement<BBOXType> createAreaOperator(BBox bBox) {
         logger.debug("\n+++ {} +++", bBox);
 
-        BinarySpatialOpType binarySpatial = new BinarySpatialOpType();
+        BBOXType bBoxType = new BBOXType();
 
         PropertyNameType propertyNameType = new PropertyNameType();
         propertyNameType.setContent(Arrays.<Object>asList(NAME_GEOMETRY));
-        binarySpatial.setPropertyName(propertyNameType);
+        bBoxType.setPropertyName(propertyNameType);
 
         EnvelopeType envelope = this.createEnvelope(bBox);
-        binarySpatial.setEnvelope(gmlFactory.createBoundingBox(envelope));
+        envelope.setSrsName("EPSG:4326");
+        bBoxType.setEnvelope(gmlFactory.createEnvelope(envelope));
 
-        return filterFactory.createContains(binarySpatial);
+        return filterFactory.createBBOX(bBoxType);
     }
 
     private EnvelopeType createEnvelope(BBox bBox) {

@@ -122,7 +122,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
                     request.getResponseAsString());
 
-//        FeatureCollectionType response = request.getResponse();
-//        Assert.assertEquals(4, response.getNumberOfFeatures().intValue());
+        FeatureCollectionType response = request.getResponse();
+        Assert.assertEquals(4, response.getNumberOfFeatures().intValue());
     }
 }

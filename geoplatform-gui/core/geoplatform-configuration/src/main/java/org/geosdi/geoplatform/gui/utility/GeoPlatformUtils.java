@@ -68,7 +68,7 @@ public class GeoPlatformUtils {
     public void setGlobalConfiguration(IGeoPlatformGlobal globalConfiguration) {
         this.globalConfiguration = globalConfiguration;
     }
-
+    
     public static <T> List<T> safeList(List<T> list) {
         return list == null ? Collections.EMPTY_LIST : list;
     }

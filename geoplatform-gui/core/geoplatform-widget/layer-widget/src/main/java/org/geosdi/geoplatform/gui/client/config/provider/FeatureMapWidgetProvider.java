@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  *

@@ -39,8 +39,8 @@ import java.util.Arrays;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.BBox;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.responce.BBox;
 import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
@@ -91,14 +91,16 @@ public class WFSGetFeatureRequestV110
                 String title = featureID.substring(0, ind - 1);
 //                System.out.println("\n*** Layer title (from featureID): " + title);
                 if (!typeName.getLocalPart().contains(title)) {
-                    throw new IllegalArgumentException("featureID must be referer to typeName (one single query).");
+                    throw new IllegalArgumentException(
+                            "featureID must be referer to typeName (one single query).");
                 }
 
                 // Add featureID to filter
                 GmlObjectIdType obj = new GmlObjectIdType();
                 obj.setId(featureID);
 
-                JAXBElement<GmlObjectIdType> gmlObjectId = filterFactory.createGmlObjectId(obj);
+                JAXBElement<GmlObjectIdType> gmlObjectId = filterFactory.createGmlObjectId(
+                        obj);
                 filter.getId().add(gmlObjectId);
             }
 

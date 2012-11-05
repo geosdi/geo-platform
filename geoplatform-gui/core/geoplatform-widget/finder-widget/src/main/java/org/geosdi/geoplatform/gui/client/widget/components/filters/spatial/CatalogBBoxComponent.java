@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogBBoxHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
-import org.geosdi.geoplatform.responce.BBox;
+import org.geosdi.geoplatform.gui.responce.BBox;
 
 /**
  *
@@ -66,7 +66,8 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
     private TextField<String> maxLonField;
     private TextField<String> minLatField;
 
-    public CatalogBBoxComponent(GPEventBus bus, AreaInfo theAreaInfo) {
+    public CatalogBBoxComponent(GPEventBus bus,
+            AreaInfo theAreaInfo) {
         this.areaInfo = theAreaInfo;
 
         bus.addHandler(CatalogBBoxHandler.TYPE, this);
@@ -94,7 +95,6 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         maxLatField.setFireChangeEventOnSetValue(true);
         maxLatField.addListener(Events.Change,
                 new Listener<FieldEvent>() {
-
                     @Override
                     public void handleEvent(FieldEvent fe) {
                         BBox bBox = areaInfo.getBBox();
@@ -139,7 +139,6 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         minLatField.setFireChangeEventOnSetValue(true);
         minLatField.addListener(Events.Change,
                 new Listener<FieldEvent>() {
-
                     @Override
                     public void handleEvent(FieldEvent fe) {
                         BBox bBox = areaInfo.getBBox();
@@ -184,7 +183,6 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         minLonField.setFireChangeEventOnSetValue(true);
         minLonField.addListener(Events.Change,
                 new Listener<FieldEvent>() {
-
                     @Override
                     public void handleEvent(FieldEvent fe) {
                         BBox bBox = areaInfo.getBBox();
@@ -233,7 +231,6 @@ public class CatalogBBoxComponent implements GPCatalogFinderComponent,
         maxLonField.setFireChangeEventOnSetValue(true);
         maxLonField.addListener(Events.Change,
                 new Listener<FieldEvent>() {
-
                     @Override
                     public void handleEvent(FieldEvent fe) {
                         BBox bBox = areaInfo.getBBox();

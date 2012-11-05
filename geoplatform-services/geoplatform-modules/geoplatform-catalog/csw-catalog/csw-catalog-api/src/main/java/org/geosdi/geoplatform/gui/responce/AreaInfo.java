@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.responce;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
-import org.geosdi.geoplatform.responce.BBox;
 
 /**
  *

@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogSpatialEnableEvent
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
-import org.geosdi.geoplatform.responce.BBox;
 
 /**
  *

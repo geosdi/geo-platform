@@ -36,10 +36,9 @@
 package org.geosdi.geoplatform.ws.wfs;
 
 import java.util.List;
-import junit.framework.Assert;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -49,7 +48,7 @@ import org.junit.Test;
 public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
 
     @Test
-    public void singleFeatureV110() throws ResourceNotFoundFault {
+    public void singleFeatureV110() throws Exception {
         Assert.assertNotNull(super.wfsService);
 
         LayerSchemaDTO layerSchema =

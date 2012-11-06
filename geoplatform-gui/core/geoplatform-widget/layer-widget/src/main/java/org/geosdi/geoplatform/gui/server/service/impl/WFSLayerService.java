@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
@@ -69,6 +70,9 @@ public class WFSLayerService implements IWFSLayerService {
             return this.geoPlatformWFSClient.describeFeatureType(serverUrl,
                                                                  typeName);
         } catch (ResourceNotFoundFault ex) {
+            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
+            throw new GeoPlatformException(ex.getMessage());
+        } catch (IllegalParameterFault ex) {
             logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
             throw new GeoPlatformException(ex.getMessage());
         }

@@ -55,13 +55,13 @@ public class TypeValidatorController {
     static {
         Map<String, TypeValidator> map = Maps.newHashMap();
 
-        map.put("java.lang.Object", new TypeValidator() {
+        map.put("object", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 return true;
             }
         });
-        map.put("java.lang.String", new TypeValidator() {
+        map.put("string", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 return true;
@@ -78,7 +78,7 @@ public class TypeValidatorController {
                 return true;
             }
         });
-        map.put("java.lang.Integer", new TypeValidator() {
+        map.put("integer", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 try {
@@ -89,7 +89,7 @@ public class TypeValidatorController {
                 return true;
             }
         });
-        map.put("java.lang.Long", new TypeValidator() {
+        map.put("long", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 try {
@@ -111,7 +111,7 @@ public class TypeValidatorController {
                 return true;
             }
         });
-        map.put("java.math.BigDecimal", new TypeValidator() {
+        map.put("bigDecimal", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 try {
@@ -122,7 +122,7 @@ public class TypeValidatorController {
                 return true;
             }
         });
-        map.put("java.lang.Float", new TypeValidator() {
+        map.put("float", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 try {
@@ -133,7 +133,7 @@ public class TypeValidatorController {
                 return true;
             }
         });
-        map.put("java.lang.Double", new TypeValidator() {
+        map.put("double", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 try {
@@ -144,7 +144,7 @@ public class TypeValidatorController {
                 return true;
             }
         });
-        map.put("java.lang.Boolean", new TypeValidator() {
+        map.put("boolean", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 if (!value.equalsIgnoreCase("true")
@@ -154,7 +154,7 @@ public class TypeValidatorController {
                 return true;
             }
         });
-        map.put("java.lang.Byte", new TypeValidator() {
+        map.put("byte", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 try {

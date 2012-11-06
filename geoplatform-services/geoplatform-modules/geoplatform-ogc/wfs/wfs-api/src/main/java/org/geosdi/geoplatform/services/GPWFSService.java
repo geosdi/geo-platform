@@ -39,6 +39,7 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import org.codehaus.jra.Get;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
@@ -58,7 +59,7 @@ public interface GPWFSService {
     LayerSchemaDTO describeFeatureType(
             @WebParam(name = "serverUrl") String serverUrl,
             @WebParam(name = "typeName") String typeName)
-            throws ResourceNotFoundFault;
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Get
     @WebResult(name = "GetFeature")

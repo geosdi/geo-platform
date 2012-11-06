@@ -51,30 +51,30 @@ import org.springframework.stereotype.Component;
  */
 @Component(value = "gpSpringBusConf")
 public class GPSpringBusConfigurator implements Disposable {
-    
+
     @Autowired
     private ServerInterceptorStrategyFactory factory;
     private Bus bus;
-    
+
     public void createBus() {
         SpringBusFactory bf = new SpringBusFactory();
         bus = bf.createBus();
-        
+
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
-        
+
         bus.getInInterceptors().add(
                 factory.getSecurityInInterceptor());
         bus.getOutInterceptors().add(
                 factory.getSecurityOutInterceptor());
-        
+
         SpringBusFactory.setDefaultBus(bus);
     }
-    
+
     @Override
     public void dispose() {
-        // if (this.bus != null) {
-            // this.bus.shutdown(false);
-        // }
+        if (this.bus != null) {
+            this.bus.shutdown(false);
+        }
     }
 }

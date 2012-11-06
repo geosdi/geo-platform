@@ -11,9 +11,10 @@
             http://www.springframework.org/schema/util/spring-util-3.1.xsd"
        default-autowire="byName">
 
-    <context:component-scan base-package="org.geosdi.geoplatform.catalog.csw.beans,
+    <context:component-scan base-package="org.geosdi.geoplatform.cxf.bus.
+                            org.geosdi.geoplatform.catalog.csw.beans,
                             org.geosdi.geoplatform.catalogws.beans,
                             org.geosdi.geoplatform.modelws.beans,
-                            org.geosdi.geoplatform.cxf.bus"/>
+                            org.geosdi.geoplatform.ws.wfs.bean"/>
 
 </beans>

@@ -64,6 +64,11 @@ public abstract class BaseRequestType
     @XmlAttribute(name = "handle")
     protected String handle;
 
+    public BaseRequestType() {
+        this.service = this.getService();
+        this.version = this.getVersion();
+    }
+
     /**
      * Gets the value of the service property.
      * 
@@ -72,7 +77,7 @@ public abstract class BaseRequestType
      *     {@link String }
      *     
      */
-    public String getService() {
+    public final String getService() {
         if (service == null) {
             return "WFS";
         } else {
@@ -100,7 +105,7 @@ public abstract class BaseRequestType
      *     {@link String }
      *     
      */
-    public String getVersion() {
+    public final String getVersion() {
         if (version == null) {
             return "1.1.0";
         } else {

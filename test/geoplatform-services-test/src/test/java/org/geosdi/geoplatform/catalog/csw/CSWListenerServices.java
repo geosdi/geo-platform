@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.catalog.csw;
 
 import java.util.concurrent.TimeUnit;
 import javax.xml.ws.Endpoint;
-import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.geosdi.geoplatform.connector.security.GeosdiCatalogBeanProvider;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
 import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientTestConnector;

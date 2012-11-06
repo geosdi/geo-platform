@@ -75,8 +75,6 @@ public class WFSGetFeatureRequestV110
         }
 
         GetFeatureType request = new GetFeatureType();
-        request.setService("WFS");
-        request.setVersion("1.1.0");
 
         QueryType query = new QueryType();
         query.setTypeName(Arrays.asList(typeName));

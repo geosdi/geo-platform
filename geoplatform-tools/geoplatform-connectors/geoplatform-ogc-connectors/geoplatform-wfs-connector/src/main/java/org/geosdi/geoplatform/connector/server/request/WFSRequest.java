@@ -44,7 +44,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository;
 import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;

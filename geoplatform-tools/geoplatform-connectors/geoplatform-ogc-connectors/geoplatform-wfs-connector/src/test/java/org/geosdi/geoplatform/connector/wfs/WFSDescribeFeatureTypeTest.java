@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.wfs;
 
 import java.io.FileOutputStream;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
@@ -55,48 +55,40 @@ import org.junit.Test;
  */
 //@Category(WFSTest.class)
 public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
-    
+
     @Test
     public void testV110() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = super.serverConnector.createDescribeFeatureTypeRequest();
-        
-        List<QName> typeName = new ArrayList<QName>();
-        
+
         QName name = new QName("topp:states");
-        
-        typeName.add(name);
-        
-        request.setTypeName(typeName);
-        
+
+        request.setTypeName(Arrays.asList(name));
+
         Schema s = request.getResponse();
-        
-        logger.info("TARGET NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                + s.getTargetNamespace());
-        
+
+        logger.info("TARGET NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                    s.getTargetNamespace());
+
         for (OpenAttrs o : s.getSimpleTypeOrComplexTypeOrGroup()) {
             if (o instanceof TopLevelElement) {
-                logger.info("TopLevelElement @@@@@@@@@@@@@@@@" + o);
+                logger.info("TopLevelElement @@@@@@@@@@@@@@@@ {}", o);
             }
         }
-        
+
         for (OpenAttrs o : s.getSimpleTypeOrComplexTypeOrGroup()) {
             if (o instanceof TopLevelComplexType) {
                 List<Object> particles = ((TopLevelComplexType) o).getComplexContent().getExtension().getSequence().getParticle();
                 for (Object p : particles) {
-                    
+
                     LocalElement l = ((JAXBElement<LocalElement>) p).getValue();
                     logger.info(
-                            "ECCOLO @@@@@@@@@@@@@@@@ " + l.getType().getLocalPart());
+                            "TopLevelComplexType @@@@@@@@@@@@@@@@ {}", l.getType().getLocalPart());
                 }
             }
         }
-        
-        
+
         String wfsDescribeFeatureFile = "target/wfsDescribeFeaturev110.xml";
-        
-        
         FileOutputStream fos = null;
-        
         try {
             fos = new FileOutputStream(wfsDescribeFeatureFile);
             request.getMarshaller().marshal(s, fos);

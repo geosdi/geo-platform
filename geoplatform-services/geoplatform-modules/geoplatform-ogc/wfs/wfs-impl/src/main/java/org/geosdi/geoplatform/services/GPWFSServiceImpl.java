@@ -52,6 +52,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.xml.xsd.v2001.LocalElement;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
@@ -106,7 +107,7 @@ public class GPWFSServiceImpl implements GPWFSService {
 
             Object geom = particles.get(0);
             LocalElement geomElement = ((JAXBElement<LocalElement>) geom).getValue();
-            AttributeDTO geometryAttribute = new AttributeDTO();
+            GeometryAttributeDTO geometryAttribute = new GeometryAttributeDTO();
             Class typeClass = GeometryBinding.getGMLGeometry(geomElement.getType().getLocalPart());
             geometryAttribute.setType(typeClass.getSimpleName());
             geometryAttribute.setName(geomElement.getName());

@@ -33,7 +33,7 @@
             <artifactId>geoplatform-model</artifactId>
         </dependency>
         
-         <dependency>
+        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configurator</artifactId>
         </dependency>
@@ -92,7 +92,7 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-		<!-- SPRING -->
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jmx</artifactId>
@@ -121,17 +121,17 @@
 
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
-		<!-- JUnit -->
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
 
-		<!-- CXF -->
+        <!-- CXF -->
         <dependency>
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>

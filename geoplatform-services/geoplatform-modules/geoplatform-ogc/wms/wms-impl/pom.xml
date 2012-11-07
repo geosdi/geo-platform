@@ -46,7 +46,7 @@
         </dependency>
         
         
-            <!-- APACHE COMMONS -->
+        <!-- APACHE COMMONS -->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -56,8 +56,8 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
 
-		<!-- This dep is needed in core::dao, but seems not to be transitively
-			imported -->
+        <!-- This dep is needed in core::dao, but seems not to be transitively
+     			imported -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
@@ -75,7 +75,7 @@
         
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
-	<!-- =========================================================== -->
+        <!-- =========================================================== -->
             
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -109,7 +109,7 @@
             <artifactId>jsr-275</artifactId>
         </dependency>
 
-		<!-- GEOTOOLS -->
+        <!-- GEOTOOLS -->
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-main</artifactId>
@@ -139,7 +139,7 @@
             <artifactId>gt-epsg-wkt</artifactId>
         </dependency>
 
-		<!-- SPRING -->
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jmx</artifactId>
@@ -167,7 +167,7 @@
             <scope>provided</scope>
         </dependency>
         
-		<!-- CGLIB -->
+        <!-- CGLIB -->
         <dependency>
             <groupId>asm</groupId>
             <artifactId>asm</artifactId>
@@ -177,7 +177,7 @@
             <artifactId>cglib-nodep</artifactId>
         </dependency>
 
-		<!-- HTTP UTILS -->
+        <!-- HTTP UTILS -->
         <dependency>
             <groupId>org.codehaus.jettison</groupId>
             <artifactId>jettison</artifactId>
@@ -193,17 +193,17 @@
 
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
-		<!-- JUnit -->
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
 
-		<!-- CXF -->
+        <!-- CXF -->
         <dependency>
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
@@ -212,7 +212,7 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
         </dependency>
-		<!-- Velocity (Email templates) -->
+        <!-- Velocity (Email templates) -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
@@ -223,13 +223,13 @@
             <artifactId>mail</artifactId>
         </dependency>
 
-		<!-- LOGGER -->
+        <!-- LOGGER -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
 
-		<!-- SCOPE TEST -->
+        <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>

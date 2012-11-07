@@ -18,7 +18,7 @@
 
     <dependencies>
         
-<!-- GEOPLATFORM WS -->
+        <!-- GEOPLATFORM WS -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
@@ -85,17 +85,17 @@
         
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
         
-<!-- QUARTZ -->
+        <!-- QUARTZ -->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
         </dependency>
         
-<!-- Velocity (Email templates) -->
+        <!-- Velocity (Email templates) -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>

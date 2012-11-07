@@ -39,9 +39,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import org.geosdi.geoplatform.connector.GPWFSConnector;
 import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.junit.Before;
 import org.slf4j.Logger;
@@ -57,10 +54,7 @@ public class WFSTestConfigurator {
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private final String wfsURL = "http://150.146.160.92/geoserver/wfs";
-    //
     private final String wfsSecureURL = "http://dpc.geosdi.org/geoserver/wfs";
-    protected GPConnectorJAXBContext wfsContext = JAXBContextConnectorRepository.getProvider(
-            WFSConnectorJAXBContext.WFS_CONTEXT_KEY);
     protected GPWFSConnector serverConnector;
     protected GPWFSConnector secureServerConnector;
 

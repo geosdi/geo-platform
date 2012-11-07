@@ -310,8 +310,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                 String type = selectedItem.getType();
                 String typeName = type.substring(type.lastIndexOf(".") + 1);
 //                System.out.println("*** " + typeName + " - value: " + value);
-                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(
-                        type);
+                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(type);
                 if (!validator.validateType(value)) {
                     String errorValidation = "The value must be of " + typeName + " type";
                     bus.fireEvent(new FeatureStatusBarEvent(

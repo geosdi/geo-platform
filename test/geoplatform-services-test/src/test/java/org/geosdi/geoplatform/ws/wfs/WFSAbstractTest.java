@@ -59,8 +59,13 @@ public abstract class WFSAbstractTest {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected GPWFSService wfsService;
+    protected String addressDatastore;
 
     public void setWfsService(GPWFSService wfsService) {
         this.wfsService = wfsService;
+    }
+
+    public void setAddressDatastore(String addressDatastore) {
+        this.addressDatastore = addressDatastore;
     }
 }

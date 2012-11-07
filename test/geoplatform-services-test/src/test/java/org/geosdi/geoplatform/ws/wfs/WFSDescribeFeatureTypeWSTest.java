@@ -47,16 +47,18 @@ import org.junit.Test;
  */
 public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
 
+    private final static String VECTOR_STATES = "topp:states";
+
     @Test
     public void singleFeatureV110() throws Exception {
         Assert.assertNotNull(super.wfsService);
 
         LayerSchemaDTO layerSchema =
-                wfsService.describeFeatureType("http://localhost:8989/geoserver/wfs", "topp:states");
+                wfsService.describeFeatureType(addressDatastore, VECTOR_STATES);
         logger.info("\n\n\n@@@ {}", layerSchema);
 
         Assert.assertNotNull(layerSchema);
-        Assert.assertEquals("topp:states", layerSchema.getTypeName());
+        Assert.assertEquals(VECTOR_STATES, layerSchema.getTypeName());
         Assert.assertEquals("http://www.openplans.org/topp", layerSchema.getTargetNamespace());
 
         AttributeDTO geometry = layerSchema.getGeometry();

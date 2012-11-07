@@ -55,6 +55,7 @@ public class WFSListenerServices implements TestExecutionListener {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GPWFSService wfsService;
+    private String addressDatastore;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
@@ -66,6 +67,10 @@ public class WFSListenerServices implements TestExecutionListener {
                 "wfsClient", GPWFSClientTestConnector.class);
         Assert.assertNotNull("wfsClient is NULL", wfsClientConnector);
         wfsService = wfsClientConnector.getEndpointService();
+        Assert.assertNotNull("wfsService is NULL", wfsService);
+        
+        addressDatastore = appContext.getBean("addressDatastore", String.class);
+        Assert.assertNotNull("addressDatastore is NULL", addressDatastore);
 
         GPWFSService geoPlatformWFSService = appContext.getBean(
                 "wfsService", GPWFSService.class);
@@ -85,6 +90,7 @@ public class WFSListenerServices implements TestExecutionListener {
 
         WFSAbstractTest testInstance = (WFSAbstractTest) testContext.getTestInstance();
         testInstance.setWfsService(wfsService);
+        testInstance.setAddressDatastore(addressDatastore);
     }
 
     @Override

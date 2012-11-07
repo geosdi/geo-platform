@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.ws.wfs.bean;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.connectors.ws.wfs.GPWFSClientTestConnector;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -47,6 +48,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Develop
 public class WFSConfiguration {
+
+    private @Value("${default_wfs_datasource}")
+    String addressDatastore;
+
+    @Bean
+    public String addressDatastore() {
+        return addressDatastore;
+    }
 
     @Bean
     public GPWFSClientTestConnector wfsClient() {

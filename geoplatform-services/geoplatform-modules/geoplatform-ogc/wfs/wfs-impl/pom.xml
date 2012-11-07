@@ -171,6 +171,12 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
         </dependency>
+        
+        <!-- JTS -->
+        <dependency>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts</artifactId>
+        </dependency>
 
         <!-- SCOPE TEST -->
         <dependency>

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.ws.wfs;
 
 import java.util.List;
+import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.junit.Assert;
@@ -47,19 +48,19 @@ import org.junit.Test;
  */
 public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
 
-    private final static String VECTOR_STATES = "topp:states";
+    private final static QName TOPP_STATES = new QName("http://www.openplans.org/topp", "topp:states");
 
     @Test
     public void singleFeatureV110() throws Exception {
         Assert.assertNotNull(super.wfsService);
 
         LayerSchemaDTO layerSchema =
-                wfsService.describeFeatureType(addressDatastore, VECTOR_STATES);
+                wfsService.describeFeatureType(addressDatastore, TOPP_STATES.getLocalPart());
         logger.info("\n\n\n@@@ {}", layerSchema);
 
         Assert.assertNotNull(layerSchema);
-        Assert.assertEquals(VECTOR_STATES, layerSchema.getTypeName());
-        Assert.assertEquals("http://www.openplans.org/topp", layerSchema.getTargetNamespace());
+        Assert.assertEquals(TOPP_STATES.getLocalPart(), layerSchema.getTypeName());
+        Assert.assertEquals(TOPP_STATES.getNamespaceURI(), layerSchema.getTargetNamespace());
 
         AttributeDTO geometry = layerSchema.getGeometry();
         Assert.assertNotNull(geometry);

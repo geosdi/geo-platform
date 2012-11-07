@@ -40,9 +40,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.jws.WebService;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
@@ -70,56 +68,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWFSService")
 public class GPWFSServiceImpl implements GPWFSService {
 
-    private static final Map<String, String> GML_GEOMETRY_BINDING = new HashMap<String, String>();
-    //
-    private static final String GEOMETRY = "Geometry";
-    private static final String MULTIPOINT = "MultiPoint";
-    private static final String POINT = "Point";
-    private static final String LINESTRING = "LineString";
-    private static final String GEOMETRYCOLLECTION = "GeometryCollection";
-    private static final String MULTILINESTRING = "MultiLineString";
-    private static final String ENVELOPE = "Envelope";
-    private static final String MULTIPOLYGON = "MultiPolygon";
-    private static final String POLYGON = "Polygon";
-    private static final String LINEARRING = "LinearRing";
-
-    static {
-        GML_GEOMETRY_BINDING.put("GeometryPropertyType", GEOMETRY);
-
-        GML_GEOMETRY_BINDING.put("MultiPoint", MULTIPOINT);
-        GML_GEOMETRY_BINDING.put("MultiPointPropertyType", MULTIPOINT);
-
-        GML_GEOMETRY_BINDING.put("Point", POINT);
-        GML_GEOMETRY_BINDING.put("PointPropertyType", POINT);
-
-        GML_GEOMETRY_BINDING.put("Curve", LINESTRING);
-        GML_GEOMETRY_BINDING.put("CurvePropertyType", LINESTRING);
-
-        GML_GEOMETRY_BINDING.put("MultiGeometry", GEOMETRYCOLLECTION);
-        GML_GEOMETRY_BINDING.put("MultiGeometryPropertyType", GEOMETRYCOLLECTION);
-
-        GML_GEOMETRY_BINDING.put("CompositeCurve", MULTILINESTRING);
-        GML_GEOMETRY_BINDING.put("CompositeCurvePropertyType", MULTILINESTRING);
-        GML_GEOMETRY_BINDING.put("MultiLineStringPropertyType", MULTILINESTRING);
-        GML_GEOMETRY_BINDING.put("MultiLineString", MULTILINESTRING);
-
-        GML_GEOMETRY_BINDING.put("Envelope", ENVELOPE);
-        GML_GEOMETRY_BINDING.put("EnvelopePropertyType", ENVELOPE);
-
-        GML_GEOMETRY_BINDING.put("PolyHedralSurface", MULTIPOLYGON);
-        GML_GEOMETRY_BINDING.put("PolyHedralSurfacePropertyType", MULTIPOLYGON);
-        GML_GEOMETRY_BINDING.put("MultiSurfacePropertyType", MULTIPOLYGON);
-        GML_GEOMETRY_BINDING.put("MultiPolygonPropertyType", MULTIPOLYGON);
-
-        GML_GEOMETRY_BINDING.put("Polygon", POLYGON);
-        GML_GEOMETRY_BINDING.put("PolygonPropertyType", POLYGON);
-
-        GML_GEOMETRY_BINDING.put("Ring", LINEARRING);
-        GML_GEOMETRY_BINDING.put("RingPropertyType", LINEARRING);
-        GML_GEOMETRY_BINDING.put("LinearRing", LINEARRING);
-        GML_GEOMETRY_BINDING.put("LinearRingPropertyType", LINEARRING);
-    }
-    //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
@@ -159,7 +107,8 @@ public class GPWFSServiceImpl implements GPWFSService {
             Object geom = particles.get(0);
             LocalElement geomElement = ((JAXBElement<LocalElement>) geom).getValue();
             AttributeDTO geometryAttribute = new AttributeDTO();
-            geometryAttribute.setType(GML_GEOMETRY_BINDING.get(geomElement.getType().getLocalPart()));
+            Class typeClass = GeometryBinding.getGMLGeometry(geomElement.getType().getLocalPart());
+            geometryAttribute.setType(typeClass.getSimpleName());
             geometryAttribute.setName(geomElement.getName());
             layerSchema.setGeometry(geometryAttribute);
 

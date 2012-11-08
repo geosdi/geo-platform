@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
+import com.google.common.collect.Lists;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -178,7 +178,7 @@ public class UploadServlet extends HttpServlet {
         String extension = uploadedFile.getAbsolutePath().substring(
                 uploadedFile.getAbsolutePath().lastIndexOf(".") + 1,
                 uploadedFile.getAbsolutePath().lastIndexOf(".") + 4);
-        System.out.println("Extension: " + extension);
+        logger.info("Extension: " + extension);
         if (extension.equalsIgnoreCase(GPExtensions.ZIP.toString())) {
             try {
                 previewList = this.geoPlatformPublishClient.
@@ -187,9 +187,10 @@ public class UploadServlet extends HttpServlet {
                 logger.info("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
             }
-        } else if (extension.equalsIgnoreCase(GPExtensions.TIF.toString())) {
+        } else if (extension.equalsIgnoreCase(GPExtensions.TIF.toString())
+                || extension.equalsIgnoreCase(GPExtensions.TIFF.toString())) {
             try {
-                previewList = new ArrayList<InfoPreview>();
+                previewList = Lists.newArrayList();
                 previewList.add(this.geoPlatformPublishClient.analyzeTIFInPreview(
                         username, uploadedFile, true));
             } catch (ResourceNotFoundFault ex) {

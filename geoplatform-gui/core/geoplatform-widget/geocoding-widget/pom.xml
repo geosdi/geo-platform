@@ -31,11 +31,11 @@
 
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
-		<!-- GXT -->
+        <!-- GXT -->
         <dependency>
             <groupId>com.extjs</groupId>
             <artifactId>gxt</artifactId>
@@ -78,7 +78,7 @@
             <artifactId>geoplatform-oxm</artifactId>
         </dependency>
         
-        	<!-- GWT-OL Resources -->
+        <!-- GWT-OL Resources -->
         <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-client</artifactId>
@@ -90,7 +90,7 @@
             <scope>runtime</scope>
         </dependency>
 
-		<!-- SPRING -->
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -116,7 +116,7 @@
             <artifactId>spring-expression</artifactId>
         </dependency>
 
-	<!-- logging dependencies, delegate all to slf4j and use logback -->
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -139,7 +139,7 @@
             <artifactId>junit</artifactId>
         </dependency>
 
-		<!-- SCOPE TEST -->
+        <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -150,13 +150,13 @@
     <build>
 
         <plugins>
-			<!-- ... or ask the plugin to detect them based on gwt modules files and 
-				copy the required java sources -->
+            <!-- ... or ask the plugin to detect them based on gwt modules files and 
+        				copy the required java sources -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <executions>
-					<!-- GWT version detected from dependencyManagement -->
+                    <!-- GWT version detected from dependencyManagement -->
                     <execution>
                         <goals>
                             <goal>resources</goal>
@@ -175,8 +175,8 @@
             </plugin>
         </plugins>
 
-		<!-- TODO: the resources stuff hardcodes paths to source + test directories, 
-			we should be able to use some properties here -->
+        <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
+     			we should be able to use some properties here -->
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>

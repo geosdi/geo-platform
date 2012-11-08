@@ -18,14 +18,14 @@
 
     <dependencies>
         
-    <!-- GEOPLATFORM -->
+        <!-- GEOPLATFORM -->
        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geonetwork-catalog-api</artifactId>
         </dependency>
         
-    <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -83,11 +83,11 @@
         
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
-		<!-- JUnit -->
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

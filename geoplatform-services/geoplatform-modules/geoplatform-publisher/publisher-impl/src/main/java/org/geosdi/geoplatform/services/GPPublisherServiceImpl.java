@@ -272,7 +272,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         String userWorkspace = getWorkspace(userName);
         InfoPreview info = null;
         try {
-            Integer code = this.getEPSGCode(featureType.getCRS());
+            Integer code = this.getEPSGCodeFromString(featureType.getCRS());
             String epsgCode = null;
             if (code != null) {
                 epsgCode = "EPSG:" + code.toString();
@@ -312,7 +312,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 //            parametersMap.put("url", layerName);
 //            featureType = DataStoreFinder.getDataStore(parametersMap).getFeatureSource(layerName);
 //            System.out.println("" + CRS.getGeographicBoundingBox());
-            Integer code = this.getEPSGCode(featureType.getCRS());
+            Integer code = this.getEPSGCodeFromString(featureType.getCRS());
             String epsgCode = null;
             if (code != null) {
                 epsgCode = "EPSG:" + code.toString();
@@ -502,14 +502,20 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         return featureSource;
     }
 
-    private Integer getEPSGCode(String crs) {
-        CoordinateReferenceSystem coordinateReferenceSystem = null;
-        try {
-            coordinateReferenceSystem = CRS.parseWKT(crs);
-        } catch (FactoryException fe) {
-            logger.error("Failed to extract CoordinateReferenceSystem from String: " + fe);
+    private Integer getEPSGCodeFromString(String crs) {
+        Integer codeToReturn = null;
+        if (crs.startsWith("GEOGCS")) {
+            CoordinateReferenceSystem coordinateReferenceSystem = null;
+            try {
+                coordinateReferenceSystem = CRS.parseWKT(crs);
+            } catch (FactoryException fe) {
+                logger.error("Failed to extract CoordinateReferenceSystem from String: " + fe);
+            }
+            codeToReturn = this.getEPSGCode(coordinateReferenceSystem);
+        } else if (crs.startsWith("EPSG")) {
+            codeToReturn = Integer.parseInt(crs.substring(crs.indexOf(":") + 1));
         }
-        return this.getEPSGCode(coordinateReferenceSystem);
+        return codeToReturn;
     }
 
     private Integer getEPSGCode(SimpleFeatureSource featureSource) {
@@ -850,6 +856,9 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 //                logger.info(
 //                        "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);
 //            RESTCoverageStore store = restPublisher.publishExternalGeoTIFF(userWorkspace, fileName, fileInTifDir, epsg, sld);
+            if (restReader.getCoverage(userWorkspace, fileName, fileName) != null) {
+                restPublisher.removeCoverageStore(userWorkspace, fileName, Boolean.TRUE);
+            }
             boolean published = restPublisher.publishExternalGeoTIFF(userWorkspace,
                     fileName, fileInTifDir, fileName, epsg, GSResourceEncoder.ProjectionPolicy.FORCE_DECLARED, sld);
             if (published) {

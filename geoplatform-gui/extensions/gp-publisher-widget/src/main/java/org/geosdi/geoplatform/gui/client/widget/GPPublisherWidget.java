@@ -346,7 +346,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
 
     private void addSouthPanel() {
         fileUploader = new GPFileUploader("UploadServlet", this.epsgCheckEvent,
-                GPExtensions.ZIP, GPExtensions.TIF);
+                GPExtensions.ZIP, GPExtensions.TIF, GPExtensions.TIFF);
         southPanel = new FieldSet();
         southPanel.setHeight(78);
         southPanel.setWidth(522);

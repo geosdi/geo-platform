@@ -103,4 +103,8 @@ public class GeometryBinding {
         }
         return typeClass;
     }
+
+    public static boolean isGMLGeometricType(String type) {
+        return GML_GEOMETRY_BINDING.containsKey(type);
+    }
 }

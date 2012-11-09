@@ -38,11 +38,8 @@ package org.geosdi.geoplatform.services;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import javax.jws.WebService;
-import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.configurator.wfs.GPWFSConfigurator;
 import org.geosdi.geoplatform.connector.GPWFSConnector;
@@ -51,12 +48,8 @@ import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeReq
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.xml.xsd.v2001.LocalElement;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
-import org.geosdi.geoplatform.xml.xsd.v2001.TopLevelComplexType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +64,8 @@ public class GPWFSServiceImpl implements GPWFSService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
+    private FeatureReader featureReader = new FeatureReader();
+    //
     @Autowired
     private GPWFSConfigurator wfsConfigurator;
 
@@ -80,49 +75,32 @@ public class GPWFSServiceImpl implements GPWFSService {
         logger.debug("\n*** WFS DescribeFeatureType for layer {} ***", typeName);
         serverUrl = serverUrl.replace("wms", "wfs");
 
+        if (!typeName.contains(":")) {
+            throw new IllegalParameterFault("typeName must contain the char \":\"");
+        }
+
         if (!this.wfsConfigurator.matchDefaultDataSource(serverUrl)) {
             throw new ResourceNotFoundFault(
                     "Edit Mode cannot be applied to the server with url "
                     + wfsConfigurator.getDefaultWFSDataSource());
         }
 
-        LayerSchemaDTO layerSchema = new LayerSchemaDTO();
-        layerSchema.setTypeName(typeName);
-        List<AttributeDTO> attributeList;
+        LayerSchemaDTO layerSchema = null;
         try {
             GPWFSConnector serverConnector = this.createWFSConnector(serverUrl);
             WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
 
-            QName name = new QName(typeName);
-            request.setTypeName(Arrays.asList(name));
+            QName qName = new QName(typeName);
+            request.setTypeName(Arrays.asList(qName));
             request.setOutputFormat("text/xml; subtype=gml/3.1.1");
 
             Schema response = request.getResponse();
-            layerSchema.setTargetNamespace(response.getTargetNamespace());
+            String name = typeName.substring(typeName.indexOf(":") + 1);
+            layerSchema = featureReader.getFeature(response, name);
 
-            List<TopLevelComplexType> topLevelComplexTypeElements = response.getTopLevelComplexTypeElements();
-            TopLevelComplexType topLevelComplexType = topLevelComplexTypeElements.get(0);
-
-            List<Object> particles = topLevelComplexType.getComplexContent().getExtension().getSequence().getParticle();
-
-            Object geom = particles.get(0);
-            LocalElement geomElement = ((JAXBElement<LocalElement>) geom).getValue();
-            GeometryAttributeDTO geometryAttribute = new GeometryAttributeDTO();
-            Class typeClass = GeometryBinding.getGMLGeometry(geomElement.getType().getLocalPart());
-            geometryAttribute.setType(typeClass.getSimpleName());
-            geometryAttribute.setName(geomElement.getName());
-            layerSchema.setGeometry(geometryAttribute);
-
-            attributeList = this.createAttributes(particles);
-            layerSchema.setAttributes(attributeList);
-
-        } catch (NullPointerException ex) {
-            // data.getSchema(typeName) throws this exception
-            // if the layer is not a feature
-            logger.error(
-                    "\n### NullPointerException - The layer isn't a feature: {} ###",
-                    ex.getMessage());
-            return null;
+            if (layerSchema == null) {
+                logger.error("\n### The layer isn't a feature: {} ###");
+            }
         } catch (ServerInternalFault ex) {
             logger.error("\n### ServerInternalFault: {} ###", ex.getMessage());
         } catch (IOException ex) {
@@ -146,28 +124,6 @@ public class GPWFSServiceImpl implements GPWFSService {
             throw new IllegalParameterFault("Malformed URL");
         }
         return serverConnector;
-    }
-
-    /**
-     * Create the Feature attributes, except the geometry attribute.
-     */
-    private List<AttributeDTO> createAttributes(List<Object> particles) {
-        List<AttributeDTO> attributes = new ArrayList<AttributeDTO>(
-                particles.size() - 1);
-
-        for (int i = 1; i < particles.size(); i++) {
-            Object p = particles.get(i);
-            LocalElement l = ((JAXBElement<LocalElement>) p).getValue();
-
-            AttributeDTO att = new AttributeDTO();
-            att.setName(l.getName());
-            att.setType(l.getType().getLocalPart());
-            logger.debug("\n*** {} is of type {}", att.getName(), att.getType());
-
-            attributes.add(att);
-        }
-
-        return attributes;
     }
 
     @Override

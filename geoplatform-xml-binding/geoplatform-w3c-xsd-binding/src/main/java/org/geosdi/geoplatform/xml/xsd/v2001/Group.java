@@ -226,6 +226,20 @@ public abstract class Group
         return (this.ref != null);
     }
 
+    public List<Element> getElements() {
+        List<Element> elements = new ArrayList<Element>();
+        for (Object o : this.getParticle()) {
+            if (o instanceof JAXBElement) {
+                JAXBElement jaxbElement = (JAXBElement) o;
+                if (jaxbElement.getValue() instanceof Element) {
+                    Element element = (Element) jaxbElement.getValue();
+                    elements.add(element);
+                }
+            }
+        }
+        return elements;
+    }
+
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();

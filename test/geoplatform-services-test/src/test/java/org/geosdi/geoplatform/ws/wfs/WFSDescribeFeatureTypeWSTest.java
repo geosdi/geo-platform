@@ -52,8 +52,6 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
 
     @Test
     public void singleFeatureV110() throws Exception {
-        Assert.assertNotNull(super.wfsService);
-
         LayerSchemaDTO layerSchema =
                 wfsService.describeFeatureType(addressDatastore, TOPP_STATES.getLocalPart());
         logger.info("\n\n\n@@@ {}", layerSchema);
@@ -75,5 +73,13 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
             Assert.assertNotNull(attribute.getName());
             Assert.assertNotNull(attribute.getType());
         }
+    }
+    
+    @Test
+    public void incorrectFeatureV110() throws Exception {
+        LayerSchemaDTO layerSchema =
+                wfsService.describeFeatureType(addressDatastore, "sf:sfdem");
+
+        Assert.assertNull(layerSchema);
     }
 }

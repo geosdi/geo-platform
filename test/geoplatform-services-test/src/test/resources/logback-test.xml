@@ -43,7 +43,9 @@
     <logger name="org.geosdi.geoplatform.services.ProjectServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.AccountServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.WMSServiceImpl" level="info"/>
-    <logger name="org.geosdi.geoplatform.services.CSWServiceImpl" level="trace"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.CSWServiceImpl" level="info"/>
+    <logger name="org.geosdi.geoplatform.services.GPWFSServiceImpl" level="trace"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.FeatureReader" level="debug"/><!-- TODO info -->
     
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202"
             level="info" />

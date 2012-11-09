@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import javax.xml.namespace.QName;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
@@ -416,7 +415,28 @@ public class Schema
     }
 
     /**
-     * Returns all {@link TopLevelElement} elements
+     * Return {@link TopLevelElement} type by {@link String} name.
+     *
+     * @param name
+     *
+     * @return {@link TopLevelElement} type
+     */
+    public TopLevelElement getTopLevelElement(String name) {
+        if (name != null) {
+            for (OpenAttrs openAttrs : getSimpleTypeOrComplexTypeOrGroup()) {
+                if (openAttrs instanceof TopLevelElement) {
+                    TopLevelElement element = (TopLevelElement) openAttrs;
+                    if (element.getName().equalsIgnoreCase(name)) {
+                        return element;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns all {@link TopLevelElement} elements.
      *
      * @return {@link List<TopLevelElement>}
      */
@@ -431,25 +451,31 @@ public class Schema
     }
 
     /**
-     * Return {@link TopLevelComplexType} type by {@link QName} localPart
+     * Return {@link TopLevelComplexType} type by {@link String} name.
      *
      * @param name
      *
      * @return {@link TopLevelComplexType} type
      */
-    public TopLevelComplexType getTopLevelComplexType(QName name) {
+    public TopLevelComplexType getTopLevelComplexType(String name) {
         if (name != null) {
             for (OpenAttrs openAttrs : getSimpleTypeOrComplexTypeOrGroup()) {
-                if ((openAttrs instanceof TopLevelComplexType)
-                        && ((TopLevelComplexType) openAttrs).getName().equalsIgnoreCase(
-                        name.getLocalPart())) {
-                    return (TopLevelComplexType) openAttrs;
+                if (openAttrs instanceof TopLevelComplexType) {
+                    TopLevelComplexType complexType = (TopLevelComplexType) openAttrs;
+                    if (complexType.getName().equalsIgnoreCase(name)) {
+                        return complexType;
+                    }
                 }
             }
         }
         return null;
     }
 
+    /**
+     * Returns all {@link TopLevelComplexType} elements.
+     *
+     * @return {@link List<TopLevelComplexType>}
+     */
     public List<TopLevelComplexType> getTopLevelComplexTypeElements() {
         List<TopLevelComplexType> elements = new ArrayList<TopLevelComplexType>();
         for (OpenAttrs openAttrs : getSimpleTypeOrComplexTypeOrGroup()) {
@@ -487,19 +513,19 @@ public class Schema
             List<OpenAttrs> theIncludeOrImportOrRedefine;
             theIncludeOrImportOrRedefine = (this.isSetIncludeOrImportOrRedefine() ? this.getIncludeOrImportOrRedefine() : null);
             strategy.appendField(locator, this, "includeOrImportOrRedefine",
-                    buffer, theIncludeOrImportOrRedefine);
+                                 buffer, theIncludeOrImportOrRedefine);
         }
         {
             List<OpenAttrs> theSimpleTypeOrComplexTypeOrGroup;
             theSimpleTypeOrComplexTypeOrGroup = (this.isSetSimpleTypeOrComplexTypeOrGroup() ? this.getSimpleTypeOrComplexTypeOrGroup() : null);
             strategy.appendField(locator, this, "simpleTypeOrComplexTypeOrGroup",
-                    buffer, theSimpleTypeOrComplexTypeOrGroup);
+                                 buffer, theSimpleTypeOrComplexTypeOrGroup);
         }
         {
             String theTargetNamespace;
             theTargetNamespace = this.getTargetNamespace();
             strategy.appendField(locator, this, "targetNamespace", buffer,
-                    theTargetNamespace);
+                                 theTargetNamespace);
         }
         {
             String theVersion;
@@ -510,25 +536,25 @@ public class Schema
             List<String> theFinalDefault;
             theFinalDefault = (this.isSetFinalDefault() ? this.getFinalDefault() : null);
             strategy.appendField(locator, this, "finalDefault", buffer,
-                    theFinalDefault);
+                                 theFinalDefault);
         }
         {
             List<String> theBlockDefault;
             theBlockDefault = (this.isSetBlockDefault() ? this.getBlockDefault() : null);
             strategy.appendField(locator, this, "blockDefault", buffer,
-                    theBlockDefault);
+                                 theBlockDefault);
         }
         {
             FormChoice theAttributeFormDefault;
             theAttributeFormDefault = this.getAttributeFormDefault();
             strategy.appendField(locator, this, "attributeFormDefault", buffer,
-                    theAttributeFormDefault);
+                                 theAttributeFormDefault);
         }
         {
             FormChoice theElementFormDefault;
             theElementFormDefault = this.getElementFormDefault();
             strategy.appendField(locator, this, "elementFormDefault", buffer,
-                    theElementFormDefault);
+                                 theElementFormDefault);
         }
         {
             String theId;

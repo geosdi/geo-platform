@@ -88,7 +88,8 @@ public class GPDescribeFeatureService extends AbstractFeatureService implements
             layerSchema = featureReader.getFeature(response, name);
 
             if (layerSchema == null) {
-                logger.error("\n### The layer isn't a feature: {} ###");
+                logger.error("\n### The layer \"{}\" isn't a feature ###",
+                        typeName);
             }
         } catch (ServerInternalFault ex) {
             logger.error("\n### ServerInternalFault: {} ###", ex.getMessage());

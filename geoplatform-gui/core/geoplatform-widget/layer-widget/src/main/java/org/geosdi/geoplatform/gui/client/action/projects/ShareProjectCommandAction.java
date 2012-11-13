@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.gui.model.message.AbstractCommandAction;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
+import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
@@ -59,6 +60,11 @@ public class ShareProjectCommandAction<X extends ButtonEvent> extends AbstractCo
     public ShareProjectCommandAction() {
         super(LayerWidgetImage.INSTANCE.commandProj(),
                 BasicGinInjector.MainInjector.getInstance().getCommandActionMediator());
+    }
+
+    @Override
+    public final void registerCommandActionToMediator() {
+        this.commandActionMediator.put(GPMessageCommandType.OPEN_PROJECT, this);
     }
 
     @Override

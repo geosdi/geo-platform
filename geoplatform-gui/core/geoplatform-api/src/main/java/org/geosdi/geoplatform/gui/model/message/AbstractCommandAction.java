@@ -39,15 +39,13 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
-import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 //@Singleton
-public abstract class AbstractCommandAction<X extends ComponentEvent> extends 
-        SelectionListener<X> implements ICommandAction {
+public abstract class AbstractCommandAction<X extends ComponentEvent> extends SelectionListener<X> implements ICommandAction {
 
     protected String commandProperties;
     protected ImageResource imageResource;
@@ -57,11 +55,6 @@ public abstract class AbstractCommandAction<X extends ComponentEvent> extends
         this.imageResource = imageResource;
         this.commandActionMediator = commandActionMediator;
         this.registerCommandActionToMediator();
-    }
-
-    @Override
-    public final void registerCommandActionToMediator() {
-        this.commandActionMediator.put(GPMessageCommandType.OPEN_PROJECT, this);
     }
 
     @Override

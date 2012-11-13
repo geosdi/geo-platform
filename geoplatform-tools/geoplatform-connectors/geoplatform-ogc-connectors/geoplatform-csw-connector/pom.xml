@@ -50,6 +50,11 @@
             <artifactId>geoplatform-configurator</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-oxm</artifactId>
+        </dependency>
+        
         <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>

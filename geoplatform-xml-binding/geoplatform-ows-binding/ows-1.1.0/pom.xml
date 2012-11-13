@@ -15,10 +15,6 @@
 
     <name>Geo-Platform :: == Binding OWS 1.1.0 XML Module</name>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>

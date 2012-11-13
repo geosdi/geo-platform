@@ -392,6 +392,12 @@
                 <artifactId>geoplatform-configurator</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-oxm</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- =========================================================== -->
             <!-- SPRING -->
@@ -577,7 +583,7 @@
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
-                <version>1.4.2</version>
+                <version>1.4.3</version>
             </dependency>
             
             <!-- =========================================================== -->

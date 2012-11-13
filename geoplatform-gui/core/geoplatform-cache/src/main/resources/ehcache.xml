@@ -24,8 +24,6 @@
         <persistence strategy="localTempSwap"/>
     </cache>
     
-
-    
     <cache name="publisherCache"
            maxElementsInMemory="10000" 
            eternal="false"
@@ -34,6 +32,6 @@
            diskExpiryThreadIntervalSeconds="240"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap" />
-    </cache>>
+    </cache>
 
 </ehcache>

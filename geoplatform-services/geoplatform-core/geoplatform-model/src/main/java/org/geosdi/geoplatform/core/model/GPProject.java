@@ -88,7 +88,7 @@ public class GPProject implements Serializable {
     private int version = 1;
     //
     @Column
-    private boolean shared = false; // TODO Manage the sharing wrt permission into GPAccountProject
+    private boolean shared = false;
 
     /**
      * @return the id

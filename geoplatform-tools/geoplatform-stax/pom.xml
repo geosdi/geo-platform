@@ -15,10 +15,6 @@
 
     <name>Geo-Platform :: == Stax Module</name>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>     
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>

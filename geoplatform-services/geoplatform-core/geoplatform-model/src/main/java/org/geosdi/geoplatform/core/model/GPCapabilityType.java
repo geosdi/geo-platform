@@ -44,15 +44,15 @@ package org.geosdi.geoplatform.core.model;
 public enum GPCapabilityType {
 
     /**
-     * Web Map Server
+     * Catalog Service for the Web
      */
-    WMS,
+    CSW,
     /**
      * Web Feature Service
      */
     WFS,
     /**
-     * Catalog Service for the Web
+     * Web Map Server
      */
-    CSW;
+    WMS;
 }

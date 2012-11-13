@@ -92,13 +92,13 @@ public class GeoPlatformServer implements Serializable {
     @Column(name = "abstract", columnDefinition = "TEXT")
     private String abstractServer;
     //
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPOrganization organization;
-    //
     @Column(name = "capability_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private GPCapabilityType serverType;
+    //
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPOrganization organization;
 
     /**
      * @return the id

@@ -70,11 +70,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>          
         </dependency>
-            
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava-gwt</artifactId>
-        </dependency>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>

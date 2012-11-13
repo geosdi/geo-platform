@@ -70,9 +70,8 @@ public abstract class GPPostConnectorRequest<T>
         super(server);
     }
 
-    public HttpPost getPostMethod()
-            throws IllegalParameterFault, JAXBException, ServerInternalFault {
-
+    public HttpPost getPostMethod() throws IllegalParameterFault,
+            JAXBException, ServerInternalFault {
         if (postMethod == null) {
             this.preparePostMethod();
         }
@@ -98,8 +97,8 @@ public abstract class GPPostConnectorRequest<T>
     }
 
     @Override
-    public T getResponse()
-            throws IllegalParameterFault, ServerInternalFault, IOException {
+    public T getResponse() throws IllegalParameterFault,
+            ServerInternalFault, IOException {
         T response = null;
 
         try {
@@ -184,6 +183,34 @@ public abstract class GPPostConnectorRequest<T>
         }
 
         return writer.toString();
+    }
+
+    @Override
+    public InputStream getResponseAsStream() throws ServerInternalFault,
+            IOException, IllegalParameterFault {
+        try {
+            HttpResponse httpResponse = super.securityConnector.secure(
+                    this, this.getPostMethod());
+            HttpEntity responseEntity = httpResponse.getEntity();
+            if (responseEntity != null) {
+                return responseEntity.getContent();
+
+            } else {
+                throw new ServerInternalFault("Connector Server Error: Connection "
+                        + "problem");
+            }
+
+        } catch (JAXBException ex) {
+            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
+                    ex.getMessage());
+            throw new ServerInternalFault("*** JAXBException ***" + ex);
+
+        } catch (ClientProtocolException ex) {
+            logger.error(
+                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
+                    ex.getMessage());
+            throw new ServerInternalFault("*** ClientProtocolException ***");
+        }
     }
 
     protected abstract HttpEntity preparePostEntity()

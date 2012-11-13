@@ -33,76 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.stax.reader;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
+import javax.xml.stream.XMLStreamReader;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface GPConnectorRequest<T> {
+public abstract class GeoPlatformStaxReader  {
 
-    URI getURI();
+    protected XMLStreamReader reader;
 
-    T getResponse() throws IllegalParameterFault, ServerInternalFault,
-            IOException;
-
-    CredentialsProvider getCredentialsProvider();
-
-    DefaultHttpClient getClientConnection();
-
-    /**
-     * <p>Method to generate Response AS a {@link String} string.</p>
-     *
-     * @return {@link String}
-     *
-     * @throws ServerInternalFault, IOException, IllegalParameterFault
-     */
-    String getResponseAsString() throws ServerInternalFault, IOException,
-            IllegalParameterFault;
-
-    /**
-     * <p>Method to generate Response AS a {@link InputStream} Stream. Remember
-     * to close the Stream</p>
-     *
-     * @return {@link InputStream} stream
-     *
-     * @throws ServerInternalFault, IOException, IllegalParameterFault
-     */
-    InputStream getResponseAsStream() throws ServerInternalFault, IOException,
-            IllegalParameterFault;
-
-    /**
-     *
-     * @return Marshaller
-     *
-     * @throws JAXBException
-     */
-    Marshaller getMarshaller() throws JAXBException;
-
-    /**
-     *
-     * @return Unmarshaller
-     *
-     * @throws JAXBException
-     */
-    Unmarshaller getUnmarshaller() throws JAXBException;
-
-    /**
-     * <p>Shuts down this connection manager and releases allocated
-     * resources.</p>
-     */
-    void shutdown();
+    
 }

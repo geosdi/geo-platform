@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.feature.reader;
 
 import java.io.InputStream;
 import java.io.StringReader;
@@ -45,6 +45,7 @@ import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
 import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
+import org.geosdi.geoplatform.feature.geometry.GeometryBinding;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
@@ -63,7 +64,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureReader {
+public class GPFeatureSchemaReader implements FeatureSchemaReader {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -74,6 +75,7 @@ public class FeatureReader {
                 WFSConnectorJAXBContext.WFS_CONTEXT_KEY);
     }
 
+    @Override
     public List<LayerSchemaDTO> read(final String xml) throws JAXBException {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         StringReader stringReader = new StringReader(xml);
@@ -81,61 +83,76 @@ public class FeatureReader {
         return this.getAllFeature(schema);
     }
 
+    @Override
     public List<LayerSchemaDTO> read(final InputStream in) throws JAXBException {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         final Schema schema = (Schema) unmarshaller.unmarshal(in);
         return this.getAllFeature(schema);
     }
 
-    public LayerSchemaDTO read(final String xml, final String name) throws JAXBException {
+    @Override
+    public LayerSchemaDTO read(final String xml,
+            final String name) throws JAXBException {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         StringReader stringReader = new StringReader(xml);
         final Schema schema = (Schema) unmarshaller.unmarshal(stringReader);
         return this.getFeature(schema, name);
     }
 
-    public LayerSchemaDTO read(final InputStream in, final String name) throws JAXBException {
+    @Override
+    public LayerSchemaDTO read(final InputStream in,
+            final String name) throws JAXBException {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         final Schema schema = (Schema) unmarshaller.unmarshal(in);
         return this.getFeature(schema, name);
     }
 
+    @Override
     public List<LayerSchemaDTO> getAllFeature(final Schema schema) {
         List<LayerSchemaDTO> layerSchemaList = new ArrayList<LayerSchemaDTO>();
 
         for (TopLevelElement element : schema.getTopLevelElements()) {
             QName typeName = element.getType();
             if (typeName != null) {
-                LayerSchemaDTO layerSchema = this.getFeature(schema, element.getName());
+                LayerSchemaDTO layerSchema = this.getFeature(schema,
+                        element.getName());
 
                 layerSchemaList.add(layerSchema);
             } else {
-                logger.debug("typeName is null for element {}", element.getName());
+                logger.debug("typeName is null for element {}",
+                        element.getName());
             }
         }
 
         return layerSchemaList;
     }
 
-    public LayerSchemaDTO getFeature(final Schema schema, final String name) {
+    @Override
+    public LayerSchemaDTO getFeature(final Schema schema,
+            final String name) {
         LayerSchemaDTO layerSchema = null;
         TopLevelElement element = schema.getTopLevelElement(name);
         if (element != null) {
             QName typeName = element.getType();
             if (typeName != null) {
-                TopLevelComplexType type = schema.getTopLevelComplexType(typeName.getLocalPart());
+                TopLevelComplexType type = schema.getTopLevelComplexType(
+                        typeName.getLocalPart());
                 List<Element> elementAttributes = this.getElementAttributes(type);
                 logger.trace("*** Element Attributes: {}", elementAttributes);
 
                 layerSchema = new LayerSchemaDTO();
-                String simpleNamespace = this.getSimpleNamespace(schema.getTargetNamespace());
+                String simpleNamespace = this.getSimpleNamespace(
+                        schema.getTargetNamespace());
                 layerSchema.setTargetNamespace(schema.getTargetNamespace());
-                layerSchema.setTypeName(simpleNamespace + ":" + element.getName());
+                layerSchema.setTypeName(
+                        simpleNamespace + ":" + element.getName());
 
-                List<AttributeDTO> attributes = new ArrayList<AttributeDTO>(elementAttributes.size() - 1);
+                List<AttributeDTO> attributes = new ArrayList<AttributeDTO>(
+                        elementAttributes.size() - 1);
                 for (Element attributeElement : elementAttributes) {
                     AttributeDTO attribute = this.getAttribute(attributeElement);
-                    GeometryAttributeDTO geometryAttribute = this.getGeometryAttribute(attribute);
+                    GeometryAttributeDTO geometryAttribute = this.getGeometryAttribute(
+                            attribute);
                     if (geometryAttribute == null) {
                         attributes.add(attribute);
                     } else {
@@ -179,7 +196,8 @@ public class FeatureReader {
         AttributeDTO attribute = new AttributeDTO();
         attribute.setName(attributeElement.getName());
         attribute.setType(elementType.getLocalPart());
-        logger.debug("\n*** {} is of type {}", attribute.getName(), attribute.getType());
+        logger.debug("\n*** {} is of type {}", attribute.getName(),
+                attribute.getType());
 
         return attribute;
     }
@@ -190,7 +208,8 @@ public class FeatureReader {
             return null;
         }
         GeometryAttributeDTO geometryAttribute = new GeometryAttributeDTO();
-        geometryAttribute.setType(GeometryBinding.getGMLGeometry(type).getSimpleName());
+        geometryAttribute.setType(
+                GeometryBinding.getGMLGeometry(type).getSimpleName());
         geometryAttribute.setName(attribute.getName());
         return geometryAttribute;
     }
@@ -198,7 +217,8 @@ public class FeatureReader {
     private String getSimpleNamespace(String namespace) {
         int ind = namespace.lastIndexOf("/");
         if (ind == -1) {
-            throw new IllegalArgumentException("Namespace is incorrect: \"" + namespace + "\".");
+            throw new IllegalArgumentException(
+                    "Namespace is incorrect: \"" + namespace + "\".");
         }
         return namespace.substring(ind + 1);
     }

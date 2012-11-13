@@ -35,24 +35,29 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.Arrays;
 import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import junit.framework.Assert;
-import org.geosdi.geoplatform.configurator.category.WFSTest;
 import org.geosdi.geoplatform.connector.server.request.BBox;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@Category(WFSTest.class)
+//@Category(WFSTest.class)
 public class WFSGetFeatureTest extends WFSTestConfigurator {
 
     private QName statesName = new QName("topp:states");
@@ -79,7 +84,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setMaxFeatures(BigInteger.ONE);
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                    request.getResponseAsString());
+                request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
         logger.info("xxxxxxxxxxx {}", response.getNumberOfFeatures());
@@ -104,7 +109,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setFeatureIDs(Arrays.asList("states.1", "states.49"));
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                    request.getResponseAsString());
+                request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
         Assert.assertEquals(2, response.getNumberOfFeatures().intValue());
@@ -120,9 +125,33 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                    request.getResponseAsString());
+                request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
         Assert.assertEquals(4, response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
+    public void testGetFeatureAsStream() throws Exception {
+        DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+        domFactory.setNamespaceAware(true);
+
+        DocumentBuilder builder = domFactory.newDocumentBuilder();
+
+        WFSGetFeatureRequest<FeatureCollectionType> request =
+                super.serverConnector.createGetFeatureRequest();
+
+        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setTypeName(statesName);
+
+        InputStream stream = request.getResponseAsStream();
+
+        XPath xpath = XPathFactory.newInstance().newXPath();
+
+        Document doc = builder.parse(stream);
+
+        NodeList list = doc.getElementsByTagName(statesName.getLocalPart());
+
+        logger.info("Eccoli @@@@@@@@@@@@@@@@@@@@ " + list.getLength());
     }
 }

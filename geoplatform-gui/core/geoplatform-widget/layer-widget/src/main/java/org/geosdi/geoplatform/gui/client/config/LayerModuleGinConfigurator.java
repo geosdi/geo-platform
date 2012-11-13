@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.inject.client.AbstractGinModule;
 import org.geosdi.geoplatform.gui.client.LayerWidgetUI;
 import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFactory;
-import org.geosdi.geoplatform.gui.client.action.projects.ShareProjectCommandAction;
 import org.geosdi.geoplatform.gui.client.config.provider.IMementoSaveProvider;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveCacheManager;
@@ -53,7 +52,7 @@ public class LayerModuleGinConfigurator extends AbstractGinModule {
     protected void configure() {
         requestStaticInjection(TreeContextMenuFactory.class);
         requestStaticInjection(LayerWidgetUI.class);
-        bind(ShareProjectCommandAction.class).asEagerSingleton();
+//        bind(ShareProjectCommandAction.class).asEagerSingleton();
         bind(MementoSaveCacheManager.class).asEagerSingleton();
         bind(IMementoSave.class).toProvider(IMementoSaveProvider.class);
     }

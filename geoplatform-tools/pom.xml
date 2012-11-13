@@ -19,6 +19,7 @@
     <modules>
         <module>geoplatform-configurator</module>
         <module>geoplatform-oxm</module>
+        <module>geoplatform-stax</module>
         <module>geoplatform-connectors</module>
     </modules>
 

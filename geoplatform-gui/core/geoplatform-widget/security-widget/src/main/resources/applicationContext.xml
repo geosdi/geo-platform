@@ -10,7 +10,7 @@
 
     <context:annotation-config />
 	
-    <import resource="applicationContext-Menubar.xml" />    
+    <import resource="applicationContext-Toolbar.xml" />    
         
     <!--<bean id="userLoginManager" class="org.geosdi.geoplatform.gui.client.event.UserLoginManager"/>-->    
 

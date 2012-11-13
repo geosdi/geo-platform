@@ -40,7 +40,6 @@ import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.configurator.category.WFSTest;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.xml.xsd.v2001.LocalElement;
 import org.geosdi.geoplatform.xml.xsd.v2001.OpenAttrs;
@@ -48,14 +47,13 @@ import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 import org.geosdi.geoplatform.xml.xsd.v2001.TopLevelComplexType;
 import org.geosdi.geoplatform.xml.xsd.v2001.TopLevelElement;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Category(WFSTest.class)
+//@Category(WFSTest.class)
 public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
 
     @Test
@@ -69,7 +67,7 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
         Schema s = request.getResponse();
 
         logger.info("TARGET NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                    s.getTargetNamespace());
+                s.getTargetNamespace());
 
         for (OpenAttrs o : s.getSimpleTypeOrComplexTypeOrGroup()) {
             if (o instanceof TopLevelElement) {
@@ -82,7 +80,8 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
 
                     LocalElement l = ((JAXBElement<LocalElement>) p).getValue();
                     logger.info(
-                            "TopLevelComplexType @@@@@@@@@@@@@@@@ {}", l.getType().getLocalPart());
+                            "TopLevelComplexType @@@@@@@@@@@@@@@@ {}",
+                            l.getType().getLocalPart());
                 }
             }
         }

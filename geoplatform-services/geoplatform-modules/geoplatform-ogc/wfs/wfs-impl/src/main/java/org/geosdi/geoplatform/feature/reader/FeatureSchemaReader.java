@@ -33,76 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.feature.reader;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
+import java.util.List;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface GPConnectorRequest<T> {
+public interface FeatureSchemaReader {
 
-    URI getURI();
+    List<LayerSchemaDTO> read(final String xml) throws JAXBException;
 
-    T getResponse() throws IllegalParameterFault, ServerInternalFault,
-            IOException;
+    List<LayerSchemaDTO> read(final InputStream in) throws JAXBException;
 
-    CredentialsProvider getCredentialsProvider();
+    LayerSchemaDTO read(final String xml,
+            final String name) throws JAXBException;
 
-    DefaultHttpClient getClientConnection();
+    LayerSchemaDTO read(final InputStream in,
+            final String name) throws JAXBException;
 
-    /**
-     * <p>Method to generate Response AS a {@link String} string.</p>
-     *
-     * @return {@link String}
-     *
-     * @throws ServerInternalFault, IOException, IllegalParameterFault
-     */
-    String getResponseAsString() throws ServerInternalFault, IOException,
-            IllegalParameterFault;
+    List<LayerSchemaDTO> getAllFeature(final Schema schema);
 
-    /**
-     * <p>Method to generate Response AS a {@link InputStream} Stream. Remember
-     * to close the Stream</p>
-     *
-     * @return {@link InputStream} stream
-     *
-     * @throws ServerInternalFault, IOException, IllegalParameterFault
-     */
-    InputStream getResponseAsStream() throws ServerInternalFault, IOException,
-            IllegalParameterFault;
-
-    /**
-     *
-     * @return Marshaller
-     *
-     * @throws JAXBException
-     */
-    Marshaller getMarshaller() throws JAXBException;
-
-    /**
-     *
-     * @return Unmarshaller
-     *
-     * @throws JAXBException
-     */
-    Unmarshaller getUnmarshaller() throws JAXBException;
-
-    /**
-     * <p>Shuts down this connection manager and releases allocated
-     * resources.</p>
-     */
-    void shutdown();
+    LayerSchemaDTO getFeature(final Schema schema,
+            final String name);
 }

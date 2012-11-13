@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Francesco Izzi - geoSDI
- * 
+ *
  */
 @Embeddable
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -57,6 +57,7 @@ public class GPLayerInfo implements Serializable {
      */
     private static final long serialVersionUID = -7418444235711934950L;
     //
+    @Column(nullable = true)
     private boolean queryable = false;
     // The character ; separated list of keywords
     @Column(length = 500)
@@ -70,8 +71,7 @@ public class GPLayerInfo implements Serializable {
     }
 
     /**
-     * @param queryable
-     *            the queryable to set
+     * @param queryable the queryable to set
      */
     public void setQueryable(boolean queryable) {
         this.queryable = queryable;
@@ -88,8 +88,7 @@ public class GPLayerInfo implements Serializable {
     }
 
     /**
-     * @param keywords
-     *            the keywords to set
+     * @param keywords the keywords to set
      */
     public void setKeywords(List<String> keywords) {
         if (keywords == null || keywords.isEmpty()) {

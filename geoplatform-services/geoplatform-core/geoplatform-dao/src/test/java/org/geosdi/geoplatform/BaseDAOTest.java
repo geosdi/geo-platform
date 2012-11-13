@@ -462,13 +462,13 @@ public abstract class BaseDAOTest {
     }
 
     private void insertProjects() {
-        this.adminProject = this.createProject("admin_project", true, 0,
+        this.adminProject = this.createProject("admin_project", false, 0,
                                                new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
                                               new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)));
         this.viewerProject = this.createProject("viewer_project", false, 0,
                                                 new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)));
-        this.gsUserProject = this.createProject("gp_user_project", true, 0,
+        this.gsUserProject = this.createProject("gp_user_project", false, 0,
                                                 new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
         projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //

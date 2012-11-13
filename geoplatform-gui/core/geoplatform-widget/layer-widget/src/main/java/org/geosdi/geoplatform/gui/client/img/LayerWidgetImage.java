@@ -47,7 +47,6 @@ public interface LayerWidgetImage extends ClientBundle {
 
     LayerWidgetImage INSTANCE = GWT.create(LayerWidgetImage.class);
 
-    @Source("command-proj.jpg")
+    @Source("command-proj.png")
     ImageResource commandProj();
-
 }

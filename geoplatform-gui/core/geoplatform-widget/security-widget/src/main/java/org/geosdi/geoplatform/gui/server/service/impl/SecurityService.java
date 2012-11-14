@@ -135,6 +135,7 @@ public class SecurityService implements ISecurityService {
             throws ResourceNotFoundFault, SOAPFaultException {
         GPAccountProject accountProject = geoPlatformServiceClient.getDefaultAccountProject(account.getId());
         GPProject project;
+        GPViewport viewport = null;
         if (accountProject == null) {
             project = new GPProject();
             project.setName("Default Project");
@@ -142,9 +143,9 @@ public class SecurityService implements ISecurityService {
             project.setId(this.saveDefaultProject(account, project));
         } else {
             project = accountProject.getProject();
+            viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
         }
         this.sessionUtility.storeLoggedAccountAndDefaultProject(account, project.getId(), httpServletRequest);
-        GPViewport viewport = geoPlatformServiceClient.getDefaultViewport(accountProject.getId());
         List<GPMessage> unreadMessages = geoPlatformServiceClient.getUnreadMessagesByRecipient(account.getId());
         IGPAccountDetail userDetail = this.dtoConverter.convertAccountToDTO(account, accountProject, viewport, unreadMessages);
         userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());

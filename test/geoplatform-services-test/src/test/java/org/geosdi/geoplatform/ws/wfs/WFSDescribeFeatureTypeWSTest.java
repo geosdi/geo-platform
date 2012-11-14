@@ -50,9 +50,10 @@ import org.junit.Test;
 public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
 
     private final static QName TOPP_STATES = new QName("http://www.openplans.org/topp", "topp:states");
+    private final static QName SF_COMUNI = new QName("http://www.openplans.org/spearfish", "sf:comuni2001");
 
     @Test
-    public void singleFeatureV110() throws Exception {
+    public void statesFeatureV110() throws Exception {
         LayerSchemaDTO layerSchema =
                 wfsService.describeFeatureType(addressDatastore, TOPP_STATES.getLocalPart());
         logger.info("\n\n\n@@@ {}", layerSchema);
@@ -69,6 +70,31 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         List<AttributeDTO> attributes = layerSchema.getAttributes();
         Assert.assertNotNull(attributes);
         Assert.assertEquals(22, attributes.size());
+        for (AttributeDTO attribute : attributes) {
+            Assert.assertNotNull(attribute);
+            Assert.assertNotNull(attribute.getName());
+            Assert.assertNotNull(attribute.getType());
+        }
+    }
+
+    @Test
+    public void comuniFeatureV110() throws Exception {
+        LayerSchemaDTO layerSchema =
+                wfsService.describeFeatureType(addressDatastore, SF_COMUNI.getLocalPart());
+        logger.info("\n\n\n@@@ {}", layerSchema);
+
+        Assert.assertNotNull(layerSchema);
+        Assert.assertEquals(SF_COMUNI.getLocalPart(), layerSchema.getTypeName());
+        Assert.assertEquals(SF_COMUNI.getNamespaceURI(), layerSchema.getTargetNamespace());
+
+        AttributeDTO geometry = layerSchema.getGeometry();
+        Assert.assertNotNull(geometry);
+        Assert.assertEquals("the_geom", geometry.getName());
+        Assert.assertEquals("MultiPolygon", geometry.getType());
+
+        List<AttributeDTO> attributes = layerSchema.getAttributes();
+        Assert.assertNotNull(attributes);
+        Assert.assertEquals(10, attributes.size());
         for (AttributeDTO attribute : attributes) {
             Assert.assertNotNull(attribute);
             Assert.assertNotNull(attribute.getName());

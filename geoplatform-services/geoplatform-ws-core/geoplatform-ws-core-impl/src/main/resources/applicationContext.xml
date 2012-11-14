@@ -11,12 +11,10 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context-3.1.xsd
             http://www.springframework.org/schema/aop 
-            http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
-            http://cxf.apache.org/core             
-            http://cxf.apache.org/schemas/core.xsd
-            http://cxf.apache.org/jaxws
-            http://cxf.apache.org/schemas/jaxws.xsd"
+            http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
        default-autowire="byName">
+    
+    <context:annotation-config />
 
     <!--===================================================================== -->
     <!-- Services -->
@@ -24,32 +22,6 @@
 
     <bean id="geoPlatformService"
           class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">
-        <property name="accountDao" ref="accountDAO" />
-        <property name="accountProjectDao" ref="accountProjectDAO" />
-        <property name="projectDao" ref="projectDAO" />
-        <property name="serverDao" ref="serverDAO" />
-        <property name="folderDao" ref="folderDAO" />
-        <property name="layerDao" ref="layerDAO" />
-        <!--<property name="styleDao" ref="styleDAO" />-->
-        <property name="authorityDao" ref="authorityDAO" />
-        <property name="organizationDao" ref="organizationDAO" />
-        <property name="messageDao" ref="messageDAO" />
-        <property name="viewportDAO" ref="viewportDAO" />
-        <!-- Access Info -->
-        <property name="gsAccountDAO" ref="gsAccountDAO" />
-        <property name="gsResourceDAO" ref="gsResourceDAO" />
-        
-        <!-- ACL -->
-        <property name="classDao" ref="classDAO" />
-        <property name="entryDao" ref="entryDAO" />
-        <property name="objectIdentityDao" ref="objectIdentityDAO" />
-        <property name="sidDao" ref="sidDAO" />
-        <property name="guiComponentDao" ref="guiComponentDAO" />
-        
-        <!-- Services -->
-        <property name="schedulerService" ref="schedulerService" />
-        
-        <!-- Utility -->
         <property name="gpDigester" ref="gpDigesterSHA1" />
     </bean>
 

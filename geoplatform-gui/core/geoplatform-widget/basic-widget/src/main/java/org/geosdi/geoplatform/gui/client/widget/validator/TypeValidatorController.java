@@ -67,18 +67,18 @@ public class TypeValidatorController {
                 return true;
             }
         });
-        map.put("java.math.BigInteger", new TypeValidator() {
-            @Override
-            public boolean validateType(String value) {
-                try {
-                    new BigInteger(value);
-                } catch (NumberFormatException nfe) {
-                    return false;
-                }
-                return true;
-            }
-        });
-        map.put("integer", new TypeValidator() {
+//        map.put("java.math.BigInteger", new TypeValidator() {
+//            @Override
+//            public boolean validateType(String value) {
+//                try {
+//                    new BigInteger(value);
+//                } catch (NumberFormatException nfe) {
+//                    return false;
+//                }
+//                return true;
+//            }
+//        });
+        map.put("int", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 try {
@@ -100,7 +100,7 @@ public class TypeValidatorController {
                 return true;
             }
         });
-        map.put("java.lang.Short", new TypeValidator() {
+        map.put("short", new TypeValidator() {
             @Override
             public boolean validateType(String value) {
                 try {

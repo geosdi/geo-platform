@@ -141,11 +141,9 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
                 logger.trace("*** Element Attributes: {}", elementAttributes);
 
                 layerSchema = new LayerSchemaDTO();
-                String simpleNamespace = this.getSimpleNamespace(
-                        schema.getTargetNamespace());
                 layerSchema.setTargetNamespace(schema.getTargetNamespace());
                 layerSchema.setTypeName(
-                        simpleNamespace + ":" + element.getName());
+                        typeName.getPrefix() + ":" + element.getName());
 
                 List<AttributeDTO> attributes = new ArrayList<AttributeDTO>(
                         elementAttributes.size() - 1);
@@ -212,14 +210,5 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
                 GeometryBinding.getGMLGeometry(type).getSimpleName());
         geometryAttribute.setName(attribute.getName());
         return geometryAttribute;
-    }
-
-    private String getSimpleNamespace(String namespace) {
-        int ind = namespace.lastIndexOf("/");
-        if (ind == -1) {
-            throw new IllegalArgumentException(
-                    "Namespace is incorrect: \"" + namespace + "\".");
-        }
-        return namespace.substring(ind + 1);
     }
 }

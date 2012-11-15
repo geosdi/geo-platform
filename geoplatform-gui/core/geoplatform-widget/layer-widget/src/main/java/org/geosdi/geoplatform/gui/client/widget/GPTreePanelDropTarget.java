@@ -113,29 +113,29 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
                 && target.getParent() instanceof GPRootTreeNode) {
 //            System.out.println("Leafs without a folder not allowed");
             condition = false;// Leafs without a folder not allowed
-        } else if (source instanceof GPLayerTreeModel
-                && this.duplicateLayerCondition(target, (GPLayerTreeModel) source)) {
-//            System.out.println("Duplicated layers are not allowed on the same folder");
-            condition = false;//Duplicated layers are not allowed on the same folder
+//        } else if (source instanceof GPLayerTreeModel
+//                && this.duplicateLayerCondition(target, (GPLayerTreeModel) source)) {
+////            System.out.println("Duplicated layers are not allowed on the same folder");
+//            condition = false;//Duplicated layers are not allowed on the same folder
         }
         return condition;
     }
 
-    private boolean duplicateLayerCondition(GPBeanTreeModel target, GPLayerTreeModel layer) {
-        boolean duplicatedLayer = false;
-        GPBeanTreeModel parent = target;
-        if (target instanceof GPLayerTreeModel) {
-            parent = (GPBeanTreeModel) target.getParent();
-        }
-        for (ModelData element : parent.getChildren()) {
-            if (element != null && element instanceof GPLayerTreeModel
-                    && !element.equals(layer) && ((GPLayerTreeModel) element).getName().equals(layer.getName())) {
-                duplicatedLayer = true;
-                break;
-            }
-        }
-        return duplicatedLayer;
-    }
+//    private boolean duplicateLayerCondition(GPBeanTreeModel target, GPLayerTreeModel layer) {
+//        boolean duplicatedLayer = Boolean.FALSE;
+//        GPBeanTreeModel parent = target;
+//        if (target instanceof GPLayerTreeModel) {
+//            parent = (GPBeanTreeModel) target.getParent();
+//        }
+//        for (ModelData element : parent.getChildren()) {
+//            if (element != null && element instanceof GPLayerTreeModel
+//                    && !element.equals(layer) && ((GPLayerTreeModel) element).getName().equals(layer.getName())) {
+//                duplicatedLayer = true;
+//                break;
+//            }
+//        }
+//        return duplicatedLayer;
+//    }
 
     @Override
     protected void onDragDrop(DNDEvent event) {

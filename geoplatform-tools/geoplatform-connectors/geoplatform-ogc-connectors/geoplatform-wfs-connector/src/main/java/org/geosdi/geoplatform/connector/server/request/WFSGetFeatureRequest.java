@@ -76,6 +76,16 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
     void setBBox(BBox bBox);
 
     /**
+     * Gets the value of the SRS query property.
+     */
+    String getSRS();
+
+    /**
+     * Sets the value of the SRS query property.
+     */
+    void setSRS(String srs);
+
+    /**
      * Gets the value of the query property.
      */
 //    List<QueryType> getQuery();

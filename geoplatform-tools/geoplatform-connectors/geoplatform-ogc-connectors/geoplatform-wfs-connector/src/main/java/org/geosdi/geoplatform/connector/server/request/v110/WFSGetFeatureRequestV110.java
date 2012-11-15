@@ -116,6 +116,10 @@ public class WFSGetFeatureRequestV110
             filter.setSpatialOps(areaOperator);
         }
 
+        if (srs != null) {
+            query.setSrsName(srs);
+        }
+
         if (resultType != null) {
             request.setResultType(ResultTypeType.fromValue(resultType));
         }

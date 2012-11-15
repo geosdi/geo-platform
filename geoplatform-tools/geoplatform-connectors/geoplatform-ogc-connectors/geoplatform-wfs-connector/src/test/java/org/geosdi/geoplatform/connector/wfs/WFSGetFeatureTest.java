@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -84,7 +85,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setMaxFeatures(BigInteger.ONE);
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                request.getResponseAsString());
+                    request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
         logger.info("xxxxxxxxxxx {}", response.getNumberOfFeatures());
@@ -109,7 +110,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setFeatureIDs(Arrays.asList("states.1", "states.49"));
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                request.getResponseAsString());
+                    request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
         Assert.assertEquals(2, response.getNumberOfFeatures().intValue());
@@ -125,10 +126,32 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                request.getResponseAsString());
+                    request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
         Assert.assertEquals(4, response.getNumberOfFeatures().intValue());
+    }
+
+    @Ignore("ToDo complete with assertion")
+    @Test
+    public void statesSRS() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request =
+                super.serverConnector.createGetFeatureRequest();
+
+        request.setTypeName(statesName);
+        request.setResultType(ResultTypeType.RESULTS.value());
+
+        FeatureCollectionType response = request.getResponse();
+        // TODO Check geometry into default SRS EPSG:4326
+
+        request = super.serverConnector.createGetFeatureRequest();
+
+        request.setTypeName(statesName);
+        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setSRS("EPSG:900913");
+
+        response = request.getResponse();
+        // TODO Check geometry into SRS EPSG:900913
     }
 
     @Test

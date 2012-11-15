@@ -52,6 +52,7 @@ public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T>
     protected QName typeName;
     protected List<String> featureIDs;
     protected BBox bBox;
+    protected String srs;
     protected String resultType;
     protected String outputFormat;
     protected BigInteger maxFeatures;
@@ -88,6 +89,16 @@ public abstract class AbstractGetFeatureRequest<T> extends WFSRequest<T>
     @Override
     public void setBBox(BBox bBox) {
         this.bBox = bBox;
+    }
+
+    @Override
+    public String getSRS() {
+        return srs;
+    }
+
+    @Override
+    public void setSRS(String srs) {
+        this.srs = srs;
     }
 
     @Override

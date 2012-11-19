@@ -47,7 +47,7 @@ public class AttributeDetail extends GeoPlatformBeanModel {
 
     public enum AttributeDetailKeyValue {
 
-        NAME, VALUE, TYPE;
+        NAME, VALUE, TYPE, MAX, MIN, NILLABLE;
     }
 
     public String getName() {
@@ -72,6 +72,30 @@ public class AttributeDetail extends GeoPlatformBeanModel {
 
     public void setType(String type) {
         super.set(AttributeDetailKeyValue.TYPE.name(), type);
+    }
+
+    public Integer getMaxOccurs() {
+        return super.get(AttributeDetailKeyValue.MAX.name());
+    }
+
+    public void setMaxOccurs(Integer maxOccurs) {
+        super.set(AttributeDetailKeyValue.MAX.name(), maxOccurs);
+    }
+
+    public Integer getMinOccurs() {
+        return super.get(AttributeDetailKeyValue.MIN.name());
+    }
+
+    public void setMinOccurs(Integer minOccurs) {
+        super.set(AttributeDetailKeyValue.MIN.name(), minOccurs);
+    }
+
+    public Boolean isNillable() {
+        return super.get(AttributeDetailKeyValue.NILLABLE.name());
+    }
+
+    public void setNillable(Boolean nillable) {
+        super.set(AttributeDetailKeyValue.NILLABLE.name(), nillable);
     }
 
     @Override

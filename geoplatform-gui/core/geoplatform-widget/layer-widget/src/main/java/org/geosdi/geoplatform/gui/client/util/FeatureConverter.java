@@ -55,6 +55,9 @@ public class FeatureConverter {
         attribute.setValue(attributeDTO.getValue() == null
                 ? "" : attributeDTO.getValue());
         attribute.setType(attributeDTO.getType());
+        attribute.setMaxOccurs(attributeDTO.getMaxOccurs());
+        attribute.setMinOccurs(attributeDTO.getMinOccurs());
+        attribute.setNillable(attributeDTO.isNillable());
         return attribute;
     }
 
@@ -63,6 +66,9 @@ public class FeatureConverter {
         attributeDTO.setName(attribute.getName());
         attributeDTO.setValue(attribute.getValue());
         attributeDTO.setType(attribute.getType());
+        attributeDTO.setMaxOccurs(attribute.getMaxOccurs());
+        attributeDTO.setMinOccurs(attribute.getMinOccurs());
+        attributeDTO.setNillable(attribute.isNillable());
         return attributeDTO;
     }
 

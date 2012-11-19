@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.feature.reader;
 
 import java.io.InputStream;
 import java.io.StringReader;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBException;
@@ -114,13 +115,10 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
         for (TopLevelElement element : schema.getTopLevelElements()) {
             QName typeName = element.getType();
             if (typeName != null) {
-                LayerSchemaDTO layerSchema = this.getFeature(schema,
-                        element.getName());
-
+                LayerSchemaDTO layerSchema = this.getFeature(schema, element.getName());
                 layerSchemaList.add(layerSchema);
             } else {
-                logger.debug("typeName is null for element {}",
-                        element.getName());
+                logger.debug("typeName is null for element {}", element.getName());
             }
         }
 
@@ -192,10 +190,24 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
         }
 
         AttributeDTO attribute = new AttributeDTO();
-        attribute.setName(attributeElement.getName());
         attribute.setType(elementType.getLocalPart());
+        attribute.setName(attributeElement.getName());
         logger.debug("\n*** {} is of type {}", attribute.getName(),
-                attribute.getType());
+                     attribute.getType());
+
+        BigInteger minOccurs = attributeElement.getMinOccurs();
+        attribute.setMinOccurs(minOccurs == null ? 1 : minOccurs.intValue());
+
+        String maxOccurs = attributeElement.getMaxOccurs();
+        if (maxOccurs == null) {
+            attribute.setMaxOccurs(1);
+        } else if ("unbounded".equalsIgnoreCase(maxOccurs)) {
+            attribute.setMaxOccurs(Integer.MAX_VALUE);
+        } else {
+            attribute.setMaxOccurs(Integer.parseInt(maxOccurs));
+        }
+
+        attribute.setNillable(attributeElement.isNillable());
 
         return attribute;
     }

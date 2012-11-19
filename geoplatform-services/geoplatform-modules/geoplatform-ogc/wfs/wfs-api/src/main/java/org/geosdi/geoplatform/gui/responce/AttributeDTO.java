@@ -49,6 +49,9 @@ public class AttributeDTO implements Serializable {
     private String type;
     private String name;
     private String value;
+    private int maxOccurs;
+    private int minOccurs;
+    private boolean nillable;
 
     public AttributeDTO() {
     }
@@ -77,12 +80,41 @@ public class AttributeDTO implements Serializable {
         this.value = value;
     }
 
+    public int getMaxOccurs() {
+        return maxOccurs;
+    }
+
+    public void setMaxOccurs(int maxOccurs) {
+        this.maxOccurs = maxOccurs;
+    }
+
+    public int getMinOccurs() {
+        return minOccurs;
+    }
+
+    public void setMinOccurs(int minOccurs) {
+        this.minOccurs = minOccurs;
+    }
+
+    public boolean isNillable() {
+        return nillable;
+    }
+
+    public void setNillable(boolean nillable) {
+        this.nillable = nillable;
+    }
+    
+    
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("AttributeDTO {");
         str.append("name=").append(name);
         str.append(", value=").append(value);
         str.append(", type=").append(type);
+        str.append(", maxOccurs=").append(maxOccurs);
+        str.append(", minOccurs=").append(minOccurs);
+        str.append(", nillable=").append(nillable);
         return str.append("}").toString();
     }
 }

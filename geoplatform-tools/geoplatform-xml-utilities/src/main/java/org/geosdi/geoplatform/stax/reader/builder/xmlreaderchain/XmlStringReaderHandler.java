@@ -33,8 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.stax.reader;
+package org.geosdi.geoplatform.stax.reader.builder.xmlreaderchain;
 
+import java.io.StringReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 /**
@@ -42,9 +45,15 @@ import javax.xml.stream.XMLStreamReader;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformStaxReader  {
+public class XmlStringReaderHandler extends AbstractReaderBuildHandler {
 
-    protected XMLStreamReader reader;
-
-    
+    @Override
+    public XMLStreamReader buildXmlReader(Object o,
+            XMLInputFactory factory) throws XMLStreamException {
+        if (o instanceof String) {
+            return factory.createXMLStreamReader(new StringReader((String) o));
+        } else {
+            return super.forwardBuildXmlReader(o, factory);
+        }
+    }
 }

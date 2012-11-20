@@ -58,6 +58,7 @@ public abstract class AbstractStaxStreamReader<T> implements
 
     protected XMLStreamReader reader;
     private StreamBuildHandler streamBuilder = new FileBuildHandler();
+    private XmlStreamReaderBuilder xmlStreamBuilder = XmlStreamReaderBuilder.newInstance();
     private InputStream stream;
 
     /**
@@ -83,8 +84,8 @@ public abstract class AbstractStaxStreamReader<T> implements
 
         this.stream = streamBuilder.buildStream(o);
 
-        this.reader = (this.stream != null) ? XmlStreamReaderBuilder.newInstance().build(
-                stream) : XmlStreamReaderBuilder.newInstance().build(o);
+        this.reader = (this.stream != null) ? xmlStreamBuilder.build(stream)
+                : xmlStreamBuilder.build(o);
     }
 
     /**

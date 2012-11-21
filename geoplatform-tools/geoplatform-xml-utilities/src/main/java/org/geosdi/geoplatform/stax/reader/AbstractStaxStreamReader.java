@@ -41,8 +41,10 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.net.URI;
 import java.net.URL;
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.events.XMLEvent;
 import javax.xml.transform.Source;
 import org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder;
 import org.geosdi.geoplatform.stax.reader.builder.streamchain.FileBuildHandler;
@@ -98,6 +100,23 @@ public abstract class AbstractStaxStreamReader<T> implements
     @Override
     public void destroy() throws XMLStreamException, IOException {
         reset();
+    }
+
+    /**
+     * 
+     * @param tagName
+     * @throws XMLStreamException 
+     */
+    protected void goToEndTag(String tagName) throws XMLStreamException {
+        while (reader.hasNext()) {
+            if ((XMLEvent.END_ELEMENT == reader.next()) && (tagName.equalsIgnoreCase(
+                    reader.getLocalName()))) {
+                return;
+            } else {
+                throw new XMLStreamException("Tag Name : " + tagName
+                        + " not Found.");
+            }
+        }
     }
 
     /**

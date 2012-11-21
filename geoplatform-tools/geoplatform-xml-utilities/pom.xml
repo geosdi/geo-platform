@@ -13,7 +13,7 @@
     <version>1.5-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == Xml Utilities Module</name>
+    <name>Geo-Platform :: == XML Utilities Module</name>
     
     <description>This module provides support for reading and writing xml file
         using StAX. There is also support for read xml file using SAX.
@@ -76,7 +76,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

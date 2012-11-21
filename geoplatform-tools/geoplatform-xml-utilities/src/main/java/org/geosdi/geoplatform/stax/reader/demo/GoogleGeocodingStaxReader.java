@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.stax.reader.demo;
 
 import java.io.IOException;
-import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
 import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;

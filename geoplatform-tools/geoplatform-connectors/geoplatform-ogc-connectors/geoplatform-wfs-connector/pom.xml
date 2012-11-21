@@ -33,7 +33,13 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-w3c-xsd-binding</artifactId>
-            <version>1.5-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-xml-utilities</artifactId>
+            <version>${project.version}</version>
         </dependency>
         
         <dependency>
@@ -89,16 +95,16 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-        
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
 
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
     

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.wfs.reader;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
@@ -66,6 +67,16 @@ public class FeatureTigerRoadsTest {
         featureReader.read(new File(pathFile));
     }
 
+    @Test
+    public void readAllTigerRoadsFeaturesNet() throws IOException, XMLStreamException {
+        featureReader.read(
+                new URL("http://150.146.160.92/geoserver/wfs?service=wfs"
+                + "&version=1.1.0"
+                + "&request=GetFeature"
+                + "&typeName=tiger:tiger_roads"
+                + "&maxFeatures=1000"));
+    }
+
     class FeatureTigerRoadsStaxReader extends AbstractStaxStreamReader<StringBuilder> {
 
         private StringBuilder builder = new StringBuilder();
@@ -82,11 +93,11 @@ public class FeatureTigerRoadsTest {
                     if ("wfs".equals(reader.getPrefix()) && "FeatureCollection".equals(
                             reader.getLocalName())) {
                         String numberOfFeatures = reader.getAttributeValue(null,
-                                "numberOfFeatures");
+                                                                           "numberOfFeatures");
                         String timeStamp = reader.getAttributeValue(null,
-                                "timeStamp");
+                                                                    "timeStamp");
                         logger.info("\n@@@@@@@@@@@ {} - {}", numberOfFeatures,
-                                timeStamp);
+                                    timeStamp);
                     } else if ("featureMembers".equals(reader.getLocalName())
                             || "featureMember".equals(reader.getLocalName())) {
                         reader.next();
@@ -113,11 +124,10 @@ public class FeatureTigerRoadsTest {
             if (eventType == XMLEvent.START_ELEMENT) {
                 MultiLineStringType geometry;
                 geometry = jaxbContextBuilder.unmarshal(reader,
-                        MultiLineStringType.class);
+                                                        MultiLineStringType.class);
 
                 logger.info("Geometry @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
                         + geometry);
-
 
                 super.goToEndTag("the_geom");
             }
@@ -128,32 +138,30 @@ public class FeatureTigerRoadsTest {
         StringBuilder readAttributes() throws XMLStreamException {
             int event = reader.nextTag();
 
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder("\n");
 
             if (event == XMLEvent.START_ELEMENT) {
-
-                stringBuilder.append("\n");
 
                 while (reader.hasNext()) {
 
                     if (event == XMLEvent.START_ELEMENT) {
                         String localName = reader.getLocalName();
+                        if (localName.equals("tiger_roads")) {
+                            break;
+                        }
 
                         int eventType = reader.next();
-
                         if (eventType == XMLEvent.CHARACTERS) {
-                            if (localName.equals("tiger_roads")) {
-                                break;
-                            }
 
-                            stringBuilder.append("LocalName : ").append(
-                                    localName).append(" - Value : ").append(
-                                    reader.getText()).append("\n");
+                            stringBuilder.append("LocalName : ")
+                                    .append(localName)
+                                    .append(" - Value : ")
+                                    .append(reader.getText()).append("\n");
 
                             super.goToEndTag(localName);
                         }
                     }
-                    reader.nextTag();
+                    reader.next();
                 }
             }
             return stringBuilder;

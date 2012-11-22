@@ -35,14 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
-import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.Arrays;
 import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.connector.server.request.BBox;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
@@ -51,8 +46,6 @@ import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 
 /**
  *
@@ -152,29 +145,5 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
         response = request.getResponse();
         // TODO Check geometry into SRS EPSG:900913
-    }
-
-    @Test
-    public void testGetFeatureAsStream() throws Exception {
-        DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-        domFactory.setNamespaceAware(true);
-
-        DocumentBuilder builder = domFactory.newDocumentBuilder();
-
-        WFSGetFeatureRequest<FeatureCollectionType> request =
-                super.serverConnector.createGetFeatureRequest();
-
-        request.setResultType(ResultTypeType.RESULTS.value());
-        request.setTypeName(statesName);
-
-        InputStream stream = request.getResponseAsStream();
-
-        XPath xpath = XPathFactory.newInstance().newXPath();
-
-        Document doc = builder.parse(stream);
-
-        NodeList list = doc.getElementsByTagName(statesName.getLocalPart());
-
-        logger.info("Eccoli @@@@@@@@@@@@@@@@@@@@ " + list.getLength());
     }
 }

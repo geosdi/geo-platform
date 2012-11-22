@@ -244,7 +244,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         this.removeLayer(layerName);
         restPublisher.unpublishFeatureType(userWorkspace, layerName, layerName);
         reload();
-        restPublisher.removeDatastore(userWorkspace, layerName);
+        restPublisher.removeDatastore(userWorkspace, layerName, Boolean.TRUE);
         return true;
     }
 
@@ -640,6 +640,36 @@ public class GPPublisherServiceImpl implements GPPublisherService,
      * @return check whether the layer layerName exists in the workspace
      * workspace
      */
+    public boolean existsLayerInDataStore(String workspace, String dataStoreName, String layerName) {
+        boolean result = Boolean.FALSE;
+        String layerStoreName = null;
+        RESTLayer layer = restReader.getLayer(layerName);
+        if (layer != null) {
+            RESTFeatureType restft = restReader.getFeatureType(layer);
+            if (restft != null) {
+                layerStoreName = restft.getName();
+            }
+        }
+        if (layerStoreName != null && dataStoreName.equals(layerStoreName)) {
+            result = Boolean.TRUE;
+        }
+//        RESTDataStoreList workspaceDataStores = restReader.getDatastores(
+//                workspace);
+//        for (int i = 0; i < workspaceDataStores.size(); i++) {
+//            if (workspaceDataStores.get(i).getName().equals(dataStoreName)) {
+////                restReader.getLayer(layerName). Datastore(workspace, dataStoreName).;
+//            }
+//        }
+        return result;
+    }
+
+    /**
+     * ************
+     *
+     * @param workspace
+     * @param dataStoreName
+     * @return check whether the dataStore exists in the workspace
+     */
     public boolean existsDataStore(String workspace, String dataStoreName) {
         RESTDataStoreList workspaceDataStores = restReader.getDatastores(
                 workspace);
@@ -813,8 +843,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
             info.sld = infoPreview.getStyleName();
             if (infoPreview.isIsShape()) {
                 info.isShp = Boolean.TRUE;
-                infoPreview = this.publishShpInPreview(userName, userWorkspace,
-                        info, tempUserZipDir);
+                infoPreview = this.publishShpInPreview(userWorkspace, info, tempUserZipDir);
             } else {
                 info.isShp = Boolean.FALSE;
                 File fileInTifDir = new File(tempUserTifDir, info.name + ".tif");
@@ -920,10 +949,10 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         return infoPreview;
     }
 
-    private InfoPreview publishShpInPreview(String userName, String userWorkspace, LayerInfo info,
+    private InfoPreview publishShpInPreview(String userWorkspace, LayerInfo info,
             String tempUserZipDir) {
         InfoPreview infoPreview = null;
-        String datatStoreName = info.name;
+        String datatStoreName = userWorkspace;
         // check if the dataStore already exists
         if (existsDataStore(userWorkspace, datatStoreName)) {
             boolean result = restPublisher.unpublishFeatureType(userWorkspace,

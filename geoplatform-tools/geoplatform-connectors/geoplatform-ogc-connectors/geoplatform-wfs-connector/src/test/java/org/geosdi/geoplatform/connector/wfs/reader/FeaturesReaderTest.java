@@ -37,14 +37,9 @@ package org.geosdi.geoplatform.connector.wfs.reader;
 
 import java.io.File;
 import java.io.IOException;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
-import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
-import org.geosdi.geoplatform.connector.jaxb.JAXBContextConnectorRepository;
-import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
+import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
 import org.geosdi.geoplatform.xml.gml.v311.MultiSurfaceType;
 import org.junit.Test;
@@ -57,54 +52,40 @@ import org.slf4j.LoggerFactory;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeaturesReaderTest {
-    
-    static {
-        wfsContext = JAXBContextConnectorRepository.getProvider(
-                WFSConnectorJAXBContext.WFS_CONTEXT_KEY);
-    }
-    //
-    private static final GPConnectorJAXBContext wfsContext;
-    //
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private FeatureStaxReader featureReader = new FeatureStaxReader();
-    
+    private GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+
     @Test
     public void readGetFeature() throws IOException, XMLStreamException {
         String pathFile = new File(".").getCanonicalPath() + File.separator
                 + "src/test/resources/getFeature.xml";
-        
+
         StringBuilder read = featureReader.read(new File(pathFile));
-        
-        logger.info("Result GetFeature from File @@@@@@@@@@@@@@@@@@@@ {}",
-                read.toString());
     }
-    
+
     @Test
     public void readAllFeatures() throws IOException, XMLStreamException {
         String pathFile = new File(".").getCanonicalPath() + File.separator
                 + "src/test/resources/states-getFeature-all.xml";
-        
+
         StringBuilder read = featureReader.read(new File(pathFile));
-        
-        logger.info("Result GetAllFeature from File @@@@@@@@@@@@@@@@@@@@ {}",
-                read.toString());
     }
-    
+
     class FeatureStaxReader extends AbstractStaxStreamReader<StringBuilder> {
-        
+
         private StringBuilder builder = new StringBuilder();
-        
+
         @Override
         public StringBuilder read(Object o) throws XMLStreamException, IOException {
             super.acquireReader(o);
-            
-            String featureID = null;
-            
+
             while (reader.hasNext()) {
-                
+
                 int evenType = reader.getEventType();
-                
+
                 if (evenType == XMLEvent.START_ELEMENT) {
                     if ("wfs".equals(reader.getPrefix()) && "FeatureCollection".equals(
                             reader.getLocalName())) {
@@ -114,53 +95,76 @@ public class FeaturesReaderTest {
                                 "timeStamp");
                         logger.info("\n@@@@@@@@@@@ {} - {}", numberOfFeatures,
                                 timeStamp);
-                    }
-                    
-                    if ("topp".equals(reader.getPrefix()) && "states".equals(
+                    } else if ("featureMembers".equals(reader.getLocalName())
+                            || "featureMember".equals(reader.getLocalName())) {
+                        reader.next();
+                    } else if ("topp".equals(reader.getPrefix()) && "states".equals(
                             reader.getLocalName())) {
-                        featureID = reader.getAttributeValue(
+                        String featureID = reader.getAttributeValue(
                                 "http://www.opengis.net/gml", "id");
-                        logger.info("\n@@@@@@@@@@@ {}", featureID);
-                    }
-                    
-                    if ("topp".equals(reader.getPrefix()) && "the_geom".equals(
+                        logger.info("\n@@@@@@@@@@@ FEATURE_ID : {}", featureID);
+
+                    } else if ("topp".equals(reader.getPrefix()) && "the_geom".equals(
                             reader.getLocalName())) {
                         readGeometry();
                     }
-                    
-                    logger.info("Event Type @@@@@@@@@@@@@@@@@@ " + reader.getLocalName());
                 }
-
-//                if (evenType == XMLEvent.CHARACTERS) {
-//                    builder.append(reader.getText());
-//                }
-
                 reader.next();
             }
-            
+
             return builder;
         }
-        
+
         void readGeometry() throws XMLStreamException {
             int eventType = reader.nextTag();
-            
+
             if (eventType == XMLEvent.START_ELEMENT) {
-                
-                Unmarshaller u;
                 MultiSurfaceType geometry;
-                try {
-                    u = wfsContext.acquireUnmarshaller();
-                    geometry = ((JAXBElement<MultiSurfaceType>) u.unmarshal(
-                            reader)).getValue();
-                    
-                    logger.info("ECCOLA @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                            + geometry);
-                } catch (JAXBException ex) {
-                    logger.error("ERROR @@@@@@@@@@@@@@@ " + ex);
-                }
-                
+                geometry = jaxbContextBuilder.unmarshal(reader,
+                        MultiSurfaceType.class);
+
+                logger.info("ECCOLA @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
+                        + geometry);
+
+
                 super.goToEndTag("the_geom");
             }
+
+            logger.info(readAttributes().toString());
+        }
+
+        StringBuilder readAttributes() throws XMLStreamException {
+            int event = reader.nextTag();
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            if (event == XMLEvent.START_ELEMENT) {
+
+                stringBuilder.append("\n");
+
+                while (reader.hasNext()) {
+
+                    if (event == XMLEvent.START_ELEMENT) {
+                        String localName = reader.getLocalName();
+
+                        int eventType = reader.next();
+
+                        if (eventType == XMLEvent.CHARACTERS) {
+                            if (localName.equals("states")) {
+                                break;
+                            }
+
+                            stringBuilder.append("LocalName : ").append(
+                                    localName).append(" - Value : ").append(
+                                    reader.getText()).append("\n");
+
+                            super.goToEndTag(localName);
+                        }
+                    }
+                    reader.nextTag();
+                }
+            }
+            return stringBuilder;
         }
     }
 }

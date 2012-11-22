@@ -18,7 +18,8 @@
     
     <properties>
         <!-- Keep aligned with src/main/resources/geoplatform_datasource.xml -->
-        <db.url>jdbc:postgresql://localhost:5432/gp</db.url>
+        <db.baseurl>jdbc:postgresql://localhost:5432</db.baseurl>
+        <db.url>${db.baseurl}/gp</db.url>
         <db.driverClassName>org.postgresql.Driver</db.driverClassName>
         <db.username>postgres</db.username>
         <db.password>0x,postgres,0x</db.password>
@@ -431,7 +432,7 @@
                                                 
                         <configuration>
                             <!-- Need another database to drop the targeted one -->
-                            <url>jdbc:postgresql://localhost:5432/template_postgis</url>
+                            <url>${db.baseurl}/template_postgis</url>
                             <driver>${db.driverClassName}</driver>                            
                             <username>${db.username}</username>
                             <password>${db.password}</password>                            
@@ -465,7 +466,7 @@
                         </dependencies>
                                                 
                         <configuration>
-                            <url>jdbc:postgresql://localhost:5432/</url>
+                            <url>${db.baseurl}</url>
                             <driver>${db.driverClassName}</driver>
                             <username>${db.username}</username>
                             <password>${db.password}</password>

@@ -383,12 +383,12 @@ public abstract class BaseDAOTest {
         GeoPlatformServer server1WMS = createServer1WMS();
         GeoPlatformServer server2WMS = createServer2WMS();
         serverDAO.persist(server1WMS, server2WMS);
-        logger.debug("\n*** SAVED Server:\n{}\n***", server1WMS);
-        logger.debug("\n*** SAVED Server:\n{}\n***", server2WMS);
+        logger.debug("\n*** SAVED WMS Server:\n{}\n***", server1WMS);
+        logger.debug("\n*** SAVED WMS Server:\n{}\n***", server2WMS);
         // CSW
-//        GeoPlatformServer server1CSW = createServer1CSW();
-//        serverDAO.persist(server1CSW);
-//        logger.debug("\n*** SAVED Server:\n{}\n***", server1CSW);
+        GeoPlatformServer server1CSW = createServer1CSW();
+        serverDAO.persist(server1CSW);
+        logger.debug("\n*** SAVED CSW Server:\n{}\n***", server1CSW);
         //
 //        this.insertDummyCSWServer();
     }
@@ -423,15 +423,15 @@ public abstract class BaseDAOTest {
 //        return server;
 //    }
 //
-//    private GeoPlatformServer createServer1CSW() {
-//        GeoPlatformServer server = new GeoPlatformServer();
-//        server.setServerUrl("http://catalog.geosdi.org/geonetwork/srv/en/csw");
-//        server.setName("csw.geosdi.org");
-//        server.setAliasName("CSW on geosdi");
-//        server.setServerType(GPCapabilityType.CSW);
-//        server.setOrganization(organizationTest);
-//        return server;
-//    }
+    private GeoPlatformServer createServer1CSW() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("http://catalog.geosdi.org/geonetwork/srv/en/csw");
+        server.setName("csw.geosdi.org");
+        server.setAliasName("CSW on geosdi");
+        server.setServerType(GPCapabilityType.CSW);
+        server.setOrganization(organizationTest);
+        return server;
+    }
 //
 //    private void insertDummyCSWServer() {
 //        for (int i = 10; i <= 99; i++) {

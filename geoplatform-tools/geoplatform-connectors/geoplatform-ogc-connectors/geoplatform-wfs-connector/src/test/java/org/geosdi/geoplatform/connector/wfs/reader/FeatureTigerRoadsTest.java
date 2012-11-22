@@ -41,7 +41,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
-import org.geosdi.geoplatform.xml.gml.v311.MultiSurfaceType;
+import org.geosdi.geoplatform.xml.gml.v311.MultiLineStringType;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,30 +51,22 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeaturesReaderTest {
+public class FeatureTigerRoadsTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private FeatureStaxReader featureReader = new FeatureStaxReader();
+    private FeatureTigerRoadsStaxReader featureReader = new FeatureTigerRoadsStaxReader();
     private GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
 
     @Test
-    public void readGetFeature() throws IOException, XMLStreamException {
+    public void readAllTigerRoadsFeatures() throws IOException, XMLStreamException {
         String pathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/getFeature.xml";
+                + "src/test/resources/tigerRoads-GetFeature.xml";
 
-        StringBuilder read = featureReader.read(new File(pathFile));
+        featureReader.read(new File(pathFile));
     }
 
-    @Test
-    public void readAllFeatures() throws IOException, XMLStreamException {
-        String pathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/states-getFeature-all.xml";
-
-        StringBuilder read = featureReader.read(new File(pathFile));
-    }
-
-    class FeatureStaxReader extends AbstractStaxStreamReader<StringBuilder> {
+    class FeatureTigerRoadsStaxReader extends AbstractStaxStreamReader<StringBuilder> {
 
         private StringBuilder builder = new StringBuilder();
 
@@ -98,13 +90,13 @@ public class FeaturesReaderTest {
                     } else if ("featureMembers".equals(reader.getLocalName())
                             || "featureMember".equals(reader.getLocalName())) {
                         reader.next();
-                    } else if ("topp".equals(reader.getPrefix()) && "states".equals(
+                    } else if ("tiger".equals(reader.getPrefix()) && "tiger_roads".equals(
                             reader.getLocalName())) {
                         String featureID = reader.getAttributeValue(
                                 "http://www.opengis.net/gml", "id");
                         logger.info("\n@@@@@@@@@@@ FEATURE_ID : {}", featureID);
 
-                    } else if ("topp".equals(reader.getPrefix()) && "the_geom".equals(
+                    } else if ("tiger".equals(reader.getPrefix()) && "the_geom".equals(
                             reader.getLocalName())) {
                         readGeometry();
                     }
@@ -119,11 +111,11 @@ public class FeaturesReaderTest {
             int eventType = reader.nextTag();
 
             if (eventType == XMLEvent.START_ELEMENT) {
-                MultiSurfaceType geometry;
+                MultiLineStringType geometry;
                 geometry = jaxbContextBuilder.unmarshal(reader,
-                        MultiSurfaceType.class);
+                        MultiLineStringType.class);
 
-                logger.info("ECCOLA @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
+                logger.info("Geometry @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
                         + geometry);
 
 
@@ -150,7 +142,7 @@ public class FeaturesReaderTest {
                         int eventType = reader.next();
 
                         if (eventType == XMLEvent.CHARACTERS) {
-                            if (localName.equals("states")) {
+                            if (localName.equals("tiger_roads")) {
                                 break;
                             }
 

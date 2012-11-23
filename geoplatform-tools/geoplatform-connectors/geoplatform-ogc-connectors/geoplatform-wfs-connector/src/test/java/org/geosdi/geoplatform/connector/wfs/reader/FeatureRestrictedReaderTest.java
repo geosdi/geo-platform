@@ -52,44 +52,35 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeaturesStatesReaderTest {
+public class FeatureRestrictedReaderTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private FeatureStatesStaxReader featureReader = new FeatureStatesStaxReader();
+    private FeatureRestrictedStaxReader featureReader = new FeatureRestrictedStaxReader();
     private GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
 
     @Test
-    public void readGetFeature() throws IOException, XMLStreamException {
+    public void readAllRestrictedFeatures() throws IOException, XMLStreamException {
         String pathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/getFeature.xml";
+                + "src/test/resources/restrictedGetFeature.xml";
 
-        StringBuilder read = featureReader.read(new File(pathFile));
+        featureReader.read(new File(pathFile));
     }
 
     @Test
-    public void readAllFeatures() throws IOException, XMLStreamException {
-        String pathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/states-getFeature-all.xml";
-
-        StringBuilder read = featureReader.read(new File(pathFile));
+    public void readAllRestrictedFeaturesNet() throws IOException, XMLStreamException {
+        featureReader.read(new URL("http://150.146.160.92/geoserver/wfs?"
+                + "service=wfs&version=1.1.0&request="
+                + "GetFeature&typeName=sf:restricted"));
     }
 
-    @Test
-    public void readAllFeaturesNet() throws IOException, XMLStreamException {
-        featureReader.read(new URL("http://150.146.160.92/geoserver/wfs?service"
-                + "=wfs&version=1.1.0&request=GetFeature&typeName=topp:"
-                + "states"));
-    }
-
-    class FeatureStatesStaxReader extends AbstractStaxStreamReader<StringBuilder> {
+    class FeatureRestrictedStaxReader extends AbstractStaxStreamReader<StringBuilder> {
 
         private StringBuilder builder = new StringBuilder();
 
         @Override
         public StringBuilder read(Object o) throws XMLStreamException, IOException {
             super.acquireReader(o);
-
             while (reader.hasNext()) {
 
                 int evenType = reader.getEventType();
@@ -106,13 +97,13 @@ public class FeaturesStatesReaderTest {
                     } else if ("featureMembers".equals(reader.getLocalName())
                             || "featureMember".equals(reader.getLocalName())) {
                         reader.next();
-                    } else if ("topp".equals(reader.getPrefix()) && "states".equals(
+                    } else if ("sf".equals(reader.getPrefix()) && "restricted".equals(
                             reader.getLocalName())) {
                         String featureID = reader.getAttributeValue(
                                 "http://www.opengis.net/gml", "id");
                         logger.info("\n@@@@@@@@@@@ FEATURE_ID : {}", featureID);
 
-                    } else if ("topp".equals(reader.getPrefix()) && "the_geom".equals(
+                    } else if ("sf".equals(reader.getPrefix()) && "the_geom".equals(
                             reader.getLocalName())) {
                         readGeometry();
                     }
@@ -152,7 +143,7 @@ public class FeaturesStatesReaderTest {
 
                     if (event == XMLEvent.START_ELEMENT) {
                         String localName = reader.getLocalName();
-                        if (localName.equals("states")) {
+                        if (localName.equals("restricted")) {
                             break;
                         }
 

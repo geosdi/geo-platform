@@ -93,11 +93,11 @@ public class FeatureTigerRoadsTest {
                     if ("wfs".equals(reader.getPrefix()) && "FeatureCollection".equals(
                             reader.getLocalName())) {
                         String numberOfFeatures = reader.getAttributeValue(null,
-                                                                           "numberOfFeatures");
+                                "numberOfFeatures");
                         String timeStamp = reader.getAttributeValue(null,
-                                                                    "timeStamp");
+                                "timeStamp");
                         logger.info("\n@@@@@@@@@@@ {} - {}", numberOfFeatures,
-                                    timeStamp);
+                                timeStamp);
                     } else if ("featureMembers".equals(reader.getLocalName())
                             || "featureMember".equals(reader.getLocalName())) {
                         reader.next();
@@ -124,7 +124,7 @@ public class FeatureTigerRoadsTest {
             if (eventType == XMLEvent.START_ELEMENT) {
                 MultiLineStringType geometry;
                 geometry = jaxbContextBuilder.unmarshal(reader,
-                                                        MultiLineStringType.class);
+                        MultiLineStringType.class);
 
                 logger.info("Geometry @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
                         + geometry);
@@ -161,7 +161,7 @@ public class FeatureTigerRoadsTest {
                             super.goToEndTag(localName);
                         }
                     }
-                    reader.next();
+                    reader.nextTag();
                 }
             }
             return stringBuilder;

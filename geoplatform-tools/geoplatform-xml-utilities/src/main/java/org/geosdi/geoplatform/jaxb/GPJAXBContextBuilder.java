@@ -72,7 +72,7 @@ public final class GPJAXBContextBuilder {
         return new GPJAXBContextBuilder();
     }
 
-    private final class Cache {
+    private final static class Cache {
 
         final Class type;
         final JAXBContext context;

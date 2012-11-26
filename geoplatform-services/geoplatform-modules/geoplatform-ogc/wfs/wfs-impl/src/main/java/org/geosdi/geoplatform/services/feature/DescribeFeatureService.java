@@ -46,6 +46,6 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  */
 public interface DescribeFeatureService {
 
-    LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName) throws ResourceNotFoundFault, IllegalParameterFault;
+    LayerSchemaDTO describeFeatureType(String serverURL, String typeName)
+            throws ResourceNotFoundFault, IllegalParameterFault;
 }

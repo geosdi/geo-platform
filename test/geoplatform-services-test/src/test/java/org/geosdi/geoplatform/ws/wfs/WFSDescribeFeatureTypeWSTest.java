@@ -61,6 +61,7 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         Assert.assertNotNull(layerSchema);
         Assert.assertEquals(TOPP_STATES.getLocalPart(), layerSchema.getTypeName());
         Assert.assertEquals(TOPP_STATES.getNamespaceURI(), layerSchema.getTargetNamespace());
+        Assert.assertEquals(addressDatastore, layerSchema.getScope());
 
         AttributeDTO geometry = layerSchema.getGeometry();
         Assert.assertNotNull(geometry);
@@ -89,6 +90,7 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         Assert.assertNotNull(layerSchema);
         Assert.assertEquals(SF_COMUNI.getLocalPart(), layerSchema.getTypeName());
         Assert.assertEquals(SF_COMUNI.getNamespaceURI(), layerSchema.getTargetNamespace());
+        Assert.assertEquals(addressDatastore, layerSchema.getScope());
 
         AttributeDTO geometry = layerSchema.getGeometry();
         Assert.assertNotNull(geometry);

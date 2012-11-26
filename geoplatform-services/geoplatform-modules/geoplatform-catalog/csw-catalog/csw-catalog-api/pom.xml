@@ -23,9 +23,14 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-sharing</artifactId>
         </dependency>
         
         <!-- GUAVA -->

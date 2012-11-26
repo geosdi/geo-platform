@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogBBoxHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
-import org.geosdi.geoplatform.gui.responce.BBox;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
 /**
  *

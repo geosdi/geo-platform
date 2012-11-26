@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.inject.Provider;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
-import org.geosdi.geoplatform.gui.responce.BBox;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
 /**
  *

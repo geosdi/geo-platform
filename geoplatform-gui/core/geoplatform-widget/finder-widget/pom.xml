@@ -52,6 +52,16 @@
             <artifactId>geoplatform-configuration</artifactId>
             <classifier>sources</classifier>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-sharing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-sharing</artifactId>
+            <classifier>sources</classifier>
+        </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>

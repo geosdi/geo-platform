@@ -39,6 +39,7 @@ import java.math.BigInteger;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
 /**
  *

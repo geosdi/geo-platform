@@ -38,12 +38,12 @@ package org.geosdi.geoplatform.connector.wfs;
 import java.math.BigInteger;
 import java.util.Arrays;
 import javax.xml.namespace.QName;
-import junit.framework.Assert;
-import org.geosdi.geoplatform.connector.server.request.BBox;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 

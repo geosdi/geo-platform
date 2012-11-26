@@ -41,7 +41,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
-import org.geosdi.geoplatform.gui.responce.BBox;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;

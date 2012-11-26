@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.responce;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
 /**
  *
@@ -52,7 +53,7 @@ public class AreaInfo implements Serializable {
     private BBox bBox;
     private AreaSearchType areaSearchType;
 
-    public enum AreaSearchType implements Serializable {
+    public enum AreaSearchType {
 
         /**
          * Stored geometry fully contains the input geometry.

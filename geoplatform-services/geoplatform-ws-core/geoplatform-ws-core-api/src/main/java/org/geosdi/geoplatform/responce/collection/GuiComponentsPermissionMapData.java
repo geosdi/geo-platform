@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.responce.collection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.geosdi.geoplatform.responce.collection.adapter.StringBooleanMapAdapter;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -49,7 +50,7 @@ public class GuiComponentsPermissionMapData {
     public GuiComponentsPermissionMapData() {
     }
 
-    @XmlJavaTypeAdapter(AclMapAdapter.class)
+    @XmlJavaTypeAdapter(StringBooleanMapAdapter.class)
     public Map<String, Boolean> getPermissionMap() {
         return map;
     }

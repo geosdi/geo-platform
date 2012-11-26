@@ -38,25 +38,26 @@ package org.geosdi.geoplatform.responce.collection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.geosdi.geoplatform.responce.collection.adapter.LongIntegerMapAdapter;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWebServiceMapData<T, E> {
+public class GPWebServiceMapData {
 
-    private Map<T, E> map = new HashMap<T, E>();
+    private Map<Long, Integer> map = new HashMap<Long, Integer>();
 
     public GPWebServiceMapData() {
     }
 
-    @XmlJavaTypeAdapter(WebServiceDescendantMapAdapter.class)
-    public Map<T, E> getDescendantsMap() {
+    @XmlJavaTypeAdapter(LongIntegerMapAdapter.class)
+    public Map<Long, Integer> getDescendantsMap() {
         return map;
     }
 
-    public void setDescendantsMap(Map<T, E> d) {
+    public void setDescendantsMap(Map<Long, Integer> d) {
         map = d;
     }
 }

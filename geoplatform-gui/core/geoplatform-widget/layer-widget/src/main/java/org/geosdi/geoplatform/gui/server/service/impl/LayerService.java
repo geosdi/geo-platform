@@ -323,7 +323,7 @@ public class LayerService implements ILayerService {
         }
         GPFolder gpFolder = this.dtoConverter.convertMementoFolder(memento.getAddedFolder());
 
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         Long idSavedFolder = null;
         try {
@@ -352,7 +352,7 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(timeout);
         }
         List<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
 
         ArrayList<Long> idSavedLayers = null;
@@ -381,7 +381,7 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
@@ -402,7 +402,7 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
@@ -418,7 +418,7 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveDragAndDropLayerAndTreeModifications(
             MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
@@ -444,7 +444,7 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(
             MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
         try {

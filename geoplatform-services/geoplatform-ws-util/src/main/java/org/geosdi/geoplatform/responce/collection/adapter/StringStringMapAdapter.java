@@ -33,11 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce.collection;
+package org.geosdi.geoplatform.responce.collection.adapter;
+
+import org.geosdi.geoplatform.responce.collection.GenericMapAdapter;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class XmppAttributesMapAdapter extends GenericMapAdapter<String, String> {
+public class StringStringMapAdapter extends GenericMapAdapter<String, String> {
 }

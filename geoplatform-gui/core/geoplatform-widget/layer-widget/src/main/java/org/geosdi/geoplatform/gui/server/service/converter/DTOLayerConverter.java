@@ -286,9 +286,8 @@ public class DTOLayerConverter {
         return gpFolder;
     }
 
-    public GPWebServiceMapData<Long, Integer> convertDescendantMap(
-            Map<Long, Integer> descendantMap) {
-        GPWebServiceMapData<Long, Integer> wsMap = new GPWebServiceMapData<Long, Integer>();
+    public GPWebServiceMapData convertDescendantMap(Map descendantMap) {
+        GPWebServiceMapData wsMap = new GPWebServiceMapData();
         wsMap.setDescendantsMap(descendantMap);
         System.out.println("Size descendants map: " + descendantMap.size());
         return wsMap;

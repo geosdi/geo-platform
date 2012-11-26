@@ -33,12 +33,14 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.responce.collection;
+package org.geosdi.geoplatform.responce.collection.adapter;
+
+import org.geosdi.geoplatform.responce.collection.GenericMapAdapter;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WebServiceDescendantMapAdapter extends GenericMapAdapter<Long, Integer> {
+public class LongIntegerMapAdapter extends GenericMapAdapter<Long, Integer> {
 }

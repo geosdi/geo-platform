@@ -66,7 +66,7 @@ public class GeocodingVectorMarker extends GPVectorMarkerLayer {
 
     @Override
     public void addMarker(LonLat lonlat, Map map) {
-        //map.setCenter(lonlat, 16);
+        map.setCenter(lonlat, 16);
         super.drawFeature(lonlat);
     }
 

@@ -48,8 +48,7 @@ import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
 public class GoogleGeocodingStaxReader extends AbstractStaxStreamReader<StringBuilder> {
 
     @Override
-    public StringBuilder read(Object o) throws XMLStreamException,
-            IOException {
+    public StringBuilder read(Object o) throws XMLStreamException, IOException {
         super.acquireReader(o);
         return read();
     }

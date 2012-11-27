@@ -81,11 +81,10 @@ public class GPDescribeFeatureService extends AbstractFeatureService
 
             QName qName = new QName(typeName);
             request.setTypeName(Arrays.asList(qName));
-            request.setOutputFormat("text/xml; subtype=gml/3.1.1");
 
             Schema response = request.getResponse();
             String name = typeName.substring(typeName.indexOf(":") + 1);
-            layerSchema = featureReader.getFeature(response, name);
+            layerSchema = featureReaderXSD.getFeature(response, name);
 
             if (layerSchema == null) {
                 logger.error("\n### The layer \"{}\" isn't a feature ###", typeName);

@@ -41,7 +41,9 @@ import javax.jws.WebService;
 import org.codehaus.jra.Get;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
 /**
  * Public interface to define the service operations mapped via REST using CXT
@@ -57,12 +59,14 @@ public interface GPWFSService {
     @Get
     @WebResult(name = "DescribeFeatureType")
     LayerSchemaDTO describeFeatureType(
-            @WebParam(name = "serverUrl") String serverUrl,
+            @WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Get
     @WebResult(name = "GetFeature")
-    LayerSchemaDTO getFeature(@WebParam(name = "featureID") String featureID)
-            throws ResourceNotFoundFault;
+    FeatureCollectionDTO getFeature(
+            @WebParam(name = "layerSchema") LayerSchemaDTO layerSchema,
+            @WebParam(name = "bBox") BBox bBox)
+            throws ResourceNotFoundFault, IllegalParameterFault;
 }

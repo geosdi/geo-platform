@@ -33,41 +33,65 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v110;
+package org.geosdi.geoplatform.gui.responce;
 
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.AbstractDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.wfs.v110.DescribeFeatureTypeType;
-import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.responce.collection.FeatureAttributesMap;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSDescribeFeatureTypeRequestV110
-        extends AbstractDescribeFeatureTypeRequest<Schema> {
+@XmlRootElement(name = "FeatureDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class FeatureDTO implements Serializable {
 
-    public WFSDescribeFeatureTypeRequestV110(GPServerConnector server) {
-        super(server);
+    private static final long serialVersionUID = -5477132588177572703L;
+    //
+    private String fid;
+    private String geometry;
+    // Non-spatial attributes
+    private FeatureAttributesMap attributes;
+
+    public FeatureDTO() {
+    }
+
+    public FeatureDTO(String fid) {
+        this.fid = fid;
+    }
+
+    public String getFID() {
+        return fid;
+    }
+
+    public void setFID(String fid) {
+        this.fid = fid;
+    }
+
+    public String getGeometry() {
+        return geometry;
+    }
+
+    public void setGeometry(String geometry) {
+        this.geometry = geometry;
+    }
+
+    public FeatureAttributesMap getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(FeatureAttributesMap attributes) {
+        this.attributes = attributes;
     }
 
     @Override
-    protected Object createRequest() throws IllegalParameterFault {
-        DescribeFeatureTypeType request = new DescribeFeatureTypeType();
-
-        if ((typeName == null) || (typeName.isEmpty())) {
-            throw new IllegalArgumentException(
-                    "Parameter TypeName must not be empty.");
-        }
-        request.setTypeName(typeName);
-
-        request.setOutputFormat(outputFormat != null
-                ? outputFormat : "text/xml; subtype=gml/3.1.1");
-
-        return request;
+    public String toString() {
+        return "FeatureDTO{"
+                + "fid=" + fid
+                + ", geometry=" + geometry
+                + ", attributes=" + attributes + '}';
     }
 }

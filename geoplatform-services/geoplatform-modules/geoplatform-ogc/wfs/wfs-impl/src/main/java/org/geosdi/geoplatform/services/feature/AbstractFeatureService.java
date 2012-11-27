@@ -60,7 +60,7 @@ public abstract class AbstractFeatureService {
     @Autowired
     protected GPWFSConfigurator wfsConfigurator;
     //
-    protected FeatureSchemaReader featureReader;
+    protected FeatureSchemaReader featureReaderXSD;
 
     protected GPWFSConnector createWFSConnector(String serverUrl)
             throws IllegalParameterFault {
@@ -79,6 +79,6 @@ public abstract class AbstractFeatureService {
 
     @PostConstruct
     public void init() {
-        this.featureReader = new GPFeatureSchemaReader();
+        this.featureReaderXSD = new GPFeatureSchemaReader();
     }
 }

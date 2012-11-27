@@ -40,6 +40,7 @@ import java.io.StringReader;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
@@ -80,31 +81,35 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
     public List<LayerSchemaDTO> read(final String xml) throws JAXBException {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         StringReader stringReader = new StringReader(xml);
-        final Schema schema = (Schema) unmarshaller.unmarshal(stringReader);
+        JAXBElement elem = (JAXBElement) unmarshaller.unmarshal(stringReader);
+        final Schema schema = (Schema) elem.getValue();
         return this.getAllFeature(schema);
     }
 
     @Override
     public List<LayerSchemaDTO> read(final InputStream in) throws JAXBException {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
-        final Schema schema = (Schema) unmarshaller.unmarshal(in);
+        JAXBElement elem = (JAXBElement) unmarshaller.unmarshal(in);
+        final Schema schema = (Schema) elem.getValue();
         return this.getAllFeature(schema);
     }
 
     @Override
-    public LayerSchemaDTO read(final String xml,
-            final String name) throws JAXBException {
+    public LayerSchemaDTO read(final String xml, final String name)
+            throws JAXBException {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         StringReader stringReader = new StringReader(xml);
-        final Schema schema = (Schema) unmarshaller.unmarshal(stringReader);
+        JAXBElement elem = (JAXBElement) unmarshaller.unmarshal(stringReader);
+        final Schema schema = (Schema) elem.getValue();
         return this.getFeature(schema, name);
     }
 
     @Override
-    public LayerSchemaDTO read(final InputStream in,
-            final String name) throws JAXBException {
+    public LayerSchemaDTO read(final InputStream in, final String name)
+            throws JAXBException {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
-        final Schema schema = (Schema) unmarshaller.unmarshal(in);
+        JAXBElement elem = (JAXBElement) unmarshaller.unmarshal(in);
+        final Schema schema = (Schema) elem.getValue();
         return this.getFeature(schema, name);
     }
 
@@ -126,8 +131,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
     }
 
     @Override
-    public LayerSchemaDTO getFeature(final Schema schema,
-            final String name) {
+    public LayerSchemaDTO getFeature(final Schema schema, final String name) {
         LayerSchemaDTO layerSchema = null;
         TopLevelElement element = schema.getTopLevelElement(name);
         if (element != null) {

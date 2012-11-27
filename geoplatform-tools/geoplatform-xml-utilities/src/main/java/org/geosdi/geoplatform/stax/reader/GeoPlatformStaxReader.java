@@ -46,8 +46,7 @@ import org.springframework.beans.factory.DisposableBean;
  */
 public interface GeoPlatformStaxReader extends DisposableBean {
 
-    void acquireReader(Object o) throws XMLStreamException,
-            IOException;
+    void acquireReader(Object o) throws XMLStreamException, IOException;
 
     void reset() throws XMLStreamException, IOException;
 }

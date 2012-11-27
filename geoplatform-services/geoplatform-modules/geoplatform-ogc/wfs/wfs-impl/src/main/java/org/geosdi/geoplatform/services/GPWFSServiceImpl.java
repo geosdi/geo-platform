@@ -38,7 +38,9 @@ package org.geosdi.geoplatform.services;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.services.feature.DescribeFeatureService;
 import org.geosdi.geoplatform.services.feature.GetFeaureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,17 +64,16 @@ public class GPWFSServiceImpl implements GPWFSService {
     private GetFeaureService gpGetFeatureService;
 
     @Override
-    public LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName)
+    public LayerSchemaDTO describeFeatureType(String serverURL, String typeName)
             throws ResourceNotFoundFault, IllegalParameterFault {
 
-        return gpDescribeFeatureService.describeFeatureType(serverUrl,
-                typeName);
+        return gpDescribeFeatureService.describeFeatureType(serverURL, typeName);
     }
 
     @Override
-    public LayerSchemaDTO getFeature(String featureID) throws ResourceNotFoundFault {
-        // TODO
-        return gpGetFeatureService.getFeature(featureID);
+    public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, BBox bBox)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+
+        return gpGetFeatureService.getFeature(layerSchema, bBox);
     }
 }

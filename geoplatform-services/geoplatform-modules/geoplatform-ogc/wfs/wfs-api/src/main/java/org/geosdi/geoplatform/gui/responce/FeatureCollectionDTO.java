@@ -33,41 +33,77 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v110;
+package org.geosdi.geoplatform.gui.responce;
 
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.AbstractDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.wfs.v110.DescribeFeatureTypeType;
-import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSDescribeFeatureTypeRequestV110
-        extends AbstractDescribeFeatureTypeRequest<Schema> {
+@XmlRootElement(name = "FeatureCollectionDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class FeatureCollectionDTO implements Serializable {
 
-    public WFSDescribeFeatureTypeRequestV110(GPServerConnector server) {
-        super(server);
+    private static final long serialVersionUID = 4396973113154660358L;
+    //
+    private Date timeStamp;
+    private int numberOfFeatures;
+    //
+    @XmlElementWrapper(name = "features")
+    @XmlElement(name = "feature")
+    private List<FeatureDTO> features;
+
+    public Date getTimeStamp() {
+        if (timeStamp != null) {
+            return new Date(timeStamp.getTime());
+        }
+        return null;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = new Date(timeStamp.getTime());
+    }
+
+    public int getNumberOfFeatures() {
+        return numberOfFeatures;
+    }
+
+    public void setNumberOfFeatures(int numberOfFeatures) {
+        this.numberOfFeatures = numberOfFeatures;
+    }
+
+    public List<FeatureDTO> getFeatures() {
+        if (features == null || features.isEmpty()) {
+            return null;
+        }
+        return new ArrayList<FeatureDTO>(features);
+    }
+
+    public void setFeatures(List<FeatureDTO> features) {
+        this.features = features;
+    }
+
+    public void addFeature(FeatureDTO feature) {
+        if (features == null) {
+            features = new ArrayList<FeatureDTO>();
+        }
+        features.add(feature);
     }
 
     @Override
-    protected Object createRequest() throws IllegalParameterFault {
-        DescribeFeatureTypeType request = new DescribeFeatureTypeType();
-
-        if ((typeName == null) || (typeName.isEmpty())) {
-            throw new IllegalArgumentException(
-                    "Parameter TypeName must not be empty.");
-        }
-        request.setTypeName(typeName);
-
-        request.setOutputFormat(outputFormat != null
-                ? outputFormat : "text/xml; subtype=gml/3.1.1");
-
-        return request;
+    public String toString() {
+        return "FeatureCollectionDTO{"
+                + "timeStamp=" + timeStamp
+                + ", numberOfFeatures=" + numberOfFeatures
+                + ", features=" + features + '}';
     }
 }

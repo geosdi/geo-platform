@@ -54,8 +54,8 @@ import org.geosdi.geoplatform.stax.reader.builder.streamchain.StreamBuildHandler
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractStaxStreamReader<T> implements
-        GeoPlatformStaxReader {
+public abstract class AbstractStaxStreamReader<T>
+        implements GeoPlatformStaxReader {
 
     protected XMLStreamReader reader;
     private StreamBuildHandler streamBuilder = new FileBuildHandler();
@@ -74,8 +74,7 @@ public abstract class AbstractStaxStreamReader<T> implements
      * @param o
      */
     @Override
-    public void acquireReader(Object o) throws XMLStreamException,
-            IOException {
+    public void acquireReader(Object o) throws XMLStreamException, IOException {
         this.reset();
 
         if (o == null) {
@@ -98,7 +97,7 @@ public abstract class AbstractStaxStreamReader<T> implements
      */
     @Override
     public void destroy() throws XMLStreamException, IOException {
-        reset();
+        this.reset();
     }
 
     /**
@@ -116,7 +115,22 @@ public abstract class AbstractStaxStreamReader<T> implements
             eventType = reader.next();
         }
 
-        throw new XMLStreamException("Tag Name : " + tagName + " not Found.");
+        throw new XMLStreamException("Tag Name '" + tagName + "' not found.");
+    }
+
+    /**
+     * Check if the tag correspond to prefix and localName.
+     *
+     * @param prefix the prefix of the tag
+     * @param localName the localName of the tag
+     * @return true if the tag is prefix:localName
+     */
+    protected boolean isTagName(String prefix, String localName) {
+        if (prefix.equals(reader.getPrefix())
+                && localName.equals(reader.getLocalName())) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -138,6 +152,5 @@ public abstract class AbstractStaxStreamReader<T> implements
         }
     }
 
-    public abstract T read(Object o) throws XMLStreamException,
-            IOException;
+    public abstract T read(Object o) throws XMLStreamException, IOException;
 }

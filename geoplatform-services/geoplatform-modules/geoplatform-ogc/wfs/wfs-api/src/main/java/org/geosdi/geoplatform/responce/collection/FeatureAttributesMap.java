@@ -33,41 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v110;
+package org.geosdi.geoplatform.responce.collection;
 
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.AbstractDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.wfs.v110.DescribeFeatureTypeType;
-import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
+import java.io.Serializable;
+import java.util.Map;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.geosdi.geoplatform.responce.collection.adapter.StringStringMapAdapter;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSDescribeFeatureTypeRequestV110
-        extends AbstractDescribeFeatureTypeRequest<Schema> {
+public class FeatureAttributesMap implements Serializable {
 
-    public WFSDescribeFeatureTypeRequestV110(GPServerConnector server) {
-        super(server);
+    private static final long serialVersionUID = 1750989553209626148L;
+    private Map<String, String> map;
+
+    public FeatureAttributesMap() {
     }
 
-    @Override
-    protected Object createRequest() throws IllegalParameterFault {
-        DescribeFeatureTypeType request = new DescribeFeatureTypeType();
+    public FeatureAttributesMap(Map<String, String> map) {
+        this.map = map;
+    }
 
-        if ((typeName == null) || (typeName.isEmpty())) {
-            throw new IllegalArgumentException(
-                    "Parameter TypeName must not be empty.");
-        }
-        request.setTypeName(typeName);
+    @XmlJavaTypeAdapter(StringStringMapAdapter.class)
+    public Map<String, String> getAttributesMap() {
+        return map;
+    }
 
-        request.setOutputFormat(outputFormat != null
-                ? outputFormat : "text/xml; subtype=gml/3.1.1");
-
-        return request;
+    public void setAttributesMap(Map<String, String> map) {
+        this.map = map;
     }
 }

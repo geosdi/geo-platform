@@ -64,7 +64,8 @@ public class FeaturesStatesReaderTest {
         String pathFile = new File(".").getCanonicalPath() + File.separator
                 + "src/test/resources/getFeature.xml";
 
-        StringBuilder read = featureReader.read(new File(pathFile));
+        logger.info("readGetFeature : "
+                + featureReader.read(new File(pathFile)).toString());
     }
 
     @Test
@@ -72,14 +73,16 @@ public class FeaturesStatesReaderTest {
         String pathFile = new File(".").getCanonicalPath() + File.separator
                 + "src/test/resources/states-getFeature-all.xml";
 
-        StringBuilder read = featureReader.read(new File(pathFile));
+        logger.info("readAllFeatures : "
+                + featureReader.read(new File(pathFile)).toString());
     }
 
     @Test
     public void readAllFeaturesNet() throws IOException, XMLStreamException {
-        featureReader.read(new URL("http://150.146.160.92/geoserver/wfs?service"
+        logger.info("readAllFeaturesNet : "
+                + featureReader.read(new URL("http://150.146.160.92/geoserver/wfs?service"
                 + "=wfs&version=1.1.0&request=GetFeature&typeName=topp:"
-                + "states"));
+                + "states")).toString());
     }
 
     class FeatureStatesStaxReader extends AbstractStaxStreamReader<StringBuilder> {
@@ -101,7 +104,8 @@ public class FeaturesStatesReaderTest {
                                 "numberOfFeatures");
                         String timeStamp = reader.getAttributeValue(null,
                                 "timeStamp");
-                        logger.info("\n@@@@@@@@@@@ {} - {}", numberOfFeatures,
+                        builder.append("\n@@@@@@@@@@@ NUMBER_OF_FEATURES : ").append(
+                                numberOfFeatures).append(" - TIMESTAMP : ").append(
                                 timeStamp);
                     } else if ("featureMembers".equals(reader.getLocalName())
                             || "featureMember".equals(reader.getLocalName())) {
@@ -110,8 +114,9 @@ public class FeaturesStatesReaderTest {
                             reader.getLocalName())) {
                         String featureID = reader.getAttributeValue(
                                 "http://www.opengis.net/gml", "id");
-                        logger.info("\n@@@@@@@@@@@ FEATURE_ID : {}", featureID);
 
+                        builder.append("\n@@@@@@@@@@@ FEATURE_ID : ").append(
+                                featureID);
                     } else if ("topp".equals(reader.getPrefix()) && "the_geom".equals(
                             reader.getLocalName())) {
                         readGeometry();
@@ -131,20 +136,19 @@ public class FeaturesStatesReaderTest {
                 geometry = jaxbContextBuilder.unmarshal(reader,
                         MultiSurfaceType.class);
 
-                logger.info("Geometry @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                        + geometry);
-
+                builder.append("\n@@@@@@@@@@@@@@@@ GEOMETRY : ")
+                        .append(geometry);
 
                 super.goToEndTag("the_geom");
             }
 
-            logger.info(readAttributes().toString());
+            readAttributes();
         }
 
-        StringBuilder readAttributes() throws XMLStreamException {
+        void readAttributes() throws XMLStreamException {
             int event = reader.nextTag();
 
-            StringBuilder stringBuilder = new StringBuilder("\n");
+            builder.append("\n");
 
             if (event == XMLEvent.START_ELEMENT) {
 
@@ -159,7 +163,7 @@ public class FeaturesStatesReaderTest {
                         int eventType = reader.next();
                         if (eventType == XMLEvent.CHARACTERS) {
 
-                            stringBuilder.append("LocalName : ")
+                            builder.append("LocalName : ")
                                     .append(localName)
                                     .append(" - Value : ")
                                     .append(reader.getText()).append("\n");
@@ -170,7 +174,6 @@ public class FeaturesStatesReaderTest {
                     reader.nextTag();
                 }
             }
-            return stringBuilder;
         }
     }
 }

@@ -64,17 +64,18 @@ public class FeatureTigerRoadsTest {
         String pathFile = new File(".").getCanonicalPath() + File.separator
                 + "src/test/resources/tigerRoads-GetFeature.xml";
 
-        featureReader.read(new File(pathFile));
+        logger.info("readAllTigerRoadsFeatures : "
+                + featureReader.read(new File(pathFile)).toString());
     }
 
     @Test
     public void readAllTigerRoadsFeaturesNet() throws IOException, XMLStreamException {
-        featureReader.read(
+        logger.info("readAllTigerRoadsFeaturesNet : " + featureReader.read(
                 new URL("http://150.146.160.92/geoserver/wfs?service=wfs"
                 + "&version=1.1.0"
                 + "&request=GetFeature"
                 + "&typeName=tiger:tiger_roads"
-                + "&maxFeatures=1000"));
+                + "&maxFeatures=1000")).toString());
     }
 
     class FeatureTigerRoadsStaxReader extends AbstractStaxStreamReader<StringBuilder> {
@@ -96,7 +97,9 @@ public class FeatureTigerRoadsTest {
                                 "numberOfFeatures");
                         String timeStamp = reader.getAttributeValue(null,
                                 "timeStamp");
-                        logger.info("\n@@@@@@@@@@@ {} - {}", numberOfFeatures,
+
+                        builder.append("\n@@@@@@@@@@@ NUMBER_OF_FEATURES : ").append(
+                                numberOfFeatures).append(" - TIMESTAMP : ").append(
                                 timeStamp);
                     } else if ("featureMembers".equals(reader.getLocalName())
                             || "featureMember".equals(reader.getLocalName())) {
@@ -105,8 +108,9 @@ public class FeatureTigerRoadsTest {
                             reader.getLocalName())) {
                         String featureID = reader.getAttributeValue(
                                 "http://www.opengis.net/gml", "id");
-                        logger.info("\n@@@@@@@@@@@ FEATURE_ID : {}", featureID);
 
+                        builder.append("\n@@@@@@@@@@@ FEATURE_ID : ").append(
+                                featureID);
                     } else if ("tiger".equals(reader.getPrefix()) && "the_geom".equals(
                             reader.getLocalName())) {
                         readGeometry();
@@ -126,19 +130,19 @@ public class FeatureTigerRoadsTest {
                 geometry = jaxbContextBuilder.unmarshal(reader,
                         MultiLineStringType.class);
 
-                logger.info("Geometry @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                        + geometry);
+                builder.append("\n@@@@@@@@@@@@@@@@ GEOMETRY : ")
+                        .append(geometry);
 
                 super.goToEndTag("the_geom");
             }
 
-            logger.info(readAttributes().toString());
+            readAttributes();
         }
 
-        StringBuilder readAttributes() throws XMLStreamException {
+        void readAttributes() throws XMLStreamException {
             int event = reader.nextTag();
 
-            StringBuilder stringBuilder = new StringBuilder("\n");
+            builder.append("\n");
 
             if (event == XMLEvent.START_ELEMENT) {
 
@@ -153,7 +157,7 @@ public class FeatureTigerRoadsTest {
                         int eventType = reader.next();
                         if (eventType == XMLEvent.CHARACTERS) {
 
-                            stringBuilder.append("LocalName : ")
+                            builder.append("LocalName : ")
                                     .append(localName)
                                     .append(" - Value : ")
                                     .append(reader.getText()).append("\n");
@@ -164,7 +168,6 @@ public class FeatureTigerRoadsTest {
                     reader.nextTag();
                 }
             }
-            return stringBuilder;
         }
     }
 }

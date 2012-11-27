@@ -64,14 +64,16 @@ public class FeatureRestrictedReaderTest {
         String pathFile = new File(".").getCanonicalPath() + File.separator
                 + "src/test/resources/restrictedGetFeature.xml";
 
-        featureReader.read(new File(pathFile));
+        logger.info("readAllRestrictedFeatures : " + featureReader.read(new File(
+                pathFile)).toString());
     }
 
     @Test
     public void readAllRestrictedFeaturesNet() throws IOException, XMLStreamException {
-        featureReader.read(new URL("http://150.146.160.92/geoserver/wfs?"
+        logger.info("readAllRestrictedFeaturesNet : "
+                + featureReader.read(new URL("http://150.146.160.92/geoserver/wfs?"
                 + "service=wfs&version=1.1.0&request="
-                + "GetFeature&typeName=sf:restricted"));
+                + "GetFeature&typeName=sf:restricted")).toString());
     }
 
     class FeatureRestrictedStaxReader extends AbstractStaxStreamReader<StringBuilder> {
@@ -92,7 +94,9 @@ public class FeatureRestrictedReaderTest {
                                 "numberOfFeatures");
                         String timeStamp = reader.getAttributeValue(null,
                                 "timeStamp");
-                        logger.info("\n@@@@@@@@@@@ {} - {}", numberOfFeatures,
+
+                        builder.append("\n@@@@@@@@@@@ NUMBER_OF_FEATURES : ").append(
+                                numberOfFeatures).append(" - TIMESTAMP : ").append(
                                 timeStamp);
                     } else if ("featureMembers".equals(reader.getLocalName())
                             || "featureMember".equals(reader.getLocalName())) {
@@ -101,8 +105,9 @@ public class FeatureRestrictedReaderTest {
                             reader.getLocalName())) {
                         String featureID = reader.getAttributeValue(
                                 "http://www.opengis.net/gml", "id");
-                        logger.info("\n@@@@@@@@@@@ FEATURE_ID : {}", featureID);
 
+                        builder.append("\n@@@@@@@@@@@ FEATURE_ID : ").append(
+                                featureID);
                     } else if ("sf".equals(reader.getPrefix()) && "the_geom".equals(
                             reader.getLocalName())) {
                         readGeometry();
@@ -122,20 +127,19 @@ public class FeatureRestrictedReaderTest {
                 geometry = jaxbContextBuilder.unmarshal(reader,
                         MultiSurfaceType.class);
 
-                logger.info("Geometry @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                        + geometry);
-
+                builder.append("\n@@@@@@@@@@@@@@@@ GEOMETRY : ")
+                        .append(geometry);
 
                 super.goToEndTag("the_geom");
             }
 
-            logger.info(readAttributes().toString());
+            readAttributes();
         }
 
-        StringBuilder readAttributes() throws XMLStreamException {
+        void readAttributes() throws XMLStreamException {
             int event = reader.nextTag();
 
-            StringBuilder stringBuilder = new StringBuilder("\n");
+            builder.append("\n");
 
             if (event == XMLEvent.START_ELEMENT) {
 
@@ -150,7 +154,7 @@ public class FeatureRestrictedReaderTest {
                         int eventType = reader.next();
                         if (eventType == XMLEvent.CHARACTERS) {
 
-                            stringBuilder.append("LocalName : ")
+                            builder.append("LocalName : ")
                                     .append(localName)
                                     .append(" - Value : ")
                                     .append(reader.getText()).append("\n");
@@ -161,7 +165,6 @@ public class FeatureRestrictedReaderTest {
                     reader.nextTag();
                 }
             }
-            return stringBuilder;
         }
     }
 }

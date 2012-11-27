@@ -63,6 +63,8 @@ public class FeatureSelectHandler extends AbastractFeatureHandler {
         VectorFeature vectorFeature = super.getFeatureFromEventObject(
                 eventObject);
         
+        vectorFeature.toState(VectorFeature.State.Unknown);
+        
         vectorLayer.addFeature(vectorFeature);
         
         Attributes attributes = vectorFeature.getAttributes();

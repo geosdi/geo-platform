@@ -57,6 +57,8 @@ public class FeatureUnSelectHandler extends AbastractFeatureHandler {
         VectorFeature vectorFeature = super.getFeatureFromEventObject(
                 eventObject);
         
+        vectorFeature.toState(VectorFeature.State.Unknown);
+        
         vectorLayer.removeFeature(vectorFeature);
         
         this.attributeValuesEvent.setAttributeValues(null);

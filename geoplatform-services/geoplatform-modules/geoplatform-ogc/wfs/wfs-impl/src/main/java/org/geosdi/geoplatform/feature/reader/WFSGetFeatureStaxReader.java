@@ -79,7 +79,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         assert (typeName.contains(":") == true);
         String prefix = typeName.substring(0, typeName.indexOf(":"));
         String name = typeName.substring(typeName.indexOf(":") + 1);
-        logger.debug("@@@ Read feature {}:{}", prefix, name);
+        logger.debug("\n@@@ Read feature {}:{} @@@", prefix, name);
 
         GeometryAttributeDTO geometryAtt = layerSchema.getGeometry();
         assert (geometryAtt != null);
@@ -130,14 +130,14 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         String timeStamp = reader.getAttributeValue(null, "timeStamp");
         fc.setTimeStamp(DatatypeConverter.parseDate(timeStamp).getTime());
 
-        logger.debug("\n@@@ Read info feature {}  - time {}", numberOfFeatures, timeStamp);
+        logger.debug("\n@@@ Read info @@@\nfeature: {}\ntime: {}", numberOfFeatures, timeStamp);
 
         return fc;
     }
 
     private FeatureDTO readFID() {
         String featureID = reader.getAttributeValue("http://www.opengis.net/gml", "id");
-        logger.debug("\n@@@ FEATURE_ID: {}", featureID);
+        logger.debug("\n\n@@@ FEATURE_ID: {} @@@", featureID);
 
         FeatureDTO feature = new FeatureDTO(featureID);
         return feature;
@@ -175,26 +175,30 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         FeatureAttributesMap fMap = new FeatureAttributesMap();
         fMap.setAttributesMap(map);
 
-        int event = reader.nextTag();
+        int eventType = reader.nextTag();
         while (reader.hasNext()) {
-
-            if (event == XMLEvent.START_ELEMENT) {
+            if (eventType == XMLEvent.END_ELEMENT) {
                 String localName = reader.getLocalName();
                 if (localName.equals(featureName)) {
                     break;
                 }
+            }
 
-                int eventType = reader.next();
+            if (eventType == XMLEvent.START_ELEMENT) {
+                String localName = reader.getLocalName();
+
+                eventType = reader.next();
                 if (eventType == XMLEvent.CHARACTERS) {
                     String attributeValue = reader.getText();
                     map.put(localName, attributeValue);
-                    logger.debug("\n@@@ Attribute '{}': {}", localName, attributeValue);
+                    logger.debug("\n@@@ Attribute '{}': {} @@@", localName, attributeValue);
 
                     super.goToEndTag(localName);
                 }
             }
-            reader.nextTag();
+            eventType = reader.nextTag();
         }
+
         return fMap;
     }
 }

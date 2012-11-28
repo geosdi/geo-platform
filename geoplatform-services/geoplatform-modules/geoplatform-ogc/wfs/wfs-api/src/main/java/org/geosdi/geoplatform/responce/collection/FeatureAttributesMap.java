@@ -63,4 +63,12 @@ public class FeatureAttributesMap implements Serializable {
     public void setAttributesMap(Map<String, String> map) {
         this.map = map;
     }
+
+    @Override
+    public String toString() {
+        if (map == null) {
+            return "null";
+        }
+        return map.toString();
+    }
 }

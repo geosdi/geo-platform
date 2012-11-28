@@ -79,8 +79,18 @@ public class FeatureReaderTest {
     }
 
     public FeatureReaderTest(String file, int numAttributes, int numFeatures) {
-        this.fileDFT = pathFile + file + "-DescribeFeatureType.xml";
+        logger.trace("\n@@@ Test '{}' file (#attributes = {} - #features = {}) @@@",
+                     file, numAttributes, numFeatures);
+
         this.fileGF = pathFile + file + "-GetFeature.xml";
+
+        // DescribeFeatureType is the same for all GetFeature request
+        int i = file.indexOf("-");
+        if (i != -1) {
+            file = file.substring(0, i);
+        }
+        this.fileDFT = pathFile + file + "-DescribeFeatureType.xml";
+
         this.numAttributes = numAttributes;
         this.numFeatures = numFeatures;
     }
@@ -89,9 +99,10 @@ public class FeatureReaderTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                     {"restricted", 1, 4},
-                    {"tiger_roads", 2, 1000},
+                    {"restricted-null", 1, 4},
                     {"states", 22, 49},
-                    {"giant_polygon", 0, 1}
+                    {"giant_polygon", 0, 1},
+                    {"tiger_roads", 2, 1000}
                 });
     }
 
@@ -121,7 +132,7 @@ public class FeatureReaderTest {
                 Assert.assertNotNull(att.getName());
                 Assert.assertNotNull(att.getType());
             }
-            logger.info("\n\n@@@@@@@@@@@@@@@@@@@@ {}", layerSchema);
+            logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@ {}", layerSchema);
 
             WFSGetFeatureStaxReader featureReader = new WFSGetFeatureStaxReader(layerSchema);
             FeatureCollectionDTO fc = featureReader.read(new File(fileGF));
@@ -142,7 +153,8 @@ public class FeatureReaderTest {
                     Assert.assertNotNull(fMap);
                     Assert.assertEquals(numAttributes, fMap.size());
                 }
-                logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@ {}", feature);
+                logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@ {} - {}", feature.getFID(), feature.getAttributes());
+                logger.trace("{}", feature.getGeometry());
             }
 
         } finally {

@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.feature.reader;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
@@ -45,6 +48,9 @@ import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,59 +60,96 @@ import org.slf4j.LoggerFactory;
  * @email giuseppe.lascaleia@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@RunWith(Parameterized.class)
 public class FeatureReaderTest {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final static Logger logger = LoggerFactory.getLogger(FeatureReaderTest.class);
+    private static String pathFile;
     private FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
+    //
+    private String fileDFT, fileGF;
+    private int numAttributes, numFeatures;
 
-    @Test
-    public void readRestrictedAll() throws Exception {
-        String dftPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/restricted-DescribeFeatureType.xml";
-        String gfPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/restricted-GetFeature.xml";
+    static {
+        try {
+            pathFile = new File(".").getCanonicalPath() + File.separator + "src/test/resources/";
+        } catch (IOException ex) {
+            logger.error("\n### Error: {}", ex.getMessage());
+        }
+    }
 
-        this.checkFeature(dftPathFile, gfPathFile, 1, 4);
+    public FeatureReaderTest(String file, int numAttributes, int numFeatures) {
+        this.fileDFT = pathFile + file + "-DescribeFeatureType.xml";
+        this.fileGF = pathFile + file + "-GetFeature.xml";
+        this.numAttributes = numAttributes;
+        this.numFeatures = numFeatures;
+    }
+
+    @Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                    {"restricted", 1, 4},
+                    {"tiger_roads", 2, 1000},
+                    {"states", 22, 49},
+                    {"giant_polygon", 0, 1}
+                });
     }
 
     @Test
-    public void readTigerRoadsAll() throws Exception {
-        String dftPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/tiger_roads-DescribeFeatureType.xml";
-        String gfPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/tiger_roads-GetFeature.xml";
+    public void testFeature() throws Exception {
+        FileInputStream ff = null;
+        try {
+            File dftFile = new File(fileDFT);
+            ff = new FileInputStream(dftFile);
 
-        this.checkFeature(dftPathFile, gfPathFile, 2, 1000);
-    }
+            List<LayerSchemaDTO> schemas = featureReaderXSD.read(ff);
+            Assert.assertNotNull(schemas);
+            Assert.assertEquals(1, schemas.size());
 
-    @Test
-    public void readStates() throws Exception {
-        String dftPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/states-DescribeFeatureType.xml";
-        String gfPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/states-GetFeature.xml";
+            LayerSchemaDTO layerSchema = schemas.get(0);
+            Assert.assertNotNull(layerSchema.getTypeName());
+            String name = layerSchema.getTypeName().substring(
+                    layerSchema.getTypeName().indexOf(":") + 1);
+            Assert.assertNotNull(layerSchema.getTargetNamespace());
+            Assert.assertNotNull(layerSchema.getGeometry());
+            List<AttributeDTO> attributes = layerSchema.getAttributes();
+            Assert.assertNotNull(attributes);
+            Assert.assertEquals(numAttributes, attributes.size());
+            for (AttributeDTO att : attributes) {
+                Assert.assertTrue(att.getMinOccurs() >= 0);
+                Assert.assertTrue(att.getMaxOccurs() > att.getMinOccurs());
+                Assert.assertNotNull(att.getName());
+                Assert.assertNotNull(att.getType());
+            }
+            logger.info("\n\n@@@@@@@@@@@@@@@@@@@@ {}", layerSchema);
 
-        this.checkFeature(dftPathFile, gfPathFile, 22, 1);
-    }
+            WFSGetFeatureStaxReader featureReader = new WFSGetFeatureStaxReader(layerSchema);
+            FeatureCollectionDTO fc = featureReader.read(new File(fileGF));
+            Assert.assertNotNull(fc);
+            Assert.assertNotNull(fc.getTimeStamp());
+            Assert.assertEquals(numFeatures, fc.getNumberOfFeatures());
+            List<FeatureDTO> features = fc.getFeatures();
+            Assert.assertNotNull(features);
+            Assert.assertEquals(numFeatures, features.size());
+            for (FeatureDTO feature : features) {
+                Assert.assertTrue(feature.getFID().contains(name));
+                Assert.assertNotNull(feature.getGeometry());
+                if (numAttributes == 0) {
+                    Assert.assertNull(feature.getAttributes());
+                } else {
+                    Assert.assertNotNull(feature.getAttributes());
+                    Map<String, String> fMap = feature.getAttributes().getAttributesMap();
+                    Assert.assertNotNull(fMap);
+                    Assert.assertEquals(numAttributes, fMap.size());
+                }
+                logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@ {}", feature);
+            }
 
-    @Test
-    public void readStatesAll() throws Exception {
-        String dftPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/states-DescribeFeatureType.xml";
-        String gfPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/states-GetFeature-all.xml";
-
-        this.checkFeature(dftPathFile, gfPathFile, 22, 49);
-    }
-
-    @Test
-    public void readGiantPolygonAll() throws Exception {
-        String dftPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/giant_polygon-DescribeFeatureType.xml";
-        String gfPathFile = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/giant_polygon-GetFeature.xml";
-
-        this.checkFeature(dftPathFile, gfPathFile, 0, 1);
+        } finally {
+            if (ff != null) {
+                ff.close();
+            }
+        }
     }
 //    
 //    @Test
@@ -134,64 +177,4 @@ public class FeatureReaderTest {
 //                + "&request=GetFeature"
 //                + "&typeName=topp:states"));
 //    }
-
-    /**
-     * ***********************************************************************
-     */
-    private void checkFeature(String dftPathFile, String gfPathFile,
-            int numAtts, int numFts) throws Exception {
-        FileInputStream ff = null;
-        try {
-            File dftFile = new File(dftPathFile);
-            ff = new FileInputStream(dftFile);
-
-            List<LayerSchemaDTO> schemas = featureReaderXSD.read(ff);
-            Assert.assertNotNull(schemas);
-            Assert.assertEquals(1, schemas.size());
-
-            LayerSchemaDTO layerSchema = schemas.get(0);
-            Assert.assertNotNull(layerSchema.getTypeName());
-            String name = layerSchema.getTypeName().substring(
-                    layerSchema.getTypeName().indexOf(":") + 1);
-            Assert.assertNotNull(layerSchema.getTargetNamespace());
-            Assert.assertNotNull(layerSchema.getGeometry());
-            List<AttributeDTO> attributes = layerSchema.getAttributes();
-            Assert.assertNotNull(attributes);
-            Assert.assertEquals(numAtts, attributes.size());
-            for (AttributeDTO att : attributes) {
-                Assert.assertTrue(att.getMinOccurs() >= 0);
-                Assert.assertTrue(att.getMaxOccurs() > att.getMinOccurs());
-                Assert.assertNotNull(att.getName());
-                Assert.assertNotNull(att.getType());
-            }
-            logger.info("\n\n@@@@@@@@@@@@@@@@@@@@ {}", layerSchema);
-
-            WFSGetFeatureStaxReader featureReader = new WFSGetFeatureStaxReader(layerSchema);
-            FeatureCollectionDTO fc = featureReader.read(new File(gfPathFile));
-            Assert.assertNotNull(fc);
-            Assert.assertNotNull(fc.getTimeStamp());
-            Assert.assertEquals(numFts, fc.getNumberOfFeatures());
-            List<FeatureDTO> features = fc.getFeatures();
-            Assert.assertNotNull(features);
-            Assert.assertEquals(numFts, features.size());
-            for (FeatureDTO feature : features) {
-                Assert.assertTrue(feature.getFID().contains(name));
-                Assert.assertNotNull(feature.getGeometry());
-                if (numAtts == 0) {
-                    Assert.assertNull(feature.getAttributes());
-                } else {
-                    Assert.assertNotNull(feature.getAttributes());
-                    Map<String, String> fMap = feature.getAttributes().getAttributesMap();
-                    Assert.assertNotNull(fMap);
-                    Assert.assertEquals(numAtts, fMap.size());
-                }
-                logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@ {}", feature);
-            }
-
-        } finally {
-            if (ff != null) {
-                ff.close();
-            }
-        }
-    }
 }

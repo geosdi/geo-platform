@@ -33,15 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.wfs.reader;
+package org.geosdi.geoplatform.feature.reader;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 import java.util.Map;
-import org.geosdi.geoplatform.feature.reader.FeatureSchemaReader;
-import org.geosdi.geoplatform.feature.reader.GPFeatureSchemaReader;
-import org.geosdi.geoplatform.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureDTO;
@@ -100,6 +97,16 @@ public class FeatureReaderTest {
                 + "src/test/resources/states-GetFeature-all.xml";
 
         this.checkFeature(dftPathFile, gfPathFile, 22, 49);
+    }
+
+    @Test
+    public void readGiantPolygonAll() throws Exception {
+        String dftPathFile = new File(".").getCanonicalPath() + File.separator
+                + "src/test/resources/giant_polygon-DescribeFeatureType.xml";
+        String gfPathFile = new File(".").getCanonicalPath() + File.separator
+                + "src/test/resources/giant_polygon-GetFeature.xml";
+
+        this.checkFeature(dftPathFile, gfPathFile, 0, 1);
     }
 //    
 //    @Test
@@ -170,10 +177,14 @@ public class FeatureReaderTest {
             for (FeatureDTO feature : features) {
                 Assert.assertTrue(feature.getFID().contains(name));
                 Assert.assertNotNull(feature.getGeometry());
-                Assert.assertNotNull(feature.getAttributes());
-                Map<String, String> fMap = feature.getAttributes().getAttributesMap();
-                Assert.assertNotNull(fMap);
-                Assert.assertEquals(numAtts, fMap.size());
+                if (numAtts == 0) {
+                    Assert.assertNull(feature.getAttributes());
+                } else {
+                    Assert.assertNotNull(feature.getAttributes());
+                    Map<String, String> fMap = feature.getAttributes().getAttributesMap();
+                    Assert.assertNotNull(fMap);
+                    Assert.assertEquals(numAtts, fMap.size());
+                }
                 logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@ {}", feature);
             }
 

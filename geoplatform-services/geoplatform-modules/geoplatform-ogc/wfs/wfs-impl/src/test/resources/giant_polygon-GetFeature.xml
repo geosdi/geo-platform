@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection numberOfFeatures="1" timeStamp="2012-11-28T09:29:18.585Z" xsi:schemaLocation="http://www.census.gov http://150.146.160.92:80/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=tiger%3Agiant_polygon http://www.opengis.net/wfs http://150.146.160.92:80/geoserver/schemas/wfs/1.1.0/wfs.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:tiger="http://www.census.gov" xmlns:cite="http://www.opengeospatial.net/cite" xmlns:nurc="http://www.nurc.nato.int" xmlns:sde="http://geoserver.sf.net" xmlns:wfs="http://www.opengis.net/wfs" xmlns:topp="http://www.openplans.org/topp" xmlns:it.geosolutions="http://www.geo-solutions.it" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sf="http://www.openplans.org/spearfish" xmlns:ows="http://www.opengis.net/ows" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <gml:featureMembers>
+        <tiger:giant_polygon gml:id="giant_polygon.1">
+            <tiger:the_geom>
+                <gml:MultiSurface srsDimension="2" srsName="urn:x-ogc:def:crs:EPSG:4326">
+                    <gml:surfaceMember>
+                        <gml:Polygon srsDimension="2">
+                            <gml:exterior>
+                                <gml:LinearRing srsDimension="2">
+                                    <gml:posList>-90.0 -180.0 90.0 -180.0 90.0 180.0 -90.0 180.0 -90.0 -180.0</gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </tiger:the_geom>
+        </tiger:giant_polygon>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

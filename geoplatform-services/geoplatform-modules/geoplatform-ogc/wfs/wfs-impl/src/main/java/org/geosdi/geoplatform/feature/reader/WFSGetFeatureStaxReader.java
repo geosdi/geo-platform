@@ -87,7 +87,6 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         assert (geometryName != null);
 
         List<String> attributeNames = layerSchema.getAttributeNames();
-        assert (attributeNames != null);
 
         FeatureCollectionDTO fc = new FeatureCollectionDTO();
         FeatureDTO feature = null; // TODO Not initialize
@@ -164,6 +163,9 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
 
     private FeatureAttributesMap readAttributes(String featureName, List<String> attributeNames)
             throws XMLStreamException {
+        if (attributeNames == null) {
+            return null;
+        }
 
         Map<String, String> map = new HashMap<String, String>(attributeNames.size());
         for (String name : attributeNames) {

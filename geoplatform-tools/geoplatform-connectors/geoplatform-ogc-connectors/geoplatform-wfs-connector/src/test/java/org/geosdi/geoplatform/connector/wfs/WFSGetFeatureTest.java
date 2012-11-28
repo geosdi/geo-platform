@@ -117,6 +117,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.setSRS("EPSG:4326");
 
         logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
                     request.getResponseAsString());

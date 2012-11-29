@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.ReverseGeoco
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.template.PopupTemplate;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 import org.geosdi.geoplatform.gui.puregwt.GPToolbarActionHandlerManager;
@@ -256,7 +257,13 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
      */
     public LonLat getLonlat() {
         LonLat lt = new LonLat(this.lonlat.lon(), this.lonlat.lat());
-        lt.transform(this.mapWidget.getMap().getProjection(), GPCoordinateReferenceSystem.WGS_84.getCode());
+        
+        if (GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection().equals(
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+            lt.transform(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode(), GPCoordinateReferenceSystem.WGS_84.getCode());
+        } else {
+          //nothing to do  
+        }
         return lt;
     }
 

@@ -46,7 +46,7 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 import javax.xml.transform.Source;
 import org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder;
-import org.geosdi.geoplatform.stax.reader.builder.streamchain.FileBuildHandler;
+import org.geosdi.geoplatform.stax.reader.builder.streamchain.InputStreamBuildHandler;
 import org.geosdi.geoplatform.stax.reader.builder.streamchain.StreamBuildHandler;
 
 /**
@@ -58,7 +58,7 @@ public abstract class AbstractStaxStreamReader<T>
         implements GeoPlatformStaxReader {
 
     protected XMLStreamReader reader;
-    private StreamBuildHandler streamBuilder = new FileBuildHandler();
+    private StreamBuildHandler streamBuilder = new InputStreamBuildHandler();
     private XmlStreamReaderBuilder xmlStreamBuilder = XmlStreamReaderBuilder.newInstance();
     private InputStream stream;
 

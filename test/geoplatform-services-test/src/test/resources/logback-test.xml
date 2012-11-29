@@ -57,6 +57,8 @@
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TimeSearchRequest"
             level="info"/>
     
+    <logger name="org.geosdi.geoplatform.feature.reader.WFSGetFeatureStaxReader" level="debug"/>
+    
     <!-- DAOs -->
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="info"/>

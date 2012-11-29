@@ -143,6 +143,7 @@ public class FeatureReaderTest {
             Assert.assertNotNull(features);
             Assert.assertEquals(numFeatures, features.size());
             for (FeatureDTO feature : features) {
+                Assert.assertNotNull(feature.getFID());
                 Assert.assertTrue(feature.getFID().contains(name));
                 Assert.assertNotNull(feature.getGeometry());
                 if (numAttributes == 0) {

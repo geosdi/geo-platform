@@ -93,8 +93,8 @@ public class GPGetFeatureService extends AbstractFeatureService
             request.setTypeName(qName);
             request.setBBox(bBox);
             request.setSRS("EPSG:4326");
-            request.setResultType(ResultTypeType.RESULTS.name());
-            request.setMaxFeatures(BigInteger.TEN); // TODO pass it as argument?
+            request.setResultType(ResultTypeType.RESULTS.value());
+            request.setMaxFeatures(BigInteger.valueOf(1000L)); // TODO pass it as argument?
 
             InputStream is = request.getResponseAsStream();
             if (is == null) { // TODO check if the is can be null
@@ -107,11 +107,11 @@ public class GPGetFeatureService extends AbstractFeatureService
             featureCollection = featureReaderStAX.read(is);
 
         } catch (ServerInternalFault ex) {
-            logger.error("### ServerInternalFault: {} ###", ex.getMessage());
+            logger.error("\n### ServerInternalFault: {} ###", ex.getMessage());
         } catch (XMLStreamException ex) {
-            logger.error("### XMLStreamException: {} ###", ex.getMessage());
+            logger.error("\n### XMLStreamException: {} ###", ex.getMessage());
         } catch (IOException ex) {
-            logger.error("### IOException: {} ###", ex.getMessage());
+            logger.error("\n### IOException: {} ###", ex.getMessage());
             throw new ResourceNotFoundFault(
                     "Error to execute the WFS GetFeature for the layer " + layerSchema.getTypeName());
         }

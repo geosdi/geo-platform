@@ -4,27 +4,27 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractRing;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * An abstraction of a ring to support surface boundaries of different complexity.
- * 
+ * An abstraction of a ring to support surface boundaries of different
+ * complexity.
+ *
  * <p>Java class for AbstractRingType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="AbstractRingType">
  *   &lt;complexContent>
@@ -33,8 +33,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractRingType")
@@ -42,12 +42,10 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     RingType.class,
     LinearRingType.class
 })
-public abstract class AbstractRingType
-    extends AbstractGeometryType
-    implements ToString
-{
+public abstract class AbstractRingType extends AbstractGeometryType
+        implements ToString, AbstractRing {
 
-
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -55,16 +53,21 @@ public abstract class AbstractRingType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         return buffer;
     }
-
 }

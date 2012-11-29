@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.math.BigInteger;
@@ -17,23 +15,26 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * All geometry elements are derived directly or indirectly from this abstract supertype. A geometry element may 
- * 			have an identifying attribute ("gml:id"), a name (attribute "name") and a description (attribute "description"). It may be associated 
- * 			with a spatial reference system (attribute "srsName"). The following rules shall be adhered: - Every geometry type shall derive 
- * 			from this abstract type. - Every geometry element (i.e. an element of a geometry type) shall be directly or indirectly in the 
- * 			substitution group of _Geometry.
- * 
+ * All geometry elements are derived directly or indirectly from this abstract
+ * supertype. A geometry element may have an identifying attribute ("gml:id"), a
+ * name (attribute "name") and a description (attribute "description"). It may
+ * be associated with a spatial reference system (attribute "srsName"). The
+ * following rules shall be adhered: - Every geometry type shall derive from
+ * this abstract type. - Every geometry element (i.e. an element of a geometry
+ * type) shall be directly or indirectly in the substitution group of _Geometry.
+ *
  * <p>Java class for AbstractGeometryType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="AbstractGeometryType">
  *   &lt;complexContent>
@@ -44,8 +45,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractGeometryType")
@@ -56,10 +57,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     AbstractGeometricPrimitiveType.class,
     AbstractGeometricAggregateType.class
 })
-public abstract class AbstractGeometryType
-    extends AbstractGMLType
-    implements ToString
-{
+public abstract class AbstractGeometryType extends AbstractGMLType
+        implements ToString, AbstractGeometry {
 
     @XmlAttribute(name = "gid")
     protected String gid;
@@ -76,11 +75,9 @@ public abstract class AbstractGeometryType
 
     /**
      * Gets the value of the gid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getGid() {
         return gid;
@@ -88,98 +85,91 @@ public abstract class AbstractGeometryType
 
     /**
      * Sets the value of the gid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setGid(String value) {
         this.gid = value;
     }
 
     public boolean isSetGid() {
-        return (this.gid!= null);
+        return (this.gid != null);
     }
 
     /**
      * Gets the value of the srsName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
+    @Override
     public String getSrsName() {
         return srsName;
     }
 
     /**
      * Sets the value of the srsName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
+    @Override
     public void setSrsName(String value) {
         this.srsName = value;
     }
 
+    @Override
     public boolean isSetSrsName() {
-        return (this.srsName!= null);
+        return (this.srsName != null);
     }
 
     /**
      * Gets the value of the srsDimension property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is {@link BigInteger }
+     *
      */
+    @Override
     public BigInteger getSrsDimension() {
         return srsDimension;
     }
 
     /**
      * Sets the value of the srsDimension property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is {@link BigInteger }
+     *
      */
     public void setSrsDimension(BigInteger value) {
         this.srsDimension = value;
     }
 
+    @Override
     public boolean isSetSrsDimension() {
-        return (this.srsDimension!= null);
+        return (this.srsDimension != null);
     }
 
     /**
      * Gets the value of the axisLabels property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the axisLabels property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the axisLabels property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getAxisLabels().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link String }
-     * 
-     * 
+     *
+     *
      */
+    @Override
     public List<String> getAxisLabels() {
         if (axisLabels == null) {
             axisLabels = new ArrayList<String>();
@@ -187,8 +177,9 @@ public abstract class AbstractGeometryType
         return this.axisLabels;
     }
 
+    @Override
     public boolean isSetAxisLabels() {
-        return ((this.axisLabels!= null)&&(!this.axisLabels.isEmpty()));
+        return ((this.axisLabels != null) && (!this.axisLabels.isEmpty()));
     }
 
     public void unsetAxisLabels() {
@@ -197,26 +188,24 @@ public abstract class AbstractGeometryType
 
     /**
      * Gets the value of the uomLabels property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the uomLabels property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the uomLabels property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getUomLabels().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link String }
-     * 
-     * 
+     *
+     *
      */
+    @Override
     public List<String> getUomLabels() {
         if (uomLabels == null) {
             uomLabels = new ArrayList<String>();
@@ -224,14 +213,16 @@ public abstract class AbstractGeometryType
         return this.uomLabels;
     }
 
+    @Override
     public boolean isSetUomLabels() {
-        return ((this.uomLabels!= null)&&(!this.uomLabels.isEmpty()));
+        return ((this.uomLabels != null) && (!this.uomLabels.isEmpty()));
     }
 
     public void unsetUomLabels() {
         this.uomLabels = null;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -239,14 +230,20 @@ public abstract class AbstractGeometryType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             String theGid;
@@ -261,17 +258,20 @@ public abstract class AbstractGeometryType
         {
             BigInteger theSrsDimension;
             theSrsDimension = this.getSrsDimension();
-            strategy.appendField(locator, this, "srsDimension", buffer, theSrsDimension);
+            strategy.appendField(locator, this, "srsDimension", buffer,
+                    theSrsDimension);
         }
         {
             List<String> theAxisLabels;
-            theAxisLabels = (this.isSetAxisLabels()?this.getAxisLabels():null);
-            strategy.appendField(locator, this, "axisLabels", buffer, theAxisLabels);
+            theAxisLabels = (this.isSetAxisLabels() ? this.getAxisLabels() : null);
+            strategy.appendField(locator, this, "axisLabels", buffer,
+                    theAxisLabels);
         }
         {
             List<String> theUomLabels;
-            theUomLabels = (this.isSetUomLabels()?this.getUomLabels():null);
-            strategy.appendField(locator, this, "uomLabels", buffer, theUomLabels);
+            theUomLabels = (this.isSetUomLabels() ? this.getUomLabels() : null);
+            strategy.appendField(locator, this, "uomLabels", buffer,
+                    theUomLabels);
         }
         return buffer;
     }
@@ -287,5 +287,4 @@ public abstract class AbstractGeometryType
         List<String> draftl = this.getUomLabels();
         draftl.addAll(value);
     }
-
 }

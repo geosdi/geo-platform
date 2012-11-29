@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -15,20 +13,23 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractCurve;
+import org.geosdi.geoplatform.gml.api.CurveArrayProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A container for an array of curves. The elements are always contained in the array property, referencing geometry elements 
- * 			or arrays of geometry elements is not supported.
- * 
+ * A container for an array of curves. The elements are always contained in the
+ * array property, referencing geometry elements or arrays of geometry elements
+ * is not supported.
+ *
  * <p>Java class for CurveArrayPropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="CurveArrayPropertyType">
  *   &lt;complexContent>
@@ -40,45 +41,40 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CurveArrayPropertyType", propOrder = {
     "curve"
 })
-public class CurveArrayPropertyType
-    implements ToString
-{
+public class CurveArrayPropertyType implements ToString, CurveArrayProperty {
 
-    @XmlElementRef(name = "_Curve", namespace = "http://www.opengis.net/gml", type = ACurveElement.class)
+    @XmlElementRef(name = "_Curve", namespace = "http://www.opengis.net/gml",
+                   type = ACurveElement.class)
     protected List<JAXBElement<? extends AbstractCurveType>> curve;
 
     /**
      * Gets the value of the curve property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the curve property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the curve property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getCurve().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list null null     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
      * {@link JAXBElement }{@code <}{@link CompositeCurveType }{@code >}
      * {@link JAXBElement }{@code <}{@link CurveType }{@code >}
      * {@link JAXBElement }{@code <}{@link OrientableCurveType }{@code >}
      * {@link ACurveElement }
-     * 
-     * 
+     *
+     *
      */
     public List<JAXBElement<? extends AbstractCurveType>> getCurve() {
         if (curve == null) {
@@ -87,14 +83,28 @@ public class CurveArrayPropertyType
         return this.curve;
     }
 
+    @Override
     public boolean isSetCurve() {
-        return ((this.curve!= null)&&(!this.curve.isEmpty()));
+        return ((this.curve != null) && (!this.curve.isEmpty()));
+    }
+
+    @Override
+    public List<AbstractCurve> getAbstractCurve() {
+        List<AbstractCurve> abstractCurve = new ArrayList<AbstractCurve>();
+        
+        if(isSetCurve()) {
+            for(JAXBElement<? extends AbstractCurveType> element: curve) {
+                abstractCurve.add(element.getValue());
+            }
+        }
+        return abstractCurve;
     }
 
     public void unsetCurve() {
         this.curve = null;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -102,17 +112,23 @@ public class CurveArrayPropertyType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             List<JAXBElement<? extends AbstractCurveType>> theCurve;
-            theCurve = (this.isSetCurve()?this.getCurve():null);
+            theCurve = (this.isSetCurve() ? this.getCurve() : null);
             strategy.appendField(locator, this, "curve", buffer, theCurve);
         }
         return buffer;
@@ -123,5 +139,4 @@ public class CurveArrayPropertyType
         List<JAXBElement<? extends AbstractCurveType>> draftl = this.getCurve();
         draftl.addAll(value);
     }
-
 }

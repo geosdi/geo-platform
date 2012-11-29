@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -13,19 +11,21 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.MultiSurface;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A MultiSurface is defined by one or more Surfaces, referenced through surfaceMember elements.
- * 
+ * A MultiSurface is defined by one or more Surfaces, referenced through
+ * surfaceMember elements.
+ *
  * <p>Java class for MultiSurfaceType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="MultiSurfaceType">
  *   &lt;complexContent>
@@ -38,44 +38,40 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MultiSurfaceType", propOrder = {
     "surfaceMember",
     "surfaceMembers"
 })
-public class MultiSurfaceType
-    extends AbstractGeometricAggregateType
-    implements ToString
-{
+public class MultiSurfaceType extends AbstractGeometricAggregateType
+        implements ToString, MultiSurface {
 
     protected List<SurfacePropertyType> surfaceMember;
     protected SurfaceArrayPropertyType surfaceMembers;
 
     /**
      * Gets the value of the surfaceMember property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the surfaceMember property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the surfaceMember property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getSurfaceMember().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link SurfacePropertyType }
-     * 
-     * 
+     *
+     *
      */
+    @Override
     public List<SurfacePropertyType> getSurfaceMember() {
         if (surfaceMember == null) {
             surfaceMember = new ArrayList<SurfacePropertyType>();
@@ -83,8 +79,9 @@ public class MultiSurfaceType
         return this.surfaceMember;
     }
 
+    @Override
     public boolean isSetSurfaceMember() {
-        return ((this.surfaceMember!= null)&&(!this.surfaceMember.isEmpty()));
+        return ((this.surfaceMember != null) && (!this.surfaceMember.isEmpty()));
     }
 
     public void unsetSurfaceMember() {
@@ -93,32 +90,31 @@ public class MultiSurfaceType
 
     /**
      * Gets the value of the surfaceMembers property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SurfaceArrayPropertyType }
-     *     
+     *
+     * @return possible object is {@link SurfaceArrayPropertyType }
+     *
      */
+    @Override
     public SurfaceArrayPropertyType getSurfaceMembers() {
         return surfaceMembers;
     }
 
     /**
      * Sets the value of the surfaceMembers property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SurfaceArrayPropertyType }
-     *     
+     *
+     * @param value allowed object is {@link SurfaceArrayPropertyType }
+     *
      */
     public void setSurfaceMembers(SurfaceArrayPropertyType value) {
         this.surfaceMembers = value;
     }
 
+    @Override
     public boolean isSetSurfaceMembers() {
-        return (this.surfaceMembers!= null);
+        return (this.surfaceMembers != null);
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -126,24 +122,32 @@ public class MultiSurfaceType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<SurfacePropertyType> theSurfaceMember;
-            theSurfaceMember = (this.isSetSurfaceMember()?this.getSurfaceMember():null);
-            strategy.appendField(locator, this, "surfaceMember", buffer, theSurfaceMember);
+            theSurfaceMember = (this.isSetSurfaceMember() ? this.getSurfaceMember() : null);
+            strategy.appendField(locator, this, "surfaceMember", buffer,
+                    theSurfaceMember);
         }
         {
             SurfaceArrayPropertyType theSurfaceMembers;
             theSurfaceMembers = this.getSurfaceMembers();
-            strategy.appendField(locator, this, "surfaceMembers", buffer, theSurfaceMembers);
+            strategy.appendField(locator, this, "surfaceMembers", buffer,
+                    theSurfaceMembers);
         }
         return buffer;
     }
@@ -153,5 +157,4 @@ public class MultiSurfaceType
         List<SurfacePropertyType> draftl = this.getSurfaceMember();
         draftl.addAll(value);
     }
-
 }

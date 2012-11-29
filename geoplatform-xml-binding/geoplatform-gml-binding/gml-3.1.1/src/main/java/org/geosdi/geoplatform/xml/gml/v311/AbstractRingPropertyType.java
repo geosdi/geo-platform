@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.JAXBElement;
@@ -13,19 +11,21 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractRing;
+import org.geosdi.geoplatform.gml.api.AbstractRingProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
  * Encapsulates a ring to represent the surface boundary property of a surface.
- * 
+ *
  * <p>Java class for AbstractRingPropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="AbstractRingPropertyType">
  *   &lt;complexContent>
@@ -37,29 +37,27 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractRingPropertyType", propOrder = {
     "ring"
 })
-public class AbstractRingPropertyType
-    implements ToString
-{
+public class AbstractRingPropertyType implements ToString,
+        AbstractRingProperty {
 
-    @XmlElementRef(name = "_Ring", namespace = "http://www.opengis.net/gml", type = ARingElement.class)
+    @XmlElementRef(name = "_Ring", namespace = "http://www.opengis.net/gml",
+                   type = ARingElement.class)
     protected JAXBElement<? extends AbstractRingType> ring;
 
     /**
      * Gets the value of the ring property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
+     *
+     * @return possible object is null null     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
      *     {@link ARingElement }
      *     {@link JAXBElement }{@code <}{@link RingType }{@code >}
-     *     
+     *
      */
     public JAXBElement<? extends AbstractRingType> getRing() {
         return ring;
@@ -67,22 +65,26 @@ public class AbstractRingPropertyType
 
     /**
      * Sets the value of the ring property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
+     *
+     * @param value allowed object is null null     {@link JAXBElement }{@code <}{@link LinearRingType }{@code >}
      *     {@link ARingElement }
      *     {@link JAXBElement }{@code <}{@link RingType }{@code >}
-     *     
+     *
      */
     public void setRing(JAXBElement<? extends AbstractRingType> value) {
         this.ring = value;
     }
 
     public boolean isSetRing() {
-        return (this.ring!= null);
+        return (this.ring != null);
     }
 
+    @Override
+    public AbstractRing getAbstractRing() {
+        return isSetRing() ? ring.getValue() : null;
+    }
+
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -90,14 +92,20 @@ public class AbstractRingPropertyType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             JAXBElement<? extends AbstractRingType> theRing;
             theRing = this.getRing();
@@ -105,5 +113,4 @@ public class AbstractRingPropertyType
         }
         return buffer;
     }
-
 }

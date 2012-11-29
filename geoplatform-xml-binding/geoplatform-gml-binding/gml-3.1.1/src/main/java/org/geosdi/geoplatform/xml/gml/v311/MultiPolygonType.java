@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -13,19 +11,22 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.MultiPolygon;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A MultiPolygon is defined by one or more Polygons, referenced through polygonMember elements. Deprecated with GML version 3.0. Use MultiSurfaceType instead.
- * 
+ * A MultiPolygon is defined by one or more Polygons, referenced through
+ * polygonMember elements. Deprecated with GML version 3.0. Use MultiSurfaceType
+ * instead.
+ *
  * <p>Java class for MultiPolygonType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="MultiPolygonType">
  *   &lt;complexContent>
@@ -37,42 +38,38 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MultiPolygonType", propOrder = {
     "polygonMember"
 })
-public class MultiPolygonType
-    extends AbstractGeometricAggregateType
-    implements ToString
-{
+public class MultiPolygonType extends AbstractGeometricAggregateType
+        implements ToString, MultiPolygon {
 
     protected List<PolygonPropertyType> polygonMember;
 
     /**
      * Gets the value of the polygonMember property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the polygonMember property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the polygonMember property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getPolygonMember().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link PolygonPropertyType }
-     * 
-     * 
+     *
+     *
      */
+    @Override
     public List<PolygonPropertyType> getPolygonMember() {
         if (polygonMember == null) {
             polygonMember = new ArrayList<PolygonPropertyType>();
@@ -80,14 +77,16 @@ public class MultiPolygonType
         return this.polygonMember;
     }
 
+    @Override
     public boolean isSetPolygonMember() {
-        return ((this.polygonMember!= null)&&(!this.polygonMember.isEmpty()));
+        return ((this.polygonMember != null) && (!this.polygonMember.isEmpty()));
     }
 
     public void unsetPolygonMember() {
         this.polygonMember = null;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -95,19 +94,26 @@ public class MultiPolygonType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<PolygonPropertyType> thePolygonMember;
-            thePolygonMember = (this.isSetPolygonMember()?this.getPolygonMember():null);
-            strategy.appendField(locator, this, "polygonMember", buffer, thePolygonMember);
+            thePolygonMember = (this.isSetPolygonMember() ? this.getPolygonMember() : null);
+            strategy.appendField(locator, this, "polygonMember", buffer,
+                    thePolygonMember);
         }
         return buffer;
     }
@@ -117,5 +123,4 @@ public class MultiPolygonType
         List<PolygonPropertyType> draftl = this.getPolygonMember();
         draftl.addAll(value);
     }
-
 }

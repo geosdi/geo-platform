@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.JAXBElement;
@@ -15,21 +13,25 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.GeometryProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A geometric property can either be any geometry element encapsulated in an element of this type or an XLink reference 
- * 			to a remote geometry element (where remote includes geometry elements located elsewhere in the same document). Note that either 
- * 			the reference or the contained element must be given, but not both or none.
- * 
+ * A geometric property can either be any geometry element encapsulated in an
+ * element of this type or an XLink reference to a remote geometry element
+ * (where remote includes geometry elements located elsewhere in the same
+ * document). Note that either the reference or the contained element must be
+ * given, but not both or none.
+ *
  * <p>Java class for GeometryPropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="GeometryPropertyType">
  *   &lt;complexContent>
@@ -42,20 +44,20 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GeometryPropertyType", propOrder = {
     "geometry"
 })
-public class GeometryPropertyType
-    implements ToString
-{
+public class GeometryPropertyType implements ToString, GeometryProperty {
 
-    @XmlElementRef(name = "_Geometry", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
+    @XmlElementRef(name = "_Geometry", namespace = "http://www.opengis.net/gml",
+                   type = JAXBElement.class)
     protected JAXBElement<? extends AbstractGeometryType> geometry;
-    @XmlAttribute(name = "remoteSchema", namespace = "http://www.opengis.net/gml")
+    @XmlAttribute(name = "remoteSchema",
+                  namespace = "http://www.opengis.net/gml")
     @XmlSchemaType(name = "anyURI")
     protected String remoteSchema;
     @XmlAttribute(name = "type", namespace = "http://www.w3.org/1999/xlink")
@@ -78,10 +80,8 @@ public class GeometryPropertyType
 
     /**
      * Gets the value of the geometry property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     *
+     * @return possible object is null null     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
      *     {@link ARingElement }
      *     {@link ASurfaceElement }
      *     {@link JAXBElement }{@code <}{@link OrientableSurfaceType }{@code >}
@@ -115,7 +115,7 @@ public class GeometryPropertyType
      *     {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PolyhedralSurfaceType }{@code >}
      *     {@link JAXBElement }{@code <}{@link SolidType }{@code >}
-     *     
+     *
      */
     public JAXBElement<? extends AbstractGeometryType> getGeometry() {
         return geometry;
@@ -123,10 +123,8 @@ public class GeometryPropertyType
 
     /**
      * Sets the value of the geometry property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     *
+     * @param value allowed object is null null     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
      *     {@link ARingElement }
      *     {@link ASurfaceElement }
      *     {@link JAXBElement }{@code <}{@link OrientableSurfaceType }{@code >}
@@ -160,23 +158,27 @@ public class GeometryPropertyType
      *     {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
      *     {@link JAXBElement }{@code <}{@link PolyhedralSurfaceType }{@code >}
      *     {@link JAXBElement }{@code <}{@link SolidType }{@code >}
-     *     
+     *
      */
     public void setGeometry(JAXBElement<? extends AbstractGeometryType> value) {
         this.geometry = value;
     }
 
+    @Override
     public boolean isSetGeometry() {
-        return (this.geometry!= null);
+        return (this.geometry != null);
+    }
+
+    @Override
+    public AbstractGeometry getAbstractGeometry() {
+        return isSetGeometry() ? geometry.getValue() : null;
     }
 
     /**
      * Gets the value of the remoteSchema property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getRemoteSchema() {
         return remoteSchema;
@@ -184,27 +186,23 @@ public class GeometryPropertyType
 
     /**
      * Sets the value of the remoteSchema property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setRemoteSchema(String value) {
         this.remoteSchema = value;
     }
 
     public boolean isSetRemoteSchema() {
-        return (this.remoteSchema!= null);
+        return (this.remoteSchema != null);
     }
 
     /**
      * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getType() {
         if (type == null) {
@@ -216,27 +214,23 @@ public class GeometryPropertyType
 
     /**
      * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setType(String value) {
         this.type = value;
     }
 
     public boolean isSetType() {
-        return (this.type!= null);
+        return (this.type != null);
     }
 
     /**
      * Gets the value of the href property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getHref() {
         return href;
@@ -244,27 +238,23 @@ public class GeometryPropertyType
 
     /**
      * Sets the value of the href property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setHref(String value) {
         this.href = value;
     }
 
     public boolean isSetHref() {
-        return (this.href!= null);
+        return (this.href != null);
     }
 
     /**
      * Gets the value of the role property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getRole() {
         return role;
@@ -272,27 +262,23 @@ public class GeometryPropertyType
 
     /**
      * Sets the value of the role property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setRole(String value) {
         this.role = value;
     }
 
     public boolean isSetRole() {
-        return (this.role!= null);
+        return (this.role != null);
     }
 
     /**
      * Gets the value of the arcrole property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getArcrole() {
         return arcrole;
@@ -300,27 +286,23 @@ public class GeometryPropertyType
 
     /**
      * Sets the value of the arcrole property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setArcrole(String value) {
         this.arcrole = value;
     }
 
     public boolean isSetArcrole() {
-        return (this.arcrole!= null);
+        return (this.arcrole != null);
     }
 
     /**
      * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getTitle() {
         return title;
@@ -328,27 +310,23 @@ public class GeometryPropertyType
 
     /**
      * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setTitle(String value) {
         this.title = value;
     }
 
     public boolean isSetTitle() {
-        return (this.title!= null);
+        return (this.title != null);
     }
 
     /**
      * Gets the value of the show property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getShow() {
         return show;
@@ -356,27 +334,23 @@ public class GeometryPropertyType
 
     /**
      * Sets the value of the show property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setShow(String value) {
         this.show = value;
     }
 
     public boolean isSetShow() {
-        return (this.show!= null);
+        return (this.show != null);
     }
 
     /**
      * Gets the value of the actuate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getActuate() {
         return actuate;
@@ -384,20 +358,19 @@ public class GeometryPropertyType
 
     /**
      * Sets the value of the actuate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setActuate(String value) {
         this.actuate = value;
     }
 
     public boolean isSetActuate() {
-        return (this.actuate!= null);
+        return (this.actuate != null);
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -405,14 +378,20 @@ public class GeometryPropertyType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             JAXBElement<? extends AbstractGeometryType> theGeometry;
             theGeometry = this.getGeometry();
@@ -421,7 +400,8 @@ public class GeometryPropertyType
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema);
+            strategy.appendField(locator, this, "remoteSchema", buffer,
+                    theRemoteSchema);
         }
         {
             String theType;
@@ -460,5 +440,4 @@ public class GeometryPropertyType
         }
         return buffer;
     }
-
 }

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-
 import javax.annotation.Resource;
 import org.geosdi.geoplatform.gui.global.CopyrightInfo;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;

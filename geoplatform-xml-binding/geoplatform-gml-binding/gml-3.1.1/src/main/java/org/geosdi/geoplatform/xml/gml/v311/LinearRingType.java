@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -16,19 +14,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.LinearRing;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A LinearRing is defined by four or more coordinate tuples, with linear interpolation between them; the first and last coordinates must be coincident.
- * 
+ * A LinearRing is defined by four or more coordinate tuples, with linear
+ * interpolation between them; the first and last coordinates must be
+ * coincident.
+ *
  * <p>Java class for LinearRingType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="LinearRingType">
  *   &lt;complexContent>
@@ -49,8 +50,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LinearRingType", propOrder = {
@@ -59,15 +60,18 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "coordinates",
     "coord"
 })
-public class LinearRingType
-    extends AbstractRingType
-    implements ToString
-{
+public class LinearRingType extends AbstractRingType
+        implements ToString, LinearRing {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "pointProperty", namespace = "http://www.opengis.net/gml", type = JAXBElement.class),
-        @XmlElementRef(name = "pointRep", namespace = "http://www.opengis.net/gml", type = JAXBElement.class),
-        @XmlElementRef(name = "pos", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
+        @XmlElementRef(name = "pointProperty",
+                       namespace = "http://www.opengis.net/gml",
+                       type = JAXBElement.class),
+        @XmlElementRef(name = "pointRep",
+                       namespace = "http://www.opengis.net/gml",
+                       type = JAXBElement.class),
+        @XmlElementRef(name = "pos", namespace = "http://www.opengis.net/gml",
+                       type = JAXBElement.class)
     })
     protected List<JAXBElement<?>> posOrPointPropertyOrPointRep;
     protected DirectPositionListType posList;
@@ -76,27 +80,23 @@ public class LinearRingType
 
     /**
      * Gets the value of the posOrPointPropertyOrPointRep property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the posOrPointPropertyOrPointRep property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the posOrPointPropertyOrPointRep property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getPosOrPointPropertyOrPointRep().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link DirectPositionType }{@code >}
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list      {@link JAXBElement }{@code <}{@link DirectPositionType }{@code >}
      * {@link JAXBElement }{@code <}{@link PointPropertyType }{@code >}
      * {@link JAXBElement }{@code <}{@link PointPropertyType }{@code >}
-     * 
-     * 
+     *
+     *
      */
     public List<JAXBElement<?>> getPosOrPointPropertyOrPointRep() {
         if (posOrPointPropertyOrPointRep == null) {
@@ -105,8 +105,9 @@ public class LinearRingType
         return this.posOrPointPropertyOrPointRep;
     }
 
+    @Override
     public boolean isSetPosOrPointPropertyOrPointRep() {
-        return ((this.posOrPointPropertyOrPointRep!= null)&&(!this.posOrPointPropertyOrPointRep.isEmpty()));
+        return ((this.posOrPointPropertyOrPointRep != null) && (!this.posOrPointPropertyOrPointRep.isEmpty()));
     }
 
     public void unsetPosOrPointPropertyOrPointRep() {
@@ -115,81 +116,76 @@ public class LinearRingType
 
     /**
      * Gets the value of the posList property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DirectPositionListType }
-     *     
+     *
+     * @return possible object is {@link DirectPositionListType }
+     *
      */
+    @Override
     public DirectPositionListType getPosList() {
         return posList;
     }
 
     /**
      * Sets the value of the posList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DirectPositionListType }
-     *     
+     *
+     * @param value allowed object is {@link DirectPositionListType }
+     *
      */
     public void setPosList(DirectPositionListType value) {
         this.posList = value;
     }
 
+    @Override
     public boolean isSetPosList() {
-        return (this.posList!= null);
+        return (this.posList != null);
     }
 
     /**
      * Deprecated with GML version 3.1.0. Use "posList" instead.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CoordinatesType }
-     *     
+     *
+     * @return possible object is {@link CoordinatesType }
+     *
      */
+    @Override
     public CoordinatesType getCoordinates() {
         return coordinates;
     }
 
     /**
      * Sets the value of the coordinates property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CoordinatesType }
-     *     
+     *
+     * @param value allowed object is {@link CoordinatesType }
+     *
      */
     public void setCoordinates(CoordinatesType value) {
         this.coordinates = value;
     }
 
+    @Override
     public boolean isSetCoordinates() {
-        return (this.coordinates!= null);
+        return (this.coordinates != null);
     }
 
     /**
-     * Deprecated with GML version 3.0 and included for backwards compatibility with GML 2. Use "pos" elements instead.Gets the value of the coord property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the coord property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     * Deprecated with GML version 3.0 and included for backwards compatibility
+     * with GML 2. Use "pos" elements instead.Gets the value of the coord
+     * property.
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the coord property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getCoord().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link CoordType }
-     * 
-     * 
+     *
+     *
      */
     public List<CoordType> getCoord() {
         if (coord == null) {
@@ -199,13 +195,14 @@ public class LinearRingType
     }
 
     public boolean isSetCoord() {
-        return ((this.coord!= null)&&(!this.coord.isEmpty()));
+        return ((this.coord != null) && (!this.coord.isEmpty()));
     }
 
     public void unsetCoord() {
         this.coord = null;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -213,19 +210,26 @@ public class LinearRingType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<JAXBElement<?>> thePosOrPointPropertyOrPointRep;
-            thePosOrPointPropertyOrPointRep = (this.isSetPosOrPointPropertyOrPointRep()?this.getPosOrPointPropertyOrPointRep():null);
-            strategy.appendField(locator, this, "posOrPointPropertyOrPointRep", buffer, thePosOrPointPropertyOrPointRep);
+            thePosOrPointPropertyOrPointRep = (this.isSetPosOrPointPropertyOrPointRep() ? this.getPosOrPointPropertyOrPointRep() : null);
+            strategy.appendField(locator, this, "posOrPointPropertyOrPointRep",
+                    buffer, thePosOrPointPropertyOrPointRep);
         }
         {
             DirectPositionListType thePosList;
@@ -235,11 +239,12 @@ public class LinearRingType
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer,
+                    theCoordinates);
         }
         {
             List<CoordType> theCoord;
-            theCoord = (this.isSetCoord()?this.getCoord():null);
+            theCoord = (this.isSetCoord() ? this.getCoord() : null);
             strategy.appendField(locator, this, "coord", buffer, theCoord);
         }
         return buffer;
@@ -256,5 +261,4 @@ public class LinearRingType
         List<CoordType> draftl = this.getCoord();
         draftl.addAll(value);
     }
-
 }

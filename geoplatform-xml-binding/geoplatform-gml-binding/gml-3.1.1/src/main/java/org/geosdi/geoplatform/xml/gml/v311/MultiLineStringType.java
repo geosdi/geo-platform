@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -13,19 +11,22 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.MultiLineString;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A MultiLineString is defined by one or more LineStrings, referenced through lineStringMember elements. Deprecated with GML version 3.0. Use MultiCurveType instead.
- * 
+ * A MultiLineString is defined by one or more LineStrings, referenced through
+ * lineStringMember elements. Deprecated with GML version 3.0. Use
+ * MultiCurveType instead.
+ *
  * <p>Java class for MultiLineStringType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="MultiLineStringType">
  *   &lt;complexContent>
@@ -37,42 +38,38 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MultiLineStringType", propOrder = {
     "lineStringMember"
 })
-public class MultiLineStringType
-    extends AbstractGeometricAggregateType
-    implements ToString
-{
+public class MultiLineStringType extends AbstractGeometricAggregateType
+        implements ToString, MultiLineString {
 
     protected List<LineStringPropertyType> lineStringMember;
 
     /**
      * Gets the value of the lineStringMember property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the lineStringMember property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the lineStringMember property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getLineStringMember().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link LineStringPropertyType }
-     * 
-     * 
+     *
+     *
      */
+    @Override
     public List<LineStringPropertyType> getLineStringMember() {
         if (lineStringMember == null) {
             lineStringMember = new ArrayList<LineStringPropertyType>();
@@ -80,14 +77,16 @@ public class MultiLineStringType
         return this.lineStringMember;
     }
 
+    @Override
     public boolean isSetLineStringMember() {
-        return ((this.lineStringMember!= null)&&(!this.lineStringMember.isEmpty()));
+        return ((this.lineStringMember != null) && (!this.lineStringMember.isEmpty()));
     }
 
     public void unsetLineStringMember() {
         this.lineStringMember = null;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -95,19 +94,26 @@ public class MultiLineStringType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<LineStringPropertyType> theLineStringMember;
-            theLineStringMember = (this.isSetLineStringMember()?this.getLineStringMember():null);
-            strategy.appendField(locator, this, "lineStringMember", buffer, theLineStringMember);
+            theLineStringMember = (this.isSetLineStringMember() ? this.getLineStringMember() : null);
+            strategy.appendField(locator, this, "lineStringMember", buffer,
+                    theLineStringMember);
         }
         return buffer;
     }
@@ -117,5 +123,4 @@ public class MultiLineStringType
         List<LineStringPropertyType> draftl = this.getLineStringMember();
         draftl.addAll(value);
     }
-
 }

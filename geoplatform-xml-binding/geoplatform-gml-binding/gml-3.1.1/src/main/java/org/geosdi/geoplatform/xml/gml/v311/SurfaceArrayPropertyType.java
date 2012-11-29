@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -15,19 +13,23 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractSurface;
+import org.geosdi.geoplatform.gml.api.SurfaceArrayProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A container for an array of surfaces. The elements are always contained in the array property, referencing geometry elements or arrays of geometry elements is not supported.
- * 
+ * A container for an array of surfaces. The elements are always contained in
+ * the array property, referencing geometry elements or arrays of geometry
+ * elements is not supported.
+ *
  * <p>Java class for SurfaceArrayPropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="SurfaceArrayPropertyType">
  *   &lt;complexContent>
@@ -39,39 +41,34 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SurfaceArrayPropertyType", propOrder = {
     "surface"
 })
-public class SurfaceArrayPropertyType
-    implements ToString
-{
-
-    @XmlElementRef(name = "_Surface", namespace = "http://www.opengis.net/gml", type = ASurfaceElement.class)
+public class SurfaceArrayPropertyType implements ToString, SurfaceArrayProperty {
+    
+    @XmlElementRef(name = "_Surface", namespace = "http://www.opengis.net/gml",
+                   type = ASurfaceElement.class)
     protected List<JAXBElement<? extends AbstractSurfaceType>> surface;
 
     /**
      * Gets the value of the surface property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the surface property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the surface property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getSurface().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link TinType }{@code >}
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list null     {@link JAXBElement }{@code <}{@link TinType }{@code >}
      * {@link JAXBElement }{@code <}{@link CompositeSurfaceType }{@code >}
      * {@link ASurfaceElement }
      * {@link JAXBElement }{@code <}{@link TriangulatedSurfaceType }{@code >}
@@ -79,8 +76,8 @@ public class SurfaceArrayPropertyType
      * {@link JAXBElement }{@code <}{@link PolygonType }{@code >}
      * {@link JAXBElement }{@code <}{@link SurfaceType }{@code >}
      * {@link JAXBElement }{@code <}{@link PolyhedralSurfaceType }{@code >}
-     * 
-     * 
+     *
+     *
      */
     public List<JAXBElement<? extends AbstractSurfaceType>> getSurface() {
         if (surface == null) {
@@ -88,42 +85,60 @@ public class SurfaceArrayPropertyType
         }
         return this.surface;
     }
-
-    public boolean isSetSurface() {
-        return ((this.surface!= null)&&(!this.surface.isEmpty()));
+    
+    @Override
+    public List<AbstractSurface> getAbstractSurface() {
+        List<AbstractSurface> abstractSurface = new ArrayList<AbstractSurface>();
+        if (isSetSurface()) {
+            for (JAXBElement<? extends AbstractSurfaceType> element : surface) {
+                abstractSurface.add(element.getValue());
+            }
+        }
+        return abstractSurface;
     }
-
+    
+    @Override
+    public boolean isSetSurface() {
+        return ((this.surface != null) && (!this.surface.isEmpty()));
+    }
+    
     public void unsetSurface() {
         this.surface = null;
     }
-
+    
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
-
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
-
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             List<JAXBElement<? extends AbstractSurfaceType>> theSurface;
-            theSurface = (this.isSetSurface()?this.getSurface():null);
+            theSurface = (this.isSetSurface() ? this.getSurface() : null);
             strategy.appendField(locator, this, "surface", buffer, theSurface);
         }
         return buffer;
     }
-
-    public void setSurface(List<JAXBElement<? extends AbstractSurfaceType>> value) {
+    
+    public void setSurface(
+            List<JAXBElement<? extends AbstractSurfaceType>> value) {
         this.surface = null;
         List<JAXBElement<? extends AbstractSurfaceType>> draftl = this.getSurface();
         draftl.addAll(value);
     }
-
 }

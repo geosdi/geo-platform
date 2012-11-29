@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -15,19 +13,21 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractCurveSegment;
+import org.geosdi.geoplatform.gml.api.CurveSegmentArrayProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
  * A container for an array of curve segments.
- * 
+ *
  * <p>Java class for CurveSegmentArrayPropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="CurveSegmentArrayPropertyType">
  *   &lt;complexContent>
@@ -39,39 +39,36 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CurveSegmentArrayPropertyType", propOrder = {
     "curveSegment"
 })
-public class CurveSegmentArrayPropertyType
-    implements ToString
-{
+public class CurveSegmentArrayPropertyType implements ToString,
+        CurveSegmentArrayProperty {
 
-    @XmlElementRef(name = "_CurveSegment", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
+    @XmlElementRef(name = "_CurveSegment",
+                   namespace = "http://www.opengis.net/gml",
+                   type = JAXBElement.class)
     protected List<JAXBElement<? extends AbstractCurveSegmentType>> curveSegment;
 
     /**
      * Gets the value of the curveSegment property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the curveSegment property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the curveSegment property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getCurveSegment().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link AbstractCurveSegmentType }{@code >}
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list null null null     {@link JAXBElement }{@code <}{@link AbstractCurveSegmentType }{@code >}
      * {@link JAXBElement }{@code <}{@link CubicSplineType }{@code >}
      * {@link JAXBElement }{@code <}{@link LineStringSegmentType }{@code >}
      * {@link JAXBElement }{@code <}{@link ArcStringByBulgeType }{@code >}
@@ -87,8 +84,8 @@ public class CurveSegmentArrayPropertyType
      * {@link JAXBElement }{@code <}{@link BezierType }{@code >}
      * {@link JAXBElement }{@code <}{@link ClothoidType }{@code >}
      * {@link JAXBElement }{@code <}{@link CircleType }{@code >}
-     * 
-     * 
+     *
+     *
      */
     public List<JAXBElement<? extends AbstractCurveSegmentType>> getCurveSegment() {
         if (curveSegment == null) {
@@ -98,11 +95,23 @@ public class CurveSegmentArrayPropertyType
     }
 
     public boolean isSetCurveSegment() {
-        return ((this.curveSegment!= null)&&(!this.curveSegment.isEmpty()));
+        return ((this.curveSegment != null) && (!this.curveSegment.isEmpty()));
     }
 
     public void unsetCurveSegment() {
         this.curveSegment = null;
+    }
+
+    @Override
+    public List<AbstractCurveSegment> getAbstractCurveSegment() {
+        List<AbstractCurveSegment> abstractCurveSegment = new ArrayList<AbstractCurveSegment>();
+
+        if (isSetCurveSegment()) {
+            for (JAXBElement<? extends AbstractCurveSegmentType> element : curveSegment) {
+                abstractCurveSegment.add(element.getValue());
+            }
+        }
+        return abstractCurveSegment;
     }
 
     public String toString() {
@@ -112,26 +121,31 @@ public class CurveSegmentArrayPropertyType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             List<JAXBElement<? extends AbstractCurveSegmentType>> theCurveSegment;
-            theCurveSegment = (this.isSetCurveSegment()?this.getCurveSegment():null);
-            strategy.appendField(locator, this, "curveSegment", buffer, theCurveSegment);
+            theCurveSegment = (this.isSetCurveSegment() ? this.getCurveSegment() : null);
+            strategy.appendField(locator, this, "curveSegment", buffer,
+                    theCurveSegment);
         }
         return buffer;
     }
 
-    public void setCurveSegment(List<JAXBElement<? extends AbstractCurveSegmentType>> value) {
+    public void setCurveSegment(
+            List<JAXBElement<? extends AbstractCurveSegmentType>> value) {
         this.curveSegment = null;
         List<JAXBElement<? extends AbstractCurveSegmentType>> draftl = this.getCurveSegment();
         draftl.addAll(value);
     }
-
 }

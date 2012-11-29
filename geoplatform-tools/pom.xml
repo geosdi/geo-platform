@@ -22,6 +22,7 @@
         <module>geoplatform-xml-utilities</module>
         <module>geoplatform-connectors</module>
         <module>geoplatform-persistence-layer</module>
+        <module>geoplatform-gml-parser</module>
     </modules>
 
 </project>

@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -15,20 +13,23 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.GeometryArrayProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A container for an array of geometry elements. The elements are always contained in the array property, 
- * 			referencing geometry elements or arrays of geometry elements is not supported.
- * 
+ * A container for an array of geometry elements. The elements are always
+ * contained in the array property, referencing geometry elements or arrays of
+ * geometry elements is not supported.
+ *
  * <p>Java class for GeometryArrayPropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="GeometryArrayPropertyType">
  *   &lt;complexContent>
@@ -40,39 +41,35 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GeometryArrayPropertyType", propOrder = {
     "geometry"
 })
-public class GeometryArrayPropertyType
-    implements ToString
-{
+public class GeometryArrayPropertyType implements ToString,
+        GeometryArrayProperty {
 
-    @XmlElementRef(name = "_Geometry", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
+    @XmlElementRef(name = "_Geometry", namespace = "http://www.opengis.net/gml",
+                   type = JAXBElement.class)
     protected List<JAXBElement<? extends AbstractGeometryType>> geometry;
 
     /**
      * Gets the value of the geometry property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the geometry property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the geometry property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getGeometry().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list null     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
      * {@link ARingElement }
      * {@link ASurfaceElement }
      * {@link JAXBElement }{@code <}{@link OrientableSurfaceType }{@code >}
@@ -106,8 +103,8 @@ public class GeometryArrayPropertyType
      * {@link JAXBElement }{@code <}{@link AbstractGeometryType }{@code >}
      * {@link JAXBElement }{@code <}{@link PolyhedralSurfaceType }{@code >}
      * {@link JAXBElement }{@code <}{@link SolidType }{@code >}
-     * 
-     * 
+     *
+     *
      */
     public List<JAXBElement<? extends AbstractGeometryType>> getGeometry() {
         if (geometry == null) {
@@ -116,14 +113,27 @@ public class GeometryArrayPropertyType
         return this.geometry;
     }
 
+    @Override
     public boolean isSetGeometry() {
-        return ((this.geometry!= null)&&(!this.geometry.isEmpty()));
+        return ((this.geometry != null) && (!this.geometry.isEmpty()));
     }
 
     public void unsetGeometry() {
         this.geometry = null;
     }
 
+    @Override
+    public List<AbstractGeometry> getAbstractGeometry() {
+        List<AbstractGeometry> abstractGeometry = new ArrayList<AbstractGeometry>();
+        if (isSetGeometry()) {
+            for (JAXBElement<? extends AbstractGeometryType> element : geometry) {
+                abstractGeometry.add(element.getValue());
+            }
+        }
+        return abstractGeometry;
+    }
+
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -131,26 +141,32 @@ public class GeometryArrayPropertyType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             List<JAXBElement<? extends AbstractGeometryType>> theGeometry;
-            theGeometry = (this.isSetGeometry()?this.getGeometry():null);
+            theGeometry = (this.isSetGeometry() ? this.getGeometry() : null);
             strategy.appendField(locator, this, "geometry", buffer, theGeometry);
         }
         return buffer;
     }
 
-    public void setGeometry(List<JAXBElement<? extends AbstractGeometryType>> value) {
+    public void setGeometry(
+            List<JAXBElement<? extends AbstractGeometryType>> value) {
         this.geometry = null;
         List<JAXBElement<? extends AbstractGeometryType>> draftl = this.getGeometry();
         draftl.addAll(value);
     }
-
 }

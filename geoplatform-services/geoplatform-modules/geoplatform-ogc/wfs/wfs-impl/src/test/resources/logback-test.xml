@@ -20,6 +20,6 @@
     </root>
     
     <logger name="org.geosdi.geoplatform.feature.reader.WFSGetFeatureStaxReader" level="info" />
-    <logger name="org.geosdi.geoplatform.feature.reader.FeatureReaderTest" level="info" />
+    <logger name="org.geosdi.geoplatform.feature.reader.FeatureReaderTest" level="debug" />
 
 </configuration>

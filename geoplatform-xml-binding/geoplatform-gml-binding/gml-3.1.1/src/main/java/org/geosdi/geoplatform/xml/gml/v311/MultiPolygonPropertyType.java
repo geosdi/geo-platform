@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,21 +12,27 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.MultiPolygonProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * This type is deprecated with GML 3 and shall not be used. It is included for backwards compatibility with GML 2. Use MultiSurfacePropertyType instead.
- * 
- * A property that has a collection of polygons as its value domain can either be an appropriate geometry element encapsulated in an element of this type or an XLink reference to a remote geometry element (where remote includes geometry elements located elsewhere in the same document). Either the reference or the contained element must be given, but neither both nor none.
- * 
+ * This type is deprecated with GML 3 and shall not be used. It is included for
+ * backwards compatibility with GML 2. Use MultiSurfacePropertyType instead.
+ *
+ * A property that has a collection of polygons as its value domain can either
+ * be an appropriate geometry element encapsulated in an element of this type or
+ * an XLink reference to a remote geometry element (where remote includes
+ * geometry elements located elsewhere in the same document). Either the
+ * reference or the contained element must be given, but neither both nor none.
+ *
  * <p>Java class for MultiPolygonPropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="MultiPolygonPropertyType">
  *   &lt;complexContent>
@@ -41,20 +45,19 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MultiPolygonPropertyType", propOrder = {
     "multiPolygon"
 })
-public class MultiPolygonPropertyType
-    implements ToString
-{
+public class MultiPolygonPropertyType implements ToString, MultiPolygonProperty {
 
     @XmlElement(name = "MultiPolygon")
     protected MultiPolygonType multiPolygon;
-    @XmlAttribute(name = "remoteSchema", namespace = "http://www.opengis.net/gml")
+    @XmlAttribute(name = "remoteSchema",
+                  namespace = "http://www.opengis.net/gml")
     @XmlSchemaType(name = "anyURI")
     protected String remoteSchema;
     @XmlAttribute(name = "type", namespace = "http://www.w3.org/1999/xlink")
@@ -77,39 +80,35 @@ public class MultiPolygonPropertyType
 
     /**
      * Gets the value of the multiPolygon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MultiPolygonType }
-     *     
+     *
+     * @return possible object is {@link MultiPolygonType }
+     *
      */
+    @Override
     public MultiPolygonType getMultiPolygon() {
         return multiPolygon;
     }
 
     /**
      * Sets the value of the multiPolygon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MultiPolygonType }
-     *     
+     *
+     * @param value allowed object is {@link MultiPolygonType }
+     *
      */
     public void setMultiPolygon(MultiPolygonType value) {
         this.multiPolygon = value;
     }
 
+    @Override
     public boolean isSetMultiPolygon() {
-        return (this.multiPolygon!= null);
+        return (this.multiPolygon != null);
     }
 
     /**
      * Gets the value of the remoteSchema property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getRemoteSchema() {
         return remoteSchema;
@@ -117,27 +116,23 @@ public class MultiPolygonPropertyType
 
     /**
      * Sets the value of the remoteSchema property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setRemoteSchema(String value) {
         this.remoteSchema = value;
     }
 
     public boolean isSetRemoteSchema() {
-        return (this.remoteSchema!= null);
+        return (this.remoteSchema != null);
     }
 
     /**
      * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getType() {
         if (type == null) {
@@ -149,27 +144,23 @@ public class MultiPolygonPropertyType
 
     /**
      * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setType(String value) {
         this.type = value;
     }
 
     public boolean isSetType() {
-        return (this.type!= null);
+        return (this.type != null);
     }
 
     /**
      * Gets the value of the href property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getHref() {
         return href;
@@ -177,27 +168,23 @@ public class MultiPolygonPropertyType
 
     /**
      * Sets the value of the href property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setHref(String value) {
         this.href = value;
     }
 
     public boolean isSetHref() {
-        return (this.href!= null);
+        return (this.href != null);
     }
 
     /**
      * Gets the value of the role property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getRole() {
         return role;
@@ -205,27 +192,23 @@ public class MultiPolygonPropertyType
 
     /**
      * Sets the value of the role property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setRole(String value) {
         this.role = value;
     }
 
     public boolean isSetRole() {
-        return (this.role!= null);
+        return (this.role != null);
     }
 
     /**
      * Gets the value of the arcrole property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getArcrole() {
         return arcrole;
@@ -233,27 +216,23 @@ public class MultiPolygonPropertyType
 
     /**
      * Sets the value of the arcrole property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setArcrole(String value) {
         this.arcrole = value;
     }
 
     public boolean isSetArcrole() {
-        return (this.arcrole!= null);
+        return (this.arcrole != null);
     }
 
     /**
      * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getTitle() {
         return title;
@@ -261,27 +240,23 @@ public class MultiPolygonPropertyType
 
     /**
      * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setTitle(String value) {
         this.title = value;
     }
 
     public boolean isSetTitle() {
-        return (this.title!= null);
+        return (this.title != null);
     }
 
     /**
      * Gets the value of the show property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getShow() {
         return show;
@@ -289,27 +264,23 @@ public class MultiPolygonPropertyType
 
     /**
      * Sets the value of the show property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setShow(String value) {
         this.show = value;
     }
 
     public boolean isSetShow() {
-        return (this.show!= null);
+        return (this.show != null);
     }
 
     /**
      * Gets the value of the actuate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getActuate() {
         return actuate;
@@ -317,18 +288,16 @@ public class MultiPolygonPropertyType
 
     /**
      * Sets the value of the actuate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setActuate(String value) {
         this.actuate = value;
     }
 
     public boolean isSetActuate() {
-        return (this.actuate!= null);
+        return (this.actuate != null);
     }
 
     public String toString() {
@@ -338,23 +307,29 @@ public class MultiPolygonPropertyType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             MultiPolygonType theMultiPolygon;
             theMultiPolygon = this.getMultiPolygon();
-            strategy.appendField(locator, this, "multiPolygon", buffer, theMultiPolygon);
+            strategy.appendField(locator, this, "multiPolygon", buffer,
+                    theMultiPolygon);
         }
         {
             String theRemoteSchema;
             theRemoteSchema = this.getRemoteSchema();
-            strategy.appendField(locator, this, "remoteSchema", buffer, theRemoteSchema);
+            strategy.appendField(locator, this, "remoteSchema", buffer,
+                    theRemoteSchema);
         }
         {
             String theType;
@@ -393,5 +368,4 @@ public class MultiPolygonPropertyType
         }
         return buffer;
     }
-
 }

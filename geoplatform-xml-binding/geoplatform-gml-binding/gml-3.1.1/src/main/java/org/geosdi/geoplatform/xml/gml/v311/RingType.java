@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -19,16 +17,22 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A Ring is used to represent a single connected component of a surface boundary. It consists of a sequence of curves connected in a cycle (an object whose boundary is empty).
- * A Ring is structurally similar to a composite curve in that the endPoint of each curve in the sequence is the startPoint of the next curve in the Sequence. Since the sequence is circular, there is no exception to this rule. Each ring, like all boundaries, is a cycle and each ring is simple.
- * NOTE: Even though each Ring is simple, the boundary need not be simple. The easiest case of this is where one of the interior rings of a surface is tangent to its exterior ring.
- * 
+ * A Ring is used to represent a single connected component of a surface
+ * boundary. It consists of a sequence of curves connected in a cycle (an object
+ * whose boundary is empty). A Ring is structurally similar to a composite curve
+ * in that the endPoint of each curve in the sequence is the startPoint of the
+ * next curve in the Sequence. Since the sequence is circular, there is no
+ * exception to this rule. Each ring, like all boundaries, is a cycle and each
+ * ring is simple. NOTE: Even though each Ring is simple, the boundary need not
+ * be simple. The easiest case of this is where one of the interior rings of a
+ * surface is tangent to its exterior ring.
+ *
  * <p>Java class for RingType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="RingType">
  *   &lt;complexContent>
@@ -40,43 +44,41 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RingType", propOrder = {
     "curveMember"
 })
-public class RingType
-    extends AbstractRingType
-    implements ToString
-{
+public class RingType extends AbstractRingType
+        implements ToString {
 
     @XmlElement(required = true)
     protected List<CurvePropertyType> curveMember;
 
     /**
-     * This element references or contains one curve in the composite curve. The curves are contiguous, the collection of curves is ordered.
-     * NOTE: This definition allows for a nested structure, i.e. a CompositeCurve may use, for example, another CompositeCurve as a curve member.Gets the value of the curveMember property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the curveMember property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     * This element references or contains one curve in the composite curve. The
+     * curves are contiguous, the collection of curves is ordered. NOTE: This
+     * definition allows for a nested structure, i.e. a CompositeCurve may use,
+     * for example, another CompositeCurve as a curve member.Gets the value of
+     * the curveMember property.
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the curveMember property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getCurveMember().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link CurvePropertyType }
-     * 
-     * 
+     *
+     *
      */
     public List<CurvePropertyType> getCurveMember() {
         if (curveMember == null) {
@@ -86,13 +88,14 @@ public class RingType
     }
 
     public boolean isSetCurveMember() {
-        return ((this.curveMember!= null)&&(!this.curveMember.isEmpty()));
+        return ((this.curveMember != null) && (!this.curveMember.isEmpty()));
     }
 
     public void unsetCurveMember() {
         this.curveMember = null;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -100,19 +103,26 @@ public class RingType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<CurvePropertyType> theCurveMember;
-            theCurveMember = (this.isSetCurveMember()?this.getCurveMember():null);
-            strategy.appendField(locator, this, "curveMember", buffer, theCurveMember);
+            theCurveMember = (this.isSetCurveMember() ? this.getCurveMember() : null);
+            strategy.appendField(locator, this, "curveMember", buffer,
+                    theCurveMember);
         }
         return buffer;
     }
@@ -122,5 +132,4 @@ public class RingType
         List<CurvePropertyType> draftl = this.getCurveMember();
         draftl.addAll(value);
     }
-
 }

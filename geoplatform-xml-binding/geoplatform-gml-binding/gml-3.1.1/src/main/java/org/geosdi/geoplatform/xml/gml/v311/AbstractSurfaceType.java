@@ -4,27 +4,27 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractSurface;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * An abstraction of a surface to support the different levels of complexity. A surface is always a continuous region of a plane.
- * 
+ * An abstraction of a surface to support the different levels of complexity. A
+ * surface is always a continuous region of a plane.
+ *
  * <p>Java class for AbstractSurfaceType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="AbstractSurfaceType">
  *   &lt;complexContent>
@@ -33,8 +33,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractSurfaceType")
@@ -44,11 +44,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     CompositeSurfaceType.class,
     SurfaceType.class
 })
-public class AbstractSurfaceType
-    extends AbstractGeometricPrimitiveType
-    implements ToString
-{
-
+public class AbstractSurfaceType extends AbstractGeometricPrimitiveType
+        implements ToString, AbstractSurface {
 
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
@@ -57,16 +54,19 @@ public class AbstractSurfaceType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         return buffer;
     }
-
 }

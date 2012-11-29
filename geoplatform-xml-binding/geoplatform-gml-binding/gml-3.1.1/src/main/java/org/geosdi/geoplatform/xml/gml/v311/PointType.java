@@ -4,26 +4,25 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.Point;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
  * A Point is defined by a single coordinate tuple.
- * 
+ *
  * <p>Java class for PointType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="PointType">
  *   &lt;complexContent>
@@ -39,8 +38,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PointType", propOrder = {
@@ -48,10 +47,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "coordinates",
     "coord"
 })
-public class PointType
-    extends AbstractGeometricPrimitiveType
-    implements ToString
-{
+public class PointType extends AbstractGeometricPrimitiveType
+        implements ToString, Point {
 
     protected DirectPositionType pos;
     protected CoordinatesType coordinates;
@@ -59,91 +56,87 @@ public class PointType
 
     /**
      * Gets the value of the pos property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DirectPositionType }
-     *     
+     *
+     * @return possible object is {@link DirectPositionType }
+     *
      */
+    @Override
     public DirectPositionType getPos() {
         return pos;
     }
 
     /**
      * Sets the value of the pos property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DirectPositionType }
-     *     
+     *
+     * @param value allowed object is {@link DirectPositionType }
+     *
      */
     public void setPos(DirectPositionType value) {
         this.pos = value;
     }
 
+    @Override
     public boolean isSetPos() {
-        return (this.pos!= null);
+        return (this.pos != null);
     }
 
     /**
-     * Deprecated with GML version 3.1.0 for coordinates with ordinate values that are numbers. Use "pos" 
-     * 								instead. The "coordinates" element shall only be used for coordinates with ordinates that require a string 
-     * 								representation, e.g. DMS representations.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CoordinatesType }
-     *     
+     * Deprecated with GML version 3.1.0 for coordinates with ordinate values
+     * that are numbers. Use "pos" instead. The "coordinates" element shall only
+     * be used for coordinates with ordinates that require a string
+     * representation, e.g. DMS representations.
+     *
+     * @return possible object is {@link CoordinatesType }
+     *
      */
+    @Override
     public CoordinatesType getCoordinates() {
         return coordinates;
     }
 
     /**
      * Sets the value of the coordinates property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CoordinatesType }
-     *     
+     *
+     * @param value allowed object is {@link CoordinatesType }
+     *
      */
     public void setCoordinates(CoordinatesType value) {
         this.coordinates = value;
     }
 
+    @Override
     public boolean isSetCoordinates() {
-        return (this.coordinates!= null);
+        return (this.coordinates != null);
     }
 
     /**
-     * Deprecated with GML version 3.0. Use "pos" instead. The "coord" element is included for 
-     * 								backwards compatibility with GML 2.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CoordType }
-     *     
+     * Deprecated with GML version 3.0. Use "pos" instead. The "coord" element
+     * is included for backwards compatibility with GML 2.
+     *
+     * @return possible object is {@link CoordType }
+     *
      */
+    @Override
     public CoordType getCoord() {
         return coord;
     }
 
     /**
      * Sets the value of the coord property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CoordType }
-     *     
+     *
+     * @param value allowed object is {@link CoordType }
+     *
      */
     public void setCoord(CoordType value) {
         this.coord = value;
     }
 
+    @Override
     public boolean isSetCoord() {
-        return (this.coord!= null);
+        return (this.coord != null);
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -151,14 +144,20 @@ public class PointType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             DirectPositionType thePos;
@@ -168,7 +167,8 @@ public class PointType
         {
             CoordinatesType theCoordinates;
             theCoordinates = this.getCoordinates();
-            strategy.appendField(locator, this, "coordinates", buffer, theCoordinates);
+            strategy.appendField(locator, this, "coordinates", buffer,
+                    theCoordinates);
         }
         {
             CoordType theCoord;
@@ -177,5 +177,4 @@ public class PointType
         }
         return buffer;
     }
-
 }

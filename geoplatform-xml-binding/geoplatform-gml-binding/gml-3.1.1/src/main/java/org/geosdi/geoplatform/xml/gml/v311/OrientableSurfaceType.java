@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,14 +16,18 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * OrientableSurface consists of a surface and an orientation. If the orientation is "+", then the OrientableSurface is identical to the baseSurface. If the orientation is "-", then the OrientableSurface is a reference to a Surface with an up-normal that reverses the direction for this OrientableSurface, the sense of "the top of the surface".
- * 
+ * OrientableSurface consists of a surface and an orientation. If the
+ * orientation is "+", then the OrientableSurface is identical to the
+ * baseSurface. If the orientation is "-", then the OrientableSurface is a
+ * reference to a Surface with an up-normal that reverses the direction for this
+ * OrientableSurface, the sense of "the top of the surface".
+ *
  * <p>Java class for OrientableSurfaceType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="OrientableSurfaceType">
  *   &lt;complexContent>
@@ -38,17 +40,15 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OrientableSurfaceType", propOrder = {
     "baseSurface"
 })
-public class OrientableSurfaceType
-    extends AbstractSurfaceType
-    implements ToString
-{
+public class OrientableSurfaceType extends AbstractSurfaceType
+        implements ToString {
 
     @XmlElement(required = true)
     protected SurfacePropertyType baseSurface;
@@ -57,11 +57,9 @@ public class OrientableSurfaceType
 
     /**
      * References or contains the base surface (positive orientation).
-     * 
-     * @return
-     *     possible object is
-     *     {@link SurfacePropertyType }
-     *     
+     *
+     * @return possible object is {@link SurfacePropertyType }
+     *
      */
     public SurfacePropertyType getBaseSurface() {
         return baseSurface;
@@ -69,27 +67,23 @@ public class OrientableSurfaceType
 
     /**
      * Sets the value of the baseSurface property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SurfacePropertyType }
-     *     
+     *
+     * @param value allowed object is {@link SurfacePropertyType }
+     *
      */
     public void setBaseSurface(SurfacePropertyType value) {
         this.baseSurface = value;
     }
 
     public boolean isSetBaseSurface() {
-        return (this.baseSurface!= null);
+        return (this.baseSurface != null);
     }
 
     /**
      * Gets the value of the orientation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SignType }
-     *     
+     *
+     * @return possible object is {@link SignType }
+     *
      */
     public SignType getOrientation() {
         if (orientation == null) {
@@ -101,18 +95,16 @@ public class OrientableSurfaceType
 
     /**
      * Sets the value of the orientation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SignType }
-     *     
+     *
+     * @param value allowed object is {@link SignType }
+     *
      */
     public void setOrientation(SignType value) {
         this.orientation = value;
     }
 
     public boolean isSetOrientation() {
-        return (this.orientation!= null);
+        return (this.orientation != null);
     }
 
     public String toString() {
@@ -122,26 +114,31 @@ public class OrientableSurfaceType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             SurfacePropertyType theBaseSurface;
             theBaseSurface = this.getBaseSurface();
-            strategy.appendField(locator, this, "baseSurface", buffer, theBaseSurface);
+            strategy.appendField(locator, this, "baseSurface", buffer,
+                    theBaseSurface);
         }
         {
             SignType theOrientation;
             theOrientation = this.getOrientation();
-            strategy.appendField(locator, this, "orientation", buffer, theOrientation);
+            strategy.appendField(locator, this, "orientation", buffer,
+                    theOrientation);
         }
         return buffer;
     }
-
 }

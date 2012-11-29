@@ -4,29 +4,32 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.Curve;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * Curve is a 1-dimensional primitive. Curves are continuous, connected, and have a measurable length in terms of the coordinate system. 
- * 				A curve is composed of one or more curve segments. Each curve segment within a curve may be defined using a different interpolation method. The curve segments are connected to one another, with the end point of each segment except the last being the start point of the next segment in the segment list.
- * 				The orientation of the curve is positive.
- * 
+ * Curve is a 1-dimensional primitive. Curves are continuous, connected, and
+ * have a measurable length in terms of the coordinate system. A curve is
+ * composed of one or more curve segments. Each curve segment within a curve may
+ * be defined using a different interpolation method. The curve segments are
+ * connected to one another, with the end point of each segment except the last
+ * being the start point of the next segment in the segment list. The
+ * orientation of the curve is positive.
+ *
  * <p>Java class for CurveType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="CurveType">
  *   &lt;complexContent>
@@ -38,47 +41,42 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CurveType", propOrder = {
     "segments"
 })
-public class CurveType
-    extends AbstractCurveType
-    implements ToString
-{
+public class CurveType extends AbstractCurveType implements ToString, Curve {
 
     @XmlElement(required = true)
     protected CurveSegmentArrayPropertyType segments;
 
     /**
      * This element encapsulates the segments of the curve.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CurveSegmentArrayPropertyType }
-     *     
+     *
+     * @return possible object is {@link CurveSegmentArrayPropertyType }
+     *
      */
+    @Override
     public CurveSegmentArrayPropertyType getSegments() {
         return segments;
     }
 
     /**
      * Sets the value of the segments property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CurveSegmentArrayPropertyType }
-     *     
+     *
+     * @param value allowed object is {@link CurveSegmentArrayPropertyType }
+     *
      */
     public void setSegments(CurveSegmentArrayPropertyType value) {
         this.segments = value;
     }
 
+    @Override
     public boolean isSetSegments() {
-        return (this.segments!= null);
+        return (this.segments != null);
     }
 
     public String toString() {
@@ -88,14 +86,18 @@ public class CurveType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             CurveSegmentArrayPropertyType theSegments;
@@ -104,5 +106,4 @@ public class CurveType
         }
         return buffer;
     }
-
 }

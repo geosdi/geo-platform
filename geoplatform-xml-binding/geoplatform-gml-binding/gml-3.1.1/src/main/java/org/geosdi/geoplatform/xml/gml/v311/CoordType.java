@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.math.BigDecimal;
@@ -13,20 +11,21 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.Coord;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * Represents a coordinate tuple in one, two, or three dimensions. Deprecated with GML 3.0 and replaced by 
- * 			DirectPositionType.
- * 
+ * Represents a coordinate tuple in one, two, or three dimensions. Deprecated
+ * with GML 3.0 and replaced by DirectPositionType.
+ *
  * <p>Java class for CoordType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="CoordType">
  *   &lt;complexContent>
@@ -40,8 +39,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CoordType", propOrder = {
@@ -49,8 +48,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "y",
     "z"
 })
-public class CoordType implements ToString
-{
+public class CoordType implements ToString, Coord {
 
     @XmlElement(name = "X", required = true)
     protected BigDecimal x;
@@ -61,88 +59,83 @@ public class CoordType implements ToString
 
     /**
      * Gets the value of the x property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is {@link BigDecimal }
+     *
      */
+    @Override
     public BigDecimal getX() {
         return x;
     }
 
     /**
      * Sets the value of the x property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is {@link BigDecimal }
+     *
      */
     public void setX(BigDecimal value) {
         this.x = value;
     }
 
+    @Override
     public boolean isSetX() {
-        return (this.x!= null);
+        return (this.x != null);
     }
 
     /**
      * Gets the value of the y property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is {@link BigDecimal }
+     *
      */
+    @Override
     public BigDecimal getY() {
         return y;
     }
 
     /**
      * Sets the value of the y property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is {@link BigDecimal }
+     *
      */
     public void setY(BigDecimal value) {
         this.y = value;
     }
 
+    @Override
     public boolean isSetY() {
-        return (this.y!= null);
+        return (this.y != null);
     }
 
     /**
      * Gets the value of the z property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is {@link BigDecimal }
+     *
      */
+    @Override
     public BigDecimal getZ() {
         return z;
     }
 
     /**
      * Sets the value of the z property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is {@link BigDecimal }
+     *
      */
     public void setZ(BigDecimal value) {
         this.z = value;
     }
 
+    @Override
     public boolean isSetZ() {
-        return (this.z!= null);
+        return (this.z != null);
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -150,14 +143,20 @@ public class CoordType implements ToString
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             BigDecimal theX;
             theX = this.getX();
@@ -175,5 +174,4 @@ public class CoordType implements ToString
         }
         return buffer;
     }
-
 }

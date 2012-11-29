@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.math.BigInteger;
@@ -14,19 +12,20 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractCurveSegment;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
  * Curve segment defines a homogeneous segment of a curve.
- * 
+ *
  * <p>Java class for AbstractCurveSegmentType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="AbstractCurveSegmentType">
  *   &lt;complexContent>
@@ -40,8 +39,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractCurveSegmentType")
@@ -56,8 +55,8 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     ArcByCenterPointType.class,
     ArcStringByBulgeType.class
 })
-public abstract class AbstractCurveSegmentType implements ToString
-{
+public abstract class AbstractCurveSegmentType implements ToString,
+        AbstractCurveSegment {
 
     @XmlAttribute(name = "numDerivativesAtStart")
     protected BigInteger numDerivativesAtStart;
@@ -68,11 +67,9 @@ public abstract class AbstractCurveSegmentType implements ToString
 
     /**
      * Gets the value of the numDerivativesAtStart property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is {@link BigInteger }
+     *
      */
     public BigInteger getNumDerivativesAtStart() {
         if (numDerivativesAtStart == null) {
@@ -84,27 +81,23 @@ public abstract class AbstractCurveSegmentType implements ToString
 
     /**
      * Sets the value of the numDerivativesAtStart property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is {@link BigInteger }
+     *
      */
     public void setNumDerivativesAtStart(BigInteger value) {
         this.numDerivativesAtStart = value;
     }
 
     public boolean isSetNumDerivativesAtStart() {
-        return (this.numDerivativesAtStart!= null);
+        return (this.numDerivativesAtStart != null);
     }
 
     /**
      * Gets the value of the numDerivativesAtEnd property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is {@link BigInteger }
+     *
      */
     public BigInteger getNumDerivativesAtEnd() {
         if (numDerivativesAtEnd == null) {
@@ -116,27 +109,23 @@ public abstract class AbstractCurveSegmentType implements ToString
 
     /**
      * Sets the value of the numDerivativesAtEnd property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is {@link BigInteger }
+     *
      */
     public void setNumDerivativesAtEnd(BigInteger value) {
         this.numDerivativesAtEnd = value;
     }
 
     public boolean isSetNumDerivativesAtEnd() {
-        return (this.numDerivativesAtEnd!= null);
+        return (this.numDerivativesAtEnd != null);
     }
 
     /**
      * Gets the value of the numDerivativeInterior property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is {@link BigInteger }
+     *
      */
     public BigInteger getNumDerivativeInterior() {
         if (numDerivativeInterior == null) {
@@ -148,18 +137,16 @@ public abstract class AbstractCurveSegmentType implements ToString
 
     /**
      * Sets the value of the numDerivativeInterior property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is {@link BigInteger }
+     *
      */
     public void setNumDerivativeInterior(BigInteger value) {
         this.numDerivativeInterior = value;
     }
 
     public boolean isSetNumDerivativeInterior() {
-        return (this.numDerivativeInterior!= null);
+        return (this.numDerivativeInterior != null);
     }
 
     public String toString() {
@@ -169,30 +156,36 @@ public abstract class AbstractCurveSegmentType implements ToString
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             BigInteger theNumDerivativesAtStart;
             theNumDerivativesAtStart = this.getNumDerivativesAtStart();
-            strategy.appendField(locator, this, "numDerivativesAtStart", buffer, theNumDerivativesAtStart);
+            strategy.appendField(locator, this, "numDerivativesAtStart", buffer,
+                    theNumDerivativesAtStart);
         }
         {
             BigInteger theNumDerivativesAtEnd;
             theNumDerivativesAtEnd = this.getNumDerivativesAtEnd();
-            strategy.appendField(locator, this, "numDerivativesAtEnd", buffer, theNumDerivativesAtEnd);
+            strategy.appendField(locator, this, "numDerivativesAtEnd", buffer,
+                    theNumDerivativesAtEnd);
         }
         {
             BigInteger theNumDerivativeInterior;
             theNumDerivativeInterior = this.getNumDerivativeInterior();
-            strategy.appendField(locator, this, "numDerivativeInterior", buffer, theNumDerivativeInterior);
+            strategy.appendField(locator, this, "numDerivativeInterior", buffer,
+                    theNumDerivativeInterior);
         }
         return buffer;
     }
-
 }

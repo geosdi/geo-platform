@@ -59,8 +59,13 @@ import org.slf4j.LoggerFactory;
  */
 public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCollectionDTO> {
 
+    static {
+        jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    }
+    //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    //
+    private static final GPJAXBContextBuilder jaxbContextBuilder;
     //
     private LayerSchemaDTO layerSchema;
 
@@ -112,7 +117,8 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
 
                     super.goToEndTag(geometryName);
 
-                    FeatureAttributesMap attributes = this.readAttributes(name, attributeNames);
+                    FeatureAttributesMap attributes = this.readAttributes(name,
+                            attributeNames);
                     feature.setAttributes(attributes);
                 }
             }
@@ -124,19 +130,22 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
     }
 
     private FeatureCollectionDTO readInfo(FeatureCollectionDTO fc) {
-        String numberOfFeatures = reader.getAttributeValue(null, "numberOfFeatures");
+        String numberOfFeatures = reader.getAttributeValue(null,
+                "numberOfFeatures");
         fc.setNumberOfFeatures(Integer.parseInt(numberOfFeatures));
 
         String timeStamp = reader.getAttributeValue(null, "timeStamp");
         fc.setTimeStamp(DatatypeConverter.parseDate(timeStamp).getTime());
 
-        logger.debug("\n@@@ Read info @@@\nfeature: {}\ntime: {}", numberOfFeatures, timeStamp);
+        logger.debug("\n@@@ Read info @@@\nfeature: {}\ntime: {}",
+                numberOfFeatures, timeStamp);
 
         return fc;
     }
 
     private FeatureDTO readFID() {
-        String featureID = reader.getAttributeValue("http://www.opengis.net/gml", "id");
+        String featureID = reader.getAttributeValue("http://www.opengis.net/gml",
+                "id");
         logger.debug("\n\n@@@ FEATURE_ID: {} @@@", featureID);
 
         FeatureDTO feature = new FeatureDTO(featureID);
@@ -150,10 +159,12 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         if (eventType == XMLEvent.START_ELEMENT) {
 
             AbstractGeometryType geometry =
-                    jaxbContextBuilder.unmarshal(reader, AbstractGeometryType.class);
+                    jaxbContextBuilder.unmarshal(reader,
+                    AbstractGeometryType.class);
 
-            logger.trace("Geometry @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                         geometry);
+            logger.trace(
+                    "Geometry @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                    geometry);
 
             geometryWKT = geometry.toString(); // TODO Transform geometry to WKT form
         }
@@ -161,13 +172,15 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         return geometryWKT;
     }
 
-    private FeatureAttributesMap readAttributes(String featureName, List<String> attributeNames)
+    private FeatureAttributesMap readAttributes(String featureName,
+            List<String> attributeNames)
             throws XMLStreamException {
         if (attributeNames == null) {
             return null;
         }
 
-        Map<String, String> map = new HashMap<String, String>(attributeNames.size());
+        Map<String, String> map = new HashMap<String, String>(
+                attributeNames.size());
         for (String name : attributeNames) {
             map.put(name, null);
         }
@@ -191,7 +204,8 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
                 if (eventType == XMLEvent.CHARACTERS) {
                     String attributeValue = reader.getText();
                     map.put(localName, attributeValue);
-                    logger.debug("\n@@@ Attribute '{}': {} @@@", localName, attributeValue);
+                    logger.debug("\n@@@ Attribute '{}': {} @@@", localName,
+                            attributeValue);
 
                     super.goToEndTag(localName);
                 }

@@ -17,6 +17,7 @@
     <name>Geo-Platform :: == Binding GML XML Module</name>
 
     <modules>
+        <module>gml-api</module>
         <module>gml-3.1.1</module>
         <module>gml-3.2.1</module>
     </modules>

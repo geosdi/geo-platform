@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -13,19 +11,21 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.MultiGeometry;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A geometry collection must include one or more geometries, referenced through geometryMember elements.
- * 
+ * A geometry collection must include one or more geometries, referenced through
+ * geometryMember elements.
+ *
  * <p>Java class for MultiGeometryType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="MultiGeometryType">
  *   &lt;complexContent>
@@ -38,44 +38,40 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MultiGeometryType", propOrder = {
     "geometryMember",
     "geometryMembers"
 })
-public class MultiGeometryType
-    extends AbstractGeometricAggregateType
-    implements ToString
-{
+public class MultiGeometryType extends AbstractGeometricAggregateType
+        implements ToString, MultiGeometry {
 
     protected List<GeometryPropertyType> geometryMember;
     protected GeometryArrayPropertyType geometryMembers;
 
     /**
      * Gets the value of the geometryMember property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the geometryMember property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the geometryMember property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getGeometryMember().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list
      * {@link GeometryPropertyType }
-     * 
-     * 
+     *
+     *
      */
+    @Override
     public List<GeometryPropertyType> getGeometryMember() {
         if (geometryMember == null) {
             geometryMember = new ArrayList<GeometryPropertyType>();
@@ -83,8 +79,9 @@ public class MultiGeometryType
         return this.geometryMember;
     }
 
+    @Override
     public boolean isSetGeometryMember() {
-        return ((this.geometryMember!= null)&&(!this.geometryMember.isEmpty()));
+        return ((this.geometryMember != null) && (!this.geometryMember.isEmpty()));
     }
 
     public void unsetGeometryMember() {
@@ -93,32 +90,31 @@ public class MultiGeometryType
 
     /**
      * Gets the value of the geometryMembers property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GeometryArrayPropertyType }
-     *     
+     *
+     * @return possible object is {@link GeometryArrayPropertyType }
+     *
      */
+    @Override
     public GeometryArrayPropertyType getGeometryMembers() {
         return geometryMembers;
     }
 
     /**
      * Sets the value of the geometryMembers property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GeometryArrayPropertyType }
-     *     
+     *
+     * @param value allowed object is {@link GeometryArrayPropertyType }
+     *
      */
     public void setGeometryMembers(GeometryArrayPropertyType value) {
         this.geometryMembers = value;
     }
 
+    @Override
     public boolean isSetGeometryMembers() {
-        return (this.geometryMembers!= null);
+        return (this.geometryMembers != null);
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -126,24 +122,32 @@ public class MultiGeometryType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             List<GeometryPropertyType> theGeometryMember;
-            theGeometryMember = (this.isSetGeometryMember()?this.getGeometryMember():null);
-            strategy.appendField(locator, this, "geometryMember", buffer, theGeometryMember);
+            theGeometryMember = (this.isSetGeometryMember() ? this.getGeometryMember() : null);
+            strategy.appendField(locator, this, "geometryMember", buffer,
+                    theGeometryMember);
         }
         {
             GeometryArrayPropertyType theGeometryMembers;
             theGeometryMembers = this.getGeometryMembers();
-            strategy.appendField(locator, this, "geometryMembers", buffer, theGeometryMembers);
+            strategy.appendField(locator, this, "geometryMembers", buffer,
+                    theGeometryMembers);
         }
         return buffer;
     }
@@ -153,5 +157,4 @@ public class MultiGeometryType
         List<GeometryPropertyType> draftl = this.getGeometryMember();
         draftl.addAll(value);
     }
-
 }

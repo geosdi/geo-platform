@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import java.util.ArrayList;
@@ -15,19 +13,24 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.AbstractRingProperty;
+import org.geosdi.geoplatform.gml.api.Polygon;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * A Polygon is a special surface that is defined by a single surface patch. The boundary of this patch is coplanar and the polygon uses planar interpolation in its interior. It is backwards compatible with the Polygon of GML 2, GM_Polygon of ISO 19107 is implemented by PolygonPatch.
- * 
+ * A Polygon is a special surface that is defined by a single surface patch. The
+ * boundary of this patch is coplanar and the polygon uses planar interpolation
+ * in its interior. It is backwards compatible with the Polygon of GML 2,
+ * GM_Polygon of ISO 19107 is implemented by PolygonPatch.
+ *
  * <p>Java class for PolygonType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="PolygonType">
  *   &lt;complexContent>
@@ -40,32 +43,30 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PolygonType", propOrder = {
     "exterior",
     "interior"
 })
-public class PolygonType
-    extends AbstractSurfaceType
-    implements ToString
-{
+public class PolygonType extends AbstractSurfaceType
+        implements ToString, Polygon {
 
-    @XmlElementRef(name = "exterior", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
+    @XmlElementRef(name = "exterior", namespace = "http://www.opengis.net/gml",
+                   type = JAXBElement.class)
     protected JAXBElement<AbstractRingPropertyType> exterior;
-    @XmlElementRef(name = "interior", namespace = "http://www.opengis.net/gml", type = JAXBElement.class)
+    @XmlElementRef(name = "interior", namespace = "http://www.opengis.net/gml",
+                   type = JAXBElement.class)
     protected List<JAXBElement<AbstractRingPropertyType>> interior;
 
     /**
      * Gets the value of the exterior property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is null null null null null     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
-     *     
+     *
      */
     public JAXBElement<AbstractRingPropertyType> getExterior() {
         return exterior;
@@ -73,43 +74,39 @@ public class PolygonType
 
     /**
      * Sets the value of the exterior property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is null null null null null     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
-     *     
+     *
      */
     public void setExterior(JAXBElement<AbstractRingPropertyType> value) {
         this.exterior = value;
     }
 
+    @Override
     public boolean isSetExterior() {
-        return (this.exterior!= null);
+        return (this.exterior != null);
     }
 
     /**
      * Gets the value of the interior property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the interior property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
+     *
+     * <p> This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the interior property.
+     *
+     * <p> For example, to add a new item, do as follows:
      * <pre>
      *    getInterior().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
+     *
+     *
+     * <p> Objects of the following type(s) are allowed in the list null null
+     * null null null     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
-     * 
-     * 
+     *
+     *
      */
     public List<JAXBElement<AbstractRingPropertyType>> getInterior() {
         if (interior == null) {
@@ -118,14 +115,34 @@ public class PolygonType
         return this.interior;
     }
 
+    @Override
     public boolean isSetInterior() {
-        return ((this.interior!= null)&&(!this.interior.isEmpty()));
+        return ((this.interior != null) && (!this.interior.isEmpty()));
     }
 
     public void unsetInterior() {
         this.interior = null;
     }
 
+    @Override
+    public List<AbstractRingProperty> getInteriorValues() {
+        List<AbstractRingProperty> interiorValues = new ArrayList<AbstractRingProperty>();
+
+        if (isSetInterior()) {
+            for (JAXBElement<AbstractRingPropertyType> element : interior) {
+                AbstractRingProperty abstractRing = element.getValue();
+                interiorValues.add(abstractRing);
+            }
+        }
+        return interiorValues;
+    }
+
+    @Override
+    public AbstractRingProperty getExteriorValue() {
+        return isSetExterior() ? exterior.getValue() : null;
+    }
+
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -133,14 +150,20 @@ public class PolygonType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         super.appendFields(locator, buffer, strategy);
         {
             JAXBElement<AbstractRingPropertyType> theExterior;
@@ -149,7 +172,7 @@ public class PolygonType
         }
         {
             List<JAXBElement<AbstractRingPropertyType>> theInterior;
-            theInterior = (this.isSetInterior()?this.getInterior():null);
+            theInterior = (this.isSetInterior() ? this.getInterior() : null);
             strategy.appendField(locator, this, "interior", buffer, theInterior);
         }
         return buffer;
@@ -160,5 +183,4 @@ public class PolygonType
         List<JAXBElement<AbstractRingPropertyType>> draftl = this.getInterior();
         draftl.addAll(value);
     }
-
 }

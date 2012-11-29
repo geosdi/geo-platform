@@ -4,27 +4,27 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.04.17 at 10:27:36 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.gml.v311;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.LinearRingProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
- * Encapsulates a ring to represent properties in features or geometry collections.
- * 
+ * Encapsulates a ring to represent properties in features or geometry
+ * collections.
+ *
  * <p>Java class for LinearRingPropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="LinearRingPropertyType">
  *   &lt;complexContent>
@@ -36,48 +36,45 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LinearRingPropertyType", propOrder = {
     "linearRing"
 })
-public class LinearRingPropertyType
-    implements ToString
-{
+public class LinearRingPropertyType implements ToString, LinearRingProperty {
 
     @XmlElement(name = "LinearRing")
     protected LinearRingType linearRing;
 
     /**
      * Gets the value of the linearRing property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link LinearRingType }
-     *     
+     *
+     * @return possible object is {@link LinearRingType }
+     *
      */
+    @Override
     public LinearRingType getLinearRing() {
         return linearRing;
     }
 
     /**
      * Sets the value of the linearRing property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link LinearRingType }
-     *     
+     *
+     * @param value allowed object is {@link LinearRingType }
+     *
      */
     public void setLinearRing(LinearRingType value) {
         this.linearRing = value;
     }
 
+    @Override
     public boolean isSetLinearRing() {
-        return (this.linearRing!= null);
+        return (this.linearRing != null);
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -85,20 +82,26 @@ public class LinearRingPropertyType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer,
+            ToStringStrategy strategy) {
         {
             LinearRingType theLinearRing;
             theLinearRing = this.getLinearRing();
-            strategy.appendField(locator, this, "linearRing", buffer, theLinearRing);
+            strategy.appendField(locator, this, "linearRing", buffer,
+                    theLinearRing);
         }
         return buffer;
     }
-
 }

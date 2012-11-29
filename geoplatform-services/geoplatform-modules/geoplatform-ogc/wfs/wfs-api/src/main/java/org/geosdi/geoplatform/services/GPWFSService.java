@@ -66,6 +66,14 @@ public interface GPWFSService {
     @Get
     @WebResult(name = "GetFeature")
     FeatureCollectionDTO getFeature(
+            @WebParam(name = "serverURL") String serverURL,
+            @WebParam(name = "typeName") String typeName,
+            @WebParam(name = "bBox") BBox bBox)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Get
+    @WebResult(name = "GetFeature")
+    FeatureCollectionDTO getFeatureFromLayerSchema(
             @WebParam(name = "layerSchema") LayerSchemaDTO layerSchema,
             @WebParam(name = "bBox") BBox bBox)
             throws ResourceNotFoundFault, IllegalParameterFault;

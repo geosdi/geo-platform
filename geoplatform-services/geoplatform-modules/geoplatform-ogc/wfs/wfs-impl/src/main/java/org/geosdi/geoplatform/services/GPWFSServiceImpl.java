@@ -71,7 +71,15 @@ public class GPWFSServiceImpl implements GPWFSService {
     }
 
     @Override
-    public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, BBox bBox)
+    public FeatureCollectionDTO getFeature(String serverURL, String typeName, BBox bBox)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+
+        LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName);
+        return this.getFeatureFromLayerSchema(layerSchema, bBox);
+    }
+
+    @Override
+    public FeatureCollectionDTO getFeatureFromLayerSchema(LayerSchemaDTO layerSchema, BBox bBox)
             throws ResourceNotFoundFault, IllegalParameterFault {
 
         return gpGetFeatureService.getFeature(layerSchema, bBox);

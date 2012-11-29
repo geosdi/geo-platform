@@ -54,16 +54,25 @@ public class WFSGetFeatureWSTest extends WFSAbstractTest {
     private final static QName TOPP_STATES = new QName("http://www.openplans.org/topp", "topp:states");
 
     @Test
-    public void statesFeatureV110() throws Exception {
-        LayerSchemaDTO layerSchema =
-                wfsService.describeFeatureType(addressDatastore, TOPP_STATES.getLocalPart());
+    public void statesFeatureLayerV110() throws Exception {
+        String typeName = TOPP_STATES.getLocalPart();
+        LayerSchemaDTO layerSchema = wfsService.describeFeatureType(addressDatastore, typeName);
         logger.debug("\n\n\n@@@ {}", layerSchema);
-
         BBox bBox = new BBox(-75.102613, 40.212597, -72.361859, 41.512517);
 
-        FeatureCollectionDTO fc = wfsService.getFeature(layerSchema, bBox);
+        FeatureCollectionDTO fc = wfsService.getFeatureFromLayerSchema(layerSchema, bBox);
 
-        this.checkFeatureCollection(fc, layerSchema.getTypeName(), 22, 4);
+        this.checkFeatureCollection(fc, typeName, 22, 4);
+    }
+
+    @Test
+    public void statesFeatureV110() throws Exception {
+        String typeName = TOPP_STATES.getLocalPart();
+        BBox bBox = new BBox(-75.102613, 40.212597, -72.361859, 41.512517);
+
+        FeatureCollectionDTO fc = wfsService.getFeature(addressDatastore, typeName, bBox);
+
+        this.checkFeatureCollection(fc, typeName, 22, 4);
     }
 
     private void checkFeatureCollection(FeatureCollectionDTO fc,

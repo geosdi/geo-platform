@@ -35,11 +35,32 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.internalchain;
 
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.Coord;
+import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class MixedDirectPositionGeometryHandler {
+public class InternalCoordLineHandler extends BaseGeometryHandler<AbstractGeometry, Point, CoordinateBaseParser> {
 
+    @Override
+    public Point buildGeometry(GeometryFactory geometryFactory,
+            AbstractGeometry gmlGeometry,
+            CoordinateBaseParser parser) throws ParserException {
+
+        if (gmlGeometry instanceof Coord) {
+            return geometryFactory.createPoint(parser.parseCoordinate(
+                    (Coord) gmlGeometry));
+        }
+
+        throw new ParserException("No Valid GML Geometry Type : "
+                + gmlGeometry);
+    }
 }

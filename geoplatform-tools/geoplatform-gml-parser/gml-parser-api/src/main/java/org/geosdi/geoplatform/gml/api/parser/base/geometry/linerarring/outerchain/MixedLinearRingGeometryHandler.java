@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.outerchain;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.outerchain;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -42,9 +42,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.LineString;
+import org.geosdi.geoplatform.gml.api.LinearRing;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.internalchain.InternalPointLineHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain.InternalDirectPosLinerarRingHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
@@ -54,21 +54,21 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, GMLBasePointParser, CoordinateBaseParser>
-        implements MixedLineHandler {
+public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<LinearRing, com.vividsolutions.jts.geom.LinearRing, GMLBasePointParser, CoordinateBaseParser>
+        implements MixedLineraRingHandler {
 
-    private AbstractGeometryHandler<AbstractGeometry, Point, GMLBasePointParser, CoordinateBaseParser> mixedPointHandler;
+    private AbstractGeometryHandler<AbstractGeometry, Point, CoordinateBaseParser, GMLBasePointParser> internalDirectPosHandler;
 
-    public MixedLineGeometryHandler() {
-        super.setSuccessor(new DirectPositionLineGeometryHandler());
+    public MixedLinearRingGeometryHandler() {
+        super.setSuccessor(new DirectPosLinearRingGeometryHandler());
 
-        this.mixedPointHandler = new InternalPointLineHandler();
+        this.internalDirectPosHandler = new InternalDirectPosLinerarRingHandler();
     }
 
     @Override
-    public com.vividsolutions.jts.geom.LineString buildGeometry(
+    public com.vividsolutions.jts.geom.LinearRing buildGeometry(
             GeometryFactory geometryFactory,
-            LineString gmlGeometry,
+            LinearRing gmlGeometry,
             GMLBasePointParser firstParser,
             CoordinateBaseParser secondParser) throws ParserException {
 
@@ -79,18 +79,18 @@ public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString
     }
 
     @Override
-    public com.vividsolutions.jts.geom.LineString buildGeometry(
+    public com.vividsolutions.jts.geom.LinearRing buildGeometry(
             GeometryFactory geometryFactory,
-            LineString gmlGeometry,
+            LinearRing gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
 
         return super.forwarBuildGeometry(geometryFactory, gmlGeometry, parser);
     }
 
     @Override
-    public com.vividsolutions.jts.geom.LineString buildLineString(
+    public com.vividsolutions.jts.geom.LinearRing buildLineString(
             GeometryFactory geometryFactory,
-            LineString gmlGeometry,
+            LinearRing gmlGeometry,
             GMLBasePointParser firstParser,
             CoordinateBaseParser secondParser) throws ParserException {
 
@@ -104,11 +104,12 @@ public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString
             }
 
             coordinates.add(
-                    this.mixedPointHandler.buildGeometry(geometryFactory,
-                    (AbstractGeometry) element.getValue(), secondParser).getCoordinate());
+                    this.internalDirectPosHandler.buildGeometry(geometryFactory,
+                    (AbstractGeometry) element.getValue(), secondParser,
+                    firstParser).getCoordinate());
         }
 
-        return geometryFactory.createLineString(coordinates.toArray(
+        return geometryFactory.createLinearRing(coordinates.toArray(
                 new Coordinate[coordinates.size()]));
     }
 }

@@ -33,13 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.outerchain;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring;
 
-import com.vividsolutions.jts.geom.Coordinate;
+import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import org.geosdi.geoplatform.gml.api.LineString;
+import org.geosdi.geoplatform.gml.api.LinearRing;
+import org.geosdi.geoplatform.gml.api.LinearRingProperty;
+import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.outerchain.MixedLinearRingGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -47,26 +52,44 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionLineGeometryHandler extends BaseGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, CoordinateBaseParser> {
+public class GMLBaseLinearRingParser extends AbstractGMLBaseParser<LinearRing, LinearRingProperty, com.vividsolutions.jts.geom.LinearRing> {
 
-    public DirectPositionLineGeometryHandler() {
-        super.setSuccessor(new CoordinatesLineGeometryHandler());
+    private CoordinateBaseParser coordinateParser;
+    private GMLBasePointParser pointParser;
+    private AbstractGeometryHandler<LinearRing, com.vividsolutions.jts.geom.LinearRing, GMLBasePointParser, CoordinateBaseParser> mixedLinearRingHandler;
+
+    public GMLBaseLinearRingParser(CoordinateBaseParser coordinateParser,
+            GMLBasePointParser pointParser,
+            GeometryFactory theGeometryFactory,
+            AbstractGMLBaseSRSParser theSrsParser) {
+        super(theGeometryFactory, theSrsParser);
+        this.coordinateParser = coordinateParser;
+        this.pointParser = pointParser;
+
+        this.mixedLinearRingHandler = new MixedLinearRingGeometryHandler();
     }
 
     @Override
-    public com.vividsolutions.jts.geom.LineString buildGeometry(
-            GeometryFactory geometryFactory,
-            LineString gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
+    protected com.vividsolutions.jts.geom.LinearRing canParseGeometry(
+            LinearRing gmlGeometry)
+            throws ParserException {
 
-        if (gmlGeometry.isSetPosList()) {
-            Coordinate[] coordinates = parser.parseCoordinates(
-                    gmlGeometry.getPosList());
+        return this.mixedLinearRingHandler.buildGeometry(geometryFactory,
+                gmlGeometry, pointParser, coordinateParser);
+    }
 
-            return geometryFactory.createLineString(coordinates);
-        } else {
-            return super.forwarBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
+    @Override
+    public com.vividsolutions.jts.geom.LinearRing parseGeometry(
+            LinearRingProperty propertyType)
+            throws ParserException {
+
+        Preconditions.checkNotNull(propertyType, "The LinearRing Property Type "
+                + "must not be null.");
+
+        if (propertyType.isSetLinearRing()) {
+            return super.parseGeometry(propertyType.getLinearRing());
         }
+
+        throw new ParserException("There is no GML LinearRing To Parse.");
     }
 }

@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api;
 
+import java.util.List;
+import javax.xml.bind.JAXBElement;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -48,7 +51,9 @@ public interface LinearRing extends AbstractRing {
 
     boolean isSetPosOrPointPropertyOrPointRep();
 
+    List<JAXBElement<?>> getPosOrPointPropertyOrPointRep();
+
     boolean isSetPosList();
-    
+
     boolean isSetCoordinates();
 }

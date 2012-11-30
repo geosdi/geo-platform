@@ -47,13 +47,15 @@ public interface LineString extends AbstractCurve {
 
     Coordinates getCoordinates();
 
+    boolean isSetCoordinates();
+
     DirectPositionList getPosList();
 
     List<? extends DirectPosition> getPos();
-    
+
     boolean isSetPosOrPointPropertyOrPointRep();
-    
+
     boolean isSetPosList();
-    
+
     List<JAXBElement<?>> getPosOrPointPropertyOrPointRep();
 }

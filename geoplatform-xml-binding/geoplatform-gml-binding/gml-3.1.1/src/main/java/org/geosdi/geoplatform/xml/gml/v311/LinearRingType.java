@@ -98,6 +98,7 @@ public class LinearRingType extends AbstractRingType
      *
      *
      */
+    @Override
     public List<JAXBElement<?>> getPosOrPointPropertyOrPointRep() {
         if (posOrPointPropertyOrPointRep == null) {
             posOrPointPropertyOrPointRep = new ArrayList<JAXBElement<?>>();

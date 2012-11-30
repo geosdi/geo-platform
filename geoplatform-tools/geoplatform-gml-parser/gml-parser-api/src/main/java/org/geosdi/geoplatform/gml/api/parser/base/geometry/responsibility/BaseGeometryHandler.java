@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public abstract class BaseGeometryHandler<A extends AbstractGeometry, G extends Geometry, P extends AbstractParser> {
 
-    private BaseGeometryHandler<A, G, P> successor;
+    protected BaseGeometryHandler<A, G, P> successor;
 
     public abstract G buildGeometry(GeometryFactory geometryFactory,
             A gmlGeometry,

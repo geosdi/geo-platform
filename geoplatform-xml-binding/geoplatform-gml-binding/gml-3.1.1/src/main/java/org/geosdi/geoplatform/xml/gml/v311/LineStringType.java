@@ -184,6 +184,7 @@ public class LineStringType extends AbstractCurveType
         this.coordinates = value;
     }
 
+    @Override
     public boolean isSetCoordinates() {
         return (this.coordinates != null);
     }

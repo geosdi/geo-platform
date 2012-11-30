@@ -53,6 +53,13 @@ public class CoordinatesLineGeometryHandler extends BaseGeometryHandler<LineStri
             GeometryFactory geometryFactory,
             LineString gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        if (gmlGeometry.isSetCoordinates()) {
+            return geometryFactory.createLineString(parser.parseCoordinates(
+                    gmlGeometry.getCoordinates()));
+        }
+
+        throw new ParserException("It is not possible build a JTS Geometry from "
+                + " this GML LineString : " + gmlGeometry);
     }
 }

@@ -33,13 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.internalchain;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.outerchain;
+
+import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.LinearRing;
+import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class MixedCoordGeometryHandler {
+public class DirectPosLinearRingGeometryHandler extends BaseGeometryHandler<LinearRing, com.vividsolutions.jts.geom.LinearRing, CoordinateBaseParser> {
 
+    public DirectPosLinearRingGeometryHandler() {
+        super.setSuccessor(new CoordinatesLinearRingGeometryHandler());
+    }
+
+    @Override
+    public com.vividsolutions.jts.geom.LinearRing buildGeometry(
+            GeometryFactory geometryFactory,
+            LinearRing gmlGeometry,
+            CoordinateBaseParser parser) throws ParserException {
+
+        return gmlGeometry.isSetPosList() ? geometryFactory.createLinearRing(
+                parser.parseCoordinates(gmlGeometry.getPosList()))
+               : super.forwarBuildGeometry(geometryFactory, gmlGeometry, parser);
+    }
 }

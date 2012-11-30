@@ -33,12 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.outerchain;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain;
 
-import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import org.geosdi.geoplatform.gml.api.LineString;
-import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import com.vividsolutions.jts.geom.Point;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.PointProperty;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
@@ -47,26 +48,19 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionLineGeometryHandler extends BaseGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, CoordinateBaseParser> {
-
-    public DirectPositionLineGeometryHandler() {
-        super.setSuccessor(new CoordinatesLineGeometryHandler());
-    }
+public class InternalPointPropertyLinearRingHandler extends BaseGeometryHandler<AbstractGeometry, Point, GMLBasePointParser> {
 
     @Override
-    public com.vividsolutions.jts.geom.LineString buildGeometry(
+    public Point buildGeometry(
             GeometryFactory geometryFactory,
-            LineString gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
+            AbstractGeometry gmlGeometry,
+            GMLBasePointParser parser) throws ParserException {
 
-        if (gmlGeometry.isSetPosList()) {
-            Coordinate[] coordinates = parser.parseCoordinates(
-                    gmlGeometry.getPosList());
-
-            return geometryFactory.createLineString(coordinates);
-        } else {
-            return super.forwarBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
+        if (gmlGeometry instanceof PointProperty) {
+            return parser.parseGeometry((PointProperty) gmlGeometry);
         }
+
+        throw new ParserException("There is no Ring in this Chain "
+                + "to manage this GML Geometry " + gmlGeometry);
     }
 }

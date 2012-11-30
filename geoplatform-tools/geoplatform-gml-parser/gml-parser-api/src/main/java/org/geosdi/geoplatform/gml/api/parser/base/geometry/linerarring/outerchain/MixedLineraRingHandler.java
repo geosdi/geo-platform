@@ -33,13 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.internalchain;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.outerchain;
+
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.LinearRing;
+import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class MixedPointGeometryHandler {
+public interface MixedLineraRingHandler {
 
+    LinearRing buildLineString(GeometryFactory geometryFactory,
+            org.geosdi.geoplatform.gml.api.LinearRing gmlGeometry,
+            GMLBasePointParser firstParser,
+            CoordinateBaseParser secondParser) throws ParserException;
 }

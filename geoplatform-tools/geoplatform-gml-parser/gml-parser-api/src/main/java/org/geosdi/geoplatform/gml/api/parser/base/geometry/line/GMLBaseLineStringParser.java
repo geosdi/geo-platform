@@ -39,13 +39,12 @@ import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.LineString;
 import org.geosdi.geoplatform.gml.api.LineStringProperty;
-import org.geosdi.geoplatform.gml.api.Point;
-import org.geosdi.geoplatform.gml.api.PointProperty;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;
-import org.geosdi.geoplatform.gml.api.parser.base.GMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.outerchain.MixedLineGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -56,23 +55,27 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 public class GMLBaseLineStringParser extends AbstractGMLBaseParser<LineString, LineStringProperty, com.vividsolutions.jts.geom.LineString> {
 
     private CoordinateBaseParser coordinateParser;
-    private GMLBaseParser<Point, PointProperty, com.vividsolutions.jts.geom.Point> pointParser;
+    private GMLBasePointParser pointParser;
+    private AbstractGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, GMLBasePointParser, CoordinateBaseParser> mixedLineHandler;
 
-    public GMLBaseLineStringParser(CoordinateBaseParser coordinateParser,
-            GeometryFactory theGeometryFactory,
-            AbstractGMLBaseSRSParser theSrsParser) {
+    public GMLBaseLineStringParser(GeometryFactory theGeometryFactory,
+            AbstractGMLBaseSRSParser theSrsParser,
+            CoordinateBaseParser coordinateParser,
+            GMLBasePointParser thePointParser) {
         super(theGeometryFactory, theSrsParser);
-        
+
         this.coordinateParser = coordinateParser;
-        this.pointParser = new GMLBasePointParser(theGeometryFactory,
-                theSrsParser, coordinateParser);
+        this.pointParser = thePointParser;
+        this.mixedLineHandler = new MixedLineGeometryHandler();
     }
 
     @Override
     protected com.vividsolutions.jts.geom.LineString canParseGeometry(
             LineString gmlGeometry)
             throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        return this.mixedLineHandler.buildGeometry(geometryFactory, gmlGeometry,
+                pointParser, coordinateParser);
     }
 
     @Override

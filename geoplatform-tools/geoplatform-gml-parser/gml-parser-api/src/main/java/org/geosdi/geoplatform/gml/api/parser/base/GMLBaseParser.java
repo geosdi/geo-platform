@@ -45,7 +45,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GMLBaseParser<A extends AbstractGeometry, P extends PropertyType, G extends Geometry> {
+public interface GMLBaseParser<A extends AbstractGeometry, P extends PropertyType, G extends Geometry>
+        extends AbstractParser {
 
     G parseGeometry(A gmlGeometry) throws ParserException;
 

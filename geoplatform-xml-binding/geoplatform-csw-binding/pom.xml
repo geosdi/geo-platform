@@ -1,4 +1,4 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -65,10 +65,6 @@
     
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-            </plugin>
-            
             <!-- mvn jaxb2:generate -X -->
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
@@ -96,27 +92,6 @@
                 </configuration>
             </plugin>
         </plugins>
-
-        <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
-     			we should be able to use some properties here -->
-        <resources>
-            <resource>
-                <directory>${basedir}/src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.utf</include>
-                    <include>**/*.properties</include>
-                    <include>**/*.serialized</include>
-                    <include>**/*.xsd</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
     
 </project>

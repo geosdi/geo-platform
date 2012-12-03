@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
-import org.geosdi.geoplatform.responce.collection.FeatureAttributesMap;
+import org.geosdi.geoplatform.gui.responce.collection.FeatureAttributesMap;
 import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
 import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 import org.slf4j.Logger;

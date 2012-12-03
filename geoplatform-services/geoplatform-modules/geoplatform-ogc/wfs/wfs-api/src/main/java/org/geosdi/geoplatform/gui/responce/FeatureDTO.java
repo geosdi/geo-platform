@@ -39,7 +39,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.responce.collection.FeatureAttributesMap;
+import org.geosdi.geoplatform.gui.responce.collection.FeatureAttributesMap;
 
 /**
  *

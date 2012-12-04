@@ -39,6 +39,15 @@ import com.google.common.collect.Maps;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import java.util.EnumMap;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.coordinate.GMLCoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.GMLBaseLineStringParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.GMLBaseLinearRingParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.point.GMLBaseMultiPointParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.polygon.GMLBaseMultiPolygonParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.GMLBasePolygonParser;
 
 /**
  *
@@ -74,13 +83,154 @@ public class GMLBaseParametersRepo {
     static {
         defaultSRSParser = parameters.put(BaseParameterEnum.DEFAULT_SRS_PARSER,
                 new BaseParameterValue<DefaultSRSBaseParser>() {
-                    
                     @Override
                     public DefaultSRSBaseParser getValue() {
                         return new DefaultSRSBaseParser(
                                 defaultSRSParameterFormat.getValue());
                     }
                 });
+    }
+    //
+    private static final BaseParameterValue<CoordinateBaseParser> defaultCoordinateParser;
+
+    static {
+        defaultCoordinateParser = parameters.put(
+                BaseParameterEnum.DEFAULT_COORDINATE_PARSER,
+                new BaseParameterValue<CoordinateBaseParser>() {
+                    @Override
+                    public CoordinateBaseParser getValue() {
+                        return new GMLCoordinateBaseParser();
+                    }
+                });
+    }
+    //
+    private static final BaseParameterValue<GMLBasePointParser> defaultPointParser;
+
+    static {
+        defaultPointParser = parameters.put(
+                BaseParameterEnum.DEFAULT_POINT_PARSER,
+                new BaseParameterValue<GMLBasePointParser>() {
+                    @Override
+                    public GMLBasePointParser getValue() {
+                        return new GMLBasePointParser(
+                                defaultGeometryFactory.getValue(),
+                                defaultSRSParser.getValue(),
+                                defaultCoordinateParser.getValue());
+                    }
+                });
+    }
+    //
+    private static final BaseParameterValue<GMLBaseLineStringParser> defaultLineStringParser;
+
+    static {
+        defaultLineStringParser = parameters.put(
+                BaseParameterEnum.DEFAULT_LINE_STRING_PARSER,
+                new BaseParameterValue<GMLBaseLineStringParser>() {
+                    @Override
+                    public GMLBaseLineStringParser getValue() {
+                        return new GMLBaseLineStringParser(
+                                defaultGeometryFactory.getValue(),
+                                defaultSRSParser.getValue(),
+                                defaultCoordinateParser.getValue(),
+                                defaultPointParser.getValue());
+                    }
+                });
+    }
+    //
+    private static final BaseParameterValue<GMLBaseLinearRingParser> defaultLinearRingParser;
+
+    static {
+        defaultLinearRingParser = parameters.put(
+                BaseParameterEnum.DEFAULT_LINEAR_RING_PARSER,
+                new BaseParameterValue<GMLBaseLinearRingParser>() {
+                    @Override
+                    public GMLBaseLinearRingParser getValue() {
+                        return new GMLBaseLinearRingParser(
+                                defaultCoordinateParser.getValue(),
+                                defaultPointParser.getValue(),
+                                defaultGeometryFactory.getValue(),
+                                defaultSRSParser.getValue());
+                    }
+                });
+    }
+    //
+    private static final BaseParameterValue<GMLBasePolygonParser> defaultPolygonParser;
+
+    static {
+        defaultPolygonParser = parameters.put(
+                BaseParameterEnum.DEFAULT_POLYGON_PARSER,
+                new BaseParameterValue<GMLBasePolygonParser>() {
+                    @Override
+                    public GMLBasePolygonParser getValue() {
+                        return new GMLBasePolygonParser(
+                                defaultLinearRingParser.getValue(),
+                                defaultGeometryFactory.getValue(),
+                                defaultSRSParser.getValue());
+                    }
+                });
+    }
+    //
+    private static final BaseParameterValue<GMLBaseMultiPointParser> defaultMultiPointParser;
+
+    static {
+        defaultMultiPointParser = parameters.put(
+                BaseParameterEnum.DEFAULT_MULTI_POINT_PARSER,
+                new BaseParameterValue<GMLBaseMultiPointParser>() {
+                    @Override
+                    public GMLBaseMultiPointParser getValue() {
+                        return new GMLBaseMultiPointParser(
+                                defaultGeometryFactory.getValue(),
+                                defaultSRSParser.getValue(),
+                                defaultPointParser.getValue());
+                    }
+                });
+    }
+    //
+    private static final BaseParameterValue<GMLBaseMultiLineStringParser> defaultMultiLineStringParser;
+
+    static {
+        defaultMultiLineStringParser = parameters.put(
+                BaseParameterEnum.DEFAULT_MULTI_LINE_STRING_PARSER,
+                new BaseParameterValue<GMLBaseMultiLineStringParser>() {
+                    @Override
+                    public GMLBaseMultiLineStringParser getValue() {
+                        return new GMLBaseMultiLineStringParser(
+                                defaultGeometryFactory.getValue(),
+                                defaultSRSParser.getValue(),
+                                defaultLineStringParser.getValue());
+                    }
+                });
+    }
+    //
+    private static final BaseParameterValue<GMLBaseMultiPolygonParser> defaultMultiPolygonParser;
+
+    static {
+        defaultMultiPolygonParser = parameters.put(
+                BaseParameterEnum.DEFAULT_MULTI_POLYGON_PARSER,
+                new BaseParameterValue<GMLBaseMultiPolygonParser>() {
+                    @Override
+                    public GMLBaseMultiPolygonParser getValue() {
+                        return new GMLBaseMultiPolygonParser(
+                                defaultGeometryFactory.getValue(),
+                                defaultSRSParser.getValue(),
+                                defaultPolygonParser.getValue());
+                    }
+                });
+    }
+
+    public static GMLBasePointParser getDefaultPointParser() {
+        return (GMLBasePointParser) parameters.get(
+                BaseParameterEnum.DEFAULT_POINT_PARSER).getValue();
+    }
+
+    public static GMLBaseLineStringParser getDefaultLineStringParser() {
+        return (GMLBaseLineStringParser) parameters.get(
+                BaseParameterEnum.DEFAULT_LINE_STRING_PARSER).getValue();
+    }
+
+    public static GMLBaseLinearRingParser getDefaultLinearRingParser() {
+        return ((BaseParameterValue<GMLBaseLinearRingParser>) parameters.get(
+                BaseParameterEnum.DEFAULT_LINEAR_RING_PARSER)).getValue();
     }
 
     public static BaseParameterValue getRepoParamater(BaseParameterEnum key) {

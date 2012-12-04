@@ -33,24 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.parameter;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
+
+import com.vividsolutions.jts.geom.Geometry;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.PropertyType;
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum BaseParameterEnum {
+public abstract class SextanteGeometryHandler {
 
-    DEFAULT_SRS_PARAMETER_FORMAT,
-    DEFAULT_GEOMETRY_FACTORY,
-    DEFAULT_SRS_PARSER,
-    DEFAULT_COORDINATE_PARSER,
-    DEFAULT_POINT_PARSER,
-    DEFAULT_LINE_STRING_PARSER,
-    DEFAULT_LINEAR_RING_PARSER,
-    DEFAULT_POLYGON_PARSER,
-    DEFAULT_MULTI_POINT_PARSER,
-    DEFAULT_MULTI_LINE_STRING_PARSER,
-    DEFAULT_MULTI_POLYGON_PARSER;
+    protected SextanteGeometryHandler successor;
+
+    public abstract Geometry parseGeometry(AbstractGeometry gmlGeometry)
+            throws ParserException;
+
+    public Geometry forwardParseGeometry(AbstractGeometry gmlGeometry)
+            throws ParserException {
+        if (successor != null) {
+            return successor.parseGeometry(gmlGeometry);
+        }
+
+        throw new ParserException("There is no Ring in this Chain to Parse this "
+                + "GML Geometry : " + gmlGeometry);
+    }
+
+    public abstract Geometry parseGeometry(PropertyType propertyType)
+            throws ParserException;
+
+    public Geometry forwardParseGeometry(PropertyType propertyType)
+            throws ParserException {
+        if (successor != null) {
+            return successor.parseGeometry(propertyType);
+        }
+
+        throw new ParserException("There is no Ring in this Chain to parse "
+                + "GML PropertyType : " + propertyType);
+    }
+
+    protected abstract boolean isCompatibleGeometry(Object gmlGeometry);
+
+    protected abstract boolean isCompatibleProperty(Object propertyType);
+
+    /**
+     * @param successor the successor to set
+     */
+    public void setSuccessor(SextanteGeometryHandler successor) {
+        this.successor = successor;
+    }
 }

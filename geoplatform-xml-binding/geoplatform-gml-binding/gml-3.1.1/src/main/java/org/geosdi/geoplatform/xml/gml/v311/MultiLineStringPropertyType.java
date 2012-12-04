@@ -98,6 +98,7 @@ public class MultiLineStringPropertyType implements ToString, MultiLineStringPro
         this.multiLineString = value;
     }
 
+    @Override
     public boolean isSetMultiLineString() {
         return (this.multiLineString != null);
     }

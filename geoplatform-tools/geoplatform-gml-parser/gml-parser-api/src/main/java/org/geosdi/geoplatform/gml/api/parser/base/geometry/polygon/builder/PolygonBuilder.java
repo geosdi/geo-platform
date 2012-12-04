@@ -33,24 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.parameter;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.builder;
+
+import com.vividsolutions.jts.geom.LinearRing;
+import org.geosdi.geoplatform.gml.api.Polygon;
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum BaseParameterEnum {
+public interface PolygonBuilder {
 
-    DEFAULT_SRS_PARAMETER_FORMAT,
-    DEFAULT_GEOMETRY_FACTORY,
-    DEFAULT_SRS_PARSER,
-    DEFAULT_COORDINATE_PARSER,
-    DEFAULT_POINT_PARSER,
-    DEFAULT_LINE_STRING_PARSER,
-    DEFAULT_LINEAR_RING_PARSER,
-    DEFAULT_POLYGON_PARSER,
-    DEFAULT_MULTI_POINT_PARSER,
-    DEFAULT_MULTI_LINE_STRING_PARSER,
-    DEFAULT_MULTI_POLYGON_PARSER;
+    LinearRing buildExteriorPolygon(Polygon polygon) throws ParserException;
+
+    LinearRing[] buildInteriorPolygon(Polygon polygon) throws ParserException;
 }

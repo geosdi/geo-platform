@@ -33,24 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.parameter;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
+
+import com.vividsolutions.jts.geom.Geometry;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.PropertyType;
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum BaseParameterEnum {
+public class SextanteLinearRingHandler extends SextanteGeometryHandler {
 
-    DEFAULT_SRS_PARAMETER_FORMAT,
-    DEFAULT_GEOMETRY_FACTORY,
-    DEFAULT_SRS_PARSER,
-    DEFAULT_COORDINATE_PARSER,
-    DEFAULT_POINT_PARSER,
-    DEFAULT_LINE_STRING_PARSER,
-    DEFAULT_LINEAR_RING_PARSER,
-    DEFAULT_POLYGON_PARSER,
-    DEFAULT_MULTI_POINT_PARSER,
-    DEFAULT_MULTI_LINE_STRING_PARSER,
-    DEFAULT_MULTI_POLYGON_PARSER;
+    @Override
+    public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    protected boolean isCompatibleGeometry(Object gmlGeometry) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    protected boolean isCompatibleProperty(Object propertyType) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

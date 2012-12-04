@@ -42,5 +42,7 @@ package org.geosdi.geoplatform.gml.api;
  */
 public interface MultiLineStringProperty extends PropertyType {
 
+    boolean isSetMultiLineString();
+
     MultiLineString getMultiLineString();
 }

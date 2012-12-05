@@ -33,15 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.collection;
 
-import com.vividsolutions.jts.geom.Geometry;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.MultiLineString;
-import org.geosdi.geoplatform.gml.api.MultiLineStringProperty;
-import org.geosdi.geoplatform.gml.api.PropertyType;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
+import com.google.common.base.Preconditions;
+import com.vividsolutions.jts.geom.GeometryCollection;
+import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
+import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
+import org.geosdi.geoplatform.gml.api.parser.base.GMLBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability.GeometryCollectionHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability.MultiPointCollectionHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -49,37 +49,30 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class SextanteMultiLineStringHandler extends SextanteGeometryHandler {
+public class GMLBaseGeometryCollectionParser implements
+        GMLBaseParser<AbstractGeometricAggregate, MultiGeometryProperty, GeometryCollection> {
     
-    private GMLBaseMultiLineStringParser multiLineStringParser = GMLBaseParametersRepo.getDefaultMultiLineStringParser();
-    
-    public SextanteMultiLineStringHandler() {
-        super.setSuccessor(new SextanteMultiPolygonHandler());
-    }
-    
+    private GeometryCollectionHandler multiPointHandler = new MultiPointCollectionHandler();
+
     @Override
-    public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
-        return isCompatibleGeometry(gmlGeometry)
-               ? multiLineStringParser.parseGeometry(
-                (MultiLineString) gmlGeometry)
-               : super.forwardParseGeometry(gmlGeometry);
+    public GeometryCollection parseGeometry(
+            AbstractGeometricAggregate gmlGeometry)
+            throws ParserException {
+        
+        return this.multiPointHandler.parseGeometry(gmlGeometry);
     }
-    
+
     @Override
-    public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
-        return isCompatibleProperty(propertyType)
-               ? multiLineStringParser.parseGeometry(
-                (MultiLineStringProperty) propertyType)
-               : super.forwardParseGeometry(propertyType);
-    }
-    
-    @Override
-    protected boolean isCompatibleGeometry(Object gmlGeometry) {
-        return gmlGeometry instanceof MultiLineString;
-    }
-    
-    @Override
-    protected boolean isCompatibleProperty(Object propertyType) {
-        return propertyType instanceof MultiLineStringProperty;
+    public GeometryCollection parseGeometry(MultiGeometryProperty propertyType)
+            throws ParserException {
+
+        Preconditions.checkNotNull(propertyType, "The MultiGeometry Property "
+                + "must be not null.");
+
+        if (propertyType.isSetGeometricAggregate()) {
+            return parseGeometry(propertyType.getAbstractGeometricAggregate());
+        }
+
+        throw new ParserException("There is no GeometricAggregate to parse.");
     }
 }

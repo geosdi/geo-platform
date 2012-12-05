@@ -74,8 +74,8 @@ public class GMLBaseMultiPointParser
             MultiPoint gmlGeometry)
             throws ParserException {
 
-        Preconditions.checkArgument(
-                !(gmlGeometry.isSetPointMember()) && !(gmlGeometry.isSetPointMembers()),
+        Preconditions.checkArgument((gmlGeometry.isSetPointMember())
+                && (gmlGeometry.isSetPointMembers()),
                 "PointMember and PointMembers can't be both null.");
 
         List<Point> points = new ArrayList<Point>();

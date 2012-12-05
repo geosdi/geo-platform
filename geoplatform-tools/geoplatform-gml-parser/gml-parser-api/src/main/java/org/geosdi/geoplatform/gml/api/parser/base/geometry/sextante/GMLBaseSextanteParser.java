@@ -39,6 +39,8 @@ import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.PropertyType;
 import org.geosdi.geoplatform.gml.api.parser.base.GMLBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability.SextanteGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability.SextantePointHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -50,14 +52,16 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class GMLBaseSextanteParser implements
         GMLBaseParser<AbstractGeometry, PropertyType, Geometry> {
+    
+    private SextanteGeometryHandler pointHandler = new SextantePointHandler();
 
     @Override
     public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return pointHandler.parseGeometry(gmlGeometry);
     }
 
     @Override
     public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return pointHandler.parseGeometry(propertyType);
     }
 }

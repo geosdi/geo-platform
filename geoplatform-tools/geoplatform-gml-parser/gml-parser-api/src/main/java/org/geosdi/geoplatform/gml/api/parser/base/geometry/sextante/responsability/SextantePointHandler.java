@@ -50,27 +50,31 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class SextantePointHandler extends SextanteGeometryHandler {
-
+    
     private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
-
+    
+    public SextantePointHandler() {
+        super.setSuccessor(new SextanteLineStringHandler());
+    }
+    
     @Override
     public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
         return isCompatibleGeometry(gmlGeometry) ? pointParser.parseGeometry(
                 (Point) gmlGeometry) : super.forwardParseGeometry(gmlGeometry);
     }
-
+    
     @Override
     public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
         return isCompatibleProperty(propertyType) ? pointParser.parseGeometry(
                 (PointProperty) propertyType) : super.forwardParseGeometry(
                 propertyType);
     }
-
+    
     @Override
     protected boolean isCompatibleGeometry(Object gmlGeometry) {
         return gmlGeometry instanceof Point;
     }
-
+    
     @Override
     protected boolean isCompatibleProperty(Object propertyType) {
         return propertyType instanceof PointProperty;

@@ -52,7 +52,7 @@ public abstract class SextanteGeometryHandler {
     public abstract Geometry parseGeometry(AbstractGeometry gmlGeometry)
             throws ParserException;
 
-    public Geometry forwardParseGeometry(AbstractGeometry gmlGeometry)
+    protected Geometry forwardParseGeometry(AbstractGeometry gmlGeometry)
             throws ParserException {
         if (successor != null) {
             return successor.parseGeometry(gmlGeometry);
@@ -65,7 +65,7 @@ public abstract class SextanteGeometryHandler {
     public abstract Geometry parseGeometry(PropertyType propertyType)
             throws ParserException;
 
-    public Geometry forwardParseGeometry(PropertyType propertyType)
+    protected Geometry forwardParseGeometry(PropertyType propertyType)
             throws ParserException {
         if (successor != null) {
             return successor.parseGeometry(propertyType);

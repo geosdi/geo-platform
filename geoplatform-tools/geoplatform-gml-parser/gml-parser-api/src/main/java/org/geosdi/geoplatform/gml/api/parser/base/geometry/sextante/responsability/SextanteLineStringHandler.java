@@ -50,16 +50,20 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class SextanteLineStringHandler extends SextanteGeometryHandler {
-
+    
     private GMLBaseLineStringParser lineStringParser = GMLBaseParametersRepo.getDefaultLineStringParser();
-
+    
+    public SextanteLineStringHandler() {
+        super.setSuccessor(new SextanteLinearRingHandler());
+    }
+    
     @Override
     public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
         return isCompatibleGeometry(gmlGeometry)
                ? lineStringParser.parseGeometry((LineString) gmlGeometry)
                : super.forwardParseGeometry(gmlGeometry);
     }
-
+    
     @Override
     public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
         return isCompatibleProperty(propertyType)
@@ -67,12 +71,12 @@ public class SextanteLineStringHandler extends SextanteGeometryHandler {
                 (LineStringProperty) propertyType) : super.forwardParseGeometry(
                 propertyType);
     }
-
+    
     @Override
     protected boolean isCompatibleGeometry(Object gmlGeometry) {
         return gmlGeometry instanceof LineString;
     }
-
+    
     @Override
     protected boolean isCompatibleProperty(Object propertyType) {
         return propertyType instanceof LineStringProperty;

@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
 
 import com.vividsolutions.jts.geom.Geometry;
+import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.MultiLineString;
-import org.geosdi.geoplatform.gml.api.MultiLineStringProperty;
+import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
 import org.geosdi.geoplatform.gml.api.PropertyType;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.GMLBaseGeometryCollectionParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
@@ -49,37 +49,33 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class SextanteMultiLineStringHandler extends SextanteGeometryHandler {
-    
-    private GMLBaseMultiLineStringParser multiLineStringParser = GMLBaseParametersRepo.getDefaultMultiLineStringParser();
-    
-    public SextanteMultiLineStringHandler() {
-        super.setSuccessor(new SextanteMultiPolygonHandler());
-    }
-    
+public class SextanteGeometryCollectionHandler extends SextanteGeometryHandler {
+
+    private GMLBaseGeometryCollectionParser geometryCollectionParser = GMLBaseParametersRepo.getDefaultGeometryCollectionParser();
+
     @Override
     public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
         return isCompatibleGeometry(gmlGeometry)
-               ? multiLineStringParser.parseGeometry(
-                (MultiLineString) gmlGeometry)
+               ? geometryCollectionParser.parseGeometry(
+                (AbstractGeometricAggregate) gmlGeometry)
                : super.forwardParseGeometry(gmlGeometry);
     }
-    
+
     @Override
     public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
         return isCompatibleProperty(propertyType)
-               ? multiLineStringParser.parseGeometry(
-                (MultiLineStringProperty) propertyType)
+               ? geometryCollectionParser.parseGeometry(
+                (MultiGeometryProperty) propertyType)
                : super.forwardParseGeometry(propertyType);
     }
-    
+
     @Override
     protected boolean isCompatibleGeometry(Object gmlGeometry) {
-        return gmlGeometry instanceof MultiLineString;
+        return gmlGeometry instanceof AbstractGeometricAggregate;
     }
-    
+
     @Override
     protected boolean isCompatibleProperty(Object propertyType) {
-        return propertyType instanceof MultiLineStringProperty;
+        return propertyType instanceof MultiGeometryProperty;
     }
 }

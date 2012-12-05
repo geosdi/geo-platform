@@ -33,14 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability;
 
-import com.vividsolutions.jts.geom.Geometry;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.MultiLineString;
-import org.geosdi.geoplatform.gml.api.MultiLineStringProperty;
-import org.geosdi.geoplatform.gml.api.PropertyType;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
+import com.vividsolutions.jts.geom.GeometryCollection;
+import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
+import org.geosdi.geoplatform.gml.api.MultiGeometry;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.geometry.GMLBaseMultiGeometryParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
@@ -49,37 +47,22 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class SextanteMultiLineStringHandler extends SextanteGeometryHandler {
-    
-    private GMLBaseMultiLineStringParser multiLineStringParser = GMLBaseParametersRepo.getDefaultMultiLineStringParser();
-    
-    public SextanteMultiLineStringHandler() {
-        super.setSuccessor(new SextanteMultiPolygonHandler());
-    }
-    
+public class MultiGeometryCollectionHandler extends GeometryCollectionHandler {
+
+    private GMLBaseMultiGeometryParser multiGeometryParser = GMLBaseParametersRepo.getDefaultMultiGeometryParser();
+
     @Override
-    public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
+    public GeometryCollection parseGeometry(
+            AbstractGeometricAggregate gmlGeometry)
+            throws ParserException {
+
         return isCompatibleGeometry(gmlGeometry)
-               ? multiLineStringParser.parseGeometry(
-                (MultiLineString) gmlGeometry)
+               ? multiGeometryParser.parseGeometry((MultiGeometry) gmlGeometry)
                : super.forwardParseGeometry(gmlGeometry);
     }
-    
-    @Override
-    public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
-        return isCompatibleProperty(propertyType)
-               ? multiLineStringParser.parseGeometry(
-                (MultiLineStringProperty) propertyType)
-               : super.forwardParseGeometry(propertyType);
-    }
-    
+
     @Override
     protected boolean isCompatibleGeometry(Object gmlGeometry) {
-        return gmlGeometry instanceof MultiLineString;
-    }
-    
-    @Override
-    protected boolean isCompatibleProperty(Object propertyType) {
-        return propertyType instanceof MultiLineStringProperty;
+        return gmlGeometry instanceof MultiGeometry;
     }
 }

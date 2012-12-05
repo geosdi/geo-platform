@@ -37,7 +37,11 @@ package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsabil
 
 import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.MultiPolygon;
+import org.geosdi.geoplatform.gml.api.MultiPolygonProperty;
 import org.geosdi.geoplatform.gml.api.PropertyType;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.polygon.GMLBaseMultiPolygonParser;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -46,24 +50,35 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class SextanteMultiPolygonHandler extends SextanteGeometryHandler {
-
+    
+    private GMLBaseMultiPolygonParser multiPolygonParser = GMLBaseParametersRepo.getDefaultMultiPolygonParser();
+    
+    public SextanteMultiPolygonHandler() {
+        super.setSuccessor(new SextanteGeometryCollectionHandler());
+    }
+    
     @Override
     public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return isCompatibleGeometry(gmlGeometry)
+               ? multiPolygonParser.parseGeometry((MultiPolygon) gmlGeometry)
+               : super.forwardParseGeometry(gmlGeometry);
     }
-
+    
     @Override
     public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return isCompatibleProperty(propertyType)
+               ? multiPolygonParser.parseGeometry(
+                (MultiPolygonProperty) propertyType)
+               : super.forwardParseGeometry(propertyType);
     }
-
+    
     @Override
     protected boolean isCompatibleGeometry(Object gmlGeometry) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return gmlGeometry instanceof MultiPolygon;
     }
-
+    
     @Override
     protected boolean isCompatibleProperty(Object propertyType) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return propertyType instanceof MultiPolygonProperty;
     }
 }

@@ -37,7 +37,11 @@ package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsabil
 
 import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.LinearRing;
+import org.geosdi.geoplatform.gml.api.LinearRingProperty;
 import org.geosdi.geoplatform.gml.api.PropertyType;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.GMLBaseLinearRingParser;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -46,24 +50,35 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class SextanteLinearRingHandler extends SextanteGeometryHandler {
-
+    
+    private GMLBaseLinearRingParser linearRingParser = GMLBaseParametersRepo.getDefaultLinearRingParser();
+    
+    public SextanteLinearRingHandler() {
+        super.setSuccessor(new SextantePolygonHandler());
+    }
+    
     @Override
     public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return isCompatibleGeometry(gmlGeometry)
+               ? linearRingParser.parseGeometry((LinearRing) gmlGeometry)
+               : super.forwardParseGeometry(gmlGeometry);
     }
-
+    
     @Override
     public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return isCompatibleProperty(propertyType)
+               ? linearRingParser.parseGeometry(
+                (LinearRingProperty) propertyType) : super.forwardParseGeometry(
+                propertyType);
     }
-
+    
     @Override
     protected boolean isCompatibleGeometry(Object gmlGeometry) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return gmlGeometry instanceof LinearRing;
     }
-
+    
     @Override
     protected boolean isCompatibleProperty(Object propertyType) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return propertyType instanceof LinearRingProperty;
     }
 }

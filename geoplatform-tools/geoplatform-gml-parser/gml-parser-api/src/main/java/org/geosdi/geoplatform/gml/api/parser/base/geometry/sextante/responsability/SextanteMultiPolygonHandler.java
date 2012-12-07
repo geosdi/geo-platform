@@ -54,7 +54,7 @@ public class SextanteMultiPolygonHandler extends SextanteGeometryHandler {
     private GMLBaseMultiPolygonParser multiPolygonParser = GMLBaseParametersRepo.getDefaultMultiPolygonParser();
     
     public SextanteMultiPolygonHandler() {
-        super.setSuccessor(new SextanteGeometryCollectionHandler());
+        super.setSuccessor(new SextanteMultiSurfaceHandler());
     }
     
     @Override

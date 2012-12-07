@@ -21,15 +21,24 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-api</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-connector</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-util</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gml-parser-api</artifactId>
+            <version>1.5-SNAPSHOT</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>

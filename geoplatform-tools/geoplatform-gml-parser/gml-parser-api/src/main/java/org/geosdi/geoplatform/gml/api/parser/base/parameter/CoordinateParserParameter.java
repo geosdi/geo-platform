@@ -33,53 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
+package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
-import com.vividsolutions.jts.geom.Geometry;
-import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
-import org.geosdi.geoplatform.gml.api.PropertyType;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.GMLBaseGeometryCollectionParser;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.coordinate.GMLCoordinateBaseParser;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class SextanteGeometryCollectionHandler extends SextanteGeometryHandler {
+class CoordinateParserParameter implements
+        BaseParameterValue<CoordinateBaseParser> {
 
-    private GMLBaseGeometryCollectionParser geometryCollectionParser;
-
-    public SextanteGeometryCollectionHandler() {
-        this.geometryCollectionParser = new GMLBaseGeometryCollectionParser();
-    }
+    private CoordinateBaseParser coordinateParser;
 
     @Override
-    public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
-        return isCompatibleGeometry(gmlGeometry)
-               ? geometryCollectionParser.parseGeometry(
-                (AbstractGeometricAggregate) gmlGeometry)
-               : super.forwardParseGeometry(gmlGeometry);
-    }
-
-    @Override
-    public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
-        return isCompatibleProperty(propertyType)
-               ? geometryCollectionParser.parseGeometry(
-                (MultiGeometryProperty) propertyType)
-               : super.forwardParseGeometry(propertyType);
-    }
-
-    @Override
-    protected boolean isCompatibleGeometry(Object gmlGeometry) {
-        return gmlGeometry instanceof AbstractGeometricAggregate;
-    }
-
-    @Override
-    protected boolean isCompatibleProperty(Object propertyType) {
-        return propertyType instanceof MultiGeometryProperty;
+    public CoordinateBaseParser getValue() {
+        return coordinateParser = (coordinateParser == null)
+                                  ? new GMLCoordinateBaseParser()
+                                  : coordinateParser;
     }
 }

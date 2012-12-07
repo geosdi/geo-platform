@@ -63,7 +63,8 @@ import org.slf4j.LoggerFactory;
 @RunWith(Parameterized.class)
 public class FeatureReaderTest {
 
-    private final static Logger logger = LoggerFactory.getLogger(FeatureReaderTest.class);
+    private final static Logger logger = LoggerFactory.getLogger(
+            FeatureReaderTest.class);
     private static String pathFile;
     private FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
     //
@@ -78,9 +79,12 @@ public class FeatureReaderTest {
         }
     }
 
-    public FeatureReaderTest(String file, int numAttributes, int numFeatures) {
-        logger.trace("\n@@@ Test '{}' file (#attributes = {} - #features = {}) @@@",
-                     file, numAttributes, numFeatures);
+    public FeatureReaderTest(String file,
+            int numAttributes,
+            int numFeatures) {
+        logger.trace(
+                "\n@@@ Test '{}' file (#attributes = {} - #features = {}) @@@",
+                file, numAttributes, numFeatures);
 
         this.fileGF = pathFile + file + "-GetFeature.xml";
 
@@ -134,7 +138,8 @@ public class FeatureReaderTest {
             }
             logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@ {}", layerSchema);
 
-            WFSGetFeatureStaxReader featureReader = new WFSGetFeatureStaxReader(layerSchema);
+            WFSGetFeatureStaxReader featureReader = new WFSGetFeatureStaxReader(
+                    layerSchema);
             FeatureCollectionDTO fc = featureReader.read(new File(fileGF));
             Assert.assertNotNull(fc);
             Assert.assertNotNull(fc.getTimeStamp());
@@ -154,8 +159,10 @@ public class FeatureReaderTest {
                     Assert.assertNotNull(fMap);
                     Assert.assertEquals(numAttributes, fMap.size());
                 }
-                logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@ {} - {}", feature.getFID(), feature.getAttributes());
-                logger.trace("{}", feature.getGeometry());
+                logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@ {} - {}",
+                        feature.getFID(), feature.getAttributes());
+                logger.debug("\nGEOMETRY @@@@@@@@@@@@@@@@ : {}",
+                        feature.getGeometry());
             }
 
         } finally {

@@ -38,13 +38,26 @@ package org.geosdi.geoplatform.gml.api.parser.base.geometry.collection;
 import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.GeometryCollection;
 import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
+import org.geosdi.geoplatform.gml.api.MultiGeometry;
 import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
+import org.geosdi.geoplatform.gml.api.MultiLineString;
+import org.geosdi.geoplatform.gml.api.MultiPoint;
+import org.geosdi.geoplatform.gml.api.MultiPolygon;
+import org.geosdi.geoplatform.gml.api.MultiSurface;
 import org.geosdi.geoplatform.gml.api.parser.base.GMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability.GeometryCollectionHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability.MultiPointCollectionHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
+ * <p>This Class permits to parse this kinds of GML Geometries : 
+ * <ul>
+ *      <li>{@link MultiPoint}</li>
+ *      <li>{@link MultiLineString}</li>
+ *      <li>{@link MultiPolygon}</li>
+ *      <li>{@link MultiGeometry}</li>
+ * </ul>
+ * </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

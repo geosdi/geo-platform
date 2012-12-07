@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class GMLBaseSextanteParser implements
         GMLBaseParser<AbstractGeometry, PropertyType, Geometry> {
-    
+
     private SextanteGeometryHandler pointHandler = new SextantePointHandler();
 
     @Override

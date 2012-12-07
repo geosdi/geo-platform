@@ -50,6 +50,8 @@ import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.BaseParameterEnum;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -59,30 +61,32 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeometry, MultiGeometryProperty, GeometryCollection> {
 
-    private GMLBaseSextanteParser geometryParser;
+    private GMLBaseSextanteParser geometryParser = GMLBaseParametersRepo.getDefaultSextanteParser();
     private MemberBuilder multiGeometryMember = new MultiGeometryMember();
     private MemberBuilder multiGeometryMembers = new MultiGeometryMembers();
 
     public GMLBaseMultiGeometryParser(GeometryFactory theGeometryFactory,
-            AbstractGMLBaseSRSParser theSrsParser,
-            GMLBaseSextanteParser theGeometryParser) {
+            AbstractGMLBaseSRSParser theSrsParser) {
         super(theGeometryFactory, theSrsParser);
+    }
 
-        this.geometryParser = theGeometryParser;
+    public GMLBaseMultiGeometryParser() {
+        this(GMLBaseParametersRepo.getDefaultGeometryFactory(),
+                GMLBaseParametersRepo.getDefaultSRSParser());
     }
 
     @Override
     protected GeometryCollection canParseGeometry(MultiGeometry gmlGeometry)
             throws ParserException {
 
-        Preconditions.checkArgument((gmlGeometry.isSetGeometryMember())
-                && (gmlGeometry.isSetGeometryMembers()),
-                "GeometryMember and GeometryMembers can't be both null.");
-
         List<Geometry> geometries = new ArrayList<Geometry>();
 
         this.multiGeometryMember.builMember(gmlGeometry, geometries);
         this.multiGeometryMember.builMember(gmlGeometry, geometries);
+
+        Preconditions.checkArgument(!geometries.isEmpty(),
+                "GeometryMember and GeometryMembers "
+                + "can't be both null.");
 
         return geometryFactory.createGeometryCollection(geometries.toArray(
                 new Geometry[geometries.size()]));
@@ -141,5 +145,10 @@ public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeome
                 }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "GMLBaseMultiGeometryParser{" + "geometryParser=" + geometryParser + '}';
     }
 }

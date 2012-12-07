@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
 
 import com.vividsolutions.jts.geom.Geometry;
-import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
+import org.geosdi.geoplatform.gml.api.MultiSurface;
+import org.geosdi.geoplatform.gml.api.MultiSurfaceProperty;
 import org.geosdi.geoplatform.gml.api.PropertyType;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.GMLBaseGeometryCollectionParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.surface.GMLBaseMultiSurfaceParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
@@ -49,37 +49,36 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class SextanteGeometryCollectionHandler extends SextanteGeometryHandler {
+public class SextanteMultiSurfaceHandler extends SextanteGeometryHandler {
 
-    private GMLBaseGeometryCollectionParser geometryCollectionParser;
+    private GMLBaseMultiSurfaceParser multiSurfaceParser = GMLBaseParametersRepo.getDefaultMultiSurfaceParser();
 
-    public SextanteGeometryCollectionHandler() {
-        this.geometryCollectionParser = new GMLBaseGeometryCollectionParser();
+    public SextanteMultiSurfaceHandler() {
+        super.setSuccessor(new SextanteGeometryCollectionHandler());
     }
 
     @Override
     public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
         return isCompatibleGeometry(gmlGeometry)
-               ? geometryCollectionParser.parseGeometry(
-                (AbstractGeometricAggregate) gmlGeometry)
+               ? multiSurfaceParser.parseGeometry((MultiSurface) gmlGeometry)
                : super.forwardParseGeometry(gmlGeometry);
     }
 
     @Override
     public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
         return isCompatibleProperty(propertyType)
-               ? geometryCollectionParser.parseGeometry(
-                (MultiGeometryProperty) propertyType)
+               ? multiSurfaceParser.parseGeometry(
+                (MultiSurfaceProperty) propertyType)
                : super.forwardParseGeometry(propertyType);
     }
 
     @Override
     protected boolean isCompatibleGeometry(Object gmlGeometry) {
-        return gmlGeometry instanceof AbstractGeometricAggregate;
+        return gmlGeometry instanceof MultiSurface;
     }
 
     @Override
     protected boolean isCompatibleProperty(Object propertyType) {
-        return propertyType instanceof MultiGeometryProperty;
+        return propertyType instanceof MultiSurfaceProperty;
     }
 }

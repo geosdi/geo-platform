@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.feature.reader;
 
+import com.vividsolutions.jts.io.WKTWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,10 @@ import java.util.Map;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
@@ -68,6 +73,8 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
     private static final GPJAXBContextBuilder jaxbContextBuilder;
     //
     private LayerSchemaDTO layerSchema;
+    //
+    private GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();
 
     public WFSGetFeatureStaxReader(LayerSchemaDTO layerSchema) {
         this.layerSchema = layerSchema;
@@ -158,15 +165,23 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         int eventType = reader.nextTag();
         if (eventType == XMLEvent.START_ELEMENT) {
 
-            AbstractGeometryType geometry =
+            AbstractGeometry geometry =
                     jaxbContextBuilder.unmarshal(reader,
                     AbstractGeometryType.class);
 
-            logger.trace(
-                    "Geometry @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                    geometry);
+            WKTWriter wktWriter = new WKTWriter(2);
 
-            geometryWKT = geometry.toString(); // TODO Transform geometry to WKT form
+            logger.trace("Geometry @@@@@@@@@@@@@@ {}", geometry);
+
+            wktWriter.setFormatted(true);
+            try {
+                geometryWKT = wktWriter.writeFormatted(this.sextanteParser.parseGeometry(
+                        geometry));
+
+                logger.trace("WKT GEOMETRY @@@@@@@@@@@@@@@@ " + geometryWKT);
+            } catch (ParserException ex) {
+                logger.error("Parse Exception : " + ex);
+            }
         }
 
         return geometryWKT;

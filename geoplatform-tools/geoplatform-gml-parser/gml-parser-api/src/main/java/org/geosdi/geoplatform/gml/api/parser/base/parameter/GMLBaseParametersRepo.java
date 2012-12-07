@@ -40,14 +40,13 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import java.util.EnumMap;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
-import org.geosdi.geoplatform.gml.api.parser.base.coordinate.GMLCoordinateBaseParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.GMLBaseGeometryCollectionParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.GMLBaseLineStringParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.GMLBaseLinearRingParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.geometry.GMLBaseMultiGeometryParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.point.GMLBaseMultiPointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.polygon.GMLBaseMultiPolygonParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.surface.GMLBaseMultiSurfaceParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.GMLBasePolygonParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
@@ -59,195 +58,98 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSexta
  */
 public class GMLBaseParametersRepo {
 
-    private final static EnumMap<BaseParameterEnum, BaseParameterValue> parameters = Maps.newEnumMap(
-            BaseParameterEnum.class);
+    static {
+        lookUpAllParameters();
+    }
+    //
+    private static EnumMap<BaseParameterEnum, BaseParameterValue> parameters;
 
     private GMLBaseParametersRepo() {
     }
-    //
-    private static final BaseParameterValue<String[]> defaultSRSParameterFormat = new SRSFormatParameterPatterns();
 
-    static {
+    private static void lookUpAllParameters() {
+        parameters = Maps.newEnumMap(BaseParameterEnum.class);
+
+        final BaseParameterValue<String[]> defaultSRSParameterFormat = new SRSFormatParameterPatterns();
         parameters.put(BaseParameterEnum.DEFAULT_SRS_PARAMETER_FORMAT,
                 defaultSRSParameterFormat);
-    }
-    //
-    private static final BaseParameterValue<GeometryFactory> defaultGeometryFactory = new GeometryFactoryParameter();
 
-    static {
+        final BaseParameterValue<GeometryFactory> defaultGeometryFactory = new GeometryFactoryParameter();
         parameters.put(BaseParameterEnum.DEFAULT_GEOMETRY_FACTORY,
                 defaultGeometryFactory);
-    }
-    //
-    private static final BaseParameterValue<DefaultSRSBaseParser> defaultSRSParser = new BaseParameterValue<DefaultSRSBaseParser>() {
-        @Override
-        public DefaultSRSBaseParser getValue() {
-            return new DefaultSRSBaseParser(
-                    defaultSRSParameterFormat.getValue());
-        }
-    };
 
-    static {
+        final BaseParameterValue<DefaultSRSBaseParser> defaultSRSParser = new DefaultSRSParserParameter(
+                defaultSRSParameterFormat.getValue());
         parameters.put(BaseParameterEnum.DEFAULT_SRS_PARSER, defaultSRSParser);
-    }
-    //
-    private static final BaseParameterValue<CoordinateBaseParser> defaultCoordinateParser = new BaseParameterValue<CoordinateBaseParser>() {
-        @Override
-        public CoordinateBaseParser getValue() {
-            return new GMLCoordinateBaseParser();
-        }
-    };
 
-    static {
+        final BaseParameterValue<CoordinateBaseParser> defaultCoordinateParser = new CoordinateParserParameter();
         parameters.put(BaseParameterEnum.DEFAULT_COORDINATE_PARSER,
                 defaultCoordinateParser);
-    }
-    //
-    private static final BaseParameterValue<GMLBasePointParser> defaultPointParser = new BaseParameterValue<GMLBasePointParser>() {
-        @Override
-        public GMLBasePointParser getValue() {
-            return new GMLBasePointParser(
-                    defaultGeometryFactory.getValue(),
-                    defaultSRSParser.getValue(),
-                    defaultCoordinateParser.getValue());
-        }
-    };
 
-    static {
+        final BaseParameterValue<GMLBasePointParser> defaultPointParser = new PointParserParameter(
+                defaultGeometryFactory, defaultSRSParser,
+                defaultCoordinateParser);
         parameters.put(BaseParameterEnum.DEFAULT_POINT_PARSER,
                 defaultPointParser);
-    }
-    //
-    private static final BaseParameterValue<GMLBaseLineStringParser> defaultLineStringParser = new BaseParameterValue<GMLBaseLineStringParser>() {
-        @Override
-        public GMLBaseLineStringParser getValue() {
-            return new GMLBaseLineStringParser(
-                    defaultGeometryFactory.getValue(),
-                    defaultSRSParser.getValue(),
-                    defaultCoordinateParser.getValue(),
-                    defaultPointParser.getValue());
-        }
-    };
 
-    static {
+        final BaseParameterValue<GMLBaseLineStringParser> defaultLineStringParser = new LineStringParserParameter(
+                defaultGeometryFactory, defaultSRSParser,
+                defaultCoordinateParser,
+                defaultPointParser);
         parameters.put(BaseParameterEnum.DEFAULT_LINE_STRING_PARSER,
                 defaultLineStringParser);
-    }
-    //
-    private static final BaseParameterValue<GMLBaseLinearRingParser> defaultLinearRingParser = new BaseParameterValue<GMLBaseLinearRingParser>() {
-        @Override
-        public GMLBaseLinearRingParser getValue() {
-            return new GMLBaseLinearRingParser(
-                    defaultCoordinateParser.getValue(),
-                    defaultPointParser.getValue(),
-                    defaultGeometryFactory.getValue(),
-                    defaultSRSParser.getValue());
-        }
-    };
 
-    static {
+        final BaseParameterValue<GMLBaseLinearRingParser> defaultLinearRingParser = new LinearRingParserParameter(
+                defaultGeometryFactory, defaultSRSParser,
+                defaultCoordinateParser,
+                defaultPointParser);
         parameters.put(BaseParameterEnum.DEFAULT_LINEAR_RING_PARSER,
                 defaultLinearRingParser);
-    }
-    //
-    private static final BaseParameterValue<GMLBasePolygonParser> defaultPolygonParser = new BaseParameterValue<GMLBasePolygonParser>() {
-        @Override
-        public GMLBasePolygonParser getValue() {
-            return new GMLBasePolygonParser(
-                    defaultLinearRingParser.getValue(),
-                    defaultGeometryFactory.getValue(),
-                    defaultSRSParser.getValue());
-        }
-    };
 
-    static {
+        final BaseParameterValue<GMLBasePolygonParser> defaultPolygonParser = new PolygonParserParameter(
+                defaultGeometryFactory, defaultSRSParser,
+                defaultLinearRingParser);
         parameters.put(BaseParameterEnum.DEFAULT_POLYGON_PARSER,
                 defaultPolygonParser);
-    }
-    //
-    private static final BaseParameterValue<GMLBaseMultiPointParser> defaultMultiPointParser = new BaseParameterValue<GMLBaseMultiPointParser>() {
-        @Override
-        public GMLBaseMultiPointParser getValue() {
-            return new GMLBaseMultiPointParser(
-                    defaultGeometryFactory.getValue(),
-                    defaultSRSParser.getValue(),
-                    defaultPointParser.getValue());
-        }
-    };
 
-    static {
+        final BaseParameterValue<GMLBaseMultiPointParser> defaultMultiPointParser = new MultiPointParserParameter(
+                defaultGeometryFactory, defaultSRSParser,
+                defaultPointParser);
         parameters.put(BaseParameterEnum.DEFAULT_MULTI_POINT_PARSER,
                 defaultMultiPointParser);
-    }
-    //
-    private static final BaseParameterValue<GMLBaseMultiLineStringParser> defaultMultiLineStringParser = new BaseParameterValue<GMLBaseMultiLineStringParser>() {
-        @Override
-        public GMLBaseMultiLineStringParser getValue() {
-            return new GMLBaseMultiLineStringParser(
-                    defaultGeometryFactory.getValue(),
-                    defaultSRSParser.getValue(),
-                    defaultLineStringParser.getValue());
-        }
-    };
 
-    static {
+        final BaseParameterValue<GMLBaseMultiLineStringParser> defaultMultiLineStringParser = new MultiLineStringParserParameter(
+                defaultGeometryFactory, defaultSRSParser,
+                defaultLineStringParser);
         parameters.put(BaseParameterEnum.DEFAULT_MULTI_LINE_STRING_PARSER,
                 defaultMultiLineStringParser);
-    }
-    //
-    private static final BaseParameterValue<GMLBaseMultiPolygonParser> defaultMultiPolygonParser = new BaseParameterValue<GMLBaseMultiPolygonParser>() {
-        @Override
-        public GMLBaseMultiPolygonParser getValue() {
-            return new GMLBaseMultiPolygonParser(
-                    defaultGeometryFactory.getValue(),
-                    defaultSRSParser.getValue(),
-                    defaultPolygonParser.getValue());
-        }
-    };
 
-    static {
+        final BaseParameterValue<GMLBaseMultiPolygonParser> defaultMultiPolygonParser = new MultiPolygonParserParameter(
+                defaultGeometryFactory, defaultSRSParser,
+                defaultPolygonParser);
         parameters.put(
                 BaseParameterEnum.DEFAULT_MULTI_POLYGON_PARSER,
                 defaultMultiPolygonParser);
-    }
-    //
-    private static final BaseParameterValue<GMLBaseSextanteParser> defaultSextanteParser = new BaseParameterValue<GMLBaseSextanteParser>() {
-        @Override
-        public GMLBaseSextanteParser getValue() {
-            return new GMLBaseSextanteParser();
-        }
-    };
 
-    static {
+        final BaseParameterValue<GMLBaseMultiSurfaceParser> defaultMultiSurfaceParser = new MultiSurfaceParserParameter(
+                defaultGeometryFactory, defaultSRSParser,
+                defaultPolygonParser);
+        parameters.put(BaseParameterEnum.DEFAULT_MULTI_SURFACE_PARSER,
+                defaultMultiSurfaceParser);
+
+        final BaseParameterValue<GMLBaseSextanteParser> defaultSextanteParser = new SextanteParserParameter();
         parameters.put(BaseParameterEnum.DEFAULT_SEXTANTE_PARSER,
                 defaultSextanteParser);
     }
-    //
-    private static final BaseParameterValue<GMLBaseMultiGeometryParser> defaultMultiGeometryParser = new BaseParameterValue<GMLBaseMultiGeometryParser>() {
-        @Override
-        public GMLBaseMultiGeometryParser getValue() {
-            return new GMLBaseMultiGeometryParser(
-                    defaultGeometryFactory.getValue(),
-                    defaultSRSParser.getValue(),
-                    defaultSextanteParser.getValue());
-        }
-    };
 
-    static {
-        parameters.put(BaseParameterEnum.DEFAULT_MULTI_GEOMETRY_PARSER,
-                defaultMultiGeometryParser);
+    public static GeometryFactory getDefaultGeometryFactory() {
+        return (GeometryFactory) parameters.get(
+                BaseParameterEnum.DEFAULT_GEOMETRY_FACTORY).getValue();
     }
-    //
-    private static final BaseParameterValue<GMLBaseGeometryCollectionParser> defaultGeometryCollectionParser = new BaseParameterValue<GMLBaseGeometryCollectionParser>() {
-        @Override
-        public GMLBaseGeometryCollectionParser getValue() {
-            return new GMLBaseGeometryCollectionParser();
-        }
-    };
 
-    static {
-        parameters.put(BaseParameterEnum.DEFAULT_GEOMETRY_COLLECTION_PARSER,
-                defaultGeometryCollectionParser);
+    public static DefaultSRSBaseParser getDefaultSRSParser() {
+        return (DefaultSRSBaseParser) parameters.get(
+                BaseParameterEnum.DEFAULT_SRS_PARSER).getValue();
     }
 
     public static GMLBasePointParser getDefaultPointParser() {
@@ -285,14 +187,14 @@ public class GMLBaseParametersRepo {
                 BaseParameterEnum.DEFAULT_MULTI_POLYGON_PARSER)).getValue();
     }
 
-    public static GMLBaseMultiGeometryParser getDefaultMultiGeometryParser() {
-        return ((BaseParameterValue<GMLBaseMultiGeometryParser>) parameters.get(
-                BaseParameterEnum.DEFAULT_MULTI_GEOMETRY_PARSER)).getValue();
+    public static GMLBaseMultiSurfaceParser getDefaultMultiSurfaceParser() {
+        return ((BaseParameterValue<GMLBaseMultiSurfaceParser>) parameters.get(
+                BaseParameterEnum.DEFAULT_MULTI_SURFACE_PARSER)).getValue();
     }
 
-    public static GMLBaseGeometryCollectionParser getDefaultGeometryCollectionParser() {
-        return ((BaseParameterValue<GMLBaseGeometryCollectionParser>) parameters.get(
-                BaseParameterEnum.DEFAULT_GEOMETRY_COLLECTION_PARSER)).getValue();
+    public static GMLBaseSextanteParser getDefaultSextanteParser() {
+        return ((BaseParameterValue<GMLBaseSextanteParser>) parameters.get(
+                BaseParameterEnum.DEFAULT_SEXTANTE_PARSER)).getValue();
     }
 
     public static BaseParameterValue getRepoParamater(BaseParameterEnum key) {

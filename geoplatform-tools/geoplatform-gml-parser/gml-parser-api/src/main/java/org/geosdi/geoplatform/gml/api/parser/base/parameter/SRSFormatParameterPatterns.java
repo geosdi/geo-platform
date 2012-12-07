@@ -42,13 +42,15 @@ package org.geosdi.geoplatform.gml.api.parser.base.parameter;
  */
 class SRSFormatParameterPatterns implements BaseParameterValue<String[]> {
 
+    private String[] patterns = new String[]{"EPSG:{0,number,integer}",
+        "urn:ogc:def:crs:EPSG::{0,number,#}",
+        "urn:ogc:def:crs:EPSG:{1}:{0,number,#}",
+        "urn:x-ogc:def:crs:EPSG::{0,number,#}",
+        "urn:x-ogc:def:crs:EPSG:{1}:{0,number,#}",
+        "http://www.opengis.net/gml/srs/epsg.xml#{0,number,#}"};
+
     @Override
     public String[] getValue() {
-        return new String[]{"EPSG:{0,number,integer}",
-                    "urn:ogc:def:crs:EPSG::{0,number,#}",
-                    "urn:ogc:def:crs:EPSG:{1}:{0,number,#}",
-                    "urn:x-ogc:def:crs:EPSG::{0,number,#}",
-                    "urn:x-ogc:def:crs:EPSG:{1}:{0,number,#}",
-                    "http://www.opengis.net/gml/srs/epsg.xml#{0,number,#}"};
+        return patterns;
     }
 }

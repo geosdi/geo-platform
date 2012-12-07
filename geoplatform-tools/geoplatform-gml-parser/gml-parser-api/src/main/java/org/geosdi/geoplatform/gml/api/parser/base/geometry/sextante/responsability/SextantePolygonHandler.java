@@ -50,30 +50,30 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class SextantePolygonHandler extends SextanteGeometryHandler {
-    
+
     private GMLBasePolygonParser polygonParser = GMLBaseParametersRepo.getDefaultPolygonParser();
-    
+
     public SextantePolygonHandler() {
         super.setSuccessor(new SextanteMultiPointHandler());
     }
-    
+
     @Override
     public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
         return isCompatibleGeometry(gmlGeometry)
                ? polygonParser.parseGeometry((Polygon) gmlGeometry)
                : super.forwardParseGeometry(gmlGeometry);
     }
-    
+
     @Override
     public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     @Override
     protected boolean isCompatibleGeometry(Object gmlGeometry) {
         return gmlGeometry instanceof Polygon;
     }
-    
+
     @Override
     protected boolean isCompatibleProperty(Object propertyType) {
         return propertyType instanceof PolygonProperty;

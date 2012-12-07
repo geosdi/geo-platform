@@ -45,8 +45,11 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 class GeometryFactoryParameter implements
         BaseParameterValue<GeometryFactory> {
 
+    private GeometryFactory geometryFactory;
+
     @Override
     public GeometryFactory getValue() {
-        return new GeometryFactory();
+        return geometryFactory = (geometryFactory == null)
+                                 ? new GeometryFactory() : geometryFactory;
     }
 }

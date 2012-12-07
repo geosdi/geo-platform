@@ -33,53 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
+package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
-import com.vividsolutions.jts.geom.Geometry;
-import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
-import org.geosdi.geoplatform.gml.api.PropertyType;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.GMLBaseGeometryCollectionParser;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.GMLBaseLinearRingParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class SextanteGeometryCollectionHandler extends SextanteGeometryHandler {
+class LinearRingParserParameter implements
+        BaseParameterValue<GMLBaseLinearRingParser> {
 
-    private GMLBaseGeometryCollectionParser geometryCollectionParser;
+    private GMLBaseLinearRingParser linearRingParser;
+    private BaseParameterValue<GeometryFactory> geometryParameter;
+    private BaseParameterValue<DefaultSRSBaseParser> srsParameter;
+    private BaseParameterValue<CoordinateBaseParser> coordinateParameter;
+    private BaseParameterValue<GMLBasePointParser> pointParameter;
 
-    public SextanteGeometryCollectionHandler() {
-        this.geometryCollectionParser = new GMLBaseGeometryCollectionParser();
+    public LinearRingParserParameter(
+            BaseParameterValue<GeometryFactory> geometryParameter,
+            BaseParameterValue<DefaultSRSBaseParser> srsParameter,
+            BaseParameterValue<CoordinateBaseParser> coordinateParameter,
+            BaseParameterValue<GMLBasePointParser> pointParameter) {
+        this.geometryParameter = geometryParameter;
+        this.srsParameter = srsParameter;
+        this.coordinateParameter = coordinateParameter;
+        this.pointParameter = pointParameter;
     }
 
     @Override
-    public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
-        return isCompatibleGeometry(gmlGeometry)
-               ? geometryCollectionParser.parseGeometry(
-                (AbstractGeometricAggregate) gmlGeometry)
-               : super.forwardParseGeometry(gmlGeometry);
-    }
-
-    @Override
-    public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
-        return isCompatibleProperty(propertyType)
-               ? geometryCollectionParser.parseGeometry(
-                (MultiGeometryProperty) propertyType)
-               : super.forwardParseGeometry(propertyType);
-    }
-
-    @Override
-    protected boolean isCompatibleGeometry(Object gmlGeometry) {
-        return gmlGeometry instanceof AbstractGeometricAggregate;
-    }
-
-    @Override
-    protected boolean isCompatibleProperty(Object propertyType) {
-        return propertyType instanceof MultiGeometryProperty;
+    public GMLBaseLinearRingParser getValue() {
+        return linearRingParser = (linearRingParser == null)
+                                  ? new GMLBaseLinearRingParser(
+                coordinateParameter.getValue(), pointParameter.getValue(),
+                geometryParameter.getValue(),
+                srsParameter.getValue()) : linearRingParser;
     }
 }

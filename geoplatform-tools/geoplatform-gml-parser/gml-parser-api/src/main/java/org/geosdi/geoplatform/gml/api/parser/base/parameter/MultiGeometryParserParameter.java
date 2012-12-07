@@ -35,25 +35,22 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.geometry.GMLBaseMultiGeometryParser;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum BaseParameterEnum {
+class MultiGeometryParserParameter implements
+        BaseParameterValue<GMLBaseMultiGeometryParser> {
 
-    DEFAULT_SRS_PARAMETER_FORMAT,
-    DEFAULT_GEOMETRY_FACTORY,
-    DEFAULT_SRS_PARSER,
-    DEFAULT_COORDINATE_PARSER,
-    DEFAULT_POINT_PARSER,
-    DEFAULT_LINE_STRING_PARSER,
-    DEFAULT_LINEAR_RING_PARSER,
-    DEFAULT_POLYGON_PARSER,
-    DEFAULT_MULTI_POINT_PARSER,
-    DEFAULT_MULTI_LINE_STRING_PARSER,
-    DEFAULT_MULTI_POLYGON_PARSER,
-    DEFAULT_MULTI_SURFACE_PARSER,
-    DEFAULT_SEXTANTE_PARSER,
-    DEFAULT_MULTI_GEOMETRY_PARSER;
+    private GMLBaseMultiGeometryParser multiGeometryParser;
+
+    @Override
+    public GMLBaseMultiGeometryParser getValue() {
+        return multiGeometryParser = ((multiGeometryParser == null)
+                                      ? new GMLBaseMultiGeometryParser()
+                                      : multiGeometryParser);
+    }
 }

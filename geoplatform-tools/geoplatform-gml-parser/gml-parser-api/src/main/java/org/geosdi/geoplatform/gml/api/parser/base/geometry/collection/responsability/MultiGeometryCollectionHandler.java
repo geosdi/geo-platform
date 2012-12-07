@@ -39,6 +39,7 @@ import com.vividsolutions.jts.geom.GeometryCollection;
 import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
 import org.geosdi.geoplatform.gml.api.MultiGeometry;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.geometry.GMLBaseMultiGeometryParser;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -48,16 +49,16 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class MultiGeometryCollectionHandler extends GeometryCollectionHandler {
 
-    private GMLBaseMultiGeometryParser multiGeometryParser;
+    static {
+        multiGeometryParser = GMLBaseParametersRepo.getDefaultMultiGeometryParser();
+    }
+    //
+    private static final GMLBaseMultiGeometryParser multiGeometryParser;
 
     @Override
     public GeometryCollection parseGeometry(
             AbstractGeometricAggregate gmlGeometry)
             throws ParserException {
-
-        multiGeometryParser = (multiGeometryParser == null)
-                              ? new GMLBaseMultiGeometryParser()
-                              : multiGeometryParser;
 
         return isCompatibleGeometry(gmlGeometry)
                ? multiGeometryParser.parseGeometry((MultiGeometry) gmlGeometry)

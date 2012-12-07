@@ -140,6 +140,10 @@ public class GMLBaseParametersRepo {
         final BaseParameterValue<GMLBaseSextanteParser> defaultSextanteParser = new SextanteParserParameter();
         parameters.put(BaseParameterEnum.DEFAULT_SEXTANTE_PARSER,
                 defaultSextanteParser);
+
+        final BaseParameterValue<GMLBaseMultiGeometryParser> defaultMultiGeometryParser = new MultiGeometryParserParameter();
+        parameters.put(BaseParameterEnum.DEFAULT_MULTI_GEOMETRY_PARSER,
+                defaultMultiGeometryParser);
     }
 
     public static GeometryFactory getDefaultGeometryFactory() {
@@ -195,6 +199,11 @@ public class GMLBaseParametersRepo {
     public static GMLBaseSextanteParser getDefaultSextanteParser() {
         return ((BaseParameterValue<GMLBaseSextanteParser>) parameters.get(
                 BaseParameterEnum.DEFAULT_SEXTANTE_PARSER)).getValue();
+    }
+
+    public static GMLBaseMultiGeometryParser getDefaultMultiGeometryParser() {
+        return ((BaseParameterValue<GMLBaseMultiGeometryParser>) parameters.get(
+                BaseParameterEnum.DEFAULT_MULTI_GEOMETRY_PARSER)).getValue();
     }
 
     public static BaseParameterValue getRepoParamater(BaseParameterEnum key) {

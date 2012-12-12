@@ -71,7 +71,7 @@ public class InternalPointLineHandler extends AbstractGeometryHandler<AbstractGe
             AbstractGeometry gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
 
-        return super.forwarBuildGeometry(geometryFactory,
+        return super.forwardBuildGeometry(geometryFactory,
                 gmlGeometry, parser);
     }
 }

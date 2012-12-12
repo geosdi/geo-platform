@@ -84,7 +84,7 @@ public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString
             LineString gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
 
-        return super.forwarBuildGeometry(geometryFactory, gmlGeometry, parser);
+        return super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
     }
 
     @Override

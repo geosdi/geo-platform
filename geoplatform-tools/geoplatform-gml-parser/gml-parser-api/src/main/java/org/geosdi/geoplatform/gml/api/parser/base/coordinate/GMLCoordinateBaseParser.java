@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.coordinate;
 
+import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.Coordinate;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.geosdi.geoplatform.gml.api.Coord;
@@ -74,7 +76,8 @@ public class GMLCoordinateBaseParser implements CoordinateBaseParser {
     @Override
     public Coordinate[] parseCoordinates(DirectPositionList directPositionList)
             throws ParserException {
-        int dimensions = directPositionList.isSetSrsDimension() ? directPositionList
+        int dimensions = directPositionList.isSetSrsDimension()
+                         ? directPositionList
                 .getSrsDimension().intValue() : 2;
 
         if (dimensions < 2 || dimensions > 3) {
@@ -176,7 +179,7 @@ public class GMLCoordinateBaseParser implements CoordinateBaseParser {
     @Override
     public double parseCoordinate(String value,
             String decimalSeparator) throws ParserException {
-        
+
         String ds = decimalSeparator == null ? "." : decimalSeparator;
 
         try {
@@ -186,5 +189,28 @@ public class GMLCoordinateBaseParser implements CoordinateBaseParser {
         } catch (NumberFormatException ex) {
             throw new ParserException(ex);
         }
+    }
+
+    @Override
+    public Coordinate[] parseCoordinate(Coordinates coordinates) throws ParserException {
+        return this.parseCoordinates(coordinates.getValue(),
+                coordinates.getDecimal(), coordinates.getCs(),
+                coordinates.getTs());
+    }
+
+    @Override
+    public Coordinate[] parseCoordinates(
+            List<? extends DirectPosition> positions) throws ParserException {
+        Preconditions.checkNotNull(positions, "The List of Positions must not "
+                + "be null.");
+
+        List<Coordinate> coordinates = new ArrayList<Coordinate>(
+                positions.size());
+
+        for (DirectPosition directPosition : positions) {
+            coordinates.add(parseCoordinate(directPosition));
+        }
+
+        return coordinates.toArray(new Coordinate[coordinates.size()]);
     }
 }

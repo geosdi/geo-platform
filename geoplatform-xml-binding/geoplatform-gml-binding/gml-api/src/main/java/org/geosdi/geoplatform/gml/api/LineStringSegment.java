@@ -45,8 +45,12 @@ import java.util.List;
 public interface LineStringSegment extends AbstractCurveSegment {
 
     Coordinates getCoordinates();
+    
+    boolean isSetCoordinates();
 
     DirectPositionList getPosList();
+    
+    boolean isSetPosList();
 
     List<? extends DirectPosition> getPos();
 

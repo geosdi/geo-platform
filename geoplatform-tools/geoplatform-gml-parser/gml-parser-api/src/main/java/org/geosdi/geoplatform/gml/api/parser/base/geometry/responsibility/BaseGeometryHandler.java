@@ -54,7 +54,7 @@ public abstract class BaseGeometryHandler<A extends AbstractGeometry, G extends 
             A gmlGeometry,
             P parser) throws ParserException;
 
-    protected G forwarBuildGeometry(GeometryFactory geometryFactory,
+    protected G forwardBuildGeometry(GeometryFactory geometryFactory,
             A gmlGeometry,
             P parser) throws ParserException {
         if (successor != null) {

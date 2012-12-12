@@ -74,6 +74,6 @@ public class InternalCoordLinearRingHandler extends AbstractGeometryHandler<Abst
             AbstractGeometry gmlGeometry,
             GMLBasePointParser parser) throws ParserException {
         
-        return super.forwarBuildGeometry(geometryFactory, gmlGeometry, parser);
+        return super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
     }
 }

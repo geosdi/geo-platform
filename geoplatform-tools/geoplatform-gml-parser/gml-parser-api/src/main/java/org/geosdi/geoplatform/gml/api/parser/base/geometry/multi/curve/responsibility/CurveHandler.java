@@ -33,11 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.responsibility;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import com.vividsolutions.jts.geom.LineString;
+import java.util.List;
+import org.geosdi.geoplatform.gml.api.AbstractCurve;
+import org.geosdi.geoplatform.gml.api.Curve;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.GMLBaseCurveParser;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -45,23 +48,22 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
+public class CurveHandler extends MultiCurveHandler {
 
-    public DirectPositionGeometryHandler() {
-        super.setSuccessor(new CoordinatesGeometryHandler());
+    private GMLBaseCurveParser curveParser = GMLBaseParametersRepo.getDefaultCurveParser();
+
+    @Override
+    public void parseGeometry(List<LineString> collection,
+            AbstractCurve gmlGeometry) throws ParserException {
+       if(isCompatibleGeometry(gmlGeometry)) {
+           collection.addAll(curveParser.parseGeometry((Curve) gmlGeometry));
+       } else {
+           super.forwardParseGeometry(collection, gmlGeometry);
+       }
     }
 
     @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            org.geosdi.geoplatform.gml.api.Point gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
-
-        if (gmlGeometry.isSetPos()) {
-            return geometryFactory.createPoint(parser.parseCoordinate(
-                    gmlGeometry.getPos()));
-        } else {
-            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
-        }
+    protected boolean isCompatibleGeometry(Object gmlGeometry) {
+        return gmlGeometry instanceof Curve;
     }
 }

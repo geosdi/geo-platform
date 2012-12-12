@@ -37,11 +37,14 @@ package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.google.common.collect.Maps;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import java.util.EnumMap;
+import java.util.Collections;
+import java.util.Map;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.GMLBaseCurveParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.GMLBaseLineStringParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.GMLBaseLinearRingParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.GMLBaseMultiCurveParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.geometry.GMLBaseMultiGeometryParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.point.GMLBaseMultiPointParser;
@@ -62,7 +65,7 @@ public class GMLBaseParametersRepo {
         lookUpAllParameters();
     }
     //
-    private static EnumMap<BaseParameterEnum, BaseParameterValue> parameters;
+    private static Map<BaseParameterEnum, BaseParameterValue> parameters;
 
     private GMLBaseParametersRepo() {
     }
@@ -112,6 +115,11 @@ public class GMLBaseParametersRepo {
         parameters.put(BaseParameterEnum.DEFAULT_POLYGON_PARSER,
                 defaultPolygonParser);
 
+        final BaseParameterValue<GMLBaseCurveParser> defaultCurveParser = new CurveParserParameter(
+                defaultGeometryFactory, defaultSRSParser);
+        parameters.put(BaseParameterEnum.DEFAULT_CURVE_PARSER,
+                defaultCurveParser);
+
         final BaseParameterValue<GMLBaseMultiPointParser> defaultMultiPointParser = new MultiPointParserParameter(
                 defaultGeometryFactory, defaultSRSParser,
                 defaultPointParser);
@@ -144,6 +152,11 @@ public class GMLBaseParametersRepo {
         final BaseParameterValue<GMLBaseMultiGeometryParser> defaultMultiGeometryParser = new MultiGeometryParserParameter();
         parameters.put(BaseParameterEnum.DEFAULT_MULTI_GEOMETRY_PARSER,
                 defaultMultiGeometryParser);
+
+        final BaseParameterValue<GMLBaseMultiCurveParser> defaultMultiCurveParser = new MultiCurveParserParameter(
+                defaultGeometryFactory, defaultSRSParser);
+        parameters.put(BaseParameterEnum.DEFAULT_MULTI_CURVE_PARSER,
+                defaultMultiCurveParser);
     }
 
     public static GeometryFactory getDefaultGeometryFactory() {
@@ -206,7 +219,26 @@ public class GMLBaseParametersRepo {
                 BaseParameterEnum.DEFAULT_MULTI_GEOMETRY_PARSER)).getValue();
     }
 
+    public static CoordinateBaseParser getDefaultCoordinateBaseParser() {
+        return ((BaseParameterValue<CoordinateBaseParser>) parameters.get(
+                BaseParameterEnum.DEFAULT_COORDINATE_PARSER)).getValue();
+    }
+
+    public static GMLBaseCurveParser getDefaultCurveParser() {
+        return ((BaseParameterValue<GMLBaseCurveParser>) parameters.get(
+                BaseParameterEnum.DEFAULT_CURVE_PARSER)).getValue();
+    }
+
+    public static GMLBaseMultiCurveParser getDefaultMultiCurveParser() {
+        return ((BaseParameterValue<GMLBaseMultiCurveParser>) parameters.get(
+                BaseParameterEnum.DEFAULT_MULTI_CURVE_PARSER)).getValue();
+    }
+
     public static BaseParameterValue getRepoParamater(BaseParameterEnum key) {
         return parameters.get(key);
+    }
+
+    public static Map<BaseParameterEnum, BaseParameterValue> getAllParameters() {
+        return Collections.unmodifiableMap(parameters);
     }
 }

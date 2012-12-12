@@ -33,10 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.responsibility;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.LineString;
+import org.geosdi.geoplatform.gml.api.LineStringSegment;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
@@ -45,23 +46,33 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
+public abstract class AbstractCurveHandler {
 
-    public DirectPositionGeometryHandler() {
-        super.setSuccessor(new CoordinatesGeometryHandler());
-    }
+    protected AbstractCurveHandler successor;
 
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            org.geosdi.geoplatform.gml.api.Point gmlGeometry,
+    public abstract LineString parseGeometry(
+            GeometryFactory geometryFactory,
+            LineStringSegment lineStringSegment,
+            CoordinateBaseParser parser) throws ParserException;
+
+    protected LineString forwardParseGeometry(
+            GeometryFactory geometryFactory,
+            LineStringSegment lineStringSegment,
             CoordinateBaseParser parser) throws ParserException {
-
-        if (gmlGeometry.isSetPos()) {
-            return geometryFactory.createPoint(parser.parseCoordinate(
-                    gmlGeometry.getPos()));
-        } else {
-            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
+        if (successor != null) {
+            return successor.parseGeometry(geometryFactory,
+                    lineStringSegment,
                     parser);
         }
+
+        throw new ParserException("Unable to Buid LineString "
+                + "with Parser " + parser);
+    }
+
+    /**
+     * @param successor the successor to set
+     */
+    public void setSuccessor(AbstractCurveHandler successor) {
+        this.successor = successor;
     }
 }

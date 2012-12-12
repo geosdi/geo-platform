@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api.parser.base.coordinate;
 
 import com.vividsolutions.jts.geom.Coordinate;
+import java.util.List;
 import org.geosdi.geoplatform.gml.api.Coord;
 import org.geosdi.geoplatform.gml.api.Coordinates;
 import org.geosdi.geoplatform.gml.api.DirectPosition;
@@ -68,6 +69,10 @@ public interface CoordinateBaseParser extends AbstractParser {
     Coordinate parseCoordinate(String value,
             String decimalSeparator,
             String cs) throws ParserException;
+
+    Coordinate[] parseCoordinate(Coordinates coordinates) throws ParserException;
+
+    Coordinate[] parseCoordinates(List<? extends DirectPosition> positions) throws ParserException;
 
     double parseCoordinate(String value,
             String decimalSeparator) throws ParserException;

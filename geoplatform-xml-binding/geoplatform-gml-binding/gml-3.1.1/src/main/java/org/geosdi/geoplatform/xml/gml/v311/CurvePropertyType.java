@@ -106,6 +106,7 @@ public class CurvePropertyType implements ToString, CurveProperty {
         this.curve = value;
     }
 
+    @Override
     public boolean isSetCurve() {
         return (this.curve != null);
     }

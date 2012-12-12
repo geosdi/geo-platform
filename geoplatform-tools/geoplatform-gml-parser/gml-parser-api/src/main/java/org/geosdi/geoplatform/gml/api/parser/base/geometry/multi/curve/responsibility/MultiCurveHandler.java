@@ -33,11 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.responsibility;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import com.vividsolutions.jts.geom.LineString;
+import java.util.List;
+import org.geosdi.geoplatform.gml.api.AbstractCurve;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -45,23 +45,31 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
+public abstract class MultiCurveHandler {
 
-    public DirectPositionGeometryHandler() {
-        super.setSuccessor(new CoordinatesGeometryHandler());
+    protected MultiCurveHandler successor;
+
+    public abstract void parseGeometry(
+            List<LineString> collection,
+            AbstractCurve gmlGeometry) throws ParserException;
+
+    protected void forwardParseGeometry(
+            List<LineString> collection,
+            AbstractCurve gmlGeometry) throws ParserException {
+        if (successor != null) {
+            successor.parseGeometry(collection, gmlGeometry);
+        }
+
+        throw new ParserException("There are no Rings in Chain to parse "
+                + "this unespected Curve Type : " + gmlGeometry);
     }
 
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            org.geosdi.geoplatform.gml.api.Point gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
+    protected abstract boolean isCompatibleGeometry(Object gmlGeometry);
 
-        if (gmlGeometry.isSetPos()) {
-            return geometryFactory.createPoint(parser.parseCoordinate(
-                    gmlGeometry.getPos()));
-        } else {
-            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
-        }
+    /**
+     * @param successor the successor to set
+     */
+    public void setSuccessor(MultiCurveHandler successor) {
+        this.successor = successor;
     }
 }

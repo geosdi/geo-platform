@@ -61,7 +61,7 @@ public class InternalDirectPositionLineHandler extends BaseGeometryHandler<Abstr
 
         return gmlGeometry instanceof DirectPosition
                ? geometryFactory.createPoint(parser.parseCoordinate(
-                (DirectPosition) gmlGeometry)) : super.forwarBuildGeometry(
+                (DirectPosition) gmlGeometry)) : super.forwardBuildGeometry(
                 geometryFactory, gmlGeometry, parser);
     }
 }

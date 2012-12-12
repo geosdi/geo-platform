@@ -43,4 +43,6 @@ package org.geosdi.geoplatform.gml.api;
 public interface CurveProperty extends PropertyType {
 
     AbstractCurve getAbstractCurve();
+
+    boolean isSetCurve();
 }

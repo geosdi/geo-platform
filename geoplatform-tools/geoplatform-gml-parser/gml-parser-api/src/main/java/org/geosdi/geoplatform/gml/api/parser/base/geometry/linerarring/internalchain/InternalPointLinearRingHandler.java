@@ -62,6 +62,6 @@ public class InternalPointLinearRingHandler extends BaseGeometryHandler<Abstract
         return gmlGeometry instanceof org.geosdi.geoplatform.gml.api.Point
                ? parser.parseGeometry(
                 (org.geosdi.geoplatform.gml.api.Point) gmlGeometry)
-               : super.forwarBuildGeometry(geometryFactory, gmlGeometry, parser);
+               : super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
     }
 }

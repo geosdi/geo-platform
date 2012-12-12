@@ -6,6 +6,7 @@
 //
 package org.geosdi.geoplatform.xml.gml.v311;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
@@ -157,6 +158,7 @@ public class LineStringSegmentType extends AbstractCurveSegmentType
         this.posList = value;
     }
 
+    @Override
     public boolean isSetPosList() {
         return (this.posList != null);
     }
@@ -182,6 +184,7 @@ public class LineStringSegmentType extends AbstractCurveSegmentType
         this.coordinates = value;
     }
 
+    @Override
     public boolean isSetCoordinates() {
         return (this.coordinates != null);
     }

@@ -65,7 +65,7 @@ public class DirectPositionLineGeometryHandler extends BaseGeometryHandler<LineS
 
             return geometryFactory.createLineString(coordinates);
         } else {
-            return super.forwarBuildGeometry(geometryFactory, gmlGeometry,
+            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
                     parser);
         }
     }

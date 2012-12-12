@@ -67,7 +67,7 @@ public class CoordinatesGeometryHandler extends BasePointGeometryHandler {
 
             return geometryFactory.createPoint(coordinates[0]);
         } else {
-            return super.forwarBuildGeometry(geometryFactory, gmlGeometry,
+            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
                     parser);
         }
     }

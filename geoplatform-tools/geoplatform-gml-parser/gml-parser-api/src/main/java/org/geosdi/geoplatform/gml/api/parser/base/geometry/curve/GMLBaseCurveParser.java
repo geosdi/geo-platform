@@ -33,11 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.LineString;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import org.geosdi.geoplatform.gml.api.AbstractCurveSegment;
+import org.geosdi.geoplatform.gml.api.Curve;
+import org.geosdi.geoplatform.gml.api.CurveSegmentArrayProperty;
+import org.geosdi.geoplatform.gml.api.LineStringSegment;
+import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.responsibility.AbstractCurveHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.responsibility.CoordCurveHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -45,23 +56,34 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
+public class GMLBaseCurveParser {
 
-    public DirectPositionGeometryHandler() {
-        super.setSuccessor(new CoordinatesGeometryHandler());
+    private CoordinateBaseParser coordinateParser = GMLBaseParametersRepo.getDefaultCoordinateBaseParser();
+    private AbstractCurveHandler coordCurveHandler = new CoordCurveHandler();
+    private final GeometryFactory geometryFactory;
+    private final AbstractGMLBaseSRSParser srsParser;
+
+    public GMLBaseCurveParser(GeometryFactory theGeometryFactory,
+            AbstractGMLBaseSRSParser theSrsParser) {
+        this.geometryFactory = theGeometryFactory;
+        this.srsParser = theSrsParser;
     }
 
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            org.geosdi.geoplatform.gml.api.Point gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
-
-        if (gmlGeometry.isSetPos()) {
-            return geometryFactory.createPoint(parser.parseCoordinate(
-                    gmlGeometry.getPos()));
-        } else {
-            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
+    public Collection<LineString> parseGeometry(Curve gmlGeometry) throws ParserException {
+        List<LineString> lines = new ArrayList<LineString>();
+        if (gmlGeometry.isSetSegments()) {
+            CurveSegmentArrayProperty curveArrySegment = gmlGeometry.getSegments();
+            for (AbstractCurveSegment curveSegment : curveArrySegment.getAbstractCurveSegment()) {
+                if (curveSegment instanceof LineStringSegment) {
+                    LineStringSegment lineStringSegment = (LineStringSegment) curveSegment;
+                    lines.add(coordCurveHandler.parseGeometry(geometryFactory,
+                            lineStringSegment, coordinateParser));
+                } else {
+                    throw new IllegalArgumentException("In CurveType only "
+                            + "LineStringSegment are allowed.");
+                }
+            }
         }
+        return lines;
     }
 }

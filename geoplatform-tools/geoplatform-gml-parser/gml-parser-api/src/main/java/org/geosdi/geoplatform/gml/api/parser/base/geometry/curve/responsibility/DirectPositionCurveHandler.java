@@ -33,10 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.responsibility;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.LineString;
+import org.geosdi.geoplatform.gml.api.LineStringSegment;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
@@ -45,23 +46,20 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
+public class DirectPositionCurveHandler extends AbstractCurveHandler {
 
-    public DirectPositionGeometryHandler() {
-        super.setSuccessor(new CoordinatesGeometryHandler());
+    public DirectPositionCurveHandler() {
+        super.setSuccessor(new DirectPositionListCurveHandler());
     }
 
     @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            org.geosdi.geoplatform.gml.api.Point gmlGeometry,
+    public LineString parseGeometry(GeometryFactory geometryFactory,
+            LineStringSegment lineStringSegment,
             CoordinateBaseParser parser) throws ParserException {
 
-        if (gmlGeometry.isSetPos()) {
-            return geometryFactory.createPoint(parser.parseCoordinate(
-                    gmlGeometry.getPos()));
-        } else {
-            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
-        }
+        return lineStringSegment.isSetPosList()
+               ? geometryFactory.createLineString(parser.parseCoordinates(
+                lineStringSegment.getPosList())) : super.forwardParseGeometry(
+                geometryFactory, lineStringSegment, parser);
     }
 }

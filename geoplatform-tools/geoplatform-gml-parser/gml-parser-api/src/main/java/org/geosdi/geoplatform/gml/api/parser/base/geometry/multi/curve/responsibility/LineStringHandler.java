@@ -33,11 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.responsibility;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import com.vividsolutions.jts.geom.LineString;
+import java.util.List;
+import org.geosdi.geoplatform.gml.api.AbstractCurve;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.GMLBaseLineStringParser;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -45,23 +47,29 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
+public class LineStringHandler extends MultiCurveHandler {
 
-    public DirectPositionGeometryHandler() {
-        super.setSuccessor(new CoordinatesGeometryHandler());
+    private GMLBaseLineStringParser lineStringParser = GMLBaseParametersRepo.getDefaultLineStringParser();
+
+    public LineStringHandler() {
+        super.setSuccessor(new CurveHandler());
     }
 
     @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            org.geosdi.geoplatform.gml.api.Point gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
+    public void parseGeometry(List<LineString> collection,
+            AbstractCurve gmlGeometry) throws ParserException {
 
-        if (gmlGeometry.isSetPos()) {
-            return geometryFactory.createPoint(parser.parseCoordinate(
-                    gmlGeometry.getPos()));
+        if (isCompatibleGeometry(gmlGeometry)) {
+            collection.add(lineStringParser.parseGeometry(
+                    (org.geosdi.geoplatform.gml.api.LineString) gmlGeometry));
         } else {
-            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
+            super.forwardParseGeometry(collection, gmlGeometry);
         }
+
+    }
+
+    @Override
+    protected boolean isCompatibleGeometry(Object gmlGeometry) {
+        return gmlGeometry instanceof org.geosdi.geoplatform.gml.api.LineString;
     }
 }

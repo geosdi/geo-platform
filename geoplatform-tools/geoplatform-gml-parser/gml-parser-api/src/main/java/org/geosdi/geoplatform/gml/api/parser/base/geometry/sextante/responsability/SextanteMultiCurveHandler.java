@@ -33,11 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsability;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import com.vividsolutions.jts.geom.Geometry;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.MultiCurve;
+import org.geosdi.geoplatform.gml.api.MultiCurveProperty;
+import org.geosdi.geoplatform.gml.api.PropertyType;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.GMLBaseMultiCurveParser;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -45,23 +49,36 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
+public class SextanteMultiCurveHandler extends SextanteGeometryHandler {
 
-    public DirectPositionGeometryHandler() {
-        super.setSuccessor(new CoordinatesGeometryHandler());
+    private GMLBaseMultiCurveParser multiCurveParser = GMLBaseParametersRepo.getDefaultMultiCurveParser();
+
+    public SextanteMultiCurveHandler() {
+        super.setSuccessor(new SextanteMultiPolygonHandler());
     }
 
     @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            org.geosdi.geoplatform.gml.api.Point gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
+    public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
+        return isCompatibleGeometry(gmlGeometry)
+               ? multiCurveParser.parseGeometry((MultiCurve) gmlGeometry)
+               : super.forwardParseGeometry(gmlGeometry);
+    }
 
-        if (gmlGeometry.isSetPos()) {
-            return geometryFactory.createPoint(parser.parseCoordinate(
-                    gmlGeometry.getPos()));
-        } else {
-            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
-        }
+    @Override
+    public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
+        return isCompatibleProperty(propertyType)
+               ? multiCurveParser.parseGeometry(
+                (MultiCurveProperty) propertyType) : super.forwardParseGeometry(
+                propertyType);
+    }
+
+    @Override
+    protected boolean isCompatibleGeometry(Object gmlGeometry) {
+        return gmlGeometry instanceof MultiCurve;
+    }
+
+    @Override
+    protected boolean isCompatibleProperty(Object propertyType) {
+        return propertyType instanceof MultiCurveProperty;
     }
 }

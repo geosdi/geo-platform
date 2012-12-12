@@ -84,7 +84,7 @@ public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<Line
             LinearRing gmlGeometry,
             CoordinateBaseParser parser) throws ParserException {
 
-        return super.forwarBuildGeometry(geometryFactory, gmlGeometry, parser);
+        return super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
     }
 
     @Override

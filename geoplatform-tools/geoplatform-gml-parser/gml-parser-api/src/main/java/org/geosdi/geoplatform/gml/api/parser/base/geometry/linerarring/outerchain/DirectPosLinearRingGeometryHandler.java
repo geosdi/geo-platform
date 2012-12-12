@@ -60,6 +60,6 @@ public class DirectPosLinearRingGeometryHandler extends BaseGeometryHandler<Line
 
         return gmlGeometry.isSetPosList() ? geometryFactory.createLinearRing(
                 parser.parseCoordinates(gmlGeometry.getPosList()))
-               : super.forwarBuildGeometry(geometryFactory, gmlGeometry, parser);
+               : super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
     }
 }

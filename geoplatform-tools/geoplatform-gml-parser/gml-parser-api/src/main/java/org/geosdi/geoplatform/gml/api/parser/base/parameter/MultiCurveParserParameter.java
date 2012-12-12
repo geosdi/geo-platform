@@ -33,35 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.point.responsibility;
+package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.GMLBaseMultiCurveParser;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DirectPositionGeometryHandler extends BasePointGeometryHandler {
+public class MultiCurveParserParameter implements
+        BaseParameterValue<GMLBaseMultiCurveParser> {
 
-    public DirectPositionGeometryHandler() {
-        super.setSuccessor(new CoordinatesGeometryHandler());
+    private GMLBaseMultiCurveParser multiCurveParser;
+    private BaseParameterValue<GeometryFactory> geometryFactoryParameter;
+    private BaseParameterValue<DefaultSRSBaseParser> srsParameter;
+
+    public MultiCurveParserParameter(
+            BaseParameterValue<GeometryFactory> geometryFactoryParameter,
+            BaseParameterValue<DefaultSRSBaseParser> srsParameter) {
+        this.geometryFactoryParameter = geometryFactoryParameter;
+        this.srsParameter = srsParameter;
     }
 
     @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            org.geosdi.geoplatform.gml.api.Point gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
-
-        if (gmlGeometry.isSetPos()) {
-            return geometryFactory.createPoint(parser.parseCoordinate(
-                    gmlGeometry.getPos()));
-        } else {
-            return super.forwardBuildGeometry(geometryFactory, gmlGeometry,
-                    parser);
-        }
+    public GMLBaseMultiCurveParser getValue() {
+        return multiCurveParser = (multiCurveParser == null)
+                                  ? new GMLBaseMultiCurveParser(
+                geometryFactoryParameter.getValue(), srsParameter.getValue())
+                                  : multiCurveParser;
     }
 }

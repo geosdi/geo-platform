@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector;
 
 import java.net.URL;
+import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.connector.api.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.GPCatalogServerConnector;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
@@ -64,6 +65,14 @@ public class GPCSWServerConnector extends GPServerConnector<GPCatalogServerConne
             GPSecurityConnector security,
             GPCatalogVersion theVersion) {
         super(new GPCatalogServerConnector(serverURL, security, theVersion));
+    }
+
+    public GPCSWServerConnector(URL serverURL,
+            GPSecurityConnector security,
+            HttpClientProxyConfiguration proxyConfiguration,
+            GPCatalogVersion theVersion) {
+        super(new GPCatalogServerConnector(serverURL, security,
+                proxyConfiguration, theVersion));
     }
 
     @Override

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.services;
 import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
+import org.geosdi.geoplatform.connector.proxy.CSWProxyConnectionConfiguration;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
 import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
@@ -71,6 +72,7 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     //
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
     private SnipcCatalogBeanProvider snipcProvider;
+    private CSWProxyConnectionConfiguration cswProxyConfiguration;
 
     /**
      * @param cswServiceDelegate
@@ -111,6 +113,14 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     public void setSnipcProvider(SnipcCatalogBeanProvider snipcProvider) {
         this.snipcProvider = snipcProvider;
         this.cswServiceDelegate.setSnipcProvider(snipcProvider);
+    }
+
+    /**
+     * @param cswProxyConfiguration the cswProxyConfiguration to set
+     */
+    public void setCswProxyConfiguration(CSWProxyConnectionConfiguration cswProxyConfiguration) {
+        this.cswProxyConfiguration = cswProxyConfiguration;
+        this.cswServiceDelegate.setCswProxyConfiguration(cswProxyConfiguration);
     }
 
     @Override

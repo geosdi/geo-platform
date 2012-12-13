@@ -33,47 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.proxy;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GPCSWConnectorBuilder, GPCSWServerConnector> {
+@Component(value = "cswProxyConnectionConfiguration")
+public class CSWProxyConnectionConfiguration implements HttpClientProxyConfiguration{
+
+    private @Value("${csw_use_proxy}")
+    boolean cswUseProxy;
+    private @Value("${csw_proxy_url}")
+    String cswProxyUrl;
+    private @Value("${csw_proxy_port}")
+    int cswProxyPort;
 
     /**
-     * Create a new GeoPlatform CSWConnectorBuilder with which to define a
-     * specification for a GPCSWServerConnector.
-     *
-     * @return the new GeoPlatformCSWConnectorBuilder
+     * @return the cswUseProxy
      */
-    public static GPCSWConnectorBuilder newConnector() {
-        return new GPCSWConnectorBuilder();
+    @Override
+    public boolean isUseProxy() {
+        return cswUseProxy;
     }
 
     /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *
+     * @return the cswProxyUrl
      */
     @Override
-    public GPCSWServerConnector build() {
-        if (serverUrl == null) {
-            throw new IllegalArgumentException("Error on CSW Server Connector build: "
-                    + "server URL cannot be null.");
-        }
+    public String getProxyUrl() {
+        return cswProxyUrl;
+    }
 
-        GPCatalogVersion v = GPCatalogVersion.fromString(version);
+    /**
+     * @return the csw_proxy_port
+     */
+    @Override
+    public int getProxyPort() {
+        return cswProxyPort;
+    }
 
-        GPCSWServerConnector cswConnector = super.proxyConfiguration != null
-                                            ? new GPCSWServerConnector(
-                serverUrl, securityConnector, proxyConfiguration, v)
-                                            : new GPCSWServerConnector(
-                serverUrl, securityConnector, v);
-
-        return cswConnector;
+    @Override
+    public String toString() {
+        return "CSWProxyConnectionConfiguration{ " + "cswUseProxy = "
+                + cswUseProxy + ", cswProxyUrl = " + cswProxyUrl
+                + ", csw_proxy_port = " + cswProxyPort + '}';
     }
 }

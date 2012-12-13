@@ -16,7 +16,8 @@
 
     <context:annotation-config />
     
-    <context:component-scan base-package="org.geosdi.geoplatform.connector.security"/>
+    <context:component-scan base-package="org.geosdi.geoplatform.connector.proxy, 
+                            org.geosdi.geoplatform.connector.security"/>
     
     <import resource="classpath:applicationContext-jasypt.xml" />
     

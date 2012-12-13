@@ -39,7 +39,10 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import org.apache.http.HttpHost;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,11 +58,19 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     //
     protected final URL url;
     protected final GPSecurityConnector securityConnector;
+    private final HttpClientProxyConfiguration proxyConfiguration;
 
     protected GPAbstractServerConnector(URL theUrl,
             GPSecurityConnector theSecurityConnector) {
+        this(theUrl, theSecurityConnector, null);
+    }
+
+    protected GPAbstractServerConnector(URL theUrl,
+            GPSecurityConnector theSecurityConnector,
+            HttpClientProxyConfiguration theProxyConfiguration) {
         this.url = theUrl;
         this.securityConnector = theSecurityConnector;
+        this.proxyConfiguration = theProxyConfiguration;
     }
 
     @Override
@@ -84,7 +95,10 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
 
     @Override
     public DefaultHttpClient getClientConnection() {
-        return new DefaultHttpClient();
+        return proxyConfiguration != null ? proxyConfiguration.isUseProxy()
+                                            ? configureProxy()
+                                            : new DefaultHttpClient()
+               : new DefaultHttpClient();
     }
 
     /**
@@ -119,7 +133,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         }
         final GPAbstractServerConnector other = (GPAbstractServerConnector) obj;
         if (this.url != other.url && (this.url == null || !this.url.equals(
-                other.url))) {
+                                      other.url))) {
             return false;
         }
         return true;
@@ -136,5 +150,19 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     public String toString() {
         return "GPAbstractServerConnector{" + "Server Url = " + url
                 + ", securityConnector = " + securityConnector + '}';
+    }
+
+    private DefaultHttpClient configureProxy() {
+        logger.trace("SetUp Proxy Configuratio @@@@@@@@@@@@@@@@ "
+                + proxyConfiguration);
+
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+
+        HttpHost proxy = new HttpHost(proxyConfiguration.getProxyUrl(),
+                proxyConfiguration.getProxyPort());
+        httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
+                proxy);
+
+        return httpclient;
     }
 }

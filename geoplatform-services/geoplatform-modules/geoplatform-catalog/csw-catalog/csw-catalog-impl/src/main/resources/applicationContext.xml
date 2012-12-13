@@ -17,9 +17,9 @@
             http://cxf.apache.org/schemas/jaxws.xsd"
        default-autowire="byName">
 
-	<!--===================================================================== -->
-	<!-- Services -->
-	<!--===================================================================== -->
+    <!--===================================================================== -->
+    <!-- Services -->
+    <!--===================================================================== -->
     
     <bean id="cswService"
           class="org.geosdi.geoplatform.services.GeoPlatformCSWServiceImpl">
@@ -27,8 +27,9 @@
         <property name="organizationDao" ref="organizationDAO" />
         <property name="catalogCapabilitiesBean" ref="catalogCapabilitiesBean" />
         <property name="snipcProvider" ref="snipcCatalogBeanProvider" />
+        <property name="cswProxyConfiguration" ref="cswProxyConnectionConfiguration" />
     </bean>
 
-	<!--===================================================================== -->
+    <!--===================================================================== -->
 
 </beans>

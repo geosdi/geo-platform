@@ -33,47 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
-
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+package org.geosdi.geoplatform.configurator.httpclient.proxy;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GPCSWConnectorBuilder, GPCSWServerConnector> {
+public interface HttpClientProxyConfiguration {
 
-    /**
-     * Create a new GeoPlatform CSWConnectorBuilder with which to define a
-     * specification for a GPCSWServerConnector.
-     *
-     * @return the new GeoPlatformCSWConnectorBuilder
-     */
-    public static GPCSWConnectorBuilder newConnector() {
-        return new GPCSWConnectorBuilder();
-    }
+    boolean isUseProxy();
 
-    /**
-     * TODO : HERE ALL CONTROLS FOR CONNECTOR CREATION
-     *
-     */
-    @Override
-    public GPCSWServerConnector build() {
-        if (serverUrl == null) {
-            throw new IllegalArgumentException("Error on CSW Server Connector build: "
-                    + "server URL cannot be null.");
-        }
+    String getProxyUrl();
 
-        GPCatalogVersion v = GPCatalogVersion.fromString(version);
-
-        GPCSWServerConnector cswConnector = super.proxyConfiguration != null
-                                            ? new GPCSWServerConnector(
-                serverUrl, securityConnector, proxyConfiguration, v)
-                                            : new GPCSWServerConnector(
-                serverUrl, securityConnector, v);
-
-        return cswConnector;
-    }
+    int getProxyPort();
 }

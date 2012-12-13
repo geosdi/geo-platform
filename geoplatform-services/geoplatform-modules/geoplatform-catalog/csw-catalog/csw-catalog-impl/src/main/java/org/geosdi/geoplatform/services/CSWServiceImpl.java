@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.connector.CatalogVersionException;
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCSWServerConnector;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
+import org.geosdi.geoplatform.connector.proxy.CSWProxyConnectionConfiguration;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
@@ -106,6 +107,7 @@ class CSWServiceImpl {
     //
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
     private SnipcCatalogBeanProvider snipcProvider;
+    private CSWProxyConnectionConfiguration cswProxyConfiguration;
 
     /**
      * @param serverDao the serverDao to set
@@ -137,6 +139,13 @@ class CSWServiceImpl {
     }
 
     /**
+     * @param cswProxyConfiguration the cswProxyConfiguration to set
+     */
+    public void setCswProxyConfiguration(CSWProxyConnectionConfiguration cswProxyConfiguration) {
+        this.cswProxyConfiguration = cswProxyConfiguration;
+    }
+
+    /**
      * @see
      * GeoPlatformCSWService#insertServerCSW(org.geosdi.geoplatform.core.model.GeoPlatformServer)
      */
@@ -162,7 +171,8 @@ class CSWServiceImpl {
      * @see GeoPlatformCSWService#saveServerCSW(java.lang.String,
      * java.lang.String)
      */
-    ServerCSWDTO saveServerCSW(String alias, String serverUrl,
+    ServerCSWDTO saveServerCSW(String alias,
+            String serverUrl,
             String organization)
             throws IllegalParameterFault {
 
@@ -236,7 +246,7 @@ class CSWServiceImpl {
         }
 
         List<GeoPlatformServer> found = serverDao.findAll(organization.getId(),
-                                                          GPCapabilityType.CSW);
+                GPCapabilityType.CSW);
         return convertServerList(found);
     }
 
@@ -282,7 +292,8 @@ class CSWServiceImpl {
         return new ServerCSWDTO(server);
     }
 
-    int getCSWServersCount(SearchRequest request, String organization) {
+    int getCSWServersCount(SearchRequest request,
+            String organization) {
         logger.trace("\n*** CSWServersCount: {} ***", request);
         Search searchCriteria = new Search(GeoPlatformServer.class);
         searchCriteria.addFilterEqual("serverType", GPCapabilityType.CSW);
@@ -368,7 +379,8 @@ class CSWServiceImpl {
      *
      * TODO GMD list.
      */
-    List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
+    List<SummaryRecordDTO> searchSummaryRecords(int num,
+            int start,
             CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         logger.trace("\n*** searchSummaryRecords ***\n{}", catalogFinder);
@@ -392,7 +404,7 @@ class CSWServiceImpl {
         request.setMaxRecords(BigInteger.valueOf(num));
         request.setStartPosition(BigInteger.valueOf(start));
         logger.debug("\n*** Num: {} *** Start: {} ***",
-                     request.getMaxRecords(), request.getStartPosition());
+                request.getMaxRecords(), request.getStartPosition());
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
@@ -430,7 +442,8 @@ class CSWServiceImpl {
      *
      * TODO GMD list.
      */
-    List<FullRecordDTO> searchFullRecords(int num, int start,
+    List<FullRecordDTO> searchFullRecords(int num,
+            int start,
             CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
         logger.trace("\n*** searchFullRecords ***\n{}", catalogFinder);
@@ -454,7 +467,7 @@ class CSWServiceImpl {
         request.setMaxRecords(BigInteger.valueOf(num));
         request.setStartPosition(BigInteger.valueOf(start));
         logger.debug("\n*** Num: {} *** Start: {} ***",
-                     request.getMaxRecords(), request.getStartPosition());
+                request.getMaxRecords(), request.getStartPosition());
 
         GetRecordsResponseType response = this.createGetRecordsResponse(request);
         logger.debug(
@@ -496,7 +509,8 @@ class CSWServiceImpl {
     }
 
     private SummaryRecordDTO convertSummaryRecords(
-            SummaryRecordType record, GeoPlatformServer server) {
+            SummaryRecordType record,
+            GeoPlatformServer server) {
 
         SummaryRecordDTO dto = new SummaryRecordDTO();
         dto.setIdCatalog(server.getId());
@@ -596,7 +610,7 @@ class CSWServiceImpl {
             URL url = new URL(serverUrl);
 
             GPCSWConnectorBuilder builder = GPCSWConnectorBuilder.newConnector().withServerUrl(
-                    url);
+                    url).withProxyConfiguration(cswProxyConfiguration);
 
             if (serverUrl.contains("snipc.protezionecivile.it")) {
                 GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
@@ -632,7 +646,8 @@ class CSWServiceImpl {
         return response;
     }
 
-    public String getRecordById(Long serverID, String identifier)
+    public String getRecordById(Long serverID,
+            String identifier)
             throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
         logger.trace("\n*** GetRecordById ***\n");
 
@@ -723,7 +738,7 @@ class CSWServiceImpl {
                         if ("outputSchema".equals(parameter.getName())) {
                             for (String outputSchemaValue : parameter.getValue()) {
                                 logger.trace("\n*** outputSchema available: {}",
-                                             outputSchemaValue);
+                                        outputSchemaValue);
                                 schemas.add(outputSchemaValue.trim());
                             }
                             break;

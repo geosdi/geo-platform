@@ -92,17 +92,17 @@ public abstract class GetRecordsRequestHandler {
             throw new IllegalArgumentException("Constraint Language must be FILTER.");
         }
 
-        // Add all predicats always in AND (even if there is one)
+        // Add all predicats always in OR (even if there is one)
         if (!filterType.isSetLogicOps()) {
             BinaryLogicOpType binary = new BinaryLogicOpType();
             binary.setComparisonOpsOrSpatialOpsOrLogicOps(filterPredicates);
 
-            filterType.setLogicOps(filterFactory.createAnd(binary));
+            filterType.setLogicOps(filterFactory.createOr(binary));
         } else {
             BinaryLogicOpType binary = (BinaryLogicOpType) filterType.getLogicOps().getValue();
-            List<JAXBElement<?>> andCriteria = binary.getComparisonOpsOrSpatialOpsOrLogicOps();
+            List<JAXBElement<?>> orCriteria = binary.getComparisonOpsOrSpatialOpsOrLogicOps();
 
-            andCriteria.addAll(filterPredicates);
+            orCriteria.addAll(filterPredicates);
         }
     }
 
@@ -117,7 +117,7 @@ public abstract class GetRecordsRequestHandler {
         if (previousConstraint == null) {
             request.setConstraint(followingConstraint);
         } else {
-            request.setConstraint(previousConstraint + " AND " + followingConstraint);
+            request.setConstraint(previousConstraint + " OR " + followingConstraint);
         }
     }
 

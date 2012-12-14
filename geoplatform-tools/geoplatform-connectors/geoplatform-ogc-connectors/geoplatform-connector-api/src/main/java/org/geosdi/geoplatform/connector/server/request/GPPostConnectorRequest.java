@@ -122,8 +122,8 @@ public abstract class GPPostConnectorRequest<T>
 
                 EntityUtils.consume(responseEntity);
             } else {
-                throw new ServerInternalFault("Connector Server Error: Connection "
-                        + "problem");
+                throw new ServerInternalFault(
+                        "Connector Server Error: Connection problem");
             }
 
         } catch (JAXBException ex) {
@@ -145,6 +145,7 @@ public abstract class GPPostConnectorRequest<T>
     @Override
     public String getResponseAsString() throws ServerInternalFault, IOException,
             IllegalParameterFault {
+        Reader reader = null;
         Writer writer = new StringWriter();
         try {
             HttpResponse httpResponse = super.securityConnector.secure(
@@ -156,7 +157,7 @@ public abstract class GPPostConnectorRequest<T>
 
                 char[] buffer = new char[1024];
 
-                Reader reader = new BufferedReader(
+                reader = new BufferedReader(
                         new InputStreamReader(is, "UTF-8"));
                 int n;
                 while ((n = reader.read(buffer)) != -1) {
@@ -165,8 +166,8 @@ public abstract class GPPostConnectorRequest<T>
 
                 EntityUtils.consume(responseEntity);
             } else {
-                throw new ServerInternalFault("Connector Server Error: Connection "
-                        + "problem");
+                throw new ServerInternalFault(
+                        "Connector Server Error: Connection problem");
             }
 
         } catch (JAXBException ex) {
@@ -180,6 +181,10 @@ public abstract class GPPostConnectorRequest<T>
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
 
+        } finally{
+            if(reader != null){
+                reader.close();
+            }
         }
 
         return writer.toString();
@@ -196,8 +201,8 @@ public abstract class GPPostConnectorRequest<T>
                 return responseEntity.getContent();
 
             } else {
-                throw new ServerInternalFault("Connector Server Error: Connection "
-                        + "problem");
+                throw new ServerInternalFault(
+                        "Connector Server Error: Connection problem");
             }
 
         } catch (JAXBException ex) {

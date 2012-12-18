@@ -48,6 +48,8 @@ public interface MultiGeometry extends AbstractGeometricAggregate {
     
     List<? extends GeometryProperty> getGeometryMember();
     
+    void addGeometryMember(GeometryProperty geometryProperty);
+    
     boolean isSetGeometryMembers();
     
     GeometryArrayProperty getGeometryMembers();

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.point.GMLBaseMultiPointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
@@ -46,17 +47,17 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointPar
  * @email giuseppe.lascaleia@geosdi.org
  */
 class MultiPointParserParameter implements
-        BaseParameterValue<GMLBaseMultiPointParser> {
+        ParameterValue<GMLBaseMultiPointParser> {
 
     private GMLBaseMultiPointParser multiPointParser;
-    private BaseParameterValue<GeometryFactory> geometryParameter;
-    private BaseParameterValue<DefaultSRSBaseParser> srsParameter;
-    private BaseParameterValue<GMLBasePointParser> pointParameter;
+    private ParameterValue<GeometryFactory> geometryParameter;
+    private ParameterValue<DefaultSRSBaseParser> srsParameter;
+    private ParameterValue<GMLBasePointParser> pointParameter;
 
     public MultiPointParserParameter(
-            BaseParameterValue<GeometryFactory> geometryParameter,
-            BaseParameterValue<DefaultSRSBaseParser> srsParameter,
-            BaseParameterValue<GMLBasePointParser> pointParameter) {
+            ParameterValue<GeometryFactory> geometryParameter,
+            ParameterValue<DefaultSRSBaseParser> srsParameter,
+            ParameterValue<GMLBasePointParser> pointParameter) {
         this.geometryParameter = geometryParameter;
         this.srsParameter = srsParameter;
         this.pointParameter = pointParameter;

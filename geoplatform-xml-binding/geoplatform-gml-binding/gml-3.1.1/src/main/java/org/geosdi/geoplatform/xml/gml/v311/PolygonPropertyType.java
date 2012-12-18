@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.Polygon;
 import org.geosdi.geoplatform.gml.api.PolygonProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -94,8 +95,9 @@ public class PolygonPropertyType implements ToString, PolygonProperty {
      * @param value allowed object is {@link PolygonType }
      *
      */
-    public void setPolygon(PolygonType value) {
-        this.polygon = value;
+    @Override
+    public void setPolygon(Polygon value) {
+        this.polygon = (PolygonType) value;
     }
 
     @Override

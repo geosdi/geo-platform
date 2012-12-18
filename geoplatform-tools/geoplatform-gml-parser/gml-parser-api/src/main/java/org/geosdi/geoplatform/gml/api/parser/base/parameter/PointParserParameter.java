@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
@@ -45,16 +46,16 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointPar
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class PointParserParameter implements BaseParameterValue<GMLBasePointParser> {
+class PointParserParameter implements ParameterValue<GMLBasePointParser> {
 
     private GMLBasePointParser pointParser;
-    private BaseParameterValue<GeometryFactory> geometryParameter;
-    private BaseParameterValue<DefaultSRSBaseParser> srsParameter;
-    private BaseParameterValue<CoordinateBaseParser> coordinateParameter;
+    private ParameterValue<GeometryFactory> geometryParameter;
+    private ParameterValue<DefaultSRSBaseParser> srsParameter;
+    private ParameterValue<CoordinateBaseParser> coordinateParameter;
 
-    public PointParserParameter(BaseParameterValue<GeometryFactory> theGeometryParameter,
-            BaseParameterValue<DefaultSRSBaseParser> theSrsParameter,
-            BaseParameterValue<CoordinateBaseParser> theCoordinateParameter) {
+    public PointParserParameter(ParameterValue<GeometryFactory> theGeometryParameter,
+            ParameterValue<DefaultSRSBaseParser> theSrsParameter,
+            ParameterValue<CoordinateBaseParser> theCoordinateParameter) {
         this.geometryParameter = theGeometryParameter;
         this.srsParameter = theSrsParameter;
         this.coordinateParameter = theCoordinateParameter;

@@ -45,4 +45,6 @@ public interface PointProperty extends PropertyType {
     Point getPoint();
 
     boolean isSetPoint();
+    
+    void setPoint(Point value);
 }

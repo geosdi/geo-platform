@@ -45,4 +45,6 @@ public interface PolygonProperty extends PropertyType {
     boolean isSetPolygon();
 
     Polygon getPolygon();
+
+    void setPolygon(Polygon value);
 }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.GMLBaseLinearRingParser;
@@ -47,19 +48,19 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointPar
  * @email giuseppe.lascaleia@geosdi.org
  */
 class LinearRingParserParameter implements
-        BaseParameterValue<GMLBaseLinearRingParser> {
+        ParameterValue<GMLBaseLinearRingParser> {
 
     private GMLBaseLinearRingParser linearRingParser;
-    private BaseParameterValue<GeometryFactory> geometryParameter;
-    private BaseParameterValue<DefaultSRSBaseParser> srsParameter;
-    private BaseParameterValue<CoordinateBaseParser> coordinateParameter;
-    private BaseParameterValue<GMLBasePointParser> pointParameter;
+    private ParameterValue<GeometryFactory> geometryParameter;
+    private ParameterValue<DefaultSRSBaseParser> srsParameter;
+    private ParameterValue<CoordinateBaseParser> coordinateParameter;
+    private ParameterValue<GMLBasePointParser> pointParameter;
 
     public LinearRingParserParameter(
-            BaseParameterValue<GeometryFactory> geometryParameter,
-            BaseParameterValue<DefaultSRSBaseParser> srsParameter,
-            BaseParameterValue<CoordinateBaseParser> coordinateParameter,
-            BaseParameterValue<GMLBasePointParser> pointParameter) {
+            ParameterValue<GeometryFactory> geometryParameter,
+            ParameterValue<DefaultSRSBaseParser> srsParameter,
+            ParameterValue<CoordinateBaseParser> coordinateParameter,
+            ParameterValue<GMLBasePointParser> pointParameter) {
         this.geometryParameter = geometryParameter;
         this.srsParameter = srsParameter;
         this.coordinateParameter = coordinateParameter;

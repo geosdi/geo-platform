@@ -45,4 +45,6 @@ public interface LinearRingProperty extends PropertyType {
     boolean isSetLinearRing();
 
     LinearRing getLinearRing();
+
+    void setLinearRing(LinearRing value);
 }

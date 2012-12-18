@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.MultiPolygon;
+import org.geosdi.geoplatform.gml.api.PolygonProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
@@ -75,6 +76,11 @@ public class MultiPolygonType extends AbstractGeometricAggregateType
             polygonMember = new ArrayList<PolygonPropertyType>();
         }
         return this.polygonMember;
+    }
+    
+    @Override
+    public void addPolygonMember(PolygonProperty polygonProperty) {
+        getPolygonMember().add((PolygonPropertyType) polygonProperty);
     }
 
     @Override

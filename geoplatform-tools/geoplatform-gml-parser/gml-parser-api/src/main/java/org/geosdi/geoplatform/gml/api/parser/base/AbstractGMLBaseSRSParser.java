@@ -52,6 +52,6 @@ public abstract class AbstractGMLBaseSRSParser {
         this.patterns = thePatterns;
     }
 
-    public abstract void parseSRS(AbstractGeometry source,
-            Geometry target) throws ParserException, NullPointerException;
+    public abstract void parseSRS(AbstractGeometry gmlGeometry,
+            Geometry jtsGeometry) throws ParserException, NullPointerException;
 }

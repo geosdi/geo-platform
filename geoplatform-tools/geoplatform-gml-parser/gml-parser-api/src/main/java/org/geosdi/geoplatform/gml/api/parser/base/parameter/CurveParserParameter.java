@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.GMLBaseCurveParser;
 
@@ -45,15 +46,15 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.GMLBaseCurvePar
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class CurveParserParameter implements
-        BaseParameterValue<GMLBaseCurveParser> {
+        ParameterValue<GMLBaseCurveParser> {
 
     private GMLBaseCurveParser curveParser;
-    private BaseParameterValue<GeometryFactory> geometryFactoryParameter;
-    private BaseParameterValue<DefaultSRSBaseParser> srsParameter;
+    private ParameterValue<GeometryFactory> geometryFactoryParameter;
+    private ParameterValue<DefaultSRSBaseParser> srsParameter;
 
     public CurveParserParameter(
-            BaseParameterValue<GeometryFactory> geometryFactoryParameter,
-            BaseParameterValue<DefaultSRSBaseParser> srsParameter) {
+            ParameterValue<GeometryFactory> geometryFactoryParameter,
+            ParameterValue<DefaultSRSBaseParser> srsParameter) {
         this.geometryFactoryParameter = geometryFactoryParameter;
         this.srsParameter = srsParameter;
     }

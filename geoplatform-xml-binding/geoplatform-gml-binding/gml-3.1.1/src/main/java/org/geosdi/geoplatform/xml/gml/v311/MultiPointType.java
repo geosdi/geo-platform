@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.MultiPoint;
+import org.geosdi.geoplatform.gml.api.PointProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
@@ -80,6 +81,11 @@ public class MultiPointType extends AbstractGeometricAggregateType
     }
 
     @Override
+    public void addPointMember(PointProperty pointProperty) {
+        getPointMember().add((PointPropertyType) pointProperty);
+    }
+
+    @Override
     public boolean isSetPointMember() {
         return ((this.pointMember != null) && (!this.pointMember.isEmpty()));
     }
@@ -138,7 +144,8 @@ public class MultiPointType extends AbstractGeometricAggregateType
         super.appendFields(locator, buffer, strategy);
         {
             List<PointPropertyType> thePointMember;
-            thePointMember = (this.isSetPointMember() ? this.getPointMember() : null);
+            thePointMember = (this.isSetPointMember() ? this.getPointMember()
+                              : null);
             strategy.appendField(locator, this, "pointMember", buffer,
                     thePointMember);
         }

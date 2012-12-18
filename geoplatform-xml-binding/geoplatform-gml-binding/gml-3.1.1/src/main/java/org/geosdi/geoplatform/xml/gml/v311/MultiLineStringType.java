@@ -11,6 +11,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.LineStringProperty;
 import org.geosdi.geoplatform.gml.api.MultiLineString;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -47,7 +48,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class MultiLineStringType extends AbstractGeometricAggregateType
         implements ToString, MultiLineString {
-
+    
     protected List<LineStringPropertyType> lineStringMember;
 
     /**
@@ -76,16 +77,21 @@ public class MultiLineStringType extends AbstractGeometricAggregateType
         }
         return this.lineStringMember;
     }
-
+    
+    @Override
+    public void addLineStringMember(LineStringProperty lineStringProperty) {
+        getLineStringMember().add((LineStringPropertyType) lineStringProperty);
+    }
+    
     @Override
     public boolean isSetLineStringMember() {
         return ((this.lineStringMember != null) && (!this.lineStringMember.isEmpty()));
     }
-
+    
     public void unsetLineStringMember() {
         this.lineStringMember = null;
     }
-
+    
     @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
@@ -93,7 +99,7 @@ public class MultiLineStringType extends AbstractGeometricAggregateType
         append(null, buffer, strategy);
         return buffer.toString();
     }
-
+    
     @Override
     public StringBuilder append(ObjectLocator locator,
             StringBuilder buffer,
@@ -103,7 +109,7 @@ public class MultiLineStringType extends AbstractGeometricAggregateType
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
-
+    
     @Override
     public StringBuilder appendFields(ObjectLocator locator,
             StringBuilder buffer,
@@ -111,13 +117,14 @@ public class MultiLineStringType extends AbstractGeometricAggregateType
         super.appendFields(locator, buffer, strategy);
         {
             List<LineStringPropertyType> theLineStringMember;
-            theLineStringMember = (this.isSetLineStringMember() ? this.getLineStringMember() : null);
+            theLineStringMember = (this.isSetLineStringMember()
+                                   ? this.getLineStringMember() : null);
             strategy.appendField(locator, this, "lineStringMember", buffer,
                     theLineStringMember);
         }
         return buffer;
     }
-
+    
     public void setLineStringMember(List<LineStringPropertyType> value) {
         this.lineStringMember = null;
         List<LineStringPropertyType> draftl = this.getLineStringMember();

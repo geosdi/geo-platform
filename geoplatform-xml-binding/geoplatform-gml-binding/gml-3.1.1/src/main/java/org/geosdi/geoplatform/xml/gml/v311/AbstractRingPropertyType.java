@@ -71,8 +71,9 @@ public class AbstractRingPropertyType implements ToString,
      *     {@link JAXBElement }{@code <}{@link RingType }{@code >}
      *
      */
-    public void setRing(JAXBElement<? extends AbstractRingType> value) {
-        this.ring = value;
+    @Override
+    public void setRing(JAXBElement<? extends AbstractRing> value) {
+        this.ring = (JAXBElement<? extends AbstractRingType>) value;
     }
 
     public boolean isSetRing() {

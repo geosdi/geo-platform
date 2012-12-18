@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.MultiPolygon;
 import org.geosdi.geoplatform.gml.api.MultiPolygonProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -95,8 +96,9 @@ public class MultiPolygonPropertyType implements ToString, MultiPolygonProperty 
      * @param value allowed object is {@link MultiPolygonType }
      *
      */
-    public void setMultiPolygon(MultiPolygonType value) {
-        this.multiPolygon = value;
+    @Override
+    public void setMultiPolygon(MultiPolygon value) {
+        this.multiPolygon = (MultiPolygonType) value;
     }
 
     @Override

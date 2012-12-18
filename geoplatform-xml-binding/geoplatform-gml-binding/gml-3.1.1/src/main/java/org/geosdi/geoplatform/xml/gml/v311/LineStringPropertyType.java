@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.LineString;
 import org.geosdi.geoplatform.gml.api.LineStringProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -95,8 +96,9 @@ public class LineStringPropertyType implements ToString,
      * @param value allowed object is {@link LineStringType }
      *
      */
-    public void setLineString(LineStringType value) {
-        this.lineString = value;
+    @Override
+    public void setLineString(LineString value) {
+        this.lineString = (LineStringType) value;
     }
 
     @Override

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.GeometryProperty;
 import org.geosdi.geoplatform.gml.api.MultiGeometry;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -48,7 +49,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class MultiGeometryType extends AbstractGeometricAggregateType
         implements ToString, MultiGeometry {
-
+    
     protected List<GeometryPropertyType> geometryMember;
     protected GeometryArrayPropertyType geometryMembers;
 
@@ -78,12 +79,17 @@ public class MultiGeometryType extends AbstractGeometricAggregateType
         }
         return this.geometryMember;
     }
-
+    
+    @Override
+    public void addGeometryMember(GeometryProperty geometryProperty) {
+        getGeometryMember().add((GeometryPropertyType) geometryProperty);
+    }
+    
     @Override
     public boolean isSetGeometryMember() {
         return ((this.geometryMember != null) && (!this.geometryMember.isEmpty()));
     }
-
+    
     public void unsetGeometryMember() {
         this.geometryMember = null;
     }
@@ -108,12 +114,12 @@ public class MultiGeometryType extends AbstractGeometricAggregateType
     public void setGeometryMembers(GeometryArrayPropertyType value) {
         this.geometryMembers = value;
     }
-
+    
     @Override
     public boolean isSetGeometryMembers() {
         return (this.geometryMembers != null);
     }
-
+    
     @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
@@ -121,7 +127,7 @@ public class MultiGeometryType extends AbstractGeometricAggregateType
         append(null, buffer, strategy);
         return buffer.toString();
     }
-
+    
     @Override
     public StringBuilder append(ObjectLocator locator,
             StringBuilder buffer,
@@ -131,7 +137,7 @@ public class MultiGeometryType extends AbstractGeometricAggregateType
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
-
+    
     @Override
     public StringBuilder appendFields(ObjectLocator locator,
             StringBuilder buffer,
@@ -139,7 +145,8 @@ public class MultiGeometryType extends AbstractGeometricAggregateType
         super.appendFields(locator, buffer, strategy);
         {
             List<GeometryPropertyType> theGeometryMember;
-            theGeometryMember = (this.isSetGeometryMember() ? this.getGeometryMember() : null);
+            theGeometryMember = (this.isSetGeometryMember()
+                                 ? this.getGeometryMember() : null);
             strategy.appendField(locator, this, "geometryMember", buffer,
                     theGeometryMember);
         }
@@ -151,7 +158,7 @@ public class MultiGeometryType extends AbstractGeometricAggregateType
         }
         return buffer;
     }
-
+    
     public void setGeometryMember(List<GeometryPropertyType> value) {
         this.geometryMember = null;
         List<GeometryPropertyType> draftl = this.getGeometryMember();

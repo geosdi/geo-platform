@@ -47,7 +47,9 @@ public interface MultiPoint extends AbstractGeometricAggregate {
     boolean isSetPointMember();
 
     List<? extends PointProperty> getPointMember();
-
+    
+    void addPointMember(PointProperty pointProperty);
+    
     boolean isSetPointMembers();
 
     PointArrayProperty getPointMembers();

@@ -33,26 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.server.request.v110;
 
-import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import java.util.Arrays;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.AbstractTransactionRequest;
+import org.geosdi.geoplatform.connector.server.request.transaction.ITransactionOperationStrategy;
+import org.geosdi.geoplatform.connector.server.request.transaction.TransactionDelete;
+import org.geosdi.geoplatform.connector.server.request.transaction.TransactionInsert;
+import org.geosdi.geoplatform.connector.server.request.transaction.TransactionUpdate;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
+import org.geosdi.geoplatform.xml.wfs.v110.TransactionType;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSConnector {
+public class WFSTransactionRequestV110 extends AbstractTransactionRequest<TransactionResponseType> {
 
-    WFSVersion getVersion();
+    public WFSTransactionRequestV110(GPServerConnector server) {
+        super(server);
+    }
 
-    WFSGetCapabilitiesRequest createGetCapabilitiesRequest();
+    @Override
+    protected Object createRequest() throws IllegalParameterFault {
+        if (operation == null) {
+            throw new IllegalArgumentException("Transaction Operation must not be null.");
+        }
 
-    WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest();
+        ITransactionOperationStrategy operationStrategy;
+        switch (operation) {
+            case INSERT:
+                operationStrategy = new TransactionInsert();
+                break;
+            case UPDATE:
+                operationStrategy = new TransactionUpdate();
+                break;
+            case DELETE:
+                operationStrategy = new TransactionDelete();
+                break;
+            default:
+                operationStrategy = null;
+        }
 
-    WFSGetFeatureRequest createGetFeatureRequest();
+        Object elementType = operationStrategy.getOperation(this);
 
-    WFSTransactionRequest createTransactionRequest();
+        TransactionType request = new TransactionType();
+        request.setInsertOrUpdateOrDelete(Arrays.asList(elementType));
+
+        return request;
+    }
 }

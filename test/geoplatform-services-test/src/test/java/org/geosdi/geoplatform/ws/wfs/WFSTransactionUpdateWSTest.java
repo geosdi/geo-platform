@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.ws.wfs;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 import javax.xml.namespace.QName;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
@@ -49,60 +50,55 @@ import org.junit.Test;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSGetFeatureWSTest extends WFSAbstractTest {
+public class WFSTransactionUpdateWSTest extends WFSAbstractTest {
 
     private final static QName TOPP_STATES = new QName("http://www.openplans.org/topp", "topp:states");
 
     @Test
-    public void statesFeatureLayerV110() throws Exception {
+    public void multiUpdate() throws Exception {
         String typeName = TOPP_STATES.getLocalPart();
-        LayerSchemaDTO layerSchema = wfsService.describeFeatureType(addressDatastore, typeName);
-        logger.debug("\n\n\n@@@ {}", layerSchema);
-        BBox bBox = new BBox(-75.102613, 40.212597, -72.361859, 41.512517);
-
-        FeatureCollectionDTO fc = wfsService.getFeatureByBBox(layerSchema, bBox);
-
-        this.checkFeatureCollection(fc, typeName, 22, 4);
-    }
-
-    @Test
-    public void statesFeatureV110() throws Exception {
-        String typeName = TOPP_STATES.getLocalPart();
-        BBox bBox = new BBox(-75.102613, 40.212597, -72.361859, 41.512517);
-
-        FeatureCollectionDTO fc = wfsService.getFeatureByBBoxDirect(addressDatastore, typeName, bBox);
-
-        this.checkFeatureCollection(fc, typeName, 22, 4);
-    }
-
-    private void checkFeatureCollection(FeatureCollectionDTO fc,
-            String typeName, int numAttributes, int numFeatures) {
-        Assert.assertNotNull(fc);
-
-        Assert.assertNotNull(fc.getTimeStamp());
-        Assert.assertEquals(numFeatures, fc.getNumberOfFeatures());
-
-        String name = typeName.substring(typeName.indexOf(":") + 1);
-        List<FeatureDTO> features = fc.getFeatures();
-        Assert.assertNotNull(features);
-        Assert.assertEquals(numFeatures, features.size());
-        for (FeatureDTO feature : features) {
-            String fID = feature.getFID();
-            Assert.assertNotNull(fID);
-            Assert.assertTrue(fID.startsWith(name));
-
-            Assert.assertNotNull(feature.getGeometry());
-
-            Assert.assertNotNull(feature.getAttributes());
-            Map<String, String> fMap = feature.getAttributes().getAttributesMap();
-            Assert.assertNotNull(fMap);
-            Assert.assertEquals(numAttributes, fMap.size());
-            for (Map.Entry<String, String> e : fMap.entrySet()) {
-                String attName = e.getKey();
-                String attValue = e.getValue();
-                Assert.assertNotNull(attName);
-                Assert.assertNotNull(attValue);
+        LayerSchemaDTO describeFeatureType = wfsService.describeFeatureType(addressDatastore, typeName);
+        AttributeDTO att1 = null, att2 = null;
+        for (AttributeDTO attribute : describeFeatureType.getAttributes()) {
+            if ("LAND_KM".equals(attribute.getName())) {
+                att1 = attribute;
+            } else if ("WATER_KM".equals(attribute.getName())) {
+                att2 = attribute;
             }
         }
+        Assert.assertNotNull(att1);
+        Assert.assertNotNull(att2);
+
+        BBox bbox = new BBox(-75.102613, 40.212597, -75.102613, 40.212597);
+        FeatureCollectionDTO featureCollection = wfsService.getFeatureByBBoxDirect(addressDatastore, typeName, bbox);
+        Assert.assertEquals(1, featureCollection.getNumberOfFeatures());
+        Assert.assertNotNull(featureCollection.getFeatures());
+
+        FeatureDTO feature = featureCollection.getFeatures().get(0);
+        Assert.assertNotNull(feature);
+        Assert.assertNotNull(feature.getFID());
+
+        Map<String, String> attributesMap = feature.getAttributes().getAttributesMap();
+        String val1 = attributesMap.get(att1.getName());
+        double d1 = Double.valueOf(val1) + 0.001;
+        att1.setValue(Double.toString(d1));
+        String val2 = attributesMap.get(att2.getName());
+        double d2 = Double.valueOf(val2) + 0.001;
+        att2.setValue(Double.toString(d2));
+        logger.info("\n\n*** val1: from {} to {}\n*** val2: from {} to {}\n\n",
+                    val1, att1.getValue(), val2, att2.getValue());
+
+        boolean updated = wfsService.transactionUpdate(addressDatastore, typeName,
+                                                       feature.getFID(), Arrays.asList(att1, att2));
+        Assert.assertTrue(updated);
+
+        feature = wfsService.getFeatureByFIDDirect(addressDatastore, typeName, feature.getFID());
+        Assert.assertNotNull(feature);
+        Assert.assertNotNull(feature.getFID());
+        attributesMap = feature.getAttributes().getAttributesMap();
+        val1 = attributesMap.get(att1.getName());
+        Assert.assertEquals(Double.toString(d1), val1);
+        val2 = attributesMap.get(att2.getName());
+        Assert.assertEquals(Double.toString(d2), val2);
     }
 }

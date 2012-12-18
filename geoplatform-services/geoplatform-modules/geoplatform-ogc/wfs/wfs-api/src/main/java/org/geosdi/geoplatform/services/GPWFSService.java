@@ -35,13 +35,15 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.List;
 import javax.jws.WebParam;
-import javax.jws.WebResult;
 import javax.jws.WebService;
 import org.codehaus.jra.Get;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
@@ -57,24 +59,42 @@ import org.geosdi.geoplatform.gui.shared.bean.BBox;
 public interface GPWFSService {
 
     @Get
-    @WebResult(name = "DescribeFeatureType")
     LayerSchemaDTO describeFeatureType(
             @WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Get
-    @WebResult(name = "GetFeature")
-    FeatureCollectionDTO getFeature(
+    FeatureDTO getFeatureByFIDDirect(
+            @WebParam(name = "serverURL") String serverURL,
+            @WebParam(name = "typeName") String typeName,
+            @WebParam(name = "fid") String fid)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Get
+    FeatureDTO getFeatureByFID(
+            @WebParam(name = "layerSchema") LayerSchemaDTO layerSchema,
+            @WebParam(name = "fid") String fid)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Get
+    FeatureCollectionDTO getFeatureByBBoxDirect(
             @WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName,
             @WebParam(name = "bBox") BBox bBox)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Get
-    @WebResult(name = "GetFeature")
-    FeatureCollectionDTO getFeatureFromLayerSchema(
+    FeatureCollectionDTO getFeatureByBBox(
             @WebParam(name = "layerSchema") LayerSchemaDTO layerSchema,
             @WebParam(name = "bBox") BBox bBox)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Get
+    boolean transactionUpdate(
+            @WebParam(name = "serverURL") String serverURL,
+            @WebParam(name = "typeName") String typeName,
+            @WebParam(name = "fid") String fid,
+            @WebParam(name = "attributes") List<AttributeDTO> attributes)
             throws ResourceNotFoundFault, IllegalParameterFault;
 }

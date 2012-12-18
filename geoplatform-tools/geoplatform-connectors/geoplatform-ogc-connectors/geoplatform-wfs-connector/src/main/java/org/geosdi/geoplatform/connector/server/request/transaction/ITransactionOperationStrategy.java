@@ -33,26 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.server.request.transaction;
 
-import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSConnector {
+public interface ITransactionOperationStrategy {
 
-    WFSVersion getVersion();
-
-    WFSGetCapabilitiesRequest createGetCapabilitiesRequest();
-
-    WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest();
-
-    WFSGetFeatureRequest createGetFeatureRequest();
-
-    WFSTransactionRequest createTransactionRequest();
+    Object getOperation(WFSTransactionRequest request)
+            throws IllegalParameterFault;
 }

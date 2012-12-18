@@ -79,7 +79,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     private GPEventBus bus;
     //
-    private String featureID;
     private List<AttributeDetail> attributes;
     //
     private ListStore<AttributeDetail> store;
@@ -101,11 +100,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.featureCRUDProtocol = theFeatureCRUDProtocol;
 
         this.bus.addHandler(FeatureAttributeValuesHandler.TYPE, this);
-    }
-
-    public void setFeatureID(String featureID) {
-        assert (featureID != null) : "FeatureID must not be null.";
-        this.featureID = featureID;
     }
 
     public void setAttributes(List<AttributeDetail> attributes) {
@@ -206,23 +200,23 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         super.setButtonAlign(Style.HorizontalAlignment.CENTER);
 
         resetButton = new Button("Reset", BasicWidgetResources.ICONS.delete(),
-                new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        grid.stopEditing(true);
-                        store.rejectChanges();
-                        disableButtons();
-                    }
-                });
+                                 new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                grid.stopEditing(true);
+                store.rejectChanges();
+                disableButtons();
+            }
+        });
         super.addButton(resetButton);
 
         this.saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
-                new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        saveAttributes();
-                    }
-                });
+                                     new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                saveAttributes();
+            }
+        });
         super.addButton(saveButton);
         this.disableButtons();
     }

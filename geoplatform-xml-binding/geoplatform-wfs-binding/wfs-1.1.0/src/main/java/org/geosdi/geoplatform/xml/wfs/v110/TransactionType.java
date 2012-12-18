@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -56,6 +57,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * 
  * 
  */
+@XmlRootElement(name = "Transaction")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransactionType", propOrder = {
     "lockId",

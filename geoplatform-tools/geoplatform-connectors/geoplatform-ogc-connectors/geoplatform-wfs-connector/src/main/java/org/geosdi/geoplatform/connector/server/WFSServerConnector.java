@@ -41,9 +41,11 @@ import org.geosdi.geoplatform.connector.WFSVersionException;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSDescribeFeatureTypeRequestV110;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSGetCapabilitiesRequestV110;
 import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequestV110;
+import org.geosdi.geoplatform.connector.server.request.v110.WFSTransactionRequestV110;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
@@ -55,22 +57,19 @@ public class WFSServerConnector extends GPAbstractServerConnector {
     private WFSVersion version;
 
     /**
-     * <p> Create an Instance of {@link WFSServerConnector} with the server URL
-     * and the specific version.
-     * <p/>
+     * <p>Create an Instance of {@link WFSServerConnector} with the server URL
+     * and the specific version.</p>
      *
      * @param urlServer the String that represent WFS server URL
      * @param version the value of WFS version. Must be 1.1.0
      */
-    public WFSServerConnector(String urlServer,
-            String version) {
+    public WFSServerConnector(String urlServer, String version) {
         this(urlServer, null, version);
     }
 
     /**
-     * <p> Create an instance of {@link WFSServerConnector} with the server URL,
-     * {@link GPSecurityConnector} for security and version.
-     * <p/>
+     * <p>Create an instance of {@link WFSServerConnector} with the server URL,
+     * {@link GPSecurityConnector} for security and version.</p>
      *
      * @param urlServer the String that represent WFS server URL
      * @param securityConnector {@link GPSecurityConnector}
@@ -79,15 +78,13 @@ public class WFSServerConnector extends GPAbstractServerConnector {
     public WFSServerConnector(String urlServer,
             GPSecurityConnector securityConnector,
             String version) {
-        this(analyzesServerURL(urlServer), securityConnector, toWFSVersion(
-                version));
+        this(analyzesServerURL(urlServer), securityConnector, toWFSVersion(version));
     }
 
     /**
-     * <p> Create an instance of {@link WFSServerConnector} with the {@link URL}
+     * <p>Create an instance of {@link WFSServerConnector} with the {@link URL}
      * server UR:, {@link GPSecurityConnector} security context and
-     * {@link WFSVersion} WFS version.
-     * <p/>
+     * {@link WFSVersion} WFS version.</p>
      *
      * @param server {@link URL} server URL
      * @param securityConnector {@link GPSecurityConnector}
@@ -101,8 +98,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
     }
 
     /**
-     * <p> Create WFSGetCapabilitiesRequest request.
-     * <p/>
+     * <p>Create a WFSGetCapabilitiesRequest request.</p>
      *
      * @return {@link WFSGetCapabilitiesRequest}
      */
@@ -117,8 +113,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
     }
 
     /**
-     * <p> Create WFSDescribeFeatureTypeRequest request.
-     * <p/>
+     * <p>Create a WFSDescribeFeatureTypeRequest request.</p>
      *
      * @return {@link WFSDescribeFeatureTypeRequest}
      */
@@ -133,8 +128,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
     }
 
     /**
-     * <p> Create WFSGetFeatureRequest request.
-     * <p/>
+     * <p>Create a WFSGetFeatureRequest request.</p>
      *
      * @return {@link WFSGetFeatureRequest}
      */
@@ -149,6 +143,21 @@ public class WFSServerConnector extends GPAbstractServerConnector {
     }
 
     /**
+     * <p>Create a WFSTransaction request.</p>
+     *
+     * @return {@link WFSTransaction}
+     */
+    public WFSTransactionRequest createTransactionRequest() {
+        switch (version) {
+            case V110:
+                return new WFSTransactionRequestV110(this);
+            default:
+                throw new WFSVersionException(
+                        "The version for WFS must be 1.1.0");
+        }
+    }
+
+    /**
      * @return the version
      */
     public WFSVersion getVersion() {
@@ -156,15 +165,14 @@ public class WFSServerConnector extends GPAbstractServerConnector {
     }
 
     /**
-     * <p> Method that convert String version in {@link WFSVersion} instance
-     * </p>
+     * <p>Method that convert String version in {@link WFSVersion} instance.</p>
      *
      * @param version
      *
      * @return {@link WFSVersion}
      */
     private static WFSVersion toWFSVersion(String version) {
-        if (!version.equalsIgnoreCase("1.1.0")) {
+        if (!version.equals("1.1.0")) {
             throw new WFSVersionException("WFS version must be 1.1.0");
         }
         return WFSVersion.V110;

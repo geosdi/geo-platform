@@ -33,26 +33,79 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.server.request;
 
-import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import java.util.List;
+import javax.xml.namespace.QName;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 
 /**
+ * WFS Transaction compose of a single operation.
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSConnector {
+public interface WFSTransactionRequest<T> extends GPConnectorRequest<T> {
 
-    WFSVersion getVersion();
+    /**
+     * Gets the value of the transaction operation.
+     */
+    TransactionOperation getOperation();
 
-    WFSGetCapabilitiesRequest createGetCapabilitiesRequest();
+    /**
+     * Sets the value of the transaction operation.
+     */
+    void setOperation(TransactionOperation operation);
 
-    WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest();
+    /**
+     * Gets the value of the type name query property.
+     */
+    QName getTypeName();
 
-    WFSGetFeatureRequest createGetFeatureRequest();
+    /**
+     * Sets the value of the type name query property.
+     */
+    void setTypeName(QName typeName);
 
-    WFSTransactionRequest createTransactionRequest();
+    /**
+     * Gets the value of the SRS query property.
+     */
+    String getSRS();
+
+    /**
+     * Sets the value of the SRS query property.
+     */
+    void setSRS(String srs);
+
+    /**
+     * Gets the value of the inputFormat property.
+     */
+    String getInputFormat();
+
+    /**
+     * Sets the value of the inputFormat property.
+     *
+     * <p>Default value is "x-application/gml:3".</p>
+     */
+    void setInputFormat(String inputFormat);
+
+    /**
+     * Gets the value of the feature ID property.
+     */
+    String getFID();
+
+    /**
+     * Sets the value of the feature ID property.
+     */
+    void setFID(String fid);
+
+    /**
+     * Gets the value of the attributes property.
+     */
+    List<AttributeDTO> getAttributes();
+
+    /**
+     * Sets the values of the attributes property.
+     */
+    void setAttributes(List<AttributeDTO> attributes);
 }

@@ -33,26 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
-
-import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+package org.geosdi.geoplatform.gui.shared.wfs;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSConnector {
+public enum TransactionOperation {
 
-    WFSVersion getVersion();
-
-    WFSGetCapabilitiesRequest createGetCapabilitiesRequest();
-
-    WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest();
-
-    WFSGetFeatureRequest createGetFeatureRequest();
-
-    WFSTransactionRequest createTransactionRequest();
+    INSERT, UPDATE, DELETE;
 }

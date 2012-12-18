@@ -124,8 +124,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
 
                     super.goToEndTag(geometryName);
 
-                    FeatureAttributesMap attributes = this.readAttributes(name,
-                            attributeNames);
+                    FeatureAttributesMap attributes = this.readAttributes(name, attributeNames);
                     feature.setAttributes(attributes);
                 }
             }
@@ -151,8 +150,7 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
     }
 
     private FeatureDTO readFID() {
-        String featureID = reader.getAttributeValue("http://www.opengis.net/gml",
-                "id");
+        String featureID = reader.getAttributeValue("http://www.opengis.net/gml", "id");
         logger.debug("\n\n@@@ FEATURE_ID: {} @@@", featureID);
 
         FeatureDTO feature = new FeatureDTO(featureID);

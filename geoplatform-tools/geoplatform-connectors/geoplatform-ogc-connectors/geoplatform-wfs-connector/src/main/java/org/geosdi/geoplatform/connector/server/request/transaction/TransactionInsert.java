@@ -33,26 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.server.request.transaction;
 
-import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.xml.wfs.v110.InsertElementType;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSConnector {
+public class TransactionInsert implements ITransactionOperationStrategy {
 
-    WFSVersion getVersion();
+    @Override
+    public Object getOperation(WFSTransactionRequest request)
+            throws IllegalParameterFault {
+        InsertElementType elementType = new InsertElementType();
 
-    WFSGetCapabilitiesRequest createGetCapabilitiesRequest();
+        if (request.getSRS() != null) {
+            elementType.setSrsName(request.getSRS());
+        }
 
-    WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest();
+        elementType.setInputFormat(request.getInputFormat() != null
+                ? request.getInputFormat() : "x-application/gml:3");
 
-    WFSGetFeatureRequest createGetFeatureRequest();
-
-    WFSTransactionRequest createTransactionRequest();
+        return elementType;
+    }
 }

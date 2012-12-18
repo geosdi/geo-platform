@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.services.feature;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
@@ -47,6 +48,9 @@ import org.geosdi.geoplatform.gui.shared.bean.BBox;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GetFeaureService {
+
+    FeatureDTO getFeature(LayerSchemaDTO layerSchema, String fid)
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
     FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, BBox bBox)
             throws ResourceNotFoundFault, IllegalParameterFault;

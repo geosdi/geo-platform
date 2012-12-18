@@ -35,14 +35,18 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.services.feature.DescribeFeatureService;
 import org.geosdi.geoplatform.services.feature.GetFeaureService;
+import org.geosdi.geoplatform.services.feature.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -62,6 +66,9 @@ public class GPWFSServiceImpl implements GPWFSService {
     //
     @Autowired
     private GetFeaureService gpGetFeatureService;
+    //
+    @Autowired
+    private TransactionService gpTransactionService;
 
     @Override
     public LayerSchemaDTO describeFeatureType(String serverURL, String typeName)
@@ -71,17 +78,40 @@ public class GPWFSServiceImpl implements GPWFSService {
     }
 
     @Override
-    public FeatureCollectionDTO getFeature(String serverURL, String typeName, BBox bBox)
+    public FeatureDTO getFeatureByFIDDirect(String serverURL, String typeName, String fid)
             throws ResourceNotFoundFault, IllegalParameterFault {
 
         LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName);
-        return this.getFeatureFromLayerSchema(layerSchema, bBox);
+        return this.getFeatureByFID(layerSchema, fid);
     }
 
     @Override
-    public FeatureCollectionDTO getFeatureFromLayerSchema(LayerSchemaDTO layerSchema, BBox bBox)
+    public FeatureDTO getFeatureByFID(LayerSchemaDTO layerSchema, String fid)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+
+        return gpGetFeatureService.getFeature(layerSchema, fid);
+    }
+
+    @Override
+    public FeatureCollectionDTO getFeatureByBBoxDirect(String serverURL, String typeName, BBox bBox)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+
+        LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName);
+        return this.getFeatureByBBox(layerSchema, bBox);
+    }
+
+    @Override
+    public FeatureCollectionDTO getFeatureByBBox(LayerSchemaDTO layerSchema, BBox bBox)
             throws ResourceNotFoundFault, IllegalParameterFault {
 
         return gpGetFeatureService.getFeature(layerSchema, bBox);
+    }
+
+    @Override
+    public boolean transactionUpdate(String serverURL, String typeName,
+            String fid, List<AttributeDTO> attributes)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+
+        return gpTransactionService.transactionUpdate(serverURL, typeName, fid, attributes);
     }
 }

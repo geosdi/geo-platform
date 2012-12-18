@@ -33,26 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.services.feature;
 
-import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import java.util.List;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSConnector {
+public interface TransactionService {
 
-    WFSVersion getVersion();
-
-    WFSGetCapabilitiesRequest createGetCapabilitiesRequest();
-
-    WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest();
-
-    WFSGetFeatureRequest createGetFeatureRequest();
-
-    WFSTransactionRequest createTransactionRequest();
+    boolean transactionUpdate(String serverURL, String typeName,
+            String fid, List<AttributeDTO> attributes)
+            throws ResourceNotFoundFault, IllegalParameterFault;
 }

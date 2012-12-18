@@ -58,6 +58,7 @@
             level="info"/>
     
     <logger name="org.geosdi.geoplatform.feature.reader.WFSGetFeatureStaxReader" level="info"/>
+    <logger name="org.geosdi.geoplatform.services.feature.GPTransactionService" level="info"/>
     
     <!-- DAOs -->
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>

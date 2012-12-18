@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.services.feature;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import org.geosdi.geoplatform.connector.GPWFSConnector;
@@ -47,6 +49,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
@@ -62,10 +65,34 @@ public class GPGetFeatureService extends AbstractFeatureService
         implements GetFeaureService {
 
     @Override
+    public FeatureDTO getFeature(LayerSchemaDTO layerSchema, String fid)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        assert (fid != null);
+
+        WFSGetFeatureRequest request = this.createRequest(layerSchema);
+        request.setFeatureIDs(Arrays.asList(fid));
+
+        FeatureCollectionDTO featureCollection = this.getFeatureCollection(request, layerSchema);
+        List<FeatureDTO> features = featureCollection.getFeatures();
+        assert (features != null);
+        assert (features.size() == 1);
+        return features.get(0);
+    }
+
+    @Override
     public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, BBox bBox)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        assert (layerSchema != null);
         assert (bBox != null);
+
+        WFSGetFeatureRequest request = this.createRequest(layerSchema);
+        request.setBBox(bBox);
+
+        return this.getFeatureCollection(request, layerSchema);
+    }
+
+    private WFSGetFeatureRequest createRequest(LayerSchemaDTO layerSchema)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        assert (layerSchema != null);
 
         String typeName = layerSchema.getTypeName();
         assert (typeName != null);
@@ -84,21 +111,25 @@ public class GPGetFeatureService extends AbstractFeatureService
                     + wfsConfigurator.getDefaultWFSDataSource());
         }
 
+        GPWFSConnector serverConnector = super.createWFSConnector(serverURL);
+        WFSGetFeatureRequest request = serverConnector.createGetFeatureRequest();
+
+        QName qName = new QName(typeName);
+        request.setTypeName(qName);
+        request.setSRS("EPSG:4326");
+        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setMaxFeatures(BigInteger.valueOf(1000L)); // TODO pass it as argument?
+
+        return request;
+    }
+
+    private FeatureCollectionDTO getFeatureCollection(WFSGetFeatureRequest request, LayerSchemaDTO layerSchema)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         FeatureCollectionDTO featureCollection = null;
         try {
-            GPWFSConnector serverConnector = super.createWFSConnector(serverURL);
-            WFSGetFeatureRequest request = serverConnector.createGetFeatureRequest();
-
-            QName qName = new QName(typeName);
-            request.setTypeName(qName);
-            request.setBBox(bBox);
-            request.setSRS("EPSG:4326");
-            request.setResultType(ResultTypeType.RESULTS.value());
-            request.setMaxFeatures(BigInteger.valueOf(1000L)); // TODO pass it as argument?
-
             InputStream is = request.getResponseAsStream();
             if (is == null) { // TODO check if the is can be null
-                logger.error("\n### The layer \"{}\" isn't a feature ###", typeName);
+                logger.error("\n### The layer \"{}\" isn't a feature ###", layerSchema.getTypeName());
             }
 
             final WFSGetFeatureStaxReader featureReaderStAX =

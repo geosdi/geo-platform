@@ -33,26 +33,54 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.wfs;
 
-import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import java.util.Arrays;
+import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
+import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
+import org.geosdi.geoplatform.xml.wfs.v110.TransactionSummaryType;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface WFSConnector {
+//@Category(WFSTest.class)
+public class WFSTransactionUpdateTest extends WFSTestConfigurator {
 
-    WFSVersion getVersion();
+    @Test
+    public void polyLandmarks() throws Exception {
+        WFSTransactionRequest<TransactionResponseType> request =
+                super.serverConnector.createTransactionRequest();
 
-    WFSGetCapabilitiesRequest createGetCapabilitiesRequest();
+        request.setOperation(TransactionOperation.UPDATE);
 
-    WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest();
+        QName name = new QName("tiger:poly_landmarks");
+        request.setTypeName(name);
 
-    WFSGetFeatureRequest createGetFeatureRequest();
+        request.setFID("poly_landmarks.1");
 
-    WFSTransactionRequest createTransactionRequest();
+        AttributeDTO att = new AttributeDTO();
+        att.setMaxOccurs(1);
+        att.setMinOccurs(0);
+        att.setName("LANAME");
+        att.setNillable(true);
+        att.setType("string");
+        att.setValue("Washington Square Park MOD");
+        request.setAttributes(Arrays.asList(att));
+
+        TransactionResponseType response = request.getResponse();
+        logger.info("\n*** {}", response.getTransactionResults());
+
+        TransactionSummaryType transactionSummary = response.getTransactionSummary();
+        Assert.assertEquals(0, transactionSummary.getTotalDeleted().intValue());
+        Assert.assertEquals(0, transactionSummary.getTotalInserted().intValue());
+        Assert.assertEquals(1, transactionSummary.getTotalUpdated().intValue());
+        Assert.assertEquals("1.1.0", response.getVersion());
+
+    }
 }

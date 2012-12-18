@@ -33,14 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.parameter;
+package org.geosdi.geoplatform.gml.api.parser.jts;
+
+import com.vividsolutions.jts.geom.Geometry;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.PropertyType;
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface BaseParameterValue<V> {
+public interface JTSParser<A extends AbstractGeometry, P extends PropertyType, G extends Geometry> extends JAXBElementBuilder<G> {
 
-    V getValue();
+    A parseGeometry(G jtsGeometry) throws ParserException;
+
+    P parseProperty(G jtsGeometry) throws ParserException;
 }

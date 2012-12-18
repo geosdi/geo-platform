@@ -45,4 +45,6 @@ public interface LineStringProperty extends PropertyType {
     boolean isSetLineString();
 
     LineString getLineString();
+    
+    void setLineString(LineString value);
 }

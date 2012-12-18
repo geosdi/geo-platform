@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.Point;
 import org.geosdi.geoplatform.gml.api.PointProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -92,8 +93,9 @@ public class PointPropertyType implements ToString, PointProperty {
      * @param value allowed object is {@link PointType }
      *
      */
-    public void setPoint(PointType value) {
-        this.point = value;
+    @Override
+    public void setPoint(Point value) {
+        this.point = (PointType) value;
     }
 
     @Override

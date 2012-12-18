@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
 
 /**
@@ -43,7 +44,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSexta
  * @email giuseppe.lascaleia@geosdi.org
  */
 class SextanteParserParameter implements
-        BaseParameterValue<GMLBaseSextanteParser> {
+        ParameterValue<GMLBaseSextanteParser> {
 
     private GMLBaseSextanteParser sextanteParser;
 

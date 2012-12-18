@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api;
 
 import java.util.List;
+import javax.xml.bind.JAXBElement;
 
 /**
  *
@@ -47,8 +48,12 @@ public interface Polygon extends AbstractGeometry {
     boolean isSetExterior();
 
     AbstractRingProperty getExteriorValue();
+    
+    void setExteriorValue(JAXBElement<? extends AbstractRingProperty> value);
 
     boolean isSetInterior();
 
     List<AbstractRingProperty> getInteriorValues();
+    
+    void addInteriorValue(JAXBElement<? extends AbstractRingProperty> value);
 }

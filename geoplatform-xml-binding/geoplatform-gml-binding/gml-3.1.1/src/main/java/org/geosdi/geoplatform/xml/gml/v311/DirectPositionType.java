@@ -87,6 +87,7 @@ public class DirectPositionType implements ToString, DirectPosition {
      *
      *
      */
+    @Override
     public List<Double> getValue() {
         if (value == null) {
             value = new ArrayList<Double>();

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 
 /**
  *
@@ -43,7 +44,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
  * @email giuseppe.lascaleia@geosdi.org
  */
 class GeometryFactoryParameter implements
-        BaseParameterValue<GeometryFactory> {
+        ParameterValue<GeometryFactory> {
 
     private GeometryFactory geometryFactory;
 

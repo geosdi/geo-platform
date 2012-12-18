@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.geometry.GMLBaseMultiGeometryParser;
 
 /**
@@ -43,7 +44,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.geometry.GMLBas
  * @email giuseppe.lascaleia@geosdi.org
  */
 class MultiGeometryParserParameter implements
-        BaseParameterValue<GMLBaseMultiGeometryParser> {
+        ParameterValue<GMLBaseMultiGeometryParser> {
 
     private GMLBaseMultiGeometryParser multiGeometryParser;
 

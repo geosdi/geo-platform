@@ -47,4 +47,6 @@ public interface MultiPolygon extends AbstractGeometricAggregate {
     boolean isSetPolygonMember();
 
     List<? extends PolygonProperty> getPolygonMember();
+    
+    void addPolygonMember(PolygonProperty polygonProperty);
 }

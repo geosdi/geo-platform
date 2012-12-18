@@ -47,4 +47,6 @@ public interface MultiLineString extends AbstractGeometricAggregate {
     boolean isSetLineStringMember();
 
     List<? extends LineStringProperty> getLineStringMember();
+    
+    void addLineStringMember(LineStringProperty lineStringProperty);
 }

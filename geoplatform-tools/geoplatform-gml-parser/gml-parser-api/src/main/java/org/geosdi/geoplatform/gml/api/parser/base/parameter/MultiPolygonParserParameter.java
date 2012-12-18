@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.polygon.GMLBaseMultiPolygonParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.GMLBasePolygonParser;
@@ -46,17 +47,17 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.polygon.GMLBasePolygo
  * @email giuseppe.lascaleia@geosdi.org
  */
 class MultiPolygonParserParameter implements
-        BaseParameterValue<GMLBaseMultiPolygonParser> {
+        ParameterValue<GMLBaseMultiPolygonParser> {
 
     private GMLBaseMultiPolygonParser multiPolygonParser;
-    private BaseParameterValue<GeometryFactory> geometryParameter;
-    private BaseParameterValue<DefaultSRSBaseParser> srsParameter;
-    private BaseParameterValue<GMLBasePolygonParser> polygonParameter;
+    private ParameterValue<GeometryFactory> geometryParameter;
+    private ParameterValue<DefaultSRSBaseParser> srsParameter;
+    private ParameterValue<GMLBasePolygonParser> polygonParameter;
 
     public MultiPolygonParserParameter(
-            BaseParameterValue<GeometryFactory> geometryParameter,
-            BaseParameterValue<DefaultSRSBaseParser> srsParameter,
-            BaseParameterValue<GMLBasePolygonParser> polygonParameter) {
+            ParameterValue<GeometryFactory> geometryParameter,
+            ParameterValue<DefaultSRSBaseParser> srsParameter,
+            ParameterValue<GMLBasePolygonParser> polygonParameter) {
         this.geometryParameter = geometryParameter;
         this.srsParameter = srsParameter;
         this.polygonParameter = polygonParameter;

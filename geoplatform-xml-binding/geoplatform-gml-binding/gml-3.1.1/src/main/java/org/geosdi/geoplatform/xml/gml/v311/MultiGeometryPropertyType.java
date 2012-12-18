@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
+import org.geosdi.geoplatform.gml.api.MultiGeometry;
 import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -53,7 +54,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class MultiGeometryPropertyType implements ToString,
         MultiGeometryProperty {
-
+    
     @XmlElementRef(name = "_GeometricAggregate",
                    namespace = "http://www.opengis.net/gml",
                    type = JAXBElement.class)
@@ -83,7 +84,7 @@ public class MultiGeometryPropertyType implements ToString,
     /**
      * Gets the value of the geometricAggregate property.
      *
-     * @return possible object is null null     {@link JAXBElement }{@code <}{@link MultiSurfaceType }{@code >}
+     * @return possible object is null null null null     {@link JAXBElement }{@code <}{@link MultiSurfaceType }{@code >}
      *     {@link JAXBElement }{@code <}{@link MultiPolygonType }{@code >}
      *     {@link JAXBElement }{@code <}{@link MultiGeometryType }{@code >}
      *     {@link JAXBElement }{@code <}{@link MultiSolidType }{@code >}
@@ -114,15 +115,21 @@ public class MultiGeometryPropertyType implements ToString,
             JAXBElement<? extends AbstractGeometricAggregateType> value) {
         this.geometricAggregate = value;
     }
-
+    
     @Override
     public boolean isSetGeometricAggregate() {
         return (this.geometricAggregate != null);
     }
-
+    
     @Override
     public AbstractGeometricAggregate getAbstractGeometricAggregate() {
         return isSetGeometricAggregate() ? geometricAggregate.getValue() : null;
+    }
+    
+    @Override
+    public void setAbstractGeometricAggregate(
+            JAXBElement<? extends MultiGeometry> value) {
+        this.geometricAggregate = (JAXBElement<? extends AbstractGeometricAggregateType>) value;
     }
 
     /**
@@ -144,7 +151,7 @@ public class MultiGeometryPropertyType implements ToString,
     public void setRemoteSchema(String value) {
         this.remoteSchema = value;
     }
-
+    
     public boolean isSetRemoteSchema() {
         return (this.remoteSchema != null);
     }
@@ -172,7 +179,7 @@ public class MultiGeometryPropertyType implements ToString,
     public void setType(String value) {
         this.type = value;
     }
-
+    
     public boolean isSetType() {
         return (this.type != null);
     }
@@ -196,7 +203,7 @@ public class MultiGeometryPropertyType implements ToString,
     public void setHref(String value) {
         this.href = value;
     }
-
+    
     public boolean isSetHref() {
         return (this.href != null);
     }
@@ -220,7 +227,7 @@ public class MultiGeometryPropertyType implements ToString,
     public void setRole(String value) {
         this.role = value;
     }
-
+    
     public boolean isSetRole() {
         return (this.role != null);
     }
@@ -244,7 +251,7 @@ public class MultiGeometryPropertyType implements ToString,
     public void setArcrole(String value) {
         this.arcrole = value;
     }
-
+    
     public boolean isSetArcrole() {
         return (this.arcrole != null);
     }
@@ -268,7 +275,7 @@ public class MultiGeometryPropertyType implements ToString,
     public void setTitle(String value) {
         this.title = value;
     }
-
+    
     public boolean isSetTitle() {
         return (this.title != null);
     }
@@ -292,7 +299,7 @@ public class MultiGeometryPropertyType implements ToString,
     public void setShow(String value) {
         this.show = value;
     }
-
+    
     public boolean isSetShow() {
         return (this.show != null);
     }
@@ -316,18 +323,18 @@ public class MultiGeometryPropertyType implements ToString,
     public void setActuate(String value) {
         this.actuate = value;
     }
-
+    
     public boolean isSetActuate() {
         return (this.actuate != null);
     }
-
+    
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
-
+    
     public StringBuilder append(ObjectLocator locator,
             StringBuilder buffer,
             ToStringStrategy strategy) {
@@ -336,7 +343,7 @@ public class MultiGeometryPropertyType implements ToString,
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
-
+    
     public StringBuilder appendFields(ObjectLocator locator,
             StringBuilder buffer,
             ToStringStrategy strategy) {

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.GMLCoordinateBaseParser;
 
@@ -44,7 +45,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.coordinate.GMLCoordinateBasePa
  * @email giuseppe.lascaleia@geosdi.org
  */
 class CoordinateParserParameter implements
-        BaseParameterValue<CoordinateBaseParser> {
+        ParameterValue<CoordinateBaseParser> {
 
     private CoordinateBaseParser coordinateParser;
 

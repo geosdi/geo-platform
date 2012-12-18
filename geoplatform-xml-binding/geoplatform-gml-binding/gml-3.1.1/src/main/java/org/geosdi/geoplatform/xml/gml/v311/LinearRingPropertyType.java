@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.LinearRing;
 import org.geosdi.geoplatform.gml.api.LinearRingProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -65,8 +66,9 @@ public class LinearRingPropertyType implements ToString, LinearRingProperty {
      * @param value allowed object is {@link LinearRingType }
      *
      */
-    public void setLinearRing(LinearRingType value) {
-        this.linearRing = value;
+    @Override
+    public void setLinearRing(LinearRing value) {
+        this.linearRing = (LinearRingType) value;
     }
 
     @Override

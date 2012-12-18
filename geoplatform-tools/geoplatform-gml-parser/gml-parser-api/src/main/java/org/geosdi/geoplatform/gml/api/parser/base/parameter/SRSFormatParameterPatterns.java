@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class SRSFormatParameterPatterns implements BaseParameterValue<String[]> {
+class SRSFormatParameterPatterns implements ParameterValue<String[]> {
 
     private String[] patterns = new String[]{"EPSG:{0,number,integer}",
         "urn:ogc:def:crs:EPSG::{0,number,#}",

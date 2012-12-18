@@ -45,4 +45,6 @@ public interface MultiPointProperty extends PropertyType {
     boolean isSetMultiPoint();
 
     MultiPoint getMultiPoint();
+
+    void setMultiPoint(MultiPoint value);
 }

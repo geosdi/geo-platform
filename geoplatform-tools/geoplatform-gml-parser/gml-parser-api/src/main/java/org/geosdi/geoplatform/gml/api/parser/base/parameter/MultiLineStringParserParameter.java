@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.GMLBaseLineStringParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
@@ -46,17 +47,17 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMul
  * @email giuseppe.lascaleia@geosdi.org
  */
 class MultiLineStringParserParameter implements
-        BaseParameterValue<GMLBaseMultiLineStringParser> {
+        ParameterValue<GMLBaseMultiLineStringParser> {
 
     private GMLBaseMultiLineStringParser multiLineStringParser;
-    private BaseParameterValue<GeometryFactory> geometryParameter;
-    private BaseParameterValue<DefaultSRSBaseParser> srsParameter;
-    private BaseParameterValue<GMLBaseLineStringParser> lineStringParameter;
+    private ParameterValue<GeometryFactory> geometryParameter;
+    private ParameterValue<DefaultSRSBaseParser> srsParameter;
+    private ParameterValue<GMLBaseLineStringParser> lineStringParameter;
 
     public MultiLineStringParserParameter(
-            BaseParameterValue<GeometryFactory> geometryParameter,
-            BaseParameterValue<DefaultSRSBaseParser> srsParameter,
-            BaseParameterValue<GMLBaseLineStringParser> lineStringParameter) {
+            ParameterValue<GeometryFactory> geometryParameter,
+            ParameterValue<DefaultSRSBaseParser> srsParameter,
+            ParameterValue<GMLBaseLineStringParser> lineStringParameter) {
         this.geometryParameter = geometryParameter;
         this.srsParameter = srsParameter;
         this.lineStringParameter = lineStringParameter;

@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api;
 
+import javax.xml.bind.JAXBElement;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -43,4 +45,6 @@ package org.geosdi.geoplatform.gml.api;
 public interface AbstractRingProperty extends PropertyType {
 
     AbstractRing getAbstractRing();
+    
+    void setRing(JAXBElement<? extends AbstractRing> value);
 }

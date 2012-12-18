@@ -45,4 +45,6 @@ public interface MultiLineStringProperty extends PropertyType {
     boolean isSetMultiLineString();
 
     MultiLineString getMultiLineString();
+    
+    void setMultiLineString(MultiLineString value);
 }

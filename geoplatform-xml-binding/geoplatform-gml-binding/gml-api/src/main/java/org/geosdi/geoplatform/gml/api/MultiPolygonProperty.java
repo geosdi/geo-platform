@@ -45,4 +45,6 @@ public interface MultiPolygonProperty extends PropertyType {
     boolean isSetMultiPolygon();
 
     MultiPolygon getMultiPolygon();
+    
+    void setMultiPolygon(MultiPolygon value);
 }

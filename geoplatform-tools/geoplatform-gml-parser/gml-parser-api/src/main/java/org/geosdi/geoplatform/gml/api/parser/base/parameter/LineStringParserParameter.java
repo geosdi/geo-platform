@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.GMLBaseLineStringParser;
@@ -47,19 +48,19 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointPar
  * @email giuseppe.lascaleia@geosdi.org
  */
 class LineStringParserParameter implements
-        BaseParameterValue<GMLBaseLineStringParser> {
+        ParameterValue<GMLBaseLineStringParser> {
 
     private GMLBaseLineStringParser lineStringParser;
-    private BaseParameterValue<GeometryFactory> geometryFactoryParameter;
-    private BaseParameterValue<DefaultSRSBaseParser> srsParameter;
-    private BaseParameterValue<CoordinateBaseParser> coordinateParameter;
-    private BaseParameterValue<GMLBasePointParser> pointParameter;
+    private ParameterValue<GeometryFactory> geometryFactoryParameter;
+    private ParameterValue<DefaultSRSBaseParser> srsParameter;
+    private ParameterValue<CoordinateBaseParser> coordinateParameter;
+    private ParameterValue<GMLBasePointParser> pointParameter;
 
     public LineStringParserParameter(
-            BaseParameterValue<GeometryFactory> geometryFactoryParameter,
-            BaseParameterValue<DefaultSRSBaseParser> srsParameter,
-            BaseParameterValue<CoordinateBaseParser> coordinateParameter,
-            BaseParameterValue<GMLBasePointParser> pointParameter) {
+            ParameterValue<GeometryFactory> geometryFactoryParameter,
+            ParameterValue<DefaultSRSBaseParser> srsParameter,
+            ParameterValue<CoordinateBaseParser> coordinateParameter,
+            ParameterValue<GMLBasePointParser> pointParameter) {
         this.geometryFactoryParameter = geometryFactoryParameter;
         this.srsParameter = srsParameter;
         this.coordinateParameter = coordinateParameter;

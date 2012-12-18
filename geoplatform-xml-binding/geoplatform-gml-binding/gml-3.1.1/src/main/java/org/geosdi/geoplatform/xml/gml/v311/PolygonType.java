@@ -64,7 +64,8 @@ public class PolygonType extends AbstractSurfaceType
     /**
      * Gets the value of the exterior property.
      *
-     * @return possible object is null null null null null     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
+     * @return possible object is null null null null null null null null null
+     * null null null null null     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
      *
      */
@@ -75,12 +76,22 @@ public class PolygonType extends AbstractSurfaceType
     /**
      * Sets the value of the exterior property.
      *
-     * @param value allowed object is null null null null null     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
+     * @param value allowed object is null null null null null null null null
+     * null null null null null null     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
      *     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
      *
      */
     public void setExterior(JAXBElement<AbstractRingPropertyType> value) {
         this.exterior = value;
+    }
+
+    @Override
+    public void setExteriorValue(
+            JAXBElement<? extends AbstractRingProperty> value) {
+        this.exterior = new JAXBElement<AbstractRingPropertyType>(
+                value.getName(),
+                (Class<AbstractRingPropertyType>) value.getDeclaredType(),
+                (AbstractRingPropertyType) value.getValue());
     }
 
     @Override
@@ -103,7 +114,7 @@ public class PolygonType extends AbstractSurfaceType
      *
      *
      * <p> Objects of the following type(s) are allowed in the list null null
-     * null null null     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
+     * null null null null null null null null null null null null     {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
      * {@link JAXBElement }{@code <}{@link AbstractRingPropertyType }{@code >}
      *
      *
@@ -113,6 +124,15 @@ public class PolygonType extends AbstractSurfaceType
             interior = new ArrayList<JAXBElement<AbstractRingPropertyType>>();
         }
         return this.interior;
+    }
+
+    @Override
+    public void addInteriorValue(
+            JAXBElement<? extends AbstractRingProperty> value) {
+        getInterior().add(new JAXBElement<AbstractRingPropertyType>(
+                value.getName(),
+                (Class<AbstractRingPropertyType>) value.getDeclaredType(),
+                (AbstractRingPropertyType) value.getValue()));
     }
 
     @Override

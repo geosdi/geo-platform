@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api;
 
+import javax.xml.bind.JAXBElement;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -45,4 +47,7 @@ public interface MultiGeometryProperty extends PropertyType {
     boolean isSetGeometricAggregate();
 
     AbstractGeometricAggregate getAbstractGeometricAggregate();
+
+    void setAbstractGeometricAggregate(
+            JAXBElement<? extends MultiGeometry> value);
 }

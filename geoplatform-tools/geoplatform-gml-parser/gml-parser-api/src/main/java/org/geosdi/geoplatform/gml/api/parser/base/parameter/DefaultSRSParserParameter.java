@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.parameter;
 
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
 import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
 
 /**
@@ -43,7 +44,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.DefaultSRSBaseParser;
  * @email giuseppe.lascaleia@geosdi.org
  */
 class DefaultSRSParserParameter implements
-        BaseParameterValue<DefaultSRSBaseParser> {
+        ParameterValue<DefaultSRSBaseParser> {
 
     private DefaultSRSBaseParser defaultSRSParser;
 

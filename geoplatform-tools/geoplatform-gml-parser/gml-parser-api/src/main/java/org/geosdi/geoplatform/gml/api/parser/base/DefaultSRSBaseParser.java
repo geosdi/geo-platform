@@ -41,6 +41,8 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -49,18 +51,20 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class DefaultSRSBaseParser extends AbstractGMLBaseSRSParser {
 
+    final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     public DefaultSRSBaseParser(String[] thePatterns) {
         super(thePatterns);
     }
 
     @Override
-    public void parseSRS(AbstractGeometry source,
-            Geometry target) throws ParserException, NullPointerException {
+    public void parseSRS(AbstractGeometry gmlGeometry,
+            Geometry jtsGeometry) throws ParserException, NullPointerException {
 
-        Preconditions.checkNotNull(source, "The Gml Geometry must not be null");
-        Preconditions.checkNotNull(target, "The JTS Geometry must not be null");
+        Preconditions.checkNotNull(gmlGeometry, "The Gml Geometry must not be null");
+        Preconditions.checkNotNull(jtsGeometry, "The JTS Geometry must not be null");
 
-        String srsName = source.getSrsName();
+        String srsName = gmlGeometry.getSrsName();
 
         if (srsName != null) {
             for (String pattern : patterns) {
@@ -68,24 +72,25 @@ public class DefaultSRSBaseParser extends AbstractGMLBaseSRSParser {
                     final MessageFormat format = new MessageFormat(pattern);
                     Object[] codearray = format.parse(srsName);
                     if (codearray.length > 0) {
-                        target.setSRID(((Number) codearray[0]).intValue());
-                        if (target.getUserData() == null) {
-                            target.setUserData(srsName);
+                        jtsGeometry.setSRID(((Number) codearray[0]).intValue());
+                        if (jtsGeometry.getUserData() == null) {
+                            jtsGeometry.setUserData(srsName);
                             return;
                         }
                     }
                 } catch (ParseException e) {
-                    // there is a problem with pattern so continue.
-                    continue;
+                    //only trace the ParserException and continues the cycle
+                    logger.trace("DefaultSRSBaseParser - Parser "
+                            + "Exception @@@@@@@@@@@@@@@@@ " + e);
                 }
             }
 
-            if (target.getUserData() != null) {
+            if (jtsGeometry.getUserData() != null) {
                 throw new ParserException(MessageFormat.format(
                         "Could not parse SRS name [{0}].",
                         srsName));
             } else {
-                target.setUserData(srsName);
+                jtsGeometry.setUserData(srsName);
             }
         }
 

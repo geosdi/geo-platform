@@ -57,19 +57,20 @@ public class GMLCoordinateBaseParser implements CoordinateBaseParser {
     public Coordinate parseCoordinate(DirectPosition directPosition) throws ParserException {
         List<Double> value = directPosition.getValue();
         int count = value.size();
-        if (count == 2) {
-            double x = value.get(0).doubleValue();
-            double y = value.get(1).doubleValue();
-            return new Coordinate(x, y);
-        } else if (count == 3) {
-            double x = value.get(0).doubleValue();
-            double y = value.get(1).doubleValue();
-            double z = value.get(2).doubleValue();
-            return new Coordinate(x, y, z);
 
-        } else {
-            throw new ParserException("Direct position type "
-                    + "is expected to have 2 or 3 items.");
+        switch (count) {
+            case 2:
+                double x2 = value.get(0).doubleValue();
+                double y2 = value.get(1).doubleValue();
+                return new Coordinate(x2, y2);
+            case 3:
+                double x3 = value.get(0).doubleValue();
+                double y3 = value.get(1).doubleValue();
+                double z3 = value.get(2).doubleValue();
+                return new Coordinate(x3, y3, z3);
+            default:
+                throw new ParserException("Direct position type "
+                        + "is expected to have 2 or 3 items.");
         }
     }
 
@@ -163,16 +164,17 @@ public class GMLCoordinateBaseParser implements CoordinateBaseParser {
             coordinateDouble[index] = parseCoordinate(coordinatesString[index],
                     decimalSeparator);
         }
-        if (coordinateDouble.length == 2) {
-            return new Coordinate(coordinateDouble[0],
-                    coordinateDouble[1]);
-        } else if (coordinateDouble.length == 3) {
-            return new Coordinate(coordinateDouble[0],
-                    coordinateDouble[1], coordinateDouble[2]);
 
-        } else {
-            throw new ParserException("We must have only two or "
-                    + "three coordinates.");
+        switch (coordinateDouble.length) {
+            case 2:
+                return new Coordinate(coordinateDouble[0],
+                        coordinateDouble[1]);
+            case 3:
+                return new Coordinate(coordinateDouble[0],
+                        coordinateDouble[1], coordinateDouble[2]);
+            default:
+                throw new ParserException("We must have only two or "
+                        + "three coordinates.");
         }
     }
 

@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.MultiLineString;
 import org.geosdi.geoplatform.gml.api.MultiLineStringProperty;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -94,8 +95,9 @@ public class MultiLineStringPropertyType implements ToString, MultiLineStringPro
      * @param value allowed object is {@link MultiLineStringType }
      *
      */
-    public void setMultiLineString(MultiLineStringType value) {
-        this.multiLineString = value;
+    @Override
+    public void setMultiLineString(MultiLineString value) {
+        this.multiLineString = (MultiLineStringType) value;
     }
 
     @Override

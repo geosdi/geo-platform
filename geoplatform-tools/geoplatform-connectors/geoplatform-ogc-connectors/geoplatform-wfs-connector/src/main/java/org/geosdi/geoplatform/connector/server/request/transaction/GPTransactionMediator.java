@@ -33,42 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v110;
+package org.geosdi.geoplatform.connector.server.request.transaction;
 
-import java.util.Arrays;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.AbstractTransactionRequest;
-import org.geosdi.geoplatform.connector.server.request.transaction.GPTransactionMediator;
-import org.geosdi.geoplatform.connector.server.request.transaction.ITransactionOperationStrategy;
-import org.geosdi.geoplatform.connector.server.request.transaction.TransactionDelete;
-import org.geosdi.geoplatform.connector.server.request.transaction.TransactionInsert;
-import org.geosdi.geoplatform.connector.server.request.transaction.TransactionUpdate;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
-import org.geosdi.geoplatform.xml.wfs.v110.TransactionType;
+import java.util.EnumMap;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSTransactionRequestV110 extends AbstractTransactionRequest<TransactionResponseType> {
+public class GPTransactionMediator {
 
-    public WFSTransactionRequestV110(GPServerConnector server) {
-        super(server);
+    private static GPTransactionMediator INSTANCE = new GPTransactionMediator();
+    private Map<TransactionOperation, ITransactionOperationStrategy> map;
+
+    private GPTransactionMediator() {
+        map = new EnumMap<TransactionOperation, ITransactionOperationStrategy>(TransactionOperation.class);
+        map.put(TransactionOperation.INSERT, new TransactionInsert());
+        map.put(TransactionOperation.UPDATE, new TransactionUpdate());
+        map.put(TransactionOperation.DELETE, new TransactionDelete());
     }
 
-    @Override
-    protected Object createRequest() throws IllegalParameterFault {
-        if (operation == null) {
-            throw new IllegalArgumentException("Transaction Operation must not be null.");
-        }
+    public static ITransactionOperationStrategy getStrategy(TransactionOperation operation) {
+        assert (operation != null);
 
-        ITransactionOperationStrategy operationStrategy = GPTransactionMediator.getStrategy(operation);
-        Object elementType = operationStrategy.getOperation(this);
+        ITransactionOperationStrategy operationStrategy = INSTANCE.map.get(operation);
+        assert (operationStrategy != null);
 
-        TransactionType request = new TransactionType();
-        request.setInsertOrUpdateOrDelete(Arrays.asList(elementType));
-
-        return request;
+        return operationStrategy;
     }
 }

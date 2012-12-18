@@ -46,19 +46,14 @@
     <logger name="org.geosdi.geoplatform.services.CSWServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.GPWFSServiceImpl" level="trace"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.services.FeatureReader" level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.feature.GPTransactionService" level="debug"/><!-- TODO info -->
     
-    <logger name="org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202"
-            level="info" />
-                
-    <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TextSearchRequest"
-            level="info"/>
-    <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.AreaSearchRequest"
-            level="info"/>
-    <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TimeSearchRequest"
-            level="info"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202" level="info"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TextSearchRequest" level="info"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.AreaSearchRequest" level="info"/>
+    <logger name="org.geosdi.geoplatform.connector.server.request.v202.responsibility.TimeSearchRequest" level="info"/>
     
     <logger name="org.geosdi.geoplatform.feature.reader.WFSGetFeatureStaxReader" level="info"/>
-    <logger name="org.geosdi.geoplatform.services.feature.GPTransactionService" level="info"/>
     
     <!-- DAOs -->
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>

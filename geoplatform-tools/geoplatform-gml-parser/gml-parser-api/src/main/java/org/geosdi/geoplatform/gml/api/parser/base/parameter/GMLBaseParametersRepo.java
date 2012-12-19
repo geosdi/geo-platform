@@ -60,7 +60,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSexta
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBaseParametersRepo {
+public final class GMLBaseParametersRepo {
 
     static {
         lookUpAllParameters();

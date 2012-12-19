@@ -75,7 +75,7 @@ public abstract class JTSSextanteHandler implements JAXBElementBuilder<Geometry>
                 + "parse JTS Geometry : " + geometry);
     }
 
-    protected abstract AbstractJTSParser acquireParser();
+    protected abstract <P extends AbstractJTSParser> P acquireParser();
 
     protected abstract boolean isCompatibleParser();
 

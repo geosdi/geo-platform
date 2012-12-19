@@ -33,25 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.jts.parameter;
+package org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.responsibility;
+
+import com.google.common.base.Preconditions;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.MultiPoint;
+import javax.xml.bind.JAXBElement;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.point.JTSMultiPointParser;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum JTSParameterEnum {
+public abstract class AbstractJTSSextanteMultiPointHandler extends JTSSextanteHandler {
 
-    DEFAULT_OBJECT_FACTORY,
-    DEFAULT_JTS_SRS_PARSER,
-    DEFAULT_JTS_COORDINATE_PARSER,
-    DEFAULT_JTS_POINT_PARSER,
-    DEFAULT_JTS_LINE_STRING_PARSER,
-    DEFAULT_JTS_LINEAR_RING_PARSER,
-    DEFAULT_JTS_POLYGON_PARSER,
-    DEFAULT_JTS_MULTI_POINT_PARSER,
-    DEFAULT_JTS_MULTI_LINE_PARSER,
-    DEFAULT_JTS_MULTI_POLYGON_PARSER,
-    DEFAULT_JTS_MULTI_GEOMETRY_PARSER,
-    DEFAULT_JTS_SEXTANTE_PARSER;
+    @Override
+    public AbstractGeometry parseGeometry(Geometry geometry) throws ParserException {
+        Preconditions.checkArgument(isCompatibleParser(), "The JTS Parser is "
+                + "not compatible. The parser must be an instance of "
+                + "JTSMultiPointParser and not : " + acquireParser());
+
+        return isCompatibleGeometry(geometry)
+               ? acquireParser().parseGeometry((MultiPoint) geometry)
+               : super.forwardParseGeometry(geometry);
+    }
+
+    @Override
+    protected boolean isCompatibleParser() {
+        return acquireParser() instanceof JTSMultiPointParser;
+    }
+
+    @Override
+    protected boolean isCompatibleGeometry(Object jtsGeometry) {
+        return jtsGeometry instanceof MultiPoint;
+    }
+
+    @Override
+    public JAXBElement<? extends AbstractGeometry> buildJAXBElement(
+            Geometry geometry) throws ParserException {
+
+        return isCompatibleGeometry(geometry)
+               ? acquireParser().buildJAXBElement((MultiPoint) geometry)
+               : super.forwardBuildJAXBElement(geometry);
+    }
 }

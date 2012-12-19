@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gml.impl.v311.jts.parameter;
 
 import org.geosdi.geoplatform.gml.api.jaxb.GMLObjectFactory;
 import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
-import org.geosdi.geoplatform.gml.api.parser.jts.coordinate.CoordinateParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.coordinate.JTSCoordinateParser;
 
 /**
@@ -46,18 +45,18 @@ import org.geosdi.geoplatform.gml.api.parser.jts.coordinate.JTSCoordinateParser;
  * @email giuseppe.lascaleia@geosdi.org
  */
 class JTSCoordinateParserParameter implements
-        ParameterValue<CoordinateParser> {
+        ParameterValue<JTSCoordinateParser> {
 
-    private CoordinateParser jtsCoordinateParser;
-    private ParameterValue<GMLObjectFactory> objectFactoryParameter;
+    private JTSCoordinateParser jtsCoordinateParser;
+    private ParameterValue<? extends GMLObjectFactory> objectFactoryParameter;
 
     public JTSCoordinateParserParameter(
-            ParameterValue<GMLObjectFactory> theObjectFactoryParameter) {
+            ParameterValue<? extends GMLObjectFactory> theObjectFactoryParameter) {
         this.objectFactoryParameter = theObjectFactoryParameter;
     }
 
     @Override
-    public CoordinateParser getValue() {
+    public JTSCoordinateParser getValue() {
         return jtsCoordinateParser = (jtsCoordinateParser == null)
                                      ? new JTSCoordinateParser(
                 objectFactoryParameter.getValue()) : jtsCoordinateParser;

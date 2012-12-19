@@ -33,25 +33,26 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.jts.parameter;
+package org.geosdi.geoplatform.gml.impl.v311.jts.sextante.responsibility;
+
+import org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.polygon.JTSMultiPolygonParser;
+import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.responsibility.AbstractJTSSextanteMultiPolygonHandler;
+import org.geosdi.geoplatform.gml.impl.v311.jts.parameter.JTSParametersRepo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum JTSParameterEnum {
-
-    DEFAULT_OBJECT_FACTORY,
-    DEFAULT_JTS_SRS_PARSER,
-    DEFAULT_JTS_COORDINATE_PARSER,
-    DEFAULT_JTS_POINT_PARSER,
-    DEFAULT_JTS_LINE_STRING_PARSER,
-    DEFAULT_JTS_LINEAR_RING_PARSER,
-    DEFAULT_JTS_POLYGON_PARSER,
-    DEFAULT_JTS_MULTI_POINT_PARSER,
-    DEFAULT_JTS_MULTI_LINE_PARSER,
-    DEFAULT_JTS_MULTI_POLYGON_PARSER,
-    DEFAULT_JTS_MULTI_GEOMETRY_PARSER,
-    DEFAULT_JTS_SEXTANTE_PARSER;
+public class JTSSextanteMultiPolygonHandler
+        extends AbstractJTSSextanteMultiPolygonHandler {
+    
+    public JTSSextanteMultiPolygonHandler() {
+        super.setSuccessor(new JTSSextanteMultiGeometryHandler());
+    }
+    
+    @Override
+    protected JTSMultiPolygonParser acquireParser() {
+        return JTSParametersRepo.getDefaultMultiPolygonParser();
+    }
 }

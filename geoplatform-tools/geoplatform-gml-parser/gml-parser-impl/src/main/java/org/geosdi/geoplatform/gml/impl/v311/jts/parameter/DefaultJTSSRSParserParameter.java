@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gml.impl.v311.jts.parameter;
 
 import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
-import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.DefaultJTSSRSParser;
 
 /**
@@ -45,12 +44,12 @@ import org.geosdi.geoplatform.gml.api.parser.jts.DefaultJTSSRSParser;
  * @email giuseppe.lascaleia@geosdi.org
  */
 class DefaultJTSSRSParserParameter implements
-        ParameterValue<AbstractJTSSRSParser> {
+        ParameterValue<DefaultJTSSRSParser> {
 
     private DefaultJTSSRSParser jtsSRSParser;
 
     @Override
-    public AbstractJTSSRSParser getValue() {
+    public DefaultJTSSRSParser getValue() {
         return jtsSRSParser = (jtsSRSParser == null) ? new DefaultJTSSRSParser()
                               : jtsSRSParser;
     }

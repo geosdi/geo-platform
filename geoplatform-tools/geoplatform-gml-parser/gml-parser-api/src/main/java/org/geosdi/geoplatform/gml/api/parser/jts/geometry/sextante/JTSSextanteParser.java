@@ -49,12 +49,8 @@ import org.geosdi.geoplatform.gml.api.parser.jts.JTSParser;
  */
 public abstract class JTSSextanteParser implements
         JTSParser<AbstractGeometry, GeometryProperty, Geometry> {
-
-    protected final AbstractGMLObjectFactory gmlObjectFactory;
-
-    public JTSSextanteParser(AbstractGMLObjectFactory theGmlObjectFactory) {
-        this.gmlObjectFactory = theGmlObjectFactory;
-    }
+    
+    protected abstract <F extends AbstractGMLObjectFactory> F acquireGMLFactory();
 
     public abstract GMLBaseVersion getGMLVersion();
 }

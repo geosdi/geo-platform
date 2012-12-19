@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gml.api;
 
+import javax.xml.bind.JAXBElement;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -45,4 +47,6 @@ public interface GeometryProperty extends PropertyType {
     boolean isSetGeometry();
 
     AbstractGeometry getAbstractGeometry();
+    
+    void setAbstractGeometry(JAXBElement<? extends AbstractGeometry> value);
 }

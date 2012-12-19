@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gml.impl.v311.jts.parameter;
 
 import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
 import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
-import org.geosdi.geoplatform.gml.api.parser.jts.DefaultJTSSRSParser;
+import org.geosdi.geoplatform.gml.api.parser.jts.AbstractJTSSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.coordinate.JTSCoordinateParser;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.point.JTSPointParser;
 
@@ -50,12 +50,12 @@ class JTSPointParserParameter implements ParameterValue<JTSPointParser> {
 
     private JTSPointParser jtsPointParser;
     private ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
-    private ParameterValue<DefaultJTSSRSParser> srsParameter;
+    private ParameterValue<? extends AbstractJTSSRSParser> srsParameter;
     private ParameterValue<JTSCoordinateParser> coordinateParameter;
 
     public JTSPointParserParameter(
             ParameterValue<AbstractGMLObjectFactory> theObjectFactoryParameter,
-            ParameterValue<DefaultJTSSRSParser> theSrsParameter,
+            ParameterValue<? extends AbstractJTSSRSParser> theSrsParameter,
             ParameterValue<JTSCoordinateParser> theCoordinateParameter) {
         this.objectFactoryParameter = theObjectFactoryParameter;
         this.srsParameter = theSrsParameter;

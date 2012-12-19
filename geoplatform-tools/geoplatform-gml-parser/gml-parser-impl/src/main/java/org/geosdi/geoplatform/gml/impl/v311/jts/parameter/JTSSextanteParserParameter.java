@@ -35,23 +35,23 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jts.parameter;
 
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
+import org.geosdi.geoplatform.gml.impl.v311.jts.sextante.JTSSextanteParserV311;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum JTSParameterEnum {
+class JTSSextanteParserParameter implements
+        ParameterValue<JTSSextanteParserV311> {
 
-    DEFAULT_OBJECT_FACTORY,
-    DEFAULT_JTS_SRS_PARSER,
-    DEFAULT_JTS_COORDINATE_PARSER,
-    DEFAULT_JTS_POINT_PARSER,
-    DEFAULT_JTS_LINE_STRING_PARSER,
-    DEFAULT_JTS_LINEAR_RING_PARSER,
-    DEFAULT_JTS_POLYGON_PARSER,
-    DEFAULT_JTS_MULTI_POINT_PARSER,
-    DEFAULT_JTS_MULTI_LINE_PARSER,
-    DEFAULT_JTS_MULTI_POLYGON_PARSER,
-    DEFAULT_JTS_MULTI_GEOMETRY_PARSER,
-    DEFAULT_JTS_SEXTANTE_PARSER;
+    private JTSSextanteParserV311 jtsSextanteParser;
+
+    @Override
+    public JTSSextanteParserV311 getValue() {
+        return jtsSextanteParser = (jtsSextanteParser == null)
+                                   ? new JTSSextanteParserV311()
+                                   : jtsSextanteParser;
+    }
 }

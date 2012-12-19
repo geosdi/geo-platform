@@ -81,7 +81,7 @@ public class GeometryPropertyType implements ToString, GeometryProperty {
     /**
      * Gets the value of the geometry property.
      *
-     * @return possible object is null null     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     * @return possible object is null null null null     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
      *     {@link ARingElement }
      *     {@link ASurfaceElement }
      *     {@link JAXBElement }{@code <}{@link OrientableSurfaceType }{@code >}
@@ -124,7 +124,7 @@ public class GeometryPropertyType implements ToString, GeometryProperty {
     /**
      * Sets the value of the geometry property.
      *
-     * @param value allowed object is null null     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
+     * @param value allowed object is null null null null     {@link JAXBElement }{@code <}{@link LineStringType }{@code >}
      *     {@link ARingElement }
      *     {@link ASurfaceElement }
      *     {@link JAXBElement }{@code <}{@link OrientableSurfaceType }{@code >}
@@ -172,6 +172,12 @@ public class GeometryPropertyType implements ToString, GeometryProperty {
     @Override
     public AbstractGeometry getAbstractGeometry() {
         return isSetGeometry() ? geometry.getValue() : null;
+    }
+
+    @Override
+    public void setAbstractGeometry(
+            JAXBElement<? extends AbstractGeometry> value) {
+        this.geometry = (JAXBElement<? extends AbstractGeometryType>) value;
     }
 
     /**

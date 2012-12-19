@@ -35,23 +35,39 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jts.parameter;
 
+import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
+import org.geosdi.geoplatform.gml.api.parameter.ParameterValue;
+import org.geosdi.geoplatform.gml.api.parser.jts.DefaultJTSSRSParser;
+import org.geosdi.geoplatform.gml.api.parser.jts.geometry.multi.geometry.JTSMultiGeometryParser;
+import org.geosdi.geoplatform.gml.impl.v311.jts.sextante.JTSSextanteParserV311;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum JTSParameterEnum {
+class JTSMultiGeometryParserParameter implements
+        ParameterValue<JTSMultiGeometryParser> {
 
-    DEFAULT_OBJECT_FACTORY,
-    DEFAULT_JTS_SRS_PARSER,
-    DEFAULT_JTS_COORDINATE_PARSER,
-    DEFAULT_JTS_POINT_PARSER,
-    DEFAULT_JTS_LINE_STRING_PARSER,
-    DEFAULT_JTS_LINEAR_RING_PARSER,
-    DEFAULT_JTS_POLYGON_PARSER,
-    DEFAULT_JTS_MULTI_POINT_PARSER,
-    DEFAULT_JTS_MULTI_LINE_PARSER,
-    DEFAULT_JTS_MULTI_POLYGON_PARSER,
-    DEFAULT_JTS_MULTI_GEOMETRY_PARSER,
-    DEFAULT_JTS_SEXTANTE_PARSER;
+    private JTSMultiGeometryParser jtsMultiGeometryParser;
+    private ParameterValue<AbstractGMLObjectFactory> objectFactoryParameter;
+    private ParameterValue<DefaultJTSSRSParser> srsParameter;
+    private ParameterValue<JTSSextanteParserV311> jtsSextanteParameter;
+
+    public JTSMultiGeometryParserParameter(
+            ParameterValue<AbstractGMLObjectFactory> theObjectFactoryParameter,
+            ParameterValue<DefaultJTSSRSParser> theSrsParameter,
+            ParameterValue<JTSSextanteParserV311> theJtsSextanteParameter) {
+        this.objectFactoryParameter = theObjectFactoryParameter;
+        this.srsParameter = theSrsParameter;
+        this.jtsSextanteParameter = theJtsSextanteParameter;
+    }
+
+    @Override
+    public JTSMultiGeometryParser getValue() {
+        return jtsMultiGeometryParser = (jtsMultiGeometryParser == null)
+                                        ? new JTSMultiGeometryParser(
+                objectFactoryParameter.getValue(), srsParameter.getValue(),
+                jtsSextanteParameter.getValue()) : jtsMultiGeometryParser;
+    }
 }

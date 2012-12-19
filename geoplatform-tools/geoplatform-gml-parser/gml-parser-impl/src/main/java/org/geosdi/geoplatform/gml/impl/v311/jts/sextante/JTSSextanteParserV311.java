@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jts.sextante;
 
+import com.google.common.base.Preconditions;
 import com.vividsolutions.jts.geom.Geometry;
 import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
@@ -43,6 +44,8 @@ import org.geosdi.geoplatform.gml.api.jaxb.AbstractGMLObjectFactory;
 import org.geosdi.geoplatform.gml.api.parser.base.GMLBaseVersion;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.JTSSextanteParser;
+import org.geosdi.geoplatform.gml.impl.v311.jts.parameter.JTSParametersRepo;
+import org.geosdi.geoplatform.gml.impl.v311.jts.sextante.responsibility.JTSSextantePointHandler;
 
 /**
  *
@@ -51,28 +54,40 @@ import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.JTSSextantePa
  */
 public class JTSSextanteParserV311 extends JTSSextanteParser {
 
-    public JTSSextanteParserV311(AbstractGMLObjectFactory theGmlObjectFactory) {
-        super(theGmlObjectFactory);
-    }
+    private AbstractGMLObjectFactory gmlFactory;
+    private JTSSextantePointHandler sextantePointHandler = new JTSSextantePointHandler();
 
     @Override
     public AbstractGeometry parseGeometry(Geometry jtsGeometry) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return sextantePointHandler.parseGeometry(jtsGeometry);
     }
 
     @Override
     public GeometryProperty parseProperty(Geometry jtsGeometry) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Preconditions.checkNotNull(jtsGeometry, "JTS Geometry must not be null.");
+
+        GeometryProperty geometryProperty = acquireGMLFactory().createGeometryPropertyType();
+        geometryProperty.setAbstractGeometry(buildJAXBElement(jtsGeometry));
+        
+        return geometryProperty;
     }
 
     @Override
     public JAXBElement<? extends AbstractGeometry> buildJAXBElement(
             Geometry geometry) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        return sextantePointHandler.buildJAXBElement(geometry);
     }
 
     @Override
     public GMLBaseVersion getGMLVersion() {
         return GMLBaseVersion.V311;
+    }
+
+    @Override
+    protected AbstractGMLObjectFactory acquireGMLFactory() {
+        return gmlFactory = (gmlFactory == null)
+                            ? JTSParametersRepo.getDefaultGmlObjectFactory()
+                            : gmlFactory;
     }
 }

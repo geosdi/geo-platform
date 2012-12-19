@@ -33,28 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
+package org.geosdi.geoplatform.connector.server.request.v202.cql;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.xml.filter.v110.BinarySpatialOpType;
-import org.geosdi.geoplatform.xml.filter.v110.FilterType;
-import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
-import org.geosdi.geoplatform.xml.filter.v110.UnaryLogicOpType;
-import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
-import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class AreaSearchRequest extends GetRecordsRequestHandler {
+public class AreaSearchRequestCQL extends GetRecordsRequestHandlerCQL {
 
     private final static String BOUNDING_BOX = "ows:BoundingBox";
     private final static String CONTAINS = "CONTAINS";
@@ -63,7 +53,7 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
     private final static String INTERSECTS = "INTERSECTS";
 
     @Override
-    protected void processGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
+    protected void processGetRecordsRequest(CatalogGetRecordsRequest request)
             throws IllegalParameterFault {
         logger.debug("Process...");
 
@@ -74,79 +64,11 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
             logger.debug("\n+++ Search Type: {} +++", areaSearchType);
             logger.debug("\n+++ {} +++", bBox);
 
-            switch (request.getConstraintLanguage()) {
-                case FILTER:
-                    List<JAXBElement<?>> areaPredicate = this.createFilterAreaPredicate(
-                            areaSearchType, bBox);
+            String areaConstraint = this.createCQLAreaPredicate(areaSearchType, bBox);
 
-                    logger.trace("\n+++ Time filter: \"{}\" +++", areaPredicate);
-                    super.addFilterConstraint(request, filterType, areaPredicate);
-                    break;
-
-                case CQL_TEXT:
-                    String areaConstraint = this.createCQLAreaPredicate(areaSearchType, bBox);
-
-                    logger.trace("\n+++ Area CQL constraint: \"{}\" +++", areaConstraint);
-                    super.addCQLConstraint(request, areaConstraint);
-                    break;
-            }
+            logger.trace("\n+++ Area CQL constraint: \"{}\" +++", areaConstraint);
+            super.addCQLConstraint(request, areaConstraint);
         }
-    }
-
-    private List<JAXBElement<?>> createFilterAreaPredicate(
-            AreaSearchType areaSearchType, BBox bBox) {
-
-        List<JAXBElement<?>> areaPredicate = new ArrayList<JAXBElement<?>>(2);
-
-        BinarySpatialOpType binarySpatial = new BinarySpatialOpType();
-
-        PropertyNameType propertyNameType = new PropertyNameType();
-        propertyNameType.setContent(Arrays.<Object>asList(BOUNDING_BOX));
-        binarySpatial.setPropertyName(propertyNameType);
-
-        EnvelopeType envelope = this.createEnvelope(bBox);
-        binarySpatial.setEnvelope(gmlFactory.createEnvelope(envelope));
-
-        switch (areaSearchType) {
-            case ENCLOSES:
-                areaPredicate.add(filterFactory.createContains(binarySpatial));
-                break;
-
-            case IS:
-                areaPredicate.add(filterFactory.createEquals(binarySpatial));
-                break;
-
-            case OUTSIDE:
-                // Workaround for GeoNetwork bug: DISJOINT = NOT(INTERSECTS)
-                UnaryLogicOpType unary = new UnaryLogicOpType();
-                unary.setSpatialOps(filterFactory.createIntersects(binarySpatial));
-
-                areaPredicate.add(filterFactory.createNot(unary));
-
-                // TODO Use DISJOINT spatial operator
-//                areaPredicate.add(filterFactory.createDisjoint(binarySpatial));
-                break;
-
-            case OVERLAP:
-                areaPredicate.add(filterFactory.createIntersects(binarySpatial));
-                break;
-        }
-
-        return areaPredicate;
-    }
-
-    private EnvelopeType createEnvelope(BBox bBox) {
-        EnvelopeType envelope = new EnvelopeType();
-
-        DirectPositionType lower = new DirectPositionType();
-        lower.setValue(Arrays.asList(bBox.getMinX(), bBox.getMinY()));
-        envelope.setLowerCorner(lower);
-
-        DirectPositionType upper = new DirectPositionType();
-        upper.setValue(Arrays.asList(bBox.getMaxX(), bBox.getMaxY()));
-        envelope.setUpperCorner(upper);
-
-        return envelope;
     }
 
     private String createCQLAreaPredicate(AreaSearchType areaSearchType, BBox bBox) {

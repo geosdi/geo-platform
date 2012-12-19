@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
+package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class TextSearchRequest extends GetRecordsRequestHandler {
+public class TextSearchRequestFilter extends GetRecordsRequestHandlerFilter {
 
     private final static String ANYTEXT = "AnyText";
     private final static String TITLE = "dc:title";
@@ -70,32 +70,20 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
             boolean searchTitle = textInfo.isSearchTitle();
             boolean searchAbstract = textInfo.isSearchAbstract();
             boolean searchSubjects = textInfo.isSearchSubjects();
-            if (searchText != null
-                    && !searchTitle && !searchAbstract && !searchSubjects) {
-                throw new IllegalParameterFault(
-                        "You need to specify where to search \"" + searchText + "\" text");
-            }
-
-            logger.debug("\n+++ Search text: \"{}\" +++", searchText);
             if (searchText != null) {
-                switch (request.getConstraintLanguage()) {
-                    case FILTER:
-                        List<JAXBElement<?>> textPredicate =
-                                this.createFilterTextPredicate(searchText,
-                                searchTitle, searchAbstract, searchSubjects);
-
-                        logger.trace("\n+++ Text filter: \"{}\" +++", textPredicate);
-                        super.addFilterConstraint(request, filterType, textPredicate);
-                        break;
-
-                    case CQL_TEXT:
-                        String constraint = this.createCQLTextPredicate(searchText,
-                                searchTitle, searchAbstract, searchSubjects);
-
-                        logger.trace("\n+++ Text CQL constraint: \"{}\" +++", request.getConstraint());
-                        super.addCQLConstraint(request, constraint);
-                        break;
+                if (!searchTitle && !searchAbstract && !searchSubjects) {
+                    throw new IllegalParameterFault(
+                            "You need to specify where to search \"" + searchText + "\" text");
                 }
+
+                logger.debug("\n+++ Search text: \"{}\" +++", searchText);
+
+                List<JAXBElement<?>> textPredicate =
+                        this.createFilterTextPredicate(searchText,
+                                                       searchTitle, searchAbstract, searchSubjects);
+
+                logger.trace("\n+++ Text filter: \"{}\" +++", textPredicate);
+                super.addFilterConstraint(request, filterType, textPredicate);
             }
         }
     }
@@ -155,40 +143,5 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
         propertyIsLikeType.setLiteral(literalType);
 
         return propertyIsLikeType;
-    }
-
-    private String createCQLTextPredicate(String searchText,
-            boolean searchTitle, boolean searchAbstract, boolean searchSubjects) {
-
-        StringBuilder constraint = new StringBuilder();
-
-        if (searchTitle & searchAbstract & searchSubjects) {
-            constraint.append(ANYTEXT);
-
-        } else {
-            if (searchTitle) {
-                constraint.append(TITLE);
-            }
-
-            if (searchAbstract) {
-                if (constraint.length() > 0) {
-                    constraint.append(" OR ");
-                }
-                constraint.append(ABSTRACT);
-            }
-
-            if (searchSubjects) {
-                if (constraint.length() > 0) {
-                    constraint.append(" OR ");
-                }
-                constraint.append(SUBJECT);
-            }
-        }
-
-        if (constraint.length() > 0) {
-            constraint.append(" LIKE '%").append(searchText).append("%'");
-        }
-
-        return constraint.toString();
     }
 }

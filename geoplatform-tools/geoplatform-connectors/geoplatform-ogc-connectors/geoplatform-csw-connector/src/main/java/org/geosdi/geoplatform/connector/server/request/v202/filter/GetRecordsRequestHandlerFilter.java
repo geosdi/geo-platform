@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
+package org.geosdi.geoplatform.connector.server.request.v202.filter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,20 +54,20 @@ import org.slf4j.LoggerFactory;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GetRecordsRequestHandler {
+public abstract class GetRecordsRequestHandlerFilter {
 
     final protected Logger logger = LoggerFactory.getLogger(this.getClass());
     protected org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
     protected org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory;
     //
-    private GetRecordsRequestHandler successor;
+    private GetRecordsRequestHandlerFilter successor;
 
-    public GetRecordsRequestHandler() {
+    public GetRecordsRequestHandlerFilter() {
         filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
         gmlFactory = new org.geosdi.geoplatform.xml.gml.v311.ObjectFactory();
     }
 
-    public void setSuccessor(GetRecordsRequestHandler theSuccessor) {
+    public void setSuccessor(GetRecordsRequestHandlerFilter theSuccessor) {
         successor = theSuccessor;
     }
 
@@ -103,21 +103,6 @@ public abstract class GetRecordsRequestHandler {
             List<JAXBElement<?>> orCriteria = binary.getComparisonOpsOrSpatialOpsOrLogicOps();
 
             orCriteria.addAll(filterPredicates);
-        }
-    }
-
-    protected void addCQLConstraint(CatalogGetRecordsRequest request,
-            String followingConstraint) {
-
-        if (request.getConstraintLanguage() != ConstraintLanguage.CQL_TEXT) {
-            throw new IllegalArgumentException("Constraint Language must be CQL_TEXT.");
-        }
-
-        String previousConstraint = request.getConstraint();
-        if (previousConstraint == null) {
-            request.setConstraint(followingConstraint);
-        } else {
-            request.setConstraint(previousConstraint + " OR " + followingConstraint);
         }
     }
 

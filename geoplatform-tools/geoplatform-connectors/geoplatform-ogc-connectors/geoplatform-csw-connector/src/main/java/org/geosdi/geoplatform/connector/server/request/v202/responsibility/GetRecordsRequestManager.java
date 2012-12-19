@@ -36,6 +36,14 @@
 package org.geosdi.geoplatform.connector.server.request.v202.responsibility;
 
 import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
+import org.geosdi.geoplatform.connector.server.request.v202.cql.AreaSearchRequestCQL;
+import org.geosdi.geoplatform.connector.server.request.v202.cql.GetRecordsRequestHandlerCQL;
+import org.geosdi.geoplatform.connector.server.request.v202.cql.TextSearchRequestCQL;
+import org.geosdi.geoplatform.connector.server.request.v202.cql.TimeSearchRequestCQL;
+import org.geosdi.geoplatform.connector.server.request.v202.filter.AreaSearchRequestFilter;
+import org.geosdi.geoplatform.connector.server.request.v202.filter.GetRecordsRequestHandlerFilter;
+import org.geosdi.geoplatform.connector.server.request.v202.filter.TextSearchRequestFilter;
+import org.geosdi.geoplatform.connector.server.request.v202.filter.TimeSearchRequestFilter;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
@@ -45,27 +53,53 @@ import org.geosdi.geoplatform.xml.filter.v110.FilterType;
  */
 public class GetRecordsRequestManager {
 
-    private GetRecordsRequestHandler textSearchRequest; // The first ring of the chain
+    private GetRecordsRequestHandlerFilter textSearchRequestFilter; // The first ring of the chain Filter
+    private GetRecordsRequestHandlerCQL textSearchRequestCQL; // The first ring of the chain CQL
 
     public GetRecordsRequestManager() {
-        this.createChain();
+        this.createChainFilter();
+        this.createChainCQL();
     }
 
-    private void createChain() {
-        textSearchRequest = new TextSearchRequest();
-        GetRecordsRequestHandler areaSearchRequest = new AreaSearchRequest();
-        GetRecordsRequestHandler timeSearchRequest = new TimeSearchRequest();
+    private void createChainFilter() {
+        textSearchRequestFilter = new TextSearchRequestFilter();
+        GetRecordsRequestHandlerFilter areaSearchRequest = new AreaSearchRequestFilter();
+        GetRecordsRequestHandlerFilter timeSearchRequest = new TimeSearchRequestFilter();
 
-        textSearchRequest.setSuccessor(areaSearchRequest);
+        textSearchRequestFilter.setSuccessor(areaSearchRequest);
+        areaSearchRequest.setSuccessor(timeSearchRequest);
+    }
+
+    private void createChainCQL() {
+        textSearchRequestCQL = new TextSearchRequestCQL();
+        GetRecordsRequestHandlerCQL areaSearchRequest = new AreaSearchRequestCQL();
+        GetRecordsRequestHandlerCQL timeSearchRequest = new TimeSearchRequestCQL();
+
+        textSearchRequestCQL.setSuccessor(areaSearchRequest);
         areaSearchRequest.setSuccessor(timeSearchRequest);
     }
 
     public void filterGetRecordsRequest(CatalogGetRecordsRequest request, FilterType filterType)
             throws IllegalParameterFault {
+        assert (request != null);
+        assert (filterType != null);
 
         // Filter request iff there is a catalog finder setted
+        if (request.getCatalogFinder() == null) {
+            return;
+        }
+
+
         if (request.getCatalogFinder() != null) {
-            textSearchRequest.forwardGetRecordsRequest(request, filterType);
+            switch (request.getConstraintLanguage()) {
+                case FILTER:
+                    textSearchRequestFilter.forwardGetRecordsRequest(request, filterType);
+                    break;
+                case CQL_TEXT:
+                    textSearchRequestCQL.forwardGetRecordsRequest(request);
+                    break;
+                default:
+            }
         }
     }
 }

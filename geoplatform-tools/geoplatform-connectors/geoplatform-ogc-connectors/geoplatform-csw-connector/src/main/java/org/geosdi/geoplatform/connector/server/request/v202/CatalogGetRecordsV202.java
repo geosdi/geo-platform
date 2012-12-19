@@ -113,7 +113,7 @@ public class CatalogGetRecordsV202 extends CatalogGetRecords<GetRecordsResponseT
             }
 
             QueryConstraintType queryConstraintType = new QueryConstraintType();
-            queryConstraintType.setVersion(constraintLanguageVersion.toString());
+            queryConstraintType.setVersion(constraintLanguageVersion.getVersion());
 
             switch (constraintLanguage) {
                 case FILTER:

@@ -49,8 +49,7 @@ public enum ConstraintLanguageVersion {
         this.version = version;
     }
 
-    @Override
-    public String toString() {
+    public String getVersion() {
         return version;
     }
 }

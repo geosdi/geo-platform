@@ -33,10 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.server.request.transaction;
+package org.geosdi.geoplatform.connector.server.request.v110.transaction;
 
 import java.util.EnumMap;
 import java.util.Map;
+import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 
 /**

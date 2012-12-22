@@ -45,12 +45,6 @@ import java.util.List;
  */
 public class CSWContextServiceProvider {
 
-    private static List<Class> allClasses;
-
-    static {
-        allClasses = new ArrayList<Class>();
-    }
-
     /**
      * Load All Classes for CSW JAXB Context
      *
@@ -106,6 +100,7 @@ public class CSWContextServiceProvider {
     }
 
     private static Class[] getAllClasses() {
+        List<Class> allClasses = new ArrayList<Class>();
         allClasses.add(org.geosdi.geoplatform.xml.ows.v100.ObjectFactory.class);
 
         allClasses.add(

@@ -78,7 +78,7 @@ public abstract class GeoPlatformJAXBContext extends GPConnectorJAXBContext {
      * <p>
      *   Obtain a new instance of a <tt>GeoPlatformJAXBContext</tt> class.
      *
-     * <p>
+     * </p>
      * The context path which is a list of  colon (':', \u005Cu003A) separated 
      * java package names that contain schema-derived classes and/or fully 
      *  qualified JAXB-annotated classes. 

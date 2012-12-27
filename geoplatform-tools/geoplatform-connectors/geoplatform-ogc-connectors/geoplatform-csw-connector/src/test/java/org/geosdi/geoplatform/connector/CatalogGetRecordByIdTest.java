@@ -140,7 +140,7 @@ public class CatalogGetRecordByIdTest {
         List<Object> any = response.getAny();
 
         logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                    ((JAXBElement) any.get(0)).getValue());
+                ((JAXBElement) any.get(0)).getValue());
     }
 
     @Test
@@ -149,7 +149,7 @@ public class CatalogGetRecordByIdTest {
                 this.serverConnector.createGetRecordByIdRequest();
 
         request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47",
-                      "9a554857-3a16-4e03-b105-47f93e3af3c3");
+                "9a554857-3a16-4e03-b105-47f93e3af3c3");
 
         GetRecordByIdResponseType response = request.getResponse();
 
@@ -162,7 +162,7 @@ public class CatalogGetRecordByIdTest {
 
         for (JAXBElement element : abstractRecord) {
             logger.info("SUMMARY RECORD @@@@@@@@@@@@@@@@@@ {}\n",
-                        element.getValue());
+                    element.getValue());
         }
     }
 
@@ -189,6 +189,7 @@ public class CatalogGetRecordByIdTest {
         logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", metadata);
     }
 
+    @Ignore(value = "Catalog is DOWN")
     @Test
     public void testOutputGmdIspra() throws Exception {
         URL url = new URL(ISPRA_URL);
@@ -216,6 +217,7 @@ public class CatalogGetRecordByIdTest {
         logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", metadata);
     }
 
+    @Ignore(value = "Catalog is DOWN")
     @Test
     public void testOutputOriginalIspra() throws Exception {
         URL url = new URL(ISPRA_URL);
@@ -263,7 +265,7 @@ public class CatalogGetRecordByIdTest {
         Assert.assertEquals(1, abstractRecord.size());
 
         logger.info("RECORD @@@@@@@@@@@@@@@@@@ {}",
-                    abstractRecord.get(0).getValue());
+                abstractRecord.get(0).getValue());
     }
 
     /**
@@ -302,7 +304,7 @@ public class CatalogGetRecordByIdTest {
 //        MDMetadataType metadata = (MDMetadataType) o;
 //        Assert.assertNotNull(metadata);
         logger.info("FULL METADATA @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
-                    request.getResponseAsString());
+                request.getResponseAsString());
 
         String snipcGetRecordById = "target/snipcGetRecordById.xml";
 

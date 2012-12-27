@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gml.impl.v311.jaxb;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
-import javax.xml.bind.annotation.XmlRegistry;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.AbstractRingProperty;
 import org.geosdi.geoplatform.gml.api.Coord;
@@ -91,7 +90,6 @@ import org.geosdi.geoplatform.xml.gml.v311.PolygonType;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRegistry
 public class GMLObjectFactoryV311 extends AbstractGMLObjectFactory {
 
     @Override

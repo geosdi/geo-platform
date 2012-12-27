@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gml:Point srsName="urn:ogc:def:crs:EPSG::4326" xmlns:ns2="http://www.w3.org/1999/xlink" xmlns:ns4="http://www.w3.org/2001/SMIL20/Language" xmlns:ns3="http://www.w3.org/2001/SMIL20/" xmlns:gml="http://www.opengis.net/gml">
+    <gml:pos>10.0 20.0</gml:pos>
+</gml:Point>

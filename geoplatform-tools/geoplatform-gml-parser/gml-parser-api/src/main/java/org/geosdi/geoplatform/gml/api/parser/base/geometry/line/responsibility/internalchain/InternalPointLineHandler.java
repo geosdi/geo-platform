@@ -37,11 +37,10 @@ package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.
 
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.PointProperty;
-import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -49,7 +48,10 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointLineHandler extends AbstractGeometryHandler<AbstractGeometry, Point, GMLBasePointParser, CoordinateBaseParser> {
+public class InternalPointLineHandler
+        extends AbstractInternalChainHandler<Point> {
+
+    private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
 
     public InternalPointLineHandler() {
         super.setSuccessor(new InternalDirectPositionLineHandler());
@@ -57,21 +59,10 @@ public class InternalPointLineHandler extends AbstractGeometryHandler<AbstractGe
 
     @Override
     public Point buildGeometry(GeometryFactory geometryFactory,
-            AbstractGeometry gmlGeometry,
-            GMLBasePointParser firstParser,
-            CoordinateBaseParser secondParser) throws ParserException {
+            Object object) throws ParserException {
 
-        return gmlGeometry instanceof PointProperty
-               ? firstParser.parseGeometry((PointProperty) gmlGeometry)
-               : buildGeometry(geometryFactory, gmlGeometry, secondParser);
-    }
-
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            AbstractGeometry gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
-
-        return super.forwardBuildGeometry(geometryFactory,
-                gmlGeometry, parser);
+        return object instanceof PointProperty
+               ? pointParser.parseGeometry((PointProperty) object)
+               : super.forwardBuildGeometry(geometryFactory, object);
     }
 }

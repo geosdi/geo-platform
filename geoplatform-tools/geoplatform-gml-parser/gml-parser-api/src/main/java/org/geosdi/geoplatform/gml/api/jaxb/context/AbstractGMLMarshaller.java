@@ -33,36 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain;
+package org.geosdi.geoplatform.gml.api.jaxb.context;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
+import com.google.common.base.Preconditions;
+import com.vividsolutions.jts.geom.Geometry;
+import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.PointProperty;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.JTSSextanteParser;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointPropertyLinearRingHandler extends AbstractInternalChainHandler<Point> {
+public abstract class AbstractGMLMarshaller implements GMLMarshaller {
 
-    private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
+    private final JTSSextanteParser jtsSextanteParser;
 
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
+    public AbstractGMLMarshaller(JTSSextanteParser theJtsSextanteParser) {
+        this.jtsSextanteParser = theJtsSextanteParser;
+    }
+
+    protected JAXBElement<? extends AbstractGeometry> buildJAXBElement(
             Object object) throws ParserException {
+        Preconditions.checkNotNull(object, "The Object to parse must "
+                + "not be null.");
 
-        if (object instanceof PointProperty) {
-            return pointParser.parseGeometry((PointProperty) object);
-        }
+        Preconditions.checkArgument(object instanceof Geometry,
+                "The GMLMarshaller "
+                + "must marshall only objects that are instance "
+                + "of JTS Geometry.");
 
-        throw new ParserException("There are no Rings in this Chain "
-                + "to build GML Geometry with this Object : " + object);
+        return this.jtsSextanteParser.buildJAXBElement((Geometry) object);
     }
 }

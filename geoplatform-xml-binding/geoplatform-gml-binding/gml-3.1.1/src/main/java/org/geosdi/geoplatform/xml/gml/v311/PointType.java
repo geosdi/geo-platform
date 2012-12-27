@@ -9,6 +9,7 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.gml.api.DirectPosition;
 import org.geosdi.geoplatform.gml.api.Point;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
@@ -71,8 +72,9 @@ public class PointType extends AbstractGeometricPrimitiveType
      * @param value allowed object is {@link DirectPositionType }
      *
      */
-    public void setPos(DirectPositionType value) {
-        this.pos = value;
+    @Override
+    public void setPos(DirectPosition value) {
+        this.pos = (DirectPositionType) value;
     }
 
     @Override

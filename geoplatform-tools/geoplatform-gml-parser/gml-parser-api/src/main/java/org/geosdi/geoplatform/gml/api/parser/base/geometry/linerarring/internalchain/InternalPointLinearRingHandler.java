@@ -39,7 +39,9 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -47,21 +49,21 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointLinearRingHandler extends BaseGeometryHandler<AbstractGeometry, Point, GMLBasePointParser> {
-    
+public class InternalPointLinearRingHandler extends AbstractInternalChainHandler<Point> {
+
+    private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
+
     public InternalPointLinearRingHandler() {
         super.setSuccessor(new InternalPointPropertyLinearRingHandler());
     }
-    
+
     @Override
-    public Point buildGeometry(
-            GeometryFactory geometryFactory,
-            AbstractGeometry gmlGeometry,
-            GMLBasePointParser parser) throws ParserException {
-        
-        return gmlGeometry instanceof org.geosdi.geoplatform.gml.api.Point
-               ? parser.parseGeometry(
-                (org.geosdi.geoplatform.gml.api.Point) gmlGeometry)
-               : super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
+    public Point buildGeometry(GeometryFactory geometryFactory,
+            Object object) throws ParserException {
+
+        return object instanceof org.geosdi.geoplatform.gml.api.Point
+               ? pointParser.parseGeometry(
+                (org.geosdi.geoplatform.gml.api.Point) object)
+               : super.forwardBuildGeometry(geometryFactory, object);
     }
 }

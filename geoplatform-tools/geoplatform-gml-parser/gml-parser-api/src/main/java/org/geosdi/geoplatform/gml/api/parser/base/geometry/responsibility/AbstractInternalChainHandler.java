@@ -33,16 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain;
+package org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility;
 
+import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.PointProperty;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -50,19 +44,27 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointPropertyLinearRingHandler extends AbstractInternalChainHandler<Point> {
+public abstract class AbstractInternalChainHandler<G extends Geometry> {
 
-    private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
+    protected AbstractInternalChainHandler successor;
 
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
+    public abstract G buildGeometry(GeometryFactory geometryFactory,
+            Object object) throws ParserException;
+
+    protected G forwardBuildGeometry(GeometryFactory geometryFactory,
             Object object) throws ParserException {
-
-        if (object instanceof PointProperty) {
-            return pointParser.parseGeometry((PointProperty) object);
+        if (successor != null) {
+            return (G) successor.buildGeometry(geometryFactory, object);
         }
 
-        throw new ParserException("There are no Rings in this Chain "
-                + "to build GML Geometry with this Object : " + object);
+        throw new ParserException("There are no Rings in this chain to "
+                + "build Geometry with Object : " + object);
+    }
+
+    /**
+     * @param successor the successor to set
+     */
+    public void setSuccessor(AbstractInternalChainHandler successor) {
+        this.successor = successor;
     }
 }

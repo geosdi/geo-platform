@@ -46,6 +46,8 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.o
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -54,6 +56,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class GMLBaseLineStringParser extends AbstractGMLBaseParser<LineString, LineStringProperty, com.vividsolutions.jts.geom.LineString> {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     private CoordinateBaseParser coordinateParser;
     private GMLBasePointParser pointParser;
     private AbstractGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, GMLBasePointParser, CoordinateBaseParser> mixedLineHandler;

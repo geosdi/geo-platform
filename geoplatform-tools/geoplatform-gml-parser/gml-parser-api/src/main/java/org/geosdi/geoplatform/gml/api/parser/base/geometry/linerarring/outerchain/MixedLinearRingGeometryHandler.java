@@ -37,11 +37,9 @@ package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.outercha
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.LinearRing;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain.InternalDirectPosLinerarRingHandler;
@@ -57,7 +55,7 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<LinearRing, com.vividsolutions.jts.geom.LinearRing, GMLBasePointParser, CoordinateBaseParser>
         implements MixedLineraRingHandler {
 
-    private AbstractGeometryHandler<AbstractGeometry, Point, CoordinateBaseParser, GMLBasePointParser> internalDirectPosHandler;
+    private InternalDirectPosLinerarRingHandler internalDirectPosHandler;
 
     public MixedLinearRingGeometryHandler() {
         super.setSuccessor(new DirectPosLinearRingGeometryHandler());
@@ -98,15 +96,9 @@ public class MixedLinearRingGeometryHandler extends AbstractGeometryHandler<Line
 
         for (JAXBElement<?> element : gmlGeometry.getPosOrPointPropertyOrPointRep()) {
 
-            if (!(element.getValue() instanceof AbstractGeometry)) {
-                throw new ParserException("The element " + element.getValue()
-                        + " is not an instance of GML AbstractGeometry.");
-            }
-
             coordinates.add(
                     this.internalDirectPosHandler.buildGeometry(geometryFactory,
-                    (AbstractGeometry) element.getValue(), secondParser,
-                    firstParser).getCoordinate());
+                    element.getValue()).getCoordinate());
         }
 
         return geometryFactory.createLinearRing(coordinates.toArray(

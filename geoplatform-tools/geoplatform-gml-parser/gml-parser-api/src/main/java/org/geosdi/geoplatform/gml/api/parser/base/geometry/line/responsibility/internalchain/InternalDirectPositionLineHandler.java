@@ -36,10 +36,11 @@
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.internalchain;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import com.vividsolutions.jts.geom.Point;
 import org.geosdi.geoplatform.gml.api.DirectPosition;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -47,21 +48,22 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalDirectPositionLineHandler extends BaseGeometryHandler<AbstractGeometry, com.vividsolutions.jts.geom.Point, CoordinateBaseParser> {
+public class InternalDirectPositionLineHandler
+        extends AbstractInternalChainHandler<Point> {
+
+    private CoordinateBaseParser coordinateBaseParser = GMLBaseParametersRepo.getDefaultCoordinateBaseParser();
 
     public InternalDirectPositionLineHandler() {
         super.setSuccessor(new InternalCoordLineHandler());
     }
 
     @Override
-    public com.vividsolutions.jts.geom.Point buildGeometry(
-            GeometryFactory geometryFactory,
-            AbstractGeometry gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
+    public Point buildGeometry(GeometryFactory geometryFactory,
+            Object object) throws ParserException {
 
-        return gmlGeometry instanceof DirectPosition
-               ? geometryFactory.createPoint(parser.parseCoordinate(
-                (DirectPosition) gmlGeometry)) : super.forwardBuildGeometry(
-                geometryFactory, gmlGeometry, parser);
+        return object instanceof DirectPosition
+               ? geometryFactory.createPoint(coordinateBaseParser.parseCoordinate(
+                (DirectPosition) object)) : super.forwardBuildGeometry(
+                geometryFactory, object);
     }
 }

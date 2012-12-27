@@ -33,15 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain;
+package org.geosdi.geoplatform.gml.api.jaxb.context;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
+import com.google.common.base.Preconditions;
+import com.vividsolutions.jts.geom.Geometry;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBIntrospector;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.PointProperty;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
+import org.geosdi.geoplatform.gml.api.PropertyType;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
@@ -50,19 +50,44 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointPropertyLinearRingHandler extends AbstractInternalChainHandler<Point> {
+public abstract class AbstractGMLUnmarshaller
+        implements GMLUnmarshaller {
 
-    private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
+    protected GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();
 
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            Object object) throws ParserException {
+    protected Geometry parseElement(Object element) throws ParserException {
+        Object value = JAXBIntrospector.getValue(element);
 
-        if (object instanceof PointProperty) {
-            return pointParser.parseGeometry((PointProperty) object);
+        if (value instanceof PropertyType) {
+            return sextanteParser.parseGeometry((PropertyType) value);
+        } else if (value instanceof AbstractGeometry) {
+            return sextanteParser.parseGeometry((AbstractGeometry) value);
         }
 
-        throw new ParserException("There are no Rings in this Chain "
-                + "to build GML Geometry with this Object : " + object);
+        throw new ParserException("The Object must be an instance of PropertyType "
+                + " or AbstractGeometry Class.");
+
+    }
+
+    protected <T> JAXBElement<T> parseElement(Object element,
+            Class<T> type) throws ParserException {
+
+        Preconditions.checkNotNull(element, "The Object Element must not "
+                + "be null.");
+
+        if (element instanceof JAXBElement) {
+            Geometry geom = parseElement(element);
+            if (type.isAssignableFrom(geom.getClass())) {
+                T value = (T) geom;
+                return new JAXBElement<T>(((JAXBElement<?>) element).getName(),
+                        type, value);
+            } else {
+                throw new ParserException("Geometry class " + geom.getClass().getName()
+                        + " not match " + type.getName());
+            }
+        } else {
+            throw new ParserException("The Object element is not an instance"
+                    + " of JAXBElement class");
+        }
     }
 }

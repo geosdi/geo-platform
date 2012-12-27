@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gml:MultiPolygon xmlns:ns2="http://www.w3.org/1999/xlink" xmlns:ns4="http://www.w3.org/2001/SMIL20/Language" xmlns:ns3="http://www.w3.org/2001/SMIL20/" xmlns:gml="http://www.opengis.net/gml">
+    <gml:polygonMember>
+        <gml:Polygon>
+            <gml:exterior>
+                <gml:LinearRing>
+                    <gml:pos>40.0 40.0</gml:pos>
+                    <gml:pos>20.0 45.0</gml:pos>
+                    <gml:pos>45.0 30.0</gml:pos>
+                    <gml:pos>40.0 40.0</gml:pos>
+                </gml:LinearRing>
+            </gml:exterior>
+        </gml:Polygon>
+    </gml:polygonMember>
+    <gml:polygonMember>
+        <gml:Polygon>
+            <gml:exterior>
+                <gml:LinearRing>
+                    <gml:pos>20.0 35.0</gml:pos>
+                    <gml:pos>45.0 20.0</gml:pos>
+                    <gml:pos>30.0 5.0</gml:pos>
+                    <gml:pos>10.0 10.0</gml:pos>
+                    <gml:pos>10.0 30.0</gml:pos>
+                    <gml:pos>20.0 35.0</gml:pos>
+                </gml:LinearRing>
+            </gml:exterior>
+            <gml:interior>
+                <gml:LinearRing>
+                    <gml:pos>30.0 20.0</gml:pos>
+                    <gml:pos>20.0 25.0</gml:pos>
+                    <gml:pos>20.0 15.0</gml:pos>
+                    <gml:pos>30.0 20.0</gml:pos>
+                </gml:LinearRing>
+            </gml:interior>
+        </gml:Polygon>
+    </gml:polygonMember>
+</gml:MultiPolygon>

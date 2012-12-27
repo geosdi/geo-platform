@@ -33,36 +33,69 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain;
+package org.geosdi.geoplatform.gml.impl.v311.gml.theories;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.PointProperty;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.io.WKTWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import javax.xml.bind.JAXBException;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
+import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointPropertyLinearRingHandler extends AbstractInternalChainHandler<Point> {
+@RunWith(Theories.class)
+public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
 
-    private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
+    private GMLUnmarshaller unmarshaller;
+    private static String dirFiles;
+
+    static {
+        try {
+            dirFiles = new File(".").getCanonicalPath() + File.separator + "src/test/resources/";
+        } catch (IOException ex) {
+            LoggerFactory.getLogger(GMLTheoriesSextanteParserTest.class).error(
+                    "\n### Error: {}", ex.getMessage());
+        }
+    }
 
     @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            Object object) throws ParserException {
+    public void setUp() throws JAXBException {
+        super.setUp();
+        this.unmarshaller = jaxbContext.acquireUnmarshaller();
+    }
 
-        if (object instanceof PointProperty) {
-            return pointParser.parseGeometry((PointProperty) object);
-        }
+    @DataPoints
+    public static String[] data() {
+        return new String[]{
+                    "Point.xml", "GeometryCollection.xml", "LineString.xml",
+                    "LinearRing.xml", "MultiLineString.xml", "MultiPoint.xml",
+                    "MultiPolygon.xml", "Polygon.xml"
+                };
+    }
 
-        throw new ParserException("There are no Rings in this Chain "
-                + "to build GML Geometry with this Object : " + object);
+    @Theory
+    public void testGMLGeometry(String file) throws JAXBException,
+            ParserException {
+
+        String geometryFileString = dirFiles + file;
+        File geometryFile = new File(geometryFileString);
+
+        Geometry geometry = (Geometry) unmarshaller.unmarshal(geometryFile);
+
+        WKTWriter writer = new WKTWriter();
+        logger.info("JTS GEOMETRY @@@@@@@@@@@@@@@@@@@@@@ \n" 
+                + writer.writeFormatted(geometry));
     }
 }

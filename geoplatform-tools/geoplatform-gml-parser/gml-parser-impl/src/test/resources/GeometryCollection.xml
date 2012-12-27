@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gml:MultiGeometry xmlns:ns2="http://www.w3.org/1999/xlink" xmlns:ns4="http://www.w3.org/2001/SMIL20/Language" xmlns:ns3="http://www.w3.org/2001/SMIL20/" xmlns:gml="http://www.opengis.net/gml">
+    <gml:geometryMember>
+        <gml:Point>
+            <gml:pos>0.0 0.0</gml:pos>
+        </gml:Point>
+    </gml:geometryMember>
+    <gml:geometryMember>
+        <gml:Point>
+            <gml:pos>1.0 0.0</gml:pos>
+        </gml:Point>
+    </gml:geometryMember>
+    <gml:geometryMember>
+        <gml:Point>
+            <gml:pos>1.0 1.0</gml:pos>
+        </gml:Point>
+    </gml:geometryMember>
+    <gml:geometryMember>
+        <gml:Point>
+            <gml:pos>0.0 1.0</gml:pos>
+        </gml:Point>
+    </gml:geometryMember>
+    <gml:geometryMember>
+        <gml:LineString>
+            <gml:pos>4.0 6.0</gml:pos>
+            <gml:pos>7.0 10.0</gml:pos>
+        </gml:LineString>
+    </gml:geometryMember>
+    <gml:geometryMember>
+        <gml:Polygon>
+            <gml:exterior>
+                <gml:LinearRing>
+                    <gml:pos>35.0 10.0</gml:pos>
+                    <gml:pos>10.0 20.0</gml:pos>
+                    <gml:pos>15.0 40.0</gml:pos>
+                    <gml:pos>45.0 45.0</gml:pos>
+                    <gml:pos>35.0 10.0</gml:pos>
+                </gml:LinearRing>
+            </gml:exterior>
+            <gml:interior>
+                <gml:LinearRing>
+                    <gml:pos>20.0 30.0</gml:pos>
+                    <gml:pos>35.0 35.0</gml:pos>
+                    <gml:pos>30.0 20.0</gml:pos>
+                    <gml:pos>20.0 30.0</gml:pos>
+                </gml:LinearRing>
+            </gml:interior>
+        </gml:Polygon>
+    </gml:geometryMember>
+    <gml:geometryMember>
+        <gml:LineString>
+            <gml:pos>7.0 7.0</gml:pos>
+            <gml:pos>6.0 9.0</gml:pos>
+            <gml:pos>6.0 11.0</gml:pos>
+            <gml:pos>7.0 12.0</gml:pos>
+            <gml:pos>9.0 11.0</gml:pos>
+            <gml:pos>11.0 12.0</gml:pos>
+            <gml:pos>13.0 11.0</gml:pos>
+            <gml:pos>13.0 9.0</gml:pos>
+            <gml:pos>11.0 7.0</gml:pos>
+            <gml:pos>7.0 7.0</gml:pos>
+        </gml:LineString>
+    </gml:geometryMember>
+</gml:MultiGeometry>

@@ -11,7 +11,6 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlType;
@@ -58,7 +57,6 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LineStringType", propOrder = {
     "posOrPointPropertyOrPointRep",
-    "pos",
     "posList",
     "coordinates"
 })
@@ -69,6 +67,8 @@ public class LineStringType extends AbstractCurveType
         @XmlElementRef(name = "pointProperty",
                        namespace = "http://www.opengis.net/gml",
                        type = JAXBElement.class),
+        @XmlElementRef(name = "pos", namespace = "http://www.opengis.net/gml",
+                       type = JAXBElement.class),
         @XmlElementRef(name = "pointRep",
                        namespace = "http://www.opengis.net/gml",
                        type = JAXBElement.class),
@@ -76,8 +76,6 @@ public class LineStringType extends AbstractCurveType
                        type = JAXBElement.class)
     })
     protected List<JAXBElement<?>> posOrPointPropertyOrPointRep;
-    @XmlElement(name = "pos", namespace = "http://www.opengis.net/gml")
-    private List<DirectPositionType> pos;
     protected DirectPositionListType posList;
     protected CoordinatesType coordinates;
 
@@ -95,7 +93,7 @@ public class LineStringType extends AbstractCurveType
      * </pre>
      *
      *
-     * <p> Objects of the following type(s) are allowed in the list null     {@link JAXBElement }{@code <}{@link PointPropertyType }{@code >}
+     * <p> Objects of the following type(s) are allowed in the list null null     {@link JAXBElement }{@code <}{@link PointPropertyType }{@code >}
      * {@link JAXBElement }{@code <}{@link CoordType }{@code >}
      * {@link JAXBElement }{@code <}{@link DirectPositionType }{@code >}
      * {@link JAXBElement }{@code <}{@link PointPropertyType }{@code >}
@@ -117,24 +115,6 @@ public class LineStringType extends AbstractCurveType
 
     public void unsetPosOrPointPropertyOrPointRep() {
         this.posOrPointPropertyOrPointRep = null;
-    }
-
-    /**
-     * @return the pos
-     */
-    @Override
-    public List<DirectPositionType> getPos() {
-        if (pos == null) {
-            this.pos = new ArrayList<DirectPositionType>();
-        }
-        return pos;
-    }
-
-    /**
-     * @param pos the pos to set
-     */
-    public void setPos(List<DirectPositionType> pos) {
-        this.pos = pos;
     }
 
     /**
@@ -214,7 +194,9 @@ public class LineStringType extends AbstractCurveType
         super.appendFields(locator, buffer, strategy);
         {
             List<JAXBElement<?>> thePosOrPointPropertyOrPointRep;
-            thePosOrPointPropertyOrPointRep = (this.isSetPosOrPointPropertyOrPointRep() ? this.getPosOrPointPropertyOrPointRep() : null);
+            thePosOrPointPropertyOrPointRep = (this.isSetPosOrPointPropertyOrPointRep()
+                                               ? this.getPosOrPointPropertyOrPointRep()
+                                               : null);
             strategy.appendField(locator, this, "posOrPointPropertyOrPointRep",
                     buffer, thePosOrPointPropertyOrPointRep);
         }

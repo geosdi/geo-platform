@@ -51,8 +51,6 @@ public interface LineString extends AbstractCurve {
 
     DirectPositionList getPosList();
 
-    List<? extends DirectPosition> getPos();
-
     boolean isSetPosOrPointPropertyOrPointRep();
 
     boolean isSetPosList();

@@ -43,6 +43,8 @@ package org.geosdi.geoplatform.gml.api;
 public interface Point extends AbstractGeometry {
 
     DirectPosition getPos();
+    
+    void setPos(DirectPosition value);
 
     Coordinates getCoordinates();
     

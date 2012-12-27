@@ -75,6 +75,7 @@ public class JTSPointParser extends AbstractJTSParser<Point, PointProperty, com.
         if (!jtsGeometry.isEmpty()) {
             DirectPosition directPosition = coordinateParser.parseCoordiante(
                     jtsGeometry.getCoordinate());
+            point.setPos(directPosition);
         }
 
         return point;

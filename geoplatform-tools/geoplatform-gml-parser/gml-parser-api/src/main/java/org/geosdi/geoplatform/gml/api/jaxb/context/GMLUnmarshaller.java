@@ -33,36 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain;
+package org.geosdi.geoplatform.gml.api.jaxb.context;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.PointProperty;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
+import java.io.File;
+import java.io.InputStream;
+import java.io.Reader;
+import java.net.URL;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointPropertyLinearRingHandler extends AbstractInternalChainHandler<Point> {
+public interface GMLUnmarshaller {
 
-    private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
+    Object unmarshal(File f) throws JAXBException,
+            ParserException;
 
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            Object object) throws ParserException {
+    Object unmarshal(InputStream is) throws JAXBException,
+            ParserException;
 
-        if (object instanceof PointProperty) {
-            return pointParser.parseGeometry((PointProperty) object);
-        }
+    Object unmarshal(Reader reader) throws JAXBException,
+            ParserException;
 
-        throw new ParserException("There are no Rings in this Chain "
-                + "to build GML Geometry with this Object : " + object);
-    }
+    Object unmarshal(URL url) throws JAXBException,
+            ParserException;
+
+    Object unmarshal(InputSource source) throws JAXBException,
+            ParserException;
+
+    Object unmarshal(Node node) throws JAXBException,
+            ParserException;
+
+    <T> JAXBElement<T> unmarshal(org.w3c.dom.Node node,
+            Class<T> declaredType) throws JAXBException, ParserException;
+
+    <T> JAXBElement<T> unmarshal(javax.xml.transform.Source source,
+            Class<T> declaredType)
+            throws JAXBException, ParserException;
+
+    <T> JAXBElement<T> unmarshal(javax.xml.stream.XMLStreamReader reader,
+            Class<T> declaredType) throws JAXBException, ParserException;
+
+    <T> JAXBElement<T> unmarshal(javax.xml.stream.XMLEventReader reader,
+            Class<T> declaredType) throws JAXBException, ParserException;
 }

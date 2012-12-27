@@ -33,16 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain;
+package org.geosdi.geoplatform.gml.api.jaxb.context;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.PointProperty;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
+import java.io.File;
+import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -50,19 +44,37 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointPropertyLinearRingHandler extends AbstractInternalChainHandler<Point> {
+public interface GMLMarshaller {
 
-    private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
+    void marshal(Object jaxbElement,
+            javax.xml.transform.Result result)
+            throws JAXBException, ParserException;
 
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            Object object) throws ParserException {
+    void marshal(Object jaxbElement,
+            java.io.OutputStream os)
+            throws JAXBException, ParserException;
 
-        if (object instanceof PointProperty) {
-            return pointParser.parseGeometry((PointProperty) object);
-        }
+    void marshal(Object jaxbElement,
+            File output)
+            throws JAXBException, ParserException;
 
-        throw new ParserException("There are no Rings in this Chain "
-                + "to build GML Geometry with this Object : " + object);
-    }
+    void marshal(Object jaxbElement,
+            java.io.Writer writer)
+            throws JAXBException, ParserException;
+
+    void marshal(Object jaxbElement,
+            org.xml.sax.ContentHandler handler)
+            throws JAXBException, ParserException;
+
+    void marshal(Object jaxbElement,
+            org.w3c.dom.Node node)
+            throws JAXBException, ParserException;
+
+    void marshal(Object jaxbElement,
+            javax.xml.stream.XMLStreamWriter writer)
+            throws JAXBException, ParserException;
+
+    void marshal(Object jaxbElement,
+            javax.xml.stream.XMLEventWriter writer)
+            throws JAXBException, ParserException;
 }

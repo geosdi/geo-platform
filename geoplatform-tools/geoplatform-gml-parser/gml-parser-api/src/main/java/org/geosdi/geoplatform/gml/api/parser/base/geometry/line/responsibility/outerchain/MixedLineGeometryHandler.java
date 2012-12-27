@@ -37,17 +37,17 @@ package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.LineString;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.internalchain.InternalPointLineHandler;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -57,7 +57,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString, com.vividsolutions.jts.geom.LineString, GMLBasePointParser, CoordinateBaseParser>
         implements MixedLineHandler {
 
-    private AbstractGeometryHandler<AbstractGeometry, Point, GMLBasePointParser, CoordinateBaseParser> mixedPointHandler;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private InternalPointLineHandler mixedPointHandler;
 
     public MixedLineGeometryHandler() {
         super.setSuccessor(new DirectPositionLineGeometryHandler());
@@ -98,14 +99,9 @@ public class MixedLineGeometryHandler extends AbstractGeometryHandler<LineString
 
         for (JAXBElement<?> element : gmlGeometry.getPosOrPointPropertyOrPointRep()) {
 
-            if (!(element.getValue() instanceof AbstractGeometry)) {
-                throw new ParserException("The element " + element.getValue()
-                        + " is not an instance of GML AbstractGeometry.");
-            }
-
             coordinates.add(
                     this.mixedPointHandler.buildGeometry(geometryFactory,
-                    (AbstractGeometry) element.getValue(), secondParser).getCoordinate());
+                    element.getValue()).getCoordinate());
         }
 
         return geometryFactory.createLineString(coordinates.toArray(

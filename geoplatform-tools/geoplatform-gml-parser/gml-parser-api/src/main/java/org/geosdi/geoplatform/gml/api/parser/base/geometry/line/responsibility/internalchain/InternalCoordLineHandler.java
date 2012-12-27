@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.gml.api.parser.base.geometry.line.responsibility.
 
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.Coord;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -48,19 +48,21 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalCoordLineHandler extends BaseGeometryHandler<AbstractGeometry, Point, CoordinateBaseParser> {
+public class InternalCoordLineHandler
+        extends AbstractInternalChainHandler<Point> {
+
+    private CoordinateBaseParser coordinateBaseParser = GMLBaseParametersRepo.getDefaultCoordinateBaseParser();
 
     @Override
     public Point buildGeometry(GeometryFactory geometryFactory,
-            AbstractGeometry gmlGeometry,
-            CoordinateBaseParser parser) throws ParserException {
+            Object object) throws ParserException {
 
-        if (gmlGeometry instanceof Coord) {
-            return geometryFactory.createPoint(parser.parseCoordinate(
-                    (Coord) gmlGeometry));
+        if (object instanceof Coord) {
+            return geometryFactory.createPoint(coordinateBaseParser.parseCoordinate(
+                    (Coord) object));
         }
 
-        throw new ParserException("No Valid GML Geometry Type : "
-                + gmlGeometry);
+        throw new ParserException("Unespected Value : "
+                + object + " to build GML Geometry.");
     }
 }

@@ -37,11 +37,10 @@ package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internal
 
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.DirectPosition;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -49,7 +48,9 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalDirectPosLinerarRingHandler extends AbstractGeometryHandler<AbstractGeometry, Point, CoordinateBaseParser, GMLBasePointParser> {
+public class InternalDirectPosLinerarRingHandler extends AbstractInternalChainHandler<Point> {
+
+    private CoordinateBaseParser coordinateBaseParser = GMLBaseParametersRepo.getDefaultCoordinateBaseParser();
 
     public InternalDirectPosLinerarRingHandler() {
         super.setSuccessor(new InternalCoordLinearRingHandler());
@@ -58,28 +59,12 @@ public class InternalDirectPosLinerarRingHandler extends AbstractGeometryHandler
     @Override
     public Point buildGeometry(
             GeometryFactory geometryFactory,
-            AbstractGeometry gmlGeometry,
-            CoordinateBaseParser firstParser,
-            GMLBasePointParser secondParser) throws ParserException {
+            Object object) throws ParserException {
 
-        return (Point) (gmlGeometry instanceof DirectPosition
-                        ? firstParser.parseCoordinate(
-                        (DirectPosition) gmlGeometry)
-                        : super.forwarBuildGeometry(geometryFactory, gmlGeometry,
-                        firstParser, secondParser));
-    }
-
-    /**
-     *
-     * This method is deprecated for this class.
-     *
-     */
-    @Override
-    @Deprecated
-    public Point buildGeometry(
-            GeometryFactory geometryFactory,
-            AbstractGeometry gmlGeometry,
-            GMLBasePointParser parser) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return object instanceof DirectPosition
+               ? geometryFactory.createPoint(
+                coordinateBaseParser.parseCoordinate(
+                (DirectPosition) object))
+               : super.forwardBuildGeometry(geometryFactory, object);
     }
 }

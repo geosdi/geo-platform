@@ -33,36 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internalchain;
+package org.geosdi.geoplatform.gml.impl.v311;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.PointProperty;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.BaseGeometryHandler;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import com.vividsolutions.jts.io.WKTReader;
+import javax.xml.bind.JAXBException;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
+import org.junit.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalPointPropertyLinearRingHandler extends AbstractInternalChainHandler<Point> {
+public abstract class AbstractGMLParserTest {
 
-    private GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    protected static GMLJAXBContext jaxbContext;
 
-    @Override
-    public Point buildGeometry(GeometryFactory geometryFactory,
-            Object object) throws ParserException {
+    static {
+        jaxbContext = GMLContextFactoryV311.createJAXBContext();
+    }
+    //
+    protected GeometryFactory geometryFactory = new GeometryFactory();
+    protected WKTReader reader;
 
-        if (object instanceof PointProperty) {
-            return pointParser.parseGeometry((PointProperty) object);
-        }
-
-        throw new ParserException("There are no Rings in this Chain "
-                + "to build GML Geometry with this Object : " + object);
+    @Before
+    public void setUp() throws JAXBException {
+        reader = new WKTReader(geometryFactory);
     }
 }

@@ -37,11 +37,10 @@ package org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.internal
 
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.Coord;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractGeometryHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.responsibility.AbstractInternalChainHandler;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -49,31 +48,22 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InternalCoordLinearRingHandler extends AbstractGeometryHandler<AbstractGeometry, Point, CoordinateBaseParser, GMLBasePointParser> {
-    
+public class InternalCoordLinearRingHandler extends AbstractInternalChainHandler<Point> {
+
+    private CoordinateBaseParser coordinateBaseParser = GMLBaseParametersRepo.getDefaultCoordinateBaseParser();
+
     public InternalCoordLinearRingHandler() {
         super.setSuccessor(new InternalPointLinearRingHandler());
     }
-    
+
     @Override
     public Point buildGeometry(
             GeometryFactory geometryFactory,
-            AbstractGeometry gmlGeometry,
-            CoordinateBaseParser firstParser,
-            GMLBasePointParser secondParser) throws ParserException {
-        
-        return (Point) (gmlGeometry instanceof Coord
-                        ? firstParser.parseCoordinate((Coord) gmlGeometry)
-                        : buildGeometry(geometryFactory, gmlGeometry,
-                        secondParser));
-    }
-    
-    @Override
-    public Point buildGeometry(
-            GeometryFactory geometryFactory,
-            AbstractGeometry gmlGeometry,
-            GMLBasePointParser parser) throws ParserException {
-        
-        return super.forwardBuildGeometry(geometryFactory, gmlGeometry, parser);
+            Object object) throws ParserException {
+
+        return object instanceof Coord
+               ? geometryFactory.createPoint(
+                coordinateBaseParser.parseCoordinate((Coord) object))
+               : super.forwardBuildGeometry(geometryFactory, object);
     }
 }

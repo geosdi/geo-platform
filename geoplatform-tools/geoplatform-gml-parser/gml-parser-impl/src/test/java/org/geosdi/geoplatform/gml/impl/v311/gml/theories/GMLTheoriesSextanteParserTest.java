@@ -44,6 +44,7 @@ import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
+import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
@@ -61,13 +62,9 @@ public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
     private GMLUnmarshaller unmarshaller;
     private static String dirFiles;
 
-    static {
-        try {
-            dirFiles = new File(".").getCanonicalPath() + File.separator + "src/test/resources/";
-        } catch (IOException ex) {
-            LoggerFactory.getLogger(GMLTheoriesSextanteParserTest.class).error(
-                    "\n### Error: {}", ex.getMessage());
-        }
+    @BeforeClass
+    public static void buildDirFiles() throws IOException {
+        dirFiles = new File(".").getCanonicalPath() + File.separator + "src/test/resources/";
     }
 
     @Override
@@ -95,7 +92,7 @@ public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
         Geometry geometry = (Geometry) unmarshaller.unmarshal(geometryFile);
 
         WKTWriter writer = new WKTWriter();
-        logger.info("JTS GEOMETRY @@@@@@@@@@@@@@@@@@@@@@ \n" 
+        logger.info("JTS GEOMETRY @@@@@@@@@@@@@@@@@@@@@@ \n"
                 + writer.writeFormatted(geometry));
     }
 }

@@ -866,12 +866,6 @@
             <!-- HTTP UTILS -->
             <!-- =========================================================== -->
             <dependency>
-                <groupId>org.codehaus.jettison</groupId>
-                <artifactId>jettison</artifactId>
-                <version>1.3.1</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
                 <version>${aspectj-version}</version>

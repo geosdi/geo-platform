@@ -39,15 +39,6 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
 
-        <!-- CHECK THIS!!! without it, it will work on local test, but will fail 
-     			in dependant modules -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <!-- <scope>runtime</scope> -->
-        </dependency>
-
-
         <!-- GEOPLATFORM WS -->
         <dependency>
             <groupId>org.geosdi</groupId>

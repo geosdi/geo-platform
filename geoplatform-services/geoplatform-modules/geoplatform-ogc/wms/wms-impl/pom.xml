@@ -56,13 +56,6 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
 
-        <!-- This dep is needed in core::dao, but seems not to be transitively
-     			imported -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>

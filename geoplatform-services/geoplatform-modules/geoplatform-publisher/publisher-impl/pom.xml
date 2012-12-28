@@ -41,9 +41,14 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-
-        <!-- This dep is needed in core::dao, but seems not to be transitively
-     			imported -->
+        
+        <!--
+        Transitive dependiency of commons-httpclient:commons-httpclient.
+        The latter is a transitive dependiency for:
+        1. org.geotools:gt-wms
+        2. it.geosolutions:geoserver-manager
+        3. it.geosolutions:geonetwork-manager
+        -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>

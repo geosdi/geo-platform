@@ -18,7 +18,7 @@
 
     <dependencies>
         
-    <!-- GEOPLATFORM -->
+        <!-- GEOPLATFORM -->
        
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -30,16 +30,24 @@
             <artifactId>geoplatform-configurator</artifactId>
         </dependency>
         
-         <!-- GEONETWORK -->
+        <!-- GEONETWORK -->
         <dependency>
             <groupId>it.geosolutions</groupId>
             <artifactId>geonetwork-manager</artifactId>
             <version>${geonetwork-version}</version>
         </dependency>
+        <!--
+        Transitive dependiency of commons-httpclient:commons-httpclient.
+        The latter is a transitive dependiency for it.geosolutions:geonetwork-manager
+        -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
         
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
-	<!-- =========================================================== -->
+        <!-- =========================================================== -->
             
         <dependency>
             <groupId>com.google.guava</groupId>

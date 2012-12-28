@@ -41,6 +41,7 @@ import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,7 +56,8 @@ public abstract class AbstractGMLParserTest {
     //
     protected static GMLJAXBContext jaxbContext;
 
-    static {
+    @BeforeClass
+    public static void loadJAXBContext() {
         jaxbContext = GMLContextFactoryV311.createJAXBContext();
     }
     //

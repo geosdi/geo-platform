@@ -39,7 +39,6 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.WKTWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.StringWriter;
 import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
@@ -49,7 +48,6 @@ import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
-import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -64,7 +62,8 @@ public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
 
     @BeforeClass
     public static void buildDirFiles() throws IOException {
-        dirFiles = new File(".").getCanonicalPath() + File.separator + "src/test/resources/";
+        dirFiles = new File(".").getCanonicalPath() + File.separator
+                + "src/test/resources/";
     }
 
     @Override
@@ -78,7 +77,7 @@ public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
         return new String[]{
                     "Point.xml", "GeometryCollection.xml", "LineString.xml",
                     "LinearRing.xml", "MultiLineString.xml", "MultiPoint.xml",
-                    "MultiPolygon.xml", "Polygon.xml"
+                    "MultiPolygon.xml", "Polygon.xml", "MultiSurface.xml"
                 };
     }
 
@@ -92,7 +91,7 @@ public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
         Geometry geometry = (Geometry) unmarshaller.unmarshal(geometryFile);
 
         WKTWriter writer = new WKTWriter();
-        logger.info("JTS GEOMETRY @@@@@@@@@@@@@@@@@@@@@@ \n"
-                + writer.writeFormatted(geometry));
+        logger.info("############### JTS GEOMETRY : \n\n {} \n",
+                writer.writeFormatted(geometry));
     }
 }

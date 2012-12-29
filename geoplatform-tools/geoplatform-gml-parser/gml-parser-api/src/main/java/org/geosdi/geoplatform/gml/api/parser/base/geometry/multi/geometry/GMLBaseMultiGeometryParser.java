@@ -50,9 +50,10 @@ import org.geosdi.geoplatform.gml.api.MultiGeometryProperty;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.BaseParameterEnum;
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -61,6 +62,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeometry, MultiGeometryProperty, GeometryCollection> {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     private GMLBaseSextanteParser geometryParser = GMLBaseParametersRepo.getDefaultSextanteParser();
     private MemberBuilder multiGeometryMember = new MultiGeometryMember();
     private MemberBuilder multiGeometryMembers = new MultiGeometryMembers();
@@ -82,7 +85,7 @@ public class GMLBaseMultiGeometryParser extends AbstractGMLBaseParser<MultiGeome
         List<Geometry> geometries = new ArrayList<Geometry>();
 
         this.multiGeometryMember.builMember(gmlGeometry, geometries);
-        this.multiGeometryMember.builMember(gmlGeometry, geometries);
+        this.multiGeometryMembers.builMember(gmlGeometry, geometries);
 
         Preconditions.checkArgument(!geometries.isEmpty(),
                 "GeometryMember and GeometryMembers "

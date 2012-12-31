@@ -33,55 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.jaxb.context;
+package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.URL;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
+import javax.xml.bind.JAXBContext;
+import org.apache.commons.pool.BasePoolableObjectFactory;
+import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GMLUnmarshaller {
+public class GMLUnmarshallerFactory
+        extends BasePoolableObjectFactory<DefaultGMLUnmarshaller> {
 
-    Object unmarshal(File f) throws JAXBException,
-            ParserException;
+    private final JAXBContext jaxbContext;
 
-    Object unmarshal(InputStream is) throws JAXBException,
-            ParserException;
+    public GMLUnmarshallerFactory(JAXBContext theJaxbContext) {
+        this.jaxbContext = theJaxbContext;
+    }
 
-    Object unmarshal(Reader reader) throws JAXBException,
-            ParserException;
+    @Override
+    public DefaultGMLUnmarshaller makeObject() throws Exception {
+        return new DefaultGMLUnmarshaller(jaxbContext.createUnmarshaller());
+    }
 
-    Object unmarshal(URL url) throws JAXBException,
-            ParserException;
-
-    Object unmarshal(InputSource source) throws JAXBException,
-            ParserException;
-
-    Object unmarshal(Node node) throws JAXBException,
-            ParserException;
-
-    <T> JAXBElement<T> unmarshal(org.w3c.dom.Node node,
-            Class<T> declaredType) throws JAXBException, ParserException;
-
-    <T> JAXBElement<T> unmarshal(javax.xml.transform.Source source,
-            Class<T> declaredType)
-            throws JAXBException, ParserException;
-
-    <T> JAXBElement<T> unmarshal(javax.xml.stream.XMLStreamReader reader,
-            Class<T> declaredType) throws JAXBException, ParserException;
-
-    <T> JAXBElement<T> unmarshal(javax.xml.stream.XMLEventReader reader,
-            Class<T> declaredType) throws JAXBException, ParserException;
-    
-    void dispose() throws Exception;
+    @Override
+    public void destroyObject(DefaultGMLUnmarshaller obj) throws Exception {
+        obj.dispose();
+    }
 }

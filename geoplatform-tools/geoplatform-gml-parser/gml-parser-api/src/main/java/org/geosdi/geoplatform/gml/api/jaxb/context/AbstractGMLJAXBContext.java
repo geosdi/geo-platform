@@ -36,8 +36,10 @@
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
+import org.apache.commons.pool.impl.GenericObjectPool;
 import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
+import org.geosdi.geoplatform.gml.api.jaxb.context.pool.GMLUnmarshallerFactory;
+import org.geosdi.geoplatform.gml.api.jaxb.context.pool.PoolConfig;
 
 /**
  *
@@ -47,13 +49,19 @@ import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
 public abstract class AbstractGMLJAXBContext implements GMLJAXBContext {
 
     protected final JAXBContext jaxbContext;
+    private final GenericObjectPool<DefaultGMLUnmarshaller> gmlUnmarshallerPool;
 
     public AbstractGMLJAXBContext(JAXBContext theJaxbContext) {
         this.jaxbContext = theJaxbContext;
+        this.gmlUnmarshallerPool = new GenericObjectPool<DefaultGMLUnmarshaller>(
+                new GMLUnmarshallerFactory(theJaxbContext), new PoolConfig());
     }
 
     @Override
-    public GMLUnmarshaller acquireUnmarshaller() throws JAXBException {
-        return new DefaultGMLUnmarshaller(jaxbContext.createUnmarshaller());
+    public GMLUnmarshaller acquireUnmarshaller() throws Exception {
+        DefaultGMLUnmarshaller unmarshaller = gmlUnmarshallerPool.borrowObject();
+        gmlUnmarshallerPool.returnObject(unmarshaller);
+
+        return unmarshaller;
     }
 }

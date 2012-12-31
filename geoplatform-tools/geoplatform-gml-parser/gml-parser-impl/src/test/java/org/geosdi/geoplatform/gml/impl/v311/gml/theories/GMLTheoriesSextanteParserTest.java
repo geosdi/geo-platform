@@ -39,8 +39,6 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.WKTWriter;
 import java.io.File;
 import java.io.IOException;
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
 import org.junit.BeforeClass;
@@ -57,19 +55,12 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
 
-    private GMLUnmarshaller unmarshaller;
     private static String dirFiles;
 
     @BeforeClass
     public static void buildDirFiles() throws IOException {
         dirFiles = new File(".").getCanonicalPath() + File.separator
                 + "src/test/resources/";
-    }
-
-    @Override
-    public void setUp() throws JAXBException {
-        super.setUp();
-        this.unmarshaller = jaxbContext.acquireUnmarshaller();
     }
 
     @DataPoints
@@ -82,16 +73,18 @@ public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
     }
 
     @Theory
-    public void testGMLGeometry(String file) throws JAXBException,
+    public void testGMLGeometry(String file) throws Exception,
             ParserException {
-
+        
         String geometryFileString = dirFiles + file;
         File geometryFile = new File(geometryFileString);
 
-        Geometry geometry = (Geometry) unmarshaller.unmarshal(geometryFile);
+        Geometry geometry = (Geometry) jaxbContext.acquireUnmarshaller().unmarshal(
+                geometryFile);
 
         WKTWriter writer = new WKTWriter();
-        logger.info("############### JTS GEOMETRY : \n\n {} \n",
+        logger.info("############### JTS GEOMETRY : {} \n\n {} \n",
+                geometry.getClass().getSimpleName(),
                 writer.writeFormatted(geometry));
     }
 }

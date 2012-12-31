@@ -40,12 +40,8 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 import java.io.StringWriter;
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
 import org.junit.Test;
 
@@ -56,18 +52,14 @@ import org.junit.Test;
  */
 public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
-    private GMLMarshaller marshaller;
-
     @Override
-    public void setUp() throws JAXBException {
+    public void setUp() throws Exception {
         super.setUp();
-        this.marshaller = jaxbContext.acquireMarshaller();
         reader = new WKTReader(geometryFactory);
     }
 
     @Test
-    public void testPoint() throws JAXBException,
-            ParserException {
+    public void testPoint() throws Exception {
         Coordinate ptc = new Coordinate(10, 20);
 
         Point point = geometryFactory.createPoint(ptc);
@@ -75,14 +67,13 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
         StringWriter writer = new StringWriter();
 
-        this.marshaller.marshal(point, writer);
+        jaxbContext.acquireMarshaller().marshal(point, writer);
 
         logger.info("GML V311 Point : \n" + writer);
     }
 
     @Test
-    public void testLineString() throws JAXBException,
-            ParserException {
+    public void testLineString() throws Exception {
         Coordinate[] lsc = new Coordinate[8];
         lsc[0] = new Coordinate(5.0d, 5.0d);
         lsc[1] = new Coordinate(6.0d, 5.0d);
@@ -98,14 +89,13 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
         StringWriter writer = new StringWriter();
 
-        this.marshaller.marshal(lineString, writer);
+        jaxbContext.acquireMarshaller().marshal(lineString, writer);
 
         logger.info("GML V311 LineString : \n" + writer);
     }
 
     @Test
-    public void testLinearRing() throws JAXBException,
-            ParserException {
+    public void testLinearRing() throws Exception {
         Coordinate[] lrc = new Coordinate[10];
         lrc[0] = new Coordinate(7, 7);
         lrc[1] = new Coordinate(6, 9);
@@ -122,68 +112,63 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         linearRing.setSRID(4326);
 
         StringWriter writer = new StringWriter();
-        this.marshaller.marshal(linearRing, writer);
+        jaxbContext.acquireMarshaller().marshal(linearRing, writer);
 
         logger.info("GML V311 LinearRing : \n " + writer);
     }
 
     @Test
-    public void testPolygon() throws ParseException,
-            JAXBException, ParserException {
+    public void testPolygon() throws Exception {
 
         Geometry polygon = reader.read("POLYGON ((35 10, 10 20, 15 40, 45 45, 35 10), "
                 + "(20 30, 35 35, 30 20, 20 30))");
 
         StringWriter writer = new StringWriter();
 
-        this.marshaller.marshal(polygon, writer);
+        jaxbContext.acquireMarshaller().marshal(polygon, writer);
 
         logger.info("GML V311 Polygon : \n  " + writer);
     }
 
     @Test
-    public void testMultiPoint() throws ParseException, JAXBException,
-            ParserException {
+    public void testMultiPoint() throws Exception {
 
         Geometry multiPoint = reader.read("MULTIPOINT ((10 40), (40 30), "
                 + "(20 20), (30 10))");
 
         StringWriter writer = new StringWriter();
-        this.marshaller.marshal(multiPoint, writer);
+        jaxbContext.acquireMarshaller().marshal(multiPoint, writer);
 
         logger.info("GML V311 MultiPoint : \n " + writer);
     }
 
     @Test
-    public void testMultiLineString() throws ParseException, JAXBException,
-            ParserException {
+    public void testMultiLineString() throws Exception {
 
         Geometry multiLineString = reader.read("MULTILINESTRING ((10 10, 20 20, 10 40), "
                 + "(40 40, 30 30, 40 20, 30 10))");
 
         StringWriter writer = new StringWriter();
-        this.marshaller.marshal(multiLineString, writer);
+        jaxbContext.acquireMarshaller().marshal(multiLineString, writer);
 
         logger.info("GML V311 MultiLineString : \n " + writer);
     }
 
     @Test
-    public void testMultiPolygon() throws ParseException, JAXBException,
-            ParserException {
+    public void testMultiPolygon() throws Exception {
 
         Geometry multiPolygon = reader.read("MULTIPOLYGON (((40 40, 20 45,"
                 + " 45 30, 40 40)), ((20 35, 45 20, 30 5, "
                 + "10 10, 10 30, 20 35), (30 20, 20 25, 20 15, 30 20)))");
 
         StringWriter writer = new StringWriter();
-        this.marshaller.marshal(multiPolygon, writer);
+        jaxbContext.acquireMarshaller().marshal(multiPolygon, writer);
 
         logger.info("GML V311 MultiPolygon : \n " + writer);
     }
 
     @Test
-    public void testGeometryCollection() throws ParseException, JAXBException,
-            ParserException {
+    public void testGeometryCollection() throws Exception {
 
         Geometry geometryCollection = reader.read("GEOMETRYCOLLECTION(POINT(0 0), "
                 + "POINT(1 0), POINT(1 1), POINT(0 1), LINESTRING(4 6,7 10), "
@@ -192,7 +177,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
                 + " 7 12, 9 11, 11 12, 13 11, 13 9, 11 7, 7 7))");
 
         StringWriter writer = new StringWriter();
-        this.marshaller.marshal(geometryCollection, writer);
+        jaxbContext.acquireMarshaller().marshal(geometryCollection, writer);
 
         logger.info("GML V311 Geometry Collection : \n " + writer);
     }

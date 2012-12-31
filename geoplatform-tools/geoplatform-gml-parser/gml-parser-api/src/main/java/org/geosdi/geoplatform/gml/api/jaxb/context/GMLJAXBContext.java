@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
-import javax.xml.bind.JAXBException;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -44,7 +42,7 @@ import javax.xml.bind.JAXBException;
  */
 public interface GMLJAXBContext {
 
-    GMLMarshaller acquireMarshaller() throws JAXBException;
+    GMLMarshaller acquireMarshaller() throws Exception;
 
-    GMLUnmarshaller acquireUnmarshaller() throws JAXBException;
+    GMLUnmarshaller acquireUnmarshaller() throws Exception;
 }

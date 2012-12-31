@@ -100,8 +100,10 @@ public class GMLSextantePoolParserTest extends AbstractGMLParserTest {
     private long executeSingleTask() throws Exception {
         long start = System.currentTimeMillis();
 
-        Geometry geometry = (Geometry) jaxbContext.acquireUnmarshaller().unmarshal(
-                file);
+        synchronized (this) {
+            Geometry geometry = (Geometry) jaxbContext.acquireUnmarshaller().unmarshal(
+                    file);
+        }
 
         return System.currentTimeMillis() - start;
     }

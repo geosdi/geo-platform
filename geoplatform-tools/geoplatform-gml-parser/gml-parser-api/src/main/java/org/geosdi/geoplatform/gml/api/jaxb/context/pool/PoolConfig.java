@@ -46,9 +46,9 @@ import org.apache.commons.pool.impl.GenericObjectPool;
 public class PoolConfig extends GenericObjectPool.Config {
 
     {
-        maxIdle = 10;
-        maxActive = 50;
-        minIdle = 2;
+        maxIdle = 50;
+        maxActive = 100;
+        minIdle = 10;
         whenExhaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_GROW;
         timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
         numTestsPerEvictionRun = 25;

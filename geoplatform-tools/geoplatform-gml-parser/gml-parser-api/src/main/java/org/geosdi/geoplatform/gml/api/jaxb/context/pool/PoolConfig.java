@@ -33,55 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.jaxb.context;
+package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.URL;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
+import org.apache.commons.pool.impl.GenericKeyedObjectPool;
+import org.apache.commons.pool.impl.GenericObjectPool;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GMLUnmarshaller {
+public class PoolConfig extends GenericObjectPool.Config {
 
-    Object unmarshal(File f) throws JAXBException,
-            ParserException;
-
-    Object unmarshal(InputStream is) throws JAXBException,
-            ParserException;
-
-    Object unmarshal(Reader reader) throws JAXBException,
-            ParserException;
-
-    Object unmarshal(URL url) throws JAXBException,
-            ParserException;
-
-    Object unmarshal(InputSource source) throws JAXBException,
-            ParserException;
-
-    Object unmarshal(Node node) throws JAXBException,
-            ParserException;
-
-    <T> JAXBElement<T> unmarshal(org.w3c.dom.Node node,
-            Class<T> declaredType) throws JAXBException, ParserException;
-
-    <T> JAXBElement<T> unmarshal(javax.xml.transform.Source source,
-            Class<T> declaredType)
-            throws JAXBException, ParserException;
-
-    <T> JAXBElement<T> unmarshal(javax.xml.stream.XMLStreamReader reader,
-            Class<T> declaredType) throws JAXBException, ParserException;
-
-    <T> JAXBElement<T> unmarshal(javax.xml.stream.XMLEventReader reader,
-            Class<T> declaredType) throws JAXBException, ParserException;
-    
-    void dispose() throws Exception;
+    {
+        maxIdle = 50;
+        maxActive = 100;
+        minIdle = 10;
+        whenExhaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_GROW;
+        timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
+        numTestsPerEvictionRun = 25;
+        minEvictableIdleTimeMillis = 1000L * 60L * 5L;
+    }
 }

@@ -36,10 +36,12 @@
 package org.geosdi.geoplatform.gml.impl.v311.jaxb.context;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import org.apache.commons.pool.impl.GenericObjectPool;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.AbstractGMLJAXBContext;
+import org.geosdi.geoplatform.gml.api.jaxb.context.pool.PoolConfig;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool.GMLMarshallerFactoryV311;
 
 /**
  *
@@ -48,15 +50,19 @@ import org.geosdi.geoplatform.gml.api.jaxb.context.AbstractGMLJAXBContext;
  */
 public class GMLJAXBContextV311 extends AbstractGMLJAXBContext {
 
+    private final GenericObjectPool<GMLMarshaller> gmlMarshallerPool;
+
     public GMLJAXBContextV311(JAXBContext theJaxbContext) {
         super(theJaxbContext);
+        this.gmlMarshallerPool = new GenericObjectPool<GMLMarshaller>(new GMLMarshallerFactoryV311(
+                theJaxbContext), new PoolConfig());
     }
 
     @Override
-    public GMLMarshaller acquireMarshaller() throws JAXBException {
-        Marshaller marshaller = jaxbContext.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+    public GMLMarshaller acquireMarshaller() throws Exception {
+        GMLMarshaller marshaller = gmlMarshallerPool.borrowObject();
+        gmlMarshallerPool.returnObject(marshaller);
         
-        return new GMLMarshallerV311(marshaller);
+        return marshaller;
     }
 }

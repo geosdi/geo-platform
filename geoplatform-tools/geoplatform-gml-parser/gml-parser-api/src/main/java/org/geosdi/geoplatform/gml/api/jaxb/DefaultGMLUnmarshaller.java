@@ -47,6 +47,8 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.Source;
 import org.geosdi.geoplatform.gml.api.jaxb.context.AbstractGMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
@@ -56,74 +58,81 @@ import org.xml.sax.InputSource;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
-
+    
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     private final Unmarshaller unmarshaller;
-
+    
     public DefaultGMLUnmarshaller(Unmarshaller theUnmarshaller) {
         this.unmarshaller = theUnmarshaller;
     }
-
+    
     @Override
     public Object unmarshal(File f) throws JAXBException,
             ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(f));
     }
-
+    
     @Override
     public Object unmarshal(InputStream is) throws JAXBException,
             ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(is));
     }
-
+    
     @Override
     public Object unmarshal(Reader reader) throws JAXBException,
             ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(reader));
     }
-
+    
     @Override
     public Object unmarshal(URL url) throws JAXBException,
             ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(url));
     }
-
+    
     @Override
     public Object unmarshal(InputSource source) throws JAXBException,
             ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(source));
     }
-
+    
     @Override
     public Object unmarshal(Node node) throws JAXBException,
             ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(node));
     }
-
+    
     @Override
     public <T> JAXBElement<T> unmarshal(Node node,
             Class<T> declaredType) throws JAXBException, ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(node),
                 declaredType);
     }
-
+    
     @Override
     public <T> JAXBElement<T> unmarshal(Source source,
             Class<T> declaredType) throws JAXBException, ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(source),
                 declaredType);
     }
-
+    
     @Override
     public <T> JAXBElement<T> unmarshal(XMLStreamReader reader,
             Class<T> declaredType) throws JAXBException, ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(reader),
                 declaredType);
     }
-
+    
     @Override
     public <T> JAXBElement<T> unmarshal(XMLEventReader reader,
             Class<T> declaredType) throws JAXBException, ParserException {
         return super.parseElement(this.unmarshaller.unmarshal(reader),
                 declaredType);
+    }
+    
+    @Override
+    public void dispose() throws Exception {
+        logger.info("DISPOSING UNMARSHALLER @@@@@@@@@@@@@@@@@@@@@");
     }
 }

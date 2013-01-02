@@ -33,58 +33,86 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.gml.theories;
+package org.geosdi.geoplatform.gml.impl.v311.gml.pool;
 
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.io.WKTWriter;
 import java.io.File;
-import java.io.IOException;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
 import org.junit.BeforeClass;
-import org.junit.experimental.theories.DataPoints;
-import org.junit.experimental.theories.Theories;
-import org.junit.experimental.theories.Theory;
-import org.junit.runner.RunWith;
+import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(Theories.class)
-public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
+public class GMLSextantePoolParserTest extends AbstractGMLParserTest {
 
-    private static String dirFiles;
+    private static final int numThreads = 50;
+    private static File file;
 
     @BeforeClass
-    public static void buildDirFiles() throws IOException {
-        dirFiles = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/";
+    public static void loadFile() throws Exception {
+        String fileString = new File(".").getCanonicalPath() + File.separator
+                + "src/test/resources/GeometryCollection.xml";
+        file = new File(fileString);
     }
 
-    @DataPoints
-    public static String[] data() {
-        return new String[]{
-                    "Point.xml", "GeometryCollection.xml", "LineString.xml",
-                    "LinearRing.xml", "MultiLineString.xml", "MultiPoint.xml",
-                    "MultiPolygon.xml", "Polygon.xml", "MultiSurface.xml"
-                };
+    @Test
+    public void gmlSextantePoolTest() throws Exception {
+        logger.info("Executed {} threads in {} s", numThreads,
+                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks()));
     }
 
-    @Theory
-    public void testGMLGeometry(String file) throws Exception,
-            ParserException {
-        
-        String geometryFileString = dirFiles + file;
-        File geometryFile = new File(geometryFileString);
+    private long executeMultiThreadsTasks() throws Exception {
+        long time = 0;
 
-        Geometry geometry = (Geometry) jaxbContext.acquireUnmarshaller().unmarshal(
-                geometryFile);
+        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
 
-        WKTWriter writer = new WKTWriter();
-        logger.info("############### JTS GEOMETRY : {} \n\n {} \n",
-                geometry.getClass().getSimpleName(),
-                writer.writeFormatted(geometry));
+        List<GMLSextanteTask> tasks = new ArrayList<GMLSextanteTask>(numThreads);
+        for (int i = 0; i < numThreads; i++) {
+            tasks.add(new GMLSextanteTask());
+        }
+
+        List<Future<Long>> results = executor.invokeAll(tasks);
+        executor.shutdown();
+
+        boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
+
+        if (flag) {
+            for (Future<Long> future : results) {
+                time += future.get();
+            }
+        } else {
+            throw new InterruptedException("Some Threads are not executed.");
+        }
+
+        return time;
+    }
+
+    private long executeSingleTask() throws Exception {
+        long start = System.currentTimeMillis();
+
+        synchronized (this) {
+            Geometry geometry = (Geometry) jaxbContext.acquireUnmarshaller().unmarshal(
+                    file);
+        }
+
+        return System.currentTimeMillis() - start;
+    }
+
+    protected class GMLSextanteTask implements Callable<Long> {
+
+        @Override
+        public Long call() throws Exception {
+            return executeSingleTask();
+        }
     }
 }

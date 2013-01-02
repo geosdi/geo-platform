@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gml.impl.v311;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.io.WKTReader;
-import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
 import org.junit.Before;
@@ -65,7 +64,7 @@ public abstract class AbstractGMLParserTest {
     protected WKTReader reader;
 
     @Before
-    public void setUp() throws JAXBException {
+    public void setUp() throws Exception {
         reader = new WKTReader(geometryFactory);
     }
 }

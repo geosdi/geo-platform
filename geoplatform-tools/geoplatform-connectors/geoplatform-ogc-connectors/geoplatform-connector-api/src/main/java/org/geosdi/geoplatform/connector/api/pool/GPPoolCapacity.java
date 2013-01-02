@@ -33,51 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
-
-import com.google.common.collect.Maps;
-import java.util.Map;
-import net.jcip.annotations.ThreadSafe;
+package org.geosdi.geoplatform.connector.api.pool;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-public class GeoPlatformServerPool<C extends GPServerConnector>
-        implements IServerPoll<C> {
+public enum GPPoolCapacity {
 
-    private Map<String, C> pool;
-    private GPPoolCapacity capacity;
+    LOW(25),
+    MEDIUM(50),
+    HIGH(100);
+    //
+    private int value;
 
-    /**
-     * 
-     * @param capacity for HashMap
-     */
-    public GeoPlatformServerPool(GPPoolCapacity theCapacity) {
-        this.pool = Maps.newHashMapWithExpectedSize(theCapacity.getValue());
-        this.capacity = theCapacity;
+    GPPoolCapacity(int theValue) {
+        this.value = theValue;
     }
 
     /**
-     * TODO: MODIFY this when it must be use. Now the used approach is not synchronized
-     * There a lot of control to do
-     * 
-     * @param connector 
+     * @return the value
      */
-    @Override
-    public synchronized void bindConnector(C connector) {
-        this.pool.put(connector.getRegistrationKey(), connector);
-    }
-
-    @Override
-    public synchronized void removeConnector(C connector) {
-        this.pool.remove(connector.getRegistrationKey());
-    }
-
-    @Override
-    public synchronized GPServerConnector getConnector(String key) {
-        return this.pool.get(key);
+    public int getValue() {
+        return value;
     }
 }

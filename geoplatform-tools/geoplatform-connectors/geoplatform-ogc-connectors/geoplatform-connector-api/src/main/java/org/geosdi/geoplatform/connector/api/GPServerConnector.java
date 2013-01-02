@@ -51,7 +51,6 @@ public abstract class GPServerConnector<T extends GPAbstractServerConnector>
         implements GeoPlatformConnector {
 
     private Date registrationDate = new Date();
-    private int usageCounter;
     protected T server;
 
     public GPServerConnector(T theServer) {
@@ -66,17 +65,11 @@ public abstract class GPServerConnector<T extends GPAbstractServerConnector>
     @Override
     public void setRegistrationDate(Date date) {
         this.registrationDate = date;
-        this.usageCounter++;
     }
 
     @Override
     public String getRegistrationKey() {
         return this.server.getURL().toString();
-    }
-
-    @Override
-    public int getUsageCounter() {
-        return this.usageCounter;
     }
 
     @Override
@@ -97,6 +90,6 @@ public abstract class GPServerConnector<T extends GPAbstractServerConnector>
     @Override
     public String toString() {
         return "GPServerConnector{" + "registrationDate=" + registrationDate
-                + ", usageCounter=" + usageCounter + '}';
+                + ", server=" + server + '}';
     }
 }

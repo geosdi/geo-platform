@@ -54,8 +54,6 @@ public interface GeoPlatformConnector {
 
     void setRegistrationDate(Date date);
 
-    int getUsageCounter();
-
     URL getURL();
 
     URI getURI() throws URISyntaxException;

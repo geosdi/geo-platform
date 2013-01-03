@@ -42,7 +42,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
-import org.geosdi.geoplatform.connector.GPWFSConnector;
+import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -111,7 +111,7 @@ public class GPGetFeatureService extends AbstractFeatureService
                     + wfsConfigurator.getDefaultWFSDataSource());
         }
 
-        GPWFSConnector serverConnector = super.createWFSConnector(serverURL);
+        GPWFSConnectorStore serverConnector = super.createWFSConnector(serverURL);
         WFSGetFeatureRequest request = serverConnector.createGetFeatureRequest();
 
         QName qName = new QName(typeName);

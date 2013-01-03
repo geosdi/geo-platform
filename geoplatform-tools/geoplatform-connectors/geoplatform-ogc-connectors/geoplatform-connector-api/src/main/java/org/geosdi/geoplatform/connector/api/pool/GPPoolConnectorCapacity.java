@@ -33,62 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
-
-import java.net.URL;
-import org.geosdi.geoplatform.connector.api.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.WFSServerConnector;
-import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+package org.geosdi.geoplatform.connector.api.pool;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPWFSConnector extends GPServerConnector<WFSServerConnector>
-        implements WFSConnector {
+public enum GPPoolConnectorCapacity {
 
-    public GPWFSConnector(URL serverURL) {
-        this(serverURL, null);
+    LOW(25),
+    MEDIUM(50),
+    HIGH(100);
+    //
+    private int value;
+
+    GPPoolConnectorCapacity(int theValue) {
+        this.value = theValue;
     }
 
-    public GPWFSConnector(URL serverURL,
-            WFSVersion theVersion) {
-        this(serverURL, null, theVersion);
-    }
-
-    public GPWFSConnector(URL serverURL,
-            GPSecurityConnector security,
-            WFSVersion theVersion) {
-        super(new WFSServerConnector(serverURL, security, theVersion));
-    }
-
-    @Override
-    public WFSVersion getVersion() {
-        return server.getVersion();
-    }
-
-    @Override
-    public WFSGetCapabilitiesRequest createGetCapabilitiesRequest() {
-        return server.createGetCapabilitiesRequest();
-    }
-
-    @Override
-    public WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest() {
-        return server.createDescribeFeatureTypeRequest();
-    }
-
-    @Override
-    public WFSGetFeatureRequest createGetFeatureRequest() {
-        return server.createGetFeatureRequest();
-    }
-
-    @Override
-    public WFSTransactionRequest createTransactionRequest() {
-        return server.createTransactionRequest();
+    /**
+     * @return the value
+     */
+    public int getValue() {
+        return value;
     }
 }

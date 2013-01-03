@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,28 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Date;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import javax.xml.bind.JAXBContext;
+import org.apache.commons.pool.impl.GenericObjectPool;
+import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
+import org.geosdi.geoplatform.gml.api.jaxb.context.AbstractGMLJAXBContext;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformConnector {
+public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext {
 
-    Date getRegistrationDate();
+    private final GenericObjectPool<DefaultGMLUnmarshaller> gmlUnmarshallerPool;
 
-    URL getURL();
+    public GMLJAXBContextPooled(JAXBContext theJaxbContext) {
+        super(theJaxbContext);
+        this.gmlUnmarshallerPool = new GenericObjectPool<DefaultGMLUnmarshaller>(
+                new GMLUnmarshallerFactory(theJaxbContext), new PoolConfig());
+    }
 
-    URI getURI() throws URISyntaxException;
+    @Override
+    public GMLUnmarshaller acquireUnmarshaller() throws Exception {
+        DefaultGMLUnmarshaller unmarshaller = gmlUnmarshallerPool.borrowObject();
+        gmlUnmarshallerPool.returnObject(unmarshaller);
 
-    GPSecurityConnector getSecurityConnector();
-
-    void dispose() throws Exception;
+        return unmarshaller;
+    }
 }

@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.services.feature;
 import java.io.IOException;
 import java.util.List;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.GPWFSConnector;
+import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -79,7 +79,7 @@ public class GPTransactionService extends AbstractFeatureService
         }
 
         try {
-            GPWFSConnector serverConnector = super.createWFSConnector(serverURL);
+            GPWFSConnectorStore serverConnector = super.createWFSConnector(serverURL);
             WFSTransactionRequest<TransactionResponseType> request =
                     serverConnector.createTransactionRequest();
 

@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,28 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Date;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.InitializationError;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformConnector {
+public class OrderedRunner extends BlockJUnit4ClassRunner {
 
-    Date getRegistrationDate();
+    public OrderedRunner(Class<?> klass) throws InitializationError {
+        super(klass);
+    }
 
-    URL getURL();
+    @Override
+    protected List<FrameworkMethod> computeTestMethods() {
+        List<FrameworkMethod> fmList = super.computeTestMethods();
+        Collections.sort(fmList, new Comparator<FrameworkMethod>() {
+            @Override
+            public int compare(FrameworkMethod fm1,
+                    FrameworkMethod fm2) {
+                Order o1 = fm1.getAnnotation(Order.class);
+                Order o2 = fm2.getAnnotation(Order.class);
 
-    URI getURI() throws URISyntaxException;
+                if ((o1 == null) || (o2 == null)) {
+                    return -1;
+                }
 
-    GPSecurityConnector getSecurityConnector();
+                return o1.order() - o2.order();
+            }
+        });
 
-    void dispose() throws Exception;
+        return fmList;
+    }
 }

@@ -47,7 +47,7 @@ import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.connector.CatalogVersionException;
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
-import org.geosdi.geoplatform.connector.GPCSWServerConnector;
+import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.connector.proxy.CSWProxyConnectionConfiguration;
 import org.geosdi.geoplatform.connector.security.SnipcCatalogBeanProvider;
@@ -605,7 +605,7 @@ class CSWServiceImpl {
             String serverUrl)
             throws IllegalParameterFault {
 
-        GPCSWServerConnector serverConnector = null;
+        GPCatalogConnectorStore serverConnector = null;
         try {
             URL url = new URL(serverUrl);
 
@@ -653,7 +653,7 @@ class CSWServiceImpl {
 
         GeoPlatformServer server = this.getCSWServerByID(serverID);
 
-        GPCSWServerConnector serverConnector = this.createServerConnector(
+        GPCatalogConnectorStore serverConnector = this.createServerConnector(
                 server.getServerUrl());
 
         OutputSchema outputSchema = this.retrieveGetRecordByIdOutputSchema(
@@ -672,8 +672,8 @@ class CSWServiceImpl {
         return responseXSL;
     }
 
-    private GPCSWServerConnector createServerConnector(String serverUrl) throws IllegalParameterFault {
-        GPCSWServerConnector serverConnector;
+    private GPCatalogConnectorStore createServerConnector(String serverUrl) throws IllegalParameterFault {
+        GPCatalogConnectorStore serverConnector;
         try {
             URL url = new URL(serverUrl);
             GPCSWConnectorBuilder builder = GPCSWConnectorBuilder.newConnector()
@@ -698,7 +698,7 @@ class CSWServiceImpl {
      * Retrieve the best OutputSchema for GetRecordById request.
      */
     private OutputSchema retrieveGetRecordByIdOutputSchema(
-            GPCSWServerConnector serverConnector)
+            GPCatalogConnectorStore serverConnector)
             throws IllegalParameterFault, ServerInternalFault {
         List<String> schemas = this.retrieveGetRecordByIdOutputSchemas(
                 serverConnector);
@@ -720,7 +720,7 @@ class CSWServiceImpl {
      * request.
      */
     private List<String> retrieveGetRecordByIdOutputSchemas(
-            GPCSWServerConnector serverConnector)
+            GPCatalogConnectorStore serverConnector)
             throws IllegalParameterFault, ServerInternalFault {
         List<String> schemas = null;
         try {

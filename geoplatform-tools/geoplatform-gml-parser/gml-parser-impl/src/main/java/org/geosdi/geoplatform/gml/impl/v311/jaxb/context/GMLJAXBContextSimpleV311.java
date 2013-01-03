@@ -33,28 +33,26 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.gml.impl.v311.jaxb.context;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Date;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import javax.xml.bind.JAXBContext;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContextSimple;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformConnector {
+public class GMLJAXBContextSimpleV311 extends GMLJAXBContextSimple {
 
-    Date getRegistrationDate();
+    public GMLJAXBContextSimpleV311(JAXBContext theJaxbContext) {
+        super(theJaxbContext);
 
-    URL getURL();
+    }
 
-    URI getURI() throws URISyntaxException;
-
-    GPSecurityConnector getSecurityConnector();
-
-    void dispose() throws Exception;
+    @Override
+    public GMLMarshaller acquireMarshaller() throws Exception {
+        return new GMLMarshallerV311(jaxbContext.createMarshaller());
+    }
 }

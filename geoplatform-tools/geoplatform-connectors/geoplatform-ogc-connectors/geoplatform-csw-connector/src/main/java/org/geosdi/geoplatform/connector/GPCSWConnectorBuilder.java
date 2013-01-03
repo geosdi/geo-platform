@@ -43,11 +43,11 @@ import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GPCSWConnectorBuilder, GPCSWServerConnector> {
+        extends AbstractConnectorBuilder<GPCSWConnectorBuilder, GPCatalogConnectorStore> {
 
     /**
      * Create a new GeoPlatform CSWConnectorBuilder with which to define a
-     * specification for a GPCSWServerConnector.
+     * specification for a GPCatalogConnectorDecorator.
      *
      * @return the new GeoPlatformCSWConnectorBuilder
      */
@@ -60,7 +60,7 @@ public class GPCSWConnectorBuilder
      *
      */
     @Override
-    public GPCSWServerConnector build() {
+    public GPCatalogConnectorStore build() {
         if (serverUrl == null) {
             throw new IllegalArgumentException("Error on CSW Server Connector build: "
                     + "server URL cannot be null.");
@@ -68,10 +68,10 @@ public class GPCSWConnectorBuilder
 
         GPCatalogVersion v = GPCatalogVersion.fromString(version);
 
-        GPCSWServerConnector cswConnector = super.proxyConfiguration != null
-                                            ? new GPCSWServerConnector(
+        GPCatalogConnectorStore cswConnector = super.proxyConfiguration != null
+                                            ? new GPCatalogConnectorStore(
                 serverUrl, securityConnector, proxyConfiguration, v)
-                                            : new GPCSWServerConnector(
+                                            : new GPCatalogConnectorStore(
                 serverUrl, securityConnector, v);
 
         return cswConnector;

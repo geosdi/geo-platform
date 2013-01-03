@@ -33,12 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Date;
+import org.geosdi.geoplatform.connector.api.GPConnectorStore;
+import org.geosdi.geoplatform.connector.server.GPWFSServerConnector;
+import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
@@ -46,15 +49,46 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformConnector {
+public class GPWFSConnectorStore extends GPConnectorStore<GPWFSServerConnector>
+        implements WFSConnector {
 
-    Date getRegistrationDate();
+    public GPWFSConnectorStore(URL serverURL) {
+        this(serverURL, null);
+    }
 
-    URL getURL();
+    public GPWFSConnectorStore(URL serverURL,
+            WFSVersion theVersion) {
+        this(serverURL, null, theVersion);
+    }
 
-    URI getURI() throws URISyntaxException;
+    public GPWFSConnectorStore(URL serverURL,
+            GPSecurityConnector security,
+            WFSVersion theVersion) {
+        super(new GPWFSServerConnector(serverURL, security, theVersion));
+    }
 
-    GPSecurityConnector getSecurityConnector();
+    @Override
+    public WFSVersion getVersion() {
+        return server.getVersion();
+    }
 
-    void dispose() throws Exception;
+    @Override
+    public WFSGetCapabilitiesRequest createGetCapabilitiesRequest() {
+        return server.createGetCapabilitiesRequest();
+    }
+
+    @Override
+    public WFSDescribeFeatureTypeRequest createDescribeFeatureTypeRequest() {
+        return server.createDescribeFeatureTypeRequest();
+    }
+
+    @Override
+    public WFSGetFeatureRequest createGetFeatureRequest() {
+        return server.createGetFeatureRequest();
+    }
+
+    @Override
+    public WFSTransactionRequest createTransactionRequest() {
+        return server.createTransactionRequest();
+    }
 }

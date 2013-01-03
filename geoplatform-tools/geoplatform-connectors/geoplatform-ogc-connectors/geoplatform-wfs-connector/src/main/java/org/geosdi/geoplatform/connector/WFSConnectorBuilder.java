@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class WFSConnectorBuilder
-        extends AbstractConnectorBuilder<WFSConnectorBuilder, GPWFSConnector> {
+        extends AbstractConnectorBuilder<WFSConnectorBuilder, GPWFSConnectorStore> {
 
     /**
      * Create a new GeoPlatform WFSConnectorBuilder with which to define a
@@ -56,7 +56,7 @@ public class WFSConnectorBuilder
     }
 
     @Override
-    public GPWFSConnector build() {
+    public GPWFSConnectorStore build() {
         if (serverUrl == null) {
             throw new IllegalArgumentException("Error on WFS Server Connector build: "
                     + "server URL cannot be null.");
@@ -64,7 +64,7 @@ public class WFSConnectorBuilder
 
         WFSVersion v = WFSVersion.fromString(version);
 
-        return new GPWFSConnector(serverUrl,
+        return new GPWFSConnectorStore(serverUrl,
                 securityConnector, v);
     }
 }

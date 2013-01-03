@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,63 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Date;
-import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import javax.xml.bind.JAXBContext;
+import org.apache.commons.pool.impl.GenericObjectPool;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
+import org.geosdi.geoplatform.gml.api.jaxb.context.pool.GMLJAXBContextPooled;
+import org.geosdi.geoplatform.gml.api.jaxb.context.pool.PoolConfig;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPServerConnector<T extends GPAbstractServerConnector>
-        implements GeoPlatformConnector {
+public class GMLJAXBContextPooledV311 extends GMLJAXBContextPooled {
 
-    private Date registrationDate = new Date();
-    protected T server;
+    private final GenericObjectPool<GMLMarshaller> gmlMarshallerPool;
 
-    public GPServerConnector(T theServer) {
-        this.server = theServer;
+    public GMLJAXBContextPooledV311(JAXBContext theJaxbContext) {
+        super(theJaxbContext);
+        this.gmlMarshallerPool = new GenericObjectPool<GMLMarshaller>(new GMLMarshallerFactoryV311(
+                theJaxbContext), new PoolConfig());
     }
 
     @Override
-    public Date getRegistrationDate() {
-        return this.registrationDate;
-    }
+    public GMLMarshaller acquireMarshaller() throws Exception {
+        GMLMarshaller marshaller = gmlMarshallerPool.borrowObject();
+        gmlMarshallerPool.returnObject(marshaller);
 
-    @Override
-    public void setRegistrationDate(Date date) {
-        this.registrationDate = date;
-    }
-
-    @Override
-    public String getRegistrationKey() {
-        return this.server.getURL().toString();
-    }
-
-    @Override
-    public GPSecurityConnector getSecurityConnector() {
-        return server.getSecurityConnector();
-    }
-
-    @Override
-    public URI getURI() throws URISyntaxException {
-        return server.getURI();
-    }
-
-    @Override
-    public URL getURL() {
-        return server.getURL();
-    }
-
-    @Override
-    public String toString() {
-        return "GPServerConnector{" + "registrationDate=" + registrationDate
-                + ", server=" + server + '}';
+        return marshaller;
     }
 }

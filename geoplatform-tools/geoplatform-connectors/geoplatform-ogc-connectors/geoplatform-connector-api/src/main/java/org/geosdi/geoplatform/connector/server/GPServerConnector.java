@@ -53,4 +53,6 @@ public interface GPServerConnector {
     DefaultHttpClient getClientConnection();
 
     GPSecurityConnector getSecurityConnector();
+    
+    void dispose() throws Exception;
 }

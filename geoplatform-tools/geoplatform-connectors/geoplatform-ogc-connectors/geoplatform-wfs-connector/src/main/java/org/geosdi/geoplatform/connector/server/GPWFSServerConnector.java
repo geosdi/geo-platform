@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WFSServerConnector extends GPAbstractServerConnector {
+public class GPWFSServerConnector extends GPAbstractServerConnector {
 
     private WFSVersion version;
 
@@ -63,7 +63,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @param urlServer the String that represent WFS server URL
      * @param version the value of WFS version. Must be 1.1.0
      */
-    public WFSServerConnector(String urlServer, String version) {
+    public GPWFSServerConnector(String urlServer, String version) {
         this(urlServer, null, version);
     }
 
@@ -75,7 +75,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @param securityConnector {@link GPSecurityConnector}
      * @param version the value of WFS version. Must be 1.1.0
      */
-    public WFSServerConnector(String urlServer,
+    public GPWFSServerConnector(String urlServer,
             GPSecurityConnector securityConnector,
             String version) {
         this(analyzesServerURL(urlServer), securityConnector, toWFSVersion(version));
@@ -90,7 +90,7 @@ public class WFSServerConnector extends GPAbstractServerConnector {
      * @param securityConnector {@link GPSecurityConnector}
      * @param theVersion {@link WFSVersion} WFS version. Must be 1.1.0
      */
-    public WFSServerConnector(URL server,
+    public GPWFSServerConnector(URL server,
             GPSecurityConnector securityConnector,
             WFSVersion theVersion) {
         super(server, securityConnector);

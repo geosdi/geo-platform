@@ -582,6 +582,16 @@
             </dependency>
             
             <!-- =========================================================== -->
+            <!--                    Commons Pool                             -->
+            <!-- =========================================================== -->
+            
+            <dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>${commons-pool-version}</version>
+            </dependency>
+            
+            <!-- =========================================================== -->
             <!--                    XMLBEANS                                 -->
             <!-- =========================================================== -->
             
@@ -1586,6 +1596,8 @@
         <ehcache-version>2.6.2</ehcache-version>
         
         <jdom-version>1.1</jdom-version>
+        
+        <commons-pool-version>1.6</commons-pool-version>
         
         <geonetwork-version>1.0-SNAPSHOT</geonetwork-version>
     </properties>

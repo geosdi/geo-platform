@@ -1572,7 +1572,7 @@
         <jetty-version>7.6.2.v20120308</jetty-version>
 
         <postgresql-version>8.4-702.jdbc3</postgresql-version>
-        <postgis-jdbc-version>1.1.6</postgis-jdbc-version>
+        <postgis-jdbc-version>1.5.2</postgis-jdbc-version>
 
         <hibernate-version>3.6.10.Final</hibernate-version>
         <hibernate-generic-dao-version>1.1.0</hibernate-generic-dao-version>
@@ -1603,4 +1603,3 @@
     </properties>
     
 </project>
->>>>>>> 5bf78ee22b017ae4352c7fd95e4363cb2b75aa27

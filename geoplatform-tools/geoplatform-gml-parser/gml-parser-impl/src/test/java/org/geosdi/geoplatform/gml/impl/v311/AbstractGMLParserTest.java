@@ -39,6 +39,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.io.WKTReader;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
@@ -57,7 +58,8 @@ public abstract class AbstractGMLParserTest {
 
     @BeforeClass
     public static void loadJAXBContext() {
-        jaxbContext = GMLContextFactoryV311.createJAXBContext();
+        jaxbContext = GMLContextFactoryV311.createJAXBContext(
+                GMLContextType.SIMPLE);
     }
     //
     protected GeometryFactory geometryFactory = new GeometryFactory();

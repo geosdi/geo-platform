@@ -59,6 +59,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     protected final URL url;
     protected final GPSecurityConnector securityConnector;
     private final HttpClientProxyConfiguration proxyConfiguration;
+    private DefaultHttpClient httpClient;
 
     protected GPAbstractServerConnector(URL theUrl,
             GPSecurityConnector theSecurityConnector) {
@@ -95,10 +96,17 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
 
     @Override
     public DefaultHttpClient getClientConnection() {
-        return proxyConfiguration != null ? proxyConfiguration.isUseProxy()
-                                            ? configureProxy()
-                                            : new DefaultHttpClient()
-               : new DefaultHttpClient();
+        return httpClient = (httpClient == null)
+                            ? proxyConfiguration != null
+                              ? proxyConfiguration.isUseProxy()
+                                ? configureProxy() : new DefaultHttpClient()
+                              : new DefaultHttpClient()
+                            : httpClient;
+    }
+
+    @Override
+    public void dispose() throws Exception {
+        this.httpClient.getConnectionManager().shutdown();
     }
 
     /**

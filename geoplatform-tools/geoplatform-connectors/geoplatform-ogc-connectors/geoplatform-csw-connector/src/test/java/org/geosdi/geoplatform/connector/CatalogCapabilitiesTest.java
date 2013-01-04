@@ -160,7 +160,7 @@ public class CatalogCapabilitiesTest {
     @Test
     public void testGetCapabilitiesWithConnector() throws Exception {
         URL url = new URL("http://catalog.geosdi.org/geonetwork/srv/en/csw");
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
@@ -191,7 +191,7 @@ public class CatalogCapabilitiesTest {
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureGetCapabilities() throws Exception {
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(new URL(snipcUrl)).withClientSecurity(
                 new BasicPreemptiveSecurityConnector(snipcUsername,
                                                      snipcPassword)).build();

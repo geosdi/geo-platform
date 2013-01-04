@@ -74,7 +74,7 @@ public class CatalogGetRecordByIdTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private GPCSWServerConnector serverConnector;
+    private GPCatalogConnectorStore serverConnector;
     /**
      * geoSDI Catalog.
      */
@@ -193,7 +193,7 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testOutputGmdIspra() throws Exception {
         URL url = new URL(ISPRA_URL);
-        GPCSWServerConnector connector = GPCSWConnectorBuilder.newConnector().
+        GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
@@ -221,7 +221,7 @@ public class CatalogGetRecordByIdTest {
     @Test
     public void testOutputOriginalIspra() throws Exception {
         URL url = new URL(ISPRA_URL);
-        GPCSWServerConnector connector = GPCSWConnectorBuilder.newConnector().
+        GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =

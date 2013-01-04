@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,36 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.jaxb.context;
+package org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import org.apache.commons.pool.impl.GenericObjectPool;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
-import org.geosdi.geoplatform.gml.api.jaxb.context.AbstractGMLJAXBContext;
-import org.geosdi.geoplatform.gml.api.jaxb.context.pool.PoolConfig;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool.GMLMarshallerFactoryV311;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLJAXBContextV311 extends AbstractGMLJAXBContext {
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Order {
 
-    private final GenericObjectPool<GMLMarshaller> gmlMarshallerPool;
-
-    public GMLJAXBContextV311(JAXBContext theJaxbContext) {
-        super(theJaxbContext);
-        this.gmlMarshallerPool = new GenericObjectPool<GMLMarshaller>(new GMLMarshallerFactoryV311(
-                theJaxbContext), new PoolConfig());
-    }
-
-    @Override
-    public GMLMarshaller acquireMarshaller() throws Exception {
-        GMLMarshaller marshaller = gmlMarshallerPool.borrowObject();
-        gmlMarshallerPool.returnObject(marshaller);
-        
-        return marshaller;
-    }
+    public int order();
 }

@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.gml.pool;
+package org.geosdi.geoplatform.gml.impl.v311.gml.comparison;
 
 import com.vividsolutions.jts.geom.Geometry;
 import java.io.File;
@@ -44,19 +44,24 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
+import org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility.OrderedRunner;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLSextantePoolParserTest extends AbstractGMLParserTest {
+@RunWith(OrderedRunner.class)
+public abstract class AbstractGMLComparisonTest {
 
-    private static final int numThreads = 50;
-    private static File file;
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    protected static File file;
 
     @BeforeClass
     public static void loadFile() throws Exception {
@@ -65,20 +70,21 @@ public class GMLSextantePoolParserTest extends AbstractGMLParserTest {
         file = new File(fileString);
     }
 
-    @Test
-    public void gmlSextantePoolTest() throws Exception {
-        logger.info("Executed {} threads in {} s", numThreads,
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks()));
+    protected int defineNumThreads() {
+        return 150;
     }
 
-    private long executeMultiThreadsTasks() throws Exception {
+    protected long executeMultiThreadsTasks(GMLJAXBContext jaxbContext) throws Exception {
         long time = 0;
+
+        int numThreads = defineNumThreads();
 
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
 
-        List<GMLSextanteTask> tasks = new ArrayList<GMLSextanteTask>(numThreads);
+        List<GMLSextanteTask> tasks = new ArrayList<GMLSextanteTask>(
+                numThreads);
         for (int i = 0; i < numThreads; i++) {
-            tasks.add(new GMLSextanteTask());
+            tasks.add(new GMLSextanteTask(jaxbContext));
         }
 
         List<Future<Long>> results = executor.invokeAll(tasks);
@@ -97,7 +103,7 @@ public class GMLSextantePoolParserTest extends AbstractGMLParserTest {
         return time;
     }
 
-    private long executeSingleTask() throws Exception {
+    private long executeSingleTask(GMLJAXBContext jaxbContext) throws Exception {
         long start = System.currentTimeMillis();
 
         synchronized (this) {
@@ -108,11 +114,17 @@ public class GMLSextantePoolParserTest extends AbstractGMLParserTest {
         return System.currentTimeMillis() - start;
     }
 
-    protected class GMLSextanteTask implements Callable<Long> {
+    private class GMLSextanteTask implements Callable<Long> {
+
+        private GMLJAXBContext jaxbContext;
+
+        public GMLSextanteTask(GMLJAXBContext theJaxbContext) {
+            this.jaxbContext = theJaxbContext;
+        }
 
         @Override
         public Long call() throws Exception {
-            return executeSingleTask();
+            return executeSingleTask(jaxbContext);
         }
     }
 }

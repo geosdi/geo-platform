@@ -33,12 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Date;
+import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
+import org.geosdi.geoplatform.connector.api.GPConnectorStore;
+import org.geosdi.geoplatform.connector.server.GPCatalogServerConnector;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
+import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
@@ -46,15 +49,50 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformConnector {
+public class GPCatalogConnectorStore
+        extends GPConnectorStore<GPCatalogServerConnector>
+        implements GeoPlatformCSWConnector {
 
-    Date getRegistrationDate();
+    public GPCatalogConnectorStore(URL serverURL) {
+        this(serverURL, null);
+    }
 
-    URL getURL();
+    public GPCatalogConnectorStore(URL serverURL,
+            GPCatalogVersion theVersion) {
+        this(serverURL, null, theVersion);
+    }
 
-    URI getURI() throws URISyntaxException;
+    public GPCatalogConnectorStore(URL serverURL,
+            GPSecurityConnector security,
+            GPCatalogVersion theVersion) {
+        super(new GPCatalogServerConnector(serverURL, security, theVersion));
+    }
 
-    GPSecurityConnector getSecurityConnector();
+    public GPCatalogConnectorStore(URL serverURL,
+            GPSecurityConnector security,
+            HttpClientProxyConfiguration proxyConfiguration,
+            GPCatalogVersion theVersion) {
+        super(new GPCatalogServerConnector(serverURL, security,
+                proxyConfiguration, theVersion));
+    }
 
-    void dispose() throws Exception;
+    @Override
+    public GPCatalogVersion getVersion() {
+        return server.getVersion();
+    }
+
+    @Override
+    public CatalogGetCapabilitiesRequest createGetCapabilitiesRequest() {
+        return server.createGetCapabilitiesRequest();
+    }
+
+    @Override
+    public CatalogGetRecordsRequest createGetRecordsRequest() {
+        return server.createGetRecordsRequest();
+    }
+
+    @Override
+    public CatalogGetRecordByIdRequest createGetRecordByIdRequest() {
+        return server.createGetRecordByIdRequest();
+    }
 }

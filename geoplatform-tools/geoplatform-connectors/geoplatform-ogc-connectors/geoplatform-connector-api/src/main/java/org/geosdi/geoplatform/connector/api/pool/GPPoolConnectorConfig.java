@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -35,27 +35,23 @@
  */
 package org.geosdi.geoplatform.connector.api.pool;
 
+import org.apache.commons.pool.impl.GenericKeyedObjectPool;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPPoolCapacity {
+public class GPPoolConnectorConfig extends GenericKeyedObjectPool.Config {
 
-    LOW(25),
-    MEDIUM(50),
-    HIGH(100);
-    //
-    private int value;
-
-    GPPoolCapacity(int theValue) {
-        this.value = theValue;
-    }
-
-    /**
-     * @return the value
-     */
-    public int getValue() {
-        return value;
+    {
+        maxIdle = 10;
+        maxActive = 10;
+        maxTotal = GPPoolConnectorCapacity.MEDIUM.getValue();
+        minIdle = 1;
+        whenExhaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_GROW;
+        timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
+        numTestsPerEvictionRun = 25;
+        minEvictableIdleTimeMillis = 1000L * 60L * 5L;
     }
 }

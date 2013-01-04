@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.GMLJAXBContextV311;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.GMLJAXBContextSimpleV311;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool.GMLJAXBContextPooledV311;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -63,7 +64,14 @@ public class GMLContextFactoryV311 {
     private GMLContextFactoryV311() {
     }
 
-    public static GMLJAXBContext createJAXBContext() {
-        return new GMLJAXBContextV311(jaxbContext);
+    public static GMLJAXBContext createJAXBContext(GMLContextType type) {
+        switch (type) {
+            case SIMPLE:
+                return new GMLJAXBContextSimpleV311(jaxbContext);
+            case POOLED:
+                return new GMLJAXBContextPooledV311(jaxbContext);
+            default:
+                return new GMLJAXBContextSimpleV311(jaxbContext);
+        }
     }
 }

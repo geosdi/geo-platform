@@ -39,7 +39,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import javax.annotation.PostConstruct;
 import org.geosdi.geoplatform.configurator.wfs.GPWFSConfigurator;
-import org.geosdi.geoplatform.connector.GPWFSConnector;
+import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.feature.reader.FeatureSchemaReader;
@@ -62,9 +62,9 @@ public abstract class AbstractFeatureService {
     //
     protected FeatureSchemaReader featureReaderXSD;
 
-    protected GPWFSConnector createWFSConnector(String serverUrl)
+    protected GPWFSConnectorStore createWFSConnector(String serverUrl)
             throws IllegalParameterFault {
-        GPWFSConnector serverConnector;
+        GPWFSConnectorStore serverConnector;
         try {
             URL url = new URL(serverUrl);
             WFSConnectorBuilder builder = WFSConnectorBuilder.newConnector()

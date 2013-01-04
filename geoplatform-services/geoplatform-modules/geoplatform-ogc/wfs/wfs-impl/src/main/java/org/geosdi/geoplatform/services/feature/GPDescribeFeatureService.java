@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.services.feature;
 import java.io.IOException;
 import java.util.Arrays;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.GPWFSConnector;
+import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -75,7 +75,7 @@ public class GPDescribeFeatureService extends AbstractFeatureService
 
         LayerSchemaDTO layerSchema = null;
         try {
-            GPWFSConnector serverConnector = super.createWFSConnector(serverURL);
+            GPWFSConnectorStore serverConnector = super.createWFSConnector(serverURL);
             WFSDescribeFeatureTypeRequest<Schema> request =
                     serverConnector.createDescribeFeatureTypeRequest();
 

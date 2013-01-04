@@ -33,65 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.gml.impl.v311.gml.comparison;
 
-import java.net.URL;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
-import org.geosdi.geoplatform.connector.api.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.GPCatalogServerConnector;
-import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordByIdRequest;
-import org.geosdi.geoplatform.connector.server.request.CatalogGetRecordsRequest;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import java.util.concurrent.TimeUnit;
+import org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility.Order;
+import org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility.OrderedRunner;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWServerConnector extends GPServerConnector<GPCatalogServerConnector>
-        implements GeoPlatformCSWConnector {
+@RunWith(OrderedRunner.class)
+public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
 
-    public GPCSWServerConnector(URL serverURL) {
-        this(serverURL, null);
+    @Test
+    @Order(order = 2)
+    public void gmlSextantePoolTest() throws Exception {
+        logger.info("gmlSextantePoolTest : Executed {} threads in {} s \n",
+                super.defineNumThreads(),
+                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
+                GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED))));
     }
 
-    public GPCSWServerConnector(URL serverURL,
-            GPCatalogVersion theVersion) {
-        this(serverURL, null, theVersion);
-    }
-
-    public GPCSWServerConnector(URL serverURL,
-            GPSecurityConnector security,
-            GPCatalogVersion theVersion) {
-        super(new GPCatalogServerConnector(serverURL, security, theVersion));
-    }
-
-    public GPCSWServerConnector(URL serverURL,
-            GPSecurityConnector security,
-            HttpClientProxyConfiguration proxyConfiguration,
-            GPCatalogVersion theVersion) {
-        super(new GPCatalogServerConnector(serverURL, security,
-                proxyConfiguration, theVersion));
-    }
-
-    @Override
-    public GPCatalogVersion getVersion() {
-        return server.getVersion();
-    }
-
-    @Override
-    public CatalogGetCapabilitiesRequest createGetCapabilitiesRequest() {
-        return server.createGetCapabilitiesRequest();
-    }
-
-    @Override
-    public CatalogGetRecordsRequest createGetRecordsRequest() {
-        return server.createGetRecordsRequest();
-    }
-
-    @Override
-    public CatalogGetRecordByIdRequest createGetRecordByIdRequest() {
-        return server.createGetRecordByIdRequest();
+    @Test
+    @Order(order = 1)
+    public void gmlSextanteSimpleTest() throws Exception {
+        logger.info("gmlSextanteSimpleTest : Executed {} threads in {} s \n",
+                super.defineNumThreads(),
+                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
+                GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE))));
     }
 }

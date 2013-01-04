@@ -38,23 +38,62 @@ package org.geosdi.geoplatform.connector.api;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformConnector {
+public abstract class GPConnectorStore<T extends GPAbstractServerConnector>
+        implements GeoPlatformConnector {
 
-    Date getRegistrationDate();
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private Date registrationDate = new Date();
+    private SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+    protected T server;
 
-    URL getURL();
+    public GPConnectorStore(T theServer) {
+        this.server = theServer;
+    }
 
-    URI getURI() throws URISyntaxException;
+    @Override
+    public Date getRegistrationDate() {
+        return this.registrationDate;
+    }
 
-    GPSecurityConnector getSecurityConnector();
+    @Override
+    public GPSecurityConnector getSecurityConnector() {
+        return server.getSecurityConnector();
+    }
 
-    void dispose() throws Exception;
+    @Override
+    public URI getURI() throws URISyntaxException {
+        return server.getURI();
+    }
+
+    @Override
+    public URL getURL() {
+        return server.getURL();
+    }
+
+    @Override
+    public void dispose() throws Exception {
+        logger.trace("########################## Disposing GeoPlatformConnector "
+                + "[ {} ]", this);
+        this.server.dispose();
+    }
+
+    @Override
+    public String toString() {
+        return "GPServerConnector{" + "registrationDate = " + dt.format(
+                registrationDate)
+                + ", server = " + server + '}';
+    }
 }

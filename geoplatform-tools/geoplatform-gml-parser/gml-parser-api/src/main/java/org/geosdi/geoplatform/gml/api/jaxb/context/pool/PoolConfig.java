@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
-import org.apache.commons.pool.impl.GenericKeyedObjectPool;
 import org.apache.commons.pool.impl.GenericObjectPool;
 
 /**
@@ -46,12 +45,12 @@ import org.apache.commons.pool.impl.GenericObjectPool;
 public class PoolConfig extends GenericObjectPool.Config {
 
     {
-        maxIdle = 50;
-        maxActive = 100;
-        minIdle = 10;
-        whenExhaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_GROW;
+        maxIdle = 8;
+        maxActive = 10;
+        minIdle = 1;
+        whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_GROW;
         timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
-        numTestsPerEvictionRun = 25;
+        numTestsPerEvictionRun = 5;
         minEvictableIdleTimeMillis = 1000L * 60L * 5L;
     }
 }

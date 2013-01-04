@@ -88,7 +88,7 @@ public class CatalogGetRecordsTest {
     @Test
     public void testSummaryRecord() throws Exception {
         URL url = new URL(geosdiUrl);
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(
+        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(
                 url).build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
@@ -122,7 +122,7 @@ public class CatalogGetRecordsTest {
     @Test
     public void testFullRecord() throws Exception {
         URL url = new URL(geosdiUrl);
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(
+        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(
                 url).build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
@@ -154,7 +154,7 @@ public class CatalogGetRecordsTest {
     @Test
     public void testCQLTemporalFilterGeomatys() throws Exception {
         URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().
+        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
 
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
@@ -197,7 +197,7 @@ public class CatalogGetRecordsTest {
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureGetRecords() throws Exception {
-        GPCSWServerConnector serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(new URL(
+        GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilder.newConnector().withServerUrl(new URL(
                 snipcUrl)).withClientSecurity(new BasicPreemptiveSecurityConnector(
                 snipcUsername, snipcPassword)).build();
 

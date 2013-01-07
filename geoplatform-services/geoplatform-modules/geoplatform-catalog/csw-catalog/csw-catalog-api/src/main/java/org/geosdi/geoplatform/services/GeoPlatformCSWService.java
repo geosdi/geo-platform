@@ -46,7 +46,6 @@ import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
@@ -137,7 +136,7 @@ public interface GeoPlatformCSWService {
     @WebResult(name = "RecordsCount")
     int getRecordsCount(
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault;
+            throws Exception;
 
     @Get
     @WebResult(name = "SummaryRecord")
@@ -145,7 +144,7 @@ public interface GeoPlatformCSWService {
             @WebParam(name = "num") int num,
             @WebParam(name = "start") int start,
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault;
+            throws Exception;
 
     @Get
     @WebResult(name = "FullRecord")
@@ -153,7 +152,7 @@ public interface GeoPlatformCSWService {
             @WebParam(name = "num") int num,
             @WebParam(name = "start") int start,
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault;
+            throws Exception;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="GetRecordById request">
@@ -165,7 +164,7 @@ public interface GeoPlatformCSWService {
     String getRecordById(
             @WebParam(name = "serverID") Long serverID,
             @WebParam(name = "identifier") String identifier)
-            throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault;
+            throws Exception;
     //</editor-fold>
 //    @Get
 //    @WebResult(name = "Capabilities")

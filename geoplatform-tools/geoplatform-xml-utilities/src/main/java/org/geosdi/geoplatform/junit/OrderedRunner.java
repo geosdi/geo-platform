@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.junit;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility.Order;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;

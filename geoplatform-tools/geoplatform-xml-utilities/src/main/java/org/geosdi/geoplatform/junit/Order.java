@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility;
+package org.geosdi.geoplatform.junit;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.gml.impl.v311.gml.comparison;
 
 import java.util.concurrent.TimeUnit;
-import org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility.Order;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
+import org.geosdi.geoplatform.junit.Order;
 import org.geosdi.geoplatform.junit.OrderedRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;

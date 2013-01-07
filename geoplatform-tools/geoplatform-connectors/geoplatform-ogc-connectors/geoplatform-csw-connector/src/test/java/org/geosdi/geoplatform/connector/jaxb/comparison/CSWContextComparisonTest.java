@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.jaxb.comparison;
 
 import java.util.concurrent.TimeUnit;
 import org.geosdi.geoplatform.connector.jaxb.comparison.factory.CSWContextFactory;
-import org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility.Order;
+import org.geosdi.geoplatform.junit.Order;
 import org.geosdi.geoplatform.junit.OrderedRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -37,16 +37,15 @@ package org.geosdi.geoplatform.stax.reader;
 
 import java.io.IOException;
 import javax.xml.stream.XMLStreamException;
-import org.springframework.beans.factory.DisposableBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformStaxReader extends DisposableBean {
+public interface GeoPlatformStaxReader {
 
     void acquireReader(Object o) throws XMLStreamException, IOException;
-
-    void reset() throws XMLStreamException, IOException;
+    
+    void destroy() throws XMLStreamException, IOException;
 }

@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.services.feature;
 
 import java.util.List;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 
 /**
@@ -48,5 +46,5 @@ public interface TransactionService {
 
     boolean transactionUpdate(String serverURL, String typeName,
             String fid, List<AttributeDTO> attributes)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+            throws Exception;
 }

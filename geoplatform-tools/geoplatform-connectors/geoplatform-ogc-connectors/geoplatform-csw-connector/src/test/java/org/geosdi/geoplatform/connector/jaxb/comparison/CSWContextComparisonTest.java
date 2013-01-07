@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,24 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
+package org.geosdi.geoplatform.connector.jaxb.comparison;
 
-import org.apache.commons.pool.impl.GenericObjectPool;
+import java.util.concurrent.TimeUnit;
+import org.geosdi.geoplatform.connector.jaxb.comparison.factory.CSWContextFactory;
+import org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility.Order;
+import org.geosdi.geoplatform.junit.OrderedRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class PoolConfig extends GenericObjectPool.Config {
+@RunWith(OrderedRunner.class)
+public class CSWContextComparisonTest
+        extends AbstractCSWComparisonTest {
 
-    {
-        maxIdle = 3;
-        maxActive = 20;
-        minIdle = 1;
-        whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_GROW;
-        timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
-        numTestsPerEvictionRun = 10;
-        minEvictableIdleTimeMillis = 1000L * 60L * 5L;
+    @Test
+    @Order(order = 2)
+    public void cswPooledContextTest() throws Exception {
+        logger.info("CSWPooledContextTest : Executed {} threads in {} s \n",
+                super.defineNumThreads(),
+                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
+                CSWContextFactory.createCSWContext(
+                CSWContextFactory.CSWContextType.POOLED))));
+    }
+
+    @Test
+    @Order(order = 1)
+    public void cswSimpleContextTest() throws Exception {
+        logger.info("CSWSimpleContextTest : Executed {} threads in {} s \n",
+                super.defineNumThreads(),
+                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
+                CSWContextFactory.createCSWContext(
+                CSWContextFactory.CSWContextType.SIMPLE))));
     }
 }

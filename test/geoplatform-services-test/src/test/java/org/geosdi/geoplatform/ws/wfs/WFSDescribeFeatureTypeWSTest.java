@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.ws.wfs;
 
 import java.util.List;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.apache.cxf.binding.soap.SoapFault;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.junit.Assert;
@@ -123,7 +123,7 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         Assert.assertNull(layerSchema);
     }
 
-    @Test(expected = IllegalParameterFault.class)
+    @Test(expected = SoapFault.class)
     public void errorFeatureV110() throws Exception {
         LayerSchemaDTO layerSchema = // typeName must contain the char ":"
                 wfsService.describeFeatureType(addressDatastore, "error");

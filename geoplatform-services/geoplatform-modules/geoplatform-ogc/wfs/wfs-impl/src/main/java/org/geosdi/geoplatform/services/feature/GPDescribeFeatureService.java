@@ -58,7 +58,7 @@ public class GPDescribeFeatureService extends AbstractFeatureService
 
     @Override
     public LayerSchemaDTO describeFeatureType(String serverURL, String typeName)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
         logger.debug("\n*** WFS DescribeFeatureType for layer {} ***", typeName);
         serverURL = serverURL.replace("wms", "wfs");
 

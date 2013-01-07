@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
@@ -46,5 +45,5 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 public interface IWFSLayerService {
 
     LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName) throws GeoPlatformException;
+            String typeName) throws Exception;
 }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.jaxb;
 
 import java.util.Map;
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -46,18 +47,21 @@ import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository.Ge
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CSWJAXBContext extends GeoPlatformJAXBContext {
+public class CSWJAXBContext
+        extends GeoPlatformJAXBContext {
 
     public CSWJAXBContext(Class... classToBeBound) throws JAXBException {
         super(classToBeBound);
     }
 
-    public CSWJAXBContext(String contextPath, ClassLoader classLoader,
+    public CSWJAXBContext(String contextPath,
+            ClassLoader classLoader,
             Map<String, ?> properties) throws JAXBException {
         super(contextPath, classLoader, properties);
     }
 
-    public CSWJAXBContext(String contextPath, ClassLoader classLoader)
+    public CSWJAXBContext(String contextPath,
+            ClassLoader classLoader)
             throws JAXBException {
         super(contextPath, classLoader);
     }
@@ -66,11 +70,15 @@ public class CSWJAXBContext extends GeoPlatformJAXBContext {
         super(contextPath);
     }
 
+    public CSWJAXBContext(JAXBContext theJaxbContext) {
+        super(theJaxbContext);
+    }
+
     @Override
     public Marshaller acquireMarshaller() throws JAXBException {
         synchronized (this) {
             return super.marshaller != null
-                    ? super.marshaller : super.createMarshaller();
+                   ? super.marshaller : super.createMarshaller();
         }
     }
 
@@ -78,11 +86,12 @@ public class CSWJAXBContext extends GeoPlatformJAXBContext {
     public Unmarshaller acquireUnmarshaller() throws JAXBException {
         synchronized (this) {
             return super.unmarshaller != null
-                    ? super.unmarshaller : super.createUnmarshaller();
+                   ? super.unmarshaller : super.createUnmarshaller();
         }
     }
 
-    public static class CSWJAXBContextKey extends GeoPlatformJAXBContextKey {
+    public static class CSWJAXBContextKey
+            extends GeoPlatformJAXBContextKey {
 
         public CSWJAXBContextKey() {
             super(CSWConnectorJAXBContext.class);

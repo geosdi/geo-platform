@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector.jaxb;
+package org.geosdi.geoplatform.connector.jaxb.pool;
 
 import java.util.Collections;
 import java.util.Map;
@@ -41,24 +41,25 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import org.apache.commons.pool.impl.GenericObjectPool;
+import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.pool.factory.GPMarshallerFactory;
+import org.geosdi.geoplatform.connector.jaxb.pool.factory.GPUnmarshallerFactory;
 
 /**
- * The GeoPlatformJAXBContext class provides the client's entry point to the 
- * JAXBContext. This class allows you to perform the classic operations 
- * of the marshal and unmarshal JAXBContext
- * 
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformJAXBContext extends GPConnectorJAXBContext {
-    
-    protected Marshaller marshaller;
-    protected Unmarshaller unmarshaller;
+public abstract class GeoPlatformJAXBContextPool
+        extends GPConnectorJAXBContext {
 
+    protected final GenericObjectPool<Marshaller> marshallerPool;
+    protected final GenericObjectPool<Unmarshaller> unmarshallerPool;
+    
     /**
      * <p>
-     *      Create a new instance of a <tt>GeoPlatformJAXBContext</tt> class.
+     *      Create a new instance of a <tt>GeoPlatformJAXBContextPool</tt> class.
      *
      *
      * @throws JAXBException if an error was encountered while creating the
@@ -70,13 +71,13 @@ public abstract class GeoPlatformJAXBContext extends GPConnectorJAXBContext {
      *   <li>mixing schema derived packages from different providers on the same contextPath</li>
      * </ol>
      */
-    public GeoPlatformJAXBContext(String contextPath) throws JAXBException {
+    public GeoPlatformJAXBContextPool(String contextPath) throws JAXBException {
         this(contextPath, Thread.currentThread().getContextClassLoader());
     }
 
     /**
      * <p>
-     *   Obtain a new instance of a <tt>GeoPlatformJAXBContext</tt> class.
+     *   Obtain a new instance of a <tt>GeoPlatformJAXBContextPool</tt> class.
      *
      * </p>
      * The context path which is a list of  colon (':', \u005Cu003A) separated 
@@ -92,14 +93,14 @@ public abstract class GeoPlatformJAXBContext extends GPConnectorJAXBContext {
      *   <li>mixing schema derived packages from different providers on the same contextPath</li>
      * </ol>
      */
-    public GeoPlatformJAXBContext(String contextPath, ClassLoader classLoader)
+    public GeoPlatformJAXBContextPool(String contextPath, ClassLoader classLoader)
             throws JAXBException {
         this(contextPath, classLoader, Collections.<String, Object>emptyMap());
     }
 
     /**
      * <p>
-     *   Obtain a new instance of a <tt>GeoPlatformJAXBContext</tt> class.
+     *   Obtain a new instance of a <tt>GeoPlatformJAXBContextPool</tt> class.
      *
      * <p>
      * 
@@ -119,10 +120,15 @@ public abstract class GeoPlatformJAXBContext extends GPConnectorJAXBContext {
      *   <li>mixing schema derived packages from different providers on the same contextPath</li>
      * </ol>
      */
-    public GeoPlatformJAXBContext(String contextPath, ClassLoader classLoader,
+    public GeoPlatformJAXBContextPool(String contextPath, ClassLoader classLoader,
             Map<String, ?> properties) throws JAXBException {
 
         super(contextPath, classLoader, properties);
+        
+        this.marshallerPool = new GenericObjectPool<Marshaller>(new GPMarshallerFactory(
+                jaxbContext), new GeoPlatformJAXBConfig());
+        this.unmarshallerPool = new GenericObjectPool<Unmarshaller>(new GPUnmarshallerFactory(
+                jaxbContext), new GeoPlatformJAXBConfig());
     }
 
     /**
@@ -148,46 +154,41 @@ public abstract class GeoPlatformJAXBContext extends GPConnectorJAXBContext {
      * @throws IllegalArgumentException
      *      if the parameter contains {@code null} (i.e., {@code GeoPlatformJAXBContext(null);})
      */
-    public GeoPlatformJAXBContext(Class... classToBeBound)
+    public GeoPlatformJAXBContextPool(Class... classToBeBound)
             throws JAXBException {
 
         super(classToBeBound);
-    }
-
-    public GeoPlatformJAXBContext(JAXBContext theJaxbContext) {
-        super(theJaxbContext);
-    }
-
-    /** 
-     * Create a <p>Marshaller</p> object that can be used to convert a 
-     *  java content tree into XML data.
-     *
-     * @return a <tt>Marshaller</tt> object
-     *
-     * @throws JAXBException if an error was encountered while creating the
-     *       
-     **/
-    protected Marshaller createMarshaller() throws JAXBException {
-        this.marshaller = this.jaxbContext.createMarshaller();
-
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-
-        return this.marshaller;
-    }
-
-    /**
-     * Create an <p>Unmarshaller</p> object that can be used to convert XML
-     * data into a java content tree.
-     *
-     * @return an <tt>Unmarshaller</tt> object
-     *
-     * @throws JAXBException if an error was encountered while creating the
-     *                       <tt>Unmarshaller</tt> object
-     */
-    protected Unmarshaller createUnmarshaller() throws JAXBException {
-        this.unmarshaller = this.jaxbContext.createUnmarshaller();
         
-        return this.unmarshaller;
+        this.marshallerPool = new GenericObjectPool<Marshaller>(new GPMarshallerFactory(
+                jaxbContext), new GeoPlatformJAXBConfig());
+        this.unmarshallerPool = new GenericObjectPool<Unmarshaller>(new GPUnmarshallerFactory(
+                jaxbContext), new GeoPlatformJAXBConfig());
     }
+
+    public GeoPlatformJAXBContextPool(JAXBContext theJaxbContext) {
+        super(theJaxbContext);
+      
+        this.marshallerPool = new GenericObjectPool<Marshaller>(new GPMarshallerFactory(
+                jaxbContext), new GeoPlatformJAXBConfig());
+        this.unmarshallerPool = new GenericObjectPool<Unmarshaller>(new GPUnmarshallerFactory(
+                jaxbContext), new GeoPlatformJAXBConfig());
+    }
+    
+    
+
+    @Override
+    public Marshaller acquireMarshaller() throws Exception {
+        Marshaller marshaller = marshallerPool.borrowObject();
+        marshallerPool.returnObject(marshaller);
+        
+        return marshaller;
+    }
+
+    @Override
+    public Unmarshaller acquireUnmarshaller() throws Exception {
+        Unmarshaller unmarshaller = unmarshallerPool.borrowObject();
+        unmarshallerPool.returnObject(unmarshaller);
+        
+        return unmarshaller;
+    }    
 }

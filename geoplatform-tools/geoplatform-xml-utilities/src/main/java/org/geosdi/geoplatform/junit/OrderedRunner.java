@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,24 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
+package org.geosdi.geoplatform.junit;
 
-import org.apache.commons.pool.impl.GenericObjectPool;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility.Order;
+import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.InitializationError;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class PoolConfig extends GenericObjectPool.Config {
+public class OrderedRunner extends BlockJUnit4ClassRunner {
 
-    {
-        maxIdle = 3;
-        maxActive = 20;
-        minIdle = 1;
-        whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_GROW;
-        timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
-        numTestsPerEvictionRun = 10;
-        minEvictableIdleTimeMillis = 1000L * 60L * 5L;
+    public OrderedRunner(Class<?> klass) throws InitializationError {
+        super(klass);
+    }
+
+    @Override
+    protected List<FrameworkMethod> computeTestMethods() {
+        List<FrameworkMethod> fmList = super.computeTestMethods();
+        Collections.sort(fmList, new Comparator<FrameworkMethod>() {
+            @Override
+            public int compare(FrameworkMethod fm1,
+                    FrameworkMethod fm2) {
+                Order o1 = fm1.getAnnotation(Order.class);
+                Order o2 = fm2.getAnnotation(Order.class);
+
+                if ((o1 == null) || (o2 == null)) {
+                    return -1;
+                }
+
+                return o1.order() - o2.order();
+            }
+        });
+
+        return fmList;
     }
 }

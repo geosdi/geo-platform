@@ -84,14 +84,14 @@ public interface GPCatalogFinderRemote extends RemoteService {
     PagingLoadResult<SummaryRecord> searchSummaryRecords(
             PagingLoadConfig config,
             CatalogFinderBean catalogFinder)
-            throws GeoPlatformException;
+            throws Exception;
 
     PagingLoadResult<FullRecord> searchFullRecords(
             PagingLoadConfig config,
             CatalogFinderBean catalogFinder)
-            throws GeoPlatformException;
+            throws Exception;
 
     String getRecordById(Long serverID,
             String identifier,
-            String moduleName);
+            String moduleName) throws Exception;
 }

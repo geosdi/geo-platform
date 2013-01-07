@@ -72,7 +72,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
@@ -119,7 +119,7 @@ public class CatalogContextTest {
     }
 
     @Test
-    public void testJAXBContext() throws JAXBException {
+    public void testJAXBContext() throws Exception {
         Assert.assertNotNull(cswContext);
 
         Unmarshaller m = cswContext.acquireUnmarshaller();

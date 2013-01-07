@@ -41,7 +41,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
@@ -78,7 +77,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
     }
 
     @Override
-    public List<LayerSchemaDTO> read(final String xml) throws JAXBException {
+    public List<LayerSchemaDTO> read(final String xml) throws Exception {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         StringReader stringReader = new StringReader(xml);
         JAXBElement elem = (JAXBElement) unmarshaller.unmarshal(stringReader);
@@ -87,7 +86,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
     }
 
     @Override
-    public List<LayerSchemaDTO> read(final InputStream in) throws JAXBException {
+    public List<LayerSchemaDTO> read(final InputStream in) throws Exception {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         JAXBElement elem = (JAXBElement) unmarshaller.unmarshal(in);
         final Schema schema = (Schema) elem.getValue();
@@ -96,7 +95,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
 
     @Override
     public LayerSchemaDTO read(final String xml, final String name)
-            throws JAXBException {
+            throws Exception {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         StringReader stringReader = new StringReader(xml);
         JAXBElement elem = (JAXBElement) unmarshaller.unmarshal(stringReader);
@@ -106,7 +105,7 @@ public class GPFeatureSchemaReader implements FeatureSchemaReader {
 
     @Override
     public LayerSchemaDTO read(final InputStream in, final String name)
-            throws JAXBException {
+            throws Exception {
         Unmarshaller unmarshaller = wfsContext.acquireUnmarshaller();
         JAXBElement elem = (JAXBElement) unmarshaller.unmarshal(in);
         final Schema schema = (Schema) elem.getValue();

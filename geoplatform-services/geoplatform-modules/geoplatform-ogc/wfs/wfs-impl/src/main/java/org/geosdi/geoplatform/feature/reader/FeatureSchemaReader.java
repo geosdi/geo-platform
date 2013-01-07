@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.feature.reader;
 
 import java.io.InputStream;
 import java.util.List;
-import javax.xml.bind.JAXBException;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 
@@ -48,15 +47,15 @@ import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
  */
 public interface FeatureSchemaReader {
 
-    List<LayerSchemaDTO> read(final String xml) throws JAXBException;
+    List<LayerSchemaDTO> read(final String xml) throws Exception;
 
-    List<LayerSchemaDTO> read(final InputStream in) throws JAXBException;
+    List<LayerSchemaDTO> read(final InputStream in) throws Exception;
 
     LayerSchemaDTO read(final String xml,
-            final String name) throws JAXBException;
+            final String name) throws Exception;
 
     LayerSchemaDTO read(final InputStream in,
-            final String name) throws JAXBException;
+            final String name) throws Exception;
 
     List<LayerSchemaDTO> getAllFeature(final Schema schema);
 

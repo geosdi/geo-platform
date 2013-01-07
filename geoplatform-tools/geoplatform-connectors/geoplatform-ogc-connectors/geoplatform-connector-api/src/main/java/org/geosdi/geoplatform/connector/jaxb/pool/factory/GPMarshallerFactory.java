@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,24 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
+package org.geosdi.geoplatform.connector.jaxb.pool.factory;
 
-import org.apache.commons.pool.impl.GenericObjectPool;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import org.apache.commons.pool.BasePoolableObjectFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class PoolConfig extends GenericObjectPool.Config {
+public class GPMarshallerFactory
+        extends BasePoolableObjectFactory<Marshaller> {
 
-    {
-        maxIdle = 3;
-        maxActive = 20;
-        minIdle = 1;
-        whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_GROW;
-        timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
-        numTestsPerEvictionRun = 10;
-        minEvictableIdleTimeMillis = 1000L * 60L * 5L;
+    private final JAXBContext jaxbContext;
+
+    public GPMarshallerFactory(JAXBContext theJaxbContext) {
+        this.jaxbContext = theJaxbContext;
+    }
+
+    @Override
+    public Marshaller makeObject() throws Exception {
+        Marshaller marshaller = this.jaxbContext.createMarshaller();
+
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+
+        return marshaller;
     }
 }

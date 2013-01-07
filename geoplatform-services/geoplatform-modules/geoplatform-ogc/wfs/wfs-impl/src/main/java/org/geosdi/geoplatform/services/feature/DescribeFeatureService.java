@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.services.feature;
 
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
@@ -47,5 +45,5 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 public interface DescribeFeatureService {
 
     LayerSchemaDTO describeFeatureType(String serverURL, String typeName)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+            throws Exception;
 }

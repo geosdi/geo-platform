@@ -312,7 +312,7 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName) throws GeoPlatformException;
+            String typeName) throws Exception;
 
     String getLayerDimension(String layerName) throws GeoPlatformException;
 }

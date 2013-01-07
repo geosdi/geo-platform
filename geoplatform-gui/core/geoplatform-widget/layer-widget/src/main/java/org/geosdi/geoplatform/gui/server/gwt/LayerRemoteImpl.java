@@ -312,7 +312,7 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
      */
     @Override
     public LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName) throws GeoPlatformException {
+            String typeName) throws Exception {
         return this.wfsLayerService.describeFeatureType(serverUrl, typeName);
     }
 }

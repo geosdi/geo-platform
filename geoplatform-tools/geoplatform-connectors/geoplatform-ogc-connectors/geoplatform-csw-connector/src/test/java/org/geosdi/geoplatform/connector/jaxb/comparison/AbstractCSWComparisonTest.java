@@ -33,9 +33,8 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.gml.comparison;
+package org.geosdi.geoplatform.connector.jaxb.comparison;
 
-import com.vividsolutions.jts.geom.Geometry;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
+import javax.xml.bind.JAXBElement;
+import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractGMLComparisonTest {
+public abstract class AbstractCSWComparisonTest {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -63,7 +64,7 @@ public abstract class AbstractGMLComparisonTest {
     @BeforeClass
     public static void loadFile() throws Exception {
         String fileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/GeometryCollection.xml";
+                + "src/test/resources/getRecordsCount.xml";
         file = new File(fileString);
     }
 
@@ -71,7 +72,8 @@ public abstract class AbstractGMLComparisonTest {
         return 150;
     }
 
-    protected long executeMultiThreadsTasks(GMLJAXBContext jaxbContext) throws Exception {
+    protected long executeMultiThreadsTasks(GPConnectorJAXBContext jaxbContext)
+            throws Exception {
         long time = 0;
 
         int numThreads = defineNumThreads();
@@ -100,22 +102,23 @@ public abstract class AbstractGMLComparisonTest {
         return time;
     }
 
-    private long executeSingleTask(GMLJAXBContext jaxbContext) throws Exception {
+    private long executeSingleTask(GPConnectorJAXBContext jaxbContext) throws Exception {
         long start = System.currentTimeMillis();
 
         synchronized (this) {
-            Geometry geometry = (Geometry) jaxbContext.acquireUnmarshaller().unmarshal(
-                    file);
+            GetRecordsType getRecords = ((JAXBElement<GetRecordsType>) jaxbContext.acquireUnmarshaller().unmarshal(
+                                         file)).getValue();
         }
 
         return System.currentTimeMillis() - start;
     }
 
-    private class GMLSextanteTask implements Callable<Long> {
+    private class GMLSextanteTask
+            implements Callable<Long> {
 
-        private GMLJAXBContext jaxbContext;
+        private GPConnectorJAXBContext jaxbContext;
 
-        public GMLSextanteTask(GMLJAXBContext theJaxbContext) {
+        public GMLSextanteTask(GPConnectorJAXBContext theJaxbContext) {
             this.jaxbContext = theJaxbContext;
         }
 

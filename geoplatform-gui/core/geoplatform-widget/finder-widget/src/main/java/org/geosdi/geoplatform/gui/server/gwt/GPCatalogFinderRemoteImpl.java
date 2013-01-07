@@ -98,7 +98,7 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     public PagingLoadResult<SummaryRecord> searchSummaryRecords(
             PagingLoadConfig config,
             CatalogFinderBean catalogFinder)
-            throws GeoPlatformException {
+            throws Exception {
         return gpCatalogFinderService.searchSummaryRecords(config, catalogFinder,
                                                            super.getThreadLocalRequest());
     }
@@ -107,7 +107,7 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     public PagingLoadResult<FullRecord> searchFullRecords(
             PagingLoadConfig config,
             CatalogFinderBean catalogFinder)
-            throws GeoPlatformException {
+            throws Exception {
         return gpCatalogFinderService.searchFullRecords(config, catalogFinder,
                                                         super.getThreadLocalRequest());
     }
@@ -115,7 +115,7 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     @Override
     public String getRecordById(Long serverID,
             String identifier,
-            String moduleName) {
+            String moduleName)  throws Exception{
         return gpCatalogFinderService.getRecordById(serverID, identifier,
                                                     moduleName,
                                                     super.getThreadLocalRequest());

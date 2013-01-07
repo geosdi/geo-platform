@@ -90,7 +90,7 @@ public abstract class AbstractStaxStreamReader<T>
 
     /**
      * Close the {@link XMLStreamReader} reader and the {@link InputStream}
-     * stream when the Spring Context is destroy
+     * stream 
      *
      * @throws XMLStreamException
      * @throws IOException
@@ -140,8 +140,7 @@ public abstract class AbstractStaxStreamReader<T>
      * @throws XMLStreamException
      * @throws IOException
      */
-    @Override
-    public void reset() throws XMLStreamException, IOException {
+    protected void reset() throws XMLStreamException, IOException {
         if (reader != null) {
             reader.close();
             reader = null;

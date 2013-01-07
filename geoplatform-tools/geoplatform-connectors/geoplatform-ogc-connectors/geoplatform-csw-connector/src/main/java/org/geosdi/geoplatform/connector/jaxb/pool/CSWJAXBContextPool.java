@@ -33,44 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.gml.comparison.utility;
+package org.geosdi.geoplatform.connector.jaxb.pool;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import org.junit.runners.BlockJUnit4ClassRunner;
-import org.junit.runners.model.FrameworkMethod;
-import org.junit.runners.model.InitializationError;
+import java.util.Map;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.GeoPlatformJAXBContextRepository;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class OrderedRunner extends BlockJUnit4ClassRunner {
+public class CSWJAXBContextPool
+        extends GeoPlatformJAXBContextPool {
 
-    public OrderedRunner(Class<?> klass) throws InitializationError {
-        super(klass);
+    public CSWJAXBContextPool(String contextPath) throws JAXBException {
+        super(contextPath);
     }
 
-    @Override
-    protected List<FrameworkMethod> computeTestMethods() {
-        List<FrameworkMethod> fmList = super.computeTestMethods();
-        Collections.sort(fmList, new Comparator<FrameworkMethod>() {
-            @Override
-            public int compare(FrameworkMethod fm1,
-                    FrameworkMethod fm2) {
-                Order o1 = fm1.getAnnotation(Order.class);
-                Order o2 = fm2.getAnnotation(Order.class);
+    public CSWJAXBContextPool(String contextPath,
+            ClassLoader classLoader) throws JAXBException {
+        super(contextPath, classLoader);
+    }
 
-                if ((o1 == null) || (o2 == null)) {
-                    return -1;
-                }
+    public CSWJAXBContextPool(String contextPath,
+            ClassLoader classLoader,
+            Map<String, ?> properties) throws JAXBException {
+        super(contextPath, classLoader, properties);
+    }
 
-                return o1.order() - o2.order();
-            }
-        });
+    public CSWJAXBContextPool(Class... classToBeBound) throws JAXBException {
+        super(classToBeBound);
+    }
 
-        return fmList;
+    public CSWJAXBContextPool(JAXBContext theJaxbContext) {
+        super(theJaxbContext);
+    }
+
+    public static class CSWJAXBContextPoolKey
+            extends GeoPlatformJAXBContextRepository.GeoPlatformJAXBContextKey {
+
+        public CSWJAXBContextPoolKey() {
+            super(CSWConnectorJAXBContext.class);
+        }
+
+        @Override
+        public boolean isCompatibleValue(Object o) {
+            return o instanceof CSWJAXBContextPool;
+        }
     }
 }

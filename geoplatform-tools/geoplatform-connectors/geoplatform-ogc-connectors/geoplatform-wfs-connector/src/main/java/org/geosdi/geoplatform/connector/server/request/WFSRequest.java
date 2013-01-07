@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
@@ -68,7 +67,7 @@ public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
 
     @Override
     protected HttpEntity preparePostEntity()
-            throws IllegalParameterFault, JAXBException, UnsupportedEncodingException {
+            throws IllegalParameterFault, Exception, UnsupportedEncodingException {
 
         Marshaller marshaller = this.getMarshaller();
 
@@ -82,12 +81,12 @@ public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
     protected abstract Object createRequest() throws IllegalParameterFault;
 
     @Override
-    public Marshaller getMarshaller() throws JAXBException {
+    public Marshaller getMarshaller() throws Exception {
         return wfsContext.acquireMarshaller();
     }
 
     @Override
-    public Unmarshaller getUnmarshaller() throws JAXBException {
+    public Unmarshaller getUnmarshaller() throws Exception {
         return wfsContext.acquireUnmarshaller();
     }
 }

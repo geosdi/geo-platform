@@ -39,8 +39,6 @@ import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import org.codehaus.jra.Get;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureDTO;
@@ -62,33 +60,33 @@ public interface GPWFSService {
     LayerSchemaDTO describeFeatureType(
             @WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+            throws Exception;
 
     @Get
     FeatureDTO getFeatureByFIDDirect(
             @WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName,
             @WebParam(name = "fid") String fid)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+            throws Exception;
 
     @Get
     FeatureDTO getFeatureByFID(
             @WebParam(name = "layerSchema") LayerSchemaDTO layerSchema,
             @WebParam(name = "fid") String fid)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+            throws Exception;
 
     @Get
     FeatureCollectionDTO getFeatureByBBoxDirect(
             @WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName,
             @WebParam(name = "bBox") BBox bBox)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+            throws Exception;
 
     @Get
     FeatureCollectionDTO getFeatureByBBox(
             @WebParam(name = "layerSchema") LayerSchemaDTO layerSchema,
             @WebParam(name = "bBox") BBox bBox)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+            throws Exception;
 
     @Get
     boolean transactionUpdate(
@@ -96,5 +94,5 @@ public interface GPWFSService {
             @WebParam(name = "typeName") String typeName,
             @WebParam(name = "fid") String fid,
             @WebParam(name = "attributes") List<AttributeDTO> attributes)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+            throws Exception;
 }

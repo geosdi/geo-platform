@@ -59,7 +59,7 @@ public class GPTransactionService extends AbstractFeatureService
     @Override
     public boolean transactionUpdate(String serverURL, String typeName,
             String fid, List<AttributeDTO> attributes)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
         assert (serverURL != null);
         assert (typeName != null);
         assert (fid != null);

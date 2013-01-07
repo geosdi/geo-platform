@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.services;
 
 import java.util.List;
 import javax.jws.WebService;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureDTO;
@@ -72,14 +70,14 @@ public class GPWFSServiceImpl implements GPWFSService {
 
     @Override
     public LayerSchemaDTO describeFeatureType(String serverURL, String typeName)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
 
         return gpDescribeFeatureService.describeFeatureType(serverURL, typeName);
     }
 
     @Override
     public FeatureDTO getFeatureByFIDDirect(String serverURL, String typeName, String fid)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
 
         LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName);
         return this.getFeatureByFID(layerSchema, fid);
@@ -87,14 +85,14 @@ public class GPWFSServiceImpl implements GPWFSService {
 
     @Override
     public FeatureDTO getFeatureByFID(LayerSchemaDTO layerSchema, String fid)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
 
         return gpGetFeatureService.getFeature(layerSchema, fid);
     }
 
     @Override
     public FeatureCollectionDTO getFeatureByBBoxDirect(String serverURL, String typeName, BBox bBox)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
 
         LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName);
         return this.getFeatureByBBox(layerSchema, bBox);
@@ -102,7 +100,7 @@ public class GPWFSServiceImpl implements GPWFSService {
 
     @Override
     public FeatureCollectionDTO getFeatureByBBox(LayerSchemaDTO layerSchema, BBox bBox)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
 
         return gpGetFeatureService.getFeature(layerSchema, bBox);
     }
@@ -110,7 +108,7 @@ public class GPWFSServiceImpl implements GPWFSService {
     @Override
     public boolean transactionUpdate(String serverURL, String typeName,
             String fid, List<AttributeDTO> attributes)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
 
         return gpTransactionService.transactionUpdate(serverURL, typeName, fid, attributes);
     }

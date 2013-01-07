@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,24 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
+package org.geosdi.geoplatform.connector.jaxb.comparison.factory;
 
-import org.apache.commons.pool.impl.GenericObjectPool;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import org.geosdi.geoplatform.connector.jaxb.CSWJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.GPConnectorJAXBContext;
+import org.geosdi.geoplatform.connector.jaxb.pool.CSWJAXBContextPool;
+import org.geosdi.geoplatform.xml.csw.CSWContextServiceProvider;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class PoolConfig extends GenericObjectPool.Config {
+public class CSWContextFactory {
 
-    {
-        maxIdle = 3;
-        maxActive = 20;
-        minIdle = 1;
-        whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_GROW;
-        timeBetweenEvictionRunsMillis = 1000L * 60L * 10L;
-        numTestsPerEvictionRun = 10;
-        minEvictableIdleTimeMillis = 1000L * 60L * 5L;
+    public enum CSWContextType {
+
+        SIMPLE,
+        POOLED;
+    }
+
+    static {
+        try {
+            jaxbContext = JAXBContext.newInstance(
+                    CSWContextServiceProvider.loadContextPath());
+        } catch (JAXBException ex) {
+            LoggerFactory.getLogger(CSWContextFactory.class).error("ERROR Loading "
+                    + "Context : " + ex);
+        }
+    }
+    //
+    private static JAXBContext jaxbContext;
+
+    public static GPConnectorJAXBContext createCSWContext(CSWContextType type)
+            throws Exception {
+
+        switch (type) {
+            case SIMPLE:
+                return new CSWJAXBContext(jaxbContext);
+            case POOLED:
+                return new CSWJAXBContextPool(jaxbContext);
+            default:
+                return new CSWJAXBContext(jaxbContext);
+        }
     }
 }

@@ -351,7 +351,7 @@ class CSWServiceImpl {
     }
 
     int getRecordsCount(CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+            throws Exception {
         logger.trace("\n*** getRecordsCount ***\n{}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(
@@ -382,7 +382,7 @@ class CSWServiceImpl {
     List<SummaryRecordDTO> searchSummaryRecords(int num,
             int start,
             CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+            throws Exception {
         logger.trace("\n*** searchSummaryRecords ***\n{}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(
@@ -445,7 +445,7 @@ class CSWServiceImpl {
     List<FullRecordDTO> searchFullRecords(int num,
             int start,
             CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+            throws Exception {
         logger.trace("\n*** searchFullRecords ***\n{}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(
@@ -633,7 +633,7 @@ class CSWServiceImpl {
 
     private GetRecordsResponseType createGetRecordsResponse(
             CatalogGetRecordsRequest<GetRecordsResponseType> request)
-            throws IllegalParameterFault, ServerInternalFault {
+            throws Exception {
 
         GetRecordsResponseType response = null;
         try {
@@ -648,7 +648,7 @@ class CSWServiceImpl {
 
     public String getRecordById(Long serverID,
             String identifier)
-            throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
+            throws Exception {
         logger.trace("\n*** GetRecordById ***\n");
 
         GeoPlatformServer server = this.getCSWServerByID(serverID);
@@ -699,7 +699,7 @@ class CSWServiceImpl {
      */
     private OutputSchema retrieveGetRecordByIdOutputSchema(
             GPCatalogConnectorStore serverConnector)
-            throws IllegalParameterFault, ServerInternalFault {
+            throws Exception {
         List<String> schemas = this.retrieveGetRecordByIdOutputSchemas(
                 serverConnector);
 
@@ -721,7 +721,7 @@ class CSWServiceImpl {
      */
     private List<String> retrieveGetRecordByIdOutputSchemas(
             GPCatalogConnectorStore serverConnector)
-            throws IllegalParameterFault, ServerInternalFault {
+            throws Exception {
         List<String> schemas = null;
         try {
             CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
@@ -772,7 +772,7 @@ class CSWServiceImpl {
 
     private String createGetRecordByIdResponseAsString(
             CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request)
-            throws IllegalParameterFault, ServerInternalFault {
+            throws Exception {
 
         String response = null;
         try {

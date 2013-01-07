@@ -35,10 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.client.CredentialsProvider;
@@ -57,7 +55,7 @@ public interface GPConnectorRequest<T> {
     URI getURI();
 
     T getResponse() throws IllegalParameterFault, ServerInternalFault,
-            IOException;
+            Exception;
 
     CredentialsProvider getCredentialsProvider();
 
@@ -68,9 +66,9 @@ public interface GPConnectorRequest<T> {
      *
      * @return {@link String}
      *
-     * @throws ServerInternalFault, IOException, IllegalParameterFault
+     * @throws ServerInternalFault, Exception, IllegalParameterFault
      */
-    String getResponseAsString() throws ServerInternalFault, IOException,
+    String getResponseAsString() throws ServerInternalFault, Exception,
             IllegalParameterFault;
 
     /**
@@ -79,26 +77,26 @@ public interface GPConnectorRequest<T> {
      *
      * @return {@link InputStream} stream
      *
-     * @throws ServerInternalFault, IOException, IllegalParameterFault
+     * @throws ServerInternalFault, Exception, IllegalParameterFault
      */
-    InputStream getResponseAsStream() throws ServerInternalFault, IOException,
+    InputStream getResponseAsStream() throws ServerInternalFault, Exception,
             IllegalParameterFault;
 
     /**
      *
      * @return Marshaller
      *
-     * @throws JAXBException
+     * @throws Exception
      */
-    Marshaller getMarshaller() throws JAXBException;
+    Marshaller getMarshaller() throws Exception;
 
     /**
      *
      * @return Unmarshaller
      *
-     * @throws JAXBException
+     * @throws Exception
      */
-    Unmarshaller getUnmarshaller() throws JAXBException;
+    Unmarshaller getUnmarshaller() throws Exception;
 
     /**
      * <p>Shuts down this connection manager and releases allocated

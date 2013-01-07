@@ -45,7 +45,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.jaxb.CSWConnectorJAXBContext;
@@ -98,7 +97,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsCount() throws JAXBException {
+    public void testGetRecordsCount() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.HITS);
@@ -127,7 +126,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsCountQuery() throws JAXBException {
+    public void testGetRecordsCountQuery() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.HITS);
@@ -165,7 +164,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilterTextAnytext() throws JAXBException {
+    public void testGetRecordsSearchFilterTextAnytext() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -227,7 +226,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilterTextTitleOrAbstract() throws JAXBException {
+    public void testGetRecordsSearchFilterTextTitleOrAbstract() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -306,7 +305,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilterTextTitleOrSubject() throws JAXBException {
+    public void testGetRecordsSearchFilterTextTitleOrSubject() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -383,7 +382,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilterAreaBBox() throws JAXBException {
+    public void testGetRecordsSearchFilterAreaBBox() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -456,7 +455,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilterAreaEnclosesEnvelope() throws JAXBException {
+    public void testGetRecordsSearchFilterAreaEnclosesEnvelope() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -529,7 +528,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilterAreaEnclosesPolygon() throws JAXBException {
+    public void testGetRecordsSearchFilterAreaEnclosesPolygon() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -623,7 +622,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchFilterTemporal() throws JAXBException {
+    public void testGetRecordsSearchFilterTemporal() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);
@@ -702,7 +701,7 @@ public class CatalogRequestTest {
     }
 
     @Test
-    public void testGetRecordsSearchCQL() throws JAXBException {
+    public void testGetRecordsSearchCQL() throws Exception {
         GetRecordsType getRecords = new GetRecordsType();
 
         getRecords.setResultType(ResultType.RESULTS);

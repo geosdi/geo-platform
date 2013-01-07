@@ -66,7 +66,7 @@ public class GPGetFeatureService extends AbstractFeatureService
 
     @Override
     public FeatureDTO getFeature(LayerSchemaDTO layerSchema, String fid)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
         assert (fid != null);
 
         WFSGetFeatureRequest request = this.createRequest(layerSchema);
@@ -81,7 +81,7 @@ public class GPGetFeatureService extends AbstractFeatureService
 
     @Override
     public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, BBox bBox)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
         assert (bBox != null);
 
         WFSGetFeatureRequest request = this.createRequest(layerSchema);
@@ -124,7 +124,7 @@ public class GPGetFeatureService extends AbstractFeatureService
     }
 
     private FeatureCollectionDTO getFeatureCollection(WFSGetFeatureRequest request, LayerSchemaDTO layerSchema)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
         FeatureCollectionDTO featureCollection = null;
         try {
             InputStream is = request.getResponseAsStream();

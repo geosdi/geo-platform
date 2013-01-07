@@ -44,35 +44,34 @@ import javax.xml.bind.Unmarshaller;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPConnectorJAXBContext {
 
     protected final JAXBContext jaxbContext;
 
     /**
-     * <p>
-     *   Obtain a new instance of a <tt>GeoPlatformJAXBContext</tt> class.
+     * <p> Obtain a new instance of a <tt>GeoPlatformJAXBContext</tt> class.
      *
      * <p>
-     * 
-     * @param contextPath list of java package names that contain schema derived classes
-     * @param classLoader
-     *      This class loader will be used to locate the implementation classes.
-     * @param properties
-     *      provider-specific properties. Can be null, which means the same thing as passing
-     *      in an empty map.
+     *
+     * @param contextPath list of java package names that contain schema derived
+     * classes
+     * @param classLoader This class loader will be used to locate the
+     * implementation classes.
+     * @param properties provider-specific properties. Can be null, which means
+     * the same thing as passing in an empty map.
      *
      * @throws JAXBException if an error was encountered while creating the
-     *                       <tt>JAXBContext</tt> such as
-     * <ol>
-     *   <li>failure to locate either ObjectFactory.class or jaxb.index in the packages</li>
-     *   <li>an ambiguity among global elements contained in the contextPath</li>
-     *   <li>failure to locate a value for the context factory provider property</li>
-     *   <li>mixing schema derived packages from different providers on the same contextPath</li>
-     * </ol>
+     * <tt>JAXBContext</tt> such as <ol> <li>failure to locate either
+     * ObjectFactory.class or jaxb.index in the packages</li> <li>an ambiguity
+     * among global elements contained in the contextPath</li> <li>failure to
+     * locate a value for the context factory provider property</li> <li>mixing
+     * schema derived packages from different providers on the same
+     * contextPath</li> </ol>
      */
-    public GPConnectorJAXBContext(String contextPath, ClassLoader classLoader,
+    public GPConnectorJAXBContext(String contextPath,
+            ClassLoader classLoader,
             Map<String, ?> properties) throws JAXBException {
 
         this.jaxbContext = JAXBContext.newInstance(contextPath, classLoader,
@@ -80,35 +79,34 @@ public abstract class GPConnectorJAXBContext {
     }
 
     /**
-     * 
-     *  
-     * @param classesToBeBound
-     *      list of java classes to be recognized by the new {@link JAXBContext}.
-     *      Can be empty, in which case a {@link JAXBContext} that only knows about
-     *      spec-defined classes will be returned.
-     * 
-     * @throws JAXBException
-     *      if an error was encountered while creating the
-     *      <tt>JAXBContext</tt>, such as (but not limited to):
-     * <ol>
-     *  <li>No JAXB implementation was discovered</li>
-     *  <li>Classes use JAXB annotations incorrectly</li>
-     *  <li>Classes have colliding annotations (i.e., two classes with the same type name)</li>
-     *  <li>The JAXB implementation was unable to locate
-     *      provider-specific out-of-band information (such as additional
-     *      files generated at the development time.)</li>
-     * </ol>
-     * 
-     * @throws IllegalArgumentException
-     *      if the parameter contains {@code null} (i.e., {@code GeoPlatformJAXBContext(null);})
+     *
+     *
+     * @param classesToBeBound list of java classes to be recognized by the new
+     * {@link JAXBContext}. Can be empty, in which case a {@link JAXBContext}
+     * that only knows about spec-defined classes will be returned.
+     *
+     * @throws JAXBException if an error was encountered while creating the
+     * <tt>JAXBContext</tt>, such as (but not limited to): <ol> <li>No JAXB
+     * implementation was discovered</li> <li>Classes use JAXB annotations
+     * incorrectly</li> <li>Classes have colliding annotations (i.e., two
+     * classes with the same type name)</li> <li>The JAXB implementation was
+     * unable to locate provider-specific out-of-band information (such as
+     * additional files generated at the development time.)</li> </ol>
+     *
+     * @throws IllegalArgumentException if the parameter contains {@code null}
+     * (i.e., {@code GeoPlatformJAXBContext(null);})
      */
     public GPConnectorJAXBContext(Class... classToBeBound)
             throws JAXBException {
 
         this.jaxbContext = JAXBContext.newInstance(classToBeBound);
     }
+    
+    public GPConnectorJAXBContext(JAXBContext theJaxbContext) {
+        this.jaxbContext = theJaxbContext;
+    }
 
-    public abstract Marshaller acquireMarshaller() throws JAXBException;
+    public abstract Marshaller acquireMarshaller() throws Exception;
 
-    public abstract Unmarshaller acquireUnmarshaller() throws JAXBException;
+    public abstract Unmarshaller acquireUnmarshaller() throws Exception;
 }

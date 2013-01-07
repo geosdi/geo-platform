@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -71,7 +70,7 @@ public abstract class GPPostConnectorRequest<T>
     }
 
     public HttpPost getPostMethod() throws IllegalParameterFault,
-            JAXBException, ServerInternalFault {
+            Exception, ServerInternalFault {
         if (postMethod == null) {
             this.preparePostMethod();
         }
@@ -80,7 +79,7 @@ public abstract class GPPostConnectorRequest<T>
     }
 
     private void preparePostMethod()
-            throws IllegalParameterFault, JAXBException, ServerInternalFault {
+            throws IllegalParameterFault, Exception, ServerInternalFault {
 
         super.prepareHttpParams();
         this.postMethod = new HttpPost(super.serverURI);
@@ -98,7 +97,7 @@ public abstract class GPPostConnectorRequest<T>
 
     @Override
     public T getResponse() throws IllegalParameterFault,
-            ServerInternalFault, IOException {
+            ServerInternalFault, Exception {
         T response = null;
 
         try {
@@ -143,7 +142,7 @@ public abstract class GPPostConnectorRequest<T>
     }
 
     @Override
-    public String getResponseAsString() throws ServerInternalFault, IOException,
+    public String getResponseAsString() throws ServerInternalFault, Exception,
             IllegalParameterFault {
         Reader reader = null;
         Writer writer = new StringWriter();
@@ -192,7 +191,7 @@ public abstract class GPPostConnectorRequest<T>
 
     @Override
     public InputStream getResponseAsStream() throws ServerInternalFault,
-            IOException, IllegalParameterFault {
+            Exception, IllegalParameterFault {
         try {
             HttpResponse httpResponse = super.securityConnector.secure(
                     this, this.getPostMethod());
@@ -219,5 +218,5 @@ public abstract class GPPostConnectorRequest<T>
     }
 
     protected abstract HttpEntity preparePostEntity()
-            throws IllegalParameterFault, JAXBException, UnsupportedEncodingException;
+            throws IllegalParameterFault, Exception, UnsupportedEncodingException;
 }

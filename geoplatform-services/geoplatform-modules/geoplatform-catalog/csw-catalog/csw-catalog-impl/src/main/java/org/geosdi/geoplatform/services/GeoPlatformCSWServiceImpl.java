@@ -176,27 +176,27 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
 
     @Override
     public int getRecordsCount(CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+            throws Exception {
         return cswServiceDelegate.getRecordsCount(catalogFinder);
     }
 
     @Override
     public List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
             CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+            throws Exception {
         return cswServiceDelegate.searchSummaryRecords(num, start, catalogFinder);
     }
 
     @Override
     public List<FullRecordDTO> searchFullRecords(int num, int start,
             CatalogFinderBean catalogFinder)
-            throws IllegalParameterFault, ResourceNotFoundFault, ServerInternalFault {
+            throws Exception {
         return cswServiceDelegate.searchFullRecords(num, start, catalogFinder);
     }
 
     @Override
     public String getRecordById(Long serverID, String identifier)
-            throws ResourceNotFoundFault, IllegalParameterFault, ServerInternalFault {
+            throws Exception {
         return cswServiceDelegate.getRecordById(serverID, identifier);
     }
 }

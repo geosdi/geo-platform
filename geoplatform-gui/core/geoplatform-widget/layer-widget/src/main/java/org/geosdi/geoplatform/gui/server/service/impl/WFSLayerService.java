@@ -63,7 +63,7 @@ public class WFSLayerService implements IWFSLayerService {
 
     @Override
     public LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName) throws GeoPlatformException {
+            String typeName) throws Exception {
 
         try {
 

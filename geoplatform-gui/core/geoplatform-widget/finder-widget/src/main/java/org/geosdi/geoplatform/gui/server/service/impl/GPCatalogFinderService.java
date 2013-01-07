@@ -182,7 +182,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             PagingLoadConfig config,
             CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+            throws Exception {
 
         int recordsCount;
         ArrayList<SummaryRecord> searchRecords;
@@ -224,7 +224,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             PagingLoadConfig config,
             CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+            throws Exception {
 
         logger.debug(
                 "\n--------------------------\n{}\n--------------------------\n",
@@ -267,7 +267,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public String getRecordById(Long serverID, String identifier, String moduleName,
-            HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) throws Exception{
 
         try {
             String url = httpServletRequest.getSession().getServletContext()

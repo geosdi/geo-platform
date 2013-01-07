@@ -76,15 +76,15 @@ public interface IGPCatalogFinderService {
     PagingLoadResult<SummaryRecord> searchSummaryRecords(PagingLoadConfig config,
             CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+            throws Exception;
 
     PagingLoadResult<FullRecord> searchFullRecords(PagingLoadConfig config,
             CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+            throws Exception;
 
     String getRecordById(Long serverID,
             String identifier,
             String moduleName,
-            HttpServletRequest httpServletRequest);
+            HttpServletRequest httpServletRequest) throws Exception;
 }

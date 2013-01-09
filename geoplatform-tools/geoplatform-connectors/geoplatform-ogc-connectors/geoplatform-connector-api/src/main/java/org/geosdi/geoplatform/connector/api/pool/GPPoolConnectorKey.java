@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.api.pool;
 
 import java.net.URL;
+import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
@@ -44,6 +45,7 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Immutable
 public class GPPoolConnectorKey {
 
     private final URL serverUrl;

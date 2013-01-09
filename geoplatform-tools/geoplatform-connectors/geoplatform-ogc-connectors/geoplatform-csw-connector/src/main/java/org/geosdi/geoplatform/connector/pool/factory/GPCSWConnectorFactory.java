@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,42 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.pool.factory;
 
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import com.google.common.base.Preconditions;
+import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
+import org.geosdi.geoplatform.connector.GPCatalogVersion;
+import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorFactory;
+import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GPCSWConnectorBuilder, GPCatalogConnectorStore> {
-
-    /**
-     * Create a new GeoPlatform CSWConnectorBuilder with which to define a
-     * specification for a GPCatalogConnectorDecorator.
-     *
-     * @return the new GeoPlatformCSWConnectorBuilder
-     */
-    public static GPCSWConnectorBuilder newConnector() {
-        return new GPCSWConnectorBuilder();
-    }
+public class GPCSWConnectorFactory
+        extends GPPoolConnectorFactory<GPPoolConnectorKey, GPCatalogConnectorStore> {
 
     @Override
-    public GPCatalogConnectorStore build() throws Exception {
-        if (serverUrl == null) {
-            throw new IllegalArgumentException("Error on CSW Server Connector build: "
-                    + "server URL cannot be null.");
-        }
+    public GPCatalogConnectorStore makeObject(GPPoolConnectorKey key)
+            throws Exception {
 
-        GPCatalogVersion v = GPCatalogVersion.fromString(version);
+        Preconditions.checkNotNull(key, "The GPPoolConnectorKey "
+                + "must not be null");
 
-        GPCatalogConnectorStore cswConnector = super.proxyConfiguration != null
+        GPCatalogVersion v = GPCatalogVersion.fromString(key.getVersion());
+
+        GPCatalogConnectorStore cswConnector = key.getProxyConfiguration() != null
                                                ? new GPCatalogConnectorStore(
-                serverUrl, securityConnector, proxyConfiguration, v)
+                key.getServerUrl(), key.getSecurityConnector(),
+                key.getProxyConfiguration(), v)
                                                : new GPCatalogConnectorStore(
-                serverUrl, securityConnector, v);
+                key.getServerUrl(), key.getSecurityConnector(), v);
 
         return cswConnector;
     }

@@ -141,7 +141,8 @@ class CSWServiceImpl {
     /**
      * @param cswProxyConfiguration the cswProxyConfiguration to set
      */
-    public void setCswProxyConfiguration(CSWProxyConnectionConfiguration cswProxyConfiguration) {
+    public void setCswProxyConfiguration(
+            CSWProxyConnectionConfiguration cswProxyConfiguration) {
         this.cswProxyConfiguration = cswProxyConfiguration;
     }
 
@@ -603,7 +604,7 @@ class CSWServiceImpl {
 
     private CatalogGetRecordsRequest<GetRecordsResponseType> createGetRecordsRequest(
             String serverUrl)
-            throws IllegalParameterFault {
+            throws Exception {
 
         GPCatalogConnectorStore serverConnector = null;
         try {
@@ -672,7 +673,8 @@ class CSWServiceImpl {
         return responseXSL;
     }
 
-    private GPCatalogConnectorStore createServerConnector(String serverUrl) throws IllegalParameterFault {
+    private GPCatalogConnectorStore createServerConnector(String serverUrl)
+            throws Exception {
         GPCatalogConnectorStore serverConnector;
         try {
             URL url = new URL(serverUrl);

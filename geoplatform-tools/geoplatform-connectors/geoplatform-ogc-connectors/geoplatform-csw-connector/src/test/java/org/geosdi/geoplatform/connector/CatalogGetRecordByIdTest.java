@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector;
 
 import java.io.FileOutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
@@ -95,7 +94,7 @@ public class CatalogGetRecordByIdTest {
     private static final String ISPRA_URL = "http://sgi.isprambiente.it/geoportal/csw/discovery";
 
     @Before
-    public void setUp() throws MalformedURLException {
+    public void setUp() throws Exception {
         URL url = new URL(geosdiUrl);
         this.serverConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();

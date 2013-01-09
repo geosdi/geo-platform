@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
@@ -59,7 +58,7 @@ public class WFSTestConfigurator {
     protected GPWFSConnectorStore secureServerConnector;
 
     @Before
-    public void setUp() throws MalformedURLException {
+    public void setUp() throws Exception {
         this.serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
                 new URL(wfsURL)).build();
 

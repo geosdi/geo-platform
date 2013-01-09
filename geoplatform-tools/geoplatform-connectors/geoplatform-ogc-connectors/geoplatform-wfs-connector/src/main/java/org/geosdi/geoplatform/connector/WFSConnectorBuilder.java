@@ -56,7 +56,7 @@ public class WFSConnectorBuilder
     }
 
     @Override
-    public GPWFSConnectorStore build() {
+    public GPWFSConnectorStore build() throws Exception {
         if (serverUrl == null) {
             throw new IllegalArgumentException("Error on WFS Server Connector build: "
                     + "server URL cannot be null.");

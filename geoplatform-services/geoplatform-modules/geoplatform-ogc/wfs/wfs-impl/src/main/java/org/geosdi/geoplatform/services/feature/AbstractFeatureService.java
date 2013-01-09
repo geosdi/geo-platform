@@ -63,7 +63,7 @@ public abstract class AbstractFeatureService {
     protected FeatureSchemaReader featureReaderXSD;
 
     protected GPWFSConnectorStore createWFSConnector(String serverUrl)
-            throws IllegalParameterFault {
+            throws Exception {
         GPWFSConnectorStore serverConnector;
         try {
             URL url = new URL(serverUrl);

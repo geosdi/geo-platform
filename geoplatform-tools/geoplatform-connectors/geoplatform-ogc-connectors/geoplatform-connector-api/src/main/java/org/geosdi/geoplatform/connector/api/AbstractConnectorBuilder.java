@@ -80,5 +80,5 @@ public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilde
         return (B) this;
     }
 
-    public abstract C build();
+    public abstract C build() throws Exception;
 }

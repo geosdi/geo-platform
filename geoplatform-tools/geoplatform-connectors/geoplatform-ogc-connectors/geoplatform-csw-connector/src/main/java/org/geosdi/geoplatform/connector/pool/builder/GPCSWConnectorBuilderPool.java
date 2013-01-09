@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,43 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.pool.builder;
 
+import com.google.common.base.Preconditions;
+import org.apache.commons.pool.impl.GenericKeyedObjectPool;
+import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;
+import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
+import org.geosdi.geoplatform.connector.pool.factory.GPCSWConnectorFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWConnectorBuilder
-        extends AbstractConnectorBuilder<GPCSWConnectorBuilder, GPCatalogConnectorStore> {
+public class GPCSWConnectorBuilderPool
+        extends AbstractConnectorBuilder<GPCSWConnectorBuilderPool, GPCatalogConnectorStore> {
 
-    /**
-     * Create a new GeoPlatform CSWConnectorBuilder with which to define a
-     * specification for a GPCatalogConnectorDecorator.
-     *
-     * @return the new GeoPlatformCSWConnectorBuilder
-     */
-    public static GPCSWConnectorBuilder newConnector() {
-        return new GPCSWConnectorBuilder();
+    static {
+        catalogConnectoPool = new GenericKeyedObjectPool<GPPoolConnectorKey, GPCatalogConnectorStore>(
+                new GPCSWConnectorFactory(), new GPPoolConnectorConfig());
+    }
+    //
+    private static GenericKeyedObjectPool<GPPoolConnectorKey, GPCatalogConnectorStore> catalogConnectoPool;
+
+    public static GPCSWConnectorBuilderPool newInstance() {
+        return new GPCSWConnectorBuilderPool();
     }
 
     @Override
     public GPCatalogConnectorStore build() throws Exception {
-        if (serverUrl == null) {
-            throw new IllegalArgumentException("Error on CSW Server Connector build: "
-                    + "server URL cannot be null.");
-        }
+        Preconditions.checkNotNull(serverUrl, "CSW Server URL must "
+                + "not be null.");
 
-        GPCatalogVersion v = GPCatalogVersion.fromString(version);
+        GPPoolConnectorKey keyConnector = super.proxyConfiguration != null
+                                          ? new GPPoolConnectorKey(
+                serverUrl, securityConnector, proxyConfiguration, version)
+                                          : new GPPoolConnectorKey(
+                serverUrl, securityConnector, version);
 
-        GPCatalogConnectorStore cswConnector = super.proxyConfiguration != null
-                                               ? new GPCatalogConnectorStore(
-                serverUrl, securityConnector, proxyConfiguration, v)
-                                               : new GPCatalogConnectorStore(
-                serverUrl, securityConnector, v);
+        GPCatalogConnectorStore catalogStore = catalogConnectoPool.borrowObject(
+                keyConnector);
 
-        return cswConnector;
+        catalogConnectoPool.returnObject(keyConnector, catalogStore);
+
+        return catalogStore;
     }
 }

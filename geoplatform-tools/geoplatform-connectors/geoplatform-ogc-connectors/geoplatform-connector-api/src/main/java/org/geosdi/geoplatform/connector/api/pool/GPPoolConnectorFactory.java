@@ -43,12 +43,12 @@ import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPPoolConnectorFactory
-        extends BaseKeyedPoolableObjectFactory<GPPoolConnectorKey, GeoPlatformConnector> {
+public abstract class GPPoolConnectorFactory<K extends GPPoolConnectorKey, C extends GeoPlatformConnector>
+        extends BaseKeyedPoolableObjectFactory<K, C> {
 
     @Override
-    public void destroyObject(GPPoolConnectorKey key,
-            GeoPlatformConnector obj) throws Exception {
+    public void destroyObject(K key,
+            C obj) throws Exception {
         obj.dispose();
     }
 }

@@ -91,7 +91,7 @@ public class GPGetFeatureService extends AbstractFeatureService
     }
 
     private WFSGetFeatureRequest createRequest(LayerSchemaDTO layerSchema)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws Exception {
         assert (layerSchema != null);
 
         String typeName = layerSchema.getTypeName();

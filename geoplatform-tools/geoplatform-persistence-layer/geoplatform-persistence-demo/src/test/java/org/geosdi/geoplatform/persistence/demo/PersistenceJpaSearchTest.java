@@ -77,7 +77,7 @@ public class PersistenceJpaSearchTest {
     @Test
     public void testSearchLucene() throws Exception {
         insert();
-        
+
 //        Assert.assertEquals(100, jpaCarSearchDAO.findByPlate("AR"));
         logger.info("ECCOLI @@@@@@@@@@@@ "
                 + jpaCarSearchDAO.findByPlate("AR").size());

@@ -107,7 +107,7 @@ public class Car
     /**
      * @return the plate
      */
-    @Field(name = "model", store = Store.YES, analyze = Analyze.YES)
+    @Field(name = "plate", store = Store.YES, analyze = Analyze.YES)
     @Analyzer(definition = "customanalyzer")
     public String getPlate() {
         return plate;

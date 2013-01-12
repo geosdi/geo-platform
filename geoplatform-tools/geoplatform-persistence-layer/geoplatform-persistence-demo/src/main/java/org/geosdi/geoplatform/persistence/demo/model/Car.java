@@ -42,7 +42,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import org.apache.solr.analysis.LowerCaseFilterFactory;
+import org.apache.solr.analysis.SnowballPorterFilterFactory;
+import org.apache.solr.analysis.StandardTokenizerFactory;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.AnalyzerDef;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Parameter;
+import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.TokenFilterDef;
+import org.hibernate.search.annotations.TokenizerDef;
 
 /**
  *
@@ -50,13 +63,25 @@ import org.hibernate.annotations.NaturalId;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Entity
-public class Car implements Serializable {
+@AnalyzerDef(name = "customanalyzer",
+             tokenizer =
+@TokenizerDef(factory = StandardTokenizerFactory.class),
+             filters = {
+    @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+    @TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = {
+        @Parameter(name = "language", value = "English")
+    })
+})
+@Indexed(index = "CarIndex")
+public class Car
+        implements Serializable {
 
     private static final long serialVersionUID = 7556465403027719413L;
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAR_SEQ")
     @SequenceGenerator(name = "CAR_SEQ", sequenceName = "CAR_SEQ")
+    @DocumentId
     private Long id;
     //
     @NaturalId
@@ -82,6 +107,8 @@ public class Car implements Serializable {
     /**
      * @return the plate
      */
+    @Field(name = "model", store = Store.YES, analyze = Analyze.YES)
+    @Analyzer(definition = "customanalyzer")
     public String getPlate() {
         return plate;
     }

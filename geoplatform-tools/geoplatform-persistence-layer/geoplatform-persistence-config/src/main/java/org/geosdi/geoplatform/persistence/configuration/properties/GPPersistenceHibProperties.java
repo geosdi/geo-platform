@@ -77,24 +77,10 @@ public class GPPersistenceHibProperties {
     }
 
     /**
-     * @param hibDatabasePlatform the hibDatabasePlatform to set
-     */
-    public void setHibDatabasePlatform(String hibDatabasePlatform) {
-        this.hibDatabasePlatform = hibDatabasePlatform;
-    }
-
-    /**
      * @return the hibShowSql
      */
     public boolean isHibShowSql() {
         return hibShowSql;
-    }
-
-    /**
-     * @param hibShowSql the hibShowSql to set
-     */
-    public void setHibShowSql(boolean hibShowSql) {
-        this.hibShowSql = hibShowSql;
     }
 
     /**
@@ -105,24 +91,10 @@ public class GPPersistenceHibProperties {
     }
 
     /**
-     * @param hibGenerateDdl the hibGenerateDdl to set
-     */
-    public void setHibGenerateDdl(boolean hibGenerateDdl) {
-        this.hibGenerateDdl = hibGenerateDdl;
-    }
-
-    /**
      * @return the hibHbm2ddlAuto
      */
     public String getHibHbm2ddlAuto() {
         return hibHbm2ddlAuto;
-    }
-
-    /**
-     * @param hibHbm2ddlAuto the hibHbm2ddlAuto to set
-     */
-    public void setHibHbm2ddlAuto(String hibHbm2ddlAuto) {
-        this.hibHbm2ddlAuto = hibHbm2ddlAuto;
     }
 
     /**
@@ -133,24 +105,10 @@ public class GPPersistenceHibProperties {
     }
 
     /**
-     * @param hibCacheProviderClass the hibCacheProviderClass to set
-     */
-    public void setHibCacheProviderClass(String hibCacheProviderClass) {
-        this.hibCacheProviderClass = hibCacheProviderClass;
-    }
-
-    /**
      * @return the hibCacheRegionFactoryClass
      */
     public String getHibCacheRegionFactoryClass() {
         return hibCacheRegionFactoryClass;
-    }
-
-    /**
-     * @param hibCacheRegionFactoryClass the hibCacheRegionFactoryClass to set
-     */
-    public void setHibCacheRegionFactoryClass(String hibCacheRegionFactoryClass) {
-        this.hibCacheRegionFactoryClass = hibCacheRegionFactoryClass;
     }
 
     /**
@@ -161,24 +119,10 @@ public class GPPersistenceHibProperties {
     }
 
     /**
-     * @param hibUseSecondLevelCache the hibUseSecondLevelCache to set
-     */
-    public void setHibUseSecondLevelCache(boolean hibUseSecondLevelCache) {
-        this.hibUseSecondLevelCache = hibUseSecondLevelCache;
-    }
-
-    /**
      * @return the hibUseQueryCache
      */
     public boolean isHibUseQueryCache() {
         return hibUseQueryCache;
-    }
-
-    /**
-     * @param hibUseQueryCache the hibUseQueryCache to set
-     */
-    public void setHibUseQueryCache(boolean hibUseQueryCache) {
-        this.hibUseQueryCache = hibUseQueryCache;
     }
 
     /**
@@ -189,13 +133,6 @@ public class GPPersistenceHibProperties {
     }
 
     /**
-     * @param hibGenerateStatistics the hibGenerateStatistics to set
-     */
-    public void setHibGenerateStatistics(boolean hibGenerateStatistics) {
-        this.hibGenerateStatistics = hibGenerateStatistics;
-    }
-
-    /**
      * @return the hibDefaultSchema
      */
     public String getHibDefaultSchema() {
@@ -203,24 +140,10 @@ public class GPPersistenceHibProperties {
     }
 
     /**
-     * @param hibDefaultSchema the hibDefaultSchema to set
-     */
-    public void setHibDefaultSchema(String hibDefaultSchema) {
-        this.hibDefaultSchema = hibDefaultSchema;
-    }
-
-    /**
      * @return the ehcacheConfResourceName
      */
     public String getEhcacheConfResourceName() {
         return ehcacheConfResourceName;
-    }
-
-    /**
-     * @param ehcacheConfResourceName the ehcacheConfResourceName to set
-     */
-    public void setEhcacheConfResourceName(String ehcacheConfResourceName) {
-        this.ehcacheConfResourceName = ehcacheConfResourceName;
     }
 
     @Override

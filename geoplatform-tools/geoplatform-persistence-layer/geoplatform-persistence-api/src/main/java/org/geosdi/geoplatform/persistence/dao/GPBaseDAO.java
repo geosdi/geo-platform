@@ -46,11 +46,8 @@ import org.hibernate.criterion.Criterion;
  * @email giuseppe.lascaleia@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface GPBaseDAO<T extends Object, ID extends Serializable> {
-
-    T persist(T entity);
-
-    void update(T entity);
+public interface GPBaseDAO<T extends Object, ID extends Serializable>
+        extends GPGenericDAO<T> {
 
     void delete(Long id);
 
@@ -58,7 +55,8 @@ public interface GPBaseDAO<T extends Object, ID extends Serializable> {
 
     List<T> findAll();
 
-    List<T> findAll(int start, int end) throws GPDAOException;
+    List<T> findAll(int start,
+            int end) throws GPDAOException;
 
     List<T> findByCriteria(Criterion... criterion) throws GPDAOException;
 }

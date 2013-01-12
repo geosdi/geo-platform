@@ -62,7 +62,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private Class< T> persistentClass;
+    private Class<T> persistentClass;
     //
     protected EntityManager entityManager;
 
@@ -136,7 +136,8 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     }
 
     @Override
-    public List<T> findAll(int start, int end) throws GPDAOException {
+    public List<T> findAll(int start,
+            int end) throws GPDAOException {
         try {
             Criteria crit = getSession().createCriteria(persistentClass);
             crit.setFirstResult(start);

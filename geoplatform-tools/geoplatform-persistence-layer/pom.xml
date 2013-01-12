@@ -101,6 +101,7 @@
     <modules>
         <module>geoplatform-persistence-api</module>
         <module>geoplatform-persistence-config</module>
+        <module>geoplatform-persistence-search</module>
         <module>geoplatform-persistence-loader</module>
         <module>geoplatform-persistence-demo</module>
     </modules>

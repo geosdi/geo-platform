@@ -73,7 +73,7 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     @Override
     public T persist(T entity) {
         Preconditions.checkNotNull(entity);
-        
+
         getCurrentSession().persist(entity);
         return entity;
     }
@@ -125,7 +125,8 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     }
 
     @Override
-    public List<T> findAll(int start, int end) throws GPDAOException {
+    public List<T> findAll(int start,
+            int end) throws GPDAOException {
         try {
             Criteria crit = getCurrentSession().createCriteria(persistentClass);
             crit.setFirstResult(start);

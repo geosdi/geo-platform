@@ -54,22 +54,27 @@ import org.springframework.stereotype.Repository;
 @Profile(value = "hibernate")
 public class HibernateCarDAO extends GPAbstractHibernateDAO<Car, Long>
         implements ICarDAO {
-
+    
     public HibernateCarDAO() {
         super(Car.class);
     }
-
+    
     @Override
     public Car findByPlate(String plat) throws GPDAOException {
         try {
             Criteria crit = super.getCurrentSession().createCriteria(
                     super.getPersistentClass());
             crit.add(Restrictions.naturalId());
-
+            
             return (Car) crit.uniqueResult();
         } catch (HibernateException ex) {
             logger.error("HibernateException : {}", ex);
             throw new GPDAOException(ex);
         }
+    }
+    
+    @Override
+    public void delete(Car entity) {
+        super.delete(entity.getId());
     }
 }

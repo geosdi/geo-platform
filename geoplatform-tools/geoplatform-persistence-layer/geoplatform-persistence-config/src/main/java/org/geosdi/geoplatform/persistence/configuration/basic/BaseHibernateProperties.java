@@ -36,7 +36,10 @@
 package org.geosdi.geoplatform.persistence.configuration.basic;
 
 import java.util.Properties;
+import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PersistenceHibernateStrategy;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceHibProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,23 +50,27 @@ import org.springframework.context.annotation.Configuration;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class PersistenceHibernateProperties {
+public class BaseHibernateProperties
+        implements PersistenceHibernateStrategy {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     @Autowired
     private GPPersistenceHibProperties gpHibernateProperties;
 
     @Bean
+    @Override
     public Properties hibernateProperties() {
         return new Properties() {
             private static final long serialVersionUID = 3109256773218160485L;
 
             {
                 this.put("hibernate.dialect",
-                         gpHibernateProperties.getHibDatabasePlatform());
+                        gpHibernateProperties.getHibDatabasePlatform());
                 this.put("hibernate.hbm2ddl.auto",
-                         gpHibernateProperties.getHibHbm2ddlAuto());
+                        gpHibernateProperties.getHibHbm2ddlAuto());
                 this.put("hibernate.show_sql",
-                         gpHibernateProperties.isHibShowSql());
+                        gpHibernateProperties.isHibShowSql());
 //                this.put("hibernate.cache.provider_class",
 //                         gpHibernateProperties.getHibCacheProviderClass());
 //                this.put("hibernate.cache.region.factory_class",
@@ -75,9 +82,7 @@ public class PersistenceHibernateProperties {
 //                this.put("hibernate.generate_statistics",
 //                         gpHibernateProperties.isHibGenerateStatistics());
                 this.put("hibernate.default_schema",
-                         gpHibernateProperties.getHibDefaultSchema());
-                this.put("hibernate.default_schema",
-                         gpHibernateProperties.getHibDefaultSchema());
+                        gpHibernateProperties.getHibDefaultSchema());
 //                this.put("net.sf.ehcache.configurationResourceName",
 //                         gpHibernateProperties.getEhcacheConfResourceName());
             }

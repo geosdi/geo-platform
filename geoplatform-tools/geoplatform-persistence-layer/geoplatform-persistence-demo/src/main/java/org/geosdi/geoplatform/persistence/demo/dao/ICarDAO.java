@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.persistence.demo.dao;
 
 import org.geosdi.geoplatform.persistence.dao.GPBaseDAO;
-import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
 
 /**
@@ -47,5 +46,5 @@ import org.geosdi.geoplatform.persistence.demo.model.Car;
 public interface ICarDAO extends
         GPBaseDAO<Car, Long> {
 
-    Car findByPlate(String plat) throws GPDAOException;
+    Car findByPlate(String plat) throws Exception;
 }

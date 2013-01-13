@@ -52,6 +52,8 @@ public class GPPersistenceSearchProperties {
     private String indexBase;
     @Value("${hibernate_search_directory_provider}")
     private String directoryProvider;
+    @Value("${hibernate_search_lucene_version}")
+    private String luceneVersion;
 
     /**
      * @return the indexBase
@@ -67,9 +69,17 @@ public class GPPersistenceSearchProperties {
         return directoryProvider;
     }
 
+    /**
+     * @return the luceneVersion
+     */
+    public String getLuceneVersion() {
+        return luceneVersion;
+    }
+
     @Override
     public String toString() {
         return "GPPersistenceSearchProperties { " + "indexBase = "
-                + indexBase + ", directoryProvider = " + directoryProvider + '}';
+                + indexBase + ", directoryProvider = " + directoryProvider
+                + ", luceneVersion = " + luceneVersion + '}';
     }
 }

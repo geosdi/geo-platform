@@ -33,59 +33,48 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.persistence.configuration.basic.strategy;
+package org.geosdi.geoplatform.persistence.demo.model.experimental;
 
-import java.util.Properties;
+import org.geosdi.geoplatform.persistence.demo.model.Car;
+import org.hibernate.search.indexes.interceptor.EntityIndexingInterceptor;
+import org.hibernate.search.indexes.interceptor.IndexingOverride;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "hibPropStrategyManager")
-public class PropertiesStrategyManager
-        implements InitializingBean {
+public class CarIndexInterceptor implements EntityIndexingInterceptor<Car> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    private Properties hibernateProperties;
-    //
-    @Autowired(required = false)
-    @Qualifier(value = "luceneHibProp")
-    private PersistenceHibernateStrategy luceneHibProp;
 
-    /**
-     * 
-     * @return Properties Configuration
-     */
-    public Properties getProperties() {
-        return luceneHibProp != null ? luceneHibProp.hibernateProperties()
-               : hibernateProperties;
+    @Override
+    public IndexingOverride onAdd(Car t) {
+        logger.info("EXECUTE onAdd ################################### "
+                + t);
+        return IndexingOverride.APPLY_DEFAULT;
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        StringBuilder builder = new StringBuilder();
-        builder.append("PropertiesStrategyManager Configuration ############"
-                + "#######");
-        builder.append("\n\n");
-        builder.append("Strategy Used : ");
-        builder.append(printStrategy());
-        builder.append("\n\n");
-
-        logger.info(builder.toString());
+    public IndexingOverride onUpdate(Car t) {
+        logger.info("EXECUTE onUpdate ################################### "
+                + t);
+        return IndexingOverride.UPDATE;
     }
 
-    private String printStrategy() {
-        return luceneHibProp != null
-               ? "Hibernate annd Lucene Configuration : " + luceneHibProp
-               : "Basic Hibernate Configuration. ";
+    @Override
+    public IndexingOverride onDelete(Car t) {
+        logger.info("EXECUTE onDelete ################################### "
+                + t);
+        return IndexingOverride.REMOVE;
+    }
+
+    @Override
+    public IndexingOverride onCollectionUpdate(Car t) {
+        logger.info("EXECUTE onCollectionUpdate ######################### "
+                + t);
+        return IndexingOverride.APPLY_DEFAULT;
     }
 }

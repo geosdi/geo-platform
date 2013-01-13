@@ -91,4 +91,10 @@ public abstract class GenericJPASearchDAO<T extends Object>
     public void update(T entity) {
         this.entityManager.merge(entity);
     }
+
+    @Override
+    public void removeAll() {
+        getSearchManager().createNativeQuery("delete * from "
+                + persistentClass.getSimpleName(), persistentClass);
+    }
 }

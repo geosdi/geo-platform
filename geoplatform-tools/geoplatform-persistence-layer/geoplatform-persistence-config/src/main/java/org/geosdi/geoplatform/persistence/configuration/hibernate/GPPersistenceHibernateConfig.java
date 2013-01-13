@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.hibernate;
 
-import java.util.Properties;
 import javax.sql.DataSource;
+import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PropertiesStrategyManager;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -64,7 +64,7 @@ public class GPPersistenceHibernateConfig {
     private DataSource persitenceDataSource;
     //
     @Autowired
-    private Properties hibernateProperties;
+    private PropertiesStrategyManager hibPropStrategyManager;
 
     @Bean
     public LocalSessionFactoryBean gpSessionFactoryBean() {
@@ -72,7 +72,8 @@ public class GPPersistenceHibernateConfig {
         factoryBean.setDataSource(this.persitenceDataSource);
         factoryBean.setPackagesToScan(
                 this.gpPersistenceConnector.getPackagesToScan());
-        factoryBean.setHibernateProperties(this.hibernateProperties);
+        factoryBean.setHibernateProperties(
+                this.hibPropStrategyManager.getProperties());
 
         return factoryBean;
     }

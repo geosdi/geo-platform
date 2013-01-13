@@ -46,4 +46,6 @@ import org.hibernate.search.jpa.FullTextEntityManager;
 public interface GPBaseSearchDAO<T extends Object> extends GPGenericDAO<T> {
     
     FullTextEntityManager getSearchManager();
+    
+    void removeAll();
 }

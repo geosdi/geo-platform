@@ -62,7 +62,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Profile(value = "jpa")
 @EnableTransactionManagement
 public class GPPersistenceJpaConfig {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
@@ -76,36 +76,37 @@ public class GPPersistenceJpaConfig {
     //
     @Autowired
     private PropertiesStrategyManager hibPropStrategyManager;
-
+    
     @Bean
     public LocalContainerEntityManagerFactoryBean gpEntityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean gpFactoryBean = new LocalContainerEntityManagerFactoryBean();
         gpFactoryBean.setDataSource(this.persitenceDataSource);
         gpFactoryBean.setPackagesToScan(
                 this.gpPersistenceConnector.getPackagesToScan());
-
+        
         gpFactoryBean.setJpaVendorAdapter(this.jpaVendorAdapter);
         gpFactoryBean.setLoadTimeWeaver(this.gpLoadTimeWeaver());
         gpFactoryBean.setJpaProperties(
                 this.hibPropStrategyManager.getProperties());
-
+        gpFactoryBean.setPersistenceUnitName("geoplatform-persistence-layer");
+        
         return gpFactoryBean;
     }
-
+    
     @Bean(name = "transactionManager")
     public PlatformTransactionManager gpTransactionManager() {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(
                 this.gpEntityManagerFactory().getObject());
-
+        
         return transactionManager;
     }
-
+    
     @Bean
     public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
+    
     @Bean
     public LoadTimeWeaver gpLoadTimeWeaver() {
         return new InstrumentationLoadTimeWeaver();

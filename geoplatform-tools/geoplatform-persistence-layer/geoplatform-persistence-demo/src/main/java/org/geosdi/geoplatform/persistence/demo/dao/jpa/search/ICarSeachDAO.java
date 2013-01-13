@@ -47,5 +47,5 @@ import org.geosdi.geoplatform.persistence.demo.model.Car;
 public interface ICarSeachDAO
         extends GPBaseSearchDAO<Car> {
 
-    List<Car> findByPlate(String plat) throws Exception;
+    List<Car> findByModel(String model) throws Exception;
 }

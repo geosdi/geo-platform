@@ -35,13 +35,11 @@
  */
 package org.geosdi.geoplatform.persistence.demo;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.persistence.demo.dao.jpa.search.ICarSeachDAO;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
 import org.geosdi.geoplatform.persistence.loader.PersistenceLoaderConfigurer;
-import org.hibernate.search.jpa.FullTextEntityManager;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -64,7 +62,6 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 public class PersistenceJpaSearchTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private List<Car> cars = new ArrayList<Car>();
     //
     @Autowired
     private ICarSeachDAO jpaCarSearchDAO;
@@ -78,18 +75,7 @@ public class PersistenceJpaSearchTest {
     public void testSearchLucene() throws Exception {
         insert();
 
-//        Assert.assertEquals(100, jpaCarSearchDAO.findByPlate("AR"));
-        logger.info("ECCOLI @@@@@@@@@@@@ "
-                + jpaCarSearchDAO.findByPlate("AR").size());
-    }
-
-    private void index() {
-        FullTextEntityManager ftEm = jpaCarSearchDAO.getSearchManager();
-        try {
-            ftEm.createIndexer().startAndWait();
-        } catch (InterruptedException e) {
-            logger.error("Was interrupted during indexing", e);
-        }
+        Assert.assertEquals(100, jpaCarSearchDAO.findByModel("fi*").size());
     }
 
     private void insert() {
@@ -98,14 +84,11 @@ public class PersistenceJpaSearchTest {
             car.setPlate("AR793" + i);
             car.setModel("Fiat Model " + i);
             jpaCarSearchDAO.persist(car);
-            cars.add(car);
         }
     }
 
     private void removeAll() {
-        for (Car car : cars) {
-            jpaCarSearchDAO.delete(car);
-        }
+        jpaCarSearchDAO.removeAll();
         logger.info("REMOVED ALL CARS ##################################");
     }
 }

@@ -64,6 +64,9 @@ public class LuceneHibernateProperties
         hibernateProperties.put("hibernate.search.default.directory_provider",
                 gpSearchProperties.getDirectoryProvider());
 
+        hibernateProperties.put("hibernate.search.lucene_version",
+                gpSearchProperties.getLuceneVersion());
+
         return hibernateProperties;
     }
 

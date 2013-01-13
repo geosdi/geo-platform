@@ -61,7 +61,7 @@ public class JPACarSearchDAO extends GenericJPASearchDAO<Car>
     }
 
     @Override
-    public List<Car> findByPlate(String plat) throws Exception {
+    public List<Car> findByModel(String model) throws Exception {
         FullTextEntityManager ftEntityManager = super.getSearchManager();
 
         SearchFactory searchFactory = ftEntityManager.getSearchFactory();
@@ -69,8 +69,8 @@ public class JPACarSearchDAO extends GenericJPASearchDAO<Car>
         QueryBuilder queryBuilder = searchFactory.buildQueryBuilder().forEntity(
                 persistentClass).get();
 
-        Query luceneQuery = queryBuilder.keyword().wildcard().onField("plate").matching(
-                plat + "*").createQuery();
+        Query luceneQuery = queryBuilder.keyword().wildcard().onField("model").matching(
+                model).createQuery();
 
         FullTextQuery query = ftEntityManager.createFullTextQuery(
                 luceneQuery);

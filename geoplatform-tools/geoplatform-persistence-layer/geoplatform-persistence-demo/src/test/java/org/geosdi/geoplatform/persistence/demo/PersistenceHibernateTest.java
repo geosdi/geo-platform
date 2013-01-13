@@ -79,6 +79,6 @@ public class PersistenceHibernateTest {
         logger.info("Persistence Hibernate Test - Car Found @@@@@@@@@@@@"
                 + "@@@@@@@@@@@@@ " + car);
 
-        this.hibCarDAO.delete(car.getId());
+        this.hibCarDAO.removeAll();
     }
 }

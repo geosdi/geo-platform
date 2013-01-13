@@ -77,11 +77,4 @@ public class JPACarSearchDAO extends GenericJPASearchDAO<Car>
 
         return query.getResultList();
     }
-
-    @Override
-    public void delete(Car entity) {
-        Car carToRemove = super.entityManager.find(persistentClass,
-                entity.getId());
-        super.entityManager.remove(carToRemove);
-    }
 }

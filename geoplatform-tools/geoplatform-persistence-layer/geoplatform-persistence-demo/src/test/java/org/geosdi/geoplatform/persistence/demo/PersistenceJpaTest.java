@@ -79,6 +79,6 @@ public class PersistenceJpaTest {
         logger.info("Persistence JPA Test - Car Found @@@@@@@@@@@@"
                 + "@@@@@@@@@@@@@ " + car);
 
-        this.jpaCarDAO.delete(car);
+        this.jpaCarDAO.delete(car.getId());
     }
 }

@@ -138,6 +138,12 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
         }
     }
 
+    @Override
+    public void removeAll() {
+        getCurrentSession().createSQLQuery("delete from "
+                + persistentClass.getSimpleName()).executeUpdate();
+    }
+
     protected Session getCurrentSession() {
         return this.sessionFactory.getCurrentSession();
     }

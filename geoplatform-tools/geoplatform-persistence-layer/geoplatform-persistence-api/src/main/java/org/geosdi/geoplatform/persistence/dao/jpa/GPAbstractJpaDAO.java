@@ -149,6 +149,13 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
         }
     }
 
+    @Override
+    public void removeAll() {
+        this.entityManager.createNativeQuery("delete * from "
+                + persistentClass.getSimpleName(),
+                persistentClass);
+    }
+
     protected Class< T> getPersistentClass() {
         if (logger.isDebugEnabled()) {
             logger.debug("@@@@@@@@@@@@@@@@@@@@@ Persistent Class : "

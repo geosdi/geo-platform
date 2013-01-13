@@ -44,8 +44,6 @@ import org.hibernate.search.jpa.FullTextEntityManager;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPBaseSearchDAO<T extends Object> extends GPGenericDAO<T> {
-    
+
     FullTextEntityManager getSearchManager();
-    
-    void removeAll();
 }

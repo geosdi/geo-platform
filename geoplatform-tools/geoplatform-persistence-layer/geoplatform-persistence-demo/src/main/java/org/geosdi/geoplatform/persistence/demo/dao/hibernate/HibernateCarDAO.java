@@ -72,9 +72,4 @@ public class HibernateCarDAO extends GPAbstractHibernateDAO<Car, Long>
             throw new GPDAOException(ex);
         }
     }
-    
-    @Override
-    public void delete(Car entity) {
-        super.delete(entity.getId());
-    }
 }

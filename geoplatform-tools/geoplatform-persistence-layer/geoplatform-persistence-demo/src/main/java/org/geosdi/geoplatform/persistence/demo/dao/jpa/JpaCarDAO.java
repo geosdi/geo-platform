@@ -72,9 +72,4 @@ public class JpaCarDAO extends GPAbstractJpaDAO<Car, Long>
             throw new GPDAOException(ex);
         }
     }
-
-    @Override
-    public void delete(Car entity) {
-        super.delete(entity.getId());
-    }
 }

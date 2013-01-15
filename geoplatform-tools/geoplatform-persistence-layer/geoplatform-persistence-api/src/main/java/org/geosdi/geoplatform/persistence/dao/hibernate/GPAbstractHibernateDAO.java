@@ -62,6 +62,7 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     private Class<T> persistentClass;
+    //
     @Autowired
     private SessionFactory sessionFactory;
 

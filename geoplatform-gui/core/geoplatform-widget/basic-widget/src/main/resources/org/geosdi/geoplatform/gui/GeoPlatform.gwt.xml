@@ -38,5 +38,25 @@
     
     <servlet path="/GeoPlatformOGCRemote"
              class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />
-	
+    
+    <!-- TEMP FIX UNTIL GOING TO GWT 2.5 -->
+    <!-- Fallback implementation, based on a timer -->
+    <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplTimer">
+        <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
+        <any>
+            <when-property-is name="user.agent" value="ie6"/>
+            <when-property-is name="user.agent" value="ie8"/>
+            <when-property-is name="user.agent" value="ie9"/>
+            <when-property-is name="user.agent" value="safari"/>
+            <when-property-is name="user.agent" value="opera"/>
+        </any>
+    </replace-with>
+
+    <!-- Implementation based on mozRequestAnimationFrame -->
+    <replace-with class="com.google.gwt.animation.client.AnimationSchedulerImplMozilla">
+        <when-type-is class="com.google.gwt.animation.client.AnimationScheduler"/>
+        <when-property-is name="user.agent" value="gecko1_8"/>
+    </replace-with>
+    <!-- ************* END ************* -->
+    
 </module>

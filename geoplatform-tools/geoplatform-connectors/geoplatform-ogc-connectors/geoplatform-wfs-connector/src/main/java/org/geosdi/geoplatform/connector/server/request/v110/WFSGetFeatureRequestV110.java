@@ -87,7 +87,7 @@ public class WFSGetFeatureRequestV110
                 // Chech featureID (only one single query is permitted)
                 int ind = featureID.lastIndexOf(".");
                 String title = featureID.substring(0, ind - 1);
-//                System.out.println("\n*** Layer title (from featureID): " + title);
+                logger.trace("\n*** Layer title (from featureID): " + title);
                 if (!typeName.getLocalPart().contains(title)) {
                     throw new IllegalArgumentException(
                             "featureID must be referer to typeName (one single query).");

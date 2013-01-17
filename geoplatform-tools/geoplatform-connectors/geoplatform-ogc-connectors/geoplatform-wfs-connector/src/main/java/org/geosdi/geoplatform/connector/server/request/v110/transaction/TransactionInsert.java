@@ -35,9 +35,15 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.transaction;
 
+import java.util.List;
+import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.xml.gml.v311.FeatureCollectionType;
+import org.geosdi.geoplatform.xml.gml.v311.FeaturePropertyType;
+import org.geosdi.geoplatform.xml.wfs.v110.IdentifierGenerationOptionType;
 import org.geosdi.geoplatform.xml.wfs.v110.InsertElementType;
 
 /**
@@ -46,17 +52,39 @@ import org.geosdi.geoplatform.xml.wfs.v110.InsertElementType;
  */
 public class TransactionInsert implements ITransactionOperationStrategy {
 
+    private org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory;
+
+    public TransactionInsert() {
+        gmlFactory = new org.geosdi.geoplatform.xml.gml.v311.ObjectFactory();
+    }
+
     @Override
     public Object getOperation(WFSTransactionRequest request)
             throws IllegalParameterFault {
         InsertElementType elementType = new InsertElementType();
+        elementType.setIdgen(IdentifierGenerationOptionType.GENERATE_NEW);
 
         if (request.getSRS() != null) {
             elementType.setSrsName(request.getSRS());
         }
 
         elementType.setInputFormat(request.getInputFormat() != null
-                ? request.getInputFormat() : "x-application/gml:3");
+                ? request.getInputFormat() : "\"text/xml; subtype=gml/3.1.1\"");
+        
+        List<AttributeDTO> attributes = request.getAttributes();
+        String name = attributes.get(0).getName();
+
+        FeaturePropertyType ff = new FeaturePropertyType();
+        ff.setTitle(name);
+        
+        FeatureCollectionType feature = new FeatureCollectionType();
+        List<FeaturePropertyType> featureMember = feature.getFeatureMember();
+        featureMember.add(ff);
+        
+        JAXBElement<FeatureCollectionType> featureElement = gmlFactory.createFeatureCollection(feature);
+
+        List<JAXBElement<?>> features = elementType.getFeature();
+        features.add(featureElement);
 
         return elementType;
     }

@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionSummaryType;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -50,29 +51,32 @@ import org.junit.Test;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 //@Category(WFSTest.class)
-public class WFSTransactionUpdateTest extends WFSTestConfigurator {
+public class WFSTransactionInsertTest extends WFSTestConfigurator {
 
-    private final static QName POLY_LANDMARKS = new QName("http://www.census.gov", "tiger:poly_landmarks");
+    private final static QName TASMANIA_ROADS = new QName("http://www.openplans.org/topp",
+                                                          "topp:tasmania_roads");
 
     @Test
-    public void polyLandmarks() throws Exception {
+    @Ignore
+    public void tasmaniaRoads() throws Exception {
         WFSTransactionRequest<TransactionResponseType> request =
                 super.serverConnector.createTransactionRequest();
 
-        request.setOperation(TransactionOperation.UPDATE);
+        request.setOperation(TransactionOperation.INSERT);
 
-        QName name = new QName(POLY_LANDMARKS.getLocalPart());
+        QName name = new QName(TASMANIA_ROADS.getLocalPart());
         request.setTypeName(name);
 
-        request.setFID("poly_landmarks.1");
-
         AttributeDTO att = new AttributeDTO();
-        att.setMaxOccurs(1);
-        att.setMinOccurs(0);
-        att.setName("LANAME");
-        att.setNillable(true);
-        att.setType("string");
-        att.setValue("Washington Square Park MOD");
+//        att.setMaxOccurs(1);
+//        att.setMinOccurs(0);
+//        att.setNillable(true);
+//        att.setType("string");
+        att.setName("TYPE");
+        att.setValue("NEW attribute value TYPE");
+
+        // TODO Geometry attribute
+
         request.setAttributes(Arrays.asList(att));
 
         TransactionResponseType response = request.getResponse();
@@ -80,8 +84,8 @@ public class WFSTransactionUpdateTest extends WFSTestConfigurator {
 
         TransactionSummaryType transactionSummary = response.getTransactionSummary();
         Assert.assertEquals(0, transactionSummary.getTotalDeleted().intValue());
-        Assert.assertEquals(0, transactionSummary.getTotalInserted().intValue());
-        Assert.assertEquals(1, transactionSummary.getTotalUpdated().intValue());
+        Assert.assertEquals(0, transactionSummary.getTotalUpdated().intValue());
+        Assert.assertEquals(1, transactionSummary.getTotalInserted().intValue());
         Assert.assertEquals("1.1.0", response.getVersion());
     }
 }

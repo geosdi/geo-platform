@@ -559,9 +559,9 @@
             <!-- =========================================================== -->
 
             <dependency>
-                <groupId>jdom</groupId>
+                <groupId>org.jdom</groupId>
                 <artifactId>jdom</artifactId>
-                <version>${jdom-version}</version>
+                <version>1.1</version>
             </dependency>
 
             <dependency>
@@ -1594,8 +1594,6 @@
         <guice-version>3.0</guice-version>
         
         <ehcache-version>2.6.2</ehcache-version>
-        
-        <jdom-version>1.1</jdom-version>
         
         <commons-pool-version>1.6</commons-pool-version>
         

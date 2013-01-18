@@ -62,6 +62,11 @@ public abstract class AbstractStaxStreamWriter implements GeoPlatformStaxWriter 
 
         Preconditions.checkNotNull(o, "The Object passed to "
                 + "acquire Writer must not be null.");
+
+        this.stream = streamBuilder.buildStream(o);
+
+        this.writer = (this.stream != null) ? xmlStreamBuilder.build(stream)
+                      : xmlStreamBuilder.build(o);
     }
 
     @Override

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.stax.writer.builder.streamchain;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -58,9 +58,10 @@ public class StringBuildHandler extends StreamWriterBuildHandler {
     }
     
     private OutputStream buildFromString(String s) throws IOException {
-        ByteOutputStream stream = new ByteOutputStream();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
         final PrintStream printStream = new PrintStream(stream);
         printStream.print(s);
+        printStream.flush();
         printStream.close();
         
         return stream;

@@ -55,18 +55,15 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
 
     private final static QName TASMANIA_ROADS = new QName(
             "http://www.openplans.org/topp",
-            "topp:tasmania_roads");
+            "topp:tasmania_roads", "topp");
 
     @Test
-    @Ignore
     public void tasmaniaRoads() throws Exception {
         WFSTransactionRequest<TransactionResponseType> request =
                 super.serverConnector.createTransactionRequest();
 
         request.setOperation(TransactionOperation.INSERT);
-
-        QName name = new QName(TASMANIA_ROADS.getLocalPart());
-        request.setTypeName(name);
+        request.setTypeName(TASMANIA_ROADS);
 
         AttributeDTO att = new AttributeDTO();
 //        att.setMaxOccurs(1);
@@ -79,8 +76,6 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
         // TODO Geometry attribute
 
         request.setAttributes(Arrays.asList(att));
-
-        logger.info("Eccolo @@@@@@@@@@@@@@@@@@@@@@ " + request.showRequestAsString());
 
         TransactionResponseType response = request.getResponse();
         logger.info("\n*** {}", response.getTransactionResults());

@@ -74,8 +74,10 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
         super.acquireWriter(output);
 
         QName typeName = target.getTypeName();
+        
+        writer.writeStartElement(typeName.getLocalPart());
+        
         List<AttributeDTO> attributes = target.getAttributes();
-
         for (AttributeDTO attributeDTO : attributes) {
             if (attributeDTO instanceof GeometryAttributeDTO) {
                 writeGeometryAttribute((GeometryAttributeDTO) attributeDTO,
@@ -84,6 +86,8 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
                 writeAttribute(attributeDTO, typeName);
             }
         }
+        
+        writer.writeEndElement();
 
         writer.flush();
     }
@@ -103,7 +107,7 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
 
     private void writeAttribute(AttributeDTO attribute,
             QName typeName) throws XMLStreamException {
-        super.writeElement(typeName.getPrefix(), typeName.getNamespaceURI(),
-                attribute.getName(), attribute.getValue());
+        super.writeElement(typeName.getPrefix() + ":" + attribute.getName(),
+                attribute.getValue());
     }
 }

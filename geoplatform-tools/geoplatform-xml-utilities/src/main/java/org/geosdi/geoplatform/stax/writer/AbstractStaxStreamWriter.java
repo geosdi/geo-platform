@@ -94,13 +94,31 @@ public abstract class AbstractStaxStreamWriter<T extends Object> implements
      * @param value
      * @throws XMLStreamException
      */
-    protected void writeElement(final String prefix,
-            final String nameSpace,
-            final String localName,
+    protected void writeElement(final String prefix, 
+            final String localName, 
+            final String nameSpace, 
             final Object value) throws XMLStreamException {
 
         if (value != null) {
-            this.writer.writeStartElement(prefix, nameSpace, localName);
+            this.writer.writeStartElement(prefix, localName, nameSpace);
+            this.writer.writeCharacters(value.toString());
+            this.writer.writeEndElement();
+        }
+    }
+
+    /**
+     *
+     * @param prefix
+     * @param nameSpace
+     * @param localName
+     * @param value
+     * @throws XMLStreamException
+     */
+    protected void writeElement(final String localName, 
+            final Object value) throws XMLStreamException {
+
+        if (value != null) {
+            this.writer.writeStartElement(localName);
             this.writer.writeCharacters(value.toString());
             this.writer.writeEndElement();
         }

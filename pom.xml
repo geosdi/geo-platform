@@ -1593,7 +1593,7 @@
         <guava-version>13.0.1</guava-version>
         <guice-version>3.0</guice-version>
         
-        <ehcache-version>2.6.2</ehcache-version>
+        <ehcache-version>2.6.3</ehcache-version>
         
         <commons-pool-version>1.6</commons-pool-version>
         

@@ -69,7 +69,7 @@ public abstract class GPPostConnectorRequest<T>
         super(server);
     }
 
-    public HttpPost getPostMethod() throws IllegalParameterFault,
+    private HttpPost getPostMethod() throws IllegalParameterFault,
             Exception, ServerInternalFault {
         if (postMethod == null) {
             this.preparePostMethod();
@@ -85,7 +85,8 @@ public abstract class GPPostConnectorRequest<T>
         this.postMethod = new HttpPost(super.serverURI);
 
         try {
-            this.postMethod.setEntity(this.preparePostEntity());
+            HttpEntity httpEntity = this.preparePostEntity();
+            this.postMethod.setEntity(httpEntity);
 
         } catch (UnsupportedEncodingException ex) {
             logger.error(
@@ -101,8 +102,8 @@ public abstract class GPPostConnectorRequest<T>
         T response = null;
 
         try {
-            HttpResponse httpResponse = super.securityConnector.secure(
-                    this, this.getPostMethod());
+            HttpPost httpPost = this.getPostMethod();
+            HttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
             HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
@@ -127,7 +128,7 @@ public abstract class GPPostConnectorRequest<T>
 
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                    ex.getMessage());
+                         ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***" + ex);
 
         } catch (ClientProtocolException ex) {
@@ -147,8 +148,8 @@ public abstract class GPPostConnectorRequest<T>
         Reader reader = null;
         Writer writer = new StringWriter();
         try {
-            HttpResponse httpResponse = super.securityConnector.secure(
-                    this, this.getPostMethod());
+            HttpPost httpPost = this.getPostMethod();
+            HttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
             HttpEntity responseEntity = httpResponse.getEntity();
 
             if (responseEntity != null) {
@@ -171,7 +172,7 @@ public abstract class GPPostConnectorRequest<T>
 
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                    ex.getMessage());
+                         ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***");
 
         } catch (ClientProtocolException ex) {
@@ -180,8 +181,8 @@ public abstract class GPPostConnectorRequest<T>
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
 
-        } finally{
-            if(reader != null){
+        } finally {
+            if (reader != null) {
                 reader.close();
             }
         }
@@ -193,8 +194,8 @@ public abstract class GPPostConnectorRequest<T>
     public InputStream getResponseAsStream() throws ServerInternalFault,
             Exception, IllegalParameterFault {
         try {
-            HttpResponse httpResponse = super.securityConnector.secure(
-                    this, this.getPostMethod());
+            HttpPost httpPost = this.getPostMethod();
+            HttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
             HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
                 return responseEntity.getContent();
@@ -206,7 +207,7 @@ public abstract class GPPostConnectorRequest<T>
 
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                    ex.getMessage());
+                         ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***" + ex);
 
         } catch (ClientProtocolException ex) {

@@ -35,10 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.transaction.stax;
 
-import java.io.IOException;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.io.ParseException;
+import java.util.List;
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import org.geosdi.geoplatform.connector.AbstractFeatureStreamWriter;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.gml.api.AbstractGeometry;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 
@@ -49,21 +56,54 @@ import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
  */
 public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransactionRequest> {
 
+    static {
+        gmlContext = GMLContextFactoryV311.createJAXBContext(
+                GMLContextType.POOLED);
+    }
+    //
+    private static final GMLJAXBContext gmlContext;
+
     public FeatureStreamWriter() {
-        super("1.1.0", "3.2.1");
+        super("1.1.0", "3.1.1");
     }
 
     @Override
     public void write(WFSTransactionRequest target,
-            Object output) throws XMLStreamException, IOException {
+            Object output) throws XMLStreamException, Exception {
+
+        super.acquireWriter(output);
+
+        QName typeName = target.getTypeName();
+        List<AttributeDTO> attributes = target.getAttributes();
+
+        for (AttributeDTO attributeDTO : attributes) {
+            if (attributeDTO instanceof GeometryAttributeDTO) {
+                writeGeometryAttribute((GeometryAttributeDTO) attributeDTO,
+                        typeName);
+            } else {
+                writeAttribute(attributeDTO, typeName);
+            }
+        }
+
+        writer.flush();
     }
 
     private void writeGeometryAttribute(GeometryAttributeDTO geometry,
-            String prefix)
-            throws XMLStreamException {
+            QName typeName)
+            throws XMLStreamException, Exception {
+        
+        writer.writeStartElement(typeName.getNamespaceURI(), geometry.getName());
+        
+        String wktGeometry = geometry.getValue();
+        Geometry jtsGeometry = this.wktReader.read(wktGeometry);
+        gmlContext.acquireMarshaller().marshal(jtsGeometry, writer);
+        
+        writer.writeEndElement();
     }
 
     private void writeAttribute(AttributeDTO attribute,
-            String prefix) throws XMLStreamException {
+            QName typeName) throws XMLStreamException {
+        super.writeElement(typeName.getPrefix(), typeName.getNamespaceURI(),
+                attribute.getName(), attribute.getValue());
     }
 }

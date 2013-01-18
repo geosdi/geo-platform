@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector;
 
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.io.WKTReader;
 import org.geosdi.geoplatform.stax.writer.AbstractStaxStreamWriter;
 
 /**
@@ -46,11 +48,13 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
 
     private final String wfsVersion;
     private final String gmlVersion;
+    protected final WKTReader wktReader;
 
     public AbstractFeatureStreamWriter(String wfsVersion,
             String gmlVersion) {
         this.wfsVersion = wfsVersion;
         this.gmlVersion = gmlVersion;
+        this.wktReader = new WKTReader(new GeometryFactory());
     }
 
     /**

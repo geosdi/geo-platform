@@ -44,7 +44,7 @@ import java.net.URI;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class UriBuildHandler extends StreamBuildHandler {
+class UriBuildHandler extends StreamReaderBuildHandler {
 
     @Override
     public InputStream buildStream(Object o) throws IOException {

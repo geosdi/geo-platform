@@ -43,7 +43,7 @@ import java.io.InputStream;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InputStreamBuildHandler extends StreamBuildHandler {
+public class InputStreamBuildHandler extends StreamReaderBuildHandler {
 
     public InputStreamBuildHandler() {
         super.setSuccessor(new FileBuildHandler());

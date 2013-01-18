@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.stax.reader;
 
+import com.google.common.base.Preconditions;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +48,7 @@ import javax.xml.stream.events.XMLEvent;
 import javax.xml.transform.Source;
 import org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder;
 import org.geosdi.geoplatform.stax.reader.builder.streamchain.InputStreamBuildHandler;
-import org.geosdi.geoplatform.stax.reader.builder.streamchain.StreamBuildHandler;
+import org.geosdi.geoplatform.stax.reader.builder.streamchain.StreamReaderBuildHandler;
 
 /**
  *
@@ -58,7 +59,7 @@ public abstract class AbstractStaxStreamReader<T>
         implements GeoPlatformStaxReader {
 
     protected XMLStreamReader reader;
-    private StreamBuildHandler streamBuilder = new InputStreamBuildHandler();
+    private StreamReaderBuildHandler streamBuilder = new InputStreamBuildHandler();
     private XmlStreamReaderBuilder xmlStreamBuilder = XmlStreamReaderBuilder.newInstance();
     private InputStream stream;
 
@@ -77,26 +78,24 @@ public abstract class AbstractStaxStreamReader<T>
     public void acquireReader(Object o) throws XMLStreamException, IOException {
         this.reset();
 
-        if (o == null) {
-            throw new IllegalArgumentException(
-                    "The Object passed must not be null.");
-        }
+        Preconditions.checkNotNull(o, "The Object passed to "
+                + "acquire Reader must not be null.");
 
         this.stream = streamBuilder.buildStream(o);
 
         this.reader = (this.stream != null) ? xmlStreamBuilder.build(stream)
-                : xmlStreamBuilder.build(o);
+                      : xmlStreamBuilder.build(o);
     }
 
     /**
      * Close the {@link XMLStreamReader} reader and the {@link InputStream}
-     * stream 
+     * stream
      *
      * @throws XMLStreamException
      * @throws IOException
      */
     @Override
-    public void destroy() throws XMLStreamException, IOException {
+    public void dispose() throws XMLStreamException, IOException {
         this.reset();
     }
 
@@ -125,7 +124,8 @@ public abstract class AbstractStaxStreamReader<T>
      * @param localName the localName of the tag
      * @return true if the tag is prefix:localName
      */
-    protected boolean isTagName(String prefix, String localName) {
+    protected boolean isTagName(String prefix,
+            String localName) {
         if (prefix.equals(reader.getPrefix())
                 && localName.equals(reader.getLocalName())) {
             return true;
@@ -148,6 +148,7 @@ public abstract class AbstractStaxStreamReader<T>
 
         if (stream != null) {
             stream.close();
+            stream = null;
         }
     }
 

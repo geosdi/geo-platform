@@ -53,8 +53,9 @@ import org.junit.Test;
 //@Category(WFSTest.class)
 public class WFSTransactionInsertTest extends WFSTestConfigurator {
 
-    private final static QName TASMANIA_ROADS = new QName("http://www.openplans.org/topp",
-                                                          "topp:tasmania_roads");
+    private final static QName TASMANIA_ROADS = new QName(
+            "http://www.openplans.org/topp",
+            "topp:tasmania_roads");
 
     @Test
     @Ignore
@@ -78,6 +79,8 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
         // TODO Geometry attribute
 
         request.setAttributes(Arrays.asList(att));
+
+        logger.info("Eccolo @@@@@@@@@@@@@@@@@@@@@@ " + request.showRequestAsString());
 
         TransactionResponseType response = request.getResponse();
         logger.info("\n*** {}", response.getTransactionResults());

@@ -44,7 +44,7 @@ import java.net.URL;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class UrlBuildHandler extends StreamBuildHandler {
+class UrlBuildHandler extends StreamReaderBuildHandler {
 
     public UrlBuildHandler() {
         super.setSuccessor(new UriBuildHandler());

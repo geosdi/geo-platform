@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,30 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.stax.reader.builder.streamchain;
+package org.geosdi.geoplatform;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class FileBuildHandler extends StreamReaderBuildHandler {
+public class Test {
 
-    public FileBuildHandler() {
-        super.setSuccessor(new UrlBuildHandler());
-    }
+    public static void main(String args[]) throws Exception {
 
-    @Override
-    public InputStream buildStream(Object o) throws IOException {
-        if (o instanceof File) {
-            return new FileInputStream((File) o);
-        } else {
-            return super.forwardBuildStream(o);
-        }
+        // Create a new instance of a OutputStreamWriter object
+        // attached to a ByteArrayOutputStream.
+        ByteArrayOutputStream out =
+                new ByteArrayOutputStream();
+        OutputStreamWriter writer = new OutputStreamWriter(out);
+
+        // Write to the output stream.
+        String s = "Random String";
+        char[] arr = s.toCharArray();
+        // Only write from the 7th character on.
+        writer.write(arr, 0, arr.length - 7);
+        writer.flush();
+        writer.close();
+
+        // Display the contents of the ByteArrayOutputStream.
+        System.out.println(out.toString());
+
+        // Close the OutputStreamWriter object.
+
     }
 }

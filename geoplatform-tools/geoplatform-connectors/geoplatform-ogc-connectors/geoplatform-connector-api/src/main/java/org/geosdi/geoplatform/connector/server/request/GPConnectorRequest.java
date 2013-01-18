@@ -103,4 +103,13 @@ public interface GPConnectorRequest<T> {
      * resources.</p>
      */
     void shutdown();
+
+    /**
+     * Show the XML Object created for the Request to send to Server
+     *
+     * @return Request as a String
+     * 
+     * @throws Exception
+     */
+    String showRequestAsString() throws Exception;
 }

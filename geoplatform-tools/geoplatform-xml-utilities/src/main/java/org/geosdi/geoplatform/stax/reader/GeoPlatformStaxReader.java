@@ -47,5 +47,5 @@ public interface GeoPlatformStaxReader {
 
     void acquireReader(Object o) throws XMLStreamException, IOException;
     
-    void destroy() throws XMLStreamException, IOException;
+    void dispose() throws XMLStreamException, IOException;
 }

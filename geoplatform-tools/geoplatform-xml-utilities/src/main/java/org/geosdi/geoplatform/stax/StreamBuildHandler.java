@@ -33,23 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.stax.reader.builder.streamchain;
+package org.geosdi.geoplatform.stax;
 
+import java.io.Closeable;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class StreamBuildHandler {
+public abstract class StreamBuildHandler<S extends Closeable> {
 
-    private StreamBuildHandler successor;
+    private StreamBuildHandler<S> successor;
 
-    public abstract InputStream buildStream(Object o) throws IOException;
+    public abstract S buildStream(Object o) throws IOException;
 
-    protected InputStream forwardBuildStream(Object o) throws IOException {
+    protected S forwardBuildStream(Object o) throws IOException {
         if (successor != null) {
             return successor.buildStream(o);
         }
@@ -60,7 +60,7 @@ public abstract class StreamBuildHandler {
     /**
      * @param successor the successor to set
      */
-    public void setSuccessor(StreamBuildHandler successor) {
+    public void setSuccessor(StreamBuildHandler<S> successor) {
         this.successor = successor;
     }
 }

@@ -39,6 +39,7 @@ import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -154,8 +155,12 @@ public class PublishUtility {
     public static File getFileNameToLowerCase(File file) {
         File fileToReturn = new File(FilenameUtils.getFullPath(file.getAbsolutePath())
                 + file.getName().toLowerCase());
-        file.renameTo(fileToReturn);
-        return file;
+        try {
+            FileUtils.moveFile(file, fileToReturn);
+        } catch (IOException ex) {
+            logger.error("Error renaming file: " + ex);
+        }
+        return fileToReturn;
     }
 
     public static void extractEntryToFile(ZipEntry entry, ZipFile zipSrc, String tempUserDir) {

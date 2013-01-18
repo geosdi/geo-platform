@@ -36,14 +36,14 @@
 package org.geosdi.geoplatform.connector.server.request.v110.transaction.stax;
 
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.io.ParseException;
 import java.util.List;
+import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import org.geosdi.geoplatform.connector.AbstractFeatureStreamWriter;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
@@ -74,9 +74,9 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
         super.acquireWriter(output);
 
         QName typeName = target.getTypeName();
-        
+
         writer.writeStartElement(typeName.getLocalPart());
-        
+
         List<AttributeDTO> attributes = target.getAttributes();
         for (AttributeDTO attributeDTO : attributes) {
             if (attributeDTO instanceof GeometryAttributeDTO) {
@@ -86,7 +86,7 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
                 writeAttribute(attributeDTO, typeName);
             }
         }
-        
+
         writer.writeEndElement();
 
         writer.flush();
@@ -95,13 +95,17 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
     private void writeGeometryAttribute(GeometryAttributeDTO geometry,
             QName typeName)
             throws XMLStreamException, Exception {
-        
+
         writer.writeStartElement(typeName.getPrefix() + ":" + geometry.getName());
-        
+
         String wktGeometry = geometry.getValue();
         Geometry jtsGeometry = this.wktReader.read(wktGeometry);
+
+        GMLMarshaller marshaller = gmlContext.acquireMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+
         gmlContext.acquireMarshaller().marshal(jtsGeometry, writer);
-        
+
         writer.writeEndElement();
     }
 

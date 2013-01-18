@@ -40,6 +40,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.Result;
@@ -109,5 +110,11 @@ public class GMLMarshallerV311 extends AbstractGMLMarshaller {
     public void marshal(Object jaxbElement,
             XMLEventWriter writer) throws JAXBException, ParserException {
         this.marshaller.marshal(super.buildJAXBElement(jaxbElement), writer);
+    }
+
+    @Override
+    public void setProperty(String name,
+            Object value) throws PropertyException {
+        this.marshaller.setProperty(name, value);
     }
 }

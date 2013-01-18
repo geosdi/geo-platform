@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gml.api.jaxb.context;
 
 import java.io.File;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.PropertyException;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
@@ -77,4 +78,7 @@ public interface GMLMarshaller {
     void marshal(Object jaxbElement,
             javax.xml.stream.XMLEventWriter writer)
             throws JAXBException, ParserException;
+    
+    void setProperty( String name, Object value )
+        throws PropertyException;
 }

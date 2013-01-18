@@ -101,15 +101,32 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
     @Override
     protected Object createRequest() throws IllegalParameterFault {
         if (operation == null) {
-            throw new IllegalArgumentException("Transaction Operation must not be null.");
+            throw new IllegalArgumentException(
+                    "Transaction Operation must not be null.");
         }
 
-        ITransactionOperationStrategy operationStrategy = GPTransactionMediator.getStrategy(operation);
+        ITransactionOperationStrategy operationStrategy = GPTransactionMediator.getStrategy(
+                operation);
         Object elementType = operationStrategy.getOperation(this);
 
         TransactionType request = new TransactionType();
         request.setInsertOrUpdateOrDelete(Arrays.asList(elementType));
 
         return request;
+    }
+
+    @Override
+    public String showRequestAsString() throws Exception {
+        return operation == TransactionOperation.INSERT ? showRequestWithStax()
+               : super.showRequestAsString();
+    }
+
+    protected final String showRequestWithStax() throws Exception {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        FeatureStreamWriter streamWriter = new FeatureStreamWriter();
+        streamWriter.write(this, outputStream);
+
+        return outputStream.toString("UTF-8");
     }
 }

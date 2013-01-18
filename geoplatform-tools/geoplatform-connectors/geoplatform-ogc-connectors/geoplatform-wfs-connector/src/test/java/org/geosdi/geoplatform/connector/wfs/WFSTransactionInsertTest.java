@@ -59,7 +59,7 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
             "topp:tasmania_roads", "topp");
 
     @Test
-    @Ignore
+//    @Ignore
     public void tasmaniaRoads() throws Exception {
         WFSTransactionRequest<TransactionResponseType> request =
                 super.serverConnector.createTransactionRequest();
@@ -83,13 +83,16 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
 
         request.setAttributes(Arrays.asList(att, geometry));
 
-        TransactionResponseType response = request.getResponse();
-        logger.info("\n*** {}", response.getTransactionResults());
+        logger.info("Ecco la richiesta @@@@@@@@@@@@@@@@@@@@@@@@@@ "
+                + request.showRequestAsString());
 
-        TransactionSummaryType transactionSummary = response.getTransactionSummary();
-        Assert.assertEquals(0, transactionSummary.getTotalDeleted().intValue());
-        Assert.assertEquals(0, transactionSummary.getTotalUpdated().intValue());
-        Assert.assertEquals(1, transactionSummary.getTotalInserted().intValue());
-        Assert.assertEquals("1.1.0", response.getVersion());
+//        TransactionResponseType response = request.getResponse();
+//        logger.info("\n*** {}", response.getTransactionResults());
+//
+//        TransactionSummaryType transactionSummary = response.getTransactionSummary();
+//        Assert.assertEquals(0, transactionSummary.getTotalDeleted().intValue());
+//        Assert.assertEquals(0, transactionSummary.getTotalUpdated().intValue());
+//        Assert.assertEquals(1, transactionSummary.getTotalInserted().intValue());
+//        Assert.assertEquals("1.1.0", response.getVersion());
     }
 }

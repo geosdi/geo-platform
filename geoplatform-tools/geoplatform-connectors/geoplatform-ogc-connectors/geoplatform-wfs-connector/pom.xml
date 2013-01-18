@@ -60,6 +60,12 @@
             <artifactId>geoplatform-configurator</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gml-parser-impl</artifactId>
+            <version>1.5-SNAPSHOT</version>
+        </dependency>
+        
         <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>

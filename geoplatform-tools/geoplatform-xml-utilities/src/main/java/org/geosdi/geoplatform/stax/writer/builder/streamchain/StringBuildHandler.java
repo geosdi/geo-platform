@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,30 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.stax.reader.builder.streamchain;
+package org.geosdi.geoplatform.stax.writer.builder.streamchain;
 
-import java.io.File;
-import java.io.FileInputStream;
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class FileBuildHandler extends StreamReaderBuildHandler {
-
-    public FileBuildHandler() {
-        super.setSuccessor(new UrlBuildHandler());
+public class StringBuildHandler extends StreamWriterBuildHandler {
+    
+    public StringBuildHandler() {
+        super.setSuccessor(new FileBuildHandler());
     }
-
+    
     @Override
-    public InputStream buildStream(Object o) throws IOException {
-        if (o instanceof File) {
-            return new FileInputStream((File) o);
-        } else {
-            return super.forwardBuildStream(o);
-        }
+    public OutputStream buildStream(Object o) throws IOException {
+        return o instanceof String ? buildFromString((String) o)
+               : super.forwardBuildStream(o);
+    }
+    
+    private OutputStream buildFromString(String s) throws IOException {
+        ByteOutputStream stream = new ByteOutputStream();
+        final PrintStream printStream = new PrintStream(stream);
+        printStream.print(s);
+        printStream.close();
+        
+        return stream;
     }
 }

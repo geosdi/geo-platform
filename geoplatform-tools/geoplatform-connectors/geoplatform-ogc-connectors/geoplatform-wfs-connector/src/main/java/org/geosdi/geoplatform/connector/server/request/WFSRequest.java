@@ -89,4 +89,12 @@ public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
     public Unmarshaller getUnmarshaller() throws Exception {
         return wfsContext.acquireUnmarshaller();
     }
+
+    @Override
+    public String showRequestAsString() throws Exception {
+        StringWriter writer = new StringWriter();
+        wfsContext.acquireMarshaller().marshal(createRequest(), writer);
+
+        return writer.toString();
+    }
 }

@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,30 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.stax.reader.builder.streamchain;
+package org.geosdi.geoplatform.stax.writer.builder.xmlwriterchain;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class FileBuildHandler extends StreamReaderBuildHandler {
+public abstract class AbstractWriterBuildHandler {
 
-    public FileBuildHandler() {
-        super.setSuccessor(new UrlBuildHandler());
+    private AbstractWriterBuildHandler successor;
+
+    public abstract XMLStreamWriter buildXmlWriter(Object o,
+            XMLOutputFactory factory)
+            throws XMLStreamException;
+
+    protected XMLStreamWriter forwardBuildXmlWriter(Object o,
+            XMLOutputFactory factory)
+            throws XMLStreamException {
+        if (successor != null) {
+            return successor.buildXmlWriter(o, factory);
+        } else {
+            throw new XMLStreamException("There are no Element in Chain to parse"
+                    + " Object : " + o);
+        }
     }
 
-    @Override
-    public InputStream buildStream(Object o) throws IOException {
-        if (o instanceof File) {
-            return new FileInputStream((File) o);
-        } else {
-            return super.forwardBuildStream(o);
-        }
+    /**
+     * @param successor the successor to set
+     */
+    public void setSuccessor(AbstractWriterBuildHandler successor) {
+        this.successor = successor;
     }
 }

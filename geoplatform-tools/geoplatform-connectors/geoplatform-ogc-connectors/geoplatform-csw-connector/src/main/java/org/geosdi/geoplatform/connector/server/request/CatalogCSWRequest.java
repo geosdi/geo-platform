@@ -91,4 +91,12 @@ public abstract class CatalogCSWRequest<T> extends GPPostConnectorRequest<T> {
     public Unmarshaller getUnmarshaller() throws Exception {
         return cswContext.acquireUnmarshaller();
     }
+
+    @Override
+    public String showRequestAsString() throws Exception {
+        StringWriter writer = new StringWriter();
+        cswContext.acquireMarshaller().marshal(createRequest(), writer);
+
+        return writer.toString();
+    }
 }

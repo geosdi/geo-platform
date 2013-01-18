@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,30 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.stax.reader.builder.streamchain;
+package org.geosdi.geoplatform.stax.writer;
 
-import java.io.File;
-import java.io.FileInputStream;
+import com.google.common.base.Preconditions;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.OutputStream;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
+import org.geosdi.geoplatform.stax.writer.builder.XmlStreamWriterBuilder;
+import org.geosdi.geoplatform.stax.writer.builder.streamchain.StreamWriterBuildHandler;
+import org.geosdi.geoplatform.stax.writer.builder.streamchain.StringBuildHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class FileBuildHandler extends StreamReaderBuildHandler {
+public abstract class AbstractStaxStreamWriter implements GeoPlatformStaxWriter {
 
-    public FileBuildHandler() {
-        super.setSuccessor(new UrlBuildHandler());
+    protected XMLStreamWriter writer;
+    private StreamWriterBuildHandler streamBuilder = new StringBuildHandler();
+    private XmlStreamWriterBuilder xmlStreamBuilder = XmlStreamWriterBuilder.newInstance();
+    private OutputStream stream;
+
+    @Override
+    public void acquireWriter(Object o) throws XMLStreamException, IOException {
+        reset();
+
+        Preconditions.checkNotNull(o, "The Object passed to "
+                + "acquire Writer must not be null.");
     }
 
     @Override
-    public InputStream buildStream(Object o) throws IOException {
-        if (o instanceof File) {
-            return new FileInputStream((File) o);
-        } else {
-            return super.forwardBuildStream(o);
+    public void dispose() throws XMLStreamException, IOException {
+        reset();
+    }
+
+    protected void reset() throws XMLStreamException, IOException {
+        if (writer != null) {
+            writer.close();
+            writer = null;
+        }
+
+        if (stream != null) {
+            stream.close();
+            stream = null;
         }
     }
 }

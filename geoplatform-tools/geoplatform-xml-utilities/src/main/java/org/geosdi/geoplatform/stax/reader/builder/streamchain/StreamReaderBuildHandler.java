@@ -35,28 +35,13 @@
  */
 package org.geosdi.geoplatform.stax.reader.builder.streamchain;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import org.geosdi.geoplatform.stax.StreamBuildHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class FileBuildHandler extends StreamReaderBuildHandler {
-
-    public FileBuildHandler() {
-        super.setSuccessor(new UrlBuildHandler());
-    }
-
-    @Override
-    public InputStream buildStream(Object o) throws IOException {
-        if (o instanceof File) {
-            return new FileInputStream((File) o);
-        } else {
-            return super.forwardBuildStream(o);
-        }
-    }
+public abstract class StreamReaderBuildHandler extends StreamBuildHandler<InputStream> {
 }

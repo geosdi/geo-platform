@@ -39,6 +39,7 @@ import java.util.Arrays;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionSummaryType;
@@ -58,6 +59,7 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
             "topp:tasmania_roads", "topp");
 
     @Test
+    @Ignore
     public void tasmaniaRoads() throws Exception {
         WFSTransactionRequest<TransactionResponseType> request =
                 super.serverConnector.createTransactionRequest();
@@ -74,8 +76,12 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
         att.setValue("NEW attribute value TYPE");
 
         // TODO Geometry attribute
+        GeometryAttributeDTO geometry = new GeometryAttributeDTO();
+        geometry.setName("the_geom");
+        geometry.setValue("MULTILINESTRING ((10 10, 20 20, 10 40), "
+                + "(40 40, 30 30, 40 20, 30 10))");
 
-        request.setAttributes(Arrays.asList(att));
+        request.setAttributes(Arrays.asList(att, geometry));
 
         TransactionResponseType response = request.getResponse();
         logger.info("\n*** {}", response.getTransactionResults());

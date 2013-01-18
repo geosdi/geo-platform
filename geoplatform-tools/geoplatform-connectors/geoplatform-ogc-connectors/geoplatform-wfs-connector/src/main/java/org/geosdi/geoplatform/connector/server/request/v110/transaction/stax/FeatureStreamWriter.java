@@ -96,7 +96,7 @@ public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransact
             QName typeName)
             throws XMLStreamException, Exception {
         
-        writer.writeStartElement(typeName.getNamespaceURI(), geometry.getName());
+        writer.writeStartElement(typeName.getPrefix() + ":" + geometry.getName());
         
         String wktGeometry = geometry.getValue();
         Geometry jtsGeometry = this.wktReader.read(wktGeometry);

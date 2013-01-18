@@ -35,12 +35,21 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110;
 
+import java.io.ByteArrayOutputStream;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import javax.xml.bind.Marshaller;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractTransactionRequest;
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.GPTransactionMediator;
+import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeatureStreamWriter;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionType;
 
@@ -52,6 +61,41 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
 
     public WFSTransactionRequestV110(GPServerConnector server) {
         super(server);
+    }
+
+    @Override
+    protected HttpEntity preparePostEntity()
+            throws IllegalParameterFault, Exception, UnsupportedEncodingException {
+        if (operation != TransactionOperation.INSERT) {
+            return super.preparePostEntity();
+        }
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        FeatureStreamWriter streamWriter = new FeatureStreamWriter();
+        streamWriter.write(this, outputStream);
+
+        String feature = outputStream.toString("UTF-8");
+        logger.debug("\n*** Feature to INSERT ***\n{}\n\n", feature);
+
+        String request = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                + "<wfs:Transaction service=\"WFS\" version=\"1.1.0\" "
+                + "xmlns:ogc=\"http://www.opengis.net/ogc\" "
+                + "xmlns:wfs=\"http://www.opengis.net/wfs\" "
+                + "xmlns:ows=\"http://www.opengis.net/ows\" "
+                + "xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" "
+                + "xmlns:gml=\"http://www.opengis.net/gml\" "
+                + "xmlns:" + typeName.getPrefix() + "=\"" + typeName.getNamespaceURI() + "\" "
+                + "xmlns:ns6=\"http://www.w3.org/1999/xlink\" "
+                + "xmlns:ns7=\"http://www.w3.org/2001/SMIL20/\" "
+                + "xmlns:ns8=\"http://www.w3.org/2001/SMIL20/Language\">\n"
+                + "<wfs:Insert idgen=\"GenerateNew\" inputFormat=\"text/xml; subtype=gml/3.1.1\">\n"
+                + feature
+                + "</wfs:Insert>\n"
+                + "</wfs:Transaction>";
+        logger.trace("\n*** Request TRANSACTION INSERT ***\n{}\n\n", request);
+
+        return new StringEntity(request, ContentType.APPLICATION_XML);
     }
 
     @Override

@@ -35,14 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.transaction;
 
-import java.util.List;
-import javax.xml.bind.JAXBElement;
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.xml.gml.v311.FeatureCollectionType;
-import org.geosdi.geoplatform.xml.gml.v311.FeaturePropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.IdentifierGenerationOptionType;
 import org.geosdi.geoplatform.xml.wfs.v110.InsertElementType;
 
@@ -51,12 +46,6 @@ import org.geosdi.geoplatform.xml.wfs.v110.InsertElementType;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class TransactionInsert implements ITransactionOperationStrategy {
-
-    private org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory;
-
-    public TransactionInsert() {
-        gmlFactory = new org.geosdi.geoplatform.xml.gml.v311.ObjectFactory();
-    }
 
     @Override
     public Object getOperation(WFSTransactionRequest request)
@@ -69,22 +58,7 @@ public class TransactionInsert implements ITransactionOperationStrategy {
         }
 
         elementType.setInputFormat(request.getInputFormat() != null
-                ? request.getInputFormat() : "\"text/xml; subtype=gml/3.1.1\"");
-        
-        List<AttributeDTO> attributes = request.getAttributes();
-        String name = attributes.get(0).getName();
-
-        FeaturePropertyType ff = new FeaturePropertyType();
-        ff.setTitle(name);
-        
-        FeatureCollectionType feature = new FeatureCollectionType();
-        List<FeaturePropertyType> featureMember = feature.getFeatureMember();
-        featureMember.add(ff);
-        
-        JAXBElement<FeatureCollectionType> featureElement = gmlFactory.createFeatureCollection(feature);
-
-        List<JAXBElement<?>> features = elementType.getFeature();
-        features.add(featureElement);
+                ? request.getInputFormat() : "text/xml; subtype=gml/3.1.1");
 
         return elementType;
     }

@@ -49,7 +49,8 @@ import org.geosdi.geoplatform.stax.writer.builder.streamchain.StringBuildHandler
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractStaxStreamWriter implements GeoPlatformStaxWriter {
+public abstract class AbstractStaxStreamWriter<T extends Object> implements
+        GeoPlatformStaxWriter {
 
     protected XMLStreamWriter writer;
     private StreamWriterBuildHandler streamBuilder = new StringBuildHandler();
@@ -74,6 +75,43 @@ public abstract class AbstractStaxStreamWriter implements GeoPlatformStaxWriter 
         reset();
     }
 
+    /**
+     * Write the Target Object acquiring XMLStreamWriter through output
+     *
+     * @param target : the Object to write
+     * @param output : the Object through to acquire Writer
+     * @throws XMLStreamException
+     * @throws IOException
+     */
+    public abstract void write(T target,
+            Object output) throws XMLStreamException, IOException;
+
+    /**
+     *
+     * @param prefix
+     * @param nameSpace
+     * @param localName
+     * @param value
+     * @throws XMLStreamException
+     */
+    protected void writeElement(final String prefix,
+            final String nameSpace,
+            final String localName,
+            final Object value) throws XMLStreamException {
+
+        if (value != null) {
+            this.writer.writeStartElement(prefix, nameSpace, localName);
+            this.writer.writeCharacters(value.toString());
+            this.writer.writeEndElement();
+        }
+    }
+
+    /**
+     * Reset the Component closing both the Writer and Stream
+     *
+     * @throws XMLStreamException
+     * @throws IOException
+     */
     protected void reset() throws XMLStreamException, IOException {
         if (writer != null) {
             writer.close();

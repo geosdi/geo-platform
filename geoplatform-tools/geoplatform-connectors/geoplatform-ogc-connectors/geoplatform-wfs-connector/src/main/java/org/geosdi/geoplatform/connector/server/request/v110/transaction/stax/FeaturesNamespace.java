@@ -35,64 +35,30 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.transaction.stax;
 
-import com.vividsolutions.jts.geom.Geometry;
-import java.util.List;
-import javax.xml.bind.Marshaller;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
-import org.geosdi.geoplatform.connector.AbstractFeatureStreamWriter;
-import org.geosdi.geoplatform.connector.server.request.TransactionIdGen;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransactionRequest> {
+public enum FeaturesNamespace {
 
-    static {
-        gmlContext = GMLContextFactoryV311.createJAXBContext(
-                GMLContextType.POOLED);
-    }
+    WFS(new FeatureNamespace("wfs", "http://www.opengis.net/wfs")),
+    GML(new FeatureNamespace("gml", "http://www.opengis.net/gml")),
+    OGC(new FeatureNamespace("ogc", "http://www.opengis.net/ogc")),
+    XSI(new FeatureNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance")),
+    XS(new FeatureNamespace("xs", "http://www.w3.org/2001/XMLSchema"));
     //
-    private static final GMLJAXBContext gmlContext;
+    private FeatureNamespace value;
 
-    public FeatureStreamWriter() {
-        super("1.1.0", "3.1.1");
+    FeaturesNamespace(FeatureNamespace value) {
+        this.value = value;
     }
 
-    @Override
-    public void write(WFSTransactionRequest target,
-            Object output) throws XMLStreamException, Exception {
-
-        super.acquireWriter(output);
-
-        super.writeDocument(target);
+    public String NAMESPACE() {
+        return value.getNamespace();
     }
 
-    @Override
-    protected final void writeGeometryAttribute(GeometryAttributeDTO geometry,
-            QName typeName)
-            throws XMLStreamException, Exception {
-
-        writer.writeStartElement(typeName.getPrefix()
-                + ":" + geometry.getName());
-
-        String wktGeometry = geometry.getValue();
-        Geometry jtsGeometry = this.wktReader.read(wktGeometry);
-
-        GMLMarshaller marshaller = gmlContext.acquireMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-
-        gmlContext.acquireMarshaller().marshal(jtsGeometry, writer);
-
-        writer.writeEndElement();
+    public String PREFIX() {
+        return value.getPrefix();
     }
 }

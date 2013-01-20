@@ -35,64 +35,29 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.transaction.stax;
 
-import com.vividsolutions.jts.geom.Geometry;
-import java.util.List;
-import javax.xml.bind.Marshaller;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
-import org.geosdi.geoplatform.connector.AbstractFeatureStreamWriter;
-import org.geosdi.geoplatform.connector.server.request.TransactionIdGen;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
+import com.google.common.collect.Maps;
+import java.util.EnumMap;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransactionRequest> {
+public class TransactionParameters {
+
+    private static final EnumMap<WFSTransactionParam, String> parameters = Maps.newEnumMap(
+            WFSTransactionParam.class);
 
     static {
-        gmlContext = GMLContextFactoryV311.createJAXBContext(
-                GMLContextType.POOLED);
-    }
-    //
-    private static final GMLJAXBContext gmlContext;
-
-    public FeatureStreamWriter() {
-        super("1.1.0", "3.1.1");
+        parameters.put(WFSTransactionParam.TRANSACTION, "Transaction");
+        parameters.put(WFSTransactionParam.TRANSACTION_INSERT, "Insert");
+        parameters.put(WFSTransactionParam.ID_GEN, "idgen");
+        parameters.put(WFSTransactionParam.INPUT_FORMAT, "inputFormat");
+        parameters.put(WFSTransactionParam.LOCKID, "LockId");
+        parameters.put(WFSTransactionParam.RELEASE_ACTION, "releaseAction");
     }
 
-    @Override
-    public void write(WFSTransactionRequest target,
-            Object output) throws XMLStreamException, Exception {
-
-        super.acquireWriter(output);
-
-        super.writeDocument(target);
-    }
-
-    @Override
-    protected final void writeGeometryAttribute(GeometryAttributeDTO geometry,
-            QName typeName)
-            throws XMLStreamException, Exception {
-
-        writer.writeStartElement(typeName.getPrefix()
-                + ":" + geometry.getName());
-
-        String wktGeometry = geometry.getValue();
-        Geometry jtsGeometry = this.wktReader.read(wktGeometry);
-
-        GMLMarshaller marshaller = gmlContext.acquireMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-
-        gmlContext.acquireMarshaller().marshal(jtsGeometry, writer);
-
-        writer.writeEndElement();
+    public static String getParam(WFSTransactionParam key) {
+        return parameters.get(key);
     }
 }

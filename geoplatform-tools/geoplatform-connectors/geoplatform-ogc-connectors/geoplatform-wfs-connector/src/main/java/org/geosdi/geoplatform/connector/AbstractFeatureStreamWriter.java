@@ -37,6 +37,16 @@ package org.geosdi.geoplatform.connector;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.io.WKTReader;
+import java.util.List;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
+import org.geosdi.geoplatform.connector.server.request.TransactionIdGen;
+import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeaturesNamespace;
+import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.TransactionParameters;
+import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.WFSTransactionParam;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.stax.writer.AbstractStaxStreamWriter;
 
 /**
@@ -44,7 +54,8 @@ import org.geosdi.geoplatform.stax.writer.AbstractStaxStreamWriter;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractFeatureStreamWriter<T extends Object> extends AbstractStaxStreamWriter<T> {
+public abstract class AbstractFeatureStreamWriter<T extends Object>
+        extends AbstractStaxStreamWriter<T> {
 
     private final String wfsVersion;
     private final String gmlVersion;
@@ -55,6 +66,118 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
         this.wfsVersion = wfsVersion;
         this.gmlVersion = gmlVersion;
         this.wktReader = new WKTReader(new GeometryFactory());
+    }
+
+    /**
+     *
+     * @param <T extends WFSTransactionRequest> request
+     *
+     * @throws XMLStreamException
+     * @throws Exception
+     */
+    protected final <T extends WFSTransactionRequest> void writeDocument(
+            T request) throws XMLStreamException, Exception {
+
+        this.writeStartDocument(request.getTypeName());
+        this.writeTransactionRequest(request);
+
+        writer.writeEndDocument();
+        writer.flush();
+        writer.close();
+    }
+
+    protected abstract void writeGeometryAttribute(GeometryAttributeDTO geometry,
+            QName typeName) throws XMLStreamException, Exception;
+
+    private void writeStartDocument(QName typeName) throws XMLStreamException {
+        writer.writeStartDocument("UTF-8", "1.0");
+
+        writer.setDefaultNamespace(FeaturesNamespace.WFS.NAMESPACE());
+        writer.setPrefix(FeaturesNamespace.GML.PREFIX(),
+                FeaturesNamespace.GML.NAMESPACE());
+
+        writer.setPrefix(FeaturesNamespace.XSI.PREFIX(),
+                FeaturesNamespace.XSI.NAMESPACE());
+        writer.setPrefix(FeaturesNamespace.WFS.PREFIX(),
+                FeaturesNamespace.WFS.NAMESPACE());
+        writer.setPrefix(FeaturesNamespace.OGC.PREFIX(),
+                FeaturesNamespace.OGC.NAMESPACE());
+        writer.setPrefix(FeaturesNamespace.XS.PREFIX(),
+                FeaturesNamespace.XS.NAMESPACE());
+
+        writer.setPrefix(typeName.getPrefix(), typeName.getNamespaceURI());
+    }
+
+    private <T extends WFSTransactionRequest> void writeTransactionRequest(
+            T request)
+            throws XMLStreamException, Exception {
+
+        writer.writeStartElement(FeaturesNamespace.WFS.PREFIX(),
+                TransactionParameters.getParam(WFSTransactionParam.TRANSACTION),
+                FeaturesNamespace.WFS.NAMESPACE());
+        writer.writeAttribute("service", this.getService());
+        writer.writeAttribute("version", this.getWfsVersion());
+
+        this.writeTransactionInsert(request);
+
+        writer.writeEndElement();
+    }
+
+    private void writeTransactionInsert(WFSTransactionRequest request)
+            throws XMLStreamException, Exception {
+        writer.writeStartElement(FeaturesNamespace.WFS.PREFIX(),
+                TransactionParameters.getParam(
+                WFSTransactionParam.TRANSACTION_INSERT),
+                FeaturesNamespace.WFS.NAMESPACE());
+
+        TransactionIdGen idGen = request.getTransactionIdGen();
+
+        if (idGen != null) {
+            writer.writeAttribute(FeaturesNamespace.WFS.PREFIX(),
+                    FeaturesNamespace.WFS.NAMESPACE(),
+                    TransactionParameters.getParam(
+                    WFSTransactionParam.ID_GEN),
+                    idGen.value());
+        }
+
+        String inputFormat = request.getInputFormat();
+
+        if (inputFormat != null) {
+            writer.writeAttribute(FeaturesNamespace.WFS.PREFIX(),
+                    FeaturesNamespace.WFS.NAMESPACE(),
+                    TransactionParameters.getParam(
+                    WFSTransactionParam.INPUT_FORMAT),
+                    inputFormat);
+        }
+
+        this.writeFeature(request);
+
+        writer.writeEndElement();
+    }
+
+    private void writeFeature(WFSTransactionRequest request)
+            throws XMLStreamException, Exception {
+        QName typeName = request.getTypeName();
+
+        writer.writeStartElement(typeName.getLocalPart());
+
+        List<AttributeDTO> attributes = request.getAttributes();
+        for (AttributeDTO attributeDTO : attributes) {
+            if (attributeDTO instanceof GeometryAttributeDTO) {
+                writeGeometryAttribute((GeometryAttributeDTO) attributeDTO,
+                        typeName);
+            } else {
+                writeAttribute(attributeDTO, typeName);
+            }
+        }
+
+        writer.writeEndElement();
+    }
+
+    private void writeAttribute(AttributeDTO attribute,
+            QName typeName) throws XMLStreamException {
+        super.writeElement(typeName.getPrefix() + ":" + attribute.getName(),
+                attribute.getValue());
     }
 
     /**
@@ -71,9 +194,17 @@ public abstract class AbstractFeatureStreamWriter<T extends Object> extends Abst
         return gmlVersion;
     }
 
+    /**
+     * @return the service
+     */
+    public String getService() {
+        return "WFS";
+    }
+
     @Override
     public String toString() {
-        return "AbstractFeatureStreamWriter { " + "wfsVersion = " + wfsVersion
+        return "AbstractFeatureStreamWriter { " + "service = " + getService()
+                + ", wfsVersion = " + wfsVersion
                 + ", gmlVersion = " + gmlVersion + '}';
     }
 }

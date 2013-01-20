@@ -64,45 +64,18 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
     }
 
     @Override
-    protected HttpEntity preparePostEntity()
-            throws IllegalParameterFault, Exception, UnsupportedEncodingException {
-        if (operation != TransactionOperation.INSERT) {
-            return super.preparePostEntity();
-        }
+    protected HttpEntity preparePostEntity() throws IllegalParameterFault,
+            Exception, UnsupportedEncodingException {
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        FeatureStreamWriter streamWriter = new FeatureStreamWriter();
-        streamWriter.write(this, outputStream);
-
-        String feature = outputStream.toString("UTF-8");
-        logger.debug("\n*** Feature to INSERT ***\n{}\n\n", feature);
-
-        String request = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-                + "<wfs:Transaction service=\"WFS\" version=\"1.1.0\" "
-                + "xmlns:ogc=\"http://www.opengis.net/ogc\" "
-                + "xmlns:wfs=\"http://www.opengis.net/wfs\" "
-                + "xmlns:ows=\"http://www.opengis.net/ows\" "
-                + "xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" "
-                + "xmlns:gml=\"http://www.opengis.net/gml\" "
-                + "xmlns:" + typeName.getPrefix() + "=\"" + typeName.getNamespaceURI() + "\" "
-                + "xmlns:ns6=\"http://www.w3.org/1999/xlink\" "
-                + "xmlns:ns7=\"http://www.w3.org/2001/SMIL20/\" "
-                + "xmlns:ns8=\"http://www.w3.org/2001/SMIL20/Language\">\n"
-                + "<wfs:Insert idgen=\"GenerateNew\" inputFormat=\"text/xml; subtype=gml/3.1.1\">\n"
-                + feature
-                + "</wfs:Insert>\n"
-                + "</wfs:Transaction>";
-        logger.trace("\n*** Request TRANSACTION INSERT ***\n{}\n\n", request);
-
-        return new StringEntity(request, ContentType.APPLICATION_XML);
+        return operation == TransactionOperation.INSERT
+               ? preparePostEntityWithStax() : super.preparePostEntity();
     }
 
     @Override
     protected Object createRequest() throws IllegalParameterFault {
         if (operation == null) {
-            throw new IllegalArgumentException(
-                    "Transaction Operation must not be null.");
+            throw new IllegalArgumentException("Transaction Operation "
+                    + "must not be null.");
         }
 
         ITransactionOperationStrategy operationStrategy = GPTransactionMediator.getStrategy(
@@ -121,6 +94,11 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
                : super.showRequestAsString();
     }
 
+    /**
+     * 
+     * @return String
+     * @throws Exception 
+     */
     protected final String showRequestWithStax() throws Exception {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -128,5 +106,26 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
         streamWriter.write(this, outputStream);
 
         return outputStream.toString("UTF-8");
+    }
+
+    /**
+     *
+     * @return HttpEntity
+     * @throws IllegalParameterFault
+     * @throws Exception
+     * @throws UnsupportedEncodingException
+     */
+    protected final HttpEntity preparePostEntityWithStax() throws IllegalParameterFault,
+            Exception, UnsupportedEncodingException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        FeatureStreamWriter streamWriter = new FeatureStreamWriter();
+        streamWriter.write(this, outputStream);
+
+        String request = outputStream.toString("UTF-8");
+
+        logger.trace("\n*** Request TRANSACTION INSERT ***\n{}\n\n", request);
+
+        return new StringEntity(request, ContentType.APPLICATION_XML);
     }
 }

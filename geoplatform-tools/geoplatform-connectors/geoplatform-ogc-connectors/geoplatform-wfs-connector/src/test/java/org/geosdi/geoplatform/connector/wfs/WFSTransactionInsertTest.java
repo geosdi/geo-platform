@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionSummaryType;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -68,10 +67,6 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
         request.setTypeName(TASMANIA_ROADS);
 
         AttributeDTO att = new AttributeDTO();
-//        att.setMaxOccurs(1);
-//        att.setMinOccurs(0);
-//        att.setNillable(true);
-//        att.setType("string");
         att.setName("TYPE");
         att.setValue("NEW attribute value TYPE");
 
@@ -83,8 +78,8 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
 
         request.setAttributes(Arrays.asList(att, geometry));
 
-        logger.info("Ecco la richiesta @@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                + request.showRequestAsString());
+        logger.info("\n*** Request TRANSACTION INSERT ***\n{}\n\n",
+                request.showRequestAsString());
 
 //        TransactionResponseType response = request.getResponse();
 //        logger.info("\n*** {}", response.getTransactionResults());

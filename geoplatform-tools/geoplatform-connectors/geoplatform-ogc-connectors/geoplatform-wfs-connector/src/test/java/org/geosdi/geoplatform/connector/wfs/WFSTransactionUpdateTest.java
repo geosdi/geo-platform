@@ -51,21 +51,22 @@ import org.junit.Test;
  */
 //@Category(WFSTest.class)
 public class WFSTransactionUpdateTest extends WFSTestConfigurator {
-
-    private final static QName POLY_LANDMARKS = new QName("http://www.census.gov", "tiger:poly_landmarks");
-
+    
+    private final static QName POLY_LANDMARKS = new QName(
+            "http://www.census.gov", "tiger:poly_landmarks");
+    
     @Test
     public void polyLandmarks() throws Exception {
         WFSTransactionRequest<TransactionResponseType> request =
                 super.serverConnector.createTransactionRequest();
-
+        
         request.setOperation(TransactionOperation.UPDATE);
-
+        
         QName name = new QName(POLY_LANDMARKS.getLocalPart());
         request.setTypeName(name);
-
+        
         request.setFID("poly_landmarks.1");
-
+        
         AttributeDTO att = new AttributeDTO();
         att.setMaxOccurs(1);
         att.setMinOccurs(0);
@@ -75,13 +76,19 @@ public class WFSTransactionUpdateTest extends WFSTestConfigurator {
         att.setValue("Washington Square Park MOD");
         request.setAttributes(Arrays.asList(att));
 
-        TransactionResponseType response = request.getResponse();
-        logger.info("\n*** {}", response.getTransactionResults());
+        // We must avoid transactions on the server,
+        // but show only the requests generated
+        
+        logger.info("HERE THE REQUEST ########################## \n {}",
+                request.showRequestAsString());
 
-        TransactionSummaryType transactionSummary = response.getTransactionSummary();
-        Assert.assertEquals(0, transactionSummary.getTotalDeleted().intValue());
-        Assert.assertEquals(0, transactionSummary.getTotalInserted().intValue());
-        Assert.assertEquals(1, transactionSummary.getTotalUpdated().intValue());
-        Assert.assertEquals("1.1.0", response.getVersion());
+//        TransactionResponseType response = request.getResponse();
+//        logger.info("\n*** {}", response.getTransactionResults());
+//
+//        TransactionSummaryType transactionSummary = response.getTransactionSummary();
+//        Assert.assertEquals(0, transactionSummary.getTotalDeleted().intValue());
+//        Assert.assertEquals(0, transactionSummary.getTotalInserted().intValue());
+//        Assert.assertEquals(1, transactionSummary.getTotalUpdated().intValue());
+//        Assert.assertEquals("1.1.0", response.getVersion());
     }
 }

@@ -49,6 +49,7 @@ public abstract class AbstractTransactionRequest<T> extends WFSRequest<T>
         implements WFSTransactionRequest<T> {
 
     protected TransactionOperation operation;
+    private TransactionIdGen transactionIdGen = TransactionIdGen.GENERATE_NEW;
     protected QName typeName;
     protected String srs;
     protected String inputFormat;
@@ -67,6 +68,22 @@ public abstract class AbstractTransactionRequest<T> extends WFSRequest<T>
     @Override
     public void setOperation(TransactionOperation operation) {
         this.operation = operation;
+    }
+
+    /**
+     * @return the transactionIdGen
+     */
+    @Override
+    public TransactionIdGen getTransactionIdGen() {
+        return transactionIdGen;
+    }
+
+    /**
+     * @param transactionIdGen the transactionIdGen to set
+     */
+    @Override
+    public void setTransactionIdGen(TransactionIdGen transactionIdGen) {
+        this.transactionIdGen = transactionIdGen;
     }
 
     @Override

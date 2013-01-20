@@ -15,7 +15,5 @@
         <appender-ref ref="STDOUT" />
     </root>
     
-    <!-- Transaction -->
-    <logger name="org.geosdi.geoplatform.connector.server.request.v110.WFSTransactionRequestV110" level="trace" /><!-- TODO info -->
 
 </configuration>

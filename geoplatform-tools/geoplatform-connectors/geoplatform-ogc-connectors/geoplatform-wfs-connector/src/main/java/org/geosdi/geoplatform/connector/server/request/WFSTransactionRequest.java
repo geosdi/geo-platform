@@ -58,6 +58,18 @@ public interface WFSTransactionRequest<T> extends GPConnectorRequest<T> {
     void setOperation(TransactionOperation operation);
 
     /**
+     * Sets the value of the {@link TransactionIdGen} idGen.
+     */
+    void setTransactionIdGen(TransactionIdGen transactionIdGen);
+
+    /**
+     * Gets the value of the {@link TransactionIdGen} idGen.
+     *
+     * Default Value is GenerateNew.
+     */
+    TransactionIdGen getTransactionIdGen();
+
+    /**
      * Gets the value of the type name query property.
      */
     QName getTypeName();

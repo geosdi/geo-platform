@@ -35,64 +35,68 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.transaction.stax;
 
-import com.vividsolutions.jts.geom.Geometry;
-import java.util.List;
-import javax.xml.bind.Marshaller;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
-import org.geosdi.geoplatform.connector.AbstractFeatureStreamWriter;
-import org.geosdi.geoplatform.connector.server.request.TransactionIdGen;
-import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureStreamWriter extends AbstractFeatureStreamWriter<WFSTransactionRequest> {
+public class FeatureNamespace {
 
-    static {
-        gmlContext = GMLContextFactoryV311.createJAXBContext(
-                GMLContextType.POOLED);
+    private final String prefix;
+    private final String namespace;
+
+    public FeatureNamespace(String prefix,
+            String namespace) {
+        this.prefix = prefix;
+        this.namespace = namespace;
     }
-    //
-    private static final GMLJAXBContext gmlContext;
 
-    public FeatureStreamWriter() {
-        super("1.1.0", "3.1.1");
+    /**
+     * @return the prefix
+     */
+    public String getPrefix() {
+        return prefix;
+    }
+
+    /**
+     * @return the namespace
+     */
+    public String getNamespace() {
+        return namespace;
     }
 
     @Override
-    public void write(WFSTransactionRequest target,
-            Object output) throws XMLStreamException, Exception {
-
-        super.acquireWriter(output);
-
-        super.writeDocument(target);
+    public int hashCode() {
+        int hash = 5;
+        hash = 13 * hash + (this.prefix != null ? this.prefix.hashCode() : 0);
+        hash = 13 * hash + (this.namespace != null ? this.namespace.hashCode()
+                            : 0);
+        return hash;
     }
 
     @Override
-    protected final void writeGeometryAttribute(GeometryAttributeDTO geometry,
-            QName typeName)
-            throws XMLStreamException, Exception {
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FeatureNamespace other = (FeatureNamespace) obj;
+        if ((this.prefix == null) ? (other.prefix != null)
+            : !this.prefix.equals(other.prefix)) {
+            return false;
+        }
+        if ((this.namespace == null) ? (other.namespace != null)
+            : !this.namespace.equals(other.namespace)) {
+            return false;
+        }
+        return true;
+    }
 
-        writer.writeStartElement(typeName.getPrefix()
-                + ":" + geometry.getName());
-
-        String wktGeometry = geometry.getValue();
-        Geometry jtsGeometry = this.wktReader.read(wktGeometry);
-
-        GMLMarshaller marshaller = gmlContext.acquireMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-
-        gmlContext.acquireMarshaller().marshal(jtsGeometry, writer);
-
-        writer.writeEndElement();
+    @Override
+    public String toString() {
+        return "FeatureNamespace { " + "prefix = " + prefix
+                + ", namespace = " + namespace + '}';
     }
 }

@@ -87,7 +87,6 @@ import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
 import org.geosdi.geoplatform.services.GPTrackingService;
-import org.geosdi.geoplatform.services.GPWFSService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,8 +106,6 @@ public class LayerService implements ILayerService {
     private GeoPlatformService geoPlatformServiceClient;
     //
     private GPTrackingService geoPlatformTrackingClient;
-    //
-    private GPWFSService geoPlatformFeatureClient;
     //
     @Autowired
     private DTOLayerConverter dtoConverter;
@@ -135,16 +132,6 @@ public class LayerService implements ILayerService {
     public void setGeoPlatformTrackingClient(
             @Qualifier("geoPlatformTrackingClient") GPTrackingService geoPlatformTrackingClient) {
         this.geoPlatformTrackingClient = geoPlatformTrackingClient;
-    }
-
-    /**
-     *
-     * @param geoPlatformFeatureClient the geoPlatformFeatureClient to set
-     */
-    @Autowired
-    public void setGeoPlatformWFSClient(
-            @Qualifier("geoPlatformWFSClient") GPWFSService geoPlatformFeatureClient) {
-        this.geoPlatformFeatureClient = geoPlatformFeatureClient;
     }
 
     @Override

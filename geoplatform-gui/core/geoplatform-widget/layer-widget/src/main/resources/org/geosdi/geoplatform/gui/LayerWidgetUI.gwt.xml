@@ -6,8 +6,6 @@
     
     <source path="client" />
     
-    <!-- MOVE THIS IN MODULE WFS-EDITOR  -->
-    <source path="responce" />
     <!-- =============================== -->
     
     <entry-point class='org.geosdi.geoplatform.gui.client.LayerWidgetUI' />

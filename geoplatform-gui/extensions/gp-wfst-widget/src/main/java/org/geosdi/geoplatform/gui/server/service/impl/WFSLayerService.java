@@ -33,17 +33,54 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.gui.server.service.impl;
 
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.server.IWFSLayerService;
+import org.geosdi.geoplatform.services.GPWFSService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IWFSLayerService {
+@Service(value = "wfsLayerService")
+public class WFSLayerService implements IWFSLayerService {
 
-    LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName) throws Exception;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private GPWFSService geoPlatformWFSClient;
+
+    @Override
+    public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
+            throws Exception {
+
+        try {
+            return this.geoPlatformWFSClient.describeFeatureType(serverUrl,
+                                                                 typeName);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
+            throw new GeoPlatformException(ex.getMessage());
+        } catch (IllegalParameterFault ex) {
+            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
+            throw new GeoPlatformException(ex.getMessage());
+        }
+    }
+
+    /**
+     * @param geoPlatformWFSClient the geoPlatformWFSClient to set
+     */
+    @Autowired
+    public void setGeoPlatformWFSClient(
+            @Qualifier(value = "geoPlatformWFSClient") GPWFSService geoPlatformWFSClient) {
+        this.geoPlatformWFSClient = geoPlatformWFSClient;
+    }
 }

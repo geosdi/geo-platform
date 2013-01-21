@@ -150,7 +150,4 @@ public interface LayerIcons extends ImageBundle {
 
     @Resource("refresh_layer.png")
     AbstractImagePrototype refreshLayerIcon();
-
-    @Resource("vector.png")
-    AbstractImagePrototype vector();
 }

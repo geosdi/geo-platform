@@ -1,4 +1,4 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -42,8 +42,9 @@
     
     <modules>
         <module>gp-publisher-widget</module>
-        <module>oauth2-widget</module>
+        <module>gp-wfst-widget</module>
         <module>gp-wps-widget</module>
+        <module>oauth2-widget</module>
     </modules>
 
 </project>

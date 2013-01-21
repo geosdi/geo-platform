@@ -1,142 +1,79 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+  
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-widget</artifactId>
+        <artifactId>extension</artifactId>
         <version>1.5-SNAPSHOT</version>
     </parent>
-
+  
     <groupId>org.geosdi</groupId>
-    <artifactId>layer-widget</artifactId>
+    <artifactId>gp-wfst-widget</artifactId>
     <version>1.5-SNAPSHOT</version>
     <packaging>jar</packaging>
-
-    <name>Geo-Platform :: == Layer Module</name>
-
+  
+    <name>Geo-Platform :: == WFS-T Widget</name>
+  
     <dependencies>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-wfs-api</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-wfs-connector</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- Dependencies for GWT -->
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- GXT -->
-        <dependency>
-            <groupId>com.extjs</groupId>
-            <artifactId>gxt</artifactId>
-        </dependency>
-
-        <!-- GWT-OL Resources -->
-        <dependency>
-            <groupId>org.gwtopenmaps.openlayers</groupId>
-            <artifactId>gwt-openlayers-client</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.gwtopenmaps.openlayers</groupId>
-            <artifactId>gwt-openlayers-server</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
             <classifier>sources</classifier>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
             <classifier>sources</classifier>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-server-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
-        </dependency>
-
-        <!-- GeoPlatform Server Module -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>server-widget</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>server-widget</artifactId>
+            <artifactId>basic-widget</artifactId>
             <classifier>sources</classifier>
-        </dependency>
-        
-        <!-- GeoPlatform Print Module -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-print</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-print</artifactId>
-            <version>${project.version}</version>
-            <classifier>sources</classifier>
-        </dependency>
-        
-        <!-- ============================================================= -->
-        <!-- ============= GEOPLATFORM WS CONNECTORS ============= -->
-        <!-- ============================================================= -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-tracking-connector</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>it.geosolutions</groupId>
-            <artifactId>geoserver-manager</artifactId>
-            <version>1.4-SNAPSHOT</version>
-        </dependency>
-        
-        <!-- GIN -->
-        <dependency>
-            <groupId>com.google.gwt.inject</groupId>
-            <artifactId>gin</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>name.pehl.piriti</groupId>
-            <artifactId>piriti-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>name.pehl</groupId>
-            <artifactId>totoe</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
         </dependency>
 
         <!-- SPRING -->
@@ -159,6 +96,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>com.google.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
+        </dependency>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
@@ -178,21 +120,18 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
 
+        <!-- SCOPE TEST -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-        </dependency>
-        
-        <!-- SCOPE TEST -->
+        </dependency>        
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-
     </dependencies>
-
+    
     <build>
-
         <plugins>
             <!-- ... or ask the plugin to detect them based on gwt modules files and 
         				copy the required java sources -->
@@ -208,17 +147,13 @@
                     </execution>
                 </executions>
             </plugin>
-
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
-
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-            </plugin>
         </plugins>
-
+            
         <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
      			we should be able to use some properties here -->
         <resources>
@@ -253,6 +188,6 @@
                 </includes>
             </resource>
         </resources>
-
     </build>
+  
 </project>

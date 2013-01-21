@@ -48,7 +48,6 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import java.util.List;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
@@ -94,7 +93,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     public void initSize() {
         super.setSize(1000, 650);
         super.setHeading("GeoPlatform Feature UI");
-        super.setIcon(LayerResources.ICONS.vector());
+        super.setIcon(BasicWidgetResources.ICONS.vector());
     }
 
     @Override

@@ -33,55 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher;
+package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.LayerSchemaHandlerManager;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
+ * <p>This Handler will make a Describe FeatureType Request to determine whether
+ * the Layer is a Vector or not</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPDescribeFeatureDispatcher implements DescribeFeatureDispatcher {
+public class DescribeFeatureTypeHandler extends LayerTypeHandler {
 
-    private LayerSchemaHandlerManager layerSchemaManager;
+    private GPDescribeFeatureDispatcher featureDispatcher;
 
-    @Inject
-    public GPDescribeFeatureDispatcher(
-            LayerSchemaHandlerManager theLayerSchemaManager) {
-        this.layerSchemaManager = theLayerSchemaManager;
+    public DescribeFeatureTypeHandler(
+            GPDescribeFeatureDispatcher theFeatureDispatcher) {
+        this.featureDispatcher = theFeatureDispatcher;
     }
 
     @Override
-    public void dispatchDescribeFeatureRequest(final GPLayerTreeModel layer) {
-        LayerRemote.Util.getInstance().describeFeatureType(
-                layer.getDataSource(), layer.getName(),
-                new AsyncCallback<LayerSchemaDTO>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        String errorMessage = "Error on WFS DescribeFeatureType request";
-
-                        GeoPlatformMessage.errorMessage(
-                                "DescribeFetureType Service Error",
-                                errorMessage + " - " + caught.getMessage());
-
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for " + layer.getName() + " layer.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                    }
-
-                    @Override
-                    public void onSuccess(LayerSchemaDTO result) {
-                        layerSchemaManager.forwardLayerSchema(result, layer);
-                    }
-                });
+    public void layerType(GPLayerTreeModel layer) {
+        System.out.println(
+                "DescribeFeatureTypeHandler @@@@@@@@@@@@@@@@@@@@@@@@");
+        this.featureDispatcher.dispatchDescribeFeatureRequest(layer);
     }
 }

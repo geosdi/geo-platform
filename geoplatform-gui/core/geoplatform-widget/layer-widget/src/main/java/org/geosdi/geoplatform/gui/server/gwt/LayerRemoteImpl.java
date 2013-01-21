@@ -54,9 +54,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.server.ILayerService;
-import org.geosdi.geoplatform.gui.server.IWFSLayerService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,9 +70,6 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     //
     @Autowired
     private ILayerService layerService;
-    //
-    @Autowired
-    private IWFSLayerService wfsLayerService;
 
     @Override
     public GPClientProject loadDefaultProjectElements() throws GeoPlatformException {
@@ -305,14 +300,5 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Override
     public String getLayerDimension(String layerName) throws GeoPlatformException {
         return this.layerService.getLayerDimension(layerName, super.getThreadLocalRequest());
-    }
-
-    /**
-     * Move this method in WFS-Editor Module
-     */
-    @Override
-    public LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName) throws Exception {
-        return this.wfsLayerService.describeFeatureType(serverUrl, typeName);
     }
 }

@@ -33,57 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.service.impl;
+package org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher;
 
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.LayerSchemaHandlerManager;
+import org.geosdi.geoplatform.gui.client.service.WFSRemote;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.gui.server.IWFSLayerService;
-import org.geosdi.geoplatform.services.GPWFSService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
- * @since 1.5.SNAPSHOT Move this class in the WFS-Editor Module
  */
-@Service(value = "wfsLayerService")
-public class WFSLayerService implements IWFSLayerService {
+public class GPDescribeFeatureDispatcher implements DescribeFeatureDispatcher {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private GPWFSService geoPlatformWFSClient;
+    private LayerSchemaHandlerManager layerSchemaManager;
 
-    @Override
-    public LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName) throws Exception {
-
-        try {
-
-            return this.geoPlatformWFSClient.describeFeatureType(serverUrl,
-                                                                 typeName);
-        } catch (ResourceNotFoundFault ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
-            throw new GeoPlatformException(ex.getMessage());
-        } catch (IllegalParameterFault ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
-            throw new GeoPlatformException(ex.getMessage());
-        }
+    @Inject
+    public GPDescribeFeatureDispatcher(
+            LayerSchemaHandlerManager theLayerSchemaManager) {
+        this.layerSchemaManager = theLayerSchemaManager;
     }
 
-    /**
-     * @param geoPlatformWFSClient the geoPlatformWFSClient to set
-     */
-    @Autowired
-    public void setGeoPlatformWFSClient(
-            @Qualifier(value = "geoPlatformWFSClient") GPWFSService geoPlatformWFSClient) {
-        this.geoPlatformWFSClient = geoPlatformWFSClient;
+    @Override
+    public void dispatchDescribeFeatureRequest(final GPLayerTreeModel layer) {
+        WFSRemote.Util.getInstance().describeFeatureType(
+                layer.getDataSource(), layer.getName(),
+                new AsyncCallback<LayerSchemaDTO>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        String errorMessage = "Error on WFS DescribeFeatureType request";
+
+                        GeoPlatformMessage.errorMessage(
+                                "DescribeFetureType Service Error",
+                                errorMessage + " - " + caught.getMessage());
+
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                errorMessage + " for " + layer.getName() + " layer.",
+                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                    }
+
+                    @Override
+                    public void onSuccess(LayerSchemaDTO result) {
+                        layerSchemaManager.forwardLayerSchema(result, layer);
+                    }
+                });
     }
 }

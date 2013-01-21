@@ -33,31 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
+package org.geosdi.geoplatform.gui.server;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
- * <p>This Handler will make a Describe FeatureType Request to determine whether
- * the Layer is a Vector or not</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DescribeFeatureTypeHandler extends LayerTypeHandler {
+public interface IWFSLayerService {
 
-    private GPDescribeFeatureDispatcher featureDispatcher;
-
-    public DescribeFeatureTypeHandler(
-            GPDescribeFeatureDispatcher theFeatureDispatcher) {
-        this.featureDispatcher = theFeatureDispatcher;
-    }
-
-    @Override
-    public void layerType(GPLayerTreeModel layer) {
-        System.out.println(
-                "DescribeFeatureTypeHandler @@@@@@@@@@@@@@@@@@@@@@@@");
-        this.featureDispatcher.dispatchDescribeFeatureRequest(layer);
-    }
+    LayerSchemaDTO describeFeatureType(
+            String serverUrl,
+            String typeName)
+            throws Exception;
 }

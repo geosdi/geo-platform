@@ -45,7 +45,6 @@ import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import javax.jws.WebService;
@@ -517,27 +516,6 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         if (existsStyle(layerName)) {
             restPublisher.removeStyle(layerName);
         }
-        //
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(fileSLD));
-        } catch (FileNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GPPublisherServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String line = null;
-        StringBuilder stringBuilder = new StringBuilder();
-        String ls = System.getProperty("line.separator");
-        try {
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-                stringBuilder.append(ls);
-            }
-        } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(GPPublisherServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("********************** File sld content: ");
-        System.out.println(stringBuilder.toString());
-        //
         boolean returnPS = restPublisher.publishStyle(fileSLD, layerName);
         logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
         return layerName;

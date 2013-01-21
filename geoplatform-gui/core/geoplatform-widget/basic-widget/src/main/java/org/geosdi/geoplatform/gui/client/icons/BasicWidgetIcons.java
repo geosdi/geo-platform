@@ -121,4 +121,7 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("wps_add.png")
     AbstractImagePrototype wpsAdd();
+    
+    @Resource("vectorLayer.png")
+    AbstractImagePrototype vectorLayer();
 }

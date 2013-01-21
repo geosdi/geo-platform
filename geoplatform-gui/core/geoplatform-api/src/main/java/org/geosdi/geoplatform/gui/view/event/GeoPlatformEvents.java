@@ -56,4 +56,14 @@ public final class GeoPlatformEvents {
     public static final EventType REMOVE_WINDOW_CLOSE_LISTENER = new EventType();
     public static final EventType COLOR_CHOOSED = new EventType();
     public static final EventType USER_UPDATE_HIS_NAME = new EventType();
+    //Geodata event
+    public static final EventType SHOW_GEODATA_RASTER_LAYERS = new EventType();
+    public static final EventType SHOW_GEODATA_VECTOR_LAYERS = new EventType();
+    public static final EventType SHOW_GEODATA_UPLOAD_RASTER = new EventType();
+    public static final EventType SHOW_GEODATA_UPLOAD_VECTOR = new EventType();
+    public static final EventType SHOW_GEODATA_RASTER_DATA_FOLDER = new EventType();
+    public static final EventType SHOW_GEODATA_VECTOR_DATA_FOLDER = new EventType();
+    public static final EventType SHOW_GEODATA_GET_BIG_RASTER_FILE = new EventType();
+    public static final EventType SHOW_GEODATA_GEORECTIFY = new EventType();
+    public static final EventType SHOW_GEODATA_SAVE_GEORECTIFY = new EventType();
 }

@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.geosdi.geoplatform.services.utility.PublishUtility;
 import com.google.common.collect.Lists;
-import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.*;
@@ -47,14 +45,17 @@ import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import java.io.*;
 import java.util.*;
-import java.util.zip.ZipFile;
+import java.util.logging.Level;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import javax.jws.WebService;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsConfiguration;
 import org.geosdi.geoplatform.services.utility.PostGISUtility;
+import org.geosdi.geoplatform.services.utility.PublishUtility;
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.data.DataSourceException;
 import org.geotools.data.FileDataStore;
@@ -483,10 +484,10 @@ public class GPPublisherServiceImpl implements GPPublisherService,
             String SLDFileName = origName + ".sld";
             File fileSLD = new File(tempUserTifDir, SLDFileName);
             if (fileSLD.exists()) {
-                PublishUtility.copyFile(fileSLD,
+                File filePublished = PublishUtility.copyFile(fileSLD,
                         tempUserTifDir, userName + "_" + SLDFileName, true);
                 fileSLD.delete();
-                info.sld = this.publishSLD(fileSLD, info.name);
+                info.sld = this.publishSLD(filePublished, info.name);
             } else {
                 info.sld = "default_raster";
             }
@@ -516,6 +517,27 @@ public class GPPublisherServiceImpl implements GPPublisherService,
         if (existsStyle(layerName)) {
             restPublisher.removeStyle(layerName);
         }
+        //
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(fileSLD));
+        } catch (FileNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GPPublisherServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String line = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        String ls = System.getProperty("line.separator");
+        try {
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+                stringBuilder.append(ls);
+            }
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(GPPublisherServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("********************** File sld content: ");
+        System.out.println(stringBuilder.toString());
+        //
         boolean returnPS = restPublisher.publishStyle(fileSLD, layerName);
         logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
         return layerName;

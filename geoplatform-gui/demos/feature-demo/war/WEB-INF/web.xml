@@ -40,15 +40,6 @@
         <url-pattern>/feature_demo/WFSRemote</url-pattern>
     </servlet-mapping>
     
-    <!--<servlet>
-        <servlet-name>GeoPlatformOGCRemote</servlet-name>
-        <servlet-class>org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GeoPlatformOGCRemote</servlet-name>
-        <url-pattern>/feature_demo/GeoPlatformOGCRemote</url-pattern>
-    </servlet-mapping>-->
-    
     <!-- Default page to serve -->
     <welcome-file-list>
         <welcome-file>FeatureDemoUI.html</welcome-file>

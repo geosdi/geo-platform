@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -47,7 +48,7 @@
             <version>1.0.0.GA</version>
         </dependency>
 
-		<!-- GXT -->
+        <!-- GXT -->
         <dependency>
             <groupId>com.extjs</groupId>
             <artifactId>gxt</artifactId>
@@ -75,7 +76,7 @@
             <classifier>sources</classifier>
         </dependency>
         
-         <!-- GeoPlatform -->
+        <!-- GeoPlatform -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>csw-catalog-api</artifactId>
@@ -88,7 +89,7 @@
             <version>${project.version}</version>
         </dependency>
 
-		<!-- GEOPLATFORM_RESOURCES -->
+        <!-- GEOPLATFORM_RESOURCES -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-resources</artifactId>
@@ -130,7 +131,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
                 <configuration>
                     <warSourceExcludes>.gwt-tmp/**</warSourceExcludes>
                     <warSourceDirectory>war</warSourceDirectory>
@@ -140,7 +140,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <version>2.4.0</version>
                 <configuration>
                     <inplace>true</inplace>
                     <gwtVersion>${gwtVersion}</gwtVersion>
@@ -165,11 +164,10 @@
                 </executions>
             </plugin>
 
-		<!-- Run the application using "mvn jetty:run" -->
+            <!-- Run the application using "mvn jetty:run" -->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>7.5.2.v20111006</version>
                 <configuration>
                     <webAppSourceDirectory>${basedir}/war</webAppSourceDirectory>
                     <webAppConfig>
@@ -194,9 +192,9 @@
                         <phase>clean</phase>
                         <configuration>
                             <tasks>
-                                <delete dir="war/WEB-INF/lib" />
                                 <delete dir="war/catalog_finder_demo" />
                                 <delete dir="war/WEB-INF/deploy" />
+                                <delete dir="war/WEB-INF/lib" />
                                 <delete dir="gwt-unitCache" />
                             </tasks>
                         </configuration>

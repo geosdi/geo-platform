@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
 
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 

@@ -47,6 +47,7 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import java.util.List;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
@@ -61,6 +62,7 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@Singleton
 public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
 
     private FeatureMapWidget mapWidget;

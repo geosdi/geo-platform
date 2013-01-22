@@ -33,38 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config;
+package org.geosdi.geoplatform.demos.feature.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.inject.client.GinModules;
-import com.google.gwt.inject.client.Ginjector;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
+import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@GinModules(value = {FeatureInjectorModule.class})
-public interface FeatureInjector extends Ginjector {
+public class FeatureDemoUI implements EntryPoint {
 
-    public static class MainInjector {
+    @Override
+    public void onModuleLoad() {
+        // TODO Is it necessary?
+        // Required for retrieve organization name in the save feature server operation
+//        IGPAccountDetail account = new AccountDetailDummy();
+//        GPAccountLogged.getInstance().setAccountDetail(account);
 
-        private static FeatureInjector INSTANCE = GWT.create(
-                FeatureInjector.class);
+        FeatureInjector injector = FeatureInjector.MainInjector.getInstance();
+        FeatureWidget featureWidget = injector.getFeatureWidget();
 
-        private MainInjector() {
-        }
-
-        public static FeatureInjector getInstance() {
-            return INSTANCE;
-        }
+        featureWidget.setClosable(false);
+        featureWidget.show();
     }
-
-    GPEventBus getEventBus();
-
-    LayerTypeHandlerManager getLayerTypeHandlerManager();
-    
-    FeatureWidget getFeatureWidget();
 }

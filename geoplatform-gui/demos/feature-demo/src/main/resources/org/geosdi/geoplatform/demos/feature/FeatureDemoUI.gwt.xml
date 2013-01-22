@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="feature_demo">
+    <inherits name='org.geosdi.geoplatform.gui.GeoPlatform' />
+	
+    <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
+    <inherits name='org.geosdi.geoplatform.gui.Resources' />
+    
+    <inherits name="org.geosdi.geoplatform.gui.WFSWidgetUI" />
+	
+    <source path="client" />
+    
+    <script src="lib/proj4js-compressed.js" />
+    <script src="lib/projCode/tmerc.js" />
+    <script src="lib/projCode/merc.js" />
+    <script src="lib/projCode/utm.js" />
+    <script src="lib/defs/EPSG4326.js" />
+    <script src="lib/defs/EPSG900913.js" />
+	
+    <entry-point class='org.geosdi.geoplatform.demos.feature.client.WFSWidgetUI' />
+	
+</module>

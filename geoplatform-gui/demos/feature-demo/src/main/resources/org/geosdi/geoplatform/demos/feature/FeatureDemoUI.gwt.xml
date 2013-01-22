@@ -16,6 +16,6 @@
     <script src="lib/defs/EPSG4326.js" />
     <script src="lib/defs/EPSG900913.js" />
 	
-    <entry-point class='org.geosdi.geoplatform.demos.feature.client.WFSWidgetUI' />
+    <entry-point class='org.geosdi.geoplatform.demos.feature.client.FeatureDemoUI' />
 	
 </module>

@@ -36,14 +36,27 @@
 package org.geosdi.geoplatform.demos.feature.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
+import org.geosdi.geoplatform.gui.client.service.WFSRemote;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.server.GPVectorLayerGrid;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureDemoUI implements EntryPoint {
+
+//    private static final String SCOPE = "http://localhost:8989/geoserver/wms";
+    private static final String SCOPE = "http://150.146.160.92/geoserver/wms";
 
     @Override
     public void onModuleLoad() {
@@ -53,9 +66,56 @@ public class FeatureDemoUI implements EntryPoint {
 //        GPAccountLogged.getInstance().setAccountDetail(account);
 
         FeatureInjector injector = FeatureInjector.MainInjector.getInstance();
-        FeatureWidget featureWidget = injector.getFeatureWidget();
+        final FeatureWidget featureWidget = injector.getFeatureWidget();
 
-        featureWidget.setClosable(false);
-        featureWidget.show();
+        final GPLayerBean layer = this.toppStates();
+
+        WFSRemote.Util.getInstance().describeFeatureType(layer.getDataSource(),
+                                                         layer.getName(),
+                                                         new AsyncCallback<LayerSchemaDTO>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage(
+                        "DescribeFetureType Service Error",
+                        "Error on WFS DescribeFeatureType request:\n" + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(LayerSchemaDTO schema) {
+                assert (schema != null) : "LayerSchemaDTO is NULL.";
+
+                featureWidget.bind(layer, schema);
+
+                featureWidget.setClosable(false);
+                featureWidget.show();
+            }
+        });
+    }
+
+    public GPLayerBean toppStates() {
+        GPLayerBean layer = new GPVectorLayerGrid();
+        layer.setDataSource(SCOPE);
+        layer.setName("topp:states");
+        layer.setLayerType(GPLayerType.MULTIPOLYGON);
+        layer.setTitle("USA Population");
+        layer.setAbstractText("This is some census data on the states.");
+        layer.setCrs("EPSG:4326");
+        layer.setBbox(
+                new BBoxClientInfo(-124.731422, 24.955967, -66.969849, 49.371735));
+
+        ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>(3);
+        GPStyleStringBeanModel polygonStyle = new GPStyleStringBeanModel();
+        polygonStyle.setStyleString("polygon");
+        styles.add(polygonStyle);
+        GPStyleStringBeanModel pophatchStyle = new GPStyleStringBeanModel();
+        pophatchStyle.setStyleString("pophatch");
+        styles.add(pophatchStyle);
+        GPStyleStringBeanModel populationStyle = new GPStyleStringBeanModel();
+        populationStyle.setStyleString("population");
+        styles.add(populationStyle);
+
+        layer.setStyles(styles);
+
+        return layer;
     }
 }

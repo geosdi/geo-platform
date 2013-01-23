@@ -109,8 +109,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     }
 
     private void addMapWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST,
-                                                           700);
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST, 700);
         layoutData.setMargins(new Margins(0));
 
         super.add(this.mapWidget, layoutData);
@@ -169,16 +168,14 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     }
 
     @Override
-    protected void endDrag(DragEvent de,
-            boolean canceled) {
+    protected void endDrag(DragEvent de, boolean canceled) {
         super.endDrag(de, canceled);
 
         this.mapWidget.updateSize();
     }
 
     @Override
-    public void bind(GPLayerBean theSelectedLayer,
-            LayerSchemaDTO theSchemaDTO) {
+    public void bind(GPLayerBean theSelectedLayer, LayerSchemaDTO theSchemaDTO) {
         this.selectedLayer = theSelectedLayer;
         this.schemaDTO = theSchemaDTO;
 

@@ -71,7 +71,8 @@ public class GPVectorLayerGrid extends GPLayerGrid implements GPVectorBean {
 
     @Override
     public String toString() {
-        return "GPVectorLayerGrid{ " + "featureNameSpace = " + featureNameSpace
+        return "GPVectorLayerGrid{ " + super.toString()
+                + ", featureNameSpace = " + featureNameSpace
                 + ", geometryName = " + geometryName + '}';
     }
 }

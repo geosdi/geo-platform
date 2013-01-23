@@ -38,13 +38,15 @@ package org.geosdi.geoplatform.gui.client.widget.cql;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.CQLFilterLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -56,12 +58,12 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
  */
 public class CQLFilterWidget extends GeoPlatformWindow {
 
-    private final static short WIDGET_HEIGHT = 250;
-    private final static short WIDGET_WIDTH = 400;
+    public final static short WIDGET_HEIGHT = 400;
+    public final static short WIDGET_WIDTH = 500;
     private final static String CQL_FILTER_HEADING = "CQL FILTER EDITOR";
     private final CQLFilterLayerMapEvent cqlFilterLayerMapEvent = new CQLFilterLayerMapEvent();
-    private TextArea filterTextArea;
     private GPTreePanel<GPBeanTreeModel> treePanel;
+    private CQLFilterTabWidget cqlFilterTabWidget;
 
     public CQLFilterWidget(boolean lazy, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(lazy);
@@ -70,34 +72,58 @@ public class CQLFilterWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
-        this.filterTextArea = new TextArea();
-        super.add(this.filterTextArea);
-        Button apply = new Button("Apply",
-                new SelectionListener<ButtonEvent>() {
+        this.cqlFilterTabWidget = new CQLFilterTabWidget(Boolean.TRUE, this.treePanel);
+        super.add(this.cqlFilterTabWidget);
+        Button verifyButton = new Button("Verify", new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                LayerRemote.Util.getInstance().checkCQLExpression(cqlFilterTabWidget.getCQLFilterExpression(),
+                        new AsyncCallback<String>() {
                     @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-                        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
-                        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
-                        layerSelected.setCqlFilter(filterTextArea.getValue());
-                        mementoSave.putOriginalPropertiesInCache(memento);
-                        cqlFilterLayerMapEvent.setLayerBean(layerSelected);
-                        GPHandlerManager.fireEvent(cqlFilterLayerMapEvent);
-                        treePanel.refresh(layerSelected);
+                    public void onFailure(Throwable caught) {
+                        GeoPlatformMessage.errorMessage("CQL Error",
+                                caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(String result) {
+                        CQLFilterWidget.super.setStateId(result);
+                        if (result.startsWith("Error")) {
+                            GeoPlatformMessage.errorMessage("CQL Error",
+                                    result);
+                        } else {
+                            GeoPlatformMessage.alertMessage("CQL Success",
+                                    result);
+                        }
                     }
                 });
-
-        super.addButton(apply);
-        Button close = new Button("Close",
+            }
+        });
+        super.addButton(verifyButton);
+        Button applyButton = new Button("Apply", new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
+                IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
+                layerSelected.setCqlFilter(cqlFilterTabWidget.getCQLFilterExpression());
+                mementoSave.putOriginalPropertiesInCache(memento);
+                cqlFilterLayerMapEvent.setLayerBean(layerSelected);
+                GPHandlerManager.fireEvent(cqlFilterLayerMapEvent);
+                treePanel.refresh(layerSelected);
+            }
+        });
+        super.addButton(applyButton);
+        Button closeButton = new Button("Close",
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        filterTextArea.clear();
-                        hide();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                cqlFilterTabWidget.reset();
+                hide();
+            }
+        });
 
-        super.addButton(close);
+        super.addButton(closeButton);
     }
 
     @Override
@@ -106,7 +132,7 @@ public class CQLFilterWidget extends GeoPlatformWindow {
         GPLayerTreeModel layerElement = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
         String cqlFilter = layerElement.getCqlFilter();
         if (cqlFilter != null) {
-            this.filterTextArea.setValue(cqlFilter);
+            this.cqlFilterTabWidget.setCQLValue(cqlFilter);
         }
     }
 

@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
@@ -300,5 +301,15 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Override
     public String getLayerDimension(String layerName) throws GeoPlatformException {
         return this.layerService.getLayerDimension(layerName, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public String checkCQLExpression(String CQLExpression) throws GeoPlatformException {
+        return this.layerService.checkCQLExpression(CQLExpression, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException {
+        return this.layerService.describeFeatureType(layerName);
     }
 }

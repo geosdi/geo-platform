@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
-import java.util.HashMap;
+import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public class VisitorPosition extends AbstractVisitTree
         implements IVisitor {
@@ -61,7 +61,7 @@ public class VisitorPosition extends AbstractVisitTree
     private GPBeanTreeModel startPosition;
     private GPBeanTreeModel endPosition;
     private GPBeanTreeModel tmpElement;
-    private Map<FolderTreeNode, Integer> folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
+    private Map<FolderTreeNode, Integer> folderDescendantMap = Maps.newHashMap();
 
     public void fixPosition(GPBeanTreeModel changedElement,
             GPBeanTreeModel parentDestination, int newIndex) {

@@ -39,7 +39,7 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
@@ -58,28 +58,26 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
     }
 
     @Override
-    public void layerSchemaParser(LayerSchemaDTO schemaDTO,
-            GPLayerTreeModel layer) {
+    public void layerSchemaParser(LayerSchemaDTO schemaDTO, GPLayerBean layer) {
         if (schemaDTO != null) {
-            showFeatureWidget(schemaDTO, layer);
+            this.showFeatureWidget(schemaDTO, layer);
         } else {
             super.forwardLayerSchema(schemaDTO, layer);
         }
     }
 
-    private void showFeatureWidget(LayerSchemaDTO result,
-            GPLayerTreeModel layer) {
-        String geometryType = result.getGeometry().getType();
+    private void showFeatureWidget(LayerSchemaDTO schemaDTO, GPLayerBean layer) {
+        String geometryType = schemaDTO.getGeometry().getType();
 
-        layer.setLayerType(GPLayerType.valueOf(
-                geometryType.toUpperCase()));
+        layer.setLayerType(
+                GPLayerType.valueOf(geometryType.toUpperCase()));
 
         LayoutManager.getInstance().getStatusMap().setStatus(
                 "The Layer " + layer.getName() + " is a WFS layer of "
                 + geometryType + " geometry type.",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
-        featureWidget.bind(layer, result);
+        featureWidget.bind(layer, schemaDTO);
         featureWidget.show();
     }
 }

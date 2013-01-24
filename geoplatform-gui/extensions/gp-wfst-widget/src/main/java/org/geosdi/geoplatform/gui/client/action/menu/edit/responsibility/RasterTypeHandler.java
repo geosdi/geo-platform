@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.shared.GPLayerType;
 public class RasterTypeHandler extends LayerTypeHandler {
 
     @Override
-    public void layerType(GPLayerTreeModel layer) {
+    public void layerType(GPLayerBean layer) {
         if (layer.getLayerType() == GPLayerType.RASTER) {
             String alertMessage = "The Layer " + layer.getName()
                     + " isn't a Vector.";

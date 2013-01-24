@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.client.service.WFSRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
@@ -61,7 +61,7 @@ public class GPDescribeFeatureDispatcher implements DescribeFeatureDispatcher {
     }
 
     @Override
-    public void dispatchDescribeFeatureRequest(final GPLayerTreeModel layer) {
+    public void dispatchDescribeFeatureRequest(final GPLayerBean layer) {
         WFSRemote.Util.getInstance().describeFeatureType(
                 layer.getDataSource(), layer.getName(),
                 new AsyncCallback<LayerSchemaDTO>() {

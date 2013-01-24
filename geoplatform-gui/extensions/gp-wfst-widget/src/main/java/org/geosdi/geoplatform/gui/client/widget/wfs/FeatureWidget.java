@@ -162,7 +162,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     protected void afterShow() {
         super.afterShow();
         
-        this.statusBar.setBusy("Loading Layer AS WFS");
+        this.statusBar.setBusy("Loading Layer as WFS");
 
         this.mapWidget.bind(selectedLayer, schemaDTO);
     }

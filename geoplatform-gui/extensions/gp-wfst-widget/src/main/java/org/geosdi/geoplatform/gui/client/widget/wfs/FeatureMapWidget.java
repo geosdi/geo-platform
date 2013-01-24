@@ -137,9 +137,8 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
     }
 
     @Override
-    public void bind(final GPLayerBean layer,
-            final LayerSchemaDTO schema) {
-
+    public void bind(final GPLayerBean layer, final LayerSchemaDTO schema) {
+        
         this.wms = this.mapLayerBuilder.buildLayer(layer);
 
         this.controlFeature = this.featureControlBuilder.buildControl(new GetFeatureModel() {

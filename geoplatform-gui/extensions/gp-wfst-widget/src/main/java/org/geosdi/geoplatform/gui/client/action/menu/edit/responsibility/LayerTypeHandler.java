@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
 
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
@@ -53,9 +53,9 @@ public abstract class LayerTypeHandler {
         this.successor = theSuccessor;
     }
 
-    public abstract void layerType(GPLayerTreeModel layer);
+    public abstract void layerType(GPLayerBean layer);
 
-    protected void forwardLayerType(GPLayerTreeModel layer) {
+    protected void forwardLayerType(GPLayerBean layer) {
         if (successor != null) {
             successor.layerType(layer);
         }

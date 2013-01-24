@@ -40,6 +40,16 @@
         <url-pattern>/feature_demo/WFSRemote</url-pattern>
     </servlet-mapping>
     
+    <!-- Open proxy to circumvent cross-domain XMLHTTPRequest restrictions. -->
+    <servlet>
+        <servlet-name>GwtOpenlayersProxy</servlet-name>
+        <servlet-class>org.gwtopenmaps.openlayers.server.GwtOpenLayersProxyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GwtOpenlayersProxy</servlet-name>
+        <url-pattern>/gwtOpenLayersProxy/*</url-pattern>
+    </servlet-mapping>
+    
     <!-- Default page to serve -->
     <welcome-file-list>
         <welcome-file>FeatureDemoUI.html</welcome-file>

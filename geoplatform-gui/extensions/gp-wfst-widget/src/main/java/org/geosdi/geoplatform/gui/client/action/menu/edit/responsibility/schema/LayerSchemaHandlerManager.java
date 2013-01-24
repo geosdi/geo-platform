@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
@@ -55,8 +55,7 @@ public class LayerSchemaHandlerManager {
         setUpChainElements();
     }
 
-    public void forwardLayerSchema(LayerSchemaDTO schemaDTO,
-            GPLayerTreeModel layer) {
+    public void forwardLayerSchema(LayerSchemaDTO schemaDTO, GPLayerBean layer) {
         this.nullHandler.layerSchemaParser(schemaDTO, layer);
     }
 

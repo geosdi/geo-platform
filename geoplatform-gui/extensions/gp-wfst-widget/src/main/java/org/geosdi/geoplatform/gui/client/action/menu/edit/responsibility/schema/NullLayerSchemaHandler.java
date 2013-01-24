@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
@@ -51,15 +51,15 @@ public class NullLayerSchemaHandler extends LayerSchemaParserHandler {
 
     @Override
     public void layerSchemaParser(LayerSchemaDTO schemaDTO,
-            GPLayerTreeModel layer) {
+            GPLayerBean layer) {
         if (schemaDTO == null) {
-            showAlertMessage(layer);
+            this.showAlertMessage(layer);
         } else {
             super.forwardLayerSchema(schemaDTO, layer);
         }
     }
 
-    private void showAlertMessage(GPLayerTreeModel layer) {
+    private void showAlertMessage(GPLayerBean layer) {
         String alertMessage = "The Layer " + layer.getName()
                 + " isn't a Vector.";
         GeoPlatformMessage.alertMessage(

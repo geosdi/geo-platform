@@ -42,8 +42,8 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTy
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  *
@@ -62,7 +62,7 @@ public class EditWFSAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent e) {
-        final GPLayerTreeModel layer = (GPLayerTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
+        final GPLayerBean layer = (GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem();
 
         LayoutManager.getInstance().getStatusMap().setBusy(
                 "Checking if " + layer.getName() + " is a Vector Layer.");

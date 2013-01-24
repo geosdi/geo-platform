@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher;
 
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
@@ -44,5 +44,5 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
  */
 public interface DescribeFeatureDispatcher {
 
-    void dispatchDescribeFeatureRequest(GPLayerTreeModel layer);
+    void dispatchDescribeFeatureRequest(GPLayerBean layer);
 }

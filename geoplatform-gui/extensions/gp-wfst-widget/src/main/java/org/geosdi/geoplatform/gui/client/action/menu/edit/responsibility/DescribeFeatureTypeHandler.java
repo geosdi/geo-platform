@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
 
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  * <p>This Handler will make a Describe FeatureType Request to determine whether
@@ -55,7 +55,7 @@ public class DescribeFeatureTypeHandler extends LayerTypeHandler {
     }
 
     @Override
-    public void layerType(GPLayerTreeModel layer) {
+    public void layerType(GPLayerBean layer) {
         System.out.println(
                 "DescribeFeatureTypeHandler @@@@@@@@@@@@@@@@@@@@@@@@");
         this.featureDispatcher.dispatchDescribeFeatureRequest(layer);

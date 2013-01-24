@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
 
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
@@ -54,7 +54,7 @@ public class LayerTypeHandlerManager {
         setUpChainElements();
     }
 
-    public void forwardLayerType(GPLayerTreeModel layer) {
+    public void forwardLayerType(GPLayerBean layer) {
         this.rasterType.layerType(layer);
     }
 

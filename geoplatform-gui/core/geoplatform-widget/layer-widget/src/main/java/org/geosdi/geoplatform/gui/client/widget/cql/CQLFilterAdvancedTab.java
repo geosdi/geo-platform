@@ -45,8 +45,8 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
-import org.geosdi.geoplatform.gui.client.widget.cql.button.BetweenCQLButton;
 import org.geosdi.geoplatform.gui.client.widget.cql.button.BBOXCQLButton;
+import org.geosdi.geoplatform.gui.client.widget.cql.button.BetweenCQLButton;
 import org.geosdi.geoplatform.gui.client.widget.cql.button.INCQLButton;
 import org.geosdi.geoplatform.gui.client.widget.cql.button.TimeCQLButton;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLayerAttributesComboBox;
@@ -256,7 +256,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         super.add(spatialPanel);
         super.add(functionPanel);
         this.filterTextArea.setSize(CQLFilterTabWidget.TAB_WIDGET_WIDTH,
-                CQLFilterTabWidget.TAB_WIDGET_HEIGHT);
+                CQLFilterTabWidget.TAB_WIDGET_HEIGHT-80);
         super.add(this.filterTextArea, new FormData("98%"));
     }
 

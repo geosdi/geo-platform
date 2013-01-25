@@ -777,7 +777,7 @@
             <dependency>
                 <groupId>org.apache.ws.security</groupId>
                 <artifactId>wss4j</artifactId>
-                <version>1.6.8</version>
+                <version>1.6.9</version>
             </dependency>
             
             <dependency>
@@ -1555,8 +1555,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         
-        <cxf-version>2.7.1</cxf-version>
-        <spring-version>3.2.0.RELEASE</spring-version>
+        <cxf-version>2.7.2</cxf-version>
+        <spring-version>3.2.1.RELEASE</spring-version>
 
         <httpcomponents-core-version>4.2.3</httpcomponents-core-version>
         <httpcomponents-client-version>4.2.3</httpcomponents-client-version>

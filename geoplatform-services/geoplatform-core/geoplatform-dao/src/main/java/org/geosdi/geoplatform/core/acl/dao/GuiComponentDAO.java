@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.core.acl.dao;
 
 import java.util.List;
-
 import org.geosdi.geoplatform.core.acl.GuiComponent;
 
 /**
@@ -58,4 +57,6 @@ public interface GuiComponentDAO {
     public boolean removeById(Long id);
 
     public GuiComponent findByComponentId(String componentId);
+
+    public List<String> findAllGuiComponentIDs();
 }

@@ -159,7 +159,7 @@ class AclServiceImpl {
      * @see GeoPlatformService#getAllGuiComponentIDs()
      */
     public List<String> getAllGuiComponentIDs() {
-        return GuiComponentIDs.LIST_ALL;
+        return guiComponentDao.findAllGuiComponentIDs();
     }
 
     /**

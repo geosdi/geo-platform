@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
@@ -82,7 +81,7 @@ public class MapWidgetUI implements EntryPoint {
 
     private void addMapToolbarAction() {
         ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
-        toolbarRegistar.put(GuiComponentIDs.ZOOM_IN,
+        toolbarRegistar.put("ZoomIn",
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -90,7 +89,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        toolbarRegistar.put(GuiComponentIDs.ZOOM_OUT,
+        toolbarRegistar.put("ZoomOut",
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -98,7 +97,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        toolbarRegistar.put(GuiComponentIDs.ZOOM_PREVIOUS,
+        toolbarRegistar.put("ZoomPrevious",
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -106,7 +105,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        toolbarRegistar.put(GuiComponentIDs.ZOOM_NEXT,
+        toolbarRegistar.put("ZoomNext",
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -114,7 +113,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        toolbarRegistar.put(GuiComponentIDs.GET_FEATURE_INFO,
+        toolbarRegistar.put("GetFeatureInfo",
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -122,7 +121,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        toolbarRegistar.put(GuiComponentIDs.MEASURE,
+        toolbarRegistar.put("Measure",
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -130,7 +129,7 @@ public class MapWidgetUI implements EntryPoint {
                     }
                 });
 
-        toolbarRegistar.put(GuiComponentIDs.MEASURE_AREA,
+        toolbarRegistar.put("MeasureArea",
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -139,14 +138,14 @@ public class MapWidgetUI implements EntryPoint {
                 });
 
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
-        menuRegistar.put(GuiComponentIDs.ABOUT_GEOPLATFORM,
+        menuRegistar.put("aboutGeoPlatform",
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {
                         return new AboutGPAction();
                     }
                 });
-        menuRegistar.put(GuiComponentIDs.VIEWPORT,
+        menuRegistar.put("viewport",
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {

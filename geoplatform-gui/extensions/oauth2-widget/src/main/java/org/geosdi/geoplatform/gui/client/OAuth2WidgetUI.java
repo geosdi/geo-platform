@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
@@ -62,7 +61,7 @@ public class OAuth2WidgetUI implements EntryPoint {
 
     private void addGoogleLoginAction() {
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
-        menuRegistar.put(GuiComponentIDs.GOOGLE_SIGN_ON_BUTTON,
+        menuRegistar.put("googleSignOnButton",
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {

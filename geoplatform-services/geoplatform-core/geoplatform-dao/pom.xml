@@ -185,71 +185,6 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
-        <!-- GeoAPI and its dependencies 
-        <dependency>
-            <groupId>org.opengis</groupId>
-            <artifactId>geoapi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.opengis</groupId>
-            <artifactId>geoapi-dummy-pending</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.opengis</groupId>
-            <artifactId>geoapi-pending</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.java.dev.jsr-275</groupId>
-            <artifactId>jsr-275</artifactId>
-        </dependency>-->
-
-        <!-- GEOTOOLS -->
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-main</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-wms</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-wfs</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-referencing</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-metadata</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-shapefile</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-epsg-extension</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-epsg-wkt</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- HIBERNATE -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -280,11 +215,6 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
         </dependency>
         
         <dependency>

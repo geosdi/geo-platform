@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,32 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
-
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.PreviewKmlTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginButton;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
+package org.geosdi.geoplatform.configurator.cxf;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class PreviewKmlTreeToolbarPlugin extends TreeToolbarPluginButton {
+public interface InterceptorStrategyBean {
 
-    @Override
-    public String getId() {
-        return "PREVIEW_KML";
-    }
+    String getLoggingStrategy();
 
-    @Override
-    public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.END_REGION;
-    }
+    String getSecurityStrategy();
 
-    @Override
-    protected ToolbarLayerTreeAction getTreeAction(TreePanel treePanel) {
-        return new PreviewKmlTreeAction(treePanel);
-    }
+    String getUsernameTokenUser();
+    
+    String getClientKeystoreUser();
+
+    String getServerKeystoreUser();
 }

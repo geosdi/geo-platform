@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
@@ -83,7 +82,7 @@ public class Geocoding implements EntryPoint {
 
     private void addReverseGeocodingAction() {
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
-        menuRegistar.put(GuiComponentIDs.GEOCODING,
+        menuRegistar.put("geocoding",
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {
@@ -92,7 +91,7 @@ public class Geocoding implements EntryPoint {
                 });
 
         ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
-        toolbarRegistar.put(GuiComponentIDs.GOOGLE_REVERSE_GEOCODING,
+        toolbarRegistar.put("googleReverseGeocoding",
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -100,7 +99,7 @@ public class Geocoding implements EntryPoint {
                     }
                 });
 
-        toolbarRegistar.put(GuiComponentIDs.YAHOO_REVERSE_GEOCODING,
+        toolbarRegistar.put("yahooReverseGeocoding",
                 new ToolbarActionCreator() {
                     @Override
                     public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {

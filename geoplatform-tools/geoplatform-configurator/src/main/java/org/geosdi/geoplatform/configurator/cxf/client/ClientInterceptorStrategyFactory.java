@@ -37,11 +37,15 @@ package org.geosdi.geoplatform.configurator.cxf.client;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.handler.WSHandlerConstants;
 import org.geosdi.geoplatform.configurator.cxf.AbstractInterceptorStrategyFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -49,10 +53,18 @@ import org.geosdi.geoplatform.configurator.cxf.AbstractInterceptorStrategyFactor
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@Component(value = "clientInterceptorStrategyFactory")
 public class ClientInterceptorStrategyFactory extends AbstractInterceptorStrategyFactory {
 
-    private String clientPrivateKeyPropertiesFile;
-    private String serverPublicKeyPropertiesFile;
+    @Autowired
+    @Qualifier(value = "clientStrategyBean")
+    private ClientStrategyBean bean;
+
+    @PostConstruct
+    @Override
+    public void init() {
+        super.setStrategyBean(bean);
+    }
 
     /**
      * Security
@@ -70,10 +82,11 @@ public class ClientInterceptorStrategyFactory extends AbstractInterceptorStrateg
     private Map<String, Object> createUsernameTokenInterceptor() {
         Map<String, Object> props = new HashMap<String, Object>();
 
-        props.put(WSHandlerConstants.USER, super.usernameTokenUser);
+        props.put(WSHandlerConstants.USER, bean.getUsernameTokenUser());
         props.put(WSHandlerConstants.PASSWORD_TYPE, WSConstants.PW_DIGEST);
         props.put(WSHandlerConstants.ACTION, WSHandlerConstants.USERNAME_TOKEN);
-        props.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
+        props.put(WSHandlerConstants.PW_CALLBACK_CLASS,
+                ClientKeystorePasswordCallback.class.getName());
 
         return props;
     }
@@ -83,8 +96,10 @@ public class ClientInterceptorStrategyFactory extends AbstractInterceptorStrateg
         Map<String, Object> inProps = new HashMap<String, Object>();
 
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
-        inProps.put(WSHandlerConstants.DEC_PROP_FILE, this.clientPrivateKeyPropertiesFile);
-        inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
+        inProps.put(WSHandlerConstants.DEC_PROP_FILE,
+                bean.getClientPrivateKeyPropertiesFile());
+        inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS,
+                ClientKeystorePasswordCallback.class.getName());
 
         return new WSS4JInInterceptor(inProps);
     }
@@ -94,8 +109,10 @@ public class ClientInterceptorStrategyFactory extends AbstractInterceptorStrateg
         Map<String, Object> outProps = new HashMap<String, Object>();
 
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
-        outProps.put(WSHandlerConstants.ENC_PROP_FILE, this.serverPublicKeyPropertiesFile);
-        outProps.put(WSHandlerConstants.ENCRYPTION_USER, super.serverKeystoreUser);
+        outProps.put(WSHandlerConstants.ENC_PROP_FILE,
+                bean.getServerPublicKeyPropertiesFile());
+        outProps.put(WSHandlerConstants.ENCRYPTION_USER,
+                bean.getServerKeystoreUser());
 
         return new WSS4JOutInterceptor(outProps);
     }
@@ -105,7 +122,8 @@ public class ClientInterceptorStrategyFactory extends AbstractInterceptorStrateg
         Map<String, Object> inProps = new HashMap<String, Object>();
 
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
-        inProps.put(WSHandlerConstants.SIG_PROP_FILE, this.serverPublicKeyPropertiesFile);
+        inProps.put(WSHandlerConstants.SIG_PROP_FILE,
+                bean.getServerPublicKeyPropertiesFile());
 
         return new WSS4JInInterceptor(inProps);
     }
@@ -115,9 +133,11 @@ public class ClientInterceptorStrategyFactory extends AbstractInterceptorStrateg
         Map<String, Object> outProps = new HashMap<String, Object>();
 
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
-        outProps.put(WSHandlerConstants.USER, super.clientKeystoreUser);
-        outProps.put(WSHandlerConstants.SIG_PROP_FILE, this.clientPrivateKeyPropertiesFile);
-        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
+        outProps.put(WSHandlerConstants.USER, bean.getClientKeystoreUser());
+        outProps.put(WSHandlerConstants.SIG_PROP_FILE,
+                bean.getClientPrivateKeyPropertiesFile());
+        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS,
+                ClientKeystorePasswordCallback.class.getName());
 
         return new WSS4JOutInterceptor(outProps);
     }
@@ -131,10 +151,13 @@ public class ClientInterceptorStrategyFactory extends AbstractInterceptorStrateg
         sb.append(WSHandlerConstants.SIGNATURE + " ");
         sb.append(WSHandlerConstants.ENCRYPT);
         inProps.put(WSHandlerConstants.ACTION, sb.toString());
-        inProps.put(WSHandlerConstants.SIG_PROP_FILE, this.serverPublicKeyPropertiesFile);
-        inProps.put(WSHandlerConstants.DEC_PROP_FILE, this.clientPrivateKeyPropertiesFile);
+        inProps.put(WSHandlerConstants.SIG_PROP_FILE,
+                bean.getServerPublicKeyPropertiesFile());
+        inProps.put(WSHandlerConstants.DEC_PROP_FILE,
+                bean.getClientPrivateKeyPropertiesFile());
 
-        inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
+        inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS,
+                ClientKeystorePasswordCallback.class.getName());
 
         return new WSS4JInInterceptor(inProps);
     }
@@ -148,30 +171,23 @@ public class ClientInterceptorStrategyFactory extends AbstractInterceptorStrateg
         sb.append(WSHandlerConstants.SIGNATURE + " ");
         sb.append(WSHandlerConstants.ENCRYPT);
         outProps.put(WSHandlerConstants.ACTION, sb.toString());
-        outProps.put(WSHandlerConstants.USER, super.clientKeystoreUser);
-        outProps.put(WSHandlerConstants.SIG_PROP_FILE, this.clientPrivateKeyPropertiesFile);
-        outProps.put(WSHandlerConstants.ENC_PROP_FILE, this.serverPublicKeyPropertiesFile);
-        outProps.put(WSHandlerConstants.ENCRYPTION_USER, super.serverKeystoreUser);
+        outProps.put(WSHandlerConstants.USER, bean.getClientKeystoreUser());
+        outProps.put(WSHandlerConstants.SIG_PROP_FILE,
+                bean.getClientPrivateKeyPropertiesFile());
+        outProps.put(WSHandlerConstants.ENC_PROP_FILE,
+                bean.getServerPublicKeyPropertiesFile());
+        outProps.put(WSHandlerConstants.ENCRYPTION_USER,
+                bean.getServerKeystoreUser());
 
 //        outProps.put("signatureKeyIdentifier", "DirectReference");
 
-        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
+        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS,
+                ClientKeystorePasswordCallback.class.getName());
 
 //        outProps.put("signatureParts", "{Element}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body");
 //        outProps.put("encryptionParts", "{Element}{http://www.w3.org/2000/09/xmldsig#}Signature;{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body");
 //        outProps.put("encryptionParts", "{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body");
 //        outProps.put("encryptionSymAlgorithm", "http://www.w3.org/2001/04/xmlenc#tripledes-cbc");
         return new WSS4JOutInterceptor(outProps);
-    }
-
-    /**
-     * Setter
-     */
-    public void setClientPrivateKeyPropertiesFile(String clientPrivateKeyPropertiesFile) {
-        this.clientPrivateKeyPropertiesFile = clientPrivateKeyPropertiesFile;
-    }
-
-    public void setServerPublicKeyPropertiesFile(String serverPublicKeyPropertiesFile) {
-        this.serverPublicKeyPropertiesFile = serverPublicKeyPropertiesFile;
     }
 }

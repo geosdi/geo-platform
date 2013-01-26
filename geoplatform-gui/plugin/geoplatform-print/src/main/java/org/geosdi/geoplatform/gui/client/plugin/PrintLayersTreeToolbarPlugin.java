@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.plugin;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginButton;
@@ -50,7 +49,7 @@ public class PrintLayersTreeToolbarPlugin extends TreeToolbarPluginButton {
 
     @Override
     public String getId() {
-        return GuiComponentIDs.PRINT_LAYERS;
+        return "PRINT_LAYERS";
     }
 
     @Override

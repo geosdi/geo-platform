@@ -62,20 +62,26 @@ public abstract class GPAbstractWSClientConnector<E> implements
     protected void create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
 
-        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingInInterceptor());
-        factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityInInterceptor());
+        factory.getInInterceptors().add(
+                this.clientInterceptorStrategyFactory.getLoggingInInterceptor());
+        factory.getInInterceptors().add(
+                this.clientInterceptorStrategyFactory.getSecurityInInterceptor());
 
-        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
-        factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
+        factory.getOutInterceptors().add(
+                this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
+        factory.getOutInterceptors().add(
+                this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         if (serviceClass == null) {
-            throw new IllegalArgumentException("The Parameter Service Class can't be null.");
+            throw new IllegalArgumentException(
+                    "The Parameter Service Class can't be null.");
         }
 
         factory.setServiceClass(this.serviceClass);
 
         if (getAddress() == null) {
-            throw new IllegalArgumentException("The Parameter Address can't be null.");
+            throw new IllegalArgumentException(
+                    "The Parameter Address can't be null.");
         }
 
         factory.setAddress(getAddress());

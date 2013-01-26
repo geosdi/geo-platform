@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.core.acl.AclClass;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
@@ -328,12 +327,12 @@ class AclServiceImpl {
             }
         }
 
-        for (String componentID : GuiComponentIDs.LIST_ALL) {
-            if (!permissionMap.containsKey(componentID)) {
-                logger.debug("\n*** NONE added: {} ***", componentID);
-                permissionMap.put(componentID, null);
-            }
-        }
+//        for (String componentID : GuiComponentIDs.LIST_ALL) {
+//            if (!permissionMap.containsKey(componentID)) {
+//                logger.debug("\n*** NONE added: {} ***", componentID);
+//                permissionMap.put(componentID, null);
+//            }
+//        }
     }
 
     private boolean manageExistingEntry(List<AclEntry> aces, AclSid sid,

@@ -41,7 +41,6 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.client.MapRegistryEnum;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
@@ -178,7 +177,7 @@ public class MapView extends GeoPlatformView {
      */
     public void userChangeHisName(AppEvent event) {
         ToolBar toolBar = buttonBar.getToolBar();
-        Component component = toolBar.getItemByItemId(GuiComponentIDs.USER_MENU);
+        Component component = toolBar.getItemByItemId("USER_MENU");
         Button button = (Button) component;
         String domain = button.getText();
         button.setText(event.getData().toString() + domain.substring(domain.indexOf("@") - 1));

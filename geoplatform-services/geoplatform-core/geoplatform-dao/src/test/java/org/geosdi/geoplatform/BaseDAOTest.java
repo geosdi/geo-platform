@@ -171,7 +171,6 @@ public abstract class BaseDAOTest {
     private AclSid admin;
     private AclSid user;
     private AclSid viewer;
-    private AclSid sigv;
     //
     private URL url = null;
     private static final String gsAccountUsername = "gsuser";
@@ -457,19 +456,17 @@ public abstract class BaseDAOTest {
         this.insertUser(usernameSuperUserTestAcl, organizationTest, GPRole.ADMIN, GPRole.USER);
         this.insertUser("admin_acl_test", organizationTest, GPRole.ADMIN);
         this.insertUser("user_acl_test", organizationTest, GPRole.USER);
-        //
-        this.insertApplication("SIGV");
     }
 
     private void insertProjects() {
         this.adminProject = this.createProject("admin_project", false, 0,
                                                new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
-                                              new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5)));
+                                              new Date(System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(5)));
         this.viewerProject = this.createProject("viewer_project", false, 0,
-                                                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)));
+                                                new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1)));
         this.gsUserProject = this.createProject("gp_user_project", false, 0,
-                                                new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)));
+                                                new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(3)));
         projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //
         this.insertBindingUserProject(adminTest, adminProject,
@@ -853,23 +850,16 @@ public abstract class BaseDAOTest {
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", user);
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", viewer);
         //
-        this.sigv = new AclSid(true, "SIGV");
-        //
-        logger.debug("\n*** AclSid to INSERT:\n{}\n***", sigv);
-        //
-        sidDAO.persist(superUser, admin, user, viewer, sigv);
+        sidDAO.persist(superUser, admin, user, viewer);
     }
 
     private Map<String, GuiComponent> createGuiComponents() {
         Map<String, GuiComponent> gcMap = new HashMap<String, GuiComponent>();
-        // Gui Components
+
         for (String ID : GuiComponentIDs.LIST_ALL) {
             gcMap.put(ID, new GuiComponent(ID));
         }
-        for (String ID : GuiComponentIDs.LIST_OWN_SIGV) {
-            gcMap.put(ID, new GuiComponent(ID));
-        }
-        //
+
         guiComponentDAO.persist(gcMap.values().toArray(new GuiComponent[gcMap.size()]));
 
         return gcMap;
@@ -877,18 +867,13 @@ public abstract class BaseDAOTest {
 
     private Map<String, AclObjectIdentity> createObjectIdentities(Map<String, GuiComponent> gcMap) {
         Map<String, AclObjectIdentity> objIdMap = new HashMap<String, AclObjectIdentity>();
-        // Object Identities
+
         for (String componentID : GuiComponentIDs.LIST_ALL) {
             Long id = gcMap.get(componentID).getId();
             // SuperUser is the owner of all Object Identities
             objIdMap.put(componentID, new AclObjectIdentity(gcClass, id, superUser));
         }
-        for (String componentID : GuiComponentIDs.LIST_OWN_SIGV) {
-            Long id = gcMap.get(componentID).getId();
-            // SuperUser is the owner of all Object Identities
-            objIdMap.put(componentID, new AclObjectIdentity(gcClass, id, superUser));
-        }
-        //
+
         objectIdentityDAO.persist(objIdMap.values().toArray(new AclObjectIdentity[objIdMap.size()]));
 
         return objIdMap;
@@ -917,13 +902,6 @@ public abstract class BaseDAOTest {
                 // Ace Order is 3 because the entries of admin and user should be added before
                 entriesMap.put(GPRole.VIEWER + e.getKey(),
                                new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
-            }
-        }
-        // SIGV Application
-        for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_APPLICATION_SIGV.entrySet()) {
-            if (e.getValue() != null) {
-                entriesMap.put("SIGV" + e.getKey(),
-                               new AclEntry(objIdMap.get(e.getKey()), 4, sigv, enable, e.getValue()));
             }
         }
         //

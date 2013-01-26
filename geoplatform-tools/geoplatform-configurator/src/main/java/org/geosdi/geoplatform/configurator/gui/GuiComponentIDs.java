@@ -122,17 +122,11 @@ public class GuiComponentIDs {
     public static final String PREVIEW_KML = "PREVIEW_KML";
     public static final String LAYER_STYLER = "LAYER_STYLER";
     /**
-     * Own of SIVG
-     */
-    public static final String COMMIT = "Commit";
-    /**
      * Collections of GuiComponent
      */
     public static final List<String> LIST_ALL;
     public static final Map<String, Boolean> MAP_USER;
     public static final Map<String, Boolean> MAP_VIEWER;
-    public static final List<String> LIST_OWN_SIGV; // Only for SIGV
-    public static final Map<String, Boolean> MAP_APPLICATION_SIGV;
 
     private GuiComponentIDs() {
     }
@@ -314,40 +308,5 @@ public class GuiComponentIDs {
         mapViewer.put(LAYER_STYLER, Boolean.TRUE);
         //
         MAP_VIEWER = Collections.unmodifiableMap(mapViewer);
-        /**
-         * SIGV only
-         */
-        List<String> sigv = Lists.newArrayList();
-        //
-        sigv.add(COMMIT);
-        //
-        LIST_OWN_SIGV = Collections.unmodifiableList(sigv);
-        /**
-         * SIGV Application
-         */
-        Map<String, Boolean> mapSigv = Maps.newHashMap();
-        // Menubar
-        mapSigv.put(ABOUT_GEOPLATFORM, Boolean.TRUE);
-        mapSigv.put(GEOCODING, Boolean.TRUE);
-        mapSigv.put(LAYER_MENU, Boolean.TRUE);
-        // Toolbar
-        mapSigv.put(GEO_PLATFORM_INFO_APP, Boolean.TRUE);
-        mapSigv.put(ZOOM_IN, Boolean.TRUE);
-        mapSigv.put(ZOOM_OUT, Boolean.TRUE);
-        mapSigv.put(ZOOM_PREVIOUS, Boolean.TRUE);
-        mapSigv.put(ZOOM_NEXT, Boolean.TRUE);
-        mapSigv.put(GOTO_XY, Boolean.TRUE);
-        mapSigv.put(CHANGE_BASE_LAYER, Boolean.TRUE);
-        mapSigv.put(GOOGLE_REVERSE_GEOCODING, Boolean.TRUE);
-        mapSigv.put(YAHOO_REVERSE_GEOCODING, Boolean.TRUE);
-        mapSigv.put(COMMIT, Boolean.TRUE);
-        //
-        mapSigv.put(ADD_FOLDER, Boolean.TRUE);
-        mapSigv.put(ADD_LAYERS, Boolean.TRUE);
-        mapSigv.put(DELETE_ELEMENT, Boolean.TRUE);
-//        mapSigv.put(SAVE_TREE, Boolean.TRUE);
-        mapSigv.put(PRINT_LAYERS, Boolean.TRUE);
-        //
-        MAP_APPLICATION_SIGV = Collections.unmodifiableMap(mapSigv);
     }
 }

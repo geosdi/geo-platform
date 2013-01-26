@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.initializer;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,7 +42,7 @@ import org.junit.Test;
  * @author giuseppe
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class BootstrapDAOTest extends BaseDAOTest {
+public class BootstrapInitializerTest extends BaseInitializerTest {
 
     /**
      * Put the DB into a substantial state.

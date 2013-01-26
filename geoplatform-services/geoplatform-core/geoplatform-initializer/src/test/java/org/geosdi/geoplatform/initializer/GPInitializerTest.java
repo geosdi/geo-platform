@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.initializer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,7 +60,7 @@ import org.springframework.security.acls.domain.BasePermission;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GPDAOTest extends BaseDAOTest {
+public class GPInitializerTest extends BaseInitializerTest {
 
     // User
     private String usernameUserPositionTest = "user_position_test";

@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.initializer;
 
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
@@ -52,7 +52,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.core.acl.AclClass;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
@@ -96,7 +95,7 @@ import org.xml.sax.SAXException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-TEST.xml",
     "classpath:applicationContext.xml"})
-public abstract class BaseDAOTest {
+public abstract class BaseInitializerTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //

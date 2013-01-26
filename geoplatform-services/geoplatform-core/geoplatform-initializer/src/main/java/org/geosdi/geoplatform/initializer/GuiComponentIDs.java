@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.gui;
+package org.geosdi.geoplatform.initializer;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

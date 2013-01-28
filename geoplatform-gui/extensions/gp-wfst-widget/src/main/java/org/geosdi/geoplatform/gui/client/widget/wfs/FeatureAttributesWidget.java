@@ -113,8 +113,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void setPanelProperties() {
-        super.head.setText("Feature Attributes");
-        super.head.setStyleAttribute("textAlign", "center");
+        super.setHeaderVisible(false);
     }
 
     @Override

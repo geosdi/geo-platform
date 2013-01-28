@@ -70,6 +70,7 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 public class FeatureWidget extends GeoPlatformWindow
         implements IFeatureWidget, ActionEnableHandler {
 
+    private FeatureSelectionWidget selectionWidget;
     private FeatureMapWidget mapWidget;
     private FeatureAttributesWidget attributesWidget;
     private FeatureStatusBar statusBar;
@@ -84,11 +85,14 @@ public class FeatureWidget extends GeoPlatformWindow
     private FeatureResetAttributesEvent resetEvent = new FeatureResetAttributesEvent();
 
     @Inject
-    public FeatureWidget(FeatureMapWidget mapWidget,
+    public FeatureWidget(
+            FeatureSelectionWidget selectionWidget,
+            FeatureMapWidget mapWidget,
             FeatureAttributesWidget attributesWidget,
             FeatureStatusBar statusBar,
             GPEventBus bus) {
         super(true);
+        this.selectionWidget = selectionWidget;
         this.mapWidget = mapWidget;
         this.attributesWidget = attributesWidget;
         this.statusBar = statusBar;
@@ -98,6 +102,7 @@ public class FeatureWidget extends GeoPlatformWindow
 
     @Override
     public void addComponent() {
+        this.addSelectionWidget();
         this.addMapWidget();
         this.addAttributesWidget();
         this.createStatusBar();
@@ -120,17 +125,24 @@ public class FeatureWidget extends GeoPlatformWindow
         super.setLayout(new BorderLayout());
     }
 
+    private void addSelectionWidget() {
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST, 300);
+        layoutData.setMargins(new Margins(0));
+
+        super.add(this.selectionWidget, layoutData);
+    }
+
     private void addMapWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST, 700);
+        // The notifyShow method is called 1 times at the first show 
+        // only in the center region, otherwise 2 times.        
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER, 700);
         layoutData.setMargins(new Margins(0));
 
         super.add(this.mapWidget, layoutData);
     }
 
     private void addAttributesWidget() {
-        // The notifyShow method is called 1 times at the first show 
-        // only in the center region, otherwise 2 times.
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER);
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH);
         layoutData.setMargins(new Margins(0));
 
         super.add(this.attributesWidget, layoutData);
@@ -220,6 +232,7 @@ public class FeatureWidget extends GeoPlatformWindow
                 this.schemaDTO.getAttributes());
 
         this.attributesWidget.setAttributes(attributes);
+        this.selectionWidget.setAttributes(attributes);
     }
 
     @Override

@@ -54,10 +54,8 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
-import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail.AttributeDetailKeyValue;
+import org.geosdi.geoplatform.gui.client.model.wfs.AttributeValuesDetail;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.validator.TypeValidator;
-import org.geosdi.geoplatform.gui.client.widget.validator.TypeValidatorController;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
@@ -78,8 +76,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     //
     private List<AttributeDetail> attributes;
     //
-    private ListStore<AttributeDetail> store;
-    private EditorGrid<AttributeDetail> grid;
+    private ListStore<AttributeValuesDetail> store;
+    private EditorGrid<AttributeValuesDetail> grid;
     //
     private VectorFeature feature;
     private GetFeatureControlBuilder featureControlBuilder;
@@ -103,9 +101,13 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     @Override
-    public void addComponent() {
+    protected void beforeRender() {
         this.createStore();
         this.createEditorGrid();
+    }
+
+    @Override
+    public void addComponent() {
     }
 
     @Override
@@ -114,78 +116,81 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void setPanelProperties() {
+//        super.setCollapsible(true);
         super.setHeaderVisible(false);
         super.setScrollMode(Style.Scroll.AUTO);
     }
 
     @Override
     public void reset() {
-        grid.stopEditing(true);
-        store.removeAll();
-        this.feature = null;
+        store = null;
+        grid = null;
+        feature = null;
         bus.fireEvent(new ActionEnableEvent(false));
+        super.setVScrollPosition(0);
     }
 
     private void createStore() {
-        store = new ListStore<AttributeDetail>();
-        store.addStoreListener(new StoreListener<AttributeDetail>() {
+        store = new ListStore<AttributeValuesDetail>();
+        store.addStoreListener(new StoreListener<AttributeValuesDetail>() {
             @Override
-            public void storeClear(StoreEvent<AttributeDetail> se) {
+            public void storeClear(StoreEvent<AttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(false));
             }
 
             @Override
-            public void storeUpdate(StoreEvent<AttributeDetail> se) {
+            public void storeUpdate(StoreEvent<AttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(true));
             }
         });
     }
 
     private void createEditorGrid() {
-        grid = new EditorGrid<AttributeDetail>(store, this.prepareColumnModel());
-        grid.setAutoExpandColumn(AttributeDetailKeyValue.NAME.name());
+        grid = new EditorGrid<AttributeValuesDetail>(store, this.prepareColumnModel());
+        grid.setAutoExpandColumn(attributes.get(0).getName());
         grid.setBorders(true);
         grid.setStripeRows(true);
         grid.setColumnLines(true);
         grid.setColumnResize(false);
-        grid.setHeight(600);
+
+//        grid.setHeight(600);
+        grid.setAutoHeight(true);
+        grid.setAutoWidth(true);
+
+//        grid.getView().setAutoFill(true);
+        grid.getView().setForceFit(true);
 
         super.add(grid);
     }
 
     private ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = Lists.newArrayListWithCapacity(2);
+        List<ColumnConfig> configs = Lists.newArrayListWithCapacity(attributes.size());
 
-        ColumnConfig nameColumn = new ColumnConfig();
-        nameColumn.setId(AttributeDetailKeyValue.NAME.name());
-        nameColumn.setHeader("Name");
-        nameColumn.setWidth(150);
-        nameColumn.setFixed(true);
-        configs.add(nameColumn);
-
-        TextField<String> valueTextField = new TextField<String>();
-        valueTextField.setValidator(this.attributeValuesValidator());
-        valueTextField.setAutoValidate(true);
-        CellEditor valueEditor = new CellEditor(valueTextField) {
-            @Override
-            public Object postProcessValue(Object value) {
-                if (value == null) {
+        for (AttributeDetail att : attributes) {
+            TextField<String> valueTextField = new TextField<String>();
+            valueTextField.setValidator(this.attributeValuesValidator());
+            valueTextField.setAutoValidate(true);
+            CellEditor valueEditor = new CellEditor(valueTextField) {
+                @Override
+                public Object postProcessValue(Object value) {
+                    if (value == null) {
+                        return value;
+                    }
+                    bus.fireEvent(new FeatureStatusBarEvent(
+                            "The value \"" + value + "\" is correct",
+                            FeatureStatusBarType.STATUS_OK));
                     return value;
                 }
-                bus.fireEvent(new FeatureStatusBarEvent(
-                        "The value \"" + value + "\" is correct",
-                        FeatureStatusBarType.STATUS_OK));
-                return value;
-            }
-        };
+            };
 
-        ColumnConfig valueColumn = new ColumnConfig();
-        valueColumn.setId(AttributeDetailKeyValue.VALUE.name());
-        valueColumn.setHeader("Value");
-        valueColumn.setWidth(150);
-        valueColumn.setFixed(true);
-        valueColumn.setEditor(valueEditor);
-        configs.add(valueColumn);
+            ColumnConfig valueColumn = new ColumnConfig();
+            String name = att.getName();
+            valueColumn.setId(name);
+            valueColumn.setHeader(name);
+            valueColumn.setEditor(valueEditor);
+
+            configs.add(valueColumn);
+        }
 
         return new ColumnModel(configs);
     }
@@ -222,9 +227,9 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         bus.fireEvent(new ActionEnableEvent(false));
     }
 
+    // TODO For more that one istance of feature
     @Override
-    public void setValues(Map<String, String> attributeValues,
-            VectorFeature feature) {
+    public void setValues(Map<String, String> attributeValues, VectorFeature feature) {
         assert (attributeValues != null) : "Attribute values must not be null.";
         assert (attributes != null) : "Attributes must not be null.";
 
@@ -232,20 +237,21 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         grid.mask("Retrieve feature attributes");
 
-        for (AttributeDetail attribute : this.attributes) {
-            String value = attributeValues.get(attribute.getName());
-            attribute.setValue(value);
+        AttributeValuesDetail attValues = new AttributeValuesDetail();
+        for (AttributeDetail att : attributes) {
+            String value = attributeValues.get(att.getName());
+            attValues.setValue(att.getName(), value);
         }
 
-        this.populateStore();
+        this.populateStore(attValues);
 
         grid.unmask();
     }
 
-    private void populateStore() {
+    private void populateStore(AttributeValuesDetail attValues) {
         assert (attributes != null) : "Attributes must not be null.";
-        store.removeAll(); // TODO It is executed into reset -> notifyHide
-        store.add(this.attributes);
+        store.removeAll();
+        store.add(attValues);
     }
 
     @Override
@@ -265,19 +271,21 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     private Validator attributeValuesValidator() {
         return new Validator() {
             @Override
-            public String validate(Field<?> field,
-                    String value) {
-                AttributeDetail selectedItem = grid.getSelectionModel().getSelectedItem();
-                String type = selectedItem.getType();
-                String typeName = type.substring(type.lastIndexOf(".") + 1);
-//                System.out.println("*** " + typeName + " - value: " + value);
-                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(type);
-                if (!validator.validateType(value)) {
-                    String errorValidation = "The value must be of " + typeName + " type";
-                    bus.fireEvent(new FeatureStatusBarEvent(
-                            errorValidation, FeatureStatusBarType.STATUS_ERROR));
-                    return errorValidation;
-                }
+            public String validate(Field<?> field, String value) {
+//                AttributeValuesDetail selectedItem = grid.getSelectionModel().getSelectedItem();
+//                System.out.println("*** SELECTED " + selectedItem);
+
+//                String type = selectedItem.getType();
+//                String typeName = type.substring(type.lastIndexOf(".") + 1);
+////                System.out.println("*** " + typeName + " - value: " + value);
+//
+//                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(type);
+//                if (!validator.validateType(value)) {
+//                    String errorValidation = "The value must be of " + typeName + " type";
+//                    bus.fireEvent(new FeatureStatusBarEvent(
+//                            errorValidation, FeatureStatusBarType.STATUS_ERROR));
+//                    return errorValidation;
+//                }
                 return null;
             }
         };

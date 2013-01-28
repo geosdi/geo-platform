@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldSetEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.fx.Resizable;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
@@ -104,6 +105,10 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         super.head.setText("Feature Selection");
         super.setBorders(false);
         super.setScrollMode(Style.Scroll.AUTO);
+        
+        super.setCollapsible(true);
+//        Resizable r = new Resizable(this);
+//        r.setDynamic(true);        
     }
 
     private void createFormPanel() {

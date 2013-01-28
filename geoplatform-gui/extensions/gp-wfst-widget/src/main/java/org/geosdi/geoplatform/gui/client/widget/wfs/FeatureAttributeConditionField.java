@@ -36,11 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.util.SwallowEvent;
-import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.AdapterField;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -51,8 +47,10 @@ import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.DeleteAttributeConditionEvent;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
@@ -113,7 +111,7 @@ public class FeatureAttributeConditionField extends MultiField {
         for (OperatorType operator : OperatorType.values()) {
             conditionsCombo.add(operator.toString());
         }
-//        conditionsCombo.setSimpleValue("=");
+//        conditionsCombo.setSimpleValue(OperatorType.EQUAL);
 
         return conditionsCombo;
     }
@@ -129,6 +127,9 @@ public class FeatureAttributeConditionField extends MultiField {
         Button button = new Button("", new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
+                FeatureInjector injector = FeatureInjector.MainInjector.getInstance();
+                GPEventBus bus = injector.getEventBus();
+                bus.fireEvent(new DeleteAttributeConditionEvent(FeatureAttributeConditionField.this));
             }
         });
         button.setToolTip("Delete Condition");

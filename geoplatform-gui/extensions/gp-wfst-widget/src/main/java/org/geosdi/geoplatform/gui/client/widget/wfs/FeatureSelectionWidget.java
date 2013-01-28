@@ -57,13 +57,15 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.DeleteAttributeConditionHandler;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureSelectionWidget extends GeoPlatformContentPanel {
+public class FeatureSelectionWidget extends GeoPlatformContentPanel
+        implements DeleteAttributeConditionHandler {
 
     private GPEventBus bus;
     //
@@ -80,6 +82,7 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel {
     public FeatureSelectionWidget(GPEventBus bus) {
         super(true);
         this.bus = bus;
+        bus.addHandler(DeleteAttributeConditionHandler.TYPE, this);
         this.attributeConditions = Lists.<FeatureAttributeConditionField>newArrayList();
     }
 
@@ -105,65 +108,21 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel {
         formPanel.setBorders(false);
         formPanel.setLayout(new FlowLayout());
 
-//        formPanel.setLayout(new FitLayout());
-//        formPanel.setLayout(new CardLayout());
-//        formPanel.setLayoutData(null);
-//        formPanel.setHeight(300);
-
-//        formPanel.setLabelSeparator("");
-//        formPanel.setHideLabels(true);
-
         formPanel.add(this.createMatchSelection(), new VBoxLayoutData());
-
-        /***********************************************************************/
-        formPanel.add(new FeatureAttributeConditionField(attributes));
-//        final ContentPanel panelConditions = new ContentPanel();
-//        panelConditions.setWidth(250);
-//        panelConditions.setHeaderVisible(false);
-////        panelConditions.setBorders(false);
-//        formPanel.add(panelConditions);
-
-//        final MultiField<FeatureAttributeConditionField> multi = new MultiField<FeatureAttributeConditionField>();
-//        multi.setResizeFields(true); //
-//        formPanel.add(multi);
-
-//        for (int i = 1; i <= 9; i++) {
-//            FeatureAttributeConditionField ex =
-//                    new FeatureAttributeConditionField(attributes);
-////            ex.setVisible(false);
-////            ex.setReadOnly(true);
-//            ex.setName(i + "");
-//            attributeConditions.add(ex); //
-//            formPanel.add(ex);
-//        }
 
         formPanel.setButtonAlign(Style.HorizontalAlignment.LEFT);
         formPanel.addButton(new Button("Add Condition", BasicWidgetResources.ICONS.done(),
                                        new SelectionListener<ButtonEvent>() {
-//            private int count = 0;
-
             @Override
             public void componentSelected(ButtonEvent ce) {
+                FeatureAttributeConditionField attributeCondition =
+                        new FeatureAttributeConditionField(attributes);
+                attributeConditions.add(attributeCondition);
 
-//                if (count == 9) {
-//                    System.out.println("*** MAX 9 conditions");
-//                    return;
-//                }
-//                FeatureAttributeConditionField attributeCondition = attributeConditions.get(count++);
-//                attributeCondition.setVisible(true);
-
-//                attributeConditions.add(attributeCondition);
-
-//                FeatureAttributeConditionField attributeCondition =
-//                        new FeatureAttributeConditionField(attributes);
-
-//                formPanel.add(attributeCondition);
-//                panelConditions.add(attributeCondition);
-//                multi.add(attributeCondition);
+                formPanel.add(attributeCondition);
+                formPanel.layout();
             }
         }));
-        /***********************************************************************/
-
         super.add(formPanel);
     }
 
@@ -236,6 +195,13 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel {
     public void setAttributes(List<AttributeDetail> attributes) {
         assert (attributes != null) : "Attributes must not bu null.";
         this.attributes = attributes;
+    }
+
+    @Override
+    public void deleteCondition(FeatureAttributeConditionField field) {
+        attributeConditions.remove(field);
+        formPanel.remove(field);
+        formPanel.layout();
     }
 
     private enum MatchType {

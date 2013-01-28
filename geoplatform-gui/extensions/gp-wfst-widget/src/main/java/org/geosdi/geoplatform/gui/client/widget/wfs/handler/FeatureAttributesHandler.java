@@ -44,14 +44,17 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface FeatureAttributeValuesHandler extends EventHandler {
+public interface FeatureAttributesHandler extends EventHandler {
 
-    Type<FeatureAttributeValuesHandler> TYPE = new Type<FeatureAttributeValuesHandler>();
+    Type<FeatureAttributesHandler> TYPE = new Type<FeatureAttributesHandler>();
 
-    void setValues(Map<String, String> attributeValues,
-            VectorFeature feature);
+    void setValues(Map<String, String> attributeValues, VectorFeature feature);
 
-    void resetAttributeValues();
+    void resetValues();
+
+    void saveAttributes();
+
+    void resetAttributes();
 
     void successfulTransaction();
 }

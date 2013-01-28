@@ -41,8 +41,8 @@ import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.FeatureMapLayerBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureSelectHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureSelectHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureUnSelectHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -138,7 +138,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel implements
 
     @Override
     public void bind(final GPLayerBean layer, final LayerSchemaDTO schema) {
-        
+
         this.wms = this.mapLayerBuilder.buildLayer(layer);
 
         this.controlFeature = this.featureControlBuilder.buildControl(new GetFeatureModel() {

@@ -36,22 +36,22 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributeValuesHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureTransactionEvent extends GwtEvent<FeatureAttributeValuesHandler> {
+public class FeatureTransactionEvent extends GwtEvent<FeatureAttributesHandler> {
 
     @Override
-    public Type<FeatureAttributeValuesHandler> getAssociatedType() {
-        return FeatureAttributeValuesHandler.TYPE;
+    public Type<FeatureAttributesHandler> getAssociatedType() {
+        return FeatureAttributesHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(FeatureAttributeValuesHandler handler) {
+    protected void dispatch(FeatureAttributesHandler handler) {
         handler.successfulTransaction();
     }
 }

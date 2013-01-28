@@ -52,7 +52,11 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureResetAttributesEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureSaveAttributesEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -63,14 +67,21 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Singleton
-public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
+public class FeatureWidget extends GeoPlatformWindow
+        implements IFeatureWidget, ActionEnableHandler {
 
     private FeatureMapWidget mapWidget;
     private FeatureAttributesWidget attributesWidget;
     private FeatureStatusBar statusBar;
-    private GPEventBus bus;
+    private Button saveButton;
+    private Button resetButton;
+    //
     private GPLayerBean selectedLayer;
     private LayerSchemaDTO schemaDTO;
+    //
+    private GPEventBus bus;
+    private FeatureSaveAttributesEvent saveEvent = new FeatureSaveAttributesEvent();
+    private FeatureResetAttributesEvent resetEvent = new FeatureResetAttributesEvent();
 
     @Inject
     public FeatureWidget(FeatureMapWidget mapWidget,
@@ -82,6 +93,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
         this.attributesWidget = attributesWidget;
         this.statusBar = statusBar;
         this.bus = bus;
+        bus.addHandler(ActionEnableEvent.TYPE, this);
     }
 
     @Override
@@ -94,7 +106,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     @Override
     public void initSize() {
         super.setSize(1000, 650);
-        super.setHeading("GeoPlatform Feature UI");
+        super.setHeading("GeoPlatform WFS-T Widget");
         super.setIcon(BasicWidgetResources.ICONS.vector());
     }
 
@@ -128,8 +140,27 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
         super.setButtonAlign(Style.HorizontalAlignment.LEFT);
 
         super.getButtonBar().add(this.statusBar);
-
         super.getButtonBar().add(new FillToolItem());
+
+        resetButton = new Button("Reset", BasicWidgetResources.ICONS.delete(),
+                                 new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                bus.fireEvent(resetEvent);
+            }
+        });
+        super.addButton(resetButton);
+
+        this.saveButton = new Button("Save", BasicWidgetResources.ICONS.save(),
+                                     new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                bus.fireEvent(saveEvent);
+            }
+        });
+        super.addButton(saveButton);
+
+        this.disableButtons();
 
         Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
                                   new SelectionListener<ButtonEvent>() {
@@ -161,7 +192,7 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
     @Override
     protected void afterShow() {
         super.afterShow();
-        
+
         this.statusBar.setBusy("Loading Layer as WFS");
 
         this.mapWidget.bind(selectedLayer, schemaDTO);
@@ -189,5 +220,24 @@ public class FeatureWidget extends GeoPlatformWindow implements IFeatureWidget {
                 this.schemaDTO.getAttributes());
 
         this.attributesWidget.setAttributes(attributes);
+    }
+
+    @Override
+    public void onActionEnabled(ActionEnableEvent event) {
+        if (event.isEnabled()) {
+            enableButtons();
+        } else {
+            disableButtons();
+        }
+    }
+
+    private void disableButtons() {
+        resetButton.disable();
+        saveButton.disable();
+    }
+
+    private void enableButtons() {
+        resetButton.enable();
+        saveButton.enable();
     }
 }

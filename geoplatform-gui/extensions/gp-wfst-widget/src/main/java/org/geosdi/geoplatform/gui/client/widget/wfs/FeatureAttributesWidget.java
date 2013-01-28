@@ -35,15 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
-import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
@@ -56,7 +52,6 @@ import com.google.gwt.user.client.Timer;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail.AttributeDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
@@ -64,8 +59,9 @@ import org.geosdi.geoplatform.gui.client.widget.validator.TypeValidator;
 import org.geosdi.geoplatform.gui.client.widget.validator.TypeValidatorController;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributeValuesHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
@@ -75,7 +71,7 @@ import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureAttributesWidget extends GeoPlatformContentPanel
-        implements FeatureAttributeValuesHandler {
+        implements FeatureAttributesHandler {
 
     private GPEventBus bus;
     //
@@ -84,8 +80,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     private ListStore<AttributeDetail> store;
     private EditorGrid<AttributeDetail> grid;
     //
-    private Button saveButton;
-    private Button resetButton;
     private VectorFeature feature;
     private GetFeatureControlBuilder featureControlBuilder;
     private WFSProtocolCRUDOptions featureCRUDProtocol;
@@ -99,7 +93,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.featureControlBuilder = theFeatureControlBuilder;
         this.featureCRUDProtocol = theFeatureCRUDProtocol;
 
-        this.bus.addHandler(FeatureAttributeValuesHandler.TYPE, this);
+        this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
     }
 
     public void setAttributes(List<AttributeDetail> attributes) {
@@ -111,7 +105,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     public void addComponent() {
         this.createStore();
         this.createEditorGrid();
-        this.createButtons();
     }
 
     @Override
@@ -129,7 +122,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         grid.stopEditing(true);
         store.removeAll();
         this.feature = null;
-        disableButtons();
+        bus.fireEvent(new ActionEnableEvent(false));
     }
 
     private void createStore() {
@@ -137,12 +130,12 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         store.addStoreListener(new StoreListener<AttributeDetail>() {
             @Override
             public void storeClear(StoreEvent<AttributeDetail> se) {
-                disableButtons();
+                bus.fireEvent(new ActionEnableEvent(false));
             }
 
             @Override
             public void storeUpdate(StoreEvent<AttributeDetail> se) {
-                enableButtons();
+                bus.fireEvent(new ActionEnableEvent(true));
             }
         });
     }
@@ -196,78 +189,36 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         return new ColumnModel(configs);
     }
 
-    private void createButtons() {
-        super.setButtonAlign(Style.HorizontalAlignment.CENTER);
-
-        resetButton = new Button("Reset", BasicWidgetResources.ICONS.delete(),
-                                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                grid.stopEditing(true);
-                store.rejectChanges();
-                disableButtons();
-            }
-        });
-        super.addButton(resetButton);
-
-        this.saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
-                                     new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                saveAttributes();
-            }
-        });
-        super.addButton(saveButton);
-        this.disableButtons();
-    }
-
-    private void disableButtons() {
-        resetButton.disable();
-        saveButton.disable();
-    }
-
-    private void enableButtons() {
-        resetButton.enable();
-        saveButton.enable();
-    }
-
     @Override
-    public void successfulTransaction() {
-        this.bus.fireEvent(new FeatureStatusBarEvent("Successful Transaction",
-                FeatureStatusBarType.STATUS_OK));
-
-        store.commitChanges();
-        disableButtons();
-    }
-
-    private void saveAttributes() {
+    public void saveAttributes() {
         for (Record record : store.getModifiedRecords()) {
             ModelData model = record.getModel();
             AttributeDetail attribute = (AttributeDetail) model;
             feature.getAttributes().setAttribute(attribute.getName(),
-                    attribute.getValue());
+                                                 attribute.getValue());
         }
 
         this.feature.toState(VectorFeature.State.Update);
 
         this.bus.fireEvent(new FeatureStatusBarEvent("Transaction in Progress",
-                FeatureStatusBarType.STATUS_LOADING));
+                                                     FeatureStatusBarType.STATUS_LOADING));
 
         Timer t = new Timer() {
             @Override
             public void run() {
                 featureControlBuilder.getWfsProtocol().commit(feature,
-                        featureCRUDProtocol);
+                                                              featureCRUDProtocol);
             }
         };
 
         t.schedule(2000);
     }
 
-    private void populateStore() {
-        assert (attributes != null) : "Attributes must not be null.";
-        store.removeAll(); // TODO It is executed into reset -> notifyHide
-        store.add(this.attributes);
+    @Override
+    public void resetAttributes() {
+        grid.stopEditing(true);
+        store.rejectChanges();
+        bus.fireEvent(new ActionEnableEvent(false));
     }
 
     @Override
@@ -290,9 +241,24 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         grid.unmask();
     }
 
+    private void populateStore() {
+        assert (attributes != null) : "Attributes must not be null.";
+        store.removeAll(); // TODO It is executed into reset -> notifyHide
+        store.add(this.attributes);
+    }
+
     @Override
-    public void resetAttributeValues() {
+    public void resetValues() {
         this.reset();
+    }
+
+    @Override
+    public void successfulTransaction() {
+        this.bus.fireEvent(new FeatureStatusBarEvent("Successful Transaction",
+                                                     FeatureStatusBarType.STATUS_OK));
+
+        store.commitChanges();
+        bus.fireEvent(new ActionEnableEvent(false));
     }
 
     private Validator attributeValuesValidator() {

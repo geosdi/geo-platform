@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureUnSelectHandler;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 

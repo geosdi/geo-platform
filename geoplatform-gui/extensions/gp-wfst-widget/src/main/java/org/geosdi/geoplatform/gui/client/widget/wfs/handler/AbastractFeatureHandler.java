@@ -33,9 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler;
+package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
 
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureAttributeValuesEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.gwtopenmaps.openlayers.client.event.EventHandler;
 import org.gwtopenmaps.openlayers.client.event.EventObject;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
@@ -45,24 +47,20 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandler extends AbastractFeatureHandler {
-    
-    public FeatureUnSelectHandler(Vector theVectorLayer,
-            GPEventBus bus) {
-        super(theVectorLayer, bus);
+public abstract class AbastractFeatureHandler extends EventHandler {
+
+    protected Vector vectorLayer;
+    //
+    protected GPEventBus bus;
+    protected FeatureAttributeValuesEvent attributeValuesEvent = new FeatureAttributeValuesEvent();
+
+    public AbastractFeatureHandler(Vector theVectorLayer, GPEventBus bus) {
+        this.vectorLayer = theVectorLayer;
+        this.bus = bus;
     }
-    
-    @Override
-    public void onHandle(EventObject eventObject) {
-        VectorFeature vectorFeature = super.getFeatureFromEventObject(
-                eventObject);
-        
-        vectorFeature.toState(VectorFeature.State.Unknown);
-        
-        vectorLayer.removeFeature(vectorFeature);
-        
-        this.attributeValuesEvent.setAttributeValues(null);
-        this.attributeValuesEvent.setFeature(null);
-        super.bus.fireEvent(this.attributeValuesEvent);
+
+    protected VectorFeature getFeatureFromEventObject(EventObject eventObject) {
+        return VectorFeature.narrowToVectorFeature(
+                eventObject.getJSObject().getProperty("feature"));
     }
 }

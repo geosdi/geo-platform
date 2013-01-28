@@ -65,6 +65,6 @@ public interface FeatureInjector extends Ginjector {
     GPEventBus getEventBus();
 
     LayerTypeHandlerManager getLayerTypeHandlerManager();
-    
+
     FeatureWidget getFeatureWidget();
 }

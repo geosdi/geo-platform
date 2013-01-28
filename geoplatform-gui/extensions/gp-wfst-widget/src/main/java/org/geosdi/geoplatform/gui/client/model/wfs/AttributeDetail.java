@@ -104,6 +104,9 @@ public class AttributeDetail extends GeoPlatformBeanModel {
         str.append("name=").append(this.getName());
         str.append(", value=").append(this.getValue());
         str.append(", type=").append(this.getType());
+        str.append(", max=").append(this.getMaxOccurs());
+        str.append(", min=").append(this.getMinOccurs());
+        str.append(", nillable=").append(this.isNillable());
         return str.append('}').toString();
     }
 }

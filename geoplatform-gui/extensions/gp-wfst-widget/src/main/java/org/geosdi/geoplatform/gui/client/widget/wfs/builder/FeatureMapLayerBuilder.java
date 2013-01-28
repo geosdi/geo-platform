@@ -123,7 +123,7 @@ public class FeatureMapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
         return new WMS(vectorBean.getLabel(), dataSource, wmsParams, wmsOption);
     }
 
-    public Bounds generateBoundsTransformationFromMap(GPLayerBean layerBean) {
+    private Bounds generateBoundsTransformationFromMap(GPLayerBean layerBean) {
         Bounds bounds = null;
         if (layerBean.getBbox() != null) {
             BBoxClientInfo bbox = layerBean.getBbox();

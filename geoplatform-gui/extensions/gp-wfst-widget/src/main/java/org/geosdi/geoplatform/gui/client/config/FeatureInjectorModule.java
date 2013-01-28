@@ -57,8 +57,8 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.IFeatureWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.DescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
-import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureSelectHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.feature.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureSelectHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureUnSelectHandler;
 import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -73,50 +73,50 @@ import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureInjectorModule extends AbstractGinModule {
-    
+
     @Override
     protected void configure() {
         bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
-        
+
         bind(IFeatureWidget.class).to(FeatureWidget.class).in(Singleton.class);
-        
+
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
-        
+
         bind(MapWidget.class).toProvider(FeatureMapWidgetProvider.class)
                 .in(Singleton.class);
-        
+
         bind(LayerTypeHandlerManager.class).toProvider(
                 LayerTypeHandlerManagerProvider.class).in(Singleton.class);
-        
+
         bind(DescribeFeatureTypeHandler.class).toProvider(
                 DescribeFeatureTypeHandlerProvider.class).in(Singleton.class);
-        
+
         bind(RasterTypeHandler.class).toProvider(RasterTypeHandlerProvider.class).in(
                 Singleton.class);
-        
+
         bind(DescribeFeatureDispatcher.class).to(
                 GPDescribeFeatureDispatcher.class).in(Singleton.class);
-        
+
         bind(LayerSchemaParserHandler.class).to(ConcreteLayerSchemaHandler.class).in(
                 Singleton.class);
-        
+
         bind(LayerSchemaHandlerManager.class).toProvider(
                 LayerSchemaHandlerManagerProvider.class).in(Singleton.class);
-        
+
         bind(Vector.class).toProvider(VectorLayerProvider.class).in(
                 Singleton.class);
-        
+
         bind(FeatureSelectHandler.class).toProvider(
                 FeatureSelectHandlerProvider.class).in(
                 Singleton.class);
-        
+
         bind(FeatureUnSelectHandler.class).toProvider(
                 FeatureUnSelectHandlerProvider.class).in(
                 Singleton.class);
-        
+
         bind(LonLat.class).toProvider(FeatureLonLatItalyProvider.class).in(
                 Singleton.class);
-        
+
         bind(WFSProtocolCRUDOptions.class).toProvider(
                 FeatureProtocolCRUDOptionsProvider.class).in(Singleton.class);
     }

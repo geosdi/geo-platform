@@ -118,7 +118,7 @@ public class FeatureAttributeConditionField extends MultiField {
 
     private TextField createConditionAttributeField() {
         TextField conditionAttributeField = new TextField();
-        conditionAttributeField.setWidth(80);
+        conditionAttributeField.setWidth(60);
         // TODO Validation
         return conditionAttributeField;
     }

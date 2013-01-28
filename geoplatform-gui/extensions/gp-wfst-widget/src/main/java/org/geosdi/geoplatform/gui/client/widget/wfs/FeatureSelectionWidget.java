@@ -45,10 +45,11 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.LabelField;
+import com.extjs.gxt.ui.client.widget.form.MultiField;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import com.google.common.collect.Lists;
@@ -72,7 +73,9 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     private List<AttributeDetail> attributes;
     //
     private FormPanel formPanel;
-    private SimpleComboBox<String> matchField;
+    private FieldSet matchResultSet;
+    private SimpleComboBox<String> matchComboField;
+    private Button addConditionButton;
     private List<FeatureAttributeConditionField> attributeConditions;
     //
     private Button selectAllButton;
@@ -100,74 +103,79 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     public void setPanelProperties() {
         super.head.setText("Feature Selection");
         super.setBorders(false);
+        super.setScrollMode(Style.Scroll.AUTO);
     }
 
     private void createFormPanel() {
         this.formPanel = new FormPanel();
         formPanel.setHeaderVisible(false);
         formPanel.setBorders(false);
+        formPanel.setBodyBorder(false);
         formPanel.setLayout(new FlowLayout());
 
-        formPanel.add(this.createMatchSelection(), new VBoxLayoutData());
+        formPanel.add(this.createMatchSelection());
 
-        formPanel.setButtonAlign(Style.HorizontalAlignment.LEFT);
-        formPanel.addButton(new Button("Add Condition", BasicWidgetResources.ICONS.done(),
-                                       new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                FeatureAttributeConditionField attributeCondition =
-                        new FeatureAttributeConditionField(attributes);
-                attributeConditions.add(attributeCondition);
-
-                formPanel.add(attributeCondition);
-                formPanel.layout();
-            }
-        }));
         super.add(formPanel);
     }
 
     private FieldSet createMatchSelection() {
-        FieldSet matchResultSet = new FieldSet();
+        matchResultSet = new FieldSet();
         matchResultSet.setHeading("Select by condition");
         matchResultSet.setCheckboxToggle(true);
         matchResultSet.setExpanded(true);
 
-        FormLayout layout = new FormLayout();
-        layout.setLabelWidth(60);
-        layout.setDefaultWidth(160);
-        matchResultSet.setLayout(layout);
-
-        matchField = new SimpleComboBox<String>() {
+        matchComboField = new SimpleComboBox<String>() {
             @Override
             protected void onSelect(SimpleComboValue<String> model, int index) {
                 super.onSelect(model, index);
             }
         };
-        matchField.setToolTip(new ToolTipConfig("Match selection",
-                                                "Change feature selection"));
-        matchField.setFieldLabel("Match");
-        matchField.setEditable(false);
-        matchField.setTypeAhead(true);
-        matchField.setTriggerAction(ComboBox.TriggerAction.ALL);
-        matchField.add(MatchType.ALL.name());
-        matchField.add(MatchType.ANY.name());
-        matchField.add(MatchType.NONE.name());
-        matchField.setSimpleValue(MatchType.ALL.name());
+        matchComboField.setToolTip(new ToolTipConfig("Match selection",
+                                                     "Change feature selection"));
+        matchComboField.setEditable(false);
+        matchComboField.setTypeAhead(true);
+        matchComboField.setTriggerAction(ComboBox.TriggerAction.ALL);
+        matchComboField.add(MatchType.ALL.name());
+        matchComboField.add(MatchType.ANY.name());
+        matchComboField.add(MatchType.NONE.name());
+        matchComboField.setSimpleValue(MatchType.ALL.name());
 
-        matchResultSet.add(matchField);
+        MultiField multiMatchField = new MultiField();
+        multiMatchField.add(new LabelField("Match" + "&nbsp;"));
+        multiMatchField.add(matchComboField);
+        matchResultSet.add(multiMatchField, new VBoxLayoutData(0, 0, 5, 0));
 
         matchResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
             @Override
             public void handleEvent(FieldSetEvent be) {
+                addConditionButton.setVisible(false);
                 queryButton.disable();
             }
         });
         matchResultSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
             @Override
             public void handleEvent(FieldSetEvent be) {
+                addConditionButton.setVisible(true);
                 queryButton.enable();
             }
         });
+
+        formPanel.setButtonAlign(Style.HorizontalAlignment.LEFT);
+        addConditionButton = new Button("Add Condition", BasicWidgetResources.ICONS.done(),
+                                        new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                FeatureAttributeConditionField attributeCondition =
+                        new FeatureAttributeConditionField(attributes);
+                attributeConditions.add(attributeCondition);
+
+                matchResultSet.add(attributeCondition, new VBoxLayoutData(0, 0, 1, 0));
+                matchResultSet.layout();
+
+//                FeatureSelectionWidget.super.scrollIntoView(attributeCondition);
+            }
+        });
+        formPanel.addButton(addConditionButton);
 
         return matchResultSet;
     }
@@ -200,8 +208,8 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     @Override
     public void deleteCondition(FeatureAttributeConditionField field) {
         attributeConditions.remove(field);
-        formPanel.remove(field);
-        formPanel.layout();
+        matchResultSet.remove(field);
+        matchResultSet.layout();
     }
 
     private enum MatchType {

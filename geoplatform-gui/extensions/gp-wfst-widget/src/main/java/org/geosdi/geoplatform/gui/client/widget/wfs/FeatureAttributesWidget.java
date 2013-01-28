@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
+import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
@@ -114,6 +115,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     @Override
     public void setPanelProperties() {
         super.setHeaderVisible(false);
+        super.setScrollMode(Style.Scroll.AUTO);
     }
 
     @Override

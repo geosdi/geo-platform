@@ -41,7 +41,6 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldSetEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.fx.Resizable;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
@@ -72,13 +71,13 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     private GPEventBus bus;
     //
     private List<AttributeDetail> attributes;
+    private List<FeatureAttributeConditionField> attributeConditions;
     //
     private FormPanel formPanel;
     private FieldSet matchResultSet;
     private SimpleComboBox<String> matchComboField;
     private Button addConditionButton;
-    private List<FeatureAttributeConditionField> attributeConditions;
-    //
+    private Button resetConditionsButton;
     private Button selectAllButton;
     private Button queryButton;
 
@@ -93,7 +92,9 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     @Override
     public void addComponent() {
         this.createFormPanel();
-        this.createButtons();
+        this.createMatchSelection();
+        this.createSelectionButtons();
+        this.createQueryButtons();
     }
 
     @Override
@@ -105,10 +106,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         super.head.setText("Feature Selection");
         super.setBorders(false);
         super.setScrollMode(Style.Scroll.AUTO);
-        
-        super.setCollapsible(true);
-//        Resizable r = new Resizable(this);
-//        r.setDynamic(true);        
     }
 
     private void createFormPanel() {
@@ -118,12 +115,10 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         formPanel.setBodyBorder(false);
         formPanel.setLayout(new FlowLayout());
 
-        formPanel.add(this.createMatchSelection());
-
         super.add(formPanel);
     }
 
-    private FieldSet createMatchSelection() {
+    private void createMatchSelection() {
         matchResultSet = new FieldSet();
         matchResultSet.setHeading("Select by condition");
         matchResultSet.setCheckboxToggle(true);
@@ -165,9 +160,15 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
             }
         });
 
+        formPanel.add(matchResultSet);;
+    }
+
+    private void createSelectionButtons() {
         formPanel.setButtonAlign(Style.HorizontalAlignment.LEFT);
-        addConditionButton = new Button("Add Condition", BasicWidgetResources.ICONS.done(),
-                                        new SelectionListener<ButtonEvent>() {
+
+        this.addConditionButton = new Button("Add Condition",
+                                             BasicWidgetResources.ICONS.done(),
+                                             new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 FeatureAttributeConditionField attributeCondition =
@@ -183,10 +184,21 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         });
         formPanel.addButton(addConditionButton);
 
-        return matchResultSet;
+        this.resetConditionsButton = new Button("Reset Conditions",
+                                                BasicWidgetResources.ICONS.delete(),
+                                                new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                for (FeatureAttributeConditionField attCondition : attributeConditions) {
+                    matchResultSet.remove(attCondition);
+                }
+                attributeConditions.clear();
+            }
+        });
+        formPanel.addButton(resetConditionsButton);
     }
 
-    private void createButtons() {
+    private void createQueryButtons() {
         super.setButtonAlign(Style.HorizontalAlignment.RIGHT);
 
         this.selectAllButton = new Button("Select All",
@@ -215,7 +227,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     public void deleteCondition(FeatureAttributeConditionField field) {
         attributeConditions.remove(field);
         matchResultSet.remove(field);
-        matchResultSet.layout();
     }
 
     private enum MatchType {

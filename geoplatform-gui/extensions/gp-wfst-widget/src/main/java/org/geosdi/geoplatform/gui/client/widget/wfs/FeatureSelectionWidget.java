@@ -172,7 +172,8 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                 matchResultSet.add(attributeCondition, new VBoxLayoutData(0, 0, 1, 0));
                 matchResultSet.layout();
 
-//                FeatureSelectionWidget.super.scrollIntoView(attributeCondition);
+                int vScrollPosition = FeatureSelectionWidget.super.getVScrollPosition();
+                FeatureSelectionWidget.super.setVScrollPosition(vScrollPosition + 30);
             }
         });
         formPanel.addButton(addConditionButton);

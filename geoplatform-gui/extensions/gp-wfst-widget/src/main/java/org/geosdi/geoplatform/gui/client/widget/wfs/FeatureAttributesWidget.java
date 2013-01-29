@@ -123,8 +123,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void reset() {
-        store = null;
-        grid = null;
+        grid.stopEditing(true);
+        store.removeAll();
         feature = null;
         bus.fireEvent(new ActionEnableEvent(false));
         super.setVScrollPosition(0);
@@ -151,14 +151,15 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         grid.setBorders(true);
         grid.setStripeRows(true);
         grid.setColumnLines(true);
-        grid.setColumnResize(false);
+        grid.setColumnResize(true);
 
-//        grid.setHeight(600);
         grid.setAutoHeight(true);
         grid.setAutoWidth(true);
 
 //        grid.getView().setAutoFill(true);
-        grid.getView().setForceFit(true);
+//        grid.getView().setForceFit(true);
+
+//        grid.setSelectionModel(new GridSelectionModel<AttributeValuesDetail>());
 
         super.add(grid);
     }
@@ -188,6 +189,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             valueColumn.setId(name);
             valueColumn.setHeader(name);
             valueColumn.setEditor(valueEditor);
+            valueColumn.setWidth(name.length() * 10);
 
             configs.add(valueColumn);
         }

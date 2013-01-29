@@ -66,14 +66,6 @@ public class FeatureAttributeConditionField extends MultiField {
         this.createComponents();
     }
 
-    public FeatureAttributeConditionField() {
-        throw new NullPointerException("Use constructor with List<AttributeDTO> argument.");
-    }
-
-    public FeatureAttributeConditionField(String fieldLabel, Field... fields) {
-        throw new NullPointerException("Use constructor with List<AttributeDTO> argument.");
-    }
-
     private void createComponents() {
         final String spacer = "<span class='spacer'>&nbsp;</span>";
         Button deleteButton = this.createDeleteButton();

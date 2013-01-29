@@ -114,7 +114,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void setPanelProperties() {
-        super.setHeaderVisible(false);
+//        super.setHeaderVisible(false);
         super.setScrollMode(Style.Scroll.AUTO);
     }
 

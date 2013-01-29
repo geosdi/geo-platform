@@ -97,6 +97,11 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         this.createQueryButtons();
     }
 
+    public void setAttributes(List<AttributeDetail> attributes) {
+        assert (attributes != null) : "Attributes must not bu null.";
+        this.attributes = attributes;
+    }
+
     @Override
     public void initSize() {
     }
@@ -148,19 +153,17 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         matchResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
             @Override
             public void handleEvent(FieldSetEvent be) {
-                addConditionButton.setVisible(false);
-                queryButton.disable();
+                selectionEnabled(false);
             }
         });
         matchResultSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
             @Override
             public void handleEvent(FieldSetEvent be) {
-                addConditionButton.setVisible(true);
-                queryButton.enable();
+                selectionEnabled(true);
             }
         });
 
-        formPanel.add(matchResultSet);;
+        formPanel.add(matchResultSet);
     }
 
     private void createSelectionButtons() {
@@ -218,9 +221,10 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         super.addButton(queryButton);
     }
 
-    public void setAttributes(List<AttributeDetail> attributes) {
-        assert (attributes != null) : "Attributes must not bu null.";
-        this.attributes = attributes;
+    private void selectionEnabled(boolean enabled) {
+        addConditionButton.setVisible(enabled);
+        resetConditionsButton.setVisible(enabled);
+        queryButton.setEnabled(enabled);
     }
 
     @Override

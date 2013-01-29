@@ -117,25 +117,27 @@ public class FeatureWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
+        super.setCollapsible(false);
         super.setResizable(false);
         super.setModal(true);
-        super.setCollapsible(false);
         super.setPlain(true);
 
         super.setLayout(new BorderLayout());
     }
 
     private void addSelectionWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST, 300);
-        layoutData.setMargins(new Margins(0, 5, 0, 0));
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST, 300);
+        layoutData.setMargins(new Margins(0, 0, 0, 5));
         layoutData.setCollapsible(true);
 
         super.add(this.selectionWidget, layoutData);
     }
 
     private void addMapWidget() {
-        // The notifyShow method is called 1 times at the first show 
-        // only in the center region, otherwise 2 times.        
+        /**
+         * The notifyShow method is called 1 times at the first show only in the
+         * center region, otherwise 2 times.
+         */
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER, 700);
         layoutData.setMargins(new Margins(0));
 
@@ -145,8 +147,10 @@ public class FeatureWidget extends GeoPlatformWindow
     private void addAttributesWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH);
         layoutData.setMargins(new Margins(5, 0, 0, 0));
-        layoutData.setFloatable(true);
         layoutData.setCollapsible(true);
+        layoutData.setSplit(true);
+        layoutData.setMinSize(70);
+        layoutData.setMaxSize(550);
 
         super.add(this.attributesWidget, layoutData);
     }

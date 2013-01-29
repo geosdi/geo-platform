@@ -127,7 +127,8 @@ public class FeatureWidget extends GeoPlatformWindow
 
     private void addSelectionWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST, 300);
-        layoutData.setMargins(new Margins(0));
+        layoutData.setMargins(new Margins(0, 5, 0, 0));
+        layoutData.setCollapsible(true);
 
         super.add(this.selectionWidget, layoutData);
     }
@@ -143,7 +144,9 @@ public class FeatureWidget extends GeoPlatformWindow
 
     private void addAttributesWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH);
-        layoutData.setMargins(new Margins(0));
+        layoutData.setMargins(new Margins(5, 0, 0, 0));
+        layoutData.setFloatable(true);
+        layoutData.setCollapsible(true);
 
         super.add(this.attributesWidget, layoutData);
     }

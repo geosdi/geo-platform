@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
@@ -50,23 +50,22 @@ public interface WFSRemote extends RemoteService {
 
     public static class Util {
 
-        private static WFSRemoteAsync instance = (WFSRemoteAsync) GWT.create(
-                WFSRemote.class);
+        private static WFSRemoteAsync instance =
+                (WFSRemoteAsync) GWT.create(WFSRemote.class);
 
         public static WFSRemoteAsync getInstance() {
             return instance;
         }
     }
 
-    /**
-     *
-     * @param serverUrl
-     * @param typeName
-     * @return
-     * @throws GeoPlatformException
-     */
     LayerSchemaDTO describeFeatureType(
             String serverUrl,
             String typeName)
+            throws Exception;
+
+    FeatureCollectionDTO getAllFeature(
+            String serverUrl,
+            String typeName,
+            int maxFeatures)
             throws Exception;
 }

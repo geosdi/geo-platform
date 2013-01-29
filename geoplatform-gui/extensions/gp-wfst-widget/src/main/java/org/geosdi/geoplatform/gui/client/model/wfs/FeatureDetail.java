@@ -33,28 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
+package org.geosdi.geoplatform.gui.client.model.wfs;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import java.util.Map;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface FeatureAttributesHandler extends EventHandler {
+public class FeatureDetail {
 
-    Type<FeatureAttributesHandler> TYPE = new Type<FeatureAttributesHandler>();
+    private VectorFeature vector;
+    private Map<String, String> attributes; // TODO Evaluate the use of AttributeDetail
 
-    void postInstances(List<FeatureDetail> instaces);
+    public FeatureDetail(VectorFeature vector, Map<String, String> attributes) {
+//        assert (vector != null);
+        assert (attributes != null);
+        this.vector = vector;
+        this.attributes = attributes;
+    }
 
-    void resetInstances();
+    public VectorFeature getVector() {
+        return vector;
+    }
 
-    void saveAttributes();
-
-    void resetAttributes();
-
-    void successfulTransaction();
+    public Map<String, String> getAttributes() {
+        return attributes;
+    }
 }

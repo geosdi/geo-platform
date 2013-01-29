@@ -35,15 +35,23 @@
  */
 package org.geosdi.geoplatform.gui.client.model.wfs;
 
+import java.util.Map;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class AttributeValuesDetail extends GeoPlatformBeanModel {
+public class FeatureAttributeValuesDetail extends GeoPlatformBeanModel {
 
     private static final long serialVersionUID = 3816298502884381217L;
+
+    public FeatureAttributeValuesDetail(Map<String, String> attributes) {
+        assert (attributes != null) : "attributes must not be null.";
+        for (Map.Entry<String, String> att : attributes.entrySet()) {
+            this.set(att.getKey(), att.getValue());
+        }
+    }
 
     public String getValue(String attributeName) {
         assert (attributeName != null) : "attributeName must not be null.";

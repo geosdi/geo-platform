@@ -52,4 +52,7 @@ public interface GetFeaureService {
 
     FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, BBox bBox)
             throws Exception;
+
+    FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures)
+            throws Exception;
 }

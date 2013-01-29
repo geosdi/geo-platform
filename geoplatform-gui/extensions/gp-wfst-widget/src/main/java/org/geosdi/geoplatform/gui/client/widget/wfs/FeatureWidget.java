@@ -231,11 +231,11 @@ public class FeatureWidget extends GeoPlatformWindow
             vector.setGeometryName(this.schemaDTO.getGeometry().getName());
         }
 
-        List<AttributeDetail> attributes = FeatureConverter.convertDTOs(
-                this.schemaDTO.getAttributes());
+        List<AttributeDetail> attributes =
+                FeatureConverter.convertDTOs(this.schemaDTO.getAttributes());
 
         this.attributesWidget.setAttributes(attributes);
-        this.selectionWidget.setAttributes(attributes);
+        this.selectionWidget.setSchema(schemaDTO);
     }
 
     @Override

@@ -36,9 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -49,12 +47,11 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.google.common.collect.Lists;
-import com.google.gwt.user.client.Timer;
 import java.util.List;
-import java.util.Map;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
-import org.geosdi.geoplatform.gui.client.model.wfs.AttributeValuesDetail;
+import org.geosdi.geoplatform.gui.client.model.wfs.FeatureAttributeValuesDetail;
+import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
@@ -76,10 +73,10 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     //
     private List<AttributeDetail> attributes;
     //
-    private ListStore<AttributeValuesDetail> store;
-    private EditorGrid<AttributeValuesDetail> grid;
+    private ListStore<FeatureAttributeValuesDetail> store;
+    private EditorGrid<FeatureAttributeValuesDetail> grid;
     //
-    private VectorFeature feature;
+    private List<VectorFeature> vectors;
     private GetFeatureControlBuilder featureControlBuilder;
     private WFSProtocolCRUDOptions featureCRUDProtocol;
 
@@ -116,7 +113,9 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void setPanelProperties() {
-//        super.setHeaderVisible(false);
+        super.setHeaderVisible(true);
+        super.head.setText("Feature Attributes");
+        super.head.setStyleAttribute("textAlign", "center");
         super.setScrollMode(Style.Scroll.AUTO);
     }
 
@@ -124,28 +123,28 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     public void reset() {
         grid.stopEditing(true);
         store.removeAll();
-        feature = null;
+        vectors = null;
         bus.fireEvent(new ActionEnableEvent(false));
         super.setVScrollPosition(0);
     }
 
     private void createStore() {
-        store = new ListStore<AttributeValuesDetail>();
-        store.addStoreListener(new StoreListener<AttributeValuesDetail>() {
+        store = new ListStore<FeatureAttributeValuesDetail>();
+        store.addStoreListener(new StoreListener<FeatureAttributeValuesDetail>() {
             @Override
-            public void storeClear(StoreEvent<AttributeValuesDetail> se) {
+            public void storeClear(StoreEvent<FeatureAttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(false));
             }
 
             @Override
-            public void storeUpdate(StoreEvent<AttributeValuesDetail> se) {
+            public void storeUpdate(StoreEvent<FeatureAttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(true));
             }
         });
     }
 
     private void createEditorGrid() {
-        grid = new EditorGrid<AttributeValuesDetail>(store, this.prepareColumnModel());
+        grid = new EditorGrid<FeatureAttributeValuesDetail>(store, this.prepareColumnModel());
         grid.setAutoExpandColumn(attributes.get(0).getName());
         grid.setBorders(true);
         grid.setStripeRows(true);
@@ -154,6 +153,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         grid.setAutoHeight(true);
         grid.setAutoWidth(true);
+        grid.setAutoExpandMin(100);
 
 //        grid.getView().setAutoFill(true);
 //        grid.getView().setForceFit(true);
@@ -198,27 +198,27 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void saveAttributes() {
-        for (Record record : store.getModifiedRecords()) {
-            ModelData model = record.getModel();
-            AttributeDetail attribute = (AttributeDetail) model;
-            feature.getAttributes().setAttribute(attribute.getName(),
-                                                 attribute.getValue());
-        }
-
-        this.feature.toState(VectorFeature.State.Update);
-
-        this.bus.fireEvent(new FeatureStatusBarEvent("Transaction in Progress",
-                                                     FeatureStatusBarType.STATUS_LOADING));
-
-        Timer t = new Timer() {
-            @Override
-            public void run() {
-                featureControlBuilder.getWfsProtocol().commit(feature,
-                                                              featureCRUDProtocol);
-            }
-        };
-
-        t.schedule(2000);
+//        for (Record record : store.getModifiedRecords()) {
+//            ModelData model = record.getModel();
+//            AttributeDetail attribute = (AttributeDetail) model;
+//            features.getAttributes().setAttribute(
+//                    attribute.getName(), attribute.getValue());
+//        }
+//
+//        this.features.toState(VectorFeature.State.Update);
+//
+//        this.bus.fireEvent(new FeatureStatusBarEvent("Transaction in Progress",
+//                                                     FeatureStatusBarType.STATUS_LOADING));
+//
+//        Timer t = new Timer() {
+//            @Override
+//            public void run() {
+//                featureControlBuilder.getWfsProtocol().commit(features,
+//                                                              featureCRUDProtocol);
+//            }
+//        };
+//
+//        t.schedule(2000);
     }
 
     @Override
@@ -228,20 +228,23 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         bus.fireEvent(new ActionEnableEvent(false));
     }
 
-    // TODO For more that one istance of feature
     @Override
-    public void setValues(Map<String, String> attributeValues, VectorFeature feature) {
-        assert (attributeValues != null) : "Attribute values must not be null.";
-        assert (attributes != null) : "Attributes must not be null.";
+    public void postInstances(List<FeatureDetail> instaces) {
+        assert (instaces != null) : "Feature instances must not be null.";
+        int numFeature = instaces.size();
+        if (numFeature == 0) {
+            System.out.println("*** NO FEATURE"); // TODO
+            return;
+        }
 
-        this.feature = feature;
+        grid.mask("Retrieve " + numFeature + " feature instance attributes");
 
-        grid.mask("Retrieve feature attributes");
+        this.vectors = Lists.newArrayListWithCapacity(numFeature);
+        List<FeatureAttributeValuesDetail> attValues = Lists.newArrayListWithCapacity(numFeature);
 
-        AttributeValuesDetail attValues = new AttributeValuesDetail();
-        for (AttributeDetail att : attributes) {
-            String value = attributeValues.get(att.getName());
-            attValues.setValue(att.getName(), value);
+        for (FeatureDetail instace : instaces) {
+            vectors.add(instace.getVector());
+            attValues.add(new FeatureAttributeValuesDetail(instace.getAttributes()));
         }
 
         this.populateStore(attValues);
@@ -249,14 +252,14 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         grid.unmask();
     }
 
-    private void populateStore(AttributeValuesDetail attValues) {
+    private void populateStore(List<FeatureAttributeValuesDetail> attValues) {
         assert (attributes != null) : "Attributes must not be null.";
         store.removeAll();
         store.add(attValues);
     }
 
     @Override
-    public void resetValues() {
+    public void resetInstances() {
         this.reset();
     }
 

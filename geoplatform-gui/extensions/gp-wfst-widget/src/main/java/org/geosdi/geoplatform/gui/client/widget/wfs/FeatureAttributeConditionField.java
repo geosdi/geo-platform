@@ -40,7 +40,6 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.AdapterField;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.LabelField;
 import com.extjs.gxt.ui.client.widget.form.MultiField;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
@@ -138,7 +137,8 @@ public class FeatureAttributeConditionField extends MultiField {
         LESS("<"),
         GREATER(">"),
         LESS_OR_EQUAL("<="),
-        GREATER_OR_EQUAL(">=");
+        GREATER_OR_EQUAL(">="),
+        LIKE("like");
         //
         private String symbol;
 

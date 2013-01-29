@@ -36,28 +36,24 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import java.util.Map;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureAttributeValuesEvent extends GwtEvent<FeatureAttributesHandler> {
+public class FeatureInstancesEvent extends GwtEvent<FeatureAttributesHandler> {
 
-    private Map<String, String> values;
-    protected VectorFeature feature;
+    private List<FeatureDetail> instances;
 
-    public void setAttributeValues(Map<String, String> attributeValues) {
-        this.values = attributeValues;
+    public void setInstances(List<FeatureDetail> instances) {
+        this.instances = instances;
     }
 
-    /**
-     * @param feature the feature to set
-     */
-    public void setFeature(VectorFeature feature) {
-        this.feature = feature;
+    public void clear() {
+        instances = null;
     }
 
     @Override
@@ -67,10 +63,10 @@ public class FeatureAttributeValuesEvent extends GwtEvent<FeatureAttributesHandl
 
     @Override
     protected void dispatch(FeatureAttributesHandler handler) {
-        if (values == null) {
-            handler.resetValues();
+        if (instances == null || instances.isEmpty()) {
+            handler.resetInstances();
         } else {
-            handler.setValues(values, feature);
+            handler.postInstances(instances);
         }
     }
 }

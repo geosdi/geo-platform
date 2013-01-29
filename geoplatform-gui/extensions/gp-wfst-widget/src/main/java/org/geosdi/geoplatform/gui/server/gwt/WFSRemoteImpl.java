@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import org.geosdi.geoplatform.gui.client.service.WFSRemote;
+import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.server.IWFSLayerService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
@@ -58,6 +59,15 @@ public class WFSRemoteImpl extends GPAutoInjectingRemoteServiceServlet
             String serverUrl,
             String typeName)
             throws Exception {
-        return this.wfsLayerService.describeFeatureType(serverUrl, typeName);
+        return wfsLayerService.describeFeatureType(serverUrl, typeName);
+    }
+
+    @Override
+    public FeatureCollectionDTO getAllFeature(
+            String serverUrl,
+            String typeName,
+            int maxFeatures)
+            throws Exception {
+        return wfsLayerService.getAllFeature(serverUrl, typeName, maxFeatures);
     }
 }

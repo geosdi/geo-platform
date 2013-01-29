@@ -75,6 +75,15 @@ public class WFSGetFeatureWSTest extends WFSAbstractTest {
         this.checkFeatureCollection(fc, typeName, 22, 4);
     }
 
+    @Test
+    public void statesAllFeaturesV110() throws Exception {
+        String typeName = TOPP_STATES.getLocalPart();
+
+        FeatureCollectionDTO fc = wfsService.getAllFeatureDirect(addressDatastore, typeName, 10);
+
+        this.checkFeatureCollection(fc, typeName, 22, 10);
+    }
+
     private void checkFeatureCollection(FeatureCollectionDTO fc,
             String typeName, int numAttributes, int numFeatures) {
         Assert.assertNotNull(fc);

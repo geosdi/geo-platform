@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
@@ -51,7 +50,7 @@ public class AddFolderTreeToolbarPlugin extends TreeToolbarPluginButton {
 
     @Override
     public String getId() {
-        return GuiComponentIDs.ADD_FOLDER;
+        return "ADD_FOLDER";
     }
 
     @Override

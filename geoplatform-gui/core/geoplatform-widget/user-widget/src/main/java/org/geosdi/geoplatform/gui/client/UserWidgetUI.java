@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
@@ -73,7 +72,7 @@ public class UserWidgetUI implements EntryPoint {
     }
 
     private void addUserWidgetAction() {
-        menuRegistar.put(GuiComponentIDs.MANAGE_USERS,
+        menuRegistar.put("manageUsers",
                          new MenuActionCreator() {
             @Override
             public MenuAction createAction() {
@@ -81,7 +80,7 @@ public class UserWidgetUI implements EntryPoint {
             }
         });
 
-        menuRegistar.put(GuiComponentIDs.USER_OPTIONS_BUTTON,
+        menuRegistar.put("userOptionsButton",
                          new MenuActionCreator() {
             @Override
             public MenuAction createAction() {
@@ -91,7 +90,7 @@ public class UserWidgetUI implements EntryPoint {
     }
 
     private void addRoleWidgetAction() {
-        menuRegistar.put(GuiComponentIDs.MANAGE_ROLES,
+        menuRegistar.put("manageRoles",
                          new MenuActionCreator() {
             @Override
             public MenuAction createAction() {

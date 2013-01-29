@@ -68,6 +68,7 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
@@ -79,6 +80,7 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.geosdi.geoplatform.responce.MessageDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
@@ -86,9 +88,11 @@ import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
+import org.geosdi.geoplatform.services.GPPublisherService;
 import org.geosdi.geoplatform.services.GPTrackingService;
-import org.geosdi.geoplatform.services.GPWFSService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.geotools.filter.text.cql2.CQLException;
+import org.geotools.filter.text.ecql.ECQL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,7 +112,7 @@ public class LayerService implements ILayerService {
     //
     private GPTrackingService geoPlatformTrackingClient;
     //
-    private GPWFSService geoPlatformFeatureClient;
+    private GPPublisherService geoPlatformPublishClient;
     //
     @Autowired
     private DTOLayerConverter dtoConverter;
@@ -138,13 +142,12 @@ public class LayerService implements ILayerService {
     }
 
     /**
-     *
-     * @param geoPlatformFeatureClient the geoPlatformFeatureClient to set
+     * @param geoPlatformPublisherClient the geoPlatformPublisherClient to set
      */
     @Autowired
-    public void setGeoPlatformWFSClient(
-            @Qualifier("geoPlatformWFSClient") GPWFSService geoPlatformFeatureClient) {
-        this.geoPlatformFeatureClient = geoPlatformFeatureClient;
+    public void setGeoPlatformPublishClient(
+            @Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
+        this.geoPlatformPublishClient = geoPlatformPublishClient;
     }
 
     @Override
@@ -877,5 +880,35 @@ public class LayerService implements ILayerService {
         } catch (MalformedURLException ex) {
             throw new GeoPlatformException(ex);
         }
+    }
+
+    @Override
+    public String checkCQLExpression(String CQLExpression, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        String result = "OK";
+        try {
+            ECQL.toFilterList(CQLExpression);
+        } catch (CQLException cqEx) {
+            result = "Error parsing the expression: " + cqEx;
+        }
+        return result;
+    }
+
+    @Override
+    public List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException {
+        List<GPLayerAttributes> attributeList = Lists.newArrayList();
+        try {
+            List<LayerAttribute> result = this.geoPlatformPublishClient.describeFeatureType(
+                    layerName);
+            for (LayerAttribute layerAttribute : result) {
+                GPLayerAttributes gpLayerAttributes = new GPLayerAttributes();
+                gpLayerAttributes.setAttributeType(layerAttribute.getType());
+                gpLayerAttributes.setAttributeValue(
+                        layerAttribute.getValue());
+                attributeList.add(gpLayerAttributes);
+            }
+        } catch (ResourceNotFoundFault rnff) {
+            throw new GeoPlatformException(rnff.getMessage());
+        }
+        return attributeList;
     }
 }

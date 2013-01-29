@@ -159,7 +159,8 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 
     @Override
     public String toString() {
-        return "VectorTreeNode{ " + "featureNameSpace = " + featureNameSpace
+        return "VectorTreeNode{ " + super.toString()
+                + "featureNameSpace = " + featureNameSpace
                 + ", geometryName = " + geometryName + '}';
     }
 }

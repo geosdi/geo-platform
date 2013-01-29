@@ -106,6 +106,19 @@ public class GPWFSServiceImpl implements GPWFSService {
     }
 
     @Override
+    public FeatureCollectionDTO getAllFeatureDirect(String serverURL, String typeName, int maxFeatures)
+            throws Exception {
+        LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName);
+        return this.getAllFeature(layerSchema, maxFeatures);
+    }
+
+    @Override
+    public FeatureCollectionDTO getAllFeature(LayerSchemaDTO layerSchema, int maxFeatures)
+            throws Exception {
+        return gpGetFeatureService.getFeature(layerSchema, maxFeatures);
+    }
+
+    @Override
     public boolean transactionUpdate(String serverURL, String typeName,
             String fid, List<AttributeDTO> attributes)
             throws Exception {

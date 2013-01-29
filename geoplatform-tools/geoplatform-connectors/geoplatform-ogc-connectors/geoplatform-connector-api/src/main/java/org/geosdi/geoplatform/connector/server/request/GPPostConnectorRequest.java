@@ -35,13 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import java.io.BufferedReader;
+import com.google.common.base.Charsets;
+import com.google.common.io.CharStreams;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -103,7 +101,8 @@ public abstract class GPPostConnectorRequest<T>
 
         try {
             HttpPost httpPost = this.getPostMethod();
-            HttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
+            HttpResponse httpResponse = super.securityConnector.secure(this,
+                    httpPost);
             HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
@@ -128,7 +127,7 @@ public abstract class GPPostConnectorRequest<T>
 
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                         ex.getMessage());
+                    ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***" + ex);
 
         } catch (ClientProtocolException ex) {
@@ -145,24 +144,18 @@ public abstract class GPPostConnectorRequest<T>
     @Override
     public String getResponseAsString() throws ServerInternalFault, Exception,
             IllegalParameterFault {
-        Reader reader = null;
-        Writer writer = new StringWriter();
+        String content = null;
         try {
             HttpPost httpPost = this.getPostMethod();
-            HttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
+            HttpResponse httpResponse = super.securityConnector.secure(this,
+                    httpPost);
             HttpEntity responseEntity = httpResponse.getEntity();
 
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
 
-                char[] buffer = new char[1024];
-
-                reader = new BufferedReader(
-                        new InputStreamReader(is, "UTF-8"));
-                int n;
-                while ((n = reader.read(buffer)) != -1) {
-                    writer.write(buffer, 0, n);
-                }
+                content = CharStreams.toString(new InputStreamReader(is,
+                        Charsets.UTF_8));
 
                 EntityUtils.consume(responseEntity);
             } else {
@@ -172,7 +165,7 @@ public abstract class GPPostConnectorRequest<T>
 
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                         ex.getMessage());
+                    ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***");
 
         } catch (ClientProtocolException ex) {
@@ -181,13 +174,9 @@ public abstract class GPPostConnectorRequest<T>
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
 
-        } finally {
-            if (reader != null) {
-                reader.close();
-            }
         }
 
-        return writer.toString();
+        return content;
     }
 
     @Override
@@ -195,7 +184,8 @@ public abstract class GPPostConnectorRequest<T>
             Exception, IllegalParameterFault {
         try {
             HttpPost httpPost = this.getPostMethod();
-            HttpResponse httpResponse = super.securityConnector.secure(this, httpPost);
+            HttpResponse httpResponse = super.securityConnector.secure(this,
+                    httpPost);
             HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
                 return responseEntity.getContent();
@@ -207,7 +197,7 @@ public abstract class GPPostConnectorRequest<T>
 
         } catch (JAXBException ex) {
             logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                         ex.getMessage());
+                    ex.getMessage());
             throw new ServerInternalFault("*** JAXBException ***" + ex);
 
         } catch (ClientProtocolException ex) {

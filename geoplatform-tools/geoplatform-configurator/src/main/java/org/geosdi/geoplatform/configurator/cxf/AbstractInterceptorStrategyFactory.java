@@ -49,18 +49,14 @@ import org.apache.ws.security.handler.WSHandlerConstants;
  */
 public abstract class AbstractInterceptorStrategyFactory {
 
-    private String loggingStrategy;
-    private String securityStrategy;
-    //
-    protected String usernameTokenUser;
-    protected String clientKeystoreUser;
-    protected String serverKeystoreUser;
+    private InterceptorStrategyBean strategyBean;
 
     /**
      * Logging
      */
     public LoggingInInterceptor getLoggingInInterceptor() throws IllegalArgumentException {
-        LoggingWebServiceType loggingType = LoggingWebServiceType.fromValue(loggingStrategy);
+        LoggingWebServiceType loggingType = LoggingWebServiceType.fromValue(
+                strategyBean.getLoggingStrategy());
         if (loggingType == LoggingWebServiceType.LOGGING_IN
                 || loggingType == LoggingWebServiceType.LOGGING_IN_OUT) {
             return new LoggingInInterceptor();
@@ -75,7 +71,8 @@ public abstract class AbstractInterceptorStrategyFactory {
     }
 
     public LoggingOutInterceptor getLoggingOutInterceptor() throws IllegalArgumentException {
-        LoggingWebServiceType loggingType = LoggingWebServiceType.fromValue(loggingStrategy);
+        LoggingWebServiceType loggingType = LoggingWebServiceType.fromValue(
+                strategyBean.getLoggingStrategy());
         if (loggingType == LoggingWebServiceType.LOGGING_OUT
                 || loggingType == LoggingWebServiceType.LOGGING_IN_OUT) {
             return new LoggingOutInterceptor();
@@ -93,7 +90,8 @@ public abstract class AbstractInterceptorStrategyFactory {
      * Security
      */
     public WSS4JInInterceptor getSecurityInInterceptor() throws IllegalArgumentException {
-        SecurityWebServiceType securityType = SecurityWebServiceType.fromValue(securityStrategy);
+        SecurityWebServiceType securityType = SecurityWebServiceType.fromValue(
+                strategyBean.getSecurityStrategy());
         switch (securityType) {
             case USERNAME_TOKEN:
                 return createUsernameTokenInInterceptor();
@@ -105,7 +103,8 @@ public abstract class AbstractInterceptorStrategyFactory {
                 return createTimestampSignatureEncryptionInInterceptor();
             case NONE:
                 WSS4JInInterceptor in = new WSS4JInInterceptor();
-                in.setProperty(WSHandlerConstants.ACTION, WSHandlerConstants.NO_SECURITY);
+                in.setProperty(WSHandlerConstants.ACTION,
+                        WSHandlerConstants.NO_SECURITY);
                 return in;
             default:
                 return null;
@@ -121,7 +120,8 @@ public abstract class AbstractInterceptorStrategyFactory {
     protected abstract WSS4JInInterceptor createTimestampSignatureEncryptionInInterceptor();
 
     public WSS4JOutInterceptor getSecurityOutInterceptor() throws IllegalArgumentException {
-        SecurityWebServiceType securityType = SecurityWebServiceType.fromValue(securityStrategy);
+        SecurityWebServiceType securityType = SecurityWebServiceType.fromValue(
+                strategyBean.getSecurityStrategy());
         switch (securityType) {
             case USERNAME_TOKEN:
                 return createUsernameTokenOutInterceptor();
@@ -133,7 +133,8 @@ public abstract class AbstractInterceptorStrategyFactory {
                 return createTimestampSignatureEncryptionOutInterceptor();
             case NONE:
                 WSS4JOutInterceptor out = new WSS4JOutInterceptor();
-                out.setProperty(WSHandlerConstants.ACTION, WSHandlerConstants.NO_SECURITY);
+                out.setProperty(WSHandlerConstants.ACTION,
+                        WSHandlerConstants.NO_SECURITY);
                 return out;
             default:
                 return null;
@@ -147,27 +148,13 @@ public abstract class AbstractInterceptorStrategyFactory {
     protected abstract WSS4JOutInterceptor createSignatureOutInterceptor();
 
     protected abstract WSS4JOutInterceptor createTimestampSignatureEncryptionOutInterceptor();
+    
+    public abstract void init();
 
     /**
-     * Setter
+     * @param strategyBean the strategyBean to set
      */
-    public void setLoggingStrategy(String loggingStrategy) {
-        this.loggingStrategy = loggingStrategy;
-    }
-
-    public void setSecurityStrategy(String securityStrategy) {
-        this.securityStrategy = securityStrategy;
-    }
-
-    public void setUsernameTokenUser(String usernameTokenUser) {
-        this.usernameTokenUser = usernameTokenUser;
-    }
-
-    public void setClientKeystoreUser(String clientKeystoreUser) {
-        this.clientKeystoreUser = clientKeystoreUser;
-    }
-
-    public void setServerKeystoreUser(String serverKeystoreUser) {
-        this.serverKeystoreUser = serverKeystoreUser;
+    public void setStrategyBean(InterceptorStrategyBean strategyBean) {
+        this.strategyBean = strategyBean;
     }
 }

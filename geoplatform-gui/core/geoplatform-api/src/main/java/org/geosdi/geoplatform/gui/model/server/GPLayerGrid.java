@@ -308,8 +308,12 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel
      */
     @Override
     public String toString() {
-        return "GPLayerBeanModel{" + "id = " + id + ", name = " + name
-                + ", abstractText = " + abstractText + ", dataSource = " + dataSource
-                + ", crs = " + crs + ", bbox = " + bbox + ", layerType = " + layerType + '}';
+        return "id = " + id
+                + ", name = " + name
+                + ", abstractText = " + abstractText
+                + ", dataSource = " + dataSource
+                + ", crs = " + crs
+                + ", bbox = " + bbox
+                + ", layerType = " + layerType;
     }
 }

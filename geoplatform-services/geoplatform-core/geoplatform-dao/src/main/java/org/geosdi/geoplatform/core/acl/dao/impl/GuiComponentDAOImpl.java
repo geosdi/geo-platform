@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.core.acl.dao.impl;
 
 import com.googlecode.genericdao.search.Search;
+import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.geosdi.geoplatform.core.acl.GuiComponent;
@@ -65,5 +66,12 @@ public class GuiComponentDAOImpl extends BaseDAO<GuiComponent, Long>
         Search search = new Search();
         search.addFilterEqual("componentId", componentId);
         return searchUnique(search);
+    }
+
+    @Override
+    public List<String> findAllGuiComponentIDs() {
+        Search search = new Search();
+        search.addField("componentId");
+        return search(search);
     }
 }

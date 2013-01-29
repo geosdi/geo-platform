@@ -77,7 +77,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -392,7 +391,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                 // i.e. MANAGE_ROLES will not be modified for a ADMIN role
                 if (role.equals(GPRole.ADMIN.getRole())) {
                     for (GuiComponentDetail gc : guiComponents) {
-                        if (gc.getComponentId().equals(GuiComponentIDs.MANAGE_ROLES)) {
+                        if (gc.getComponentId().equals("manageRoles")) {
                             ManageRolesWidget.this.store.remove(gc);
                             break;
                         }

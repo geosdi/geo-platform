@@ -57,18 +57,6 @@
             <artifactId>geoplatform-resources</artifactId>
         </dependency>
         
-        <!-- GWT-OL Resources -->
-        <!--        <dependency>
-            <groupId>org.gwtopenmaps.openlayers</groupId>
-            <artifactId>gwt-openlayers-client</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.gwtopenmaps.openlayers</groupId>
-            <artifactId>gwt-openlayers-server</artifactId>
-            <scope>runtime</scope>
-        </dependency>-->
-        
         <!-- GIN -->
         <dependency>
             <groupId>com.google.gwt.inject</groupId>

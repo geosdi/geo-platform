@@ -186,6 +186,7 @@ public class TreeContextMenuFactory {
                     treePanel));
             layerContextMenu.add(createViewportLayerMenu);
 
+            // TODO ADD EditWFS dynamically
             EditWFSAction editFeatureAction = new EditWFSAction(treePanel);
             MenuItem editFeature = new MenuItem();
             editFeature.setText(editFeatureAction.getTitle());

@@ -53,8 +53,8 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
@@ -170,10 +170,11 @@ public interface LayerRemoteAsync {
             Map<String, String> attributesMap,
             AsyncCallback<?> callback) throws GeoPlatformException;
 
-    void describeFeatureType(String serverUrl,
-            String typeName,
-            AsyncCallback<LayerSchemaDTO> callback) throws GeoPlatformException;
-
     void getLayerDimension(String layerName,
             AsyncCallback<String> callback) throws GeoPlatformException;
+
+    void checkCQLExpression(String CQLExpression, AsyncCallback<String> callback)
+            throws GeoPlatformException;
+
+    void describeFeatureType(String layerName, AsyncCallback<List<GPLayerAttributes>> callback);
 }

@@ -55,8 +55,8 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
@@ -304,15 +304,9 @@ public interface LayerRemote extends RemoteService {
             String text,
             Map<String, String> attributesMap) throws GeoPlatformException;
 
-    /**
-     *
-     * @param serverUrl
-     * @param typeName
-     * @return
-     * @throws GeoPlatformException
-     */
-    LayerSchemaDTO describeFeatureType(String serverUrl,
-            String typeName) throws Exception;
-
     String getLayerDimension(String layerName) throws GeoPlatformException;
+
+    String checkCQLExpression(String CQLExpression) throws GeoPlatformException;
+
+    List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException;
 }

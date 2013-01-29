@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
 
@@ -62,5 +62,11 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
     @Override
     public void setOpacity(float opacity) {
         this.opacity = opacity;
+    }
+
+    @Override
+    public String toString() {
+        return "GPRasterLayerGrid{" + super.toString()
+                + ", opacity=" + opacity + '}';
     }
 }

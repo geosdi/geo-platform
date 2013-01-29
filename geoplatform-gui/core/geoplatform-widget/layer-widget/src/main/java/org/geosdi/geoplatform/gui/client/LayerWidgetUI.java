@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
@@ -94,7 +93,7 @@ public class LayerWidgetUI implements EntryPoint {
 
     private void addLayerWidgetAction() {
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
-        menuRegistar.put(GuiComponentIDs.LAYER_MENU,
+        menuRegistar.put("layerMenu",
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {
@@ -102,7 +101,7 @@ public class LayerWidgetUI implements EntryPoint {
                     }
                 });
 
-        menuRegistar.put(GuiComponentIDs.MANAGE_PROJECTS,
+        menuRegistar.put("manageProjects",
                 new MenuActionCreator() {
                     @Override
                     public MenuAction createAction() {

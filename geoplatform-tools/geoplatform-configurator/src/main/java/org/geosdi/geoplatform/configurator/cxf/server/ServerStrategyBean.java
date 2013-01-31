@@ -47,7 +47,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "serverStrategyBean")
 public class ServerStrategyBean implements InterceptorStrategyBean {
 
-    @Value(value = "${webservice_client_logging}")
+    @Value(value = "${webservice_server_logging}")
     private String loggingStrategy;
     @Value(value = "${webservice_security_strategy}")
     private String securityStrategy;

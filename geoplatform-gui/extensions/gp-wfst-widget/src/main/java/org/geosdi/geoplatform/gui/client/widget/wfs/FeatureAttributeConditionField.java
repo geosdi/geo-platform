@@ -48,6 +48,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
+import org.geosdi.geoplatform.gui.client.model.wfs.OperatorType;
 import org.geosdi.geoplatform.gui.client.widget.wfs.event.DeleteAttributeConditionEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -128,27 +129,5 @@ public class FeatureAttributeConditionField extends MultiField {
         button.setAutoWidth(true);
 
         return button;
-    }
-
-    private enum OperatorType {
-
-        EQUAL("="),
-        NOT_EQUAL("<>"),
-        LESS("<"),
-        GREATER(">"),
-        LESS_OR_EQUAL("<="),
-        GREATER_OR_EQUAL(">="),
-        LIKE("like");
-        //
-        private String symbol;
-
-        private OperatorType(String symbol) {
-            this.symbol = symbol;
-        }
-
-        @Override
-        public String toString() {
-            return this.symbol;
-        }
     }
 }

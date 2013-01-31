@@ -33,25 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.cql;
+package org.geosdi.geoplatform.gui.client.model.wfs;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface ICQLBasicOperator {
+public enum OperatorType {
 
-//    void setFeatureAttribute(String featureAttribute);
-//
-//    String getFeatureAttribute();
-//
-//    void setCQLOperator(String operator);
-//
-//    String getCQLOperator();
-//
-//    String getComparisonValue();
-//
-//    void setComparisonValue();
+    EQUAL("="),
+    NOT_EQUAL("<>"),
+    LESS("<"),
+    GREATER(">"),
+    LESS_OR_EQUAL("<="),
+    GREATER_OR_EQUAL(">="),
+    LIKE("like");
+    //
+    private String symbol;
 
-    String generateExpression(String featureAttribute, String conditionValue);
+    private OperatorType(String symbol) {
+        this.symbol = symbol;
+    }
+
+    @Override
+    public String toString() {
+        return this.symbol;
+    }
 }

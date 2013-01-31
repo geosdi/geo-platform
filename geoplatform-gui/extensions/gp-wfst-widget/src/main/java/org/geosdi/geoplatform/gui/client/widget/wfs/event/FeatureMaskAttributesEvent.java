@@ -33,30 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
+package org.geosdi.geoplatform.gui.client.widget.wfs.event;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface FeatureAttributesHandler extends EventHandler {
+public class FeatureMaskAttributesEvent extends GwtEvent<FeatureAttributesHandler> {
 
-    Type<FeatureAttributesHandler> TYPE = new Type<FeatureAttributesHandler>();
+    private boolean mask;
 
-    void postInstances(List<FeatureDetail> instaces);
+    public FeatureMaskAttributesEvent(boolean mask) {
+        this.mask = mask;
+    }
 
-    void resetInstances();
+    @Override
+    public Type<FeatureAttributesHandler> getAssociatedType() {
+        return FeatureAttributesHandler.TYPE;
+    }
 
-    void saveAttributes();
-
-    void resetAttributes();
-
-    void successfulTransaction();
-
-    void maskAttributes(boolean mask);
+    @Override
+    protected void dispatch(FeatureAttributesHandler handler) {
+        handler.maskAttributes(mask);
+    }
 }

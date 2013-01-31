@@ -113,10 +113,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void setPanelProperties() {
-        super.setHeaderVisible(true);
-        super.head.setText("Feature Attributes");
-        super.head.setStyleAttribute("textAlign", "center");
-        super.setScrollMode(Style.Scroll.AUTO);
+        super.setScrollMode(Style.Scroll.AUTOX);
     }
 
     @Override
@@ -145,18 +142,14 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     private void createEditorGrid() {
         grid = new EditorGrid<FeatureAttributeValuesDetail>(store, this.prepareColumnModel());
-        grid.setAutoExpandColumn(attributes.get(0).getName());
         grid.setBorders(true);
         grid.setStripeRows(true);
         grid.setColumnLines(true);
         grid.setColumnResize(true);
-
-        grid.setAutoHeight(true);
-        grid.setAutoWidth(true);
         grid.setAutoExpandMin(100);
-
-//        grid.getView().setAutoFill(true);
-//        grid.getView().setForceFit(true);
+        grid.setAutoExpandMax(400);
+        grid.setAutoWidth(true);
+        grid.setAutoHeight(true);
 
 //        grid.setSelectionModel(new GridSelectionModel<AttributeValuesDetail>());
 
@@ -293,5 +286,14 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                 return null;
             }
         };
+    }
+
+    @Override
+    public void maskAttributes(boolean mask) {
+        if (mask) {
+            grid.mask("Retrieving feature attributes");
+        } else {
+            grid.unmask();
+        }
     }
 }

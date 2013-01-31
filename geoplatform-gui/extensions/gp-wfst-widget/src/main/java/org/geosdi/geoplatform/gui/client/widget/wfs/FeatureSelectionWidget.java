@@ -65,6 +65,7 @@ import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureInstancesEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureMaskAttributesEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.handler.DeleteAttributeConditionHandler;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -229,6 +230,8 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                                           new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
+                queryEnabled(false);
+
                 WFSRemote.Util.getInstance().getAllFeature(
                         schemaDTO.getScope(),
                         schemaDTO.getTypeName(),
@@ -259,6 +262,7 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                         FeatureInstancesEvent e = new FeatureInstancesEvent();
                         e.setInstances(instances);
                         bus.fireEvent(e);
+                        queryEnabled(true);
                     }
                 });
             }
@@ -279,6 +283,12 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         addConditionButton.setVisible(enabled);
         resetConditionsButton.setVisible(enabled);
         queryButton.setEnabled(enabled);
+    }
+
+    private void queryEnabled(boolean enabled) {
+        selectAllButton.setEnabled(enabled);
+        queryButton.setEnabled(enabled);
+        bus.fireEvent(new FeatureMaskAttributesEvent(!enabled));
     }
 
     @Override

@@ -145,12 +145,17 @@ public class FeatureWidget extends GeoPlatformWindow
     }
 
     private void addAttributesWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH);
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH, 150);
         layoutData.setMargins(new Margins(5, 0, 0, 0));
         layoutData.setCollapsible(true);
         layoutData.setSplit(true);
         layoutData.setMinSize(70);
         layoutData.setMaxSize(550);
+
+        attributesWidget.setHeaderVisible(true);
+        attributesWidget.getHeader().setText("Feature Attributes");
+        attributesWidget.getHeader().setStyleAttribute("textAlign", "center");
+        attributesWidget.setScrollMode(Style.Scroll.AUTOY);
 
         super.add(this.attributesWidget, layoutData);
     }

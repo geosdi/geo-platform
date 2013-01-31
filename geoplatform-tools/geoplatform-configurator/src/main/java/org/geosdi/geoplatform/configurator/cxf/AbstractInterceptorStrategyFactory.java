@@ -148,7 +148,7 @@ public abstract class AbstractInterceptorStrategyFactory {
     protected abstract WSS4JOutInterceptor createSignatureOutInterceptor();
 
     protected abstract WSS4JOutInterceptor createTimestampSignatureEncryptionOutInterceptor();
-    
+
     public abstract void init();
 
     /**

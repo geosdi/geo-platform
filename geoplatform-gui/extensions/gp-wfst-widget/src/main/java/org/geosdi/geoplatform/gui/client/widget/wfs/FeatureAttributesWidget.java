@@ -141,15 +141,17 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     private void createEditorGrid() {
-        grid = new EditorGrid<FeatureAttributeValuesDetail>(store, this.prepareColumnModel());
+        grid = new EditorGrid<FeatureAttributeValuesDetail>(store,
+                this.prepareColumnModel());
+
         grid.setBorders(true);
         grid.setStripeRows(true);
         grid.setColumnLines(true);
         grid.setColumnResize(true);
+        grid.setHeight(200);
+        grid.setAutoWidth(true);
         grid.setAutoExpandMin(100);
         grid.setAutoExpandMax(400);
-        grid.setAutoWidth(true);
-        grid.setAutoHeight(true);
 
 //        grid.setSelectionModel(new GridSelectionModel<AttributeValuesDetail>());
 
@@ -157,7 +159,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     private ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = Lists.newArrayListWithCapacity(attributes.size());
+        List<ColumnConfig> configs = Lists.newArrayListWithCapacity(
+                attributes.size());
 
         for (AttributeDetail att : attributes) {
             TextField<String> valueTextField = new TextField<String>();
@@ -230,14 +233,17 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             return;
         }
 
+
         grid.mask("Retrieve " + numFeature + " feature instance attributes");
 
         this.vectors = Lists.newArrayListWithCapacity(numFeature);
-        List<FeatureAttributeValuesDetail> attValues = Lists.newArrayListWithCapacity(numFeature);
+        List<FeatureAttributeValuesDetail> attValues = Lists.newArrayListWithCapacity(
+                numFeature);
 
         for (FeatureDetail instace : instaces) {
             vectors.add(instace.getVector());
-            attValues.add(new FeatureAttributeValuesDetail(instace.getAttributes()));
+            attValues.add(new FeatureAttributeValuesDetail(
+                    instace.getAttributes()));
         }
 
         this.populateStore(attValues);
@@ -259,7 +265,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     @Override
     public void successfulTransaction() {
         this.bus.fireEvent(new FeatureStatusBarEvent("Successful Transaction",
-                                                     FeatureStatusBarType.STATUS_OK));
+                FeatureStatusBarType.STATUS_OK));
 
         store.commitChanges();
         bus.fireEvent(new ActionEnableEvent(false));
@@ -268,7 +274,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     private Validator attributeValuesValidator() {
         return new Validator() {
             @Override
-            public String validate(Field<?> field, String value) {
+            public String validate(Field<?> field,
+                    String value) {
 //                AttributeValuesDetail selectedItem = grid.getSelectionModel().getSelectedItem();
 //                System.out.println("*** SELECTED " + selectedItem);
 

@@ -89,7 +89,9 @@ public class GPEPSGContentPanel extends GeoPlatformContentPanel {
         this.comboEpsgListener = new SelectionChangedListener<EPSGTemplate>() {
             @Override
             public void selectionChanged(SelectionChangedEvent<EPSGTemplate> se) {
-                epsgTextField.setValue(se.getSelectedItem().getEpsg());
+                if (se.getSelectedItem() != null) {
+                    epsgTextField.setValue(se.getSelectedItem().getEpsg());
+                }
             }
         };
 

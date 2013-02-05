@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureAttributeValuesEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureInstancesEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.event.EventHandler;
 import org.gwtopenmaps.openlayers.client.event.EventObject;
@@ -52,7 +52,7 @@ public abstract class AbastractFeatureHandler extends EventHandler {
     protected Vector vectorLayer;
     //
     protected GPEventBus bus;
-    protected FeatureAttributeValuesEvent attributeValuesEvent = new FeatureAttributeValuesEvent();
+    protected FeatureInstancesEvent attributeValuesEvent = new FeatureInstancesEvent();
 
     public AbastractFeatureHandler(Vector theVectorLayer, GPEventBus bus) {
         this.vectorLayer = theVectorLayer;

@@ -36,8 +36,10 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
 
 import com.google.common.collect.Maps;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.event.EventObject;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -68,15 +70,16 @@ public class FeatureSelectHandler extends AbastractFeatureHandler {
         Attributes attributes = vectorFeature.getAttributes();
         List<String> attributeNames = attributes.getAttributeNames();
 
-        Map<String, String> attributeMap = Maps.<String, String>newHashMapWithExpectedSize(
-                attributeNames.size());
+        Map<String, String> attributeMap =
+                Maps.<String, String>newHashMapWithExpectedSize(attributeNames.size());
         for (String name : attributeNames) {
             String value = attributes.getAttributeAsString(name);
             attributeMap.put(name, value);
         }
 
-        this.attributeValuesEvent.setAttributeValues(attributeMap);
-        this.attributeValuesEvent.setFeature(vectorFeature);
+        FeatureDetail instance =
+                new FeatureDetail(vectorFeature, attributeMap);
+        this.attributeValuesEvent.setInstances(Arrays.asList(instance));
         super.bus.fireEvent(this.attributeValuesEvent);
     }
 }

@@ -33,30 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
+package org.geosdi.geoplatform.gui.client.model.wfs;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface FeatureAttributesHandler extends EventHandler {
+public class FeatureAttributeValuesDetail extends GeoPlatformBeanModel {
 
-    Type<FeatureAttributesHandler> TYPE = new Type<FeatureAttributesHandler>();
+    private static final long serialVersionUID = 3816298502884381217L;
 
-    void postInstances(List<FeatureDetail> instaces);
+    public FeatureAttributeValuesDetail(Map<String, String> attributes) {
+        assert (attributes != null) : "attributes must not be null.";
+        for (Map.Entry<String, String> att : attributes.entrySet()) {
+            this.set(att.getKey(), att.getValue());
+        }
+    }
 
-    void resetInstances();
+    public String getValue(String attributeName) {
+        assert (attributeName != null) : "attributeName must not be null.";
+        return super.get(attributeName);
+    }
 
-    void saveAttributes();
+    public String setValue(String attributeName, String attributeValue) {
+        assert (attributeName != null) : "attributeName must not be null.";
+        assert (attributeValue != null) : "attributeValue must not be null.";
+        return super.set(attributeName, attributeValue);
+    }
 
-    void resetAttributes();
-
-    void successfulTransaction();
-
-    void maskAttributes(boolean mask);
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("AttributeDetail {");
+        for (String name : super.getProperties().keySet()) {
+            str.append(", ").append(name).append(" = ").append(this.get(name));
+        }
+        return str.append('}').toString();
+    }
 }

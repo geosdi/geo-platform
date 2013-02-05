@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.widget.validator;
 
 import com.google.common.collect.Maps;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Collections;
 import java.util.Map;
 

@@ -33,44 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.event;
-
-import com.google.gwt.event.shared.GwtEvent;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+package org.geosdi.geoplatform.gui.client.model.wfs;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureAttributeValuesEvent extends GwtEvent<FeatureAttributesHandler> {
+public enum OperatorType {
 
-    private Map<String, String> values;
-    protected VectorFeature feature;
+    EQUAL("="),
+    NOT_EQUAL("<>"),
+    LESS("<"),
+    GREATER(">"),
+    LESS_OR_EQUAL("<="),
+    GREATER_OR_EQUAL(">="),
+    LIKE("like");
+    //
+    private String symbol;
 
-    public void setAttributeValues(Map<String, String> attributeValues) {
-        this.values = attributeValues;
-    }
-
-    /**
-     * @param feature the feature to set
-     */
-    public void setFeature(VectorFeature feature) {
-        this.feature = feature;
-    }
-
-    @Override
-    public Type<FeatureAttributesHandler> getAssociatedType() {
-        return FeatureAttributesHandler.TYPE;
+    private OperatorType(String symbol) {
+        this.symbol = symbol;
     }
 
     @Override
-    protected void dispatch(FeatureAttributesHandler handler) {
-        if (values == null) {
-            handler.resetValues();
-        } else {
-            handler.setValues(values, feature);
-        }
+    public String toString() {
+        return this.symbol;
     }
 }

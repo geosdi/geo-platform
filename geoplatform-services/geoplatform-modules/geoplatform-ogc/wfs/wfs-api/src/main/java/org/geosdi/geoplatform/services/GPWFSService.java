@@ -89,6 +89,19 @@ public interface GPWFSService {
             throws Exception;
 
     @Get
+    FeatureCollectionDTO getAllFeatureDirect(
+            @WebParam(name = "serverURL") String serverURL,
+            @WebParam(name = "typeName") String typeName,
+            @WebParam(name = "maxFeatures") int maxFeatures)
+            throws Exception;
+
+    @Get
+    FeatureCollectionDTO getAllFeature(
+            @WebParam(name = "layerSchema") LayerSchemaDTO layerSchema,
+            @WebParam(name = "maxFeatures") int maxFeatures)
+            throws Exception;
+
+    @Get
     boolean transactionUpdate(
             @WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName,

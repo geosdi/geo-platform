@@ -53,5 +53,5 @@ public interface ICQLBasicOperator {
 //
 //    void setComparisonValue();
 
-    String generateExpression(String featureAttribute, String operator);
+    String generateExpression(String featureAttribute, String conditionValue);
 }

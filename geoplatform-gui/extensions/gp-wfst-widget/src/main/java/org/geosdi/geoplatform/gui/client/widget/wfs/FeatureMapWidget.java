@@ -61,8 +61,8 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureMapWidget extends GeoPlatformContentPanel implements
-        IFeatureMapWidget {
+public class FeatureMapWidget extends GeoPlatformContentPanel
+        implements IFeatureMapWidget {
 
     private MapWidget mapWidget;
     private FeatureMapLayerBuilder mapLayerBuilder;

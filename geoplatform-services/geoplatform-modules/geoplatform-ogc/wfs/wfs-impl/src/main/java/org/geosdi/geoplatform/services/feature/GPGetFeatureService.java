@@ -90,6 +90,17 @@ public class GPGetFeatureService extends AbstractFeatureService
         return this.getFeatureCollection(request, layerSchema);
     }
 
+    @Override
+    public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures)
+            throws Exception {
+        assert (maxFeatures > 0);
+
+        WFSGetFeatureRequest request = this.createRequest(layerSchema);
+        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
+
+        return this.getFeatureCollection(request, layerSchema);
+    }
+
     private WFSGetFeatureRequest createRequest(LayerSchemaDTO layerSchema)
             throws Exception {
         assert (layerSchema != null);

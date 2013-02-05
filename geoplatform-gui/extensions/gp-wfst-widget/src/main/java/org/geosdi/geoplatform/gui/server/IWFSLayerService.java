@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
+import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
@@ -47,5 +48,11 @@ public interface IWFSLayerService {
     LayerSchemaDTO describeFeatureType(
             String serverUrl,
             String typeName)
+            throws Exception;
+
+    FeatureCollectionDTO getAllFeature(
+            String serverUrl,
+            String typeName,
+            int maxFeatures)
             throws Exception;
 }

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
@@ -47,8 +46,6 @@ import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
  */
 public class WFSWidgetUI implements EntryPoint {
 
-    private Dispatcher dispatcher;
-
     /**
      * (non-Javadoc)
      *
@@ -57,9 +54,6 @@ public class WFSWidgetUI implements EntryPoint {
     @Override
     public void onModuleLoad() {
         this.initInjection();
-        dispatcher = Dispatcher.get();
-
-//        dispatcher.addController(new XXXController());
     }
 
     private void initInjection() {

@@ -53,13 +53,26 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
+import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import org.geosdi.geoplatform.gui.client.service.WFSRemote;
+import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureInstancesEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureMaskAttributesEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.handler.DeleteAttributeConditionHandler;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.gui.responce.FeatureDTO;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  *
@@ -70,14 +83,15 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
 
     private GPEventBus bus;
     //
+    private LayerSchemaDTO schemaDTO;
     private List<AttributeDetail> attributes;
+    private List<FeatureAttributeConditionField> attributeConditions;
     //
     private FormPanel formPanel;
     private FieldSet matchResultSet;
     private SimpleComboBox<String> matchComboField;
     private Button addConditionButton;
-    private List<FeatureAttributeConditionField> attributeConditions;
-    //
+    private Button resetConditionsButton;
     private Button selectAllButton;
     private Button queryButton;
 
@@ -89,10 +103,25 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         this.attributeConditions = Lists.<FeatureAttributeConditionField>newArrayList();
     }
 
+    /**
+     * TODO Pass only useful information and optimize code.
+     */
+    public void setSchema(LayerSchemaDTO schemaDTO) {
+        assert (schemaDTO != null) : "Schema must not bu null.";
+        assert (schemaDTO.getScope() != null) : "Scope must not bu null.";
+        assert (schemaDTO.getTypeName() != null) : "TypeName must not bu null.";
+        assert (schemaDTO.getTargetNamespace() != null) : "TargetNamespace must not bu null.";
+        assert (schemaDTO.getAttributes() != null) : "Attributes must not bu null.";
+        this.schemaDTO = schemaDTO;
+        this.attributes = FeatureConverter.convertDTOs(this.schemaDTO.getAttributes());
+    }
+
     @Override
     public void addComponent() {
         this.createFormPanel();
-        this.createButtons();
+        this.createMatchSelection();
+        this.createSelectionButtons();
+        this.createQueryButtons();
     }
 
     @Override
@@ -113,12 +142,10 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         formPanel.setBodyBorder(false);
         formPanel.setLayout(new FlowLayout());
 
-        formPanel.add(this.createMatchSelection());
-
         super.add(formPanel);
     }
 
-    private FieldSet createMatchSelection() {
+    private void createMatchSelection() {
         matchResultSet = new FieldSet();
         matchResultSet.setHeading("Select by condition");
         matchResultSet.setCheckboxToggle(true);
@@ -148,21 +175,25 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         matchResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
             @Override
             public void handleEvent(FieldSetEvent be) {
-                addConditionButton.setVisible(false);
-                queryButton.disable();
+                selectionEnabled(false);
             }
         });
         matchResultSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
             @Override
             public void handleEvent(FieldSetEvent be) {
-                addConditionButton.setVisible(true);
-                queryButton.enable();
+                selectionEnabled(true);
             }
         });
 
+        formPanel.add(matchResultSet);
+    }
+
+    private void createSelectionButtons() {
         formPanel.setButtonAlign(Style.HorizontalAlignment.LEFT);
-        addConditionButton = new Button("Add Condition", BasicWidgetResources.ICONS.done(),
-                                        new SelectionListener<ButtonEvent>() {
+
+        this.addConditionButton = new Button("Add Condition",
+                                             BasicWidgetResources.ICONS.done(),
+                                             new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 FeatureAttributeConditionField attributeCondition =
@@ -178,16 +209,62 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         });
         formPanel.addButton(addConditionButton);
 
-        return matchResultSet;
+        this.resetConditionsButton = new Button("Reset Conditions",
+                                                BasicWidgetResources.ICONS.delete(),
+                                                new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                for (FeatureAttributeConditionField attCondition : attributeConditions) {
+                    matchResultSet.remove(attCondition);
+                }
+                attributeConditions.clear();
+            }
+        });
+        formPanel.addButton(resetConditionsButton);
     }
 
-    private void createButtons() {
+    private void createQueryButtons() {
         super.setButtonAlign(Style.HorizontalAlignment.RIGHT);
 
         this.selectAllButton = new Button("Select All",
                                           new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
+                queryEnabled(false);
+
+                WFSRemote.Util.getInstance().getAllFeature(
+                        schemaDTO.getScope(),
+                        schemaDTO.getTypeName(),
+                        50, // TODO Customize
+                        new AsyncCallback<FeatureCollectionDTO>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        String errorMessage = "Error on WFS GetFeature request";
+
+                        GeoPlatformMessage.errorMessage(
+                                "GetFeture Service Error",
+                                errorMessage + " - " + caught.getMessage());
+
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                errorMessage + " for " + schemaDTO.getTypeName() + " layer.",
+                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                    }
+
+                    @Override
+                    public void onSuccess(FeatureCollectionDTO result) {
+                        List<FeatureDetail> instances = Lists.newArrayListWithCapacity(result.getFeatures().size());
+                        for (FeatureDTO feature : result.getFeatures()) {
+                            Map<String, String> attributes = feature.getAttributes().getAttributesMap();
+                            FeatureDetail featureDetail = new FeatureDetail(null, attributes);
+                            instances.add(featureDetail);
+                        }
+
+                        FeatureInstancesEvent e = new FeatureInstancesEvent();
+                        e.setInstances(instances);
+                        bus.fireEvent(e);
+                        queryEnabled(true);
+                    }
+                });
             }
         });
         super.addButton(selectAllButton);
@@ -196,21 +273,28 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                                       new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
+                // TODO
             }
         });
         super.addButton(queryButton);
     }
 
-    public void setAttributes(List<AttributeDetail> attributes) {
-        assert (attributes != null) : "Attributes must not bu null.";
-        this.attributes = attributes;
+    private void selectionEnabled(boolean enabled) {
+        addConditionButton.setVisible(enabled);
+        resetConditionsButton.setVisible(enabled);
+        queryButton.setEnabled(enabled);
+    }
+
+    private void queryEnabled(boolean enabled) {
+        selectAllButton.setEnabled(enabled);
+        queryButton.setEnabled(enabled);
+        bus.fireEvent(new FeatureMaskAttributesEvent(!enabled));
     }
 
     @Override
     public void deleteCondition(FeatureAttributeConditionField field) {
         attributeConditions.remove(field);
         matchResultSet.remove(field);
-        matchResultSet.layout();
     }
 
     private enum MatchType {

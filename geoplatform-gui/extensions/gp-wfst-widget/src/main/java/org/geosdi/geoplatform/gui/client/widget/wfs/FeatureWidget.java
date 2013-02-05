@@ -117,24 +117,27 @@ public class FeatureWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
+        super.setCollapsible(false);
         super.setResizable(false);
         super.setModal(true);
-        super.setCollapsible(false);
         super.setPlain(true);
 
         super.setLayout(new BorderLayout());
     }
 
     private void addSelectionWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.WEST, 300);
-        layoutData.setMargins(new Margins(0));
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST, 300);
+        layoutData.setMargins(new Margins(0, 0, 0, 5));
+        layoutData.setCollapsible(true);
 
         super.add(this.selectionWidget, layoutData);
     }
 
     private void addMapWidget() {
-        // The notifyShow method is called 1 times at the first show 
-        // only in the center region, otherwise 2 times.        
+        /**
+         * The notifyShow method is called 1 times at the first show only in the
+         * center region, otherwise 2 times.
+         */
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER, 700);
         layoutData.setMargins(new Margins(0));
 
@@ -142,8 +145,17 @@ public class FeatureWidget extends GeoPlatformWindow
     }
 
     private void addAttributesWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH);
-        layoutData.setMargins(new Margins(0));
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH, 150);
+        layoutData.setMargins(new Margins(5, 0, 0, 0));
+        layoutData.setCollapsible(true);
+        layoutData.setSplit(true);
+        layoutData.setMinSize(70);
+        layoutData.setMaxSize(550);
+
+        attributesWidget.setHeaderVisible(true);
+        attributesWidget.getHeader().setText("Feature Attributes");
+        attributesWidget.getHeader().setStyleAttribute("textAlign", "center");
+        attributesWidget.setScrollMode(Style.Scroll.AUTOY);
 
         super.add(this.attributesWidget, layoutData);
     }
@@ -228,11 +240,11 @@ public class FeatureWidget extends GeoPlatformWindow
             vector.setGeometryName(this.schemaDTO.getGeometry().getName());
         }
 
-        List<AttributeDetail> attributes = FeatureConverter.convertDTOs(
-                this.schemaDTO.getAttributes());
+        List<AttributeDetail> attributes =
+                FeatureConverter.convertDTOs(this.schemaDTO.getAttributes());
 
         this.attributesWidget.setAttributes(attributes);
-        this.selectionWidget.setAttributes(attributes);
+        this.selectionWidget.setSchema(schemaDTO);
     }
 
     @Override

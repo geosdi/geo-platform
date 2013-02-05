@@ -40,7 +40,6 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.AdapterField;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.LabelField;
 import com.extjs.gxt.ui.client.widget.form.MultiField;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
@@ -49,6 +48,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
+import org.geosdi.geoplatform.gui.client.model.wfs.OperatorType;
 import org.geosdi.geoplatform.gui.client.widget.wfs.event.DeleteAttributeConditionEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
@@ -64,14 +64,6 @@ public class FeatureAttributeConditionField extends MultiField {
         assert (attributes != null) : "attributes must not be null.";
         this.attributes = attributes;
         this.createComponents();
-    }
-
-    public FeatureAttributeConditionField() {
-        throw new NullPointerException("Use constructor with List<AttributeDTO> argument.");
-    }
-
-    public FeatureAttributeConditionField(String fieldLabel, Field... fields) {
-        throw new NullPointerException("Use constructor with List<AttributeDTO> argument.");
     }
 
     private void createComponents() {
@@ -137,26 +129,5 @@ public class FeatureAttributeConditionField extends MultiField {
         button.setAutoWidth(true);
 
         return button;
-    }
-
-    private enum OperatorType {
-
-        EQUAL("="),
-        NOT_EQUAL("<>"),
-        LESS("<"),
-        GREATER(">"),
-        LESS_OR_EQUAL("<="),
-        GREATER_OR_EQUAL(">=");
-        //
-        private String symbol;
-
-        private OperatorType(String symbol) {
-            this.symbol = symbol;
-        }
-
-        @Override
-        public String toString() {
-            return this.symbol;
-        }
     }
 }

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
@@ -49,5 +50,12 @@ public interface WFSRemoteAsync {
             String serverUrl,
             String typeName,
             AsyncCallback<LayerSchemaDTO> callback)
+            throws GeoPlatformException;
+
+    void getAllFeature(
+            String serverUrl,
+            String typeName,
+            int maxFeatures,
+            AsyncCallback<FeatureCollectionDTO> callback)
             throws GeoPlatformException;
 }

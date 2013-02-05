@@ -33,30 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
+package org.geosdi.geoplatform.gui.client.widget.wfs.event;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.GwtEvent;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface FeatureAttributesHandler extends EventHandler {
+public class FeatureInstancesEvent extends GwtEvent<FeatureAttributesHandler> {
 
-    Type<FeatureAttributesHandler> TYPE = new Type<FeatureAttributesHandler>();
+    private List<FeatureDetail> instances;
 
-    void postInstances(List<FeatureDetail> instaces);
+    public void setInstances(List<FeatureDetail> instances) {
+        this.instances = instances;
+    }
 
-    void resetInstances();
+    public void clear() {
+        instances = null;
+    }
 
-    void saveAttributes();
+    @Override
+    public Type<FeatureAttributesHandler> getAssociatedType() {
+        return FeatureAttributesHandler.TYPE;
+    }
 
-    void resetAttributes();
-
-    void successfulTransaction();
-
-    void maskAttributes(boolean mask);
+    @Override
+    protected void dispatch(FeatureAttributesHandler handler) {
+        if (instances == null || instances.isEmpty()) {
+            handler.resetInstances();
+        } else {
+            handler.postInstances(instances);
+        }
+    }
 }

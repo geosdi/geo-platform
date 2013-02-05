@@ -190,7 +190,7 @@ public class TimeCQLButton extends AdvancedCQLButton {
 
             @Override
             public void initSize() {
-                super.setSize("520", "270");
+                super.setSize("570", "270");
             }
 
             @Override

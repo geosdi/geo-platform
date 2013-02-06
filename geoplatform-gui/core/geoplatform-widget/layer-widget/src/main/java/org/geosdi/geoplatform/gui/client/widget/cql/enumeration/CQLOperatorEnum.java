@@ -84,6 +84,39 @@ public enum CQLOperatorEnum {
         public ICQLBasicOperator getOperatorInstance() {
             return new CQLStringOperator(super.symbol);
         }
+    },
+    STARTS_WITH("starts with") {
+        @Override
+        public ICQLBasicOperator getOperatorInstance() {
+            return new CQLStringOperator("like") {
+                @Override
+                public String generateExpression(String featureAttribute, String conditionValue) {
+                    return super.generateExpression(featureAttribute, conditionValue + "%");
+                }
+            };
+        }
+    },
+    ENDS_WITH("ends with") {
+        @Override
+        public ICQLBasicOperator getOperatorInstance() {
+            return new CQLStringOperator("like") {
+                @Override
+                public String generateExpression(String featureAttribute, String conditionValue) {
+                    return super.generateExpression(featureAttribute, "%" + conditionValue);
+                }
+            };
+        }
+    },
+    CONTAINS("contains") {
+        @Override
+        public ICQLBasicOperator getOperatorInstance() {
+            return new CQLStringOperator("like") {
+                @Override
+                public String generateExpression(String featureAttribute, String conditionValue) {
+                    return super.generateExpression(featureAttribute, "%" + conditionValue + "%");
+                }
+            };
+        }
     };
     private String symbol;
 

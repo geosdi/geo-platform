@@ -62,6 +62,9 @@ public class CQLOperatorValue extends GeoPlatformBeanModel {
         operatorList.add(new CQLOperatorValue().setOperatorValue(CQLOperatorEnum.LESS_OR_EQUAL));
         operatorList.add(new CQLOperatorValue().setOperatorValue(CQLOperatorEnum.GREATER_OR_EQUAL));
         operatorList.add(new CQLOperatorValue().setOperatorValue(CQLOperatorEnum.LIKE));
+        operatorList.add(new CQLOperatorValue().setOperatorValue(CQLOperatorEnum.STARTS_WITH));
+        operatorList.add(new CQLOperatorValue().setOperatorValue(CQLOperatorEnum.ENDS_WITH));
+        operatorList.add(new CQLOperatorValue().setOperatorValue(CQLOperatorEnum.CONTAINS));
     }
 
     public CQLOperatorValue setOperatorValue(CQLOperatorEnum operatorValue) {

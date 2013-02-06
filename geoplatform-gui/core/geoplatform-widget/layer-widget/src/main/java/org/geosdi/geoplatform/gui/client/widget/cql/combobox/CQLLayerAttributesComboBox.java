@@ -90,6 +90,7 @@ public class CQLLayerAttributesComboBox extends ComboBox<GPLayerAttributes> {
         this.setDisplayField(GPAttributeKey.ATTRIBUTE_VALUE.toString());
         this.setEditable(false);
         this.setForceSelection(true);
+        this.setUseQueryCache(Boolean.FALSE);
 //        this.setValueField(GPLayerAttributes.GPAttributeKey.ATTRIBUTE_VALUE.toString());
     }
 }

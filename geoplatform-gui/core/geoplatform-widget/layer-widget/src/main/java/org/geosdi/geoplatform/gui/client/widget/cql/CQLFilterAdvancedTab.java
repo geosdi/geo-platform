@@ -191,6 +191,14 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
             }
         });
         symbolPanel.add(divisionOperator);
+        Button apexElement = new Button("'", new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                insertTextIntoFilterArea("'");
+            }
+        });
+        apexElement.setToolTip("Use apex before a string element");
+        symbolPanel.add(apexElement);
         Button notOperator = new Button("NOT", new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -226,11 +234,11 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         symbolPanel.add(doesNotExistOperator);
         BetweenCQLButton betweenCQLButton = new BetweenCQLButton(filterTextArea);
         symbolPanel.add(betweenCQLButton);
-        INCQLButton incqlb = new INCQLButton(filterTextArea, this.treePanel);
-        symbolPanel.add(incqlb);
 
         HorizontalPanel spatialPanel = new HorizontalPanel();
         spatialPanel.setSpacing(2);
+        INCQLButton incqlb = new INCQLButton(filterTextArea, this.treePanel);
+        spatialPanel.add(incqlb);
         BBOXCQLButton bboxcqlb = new BBOXCQLButton(filterTextArea, this.treePanel);
         spatialPanel.add(bboxcqlb);
         Button includeOperator = new Button("INCLUDE", new SelectionListener<ButtonEvent>() {
@@ -256,7 +264,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         super.add(spatialPanel);
         super.add(functionPanel);
         this.filterTextArea.setSize(CQLFilterTabWidget.TAB_WIDGET_WIDTH,
-                CQLFilterTabWidget.TAB_WIDGET_HEIGHT-80);
+                CQLFilterTabWidget.TAB_WIDGET_HEIGHT - 80);
         super.add(this.filterTextArea, new FormData("98%"));
     }
 
@@ -281,5 +289,11 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
     @Override
     public void setCQLValue(String cqlFilter) {
         this.filterTextArea.setValue(cqlFilter);
+    }
+
+    @Override
+    protected void onUnload() {
+        super.onUnload();
+        this.filterTextArea.clear();
     }
 }

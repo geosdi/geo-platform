@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.time.AddModifyTimeFilterAction;
+import org.geosdi.geoplatform.gui.client.action.menu.time.RemoveTimeFilterAction;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 
 /**
@@ -56,6 +57,9 @@ public class GPTimeFilterMenu extends Menu {
         addModifyMenuItem.setIcon(LayerResources.ICONS.cqlFilter());
         addModifyMenuItem.addSelectionListener(new AddModifyTimeFilterAction(tree));
         super.add(addModifyMenuItem);
-        
+        MenuItem removeTimeFilterMenuItem = new MenuItem("Remove Filter");
+        removeTimeFilterMenuItem.addSelectionListener(new RemoveTimeFilterAction(tree));
+        removeTimeFilterMenuItem.setIcon(LayerResources.ICONS.cqlFilterDelete());
+        super.add(removeTimeFilterMenuItem);
     }
 }

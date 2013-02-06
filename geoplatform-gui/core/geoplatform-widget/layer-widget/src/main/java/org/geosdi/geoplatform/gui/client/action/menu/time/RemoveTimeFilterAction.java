@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu.cqlfilter;
+package org.geosdi.geoplatform.gui.client.action.menu.time;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
@@ -41,23 +41,28 @@ import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
+import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
+import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.impl.map.event.CQLFilterLayerMapEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.TimeFilterLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class RemoveCQLFilterAction extends MenuAction {
+public class RemoveTimeFilterAction extends MenuAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
-    private final CQLFilterLayerMapEvent cqlFilterLayerMapEvent = new CQLFilterLayerMapEvent();
+    private final TimeFilterLayerMapEvent timeFilterLayerMapEvent = new TimeFilterLayerMapEvent();
+    private final GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
 
-    public RemoveCQLFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("RemoveCQLFilter");
+    public RemoveTimeFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
+        super("RemoveTimeFilter");
         this.treePanel = treePanel;
     }
 
@@ -65,15 +70,25 @@ public class RemoveCQLFilterAction extends MenuAction {
     public void componentSelected(MenuEvent ce) {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         if (itemSelected instanceof FolderTreeNode) {
-            throw new IllegalArgumentException("The CQL Filter can't be applied to a folder");
+            throw new IllegalArgumentException("The Time Filter can't be applied to a folder");
         }
         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
         IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
         AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
-        layerSelected.setCqlFilter("");
+        layerSelected.setTimeFilter("");
+        String layerName;
+        if (layerSelected.getAlias() != null
+                && layerSelected.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
+            layerName = layerSelected.getAlias().substring(0,
+                    layerSelected.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+        } else {
+            layerName = layerSelected.getLabel();
+        }
+        layerSelected.setAlias(layerName);
         mementoSave.putOriginalPropertiesInCache(memento);
-        cqlFilterLayerMapEvent.setLayerBean(layerSelected);
-        GPHandlerManager.fireEvent(cqlFilterLayerMapEvent);
+        WidgetPropertiesHandlerManager.fireEvent(labelEvent);
+        timeFilterLayerMapEvent.setLayerBean(layerSelected);
+        GPHandlerManager.fireEvent(timeFilterLayerMapEvent);
         treePanel.refresh(layerSelected);
     }
 }

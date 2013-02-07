@@ -199,6 +199,14 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         });
         apexElement.setToolTip("Use apex before a string element");
         symbolPanel.add(apexElement);
+        Button jollyCharacter = new Button("%", new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                insertTextIntoFilterArea("%");
+            }
+        });
+        jollyCharacter.setToolTip("The % character is a wild-card for any number of characters");
+        symbolPanel.add(jollyCharacter);
         Button notOperator = new Button("NOT", new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -232,11 +240,12 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         doesNotExistOperator.setTitle("Applied to attributes: "
                 + "Tests whether a featuretype does not have a given attribute");
         symbolPanel.add(doesNotExistOperator);
-        BetweenCQLButton betweenCQLButton = new BetweenCQLButton(filterTextArea);
-        symbolPanel.add(betweenCQLButton);
+
 
         HorizontalPanel spatialPanel = new HorizontalPanel();
         spatialPanel.setSpacing(2);
+        BetweenCQLButton betweenCQLButton = new BetweenCQLButton(filterTextArea);
+        spatialPanel.add(betweenCQLButton);
         INCQLButton incqlb = new INCQLButton(filterTextArea, this.treePanel);
         spatialPanel.add(incqlb);
         BBOXCQLButton bboxcqlb = new BBOXCQLButton(filterTextArea, this.treePanel);

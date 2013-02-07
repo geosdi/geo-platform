@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.gui.client.widget.cql;
 
 import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.MultiField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLayerAttributesComboBox;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLogicalOperatorComboBox;
@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes.GPAttributeKey;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class CQLFilterBasicRow extends HorizontalPanel {
+public class CQLFilterBasicRow extends MultiField<String> {
 
     private CQLLayerAttributesComboBox attributesComboBox;
     private CQLLogicalOperatorComboBox logicalOperatorComboBox;

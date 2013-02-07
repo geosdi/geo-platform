@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.AdapterField;
 import com.google.common.collect.Lists;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -78,9 +79,7 @@ public class CQLFilterBasicTab extends GeoPlatformTabItem implements ICQLFilterT
         this.expressionsPanel = new VerticalPanel();
         this.expressionsPanel.setSpacing(10);
         super.add(this.expressionsPanel);
-        CQLFilterBasicRow basicRow = new CQLFilterBasicRow(treePanel);
-        this.filterList.add(basicRow);
-        this.expressionsPanel.add(basicRow);
+        //
         this.addExpressionButton = new Button("Add Expression");
         addExpressionButton.setIcon(BasicWidgetResources.ICONS.done());
         addExpressionButton.setToolTip("Add a new expression line");
@@ -93,10 +92,35 @@ public class CQLFilterBasicTab extends GeoPlatformTabItem implements ICQLFilterT
         super.add(this.addExpressionButton);
     }
 
+    @Override
+    protected void onLoad() {
+        super.onLoad();
+        this.addFirstRow();
+    }
+
+    private void addFirstRow() {
+        CQLFilterBasicRow basicRow = new CQLFilterBasicRow(treePanel);
+        this.filterList.add(basicRow);
+        this.expressionsPanel.add(basicRow);
+        super.layout();
+    }
+
+    @Override
+    protected void onUnload() {
+        super.onUnload();
+        this.reset();
+    }
+
+    @Override
+    public void reset() {
+        this.expressionsPanel.removeAll();
+        this.filterList.clear();
+    }
+
     private CQLFilterBasicRow addCQLBasicRow() {
         CQLFilterBasicRow basicRow = new CQLFilterBasicRow(treePanel);
         Button deleteRowButton = this.generateDeleteButton(basicRow);
-        basicRow.add(deleteRowButton);
+        basicRow.add(new AdapterField(deleteRowButton));
         this.filterList.add(basicRow);
         this.expressionsPanel.add(basicRow.getLogicalOperatorComboBox());
         this.expressionsPanel.add(basicRow);

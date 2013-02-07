@@ -236,6 +236,7 @@
             </roles>
             <properties>
                 <openPGP>0xB25F4B38</openPGP>
+                 <active>false</active>
             </properties>
             <timezone>+1</timezone>
         </developer>

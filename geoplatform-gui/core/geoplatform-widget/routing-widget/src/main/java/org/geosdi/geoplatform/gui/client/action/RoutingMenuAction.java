@@ -35,16 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.action;
 
-import org.geosdi.geoplatform.gui.client.RoutingEvents;
-
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
+import org.geosdi.geoplatform.gui.client.RoutingEvents;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class RoutingMenuAction extends MenuCheckAction {

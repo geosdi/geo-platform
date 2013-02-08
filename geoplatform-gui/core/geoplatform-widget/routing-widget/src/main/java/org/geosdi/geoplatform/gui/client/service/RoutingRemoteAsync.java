@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.service;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.model.RoutingBean;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public interface RoutingRemoteAsync {

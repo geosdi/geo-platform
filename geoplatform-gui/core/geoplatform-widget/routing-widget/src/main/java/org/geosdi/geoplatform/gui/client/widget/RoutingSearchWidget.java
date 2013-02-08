@@ -35,16 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.model.RoutingBean;
-import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
-import org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent;
-import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
-import org.geosdi.geoplatform.gui.puregwt.routing.event.TraceRoutingLineEvent;
-
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -55,6 +45,15 @@ import com.extjs.gxt.ui.client.widget.layout.MarginData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.model.RoutingBean;
+import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
+import org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent;
+import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.TraceRoutingLineEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

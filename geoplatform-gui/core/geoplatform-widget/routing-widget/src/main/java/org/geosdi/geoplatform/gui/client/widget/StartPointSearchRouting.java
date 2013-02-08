@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveStartRoutingPointEvent;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.StartRoutingPointEvent;
-
-import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
-import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

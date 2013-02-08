@@ -43,7 +43,8 @@ import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServ
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class RoutingRemoteImpl extends GPAutoInjectingRemoteServiceServlet

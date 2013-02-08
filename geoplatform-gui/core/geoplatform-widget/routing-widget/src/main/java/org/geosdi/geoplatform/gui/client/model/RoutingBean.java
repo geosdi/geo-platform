@@ -40,7 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class RoutingBean implements Serializable {

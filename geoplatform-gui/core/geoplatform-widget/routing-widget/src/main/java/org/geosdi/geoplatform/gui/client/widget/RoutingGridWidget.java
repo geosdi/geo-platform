@@ -35,20 +35,19 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.geosdi.geoplatform.gui.client.model.Directions;
-import org.geosdi.geoplatform.gui.client.model.Directions.DirectionsKeyValue;
-import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
-
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import java.util.ArrayList;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.Directions;
+import org.geosdi.geoplatform.gui.client.model.Directions.DirectionsKeyValue;
+import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {

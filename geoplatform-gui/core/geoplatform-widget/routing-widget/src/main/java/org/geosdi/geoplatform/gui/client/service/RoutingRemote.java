@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.service;
 
-import org.geosdi.geoplatform.gui.client.model.RoutingBean;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import org.geosdi.geoplatform.gui.client.model.RoutingBean;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 @RemoteServiceRelativePath("RoutingRemote")

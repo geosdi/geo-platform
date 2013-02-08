@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
+import com.extjs.gxt.ui.client.mvc.AppEvent;
 import org.geosdi.geoplatform.gui.client.RoutingEvents;
 import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
 import org.geosdi.geoplatform.gui.client.service.GeocodingRemoteAsync;
 import org.geosdi.geoplatform.gui.client.service.RoutingRemote;
 import org.geosdi.geoplatform.gui.client.service.RoutingRemoteAsync;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
 
 /**
  * 

@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
-
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.WidgetListener;
@@ -44,6 +42,7 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 
 /**
  * 

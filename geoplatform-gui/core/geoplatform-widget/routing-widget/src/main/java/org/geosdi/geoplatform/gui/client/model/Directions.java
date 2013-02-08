@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.gui.client.model;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class Directions extends GeoPlatformBeanModel {

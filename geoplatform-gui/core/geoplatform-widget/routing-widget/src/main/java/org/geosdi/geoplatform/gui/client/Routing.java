@@ -45,8 +45,9 @@ import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 
 /**
- * @author giuseppe
- *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
 public class Routing implements EntryPoint {
 

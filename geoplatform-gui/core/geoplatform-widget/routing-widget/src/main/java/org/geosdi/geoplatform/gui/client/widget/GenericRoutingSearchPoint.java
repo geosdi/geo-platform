@@ -35,8 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.KeyListener;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
@@ -44,11 +47,6 @@ import org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget;
 import org.geosdi.geoplatform.gui.client.widget.search.routing.GPComboBox;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
-
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

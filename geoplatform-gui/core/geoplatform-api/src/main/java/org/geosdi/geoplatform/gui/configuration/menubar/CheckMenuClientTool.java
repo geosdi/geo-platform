@@ -36,12 +36,14 @@
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
+import org.geosdi.geoplatform.gui.configuration.GPCheckMenuItem;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class CheckMenuClientTool extends MenuBarClientTool {
+public class CheckMenuClientTool extends MenuBarClientTool implements
+        GPCheckMenuItem {
 
     private static final long serialVersionUID = -6257517250152965702L;
     //
@@ -50,16 +52,23 @@ public class CheckMenuClientTool extends MenuBarClientTool {
     /**
      * @return the checked
      */
+    @Override
     public boolean isChecked() {
         return checked;
     }
 
     /**
-     * @param checked
-     *            the checked to set
+     * @param checked the checked to set
      */
+    @Override
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    @Override
+    protected void create(IGeoPlatformMenubar menubar,
+            Menu menu) {
+        menubar.addCheckMenuItem(this, menu);
     }
 
     /**
@@ -72,10 +81,5 @@ public class CheckMenuClientTool extends MenuBarClientTool {
         return "CheckMenuClientTool{" + super.toString()
                 + ", text=" + text
                 + ", checked=" + checked + '}';
-    }
-
-    @Override
-    protected void create(IGeoPlatformMenubar menubar, Menu menu) {
-        menubar.addCheckMenuItem(this, menu);
     }
 }

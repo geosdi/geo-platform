@@ -33,19 +33,70 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
+package org.geosdi.geoplatform.gui.configuration;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.GeoPlatformMenuCreator;
+import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 
 /**
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface IGeoPlatformMenubar extends GeoPlatformMenuCreator {
+public abstract class GPMenuGenericTool<M extends GeoPlatformMenuCreator>
+        extends GenericTool implements GPMenuItem {
 
-    void addMenuSeparator(final Menu menu);
+    private static final long serialVersionUID = -6366879645618646403L;
 
-    void addOAuth2MenuItem(OAuth2MenuBarClientTool tool,
+    /**
+     * Check the permission of the user logged and call the method for creation.
+     * If the permission was not found the tool will not be created.
+     *
+     * @param menuCreator
+     * @param menu
+     */
+    public void buildTool(M menuCreator,
+            final Menu menu) {
+        if (secure) {
+            checkSecurity(menuCreator, menu);
+        } else {
+            byPassSecurity(menuCreator, menu);
+        }
+    }
+
+    /**
+     * Check the permission of the user logged and call the method for creation.
+     * If the permission was not found the tool will not be created.
+     *
+     * @param strategy
+     */
+    protected final void checkSecurity(M menuCreator,
+            Menu menu) {
+        Boolean permission = GPAccountLogged.getInstance().
+                hasComponentPermission(this.getId());
+        if (permission != null) {
+            super.enabled &= permission;
+            this.create(menuCreator, menu);
+        }
+    }
+
+    /**
+     * Bypass User Permission on Tool and call the method for creation
+     *
+     * @param strategy
+     */
+    protected final void byPassSecurity(M menuCreator,
+            Menu menu) {
+        this.create(menuCreator, menu);
+    }
+
+    /**
+     * Each component will be added into menu itself
+     *
+     * @param menubar
+     * @param menu
+     */
+    protected abstract void create(M menuCreator,
             final Menu menu);
 }

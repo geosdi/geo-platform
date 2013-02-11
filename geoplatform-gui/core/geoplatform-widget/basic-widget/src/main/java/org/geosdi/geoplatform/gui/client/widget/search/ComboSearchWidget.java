@@ -35,12 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.search;
 
-import java.util.List;
-
-import org.geosdi.geoplatform.gui.client.widget.search.routing.GPComboBox;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
-
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -50,6 +44,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Image;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.search.routing.GPComboBox;
+import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

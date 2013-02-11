@@ -36,17 +36,20 @@
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
+import org.geosdi.geoplatform.gui.configuration.GPDateMenuItem;
 
 /**
  * @author giuseppe
  *
  */
-public class DateMenuClientTool extends MenuBarClientTool {
+public class DateMenuClientTool extends MenuBarClientTool implements
+        GPDateMenuItem {
 
     private static final long serialVersionUID = -5201671145624228072L;
 
     @Override
-    protected void create(IGeoPlatformMenubar menubar, Menu menu) {
+    protected void create(IGeoPlatformMenubar menubar,
+            Menu menu) {
         menubar.addDateMenu(this, menu);
     }
 }

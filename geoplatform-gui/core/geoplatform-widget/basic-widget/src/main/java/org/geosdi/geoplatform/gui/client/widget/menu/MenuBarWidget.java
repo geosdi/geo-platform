@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class MenuBarWidget {
 
@@ -65,9 +65,12 @@ public class MenuBarWidget {
     private void initialize() {
         for (MenuBarCategory category : this.menuBarContainerTool.getCategories()) {
             Menu menu = new Menu();
-            this.bar.add(new MenuBarItem(category.getText(), menu));
+
             addCategory(category, menu);
 
+            if (menu.getItemCount() > 0) {
+                this.bar.add(new MenuBarItem(category.getText(), menu));
+            }
         }
     }
 
@@ -75,9 +78,10 @@ public class MenuBarWidget {
      * Add MenuBarItem to MenuBar
      *
      * @param category
-     * @param menu  
+     * @param menu
      */
-    public void addCategory(MenuBarCategory category, Menu menu) {
+    public void addCategory(MenuBarCategory category,
+            Menu menu) {
         MenuUtility.getIstance().buildTools(menu, category.getTools());
     }
 

@@ -53,13 +53,14 @@ import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeCheckHandler;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
+import org.geosdi.geoplatform.gui.configuration.GPCheckMenuItem;
+import org.geosdi.geoplatform.gui.configuration.GPDateMenuItem;
+import org.geosdi.geoplatform.gui.configuration.GPGroupMenuItem;
+import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.configuration.GPMenuItem;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
-import org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool;
-import org.geosdi.geoplatform.gui.configuration.menubar.DateMenuClientTool;
-import org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.IGeoPlatformMenubar;
-import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.OAuth2MenuBarClientTool;
 
 /**
@@ -83,8 +84,9 @@ public class MenuUtility implements IGeoPlatformMenubar {
      * @param tools
      * @param menu
      */
-    public void buildTools(Menu menu, List<MenuBarClientTool> tools) {
-        for (MenuBarClientTool tool : tools) {
+    public void buildTools(Menu menu,
+            List<? extends GPMenuGenericTool> tools) {
+        for (GPMenuGenericTool tool : tools) {
             tool.buildTool(INSTANCE, menu);
         }
     }
@@ -106,7 +108,8 @@ public class MenuUtility implements IGeoPlatformMenubar {
      * @param menu
      */
     @Override
-    public void addMenuItem(MenuBarClientTool tool, Menu menu) {
+    public void addMenuItem(GPMenuItem tool,
+            Menu menu) {
         MenuBaseAction action = (MenuBaseAction) menuRegistar.get(tool.getId());
 
         final MenuItem item = new MenuItem(tool.getText());
@@ -131,7 +134,8 @@ public class MenuUtility implements IGeoPlatformMenubar {
      * @param menu
      */
     @Override
-    public void addCheckMenuItem(CheckMenuClientTool tool, final Menu menu) {
+    public void addCheckMenuItem(GPCheckMenuItem tool,
+            final Menu menu) {
         MenuCheckAction action = (MenuCheckAction) menuRegistar.get(tool.getId());
 
         final CheckMenuItem item = new CheckMenuItem(tool.getText());
@@ -164,7 +168,8 @@ public class MenuUtility implements IGeoPlatformMenubar {
      * @param menu
      */
     @Override
-    public void addDateMenu(DateMenuClientTool tool, Menu menu) {
+    public void addDateMenu(GPDateMenuItem tool,
+            Menu menu) {
         MenuItem date = new MenuItem("Choose a Date");
         menu.add(date);
         date.setSubMenu(new DateMenu());
@@ -177,8 +182,10 @@ public class MenuUtility implements IGeoPlatformMenubar {
      * @param menu
      */
     @Override
-    public void addOAuth2MenuItem(OAuth2MenuBarClientTool tool, Menu menu) {
-        OAuth2MenuBaseAction action = (OAuth2MenuBaseAction) menuRegistar.get(tool.getId());
+    public void addOAuth2MenuItem(OAuth2MenuBarClientTool tool,
+            Menu menu) {
+        OAuth2MenuBaseAction action = (OAuth2MenuBaseAction) menuRegistar.get(
+                tool.getId());
 
         final MenuItem item = new MenuItem(tool.getText());
 
@@ -211,7 +218,8 @@ public class MenuUtility implements IGeoPlatformMenubar {
      * @param menu
      */
     @Override
-    public void addGroupMenuItem(GroupMenuClientTool tool, Menu menu) {
+    public void addGroupMenuItem(GPGroupMenuItem tool,
+            Menu menu) {
         MenuItem item = new MenuItem(tool.getText());
         menu.add(item);
         Menu subMenu = new Menu();
@@ -219,7 +227,8 @@ public class MenuUtility implements IGeoPlatformMenubar {
         item.setSubMenu(subMenu);
     }
 
-    private void addMenuActionEnableHandler(MenuAction action, final MenuItem item) {
+    private void addMenuActionEnableHandler(MenuAction action,
+            final MenuItem item) {
         action.addActionEnableHandler(new ActionEnableHandler() {
             @Override
             public void onActionEnabled(ActionEnableEvent event) {

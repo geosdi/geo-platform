@@ -38,35 +38,40 @@ package org.geosdi.geoplatform.gui.configuration.menubar;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import java.util.Collections;
 import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.GPGroupMenuItem;
+import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
 
 /**
  * @author giuseppe
  *
  */
-public class GroupMenuClientTool extends MenuBarClientTool {
+public class GroupMenuClientTool extends MenuBarClientTool implements
+        GPGroupMenuItem {
 
     private static final long serialVersionUID = -6262573797200577418L;
     //
-    private List<MenuBarClientTool> tools;
+    private List<? extends GPMenuGenericTool> tools;
 
     /**
      * @return the tools
      */
-    public List<MenuBarClientTool> getTools() {
+    @Override
+    public List<? extends GPMenuGenericTool> getTools() {
         return tools;
     }
 
     /**
-     * @param tools
-     *            the tools to set
+     * @param tools the tools to set
      */
-    public void setTools(List<MenuBarClientTool> tools) {
+    @Override
+    public void setTools(List<? extends GPMenuGenericTool> tools) {
         Collections.sort(tools);
         this.tools = tools;
     }
 
     @Override
-    protected void create(IGeoPlatformMenubar menubar, Menu menu) {
+    protected void create(IGeoPlatformMenubar menubar,
+            Menu menu) {
         menubar.addGroupMenuItem(this, menu);
     }
 }

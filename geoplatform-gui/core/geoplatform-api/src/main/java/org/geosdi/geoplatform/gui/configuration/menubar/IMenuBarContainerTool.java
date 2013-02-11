@@ -38,10 +38,10 @@ package org.geosdi.geoplatform.gui.configuration.menubar;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface IMenuBarContainerTool extends Serializable {
 

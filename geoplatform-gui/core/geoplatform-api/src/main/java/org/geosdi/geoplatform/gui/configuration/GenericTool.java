@@ -35,25 +35,25 @@
  */
 package org.geosdi.geoplatform.gui.configuration;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GenericTool
-        implements Serializable, Comparable<GenericTool> {
+public abstract class GenericTool implements GPGenericTool,
+        Comparable<GenericTool> {
 
     private static final long serialVersionUID = -379951057942018866L;
     //
     protected String id;
     protected boolean enabled;
     protected int order;
+    protected boolean secure = true;
 
     /**
      * @return the id
      */
+    @Override
     public String getId() {
         return id;
     }
@@ -68,6 +68,7 @@ public abstract class GenericTool
     /**
      * @return the enabled
      */
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
@@ -93,10 +94,29 @@ public abstract class GenericTool
         this.order = order;
     }
 
+    /**
+     * @return the secure
+     */
+    @Override
+    public boolean isSecure() {
+        return secure;
+    }
+
+    /**
+     * <pre>
+     * Determines whether a tool is under safety. Default to true.
+     * </pre>
+     *
+     * @param secure the secure to set
+     */
+    public void setSecure(boolean secure) {
+        this.secure = secure;
+    }
+
     @Override
     public String toString() {
         return "GenericTool{ " + "id = " + id + ", enabled = " + enabled
-                + ", order = " + order + '}';
+                + ", order = " + order + ", secure = " + secure + '}';
     }
 
     /**

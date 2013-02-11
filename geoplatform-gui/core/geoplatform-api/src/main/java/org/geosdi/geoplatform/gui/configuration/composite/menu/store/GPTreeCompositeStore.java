@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,19 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
+package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.GeoPlatformMenuCreator;
+import java.util.List;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformMenubar extends GeoPlatformMenuCreator {
+public interface GPTreeCompositeStore {
 
-    void addMenuSeparator(final Menu menu);
+    void setClientTools(
+            Map<GPTreeMenuType, Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>>> theClientTools);
 
-    void addOAuth2MenuItem(OAuth2MenuBarClientTool tool,
-            final Menu menu);
+    /**
+     * Return all {@link GPMenuGenericTool} in the Store associated with
+     * {@link StoreCompositeKey} key
+     *
+     * @param key
+     * @return List<? extends GPMenuGenericTool>
+     */
+    List<? extends GPMenuGenericTool> getTools(StoreCompositeKey key);
 }

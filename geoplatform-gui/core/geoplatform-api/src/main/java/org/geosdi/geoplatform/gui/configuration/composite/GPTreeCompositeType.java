@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,19 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
-
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.GeoPlatformMenuCreator;
+package org.geosdi.geoplatform.gui.configuration.composite;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformMenubar extends GeoPlatformMenuCreator {
+public enum GPTreeCompositeType {
 
-    void addMenuSeparator(final Menu menu);
-
-    void addOAuth2MenuItem(OAuth2MenuBarClientTool tool,
-            final Menu menu);
+    /**
+     * The Root Element of GPLayerTreeWidget
+     */
+    ROOT,
+    /**
+     * The Element with Childs in LayerTreeWidget
+     */
+    COMPOSITE,
+    /**
+     * The LayerTreeWidget Leaf Element
+     */
+    LEAF;
 }

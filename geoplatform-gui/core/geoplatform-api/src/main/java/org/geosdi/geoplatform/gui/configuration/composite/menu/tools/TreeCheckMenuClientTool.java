@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,19 +33,49 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
+package org.geosdi.geoplatform.gui.configuration.composite.menu.tools;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.GeoPlatformMenuCreator;
+import org.geosdi.geoplatform.gui.configuration.GPCheckMenuItem;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMenuStrategy;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformMenubar extends GeoPlatformMenuCreator {
+public class TreeCheckMenuClientTool extends TreeMenuClientTool implements
+        GPCheckMenuItem {
 
-    void addMenuSeparator(final Menu menu);
+    private static final long serialVersionUID = 6593562723222293334L;
+    //
+    private boolean checked;
 
-    void addOAuth2MenuItem(OAuth2MenuBarClientTool tool,
-            final Menu menu);
+    /**
+     * @return the checked
+     */
+    @Override
+    public boolean isChecked() {
+        return checked;
+    }
+
+    /**
+     * @param checked the checked to set
+     */
+    @Override
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    @Override
+    protected void create(GPTreeMenuStrategy menuCreator,
+            Menu menu) {
+       menuCreator.addCheckMenuItem(this, menu);
+    }
+
+    @Override
+    public String toString() {
+        return "TreeCheckMenuClientTool{ " + super.toString() + "checked = "
+                + checked + '}';
+    }
 }

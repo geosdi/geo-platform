@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,19 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
+package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.GeoPlatformMenuCreator;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformMenubar extends GeoPlatformMenuCreator {
+public class StoreCompositeKey {
 
-    void addMenuSeparator(final Menu menu);
+    private final GPTreeMenuType treeMenuType;
+    private final GPTreeCompositeType compositeType;
 
-    void addOAuth2MenuItem(OAuth2MenuBarClientTool tool,
-            final Menu menu);
+    public StoreCompositeKey(GPTreeMenuType theTreeMenuType,
+            GPTreeCompositeType theCompositeType) {
+        this.treeMenuType = theTreeMenuType;
+        this.compositeType = theCompositeType;
+    }
+
+    /**
+     * @return the treeMenuType
+     */
+    public GPTreeMenuType getTreeMenuType() {
+        return treeMenuType;
+    }
+
+    /**
+     * @return the compositeType
+     */
+    public GPTreeCompositeType getCompositeType() {
+        return compositeType;
+    }
+
+    @Override
+    public String toString() {
+        return "StoreCompositeKey { " + "treeMenuType = " + treeMenuType
+                + ", compositeType = " + compositeType + '}';
+    }
 }

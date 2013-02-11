@@ -80,7 +80,7 @@ public class GeoPlatformGeocoderFactory implements GeocoderFactory {
      * @return IGPGeocoderPluginManager
      */
     private IGPGeocoderPluginManager istantiate() {
-        IGPGeocoderPluginManager pluginManager = null;
+        IGPGeocoderPluginManager pluginManager;
 
         switch (getGeocoderPluginType()) {
             case SIMPLE:

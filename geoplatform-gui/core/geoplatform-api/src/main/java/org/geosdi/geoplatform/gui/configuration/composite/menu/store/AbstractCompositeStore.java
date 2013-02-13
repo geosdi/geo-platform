@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,72 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
+import com.google.common.base.Preconditions;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GPMenuGenericTool<M extends GeoPlatformMenuCreator>
-        extends GenericTool implements GPMenuItem {
+public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
 
-    private static final long serialVersionUID = -6366879645618646403L;
+    protected Map<GPTreeMenuType, Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>>> clientTools;
+    private CompositeStoreSorter sorter;
 
-    /**
-     * Check the permission of the user logged and call the method for creation.
-     * If the permission was not found the tool will not be created.
-     *
-     * @param menuCreator
-     * @param menu
-     */
-    public void buildTool(M menuCreator,
-            final Menu menu) {
-        if (secure) {
-            checkSecurity(menuCreator, menu);
-        } else {
-            byPassSecurity(menuCreator, menu);
-        }
+    public AbstractCompositeStore() {
+        this.sorter = new CompositeStoreSorter() {
+            
+            @Override
+            public void sort() {
+                for (Map.Entry<GPTreeMenuType, Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>>> baseEntry : clientTools.entrySet()) {
+                    Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>> map = baseEntry.getValue();
+
+                    for (Map.Entry<GPTreeCompositeType, List<? extends GPMenuGenericTool>> entry : map.entrySet()) {
+                        Collections.sort(entry.getValue());
+                    }
+                }
+            }
+        };
     }
 
-    /**
-     * Check the permission of the user logged and call the method for creation.
-     * If the permission was not found the tool will not be created.
-     *
-     * @param M menuCreator
-     * @param menu
-     */
-    protected final void checkSecurity(M menuCreator,
-            Menu menu) {
-        Boolean permission = GPAccountLogged.getInstance().
-                hasComponentPermission(this.getId());
-        if (permission != null) {
-            super.enabled &= permission;
-            this.create(menuCreator, menu);
-        }
+    @Override
+    public void setClientTools(
+            Map<GPTreeMenuType, Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>>> theClientTools) {
+        this.clientTools = theClientTools;
     }
 
-    /**
-     * Bypass User Permission on Tool and call the method for creation
-     * 
-     * @param M menuCreator
-     * @param menu 
-     */
-    protected final void byPassSecurity(M menuCreator,
-            Menu menu) {
-        this.create(menuCreator, menu);
+    @Override
+    public void init() {
+        Preconditions.checkNotNull(clientTools, "The Client Tools must not "
+                + "be null.");
+
+        this.sorter.sort();
     }
 
-    /**
-     * Each component will be added into menu itself
-     *
-     * @param menubar
-     * @param menu
-     */
-    protected abstract void create(M menuCreator,
-            final Menu menu);
+    @Override
+    public String toString() {
+        return "AbstractCompositeStore{ " + "clientTools = " + clientTools + '}';
+    }
 }

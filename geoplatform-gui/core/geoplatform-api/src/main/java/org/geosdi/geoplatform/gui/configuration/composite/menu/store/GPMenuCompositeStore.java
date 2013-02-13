@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPTreeCompositeStore {
+public interface GPMenuCompositeStore {
 
     void setClientTools(
             Map<GPTreeMenuType, Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>>> theClientTools);
@@ -59,4 +59,9 @@ public interface GPTreeCompositeStore {
      * @return List<? extends GPMenuGenericTool>
      */
     List<? extends GPMenuGenericTool> getTools(StoreCompositeKey key);
+
+    /**
+     * Init Method Called By Spring to Sort all Elements in Map
+     */
+    void init();
 }

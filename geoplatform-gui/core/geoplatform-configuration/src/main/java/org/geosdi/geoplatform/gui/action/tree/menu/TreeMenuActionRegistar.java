@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,72 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.action.tree.menu;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GPMenuGenericTool<M extends GeoPlatformMenuCreator>
-        extends GenericTool implements GPMenuItem {
-
-    private static final long serialVersionUID = -6366879645618646403L;
+public final class TreeMenuActionRegistar
+        extends GeoPlatformActionRegistar<TreeMenuActionCreator> {
 
     /**
-     * Check the permission of the user logged and call the method for creation.
-     * If the permission was not found the tool will not be created.
      *
-     * @param menuCreator
-     * @param menu
+     * @param key
+     * @param toolActionCreator
      */
-    public void buildTool(M menuCreator,
-            final Menu menu) {
-        if (secure) {
-            checkSecurity(menuCreator, menu);
-        } else {
-            byPassSecurity(menuCreator, menu);
+    @Override
+    public void put(String key,
+            TreeMenuActionCreator toolActionCreator) {
+        if ((key != null) && (toolActionCreator != null)) {
+            super.registry.put(key, toolActionCreator);
         }
     }
 
     /**
-     * Check the permission of the user logged and call the method for creation.
-     * If the permission was not found the tool will not be created.
      *
-     * @param M menuCreator
-     * @param menu
+     * @param key
+     * @param treePanel
+     * @return {@link MenuAction}
      */
-    protected final void checkSecurity(M menuCreator,
-            Menu menu) {
-        Boolean permission = GPAccountLogged.getInstance().
-                hasComponentPermission(this.getId());
-        if (permission != null) {
-            super.enabled &= permission;
-            this.create(menuCreator, menu);
+    public MenuAction get(String key,
+            TreePanel treePanel) {
+        TreeMenuActionCreator toolActionCreator = super.registry.get(key);
+        
+        if (toolActionCreator == null) {
+            return null;
         }
-    }
 
-    /**
-     * Bypass User Permission on Tool and call the method for creation
-     * 
-     * @param M menuCreator
-     * @param menu 
-     */
-    protected final void byPassSecurity(M menuCreator,
-            Menu menu) {
-        this.create(menuCreator, menu);
-    }
+        MenuAction action = toolActionCreator.createAction(treePanel);
+        action.setId(key);
 
-    /**
-     * Each component will be added into menu itself
-     *
-     * @param menubar
-     * @param menu
-     */
-    protected abstract void create(M menuCreator,
-            final Menu menu);
+        return action;
+    }
 }

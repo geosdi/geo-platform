@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -35,70 +35,59 @@
  */
 package org.geosdi.geoplatform.gui.configuration;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
+import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
+import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStore;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GPMenuGenericTool<M extends GeoPlatformMenuCreator>
-        extends GenericTool implements GPMenuItem {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-TEST.xml"})
+public class GPTreeMenuStoreLoaderTest {
 
-    private static final long serialVersionUID = -6366879645618646403L;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private TreeMenuStore geoPlatformTreeMenuStore;
 
-    /**
-     * Check the permission of the user logged and call the method for creation.
-     * If the permission was not found the tool will not be created.
-     *
-     * @param menuCreator
-     * @param menu
-     */
-    public void buildTool(M menuCreator,
-            final Menu menu) {
-        if (secure) {
-            checkSecurity(menuCreator, menu);
-        } else {
-            byPassSecurity(menuCreator, menu);
-        }
+    @Test
+    public void treeMenuStoreLoader() {
+        Assert.assertNotNull(geoPlatformTreeMenuStore);
     }
 
-    /**
-     * Check the permission of the user logged and call the method for creation.
-     * If the permission was not found the tool will not be created.
-     *
-     * @param M menuCreator
-     * @param menu
-     */
-    protected final void checkSecurity(M menuCreator,
-            Menu menu) {
-        Boolean permission = GPAccountLogged.getInstance().
-                hasComponentPermission(this.getId());
-        if (permission != null) {
-            super.enabled &= permission;
-            this.create(menuCreator, menu);
-        }
+    @Test
+    public void treeMenuRootLoader() {
+        List<? extends GPMenuGenericTool> tools = geoPlatformTreeMenuStore.getTools(
+                new StoreCompositeKey(GPTreeMenuType.SIMPLE,
+                GPTreeCompositeType.ROOT));
+
+        Assert.assertEquals(4, tools.size());
+
+        logger.info("ROOT TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
+                tools);
     }
 
-    /**
-     * Bypass User Permission on Tool and call the method for creation
-     * 
-     * @param M menuCreator
-     * @param menu 
-     */
-    protected final void byPassSecurity(M menuCreator,
-            Menu menu) {
-        this.create(menuCreator, menu);
-    }
+    @Test
+    public void treeMenuCompositeLoader() {
+        List<? extends GPMenuGenericTool> tools = geoPlatformTreeMenuStore.getTools(
+                new StoreCompositeKey(GPTreeMenuType.SIMPLE,
+                GPTreeCompositeType.COMPOSITE));
 
-    /**
-     * Each component will be added into menu itself
-     *
-     * @param menubar
-     * @param menu
-     */
-    protected abstract void create(M menuCreator,
-            final Menu menu);
+        Assert.assertEquals(4, tools.size());
+
+        logger.info("COMPOSITE TREE MENU @@@@@@@@@@@@@@@ \n\n {} \n", tools);
+    }
 }

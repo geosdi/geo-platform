@@ -55,7 +55,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-TEST.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml"})
 public class GPTreeMenuStoreLoaderTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

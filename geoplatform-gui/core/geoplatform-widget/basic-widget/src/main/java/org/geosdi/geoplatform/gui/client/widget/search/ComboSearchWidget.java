@@ -46,15 +46,14 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Image;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.search.routing.GPComboBox;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extends GeoPlatformController> {
+public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel> {
 
     /**
      *
@@ -80,12 +79,11 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
             return this.value;
         }
     }
-    protected C controller;
     protected FlexTable tableWidget;
     protected ListStore<T> store;
     protected GPComboBox<T> combo;
     protected Image loadImage;
-    protected Image display;
+    protected Image displayResult;
 
     /**
      * @Default Constructor
@@ -95,19 +93,12 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
         this.init();
     }
 
-    /**
-     * @Constructor
-     *
-     * @param theController
-     */
-    public ComboSearchWidget(C theController) {
-        this.controller = theController;
-        this.init();
-    }
-
     private void init() {
         this.createCombo();
         this.initWidget();
+        setWidgetProperties();
+        setComboToolTip();
+        setComboSelectionChangedListener();
     }
 
     /**
@@ -118,12 +109,6 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
         this.store = new ListStore<T>();
         this.combo = new GPComboBox<T>();
         this.combo.setStore(store);
-
-        setWidgetProperties();
-        setComboToolTip();
-
-        setComboSelectionChangedListener();
-
     }
 
     /**
@@ -132,7 +117,6 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
      */
     private void initWidget() {
         tableWidget = new FlexTable();
-
         tableWidget.setCellSpacing(8);
         tableWidget.setCellPadding(4);
 
@@ -149,13 +133,12 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 
         tableWidget.setWidget(1, 2, this.loadImage);
 
-        this.display = new Image();
-        this.display.setUrl(GWT.getModuleBaseURL() + "/gp-images/help-icon.png");
+        this.displayResult = new Image();
+        this.displayResult.setUrl(GWT.getModuleBaseURL() + "/gp-images/help-icon.png");
 
-        this.display.setTitle("Reload Results after Combo Collapse.");
+        this.displayResult.setTitle("Reload Results after Combo Collapse.");
 
-        this.display.addClickHandler(new ClickHandler() {
-
+        this.displayResult.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 if (store.getModels().size() > 0) {
@@ -165,7 +148,7 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
             }
         });
 
-        tableWidget.setWidget(1, 3, this.display);
+        tableWidget.setWidget(1, 3, this.displayResult);
     }
 
     /**
@@ -173,7 +156,6 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
      */
     private void setComboSelectionChangedListener() {
         this.combo.addSelectionChangedListener(new SelectionChangedListener<T>() {
-
             @Override
             public void selectionChanged(SelectionChangedEvent<T> se) {
                 changeSelection(se);

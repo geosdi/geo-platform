@@ -236,7 +236,7 @@
             </roles>
             <properties>
                 <openPGP>0xB25F4B38</openPGP>
-                 <active>false</active>
+                <active>false</active>
             </properties>
             <timezone>+1</timezone>
         </developer>
@@ -1223,9 +1223,16 @@
             </dependency>
             
             <dependency>
-                <groupId>name.pehl.piriti</groupId>
-                <artifactId>piriti-core</artifactId>
-                <version>0.7b3</version>
+                <groupId>name.pehl</groupId>
+                <artifactId>piriti-user</artifactId>
+                <version>0.8</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>name.pehl</groupId>
+                <artifactId>piriti-dev</artifactId>
+                <version>0.8</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>name.pehl</groupId>

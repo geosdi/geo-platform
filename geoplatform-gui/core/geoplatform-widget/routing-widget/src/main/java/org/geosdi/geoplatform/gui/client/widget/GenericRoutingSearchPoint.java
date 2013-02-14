@@ -51,10 +51,12 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<GeocodingBean, RoutingController>
+public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<GeocodingBean>
         implements CleanComboEventHandler {
+
+    private RoutingController controller;
 
     /**
      * @Constructor
@@ -63,13 +65,14 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
      *
      */
     public GenericRoutingSearchPoint(RoutingController controller) {
-        super(controller);
+        this.controller = controller;
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#setWidgetProperties()
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#setWidgetProperties()
      */
     @Override
     public void setWidgetProperties() {
@@ -81,7 +84,6 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
         this.combo.setWidth(200);
 
         this.combo.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
@@ -101,35 +103,34 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
         loadImage(TypeImage.IMAGE_LOADING, true);
         this.clearStore();
 
-        controller.getGeocodingService().findLocations(combo.getRawValue(),
+        this.controller.getGeocodingService().findLocations(combo.getRawValue(),
                 new AsyncCallback<ArrayList<GeocodingBean>>() {
+            @Override
+            public void onSuccess(ArrayList<GeocodingBean> result) {
 
-                    @Override
-                    public void onSuccess(ArrayList<GeocodingBean> result) {
+                if (result.size() > 0) {
+                    GeoPlatformMessage.infoMessage("Geocoding Service",
+                            "Results loaded with success.");
+                    loadImage(TypeImage.IMAGE_RESULT_FOUND, true);
+                    fillStore(result);
+                    expand();
+                } else {
+                    GeoPlatformMessage.alertMessage(
+                            "Geocoding Service", "No Results found!");
+                    loadImage(TypeImage.IMAGE_RESULT_NOT_FOUND, true);
+                    clearStore();
+                }
 
-                        if (result.size() > 0) {
-                            GeoPlatformMessage.infoMessage("Geocoding Service",
-                                    "Results loaded with success.");
-                            loadImage(TypeImage.IMAGE_RESULT_FOUND, true);
-                            fillStore(result);
-                            expand();
-                        } else {
-                            GeoPlatformMessage.alertMessage(
-                                    "Geocoding Service", "No Results found!");
-                            loadImage(TypeImage.IMAGE_RESULT_NOT_FOUND, true);
-                            clearStore();
-                        }
+            }
 
-                    }
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage("Geocoding Service",
-                                "An Error occurred while dispatching request.");
-                        loadImage(TypeImage.IMAGE_SERVICE_ERROR, true);
-                        clearStore();
-                    }
-                });
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage("Geocoding Service",
+                        "An Error occurred while dispatching request.");
+                loadImage(TypeImage.IMAGE_SERVICE_ERROR, true);
+                clearStore();
+            }
+        });
     }
 
     /**

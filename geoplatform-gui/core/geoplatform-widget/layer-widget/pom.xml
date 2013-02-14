@@ -133,8 +133,12 @@
         </dependency>
         
         <dependency>
-            <groupId>name.pehl.piriti</groupId>
-            <artifactId>piriti-core</artifactId>
+            <groupId>name.pehl</groupId>
+            <artifactId>piriti-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>name.pehl</groupId>
+            <artifactId>piriti-dev</artifactId>
         </dependency>
         <dependency>
             <groupId>name.pehl</groupId>

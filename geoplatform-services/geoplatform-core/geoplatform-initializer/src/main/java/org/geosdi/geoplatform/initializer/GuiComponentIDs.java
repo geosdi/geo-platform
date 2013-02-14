@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.initializer;
 
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import java.util.Collections;
@@ -70,6 +71,20 @@ public class GuiComponentIDs {
     public static final String GRATICULA = "graticula";
     //
     public static final String EXTERNAL_LINKS = "externalLinks";
+    
+    /**
+     * Menu Bar Geodata
+     */
+    public static final String SHOW_GEODATA_RASTER_LAYERS = "geodata_raster_layers";
+    public static final String SHOW_GEODATA_VECTOR_LAYERS = "geodata_vector_layers";
+    public static final String SHOW_GEODATA_UPLOAD_RASTER = "geodata_upload_raster";
+    public static final String SHOW_GEODATA_UPLOAD_VECTOR = "geodata_upload_vector";
+    public static final String SHOW_GEODATA_RASTER_DATA_FOLDER = "geodata_raster_data_folder";
+    public static final String SHOW_GEODATA_VECTOR_DATA_FOLDER = "geodata_vector_data_folder";
+    public static final String SHOW_GEODATA_GET_BIG_RASTER_FILE = "geodata_big_raster_file";
+    public static final String SHOW_GEODATA_GEORECTIFY = "geodata_georectify";
+    //public static final String SHOW_GEODATA_SAVE_GEORECTIFY = "geodata_save_georectify";
+    
     /**
      * Map Toolbar
      */
@@ -149,6 +164,15 @@ public class GuiComponentIDs {
         all.add(LAYER_MENU);
         all.add(GRATICULA);
         all.add(VIEWPORT);
+        //8-11-2012 add for Geodata
+        all.add(SHOW_GEODATA_RASTER_LAYERS);
+        all.add(SHOW_GEODATA_VECTOR_LAYERS);
+        all.add(SHOW_GEODATA_UPLOAD_RASTER); 
+   		all.add(SHOW_GEODATA_UPLOAD_VECTOR);
+   		all.add(SHOW_GEODATA_RASTER_DATA_FOLDER);
+   		all.add(SHOW_GEODATA_VECTOR_DATA_FOLDER);
+   		all.add(SHOW_GEODATA_GET_BIG_RASTER_FILE);
+   		all.add(SHOW_GEODATA_GEORECTIFY); 
         // Map Toolbar
         all.add(GEO_PLATFORM_INFO_APP);
         all.add(EXTERNAL_LINKS);
@@ -209,6 +233,16 @@ public class GuiComponentIDs {
         mapUser.put(LAYER_MENU, Boolean.TRUE);
         mapUser.put(GRATICULA, Boolean.TRUE);
         mapUser.put(VIEWPORT, Boolean.TRUE);
+        //8-11-2012 add for Geodata
+        mapUser.put(SHOW_GEODATA_RASTER_LAYERS, Boolean.TRUE);
+        mapUser.put(SHOW_GEODATA_VECTOR_LAYERS, Boolean.TRUE);
+        mapUser.put(SHOW_GEODATA_UPLOAD_RASTER, Boolean.TRUE); 
+        mapUser.put(SHOW_GEODATA_UPLOAD_VECTOR, Boolean.TRUE);
+        mapUser.put(SHOW_GEODATA_RASTER_DATA_FOLDER, Boolean.TRUE);
+        mapUser.put(SHOW_GEODATA_VECTOR_DATA_FOLDER, Boolean.TRUE);
+        mapUser.put(SHOW_GEODATA_GET_BIG_RASTER_FILE, Boolean.TRUE);
+        mapUser.put(SHOW_GEODATA_GEORECTIFY, Boolean.TRUE); 
+        
         // Map Toolbar
         mapUser.put(GEO_PLATFORM_INFO_APP, Boolean.TRUE);
         mapUser.put(ZOOM_IN, Boolean.TRUE);

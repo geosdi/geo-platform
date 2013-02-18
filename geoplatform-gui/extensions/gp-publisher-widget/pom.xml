@@ -134,18 +134,18 @@
         <dependency>
             <groupId>name.pehl</groupId>
             <artifactId>piriti-user</artifactId>
-            <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>name.pehl</groupId>
             <artifactId>piriti-dev</artifactId>
-            <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>name.pehl</groupId>
             <artifactId>totoe</artifactId>
-            <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>

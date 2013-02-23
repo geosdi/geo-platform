@@ -55,11 +55,13 @@ public interface GPSecurityConnector {
      * Method to secure Connection
      *
      * @param C an instance of {@link GPConnectorRequest} class
-     * @param H an instance of {@link HttpUriRequest} class (HttpPost or HttpGet)
+     * @param H an instance of {@link HttpUriRequest} class (HttpPost or
+     * HttpGet)
      *
      * @return HttpResponse
      *
      */
-    <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(C connectorRequest,
+    <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(
+            C connectorRequest,
             H httpRequest) throws ClientProtocolException, IOException;
 }

@@ -51,7 +51,8 @@ public abstract class AbstractSecurityConnector implements GPSecurityConnector {
     private final String password;
     private AuthScope authScope;
 
-    public AbstractSecurityConnector(String theUserName, String thePassword) {
+    public AbstractSecurityConnector(String theUserName,
+            String thePassword) {
         this.username = theUserName;
         this.password = thePassword;
     }
@@ -65,11 +66,11 @@ public abstract class AbstractSecurityConnector implements GPSecurityConnector {
             URI targetURI) {
         if (this.authScope == null) {
             this.authScope = new AuthScope(targetURI.getHost(),
-                                           targetURI.getPort());
+                    targetURI.getPort());
         }
 
         credentialsProvider.setCredentials(authScope,
-                                           new UsernamePasswordCredentials(
+                new UsernamePasswordCredentials(
                 username, password));
     }
 }

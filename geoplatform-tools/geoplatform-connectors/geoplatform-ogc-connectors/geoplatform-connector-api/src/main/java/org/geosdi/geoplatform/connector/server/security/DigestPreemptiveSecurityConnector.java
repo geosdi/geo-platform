@@ -45,7 +45,8 @@ import org.apache.http.impl.auth.DigestScheme;
  */
 public class DigestPreemptiveSecurityConnector extends PreemptiveSecurityConnector {
 
-    public DigestPreemptiveSecurityConnector(String theUserName, String thePassword) {
+    public DigestPreemptiveSecurityConnector(String theUserName,
+            String thePassword) {
         super(theUserName, thePassword);
     }
 

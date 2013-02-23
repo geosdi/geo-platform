@@ -60,7 +60,8 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
     protected AuthCache authCache;
     protected HttpContext localcontext = new BasicHttpContext();
 
-    public PreemptiveSecurityConnector(String theUserName, String thePassword) {
+    public PreemptiveSecurityConnector(String theUserName,
+            String thePassword) {
         super(theUserName, thePassword);
     }
 
@@ -77,8 +78,8 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
         this.preparePreemptiveParameters(targetHost);
 
         return connectorRequest.getClientConnection().execute(targetHost,
-                                                              httpRequest,
-                                                              localcontext);
+                httpRequest,
+                localcontext);
     }
 
     protected void preparePreemptiveParameters(HttpHost targetHost) {
@@ -86,7 +87,7 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
             this.authCache = new BasicAuthCache();
             this.authCache.put(targetHost, createScheme());
             this.localcontext.setAttribute(ClientContext.AUTH_CACHE,
-                                           this.authCache);
+                    this.authCache);
         }
     }
 

@@ -48,12 +48,14 @@ import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
  */
 public class DefaultSecurityConnector extends AbstractSecurityConnector {
 
-    public DefaultSecurityConnector(String theUserName, String thePassword) {
+    public DefaultSecurityConnector(String theUserName,
+            String thePassword) {
         super(theUserName, thePassword);
     }
 
     @Override
-    public <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(C connectorRequest,
+    public <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(
+            C connectorRequest,
             H httpRequest) throws ClientProtocolException, IOException {
 
         super.bindCredentials(

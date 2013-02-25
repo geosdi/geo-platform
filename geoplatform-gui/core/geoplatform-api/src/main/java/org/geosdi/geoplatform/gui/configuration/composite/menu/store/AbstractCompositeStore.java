@@ -40,8 +40,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
-import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
 
 /**
  *
@@ -50,20 +48,18 @@ import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
  */
 public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
 
-    protected Map<GPTreeMenuType, Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>>> clientTools;
+    protected Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> clientTools;
     private CompositeStoreSorter sorter;
 
     public AbstractCompositeStore() {
         this.sorter = new CompositeStoreSorter() {
-            
+
             @Override
             public void sort() {
-                for (Map.Entry<GPTreeMenuType, Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>>> baseEntry : clientTools.entrySet()) {
-                    Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>> map = baseEntry.getValue();
+                for (Map.Entry<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> baseEntry : clientTools.entrySet()) {
+                    List<? extends GPMenuGenericTool> list = baseEntry.getValue();
 
-                    for (Map.Entry<GPTreeCompositeType, List<? extends GPMenuGenericTool>> entry : map.entrySet()) {
-                        Collections.sort(entry.getValue());
-                    }
+                    Collections.sort(list);
                 }
             }
         };
@@ -71,7 +67,7 @@ public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
 
     @Override
     public void setClientTools(
-            Map<GPTreeMenuType, Map<GPTreeCompositeType, List<? extends GPMenuGenericTool>>> theClientTools) {
+            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools) {
         this.clientTools = theClientTools;
     }
 

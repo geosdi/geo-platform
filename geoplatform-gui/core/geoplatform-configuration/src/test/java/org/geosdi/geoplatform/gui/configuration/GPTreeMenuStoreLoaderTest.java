@@ -37,8 +37,7 @@ package org.geosdi.geoplatform.gui.configuration;
 
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.store.SingleSelectionCompositeKey;
 import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStore;
 import org.junit.Assert;
 import org.junit.Test;
@@ -57,37 +56,35 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml"})
 public class GPTreeMenuStoreLoaderTest {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
     private TreeMenuStore geoPlatformTreeMenuStore;
-
+    
     @Test
     public void treeMenuStoreLoader() {
         Assert.assertNotNull(geoPlatformTreeMenuStore);
     }
-
+    
     @Test
     public void treeMenuRootLoader() {
         List<? extends GPMenuGenericTool> tools = geoPlatformTreeMenuStore.getTools(
-                new StoreCompositeKey(GPTreeMenuType.SIMPLE,
-                GPTreeCompositeType.ROOT));
-
+                new SingleSelectionCompositeKey(GPTreeCompositeType.ROOT));
+        
         Assert.assertEquals(4, tools.size());
-
+        
         logger.info("ROOT TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
                 tools);
     }
-
+    
     @Test
     public void treeMenuCompositeLoader() {
         List<? extends GPMenuGenericTool> tools = geoPlatformTreeMenuStore.getTools(
-                new StoreCompositeKey(GPTreeMenuType.SIMPLE,
-                GPTreeCompositeType.COMPOSITE));
-
+                new SingleSelectionCompositeKey(GPTreeCompositeType.COMPOSITE));
+        
         Assert.assertEquals(4, tools.size());
-
+        
         logger.info("COMPOSITE TREE MENU @@@@@@@@@@@@@@@ \n\n {} \n", tools);
     }
 }

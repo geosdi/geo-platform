@@ -35,31 +35,62 @@
  */
 package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
 
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.MultiSelectionElementType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPMenuCompositeStore {
+public class MultiSelectionCompositeKey extends StoreCompositeKey {
 
-    void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools);
+    private final MultiSelectionElementType multiSelectionType;
 
-    /**
-     * Return all {@link GPMenuGenericTool} in the Store associated with
-     * {@link StoreCompositeKey} key
-     *
-     * @param key
-     * @return List<? extends GPMenuGenericTool>
-     */
-    List<? extends GPMenuGenericTool> getTools(StoreCompositeKey key);
+    public MultiSelectionCompositeKey(
+            MultiSelectionElementType theMultiSelectionType) {
+        super(GPTreeMenuType.ADVANCED);
+        this.multiSelectionType = theMultiSelectionType;
+    }
 
     /**
-     * Init Method Called By Spring to Sort all Elements in Map
+     * @return the multiSelectionType
      */
-    void init();
+    public MultiSelectionElementType getMultiSelectionType() {
+        return multiSelectionType;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + (this.multiSelectionType != null
+                            ? this.multiSelectionType.hashCode() : 0);
+        hash = 59 * hash + (this.treeMenuType != null
+                            ? this.treeMenuType.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MultiSelectionCompositeKey other = (MultiSelectionCompositeKey) obj;
+        if (this.multiSelectionType != other.multiSelectionType) {
+            return false;
+        }
+        if (this.treeMenuType != other.treeMenuType) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "MultiSelectionCompositeKey{ " + super.toString()
+                + "multiSelectionType = " + multiSelectionType + '}';
+    }
 }

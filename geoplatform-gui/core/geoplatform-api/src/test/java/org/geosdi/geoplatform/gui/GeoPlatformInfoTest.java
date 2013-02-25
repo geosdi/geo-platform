@@ -47,23 +47,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "applicationContext-Test.xml" })
+@ContextConfiguration(locations = {"applicationContext-Test.xml"})
 public class GeoPlatformInfoTest {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private GeoPlatformInfo geoPlatformInfo;
 
-	@Autowired
-	private GeoPlatformInfo geoPlatformInfo;
+    @Test
+    public void test() {
+        assertNotNull(geoPlatformInfo);
 
-	@Test
-	public void test() {
-		assertNotNull(geoPlatformInfo);
-
-		logger.info("GeoPlatformInfo ********************************* {}",
-				this.geoPlatformInfo.toString());
-	}
-
+        logger.info("GeoPlatformInfo ********************************* {}",
+                this.geoPlatformInfo.toString());
+    }
 }

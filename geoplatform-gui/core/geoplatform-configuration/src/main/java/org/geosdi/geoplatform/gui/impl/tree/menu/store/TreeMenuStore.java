@@ -49,10 +49,6 @@ public class TreeMenuStore extends AbstractCompositeStore {
 
     @Override
     public List<? extends GPMenuGenericTool> getTools(StoreCompositeKey key) {
-        return (clientTools.get(key.getTreeMenuType()) != null)
-               ? (clientTools.get(key.getTreeMenuType()).get(
-                  key.getCompositeType())) != null
-                 ? clientTools.get(key.getTreeMenuType()).get(
-                key.getCompositeType()) : null : null;
+        return clientTools.get(key);
     }
 }

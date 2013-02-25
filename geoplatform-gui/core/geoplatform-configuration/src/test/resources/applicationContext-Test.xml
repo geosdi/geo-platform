@@ -12,168 +12,172 @@
     <bean id="geoPlatformTreeMenuStore" class="org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStore" init-method="init">
         <property name="clientTools">
             <map>
-                <entry key="SIMPLE">
-                    <map>
-                        <entry key="ROOT">
-                            <list>
-                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                    <property name="id" value="menu1Root" />
-                                    <property name="text" value="ROOT_MENU_1" />
-                                    <property name="enabled" value="true" />
-                                    <property name="order" value="1" />
-                                </bean>
-                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                    <property name="id" value="menu2Root" />
-                                    <property name="text" value="ROOT_MENU_2" />
-                                    <property name="enabled" value="true" />
-                                    <property name="order" value="2" />
-                                </bean>
-                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                    <property name="id" value="menu3Root" />
-                                    <property name="text" value="ROOT_MENU_3" />
-                                    <property name="enabled" value="true" />
-                                    <property name="order" value="3" />
-                                </bean>
-                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool">
-                                    <property name="id" value="groupMenuRoot" />
-                                    <property name="text" value="ROOT_GROUP_MENU" />
-                                    <property name="enabled" value="true" />
-                                    <property name="order" value="4" />
-                                    <property name="tools">
-                                        <list>
-                                            <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                <property name="id" value="subMenu3Root" />
-                                                <property name="text" value="ROOT_SUB_MENU_3" />
-                                                <property name="enabled" value="true" />
-                                                <property name="order" value="3" />
-                                            </bean>
-                                            <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                <property name="id" value="subMenu2Root" />
-                                                <property name="text" value="ROOT_SUB_MENU_2" />
-                                                <property name="enabled" value="true" />
-                                                <property name="order" value="2" />
-                                            </bean>
-                                            <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                <property name="id" value="subMenu1Root" />
-                                                <property name="text" value="ROOT_SUB_MENU_1" />
-                                                <property name="enabled" value="true" />
-                                                <property name="order" value="1" />
-                                            </bean>
-                                            <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool">
-                                                <property name="id" value="groupMenuRoot" />
-                                                <property name="text" value="ROOT_GROUP_MENU" />
-                                                <property name="enabled" value="true" />
-                                                <property name="order" value="4" />
-                                                <property name="tools">
-                                                    <list>
-                                                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                            <property name="id" value="subMenu1Root" />
-                                                            <property name="text" value="ROOT_SUB_MENU_3" />
-                                                            <property name="enabled" value="true" />
-                                                            <property name="order" value="3" />
-                                                        </bean>
-                                                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                            <property name="id" value="subMenu2Root" />
-                                                            <property name="text" value="ROOT_SUB_MENU_1" />
-                                                            <property name="enabled" value="true" />
-                                                            <property name="order" value="1" />
-                                                        </bean>
-                                                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                            <property name="id" value="subMenu3Root" />
-                                                            <property name="text" value="ROOT_SUB_MENU_2" />
-                                                            <property name="enabled" value="true" />
-                                                            <property name="order" value="2" />
-                                                        </bean>
-                                                    </list>
-                                                </property>    
-                                            </bean>
-                                        </list>
-                                    </property>    
-                                </bean>
-                            </list>
-                        </entry>
-                        <entry key="COMPOSITE">
-                            <list>
-                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                    <property name="id" value="composite1Root" />
-                                    <property name="text" value="COMPOSITE_MENU_2" />
-                                    <property name="enabled" value="true" />
-                                    <property name="order" value="2" />
-                                </bean>
-                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                    <property name="id" value="composite2Root" />
-                                    <property name="text" value="COMPOSITE_MENU_3" />
-                                    <property name="enabled" value="true" />
-                                    <property name="order" value="3" />
-                                </bean>
-                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                    <property name="id" value="composite3Root" />
-                                    <property name="text" value="COMPOSITE_MENU_4" />
-                                    <property name="enabled" value="true" />
-                                    <property name="order" value="4" />
-                                </bean>
-                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool">
-                                    <property name="id" value="groupMenuComposite" />
-                                    <property name="text" value="COMPOSITE_GROUP_MENU" />
-                                    <property name="enabled" value="true" />
-                                    <property name="order" value="1" />
-                                    <property name="tools">
-                                        <list>
-                                            <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                <property name="id" value="subMenu1Composite" />
-                                                <property name="text" value="COMPOSITE_SUB_MENU_1" />
-                                                <property name="enabled" value="true" />
-                                                <property name="order" value="1" />
-                                            </bean>
-                                            <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                <property name="id" value="subMenu2Composite" />
-                                                <property name="text" value="COMPOSITE_SUB_MENU_2" />
-                                                <property name="enabled" value="true" />
-                                                <property name="order" value="2" />
-                                            </bean>
-                                            <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                <property name="id" value="subMenu3Composite" />
-                                                <property name="text" value="COMPOSITE_SUB_MENU_3" />
-                                                <property name="enabled" value="true" />
-                                                <property name="order" value="3" />
-                                            </bean>
-                                            <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool">
-                                                <property name="id" value="groupMenuComposite" />
-                                                <property name="text" value="COMPOSITE_GROUP_MENU" />
-                                                <property name="enabled" value="true" />
-                                                <property name="order" value="4" />
-                                                <property name="tools">
-                                                    <list>
-                                                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                            <property name="id" value="subMenu1Composite" />
-                                                            <property name="text" value="COMPOSITE_SUB_MENU_1" />
-                                                            <property name="enabled" value="true" />
-                                                            <property name="order" value="1" />
-                                                        </bean>
-                                                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                            <property name="id" value="subMenu2Composite" />
-                                                            <property name="text" value="COMPOSITE_SUB_MENU_2" />
-                                                            <property name="enabled" value="true" />
-                                                            <property name="order" value="2" />
-                                                        </bean>
-                                                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                                                            <property name="id" value="subMenu3Composite" />
-                                                            <property name="text" value="COMPOSITE_SUB_MENU_3" />
-                                                            <property name="enabled" value="true" />
-                                                            <property name="order" value="3" />
-                                                        </bean>
-                                                    </list>
-                                                </property>    
-                                            </bean>
-                                        </list>
-                                    </property>    
-                                </bean>
-                            </list>
-                        </entry>
-                    </map>
+                <entry key-ref="rootMenu">
+                    <list>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                            <property name="id" value="menu1Root" />
+                            <property name="text" value="ROOT_MENU_1" />
+                            <property name="enabled" value="true" />
+                            <property name="order" value="1" />
+                        </bean>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                            <property name="id" value="menu2Root" />
+                            <property name="text" value="ROOT_MENU_2" />
+                            <property name="enabled" value="true" />
+                            <property name="order" value="2" />
+                        </bean>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                            <property name="id" value="menu3Root" />
+                            <property name="text" value="ROOT_MENU_3" />
+                            <property name="enabled" value="true" />
+                            <property name="order" value="3" />
+                        </bean>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool">
+                            <property name="id" value="groupMenuRoot" />
+                            <property name="text" value="ROOT_GROUP_MENU" />
+                            <property name="enabled" value="true" />
+                            <property name="order" value="4" />
+                            <property name="tools">
+                                <list>
+                                    <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                        <property name="id" value="subMenu3Root" />
+                                        <property name="text" value="ROOT_SUB_MENU_3" />
+                                        <property name="enabled" value="true" />
+                                        <property name="order" value="3" />
+                                    </bean>
+                                    <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                        <property name="id" value="subMenu2Root" />
+                                        <property name="text" value="ROOT_SUB_MENU_2" />
+                                        <property name="enabled" value="true" />
+                                        <property name="order" value="2" />
+                                    </bean>
+                                    <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                        <property name="id" value="subMenu1Root" />
+                                        <property name="text" value="ROOT_SUB_MENU_1" />
+                                        <property name="enabled" value="true" />
+                                        <property name="order" value="1" />
+                                    </bean>
+                                    <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool">
+                                        <property name="id" value="groupMenuRoot" />
+                                        <property name="text" value="ROOT_GROUP_MENU" />
+                                        <property name="enabled" value="true" />
+                                        <property name="order" value="4" />
+                                        <property name="tools">
+                                            <list>
+                                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                                    <property name="id" value="subMenu1Root" />
+                                                    <property name="text" value="ROOT_SUB_MENU_3" />
+                                                    <property name="enabled" value="true" />
+                                                    <property name="order" value="3" />
+                                                </bean>
+                                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                                    <property name="id" value="subMenu2Root" />
+                                                    <property name="text" value="ROOT_SUB_MENU_1" />
+                                                    <property name="enabled" value="true" />
+                                                    <property name="order" value="1" />
+                                                </bean>
+                                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                                    <property name="id" value="subMenu3Root" />
+                                                    <property name="text" value="ROOT_SUB_MENU_2" />
+                                                    <property name="enabled" value="true" />
+                                                    <property name="order" value="2" />
+                                                </bean>
+                                            </list>
+                                        </property>    
+                                    </bean>
+                                </list>
+                            </property>    
+                        </bean>
+                    </list>
+                </entry>
+                <entry key-ref="compositeMenu">
+                    <list>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                            <property name="id" value="composite1Root" />
+                            <property name="text" value="COMPOSITE_MENU_2" />
+                            <property name="enabled" value="true" />
+                            <property name="order" value="2" />
+                        </bean>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                            <property name="id" value="composite2Root" />
+                            <property name="text" value="COMPOSITE_MENU_3" />
+                            <property name="enabled" value="true" />
+                            <property name="order" value="3" />
+                        </bean>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                            <property name="id" value="composite3Root" />
+                            <property name="text" value="COMPOSITE_MENU_4" />
+                            <property name="enabled" value="true" />
+                            <property name="order" value="4" />
+                        </bean>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool">
+                            <property name="id" value="groupMenuComposite" />
+                            <property name="text" value="COMPOSITE_GROUP_MENU" />
+                            <property name="enabled" value="true" />
+                            <property name="order" value="1" />
+                            <property name="tools">
+                                <list>
+                                    <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                        <property name="id" value="subMenu1Composite" />
+                                        <property name="text" value="COMPOSITE_SUB_MENU_1" />
+                                        <property name="enabled" value="true" />
+                                        <property name="order" value="1" />
+                                    </bean>
+                                    <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                        <property name="id" value="subMenu2Composite" />
+                                        <property name="text" value="COMPOSITE_SUB_MENU_2" />
+                                        <property name="enabled" value="true" />
+                                        <property name="order" value="2" />
+                                    </bean>
+                                    <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                        <property name="id" value="subMenu3Composite" />
+                                        <property name="text" value="COMPOSITE_SUB_MENU_3" />
+                                        <property name="enabled" value="true" />
+                                        <property name="order" value="3" />
+                                    </bean>
+                                    <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool">
+                                        <property name="id" value="groupMenuComposite" />
+                                        <property name="text" value="COMPOSITE_GROUP_MENU" />
+                                        <property name="enabled" value="true" />
+                                        <property name="order" value="4" />
+                                        <property name="tools">
+                                            <list>
+                                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                                    <property name="id" value="subMenu1Composite" />
+                                                    <property name="text" value="COMPOSITE_SUB_MENU_1" />
+                                                    <property name="enabled" value="true" />
+                                                    <property name="order" value="1" />
+                                                </bean>
+                                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                                    <property name="id" value="subMenu2Composite" />
+                                                    <property name="text" value="COMPOSITE_SUB_MENU_2" />
+                                                    <property name="enabled" value="true" />
+                                                    <property name="order" value="2" />
+                                                </bean>
+                                                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                                                    <property name="id" value="subMenu3Composite" />
+                                                    <property name="text" value="COMPOSITE_SUB_MENU_3" />
+                                                    <property name="enabled" value="true" />
+                                                    <property name="order" value="3" />
+                                                </bean>
+                                            </list>
+                                        </property>    
+                                    </bean>
+                                </list>
+                            </property>    
+                        </bean>
+                    </list>
                 </entry>
             </map>
         </property>
+    </bean>
+    
+    <bean id="rootMenu" class="org.geosdi.geoplatform.gui.configuration.composite.menu.store.SingleSelectionCompositeKey">
+        <constructor-arg index="0" value="ROOT" />
+    </bean>
+    
+    <bean id="compositeMenu" class="org.geosdi.geoplatform.gui.configuration.composite.menu.store.SingleSelectionCompositeKey">
+        <constructor-arg index="0" value="COMPOSITE" />
     </bean>
 
 </beans>

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
 
-import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
 
 /**
@@ -43,15 +42,12 @@ import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class StoreCompositeKey {
+public abstract class StoreCompositeKey {
 
-    private final GPTreeMenuType treeMenuType;
-    private final GPTreeCompositeType compositeType;
+    protected final GPTreeMenuType treeMenuType;
 
-    public StoreCompositeKey(GPTreeMenuType theTreeMenuType,
-            GPTreeCompositeType theCompositeType) {
+    public StoreCompositeKey(GPTreeMenuType theTreeMenuType) {
         this.treeMenuType = theTreeMenuType;
-        this.compositeType = theCompositeType;
     }
 
     /**
@@ -61,16 +57,9 @@ public class StoreCompositeKey {
         return treeMenuType;
     }
 
-    /**
-     * @return the compositeType
-     */
-    public GPTreeCompositeType getCompositeType() {
-        return compositeType;
-    }
-
     @Override
     public String toString() {
-        return "StoreCompositeKey { " + "treeMenuType = " + treeMenuType
-                + ", compositeType = " + compositeType + '}';
-    }
+        return "StoreCompositeKey{ " + "treeMenuType = "
+                + treeMenuType + '}';
+    }    
 }

@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.action.menu;
 
-import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeCheckHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeCheckEvent;
+import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeCheckHandler;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeCheckHandler;
 
 /**

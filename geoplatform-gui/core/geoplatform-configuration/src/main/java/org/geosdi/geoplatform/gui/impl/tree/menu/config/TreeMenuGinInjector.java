@@ -33,33 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
+package org.geosdi.geoplatform.gui.impl.tree.menu.config;
 
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.inject.client.GinModules;
+import com.google.gwt.inject.client.Ginjector;
+import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionRegistar;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPMenuCompositeStore {
+@GinModules(value = {TreeMenuGinConfigurator.class})
+public interface TreeMenuGinInjector extends Ginjector {
 
-    void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools);
+    public static class MainInjector {
 
-    /**
-     * Return all {@link GPMenuGenericTool} in the Store associated with
-     * {@link StoreCompositeKey} key
-     *
-     * @param key
-     * @return List<? extends GPMenuGenericTool>
-     */
-    List<? extends GPMenuGenericTool> getTools(StoreCompositeKey key);
+        private static TreeMenuGinInjector instance;
 
-    /**
-     * Init Method Called By Spring to Sort all Elements in Map
-     */
-    void init();
+        private MainInjector() {
+        }
+
+        public static TreeMenuGinInjector getInstance() {
+            if (instance == null) {
+                instance = GWT.create(TreeMenuGinInjector.class);
+            }
+
+            return instance;
+        }
+    }
+
+    public TreeMenuActionRegistar getTreeMenuActionRegistar();
 }

@@ -33,33 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
+package org.geosdi.geoplatform.gui.impl.menu;
 
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPMenuCompositeStore {
+public interface MenuActionHandler {
 
-    void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools);
-
-    /**
-     * Return all {@link GPMenuGenericTool} in the Store associated with
-     * {@link StoreCompositeKey} key
-     *
-     * @param key
-     * @return List<? extends GPMenuGenericTool>
-     */
-    List<? extends GPMenuGenericTool> getTools(StoreCompositeKey key);
-
-    /**
-     * Init Method Called By Spring to Sort all Elements in Map
-     */
-    void init();
+    void addMenuActionEnableHandler(MenuAction action,
+            final MenuItem item);
 }

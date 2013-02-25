@@ -35,31 +35,61 @@
  */
 package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
 
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPMenuCompositeStore {
+public class SingleSelectionCompositeKey extends StoreCompositeKey {
 
-    void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools);
+    private final GPTreeCompositeType compositeType;
 
-    /**
-     * Return all {@link GPMenuGenericTool} in the Store associated with
-     * {@link StoreCompositeKey} key
-     *
-     * @param key
-     * @return List<? extends GPMenuGenericTool>
-     */
-    List<? extends GPMenuGenericTool> getTools(StoreCompositeKey key);
+    public SingleSelectionCompositeKey(GPTreeCompositeType compositeType) {
+        super(GPTreeMenuType.SIMPLE);
+        this.compositeType = compositeType;
+    }
 
     /**
-     * Init Method Called By Spring to Sort all Elements in Map
+     * @return the compositeType
      */
-    void init();
+    public GPTreeCompositeType getCompositeType() {
+        return compositeType;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + (this.treeMenuType != null
+                            ? this.treeMenuType.hashCode() : 0);
+        hash = 53 * hash + (this.compositeType != null
+                            ? this.compositeType.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SingleSelectionCompositeKey other = (SingleSelectionCompositeKey) obj;
+        if (this.treeMenuType != other.treeMenuType) {
+            return false;
+        }
+        if (this.compositeType != other.compositeType) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "SingleSelectionCompositeKey{" + super.toString()
+                + "compositeType = " + compositeType + '}';
+    }
 }

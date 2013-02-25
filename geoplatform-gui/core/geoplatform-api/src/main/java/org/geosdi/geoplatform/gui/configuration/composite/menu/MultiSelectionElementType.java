@@ -33,33 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
-
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+package org.geosdi.geoplatform.gui.configuration.composite.menu;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPMenuCompositeStore {
-
-    void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools);
+public enum MultiSelectionElementType {
 
     /**
-     * Return all {@link GPMenuGenericTool} in the Store associated with
-     * {@link StoreCompositeKey} key
-     *
-     * @param key
-     * @return List<? extends GPMenuGenericTool>
+     * All Tree Elements : ROOT, COMPOSITE and LEAF
      */
-    List<? extends GPMenuGenericTool> getTools(StoreCompositeKey key);
-
+    ALL,
     /**
-     * Init Method Called By Spring to Sort all Elements in Map
+     * Only ROOT and COMPOSITE
      */
-    void init();
+    ROOT_COMPOSITE,
+    /**
+     * Only ROOT and LEAF
+     */
+    ROOT_LEAF,
+    /**
+     * Only COMPOSITE and LEAF
+     */
+    COMPOSITE_LEAF;
 }

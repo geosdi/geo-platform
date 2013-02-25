@@ -35,22 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.menu;
 
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.DateMenu;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeCheckEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
-import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeCheckHandler;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.configuration.GPCheckMenuItem;
@@ -58,10 +52,10 @@ import org.geosdi.geoplatform.gui.configuration.GPDateMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPGroupMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
 import org.geosdi.geoplatform.gui.configuration.GPMenuItem;
-import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
-import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.menubar.IGeoPlatformMenubar;
 import org.geosdi.geoplatform.gui.configuration.menubar.OAuth2MenuBarClientTool;
+import org.geosdi.geoplatform.gui.impl.menu.binder.GPMenuActionBinder;
+import org.geosdi.geoplatform.gui.impl.menu.binder.MenuActionBinder;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -70,9 +64,11 @@ import org.geosdi.geoplatform.gui.configuration.menubar.OAuth2MenuBarClientTool;
 public class MenuUtility implements IGeoPlatformMenubar {
 
     private static MenuUtility INSTANCE = new MenuUtility();
+    private MenuActionBinder menuActionBinder;
     private MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
 
     private MenuUtility() {
+        this.menuActionBinder = new GPMenuActionBinder(this);
     }
 
     public static MenuUtility getIstance() {
@@ -86,9 +82,7 @@ public class MenuUtility implements IGeoPlatformMenubar {
      */
     public void buildTools(Menu menu,
             List<? extends GPMenuGenericTool> tools) {
-        for (GPMenuGenericTool tool : tools) {
-            tool.buildTool(INSTANCE, menu);
-        }
+        this.menuActionBinder.bindTools(menu, tools);
     }
 
     /**
@@ -112,19 +106,7 @@ public class MenuUtility implements IGeoPlatformMenubar {
             Menu menu) {
         MenuBaseAction action = (MenuBaseAction) menuRegistar.get(tool.getId());
 
-        final MenuItem item = new MenuItem(tool.getText());
-
-        if (action != null) {
-            action.setId(tool.getId());
-            item.setIcon(action.getImage());
-            item.setItemId(action.getId());
-            item.addSelectionListener(action);
-
-            this.addMenuActionEnableHandler(action, item);
-
-            action.setEnabled(tool.isEnabled());
-        }
-        menu.add(item);
+        this.menuActionBinder.bindMenuBaseAction(action, tool, menu);
     }
 
     /**
@@ -138,27 +120,7 @@ public class MenuUtility implements IGeoPlatformMenubar {
             final Menu menu) {
         MenuCheckAction action = (MenuCheckAction) menuRegistar.get(tool.getId());
 
-        final CheckMenuItem item = new CheckMenuItem(tool.getText());
-        item.setItemId(tool.getId());
-
-        menu.add(item);
-
-        if (action != null) {
-            action.setId(tool.getId());
-            item.addSelectionListener(action);
-
-            this.addMenuActionEnableHandler(action, item);
-            action.addMenuActionChangeCheckHandler(new MenuActionChangeCheckHandler() {
-                @Override
-                public void onActionCheckChange(MenuActionChangeCheckEvent event) {
-                    item.setChecked(event.isCheck());
-                    item.fireEvent(Events.Select, new MenuEvent(menu, item));
-                }
-            });
-
-            action.setChecked(tool.isChecked());
-            action.setEnabled(tool.isEnabled());
-        }
+        this.menuActionBinder.bindMenuCheckAction(action, tool, menu);
     }
 
     /**
@@ -195,8 +157,9 @@ public class MenuUtility implements IGeoPlatformMenubar {
             item.setItemId(action.getId());
             item.addSelectionListener(action);
 
-            this.addMenuActionEnableHandler(action, item);
+            this.menuActionBinder.addMenuActionEnableHandler(action, item);
             action.addMenuActionChangeIconHandler(new MenuActionChangeIconHandler() {
+                
                 @Override
                 public void onActionChangeIcon(MenuActionChangeIconEvent event) {
                     item.setIcon(event.getImage());
@@ -220,20 +183,6 @@ public class MenuUtility implements IGeoPlatformMenubar {
     @Override
     public void addGroupMenuItem(GPGroupMenuItem tool,
             Menu menu) {
-        MenuItem item = new MenuItem(tool.getText());
-        menu.add(item);
-        Menu subMenu = new Menu();
-        this.buildTools(subMenu, tool.getTools());
-        item.setSubMenu(subMenu);
-    }
-
-    private void addMenuActionEnableHandler(MenuAction action,
-            final MenuItem item) {
-        action.addActionEnableHandler(new ActionEnableHandler() {
-            @Override
-            public void onActionEnabled(ActionEnableEvent event) {
-                item.setEnabled(event.isEnabled());
-            }
-        });
+        this.menuActionBinder.bindGroupMenuItem(tool, menu);
     }
 }

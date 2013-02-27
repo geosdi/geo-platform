@@ -15,6 +15,7 @@
                 
     <bean id="persistenceConfigurer"
          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="nullValue" value="@null" />
         <property name="locations">
             <list>
                 <value>classpath:gp-db.properties</value>

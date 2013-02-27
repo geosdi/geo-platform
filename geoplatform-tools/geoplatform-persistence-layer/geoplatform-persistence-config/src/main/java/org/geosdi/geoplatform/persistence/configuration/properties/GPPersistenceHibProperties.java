@@ -54,12 +54,12 @@ public class GPPersistenceHibProperties {
     private boolean hibGenerateDdl;
     @Value("${db_hbm2ddlAuto}")
     private String hibHbm2ddlAuto;
-    @Value("${db_cacheProviderClass}")
+    @Value("${db_cacheProviderClass:@null}")
     private String hibCacheProviderClass;
     @Value("${db_cacheRegionFactoryClass}")
     private String hibCacheRegionFactoryClass;
-    @Value("${db_useSecondLevelCache}")
-    private boolean hibUseSecondLevelCache;
+    @Value("${db_useSecondLevelCache:@null}")
+    private Boolean hibUseSecondLevelCache;
     @Value("${db_useQueryCache}")
     private boolean hibUseQueryCache;
     @Value("${db_generateStatistics}")
@@ -114,7 +114,7 @@ public class GPPersistenceHibProperties {
     /**
      * @return the hibUseSecondLevelCache
      */
-    public boolean isHibUseSecondLevelCache() {
+    public Boolean isHibUseSecondLevelCache() {
         return hibUseSecondLevelCache;
     }
 

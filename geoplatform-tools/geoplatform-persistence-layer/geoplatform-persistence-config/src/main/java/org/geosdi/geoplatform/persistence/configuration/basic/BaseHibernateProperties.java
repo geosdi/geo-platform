@@ -52,19 +52,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BaseHibernateProperties
         implements PersistenceHibernateStrategy {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
     private GPPersistenceHibProperties gpHibernateProperties;
-
+    
     @Bean
     @Override
     public Properties hibernateProperties() {
         return new Properties() {
-            private static final long serialVersionUID = 3109256773218160485L;
 
+            private static final long serialVersionUID = 3109256773218160485L;
+            
             {
+                
+                logger.info(
+                        "ECCOLO @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + gpHibernateProperties);
+                
                 this.put("hibernate.dialect",
                         gpHibernateProperties.getHibDatabasePlatform());
                 this.put("hibernate.hbm2ddl.auto",

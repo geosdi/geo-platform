@@ -62,6 +62,7 @@ public class BaseHibernateProperties
     @Override
     public Properties hibernateProperties() {
         return new Properties() {
+
             private static final long serialVersionUID = 3109256773218160485L;
 
             {
@@ -75,7 +76,8 @@ public class BaseHibernateProperties
                         gpHibernateProperties.isHibShowSql());
                 this.put("hibernate.generate_statistics",
                         gpHibernateProperties.isHibGenerateStatistics());
-                if (gpHibernateProperties.isHibUseSecondLevelCache()
+
+                if (gpHibernateProperties.isHibUseSecondLevelCache() 
                         && gpHibernateProperties.getHibCacheProviderClass() != null
                         && gpHibernateProperties.getHibCacheRegionFactoryClass() != null
                         && gpHibernateProperties.getEhcacheConfResourceName() != null) {
@@ -89,8 +91,9 @@ public class BaseHibernateProperties
                             gpHibernateProperties.getEhcacheConfResourceName());
                     this.put("hibernate.cache.use_query_cache",
                             gpHibernateProperties.isHibUseQueryCache());
-                } else {
-                    throw new IllegalArgumentException(BaseHibernateProperties.class.getCanonicalName()
+                } else if(gpHibernateProperties.isHibUseSecondLevelCache()) {
+                    throw new IllegalArgumentException(
+                            BaseHibernateProperties.class.getCanonicalName()
                             + ": To use the Second level cache it is "
                             + "necessary to specify all the necessary parameters");
                 }

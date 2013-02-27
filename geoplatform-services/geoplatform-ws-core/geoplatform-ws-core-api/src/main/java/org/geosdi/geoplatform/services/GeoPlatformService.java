@@ -91,10 +91,10 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  *
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @author Francesco Izzi - CNR IMAA - geoSDI
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Nazzareno Sileno - CNR IMAA - geoSDI
  */
 @WebService(name = "GeoPlatformService",
-            targetNamespace = "http://services.geo-platform.org/")
+        targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
     // <editor-fold defaultstate="collapsed" desc="Organization">
@@ -1443,7 +1443,6 @@ public interface GeoPlatformService {
 //    @WebResult(name = "geometry")
 //    GeometryDTO getGeometry(@WebParam(name = "layerID") Long layerID)
 //            throws ResourceNotFoundFault;
-
     /**
      * Retrieve the type of a Layer.
      *

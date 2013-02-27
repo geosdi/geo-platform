@@ -48,10 +48,10 @@ public class GPPersistenceHibProperties {
 
     @Value("${db_databasePlatform}")
     private String hibDatabasePlatform;
-    @Value("${db_showSql}")
-    private boolean hibShowSql;
-    @Value("${db_generateDdl}")
-    private boolean hibGenerateDdl;
+    @Value("${db_showSql:@null}")
+    private Boolean hibShowSql;
+    @Value("${db_generateDdl:@null}")
+    private Boolean hibGenerateDdl;
     @Value("${db_hbm2ddlAuto}")
     private String hibHbm2ddlAuto;
     @Value("${db_cacheProviderClass:@null}")
@@ -60,10 +60,10 @@ public class GPPersistenceHibProperties {
     private String hibCacheRegionFactoryClass;
     @Value("${db_useSecondLevelCache:@null}")
     private Boolean hibUseSecondLevelCache;
-    @Value("${db_useQueryCache}")
-    private boolean hibUseQueryCache;
-    @Value("${db_generateStatistics}")
-    private boolean hibGenerateStatistics;
+    @Value("${db_useQueryCache:@null}")
+    private Boolean hibUseQueryCache;
+    @Value("${db_generateStatistics:@null}")
+    private Boolean hibGenerateStatistics;
     @Value("${db_defaultSchema}")
     private String hibDefaultSchema;
     @Value("${db_ehcacheConfigurationResourceName}")
@@ -80,14 +80,14 @@ public class GPPersistenceHibProperties {
      * @return the hibShowSql
      */
     public boolean isHibShowSql() {
-        return hibShowSql;
+        return (hibShowSql == null) ? false : hibShowSql;
     }
 
     /**
      * @return the hibGenerateDdl
      */
     public boolean isHibGenerateDdl() {
-        return hibGenerateDdl;
+        return (hibGenerateDdl == null) ? false : hibGenerateDdl;
     }
 
     /**
@@ -114,22 +114,22 @@ public class GPPersistenceHibProperties {
     /**
      * @return the hibUseSecondLevelCache
      */
-    public Boolean isHibUseSecondLevelCache() {
-        return hibUseSecondLevelCache;
+    public boolean isHibUseSecondLevelCache() {
+        return (hibUseSecondLevelCache == null) ? false : hibUseSecondLevelCache;
     }
 
     /**
      * @return the hibUseQueryCache
      */
     public boolean isHibUseQueryCache() {
-        return hibUseQueryCache;
+        return (hibUseQueryCache == null) ? false : hibUseQueryCache;
     }
 
     /**
      * @return the hibGenerateStatistics
      */
     public boolean isHibGenerateStatistics() {
-        return hibGenerateStatistics;
+        return (hibGenerateStatistics == null) ? false : hibGenerateStatistics;
     }
 
     /**
@@ -149,14 +149,14 @@ public class GPPersistenceHibProperties {
     @Override
     public String toString() {
         return "GPPersistenceHibProperties{ " + "hibDatabasePlatform = "
-                + hibDatabasePlatform + ", hibShowSql = " + hibShowSql
-                + ", hibGenerateDdl = " + hibGenerateDdl
+                + hibDatabasePlatform + ", hibShowSql = " + isHibShowSql()
+                + ", hibGenerateDdl = " + isHibGenerateDdl()
                 + ", hibHbm2ddlAuto = " + hibHbm2ddlAuto
                 + ", hibCacheProviderClass = " + hibCacheProviderClass
                 + ", hibCacheRegionFactoryClass = " + hibCacheRegionFactoryClass
-                + ", hibUseSecondLevelCache = " + hibUseSecondLevelCache
-                + ", hibUseQueryCache = " + hibUseQueryCache
-                + ", hibGenerateStatistics = " + hibGenerateStatistics
+                + ", hibUseSecondLevelCache = " + isHibUseSecondLevelCache()
+                + ", hibUseQueryCache = " + isHibUseQueryCache()
+                + ", hibGenerateStatistics = " + isHibGenerateStatistics()
                 + ", hibDefaultSchema = " + hibDefaultSchema
                 + ", ehcacheConfResourceName = " + ehcacheConfResourceName + '}';
     }

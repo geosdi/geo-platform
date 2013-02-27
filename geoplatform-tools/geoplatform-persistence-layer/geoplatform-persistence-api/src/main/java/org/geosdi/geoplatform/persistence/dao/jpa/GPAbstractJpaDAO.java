@@ -63,7 +63,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private Class<T> persistentClass;
+    private final Class<T> persistentClass;
     //
     protected EntityManager entityManager;
 

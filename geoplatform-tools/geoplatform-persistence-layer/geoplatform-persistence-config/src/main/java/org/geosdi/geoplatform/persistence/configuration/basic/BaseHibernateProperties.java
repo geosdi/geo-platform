@@ -52,44 +52,50 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BaseHibernateProperties
         implements PersistenceHibernateStrategy {
-    
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
     private GPPersistenceHibProperties gpHibernateProperties;
-    
+
     @Bean
     @Override
     public Properties hibernateProperties() {
         return new Properties() {
-
             private static final long serialVersionUID = 3109256773218160485L;
-            
+
             {
-                
-                logger.info(
-                        "ECCOLO @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + gpHibernateProperties);
-                
+                logger.debug("Hibernate Properties " + gpHibernateProperties);
+                assert (gpHibernateProperties != null) : "The Persistence Hibernate Properties obj must not be null";
                 this.put("hibernate.dialect",
                         gpHibernateProperties.getHibDatabasePlatform());
                 this.put("hibernate.hbm2ddl.auto",
                         gpHibernateProperties.getHibHbm2ddlAuto());
                 this.put("hibernate.show_sql",
                         gpHibernateProperties.isHibShowSql());
-//                this.put("hibernate.cache.provider_class",
-//                         gpHibernateProperties.getHibCacheProviderClass());
-//                this.put("hibernate.cache.region.factory_class",
-//                         gpHibernateProperties.getHibCacheRegionFactoryClass());
-//                this.put("hibernate.cache.use_second_level_cache",
-//                         gpHibernateProperties.isHibUseSecondLevelCache());
-//                this.put("hibernate.cache.use_query_cache",
-//                         gpHibernateProperties.isHibUseQueryCache());
-//                this.put("hibernate.generate_statistics",
-//                         gpHibernateProperties.isHibGenerateStatistics());
+                this.put("hibernate.generate_statistics",
+                        gpHibernateProperties.isHibGenerateStatistics());
+                if (gpHibernateProperties.isHibUseSecondLevelCache()
+                        && gpHibernateProperties.getHibCacheProviderClass() != null
+                        && gpHibernateProperties.getHibCacheRegionFactoryClass() != null
+                        && gpHibernateProperties.getEhcacheConfResourceName() != null) {
+                    this.put("hibernate.cache.provider_class",
+                            gpHibernateProperties.getHibCacheProviderClass());
+                    this.put("hibernate.cache.region.factory_class",
+                            gpHibernateProperties.getHibCacheRegionFactoryClass());
+                    this.put("hibernate.cache.use_second_level_cache",
+                            gpHibernateProperties.isHibUseSecondLevelCache());
+                    this.put("net.sf.ehcache.configurationResourceName",
+                            gpHibernateProperties.getEhcacheConfResourceName());
+                    this.put("hibernate.cache.use_query_cache",
+                            gpHibernateProperties.isHibUseQueryCache());
+                } else {
+                    throw new IllegalArgumentException(BaseHibernateProperties.class.getCanonicalName()
+                            + ": To use the Second level cache it is "
+                            + "necessary to specify all the necessary parameters");
+                }
                 this.put("hibernate.default_schema",
                         gpHibernateProperties.getHibDefaultSchema());
-//                this.put("net.sf.ehcache.configurationResourceName",
-//                         gpHibernateProperties.getEhcacheConfResourceName());
             }
         };
     }

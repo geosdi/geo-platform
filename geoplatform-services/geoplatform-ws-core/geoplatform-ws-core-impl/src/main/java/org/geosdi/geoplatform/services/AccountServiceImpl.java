@@ -39,7 +39,7 @@ import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
+import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigurator;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
@@ -80,7 +80,7 @@ class AccountServiceImpl {
     // Service
     private GPSchedulerService schedulerService;
     // Utility
-    private GPDigesterConfigutator gpDigester;
+    private GPDigesterConfigurator gpDigester;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -128,7 +128,7 @@ class AccountServiceImpl {
     /**
      * @param gpDigester the gpDigester to set
      */
-    public void setGpDigester(GPDigesterConfigutator gpDigester) {
+    public void setGpDigester(GPDigesterConfigurator gpDigester) {
         this.gpDigester = gpDigester;
     }
     //</editor-fold>

@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.jws.WebService;
-import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
+import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigurator;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
@@ -75,9 +75,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @author Francesco Izzi - CNR IMAA - geoSDI
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  */
 @Transactional // Give atomicity on WS methods
 @WebService(
@@ -118,7 +116,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // Services
     private GPSchedulerService schedulerService;
     // Utility
-    private GPDigesterConfigutator gpDigester;
+    private GPDigesterConfigurator gpDigester;
 
     /**
      * Default constructor create each service delegate.
@@ -289,7 +287,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param gpDigester the gpDigester to set
      *
      */
-    public void setGpDigester(GPDigesterConfigutator gpDigester) {
+    public void setGpDigester(GPDigesterConfigurator gpDigester) {
         this.gpDigester = gpDigester;
         this.accountServiceDelegate.setGpDigester(gpDigester);
     }

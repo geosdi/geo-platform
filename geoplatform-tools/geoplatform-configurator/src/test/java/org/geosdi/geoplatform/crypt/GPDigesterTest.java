@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.crypt;
 
 import javax.annotation.Resource;
-import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
+import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigurator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,10 +61,10 @@ public class GPDigesterTest {
     private final static String encryptedTextSHA1 = "87f969449681b7674a7bda1a8988f413c16a16a7";
     //
     @Resource(name = "gpDigesterSHA1")
-    private GPDigesterConfigutator gpDigesterSHA1;
+    private GPDigesterConfigurator gpDigesterSHA1;
     //
     @Resource(name = "gpDigesterMD5")
-    private GPDigesterConfigutator gpDigesterMD5;
+    private GPDigesterConfigurator gpDigesterMD5;
 
     @Test
     public void testMD5() {

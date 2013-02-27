@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigutator;
+import org.geosdi.geoplatform.configurator.crypt.GPDigesterConfigurator;
 import org.geosdi.geoplatform.core.acl.AclClass;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
@@ -151,7 +151,7 @@ public abstract class BaseInitializerTest {
     protected GPMessageDAO messageDAO;
     //
     @Autowired
-    protected GPDigesterConfigutator gpDigesterSHA1;
+    protected GPDigesterConfigurator gpDigesterSHA1;
     //
     protected GPOrganization organizationTest;
     protected GPUser adminTest;

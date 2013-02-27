@@ -35,44 +35,14 @@
  */
 package org.geosdi.geoplatform.configurator.crypt;
 
-import org.jasypt.digest.PooledStringDigester;
-import org.jasypt.digest.config.StringDigesterConfig;
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPPooledDigester implements GPDigesterConfigurator,
-        InitializingBean {
+public interface GPDigesterConfigurator {
 
-    private final PooledStringDigester digester;
-    private StringDigesterConfig config;
+    String digest(String plainText);
 
-    public GPPooledDigester() {
-        this.digester = new PooledStringDigester();
-    }
-
-    @Override
-    public String digest(String plainText) {
-        return this.digester.digest(plainText).toLowerCase();
-    }
-
-    @Override
-    public boolean matches(String encryptedText, String plainText) {
-        return this.digester.matches(plainText, encryptedText);
-    }
-
-    /**
-     * @param config the config to set
-     */
-    public void setConfig(StringDigesterConfig config) {
-        this.config = config;
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        this.digester.setConfig(config);
-    }
+    boolean matches(String encryptedText, String plainText);
 }

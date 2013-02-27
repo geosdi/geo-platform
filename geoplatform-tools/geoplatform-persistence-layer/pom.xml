@@ -110,7 +110,7 @@
         <hibernate-version>4.1.10.Final</hibernate-version>
         <hibernate-persistence-version>1.0.1.Final</hibernate-persistence-version>
         <hibernate-commons-annotations-version>4.0.1.Final</hibernate-commons-annotations-version>
-        <spring-data-jpa-version>13.0.RELEASE</spring-data-jpa-version>
+        <spring-data-jpa-version>1.3.0.RELEASE</spring-data-jpa-version>
     </properties>
     
 </project>

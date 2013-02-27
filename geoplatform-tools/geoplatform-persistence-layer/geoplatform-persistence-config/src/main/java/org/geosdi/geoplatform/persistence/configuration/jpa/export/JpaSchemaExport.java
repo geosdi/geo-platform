@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.jpa.export;
 
-import java.util.Properties;
 import org.geosdi.geoplatform.persistence.configuration.export.PersistenceSchemaExport;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.ejb.Ejb3Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -53,14 +53,16 @@ import org.springframework.stereotype.Component;
 public class JpaSchemaExport extends PersistenceSchemaExport {
 
     @Autowired
-    private Properties hibernateProperties;
+    private LocalContainerEntityManagerFactoryBean gpEntityManagerFactory;
 
     @Override
     protected void createSchema() {
-        Configuration configuration = new Configuration();
-        configuration.addProperties(hibernateProperties);
-
-        this.schema = new SchemaExport(configuration);
+        Ejb3Configuration cfg = new Ejb3Configuration();
+        Ejb3Configuration configured =
+                cfg.configure(gpEntityManagerFactory.getPersistenceUnitInfo(),
+                gpEntityManagerFactory.getJpaPropertyMap());
+        
+        schema = new SchemaExport(configured.getHibernateConfiguration());
 
         super.exportSchema();
     }

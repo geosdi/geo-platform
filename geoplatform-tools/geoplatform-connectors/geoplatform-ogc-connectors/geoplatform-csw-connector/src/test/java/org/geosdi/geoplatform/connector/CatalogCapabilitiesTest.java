@@ -137,6 +137,7 @@ public class CatalogCapabilitiesTest {
     }
 
     @Test
+    @Ignore(value = "There some problems.")
     public void testCSW_ESRI() {
         try {
 

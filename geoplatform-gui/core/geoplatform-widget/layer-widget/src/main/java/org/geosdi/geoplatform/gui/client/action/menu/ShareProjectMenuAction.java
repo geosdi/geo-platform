@@ -62,14 +62,18 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
     private GPProjectManagementWidget projectManagementWidget;
 
     @Inject
-    public ShareProjectMenuAction(GPProjectManagementWidget projectManagementWidget) {
-        super(GPTrustedLevel.HIGH, "Share Project", LayerResources.ICONS.arrowRefresh());
+    public ShareProjectMenuAction(
+            GPProjectManagementWidget projectManagementWidget) {
+        super(GPTrustedLevel.HIGH, "Share Project",
+                LayerResources.ICONS.arrowRefresh());
         this.projectManagementWidget = projectManagementWidget;
     }
 
     @Override
     public void componentSelected(MenuEvent e) {
-        LayerRemote.Util.getInstance().loadDefaultProject(new AsyncCallback<GPClientProject>() {
+        LayerRemote.Util.getInstance().loadDefaultProject(
+                new AsyncCallback<GPClientProject>() {
+
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
@@ -82,8 +86,6 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Error sharing the layer tree project",
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                    System.out.println("Error sharing the layer tree project: " + caught.toString()
-                            + " data: " + caught.getMessage());
                 }
             }
 

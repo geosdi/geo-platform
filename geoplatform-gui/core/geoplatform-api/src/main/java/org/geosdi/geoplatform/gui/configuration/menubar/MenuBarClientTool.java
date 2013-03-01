@@ -36,43 +36,20 @@
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.configuration.BaseMenuGenericTool;
 
 /**
  * @author giuseppe
  *
  */
-public class MenuBarClientTool extends GPMenuGenericTool<IGeoPlatformMenubar> {
+public class MenuBarClientTool extends BaseMenuGenericTool<IGeoPlatformMenubar> {
 
     private static final long serialVersionUID = -3760023225532302795L;
     //
-    protected String text;
-
-    /**
-     * @return the text
-     */
-    @Override
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * @param text the text to set
-     */
-    @Override
-    public void setText(String text) {
-        this.text = text;
-    }
 
     @Override
     protected void create(IGeoPlatformMenubar menubar,
             Menu menu) {
         menubar.addMenuItem(this, menu);
-    }
-
-    @Override
-    public String toString() {
-        return "MenuBarClientTool{ " + super.toString()
-                + "text = " + text + '}';
     }
 }

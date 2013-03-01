@@ -33,24 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.tools;
+package org.geosdi.geoplatform.gui.configuration;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.BaseMenuGenericTool;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMenuStrategy;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
+ * <p>
+ * This Class can be used to add a generic Widget in Menu Item
+ * </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class TreeMenuClientTool extends BaseMenuGenericTool<GPTreeMenuStrategy> {
+public abstract class AdapterMenuClientTool<W extends Widget, M extends GeoPlatformMenuCreator>
+        extends GPMenuGenericTool<M> {
 
-    private static final long serialVersionUID = -1046995238986778869L;
+    private static final long serialVersionUID = 9036611812648192765L;
 
-    @Override
-    protected void create(GPTreeMenuStrategy menuCreator,
-            Menu menu) {
-        menuCreator.addMenuItem(this, menu);
-    }
+    protected abstract W buildWidget(M menuCreator);
 }

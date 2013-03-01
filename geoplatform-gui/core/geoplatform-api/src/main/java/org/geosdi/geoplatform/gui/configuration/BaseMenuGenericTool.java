@@ -33,24 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.tools;
-
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.BaseMenuGenericTool;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMenuStrategy;
+package org.geosdi.geoplatform.gui.configuration;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class TreeMenuClientTool extends BaseMenuGenericTool<GPTreeMenuStrategy> {
+public abstract class BaseMenuGenericTool<M extends GeoPlatformMenuCreator>
+        extends GPMenuGenericTool<M> implements GPMenuItem {
 
-    private static final long serialVersionUID = -1046995238986778869L;
+    private static final long serialVersionUID = -865083411234763080L;
+    //
+    protected String text;
+
+    /**
+     * @return the text
+     */
+    @Override
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * @param text the text to set
+     */
+    @Override
+    public void setText(String text) {
+        this.text = text;
+    }
 
     @Override
-    protected void create(GPTreeMenuStrategy menuCreator,
-            Menu menu) {
-        menuCreator.addMenuItem(this, menu);
+    public String toString() {
+        return getClass().getName() + "{" + " text = " + text + '}';
     }
 }

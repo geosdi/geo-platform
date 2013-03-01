@@ -48,7 +48,7 @@ public abstract class GenericTool implements GPGenericTool,
     protected String id;
     protected boolean enabled;
     protected int order;
-    protected boolean secure = true;
+    protected boolean secure;
 
     /**
      * @return the id
@@ -115,7 +115,7 @@ public abstract class GenericTool implements GPGenericTool,
 
     @Override
     public String toString() {
-        return "GenericTool{ " + "id = " + id + ", enabled = " + enabled
+        return getClass().getName() + "{ " + "id = " + id + ", enabled = " + enabled
                 + ", order = " + order + ", secure = " + secure + '}';
     }
 

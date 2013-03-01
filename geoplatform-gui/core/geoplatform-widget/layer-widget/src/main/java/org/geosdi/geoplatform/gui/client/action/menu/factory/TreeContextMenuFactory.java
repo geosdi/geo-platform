@@ -199,7 +199,7 @@ public class TreeContextMenuFactory {
                 protected void onSelect(ModelData model, int index) {
                     super.onSelect(model, index);
                     refreshTimeComboBox.clearSelections();
-                    layerContextMenu.hide();
+                    refreshTimeComboBox.getParent().setVisible(false);
                 }
             };
             refreshTimeComboBox.setEmptyText("Refresh Time");

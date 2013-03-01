@@ -48,33 +48,35 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class DeleteRequestManager {
-    
+
     private TreePanel<GPBeanTreeModel> tree;
     private DeleteRequestHandler deleteFolder;
     private DeleteRequestHandler deleteLayer;
-    
+
     public DeleteRequestManager(TreePanel theTree) {
         this.tree = theTree;
         initChain();
     }
-    
+
     public void processRequest() {
         GeoPlatformMessage.confirmMessage("Delete Layer",
                 "Are you sure you want to delete the selected element(s)?",
                 new Listener<MessageBoxEvent>() {
-                    @Override
-                    public void handleEvent(MessageBoxEvent be) {
-                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                            for (GPBeanTreeModel model :
-                                    DeleteRequestManager.this.tree.getSelectionModel().getSelectedItems()) {
-                                DeleteRequestManager.this.deleteFolder.deleteRequest(model);
-                            }
-                        }
+
+            @Override
+            public void handleEvent(MessageBoxEvent be) {
+                if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                    for (GPBeanTreeModel model
+                            : DeleteRequestManager.this.tree.getSelectionModel().getSelectedItems()) {
+                        DeleteRequestManager.this.deleteFolder.deleteRequest(
+                                model);
                     }
-                });
-        
+                }
+            }
+        });
+
     }
-    
+
     private void initChain() {
         this.deleteFolder = new DeleteFolderHandler(tree);
         this.deleteLayer = new DeleteLayerHandler(tree);

@@ -92,14 +92,17 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
         memento.convertMementoToWs();
         LayerRemote.Util.getInstance().saveDeletedFolderAndTreeModifications(
                 memento, new AsyncCallback<Boolean>() {
+
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
                 } else {
-                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(
+                    LayerHandlerManager.fireEvent(
+                            new DisplayLayersProgressBarEvent(
                             false));
-                    GeoPlatformMessage.errorMessage("Save Delete Operation Error",
+                    GeoPlatformMessage.errorMessage(
+                            "Save Delete Operation Error",
                             "Problems on saving the new tree state after deleting elements");
                 }
             }

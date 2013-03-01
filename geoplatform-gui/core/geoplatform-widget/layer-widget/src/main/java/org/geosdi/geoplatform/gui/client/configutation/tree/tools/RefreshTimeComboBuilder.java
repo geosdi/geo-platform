@@ -33,24 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.tools;
+package org.geosdi.geoplatform.gui.client.configutation.tree.tools;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.BaseMenuGenericTool;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMenuStrategy;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.action.menu.RefreshLayerAction;
+import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class TreeMenuClientTool extends BaseMenuGenericTool<GPTreeMenuStrategy> {
+public class RefreshTimeComboBuilder {
 
-    private static final long serialVersionUID = -1046995238986778869L;
+    private ComboBox combo;
 
-    @Override
-    protected void create(GPTreeMenuStrategy menuCreator,
-            Menu menu) {
-        menuCreator.addMenuItem(this, menu);
+    public ComboBox build(TreePanel tree) {
+        this.combo = new ComboBox() {
+
+            @Override
+            protected void onSelect(ModelData model, int index) {
+                super.onSelect(model, index);
+                combo.clearSelections();
+                combo.getParent().setVisible(false);
+            }
+        };
+
+        combo.setEmptyText("Refresh Time");
+        ListStore<LayerRefreshTimeValue> store = new ListStore<LayerRefreshTimeValue>();
+        store.add(LayerRefreshTimeValue.getLayerRefreshTimeList());
+        combo.setStore(store);
+        combo.setEditable(Boolean.FALSE);
+        combo.setForceSelection(Boolean.TRUE);
+        combo.setTypeAhead(Boolean.FALSE);
+        combo.setUseQueryCache(Boolean.FALSE);
+        combo.setDisplayField(
+                LayerRefreshTimeValue.REFRESH_TIME_KEY);
+
+        combo.addSelectionChangedListener(new RefreshLayerAction(
+                (GPTreePanel<GPBeanTreeModel>) tree));
+
+        return combo;
     }
 }

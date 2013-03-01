@@ -35,10 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.impl.tree.menu.strategy;
 
+import com.extjs.gxt.ui.client.widget.menu.AdapterMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.DateMenu;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.Widget;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
@@ -109,7 +111,17 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
     }
 
     @Override
+    public void addWidget(Widget widget, Menu menu) {
+        menu.add(new AdapterMenuItem(widget));
+    }
+
+    @Override
     public boolean isInitialized() {
         return initialized;
+    }
+
+    @Override
+    public TreePanel getTree() {
+        return this.treePanel;
     }
 }

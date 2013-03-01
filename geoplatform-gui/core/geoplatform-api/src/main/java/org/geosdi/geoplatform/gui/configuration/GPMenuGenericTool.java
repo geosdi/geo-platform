@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class GPMenuGenericTool<M extends GeoPlatformMenuCreator>
-        extends GenericTool implements GPMenuItem {
+        extends GenericTool {
 
     private static final long serialVersionUID = -6366879645618646403L;
 

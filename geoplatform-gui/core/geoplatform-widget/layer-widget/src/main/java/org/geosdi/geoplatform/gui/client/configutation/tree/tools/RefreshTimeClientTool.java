@@ -33,10 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.tools;
+package org.geosdi.geoplatform.gui.client.configutation.tree.tools;
 
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
-import org.geosdi.geoplatform.gui.configuration.BaseMenuGenericTool;
+import org.geosdi.geoplatform.gui.configuration.AdapterMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMenuStrategy;
 
 /**
@@ -44,13 +45,17 @@ import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMe
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class TreeMenuClientTool extends BaseMenuGenericTool<GPTreeMenuStrategy> {
+public class RefreshTimeClientTool extends AdapterMenuClientTool<ComboBox, GPTreeMenuStrategy> {
 
-    private static final long serialVersionUID = -1046995238986778869L;
+    private static final long serialVersionUID = 5905822656524314136L;
 
     @Override
-    protected void create(GPTreeMenuStrategy menuCreator,
-            Menu menu) {
-        menuCreator.addMenuItem(this, menu);
+    protected final ComboBox buildWidget(GPTreeMenuStrategy menuCreator) {
+        return new RefreshTimeComboBuilder().build(menuCreator.getTree());
+    }
+
+    @Override
+    protected void create(GPTreeMenuStrategy menuCreator, Menu menu) {
+        menuCreator.addWidget(this.buildWidget(menuCreator), menu);
     }
 }

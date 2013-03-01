@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.configuration.composite.menu.strategy;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.configuration.GeoPlatformMenuCreator;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
 
@@ -53,6 +55,20 @@ public interface GPTreeMenuStrategy extends GeoPlatformMenuCreator {
      * @return {@link Menu} menu
      */
     Menu getMenu(StoreCompositeKey key);
+
+    /**
+     *
+     * @return {@link TreePanel}
+     */
+    TreePanel getTree();
+
+    /**
+     * Insert a Generic Widget in {@link TreePanel} Menu
+     *
+     * @param widget
+     * @param menu
+     */
+    void addWidget(Widget widget, Menu menu);
 
     /**
      * Give Information about the TreeMenuStrategy Status

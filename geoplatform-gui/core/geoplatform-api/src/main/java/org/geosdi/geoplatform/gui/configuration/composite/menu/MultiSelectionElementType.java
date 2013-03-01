@@ -47,15 +47,15 @@ public enum MultiSelectionElementType {
      */
     ALL,
     /**
-     * Only ROOT and COMPOSITE
+     * Multi Selection for COMPOSITE Nodes
      */
-    ROOT_COMPOSITE,
+    ONLY_COMPOSITE,
     /**
-     * Only ROOT and LEAF
+     * Multi Selection for LEAF Nodes
      */
-    ROOT_LEAF,
+    ONLY_LEAF,
     /**
-     * Only COMPOSITE and LEAF
+     * Multi Selection for COMPOSITE and LEAF Nodes together
      */
     COMPOSITE_LEAF;
 }

@@ -74,12 +74,18 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
     public void selectionChanged(SelectionChangedEvent<LayerRefreshTimeValue> se) {
         final GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         if (!(itemSelected instanceof GPLayerTreeModel)) {
-            throw new IllegalArgumentException("It is possible to refresh only layers");
+            throw new IllegalArgumentException(
+                    "It is possible to refresh only layers");
         }
         final GPLayerTreeModel layerSelected = (GPLayerTreeModel) itemSelected;
-        final LayerRefreshTimeEnum refreshTimeEnum = se.getSelectedItem().get(LayerRefreshTimeValue.REFRESH_TIME_KEY);
-        LayerRemote.Util.getInstance().setLayerRefreshTime((String) Registry.get(GlobalRegistryEnum.EMITE_RESOURCE.getValue()), layerSelected.getUUID(),
+        final LayerRefreshTimeEnum refreshTimeEnum = se.getSelectedItem().get(
+                LayerRefreshTimeValue.REFRESH_TIME_KEY);
+        LayerRemote.Util.getInstance().setLayerRefreshTime(
+                (String) Registry.get(
+                GlobalRegistryEnum.EMITE_RESOURCE.getValue()),
+                layerSelected.getUUID(),
                 refreshTimeEnum.getValue(), new AsyncCallback<Object>() {
+
             @Override
             public void onFailure(Throwable caught) {
                 GeoPlatformMessage.errorMessage("Error Reloading",
@@ -89,7 +95,8 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "Error setting the reload time",
                         SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                System.out.println("Error setting the reload time for layer: " + caught.toString()
+                System.out.println(
+                        "Error setting the reload time for layer: " + caught.toString()
                         + " data: " + caught.getMessage());
             }
 
@@ -114,12 +121,15 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
     public void handleMessageBody(final String messageBody) {
         GPBeanTreeModel element = treePanel.getStore().findModel(messageBody);
         if (element != null && element instanceof GPLayerTreeModel && ((GPLayerTreeModel) element).isChecked()) {
-            this.reloadLayerEvent = new ReloadLayerMapEvent((GPLayerBean) element);
+            this.reloadLayerEvent = new ReloadLayerMapEvent(
+                    (GPLayerBean) element);
             GPHandlerManager.fireEvent(this.reloadLayerEvent);
         } else if (element instanceof GPLayerTreeModel) {
             LayerRemote.Util.getInstance().setLayerRefreshTime(
-                    (String) Registry.get(GlobalRegistryEnum.EMITE_RESOURCE.getValue()),
+                    (String) Registry.get(
+                    GlobalRegistryEnum.EMITE_RESOURCE.getValue()),
                     messageBody, 0, new AsyncCallback<Object>() {
+
                 @Override
                 public void onFailure(Throwable caught) {
 //                    System.out.println("Fallita rimozione layer xmpp in ascolto: " + messageBody);

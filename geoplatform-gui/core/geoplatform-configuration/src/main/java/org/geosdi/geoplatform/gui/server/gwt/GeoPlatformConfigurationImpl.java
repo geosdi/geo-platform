@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server.gwt;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.geosdi.geoplatform.gui.server.service.IStartupService;
@@ -53,14 +52,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceServlet
         implements GeoPlatformConfiguration {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 4416552134318747534L;
     //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -72,14 +68,18 @@ public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceSe
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
 
-        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(
+                getServletContext());
         GeoPlatformContextUtil.getInstance().setSpringContext(context);
+
+        this.initGeoPlatformContext();
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration#initGeoPlatformConfiguration()
+     * @see
+     * org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration#initGeoPlatformConfiguration()
      */
     @Override
     public IGeoPlatformGlobal initGeoPlatformConfiguration() {
@@ -92,9 +92,9 @@ public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceSe
     }
 
     /**
-     * Init Spring Context
+     * Init GeoPlatform Context
      */
-    private void injectValues() {
+    private void initGeoPlatformContext() {
         assert (this.startupService != null) : "The GeoPlatform StartupService is null";
 
         logger.info("################ GeoPlatform Context Initialized Correctly");

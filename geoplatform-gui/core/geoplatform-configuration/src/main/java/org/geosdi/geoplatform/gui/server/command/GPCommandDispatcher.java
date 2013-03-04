@@ -33,61 +33,61 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
+package org.geosdi.geoplatform.gui.server.command;
 
-import com.google.common.base.Preconditions;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.geosdi.geoplatform.gui.command.server.CommandDispatcher;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
+public class GPCommandDispatcher implements CommandDispatcher {
 
-    private static final long serialVersionUID = -7607092275910880131L;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    protected Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> clientTools;
-    private CompositeStoreSorter sorter;
+    private ApplicationContext appContext;
 
-    public AbstractCompositeStore() {
-        this.sorter = new CompositeStoreSorter() {
+    @Override
+    public <Request extends GPCommandRequest> GPCommandResponse execute(
+            Request request) throws Exception {
 
-            @Override
-            public void sort() {
-                for (Map.Entry<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> baseEntry : clientTools.entrySet()) {
-                    List<? extends GPMenuGenericTool> list = baseEntry.getValue();
+        logger.debug("GPCommandDipatcher : Execution of Command "
+                + request.getCommandName());
 
-                    Collections.sort(list);
-                }
-            }
-        };
+        GPCommand command = appContext.getBean(request.getCommandName(),
+                GPCommand.class);
+
+        if (command == null) {
+            logger.error("There is no Command with name : "
+                    + request.getCommandName() + " defined in Spring "
+                    + "Application Context.");
+            throw new GeoPlatformException("No Command with name : "
+                    + request.getCommandName() + " found.");
+        }
+
+        logger.debug("Found Command " + request.getCommandName()
+                + " : " + command);
+
+        return command.execute(request);
     }
 
     @Override
-    public void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools) {
-        this.clientTools = theClientTools;
+    public void destroy() {
+        logger.info("GPCommandDispatcher destroy --------------"
+                + "-----------------------------> ");
     }
 
     @Override
-    public Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> getClientTools() {
-        return this.clientTools;
-    }
-
-    @Override
-    public void init() {
-        Preconditions.checkNotNull(clientTools, "The Client Tools must not "
-                + "be null.");
-
-        this.sorter.sort();
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractCompositeStore{ " + "clientTools = " + clientTools + '}';
+    public void setApplicationContext(ApplicationContext ac) throws BeansException {
+        this.appContext = ac;
     }
 }

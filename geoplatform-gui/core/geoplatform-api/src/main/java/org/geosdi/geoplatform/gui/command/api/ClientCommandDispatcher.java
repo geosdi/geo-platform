@@ -33,61 +33,54 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
+package org.geosdi.geoplatform.gui.command.api;
 
-import com.google.common.base.Preconditions;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.command.api.ClientCommand;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.service.GeoPlatformService;
+import org.geosdi.geoplatform.gui.service.GeoPlatformServiceAsync;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ *
+ * @since 1.5.1
  */
-public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
+public final class ClientCommandDispatcher {
 
-    private static final long serialVersionUID = -7607092275910880131L;
+    private static ClientCommandDispatcher instance = new ClientCommandDispatcher();
     //
-    protected Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> clientTools;
-    private CompositeStoreSorter sorter;
+    private GeoPlatformServiceAsync service;
 
-    public AbstractCompositeStore() {
-        this.sorter = new CompositeStoreSorter() {
+    private ClientCommandDispatcher() {
+        this.service = GeoPlatformService.Util.getInstance();
+    }
+
+    public static ClientCommandDispatcher getInstance() {
+        return instance;
+    }
+
+    /**
+     * <p>Execute the {@link ClientCommand} command on the Server</p>
+     *
+     * @param ClientCommand command
+     */
+    public void execute(final ClientCommand command) {
+
+        this.service.execute(command.getCommandRequest(),
+                new AsyncCallback<GPCommandResponse>() {
 
             @Override
-            public void sort() {
-                for (Map.Entry<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> baseEntry : clientTools.entrySet()) {
-                    List<? extends GPMenuGenericTool> list = baseEntry.getValue();
-
-                    Collections.sort(list);
-                }
+            public void onFailure(Throwable caught) {
+                command.onCommandFailure(caught);
             }
-        };
-    }
 
-    @Override
-    public void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools) {
-        this.clientTools = theClientTools;
-    }
-
-    @Override
-    public Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> getClientTools() {
-        return this.clientTools;
-    }
-
-    @Override
-    public void init() {
-        Preconditions.checkNotNull(clientTools, "The Client Tools must not "
-                + "be null.");
-
-        this.sorter.sort();
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractCompositeStore{ " + "clientTools = " + clientTools + '}';
+            @Override
+            public void onSuccess(GPCommandResponse result) {
+                command.onCommandSuccess(result);
+            }
+        });
     }
 }

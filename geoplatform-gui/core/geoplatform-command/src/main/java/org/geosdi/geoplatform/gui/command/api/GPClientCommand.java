@@ -33,61 +33,68 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
-
-import com.google.common.base.Preconditions;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+package org.geosdi.geoplatform.gui.command.api;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
+public abstract class GPClientCommand<Response extends GPCommandResponse>
+        implements ClientCommand<Response> {
 
-    private static final long serialVersionUID = -7607092275910880131L;
+    private static final long serialVersionUID = 5762555309340995385L;
     //
-    protected Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> clientTools;
-    private CompositeStoreSorter sorter;
+    private GPCommandRequest commandRequest;
 
-    public AbstractCompositeStore() {
-        this.sorter = new CompositeStoreSorter() {
+    public GPClientCommand() {
+    }
 
-            @Override
-            public void sort() {
-                for (Map.Entry<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> baseEntry : clientTools.entrySet()) {
-                    List<? extends GPMenuGenericTool> list = baseEntry.getValue();
+    public GPClientCommand(GPCommandRequest theCommandRequest) {
+        this.commandRequest = theCommandRequest;
+    }
 
-                    Collections.sort(list);
-                }
-            }
-        };
+    /**
+     * @return the commandRequest
+     */
+    @Override
+    public GPCommandRequest getCommandRequest() {
+        return commandRequest;
+    }
+
+    /**
+     * @param commandRequest the commandRequest to set
+     */
+    public void setCommandRequest(GPCommandRequest commandRequest) {
+        this.commandRequest = commandRequest;
     }
 
     @Override
-    public void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools) {
-        this.clientTools = theClientTools;
+    public int hashCode() {
+        int hash = 3;
+        hash = 73 * hash + (this.commandRequest != null
+                            ? this.commandRequest.hashCode() : 0);
+        return hash;
     }
 
     @Override
-    public Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> getClientTools() {
-        return this.clientTools;
-    }
-
-    @Override
-    public void init() {
-        Preconditions.checkNotNull(clientTools, "The Client Tools must not "
-                + "be null.");
-
-        this.sorter.sort();
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GPClientCommand<Response> other = (GPClientCommand<Response>) obj;
+        if (this.commandRequest != other.commandRequest && (this.commandRequest == null || !this.commandRequest.equals(
+                                                            other.commandRequest))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "AbstractCompositeStore{ " + "clientTools = " + clientTools + '}';
+        return "GPClientCommand{ " + "commandRequest = " + commandRequest + '}';
     }
 }

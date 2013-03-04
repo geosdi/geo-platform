@@ -33,61 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
+package org.geosdi.geoplatform.gui.command.server;
 
-import com.google.common.base.Preconditions;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.springframework.context.ApplicationContextAware;
 
 /**
+ * <p>
+ * Class responsible for dispatching requests to the various command
+ * </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * 
+ * @since 1.5.1
  */
-public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
+public interface CommandDispatcher extends ApplicationContextAware {
 
-    private static final long serialVersionUID = -7607092275910880131L;
-    //
-    protected Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> clientTools;
-    private CompositeStoreSorter sorter;
-
-    public AbstractCompositeStore() {
-        this.sorter = new CompositeStoreSorter() {
-
-            @Override
-            public void sort() {
-                for (Map.Entry<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> baseEntry : clientTools.entrySet()) {
-                    List<? extends GPMenuGenericTool> list = baseEntry.getValue();
-
-                    Collections.sort(list);
-                }
-            }
-        };
-    }
-
-    @Override
-    public void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools) {
-        this.clientTools = theClientTools;
-    }
-
-    @Override
-    public Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> getClientTools() {
-        return this.clientTools;
-    }
-
-    @Override
-    public void init() {
-        Preconditions.checkNotNull(clientTools, "The Client Tools must not "
-                + "be null.");
-
-        this.sorter.sort();
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractCompositeStore{ " + "clientTools = " + clientTools + '}';
-    }
+    /**
+     *
+     * @param <Request> request
+     *
+     * @return {@link GPCommandResponse} response
+     *
+     * @throws Exception
+     */
+    <Request extends GPCommandRequest> GPCommandResponse execute(Request request)
+            throws Exception;
+    
+    void destroy();
 }

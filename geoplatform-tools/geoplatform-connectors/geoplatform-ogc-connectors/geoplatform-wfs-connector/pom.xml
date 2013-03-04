@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-ogc-connectors</artifactId>
-        <version>1.5-SNAPSHOT</version>
+        <version>1.6-SNAPSHOT</version>
     </parent>
     
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-wfs-connector</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.6-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>Geo-Platform :: == WFS Connector Module</name>
@@ -61,7 +61,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>gml-parser-impl</artifactId>
-            <version>1.5-SNAPSHOT</version>
+            <version>1.6-SNAPSHOT</version>
         </dependency>
         
         <!-- SPRING -->

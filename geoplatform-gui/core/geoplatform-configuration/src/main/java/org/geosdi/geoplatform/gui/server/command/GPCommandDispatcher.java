@@ -90,5 +90,4 @@ public class GPCommandDispatcher implements CommandDispatcher {
     public void setApplicationContext(ApplicationContext ac) throws BeansException {
         this.appContext = ac;
     }
-
 }

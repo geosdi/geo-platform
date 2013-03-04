@@ -19,7 +19,7 @@
     <modules>
         <module>geoplatform-model</module>
         <module>geoplatform-dao</module>
-        <!-- module>geoplatform-initializer</module -->
+        <module>geoplatform-initializer</module>
     </modules>
     
     <dependencies>

@@ -35,6 +35,19 @@
             
             <dependency>
                 <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-command</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-command</artifactId>
+                <version>${project.version}</version>
+                <classifier>sources</classifier>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -145,6 +158,7 @@
     <modules>
         <module>geoplatform-api</module>
         <module>geoplatform-configuration</module>
+        <module>geoplatform-command</module>
         <module>geoplatform-server-api</module>
         <module>geoplatform-widget</module>
         <module>geoplatform-cache</module>

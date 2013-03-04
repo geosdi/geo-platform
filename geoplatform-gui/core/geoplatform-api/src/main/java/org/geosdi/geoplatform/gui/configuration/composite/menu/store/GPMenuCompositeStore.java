@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
@@ -44,10 +45,12 @@ import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPMenuCompositeStore {
+public interface GPMenuCompositeStore extends Serializable {
 
     void setClientTools(
             Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools);
+
+    Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> getClientTools();
 
     /**
      * Return all {@link GPMenuGenericTool} in the Store associated with

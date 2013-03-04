@@ -33,61 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
+package org.geosdi.geoplatform.gui.server.command;
 
-import com.google.common.base.Preconditions;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.client.command.GetCompositeMenuRequest;
+import org.geosdi.geoplatform.gui.client.command.GetCompositeMenuResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.store.GPMenuCompositeStore;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
+@Component(value = "command.GetCompositeMenuCommand")
+public class GetCompositeMenuCommand implements
+        GPCommand<GetCompositeMenuRequest, GetCompositeMenuResponse> {
 
-    private static final long serialVersionUID = -7607092275910880131L;
-    //
-    protected Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> clientTools;
-    private CompositeStoreSorter sorter;
-
-    public AbstractCompositeStore() {
-        this.sorter = new CompositeStoreSorter() {
-
-            @Override
-            public void sort() {
-                for (Map.Entry<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> baseEntry : clientTools.entrySet()) {
-                    List<? extends GPMenuGenericTool> list = baseEntry.getValue();
-
-                    Collections.sort(list);
-                }
-            }
-        };
-    }
+    @Autowired
+    private GPMenuCompositeStore gpTreeMenuStore;
 
     @Override
-    public void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools) {
-        this.clientTools = theClientTools;
-    }
+    public GetCompositeMenuResponse execute(GetCompositeMenuRequest request)
+            throws GeoPlatformException {
 
-    @Override
-    public Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> getClientTools() {
-        return this.clientTools;
-    }
-
-    @Override
-    public void init() {
-        Preconditions.checkNotNull(clientTools, "The Client Tools must not "
-                + "be null.");
-
-        this.sorter.sort();
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractCompositeStore{ " + "clientTools = " + clientTools + '}';
+        return new GetCompositeMenuResponse(gpTreeMenuStore);
     }
 }

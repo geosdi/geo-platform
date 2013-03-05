@@ -18,7 +18,7 @@
         <property name="nullValue" value="@null" />
         <property name="locations">
             <list>
-                <value>classpath:gp-db.properties</value>
+                <value>classpath:persistence-db.properties</value>
                 <value>file:${GP_DATA_DIR}/gp-db.properties</value>
             </list>
         </property>

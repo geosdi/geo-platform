@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -259,7 +259,7 @@ public class ProjectDTO {
     }
 
     public static List<ProjectDTO> convertToProjectDTOList(List<GPProject> projects) {
-        List<ProjectDTO> projectsDTO = new ArrayList<ProjectDTO>(projects.size());
+        List<ProjectDTO> projectsDTO = Lists.<ProjectDTO>newArrayListWithExpectedSize(projects.size());
 
         for (GPProject project : projects) {
             projectsDTO.add(new ProjectDTO(project));

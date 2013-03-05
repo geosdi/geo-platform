@@ -70,14 +70,16 @@ public class MementoSaveBuilder {
             memento.setRefBaseElement(folder);
             folder.getObservable().addObserver(memento);
         }
-        memento.setRefParent((folder.getParent() instanceof FolderTreeNode) ? (FolderTreeNode) folder.getParent() : null);
+        memento.setRefParent((folder.getParent() instanceof FolderTreeNode)
+                             ? (FolderTreeNode) folder.getParent() : null);
         memento.setNumberOfDescendants(folder.getNumberOfDescendants());
         memento.setzIndex(folder.getzIndex());
         memento.setFolderName(folder.getLabel());
         return memento;
     }
 
-    public static List<AbstractMementoLayer> generateMementoLayerList(List<GPBeanTreeModel> layers) {
+    public static List<AbstractMementoLayer> generateMementoLayerList(
+            List<GPBeanTreeModel> layers) {
         List<AbstractMementoLayer> mementoLayerList = Lists.newArrayList();
         for (GPBeanTreeModel beanModel : layers) {
             GPLayerTreeModel layer = null;
@@ -85,20 +87,23 @@ public class MementoSaveBuilder {
             if (beanModel instanceof RasterTreeNode) {
                 layer = ((RasterTreeNode) beanModel);
                 memento = new MementoRaster();
-                List<String> stringList = convertStyles(((RasterTreeNode) beanModel).getStyles());
+                List<String> stringList = convertStyles(
+                        ((RasterTreeNode) beanModel).getStyles());
                 ((MementoRaster) memento).setStyles(stringList);
             } else if (beanModel instanceof VectorTreeNode) {
                 layer = ((VectorTreeNode) beanModel);
                 memento = new MementoVector();
             }
-            MementoSaveBuilder.convertToMementoLayerFromLayerModel(memento, layer);
+            MementoSaveBuilder.convertToMementoLayerFromLayerModel(memento,
+                    layer);
             mementoLayerList.add(memento);
         }
         System.out.println("Memento layer list size: " + mementoLayerList.size());
         return mementoLayerList;
     }
 
-    private static List<String> convertStyles(ArrayList<GPStyleStringBeanModel> styles) {
+    private static List<String> convertStyles(
+            ArrayList<GPStyleStringBeanModel> styles) {
         List<String> stringList = Lists.newArrayList();
         for (GPStyleStringBeanModel gPStyleStringBeanModel : styles) {
             stringList.add(gPStyleStringBeanModel.getStyleString());
@@ -106,7 +111,8 @@ public class MementoSaveBuilder {
         return stringList;
     }
 
-    private static void convertToMementoLayerFromLayerModel(AbstractMementoLayer memento, GPLayerTreeModel layer) {
+    private static void convertToMementoLayerFromLayerModel(
+            AbstractMementoLayer memento, GPLayerTreeModel layer) {
         memento.setRefBaseElement(layer);
         if (layer.getId() != null) {
             memento.setIdBaseElement(layer.getId());
@@ -123,30 +129,37 @@ public class MementoSaveBuilder {
 //        memento.setAlias(layer.getAlias());
         memento.setzIndex(layer.getzIndex());
         // Bbox
-        memento.setLowerLeftX(layer.getBbox().getLowerLeftX());
-        memento.setLowerLeftY(layer.getBbox().getLowerLeftY());
-        memento.setUpperRightX(layer.getBbox().getUpperRightX());
-        memento.setUpperRightY(layer.getBbox().getUpperRightY());
+        if (layer.getBbox() != null) {
+            memento.setLowerLeftX(layer.getBbox().getLowerLeftX());
+            memento.setLowerLeftY(layer.getBbox().getLowerLeftY());
+            memento.setUpperRightX(layer.getBbox().getUpperRightX());
+            memento.setUpperRightY(layer.getBbox().getUpperRightY());
+        }
         // Parent folder
         FolderTreeNode refParent = (FolderTreeNode) layer.getParent();
         memento.setRefParent(refParent);
     }
 
-    public static AbstractMementoOriginalProperties generateMementoOriginalProperties(GPBeanTreeModel element) {
+    public static AbstractMementoOriginalProperties generateMementoOriginalProperties(
+            GPBeanTreeModel element) {
         AbstractMementoOriginalProperties memento = null;
         if (element instanceof GPLayerTreeModel) {
-            memento = new MementoLayerOriginalProperties(saveLayersPropertiesAction);
+            memento = new MementoLayerOriginalProperties(
+                    saveLayersPropertiesAction);
         } else if (element instanceof FolderTreeNode) {
-            memento = new MementoFolderOriginalProperties(saveFoldersPropertiesAction);
+            memento = new MementoFolderOriginalProperties(
+                    saveFoldersPropertiesAction);
         } else {
-            throw new IllegalArgumentException("The method copyOriginalProperties "
+            throw new IllegalArgumentException(
+                    "The method copyOriginalProperties "
                     + "in MementoSaveBuilder class does not accepts your instance: "
                     + element);
         }
         return memento;
     }
 
-    public static AbstractMementoSave generateTypeOfSaveMemento(GPBeanTreeModel element) {
+    public static AbstractMementoSave generateTypeOfSaveMemento(
+            GPBeanTreeModel element) {
         AbstractMementoSave memento = null;
         if (element instanceof FolderTreeNode) {
             memento = new MementoFolder();

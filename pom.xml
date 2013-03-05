@@ -1581,7 +1581,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         
-        <cxf-version>2.7.2</cxf-version>
+        <cxf-version>2.7.3</cxf-version>
         <spring-version>3.2.1.RELEASE</spring-version>
 
         <httpcomponents-core-version>4.2.3</httpcomponents-core-version>

@@ -19,7 +19,7 @@
         <property name="locations">
             <list>
                 <value>classpath:persistence-db.properties</value>
-                <value>file:${GP_DATA_DIR}/gp-db.properties</value>
+                <value>file:${GP_DATA_DIR}/persistence-db.properties</value>
             </list>
         </property>
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />

@@ -197,7 +197,8 @@ public class GPWMSServiceImpl implements GPWMSService {
         }
         Map<String, CRSEnvelope> additionalBounds = layer.getBoundingBoxes();
 
-        System.out.println(additionalBounds.toString());
+        logger.debug("ADDITIONAL BOUNDS ###############################"
+                + additionalBounds.toString());
 
         if (additionalBounds.size() > 0) {
             if (additionalBounds.containsKey(EPSG_GOOGLE)
@@ -214,9 +215,10 @@ public class GPWMSServiceImpl implements GPWMSService {
         }
 
         if (urlServer.contains(GEB)) {
-            raster.setBbox(this.createBbox(layer.getLatLonBoundingBox()));
+            if (layer.getLatLonBoundingBox() != null) {
+                raster.setBbox(this.createBbox(layer.getLatLonBoundingBox()));
+            }
             raster.setSrs(EPSG_4326);
-
         }
 
         // Set LayerInfo of Raster Ith
@@ -234,7 +236,8 @@ public class GPWMSServiceImpl implements GPWMSService {
         List<StyleImpl> stylesImpl = layer.getStyles();
         logger.debug(
                 "\n*** Layer \"{}\" has {} SubLayers and {} StyleImpl ***",
-                layer.getTitle(), layer.getLayerChildren().size(), stylesImpl.size());
+                layer.getTitle(), layer.getLayerChildren().size(),
+                stylesImpl.size());
 
         raster.setStyleList(this.createStyleList(stylesImpl));
 

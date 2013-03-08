@@ -86,12 +86,12 @@
             <artifactId>wsdl4j</artifactId>
         </dependency>
         
-         <dependency>
+        <dependency>
             <groupId>org.apache.ws.security</groupId>
             <artifactId>wss4j</artifactId>
         </dependency>
         
-         <dependency>
+        <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
         </dependency>
@@ -99,6 +99,19 @@
         <dependency>
             <groupId>org.apache.santuario</groupId>
             <artifactId>xmlsec</artifactId>
+        </dependency>
+        
+        <!-- =============================================================== -->
+        <!-- CXF  Rest -->
+        <!-- =============================================================== -->
+        <dependency> 
+            <groupId>org.apache.cxf</groupId> 
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId> 
+        </dependency> 
+        <dependency> 
+            <groupId>org.apache.cxf</groupId> 
+            <artifactId>cxf-rt-rs-extension-providers</artifactId> 
+            <version>${cxf-version}</version>
         </dependency>
         
         <!-- SPRING -->

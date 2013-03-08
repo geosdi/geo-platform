@@ -33,34 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws;
+package org.geosdi.geoplatform.connectors.ws.rest;
 
-import javax.annotation.PostConstruct;
+import java.util.Arrays;
+import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
+import org.apache.cxf.jaxrs.provider.json.JSONProvider;
+import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
 
 /**
+ * <p> Abstract class that represents the template for the implementation of all
+ * clients REST ws. The parameter E is the generic endpoints </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPAbstractWSClientConnector<E> implements
-        GeoPlatformWSClientConnector<E> {
+public abstract class RestClientConnector<E> extends GPAbstractWSClientConnector<E> {
 
-    protected E endpointService;
-    protected final Class<E> serviceClass;
-
-    public GPAbstractWSClientConnector(Class<E> theServiceClass) {
-        this.serviceClass = theServiceClass;
-    }
-
-    protected abstract void create();
-
-    @PostConstruct
-    public void createWebServicesClient() {
-        this.create();
+    public RestClientConnector(Class<E> theServiceClass) {
+        super(theServiceClass);
     }
 
     @Override
-    public E getEndpointService() {
-        return this.endpointService;
+    protected void create() {
+        if (serviceClass == null) {
+            throw new IllegalArgumentException(
+                    "The Parameter Service Class can't be null.");
+        }
+
+        if (getAddress() == null) {
+            throw new IllegalArgumentException(
+                    "The Parameter Address can't be null.");
+        }
+
+        JSONProvider jsonProvider = new JSONProvider();
+        jsonProvider.setDropRootElement(false);
+        jsonProvider.setSupportUnwrapped(true);
+
+        this.endpointService = JAXRSClientFactory.create(getAddress(),
+                serviceClass,
+                Arrays.<JSONProvider>asList(jsonProvider));
     }
 }

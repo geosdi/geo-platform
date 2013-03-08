@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connectors.ws.geonetwork;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -48,7 +48,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(value = "gpGeonetworkClientConnector")
 @Production
-public class GPGeonetworkClientConnector extends GPAbstractWSClientConnector<GPCatalogFinderService> {
+public class GPGeonetworkClientConnector extends SoapClientConnector<GPCatalogFinderService> {
 
     private @Value("${webservice_catalogfinder_endpoint_address}")
     String address;

@@ -40,7 +40,7 @@ import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GPTrackingService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -52,7 +52,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(value = "gpTrackingClientConnector")
 @Production
-public class GPTrackingClientConnector extends GPAbstractWSClientConnector<GPTrackingService> {
+public class GPTrackingClientConnector extends SoapClientConnector<GPTrackingService> {
 
     private @Value("${webservice_tracking_endpoint_address}")
     String address;

@@ -39,75 +39,52 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author giuseppe
- * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "PaginatedSearchRequest")
-public class PaginatedSearchRequest extends SearchRequest {
+@XmlRootElement(name = "SearchRequest")
+public class SearchRequest {
 
-    private int num;
-    private int page;
+    private String nameLike;
 
-    public PaginatedSearchRequest() {
+    public SearchRequest() {
     }
 
-    public PaginatedSearchRequest(int num, int page) {
-        this.num = num;
-        this.page = page;
+    public SearchRequest(String nameLike) {
+        this.nameLike = LikePatternType.CONTAINS.apply(nameLike);
     }
 
-    public PaginatedSearchRequest(String nameLike, int num, int page) {
-        super(nameLike);
-        this.num = num;
-        this.page = page;
-    }
-
-    public PaginatedSearchRequest(String nameLike, LikePatternType likeType, int num, int page) {
-        super(nameLike, likeType);
-        this.num = num;
-        this.page = page;
+    public SearchRequest(String nameLike, LikePatternType likeType) {
+        this.nameLike = likeType.apply(nameLike);
     }
 
     /**
-     * @param num
-     *            the number of entries per page (you may get less entries in
-     *            the last page)
+     * @return a nullable case insensitive LIKE filter. Only matching items will
+     * be returned.
      */
-    public void setNum(int num) {
-        this.num = num;
+    @XmlElement(required = true, nillable = true)
+    public String getNameLike() {
+        return nameLike;
     }
 
     /**
-     * @return the number of entries per page (you may get less entries in the
-     *         last page)
+     * Set a case insensitive LIKE filter. Only matching items will be returned.
+     * <BR>
+     * "%" wildcards have to already be in the search string. <BR>
+     * This param is optional.
+     *
+     * @param nameLike
      */
-    @XmlElement(required = true, nillable = false)
-    public int getNum() {
-        return num;
-    }
-
-    /**
-     * @param page
-     *            the page number
-     */
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    /**
-     * @return the page number
-     */
-    @XmlElement(required = true, nillable = false)
-    public int getPage() {
-        return page;
+    public void setNameLike(String nameLike) {
+        this.nameLike = nameLike;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder(getClass().getSimpleName());
-        builder.append(" [num=").append(num);
-        builder.append(", page=").append(page);
-        builder.append(", like=").append(super.getNameLike()).append(']');
+        builder.append(" [like=").append(nameLike).append(']');
         return builder.toString();
     }
 }

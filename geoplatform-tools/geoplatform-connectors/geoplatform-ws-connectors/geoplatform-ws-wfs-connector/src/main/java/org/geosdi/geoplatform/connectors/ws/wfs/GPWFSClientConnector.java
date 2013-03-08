@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connectors.ws.wfs;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GPWFSService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -47,7 +47,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(value = "gpWFSClientConnector")
 @Production
-public class GPWFSClientConnector extends GPAbstractWSClientConnector<GPWFSService> {
+public class GPWFSClientConnector extends SoapClientConnector<GPWFSService> {
 
     private @Value("configurator{webservice_wfsservice_endpoint_address}")
     String address;

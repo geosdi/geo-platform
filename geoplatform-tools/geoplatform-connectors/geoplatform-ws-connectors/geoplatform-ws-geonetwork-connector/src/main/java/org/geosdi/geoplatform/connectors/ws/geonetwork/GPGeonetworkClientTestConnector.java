@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connectors.ws.geonetwork;
 
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -44,7 +44,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeonetworkClientTestConnector extends GPAbstractWSClientConnector<GPCatalogFinderService> {
+public class GPGeonetworkClientTestConnector extends SoapClientConnector<GPCatalogFinderService> {
 
     private @Value("configurator{webservice_test_catalogfinder_endpoint_address}")
     String address;

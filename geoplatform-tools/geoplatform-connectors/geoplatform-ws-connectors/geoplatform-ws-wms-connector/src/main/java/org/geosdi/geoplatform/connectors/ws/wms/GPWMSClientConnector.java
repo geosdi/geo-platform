@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connectors.ws.wms;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -47,11 +47,9 @@ import org.springframework.stereotype.Component;
  * @author Francesco Izzi - geoSDI
  * @email francesco.izzi@geosdi.org
  */
-
-
 @Component(value = "gpWMSClientConnector")
 @Production
-public class GPWMSClientConnector extends GPAbstractWSClientConnector<GPWMSService> {
+public class GPWMSClientConnector extends SoapClientConnector<GPWMSService> {
 
     private @Value("configurator{webservice_wms_endpoint_address}")
     String address;

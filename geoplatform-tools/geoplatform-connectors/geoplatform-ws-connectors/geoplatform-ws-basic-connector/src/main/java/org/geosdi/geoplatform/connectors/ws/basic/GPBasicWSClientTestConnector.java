@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connectors.ws.basic;
 
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -45,7 +45,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPBasicWSClientTestConnector extends GPAbstractWSClientConnector<GeoPlatformService> {
+public class GPBasicWSClientTestConnector extends SoapClientConnector<GeoPlatformService> {
 
     private @Value("configurator{webservice_test_endpoint_address}")
     String address;

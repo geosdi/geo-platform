@@ -19,13 +19,21 @@
         <module>geoplatform-core</module>
         <module>geoplatform-modules</module>
         <module>geoplatform-ws-core</module>
+        <module>geoplatform-ws-base-util</module>
         <module>geoplatform-ws-util</module>
     </modules>
+    
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-sharing</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-ws-base-util</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

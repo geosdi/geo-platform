@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,34 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.connectors.ws;
+package org.geosdi.geoplatform.connectors.ws.soap;
 
-import javax.annotation.PostConstruct;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.geosdi.geoplatform.configurator.cxf.client.ClientInterceptorStrategyFactory;
+import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ * <p> Abstract class that represents the template for the implementation of all
+ * clients SOAP ws. The parameter E is the generic endpoints </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPAbstractWSClientConnector<E> implements
-        GeoPlatformWSClientConnector<E> {
+public abstract class SoapClientConnector<E> extends GPAbstractWSClientConnector<E> {
 
-    protected E endpointService;
-    protected final Class<E> serviceClass;
+    @Autowired
+    private ClientInterceptorStrategyFactory clientInterceptorStrategyFactory;
 
-    public GPAbstractWSClientConnector(Class<E> theServiceClass) {
-        this.serviceClass = theServiceClass;
-    }
-
-    protected abstract void create();
-
-    @PostConstruct
-    public void createWebServicesClient() {
-        this.create();
+    public SoapClientConnector(Class<E> theServiceClass) {
+        super(theServiceClass);
     }
 
     @Override
-    public E getEndpointService() {
-        return this.endpointService;
+    protected void create() {
+        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+
+        factory.getInInterceptors().add(
+                this.clientInterceptorStrategyFactory.getLoggingInInterceptor());
+        factory.getInInterceptors().add(
+                this.clientInterceptorStrategyFactory.getSecurityInInterceptor());
+
+        factory.getOutInterceptors().add(
+                this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
+        factory.getOutInterceptors().add(
+                this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
+
+        if (serviceClass == null) {
+            throw new IllegalArgumentException(
+                    "The Parameter Service Class can't be null.");
+        }
+
+        factory.setServiceClass(this.serviceClass);
+
+        if (getAddress() == null) {
+            throw new IllegalArgumentException(
+                    "The Parameter Address can't be null.");
+        }
+
+        factory.setAddress(getAddress());
+        this.endpointService = (E) factory.create();
     }
 }

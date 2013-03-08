@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connectors.ws.csw;
 
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -44,7 +44,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWClientTestConnector extends GPAbstractWSClientConnector<GeoPlatformCSWService> {
+public class GPCSWClientTestConnector extends SoapClientConnector<GeoPlatformCSWService> {
 
     private @Value("configurator{webservice_test_cswservice_endpoint_address}")
     String address;

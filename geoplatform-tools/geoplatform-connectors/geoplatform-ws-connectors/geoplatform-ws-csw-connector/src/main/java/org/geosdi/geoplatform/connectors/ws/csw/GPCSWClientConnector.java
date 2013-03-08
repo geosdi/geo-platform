@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connectors.ws.csw;
 
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
-import org.geosdi.geoplatform.connectors.ws.GPAbstractWSClientConnector;
+import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -48,7 +48,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(value = "gpCSWClientConnector")
 @Production
-public class GPCSWClientConnector extends GPAbstractWSClientConnector<GeoPlatformCSWService> {
+public class GPCSWClientConnector extends SoapClientConnector<GeoPlatformCSWService> {
 
     private @Value("configurator{webservice_cswservice_endpoint_address}")
     String address;

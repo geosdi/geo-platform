@@ -47,19 +47,19 @@ import org.springframework.stereotype.Component;
 @Component(value = "serverStrategyBean")
 public class ServerStrategyBean implements InterceptorStrategyBean {
 
-    @Value(value = "${webservice_server_logging}")
+    @Value(value = "configurator{webservice_server_logging}")
     private String loggingStrategy;
-    @Value(value = "${webservice_security_strategy}")
+    @Value(value = "configurator{webservice_security_strategy}")
     private String securityStrategy;
-    @Value(value = "${webservice_username_token_user}")
+    @Value(value = "configurator{webservice_username_token_user}")
     private String usernameTokenUser;
-    @Value(value = "${webservice_client_keystore_user}")
+    @Value(value = "configurator{webservice_client_keystore_user}")
     private String clientKeystoreUser;
-    @Value(value = "${webservice_server_keystore_user}")
+    @Value(value = "configurator{webservice_server_keystore_user}")
     private String serverKeystoreUser;
-    @Value(value = "${webservice_server_privatekey_properties_file}")
+    @Value(value = "configurator{webservice_server_privatekey_properties_file}")
     private String serverPrivateKeyPropertiesFile;
-    @Value(value = "${webservice_client_publickey_properties_file}")
+    @Value(value = "configurator{webservice_client_publickey_properties_file}")
     private String clientPublicKeyPropertiesFile;
 
     /**

@@ -50,7 +50,7 @@ import org.springframework.stereotype.Component;
 @Production
 public class GPGeonetworkClientConnector extends GPAbstractWSClientConnector<GPCatalogFinderService> {
 
-    private @Value("${webservice_catalogfinder_endpoint_address}")
+    private @Value("configurator{webservice_catalogfinder_endpoint_address}")
     String address;
 
     public GPGeonetworkClientConnector() {

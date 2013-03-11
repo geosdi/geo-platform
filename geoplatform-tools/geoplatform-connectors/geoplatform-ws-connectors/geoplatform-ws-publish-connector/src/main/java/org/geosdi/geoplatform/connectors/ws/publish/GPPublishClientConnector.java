@@ -54,7 +54,7 @@ import org.springframework.stereotype.Component;
 @Production
 public class GPPublishClientConnector extends GPAbstractWSClientConnector<GPPublisherService> {
 
-    private @Value("${webservice_publisher_endpoint_address}")
+    private @Value("configurator{webservice_publisher_endpoint_address}")
     String address;
 
     public GPPublishClientConnector() {

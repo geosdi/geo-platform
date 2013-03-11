@@ -46,7 +46,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class GPGeonetworkClientTestConnector extends GPAbstractWSClientConnector<GPCatalogFinderService> {
 
-    private @Value("${webservice_test_catalogfinder_endpoint_address}")
+    private @Value("configurator{webservice_test_catalogfinder_endpoint_address}")
     String address;
 
     public GPGeonetworkClientTestConnector() {

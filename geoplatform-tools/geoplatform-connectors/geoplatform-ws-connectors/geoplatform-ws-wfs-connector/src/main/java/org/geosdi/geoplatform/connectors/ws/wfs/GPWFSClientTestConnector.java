@@ -45,7 +45,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class GPWFSClientTestConnector extends GPAbstractWSClientConnector<GPWFSService> {
 
-    private @Value("${webservice_test_wfsservice_endpoint_address}")
+    private @Value("configurator{webservice_test_wfsservice_endpoint_address}")
     String address;
 
     public GPWFSClientTestConnector() {

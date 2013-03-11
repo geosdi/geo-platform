@@ -46,7 +46,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class GPCSWClientTestConnector extends GPAbstractWSClientConnector<GeoPlatformCSWService> {
 
-    private @Value("${webservice_test_cswservice_endpoint_address}")
+    private @Value("configurator{webservice_test_cswservice_endpoint_address}")
     String address;
 
     public GPCSWClientTestConnector() {

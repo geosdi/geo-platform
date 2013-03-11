@@ -49,7 +49,7 @@ import org.springframework.stereotype.Component;
 @Production
 public class GPWFSClientConnector extends GPAbstractWSClientConnector<GPWFSService> {
 
-    private @Value("${webservice_wfsservice_endpoint_address}")
+    private @Value("configurator{webservice_wfsservice_endpoint_address}")
     String address;
 
     public GPWFSClientConnector() {

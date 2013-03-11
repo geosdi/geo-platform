@@ -54,7 +54,7 @@ import org.springframework.stereotype.Component;
 @Production
 public class GPTrackingClientConnector extends GPAbstractWSClientConnector<GPTrackingService> {
 
-    private @Value("${webservice_tracking_endpoint_address}")
+    private @Value("configurator{webservice_tracking_endpoint_address}")
     String address;
 
     public GPTrackingClientConnector() {

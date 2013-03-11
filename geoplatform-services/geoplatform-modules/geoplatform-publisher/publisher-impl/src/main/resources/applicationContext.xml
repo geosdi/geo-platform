@@ -25,26 +25,26 @@
 
     <bean id="publisherService" class="org.geosdi.geoplatform.services.GPPublisherServiceImpl">
         <!-- the server to connect -->
-        <constructor-arg type="java.lang.String" value="${geoserver_url}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
         <!-- the login and the password of the REST geoserver instance -->
-        <constructor-arg type="java.lang.String" value="${geoserver_username}"/>
-        <constructor-arg type="java.lang.String" value="${geoserver_password}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
         <!-- the workspace where publishing the shapefiles to preview -->
-        <constructor-arg type="java.lang.String" value="${geoportal_dir_path}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoportal_dir_path}"/>
     </bean>
     
     <bean id="restPublisher" class="it.geosolutions.geoserver.rest.GeoServerRESTPublisher">
-        <constructor-arg type="java.lang.String" value="${geoserver_url}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
         <!-- the login and the password of the REST geoserver instance -->
-        <constructor-arg type="java.lang.String" value="${geoserver_username}"/>
-        <constructor-arg type="java.lang.String" value="${geoserver_password}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
     </bean>
 
     <bean id="restReader" class="it.geosolutions.geoserver.rest.GeoServerRESTReader">
-        <constructor-arg type="java.lang.String" value="${geoserver_url}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
         <!-- the login and the password of the REST geoserver instance -->
-        <constructor-arg type="java.lang.String" value="${geoserver_username}"/>
-        <constructor-arg type="java.lang.String" value="${geoserver_password}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
     </bean>
 
     <!--===================================================================== -->

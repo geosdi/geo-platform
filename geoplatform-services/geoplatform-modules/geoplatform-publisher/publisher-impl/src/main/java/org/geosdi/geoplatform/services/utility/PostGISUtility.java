@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.services.utility;
 
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
-import it.geosolutions.geoserver.rest.decoder.RESTDataStore;
 import it.geosolutions.geoserver.rest.encoder.datastore.GSPostGISDatastoreEncoder;
 import it.geosolutions.geoserver.rest.manager.GeoServerRESTDatastoreManager;
 import java.net.MalformedURLException;
@@ -56,21 +55,21 @@ public class PostGISUtility {
 
     @Autowired
     private GeoServerRESTReader reader;
-    private @Value("${geoserver_url}")
+    private @Value("configurator{geoserver_url}")
     String geoserverUrl;
-    private @Value("${geoserver_username}")
+    private @Value("configurator{geoserver_username}")
     String geoserverUser;
-    private @Value("${geoserver_password}")
+    private @Value("configurator{geoserver_password}")
     String geoserverPassword;
-    private @Value("${host_postgis_datastore_publisher}")
+    private @Value("configurator{host_postgis_datastore_publisher}")
     String hostPostgisDatastore;
-    private @Value("${port_postgis_datastore_publisher}")
+    private @Value("configurator{port_postgis_datastore_publisher}")
     int portPostgisDatastore;
-    private @Value("${db_name_postgis_datastore_publisher}")
+    private @Value("configurator{db_name_postgis_datastore_publisher}")
     String dbNamePostgisDatastore;
-    private @Value("${username_db_postgis_datastore_publisher}")
+    private @Value("configurator{username_db_postgis_datastore_publisher}")
     String userNameDBPostgisDatastore;
-    private @Value("${password_db_postgis_datastore_publisher}")
+    private @Value("configurator{password_db_postgis_datastore_publisher}")
     String passwordDBPostgisDatastore;
 
     public GeoServerRESTDatastoreManager generateEncoder(String storeName, String workspace) {
@@ -79,30 +78,30 @@ public class PostGISUtility {
 //        System.out.println(store);
         GeoServerRESTDatastoreManager manager = null;
 //        if (store == null) {
-            try {
-                manager = new GeoServerRESTDatastoreManager(
-                        new URL(geoserverUrl), geoserverUser, geoserverPassword);
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(PostGISUtility.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder(storeName);
-            encoder.setEnabled(true);
-            encoder.setHost(hostPostgisDatastore);
-            encoder.setPort(portPostgisDatastore);
-            encoder.setDatabase(dbNamePostgisDatastore);
-            encoder.setSchema("public");
-            encoder.setUser(userNameDBPostgisDatastore);
-            encoder.setPassword(passwordDBPostgisDatastore);
-            encoder.setExposePrimaryKeys(Boolean.FALSE);
-            encoder.setMaxConnections(20);
-            encoder.setMinConnections(1);
-            encoder.setFetchSize(1000);
-            encoder.setConnectionTimeout(20);
-            encoder.setValidateConnections(false);
-            encoder.setLooseBBox(Boolean.TRUE);
-            encoder.setPreparedStatements(false);
-            encoder.setMaxOpenPreparedStatements(50);
-            manager.create(workspace, encoder);
+        try {
+            manager = new GeoServerRESTDatastoreManager(
+                    new URL(geoserverUrl), geoserverUser, geoserverPassword);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PostGISUtility.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder(storeName);
+        encoder.setEnabled(true);
+        encoder.setHost(hostPostgisDatastore);
+        encoder.setPort(portPostgisDatastore);
+        encoder.setDatabase(dbNamePostgisDatastore);
+        encoder.setSchema("public");
+        encoder.setUser(userNameDBPostgisDatastore);
+        encoder.setPassword(passwordDBPostgisDatastore);
+        encoder.setExposePrimaryKeys(Boolean.FALSE);
+        encoder.setMaxConnections(20);
+        encoder.setMinConnections(1);
+        encoder.setFetchSize(1000);
+        encoder.setConnectionTimeout(20);
+        encoder.setValidateConnections(false);
+        encoder.setLooseBBox(Boolean.TRUE);
+        encoder.setPreparedStatements(false);
+        encoder.setMaxOpenPreparedStatements(50);
+        manager.create(workspace, encoder);
 //        }
         return manager;
     }

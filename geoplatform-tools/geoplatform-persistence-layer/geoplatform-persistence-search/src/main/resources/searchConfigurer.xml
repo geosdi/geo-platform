@@ -15,6 +15,8 @@
                 
     <bean id="searchConfigurer"
          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="placeholderPrefix" value="search{" />
+        <property name="placeholderSuffix" value="}" />
         <property name="locations">
             <list>
                 <value>classpath:gp-search.properties</value>

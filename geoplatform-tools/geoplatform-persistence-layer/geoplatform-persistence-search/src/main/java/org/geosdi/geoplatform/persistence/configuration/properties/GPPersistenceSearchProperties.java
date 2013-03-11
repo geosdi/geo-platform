@@ -48,11 +48,11 @@ import org.springframework.stereotype.Component;
 @ImportResource(value = {"classpath:searchConfigurer.xml"})
 public class GPPersistenceSearchProperties {
 
-    @Value("${hibernate_search_indexBase}")
+    @Value("search{hibernate_search_indexBase}")
     private String indexBase;
-    @Value("${hibernate_search_directory_provider}")
+    @Value("search{hibernate_search_directory_provider}")
     private String directoryProvider;
-    @Value("${hibernate_search_lucene_version}")
+    @Value("search{hibernate_search_lucene_version}")
     private String luceneVersion;
 
     /**

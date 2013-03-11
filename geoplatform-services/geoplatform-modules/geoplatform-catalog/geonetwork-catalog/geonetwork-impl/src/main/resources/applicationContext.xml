@@ -22,9 +22,9 @@
     <import resource="classpath:applicationContext-jasypt.xml" />
     
     <bean id="gpCatalogClient" class="org.geosdi.geoplatform.services.util.GPCatalogClient">
-        <property name="geoNetworkServiceURL" value="${geonetwork_url}" />
-        <property name="geoNetworkUsername" value="${geonetwork_username}" />
-        <property name="geoNetworkPassword" value="${geonetwork_password}" />
+        <property name="geoNetworkServiceURL" value="configurator{geonetwork_url}" />
+        <property name="geoNetworkUsername" value="configurator{geonetwork_username}" />
+        <property name="geoNetworkPassword" value="configurator{geonetwork_password}" />
     </bean>
 
 	<!--===================================================================== -->

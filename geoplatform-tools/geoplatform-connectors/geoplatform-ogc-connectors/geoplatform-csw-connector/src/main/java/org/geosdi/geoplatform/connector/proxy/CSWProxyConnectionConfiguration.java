@@ -47,11 +47,11 @@ import org.springframework.stereotype.Component;
 @Component(value = "cswProxyConnectionConfiguration")
 public class CSWProxyConnectionConfiguration implements HttpClientProxyConfiguration{
 
-    private @Value("${csw_use_proxy}")
+    private @Value("configurator{csw_use_proxy}")
     boolean cswUseProxy;
-    private @Value("${csw_proxy_url}")
+    private @Value("configurator{csw_proxy_url}")
     String cswProxyUrl;
-    private @Value("${csw_proxy_port}")
+    private @Value("configurator{csw_proxy_port}")
     int cswProxyPort;
 
     /**

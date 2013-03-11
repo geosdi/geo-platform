@@ -46,7 +46,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "gpWFSConfigurator")
 public class GPWFSConfiguratorImpl implements GPWFSConfigurator {
 
-    protected @Value("${default_wfs_datasource}")
+    protected @Value("configurator{default_wfs_datasource}")
     String defaultWFSDataSource;
 
     @Override

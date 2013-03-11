@@ -61,7 +61,7 @@ public class GPCatalogEndPointImpl {
     private Endpoint endpoint;
     private Bus bus;
     //
-    private @Value("${webservice_test_catalogfinder_endpoint_address}")
+    private @Value("configurator{webservice_test_catalogfinder_endpoint_address}")
     String serverAddress;
     //
     @Autowired

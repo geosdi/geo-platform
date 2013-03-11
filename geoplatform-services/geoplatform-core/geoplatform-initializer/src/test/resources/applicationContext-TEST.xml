@@ -27,15 +27,17 @@
     <!-- org.jasypt.encryption.StringEncryptor) is set as a constructor arg.  -->
     <!--                                                                      -->
     <bean id="gpPropertiesDAO"
-          class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+          class="org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer">
         <constructor-arg ref="pooledPBEStringEncryptor" />
+        <property name="nullValue" value="@null" />
+        <property name="placeholderPrefix" value="coreTest{" />
+        <property name="placeholderSuffix" value="}" />
         <property name="locations">
             <list>
                 <value>classpath:gp-db.properties</value>
                 <value>file:${GP_DATA_DIR}/gp-db.properties</value>
             </list>
         </property>
-        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
         <property name="ignoreResourceNotFound" value="true" />
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>

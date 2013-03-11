@@ -50,7 +50,7 @@ import org.springframework.stereotype.Component;
 @Production
 public class GPBasicWSClientConnector extends SoapClientConnector<GeoPlatformService> {
 
-    private @Value("${webservice_endpoint_address}")
+    private @Value("configurator{webservice_endpoint_address}")
     String address;
 
     public GPBasicWSClientConnector() {

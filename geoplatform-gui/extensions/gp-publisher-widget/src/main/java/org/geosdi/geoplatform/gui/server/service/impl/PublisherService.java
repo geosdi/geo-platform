@@ -98,13 +98,13 @@ public class PublisherService implements IPublisherService {
     @Autowired
     private SessionUtility sessionUtility;
     //
-    private @Value("${cluster_reload_url}")
+    private @Value("configurator{cluster_reload_url}")
     String urlClusterReload;
-    private @Value("${cluster_reload_host_url}")
+    private @Value("configurator{cluster_reload_host_url}")
     String hostUrlClusterReload;
-    private @Value("${cluser_reload_username}")
+    private @Value("configurator{cluser_reload_username}")
     String userNameClusterReload;
-    private @Value("${cluser_reload_password}")
+    private @Value("configurator{cluser_reload_password}")
     String passwordClusterReload;
 
     @Override

@@ -65,7 +65,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "dtoSecurityConverter")
 public class DTOSecurityConverter {
 
-    private @Value("${host_xmpp_server}")
+    private @Value("configurator{host_xmpp_server}")
     String hostXmppServer;
     //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

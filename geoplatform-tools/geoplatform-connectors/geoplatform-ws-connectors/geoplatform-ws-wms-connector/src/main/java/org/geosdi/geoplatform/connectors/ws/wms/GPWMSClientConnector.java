@@ -51,7 +51,7 @@ import org.springframework.stereotype.Component;
 @Production
 public class GPWMSClientConnector extends SoapClientConnector<GPWMSService> {
 
-    private @Value("${webservice_wms_endpoint_address}")
+    private @Value("configurator{webservice_wms_endpoint_address}")
     String address;
 
     public GPWMSClientConnector() {

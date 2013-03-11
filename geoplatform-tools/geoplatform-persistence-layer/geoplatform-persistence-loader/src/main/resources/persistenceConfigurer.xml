@@ -16,6 +16,8 @@
     <bean id="persistenceConfigurer"
          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="nullValue" value="@null" />
+        <property name="placeholderPrefix" value="persistence{" />
+        <property name="placeholderSuffix" value="}" />
         <property name="locations">
             <list>
                 <value>classpath:persistence-db.properties</value>

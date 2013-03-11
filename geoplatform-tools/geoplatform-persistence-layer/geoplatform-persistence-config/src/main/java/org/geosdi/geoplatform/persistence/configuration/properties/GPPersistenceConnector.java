@@ -48,15 +48,15 @@ import org.springframework.stereotype.Component;
 @Component(value = "gpPersistenceConnector")
 public class GPPersistenceConnector implements InitializingBean {
 
-    @Value("${db_driverClassName}")
+    @Value("persistence{db_driverClassName}")
     private String driverClassName;
-    @Value("${db_url}")
+    @Value("persistence{db_url}")
     private String url;
-    @Value("${db_username}")
+    @Value("persistence{db_username}")
     private String username;
-    @Value("${db_password}")
+    @Value("persistence{db_password}")
     private String password;
-    @Value("${db_packageToScan}")
+    @Value("persistence{db_packageToScan}")
     private String packageToScan;
     private String[] packagesToScan;
 

@@ -46,27 +46,27 @@ import org.springframework.stereotype.Component;
 @Component(value = "gpHibernateProperties")
 public class GPPersistenceHibProperties {
 
-    @Value("${db_databasePlatform}")
+    @Value("persistence{db_databasePlatform}")
     private String hibDatabasePlatform;
-    @Value("${db_showSql:@null}")
+    @Value("persistence{db_showSql:@null}")
     private Boolean hibShowSql;
-    @Value("${db_generateDdl:@null}")
+    @Value("persistence{db_generateDdl:@null}")
     private Boolean hibGenerateDdl;
-    @Value("${db_hbm2ddlAuto}")
+    @Value("persistence{db_hbm2ddlAuto}")
     private String hibHbm2ddlAuto;
-    @Value("${db_cacheProviderClass:@null}")
+    @Value("persistence{db_cacheProviderClass:@null}")
     private String hibCacheProviderClass;
-    @Value("${db_cacheRegionFactoryClass}")
+    @Value("persistence{db_cacheRegionFactoryClass}")
     private String hibCacheRegionFactoryClass;
-    @Value("${db_useSecondLevelCache:@null}")
+    @Value("persistence{db_useSecondLevelCache:@null}")
     private Boolean hibUseSecondLevelCache;
-    @Value("${db_useQueryCache:@null}")
+    @Value("persistence{db_useQueryCache:@null}")
     private Boolean hibUseQueryCache;
-    @Value("${db_generateStatistics:@null}")
+    @Value("persistence{db_generateStatistics:@null}")
     private Boolean hibGenerateStatistics;
-    @Value("${db_defaultSchema}")
+    @Value("persistence{db_defaultSchema}")
     private String hibDefaultSchema;
-    @Value("${db_ehcacheConfigurationResourceName}")
+    @Value("persistence{db_ehcacheConfigurationResourceName}")
     private String ehcacheConfResourceName;
 
     /**

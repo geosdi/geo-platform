@@ -46,11 +46,11 @@ import org.springframework.stereotype.Component;
 @Component(value = "geosdiCatalogBeanProvider")
 public class GeosdiCatalogBeanProvider {
 
-    private @Value("${geosdi_catalog_url}")
+    private @Value("configurator{geosdi_catalog_url}")
     String geosdiUrl;
-//    private @Value("${geosdi_catalog_username}")
+//    private @Value("configurator{geosdi_catalog_username}")
 //    String geosdiUsername;
-//    private @Value("${geosdi_catalog_password}")
+//    private @Value("configurator{geosdi_catalog_password}")
 //    String geosdiPassword;
 
     public String getGeosdiUrl() {

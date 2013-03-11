@@ -49,7 +49,7 @@ import org.springframework.context.annotation.Configuration;
 @Develop
 public class WFSConfiguration {
 
-    private @Value("${default_wfs_datasource}")
+    private @Value("configurator{default_wfs_datasource}")
     String addressDatastore;
 
     @Bean

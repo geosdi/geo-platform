@@ -70,11 +70,11 @@ public class CatalogCapabilitiesTest {
     /**
      * SNIPC Catalog.
      */
-    private @Value("${snipc_catalog_url}")
+    private @Value("configurator{snipc_catalog_url}")
     String snipcUrl;
-    private @Value("${snipc_catalog_username}")
+    private @Value("configurator{snipc_catalog_username}")
     String snipcUsername;
-    private @Value("${snipc_catalog_password}")
+    private @Value("configurator{snipc_catalog_password}")
     String snipcPassword;
     //
     @Autowired

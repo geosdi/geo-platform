@@ -15,10 +15,10 @@
     <context:annotation-config />
     
     <bean id="trackingService" class="org.geosdi.geoplatform.services.GPTrackingServiceImpl">
-        <constructor-arg type="java.lang.String" value="${host_xmpp_server}"/>
-        <constructor-arg type="java.lang.String" value="${port_xmpp_server}"/>
-        <constructor-arg type="java.lang.String" value="${username_xmpp_server}"/>
-        <constructor-arg type="java.lang.String" value="${password_xmpp_server}"/>
+        <constructor-arg type="java.lang.String" value="configurator{host_xmpp_server}"/>
+        <constructor-arg type="java.lang.String" value="configurator{port_xmpp_server}"/>
+        <constructor-arg type="java.lang.String" value="configurator{username_xmpp_server}"/>
+        <constructor-arg type="java.lang.String" value="configurator{password_xmpp_server}"/>
     </bean>
 
 </beans>

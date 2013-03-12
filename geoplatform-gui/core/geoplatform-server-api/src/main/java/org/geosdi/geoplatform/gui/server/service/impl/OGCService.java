@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GSAccount;
@@ -135,8 +134,8 @@ public class OGCService implements IOGCService {
                 authKey = gsAccount.getAuthkey();
             }
             ServerDTO server = geoPlatformWMSServiceClient.getCapabilities(req,
-                                                                           token,
-                                                                           authKey);
+                    token,
+                    authKey);
 
             return dtoServerConverter.createRasterLayerList(
                     server.getLayerList());
@@ -155,8 +154,8 @@ public class OGCService implements IOGCService {
         ServerDTO serverWS = null;
         try {
             serverWS = geoPlatformServiceClient.saveServer(id, aliasServerName,
-                                                           urlServer,
-                                                           organization);
+                    urlServer,
+                    organization);
         } catch (IllegalParameterFault ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());

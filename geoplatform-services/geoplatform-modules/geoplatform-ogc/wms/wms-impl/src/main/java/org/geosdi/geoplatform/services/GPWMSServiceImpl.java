@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -158,7 +159,7 @@ public class GPWMSServiceImpl implements GPWMSService {
 
     private List<RasterLayerDTO> convertToLayerList(Layer layer,
             String urlServer) {
-        List<RasterLayerDTO> shortLayers = new ArrayList<RasterLayerDTO>();
+        List<RasterLayerDTO> shortLayers = Lists.<RasterLayerDTO>newArrayList();
 
         RasterLayerDTO raster = this.getRasterAndSubRaster(layer, urlServer);
         shortLayers.add(raster);
@@ -170,7 +171,7 @@ public class GPWMSServiceImpl implements GPWMSService {
         RasterLayerDTO raster = this.convertLayerToRaster(layer, urlServer);
 
         List<Layer> subLayerList = layer.getLayerChildren();
-        List<RasterLayerDTO> subRasterList = new ArrayList<RasterLayerDTO>(
+        List<RasterLayerDTO> subRasterList = Lists.<RasterLayerDTO>newArrayListWithExpectedSize(
                 subLayerList.size());
         raster.setSubLayerList(subRasterList);
 

@@ -1,7 +1,8 @@
   <!-- Inherit the core Web Toolkit stuff. -->
 <module>    
         <!-- ADDING GWTQUERY-UI DEPENDENCY -->
-    <inherits name="gwtquery.plugins.UiGoogleCdn" />
+    <!--<inherits name="gwtquery.plugins.UiGoogleCdn" />-->
+    <inherits name='gwtquery.plugins.UiEmbedded' />
     
     <source path="client" />
 

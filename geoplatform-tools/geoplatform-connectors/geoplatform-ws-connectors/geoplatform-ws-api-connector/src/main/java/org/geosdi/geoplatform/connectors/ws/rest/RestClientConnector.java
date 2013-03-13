@@ -67,7 +67,7 @@ public abstract class RestClientConnector<E> extends GPAbstractWSClientConnector
 
         JSONProvider jsonProvider = new JSONProvider();
         jsonProvider.setDropRootElement(false);
-        jsonProvider.setSupportUnwrapped(true);
+//        jsonProvider.setSupportUnwrapped(true);
 
         this.endpointService = JAXRSClientFactory.create(getAddress(),
                 serviceClass,

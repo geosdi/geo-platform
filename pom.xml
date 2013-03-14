@@ -66,6 +66,13 @@
             <id>Hibernate Spatial repo</id>
             <url>http://www.hibernatespatial.org/repository</url>
         </repository>
+        
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2
+            </url>
+        </repository>
 
         <repository>
             <id>sonatype-oss-repo</id>
@@ -1612,7 +1619,7 @@
         <gwtVersion>2.4.0</gwtVersion>
         <gxtVersion>2.2.5</gxtVersion>
         
-        <gwtOpenlayersVersion>0.9-SNAPSHOT</gwtOpenlayersVersion>
+        <gwtOpenlayersVersion>0.9</gwtOpenlayersVersion>
         
         <jasypt-version>1.9.0</jasypt-version>
         

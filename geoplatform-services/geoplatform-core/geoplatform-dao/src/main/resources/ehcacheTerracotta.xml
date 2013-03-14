@@ -1,5 +1,6 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="ehcache.xsd">
+	xsi:noNamespaceSchemaLocation="ehcache.xsd"
+        name="coreDAOCacheManager">
 
     <terracottaConfig rejoin="true" url="150.145.133.88:9510"/>
 <!--        <tc-config>

@@ -1,6 +1,7 @@
 
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         name="coreDAOCacheManager">
     
     <diskStore path="java.io.tmpdir" />
 

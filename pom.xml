@@ -1588,7 +1588,7 @@
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         
         <cxf-version>2.7.3</cxf-version>
-        <spring-version>3.2.1.RELEASE</spring-version>
+        <spring-version>3.2.2.RELEASE</spring-version>
 
         <httpcomponents-core-version>4.2.3</httpcomponents-core-version>
         <httpcomponents-client-version>4.2.3</httpcomponents-client-version>

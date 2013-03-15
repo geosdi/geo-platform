@@ -119,11 +119,11 @@
             <version>1.4-SNAPSHOT</version>
         </dependency>
         
-        <dependency>
+        <!--        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>gp-wfst-widget</artifactId>
             <version>1.5-20130126.152419-92</version>
-        </dependency>
+        </dependency>-->
         
         <!-- GIN -->
         <dependency>

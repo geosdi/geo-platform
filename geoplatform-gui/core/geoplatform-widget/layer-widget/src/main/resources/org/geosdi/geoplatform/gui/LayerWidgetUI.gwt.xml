@@ -4,9 +4,6 @@
     <inherits name='name.pehl.piriti.json.JSON' />
     <inherits name="com.google.gwt.inject.Inject"/>
     
-    <!-- REMOVE THIS AFTER LAYER TREE MENU REFACTORING -->
-    <inherits name="org.geosdi.geoplatform.gui.WFSWidgetUI" />
-    
     <source path="client" />
     
     <!-- =============================== -->

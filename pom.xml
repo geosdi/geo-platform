@@ -72,6 +72,13 @@
             <name>Sonatype Open Source maven snapshot repo</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
+        
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2
+            </url>
+        </repository>
 
         <!-- Apache -->
         <repository>
@@ -1612,7 +1619,7 @@
         <gwtVersion>2.4.0</gwtVersion>
         <gxtVersion>2.2.5</gxtVersion>
         
-        <gwtOpenlayersVersion>0.9-SNAPSHOT</gwtOpenlayersVersion>
+        <gwtOpenlayersVersion>1.0-SNAPSHOT</gwtOpenlayersVersion>
         
         <jasypt-version>1.9.0</jasypt-version>
         

@@ -54,7 +54,6 @@ import org.geosdi.geoplatform.gui.client.action.menu.ShareProjectMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFolderRenameAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.EditWFSAction;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
 import org.geosdi.geoplatform.gui.client.widget.contextmenu.GPCQLFilterMenu;
 import org.geosdi.geoplatform.gui.client.widget.contextmenu.GPExportMenu;
@@ -107,7 +106,7 @@ public class TreeContextMenuFactory {
             copyMultiLayers.setIcon(LayerResources.ICONS.copy());
             copyMultiLayers.addSelectionListener(
                     new CopyLayerAction(treePanel,
-                                        pasteAction, pasteMenuItem));
+                    pasteAction, pasteMenuItem));
         }
         if (isOnlyLayers) {
             multipleSelectionContextMenu.add(copyMultiLayers);
@@ -173,8 +172,8 @@ public class TreeContextMenuFactory {
             MenuItem copyMenuItem = new MenuItem("Copy Layer");
             copyMenuItem.setIcon(LayerResources.ICONS.copy());
             copyMenuItem.addSelectionListener(new CopyLayerAction(treePanel,
-                                                                  pasteAction,
-                                                                  pasteMenuItem));
+                    pasteAction,
+                    pasteMenuItem));
 
             layerContextMenu.add(copyMenuItem);
 
@@ -187,12 +186,12 @@ public class TreeContextMenuFactory {
             layerContextMenu.add(createViewportLayerMenu);
 
             // TODO ADD EditWFS dynamically
-            EditWFSAction editFeatureAction = new EditWFSAction(treePanel);
-            MenuItem editFeature = new MenuItem();
-            editFeature.setText(editFeatureAction.getTitle());
-            editFeature.setIcon(editFeatureAction.getImage());
-            editFeature.addSelectionListener(editFeatureAction);
-            layerContextMenu.add(editFeature);
+//            EditWFSAction editFeatureAction = new EditWFSAction(treePanel);
+//            MenuItem editFeature = new MenuItem();
+//            editFeature.setText(editFeatureAction.getTitle());
+//            editFeature.setIcon(editFeatureAction.getImage());
+//            editFeature.addSelectionListener(editFeatureAction);
+//            layerContextMenu.add(editFeature);
 
             refreshTimeComboBox = new ComboBox() {
                 @Override

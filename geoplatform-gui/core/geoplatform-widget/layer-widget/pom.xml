@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Layer Module</name>
-
+    
     <dependencies>
         <dependency>
             <groupId>com.google.gwt</groupId>

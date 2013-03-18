@@ -42,12 +42,11 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface IGPBuildTreeHandler extends EventHandler{
-    
+public interface IGPBuildTreeHandler extends EventHandler {
+
     Type<IGPBuildTreeHandler> TYPE = new Type<IGPBuildTreeHandler>();
-    
+
     public void buildTree();
-    
+
     public void rebuildTree();
-    
 }

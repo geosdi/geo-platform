@@ -51,19 +51,23 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class RefreshTimeComboBuilder {
 
-    private ComboBox combo;
+    private final ComboBox combo;
 
-    public ComboBox build(TreePanel tree) {
+    public RefreshTimeComboBuilder() {
         this.combo = new ComboBox() {
 
             @Override
             protected void onSelect(ModelData model, int index) {
                 super.onSelect(model, index);
                 combo.clearSelections();
-                combo.getParent().setVisible(false);
+                if (combo.getParent() != null) {
+                    combo.getParent().setVisible(false);
+                }
             }
         };
+    }
 
+    protected ComboBox build(TreePanel tree) {
         combo.setEmptyText("Refresh Time");
         ListStore<LayerRefreshTimeValue> store = new ListStore<LayerRefreshTimeValue>();
         store.add(LayerRefreshTimeValue.getLayerRefreshTimeList());

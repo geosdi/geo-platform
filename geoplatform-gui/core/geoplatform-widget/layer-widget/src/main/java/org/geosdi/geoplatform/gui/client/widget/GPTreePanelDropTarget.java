@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -50,7 +49,6 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.TreeNode;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 public class GPTreePanelDropTarget extends TreePanelDropTarget {
 
@@ -66,7 +64,7 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
     protected void showFeedback(DNDEvent e) {
         super.showFeedback(e);
         TreeNode overItem = tree.findNode(e.getTarget());
-        if(overItem == null){
+        if (overItem == null) {
             e.getStatus().setStatus(false);
         }
         TreeModel targetTreeModel = (TreeModel) overItem.getModel();
@@ -95,8 +93,8 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
         } else if (this.target.isLeaf() && this.target instanceof FolderTreeNode) {
 //            System.out.println("Insert elements into empty folders");
             Feedback feedbackToChange;
-            if(!(this.target.getParent() instanceof GPRootTreeNode) ||
-                    this.source instanceof FolderTreeNode){
+            if (!(this.target.getParent() instanceof GPRootTreeNode)
+                    || this.source instanceof FolderTreeNode) {
                 feedbackToChange = Feedback.BOTH;
             } else {
                 feedbackToChange = Feedback.APPEND;
@@ -136,7 +134,6 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
 //        }
 //        return duplicatedLayer;
 //    }
-
     @Override
     protected void onDragDrop(DNDEvent event) {
         super.onDragDrop(event);

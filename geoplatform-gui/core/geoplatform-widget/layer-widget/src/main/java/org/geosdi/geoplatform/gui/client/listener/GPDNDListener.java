@@ -28,7 +28,8 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
-public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>, ISave<MementoSaveDragDrop> {
+public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
+        ISave<MementoSaveDragDrop> {
 
     private VisitorDisplayHide checkerVisitor;
     private VisitorPosition visitor = new VisitorPosition();
@@ -67,8 +68,11 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
             MementoSaveDragDrop mementoSaveDND = new MementoSaveDragDrop(this);
             mementoSaveDND.setRefBaseElement(changedElement);
             mementoSaveDND.setNewZIndex(changedElement.getzIndex());
-            mementoSaveDND.setRefNewParent((parentDestination instanceof FolderTreeNode) ? (FolderTreeNode) parentDestination : null);
-            mementoSaveDND.setDescendantMap(this.visitor.getFolderDescendantMap());
+            mementoSaveDND.setRefNewParent(
+                    (parentDestination instanceof FolderTreeNode)
+                    ? (FolderTreeNode) parentDestination : null);
+            mementoSaveDND.setDescendantMap(
+                    this.visitor.getFolderDescendantMap());
             IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
             mementoSave.add(mementoSaveDND);
             this.isActiveDrop = false;
@@ -91,53 +95,66 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
         //Warning: The following conversion is absolutely necessary!
         memento.convertMementoToWs();
         if (memento.getRefBaseElement() instanceof FolderTreeNode) {
-            LayerRemote.Util.getInstance().saveDragAndDropFolderAndTreeModifications(memento,
+            LayerRemote.Util.getInstance().saveDragAndDropFolderAndTreeModifications(
+                    memento,
                     new AsyncCallback<Boolean>() {
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            if (caught.getCause() instanceof GPSessionTimeout) {
-                                GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-                            } else {
-                                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                                GeoPlatformMessage.errorMessage("Save Folder Drag&Drop Operation Error",
-                                        "Problems on saving the new tree state after folder drag&drop operation");
-                            }
-                        }
 
-                        @Override
-                        public void onSuccess(Boolean result) {
-                            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
-                            mementoSave.remove(memento);
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Folder Drag&Drop operation saved successfully.",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
-                            LayerHandlerManager.fireEvent(peekCacheEvent);
-                        }
-                    });
+                @Override
+                public void onFailure(Throwable caught) {
+                    if (caught.getCause() instanceof GPSessionTimeout) {
+                        GPHandlerManager.fireEvent(new GPLoginEvent(
+                                peekCacheEvent));
+                    } else {
+                        LayerHandlerManager.fireEvent(
+                                new DisplayLayersProgressBarEvent(false));
+                        GeoPlatformMessage.errorMessage(
+                                "Save Folder Drag&Drop Operation Error",
+                                "Problems on saving the new tree state after folder drag&drop operation");
+                    }
+                }
+
+                @Override
+                public void onSuccess(Boolean result) {
+                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    mementoSave.remove(memento);
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            "Folder Drag&Drop operation saved successfully.",
+                            EnumSearchStatus.STATUS_SEARCH.toString());
+                    LayerHandlerManager.fireEvent(peekCacheEvent);
+                }
+
+            });
         } else if (memento.getRefBaseElement() instanceof GPLayerBean) {
-            LayerRemote.Util.getInstance().saveDragAndDropLayerAndTreeModifications(memento,
+            LayerRemote.Util.getInstance().saveDragAndDropLayerAndTreeModifications(
+                    memento,
                     new AsyncCallback<Boolean>() {
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            if (caught.getCause() instanceof GPSessionTimeout) {
-                                GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-                            } else {
-                                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                                GeoPlatformMessage.errorMessage("Save Layer Drag&Drop Operation Error",
-                                        "Problems on saving the new tree state after layer drag&drop operation");
-                            }
-                        }
 
-                        @Override
-                        public void onSuccess(Boolean result) {
-                            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
-                            mementoSave.remove(memento);
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Layer Drag&Drop operation saved successfully.",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
-                            LayerHandlerManager.fireEvent(peekCacheEvent);
-                        }
-                    });
+                @Override
+                public void onFailure(Throwable caught) {
+                    if (caught.getCause() instanceof GPSessionTimeout) {
+                        GPHandlerManager.fireEvent(new GPLoginEvent(
+                                peekCacheEvent));
+                    } else {
+                        LayerHandlerManager.fireEvent(
+                                new DisplayLayersProgressBarEvent(false));
+                        GeoPlatformMessage.errorMessage(
+                                "Save Layer Drag&Drop Operation Error",
+                                "Problems on saving the new tree state after layer drag&drop operation");
+                    }
+                }
+
+                @Override
+                public void onSuccess(Boolean result) {
+                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    mementoSave.remove(memento);
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            "Layer Drag&Drop operation saved successfully.",
+                            EnumSearchStatus.STATUS_SEARCH.toString());
+                    LayerHandlerManager.fireEvent(peekCacheEvent);
+                }
+
+            });
         }
     }
+
 }

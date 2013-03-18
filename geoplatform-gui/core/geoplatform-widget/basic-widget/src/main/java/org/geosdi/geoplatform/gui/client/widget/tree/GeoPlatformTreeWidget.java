@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.widget.tree;
 import com.extjs.gxt.ui.client.Registry;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 
 /**
@@ -49,16 +48,13 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
 
     public static final String TREE_PANEL = "treePanel";
-    protected GPTreeStore<T> store;
-    protected GPTreePanel<T> tree;
+    protected final GPTreeStore<T> store;
+    protected final GPTreePanel<T> tree;
 
-    /**
-     * @Constructor
-     *
-     */
-    public GeoPlatformTreeWidget() {
-        this.store = new GPTreeStore<T>();
-        this.tree = this.createTreePanel(store);
+    public GeoPlatformTreeWidget(GPTreeStore<T> theStore,
+            GPTreePanel<T> theTree) {
+        this.store = theStore;
+        this.tree = theTree;
         Registry.register(TREE_PANEL, tree);
     }
 
@@ -96,6 +92,10 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
 
     public abstract void setTreePanelProperties();
 
+    protected void afterPropertiesSet() {
+        setTreePanelProperties();
+    }
+
     /**
      * @return the store
      */
@@ -104,25 +104,9 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
     }
 
     /**
-     * @param store the store to set
-     */
-    public void setStore(GPTreeStore<T> store) {
-        this.store = store;
-    }
-
-    /**
      * @return the tree
      */
-    public TreePanel<T> getTree() {
+    public GPTreePanel<T> getTree() {
         return tree;
     }
-
-    /**
-     * @param tree the tree to set
-     */
-    public void setTree(GPTreePanel<T> tree) {
-        this.tree = tree;
-    }
-
-    public abstract GPTreePanel<T> createTreePanel(GPTreeStore<T> store);
 }

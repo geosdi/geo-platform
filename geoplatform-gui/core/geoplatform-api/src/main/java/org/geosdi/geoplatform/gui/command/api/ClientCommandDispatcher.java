@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.command.api;
 
-import org.geosdi.geoplatform.gui.command.api.ClientCommand;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.service.GeoPlatformService;
 import org.geosdi.geoplatform.gui.service.GeoPlatformServiceAsync;

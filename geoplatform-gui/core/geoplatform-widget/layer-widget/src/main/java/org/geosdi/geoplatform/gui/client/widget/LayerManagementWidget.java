@@ -38,45 +38,64 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.ScrollListener;
 import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.util.Margins;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
-import org.geosdi.geoplatform.gui.client.widget.toolbar.LayerTreeToolbar;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class LayerManagementWidget extends ContentPanel {
+@Singleton
+public class LayerManagementWidget extends GeoPlatformContentPanel {
 
-    private LayerTreeWidget layerTree;
-    //private LayerAsyncTreeWidget layerTree;
-    private LayerTreeToolbar treeToolbar;
+    private LayerTreePanel layerTreePanel;
     private GPLegendPanel legendPanel;
-    private ContentPanel treePanel;
 
-    /*
-     * @Constructor
-     * 
-     */
-    public LayerManagementWidget() {
+    @Inject
+    public LayerManagementWidget(LayerTreePanel theLayerTreePanel,
+            GPLegendPanel theLegendPanel) {
+        super(true);
+
+        this.layerTreePanel = theLayerTreePanel;
+        this.legendPanel = theLegendPanel;
+    }
+
+    @Override
+    public void addComponent() {
+        BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH);
+        northData.setMargins(new Margins(5, 5, 0, 5));
+
+        super.add(this.layerTreePanel, northData);
+
+        BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH,
+                180);
+        southData.setMargins(new Margins(5, 5, 5, 5));
+
+        super.add(this.legendPanel, southData);
+    }
+
+    @Override
+    public void initSize() {
+    }
+
+    @Override
+    public void setPanelProperties() {
         setHeading("GeoPlatform - Layer Widget");
         setLayout(new BorderLayout());
 
         setLayoutOnChange(true);
-
-        addComponents();
 
         addWidgetListener(new WidgetListener() {
 
             @Override
             public void widgetResized(ComponentEvent ce) {
                 if (getHeight() > 0) {
-                    treePanel.setHeight(getHeight() - 220);
+                    layerTreePanel.setHeight(getHeight() - 220);
                 }
             }
         });
@@ -84,72 +103,12 @@ public class LayerManagementWidget extends ContentPanel {
         setScrollMode(Scroll.NONE);
     }
 
-    private void addComponents() {
-        treePanel = new ContentPanel();
-        treePanel.setScrollMode(Scroll.AUTOY);
-        treePanel.setHeaderVisible(false);
-
-        //This code fix a scroll problem on IE9
-        treePanel.addScrollListener(new ScrollListener() {
-
-           int posV = 0;
-
-           /**
-            * Fires when a component is scrolled.
-            * 
-            * @param ce the component event
-            */
-           @Override
-           public void widgetScrolled(ComponentEvent ce) {
-               if (posV > 9 && treePanel.getVScrollPosition() == 0) {
-                   treePanel.setVScrollPosition(posV);
-               }
-               posV = treePanel.getVScrollPosition();
-           }
-       });
-        this.layerTree = new LayerTreeWidget(treePanel);
-        //this.layerTree = new LayerAsyncTreeWidget();
-
-        BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH);
-        northData.setMargins(new Margins(5, 5, 0, 5));
-
-        treePanel.add(this.layerTree.getTree());
-
-        this.treeToolbar = new LayerTreeToolbar(this.layerTree.getTree());
-
-        this.treePanel.setTopComponent(this.treeToolbar.getToolBar());
-
-        super.add(this.treePanel, northData);
-
-        this.legendPanel = new GPLegendPanel();
-
-        BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 180);
-        southData.setMargins(new Margins(5, 5, 5, 5));
-
-        super.add(this.legendPanel, southData);
-    }
-
-    /**
-     * Build Layer Widget with Spring Configuration
-     *
-     */
-    public void buildComponents() {
-        this.treeToolbar.buildToolbar();
-        this.layerTree.buildTree();
-    }
-
     /**
      * @return the layerTree
      */
     public LayerTreeWidget getLayerTree() {
-        return layerTree;
+        return layerTreePanel.getLayerTree();
     }
-//    /**
-//     * @return the layerTree
-//     */
-//    public LayerAsyncTreeWidget getLayerTree() {
-//        return layerTree;
-//    }
 
     /**
      * @return the legendPanel

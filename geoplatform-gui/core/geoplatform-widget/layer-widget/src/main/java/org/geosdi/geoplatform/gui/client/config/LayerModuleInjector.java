@@ -40,17 +40,21 @@ import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.widget.LayerManagementWidget;
+import org.geosdi.geoplatform.gui.client.widget.LayerTreePanel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@GinModules(value = {LayerModuleGinConfigurator.class})
+@GinModules(value = {LayerModuleGinConfigurator.class,
+    LayerTreeGinConfigurator.class})
 public interface LayerModuleInjector extends Ginjector {
 
     public static class MainInjector {
 
-        private static LayerModuleInjector instance = GWT.create(LayerModuleInjector.class);
+        private static LayerModuleInjector instance = GWT.create(
+                LayerModuleInjector.class);
 
         private MainInjector() {
         }
@@ -63,4 +67,8 @@ public interface LayerModuleInjector extends Ginjector {
     public LoadMenuProjects getLoadMenuProject();
 
     public IMementoSave getMementoSave();
+
+    public LayerManagementWidget getLayerManagementWidget();
+    
+    public LayerTreePanel getLayerTreePanel();
 }

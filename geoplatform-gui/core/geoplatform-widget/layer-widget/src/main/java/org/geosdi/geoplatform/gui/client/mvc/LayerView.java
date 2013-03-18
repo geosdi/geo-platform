@@ -42,12 +42,14 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.widget.progressbar.GPLayerProgressBar;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class LayerView extends GeoPlatformView {
 
@@ -61,7 +63,8 @@ public class LayerView extends GeoPlatformView {
      */
     public LayerView(Controller controller) {
         super(controller);
-        this.layerManagement = new LayerManagementWidget();
+
+        this.layerManagement = LayerModuleInjector.MainInjector.getInstance().getLayerManagementWidget();
     }
 
     @Override
@@ -72,7 +75,8 @@ public class LayerView extends GeoPlatformView {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     protected void handleEvent(AppEvent event) {
@@ -104,7 +108,6 @@ public class LayerView extends GeoPlatformView {
      *
      */
     private void onShowLayerWidget() {
-        this.layerManagement.buildComponents();
         if (!LayoutManager.isWestVisible()) {
             LayoutManager.manageWest(true);
         }

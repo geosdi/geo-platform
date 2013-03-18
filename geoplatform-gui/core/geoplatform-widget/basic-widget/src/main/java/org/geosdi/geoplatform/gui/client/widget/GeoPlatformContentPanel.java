@@ -95,17 +95,23 @@ public abstract class GeoPlatformContentPanel extends ContentPanel {
     }
 
     /**
-     * 
-     * @return 
-     *          Component State for Initialization of All Components
+     *
+     * @return Component State for Initialization of All Components
      */
     public boolean isInitialized() {
         return initialized;
     }
 
     /**
-     * Useful method to override in subclasses to execute operation at the construction end
+     * Useful method to override in subclasses to execute operation at the
+     * construction end
      */
     public void postConstruct() {
+    }
+
+    @Override
+    public String toString() {
+        return "GeoPlatformContentPanel{ " + "initialized = "
+                + initialized + '}';
     }
 }

@@ -62,7 +62,8 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>>, ISave<MementoSaveCheck> {
+public class GPCheckListener implements
+        Listener<TreePanelEvent<GPBeanTreeModel>>, ISave<MementoSaveCheck> {
 
     private VisitorDisplayHide visitorDisplay;
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
@@ -73,14 +74,15 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
 
     @Override
     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
-        //System.out.println("Events.CheckChange from: " + be.getItem().getLabel());
+        System.out.println("Events.CheckChange from: " + be.getItem().getLabel());
         boolean isCacheable = this.visitorDisplay.isCacheableCheck();
         GPBeanTreeModel element = be.getItem();
         element.accept(this.visitorDisplay);
         if (isCacheable && !(element instanceof GPRootTreeNode)) {
             be.getItem().setChecked(!element.isChecked());
             IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
-            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(element);
+            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
+                    element);
             be.getItem().setChecked(!element.isChecked());
             mementoSave.putOriginalPropertiesInCache(memento);
         }
@@ -90,14 +92,19 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
     public void executeSave(final MementoSaveCheck memento) {
         memento.convertMementoToWs();
         if (memento.getRefBaseElement() instanceof FolderTreeNode) {
-            LayerRemote.Util.getInstance().saveCheckStatusFolderAndTreeModifications(memento, new AsyncCallback<Boolean>() {
+            LayerRemote.Util.getInstance().saveCheckStatusFolderAndTreeModifications(
+                    memento, new AsyncCallback<Boolean>() {
+
                 @Override
                 public void onFailure(Throwable caught) {
                     if (caught.getCause() instanceof GPSessionTimeout) {
-                        GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                        GPHandlerManager.fireEvent(new GPLoginEvent(
+                                peekCacheEvent));
                     } else {
-                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                        GeoPlatformMessage.errorMessage("Save Check Operation on Folder Error",
+                        LayerHandlerManager.fireEvent(
+                                new DisplayLayersProgressBarEvent(false));
+                        GeoPlatformMessage.errorMessage(
+                                "Save Check Operation on Folder Error",
                                 "Problems on saving the new tree state after checking folder");
                     }
                 }

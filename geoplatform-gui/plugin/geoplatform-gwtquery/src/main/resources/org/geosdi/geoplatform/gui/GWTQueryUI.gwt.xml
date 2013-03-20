@@ -1,6 +1,7 @@
-  <!-- Inherit the core Web Toolkit stuff. -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">
 <module>    
-        <!-- ADDING GWTQUERY-UI DEPENDENCY -->
+    <!-- ADDING GWTQUERY-UI DEPENDENCY -->
     <!--<inherits name="gwtquery.plugins.UiGoogleCdn" />-->
     <inherits name='gwtquery.plugins.UiEmbedded' />
     

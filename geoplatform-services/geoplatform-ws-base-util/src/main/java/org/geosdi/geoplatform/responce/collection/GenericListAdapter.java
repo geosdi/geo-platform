@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.responce.collection;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -44,9 +45,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @email nazzareno.sileno@geosdi.org
  */
 @XmlRootElement(name = "List")
-public class GenericListAdapter<T> {
+public class GenericListAdapter<T> implements Serializable {
 
+    private static final long serialVersionUID = -9002627076906911672L;
     protected List<T> list;
+
+    public GenericListAdapter() {
+    }
+
+    public GenericListAdapter(List<T> list) {
+        this.list = list;
+    }
 
     @XmlElement(name = "Item")
     public List<T> getList() {

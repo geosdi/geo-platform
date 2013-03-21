@@ -33,15 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic;
+package org.geosdi.geoplatform.gui.client.config.provider;
+
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu.LayerTreeBasicMenu;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface TreeBasicProperties {
+public class LayerTreeBasicMenuProvider implements Provider<LayerTreeBasicMenu> {
 
-    void setTreeBasicProperties();
+    private LayerTreeBasicMenu treeBasicMenu;
+
+    @Override
+    public LayerTreeBasicMenu get() {
+        return this.treeBasicMenu = (this.treeBasicMenu == null)
+                                    ? new LayerTreeBasicMenu() : treeBasicMenu;
+    }
 
 }

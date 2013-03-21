@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFactory;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -61,18 +60,17 @@ import org.geosdi.geoplatform.gui.puregwt.layers.IGPBuildTreeHandler;
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         implements IGPBuildTreeHandler, IGPExpandTreeNodeHandler {
 
-    private final LayerTreeBuilder treeBuilder;
+    @Inject
+    private LayerTreeBuilder treeBuilder;
     private final GPTreeProperties treeProperties;
 
     @Inject
     public LayerTreeWidget(GinTreeStore theStore, GinTreePanel theThree,
-            LayerTreeBuilder theTreeBuilder,
             GPTreeProperties theTreeProperties) {
         super(theStore.get(), theThree.get());
         //Assigning a dynamic context menu to the tree
         TreeContextMenuFactory.setTreePanel(super.tree);
 
-        this.treeBuilder = theTreeBuilder;
         this.treeProperties = theTreeProperties;
         super.afterPropertiesSet();
     }
@@ -83,12 +81,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     }
 
     @Override
-    public final void setTreePanelProperties() {        
+    public final void setTreePanelProperties() {
         this.treeProperties.bind(this);
-
-        super.setCheckable(Boolean.TRUE);
-        super.setCheckStyle(CheckCascade.NONE);
-        this.setTreeMenu();
     }
 
     @Override
@@ -104,7 +98,17 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     }
 
     private void setTreeMenu() {
-        super.tree.setContextMenu(TreeContextMenuFactory.getRootContextMenu());
+//        super.tree.addListener(Events.Render, new Listener() {
+//
+//            @Override
+//            public void handleEvent(BaseEvent be) {
+//                System.out.println("CODICE ESEGUITO RENDER @@@@@@@@@@@@@@@@@@@@@@@");
+//            }
+//
+//        });
+
+
+//        super.tree.setContextMenu(TreeContextMenuFactory.getRootContextMenu());
         super.tree.addListener(Events.OnContextMenu, new Listener() {
 
             @Override

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.decorator;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.GPTreeLabelHandler;
@@ -43,19 +44,26 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPLayerTreeDecorator implements GPTreeLabelHandler {
+public class GPLayerTreeDecorator implements LayerTreeDecorator {
 
     private GPTreePanel tree;
 
     public GPLayerTreeDecorator(GPTreePanel theTree) {
         this.tree = theTree;
-        WidgetPropertiesHandlerManager.addHandler(GPTreeLabelHandler.TYPE, this);
     }
 
     @Override
     public void changeLabel(String label) {
-        this.tree.refreshLabel((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem());
+        this.tree.refreshLabel(
+                (GPBeanTreeModel) tree.getSelectionModel().getSelectedItem());
     }
+
+    @Override
+    public HandlerRegistration addChangeLabelHandler() {
+        return WidgetPropertiesHandlerManager.addHandler(GPTreeLabelHandler.TYPE,
+                this);
+    }
+
 }

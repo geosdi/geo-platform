@@ -4,7 +4,7 @@
  *  http:geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.client.config.provider.GPLayerTreeDecoratorPro
 import org.geosdi.geoplatform.gui.client.config.provider.GPRootTreeNodeProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.GPTreeHandlerManagerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.GPTreeStoreWidgetProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.LayerTreeBasicMenuProvider;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.GPLegendPanel;
 import org.geosdi.geoplatform.gui.client.widget.GPTreePanelDropTarget;
@@ -50,6 +51,7 @@ import org.geosdi.geoplatform.gui.client.widget.LayerTreeWidget;
 import org.geosdi.geoplatform.gui.client.widget.decorator.GPLayerTreeDecorator;
 import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.LayerTreeToolbar;
+import org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu.LayerTreeBasicMenu;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.handler.GPTreeHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.LegendLayerHandler;
 
@@ -59,7 +61,7 @@ import org.geosdi.geoplatform.gui.puregwt.layers.event.LegendLayerHandler;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class LayerTreeGinConfigurator extends AbstractGinModule {
-
+    
     @Override
     protected void configure() {
         bind(LayerTreePanel.class).in(Singleton.class);
@@ -67,18 +69,21 @@ public class LayerTreeGinConfigurator extends AbstractGinModule {
         bind(LayerTreeToolbar.class).in(Singleton.class);
         bind(LegendLayerHandler.class).to(GPLegendPanel.class).in(
                 Singleton.class);
-
+        
         bind(GPTreeStoreWidget.class).toProvider(GPTreeStoreWidgetProvider.class);
-
+        
         bind(GPLayerTreeDecorator.class).toProvider(
                 GPLayerTreeDecoratorProvider.class);
-
+        
         bind(GPRootTreeNode.class).toProvider(GPRootTreeNodeProvider.class);
-
+        
         bind(GPTreePanelDropTarget.class).toProvider(DropTargetProvider.class);
-
+        
         bind(GPTreeHandlerManager.class).toProvider(
                 GPTreeHandlerManagerProvider.class);
+        
+        bind(LayerTreeBasicMenu.class).toProvider(
+                LayerTreeBasicMenuProvider.class).in(Singleton.class);
     }
-
+    
 }

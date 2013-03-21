@@ -33,15 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic;
+package org.geosdi.geoplatform.gui.client;
+
+import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.menu.AboutGPAction;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface TreeBasicProperties {
+public class BasicWidget implements EntryPoint {
 
-    void setTreeBasicProperties();
+    @Override
+    public void onModuleLoad() {
+        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+        menuRegistar.put("aboutGeoPlatform",
+                new MenuActionCreator() {
+
+            private AboutGPAction action;
+
+            @Override
+            public MenuAction createAction() {
+                return action = (action == null)
+                                ? new AboutGPAction() : action;
+            }
+
+        });
+    }
 
 }

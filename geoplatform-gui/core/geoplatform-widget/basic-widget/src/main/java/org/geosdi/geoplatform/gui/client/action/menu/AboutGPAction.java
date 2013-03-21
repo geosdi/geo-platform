@@ -33,15 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic;
+package org.geosdi.geoplatform.gui.client.action.menu;
+
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.widget.about.GPAboutWidget;
 
 /**
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface TreeBasicProperties {
+public class AboutGPAction extends MenuBaseAction {
 
-    void setTreeBasicProperties();
+    private final GPAboutWidget aboutWidget = new GPAboutWidget();
+
+    public AboutGPAction() {
+        super("About GeoPlatform", BasicWidgetResources.ICONS.info());
+    }
+
+    @Override
+    public void componentSelected(MenuEvent ce) {
+        this.aboutWidget.show();
+    }
 
 }

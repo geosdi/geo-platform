@@ -6,6 +6,7 @@
 	
     <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
     <inherits name='org.geosdi.geoplatform.gui.Resources' />
+    <inherits name='org.geosdi.geoplatform.gui.BasicWidget' />
     
     <!-- ADDING GOOGLE-GUAVA MODULE -->
     <inherits name="com.google.common.collect.Collect"/>
@@ -16,7 +17,6 @@
     <inherits name='org.gwtopenmaps.openlayers.OpenLayers' />
 	
     <source path="client" />
-    
     <source path="shared" />
 	
     <source path="configuration" />

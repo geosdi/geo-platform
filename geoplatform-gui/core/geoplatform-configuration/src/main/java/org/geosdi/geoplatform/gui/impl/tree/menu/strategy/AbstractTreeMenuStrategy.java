@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -62,11 +62,16 @@ import org.geosdi.geoplatform.gui.impl.tree.menu.config.TreeMenuGinInjector;
  */
 public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
 
+    static {
+        registar = TreeMenuGinInjector.MainInjector.getInstance().getTreeMenuActionRegistar();
+    }
+
+    private static TreeMenuActionRegistar registar;
+    //
     protected Menu menu;
     private final TreePanel treePanel;
     private boolean initialized;
     private MenuActionBinder menuActionBinder;
-    private TreeMenuActionRegistar registar = TreeMenuGinInjector.MainInjector.getInstance().getTreeMenuActionRegistar();
 
     public AbstractTreeMenuStrategy(TreePanel theTreePanel) {
         this.treePanel = theTreePanel;
@@ -124,4 +129,5 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
     public TreePanel getTree() {
         return this.treePanel;
     }
+
 }

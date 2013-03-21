@@ -33,15 +33,42 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic;
+package org.geosdi.geoplatform.gui.client.widget.about;
+
+import com.google.gwt.user.client.ui.Frame;
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface TreeBasicProperties {
+public class GPAboutWidget extends GeoPlatformWindow {
 
-    void setTreeBasicProperties();
+    private final short ABOUT_WIDTH = 400;
+    private final short ABOUT_HEIGHT = 350;
+
+    public GPAboutWidget() {
+        super(true);
+    }
+
+    @Override
+    public void addComponent() {
+        Frame aboutFrame = new Frame("http://www.geosdi.org/aboutGeoPlatform.html");
+        aboutFrame.setSize("100%", "100%");
+        super.add(aboutFrame);
+    }
+
+    @Override
+    public void initSize() {
+        super.setSize(ABOUT_WIDTH + 10, ABOUT_HEIGHT + 10);
+    }
+
+    @Override
+    public void setWindowProperties() {
+        super.setHeading("About Geo-Platform");
+        super.setBodyStyle("background-color:white");
+        super.setResizable(Boolean.FALSE);
+    }
 
 }

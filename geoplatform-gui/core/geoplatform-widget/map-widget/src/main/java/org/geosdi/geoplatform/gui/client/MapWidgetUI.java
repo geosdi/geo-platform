@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.menu.AboutGPAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ViewportAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.MeasureAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.MeasureAreaAction;
@@ -83,75 +82,87 @@ public class MapWidgetUI implements EntryPoint {
         ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
         toolbarRegistar.put("ZoomIn",
                 new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                        return new ZoomInAction(mapWidget);
-                    }
-                });
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new ZoomInAction(mapWidget);
+            }
+
+        });
 
         toolbarRegistar.put("ZoomOut",
                 new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                        return new ZoomOutAction(mapWidget);
-                    }
-                });
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new ZoomOutAction(mapWidget);
+            }
+
+        });
 
         toolbarRegistar.put("ZoomPrevious",
                 new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                        return new ZoomPreviousAction(mapWidget);
-                    }
-                });
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new ZoomPreviousAction(mapWidget);
+            }
+
+        });
 
         toolbarRegistar.put("ZoomNext",
                 new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                        return new ZoomNextAction(mapWidget);
-                    }
-                });
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new ZoomNextAction(mapWidget);
+            }
+
+        });
 
         toolbarRegistar.put("GetFeatureInfo",
                 new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                        return new GetFeatureInfoAction(mapWidget);
-                    }
-                });
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new GetFeatureInfoAction(mapWidget);
+            }
+
+        });
 
         toolbarRegistar.put("Measure",
                 new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                        return new MeasureAction(mapWidget);
-                    }
-                });
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new MeasureAction(mapWidget);
+            }
+
+        });
 
         toolbarRegistar.put("MeasureArea",
                 new ToolbarActionCreator() {
-                    @Override
-                    public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                        return new MeasureAreaAction(mapWidget);
-                    }
-                });
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new MeasureAreaAction(mapWidget);
+            }
+
+        });
 
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
-        menuRegistar.put("aboutGeoPlatform",
-                new MenuActionCreator() {
-                    @Override
-                    public MenuAction createAction() {
-                        return new AboutGPAction();
-                    }
-                });
+
         menuRegistar.put("viewport",
                 new MenuActionCreator() {
-                    @Override
-                    public MenuAction createAction() {
-                        MapLayoutWidget mapLayoutWidget = Registry.get(MapRegistryEnum.MAP_LAYOUT_WIDGET.toString());
-                        return new ViewportAction(mapLayoutWidget.getMap());
-                    }
-                });
+
+            @Override
+            public MenuAction createAction() {
+                MapLayoutWidget mapLayoutWidget = Registry.get(
+                        MapRegistryEnum.MAP_LAYOUT_WIDGET.toString());
+                return new ViewportAction(mapLayoutWidget.getMap());
+            }
+
+        });
     }
+
 }

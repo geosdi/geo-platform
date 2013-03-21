@@ -33,15 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic;
+package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu;
+
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface TreeBasicProperties {
+public class LayerTreeBasicMenu implements GPCompositeBasicMenu {
 
-    void setTreeBasicProperties();
+    private Menu menu = new Menu();
+
+    @Override
+    public Menu getBasicMenu() {
+        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
+
+        MenuBaseAction baseAction = (MenuBaseAction) menuRegistar.get(
+                "aboutGeoPlatform");
+
+        MenuItem item = new MenuItem(baseAction.getTitle(),
+                baseAction.getImage(), baseAction);
+        
+        menu.add(item);
+
+        return this.menu;
+    }
 
 }

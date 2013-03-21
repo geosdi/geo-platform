@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -97,6 +97,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         this.tree = theTree.get();
     }
 
+    @Override
     public void buildTree() {
         if (!initialized) {
             Registry.register(UserSessionEnum.TREE_LOADED.name(), initialized);

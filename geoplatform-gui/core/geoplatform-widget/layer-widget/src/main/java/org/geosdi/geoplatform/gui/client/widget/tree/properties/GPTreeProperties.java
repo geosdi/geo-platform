@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -71,8 +71,7 @@ public class GPTreeProperties implements TreeProperties {
         this.treeBasicProperties = theTreeBasicProperties;
         this.treeHandlerManager = theTreeHandlerManager;
     }
-    
-    
+
     protected void setTreeProperties() {
         this.treeExpandListener.addExpandListener();
         this.treeDndManager.enableDndSupport();
@@ -83,6 +82,11 @@ public class GPTreeProperties implements TreeProperties {
 
     @Override
     public void bind(LayerTreeWidget theLayerTreeWidget) {
+        if (theLayerTreeWidget == null) {
+            throw new IllegalArgumentException("The LayerTreeWidget to Bind "
+                    + "must not be null.");
+        }
+
         this.layerTreeWidget = theLayerTreeWidget;
         this.setTreeProperties();
     }

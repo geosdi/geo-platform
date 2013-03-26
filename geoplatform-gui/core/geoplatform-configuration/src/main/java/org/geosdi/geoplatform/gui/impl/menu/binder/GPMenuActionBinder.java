@@ -76,15 +76,16 @@ public class GPMenuActionBinder implements MenuActionBinder {
     }
 
     @Override
-    public void bindMenuBaseAction(MenuBaseAction action,
-            GPMenuItem tool,
-            final Menu menu) {
+    public void bindMenuBaseAction(MenuAction action,
+            GPMenuItem tool, final Menu menu) {
         final MenuItem item = new MenuItem(tool.getText());
         item.setItemId(tool.getId());
 
         if (action != null) {
             action.setId(tool.getId());
-            item.setIcon(action.getImage());
+            if (action instanceof MenuBaseAction) {
+                item.setIcon(((MenuBaseAction) action).getImage());
+            }
             item.addSelectionListener(action);
 
             this.addMenuActionEnableHandler(action, item);
@@ -101,7 +102,7 @@ public class GPMenuActionBinder implements MenuActionBinder {
             final Menu menu) {
         final CheckMenuItem item = new CheckMenuItem(tool.getText());
         item.setItemId(tool.getId());
-        
+
         menu.add(item);
 
         if (action != null) {
@@ -110,13 +111,15 @@ public class GPMenuActionBinder implements MenuActionBinder {
 
             this.addMenuActionEnableHandler(action, item);
 
-            action.addMenuActionChangeCheckHandler(new MenuActionChangeCheckHandler() {
-                
+            action.addMenuActionChangeCheckHandler(
+                    new MenuActionChangeCheckHandler() {
+
                 @Override
                 public void onActionCheckChange(MenuActionChangeCheckEvent event) {
                     item.setChecked(event.isCheck());
                     item.fireEvent(Events.Select, new MenuEvent(menu, item));
                 }
+
             });
 
             action.setChecked(tool.isChecked());
@@ -138,11 +141,13 @@ public class GPMenuActionBinder implements MenuActionBinder {
     public void addMenuActionEnableHandler(MenuAction action,
             final MenuItem item) {
         action.addActionEnableHandler(new ActionEnableHandler() {
-            
+
             @Override
             public void onActionEnabled(ActionEnableEvent event) {
                 item.setEnabled(event.isEnabled());
             }
+
         });
     }
+
 }

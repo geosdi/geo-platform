@@ -53,6 +53,9 @@ import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.LayerTreeToolbar;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu.LayerTreeBasicMenu;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.handler.GPTreeHandlerManager;
+import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStoreRepository;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.LegendLayerHandler;
 
 /**
@@ -61,29 +64,33 @@ import org.geosdi.geoplatform.gui.puregwt.layers.event.LegendLayerHandler;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class LayerTreeGinConfigurator extends AbstractGinModule {
-    
+
     @Override
     protected void configure() {
+        bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
+
         bind(LayerTreePanel.class).in(Singleton.class);
         bind(LayerTreeWidget.class).in(Singleton.class);
         bind(LayerTreeToolbar.class).in(Singleton.class);
         bind(LegendLayerHandler.class).to(GPLegendPanel.class).in(
                 Singleton.class);
-        
+
         bind(GPTreeStoreWidget.class).toProvider(GPTreeStoreWidgetProvider.class);
-        
+
         bind(GPLayerTreeDecorator.class).toProvider(
                 GPLayerTreeDecoratorProvider.class);
-        
+
         bind(GPRootTreeNode.class).toProvider(GPRootTreeNodeProvider.class);
-        
+
         bind(GPTreePanelDropTarget.class).toProvider(DropTargetProvider.class);
-        
+
         bind(GPTreeHandlerManager.class).toProvider(
                 GPTreeHandlerManagerProvider.class);
-        
+
         bind(LayerTreeBasicMenu.class).toProvider(
                 LayerTreeBasicMenuProvider.class).in(Singleton.class);
+
+        bind(TreeMenuStoreRepository.class).in(Singleton.class);
     }
-    
+
 }

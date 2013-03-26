@@ -36,7 +36,8 @@
 package org.geosdi.geoplatform.gui.client.action.menu.cqlfilter;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.cql.CQLFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -46,13 +47,13 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class AddModifyCQLFilterAction extends MenuAction {
+public class AddModifyCQLFilterAction extends MenuBaseAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private CQLFilterWidget cqlFilterWidget;
 
     public AddModifyCQLFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("AddModifyCQLFilter");
+        super("AddModifyCQLFilter", LayerResources.ICONS.cqlFilter());
         this.treePanel = treePanel;
         this.cqlFilterWidget = new CQLFilterWidget(Boolean.TRUE, treePanel);
     }

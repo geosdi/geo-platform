@@ -97,4 +97,5 @@ public abstract class GPClientCommand<Response extends GPCommandResponse>
     public String toString() {
         return "GPClientCommand{ " + "commandRequest = " + commandRequest + '}';
     }
+
 }

@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ZoomToExtendsEvent;
@@ -48,13 +49,13 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
-public class ZoomToLayerExtentAction extends MenuAction {
+public class ZoomToLayerExtentAction extends MenuBaseAction {
 
     private TreePanel treePanel;
     private ZoomToExtendsEvent zoomToExtendsEvent = new ZoomToExtendsEvent();
 
     public ZoomToLayerExtentAction(TreePanel treePanel) {
-        super("ZoomToLayerExtent");
+        super("ZoomToLayerExtent", LayerResources.ICONS.zoomToMaxExtend());
         this.treePanel = treePanel;
     }
 
@@ -68,4 +69,5 @@ public class ZoomToLayerExtentAction extends MenuAction {
             MapHandlerManager.fireEvent(zoomToExtendsEvent);
         }
     }
+
 }

@@ -43,4 +43,5 @@ package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
 public interface CompositeStoreSorter {
 
     void sort();
+
 }

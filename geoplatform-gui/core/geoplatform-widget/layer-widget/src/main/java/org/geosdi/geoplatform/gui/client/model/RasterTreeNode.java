@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFactory;
 import org.geosdi.geoplatform.gui.client.model.state.LayerStateEnum;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
@@ -69,6 +67,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         public String toString() {
             return this.value;
         }
+
     }
     //
     private float opacity = 1.0f;
@@ -151,11 +150,6 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     }
 
     @Override
-    public Menu getTreeContextMenu() {
-        return TreeContextMenuFactory.getLayerContextMenu();
-    }
-
-    @Override
     public TreeStatusEnum getTreeStatus() {
         return TreeStatusEnum.RASTER_SELECTED;
     }
@@ -175,4 +169,5 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         return "RasterTreeNode {" + super.toString()
                 + ", opacity = " + opacity + "}";
     }
+
 }

@@ -52,4 +52,5 @@ public interface ClientCommand<Response extends GPCommandResponse> extends
     void onCommandSuccess(Response response);
 
     void onCommandFailure(Throwable exception);
+
 }

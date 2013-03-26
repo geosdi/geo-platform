@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.LayerMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
+import org.geosdi.geoplatform.gui.client.action.temporary.TreeMenuActionFactory;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.mvc.LayerController;
@@ -85,6 +86,7 @@ public class LayerWidgetUI implements EntryPoint {
 
         addLayerWidgetAction();
         addTreeToolbarComponents();
+        TreeMenuActionFactory.buildTreeMenuActions();
     }
 
     private void initInjection() {
@@ -100,6 +102,7 @@ public class LayerWidgetUI implements EntryPoint {
             public MenuAction createAction() {
                 return new LayerMenuAction();
             }
+
         });
 
         menuRegistar.put("manageProjects",
@@ -109,6 +112,7 @@ public class LayerWidgetUI implements EntryPoint {
             public MenuAction createAction() {
                 return loadMenuProjects;
             }
+
         });
 
     }
@@ -131,4 +135,5 @@ public class LayerWidgetUI implements EntryPoint {
         AddLayerPluginManager.addWindowPlugin(new AddVectorLayerPlugin());
         AddLayerPluginManager.addWindowPlugin(new GetMapLayerPlugin());
     }
+
 }

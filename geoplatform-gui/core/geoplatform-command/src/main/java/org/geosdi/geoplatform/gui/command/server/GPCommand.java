@@ -57,5 +57,5 @@ public interface GPCommand<Request extends GPCommandRequest, Response extends GP
      *
      * @throws Exception
      */
-    Response execute(Request request) throws Exception;
+    Response execute(Request request);
 }

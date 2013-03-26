@@ -70,10 +70,6 @@ public interface GPTreeMenuStrategy extends GeoPlatformMenuCreator {
      */
     void addWidget(Widget widget, Menu menu);
 
-    /**
-     * Give Information about the TreeMenuStrategy Status
-     *
-     * @return {@link Boolean} value
-     */
-    boolean isInitialized();
+    Menu bindMenu(StoreCompositeKey key);
+
 }

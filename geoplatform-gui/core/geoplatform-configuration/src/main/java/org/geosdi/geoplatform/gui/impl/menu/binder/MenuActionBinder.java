@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.impl.menu.binder;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
 import org.geosdi.geoplatform.gui.configuration.GPCheckMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPGroupMenuItem;
@@ -52,17 +52,14 @@ import org.geosdi.geoplatform.gui.impl.menu.MenuActionHandler;
  */
 public interface MenuActionBinder extends MenuActionHandler {
 
-    void bindTools(Menu menu,
-            List<? extends GPMenuGenericTool> tools);
+    void bindTools(Menu menu, List<? extends GPMenuGenericTool> tools);
 
-    void bindMenuBaseAction(MenuBaseAction action,
-            GPMenuItem tool,
+    void bindMenuBaseAction(MenuAction action, GPMenuItem tool,
             final Menu menu);
 
-    void bindMenuCheckAction(MenuCheckAction action,
-            GPCheckMenuItem tool,
+    void bindMenuCheckAction(MenuCheckAction action, GPCheckMenuItem tool,
             final Menu menu);
 
-    void bindGroupMenuItem(GPGroupMenuItem tool,
-            Menu menu);
+    void bindGroupMenuItem(GPGroupMenuItem tool, Menu menu);
+
 }

@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.model.tree;
 
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.model.UUIDGenerator;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
@@ -171,9 +171,10 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     public abstract AbstractImagePrototype getIcon();
 
-    public abstract Menu getTreeContextMenu();
+    public abstract GPTreeCompositeType getTreeCompositeType();
 
     public abstract TreeStatusEnum getTreeStatus();
 
     public abstract void accept(IVisitor visitor);
+
 }

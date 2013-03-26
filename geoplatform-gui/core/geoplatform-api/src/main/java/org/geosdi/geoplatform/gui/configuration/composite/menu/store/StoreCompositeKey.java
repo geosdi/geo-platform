@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
 
+import java.io.Serializable;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
 
 /**
@@ -42,9 +43,11 @@ import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class StoreCompositeKey {
+public abstract class StoreCompositeKey implements Serializable {
 
-    protected final GPTreeMenuType treeMenuType;
+    private static final long serialVersionUID = -2401990359769249039L;
+    //
+    protected GPTreeMenuType treeMenuType;
 
     public StoreCompositeKey(GPTreeMenuType theTreeMenuType) {
         this.treeMenuType = theTreeMenuType;
@@ -61,5 +64,6 @@ public abstract class StoreCompositeKey {
     public String toString() {
         return "StoreCompositeKey{ " + "treeMenuType = "
                 + treeMenuType + '}';
-    }    
+    }
+
 }

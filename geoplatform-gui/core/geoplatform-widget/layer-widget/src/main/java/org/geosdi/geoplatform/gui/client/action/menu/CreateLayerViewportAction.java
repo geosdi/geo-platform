@@ -39,7 +39,8 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.CreateViewportEvent;
@@ -50,13 +51,13 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class CreateLayerViewportAction extends MenuAction {
+public class CreateLayerViewportAction extends MenuBaseAction {
 
     private TreePanel treePanel;
     private CreateViewportEvent createViewportEvent = new CreateViewportEvent();
 
     public CreateLayerViewportAction(final TreePanel treePanel) {
-        super("CreateLayerViewport");
+        super("CreateLayerViewport", BasicWidgetResources.ICONS.viewport());
         this.treePanel = treePanel;
     }
 
@@ -65,7 +66,8 @@ public class CreateLayerViewportAction extends MenuAction {
         List<GPLayerBean> layerList;
         GPBeanTreeModel item = (GPBeanTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
         if (item instanceof FolderTreeNode) {
-            throw new IllegalArgumentException("The CreateLayerViewportAction can "
+            throw new IllegalArgumentException(
+                    "The CreateLayerViewportAction can "
                     + "take only layer and not folder");
         } else {
             layerList = Lists.newArrayList((GPLayerBean) item);
@@ -74,4 +76,5 @@ public class CreateLayerViewportAction extends MenuAction {
             MapHandlerManager.fireEvent(createViewportEvent);
         }
     }
+
 }

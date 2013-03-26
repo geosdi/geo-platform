@@ -50,4 +50,5 @@ public class GetCompositeMenuRequest implements GPCommandRequest {
     public String getCommandName() {
         return "command.GetCompositeMenuCommand";
     }
+
 }

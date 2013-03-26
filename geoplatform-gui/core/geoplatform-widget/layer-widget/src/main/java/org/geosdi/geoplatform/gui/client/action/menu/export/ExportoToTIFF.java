@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.gui.client.action.menu.export;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Window;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -47,12 +48,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
-public class ExportoToTIFF extends MenuAction {
+public class ExportoToTIFF extends MenuBaseAction {
 
     private TreePanel treePanel;
 
     public ExportoToTIFF(TreePanel treePanel) {
-        super("ExportToTIFF");
+        super("ExportToTIFF", LayerResources.ICONS.exportToTIFF());
         this.treePanel = treePanel;
     }
 
@@ -85,4 +86,5 @@ public class ExportoToTIFF extends MenuAction {
         }
 
     }
+
 }

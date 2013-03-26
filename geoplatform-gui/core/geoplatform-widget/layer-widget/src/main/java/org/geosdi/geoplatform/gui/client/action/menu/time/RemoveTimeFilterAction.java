@@ -36,7 +36,8 @@
 package org.geosdi.geoplatform.gui.client.action.menu.time;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
@@ -55,14 +56,14 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class RemoveTimeFilterAction extends MenuAction {
+public class RemoveTimeFilterAction extends MenuBaseAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private final TimeFilterLayerMapEvent timeFilterLayerMapEvent = new TimeFilterLayerMapEvent();
     private final GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
 
     public RemoveTimeFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("RemoveTimeFilter");
+        super("RemoveTimeFilter", LayerResources.ICONS.cqlFilterDelete());
         this.treePanel = treePanel;
     }
 
@@ -70,17 +71,21 @@ public class RemoveTimeFilterAction extends MenuAction {
     public void componentSelected(MenuEvent ce) {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         if (itemSelected instanceof FolderTreeNode) {
-            throw new IllegalArgumentException("The Time Filter can't be applied to a folder");
+            throw new IllegalArgumentException(
+                    "The Time Filter can't be applied to a folder");
         }
         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
         IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
-        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
+        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
+                layerSelected);
         layerSelected.setTimeFilter("");
         String layerName;
         if (layerSelected.getAlias() != null
-                && layerSelected.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
+                && layerSelected.getAlias().indexOf(
+                LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
             layerName = layerSelected.getAlias().substring(0,
-                    layerSelected.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+                    layerSelected.getAlias().indexOf(
+                    LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
         } else {
             layerName = layerSelected.getLabel();
         }
@@ -91,4 +96,5 @@ public class RemoveTimeFilterAction extends MenuAction {
         GPHandlerManager.fireEvent(timeFilterLayerMapEvent);
         treePanel.refresh(layerSelected);
     }
+
 }

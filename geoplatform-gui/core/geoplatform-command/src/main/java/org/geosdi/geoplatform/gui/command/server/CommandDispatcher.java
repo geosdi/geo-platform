@@ -46,7 +46,7 @@ import org.springframework.context.ApplicationContextAware;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  * @since 1.5.1
  */
 public interface CommandDispatcher extends ApplicationContextAware {
@@ -59,8 +59,9 @@ public interface CommandDispatcher extends ApplicationContextAware {
      *
      * @throws Exception
      */
-    <Request extends GPCommandRequest> GPCommandResponse execute(Request request)
-            throws Exception;
-    
+    <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(
+            Request request);
+
     void destroy();
+
 }

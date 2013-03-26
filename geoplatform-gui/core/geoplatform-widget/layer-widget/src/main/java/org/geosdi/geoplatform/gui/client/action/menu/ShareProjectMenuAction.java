@@ -93,6 +93,8 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
             public void onSuccess(GPClientProject result) {
                 projectManagementWidget.showSharingPanel(result);
             }
+
         });
     }
+
 }

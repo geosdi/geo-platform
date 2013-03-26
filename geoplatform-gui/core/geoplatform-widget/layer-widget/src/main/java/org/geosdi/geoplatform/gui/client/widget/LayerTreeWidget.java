@@ -35,21 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFactory;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.IGPExpandTreeNodeHandler;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.builder.LayerTreeBuilder;
+import org.geosdi.geoplatform.gui.client.widget.tree.menu.automator.GPTreeMenuAutomator;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.GPTreeProperties;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GinTreeStore;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.IGPBuildTreeHandler;
 
 /**
@@ -63,15 +60,18 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     @Inject
     private LayerTreeBuilder treeBuilder;
     private final GPTreeProperties treeProperties;
+    private final GPTreeMenuAutomator menuAutomator;
 
     @Inject
     public LayerTreeWidget(GinTreeStore theStore, GinTreePanel theThree,
-            GPTreeProperties theTreeProperties) {
+            GPTreeProperties theTreeProperties,
+            GPTreeMenuAutomator theMenuAutomator) {
         super(theStore.get(), theThree.get());
         //Assigning a dynamic context menu to the tree
-        TreeContextMenuFactory.setTreePanel(super.tree);
+//        TreeContextMenuFactory.setTreePanel(super.tree);
 
         this.treeProperties = theTreeProperties;
+        this.menuAutomator = theMenuAutomator;
         super.afterPropertiesSet();
     }
 
@@ -83,6 +83,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     @Override
     public final void setTreePanelProperties() {
         this.treeProperties.bind(this);
+        this.menuAutomator.automateTreeMenuCreation();
     }
 
     @Override
@@ -95,42 +96,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     @Override
     public void rebuildTree() {
         this.treeBuilder.rebuildTree();
-    }
-
-    private void setTreeMenu() {
-//        super.tree.addListener(Events.Render, new Listener() {
-//
-//            @Override
-//            public void handleEvent(BaseEvent be) {
-//                System.out.println("CODICE ESEGUITO RENDER @@@@@@@@@@@@@@@@@@@@@@@");
-//            }
-//
-//        });
-
-
-//        super.tree.setContextMenu(TreeContextMenuFactory.getRootContextMenu());
-        super.tree.addListener(Events.OnContextMenu, new Listener() {
-
-            @Override
-            public void handleEvent(BaseEvent be) {
-                if (tree.getSelectionModel().getSelectedItems().size() > 1) {
-                    boolean isOnlyLayers = Boolean.TRUE;
-                    for (GPBeanTreeModel element : tree.getSelectionModel().getSelectedItems()) {
-                        if (!(element instanceof GPLayerTreeModel)) {
-                            isOnlyLayers = Boolean.FALSE;
-                            break;
-                        }
-                    }
-                    tree.setContextMenu(
-                            TreeContextMenuFactory.getMultiSelectionMenu(
-                            isOnlyLayers));
-                } else {
-                    GPBeanTreeModel selectedItem = tree.getSelectionModel().getSelectedItem();
-                    tree.setContextMenu(selectedItem.getTreeContextMenu());
-                }
-            }
-
-        });
     }
 
 }

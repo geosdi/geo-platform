@@ -57,8 +57,8 @@ public class GPCommandDispatcher implements CommandDispatcher {
     private ApplicationContext appContext;
 
     @Override
-    public <Request extends GPCommandRequest> GPCommandResponse execute(
-            Request request) throws Exception {
+    public <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(
+            Request request) throws GeoPlatformException {
 
         logger.debug("GPCommandDipatcher : Execution of Command "
                 + request.getCommandName());
@@ -77,7 +77,7 @@ public class GPCommandDispatcher implements CommandDispatcher {
         logger.debug("Found Command " + request.getCommandName()
                 + " : " + command);
 
-        return command.execute(request);
+        return (Response) command.execute(request);
     }
 
     @Override
@@ -90,4 +90,5 @@ public class GPCommandDispatcher implements CommandDispatcher {
     public void setApplicationContext(ApplicationContext ac) throws BeansException {
         this.appContext = ac;
     }
+
 }

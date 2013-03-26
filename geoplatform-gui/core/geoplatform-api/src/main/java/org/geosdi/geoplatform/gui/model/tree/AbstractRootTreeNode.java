@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.model.tree;
 
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
@@ -49,4 +50,10 @@ public abstract class AbstractRootTreeNode extends GPBeanTreeModel {
     public void accept(IVisitor visitor) {
         visitor.visitRoot(this);
     }
+
+    @Override
+    public GPTreeCompositeType getTreeCompositeType() {
+        return GPTreeCompositeType.ROOT;
+    }
+
 }

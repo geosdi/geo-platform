@@ -53,8 +53,7 @@ public final class TreeMenuActionRegistar
      * @param toolActionCreator
      */
     @Override
-    public void put(String key,
-            TreeMenuActionCreator toolActionCreator) {
+    public void put(String key, TreeMenuActionCreator toolActionCreator) {
         if ((key != null) && (toolActionCreator != null)) {
             super.registry.put(key, toolActionCreator);
         }
@@ -66,10 +65,9 @@ public final class TreeMenuActionRegistar
      * @param treePanel
      * @return {@link MenuAction}
      */
-    public MenuAction get(String key,
-            TreePanel treePanel) {
+    public MenuAction get(String key, TreePanel treePanel) {
         TreeMenuActionCreator toolActionCreator = super.registry.get(key);
-        
+
         if (toolActionCreator == null) {
             return null;
         }
@@ -79,4 +77,5 @@ public final class TreeMenuActionRegistar
 
         return action;
     }
+
 }

@@ -48,7 +48,10 @@ public class GetCompositeMenuResponse implements
 
     private static final long serialVersionUID = 7178727687878667656L;
     //
-    private final GPMenuCompositeStore menuCompositeStore;
+    private GPMenuCompositeStore menuCompositeStore;
+
+    public GetCompositeMenuResponse() {
+    }
 
     public GetCompositeMenuResponse(GPMenuCompositeStore menuCompositeStore) {
         this.menuCompositeStore = menuCompositeStore;
@@ -64,4 +67,5 @@ public class GetCompositeMenuResponse implements
         return "GetCompositeMenuResponse{ " + "menuCompositeStore = "
                 + menuCompositeStore + '}';
     }
+
 }

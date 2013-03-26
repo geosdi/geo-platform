@@ -36,7 +36,8 @@
 package org.geosdi.geoplatform.gui.client.action.menu.time;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -46,23 +47,26 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class AddModifyTimeFilterAction extends MenuAction {
+public class AddModifyTimeFilterAction extends MenuBaseAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private LayerTimeFilterWidget timeFilterWidget;
 
     public AddModifyTimeFilterAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("AddModifyCQLFilter");
+        super("AddModifyCQLFilter", LayerResources.ICONS.cqlFilter());
         this.treePanel = treePanel;
-        this.timeFilterWidget = new LayerTimeFilterWidget(Boolean.TRUE, treePanel);
+        this.timeFilterWidget = new LayerTimeFilterWidget(Boolean.TRUE,
+                treePanel);
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         if (itemSelected instanceof FolderTreeNode) {
-            throw new IllegalArgumentException("The TIME Filter can't be applied to a folder");
+            throw new IllegalArgumentException(
+                    "The TIME Filter can't be applied to a folder");
         }
         timeFilterWidget.show();
     }
+
 }

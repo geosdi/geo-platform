@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.OnDelete;
@@ -36,13 +34,14 @@ public class CarPart implements Serializable {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,
-            generator = "CAR_PARTS_SEQ")
+                    generator = "CAR_PARTS_SEQ")
     @SequenceGenerator(name = "CAR_PARTS_SEQ", sequenceName = "CAR_PARTS_SEQ")
     private Long id;
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "carplate", referencedColumnName = "plate", nullable = false, updatable = false)
+    @JoinColumn(name = "carplate", referencedColumnName = "plate",
+                nullable = false)
     @Index(name = "ROLEPROPS_ROLENAME_INDEX")
     private Car car;
     //
@@ -96,10 +95,12 @@ public class CarPart implements Serializable {
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if (this.car != other.car && (this.car == null || !this.car.equals(other.car))) {
+        if (this.car != other.car && (this.car == null || !this.car.equals(
+                                      other.car))) {
             return false;
         }
-        if ((this.partName == null) ? (other.partName != null) : !this.partName.equals(other.partName)) {
+        if ((this.partName == null) ? (other.partName != null)
+            : !this.partName.equals(other.partName)) {
             return false;
         }
         return true;
@@ -109,4 +110,5 @@ public class CarPart implements Serializable {
     public String toString() {
         return "CarPart{" + "id=" + id + ", car=" + car + ", partName=" + partName + '}';
     }
+
 }

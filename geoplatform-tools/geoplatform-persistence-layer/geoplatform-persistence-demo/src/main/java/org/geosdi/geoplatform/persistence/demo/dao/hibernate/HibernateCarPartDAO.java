@@ -33,66 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.persistence.demo;
+package org.geosdi.geoplatform.persistence.demo.dao.hibernate;
 
-import org.junit.Assert;
-import org.geosdi.geoplatform.persistence.demo.dao.ICarDAO;
+import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
+import org.geosdi.geoplatform.persistence.dao.hibernate.GPAbstractHibernateDAO;
 import org.geosdi.geoplatform.persistence.demo.dao.ICarPartDAO;
-import org.geosdi.geoplatform.persistence.demo.model.Car;
 import org.geosdi.geoplatform.persistence.demo.model.CarPart;
-import org.geosdi.geoplatform.persistence.loader.PersistenceLoaderConfigurer;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceLoaderConfigurer.class},
-        loader = AnnotationConfigContextLoader.class)
-@ActiveProfiles(value = {"jpa"})
-public class PersistenceJpaTest {
+@Repository(value = "hibernateCarPartDAO")
+@Profile(value = "hibernate")
+public class HibernateCarPartDAO extends GPAbstractHibernateDAO<CarPart, Long>
+        implements ICarPartDAO {
 
-    private final static String PART_NAME = "Gearbox";
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    private ICarDAO jpaCarDAO;
-    @Autowired
-    private ICarPartDAO jpaCarPartDAO;
-    private Car car;
-    private CarPart carPart;
-
-    @Before
-    public void setUp() {
-        car = new Car();
-        car.setPlate("AR793M");
-        car.setModel("Fiat Punto");
-        this.carPart = new CarPart();
-        this.carPart.setCar(car);
-        this.carPart.setPartName(PART_NAME);
-        jpaCarDAO.persist(car);
-        jpaCarPartDAO.persist(carPart);
+    public HibernateCarPartDAO() {
+        super(CarPart.class);
     }
 
-    @Test
-    public void testJpaProfile() throws Exception {
-        logger.info("Persistence JPA Test - Car Found @@@@@@@@@@@@"
-                + "@@@@@@@@@@@@@ " + car);
+    @Override
+    public CarPart findByPartName(String partName) throws Exception {
+        try {
+            Criteria crit = super.getCurrentSession().createCriteria(
+                    super.getPersistentClass());
+            crit.add(Restrictions.naturalId());
 
-        System.out.println("Trovato: " + this.jpaCarPartDAO.findByPartName(PART_NAME).getPartName());
-        this.jpaCarDAO.delete(car.getId());
-        System.out.println("C'è ancora: " + this.jpaCarPartDAO.findByPartName(PART_NAME).getPartName());
-        Assert.assertNull("The car part is not null", this.jpaCarPartDAO.findByPartName(PART_NAME));
+            return (CarPart) crit.uniqueResult();
+        } catch (HibernateException ex) {
+            logger.error("HibernateException : {}", ex);
+            throw new GPDAOException(ex);
+        }
     }
 }

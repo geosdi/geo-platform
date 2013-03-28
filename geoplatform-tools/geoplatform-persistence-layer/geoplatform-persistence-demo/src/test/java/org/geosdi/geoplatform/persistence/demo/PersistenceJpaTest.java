@@ -59,7 +59,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceLoaderConfigurer.class},
-        loader = AnnotationConfigContextLoader.class)
+                      loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles(value = {"jpa"})
 public class PersistenceJpaTest {
 
@@ -90,9 +90,14 @@ public class PersistenceJpaTest {
         logger.info("Persistence JPA Test - Car Found @@@@@@@@@@@@"
                 + "@@@@@@@@@@@@@ " + car);
 
-        System.out.println("Trovato: " + this.jpaCarPartDAO.findByPartName(PART_NAME).getPartName());
+        logger.info("FOUND PART @@@@@@@@@@@@@@@@@@@@@@@@@@: "
+                + this.jpaCarPartDAO.findByPartName(PART_NAME).getPartName());
         this.jpaCarDAO.delete(car.getId());
-        System.out.println("C'è ancora: " + this.jpaCarPartDAO.findByPartName(PART_NAME).getPartName());
-        Assert.assertNull("The car part is not null", this.jpaCarPartDAO.findByPartName(PART_NAME));
+
+
+        CarPart test = this.jpaCarPartDAO.findByPartName(PART_NAME);
+
+        Assert.assertNull("The car part is not null", test);
     }
+
 }

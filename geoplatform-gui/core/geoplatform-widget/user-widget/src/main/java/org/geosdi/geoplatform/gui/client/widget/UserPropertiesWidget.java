@@ -36,23 +36,26 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.event.WindowEvent;
-import com.extjs.gxt.ui.client.event.WindowListener;
+import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.Date;
 import java.util.List;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageInsertUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageUpdateUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageInsertUserEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageUpdateUserEvent;
 import org.geosdi.geoplatform.gui.client.form.binding.UserPropertiesBinding;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
+import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
@@ -70,7 +73,8 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UserPropertiesWidget extends GeoPlatformWindow
+@Singleton
+public class UserPropertiesWidget extends GeoPlatformTabItem
         implements IManageInsertUserHandler, IManageUpdateUserHandler {
 
     private GPUserManageDetail user;
@@ -83,15 +87,18 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     private ManageInsertUserEvent manageInsertUserEvent = new ManageInsertUserEvent();
     private ManageUpdateUserEvent manageUpdateUserEvent = new ManageUpdateUserEvent();
 
-    public UserPropertiesWidget(ListStore<GPUserManageDetail> store) {
-        super(true);
-        this.store = store;
+    public UserPropertiesWidget() {
+        super("User Properties");
+//        super.setSize(340, 350);
+        this.setWidgetProperties();
+        super.setLayout(new FitLayout());
         TimeoutHandlerManager.addHandler(IManageInsertUserHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IManageUpdateUserHandler.TYPE, this);
+        this.subclassCallToInit();
     }
 
     @Override
-    public void addComponent() {
+    public void addComponents() {
         this.addCentralPanel();
     }
 
@@ -115,42 +122,33 @@ public class UserPropertiesWidget extends GeoPlatformWindow
         });
         this.userPropertiesBinding = new UserPropertiesBinding(store, saveButton);
 
-        Button closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                hide();
-            }
-        });
+//        Button closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
+//            @Override
+//            public void componentSelected(ButtonEvent ce) {
+//                UserPropertiesWidget.super.getTabPanel().hide();
+//            }
+//        });
         this.centralPanel.add(this.userPropertiesBinding.getWidget());
         this.centralPanel.setSize(325, 335);
+        this.centralPanel.getButtonBar().add(saveButton);
+//        this.centralPanel.getButtonBar().add(closeButton);
         super.add(this.centralPanel);
-        super.getButtonBar().add(saveButton);
-        super.getButtonBar().add(closeButton);
     }
 
-    public void show(GPUserManageDetail userDetail, List<String> roles) {
+    public void setData(GPUserManageDetail userDetail, List<String> roles) {
         this.user = userDetail;
-        super.show();
         this.userPropertiesBinding.populateRoles(roles);
     }
 
-    @Override
-    public void initSize() {
-        super.setSize(340, 350);
-    }
-
-    @Override
-    public void setWindowProperties() {
-        super.setHeading("User Properties");
+    private void setWidgetProperties() {
         super.setLayout(new BorderLayout());
-        super.setResizable(false);
-        super.setModal(true);
-        super.setCollapsible(false);
-        super.setPlain(true);
-        this.addWindowListener(new WindowListener() {
+        this.addWidgetListener(new WidgetListener() {
             @Override
-            public void windowShow(WindowEvent we) {
-                userPropertiesBinding.bindModel(user);
+            public void widgetAttached(ComponentEvent ce) {
+                super.widgetAttached(ce);
+                if (user != null) {
+                    userPropertiesBinding.bindModel(user);
+                }
             }
         });
     }
@@ -159,8 +157,8 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     public void manageInsertUser() {
         user.setCreationDate(new Date());
         UserRemoteImpl.Util.getInstance().insertUser(user,
-                                                     GPAccountLogged.getInstance().getOrganization(),
-                                                     new AsyncCallback<Long>() {
+                GPAccountLogged.getInstance().getOrganization(),
+                new AsyncCallback<Long>() {
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
@@ -176,11 +174,11 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                 store.insert(user, 0);
                 store.commitChanges();
 
-                hide();
+//                hide();
 
                 // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully added",
-                                               "<ul><li>" + user.getUsername() + "</li></ul>");
+                        "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }
@@ -200,13 +198,17 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             @Override
             public void onSuccess(Long result) {
                 store.commitChanges();
-                hide();
+//                hide();
 
                 // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully modify",
-                                               "<ul><li>" + user.getUsername() + "</li></ul>");
+                        "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
+    }
+
+    public void setStore(ListStore<GPUserManageDetail> store) {
+        this.store = store;
     }
 
     @Override
@@ -214,5 +216,10 @@ public class UserPropertiesWidget extends GeoPlatformWindow
         store.rejectChanges();
         userPropertiesBinding.unBindModel();
         userPropertiesBinding.resetFields();
+    }
+
+    @Override
+    public final void subclassCallToInit() {
+        super.init();
     }
 }

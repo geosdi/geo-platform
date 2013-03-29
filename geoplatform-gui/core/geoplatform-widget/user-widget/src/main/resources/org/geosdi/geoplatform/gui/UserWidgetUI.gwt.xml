@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">
-<module>    
+<module>
     <source path="client" />
     
     <entry-point class="org.geosdi.geoplatform.gui.client.UserWidgetUI" />
     
     <servlet path="/UserRemote" class="org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl" />
+    
+    <define-property name="gssm.presence" values="true,false"/>
+    
+    <replace-with class="org.geosdi.geoplatform.gui.client.widget.GSSecurityManagerWidget">
+        <when-type-is class="org.geosdi.geoplatform.gui.client.widget.UserPropertiesManagerWidget"/>
+        <when-property-is name="gssm.presence" value="true"/>
+    </replace-with>
 </module>

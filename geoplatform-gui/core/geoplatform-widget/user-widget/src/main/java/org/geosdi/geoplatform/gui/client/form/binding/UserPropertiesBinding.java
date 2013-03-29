@@ -141,6 +141,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.passwordField = new TextField<String>();
         this.passwordField.setPassword(true);
+        this.passwordField.setFieldLabel("Password");
         this.passwordField.setValidator(this.validatorPassword());
 
         this.passwordRepeatField = new TextField<String>();

@@ -36,60 +36,60 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.common.collect.Lists;
+import com.google.gwt.event.shared.HandlerRegistration;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.action.menu.expander.GPMenuFolderExpander;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddLayersFromCopyMenuEvent;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PasteLayerAction extends MenuBaseAction {
+public class PasteLayerAction extends PasteLayerBaseAction {
 
-    private TreePanel<GPBeanTreeModel> treePanel;
-    private List<GPLayerBean> layersToCopy = Lists.newArrayList();
-    private GPMenuFolderExpander folderExpander;
+    private HandlerRegistration handlerRegistration;
 
-    public PasteLayerAction(TreePanel<GPBeanTreeModel> treePanel) {
-        super("PasteLayers", LayerResources.ICONS.paste());
-        this.treePanel = treePanel;
-        this.folderExpander = new GPMenuFolderExpander(treePanel, this);
+    @Inject
+    public PasteLayerAction(GinTreePanel ginTreePanel, GPEventBus theBus) {
+        super("PasteLayers", LayerResources.ICONS.paste(), ginTreePanel.get(),
+                theBus);
+
+        this.handlerRegistration = super.addPasteLayerMenuHandler();
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
+        GPBeanTreeModel itemSelected = this.tree.getSelectionModel().getSelectedItem();
         if ((!(itemSelected instanceof FolderTreeNode)) || this.layersToCopy == null) {
             throw new IllegalArgumentException(
                     "It is possible to past only copied layers into a Folder");
         }
-        if (!this.treePanel.isExpanded(itemSelected)) {
+        if (!this.tree.isExpanded(itemSelected)) {
             this.folderExpander.checkNodeState();
         } else {
             this.executePaste();
         }
     }
 
-    private void executePaste() {
+    @Override
+    protected void executePaste() {
         LayerHandlerManager.fireEvent(new AddLayersFromCopyMenuEvent(
                 layersToCopy));
     }
 
-    /**
-     * @param layerToCopy the layerToCopy to set
-     */
-    public void setLayerToCopy(List<GPLayerTreeModel> layersToCopy) {
+    @Override
+    public void bindLayersToCopy(List<GPLayerTreeModel> layersToCopy) {
         this.layersToCopy.clear();
         this.layersToCopy.addAll(layersToCopy);
+
+        super.setMustBeEnabled(true);
     }
 
 }

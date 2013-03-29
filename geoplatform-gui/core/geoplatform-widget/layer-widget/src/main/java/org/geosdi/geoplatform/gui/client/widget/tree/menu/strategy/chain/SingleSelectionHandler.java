@@ -39,8 +39,11 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.config.annotation.SingleSelection;
+import org.geosdi.geoplatform.gui.client.widget.tree.menu.store.keybuilder.SelectionCompositeKeyBuilder;
 import org.geosdi.geoplatform.gui.client.widget.tree.menu.strategy.SingleSelectionMenuStrategy;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.store.SingleSelectionCompositeKey;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
 import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.TreeMenuStrategyManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -54,10 +57,14 @@ public class SingleSelectionHandler extends SelectionChainHandler {
 
     @Inject
     private SingleSelectionMenuStrategy singleSelectionStrategy;
+    private final SelectionCompositeKeyBuilder compositeKeyBuilder;
 
     @Inject
-    public SingleSelectionHandler(MultiSelectionHandler theSuccessor) {
+    public SingleSelectionHandler(MultiSelectionHandler theSuccessor,
+            @SingleSelection SelectionCompositeKeyBuilder theCompositeKeyBuilder) {
         super.setSuccessor(theSuccessor);
+
+        this.compositeKeyBuilder = theCompositeKeyBuilder;
     }
 
     @Override
@@ -73,8 +80,14 @@ public class SingleSelectionHandler extends SelectionChainHandler {
             List<GPBeanTreeModel> selections) {
         strategyManager.setMenuStrategy(singleSelectionStrategy);
 
-        return strategyManager.getMenu(new SingleSelectionCompositeKey(
-                selections.get(0).getTreeCompositeType()));
+        return strategyManager.getMenu(super.bindSelection(selections));
+    }
+
+    @Override
+    protected StoreCompositeKey buildStoreCompositeKey(
+            List<GPBeanTreeModel> selections) {
+
+        return this.compositeKeyBuilder.buildStoreCompositeKey(selections);
     }
 
 }

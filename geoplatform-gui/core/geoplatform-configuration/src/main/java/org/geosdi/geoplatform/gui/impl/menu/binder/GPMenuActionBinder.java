@@ -90,7 +90,8 @@ public class GPMenuActionBinder implements MenuActionBinder {
 
             this.addMenuActionEnableHandler(action, item);
 
-            action.setEnabled(tool.isEnabled());
+            action.setEnabled((action.isMustBeEnabled())
+                              ? action.isMustBeEnabled() : tool.isEnabled());
         }
 
         menu.add(item);

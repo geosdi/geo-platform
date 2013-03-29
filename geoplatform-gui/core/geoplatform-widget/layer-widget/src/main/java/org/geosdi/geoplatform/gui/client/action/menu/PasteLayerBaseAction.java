@@ -33,42 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.menu.strategy;
+package org.geosdi.geoplatform.gui.client.action.menu;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.collect.Lists;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
-import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStoreRepository;
-import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.AbstractTreeMenuStrategy;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.action.menu.expander.GPMenuFolderExpander;
+import org.geosdi.geoplatform.gui.client.puregwt.menu.handler.PasteLayerMenuHandler;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class MultiSelectionMenuStrategy extends AbstractTreeMenuStrategy {
+public abstract class PasteLayerBaseAction extends MenuBaseAction implements
+        PasteLayerMenuHandler {
 
-    @Inject
-    private TreeMenuStoreRepository storeRepository;
+    protected final TreePanel<GPBeanTreeModel> tree;
+    protected final GPMenuFolderExpander folderExpander;
+    protected final GPEventBus bus;
+    protected List<GPLayerBean> layersToCopy = Lists.newArrayList();
 
-    @Inject
-    public MultiSelectionMenuStrategy(GinTreePanel ginTreePanel) {
-        super(ginTreePanel.get());
+    public PasteLayerBaseAction(String title, AbstractImagePrototype image,
+            TreePanel<GPBeanTreeModel> theTree, GPEventBus theBus) {
+        super(title, image);
+
+        this.tree = theTree;
+        this.bus = theBus;
+        this.folderExpander = new GPMenuFolderExpander(tree, this);
     }
 
-    @Override
-    public Menu getMenu(StoreCompositeKey key) {
-        List<? extends GPMenuGenericTool> tools = this.storeRepository.getMenuCompositeStore().getTools(
-                key);
+    protected abstract void executePaste();
 
-        return ((tools != null) && (tools.size() > 0)) ? super.buildMenu(key,
-                tools) : null;
+    protected HandlerRegistration addPasteLayerMenuHandler() {
+        return this.bus.addHandler(PasteLayerMenuHandler.TYPE, this);
     }
 
 }

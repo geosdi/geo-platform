@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.config.annotation.MultiSelection;
+import org.geosdi.geoplatform.gui.client.config.annotation.SingleSelection;
 import org.geosdi.geoplatform.gui.client.config.provider.DropTargetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.GPLayerTreeDecoratorProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.GPRootTreeNodeProvider;
@@ -51,6 +53,9 @@ import org.geosdi.geoplatform.gui.client.widget.LayerTreeWidget;
 import org.geosdi.geoplatform.gui.client.widget.decorator.GPLayerTreeDecorator;
 import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.LayerTreeToolbar;
+import org.geosdi.geoplatform.gui.client.widget.tree.menu.store.keybuilder.MultiSelectionCompositeKeyBuilder;
+import org.geosdi.geoplatform.gui.client.widget.tree.menu.store.keybuilder.SelectionCompositeKeyBuilder;
+import org.geosdi.geoplatform.gui.client.widget.tree.menu.store.keybuilder.SingleSelectionCompositeKeyBuilder;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu.LayerTreeBasicMenu;
 import org.geosdi.geoplatform.gui.client.widget.tree.properties.handler.GPTreeHandlerManager;
 import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStoreRepository;
@@ -91,6 +96,13 @@ public class LayerTreeGinConfigurator extends AbstractGinModule {
                 LayerTreeBasicMenuProvider.class).in(Singleton.class);
 
         bind(TreeMenuStoreRepository.class).in(Singleton.class);
+
+        bind(SelectionCompositeKeyBuilder.class).annotatedWith(
+                SingleSelection.class).to(
+                SingleSelectionCompositeKeyBuilder.class);
+
+        bind(SelectionCompositeKeyBuilder.class).annotatedWith(
+                MultiSelection.class).to(MultiSelectionCompositeKeyBuilder.class);
     }
 
 }

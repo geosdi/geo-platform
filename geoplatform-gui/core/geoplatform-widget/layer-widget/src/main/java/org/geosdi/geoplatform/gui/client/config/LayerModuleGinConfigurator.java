@@ -36,7 +36,10 @@
 package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.LayerWidgetUI;
+import org.geosdi.geoplatform.gui.client.action.menu.CopyLayerAction;
+import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
 import org.geosdi.geoplatform.gui.client.action.projects.ShareProjectCommandAction;
 import org.geosdi.geoplatform.gui.client.action.temporary.TreeMenuActionFactory;
 import org.geosdi.geoplatform.gui.client.config.provider.IMementoSaveProvider;
@@ -57,6 +60,10 @@ public class LayerModuleGinConfigurator extends AbstractGinModule {
         bind(ShareProjectCommandAction.class).asEagerSingleton();
         bind(MementoSaveCacheManager.class).asEagerSingleton();
         bind(IMementoSave.class).toProvider(IMementoSaveProvider.class);
+        
+        bind(PasteLayerAction.class).in(Singleton.class);
+        
+        bind(CopyLayerAction.class).in(Singleton.class);
     }
-
+    
 }

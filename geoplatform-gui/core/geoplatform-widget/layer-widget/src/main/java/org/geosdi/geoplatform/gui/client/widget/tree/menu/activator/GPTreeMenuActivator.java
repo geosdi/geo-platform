@@ -86,21 +86,6 @@ public class GPTreeMenuActivator implements TreeMenuActivator {
                         tree.getSelectionModel().getSelectedItems());
                 tree.setContextMenu((menu != null) ? menu
                                     : treeBasicMenu.getBasicMenu());
-//                if (tree.getSelectionModel().getSelectedItems().size() > 1) {
-//                    boolean isOnlyLayers = Boolean.TRUE;
-//                    for (GPBeanTreeModel element : tree.getSelectionModel().getSelectedItems()) {
-//                        if (!(element instanceof GPLayerTreeModel)) {
-//                            isOnlyLayers = Boolean.FALSE;
-//                            break;
-//                        }
-//                    }
-//                    tree.setContextMenu(
-//                            TreeContextMenuFactory.getMultiSelectionMenu(
-//                            isOnlyLayers));
-//                } else {
-//                    GPBeanTreeModel selectedItem = tree.getSelectionModel().getSelectedItem();
-//                    tree.setContextMenu(selectedItem.getTreeContextMenu());
-//                }
             }
 
         });

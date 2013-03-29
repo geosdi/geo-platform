@@ -35,44 +35,50 @@
  */
 package org.geosdi.geoplatform.gui.action.menu;
 
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.extjs.gxt.ui.client.Registry;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
-import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeIconHandler;
-import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class MenuBaseSecureAction extends MenuSecureAction
-        implements HasMenuActionChangeIconHandler {
+public abstract class MenuBaseSecureAction extends MenuBaseAction {
 
-    private AbstractImagePrototype image;
+    private GPTrustedLevel trustedLevel;
 
-    public MenuBaseSecureAction(GPTrustedLevel trustedLevel, String title, AbstractImagePrototype image) {
-        super(trustedLevel, title);
-        this.image = image;
-    }
-
-    /**
-     * @return the image
-     */
-    public AbstractImagePrototype getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(AbstractImagePrototype image) {
-        this.image = image;
-        this.handlerManager.fireEvent(new MenuActionChangeIconEvent(image));
+    public MenuBaseSecureAction(GPTrustedLevel theTrustedLevel, String theTitle,
+            AbstractImagePrototype theImage) {
+        super(theTitle, theImage);
+        this.trustedLevel = theTrustedLevel;
     }
 
     @Override
-    public HandlerRegistration addMenuActionChangeIconHandler(MenuActionChangeIconHandler actionHandler) {
-        return this.handlerManager.addHandler(MenuActionChangeIconEvent.TYPE, actionHandler);
+    public boolean isEnabled() {
+        IGPAccountDetail accountDetail = Registry.get(
+                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        // Application has neither an authority nor a trusted level
+        GPTrustedLevel accountTrustedLevel = accountDetail.getTrustedLevel();
+
+        return (accountTrustedLevel == null) ? false
+               : accountTrustedLevel.ordinal() >= this.trustedLevel.ordinal();
     }
+
+    /**
+     * @param enabled the enabled to set
+     */
+    @Override
+    public void setEnabled(boolean enabled) {
+        if (this.isEnabled()) {
+            super.setEnabled(enabled);
+        } else {
+            super.setEnabled(Boolean.FALSE);
+        }
+    }
+
 }

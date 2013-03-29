@@ -44,7 +44,6 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.AddFolderMenuAction;
-import org.geosdi.geoplatform.gui.client.action.menu.CopyLayerAction;
 import org.geosdi.geoplatform.gui.client.action.menu.CreateFolderViewportAction;
 import org.geosdi.geoplatform.gui.client.action.menu.CreateLayerViewportAction;
 import org.geosdi.geoplatform.gui.client.action.menu.DeleteElementsMenuAction;
@@ -85,11 +84,11 @@ public class TreeContextMenuFactory {
 
     public static void setTreePanel(GPTreePanel<GPBeanTreeModel> treePanel) {
         TreeContextMenuFactory.treePanel = treePanel;
-        pasteAction = new PasteLayerAction(treePanel);
-        pasteMenuItem = new MenuItem("Paste in Folder");
-        pasteMenuItem.setIcon(LayerResources.ICONS.paste());
-        pasteMenuItem.setEnabled(Boolean.FALSE);
-        pasteMenuItem.addSelectionListener(pasteAction);
+//        pasteAction = new PasteLayerAction(treePanel);
+//        pasteMenuItem = new MenuItem("Paste in Folder");
+//        pasteMenuItem.setIcon(LayerResources.ICONS.paste());
+//        pasteMenuItem.setEnabled(Boolean.FALSE);
+//        pasteMenuItem.addSelectionListener(pasteAction);
     }
 
     public static Menu getMultiSelectionMenu(boolean isOnlyLayers) {
@@ -104,9 +103,9 @@ public class TreeContextMenuFactory {
             multipleSelectionContextMenu.add(deleteElements);
             copyMultiLayers = new MenuItem("Copy Layers");
             copyMultiLayers.setIcon(LayerResources.ICONS.copy());
-            copyMultiLayers.addSelectionListener(
-                    new CopyLayerAction(treePanel,
-                    pasteAction, pasteMenuItem));
+//            copyMultiLayers.addSelectionListener(
+//                    new CopyLayerAction(treePanel,
+//                    pasteAction, pasteMenuItem));
         }
         if (isOnlyLayers) {
             multipleSelectionContextMenu.add(copyMultiLayers);
@@ -171,9 +170,9 @@ public class TreeContextMenuFactory {
 
             MenuItem copyMenuItem = new MenuItem("Copy Layer");
             copyMenuItem.setIcon(LayerResources.ICONS.copy());
-            copyMenuItem.addSelectionListener(new CopyLayerAction(treePanel,
-                    pasteAction,
-                    pasteMenuItem));
+//            copyMenuItem.addSelectionListener(new CopyLayerAction(treePanel,
+//                    pasteAction,
+//                    pasteMenuItem));
 
             layerContextMenu.add(copyMenuItem);
 

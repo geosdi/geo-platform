@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.tree.menu.strategy.chain;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
 import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.TreeMenuStrategyManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -59,6 +60,13 @@ public abstract class SelectionChainHandler {
     }
 
     protected abstract Menu bindStrategy(TreeMenuStrategyManager strategyManager,
+            List<GPBeanTreeModel> selections);
+
+    protected StoreCompositeKey bindSelection(List<GPBeanTreeModel> selections) {
+        return buildStoreCompositeKey(selections);
+    }
+
+    protected abstract StoreCompositeKey buildStoreCompositeKey(
             List<GPBeanTreeModel> selections);
 
     /**

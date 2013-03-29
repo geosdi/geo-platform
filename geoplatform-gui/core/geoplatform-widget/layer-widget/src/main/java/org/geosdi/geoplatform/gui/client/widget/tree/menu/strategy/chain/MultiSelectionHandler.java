@@ -39,7 +39,10 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.config.annotation.MultiSelection;
+import org.geosdi.geoplatform.gui.client.widget.tree.menu.store.keybuilder.SelectionCompositeKeyBuilder;
 import org.geosdi.geoplatform.gui.client.widget.tree.menu.strategy.MultiSelectionMenuStrategy;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
 import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.TreeMenuStrategyManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -53,6 +56,13 @@ public class MultiSelectionHandler extends SelectionChainHandler {
 
     @Inject
     private MultiSelectionMenuStrategy multiSelectionStrategy;
+    private final SelectionCompositeKeyBuilder compositeKeyBuilder;
+
+    @Inject
+    public MultiSelectionHandler(
+            @MultiSelection SelectionCompositeKeyBuilder theCompositeKeyBuilder) {
+        this.compositeKeyBuilder = theCompositeKeyBuilder;
+    }
 
     @Override
     public Menu buildMenu(TreeMenuStrategyManager strategyManager,
@@ -65,7 +75,16 @@ public class MultiSelectionHandler extends SelectionChainHandler {
     @Override
     protected Menu bindStrategy(TreeMenuStrategyManager strategyManager,
             List<GPBeanTreeModel> selections) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        strategyManager.setMenuStrategy(multiSelectionStrategy);
+
+        return strategyManager.getMenu(super.bindSelection(selections));
+    }
+
+    @Override
+    protected StoreCompositeKey buildStoreCompositeKey(
+            List<GPBeanTreeModel> selections) {
+
+        return compositeKeyBuilder.buildStoreCompositeKey(selections);
     }
 
 }

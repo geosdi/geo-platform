@@ -50,8 +50,6 @@ public class UserPropertiesTabWidget extends GeoPlatformTabWidget {
     public final static short TAB_WIDGET_WIDTH = UserPropertiesManagerWidget.WIDGET_WIDTH - 15;
     public final static short TAB_WIDGET_HEIGHT = UserPropertiesManagerWidget.WIDGET_HEIGHT - 97;
     public final static short TAB_FIELDSET_WIDTH = 350;
-//    @Inject
-//    private UserPropertiesWidget userPropertiesTab;
 
     public UserPropertiesTabWidget() {
         super(Boolean.TRUE);
@@ -73,6 +71,12 @@ public class UserPropertiesTabWidget extends GeoPlatformTabWidget {
         super.setAnimScroll(true);
         super.setTabScroll(true);
         super.setCloseContextMenu(Boolean.FALSE);
+    }
+
+    @Override
+    protected void onAttach() {
+        super.onAttach();
+        super.setSelection(UserModuleInjector.MainInjector.getInstance().getUserPropertiesWidget());
     }
 
     @Override

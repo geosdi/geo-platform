@@ -115,6 +115,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     public FormPanel createFormPanel() {
         FormPanel fp = new FormPanel();
         fp.setHeaderVisible(false);
+        fp.setBodyBorder(Boolean.FALSE);
 
         this.nameField = new TextField<String>();
         this.nameField.setId(GPSimpleUserKeyValue.NAME.toString());
@@ -232,7 +233,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         fp.add(tempAndExpiredFields);
         fp.add(this.userRoleComboBox);
         fp.add(this.trustedLevelComboBox);
-
+        fp.setBorders(Boolean.FALSE);
         return fp;
     }
 

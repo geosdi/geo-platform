@@ -95,6 +95,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.finalizeInitOperations();
         //Using defered binding will be select the right widget to show
         this.userPropertiesManagerWidget = GWT.create(UserPropertiesManagerWidget.class);
+        this.userPropertiesWidget.setWindowToClose(this.userPropertiesManagerWidget);
         //
         super.selectButton.setText("Modify User");
         super.search.setFieldLabel("Find User");

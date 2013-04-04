@@ -19,8 +19,8 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-api</artifactId>

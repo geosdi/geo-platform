@@ -192,7 +192,7 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
         Assert.assertEquals(0, cswService.getRecordsCount(catalogFinder));
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testGetRecordsOurCountAreaItaly() throws Exception {
         int tot = cswService.getRecordsCount(catalogFinder);
         Assert.assertEquals(2932, tot);

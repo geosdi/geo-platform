@@ -177,11 +177,13 @@ public class FeatureWidget extends GeoPlatformWindow
         this.disableButtons();
 
         Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
-                                  new SelectionListener<ButtonEvent>() {
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 hide();
             }
+
         });
         super.addButton(close);
     }
@@ -270,4 +272,5 @@ public class FeatureWidget extends GeoPlatformWindow
         resetButton.enable();
         saveButton.enable();
     }
+
 }

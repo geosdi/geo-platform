@@ -39,8 +39,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement(name = "ClassToXMLMap")
 @XStreamAlias("ClassToXMLMap")
@@ -57,8 +58,7 @@ public class ClassToXMLMap {
     }
 
     /**
-     * @param data
-     *            the data to set
+     * @param data the data to set
      */
     public void setData(String data) {
         this.data = data;
@@ -72,8 +72,7 @@ public class ClassToXMLMap {
     }
 
     /**
-     * @param history
-     *            the history to set
+     * @param history the history to set
      */
     public void setHistory(String history) {
         this.history = history;
@@ -81,11 +80,12 @@ public class ClassToXMLMap {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "ClassToXMLMap [data=" + data + ", history=" + history + "]";
     }
+
 }

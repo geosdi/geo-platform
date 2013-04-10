@@ -35,97 +35,111 @@
  */
 package org.geosdi.geoplatform.oxm;
 
+import java.io.File;
 import java.io.IOException;
 import org.geosdi.geoplatform.mock.ClassToXMLMap;
+import org.geosdi.geoplatform.oxm.jaxb.GenericJaxbMarshaller;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@SuppressWarnings("deprecation")
-public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContextTests {
-    
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:"
+    + "applicationContext-Test.xml"})
+public class GeoPlatformOXMTest {
 
-    @Autowired
-    @Qualifier(value = "castor")
-    private GeoPlatformMarshall castor;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    @Qualifier(value = "jax")
-    private GeoPlatformMarshall jax;
+    @Qualifier(value = "castor")
+    private GPGenericMarshaller castor;
+    //
+    @Autowired
+    private GenericJaxbMarshaller jax;
     //
     @Autowired
     @Qualifier(value = "xtream")
-    private GeoPlatformMarshall xtream;
+    private GPGenericMarshaller xtream;
     //
     @Autowired
     @Qualifier(value = "jibx")
-    private GeoPlatformMarshall jibx;
+    private GPGenericMarshaller jibx;
     //
     private ClassToXMLMap message;
 
-    @Override
-    protected void onSetUp() throws Exception {
+    @Before
+    public void onSetUp() throws Exception {
         message = new ClassToXMLMap();
         message.setData("I am data");
         message.setHistory("in the past");
-        super.onSetUp();
     }
 
     @Test
     public void testCastor() throws Exception {
         String castorFile = "target/castor.xml";
-        castor.saveXML(message, castorFile);
+        File f = new File(castorFile);
 
-        ClassToXMLMap castorMap = (ClassToXMLMap) castor.loadFromXML(castorFile);
-        assertNotNull(castorMap);
+        castor.marshal(message, f);
 
-        logger.info("CASTOR BEAN  ******************** {}", castorMap);
+        ClassToXMLMap castorMap = (ClassToXMLMap) castor.unmarshal(f);
+        Assert.assertNotNull(castorMap);
+
+        logger.info("CASTOR BEAN  ******************** {}", castorMap + "\n");
 
     }
 
     @Test
     public void testJaxB() throws Exception {
         String jaxbFile = "target/jaxb.xml";
-        jax.saveXML(message, jaxbFile);
+        File f = new File(jaxbFile);
 
-        ClassToXMLMap jaxbMap = (ClassToXMLMap) jax.loadFromXML(jaxbFile);
-        assertNotNull(jaxbMap);
+        jax.marshal(message, f);
 
-        logger.info("JAX BEAN ***************** {}", jaxbMap);
+        ClassToXMLMap jaxbMap = (ClassToXMLMap) jax.unmarshal(f);
+        Assert.assertNotNull(jaxbMap);
+
+        logger.info("JAX BEAN ***************** {}", jaxbMap + "\n");
     }
 
     @Test
     public void testXStream() throws Exception {
         String xtreamFile = "target/xtream.xml";
-        xtream.saveXML(message, xtreamFile);
+        File f = new File(xtreamFile);
 
-        ClassToXMLMap xstreamMap = (ClassToXMLMap) xtream.loadFromXML(xtreamFile);
-        assertNotNull(xtream.loadFromXML(xtreamFile));
+        xtream.marshal(message, f);
 
-        logger.info("XSTREAM BEAN *************** {}", xstreamMap);
+        ClassToXMLMap xstreamMap = (ClassToXMLMap) xtream.
+                unmarshal(f);
+
+        Assert.assertNotNull(xstreamMap);
+
+        logger.info("XSTREAM BEAN *************** {}", xstreamMap + "\n");
     }
-    
+
     @Test
     public void testJibx() throws IOException {
         String jibxFile = "target/jibx.xml";
-        jibx.saveXML(message, jibxFile);
+        File f = new File(jibxFile);
 
-        ClassToXMLMap jibxMap = (ClassToXMLMap) jibx.loadFromXML(jibxFile);
-        assertNotNull(jibx.loadFromXML(jibxFile));
+        jibx.marshal(message, f);
 
-        logger.info("JIXB BEAN *************** {}", jibxMap);
+        ClassToXMLMap jibxMap = (ClassToXMLMap) jibx.unmarshal(f);
+
+        Assert.assertNotNull(jibxMap);
+
+        logger.info("JIXB BEAN *************** {}", jibxMap + "\n");
     }
 
-    @Override
-    protected String[] getConfigLocations() {
-        return new String[]{"classpath:applicationContext.xml"};
-    }
 }

@@ -141,10 +141,13 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
 
         this.wms = this.mapLayerBuilder.buildLayer(layer);
 
-        this.controlFeature = this.featureControlBuilder.buildControl(new GetFeatureModel() {
+        this.controlFeature = this.featureControlBuilder.buildControl(
+                new GetFeatureModel() {
+
             @Override
             public String getFeatureNameSpace() {
-                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).getFeatureNameSpace()
+                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).
+                        getFeatureNameSpace()
                         : schema.getTargetNamespace();
             }
 
@@ -153,7 +156,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
                 int pos = layer.getName().indexOf(":");
 
                 return pos > 0 ? layer.getName().substring(pos + 1,
-                                                           layer.getName().length()) : layer.getName();
+                        layer.getName().length()) : layer.getName();
             }
 
             @Override
@@ -163,7 +166,8 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
 
             @Override
             public String getGeometryName() {
-                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).getGeometryName()
+                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).
+                        getGeometryName()
                         : schema.getGeometry().getName();
             }
 
@@ -171,14 +175,17 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
             public WMS getWMSLayer() {
                 return (WMS) wms;
             }
+
         });
 
         Timer t = new Timer() {
+
             @Override
             public void run() {
                 loadLayerOnMap();
                 notifyStatus();
             }
+
         };
 
         t.schedule(1000);
@@ -196,10 +203,10 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
         this.mapWidget.getMap().addControl(controlFeature);
 
         controlFeature.getEvents().register("featureselected", this.wms,
-                                            this.selectFeature);
+                this.selectFeature);
 
         controlFeature.getEvents().register("featureunselected", this.wms,
-                                            this.unSelectFeature);
+                this.unSelectFeature);
 
         Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
 
@@ -211,6 +218,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
     private void notifyStatus() {
         this.bus.fireEvent(
                 new FeatureStatusBarEvent("WFS Layer loaded",
-                                          FeatureStatusBarType.STATUS_OK));
+                FeatureStatusBarType.STATUS_OK));
     }
+
 }

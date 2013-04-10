@@ -41,7 +41,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.connector.security.CatalogSecurityConnection;
-import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
+import org.geosdi.geoplatform.oxm.GPGenericMarshaller;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +49,7 @@ import org.springframework.beans.factory.annotation.Value;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogGetCapabilitiesBean implements InitializingBean {
 
@@ -64,7 +64,7 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
     String snipcPassword;
     //
     @Autowired
-    private GeoPlatformMarshall xStreamCatalog;
+    private GPGenericMarshaller xStreamCatalog;
     //
     private CatalogSecurityConnection securityConnection;
 
@@ -74,15 +74,15 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
     }
 
     /**
-     * Bind CSW Server URL with Control for Server Version.
-     * The standard CSW Server version must be 2.0.2
-     * 
+     * Bind CSW Server URL with Control for Server Version. The standard CSW
+     * Server version must be 2.0.2
+     *
      * @param urlServer
-     * @return  CatalogCapabilities
-     * 
+     * @return CatalogCapabilities
+     *
      * @throws MalformedURLException
      * @throws IOException
-     * @throws CatalogVersionException 
+     * @throws CatalogVersionException
      */
     public CatalogCapabilities bindUrl(String urlServer)
             throws MalformedURLException, IOException, CatalogVersionException {
@@ -106,10 +106,14 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
         CatalogCapabilities catalogGetCapabilities = null;
         HttpURLConnection conn = null;
         try {
-            URL url = new URL(this.convertUrl(urlServer) + CSW_CABABILITIES_REQUEST);
+            URL url = new URL(
+                    this.convertUrl(urlServer) + CSW_CABABILITIES_REQUEST);
 
             if (urlServer.startsWith("https")) {
-                /** @@@@@@@@@@@@@@@ TODO FIX ME @@@@@@@@@@@@@@@@@@@@ **/
+                /**
+                 * @@@@@@@@@@@@@@@ TODO FIX ME
+                 * @@@@@@@@@@@@@@@@@@@@ *
+                 */
                 if (urlServer.contains("snipc.protezionecivile.it")) {
                     conn = this.securityConnection.getSecureConnectionWithAuth(
                             url, snipcUsername, snipcPassword);
@@ -120,8 +124,8 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
                 conn = (HttpURLConnection) url.openConnection();
             }
 
-            catalogGetCapabilities = (CatalogCapabilities) this.xStreamCatalog.loadFromStream(
-                    conn.getInputStream());
+            catalogGetCapabilities = (CatalogCapabilities) this.xStreamCatalog.
+                    unmarshal(conn.getInputStream());
 
         } finally {
             if (conn != null) {
@@ -134,7 +138,8 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
 
     private void checkCSWServerVersion(CatalogCapabilities capabilitiesBean)
             throws CatalogVersionException {
-        if (!capabilitiesBean.getServiceIdentification().getServiceTypeVersion().equals(
+        if (!capabilitiesBean.getServiceIdentification().getServiceTypeVersion().
+                equals(
                 GPCatalogVersion.V202.toString())) {
             throw new CatalogVersionException("The version of CSW Service "
                     + "must be 2.0.2");
@@ -148,4 +153,5 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
         }
         return urlServer;
     }
+
 }

@@ -9,11 +9,11 @@
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>geoplatform-test</artifactId>
+    <artifactId>geoplatform-test-utils</artifactId>
     <version>1.6-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Geo-Platform :: == All Tests Module</name>
+    <name>Geo-Platform :: == Utils Tests Module</name>
 
     <repositories>
 		<!-- geoSDI -->
@@ -24,29 +24,8 @@
         </repository>
     </repositories>
     
-    <build>
-        <defaultGoal>test</defaultGoal>
-    </build>
-    
     <modules>
-        <module>geoplatform-services-test</module>
-        <module>geoplatform-ui-test</module>
-        <module>geoplatform-test-utils</module>
+        <module>geoplatform-oxm-model-test</module>
     </modules>
-    
-<!--    <profiles>
-        <profile>
-            <id>test.services</id>
-            <modules>
-                <module>geoplatform-services-test</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>test.ui</id>
-            <modules>
-                <module>geoplatform-ui-test</module>
-            </modules>
-        </profile>
-    </profiles>-->
 
 </project>

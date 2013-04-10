@@ -97,33 +97,14 @@
             <groupId>org.jibx</groupId>
             <artifactId>jibx-extras</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-oxm-model-test</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
             
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.jibx</groupId>
-                <artifactId>jibx-maven-plugin</artifactId>
-                <version>1.2.3</version>
-                <configuration>
-                    <schemaBindingDirectory>src/main/resources/jibx</schemaBindingDirectory>    
-                    <includes>
-                        <include>binding.xml</include>
-                    </includes>
-                    <load>true</load>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>compile-jibx-beans</id>
-                        <phase>process-test-classes</phase>
-                        <goals>
-                            <goal>test-bind</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
     
 </project>

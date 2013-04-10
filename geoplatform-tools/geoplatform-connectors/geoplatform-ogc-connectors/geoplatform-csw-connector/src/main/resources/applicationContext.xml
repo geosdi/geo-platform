@@ -21,9 +21,8 @@
     
     <import resource="classpath:applicationContext-jasypt.xml" />
     
-    <bean id="xStreamCatalog" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+    <bean id="xStreamCatalog" class="org.geosdi.geoplatform.oxm.xtream.GPXStreamMarshaller">
         <property name="marshaller" ref="xStreamCatalogMarshaller" />
-        <property name="unmarshaller" ref="xStreamCatalogMarshaller" />
     </bean>
     
     <bean id="xStreamCatalogMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">

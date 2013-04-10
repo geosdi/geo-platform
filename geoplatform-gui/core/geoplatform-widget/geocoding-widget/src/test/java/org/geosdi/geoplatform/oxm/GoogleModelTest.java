@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.oxm;
 import java.io.File;
 import java.io.IOException;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocodeRoot;
+import org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,55 +51,65 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:org/geosdi/geoplatform/gui/applicationContext-TEST.xml"})
-public class GoogleModelTest {
+@ContextConfiguration(
+            locations = {"classpath:org/geosdi/geoplatform/gui/applicationContext-TEST.xml"})
+    public class GoogleModelTest {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    private GeoPlatformMarshall geocoderGoogleJaxbMarshaller;
+        private final Logger logger = LoggerFactory.getLogger(this.getClass());
+        //
+        @Autowired
+        private GPJaxbMarshaller geocoderGoogleJaxbMarshaller;
 
-    @Test
-    public void testGeocoding() {
-        try {
-            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
-                    + "src/test/resources/googleReverseGeocodeExample.xml";
+        @Test
+        public void testGeocoding() {
+            try {
+                String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
+                        + "src/test/resources/googleReverseGeocodeExample.xml";
 
-            File source = new File(sourceFileUrl);
-            if (!source.canRead()) {
-                throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
+                File source = new File(sourceFileUrl);
+                if (!source.canRead()) {
+                    throw new IllegalArgumentException(
+                            "Source path " + sourceFileUrl + " is not valid");
+                }
+
+                GPGoogleGeocodeRoot geocode = (GPGoogleGeocodeRoot) geocoderGoogleJaxbMarshaller.
+                        unmarshal(source);
+                Assert.assertNotNull("The geocode is null", geocode);
+
+                logger.info(
+                        "\n\n\t GeoPlatform Google geocoding OXM parsing : {}\n\n",
+                        geocode);
+            } catch (IOException ex) {
+                Assert.fail(ex.getMessage());
             }
-
-            GPGoogleGeocodeRoot geocode = (GPGoogleGeocodeRoot) geocoderGoogleJaxbMarshaller.loadFromFile(source);
-            Assert.assertNotNull("The geocode is null", geocode);
-
-            logger.info("\n\n\t GeoPlatform Google geocoding OXM parsing : {}\n\n", geocode);
-        } catch (IOException ex) {
-            Assert.fail(ex.getMessage());
         }
-    }
 
-    @Test
-    public void testReverseGeocoding() {
-        try {
-            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
-                    + "src/test/resources/googleReverseGeocodeExample.xml";
+        @Test
+        public void testReverseGeocoding() {
+            try {
+                String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
+                        + "src/test/resources/googleReverseGeocodeExample.xml";
 
-            File source = new File(sourceFileUrl);
-            if (!source.canRead()) {
-                throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
+                File source = new File(sourceFileUrl);
+                if (!source.canRead()) {
+                    throw new IllegalArgumentException(
+                            "Source path " + sourceFileUrl + " is not valid");
+                }
+
+                GPGoogleGeocodeRoot geocode = (GPGoogleGeocodeRoot) geocoderGoogleJaxbMarshaller.
+                        unmarshal(source);
+                Assert.assertNotNull("The geocode is null", geocode);
+
+                logger.info(
+                        "\n\n\t GeoPlatform Google reverse geocoding OXM parsing : {}\n\n",
+                        geocode);
+            } catch (IOException ex) {
+                Assert.fail(ex.getMessage());
             }
-
-            GPGoogleGeocodeRoot geocode = (GPGoogleGeocodeRoot) geocoderGoogleJaxbMarshaller.loadFromFile(source);
-            Assert.assertNotNull("The geocode is null", geocode);
-
-            logger.info("\n\n\t GeoPlatform Google reverse geocoding OXM parsing : {}\n\n", geocode);
-        } catch (IOException ex) {
-            Assert.fail(ex.getMessage());
         }
+
     }
-}

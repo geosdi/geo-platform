@@ -33,21 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.oxm.xtream;
+package org.geosdi.geoplatform.twitter;
 
-import org.geosdi.geoplatform.GPGenericMarshaller;
-import org.springframework.oxm.xstream.XStreamMarshaller;
+import com.google.gson.annotations.SerializedName;
+import java.util.Date;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPXStreamMarshaller extends GPGenericMarshaller<XStreamMarshaller> {
+public class Result {
+
+    @SerializedName(value = "created_at")
+    private Date createdAt;
+    @SerializedName(value = "from_user")
+    private String fromUser;
+    private String text;
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(String fromUser) {
+        this.fromUser = fromUser;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     @Override
-    public void setMarshaller(XStreamMarshaller theMarshaller) {
-        this.marshaller = theMarshaller;
+    public String toString() {
+        return "Result{" + "createdAt=" + createdAt + ", fromUser=" + fromUser + ", text=" + text + '}';
     }
 
 }

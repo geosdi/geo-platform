@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.oxm.castor;
 
-import org.geosdi.geoplatform.oxm.GPGenericMarshaller;
+import org.geosdi.geoplatform.GPGenericMarshaller;
 import org.springframework.oxm.castor.CastorMarshaller;
 
 /**

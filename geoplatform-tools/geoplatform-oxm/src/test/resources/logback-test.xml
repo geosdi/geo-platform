@@ -14,5 +14,9 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
+    
+    <logger name="org.springframework" level="info" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
 
 </configuration>

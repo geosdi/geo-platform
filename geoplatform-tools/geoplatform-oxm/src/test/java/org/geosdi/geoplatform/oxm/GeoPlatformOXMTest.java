@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.oxm;
 
 import java.io.File;
 import java.io.IOException;
+import org.geosdi.geoplatform.GPGenericMarshaller;
 import org.geosdi.geoplatform.mock.ClassToXMLMap;
 import org.geosdi.geoplatform.oxm.jaxb.GenericJaxbMarshaller;
 import org.junit.Assert;

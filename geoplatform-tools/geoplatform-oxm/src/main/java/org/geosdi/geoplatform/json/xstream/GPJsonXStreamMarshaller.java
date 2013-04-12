@@ -33,21 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.oxm.xtream;
+package org.geosdi.geoplatform.json.xstream;
 
-import org.geosdi.geoplatform.GPGenericMarshaller;
-import org.springframework.oxm.xstream.XStreamMarshaller;
+import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
+import org.geosdi.geoplatform.oxm.xtream.GPXStreamMarshaller;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPXStreamMarshaller extends GPGenericMarshaller<XStreamMarshaller> {
-
+public class GPJsonXStreamMarshaller extends GPXStreamMarshaller {
+    
     @Override
-    public void setMarshaller(XStreamMarshaller theMarshaller) {
-        this.marshaller = theMarshaller;
+    public void afterPropertiesSet() throws Exception {
+        super.afterPropertiesSet();
+        
+        this.marshaller.setStreamDriver(new JettisonMappedXmlDriver());
     }
-
+    
 }

@@ -33,21 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.oxm.xtream;
+package org.geosdi.geoplatform.twitter;
 
-import org.geosdi.geoplatform.GPGenericMarshaller;
-import org.springframework.oxm.xstream.XStreamMarshaller;
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPXStreamMarshaller extends GPGenericMarshaller<XStreamMarshaller> {
+public class SearchResults {
+
+    private String query;
+    @SerializedName(value = "completed_in")
+    private float completedIn;
+    private List<Result> results;
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public float getCompletedIn() {
+        return completedIn;
+    }
+
+    public void setCompletedIn(float completedIn) {
+        this.completedIn = completedIn;
+    }
+
+    public List<Result> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
+    }
 
     @Override
-    public void setMarshaller(XStreamMarshaller theMarshaller) {
-        this.marshaller = theMarshaller;
+    public String toString() {
+        return "SearchResults{" + "query=" + query + ", completedIn=" + completedIn + ", results=" + results + '}';
     }
 
 }

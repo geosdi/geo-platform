@@ -33,21 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.oxm.xtream;
+package org.geosdi.geoplatform.json.jaxb;
 
-import org.geosdi.geoplatform.GPGenericMarshaller;
-import org.springframework.oxm.xstream.XStreamMarshaller;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
+import java.net.URL;
+import javax.xml.transform.stream.StreamSource;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPXStreamMarshaller extends GPGenericMarshaller<XStreamMarshaller> {
+public interface GenericJsonJaxbMarshaller extends InitializingBean {
 
-    @Override
-    public void setMarshaller(XStreamMarshaller theMarshaller) {
-        this.marshaller = theMarshaller;
-    }
+    void setMarshaller(Jaxb2Marshaller theMarshaller);
+
+    void marshal(Object jaxbElement, File output) throws IOException;
+
+    void marshal(Object jaxbElement, Writer writer) throws IOException;
+
+    Object unmarshal(File f) throws Exception;
+    
+    Object unmarshal(InputStream is) throws Exception;
+    
+    Object unmarshal(String s) throws Exception;
+    
+    Object unmarshal(StreamSource streamSource) throws Exception;
 
 }

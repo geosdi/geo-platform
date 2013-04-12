@@ -33,14 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.oxm;
+package org.geosdi.geoplatform;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Reader;
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
@@ -48,6 +47,8 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stax.StAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import org.geosdi.geoplatform.oxm.GPMarshaller;
+import org.geosdi.geoplatform.oxm.GPUnmarshaller;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.oxm.support.AbstractMarshaller;
 

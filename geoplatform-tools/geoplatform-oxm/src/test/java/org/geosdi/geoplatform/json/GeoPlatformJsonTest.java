@@ -41,7 +41,9 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -123,10 +125,10 @@ public class GeoPlatformJsonTest {
 
     @Test
     public void testTwitterSearch() throws Exception {
-        URL url = new URL("http://search.twitter.com/search.json?q=jaxb");
+        URL url = new URL("http://search.twitter.com/search.json?q=jenkins");
 
         JsonDeserializer<Date> dateDeserializer = new JsonDeserializer<Date>() {
-            
+
             @Override
             public Date deserialize(JsonElement je, Type type,
                     JsonDeserializationContext jdc) throws JsonParseException {
@@ -142,7 +144,20 @@ public class GeoPlatformJsonTest {
         SearchResults r = gson.fromJson(new InputStreamReader(url.openStream()),
                 SearchResults.class);
 
-        logger.info("ECCOLI @@@@@@@@@@@@@@@@@@@@@@@@ " + r);
+        logger.info("FOUND : {} Results  ", r.getResults().size());
+
+        String googleJsonFile = "target/googleJson.json";
+        File f = new File(googleJsonFile);
+        
+        String json = gson.toJson(r);
+        
+        FileWriter fileWriter = new FileWriter(f, true);
+        BufferedWriter bufferFileWriter  = new BufferedWriter(fileWriter);
+        
+        bufferFileWriter.append(json);
+        
+        bufferFileWriter.close();
+                
     }
 
 }

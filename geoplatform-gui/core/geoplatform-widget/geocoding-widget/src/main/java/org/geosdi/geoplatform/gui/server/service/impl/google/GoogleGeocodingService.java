@@ -40,15 +40,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-
-
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodeBean;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocodeRoot;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleResult;
 import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
 import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
-import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
+import org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +54,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 @Service("googleGeocodingService")
 public class GoogleGeocodingService implements
@@ -68,14 +66,15 @@ public class GoogleGeocodingService implements
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    private GeoPlatformMarshall geocoderGoogleJaxbMarshaller;
+    private GPJaxbMarshaller geocoderGoogleJaxbMarshaller;
     //
     private ArrayList<GeocodingBean> beans;
 
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations(java.lang.String)
+     * @see
+     * org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations(java.lang.String)
      */
     @Override
     public ArrayList<GeocodingBean> findLocations(String address)
@@ -84,12 +83,14 @@ public class GoogleGeocodingService implements
 
         URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address="
                 + URLEncoder.encode(address, "UTF-8") + "&language=it&sensor=false");
-        
+
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-        GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.loadFromStream(conn.getInputStream());
+        GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.
+                unmarshal(conn.getInputStream());
 
-        if (oxmBean.getStatus().equals(ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
+        if (oxmBean.getStatus().equals(
+                ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
             for (GPGoogleResult result : oxmBean.getResultList()) {
                 beans.add(new GoogleGeocodeBean(result));
             }
@@ -97,4 +98,5 @@ public class GoogleGeocodingService implements
 
         return beans;
     }
+
 }

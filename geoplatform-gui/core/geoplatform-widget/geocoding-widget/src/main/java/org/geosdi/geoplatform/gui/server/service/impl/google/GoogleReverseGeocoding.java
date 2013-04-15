@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocodeRoot;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleResult;
 import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
 import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
-import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
+import org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 @Service("googleReverseGeocoding")
 public class GoogleReverseGeocoding implements IReverseGeocoding {
@@ -67,12 +67,14 @@ public class GoogleReverseGeocoding implements IReverseGeocoding {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    private GeoPlatformMarshall geocoderGoogleJaxbMarshaller;
+    private GPJaxbMarshaller geocoderGoogleJaxbMarshaller;
 
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.server.service.IReverseGeocoding#findLocation(double, double)
+     * @see
+     * org.geosdi.geoplatform.gui.server.service.IReverseGeocoding#findLocation(double,
+     * double)
      */
     @Override
     public GeocodingBean findLocation(double lat, double lon)
@@ -83,14 +85,20 @@ public class GoogleReverseGeocoding implements IReverseGeocoding {
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-        GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.loadFromStream(conn.getInputStream());
+        GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.
+                unmarshal(conn.getInputStream());
 
-        if (oxmBean.getStatus().equals(ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
+        if (oxmBean.getStatus().equals(
+                ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
             GPGoogleResult result = oxmBean.getResultList().get(0);
             return new GoogleGeocodeBean(result);
         }
 
-        /**@@@@@@@@@@@@@@ TODO FIXE ME @@@@@@@@@@@@@@@@@@@@ **/
+        /**
+         * @@@@@@@@@@@@@@ TODO FIXE ME
+         * @@@@@@@@@@@@@@@@@@@@ *
+         */
         return new GoogleGeocodeBean(GeocodingKeyValue.ZERO_RESULTS.toString());
     }
+
 }

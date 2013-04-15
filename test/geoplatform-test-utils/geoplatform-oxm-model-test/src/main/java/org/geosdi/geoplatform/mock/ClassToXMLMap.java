@@ -33,36 +33,59 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.menu;
+package org.geosdi.geoplatform.mock;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
-import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+import javax.xml.bind.annotation.XmlRootElement;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class MenuSecureAction extends GeoPlatformSecureAction<MenuEvent> {
+@XmlRootElement(name = "ClassToXMLMap")
+@XStreamAlias("ClassToXMLMap")
+public class ClassToXMLMap {
 
-    private String title;
+    private String data;
+    private String history;
 
-    public MenuSecureAction(GPTrustedLevel trustedLevel, String title) {
-        super(trustedLevel);
-        this.title = title;
+    /**
+     * @return the data
+     */
+    public String getData() {
+        return data;
     }
 
     /**
-     * @return the title
+     * @param data the data to set
      */
-    public String getTitle() {
-        return title;
+    public void setData(String data) {
+        this.data = data;
     }
 
     /**
-     * @param title the title to set
+     * @return the history
      */
-    public void setTitle(String title) {
-        this.title = title;
+    public String getHistory() {
+        return history;
     }
+
+    /**
+     * @param history the history to set
+     */
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
+    /**
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ClassToXMLMap [data=" + data + ", history=" + history + "]";
+    }
+
 }

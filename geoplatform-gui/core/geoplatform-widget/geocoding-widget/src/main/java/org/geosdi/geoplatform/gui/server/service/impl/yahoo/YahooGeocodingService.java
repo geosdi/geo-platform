@@ -47,58 +47,60 @@ import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooGeocodeRoot;
 import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooResult;
 import org.geosdi.geoplatform.gui.oxm.model.yahoo.enums.ResponseStatus;
 import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
-import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
+import org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 
+ *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
- * 
+ *
  */
 @Service("yahooGeocodingService")
 public class YahooGeocodingService implements IGeocodingService {
 
-	// URL prefix to the geocoder
-	private static final String GEOCODER_REQUEST_PREFIX_FOR_XML = "http://where.yahooapis.com/geocode";
-	//
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	//
-	@Autowired
-	private GeoPlatformMarshall geocoderYahooJaxbMarshaller;
-	//
-	private ArrayList<GeocodingBean> beans;
+    // URL prefix to the geocoder
+    private static final String GEOCODER_REQUEST_PREFIX_FOR_XML = "http://where.yahooapis.com/geocode";
+    //
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private GPJaxbMarshaller geocoderYahooJaxbMarshaller;
+    //
+    private ArrayList<GeocodingBean> beans;
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations(java.lang.String)
-	 */
-	@Override
-	public ArrayList<GeocodingBean> findLocations(String address)
-			throws IOException {
-		this.beans = new ArrayList<GeocodingBean>();
+    /**
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations(java.lang.String)
+     */
+    @Override
+    public ArrayList<GeocodingBean> findLocations(String address)
+            throws IOException {
+        this.beans = new ArrayList<GeocodingBean>();
 
-		URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?location="
-				+ URLEncoder.encode(address, "UTF-8")
-				+ "&locale=it_IT"
-				+ "&appid=oyPe8o3V34EgAqJ2h4KP8KDsxgsYfqncfoLF7nagje.a1wUYJeHBE2aQaua7");
+        URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?location="
+                + URLEncoder.encode(address, "UTF-8")
+                + "&locale=it_IT"
+                + "&appid=oyPe8o3V34EgAqJ2h4KP8KDsxgsYfqncfoLF7nagje.a1wUYJeHBE2aQaua7");
 
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-		GPYahooGeocodeRoot oxmBean = (GPYahooGeocodeRoot) this.geocoderYahooJaxbMarshaller
-				.loadFromStream(conn.getInputStream());
+        GPYahooGeocodeRoot oxmBean = (GPYahooGeocodeRoot) this.geocoderYahooJaxbMarshaller.
+                unmarshal(conn.getInputStream());
 
-		if (oxmBean.getError().equals(
-				ResponseStatus.EnumResponseStatus.CODE_NO_ERROR.getValue())) {
-			for (GPYahooResult result : oxmBean.getResultList()) {
-				beans.add(new YahooGeocodeBean(result));
-			}
-		}
+        if (oxmBean.getError().equals(
+                ResponseStatus.EnumResponseStatus.CODE_NO_ERROR.getValue())) {
+            for (GPYahooResult result : oxmBean.getResultList()) {
+                beans.add(new YahooGeocodeBean(result));
+            }
+        }
 
-		return beans;
-	}
+        return beans;
+    }
+
 }

@@ -105,7 +105,7 @@ public class CatalogGetRecordByIdTest {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
 
-        request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47");
+        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
 
         GetRecordByIdResponseType response = request.getResponse();
 
@@ -126,7 +126,7 @@ public class CatalogGetRecordByIdTest {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
 
-        request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47");
+        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
 
         request.setOutputSchema(OutputSchema.GMD);
         request.setElementSetType("full");
@@ -147,8 +147,8 @@ public class CatalogGetRecordByIdTest {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
 
-        request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47",
-                "9a554857-3a16-4e03-b105-47f93e3af3c3");
+        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af",
+                "09548fff-1146-44c6-bad9-17015f7f7ed8");
 
         GetRecordByIdResponseType response = request.getResponse();
 
@@ -170,7 +170,7 @@ public class CatalogGetRecordByIdTest {
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request =
                 this.serverConnector.createGetRecordByIdRequest();
 
-        request.setId("edf0bd63-97ef-4a0d-acad-b7e339be8f47");
+        request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af");
         request.setElementSetType(ElementSetType.FULL.value());
         request.setOutputSchema(OutputSchema.GMD);
 

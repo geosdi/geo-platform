@@ -39,6 +39,7 @@ import java.io.IOException;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -79,6 +80,7 @@ public class ReverseGeocoderTest {
         logger.info("Locations ***************** {}", bean.getDescription());
     }
 
+    @Ignore(value = "TO BE REMOVED YAHOO SERVICE")
     @Test
     public void testYahooReverseGeocoding() {
         GeocodingBean bean = null;

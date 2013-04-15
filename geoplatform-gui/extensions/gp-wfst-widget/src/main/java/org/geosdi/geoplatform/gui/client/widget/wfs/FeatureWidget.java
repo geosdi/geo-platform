@@ -85,8 +85,7 @@ public class FeatureWidget extends GeoPlatformWindow
     private FeatureResetAttributesEvent resetEvent = new FeatureResetAttributesEvent();
 
     @Inject
-    public FeatureWidget(
-            FeatureSelectionWidget selectionWidget,
+    public FeatureWidget(FeatureSelectionWidget selectionWidget,
             FeatureMapWidget mapWidget,
             FeatureAttributesWidget attributesWidget,
             FeatureStatusBar statusBar,
@@ -126,7 +125,8 @@ public class FeatureWidget extends GeoPlatformWindow
     }
 
     private void addSelectionWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST, 300);
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST,
+                300);
         layoutData.setMargins(new Margins(0, 0, 0, 5));
         layoutData.setCollapsible(true);
 
@@ -138,14 +138,17 @@ public class FeatureWidget extends GeoPlatformWindow
          * The notifyShow method is called 1 times at the first show only in the
          * center region, otherwise 2 times.
          */
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER, 700);
+        System.out.println("CODICE ESEGUITO@@@@@@@@@@@@@@@");
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER,
+                700);
         layoutData.setMargins(new Margins(0));
 
         super.add(this.mapWidget, layoutData);
     }
 
     private void addAttributesWidget() {
-        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH, 150);
+        BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH,
+                150);
         layoutData.setMargins(new Margins(5, 0, 0, 0));
         layoutData.setCollapsible(true);
         layoutData.setSplit(true);
@@ -167,31 +170,37 @@ public class FeatureWidget extends GeoPlatformWindow
         super.getButtonBar().add(new FillToolItem());
 
         resetButton = new Button("Reset", BasicWidgetResources.ICONS.delete(),
-                                 new SelectionListener<ButtonEvent>() {
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 bus.fireEvent(resetEvent);
             }
+
         });
         super.addButton(resetButton);
 
         this.saveButton = new Button("Save", BasicWidgetResources.ICONS.save(),
-                                     new SelectionListener<ButtonEvent>() {
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 bus.fireEvent(saveEvent);
             }
+
         });
         super.addButton(saveButton);
 
         this.disableButtons();
 
         Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
-                                  new SelectionListener<ButtonEvent>() {
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 hide();
             }
+
         });
         super.addButton(close);
     }
@@ -265,4 +274,5 @@ public class FeatureWidget extends GeoPlatformWindow
         resetButton.enable();
         saveButton.enable();
     }
+
 }

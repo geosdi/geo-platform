@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.gui.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,10 +51,6 @@ public class WFSWidgetUI implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        this.initInjection();
     }
 
-    private void initInjection() {
-        GWT.create(FeatureInjector.class);
-    }
 }

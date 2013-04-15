@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 public abstract class MenuAction extends GeoPlatformAction<MenuEvent> {
 
     private String title;
+    private boolean mustBeEnabled;
 
     public MenuAction(String title) {
         this.title = title;
@@ -59,10 +60,24 @@ public abstract class MenuAction extends GeoPlatformAction<MenuEvent> {
     }
 
     /**
-     * @param title
-     *            the title to set
+     * @param title the title to set
      */
     public void setTitle(String title) {
         this.title = title;
     }
+
+    /**
+     * @return the mustBeEnabled
+     */
+    public boolean isMustBeEnabled() {
+        return mustBeEnabled;
+    }
+
+    /**
+     * @param mustBeEnabled the mustBeEnabled to set
+     */
+    public void setMustBeEnabled(boolean mustBeEnabled) {
+        this.mustBeEnabled = mustBeEnabled;
+    }
+
 }

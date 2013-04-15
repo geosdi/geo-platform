@@ -37,9 +37,11 @@ package org.geosdi.geoplatform.gui.client.widget.tree.menu.strategy;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
+import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
 import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStoreRepository;
 import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.AbstractTreeMenuStrategy;
@@ -62,7 +64,11 @@ public class MultiSelectionMenuStrategy extends AbstractTreeMenuStrategy {
 
     @Override
     public Menu getMenu(StoreCompositeKey key) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<? extends GPMenuGenericTool> tools = this.storeRepository.getMenuCompositeStore().getTools(
+                key);
+
+        return ((tools != null) && (tools.size() > 0)) ? super.buildMenu(key,
+                tools) : null;
     }
 
 }

@@ -13,34 +13,30 @@
 
     <context:annotation-config />
 
-    <bean id="castor" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+    <bean id="castor" class="org.geosdi.geoplatform.oxm.castor.GPCastorMarshaller">
         <property name="marshaller" ref="castorMarshaller" />
-        <property name="unmarshaller" ref="castorMarshaller" />
     </bean>
     
-    <bean id="jibx" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+    <bean id="jibx" class="org.geosdi.geoplatform.oxm.jibx.GPJibxMarshaller">
         <property name="marshaller" ref="jibxMarshaller" />
-        <property name="unmarshaller" ref="jibxMarshaller" />
     </bean>
 	
-    <bean id="jax" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+    <bean id="jax" class="org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller">
         <property name="marshaller" ref="jaxb" />
-        <property name="unmarshaller" ref="jaxb" />
     </bean>
 	
-    <bean id="xtream" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+    <bean id="xtream" class="org.geosdi.geoplatform.oxm.xtream.GPXStreamMarshaller">
         <property name="marshaller" ref="xStreamMarshaller" />
-        <property name="unmarshaller" ref="xStreamMarshaller" />
     </bean>
 
     <bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
         <property name="mappingLocation"
-			value="classpath:mapping.xml" />
+                  value="classpath:mapping.xml" />
     </bean>
 
     <oxm:jaxb2-marshaller id="jaxb">
         <oxm:class-to-be-bound
-			name="org.geosdi.geoplatform.mock.ClassToXMLMap" />
+            name="org.geosdi.geoplatform.mock.ClassToXMLMap" />
     </oxm:jaxb2-marshaller>
 
     <bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">

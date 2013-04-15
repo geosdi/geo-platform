@@ -236,12 +236,7 @@
                 </entry>
                 <entry key-ref="gpAllMenu">
                     <list>
-                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
-                            <property name="id" value="DELETE_TREE_ELEMENTS" />
-                            <property name="text" value="Delete Selected Elements" />
-                            <property name="enabled" value="true" />
-                            <property name="order" value="1" />
-                        </bean>
+                        <ref bean="deleteMenu" />
                     </list>
                 </entry>
                 <entry key-ref="gpLeafsMenu">
@@ -250,12 +245,20 @@
                             <property name="id" value="COPY_LAYERS" />
                             <property name="text" value="Copy Layers" />
                             <property name="enabled" value="true" />
-                            <property name="order" value="1" />
+                            <property name="order" value="2" />
                         </bean>
+                        <ref bean="deleteMenu" />
                     </list>
                 </entry>
             </map>
         </property>
+    </bean>
+    
+    <bean id="deleteMenu" class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+        <property name="id" value="DELETE_TREE_ELEMENTS" />
+        <property name="text" value="Delete Selected Elements" />
+        <property name="enabled" value="true" />
+        <property name="order" value="1" />
     </bean>
 
 </beans>

@@ -41,8 +41,10 @@ import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionCreator;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.AddFolderMenuAction;
+import org.geosdi.geoplatform.gui.client.action.menu.CopyLayerAction;
 import org.geosdi.geoplatform.gui.client.action.menu.CreateFolderViewportAction;
 import org.geosdi.geoplatform.gui.client.action.menu.CreateLayerViewportAction;
+import org.geosdi.geoplatform.gui.client.action.menu.DeleteElementsMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShareProjectMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFolderRenameAction;
@@ -81,11 +83,17 @@ public class TreeMenuActionFactory {
     //
     @Inject
     static ShareProjectMenuAction shareProjectMenuAction;
+    @Inject
+    static PasteLayerAction pasteLayerAction;
+    @Inject
+    static CopyLayerAction copyLayerAction;
 
     public static void buildTreeMenuActions() {
         buildRootMenuActions();
         buildCompositeMenuActions();
         buildLeafMenuActions();
+        buildMultiSelectionMenu();
+
     }
 
     private static void buildRootMenuActions() {
@@ -98,14 +106,14 @@ public class TreeMenuActionFactory {
 
         });
 
-//        registar.put("SHARE_PROJECT", new TreeMenuActionCreator() {
-//
-//            @Override
-//            public MenuAction createAction(TreePanel treePanel) {
-//                return shareProjectMenuAction;
-//            }
-//
-//        });
+        registar.put("SHARE_PROJECT", new TreeMenuActionCreator() {
+
+            @Override
+            public MenuAction createAction(TreePanel treePanel) {
+                return shareProjectMenuAction;
+            }
+
+        });
     }
 
     private static void buildCompositeMenuActions() {
@@ -113,7 +121,7 @@ public class TreeMenuActionFactory {
 
             @Override
             public MenuAction createAction(TreePanel treePanel) {
-                return new PasteLayerAction(treePanel);
+                return pasteLayerAction;
             }
 
         });
@@ -302,6 +310,34 @@ public class TreeMenuActionFactory {
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ShowLayerPropertiesAction(treePanel);
+            }
+
+        });
+    }
+
+    private static void buildMultiSelectionMenu() {
+        buildAllElementsActions();
+        buildLeafsMultiSelectionActions();
+    }
+
+    private static void buildAllElementsActions() {
+        registar.put("DELETE_TREE_ELEMENTS", new TreeMenuActionCreator() {
+
+            @Override
+            public MenuAction createAction(TreePanel treePanel) {
+                return new DeleteElementsMenuAction(
+                        treePanel);
+            }
+
+        });
+    }
+
+    private static void buildLeafsMultiSelectionActions() {
+        registar.put("COPY_LAYERS", new TreeMenuActionCreator() {
+
+            @Override
+            public MenuAction createAction(TreePanel treePanel) {
+                return copyLayerAction;
             }
 
         });

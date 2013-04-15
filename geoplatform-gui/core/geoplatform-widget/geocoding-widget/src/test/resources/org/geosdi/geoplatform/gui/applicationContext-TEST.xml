@@ -20,9 +20,8 @@
           class="org.geosdi.geoplatform.gui.server.service.impl.yahoo.YahooReverseGeocoding" />
                 
     <!-- Google Binder -->
-    <bean id="geocoderGoogleJaxbMarshaller" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+    <bean id="geocoderGoogleJaxbMarshaller" class="org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller">
         <property name="marshaller" ref="jaxbGoogleGeoCoder" />
-        <property name="unmarshaller" ref="jaxbGoogleGeoCoder" />
     </bean>
     
     <oxm:jaxb2-marshaller id="jaxbGoogleGeoCoder">
@@ -31,9 +30,8 @@
     </oxm:jaxb2-marshaller>
     
     <!-- Yahoo Binder -->
-    <bean id="geocoderYahooJaxbMarshaller" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+    <bean id="geocoderYahooJaxbMarshaller" class="org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller">
         <property name="marshaller" ref="jaxbYahooGeoCoder" />
-        <property name="unmarshaller" ref="jaxbYahooGeoCoder" />
     </bean>
     
     <oxm:jaxb2-marshaller id="jaxbYahooGeoCoder">

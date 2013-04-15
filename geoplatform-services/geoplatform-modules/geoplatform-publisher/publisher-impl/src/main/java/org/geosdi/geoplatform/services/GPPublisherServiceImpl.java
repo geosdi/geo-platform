@@ -170,7 +170,12 @@ public class GPPublisherServiceImpl implements GPPublisherService,
     @Override
     public String loadStyle(String layerDatasource, String styleName) throws
             ResourceNotFoundFault {
-        if (!layerDatasource.startsWith(RESTURL)) {
+        String dataSource = layerDatasource;
+        if(layerDatasource.matches(".*:80/")){
+            dataSource = dataSource.replaceFirst(":80", "");
+        }
+        System.out.println("Data source: " + dataSource);
+        if (!dataSource.startsWith(RESTURL)) {
             //The requested style can't be loaded from the rest url configured.
             throw new ResourceNotFoundFault(
                     "The requested style can't be "

@@ -36,11 +36,14 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.store.Store;
+import com.extjs.gxt.ui.client.store.StoreSorter;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
@@ -109,13 +112,24 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     }
 
     private void createComponents() {
+        StoreSorter<GPServerBeanModel> storeSorter = new StoreSorter<GPServerBeanModel>(){
+
+            @Override
+            public int compare(Store<GPServerBeanModel> store, GPServerBeanModel m1, 
+            GPServerBeanModel m2, String property) {
+                return m1.getAlias().toLowerCase().compareTo(m2.getAlias().toLowerCase());
+            }
+            
+        };
+        this.store.setStoreSorter(storeSorter);
         this.comboServer = new ComboBox<GPServerBeanModel>();
 
         comboServer.setEmptyText("Select a Server...");
         comboServer.setDisplayField(GPServerKeyValue.ALIAS.getValue());
         comboServer.setTemplate(getTemplate());
         comboServer.setWidth(250);
-        comboServer.setEditable(false);
+        comboServer.setEditable(Boolean.TRUE);
+        comboServer.setForceSelection(Boolean.TRUE);
         comboServer.setStore(this.store);
         comboServer.setTypeAhead(true);
         comboServer.setTriggerAction(TriggerAction.ALL);
@@ -240,6 +254,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                             setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
                                             EnumSearchServer.STATUS_MESSAGE_LOAD);
                             store.add(result);
+                            store.sort(GPServerKeyValue.ALIAS.getValue(), Style.SortDir.ASC);
                         }
                     }
                 });

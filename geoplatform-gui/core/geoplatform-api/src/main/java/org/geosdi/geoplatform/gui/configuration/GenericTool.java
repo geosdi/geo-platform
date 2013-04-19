@@ -48,7 +48,7 @@ public abstract class GenericTool implements GPGenericTool,
     protected String id;
     protected boolean enabled;
     protected int order;
-    protected boolean secure;
+    protected boolean secure = true;
 
     /**
      * @return the id

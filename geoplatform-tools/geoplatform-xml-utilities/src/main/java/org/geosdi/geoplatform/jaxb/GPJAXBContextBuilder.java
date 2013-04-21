@@ -81,6 +81,7 @@ public final class GPJAXBContextBuilder {
             this.type = type;
             this.context = JAXBContext.newInstance(type);
         }
+
     }
     //
     private volatile WeakReference<Cache> cache;
@@ -104,9 +105,10 @@ public final class GPJAXBContextBuilder {
     public <T> T unmarshal(File xml,
             Class<T> type) {
         try {
-            JAXBElement<T> item = (JAXBElement<T>) getContext(type).createUnmarshaller().unmarshal(
-                    xml);
-            return item.getValue();
+            Object item = getContext(type).createUnmarshaller().unmarshal(xml);
+
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
+                    getValue() : (T) item;
         } catch (JAXBException e) {
             throw new DataBindingException(e);
         }
@@ -115,9 +117,10 @@ public final class GPJAXBContextBuilder {
     public <T> T unmarshal(URL xml,
             Class<T> type) {
         try {
-            JAXBElement<T> item = (JAXBElement<T>) getContext(type).createUnmarshaller().unmarshal(
-                    xml);
-            return item.getValue();
+            Object item = getContext(type).createUnmarshaller().unmarshal(xml);
+
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
+                    getValue() : (T) item;
         } catch (JAXBException e) {
             throw new DataBindingException(e);
         }
@@ -126,9 +129,11 @@ public final class GPJAXBContextBuilder {
     public <T> T unmarshal(URI xml,
             Class<T> type) {
         try {
-            JAXBElement<T> item = (JAXBElement<T>) getContext(type).createUnmarshaller().unmarshal(
-                    xml.toURL());
-            return item.getValue();
+            Object item = getContext(type).createUnmarshaller().unmarshal(xml.
+                    toURL());
+
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
+                    getValue() : (T) item;
         } catch (JAXBException e) {
             throw new DataBindingException(e);
         } catch (IOException e) {
@@ -139,9 +144,10 @@ public final class GPJAXBContextBuilder {
     public <T> T unmarshal(Source xml,
             Class<T> type) {
         try {
-            JAXBElement<T> item = (JAXBElement<T>) getContext(type).createUnmarshaller().unmarshal(
-                    xml);
-            return item.getValue();
+            Object item = getContext(type).createUnmarshaller().unmarshal(xml);
+
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
+                    getValue() : (T) item;
         } catch (JAXBException e) {
             throw new DataBindingException(e);
         }
@@ -150,9 +156,10 @@ public final class GPJAXBContextBuilder {
     public <T> T unmarshal(XMLStreamReader xml,
             Class<T> type) {
         try {
-            JAXBElement<T> item = (JAXBElement<T>) getContext(type).createUnmarshaller().unmarshal(
-                    xml);
-            return item.getValue();
+            Object item = getContext(type).createUnmarshaller().unmarshal(xml);
+
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
+                    getValue() : (T) item;
         } catch (JAXBException e) {
             throw new DataBindingException(e);
         }
@@ -161,9 +168,10 @@ public final class GPJAXBContextBuilder {
     public <T> T unmarshal(XMLEventReader xml,
             Class<T> type) {
         try {
-            JAXBElement<T> item = (JAXBElement<T>) getContext(type).createUnmarshaller().unmarshal(
-                    xml);
-            return item.getValue();
+            Object item = getContext(type).createUnmarshaller().unmarshal(xml);
+
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
+                    getValue() : (T) item;
         } catch (JAXBException e) {
             throw new DataBindingException(e);
         }
@@ -172,9 +180,10 @@ public final class GPJAXBContextBuilder {
     public <T> T unmarshal(Node xml,
             Class<T> type) {
         try {
-            JAXBElement<T> item = (JAXBElement<T>) getContext(type).createUnmarshaller().unmarshal(
-                    xml);
-            return item.getValue();
+            Object item = getContext(type).createUnmarshaller().unmarshal(xml);
+
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
+                    getValue() : (T) item;
         } catch (JAXBException e) {
             throw new DataBindingException(e);
         }
@@ -236,4 +245,5 @@ public final class GPJAXBContextBuilder {
             throw new DataBindingException(e);
         }
     }
+
 }

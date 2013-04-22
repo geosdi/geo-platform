@@ -46,5 +46,5 @@ public interface GPGenericDAO<T extends Object> {
 
     void update(T entity);
 
-    void removeAll();
+    int removeAll();
 }

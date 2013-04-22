@@ -140,8 +140,8 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
     }
 
     @Override
-    public void removeAll() {
-        getCurrentSession().createSQLQuery("delete from "
+    public int removeAll() {
+        return getCurrentSession().createSQLQuery("delete from "
                 + persistentClass.getSimpleName()).executeUpdate();
     }
 
@@ -155,4 +155,5 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
         }
         return this.persistentClass;
     }
+
 }

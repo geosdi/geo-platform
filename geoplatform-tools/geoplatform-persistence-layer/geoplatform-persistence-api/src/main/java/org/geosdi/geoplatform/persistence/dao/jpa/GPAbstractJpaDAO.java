@@ -40,7 +40,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import org.geosdi.geoplatform.persistence.dao.GPBaseDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.hibernate.Criteria;
@@ -151,10 +151,12 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     }
 
     @Override
-    public void removeAll() {
-        this.entityManager.createNativeQuery("delete * from "
+    public int removeAll() {
+        Query q = this.entityManager.createNativeQuery("delete from "
                 + persistentClass.getSimpleName(),
                 persistentClass);
+        
+        return q.executeUpdate();
     }
 
     protected Class< T> getPersistentClass() {

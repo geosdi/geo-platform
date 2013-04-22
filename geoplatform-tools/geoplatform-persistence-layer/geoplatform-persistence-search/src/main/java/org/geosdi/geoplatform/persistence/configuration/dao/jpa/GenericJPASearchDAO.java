@@ -75,7 +75,7 @@ public abstract class GenericJPASearchDAO<T extends Object>
     @Override
     public FullTextEntityManager getSearchManager() {
         return this.ftEntityManager = (ftEntityManager == null)
-                                      ? Search.getFullTextEntityManager(
+                ? Search.getFullTextEntityManager(
                 entityManager) : ftEntityManager;
     }
 
@@ -93,8 +93,10 @@ public abstract class GenericJPASearchDAO<T extends Object>
     }
 
     @Override
-    public void removeAll() {
-        getSearchManager().createNativeQuery("delete * from "
-                + persistentClass.getSimpleName(), persistentClass);
+    public int removeAll() {
+        return getSearchManager().createNativeQuery("delete from "
+                + persistentClass.getSimpleName(), persistentClass).
+                executeUpdate();
     }
+
 }

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.jaxb;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.lang.ref.WeakReference;
@@ -175,6 +176,18 @@ public final class GPJAXBContextBuilder {
             JAXBElement<T> item = (JAXBElement<T>) getContext(type).createUnmarshaller().unmarshal(
                     xml);
             return item.getValue();
+        } catch (JAXBException e) {
+            throw new DataBindingException(e);
+        }
+    }
+
+    public <T> T unmarshal(InputStream xml,
+            Class<T> type) {
+        try {
+            Object item = getContext(type).createUnmarshaller().unmarshal(xml);
+
+            return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).
+                    getValue() : (T) item;
         } catch (JAXBException e) {
             throw new DataBindingException(e);
         }

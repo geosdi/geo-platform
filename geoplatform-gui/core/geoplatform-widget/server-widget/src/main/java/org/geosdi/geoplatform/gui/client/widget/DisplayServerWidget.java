@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
@@ -59,9 +58,7 @@ import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHa
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
@@ -99,7 +96,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      */
     public DisplayServerWidget(GridLayersWidget theGridWidget) {
         TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE,
-                                         this);
+                this);
         init();
         this.gridWidget = theGridWidget;
         this.manageServersWidget = new ManageServerWidget(this, true);
@@ -112,14 +109,15 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     }
 
     private void createComponents() {
-        StoreSorter<GPServerBeanModel> storeSorter = new StoreSorter<GPServerBeanModel>(){
-
+        StoreSorter<GPServerBeanModel> storeSorter = new StoreSorter<GPServerBeanModel>() {
             @Override
-            public int compare(Store<GPServerBeanModel> store, GPServerBeanModel m1, 
-            GPServerBeanModel m2, String property) {
-                return m1.getAlias().toLowerCase().compareTo(m2.getAlias().toLowerCase());
+            public int compare(Store<GPServerBeanModel> store, GPServerBeanModel m1,
+                    GPServerBeanModel m2, String property) {
+                if (m1.getAlias() != null && m2.getAlias() != null) {
+                    return m1.getAlias().toLowerCase().compareTo(m2.getAlias().toLowerCase());
+                }
+                return 0;
             }
-            
         };
         this.store.setStoreSorter(storeSorter);
         this.comboServer = new ComboBox<GPServerBeanModel>();
@@ -143,8 +141,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         });
 
         this.manageServersButton = new Button("Manage Servers",
-                                              ServerWidgetResources.ICONS.addServer(),
-                                              new SelectionListener<ButtonEvent>() {
+                ServerWidgetResources.ICONS.addServer(),
+                new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 manageServersWidget.show();
@@ -164,7 +162,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                 } else {
                     manageServersButton.setEnabled(false);
                     GeoPlatformMessage.errorMessage("Error",
-                                                    "An error occurred while making the requested operation.\n"
+                            "An error occurred while making the requested operation.\n"
                             + "Verify network connections and try again."
                             + "\nIf the problem persists contact your system administrator.");
                     LayoutManager.getInstance().getStatusMap().setStatus(
@@ -235,29 +233,29 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         GeoPlatformOGCRemote.Util.getInstance().loadServers(
                 GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                        EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
-                        GeoPlatformMessage.errorMessage("Server Service",
-                                                        "An Error occured loading Servers.");
-                    }
+            @Override
+            public void onFailure(Throwable caught) {
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                        EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
+                GeoPlatformMessage.errorMessage("Server Service",
+                        "An Error occured loading Servers.");
+            }
 
-                    @Override
-                    public void onSuccess(ArrayList<GPServerBeanModel> result) {
-                        if (result.isEmpty()) {
-                            setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
-                            GeoPlatformMessage.alertMessage("Server Service",
-                                                            "There are no Servers.");
-                        } else {
-                            setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                                            EnumSearchServer.STATUS_MESSAGE_LOAD);
-                            store.add(result);
-                            store.sort(GPServerKeyValue.ALIAS.getValue(), Style.SortDir.ASC);
-                        }
-                    }
-                });
+            @Override
+            public void onSuccess(ArrayList<GPServerBeanModel> result) {
+                if (result.isEmpty()) {
+                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
+                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
+                    GeoPlatformMessage.alertMessage("Server Service",
+                            "There are no Servers.");
+                } else {
+                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                            EnumSearchServer.STATUS_MESSAGE_LOAD);
+                    store.add(result);
+                    store.sort(GPServerKeyValue.ALIAS.getValue(), Style.SortDir.ASC);
+                }
+            }
+        });
     }
 
     public void resetComponents() {
@@ -332,7 +330,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
         public PerformGetcapabilities() {
             OAuth2HandlerManager.addHandler(IGPOAuth2CapabilitiesHandler.TYPE,
-                                            this);
+                    this);
         }
 
         private void checkSelectedServer(GPServerBeanModel selected) {
@@ -351,35 +349,35 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
             GeoPlatformOGCRemote.Util.getInstance().getCapabilities(
                     selectedServer.getId(),
                     new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            gridWidget.unMaskGrid();
-                            LayoutManager.getInstance().getStatusMap().clearStatus(
-                                    "");
+                @Override
+                public void onFailure(Throwable caught) {
+                    gridWidget.unMaskGrid();
+                    LayoutManager.getInstance().getStatusMap().clearStatus(
+                            "");
 
-                            if (selectedServer.getUrlServer().contains(
-                                    EnumOAuth2.GEB_STRING.getValue())) {
-                                GeoPlatformMessage.infoMessage(
-                                        "Google sign on required",
-                                        "Is necessary to sign on Google account for access the Google Earth Builder functionality");
-                                OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(
-                                        EnumOAuth2.LOAD_CAPABILITIES.getValue()));
-                            } else {
-                                GeoPlatformMessage.errorMessage("Server Service",
-                                                                caught.getMessage());
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        "Server Error. " + caught.getMessage(),
-                                        EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                            }
-                        }
+                    if (selectedServer.getUrlServer().contains(
+                            EnumOAuth2.GEB_STRING.getValue())) {
+                        GeoPlatformMessage.infoMessage(
+                                "Google sign on required",
+                                "Is necessary to sign on Google account for access the Google Earth Builder functionality");
+                        OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(
+                                EnumOAuth2.LOAD_CAPABILITIES.getValue()));
+                    } else {
+                        GeoPlatformMessage.errorMessage("Server Service",
+                                caught.getMessage());
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Server Error. " + caught.getMessage(),
+                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                    }
+                }
 
-                        @Override
-                        public void onSuccess(
-                                ArrayList<? extends GPLayerGrid> result) {
-                            selectedServer.setLayers(result);
-                            fillGrid(result);
-                        }
-                    });
+                @Override
+                public void onSuccess(
+                        ArrayList<? extends GPLayerGrid> result) {
+                    selectedServer.setLayers(result);
+                    fillGrid(result);
+                }
+            });
         }
     }
 

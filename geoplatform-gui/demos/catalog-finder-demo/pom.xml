@@ -34,6 +34,12 @@
             <scope>provided</scope>
         </dependency>
         
+        <dependency>
+            <groupId>com.google.web.bindery</groupId>
+            <artifactId>requestfactory-server</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
         <!-- Dependencies for GWT-2.3.0 Compilation -->
         <dependency>
             <groupId>javax.validation</groupId>
@@ -155,7 +161,7 @@
                         <id>test</id>
                         <goals>
                             <goal>clean</goal>
-                            <!--goal>compile</goal-->
+                            <!--<goal>compile</goal>-->
                             <goal>generateAsync</goal>
                             <goal>test</goal>
                         </goals>

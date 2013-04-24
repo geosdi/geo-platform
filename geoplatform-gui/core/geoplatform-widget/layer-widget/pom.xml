@@ -21,6 +21,12 @@
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>com.google.web.bindery</groupId>
+            <artifactId>requestfactory-server</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
         <!-- GXT -->
         <dependency>

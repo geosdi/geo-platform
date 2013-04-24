@@ -27,6 +27,12 @@
             <artifactId>gwt-servlet</artifactId>
             <scope>runtime</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>com.google.web.bindery</groupId>
+            <artifactId>requestfactory-server</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>

@@ -38,8 +38,12 @@ package org.geosdi.geoplatform.gui.client.form;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.store.StoreListener;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -52,6 +56,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.RootPanel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -80,6 +85,11 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Pixel;
+import org.gwtopenmaps.openlayers.client.control.DragFeature;
+import org.gwtopenmaps.openlayers.client.control.DragFeatureOptions;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
@@ -90,8 +100,11 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private ListStore<DPI> storeDPI;
     private ListStore<PrintTemplate> storeTemplate;
+    private ListStore<Scale> storeScale;
     private ComboBox<DPI> comboDPI;
     private ComboBox<PrintTemplate> comboTemplate;
+    private ComboBox<Scale> comboScale;
+    private ComboBox<Scale> scaleCombo;
     private CheckBox checkPrintBaseMap;
     private TextField<String> title;
     private TextField<String> mapTitle;
@@ -100,6 +113,9 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private Button cancel;
     private TreePanel tree;
     private List<GPLayerBean> layerList;
+    private double sizeFactor = .5;
+    private boolean rotation = true;
+    private DragFeature dragPrintArea;
 
     public GPPrintWidget() {
         super();
@@ -116,6 +132,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         addEditPrintSettings();
         addComboDPI();
         addComboTemplate();
+        addScaleCombo();
         addCheckPrintBaseMap();
         addButtons();
     }
@@ -123,13 +140,15 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     @Override
     public void initSize() {
         super.setHeading("GeoPlatform Print Widget");
-        setSize(400, 560);
+        super.setPosition(RootPanel.get().getOffsetWidth() - 400 - 6, 55);
+        setSize(400, 650);
     }
 
     @Override
     public void initSizeFormPanel() {
         formPanel.setHeaderVisible(false);
         formPanel.setSize(400, 560);
+        super.setModal(false);
     }
 
     @Override
@@ -234,6 +253,16 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         this.comments.reset();
         this.comboDPI.reset();
         this.comboDPI.clearSelections();
+        this.comboScale.reset();
+        this.comboScale.setValue(new Scale("1:4.000.000"));
+
+        if (GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent") != null) {
+            GPApplicationMap.getInstance().getApplicationMap().getMap().removeControl(dragPrintArea);
+            dragPrintArea.deactivate();
+            GPApplicationMap.getInstance().getApplicationMap().getMap().removeLayer(GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent"));
+            //GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent").destroy(true);
+        }
+
     }
 
     private void addEditPrintSettings() {
@@ -309,7 +338,9 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         this.comboTemplate = new ComboBox<PrintTemplate>();
         this.comboTemplate.setFieldLabel("Select Template");
-        this.comboTemplate.setEmptyText("Choose Template....");
+//        this.comboTemplate.setEmptyText("Choose Template....");
+        this.comboTemplate.setValue(new PrintTemplate("A4 Portrait"));
+
         this.comboTemplate.setDisplayField(
                 PrintTemplate.PrintEnumTemplate.TEMPLATE.getValue());
         this.comboTemplate.setEditable(false);
@@ -323,6 +354,83 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         fieldSet.add(this.comboTemplate);
 
         super.formPanel.add(fieldSet);
+
+        comboTemplate.addSelectionChangedListener(new SelectionChangedListener<PrintTemplate>() {
+            @Override
+            public void selectionChanged(SelectionChangedEvent<PrintTemplate> se) {
+                if (se != null) {
+                    if (GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent") != null) {
+                        GPApplicationMap.getInstance().getApplicationMap().getMap().removeControl(dragPrintArea);
+                        dragPrintArea.deactivate();
+                        GPApplicationMap.getInstance().getApplicationMap().getMap().removeLayer(GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent"));
+
+                        String scaleString = comboScale.getValue().getScale();
+                        String scaleStringRight = scaleString.substring(scaleString.indexOf(":") + 1);
+                        String scaleStringWithoutDot = scaleStringRight.replaceAll("\\.", "");
+                        float scale = Float.parseFloat(scaleStringWithoutDot);
+                        updateRotationAndSizeForPrint(se.getSelectedItem().getTemplate());
+                        Vector printExtent = PrintUtility.createRectangle(GPApplicationMap.getInstance().getApplicationMap().getMap().getCenter(), scale, GPApplicationMap.getInstance().getApplicationMap().getMap(), sizeFactor, rotation);
+                        dragPrintArea = PrintUtility.enableDragPrintArea(GPApplicationMap.getInstance().getApplicationMap().getMap(), printExtent);
+                        GPApplicationMap.getInstance().getApplicationMap().getMap().addLayer(printExtent);
+                    }
+
+                }
+            }
+        });
+    }
+
+    private void addScaleCombo() {
+        fieldSet = new FieldSet();
+        fieldSet.setHeading("Scale");
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(100);
+        layout.setLabelPad(5);
+        fieldSet.setLayout(layout);
+
+        this.storeScale = new ListStore<Scale>();
+        this.storeScale.add(PrintUtility.getScale());
+
+        this.comboScale = new ComboBox<Scale>();
+        this.comboScale.setFieldLabel("Select Scale");
+//        this.comboScale.setEmptyText("Choose Scale....");
+        this.comboScale.setValue(new Scale("1:4.000.000"));
+        this.comboScale.setDisplayField(
+                Scale.ScaleEnum.SCALE.getValue());
+        this.comboScale.setEditable(false);
+        this.comboScale.setAllowBlank(false);
+        this.comboScale.setForceSelection(true);
+        this.comboScale.setTypeAhead(true);
+        this.comboScale.setTriggerAction(TriggerAction.ALL);
+
+        this.comboScale.setStore(this.storeScale);
+
+        fieldSet.add(this.comboScale);
+
+        super.formPanel.add(fieldSet);
+
+        comboScale.addSelectionChangedListener(new SelectionChangedListener<Scale>() {
+            @Override
+            public void selectionChanged(SelectionChangedEvent<Scale> se) {
+                if (se != null) {
+                    if (GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent") != null) {
+                        GPApplicationMap.getInstance().getApplicationMap().getMap().removeControl(dragPrintArea);
+                        dragPrintArea.deactivate();
+                        GPApplicationMap.getInstance().getApplicationMap().getMap().removeLayer(GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent"));
+
+                        String scaleString = se.getSelectedItem().getScale();
+                        String scaleStringRight = scaleString.substring(scaleString.indexOf(":") + 1);
+                        String scaleStringWithoutDot = scaleStringRight.replaceAll("\\.", "");
+                        float scale = Float.parseFloat(scaleStringWithoutDot);
+                        Vector printExtent = PrintUtility.createRectangle(GPApplicationMap.getInstance().getApplicationMap().getMap().getCenter(), scale, GPApplicationMap.getInstance().getApplicationMap().getMap(), sizeFactor, rotation);
+                        dragPrintArea = PrintUtility.enableDragPrintArea(GPApplicationMap.getInstance().getApplicationMap().getMap(), printExtent);
+                        GPApplicationMap.getInstance().getApplicationMap().getMap().addLayer(printExtent);
+                    }
+
+                }
+            }
+        });
+
+
     }
 
     private void addCheckPrintBaseMap() {
@@ -344,21 +452,27 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         print = new Button("Print", PrintResources.ICONS.print(),
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        execute();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                execute();
+            }
+        });
 
         this.formPanel.addButton(print);
 
         this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        hide();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                if (GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent") != null) {
+                    GPApplicationMap.getInstance().getApplicationMap().getMap().removeControl(dragPrintArea);
+                    dragPrintArea.deactivate();
+                    GPApplicationMap.getInstance().getApplicationMap().getMap().removeLayer(GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent"));
+                    //GPApplicationMap.getInstance().getApplicationMap().getMap().getLayerByName("VectorPrintExtent").destroy(true);
+                }
+                hide();
+            }
+        });
 
         this.formPanel.addButton(cancel);
     }
@@ -383,5 +497,54 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                 0);
         assert (root != null) : "VisitorDisplayHide on getVisibleLayers(): Impossible to retrieve root element";
         return this.getVisibleLayersOnTree(root.getChildren(), layerList);
+    }
+
+    @Override
+    public void showForm() {
+        super.showForm();
+        this.comboScale.setValue(new Scale("1:4.000.000"));
+
+        updateRotationAndSizeForPrint(comboTemplate.getValue().getTemplate());
+        Vector printExtent = PrintUtility.createRectangle(GPApplicationMap.getInstance().getApplicationMap().getMap().getCenter(), 4000000, GPApplicationMap.getInstance().getApplicationMap().getMap(), sizeFactor, rotation);
+
+        dragPrintArea = PrintUtility.enableDragPrintArea(GPApplicationMap.getInstance().getApplicationMap().getMap(), printExtent);
+        GPApplicationMap.getInstance().getApplicationMap().getMap().addLayer(printExtent);
+
+    }
+    
+
+    private void updateRotationAndSizeForPrint(String template) {
+
+        if (template.contains("A4 Landscape")) {
+            sizeFactor = .5;
+            rotation = false;
+        } else if (template.contains("A4 Portrait")) {
+            sizeFactor = .5;
+            rotation = true;
+        } else if (template.contains("A3 Landscape")) {
+            sizeFactor = 1;
+            rotation = false;
+        } else if (template.contains("A3 Portrait")) {
+            sizeFactor = 1;
+            rotation = true;
+        } else if (template.contains("A2 Landscape")) {
+            sizeFactor = 2;
+            rotation = false;
+        } else if (template.contains("A2 Portrait")) {
+            sizeFactor = 2;
+            rotation = true;
+        } else if (template.contains("A1 Landscape")) {
+            sizeFactor = 3;
+            rotation = false;
+        } else if (template.contains("A1 Portrait")) {
+            sizeFactor = 3;
+            rotation = true;
+        } else if (template.contains("A0 Landscape")) {
+            sizeFactor = 4;
+            rotation = false;
+        } else if (template.contains("A0 Portrait")) {
+            sizeFactor = 4;
+            rotation = true;
+        }
     }
 }

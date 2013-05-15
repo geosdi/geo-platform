@@ -130,17 +130,9 @@ public class PrintUtility {
         style.setStrokeDashstyle("dash");
 
         style.setFillOpacity(0.4);
-
- 
+        
         StyleMap styleMap = new StyleMap(style);
-
         vectorLayer.setStyleMap(styleMap);
-        
-        DragFeature dragFeature = createDragFeature(vectorLayer);
-        map.addControl(dragFeature);
-        dragFeature.activate();
-        
-        
         
         return vectorLayer;
     }
@@ -149,7 +141,7 @@ public class PrintUtility {
     public static DragFeature enableDragPrintArea(Map map, Vector vectorLayer){
         DragFeature dragFeature = createDragFeature(vectorLayer);
         map.addControl(dragFeature);
-        //dragFeature.activate();
+        dragFeature.activate();
         
         return dragFeature;
     }

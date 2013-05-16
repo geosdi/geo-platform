@@ -1,0 +1,15 @@
+<html>
+<body>
+    <h3>Hi,</h3>
+    <div>
+        the application has granted access to the 
+        user <u>${createdUserName}</u>, into ${frontendLabel}
+        <br/>
+        The assigned user name is: <b>${createdUserName}</b>
+    </div>
+    <br/><br/>
+    <div>
+        Please, log-in to the <a href="${frontendLink}">${frontendLabel}</a> and manage this account.
+    </div>
+</body>
+</html>

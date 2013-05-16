@@ -43,6 +43,7 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.GPXMPPClient;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
@@ -59,6 +60,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+@Singleton
 public class SessionLoginWidget extends GPSecurityWidget {
 
     private final static int MAX_NUMBER_ATTEMPTS = 5;
@@ -75,6 +77,10 @@ public class SessionLoginWidget extends GPSecurityWidget {
     public SessionLoginWidget(EventType eventOnSuccess) {
         super();
         this.eventOnSuccess = eventOnSuccess;
+    }
+
+    public SessionLoginWidget() {
+        super();
     }
 
     @Override
@@ -111,31 +117,31 @@ public class SessionLoginWidget extends GPSecurityWidget {
                     this.userName.getValue(),
                     this.password.getValue(),
                     new AsyncCallback<IGPAccountDetail>() {
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            errorConnection();
-                            status.setStatus(
-                                    LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
-                                    LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
-                            GeoPlatformMessage.infoMessage("Login Error",
-                                    caught.getMessage());
-                            ++reloginAttempts;
-                        }
+                @Override
+                public void onFailure(Throwable caught) {
+                    errorConnection();
+                    status.setStatus(
+                            LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
+                            LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
+                    GeoPlatformMessage.infoMessage("Login Error",
+                            caught.getMessage());
+                    ++reloginAttempts;
+                }
 
-                        @Override
-                        public void onSuccess(IGPAccountDetail result) {
-                            GPAccountLogged.getInstance().setAccountDetail(result);
-                            status.setStatus(
-                                    LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
-                                    LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
-                            userScreen();
-                            userLogged = userName.getValue();
-                            reloginAttempts = 0;
-                            Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), result.getTreeOptions());
-                            Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), result);
-                            loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
-                        }
-                    });
+                @Override
+                public void onSuccess(IGPAccountDetail result) {
+                    GPAccountLogged.getInstance().setAccountDetail(result);
+                    status.setStatus(
+                            LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
+                            LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
+                    userScreen();
+                    userLogged = userName.getValue();
+                    reloginAttempts = 0;
+                    Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), result.getTreeOptions());
+                    Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), result);
+                    loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
+                }
+            });
         } else if ((this.reloginAttempts + 1) < MAX_NUMBER_ATTEMPTS) {
             ++this.reloginAttempts;
             GeoPlatformMessage.infoMessage(
@@ -200,6 +206,10 @@ public class SessionLoginWidget extends GPSecurityWidget {
         this.status.setIconStyle(status.getValue());
         this.status.setText(message.getValue());
         getButtonBar().enable();
+    }
+
+    public void setEventOnSuccess(EventType eventOnSuccess) {
+        this.eventOnSuccess = eventOnSuccess;
     }
 
     /**

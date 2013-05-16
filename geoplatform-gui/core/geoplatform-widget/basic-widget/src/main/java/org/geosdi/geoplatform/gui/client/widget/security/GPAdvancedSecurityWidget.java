@@ -91,13 +91,6 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
         userName.setFocus(true);
         this.addStatusComponent();
         this.addKeyHandler();
-        this.checkSSO();
-    }
-
-    protected void continueLoginProcesFromSSo(boolean isSSO) {
-        if (isSSO) {
-            this.showProgressBar();
-        }
     }
 
     private void addKeyHandler() {
@@ -157,7 +150,7 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
             @Override
             public void run() {
                 progres += 0.1;
-                progressBar.setRunProgress(progres, userName.getValue());
+                progressBar.setRunProgress(progres, "Caricamento di " + userName.getValue() + " in corso...");
                 if (progres > 1.0) {
                     progressBar.setRunProgress(1.0, "Done");
                     timer.cancel();
@@ -178,6 +171,4 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
     public abstract void reset();
 
     public abstract void loginDone();
-
-    public abstract boolean checkSSO();
 }

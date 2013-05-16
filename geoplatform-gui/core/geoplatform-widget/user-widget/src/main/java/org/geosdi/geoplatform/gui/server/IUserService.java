@@ -59,6 +59,10 @@ public interface IUserService {
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
+    Long insertUser(IGPUserManageDetail userDetail, String organization,
+            HttpServletRequest httpServletRequest, boolean checkUserSession)
+            throws GeoPlatformException;
+
     Long updateUserTreeOptions(IGPTreeOptions userTreeOptions,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;

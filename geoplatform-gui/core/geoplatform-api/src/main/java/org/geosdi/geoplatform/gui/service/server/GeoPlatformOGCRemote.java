@@ -111,7 +111,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<? extends GPLayerGrid> getCapabilities(Long idServer)
+    public ArrayList<? extends GPLayerGrid> getCapabilities(String serverUrl, Long idServer)
             throws GeoPlatformException;
 
     /**

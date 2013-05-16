@@ -347,7 +347,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         @Override
         public void loadCapabilitiesFromWS() {
             GeoPlatformOGCRemote.Util.getInstance().getCapabilities(
-                    selectedServer.getId(),
+                    selectedServer.getUrlServer(), selectedServer.getId(),
                     new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
                 @Override
                 public void onFailure(Throwable caught) {

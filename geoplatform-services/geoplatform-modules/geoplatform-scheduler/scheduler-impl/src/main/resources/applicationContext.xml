@@ -27,6 +27,9 @@
         <!-- Template registration -->
         <property name="subjectRegistration" value="#{emailProperties['email.subject.registration']}" />
         <property name="templateRegistration" value="#{emailProperties['email.template.registration']}" />
+        <!-- Template user creation notification -->
+        <property name="subjectCreationNotification" value="#{emailProperties['email.subject.creationNotification']}" />
+        <property name="templateCreationNotification" value="#{emailProperties['email.template.creationNotification']}" />
         <!-- Template modification -->
         <property name="subjectModification" value="#{emailProperties['email.subject.modification']}" />
         <property name="templateModification" value="#{emailProperties['email.template.modification']}" />        

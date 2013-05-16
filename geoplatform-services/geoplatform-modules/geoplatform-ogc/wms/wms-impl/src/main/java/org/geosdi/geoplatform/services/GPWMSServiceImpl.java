@@ -73,25 +73,25 @@ public class GPWMSServiceImpl implements GPWMSService {
     private GPServerDAO serverDao;
     private static final String GEB = "earthbuilder.google.com";
 
+    public GPWMSServiceImpl() {
+    }
+
     @Override
-    public ServerDTO getCapabilities(RequestByID request, String token,
+    public ServerDTO getCapabilities(String serverUrl, RequestByID request, String token,
             String authkey) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(request.getId());
         if (server == null) {
             throw new ResourceNotFoundFault("Server has been deleted",
                     request.getId());
         }
-
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
-                server.getServerUrl(), token, authkey);
-
+                serverUrl, token, authkey);
         // server = this.createWMSServerFromService(server,
         // wmsCapabilities.getService());
         // serverDao.merge(server);
-
+        List<RasterLayerDTO> layers = this.convertToLayerList(
+                wmsCapabilities.getLayer(), serverUrl);
         ServerDTO serverDTO = new ServerDTO(server);
-        List<RasterLayerDTO> layers = convertToLayerList(
-                wmsCapabilities.getLayer(), server.getServerUrl());
         serverDTO.setLayerList(layers);
 
         return serverDTO;

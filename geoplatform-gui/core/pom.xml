@@ -148,6 +148,7 @@
         <module>geoplatform-server-api</module>
         <module>geoplatform-widget</module>
         <module>geoplatform-cache</module>
+        <module>geoplatform-startup</module>
     </modules>
 
 

@@ -19,6 +19,7 @@
     
     <import resource="applicationContext-crypt.xml" />
     <import resource="applicationContext-jasypt.xml" />
+    <import resource="applicationContext-CAS.xml" />
     
 <!--    <bean id="clientInterceptorStrategyFactory"
           class="org.geosdi.geoplatform.configurator.cxf.client.ClientInterceptorStrategyFactory">

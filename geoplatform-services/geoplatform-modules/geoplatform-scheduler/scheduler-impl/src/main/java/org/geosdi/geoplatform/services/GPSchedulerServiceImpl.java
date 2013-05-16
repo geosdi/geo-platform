@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.List;
 import javax.annotation.PreDestroy;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
@@ -43,6 +44,7 @@ import org.geosdi.geoplatform.jobs.EmailJob;
 import org.geosdi.geoplatform.jobs.EmailModificationJob;
 import org.geosdi.geoplatform.jobs.EmailRegistrationJob;
 import org.geosdi.geoplatform.jobs.EmailTask;
+import org.geosdi.geoplatform.jobs.EmailUserCreationNotificationJob;
 import org.geosdi.geoplatform.jobs.GroupJobType;
 import org.geosdi.geoplatform.jobs.TempAccountExpireJob;
 import org.quartz.CronScheduleBuilder;
@@ -75,6 +77,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
     private Scheduler scheduler;
     private JobDetail jobTempAccount;
     private JobDetail jobEmailRegistration;
+    private JobDetail jobEmailCreationNotification;
     private JobDetail jobEmailModification;
 
     public void setAccountDAO(GPAccountDAO accountDAO) {
@@ -82,8 +85,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
     }
 
     /**
-     * @param emailTask
-     *          the emailTask to set
+     * @param emailTask the emailTask to set
      */
     public void setEmailTask(EmailTask emailTast) {
         this.emailTask = emailTast;
@@ -110,7 +112,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
 
     @Override
     public void sendEmailModification(GPUser user,
-                                      String previousEmail, String newPlainPassword) {
+            String previousEmail, String newPlainPassword) {
         // Trigger the job to run once
         Trigger trigger = TriggerBuilder.newTrigger().
                 withIdentity("EmailModificationTrigger", GroupJobType.EMAIL.toString()). // KEY email.EmailModificationTrigger
@@ -127,6 +129,25 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
             scheduler.scheduleJob(trigger);
         } catch (SchedulerException ex) {
             logger.error("SchedulerException: {}", ex.getMessage());
+        }
+    }
+
+    @Override
+    public void sendEmailUserCreationNotification(List<String> emailRecipient, String createdUserName) {
+        // Trigger the job to run once
+        Trigger trigger = TriggerBuilder.newTrigger().
+                withIdentity("emailUserCreationNotificationTrigger", GroupJobType.EMAIL.toString()). // KEY email.EmailRegistrationTrigger
+                withDescription("Runs once immediately").
+                startNow().
+                forJob(jobEmailCreationNotification).
+                build();
+        trigger.getJobDataMap().put(EmailUserCreationNotificationJob.CREATED_USERNAME, createdUserName);
+        trigger.getJobDataMap().put(EmailUserCreationNotificationJob.EMAIL_RECIPIENT, emailRecipient);
+        try {
+            logger.info("\n*** Fire trigger for sending user creation notification email...");
+            scheduler.scheduleJob(trigger);
+        } catch (SchedulerException ex) {
+            logger.error("SchedulerException", ex.getMessage());
         }
     }
 
@@ -156,6 +177,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
         this.createDataTempAccountExpired();
         this.createEmailRegistrationJob();
         this.createEmailModificationJob();
+        this.createEmailUserCreationNotificationJob();
     }
 
     private void createDataTempAccountExpired() throws SchedulerException {
@@ -188,6 +210,19 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
 
         // Add job to the scheduler for execute when trigger will be fired
         scheduler.addJob(jobEmailRegistration, false);
+    }
+
+    private void createEmailUserCreationNotificationJob() throws SchedulerException {
+        // Define the job and tie it to EmailUserCreationNotificationJob class
+        jobEmailCreationNotification = JobBuilder.newJob(EmailUserCreationNotificationJob.class).
+                withIdentity("EmailUserCreationNotificationJob", GroupJobType.EMAIL.toString()). // KEY email.EmailRegistrationJob
+                withDescription("Send a notification email to a recipient list").
+                storeDurably().
+                build();
+        jobEmailCreationNotification.getJobDataMap().put(EmailRegistrationJob.EMAIL_TASK, emailTask);
+
+        // Add job to the scheduler for execute when trigger will be fired
+        scheduler.addJob(jobEmailCreationNotification, false);
     }
 
     private void createEmailModificationJob() throws SchedulerException {

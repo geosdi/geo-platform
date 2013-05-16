@@ -74,6 +74,13 @@ public interface SecurityRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     IGPAccountDetail ssoLogin() throws GeoPlatformException;
+    
+    /**
+     *
+     * @return IGPAccountDetail
+     * @throws GeoPlatformException
+     */
+    IGPAccountDetail casLogin() throws GeoPlatformException;
 
     /**
      *

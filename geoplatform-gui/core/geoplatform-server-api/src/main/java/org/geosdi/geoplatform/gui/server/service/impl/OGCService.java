@@ -121,7 +121,7 @@ public class OGCService implements IOGCService {
 
     @Override
     public ArrayList<? extends GPLayerGrid> getCapabilities(
-            HttpServletRequest httpServletRequest, Long idServer)
+            String serverUrl, HttpServletRequest httpServletRequest, Long idServer)
             throws GeoPlatformException {
         try {
             HttpSession session = httpServletRequest.getSession();
@@ -134,9 +134,8 @@ public class OGCService implements IOGCService {
             if (gsAccount != null) {
                 authKey = gsAccount.getAuthkey();
             }
-            ServerDTO server = geoPlatformWMSServiceClient.getCapabilities(req,
-                                                                           token,
-                                                                           authKey);
+            ServerDTO server = geoPlatformWMSServiceClient.getCapabilities(
+                    serverUrl, req, token, authKey);
 
             return dtoServerConverter.createRasterLayerList(
                     server.getLayerList());

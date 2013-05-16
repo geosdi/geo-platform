@@ -41,6 +41,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
+import org.gwtopenmaps.openlayers.client.OpenLayers;
 import org.gwtopenmaps.openlayers.client.Size;
 import org.gwtopenmaps.openlayers.client.layer.Bing;
 import org.gwtopenmaps.openlayers.client.layer.BingOptions;
@@ -171,7 +172,9 @@ class GPBaseLayerRepository {
         OSMOptions osmOption = new OSMOptions();
         osmOption.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
-        Layer osm = OSM.Mapnik("OpenStreetMap", osmOption);
+//        Layer osm = OSM.Mapnik("OpenStreetMap", osmOption);
+        Layer osm = OSM.THIS("OpenStreetMap", OpenLayers.getProxyHost()
+                + "http://tile.openstreetmap.org/${z}/${x}/${y}.png", osmOption);
         osm.setIsBaseLayer(Boolean.TRUE);
         return osm;
     }

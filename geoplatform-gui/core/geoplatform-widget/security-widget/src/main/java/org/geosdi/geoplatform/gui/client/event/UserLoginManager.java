@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
 import org.geosdi.geoplatform.gui.client.widget.LoginWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -63,8 +64,10 @@ public class UserLoginManager implements GPLoginHandler {
                 EnumSearchStatus.STATUS_NO_SEARCH.toString());
         LayoutManager.getInstance().getViewport().mask("Session Timeout",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-        this.loginWidget.setGwtEventOnSuccess(event);
+        SecurityGinInjector.MainInjector.getInstance().getSessionLoginWidget()
+                .setGwtEventOnSuccess(event);
 
-        this.loginWidget.showSessionExpiredLogin();
+        SecurityGinInjector.MainInjector.getInstance().getSessionLoginWidget()
+                .show();
     }
 }

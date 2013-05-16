@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
+import com.google.gwt.user.client.rpc.SerializationException;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
@@ -53,6 +55,22 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingRemoteServiceServle
         implements GeoPlatformOGCRemote {
 
     private static final long serialVersionUID = 7340579377487014548L;
+    static ThreadLocal<HttpServletRequest> perThreadRequest =
+            new ThreadLocal<HttpServletRequest>();
+
+    @Override
+    public String processCall(String payload) throws SerializationException {
+        try {
+            perThreadRequest.set(getThreadLocalRequest());
+            return super.processCall(payload);
+        } finally {
+            perThreadRequest.set(null);
+        }
+    }
+
+    public static HttpServletRequest getRequest() {
+        return perThreadRequest.get();
+    }
     //
     @Autowired
     private IOGCService ogcService;
@@ -70,17 +88,17 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingRemoteServiceServle
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getCapabilities(Long idServer)
+    public ArrayList<? extends GPLayerGrid> getCapabilities(String serverUrl, Long idServer)
             throws GeoPlatformException {
-        return ogcService.getCapabilities(super.getThreadLocalRequest(),
-                                          idServer);
+        return ogcService.getCapabilities(serverUrl, super.getThreadLocalRequest(),
+                idServer);
     }
 
     @Override
     public GPServerBeanModel saveServer(Long id, String aliasServerName,
             String urlServer, String organization) throws GeoPlatformException {
         return ogcService.saveServer(id, aliasServerName, urlServer,
-                                     organization);
+                organization);
     }
 
     @Override

@@ -40,6 +40,8 @@ import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.client.widget.security.GPLoginAccessManager;
+import org.geosdi.geoplatform.gui.client.widget.security.SecurityLoginChainOfResponsibility;
 import org.geosdi.geoplatform.gui.model.message.CommandActionMediator;
 
 /**
@@ -70,4 +72,8 @@ public interface BasicGinInjector extends Ginjector {
     public MenuActionRegistar getMenuActionRegistar();
 
     public CommandActionMediator getCommandActionMediator();
+
+    public SecurityLoginChainOfResponsibility getSecurityLoginChainOfResponsibility();
+
+    public GPLoginAccessManager getLoginAccessManager();
 }

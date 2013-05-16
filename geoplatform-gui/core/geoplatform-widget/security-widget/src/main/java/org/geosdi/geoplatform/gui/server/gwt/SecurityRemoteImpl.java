@@ -67,6 +67,11 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
+    public IGPAccountDetail casLogin() throws GeoPlatformException {
+        return this.securityService.casLogin(super.getThreadLocalRequest());
+    }
+
+    @Override
     public IGPAccountDetail applicationLogin(String appID) throws GeoPlatformException {
         return this.securityService.applicationLogin(appID, super.getThreadLocalRequest());
     }

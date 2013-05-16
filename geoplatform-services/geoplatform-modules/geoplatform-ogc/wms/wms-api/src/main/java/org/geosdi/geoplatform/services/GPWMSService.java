@@ -47,31 +47,30 @@ import org.geosdi.geoplatform.responce.ServerDTO;
 /**
  * Public interface to define the service operations mapped via REST using CXT
  * framework.
- * 
+ *
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @email francesco.izzi@geosdi.org
  */
 @WebService(name = "GPWMSService",
-            targetNamespace = "http://services.geo-platform.org/")
+        targetNamespace = "http://services.geo-platform.org/")
 public interface GPWMSService {
-    
+
     // <editor-fold defaultstate="collapsed" desc="WMS">
     // ==========================================================================
     // === WMS
     // ==========================================================================
-
     @Get
     @HttpResource(location = "/wms/capabilities/{id}")
     @WebResult(name = "Capabilities")
-    ServerDTO getCapabilities(@WebParam(name = "request") RequestByID request,
+    ServerDTO getCapabilities(@WebParam(name = "serverUrl") String serverUrl,
+            @WebParam(name = "request") RequestByID request,
             @WebParam(name = "token") String token, @WebParam(name = "authkey") String authkey)
             throws ResourceNotFoundFault;
-    
+
     @Get
     @HttpResource(location = "/server/{serverUrl}")
     @WebResult(name = "Servers")
     ServerDTO getShortServer(@WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
-
     // </editor-fold>
 }

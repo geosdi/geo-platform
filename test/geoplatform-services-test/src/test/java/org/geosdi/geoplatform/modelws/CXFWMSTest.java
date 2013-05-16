@@ -67,7 +67,8 @@ public class CXFWMSTest extends ServiceWMSTest {
         logger.info("^^^^^^^^^^^^^^^^^^^^^^^^^ SERVER___DTO ^^^^^^^^^^^^^^^^^^\n{}", serverDTO);
         Assert.assertNotNull(serverDTO);
 
-        serverDTO = gpWMSClient.getCapabilities(new RequestByID(serverDTO.getId()), null, null);
+        serverDTO = gpWMSClient.getCapabilities(serverDTO.getServerUrl(),
+                new RequestByID(serverDTO.getId()), null, null);
         logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
     }
 }

@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.jobs;
 
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.exception.EmailException;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -63,7 +62,7 @@ public abstract class EmailJob implements Job {
     /**
      * Quartz pass emailTask each time that an instance of EmailJob was created,
      * because emailTask was insert into JobDataMap of JobDetail tie to this job
-     * 
+     *
      * @param emailTask the emailTask to set
      */
     public void setEmailTask(EmailTask emailTask) {
@@ -75,11 +74,12 @@ public abstract class EmailJob implements Job {
         logger.debug("\n*** START send email job ***");
 
         GPUser user = (GPUser) context.getTrigger().getJobDataMap().get(USER);
-        logger.trace("\n\n*** {}", user);
-
-        if (user != null) {
-            this.sendEmail(user, context);
+        if (user == null) {
+            logger.trace("\n\n*** Warning there are no GPUser in Quarz trigger to send email {}", user);
+        } else {
+            logger.trace("\n\n*** {}", user);
         }
+        this.sendEmail(user, context);
 
         logger.debug("\n*** STOP send email job ***");
     }

@@ -39,11 +39,30 @@
             <type>jar</type>
         </dependency>
         
+        <!-- CAS -->
+        <dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <type>jar</type>
+            <version>3.2.1</version>
+        </dependency>
+        
         <!-- GWT-OL Resources -->
         
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>user-widget</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
         </dependency>
 
         <dependency>
@@ -62,6 +81,8 @@
             <artifactId>geoplatform-xmpp</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        
     </dependencies>
 
     <build>

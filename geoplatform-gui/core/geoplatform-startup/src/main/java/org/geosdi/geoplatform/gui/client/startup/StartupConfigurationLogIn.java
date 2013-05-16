@@ -33,23 +33,30 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.configuration.startup;
+package org.geosdi.geoplatform.gui.client.startup;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
+import org.geosdi.geoplatform.gui.client.handler.SSOLoginHandler;
+import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
+import org.geosdi.geoplatform.gui.configuration.startup.IStartupConfigurationStrategy;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
-public class StartupConfigurationLogIn implements IStartupConfigurationStrategy{
+public class StartupConfigurationLogIn implements IStartupConfigurationStrategy {
 
+    //TODO: Move this class on geo-platform
+    
     private static final long serialVersionUID = -4521004364754154783L;
-    
-    
+
     @Override
     public void initGeoPlatformConfiguration() {
-        Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
+        BasicGinInjector injector = BasicGinInjector.MainInjector.getInstance();
+        ILoginHandler cASLoginHandler = new SSOLoginHandler();
+        injector.getSecurityLoginChainOfResponsibility().setLoginHandler(cASLoginHandler);
+        injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM, "CAS login in corso...");
+//        Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
     }
-    
 }

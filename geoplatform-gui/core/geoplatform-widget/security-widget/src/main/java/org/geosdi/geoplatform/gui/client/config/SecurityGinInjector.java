@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
+import org.geosdi.geoplatform.gui.client.model.PostLoginOperations;
+import org.geosdi.geoplatform.gui.client.widget.SessionLoginWidget;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -60,4 +62,8 @@ public interface SecurityGinInjector extends Ginjector {
             return instance;
         }
     }
+
+    SessionLoginWidget getSessionLoginWidget();
+
+    PostLoginOperations getPostLoginOperations();
 }

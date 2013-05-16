@@ -51,6 +51,9 @@ public interface ISecurityService {
 
     IGPAccountDetail ssoLogin(HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
+    
+    IGPAccountDetail casLogin(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 
     IGPAccountDetail applicationLogin(String appID,
             HttpServletRequest httpServletRequest)

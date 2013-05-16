@@ -94,7 +94,7 @@ public class UserService implements IUserService {
         int page = start == 0 ? start : start / config.getLimit();
 
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                                                                config.getLimit(), page);
+                config.getLimit(), page);
 
         List<UserDTO> userList = null;
         try {
@@ -113,15 +113,23 @@ public class UserService implements IUserService {
         }
 
         return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
-                                                            config.getOffset(), usersCount.intValue());
+                config.getOffset(), usersCount.intValue());
     }
 
     @Override
     public Long insertUser(IGPUserManageDetail userDetail, String organization,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        this.getCheckLoggedUser(httpServletRequest);
+        return this.insertUser(userDetail, organization, httpServletRequest, Boolean.TRUE);
+    }
 
+    @Override
+    public Long insertUser(IGPUserManageDetail userDetail, String organization,
+            HttpServletRequest httpServletRequest, boolean checkUserSession)
+            throws GeoPlatformException {
+        if (checkUserSession) {
+            this.getCheckLoggedUser(httpServletRequest);
+        }
         logger.debug("\nUser to INSERT (of the organization \"{}\"):\n{}", organization, userDetail);
         Long iserId = null;
         try {
@@ -132,7 +140,6 @@ public class UserService implements IUserService {
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         }
-
         return iserId;
     }
 
@@ -190,10 +197,10 @@ public class UserService implements IUserService {
             userDTO.setEmailAddress(userDetail.getEmail());
 
             userID = geoPlatformServiceClient.updateOwnUser(userDTO,
-                                                            currentPlainPassword, newPlainPassword);
+                    currentPlainPassword, newPlainPassword);
 
             sessionUtility.storeLoggedAccount(this.dtoUserConverter.convertToGPUser(userDetail),
-                                              httpServletRequest);
+                    httpServletRequest);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         } catch (ResourceNotFoundFault rnnf) {

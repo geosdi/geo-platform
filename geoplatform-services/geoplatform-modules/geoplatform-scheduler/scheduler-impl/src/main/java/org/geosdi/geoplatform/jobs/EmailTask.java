@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.jobs;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -70,80 +71,128 @@ public class EmailTask {
     //
     private String subjectModification;
     private String templateModification;
+    //
+    private String subjectCreationNotification;
+    private String templateCreationNotification;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
-     * @param mailSender
-     *          the mailSender to set
+     * @param mailSender the mailSender to set
      */
     public void setMailSender(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
     /**
-     * @param velocityEngine
-     *          the velocityEngine to set
+     * @param velocityEngine the velocityEngine to set
      */
     public void setVelocityEngine(VelocityEngine velocityEngine) {
         this.velocityEngine = velocityEngine;
     }
 
     /**
-     * @param frontendLink
-     *          the frontendLink to set
+     * @param frontendLink the frontendLink to set
      */
     public void setFrontendLink(String frontendLink) {
         this.frontendLink = frontendLink;
     }
 
     /**
-     * @param frontendLabel
-     *          the frontendLabel to set
+     * @param frontendLabel the frontendLabel to set
      */
     public void setFrontendLabel(String frontendLabel) {
         this.frontendLabel = frontendLabel;
     }
 
     /**
-     * @param subjectRegistration
-     *          the subjectRegistration to set
+     * @param subjectRegistration the subjectRegistration to set
      */
     public void setSubjectRegistration(String subjectRegistration) {
         this.subjectRegistration = subjectRegistration;
     }
 
     /**
-     * @param templateRegistration
-     *          the templateRegistration to set
+     * @param templateRegistration the templateRegistration to set
      */
     public void setTemplateRegistration(String templateRegistration) {
         this.templateRegistration = templateRegistration;
     }
 
+    public void setSubjectCreationNotification(String subjectCreationNotification) {
+        this.subjectCreationNotification = subjectCreationNotification;
+    }
+
+    public void setTemplateCreationNotification(String templateCreationNotification) {
+        this.templateCreationNotification = templateCreationNotification;
+    }
+
     /**
-     * @param subjectModification
-     *          the subjectModification to set
+     * @param subjectModification the subjectModification to set
      */
     public void setSubjectModification(String subjectModification) {
         this.subjectModification = subjectModification;
     }
 
     /**
-     * @param templateModification
-     *          the templateModification to set
+     * @param templateModification the templateModification to set
      */
     public void setTemplateModification(String templateModification) {
         this.templateModification = templateModification;
     }
     //</editor-fold>
 
-    // TODO Factorize
+    public void sendEmailUserCreationNotification(final List<String> emailRecipient,
+            final String createdUserName) throws EmailException {
+        logger.info("\n*** Sending email for user creation notification to {} ***",
+                emailRecipient.size());
+
+        MimeMessagePreparator preparator = new MimeMessagePreparator() {
+            @Override
+            public void prepare(MimeMessage mimeMessage) {
+                try {
+                    MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                    message.setSubject(createSubject(subjectCreationNotification));
+
+//                    String[] array = new String[emailRecipient.size()];
+//                    for (int i = 0; i < emailRecipient.size(); i++) {
+//                        array[i] = emailRecipient.get(i);
+//                    }
+                    String[] array = emailRecipient.toArray(new String[emailRecipient.size()]);
+
+                    message.setTo(array);
+
+                    Map model = new HashMap();
+                    model.put("createdUserName", createdUserName);
+                    model.put("frontendLink", frontendLink);
+                    model.put("frontendLabel", frontendLabel);
+                    String text = VelocityEngineUtils.mergeTemplateIntoString(
+                            velocityEngine, templateCreationNotification, "UTF-8", model);
+                    message.setText(text, true);
+                } catch (VelocityException ex) {
+                    logger.error("\n*** VelocityException: {}", ex.getMessage());
+                } catch (MessagingException ex) {
+                    logger.error("\n*** MessagingException: {}", ex.getMessage());
+                } catch (Exception ex) {
+                    logger.error("\n*** Exception: {}", ex.getMessage());
+                }
+            }
+        };
+
+        try {
+            mailSender.send(preparator);
+        } catch (MailException ex) {
+            logger.error("\n*** MailException: {}" + ex.getStackTrace().toString());
+            throw new EmailException(ex.getMessage());
+        }
+
+        logger.info("\n*** Email for user creation notification sended to {} ***", emailRecipient.toString());
+    }
+
     public void sendEmailRegistration(final GPUser user) throws EmailException {
         String email = user.getEmailAddress();
         logger.info("\n*** Sending email for registration to {} ***", email);
 
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
-
             @Override
             public void prepare(MimeMessage mimeMessage) {
                 try {
@@ -156,7 +205,7 @@ public class EmailTask {
                     model.put("frontendLink", frontendLink);
                     model.put("frontendLabel", frontendLabel);
                     String text = VelocityEngineUtils.mergeTemplateIntoString(
-                            velocityEngine, templateRegistration, model);
+                            velocityEngine, templateRegistration, "UTF-8", model);
                     message.setText(text, true);
                 } catch (VelocityException ex) {
                     logger.error("\n*** VelocityException: {}", ex.getMessage());
@@ -185,7 +234,6 @@ public class EmailTask {
         logger.info("\n*** Sending email for registration to {} ***", email);
 
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
-
             @Override
             public void prepare(MimeMessage mimeMessage) {
                 try {
@@ -213,7 +261,7 @@ public class EmailTask {
                     model.put("passwordChanged", passwordChanged);
 
                     String text = VelocityEngineUtils.mergeTemplateIntoString(
-                            velocityEngine, templateModification, model);
+                            velocityEngine, templateModification, "UTF-8", model);
                     message.setText(text, true);
                 } catch (VelocityException ex) {
                     logger.error("\n*** VelocityException: {}", ex.getMessage());

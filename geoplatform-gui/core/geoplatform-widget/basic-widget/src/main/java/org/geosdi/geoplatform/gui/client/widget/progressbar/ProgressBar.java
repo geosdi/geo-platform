@@ -64,9 +64,9 @@ public class ProgressBar extends Composite {
         runBar.getElement().getStyle().setWidth(100 * value, Style.Unit.PCT);
     }
 
-    public void setRunProgress(double value, String userName) {
+    public void setRunProgress(double value, String loadingMessage) {
         if (value < 1.0) {
-            label.setText("Caricamento di " + userName + " in corso...");
+            label.setText(loadingMessage);
         } else {
             label.setText("Avvio in corso...");
         }

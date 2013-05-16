@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import com.google.common.collect.Lists;
+import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.SOAPFaultException;
@@ -43,20 +46,27 @@ import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOSecurityConverter;
+import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.jasig.cas.client.util.AbstractCasFilter;
+import org.jasig.cas.client.validation.Assertion;
+import org.jasig.cas.client.validation.AssertionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -68,6 +78,15 @@ public class SecurityService implements ISecurityService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
+    private @Value("casProp{cas_organization}")
+    String casOrganization;
+    private @Value("casProp{cas_authority}")
+    String casAuthority;
+    private @Value("casProp{cas_email_suffix}")
+    String casEmailSuffix;
+    private @Value("casProp{cas_admin_emails}")
+    String casAdminEmails;
+    //
     private GeoPlatformService geoPlatformServiceClient;
     //
     @Autowired
@@ -75,6 +94,9 @@ public class SecurityService implements ISecurityService {
     //
     @Autowired
     private DTOSecurityConverter dtoConverter;
+    //
+    @Autowired
+    private UserService userService;
 
     @Override
     public IGPAccountDetail userLogin(String username, String password, HttpServletRequest httpServletRequest)
@@ -129,11 +151,75 @@ public class SecurityService implements ISecurityService {
         return accountDetail;
     }
 
-    private IGPAccountDetail executeLoginOnGPAccount(GPAccount account, 
+    @Override
+    public IGPAccountDetail casLogin(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        Assertion casAssertion = (AssertionImpl) httpServletRequest.
+                getSession().getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
+        IGPAccountDetail accountDetail = null;
+        if (casAssertion != null && casAssertion.getPrincipal() != null
+                && casAssertion.getPrincipal().getName() != null) {
+            String casUserName = casAssertion.getPrincipal().getName();
+            GPUser user;
+            try {
+                user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(casUserName, LikePatternType.CONTENT_EQUALS));
+                geoPlatformServiceClient.getAccountPermission(user.getId());
+                accountDetail = this.executeLoginOnGPAccount(user,
+                        geoPlatformServiceClient.getAccountPermission(user.getId()), httpServletRequest);
+            } catch (ResourceNotFoundFault ex) {
+                logger.info("SecurityService", "Unable to find user with username or email: " + casUserName
+                        + " Error: " + ex);
+                accountDetail = this.createNewCASUser(casUserName, httpServletRequest);
+            } catch (SOAPFaultException ex) {
+                logger.error("Error on SecurityService: " + ex + " password incorrect");
+                throw new GeoPlatformException("Password incorrect");
+            }
+        }
+        return accountDetail;
+    }
+
+    private IGPAccountDetail createNewCASUser(String casUserName, HttpServletRequest httpServletRequest) {
+        IGPUserManageDetail newCASAccount = this.fillNewCASAccount(casUserName);
+        logger.info("A new user from CAS login will be created with username: " + casUserName);
+        userService.insertUser(newCASAccount, this.casOrganization, httpServletRequest,
+                Boolean.FALSE);
+        StringTokenizer tokenizer = new StringTokenizer(this.casAdminEmails, ";");
+        List<String> emailList = Lists.<String>newArrayListWithExpectedSize(tokenizer.countTokens());
+        while (tokenizer.hasMoreElements()) {
+            emailList.add(tokenizer.nextToken());
+        }
+        try {
+            geoPlatformServiceClient.sendCASNewUserNotification(emailList, casUserName);
+        } catch (IllegalParameterFault ex) {
+            logger.error("SecurityService", "Unable to send email to: " + this.casAdminEmails
+                    + " after new cas user creation. Error: " + ex);
+        }
+        return this.casLogin(httpServletRequest);
+    }
+
+    private IGPUserManageDetail fillNewCASAccount(String userName) {
+        IGPUserManageDetail userToReturn = new GPUserManageDetail();
+        userToReturn.setAuthority(this.casAuthority);
+        userToReturn.setCreationDate(new Date());
+        userToReturn.setEmail(userName + this.casEmailSuffix);
+        userToReturn.setEnabled(Boolean.TRUE);
+        userToReturn.setName(userName);
+        userToReturn.setOrganization(this.casOrganization);
+        userToReturn.setPassword(userName);
+        userToReturn.setTemporary(Boolean.FALSE);
+        userToReturn.setTrustedLevel(GPTrustedLevel.LOW);
+        userToReturn.setUsername(userName);
+        return userToReturn;
+    }
+
+    private IGPAccountDetail executeLoginOnGPAccount(GPAccount account,
             GuiComponentsPermissionMapData guiComponentPermission,
             HttpServletRequest httpServletRequest)
             throws ResourceNotFoundFault, SOAPFaultException {
+        System.out.println("Account id: " + account.getId());
         GPAccountProject accountProject = geoPlatformServiceClient.getDefaultAccountProject(account.getId());
+        System.out.println("Account project: ");
+        System.out.println(accountProject);
         GPProject project;
         GPViewport viewport = null;
         if (accountProject == null) {

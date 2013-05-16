@@ -149,6 +149,10 @@ public interface GeoPlatformService {
             @WebParam(name = "sendEmail") boolean sendEmail)
             throws IllegalParameterFault;
 
+    @Post
+    void sendCASNewUserNotification (List<String> emailRecipient, String userNameToNotify)
+            throws IllegalParameterFault;
+
     /**
      * Update a User and his Authorities.
      *

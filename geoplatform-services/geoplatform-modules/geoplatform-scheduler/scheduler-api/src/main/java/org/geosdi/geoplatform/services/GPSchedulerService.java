@@ -35,15 +35,16 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.core.model.GPUser;
 
 /**
- * Public interface to define the service operations mapped via REST
- * using CXT framework.
- * 
+ * Public interface to define the service operations mapped via REST using CXT
+ * framework.
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebService(name = "GPSchedulerService", targetNamespace = "http://services.geo-platform.org/")
@@ -60,4 +61,7 @@ public interface GPSchedulerService {
     // For test purpose
     @Post
     void checkTempAccount();
+
+    @Post
+    void sendEmailUserCreationNotification(List<String> emailRecipient, String createdUserName);
 }

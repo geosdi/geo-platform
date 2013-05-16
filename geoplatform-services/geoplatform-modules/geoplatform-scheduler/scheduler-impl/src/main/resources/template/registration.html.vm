@@ -9,7 +9,7 @@
     </div>
     <br/><br/>
     <div>
-        Log in to the <a href="${frontendLink}">${frontendLabel}</b>
+        Log in to the <a href="${frontendLink}">${frontendLabel}</a>
     </div>
 </body>
 </html>

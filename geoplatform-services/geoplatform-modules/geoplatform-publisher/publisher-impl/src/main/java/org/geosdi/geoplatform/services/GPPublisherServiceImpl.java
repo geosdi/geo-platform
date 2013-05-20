@@ -171,7 +171,7 @@ public class GPPublisherServiceImpl implements GPPublisherService,
     public String loadStyle(String layerDatasource, String styleName) throws
             ResourceNotFoundFault {
         String dataSource = layerDatasource;
-        if(layerDatasource.matches(".*:80/")){
+        if (layerDatasource.matches(".*:80/")) {
             dataSource = dataSource.replaceFirst(":80", "");
         }
         System.out.println("Data source: " + dataSource);
@@ -678,9 +678,11 @@ public class GPPublisherServiceImpl implements GPPublisherService,
     public boolean existsDataStore(String workspace, String dataStoreName) {
         RESTDataStoreList workspaceDataStores = restReader.getDatastores(
                 workspace);
-        for (int i = 0; i < workspaceDataStores.size(); i++) {
-            if (workspaceDataStores.get(i).getName().equals(dataStoreName)) {
-                return true;
+        if (workspaceDataStores != null) {
+            for (int i = 0; i < workspaceDataStores.size(); i++) {
+                if (workspaceDataStores.get(i).getName().equals(dataStoreName)) {
+                    return true;
+                }
             }
         }
         return false;

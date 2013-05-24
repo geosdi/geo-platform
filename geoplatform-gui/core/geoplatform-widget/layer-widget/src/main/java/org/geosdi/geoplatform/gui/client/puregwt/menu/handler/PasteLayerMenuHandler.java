@@ -33,42 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.menu.strategy;
+package org.geosdi.geoplatform.gui.client.puregwt.menu.handler;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
-import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
-import org.geosdi.geoplatform.gui.impl.tree.menu.store.TreeMenuStoreRepository;
-import org.geosdi.geoplatform.gui.impl.tree.menu.strategy.AbstractTreeMenuStrategy;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class MultiSelectionMenuStrategy extends AbstractTreeMenuStrategy {
+public interface PasteLayerMenuHandler extends EventHandler {
 
-    @Inject
-    private TreeMenuStoreRepository storeRepository;
+    GwtEvent.Type<PasteLayerMenuHandler> TYPE = new GwtEvent.Type<PasteLayerMenuHandler>();
 
-    @Inject
-    public MultiSelectionMenuStrategy(GinTreePanel ginTreePanel) {
-        super(ginTreePanel.get());
-    }
-
-    @Override
-    public Menu getMenu(StoreCompositeKey key) {
-        List<? extends GPMenuGenericTool> tools = this.storeRepository.getMenuCompositeStore().getTools(
-                key);
-
-        return ((tools != null) && (tools.size() > 0)) ? super.buildMenu(key,
-                tools) : null;
-    }
+    void bindLayersToCopy(List<GPLayerTreeModel> layersToCopy);
 
 }

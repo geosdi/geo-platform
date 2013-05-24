@@ -42,8 +42,9 @@ import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeIconHan
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class MenuBaseAction extends MenuAction
         implements HasMenuActionChangeIconHandler {
@@ -71,7 +72,10 @@ public abstract class MenuBaseAction extends MenuAction
     }
 
     @Override
-    public HandlerRegistration addMenuActionChangeIconHandler(MenuActionChangeIconHandler actionHandler) {
-        return this.handlerManager.addHandler(MenuActionChangeIconEvent.TYPE, actionHandler);
+    public HandlerRegistration addMenuActionChangeIconHandler(
+            MenuActionChangeIconHandler actionHandler) {
+        return this.handlerManager.addHandler(MenuActionChangeIconEvent.TYPE,
+                actionHandler);
     }
+
 }

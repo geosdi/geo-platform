@@ -123,7 +123,7 @@ public class GPTreeMenuTest {
                 new MultiSelectionCompositeKey(
                 MultiSelectionElementType.ONLY_LEAF));
 
-        Assert.assertEquals(1, tools.size());
+        Assert.assertEquals(2, tools.size());
 
         logger.info("LEAFS TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
                 tools);

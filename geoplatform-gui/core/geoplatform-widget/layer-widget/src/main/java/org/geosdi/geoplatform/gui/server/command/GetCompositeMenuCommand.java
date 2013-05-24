@@ -68,15 +68,11 @@ public class GetCompositeMenuCommand implements
         if (gpTreeMenuStore == null) {
             logger.debug("################################# "
                     + "GPMenuCompositeStore is null.");
-            /**
-             * ********************** TODO *****************************
-             */
-            /**
-             * ****** MANAGE THIS EXCEPTION WITH A DEFAULT STORE *******
-             */
+
             throw new GeoPlatformException("GPMenuCompositeStore is null");
         }
 
         return new GetCompositeMenuResponse(gpTreeMenuStore);
     }
+
 }

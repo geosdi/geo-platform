@@ -45,7 +45,13 @@ import org.geosdi.geoplatform.gui.configuration.composite.menu.GPTreeMenuType;
  */
 public class SingleSelectionCompositeKey extends StoreCompositeKey {
 
-    private final GPTreeCompositeType compositeType;
+    private static final long serialVersionUID = 3635364962801166264L;
+    //
+    private GPTreeCompositeType compositeType;
+
+    public SingleSelectionCompositeKey() {
+        this(null);
+    }
 
     public SingleSelectionCompositeKey(GPTreeCompositeType compositeType) {
         super(GPTreeMenuType.SIMPLE);
@@ -92,4 +98,5 @@ public class SingleSelectionCompositeKey extends StoreCompositeKey {
         return "SingleSelectionCompositeKey{" + super.toString()
                 + "compositeType = " + compositeType + '}';
     }
+
 }

@@ -40,6 +40,7 @@ import com.google.common.collect.Maps;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
@@ -62,13 +63,15 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
         public String toString() {
             return this.value;
         }
+
     }
 
     protected AbstractFolderTreeNode() {
     }
 
     protected AbstractFolderTreeNode(GPFolderClientInfo folder) {
-        super(folder.getId(), folder.getLabel(), folder.getzIndex(), folder.isChecked());
+        super(folder.getId(), folder.getLabel(), folder.getzIndex(),
+                folder.isChecked());
     }
 
     @Override
@@ -80,6 +83,11 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
     public void setLabel(String label) {
         super.setLabel(label);
         super.set(GPFolderKeyValue.LABEL.toString(), label);
+    }
+
+    @Override
+    public GPTreeCompositeType getTreeCompositeType() {
+        return GPTreeCompositeType.COMPOSITE;
     }
 
     /**
@@ -104,4 +112,5 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
 
         return childMap;
     }
+
 }

@@ -36,12 +36,13 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.expander.GPMenuFolderExpander;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddLayersFromCopyMenuEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -52,14 +53,14 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PasteLayerAction extends MenuAction {
+public class PasteLayerAction extends MenuBaseAction {
 
-    private GPTreePanel<GPBeanTreeModel> treePanel;
+    private TreePanel<GPBeanTreeModel> treePanel;
     private List<GPLayerBean> layersToCopy = Lists.newArrayList();
     private GPMenuFolderExpander folderExpander;
 
-    public PasteLayerAction(GPTreePanel<GPBeanTreeModel> treePanel) {
-        super("PasteLayers");
+    public PasteLayerAction(TreePanel<GPBeanTreeModel> treePanel) {
+        super("PasteLayers", LayerResources.ICONS.paste());
         this.treePanel = treePanel;
         this.folderExpander = new GPMenuFolderExpander(treePanel, this);
     }
@@ -68,7 +69,8 @@ public class PasteLayerAction extends MenuAction {
     public void componentSelected(MenuEvent ce) {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         if ((!(itemSelected instanceof FolderTreeNode)) || this.layersToCopy == null) {
-            throw new IllegalArgumentException("It is possible to past only copied layers into a Folder");
+            throw new IllegalArgumentException(
+                    "It is possible to past only copied layers into a Folder");
         }
         if (!this.treePanel.isExpanded(itemSelected)) {
             this.folderExpander.checkNodeState();
@@ -78,7 +80,8 @@ public class PasteLayerAction extends MenuAction {
     }
 
     private void executePaste() {
-        LayerHandlerManager.fireEvent(new AddLayersFromCopyMenuEvent(layersToCopy));
+        LayerHandlerManager.fireEvent(new AddLayersFromCopyMenuEvent(
+                layersToCopy));
     }
 
     /**
@@ -88,4 +91,5 @@ public class PasteLayerAction extends MenuAction {
         this.layersToCopy.clear();
         this.layersToCopy.addAll(layersToCopy);
     }
+
 }

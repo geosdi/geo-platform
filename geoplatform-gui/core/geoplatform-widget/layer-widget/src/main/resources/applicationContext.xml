@@ -11,6 +11,7 @@
     <context:annotation-config />
 	
     <import resource="applicationContext-Menubar.xml" />
+    <import resource="applicationContext-CompositeMenu.xml" />
 
     <bean id="geoserverRestReader" class="it.geosolutions.geoserver.rest.GeoServerRESTReader">
         <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>

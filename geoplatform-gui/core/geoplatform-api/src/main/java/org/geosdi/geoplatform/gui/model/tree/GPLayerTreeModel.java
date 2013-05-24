@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.model.tree;
 
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -69,6 +70,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
         public String toString() {
             return this.value;
         }
+
     }
     //
     private String title;
@@ -180,7 +182,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     public final void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
         super.set(GPLayerKeyValue.ABSTRACT.toString(),
-                  this.abstractText != null ? this.abstractText : "");
+                this.abstractText != null ? this.abstractText : "");
     }
 
     /**
@@ -286,9 +288,14 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     }
 
     @Override
+    public GPTreeCompositeType getTreeCompositeType() {
+        return GPTreeCompositeType.LEAF;
+    }
+
+    @Override
     public String getLabel() {
         return ((getAlias() != null) && (!getAlias().equals("")))
-                ? getAlias() : super.getLabel();
+               ? getAlias() : super.getLabel();
     }
 
     public void setState(IGPLayerTreeState state) {
@@ -329,5 +336,6 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
         protected synchronized void setChanged() {
             super.setChanged();
         }
+
     }
 }

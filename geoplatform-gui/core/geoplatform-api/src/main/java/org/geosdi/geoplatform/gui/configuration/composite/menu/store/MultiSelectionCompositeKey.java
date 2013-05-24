@@ -45,7 +45,13 @@ import org.geosdi.geoplatform.gui.configuration.composite.menu.MultiSelectionEle
  */
 public class MultiSelectionCompositeKey extends StoreCompositeKey {
 
-    private final MultiSelectionElementType multiSelectionType;
+    private static final long serialVersionUID = -1258878031936700822L;
+    //
+    private MultiSelectionElementType multiSelectionType;
+
+    public MultiSelectionCompositeKey() {
+        this(null);
+    }
 
     public MultiSelectionCompositeKey(
             MultiSelectionElementType theMultiSelectionType) {
@@ -93,4 +99,5 @@ public class MultiSelectionCompositeKey extends StoreCompositeKey {
         return "MultiSelectionCompositeKey{ " + super.toString()
                 + "multiSelectionType = " + multiSelectionType + '}';
     }
+
 }

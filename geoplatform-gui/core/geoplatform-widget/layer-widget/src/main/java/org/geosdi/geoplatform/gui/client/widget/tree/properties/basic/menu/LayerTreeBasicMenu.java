@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu;
 
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
@@ -48,21 +50,35 @@ import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
  */
 public class LayerTreeBasicMenu implements GPCompositeBasicMenu {
 
-    private Menu menu = new Menu();
+    private Menu menu;
 
     @Override
     public Menu getBasicMenu() {
+        return this.menu = (this.menu == null) ? buildBasicMenu() : this.menu;
+    }
+
+    private Menu buildBasicMenu() {
+        Menu m = new Menu();
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
 
         MenuBaseAction baseAction = (MenuBaseAction) menuRegistar.get(
                 "aboutGeoPlatform");
 
-        MenuItem item = new MenuItem(baseAction.getTitle(),
-                baseAction.getImage(), baseAction);
-        
-        menu.add(item);
+        SelectionListener selectionListener = (baseAction != null) ? baseAction
+                                              : new SelectionListener<MenuEvent>() {
 
-        return this.menu;
+            @Override
+            public void componentSelected(MenuEvent ce) {
+            }
+
+        };
+
+        MenuItem item = new MenuItem(baseAction.getTitle(),
+                baseAction.getImage(), selectionListener);
+
+        m.add(item);
+
+        return m;
     }
 
 }

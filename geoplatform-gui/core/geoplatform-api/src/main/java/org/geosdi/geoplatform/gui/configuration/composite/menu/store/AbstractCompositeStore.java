@@ -51,20 +51,8 @@ public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
     private static final long serialVersionUID = -7607092275910880131L;
     //
     protected Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> clientTools;
-    private CompositeStoreSorter sorter;
 
     public AbstractCompositeStore() {
-        this.sorter = new CompositeStoreSorter() {
-
-            @Override
-            public void sort() {
-                for (Map.Entry<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> baseEntry : clientTools.entrySet()) {
-                    List<? extends GPMenuGenericTool> list = baseEntry.getValue();
-
-                    Collections.sort(list);
-                }
-            }
-        };
     }
 
     @Override
@@ -83,11 +71,25 @@ public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
         Preconditions.checkNotNull(clientTools, "The Client Tools must not "
                 + "be null.");
 
-        this.sorter.sort();
+        CompositeStoreSorter sorter = new CompositeStoreSorter() {
+
+            @Override
+            public void sort() {
+                for (Map.Entry<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> baseEntry : clientTools.entrySet()) {
+                    List<? extends GPMenuGenericTool> list = baseEntry.getValue();
+
+                    Collections.sort(list);
+                }
+            }
+
+        };
+
+        sorter.sort();
     }
 
     @Override
     public String toString() {
         return "AbstractCompositeStore{ " + "clientTools = " + clientTools + '}';
     }
+
 }

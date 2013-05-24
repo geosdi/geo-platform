@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface GeoPlatformServiceAsync {
 
-    <Request extends GPCommandRequest> void execute(Request request,
-            AsyncCallback<? extends GPCommandResponse> response) throws GeoPlatformException;
+    <Request extends GPCommandRequest, Response extends GPCommandResponse> void execute(
+            Request request, AsyncCallback<Response> response) throws GeoPlatformException;
+
 }

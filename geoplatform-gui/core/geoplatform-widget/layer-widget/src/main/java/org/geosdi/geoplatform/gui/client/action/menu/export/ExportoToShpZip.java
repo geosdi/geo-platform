@@ -39,7 +39,8 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Window;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -48,12 +49,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
-public class ExportoToShpZip extends MenuAction {
+public class ExportoToShpZip extends MenuBaseAction {
 
     private TreePanel treePanel;
 
     public ExportoToShpZip(TreePanel treePanel) {
-        super("ExportToShpZip");
+        super("ExportToShpZip", LayerResources.ICONS.exportToShpZip());
         this.treePanel = treePanel;
     }
 
@@ -75,8 +76,10 @@ public class ExportoToShpZip extends MenuAction {
             Window.open(shpZipURL, shpZipURL, shpZipURL);
         }
         {
-            Info.display("WARNING", "Il layer selezionato non è un layer vettoriale");
+            Info.display("WARNING",
+                    "Il layer selezionato non è un layer vettoriale");
         }
 
     }
+
 }

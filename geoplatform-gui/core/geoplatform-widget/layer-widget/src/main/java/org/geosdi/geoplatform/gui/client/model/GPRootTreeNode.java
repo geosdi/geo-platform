@@ -35,12 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.action.menu.factory.TreeContextMenuFactory;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
@@ -101,12 +99,8 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
     }
 
     @Override
-    public Menu getTreeContextMenu() {
-        return TreeContextMenuFactory.getRootContextMenu();
-    }
-
-    @Override
     public TreeStatusEnum getTreeStatus() {
         return TreeStatusEnum.ROOT_SELECTED;
     }
+
 }

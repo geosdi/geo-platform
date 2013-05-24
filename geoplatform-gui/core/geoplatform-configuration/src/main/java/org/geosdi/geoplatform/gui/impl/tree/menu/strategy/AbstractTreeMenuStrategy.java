@@ -40,9 +40,11 @@ import com.extjs.gxt.ui.client.widget.menu.DateMenu;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.collect.Maps;
 import com.google.gwt.user.client.ui.Widget;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionRegistar;
 import org.geosdi.geoplatform.gui.configuration.GPCheckMenuItem;
@@ -50,6 +52,7 @@ import org.geosdi.geoplatform.gui.configuration.GPDateMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPGroupMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
 import org.geosdi.geoplatform.gui.configuration.GPMenuItem;
+import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompositeKey;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.strategy.GPTreeMenuStrategy;
 import org.geosdi.geoplatform.gui.impl.menu.binder.GPMenuActionBinder;
 import org.geosdi.geoplatform.gui.impl.menu.binder.MenuActionBinder;
@@ -68,9 +71,8 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
 
     private static TreeMenuActionRegistar registar;
     //
-    protected Menu menu;
+    private Map<StoreCompositeKey, Menu> menuRegistar = Maps.newHashMap();
     private final TreePanel treePanel;
-    private boolean initialized;
     private MenuActionBinder menuActionBinder;
 
     public AbstractTreeMenuStrategy(TreePanel theTreePanel) {
@@ -78,15 +80,26 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
         this.menuActionBinder = new GPMenuActionBinder(this);
     }
 
-    protected final void buildTools(Menu menu,
+    protected final Menu buildTools(Menu menu,
             List<? extends GPMenuGenericTool> tools) {
         this.menuActionBinder.bindTools(menu, tools);
+
+        return menu;
+    }
+
+    protected final Menu buildMenu(StoreCompositeKey key,
+            List<? extends GPMenuGenericTool> tools) {
+
+        if (this.menuRegistar.get(key) != null) {
+            return this.menuRegistar.get(key);
+        }
+
+        return this.buildTools(this.bindMenu(key), tools);
     }
 
     @Override
-    public void addMenuItem(GPMenuItem tool,
-            Menu menu) {
-        MenuBaseAction action = (MenuBaseAction) registar.get(tool.getId(),
+    public void addMenuItem(GPMenuItem tool, Menu menu) {
+        MenuAction action = (MenuAction) registar.get(tool.getId(),
                 treePanel);
 
         this.menuActionBinder.bindMenuBaseAction(action, tool, menu);
@@ -121,8 +134,11 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
     }
 
     @Override
-    public boolean isInitialized() {
-        return initialized;
+    public Menu bindMenu(StoreCompositeKey key) {
+        Menu menu = new Menu();
+        this.menuRegistar.put(key, menu);
+
+        return menu;
     }
 
     @Override

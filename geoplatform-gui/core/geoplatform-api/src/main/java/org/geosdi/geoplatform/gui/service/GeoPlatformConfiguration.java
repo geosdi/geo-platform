@@ -41,8 +41,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 
 /**
- * @author giuseppe
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @RemoteServiceRelativePath("GeoPlatformConfiguration")
 public interface GeoPlatformConfiguration extends RemoteService {
@@ -53,7 +54,8 @@ public interface GeoPlatformConfiguration extends RemoteService {
 
         public static GeoPlatformConfigurationAsync getInstance() {
             if (instance == null) {
-                instance = (GeoPlatformConfigurationAsync) GWT.create(GeoPlatformConfiguration.class);
+                instance = (GeoPlatformConfigurationAsync) GWT.create(
+                        GeoPlatformConfiguration.class);
             }
 
             return instance;

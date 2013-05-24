@@ -33,61 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.composite.menu.store;
+package org.geosdi.geoplatform.gui;
 
-import com.google.common.base.Preconditions;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.configuration.GPMenuGenericTool;
+import org.geosdi.geoplatform.gui.client.command.GetCompositeMenuRequest;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.geosdi.geoplatform.gui.command.server.CommandDispatcher;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractCompositeStore implements GPMenuCompositeStore {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {GPTreeMenuCommandLoader.class},
+                      loader = AnnotationConfigContextLoader.class)
+@ImportResource(value = {"classpath:applicationContext-CompositeMenu.xml"})
+public class GPTreeMenuCommandTest {
 
-    private static final long serialVersionUID = -7607092275910880131L;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    protected Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> clientTools;
-    private CompositeStoreSorter sorter;
+    @Autowired
+    private CommandDispatcher gpCommandDispatcher;
 
-    public AbstractCompositeStore() {
-        this.sorter = new CompositeStoreSorter() {
-
-            @Override
-            public void sort() {
-                for (Map.Entry<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> baseEntry : clientTools.entrySet()) {
-                    List<? extends GPMenuGenericTool> list = baseEntry.getValue();
-
-                    Collections.sort(list);
-                }
-            }
-        };
+    @Before
+    public void setUp() {
+        Assert.assertNotNull(gpCommandDispatcher);
     }
 
-    @Override
-    public void setClientTools(
-            Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> theClientTools) {
-        this.clientTools = theClientTools;
-    }
+    @Test
+    public void compositeMenuCommand() throws Exception {
+        GPCommandResponse response = gpCommandDispatcher.execute(
+                new GetCompositeMenuRequest());
 
-    @Override
-    public Map<? extends StoreCompositeKey, List<? extends GPMenuGenericTool>> getClientTools() {
-        return this.clientTools;
-    }
-
-    @Override
-    public void init() {
-        Preconditions.checkNotNull(clientTools, "The Client Tools must not "
-                + "be null.");
-
-        this.sorter.sort();
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractCompositeStore{ " + "clientTools = " + clientTools + '}';
+        logger.info("RESPONSE : ######################### \n\n {} \n ",
+                response);
     }
 }

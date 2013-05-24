@@ -47,6 +47,8 @@ import org.geosdi.geoplatform.gui.configuration.composite.menu.store.StoreCompos
  */
 public class TreeMenuStore extends AbstractCompositeStore {
 
+    private static final long serialVersionUID = -2902185512891617895L;
+
     @Override
     public List<? extends GPMenuGenericTool> getTools(StoreCompositeKey key) {
         return clientTools.get(key);

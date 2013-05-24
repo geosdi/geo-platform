@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.GetCompositeMenuRequest;
 import org.geosdi.geoplatform.gui.client.command.GetCompositeMenuResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -62,8 +63,8 @@ public class GetCompositeMenuCommand implements
     private GPMenuCompositeStore gpTreeMenuStore;
 
     @Override
-    public GetCompositeMenuResponse execute(GetCompositeMenuRequest request)
-            throws GeoPlatformException {
+    public GetCompositeMenuResponse execute(GetCompositeMenuRequest request,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
 
         if (gpTreeMenuStore == null) {
             logger.debug("################################# "

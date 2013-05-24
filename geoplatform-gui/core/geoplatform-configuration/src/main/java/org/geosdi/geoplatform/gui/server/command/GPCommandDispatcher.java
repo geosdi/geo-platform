@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.command.server.CommandDispatcher;
@@ -58,11 +59,32 @@ public class GPCommandDispatcher implements CommandDispatcher {
 
     @Override
     public <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(
-            Request request) throws GeoPlatformException {
-
+            Request request, HttpServletRequest httpServletRequest) {
         logger.debug("GPCommandDipatcher : Execution of Command "
                 + request.getCommandName());
 
+        GPCommand command = findCommand(request);
+
+        logger.debug("Found Command " + request.getCommandName()
+                + " : " + command);
+
+        return (Response) command.execute(request, httpServletRequest);
+    }
+
+    @Override
+    public void destroy() {
+        logger.info("GPCommandDispatcher destroy --------------"
+                + "-----------------------------> ");
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext ac) throws
+            BeansException {
+        this.appContext = ac;
+    }
+
+    private <Request extends GPCommandRequest> GPCommand findCommand(
+            Request request) throws GeoPlatformException {
         GPCommand command = appContext.getBean(request.getCommandName(),
                 GPCommand.class);
 
@@ -74,20 +96,7 @@ public class GPCommandDispatcher implements CommandDispatcher {
                     + request.getCommandName() + " found.");
         }
 
-        logger.debug("Found Command " + request.getCommandName()
-                + " : " + command);
-
-        return (Response) command.execute(request);
+        return command;
     }
 
-    @Override
-    public void destroy() {
-        logger.info("GPCommandDispatcher destroy --------------"
-                + "-----------------------------> ");
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext ac) throws BeansException {
-        this.appContext = ac;
-    }
 }

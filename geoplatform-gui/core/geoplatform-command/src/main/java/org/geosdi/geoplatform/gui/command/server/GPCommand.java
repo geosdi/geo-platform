@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.command.server;
 
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
@@ -49,13 +50,11 @@ import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 public interface GPCommand<Request extends GPCommandRequest, Response extends GPCommandResponse> {
 
     /**
-     * <p>Method to execute the {@link GPCommandRequest} Request</p>
      *
-     * @param Request the request paramater
-     *
-     * @return {@link GPCommandResponse} response
-     *
-     * @throws Exception
+     * @param request
+     * @param httpServletRequest
+     * @return
      */
-    Response execute(Request request);
+    Response execute(Request request, HttpServletRequest httpServletRequest);
+
 }

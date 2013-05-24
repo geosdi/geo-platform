@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.handler;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.command.CASLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.CASLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
 import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -50,20 +51,25 @@ public class CASLoginHandler extends ILoginHandler {
 
     @Override
     public void doLogin() {
-        SecurityRemoteImpl.Util.getInstance().casLogin(new AsyncCallback<IGPAccountDetail>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                System.out.println("Error login on CAS: " + caught.getMessage());
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<CASLoginResponse>() {
+
+            private static final long serialVersionUID = 2625510244813075313L;
+
+            {
+                super.setCommandRequest(new CASLoginRequest());
             }
 
             @Override
-            public void onSuccess(IGPAccountDetail resultDetails) {
-                if (resultDetails != null) {
-                    SecurityGinInjector.MainInjector.getInstance().getPostLoginOperations().
-                            executeLoginOperations(resultDetails);
+            public void onCommandSuccess(CASLoginResponse response) {
+                if (response != null) {
+                    SecurityGinInjector.MainInjector.getInstance().
+                            getPostLoginOperations().
+                            executeLoginOperations(response.getResult());
                     //loginXMPPClient(ivUser, password.getValue(), result.getHostXmppServer());
                     BasicGinInjector.MainInjector.getInstance().
-                            getLoginAccessManager().hideProgressBar(Boolean.TRUE);
+                            getLoginAccessManager().
+                            hideProgressBar(Boolean.TRUE);
                 } else if (CASLoginHandler.super.nextHandler != null) {
                     CASLoginHandler.super.nextHandler.doLogin();
                 } else {
@@ -71,6 +77,14 @@ public class CASLoginHandler extends ILoginHandler {
                     System.out.println("Error login on CAS");
                 }
             }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                System.out.println("Error login on CAS: " + exception.
+                        getMessage());
+            }
+
         });
     }
+
 }

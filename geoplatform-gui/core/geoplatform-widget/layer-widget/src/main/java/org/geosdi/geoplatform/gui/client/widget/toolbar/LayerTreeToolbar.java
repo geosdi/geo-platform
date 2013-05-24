@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.gui.client.widget.toolbar;
 
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.widget.LayerTreeWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
@@ -49,10 +49,10 @@ import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class LayerTreeToolbar extends GPTreeToolbar {
-    
+
     private boolean initialized;
 
     /**
@@ -60,10 +60,11 @@ public class LayerTreeToolbar extends GPTreeToolbar {
      *
      * @param theTree
      */
-    public LayerTreeToolbar(TreePanel theTree) {
-        super(theTree);
+    @Inject
+    public LayerTreeToolbar(LayerTreeWidget layerTree) {
+        super(layerTree.getTree());
     }
-    
+
     @Override
     public void buildToolbar() {
         if (!initialized) {
@@ -74,7 +75,7 @@ public class LayerTreeToolbar extends GPTreeToolbar {
 
     /**
      * Create the Toolbar for LayerTreeWidget
-     * 
+     *
      */
     @Override
     public void initialize() {
@@ -84,13 +85,14 @@ public class LayerTreeToolbar extends GPTreeToolbar {
         this.addSeparator();
         this.addElementsByRegion(TreeToolbarRegion.END_REGION);
     }
-    
+
     private void addElementsByRegion(TreeToolbarRegion region) {
         List<ITreeToolbarPlugin> pluginsExcluded = Lists.newArrayList();
-        
-        for (ITreeToolbarPlugin element : TreeToolbarPluginManager.getToolbarPluginByRegion(region)) {
+
+        for (ITreeToolbarPlugin element : TreeToolbarPluginManager.getToolbarPluginByRegion(
+                region)) {
             String id = element.getId();
-            
+
             Boolean permission = GPAccountLogged.getInstance().
                     hasComponentPermission(id);
             if (permission == null) { // Element will not be visible
@@ -101,10 +103,10 @@ public class LayerTreeToolbar extends GPTreeToolbar {
                 // The element will removed from toolbarPlugin (method setEnableByStatus will not be called) and added to toolbar
                 pluginsExcluded.add(element);
             }
-            
+
             this.toolBar.add(element.getWidget(tree));
         }
-        
+
         TreeToolbarPluginManager.removeToolbarPlugins(pluginsExcluded);
     }
 

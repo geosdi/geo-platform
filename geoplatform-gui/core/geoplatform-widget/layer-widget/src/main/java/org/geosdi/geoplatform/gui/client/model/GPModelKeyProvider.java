@@ -48,5 +48,4 @@ public class GPModelKeyProvider implements ModelKeyProvider<GPBeanTreeModel> {
     public String getKey(GPBeanTreeModel model) {
         return model.getUUID();
     }
-
 }

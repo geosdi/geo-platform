@@ -38,14 +38,14 @@ package org.geosdi.geoplatform.gui.client.puregwt.timeout;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface IGPExpandTreeNodeHandler extends EventHandler{
- 
+public interface IGPExpandTreeNodeHandler extends EventHandler {
+
     Type<IGPExpandTreeNodeHandler> TYPE = new Type<IGPExpandTreeNodeHandler>();
-    
+
     public void expandNode(FolderTreeNode node);
-    
 }

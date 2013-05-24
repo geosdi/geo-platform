@@ -95,30 +95,36 @@ public class LayerWidgetUI implements EntryPoint {
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
         menuRegistar.put("layerMenu",
                 new MenuActionCreator() {
-                    @Override
-                    public MenuAction createAction() {
-                        return new LayerMenuAction();
-                    }
-                });
+
+            @Override
+            public MenuAction createAction() {
+                return new LayerMenuAction();
+            }
+        });
 
         menuRegistar.put("manageProjects",
                 new MenuActionCreator() {
-                    @Override
-                    public MenuAction createAction() {
-                        return loadMenuProjects;
-                    }
-                });
+
+            @Override
+            public MenuAction createAction() {
+                return loadMenuProjects;
+            }
+        });
 
     }
 
     private void addTreeToolbarComponents() {
-        TreeToolbarPluginManager.addToolbarPlugin(new AddFolderTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolbarPlugin(new AddLayerTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(
+                new AddFolderTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(
+                new AddLayerTreeToolbarPlugin());
 //        TreeToolbarPluginManager.addToolBarPlugin(new AddVectorTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolbarPlugin(new DeleteElementTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(
+                new DeleteElementTreeToolbarPlugin());
         TreeToolbarPluginManager.addToolbarPlugin(new SaveTreeToolbarPlugin());
         //No entrypoint in print module then I declared here the plugin
-        TreeToolbarPluginManager.addToolbarPlugin(new PrintLayersTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(
+                new PrintLayersTreeToolbarPlugin());
 //        TreeToolbarPluginManager.addToolBarPlugin(new GetMapTreeToolbarPlugin());
 
         AddLayerPluginManager.addWindowPlugin(new AddRasterLayerPlugin());

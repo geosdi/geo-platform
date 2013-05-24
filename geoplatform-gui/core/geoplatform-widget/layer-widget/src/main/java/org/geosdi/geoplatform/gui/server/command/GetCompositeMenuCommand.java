@@ -40,7 +40,10 @@ import org.geosdi.geoplatform.gui.client.command.GetCompositeMenuResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.configuration.composite.menu.store.GPMenuCompositeStore;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -48,16 +51,31 @@ import org.springframework.stereotype.Component;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Lazy(true)
 @Component(value = "command.GetCompositeMenuCommand")
 public class GetCompositeMenuCommand implements
         GPCommand<GetCompositeMenuRequest, GetCompositeMenuResponse> {
 
-    @Autowired
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired(required = false)
     private GPMenuCompositeStore gpTreeMenuStore;
 
     @Override
     public GetCompositeMenuResponse execute(GetCompositeMenuRequest request)
             throws GeoPlatformException {
+
+        if (gpTreeMenuStore == null) {
+            logger.debug("################################# "
+                    + "GPMenuCompositeStore is null.");
+            /**
+             * ********************** TODO *****************************
+             */
+            /**
+             * ****** MANAGE THIS EXCEPTION WITH A DEFAULT STORE *******
+             */
+            throw new GeoPlatformException("GPMenuCompositeStore is null");
+        }
 
         return new GetCompositeMenuResponse(gpTreeMenuStore);
     }

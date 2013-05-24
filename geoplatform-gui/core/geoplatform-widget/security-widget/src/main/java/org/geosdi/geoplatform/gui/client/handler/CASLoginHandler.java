@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.handler;
 
-import org.geosdi.geoplatform.gui.client.command.CASLoginRequest;
-import org.geosdi.geoplatform.gui.client.command.CASLoginResponse;
+import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
 import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;

@@ -73,6 +73,7 @@ public interface SecurityRemote extends RemoteService {
      * @return IGPAccountDetail
      * @throws GeoPlatformException
      */
+    @Deprecated
     IGPAccountDetail ssoLogin() throws GeoPlatformException;
     
     /**
@@ -80,6 +81,7 @@ public interface SecurityRemote extends RemoteService {
      * @return IGPAccountDetail
      * @throws GeoPlatformException
      */
+    @Deprecated
     IGPAccountDetail casLogin() throws GeoPlatformException;
 
     /**

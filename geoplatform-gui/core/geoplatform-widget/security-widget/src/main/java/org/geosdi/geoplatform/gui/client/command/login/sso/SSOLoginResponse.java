@@ -33,22 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command;
+package org.geosdi.geoplatform.gui.client.command.login.sso;
 
-import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CASLoginRequest implements GPCommandRequest {
+public class SSOLoginResponse implements GPCommandResponse<IGPAccountDetail> {
 
-    private static final long serialVersionUID = 3727210556994205008L;
+    private static final long serialVersionUID = 934448621485412681L;
+    //
+    private IGPAccountDetail accountDetail;
+
+    public SSOLoginResponse() {
+    }
+
+    public SSOLoginResponse(IGPAccountDetail theAccountDetail) {
+        this.accountDetail = theAccountDetail;
+    }
 
     @Override
-    public String getCommandName() {
-        return "command.CasLoginCommand";
+    public IGPAccountDetail getResult() {
+        return this.accountDetail;
+    }
+
+    @Override
+    public String toString() {
+        return "SSOLoginResponse{ " + "accountDetail = " + accountDetail + '}';
     }
 
 }

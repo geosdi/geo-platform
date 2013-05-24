@@ -62,11 +62,13 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
+    @Deprecated
     public IGPAccountDetail ssoLogin() throws GeoPlatformException {
         return this.securityService.ssoLogin(super.getThreadLocalRequest());
     }
 
     @Override
+    @Deprecated
     public IGPAccountDetail casLogin() throws GeoPlatformException {
         return this.securityService.casLogin(super.getThreadLocalRequest());
     }

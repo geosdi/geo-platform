@@ -37,9 +37,13 @@ package org.geosdi.geoplatform.gui.client.handler;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
 import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
@@ -52,28 +56,43 @@ public class SSOLoginHandler extends ILoginHandler {
 
     @Override
     public void doLogin() {
-        SecurityRemoteImpl.Util.getInstance().ssoLogin(new AsyncCallback<IGPAccountDetail>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                System.out.println("Error login on IVUser: " + caught.getMessage());
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<SSOLoginResponse>() {
+
+            private static final long serialVersionUID = -1447466115597300972L;
+
+            {
+                super.setCommandRequest(new SSOLoginRequest());
             }
 
             @Override
-            public void onSuccess(IGPAccountDetail resultDetails) {
-                if (resultDetails != null) {
-                    SecurityGinInjector.MainInjector.getInstance().getPostLoginOperations().
-                            executeLoginOperations(resultDetails);
-                    //loginXMPPClient(ivUser, password.getValue(), result.getHostXmppServer());
+            public void onCommandSuccess(SSOLoginResponse response) {
+                if ((response != null) && (response.getResult() != null)) {
+                    SecurityGinInjector.MainInjector.getInstance().
+                            getPostLoginOperations().
+                            executeLoginOperations(response.getResult());
+                    
                     BasicGinInjector.MainInjector.getInstance().
-                            getLoginAccessManager().hideProgressBar(Boolean.TRUE);
+                            getLoginAccessManager().
+                            hideProgressBar(Boolean.TRUE);
                 } else if (SSOLoginHandler.super.nextHandler != null) {
                     SSOLoginHandler.super.nextHandler.doLogin();
                 } else {
                     BasicGinInjector.MainInjector.getInstance().
-                            getLoginAccessManager().hideProgressBar(Boolean.FALSE);
-                    Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
+                            getLoginAccessManager().hideProgressBar(
+                            Boolean.FALSE);
+                    Dispatcher.forwardEvent(
+                            GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
                 }
             }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                System.out.println("Error login on IVUser: " + exception.
+                        getMessage());
+            }
+
         });
     }
+
 }

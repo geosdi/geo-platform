@@ -35,18 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.config;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import javax.inject.Scope;
+import javax.inject.Singleton;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@Scope
-@Documented
-@Retention(RUNTIME)
+@Singleton
 public @interface CatalogFilter {
 }

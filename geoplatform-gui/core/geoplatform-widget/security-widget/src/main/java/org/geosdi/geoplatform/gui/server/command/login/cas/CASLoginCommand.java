@@ -33,37 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command;
+package org.geosdi.geoplatform.gui.server.command.login.cas;
 
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.server.ISecurityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CASLoginResponse implements GPCommandResponse<IGPAccountDetail> {
+@Lazy(true)
+@Component(value = "command.login.CasLoginCommand")
+public class CASLoginCommand implements
+        GPCommand<CASLoginRequest, CASLoginResponse> {
 
-    private static final long serialVersionUID = 3505297359812594782L;
+    private static final Logger logger = LoggerFactory.getLogger(
+            CASLoginCommand.class);
     //
-    private IGPAccountDetail accountDetail;
-
-    public CASLoginResponse() {
-    }
-
-    public CASLoginResponse(IGPAccountDetail theAccountDetail) {
-        this.accountDetail = theAccountDetail;
-    }
+    @Autowired
+    private ISecurityService securityService;
 
     @Override
-    public IGPAccountDetail getResult() {
-        return this.accountDetail;
-    }
+    public CASLoginResponse execute(CASLoginRequest request,
+            HttpServletRequest httpServletRequest) {
 
-    @Override
-    public String toString() {
-        return "CASLoginResponse{ " + "accountDetail = " + accountDetail + '}';
+        IGPAccountDetail accauntDetail = this.securityService.casLogin(
+                httpServletRequest);
+
+        return new CASLoginResponse(accauntDetail);
     }
 
 }

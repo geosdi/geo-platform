@@ -33,15 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic;
+package org.geosdi.geoplatform.gui.client.widget.decorator;
+
+import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.puregwt.layers.decorator.GPTreeLabelHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface TreeBasicProperties {
+public interface LayerTreeDecorator extends GPTreeLabelHandler{
 
-    void setTreeBasicProperties();
+    HandlerRegistration addChangeLabelHandler();
 
 }

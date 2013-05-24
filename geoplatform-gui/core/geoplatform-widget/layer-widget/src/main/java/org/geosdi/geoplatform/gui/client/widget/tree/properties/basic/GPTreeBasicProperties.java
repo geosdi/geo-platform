@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.widget.decorator.GPLayerTreeDecorator;
@@ -45,6 +46,7 @@ import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu.LayerTreeBasicMenu;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -56,20 +58,24 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class GPTreeBasicProperties implements TreeBasicProperties {
 
     private final GPTreePanel tree;
-    private final GPTreeStoreWidget treeStore;
-    private final GPLayerTreeDecorator treeDecorator;
+    @Inject
+    private GPTreeStoreWidget treeStore;
+    @Inject
+    private GPLayerTreeDecorator treeDecorator;
+    @Inject
+    private LayerTreeBasicMenu basicMenu;
 
     @Inject
-    public GPTreeBasicProperties(GinTreePanel ginTreePanel,
-            GPTreeStoreWidget theTreeStore,
-            GPLayerTreeDecorator theTreeDecorator) {
+    public GPTreeBasicProperties(GinTreePanel ginTreePanel) {
         this.tree = ginTreePanel.get();
-        this.treeStore = theTreeStore;
-        this.treeDecorator = theTreeDecorator;
     }
 
     @Override
     public void setTreeBasicProperties() {
+        this.treeStore.addTreeStoreHandler();
+
+        this.treeDecorator.addChangeLabelHandler();
+
         tree.getSelectionModel().setSelectionMode(
                 Style.SelectionMode.MULTI);
 
@@ -86,6 +92,10 @@ public class GPTreeBasicProperties implements TreeBasicProperties {
         });
 
         tree.setAutoHeight(Boolean.TRUE);
+        tree.setCheckable(Boolean.TRUE);
+        tree.setCheckStyle(TreePanel.CheckCascade.NONE);
+
+        tree.setContextMenu(this.basicMenu.getBasicMenu());
     }
 
 }

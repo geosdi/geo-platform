@@ -33,39 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic.menu;
 
-import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.widget.Window;
-import com.google.gwt.user.client.ui.Frame;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class AboutGPAction extends MenuBaseAction {
+public interface GPCompositeBasicMenu {
 
-    private Window htmlWindow = new Window();
-    private final short ABOUT_WIDTH = 400;
-    private final short ABOUT_HEIGHT = 350;
+    Menu getBasicMenu();
 
-    public AboutGPAction() {
-        super("About GeoPlatform", BasicWidgetResources.ICONS.info());
-        Frame frame = new Frame("http://www.geosdi.org/aboutGeoPlatform.html");
-        frame.setSize("100%","100%");
-        htmlWindow.setHeading("About Geo-Platform");
-        htmlWindow.add(frame);
-        htmlWindow.setSize(ABOUT_WIDTH + 10, ABOUT_HEIGHT + 10);
-        htmlWindow.setBodyStyle("background-color:white");
-        htmlWindow.setResizable(Boolean.FALSE);
-//        htmlWindow.setScrollMode(Style.Scroll.AUTOY);
-    }
-
-    @Override
-    public void componentSelected(MenuEvent ce) {
-        htmlWindow.show();
-    }
 }

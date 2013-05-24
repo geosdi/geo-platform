@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree.store;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -43,14 +44,20 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GenericTreeStoreWidget implements GPTreeStoreEventHandler {
+public abstract class GenericTreeStoreWidget implements GPTreeStoreHandler {
 
     protected GPTreePanel<GPBeanTreeModel> tree;
 
     public GenericTreeStoreWidget(GPTreePanel<GPBeanTreeModel> theTree) {
         this.tree = theTree;
-        LayerHandlerManager.addHandler(GPTreeStoreEventHandler.TYPE, this);
+
     }
+
+    @Override
+    public HandlerRegistration addTreeStoreHandler() {
+        return LayerHandlerManager.addHandler(GPTreeStoreEventHandler.TYPE, this);
+    }
+
 }

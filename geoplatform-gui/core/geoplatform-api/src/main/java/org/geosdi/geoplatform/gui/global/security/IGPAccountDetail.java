@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.global.security;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
@@ -48,7 +49,7 @@ import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface IGPAccountDetail {
+public interface IGPAccountDetail extends Serializable {
 
     String getName();
 
@@ -89,4 +90,5 @@ public interface IGPAccountDetail {
     Boolean hasComponentPermission(String componentID);
 
     public List<IGPClientMessage> getUnreadMessages();
+
 }

@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,39 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.server.command;
 
-import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
-import org.geosdi.geoplatform.gui.command.server.CommandDispatcher;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
-import org.geosdi.geoplatform.gui.service.GeoPlatformService;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.client.command.CASLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.CASLoginResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformServiceImpl extends GPAutoInjectingRemoteServiceServlet
-        implements GeoPlatformService {
+@Lazy(true)
+@Component(value = "command.CasLoginCommand")
+public class CASLoginCommand implements
+        GPCommand<CASLoginRequest, CASLoginResponse> {
 
-    private static final long serialVersionUID = 8142113535798430418L;
-    //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(
+            CASLoginCommand.class);
     //
     @Autowired
-    private CommandDispatcher gpCommandDispatcher;
+    private ISecurityService securityService;
 
     @Override
-    public <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(
-            Request request) throws GeoPlatformException {
+    public CASLoginResponse execute(CASLoginRequest request,
+            HttpServletRequest httpServletRequest) {
 
-        return this.gpCommandDispatcher.execute(request, super.
-                getThreadLocalRequest());
+        IGPAccountDetail accauntDetail = this.securityService.casLogin(
+                httpServletRequest);
+
+        return new CASLoginResponse(accauntDetail);
     }
 
 }

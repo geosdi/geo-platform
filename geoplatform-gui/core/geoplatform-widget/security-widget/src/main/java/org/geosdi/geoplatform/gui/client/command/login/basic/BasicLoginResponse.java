@@ -33,49 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.login.cas;
+package org.geosdi.geoplatform.gui.client.command.login.basic;
 
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
-import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.server.ISecurityService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
-@Component(value = "command.login.CasLoginCommand")
-public class CASLoginCommand implements
-        GPCommand<CASLoginRequest, CASLoginResponse> {
+public class BasicLoginResponse implements GPCommandResponse<IGPAccountDetail> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            CASLoginCommand.class);
+    private static final long serialVersionUID = 2382685807962844944L;
     //
-    @Autowired
-    private ISecurityService securityService;
+    private IGPAccountDetail accountDetail;
+
+    public BasicLoginResponse() {
+    }
+
+    public BasicLoginResponse(IGPAccountDetail accountDetail) {
+        this.accountDetail = accountDetail;
+    }
 
     @Override
-    public CASLoginResponse execute(CASLoginRequest request,
-            HttpServletRequest httpServletRequest) {
+    public IGPAccountDetail getResult() {
+        return this.accountDetail;
+    }
 
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        IGPAccountDetail accauntDetail = this.securityService.casLogin(
-                httpServletRequest);
-
-        logger.debug("##################### FOUND {} ", accauntDetail);
-
-        return new CASLoginResponse(accauntDetail);
+    @Override
+    public String toString() {
+        return "BasicLoginResponse{ " + "accountDetail = " + accountDetail + '}';
     }
 
 }

@@ -33,11 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.login.cas;
+package org.geosdi.geoplatform.gui.server.command.login.basic;
 
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
+import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
@@ -53,29 +53,29 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
-@Component(value = "command.login.CasLoginCommand")
-public class CASLoginCommand implements
-        GPCommand<CASLoginRequest, CASLoginResponse> {
+@Component(value = "command.login.BasicLoginCommand")
+public class BasicLoginCommand implements
+        GPCommand<BasicLoginRequest, BasicLoginResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            CASLoginCommand.class);
+            BasicLoginCommand.class);
     //
     @Autowired
     private ISecurityService securityService;
 
     @Override
-    public CASLoginResponse execute(CASLoginRequest request,
+    public BasicLoginResponse execute(BasicLoginRequest request,
             HttpServletRequest httpServletRequest) {
 
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
-        IGPAccountDetail accauntDetail = this.securityService.casLogin(
-                httpServletRequest);
+        IGPAccountDetail accountDetail = this.securityService.userLogin(request.
+                getUserName(), request.getPassword(), httpServletRequest);
 
-        logger.debug("##################### FOUND {} ", accauntDetail);
+        logger.debug("#################### Found {} ", accountDetail);
 
-        return new CASLoginResponse(accauntDetail);
+        return new BasicLoginResponse(accountDetail);
     }
 
 }

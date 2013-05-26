@@ -33,49 +33,67 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.login.cas;
+package org.geosdi.geoplatform.gui.client.command.login.basic;
 
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
-import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.server.ISecurityService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
-@Component(value = "command.login.CasLoginCommand")
-public class CASLoginCommand implements
-        GPCommand<CASLoginRequest, CASLoginResponse> {
+public class BasicLoginRequest implements GPCommandRequest {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            CASLoginCommand.class);
+    private static final long serialVersionUID = -6015505868594436818L;
     //
-    @Autowired
-    private ISecurityService securityService;
+    private String userName;
+    private String password;
+
+    public BasicLoginRequest() {
+    }
+
+    public BasicLoginRequest(String theUserName, String thePassword) {
+        this.userName = theUserName;
+        this.password = thePassword;
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
-    public CASLoginResponse execute(CASLoginRequest request,
-            HttpServletRequest httpServletRequest) {
+    public String getCommandName() {
+        return "command.login.BasicLoginCommand";
+    }
 
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        IGPAccountDetail accauntDetail = this.securityService.casLogin(
-                httpServletRequest);
-
-        logger.debug("##################### FOUND {} ", accauntDetail);
-
-        return new CASLoginResponse(accauntDetail);
+    @Override
+    public String toString() {
+        return "BasicLoginRequest{ " + "userName = " + getUserName()
+                + ", password = " + getPassword() + '}';
     }
 
 }

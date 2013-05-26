@@ -57,6 +57,7 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     private ISecurityService securityService;
 
     @Override
+    @Deprecated
     public IGPAccountDetail userLogin(String userName, String password) throws GeoPlatformException {
         return this.securityService.userLogin(userName, password, super.getThreadLocalRequest());
     }

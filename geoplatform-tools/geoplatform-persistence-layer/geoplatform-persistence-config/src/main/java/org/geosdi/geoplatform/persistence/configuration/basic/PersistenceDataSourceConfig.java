@@ -37,11 +37,11 @@ package org.geosdi.geoplatform.persistence.configuration.basic;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import javax.sql.DataSource;
+import org.geosdi.geoplatform.persistence.configuration.c3p0.C3P0BasicProperties;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
  *
@@ -50,22 +50,39 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  */
 @Configuration
 public class PersistenceDataSourceConfig {
-    
+
     @Autowired
     private GPPersistenceConnector gpPersistenceConnector;
+    //
+    @Autowired
+    private C3P0BasicProperties c3p0BasicProperties;
 
-    /**
-     * TODO : Change this implementation with {@link ComboPooledDataSource}
-     */
     @Bean
-    public DataSource persitenceDataSource() {
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(
-                this.gpPersistenceConnector.getDriverClassName());
-        dataSource.setUrl(this.gpPersistenceConnector.getUrl());
-        dataSource.setUsername(this.gpPersistenceConnector.getUsername());
+    public DataSource persitenceDataSource() throws Exception {
+        final ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setDriverClass(this.gpPersistenceConnector.
+                getDriverClassName());
+        dataSource.setJdbcUrl(this.gpPersistenceConnector.getUrl());
+        dataSource.setUser(this.gpPersistenceConnector.getUsername());
         dataSource.setPassword(this.gpPersistenceConnector.getPassword());
+
+
+        /**
+         * ************************ Poll Settings ****************************
+         */
+        dataSource.setAcquireIncrement(c3p0BasicProperties
+                .getAcquireIncrement());
+        dataSource.setAcquireRetryAttempts(c3p0BasicProperties.
+                getAcquireRetryAttempts());
+        dataSource.setMinPoolSize(c3p0BasicProperties.getMinPoolSize());
+        dataSource.setMaxPoolSize(c3p0BasicProperties.getMaxPoolSize());
+        dataSource.setMaxIdleTime(c3p0BasicProperties.getMaxIdleTime());
+        dataSource.setMaxConnectionAge(c3p0BasicProperties
+                .getMaxConnectionAge());
+        dataSource.setConnectionCustomizerClassName(c3p0BasicProperties
+                .getConnectionCustomizerClassName());
 
         return dataSource;
     }
+
 }

@@ -92,8 +92,10 @@ public interface SecurityRemote extends RemoteService {
      * @return IGPAccountDetail
      * @throws GeoPlatformException
      */
+    @Deprecated
     IGPAccountDetail applicationLogin(String appID)
             throws GeoPlatformException;
 
+    @Deprecated
     void invalidateSession() throws GeoPlatformException;
 }

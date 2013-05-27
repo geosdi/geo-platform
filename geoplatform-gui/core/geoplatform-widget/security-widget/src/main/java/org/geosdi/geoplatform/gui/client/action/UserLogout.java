@@ -41,11 +41,13 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
+import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionResponse;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
@@ -53,15 +55,17 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @email nazzareno.sileno@geosdi.org
  */
 public class UserLogout extends MenuBaseAction {
-
+    
     public UserLogout() {
         super("Logout", BasicWidgetResources.ICONS.logout());
     }
-
+    
     @Override
     public void componentSelected(MenuEvent ce) {
-        GeoPlatformMessage.confirmMessage("Log-out message", "Do you really want to leave the application?",
-                                          new Listener<MessageBoxEvent>() {
+        GeoPlatformMessage.confirmMessage("Log-out message",
+                "Do you really want to leave the application?",
+                new Listener<MessageBoxEvent>() {
+            
             @Override
             public void handleEvent(MessageBoxEvent be) {
                 if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
@@ -70,20 +74,31 @@ public class UserLogout extends MenuBaseAction {
                     invalidateSession();
                 }
             }
+            
         });
     }
-
+    
     private void invalidateSession() {
-        SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                //TODO: In case of fail... what is possible to do??
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<InvalidateSessionResponse>() {
+            
+            private static final long serialVersionUID = 3838394981874885388L;
+            
+            {
+                super.setCommandRequest(new InvalidateSessionRequest());
             }
-
+            
             @Override
-            public void onSuccess(Object result) {
+            public void onCommandSuccess(InvalidateSessionResponse response) {
                 Window.Location.reload();
             }
+            
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                //TODO: In case of fail... what is possible to do??
+            }
+            
         });
     }
+    
 }

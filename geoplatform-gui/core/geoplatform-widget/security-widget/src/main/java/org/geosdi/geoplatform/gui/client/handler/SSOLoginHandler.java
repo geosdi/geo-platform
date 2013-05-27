@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.handler;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
@@ -44,8 +43,6 @@ import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
 import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**

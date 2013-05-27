@@ -58,8 +58,10 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
 
     @Override
     @Deprecated
-    public IGPAccountDetail userLogin(String userName, String password) throws GeoPlatformException {
-        return this.securityService.userLogin(userName, password, super.getThreadLocalRequest());
+    public IGPAccountDetail userLogin(String userName, String password) throws
+            GeoPlatformException {
+        return this.securityService.userLogin(userName, password, super.
+                getThreadLocalRequest());
     }
 
     @Override
@@ -75,12 +77,17 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
-    public IGPAccountDetail applicationLogin(String appID) throws GeoPlatformException {
-        return this.securityService.applicationLogin(appID, super.getThreadLocalRequest());
+    @Deprecated
+    public IGPAccountDetail applicationLogin(String appID) throws
+            GeoPlatformException {
+        return this.securityService.applicationLogin(appID, super.
+                getThreadLocalRequest());
     }
 
     @Override
+    @Deprecated
     public void invalidateSession() throws GeoPlatformException {
         this.securityService.invalidateSession(super.getThreadLocalRequest());
     }
+
 }

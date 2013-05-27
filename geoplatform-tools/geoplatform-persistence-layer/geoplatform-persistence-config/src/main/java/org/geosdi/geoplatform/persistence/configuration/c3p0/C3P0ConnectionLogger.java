@@ -33,49 +33,66 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.login.cas;
+package org.geosdi.geoplatform.persistence.configuration.c3p0;
 
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
-import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.server.ISecurityService;
+import com.mchange.v2.c3p0.ConnectionCustomizer;
+import java.sql.Connection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
-@Component(value = "command.login.CasLoginCommand")
-public class CASLoginCommand implements
-        GPCommand<CASLoginRequest, CASLoginResponse> {
+public class C3P0ConnectionLogger implements ConnectionCustomizer {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            CASLoginCommand.class);
+            C3P0ConnectionLogger.class);
     //
-    @Autowired
-    private ISecurityService securityService;
+    private int activeConnections = 0;
+    private int acquiredConnections = 0;
 
     @Override
-    public CASLoginResponse execute(CASLoginRequest request,
-            HttpServletRequest httpServletRequest) {
+    public void onAcquire(Connection c, String parentDataSourceIdentityToken)
+            throws Exception {
+        logger.debug("onAcquire: Connection acquired from database : " + c
+                + " [" + parentDataSourceIdentityToken + "]");
+        acquiredConnections++;
+        logger.debug("onAcquire: Total Open Connections in Pool : "
+                + acquiredConnections);
+    }
 
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
+    @Override
+    public void onDestroy(Connection c, String parentDataSourceIdentityToken)
+            throws Exception {
+        logger.debug("onDestroy: Connection closed with database : " + c + " ["
+                + parentDataSourceIdentityToken + "]");
+        acquiredConnections--;
+        logger.debug("onDestroy: Total Open Connections in Pool : "
+                + acquiredConnections);
+    }
 
-        IGPAccountDetail accauntDetail = this.securityService.casLogin(
-                httpServletRequest);
+    @Override
+    public void onCheckOut(Connection c, String parentDataSourceIdentityToken)
+            throws Exception {
+        logger.debug(
+                "onCheckOut: Connection from pool provide to application : "
+                + c + " [" + parentDataSourceIdentityToken + "]");
+        activeConnections++;
+        logger.debug("onCheckOut: Total Active Connections in Pool : "
+                + activeConnections);
+    }
 
-        logger.debug("##################### FOUND {} ", accauntDetail);
-
-        return new CASLoginResponse(accauntDetail);
+    @Override
+    public void onCheckIn(Connection c, String parentDataSourceIdentityToken)
+            throws Exception {
+        logger.debug("onCheckIn: Connection returned to pool "
+                + "from application : "
+                + c + " [" + parentDataSourceIdentityToken + "]");
+        activeConnections--;
+        logger.debug("onCheckIn: Total Active Connections in Pool : "
+                + activeConnections);
     }
 
 }

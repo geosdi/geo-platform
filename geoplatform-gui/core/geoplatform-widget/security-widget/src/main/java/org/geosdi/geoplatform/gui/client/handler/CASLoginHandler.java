@@ -62,11 +62,11 @@ public class CASLoginHandler extends ILoginHandler {
 
             @Override
             public void onCommandSuccess(CASLoginResponse response) {
-                if (response != null) {
+                if ((response != null) && (response.getResult() != null)) {
                     SecurityGinInjector.MainInjector.getInstance().
                             getPostLoginOperations().
                             executeLoginOperations(response.getResult());
-                    //loginXMPPClient(ivUser, password.getValue(), result.getHostXmppServer());
+
                     BasicGinInjector.MainInjector.getInstance().
                             getLoginAccessManager().
                             hideProgressBar(Boolean.TRUE);

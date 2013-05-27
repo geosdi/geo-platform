@@ -41,24 +41,27 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.GPXMPPClient;
+import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPAdvancedSecurityWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManager {
+public class LoginWidget extends GPAdvancedSecurityWidget implements
+        ILoginManager {
 
     private LoginStatus status;
     private EventType eventOnSuccess;
@@ -74,7 +77,8 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         super();
         this.eventOnSuccess = eventOnSuccess;
         this.generateLoginManager();
-        SecurityGinInjector.MainInjector.getInstance().getSessionLoginWidget().setEventOnSuccess(eventOnSuccess);
+        SecurityGinInjector.MainInjector.getInstance().getSessionLoginWidget().
+                setEventOnSuccess(eventOnSuccess);
     }
 
     @UiFactory
@@ -114,25 +118,32 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         login.setEnabled(Boolean.FALSE);
         super.showProgressBar();
         super.loginError.setText("");
-        SecurityRemoteImpl.Util.getInstance().userLogin(
-                this.userName.getValue(),
-                this.password.getValue(),
-                new AsyncCallback<IGPAccountDetail>() {
+
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<BasicLoginResponse>(new BasicLoginRequest(
+                this.userName.getValue(), this.password.getValue())) {
+
+            private static final long serialVersionUID = -1178797454775088815L;
+
             @Override
-            public void onFailure(Throwable caught) {
-                loginFailureMessage = caught.getMessage();
-                errorConnection();
-                status.setStatus(
-                        LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
-                        LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
+            public void onCommandSuccess(BasicLoginResponse response) {
+                loginFailureMessage = "";
+                executeLoginOperations(response.getResult());
+                loginXMPPClient(userName.getValue(), password.getValue(),
+                        response.getResult().getHostXmppServer());
             }
 
             @Override
-            public void onSuccess(IGPAccountDetail result) {
-                loginFailureMessage = "";
-                executeLoginOperations(result);
-                loginXMPPClient(userName.getValue(), password.getValue(), result.getHostXmppServer());
+            public void onCommandFailure(Throwable exception) {
+                loginFailureMessage = exception.getMessage();
+                errorConnection();
+                status.setStatus(
+                        LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.
+                        getValue(),
+                        LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.
+                        getValue());
             }
+
         });
     }
 
@@ -143,14 +154,17 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
         GPAccountLogged.getInstance().setAccountDetail(resultDetails);
         SecurityGinInjector.MainInjector.getInstance().getSessionLoginWidget().
                 setUserLogger(resultDetails.getUsername());
-        Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(), resultDetails.getTreeOptions());
-        Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(), resultDetails);
+        Registry.register(UserSessionEnum.USER_TREE_OPTIONS.name(),
+                resultDetails.getTreeOptions());
+        Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(),
+                resultDetails);
     }
 
     @Override
     public void loginDone() {
         if (loginFailureMessage != null && loginFailureMessage.equals("")) {
             final Timer t = new Timer() {
+
                 @Override
                 public void run() {
                     Dispatcher.forwardEvent(eventOnSuccess);
@@ -158,19 +172,20 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
                     reset();
                     LoginWidget.super.progressBar.hide();
                 }
+
             };
             t.schedule(2000);
         } else {
             System.out.println("Login failure message: " + loginFailureMessage);
             this.getParent().getElement().getStyle().clearDisplay();
-//            this.getElement().getStyle().clearDisplay();
             LoginWidget.super.progressBar.hide();
             super.loginError.setText("Nome utente o password errati");
             login.setEnabled(Boolean.TRUE);
         }
     }
 
-    private void loginXMPPClient(String username, String password, String hostXmppServer) {
+    private void loginXMPPClient(String username, String password,
+            String hostXmppServer) {
         GPXMPPClient xMPPClient = new GPXMPPClient();
         xMPPClient.userXMPPLogin(username, password, hostXmppServer);
     }
@@ -192,10 +207,5 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements ILoginManag
     public final void generateLoginManager() {
         UserLoginManager loginManager = new UserLoginManager(this);
     }
-//    public void show() {
-//        this.login.setEnabled(Boolean.TRUE);
-//        validate();
-//        super.setVisible(Boolean.TRUE);
-//        RootPanel.get().add(this);
-//    }
+
 }

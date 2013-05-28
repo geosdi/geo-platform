@@ -10,7 +10,7 @@
     </parent>
   
     <groupId>org.geosdi</groupId>
-    <artifactId>gp-cas-jms-producer</artifactId>
+    <artifactId>geoplatform-cas-jms-producer</artifactId>
     <version>1.5-SNAPSHOT</version>
     <name>Geo-Platform :: == CAS JMS Producer</name>
   
@@ -20,9 +20,11 @@
   
     <dependencies>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>          
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-cas-jms-mock</artifactId>
+            <version>${project.version}</version>
         </dependency>
+        
         <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -44,6 +46,21 @@
             <artifactId>spring-expression</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+        </dependency>
+            
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+        </dependency>
+        
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -61,5 +78,38 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>watcher</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>org.geosdi.geoplatform.cas.jms.app.CASProducerApp</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

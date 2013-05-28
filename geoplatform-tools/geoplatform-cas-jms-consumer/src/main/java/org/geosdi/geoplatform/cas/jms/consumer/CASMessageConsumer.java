@@ -33,20 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cas.support;
+package org.geosdi.geoplatform.cas.jms.consumer;
 
-import java.util.Map;
+import javax.jms.JMSException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jms.core.JmsTemplate;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface ICASRegistar {
+public class CASMessageConsumer implements ICASConsumer {
     
-    void registerProperty(String propertyName, Object value);
+    private static final Logger logger = LoggerFactory.getLogger(
+            CASMessageConsumer.class);
+    //
+    private JmsTemplate jmsTemplate;
     
-    Object getProperty(String propertyName);
-    
-    Map<String, Object> getRegistar();
+    @Override
+    public Object receive() throws JMSException {
+        Object o = this.jmsTemplate.receiveAndConvert();
+        
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@ CASMessageConsumer : "
+                + "Received Object " + o);
+        
+        return o;
+    }
 
+    /**
+     * @param theJmsTemplate the jmsTemplate to set
+     */
+    public void setJmsTemplate(JmsTemplate theJmsTemplate) {
+        this.jmsTemplate = theJmsTemplate;
+    }
+    
 }

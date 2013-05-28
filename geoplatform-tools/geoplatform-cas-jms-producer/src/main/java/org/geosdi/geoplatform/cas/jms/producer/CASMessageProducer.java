@@ -33,37 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cas.support;
+package org.geosdi.geoplatform.cas.jms.producer;
 
-import com.google.common.collect.Maps;
-import java.util.Collections;
-import java.util.Map;
+import java.io.Serializable;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.ObjectMessage;
+import javax.jms.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class CASPropertiesRegistar implements ICASRegistar {
+public class CASMessageProducer implements ICASProducer {
 
-    private static final Logger logger = LoggerFactory.getLogger(CASPropertiesRegistar.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            CASMessageProducer.class);
     //
-    private final Map<String, Object> registar = Maps.<String, Object>newHashMap();
+    private JmsTemplate jmsTemplate;
 
     @Override
-    public synchronized void registerProperty(String propertyName, Object value) {
-        logger.debug("Registering property: " + propertyName);
-        this.registar.put(propertyName, value);
+    public void sendObject(final Serializable o) throws JMSException {
+        this.jmsTemplate.send(new MessageCreator() {
+
+            @Override
+            public Message createMessage(Session sn) throws JMSException {
+                ObjectMessage message = sn.createObjectMessage(o);
+                logger.info("@@@@@@@@@@@@@@@@@@@@@@ CASMessageProducer : "
+                        + "Sending Object " + o);
+
+                return message;
+            }
+
+        });
     }
 
-    @Override
-    public synchronized Object getProperty(String propertyName) {
-        return this.registar.get(propertyName);
+    /**
+     * @param theJmsTemplate the jmsTemplate to set
+     */
+    public void setJmsTemplate(JmsTemplate theJmsTemplate) {
+        this.jmsTemplate = theJmsTemplate;
     }
 
-    @Override
-    public Map<String, Object> getRegistar() {
-        return Collections.unmodifiableMap(registar);
-    }
 }

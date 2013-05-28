@@ -23,7 +23,9 @@
         <module>geoplatform-persistence-layer</module>
         <module>geoplatform-gml-parser</module>
         <module>geoplatform-cas-aop</module>
-        <module>gp-cas-jms-producer</module>
+        <module>geoplatform-cas-jms-mock</module>
+        <module>geoplatform-cas-jms-producer</module>
+        <module>geoplatform-cas-jms-consumer</module>
     </modules>
 
 </project>

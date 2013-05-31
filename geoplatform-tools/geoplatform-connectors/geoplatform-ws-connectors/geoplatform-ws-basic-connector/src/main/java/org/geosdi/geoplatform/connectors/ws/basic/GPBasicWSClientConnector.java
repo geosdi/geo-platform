@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.connectors.ws.basic;
 
+import javax.ws.rs.client.ClientFactory;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.frontend.ClientProxy;
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.connectors.ws.soap.SoapClientConnector;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -52,9 +55,18 @@ public class GPBasicWSClientConnector extends SoapClientConnector<GeoPlatformSer
 
     private @Value("configurator{webservice_endpoint_address}")
     String address;
+    //
+    private Client client;
 
     public GPBasicWSClientConnector() {
         super(GeoPlatformService.class);
+    }
+
+    @Override
+    protected void create() {
+        super.create();
+
+        this.client = ClientProxy.getClient(super.getEndpointService());
     }
 
     @Override
@@ -66,4 +78,12 @@ public class GPBasicWSClientConnector extends SoapClientConnector<GeoPlatformSer
     public void setAddress(String theAddress) {
         this.address = theAddress;
     }
+
+    /**
+     * @return the client
+     */
+    public Client getClient() {
+        return client;
+    }
+
 }

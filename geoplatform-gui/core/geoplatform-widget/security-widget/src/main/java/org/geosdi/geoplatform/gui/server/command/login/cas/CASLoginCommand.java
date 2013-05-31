@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.cas;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientConnector;
 import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -62,6 +64,9 @@ public class CASLoginCommand implements
     //
     @Autowired
     private ISecurityService securityService;
+    //
+    @Resource
+    private GPBasicWSClientConnector gpBasicWSClientConnector;
 
     @Override
     public CASLoginResponse execute(CASLoginRequest request,
@@ -70,6 +75,9 @@ public class CASLoginCommand implements
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
+        /**
+         * Here the parameter in Request *
+         */
         IGPAccountDetail accauntDetail = this.securityService.casLogin(
                 httpServletRequest);
 

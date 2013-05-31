@@ -54,12 +54,13 @@ public class CASProducerApp {
         ICASProducer casProducer = (ICASProducer) context.getBean(
                 "casMessageProducer");
 
-        CASMockObject mock = new CASMockObject();
-        mock.setId(new Long(22));
-        mock.setMessage("I AM HERE NOW #################");
+        for (int i = 0; i < 10; i++) {
+            CASMockObject mock = new CASMockObject();
+            mock.setId(new Long(i));
+            mock.setMessage("I AM HERE NOW ################# " + i);
 
-
-        casProducer.sendObject(mock);
+            casProducer.sendObject(mock);
+        }
     }
 
 }

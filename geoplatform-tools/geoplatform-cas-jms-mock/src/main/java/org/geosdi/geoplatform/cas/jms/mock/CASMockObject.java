@@ -82,8 +82,7 @@ public class CASMockObject implements Serializable {
 
     @Override
     public String toString() {
-        return "CASMockObject{ " + "id = " + id
-                + ", message = " + message + '}';
+        return "CASMockObject{" + "id = " + id + '}';
     }
 
 }

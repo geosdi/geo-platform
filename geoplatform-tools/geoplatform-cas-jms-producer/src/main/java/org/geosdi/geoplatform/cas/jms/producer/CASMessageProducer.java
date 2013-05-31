@@ -64,6 +64,8 @@ public class CASMessageProducer implements ICASProducer {
             @Override
             public Message createMessage(Session sn) throws JMSException {
                 ObjectMessage message = sn.createObjectMessage(o);
+                message.setStringProperty("messageID", o.toString());
+
                 logger.info("@@@@@@@@@@@@@@@@@@@@@@ CASMessageProducer : "
                         + "Sending Object " + o);
 

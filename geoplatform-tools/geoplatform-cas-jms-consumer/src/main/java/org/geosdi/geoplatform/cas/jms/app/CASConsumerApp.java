@@ -55,7 +55,7 @@ public class CASConsumerApp {
         ICASConsumer casConsumer = (ICASConsumer) appContext.getBean(
                 "casMessageConsumer");
 
-        casConsumer.receive();
+        casConsumer.receive("messageID = 'CASMockObject{id = 8}'");
     }
 
 }

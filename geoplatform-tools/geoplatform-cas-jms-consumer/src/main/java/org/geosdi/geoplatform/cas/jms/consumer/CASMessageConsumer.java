@@ -46,19 +46,29 @@ import org.springframework.jms.core.JmsTemplate;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class CASMessageConsumer implements ICASConsumer {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(
             CASMessageConsumer.class);
     //
     private JmsTemplate jmsTemplate;
-    
+
     @Override
     public Object receive() throws JMSException {
         Object o = this.jmsTemplate.receiveAndConvert();
-        
+
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@ CASMessageConsumer : "
                 + "Received Object " + o);
-        
+
+        return o;
+    }
+
+    @Override
+    public Object receive(String messageSelector) throws JMSException {
+        Object o = this.jmsTemplate.receiveSelectedAndConvert(messageSelector);
+
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@ CASMessageConsumer : "
+                + "Received Object " + o);
+
         return o;
     }
 
@@ -68,5 +78,5 @@ public class CASMessageConsumer implements ICASConsumer {
     public void setJmsTemplate(JmsTemplate theJmsTemplate) {
         this.jmsTemplate = theJmsTemplate;
     }
-    
+
 }

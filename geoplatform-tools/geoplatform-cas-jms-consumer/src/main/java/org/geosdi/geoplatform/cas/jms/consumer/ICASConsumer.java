@@ -46,4 +46,6 @@ public interface ICASConsumer {
 
     Object receive() throws JMSException;
 
+    Object receive(String messageSelector) throws JMSException;
+
 }

@@ -57,4 +57,5 @@ public class BasicWSClientConnectorConfiguration {
     public GeoPlatformService geoPlatformServiceClient() {
         return this.gpBasicWSClientConnector.getEndpointService();
     }
+
 }

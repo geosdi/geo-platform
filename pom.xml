@@ -90,7 +90,7 @@
             </snapshots>
         </repository>
 
-        <repository>
+        <!-- repository>
             <id>apache.snapshots</id>
             <name>Apache Snapshots Repository</name>
             <url>http://people.apache.org/repo/m2-snapshot-repository</url>
@@ -100,9 +100,9 @@
             <releases>
                 <enabled>false</enabled>
             </releases>
-        </repository>
+        </repository -->
 
-        <repository>
+        <!-- repository>
             <id>apache.incubating</id>
             <name>Apache Incubating Repository</name>
             <url>http://people.apache.org/repo/m2-incubating-repository</url>
@@ -112,7 +112,7 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-        </repository>
+        </repository -->
 
         <!-- ibiblio -->
         <repository>
@@ -627,7 +627,7 @@
             
             <dependency>
                 <groupId>org.apache.xmlbeans</groupId>
-                <artifactId>xmlbeans</artifactId>
+                <artifactId>xmlbeans-xmlpublic</artifactId>
                 <version>2.6.0</version>
             </dependency>
             
@@ -1584,7 +1584,7 @@
 
     <pluginRepositories>
 
-        <pluginRepository>
+<!--        <pluginRepository>
             <id>apache.snapshots</id>
             <name>Apache Snapshots Repository</name>
             <url>http://people.apache.org/repo/m2-snapshot-repository</url>
@@ -1606,7 +1606,7 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-        </pluginRepository>
+        </pluginRepository>-->
 
         <!-- pluginRepository>
             <id>mortbay-repo</id>
@@ -1625,8 +1625,8 @@
         
         <activemq-version>5.8.0</activemq-version>
 
-        <httpcomponents-core-version>4.2.3</httpcomponents-core-version>
-        <httpcomponents-client-version>4.2.3</httpcomponents-client-version>
+        <httpcomponents-core-version>4.2.4</httpcomponents-core-version>
+        <httpcomponents-client-version>4.2.5</httpcomponents-client-version>
 
         <jibx-version>1.2.4.5</jibx-version>
 

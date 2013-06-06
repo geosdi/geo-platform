@@ -85,12 +85,19 @@
                             <property name="secure" value="false" />
                             <property name="order" value="1" />
                         </bean>
+                        <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                            <property name="id" value="GET_LEGEND" />
+                            <property name="text" value="Get Legend" />
+                            <property name="enabled" value="true" />
+                            <property name="secure" value="false" />
+                            <property name="order" value="2" />
+                        </bean>
                         <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool">
                             <property name="id" value="EXPORT" />
                             <property name="text" value="Export" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />
-                            <property name="order" value="2" />
+                            <property name="order" value="3" />
                             <property name="tools">
                                 <list>
                                     <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
@@ -182,7 +189,7 @@
                             <property name="text" value="CQL Filter" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />
-                            <property name="order" value="3" />
+                            <property name="order" value="4" />
                             <property name="tools">
                                 <list>
                                     <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
@@ -207,7 +214,7 @@
                             <property name="text" value="TIME Filter" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />
-                            <property name="order" value="4" />
+                            <property name="order" value="5" />
                             <property name="tools">
                                 <list>
                                     <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
@@ -232,34 +239,34 @@
                             <property name="text" value="Copy Layer" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />
-                            <property name="order" value="5" />
+                            <property name="order" value="6" />
                         </bean>
                         <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
                             <property name="id" value="CREATE_VIEWPORT" />
                             <property name="text" value="Create Viewport" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />
-                            <property name="order" value="6" />
+                            <property name="order" value="7" />
                         </bean>
                         <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
                             <property name="id" value="EDIT_FEATURE" />
                             <property name="text" value="Edit WFS Mode" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />
-                            <property name="order" value="7" />
+                            <property name="order" value="8" />
                         </bean>
                         <bean class="org.geosdi.geoplatform.gui.client.configutation.tree.tools.RefreshTimeClientTool">
                             <property name="id" value="REFRESH_TIME" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />
-                            <property name="order" value="8" />
+                            <property name="order" value="9" />
                         </bean>
                         <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
                             <property name="id" value="LAYER_PROPERTIES" />
                             <property name="text" value="Layer Properties" />
                             <property name="enabled" value="true" />
                             <property name="secure" value="false" />
-                            <property name="order" value="9" />
+                            <property name="order" value="10" />
                         </bean>
                     </list>
                 </entry>

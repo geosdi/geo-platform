@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connectors.ws.basic;
 
-import javax.ws.rs.client.ClientFactory;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.geosdi.geoplatform.configurator.bootstrap.Production;
@@ -85,5 +84,4 @@ public class GPBasicWSClientConnector extends SoapClientConnector<GeoPlatformSer
     public Client getClient() {
         return client;
     }
-
 }

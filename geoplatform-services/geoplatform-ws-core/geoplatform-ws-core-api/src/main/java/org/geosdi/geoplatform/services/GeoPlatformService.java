@@ -150,7 +150,7 @@ public interface GeoPlatformService {
             throws IllegalParameterFault;
 
     @Post
-    void sendCASNewUserNotification (List<String> emailRecipient, String userNameToNotify)
+    void sendCASNewUserNotification(List<String> emailRecipient, String userNameToNotify)
             throws IllegalParameterFault;
 
     /**

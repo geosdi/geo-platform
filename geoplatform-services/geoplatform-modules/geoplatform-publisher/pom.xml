@@ -16,9 +16,9 @@
     <name>Geo-Platform :: == Publish Module</name>
   
     <modules>
+        <module>geoplatform-publisher-interface</module>
+        <module>geoplatform-publisher-base-impl</module>
         <module>publisher-api</module>
         <module>publisher-impl</module>
-    <module>geoplatform-publisher-interface</module>
-    <module>geoplatform-publisher-base-impl</module>
-  </modules>
+    </modules>
 </project>

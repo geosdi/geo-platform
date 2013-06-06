@@ -74,6 +74,7 @@ import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.responce.InfoPreview;
+import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,7 +157,7 @@ public class PublisherService implements IPublisherService {
 
     private ArrayList<InfoPreview> trasformPreviewLayerList(
             List<EPSGLayerData> previewLayerList) {
-        ArrayList<InfoPreview> infoPreviewList = Lists.newArrayList();
+        ArrayList<InfoPreview> infoPreviewList = Lists.<InfoPreview>newArrayList();
         InfoPreview infoPreview;
         for (EPSGLayerData previewLayer : previewLayerList) {
             infoPreview = new InfoPreview(null, null,

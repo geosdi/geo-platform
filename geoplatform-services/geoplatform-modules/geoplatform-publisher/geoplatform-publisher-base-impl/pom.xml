@@ -74,11 +74,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>          
         </dependency>
-            
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava-gwt</artifactId>
-        </dependency>
         
         <!--        <dependency>
             <groupId>net.java.dev.jsr-275</groupId>
@@ -186,33 +181,6 @@
             <artifactId>cglib-nodep</artifactId>
         </dependency>
 
-        <!-- HTTP UTILS -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-        </dependency>
-
-        <!--        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>-->
-        
-        <!-- Velocity (Email templates) -->
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-        </dependency>
-
         <!-- LOGGER -->
         <dependency>
             <groupId>log4j</groupId>
@@ -250,3 +218,4 @@
         </dependency>
     </dependencies>
 </project>
+>>>>>>> edd4891... FIXED ALL TESTS for GeoPlatform Publisher Modules

@@ -37,11 +37,12 @@ package org.geosdi.geoplatform.services.utility;
 
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.encoder.datastore.GSPostGISDatastoreEncoder;
-import it.geosolutions.geoserver.rest.manager.GeoServerRESTDatastoreManager;
+import it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,7 @@ import org.springframework.stereotype.Service;
 @Service("postGISUtility")
 public class PostGISUtility {
 
-    @Autowired
+    @Resource(name = "restReader")
     private GeoServerRESTReader reader;
     private @Value("configurator{geoserver_url}")
     String geoserverUrl;
@@ -72,14 +73,14 @@ public class PostGISUtility {
     private @Value("configurator{password_db_postgis_datastore_publisher}")
     String passwordDBPostgisDatastore;
 
-    public GeoServerRESTDatastoreManager generateEncoder(String storeName, String workspace) {
+    public GeoServerRESTStoreManager generateEncoder(String storeName, String workspace) {
 //        RESTDataStore store = reader.getDatastore(workspace, storeName);
 //        System.out.println("************ Store Retrieved: ");
 //        System.out.println(store);
-        GeoServerRESTDatastoreManager manager = null;
+        GeoServerRESTStoreManager manager = null;
 //        if (store == null) {
         try {
-            manager = new GeoServerRESTDatastoreManager(
+            manager = new GeoServerRESTStoreManager(
                     new URL(geoserverUrl), geoserverUser, geoserverPassword);
         } catch (MalformedURLException ex) {
             Logger.getLogger(PostGISUtility.class.getName()).log(Level.SEVERE, null, ex);

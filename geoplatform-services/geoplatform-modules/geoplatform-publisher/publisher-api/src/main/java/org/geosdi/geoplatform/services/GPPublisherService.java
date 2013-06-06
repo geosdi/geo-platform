@@ -55,8 +55,8 @@ import org.geosdi.geoplatform.responce.LayerAttribute;
  * @email nazzareno.sileno@geosdi.org
  */
 @WebService(name = "GPPublisherService",
-targetNamespace = "http://services.geo-platform.org/")
-public interface GPPublisherService {
+        targetNamespace = "http://services.geo-platform.org/")
+public interface GPPublisherService extends IGPPublisherService {
 
     @Get
     @HttpResource(location = "/preview/analyzeZIPEPSG")

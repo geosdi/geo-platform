@@ -33,41 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.services;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.InfoPreview;
+import org.geosdi.geoplatform.responce.LayerAttribute;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@XmlRootElement(name = "LayerAttribute")
-public class LayerAttribute {
+public interface IGPPublisherService {
 
-    private String value;
-    private String type;
+    List<InfoPreview> analyzeZIPEPSG(String sessionID, String userName, File file)
+            throws ResourceNotFoundFault;
 
-    public LayerAttribute() {
-    }
+    List<InfoPreview> processEPSGResult(String userName, List<InfoPreview> previewLayerList)
+            throws ResourceNotFoundFault;
 
-    public LayerAttribute(String value, String type) {
-        this.value = value;
-        this.type = type;
-    }
+    String loadStyle(String layerDatasource, String styleName)
+            throws ResourceNotFoundFault;
 
-    public String getType() {
-        return type;
-    }
+    List<LayerAttribute> describeFeatureType(String layerName)
+            throws ResourceNotFoundFault;
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    boolean publishStyle(String styleToPublish)
+            throws ResourceNotFoundFault;
 
-    public String getValue() {
-        return value;
-    }
+    boolean putStyle(String styleToPublish, String styleName)
+            throws ResourceNotFoundFault;
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+    public boolean existsStyle(String styleName);
+
+    InfoPreview analyzeTIFInPreview(String sessionID, File file, boolean overwrite)
+            throws ResourceNotFoundFault;
+
+    List<InfoPreview> uploadShapeInPreview(String sessionID, String username,
+            File shpFile, File dbfFile, File shxFile, File prjFile, File sldFile)
+            throws ResourceNotFoundFault;
+
+    List<InfoPreview> getPreviewDataStores(String userName) throws ResourceNotFoundFault;
+
+    boolean publish(String sessionID, String workspace, String dataStoreName,
+            String layerName)
+            throws ResourceNotFoundFault, FileNotFoundException;
+
+    boolean publishAll(String sessionID, String workspace, String dataStoreName,
+            List<String> layerNames) throws ResourceNotFoundFault, FileNotFoundException;
+
+    boolean publishAllofPreview(String sessionID, String workspace,
+            String dataStoreName)
+            throws ResourceNotFoundFault, FileNotFoundException;
 }

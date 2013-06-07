@@ -76,6 +76,12 @@
             <version>${project.version}</version>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-publisher-base-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
         <!-- GWT-OL Resources -->
         <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>

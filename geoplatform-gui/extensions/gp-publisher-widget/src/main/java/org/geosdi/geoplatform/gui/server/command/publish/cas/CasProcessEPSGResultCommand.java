@@ -35,12 +35,27 @@
  */
 package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
+import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultRequest;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultResponse;
+import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.SessionUtility;
+import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.responce.InfoPreview;
+import org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -56,12 +71,55 @@ public class CasProcessEPSGResultCommand implements
 
     private static final Logger logger = LoggerFactory.getLogger(
             CasProcessEPSGResultCommand.class);
+    private GPPublisherBasicServiceImpl casPublisherService;
+    @Autowired
+    private SessionUtility sessionUtility;
 
     @Override
     public CasProcessEPSGResultResponse execute(
             CasProcessEPSGResultRequest request,
             HttpServletRequest httpServletRequest) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        GPAccount account;
+        try {
+            account = sessionUtility.getLoggedAccount(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        List<InfoPreview> resultList = null;
+        List<EPSGLayerData> previewLayerList = request.getPreviewLayerList();
+        try {
+            resultList = casPublisherService.processEPSGResult(
+                    account.getNaturalID(), this.trasformPreviewLayerList(
+                    previewLayerList));
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("Error on publish shape: " + ex);
+            throw new GeoPlatformException("Error on publish shape.");
+        }
+        return new CasProcessEPSGResultResponse(PublisherFileUtils.generateJSONObjects(resultList));
     }
 
+    private ArrayList<InfoPreview> trasformPreviewLayerList(
+            List<EPSGLayerData> previewLayerList) {
+        ArrayList<InfoPreview> infoPreviewList = Lists.<InfoPreview>newArrayList();
+        InfoPreview infoPreview;
+        for (EPSGLayerData previewLayer : previewLayerList) {
+            infoPreview = new InfoPreview(null, null,
+                    previewLayer.getFeatureName(),
+                    0d, 0d, 0d, 0d, previewLayer.getEpsgCode(),
+                    previewLayer.getStyleName(), previewLayer.isIsShape());
+            infoPreviewList.add(infoPreview);
+            logger.info("Layer preview transformed: " + infoPreview.toString());
+        }
+        return infoPreviewList;
+    }
+
+    /**
+     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     */
+    @Resource
+    public void setCasPublisherService(
+            @Qualifier("casPublisherService") GPPublisherBasicServiceImpl casPublisherService) {
+//        System.out.println("*************** Setting publisher service: " + );
+        this.casPublisherService = casPublisherService;
+    }
 }

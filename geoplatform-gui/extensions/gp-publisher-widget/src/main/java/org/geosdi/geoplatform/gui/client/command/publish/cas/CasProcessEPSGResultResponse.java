@@ -46,6 +46,10 @@ public class CasProcessEPSGResultResponse extends ProcessEPSGResultResponse {
 
     private static final long serialVersionUID = -4758668682264787766L;
 
+    public CasProcessEPSGResultResponse(String result) {
+        super(result);
+    }
+    
     @Override
     public String toString() {
         return super.toString();

@@ -15,10 +15,20 @@
             http://cxf.apache.org/schemas/core.xsd
             http://cxf.apache.org/jaxws
             http://cxf.apache.org/schemas/jaxws.xsd"
-       default-autowire="byName">
+       default-autowire="byName" profile="cas">
 
     <context:annotation-config />
     
     <context:component-scan base-package="org.geosdi.geoplatform.services"/>
+    
+    <bean id="casPublisherService" class="org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl">
+         <!--the server to connect--> 
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
+         <!--the login and the password of the REST geoserver instance--> 
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
+         <!--the workspace where publishing the shapefiles to preview--> 
+        <constructor-arg type="java.lang.String" value="configurator{geoportal_dir_path}"/>
+    </bean>
 
 </beans>

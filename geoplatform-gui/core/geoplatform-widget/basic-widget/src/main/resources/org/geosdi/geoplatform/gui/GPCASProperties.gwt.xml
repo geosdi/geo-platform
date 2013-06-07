@@ -3,4 +3,6 @@
     
     <define-property name="security.strategy" values="basic,cas"/>
     
+    <set-property name="security.strategy" value="basic" /> 
+    
 </module>

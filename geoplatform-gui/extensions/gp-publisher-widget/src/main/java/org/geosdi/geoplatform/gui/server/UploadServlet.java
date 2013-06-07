@@ -39,6 +39,7 @@ import com.google.common.collect.Lists;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,10 +57,11 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility.SessionProperty;
+import org.geosdi.geoplatform.gui.server.uploader.IPublisherUploader;
 import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.geoplatform.responce.InfoPreview;
-import org.geosdi.geoplatform.services.GPPublisherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -71,17 +73,21 @@ import org.geosdi.geoplatform.services.GPPublisherService;
 public class UploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = -1464439864247709647L;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private static final Logger logger = LoggerFactory.getLogger(
+            UploadServlet.class);
+    //
+    @Autowired
     private PublisherFileUtils publisherFileUtils;
-    private GPPublisherService geoPlatformPublishClient;
+    //
+    @Autowired
+    private IPublisherUploader gpPublisherUploader;
 
     @Override
-    public void init() throws ServletException {
+    public void init(ServletConfig config) throws ServletException {
         super.init();
-        this.geoPlatformPublishClient = (GPPublisherService) GeoPlatformContextUtil.getInstance().getBean(
-                "geoPlatformPublishClient");
-        this.publisherFileUtils = (PublisherFileUtils) GeoPlatformContextUtil.getInstance().getBean(
-                PublisherFileUtils.class);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
     }
 
     @Override
@@ -133,7 +139,8 @@ public class UploadServlet extends HttpServlet {
                     }
 
                     try {
-                        uploadedFile = this.publisherFileUtils.createFileWithUniqueName(
+                        uploadedFile = this.publisherFileUtils.
+                                createFileWithUniqueName(
                                 fileName);
                         item.write(uploadedFile);
                     } catch (Exception ex) {
@@ -181,7 +188,7 @@ public class UploadServlet extends HttpServlet {
         logger.info("Extension: " + extension);
         if (extension.equalsIgnoreCase(GPExtensions.ZIP.toString())) {
             try {
-                previewList = this.geoPlatformPublishClient.
+                previewList = this.gpPublisherUploader.
                         analyzeZIPEPSG(sessionID, username, uploadedFile);
             } catch (ResourceNotFoundFault ex) {
                 logger.info("Error on uploading shape: " + ex);
@@ -191,7 +198,8 @@ public class UploadServlet extends HttpServlet {
                 || extension.equalsIgnoreCase(GPExtensions.TIFF.toString())) {
             try {
                 previewList = Lists.newArrayList();
-                previewList.add(this.geoPlatformPublishClient.analyzeTIFInPreview(
+                previewList.add(this.gpPublisherUploader.
+                        analyzeTIFInPreview(
                         username, uploadedFile, true));
             } catch (ResourceNotFoundFault ex) {
                 logger.info("Error on uploading shape: " + ex);
@@ -200,4 +208,5 @@ public class UploadServlet extends HttpServlet {
         }
         return previewList;
     }
+
 }

@@ -33,19 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.login.cas;
+package org.geosdi.geoplatform.gui.server.uploader;
 
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
-import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.server.ISecurityService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.File;
+import java.util.List;
+import javax.annotation.Resource;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.InfoPreview;
+import org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl;
+import org.geosdi.geoplatform.services.GPPublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Profile;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -53,34 +51,48 @@ import org.springframework.stereotype.Component;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
-@Component(value = "command.login.CasLoginCommand")
-@Profile(value = "cas")
-public class CASLoginCommand implements
-        GPCommand<CASLoginRequest, CASLoginResponse> {
+@Component(value = "gpPublisherUploader")
+public class GPPublisherUploader implements IPublisherUploader {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            CASLoginCommand.class);
+    private GPPublisherService geoPlatformPublishClient;
     //
-    @Autowired
-    private ISecurityService securityService;
+    private GPPublisherBasicServiceImpl casPublisherService;
 
     @Override
-    public CASLoginResponse execute(CASLoginRequest request,
-            HttpServletRequest httpServletRequest) {
+    public List<InfoPreview> analyzeZIPEPSG(String sessionID, String userName,
+            File file) throws ResourceNotFoundFault {
 
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
+        return (casPublisherService != null) ? casPublisherService.
+                analyzeZIPEPSG(sessionID, userName, file) : geoPlatformPublishClient.
+                analyzeZIPEPSG(sessionID, userName, file);
+    }
 
-        /**
-         * Here the parameter in Request *
-         */
-        IGPAccountDetail accauntDetail = this.securityService.casLogin(
-                httpServletRequest);
+    @Override
+    public InfoPreview analyzeTIFInPreview(String sessionID, File file,
+            boolean overwrite) throws ResourceNotFoundFault {
 
-        logger.debug("##################### FOUND {} ", accauntDetail);
+        return (casPublisherService != null) ? casPublisherService.
+                analyzeTIFInPreview(sessionID, file, overwrite) : geoPlatformPublishClient.
+                analyzeTIFInPreview(sessionID, file, overwrite);
+    }
 
-        return new CASLoginResponse(accauntDetail);
+    /**
+     *
+     * @param geoPlatformPublishClient
+     */
+    @Autowired
+    public void setGeoPlatformPublishClient(
+            @Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
+        this.geoPlatformPublishClient = geoPlatformPublishClient;
+    }
+
+    /**
+     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     */
+    @Autowired(required = false)
+    public void setCasPublisherService(
+            @Qualifier("casPublisherService") GPPublisherBasicServiceImpl casPublisherService) {
+        this.casPublisherService = casPublisherService;
     }
 
 }

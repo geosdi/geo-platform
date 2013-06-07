@@ -56,17 +56,24 @@ public class PublisherRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     private IPublisherService publisherService;
 
     @Override
-    public String publishLayerPreview(List<String> layerList, boolean reloadCluster) throws GeoPlatformException {
-        return publisherService.publishLayerPreview(super.getThreadLocalRequest(), layerList, reloadCluster);
+    @Deprecated
+    public String publishLayerPreview(List<String> layerList,
+            boolean reloadCluster) throws GeoPlatformException {
+        return publisherService.publishLayerPreview(super.
+                getThreadLocalRequest(), layerList, reloadCluster);
     }
 
     @Override
-    public String processEPSGResult(List<EPSGLayerData> previewLayerList) throws GeoPlatformException {
-        return publisherService.processEPSGResult(super.getThreadLocalRequest(), previewLayerList);
+    @Deprecated
+    public String processEPSGResult(List<EPSGLayerData> previewLayerList) throws
+            GeoPlatformException {
+        return publisherService.processEPSGResult(super.getThreadLocalRequest(),
+                previewLayerList);
     }
 
     @Override
     public void kmlPreview(String url) throws GeoPlatformException {
         publisherService.kmlPreview(super.getThreadLocalRequest(), url);
     }
+
 }

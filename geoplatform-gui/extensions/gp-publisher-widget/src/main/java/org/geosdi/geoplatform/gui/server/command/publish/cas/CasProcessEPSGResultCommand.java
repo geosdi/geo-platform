@@ -33,17 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.login.cas;
+package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
+import org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultRequest;
+import org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -53,32 +50,18 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
-@Component(value = "command.login.CasLoginCommand")
-public class CASLoginCommand implements
-        GPCommand<CASLoginRequest, CASLoginResponse> {
+@Component(value = "command.publish.cas.CasProcessEPSGResultCommand")
+public class CasProcessEPSGResultCommand implements
+        GPCommand<CasProcessEPSGResultRequest, CasProcessEPSGResultResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            CASLoginCommand.class);
-    //
-    @Autowired
-    private ISecurityService securityService;
+            CasProcessEPSGResultCommand.class);
 
     @Override
-    public CASLoginResponse execute(CASLoginRequest request,
+    public CasProcessEPSGResultResponse execute(
+            CasProcessEPSGResultRequest request,
             HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        /**
-         * Here the parameter in Request *
-         */
-        IGPAccountDetail accauntDetail = this.securityService.casLogin(
-                httpServletRequest);
-
-        logger.debug("##################### FOUND {} ", accauntDetail);
-
-        return new CASLoginResponse(accauntDetail);
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

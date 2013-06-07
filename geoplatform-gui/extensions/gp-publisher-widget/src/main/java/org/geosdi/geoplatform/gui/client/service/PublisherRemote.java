@@ -57,11 +57,17 @@ public interface PublisherRemote extends RemoteService {
         public static PublisherRemoteAsync getInstance() {
             return instance;
         }
+
     }
 
-    public String processEPSGResult(List<EPSGLayerData> previewLayerList) throws GeoPlatformException;
+    @Deprecated
+    public String processEPSGResult(List<EPSGLayerData> previewLayerList) throws
+            GeoPlatformException;
 
-    public String publishLayerPreview(List<String> layerList, boolean reloadCluster) throws GeoPlatformException;
+    @Deprecated
+    public String publishLayerPreview(List<String> layerList,
+            boolean reloadCluster) throws GeoPlatformException;
 
     public void kmlPreview(String url) throws GeoPlatformException;
+
 }

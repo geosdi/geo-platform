@@ -33,14 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.login.cas;
+package org.geosdi.geoplatform.gui.server.command.publish.basic;
 
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
-import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
+import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewRequest;
+import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.server.ISecurityService;
+import org.geosdi.geoplatform.gui.server.service.IPublisherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,32 +52,31 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
-@Component(value = "command.login.CasLoginCommand")
-public class CASLoginCommand implements
-        GPCommand<CASLoginRequest, CASLoginResponse> {
+@Component(value = "command.publish.basic.PublishLayerPreviewCommand")
+public class PublishLayerPreviewCommand implements
+        GPCommand<PublishLayerPreviewRequest, PublishLayerPreviewResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            CASLoginCommand.class);
+            PublishLayerPreviewCommand.class);
     //
     @Autowired
-    private ISecurityService securityService;
+    private IPublisherService publisherService;
 
     @Override
-    public CASLoginResponse execute(CASLoginRequest request,
+    public PublishLayerPreviewResponse execute(
+            PublishLayerPreviewRequest request,
             HttpServletRequest httpServletRequest) {
 
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
-        /**
-         * Here the parameter in Request *
-         */
-        IGPAccountDetail accauntDetail = this.securityService.casLogin(
-                httpServletRequest);
+        String result = this.publisherService.publishLayerPreview(
+                httpServletRequest, request.getLayerList(), request.
+                isReloadCluster());
 
-        logger.debug("##################### FOUND {} ", accauntDetail);
+        logger.debug("#################### Found {} ", result);
 
-        return new CASLoginResponse(accauntDetail);
+        return new PublishLayerPreviewResponse(result);
     }
 
 }

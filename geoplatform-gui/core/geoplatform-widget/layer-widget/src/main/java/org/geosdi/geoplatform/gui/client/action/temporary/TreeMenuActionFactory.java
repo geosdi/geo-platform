@@ -62,6 +62,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToPDF;
 import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToTIFF;
+import org.geosdi.geoplatform.gui.client.action.menu.legend.GetLegendGraphicsBox;
 import org.geosdi.geoplatform.gui.client.action.menu.time.AddModifyTimeFilterAction;
 import org.geosdi.geoplatform.gui.client.action.menu.time.RemoveTimeFilterAction;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -151,6 +152,16 @@ public class TreeMenuActionFactory {
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ZoomToLayerExtentAction(
+                        treePanel);
+            }
+
+        });
+        
+        registar.put("GET_LEGEND", new TreeMenuActionCreator() {
+
+            @Override
+            public MenuAction createAction(TreePanel treePanel) {
+                return new GetLegendGraphicsBox(
                         treePanel);
             }
 

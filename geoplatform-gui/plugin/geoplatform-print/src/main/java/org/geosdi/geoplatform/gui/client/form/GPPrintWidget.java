@@ -155,36 +155,36 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     public void execute() {
         if (formPanel.isValid()) {
 
-            double lat = GPApplicationMap.getInstance().getApplicationMap().
-                    getMap().getCenter().lat();
-            double lon = GPApplicationMap.getInstance().getApplicationMap().
-                    getMap().getCenter().lon();
+            // Center on correct ViewPort
+            Vector printExtent = PrintUtility.createRectangle(
+                    GPApplicationMap.getInstance().
+                    getApplicationMap().getMap().getCenter(), getCurrentScale(),
+                    GPApplicationMap.getInstance().
+                    getApplicationMap().getMap(), sizeFactor,
+                    rotation);
 
+            LonLat center = printExtent.getDataExtent().getCenterLonLat();
+//            if (GPApplicationMap.getInstance().getApplicationMap().getMap().
+//                    getProjection().equals(
+//                    GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+//                center.transform(GPCoordinateReferenceSystem.EPSG_GOOGLE.
+//                        getCode(),
+//                        GPCoordinateReferenceSystem.WGS_84.getCode());
+//            }
 
-            LonLat center = new LonLat(lon, lat);
-            if (GPApplicationMap.getInstance().getApplicationMap().getMap().
-                    getProjection().equals(
-                    GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
-                center.transform(GPCoordinateReferenceSystem.EPSG_GOOGLE.
-                        getCode(),
-                        GPCoordinateReferenceSystem.WGS_84.getCode());
-            }
+            String specJson = "{\"layout\":\"" + comboTemplate.getValue().getTemplate() + "\""
+                    + ",\"srs\":\"EPSG:900913\",\"units\": \"m\",\"geodetic\":true,\"outputFilename\":\"gp-map\", \"outputFormat\":\"pdf\",";
 
-            Double scaleDouble = new Double(
-                    GPApplicationMap.getInstance().getApplicationMap().getMap().
-                    getScale());
 
             String layers = "{\"title\":\"" + title.getValue() + "\",\"pages\":[{\"center\":["
                     + center.lon() + ","
                     + center.lat()
-                    + "],\"scale\":" + Scale.searchValue(scaleDouble)
+                    + "],\"scale\":" + getCurrentScale()
                     + ",\"rotation\":0,\"mapTitle\":\"" + mapTitle.getValue()
                     + "\",\"comment\":\"" + comments.getValue() + "\"}],\"layers\":[";
 
 
-            layerList = buildLayerList();
-
-            Collections.sort(layerList, new LayerComparable());
+           
 
             GPLayerBean baseMap = new GPRasterLayerGrid();
 
@@ -192,24 +192,38 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             baseMap.setDataSource("http://dpc.geosdi.org/geoserver/wms");
             baseMap.setLayerType(GPLayerType.WMS);
 
-            if (this.checkPrintBaseMap.getValue()) {
-                layers = layers.concat(buildLayersOrderList(baseMap));
-            }
+            specJson = specJson.concat(buildBaseLayerJson());
 
-            for (int i = 0; i < layerList.size(); i++) {
-                if (layerList.get(i) instanceof GPLayerBean) {
-                    GPLayerBean layer = (GPLayerBean) layerList.get(i);
-                    layers = layers.concat(buildLayersOrderList(layer));
-                }
-            }
+            String pagesJson = "\"pages\": ["
+                    + "{"
+                    + "\"center\": [" + center.lon() + "," + center.lat() + "],"
+                    + "\"scale\": " + getCurrentScale() + ","
+                    + "\"dpi\": " + comboDPI.getValue().getDpi() + ","
+                    + "\"mapTitle\": \"" + mapTitle.getValue() + "\","
+                    + "\"title\": \"" + title.getValue() + "\","
+                    + "\"comment\": \"" + comments.getValue() + "\""
+                    + "}"
+                    + "]}";
+
+            specJson = specJson.concat(pagesJson);
+//            if (this.checkPrintBaseMap.getValue()) {
+//                layers = layers.concat(buildLayersOrderList(baseMap));
+//            }
+//
+//            for (int i = 0; i < layerList.size(); i++) {
+//                if (layerList.get(i) instanceof GPLayerBean) {
+//                    GPLayerBean layer = (GPLayerBean) layerList.get(i);
+//                    layers = layers.concat(buildLayersOrderList(layer));
+//                }
+//            }
 
             System.out.println(comboTemplate.getValue().getTemplate());
             layers = layers.concat("],\"layout\":\"" + comboTemplate.getValue().
-                    getTemplate() + "\",\"srs\":\"EPSG:4326\",\"dpi\":"
-                    + comboDPI.getValue().getDpi() + ",\"units\":\"degrees\"}");
+                    getTemplate() + "\",\"srs\":\"EPSG:900913\",\"geodetic\":true,\"outputFilename\":\"sitdpc-map\", \"outputFormat\":\"pdf\",\"dpi\":"
+                    + comboDPI.getValue().getDpi() + ",\"units\":\"m\"}");
 
             String url = GWT.getHostPageBaseURL() + GWT.getModuleName() + "/pdf/print.pdf?spec="
-                    + URL.encode(layers);
+                    + URL.encode(specJson);
 
             System.out.println(URL.decode(url));
 
@@ -220,18 +234,84 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     }
 
-    public String buildLayersOrderList(GPLayerBean layer) {
-        String start = "{\"layers\":[";
-        String apice = "\"";
-        String layerList = "";
-        String baseURL = "],\"baseURL\":\"" + layer.getDataSource();
-        String format = "\",\"format\":\"" + "image/png";
-        String end = "\",\"type\":\"WMS\"},";
-        layerList = layerList.concat(start);
-        layerList = layerList.concat(apice + layer.getName() + apice + ",");
-        layerList = layerList.substring(0, layerList.length() - 1);
+    public String buildBaseLayerJson() {
+        String json = "";
+        String start = "\"layers\":[{";
+        String baseURL = "\"baseURL\": \"http://tile.openstreetmap.org/\",";
+        String opacity = "\"opacity\": 1,";
+        String type = "\"type\":\"Osm\",";
+        String maxExtent = "\"maxExtent\": ["
+                + "-20037508.3392,"
+                + "-20037508.3392,"
+                + "20037508.3392,"
+                + "20037508.3392"
+                + "],";
+        String tileSize = "\"tileSize\": ["
+                + "256,"
+                + "256"
+                + "],";
 
-        return layerList.concat(baseURL + format + end);
+        String resolutions = "\"resolutions\": ["
+                + "156543.0339,78271.51695,39135.758475,19567.8792375,9783.93961875,4891.969809375,2445.9849046875,1222.99245234375,611.496226171875,305.7481130859375,152.87405654296876,76.43702827148438,38.21851413574219,19.109257067871095,9.554628533935547,4.777314266967774,2.388657133483887,1.1943285667419434,0.5971642833709717"
+                + "],";
+        String extentions = "\"extension\": \"png\"}";
+        
+        
+         layerList = buildLayerList();
+
+         Collections.sort(layerList, new LayerComparable());
+        
+         String layerListJson = "";
+         for (int i = 0; i < layerList.size(); i++) {
+                if (layerList.get(i) instanceof GPLayerBean) {
+                    GPLayerBean layer = (GPLayerBean) layerList.get(i);
+                    layerListJson = layerListJson.concat(buildLayersOrderList(layer));
+                }
+            }
+            
+        String end = "],";
+
+
+
+        return json.concat(start + baseURL + opacity + type + maxExtent + tileSize + resolutions + extentions + layerListJson + end);
+    }
+
+    public String buildLayersOrderList(GPLayerBean layer) {
+
+//        String apice = "\"";
+//        String layerList = "";
+//        String baseURL = "{\"baseURL\":\"" + layer.getDataSource();
+//        String format = "\",\"format\":\"" + "image/png";
+//        String end = "\",\"type\":\"WMS\"},";
+        
+        
+        
+        String layerJson = ",{\n" +
+"            \"baseURL\": \""+  layer.getDataSource() +"\",\n" +
+"            \"opacity\": 1,\n" +
+"            \"singleTile\": false,\n" +
+"            \"type\": \"WMS\",\n" +
+"            \"layers\": [\n" +
+"                \"" +layer.getName() +"\"\n" +
+"            ],\n" +
+"            \"format\": \"image/png\",\n" +
+"            \"styles\": [\n" +
+"                \"\"\n" +
+"            ],\n" +
+"            \"customParams\": {\n" +
+"                \"TRANSPARENT\": \"TRUE\"\n" +
+"            }\n" +
+"        }";
+        
+        
+        
+        
+        
+//        //layerList = layerList.concat(start);
+//        layerList = layerList.concat(apice + layer.getName() + apice + ",");
+//        layerList = layerList.substring(0, layerList.length() - 1);
+
+        return layerJson;
     }
 
     @Override
@@ -266,7 +346,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                 getLayerByName("VectorPrintExtent") != null) {
             GPApplicationMap.getInstance().getApplicationMap().getMap().
                     removeControl(dragPrintArea);
-            dragPrintArea.deactivate();
+            //dragPrintArea.deactivate();
             GPApplicationMap.getInstance().getApplicationMap().getMap().
                     removeLayer(GPApplicationMap.getInstance().
                     getApplicationMap().getMap().getLayerByName(
@@ -368,7 +448,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         comboTemplate.addSelectionChangedListener(
                 new SelectionChangedListener<PrintTemplate>() {
-
             @Override
             public void selectionChanged(SelectionChangedEvent<PrintTemplate> se) {
                 if (se != null) {
@@ -405,7 +484,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
                 }
             }
-
         });
     }
 
@@ -440,7 +518,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         comboScale.addSelectionChangedListener(
                 new SelectionChangedListener<Scale>() {
-
             @Override
             public void selectionChanged(SelectionChangedEvent<Scale> se) {
                 if (se != null) {
@@ -475,7 +552,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
                 }
             }
-
         });
 
 
@@ -500,19 +576,16 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         print = new Button("Print", PrintResources.ICONS.print(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 execute();
             }
-
         });
 
         this.formPanel.addButton(print);
 
         this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (GPApplicationMap.getInstance().getApplicationMap().getMap().
@@ -528,7 +601,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                 }
                 hide();
             }
-
         });
 
         this.formPanel.addButton(cancel);
@@ -612,4 +684,12 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         }
     }
 
+    private float getCurrentScale() {
+        String scaleString = comboScale.getValue().getScale();
+        String scaleStringRight = scaleString.substring(
+                scaleString.indexOf(":") + 1);
+        String scaleStringWithoutDot = scaleStringRight.
+                replaceAll("\\.", "");
+        return Float.parseFloat(scaleStringWithoutDot);
+    }
 }

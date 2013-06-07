@@ -182,7 +182,7 @@ public class PrintUtility {
         return new DragFeatureListener() {
             public void onDragEvent(VectorFeature vectorFeature,
                     Pixel pixel) {
-                Info.display("test", pixel.toString());
+                
             }
         };
     }

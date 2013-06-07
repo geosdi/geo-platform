@@ -97,7 +97,7 @@ public class GetLegendGraphicsBox extends MenuBaseAction {
             legendDialog.add(image);
             
             legendDialog.show();
-            
+             
             legendDialog.setPopupPosition(ce.getMenu().getPosition(true).x, ce.getMenu().getPosition(true).y);
             
         }

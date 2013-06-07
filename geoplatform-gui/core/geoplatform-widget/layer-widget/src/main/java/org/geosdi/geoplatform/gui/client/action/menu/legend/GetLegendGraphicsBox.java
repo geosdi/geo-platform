@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.action.menu.legend;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
@@ -59,7 +58,7 @@ public class GetLegendGraphicsBox extends MenuBaseAction {
             + "&VERSION=1.0.0&FORMAT=image/png&LAYER=";
 
     public GetLegendGraphicsBox(TreePanel treePanel) {
-        super("GetLegend", LayerResources.ICONS.exportToPDF());
+        super("GetLegend", LayerResources.ICONS.exportToTIFF());
         this.treePanel = treePanel;
     }
 
@@ -98,7 +97,9 @@ public class GetLegendGraphicsBox extends MenuBaseAction {
             legendDialog.add(image);
             
             legendDialog.show();
-            legendDialog.center();
+            
+            legendDialog.setPopupPosition(ce.getMenu().getPosition(true).x, ce.getMenu().getPosition(true).y);
+            
         }
 
     }

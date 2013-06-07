@@ -45,8 +45,10 @@ import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
  */
 public interface PublisherRemoteAsync {
 
+    @Deprecated
     public void processEPSGResult(List<EPSGLayerData> previewLayerList, AsyncCallback<String> callback);
 
+    @Deprecated
     public void publishLayerPreview(List<String> layerList, boolean reloadCluster, AsyncCallback<String> callback);
 
     public void kmlPreview(String url, AsyncCallback<Boolean> callback);

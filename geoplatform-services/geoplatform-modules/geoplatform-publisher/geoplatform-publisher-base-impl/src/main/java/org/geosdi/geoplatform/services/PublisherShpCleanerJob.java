@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.io.File;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.services.utility.PublishUtility;
 import org.quartz.Job;
@@ -48,21 +47,21 @@ import org.slf4j.LoggerFactory;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PublisherTifCleanerJob implements Job {
+public class PublisherShpCleanerJob implements Job {
 
-    public static final String PUBLISHER_TIF_CLEANER_JOB = "publischerTifCleanerJob";
+    public static final String PUBLISHER_SHP_CLEANER_JOB = "publischerShpCleanerJob";
+    public static final String LAYER_NAME = "shpList";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        String fileName = (String) context.getTrigger().getJobDataMap().get(PublishUtility.FILE_NAME);
+        String layerName = (String) context.getTrigger().getJobDataMap().get(LAYER_NAME);
         String userWorkspace = (String) context.getTrigger().getJobDataMap().get(PublishUtility.USER_WORKSPACE);
-
-        GPPublisherServiceImpl publisherService = (GPPublisherServiceImpl) context.getTrigger().getJobDataMap().get(PublishUtility.PUBLISHER_SERVICE);
+        GPPublisherBasicServiceImpl publisherService = (GPPublisherBasicServiceImpl) context.getTrigger().getJobDataMap().get(PublishUtility.PUBLISHER_SERVICE);
         try {
-            publisherService.removeTIFFromPreview(userWorkspace, fileName);
+            publisherService.removeSHPFromPreview(userWorkspace, layerName);
         } catch (ResourceNotFoundFault re) {
-            logger.error("Error on PublisherTifCleanerJob: " + re);
+            logger.error("Error on PublisherShpCleanerJob: " + re);
         }
         String filePath = (String) context.getTrigger().getJobDataMap().get(PublishUtility.FILE_PATH);
         PublishUtility.deleteFile(filePath);

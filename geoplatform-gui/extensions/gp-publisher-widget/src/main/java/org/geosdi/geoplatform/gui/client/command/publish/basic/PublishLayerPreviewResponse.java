@@ -33,41 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.gui.client.command.publish.basic;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement(name = "LayerAttribute")
-public class LayerAttribute {
+public class PublishLayerPreviewResponse implements GPCommandResponse<String> {
 
-    private String value;
-    private String type;
+    private static final long serialVersionUID = -4087511866468098650L;
+    //
+    private String result;
 
-    public LayerAttribute() {
+    public PublishLayerPreviewResponse() {
     }
 
-    public LayerAttribute(String value, String type) {
-        this.value = value;
-        this.type = type;
+    public PublishLayerPreviewResponse(String theResult) {
+        this.result = theResult;
     }
 
-    public String getType() {
-        return type;
+    @Override
+    public String getResult() {
+        return this.result;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    @Override
+    public String toString() {
+        return this.getClass().getName() + " {" + "result = " + result + '}';
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 }

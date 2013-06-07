@@ -45,4 +45,13 @@ import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPrevi
 public class CasPublishLayerPreviewResponse extends PublishLayerPreviewResponse {
 
     private static final long serialVersionUID = -8221815351588684446L;
+
+    public CasPublishLayerPreviewResponse(String theResult) {
+        super(theResult);
+    }
+
+    @Override
+    public String toString() {
+        return "CasPublishLayerPreviewResponse{" + super.toString() + '}';
+    }
 }

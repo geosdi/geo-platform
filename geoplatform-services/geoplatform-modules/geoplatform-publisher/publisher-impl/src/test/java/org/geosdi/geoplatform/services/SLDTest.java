@@ -71,15 +71,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath:applicationContext.xml"})
+    "classpath*:applicationContext.xml"})
 public class SLDTest {
 
-    protected Logger logger = LoggerFactory.getLogger(SLDTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(SLDTest.class);
+    //
     private StyleFactory styleFactory = CommonFactoryFinder.getStyleFactory();
     private FilterFactory filterFactory = CommonFactoryFinder.getFilterFactory();
     private StyleBuilder styleBuilder = new StyleBuilder();
+    //
     @Autowired
     private GeoServerRESTReader restReader;
+    //
     @Autowired
     private GeoServerRESTPublisher restPublisher;
 
@@ -87,8 +90,11 @@ public class SLDTest {
     public void testDescribeFeatureType() {
         try {
             RESTLayer restLayer = this.restReader.getLayer("topp:states");
-            for (Attribute att : this.restReader.getFeatureType(restLayer).getAttributes()) {
-                System.out.println("Stampa attributo: " + att.getBinding() + " - " + att.getName());
+            for (Attribute att : this.restReader.getFeatureType(restLayer).
+                    getAttributes()) {
+                System.out.println(
+                        "Stampa attributo: " + att.getBinding() + " - " + att.
+                        getName());
             }
         } catch (Exception e) {
             logger.error("Error on performing SLD Test: " + e + " maybe the "
@@ -99,8 +105,7 @@ public class SLDTest {
     @Test
     public void testSLD() {
         String sldBody = this.restReader.getSLD("population");
-//        sldBody = this.removeXmlStringNamespaceAndPreamble(sldBody);
-        System.out.println("Style: " + sldBody);
+        logger.info("##################### Style: {} ", sldBody);
         String xmlToPublish = null;
         try {
             Reader reader = new StringReader(sldBody);
@@ -108,22 +113,14 @@ public class SLDTest {
             style.setName("Frank");
             for (FeatureTypeStyle fStyle : style.featureTypeStyles()) {
                 for (Rule rule : fStyle.rules()) {
-//                    System.out.println("Rule: " + rule.getLegend().toString());
-//                    TextSymbolizer2 txtSym = new TextSymbolizerImpl();
                     for (Symbolizer sym : rule.symbolizers()) {
                         for (String qwerty : sym.getOptions().keySet()) {
-                            System.out.println("Qwerty: " + qwerty);
+                            logger.info("################ Qwerty: {} ", qwerty);
                         }
                         StringBuilder stringa = new StringBuilder();
-//                        stringa.append(sym.getDescription().getAbstract());
-//                        stringa.append(sym.getDescription().getTitle());
-                        //
-//                        stringa.append(sym.getGeometry().toString());
-//                        stringa.append(sym.getGeometryPropertyName());
-                        //
-//                        stringa.append(sym.getName());
-//                        stringa.append(sym.getUnitOfMeasure().toString());
-                        System.out.println("Stringa generata: " + stringa);
+
+                        logger.info("@@@@@@@@@@@@@@@@@@@@@ Stringa "
+                                + "generata: {} ", stringa);
                     }
                 }
                 PolygonSymbolizer pointSymbolizer = SLD.polySymbolizer(fStyle);
@@ -136,30 +133,12 @@ public class SLDTest {
 
                 SLDTransformer styleTransform = new SLDTransformer();
                 xmlToPublish = styleTransform.transform(style);
-                System.out.println("Modifica apportata: " + xmlToPublish);
+                logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@ Modifica "
+                        + "apportata: {} ", xmlToPublish);
 
-//                Expression expres = pointSymbolizer.getGeometry();
-                System.out.println("Expression: " + expres.getOpacity());
+                logger.info("######################## Expression: {} ", expres.
+                        getOpacity());
             }
-//            Graphic graphic = pointSymbolizer.getGraphic();
-//            System.out.println("Graphic: " + graphic == null);
-//            System.out.println("Opacity: " + graphic.getOpacity().toString());
-
-//            for (GraphicalSymbol gs : graphic.graphicalSymbols()) {
-//                System.out.println("Sim qua");
-//                if (gs instanceof Mark) {
-//                    Mark mark = (Mark) gs;
-//                    System.out.println("Uffa uffina : " + mark.getWellKnownName().toString());
-//                }
-//            }
-            //            String geometry = rule.symbolizers().get(0).getGeometryPropertyName();
-            //            System.out.println("Geometry: " + geometry);
-            //            Symbolizer sym = style.getDefaultSpecification();
-            //            logger.info("Symbolizer sym = style.getDefaultSpecification();");
-            //            Map<String, String> options = sym.getOptions();
-            //            logger.info("Map<String, String> options = sym.getOptions();");
-            //            System.out.println("SLD Body: " + sym.hasOption("Opacity"));
-
 
             restPublisher.publishStyle(xmlToPublish);
         } catch (Exception nep) {
@@ -193,40 +172,19 @@ public class SLDTest {
     private Style createFromSLD(Reader sld) {
         try {
             SLDParser stylereader = new SLDParser(styleFactory, sld);
-//            SLDParser stylereader = new SLDParser(styleFactory, file.toURI().toURL());
-
-
-//            Configuration config = new SLDConfiguration();
-//            Parser parser = new Parser(config);
-//            StyledLayerDescriptor sld2 = (StyledLayerDescriptor) parser.parse(sld);
-
-            // testing new solution
-//            String sldBody = this.restReader.getSLD("population");
-//            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            //
-//            File file = new File("/Geoportal/admin/tif/test2.sld");
-//            Document doc = dBuilder.parse(file);
-//            Document doc = dBuilder.parse(new InputSource(sld));
-//            System.out.println("Almeno qua***********");
-//            doc.getDocumentElement().normalize();
-//            System.out.println("Testinging: " + doc.toString());
-//
-//            Style[] style = stylereader.readDOM(doc);
-            //
             Style[] style = stylereader.readXML();
             return style[0];
 
         } catch (Exception e) {
-            System.out.println("Exception on creating sld: " + e.toString());
-//            JExceptionReporter.showDialog(e, "Problem creating style");
+            logger.error("################## Exception on creating "
+                    + "sld: {} ", e.toString());
         }
         return null;
     }
 
     private String removeXmlStringNamespaceAndPreamble(String xmlString) {
-        return xmlString//.replaceAll("(<\\?[^<]*\\?>)?", ""). /* remove preamble */
-                //replaceAll("xmlns.*?(\"|\').*?(\"|\')", "") /* remove xmlns declaration */
-                .replaceAll("(<)(\\w+:)(.*?>)", "$1$3") /* remove opening tag prefix */.replaceAll("(</)(\\w+:)(.*?>)", "$1$3"); /* remove closing tags prefix */
+        return xmlString.replaceAll("(<)(\\w+:)(.*?>)", "$1$3") /* remove opening tag prefix */.
+                replaceAll("(</)(\\w+:)(.*?>)", "$1$3"); /* remove closing tags prefix */
     }
+
 }

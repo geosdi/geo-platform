@@ -38,5 +38,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-publisher-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -23,6 +23,7 @@
     <source path="configuration/mvc" />
     <source path="configuration/action" />
     <source path="command/api" />
+    <source path="command/capabilities" />
     <source path="containers" />
     <source path="global" />
     <source path="model" />

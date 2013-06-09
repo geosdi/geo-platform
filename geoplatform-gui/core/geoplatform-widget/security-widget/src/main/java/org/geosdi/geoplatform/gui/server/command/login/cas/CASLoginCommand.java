@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.cas;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.connectors.ws.basic.GPBasicWSClientConnector;
 import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -47,6 +45,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -56,6 +55,7 @@ import org.springframework.stereotype.Component;
  */
 @Lazy(true)
 @Component(value = "command.login.CasLoginCommand")
+@Profile(value = "cas")
 public class CASLoginCommand implements
         GPCommand<CASLoginRequest, CASLoginResponse> {
 
@@ -64,9 +64,6 @@ public class CASLoginCommand implements
     //
     @Autowired
     private ISecurityService securityService;
-    //
-    @Resource
-    private GPBasicWSClientConnector gpBasicWSClientConnector;
 
     @Override
     public CASLoginResponse execute(CASLoginRequest request,

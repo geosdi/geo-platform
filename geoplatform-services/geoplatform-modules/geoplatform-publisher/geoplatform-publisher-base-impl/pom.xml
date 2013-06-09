@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+  
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-publisher</artifactId>
+        <version>1.5-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-publisher-base-impl</artifactId>
+    <version>1.5-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Geo-Platform :: == Publish Module Base Impl</name>
+  
+    <dependencies>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-shared-beans</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- APACHE COMMONS -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        
+        <!--
+        Transitive dependiency of commons-httpclient:commons-httpclient.
+        The latter is a transitive dependiency for:
+        1. org.geotools:gt-wms
+        2. it.geosolutions:geoserver-manager
+        3. it.geosolutions:geonetwork-manager
+        -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-publisher-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
+        </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ======================== GUAVA =========================== -->
+        <!-- =========================================================== -->
+            
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>          
+        </dependency>
+        
+        <!--        <dependency>
+            <groupId>net.java.dev.jsr-275</groupId>
+            <artifactId>jsr-275</artifactId>
+        </dependency>-->
+        
+        <dependency>
+            <groupId>it.geosolutions</groupId>
+            <artifactId>geoserver-manager</artifactId>
+            <version>${geoserver-manager-version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-ext</artifactId>
+            <version>1.7</version>
+        </dependency>
+
+        <!-- GEOTOOLS -->
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-main</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-wms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-wfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-referencing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-metadata</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-shapefile</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-extension</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-wkt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geotiff</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-coveragetools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-sld</artifactId>
+        </dependency>
+        <!-- QUARTZ -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+
+        <!-- SPRING -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jmx</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- CGLIB -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+        </dependency>
+
+        <!-- LOGGER -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+
+        <!-- SCOPE TEST -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

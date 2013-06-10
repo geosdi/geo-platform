@@ -50,5 +50,4 @@ public class CASLoginRequest implements GPCommandRequest {
     public String getCommandName() {
         return "command.login.CasLoginCommand";
     }
-
 }

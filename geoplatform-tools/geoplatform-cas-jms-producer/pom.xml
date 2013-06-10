@@ -25,6 +25,14 @@
             <version>${project.version}</version>
         </dependency>
         
+        <!-- CAS -->
+        <dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <type>jar</type>
+            <version>3.2.1</version>
+        </dependency>
+        
         <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -113,3 +121,4 @@
         </plugins>
     </build>
 </project>
+>>>>>>> 507f9e2... Added publisher support to CAS configuration

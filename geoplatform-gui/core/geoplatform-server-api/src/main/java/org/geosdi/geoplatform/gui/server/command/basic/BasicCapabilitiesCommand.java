@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -32,60 +32,51 @@
  * to your version of the library, but you are not obligated to do so. If you do not 
  * wish to do so, delete this exception statement from your version. 
  *
-<<<<<<< HEAD
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.server.command.basic;
 
-import com.google.gwt.user.client.rpc.SerializationException;
+import org.geosdi.geoplatform.gui.server.command.cas.*;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
-import org.geosdi.geoplatform.gui.command.server.CommandDispatcher;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
-import org.geosdi.geoplatform.gui.service.GeoPlatformService;
+import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesRequest;
+import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
+import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeoPlatformServiceImpl extends GPAutoInjectingRemoteServiceServlet
-        implements GeoPlatformService {
+@Lazy(true)
+@Component(value = "command.capabilities.BasicCapabilitiesCommand")
+public class BasicCapabilitiesCommand implements
+        GPCommand<BasicCapabilitiesRequest, BasicCapabilitiesResponse> {
 
-    private static final long serialVersionUID = 8142113535798430418L;
-    //
-    static ThreadLocal<HttpServletRequest> perThreadRequest =
-            new ThreadLocal<HttpServletRequest>();
-    //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-
-    @Override
-    public String processCall(String payload) throws SerializationException {
-        try {
-            perThreadRequest.set(getThreadLocalRequest());
-            return super.processCall(payload);
-        } finally {
-            perThreadRequest.set(null);
-        }
-    }
-
-    public static HttpServletRequest getRequest() {
-        return perThreadRequest.get();
-    }
+    private static final Logger logger = LoggerFactory.getLogger(
+            CASCapabilitiesCommand.class);
     //
     @Autowired
-    private CommandDispatcher gpCommandDispatcher;
+    private IOGCService ogcService;
 
     @Override
-    public <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(
-            Request request) throws GeoPlatformException {
+    public BasicCapabilitiesResponse execute(BasicCapabilitiesRequest request,
+            HttpServletRequest httpServletRequest) {
 
-        return this.gpCommandDispatcher.execute(request, super.
-                getThreadLocalRequest());
+        logger.info("##################### Executing {} Command", this.
+                getClass().getSimpleName());
+
+        ArrayList<? extends GPLayerGrid> capabilitiesResult = this.ogcService.getCapabilities(
+                request.getServerUrl(), httpServletRequest, request.getIdServer());
+
+        logger.info("##################### FOUND {} ", capabilitiesResult);
+
+        return new BasicCapabilitiesResponse(capabilitiesResult);
     }
 }

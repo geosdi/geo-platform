@@ -33,26 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.publish.cas;
+package org.geosdi.geoplatform.gui.command.capabilities.cas;
 
-import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultResponse;
+import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesRequest;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class CasProcessEPSGResultResponse extends ProcessEPSGResultResponse {
+public class CASCapabilitiesRequest extends BasicCapabilitiesRequest {
 
-    private static final long serialVersionUID = -4758668682264787766L;
+    private static final long serialVersionUID = 3727210556994205008L;
 
-    public CasProcessEPSGResultResponse(String result) {
-        super(result);
+    public CASCapabilitiesRequest() {
     }
-    
+
+    public CASCapabilitiesRequest(String serverUrl, Long idServer) {
+        super(serverUrl, idServer);
+    }
+
+    @Override
+    public String getCommandName() {
+        return "command.capabilities.CasCapabilitiesCommand";
+    }
+
     @Override
     public String toString() {
-        return super.toString();
+        return "CASCapabilitiesRequest{" + super.toString() + '}';
     }
-
 }

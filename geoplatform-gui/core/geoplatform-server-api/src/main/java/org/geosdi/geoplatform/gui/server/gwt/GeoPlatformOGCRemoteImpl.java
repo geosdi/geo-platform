@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
-import com.google.gwt.user.client.rpc.SerializationException;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.server.command.basic.BasicCapabilitiesCommand;
 import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
@@ -55,22 +54,6 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingRemoteServiceServle
         implements GeoPlatformOGCRemote {
 
     private static final long serialVersionUID = 7340579377487014548L;
-    static ThreadLocal<HttpServletRequest> perThreadRequest =
-            new ThreadLocal<HttpServletRequest>();
-
-    @Override
-    public String processCall(String payload) throws SerializationException {
-        try {
-            perThreadRequest.set(getThreadLocalRequest());
-            return super.processCall(payload);
-        } finally {
-            perThreadRequest.set(null);
-        }
-    }
-
-    public static HttpServletRequest getRequest() {
-        return perThreadRequest.get();
-    }
     //
     @Autowired
     private IOGCService ogcService;
@@ -87,6 +70,13 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingRemoteServiceServle
         return ogcService.getServerDetails(idServer);
     }
 
+    /**
+     * @see BasicCapabilitiesCommand
+     * @return
+     * @throws GeoPlatformException
+     * @deprecated
+     */
+    @Deprecated
     @Override
     public ArrayList<? extends GPLayerGrid> getCapabilities(String serverUrl, Long idServer)
             throws GeoPlatformException {

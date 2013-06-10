@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Layer Module</name>
-    
+
     <dependencies>
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -122,7 +122,7 @@
         <dependency>
             <groupId>it.geosolutions</groupId>
             <artifactId>geoserver-manager</artifactId>
-            <version>1.6.x-enhanced</version>
+            <version>${geoserver-manager-version}</version>
         </dependency>
         
         <!--        <dependency>

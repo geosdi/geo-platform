@@ -47,8 +47,6 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  */
 public class StartupConfigurationLogIn implements IStartupConfigurationStrategy {
 
-    //TODO: Move this class on geo-platform
-    
     private static final long serialVersionUID = -4521004364754154783L;
 
     @Override
@@ -56,7 +54,7 @@ public class StartupConfigurationLogIn implements IStartupConfigurationStrategy 
         BasicGinInjector injector = BasicGinInjector.MainInjector.getInstance();
         ILoginHandler cASLoginHandler = new SSOLoginHandler();
         injector.getSecurityLoginChainOfResponsibility().setLoginHandler(cASLoginHandler);
-        injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM, "CAS login in corso...");
+        injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM, "Login in corso...");
 //        Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
     }
 }

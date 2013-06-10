@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.command.session;
 
+import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
@@ -42,16 +43,16 @@ import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InvalidateSessionResponse implements GPCommandResponse<Boolean> {
+public class InvalidateSessionResponse implements GPCommandResponse<String> {
 
-    private static final long serialVersionUID = -6322770881138903444L;
+    private static final long serialVersionUID = -2491269415299451018L;
+    protected String result;
 
     public InvalidateSessionResponse() {
     }
 
-    @Override
-    public Boolean getResult() {
-        return Boolean.TRUE;
+    public InvalidateSessionResponse(String result) {
+        this.result = result;
     }
 
     @Override
@@ -59,4 +60,16 @@ public class InvalidateSessionResponse implements GPCommandResponse<Boolean> {
         return "InvalidateSessionResponse{ " + '}';
     }
 
+    @Override
+    public String getResult() {
+        return result;
+    }
+
+    public void executeInvalidateSession() {
+        Window.Location.reload();
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 }

@@ -56,5 +56,4 @@ public interface GPCommand<Request extends GPCommandRequest, Response extends GP
      * @return
      */
     Response execute(Request request, HttpServletRequest httpServletRequest);
-
 }

@@ -39,6 +39,8 @@ import org.geosdi.geoplatform.gui.client.service.SecurityRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
+import org.geosdi.geoplatform.gui.server.command.login.basic.BasicLoginCommand;
+import org.geosdi.geoplatform.gui.server.command.login.sso.SSOLoginCommand;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -64,12 +66,26 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
                 getThreadLocalRequest());
     }
 
+    /**
+     * @see SSOLoginCommand
+     * @return
+     * @throws GeoPlatformException
+     * @deprecated
+     *
+     */
     @Override
     @Deprecated
     public IGPAccountDetail ssoLogin() throws GeoPlatformException {
         return this.securityService.ssoLogin(super.getThreadLocalRequest());
     }
 
+    /**
+     * @see BasicLoginCommand
+     * @return
+     * @throws GeoPlatformException
+     * @deprecated
+     *
+     */
     @Override
     @Deprecated
     public IGPAccountDetail casLogin() throws GeoPlatformException {
@@ -89,5 +105,4 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     public void invalidateSession() throws GeoPlatformException {
         this.securityService.invalidateSession(super.getThreadLocalRequest());
     }
-
 }

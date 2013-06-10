@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -32,60 +32,52 @@
  * to your version of the library, but you are not obligated to do so. If you do not 
  * wish to do so, delete this exception statement from your version. 
  *
-<<<<<<< HEAD
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.command.capabilities.basic;
 
-import com.google.gwt.user.client.rpc.SerializationException;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
-import org.geosdi.geoplatform.gui.command.server.CommandDispatcher;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
-import org.geosdi.geoplatform.gui.service.GeoPlatformService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class GeoPlatformServiceImpl extends GPAutoInjectingRemoteServiceServlet
-        implements GeoPlatformService {
+public class BasicCapabilitiesRequest implements GPCommandRequest {
+    
+    private static final long serialVersionUID = -2103626001362046547L;
+    private String serverUrl;
+    private Long idServer;
 
-    private static final long serialVersionUID = 8142113535798430418L;
-    //
-    static ThreadLocal<HttpServletRequest> perThreadRequest =
-            new ThreadLocal<HttpServletRequest>();
-    //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-
-    @Override
-    public String processCall(String payload) throws SerializationException {
-        try {
-            perThreadRequest.set(getThreadLocalRequest());
-            return super.processCall(payload);
-        } finally {
-            perThreadRequest.set(null);
-        }
+    public BasicCapabilitiesRequest() {
     }
 
-    public static HttpServletRequest getRequest() {
-        return perThreadRequest.get();
+    public BasicCapabilitiesRequest(String serverUrl, Long idServer) {
+        this.serverUrl = serverUrl;
+        this.idServer = idServer;
     }
-    //
-    @Autowired
-    private CommandDispatcher gpCommandDispatcher;
 
     @Override
-    public <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(
-            Request request) throws GeoPlatformException {
+    public String getCommandName() {
+        return "command.capabilities.BasicCapabilitiesCommand";
+    }
 
-        return this.gpCommandDispatcher.execute(request, super.
-                getThreadLocalRequest());
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
+    public Long getIdServer() {
+        return idServer;
+    }
+
+    public void setIdServer(Long idServer) {
+        this.idServer = idServer;
+    }
+
+    @Override
+    public String toString() {
+        return "CASCapabilitiesRequest{" + "serverUrl=" + serverUrl + ", idServer=" + idServer + '}';
     }
 }

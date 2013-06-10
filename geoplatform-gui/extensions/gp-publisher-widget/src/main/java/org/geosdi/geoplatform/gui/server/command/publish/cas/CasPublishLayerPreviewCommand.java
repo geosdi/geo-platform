@@ -53,8 +53,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewResponse;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasPublishLayerPreviewRequest;
-import org.geosdi.geoplatform.gui.client.command.publish.cas.CasPublishLayerPreviewResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
@@ -78,7 +78,7 @@ import org.springframework.stereotype.Component;
 @Lazy(true)
 @Component(value = "command.publish.cas.CasPublishLayerPreviewCommand")
 public class CasPublishLayerPreviewCommand implements
-        GPCommand<CasPublishLayerPreviewRequest, CasPublishLayerPreviewResponse>, InitializingBean {
+        GPCommand<CasPublishLayerPreviewRequest, PublishLayerPreviewResponse>, InitializingBean {
 
     private static final Logger logger = LoggerFactory.getLogger(
             CasPublishLayerPreviewCommand.class);
@@ -106,7 +106,7 @@ public class CasPublishLayerPreviewCommand implements
     }
 
     @Override
-    public CasPublishLayerPreviewResponse execute(
+    public PublishLayerPreviewResponse execute(
             CasPublishLayerPreviewRequest request,
             HttpServletRequest httpServletRequest) {
         try {
@@ -155,7 +155,7 @@ public class CasPublishLayerPreviewCommand implements
             throw new GeoPlatformException(new GPReloadURLException(
                     "Error on reloading cluster."));
         }
-        return new CasPublishLayerPreviewResponse(result);
+        return new PublishLayerPreviewResponse(result);
 
     }
 

@@ -33,43 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.session;
+package org.geosdi.geoplatform.gui.server.command.basic;
 
-import com.google.gwt.user.client.Window;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.geosdi.geoplatform.gui.server.command.cas.*;
+import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesRequest;
+import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
+import org.geosdi.geoplatform.gui.server.service.IOGCService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InvalidateSessionResponse implements GPCommandResponse<String> {
+@Lazy(true)
+@Component(value = "command.capabilities.BasicCapabilitiesCommand")
+public class BasicCapabilitiesCommand implements
+        GPCommand<BasicCapabilitiesRequest, BasicCapabilitiesResponse> {
 
-    private static final long serialVersionUID = -2491269415299451018L;
-    protected String result;
-
-    public InvalidateSessionResponse() {
-    }
-
-    public InvalidateSessionResponse(String result) {
-        this.result = result;
-    }
-
-    @Override
-    public String toString() {
-        return "InvalidateSessionResponse{ " + '}';
-    }
+    private static final Logger logger = LoggerFactory.getLogger(
+            CASCapabilitiesCommand.class);
+    //
+    @Autowired
+    private IOGCService ogcService;
 
     @Override
-    public String getResult() {
-        return result;
-    }
+    public BasicCapabilitiesResponse execute(BasicCapabilitiesRequest request,
+            HttpServletRequest httpServletRequest) {
 
-    public void executeInvalidateSession() {
-        Window.Location.reload();
-    }
+        logger.info("##################### Executing {} Command", this.
+                getClass().getSimpleName());
 
-    public void setResult(String result) {
-        this.result = result;
+        ArrayList<? extends GPLayerGrid> capabilitiesResult = this.ogcService.getCapabilities(
+                request.getServerUrl(), httpServletRequest, request.getIdServer());
+
+        logger.info("##################### FOUND {} ", capabilitiesResult);
+
+        return new BasicCapabilitiesResponse(capabilitiesResult);
     }
 }

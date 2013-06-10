@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.cas.jms.app;
 
+import java.util.UUID;
 import org.geosdi.geoplatform.cas.jms.mock.CASMockObject;
 import org.geosdi.geoplatform.cas.jms.producer.ICASProducer;
 import org.springframework.context.ApplicationContext;
@@ -50,10 +51,8 @@ public class CASProducerApp {
     public static void main(String[] args) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext(
                 "classpath:applicationContext.xml");
-
         ICASProducer casProducer = (ICASProducer) context.getBean(
                 "casMessageProducer");
-
         for (int i = 0; i < 10; i++) {
             CASMockObject mock = new CASMockObject();
             mock.setId(new Long(i));
@@ -62,5 +61,4 @@ public class CASProducerApp {
             casProducer.sendObject(mock);
         }
     }
-
 }

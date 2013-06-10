@@ -75,12 +75,12 @@ public class CASLoginCommand implements
         /**
          * Here the parameter in Request *
          */
-        IGPAccountDetail accauntDetail = this.securityService.casLogin(
+        IGPAccountDetail accountDetail = this.securityService.casLogin(
                 httpServletRequest);
 
-        logger.debug("##################### FOUND {} ", accauntDetail);
+        logger.debug("##################### FOUND {} ", accountDetail);
 
-        return new CASLoginResponse(accauntDetail);
+        return new CASLoginResponse(accountDetail);
     }
 
 }

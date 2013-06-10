@@ -49,6 +49,7 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,10 @@ import org.geosdi.geoplatform.gui.client.event.timeout.DisplayGetCapabilitiesEve
 import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHandler;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesRequest;
+import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesResponse;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
@@ -346,11 +351,27 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
         @Override
         public void loadCapabilitiesFromWS() {
-            GeoPlatformOGCRemote.Util.getInstance().getCapabilities(
-                    selectedServer.getUrlServer(), selectedServer.getId(),
-                    new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
+            final BasicCapabilitiesRequest capabilitiesRequest = GWT.create(BasicCapabilitiesRequest.class);
+            capabilitiesRequest.setIdServer(selectedServer.getId());
+            capabilitiesRequest.setServerUrl(selectedServer.getUrlServer());
+//            final BasicCapabilitiesRequest capabilitiesRequest = new BasicCapabilitiesRequest(
+//                    selectedServer.getUrlServer(), selectedServer.getId());
+            ClientCommandDispatcher.getInstance().execute(
+                    new GPClientCommand<BasicCapabilitiesResponse>() {
+                private static final long serialVersionUID = -5938478884870425893L;
+
+                {
+                    super.setCommandRequest(capabilitiesRequest);
+                }
+
                 @Override
-                public void onFailure(Throwable caught) {
+                public void onCommandSuccess(BasicCapabilitiesResponse response) {
+                    selectedServer.setLayers(response.getResult());
+                    fillGrid(response.getResult());
+                }
+
+                @Override
+                public void onCommandFailure(Throwable exception) {
                     gridWidget.unMaskGrid();
                     LayoutManager.getInstance().getStatusMap().clearStatus(
                             "");
@@ -364,18 +385,11 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                                 EnumOAuth2.LOAD_CAPABILITIES.getValue()));
                     } else {
                         GeoPlatformMessage.errorMessage("Server Service",
-                                caught.getMessage());
+                                exception.getMessage());
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Server Error. " + caught.getMessage(),
+                                "Server Error. " + exception.getMessage(),
                                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                     }
-                }
-
-                @Override
-                public void onSuccess(
-                        ArrayList<? extends GPLayerGrid> result) {
-                    selectedServer.setLayers(result);
-                    fillGrid(result);
                 }
             });
         }

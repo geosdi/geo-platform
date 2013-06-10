@@ -33,43 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.session;
+package org.geosdi.geoplatform.gui.command.capabilities.basic;
 
-import com.google.gwt.user.client.Window;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class InvalidateSessionResponse implements GPCommandResponse<String> {
+public class BasicCapabilitiesRequest implements GPCommandRequest {
+    
+    private static final long serialVersionUID = -2103626001362046547L;
+    private String serverUrl;
+    private Long idServer;
 
-    private static final long serialVersionUID = -2491269415299451018L;
-    protected String result;
-
-    public InvalidateSessionResponse() {
+    public BasicCapabilitiesRequest() {
     }
 
-    public InvalidateSessionResponse(String result) {
-        this.result = result;
+    public BasicCapabilitiesRequest(String serverUrl, Long idServer) {
+        this.serverUrl = serverUrl;
+        this.idServer = idServer;
+    }
+
+    @Override
+    public String getCommandName() {
+        return "command.capabilities.BasicCapabilitiesCommand";
+    }
+
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
+    public Long getIdServer() {
+        return idServer;
+    }
+
+    public void setIdServer(Long idServer) {
+        this.idServer = idServer;
     }
 
     @Override
     public String toString() {
-        return "InvalidateSessionResponse{ " + '}';
-    }
-
-    @Override
-    public String getResult() {
-        return result;
-    }
-
-    public void executeInvalidateSession() {
-        Window.Location.reload();
-    }
-
-    public void setResult(String result) {
-        this.result = result;
+        return "CASCapabilitiesRequest{" + "serverUrl=" + serverUrl + ", idServer=" + idServer + '}';
     }
 }

@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
+import com.google.gwt.user.client.rpc.SerializationException;
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.command.server.CommandDispatcher;
@@ -55,7 +57,25 @@ public class GeoPlatformServiceImpl extends GPAutoInjectingRemoteServiceServlet
 
     private static final long serialVersionUID = 8142113535798430418L;
     //
+    static ThreadLocal<HttpServletRequest> perThreadRequest =
+            new ThreadLocal<HttpServletRequest>();
+    //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+
+    @Override
+    public String processCall(String payload) throws SerializationException {
+        try {
+            perThreadRequest.set(getThreadLocalRequest());
+            return super.processCall(payload);
+        } finally {
+            perThreadRequest.set(null);
+        }
+    }
+
+    public static HttpServletRequest getRequest() {
+        return perThreadRequest.get();
+    }
     //
     @Autowired
     private CommandDispatcher gpCommandDispatcher;
@@ -67,5 +87,4 @@ public class GeoPlatformServiceImpl extends GPAutoInjectingRemoteServiceServlet
         return this.gpCommandDispatcher.execute(request, super.
                 getThreadLocalRequest());
     }
-
 }

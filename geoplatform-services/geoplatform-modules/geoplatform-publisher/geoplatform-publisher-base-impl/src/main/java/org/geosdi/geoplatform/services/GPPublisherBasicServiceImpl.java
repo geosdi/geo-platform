@@ -615,8 +615,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
      * @return perform a REST call for deleting the layer
      */
     private boolean removeLayer(String layer) {
-        String sUrl = RESTURL + "/rest/layers/" + layer + "?purge=true";
-        return HttpUtilsLocal.delete(sUrl, RESTUSER, RESTPW);
+        return this.restPublisher.removeLayer(null, layer);
+//        String sUrl = RESTURL + "/rest/layers/" + layer + "?purge=true";
+//        return HttpUtilsLocal.delete(sUrl, RESTUSER, RESTPW);
     }
 
     /**
@@ -692,9 +693,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
      *
      * @return reload the catalogue of geoserver
      */
-    private String reload() {
-        String sUrl = RESTURL + "/rest/reload";
-        return HttpUtilsLocal.post(sUrl, "", "text/html", RESTUSER, RESTPW);
+    private boolean reload() {
+        return this.restPublisher.reload();
+//        String sUrl = RESTURL + "/rest/reload";
+//        return HttpUtilsLocal.post(sUrl, "", "text/html", RESTUSER, RESTPW);
     }
 
     /**

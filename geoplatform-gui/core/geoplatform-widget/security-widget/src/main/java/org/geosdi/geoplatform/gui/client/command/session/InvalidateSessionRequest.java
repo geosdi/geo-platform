@@ -53,7 +53,6 @@ public class InvalidateSessionRequest implements GPCommandRequest {
 
     @Override
     public String toString() {
-        return "InvalidateSessionRequest{ " + getCommandName() + '}';
+        return getClass().getName();
     }
-
 }

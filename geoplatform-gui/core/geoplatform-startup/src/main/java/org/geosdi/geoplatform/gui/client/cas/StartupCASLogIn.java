@@ -54,7 +54,7 @@ public class StartupCASLogIn implements IStartupConfigurationStrategy {
         BasicGinInjector injector = BasicGinInjector.MainInjector.getInstance();
         ILoginHandler cASLoginHandler = new CASLoginHandler();
         injector.getSecurityLoginChainOfResponsibility().setLoginHandler(cASLoginHandler);
-        injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM, 
+        injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM,
                 "CAS login in corso...");
 
         //Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_FIRST_LOGIN);

@@ -60,7 +60,6 @@ public class CASMessageProducer implements ICASProducer {
     @Override
     public void sendObject(final Serializable o) throws JMSException {
         this.jmsTemplate.send(new MessageCreator() {
-
             @Override
             public Message createMessage(Session sn) throws JMSException {
                 ObjectMessage message = sn.createObjectMessage(o);
@@ -71,7 +70,6 @@ public class CASMessageProducer implements ICASProducer {
 
                 return message;
             }
-
         });
     }
 
@@ -81,5 +79,4 @@ public class CASMessageProducer implements ICASProducer {
     public void setJmsTemplate(JmsTemplate theJmsTemplate) {
         this.jmsTemplate = theJmsTemplate;
     }
-
 }

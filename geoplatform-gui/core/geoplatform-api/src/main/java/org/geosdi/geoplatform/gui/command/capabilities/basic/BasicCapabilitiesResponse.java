@@ -33,43 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.session;
+package org.geosdi.geoplatform.gui.command.capabilities.basic;
 
-import com.google.gwt.user.client.Window;
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class InvalidateSessionResponse implements GPCommandResponse<String> {
+public class BasicCapabilitiesResponse implements GPCommandResponse<ArrayList<? extends GPLayerGrid>> {
 
-    private static final long serialVersionUID = -2491269415299451018L;
-    protected String result;
+    private static final long serialVersionUID = 3505297359812594782L;
+    //
+    private ArrayList<? extends GPLayerGrid> capabilitiesResult;
 
-    public InvalidateSessionResponse() {
+    public BasicCapabilitiesResponse() {
     }
 
-    public InvalidateSessionResponse(String result) {
-        this.result = result;
+    public BasicCapabilitiesResponse(ArrayList<? extends GPLayerGrid> capabilitiesResult) {
+        this.capabilitiesResult = capabilitiesResult;
+    }
+
+    @Override
+    public ArrayList<? extends GPLayerGrid> getResult() {
+        return this.capabilitiesResult;
     }
 
     @Override
     public String toString() {
-        return "InvalidateSessionResponse{ " + '}';
-    }
-
-    @Override
-    public String getResult() {
-        return result;
-    }
-
-    public void executeInvalidateSession() {
-        Window.Location.reload();
-    }
-
-    public void setResult(String result) {
-        this.result = result;
+        return "BasicCapabilitiesResponse{ " + "capabilitiesResult = " + capabilitiesResult + '}';
     }
 }

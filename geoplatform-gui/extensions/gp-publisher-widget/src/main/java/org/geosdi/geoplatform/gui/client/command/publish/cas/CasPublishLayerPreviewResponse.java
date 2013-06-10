@@ -46,6 +46,9 @@ public class CasPublishLayerPreviewResponse extends PublishLayerPreviewResponse 
 
     private static final long serialVersionUID = -8221815351588684446L;
 
+    public CasPublishLayerPreviewResponse() {
+    }
+    
     public CasPublishLayerPreviewResponse(String theResult) {
         super(theResult);
     }

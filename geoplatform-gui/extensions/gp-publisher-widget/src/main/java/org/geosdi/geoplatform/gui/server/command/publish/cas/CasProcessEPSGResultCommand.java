@@ -42,8 +42,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultResponse;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultRequest;
-import org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultResponse;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -69,7 +69,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "command.publish.cas.CasProcessEPSGResultCommand")
 @Profile(value = "cas")
 public class CasProcessEPSGResultCommand implements
-        GPCommand<CasProcessEPSGResultRequest, CasProcessEPSGResultResponse> {
+        GPCommand<CasProcessEPSGResultRequest, ProcessEPSGResultResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
             CasProcessEPSGResultCommand.class);
@@ -78,7 +78,7 @@ public class CasProcessEPSGResultCommand implements
     private SessionUtility sessionUtility;
 
     @Override
-    public CasProcessEPSGResultResponse execute(
+    public ProcessEPSGResultResponse execute(
             CasProcessEPSGResultRequest request,
             HttpServletRequest httpServletRequest) {
         GPAccount account;
@@ -97,7 +97,7 @@ public class CasProcessEPSGResultCommand implements
             logger.error("Error on publish shape: " + ex);
             throw new GeoPlatformException("Error on publish shape.");
         }
-        return new CasProcessEPSGResultResponse(PublisherFileUtils.generateJSONObjects(resultList));
+        return new ProcessEPSGResultResponse(PublisherFileUtils.generateJSONObjects(resultList));
     }
 
     private ArrayList<InfoPreview> trasformPreviewLayerList(

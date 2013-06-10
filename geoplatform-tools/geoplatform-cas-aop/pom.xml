@@ -68,12 +68,18 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
+        <!--    <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
             <version>${project.version}</version>
-        </dependency>
+        </dependency>-->
 
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-publisher-widget</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
@@ -87,19 +93,23 @@
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
+            <artifactId>cglib-nodep</artifactId>
         </dependency>
+        <!--        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>-->
         
+        <dependency>
+            <groupId>it.geosolutions</groupId>
+            <artifactId>geoserver-manager</artifactId>
+            <version>${geoserver-manager-version}</version>
+        </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-server-api</artifactId>
+            <artifactId>gp-shared-beans</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-wms-impl</artifactId>
         </dependency>
         
         <!-- logging dependencies, delegate all to slf4j and use logback -->
@@ -124,11 +134,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
         
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     

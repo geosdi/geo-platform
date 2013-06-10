@@ -43,7 +43,6 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -54,8 +53,8 @@ import org.springframework.stereotype.Service;
 @Service("postGISUtility")
 public class PostGISUtility {
 
-    @Resource(name = "restReader")
-    private GeoServerRESTReader reader;
+    @Resource(name = "restStoreManager")
+    private GeoServerRESTStoreManager restStoreManager;
     private @Value("configurator{geoserver_url}")
     String geoserverUrl;
     private @Value("configurator{geoserver_username}")
@@ -77,14 +76,14 @@ public class PostGISUtility {
 //        RESTDataStore store = reader.getDatastore(workspace, storeName);
 //        System.out.println("************ Store Retrieved: ");
 //        System.out.println(store);
-        GeoServerRESTStoreManager manager = null;
+        //GeoServerRESTStoreManager manager = null;
 //        if (store == null) {
-        try {
+        /**try {
             manager = new GeoServerRESTStoreManager(
                     new URL(geoserverUrl), geoserverUser, geoserverPassword);
         } catch (MalformedURLException ex) {
             Logger.getLogger(PostGISUtility.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder(storeName);
         encoder.setEnabled(true);
         encoder.setHost(hostPostgisDatastore);
@@ -102,9 +101,9 @@ public class PostGISUtility {
         encoder.setLooseBBox(Boolean.TRUE);
         encoder.setPreparedStatements(false);
         encoder.setMaxOpenPreparedStatements(50);
-        manager.create(workspace, encoder);
+        restStoreManager.create(workspace, encoder);
 //        }
-        return manager;
+        return restStoreManager;
     }
 
 //    public GSPostGISDatastoreEncoder generateEncoder(String storeName) {

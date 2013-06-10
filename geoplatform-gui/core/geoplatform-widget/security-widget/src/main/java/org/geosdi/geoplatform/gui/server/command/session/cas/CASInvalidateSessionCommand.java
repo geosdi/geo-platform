@@ -33,43 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.session;
+package org.geosdi.geoplatform.gui.server.command.session.cas;
 
-import com.google.gwt.user.client.Window;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
+import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionResponse;
+import org.geosdi.geoplatform.gui.client.command.session.cas.CASInvalidateSessionResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.server.ISecurityService;
+import org.geosdi.geoplatform.gui.server.command.login.basic.BasicLoginCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InvalidateSessionResponse implements GPCommandResponse<String> {
+@Lazy(true)
+@Profile(value = "cas")
+@Component(value = "command.session.cas.CASInvalidateSessionCommand")
+public class CASInvalidateSessionCommand implements
+        GPCommand<InvalidateSessionRequest, CASInvalidateSessionResponse> {
 
-    private static final long serialVersionUID = -2491269415299451018L;
-    protected String result;
-
-    public InvalidateSessionResponse() {
-    }
-
-    public InvalidateSessionResponse(String result) {
-        this.result = result;
-    }
-
-    @Override
-    public String toString() {
-        return "InvalidateSessionResponse{ " + '}';
-    }
+    private static final Logger logger = LoggerFactory.getLogger(
+            BasicLoginCommand.class);
+    private @Value("casProp{cas_logout_url}")
+    String casLogoutURL;
+    //
+    @Autowired
+    private ISecurityService securityService;
 
     @Override
-    public String getResult() {
-        return result;
-    }
+    public CASInvalidateSessionResponse execute(InvalidateSessionRequest request,
+            HttpServletRequest httpServletRequest) {
 
-    public void executeInvalidateSession() {
-        Window.Location.reload();
-    }
+        logger.debug("##################### Executing {} Command", this.
+                getClass().getSimpleName());
 
-    public void setResult(String result) {
-        this.result = result;
+        this.securityService.invalidateSession(httpServletRequest);
+
+        logger.debug("#################### CAS Session Invalidate.");
+
+        return new CASInvalidateSessionResponse(casLogoutURL);
     }
 }

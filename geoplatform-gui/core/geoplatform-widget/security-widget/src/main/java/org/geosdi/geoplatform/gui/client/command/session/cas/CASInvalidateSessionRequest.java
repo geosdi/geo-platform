@@ -33,43 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.session;
+package org.geosdi.geoplatform.gui.client.command.session.cas;
 
-import com.google.gwt.user.client.Window;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InvalidateSessionResponse implements GPCommandResponse<String> {
+public class CASInvalidateSessionRequest extends InvalidateSessionRequest {
 
-    private static final long serialVersionUID = -2491269415299451018L;
-    protected String result;
-
-    public InvalidateSessionResponse() {
-    }
-
-    public InvalidateSessionResponse(String result) {
-        this.result = result;
-    }
+    private static final long serialVersionUID = -2824094825601018534L;
 
     @Override
-    public String toString() {
-        return "InvalidateSessionResponse{ " + '}';
-    }
-
-    @Override
-    public String getResult() {
-        return result;
-    }
-
-    public void executeInvalidateSession() {
-        Window.Location.reload();
-    }
-
-    public void setResult(String result) {
-        this.result = result;
+    public String getCommandName() {
+        return "command.session.cas.CASInvalidateSessionCommand";
     }
 }

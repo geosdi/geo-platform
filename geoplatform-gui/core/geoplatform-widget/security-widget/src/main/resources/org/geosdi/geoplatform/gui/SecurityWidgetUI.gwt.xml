@@ -2,8 +2,20 @@
 <module>
     <inherits name="org.geosdi.geoplatform.gui.XMPPWidgetUI" />
     
+    <inherits name="org.geosdi.geoplatform.gui.GPCASProperties" />
+    
     <source path="client" />
 
     <servlet path="/SecurityRemote" class="org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl" />
+    
+    <replace-with class="org.geosdi.geoplatform.gui.command.capabilities.cas.CASCapabilitiesRequest">
+        <when-type-is class="org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesRequest"/>
+        <when-property-is name="security.strategy" value="cas"/>
+    </replace-with>
 
+    <replace-with class="org.geosdi.geoplatform.gui.client.command.session.cas.CASInvalidateSessionRequest">
+        <when-type-is class="org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest"/>
+        <when-property-is name="security.strategy" value="cas"/>
+    </replace-with>
+    
 </module>

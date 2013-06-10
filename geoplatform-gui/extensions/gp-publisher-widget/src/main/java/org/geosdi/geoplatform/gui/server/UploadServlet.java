@@ -60,6 +60,9 @@ import org.geosdi.geoplatform.gui.server.SessionUtility.SessionProperty;
 import org.geosdi.geoplatform.gui.server.uploader.IPublisherUploader;
 import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.responce.InfoPreview;
+import org.jasig.cas.client.util.AbstractCasFilter;
+import org.jasig.cas.client.validation.Assertion;
+import org.jasig.cas.client.validation.AssertionImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -77,11 +80,17 @@ public class UploadServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(
             UploadServlet.class);
     //
+    private static Assertion receivedAssertion;
+    //
     @Autowired
     private PublisherFileUtils publisherFileUtils;
     //
     @Autowired
     private IPublisherUploader gpPublisherUploader;
+
+    public static Assertion getReceivedAssertion() {
+        return receivedAssertion;
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -111,6 +120,7 @@ public class UploadServlet extends HttpServlet {
                     "Session Timeout");
             return;
         }
+        receivedAssertion = (AssertionImpl) session.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
@@ -208,5 +218,4 @@ public class UploadServlet extends HttpServlet {
         }
         return previewList;
     }
-
 }

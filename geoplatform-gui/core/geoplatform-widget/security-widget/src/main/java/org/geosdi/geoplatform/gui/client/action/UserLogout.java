@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -55,17 +56,16 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @email nazzareno.sileno@geosdi.org
  */
 public class UserLogout extends MenuBaseAction {
-    
+
     public UserLogout() {
         super("Logout", BasicWidgetResources.ICONS.logout());
     }
-    
+
     @Override
     public void componentSelected(MenuEvent ce) {
         GeoPlatformMessage.confirmMessage("Log-out message",
                 "Do you really want to leave the application?",
                 new Listener<MessageBoxEvent>() {
-            
             @Override
             public void handleEvent(MessageBoxEvent be) {
                 if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
@@ -74,31 +74,32 @@ public class UserLogout extends MenuBaseAction {
                     invalidateSession();
                 }
             }
-            
         });
     }
-    
+
     private void invalidateSession() {
+        final InvalidateSessionRequest invalidateSessionRequest = GWT.create(InvalidateSessionRequest.class);
         ClientCommandDispatcher.getInstance().execute(
                 new GPClientCommand<InvalidateSessionResponse>() {
-            
             private static final long serialVersionUID = 3838394981874885388L;
-            
+
             {
-                super.setCommandRequest(new InvalidateSessionRequest());
+                super.setCommandRequest(invalidateSessionRequest);
             }
-            
+
             @Override
             public void onCommandSuccess(InvalidateSessionResponse response) {
-                Window.Location.reload();
+//                Window.Location.reload();
+//                String url = GWT.getHostPageBaseURL() + "/cas/logout";
+//                Window.open(url, null, "_self");
+                response.executeInvalidateSession();
             }
-            
+
             @Override
             public void onCommandFailure(Throwable exception) {
+                System.out.println("Error on invalidating the session!!!");
                 //TODO: In case of fail... what is possible to do??
             }
-            
         });
     }
-    
 }

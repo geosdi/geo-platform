@@ -81,7 +81,7 @@ public abstract class GPAbstractConnectorRequest<T>
     /**
      * <p>
      * Setting basic configuration for HttpParams
-     * <p/>
+     * </p>
      */
     protected void prepareHttpParams() {
         HttpParams httpParams = this.clientConnection.getParams();

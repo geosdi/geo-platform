@@ -79,6 +79,7 @@ public abstract class GPAbstractConnectorRequest<T>
     }
 
     /**
+     * <p>
      * Setting basic configuration for HttpParams
      * </p>
      */

@@ -93,7 +93,7 @@
                
         <dependency>
             <groupId>org.apache.xmlbeans</groupId>
-            <artifactId>xmlbeans</artifactId>
+            <artifactId>xmlbeans-xmlpublic</artifactId>
         </dependency>
         
         <!-- logging dependencies, delegate all to slf4j and use logback -->

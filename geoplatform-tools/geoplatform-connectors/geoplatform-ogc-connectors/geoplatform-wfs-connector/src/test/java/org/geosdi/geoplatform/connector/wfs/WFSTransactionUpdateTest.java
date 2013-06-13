@@ -49,7 +49,6 @@ import org.junit.Test;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-//@Category(WFSTest.class)
 public class WFSTransactionUpdateTest extends WFSTestConfigurator {
     
     private final static QName POLY_LANDMARKS = new QName(

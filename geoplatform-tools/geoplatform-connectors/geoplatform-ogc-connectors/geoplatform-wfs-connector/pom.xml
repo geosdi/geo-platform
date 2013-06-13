@@ -102,16 +102,17 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-
-        <!-- SCOPE TEST -->
+        
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
         
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     
@@ -124,23 +125,6 @@
             
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-            </plugin>
-            
-            <!-- test -->
-            <!-- mvn test (single test: -D test=XXX) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludedGroups>org.geosdi.geoplatform.configurator.category.WFSTest</excludedGroups>
-                </configuration>
-            </plugin>
-            <!-- mvn verify (single test: -D it.test=XXX) -->
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <groups>org.geosdi.geoplatform.configurator.category.WFSTest</groups>
-                </configuration>
             </plugin>
         </plugins>
 

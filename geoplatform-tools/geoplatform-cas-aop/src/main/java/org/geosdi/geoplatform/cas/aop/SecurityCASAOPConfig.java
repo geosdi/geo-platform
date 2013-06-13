@@ -46,7 +46,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @EnableAspectJAutoProxy(proxyTargetClass = false)
-public class SecurityCasAopConfig {
+public class SecurityCASAOPConfig {
 
     @Bean
     public SecurityCASAOP securityCASAOP() {

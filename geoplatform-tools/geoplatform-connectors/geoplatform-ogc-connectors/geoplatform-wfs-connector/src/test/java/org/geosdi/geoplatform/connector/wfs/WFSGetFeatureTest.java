@@ -51,7 +51,6 @@ import org.junit.Test;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-//@Category(WFSTest.class)
 public class WFSGetFeatureTest extends WFSTestConfigurator {
 
     private QName statesName = new QName("topp:states");

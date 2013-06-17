@@ -22,22 +22,13 @@
     </listener>
     
     <servlet>
-        <servlet-name>GeoPlatformConfiguration</servlet-name>
-        <servlet-class>org.geosdi.geoplatform.gui.server.gwt.GeoPlatformConfigurationImpl</servlet-class>
+        <servlet-name>GeoPlatformService</servlet-name>
+        <servlet-class>org.geosdi.geoplatform.gui.server.gwt.GeoPlatformServiceImpl</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>GeoPlatformConfiguration</servlet-name>
-        <url-pattern>/feature_demo/GeoPlatformConfiguration</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>WFSRemote</servlet-name>
-        <servlet-class>org.geosdi.geoplatform.gui.server.gwt.WFSRemoteImpl</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>WFSRemote</servlet-name>
-        <url-pattern>/feature_demo/WFSRemote</url-pattern>
+        <servlet-name>GeoPlatformService</servlet-name>
+        <url-pattern>/feature_demo/GeoPlatformService</url-pattern>
     </servlet-mapping>
     
     <!-- Open proxy to circumvent cross-domain XMLHTTPRequest restrictions. -->

@@ -9,7 +9,7 @@
        default-autowire="byName">
 	
 
-    <context:component-scan base-package="org.geosdi.geoplatform.gui, 
+    <context:component-scan base-package="org.geosdi.geoplatform.gui.server.service, 
                             org.geosdi.geoplatform.configurator.cxf.client"/>
                             
     <!-- general definitions -->

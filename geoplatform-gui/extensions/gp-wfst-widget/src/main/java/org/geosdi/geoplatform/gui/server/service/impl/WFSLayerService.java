@@ -62,7 +62,7 @@ public class WFSLayerService implements IWFSLayerService {
 
     @Override
     public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
-            throws Exception {
+            throws GeoPlatformException {
 
         try {
             return geoPlatformWFSClient.describeFeatureType(serverUrl, typeName);
@@ -73,19 +73,27 @@ public class WFSLayerService implements IWFSLayerService {
         } catch (IllegalParameterFault ex) {
             logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
             throw new GeoPlatformException(ex.getMessage());
+        } catch (Exception ex) {
+            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
+            throw new GeoPlatformException(ex.getMessage());
         }
     }
 
     @Override
-    public FeatureCollectionDTO getAllFeature(String serverUrl, String typeName, int maxFeatures)
-            throws Exception {
+    public FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
+            int maxFeatures)
+            throws GeoPlatformException {
 
         try {
-            return geoPlatformWFSClient.getAllFeatureDirect(serverUrl, typeName, maxFeatures);
+            return geoPlatformWFSClient.getAllFeatureDirect(serverUrl, typeName,
+                    maxFeatures);
         } catch (ResourceNotFoundFault ex) {
             logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
             throw new GeoPlatformException(ex.getMessage());
         } catch (IllegalParameterFault ex) {
+            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
+            throw new GeoPlatformException(ex.getMessage());
+        } catch (Exception ex) {
             logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
             throw new GeoPlatformException(ex.getMessage());
         }
@@ -99,4 +107,5 @@ public class WFSLayerService implements IWFSLayerService {
             @Qualifier(value = "geoPlatformWFSClient") GPWFSService geoPlatformWFSClient) {
         this.geoPlatformWFSClient = geoPlatformWFSClient;
     }
+
 }

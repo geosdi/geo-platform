@@ -33,59 +33,49 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.gml.theories;
+package org.geosdi.geoplatform.gui.server.command.wfst.basic;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.io.WKTWriter;
-import java.io.File;
-import java.io.IOException;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
-import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
-import org.junit.BeforeClass;
-import org.junit.experimental.theories.DataPoints;
-import org.junit.experimental.theories.Theories;
-import org.junit.experimental.theories.Theory;
-import org.junit.runner.RunWith;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.server.IWFSLayerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(Theories.class)
-public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
+@Lazy(true)
+@Component(value = "command.wfst.basic.DescribeFeatureTypeCommand")
+public class DescribeFeatureTypeCommand implements
+        GPCommand<DescribeFeatureTypeRequest, DescribeFeatureTypeResponse> {
 
-    private static String dirFiles;
+    private static final Logger logger = LoggerFactory.getLogger(
+            DescribeFeatureTypeCommand.class);
+    //
+    @Autowired
+    private IWFSLayerService wfsLayerService;
 
-    @BeforeClass
-    public static void buildDirFiles() throws IOException {
-        dirFiles = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/";
-    }
+    @Override
+    public DescribeFeatureTypeResponse execute(
+            DescribeFeatureTypeRequest request) {
 
-    @DataPoints
-    public static String[] data() {
-        return new String[]{
-            "MultiCurve.xml", "Point.xml", "GeometryCollection.xml", "LineString.xml",
-            "LinearRing.xml", "MultiLineString.xml", "MultiPoint.xml",
-            "MultiPolygon.xml", "Polygon.xml", "MultiSurface.xml"
-        };
-    }
+        logger.debug("##################### Executing {} Command", this.
+                getClass().getSimpleName());
 
-    @Theory
-    public void testGMLGeometry(String file) throws Exception,
-            ParserException {
+        LayerSchemaDTO result = this.wfsLayerService.describeFeatureType(
+                request.getServerUrl(), request.getTypeName());
 
-        String geometryFileString = dirFiles + file;
-        File geometryFile = new File(geometryFileString);
 
-        Geometry geometry = (Geometry) jaxbContext.acquireUnmarshaller().unmarshal(
-                geometryFile);
+        logger.debug("#################### Found {} ", result);
 
-        WKTWriter writer = new WKTWriter();
-        logger.info("############### JTS GEOMETRY : {} \n\n {} \n",
-                geometry.getClass().getSimpleName(),
-                writer.writeFormatted(geometry));
+        return new DescribeFeatureTypeResponse(result);
     }
 
 }

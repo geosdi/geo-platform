@@ -41,6 +41,8 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.PropertyType;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -50,6 +52,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 public abstract class AbstractGMLBaseParser<A extends AbstractGeometry, P extends PropertyType, G extends Geometry>
         implements GMLBaseParser<A, P, G>, AbstractParser {
 
+    protected static final Logger logger = LoggerFactory.getLogger(AbstractGMLBaseParser.class);
+    //
     protected final GeometryFactory geometryFactory;
     protected final AbstractGMLBaseSRSParser srsParser;
 
@@ -88,4 +92,5 @@ public abstract class AbstractGMLBaseParser<A extends AbstractGeometry, P extend
     public AbstractGMLBaseSRSParser getSrsParser() {
         return srsParser;
     }
+
 }

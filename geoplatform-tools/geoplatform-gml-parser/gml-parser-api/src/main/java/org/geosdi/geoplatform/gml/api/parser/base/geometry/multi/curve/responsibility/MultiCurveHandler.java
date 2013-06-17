@@ -35,10 +35,13 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.responsibility;
 
+import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import com.vividsolutions.jts.geom.LineString;
 import java.util.List;
 import org.geosdi.geoplatform.gml.api.AbstractCurve;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -47,6 +50,9 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
  */
 public abstract class MultiCurveHandler {
 
+    protected static final Logger logger = LoggerFactory.getLogger(
+            MultiCurveHandler.class);
+    //
     protected MultiCurveHandler successor;
 
     public abstract void parseGeometry(
@@ -56,12 +62,13 @@ public abstract class MultiCurveHandler {
     protected void forwardParseGeometry(
             List<LineString> collection,
             AbstractCurve gmlGeometry) throws ParserException {
+
         if (successor != null) {
             successor.parseGeometry(collection, gmlGeometry);
+        } else {
+            throw new ParserException("There are no Rings in Chain to parse "
+                    + "this unespected Curve Type : " + gmlGeometry);
         }
-
-        throw new ParserException("There are no Rings in Chain to parse "
-                + "this unespected Curve Type : " + gmlGeometry);
     }
 
     protected abstract boolean isCompatibleGeometry(Object gmlGeometry);
@@ -72,4 +79,11 @@ public abstract class MultiCurveHandler {
     public void setSuccessor(MultiCurveHandler successor) {
         this.successor = successor;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" + "successor = "
+                + successor + '}';
+    }
+
 }

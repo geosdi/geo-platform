@@ -10,13 +10,11 @@
         </encoder>
     </appender>
 
-    <logger name="org.jasypt" level="info" additivity="false">
-        <appender-ref ref="STDOUT" />
-    </logger>
-
     <root>
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
+    
+    <logger name="org.geosdi.geoplatform.gml" level="debug"/>
 
 </configuration>

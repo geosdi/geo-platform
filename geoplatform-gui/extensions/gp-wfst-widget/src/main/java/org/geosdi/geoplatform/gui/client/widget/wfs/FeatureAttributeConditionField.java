@@ -117,12 +117,15 @@ public class FeatureAttributeConditionField extends MultiField {
 
     private Button createDeleteButton() {
         Button button = new Button("", new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 FeatureInjector injector = FeatureInjector.MainInjector.getInstance();
                 GPEventBus bus = injector.getEventBus();
-                bus.fireEvent(new DeleteAttributeConditionEvent(FeatureAttributeConditionField.this));
+                bus.fireEvent(new DeleteAttributeConditionEvent(
+                        FeatureAttributeConditionField.this));
             }
+
         });
         button.setToolTip("Delete Condition");
         button.setIcon(BasicWidgetResources.ICONS.delete());
@@ -130,4 +133,5 @@ public class FeatureAttributeConditionField extends MultiField {
 
         return button;
     }
+
 }

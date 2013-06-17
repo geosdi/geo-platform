@@ -33,59 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.impl.v311.gml.theories;
+package org.geosdi.geoplatform.gui.client.command.wfst;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.io.WKTWriter;
-import java.io.File;
-import java.io.IOException;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
-import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
-import org.junit.BeforeClass;
-import org.junit.experimental.theories.DataPoints;
-import org.junit.experimental.theories.Theories;
-import org.junit.experimental.theories.Theory;
-import org.junit.runner.RunWith;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(Theories.class)
-public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
+public abstract class WFSTRequest implements GPCommandRequest {
 
-    private static String dirFiles;
+    private static final long serialVersionUID = 8204781282263834238L;
+    //
+    private String serverUrl;
+    private String typeName;
 
-    @BeforeClass
-    public static void buildDirFiles() throws IOException {
-        dirFiles = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/";
+    public WFSTRequest() {
     }
 
-    @DataPoints
-    public static String[] data() {
-        return new String[]{
-            "MultiCurve.xml", "Point.xml", "GeometryCollection.xml", "LineString.xml",
-            "LinearRing.xml", "MultiLineString.xml", "MultiPoint.xml",
-            "MultiPolygon.xml", "Polygon.xml", "MultiSurface.xml"
-        };
+    /**
+     * @return the serverUrl
+     */
+    public String getServerUrl() {
+        return serverUrl;
     }
 
-    @Theory
-    public void testGMLGeometry(String file) throws Exception,
-            ParserException {
+    /**
+     * @param serverUrl the serverUrl to set
+     */
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
 
-        String geometryFileString = dirFiles + file;
-        File geometryFile = new File(geometryFileString);
+    /**
+     * @return the typeName
+     */
+    public String getTypeName() {
+        return typeName;
+    }
 
-        Geometry geometry = (Geometry) jaxbContext.acquireUnmarshaller().unmarshal(
-                geometryFile);
+    /**
+     * @param typeName the typeName to set
+     */
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
 
-        WKTWriter writer = new WKTWriter();
-        logger.info("############### JTS GEOMETRY : {} \n\n {} \n",
-                geometry.getClass().getSimpleName(),
-                writer.writeFormatted(geometry));
+    @Override
+    public String toString() {
+        return getClass().getName() + "{" + "serverUrl = " + getServerUrl()
+                + ", typeName = " + getTypeName() + ", commandName = "
+                + getCommandName() + '}';
     }
 
 }

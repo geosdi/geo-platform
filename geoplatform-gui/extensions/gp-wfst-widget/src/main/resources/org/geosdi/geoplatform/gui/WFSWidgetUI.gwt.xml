@@ -8,7 +8,5 @@
     <!-- =============================== -->
     
     <entry-point class="org.geosdi.geoplatform.gui.client.WFSWidgetUI" />
-    
-    <servlet path="/WFSRemote" class="org.geosdi.geoplatform.gui.server.gwt.WFSRemoteImpl" />
 
 </module>

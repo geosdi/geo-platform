@@ -44,18 +44,16 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+@Deprecated
 public interface WFSRemoteAsync {
 
-    void describeFeatureType(
-            String serverUrl,
-            String typeName,
+    @Deprecated
+    void describeFeatureType(String serverUrl, String typeName,
             AsyncCallback<LayerSchemaDTO> callback)
             throws GeoPlatformException;
 
-    void getAllFeature(
-            String serverUrl,
-            String typeName,
-            int maxFeatures,
-            AsyncCallback<FeatureCollectionDTO> callback)
-            throws GeoPlatformException;
+    @Deprecated
+    void getAllFeature(String serverUrl, String typeName, int maxFeatures,
+            AsyncCallback<FeatureCollectionDTO> callback) throws GeoPlatformException;
+
 }

@@ -60,13 +60,15 @@ public class SextantePolygonHandler extends SextanteGeometryHandler {
     @Override
     public Geometry parseGeometry(AbstractGeometry gmlGeometry) throws ParserException {
         return isCompatibleGeometry(gmlGeometry)
-               ? polygonParser.parseGeometry((Polygon) gmlGeometry)
-               : super.forwardParseGeometry(gmlGeometry);
+                ? polygonParser.parseGeometry((Polygon) gmlGeometry)
+                : super.forwardParseGeometry(gmlGeometry);
     }
 
     @Override
     public Geometry parseGeometry(PropertyType propertyType) throws ParserException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return isCompatibleProperty(propertyType) ? polygonParser.parseGeometry(
+                (PolygonProperty) propertyType) : super.forwardParseGeometry(
+                propertyType);
     }
 
     @Override
@@ -78,4 +80,5 @@ public class SextantePolygonHandler extends SextanteGeometryHandler {
     protected boolean isCompatibleProperty(Object propertyType) {
         return propertyType instanceof PolygonProperty;
     }
+
 }

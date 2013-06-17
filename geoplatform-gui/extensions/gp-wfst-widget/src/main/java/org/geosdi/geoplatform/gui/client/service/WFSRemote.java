@@ -44,7 +44,10 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ *
+ * @deprecated See
  */
+@Deprecated
 @RemoteServiceRelativePath("WFSRemote")
 public interface WFSRemote extends RemoteService {
 
@@ -56,16 +59,15 @@ public interface WFSRemote extends RemoteService {
         public static WFSRemoteAsync getInstance() {
             return instance;
         }
+
     }
 
-    LayerSchemaDTO describeFeatureType(
-            String serverUrl,
-            String typeName)
+    @Deprecated
+    LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
             throws Exception;
 
-    FeatureCollectionDTO getAllFeature(
-            String serverUrl,
-            String typeName,
-            int maxFeatures)
-            throws Exception;
+    @Deprecated
+    FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
+            int maxFeatures) throws Exception;
+
 }

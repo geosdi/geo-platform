@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.responsabili
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 
 /**
- * <p>This class represnets the Sextante to parse All GML Geometry in JTS
+ * <p>This class represents the Sextante to parse All GML Geometry in JTS
  * Geometry. </p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

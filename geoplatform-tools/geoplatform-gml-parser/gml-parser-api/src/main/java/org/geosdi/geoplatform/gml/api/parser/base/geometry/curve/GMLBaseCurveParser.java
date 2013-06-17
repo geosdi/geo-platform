@@ -86,4 +86,5 @@ public class GMLBaseCurveParser {
         }
         return lines;
     }
+
 }

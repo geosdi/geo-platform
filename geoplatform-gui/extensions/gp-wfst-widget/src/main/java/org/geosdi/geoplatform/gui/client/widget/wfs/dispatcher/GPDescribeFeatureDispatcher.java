@@ -35,15 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.LayerSchemaHandlerManager;
-import org.geosdi.geoplatform.gui.client.service.WFSRemote;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  *
@@ -53,6 +54,7 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 public class GPDescribeFeatureDispatcher implements DescribeFeatureDispatcher {
 
     private LayerSchemaHandlerManager layerSchemaManager;
+    private DescribeFeatureTypeRequest describeFeatureRequest = new DescribeFeatureTypeRequest();
 
     @Inject
     public GPDescribeFeatureDispatcher(
@@ -62,26 +64,38 @@ public class GPDescribeFeatureDispatcher implements DescribeFeatureDispatcher {
 
     @Override
     public void dispatchDescribeFeatureRequest(final GPLayerBean layer) {
-        WFSRemote.Util.getInstance().describeFeatureType(
-                layer.getDataSource(), layer.getName(),
-                new AsyncCallback<LayerSchemaDTO>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        String errorMessage = "Error on WFS DescribeFeatureType request";
+        this.describeFeatureRequest.setServerUrl(layer.getDataSource());
+        this.describeFeatureRequest.setTypeName(layer.getName());
 
-                        GeoPlatformMessage.errorMessage(
-                                "DescribeFetureType Service Error",
-                                errorMessage + " - " + caught.getMessage());
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<DescribeFeatureTypeResponse>() {
 
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for " + layer.getName() + " layer.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                    }
+            private static final long serialVersionUID = 6130617748457405063L;
 
-                    @Override
-                    public void onSuccess(LayerSchemaDTO result) {
-                        layerSchemaManager.forwardLayerSchema(result, layer);
-                    }
-                });
+            {
+                super.setCommandRequest(describeFeatureRequest);
+            }
+
+            @Override
+            public void onCommandSuccess(DescribeFeatureTypeResponse response) {
+                layerSchemaManager.forwardLayerSchema(response.getResult(),
+                        layer);
+            }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                String errorMessage = "Error on WFS DescribeFeatureType request";
+
+                GeoPlatformMessage.errorMessage(
+                        "DescribeFetureType Service Error",
+                        errorMessage + " - " + exception.getMessage());
+
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        errorMessage + " for " + layer.getName() + " layer.",
+                        SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+            }
+
+        });
     }
+
 }

@@ -72,6 +72,9 @@ public class GMLBaseMultiCurveParser extends AbstractGMLBaseParser<MultiCurve, M
     protected MultiLineString canParseGeometry(MultiCurve gmlGeometry) throws ParserException {
         List<LineString> lines = new ArrayList<LineString>();
 
+        logger.debug("Parsing Geometry : ################## {} \n\n",
+                gmlGeometry);
+
         this.multiCurveMember.buildMember(lines, gmlGeometry);
         this.multiCurveMembers.buildMember(lines, gmlGeometry);
 
@@ -98,6 +101,7 @@ public class GMLBaseMultiCurveParser extends AbstractGMLBaseParser<MultiCurve, M
 
         void buildMember(List<LineString> lines,
                 MultiCurve gmlGeometry) throws ParserException;
+
     }
 
     protected class MultiCurveMember implements MultiCurveBuilder {
@@ -114,6 +118,7 @@ public class GMLBaseMultiCurveParser extends AbstractGMLBaseParser<MultiCurve, M
                 }
             }
         }
+
     }
 
     protected class MultiCurveMembers implements MultiCurveBuilder {
@@ -130,5 +135,7 @@ public class GMLBaseMultiCurveParser extends AbstractGMLBaseParser<MultiCurve, M
                 }
             }
         }
+
     }
+
 }

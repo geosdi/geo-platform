@@ -55,19 +55,17 @@ public class WFSRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     private IWFSLayerService wfsLayerService;
 
     @Override
-    public LayerSchemaDTO describeFeatureType(
-            String serverUrl,
-            String typeName)
+    public LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
             throws Exception {
+
         return wfsLayerService.describeFeatureType(serverUrl, typeName);
     }
 
     @Override
-    public FeatureCollectionDTO getAllFeature(
-            String serverUrl,
-            String typeName,
-            int maxFeatures)
-            throws Exception {
+    public FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
+            int maxFeatures) throws Exception {
+
         return wfsLayerService.getAllFeature(serverUrl, typeName, maxFeatures);
     }
+
 }

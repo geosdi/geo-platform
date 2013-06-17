@@ -55,15 +55,16 @@ public class CurveHandler extends MultiCurveHandler {
     @Override
     public void parseGeometry(List<LineString> collection,
             AbstractCurve gmlGeometry) throws ParserException {
-       if(isCompatibleGeometry(gmlGeometry)) {
-           collection.addAll(curveParser.parseGeometry((Curve) gmlGeometry));
-       } else {
-           super.forwardParseGeometry(collection, gmlGeometry);
-       }
+        if (isCompatibleGeometry(gmlGeometry)) {
+            collection.addAll(curveParser.parseGeometry((Curve) gmlGeometry));
+        } else {
+            super.forwardParseGeometry(collection, gmlGeometry);
+        }
     }
 
     @Override
     protected boolean isCompatibleGeometry(Object gmlGeometry) {
         return gmlGeometry instanceof Curve;
     }
+
 }

@@ -33,12 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureInstancesEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.gwtopenmaps.openlayers.client.event.EventHandler;
+import org.gwtopenmaps.openlayers.client.event.EventObject;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -46,20 +47,20 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandlerProvider implements
-        Provider<FeatureUnSelectHandler> {
+public abstract class AbastractFeatureHandler extends EventHandler {
 
-    private Vector vectorLayer;
-    private GPEventBus bus;
+    protected Vector vectorLayer;
+    //
+    protected GPEventBus bus;
+    protected FeatureInstancesEvent attributeValuesEvent = new FeatureInstancesEvent();
 
-    @Inject
-    public FeatureUnSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
+    public AbastractFeatureHandler(Vector theVectorLayer, GPEventBus bus) {
         this.vectorLayer = theVectorLayer;
         this.bus = bus;
     }
 
-    @Override
-    public FeatureUnSelectHandler get() {
-        return new FeatureUnSelectHandler(vectorLayer, bus);
+    protected VectorFeature getFeatureFromEventObject(EventObject eventObject) {
+        return VectorFeature.narrowToVectorFeature(
+                eventObject.getJSObject().getProperty("feature"));
     }
 }

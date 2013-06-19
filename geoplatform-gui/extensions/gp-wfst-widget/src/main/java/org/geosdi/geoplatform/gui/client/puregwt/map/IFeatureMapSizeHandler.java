@@ -33,33 +33,26 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.puregwt.map;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandlerProvider implements
-        Provider<FeatureUnSelectHandler> {
+public interface IFeatureMapSizeHandler extends EventHandler {
 
-    private Vector vectorLayer;
-    private GPEventBus bus;
+    public static final Type<IFeatureMapSizeHandler> TYPE = new Type<IFeatureMapSizeHandler>();
 
-    @Inject
-    public FeatureUnSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
-        this.vectorLayer = theVectorLayer;
-        this.bus = bus;
-    }
+    void increaseWidth(int width);
 
-    @Override
-    public FeatureUnSelectHandler get() {
-        return new FeatureUnSelectHandler(vectorLayer, bus);
-    }
+    void decreaseWidth();
+    
+    void increaseHeight(int height);
+
+    void decreaseHeight();
+
 }

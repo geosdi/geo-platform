@@ -61,12 +61,14 @@ import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseWidthEvent;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureInstancesEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureMaskAttributesEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.DeleteAttributeConditionHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureInstancesEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureMaskAttributesEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.DeleteAttributeConditionHandler;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -76,11 +78,15 @@ import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureSelectionWidget extends GeoPlatformContentPanel
         implements DeleteAttributeConditionHandler {
+    
+    public static final String ID = "WFST-FeatureSelectionWidget";
 
     private GPEventBus bus;
     //
@@ -96,11 +102,12 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     private Button selectAllButton;
     private Button queryButton;
     private GetAllFeatureRequest getAllFeatureRequest = new GetAllFeatureRequest();
+    private FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
 
     @Inject
-    public FeatureSelectionWidget(GPEventBus bus) {
+    public FeatureSelectionWidget(GPEventBus theBus) {
         super(true);
-        this.bus = bus;
+        this.bus = theBus;
         bus.addHandler(DeleteAttributeConditionHandler.TYPE, this);
         this.attributeConditions = Lists.<FeatureAttributeConditionField>newArrayList();
     }
@@ -132,7 +139,15 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     }
 
     @Override
+    public void collapse() {
+        this.increaseWidthEvent.setWidth(super.getWidth());
+        this.bus.fireEvent(increaseWidthEvent);
+        super.collapse();
+    }
+
+    @Override
     public void setPanelProperties() {
+        super.setId(ID);
         super.head.setText("Feature Selection");
         super.setBorders(false);
         super.setScrollMode(Style.Scroll.AUTO);

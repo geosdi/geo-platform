@@ -33,33 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.config.provider.button;
 
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureResetAttributesEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandlerProvider implements
-        Provider<FeatureUnSelectHandler> {
+public class ResetButtonProvider implements Provider<Button> {
 
-    private Vector vectorLayer;
     private GPEventBus bus;
+    private final FeatureResetAttributesEvent resetEvent = new FeatureResetAttributesEvent();
 
     @Inject
-    public FeatureUnSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
-        this.vectorLayer = theVectorLayer;
-        this.bus = bus;
+    public ResetButtonProvider(GPEventBus theBus) {
+        this.bus = theBus;
     }
 
     @Override
-    public FeatureUnSelectHandler get() {
-        return new FeatureUnSelectHandler(vectorLayer, bus);
+    public Button get() {
+        return new Button("Reset", BasicWidgetResources.ICONS.delete(),
+                new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                bus.fireEvent(resetEvent);
+            }
+
+        });
     }
+
 }

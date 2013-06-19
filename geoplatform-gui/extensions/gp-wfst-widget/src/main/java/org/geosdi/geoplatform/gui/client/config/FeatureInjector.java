@@ -44,9 +44,13 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@GinModules(value = {FeatureInjectorModule.class})
+@GinModules(value = {FeatureInjectorModule.class, FeatureInjectorProvider.class,
+    FeatureInjectorButtonProvider.class})
 public interface FeatureInjector extends Ginjector {
 
     public static class MainInjector {
@@ -60,6 +64,7 @@ public interface FeatureInjector extends Ginjector {
         public static FeatureInjector getInstance() {
             return INSTANCE;
         }
+
     }
 
     GPEventBus getEventBus();
@@ -67,4 +72,5 @@ public interface FeatureInjector extends Ginjector {
     LayerTypeHandlerManager getLayerTypeHandlerManager();
 
     FeatureWidget getFeatureWidget();
+
 }

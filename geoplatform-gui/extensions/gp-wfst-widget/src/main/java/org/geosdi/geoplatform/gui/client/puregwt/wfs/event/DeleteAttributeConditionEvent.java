@@ -33,19 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributeConditionField;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.DeleteAttributeConditionHandler;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface DeleteAttributeConditionHandler extends EventHandler {
+public class DeleteAttributeConditionEvent extends GwtEvent<DeleteAttributeConditionHandler> {
 
-    Type<DeleteAttributeConditionHandler> TYPE = new Type<DeleteAttributeConditionHandler>();
+    private FeatureAttributeConditionField conditionField;
 
-    void deleteCondition(FeatureAttributeConditionField field);
+    public DeleteAttributeConditionEvent(FeatureAttributeConditionField conditionField) {
+        this.conditionField = conditionField;
+    }
+
+    @Override
+    public Type<DeleteAttributeConditionHandler> getAssociatedType() {
+        return DeleteAttributeConditionHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(DeleteAttributeConditionHandler handler) {
+        handler.deleteCondition(conditionField);
+    }
 }

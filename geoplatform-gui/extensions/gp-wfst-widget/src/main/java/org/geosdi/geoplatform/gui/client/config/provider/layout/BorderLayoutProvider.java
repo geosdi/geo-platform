@@ -33,33 +33,48 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.config.provider.layout;
 
+import com.extjs.gxt.ui.client.event.BorderLayoutEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureSelectionLayoutHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandlerProvider implements
-        Provider<FeatureUnSelectHandler> {
+public class BorderLayoutProvider implements Provider<BorderLayout> {
 
-    private Vector vectorLayer;
-    private GPEventBus bus;
+    private final FeatureSelectionLayoutHandler selectionLayoutHandler;
 
     @Inject
-    public FeatureUnSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
-        this.vectorLayer = theVectorLayer;
-        this.bus = bus;
+    public BorderLayoutProvider(
+            FeatureSelectionLayoutHandler theSelectionLayoutHandler) {
+        this.selectionLayoutHandler = theSelectionLayoutHandler;
     }
 
     @Override
-    public FeatureUnSelectHandler get() {
-        return new FeatureUnSelectHandler(vectorLayer, bus);
+    public BorderLayout get() {
+        return new BorderLayout() {
+
+            {
+                super.addListener(Events.Expand,
+                        new Listener<BorderLayoutEvent>() {
+
+                    @Override
+                    public void handleEvent(BorderLayoutEvent be) {
+                        selectionLayoutHandler.manageLayout(be.getPanel());
+                    }
+
+                });
+            }
+
+        };
     }
+
 }

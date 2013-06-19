@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.statusbar;
 
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.StatusWidget;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureStatusBarHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureStatusBarHandler;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**

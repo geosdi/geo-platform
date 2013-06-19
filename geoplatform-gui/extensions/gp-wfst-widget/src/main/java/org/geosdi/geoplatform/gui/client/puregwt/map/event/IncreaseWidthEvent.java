@@ -33,33 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
+package org.geosdi.geoplatform.gui.client.puregwt.map.event;
 
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.event.EventObject;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandler extends AbastractFeatureHandler {
-
-    public FeatureUnSelectHandler(Vector theVectorLayer, GPEventBus bus) {
-        super(theVectorLayer, bus);
-    }
+public class IncreaseWidthEvent extends FeatureMapWidthEvent {
 
     @Override
-    public void onHandle(EventObject eventObject) {
-        VectorFeature vectorFeature = super.getFeatureFromEventObject(eventObject);
-
-        vectorFeature.toState(VectorFeature.State.Unknown);
-
-        vectorLayer.removeFeature(vectorFeature);
-
-        this.attributeValuesEvent.clear();
-        super.bus.fireEvent(this.attributeValuesEvent);
+    protected void dispatch(IFeatureMapSizeHandler handler) {
+        handler.increaseWidth(width);
     }
+
 }

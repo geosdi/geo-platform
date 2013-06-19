@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.OperatorType;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.DeleteAttributeConditionEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.DeleteAttributeConditionEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**

@@ -33,33 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
+import com.google.common.collect.Maps;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.gwtopenmaps.openlayers.client.event.EventObject;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.util.Attributes;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandlerProvider implements
-        Provider<FeatureUnSelectHandler> {
+public class FeatureSelectHandler extends AbastractFeatureHandler {
 
-    private Vector vectorLayer;
-    private GPEventBus bus;
-
-    @Inject
-    public FeatureUnSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
-        this.vectorLayer = theVectorLayer;
-        this.bus = bus;
+    public FeatureSelectHandler(Vector theVectorLayer, GPEventBus bus) {
+        super(theVectorLayer, bus);
     }
 
     @Override
-    public FeatureUnSelectHandler get() {
-        return new FeatureUnSelectHandler(vectorLayer, bus);
+    public void onHandle(EventObject eventObject) {
+        System.out.println("FeatureSelectHandler @@@@@@@@@@@@@@@@");
+
+        VectorFeature vectorFeature = super.getFeatureFromEventObject(eventObject);
+
+        vectorFeature.toState(VectorFeature.State.Unknown);
+
+        vectorLayer.addFeature(vectorFeature);
+
+        Attributes attributes = vectorFeature.getAttributes();
+        List<String> attributeNames = attributes.getAttributeNames();
+
+        Map<String, String> attributeMap =
+                Maps.<String, String>newHashMapWithExpectedSize(attributeNames.size());
+        for (String name : attributeNames) {
+            String value = attributes.getAttributeAsString(name);
+            attributeMap.put(name, value);
+        }
+
+        FeatureDetail instance =
+                new FeatureDetail(vectorFeature, attributeMap);
+        this.attributeValuesEvent.setInstances(Arrays.asList(instance));
+        super.bus.fireEvent(this.attributeValuesEvent);
     }
 }

@@ -33,34 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
+package org.geosdi.geoplatform.gui.client.config.provider.button;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureInstancesEvent;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import javax.inject.Inject;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureSaveAttributesEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.event.EventHandler;
-import org.gwtopenmaps.openlayers.client.event.EventObject;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbastractFeatureHandler extends EventHandler {
+public class SaveButtonProvider implements Provider<Button> {
 
-    protected Vector vectorLayer;
-    //
-    protected GPEventBus bus;
-    protected FeatureInstancesEvent attributeValuesEvent = new FeatureInstancesEvent();
+    private GPEventBus bus;
+    private final FeatureSaveAttributesEvent saveEvent = new FeatureSaveAttributesEvent();
 
-    public AbastractFeatureHandler(Vector theVectorLayer, GPEventBus bus) {
-        this.vectorLayer = theVectorLayer;
-        this.bus = bus;
+    @Inject
+    public SaveButtonProvider(GPEventBus theBus) {
+        this.bus = theBus;
     }
 
-    protected VectorFeature getFeatureFromEventObject(EventObject eventObject) {
-        return VectorFeature.narrowToVectorFeature(
-                eventObject.getJSObject().getProperty("feature"));
+    @Override
+    public Button get() {
+        return new Button("Save", BasicWidgetResources.ICONS.save(),
+                new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                bus.fireEvent(saveEvent);
+            }
+
+        });
     }
+
 }

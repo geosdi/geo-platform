@@ -33,10 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.event;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHandler;
 
 /**
  *

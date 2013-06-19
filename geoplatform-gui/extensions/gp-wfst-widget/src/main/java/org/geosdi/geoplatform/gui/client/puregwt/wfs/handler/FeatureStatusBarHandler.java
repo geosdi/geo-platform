@@ -33,30 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface FeatureAttributesHandler extends EventHandler {
+public interface FeatureStatusBarHandler extends EventHandler {
 
-    Type<FeatureAttributesHandler> TYPE = new Type<FeatureAttributesHandler>();
+    Type<FeatureStatusBarHandler> TYPE = new Type<FeatureStatusBarHandler>();
 
-    void postInstances(List<FeatureDetail> instaces);
+    void setStatus(String text, FeatureStatusBarType iconStyle);
 
-    void resetInstances();
-
-    void saveAttributes();
-
-    void resetAttributes();
-
-    void successfulTransaction();
-
-    void maskAttributes(boolean mask);
+    void reset();
 }

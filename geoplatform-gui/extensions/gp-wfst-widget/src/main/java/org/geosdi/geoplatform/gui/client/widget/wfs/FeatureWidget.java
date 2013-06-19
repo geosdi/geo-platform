@@ -47,13 +47,12 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import java.util.List;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.config.annotation.ResetButton;
+import org.geosdi.geoplatform.gui.client.config.annotation.SaveButton;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureResetAttributesEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureSaveAttributesEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
@@ -63,17 +62,24 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@Singleton
 public class FeatureWidget extends GeoPlatformWindow
         implements IFeatureWidget, ActionEnableHandler {
 
+    @Inject
     private FeatureSelectionWidget selectionWidget;
+    @Inject
     private FeatureMapWidget mapWidget;
+    @Inject
     private FeatureAttributesWidget attributesWidget;
+    @Inject
     private FeatureStatusBar statusBar;
+    @Inject
+    private BorderLayout layout;
     private Button saveButton;
     private Button resetButton;
     //
@@ -81,21 +87,15 @@ public class FeatureWidget extends GeoPlatformWindow
     private LayerSchemaDTO schemaDTO;
     //
     private GPEventBus bus;
-    private FeatureSaveAttributesEvent saveEvent = new FeatureSaveAttributesEvent();
-    private FeatureResetAttributesEvent resetEvent = new FeatureResetAttributesEvent();
 
     @Inject
-    public FeatureWidget(FeatureSelectionWidget selectionWidget,
-            FeatureMapWidget mapWidget,
-            FeatureAttributesWidget attributesWidget,
-            FeatureStatusBar statusBar,
-            GPEventBus bus) {
+    public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton,
+            @SaveButton Button theSaveButton) {
         super(true);
-        this.selectionWidget = selectionWidget;
-        this.mapWidget = mapWidget;
-        this.attributesWidget = attributesWidget;
-        this.statusBar = statusBar;
-        this.bus = bus;
+        this.bus = theBus;
+        this.resetButton = theResetButton;
+        this.saveButton = theResetButton;
+
         bus.addHandler(ActionEnableEvent.TYPE, this);
     }
 
@@ -121,27 +121,22 @@ public class FeatureWidget extends GeoPlatformWindow
         super.setModal(true);
         super.setPlain(true);
 
-        super.setLayout(new BorderLayout());
+        super.setLayout(layout);
     }
 
     private void addSelectionWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST,
                 300);
-        layoutData.setMargins(new Margins(0, 0, 0, 5));
+        layoutData.setMargins(new Margins(5, 5, 5, 5));
         layoutData.setCollapsible(true);
 
         super.add(this.selectionWidget, layoutData);
     }
 
     private void addMapWidget() {
-        /**
-         * The notifyShow method is called 1 times at the first show only in the
-         * center region, otherwise 2 times.
-         */
-        System.out.println("CODICE ESEGUITO@@@@@@@@@@@@@@@");
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER,
                 700);
-        layoutData.setMargins(new Margins(0));
+        layoutData.setMargins(new Margins(5));
 
         super.add(this.mapWidget, layoutData);
     }
@@ -149,11 +144,11 @@ public class FeatureWidget extends GeoPlatformWindow
     private void addAttributesWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH,
                 150);
-        layoutData.setMargins(new Margins(5, 0, 0, 0));
+        layoutData.setMargins(new Margins(5, 5, 5, 5));
         layoutData.setCollapsible(true);
         layoutData.setSplit(true);
         layoutData.setMinSize(70);
-        layoutData.setMaxSize(550);
+        layoutData.setMaxSize(500);
 
         attributesWidget.setHeaderVisible(true);
         attributesWidget.getHeader().setText("Feature Attributes");
@@ -169,26 +164,8 @@ public class FeatureWidget extends GeoPlatformWindow
         super.getButtonBar().add(this.statusBar);
         super.getButtonBar().add(new FillToolItem());
 
-        resetButton = new Button("Reset", BasicWidgetResources.ICONS.delete(),
-                new SelectionListener<ButtonEvent>() {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                bus.fireEvent(resetEvent);
-            }
-
-        });
         super.addButton(resetButton);
 
-        this.saveButton = new Button("Save", BasicWidgetResources.ICONS.save(),
-                new SelectionListener<ButtonEvent>() {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                bus.fireEvent(saveEvent);
-            }
-
-        });
         super.addButton(saveButton);
 
         this.disableButtons();

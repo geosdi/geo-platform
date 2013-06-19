@@ -36,9 +36,13 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SplitBarEvent;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
+import com.extjs.gxt.ui.client.widget.SplitBar;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
@@ -52,23 +56,26 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureAttributeValuesDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapHeightEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseHeightEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 
 /**
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureAttributesWidget extends GeoPlatformContentPanel
         implements FeatureAttributesHandler {
 
+    public static final String ID = "WFST-FeatureAttributesWidget";
     private GPEventBus bus;
     //
     private List<AttributeDetail> attributes;
@@ -77,17 +84,20 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     private EditorGrid<FeatureAttributeValuesDetail> grid;
     //
     private List<VectorFeature> vectors;
-    private GetFeatureControlBuilder featureControlBuilder;
-    private WFSProtocolCRUDOptions featureCRUDProtocol;
+    private FeatureMapHeightEvent increaseHeightEvent = new IncreaseHeightEvent();
+    private Listener<SplitBarEvent> listener = new Listener<SplitBarEvent>() {
+
+        @Override
+        public void handleEvent(SplitBarEvent be) {
+            grid.setHeight(be.getSize() - 30);
+        }
+
+    };
 
     @Inject
-    public FeatureAttributesWidget(GPEventBus bus,
-            GetFeatureControlBuilder theFeatureControlBuilder,
-            WFSProtocolCRUDOptions theFeatureCRUDProtocol) {
+    public FeatureAttributesWidget(GPEventBus bus) {
         super(true);
         this.bus = bus;
-        this.featureControlBuilder = theFeatureControlBuilder;
-        this.featureCRUDProtocol = theFeatureCRUDProtocol;
 
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
     }
@@ -104,6 +114,12 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     @Override
+    protected void afterRender() {
+        super.afterRender();
+        super.setId(ID);
+    }
+
+    @Override
     public void addComponent() {
     }
 
@@ -112,8 +128,27 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     @Override
+    public void collapse() {
+        this.increaseHeightEvent.setHeight(getHeight());
+        this.bus.fireEvent(increaseHeightEvent);
+        super.collapse();
+    }
+
+    @Override
     public void setPanelProperties() {
         super.setScrollMode(Style.Scroll.AUTOX);
+    }
+
+    @Override
+    public void saveState() {
+        SplitBar bar = super.getData("splitBar");
+
+        if (bar != null) {
+            System.out.println("ECCOLA @@@@@@@@@@@@@@@@@@ " + super.getHeight());
+            bar.removeListener(Events.DragEnd, listener);
+
+            bar.addListener(Events.DragEnd, listener);
+        }
     }
 
     @Override
@@ -127,7 +162,9 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     private void createStore() {
         store = new ListStore<FeatureAttributeValuesDetail>();
-        store.addStoreListener(new StoreListener<FeatureAttributeValuesDetail>() {
+        store.addStoreListener(
+                new StoreListener<FeatureAttributeValuesDetail>() {
+
             @Override
             public void storeClear(StoreEvent<FeatureAttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(false));
@@ -137,6 +174,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             public void storeUpdate(StoreEvent<FeatureAttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(true));
             }
+
         });
     }
 
@@ -148,10 +186,10 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         grid.setStripeRows(true);
         grid.setColumnLines(true);
         grid.setColumnResize(true);
-        grid.setHeight(200);
+        grid.setHeight(125);
         grid.setAutoWidth(true);
-        grid.setAutoExpandMin(100);
-        grid.setAutoExpandMax(400);
+//        grid.setAutoExpandMin(100);
+//        grid.setAutoExpandMax(400);
 
 //        grid.setSelectionModel(new GridSelectionModel<AttributeValuesDetail>());
 
@@ -167,6 +205,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             valueTextField.setValidator(this.attributeValuesValidator());
             valueTextField.setAutoValidate(true);
             CellEditor valueEditor = new CellEditor(valueTextField) {
+
                 @Override
                 public Object postProcessValue(Object value) {
                     if (value == null) {
@@ -177,6 +216,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                             FeatureStatusBarType.STATUS_OK));
                     return value;
                 }
+
             };
 
             ColumnConfig valueColumn = new ColumnConfig();
@@ -273,6 +313,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     private Validator attributeValuesValidator() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field,
                     String value) {
@@ -292,6 +333,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 //                }
                 return null;
             }
+
         };
     }
 
@@ -303,4 +345,5 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             grid.unmask();
         }
     }
+
 }

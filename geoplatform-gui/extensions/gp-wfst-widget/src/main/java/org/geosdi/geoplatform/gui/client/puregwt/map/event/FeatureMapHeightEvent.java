@@ -33,25 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.event;
+package org.geosdi.geoplatform.gui.client.puregwt.map.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureTransactionEvent extends GwtEvent<FeatureAttributesHandler> {
+public abstract class FeatureMapHeightEvent
+        extends GwtEvent<IFeatureMapSizeHandler> {
 
-    @Override
-    public Type<FeatureAttributesHandler> getAssociatedType() {
-        return FeatureAttributesHandler.TYPE;
+    protected int height;
+
+    /**
+     * @param height the height to set
+     */
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     @Override
-    protected void dispatch(FeatureAttributesHandler handler) {
-        handler.successfulTransaction();
+    public Type<IFeatureMapSizeHandler> getAssociatedType() {
+        return IFeatureMapSizeHandler.TYPE;
     }
+
 }

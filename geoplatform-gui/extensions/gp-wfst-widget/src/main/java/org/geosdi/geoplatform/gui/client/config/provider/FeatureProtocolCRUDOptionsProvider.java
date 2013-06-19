@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureTransactionEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureTransactionEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.protocol.CRUDOptions;

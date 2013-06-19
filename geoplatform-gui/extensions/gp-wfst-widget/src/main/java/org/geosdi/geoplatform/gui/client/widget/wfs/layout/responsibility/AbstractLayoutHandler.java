@@ -33,33 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandlerProvider implements
-        Provider<FeatureUnSelectHandler> {
+public abstract class AbstractLayoutHandler {
 
-    private Vector vectorLayer;
-    private GPEventBus bus;
+    protected AbstractLayoutHandler successor;
 
-    @Inject
-    public FeatureUnSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
-        this.vectorLayer = theVectorLayer;
-        this.bus = bus;
+    protected void forwardManageLayout(ContentPanel panel) {
+        if (successor != null) {
+            successor.manageLayout(panel);
+        }
     }
 
-    @Override
-    public FeatureUnSelectHandler get() {
-        return new FeatureUnSelectHandler(vectorLayer, bus);
+    /**
+     *
+     * @param idPanel
+     */
+    public abstract void manageLayout(ContentPanel panel);
+
+    /**
+     *
+     * @param idPanel
+     * @return
+     */
+    public abstract boolean canManageLayout(String idPanel);
+
+    /**
+     * @param successor the successor to set
+     */
+    public void setSuccessor(AbstractLayoutHandler successor) {
+        this.successor = successor;
     }
+
 }

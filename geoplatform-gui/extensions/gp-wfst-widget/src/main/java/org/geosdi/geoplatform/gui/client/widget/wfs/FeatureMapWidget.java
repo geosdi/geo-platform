@@ -35,14 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Timer;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.FeatureMapLayerBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureSelectHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -58,41 +59,40 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 
 /**
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureMapWidget extends GeoPlatformContentPanel
         implements IFeatureMapWidget {
 
+    @Inject
     private MapWidget mapWidget;
+    @Inject
     private FeatureMapLayerBuilder mapLayerBuilder;
+    @Inject
     private Vector vectorLayer;
-    private Layer wms;
-    private GetFeature controlFeature;
+    @Inject
     private GetFeatureControlBuilder featureControlBuilder;
+    @Inject
     private FeatureSelectHandler selectFeature;
+    @Inject
     private FeatureUnSelectHandler unSelectFeature;
+    @Inject
     private LonLat italyLonLat;
     private GPEventBus bus;
+    private HandlerRegistration handlerRegistration;
+    private Layer wms;
+    private GetFeature controlFeature;
 
     @Inject
-    public FeatureMapWidget(MapWidget mapWidget,
-            FeatureMapLayerBuilder theMapLayerBuilder,
-            Vector theVectorLayer,
-            FeatureSelectHandler theSelectFeature,
-            FeatureUnSelectHandler theUnSelectFeature,
-            GetFeatureControlBuilder theFeatureControlBuilder,
-            LonLat theItalyLonLat,
-            GPEventBus bus) {
+    public FeatureMapWidget(GPEventBus theBus) {
         super(true);
-        this.mapWidget = mapWidget;
-        this.mapLayerBuilder = theMapLayerBuilder;
-        this.vectorLayer = theVectorLayer;
-        this.selectFeature = theSelectFeature;
-        this.unSelectFeature = theUnSelectFeature;
-        this.featureControlBuilder = theFeatureControlBuilder;
-        this.italyLonLat = theItalyLonLat;
-        this.bus = bus;
+
+        this.bus = theBus;
+        this.handlerRegistration = this.bus.addHandler(FeatureMapWidget.TYPE,
+                this);
     }
 
     @Override
@@ -194,6 +194,38 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
     @Override
     public void updateSize() {
         this.mapWidget.getMap().updateSize();
+    }
+
+    @Override
+    public void increaseWidth(int width) {
+        super.setWidth(getWidth() + width);
+        this.mapWidget.setWidth(String.valueOf(super.getWidth()));
+        updateSize();
+        super.layout();
+    }
+
+    @Override
+    public void decreaseWidth() {
+        super.setWidth(getWidth());
+        this.mapWidget.setWidth(String.valueOf(super.getWidth()));
+        updateSize();
+        super.layout();
+    }
+
+    @Override
+    public void increaseHeight(int height) {
+        super.setHeight(getHeight() + height);
+        this.mapWidget.setHeight(String.valueOf(super.getHeight()));
+        updateSize();
+        super.layout();
+    }
+
+    @Override
+    public void decreaseHeight() {
+        super.setHeight(getHeight());
+        this.mapWidget.setHeight(String.valueOf(super.getHeight()));
+        updateSize();
+        super.layout();
     }
 
     private void loadLayerOnMap() {

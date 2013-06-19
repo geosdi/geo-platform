@@ -59,8 +59,9 @@ public class FeatureLonLatItalyProvider implements Provider<LonLat> {
     public LonLat get() {
         LonLat italy = new LonLat(13.375, 42.329);
         italy.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
-                        mapWidget.getMap().getProjection());
+                mapWidget.getMap().getProjection());
 
         return italy;
     }
+
 }

@@ -33,24 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.event;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.handler.FeatureAttributesHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureStatusBarHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 
 /**
  *
- * Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureSaveAttributesEvent extends GwtEvent<FeatureAttributesHandler> {
+public class FeatureStatusBarEvent extends GwtEvent<FeatureStatusBarHandler> {
 
-    @Override
-    public Type<FeatureAttributesHandler> getAssociatedType() {
-        return FeatureAttributesHandler.TYPE;
+    private String text;
+    private FeatureStatusBarType iconStyle;
+
+    public FeatureStatusBarEvent(String text, FeatureStatusBarType iconStyle) {
+        this.text = text;
+        this.iconStyle = iconStyle;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public FeatureStatusBarType getIconStyle() {
+        return iconStyle;
     }
 
     @Override
-    protected void dispatch(FeatureAttributesHandler handler) {
-        handler.saveAttributes();
+    public Type<FeatureStatusBarHandler> getAssociatedType() {
+        return FeatureStatusBarHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(FeatureStatusBarHandler handler) {
+        handler.setStatus(text, iconStyle);
     }
 }

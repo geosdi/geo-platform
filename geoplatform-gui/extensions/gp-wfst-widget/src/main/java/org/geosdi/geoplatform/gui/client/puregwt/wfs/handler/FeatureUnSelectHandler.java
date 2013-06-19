@@ -33,53 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.handler;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
-import com.google.common.collect.Maps;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.event.EventObject;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.util.Attributes;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureSelectHandler extends AbastractFeatureHandler {
+public class FeatureUnSelectHandler extends AbastractFeatureHandler {
 
-    public FeatureSelectHandler(Vector theVectorLayer, GPEventBus bus) {
+    public FeatureUnSelectHandler(Vector theVectorLayer, GPEventBus bus) {
         super(theVectorLayer, bus);
     }
 
     @Override
     public void onHandle(EventObject eventObject) {
-        System.out.println("FeatureSelectHandler @@@@@@@@@@@@@@@@");
-
         VectorFeature vectorFeature = super.getFeatureFromEventObject(eventObject);
 
         vectorFeature.toState(VectorFeature.State.Unknown);
 
-        vectorLayer.addFeature(vectorFeature);
+        vectorLayer.removeFeature(vectorFeature);
 
-        Attributes attributes = vectorFeature.getAttributes();
-        List<String> attributeNames = attributes.getAttributeNames();
-
-        Map<String, String> attributeMap =
-                Maps.<String, String>newHashMapWithExpectedSize(attributeNames.size());
-        for (String name : attributeNames) {
-            String value = attributes.getAttributeAsString(name);
-            attributeMap.put(name, value);
-        }
-
-        FeatureDetail instance =
-                new FeatureDetail(vectorFeature, attributeMap);
-        this.attributeValuesEvent.setInstances(Arrays.asList(instance));
+        this.attributeValuesEvent.clear();
         super.bus.fireEvent(this.attributeValuesEvent);
     }
 }

@@ -33,33 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility;
 
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.map.event.DecreaseHeightEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWidget;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandlerProvider implements
-        Provider<FeatureUnSelectHandler> {
+public class FeatureAttributesLayoutHandler extends AbstractLayoutHandler {
 
-    private Vector vectorLayer;
     private GPEventBus bus;
+    private DecreaseHeightEvent event = new DecreaseHeightEvent();
 
     @Inject
-    public FeatureUnSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
-        this.vectorLayer = theVectorLayer;
-        this.bus = bus;
+    public FeatureAttributesLayoutHandler(GPEventBus theBus) {
+        this.bus = theBus;
     }
 
     @Override
-    public FeatureUnSelectHandler get() {
-        return new FeatureUnSelectHandler(vectorLayer, bus);
+    public void manageLayout(ContentPanel panel) {
+        if (canManageLayout(panel.getId())) {
+            bus.fireEvent(event);
+        }
     }
+
+    @Override
+    public boolean canManageLayout(String idPanel) {
+        return idPanel.equalsIgnoreCase(FeatureAttributesWidget.ID);
+    }
+
 }

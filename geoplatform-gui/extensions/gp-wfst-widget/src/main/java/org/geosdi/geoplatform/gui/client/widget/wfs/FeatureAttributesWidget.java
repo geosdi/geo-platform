@@ -36,13 +36,9 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.SplitBarEvent;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
-import com.extjs.gxt.ui.client.widget.SplitBar;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
@@ -75,7 +71,8 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 public class FeatureAttributesWidget extends GeoPlatformContentPanel
         implements FeatureAttributesHandler {
 
-    public static final String ID = "WFST-FeatureAttributesWidget";
+    public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
+    //
     private GPEventBus bus;
     //
     private List<AttributeDetail> attributes;
@@ -85,14 +82,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     //
     private List<VectorFeature> vectors;
     private FeatureMapHeightEvent increaseHeightEvent = new IncreaseHeightEvent();
-    private Listener<SplitBarEvent> listener = new Listener<SplitBarEvent>() {
-
-        @Override
-        public void handleEvent(SplitBarEvent be) {
-            grid.setHeight(be.getSize() - 30);
-        }
-
-    };
 
     @Inject
     public FeatureAttributesWidget(GPEventBus bus) {
@@ -126,6 +115,10 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     @Override
     public void initSize() {
     }
+    
+    protected void manageGridSize() {
+        this.grid.setHeight(super.getHeight() - 25);
+    }
 
     @Override
     public void collapse() {
@@ -137,18 +130,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     @Override
     public void setPanelProperties() {
         super.setScrollMode(Style.Scroll.AUTOX);
-    }
-
-    @Override
-    public void saveState() {
-        SplitBar bar = super.getData("splitBar");
-
-        if (bar != null) {
-            System.out.println("ECCOLA @@@@@@@@@@@@@@@@@@ " + super.getHeight());
-            bar.removeListener(Events.DragEnd, listener);
-
-            bar.addListener(Events.DragEnd, listener);
-        }
     }
 
     @Override

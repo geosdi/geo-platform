@@ -35,18 +35,20 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IFeatureWidget {
+public enum WFSWidgetNames {
 
-    void bind(GPLayerBean theSelectedLayer,
-            LayerSchemaDTO theSchemaDTO);
-    
-    void manageWidgetsSize();
+    FEATURE_ATTRIBUTES("WFST-FeatureAttributesWidget"),
+    FEATURE_SELECTION("WFST-FeatureSelectionWidget");
+    //
+    private String value;
+
+    WFSWidgetNames(String value) {
+        this.value = value;
+    }
+
 }

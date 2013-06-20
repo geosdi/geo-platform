@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.DragEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.widget.SplitBar;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
@@ -94,7 +95,7 @@ public class FeatureWidget extends GeoPlatformWindow
         super(true);
         this.bus = theBus;
         this.resetButton = theResetButton;
-        this.saveButton = theResetButton;
+        this.saveButton = theSaveButton;
 
         bus.addHandler(ActionEnableEvent.TYPE, this);
     }
@@ -147,12 +148,13 @@ public class FeatureWidget extends GeoPlatformWindow
         layoutData.setMargins(new Margins(5, 5, 5, 5));
         layoutData.setCollapsible(true);
         layoutData.setSplit(true);
-        layoutData.setMinSize(70);
+        layoutData.setMinSize(150);
         layoutData.setMaxSize(500);
 
         attributesWidget.setHeaderVisible(true);
         attributesWidget.getHeader().setText("Feature Attributes");
-        attributesWidget.getHeader().setStyleAttribute("textAlign", "center");
+        attributesWidget.getHeader().setStyleAttribute("textAlign",
+                "center");
         attributesWidget.setScrollMode(Style.Scroll.AUTOY);
 
         super.add(this.attributesWidget, layoutData);
@@ -239,6 +241,16 @@ public class FeatureWidget extends GeoPlatformWindow
             enableButtons();
         } else {
             disableButtons();
+        }
+    }
+
+    @Override
+    public void manageWidgetsSize() {
+        SplitBar bar = attributesWidget.getData("splitBar");
+
+        if (bar != null) {
+            this.attributesWidget.manageGridSize();
+            this.mapWidget.manageMapSize();
         }
     }
 

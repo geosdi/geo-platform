@@ -227,6 +227,12 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
         updateSize();
         super.layout();
     }
+    
+    protected void manageMapSize() {
+        this.mapWidget.setHeight(String.valueOf(super.getHeight()));
+        updateSize();
+        super.layout();
+    }
 
     private void loadLayerOnMap() {
         this.mapWidget.getMap().addLayer(wms);

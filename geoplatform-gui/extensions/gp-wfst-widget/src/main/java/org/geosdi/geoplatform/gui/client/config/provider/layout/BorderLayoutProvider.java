@@ -37,10 +37,12 @@ package org.geosdi.geoplatform.gui.client.config.provider.layout;
 
 import com.extjs.gxt.ui.client.event.BorderLayoutEvent;
 import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.LayoutEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import javax.inject.Inject;
 import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.IFeatureWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureSelectionLayoutHandler;
 
 /**
@@ -69,6 +71,16 @@ public class BorderLayoutProvider implements Provider<BorderLayout> {
                     @Override
                     public void handleEvent(BorderLayoutEvent be) {
                         selectionLayoutHandler.manageLayout(be.getPanel());
+                    }
+
+                });
+
+                super.addListener(Events.AfterLayout,
+                        new Listener<LayoutEvent>() {
+
+                    @Override
+                    public void handleEvent(LayoutEvent be) {
+                        ((IFeatureWidget) be.getContainer()).manageWidgetsSize();
                     }
 
                 });

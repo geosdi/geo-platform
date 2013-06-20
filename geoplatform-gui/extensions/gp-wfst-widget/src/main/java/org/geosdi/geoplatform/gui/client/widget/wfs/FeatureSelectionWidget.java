@@ -85,9 +85,9 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  */
 public class FeatureSelectionWidget extends GeoPlatformContentPanel
         implements DeleteAttributeConditionHandler {
-    
-    public static final String ID = "WFST-FeatureSelectionWidget";
 
+    public static final String ID = WFSWidgetNames.FEATURE_SELECTION.name();
+    //
     private GPEventBus bus;
     //
     private LayerSchemaDTO schemaDTO;

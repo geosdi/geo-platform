@@ -466,16 +466,14 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         animationTimer = new Timer() {
             @Override
             public void run() {
-                if (shuffleButton.isPressed() && t2Time != -1) {
-                    int endValue = getFielValueIncrement(endFilterNumberField);
-                    endFilterNumberField.setValue(endValue);
-                    if (endValue + 1 == startFilterNumberField.getValue().intValue()) {
+                if (shuffleButton.isPressed()) {
+                    int startValue = getFielValueIncrement(startFilterNumberField);
+                    if (t2Time != -1 && startValue == 0) {
                         playButton.toggle(Boolean.FALSE);
                         playSelectioListener.componentSelected(null);
+                    } else {
+                        startFilterNumberField.setValue(startValue);
                     }
-                } else if (shuffleButton.isPressed()) {
-                    int startValue = getFielValueIncrement(startFilterNumberField);
-                    startFilterNumberField.setValue(startValue);
                 } else {
                     int startValue = getFielValueDecrement(startFilterNumberField);
                     startFilterNumberField.setValue(startValue);

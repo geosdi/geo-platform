@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.client.action.menu.time;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -66,7 +68,9 @@ public class AddModifyTimeFilterAction extends MenuBaseAction {
             throw new IllegalArgumentException(
                     "The TIME Filter can't be applied to a folder");
         }
+        Menu parentMenu = ce.getMenu().getParentItem().getParentMenu();
+        timeFilterWidget.setPagePosition(parentMenu.getPosition(true).x, parentMenu.getPosition(true).y);
+
         timeFilterWidget.show();
     }
-
 }

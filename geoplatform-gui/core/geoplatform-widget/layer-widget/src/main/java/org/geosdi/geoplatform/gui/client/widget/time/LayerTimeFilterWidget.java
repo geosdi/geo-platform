@@ -35,19 +35,20 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.time;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
-import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
@@ -56,8 +57,10 @@ import com.extjs.gxt.ui.client.widget.form.RadioGroup;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
@@ -86,12 +89,12 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
     public final static String LAYER_TIME_DELIMITER = " - [";
     private final static short WIDGET_HEIGHT = 230;
-    private final static short WIDGET_WIDTH = 360;
+    private final static short WIDGET_WIDTH = 400;
     private final static String TIME_FILTER_HEADING = "TIME FILTER EDITOR";
     private final TimeFilterLayerMapEvent timeFilterLayerMapEvent = new TimeFilterLayerMapEvent();
     private final GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
-    private NumberField startFilterTextField;
-    private NumberField endFilterTextField;
+    private NumberField startFilterNumberField;
+    private NumberField endFilterNumberField;
     private ComboBox<DimensionData> startDimensionComboBox;
     private ComboBox<DimensionData> endDimensionComboBox;
     private ListStore<DimensionData> startStore;
@@ -103,6 +106,13 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
     private final LayoutContainer fixedDimensionContainer = new LayoutContainer(new FormLayout());
     private final LayoutContainer variableDimensionContainer = new LayoutContainer(new FormLayout());
     private RadioGroup dimensionRadioGroup;
+    private SelectionListener<ButtonEvent> applyFilterSelectionListener;
+    private Label endTimeLabel;
+    private Label startTimeLabel;
+    private Timer animationTimer;
+    private SelectionListener<ButtonEvent> playSelectioListener;
+    private ToggleButton playButton;
+    private ToggleButton shuffleButton;
 
     public LayerTimeFilterWidget(boolean lazy, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(lazy);
@@ -174,146 +184,377 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.endDimensionComboBox.setEditable(Boolean.FALSE);
         dimensionSizeLabel = new Label();
         dimensionSizeLabel.setStyleAttribute("font-size", "12px");
-        this.startFilterTextField = new NumberField();
-        this.startFilterTextField.setFieldLabel("From Dimension to Display");
-        this.startFilterTextField.addKeyListener(new KeyListener() {
+        Label startFilterLabel = new Label("T1");
+        startFilterLabel.setStyleAttribute("font-size", "1.8em");
+        startFilterLabel.setStyleAttribute("background-color", "green");
+        startFilterLabel.setStyleAttribute("color", "#fff");
+        startFilterLabel.setStyleAttribute("padding", "3px");
+        final Button buttonBackwardT1 = new Button();
+        final Button buttonForwardT1 = new Button();
+        final Button buttonBackwardT2 = new Button();
+        final Button buttonForwardT2 = new Button();
+        this.startFilterNumberField = new NumberField();
+        this.startFilterNumberField.setFireChangeEventOnSetValue(Boolean.TRUE);
+        this.startFilterNumberField.addListener(Events.Change, new Listener<BaseEvent>() {
             @Override
-            public void componentKeyUp(ComponentEvent event) {
-                super.componentKeyUp(event);
-                Number number = startFilterTextField.getValue();
-                if (number != null) {
-                    int fromFilter = number.intValue();
-                    String tooltip = (String) startStore.getModels().get(startStore.getModels().size() - fromFilter - 1).get(DimensionData.DIMENSION_KEY);
-                    startFilterTextField.setToolTip(tooltip);
+            public void handleEvent(BaseEvent be) {
+                Number valueNumber = startFilterNumberField.getValue();
+                if (valueNumber != null) {
+                    int fromFilter = valueNumber.intValue();
+                    String tooltip = (String) startStore.getModels().get(
+                            startStore.getModels().size() - fromFilter - 1).get(
+                            DimensionData.DIMENSION_KEY);
+                    startFilterNumberField.setToolTip(tooltip);
+                    startTimeLabel.setText(tooltip);
+                    if (fromFilter != 0) {
+                        buttonBackwardT1.setEnabled(Boolean.TRUE);
+                    } else {
+                        buttonBackwardT1.setEnabled(Boolean.FALSE);
+                    }
+                    if (fromFilter != startStore.getModels().size() - 1) {
+                        buttonForwardT1.setEnabled(Boolean.TRUE);
+                    } else {
+                        buttonForwardT1.setEnabled(Boolean.FALSE);
+                    }
+                } else {
+                    startTimeLabel.setText("");
+                    startFilterNumberField.setToolTip("");
                 }
             }
         });
-        this.endFilterTextField = new NumberField();
-        this.endFilterTextField.setFieldLabel("To Dimension to Display");
-        this.endFilterTextField.addKeyListener(new KeyListener() {
+        startTimeLabel = new Label();
+        startTimeLabel.setStyleAttribute("font-size", "1.3em");
+        this.startFilterNumberField.setSize(50, 30);
+        this.endFilterNumberField = new NumberField();
+        this.endFilterNumberField.setFireChangeEventOnSetValue(Boolean.TRUE);
+        Label endFilterLabel = new Label("T2");
+        endFilterLabel.setStyleAttribute("font-size", "1.8em");
+        endFilterLabel.setStyleAttribute("background-color", "red");
+        endFilterLabel.setStyleAttribute("color", "#fff");
+        endFilterLabel.setStyleAttribute("padding", "3px");
+        endTimeLabel = new Label();
+        endTimeLabel.setStyleAttribute("font-size", "1.3em");
+        this.endFilterNumberField.addListener(Events.Change, new Listener<BaseEvent>() {
             @Override
-            public void componentKeyUp(ComponentEvent event) {
-                super.componentKeyUp(event);
-                Number toFilter = endFilterTextField.getValue();
-                if (toFilter != null) {
-                    String tooltip = (String) startStore.getModels().get(startStore.getModels().size() - toFilter.intValue() - 1).get(DimensionData.DIMENSION_KEY);
-                    endFilterTextField.setToolTip(tooltip);
+            public void handleEvent(BaseEvent be) {
+                Number valueNumber = endFilterNumberField.getValue();
+                if (valueNumber != null) {
+                    int endFilter = valueNumber.intValue();
+                    String tooltip = (String) startStore.getModels().get(
+                            startStore.getModels().size() - endFilter - 1).
+                            get(DimensionData.DIMENSION_KEY);
+                    endFilterNumberField.setToolTip(tooltip);
+                    endTimeLabel.setText(tooltip);
+                    if (endFilter != 0) {
+                        buttonBackwardT2.setEnabled(Boolean.TRUE);
+                    } else {
+                        buttonBackwardT2.setEnabled(Boolean.FALSE);
+                    }
+                    if (endFilter != startStore.getModels().size() - 1) {
+                        buttonForwardT2.setEnabled(Boolean.TRUE);
+                    } else {
+                        buttonForwardT2.setEnabled(Boolean.FALSE);
+                    }
+                } else {
+                    endTimeLabel.setText("");
+                    endFilterNumberField.setToolTip("");
                 }
             }
         });
+        this.endFilterNumberField.setSize(50, 30);
         FormPanel panel = new FormPanel();
         panel.setHeaderVisible(Boolean.FALSE);
         panel.setFrame(Boolean.TRUE);
         panel.setBorders(Boolean.FALSE);
         panel.setHeight(WIDGET_HEIGHT - 67);
         panel.add(this.dimensionRadioGroup);
+        panel.setStyleAttribute("background-color", "white");
         this.variableDimensionContainer.add(dimensionSizeLabel, new FormData("100%"));
-        this.variableDimensionContainer.add(this.startFilterTextField);
-        this.variableDimensionContainer.add(this.endFilterTextField);
+
+        buttonBackwardT1.setIcon(LayerResources.ICONS.backwardTime());
+        buttonBackwardT1.setSize(30, 30);
+        buttonBackwardT1.disable();
+        buttonBackwardT1.addSelectionListener(new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                int fieldValue = startFilterNumberField.getValue().intValue();
+                if (!(fieldValue < 0)) {
+                    --fieldValue;
+                    startFilterNumberField.setValue(fieldValue);
+                    applyFilterSelectionListener.componentSelected(ce);
+                }
+            }
+        });
+        buttonForwardT1.setIcon(LayerResources.ICONS.forwardTime());
+        buttonForwardT1.addSelectionListener(new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                int fieldValue = startFilterNumberField.getValue().intValue();
+                int maxValue = startStore.getModels().size() - 1;
+                if (!(fieldValue > maxValue)) {
+                    ++fieldValue;
+                    startFilterNumberField.setValue(fieldValue);
+                    applyFilterSelectionListener.componentSelected(ce);
+                }
+            }
+        });
+        buttonForwardT1.setSize(30, 30);
+
+        buttonBackwardT2.setIcon(LayerResources.ICONS.backwardTime());
+        buttonBackwardT2.setSize(30, 30);
+        buttonBackwardT2.addSelectionListener(new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                int fieldValue = endFilterNumberField.getValue().intValue();
+                if (!(fieldValue < 0)) {
+                    fieldValue = --fieldValue;
+                    endFilterNumberField.setValue(fieldValue);
+                    applyFilterSelectionListener.componentSelected(ce);
+                }
+            }
+        });
+        buttonForwardT2.setIcon(LayerResources.ICONS.forwardTime());
+        buttonForwardT2.addSelectionListener(new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                int fieldValue = endFilterNumberField.getValue().intValue();
+                int maxValue = startStore.getModels().size() - 1;
+                int startFieldValue = startFilterNumberField.getValue().intValue();
+                if ((fieldValue + 1 < startFieldValue) && !(fieldValue > maxValue)) {
+                    fieldValue = ++fieldValue;
+                    endFilterNumberField.setValue(fieldValue);
+                    applyFilterSelectionListener.componentSelected(ce);
+                } else if (fieldValue + 1 >= startFieldValue) {
+                    GeoPlatformMessage.alertMessage("Dimension Warning",
+                            "The T2 time must be lesser than T1 time");
+                }
+            }
+        });
+        buttonForwardT2.setSize(30, 30);
+
+        HorizontalPanel startRow = new HorizontalPanel();
+        startRow.setSpacing(3);
+        startRow.add(startFilterLabel);
+        startRow.add(buttonBackwardT1);
+        startRow.add(this.startFilterNumberField);
+        startRow.add(buttonForwardT1);
+        startRow.add(startTimeLabel);
+        HorizontalPanel endRow = new HorizontalPanel();
+        endRow.setSpacing(3);
+        endRow.add(endFilterLabel);
+        endRow.add(buttonBackwardT2);
+        endRow.add(this.endFilterNumberField);
+        endRow.add(buttonForwardT2);
+        endRow.add(endTimeLabel);
+
+        this.variableDimensionContainer.add(startRow);
+        this.variableDimensionContainer.add(endRow);
+
         this.fixedDimensionContainer.add(this.startDimensionComboBox);
         this.fixedDimensionContainer.add(this.endDimensionComboBox);
         panel.add(this.fixedDimensionContainer, new FormData("100%"));
         panel.add(this.variableDimensionContainer, new FormData("100%"));
         super.add(panel);
-        Button apply = new Button("Apply",
-                new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-                        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
-                        AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
-                        String layerName;
-                        if (layerSelected.getAlias() != null
-                                && layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER) != -1) {
-                            layerName = layerSelected.getAlias().substring(0,
-                                    layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER));
-                        } else {
-                            layerName = layerSelected.getLabel();
+
+        this.shuffleButton = new ToggleButton("Shuffle", LayerResources.ICONS.shuffleTime());
+        shuffleButton.setHeight(30);
+        super.addButton(shuffleButton);
+
+        playButton = new ToggleButton("Play", LayerResources.ICONS.playTime());
+        this.playSelectioListener = new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                System.out.println("Play button status: ");
+                if (!playButton.isPressed()) {
+                    playButton.setText("Play");
+                    playButton.setIcon(LayerResources.ICONS.playTime());
+                    animationTimer.cancel();
+                } else {
+                    Number startValueNumber = startFilterNumberField.getValue();
+                    if (startValueNumber == null) {
+                        GeoPlatformMessage.alertMessage("Time Filter Warning",
+                                "Impossible to show time sequence, the T1 time must be set");
+                    } else {
+                        Number endValueNumber = endFilterNumberField.getValue();
+                        int endValue = -1;
+                        if (endValueNumber != null) {
+                            endValue = endValueNumber.intValue();
                         }
-                        if (fixedDimensionRadio.getValue()) {
-                            String timeFilter = (String) startDimensionComboBox.getValue().get(DimensionData.DIMENSION_KEY);
-                            if (endDimensionComboBox.getValue() != null) {
-                                timeFilter += "/" + (String) endDimensionComboBox.getValue().get(DimensionData.DIMENSION_KEY);
-                            }
-                            layerSelected.setTimeFilter(timeFilter);
-                            layerSelected.setVariableTimeFilter(null);
-                            layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getTimeFilter() + "]");
-                            WidgetPropertiesHandlerManager.fireEvent(labelEvent);
-                        } else {
-                            int fromFilter = startFilterTextField.getValue().intValue();
-                            Number toFilter = endFilterTextField.getValue();
-//                            System.out.println("End filter: " + endFilter);
-                            if (fromFilter < 0 || fromFilter > startStore.getModels().size() - 1
-                                    || (toFilter != null && (toFilter.intValue() >= fromFilter
-                                    || toFilter.intValue() < 0))) {
-                                GeoPlatformMessage.errorMessage("Time Filter Error", "Incorrect Position time, you must specify a valid position in size range");
-                                return;
-                            } else {
-                                String timeFilter = "" + startFilterTextField.getValue().intValue();
-                                String variableTimeFilter = (String) startStore.getModels().get(startStore.getModels().size() - fromFilter - 1).get(DimensionData.DIMENSION_KEY);
-                                if (endFilterTextField.getValue() != null) {
-                                    timeFilter += "/" + endFilterTextField.getValue().intValue();
-                                    variableTimeFilter += "/" + (String) startStore.getModels().get(startStore.getModels().size() - toFilter.intValue() - 1).get(DimensionData.DIMENSION_KEY);
-                                }
-                                layerSelected.setTimeFilter(timeFilter);
-                                layerSelected.setVariableTimeFilter(variableTimeFilter);
-                                layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getVariableTimeFilter() + "]");
-                                WidgetPropertiesHandlerManager.fireEvent(labelEvent);
-                            }
-                        }
-                        mementoSave.putOriginalPropertiesInCache(memento);
-                        timeFilterLayerMapEvent.setLayerBean(layerSelected);
-                        GPHandlerManager.fireEvent(timeFilterLayerMapEvent);
-                        treePanel.refresh(layerSelected);
+                        playButton.setIcon(LayerResources.ICONS.pauseTime());
+                        playButton.setText("Pause");
+                        playTimeFilter(endValue);
                     }
-                });
+                }
+            }
+        };
+        playButton.addSelectionListener(playSelectioListener);
+        playButton.setHeight(30);
+        super.addButton(playButton);
+
+        Button apply = new Button("Apply");
+        this.applyFilterSelectionListener = new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
+                IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
+                String layerName;
+                if (layerSelected.getAlias() != null
+                        && layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER) != -1) {
+                    layerName = layerSelected.getAlias().substring(0,
+                            layerSelected.getAlias().indexOf(LAYER_TIME_DELIMITER));
+                } else {
+                    layerName = layerSelected.getLabel();
+                }
+                if (fixedDimensionRadio.getValue()) {
+                    String timeFilter = (String) startDimensionComboBox.getValue().get(DimensionData.DIMENSION_KEY);
+                    if (endDimensionComboBox.getValue() != null) {
+                        timeFilter += "/" + (String) endDimensionComboBox.getValue().get(DimensionData.DIMENSION_KEY);
+                    }
+                    layerSelected.setTimeFilter(timeFilter);
+                    layerSelected.setVariableTimeFilter(null);
+                    layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getTimeFilter() + "]");
+                    WidgetPropertiesHandlerManager.fireEvent(labelEvent);
+                } else {
+                    int fromFilter = startFilterNumberField.getValue().intValue();
+                    Number toFilter = endFilterNumberField.getValue();
+//                            System.out.println("End filter: " + endFilter);
+                    if (fromFilter < 0 || fromFilter > startStore.getModels().size() - 1
+                            || (toFilter != null && (toFilter.intValue() >= fromFilter
+                            || toFilter.intValue() < 0))) {
+                        GeoPlatformMessage.errorMessage("Time Filter Error", "Incorrect Position time, you must specify a valid position in size range");
+                        return;
+                    } else {
+                        String timeFilter = "" + startFilterNumberField.getValue().intValue();
+                        String variableTimeFilter = (String) startStore.getModels().get(startStore.getModels().size() - fromFilter - 1).get(DimensionData.DIMENSION_KEY);
+                        if (endFilterNumberField.getValue() != null) {
+                            timeFilter += "/" + endFilterNumberField.getValue().intValue();
+                            variableTimeFilter += "/" + (String) startStore.getModels().get(startStore.getModels().size() - toFilter.intValue() - 1).get(DimensionData.DIMENSION_KEY);
+                        }
+                        layerSelected.setTimeFilter(timeFilter);
+                        layerSelected.setVariableTimeFilter(variableTimeFilter);
+                        layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getVariableTimeFilter() + "]");
+                        WidgetPropertiesHandlerManager.fireEvent(labelEvent);
+                    }
+                }
+                mementoSave.putOriginalPropertiesInCache(memento);
+                timeFilterLayerMapEvent.setLayerBean(layerSelected);
+                GPHandlerManager.fireEvent(timeFilterLayerMapEvent);
+                treePanel.refresh(layerSelected);
+            }
+        };
+
+        apply.addSelectionListener(applyFilterSelectionListener);
 
         super.addButton(apply);
         Button close = new Button("Close",
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        startFilterTextField.clear();
-                        endFilterTextField.clear();
-                        hide();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                startFilterNumberField.clear();
+                startTimeLabel.setText("");
+                endTimeLabel.setText("");
+                endFilterNumberField.clear();
+                hide();
+            }
+        });
 
         super.addButton(close);
+    }
+
+    private void playTimeFilter(final int t2Time) {
+        animationTimer = new Timer() {
+            @Override
+            public void run() {
+                if (shuffleButton.isPressed() && t2Time != -1) {
+                    int endValue = getFielValueIncrement(endFilterNumberField);
+                    endFilterNumberField.setValue(endValue);
+                    if (endValue + 1 == startFilterNumberField.getValue().intValue()) {
+                        playButton.toggle(Boolean.FALSE);
+                        playSelectioListener.componentSelected(null);
+                    }
+                } else if (shuffleButton.isPressed()) {
+                    int startValue = getFielValueIncrement(startFilterNumberField);
+                    startFilterNumberField.setValue(startValue);
+                } else {
+                    int startValue = getFielValueDecrement(startFilterNumberField);
+                    startFilterNumberField.setValue(startValue);
+                    if (t2Time != -1 && (startValue - 1 == t2Time)) {
+                        playButton.toggle(Boolean.FALSE);
+                        playSelectioListener.componentSelected(null);
+                    }
+                }
+                applyFilterSelectionListener.componentSelected(null);
+            }
+        };
+        animationTimer.scheduleRepeating(2000);
+    }
+
+    private int getFielValueDecrement(NumberField numberField) {
+        int valueToReturn = -1;
+        Number timeNumber = numberField.getValue();
+        if (timeNumber != null) {
+            valueToReturn = timeNumber.intValue();
+            if (valueToReturn == 0) {
+                valueToReturn = startStore.getModels().size() - 1;
+            } else {
+                --valueToReturn;
+            }
+        }
+        return valueToReturn;
+    }
+
+    private int getFielValueIncrement(NumberField numberField) {
+        int valueToReturn = -1;
+        Number timeNumber = numberField.getValue();
+        if (timeNumber != null) {
+            valueToReturn = timeNumber.intValue();
+            if (valueToReturn == startStore.getModels().size() - 1) {
+                valueToReturn = 0;
+            } else {
+                ++valueToReturn;
+            }
+        }
+        return valueToReturn;
     }
 
     private void loadDataToDisplay() {
         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
         LayerRemote.Util.getInstance().getLayerDimension(layerSelected.getName(),
                 new AsyncCallback<String>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        if (caught.getCause() instanceof GPSessionTimeout) {
-                            GPHandlerManager.fireEvent(new GPLoginEvent(null));
-                        } else {
-                            GeoPlatformMessage.errorMessage("Error Loading Time Filter",
-                                    "An error occurred while making the requested connection.\n"
-                                    + "Verify network connections and try again."
-                                    + "\nIf the problem persists contact your system administrator.");
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Error Loading Time Filter",
-                                    SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                            System.out.println("Error Loading Time Filter: " + caught.toString()
-                                    + " data: " + caught.getMessage());
-                        }
-                    }
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(null));
+                } else {
+                    GeoPlatformMessage.errorMessage("Error Loading Time Filter",
+                            "An error occurred while making the requested connection.\n"
+                            + "Verify network connections and try again."
+                            + "\nIf the problem persists contact your system administrator.");
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            "Error Loading Time Filter",
+                            SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    System.out.println("Error Loading Time Filter: " + caught.toString()
+                            + " data: " + caught.getMessage());
+                }
+            }
 
-                    @Override
-                    public void onSuccess(String result) {
-                        List<String> dimensionList = Lists.newArrayList(result.split(","));
-                        dimensionSizeLabel.setText("Dimension Size: " + dimensionList.size());
-                        startStore.removeAll();
-                        endStore.removeAll();
-                        for (String dimension : GeoPlatformUtils.safeList(dimensionList)) {
-                            startStore.add(new DimensionData(dimension));
-                        }
-                    }
-                });
+            @Override
+            public void onSuccess(String result) {
+                List<String> dimensionList = Lists.<String>newArrayList(result.split(","));
+                dimensionSizeLabel.setText("Dimension Size: " + dimensionList.size());
+                dimensionSizeLabel.setStyleAttribute("font-size", "1.3em");
+                dimensionSizeLabel.setStyleAttribute("text-align", "right");
+                startStore.removeAll();
+                endStore.removeAll();
+                for (String dimension : GeoPlatformUtils.safeList(dimensionList)) {
+                    startStore.add(new DimensionData(dimension));
+                }
+                if (!dimensionList.isEmpty()) {
+                    startFilterNumberField.setValue(0);
+                }
+            }
+        });
     }
 
     @Override
@@ -327,11 +568,11 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
             try {
                 String[] variableTimeFilterSplitted = timeFilter.split("/");
                 int integerTimeFilter = Integer.parseInt(variableTimeFilterSplitted[0]);
-                this.startFilterTextField.setValue(integerTimeFilter);
+                this.startFilterNumberField.setValue(integerTimeFilter);
                 this.dimensionRadioGroup.setValue(this.variableDimensionRadio);
                 if (variableTimeFilterSplitted.length > 1) {
                     integerTimeFilter = Integer.parseInt(variableTimeFilterSplitted[1]);
-                    this.endFilterTextField.setValue(integerTimeFilter);
+                    this.endFilterNumberField.setValue(integerTimeFilter);
                 }
             } catch (NumberFormatException nfe) {
             }

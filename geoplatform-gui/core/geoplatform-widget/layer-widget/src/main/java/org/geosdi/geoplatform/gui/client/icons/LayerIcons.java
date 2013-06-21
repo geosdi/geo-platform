@@ -46,6 +46,21 @@ import com.google.gwt.user.client.ui.ImageBundle;
 @SuppressWarnings("deprecation")
 public interface LayerIcons extends ImageBundle {
 
+    @Resource("skip_forward.png")
+    AbstractImagePrototype forwardTime();
+
+    @Resource("skip_backward.png")
+    AbstractImagePrototype backwardTime();
+
+    @Resource("play.png")
+    AbstractImagePrototype playTime();
+    
+    @Resource("pause.png")
+    AbstractImagePrototype pauseTime();
+    
+    @Resource("shuffle_time.png")
+    AbstractImagePrototype shuffleTime();
+
     @Resource("layer_folder.png")
     AbstractImagePrototype layerFolder();
 

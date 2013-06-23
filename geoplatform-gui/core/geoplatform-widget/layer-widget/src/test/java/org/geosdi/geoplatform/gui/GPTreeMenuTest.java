@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -99,7 +99,7 @@ public class GPTreeMenuTest {
         List<? extends GPMenuGenericTool> tools = gpTreeMenuStore.getTools(
                 new SingleSelectionCompositeKey(GPTreeCompositeType.LEAF));
 
-        Assert.assertEquals(10, tools.size());
+        Assert.assertEquals(9, tools.size());
 
         logger.info("LEAF TREE MENU @@@@@@@@@@@@@@@@@@@@@@@@@@ \n\n {} \n",
                 tools);

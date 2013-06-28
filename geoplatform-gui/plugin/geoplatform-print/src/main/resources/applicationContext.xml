@@ -8,5 +8,8 @@
 	default-autowire="byName">
 
     <context:annotation-config />
+    
+    <import resource="classpath:mapfish-spring-application-context.xml" />
+    <import resource="classpath:*-mapfish-spring-application-context-override.xml" />
 
 </beans>

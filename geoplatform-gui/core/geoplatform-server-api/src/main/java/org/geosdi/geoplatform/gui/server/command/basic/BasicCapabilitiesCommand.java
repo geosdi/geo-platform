@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.basic;
 
-import org.geosdi.geoplatform.gui.server.command.cas.*;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesRequest;
@@ -60,7 +59,7 @@ public class BasicCapabilitiesCommand implements
         GPCommand<BasicCapabilitiesRequest, BasicCapabilitiesResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            CASCapabilitiesCommand.class);
+            BasicCapabilitiesCommand.class);
     //
     @Autowired
     private IOGCService ogcService;
@@ -69,13 +68,13 @@ public class BasicCapabilitiesCommand implements
     public BasicCapabilitiesResponse execute(BasicCapabilitiesRequest request,
             HttpServletRequest httpServletRequest) {
 
-        logger.info("##################### Executing {} Command", this.
+        logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
         ArrayList<? extends GPLayerGrid> capabilitiesResult = this.ogcService.getCapabilities(
                 request.getServerUrl(), httpServletRequest, request.getIdServer());
 
-        logger.info("##################### FOUND {} ", capabilitiesResult);
+        logger.debug("##################### FOUND {} ", capabilitiesResult);
 
         return new BasicCapabilitiesResponse(capabilitiesResult);
     }

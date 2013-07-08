@@ -1169,6 +1169,13 @@
                 <version>${gwtVersion}</version>
                 <scope>runtime</scope>
             </dependency>
+            
+            <dependency>
+                <groupId>com.google.web.bindery</groupId>
+                <artifactId>requestfactory-server</artifactId>
+                <version>${gwtVersion}</version>
+                <scope>runtime</scope>
+            </dependency>
 
             <!-- GXT -->
             <dependency>
@@ -1650,7 +1657,7 @@
         <geoapi-version>2.3-M1</geoapi-version>
         <gt-version>9-SNAPSHOT</gt-version>
 
-        <gwtVersion>2.4.0</gwtVersion>
+        <gwtVersion>2.5.1</gwtVersion>
         <gxtVersion>2.2.5</gxtVersion>
         
         <gwtOpenlayersVersion>1.0-SNAPSHOT</gwtOpenlayersVersion>

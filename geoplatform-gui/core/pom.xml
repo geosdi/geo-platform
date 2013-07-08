@@ -163,7 +163,7 @@
         <module>geoplatform-widget</module>
         <module>geoplatform-cache</module>
         <module>geoplatform-startup</module>
-        <!--<module>geoplatform-memento-persistence</module>-->
+        <module>geoplatform-memento-persistence</module>
     </modules>
 
 

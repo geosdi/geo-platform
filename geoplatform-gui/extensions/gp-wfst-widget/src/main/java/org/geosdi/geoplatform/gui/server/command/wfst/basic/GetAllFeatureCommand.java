@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.wfst.basic;
 
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -63,7 +64,8 @@ public class GetAllFeatureCommand implements
     private IWFSLayerService wfsLayerService;
 
     @Override
-    public GetAllFeatureResponse execute(GetAllFeatureRequest request) {
+    public GetAllFeatureResponse execute(GetAllFeatureRequest request,
+            HttpServletRequest httpServletRequest) {
 
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
@@ -76,5 +78,4 @@ public class GetAllFeatureCommand implements
 
         return new GetAllFeatureResponse(result);
     }
-
 }

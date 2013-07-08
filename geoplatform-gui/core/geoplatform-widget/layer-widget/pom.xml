@@ -77,6 +77,37 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-publisher-api</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-shared-beans</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-memento-persistence</artifactId>
+            <version>${project.version}</version>
+        </dependency>       
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-memento-persistence</artifactId>
+            <classifier>sources</classifier>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-layer-filters</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-layer-filters</artifactId>
+            <classifier>sources</classifier>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- GeoPlatform Server Module -->
         <dependency>
@@ -131,18 +162,6 @@
             <artifactId>gin</artifactId>
         </dependency>
         
-        <dependency>
-            <groupId>name.pehl</groupId>
-            <artifactId>piriti-user</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>name.pehl</groupId>
-            <artifactId>piriti-dev</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>name.pehl</groupId>
-            <artifactId>totoe</artifactId>
-        </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>

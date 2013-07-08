@@ -42,7 +42,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
@@ -74,7 +74,6 @@ public class GPTreeExpand implements TreeExpand {
     public void expand() {
         tree.addListener(Events.Expand,
                 new Listener<TreePanelEvent<ModelData>>() {
-
             @Override
             public void handleEvent(TreePanelEvent<ModelData> be) {
                 if (dragSource.getFiresEvents() && be.getItem() instanceof FolderTreeNode
@@ -87,15 +86,13 @@ public class GPTreeExpand implements TreeExpand {
                     tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
                 }
                 if (be.getItem() instanceof FolderTreeNode) {
-                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                     AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
                             (GPBeanTreeModel) be.getItem());
                     ((FolderTreeNode) be.getItem()).setExpanded(Boolean.TRUE);
                     mementoSave.putOriginalPropertiesInCache(memento);
                 }
             }
-
         });
     }
-
 }

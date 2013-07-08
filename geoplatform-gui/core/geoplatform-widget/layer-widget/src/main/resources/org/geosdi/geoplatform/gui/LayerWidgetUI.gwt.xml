@@ -2,8 +2,8 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">  
 <!-- Inherit the core Web Toolkit stuff. -->
 <module>
-    <inherits name='name.pehl.piriti.json.JSON' />
     <inherits name="com.google.gwt.inject.Inject"/>
+    <inherits name="org.geosdi.geoplatform.gui.LayerFiltersWidgetUI" />
     
     <source path="client" />
     

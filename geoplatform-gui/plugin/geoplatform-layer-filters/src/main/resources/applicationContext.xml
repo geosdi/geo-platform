@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+       default-autowire="byName">
+    
+    <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool"
+          id="CQL_FILTER">
+        <property name="id" value="CQL_FILTER" />
+        <property name="text" value="CQL Filter" />
+        <property name="enabled" value="true" />
+        <property name="secure" value="false" />
+        <property name="order" value="4" />
+        <property name="tools">
+            <list>
+                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                    <property name="id" value="ADD_MODIFY_CQL_FILTER" />
+                    <property name="text" value="Add/Modify Filter" />
+                    <property name="enabled" value="true" />
+                    <property name="secure" value="false" />
+                    <property name="order" value="1" />
+                </bean>
+    
+                <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
+                    <property name="id" value="REMOVE_CQL_FILTER" />
+                    <property name="text" value="Remove Filter" />
+                    <property name="enabled" value="true" />
+                    <property name="secure" value="false" />
+                    <property name="order" value="2" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

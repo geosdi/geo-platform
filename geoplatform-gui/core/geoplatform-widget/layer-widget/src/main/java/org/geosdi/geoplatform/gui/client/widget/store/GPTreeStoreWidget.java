@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
@@ -315,7 +315,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
             MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
             mementoSaveLayer.setAddedLayers(MementoSaveBuilder.generateMementoLayerList(layerList));
             mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
-            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             mementoSave.add(mementoSaveLayer);
         }
     }
@@ -346,7 +346,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     private RasterTreeNode generateRasterTreeNode(GPShortLayerBean layer, String rasterAlias) {
         RasterTreeNode rasterTreeNode = this.generateRasterTreeNode(layer);
-        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(rasterTreeNode);
         rasterTreeNode.setAlias(rasterAlias);
         mementoSave.putOriginalPropertiesInCache(memento);
@@ -370,7 +370,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     private RasterTreeNode duplicateRaster(GPLayerBean layer, String alias) {
         RasterTreeNode raster = this.duplicateRaster(layer);
-        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(raster);
         raster.setAlias(alias);
         mementoSave.putOriginalPropertiesInCache(memento);

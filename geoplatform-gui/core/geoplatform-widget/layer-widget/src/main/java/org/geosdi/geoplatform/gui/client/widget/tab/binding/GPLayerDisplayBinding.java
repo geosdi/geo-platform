@@ -49,7 +49,7 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.SliderField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode.GPRasterKeyValue;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
@@ -175,7 +175,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         @Override//From view to model
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((GPLayerTreeModel) GPLayerDisplayBinding.this.getModel());
             ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).setOpacity(((Integer) val).floatValue() / 100);
             mementoSave.putOriginalPropertiesInCache(memento);

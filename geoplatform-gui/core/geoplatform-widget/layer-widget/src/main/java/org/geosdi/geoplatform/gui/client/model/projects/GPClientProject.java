@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model.projects;
 
+import org.geosdi.geoplatform.gui.model.project.IGPClientProject;
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
@@ -46,7 +47,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  * @email giuseppe.lascaleia@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GPClientProject extends GeoPlatformBeanModel {
+public class GPClientProject extends GeoPlatformBeanModel implements IGPClientProject {
 
     private static final long serialVersionUID = 607645430816968379L;
     //
@@ -59,6 +60,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     /**
      * @return the id
      */
+    @Override
     public Long getId() {
         return id;
     }
@@ -73,6 +75,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     /**
      * @return the name
      */
+    @Override
     public String getName() {
         return super.get(GPClientProjectKey.PROJECT_NAME.toString());
     }
@@ -87,6 +90,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     /**
      * @return the image
      */
+    @Override
     public String getImage() {
         return super.get(GPClientProjectKey.PROJECT_IMAGE.toString());
     }
@@ -98,6 +102,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     /**
      * @return the numberOfElements
      */
+    @Override
     public int getNumberOfElements() {
         Integer numberOfElements = (Integer) super.get(
                 GPClientProjectKey.PROJECT_ELEMENTS.toString());
@@ -114,6 +119,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     /**
      * @return the version
      */
+    @Override
     public int getVersion() {
         Integer version = (Integer) super.get(
                 GPClientProjectKey.PROJECT_VERSION.toString());
@@ -127,6 +133,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
         set(GPClientProjectKey.PROJECT_VERSION.toString(), version);
     }
 
+    @Override
     public IGPUserSimpleDetail getOwner() {
         return this.owner;
     }
@@ -138,10 +145,12 @@ public class GPClientProject extends GeoPlatformBeanModel {
     /**
      * @return the shared
      */
+    @Override
     public boolean isShared() {
         return shared;
     }
 
+    @Override
     public String getSharedLabel() {
         return shared ? "Shared" : "";
     }
@@ -157,6 +166,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     /**
      * @return the defaultProject
      */
+    @Override
     public boolean isDefaultProject() {
         Boolean isDefault = (Boolean) super.get(
                 GPClientProjectKey.DEFAULT_PROJECT.toString());
@@ -169,13 +179,15 @@ public class GPClientProject extends GeoPlatformBeanModel {
     public void setDefaultProject(boolean defaultProject) {
         set(GPClientProjectKey.DEFAULT_PROJECT.toString(), defaultProject);
         set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(),
-            this.getDefaultProjectLabel());
+                this.getDefaultProjectLabel());
     }
 
+    @Override
     public String getDefaultProjectLabel() {
         return this.isDefaultProject() ? "DEFAULT PROJECT" : "";
     }
 
+    @Override
     public List<GPFolderClientInfo> getRootFolders() {
         return rootFolders;
     }

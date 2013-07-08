@@ -50,7 +50,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
@@ -154,11 +154,11 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         save = new Button("Create", LayerResources.ICONS.addFolder(),
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        execute();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                execute();
+            }
+        });
 
         save.setEnabled(false);
 
@@ -166,11 +166,11 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        clearComponents();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                clearComponents();
+            }
+        });
 
         this.formPanel.addButton(cancel);
 
@@ -205,7 +205,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                 this.entity));
         mementoSaveAdd.setDescendantMap(this.addVisitor.getFolderDescendantMap());
 
-        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         mementoSave.add(mementoSaveAdd);
 
         clearComponents();
@@ -251,31 +251,31 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         LayerRemote.Util.getInstance().saveAddedFolderAndTreeModifications(memento,
                 new AsyncCallback<Long>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        if (caught.getCause() instanceof GPSessionTimeout) {
-                            GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-                        } else {
-                            LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                            setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
-                            GeoPlatformMessage.errorMessage("Save Folder Error",
-                                    "Problems on saving the new tree state after folder creation");
-                        }
-                    }
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                } else {
+                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                    setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                            EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
+                    GeoPlatformMessage.errorMessage("Save Folder Error",
+                            "Problems on saving the new tree state after folder creation");
+                }
+            }
 
-                    @Override
-                    public void onSuccess(Long result) {
-                        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
-                        mementoSave.remove(memento);
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Folders saved successfully.",
-                                EnumSearchStatus.STATUS_SEARCH.toString());
-                        MementoFolder mementoAdded = memento.getAddedFolder();
-                        mementoAdded.getRefBaseElement().setId(result);
-                        mementoAdded.getRefBaseElement().setLoaded(true);
-                        LayerHandlerManager.fireEvent(peekCacheEvent);
-                    }
-                });
+            @Override
+            public void onSuccess(Long result) {
+                IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
+                mementoSave.remove(memento);
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        "Folders saved successfully.",
+                        EnumSearchStatus.STATUS_SEARCH.toString());
+                MementoFolder mementoAdded = memento.getAddedFolder();
+                mementoAdded.getRefBaseElement().setId(result);
+                mementoAdded.getRefBaseElement().setLoaded(true);
+                LayerHandlerManager.fireEvent(peekCacheEvent);
+            }
+        });
     }
 }

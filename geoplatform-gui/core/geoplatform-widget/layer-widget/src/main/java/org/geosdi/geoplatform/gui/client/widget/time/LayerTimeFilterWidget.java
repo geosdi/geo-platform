@@ -57,18 +57,21 @@ import com.extjs.gxt.ui.client.widget.form.RadioGroup;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerDimensionRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerDimensionResponse;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.TimeFilterLayerMapEvent;
@@ -396,7 +399,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-                IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                 AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(layerSelected);
                 String layerName;
                 if (layerSelected.getAlias() != null
@@ -517,29 +520,23 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
     }
 
     private void loadDataToDisplay() {
+        final GetLayerDimensionRequest getLayerDimensionRequest = GWT.
+                <GetLayerDimensionRequest>create(GetLayerDimensionRequest.class);
+
         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        LayerRemote.Util.getInstance().getLayerDimension(layerSelected.getName(),
-                new AsyncCallback<String>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                if (caught.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(null));
-                } else {
-                    GeoPlatformMessage.errorMessage("Error Loading Time Filter",
-                            "An error occurred while making the requested connection.\n"
-                            + "Verify network connections and try again."
-                            + "\nIf the problem persists contact your system administrator.");
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Error Loading Time Filter",
-                            SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                    System.out.println("Error Loading Time Filter: " + caught.toString()
-                            + " data: " + caught.getMessage());
-                }
+        getLayerDimensionRequest.setLayerName(layerSelected.getName());
+
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<GetLayerDimensionResponse>() {
+            private static final long serialVersionUID = 4372276287420606744L;
+
+            {
+                super.setCommandRequest(getLayerDimensionRequest);
             }
 
             @Override
-            public void onSuccess(String result) {
-                List<String> dimensionList = Lists.<String>newArrayList(result.split(","));
+            public void onCommandSuccess(GetLayerDimensionResponse response) {
+                List<String> dimensionList = Lists.<String>newArrayList(response.getResult().split(","));
                 dimensionSizeLabel.setText("Dimension Size: " + dimensionList.size());
                 dimensionSizeLabel.setStyleAttribute("font-size", "1.3em");
                 dimensionSizeLabel.setStyleAttribute("text-align", "right");
@@ -550,6 +547,23 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                 }
                 if (!dimensionList.isEmpty()) {
                     startFilterNumberField.setValue(0);
+                }
+            }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(null));
+                } else {
+                    GeoPlatformMessage.errorMessage("Error Loading Time Filter",
+                            "An error occurred while making the requested connection.\n"
+                            + "Verify network connections and try again."
+                            + "\nIf the problem persists contact your system administrator.");
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            "Error Loading Time Filter",
+                            SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    System.out.println("Error Loading Time Filter: " + exception.toString()
+                            + " data: " + exception.getMessage());
                 }
             }
         });

@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
@@ -83,7 +83,7 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
     protected void delete(GPBeanTreeModel element) {
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         this.visitorDispalyHide.removeVisibleLayers(element);
-        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         IMemento<ISave> precedingMemento;
         precedingMemento = mementoSave.peekLast();
         boolean isAllowedNewMemento = true;

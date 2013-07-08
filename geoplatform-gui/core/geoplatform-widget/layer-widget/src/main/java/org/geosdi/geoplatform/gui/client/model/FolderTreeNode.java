@@ -46,7 +46,6 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,11 +57,8 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
     private static final long serialVersionUID = -3687415822526940729L;
     //
     private VisitorModelConverter visitor = new VisitorModelConverter(this);
-    private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
-    private boolean loaded = Boolean.FALSE;
     private boolean loading = Boolean.FALSE;
     private boolean expanded = Boolean.FALSE;
-    private int numberOfDescendants = 0;
 
     public FolderTreeNode() {
     }
@@ -73,7 +69,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
 
     public FolderTreeNode(GPFolderClientInfo folder, boolean addChildrens) {
         super(folder);
-        this.numberOfDescendants = folder.getNumberOfDescendants();
+        super.numberOfDescendants = folder.getNumberOfDescendants();
         this.expanded = folder.isExpanded();
         if (addChildrens) {
             this.modelConverter(folder.getFolderElements());
@@ -103,34 +99,6 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
         return LayerResources.ICONS.layerFolder();
     }
 
-    /**
-     * @return the number of childrens
-     */
-    public int getNumberOfDescendants() {
-        return numberOfDescendants;
-    }
-
-    /**
-     * @param numberOfChildrens the numberOfChildrens to set
-     */
-    public void setNumberOfDescendants(int numberOfChildrens) {
-        this.numberOfDescendants = numberOfChildrens;
-    }
-
-    /**
-     * @return the loaded
-     */
-    public boolean isLoaded() {
-        return loaded;
-    }
-
-    /**
-     * @param loaded the loaded to set
-     */
-    public void setLoaded(boolean loaded) {
-        this.loaded = loaded;
-    }
-
     public boolean isLoading() {
         return loading;
     }
@@ -139,6 +107,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
         this.loading = loading;
     }
 
+    @Override
     public boolean isExpanded() {
         return expanded;
     }
@@ -148,30 +117,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
     }
 
     @Override
-    public void setId(Long id) {
-        super.setId(id);
-        observable.setChanged();
-        observable.notifyObservers(id);
-    }
-
-    public ObservableFolderTreeNode getObservable() {
-        return observable;
-    }
-
-    public void setObservable(ObservableFolderTreeNode observable) {
-        this.observable = observable;
-    }
-
-    @Override
     public TreeStatusEnum getTreeStatus() {
         return TreeStatusEnum.FOLDER_SELECTED;
-    }
-
-    public class ObservableFolderTreeNode extends Observable {
-
-        @Override
-        protected synchronized void setChanged() {
-            super.setChanged();
-        }
     }
 }

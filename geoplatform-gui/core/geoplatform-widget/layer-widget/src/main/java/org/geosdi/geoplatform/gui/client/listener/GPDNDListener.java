@@ -10,8 +10,8 @@ import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
@@ -73,7 +73,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
                     ? (FolderTreeNode) parentDestination : null);
             mementoSaveDND.setDescendantMap(
                     this.visitor.getFolderDescendantMap());
-            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             mementoSave.add(mementoSaveDND);
             this.isActiveDrop = false;
             this.isFolderDrop = false;
@@ -98,7 +98,6 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
             LayerRemote.Util.getInstance().saveDragAndDropFolderAndTreeModifications(
                     memento,
                     new AsyncCallback<Boolean>() {
-
                 @Override
                 public void onFailure(Throwable caught) {
                     if (caught.getCause() instanceof GPSessionTimeout) {
@@ -115,20 +114,18 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
 
                 @Override
                 public void onSuccess(Boolean result) {
-                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                     mementoSave.remove(memento);
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Folder Drag&Drop operation saved successfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());
                     LayerHandlerManager.fireEvent(peekCacheEvent);
                 }
-
             });
         } else if (memento.getRefBaseElement() instanceof GPLayerBean) {
             LayerRemote.Util.getInstance().saveDragAndDropLayerAndTreeModifications(
                     memento,
                     new AsyncCallback<Boolean>() {
-
                 @Override
                 public void onFailure(Throwable caught) {
                     if (caught.getCause() instanceof GPSessionTimeout) {
@@ -145,16 +142,14 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
 
                 @Override
                 public void onSuccess(Boolean result) {
-                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                     mementoSave.remove(memento);
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Layer Drag&Drop operation saved successfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());
                     LayerHandlerManager.fireEvent(peekCacheEvent);
                 }
-
             });
         }
     }
-
 }

@@ -92,10 +92,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
     private String RESTUSER = "";
     private String RESTPW = "";
     //
-    @Autowired
+    @Resource(name = "sharedRestPublisher")
     private GeoServerRESTPublisher restPublisher;
     //
-    @Resource(name = "restReader")
+    @Resource(name = "sharedRestReader")
     private GeoServerRESTReader restReader;
     private String geoportalDir = "";
     //

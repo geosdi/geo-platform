@@ -42,28 +42,22 @@ import org.geosdi.geoplatform.gui.client.action.menu.CopyLayerAction;
 import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
 import org.geosdi.geoplatform.gui.client.action.projects.ShareProjectCommandAction;
 import org.geosdi.geoplatform.gui.client.action.temporary.TreeMenuActionFactory;
-import org.geosdi.geoplatform.gui.client.config.provider.IMementoSaveProvider;
-import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
-import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveCacheManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class LayerModuleGinConfigurator extends AbstractGinModule {
-    
+
     @Override
     protected void configure() {
 //        requestStaticInjection(TreeContextMenuFactory.class);
         requestStaticInjection(TreeMenuActionFactory.class);
         requestStaticInjection(LayerWidgetUI.class);
         bind(ShareProjectCommandAction.class).asEagerSingleton();
-        bind(MementoSaveCacheManager.class).asEagerSingleton();
-        bind(IMementoSave.class).toProvider(IMementoSaveProvider.class);
-        
+
         bind(PasteLayerAction.class).in(Singleton.class);
-        
+
         bind(CopyLayerAction.class).in(Singleton.class);
     }
-    
 }

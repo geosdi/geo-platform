@@ -200,7 +200,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
 
         controlFeature.getEvents().register("featureunselected", this.wms,
                                             this.unSelectFeature);
-
+        
         Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
 
         this.mapWidget.getMap().zoomToExtent(bb);
@@ -213,4 +213,12 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
                 new FeatureStatusBarEvent("WFS Layer loaded",
                                           FeatureStatusBarType.STATUS_OK));
     }
+
+//    @Override
+//    protected void onAttach() {
+//        super.onAttach();
+//        this.updateSize();
+//    }
+    
+    
 }

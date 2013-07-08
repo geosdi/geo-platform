@@ -44,10 +44,14 @@ import org.geosdi.geoplatform.gui.configuration.composite.GPTreeCompositeType;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
+import org.geosdi.geoplatform.gui.observable.Observable;
 
 public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
 
     private static final long serialVersionUID = 4886440607031207404L;
+    private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
+    protected int numberOfDescendants = 0;
+    private boolean loaded = Boolean.FALSE;
 
     public enum GPFolderKeyValue {
 
@@ -63,7 +67,6 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
         public String toString() {
             return this.value;
         }
-
     }
 
     protected AbstractFolderTreeNode() {
@@ -91,6 +94,34 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
     }
 
     /**
+     * @return the number of childrens
+     */
+    public int getNumberOfDescendants() {
+        return numberOfDescendants;
+    }
+
+    /**
+     * @param numberOfChildrens the numberOfChildrens to set
+     */
+    public void setNumberOfDescendants(int numberOfChildrens) {
+        this.numberOfDescendants = numberOfChildrens;
+    }
+
+    /**
+     * @return the loaded
+     */
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    /**
+     * @param loaded the loaded to set
+     */
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
+    }
+
+    /**
      * The Folder Child as a Map
      *
      * @return Map<String, GPLayerBean>
@@ -113,4 +144,28 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
         return childMap;
     }
 
+    @Override
+    public void setId(Long id) {
+        super.setId(id);
+        observable.setChanged();
+        observable.notifyObservers(id);
+    }
+
+    public ObservableFolderTreeNode getObservable() {
+        return observable;
+    }
+
+    public void setObservable(ObservableFolderTreeNode observable) {
+        this.observable = observable;
+    }
+
+    public abstract boolean isExpanded();
+
+    public class ObservableFolderTreeNode extends Observable {
+
+        @Override
+        protected synchronized void setChanged() {
+            super.setChanged();
+        }
+    }
 }

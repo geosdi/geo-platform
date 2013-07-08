@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
@@ -80,7 +80,7 @@ public class GPCheckListener implements
         element.accept(this.visitorDisplay);
         if (isCacheable && !(element instanceof GPRootTreeNode)) {
             be.getItem().setChecked(!element.isChecked());
-            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
                     element);
             be.getItem().setChecked(!element.isChecked());
@@ -94,7 +94,6 @@ public class GPCheckListener implements
         if (memento.getRefBaseElement() instanceof FolderTreeNode) {
             LayerRemote.Util.getInstance().saveCheckStatusFolderAndTreeModifications(
                     memento, new AsyncCallback<Boolean>() {
-
                 @Override
                 public void onFailure(Throwable caught) {
                     if (caught.getCause() instanceof GPSessionTimeout) {
@@ -111,7 +110,7 @@ public class GPCheckListener implements
 
                 @Override
                 public void onSuccess(Boolean result) {
-                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                     mementoSave.remove(memento);
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Save Check Folder Operation completed successfully.",

@@ -47,22 +47,18 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
-import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
@@ -72,9 +68,9 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
+import org.geosdi.geoplatform.gui.server.converter.DTOMementoConverter;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOLayerConverter;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
-import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
@@ -87,12 +83,9 @@ import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
-import org.geosdi.geoplatform.responce.collection.XmppAttributesMap;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.geosdi.geoplatform.services.GPTrackingService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.geotools.filter.text.cql2.CQLException;
-import org.geotools.filter.text.ecql.ECQL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,12 +108,19 @@ public class LayerService implements ILayerService {
     private GPPublisherService geoPlatformPublishClient;
     //
     @Autowired
-    private DTOLayerConverter dtoConverter;
+    private DTOLayerConverter dtoLayerConverter;
+    @Autowired
+    private DTOMementoConverter dtoMementoConverter;
     //
     @Autowired
     private SessionUtility sessionUtility;
+    //
+    private GeoServerRESTReader sharedRestReader;
+
     @Autowired
-    private GeoServerRESTReader geoserverRestReader;
+    public void setRestReader(@Qualifier(value = "sharedRestReader") GeoServerRESTReader sharedRestReader) {
+        this.sharedRestReader = sharedRestReader;
+    }
 
     /**
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
@@ -173,7 +173,7 @@ public class LayerService implements ILayerService {
         } catch (ResourceNotFoundFault rnf) {
             logger.error("Returning no elements: " + rnf);
         }
-        return this.dtoConverter.convertToGPClientProject(projectDTO);
+        return this.dtoLayerConverter.convertToGPClientProject(projectDTO);
     }
 
     @Override
@@ -198,7 +198,7 @@ public class LayerService implements ILayerService {
         } catch (ResourceNotFoundFault rnf) {
             logger.debug("Returning no elements: " + rnf);
         }
-        return this.dtoConverter.convertOnlyFolders(folderList);
+        return this.dtoLayerConverter.convertOnlyFolders(folderList);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class LayerService implements ILayerService {
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(folderID);
         ArrayList<IGPFolderElements> elementsToReturn = Lists.newArrayListWithCapacity(0);
         try {
-            elementsToReturn = this.dtoConverter.convertFolderElements(folderElements);
+            elementsToReturn = this.dtoLayerConverter.convertFolderElements(folderElements);
         } catch (Exception e) {
             logger.debug("Returning no elements: " + e);
         }
@@ -324,9 +324,9 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        GPFolder gpFolder = this.dtoConverter.convertMementoFolder(memento.getAddedFolder());
+        GPFolder gpFolder = this.dtoLayerConverter.convertMementoFolder(memento.getAddedFolder());
 
-        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         Long idSavedFolder = null;
         try {
@@ -347,36 +347,6 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento,
-            HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        try {
-            this.sessionUtility.getLoggedAccount(httpServletRequest);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-        }
-        List<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
-        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
-                memento.getWsDescendantMap());
-
-        ArrayList<Long> idSavedLayers = null;
-        try {
-            Long projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
-            Long parentFolderId = layersList.get(0).getFolder().getId();
-            idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
-                    projectId, parentFolderId, layersList, map);
-        } catch (ResourceNotFoundFault ex) {
-            this.logger.error("Failed to save layers on LayerService: " + ex);
-            throw new GeoPlatformException(ex);
-        } catch (IllegalParameterFault ex) {
-            this.logger.error("Failed to save layers on LayerService: " + ex);
-            throw new GeoPlatformException(ex);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-        }
-        return idSavedLayers;
-    }
-
-    @Override
     public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -384,7 +354,7 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
@@ -405,7 +375,7 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
@@ -421,7 +391,7 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveDragAndDropLayerAndTreeModifications(
             MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
@@ -447,7 +417,7 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(
             MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPWebServiceMapData map = this.dtoConverter.convertDescendantMap(
+        GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
@@ -517,7 +487,7 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        RasterPropertiesDTO dto = this.dtoConverter.convertMementoProperties(memento);
+        RasterPropertiesDTO dto = this.dtoMementoConverter.convertMementoProperties(memento);
         try {
             result = geoPlatformServiceClient.saveLayerProperties(dto);
         } catch (ResourceNotFoundFault ex) {
@@ -528,27 +498,6 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(ex);
         }
         return result;
-    }
-
-    @Override
-    public boolean saveFolderProperties(MementoFolderOriginalProperties memento,
-            HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        try {
-            this.sessionUtility.getLoggedAccount(httpServletRequest);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-        }
-        try {
-            geoPlatformServiceClient.saveFolderProperties(memento.getIdBaseElement(),
-                    memento.getName(), memento.isChecked(), memento.isExpanded());
-        } catch (ResourceNotFoundFault ex) {
-            this.logger.error("Failed to save folder on LayerService: " + ex);
-            throw new GeoPlatformException(ex);
-        } catch (IllegalParameterFault ex) {
-            this.logger.error("Failed to save folder on LayerService: " + ex);
-            throw new GeoPlatformException(ex);
-        }
-        return true;
     }
 
     @Override
@@ -640,7 +589,7 @@ public class LayerService implements ILayerService {
             ArrayList<GPClientProject> clientProjects = new ArrayList<GPClientProject>();
 
             for (ProjectDTO projectDTO : projectsDTO) {
-                GPClientProject clientProject = this.dtoConverter.convertToGPCLientProject(projectDTO, imageURL);
+                GPClientProject clientProject = this.dtoLayerConverter.convertToGPCLientProject(projectDTO, imageURL);
                 clientProjects.add(clientProject);
             }
 
@@ -677,7 +626,7 @@ public class LayerService implements ILayerService {
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
             projectId = this.geoPlatformServiceClient.saveProject(account.getNaturalID(),
-                    this.dtoConverter.convertToGProject(project), project.isDefaultProject());
+                    this.dtoLayerConverter.convertToGProject(project), project.isDefaultProject());
 
             this.sessionUtility.storeLoggedAccountAndDefaultProject(account,
                     projectId, httpServletRequest);
@@ -702,7 +651,7 @@ public class LayerService implements ILayerService {
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
-            AccountProjectPropertiesDTO dto = this.dtoConverter.convertToAccountProjectPropertiesDTO(account.getId(),
+            AccountProjectPropertiesDTO dto = this.dtoLayerConverter.convertToAccountProjectPropertiesDTO(account.getId(),
                     project);
             if (this.geoPlatformServiceClient.saveAccountProjectProperties(dto)) {
                 this.sessionUtility.storeLoggedAccountAndDefaultProject(account,
@@ -760,7 +709,7 @@ public class LayerService implements ILayerService {
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
             List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccounts(account.getOrganization().getName());
-            simpleUserList = Lists.newArrayList(this.dtoConverter.convertToGPSimpleUser(accounts));
+            simpleUserList = Lists.newArrayList(this.dtoLayerConverter.convertToGPSimpleUser(accounts));
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         } catch (ResourceNotFoundFault rnf) {
@@ -776,7 +725,7 @@ public class LayerService implements ILayerService {
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
             List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccountsToShareByProjectID(projectId);
-            simpleUserList = Lists.newArrayList(this.dtoConverter.convertToGPSimpleUser(accounts));
+            simpleUserList = Lists.newArrayList(this.dtoLayerConverter.convertToGPSimpleUser(accounts));
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         } catch (ResourceNotFoundFault rnf) {
@@ -792,7 +741,7 @@ public class LayerService implements ILayerService {
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
             List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccountsByProjectID(idSharedProject);
-            simpleUserList = Lists.newArrayList(this.dtoConverter.convertToGPSimpleUser(accounts));
+            simpleUserList = Lists.newArrayList(this.dtoLayerConverter.convertToGPSimpleUser(accounts));
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         } catch (ResourceNotFoundFault rnf) {
@@ -849,48 +798,19 @@ public class LayerService implements ILayerService {
             logger.error("An Error Occured : " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
-        return this.dtoConverter.convertToGPClientProject(projectDTO);
-    }
-
-    @Override
-    public void sendSharedProjectNotification(Long projectId, XMPPSubjectEnum subject,
-            String text, Map<String, String> attributesMap,
-            HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        try {
-            this.sessionUtility.getLoggedAccount(httpServletRequest);
-            logger.debug("Request to send shared project message for projectID: "
-                    + projectId + " - with subject: " + subject);
-            this.geoPlatformTrackingClient.sendSharedProjectNotification(projectId,
-                    subject, text, new XmppAttributesMap(attributesMap));
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-        } catch (ResourceNotFoundFault rnff) {
-            logger.error("An Error Occured on sendSharedProjectNotification: " + rnff);
-            throw new GeoPlatformException(rnff);
-        }
+        return this.dtoLayerConverter.convertToGPClientProject(projectDTO);
     }
 
     @Override
     public String getLayerDimension(String layerName, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
-            return this.geoserverRestReader.getDimensions(layerName);
+            return this.sharedRestReader.getDimensions(layerName);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         } catch (MalformedURLException ex) {
             throw new GeoPlatformException(ex);
         }
-    }
-
-    @Override
-    public String checkCQLExpression(String CQLExpression, HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        String result = "OK";
-        try {
-            ECQL.toFilterList(CQLExpression);
-        } catch (CQLException cqEx) {
-            result = "Error parsing the expression: " + cqEx;
-        }
-        return result;
     }
 
     @Override

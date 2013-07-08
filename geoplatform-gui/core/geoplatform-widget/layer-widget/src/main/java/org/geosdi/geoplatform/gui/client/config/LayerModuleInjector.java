@@ -39,7 +39,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
-import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.widget.LayerManagementWidget;
 import org.geosdi.geoplatform.gui.client.widget.LayerTreePanel;
 
@@ -66,9 +65,7 @@ public interface LayerModuleInjector extends Ginjector {
 
     public LoadMenuProjects getLoadMenuProject();
 
-    public IMementoSave getMementoSave();
-
     public LayerManagementWidget getLayerManagementWidget();
-    
+
     public LayerTreePanel getLayerTreePanel();
 }

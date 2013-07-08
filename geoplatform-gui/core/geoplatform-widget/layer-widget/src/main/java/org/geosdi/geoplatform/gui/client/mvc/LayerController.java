@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.mvc;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 
 /**

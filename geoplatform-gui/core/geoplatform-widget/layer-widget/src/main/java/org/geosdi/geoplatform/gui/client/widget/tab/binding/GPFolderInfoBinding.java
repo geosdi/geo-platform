@@ -43,7 +43,7 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.KeyCodes;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
@@ -112,7 +112,7 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
         @Override
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((FolderTreeNode) model);
             ((FolderTreeNode) model).setLabel(val != null ? (String) val : "");
             mementoSave.putOriginalPropertiesInCache(memento);

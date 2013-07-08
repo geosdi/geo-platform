@@ -50,8 +50,6 @@ import org.geosdi.geoplatform.gui.client.action.menu.ShareProjectMenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFolderRenameAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
-import org.geosdi.geoplatform.gui.client.action.menu.cqlfilter.AddModifyCQLFilterAction;
-import org.geosdi.geoplatform.gui.client.action.menu.cqlfilter.RemoveCQLFilterAction;
 import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToCSV;
 import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToGML2;
 import org.geosdi.geoplatform.gui.client.action.menu.export.ExportoToGML3_1;
@@ -257,25 +255,25 @@ public class TreeMenuActionFactory {
 
         });
 
-        registar.put("ADD_MODIFY_CQL_FILTER", new TreeMenuActionCreator() {
-
-            @Override
-            public MenuAction createAction(TreePanel treePanel) {
-                return new AddModifyCQLFilterAction(
-                        (GPTreePanel<GPBeanTreeModel>) treePanel);
-            }
-
-        });
-
-        registar.put("REMOVE_CQL_FILTER", new TreeMenuActionCreator() {
-
-            @Override
-            public MenuAction createAction(TreePanel treePanel) {
-                return new RemoveCQLFilterAction(
-                        (GPTreePanel<GPBeanTreeModel>) treePanel);
-            }
-
-        });
+//        registar.put("ADD_MODIFY_CQL_FILTER", new TreeMenuActionCreator() {
+//
+//            @Override
+//            public MenuAction createAction(TreePanel treePanel) {
+//                return new AddModifyCQLFilterAction(
+//                        (GPTreePanel<GPBeanTreeModel>) treePanel);
+//            }
+//
+//        });
+//
+//        registar.put("REMOVE_CQL_FILTER", new TreeMenuActionCreator() {
+//
+//            @Override
+//            public MenuAction createAction(TreePanel treePanel) {
+//                return new RemoveCQLFilterAction(
+//                        (GPTreePanel<GPBeanTreeModel>) treePanel);
+//            }
+//
+//        });
 
         registar.put("ADD_MODIFY_TIME_FILTER", new TreeMenuActionCreator() {
 

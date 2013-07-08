@@ -1,13 +1,12 @@
 /**
- * ------------------------------------------------------------------
- * -- Copyright <Creation_date>-<Last modification date> SELEX Sistemi
- * -- Integrati S.p.A. all rights reserved.
- * -- This software is the property of SELEX Sistemi Integrati S.p.A.
- * -- and can not be reproduced, used to prepare Derivative Works of,
- * -- publicly displayed, publicly performed, sublicensed, and it
- * -- cannot be distributed as the Work itself and such Derivative
- * -- Works in Source or Object form except under a license agreement
- * -- granted by SELEX Sistemi Integrati S.p.A.
+ * ------------------------------------------------------------------ --
+ * Copyright <Creation_date>-<Last modification date> SELEX Sistemi -- Integrati
+ * S.p.A. all rights reserved. -- This software is the property of SELEX Sistemi
+ * Integrati S.p.A. -- and can not be reproduced, used to prepare Derivative
+ * Works of, -- publicly displayed, publicly performed, sublicensed, and it --
+ * cannot be distributed as the Work itself and such Derivative -- Works in
+ * Source or Object form except under a license agreement -- granted by SELEX
+ * Sistemi Integrati S.p.A.
  * ------------------------------------------------------------------
  *
  * @file GeoPortalAOE.java
@@ -27,6 +26,8 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  */
 public class PointRepresentation extends GeoPlatformBeanModel {
 
+    private static final long serialVersionUID = 4796399385877182227L;
+
     public enum PointRepresentationKeyValue {
 
         EPSG_CODE, X_COORDINATE, Y_COORDINATE;
@@ -41,7 +42,8 @@ public class PointRepresentation extends GeoPlatformBeanModel {
     }
 
     public double getXCoordinate() {
-        return (Double)super.get(PointRepresentationKeyValue.X_COORDINATE.toString());
+        return (Double) super.get(
+                PointRepresentationKeyValue.X_COORDINATE.toString());
     }
 
     public void setXCoordinate(double x) {
@@ -49,10 +51,12 @@ public class PointRepresentation extends GeoPlatformBeanModel {
     }
 
     public double getYCoordinate() {
-        return (Double)super.get(PointRepresentationKeyValue.Y_COORDINATE.toString());
+        return (Double) super.get(
+                PointRepresentationKeyValue.Y_COORDINATE.toString());
     }
 
     public void setYCoordinate(double y) {
         super.set(PointRepresentationKeyValue.Y_COORDINATE.toString(), y);
     }
+
 }

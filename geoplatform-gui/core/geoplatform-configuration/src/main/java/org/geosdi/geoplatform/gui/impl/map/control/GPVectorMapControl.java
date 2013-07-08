@@ -39,15 +39,17 @@ import org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapContro
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPVectorMapControl implements GeoPlatformMapControl {
 
-	protected Vector vector;
+    protected Vector vector;
 
-	public GPVectorMapControl(Vector vector) {
-		this.vector = vector;
-		this.createControl();
-	}
+    public GPVectorMapControl(Vector vector) {
+        this.vector = vector;
+        this.createControl();
+    }
+
 }

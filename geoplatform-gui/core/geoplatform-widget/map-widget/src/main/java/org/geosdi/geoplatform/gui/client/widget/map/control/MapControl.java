@@ -39,22 +39,23 @@ import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class MapControl extends GPVectorMapControl {
 
-	protected boolean enabled;
+    protected boolean enabled;
 
-	public MapControl(Vector vector) {
-		super(vector);
-	}
+    public MapControl(Vector vector) {
+        super(vector);
+    }
 
-	/**
-	 * @return the enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
 
 }

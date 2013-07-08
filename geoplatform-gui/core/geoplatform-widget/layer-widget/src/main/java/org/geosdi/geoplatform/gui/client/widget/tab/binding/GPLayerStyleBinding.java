@@ -43,7 +43,7 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
@@ -141,7 +141,7 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 GPStyleStringBeanModel styleString = (GPStyleStringBeanModel) val;
                 RasterTreeNode raster = (RasterTreeNode) model;
                 if (!styleString.equals(raster.getStyles().get(0))) {
-                    IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+                    IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                     AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(raster);
                     ArrayList<GPStyleStringBeanModel> rasterList = raster.getStyles();
                     rasterList.remove(styleString);

@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.menu.time;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
@@ -75,7 +75,7 @@ public class RemoveTimeFilterAction extends MenuBaseAction {
                     "The Time Filter can't be applied to a folder");
         }
         GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
                 layerSelected);
         layerSelected.setTimeFilter("");
@@ -96,5 +96,4 @@ public class RemoveTimeFilterAction extends MenuBaseAction {
         GPHandlerManager.fireEvent(timeFilterLayerMapEvent);
         treePanel.refresh(layerSelected);
     }
-
 }

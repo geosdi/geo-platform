@@ -39,7 +39,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.AbstractVectorTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
+public class VectorTreeNode extends AbstractVectorTreeModel implements GPVectorBean {
 
     private static final long serialVersionUID = -2445765797861311204L;
     //
@@ -156,5 +156,4 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
                 + "featureNameSpace = " + featureNameSpace
                 + ", geometryName = " + geometryName + '}';
     }
-
 }

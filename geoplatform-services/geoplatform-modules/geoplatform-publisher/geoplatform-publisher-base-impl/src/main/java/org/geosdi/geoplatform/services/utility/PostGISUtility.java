@@ -53,7 +53,7 @@ import org.springframework.stereotype.Service;
 @Service("postGISUtility")
 public class PostGISUtility {
 
-    @Resource(name = "restStoreManager")
+    @Resource(name = "sharedRestStoreManager")
     private GeoServerRESTStoreManager restStoreManager;
     private @Value("configurator{geoserver_url}")
     String geoserverUrl;

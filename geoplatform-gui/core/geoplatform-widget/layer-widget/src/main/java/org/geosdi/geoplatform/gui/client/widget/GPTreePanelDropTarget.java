@@ -48,7 +48,7 @@ import com.extjs.gxt.ui.client.event.DNDEvent;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.TreeNode;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 
 public class GPTreePanelDropTarget extends TreePanelDropTarget {
 

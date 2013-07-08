@@ -42,18 +42,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
-import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.time.LayerTimeFilterWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
@@ -70,12 +62,10 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
-import org.geosdi.geoplatform.responce.RasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
-import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,7 +82,7 @@ import org.springframework.stereotype.Component;
 public class DTOLayerConverter {
 
     @Autowired
-    private GeoServerRESTReader geoserverRestReader;
+    private GeoServerRESTReader sharedRestReader;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public ArrayList<GPFolderClientInfo> convertOnlyFolders(Collection<FolderDTO> folders) {
@@ -137,24 +127,6 @@ public class DTOLayerConverter {
         return folderElement;
     }
 
-    public RasterPropertiesDTO convertMementoProperties(MementoLayerOriginalProperties memento) {
-        RasterPropertiesDTO dto = new RasterPropertiesDTO();
-        dto.setAlias(memento.getName());
-        dto.setChecked(memento.isChecked());
-        dto.setId(memento.getIdBaseElement());
-        dto.setOpacity(memento.getOpacity());
-        dto.setCqlFilter(memento.getCqlFilter());
-        dto.setTimeFilter(memento.getTimeFilter());
-        List<String> styleList = Lists.newArrayList();
-        if (memento.getStyleList() != null) {
-            for (GPStyleStringBeanModel beanModel : memento.getStyleList()) {
-                styleList.add(beanModel.getStyleString());
-            }
-        }
-        dto.setStyleList(styleList);
-        return dto;
-    }
-
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
@@ -193,7 +165,7 @@ public class DTOLayerConverter {
         if (layerDTO.getTimeFilter() != null) {
             layer.setTimeFilter(layerDTO.getTimeFilter());
             try {
-                String dimension = this.geoserverRestReader.getDimensions(layerDTO.getTitle());
+                String dimension = this.sharedRestReader.getDimensions(layerDTO.getTitle());
                 if (!dimension.contains("<h2>")) {
                     List<String> dimensionList = Lists.newArrayList(dimension.split(","));
 
@@ -286,37 +258,6 @@ public class DTOLayerConverter {
         return gpFolder;
     }
 
-    public GPWebServiceMapData convertDescendantMap(Map descendantMap) {
-        GPWebServiceMapData wsMap = new GPWebServiceMapData();
-        wsMap.setDescendantsMap(descendantMap);
-        System.out.println("Size descendants map: " + descendantMap.size());
-        return wsMap;
-    }
-
-    public List<GPLayer> convertMementoLayers(List<AbstractMementoLayer> addedLayers) {
-        List<GPLayer> layersList = Lists.newArrayList();
-        GPFolder folder = new GPFolder();
-        for (AbstractMementoLayer memento : addedLayers) {
-            GPLayer layer = null;
-            if (memento instanceof MementoRaster) {
-//                MementoRaster mementoRaster = (MementoRaster) memento;
-                layer = new GPRasterLayer();
-                layer.setLayerType(GPLayerType.WMS);
-                ((GPRasterLayer) layer).setStyles(((MementoRaster) memento).getStyles());
-                // layer.setLayerInfo();???
-            } else if (memento instanceof MementoVector) {
-//                MementoVector mementoVector = (MementoVector) memento;
-                layer = new GPVectorLayer();
-                // layer.setGeometry()???
-            }
-            this.convertToLayerElementFromMementoLayer(layer, memento);
-            folder.setId(memento.getIdFolderParent());
-            layer.setFolder(folder);
-            layersList.add(layer);
-        }
-        return layersList;
-    }
-
     public GPProject convertToGProject(GPClientProject clientProject) {
         GPProject project = new GPProject();
         project.setName(clientProject.getName());
@@ -334,21 +275,6 @@ public class DTOLayerConverter {
         dto.setDefaultProject(project.isDefaultProject());
         dto.setShared(project.isShared());
         return dto;
-    }
-
-    private void convertToLayerElementFromMementoLayer(GPLayer layer, AbstractMementoLayer memento) {
-        layer.setAbstractText(memento.getAbstractText());
-        layer.setBbox(new GPBBox(memento.getLowerLeftX(), memento.getLowerLeftY(),
-                memento.getUpperRightX(), memento.getUpperRightY()));
-        layer.setSrs(memento.getSrs());
-        layer.setUrlServer(memento.getDataSource());
-        layer.setId(memento.getIdBaseElement());
-        layer.setName(memento.getLayerName());
-        layer.setTitle(memento.getTitle());
-        layer.setPosition(memento.getzIndex());
-//        layer.setChecked(memento.isChecked());
-//        layer.setAlias(memento.getAlias());
-//        layer.setShared(mementoLayer.isShared());
     }
 
     public GPClientProject convertToGPClientProject(ProjectDTO projectDTO) {

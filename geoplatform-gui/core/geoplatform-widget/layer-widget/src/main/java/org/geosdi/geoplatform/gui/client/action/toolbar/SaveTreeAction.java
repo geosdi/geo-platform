@@ -42,8 +42,8 @@ import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.SaveTreeToolbarPlugin;
@@ -79,7 +79,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
         Boolean permission = GPAccountLogged.getInstance().
                 hasComponentPermission(savePlugin.getId());
         if (permission) { // Observ only if there are the pemission to true
-            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             mementoSave.getObservable().addObserver(this);
         }
     }
@@ -101,7 +101,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
     }
 
     public void peek() {
-        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         if (mementoSave.peek() != null) {
             IMemento<ISave> memento = mementoSave.peek();
             memento.getAction().executeSave(memento);

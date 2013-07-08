@@ -1270,19 +1270,19 @@
             <dependency>
                 <groupId>name.pehl</groupId>
                 <artifactId>piriti-user</artifactId>
-                <version>0.8</version>
+                <version>0.10</version>
             </dependency>
             
             <dependency>
                 <groupId>name.pehl</groupId>
                 <artifactId>piriti-dev</artifactId>
-                <version>0.8</version>
+                <version>0.10</version>
             </dependency>
             
             <dependency>
                 <groupId>name.pehl</groupId>
                 <artifactId>totoe</artifactId>
-                <version>0.4</version>
+                <version>0.6</version>
             </dependency>
             <dependency>
                 <groupId>javax.inject</groupId>

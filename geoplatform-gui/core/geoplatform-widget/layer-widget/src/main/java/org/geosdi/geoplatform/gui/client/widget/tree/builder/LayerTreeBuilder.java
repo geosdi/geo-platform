@@ -43,7 +43,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
@@ -107,7 +107,6 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
 
             LayerRemote.Util.getInstance().loadDefaultProjectElements(
                     new AsyncCallback<GPClientProject>() {
-
                 @Override
                 public void onFailure(Throwable caught) {
                     if (caught.getCause() instanceof GPSessionTimeout) {
@@ -130,7 +129,6 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
                 public void onSuccess(GPClientProject result) {
                     onBuildSuccess(result);
                 }
-
             });
         }
     }
@@ -157,7 +155,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
     @Override
     public void rebuildTree() {
         this.initialized = Boolean.FALSE;
-        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         mementoSave.clear();
         GPHandlerManager.fireEvent(new ResetMapStoreEvent());
         this.root.removeAll();
@@ -214,5 +212,4 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             }
         }
     }
-
 }

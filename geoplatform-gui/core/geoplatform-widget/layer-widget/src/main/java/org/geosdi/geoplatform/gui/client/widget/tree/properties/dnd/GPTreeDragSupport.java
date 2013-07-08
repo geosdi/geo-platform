@@ -45,7 +45,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.listener.GPDNDListener;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.dnd.GinDragSource;

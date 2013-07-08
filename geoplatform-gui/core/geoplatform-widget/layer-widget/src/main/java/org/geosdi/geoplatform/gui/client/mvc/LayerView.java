@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
-import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.widget.LayerManagementWidget;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;

@@ -39,7 +39,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.model.state.LayerStateEnum;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.AbstractRasterTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.model.tree.state.IGPLayerTreeState;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
+public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterBean {
 
     private static final long serialVersionUID = 8265365333381641340L;
 
@@ -67,7 +67,6 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         public String toString() {
             return this.value;
         }
-
     }
     //
     private float opacity = 1.0f;
@@ -169,5 +168,4 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         return "RasterTreeNode {" + super.toString()
                 + ", opacity = " + opacity + "}";
     }
-
 }

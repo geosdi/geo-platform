@@ -58,7 +58,7 @@ import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
@@ -136,11 +136,11 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         this.save = new Button("Add", LayerResources.ICONS.addRasterLayer(),
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        execute();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                execute();
+            }
+        });
 
         save.setEnabled(false);
 
@@ -148,11 +148,11 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        clearComponents();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                clearComponents();
+            }
+        });
 
         this.formPanel.addButton(cancel);
 
@@ -232,7 +232,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
         mementoSaveLayer.setAddedLayers(MementoSaveBuilder.generateMementoLayerList(rasterList));
         mementoSaveLayer.setDescendantMap(this.addVisitor.getFolderDescendantMap());
-        IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+        IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
         mementoSave.add(mementoSaveLayer);
 
         clearComponents();

@@ -45,7 +45,7 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.KeyCodes;
-import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
+import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
@@ -163,7 +163,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         @Override
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            IMementoSave mementoSave = LayerModuleInjector.MainInjector.getInstance().getMementoSave();
+            IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
             AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((GPLayerTreeModel) model);
             ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
             mementoSave.putOriginalPropertiesInCache(memento);

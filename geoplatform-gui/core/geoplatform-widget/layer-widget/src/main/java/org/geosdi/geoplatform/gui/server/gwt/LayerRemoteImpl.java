@@ -39,14 +39,11 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
-import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -57,7 +54,6 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
-import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -131,14 +127,6 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(
-            MementoSaveAddedLayers memento)
-            throws GeoPlatformException {
-        return this.layerService.saveAddedLayersAndTreeModifications(memento,
-                super.getThreadLocalRequest());
-    }
-
-    @Override
     public boolean saveDeletedFolderAndTreeModifications(
             MementoSaveRemove memento)
             throws GeoPlatformException {
@@ -208,13 +196,6 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
-    public boolean saveFolderProperties(MementoFolderOriginalProperties memento)
-            throws GeoPlatformException {
-        return this.layerService.saveFolderProperties(memento,
-                super.getThreadLocalRequest());
-    }
-
-    @Override
     public PagingLoadResult<GPClientProject> searchProjects(
             PagingLoadConfig config,
             String searchText,
@@ -255,16 +236,6 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     }
 
     @Override
-    public void sendSharedProjectNotification(Long projectId,
-            XMPPSubjectEnum subject,
-            String text,
-            Map<String, String> attributesMap) throws GeoPlatformException {
-        this.layerService.sendSharedProjectNotification(projectId, subject, text,
-                attributesMap,
-                super.getThreadLocalRequest());
-    }
-
-    @Override
     public ArrayList<GPSimpleUser> getOrganizationUsers() throws GeoPlatformException {
         return this.layerService.getOrganizationUsers(
                 super.getThreadLocalRequest());
@@ -298,16 +269,27 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
                 super.getThreadLocalRequest());
     }
 
+    /**
+     * @deprecated Using CAS command
+     * @param layerName
+     * @return
+     * @throws GeoPlatformException
+     * @deprecated
+     */
+    @Deprecated
     @Override
     public String getLayerDimension(String layerName) throws GeoPlatformException {
         return this.layerService.getLayerDimension(layerName, super.getThreadLocalRequest());
     }
 
-    @Override
-    public String checkCQLExpression(String CQLExpression) throws GeoPlatformException {
-        return this.layerService.checkCQLExpression(CQLExpression, super.getThreadLocalRequest());
-    }
-
+    /**
+     * @deprecated Using CAS command
+     * @param layerName
+     * @return
+     * @throws GeoPlatformException
+     * @deprecated
+     */
+    @Deprecated
     @Override
     public List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException {
         return this.layerService.describeFeatureType(layerName);

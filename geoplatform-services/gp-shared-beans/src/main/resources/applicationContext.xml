@@ -19,21 +19,21 @@
 
     <context:annotation-config />
     
-    <bean id="restPublisher" class="it.geosolutions.geoserver.rest.GeoServerRESTPublisher">
+    <bean id="sharedRestPublisher" class="it.geosolutions.geoserver.rest.GeoServerRESTPublisher">
         <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
         <!-- the login and the password of the REST geoserver instance -->
         <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
         <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
     </bean>
 
-    <bean id="restReader" class="it.geosolutions.geoserver.rest.GeoServerRESTReader">
+    <bean id="sharedRestReader" class="it.geosolutions.geoserver.rest.GeoServerRESTReader">
         <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
         <!-- the login and the password of the REST geoserver instance -->
         <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
         <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
     </bean>
 
-    <bean id="restStoreManager" class="it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager">
+    <bean id="sharedRestStoreManager" class="it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager">
         <constructor-arg type="java.net.URL" value="configurator{geoserver_url}"/>
         <!-- the login and the password of the REST geoserver instance -->
         <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>

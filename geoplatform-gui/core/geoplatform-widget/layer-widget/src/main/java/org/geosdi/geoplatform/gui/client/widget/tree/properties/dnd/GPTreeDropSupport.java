@@ -42,7 +42,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.Store;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.listener.GPDNDListener;
 import org.geosdi.geoplatform.gui.client.widget.GPTreePanelDropTarget;

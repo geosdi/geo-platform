@@ -295,7 +295,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     @Override
     public String getLabel() {
         return ((getAlias() != null) && (!getAlias().equals("")))
-               ? getAlias() : super.getLabel();
+                ? getAlias() : super.getLabel();
     }
 
     public void setState(IGPLayerTreeState state) {

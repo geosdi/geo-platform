@@ -40,14 +40,11 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
-import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
@@ -55,7 +52,6 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElemen
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
-import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -88,9 +84,6 @@ public interface LayerRemoteAsync {
     void saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento,
             AsyncCallback<Long> callback);
 
-    void saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento,
-            AsyncCallback<ArrayList<Long>> callback);
-
     void saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
             AsyncCallback<Boolean> callback);
 
@@ -110,9 +103,6 @@ public interface LayerRemoteAsync {
             AsyncCallback<Boolean> callback);
 
     void saveLayerProperties(MementoLayerOriginalProperties memento,
-            AsyncCallback<Boolean> callback);
-
-    void saveFolderProperties(MementoFolderOriginalProperties memento,
             AsyncCallback<Boolean> callback);
 
     void saveFolderForUser(String folderName,
@@ -164,17 +154,8 @@ public interface LayerRemoteAsync {
             int secondToRefresh,
             AsyncCallback<?> callback) throws GeoPlatformException;
 
-    void sendSharedProjectNotification(Long projectId,
-            XMPPSubjectEnum subject,
-            String text,
-            Map<String, String> attributesMap,
-            AsyncCallback<?> callback) throws GeoPlatformException;
-
     void getLayerDimension(String layerName,
             AsyncCallback<String> callback) throws GeoPlatformException;
-
-    void checkCQLExpression(String CQLExpression, AsyncCallback<String> callback)
-            throws GeoPlatformException;
 
     void describeFeatureType(String layerName, AsyncCallback<List<GPLayerAttributes>> callback);
 }

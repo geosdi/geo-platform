@@ -40,7 +40,7 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

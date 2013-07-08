@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.wfst.basic;
 
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -64,7 +65,8 @@ public class DescribeFeatureTypeCommand implements
 
     @Override
     public DescribeFeatureTypeResponse execute(
-            DescribeFeatureTypeRequest request) {
+            DescribeFeatureTypeRequest request,
+            HttpServletRequest httpServletRequest) {
 
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());

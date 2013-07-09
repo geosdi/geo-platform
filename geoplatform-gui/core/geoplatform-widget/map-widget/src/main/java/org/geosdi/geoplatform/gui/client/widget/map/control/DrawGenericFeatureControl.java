@@ -71,14 +71,16 @@ public abstract class DrawGenericFeatureControl extends MapControl {
      *
      * @return FeatureAddedListener
      */
-    public FeatureAddedListener createFeatureAddedListener() {
+    protected FeatureAddedListener createFeatureAddedListener() {
         return new FeatureAddedListener() {
+
             @Override
             public void onFeatureAdded(VectorFeature vf) {
 
                 Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
 
             }
+
         };
     }
 
@@ -97,4 +99,5 @@ public abstract class DrawGenericFeatureControl extends MapControl {
     public DrawFeature getControl() {
         return this.control;
     }
+
 }

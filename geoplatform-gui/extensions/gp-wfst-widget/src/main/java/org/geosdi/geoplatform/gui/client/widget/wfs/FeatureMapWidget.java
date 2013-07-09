@@ -143,6 +143,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
 
         this.controlFeature = this.featureControlBuilder.buildControl(
                 new GetFeatureModel() {
+
             @Override
             public String getFeatureNameSpace() {
                 return layer instanceof GPVectorBean ? ((GPVectorBean) layer).
@@ -174,14 +175,17 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
             public WMS getWMSLayer() {
                 return (WMS) wms;
             }
+
         });
 
         Timer t = new Timer() {
+
             @Override
             public void run() {
                 loadLayerOnMap();
                 notifyStatus();
             }
+
         };
 
         t.schedule(1000);
@@ -254,9 +258,5 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
                 new FeatureStatusBarEvent("WFS Layer loaded",
                 FeatureStatusBarType.STATUS_OK));
     }
-//    @Override
-//    protected void onAttach() {
-//        super.onAttach();
-//        this.updateSize();
-//    }
+
 }

@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.mvc.LayerController;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
-import org.geosdi.geoplatform.gui.client.plugin.PrintLayersTreeToolbarPlugin;
+//import org.geosdi.geoplatform.gui.client.plugin.PrintLayersTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddRasterLayerPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddVectorLayerPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.GetMapLayerPlugin;
@@ -126,9 +126,6 @@ public class LayerWidgetUI implements EntryPoint {
         TreeToolbarPluginManager.addToolbarPlugin(
                 new DeleteElementTreeToolbarPlugin());
         TreeToolbarPluginManager.addToolbarPlugin(new SaveTreeToolbarPlugin());
-        //No entrypoint in print module then I declared here the plugin
-        TreeToolbarPluginManager.addToolbarPlugin(
-                new PrintLayersTreeToolbarPlugin());
 //        TreeToolbarPluginManager.addToolBarPlugin(new GetMapTreeToolbarPlugin());
 
         AddLayerPluginManager.addWindowPlugin(new AddRasterLayerPlugin());

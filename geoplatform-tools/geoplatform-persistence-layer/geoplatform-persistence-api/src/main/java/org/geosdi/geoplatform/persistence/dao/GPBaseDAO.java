@@ -58,5 +58,8 @@ public interface GPBaseDAO<T extends Object, ID extends Serializable>
     List<T> findAll(int start,
             int end) throws GPDAOException;
 
+    List<T> findAll(int start,
+            int end, Criterion... criterion) throws GPDAOException;
+
     List<T> findByCriteria(Criterion... criterion) throws GPDAOException;
 }

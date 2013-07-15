@@ -151,11 +151,28 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     }
 
     @Override
+    public List<T> findAll(int start,
+            int end, Criterion... criterion) throws GPDAOException {
+        Criteria crit = getSession().createCriteria(persistentClass);
+        try {
+            for (Criterion criterionElement : criterion) {
+                crit.add(criterionElement);
+            }
+            crit.setFirstResult(start);
+            crit.setMaxResults(end);
+            return crit.list();
+        } catch (HibernateException ex) {
+            logger.error("HibernateException : " + ex);
+            throw new GPDAOException(ex);
+        }
+    }
+
+    @Override
     public int removeAll() {
         Query q = this.entityManager.createNativeQuery("delete from "
                 + persistentClass.getSimpleName(),
                 persistentClass);
-        
+
         return q.executeUpdate();
     }
 

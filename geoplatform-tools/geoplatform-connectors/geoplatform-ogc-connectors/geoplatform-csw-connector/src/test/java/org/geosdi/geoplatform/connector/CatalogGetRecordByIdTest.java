@@ -148,7 +148,7 @@ public class CatalogGetRecordByIdTest {
                 this.serverConnector.createGetRecordByIdRequest();
 
         request.setId("7e418dac-3764-4290-b8ac-47c9ac2a12af",
-                "09548fff-1146-44c6-bad9-17015f7f7ed8");
+                "r_friuli:m8726-cc-i1286");
 
         GetRecordByIdResponseType response = request.getResponse();
 

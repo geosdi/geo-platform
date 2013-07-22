@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.util;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
@@ -74,7 +74,7 @@ public class FeatureConverter {
 
     public static List<AttributeDetail> convertDTOs(List<AttributeDTO> attributesDTO) {
         assert (attributesDTO != null) : "Attributes DTO must be not null.";
-        List<AttributeDetail> attributes = new ArrayList<AttributeDetail>(attributesDTO.size());
+        List<AttributeDetail> attributes = Lists.<AttributeDetail>newArrayListWithCapacity(attributesDTO.size());
         for (AttributeDTO attributeDTO : attributesDTO) {
             attributes.add(FeatureConverter.convert(attributeDTO));
         }
@@ -83,7 +83,7 @@ public class FeatureConverter {
 
     public static List<AttributeDTO> convertDetails(List<AttributeDetail> attributes) {
         assert (attributes != null) : "Attributes must be not null.";
-        List<AttributeDTO> attributesDTO = new ArrayList<AttributeDTO>(attributes.size());
+        List<AttributeDTO> attributesDTO = Lists.<AttributeDTO>newArrayListWithCapacity(attributes.size());
         for (AttributeDetail attribute : attributes) {
             attributesDTO.add(FeatureConverter.convert(attribute));
         }

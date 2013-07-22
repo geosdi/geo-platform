@@ -178,7 +178,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     private ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = Lists.newArrayListWithCapacity(
+        List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(
                 attributes.size());
 
         for (AttributeDetail att : attributes) {
@@ -199,7 +199,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                 }
 
             };
-
+            
             ColumnConfig valueColumn = new ColumnConfig();
             String name = att.getName();
             valueColumn.setId(name);

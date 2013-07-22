@@ -49,6 +49,8 @@ public enum OperatorType {
     GREATER_OR_EQUAL(">="),
     LIKE("like");
     //
+//    BEFORE("before"),
+//    AFTER("after");
     private String symbol;
 
     private OperatorType(String symbol) {

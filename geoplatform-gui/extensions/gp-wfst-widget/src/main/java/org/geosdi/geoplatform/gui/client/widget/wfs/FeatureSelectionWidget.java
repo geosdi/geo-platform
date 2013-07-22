@@ -53,12 +53,15 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import com.google.common.collect.Lists;
+import com.google.gwt.core.client.GWT;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureResponse;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
@@ -76,6 +79,9 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.FeatureDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.responce.QueryDTO;
+import org.geosdi.geoplatform.gui.responce.QueryRestrictionDTO;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -103,6 +109,7 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     private Button queryButton;
     private GetAllFeatureRequest getAllFeatureRequest = new GetAllFeatureRequest();
     private FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
+    private QueryFeatureRequest queryFeatureRequest;
 
     @Inject
     public FeatureSelectionWidget(GPEventBus theBus) {
@@ -170,12 +177,10 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         matchResultSet.setExpanded(true);
 
         matchComboField = new SimpleComboBox<String>() {
-
             @Override
             protected void onSelect(SimpleComboValue<String> model, int index) {
                 super.onSelect(model, index);
             }
-
         };
         matchComboField.setToolTip(new ToolTipConfig("Match selection",
                 "Change feature selection"));
@@ -194,21 +199,17 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
 
         matchResultSet.addListener(Events.Collapse,
                 new Listener<FieldSetEvent>() {
-
             @Override
             public void handleEvent(FieldSetEvent be) {
                 selectionEnabled(false);
             }
-
         });
         matchResultSet.addListener(Events.Expand,
                 new Listener<FieldSetEvent>() {
-
             @Override
             public void handleEvent(FieldSetEvent be) {
                 selectionEnabled(true);
             }
-
         });
 
         formPanel.add(matchResultSet);
@@ -220,7 +221,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         this.addConditionButton = new Button("Add Condition",
                 BasicWidgetResources.ICONS.done(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 FeatureAttributeConditionField attributeCondition =
@@ -235,14 +235,12 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                 FeatureSelectionWidget.super.setVScrollPosition(
                         vScrollPosition + 30);
             }
-
         });
         formPanel.addButton(addConditionButton);
 
         this.resetConditionsButton = new Button("Reset Conditions",
                 BasicWidgetResources.ICONS.delete(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 for (FeatureAttributeConditionField attCondition : attributeConditions) {
@@ -250,7 +248,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                 }
                 attributeConditions.clear();
             }
-
         });
         formPanel.addButton(resetConditionsButton);
     }
@@ -260,7 +257,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
 
         this.selectAllButton = new Button("Select All",
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 queryEnabled(false);
@@ -271,7 +267,6 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
 
                 ClientCommandDispatcher.getInstance().execute(
                         new GPClientCommand<GetAllFeatureResponse>() {
-
                     private static final long serialVersionUID = 9028489214099941178L;
 
                     {
@@ -307,21 +302,50 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                                 errorMessage + " for " + schemaDTO.getTypeName() + " layer.",
                                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                     }
-
                 });
             }
-
         });
         super.addButton(selectAllButton);
 
+        queryFeatureRequest = GWT.create(QueryFeatureRequest.class);
+
         this.queryButton = new Button("Query",
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
-                // TODO
-            }
+                QueryDTO queryDTO = new QueryDTO();
+                queryDTO.setMatchOperator(FeatureSelectionWidget.this.matchComboField.getValue().getValue());
+                List<QueryRestrictionDTO> queryRestrictions = Lists.
+                        <QueryRestrictionDTO>newArrayListWithExpectedSize(attributeConditions.size());
+                for (FeatureAttributeConditionField conditionField : GeoPlatformUtils.safeList(attributeConditions)) {
+                    QueryRestrictionDTO queryRestriction = conditionField.getQueryRestriction();
+                    if (queryRestriction != null) {
+                        queryRestrictions.add(queryRestriction);
+                    }
+                }
+                queryFeatureRequest.setQuery(queryDTO);
 
+                ClientCommandDispatcher.getInstance().execute(
+                        new GPClientCommand<QueryFeatureResponse>() {
+                    private static final long serialVersionUID = 7052499099859652678L;
+
+                    {
+                        super.setCommandRequest(queryFeatureRequest);
+                    }
+
+                    @Override
+                    public void onCommandSuccess(QueryFeatureResponse response) {
+                        //TODO: Show response result
+                        System.out.println("On success");
+                    }
+
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        GeoPlatformMessage.errorMessage("Query Error",
+                                exception.getMessage());
+                    }
+                });
+            }
         });
         super.addButton(queryButton);
     }
@@ -348,5 +372,4 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
 
         ALL, ANY, NONE;
     }
-
 }

@@ -85,7 +85,7 @@ public class FeatureMapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
         wmsOption.setRatio(1);
 
         WMS layer = new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
-                            wmsParams, wmsOption);
+                wmsParams, wmsOption);
 
         layer.setOpacity(rasterBean.getOpacity());
 
@@ -128,12 +128,12 @@ public class FeatureMapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean>
         if (layerBean.getBbox() != null) {
             BBoxClientInfo bbox = layerBean.getBbox();
             bounds = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
-                                bbox.getUpperRightX(), bbox.getUpperRightY());
+                    bbox.getUpperRightX(), bbox.getUpperRightY());
             if (!layerBean.getCrs().equals(
                     super.mapWidget.getMap().getProjection())) {
 
                 bounds.transform(new Projection(layerBean.getCrs()),
-                                 new Projection(
+                        new Projection(
                         mapWidget.getMap().getProjection()));
             }
         }

@@ -35,7 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionCreator;
+import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.menu.edit.EditWFSAction;
+import org.geosdi.geoplatform.gui.impl.tree.menu.config.TreeMenuGinInjector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,6 +57,16 @@ public class WFSWidgetUI implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
+        TreeMenuActionRegistar registar = TreeMenuGinInjector.MainInjector.getInstance().getTreeMenuActionRegistar();
+
+        registar.put("EDIT_FEATURE", new TreeMenuActionCreator() {
+
+            @Override
+            public MenuAction createAction(TreePanel treePanel) {
+                return new EditWFSAction(treePanel);
+            }
+
+        });
     }
 
 }

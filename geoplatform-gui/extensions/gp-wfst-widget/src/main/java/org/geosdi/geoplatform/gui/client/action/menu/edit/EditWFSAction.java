@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.gui.client.action.menu.edit;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -51,10 +51,10 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class EditWFSAction extends MenuBaseAction {
 
-    private GPTreePanel<GPBeanTreeModel> treePanel;
+    private TreePanel<GPBeanTreeModel> treePanel;
     private LayerTypeHandlerManager layerTypeHandlerManager;
 
-    public EditWFSAction(GPTreePanel<GPBeanTreeModel> treePanel) {
+    public EditWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
         super("Edit WFS Mode", BasicWidgetResources.ICONS.vector());
         this.treePanel = treePanel;
         this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();

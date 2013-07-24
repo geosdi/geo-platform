@@ -66,23 +66,28 @@ public class GPEhCacheProvider implements GPHibernateCacheProvider {
             private static final long serialVersionUID = 3109256773218160485L;
 
             {
-                logger.info("Hibernate EHCache Properties : {}\n\n",
+                logger.info("################################Hibernate EHCache "
+                        + "Properties : {}\n\n",
                         gpEhCacheProperties);
 
                 if (gpEhCacheProperties.isHibUseSecondLevelCache()
-                        && gpEhCacheProperties.getHibCacheProviderClass() != null
-                        && gpEhCacheProperties.getHibCacheRegionFactoryClass() != null
-                        && gpEhCacheProperties.getEhcacheConfResourceName() != null) {
-                    this.put("hibernate.cache.provider_class",
-                            gpEhCacheProperties.getHibCacheProviderClass());
+                        && gpEhCacheProperties.getHibCacheRegionFactoryClass() != null) {
                     this.put("hibernate.cache.region.factory_class",
                             gpEhCacheProperties.getHibCacheRegionFactoryClass());
+
                     this.put("hibernate.cache.use_second_level_cache",
                             gpEhCacheProperties.isHibUseSecondLevelCache());
-                    this.put("net.sf.ehcache.configurationResourceName",
-                            gpEhCacheProperties.getEhcacheConfResourceName());
+
+                    if (gpEhCacheProperties.getEhcacheConfResourceName() != null) {
+                        this.put("net.sf.ehcache.configurationResourceName",
+                                gpEhCacheProperties.getEhcacheConfResourceName());
+                    }
+
                     this.put("hibernate.cache.use_query_cache",
                             gpEhCacheProperties.isHibUseQueryCache());
+
+                    this.put("hibernate.cache.use_structured_entries",
+                            gpEhCacheProperties.isUseStructuredEntries());
                 } else if (gpEhCacheProperties.isHibUseSecondLevelCache()) {
                     throw new IllegalArgumentException(
                             GPEhCacheProperties.class.getCanonicalName()

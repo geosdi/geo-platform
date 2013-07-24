@@ -46,23 +46,16 @@ import org.springframework.stereotype.Component;
 @Component(value = "gpEhCacheProperties")
 public class GPEhCacheProperties {
 
-    @Value("persistence{db_cacheProviderClass:@null}")
-    private String hibCacheProviderClass;
     @Value("persistence{db_cacheRegionFactoryClass}")
     private String hibCacheRegionFactoryClass;
     @Value("persistence{db_useSecondLevelCache:@null}")
     private Boolean hibUseSecondLevelCache;
     @Value("persistence{db_useQueryCache:@null}")
     private Boolean hibUseQueryCache;
-    @Value("persistence{db_ehcacheConfigurationResourceName}")
+    @Value("persistence{db_ehcacheConfigurationResourceName:@null}")
     private String ehcacheConfResourceName;
-
-    /**
-     * @return the hibCacheProviderClass
-     */
-    public String getHibCacheProviderClass() {
-        return hibCacheProviderClass;
-    }
+    @Value("persistence{db_use_structured_entries:@null}")
+    private Boolean useStructuredEntries;
 
     /**
      * @return the hibCacheRegionFactoryClass
@@ -92,14 +85,21 @@ public class GPEhCacheProperties {
         return ehcacheConfResourceName;
     }
 
+    /**
+     * @return the useStructuredEntries
+     */
+    public boolean isUseStructuredEntries() {
+        return (useStructuredEntries == null) ? false : useStructuredEntries;
+    }
+
     @Override
     public String toString() {
-        return "GPEhCacheProperties{ " + "hibCacheProviderClass = "
-                + hibCacheProviderClass + ", hibCacheRegionFactoryClass = "
+        return "GPEhCacheProperties{ " + "hibCacheRegionFactoryClass = "
                 + hibCacheRegionFactoryClass + ", hibUseSecondLevelCache = "
                 + hibUseSecondLevelCache + ", hibUseQueryCache = "
                 + hibUseQueryCache + ", ehcacheConfResourceName = "
-                + ehcacheConfResourceName + '}';
+                + ehcacheConfResourceName + ", useStructuredEntries = "
+                + useStructuredEntries + '}';
     }
 
 }

@@ -33,62 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.persistence.demo;
+package org.geosdi.geoplatform.persistence.search.demo.dao.jpa.search;
 
-import org.geosdi.geoplatform.persistence.demo.dao.jpa.search.ICarSeachDAO;
-import org.geosdi.geoplatform.persistence.demo.model.Car;
-import org.geosdi.geoplatform.persistence.loader.PersistenceLoaderConfigurer;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import java.util.List;
+import org.geosdi.geoplatform.persistence.configuration.dao.GPBaseSearchDAO;
+import org.geosdi.geoplatform.persistence.search.demo.model.CarSearch;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceLoaderConfigurer.class},
-                      loader = AnnotationConfigContextLoader.class)
-@ActiveProfiles(value = {"jpa"})
-public class PersistenceJpaSearchTest {
+public interface ICarSeachDAO
+        extends GPBaseSearchDAO<CarSearch> {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    private ICarSeachDAO jpaCarSearchDAO;
-
-    @After
-    public void tearDown() {
-        removeAll();
-    }
-
-    @Test
-    public void testSearchLucene() throws Exception {
-        insert();
-
-        Assert.assertEquals(100, jpaCarSearchDAO.findByModel("fi*").size());
-    }
-
-    private void insert() {
-        for (int i = 0; i < 100; i++) {
-            Car car = new Car();
-            car.setPlate("AR793" + i);
-            car.setModel("Fiat Model " + i);
-            jpaCarSearchDAO.persist(car);
-        }
-    }
-
-    private void removeAll() {
-        jpaCarSearchDAO.removeAll();
-        logger.info("REMOVED ALL CARS ##################################");
-    }
+    List<CarSearch> findByModel(String model) throws Exception;
+ 
 }

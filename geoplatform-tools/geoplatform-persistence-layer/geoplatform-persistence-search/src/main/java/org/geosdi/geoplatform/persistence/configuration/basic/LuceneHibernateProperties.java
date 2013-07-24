@@ -39,6 +39,7 @@ import java.util.Properties;
 import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PersistenceHibernateStrategy;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceSearchProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -47,6 +48,7 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "luceneHibProp")
+@Profile(value = "lucene")
 public class LuceneHibernateProperties
         implements PersistenceHibernateStrategy {
 
@@ -58,6 +60,8 @@ public class LuceneHibernateProperties
 
     @Override
     public Properties hibernateProperties() {
+        hibernateProperties.put("hibernate.search.CarIndex.sharding_strategy.nbr_of_shards",
+                5);
         hibernateProperties.put("hibernate.search.default.indexBase",
                 gpSearchProperties.getIndexBase());
 
@@ -75,4 +79,5 @@ public class LuceneHibernateProperties
         return "LuceneHibernateProperties { " + "gpSearchProperties = "
                 + gpSearchProperties + '}';
     }
+
 }

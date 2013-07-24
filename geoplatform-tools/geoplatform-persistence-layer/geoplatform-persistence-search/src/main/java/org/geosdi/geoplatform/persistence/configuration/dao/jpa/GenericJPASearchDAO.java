@@ -39,6 +39,7 @@ import com.google.common.base.Preconditions;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.geosdi.geoplatform.persistence.configuration.dao.GPBaseSearchDAO;
+import org.hibernate.Session;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.slf4j.Logger;
@@ -97,6 +98,10 @@ public abstract class GenericJPASearchDAO<T extends Object>
         return getSearchManager().createNativeQuery("delete from "
                 + persistentClass.getSimpleName(), persistentClass).
                 executeUpdate();
+    }
+
+    protected Session getSession() {
+        return (Session) this.entityManager.getDelegate();
     }
 
 }

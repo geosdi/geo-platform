@@ -33,48 +33,73 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.persistence.demo.dao.jpa.search;
+package org.geosdi.geoplatform.persistence.configuration.cache.properties;
 
-import java.util.List;
-import org.apache.lucene.search.Query;
-import org.geosdi.geoplatform.persistence.configuration.dao.jpa.GenericJPASearchDAO;
-import org.geosdi.geoplatform.persistence.demo.model.Car;
-import org.hibernate.search.SearchFactory;
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.FullTextQuery;
-import org.hibernate.search.query.dsl.QueryBuilder;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Repository(value = "jpaCarSearchDAO")
-@Profile(value = "jpa")
-public class JPACarSearchDAO extends GenericJPASearchDAO<Car>
-        implements ICarSeachDAO {
+@Component(value = "gpEhCacheProperties")
+public class GPEhCacheProperties {
 
-    public JPACarSearchDAO() {
-        super(Car.class);
+    @Value("persistence{db_cacheProviderClass:@null}")
+    private String hibCacheProviderClass;
+    @Value("persistence{db_cacheRegionFactoryClass}")
+    private String hibCacheRegionFactoryClass;
+    @Value("persistence{db_useSecondLevelCache:@null}")
+    private Boolean hibUseSecondLevelCache;
+    @Value("persistence{db_useQueryCache:@null}")
+    private Boolean hibUseQueryCache;
+    @Value("persistence{db_ehcacheConfigurationResourceName}")
+    private String ehcacheConfResourceName;
+
+    /**
+     * @return the hibCacheProviderClass
+     */
+    public String getHibCacheProviderClass() {
+        return hibCacheProviderClass;
+    }
+
+    /**
+     * @return the hibCacheRegionFactoryClass
+     */
+    public String getHibCacheRegionFactoryClass() {
+        return hibCacheRegionFactoryClass;
+    }
+
+    /**
+     * @return the hibUseSecondLevelCache
+     */
+    public boolean isHibUseSecondLevelCache() {
+        return (hibUseSecondLevelCache == null) ? false : hibUseSecondLevelCache;
+    }
+
+    /**
+     * @return the hibUseQueryCache
+     */
+    public boolean isHibUseQueryCache() {
+        return (hibUseQueryCache == null) ? false : hibUseQueryCache;
+    }
+
+    /**
+     * @return the ehcacheConfResourceName
+     */
+    public String getEhcacheConfResourceName() {
+        return ehcacheConfResourceName;
     }
 
     @Override
-    public List<Car> findByModel(String model) throws Exception {
-        FullTextEntityManager ftEntityManager = super.getSearchManager();
-
-        SearchFactory searchFactory = ftEntityManager.getSearchFactory();
-
-        QueryBuilder queryBuilder = searchFactory.buildQueryBuilder().forEntity(
-                persistentClass).get();
-
-        Query luceneQuery = queryBuilder.keyword().wildcard().onField("model").matching(
-                model).createQuery();
-
-        FullTextQuery query = ftEntityManager.createFullTextQuery(
-                luceneQuery);
-
-        return query.getResultList();
+    public String toString() {
+        return "GPEhCacheProperties{ " + "hibCacheProviderClass = "
+                + hibCacheProviderClass + ", hibCacheRegionFactoryClass = "
+                + hibCacheRegionFactoryClass + ", hibUseSecondLevelCache = "
+                + hibUseSecondLevelCache + ", hibUseQueryCache = "
+                + hibUseQueryCache + ", ehcacheConfResourceName = "
+                + ehcacheConfResourceName + '}';
     }
+
 }

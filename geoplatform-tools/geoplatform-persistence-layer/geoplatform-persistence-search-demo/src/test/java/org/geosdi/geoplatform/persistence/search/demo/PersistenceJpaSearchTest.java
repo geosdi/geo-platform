@@ -33,55 +33,63 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.persistence.configuration.properties;
+package org.geosdi.geoplatform.persistence.search.demo;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
+import org.geosdi.geoplatform.persistence.loader.PersistenceLoaderConfigurer;
+import org.geosdi.geoplatform.persistence.search.demo.dao.jpa.search.ICarSeachDAO;
+import org.geosdi.geoplatform.persistence.search.demo.model.CarSearch;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "gpSearchProperties")
-@Profile(value = "lucene")
-@ImportResource(value = {"classpath:searchConfigurer.xml"})
-public class GPPersistenceSearchProperties {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {PersistenceLoaderConfigurer.class},
+        loader = AnnotationConfigContextLoader.class)
+@ActiveProfiles(value = {"jpa", "lucene"})
+public class PersistenceJpaSearchTest {
 
-    @Value("search{hibernate_search_indexBase}")
-    private String indexBase;
-    @Value("search{hibernate_search_directory_provider}")
-    private String directoryProvider;
-    @Value("search{hibernate_search_lucene_version}")
-    private String luceneVersion;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private ICarSeachDAO jpaCarSearchDAO;
 
-    /**
-     * @return the indexBase
-     */
-    public String getIndexBase() {
-        return indexBase;
+    @After
+    public void tearDown() throws Exception {
+        removeAll();
     }
 
-    /**
-     * @return the directoryProvider
-     */
-    public String getDirectoryProvider() {
-        return directoryProvider;
+    @Test
+    public void testSearchLucene() throws Exception {
+        insert();
+
+        Assert.assertEquals(100, jpaCarSearchDAO.findByModel("fi*").size());
     }
 
-    /**
-     * @return the luceneVersion
-     */
-    public String getLuceneVersion() {
-        return luceneVersion;
+    private void insert() {
+        for (int i = 0; i < 100; i++) {
+            CarSearch car = new CarSearch();
+            car.setPlate("AR793" + i);
+            car.setModel("Fiat Model " + i);
+            jpaCarSearchDAO.persist(car);
+        }
     }
 
-    @Override
-    public String toString() {
-        return "GPPersistenceSearchProperties { " + "indexBase = "
-                + indexBase + ", directoryProvider = " + directoryProvider
-                + ", luceneVersion = " + luceneVersion + '}';
+    private void removeAll() throws Exception {
+        jpaCarSearchDAO.removeAll();
+        logger.info("REMOVED ALL CARS ##################################");
     }
+
 }

@@ -33,19 +33,48 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.persistence.demo.dao.jpa.search;
+package org.geosdi.geoplatform.persistence.search.demo.model.experimental;
 
-import java.util.List;
-import org.geosdi.geoplatform.persistence.configuration.dao.GPBaseSearchDAO;
-import org.geosdi.geoplatform.persistence.demo.model.Car;
+import org.geosdi.geoplatform.persistence.search.demo.model.CarSearch;
+import org.hibernate.search.indexes.interceptor.EntityIndexingInterceptor;
+import org.hibernate.search.indexes.interceptor.IndexingOverride;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface ICarSeachDAO
-        extends GPBaseSearchDAO<Car> {
+public class CarIndexInterceptor implements EntityIndexingInterceptor<CarSearch> {
 
-    List<Car> findByModel(String model) throws Exception;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Override
+    public IndexingOverride onAdd(CarSearch t) {
+        logger.info("EXECUTE onAdd ################################### "
+                + t);
+        return IndexingOverride.APPLY_DEFAULT;
+    }
+
+    @Override
+    public IndexingOverride onUpdate(CarSearch t) {
+        logger.info("EXECUTE onUpdate ################################### "
+                + t);
+        return IndexingOverride.UPDATE;
+    }
+
+    @Override
+    public IndexingOverride onDelete(CarSearch t) {
+        logger.info("EXECUTE onDelete ################################### "
+                + t);
+        return IndexingOverride.REMOVE;
+    }
+
+    @Override
+    public IndexingOverride onCollectionUpdate(CarSearch t) {
+        logger.info("EXECUTE onCollectionUpdate ######################### "
+                + t);
+        return IndexingOverride.APPLY_DEFAULT;
+    }
 }

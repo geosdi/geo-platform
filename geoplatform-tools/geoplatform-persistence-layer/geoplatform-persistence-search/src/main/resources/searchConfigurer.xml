@@ -11,7 +11,8 @@
             http://www.springframework.org/schema/aop 
             http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
             http://www.springframework.org/schema/util
-            http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+            http://www.springframework.org/schema/util/spring-util-3.2.xsd"
+       profile="lucene">
                 
     <bean id="searchConfigurer"
          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

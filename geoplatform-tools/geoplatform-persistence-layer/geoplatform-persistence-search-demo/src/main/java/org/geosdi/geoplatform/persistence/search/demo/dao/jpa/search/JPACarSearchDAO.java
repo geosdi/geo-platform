@@ -33,55 +33,49 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.persistence.configuration.properties;
+package org.geosdi.geoplatform.persistence.search.demo.dao.jpa.search;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.ImportResource;
+import java.util.List;
+import org.apache.lucene.search.Query;
+import org.geosdi.geoplatform.persistence.configuration.dao.jpa.GenericJPASearchDAO;
+import org.geosdi.geoplatform.persistence.search.demo.model.CarSearch;
+import org.hibernate.search.SearchFactory;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.FullTextQuery;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "gpSearchProperties")
-@Profile(value = "lucene")
-@ImportResource(value = {"classpath:searchConfigurer.xml"})
-public class GPPersistenceSearchProperties {
+@Repository(value = "jpaCarSearchDAO")
+@Profile(value = {"lucene"})
+public class JPACarSearchDAO extends GenericJPASearchDAO<CarSearch>
+        implements ICarSeachDAO {
 
-    @Value("search{hibernate_search_indexBase}")
-    private String indexBase;
-    @Value("search{hibernate_search_directory_provider}")
-    private String directoryProvider;
-    @Value("search{hibernate_search_lucene_version}")
-    private String luceneVersion;
-
-    /**
-     * @return the indexBase
-     */
-    public String getIndexBase() {
-        return indexBase;
-    }
-
-    /**
-     * @return the directoryProvider
-     */
-    public String getDirectoryProvider() {
-        return directoryProvider;
-    }
-
-    /**
-     * @return the luceneVersion
-     */
-    public String getLuceneVersion() {
-        return luceneVersion;
+    public JPACarSearchDAO() {
+        super(CarSearch.class);
     }
 
     @Override
-    public String toString() {
-        return "GPPersistenceSearchProperties { " + "indexBase = "
-                + indexBase + ", directoryProvider = " + directoryProvider
-                + ", luceneVersion = " + luceneVersion + '}';
+    public List<CarSearch> findByModel(String model) throws Exception {
+        FullTextEntityManager ftEntityManager = super.getSearchManager();
+
+        SearchFactory searchFactory = ftEntityManager.getSearchFactory();
+
+        QueryBuilder queryBuilder = searchFactory.buildQueryBuilder().forEntity(
+                persistentClass).get();
+
+        Query luceneQuery = queryBuilder.keyword().wildcard().onField("model").matching(
+                model).createQuery();
+
+        FullTextQuery query = ftEntityManager.createFullTextQuery(
+                luceneQuery);
+
+        return query.getResultList();
     }
+
 }

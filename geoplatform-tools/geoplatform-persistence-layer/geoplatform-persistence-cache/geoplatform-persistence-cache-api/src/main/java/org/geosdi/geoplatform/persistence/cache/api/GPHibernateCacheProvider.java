@@ -33,48 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.persistence.demo.model.experimental;
+package org.geosdi.geoplatform.persistence.cache.api;
 
-import org.geosdi.geoplatform.persistence.demo.model.Car;
-import org.hibernate.search.indexes.interceptor.EntityIndexingInterceptor;
-import org.hibernate.search.indexes.interceptor.IndexingOverride;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Map;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CarIndexInterceptor implements EntityIndexingInterceptor<Car> {
+public interface GPHibernateCacheProvider {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    /**
+     * <p>Returns Basic Properties for Specific Cache Provider.</p>
+     *
+     * @param <P>
+     * @return specific Cache Provider Properties
+     */
+    public <P extends Map> P getCacheProviderProperties();
 
-    @Override
-    public IndexingOverride onAdd(Car t) {
-        logger.info("EXECUTE onAdd ################################### "
-                + t);
-        return IndexingOverride.APPLY_DEFAULT;
-    }
-
-    @Override
-    public IndexingOverride onUpdate(Car t) {
-        logger.info("EXECUTE onUpdate ################################### "
-                + t);
-        return IndexingOverride.UPDATE;
-    }
-
-    @Override
-    public IndexingOverride onDelete(Car t) {
-        logger.info("EXECUTE onDelete ################################### "
-                + t);
-        return IndexingOverride.REMOVE;
-    }
-
-    @Override
-    public IndexingOverride onCollectionUpdate(Car t) {
-        logger.info("EXECUTE onCollectionUpdate ######################### "
-                + t);
-        return IndexingOverride.APPLY_DEFAULT;
-    }
 }

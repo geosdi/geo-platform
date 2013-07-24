@@ -21,6 +21,12 @@
             <version>${project.version}</version>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-persistence-cache-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
         <!-- =========================================================== -->
         <!-- ================ HIBERNATE C3P0 ANNOTATIONS =============== -->
         <!-- =========================================================== -->

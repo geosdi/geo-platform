@@ -32,6 +32,12 @@
             <artifactId>geoplatform-persistence-loader</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ehcache-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
        
         
         <!-- ============================================================ -->

@@ -7,7 +7,7 @@
         position: absolute;
         top: 70px;
         padding: 0 12px;
-        width: 30px;
+        width: 50px;
         height: 300px!important;
         overflow-x: auto;
         z-index: 1000!important;
@@ -30,7 +30,7 @@
             font-weight:bold;
             padding:4px 4px;
             text-decoration:none;
-            width: 2em;
+            width: 2.1em;
             margin:2px;
         }
         .wfs-gwt-Button:hover {

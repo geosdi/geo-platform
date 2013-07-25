@@ -43,8 +43,8 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -58,71 +58,69 @@ public class EditingToolBarDialog extends Composite {
     }
     private static final Binder binder = GWT.create(Binder.class);
     @UiField
-    Button info;
+    ToggleButton info;
     @UiField
-    Button edit;
+    ToggleButton edit;
     @UiField
-    Button reshape;
+    ToggleButton reshape;
     @UiField
-    Button rotate;
+    ToggleButton rotate;
     @UiField
-    Button drag;
+    ToggleButton drag;
     @UiField
-    Button resize;
+    ToggleButton resize;
 
     public EditingToolBarDialog() {
-        TextResource editingCss = ResourceEditingToolBar.INSTANCE.awesome();
-        StyleInjector.inject(editingCss.getText());
         
-        TextResource editingCssIE = ResourceEditingToolBar.INSTANCE.awesomeIE();
-        StyleInjector.inject(editingCssIE.getText());
+        TextResource wfstCss = ResourceEditingToolBar.INSTANCE.wfstCss();
+        StyleInjector.inject(wfstCss.getText());
         
         initWidget(binder.createAndBindUi(this));
 
-        // initialize icons
-        info.addStyleName("icon-info-sign icon-large");
+        // initialize icons 
+        info.setText("In");
         info.setTitle("Info");
-        edit.addStyleName("icon-check-empty icon-large");
+        edit.setText("Ed");
         edit.setTitle("Edit");
-        reshape.addStyleName("icon-external-link icon-large");
+        reshape.setText("Rs");
         reshape.setTitle("Reshape");
-        rotate.addStyleName("icon-undo icon-large");
+        rotate.setText("Ro");
         rotate.setTitle("Rotate");
-        drag.addStyleName("icon-hand-up icon-large");
+        drag.setText("D");
         drag.setTitle("Drag");
-        resize.addStyleName("icon-resize-horizontal icon-large");
+        resize.setText("Re");
         resize.setTitle("Resize");
 
     }
 
     @UiHandler("info")
     void handleInfoClick(ClickEvent e) {
-        Window.alert("Info");        
+        //Window.alert("Info");        
     }
     
     @UiHandler("edit")
     void handleEditClick(ClickEvent e) {
-        Window.alert("Edit");        
+        //Window.alert("Edit");        
     }
     
     @UiHandler("reshape")
     void handleReshapeClick(ClickEvent e) {
-        Window.alert("Reshape");        
+        //Window.alert("Reshape");        
     }
     
     @UiHandler("rotate")
     void handleRotateClick(ClickEvent e) {
-        Window.alert("Reshape");        
+        //Window.alert("Reshape");        
     }
     
     @UiHandler("drag")
     void handleDragClick(ClickEvent e) {
-        Window.alert("Drag");        
+        //Window.alert("Drag");        
     }
     
     @UiHandler("resize")
     void handleResizeClick(ClickEvent e) {
-        Window.alert("Resize");        
+        //Window.alert("Resize");        
     }
     
 }

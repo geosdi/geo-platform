@@ -1,0 +1,58 @@
+/* 
+    Document   : wfst
+    Created on : 25-lug-2013, 15.51.19
+    Author     : Francesco Izzi @ geSDI
+    Description: Override gwt styles.
+*/
+
+.gwt-ToggleButton {
+    background-color: rgba(121, 187, 255, .7);
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #84bbf3;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:normal;
+    padding:4px 4px;
+    text-align:center;
+    text-decoration:none;
+    width: 2.1em;
+    margin:2px;
+} 
+
+.gwt-ToggleButton-up {   
+    background-color: rgba(121, 187, 255, .7);
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #84bbf3;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:normal;
+    padding:4px 4px;
+    text-align:center;
+    text-decoration:none;
+    width: 2.1em;
+    margin:2px;
+} 
+.gwt-ToggleButton-down {
+    background-color: rgba(229, 56, 55, .8);
+} 
+.gwt-ToggleButton-up-hovering {
+    background-color:#378de5;
+} 
+.gwt-ToggleButton-down-hovering {
+    background-color:#378de5;
+} 
+.gwt-ToggleButton-up-disabled {
+    
+} 
+.gwt-ToggleButton-down-disabled {
+    
+} 
+

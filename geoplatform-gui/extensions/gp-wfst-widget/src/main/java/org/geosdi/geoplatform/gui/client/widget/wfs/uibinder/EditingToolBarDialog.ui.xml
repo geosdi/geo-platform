@@ -1,0 +1,59 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:wfsEdit='urn:org.geosdi.geoplatform.gui.client.widget.wfs.uibinder'>
+
+    <ui:style>
+        .panel {
+        position: absolute;
+        top: 70px;
+        padding: 0 12px;
+        width: 30px;
+        height: 300px!important;
+        overflow-x: auto;
+        z-index: 1000!important;
+        }
+        
+        /* .gwt-Button */
+
+        .wfs-gwt-Button {
+            background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+            background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+            background-color: rgba(121, 187, 255, .7);
+            -moz-border-radius:6px;
+            -webkit-border-radius:6px;
+            border-radius:6px;
+            border:1px solid #84bbf3;
+            display:inline-block;
+            color:#ffffff;
+            font-family:arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:4px 4px;
+            text-decoration:none;
+            width: 2em;
+            margin:2px;
+        }
+        .wfs-gwt-Button:hover {
+            background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+            background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
+            background-color:#378de5;
+        }
+        .wfs-gwt-Button:active {
+            position:relative;
+            top:1px;
+        }
+      
+      
+    </ui:style>
+
+    
+    <g:FlowPanel styleName="{style.panel}">
+        <g:Button ui:field="info" styleName="{style.wfs-gwt-Button}"/>
+        <g:Button ui:field="edit" styleName="{style.wfs-gwt-Button}"/>
+        <g:Button ui:field="reshape" styleName="{style.wfs-gwt-Button}"/>
+        <g:Button ui:field="rotate" styleName="{style.wfs-gwt-Button}"/>
+        <g:Button ui:field="drag" styleName="{style.wfs-gwt-Button}"/>
+        <g:Button ui:field="resize" styleName="{style.wfs-gwt-Button}"/>
+    </g:FlowPanel>
+    
+</ui:UiBinder>

@@ -5,6 +5,7 @@
 package org.geosdi.geoplatform.persistence.demo.model;
 
 import java.io.Serializable;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.OnDelete;
@@ -27,21 +30,23 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "CAR_PARTS", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"partname", "carplate"})})
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "car_parts")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE,
+        region = "carPartCacheRegion")
 public class CarPart implements Serializable {
 
     private static final long serialVersionUID = 2061845368648914687L;
     //
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,
-                    generator = "CAR_PARTS_SEQ")
+            generator = "CAR_PARTS_SEQ")
     @SequenceGenerator(name = "CAR_PARTS_SEQ", sequenceName = "CAR_PARTS_SEQ")
     private Long id;
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "carplate", referencedColumnName = "plate",
-                nullable = false)
+            nullable = false)
     @Index(name = "ROLEPROPS_ROLENAME_INDEX")
     private Car car;
     //
@@ -96,11 +101,11 @@ public class CarPart implements Serializable {
             return false;
         }
         if (this.car != other.car && (this.car == null || !this.car.equals(
-                                      other.car))) {
+                other.car))) {
             return false;
         }
         if ((this.partName == null) ? (other.partName != null)
-            : !this.partName.equals(other.partName)) {
+                : !this.partName.equals(other.partName)) {
             return false;
         }
         return true;

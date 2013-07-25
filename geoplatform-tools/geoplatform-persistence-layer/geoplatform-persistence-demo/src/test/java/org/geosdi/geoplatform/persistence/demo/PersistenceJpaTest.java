@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.persistence.demo.dao.ICarPartDAO;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
 import org.geosdi.geoplatform.persistence.demo.model.CarPart;
 import org.geosdi.geoplatform.persistence.loader.PersistenceLoaderConfigurer;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,7 +60,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceLoaderConfigurer.class},
-                      loader = AnnotationConfigContextLoader.class)
+        loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles(value = {"jpa"})
 public class PersistenceJpaTest {
 
@@ -68,36 +69,48 @@ public class PersistenceJpaTest {
     //
     @Autowired
     private ICarDAO jpaCarDAO;
+    //
     @Autowired
     private ICarPartDAO jpaCarPartDAO;
-    private Car car;
-    private CarPart carPart;
+
+    @After
+    public void tearDown() throws Exception {
+        removeAll();
+    }
 
     @Before
     public void setUp() {
-        car = new Car();
-        car.setPlate("AR793M");
-        car.setModel("Fiat Punto");
-        this.carPart = new CarPart();
-        this.carPart.setCar(car);
-        this.carPart.setPartName(PART_NAME);
-        jpaCarDAO.persist(car);
-        jpaCarPartDAO.persist(carPart);
+        insert();
     }
 
     @Test
     public void testJpaProfile() throws Exception {
-        logger.info("Persistence JPA Test - Car Found @@@@@@@@@@@@"
-                + "@@@@@@@@@@@@@ " + car);
-
         logger.info("FOUND PART @@@@@@@@@@@@@@@@@@@@@@@@@@: "
-                + this.jpaCarPartDAO.findByPartName(PART_NAME).getPartName());
-        this.jpaCarDAO.delete(car.getId());
+                + this.jpaCarPartDAO.findByPartName(PART_NAME + 0).getPartName());
 
+        CarPart test = this.jpaCarPartDAO.findByPartName(PART_NAME + 0);
 
-        CarPart test = this.jpaCarPartDAO.findByPartName(PART_NAME);
+        Assert.assertNotNull("The car part is not null", test);
 
-        Assert.assertNull("The car part is not null", test);
+        Assert.assertEquals(100, this.jpaCarDAO.findAll().size());
+    }
+
+    private void insert() {
+        for (int i = 0; i < 100; i++) {
+            Car car = new Car();
+            car.setPlate("AR793" + i);
+            car.setModel("Fiat Model " + i);
+            CarPart carPart = new CarPart();
+            carPart.setPartName(PART_NAME + i);
+            carPart.setCar(car);
+            jpaCarDAO.persist(car);
+            jpaCarPartDAO.persist(carPart);
+        }
+    }
+
+    private void removeAll() throws Exception {
+        jpaCarDAO.removeAll();
+        logger.info("REMOVED ALL CARS ##################################");
     }
 
 }

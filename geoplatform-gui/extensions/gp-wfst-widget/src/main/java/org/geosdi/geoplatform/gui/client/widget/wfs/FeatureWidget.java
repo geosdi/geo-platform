@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
+import org.geosdi.geoplatform.gui.client.widget.wfs.uibinder.EditingToolBarDialog;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -106,6 +107,8 @@ public class FeatureWidget extends GeoPlatformWindow
         this.addMapWidget();
         this.addAttributesWidget();
         this.createStatusBar();
+        this.createEditingBar();
+
     }
 
     @Override
@@ -182,6 +185,12 @@ public class FeatureWidget extends GeoPlatformWindow
 
         });
         super.addButton(close);
+    }
+    
+    private void createEditingBar() {
+        EditingToolBarDialog tbd = new EditingToolBarDialog();
+
+        super.add(tbd);
     }
 
     @Override

@@ -73,20 +73,24 @@ public class EditingToolBarDialog extends Composite {
     public EditingToolBarDialog() {
         TextResource editingCss = ResourceEditingToolBar.INSTANCE.awesome();
         StyleInjector.inject(editingCss.getText());
+        
+        TextResource editingCssIE = ResourceEditingToolBar.INSTANCE.awesomeIE();
+        StyleInjector.inject(editingCssIE.getText());
+        
         initWidget(binder.createAndBindUi(this));
 
         // initialize icons
         info.addStyleName("icon-info-sign icon-large");
         info.setTitle("Info");
-        edit.addStyleName("icon-pencil icon-large");
+        edit.addStyleName("icon-check-empty icon-large");
         edit.setTitle("Edit");
         reshape.addStyleName("icon-external-link icon-large");
         reshape.setTitle("Reshape");
         rotate.addStyleName("icon-undo icon-large");
         rotate.setTitle("Rotate");
-        drag.addStyleName("icon-move icon-large");
+        drag.addStyleName("icon-hand-up icon-large");
         drag.setTitle("Drag");
-        resize.addStyleName("icon-resize-full icon-large");
+        resize.addStyleName("icon-resize-horizontal icon-large");
         resize.setTitle("Resize");
 
     }

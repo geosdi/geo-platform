@@ -49,4 +49,7 @@ public interface ResourceEditingToolBar extends ClientBundle {
     
     @ClientBundle.Source("awesome/css/font-awesome.min.css")
     TextResource awesome();
+    
+    @ClientBundle.Source("awesome/css/font-awesome-ie7.min.css")
+    TextResource awesomeIE();
 }

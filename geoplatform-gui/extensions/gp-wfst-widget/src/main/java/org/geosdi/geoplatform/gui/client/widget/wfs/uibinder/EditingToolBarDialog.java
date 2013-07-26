@@ -44,6 +44,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -76,19 +77,31 @@ public class EditingToolBarDialog extends Composite {
         StyleInjector.inject(wfstCss.getText());
         
         initWidget(binder.createAndBindUi(this));
+        
+        //setting up the icons
+        Image infoImage = new Image(ResourceEditingToolBar.INSTANCE.info());
+        info.getElement().appendChild(infoImage.getElement());
+        
+        Image editImage = new Image(ResourceEditingToolBar.INSTANCE.edit());
+        edit.getElement().appendChild(editImage.getElement());
+        
+        Image reshapeImage = new Image(ResourceEditingToolBar.INSTANCE.reshape());
+        reshape.getElement().appendChild(reshapeImage.getElement());
+        
+        Image rotateImage = new Image(ResourceEditingToolBar.INSTANCE.rotate());
+        rotate.getElement().appendChild(rotateImage.getElement());
+        
+        Image dragImage = new Image(ResourceEditingToolBar.INSTANCE.drag());
+        drag.getElement().appendChild(dragImage.getElement());
+        
+        Image resizeImage = new Image(ResourceEditingToolBar.INSTANCE.resize());
+        resize.getElement().appendChild(resizeImage.getElement());
 
-        // initialize icons 
-        info.setText("In");
         info.setTitle("Info");
-        edit.setText("Ed");
         edit.setTitle("Edit");
-        reshape.setText("Rs");
         reshape.setTitle("Reshape");
-        rotate.setText("Ro");
         rotate.setTitle("Rotate");
-        drag.setText("D");
         drag.setTitle("Drag");
-        resize.setText("Re");
         resize.setTitle("Resize");
 
     }

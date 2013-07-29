@@ -82,6 +82,8 @@ public class FeatureWidget extends GeoPlatformWindow
     private FeatureStatusBar statusBar;
     @Inject
     private BorderLayout layout;
+    @Inject
+    private EditingToolBarDialog editToolbarDialog;
     private Button saveButton;
     private Button resetButton;
     //
@@ -184,11 +186,9 @@ public class FeatureWidget extends GeoPlatformWindow
         });
         super.addButton(close);
     }
-    
-    private void createEditingBar() {
-        EditingToolBarDialog tbd = new EditingToolBarDialog();
 
-        super.add(tbd);
+    private void createEditingBar() {
+        super.add(editToolbarDialog);
     }
 
     @Override

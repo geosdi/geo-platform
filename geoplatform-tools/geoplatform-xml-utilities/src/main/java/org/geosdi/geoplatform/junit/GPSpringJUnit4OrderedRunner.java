@@ -33,38 +33,48 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.junit;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStreamWriter;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.InitializationError;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class Test {
+public class GPSpringJUnit4OrderedRunner extends SpringJUnit4ClassRunner {
 
-    public static void main(String args[]) throws Exception {
-
-        // Create a new instance of a OutputStreamWriter object
-        // attached to a ByteArrayOutputStream.
-        ByteArrayOutputStream out =
-                new ByteArrayOutputStream();
-        OutputStreamWriter writer = new OutputStreamWriter(out);
-
-        // Write to the output stream.
-        String s = "Random String";
-        char[] arr = s.toCharArray();
-        // Only write from the 7th character on.
-        writer.write(arr, 0, arr.length - 7);
-        writer.flush();
-        writer.close();
-
-        // Display the contents of the ByteArrayOutputStream.
-        System.out.println(out.toString());
-
-        // Close the OutputStreamWriter object.
-
+    public GPSpringJUnit4OrderedRunner(Class<?> clazz)
+            throws InitializationError {
+        super(clazz);
     }
+
+    @Override
+    protected List<FrameworkMethod> computeTestMethods() {
+        List<FrameworkMethod> fmList = super.computeTestMethods();
+        Collections.sort(fmList, new Comparator<FrameworkMethod>() {
+
+            @Override
+            public int compare(FrameworkMethod fm1,
+                    FrameworkMethod fm2) {
+                Order o1 = fm1.getAnnotation(Order.class);
+                Order o2 = fm2.getAnnotation(Order.class);
+
+                if ((o1 == null) || (o2 == null)) {
+                    return -1;
+                }
+
+                return o1.order() - o2.order();
+            }
+
+        });
+
+        return fmList;
+    }
+
 }

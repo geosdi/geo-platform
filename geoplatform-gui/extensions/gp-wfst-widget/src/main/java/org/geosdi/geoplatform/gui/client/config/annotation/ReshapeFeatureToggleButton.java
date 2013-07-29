@@ -33,38 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.gui.client.config.annotation;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStreamWriter;
+import com.google.inject.BindingAnnotation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class Test {
-
-    public static void main(String args[]) throws Exception {
-
-        // Create a new instance of a OutputStreamWriter object
-        // attached to a ByteArrayOutputStream.
-        ByteArrayOutputStream out =
-                new ByteArrayOutputStream();
-        OutputStreamWriter writer = new OutputStreamWriter(out);
-
-        // Write to the output stream.
-        String s = "Random String";
-        char[] arr = s.toCharArray();
-        // Only write from the 7th character on.
-        writer.write(arr, 0, arr.length - 7);
-        writer.flush();
-        writer.close();
-
-        // Display the contents of the ByteArrayOutputStream.
-        System.out.println(out.toString());
-
-        // Close the OutputStreamWriter object.
-
-    }
+@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@BindingAnnotation
+public @interface ReshapeFeatureToggleButton {
 }

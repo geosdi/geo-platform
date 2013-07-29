@@ -46,19 +46,19 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureMapWidgetProvider implements Provider<MapWidget> {
+public class MapWidgetProvider implements Provider<MapWidget> {
 
     private GeoPlatformMapFactory mapFactory;
 
     @Inject
-    public FeatureMapWidgetProvider(GeoPlatformMapFactory theMapFactory) {
+    public MapWidgetProvider(GeoPlatformMapFactory theMapFactory) {
         this.mapFactory = theMapFactory;
     }
 
     @Override
     public MapWidget get() {
         return this.mapFactory.createMap("665", "410",
-                                         GPBaseLayerFactory.getBaseLayer(
-                BaseLayerValue.OPEN_STREET_MAP));
+                GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
     }
+
 }

@@ -16,13 +16,6 @@
     </ui:style>
 
     
-    <g:FlowPanel styleName="{style.panel}">
-        <g:ToggleButton ui:field="info"/>
-        <g:ToggleButton ui:field="edit"/>
-        <g:ToggleButton ui:field="reshape"/>
-        <g:ToggleButton ui:field="rotate" />
-        <g:ToggleButton ui:field="drag" />
-        <g:ToggleButton ui:field="resize"/>
-    </g:FlowPanel>
+    <g:FlowPanel ui:field="toolbarEditorPanel" styleName="{style.panel}" />
     
 </ui:UiBinder>

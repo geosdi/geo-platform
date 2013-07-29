@@ -36,27 +36,13 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Timer;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.wfs.builder.FeatureMapLayerBuilder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectHandler;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
-import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
+import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.control.GetFeature;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.WMS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -70,21 +56,9 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
     @Inject
     private MapWidget mapWidget;
     @Inject
-    private FeatureMapLayerBuilder mapLayerBuilder;
-    @Inject
-    private Vector vectorLayer;
-    @Inject
-    private GetFeatureControlBuilder featureControlBuilder;
-    @Inject
-    private FeatureSelectHandler selectFeature;
-    @Inject
-    private FeatureUnSelectHandler unSelectFeature;
-    @Inject
-    private LonLat italyLonLat;
+    private IFeatureMapInitializer featureMapInitializer;
     private GPEventBus bus;
     private HandlerRegistration handlerRegistration;
-    private Layer wms;
-    private GetFeature controlFeature;
 
     @Inject
     public FeatureMapWidget(GPEventBus theBus) {
@@ -97,7 +71,7 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
 
     @Override
     public void addComponent() {
-        this.initMapWidget();
+        this.featureMapInitializer.initMapWidget();
 
         super.add(this.mapWidget);
     }
@@ -111,84 +85,14 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
         super.setHeaderVisible(false);
     }
 
-    private void resetMapWidget() {
-        // REMOVE CONTROL GETFEATURE
-        this.controlFeature.deactivate();
-        this.mapWidget.getMap().removeControl(controlFeature);
-
-        this.vectorLayer.destroyFeatures();
-
-        if (wms != null) {
-            this.mapWidget.getMap().removeLayer(wms);
-        }
-
-        this.mapWidget.getMap().removeLayer(vectorLayer);
-
-        this.initMapWidget();
-    }
-
-    private void initMapWidget() {
-        this.mapWidget.getMap().setCenter(italyLonLat, 4);
-    }
-
     @Override
     public void reset() {
-        this.resetMapWidget();
+        this.featureMapInitializer.resetMapWidget();
     }
 
     @Override
-    public void bind(final GPLayerBean layer, final LayerSchemaDTO schema) {
-
-        this.wms = this.mapLayerBuilder.buildLayer(layer);
-
-        this.controlFeature = this.featureControlBuilder.buildControl(
-                new GetFeatureModel() {
-
-            @Override
-            public String getFeatureNameSpace() {
-                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).
-                        getFeatureNameSpace()
-                        : schema.getTargetNamespace();
-            }
-
-            @Override
-            public String getFeatureType() {
-                int pos = layer.getName().indexOf(":");
-
-                return pos > 0 ? layer.getName().substring(pos + 1,
-                        layer.getName().length()) : layer.getName();
-            }
-
-            @Override
-            public String getSrsName() {
-                return layer.getCrs();
-            }
-
-            @Override
-            public String getGeometryName() {
-                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).
-                        getGeometryName()
-                        : schema.getGeometry().getName();
-            }
-
-            @Override
-            public WMS getWMSLayer() {
-                return (WMS) wms;
-            }
-
-        });
-
-        Timer t = new Timer() {
-
-            @Override
-            public void run() {
-                loadLayerOnMap();
-                notifyStatus();
-            }
-
-        };
-
-        t.schedule(1000);
+    public void bind(GPLayerBean layer, LayerSchemaDTO schema) {
+        this.featureMapInitializer.bind(layer, schema);
     }
 
     @Override
@@ -232,31 +136,6 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
         this.mapWidget.setHeight(String.valueOf(super.getHeight()));
         updateSize();
         super.layout();
-    }
-
-    private void loadLayerOnMap() {
-        this.mapWidget.getMap().addLayer(wms);
-        this.mapWidget.getMap().addLayer(vectorLayer);
-
-        this.mapWidget.getMap().addControl(controlFeature);
-
-        controlFeature.getEvents().register("featureselected", this.wms,
-                this.selectFeature);
-
-        controlFeature.getEvents().register("featureunselected", this.wms,
-                this.unSelectFeature);
-
-        Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
-
-        this.mapWidget.getMap().zoomToExtent(bb);
-
-        this.controlFeature.activate();
-    }
-
-    private void notifyStatus() {
-        this.bus.fireEvent(
-                new FeatureStatusBarEvent("WFS Layer loaded",
-                FeatureStatusBarType.STATUS_OK));
     }
 
 }

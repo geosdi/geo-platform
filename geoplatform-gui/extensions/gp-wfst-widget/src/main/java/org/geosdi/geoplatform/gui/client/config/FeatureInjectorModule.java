@@ -40,8 +40,11 @@ import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.FeatureMapInitializer;
+import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureAttributesLayoutHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureSelectionLayoutHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.uibinder.EditingToolBarDialog;
 import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
 import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -54,7 +57,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureInjectorModule extends AbstractGinModule {
-
+    
     @Override
     protected void configure() {
         bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
@@ -62,9 +65,14 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(FeatureAttributesWidget.class).in(Singleton.class);
         bind(FeatureMapWidget.class).in(Singleton.class);
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
-
+        
+        bind(IFeatureMapInitializer.class).to(FeatureMapInitializer.class).in(
+                Singleton.class);
+        
         bind(FeatureSelectionLayoutHandler.class).in(Singleton.class);
         bind(FeatureAttributesLayoutHandler.class).in(Singleton.class);
+        
+        bind(EditingToolBarDialog.class).in(Singleton.class);
     }
-
+    
 }

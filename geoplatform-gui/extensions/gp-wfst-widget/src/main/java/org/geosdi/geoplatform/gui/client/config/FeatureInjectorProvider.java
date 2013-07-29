@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.LayerSchemaParserHandler;
 import org.geosdi.geoplatform.gui.client.config.provider.DescribeFeatureTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureLonLatItalyProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.FeatureMapWidgetProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.MapWidgetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureProtocolCRUDOptionsProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureSelectHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureUnSelectHandlerProvider;
@@ -73,7 +73,7 @@ public class FeatureInjectorProvider extends AbstractGinModule {
     
     @Override
     protected void configure() {
-        bind(MapWidget.class).toProvider(FeatureMapWidgetProvider.class)
+        bind(MapWidget.class).toProvider(MapWidgetProvider.class)
                 .in(Singleton.class);
         
         bind(LayerTypeHandlerManager.class).toProvider(

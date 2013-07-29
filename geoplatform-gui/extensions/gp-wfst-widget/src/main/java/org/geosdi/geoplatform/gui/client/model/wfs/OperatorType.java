@@ -41,6 +41,9 @@ package org.geosdi.geoplatform.gui.client.model.wfs;
  */
 public enum OperatorType {
 
+    CONTAINS("contains"),
+    ENDS_WITH("ends with"),
+    STARTS_WITH("starts with"),
     EQUAL("="),
     NOT_EQUAL("<>"),
     LESS("<"),

@@ -70,7 +70,7 @@ public class ManageServerGrid extends GeoPlatformGridWidget<GPServerBeanModel> {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
         ColumnConfig aliasColumn = new ColumnConfig();
         aliasColumn.setId("alias");
-        aliasColumn.setHeader("Server Alias");
+        aliasColumn.setHeaderHtml("Server Alias");
         aliasColumn.setWidth(220);
 
         TextField<String> aliasTextfield = new TextField<String>();
@@ -80,7 +80,7 @@ public class ManageServerGrid extends GeoPlatformGridWidget<GPServerBeanModel> {
 
         ColumnConfig urlColumn = new ColumnConfig();
         urlColumn.setId("urlServer");
-        urlColumn.setHeader("URL server");
+        urlColumn.setHeaderHtml("URL server");
         urlColumn.setWidth(400);
 
         TextField<String> urlTextfield = new TextField<String>();

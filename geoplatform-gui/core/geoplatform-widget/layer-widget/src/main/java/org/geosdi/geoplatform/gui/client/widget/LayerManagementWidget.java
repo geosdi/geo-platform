@@ -85,7 +85,7 @@ public class LayerManagementWidget extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-        setHeading("GeoPlatform - Layer Widget");
+        setHeadingHtml("GeoPlatform - Layer Widget");
         setLayout(new BorderLayout());
 
         setLayoutOnChange(true);

@@ -168,13 +168,13 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
         ColumnConfig name = new ColumnConfig();
         name.setId(GPLayerBeanKeyValue.GPLAYER_NAME.getValue());
-        name.setHeader("Layer Name");
+        name.setHeaderHtml("Layer Name");
         name.setWidth(200);
         configs.add(name);
 
         ColumnConfig title = new ColumnConfig();
         title.setId(GPLayerBeanKeyValue.GPLAYER_LABEL.getValue());
-        title.setHeader("Title");
+        title.setHeaderHtml("Title");
         title.setWidth(150);
         configs.add(title);
 

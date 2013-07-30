@@ -85,7 +85,7 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
     @Override
     public void initSize() {
         super.setSize(600, 530);
-        super.setHeading("Server Capabilities");
+        super.setHeadingHtml("Server Capabilities");
     }
 
     @Override

@@ -48,6 +48,9 @@ import com.google.gwt.resources.client.TextResource;
  */
 public class GeoPlatformStyleInjector extends GPAbstractInjector {
 
+    private GeoPlatformStyleInjector() {
+    }
+
     public static void injectCss(String cssName) {
         assert cssName != null : "The Css must not be null.";
         StyleInjector.inject(cssName);
@@ -65,7 +68,7 @@ public class GeoPlatformStyleInjector extends GPAbstractInjector {
 
     public static void injectCss(String... css) {
         assert css != null : "The Css Parameter must not be null.";
-        
+
         for (String cssName : css) {
             injectCss(cssName);
         }
@@ -78,18 +81,19 @@ public class GeoPlatformStyleInjector extends GPAbstractInjector {
             injectCssFile(cssFileName);
         }
     }
-    
+
     public static void injectCss(TextResource resource) {
         assert resource != null : "Parameter Resource must not be null";
-        
+
         injectCss(resource.getText());
     }
-    
+
     public static void injectCss(TextResource... resources) {
         assert resources != null : "Parameter Resources must not be null";
-        
+
         for (TextResource textResource : resources) {
             injectCss(textResource.getText());
         }
     }
+
 }

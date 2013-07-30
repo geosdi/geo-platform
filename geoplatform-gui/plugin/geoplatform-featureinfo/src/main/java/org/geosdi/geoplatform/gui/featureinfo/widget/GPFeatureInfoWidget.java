@@ -88,7 +88,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
         super.setResizable(true);
         super.setPlain(true);
         super.setModal(true);
-        super.setHeading("Get Feature Info");
+        super.setHeadingHtml("Get Feature Info");
     }
 
     @Override

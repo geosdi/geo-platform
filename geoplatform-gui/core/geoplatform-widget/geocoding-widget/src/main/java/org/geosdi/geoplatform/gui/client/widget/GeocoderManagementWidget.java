@@ -57,7 +57,7 @@ public class GeocoderManagementWidget extends ContentPanel {
     private IGPGeocoderPluginManager geocoderPluginManager;
 
     public GeocoderManagementWidget() {
-        setHeading("GeoPlatfom Geocoding Widget");
+        setHeadingHtml("GeoPlatfom Geocoding Widget");
         setLayout(new FitLayout());
 
         setLayoutOnChange(true);

@@ -157,7 +157,7 @@ public class CQLFilterWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeading(CQL_FILTER_HEADING);
+        super.setHeadingHtml(CQL_FILTER_HEADING);
         super.setLayout(new FitLayout());
         super.setModal(Boolean.TRUE);
     }

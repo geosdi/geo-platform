@@ -115,7 +115,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     @Override
     public void initSize() {
     }
-    
+
     protected void manageGridSize() {
         this.grid.setHeight(super.getHeight() - 25);
     }
@@ -183,6 +183,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         for (AttributeDetail att : attributes) {
             TextField<String> valueTextField = new TextField<String>();
+
             valueTextField.setValidator(this.attributeValuesValidator());
             valueTextField.setAutoValidate(true);
             CellEditor valueEditor = new CellEditor(valueTextField) {
@@ -199,13 +200,13 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                 }
 
             };
-            
+
             ColumnConfig valueColumn = new ColumnConfig();
             String name = att.getName();
             valueColumn.setId(name);
-            valueColumn.setHeader(name);
+            valueColumn.setHeaderHtml(name);
             valueColumn.setEditor(valueEditor);
-            valueColumn.setWidth(name.length() * 10);
+            valueColumn.setWidth(100);
 
             configs.add(valueColumn);
         }

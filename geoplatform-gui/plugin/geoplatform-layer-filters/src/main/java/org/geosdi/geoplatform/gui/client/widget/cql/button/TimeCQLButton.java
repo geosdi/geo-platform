@@ -195,7 +195,7 @@ public class TimeCQLButton extends AdvancedCQLButton {
 
             @Override
             public void setWindowProperties() {
-                super.setHeading("Time Filter Composition");
+                super.setHeadingHtml("Time Filter Composition");
                 super.setLayout(new FormLayout());
             }
         };

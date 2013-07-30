@@ -55,7 +55,7 @@ public class LegendWindow extends Window {
     public LegendWindow() {
         setMaximizable(false);
         setCollapsible(true);
-        setHeading("Legend Window");
+        setHeadingHtml("Legend Window");
         setHeight(300);
         setWidth(200);
         setScrollMode(Scroll.AUTOY);

@@ -208,7 +208,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                             startStore.getModels().size() - fromFilter - 1).get(
                             DimensionData.DIMENSION_KEY);
                     startFilterNumberField.setToolTip(tooltip);
-                    startTimeLabel.setText(tooltip);
+                    startTimeLabel.setHtml(tooltip);
                     if (fromFilter != 0) {
                         buttonBackwardT1.setEnabled(Boolean.TRUE);
                     } else {
@@ -220,7 +220,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                         buttonForwardT1.setEnabled(Boolean.FALSE);
                     }
                 } else {
-                    startTimeLabel.setText("");
+                    startTimeLabel.setHtml("");
                     startFilterNumberField.setToolTip("");
                 }
             }
@@ -247,7 +247,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                             startStore.getModels().size() - endFilter - 1).
                             get(DimensionData.DIMENSION_KEY);
                     endFilterNumberField.setToolTip(tooltip);
-                    endTimeLabel.setText(tooltip);
+                    endTimeLabel.setHtml(tooltip);
                     if (endFilter != 0) {
                         buttonBackwardT2.setEnabled(Boolean.TRUE);
                     } else {
@@ -259,7 +259,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                         buttonForwardT2.setEnabled(Boolean.FALSE);
                     }
                 } else {
-                    endTimeLabel.setText("");
+                    endTimeLabel.setHtml("");
                     endFilterNumberField.setToolTip("");
                 }
             }
@@ -455,8 +455,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 startFilterNumberField.clear();
-                startTimeLabel.setText("");
-                endTimeLabel.setText("");
+                startTimeLabel.setHtml("");
+                endTimeLabel.setHtml("");
                 endFilterNumberField.clear();
                 hide();
             }
@@ -537,7 +537,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
             @Override
             public void onCommandSuccess(GetLayerDimensionResponse response) {
                 List<String> dimensionList = Lists.<String>newArrayList(response.getResult().split(","));
-                dimensionSizeLabel.setText("Dimension Size: " + dimensionList.size());
+                dimensionSizeLabel.setHtml("Dimension Size: " + dimensionList.size());
                 dimensionSizeLabel.setStyleAttribute("font-size", "1.3em");
                 dimensionSizeLabel.setStyleAttribute("text-align", "right");
                 startStore.removeAll();
@@ -606,7 +606,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeading(TIME_FILTER_HEADING);
+        super.setHeadingHtml(TIME_FILTER_HEADING);
         super.setLayout(new FormLayout());
         super.setModal(Boolean.TRUE);
     }

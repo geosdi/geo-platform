@@ -103,24 +103,27 @@ public class ManageServerWidget extends Window {
         GeoPlatformOGCRemote.Util.getInstance().loadServers(
                 GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        ManageServerWidget.this.unmask();
-                        GeoPlatformMessage.errorMessage("Server Service",
-                                                        "An Error occured loading Servers.");
-                    }
 
-                    @Override
-                    public void onSuccess(ArrayList<GPServerBeanModel> result) {
-                        ManageServerWidget.this.unmask();
-                        store.removeAll();
-                        store.add(result);
-                    }
-                });
+            @Override
+            public void onFailure(Throwable caught) {
+                ManageServerWidget.this.unmask();
+                GeoPlatformMessage.errorMessage("Server Service",
+                        "An Error occured loading Servers.");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<GPServerBeanModel> result) {
+                ManageServerWidget.this.unmask();
+                store.removeAll();
+                store.add(result);
+            }
+
+        });
     }
 
     private Widget createServerFilter() {
         this.serverFilter = new StoreFilterField<GPServerBeanModel>() {
+
             @Override
             protected boolean doSelect(Store<GPServerBeanModel> store,
                     GPServerBeanModel parent,
@@ -133,6 +136,7 @@ public class ManageServerWidget extends Window {
                 }
                 return Boolean.FALSE;
             }
+
         };
         serverFilter.setEmptyText("Type the server to search");
         serverFilter.bind(this.store);
@@ -147,7 +151,7 @@ public class ManageServerWidget extends Window {
 
         ColumnConfig aliasColumn = new ColumnConfig();
         aliasColumn.setId("alias");
-        aliasColumn.setHeader("Server Alias");
+        aliasColumn.setHeaderHtml("Server Alias");
         aliasColumn.setWidth(220);
 
         TextField<String> aliasTextfield = new TextField<String>();
@@ -157,7 +161,7 @@ public class ManageServerWidget extends Window {
 
         ColumnConfig urlColumn = new ColumnConfig();
         urlColumn.setId("urlServer");
-        urlColumn.setHeader("URL server");
+        urlColumn.setHeaderHtml("URL server");
         urlColumn.setWidth(400);
 
         TextField<String> urlTextfield = new TextField<String>();
@@ -167,16 +171,17 @@ public class ManageServerWidget extends Window {
         configs.add(urlColumn);
 
         checkColumn = new GPCheckColumnConfig("delete",
-                                              "Delete", 55, store,
-                                              this.deleteServerButton);
+                "Delete", 55, store,
+                this.deleteServerButton);
         CellEditor checkBoxEditor = new CellEditor(new CheckBox());
         checkColumn.setEditor(checkBoxEditor);
         //This is very important: add checkColumn to the zero position!
         configs.add(0, checkColumn);
         final ColumnModel columnModel = new ColumnModel(configs);
         final Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store,
-                                                                         columnModel);
+                columnModel);
         RowEditor<GPServerBeanModel> rowEditor = new RowEditor<GPServerBeanModel>() {
+
             @Override
             protected void onEnter(ComponentEvent ce) {
                 System.out.println("Selected null: ");
@@ -193,6 +198,7 @@ public class ManageServerWidget extends Window {
                 //System.out.println("Hiding row editor and verifing the check status");
                 checkColumn.manageDeleteButton();
             }
+
         };
         rowEditor.setClicksToEdit(ClicksToEdit.TWO);
 
@@ -211,7 +217,9 @@ public class ManageServerWidget extends Window {
             final RowEditor<GPServerBeanModel> rowEditor) {
         ToolBar toolBar = new ToolBar();
         Button addServerButton = new Button("Add Server");
-        addServerButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+        addServerButton.addSelectionListener(
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 GPServerBeanModel server = new GPServerBeanModel();
@@ -224,10 +232,13 @@ public class ManageServerWidget extends Window {
                 store.update(server);
                 rowEditor.startEditing(store.indexOf(server), true);
             }
+
         });
         toolBar.add(addServerButton);
         deleteServerButton.setEnabled(false);
-        deleteServerButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+        deleteServerButton.addSelectionListener(
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
@@ -235,7 +246,7 @@ public class ManageServerWidget extends Window {
                 int i = 0;
                 for (GPServerBeanModel gPServerBeanModel : serverList) {
                     String check = checkColumn.getCheckState(gPServerBeanModel,
-                                                             "delete", i, 0);
+                            "delete", i, 0);
                     if (check.equals("-on")) {
                         operation.deleteServer(gPServerBeanModel);
                     }
@@ -243,12 +254,14 @@ public class ManageServerWidget extends Window {
                 }
                 checkColumn.manageDeleteButton();
             }
+
         });
         toolBar.add(deleteServerButton);
         super.setTopComponent(toolBar);
         super.setButtonAlign(HorizontalAlignment.RIGHT);
         super.addButton(new Button("Reset",
-                                   new SelectionListener<ButtonEvent>() {
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
@@ -256,9 +269,11 @@ public class ManageServerWidget extends Window {
                 serverFilter.clear();
                 checkColumn.manageDeleteButton();
             }
+
         }));
         super.addButton(new Button("Save",
-                                   new SelectionListener<ButtonEvent>() {
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
@@ -271,6 +286,7 @@ public class ManageServerWidget extends Window {
                     }
                 }
             }
+
         }));
     }
 
@@ -281,13 +297,13 @@ public class ManageServerWidget extends Window {
             this.displayServerWidget.loadServers();
         } else {
             GeoPlatformMessage.alertMessage("Warning",
-                                            "There are unsaved changes, save or reset before exit.");
+                    "There are unsaved changes, save or reset before exit.");
         }
     }
 
     public void initSize() {
         super.setModal(true);
-        super.setHeading("Server Manager");
+        super.setHeadingHtml("Server Manager");
         super.setBorders(false);
         super.setSize(600, 325);
     }
@@ -329,6 +345,7 @@ public class ManageServerWidget extends Window {
             if (server.getId() != null) {
                 GeoPlatformOGCRemote.Util.getInstance().deleteServer(
                         server.getId(), new AsyncCallback<Boolean>() {
+
                     @Override
                     public void onFailure(Throwable caught) {
                         GeoPlatformMessage.errorMessage(
@@ -350,6 +367,7 @@ public class ManageServerWidget extends Window {
                         //TODO: refresh the displayServerWidget
                         //displayServerWidget.addServer(server);
                     }
+
                 });
             } else {
                 store.remove(server);
@@ -365,36 +383,39 @@ public class ManageServerWidget extends Window {
                     record.get("urlServer").toString().trim(),
                     GPAccountLogged.getInstance().getOrganization(),
                     new AsyncCallback<GPServerBeanModel>() {
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            verifyEndOperation();
-                            if (server.getUrlServer().contains(
-                                    EnumOAuth2.GEB_STRING.getValue())) {
-                                GeoPlatformMessage.infoMessage(
-                                        "Google sign on required",
-                                        "Is necessary to sign on Google account for access the Google Earth Builder functionality");
-                                OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(
-                                        EnumOAuth2.ADD_SERVER.getValue()));
-                            } else {
-                                GeoPlatformMessage.errorMessage(
-                                        "Error on Saving Server",
-                                        caught.getMessage());
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        "Save Server Error. " + caught.getMessage(),
-                                        EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                            }
-                        }
 
-                        @Override
-                        public void onSuccess(GPServerBeanModel serverSaved) {
-                            verifyEndOperation();
-                            store.remove(server);
-                            store.insert(serverSaved, 0);
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Server added succesfully",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
-                        }
-                    });
+                @Override
+                public void onFailure(Throwable caught) {
+                    verifyEndOperation();
+                    if (server.getUrlServer().contains(
+                            EnumOAuth2.GEB_STRING.getValue())) {
+                        GeoPlatformMessage.infoMessage(
+                                "Google sign on required",
+                                "Is necessary to sign on Google account for access the Google Earth Builder functionality");
+                        OAuth2HandlerManager.fireEvent(
+                                new GPOAuth2GEBLoginEvent(
+                                EnumOAuth2.ADD_SERVER.getValue()));
+                    } else {
+                        GeoPlatformMessage.errorMessage(
+                                "Error on Saving Server",
+                                caught.getMessage());
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Save Server Error. " + caught.getMessage(),
+                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                    }
+                }
+
+                @Override
+                public void onSuccess(GPServerBeanModel serverSaved) {
+                    verifyEndOperation();
+                    store.remove(server);
+                    store.insert(serverSaved, 0);
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            "Server added succesfully",
+                            EnumSearchStatus.STATUS_SEARCH.toString());
+                }
+
+            });
         }
 
         private void verifyEndOperation() {
@@ -411,5 +432,7 @@ public class ManageServerWidget extends Window {
         public void setModifiedElementsNumber(int modifiedElementsNumber) {
             this.modifiedElementsNumber = modifiedElementsNumber;
         }
+
     }
+
 }

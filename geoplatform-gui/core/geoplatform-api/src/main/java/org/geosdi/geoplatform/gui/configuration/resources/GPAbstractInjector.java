@@ -44,7 +44,7 @@ import com.google.gwt.dom.client.HeadElement;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPAbstractInjector {
+class GPAbstractInjector {
 
     private static HeadElement head;
 
@@ -60,4 +60,5 @@ public class GPAbstractInjector {
 
         return GPAbstractInjector.head;
     }
+
 }

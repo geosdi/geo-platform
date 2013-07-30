@@ -105,7 +105,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
-        this.fieldSet.setHeading("Folder Name");
+        this.fieldSet.setHeadingHtml("Folder Name");
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);
@@ -179,7 +179,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
     @Override
     public void initSize() {
-        setHeading("Add Folder");
+        setHeadingHtml("Add Folder");
         setSize(330, 170);
     }
 

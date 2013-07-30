@@ -55,7 +55,7 @@ public class FeatureInfoPanelFactory {
     public static ContentPanel createPanel(String id, String headingText) {
         ContentPanel cp = new ContentPanel();
         cp.setId(id);
-        cp.setHeading(headingText);
+        cp.setHeadingHtml(headingText);
         return cp;
     }
     

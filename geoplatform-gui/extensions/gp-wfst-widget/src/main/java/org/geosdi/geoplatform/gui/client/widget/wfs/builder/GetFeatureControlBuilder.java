@@ -38,7 +38,9 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.builder;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.impl.map.control.feature.AbstractGetFeatureControlBuilder;
+import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.control.GetFeature;
 
 /**
  *
@@ -49,6 +51,7 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
 public class GetFeatureControlBuilder extends AbstractGetFeatureControlBuilder {
 
     private MapWidget mapWidget;
+    private GetFeature gfc;
 
     @Inject
     public GetFeatureControlBuilder(MapWidget theMapWidget) {
@@ -59,4 +62,21 @@ public class GetFeatureControlBuilder extends AbstractGetFeatureControlBuilder {
     protected String getSrsName() {
         return this.mapWidget.getMap().getProjection();
     }
+
+    @Override
+    public GetFeature buildControl(GetFeatureModel featureModel) {
+        this.gfc = super.buildControl(featureModel);
+        
+        return this.gfc;
+    }
+
+    /**
+     * <p>Return the {@link GetFeature} Control</p>
+     *
+     * @return the gfc
+     */
+    public GetFeature getGfc() {
+        return gfc;
+    }
+
 }

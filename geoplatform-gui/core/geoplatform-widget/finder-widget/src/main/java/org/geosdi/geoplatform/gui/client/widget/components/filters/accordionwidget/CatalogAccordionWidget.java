@@ -72,7 +72,7 @@ public class CatalogAccordionWidget extends GeoPlatformContentPanel {
     @Override
     public void setPanelProperties() {
         super.setAnimCollapse(false);
-        super.setHeading("Filter by Catalogue");
+        super.setHeadingText("Filter by Catalogue");
     }
 
     @Override

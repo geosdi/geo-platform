@@ -1658,7 +1658,7 @@
         <gt-version>9-SNAPSHOT</gt-version>
 
         <gwtVersion>2.5.1</gwtVersion>
-        <gxtVersion>2.2.5</gxtVersion>
+        <gxtVersion>2.3.0-gwt22</gxtVersion>
         
         <gwtOpenlayersVersion>1.0-SNAPSHOT</gwtOpenlayersVersion>
         

@@ -112,7 +112,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
-        this.fieldSet.setHeading("WMS GetMap URL");
+        this.fieldSet.setHeadingHtml("WMS GetMap URL");
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);
@@ -205,7 +205,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
     @Override
     public void initSize() {
-        setHeading("Add WMS from GetMap direct URL");
+        setHeadingHtml("Add WMS from GetMap direct URL");
         setSize(330, 170);
     }
 

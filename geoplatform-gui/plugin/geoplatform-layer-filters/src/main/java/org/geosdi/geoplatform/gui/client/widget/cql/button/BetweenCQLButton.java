@@ -98,7 +98,7 @@ public class BetweenCQLButton extends AdvancedCQLButton {
 
             @Override
             public void setWindowProperties() {
-                super.setHeading("Between Parameter Selection");
+                super.setHeadingHtml("Between Parameter Selection");
                 super.setLayout(new FormLayout());
             }
         };

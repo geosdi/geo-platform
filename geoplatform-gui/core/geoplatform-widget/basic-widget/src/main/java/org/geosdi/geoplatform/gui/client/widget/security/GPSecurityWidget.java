@@ -72,7 +72,7 @@ public abstract class GPSecurityWidget extends Dialog {
         setButtonAlign(HorizontalAlignment.LEFT);
         setButtons("");
         setIcon(BasicWidgetResources.ICONS.search());
-        setHeading("Login Service");
+        setHeadingText("Login Service");
         setModal(true);
         setBodyBorder(true);
         setBodyStyle("padding: 8px;background: none");

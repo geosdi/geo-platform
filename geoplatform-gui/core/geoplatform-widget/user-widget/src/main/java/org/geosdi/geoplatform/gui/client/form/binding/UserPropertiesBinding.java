@@ -151,7 +151,9 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.enabledField = new CheckBox();
         this.enabledField.setId(GPUserManageDetailKeyValue.ENABLED.toString());
         this.enabledField.setToolTip("Check for enable the user");
-        this.enabledField.addListener(Events.Change, new Listener<FieldEvent>() {
+        this.enabledField.addListener(Events.Change,
+                new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent be) {
                 Boolean check = (Boolean) be.getValue();
@@ -161,6 +163,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                     updateEnabled(false);
                 }
             }
+
         });
 
         this.creationDateLabelField = new LabelField();
@@ -168,12 +171,16 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         MultiField enabledAndCreationFields = new MultiField();
         enabledAndCreationFields.setFieldLabel("Enabled");
         enabledAndCreationFields.add(enabledField);
-        enabledAndCreationFields.add(new LabelField("<span class='spacer'>&nbsp;</span>"));
+        enabledAndCreationFields.add(new LabelField(
+                "<span class='spacer'>&nbsp;</span>"));
         enabledAndCreationFields.add(creationDateLabelField);
 
         this.temporaryField = new CheckBox();
-        this.temporaryField.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
-        this.temporaryField.addListener(Events.Change, new Listener<FieldEvent>() {
+        this.temporaryField.setId(
+                GPUserManageDetailKeyValue.TEMPORARY.toString());
+        this.temporaryField.addListener(Events.Change,
+                new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent be) {
                 Boolean temporary = (Boolean) be.getValue();
@@ -183,6 +190,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                     updateTemporary(false);
                 }
             }
+
         });
 
         this.expiredLabelField = new LabelField();
@@ -190,15 +198,18 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         MultiField tempAndExpiredFields = new MultiField();
         tempAndExpiredFields.setFieldLabel("Temporary");
         tempAndExpiredFields.add(temporaryField);
-        tempAndExpiredFields.add(new LabelField("<span class='spacer'>&nbsp;</span>"));
+        tempAndExpiredFields.add(new LabelField(
+                "<span class='spacer'>&nbsp;</span>"));
         tempAndExpiredFields.add(expiredLabelField);
 
         this.userRoleComboBox = new SimpleComboBox<String>() {
+
             @Override
             protected void onSelect(SimpleComboValue<String> model, int index) {
                 super.onSelect(model, index);
                 roleComboBinding.updateModel();
             }
+
         };
         this.userRoleComboBox.setId(GPSimpleUserKeyValue.AUTORITHY.toString());
         this.userRoleComboBox.setFieldLabel("Role");
@@ -211,10 +222,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.userRoleComboBox.setTriggerAction(TriggerAction.ALL);
 
         this.trustedLevelComboBox = new SimpleComboBox<GPTrustedLevel>();
-        this.trustedLevelComboBox.setId(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
+        this.trustedLevelComboBox.setId(
+                GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
         this.trustedLevelComboBox.setFieldLabel("Trusted level");
-        this.trustedLevelComboBox.setEmptyText("Select a trusted level... (required)");
-        this.trustedLevelComboBox.setToolTip("Trusted level of the execution permissions for a use case");
+        this.trustedLevelComboBox.setEmptyText(
+                "Select a trusted level... (required)");
+        this.trustedLevelComboBox.setToolTip(
+                "Trusted level of the execution permissions for a use case");
         this.trustedLevelComboBox.setEditable(false);
         this.trustedLevelComboBox.setTypeAhead(true);
         this.trustedLevelComboBox.setAllowBlank(false);
@@ -299,7 +313,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.passwordField.setAllowBlank(false);
 
         this.passwordRepeatField.disable();
-        this.passwordRepeatField.setValidator(this.validatorInsertConfirmPassword());
+        this.passwordRepeatField.setValidator(
+                this.validatorInsertConfirmPassword());
         this.passwordRepeatField.setAllowBlank(false);
 
         // TODO Check default enabled check box
@@ -308,12 +323,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 //        this.enabledField.setValueAttribute("true");
 //        this.enabledField.setRawValue("true");
 
-        this.creationDateLabelField.setText("");
+        this.creationDateLabelField.setTitle("");
 
-        this.temporaryField.setToolTip("Check if the user is temporary (will be disabled in 10 days)");
+        this.temporaryField.setToolTip(
+                "Check if the user is temporary (will be disabled in 10 days)");
         this.temporaryField.setReadOnly(false);
 
-        this.expiredLabelField.setText("Will be disabled in 10 days");
+        this.expiredLabelField.setTitle("Will be disabled in 10 days");
 
         this.userRoleComboBox.setValidator(null);
         this.trustedLevelComboBox.setValidator(null);
@@ -335,31 +351,38 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.passwordField.setAllowBlank(true);
 
         this.passwordRepeatField.disable();
-        this.passwordRepeatField.setValidator(this.validatorUpdateConfirmPassword());
+        this.passwordRepeatField.setValidator(
+                this.validatorUpdateConfirmPassword());
         this.passwordRepeatField.setAllowBlank(true);
 
-        this.creationDateLabelField.setText("Created the " + DateTimeFormat.getFormat(
-                DateTimeFormat.PredefinedFormat.DATE_LONG).format(user.getCreationDate()));
+        this.creationDateLabelField.setTitle(
+                "Created the " + DateTimeFormat.getFormat(
+                DateTimeFormat.PredefinedFormat.DATE_LONG).format(
+                user.getCreationDate()));
 
         if (!user.isTemporary()) {
             this.temporaryField.setReadOnly(true);
             this.temporaryField.setToolTip("Checked if the user is temporary");
         } else {
             this.temporaryField.setReadOnly(false);
-            this.temporaryField.setToolTip("Dechecked and the user will not be temporary");
+            this.temporaryField.setToolTip(
+                    "Dechecked and the user will not be temporary");
 
             if (user.isExpired()) {
-                this.expiredLabelField.setText("<span style='color:red'>User expired</span>");
+                this.expiredLabelField.setTitle(
+                        "<span style='color:red'>User expired</span>");
             } else {
                 Date today = new Date();
                 CalendarUtil.addDaysToDate(today, -10);
-                this.expiredLabelField.setText("User not expired (remain "
-                        + CalendarUtil.getDaysBetween(today, user.getCreationDate()) + " day/s)");
+                this.expiredLabelField.setTitle("User not expired (remain "
+                        + CalendarUtil.getDaysBetween(today,
+                        user.getCreationDate()) + " day/s)");
             }
         }
 
         this.userRoleComboBox.setValidator(this.validatorUpdateRole());
-        this.trustedLevelComboBox.setValidator(this.validatorUpdateTrustedLevel());
+        this.trustedLevelComboBox.setValidator(
+                this.validatorUpdateTrustedLevel());
     }
 
     /**
@@ -367,6 +390,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
      */
     private Validator validatorUpdateName() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(userOriginal.getName())) {
@@ -380,11 +404,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 updateName(true);
                 return null;
             }
+
         };
     }
 
     private Validator validatorUpdateEmail() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(userOriginal.getEmail())) {
@@ -398,11 +424,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 updateEmail(true);
                 return null;
             }
+
         };
     }
 
     private Validator validatorPassword() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
@@ -412,11 +440,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 passwordRepeatField.enable();
                 return null;
             }
+
         };
     }
 
     private Validator validatorUpdateConfirmPassword() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(passwordField.getValue())) {
@@ -426,11 +456,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 updatePassword(false);
                 return "Retyped reset password don't match";
             }
+
         };
     }
 
     private Validator validatorUpdateRole() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 String role = userOriginal.getAuthority();
@@ -441,11 +473,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 updateRole(true);
                 return null;
             }
+
         };
     }
 
     private Validator validatorUpdateTrustedLevel() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 GPTrustedLevel trustedLevel = userOriginal.getTrustedLevel();
@@ -456,6 +490,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 updateTrustedLevel(true);
                 return null;
             }
+
         };
     }
 
@@ -508,6 +543,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
      */
     private Validator validatorInsertName() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (!GPRegEx.RE_COMPLETE_NAME.test(value)) {
@@ -515,11 +551,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 }
                 return null;
             }
+
         };
     }
 
     private Validator validatorInsertEmail() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (!GPRegEx.RE_EMAIL.test(value)) {
@@ -527,11 +565,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 }
                 return null;
             }
+
         };
     }
 
     private Validator validatorInsertUsername() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (!GPRegEx.RE_USERNAME.test(value)) {
@@ -539,11 +579,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 }
                 return null;
             }
+
         };
     }
 
     private Validator validatorInsertConfirmPassword() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(passwordField.getValue())) {
@@ -551,6 +593,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 }
                 return "Retyped password don't match";
             }
+
         };
     }
 
@@ -574,7 +617,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void updateField(boolean updateOriginalValue) {
             GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
             if (userDetail.getAuthority() != null) {
-                userRoleComboBox.setValue(userRoleComboBox.findModel(userDetail.getAuthority()));
+                userRoleComboBox.setValue(userRoleComboBox.findModel(
+                        userDetail.getAuthority()));
             }
         }
 
@@ -593,19 +637,22 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void setRecordProperty(Record r, Object val) {
             r.set(super.property, ((SimpleComboValue<String>) val).getValue());
         }
+
     }
 
     private class TrustedLevelComboBinding extends GPFieldBinding {
 
         public TrustedLevelComboBinding() {
-            super(trustedLevelComboBox, GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
+            super(trustedLevelComboBox,
+                    GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
         }
 
         @Override
         public void updateField(boolean updateOriginalValue) {
             GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
             if (userDetail.getTrustedLevel() != null) {
-                trustedLevelComboBox.setValue(trustedLevelComboBox.findModel(userDetail.getTrustedLevel()));
+                trustedLevelComboBox.setValue(trustedLevelComboBox.findModel(
+                        userDetail.getTrustedLevel()));
             }
         }
 
@@ -622,8 +669,10 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         @Override
         public void setRecordProperty(Record r, Object val) {
-            r.set(super.property, ((SimpleComboValue<GPTrustedLevel>) val).getValue());
+            r.set(super.property,
+                    ((SimpleComboValue<GPTrustedLevel>) val).getValue());
         }
+
     }
 
     private class UsernameFieldBinding extends GPFieldBinding {
@@ -648,6 +697,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void setRecordProperty(Record r, Object val) {
             r.set(super.property, val);
         }
+
     }
 
     private class NameFieldBinding extends GPFieldBinding {
@@ -672,6 +722,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void setRecordProperty(Record r, Object val) {
             r.set(super.property, val);
         }
+
     }
 
     private class EmailFieldBinding extends GPFieldBinding {
@@ -696,6 +747,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void setRecordProperty(Record r, Object val) {
             r.set(super.property, val);
         }
+
     }
 
     private class EnabledFieldBinding extends GPFieldBinding {
@@ -720,12 +772,14 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void setRecordProperty(Record r, Object val) {
             r.set(super.property, val);
         }
+
     }
 
     private class TemporaryFieldBinding extends GPFieldBinding {
 
         public TemporaryFieldBinding() {
-            super(temporaryField, GPUserManageDetailKeyValue.TEMPORARY.toString());
+            super(temporaryField,
+                    GPUserManageDetailKeyValue.TEMPORARY.toString());
         }
 
         @Override
@@ -744,6 +798,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void setRecordProperty(Record r, Object val) {
             r.set(super.property, val);
         }
+
     }
 
     public String getPassword() {
@@ -754,4 +809,5 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.userRoleComboBox.removeAll();
         this.userRoleComboBox.add(roles);
     }
+
 }

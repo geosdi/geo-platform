@@ -186,7 +186,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-        super.setHeading("Feature EPSG Code Analisys");
+        super.setHeadingHtml("Feature EPSG Code Analisys");
         this.store.addStoreListener(new StoreListener<EPSGLayerData>() {
 
             @Override

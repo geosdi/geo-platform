@@ -61,7 +61,8 @@ public class FeatureSelectHandler extends AbastractFeatureHandler {
     public void onHandle(EventObject eventObject) {
         System.out.println("FeatureSelectHandler @@@@@@@@@@@@@@@@");
 
-        VectorFeature vectorFeature = super.getFeatureFromEventObject(eventObject);
+        VectorFeature vectorFeature = super.getFeatureFromEventObject(
+                eventObject);
 
         vectorFeature.toState(VectorFeature.State.Unknown);
 
@@ -70,16 +71,17 @@ public class FeatureSelectHandler extends AbastractFeatureHandler {
         Attributes attributes = vectorFeature.getAttributes();
         List<String> attributeNames = attributes.getAttributeNames();
 
-        Map<String, String> attributeMap =
-                Maps.<String, String>newHashMapWithExpectedSize(attributeNames.size());
+        Map<String, String> attributeMap = Maps.<String, String>newHashMapWithExpectedSize(
+                attributeNames.size());
         for (String name : attributeNames) {
             String value = attributes.getAttributeAsString(name);
             attributeMap.put(name, value);
         }
 
-        FeatureDetail instance =
-                new FeatureDetail(vectorFeature, attributeMap);
+        FeatureDetail instance = new FeatureDetail(vectorFeature, attributeMap);
         this.attributeValuesEvent.setInstances(Arrays.asList(instance));
+
         super.bus.fireEvent(this.attributeValuesEvent);
     }
+
 }

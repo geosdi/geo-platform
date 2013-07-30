@@ -149,7 +149,7 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
         formPanel.setLayout(new FlowLayout());
 
         FieldSet searchFieldSet = new FieldSet();
-        searchFieldSet.setHeading("Search");
+        searchFieldSet.setHeadingHtml("Search");
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);

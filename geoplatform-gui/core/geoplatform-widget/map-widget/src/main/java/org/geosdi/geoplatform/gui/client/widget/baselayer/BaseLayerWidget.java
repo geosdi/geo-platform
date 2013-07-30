@@ -101,7 +101,7 @@ public class BaseLayerWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("Base Layer Selection");
+        super.setHeadingHtml("Base Layer Selection");
         super.setScrollMode(Style.Scroll.NONE);
         super.setResizable(Boolean.FALSE);
     }

@@ -88,7 +88,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("Upload KML file");
+        super.setHeadingHtml("Upload KML file");
         super.setResizable(false);
     }
 
@@ -101,7 +101,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
     @Override
     public void addComponent() {
         panelSet = new FieldSet();
-        panelSet.setHeading("Load KML from URL");
+        panelSet.setHeadingHtml("Load KML from URL");
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);

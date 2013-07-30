@@ -53,141 +53,141 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
- * 
+ *
  */
 public class GPMeasureWidget extends ContentPanel implements
-		MeasureChangeHandler {
+        MeasureChangeHandler {
 
-	private static Stack<GPMeasureWidget> infoStack = new Stack<GPMeasureWidget>();
-	private static ArrayList<GPMeasureWidget> slots = new ArrayList<GPMeasureWidget>();
-	protected GPMeasureConfig config;
-	protected int level;
+    private static Stack<GPMeasureWidget> infoStack = new Stack<GPMeasureWidget>();
+    private static ArrayList<GPMeasureWidget> slots = new ArrayList<GPMeasureWidget>();
+    protected GPMeasureConfig config;
+    protected int level;
+    private Size size;
 
-	private Size size;
+    /**
+     * Creates a new GPScaleWidget instance.
+     */
+    public GPMeasureWidget() {
+        baseStyle = "x-info";
+        frame = true;
+        setShadow(false);
+        setLayoutOnChange(true);
 
-	/**
-	 * Creates a new GPScaleWidget instance.
-	 */
-	public GPMeasureWidget() {
-		baseStyle = "x-info";
-		frame = true;
-		setShadow(false);
-		setLayoutOnChange(true);
+        MapHandlerManager.addHandler(MeasureChangeHandler.TYPE, this);
+    }
 
-		MapHandlerManager.addHandler(MeasureChangeHandler.TYPE, this);
-	}
+    @Override
+    protected void onRender(Element parent, int pos) {
+        super.onRender(parent, pos);
+        if (GXT.isAriaEnabled()) {
+            Accessibility.setRole(getElement(), "alert");
+        }
+    }
 
-	@Override
-	protected void onRender(Element parent, int pos) {
-		super.onRender(parent, pos);
-		if (GXT.isAriaEnabled()) {
-			Accessibility.setRole(getElement(), "alert");
-		}
-	}
-	
-	public static void display(String title, String text) {
-	    display(new GPMeasureConfig(title, text));
-	  }
+    public static void display(String title, String text) {
+        display(new GPMeasureConfig(title, text));
+    }
 
-	public static void display(String title) {
-		display(new GPMeasureConfig(title));
-	}
+    public static void display(String title) {
+        display(new GPMeasureConfig(title));
+    }
 
-	public static void display(GPMeasureConfig config) {
-		pop().show(config);
-	}
+    public static void display(GPMeasureConfig config) {
+        pop().show(config);
+    }
 
-	public static void remove() {
-		pop().hide();
-	}
+    public static void remove() {
+        pop().hide();
+    }
 
-	private static GPMeasureWidget pop() {
-		GPMeasureWidget info = infoStack.size() > 0 ? (GPMeasureWidget) infoStack
-				.pop() : null;
-		if (info == null) {
-			info = new GPMeasureWidget();
-		}
-		return info;
-	}
+    private static GPMeasureWidget pop() {
+        GPMeasureWidget info = infoStack.size() > 0
+                ? (GPMeasureWidget) infoStack
+                .pop() : null;
+        if (info == null) {
+            info = new GPMeasureWidget();
+        }
+        return info;
+    }
 
-	/**
-	 * Displays the MeasureWidget.
-	 * 
-	 * @param config
-	 *            the info config
-	 */
-	public void show(GPMeasureConfig config) {
-		this.config = config;
-		onShowInfo();
-	}
+    /**
+     * Displays the MeasureWidget.
+     *
+     * @param config the info config
+     */
+    public void show(GPMeasureConfig config) {
+        this.config = config;
+        onShowInfo();
+    }
 
-	protected void onShowInfo() {
-		RootPanel.get().add(this);
-		el().makePositionable(true);
+    protected void onShowInfo() {
+        RootPanel.get().add(this);
+        el().makePositionable(true);
 
-		setTitle();
-		setText();
+        setTitle();
+        setText();
 
-	}
+    }
 
-	private void setText() {
-		if (config.text != null) {
-			if (config.params != null) {
-				config.text = Format.substitute(config.text, config.params);
-			}
-			removeAll();
-			addText(config.text);
-		}
-	}
+    private void setText() {
+        if (config.text != null) {
+            if (config.params != null) {
+                config.text = Format.substitute(config.text, config.params);
+            }
+            removeAll();
+            addText(config.text);
+        }
+    }
 
-	private void setTitle() {
-		if (config.title != null) {
-			head.setVisible(true);
-			if (config.params != null) {
-				config.title = Format.substitute(config.title, config.params);
-			}
-			setHeading(config.title);
-		} else {
-			head.setVisible(false);
-		}
-	}
+    private void setTitle() {
+        if (config.title != null) {
+            head.setVisible(true);
+            if (config.params != null) {
+                config.title = Format.substitute(config.title, config.params);
+            }
+            setHeadingHtml(config.title);
+        } else {
+            head.setVisible(false);
+        }
+    }
 
-	protected Point position() {
-		this.size = XDOM.getViewportSize();
-		int left = this.size.width - config.width - 10
-				+ XDOM.getBodyScrollLeft();
-		int top = this.size.height - config.height - 10
-				- (level * (config.height + 10)) + XDOM.getBodyScrollTop();
-		return new Point(left, top);
-	}
+    protected Point position() {
+        this.size = XDOM.getViewportSize();
+        int left = this.size.width - config.width - 10
+                + XDOM.getBodyScrollLeft();
+        int top = this.size.height - config.height - 10
+                - (level * (config.height + 10)) + XDOM.getBodyScrollTop();
+        return new Point(left, top);
+    }
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.scale.event.ScaleChangeHandler#onPositionChange(com.extjs.gxt.ui.client.util.Size)
-	 */
-	@Override
-	public void onPositionChange(Size s) {
-		if (this.size != s) {
-			this.size = s;
-			int left = this.size.width - config.width - 10
-					+ XDOM.getBodyScrollLeft();
-			int top = this.size.height - config.height - 10
-					- (level * (config.height + 10)) + XDOM.getBodyScrollTop();
-			Point p = new Point(left, top);
-			el().setLeftTop(p.x, p.y);
-		}
+    /**
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.scale.event.ScaleChangeHandler#onPositionChange(com.extjs.gxt.ui.client.util.Size)
+     */
+    @Override
+    public void onPositionChange(Size s) {
+        if (this.size != s) {
+            this.size = s;
+            int left = this.size.width - config.width - 10
+                    + XDOM.getBodyScrollLeft();
+            int top = this.size.height - config.height - 10
+                    - (level * (config.height + 10)) + XDOM.getBodyScrollTop();
+            Point p = new Point(left, top);
+            el().setLeftTop(p.x, p.y);
+        }
 
-	}
+    }
 
-	@Override
-	public void activationMeasure(boolean activate) {
-		if (activate) {
-			show();
-		} else {
-			hide();
-		}
+    @Override
+    public void activationMeasure(boolean activate) {
+        if (activate) {
+            show();
+        } else {
+            hide();
+        }
 
-	}
+    }
 
 }

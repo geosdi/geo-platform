@@ -66,7 +66,7 @@ public class GPAboutWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("About Geo-Platform");
+        super.setHeadingText("About Geo-Platform");
         super.setBodyStyle("background-color:white");
         super.setResizable(Boolean.FALSE);
     }

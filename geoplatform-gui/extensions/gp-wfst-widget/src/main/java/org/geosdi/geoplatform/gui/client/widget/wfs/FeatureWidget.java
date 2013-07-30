@@ -110,13 +110,12 @@ public class FeatureWidget extends GeoPlatformWindow
         this.addAttributesWidget();
         this.createStatusBar();
         this.createEditingBar();
-
     }
 
     @Override
     public void initSize() {
         super.setSize(1000, 650);
-        super.setHeading("GeoPlatform WFS-T Widget");
+        super.setHeadingHtml("GeoPlatform WFS-T Widget");
         super.setIcon(BasicWidgetResources.ICONS.vector());
     }
 

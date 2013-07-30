@@ -115,8 +115,8 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
 
             @Override
             public String getGeometryName() {
-                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).
-                        getGeometryName()
+                return (layer instanceof GPVectorBean)
+                        ? ((GPVectorBean) layer).getGeometryName()
                         : schema.getGeometry().getName();
             }
 

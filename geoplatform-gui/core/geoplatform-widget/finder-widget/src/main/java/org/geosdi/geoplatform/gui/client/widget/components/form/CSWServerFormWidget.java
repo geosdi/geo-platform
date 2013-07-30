@@ -118,7 +118,7 @@ public class CSWServerFormWidget
 
     private void createFieldSet() {
         fieldSet = new FieldSet();
-        fieldSet.setHeading("Server");
+        fieldSet.setHeadingHtml("Server");
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(70);
@@ -159,7 +159,7 @@ public class CSWServerFormWidget
 
     @Override
     public void initSize() {
-        setHeading("Insert CSW Server");
+        setHeadingHtml("Insert CSW Server");
         setSize(400, 210);
     }
 

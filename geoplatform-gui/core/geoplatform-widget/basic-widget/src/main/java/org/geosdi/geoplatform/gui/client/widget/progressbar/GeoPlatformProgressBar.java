@@ -48,10 +48,10 @@ public abstract class GeoPlatformProgressBar extends MessageBox {
     protected boolean initialized;
 
     public void createProgressBar(String title, String msg, String progressText) {
-        super.setTitle(title);
+        super.setTitleHtml(title);
         super.setMessage(msg);
         super.setType(MessageBoxType.WAIT);
-        super.setProgressText(progressText);
+        super.setProgressHtml(progressText);
         super.setButtons("");
         this.initialized = true;
     }

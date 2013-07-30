@@ -72,7 +72,7 @@ public class GPLegendWidget {
     public void addLegend(GPLayerBean layerBean) {
         if (this.legendsStore.getItemByItemId(layerBean.getUUID()) == null) {
             ContentPanel cp = new ContentPanel();
-            cp.setHeading(layerBean.getLabel());
+            cp.setHeadingText(layerBean.getLabel());
             cp.setId(layerBean.getUUID());
             cp.setHeaderVisible(false);
             cp.setBorders(false);

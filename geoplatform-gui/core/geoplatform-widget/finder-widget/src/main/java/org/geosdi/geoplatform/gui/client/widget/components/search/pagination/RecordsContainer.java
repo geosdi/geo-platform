@@ -140,7 +140,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(RecordKeyValue.TITLE.toString());
-        titleColumn.setHeader("Title");
+        titleColumn.setHeaderHtml("Title");
         titleColumn.setWidth(490);
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);

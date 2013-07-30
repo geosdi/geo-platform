@@ -94,7 +94,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        setHeading("GP Layers Properties Widget");
+        setHeadingHtml("GP Layers Properties Widget");
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());

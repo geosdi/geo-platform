@@ -105,7 +105,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         VerticalPanel verticalPanel = new VerticalPanel();
         verticalPanel.setSpacing(10);
         FieldSet fieldSet = new FieldSet();
-        fieldSet.setHeading("Share Project to Users");
+        fieldSet.setHeadingHtml("Share Project to Users");
         fieldSet.setWidth(GPProjectManagementWidget.COMPONENT_WIDTH - 25);
         this.projectNameLabel = new Label();
         this.projectNameLabel.setStyleAttribute("font-size", "13");
@@ -270,13 +270,13 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
 
     private void updateLabels() {
         IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        this.projectNameLabel.setText(PROJECT_NAME_LABEL + this.project.getName());
+        this.projectNameLabel.setHtml(PROJECT_NAME_LABEL + this.project.getName());
         if (project.getOwner() != null) {
-            this.ownerLabel.setText(OWNER_LABEL + project.getOwner().getName());
+            this.ownerLabel.setHtml(OWNER_LABEL + project.getOwner().getName());
         } else {
-            this.ownerLabel.setText(OWNER_LABEL + accountDetail.getName());
+            this.ownerLabel.setHtml(OWNER_LABEL + accountDetail.getName());
         }
-        this.organizationLabel.setText(ORGANIZATION_LABEL + accountDetail.getOrganization());
+        this.organizationLabel.setHtml(ORGANIZATION_LABEL + accountDetail.getOrganization());
     }
 
     @Override

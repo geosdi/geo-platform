@@ -128,13 +128,13 @@ public class GPPublisherWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("Geotiff - Shape Files Uploader");
+        super.setHeadingHtml("Geotiff - Shape Files Uploader");
         super.setResizable(false);
         super.setLayout(new BorderLayout());
         super.setModal(false);
         super.setCollapsible(true);
         super.setPlain(true);
-        this.htmlWindow.setHeading("Cluster Reload Result");
+        this.htmlWindow.setHeadingHtml("Cluster Reload Result");
         this.epsgTable = new EPSGTablePanel();
     }
 
@@ -403,7 +403,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
                 "If enabled: the cluster configuration will be reloaded after layers publishing");
         southPanel.add(fileUploader.getComponent(), centerFileUploader);
         southPanel.add(this.toggleButtonClusterReload, toggleButtonPosition);
-        southPanel.setHeading("File uploader");
+        southPanel.setHeadingHtml("File uploader");
         BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH,
                 100);
         southData.setMargins(new Margins(5, 20, 5, 20));

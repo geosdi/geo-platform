@@ -184,7 +184,7 @@ public class CSWServerPaginationContainer
 
         ColumnConfig aliasColumn = new ColumnConfig();
         aliasColumn.setId(GPCSWServerKeyValue.ALIAS.toString());
-        aliasColumn.setHeader("Alias");
+        aliasColumn.setHeaderHtml("Alias");
         aliasColumn.setFixed(true);
         aliasColumn.setResizable(false);
         aliasColumn.setRenderer(new GridCellRenderer<GPCSWServerBeanModel>() {
@@ -203,7 +203,7 @@ public class CSWServerPaginationContainer
 
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(GPCSWServerKeyValue.TITLE.toString());
-        titleColumn.setHeader("Title");
+        titleColumn.setHeaderHtml("Title");
         titleColumn.setWidth(100);
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);

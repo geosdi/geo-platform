@@ -68,7 +68,7 @@ public class GPProjectManagementWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("GeoPlatform Project Management");
+        super.setHeadingHtml("GeoPlatform Project Management");
     }
 
     public void showSharingPanel(GPClientProject clientProject) {

@@ -117,7 +117,7 @@ public class BBOXCQLButton extends AdvancedCQLButton {
 
             @Override
             public void setWindowProperties() {
-                super.setHeading("BBOX Parameter Selection");
+                super.setHeadingHtml("BBOX Parameter Selection");
                 super.setLayout(new FormLayout());
             }
         };

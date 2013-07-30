@@ -185,7 +185,7 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
             if (config.params != null) {
                 config.title = Format.substitute(config.title, config.params);
             }
-            setHeading(config.title);
+            setHeadingHtml(config.title);
         } else {
             head.setVisible(false);
         }

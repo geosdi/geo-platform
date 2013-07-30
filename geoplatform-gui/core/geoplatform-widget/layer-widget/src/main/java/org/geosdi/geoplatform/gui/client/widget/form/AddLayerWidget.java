@@ -129,7 +129,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("Add Layers Window");
+        super.setHeadingHtml("Add Layers Window");
         super.setScrollMode(Scroll.AUTOY);
         super.setResizable(false);
         this.store = new ListStore<IAddLayerPlugin>();

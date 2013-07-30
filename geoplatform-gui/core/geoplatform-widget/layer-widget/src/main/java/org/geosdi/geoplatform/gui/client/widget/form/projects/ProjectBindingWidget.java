@@ -103,7 +103,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     @Override
     public void addComponentToForm() {
         fieldSet = new FieldSet();
-        fieldSet.setHeading("Project Settings");
+        fieldSet.setHeadingHtml("Project Settings");
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(120);
         layout.setLabelPad(5);
@@ -127,7 +127,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     @Override
     public void initSize() {
-        super.setHeading("Add Project Widget");
+        super.setHeadingHtml("Add Project Widget");
         setSize(420, 200);
     }
 

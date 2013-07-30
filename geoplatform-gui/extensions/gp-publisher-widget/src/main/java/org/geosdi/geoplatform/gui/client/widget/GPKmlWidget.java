@@ -117,7 +117,7 @@ public class GPKmlWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("Preview KML file from URL");
+        super.setHeadingHtml("Preview KML file from URL");
         super.setResizable(false);
         super.setLayout(new BorderLayout());
         super.setModal(false);
@@ -227,7 +227,7 @@ public class GPKmlWidget extends GeoPlatformWindow
 
     private void addSouthPanel() {
         southPanel = new FieldSet();
-        southPanel.setHeading("Insert a KML URL for preview");
+        southPanel.setHeadingHtml("Insert a KML URL for preview");
 
         FormLayout layout = new FormLayout();
         layout.setLabelAlign(LabelAlign.TOP);

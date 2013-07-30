@@ -150,7 +150,7 @@ public class INCQLButton extends AdvancedCQLButton {
 
             @Override
             public void setWindowProperties() {
-                super.setHeading("IN Parameter Selection");
+                super.setHeadingHtml("IN Parameter Selection");
                 super.setLayout(new FormLayout());
             }
         };

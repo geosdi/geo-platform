@@ -61,7 +61,7 @@ public class RoutingManagementWidget extends ContentPanel {
      * @param controller
      */
     public RoutingManagementWidget(RoutingController controller) {
-        setHeading("Routing Widget");
+        setHeadingHtml("Routing Widget");
         setLayout(new FitLayout());
 
         this.initWidget(controller);

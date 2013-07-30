@@ -172,7 +172,7 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
 
     private void createMatchSelection() {
         matchResultSet = new FieldSet();
-        matchResultSet.setHeading("Select by condition");
+        matchResultSet.setHeadingHtml("Select by condition");
         matchResultSet.setCheckboxToggle(true);
         matchResultSet.setExpanded(true);
 

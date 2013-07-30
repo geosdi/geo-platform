@@ -92,15 +92,17 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         this.formPanel.setHeaderVisible(false);
 
         this.formPanel.add(this.createPropertiesSetting());
-        this.formPanel.add(this.createEmailSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
-        this.formPanel.add(this.createPasswordSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
+        this.formPanel.add(this.createEmailSetting(), new VBoxLayoutData(
+                new Margins(20, 0, 0, 0)));
+        this.formPanel.add(this.createPasswordSetting(), new VBoxLayoutData(
+                new Margins(20, 0, 0, 0)));
 
         panel.add(formPanel);
     }
 
     private FieldSet createPropertiesSetting() {
         FieldSet userFieldSet = new FieldSet();
-        userFieldSet.setHeading("User");
+        userFieldSet.setHeadingHtml("User");
         userFieldSet.setSize(400, 110);
         userFieldSet.setLayout(this.getFormLayoutTemplate());
 
@@ -130,7 +132,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private FieldSet createEmailSetting() {
         FieldSet emailResultSet = new FieldSet();
-        emailResultSet.setHeading("Change email");
+        emailResultSet.setHeadingHtml("Change email");
         emailResultSet.setSize(400, 50);
         emailResultSet.setCheckboxToggle(true);
         emailResultSet.setExpanded(false);
@@ -144,13 +146,16 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         emailField.setValidator(validatorUpdateEmail());
         emailResultSet.add(emailField);
 
-        emailResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
+        emailResultSet.addListener(Events.Collapse,
+                new Listener<FieldSetEvent>() {
+
             @Override
             public void handleEvent(FieldSetEvent be) {
                 updateEmail(null, true);
 
                 emailField.setValue(user.getEmail());
             }
+
         });
 
         return emailResultSet;
@@ -158,7 +163,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private FieldSet createPasswordSetting() {
         FieldSet passwordFieldSet = new FieldSet();
-        passwordFieldSet.setHeading("Change password");
+        passwordFieldSet.setHeadingHtml("Change password");
         passwordFieldSet.setSize(400, 100);
         passwordFieldSet.setCheckboxToggle(true);
         passwordFieldSet.setExpanded(false);
@@ -193,7 +198,9 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         newRePasswordField.setEnabled(false);
         passwordFieldSet.add(newRePasswordField);
 
-        passwordFieldSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
+        passwordFieldSet.addListener(Events.Collapse,
+                new Listener<FieldSetEvent>() {
+
             @Override
             public void handleEvent(FieldSetEvent be) {
                 updatePassword(null, true);
@@ -205,12 +212,16 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 newPasswordField.setEnabled(false);
                 newRePasswordField.setEnabled(false);
             }
+
         });
-        passwordFieldSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
+        passwordFieldSet.addListener(Events.Expand,
+                new Listener<FieldSetEvent>() {
+
             @Override
             public void handleEvent(FieldSetEvent be) {
                 updatePassword(null, false);
             }
+
         });
 
         return passwordFieldSet;
@@ -223,8 +234,9 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         String currentPlainPassword = oldPasswordField.getValue();
 
         UserRemoteImpl.Util.getInstance().updateOwnUser(user,
-                                                        currentPlainPassword, newPlainPassword,
-                                                        new AsyncCallback<Long>() {
+                currentPlainPassword, newPlainPassword,
+                new AsyncCallback<Long>() {
+
             @Override
             public void onFailure(Throwable caught) {
                 GeoPlatformMessage.errorMessage("Error", caught.getMessage());
@@ -235,8 +247,9 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 saveButton.disable();
 
                 GeoPlatformMessage.infoMessage("User successfully modify",
-                                               "<ul><li>" + user.getUsername() + "</li></ul>");
+                        "<ul><li>" + user.getUsername() + "</li></ul>");
             }
+
         });
     }
 
@@ -262,6 +275,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private Validator validatorUpdateName() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(user.getName())) {
@@ -275,11 +289,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 updateName(value, true);
                 return null;
             }
+
         };
     }
 
     private Validator validatorUpdateEmail() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(user.getEmail())) {
@@ -293,11 +309,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 updateEmail(value, true);
                 return null;
             }
+
         };
     }
 
     private Validator validatorPassword() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
@@ -313,11 +331,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 newPasswordField.setEnabled(true);
                 return null;
             }
+
         };
     }
 
     private Validator validatorUpdatePassword() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
@@ -334,11 +354,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 newRePasswordField.setEnabled(true);
                 return null;
             }
+
         };
     }
 
     private Validator validatorUpdateConfirmPassword() {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(newPasswordField.getValue())) {
@@ -348,6 +370,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 updatePassword(null, false);
                 return "Retyped new password don't match";
             }
+
         };
     }
 
@@ -380,11 +403,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private void updateUserProperties() {
         if (newName != null) {
-            Dispatcher.forwardEvent(GeoPlatformEvents.USER_UPDATE_HIS_NAME, newName);
+            Dispatcher.forwardEvent(GeoPlatformEvents.USER_UPDATE_HIS_NAME,
+                    newName);
             user.setName(newName);
         }
         if (newEmail != null) {
             user.setEmail(newEmail);
         }
     }
+
 }

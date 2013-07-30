@@ -93,7 +93,7 @@ public class ViewportWidget extends GeoPlatformWindow implements CreateViewportH
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("Viewport Widget");
+        super.setHeadingHtml("Viewport Widget");
         super.setScrollMode(Style.Scroll.NONE);
         super.setResizable(Boolean.FALSE);
     }

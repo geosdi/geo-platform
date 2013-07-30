@@ -123,7 +123,7 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
         public void updateField(boolean updateOriginalValue) {
             FolderTreeNode folder = (FolderTreeNode) model;
             labelField.setValue(folder.getLabel());
-            folderInfo.setText("The folder contains " + folder.getNumberOfDescendants() + " descendants.");
+            folderInfo.setHtml("The folder contains " + folder.getNumberOfDescendants() + " descendants.");
         }
 
         @Override

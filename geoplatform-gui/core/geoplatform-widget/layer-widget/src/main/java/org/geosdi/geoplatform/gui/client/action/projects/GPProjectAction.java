@@ -59,7 +59,7 @@ public class GPProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if (ce.getButton().getText().equalsIgnoreCase("Add")) {
+        if (ce.getButton().getHtml().equalsIgnoreCase("Add")) {
             this.bindingProject.showForm(Boolean.TRUE);
         } else {
             this.bindingProject.showForm(Boolean.FALSE);

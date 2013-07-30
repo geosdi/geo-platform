@@ -102,7 +102,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     @Override
     public void initSize() {
-        setHeading("Add KML from direct URL");
+        setHeadingHtml("Add KML from direct URL");
         setSize(330, 170);
     }
 
@@ -115,7 +115,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
     @Override
     public void addComponentToForm() {
         super.fieldSet = new FieldSet();
-        super.fieldSet.setHeading("Load KML from URL");
+        super.fieldSet.setHeadingHtml("Load KML from URL");
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);

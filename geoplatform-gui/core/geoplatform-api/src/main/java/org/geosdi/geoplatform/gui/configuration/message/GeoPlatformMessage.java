@@ -76,7 +76,7 @@ public class GeoPlatformMessage {
     public static void errorMessage(String title, String message) {
         MessageBox box = new MessageBox();
         box.setIcon(MessageBox.ERROR);
-        box.setTitle(title);
+        box.setTitleHtml(title);
         box.setMessage(message);
         box.show();
     }

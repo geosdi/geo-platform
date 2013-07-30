@@ -46,6 +46,9 @@ import com.google.gwt.dom.client.ScriptElement;
  */
 public class GeoPlatformJSInjector extends GPAbstractInjector {
 
+    private GeoPlatformJSInjector() {
+    }
+
     public static void inject(String... javascripts) {
         assert javascripts != null : "The element passed must not be null";
 
@@ -83,4 +86,5 @@ public class GeoPlatformJSInjector extends GPAbstractInjector {
                 ScriptKeywordEnum.SCRIPT_CHARSET.getValue().getValue());
         return script;
     }
+
 }

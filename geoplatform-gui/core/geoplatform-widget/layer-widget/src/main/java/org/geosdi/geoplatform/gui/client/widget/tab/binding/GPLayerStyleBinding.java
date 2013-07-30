@@ -88,7 +88,7 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         this.comboBox.setDisplayField(GPStyleStringKeyValue.StyleString.getValue());
 
         FieldSet fieldSet = new FieldSet();
-        fieldSet.setHeading("Select a style");
+        fieldSet.setHeadingHtml("Select a style");
 
         fieldSet.add(this.comboBox);
         fp.add(fieldSet);

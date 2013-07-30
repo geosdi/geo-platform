@@ -179,7 +179,7 @@ public class MapView extends GeoPlatformView {
         ToolBar toolBar = buttonBar.getToolBar();
         Component component = toolBar.getItemByItemId("USER_MENU");
         Button button = (Button) component;
-        String domain = button.getText();
+        String domain = button.getHtml();
         button.setText(event.getData().toString() + domain.substring(domain.indexOf("@") - 1));
     }
 }

@@ -78,9 +78,9 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
 
     @Override
     public void addComponentToForm() {
-        super.setHeading("Find Position");
+        super.setHeadingHtml("Find Position");
         fieldSet = new FieldSet();
-        fieldSet.setHeading("Goto X - Y");
+        fieldSet.setHeadingHtml("Goto X - Y");
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         fieldSet.setLayout(layout);

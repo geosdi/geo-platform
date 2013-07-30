@@ -87,12 +87,14 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.search.setFieldLabel("Find User");
         this.userPropertiesWidget = new UserPropertiesWidget(super.store);
         super.addButton(1, new Button("Add User",
-                                      BasicWidgetResources.ICONS.logged_user(),
-                                      new SelectionListener<ButtonEvent>() {
+                BasicWidgetResources.ICONS.logged_user(),
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 showUserPropertiesWidget(true);
             }
+
         }));
     }
 
@@ -104,15 +106,17 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("GeoPlatform Users Management");
+        super.setHeadingHtml("GeoPlatform Users Management");
         super.setSize(670, 490);
 
         super.addWindowListener(new WindowListener() {
+
             @Override
             public void windowShow(WindowEvent we) {
                 searchText = "";
                 loader.load(0, getPageSize());
             }
+
         });
     }
 
@@ -121,14 +125,17 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.toolBar = new PagingToolBar(super.getPageSize());
 
         super.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
+
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
 
                 UserRemote.Util.getInstance().searchUsers(
                         (PagingLoadConfig) loadConfig, searchText,
-                        GPAccountLogged.getInstance().getOrganization(), callback);
+                        GPAccountLogged.getInstance().getOrganization(),
+                        callback);
             }
+
         };
 
         super.loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
@@ -146,44 +153,44 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
         ColumnConfig nameColumn = new ColumnConfig();
         nameColumn.setId(GPSimpleUserKeyValue.NAME.toString());
-        nameColumn.setHeader("Name");
+        nameColumn.setHeaderHtml("Name");
         configs.add(nameColumn);
 
         ColumnConfig usernameColumn = new ColumnConfig();
         usernameColumn.setId(GPSimpleUserKeyValue.USERNAME.toString());
-        usernameColumn.setHeader("Username");
+        usernameColumn.setHeaderHtml("Username");
         usernameColumn.setWidth(120);
         configs.add(usernameColumn);
 
         CheckColumnConfig enabledColumn = new CheckColumnConfig();
         enabledColumn.setId(GPUserManageDetailKeyValue.ENABLED.toString());
-        enabledColumn.setHeader("Enabled");
+        enabledColumn.setHeaderHtml("Enabled");
         enabledColumn.setWidth(50);
         enabledColumn.setFixed(true);
         configs.add(enabledColumn);
 
         CheckColumnConfig tempColumn = new CheckColumnConfig();
         tempColumn.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
-        tempColumn.setHeader("Temporary");
+        tempColumn.setHeaderHtml("Temporary");
         tempColumn.setWidth(65);
         tempColumn.setFixed(true);
         configs.add(tempColumn);
 
         ColumnConfig roleColumn = new ColumnConfig();
         roleColumn.setId(GPSimpleUserKeyValue.AUTORITHY.toString());
-        roleColumn.setHeader("Role");
+        roleColumn.setHeaderHtml("Role");
         roleColumn.setWidth(80);
         configs.add(roleColumn);
-        
+
         ColumnConfig trustedLevelColumn = new ColumnConfig();
         trustedLevelColumn.setId(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
-        trustedLevelColumn.setHeader("Trusted");
+        trustedLevelColumn.setHeaderHtml("Trusted");
         trustedLevelColumn.setWidth(70);
         configs.add(trustedLevelColumn);
 
         ColumnConfig delColumn = new ColumnConfig();
         delColumn.setId("delColumn");
-        delColumn.setHeader("Delete");
+        delColumn.setHeaderHtml("Delete");
         delColumn.setWidth(40);
         delColumn.setFixed(true);
         delColumn.setResizable(false);
@@ -198,6 +205,8 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     public void setGridProperties() {
         super.widget.setSize(600, 250);
         super.widget.setAutoExpandColumn(GPSimpleUserKeyValue.NAME.toString());
+        super.widget.setColumnLines(true);
+        super.widget.setStripeRows(true);
     }
 
     @Override
@@ -208,8 +217,10 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     private void showUserPropertiesWidget(final boolean isNewUser) {
         searchStatus.setBusy("Retrive roles");
 
-        UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
-                                                      new AsyncCallback<ArrayList<String>>() {
+        UserRemoteImpl.Util.getInstance().getAllRoles(
+                GPAccountLogged.getInstance().getOrganization(),
+                new AsyncCallback<ArrayList<String>>() {
+
             @Override
             public void onFailure(Throwable caught) {
                 setSearchStatus(
@@ -220,7 +231,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
             @Override
             public void onSuccess(ArrayList<String> result) {
                 setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
-                                SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+                        SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
 
                 GPUserManageDetail userDetail;
                 if (isNewUser) {
@@ -230,6 +241,8 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
                 }
                 userPropertiesWidget.show(userDetail, result);
             }
+
         });
     }
+
 }

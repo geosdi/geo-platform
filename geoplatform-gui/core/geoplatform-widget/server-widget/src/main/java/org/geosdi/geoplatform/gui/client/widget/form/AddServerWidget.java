@@ -86,7 +86,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
-        this.fieldSet.setHeading("Server");
+        this.fieldSet.setHeadingHtml("Server");
         this.fieldSet.setToolTip("Insert a valid WMS Url and name for the server.");
 
         FormLayout layout = new FormLayout();
@@ -213,7 +213,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
     @Override
     public void initSize() {
-        setHeading("Add Server");
+        setHeadingHtml("Add Server");
         setSize(380, 210);
     }
 

@@ -61,7 +61,7 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 
     private void initWidget() {
         directionsField = new FieldSet();
-        directionsField.setHeading("Directions");
+        directionsField.setHeadingHtml("Directions");
         directionsField.setCollapsible(false);
 
         directionsField.add(this.grid);

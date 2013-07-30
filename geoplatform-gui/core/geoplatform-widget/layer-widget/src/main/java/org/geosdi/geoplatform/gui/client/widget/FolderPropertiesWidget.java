@@ -93,7 +93,7 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        setHeading("GP Folder Properties Widget");
+        setHeadingHtml("GP Folder Properties Widget");
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());

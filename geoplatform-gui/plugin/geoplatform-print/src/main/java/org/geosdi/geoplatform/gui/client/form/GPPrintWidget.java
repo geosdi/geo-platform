@@ -141,7 +141,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     @Override
     public void initSize() {
-        super.setHeading("GeoPlatform Print Widget");
+        super.setHeadingHtml("GeoPlatform Print Widget");
         super.setPosition(RootPanel.get().getOffsetWidth() - 400 - 6, 55);
         setSize(400, 650);
     }
@@ -443,7 +443,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addEditPrintSettings() {
         fieldSet = new FieldSet();
-        fieldSet.setHeading("Edit Print Settings");
+        fieldSet.setHeadingHtml("Edit Print Settings");
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -475,7 +475,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addComboDPI() {
         fieldSet = new FieldSet();
-        fieldSet.setHeading("DPI");
+        fieldSet.setHeadingHtml("DPI");
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -503,7 +503,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addComboTemplate() {
         fieldSet = new FieldSet();
-        fieldSet.setHeading("Template");
+        fieldSet.setHeadingHtml("Template");
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -576,7 +576,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addScaleCombo() {
         fieldSet = new FieldSet();
-        fieldSet.setHeading("Scale");
+        fieldSet.setHeadingHtml("Scale");
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -648,7 +648,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addCheckPrintBaseMap() {
         fieldSet = new FieldSet();
-        fieldSet.setHeading("Base Map");
+        fieldSet.setHeadingHtml("Base Map");
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);

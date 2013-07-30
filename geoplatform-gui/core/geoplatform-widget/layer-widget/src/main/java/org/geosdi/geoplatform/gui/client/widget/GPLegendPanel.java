@@ -70,7 +70,7 @@ public class GPLegendPanel extends GeoPlatformContentPanel implements
 
     @Override
     public void setPanelProperties() {
-        setHeading("GeoPlatform - Legend Widget");
+        setHeadingHtml("GeoPlatform - Legend Widget");
         setScrollMode(Scroll.AUTOY);
 
         LayerHandlerManager.addHandler(LegendLayerHandler.TYPE, this);

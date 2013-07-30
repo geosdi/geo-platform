@@ -67,7 +67,8 @@ public class TimeInputWidget extends GeoPlatformWindow {
         this.timeFieldRestriction = timeFieldRestriction;
     }
 
-    private void addDateAndTimeToContainer(LayoutContainer layoutContainer, String dataLabel,
+    private void addDateAndTimeToContainer(LayoutContainer layoutContainer,
+            String dataLabel,
             String timeLabel) {
         final DateField dateField = new DateField();
         dateField.setFieldLabel(dataLabel);
@@ -85,7 +86,9 @@ public class TimeInputWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
-        final Button insertButton = new Button("Insert", new SelectionListener<ButtonEvent>() {
+        final Button insertButton = new Button("Insert",
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent be) {
                 StringBuilder timeBuilder = new StringBuilder();
@@ -94,7 +97,9 @@ public class TimeInputWidget extends GeoPlatformWindow {
 //                    System.out.println("Data: " + DateTimeFormat.getFormat("yyyy-MM-dd").format(dateField.getValue()));
                     TimeField timeField = timeContainer.getData(TIME_KEY_VALUE);
 //                    System.out.println("Time: " + timeField.getValue().getText());
-                    timeBuilder.append(DateTimeFormat.getFormat("yyyy-MM-dd").format(dateField.getValue()));
+                    timeBuilder.append(
+                            DateTimeFormat.getFormat("yyyy-MM-dd").format(
+                            dateField.getValue()));
                     timeBuilder.append("T");
                     timeBuilder.append(timeField.getValue().getText());
                     timeBuilder.append(":00Z");
@@ -102,6 +107,7 @@ public class TimeInputWidget extends GeoPlatformWindow {
                 timeFieldRestriction.setValue(timeBuilder.toString());
                 TimeInputWidget.super.hide();
             }
+
         });
 
         addButton(insertButton);
@@ -109,7 +115,8 @@ public class TimeInputWidget extends GeoPlatformWindow {
         formData = new FormData("98%");
 
         timeContainer = new LayoutContainer(new FormLayout());
-        this.addDateAndTimeToContainer(timeContainer, DATE_KEY_VALUE, TIME_KEY_VALUE);
+        this.addDateAndTimeToContainer(timeContainer, DATE_KEY_VALUE,
+                TIME_KEY_VALUE);
         add(new Label("Please, select the required parameters."));
         add(timeContainer, formData);
     }
@@ -121,7 +128,8 @@ public class TimeInputWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("Time Filter Composition");
+        super.setHeadingHtml("Time Filter Composition");
         super.setLayout(new FormLayout());
     }
+
 }

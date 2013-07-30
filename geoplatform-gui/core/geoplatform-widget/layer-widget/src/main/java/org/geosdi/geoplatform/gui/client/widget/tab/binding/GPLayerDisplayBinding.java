@@ -84,7 +84,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         setSliderProperties();
 
         final FieldSet opacityFieldSet = new FieldSet();
-        opacityFieldSet.setHeading("Layer Opacity");
+        opacityFieldSet.setHeadingHtml("Layer Opacity");
         opacityFieldSet.setCollapsible(true);
 
         opacityFieldSet.addListener(Events.Collapse, new Listener<ComponentEvent>() {

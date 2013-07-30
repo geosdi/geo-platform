@@ -61,13 +61,16 @@ public class AttributeCustomFieldsMap {
 
         map.put("string", new AttributeCustomFields(getStringOperatorTypes(),
                 attributeValuesValidator("string", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 return true;
             }
+
         })));
         map.put("boolean", new AttributeCustomFields(getBooleanOperatorTypes(),
                 attributeValuesValidator("boolean", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 if (!value.equalsIgnoreCase("true")
@@ -76,16 +79,20 @@ public class AttributeCustomFieldsMap {
                 }
                 return true;
             }
+
         })));
         map.put("decimal", new AttributeCustomFields(getNumberOperatorTypes(),
                 attributeValuesValidator("decimal", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 return value.matches("(\\+|-)?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)");
             }
+
         })));
         map.put("float", new AttributeCustomFields(getNumberOperatorTypes(),
                 attributeValuesValidator("float", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 try {
@@ -95,9 +102,11 @@ public class AttributeCustomFieldsMap {
                 }
                 return true;
             }
+
         })));
         map.put("double", new AttributeCustomFields(getNumberOperatorTypes(),
                 attributeValuesValidator("double", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 try {
@@ -107,22 +116,28 @@ public class AttributeCustomFieldsMap {
                 }
                 return true;
             }
+
         })));
         //
         map.put("duration", new AttributeCustomFields(getDateOperatorTypes(),
                 attributeValuesValidator("duration", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
-                if (value.matches("-?P[0-9]+Y?([0-9]+M)?([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+(\\.[0-9]+)?S)?)?")
-                        && value.matches("'.*[YMDHS].*'") && value.matches("'.*[^T]'")) {
+                if (value.matches(
+                        "-?P[0-9]+Y?([0-9]+M)?([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+(\\.[0-9]+)?S)?)?")
+                        && value.matches("'.*[YMDHS].*'") && value.matches(
+                        "'.*[^T]'")) {
                     result = true;
                 }
                 return result;
             }
+
         })));
         map.put("dateTime", new AttributeCustomFields(getDateOperatorTypes(),
                 attributeValuesValidator("dateTime", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
@@ -137,9 +152,11 @@ public class AttributeCustomFieldsMap {
                 }
                 return result;
             }
+
         })));
         map.put("integer", new AttributeCustomFields(getNumberOperatorTypes(),
                 attributeValuesValidator("integer", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 try {
@@ -149,9 +166,13 @@ public class AttributeCustomFieldsMap {
                 }
                 return true;
             }
+
         })));
-        map.put("nonPositiveInteger", new AttributeCustomFields(getNumberOperatorTypes(),
-                attributeValuesValidator("nonPositiveInteger", new TypeValidator() {
+        map.put("nonPositiveInteger", new AttributeCustomFields(
+                getNumberOperatorTypes(),
+                attributeValuesValidator("nonPositiveInteger",
+                new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
@@ -162,9 +183,13 @@ public class AttributeCustomFieldsMap {
                 }
                 return result;
             }
+
         })));
-        map.put("negativeInteger", new AttributeCustomFields(getNumberOperatorTypes(),
-                attributeValuesValidator("negativeInteger", new TypeValidator() {
+        map.put("negativeInteger", new AttributeCustomFields(
+                getNumberOperatorTypes(),
+                attributeValuesValidator("negativeInteger",
+                new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
@@ -175,9 +200,13 @@ public class AttributeCustomFieldsMap {
                 }
                 return result;
             }
+
         })));
-        map.put("nonNegativeInteger", new AttributeCustomFields(getNumberOperatorTypes(),
-                attributeValuesValidator("nonNegativeInteger", new TypeValidator() {
+        map.put("nonNegativeInteger", new AttributeCustomFields(
+                getNumberOperatorTypes(),
+                attributeValuesValidator("nonNegativeInteger",
+                new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
@@ -188,9 +217,12 @@ public class AttributeCustomFieldsMap {
                 }
                 return result;
             }
+
         })));
-        map.put("unsignedInt", new AttributeCustomFields(getNumberOperatorTypes(),
+        map.put("unsignedInt", new AttributeCustomFields(
+                getNumberOperatorTypes(),
                 attributeValuesValidator("unsignedInt", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
@@ -201,9 +233,13 @@ public class AttributeCustomFieldsMap {
                 }
                 return result;
             }
+
         })));
-        map.put("positiveInteger", new AttributeCustomFields(getNumberOperatorTypes(),
-                attributeValuesValidator("positiveInteger", new TypeValidator() {
+        map.put("positiveInteger", new AttributeCustomFields(
+                getNumberOperatorTypes(),
+                attributeValuesValidator("positiveInteger",
+                new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
@@ -214,9 +250,12 @@ public class AttributeCustomFieldsMap {
                 }
                 return result;
             }
+
         })));
-        map.put("unsignedShort", new AttributeCustomFields(getNumberOperatorTypes(),
+        map.put("unsignedShort", new AttributeCustomFields(
+                getNumberOperatorTypes(),
                 attributeValuesValidator("unsignedShort", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
@@ -227,9 +266,12 @@ public class AttributeCustomFieldsMap {
                 }
                 return result;
             }
+
         })));
-        map.put("unsignedLong", new AttributeCustomFields(getNumberOperatorTypes(),
+        map.put("unsignedLong", new AttributeCustomFields(
+                getNumberOperatorTypes(),
                 attributeValuesValidator("unsignedLong", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
@@ -240,9 +282,11 @@ public class AttributeCustomFieldsMap {
                 }
                 return result;
             }
+
         })));
         map.put("long", new AttributeCustomFields(getNumberOperatorTypes(),
                 attributeValuesValidator("long", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 try {
@@ -252,9 +296,11 @@ public class AttributeCustomFieldsMap {
                 }
                 return true;
             }
+
         })));
         map.put("int", new AttributeCustomFields(getNumberOperatorTypes(),
                 attributeValuesValidator("int", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 try {
@@ -264,9 +310,11 @@ public class AttributeCustomFieldsMap {
                 }
                 return true;
             }
+
         })));
         map.put("short", new AttributeCustomFields(getNumberOperatorTypes(),
                 attributeValuesValidator("short", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 try {
@@ -276,9 +324,11 @@ public class AttributeCustomFieldsMap {
                 }
                 return true;
             }
+
         })));
         map.put("byte", new AttributeCustomFields(getNumberOperatorTypes(),
                 attributeValuesValidator("byte", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 boolean result = false;
@@ -290,9 +340,12 @@ public class AttributeCustomFieldsMap {
                 }
                 return result;
             }
+
         })));
-        map.put("unsignedByte", new AttributeCustomFields(getNumberOperatorTypes(),
+        map.put("unsignedByte", new AttributeCustomFields(
+                getNumberOperatorTypes(),
                 attributeValuesValidator("unsignedByte", new TypeValidator() {
+
             @Override
             public boolean validateType(String value) {
                 try {
@@ -302,10 +355,12 @@ public class AttributeCustomFieldsMap {
                 }
                 return true;
             }
+
         })));
 
 
-        CUSTOM_FIELD_MAP = Collections.<String, AttributeCustomFields>unmodifiableMap(map);
+        CUSTOM_FIELD_MAP = Collections.<String, AttributeCustomFields>unmodifiableMap(
+                map);
     }
 
     private static List<OperatorType> getStringOperatorTypes() {
@@ -347,9 +402,11 @@ public class AttributeCustomFieldsMap {
     private static Validator attributeValuesValidator(final String dataType,
             final TypeValidator validator) {
         return new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
-                String typeName = dataType.substring(dataType.lastIndexOf(".") + 1);
+                String typeName = dataType.substring(
+                        dataType.lastIndexOf(".") + 1);
                 if (!validator.validateType(value)) {
                     String errorValidation = "The value must be of " + typeName + " type";
 //                    bus.fireEvent(new FeatureStatusBarEvent(
@@ -358,6 +415,8 @@ public class AttributeCustomFieldsMap {
                 }
                 return null;
             }
+
         };
     }
+
 }

@@ -36,6 +36,9 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
@@ -47,6 +50,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.google.common.collect.Lists;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
@@ -71,7 +75,12 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 public class FeatureAttributesWidget extends GeoPlatformContentPanel
         implements FeatureAttributesHandler {
 
+    static {
+        mockColumnModel = new ColumnModel(new ArrayList<ColumnConfig>());
+    }
+
     public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
+    private static final ColumnModel mockColumnModel;
     //
     private GPEventBus bus;
     //
@@ -91,15 +100,19 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
     }
 
-    public void setAttributes(List<AttributeDetail> attributes) {
+    public void bind(List<AttributeDetail> attributes) {
         assert (attributes != null) : "Attributes must not bu null.";
         this.attributes = attributes;
     }
 
+    public void reconfigureEditorGrid() {
+        this.grid.reconfigure(store, this.prepareColumnModel());
+    }
+    
     @Override
     protected void beforeRender() {
-        this.createStore();
-        this.createEditorGrid();
+        super.beforeRender();
+        this.grid.reconfigure(store, this.prepareColumnModel());
     }
 
     @Override
@@ -110,6 +123,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Override
     public void addComponent() {
+        this.createStore();
+        this.createEditorGrid();
     }
 
     @Override
@@ -136,6 +151,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     public void reset() {
         grid.stopEditing(true);
         store.removeAll();
+
         vectors = null;
         bus.fireEvent(new ActionEnableEvent(false));
         super.setVScrollPosition(0);
@@ -161,7 +177,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     private void createEditorGrid() {
         grid = new EditorGrid<FeatureAttributeValuesDetail>(store,
-                this.prepareColumnModel());
+                mockColumnModel);
 
         grid.setBorders(true);
         grid.setStripeRows(true);
@@ -169,10 +185,19 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         grid.setColumnResize(true);
         grid.setHeight(125);
         grid.setAutoWidth(true);
-//        grid.setAutoExpandMin(100);
-//        grid.setAutoExpandMax(400);
 
-//        grid.setSelectionModel(new GridSelectionModel<AttributeValuesDetail>());
+        grid.setClicksToEdit(EditorGrid.ClicksToEdit.TWO);
+        grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SIMPLE);
+
+        grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
+
+            @Override
+            public void handleEvent(BaseEvent be) {
+                System.out.println("SELECTED @@@@@@@@@@ "
+                        + grid.getSelectionModel().getSelectedItem());
+            }
+
+        });
 
         super.add(grid);
     }

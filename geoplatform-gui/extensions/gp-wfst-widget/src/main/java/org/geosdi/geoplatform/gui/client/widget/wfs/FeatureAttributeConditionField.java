@@ -116,7 +116,7 @@ public class FeatureAttributeConditionField extends MultiField {
                     operatorCombo.disable();
                 } else {
                     AttributeCustomFields customFields =
-                            AttributeCustomFieldsMap.CUSTOM_FIELD_MAP.get(
+                            AttributeCustomFieldsMap.getAttributeCustomFields(
                             attributeDetail.getType());
                     operatorCombo.clear();
                     operatorCombo.removeAll();

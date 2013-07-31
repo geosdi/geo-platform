@@ -42,9 +42,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
-import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
@@ -61,6 +59,8 @@ import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseHeightEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFields;
+import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -78,7 +78,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     static {
         mockColumnModel = new ColumnModel(new ArrayList<ColumnConfig>());
     }
-
     public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
     private static final ColumnModel mockColumnModel;
     //
@@ -108,7 +107,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     public void reconfigureEditorGrid() {
         this.grid.reconfigure(store, this.prepareColumnModel());
     }
-    
+
     @Override
     protected void beforeRender() {
         super.beforeRender();
@@ -161,7 +160,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         store = new ListStore<FeatureAttributeValuesDetail>();
         store.addStoreListener(
                 new StoreListener<FeatureAttributeValuesDetail>() {
-
             @Override
             public void storeClear(StoreEvent<FeatureAttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(false));
@@ -171,7 +169,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             public void storeUpdate(StoreEvent<FeatureAttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(true));
             }
-
         });
     }
 
@@ -190,13 +187,11 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SIMPLE);
 
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 System.out.println("SELECTED @@@@@@@@@@ "
                         + grid.getSelectionModel().getSelectedItem());
             }
-
         });
 
         super.add(grid);
@@ -209,10 +204,13 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         for (AttributeDetail att : attributes) {
             TextField<String> valueTextField = new TextField<String>();
 
-            valueTextField.setValidator(this.attributeValuesValidator());
+            AttributeCustomFields attributeCustomFields =
+                    AttributeCustomFieldsMap.getAttributeCustomFields(att.getType());
+
+            valueTextField.setValidator(attributeCustomFields.getValidator());
+
             valueTextField.setAutoValidate(true);
             CellEditor valueEditor = new CellEditor(valueTextField) {
-
                 @Override
                 public Object postProcessValue(Object value) {
                     if (value == null) {
@@ -223,7 +221,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                             FeatureStatusBarType.STATUS_OK));
                     return value;
                 }
-
             };
 
             ColumnConfig valueColumn = new ColumnConfig();
@@ -283,8 +280,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         grid.mask("Retrieve " + numFeature + " feature instance attributes");
 
-        this.vectors = Lists.newArrayListWithCapacity(numFeature);
-        List<FeatureAttributeValuesDetail> attValues = Lists.newArrayListWithCapacity(
+        this.vectors = Lists.<VectorFeature>newArrayListWithCapacity(numFeature);
+        List<FeatureAttributeValuesDetail> attValues = Lists.<FeatureAttributeValuesDetail>newArrayListWithCapacity(
                 numFeature);
 
         for (FeatureDetail instace : instaces) {
@@ -318,32 +315,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         bus.fireEvent(new ActionEnableEvent(false));
     }
 
-    private Validator attributeValuesValidator() {
-        return new Validator() {
-
-            @Override
-            public String validate(Field<?> field,
-                    String value) {
-//                AttributeValuesDetail selectedItem = grid.getSelectionModel().getSelectedItem();
-//                System.out.println("*** SELECTED " + selectedItem);
-
-//                String type = selectedItem.getType();
-//                String typeName = type.substring(type.lastIndexOf(".") + 1);
-////                System.out.println("*** " + typeName + " - value: " + value);
-//
-//                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(type);
-//                if (!validator.validateType(value)) {
-//                    String errorValidation = "The value must be of " + typeName + " type";
-//                    bus.fireEvent(new FeatureStatusBarEvent(
-//                            errorValidation, FeatureStatusBarType.STATUS_ERROR));
-//                    return errorValidation;
-//                }
-                return null;
-            }
-
-        };
-    }
-
     @Override
     public void maskAttributes(boolean mask) {
         if (mask) {
@@ -352,5 +323,4 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             grid.unmask();
         }
     }
-
 }

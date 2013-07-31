@@ -171,7 +171,6 @@ public class FeatureWidget extends GeoPlatformWindow
         super.getButtonBar().add(new FillToolItem());
 
         super.addButton(resetButton);
-
         super.addButton(saveButton);
 
         this.disableButtons();
@@ -216,6 +215,7 @@ public class FeatureWidget extends GeoPlatformWindow
         this.statusBar.setBusy("Loading Layer as WFS");
 
         this.mapWidget.bind(selectedLayer, schemaDTO);
+        this.attributesWidget.reconfigureEditorGrid();
     }
 
     @Override
@@ -239,8 +239,8 @@ public class FeatureWidget extends GeoPlatformWindow
         List<AttributeDetail> attributes =
                 FeatureConverter.convertDTOs(this.schemaDTO.getAttributes());
 
-        this.attributesWidget.setAttributes(attributes);
-        this.selectionWidget.setSchema(schemaDTO);
+        this.attributesWidget.bind(attributes);
+        this.selectionWidget.bind(schemaDTO, attributes);
     }
 
     @Override

@@ -311,10 +311,9 @@ public class AttributeCustomFieldsMap {
     private static List<OperatorType> getStringOperatorTypes() {
         List<OperatorType> operatorTypeList = Lists.<OperatorType>newArrayList();
         operatorTypeList.add(OperatorType.EQUAL);
-        operatorTypeList.add(OperatorType.GREATER);
-        operatorTypeList.add(OperatorType.GREATER_OR_EQUAL);
-        operatorTypeList.add(OperatorType.LESS);
-        operatorTypeList.add(OperatorType.LESS_OR_EQUAL);
+        operatorTypeList.add(OperatorType.STARTS_WITH);
+        operatorTypeList.add(OperatorType.ENDS_WITH);
+        operatorTypeList.add(OperatorType.CONTAINS);
         operatorTypeList.add(OperatorType.LIKE);
         operatorTypeList.add(OperatorType.NOT_EQUAL);
         return operatorTypeList;

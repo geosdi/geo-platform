@@ -60,7 +60,6 @@ import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.IDateSelectedHandler;
-import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFields;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
@@ -220,13 +219,12 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         for (final AttributeDetail att : attributes) {
             TextField<String> valueTextField = new TextField<String>();
 
-            AttributeCustomFields attributeCustomFields =
-                    AttributeCustomFieldsMap.getAttributeCustomFields(att.getType());
-
-            valueTextField.setValidator(attributeCustomFields.getValidator());
+            valueTextField.setValidator(
+                    AttributeCustomFieldsMap.getValidatorForAttributeType(
+                    att.getType()));
 
             valueTextField.setAutoValidate(true);
-            final CellEditor valueEditor = new CellEditor(valueTextField) {
+            CellEditor valueEditor = new CellEditor(valueTextField) {
                 @Override
                 public Object postProcessValue(Object value) {
                     if (value == null) {

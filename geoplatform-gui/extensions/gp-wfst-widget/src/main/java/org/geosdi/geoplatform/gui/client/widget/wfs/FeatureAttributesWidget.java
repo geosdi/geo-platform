@@ -42,9 +42,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
-import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
@@ -61,6 +59,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseHeightEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -108,7 +107,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     public void reconfigureEditorGrid() {
         this.grid.reconfigure(store, this.prepareColumnModel());
     }
-    
+
     @Override
     protected void beforeRender() {
         super.beforeRender();
@@ -130,7 +129,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     @Override
     public void initSize() {
     }
-    
+
     protected void manageGridSize() {
         this.grid.setHeight(super.getHeight() - 25);
     }
@@ -208,7 +207,12 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         for (AttributeDetail att : attributes) {
             TextField<String> valueTextField = new TextField<String>();
-            valueTextField.setValidator(this.attributeValuesValidator());
+
+
+            valueTextField.setValidator(
+                    AttributeCustomFieldsMap.getValidatorForAttributeType(
+                    att.getType()));
+
             valueTextField.setAutoValidate(true);
             CellEditor valueEditor = new CellEditor(valueTextField) {
 
@@ -224,13 +228,14 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                 }
 
             };
-            
+
             ColumnConfig valueColumn = new ColumnConfig();
             String name = att.getName();
             valueColumn.setId(name);
             valueColumn.setHeader(name);
             valueColumn.setEditor(valueEditor);
-            valueColumn.setWidth(name.length() * 10);
+
+            valueColumn.setWidth(100);
 
             configs.add(valueColumn);
         }
@@ -282,8 +287,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         grid.mask("Retrieve " + numFeature + " feature instance attributes");
 
-        this.vectors = Lists.newArrayListWithCapacity(numFeature);
-        List<FeatureAttributeValuesDetail> attValues = Lists.newArrayListWithCapacity(
+        this.vectors = Lists.<VectorFeature>newArrayListWithCapacity(numFeature);
+        List<FeatureAttributeValuesDetail> attValues = Lists.<FeatureAttributeValuesDetail>newArrayListWithCapacity(
                 numFeature);
 
         for (FeatureDetail instace : instaces) {
@@ -315,32 +320,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         store.commitChanges();
         bus.fireEvent(new ActionEnableEvent(false));
-    }
-
-    private Validator attributeValuesValidator() {
-        return new Validator() {
-
-            @Override
-            public String validate(Field<?> field,
-                    String value) {
-//                AttributeValuesDetail selectedItem = grid.getSelectionModel().getSelectedItem();
-//                System.out.println("*** SELECTED " + selectedItem);
-
-//                String type = selectedItem.getType();
-//                String typeName = type.substring(type.lastIndexOf(".") + 1);
-////                System.out.println("*** " + typeName + " - value: " + value);
-//
-//                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(type);
-//                if (!validator.validateType(value)) {
-//                    String errorValidation = "The value must be of " + typeName + " type";
-//                    bus.fireEvent(new FeatureStatusBarEvent(
-//                            errorValidation, FeatureStatusBarType.STATUS_ERROR));
-//                    return errorValidation;
-//                }
-                return null;
-            }
-
-        };
     }
 
     @Override

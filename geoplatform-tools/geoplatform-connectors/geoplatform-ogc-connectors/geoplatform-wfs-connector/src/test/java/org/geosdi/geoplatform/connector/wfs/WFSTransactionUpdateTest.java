@@ -41,8 +41,6 @@ import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
-import org.geosdi.geoplatform.xml.wfs.v110.TransactionSummaryType;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -50,22 +48,25 @@ import org.junit.Test;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WFSTransactionUpdateTest extends WFSTestConfigurator {
-    
+
     private final static QName POLY_LANDMARKS = new QName(
             "http://www.census.gov", "tiger:poly_landmarks");
-    
+    //
+    private final static QName FIRESAT = new QName(
+            "http://www.openplans.org/spearfish", "sf:firesat");
+
     @Test
     public void polyLandmarks() throws Exception {
         WFSTransactionRequest<TransactionResponseType> request =
                 super.serverConnector.createTransactionRequest();
-        
+
         request.setOperation(TransactionOperation.UPDATE);
-        
+
         QName name = new QName(POLY_LANDMARKS.getLocalPart());
         request.setTypeName(name);
-        
+
         request.setFID("poly_landmarks.1");
-        
+
         AttributeDTO att = new AttributeDTO();
         att.setMaxOccurs(1);
         att.setMinOccurs(0);
@@ -77,7 +78,7 @@ public class WFSTransactionUpdateTest extends WFSTestConfigurator {
 
         // We must avoid transactions on the server,
         // but show only the requests generated
-        
+
         logger.info("HERE THE REQUEST ########################## \n {}",
                 request.showRequestAsString());
 
@@ -90,4 +91,39 @@ public class WFSTransactionUpdateTest extends WFSTestConfigurator {
 //        Assert.assertEquals(1, transactionSummary.getTotalUpdated().intValue());
 //        Assert.assertEquals("1.1.0", response.getVersion());
     }
+
+//    @Test
+//    public void testFiresat() throws Exception {
+//        WFSTransactionRequest<TransactionResponseType> request =
+//                super.serverConnector.createTransactionRequest();
+//
+//        request.setOperation(TransactionOperation.UPDATE);
+//
+//        QName name = new QName(FIRESAT.getLocalPart());
+//        request.setTypeName(name);
+//
+//        request.setFID("firesat.10234");
+//
+//        AttributeDTO att = new AttributeDTO();
+//        att.setName("AREA");
+//        
+//        att.setValue("33");
+//        request.setAttributes(Arrays.asList(att));
+//
+//        // We must avoid transactions on the server,
+//        // but show only the requests generated
+//
+//        logger.info("HERE THE REQUEST ########################## \n {}",
+//                request.showRequestAsString());
+//        
+//        TransactionResponseType response = request.getResponse();
+//        logger.info("\n*** {}", response.getTransactionResults());
+//
+//        TransactionSummaryType transactionSummary = response.getTransactionSummary();
+//        Assert.assertEquals(0, transactionSummary.getTotalDeleted().intValue());
+//        Assert.assertEquals(0, transactionSummary.getTotalInserted().intValue());
+//        Assert.assertEquals(1, transactionSummary.getTotalUpdated().intValue());
+//        Assert.assertEquals("1.1.0", response.getVersion());
+//    }
+
 }

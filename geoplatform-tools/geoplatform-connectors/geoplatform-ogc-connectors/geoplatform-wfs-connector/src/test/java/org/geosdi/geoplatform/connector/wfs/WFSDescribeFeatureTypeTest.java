@@ -59,7 +59,7 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
     public void testV110() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = super.serverConnector.createDescribeFeatureTypeRequest();
 
-        QName name = new QName("topp:states");
+        QName name = new QName("sf:firesat");
 
         request.setTypeName(Arrays.asList(name));
 

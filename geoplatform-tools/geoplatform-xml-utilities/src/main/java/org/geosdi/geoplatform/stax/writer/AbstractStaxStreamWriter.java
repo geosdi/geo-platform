@@ -43,6 +43,8 @@ import javax.xml.stream.XMLStreamWriter;
 import org.geosdi.geoplatform.stax.writer.builder.XmlStreamWriterBuilder;
 import org.geosdi.geoplatform.stax.writer.builder.streamchain.StreamWriterBuildHandler;
 import org.geosdi.geoplatform.stax.writer.builder.streamchain.StringBuildHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -52,6 +54,9 @@ import org.geosdi.geoplatform.stax.writer.builder.streamchain.StringBuildHandler
 public abstract class AbstractStaxStreamWriter<T extends Object> implements
         GeoPlatformStaxWriter {
 
+    protected static final Logger logger = LoggerFactory.getLogger(
+            AbstractStaxStreamWriter.class);
+    //
     protected XMLStreamWriter writer;
     private StreamWriterBuildHandler streamBuilder = new StringBuildHandler();
     private XmlStreamWriterBuilder xmlStreamBuilder = XmlStreamWriterBuilder.newInstance();
@@ -67,7 +72,7 @@ public abstract class AbstractStaxStreamWriter<T extends Object> implements
         this.stream = streamBuilder.buildStream(o);
 
         this.writer = (this.stream != null) ? xmlStreamBuilder.build(stream)
-                      : xmlStreamBuilder.build(o);
+                : xmlStreamBuilder.build(o);
     }
 
     @Override
@@ -94,9 +99,9 @@ public abstract class AbstractStaxStreamWriter<T extends Object> implements
      * @param value
      * @throws XMLStreamException
      */
-    protected void writeElement(final String prefix, 
-            final String localName, 
-            final String nameSpace, 
+    protected void writeElement(final String prefix,
+            final String localName,
+            final String nameSpace,
             final Object value) throws XMLStreamException {
 
         if (value != null) {
@@ -114,7 +119,7 @@ public abstract class AbstractStaxStreamWriter<T extends Object> implements
      * @param value
      * @throws XMLStreamException
      */
-    protected void writeElement(final String localName, 
+    protected void writeElement(final String localName,
             final Object value) throws XMLStreamException {
 
         if (value != null) {
@@ -141,4 +146,5 @@ public abstract class AbstractStaxStreamWriter<T extends Object> implements
             stream = null;
         }
     }
+
 }

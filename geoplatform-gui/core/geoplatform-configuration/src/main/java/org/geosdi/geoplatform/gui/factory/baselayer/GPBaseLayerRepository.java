@@ -55,6 +55,7 @@ import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
+import org.gwtopenmaps.openlayers.client.protocol.ProtocolType;
 
 /**
  *
@@ -221,7 +222,7 @@ class GPBaseLayerRepository {
                 GPCoordinateReferenceSystem.WGS_84.getCode());
         wmsLayerParams.setTileSize(new Size(256, 256));
         WMS metacarta = new WMS("Metacarta",
-                "http://labs.metacarta.com/wms/vmap0",
+                "http://vmap0.tiles.osgeo.org/wms/vmap0",
                 wmsParams, wmsLayerParams);
         metacarta.setIsBaseLayer(Boolean.TRUE);
 
@@ -271,6 +272,7 @@ class GPBaseLayerRepository {
     private Layer createBingRoadBaseLayer() {
         BingOptions bingOption = new BingOptions("Bing Road Layer", bingKey,
                 BingType.ROAD);
+        bingOption.setProtocol(ProtocolType.HTTPS);
         bingOption.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Bing road = new Bing(bingOption);
@@ -282,6 +284,7 @@ class GPBaseLayerRepository {
     private Layer createBingHybridBaseLayer() {
         BingOptions bingOption = new BingOptions("Bing Hybrid Layer", bingKey,
                 BingType.HYBRID);
+        bingOption.setProtocol(ProtocolType.HTTPS);
         bingOption.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Bing hybrid = new Bing(bingOption);
@@ -293,6 +296,7 @@ class GPBaseLayerRepository {
     private Layer createBingAerialBaseLayer() {
         BingOptions bingOption = new BingOptions("Bing Aerial Layer", bingKey,
                 BingType.AERIAL);
+        bingOption.setProtocol(ProtocolType.HTTPS);
         bingOption.setProjection(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         Bing aerial = new Bing(bingOption);

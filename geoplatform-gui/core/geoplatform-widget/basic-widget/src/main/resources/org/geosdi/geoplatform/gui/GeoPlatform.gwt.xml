@@ -6,6 +6,7 @@
 	
     <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
     <inherits name='org.geosdi.geoplatform.gui.Resources' />
+    <inherits name='org.geosdi.geoplatform.gui.GXTResources' />
     <inherits name='org.geosdi.geoplatform.gui.BasicWidget' />
     
     <!-- ADDING GOOGLE-GUAVA MODULE -->

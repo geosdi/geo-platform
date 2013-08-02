@@ -81,6 +81,13 @@
             <groupId>com.extjs</groupId>
             <artifactId>gxt</artifactId>
         </dependency>
+        
+        <!-- GXT RESOURCES -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-gxt-resources</artifactId>
+            <version>2.3.0</version>
+        </dependency>
 
         <!-- SPRING -->
         <dependency>

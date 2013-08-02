@@ -56,6 +56,7 @@ import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.OperatorType;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.DeleteAttributeConditionEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.IDateSelectedHandler;
 import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFields;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
@@ -68,17 +69,27 @@ import org.geosdi.geoplatform.gui.responce.QueryRestrictionDTO;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureAttributeConditionField extends MultiField {
+public class FeatureAttributeConditionField extends MultiField implements IDateSelectedHandler{
 
     private List<AttributeDetail> attributes;
     private ComboBox<AttributeDetail> nameAttributeCombo;
     private SimpleComboBox<String> operatorCombo;
     private TextField<String> conditionAttributeField = new TextField<String>();
+    private GPEventBus bus;
+    private TimeInputWidget timeInputWidget;
 
-    public FeatureAttributeConditionField(List<AttributeDetail> attributes) {
+    public FeatureAttributeConditionField(GPEventBus bus, List<AttributeDetail> attributes) {
         assert (attributes != null) : "attributes must not be null.";
         this.attributes = attributes;
+        this.bus = bus;
+        this.timeInputWidget = new TimeInputWidget(bus);
+        this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget, this);
         this.createComponents();
+    }
+
+    @Override
+    public void dateSelected(String date) {
+        this.conditionAttributeField.setValue(date);
     }
 
     private void createComponents() {
@@ -100,7 +111,6 @@ public class FeatureAttributeConditionField extends MultiField {
         nameAttributeCombo.setTriggerAction(ComboBox.TriggerAction.ALL);
         nameAttributeCombo.setWidth(110);
 
-        final TimeInputWidget timeInputWidget = new TimeInputWidget(this.conditionAttributeField);
         final Listener dateFieldListener = new Listener<BaseEvent>() {
             @Override
             public void handleEvent(BaseEvent be) {

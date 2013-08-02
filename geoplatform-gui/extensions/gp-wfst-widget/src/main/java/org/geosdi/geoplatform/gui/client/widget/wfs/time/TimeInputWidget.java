@@ -41,14 +41,14 @@ import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.DateField;
-import com.extjs.gxt.ui.client.widget.form.TextArea;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import javax.inject.Singleton;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.DateSelectedEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -60,11 +60,19 @@ public class TimeInputWidget extends GeoPlatformWindow {
     private final static String TIME_KEY_VALUE = "Time";
     private FormData formData;
     private LayoutContainer timeContainer;
-    private TextField<String> timeFieldRestriction;
+    @Inject
+    private GPEventBus bus;
+    @Inject
+    private DateSelectedEvent dateSelectedEvent;
 
-    public TimeInputWidget(TextField timeFieldRestriction) {
+    public TimeInputWidget() {
         super(Boolean.TRUE);
-        this.timeFieldRestriction = timeFieldRestriction;
+    }
+
+    public TimeInputWidget(GPEventBus bus) {
+        super(Boolean.TRUE);
+        this.bus = bus;
+        this.dateSelectedEvent = new DateSelectedEvent();
     }
 
     private void addDateAndTimeToContainer(LayoutContainer layoutContainer,
@@ -88,7 +96,6 @@ public class TimeInputWidget extends GeoPlatformWindow {
     public void addComponent() {
         final Button insertButton = new Button("Insert",
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent be) {
                 StringBuilder timeBuilder = new StringBuilder();
@@ -104,10 +111,10 @@ public class TimeInputWidget extends GeoPlatformWindow {
                     timeBuilder.append(timeField.getValue().getText());
                     timeBuilder.append(":00Z");
                 }
-                timeFieldRestriction.setValue(timeBuilder.toString());
+                dateSelectedEvent.setDate(timeBuilder.toString());
+                bus.fireEventFromSource(dateSelectedEvent, TimeInputWidget.this);
                 TimeInputWidget.super.hide();
             }
-
         });
 
         addButton(insertButton);
@@ -131,5 +138,4 @@ public class TimeInputWidget extends GeoPlatformWindow {
         super.setHeadingHtml("Time Filter Composition");
         super.setLayout(new FormLayout());
     }
-
 }

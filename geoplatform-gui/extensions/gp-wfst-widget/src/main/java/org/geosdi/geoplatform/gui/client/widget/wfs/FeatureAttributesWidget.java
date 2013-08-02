@@ -59,9 +59,11 @@ import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseHeightEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.IDateSelectedHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFields;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
+import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -73,7 +75,7 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureAttributesWidget extends GeoPlatformContentPanel
-        implements FeatureAttributesHandler {
+        implements FeatureAttributesHandler, IDateSelectedHandler {
 
     static {
         mockColumnModel = new ColumnModel(new ArrayList<ColumnConfig>());
@@ -82,6 +84,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     private static final ColumnModel mockColumnModel;
     //
     private GPEventBus bus;
+    private TimeInputWidget timeInputWidget;
     //
     private List<AttributeDetail> attributes;
     //
@@ -90,13 +93,26 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     //
     private List<VectorFeature> vectors;
     private FeatureMapHeightEvent increaseHeightEvent = new IncreaseHeightEvent();
+    //
+    private String dataAttributeName;
 
     @Inject
-    public FeatureAttributesWidget(GPEventBus bus) {
+    public FeatureAttributesWidget(GPEventBus bus, TimeInputWidget timeInputWidget) {
         super(true);
         this.bus = bus;
-
+        this.timeInputWidget = timeInputWidget;
+        this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget, this);
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
+    }
+
+    @Override
+    public void dateSelected(String date) {
+        FeatureAttributeValuesDetail featureAttributeValuesDetail = this.grid.
+                getSelectionModel().getSelectedItem();
+        if (featureAttributeValuesDetail != null) {
+            featureAttributeValuesDetail.setValue(dataAttributeName, date);
+            store.update(featureAttributeValuesDetail);
+        }
     }
 
     public void bind(List<AttributeDetail> attributes) {
@@ -201,7 +217,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(
                 attributes.size());
 
-        for (AttributeDetail att : attributes) {
+        for (final AttributeDetail att : attributes) {
             TextField<String> valueTextField = new TextField<String>();
 
             AttributeCustomFields attributeCustomFields =
@@ -210,7 +226,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             valueTextField.setValidator(attributeCustomFields.getValidator());
 
             valueTextField.setAutoValidate(true);
-            CellEditor valueEditor = new CellEditor(valueTextField) {
+            final CellEditor valueEditor = new CellEditor(valueTextField) {
                 @Override
                 public Object postProcessValue(Object value) {
                     if (value == null) {
@@ -222,6 +238,16 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                     return value;
                 }
             };
+            if (att.getType().equals("dateTime")) {
+                final Listener dateFieldListener = new Listener<BaseEvent>() {
+                    @Override
+                    public void handleEvent(BaseEvent be) {
+                        dataAttributeName = att.getName();
+                        timeInputWidget.show();
+                    }
+                };
+                valueTextField.addListener(Events.OnFocus, dateFieldListener);
+            }
 
             ColumnConfig valueColumn = new ColumnConfig();
             String name = att.getName();

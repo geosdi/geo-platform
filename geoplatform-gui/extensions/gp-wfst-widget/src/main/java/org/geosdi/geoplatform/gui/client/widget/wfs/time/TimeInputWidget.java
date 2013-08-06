@@ -55,7 +55,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  * @email nazzareno.sileno@geosdi.org
  */
 public class TimeInputWidget extends GeoPlatformWindow {
-
+    
     private final static String DATE_KEY_VALUE = "Date";
     private final static String TIME_KEY_VALUE = "Time";
     private FormData formData;
@@ -64,17 +64,17 @@ public class TimeInputWidget extends GeoPlatformWindow {
     private GPEventBus bus;
     @Inject
     private DateSelectedEvent dateSelectedEvent;
-
+    
     public TimeInputWidget() {
         super(Boolean.TRUE);
     }
-
+    
     public TimeInputWidget(GPEventBus bus) {
         super(Boolean.TRUE);
         this.bus = bus;
         this.dateSelectedEvent = new DateSelectedEvent();
     }
-
+    
     private void addDateAndTimeToContainer(LayoutContainer layoutContainer,
             String dataLabel,
             String timeLabel) {
@@ -82,20 +82,21 @@ public class TimeInputWidget extends GeoPlatformWindow {
         dateField.setFieldLabel(dataLabel);
         dateField.setData("text", "Enter the date");
         layoutContainer.setData(dataLabel, dateField);
-
+        
         final TimeField timeField = new TimeField();
         timeField.setFieldLabel(timeLabel);
         timeField.setData("text", "Enter the time");
         layoutContainer.setData(timeLabel, timeField);
-
+        
         layoutContainer.add(dateField);
         layoutContainer.add(timeField);
     }
-
+    
     @Override
     public void addComponent() {
         final Button insertButton = new Button("Insert",
                 new SelectionListener<ButtonEvent>() {
+            
             @Override
             public void componentSelected(ButtonEvent be) {
                 StringBuilder timeBuilder = new StringBuilder();
@@ -115,27 +116,30 @@ public class TimeInputWidget extends GeoPlatformWindow {
                 bus.fireEventFromSource(dateSelectedEvent, TimeInputWidget.this);
                 TimeInputWidget.super.hide();
             }
+            
         });
-
+        
         addButton(insertButton);
-
+        
         formData = new FormData("98%");
-
+        
         timeContainer = new LayoutContainer(new FormLayout());
         this.addDateAndTimeToContainer(timeContainer, DATE_KEY_VALUE,
                 TIME_KEY_VALUE);
         add(new Label("Please, select the required parameters."));
         add(timeContainer, formData);
     }
-
+    
     @Override
     public void initSize() {
         super.setSize("340", "140");
     }
-
+    
     @Override
     public void setWindowProperties() {
         super.setHeadingHtml("Time Filter Composition");
         super.setLayout(new FormLayout());
+        super.setModal(true);
     }
+    
 }

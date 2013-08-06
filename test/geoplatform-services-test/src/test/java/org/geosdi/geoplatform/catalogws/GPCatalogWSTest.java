@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -85,6 +86,7 @@ public class GPCatalogWSTest {
     }
 
     @Test
+    @Ignore(value = "Timeout Error")
     public void searchMetadata() {
         try {
             List<GPCatalogMetadataDTO> metadataList = this.catalogClient.searchPublicMetadata(

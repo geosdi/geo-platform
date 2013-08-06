@@ -35,10 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -50,6 +47,9 @@ import com.extjs.gxt.ui.client.widget.form.LabelField;
 import com.extjs.gxt.ui.client.widget.form.MultiField;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
@@ -69,7 +69,8 @@ import org.geosdi.geoplatform.gui.responce.QueryRestrictionDTO;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class FeatureAttributeConditionField extends MultiField implements IDateSelectedHandler{
+public class FeatureAttributeConditionField extends MultiField implements
+        IDateSelectedHandler {
 
     private List<AttributeDetail> attributes;
     private ComboBox<AttributeDetail> nameAttributeCombo;
@@ -77,13 +78,16 @@ public class FeatureAttributeConditionField extends MultiField implements IDateS
     private TextField<String> conditionAttributeField = new TextField<String>();
     private GPEventBus bus;
     private TimeInputWidget timeInputWidget;
+    private HandlerRegistration clickHandlerRegistration;
 
-    public FeatureAttributeConditionField(GPEventBus bus, List<AttributeDetail> attributes) {
+    public FeatureAttributeConditionField(GPEventBus bus,
+            List<AttributeDetail> attributes) {
         assert (attributes != null) : "attributes must not be null.";
         this.attributes = attributes;
         this.bus = bus;
         this.timeInputWidget = new TimeInputWidget(bus);
-        this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget, this);
+        this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget,
+                this);
         this.createComponents();
     }
 
@@ -111,16 +115,15 @@ public class FeatureAttributeConditionField extends MultiField implements IDateS
         nameAttributeCombo.setTriggerAction(ComboBox.TriggerAction.ALL);
         nameAttributeCombo.setWidth(110);
 
-        final Listener dateFieldListener = new Listener<BaseEvent>() {
+        this.nameAttributeCombo.addSelectionChangedListener(
+                new SelectionChangedListener<AttributeDetail>() {
+
             @Override
-            public void handleEvent(BaseEvent be) {
-                timeInputWidget.show();
-            }
-        };
-        this.nameAttributeCombo.addSelectionChangedListener(new SelectionChangedListener<AttributeDetail>() {
-            @Override
-            public void selectionChanged(SelectionChangedEvent<AttributeDetail> se) {
-                conditionAttributeField.removeListener(Events.OnClick, dateFieldListener);
+            public void selectionChanged(
+                    SelectionChangedEvent<AttributeDetail> se) {
+                if (clickHandlerRegistration != null) {
+                    clickHandlerRegistration.removeHandler();
+                }
                 AttributeDetail attributeDetail = se.getSelectedItem();
                 if (attributeDetail == null) {
                     operatorCombo.disable();
@@ -135,18 +138,29 @@ public class FeatureAttributeConditionField extends MultiField implements IDateS
                     }
                     operatorCombo.enable();
                     conditionAttributeField.clear();
-                    conditionAttributeField.setValidator(customFields.getValidator());
-                    conditionAttributeField.setToolTip("Datatype: " + attributeDetail.getType());
+                    conditionAttributeField.setValidator(
+                            customFields.getValidator());
+                    conditionAttributeField.setToolTip(
+                            "Datatype: " + attributeDetail.getType());
                     if (attributeDetail.getType().equals("dateTime")) {
-                        conditionAttributeField.addListener(Events.OnClick, dateFieldListener);
+                        conditionAttributeField.addHandler(new ClickHandler() {
+
+                            @Override
+                            public void onClick(ClickEvent event) {
+                                timeInputWidget.show();
+                            }
+
+                        }, ClickEvent.getType());
                     }
                 }
             }
+
         });
         ListStore nameAttributeStore = new ListStore<AttributeDetail>();
         nameAttributeStore.add(attributes);
         nameAttributeCombo.setStore(nameAttributeStore);
-        nameAttributeCombo.setDisplayField(AttributeDetail.AttributeDetailKeyValue.NAME.name());
+        nameAttributeCombo.setDisplayField(
+                AttributeDetail.AttributeDetailKeyValue.NAME.name());
 //        nameAttributeCombo.setSimpleValue("XXX");
 
         return nameAttributeCombo;
@@ -174,6 +188,7 @@ public class FeatureAttributeConditionField extends MultiField implements IDateS
 
     private Button createDeleteButton() {
         Button button = new Button("", new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 FeatureInjector injector = FeatureInjector.MainInjector.getInstance();
@@ -181,6 +196,7 @@ public class FeatureAttributeConditionField extends MultiField implements IDateS
                 bus.fireEvent(new DeleteAttributeConditionEvent(
                         FeatureAttributeConditionField.this));
             }
+
         });
         button.setToolTip("Delete Condition");
         button.setIcon(BasicWidgetResources.ICONS.delete());
@@ -197,8 +213,10 @@ public class FeatureAttributeConditionField extends MultiField implements IDateS
         if (attributeDetail != null && operator != null && this.conditionAttributeField.isValid()
                 && restriction != null) {
             AttributeDTO attributeDTO = FeatureConverter.convert(attributeDetail);
-            queryRestriction = new QueryRestrictionDTO(attributeDTO, operator, restriction);
+            queryRestriction = new QueryRestrictionDTO(attributeDTO, operator,
+                    restriction);
         }
         return queryRestriction;
     }
+
 }

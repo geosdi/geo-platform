@@ -139,6 +139,7 @@ public class TimeInputWidget extends GeoPlatformWindow {
     public void setWindowProperties() {
         super.setHeading("Time Filter Composition");
         super.setLayout(new FormLayout());
+        super.setModal(true);
     }
 
 }

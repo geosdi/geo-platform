@@ -48,6 +48,8 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.google.common.collect.Lists;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -107,16 +109,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
     }
 
-    @Override
-    public void dateSelected(String date) {
-        FeatureAttributeValuesDetail featureAttributeValuesDetail = this.grid.
-                getSelectionModel().getSelectedItem();
-        if (featureAttributeValuesDetail != null) {
-            featureAttributeValuesDetail.setValue(dataAttributeName, date);
-            store.update(featureAttributeValuesDetail);
-        }
-    }
-
     public void bind(List<AttributeDetail> attributes) {
         assert (attributes != null) : "Attributes must not bu null.";
         this.attributes = attributes;
@@ -172,6 +164,16 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         vectors = null;
         bus.fireEvent(new ActionEnableEvent(false));
         super.setVScrollPosition(0);
+    }
+
+    @Override
+    public void dateSelected(String date) {
+        FeatureAttributeValuesDetail featureAttributeValuesDetail = this.grid.
+                getSelectionModel().getSelectedItem();
+        if (featureAttributeValuesDetail != null) {
+            featureAttributeValuesDetail.setValue(dataAttributeName, date);
+            store.update(featureAttributeValuesDetail);
+        }
     }
 
     private void createStore() {
@@ -233,7 +235,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
             valueTextField.setAutoValidate(true);
 
-            final CellEditor valueEditor = new CellEditor(valueTextField) {
+            CellEditor valueEditor = new CellEditor(valueTextField) {
 
                 @Override
                 public Object postProcessValue(Object value) {
@@ -248,16 +250,18 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
             };
             if (att.getType().equals("dateTime")) {
-                final Listener dateFieldListener = new Listener<BaseEvent>() {
+
+                FocusHandler focusHandler = new FocusHandler() {
 
                     @Override
-                    public void handleEvent(BaseEvent be) {
+                    public void onFocus(FocusEvent event) {
                         dataAttributeName = att.getName();
                         timeInputWidget.show();
                     }
 
                 };
-                valueTextField.addListener(Events.OnFocus, dateFieldListener);
+
+                valueTextField.addHandler(focusHandler, FocusEvent.getType());
             }
 
             ColumnConfig valueColumn = new ColumnConfig();

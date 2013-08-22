@@ -49,6 +49,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageInsertUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageUpdateUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageInsertUserEvent;
@@ -86,6 +87,8 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
     //
     private ManageInsertUserEvent manageInsertUserEvent = new ManageInsertUserEvent();
     private ManageUpdateUserEvent manageUpdateUserEvent = new ManageUpdateUserEvent();
+    //
+    private UserPropertiesManagerWidget userPropertiesManagerWidget;
 
     public UserPropertiesWidget() {
         super("User Properties");
@@ -105,7 +108,7 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
     private void addCentralPanel() {
         this.centralPanel = new ContentPanel(new FlowLayout());
         this.centralPanel.setHeaderVisible(Boolean.FALSE);
-        this.saveButton = new Button("Save",
+        this.saveButton = new Button("Save", BasicWidgetResources.ICONS.save(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -123,16 +126,18 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
         });
         this.userPropertiesBinding = new UserPropertiesBinding(store, saveButton);
 
-//        Button closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
-//            @Override
-//            public void componentSelected(ButtonEvent ce) {
-//                UserPropertiesWidget.super.getTabPanel().hide();
-//            }
-//        });
+        Button closeButton = new Button("Close", BasicWidgetResources.ICONS.cancel(),
+                new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                userPropertiesManagerWidget.hide();
+            }
+        });
         this.centralPanel.add(this.userPropertiesBinding.getWidget());
         this.centralPanel.setSize(325, 335);
+        this.centralPanel.getButtonBar().setHeight(52);
         this.centralPanel.getButtonBar().add(saveButton);
-//        this.centralPanel.getButtonBar().add(closeButton);
+        this.centralPanel.getButtonBar().add(closeButton);
         super.add(this.centralPanel);
     }
 
@@ -175,8 +180,7 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
                 user.setId(result);
                 store.insert(user, 0);
                 store.commitChanges();
-
-//                hide();
+                userPropertiesManagerWidget.hide();
 
                 // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully added",
@@ -202,10 +206,10 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
             @Override
             public void onSuccess(Long result) {
                 store.commitChanges();
-//                hide();
+                userPropertiesManagerWidget.hide();
 
                 // TODO statusbar...
-                GeoPlatformMessage.infoMessage("User successfully modify",
+                GeoPlatformMessage.infoMessage("User successfully modified",
                         "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
@@ -225,5 +229,9 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
     @Override
     public final void subclassCallToInit() {
         super.init();
+    }
+
+    public void setWindowToClose(UserPropertiesManagerWidget userPropertiesManagerWidget) {
+        this.userPropertiesManagerWidget = userPropertiesManagerWidget;
     }
 }

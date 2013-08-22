@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.pagination;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
@@ -50,16 +51,21 @@ import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.UserPropertiesManagerWidget;
 import org.geosdi.geoplatform.gui.client.widget.UserPropertiesWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.grid.GPGridSearchWidget;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
@@ -72,9 +78,13 @@ import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+@Singleton
 public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail> {
 
+    @Inject
     private UserPropertiesWidget userPropertiesWidget;
+    //
+    private UserPropertiesManagerWidget userPropertiesManagerWidget;
 
     public ManageUsersPagWidget() {
         super(true);
@@ -83,18 +93,19 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     @Override
     public void finalizeInitOperations() {
         super.finalizeInitOperations();
+        //Using defered binding will be select the right widget to show
+        this.userPropertiesManagerWidget = GWT.create(UserPropertiesManagerWidget.class);
+        //
         super.selectButton.setText("Modify User");
         super.search.setFieldLabel("Find User");
-        this.userPropertiesWidget = new UserPropertiesWidget(super.store);
+        this.userPropertiesWidget.setStore(super.store);
         super.addButton(1, new Button("Add User",
                 BasicWidgetResources.ICONS.logged_user(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 showUserPropertiesWidget(true);
             }
-
         }));
     }
 
@@ -110,13 +121,11 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.setSize(670, 490);
 
         super.addWindowListener(new WindowListener() {
-
             @Override
             public void windowShow(WindowEvent we) {
                 searchText = "";
                 loader.load(0, getPageSize());
             }
-
         });
     }
 
@@ -125,7 +134,6 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.toolBar = new PagingToolBar(super.getPageSize());
 
         super.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
-
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
@@ -135,7 +143,6 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
                         GPAccountLogged.getInstance().getOrganization(),
                         callback);
             }
-
         };
 
         super.loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
@@ -211,16 +218,14 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
     @Override
     public void executeSelect() {
-        this.showUserPropertiesWidget(false);
+        this.showUserPropertiesWidget(Boolean.FALSE);
     }
 
     private void showUserPropertiesWidget(final boolean isNewUser) {
         searchStatus.setBusy("Retrive roles");
 
-        UserRemoteImpl.Util.getInstance().getAllRoles(
-                GPAccountLogged.getInstance().getOrganization(),
+        UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<ArrayList<String>>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 setSearchStatus(
@@ -236,13 +241,14 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
                 GPUserManageDetail userDetail;
                 if (isNewUser) {
                     userDetail = new GPUserManageDetail();
+                    Registry.register(UserSessionEnum.USER_NAME_TO_SEARCH.name(), "");
                 } else {
                     userDetail = widget.getSelectionModel().getSelectedItem();
+                    Registry.register(UserSessionEnum.USER_NAME_TO_SEARCH.name(), userDetail.getUsername());
                 }
-                userPropertiesWidget.show(userDetail, result);
+                userPropertiesWidget.setData(userDetail, result);
+                userPropertiesManagerWidget.show();
             }
-
         });
     }
-
 }

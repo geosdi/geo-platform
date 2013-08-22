@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.action;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.pagination.ManageUsersPagWidget;
+import org.geosdi.geoplatform.gui.client.config.UserModuleInjector;
 
 /**
  *
@@ -46,14 +46,12 @@ import org.geosdi.geoplatform.gui.client.widget.pagination.ManageUsersPagWidget;
  */
 public class ManageUsersMenuAction extends MenuBaseAction {
 
-    private ManageUsersPagWidget usersPagWidget = new ManageUsersPagWidget();
-
     public ManageUsersMenuAction() {
         super("Manage Users", BasicWidgetResources.ICONS.logged_user());
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        this.usersPagWidget.show();
+        UserModuleInjector.MainInjector.getInstance().getManageUsersPagWidget().show();
     }
 }

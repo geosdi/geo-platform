@@ -69,7 +69,7 @@ public class UserPropertiesManagerWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeading(WIDGET_HEADING);
+        super.setHeadingText(WIDGET_HEADING);
         super.setLayout(new FitLayout());
         super.setModal(Boolean.TRUE);
         super.setResizable(Boolean.FALSE);

@@ -55,10 +55,9 @@ public abstract class BaseMenuGenericTool<M extends GeoPlatformMenuCreator>
      */
     @Override
     public String getText() {
-        if (this.text == null && this.textKey != null) {
-            return BaseMenuGenericToolConstants.INSTANCE.getString(this.textKey);
-        }
-        return text;
+        return ((this.text == null) && (this.textKey != null))
+                ? BaseMenuGenericToolConstants.INSTANCE.getString(this.textKey)
+                : text;
     }
 
     /**
@@ -82,4 +81,5 @@ public abstract class BaseMenuGenericTool<M extends GeoPlatformMenuCreator>
     public String toString() {
         return "BaseMenuGenericTool{" + "textKey=" + textKey + ", text=" + text + '}';
     }
+
 }

@@ -20,7 +20,7 @@
     <bean name="aboutGeoPlatform"
           class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="aboutGeoPlatform" />
-        <property name="text" value="About" />
+        <property name="textKey" value="aboutGeoPlatformText" />
         <property name="enabled" value="true" />
         <property name="order" value="100" />
     </bean>

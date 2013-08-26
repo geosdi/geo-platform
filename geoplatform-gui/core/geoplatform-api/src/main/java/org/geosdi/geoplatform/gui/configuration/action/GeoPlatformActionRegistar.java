@@ -46,7 +46,7 @@ import java.util.Map;
  */
 public abstract class GeoPlatformActionRegistar<A extends GeoPlatformActionCreator> {
 
-    protected Map<String, A> registry = Maps.newHashMap();
+    protected Map<String, A> registry = Maps.<String, A>newHashMap();
 
     public abstract void put(String key, A toolActionCreator);
 }

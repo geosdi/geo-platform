@@ -19,7 +19,7 @@
     <bean name="userLogout"
           class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="userLogout" />
-        <property name="text" value="Logout" />
+        <property name="textKey" value="userLogoutText" />
         <property name="enabled" value="true" />
         <property name="order" value="30" />
     </bean>

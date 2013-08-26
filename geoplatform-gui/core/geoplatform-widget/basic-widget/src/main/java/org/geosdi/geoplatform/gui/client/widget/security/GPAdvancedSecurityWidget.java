@@ -50,6 +50,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SubmitButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.img.BasicWidgetImage;
 import org.geosdi.geoplatform.gui.client.widget.progressbar.ProgressBar;
 
@@ -150,7 +151,9 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
             @Override
             public void run() {
                 progres += 0.1;
-                progressBar.setRunProgress(progres, "Caricamento di " + userName.getValue() + " in corso...");
+                progressBar.setRunProgress(progres, BasicGinInjector.MainInjector.
+                        getInstance().getBasicWidgetMessages().
+                        GPAdvancedSecurityWidget_loginMessage(userName.getValue()));
                 if (progres > 1.0) {
                     progressBar.setRunProgress(1.0, "Done");
                     timer.cancel();

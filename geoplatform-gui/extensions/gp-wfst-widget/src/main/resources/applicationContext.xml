@@ -10,7 +10,7 @@
     
     <bean id="EDIT_FEATURE" class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
         <property name="id" value="EDIT_FEATURE" />
-        <property name="text" value="Edit WFS Mode" />
+        <property name="textKey" value="editFeatureText" />
         <property name="enabled" value="true" />
         <property name="secure" value="false" />
         <property name="order" value="8" />

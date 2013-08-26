@@ -91,7 +91,7 @@ public class GPMenuActionBinder implements MenuActionBinder {
             this.addMenuActionEnableHandler(action, item);
 
             action.setEnabled((action.isMustBeEnabled())
-                              ? action.isMustBeEnabled() : tool.isEnabled());
+                    ? action.isMustBeEnabled() : tool.isEnabled());
         }
 
         menu.add(item);
@@ -114,13 +114,11 @@ public class GPMenuActionBinder implements MenuActionBinder {
 
             action.addMenuActionChangeCheckHandler(
                     new MenuActionChangeCheckHandler() {
-
                 @Override
                 public void onActionCheckChange(MenuActionChangeCheckEvent event) {
                     item.setChecked(event.isCheck());
                     item.fireEvent(Events.Select, new MenuEvent(menu, item));
                 }
-
             });
 
             action.setChecked(tool.isChecked());
@@ -142,13 +140,10 @@ public class GPMenuActionBinder implements MenuActionBinder {
     public void addMenuActionEnableHandler(MenuAction action,
             final MenuItem item) {
         action.addActionEnableHandler(new ActionEnableHandler() {
-
             @Override
             public void onActionEnabled(ActionEnableEvent event) {
                 item.setEnabled(event.isEnabled());
             }
-
         });
     }
-
 }

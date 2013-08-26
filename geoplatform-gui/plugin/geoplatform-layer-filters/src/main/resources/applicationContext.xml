@@ -11,15 +11,15 @@
     <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeGroupMenuClientTool"
           id="CQL_FILTER">
         <property name="id" value="CQL_FILTER" />
-        <property name="text" value="CQL Filter" />
+        <property name="textKey" value="treeMenuCQLFilterText" />
         <property name="enabled" value="true" />
         <property name="secure" value="false" />
-        <property name="order" value="4" />
+        <property name="order" value="5" />
         <property name="tools">
             <list>
                 <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
                     <property name="id" value="ADD_MODIFY_CQL_FILTER" />
-                    <property name="text" value="Add/Modify Filter" />
+                    <property name="textKey" value="treeMenuCQLAddModifyFilterText" />
                     <property name="enabled" value="true" />
                     <property name="secure" value="false" />
                     <property name="order" value="1" />
@@ -27,7 +27,7 @@
     
                 <bean class="org.geosdi.geoplatform.gui.configuration.composite.menu.tools.TreeMenuClientTool">
                     <property name="id" value="REMOVE_CQL_FILTER" />
-                    <property name="text" value="Remove Filter" />
+                    <property name="textKey" value="treeMenuCQLRemoveFilterText" />
                     <property name="enabled" value="true" />
                     <property name="secure" value="false" />
                     <property name="order" value="2" />

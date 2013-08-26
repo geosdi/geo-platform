@@ -9,7 +9,7 @@
         <property name="id" value="${manageUsers.id}" />
         <property name="enabled" value="${manageUsers.enabled}" />
         <property name="order" value="${manageUsers.order}" />
-        <property name="text" value="${manageUsers.text}" />
+        <property name="textKey" value="manageUsersText" />
     </bean>
 
     <bean name="manageRoles"
@@ -17,7 +17,7 @@
         <property name="id" value="${manageRoles.id}" />
         <property name="enabled" value="${manageRoles.enabled}" />
         <property name="order" value="${manageRoles.order}" />
-        <property name="text" value="${manageRoles.text}" />
+        <property name="textKey" value="manageRolesText" />
     </bean>
 
 </beans>

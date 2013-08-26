@@ -11,7 +11,7 @@
     <bean name="layerMenu"
           class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
         <property name="id" value="layerMenu" />
-        <property name="text" value="Layers" />
+        <property name="textKey" value="layerMenuText" />
         <property name="checked" value="true" />
         <property name="enabled" value="true" />
         <property name="order" value="30" />
@@ -20,7 +20,7 @@
     <bean id="manageProjects"
           class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="manageProjects" />
-        <property name="text" value="Manage Projects" />
+        <property name="textKey" value="manageProjectsText" />
         <property name="enabled" value="true" />
         <property name="order" value="5" />
     </bean>
@@ -28,7 +28,7 @@
     <bean name="LayerProperties"
           class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="LayerProperties" />
-        <property name="text" value="Layer Properties" />
+        <property name="textKey" value="layerPropertiesText" />
         <property name="enabled" value="true" />
         <property name="order" value="90" />
     </bean>

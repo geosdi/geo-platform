@@ -4,7 +4,7 @@
  *  http://geo-platform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2012 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2013 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,28 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.client.i18n;
+
+import com.google.gwt.i18n.client.Messages;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface GPMenuItem extends GPGenericTool {
+public interface BasicWidgetMessages extends Messages {
 
-    String getText();
-
-    /**
-     * @param text the text to set
-     * @deprecated to support i18n use setTextKey(String textKey) instead
-     */
-    @Deprecated
-    void setText(String text);
-
-    /**
-     * Sets the i18n textKey to generate the proper menu text
-     *
-     * @param textKey
-     */
-    void setTextKey(String textKey);
+    String GPAdvancedSecurityWidget_loginMessage(String username);
 }

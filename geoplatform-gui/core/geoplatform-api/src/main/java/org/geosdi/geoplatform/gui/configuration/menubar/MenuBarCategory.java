@@ -38,32 +38,50 @@ package org.geosdi.geoplatform.gui.configuration.menubar;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.MenuBarCategoryConstants;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class MenuBarCategory implements Serializable,
         Comparable<MenuBarCategory> {
 
     private static final long serialVersionUID = -6392463898405375954L;
     //
-    private String text;
     private boolean enabled;
     private int order;
     private List<MenuBarClientTool> tools;
+    private String textKey;
+    private String text;
+
+    public String getTextKey() {
+        return textKey;
+    }
+
+    /**
+     * Sets the i18n textKey to generate the proper menu text
+     *
+     * @param textKey
+     */
+    public void setTextKey(String textKey) {
+        this.textKey = textKey;
+    }
 
     /**
      * @return the text
      */
     public String getText() {
+        if (this.text == null && this.textKey != null) {
+            return MenuBarCategoryConstants.INSTANCE.getString(this.textKey);
+        }
         return text;
     }
 
     /**
-     * @param text
-     *            the text to set
+     * @param text the text to set
+     * @deprecated to support i18n use setTextKey(String textKey) instead
      */
     public void setText(String text) {
         this.text = text;
@@ -77,8 +95,7 @@ public class MenuBarCategory implements Serializable,
     }
 
     /**
-     * @param enable
-     *            the enable to set
+     * @param enable the enable to set
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
@@ -92,8 +109,7 @@ public class MenuBarCategory implements Serializable,
     }
 
     /**
-     * @param order
-     *            the order to set
+     * @param order the order to set
      */
     public void setOrder(int order) {
         this.order = order;
@@ -107,8 +123,7 @@ public class MenuBarCategory implements Serializable,
     }
 
     /**
-     * @param tools
-     *            the tools to set
+     * @param tools the tools to set
      */
     public void setTools(List<MenuBarClientTool> tools) {
         Collections.sort(tools);
@@ -127,7 +142,6 @@ public class MenuBarCategory implements Serializable,
      */
     @Override
     public String toString() {
-        return "MenuBarCategory [text=" + text + ", enabled=" + enabled
-                + ", order=" + order + ", tools=" + tools + "]";
+        return "MenuBarCategory{" + "enabled=" + enabled + ", order=" + order + ", tools=" + tools + ", textKey=" + textKey + ", text=" + text + '}';
     }
 }

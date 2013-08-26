@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 import java.util.Collections;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.MenuInToolBarConstants;
 import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
 
@@ -45,21 +46,39 @@ import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
  *
  */
 public class MenuInToolBar extends WidgetGenericTool<IGeoPlatformToolbar> {
-    
+
     private static final long serialVersionUID = -6673336990643383453L;
     //
+    private String textKey;
     private String text;
     private List<MenuBarClientTool> tools;
+
+    public String getTextKey() {
+        return textKey;
+    }
+
+    /**
+     * Sets the i18n textKey to generate the proper menu text
+     *
+     * @param textKey
+     */
+    public void setTextKey(String textKey) {
+        this.textKey = textKey;
+    }
 
     /**
      * @return the text
      */
     public String getText() {
+        if (this.text == null && this.textKey != null) {
+            return MenuInToolBarConstants.INSTANCE.getString(this.textKey);
+        }
         return text;
     }
 
     /**
      * @param text the text to set
+     * @deprecated to support i18n use setTextKey(String textKey) instead
      */
     public void setText(String text) {
         this.text = text;
@@ -80,17 +99,12 @@ public class MenuInToolBar extends WidgetGenericTool<IGeoPlatformToolbar> {
         this.tools = tools;
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        return "MenuInToolBar{" + super.toString()
-                + ", text=" + text + '}';
+        return "MenuInToolBar{" + "textKey=" + textKey + ", text=" + text
+                + ", tools=" + tools + '}';
     }
-    
+
     @Override
     protected void create(IGeoPlatformToolbar toolbar) {
         toolbar.addMenuInToolBar(this);

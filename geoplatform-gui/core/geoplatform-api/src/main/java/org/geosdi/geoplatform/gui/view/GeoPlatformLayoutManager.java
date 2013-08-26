@@ -50,12 +50,13 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.i18n.ApiModuleMessages;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleChangeEvent;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public abstract class GeoPlatformLayoutManager {
 
@@ -85,7 +86,8 @@ public abstract class GeoPlatformLayoutManager {
 
     /**
      * Create North Panel in Main UI
-     * @param size 
+     *
+     * @param size
      */
     public void createNorth(float size) {
         this.north = new ContentPanel();
@@ -141,7 +143,6 @@ public abstract class GeoPlatformLayoutManager {
         center.setLayoutOnChange(true);
 
         center.addWidgetListener(new WidgetListener() {
-
             @Override
             public void widgetResized(ComponentEvent ce) {
                 MapHandlerManager.fireEvent(new ScaleChangeEvent(
@@ -152,7 +153,8 @@ public abstract class GeoPlatformLayoutManager {
         ToolBar toolBar = new ToolBar();
 
         statusMap = new Status();
-        statusMap.setText("Wellcome to " + GWT.getModuleName());
+        statusMap.setText(ApiModuleMessages.INSTANCE.
+                GeoPlatformLayoutManager_wellcomeMessage(GWT.getModuleName()));
         statusMap.setWidth(150);
         toolBar.add(statusMap);
         toolBar.add(new FillToolItem());
@@ -209,7 +211,7 @@ public abstract class GeoPlatformLayoutManager {
 
     /**
      * @return the north If North is null GeoPlatform set North Size to 50 for
-     *         default
+     * default
      *
      */
     public ContentPanel getNorth() {
@@ -220,7 +222,7 @@ public abstract class GeoPlatformLayoutManager {
     }
 
     /**
-     * 
+     *
      * @return Status Map component
      */
     public Status getStatusMap() {
@@ -245,7 +247,7 @@ public abstract class GeoPlatformLayoutManager {
         this.north.setData("layoutData", data);
 
         this.north.layout();
-        
+
         this.viewport.layout();
     }
 }

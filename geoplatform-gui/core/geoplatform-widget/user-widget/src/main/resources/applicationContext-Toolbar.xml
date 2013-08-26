@@ -9,7 +9,7 @@
         <property name="id" value="${userOptionsButton.id}" />
         <property name="enabled" value="${userOptionsButton.enabled}" />
         <property name="order" value="${userOptionsButton.order}" />
-        <property name="text" value="${userOptionsButton.text}" />
+        <property name="textKey" value="userOptionsButtonText" />
     </bean>
 
 </beans>

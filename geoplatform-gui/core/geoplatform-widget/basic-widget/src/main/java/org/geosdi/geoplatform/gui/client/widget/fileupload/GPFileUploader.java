@@ -45,6 +45,7 @@ import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
@@ -86,14 +87,15 @@ public class GPFileUploader {
         fileUpload.setName("uploadFormElement");
         panel.add(fileUpload);
 
-        buttonSubmit = new Button("Submit", new SelectionListener<ButtonEvent>() {
-
+        buttonSubmit = new Button(BasicWidgetConstants.INSTANCE.GPFileUploader_submitButtonText(),
+                new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 formPanel.submit();
                 if ((fileUpload.getFilename() != null)
                         && isValidExtensions(fileUpload.getFilename(), extensions)) {
-                    LayoutManager.getInstance().getStatusMap().setBusy("Upload in progress...");
+                    LayoutManager.getInstance().getStatusMap().setBusy(
+                            BasicWidgetConstants.INSTANCE.GPFileUploader_uploadInProgressText());
                 }
             }
         });
@@ -101,7 +103,6 @@ public class GPFileUploader {
 
         // Add an event handler to the form.
         formPanel.addSubmitHandler(new FormPanel.SubmitHandler() {
-
             @Override
             public void onSubmit(SubmitEvent event) {
                 // This event is fired just before the form is submitted. We can
@@ -117,7 +118,6 @@ public class GPFileUploader {
         });
 
         formPanel.addSubmitCompleteHandler(new FormPanel.SubmitCompleteHandler() {
-
             @Override
             public void onSubmitComplete(SubmitCompleteEvent event) {
                 // When the form submission is successfully completed,

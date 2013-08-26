@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.about;
 
 import com.google.gwt.user.client.ui.Frame;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 
 /**
@@ -66,9 +67,8 @@ public class GPAboutWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingText("About Geo-Platform");
+        super.setHeadingText(BasicWidgetConstants.INSTANCE.GPAboutWidget_headingText());
         super.setBodyStyle("background-color:white");
         super.setResizable(Boolean.FALSE);
     }
-
 }

@@ -36,12 +36,11 @@
 package org.geosdi.geoplatform.gui.configuration.geocoding.plugin;
 
 import com.extjs.gxt.ui.client.widget.TabItem;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public abstract class GPAdvancedGeocoderPlugin

@@ -84,9 +84,9 @@
     
     
     <bean name="viewport"
-              class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+          class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="viewport" />
-        <property name="text" value="Viewport" />
+        <property name="textKey" value="viewportText" />
         <property name="enabled" value="true" />
         <property name="order" value="20" />
     </bean>

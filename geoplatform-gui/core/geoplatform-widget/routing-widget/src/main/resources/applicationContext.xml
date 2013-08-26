@@ -12,7 +12,7 @@
     <bean name="routing"
 		class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
         <property name="id" value="routing" />
-        <property name="text" value="Routing" />
+        <property name="textKey" value="routingText" />
         <property name="checked" value="false" />
         <property name="enabled" value="true" />
         <property name="order" value="20" />

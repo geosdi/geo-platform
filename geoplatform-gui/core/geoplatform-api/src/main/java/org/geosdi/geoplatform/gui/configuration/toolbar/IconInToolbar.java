@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
+import org.geosdi.geoplatform.gui.client.i18n.IconInToolbarConstants;
 import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
 
 /**
@@ -43,20 +44,38 @@ import org.geosdi.geoplatform.gui.configuration.WidgetGenericTool;
  *
  */
 public class IconInToolbar extends WidgetGenericTool<IGeoPlatformToolbar> {
-    
+
     private static final long serialVersionUID = 1982533388514947046L;
     //
+    private String textKey;
     private String text;
+
+    public String getTextKey() {
+        return textKey;
+    }
+
+    /**
+     * Sets the i18n textKey to generate the proper menu text
+     *
+     * @param textKey
+     */
+    public void setTextKey(String textKey) {
+        this.textKey = textKey;
+    }
 
     /**
      * @return the text
      */
     public String getText() {
+        if (this.text == null && this.textKey != null) {
+            return IconInToolbarConstants.INSTANCE.getString(this.textKey);
+        }
         return text;
     }
 
     /**
      * @param text the text to set
+     * @deprecated to support i18n use setTextKey(String textKey) instead
      */
     public void setText(String text) {
         this.text = text;
@@ -69,10 +88,9 @@ public class IconInToolbar extends WidgetGenericTool<IGeoPlatformToolbar> {
      */
     @Override
     public String toString() {
-        return "IconInToolbar{" + super.toString()
-                + ", text=" + text + '}';
+        return "IconInToolbar{" + "textKey=" + textKey + ", text=" + text + '}';
     }
-    
+
     @Override
     protected void create(IGeoPlatformToolbar toolbar) {
         toolbar.addIconInToolbar(this);

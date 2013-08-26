@@ -42,14 +42,14 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
-import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.google.common.collect.Lists;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -61,7 +61,10 @@ import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseHeightEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.IDateSelectedHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.FeatureStatusBarType;
+import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -73,7 +76,7 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureAttributesWidget extends GeoPlatformContentPanel
-        implements FeatureAttributesHandler {
+        implements FeatureAttributesHandler, IDateSelectedHandler {
 
     static {
         mockColumnModel = new ColumnModel(new ArrayList<ColumnConfig>());
@@ -83,6 +86,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     private static final ColumnModel mockColumnModel;
     //
     private GPEventBus bus;
+    private TimeInputWidget timeInputWidget;
     //
     private List<AttributeDetail> attributes;
     //
@@ -91,12 +95,17 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     //
     private List<VectorFeature> vectors;
     private FeatureMapHeightEvent increaseHeightEvent = new IncreaseHeightEvent();
+    //
+    private String dataAttributeName;
 
     @Inject
-    public FeatureAttributesWidget(GPEventBus bus) {
+    public FeatureAttributesWidget(GPEventBus bus,
+            TimeInputWidget timeInputWidget) {
         super(true);
         this.bus = bus;
-
+        this.timeInputWidget = timeInputWidget;
+        this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget,
+                this);
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
     }
 
@@ -108,7 +117,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     public void reconfigureEditorGrid() {
         this.grid.reconfigure(store, this.prepareColumnModel());
     }
-    
+
     @Override
     protected void beforeRender() {
         super.beforeRender();
@@ -130,7 +139,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     @Override
     public void initSize() {
     }
-    
+
     protected void manageGridSize() {
         this.grid.setHeight(super.getHeight() - 25);
     }
@@ -155,6 +164,16 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         vectors = null;
         bus.fireEvent(new ActionEnableEvent(false));
         super.setVScrollPosition(0);
+    }
+
+    @Override
+    public void dateSelected(String date) {
+        FeatureAttributeValuesDetail featureAttributeValuesDetail = this.grid.
+                getSelectionModel().getSelectedItem();
+        if (featureAttributeValuesDetail != null) {
+            featureAttributeValuesDetail.setValue(dataAttributeName, date);
+            store.update(featureAttributeValuesDetail);
+        }
     }
 
     private void createStore() {
@@ -206,10 +225,16 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(
                 attributes.size());
 
-        for (AttributeDetail att : attributes) {
+        for (final AttributeDetail att : attributes) {
             TextField<String> valueTextField = new TextField<String>();
-            valueTextField.setValidator(this.attributeValuesValidator());
+
+
+            valueTextField.setValidator(
+                    AttributeCustomFieldsMap.getValidatorForAttributeType(
+                    att.getType()));
+
             valueTextField.setAutoValidate(true);
+
             CellEditor valueEditor = new CellEditor(valueTextField) {
 
                 @Override
@@ -224,13 +249,28 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                 }
 
             };
-            
+            if (att.getType().equals("dateTime")) {
+
+                FocusHandler focusHandler = new FocusHandler() {
+
+                    @Override
+                    public void onFocus(FocusEvent event) {
+                        dataAttributeName = att.getName();
+                        timeInputWidget.show();
+                    }
+
+                };
+
+                valueTextField.addHandler(focusHandler, FocusEvent.getType());
+            }
+
             ColumnConfig valueColumn = new ColumnConfig();
             String name = att.getName();
             valueColumn.setId(name);
             valueColumn.setHeader(name);
             valueColumn.setEditor(valueEditor);
-            valueColumn.setWidth(name.length() * 10);
+
+            valueColumn.setWidth(100);
 
             configs.add(valueColumn);
         }
@@ -282,8 +322,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         grid.mask("Retrieve " + numFeature + " feature instance attributes");
 
-        this.vectors = Lists.newArrayListWithCapacity(numFeature);
-        List<FeatureAttributeValuesDetail> attValues = Lists.newArrayListWithCapacity(
+        this.vectors = Lists.<VectorFeature>newArrayListWithCapacity(numFeature);
+        List<FeatureAttributeValuesDetail> attValues = Lists.<FeatureAttributeValuesDetail>newArrayListWithCapacity(
                 numFeature);
 
         for (FeatureDetail instace : instaces) {
@@ -315,32 +355,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
         store.commitChanges();
         bus.fireEvent(new ActionEnableEvent(false));
-    }
-
-    private Validator attributeValuesValidator() {
-        return new Validator() {
-
-            @Override
-            public String validate(Field<?> field,
-                    String value) {
-//                AttributeValuesDetail selectedItem = grid.getSelectionModel().getSelectedItem();
-//                System.out.println("*** SELECTED " + selectedItem);
-
-//                String type = selectedItem.getType();
-//                String typeName = type.substring(type.lastIndexOf(".") + 1);
-////                System.out.println("*** " + typeName + " - value: " + value);
-//
-//                TypeValidator validator = TypeValidatorController.MAP_VALIDATOR.get(type);
-//                if (!validator.validateType(value)) {
-//                    String errorValidation = "The value must be of " + typeName + " type";
-//                    bus.fireEvent(new FeatureStatusBarEvent(
-//                            errorValidation, FeatureStatusBarType.STATUS_ERROR));
-//                    return errorValidation;
-//                }
-                return null;
-            }
-
-        };
     }
 
     @Override

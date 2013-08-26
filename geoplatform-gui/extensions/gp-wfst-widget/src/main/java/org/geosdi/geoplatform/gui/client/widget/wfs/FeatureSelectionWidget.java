@@ -228,7 +228,7 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
             @Override
             public void componentSelected(ButtonEvent ce) {
                 FeatureAttributeConditionField attributeCondition =
-                        new FeatureAttributeConditionField(attributes);
+                        new FeatureAttributeConditionField(bus, attributes);
                 attributeConditions.add(attributeCondition);
 
                 matchResultSet.add(attributeCondition, new VBoxLayoutData(0, 0,

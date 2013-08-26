@@ -58,7 +58,7 @@ public abstract class PasteLayerBaseAction extends MenuBaseAction implements
     protected final TreePanel<GPBeanTreeModel> tree;
     protected final GPMenuFolderExpander folderExpander;
     protected final GPEventBus bus;
-    protected List<GPLayerBean> layersToCopy = Lists.newArrayList();
+    protected List<GPLayerBean> layersToCopy = Lists.<GPLayerBean>newArrayList();
 
     public PasteLayerBaseAction(String title, AbstractImagePrototype image,
             TreePanel<GPBeanTreeModel> theTree, GPEventBus theBus) {

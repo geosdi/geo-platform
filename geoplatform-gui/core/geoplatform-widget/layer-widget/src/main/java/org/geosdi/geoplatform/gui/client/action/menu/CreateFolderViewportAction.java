@@ -44,7 +44,8 @@ import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.CreateViewportEvent;
@@ -57,7 +58,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class CreateFolderViewportAction extends MenuAction {
+public class CreateFolderViewportAction extends MenuBaseAction {
 
     private TreePanel treePanel;
     private Listener<MessageBoxEvent> message;
@@ -66,7 +67,7 @@ public class CreateFolderViewportAction extends MenuAction {
     private CreateViewportEvent createViewportEvent = new CreateViewportEvent();
 
     public CreateFolderViewportAction(final TreePanel treePanel) {
-        super("CreateViewport");
+        super("CreateViewport", BasicWidgetResources.ICONS.viewport());
         this.treePanel = treePanel;
         this.executor = new Listener() {
             @Override
@@ -107,7 +108,7 @@ public class CreateFolderViewportAction extends MenuAction {
     }
 
     private List<GPLayerBean> generateLayerList(List<ModelData> modelDataList) {
-        List<GPLayerBean> layerList = Lists.newArrayList();
+        List<GPLayerBean> layerList = Lists.<GPLayerBean>newArrayList();
         for (ModelData data : modelDataList) {
             if (data instanceof GPLayerBean) {
                 layerList.add((GPLayerBean) data);

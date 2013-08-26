@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.event.GPTreeBindingFolderEvent;
 import org.geosdi.geoplatform.gui.client.widget.FolderPropertiesWidget;
@@ -47,13 +48,13 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class ShowFolderRenameAction extends MenuAction {
+public class ShowFolderRenameAction extends MenuBaseAction {
 
     private TreePanel treePanel;
     private FolderPropertiesWidget layersPropertiesWidget = new FolderPropertiesWidget();
 
     public ShowFolderRenameAction(TreePanel treePanel) {
-        super("FolderProperties");
+        super("FolderProperties", LayerResources.ICONS.editFolder());
         this.treePanel = treePanel;
         this.layersPropertiesWidget.addHandlers();
     }

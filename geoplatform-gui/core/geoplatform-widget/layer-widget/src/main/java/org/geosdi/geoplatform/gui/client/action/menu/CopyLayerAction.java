@@ -36,15 +36,14 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
 import java.util.List;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.menu.event.PasteLayerMenuEvent;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -54,14 +53,14 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class CopyLayerAction extends MenuAction {
+public class CopyLayerAction extends MenuBaseAction {
 
     private final TreePanel<GPBeanTreeModel> tree;
     private final GPEventBus bus;
 
     @Inject
     public CopyLayerAction(GinTreePanel ginTreePanel, GPEventBus theBus) {
-        super("CopyLayer");
+        super("CopyLayer", LayerResources.ICONS.copy());
         this.tree = ginTreePanel.get();
         this.bus = theBus;
     }
@@ -69,7 +68,7 @@ public class CopyLayerAction extends MenuAction {
     @Override
     public void componentSelected(MenuEvent ce) {
         final List<GPBeanTreeModel> selectedItems = this.tree.getSelectionModel().getSelectedItems();
-        final List<GPLayerTreeModel> selectedLayers = Lists.newArrayList();
+        final List<GPLayerTreeModel> selectedLayers = Lists.<GPLayerTreeModel>newArrayList();
         for (GPBeanTreeModel element : selectedItems) {
             if (element instanceof FolderTreeNode) {
                 throw new IllegalArgumentException("Folder copy is not allowed");
@@ -80,5 +79,4 @@ public class CopyLayerAction extends MenuAction {
 
         this.bus.fireEvent(new PasteLayerMenuEvent(selectedLayers));
     }
-
 }

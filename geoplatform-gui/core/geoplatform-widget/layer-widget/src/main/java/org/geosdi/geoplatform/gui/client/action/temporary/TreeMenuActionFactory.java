@@ -77,7 +77,6 @@ public class TreeMenuActionFactory {
     static {
         registar = TreeMenuGinInjector.MainInjector.getInstance().getTreeMenuActionRegistar();
     }
-
     private static TreeMenuActionRegistar registar;
     //
     @Inject
@@ -97,162 +96,128 @@ public class TreeMenuActionFactory {
 
     private static void buildRootMenuActions() {
         registar.put("ADD_FOLDER", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new AddFolderMenuAction(treePanel);
             }
-
         });
 
         registar.put("SHARE_PROJECT", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return shareProjectMenuAction;
             }
-
         });
     }
 
     private static void buildCompositeMenuActions() {
         registar.put("PASTE_MENU", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return pasteLayerAction;
             }
-
         });
 
         registar.put("RENAME_FOLDER", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ShowFolderRenameAction(treePanel);
             }
-
         });
 
-        registar.put("CREATE_VIEWPORT", new TreeMenuActionCreator() {
-
+        registar.put("CREATE_FOLDER_VIEWPORT", new TreeMenuActionCreator() {
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new CreateFolderViewportAction(treePanel);
             }
-
         });
     }
 
     private static void buildLeafMenuActions() {
         registar.put("ZOOM_TO_EXTEND", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ZoomToLayerExtentAction(
                         treePanel);
             }
-
         });
-        
-        registar.put("GET_LEGEND", new TreeMenuActionCreator() {
 
+        registar.put("GET_LEGEND", new TreeMenuActionCreator() {
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new GetLegendGraphicsBox(
                         treePanel);
             }
-
         });
 
         registar.put("EXPORT_TO_KML", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToKML(treePanel);
             }
-
         });
 
         registar.put("EXPORT_TO_PDF", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToPDF(treePanel);
             }
-
         });
 
         registar.put("EXPORT_TO_TIFF", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToTIFF(treePanel);
             }
-
         });
 
         registar.put("EXPORT_TO_SHP_ZIP", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToShpZip(treePanel);
             }
-
         });
 
         registar.put("EXPORT_GML_2", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToGML2(treePanel);
             }
-
         });
 
         registar.put("EXPORT_GML_3_1", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToGML3_1(treePanel);
             }
-
         });
 
         registar.put("EXPORT_GML_3_2", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToGML3_2(treePanel);
             }
-
         });
 
         registar.put("EXPORT_TO_CSV", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToCSV(treePanel);
             }
-
         });
 
         registar.put("EXPORT_TO_GEOJSON", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToGeoJSON(treePanel);
             }
-
         });
 
         registar.put("EXPORT_TO_RSS", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ExportoToGeoRSS(treePanel);
             }
-
         });
 
 //        registar.put("ADD_MODIFY_CQL_FILTER", new TreeMenuActionCreator() {
@@ -276,32 +241,33 @@ public class TreeMenuActionFactory {
 //        });
 
         registar.put("ADD_MODIFY_TIME_FILTER", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new AddModifyTimeFilterAction(
                         (GPTreePanel<GPBeanTreeModel>) treePanel);
             }
-
         });
 
         registar.put("REMOVE_TIME_FILTER", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new RemoveTimeFilterAction(
                         (GPTreePanel<GPBeanTreeModel>) treePanel);
             }
-
         });
 
-        registar.put("CREATE_VIEWPORT", new TreeMenuActionCreator() {
-
+        registar.put("CREATE_LAYER_VIEWPORT", new TreeMenuActionCreator() {
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new CreateLayerViewportAction(treePanel);
             }
+        });
 
+        registar.put("COPY_LAYER", new TreeMenuActionCreator() {
+            @Override
+            public MenuAction createAction(TreePanel treePanel) {
+                return copyLayerAction;
+            }
         });
 
         /**
@@ -315,12 +281,10 @@ public class TreeMenuActionFactory {
          * });
          */
         registar.put("LAYER_PROPERTIES", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new ShowLayerPropertiesAction(treePanel);
             }
-
         });
     }
 
@@ -331,25 +295,20 @@ public class TreeMenuActionFactory {
 
     private static void buildAllElementsActions() {
         registar.put("DELETE_TREE_ELEMENTS", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return new DeleteElementsMenuAction(
                         treePanel);
             }
-
         });
     }
 
     private static void buildLeafsMultiSelectionActions() {
         registar.put("COPY_LAYERS", new TreeMenuActionCreator() {
-
             @Override
             public MenuAction createAction(TreePanel treePanel) {
                 return copyLayerAction;
             }
-
         });
     }
-
 }

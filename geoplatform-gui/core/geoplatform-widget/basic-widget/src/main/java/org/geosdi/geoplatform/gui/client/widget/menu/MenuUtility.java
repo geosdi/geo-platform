@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.configuration.GPCheckMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPDateMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPGroupMenuItem;
@@ -132,7 +133,7 @@ public class MenuUtility implements IGeoPlatformMenubar {
     @Override
     public void addDateMenu(GPDateMenuItem tool,
             Menu menu) {
-        MenuItem date = new MenuItem("Choose a Date");
+        MenuItem date = new MenuItem(BasicWidgetConstants.INSTANCE.MenuUtility_chooseADateText());
         menu.add(date);
         date.setSubMenu(new DateMenu());
     }
@@ -159,7 +160,6 @@ public class MenuUtility implements IGeoPlatformMenubar {
 
             this.menuActionBinder.addMenuActionEnableHandler(action, item);
             action.addMenuActionChangeIconHandler(new MenuActionChangeIconHandler() {
-                
                 @Override
                 public void onActionChangeIcon(MenuActionChangeIconEvent event) {
                     item.setIcon(event.getImage());

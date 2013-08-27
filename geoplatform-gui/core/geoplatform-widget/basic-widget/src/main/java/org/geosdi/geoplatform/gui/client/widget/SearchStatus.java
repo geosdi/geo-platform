@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class SearchStatus extends StatusWidget {
 
@@ -46,8 +46,20 @@ public class SearchStatus extends StatusWidget {
         STATUS_SEARCH("x-status-ok"),
         STATUS_NO_SEARCH("x-status-not-ok"),
         STATUS_SEARCH_ERROR("x-status-error"),
+        /**
+         * @deprecated to support i18n use SearchStatusConstants instead
+         */
+        @Deprecated
         STATUS_MESSAGE_SEARCH("Search OK"),
+        /**
+         * @deprecated to support i18n use SearchStatusConstants instead
+         */
+        @Deprecated
         STATUS_MESSAGE_NOT_SEARCH("No Results Found"),
+        /**
+         * @deprecated to support i18n use SearchStatusConstants instead
+         */
+        @Deprecated
         STATUS_MESSAGE_SEARCH_ERROR("Search Service Error");
         //
         private String value;

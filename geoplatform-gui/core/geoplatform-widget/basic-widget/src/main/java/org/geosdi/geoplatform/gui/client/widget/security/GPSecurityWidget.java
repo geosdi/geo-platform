@@ -46,6 +46,8 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 
 /**
  *
@@ -72,7 +74,7 @@ public abstract class GPSecurityWidget extends Dialog {
         setButtonAlign(HorizontalAlignment.LEFT);
         setButtons("");
         setIcon(BasicWidgetResources.ICONS.search());
-        setHeadingText("Login Service");
+        setHeadingText(BasicWidgetConstants.INSTANCE.GPSecurityWidget_headingText());
         setModal(true);
         setBodyBorder(true);
         setBodyStyle("padding: 8px;background: none");
@@ -94,14 +96,14 @@ public abstract class GPSecurityWidget extends Dialog {
             }
         };
         userName = new TextField<String>();
-        userName.setFieldLabel("Username");
+        userName.setFieldLabel(BasicWidgetConstants.INSTANCE.GPSecurityWidget_usernameText());
 //        userName.setValue("admin");
         userName.addKeyListener(keyListener);
         add(userName);
 
         password = new TextField<String>();
         password.setPassword(true);
-        password.setFieldLabel("Password");
+        password.setFieldLabel(BasicWidgetConstants.INSTANCE.GPSecurityWidget_passwordText());
 //        password.setValue("admin");
         password.addKeyListener(keyListener);
         add(password);
@@ -115,7 +117,7 @@ public abstract class GPSecurityWidget extends Dialog {
 
         addStatusComponent();
 
-        reset = new Button("Reset", BasicWidgetResources.ICONS.cancel());
+        reset = new Button(ButtonsConstants.INSTANCE.resetText(), BasicWidgetResources.ICONS.cancel());
         reset.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -123,7 +125,7 @@ public abstract class GPSecurityWidget extends Dialog {
             }
         });
 
-        login = new Button("Login", BasicWidgetResources.ICONS.login());
+        login = new Button(ButtonsConstants.INSTANCE.loginText(), BasicWidgetResources.ICONS.login());
         login.disable();
         login.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override

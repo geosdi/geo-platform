@@ -39,30 +39,29 @@ import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
- * 
+ *
  */
 public class GetFeatureInfoEvent extends GwtEvent<GetFeatureInfoEventHandler> {
 
-	private boolean activate;
+    private boolean activate;
 
-	public GetFeatureInfoEvent(boolean activate) {
-		this.activate = activate;
-	}
+    public GetFeatureInfoEvent(boolean activate) {
+        this.activate = activate;
+    }
+    public static Type<GetFeatureInfoEventHandler> TYPE = new Type<GetFeatureInfoEventHandler>();
 
-	public static Type<GetFeatureInfoEventHandler> TYPE = new Type<GetFeatureInfoEventHandler>();
+    @Override
+    public Type<GetFeatureInfoEventHandler> getAssociatedType() {
+        return TYPE;
+    }
 
-	@Override
-	public Type<GetFeatureInfoEventHandler> getAssociatedType() {
-		return TYPE;
-	}
+    @Override
+    protected void dispatch(GetFeatureInfoEventHandler handler) {
+        if (activate) {
+            handler.register();
+        } else {
+            handler.unregister();
+        }
 
-	@Override
-	protected void dispatch(GetFeatureInfoEventHandler handler) {
-		if (activate)
-			handler.register();
-		else
-			handler.unregister();
-
-	}
-
+    }
 }

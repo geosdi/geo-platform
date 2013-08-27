@@ -48,6 +48,7 @@ import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 
 /**
@@ -91,8 +92,8 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
         LonLat ll = new LonLat(location.getLon(), location.getLat());
         ll.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), geoPlatformMap.getMap().getProjection());
         if (!this.boxesWidget.containsLonLat(ll)) {
-            GeoPlatformMessage.errorMessage("GeoPlatform Routing",
-                    "The chosen location is out of Range.");
+            GeoPlatformMessage.errorMessage(BasicWidgetConstants.INSTANCE.GPRoutingStartPoint_errorMessageTitleText(),
+                    BasicWidgetConstants.INSTANCE.GPRoutingStartPoint_errorMessageBodyText());
             return;
         }
 

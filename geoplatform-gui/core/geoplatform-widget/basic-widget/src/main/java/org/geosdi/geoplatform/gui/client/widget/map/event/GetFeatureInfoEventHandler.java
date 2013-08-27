@@ -39,12 +39,11 @@ import com.google.gwt.event.shared.EventHandler;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
- * 
+ *
  */
 public interface GetFeatureInfoEventHandler extends EventHandler {
-	
-	public void register();
 
-	public void unregister();
+    public void register();
 
+    public void unregister();
 }

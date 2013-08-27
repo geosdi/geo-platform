@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.routing;
 
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingEndPoint;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingLine;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingStartPoint;
@@ -49,7 +50,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
 
@@ -63,7 +64,7 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
 
     /**
      * @Constructor
-     * 
+     *
      * @param theGeoPlatformMap
      */
     public GPRoutingManagerWidget(GeoPlatformMap theGeoPlatformMap) {
@@ -74,7 +75,7 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
     }
 
     /**
-     * 
+     *
      */
     private void initWidget() {
         initBox();
@@ -90,7 +91,7 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
     }
 
     /**
-     * 
+     *
      */
     private void initPointsControl() {
         this.pointsVector = new Vector("GP-Routing-Points-Vector");
@@ -102,7 +103,7 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
     }
 
     /**
-     * 
+     *
      */
     private void initLineControl() {
         this.routeVector = new Vector("GP-Route-Vector");
@@ -114,13 +115,14 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.RoutingActivationEventHandler#activate()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.puregwt.routing.event.RoutingActivationEventHandler#activate()
      */
     @Override
     public void activate() {
-        GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
-                "Red square represents possible Routing Requests Area.");
+        GeoPlatformMessage.infoMessage(BasicWidgetConstants.INSTANCE.GPRoutingManagerWidget_infoMessageTitleText(),
+                BasicWidgetConstants.INSTANCE.GPRoutingManagerWidget_infoActivateMessageBodyText());
         this.geoPlatformMap.getMap().addLayer(this.pointsVector);
         this.geoPlatformMap.getMap().addLayer(this.routeVector);
         this.box.activate();
@@ -128,13 +130,14 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.RoutingActivationEventHandler#deactivate()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.puregwt.routing.event.RoutingActivationEventHandler#deactivate()
      */
     @Override
     public void deactivate() {
-        GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
-                "Routing Module Deactivated.");
+        GeoPlatformMessage.infoMessage(BasicWidgetConstants.INSTANCE.GPRoutingManagerWidget_infoMessageTitleText(),
+                BasicWidgetConstants.INSTANCE.GPRoutingManagerWidget_infoDeactivateMessageBodyText());
         this.geoPlatformMap.getMap().removeLayer(this.pointsVector);
         this.geoPlatformMap.getMap().removeLayer(this.routeVector);
         this.box.deactivate();

@@ -40,6 +40,7 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 
 public class ProgressBar extends Composite {
 
@@ -68,7 +69,7 @@ public class ProgressBar extends Composite {
         if (value < 1.0) {
             label.setText(loadingMessage);
         } else {
-            label.setText("Avvio in corso...");
+            label.setText(BasicWidgetConstants.INSTANCE.ProgressBar_startingUpText());
         }
         runBar.getElement().getStyle().setWidth(100 * value, Style.Unit.PCT);
     }

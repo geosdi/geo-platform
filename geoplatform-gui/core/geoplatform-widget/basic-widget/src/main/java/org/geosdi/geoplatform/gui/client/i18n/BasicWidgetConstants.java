@@ -36,25 +36,154 @@
 package org.geosdi.geoplatform.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.i18n.client.Constants.DefaultStringValue;
-import com.google.gwt.i18n.client.ConstantsWithLookup;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface BasicWidgetConstants extends ConstantsWithLookup {
+public interface BasicWidgetConstants extends Constants {
 
     public BasicWidgetConstants INSTANCE = GWT.create(BasicWidgetConstants.class);
 
     @DefaultStringValue("About Geo-Platform")
     String GPAboutWidget_headingText();
-    
+
+    /**
+     * Start GPTreeExpanderNotifier
+     */
+    @DefaultStringValue("Expand Folder")
+    String GPTreeExpanderNotifier_confirmMessageTitleText();
+
+    @DefaultStringValue("The folder you are trying to put elements "
+                + "must be expanded before the adding operation. "
+                + "Do you want to expand it?")
+    String GPTreeExpanderNotifier_confirmMessageBodyText();
+
+    /**
+     * Start GPSecurityWidget
+     */
+    @DefaultStringValue("Login Service")
+    String GPSecurityWidget_headingText();
+
+    @DefaultStringValue("Username")
+    String GPSecurityWidget_usernameText();
+
+    @DefaultStringValue("Password")
+    String GPSecurityWidget_passwordText();
+
+    /**
+     * Start GPAdvancedSecurityWidget
+     */
+    @DefaultStringValue("Done")
+    String GPAdvancedSecurityWidget_doneText();
+
+    /**
+     * Start ComboSearchWindow
+     */
+    @DefaultStringValue("Reload Results after Combo Collapse")
+    String ComboSearchWindow_displayResultText();
+
+    /**
+     * Start ProgressBar
+     */
+    @DefaultStringValue("Starting up...")//Avvio in corso...
+    String ProgressBar_startingUpText();
+
+    /**
+     * Start MenuUtility
+     */
+    @DefaultStringValue("Choose a Date")
+    String MenuUtility_chooseADateText();
+
+    /**
+     * Start GPEPSGContentPanel
+     */
+    @DefaultStringValue("EPSG")
+    String GPEPSGContentPanel_EPSGTextFieldLabelText();
+
+    @DefaultStringValue("Common EPSG")
+    String GPEPSGContentPanel_EPSGComboFieldLabelText();
+
+    /**
+     * Start EPSGUtility
+     */
+    @DefaultStringValue("Choose EPSG...")
+    String EPSGUtility_chooseEPSGText();
+
+    /**
+     * Start GPRoutingManagerWidget
+     */
+    @DefaultStringValue("GeoPlatform Routing Module")
+    String GPRoutingManagerWidget_infoMessageTitleText();
+
+    @DefaultStringValue("Red square represents possible Routing Requests Area.")
+    String GPRoutingManagerWidget_infoActivateMessageBodyText();
+
+    @DefaultStringValue("Routing Module Deactivated.")
+    String GPRoutingManagerWidget_infoDeactivateMessageBodyText();
+
+    /**
+     * Start GPRoutingStartPoint
+     */
+    @DefaultStringValue("GeoPlatform Routing")
+    String GPRoutingStartPoint_errorMessageTitleText();
+
+    @DefaultStringValue("The chosen location is out of Range.")
+    String GPRoutingStartPoint_errorMessageBodyText();
+
+    /**
+     * Start GPRoutingEndPoint
+     */
+    @DefaultStringValue("GeoPlatform Routing")
+    String GPRoutingEndPoint_errorMessageTitleText();
+
+    @DefaultStringValue("The chosen location is out of Range.")
+    String GPRoutingEndPoint_errorMessageBodyText();
+
+    /**
+     * Start GeoPlatformSearchWindow
+     */
+    @DefaultStringValue("Search")
+    String GeoPlatformSearchWindow_headingText();
+
+    @DefaultStringValue("Find")
+    String GeoPlatformSearchWindow_searchFieldLabelText();
+
+    @DefaultStringValue("Connection to the Server")
+    String GeoPlatformSearchWindow_connectionBusyStatusText();
+
+    /**
+     * Start GeoPlatformSearchPanel
+     */
+    @DefaultStringValue("Search")
+    String GeoPlatformSearchPanel_headingText();
+
+    @DefaultStringValue("Find")
+    String GeoPlatformSearchPanel_searchFieldLabelText();
+
+    @DefaultStringValue("Connection to the Server")
+    String GeoPlatformSearchPanel_connectionBusyStatusText();
+
+    /**
+     * Start GPFileUploader
+     */
     @DefaultStringValue("Upload in progress...")
     String GPFileUploader_uploadInProgressText();
-    
-    @DefaultStringValue("Submit")
-    String GPFileUploader_submitButtonText();
-    
-    
+
+    @DefaultStringValue("Failed to Upload File")
+    String GPFileUploader_failedStatusText();
+
+    @DefaultStringValue("Upload Error")
+    String GPFileUploader_failedErrorMessageTitleText();
+
+    @DefaultStringValue("This kind of file isn't allowed!")
+    String GPFileUploader_failedErrorKindFileBodyText();
+
+    @DefaultStringValue("Error on file upload")
+    String GPFileUploader_failedErrorGenericBodyText();
+
+    @DefaultStringValue("Uploaded File Succesfully")
+    String GPFileUploader_successStatusText();
 }

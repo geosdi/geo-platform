@@ -45,6 +45,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Image;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.search.routing.GPComboBox;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
@@ -136,7 +137,7 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel> {
         this.displayResult = new Image();
         this.displayResult.setUrl(GWT.getModuleBaseURL() + "/gp-images/help-icon.png");
 
-        this.displayResult.setTitle("Reload Results after Combo Collapse.");
+        this.displayResult.setTitle(BasicWidgetConstants.INSTANCE.ComboSearchWindow_displayResultText());
 
         this.displayResult.addClickHandler(new ClickHandler() {
             @Override

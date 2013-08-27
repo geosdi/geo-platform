@@ -41,13 +41,14 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
 
@@ -68,7 +69,6 @@ public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
 
     private void initListeners() {
         this.executor = new Listener() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 execute();
@@ -77,7 +77,6 @@ public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
         };
 
         this.message = new Listener<MessageBoxEvent>() {
-
             @Override
             public void handleEvent(MessageBoxEvent be) {
                 if (be.getButtonClicked().getItemId().equalsIgnoreCase(Dialog.YES)) {
@@ -107,10 +106,8 @@ public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
      * Confirm Expand Operation on the Folder Element.
      */
     private void confirmExpandingMessage() {
-        GeoPlatformMessage.confirmMessage("Expand Folder",
-                "The folder you are trying to put elements "
-                + "must be expanded before the adding operation. "
-                + "Do you want to expand it?",
+        GeoPlatformMessage.confirmMessage(BasicWidgetConstants.INSTANCE.GPTreeExpanderNotifier_confirmMessageTitleText(),
+                BasicWidgetConstants.INSTANCE.GPTreeExpanderNotifier_confirmMessageBodyText(),
                 this.message);
     }
 

@@ -46,6 +46,7 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.user.client.Element;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.map.util.EPSGTemplate;
 import org.geosdi.geoplatform.gui.client.widget.map.util.EPSGUtility;
@@ -69,14 +70,14 @@ public class GPEPSGContentPanel extends GeoPlatformContentPanel {
     public void addComponent() {
         epsgTextField = new TextField<String>();
         epsgTextField.setAllowBlank(false);
-        epsgTextField.setFieldLabel("EPSG");
+        epsgTextField.setFieldLabel(BasicWidgetConstants.INSTANCE.GPEPSGContentPanel_EPSGTextFieldLabelText());
 
         this.storeEPSG = new ListStore<EPSGTemplate>();
         this.storeEPSG.add(EPSGUtility.getCommonEPSG());
 
         this.comboEPSG = new ComboBox<EPSGTemplate>();
-        this.comboEPSG.setFieldLabel("Common EPSG");
-        this.comboEPSG.setEmptyText("Choose EPSG...");
+        this.comboEPSG.setFieldLabel(BasicWidgetConstants.INSTANCE.GPEPSGContentPanel_EPSGComboFieldLabelText());
+        this.comboEPSG.setEmptyText(BasicWidgetConstants.INSTANCE.EPSGUtility_chooseEPSGText());
         this.comboEPSG.setDisplayField(EPSGTemplate.EPSGEnum.EPSG_DESCRIPTION.getValue());
         this.comboEPSG.setEditable(false);
         this.comboEPSG.setAllowBlank(true);
@@ -99,7 +100,7 @@ public class GPEPSGContentPanel extends GeoPlatformContentPanel {
 
         epsgTextField = new TextField<String>();
         epsgTextField.setAllowBlank(false);
-        epsgTextField.setFieldLabel("EPSG");
+        epsgTextField.setFieldLabel(BasicWidgetConstants.INSTANCE.GPEPSGContentPanel_EPSGTextFieldLabelText());
 
         KeyListener keyListener = new KeyListener() {
             @Override

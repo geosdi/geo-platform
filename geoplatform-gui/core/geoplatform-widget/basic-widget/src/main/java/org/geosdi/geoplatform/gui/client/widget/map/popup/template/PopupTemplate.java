@@ -45,6 +45,10 @@ import com.google.gwt.core.client.GWT;
 public enum PopupTemplate {
 
     IMAGE_LOADING("<img src=" + GWT.getModuleName() + "/gp-images/loading.gif />"),
+    /**
+     * @deprecated to support i18n use PopupTemplateConstants instead
+     */
+    @Deprecated
     MESSAGE_LOADING("<br />Loading Location....."),
     IMAGE_RESULT_FOUND("<img src=" + GWT.getModuleName() + "/gp-images/ok.png />"),
     IMAGE_RESULT_NOT_FOUND("<img src=" + GWT.getModuleName() + "/gp-images/not_found.png />"),

@@ -46,6 +46,7 @@ import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
@@ -87,7 +88,7 @@ public class GPFileUploader {
         fileUpload.setName("uploadFormElement");
         panel.add(fileUpload);
 
-        buttonSubmit = new Button(BasicWidgetConstants.INSTANCE.GPFileUploader_submitButtonText(),
+        buttonSubmit = new Button(ButtonsConstants.INSTANCE.submitText(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -109,8 +110,10 @@ public class GPFileUploader {
                 // take this opportunity to perform validation
                 if (!isValidExtensions(fileUpload.getFilename(), extensions)) {
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                    GeoPlatformMessage.errorMessage("Upload Error", "This kind of file isn't allowed!");
+                            BasicWidgetConstants.INSTANCE.GPFileUploader_failedStatusText(),
+                            EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    GeoPlatformMessage.errorMessage(BasicWidgetConstants.INSTANCE.GPFileUploader_failedErrorMessageTitleText(),
+                            BasicWidgetConstants.INSTANCE.GPFileUploader_failedErrorKindFileBodyText());
                     event.cancel();
                     formPanel.reset();
                 }
@@ -143,22 +146,25 @@ public class GPFileUploader {
                         //done.enable();
                         //mapPreviewWidget.drawAoiOnMap(wkt);
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Uploaded File Succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
+                                BasicWidgetConstants.INSTANCE.GPFileUploader_successStatusText(),
+                                EnumSearchStatus.STATUS_SEARCH.toString());
                     } else {
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                BasicWidgetConstants.INSTANCE.GPFileUploader_failedStatusText(),
+                                EnumSearchStatus.STATUS_NO_SEARCH.toString());
                     }
                 } else {
-                    GeoPlatformMessage.errorMessage("Upload Error", "Error on file upload");
+                    GeoPlatformMessage.errorMessage(
+                            BasicWidgetConstants.INSTANCE.GPFileUploader_failedErrorMessageTitleText(),
+                            BasicWidgetConstants.INSTANCE.GPFileUploader_failedErrorGenericBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                            BasicWidgetConstants.INSTANCE.GPFileUploader_failedStatusText(), EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 }
             }
         });
     }
 
     public boolean isValidExtensions(String fileName, GPExtensions... extensions) {
-        System.out.println("TEST **************** " + extensions.length);
         for (GPExtensions gPExtensions : extensions) {
             if (fileName.toUpperCase().endsWith("." + gPExtensions.toString())) {
                 return true;

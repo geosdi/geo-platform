@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.map.util;
 
 import com.google.common.collect.Lists;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -47,7 +48,7 @@ public class EPSGUtility {
     public static List<EPSGTemplate> getCommonEPSG() {
         List<EPSGTemplate> epsg = Lists.newArrayList();
 
-        epsg.add(new EPSGTemplate("EPSG:0", "Choose EPSG..."));
+        epsg.add(new EPSGTemplate("EPSG:0", BasicWidgetConstants.INSTANCE.EPSGUtility_chooseEPSGText()));
         epsg.add(new EPSGTemplate("EPSG:4326", "WGS 84"));
         epsg.add(new EPSGTemplate("EPSG:3857", "Google Mercator"));
         epsg.add(new EPSGTemplate("EPSG:32632", "WGS 84 / UTM zone 32N"));

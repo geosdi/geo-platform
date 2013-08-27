@@ -47,6 +47,7 @@ import com.extjs.gxt.ui.client.widget.layout.BoxLayout.BoxLayoutPack;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.GeoPlatformOptionsMember;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
@@ -86,8 +87,8 @@ public abstract class UserOptionsMember implements GeoPlatformOptionsMember {
     }
 
     private void createSaveButton() {
-        saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
-                                new SelectionListener<ButtonEvent>() {
+        saveButton = new Button(ButtonsConstants.INSTANCE.saveText(), BasicWidgetResources.ICONS.done(),
+                new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -102,7 +103,6 @@ public abstract class UserOptionsMember implements GeoPlatformOptionsMember {
     @Override
     public final Listener<ButtonEvent> getListener() {
         return new Listener<ButtonEvent>() {
-
             @Override
             public void handleEvent(ButtonEvent ce) {
                 if (!ce.<ToggleButton>getComponent().isPressed()) {
@@ -128,7 +128,7 @@ public abstract class UserOptionsMember implements GeoPlatformOptionsMember {
 
     /**
      * Build Member when Toogle Button is Pressed
-     * 
+     *
      */
     protected void buildMember() {
         if (!initialized) {

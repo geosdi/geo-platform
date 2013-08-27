@@ -33,34 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.i18n.template;
 
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.menu.AboutGPAction;
-import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class BasicWidget implements EntryPoint {
+public interface PopupTemplateConstants extends Constants {
 
-    @Override
-    public void onModuleLoad() {
-        MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
-        menuRegistar.put("aboutGeoPlatform",
-                new MenuActionCreator() {
-            private AboutGPAction action;
+    public PopupTemplateConstants INSTANCE = GWT.create(PopupTemplateConstants.class);
 
-            @Override
-            public MenuAction createAction() {
-                return action = (action == null)
-                        ? new AboutGPAction() : action;
-            }
-        });
-    }
+    @DefaultStringValue("<br />Loading Location.....")
+    String MESSAGE_LOADING();
 }

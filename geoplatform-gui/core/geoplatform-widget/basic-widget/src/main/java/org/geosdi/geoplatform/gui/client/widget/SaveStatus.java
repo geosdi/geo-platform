@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class SaveStatus extends StatusWidget {
 
@@ -46,8 +46,20 @@ public class SaveStatus extends StatusWidget {
         STATUS_SAVE("x-status-ok"),
         STATUS_NOT_SAVE("x-status-not-ok"),
         STATUS_SAVE_ERROR("x-status-error"),
+        /**
+         * @deprecated to support i18n use SaveStatusConstants instead
+         */
+        @Deprecated
         STATUS_MESSAGE_SAVE("Operation Ok"),
+        /**
+         * @deprecated to support i18n use SaveStatusConstants instead
+         */
+        @Deprecated
         STATUS_MESSAGE_NOT_SAVE("Operation Failed"),
+        /**
+         * @deprecated to support i18n use SaveStatusConstants instead
+         */
+        @Deprecated
         STATUS_MESSAGE_SAVE_ERROR("Service Error");
         //
         private String value;

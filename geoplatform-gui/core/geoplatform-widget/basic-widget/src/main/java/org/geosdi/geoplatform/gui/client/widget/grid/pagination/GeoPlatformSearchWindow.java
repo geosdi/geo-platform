@@ -55,6 +55,9 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.status.SearchStatusConstants;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -124,7 +127,6 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
         setMaximizable(false);
 
         addWindowListener(new WindowListener() {
-
             @Override
             public void windowHide(WindowEvent we) {
                 executeClose();
@@ -149,17 +151,16 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
         formPanel.setLayout(new FlowLayout());
 
         FieldSet searchFieldSet = new FieldSet();
-        searchFieldSet.setHeadingHtml("Search");
+        searchFieldSet.setHeadingHtml(BasicWidgetConstants.INSTANCE.GeoPlatformSearchWindow_headingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         searchFieldSet.setLayout(layout);
 
         search = new TextField<String>();
-        search.setFieldLabel("Find");
+        search.setFieldLabel(BasicWidgetConstants.INSTANCE.GeoPlatformSearchWindow_searchFieldLabelText());
 
         search.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
@@ -200,8 +201,7 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        selectButton = new Button("Select", new SelectionListener<ButtonEvent>() {
-
+        selectButton = new Button(ButtonsConstants.INSTANCE.selectText(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 executeSelect();
@@ -213,8 +213,7 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
         formPanel.addButton(this.selectButton);
 
-        closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
-
+        closeButton = new Button(ButtonsConstants.INSTANCE.closeText(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 executeClose();
@@ -252,9 +251,9 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
     }
 
     /**
-     * 
+     *
      * @param position
-     * @param button 
+     * @param button
      */
     public void addButton(int position, Button button) {
         this.formPanel.getButtonBar().getItems().add(position, button);
@@ -283,10 +282,9 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
     private void setUpLoadListener() {
         loader.addLoadListener(new LoadListener() {
-
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
-                searchStatus.setBusy("Connection to the Server");
+                searchStatus.setBusy(BasicWidgetConstants.INSTANCE.GeoPlatformSearchWindow_connectionBusyStatusText());
                 if (selectButton.isEnabled()) {
                     selectButton.disable();
                 }
@@ -295,7 +293,7 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
             @Override
             public void loaderLoad(LoadEvent le) {
                 setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                                EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+                        SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH());
             }
 
             @Override
@@ -305,10 +303,10 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
                     throw le.exception;
                 } catch (GeoPlatformException e) {
                     setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                                    EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
+                            SearchStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
                 } catch (Throwable e) {
                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                    EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
+                            SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
                 }
             }
         });

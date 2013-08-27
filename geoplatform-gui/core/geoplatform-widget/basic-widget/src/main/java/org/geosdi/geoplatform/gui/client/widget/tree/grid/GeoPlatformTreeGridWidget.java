@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.tree.grid;
 
 import org.geosdi.geoplatform.gui.model.tree.grid.GPTreeGridBeanModel;
-
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.treegrid.TreeGrid;
@@ -44,7 +43,7 @@ import com.extjs.gxt.ui.client.widget.treegrid.TreeGrid;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public abstract class GeoPlatformTreeGridWidget<T extends GPTreeGridBeanModel> {
 
@@ -53,7 +52,7 @@ public abstract class GeoPlatformTreeGridWidget<T extends GPTreeGridBeanModel> {
     protected ColumnModel columnModel;
 
     /**
-     * 
+     *
      */
     public GeoPlatformTreeGridWidget() {
         this.store = new TreeStore<T>();
@@ -69,8 +68,8 @@ public abstract class GeoPlatformTreeGridWidget<T extends GPTreeGridBeanModel> {
     /**
      * Create ColumnModel with all Column For Column with GeoPlatform Column
      * Render we can have this code :
-     * 
-     * <code> 
+     *
+     * <code>
      * 		ColumnConfig gpColumnRender = new ColumnConfig(
      *				GPKeyTreeGridModel.LABEL_NODE_VALUE.toString(),
      *				"GeoPlatform-Renderer", 150);
@@ -80,18 +79,17 @@ public abstract class GeoPlatformTreeGridWidget<T extends GPTreeGridBeanModel> {
      *			@Override
      *			public Object render(T model, String property, ColumnData config,
      *					int rowIndex, int colIndex, ListStore<T> store, Grid<T> grid) {
-     *				// TODO Auto-generated method stub
      *				return model.getWidget();
      *			}
      *		});
      * </code>
-     * 
+     *
      */
     public abstract void createColumnModel();
 
     /**
      * Set TreeGrid Properties such as Borders, RowHeight etc
-     * 
+     *
      */
     public abstract void setTreeGridProperties();
 }

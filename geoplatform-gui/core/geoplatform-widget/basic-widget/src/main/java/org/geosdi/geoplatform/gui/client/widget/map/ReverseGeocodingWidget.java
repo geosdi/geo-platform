@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
+import org.geosdi.geoplatform.gui.client.i18n.template.PopupTemplateConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.ReverseGeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
@@ -242,7 +243,7 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
     private void addPopupAndFireEvent() {
         popupWidget.setLonLat(this.lonlat);
         this.popupWidget.setContentHTML(PopupTemplate.IMAGE_LOADING.toString()
-                + PopupTemplate.MESSAGE_LOADING.toString());
+                + PopupTemplateConstants.INSTANCE.MESSAGE_LOADING());
         this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
         if (dispatcher == null) {
@@ -257,12 +258,12 @@ public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHan
      */
     public LonLat getLonlat() {
         LonLat lt = new LonLat(this.lonlat.lon(), this.lonlat.lat());
-        
+
         if (GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection().equals(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
             lt.transform(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode(), GPCoordinateReferenceSystem.WGS_84.getCode());
         } else {
-          //nothing to do  
+            //nothing to do  
         }
         return lt;
     }

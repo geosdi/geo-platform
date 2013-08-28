@@ -60,7 +60,8 @@ public class ShowFullMetadataAction extends MenuBaseAction {
     private RecordsContainer rc;
 
     public ShowFullMetadataAction(RecordsContainer rc) {
-        super("Read Full Metadata",
+        super(CatalogFinderConstants.INSTANCE.
+                        ShowFullMetadataAction_titleActionText(),
                 CatalogFinderWidgetResources.ICONS.metadata());
 
         this.rc = rc;

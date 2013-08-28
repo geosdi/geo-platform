@@ -47,6 +47,7 @@ import java.util.Map;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
 import org.geosdi.geoplatform.gui.action.tree.menu.TreeMenuActionRegistar;
+import org.geosdi.geoplatform.gui.client.i18n.ConfigurationModuleConstants;
 import org.geosdi.geoplatform.gui.configuration.GPCheckMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPDateMenuItem;
 import org.geosdi.geoplatform.gui.configuration.GPGroupMenuItem;
@@ -68,10 +69,9 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
     static {
         registar = TreeMenuGinInjector.MainInjector.getInstance().getTreeMenuActionRegistar();
     }
-
     private static TreeMenuActionRegistar registar;
     //
-    private Map<StoreCompositeKey, Menu> menuRegistar = Maps.newHashMap();
+    private Map<StoreCompositeKey, Menu> menuRegistar = Maps.<StoreCompositeKey, Menu>newHashMap();
     private final TreePanel treePanel;
     private MenuActionBinder menuActionBinder;
 
@@ -117,7 +117,7 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
     @Override
     public void addDateMenu(GPDateMenuItem tool,
             Menu menu) {
-        MenuItem date = new MenuItem("Choose a Date");
+        MenuItem date = new MenuItem(ConfigurationModuleConstants.INSTANCE.AbstractTreeMenuStrategy_chooseADateText());
         menu.add(date);
         date.setSubMenu(new DateMenu());
     }
@@ -145,5 +145,4 @@ public abstract class AbstractTreeMenuStrategy implements GPTreeMenuStrategy {
     public TreePanel getTree() {
         return this.treePanel;
     }
-
 }

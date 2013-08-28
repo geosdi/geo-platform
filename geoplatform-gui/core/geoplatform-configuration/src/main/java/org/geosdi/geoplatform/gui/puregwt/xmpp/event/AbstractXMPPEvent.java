@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.xmpp.event;
 
+import com.google.common.collect.Maps;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import java.util.HashMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPEventRepository;
 
@@ -53,7 +53,7 @@ public abstract class AbstractXMPPEvent<T extends EventHandler> extends GwtEvent
 
     public AbstractXMPPEvent(String messageSubject) {
         this.messageSubject = messageSubject;
-        this.attributes = new HashMap<String, String>();
+        this.attributes = Maps.<String, String>newHashMap();
         XMPPEventRepository.putEventMapping(messageSubject, this);
     }
 

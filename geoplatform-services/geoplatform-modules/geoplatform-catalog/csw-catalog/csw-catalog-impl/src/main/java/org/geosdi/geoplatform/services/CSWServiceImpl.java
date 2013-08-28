@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import com.google.common.collect.Lists;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.io.IOException;
@@ -488,7 +489,7 @@ class CSWServiceImpl {
                 response.getSearchResults().getAbstractRecord();
         logger.trace("\n*** Record list size: {} ***", records.size());
 
-        List<FullRecordDTO> recordListDTO = new ArrayList<FullRecordDTO>(
+        List<FullRecordDTO> recordListDTO = Lists.<FullRecordDTO>newArrayListWithCapacity(
                 records.size());
         for (JAXBElement<? extends AbstractRecordType> r : records) {
             RecordType record = (RecordType) r.getValue();

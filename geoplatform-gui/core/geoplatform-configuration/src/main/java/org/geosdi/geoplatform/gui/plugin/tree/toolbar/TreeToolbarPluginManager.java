@@ -62,7 +62,7 @@ public class TreeToolbarPluginManager {
     }
     
     public static List<ITreeToolbarPlugin> getToolbarPluginByRegion(TreeToolbarRegion region) {
-        List<ITreeToolbarPlugin> regionPlugins = Lists.newArrayList();
+        List<ITreeToolbarPlugin> regionPlugins = Lists.<ITreeToolbarPlugin>newArrayList();
         for (ITreeToolbarPlugin plugin : toolbarPlugin) {
             if (plugin.getRegion() == region) {
                 regionPlugins.add(plugin);

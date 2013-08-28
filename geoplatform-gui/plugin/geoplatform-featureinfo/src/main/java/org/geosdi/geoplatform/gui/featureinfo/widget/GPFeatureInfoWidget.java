@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.featureinfo.widget;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.FeatureInfoModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -88,7 +89,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
         super.setResizable(true);
         super.setPlain(true);
         super.setModal(true);
-        super.setHeadingHtml("Get Feature Info");
+        super.setHeadingHtml(FeatureInfoModuleConstants.INSTANCE.GPFeatureInfoWidget_headingText());
     }
 
     @Override
@@ -146,8 +147,9 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
         if (this.mainPanel.getItemCount() > 0) {
             super.show();
         } else {
-            GeoPlatformMessage.alertMessage("GeoPlatform Feature Widget",
-                    "There are no layers to show Info.");
+            GeoPlatformMessage.alertMessage(FeatureInfoModuleConstants.INSTANCE.
+                    GPFeatureInfoWidget_alertNoLayerTitleText(),
+                    FeatureInfoModuleConstants.INSTANCE.GPFeatureInfoWidget_alertNoLayerBodyText());
         }
     }
 }

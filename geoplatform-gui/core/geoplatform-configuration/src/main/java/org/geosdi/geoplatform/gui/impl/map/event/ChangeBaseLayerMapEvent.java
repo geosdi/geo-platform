@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.impl.map.event;
 
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-
 import com.google.gwt.event.shared.GwtEvent;
 import org.gwtopenmaps.openlayers.client.Projection;
 

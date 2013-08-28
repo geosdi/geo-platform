@@ -54,7 +54,7 @@ public abstract class GPMapLayersStore<K extends GPLayerBean, T extends Layer>
         implements IMapLayersStore<T>, LayerMapChangedHandler {
 
     protected GeoPlatformMap mapWidget;
-    protected Map<K, T> layers = Maps.newHashMap();
+    protected Map<K, T> layers = Maps.<K, T>newHashMap();
     private DisplayLayersManager displayLayers;
 
     /**
@@ -80,6 +80,6 @@ public abstract class GPMapLayersStore<K extends GPLayerBean, T extends Layer>
      * @return List<T>
      */
     public List<T> getLayers() {
-        return Lists.newArrayList(this.layers.values());
+        return Lists.<T>newArrayList(this.layers.values());
     }
 }

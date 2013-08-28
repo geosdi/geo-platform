@@ -44,7 +44,7 @@ import java.util.List;
  */
 public class AddLayerPluginManager {
 
-    private static List<IAddLayerPlugin> windowPlugins = Lists.newArrayList();
+    private static List<IAddLayerPlugin> windowPlugins = Lists.<IAddLayerPlugin>newArrayList();
 
     /**
      * @return the toolBarPlugin

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.plugin.geocoding;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPAdvancedGeoc
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public abstract class GPGeocoderPluginManager<T extends IGPGeocoderPlugin>
@@ -56,7 +56,7 @@ public abstract class GPGeocoderPluginManager<T extends IGPGeocoderPlugin>
 
     protected GPGeocoderPluginManager(GeocoderPluginType theType) {
         this.type = theType;
-        this.geocoderPlugins = new ArrayList<T>();
+        this.geocoderPlugins = Lists.<T>newArrayList();
     }
 
     @Override

@@ -37,13 +37,11 @@ package org.geosdi.geoplatform.gui.action.menu.event;
 
 import org.geosdi.geoplatform.gui.action.menu.handler.GlobalChangeCheckActionHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-
 public abstract class MenuActionCheckEvent<T extends GlobalChangeCheckActionHandler> extends GwtEvent<T> {
 
     private boolean checked;

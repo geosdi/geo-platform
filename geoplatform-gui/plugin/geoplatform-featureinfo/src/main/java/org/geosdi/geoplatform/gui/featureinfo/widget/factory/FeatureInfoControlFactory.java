@@ -71,8 +71,8 @@ public class FeatureInfoControlFactory {
         }
         WMS wms = WMS.narrowToWMS(layer.getJSObject());
         WMSParams params = wms.getParams();
-        List<String> propertyNameList = Lists.newArrayList(params.getJSObject().getPropertyNames().split(","));
-        List<String> propertyValueList = Lists.newArrayList(params.getJSObject().getPropertyValues().split(","));
+        List<String> propertyNameList = Lists.<String>newArrayList(params.getJSObject().getPropertyNames().split(","));
+        List<String> propertyValueList = Lists.<String>newArrayList(params.getJSObject().getPropertyValues().split(","));
         int i = 0;
         for (String propertyName : GeoPlatformUtils.safeList(propertyNameList)) {
             String propertyValue = propertyValueList.get(i);

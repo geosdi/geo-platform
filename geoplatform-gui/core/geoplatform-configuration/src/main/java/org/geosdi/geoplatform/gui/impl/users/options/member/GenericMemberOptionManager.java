@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOp
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GenericMemberOptionManager<M extends GeoPlatformOptionsMember>
         implements IGPMemberOptionManager<M> {
@@ -51,7 +51,7 @@ public abstract class GenericMemberOptionManager<M extends GeoPlatformOptionsMem
     private List<M> members;
 
     public GenericMemberOptionManager() {
-        this.members = Lists.newArrayList();
+        this.members = Lists.<M>newArrayList();
     }
 
     @Override

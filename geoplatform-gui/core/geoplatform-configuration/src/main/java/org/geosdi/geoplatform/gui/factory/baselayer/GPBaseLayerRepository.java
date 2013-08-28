@@ -66,8 +66,8 @@ class GPBaseLayerRepository {
 
     private final String bingKey = "Apd8EWF9Ls5tXmyHr22O"
             + "uL1ay4HRJtI4JG4jgluTDVaJdUXZV6lpSBpX-TwnoRDG";
-    private EnumMap<BaseLayerValue, GPBaseLayerCreator> baseLayerMap = Maps.newEnumMap(
-            BaseLayerValue.class);
+    private EnumMap<BaseLayerValue, GPBaseLayerCreator> baseLayerMap = Maps.
+            <BaseLayerValue, GPBaseLayerCreator>newEnumMap(BaseLayerValue.class);
     private static GPBaseLayerRepository instance;
 
     private GPBaseLayerRepository() {

@@ -60,7 +60,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 public class FeatureInfoFlyWeight {
 
     private static FeatureInfoFlyWeight instance = new FeatureInfoFlyWeight();
-    private Map<String, IGPFeatureInfoElement> cache = Maps.newHashMap();
+    private Map<String, IGPFeatureInfoElement> cache = Maps.<String, IGPFeatureInfoElement>newHashMap();
     private FeatureInfoShowWidgetEvent event = new FeatureInfoShowWidgetEvent();
     private int count = 0;
 

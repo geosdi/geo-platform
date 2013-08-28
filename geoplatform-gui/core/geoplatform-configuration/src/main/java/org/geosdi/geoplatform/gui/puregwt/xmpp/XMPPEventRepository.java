@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
  */
 public class XMPPEventRepository {
 
-    private static Map<String, AbstractXMPPEvent> xmppEventMap = Maps.newHashMap();
+    private static Map<String, AbstractXMPPEvent> xmppEventMap = Maps.<String, AbstractXMPPEvent>newHashMap();
 
     public static void putEventMapping(String messageSubject, AbstractXMPPEvent xmppEvent) {
         xmppEventMap.put(messageSubject, xmppEvent);

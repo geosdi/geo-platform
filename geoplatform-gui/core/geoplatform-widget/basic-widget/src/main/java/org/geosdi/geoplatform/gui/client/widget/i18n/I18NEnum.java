@@ -33,38 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.i18n;
-
-import com.extjs.gxt.ui.client.data.ModelProcessor;
-import com.extjs.gxt.ui.client.widget.form.ListModelPropertyEditor;
-import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
-import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
+package org.geosdi.geoplatform.gui.client.widget.i18n;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPSimpleComboI18N<E extends I18NEnum> extends SimpleComboBox<E> {
+public interface I18NEnum {
 
-    public GPSimpleComboI18N() {
-        ListModelPropertyEditor<SimpleComboValue<E>> propEditor =
-                new ListModelPropertyEditor<SimpleComboValue<E>>() {
-            @Override
-            public String getStringValue(SimpleComboValue<E> value) {
-                return value.getValue().getI18NLabel();
-            }
-        };
-
-        propEditor.setDisplayProperty("i18Nlabel");
-
-        super.setPropertyEditor(propEditor);
-
-        super.getView().setModelProcessor(new ModelProcessor<SimpleComboValue<E>>() {
-            @Override
-            public SimpleComboValue<E> prepareData(SimpleComboValue<E> model) {
-                model.set("i18Nlabel", model.getValue().getI18NLabel());
-                return model;
-            }
-        });
-    }
+    String getI18NLabel();
 }

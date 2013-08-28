@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
-import org.geosdi.geoplatform.gui.i18n.I18NEnum;
+import org.geosdi.geoplatform.gui.client.widget.i18n.I18NEnum;
 import org.geosdi.geoplatform.gui.client.i18n.ClientAreaSearchTypeConstants;
 
 /**

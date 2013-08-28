@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
-import org.geosdi.geoplatform.gui.i18n.GPSimpleComboI18N;
+import org.geosdi.geoplatform.gui.client.widget.i18n.GPSimpleComboI18N;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.widget.Label;

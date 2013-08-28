@@ -48,13 +48,14 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import java.util.Date;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @CatalogFilter
 public class TimeAccordionWidget extends GeoPlatformContentPanel {
@@ -81,10 +82,9 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
 
     private void addRadioGroup() {
         anytimeRadio = new Radio();
-        anytimeRadio.setBoxLabel("Anytime");
+        anytimeRadio.setBoxLabel(CatalogFinderConstants.INSTANCE.TimeAccordionWidget_anyTimeBoxLabelText());
         anytimeRadio.setValue(true); // Enabled by default
         anytimeRadio.addListener(Events.Change, new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent be) {
                 timeInfo.setActive(false);
@@ -99,9 +99,8 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
         });
 
         final Radio temporalExtentRadio = new Radio();
-        temporalExtentRadio.setBoxLabel("Temporal Extent");
+        temporalExtentRadio.setBoxLabel(CatalogFinderConstants.INSTANCE.TimeAccordionWidget_temporalExtentBoxLabelText());
         temporalExtentRadio.addListener(Events.Change, new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent be) {
                 timeInfo.setActive(true);
@@ -129,14 +128,13 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
         DateTimeFormat dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
 
         startDate = new DateField();
-        startDate.setToolTip("Start date");
+        startDate.setToolTip(CatalogFinderConstants.INSTANCE.TimeAccordionWidget_startDateTooltipText());
         startDate.getPropertyEditor().setFormat(dtFormat);
         startDate.setWidth(100);
         startDate.setEditable(false);
 
         DatePicker startDatePicker = startDate.getDatePicker();
         startDatePicker.addListener(Events.Select, new Listener<DatePickerEvent>() {
-
             @Override
             public void handleEvent(DatePickerEvent dpe) {
                 setStartDate(dpe.getDate());
@@ -144,14 +142,13 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
         });
 
         endDate = new DateField();
-        endDate.setToolTip("End date");
+        endDate.setToolTip(CatalogFinderConstants.INSTANCE.TimeAccordionWidget_endDateTooltipText());
         endDate.getPropertyEditor().setFormat(dtFormat);
         endDate.setWidth(100);
         endDate.setEditable(false);
 
         DatePicker endDatePicker = endDate.getDatePicker();
         endDatePicker.addListener(Events.Select, new Listener<DatePickerEvent>() {
-
             @Override
             public void handleEvent(DatePickerEvent dpe) {
                 setEndDate(dpe.getDate());
@@ -160,9 +157,9 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
 
         multiDates = new MultiField<DateField>();
         multiDates.setOrientation(Style.Orientation.HORIZONTAL);
-        multiDates.add(new LabelField("From:&nbsp;"));
+        multiDates.add(new LabelField(CatalogFinderConstants.INSTANCE.TimeAccordionWidget_multidatesFromText()));
         multiDates.add(startDate);
-        multiDates.add(new LabelField("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;"));
+        multiDates.add(new LabelField(CatalogFinderConstants.INSTANCE.TimeAccordionWidget_multidatesToText()));
         multiDates.add(endDate);
         multiDates.disable(); // Disabled by default
 
@@ -176,7 +173,7 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
     @Override
     public void setPanelProperties() {
         super.setAnimCollapse(false);
-        super.setHeadingText("Filter by Time");
+        super.setHeadingText(CatalogFinderConstants.INSTANCE.TimeAccordionWidget_headingText());
         super.setBodyBorder(false);
     }
 

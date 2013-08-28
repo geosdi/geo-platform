@@ -46,12 +46,13 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowExpander;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import com.google.common.collect.Lists;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFullMetadataAction;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
@@ -126,21 +127,27 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
     @Override
     public ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
 
-        XTemplate tpl = XTemplate.create(
-                "<p><b>Abstract:</b> {ABSTRACT_TEXT}</p><br>"
-                + "<p><b>Keywords:</b><br></p>"
-                + "<tpl for=\"SUBJECTS\">"
-                + "<div>{.}</div>"
-                + "</tpl>");
+        StringBuilder templateBuilder = new StringBuilder();
+        templateBuilder.append("<p><b>");
+        templateBuilder.append(CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateAbstractText());
+        templateBuilder.append(":</b> {ABSTRACT_TEXT}</p><br>");
+        templateBuilder.append("<p><b>");
+        templateBuilder.append(CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateKeywordsText());
+        templateBuilder.append(":</b><br></p>");
+        templateBuilder.append("<tpl for=\"SUBJECTS\">");
+        templateBuilder.append("<div>{.}</div>");
+        templateBuilder.append("</tpl>");
+
+        XTemplate tpl = XTemplate.create(templateBuilder.toString());
 
         rowExpander = new RowExpander(tpl);
         configs.add(rowExpander);
 
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(RecordKeyValue.TITLE.toString());
-        titleColumn.setHeaderHtml("Title");
+        titleColumn.setHeaderHtml(CatalogFinderConstants.INSTANCE.RecordsContainer_titleColumnHeaderText());
         titleColumn.setWidth(490);
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
@@ -156,7 +163,6 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     public void createStore() {
         super.proxy = new RpcProxy<PagingLoadResult<FullRecord>>() {
-
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<FullRecord>> callback) {
@@ -174,7 +180,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     protected void onLoaderBeforeLoad(LoadEvent le) {
         this.metadataSelection.clearRecordsExcludedList();
-        widget.mask("Loading Records");
+        widget.mask(CatalogFinderConstants.INSTANCE.RecordsContainer_gridLoadingMaskText());
     }
 
     @Override
@@ -182,10 +188,10 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
 
         if (result.getTotalLength() == 0) {
-            getBus().fireEvent(new CatalogStatusBarEvent("There are no records",
+            getBus().fireEvent(new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.RecordsContainer_eventNoRecordsLoaderText(),
                     GPCatalogStatusBarType.STATUS_NOT_OK));
         } else {
-            getBus().fireEvent(new CatalogStatusBarEvent("Records correctly loaded",
+            getBus().fireEvent(new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.RecordsContainer_eventRecordsCorrectlyLoaderText(),
                     GPCatalogStatusBarType.STATUS_OK));
         }
 
@@ -195,9 +201,9 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     protected void onLoaderLoadException(LoadEvent le) {
         System.out.println("\n*** " + le.exception); // TODO logger
-        String errorMessage = "The services are down, report to the administator.";
-        GeoPlatformMessage.errorMessage("Connection error", errorMessage);
-        getBus().fireEvent(new CatalogStatusBarEvent(errorMessage,
+        GeoPlatformMessage.errorMessage(CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownTitleText(),
+                CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText());
+        getBus().fireEvent(new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText(),
                 GPCatalogStatusBarType.STATUS_ERROR));
 
         this.reset();
@@ -227,27 +233,25 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
             this.selectionModel.addListener(Events.BeforeSelect,
                     new Listener<SelectionEvent<FullRecord>>() {
+                @Override
+                public void handleEvent(SelectionEvent<FullRecord> se) {
+                    FullRecord record = se.getModel();
+                    if (!record.isForWMSGetMapRequest()) {
+                        se.setCancelled(true);
 
-                        @Override
-                        public void handleEvent(SelectionEvent<FullRecord> se) {
-                            FullRecord record = se.getModel();
-                            if (!record.isForWMSGetMapRequest()) {
-                                se.setCancelled(true);
-
-                                metadataSelection.addRecordExcluded(record);
-                                metadataSelection.fireCatalogRecordToolTip(record);
-                            }
-                        }
-                    });
+                        metadataSelection.addRecordExcluded(record);
+                        metadataSelection.fireCatalogRecordToolTip(record);
+                    }
+                }
+            });
 
             this.selectionModel.addSelectionChangedListener(
                     new SelectionChangedListener<FullRecord>() {
-
-                        @Override
-                        public void selectionChanged(SelectionChangedEvent<FullRecord> se) {
-                            metadataSelection.manageSelectionChanged(se);
-                        }
-                    });
+                @Override
+                public void selectionChanged(SelectionChangedEvent<FullRecord> se) {
+                    metadataSelection.manageSelectionChanged(se);
+                }
+            });
         }
     }
 

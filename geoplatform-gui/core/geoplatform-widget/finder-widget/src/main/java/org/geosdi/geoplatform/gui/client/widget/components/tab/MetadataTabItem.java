@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.tab;
 
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 
 /**
@@ -45,7 +46,7 @@ import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 public class MetadataTabItem extends GeoPlatformTabItem {
 
     public MetadataTabItem() {
-        super("Full Metadata");
+        super(CatalogFinderConstants.INSTANCE.MetadataTabItem_tabItemTitleText());
         this.subclassCallToInit();
     }
 

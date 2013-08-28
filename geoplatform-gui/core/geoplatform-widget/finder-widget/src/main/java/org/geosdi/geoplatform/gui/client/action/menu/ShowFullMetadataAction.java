@@ -41,6 +41,8 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderMessages;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
@@ -59,7 +61,7 @@ public class ShowFullMetadataAction extends MenuBaseAction {
 
     public ShowFullMetadataAction(RecordsContainer rc) {
         super("Read Full Metadata",
-              CatalogFinderWidgetResources.ICONS.metadata());
+                CatalogFinderWidgetResources.ICONS.metadata());
 
         this.rc = rc;
     }
@@ -76,31 +78,34 @@ public class ShowFullMetadataAction extends MenuBaseAction {
         }
 
         this.rc.getBus().fireEvent(
-                new CatalogStatusBarEvent("Loading GetRecordById Request for "
-                + record.getTitle(), GPCatalogStatusBarType.STATUS_LOADING));
+                new CatalogStatusBarEvent(CatalogFinderMessages.INSTANCE.
+                ShowFullMetadataAction_loadingStatusBarMessage(record.getTitle()),
+                GPCatalogStatusBarType.STATUS_LOADING));
 
         GPCatalogFinderRemote.Util.getInstance().getRecordById(
                 record.getIdCatalog(),
                 record.getIdentifier(),
                 GWT.getModuleName(),
                 new AsyncCallback<String>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        System.out.println("Error @@@@@@@@@@@@@@@@ " + caught);
-                        rc.getBus().fireEvent(
-                                new CatalogStatusBarEvent("GetRecordById Request error",
-                                                          GPCatalogStatusBarType.STATUS_ERROR));
-                    }
+            @Override
+            public void onFailure(Throwable caught) {
+                System.out.println("Error @@@@@@@@@@@@@@@@ " + caught);
+                rc.getBus().fireEvent(
+                        new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.
+                        ShowFullMetadataAction_errorRecordRequestText(),
+                        GPCatalogStatusBarType.STATUS_ERROR));
+            }
 
-                    @Override
-                    public void onSuccess(String result) {
-                        Window.open(
-                                GWT.getModuleBaseURL() + "csw-template/" + result,
-                                "Full Metadata", "");
-                        rc.getBus().fireEvent(
-                                new CatalogStatusBarEvent("GetRecordById Request executed",
-                                                          GPCatalogStatusBarType.STATUS_OK));
-                    }
-                });
+            @Override
+            public void onSuccess(String result) {
+                Window.open(
+                        GWT.getModuleBaseURL() + "csw-template/" + result,
+                        CatalogFinderConstants.INSTANCE.ShowFullMetadataAction_windowText(), "");
+                rc.getBus().fireEvent(
+                        new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.
+                        ShowFullMetadataAction_recordRequestExecutedText(),
+                        GPCatalogStatusBarType.STATUS_OK));
+            }
+        });
     }
 }

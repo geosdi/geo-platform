@@ -47,6 +47,9 @@ import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderMessages;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
@@ -95,7 +98,7 @@ public class CatalogSearchWidget extends LayoutContainer
         LayoutContainer left = new LayoutContainer();
         left.setLayout(new ColumnLayout());
 
-        Label searchLabel = new Label("Search Text");
+        Label searchLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_searchLabelText());
         searchLabel.setStyleName("catalogSearch-Label");
 
         left.add(searchLabel, new ColumnData(300.0));
@@ -106,7 +109,6 @@ public class CatalogSearchWidget extends LayoutContainer
         searchTextField = new TextField<String>();
         searchTextField.setWidth(250);
         searchTextField.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if (searchButton.isEnabled()
@@ -127,30 +129,29 @@ public class CatalogSearchWidget extends LayoutContainer
         });
         panel.add(searchTextField);
 
-        searchButton = new Button("Search",
+        searchButton = new Button(ButtonsConstants.INSTANCE.searchText(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        String searchText = searchTextField.getValue();
-                        if (searchText != null && !optionsCheckboxgroup.isValid(
-                                true)) {
-                            GeoPlatformMessage.alertMessage("Error search",
-                                    "You need to specify where to search \"" + searchText + "\" text");
-                            return;
-                        }
-                        // Manual binding
-                        textInfo.setText(searchText);
-                        textInfo.setSearchTitle(
-                                titleCheckbox.getValue().booleanValue());
-                        textInfo.setSearchAbstract(
-                                abstractCheckbox.getValue().booleanValue());
-                        textInfo.setSearchSubjects(
-                                subjectsCheckbox.getValue().booleanValue());
-                        // Performing the search
-                        recordsContainer.searchRecords();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                String searchText = searchTextField.getValue();
+                if (searchText != null && !optionsCheckboxgroup.isValid(
+                        true)) {
+                    GeoPlatformMessage.alertMessage(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_errorSearchTitleText(),
+                            CatalogFinderMessages.INSTANCE.CatalogSearchWidget_errorSearchBodyMessage(searchText));
+                    return;
+                }
+                // Manual binding
+                textInfo.setText(searchText);
+                textInfo.setSearchTitle(
+                        titleCheckbox.getValue().booleanValue());
+                textInfo.setSearchAbstract(
+                        abstractCheckbox.getValue().booleanValue());
+                textInfo.setSearchSubjects(
+                        subjectsCheckbox.getValue().booleanValue());
+                // Performing the search
+                recordsContainer.searchRecords();
+            }
+        });
         searchButton.setStyleAttribute("margin-left", "20px");
         searchButton.disable();
         panel.add(searchButton);
@@ -161,7 +162,7 @@ public class CatalogSearchWidget extends LayoutContainer
         LayoutContainer right = new LayoutContainer();
         right.setLayout(new ColumnLayout());
 
-        Label optionsLabel = new Label("Search Options");
+        Label optionsLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_optionsLabelText());
         optionsLabel.setStyleName("catalogOptions-Label");
 
         right.add(optionsLabel, new ColumnData(240.0));
@@ -169,19 +170,17 @@ public class CatalogSearchWidget extends LayoutContainer
         optionsCheckboxgroup = new CheckBoxGroup();
         optionsCheckboxgroup.setOrientation(Orientation.VERTICAL);
         optionsCheckboxgroup.setValidator(new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 CheckBoxGroup group = (CheckBoxGroup) field;
                 if (group.getValue() == null) {
-                    return "Select at least one option";
+                    return CatalogFinderConstants.INSTANCE.CatalogSearchWidget_optionsCheckboxValidateText();
                 }
                 return null;
             }
         });
 
         Listener<FieldEvent> checkBoxListener = new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent fe) {
                 manageAllSelectedCheckbox();
@@ -189,19 +188,19 @@ public class CatalogSearchWidget extends LayoutContainer
         };
 
         titleCheckbox = new CheckBox();
-        titleCheckbox.setBoxLabel("Title");
+        titleCheckbox.setBoxLabel(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_titleLabelText());
         titleCheckbox.setValue(true); // Enabled by default
         titleCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(titleCheckbox);
 
         abstractCheckbox = new CheckBox();
-        abstractCheckbox.setBoxLabel("Abstract");
+        abstractCheckbox.setBoxLabel(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_abstractLabelText());
         abstractCheckbox.setValue(true); // Enabled by default
         abstractCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(abstractCheckbox);
 
         subjectsCheckbox = new CheckBox();
-        subjectsCheckbox.setBoxLabel("Keywords");
+        subjectsCheckbox.setBoxLabel(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_keywordsLabelText());
         subjectsCheckbox.setValue(true); // Enabled by default
         subjectsCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(subjectsCheckbox);
@@ -209,20 +208,19 @@ public class CatalogSearchWidget extends LayoutContainer
         right.add(optionsCheckboxgroup);
 
         allSelectedCheckbox = new CheckBox();
-        allSelectedCheckbox.setBoxLabel("Select/Deselect all");
+        allSelectedCheckbox.setBoxLabel(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_allSelectLabelText());
         allSelectedCheckbox.setValue(true); // Enabled by default
         allSelectedCheckbox.addListener(Events.Change,
                 new Listener<FieldEvent>() {
+            @Override
+            public void handleEvent(FieldEvent fe) {
+                Boolean allSelected = (Boolean) fe.getValue();
 
-                    @Override
-                    public void handleEvent(FieldEvent fe) {
-                        Boolean allSelected = (Boolean) fe.getValue();
-
-                        titleCheckbox.setValue(allSelected);
-                        abstractCheckbox.setValue(allSelected);
-                        subjectsCheckbox.setValue(allSelected);
-                    }
-                });
+                titleCheckbox.setValue(allSelected);
+                abstractCheckbox.setValue(allSelected);
+                subjectsCheckbox.setValue(allSelected);
+            }
+        });
         right.add(allSelectedCheckbox);
 
         add(left, new ColumnData(0.6));

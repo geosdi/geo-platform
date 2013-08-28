@@ -67,4 +67,10 @@ public interface ButtonsConstants extends Constants {
     
     @DefaultStringValue("Save")
     String saveText();
+    
+    @DefaultStringValue("Search")
+    String searchText();
+
+    @DefaultStringValue("Add To Layers Tree")
+    String addToLayersTreeText();
 }

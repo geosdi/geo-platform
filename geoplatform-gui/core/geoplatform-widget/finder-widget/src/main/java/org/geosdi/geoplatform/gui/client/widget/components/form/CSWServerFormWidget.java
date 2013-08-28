@@ -43,6 +43,10 @@ import com.extjs.gxt.ui.client.widget.form.*;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderMessages;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.status.SaveStatusConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
@@ -90,26 +94,24 @@ public class CSWServerFormWidget
 
         super.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
+        saveButton = new Button(ButtonsConstants.INSTANCE.saveText(), BasicWidgetResources.ICONS.done(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        execute();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                execute();
+            }
+        });
         saveButton.setEnabled(false);
         super.formPanel.addButton(saveButton);
 
-        Button cancelButton = new Button("Cancel",
+        Button cancelButton = new Button(ButtonsConstants.INSTANCE.cancelText(),
                 BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        hide();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                hide();
+            }
+        });
         super.formPanel.addButton(cancelButton);
 
         formButtonBinding = new FormButtonBinding(super.formPanel);
@@ -118,7 +120,7 @@ public class CSWServerFormWidget
 
     private void createFieldSet() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml("Server");
+        fieldSet.setHeadingHtml(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_fieldSetHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(70);
@@ -126,24 +128,23 @@ public class CSWServerFormWidget
         fieldSet.setLayout(layout);
 
         aliasField = new TextField<String>();
-        aliasField.setFieldLabel("Alias");
-        aliasField.setEmptyText("Enter a CSW server alias");
-        aliasField.setToolTip("Insert a alias for the CSW server");
+        aliasField.setFieldLabel(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_aliasFieldLabelText());
+        aliasField.setEmptyText(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_aliasEmptyText());
+        aliasField.setToolTip(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_aliasTooltipText());
         aliasField.setAllowBlank(false);
         aliasField.setAutoValidate(true);
 
         urlField = new TextField<String>();
-        urlField.setFieldLabel("Address");
-        urlField.setEmptyText("Enter a CSW server URL");
-        urlField.setToolTip("Insert a URL for the CSW server");
+        urlField.setFieldLabel(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_urlFieldLabelText());
+        urlField.setEmptyText(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_urlEmptyText());
+        urlField.setToolTip(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_urlTooltipText());
         urlField.setAllowBlank(false);
         urlField.setAutoValidate(true);
         urlField.setValidator(new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (!value.startsWith("http://") && !value.startsWith("https://")) {
-                    return "URL must be start with \"http://\" or \"https://\"";
+                    return CatalogFinderConstants.INSTANCE.CSWServerFormWidget_urlValidateMessageText();
                 }
 
                 urlEncoding = deleteQueryStringFromURL(value.trim());
@@ -159,7 +160,7 @@ public class CSWServerFormWidget
 
     @Override
     public void initSize() {
-        setHeadingHtml("Insert CSW Server");
+        setHeadingHtml(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_headingText());
         setSize(400, 210);
     }
 
@@ -186,16 +187,16 @@ public class CSWServerFormWidget
 
     @Override
     public void execute() {
-        super.saveStatus.setBusy("Adding CSW Server");
+        super.saveStatus.setBusy(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_saveStatusBusyText());
 
         GPCSWServerBeanModel server = catalogWindget.containsServer(urlEncoding);
         if (server != null) {
             setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
-                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
+                    SaveStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SAVE());
 
             GeoPlatformMessage.alertMessage(
-                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue(),
-                    "Server already exist, with alias \"" + server.getAlias() + "\"");
+                    SaveStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SAVE(),
+                    CatalogFinderMessages.INSTANCE.CSWServerFormWidget_alertExistServerMessage(server.getAlias()));
         } else {
             saveServer();
         }
@@ -206,46 +207,43 @@ public class CSWServerFormWidget
         GPCatalogFinderRemoteImpl.Util.getInstance().saveServerCSW(aliasValue,
                 urlEncoding, GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<GPCSWServerBeanModel>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                System.out.println(
+                        "\n*** Error on saving server: " + caught.getMessage()); // TODO logger
+                setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                        SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE_ERROR());
+                bus.fireEvent(new CatalogStatusBarEvent(
+                        CatalogFinderConstants.INSTANCE.CSWServerFormWidget_eventErrorSavingServerText(),
+                        GPCatalogStatusBarType.STATUS_ERROR));
+            }
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        System.out.println(
-                                "\n*** Error on saving server: " + caught.getMessage()); // TODO logger
-                        setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-                                EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
-                        bus.fireEvent(new CatalogStatusBarEvent(
-                                "Error on saving server",
-                                GPCatalogStatusBarType.STATUS_ERROR));
-                    }
+            @Override
+            public void onSuccess(GPCSWServerBeanModel server) {
+                catalogWindget.addNewServer(server);
 
-                    @Override
-                    public void onSuccess(GPCSWServerBeanModel server) {
-                        catalogWindget.addNewServer(server);
+                /**
+                 * TODO Manage case when the user try to add a server with same
+                 * alias and URL wrt a DB entry previous added. So, the server
+                 * don't be added but will be returned the DB entry early saved.
+                 */
+                if (aliasValue.equals(server.getAlias())) {
+                    setStatus(EnumSaveStatus.STATUS_SAVE.getValue(),
+                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE());
+                    bus.fireEvent(new CatalogStatusBarEvent(
+                            CatalogFinderConstants.INSTANCE.CSWServerFormWidget_eventCorrectlySavedServerText(),
+                            GPCatalogStatusBarType.STATUS_OK));
+                } else {
+                    setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
+                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SAVE());
+                    bus.fireEvent(new CatalogStatusBarEvent(CatalogFinderMessages.
+                            INSTANCE.CSWServerFormWidget_alertExistServerMessage(server.getAlias()),
+                            GPCatalogStatusBarType.STATUS_NOT_OK));
+                }
 
-                        /**
-                         * TODO
-                         * Manage case when the user try to add a server with
-                         * same alias and URL wrt a DB entry previous added.
-                         * So, the server don't be added but will be returned
-                         * the DB entry early saved.
-                         */
-                        if (aliasValue.equals(server.getAlias())) {
-                            setStatus(EnumSaveStatus.STATUS_SAVE.getValue(),
-                                    EnumSaveStatus.STATUS_MESSAGE_SAVE.getValue());
-                            bus.fireEvent(new CatalogStatusBarEvent(
-                                    "Server correctly saved",
-                                    GPCatalogStatusBarType.STATUS_OK));
-                        } else {
-                            setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
-                                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
-                            bus.fireEvent(new CatalogStatusBarEvent("Server already exist, with alias \""
-                                    + server.getAlias() + "\"",
-                                    GPCatalogStatusBarType.STATUS_NOT_OK));
-                        }
-
-                        hide();
-                    }
-                });
+                hide();
+            }
+        });
     }
 
     private String deleteQueryStringFromURL(String serverUrl) {

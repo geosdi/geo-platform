@@ -41,6 +41,8 @@ import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.CatalogTreeLayerHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPCatalogExpander;
@@ -86,12 +88,12 @@ public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
     }
 
     private void createLabelComponent() {
-        this.operationLabel = new Label("Operations with selected");
+        this.operationLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogTreeLayerWidgetSupport_operationLabelText());
         this.operationLabel.setStyleName("searchOperation-Label");
     }
 
     private void createButtonComponent() {
-        this.addLayersToTreeButton = new Button("Add To Layers Tree",
+        this.addLayersToTreeButton = new Button(ButtonsConstants.INSTANCE.addToLayersTreeText(),
                 CatalogFinderWidgetResources.ICONS.addLayer());
         this.addLayersToTreeButton.setStyleAttribute("padding-top", "10px");
 

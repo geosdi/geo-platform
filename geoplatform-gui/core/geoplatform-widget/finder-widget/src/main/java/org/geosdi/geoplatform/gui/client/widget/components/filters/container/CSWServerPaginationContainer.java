@@ -53,6 +53,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.LoadFirstServersHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
@@ -115,14 +116,13 @@ public class CSWServerPaginationContainer
 
     private void createSearchComponent() {
         searchField = new TextField<String>();
-        searchField.setFieldLabel("Find Server");
+        searchField.setFieldLabel(CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_searchFieltLabelText());
 
         searchField.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
-                     || (event.getKeyCode() == KeyCodes.KEY_DELETE))
+                        || (event.getKeyCode() == KeyCodes.KEY_DELETE))
                         && (searchField.getValue() == null)) {
                     reset();
                 }
@@ -151,28 +151,30 @@ public class CSWServerPaginationContainer
 
     private void createButtons() {
         super.panel.setButtonAlign(Style.HorizontalAlignment.CENTER);
-        Button newServerButton = new Button("New Server",
+        Button newServerButton = new Button(CatalogFinderConstants.INSTANCE.
+                CSWServerPaginationContainer_newServerButtonText(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        serverForm.showForm();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                serverForm.showForm();
+            }
+        });
         newServerButton.setIcon(BasicWidgetResources.ICONS.done());
-        newServerButton.setToolTip("Create a new CSW Server");
+        newServerButton.setToolTip(CatalogFinderConstants.INSTANCE.
+                CSWServerPaginationContainer_newServerButtonTooltipText());
         super.panel.addButton(newServerButton);
 
-        deleteServerButton = new Button("Delete Server",
+        deleteServerButton = new Button(CatalogFinderConstants.INSTANCE.
+                CSWServerPaginationContainer_deleteServerButtonText(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        executeDeleteServer();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                executeDeleteServer();
+            }
+        });
         deleteServerButton.setIcon(BasicWidgetResources.ICONS.delete());
-        deleteServerButton.setToolTip("Delete a CSW Server selected");
+        deleteServerButton.setToolTip(CatalogFinderConstants.INSTANCE.
+                CSWServerPaginationContainer_deleteServerButtonTooltipText());
         super.panel.addButton(deleteServerButton);
 
         deleteServerButton.disable();
@@ -184,11 +186,11 @@ public class CSWServerPaginationContainer
 
         ColumnConfig aliasColumn = new ColumnConfig();
         aliasColumn.setId(GPCSWServerKeyValue.ALIAS.toString());
-        aliasColumn.setHeaderHtml("Alias");
+        aliasColumn.setHeaderHtml(CatalogFinderConstants.INSTANCE.
+                CSWServerPaginationContainer_aliasColumnHeaderText());
         aliasColumn.setFixed(true);
         aliasColumn.setResizable(false);
         aliasColumn.setRenderer(new GridCellRenderer<GPCSWServerBeanModel>() {
-
             @Override
             public Object render(GPCSWServerBeanModel model, String property,
                     ColumnData config, int rowIndex, int colIndex,
@@ -203,7 +205,8 @@ public class CSWServerPaginationContainer
 
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(GPCSWServerKeyValue.TITLE.toString());
-        titleColumn.setHeaderHtml("Title");
+        titleColumn.setHeaderHtml(CatalogFinderConstants.INSTANCE.
+                CSWServerPaginationContainer_titleColumnHeaderText());
         titleColumn.setWidth(100);
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
@@ -212,7 +215,6 @@ public class CSWServerPaginationContainer
         sm = new CheckBoxSelectionModel<GPCSWServerBeanModel>();
         sm.setSelectionMode(Style.SelectionMode.SINGLE);
         sm.addSelectionChangedListener(new SelectionChangedListener<GPCSWServerBeanModel>() {
-
             @Override
             public void selectionChanged(SelectionChangedEvent<GPCSWServerBeanModel> se) {
                 GPCSWServerBeanModel selectedServer = se.getSelectedItem();
@@ -241,12 +243,11 @@ public class CSWServerPaginationContainer
     @Override
     public void createStore() {
         super.proxy = new RpcProxy<PagingLoadResult<GPCSWServerBeanModel>>() {
-
             @Override
             protected void load(Object loadConfig, AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback) {
                 String searchText = searchField.getValue() == null ? "" : searchField.getValue();
                 GPCatalogFinderRemoteImpl.Util.getInstance().searchCSWServers(
-                        (PagingLoadConfig) loadConfig, searchText, 
+                        (PagingLoadConfig) loadConfig, searchText,
                         GPAccountLogged.getInstance().getOrganization(), callback);
             }
         };
@@ -260,7 +261,7 @@ public class CSWServerPaginationContainer
 
     @Override
     protected void onLoaderBeforeLoad(LoadEvent le) {
-        widget.mask("Loading CSW servers");
+        widget.mask(CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_gridLoadingMaskText());
     }
 
     @Override
@@ -268,10 +269,12 @@ public class CSWServerPaginationContainer
         BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
 
         if (result.getTotalLength() == 0) {
-            bus.fireEvent(new CatalogStatusBarEvent("There are no catalogs",
+            bus.fireEvent(new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.
+                    CSWServerPaginationContainer_eventNoCatalogsText(),
                     GPCatalogStatusBarType.STATUS_NOT_OK));
         } else {
-            bus.fireEvent(new CatalogStatusBarEvent("Catalogs correctly loaded",
+            bus.fireEvent(new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.
+                    CSWServerPaginationContainer_eventLoadedCatalogsText(),
                     GPCatalogStatusBarType.STATUS_OK));
         }
 
@@ -281,9 +284,11 @@ public class CSWServerPaginationContainer
     @Override
     protected void onLoaderLoadException(LoadEvent le) {
         System.out.println("\n*** " + le.exception.getMessage()); // TODO logger
-        String errorMessage = "The services are down, report to the administator.";
-        GeoPlatformMessage.errorMessage("Connection error", errorMessage);
-        bus.fireEvent(new CatalogStatusBarEvent(errorMessage,
+        GeoPlatformMessage.errorMessage(CatalogFinderConstants.INSTANCE.
+                CSWServerPaginationContainer_errorLoaderMessageTitleText(),
+                CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_errorLoaderMessageBodyText());
+        bus.fireEvent(new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.
+                CSWServerPaginationContainer_errorLoaderMessageBodyText(),
                 GPCatalogStatusBarType.STATUS_ERROR));
 
         super.reset();
@@ -291,34 +296,33 @@ public class CSWServerPaginationContainer
     }
 
     private void executeDeleteServer() {
-        super.widget.mask("Deleting server");
+        super.widget.mask(CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_gridDeletingMaskText());
 
         final GPCSWServerBeanModel selectedServer = sm.getSelectedItem();
         GPCatalogFinderRemoteImpl.Util.getInstance().deleteServerCSW(
                 selectedServer.getId(),
                 new AsyncCallback<Boolean>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                System.out.println(
+                        "\n*** Error on deleting server: " + caught.getMessage()); // TODO logger
+                bus.fireEvent(new CatalogStatusBarEvent(
+                        CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventErrorDeletingServerText(),
+                        GPCatalogStatusBarType.STATUS_ERROR));
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        System.out.println(
-                                "\n*** Error on deleting server: " + caught.getMessage()); // TODO logger
-                        bus.fireEvent(new CatalogStatusBarEvent(
-                                "Error on deleting server",
-                                GPCatalogStatusBarType.STATUS_ERROR));
+                widget.unmask();
+            }
 
-                        widget.unmask();
-                    }
+            @Override
+            public void onSuccess(Boolean result) {
+                store.remove(selectedServer);
+                bus.fireEvent(new CatalogStatusBarEvent(
+                        CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventCorrectlyDeletedServerText(),
+                        GPCatalogStatusBarType.STATUS_OK));
 
-                    @Override
-                    public void onSuccess(Boolean result) {
-                        store.remove(selectedServer);
-                        bus.fireEvent(new CatalogStatusBarEvent(
-                                "Server correctly deleted",
-                                GPCatalogStatusBarType.STATUS_OK));
-
-                        widget.unmask();
-                    }
-                });
+                widget.unmask();
+            }
+        });
     }
 
     @Override

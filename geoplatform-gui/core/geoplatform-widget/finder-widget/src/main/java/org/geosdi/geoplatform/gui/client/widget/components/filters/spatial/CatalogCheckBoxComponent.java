@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.event.CatalogSpatialEnableEvent;
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -72,10 +73,9 @@ public class CatalogCheckBoxComponent implements GPCatalogFinderComponent {
                 HasHorizontalAlignment.ALIGN_CENTER);
 
         activateFilter = new CheckBox();
-        activateFilter.setBoxLabel("Activate Spatial Filter");
+        activateFilter.setBoxLabel(CatalogFinderConstants.INSTANCE.CatalogCheckBoxComponent_activateFilterText());
 
         activateFilter.addListener(Events.Change, new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent be) {
                 Boolean checked = (Boolean) be.getValue();

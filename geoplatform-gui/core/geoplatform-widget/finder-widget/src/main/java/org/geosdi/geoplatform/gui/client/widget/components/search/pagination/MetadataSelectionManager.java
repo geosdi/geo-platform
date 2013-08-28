@@ -65,7 +65,7 @@ public class MetadataSelectionManager implements CatalogMetadataSelectionManager
     private GPEventBus bus;
     private GPCatalogRecordsToolTip recordsToolTip;
     private CatalogTreeLayerEnableEvent event = new CatalogTreeLayerEnableEvent();
-    private List<FullRecord> recordsExcluded = Lists.newArrayList();
+    private List<FullRecord> recordsExcluded = Lists.<FullRecord>newArrayList();
 
     public MetadataSelectionManager(GPEventBus theBus,
             GPCatalogRecordsToolTip theRecordsToolTip) {
@@ -87,7 +87,7 @@ public class MetadataSelectionManager implements CatalogMetadataSelectionManager
 
     @Override
     public List<FullRecord> getRecordsExcluded() {
-        return Lists.newArrayList(recordsExcluded);
+        return Lists.<FullRecord>newArrayList(recordsExcluded);
     }
 
     @Override

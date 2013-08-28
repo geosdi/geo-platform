@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwid
 
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -72,7 +73,7 @@ public class CatalogAccordionWidget extends GeoPlatformContentPanel {
     @Override
     public void setPanelProperties() {
         super.setAnimCollapse(false);
-        super.setHeadingText("Filter by Catalogue");
+        super.setHeadingText(CatalogFinderConstants.INSTANCE.CatalogAccordionWidget_headingText());
     }
 
     @Override

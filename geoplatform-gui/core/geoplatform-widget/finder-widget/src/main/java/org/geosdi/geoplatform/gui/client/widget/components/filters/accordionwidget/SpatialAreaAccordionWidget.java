@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwid
 
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.spatial.CatalogSpatialContainer;
 
@@ -68,7 +69,7 @@ public class SpatialAreaAccordionWidget extends GeoPlatformContentPanel {
     @Override
     public void setPanelProperties() {
         super.setAnimCollapse(false);
-        super.setHeadingText("Filter by Area");
+        super.setHeadingText(CatalogFinderConstants.INSTANCE.SpatialAreaAccordionWidget_headingText());
         super.setBodyBorder(false);
     }
 

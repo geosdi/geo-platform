@@ -45,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.tips.ToolTip;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import java.util.Arrays;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 
 /**
@@ -116,7 +117,9 @@ public class CatalogRecordsToolTip extends ToolTip
     protected String buildToolTipMessage(List<FullRecord> recods) {
         StringBuilder builder = new StringBuilder();
         builder.append("<br/> ");
-        builder.append("<p> The Following Metadata : </p>");
+        builder.append("<p> ");
+        builder.append(CatalogFinderConstants.INSTANCE.CatalogRecordsToolTip_buildTooltipHeaderText());
+        builder.append(": </p>");
         builder.append("<ul>");
         for (FullRecord record : recods) {
             builder.append("<li>");
@@ -125,16 +128,16 @@ public class CatalogRecordsToolTip extends ToolTip
         }
         builder.append("</ul>");
         builder.append("<br/>");
-        builder.append("Can't be added on LayerTree, because they");
+        builder.append(CatalogFinderConstants.INSTANCE.CatalogRecordsToolTip_metadataNotAddedText());
         builder.append("<br/>");
-        builder.append("haven't the GetMap Protocol defined.");
+        builder.append(CatalogFinderConstants.INSTANCE.CatalogRecordsToolTip_metadataNotGetMapProtocolText());
 
         return builder.toString();
     }
 
     private void configureToolTipConfig() {
         ToolTipConfig tipConfig = new ToolTipConfig();
-        tipConfig.setTitle("Catalog Metadata ToolTip");
+        tipConfig.setTitle(CatalogFinderConstants.INSTANCE.CatalogRecordsToolTip_tooltipTitleText());
         tipConfig.setAnchor("letf");
         tipConfig.setCloseable(true);
         tipConfig.setMaxWidth(400);

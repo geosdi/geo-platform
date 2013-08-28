@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.components.tab;
 
 import com.google.inject.Inject;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.widget.components.search.CatalogSearchResultWidget;
 import org.geosdi.geoplatform.gui.client.widget.components.search.CatalogSearchWidget;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
@@ -43,7 +44,7 @@ import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class SearchTabItem extends GeoPlatformTabItem {
 
@@ -53,7 +54,7 @@ public class SearchTabItem extends GeoPlatformTabItem {
     @Inject
     public SearchTabItem(CatalogSearchWidget theCatalogSearchWidget,
             CatalogSearchResultWidget theCatalogSearchResultWidget) {
-        super("Search");
+        super(CatalogFinderConstants.INSTANCE.SearchTabItem_tabItemTitleText());
         catalogSearchWidget = theCatalogSearchWidget;
         catalogSearchResultWidget = theCatalogSearchResultWidget;
         this.subclassCallToInit();

@@ -33,39 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.i18n;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.config.CatalogFinderInjector;
-import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
-import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.Messages;
 
 /**
- *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class WmsFromMetadataTreeAction extends ToolbarLayerTreeAction {
+public interface CatalogFinderMessages extends Messages {
 
-    static {
-        injector = CatalogFinderInjector.MainInjector.getInstance();
-    }
-    private static final CatalogFinderInjector injector;
-    //
-    private CatalogFinderWidget wmsMetadataWidget;
+    public CatalogFinderMessages INSTANCE = GWT.create(CatalogFinderMessages.class);
 
-    public WmsFromMetadataTreeAction(TreePanel treePanel) {
-        super(treePanel, BasicWidgetResources.ICONS.reset(),
-                CatalogFinderConstants.INSTANCE.WmsFromMetadataTreeAction_tooltipText());
-        this.wmsMetadataWidget = injector.getCatalogFinderWidget();
-        this.wmsMetadataWidget.setTree(tree);
-    }
-
-    @Override
-    public void componentSelected(ButtonEvent e) {
-        wmsMetadataWidget.show();
-    }
+    String ShowFullMetadataAction_loadingStatusBarMessage(String recordTitle);
+    
+    String CSWServerFormWidget_alertExistServerMessage(String serverAlias);
+    
+    String CatalogSearchWidget_errorSearchBodyMessage(String searchText);
 }

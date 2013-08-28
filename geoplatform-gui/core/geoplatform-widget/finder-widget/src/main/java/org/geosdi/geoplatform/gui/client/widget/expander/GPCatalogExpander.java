@@ -36,8 +36,9 @@
 package org.geosdi.geoplatform.gui.client.widget.expander;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
@@ -64,7 +65,7 @@ public class GPCatalogExpander
     public GPCatalogExpander(TreePanel theTree, RecordsContainer recordsContainer) {
         super(theTree);
         this.recordsContainer = recordsContainer;
-        this.showProgressBar.setMessage("Search Layers");
+        this.showProgressBar.setMessage(CatalogFinderConstants.INSTANCE.GPCatalogExpander_progressBarText());
     }
 
     @Override
@@ -72,7 +73,7 @@ public class GPCatalogExpander
         LayerHandlerManager.fireEvent(showProgressBar);
 
         List<FullRecord> records = recordsContainer.getSelectedRecords();
-        List<GPShortLayerBean> layers = new ArrayList<GPShortLayerBean>(records);
+        List<GPShortLayerBean> layers = Lists.<GPShortLayerBean>newArrayList(records);
 
         LayerHandlerManager.fireEvent(new AddRasterFromCatalogEvent(layers));
     }
@@ -85,7 +86,7 @@ public class GPCatalogExpander
     @Override
     protected void defineStatusBarCancelMessage() {
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Add layer operation cancelled.",
+                CatalogFinderConstants.INSTANCE.GPCatalogExpander_statusOperationCancelledText(),
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }
 
@@ -93,9 +94,8 @@ public class GPCatalogExpander
         if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
             super.checkNodeState();
         } else {
-            GeoPlatformMessage.alertMessage("Catalog Finder",
-                    "You can put layers into folders only.\n"
-                    + "Please select the correct node.");
+            GeoPlatformMessage.alertMessage(CatalogFinderConstants.INSTANCE.GPCatalogExpander_alertMessageTitleText(),
+                    CatalogFinderConstants.INSTANCE.GPCatalogExpander_alertMessageBodyText());
         }
     }
 }

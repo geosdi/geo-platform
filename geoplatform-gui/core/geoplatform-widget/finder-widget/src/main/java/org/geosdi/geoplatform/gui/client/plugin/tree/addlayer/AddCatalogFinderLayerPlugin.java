@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.WmsFromMetadataTreeAction;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
 
@@ -69,7 +70,7 @@ public class AddCatalogFinderLayerPlugin extends AbstractAddLayerPlugin<ToolbarL
     @Override
     public void initPlugin(TreePanel treePanel) {
         this.setImage(CatalogFinderWidgetResources.ICONS.catalogFinder().getHTML());
-        this.setTooltip("Adds one or more WMS layers to the tree from Metadata");
+        this.setTooltip(CatalogFinderConstants.INSTANCE.AddCatalogFinderLayerPlugin_tooltipText());
         action = new WmsFromMetadataTreeAction(treePanel);
         this.setName(action.getTooltip());
     }

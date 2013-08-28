@@ -44,6 +44,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.event.ActionTreePresenceEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.event.LoadFirstServersEvent;
 import org.geosdi.geoplatform.gui.client.widget.components.MainViewFinderWidget;
@@ -88,7 +89,7 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
     @Override
     public void initSize() {
         super.setSize(1000, 675);
-        super.setHeadingText("GeoPlatform Catalog Finder UI");
+        super.setHeadingText(CatalogFinderConstants.INSTANCE.CatalogFinderWidget_headingText());
     }
 
     @Override

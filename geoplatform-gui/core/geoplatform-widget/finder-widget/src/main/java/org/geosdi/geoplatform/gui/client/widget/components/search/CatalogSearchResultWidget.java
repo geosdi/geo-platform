@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.ActionTreePresenceHandler;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -72,7 +73,7 @@ public class CatalogSearchResultWidget extends LayoutContainer
     protected void onRender(Element parent, int index) {
         super.onRender(parent, index);
 
-        this.resultLabel = new Label("Search Result");
+        this.resultLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogSearchResultWidget_resultLabelText());
         resultLabel.setStyleName("searchResult-Label");
 
         add(resultLabel);

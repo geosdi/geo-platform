@@ -44,6 +44,7 @@ import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
@@ -79,8 +80,7 @@ public class CatalogComboBoxComponent implements GPCatalogFinderComponent{
     private void addLabel() {
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
-        
-        Label typeLabel = new Label("Type:");
+        Label typeLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogComboBoxComponent_typeLabelText());
         typeLabel.setStyleName("comboType-Label");
         
         table.setWidget(1, 1, typeLabel);

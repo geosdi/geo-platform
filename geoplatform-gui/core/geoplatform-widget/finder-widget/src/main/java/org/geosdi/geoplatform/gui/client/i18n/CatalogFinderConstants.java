@@ -326,6 +326,9 @@ public interface CatalogFinderConstants extends Constants {
     /**
      * Start ShowFullMetadataAction
      */
+    @DefaultStringValue("View Full Metadata")
+    String ShowFullMetadataAction_titleActionText();
+
     @DefaultStringValue("GetRecordById Request error")
     String ShowFullMetadataAction_errorRecordRequestText();
 

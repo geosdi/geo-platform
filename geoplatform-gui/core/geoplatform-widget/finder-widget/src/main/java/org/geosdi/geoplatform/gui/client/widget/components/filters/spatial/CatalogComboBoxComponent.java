@@ -35,15 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.spatial;
 
+import org.geosdi.geoplatform.gui.i18n.GPSimpleComboI18N;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
-import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import java.util.Arrays;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.widget.components.GPCatalogFinderComponent;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
@@ -54,65 +55,86 @@ import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogComboBoxComponent implements GPCatalogFinderComponent{
-    
+public class CatalogComboBoxComponent implements GPCatalogFinderComponent {
+
     private AreaInfo areaInfo;
     private FlexTable table;
-    private SimpleComboBox<AreaSearchType> combo;
-    
+    private GPSimpleComboI18N<ClientAreaSearchType> combo;
+
     public CatalogComboBoxComponent(AreaInfo theAreaInfo) {
         this.areaInfo = theAreaInfo;
     }
-    
+
     public FlexTable getComboBoxComponent() {
         this.table = new FlexTable();
         table.setCellSpacing(4);
         table.setCellPadding(1);
-        
+
         table.getElement().getStyle().setMarginLeft(80, Unit.PX);
-        
+
         this.addLabel();
         this.addComboBox();
-        
+
         return table;
     }
-    
+
     private void addLabel() {
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
         Label typeLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogComboBoxComponent_typeLabelText());
         typeLabel.setStyleName("comboType-Label");
-        
+
         table.setWidget(1, 1, typeLabel);
     }
-    
+
     private void addComboBox() {
         table.getCellFormatter().setHorizontalAlignment(1, 2,
                 HasHorizontalAlignment.ALIGN_CENTER);
-        
-        combo = new SimpleComboBox<AreaSearchType>();
+
+        combo = new GPSimpleComboI18N<ClientAreaSearchType>();
         combo.setForceSelection(true);
         combo.setEditable(false);
-        
+
         combo.setWidth(120);
         combo.setTriggerAction(TriggerAction.ALL);
-        combo.add(AreaSearchType.valuesAsList());
-        
-        combo.addSelectionChangedListener(new SelectionChangedListener<SimpleComboValue<AreaSearchType>>() {
-            
+        combo.add(Arrays.asList(ClientAreaSearchType.values()));
+
+        combo.addSelectionChangedListener(new SelectionChangedListener<SimpleComboValue<ClientAreaSearchType>>() {
             @Override
-            public void selectionChanged(SelectionChangedEvent<SimpleComboValue<AreaSearchType>> se) {
-                areaInfo.setAreaSearchType(se.getSelectedItem().getValue());
+            public void selectionChanged(SelectionChangedEvent<SimpleComboValue<ClientAreaSearchType>> se) {
+                AreaSearchType areaSearchType = AreaSearchType.valueOf(se.getSelectedItem().getValue().name());
+                areaInfo.setAreaSearchType(areaSearchType);
             }
         });
-        
-        combo.setSimpleValue(AreaSearchType.OVERLAP);
-        
+
+        combo.setSimpleValue(ClientAreaSearchType.OVERLAP);
+
+//        ListModelPropertyEditor<SimpleComboValue<AreaSearchType>> propEditor =
+//                new ListModelPropertyEditor<SimpleComboValue<AreaSearchType>>() {
+//            public String getStringValue(SimpleComboValue<AreaSearchType> value) {
+//                return value.getValue().getLabel();
+//            }
+//        };
+//
+//        propEditor.setDisplayProperty("label");
+//
+//        combo.setPropertyEditor(propEditor);
+//        
+//        combo.getView().setModelProcessor(new ModelProcessor<SimpleComboValue<AreaSearchType>>(){
+//
+//            @Override
+//            public SimpleComboValue<AreaSearchType> prepareData(SimpleComboValue<AreaSearchType> model) {
+//                model.set("label", model.getValue().getLabel());
+//                return model;
+//            }
+//            
+//        });
+
         table.setWidget(1, 2, combo);
     }
-    
+
     @Override
     public void reset() {
-        combo.setSimpleValue(AreaSearchType.OVERLAP);
+        combo.setSimpleValue(ClientAreaSearchType.OVERLAP);
     }
 }

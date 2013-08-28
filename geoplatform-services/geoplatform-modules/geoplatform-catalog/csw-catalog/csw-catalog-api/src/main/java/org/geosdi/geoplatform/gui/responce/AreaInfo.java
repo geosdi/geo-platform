@@ -56,18 +56,18 @@ public class AreaInfo implements Serializable {
     public enum AreaSearchType {
 
         /**
-         * Stored geometry fully contains the input geometry.
-         * Spatial operator: Contains
+         * Stored geometry fully contains the input geometry. Spatial operator:
+         * Contains
          */
         ENCLOSES,
         /**
-         * Stored geometry are equal the input geometry.
-         * Spatial operator: Equals
+         * Stored geometry are equal the input geometry. Spatial operator:
+         * Equals
          */
         IS,
         /**
-         * Stored geometry is fully outside the input geometry.
-         * Spatial operator: Disjoint
+         * Stored geometry is fully outside the input geometry. Spatial
+         * operator: Disjoint
          */
         OUTSIDE,
         /**

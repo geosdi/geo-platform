@@ -47,10 +47,12 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.common.collect.Lists;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.model.geocoding.GPGeocodingServiceBean;
@@ -70,7 +72,7 @@ import org.geosdi.geoplatform.gui.impl.geocoder.GeoCoderPerformOperation;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -97,7 +99,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         formPanel.setLayout(new FlowLayout());
 
         searchFieldSet = new FieldSet();
-        searchFieldSet.setHeadingHtml("Search");
+        searchFieldSet.setHeadingHtml(GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_searchFieldHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(60);
@@ -110,7 +112,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         formPanel.add(searchFieldSet);
 
         locations = new FieldSet();
-        locations.setHeadingHtml("Locations");
+        locations.setHeadingHtml(GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_locationsFieldHeadingText());
         locations.setCollapsible(true);
 
         locations.add(this.grid);
@@ -120,10 +122,9 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
     private void addSearchTextField() {
         search = new TextField<String>();
-        search.setFieldLabel("Find");
+        search.setFieldLabel(GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_searchFieldLabelText());
 
         search.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
@@ -150,11 +151,11 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
     }
 
     private void addComboGeocodingServices() {
-        List<GPGeocodingServiceBean> serviceList = new ArrayList<GPGeocodingServiceBean>();
+        List<GPGeocodingServiceBean> serviceList = Lists.<GPGeocodingServiceBean>newArrayList();
         serviceList.add(new GPGeocodingServiceBean(
                 ReverseGeoCoderProvider.GOOGLE));
-        serviceList.add(new GPGeocodingServiceBean(
-                ReverseGeoCoderProvider.YAHOO));
+//        serviceList.add(new GPGeocodingServiceBean(
+//                ReverseGeoCoderProvider.YAHOO));
 
         ListStore<GPGeocodingServiceBean> serviceStore = new ListStore<GPGeocodingServiceBean>();
         serviceStore.add(serviceList);
@@ -174,17 +175,16 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
         geocodingServiceCombo.addListener(Events.Select,
                 new Listener<FieldEvent>() {
-
-                    @Override
-                    public void handleEvent(FieldEvent fe) {
-                        if (search.getValue() != null) {
-                            ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) fe.getComponent();
-                            GPGeocodingServiceBean selectedBean = comboBox.getValue();
-                            String selectedGeocodingService = selectedBean.getGeocodingService();
-                            operation.onBeginGeocodingSearch(search.getValue());
-                        }
-                    }
-                });
+            @Override
+            public void handleEvent(FieldEvent fe) {
+                if (search.getValue() != null) {
+                    ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) fe.getComponent();
+                    GPGeocodingServiceBean selectedBean = comboBox.getValue();
+                    String selectedGeocodingService = selectedBean.getGeocodingService();
+                    operation.onBeginGeocodingSearch(search.getValue());
+                }
+            }
+        });
 
         geocodingServiceCombo.setValue(new GPGeocodingServiceBean(
                 ReverseGeoCoderProvider.GOOGLE));
@@ -201,7 +201,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 GPGeocodingHandlerManager.fireEvent(new RegisterGeocodingLocationEvent(grid.getSelectionModel().getSelectedItem(),
@@ -216,7 +215,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
         ColumnConfig column = new ColumnConfig();
         column.setId(GeocodingKeyValue.DESCRIPTION.getValue());
-        column.setHeaderHtml("Location");
+        column.setHeaderHtml(GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_columnConfigHeaderText());
         column.setWidth(240);
         configs.add(column);
 
@@ -243,7 +242,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
      */
     public void maskGrid() {
         if (this.grid.getView().getBody() != null) {
-            this.grid.getView().getBody().mask("Loading Locations");
+            this.grid.getView().getBody().mask(GeocodingModuleConstants.INSTANCE.
+                    GeocodingGridWidget_gridLoadingMaskText());
         }
     }
 
@@ -257,9 +257,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
     }
 
     /**
-     * 
-     * @param beans
-     *            {@link ArrayList} of GeocodingBean to fill the Store
+     *
+     * @param beans {@link ArrayList} of GeocodingBean to fill the Store
      */
     public void fillStore(ArrayList<GeocodingBean> beans) {
         this.store.add(beans);
@@ -288,7 +287,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
     /**
      * Method to set With for Field Set for Advanced Plugin Geocoder
-     * 
+     *
      * @param size
      */
     public void setFieldsSetWith(int size) {
@@ -298,7 +297,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
     /**
      * Internal Class for Business Logic
-     * 
+     *
      */
     private class GeocodingPerformOperation extends GeoCoderPerformOperation<GeocodingGridWidget> implements
             GeocodingSearchEventHandler {
@@ -313,7 +312,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
         /**
          * Invoke Geocoding Service for Geo-Location
-         * 
+         *
          * @param event
          */
         @Override
@@ -329,15 +328,13 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         public void checkWidgetStatus() {
             GeoPlatformMessage.checkGridWidgetStatus(
                     (IGeoPlatformGrid) gridWidget,
-                    "Geocoding - Service",
-                    "Geocoding Service is demanding too much time, probably "
-                    + "the connection problem, do you want to stop it?");
+                    GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_messageTitleText(),
+                    GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_checkStatusBodyText());
         }
 
         /**
-         * 
-         * @param location
-         *            to find
+         *
+         * @param location to find
          */
         @Override
         public void findLocations(String location) {
@@ -349,28 +346,28 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
             cleanStore();
             this.geocodingService.findLocations(location, provider,
                     new AsyncCallback<ArrayList<GeocodingBean>>() {
+                @Override
+                public void onSuccess(ArrayList<GeocodingBean> result) {
+                    ArrayList<GeocodingBean> beans = (ArrayList<GeocodingBean>) result;
+                    gridWidget.unMaskGrid();
+                    if (result != null && result.size() > 0) {
+                        gridWidget.fillStore(beans);
+                    } else {
+                        GeoPlatformMessage.alertMessage(
+                                GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_messageTitleText(),
+                                GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_noResultBodyText());
+                    }
 
-                        @Override
-                        public void onSuccess(ArrayList<GeocodingBean> result) {
-                            ArrayList<GeocodingBean> beans = (ArrayList<GeocodingBean>) result;
-                            gridWidget.unMaskGrid();
-                            if (result != null && result.size() > 0) {
-                                gridWidget.fillStore(beans);
-                            } else {
-                                GeoPlatformMessage.alertMessage("Geocoding - Service",
-                                        "There are no results for your search.");
-                            }
+                }
 
-                        }
-
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            gridWidget.unMaskGrid();
-                            grid.getView().refresh(false);
-                            GeoPlatformMessage.errorMessage("Geocoding - Service",
-                                    "There is a problem with Geocoding Service Provider");
-                        }
-                    });
+                @Override
+                public void onFailure(Throwable caught) {
+                    gridWidget.unMaskGrid();
+                    grid.getView().refresh(false);
+                    GeoPlatformMessage.errorMessage(GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_messageTitleText(),
+                            GeocodingModuleConstants.INSTANCE.GeocodingGridWidget_failureFindLocationBodyText());
+                }
+            });
         }
 
         @Override

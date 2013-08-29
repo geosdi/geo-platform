@@ -41,20 +41,22 @@ import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.gwtopenmaps.openlayers.client.LonLat;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoCoderDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GoogleDispatcher extends GeoCoderDispatcher {
 
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispatchHandler#processRequest(org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget)
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispatchHandler#processRequest(org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget)
      */
     @Override
     public void processRequest(final ReverseGeocodingWidget widget) {
@@ -63,16 +65,15 @@ public class GoogleDispatcher extends GeoCoderDispatcher {
         this.geocodingService.findLocation(lonlat.lat(), lonlat.lon(),
                 ReverseGeoCoderProvider.GOOGLE,
                 new AsyncCallback<GeocodingBean>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                widget.onRequestFailure(GeocodingModuleConstants.INSTANCE.GoogleDispatcher_requestFailureText());
+            }
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        widget.onRequestFailure("An error occurred processing the request");
-                    }
-
-                    @Override
-                    public void onSuccess(GeocodingBean result) {
-                        widget.onRequestSuccess(result);
-                    }
-                });
+            @Override
+            public void onSuccess(GeocodingBean result) {
+                widget.onRequestSuccess(result);
+            }
+        });
     }
 }

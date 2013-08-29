@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.oxm.model.yahoo;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -71,7 +71,7 @@ public class GPYahooGeocodeRoot {
     private String found;
     //
     @XmlElement(name = "Result", required = true)
-    private List<GPYahooResult> resultList = new ArrayList<GPYahooResult>();
+    private List<GPYahooResult> resultList = Lists.<GPYahooResult>newArrayList();
 
     /**
      * @return the error

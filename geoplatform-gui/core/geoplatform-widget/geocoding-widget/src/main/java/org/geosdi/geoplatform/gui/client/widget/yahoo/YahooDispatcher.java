@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.yahoo;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.widget.GeoCoderDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
@@ -45,7 +46,7 @@ import org.gwtopenmaps.openlayers.client.LonLat;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class YahooDispatcher extends GeoCoderDispatcher {
 
@@ -56,16 +57,15 @@ public class YahooDispatcher extends GeoCoderDispatcher {
         this.geocodingService.findLocation(lonlat.lat(), lonlat.lon(),
                 ReverseGeoCoderProvider.YAHOO,
                 new AsyncCallback<GeocodingBean>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                widget.onRequestFailure(GeocodingModuleConstants.INSTANCE.YahooDispatcher_requestFailureText());
+            }
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        widget.onRequestFailure("An error occurred processing the request");
-                    }
-
-                    @Override
-                    public void onSuccess(GeocodingBean result) {
-                        widget.onRequestSuccess(result);
-                    }
-                });
+            @Override
+            public void onSuccess(GeocodingBean result) {
+                widget.onRequestSuccess(result);
+            }
+        });
     }
 }

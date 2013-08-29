@@ -41,15 +41,16 @@ import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.user.client.ui.Widget;
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.plugin.factory.geocoding.GeoPlatformGeocoderFactory;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPluginManager;
 
 /**
- *  
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- * 
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  */
 public class GeocoderManagementWidget extends ContentPanel {
 
@@ -57,13 +58,12 @@ public class GeocoderManagementWidget extends ContentPanel {
     private IGPGeocoderPluginManager geocoderPluginManager;
 
     public GeocoderManagementWidget() {
-        setHeadingHtml("GeoPlatfom Geocoding Widget");
+        setHeadingHtml(GeocodingModuleConstants.INSTANCE.GeocoderManagementWidget_headingText());
         setLayout(new FitLayout());
 
         setLayoutOnChange(true);
 
         addWidgetListener(new WidgetListener() {
-
             @Override
             public void widgetResized(ComponentEvent ce) {
                 if ((getHeight() > 0)
@@ -79,8 +79,8 @@ public class GeocoderManagementWidget extends ContentPanel {
 
     /**
      * Build Geocoding Management Widget with specific Geocoder Plugin Manager
-     * 
-     * @param geocoderType 
+     *
+     * @param geocoderType
      */
     public void buildGeocoderManagementWidget(GeocoderPluginType geocoderType) {
         this.geocoderPluginManager = GeoPlatformGeocoderFactory.getDefaultPluginManager(geocoderType);

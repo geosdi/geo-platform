@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import org.geosdi.geoplatform.gui.client.GeocodingResources;
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.yahoo.ReverseGeoCoderYahooWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -43,13 +44,13 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class YahooReverseGeocodingAction extends ReverseGeocodingAction {
 
     public YahooReverseGeocodingAction(GeoPlatformMap theMapWidget) {
         super(theMapWidget, GeocodingResources.ICONS.yahooReverseGeocoding(),
-                "Yahoo Reverse Geocoding");
+                GeocodingModuleConstants.INSTANCE.YahooReverseGeocodingAction_tooltipText());
     }
 
     @Override

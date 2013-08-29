@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.client.GeocodingResources;
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.google.ReverseGeoCoderGoogleWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEvent;
@@ -55,7 +56,7 @@ public class GoogleReverseGeocodingAction extends ReverseGeocodingAction
 
     public GoogleReverseGeocodingAction(GeoPlatformMap theMapWidget) {
         super(theMapWidget, GeocodingResources.ICONS.reverseGeocoding(),
-                "Google Reverse Geocoding");
+                GeocodingModuleConstants.INSTANCE.GoogleReverseGeocodingAction_tooltipText());
 
         GPGeocodingHandlerManager.addHandler(ReverseGeocodingToggleEvent.TYPE, this);
     }

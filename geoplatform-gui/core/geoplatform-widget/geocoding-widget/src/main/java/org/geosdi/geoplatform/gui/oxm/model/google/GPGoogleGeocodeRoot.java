@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.oxm.model.google;
 
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -57,7 +58,7 @@ public class GPGoogleGeocodeRoot {
     private String status;
     //
     @XmlElement(name = "result", required = true)
-    private List<GPGoogleResult> resultList = new ArrayList<GPGoogleResult>();
+    private List<GPGoogleResult> resultList = Lists.<GPGoogleResult>newArrayList();
 
     /**
      * @return the status

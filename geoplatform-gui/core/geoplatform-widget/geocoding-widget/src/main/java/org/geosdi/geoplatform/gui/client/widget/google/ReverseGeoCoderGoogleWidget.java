@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.google;
 
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingDispatch;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
@@ -44,7 +45,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class ReverseGeoCoderGoogleWidget extends ReverseGeocodingWidget {
 
@@ -55,20 +56,26 @@ public class ReverseGeoCoderGoogleWidget extends ReverseGeocodingWidget {
 
     @Override
     public void registerChild() {
-        GeoPlatformMessage.infoMessage("Google Reverse Geocoding",
-                "Click on the map to have Information.");
+        GeoPlatformMessage.infoMessage(GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderGoogleWidget_infoMessageTitleText(),
+                GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderGoogleWidget_registerChildBodyText());
     }
 
     @Override
     public void unregisterChild() {
-        GeoPlatformMessage.infoMessage("Google Reverse Geocoding",
-                "Reverse Geocoding Control Deactivated.");
+        GeoPlatformMessage.infoMessage(GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderGoogleWidget_infoMessageTitleText(),
+                GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderGoogleWidget_unregisterChildBodyText());
     }
 
     @Override
     public void displayErrorMessage() {
-        GeoPlatformMessage.alertMessage("Google Reverse Geocoding",
-                "Server busy.");
+        GeoPlatformMessage.alertMessage(GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderGoogleWidget_infoMessageTitleText(),
+                GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderGoogleWidget_errorBodyText());
     }
 
     @Override

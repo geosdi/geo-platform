@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.yahoo;
 
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingDispatch;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
@@ -44,7 +45,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class ReverseGeoCoderYahooWidget extends ReverseGeocodingWidget {
 
@@ -60,19 +61,25 @@ public class ReverseGeoCoderYahooWidget extends ReverseGeocodingWidget {
 
     @Override
     public void registerChild() {
-        GeoPlatformMessage.infoMessage("Yahoo Reverse Geocoding",
-                "Click on the map to have Information.");
+        GeoPlatformMessage.infoMessage(GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderYahooWidget_infoMessageTitleText(),
+                GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderYahooWidget_registerChildBodyText());
     }
 
     @Override
     public void unregisterChild() {
-        GeoPlatformMessage.infoMessage("Yahoo Reverse Geocoding",
-                "Reverse Geocoding Control Deactivated.");
+        GeoPlatformMessage.infoMessage(GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderYahooWidget_infoMessageTitleText(),
+                GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderYahooWidget_unregisterChildBodyText());
     }
 
     @Override
     public void displayErrorMessage() {
-        GeoPlatformMessage.alertMessage("Yahoo Reverse Geocoding",
-                "Server busy.");
+        GeoPlatformMessage.alertMessage(GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderYahooWidget_infoMessageTitleText(),
+                GeocodingModuleConstants.INSTANCE.
+                ReverseGeoCoderYahooWidget_errorBodyText());
     }
 }

@@ -36,13 +36,14 @@
 package org.geosdi.geoplatform.gui.client.plugin;
 
 import com.extjs.gxt.ui.client.widget.TabItem;
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeocodingGridWidget;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GPAdvancedGeocoderPlugin;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public class GPGoogleGeocoderPlugin extends GPAdvancedGeocoderPlugin {
@@ -51,7 +52,8 @@ public class GPGoogleGeocoderPlugin extends GPAdvancedGeocoderPlugin {
 
     @Override
     public void buildPluginWidget() {
-        super.tabItem = new TabItem("Geoplatform geocoding");
+        super.tabItem = new TabItem(GeocodingModuleConstants.INSTANCE.
+                GPGoogleGeocoderPlugin_tabTitleText());
         this.gridWidget = new GeocodingGridWidget();
         this.gridWidget.setFieldsSetWith(305);
         super.tabItem.add(gridWidget.getWidget());

@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
@@ -49,13 +50,14 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 public class UserOptionsMemberGeocoding extends UserOptionsMember {
 
     public UserOptionsMemberGeocoding() {
-        super("Geocoding");
+        super(GeocodingModuleConstants.INSTANCE.UserOptionsMemberGeocoding_memberNameText());
     }
 
     @Override
     protected void creteLayoutData(ContentPanel panel) {
         VBoxLayoutData layoutData = new VBoxLayoutData(new Margins(0, 0, 5, 0));
-        panel.add(new Label("Set TYPE: Google or WPS"), layoutData);
+        panel.add(new Label(GeocodingModuleConstants.INSTANCE.UserOptionsMemberGeocoding_labelPanelText()),
+                layoutData);
     }
 
     @Override

@@ -41,23 +41,25 @@ import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
 import org.geosdi.geoplatform.gui.client.GeocodingEvents;
+import org.geosdi.geoplatform.gui.client.i18n.GeocodingModuleConstants;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeocodingMenuAction extends MenuCheckAction {
 
     public GeocodingMenuAction() {
-        super("Geocoding");
+        super(GeocodingModuleConstants.INSTANCE.GeocodingMenuAction_titleText());
     }
 
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(MenuEvent ce) {
@@ -65,7 +67,7 @@ public class GeocodingMenuAction extends MenuCheckAction {
 
         if (item.isChecked()) {
             Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET,
-                                    GeocoderPluginType.ADVANCED_WITH_GOOGLE);
+                    GeocoderPluginType.ADVANCED_WITH_GOOGLE);
         } else {
             Dispatcher.forwardEvent(GeocodingEvents.HIDE_GEOCODING_WIDGET);
         }

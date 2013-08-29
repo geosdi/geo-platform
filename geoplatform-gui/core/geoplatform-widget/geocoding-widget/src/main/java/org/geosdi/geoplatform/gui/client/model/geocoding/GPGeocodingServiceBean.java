@@ -40,13 +40,13 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  *
  */
 public class GPGeocodingServiceBean extends GeoPlatformBeanModel {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 2906947272030329728L;
     //

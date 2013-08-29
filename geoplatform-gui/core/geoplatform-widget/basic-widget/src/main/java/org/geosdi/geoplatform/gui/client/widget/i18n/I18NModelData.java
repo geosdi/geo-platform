@@ -33,53 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.i18n.buttons;
+package org.geosdi.geoplatform.gui.client.widget.i18n;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
+import com.extjs.gxt.ui.client.data.ModelData;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface ButtonsConstants extends Constants {
+public interface I18NModelData extends ModelData {
 
-    public ButtonsConstants INSTANCE = GWT.create(ButtonsConstants.class);
-
-    @DefaultStringValue("Select")
-    String selectText();
-
-    @DefaultStringValue("Submit")
-    String submitText();
-
-    @DefaultStringValue("Cancel")
-    String cancelText();
-
-    @DefaultStringValue("Close")
-    String closeText();
-    
-    @DefaultStringValue("Reset")
-    String resetText();
-    
-    @DefaultStringValue("Login")
-    String loginText();
-    
-    @DefaultStringValue("Save")
-    String saveText();
-    
-    @DefaultStringValue("Search")
-    String searchText();
-    
-    @DefaultStringValue("Insert")
-    String insertText();
-
-    @DefaultStringValue("Apply")
-    String applyText();
-
-    @DefaultStringValue("Verify")
-    String verifyText();
-
-    @DefaultStringValue("Add To Layers Tree")
-    String addToLayersTreeText();
+    String getI18NLabel();
 }

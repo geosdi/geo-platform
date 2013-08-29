@@ -45,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.cql.button.BBOXCQLButton;
 import org.geosdi.geoplatform.gui.client.widget.cql.button.BetweenCQLButton;
 import org.geosdi.geoplatform.gui.client.widget.cql.button.INCQLButton;
@@ -97,10 +98,10 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                 }
             }
         });
-        attributesComboBox.setEmptyText("Select Layer Attribute");
+        attributesComboBox.setEmptyText(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_attributeEmptyText());
         functionPanel.add(attributesComboBox);
         final CQLLogicalOperatorComboBox logicalOperatorComboBox = new CQLLogicalOperatorComboBox();
-        logicalOperatorComboBox.setEmptyText("Select Logical Operator");
+        logicalOperatorComboBox.setEmptyText(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_logicalOperatorEmptyText());
         logicalOperatorComboBox.addSelectionChangedListener(new SelectionChangedListener<LogicalOperator>() {
             @Override
             public void selectionChanged(SelectionChangedEvent<LogicalOperator> se) {
@@ -120,7 +121,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
         operatorComboBox.setDisplayField(CQLOperatorValue.LimitConditionEnum.OPERATOR.toString());
         operatorComboBox.setEditable(Boolean.FALSE);
         operatorComboBox.setForceSelection(Boolean.TRUE);
-        operatorComboBox.setEmptyText("Select Operator");
+        operatorComboBox.setEmptyText(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_operatorEmptyText());
         operatorComboBox.addSelectionChangedListener(new SelectionChangedListener<CQLOperatorValue>() {
             @Override
             public void selectionChanged(SelectionChangedEvent<CQLOperatorValue> se) {
@@ -197,7 +198,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                 insertTextIntoFilterArea("'");
             }
         });
-        apexElement.setToolTip("Use apex before a string element");
+        apexElement.setToolTip(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_apexElementTooltipText());
         symbolPanel.add(apexElement);
         Button jollyCharacter = new Button("%", new SelectionListener<ButtonEvent>() {
             @Override
@@ -205,7 +206,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                 insertTextIntoFilterArea("%");
             }
         });
-        jollyCharacter.setToolTip("The % character is a wild-card for any number of characters");
+        jollyCharacter.setToolTip(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_jollyCharacterTooltipText());
         symbolPanel.add(jollyCharacter);
         Button notOperator = new Button("NOT", new SelectionListener<ButtonEvent>() {
             @Override
@@ -213,7 +214,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                 insertTextIntoFilterArea("NOT");
             }
         });
-        notOperator.setTitle("Negation of a condition");
+        notOperator.setTitle(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_notOperatorTooltipText());
         symbolPanel.add(notOperator);
         Button isNullOperator = new Button("IS NULL", new SelectionListener<ButtonEvent>() {
             @Override
@@ -221,7 +222,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                 insertTextIntoFilterArea("IS NULL");
             }
         });
-        isNullOperator.setTitle("Tests whether a value is (non-)null, can be joined whit NOT operator");
+        isNullOperator.setTitle(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_isNullOperatorTooltipText());
         symbolPanel.add(isNullOperator);
         Button existOperator = new Button("EXIST", new SelectionListener<ButtonEvent>() {
             @Override
@@ -229,7 +230,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                 insertTextIntoFilterArea("EXIST");
             }
         });
-        existOperator.setTitle("Applied to attributes: Tests whether a featuretype does have a given attribute");
+        existOperator.setTitle(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_existOperatorTooltipText());
         symbolPanel.add(existOperator);
         Button doesNotExistOperator = new Button("DOES-NOT-EXIST", new SelectionListener<ButtonEvent>() {
             @Override
@@ -237,8 +238,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                 insertTextIntoFilterArea("DOES-NOT-EXIST");
             }
         });
-        doesNotExistOperator.setTitle("Applied to attributes: "
-                + "Tests whether a featuretype does not have a given attribute");
+        doesNotExistOperator.setTitle(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_doesNotExistOperatorTooltipText());
         symbolPanel.add(doesNotExistOperator);
 
 
@@ -256,7 +256,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                 insertTextIntoFilterArea("INCLUDE");
             }
         });
-        includeOperator.setTitle("Always include features to which this filter is applied");
+        includeOperator.setTitle(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_includeOperatorTooltipText());
         spatialPanel.add(includeOperator);
         Button excludeOperator = new Button("EXCLUDE", new SelectionListener<ButtonEvent>() {
             @Override
@@ -264,7 +264,7 @@ public class CQLFilterAdvancedTab extends GeoPlatformTabItem implements ICQLFilt
                 insertTextIntoFilterArea("EXCLUDE");
             }
         });
-        excludeOperator.setTitle("Always exclude features to which this filter is applied");
+        excludeOperator.setTitle(LayerFiltersModuleConstants.INSTANCE.CQLFilterAdvancedTab_excludeOperatorTooltipText());
         spatialPanel.add(excludeOperator);
         TimeCQLButton timeCQLButton = new TimeCQLButton(filterTextArea);
         spatialPanel.add(timeCQLButton);

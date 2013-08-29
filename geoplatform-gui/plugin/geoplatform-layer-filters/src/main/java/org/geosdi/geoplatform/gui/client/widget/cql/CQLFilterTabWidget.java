@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.cql;
 
 import com.google.gwt.user.client.Element;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -85,8 +86,10 @@ public class CQLFilterTabWidget extends GeoPlatformTabWidget implements ICQLFilt
 
     @Override
     public void createTabItems() {
-        this.advancedTab = new CQLFilterAdvancedTab("Advanced Editing", this.treePanel);
-        this.basicTab = new CQLFilterBasicTab("Basic Editing", this.treePanel);
+        this.advancedTab = new CQLFilterAdvancedTab(LayerFiltersModuleConstants.INSTANCE.
+                CQLFilterTabWidget_advancedTabTitleText(), this.treePanel);
+        this.basicTab = new CQLFilterBasicTab(LayerFiltersModuleConstants.INSTANCE.
+                CQLFilterTabWidget_filterBasicTabTitleText(), this.treePanel);
     }
 
     @Override

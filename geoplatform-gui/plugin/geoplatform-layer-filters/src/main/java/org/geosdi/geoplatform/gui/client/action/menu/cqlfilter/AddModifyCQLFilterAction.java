@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.action.menu.cqlfilter;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerFiltersResources;
 import org.geosdi.geoplatform.gui.client.widget.cql.CQLFilterWidget;

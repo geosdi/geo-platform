@@ -48,6 +48,8 @@ import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLayerAttributesComboBox;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -69,23 +71,21 @@ public class BBOXCQLButton extends AdvancedCQLButton {
     private FormData formData;
 
     public BBOXCQLButton(TextArea textArea, GPTreePanel<GPBeanTreeModel> treePanel) {
-        super(textArea, "BBOX");
+        super(textArea, LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_buttonText());
         this.treePanel = treePanel;
-        super.setTitle("Tests whether a geometry intersects a bounding box specified "
-                + "by its minimum and maximum X and Y values. The optional CRS is a string containing an SRS code "
-                + "(For example, 'EPSG:4326'. The default is to use the CRS of the queried layer)");
+        super.setTitle(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_titleText());
     }
 
     @Override
     protected void initialize() {
         formData = new FormData("98%");
         final CQLLayerAttributesComboBox attributesComboBox = new CQLLayerAttributesComboBox(this.treePanel);
-        attributesComboBox.setFieldLabel("Select the geometry attribute");
-        this.minXField.setFieldLabel("Min X coordinate");
-        this.maxXField.setFieldLabel("Max X coordinate");
-        this.minYField.setFieldLabel("Min Y coordinate");
-        this.maxYField.setFieldLabel("Max Y coordinate");
-        final Button insertButton = new Button("Insert", new SelectionListener<ButtonEvent>() {
+        attributesComboBox.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_attributeComboBoxLabelText());
+        this.minXField.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_minXLabelText());
+        this.maxXField.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_maxXLabelText());
+        this.minYField.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_minYLabelText());
+        this.maxYField.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_maxYLabelText());
+        final Button insertButton = new Button(ButtonsConstants.INSTANCE.insertText(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent be) {
                 String theGeom = attributesComboBox.getValue().get(
@@ -99,13 +99,13 @@ public class BBOXCQLButton extends AdvancedCQLButton {
         super.window = new GeoPlatformWindow(true) {
             @Override
             public void addComponent() {
-                add(new Label("Please, insert the required parameters."));
+                add(new Label(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_windowInsertParametersLabelText()));
                 add(attributesComboBox, formData);
                 add(minXField, formData);
                 add(minYField, formData);
                 add(maxXField, formData);
                 add(maxYField, formData);
-                add(new Label("The result will be: 'BBOX(Geometry Parameter, minX, minY, maxX, maxY)'"));
+                add(new Label(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_windowResultLabelText()));
                 insertButton.disable();
                 addButton(insertButton);
             }
@@ -117,7 +117,7 @@ public class BBOXCQLButton extends AdvancedCQLButton {
 
             @Override
             public void setWindowProperties() {
-                super.setHeadingHtml("BBOX Parameter Selection");
+                super.setHeadingHtml(LayerFiltersModuleConstants.INSTANCE.BBOXCQLButton_windowHeadingText());
                 super.setLayout(new FormLayout());
             }
         };

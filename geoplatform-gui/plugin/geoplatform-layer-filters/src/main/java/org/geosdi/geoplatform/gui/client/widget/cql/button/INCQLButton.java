@@ -54,6 +54,9 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleMessages;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.cql.combobox.CQLLayerAttributesComboBox;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -68,7 +71,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes.GPAttributeKey;
 public class INCQLButton extends AdvancedCQLButton {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
-    private List<TextField<String>> fieldList = Lists.newArrayList();
+    private List<TextField<String>> fieldList = Lists.<TextField<String>>newArrayList();
     private TextField<String> parameter1 = new TextField<String>();
     private TextField<String> parameter2 = new TextField<String>();
     private ContentPanel parameterPanel = new ContentPanel(new FormLayout());
@@ -77,25 +80,24 @@ public class INCQLButton extends AdvancedCQLButton {
     private FormData formData;
 
     public INCQLButton(TextArea textArea, GPTreePanel<GPBeanTreeModel> treePanel) {
-        super(textArea, "IN");
+        super(textArea, LayerFiltersModuleConstants.INSTANCE.INCQLButton_buttonText());
         this.treePanel = treePanel;
-        super.setTitle("Tests whether a feature ID value is (not) in a given set. "
-                + "ID values are integers or string literals, can be joined whit NOT operator");
+        super.setTitle(LayerFiltersModuleConstants.INSTANCE.INCQLButton_titleText());
     }
 
     @Override
     protected void initialize() {
         formData = new FormData("98%");
         final CQLLayerAttributesComboBox attributesComboBox = new CQLLayerAttributesComboBox(this.treePanel);
-        attributesComboBox.setFieldLabel("Select an attribute (optional)");
-        this.parameter1.setFieldLabel("Parameter 1");
-        this.parameter2.setFieldLabel("Parameter 2");
+        attributesComboBox.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.INCQLButton_attributeLabelText());
+        this.parameter1.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.INCQLButton_parameter1LabelText());
+        this.parameter2.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.INCQLButton_parameter2LabelText());
         this.parameterPanel.setHeaderVisible(Boolean.FALSE);
         this.parameterPanel.add(parameter1, formData);
         this.parameterPanel.add(parameter2, formData);
         this.fieldList.add(parameter1);
         this.fieldList.add(parameter2);
-        this.insertButton = new Button("Insert", new SelectionListener<ButtonEvent>() {
+        this.insertButton = new Button(ButtonsConstants.INSTANCE.insertText(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent be) {
                 String attribute = null;
@@ -125,12 +127,14 @@ public class INCQLButton extends AdvancedCQLButton {
         super.window = new GeoPlatformWindow(true) {
             @Override
             public void addComponent() {
-                add(new Label("Please, insert the required parameters."));
+                add(new Label(LayerFiltersModuleConstants.INSTANCE.INCQLButton_windowResultLabelText()));
                 add(attributesComboBox, formData);
                 add(parameterPanel, formData);
-                Button addExpressionButton = new Button("Add Parameter");
+                Button addExpressionButton = new Button(LayerFiltersModuleConstants.INSTANCE.
+                        INCQLButton_windowAddParameterButtonText());
                 addExpressionButton.setIcon(BasicWidgetResources.ICONS.done());
-                addExpressionButton.setToolTip("Adds a new parameter field");
+                addExpressionButton.setToolTip(LayerFiltersModuleConstants.INSTANCE.
+                        INCQLButton_windowExpressionTooltipText());
                 addExpressionButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
@@ -138,7 +142,7 @@ public class INCQLButton extends AdvancedCQLButton {
                     }
                 });
                 add(addExpressionButton);
-                add(new Label("The result will be: 'Attribute IN (parameter1, ..., parameterN)'"));
+                add(new Label(LayerFiltersModuleConstants.INSTANCE.INCQLButton_windowResultLabelText()));
                 insertButton.disable();
                 addButton(insertButton);
             }
@@ -150,7 +154,7 @@ public class INCQLButton extends AdvancedCQLButton {
 
             @Override
             public void setWindowProperties() {
-                super.setHeadingHtml("IN Parameter Selection");
+                super.setHeadingHtml(LayerFiltersModuleConstants.INSTANCE.INCQLButton_windowHeadingText());
                 super.setLayout(new FormLayout());
             }
         };
@@ -181,7 +185,8 @@ public class INCQLButton extends AdvancedCQLButton {
 
     private void addParameterFieldRow() {
         TextField<String> parameterField = new TextField<String>();
-        parameterField.setFieldLabel("Parameter " + (this.fieldList.size() + 1));
+        parameterField.setFieldLabel(LayerFiltersModuleMessages.INSTANCE.
+                INCQLButton_parameterFieldLabelMessage(this.fieldList.size() + 1));
         parameterField.addListener(Events.OnKeyUp, keyUplistener);
         this.fieldList.add(parameterField);
         this.insertButton.disable();
@@ -200,7 +205,7 @@ public class INCQLButton extends AdvancedCQLButton {
             final HorizontalPanel fieldRow) {
         Button cancelFilterButton = new Button();
         cancelFilterButton.setIcon(BasicWidgetResources.ICONS.delete());
-        cancelFilterButton.setToolTip("Remove this parameter field");
+        cancelFilterButton.setToolTip(LayerFiltersModuleConstants.INSTANCE.INCQLButton_removeParameterLabelText());
         cancelFilterButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {

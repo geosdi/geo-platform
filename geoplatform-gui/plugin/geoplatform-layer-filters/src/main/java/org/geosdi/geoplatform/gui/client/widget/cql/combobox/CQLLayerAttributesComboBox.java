@@ -49,6 +49,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterDescribeFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterDescribeFeatureResponse;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
@@ -114,9 +115,9 @@ public class CQLLayerAttributesComboBox extends ComboBox<GPLayerAttributes> {
     }
 
     private void setComboBoxProperties() {
-        super.setFieldLabel("Label Values");
+        super.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.CQLLayerAttributesComboBox_fieldLabelText());
         this.setForceSelection(true);
-        this.setLoadingText("Loading data...");
+        this.setLoadingText(LayerFiltersModuleConstants.INSTANCE.CQLLayerAttributesComboBox_loadingText());
         this.setTriggerAction(TriggerAction.ALL);
         this.setDisplayField(GPAttributeKey.ATTRIBUTE_VALUE.toString());
         this.setEditable(false);

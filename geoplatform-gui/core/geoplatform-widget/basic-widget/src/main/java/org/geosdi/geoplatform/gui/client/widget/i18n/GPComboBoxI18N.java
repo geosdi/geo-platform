@@ -33,53 +33,48 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.i18n.buttons;
+package org.geosdi.geoplatform.gui.client.widget.i18n;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
+import com.extjs.gxt.ui.client.data.ModelProcessor;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ListModelPropertyEditor;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface ButtonsConstants extends Constants {
+public class GPComboBoxI18N<E extends I18NModelData> extends ComboBox<E> {
 
-    public ButtonsConstants INSTANCE = GWT.create(ButtonsConstants.class);
+    public GPComboBoxI18N() {
+        ListModelPropertyEditor<E> propEditor =
+                new ListModelPropertyEditor<E>() {
+            @Override
+            public String getStringValue(E value) {
+                return value.getI18NLabel();
+            }
+        };
 
-    @DefaultStringValue("Select")
-    String selectText();
+        propEditor.setDisplayProperty("i18nLabel");
 
-    @DefaultStringValue("Submit")
-    String submitText();
+        super.setPropertyEditor(propEditor);
 
-    @DefaultStringValue("Cancel")
-    String cancelText();
-
-    @DefaultStringValue("Close")
-    String closeText();
-    
-    @DefaultStringValue("Reset")
-    String resetText();
-    
-    @DefaultStringValue("Login")
-    String loginText();
-    
-    @DefaultStringValue("Save")
-    String saveText();
-    
-    @DefaultStringValue("Search")
-    String searchText();
-    
-    @DefaultStringValue("Insert")
-    String insertText();
-
-    @DefaultStringValue("Apply")
-    String applyText();
-
-    @DefaultStringValue("Verify")
-    String verifyText();
-
-    @DefaultStringValue("Add To Layers Tree")
-    String addToLayersTreeText();
+        super.getView().setModelProcessor(new ModelProcessor<E>() {
+            @Override
+            public E prepareData(E model) {
+                model.set("i18nLabel", model.getI18NLabel());
+                return model;
+            }
+        });
+    }
+//    /**
+//     * The call to this method does not produce any result because the i18n 
+//     * combobox displays only i18nLabels
+//     * @param displayField
+//     * @deprecated
+//     */
+//    @Deprecated
+//    @Override
+//    public final void setDisplayField(String displayField) {
+////        super.setDisplayField(displayField); 
+//    }
 }

@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.client.widget.cql.combobox;
 
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -57,9 +59,9 @@ public class CQLLogicalOperatorComboBox extends ComboBox<LogicalOperator> {
     }
 
     private void setComboBoxProperties() {
-        super.setFieldLabel("CQL Operator");
+        super.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.CQLLogicalOperatorComboBox_fieldLabelText());
         super.setForceSelection(true);
-        super.setLoadingText("Loading data...");
+        super.setLoadingText(LayerFiltersModuleConstants.INSTANCE.CQLLogicalOperatorComboBox_loadingText());
         super.setTriggerAction(TriggerAction.ALL);
         super.setDisplayField(LogicalOperator.LogicalOperatorKeyValue.KEY_NAME.toString());
         super.setEditable(Boolean.FALSE);

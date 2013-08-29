@@ -51,6 +51,8 @@ import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 
 /**
@@ -71,35 +73,34 @@ public class TimeCQLButton extends AdvancedCQLButton {
     private LayoutContainer periodContainer;
 
     public TimeCQLButton(TextArea textArea) {
-        super(textArea, "Time Filter");
-        super.setTitle("Temporal predicates specify the relationship of a time-valued"
-                + " expression to a time or time period");
+        super(textArea, LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_buttonText());
+        super.setTitle(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_titleText());
     }
 
     @Override
     protected void initialize() {
         formData = new FormData("98%");
-        final RadioGroup radioGroup = new RadioGroup("Temporal Predicate");
-        radioGroup.setFieldLabel("Select Temporal Predicate");
+        final RadioGroup radioGroup = new RadioGroup(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_radioGroupText());
+        radioGroup.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_radioGroupFieldLabelText());
         final Radio beforeRadioButton = new Radio();
         beforeRadioButton.setData(RADIO_KEY_VALUE, "BEFORE");
-        beforeRadioButton.setBoxLabel("Before");
+        beforeRadioButton.setBoxLabel(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_beforeRadioGroupLabelText());
         beforeRadioButton.setHideLabel(Boolean.TRUE);
         final Radio afterRadioButton = new Radio();
         afterRadioButton.setData(RADIO_KEY_VALUE, "AFTER");
-        afterRadioButton.setBoxLabel("After");
+        afterRadioButton.setBoxLabel(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_afterRadioGroupLabelText());
         afterRadioButton.setHideLabel(Boolean.TRUE);
         final Radio duringRadioButton = new Radio();
         duringRadioButton.setData(RADIO_KEY_VALUE, "DURING");
-        duringRadioButton.setBoxLabel("During");
+        duringRadioButton.setBoxLabel(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_duringRadioGroupLabelText());
         duringRadioButton.setHideLabel(Boolean.TRUE);
         final Radio beforeOrDuringRadioButton = new Radio();
         beforeOrDuringRadioButton.setData(RADIO_KEY_VALUE, "BEFORE OR DURING");
-        beforeOrDuringRadioButton.setBoxLabel("Before or During");
+        beforeOrDuringRadioButton.setBoxLabel(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_beforeOrDuringRadioGroupLabelText());
         beforeOrDuringRadioButton.setHideLabel(Boolean.TRUE);
         final Radio duringOrAfterRadioButton = new Radio();
         duringOrAfterRadioButton.setData(RADIO_KEY_VALUE, "DURING OR AFTER");
-        duringOrAfterRadioButton.setBoxLabel("During or After");
+        duringOrAfterRadioButton.setBoxLabel(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_duringOrAfterRadioGroupLabelText());
         duringOrAfterRadioButton.setHideLabel(Boolean.TRUE);
         radioGroup.add(beforeRadioButton);
         radioGroup.add(beforeOrDuringRadioButton);
@@ -141,7 +142,8 @@ public class TimeCQLButton extends AdvancedCQLButton {
         duringRadioButton.addListener(Events.Change, periodListener);
 
 
-        final Button insertButton = new Button("Insert", new SelectionListener<ButtonEvent>() {
+        final Button insertButton = new Button(ButtonsConstants.INSTANCE.insertText(),
+                new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent be) {
                 String temporalPredicate = radioGroup.getValue().getData(RADIO_KEY_VALUE);
@@ -180,11 +182,11 @@ public class TimeCQLButton extends AdvancedCQLButton {
         super.window = new GeoPlatformWindow(true) {
             @Override
             public void addComponent() {
-                add(new Label("Please, select the required parameters."));
+                add(new Label(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_windowSelectLabelText()));
                 add(radioGroup, formData);
                 add(timeContainer, formData);
                 add(periodContainer, formData);
-                add(new Label("The result will be: 'Temporal Predicate time'"));
+                add(new Label(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_windowResultLabelText()));
                 addButton(insertButton);
             }
 
@@ -195,7 +197,7 @@ public class TimeCQLButton extends AdvancedCQLButton {
 
             @Override
             public void setWindowProperties() {
-                super.setHeadingHtml("Time Filter Composition");
+                super.setHeadingHtml(LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_windowHeadingText());
                 super.setLayout(new FormLayout());
             }
         };
@@ -206,12 +208,12 @@ public class TimeCQLButton extends AdvancedCQLButton {
             String timeLabel) {
         final DateField dateField = new DateField();
         dateField.setFieldLabel(dataLabel);
-        dateField.setData("text", "Enter the date");
+        dateField.setData("text", LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_dateFieldText());
         layoutContainer.setData(dataLabel, dateField);
 
         final TimeField timeField = new TimeField();
         timeField.setFieldLabel(timeLabel);
-        timeField.setData("text", "Enter the time");
+        timeField.setData("text", LayerFiltersModuleConstants.INSTANCE.TimeCQLButton_timeFieldText());
         layoutContainer.setData(timeLabel, timeField);
 
         layoutContainer.add(dateField);

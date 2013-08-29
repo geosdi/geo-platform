@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  */
 public class LogicalOperator extends GeoPlatformBeanModel {
 
-    private static final List<LogicalOperator> operatorsList = Lists.newArrayList();
+    private static final List<LogicalOperator> operatorsList = Lists.<LogicalOperator>newArrayList();
     private static final long serialVersionUID = -5139628878307023784L;
 
     public enum LogicalOperatorKeyValue {

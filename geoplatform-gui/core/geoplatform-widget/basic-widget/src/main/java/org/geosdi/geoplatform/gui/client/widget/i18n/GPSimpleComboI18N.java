@@ -55,14 +55,14 @@ public class GPSimpleComboI18N<E extends I18NEnum> extends SimpleComboBox<E> {
             }
         };
 
-        propEditor.setDisplayProperty("i18Nlabel");
+        propEditor.setDisplayProperty("i18nLabel");
 
         super.setPropertyEditor(propEditor);
 
         super.getView().setModelProcessor(new ModelProcessor<SimpleComboValue<E>>() {
             @Override
             public SimpleComboValue<E> prepareData(SimpleComboValue<E> model) {
-                model.set("i18Nlabel", model.getValue().getI18NLabel());
+                model.set("i18nLabel", model.getValue().getI18NLabel());
                 return model;
             }
         });

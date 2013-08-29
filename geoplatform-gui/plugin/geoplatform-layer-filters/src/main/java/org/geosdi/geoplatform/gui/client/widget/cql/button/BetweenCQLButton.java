@@ -46,6 +46,8 @@ import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 
 /**
@@ -60,18 +62,21 @@ public class BetweenCQLButton extends AdvancedCQLButton {
     private FormData formData;
 
     public BetweenCQLButton(TextArea textArea) {
-        super(textArea, "BETWEEN");
-        super.setTitle("Tests whether a value lies in or outside a range (inclusive), "
-                + "can be joined whit NOT operator");
+        super(textArea, LayerFiltersModuleConstants.INSTANCE.BetweenCQLButton_buttonText());
+        super.setTitle(LayerFiltersModuleConstants.INSTANCE.BetweenCQLButton_titleText());
     }
 
     @Override
     protected void initialize() {
         this.formData = new FormData("98%");
-        this.comparisonParameter.setFieldLabel("Comparison Parameter");
-        this.firstParameter.setFieldLabel("First Parameter");
-        this.secondParameter.setFieldLabel("Second Parameter");
-        final Button insertButton = new Button("Insert", new SelectionListener<ButtonEvent>() {
+        this.comparisonParameter.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.
+                BetweenCQLButton_comparisonLabelText());
+        this.firstParameter.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.
+                BetweenCQLButton_firstParameterLabelText());
+        this.secondParameter.setFieldLabel(LayerFiltersModuleConstants.INSTANCE.
+                BetweenCQLButton_secondParameterLabelText());
+        final Button insertButton = new Button(ButtonsConstants.INSTANCE.insertText(),
+                new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent be) {
                 BetweenCQLButton.super.insertTextIntoFilterArea(comparisonParameter.getValue()
@@ -82,11 +87,13 @@ public class BetweenCQLButton extends AdvancedCQLButton {
         super.window = new GeoPlatformWindow(true) {
             @Override
             public void addComponent() {
-                add(new Label("Please, insert the required parameters."));
+                add(new Label(LayerFiltersModuleConstants.INSTANCE.
+                        BetweenCQLButton_windowInsertLabelText()));
                 add(comparisonParameter, formData);
                 add(firstParameter, formData);
                 add(secondParameter, formData);
-                add(new Label("The result will be: 'Comparison parameter BETWEEN First Parameter AND Second Parameter'"));
+                add(new Label(LayerFiltersModuleConstants.INSTANCE.
+                        BetweenCQLButton_windowResultLabelText()));
                 insertButton.disable();
                 addButton(insertButton);
             }
@@ -98,7 +105,8 @@ public class BetweenCQLButton extends AdvancedCQLButton {
 
             @Override
             public void setWindowProperties() {
-                super.setHeadingHtml("Between Parameter Selection");
+                super.setHeadingHtml(LayerFiltersModuleConstants.INSTANCE.
+                        BetweenCQLButton_windowHeadingText());
                 super.setLayout(new FormLayout());
             }
         };

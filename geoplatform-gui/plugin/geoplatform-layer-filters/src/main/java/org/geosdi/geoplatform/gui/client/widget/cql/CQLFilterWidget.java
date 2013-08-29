@@ -43,6 +43,8 @@ import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterCheckCQLExpressionRequest;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterCheckCQLExpressionResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
@@ -63,7 +65,6 @@ public class CQLFilterWidget extends GeoPlatformWindow {
 
     public final static short WIDGET_HEIGHT = 400;
     public final static short WIDGET_WIDTH = 500;
-    private final static String CQL_FILTER_HEADING = "CQL FILTER EDITOR";
     private final CQLFilterLayerMapEvent cqlFilterLayerMapEvent = new CQLFilterLayerMapEvent();
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private CQLFilterTabWidget cqlFilterTabWidget;
@@ -78,7 +79,8 @@ public class CQLFilterWidget extends GeoPlatformWindow {
     public void addComponent() {
         this.cqlFilterTabWidget = new CQLFilterTabWidget(Boolean.TRUE, this.treePanel);
         super.add(this.cqlFilterTabWidget);
-        Button verifyButton = new Button("Verify", new SelectionListener<ButtonEvent>() {
+        Button verifyButton = new Button(ButtonsConstants.INSTANCE.verifyText(), 
+                new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 filterCheckCQLExpressionRequest.setCqlFilterExpression(cqlFilterTabWidget.getCQLFilterExpression());
@@ -95,24 +97,25 @@ public class CQLFilterWidget extends GeoPlatformWindow {
                     public void onCommandSuccess(FilterCheckCQLExpressionResponse response) {
                         CQLFilterWidget.super.setStateId(response.getResult());
                         if (response.getResult().startsWith("Error")) {
-                            GeoPlatformMessage.errorMessage("CQL Error",
+                            GeoPlatformMessage.errorMessage(LayerFiltersModuleConstants.INSTANCE.CQLErrorText(),
                                     response.getResult());
                         } else {
-                            GeoPlatformMessage.alertMessage("CQL Success",
+                            GeoPlatformMessage.alertMessage(LayerFiltersModuleConstants.INSTANCE.CQLSuccessText(),
                                     response.getResult());
                         }
                     }
 
                     @Override
                     public void onCommandFailure(Throwable exception) {
-                        GeoPlatformMessage.errorMessage("CQL Error",
+                        GeoPlatformMessage.errorMessage(LayerFiltersModuleConstants.INSTANCE.CQLErrorText(),
                                 exception.getMessage());
                     }
                 });
             }
         });
         super.addButton(verifyButton);
-        Button applyButton = new Button("Apply", new SelectionListener<ButtonEvent>() {
+        Button applyButton = new Button(ButtonsConstants.INSTANCE.applyText(), 
+                new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
@@ -128,7 +131,7 @@ public class CQLFilterWidget extends GeoPlatformWindow {
             }
         });
         super.addButton(applyButton);
-        Button closeButton = new Button("Close",
+        Button closeButton = new Button(ButtonsConstants.INSTANCE.closeText(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -157,7 +160,7 @@ public class CQLFilterWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml(CQL_FILTER_HEADING);
+        super.setHeadingHtml(LayerFiltersModuleConstants.INSTANCE.CQLFilterWidget_headingText());
         super.setLayout(new FitLayout());
         super.setModal(Boolean.TRUE);
     }

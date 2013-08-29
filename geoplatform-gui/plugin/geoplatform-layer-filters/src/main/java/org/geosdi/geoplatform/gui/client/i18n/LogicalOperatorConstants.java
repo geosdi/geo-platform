@@ -33,53 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.i18n.buttons;
+package org.geosdi.geoplatform.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.i18n.client.Constants.DefaultStringValue;
+import com.google.gwt.i18n.client.ConstantsWithLookup;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface ButtonsConstants extends Constants {
+public interface LogicalOperatorConstants extends ConstantsWithLookup {
 
-    public ButtonsConstants INSTANCE = GWT.create(ButtonsConstants.class);
+    public LogicalOperatorConstants INSTANCE = GWT.create(LogicalOperatorConstants.class);
 
-    @DefaultStringValue("Select")
-    String selectText();
+    @DefaultStringValue("AND")
+    String AND();
 
-    @DefaultStringValue("Submit")
-    String submitText();
-
-    @DefaultStringValue("Cancel")
-    String cancelText();
-
-    @DefaultStringValue("Close")
-    String closeText();
-    
-    @DefaultStringValue("Reset")
-    String resetText();
-    
-    @DefaultStringValue("Login")
-    String loginText();
-    
-    @DefaultStringValue("Save")
-    String saveText();
-    
-    @DefaultStringValue("Search")
-    String searchText();
-    
-    @DefaultStringValue("Insert")
-    String insertText();
-
-    @DefaultStringValue("Apply")
-    String applyText();
-
-    @DefaultStringValue("Verify")
-    String verifyText();
-
-    @DefaultStringValue("Add To Layers Tree")
-    String addToLayersTreeText();
+    @DefaultStringValue("OR")
+    String OR();
 }

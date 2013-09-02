@@ -33,36 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.gwtopenmaps.openlayers.client.Style;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class VectorLayerProvider implements Provider<Vector> {
-    
-    private Style style;
-    
-    @Inject
-    public VectorLayerProvider(Style theStyle) {
-        this.style = theStyle;
-    }
-    
+public class EditToolbarBaseObserver implements WFSToolbarObserver {
+
+    private WFSToggleButton buttonPressed;
+
     @Override
-    public Vector get() {
-        VectorOptions vectorOptions = new VectorOptions();
-        vectorOptions.setStyle(style);
-        vectorOptions.setIsBaseLayer(false);
-        vectorOptions.setDisplayInLayerSwitcher(false);
-        
-        return new Vector("Basic GeoPlatform WFS", vectorOptions);
+    public WFSToggleButton getButtonPressed() {
+        return this.buttonPressed;
     }
-    
+
+    @Override
+    public void setButtonPressed(WFSToggleButton btnPressed) {
+        this.buttonPressed = btnPressed;
+    }
+
+    @Override
+    public boolean isButtonPressed() {
+        return this.buttonPressed != null;
+    }
+
+    @Override
+    public void changeButtonState() {
+        if (isButtonPressed()) {
+            this.buttonPressed.disableEditorControl();
+            this.buttonPressed = null;
+        }
+    }
+
+    @Override
+    public boolean isSameButton(String buttonId) {
+        return this.buttonPressed != null
+                ? this.buttonPressed.getId().equalsIgnoreCase(buttonId) : false;
+    }
+
 }

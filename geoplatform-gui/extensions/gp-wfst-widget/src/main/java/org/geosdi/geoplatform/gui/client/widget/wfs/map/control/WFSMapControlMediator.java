@@ -33,36 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.gwtopenmaps.openlayers.client.Style;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class VectorLayerProvider implements Provider<Vector> {
-    
-    private Style style;
-    
-    @Inject
-    public VectorLayerProvider(Style theStyle) {
-        this.style = theStyle;
-    }
-    
-    @Override
-    public Vector get() {
-        VectorOptions vectorOptions = new VectorOptions();
-        vectorOptions.setStyle(style);
-        vectorOptions.setIsBaseLayer(false);
-        vectorOptions.setDisplayInLayerSwitcher(false);
-        
-        return new Vector("Basic GeoPlatform WFS", vectorOptions);
-    }
-    
+public class WFSMapControlMediator {
 }

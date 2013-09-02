@@ -33,36 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.gwtopenmaps.openlayers.client.Style;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class VectorLayerProvider implements Provider<Vector> {
-    
-    private Style style;
-    
-    @Inject
-    public VectorLayerProvider(Style theStyle) {
-        this.style = theStyle;
-    }
-    
-    @Override
-    public Vector get() {
-        VectorOptions vectorOptions = new VectorOptions();
-        vectorOptions.setStyle(style);
-        vectorOptions.setIsBaseLayer(false);
-        vectorOptions.setDisplayInLayerSwitcher(false);
-        
-        return new Vector("Basic GeoPlatform WFS", vectorOptions);
-    }
-    
+public interface WFSToolbarObserver {
+
+    WFSToggleButton getButtonPressed();
+
+    void setButtonPressed(WFSToggleButton btnPressed);
+
+    boolean isButtonPressed();
+
+    void changeButtonState();
+
+    boolean isSameButton(String buttonId);
+
 }

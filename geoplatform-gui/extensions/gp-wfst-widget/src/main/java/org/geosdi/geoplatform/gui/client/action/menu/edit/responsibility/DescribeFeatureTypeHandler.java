@@ -56,8 +56,6 @@ public class DescribeFeatureTypeHandler extends LayerTypeHandler {
 
     @Override
     public void layerType(GPLayerBean layer) {
-        System.out.println(
-                "DescribeFeatureTypeHandler @@@@@@@@@@@@@@@@@@@@@@@@");
         this.featureDispatcher.dispatchDescribeFeatureRequest(layer);
     }
 }

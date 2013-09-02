@@ -33,36 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.gwtopenmaps.openlayers.client.Style;
+import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
+import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class VectorLayerProvider implements Provider<Vector> {
-    
-    private Style style;
-    
-    @Inject
-    public VectorLayerProvider(Style theStyle) {
-        this.style = theStyle;
+public abstract class WFSMapControl extends GPVectorMapControl {
+
+    public WFSMapControl(Vector vector) {
+        super(vector);
     }
-    
-    @Override
-    public Vector get() {
-        VectorOptions vectorOptions = new VectorOptions();
-        vectorOptions.setStyle(style);
-        vectorOptions.setIsBaseLayer(false);
-        vectorOptions.setDisplayInLayerSwitcher(false);
-        
-        return new Vector("Basic GeoPlatform WFS", vectorOptions);
-    }
-    
+
+    /**
+     *
+     * @param <C> the {@link Control} Map Control
+     * @return Control
+     */
+    public abstract <C extends Control> C getWFSMapControl();
+
 }

@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.client.config.provider.LayerSchemaHandlerManag
 import org.geosdi.geoplatform.gui.client.config.provider.LayerTypeHandlerManagerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.RasterTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.VectorLayerProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.VectorStyleProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.DescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
@@ -61,6 +62,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectHandle
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.Style;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 
@@ -94,6 +96,8 @@ public class FeatureInjectorProvider extends AbstractGinModule {
         bind(LayerSchemaHandlerManager.class).toProvider(
                 LayerSchemaHandlerManagerProvider.class).in(Singleton.class);
         
+        bind(Style.class).toProvider(VectorStyleProvider.class).in(
+                Singleton.class);
         bind(Vector.class).toProvider(VectorLayerProvider.class).in(
                 Singleton.class);
         

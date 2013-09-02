@@ -33,36 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.action.wfs.toolbar;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.gwtopenmaps.openlayers.client.Style;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+import com.google.gwt.event.dom.client.ClickEvent;
+import org.geosdi.geoplatform.gui.client.action.wfs.WFSChangeFeatureAction;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
+import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class VectorLayerProvider implements Provider<Vector> {
-    
-    private Style style;
-    
-    @Inject
-    public VectorLayerProvider(Style theStyle) {
-        this.style = theStyle;
+public class ReshapeFeatureAction extends WFSChangeFeatureAction {
+
+    public ReshapeFeatureAction(WFSMapControlMediator theMapControlManager,
+            WFSToolbarObserver theButtonObserver) {
+        super(theMapControlManager, theButtonObserver);
     }
-    
+
     @Override
-    public Vector get() {
-        VectorOptions vectorOptions = new VectorOptions();
-        vectorOptions.setStyle(style);
-        vectorOptions.setIsBaseLayer(false);
-        vectorOptions.setDisplayInLayerSwitcher(false);
-        
-        return new Vector("Basic GeoPlatform WFS", vectorOptions);
+    public void onClick(ClickEvent event) {
+        WFSToggleButton button = (WFSToggleButton) event.getSource();
+
+        super.changeButtonState();
+
+        if (button.isDown()) {
+            super.activateChangeFeature(ModifyFeature.RESHAPE);
+            buttonObserver.setButtonPressed(button);
+        }
     }
-    
+
 }

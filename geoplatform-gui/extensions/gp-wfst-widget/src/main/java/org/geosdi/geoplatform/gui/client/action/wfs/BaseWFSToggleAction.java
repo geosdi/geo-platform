@@ -33,36 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.action.wfs;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.gwtopenmaps.openlayers.client.Style;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.EditToolbarBaseObserver;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class VectorLayerProvider implements Provider<Vector> {
-    
-    private Style style;
-    
-    @Inject
-    public VectorLayerProvider(Style theStyle) {
-        this.style = theStyle;
+public abstract class BaseWFSToggleAction extends WFSToggleAction {
+
+    protected final WFSToolbarObserver buttonObserver;
+
+    public BaseWFSToggleAction(WFSMapControlMediator theMapControlManager,
+            WFSToolbarObserver theButtonObserver) {
+        super(theMapControlManager);
+
+        this.buttonObserver = theButtonObserver;
     }
-    
+
     @Override
-    public Vector get() {
-        VectorOptions vectorOptions = new VectorOptions();
-        vectorOptions.setStyle(style);
-        vectorOptions.setIsBaseLayer(false);
-        vectorOptions.setDisplayInLayerSwitcher(false);
-        
-        return new Vector("Basic GeoPlatform WFS", vectorOptions);
+    protected final void changeButtonState() {
+        buttonObserver.changeButtonState();
     }
-    
+
 }

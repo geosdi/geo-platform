@@ -33,36 +33,80 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.gwtopenmaps.openlayers.client.Style;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.ToggleButton;
+import org.geosdi.geoplatform.gui.client.action.wfs.WFSToggleAction;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class VectorLayerProvider implements Provider<Vector> {
-    
-    private Style style;
-    
-    @Inject
-    public VectorLayerProvider(Style theStyle) {
-        this.style = theStyle;
+public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
+
+    private final String id;
+    private WFSToggleAction action;
+
+    public WFSToggleButton(String theId) {
+        super();
+        this.id = theId;
     }
-    
+
+    public WFSToggleButton(Image upImage, WFSToggleAction theAction,
+            String theId) {
+        super(upImage, theAction);
+        this.id = theId;
+        this.action = theAction;
+    }
+
+    public HandlerRegistration addWFSToggleAction(WFSToggleAction theAction) {
+        this.action = theAction;
+        return super.addClickHandler(action);
+    }
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
     @Override
-    public Vector get() {
-        VectorOptions vectorOptions = new VectorOptions();
-        vectorOptions.setStyle(style);
-        vectorOptions.setIsBaseLayer(false);
-        vectorOptions.setDisplayInLayerSwitcher(false);
-        
-        return new Vector("Basic GeoPlatform WFS", vectorOptions);
+    public void disableEditorControl() {
+        super.setDown(false);
+        if (action != null) {
+            action.disableEditorControl();
+        }
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final WFSToggleButton other = (WFSToggleButton) obj;
+        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "WFSToggleButton{ " + "id = " + id + '}';
+    }
+
 }

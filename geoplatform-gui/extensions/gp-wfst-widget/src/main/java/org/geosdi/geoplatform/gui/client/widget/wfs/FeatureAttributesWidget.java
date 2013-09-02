@@ -53,7 +53,6 @@ import com.google.gwt.event.dom.client.FocusHandler;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureAttributeValuesDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapHeightEvent;
@@ -67,6 +66,8 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.F
 import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
@@ -88,7 +89,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     private GPEventBus bus;
     private TimeInputWidget timeInputWidget;
     //
-    private List<AttributeDetail> attributes;
+    private LayerSchemaDTO schemaDTO;
     //
     private ListStore<FeatureAttributeValuesDetail> store;
     private EditorGrid<FeatureAttributeValuesDetail> grid;
@@ -109,9 +110,9 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
     }
 
-    public void bind(List<AttributeDetail> attributes) {
-        assert (attributes != null) : "Attributes must not bu null.";
-        this.attributes = attributes;
+    public void bind(LayerSchemaDTO theSchemaDTO) {
+        assert (theSchemaDTO.getAttributes() != null) : "Attributes must not bu null.";
+        this.schemaDTO = theSchemaDTO;
     }
 
     public void reconfigureEditorGrid() {
@@ -222,10 +223,11 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     private ColumnModel prepareColumnModel() {
+        List<AttributeDTO> attributesDTO = this.schemaDTO.getAttributes();
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(
-                attributes.size());
+                attributesDTO.size());
 
-        for (final AttributeDetail att : attributes) {
+        for (final AttributeDTO att : attributesDTO) {
             TextField<String> valueTextField = new TextField<String>();
 
             valueTextField.setValidator(
@@ -247,7 +249,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                 }
 
             };
-            if (att.getType().equals("dateTime")) {
+            if (att.isDateType()) {
                 FocusHandler focusHandler = new FocusHandler() {
 
                     @Override
@@ -334,7 +336,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     private void populateStore(List<FeatureAttributeValuesDetail> attValues) {
-        assert (attributes != null) : "Attributes must not be null.";
         store.removeAll();
         store.add(attValues);
     }

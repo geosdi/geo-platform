@@ -64,14 +64,20 @@ public class ReshapeAction extends ModifyFeatureAction {
             super.changeButtonState();
         }
 
-        if (mapWidget.isFeatureOperationEnable()) {
-            mapWidget.deactivateFeatureOperation();
-        }
-
-        // if (!mapWidget.isModifyFeatureEnable())
-        mapWidget.deactivateModifyFeature();
+//        if (mapWidget.isFeatureOperationEnable()) {
+//            mapWidget.deactivateFeatureOperation();
+//        }
+//
+//        // if (!mapWidget.isModifyFeatureEnable())
+//        mapWidget.deactivateModifyFeature();
         mapWidget.activateModifyFeature();
 
         this.control.setMode(ModifyFeature.RESHAPE);
     }
+
+    @Override
+    public void disableControl() {
+        this.mapWidget.deactivateModifyFeature();
+    }
+
 }

@@ -104,7 +104,9 @@ public class AttributeDTO implements Serializable {
         this.nillable = nillable;
     }
     
-    
+    public boolean isDateType() {
+        return this.type.equals("dateTime");
+    }
 
     @Override
     public String toString() {
@@ -117,4 +119,5 @@ public class AttributeDTO implements Serializable {
         str.append(", nillable=").append(nillable);
         return str.append("}").toString();
     }
+
 }

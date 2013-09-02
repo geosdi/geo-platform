@@ -64,14 +64,14 @@ public class DragAction extends ModifyFeatureAction {
             super.changeButtonState();
         }
 
-        if (mapWidget.isFeatureOperationEnable()) {
-            mapWidget.deactivateFeatureOperation();
-        }
-
-        // if (!mapWidget.isModifyFeatureEnable())
-        mapWidget.deactivateModifyFeature();
         mapWidget.activateModifyFeature();
 
         this.control.setMode(ModifyFeature.DRAG);
     }
+
+    @Override
+    public void disableControl() {
+        this.mapWidget.deactivateModifyFeature();
+    }
+
 }

@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureUnSelectListener;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
@@ -46,20 +46,20 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureSelectHandlerProvider implements
-        Provider<FeatureSelectHandler> {
+public class FeatureUnSelectListenerProvider implements
+        Provider<FeatureUnSelectListener> {
 
     private Vector vectorLayer;
     private GPEventBus bus;
 
     @Inject
-    public FeatureSelectHandlerProvider(Vector theVectorLayer, GPEventBus bus) {
+    public FeatureUnSelectListenerProvider(Vector theVectorLayer, GPEventBus bus) {
         this.vectorLayer = theVectorLayer;
         this.bus = bus;
     }
 
     @Override
-    public FeatureSelectHandler get() {
-        return new FeatureSelectHandler(vectorLayer, bus);
+    public FeatureUnSelectListener get() {
+        return new FeatureUnSelectListener(vectorLayer, bus);
     }
 }

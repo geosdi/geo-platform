@@ -35,12 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider.togglebutton;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ToggleButton;
+import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.wfs.uibinder.ResourceEditingToolBar;
+import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.DragFeatureAction;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.ResourceEditingToolBar;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
  *
@@ -48,31 +52,30 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.uibinder.ResourceEditingTool
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class DragFeatureToggleButtonProvider implements Provider<ToggleButton> {
-
+    
+    private WFSToolbarObserver buttonObserver;
+    private WFSMapControlMediator mapControlManager;
+    
+    @Inject
+    public DragFeatureToggleButtonProvider(
+            WFSMapControlMediator theMapControlManager,
+            WFSToolbarObserver theButtonObserver) {
+        this.buttonObserver = theButtonObserver;
+        this.mapControlManager = theMapControlManager;
+    }
+    
     @Override
     public ToggleButton get() {
-        return new ToggleButton(
+        return new WFSToggleButton(
                 new Image(ResourceEditingToolBar.INSTANCE.drag()),
-                new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                if (((ToggleButton) event.getSource()).isDown()) {
-                    System.out.println("DRAG FEATURE UP @@@@@@@@@"
-                            + "@@@@@@@@@@@@@@@");
-                } else {
-                    System.out.println("DRAG FEATURE DOWN @@@@@@@@"
-                            + "@@@@@@@@@@@@@@@@");
-                }
-            }
-
-        }) {
-
+                new DragFeatureAction(mapControlManager, buttonObserver),
+                WFSButtonKeyProvider.DRAG_FEATURE.name()) {
+            
             {
                 super.setTitle("Drag");
             }
-
+            
         };
     }
-
+    
 }

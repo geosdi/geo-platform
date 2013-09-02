@@ -64,14 +64,14 @@ public class RotateAction extends ModifyFeatureAction {
             super.changeButtonState();
         }
 
-        if (mapWidget.isFeatureOperationEnable()) {
-            mapWidget.deactivateFeatureOperation();
-        }
-
-        // if (!mapWidget.isModifyFeatureEnable())
-        mapWidget.deactivateModifyFeature();
         mapWidget.activateModifyFeature();
 
         this.control.setMode(ModifyFeature.ROTATE);
     }
+
+    @Override
+    public void disableControl() {
+        this.mapWidget.deactivateModifyFeature();
+    }
+
 }

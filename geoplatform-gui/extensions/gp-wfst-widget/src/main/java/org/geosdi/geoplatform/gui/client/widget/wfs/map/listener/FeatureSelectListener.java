@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.listener;
 
 import com.google.common.collect.Maps;
 import java.util.Arrays;
@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.event.EventObject;
+import org.gwtopenmaps.openlayers.client.event.FeatureSelectedListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.util.Attributes;
@@ -51,20 +51,21 @@ import org.gwtopenmaps.openlayers.client.util.Attributes;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureSelectHandler extends AbastractFeatureHandler {
+public class FeatureSelectListener extends AbastractFeatureListener implements
+        FeatureSelectedListener {
 
-    public FeatureSelectHandler(Vector theVectorLayer, GPEventBus bus) {
+    public FeatureSelectListener(Vector theVectorLayer, GPEventBus bus) {
         super(theVectorLayer, bus);
     }
 
     @Override
-    public void onHandle(EventObject eventObject) {
+    public void onFeatureSelected(FeatureSelectedEvent event) {
         System.out.println("FeatureSelectHandler @@@@@@@@@@@@@@@@");
 
-        VectorFeature vectorFeature = super.getFeatureFromEventObject(
-                eventObject);
+        VectorFeature vectorFeature = event.getFeature();
 
-        vectorFeature.toState(VectorFeature.State.Unknown);
+        vectorFeature.toState(
+                VectorFeature.State.Unknown);
 
         vectorLayer.addFeature(vectorFeature);
 

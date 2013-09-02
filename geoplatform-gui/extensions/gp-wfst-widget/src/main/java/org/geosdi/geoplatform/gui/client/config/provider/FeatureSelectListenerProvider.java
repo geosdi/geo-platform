@@ -33,12 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.uibinder;
+package org.geosdi.geoplatform.gui.client.config.provider;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureSelectListener;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class EditorToolbarMediator {
+public class FeatureSelectListenerProvider implements
+        Provider<FeatureSelectListener> {
+
+    private Vector vectorLayer;
+    private GPEventBus bus;
+
+    @Inject
+    public FeatureSelectListenerProvider(Vector theVectorLayer, GPEventBus bus) {
+        this.vectorLayer = theVectorLayer;
+        this.bus = bus;
+    }
+
+    @Override
+    public FeatureSelectListener get() {
+        return new FeatureSelectListener(vectorLayer, bus);
+    }
+
 }

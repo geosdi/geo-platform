@@ -119,15 +119,15 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         this.attributeConditions = Lists.<FeatureAttributeConditionField>newArrayList();
     }
 
-    public void bind(LayerSchemaDTO theSchemaDTO,
-            List<AttributeDetail> theAttributes) {
+    public void bind(LayerSchemaDTO theSchemaDTO) {
         assert (theSchemaDTO != null) : "Schema must not bu null.";
         assert (theSchemaDTO.getScope() != null) : "Scope must not bu null.";
         assert (theSchemaDTO.getTypeName() != null) : "TypeName must not bu null.";
         assert (theSchemaDTO.getTargetNamespace() != null) : "TargetNamespace must not bu null.";
         assert (theSchemaDTO.getAttributes() != null) : "Attributes must not bu null.";
         this.schemaDTO = theSchemaDTO;
-        this.attributes = theAttributes;
+        this.attributes = FeatureConverter.convertDTOs(
+                this.schemaDTO.getAttributes());
     }
 
     @Override

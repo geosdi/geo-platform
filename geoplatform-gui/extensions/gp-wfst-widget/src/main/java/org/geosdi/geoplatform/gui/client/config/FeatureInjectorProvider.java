@@ -48,8 +48,8 @@ import org.geosdi.geoplatform.gui.client.config.provider.DescribeFeatureTypeHand
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureLonLatItalyProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.MapWidgetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureProtocolCRUDOptionsProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.FeatureSelectHandlerProvider;
-import org.geosdi.geoplatform.gui.client.config.provider.FeatureUnSelectHandlerProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.FeatureSelectListenerProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.FeatureUnSelectListenerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.LayerSchemaHandlerManagerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.LayerTypeHandlerManagerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.RasterTypeHandlerProvider;
@@ -58,8 +58,8 @@ import org.geosdi.geoplatform.gui.client.config.provider.VectorStyleProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.layout.BorderLayoutProvider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.DescribeFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectHandler;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureSelectListener;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureUnSelectListener;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Style;
@@ -101,12 +101,12 @@ public class FeatureInjectorProvider extends AbstractGinModule {
         bind(Vector.class).toProvider(VectorLayerProvider.class).in(
                 Singleton.class);
         
-        bind(FeatureSelectHandler.class).toProvider(
-                FeatureSelectHandlerProvider.class).in(
+        bind(FeatureSelectListener.class).toProvider(
+                FeatureSelectListenerProvider.class).in(
                 Singleton.class);
         
-        bind(FeatureUnSelectHandler.class).toProvider(
-                FeatureUnSelectHandlerProvider.class).in(
+        bind(FeatureUnSelectListener.class).toProvider(
+                FeatureUnSelectListenerProvider.class).in(
                 Singleton.class);
         
         bind(LonLat.class).toProvider(FeatureLonLatItalyProvider.class).in(

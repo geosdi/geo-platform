@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider.togglebutton;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ToggleButton;
+import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.widget.wfs.uibinder.ResourceEditingToolBar;
+import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.EditFeatureAction;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.ResourceEditingToolBar;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 
 /**
  *
@@ -49,24 +51,18 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.uibinder.ResourceEditingTool
  */
 public class EditFeatureToggleButtonProvider implements Provider<ToggleButton> {
 
+    private EditFeatureAction editAction;
+
+    @Inject
+    public EditFeatureToggleButtonProvider(EditFeatureAction theEditAction) {
+        this.editAction = theEditAction;
+    }
+
     @Override
     public ToggleButton get() {
-        return new ToggleButton(
+        return new WFSToggleButton(
                 new Image(ResourceEditingToolBar.INSTANCE.edit()),
-                new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                if (((ToggleButton) event.getSource()).isDown()) {
-                    System.out.println("EDIT FEATURE UP @@@@@@@@@"
-                            + "@@@@@@@@@@@@@@@");
-                } else {
-                    System.out.println("EDIT FEATURE DOWN @@@@@@@@"
-                            + "@@@@@@@@@@@@@@@@");
-                }
-            }
-
-        }) {
+                editAction, WFSButtonKeyProvider.EDIT_FEATURE.name()) {
 
             {
                 super.setTitle("Create New Feature");

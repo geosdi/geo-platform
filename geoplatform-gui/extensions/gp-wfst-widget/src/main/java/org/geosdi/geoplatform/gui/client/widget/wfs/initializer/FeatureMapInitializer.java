@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.initializer;
 import com.google.gwt.user.client.Timer;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureSelectHandler;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureUnSelectHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureSelectListener;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureUnSelectListener;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.FeatureMapLayerBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
@@ -62,7 +62,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureMapInitializer implements IFeatureMapInitializer {
-
+    
     @Inject
     private MapWidget mapWidget;
     @Inject
@@ -72,117 +72,118 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     @Inject
     private GetFeatureControlBuilder featureControlBuilder;
     @Inject
-    private FeatureSelectHandler selectFeature;
+    private FeatureSelectListener selectFeature;
     @Inject
-    private FeatureUnSelectHandler unSelectFeature;
+    private FeatureUnSelectListener unSelectFeature;
     @Inject
     private LonLat italyLonLat;
     private GPEventBus bus;
     private Layer wms;
     private GetFeature controlFeature;
-
+    
     @Inject
     public FeatureMapInitializer(GPEventBus theBus) {
         this.bus = theBus;
     }
-
+    
     @Override
     public void bind(final GPLayerBean layer, final LayerSchemaDTO schema) {
         this.wms = this.mapLayerBuilder.buildLayer(layer);
-
+        
         this.controlFeature = this.featureControlBuilder.buildControl(
                 new GetFeatureModel() {
-
+            
             @Override
             public String getFeatureNameSpace() {
                 return layer instanceof GPVectorBean ? ((GPVectorBean) layer).
                         getFeatureNameSpace()
                         : schema.getTargetNamespace();
             }
-
+            
             @Override
             public String getFeatureType() {
                 int pos = layer.getName().indexOf(":");
-
+                
                 return pos > 0 ? layer.getName().substring(pos + 1,
                         layer.getName().length()) : layer.getName();
             }
-
+            
             @Override
             public String getSrsName() {
                 return layer.getCrs();
             }
-
+            
             @Override
             public String getGeometryName() {
                 return (layer instanceof GPVectorBean)
                         ? ((GPVectorBean) layer).getGeometryName()
                         : schema.getGeometry().getName();
             }
-
+            
             @Override
             public WMS getWMSLayer() {
                 return (WMS) wms;
             }
-
+            
         });
-
+        
         Timer t = new Timer() {
-
+            
             @Override
             public void run() {
                 loadLayerOnMap();
                 notifyStatus();
             }
-
+            
         };
-
+        
         t.schedule(1000);
     }
-
+    
     @Override
     public void resetMapWidget() {
+        this.controlFeature.removeListener(selectFeature);
+        this.controlFeature.removeListener(unSelectFeature);
+        
         this.controlFeature.deactivate();
         this.mapWidget.getMap().removeControl(controlFeature);
-
+        
         this.vectorLayer.destroyFeatures();
-
+        
         if (wms != null) {
             this.mapWidget.getMap().removeLayer(wms);
         }
-
+        
         this.mapWidget.getMap().removeLayer(vectorLayer);
-
+        
         this.initMapWidget();
     }
-
+    
     @Override
     public void initMapWidget() {
         this.mapWidget.getMap().setCenter(italyLonLat, 4);
     }
-
+    
     protected void loadLayerOnMap() {
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
-
+        
         this.mapWidget.getMap().addControl(controlFeature);
-
-        controlFeature.getEvents().register("featureselected", this.wms,
-                this.selectFeature);
-
-        controlFeature.getEvents().register("featureunselected", this.wms,
-                this.unSelectFeature);
-
+        
+        controlFeature.addFeatureSelectedListener(selectFeature);
+        
+        controlFeature.addFeatureUnselectedListener(unSelectFeature);
+        
         Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
-
+        
         this.mapWidget.getMap().zoomToExtent(bb);
-
+        
         this.controlFeature.activate();
     }
-
+    
     protected void notifyStatus() {
         this.bus.fireEvent(new FeatureStatusBarEvent("WFS Layer loaded",
                 FeatureStatusBar.FeatureStatusBarType.STATUS_OK));
     }
-
+    
 }

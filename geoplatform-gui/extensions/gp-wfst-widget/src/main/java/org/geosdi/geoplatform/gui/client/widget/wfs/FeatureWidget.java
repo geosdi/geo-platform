@@ -46,16 +46,13 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
-import java.util.List;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.annotation.ResetButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.SaveButton;
-import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
-import org.geosdi.geoplatform.gui.client.util.FeatureConverter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
-import org.geosdi.geoplatform.gui.client.widget.wfs.uibinder.EditingToolBarDialog;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.EditingToolBarDialog;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -236,11 +233,8 @@ public class FeatureWidget extends GeoPlatformWindow
             vector.setGeometryName(this.schemaDTO.getGeometry().getName());
         }
 
-        List<AttributeDetail> attributes =
-                FeatureConverter.convertDTOs(this.schemaDTO.getAttributes());
-
-        this.attributesWidget.bind(attributes);
-        this.selectionWidget.bind(schemaDTO, attributes);
+        this.attributesWidget.bind(schemaDTO);
+        this.selectionWidget.bind(schemaDTO);
     }
 
     @Override

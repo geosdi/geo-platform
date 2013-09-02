@@ -33,10 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.listener;
 
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.event.EventObject;
+import org.gwtopenmaps.openlayers.client.event.FeatureUnselectedListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
@@ -45,15 +45,16 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectHandler extends AbastractFeatureHandler {
+public class FeatureUnSelectListener extends AbastractFeatureListener implements
+        FeatureUnselectedListener {
 
-    public FeatureUnSelectHandler(Vector theVectorLayer, GPEventBus bus) {
+    public FeatureUnSelectListener(Vector theVectorLayer, GPEventBus bus) {
         super(theVectorLayer, bus);
     }
 
     @Override
-    public void onHandle(EventObject eventObject) {
-        VectorFeature vectorFeature = super.getFeatureFromEventObject(eventObject);
+    public void onFeatureUnselected(FeatureUnselectedEvent event) {
+        VectorFeature vectorFeature = event.getFeature();
 
         vectorFeature.toState(VectorFeature.State.Unknown);
 
@@ -62,4 +63,5 @@ public class FeatureUnSelectHandler extends AbastractFeatureHandler {
         this.attributeValuesEvent.clear();
         super.bus.fireEvent(this.attributeValuesEvent);
     }
+
 }

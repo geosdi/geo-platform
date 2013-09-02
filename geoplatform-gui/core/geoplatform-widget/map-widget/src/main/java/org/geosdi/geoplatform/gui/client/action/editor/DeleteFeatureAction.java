@@ -51,14 +51,14 @@ public class DeleteFeatureAction extends EditorFeatureAction {
 
     public DeleteFeatureAction(GeoPlatformMap theMapWidget) {
         super(theMapWidget, BasicWidgetResources.ICONS.erase(),
-              "Delete Feature");
+                "Delete Feature");
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
         if (((MapLayoutWidget) this.mapWidget).getFeaturesNumber() == 0) {
             GeoPlatformMessage.alertMessage("Feaures Service",
-                                            "There are no Features to erase.");
+                    "There are no Features to erase.");
             return;
         }
 
@@ -74,4 +74,10 @@ public class DeleteFeatureAction extends EditorFeatureAction {
 
         this.featureOperation.setOperation(OperationType.DELETE);
     }
+
+    @Override
+    public void disableControl() {
+        this.featureOperation.deactivateControl();
+    }
+
 }

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.map.control;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
+import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -47,7 +48,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class DrawGenericFeatureControl extends MapControl {
+public abstract class DrawGenericFeatureControl extends GPVectorMapControl {
 
     protected DrawFeature control;
 
@@ -64,7 +65,6 @@ public abstract class DrawGenericFeatureControl extends MapControl {
     @Override
     public void activateControl() {
         this.control.activate();
-        this.enabled = true;
     }
 
     /**
@@ -93,7 +93,11 @@ public abstract class DrawGenericFeatureControl extends MapControl {
     @Override
     public void deactivateControl() {
         this.control.deactivate();
-        this.enabled = false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.control.isActive();
     }
 
     public DrawFeature getControl() {

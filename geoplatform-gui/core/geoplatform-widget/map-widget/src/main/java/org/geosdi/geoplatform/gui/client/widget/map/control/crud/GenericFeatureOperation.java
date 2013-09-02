@@ -40,8 +40,8 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.client.widget.map.control.MapControl;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
 import org.gwtopenmaps.openlayers.client.control.SelectFeature;
 import org.gwtopenmaps.openlayers.client.control.SelectFeature.ClickFeatureListener;
 import org.gwtopenmaps.openlayers.client.control.SelectFeatureOptions;
@@ -53,7 +53,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GenericFeatureOperation extends MapControl {
+public class GenericFeatureOperation extends GPVectorMapControl {
 
     private SelectFeature control;
     private OperationType operation;
@@ -99,13 +99,11 @@ public class GenericFeatureOperation extends MapControl {
     @Override
     public void activateControl() {
         this.control.activate();
-        this.enabled = true;
     }
 
     @Override
     public void deactivateControl() {
         this.control.deactivate();
-        this.enabled = false;
     }
 
     /**
@@ -128,5 +126,10 @@ public class GenericFeatureOperation extends MapControl {
      */
     public OperationType getOperation() {
         return operation;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.control.isActive();
     }
 }

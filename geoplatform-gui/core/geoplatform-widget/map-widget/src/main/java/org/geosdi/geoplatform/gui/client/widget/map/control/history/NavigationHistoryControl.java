@@ -46,100 +46,111 @@ import org.gwtopenmaps.openlayers.client.event.ControlDeactivateListener;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class NavigationHistoryControl implements GeoPlatformMapControl {
 
-	private NavigationHistory control;
+    private NavigationHistory control;
 
-	public NavigationHistoryControl() {
-		this.createControl();
-	}
+    public NavigationHistoryControl() {
+        this.createControl();
+    }
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl#createControl()
-	 */
-	@Override
-	public void createControl() {
-		NavigationHistoryOptions options = new NavigationHistoryOptions();
-		options.setClearOnDeactivate(true);
-		options.setAutoActivate(false);
-		
-		this.control = new NavigationHistory(options);
+    /**
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl#createControl()
+     */
+    @Override
+    public void createControl() {
+        NavigationHistoryOptions options = new NavigationHistoryOptions();
+        options.setClearOnDeactivate(true);
+        options.setAutoActivate(false);
 
-		this.control.getPrevious().addControlActivateListener(
-				new ControlActivateListener() {
+        this.control = new NavigationHistory(options);
 
-					@Override
-					public void onActivate(ControlActivateEvent eventObject) {
-						GPHandlerManager.fireEvent(new ZoomPreviousEvent(true));
-					}
-				});
+        this.control.getPrevious().addControlActivateListener(
+                new ControlActivateListener() {
 
-		this.control.getPrevious().addControlDeactivateListener(
-				new ControlDeactivateListener() {
+            @Override
+            public void onActivate(ControlActivateEvent eventObject) {
+                GPHandlerManager.fireEvent(new ZoomPreviousEvent(true));
+            }
 
-					@Override
-					public void onDeactivate(ControlDeactivateEvent eventObject) {
-						GPHandlerManager
-								.fireEvent(new ZoomPreviousEvent(false));
-					}
-				});
+        });
 
-		this.control.getNext().addControlActivateListener(
-				new ControlActivateListener() {
+        this.control.getPrevious().addControlDeactivateListener(
+                new ControlDeactivateListener() {
 
-					@Override
-					public void onActivate(ControlActivateEvent eventObject) {
-						GPHandlerManager.fireEvent(new ZoomNextEvent(true));
-					}
-				});
+            @Override
+            public void onDeactivate(ControlDeactivateEvent eventObject) {
+                GPHandlerManager
+                        .fireEvent(new ZoomPreviousEvent(false));
+            }
 
-		this.control.getNext().addControlDeactivateListener(
-				new ControlDeactivateListener() {
+        });
 
-					@Override
-					public void onDeactivate(ControlDeactivateEvent eventObject) {
-						GPHandlerManager.fireEvent(new ZoomNextEvent(false));
-					}
-				});
-	}
+        this.control.getNext().addControlActivateListener(
+                new ControlActivateListener() {
 
-	@Override
-	public void activateControl() {
-		this.control.activate();
-	}
+            @Override
+            public void onActivate(ControlActivateEvent eventObject) {
+                GPHandlerManager.fireEvent(new ZoomNextEvent(true));
+            }
 
-	@Override
-	public void deactivateControl() {
-		this.control.deactivate();
-	}
-	
-	public void clearHistory() {
-		activateControl();
-		this.control.clear();
-	}
+        });
 
-	/**
-	 * @return the control
-	 */
-	public NavigationHistory getControl() {
-		return control;
-	}
+        this.control.getNext().addControlDeactivateListener(
+                new ControlDeactivateListener() {
 
-	/**
-	 * Restore the next state on the Map
-	 */
-	public void nextTrigger() {
-		this.control.nextTrigger();
-	}
+            @Override
+            public void onDeactivate(ControlDeactivateEvent eventObject) {
+                GPHandlerManager.fireEvent(new ZoomNextEvent(false));
+            }
 
-	/**
-	 * Restore the previous state on the Map
-	 */
-	public void previousTrigger() {
-		this.control.previousTrigger();
-	}
+        });
+    }
+
+    @Override
+    public void activateControl() {
+        this.control.activate();
+    }
+
+    @Override
+    public void deactivateControl() {
+        this.control.deactivate();
+    }
+
+    public void clearHistory() {
+        activateControl();
+        this.control.clear();
+    }
+
+    /**
+     * @return the control
+     */
+    public NavigationHistory getControl() {
+        return control;
+    }
+
+    /**
+     * Restore the next state on the Map
+     */
+    public void nextTrigger() {
+        this.control.nextTrigger();
+    }
+
+    /**
+     * Restore the previous state on the Map
+     */
+    public void previousTrigger() {
+        this.control.previousTrigger();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.control.isActive();
+    }
+
 }

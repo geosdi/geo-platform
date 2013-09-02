@@ -42,7 +42,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class DrawPointFeature extends DrawGenericFeatureControl {
 
@@ -52,26 +52,30 @@ public class DrawPointFeature extends DrawGenericFeatureControl {
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#createControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#createControl()
      */
     @Override
     public void createControl() {
         DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
-        drawPolygonFeatureOptions.onFeatureAdded(super.createFeatureAddedListener());
+        drawPolygonFeatureOptions.onFeatureAdded(
+                super.createFeatureAddedListener());
 
         this.control = new DrawFeature(this.vector, new PointHandler(),
-                                       drawPolygonFeatureOptions);
+                drawPolygonFeatureOptions);
     }
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
      */
     @Override
     public void activateControl() {
         super.activateControl();
         this.control.getLayer().setZIndex(9000);
     }
+
 }

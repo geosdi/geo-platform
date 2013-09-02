@@ -46,4 +46,6 @@ public interface GeoPlatformMapControl {
     void activateControl();
 
     void deactivateControl();
+    
+    boolean isEnabled();
 }

@@ -38,42 +38,43 @@ package org.geosdi.geoplatform.gui.client.widget.map.style;
 import org.gwtopenmaps.openlayers.client.Style;
 
 /**
- * @author giuseppe
- *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
 public class VectorFeatureStyle {
-	
-	private Style vectorStyle;
-	
-	public VectorFeatureStyle() {
-		this.createStyle();
-	}
 
-	/**
-	 * Create A Style for Vector Feature
-	 */
-	private void createStyle() {
-		this.vectorStyle = new Style();
-		vectorStyle.setStrokeColor("#000000");
-		vectorStyle.setStrokeWidth(1);
-		vectorStyle.setFillColor("#FF0000");
-		vectorStyle.setFillOpacity(0.5);
-		vectorStyle.setPointRadius(5);
-		vectorStyle.setStrokeOpacity(1.0);
-	}
+    private Style vectorStyle;
 
-	/**
-	 * @return the vectorStyle
-	 */
-	public Style getVectorStyle() {
-		return vectorStyle;
-	}
+    public VectorFeatureStyle() {
+        this.createStyle();
+    }
 
-	/**
-	 * @param vectorStyle the vectorStyle to set
-	 */
-	public void setVectorStyle(Style vectorStyle) {
-		this.vectorStyle = vectorStyle;
-	}
+    /**
+     * Create A Style for Vector Feature
+     */
+    private void createStyle() {
+        this.vectorStyle = new Style();
+        vectorStyle.setStrokeColor("#000000");
+        vectorStyle.setStrokeWidth(1);
+        vectorStyle.setFillColor("#FF0000");
+        vectorStyle.setFillOpacity(0.5);
+        vectorStyle.setPointRadius(5);
+        vectorStyle.setStrokeOpacity(1.0);
+    }
+
+    /**
+     * @return the vectorStyle
+     */
+    public Style getVectorStyle() {
+        return vectorStyle;
+    }
+
+    /**
+     * @param vectorStyle the vectorStyle to set
+     */
+    public void setVectorStyle(Style vectorStyle) {
+        this.vectorStyle = vectorStyle;
+    }
 
 }

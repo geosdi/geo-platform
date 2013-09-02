@@ -43,7 +43,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class DrawLineFeature extends DrawGenericFeatureControl {
 
@@ -56,8 +56,9 @@ public class DrawLineFeature extends DrawGenericFeatureControl {
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl#createControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl#createControl()
      */
     @Override
     public void createControl() {
@@ -65,17 +66,24 @@ public class DrawLineFeature extends DrawGenericFeatureControl {
         drawLineFeatureOption.onFeatureAdded(super.createFeatureAddedListener());
 
         this.control = new DrawFeature(vector, new PathHandler(),
-                                       drawLineFeatureOption);
+                drawLineFeatureOption);
     }
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
      */
     @Override
     public void activateControl() {
         super.activateControl();
         this.control.getLayer().setZIndex(9000);
     }
+
+    @Override
+    public boolean isEnabled() {
+        return this.control.isActive();
+    }
+
 }

@@ -48,7 +48,7 @@ import org.gwtopenmaps.openlayers.client.symbolizer.TextSymbolizerOptions;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public class GPGraticuleMapTool implements GeoPlatformMapControl {
@@ -105,4 +105,10 @@ public class GPGraticuleMapTool implements GeoPlatformMapControl {
             this.graticule.deactivate();
         }
     }
+
+    @Override
+    public boolean isEnabled() {
+        return this.graticule.isActive();
+    }
+
 }

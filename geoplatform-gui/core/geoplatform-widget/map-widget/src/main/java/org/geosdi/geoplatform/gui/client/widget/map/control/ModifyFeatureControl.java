@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.responsibility.GeometryReque
 import org.geosdi.geoplatform.gui.client.widget.map.responsibility.LineRequestHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PointRequestHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PolygonRequestHandler;
+import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener;
 import org.gwtopenmaps.openlayers.client.event.VectorBeforeFeatureModifiedListener;
@@ -48,9 +49,9 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class ModifyFeatureControl extends MapControl {
+public class ModifyFeatureControl extends GPVectorMapControl {
 
     private ModifyFeature control;
     private VectorFeature selectedFeature;
@@ -75,23 +76,27 @@ public class ModifyFeatureControl extends MapControl {
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl()
      */
     @Override
     public void createControl() {
         this.control = new ModifyFeature(vector);
 
-        vector.addVectorBeforeFeatureModifiedListener(new VectorBeforeFeatureModifiedListener() {
+        vector.addVectorBeforeFeatureModifiedListener(
+                new VectorBeforeFeatureModifiedListener() {
 
             @Override
             public void onBeforeFeatureModified(
                     BeforeFeatureModifiedEvent eventObject) {
                 selectedFeature = eventObject.getVectorFeature().clone();
             }
+
         });
 
-        vector.addVectorAfterFeatureModifiedListener(new VectorAfterFeatureModifiedListener() {
+        vector.addVectorAfterFeatureModifiedListener(
+                new VectorAfterFeatureModifiedListener() {
 
             @Override
             public void onAfterFeatureModified(
@@ -102,29 +107,35 @@ public class ModifyFeatureControl extends MapControl {
                 requestManager.forwardRequest(pointHandler, feature);
 
             }
+
         });
     }
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#activateControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#activateControl()
      */
     @Override
     public void activateControl() {
         this.control.activate();
-        this.enabled = true;
     }
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#deactivateControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#deactivateControl()
      */
     @Override
     public void deactivateControl() {
         this.control.deactivate();
-        this.enabled = false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.control.isActive();
     }
 
     public ModifyFeature getControl() {
@@ -137,4 +148,5 @@ public class ModifyFeatureControl extends MapControl {
     public VectorFeature getSelectedFeature() {
         return selectedFeature;
     }
+
 }

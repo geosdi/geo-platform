@@ -41,37 +41,46 @@ import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
- * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  */
 public class DrawPolygonControl extends DrawGenericFeatureControl {
 
     public DrawPolygonControl(Vector vector) {
-        super(vector);
+        super(vector, true);
     }
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl()
      */
     @Override
     public void createControl() {
-        DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
-        drawPolygonFeatureOptions.onFeatureAdded(super.createFeatureAddedListener());
+        if (!initialized) {
+            DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
+            drawPolygonFeatureOptions.onFeatureAdded(
+                    super.createFeatureAddedListener());
 
-        this.control = new DrawFeature(this.vector, new PolygonHandler(),
-                                       drawPolygonFeatureOptions);
+            this.control = new DrawFeature(this.vector, new PolygonHandler(),
+                    drawPolygonFeatureOptions);
+
+            initialized = true;
+        }
     }
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
      */
     @Override
     public void activateControl() {
         super.activateControl();
         this.control.getLayer().setZIndex(9000);
     }
+
 }

@@ -51,7 +51,7 @@ public class DrawLineFeature extends DrawGenericFeatureControl {
      * @param vector
      */
     public DrawLineFeature(Vector vector) {
-        super(vector);
+        super(vector, false);
     }
 
     /**
@@ -62,11 +62,16 @@ public class DrawLineFeature extends DrawGenericFeatureControl {
      */
     @Override
     public void createControl() {
-        DrawFeatureOptions drawLineFeatureOption = new DrawFeatureOptions();
-        drawLineFeatureOption.onFeatureAdded(super.createFeatureAddedListener());
+        if (!initialized) {
+            DrawFeatureOptions drawLineFeatureOption = new DrawFeatureOptions();
+            drawLineFeatureOption.onFeatureAdded(
+                    super.createFeatureAddedListener());
 
-        this.control = new DrawFeature(vector, new PathHandler(),
-                drawLineFeatureOption);
+            this.control = new DrawFeature(vector, new PathHandler(),
+                    drawLineFeatureOption);
+
+            initialized = true;
+        }
     }
 
     /**

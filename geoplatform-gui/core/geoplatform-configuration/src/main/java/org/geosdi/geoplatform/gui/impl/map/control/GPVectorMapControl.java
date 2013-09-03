@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.impl.map.control;
 
 import org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl;
+import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -46,10 +47,21 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public abstract class GPVectorMapControl implements GeoPlatformMapControl {
 
     protected Vector vector;
+    protected boolean initialized;
 
-    public GPVectorMapControl(Vector vector) {
+    public GPVectorMapControl(Vector vector, boolean lazy) {
         this.vector = vector;
-        this.createControl();
+        if (!lazy) {
+            this.createControl();
+        }
     }
+
+    public boolean isControlInitialized() {
+        return this.initialized;
+    }
+
+    protected abstract <C extends Control> C initializeMapControl();
+
+    public abstract <C extends Control> C getControl();
 
 }

@@ -52,8 +52,8 @@ public abstract class DrawGenericFeatureControl extends GPVectorMapControl {
 
     protected DrawFeature control;
 
-    public DrawGenericFeatureControl(Vector vector) {
-        super(vector);
+    public DrawGenericFeatureControl(Vector vector, boolean lazy) {
+        super(vector, lazy);
     }
 
     /**
@@ -100,7 +100,16 @@ public abstract class DrawGenericFeatureControl extends GPVectorMapControl {
         return this.control.isActive();
     }
 
+    @Override
     public DrawFeature getControl() {
+        return (this.control != null) ? this.control
+                : initializeMapControl();
+    }
+
+    @Override
+    protected DrawFeature initializeMapControl() {
+        this.createControl();
+
         return this.control;
     }
 

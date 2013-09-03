@@ -41,13 +41,14 @@ import org.gwtopenmaps.openlayers.client.handler.PointHandler;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public class DrawPointFeature extends DrawGenericFeatureControl {
 
     public DrawPointFeature(Vector vector) {
-        super(vector);
+        super(vector, false);
     }
 
     /**
@@ -58,12 +59,15 @@ public class DrawPointFeature extends DrawGenericFeatureControl {
      */
     @Override
     public void createControl() {
-        DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
-        drawPolygonFeatureOptions.onFeatureAdded(
-                super.createFeatureAddedListener());
+        if (!initialized) {
+            DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
+            drawPolygonFeatureOptions.onFeatureAdded(
+                    super.createFeatureAddedListener());
 
-        this.control = new DrawFeature(this.vector, new PointHandler(),
-                drawPolygonFeatureOptions);
+            this.control = new DrawFeature(this.vector, new PointHandler(),
+                    drawPolygonFeatureOptions);
+            initialized = true;
+        }
     }
 
     /**

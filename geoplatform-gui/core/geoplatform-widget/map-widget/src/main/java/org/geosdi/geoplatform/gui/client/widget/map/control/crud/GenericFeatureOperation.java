@@ -59,41 +59,49 @@ public class GenericFeatureOperation extends GPVectorMapControl {
     private OperationType operation;
 
     public GenericFeatureOperation(Vector vector) {
-        super(vector);
+        super(vector, false);
     }
 
     /**
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#createControl()
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#createControl()
      */
     @Override
     public void createControl() {
-        SelectFeatureOptions selectFeatureOptions = new SelectFeatureOptions();
+        if (!initialized) {
+            SelectFeatureOptions selectFeatureOptions = new SelectFeatureOptions();
 
-        selectFeatureOptions.clickFeature(new ClickFeatureListener() {
+            selectFeatureOptions.clickFeature(new ClickFeatureListener() {
 
-            @Override
-            public void onFeatureClicked(final VectorFeature vectorFeature) {
-                GeoPlatformMessage.confirmMessage(
-                        "Delete Feature",
-                        "Are you sure you want to delete the selected feature ?",
-                        new Listener<MessageBoxEvent>() {
+                @Override
+                public void onFeatureClicked(final VectorFeature vectorFeature) {
+                    GeoPlatformMessage.confirmMessage(
+                            "Delete Feature",
+                            "Are you sure you want to delete the selected feature ?",
+                            new Listener<MessageBoxEvent>() {
 
-                            @Override
-                            public void handleEvent(MessageBoxEvent be) {
-                                if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                                    Dispatcher.forwardEvent(
-                                            MapWidgetEvents.DELETE_FEATURE,
-                                            vectorFeature);
-                                }
-
+                        @Override
+                        public void handleEvent(MessageBoxEvent be) {
+                            if (Dialog.YES.equals(
+                                    be.getButtonClicked().getItemId())) {
+                                Dispatcher.forwardEvent(
+                                        MapWidgetEvents.DELETE_FEATURE,
+                                        vectorFeature);
                             }
-                        });
-            }
-        });
 
-        control = new SelectFeature(vector, selectFeatureOptions);
+                        }
+
+                    });
+                }
+
+            });
+
+            control = new SelectFeature(vector, selectFeatureOptions);
+
+            this.initialized = true;
+        }
     }
 
     @Override
@@ -109,13 +117,13 @@ public class GenericFeatureOperation extends GPVectorMapControl {
     /**
      * @return the control
      */
+    @Override
     public SelectFeature getControl() {
-        return control;
+        return (control != null) ? this.control : this.initializeMapControl();
     }
 
     /**
-     * @param operation
-     *            the operation to set
+     * @param operation the operation to set
      */
     public void setOperation(OperationType operation) {
         this.operation = operation;
@@ -132,4 +140,12 @@ public class GenericFeatureOperation extends GPVectorMapControl {
     public boolean isEnabled() {
         return this.control.isActive();
     }
+
+    @Override
+    protected SelectFeature initializeMapControl() {
+        this.createControl();
+
+        return this.control;
+    }
+
 }

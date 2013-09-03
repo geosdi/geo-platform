@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.responsibility.LineRequestHa
 import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PointRequestHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PolygonRequestHandler;
 import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
+import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener;
 import org.gwtopenmaps.openlayers.client.event.VectorBeforeFeatureModifiedListener;
@@ -48,8 +49,9 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class ModifyFeatureControl extends GPVectorMapControl {
 
@@ -61,7 +63,7 @@ public class ModifyFeatureControl extends GPVectorMapControl {
     private GeometryRequestHandler polygonHandler;
 
     public ModifyFeatureControl(Vector vector) {
-        super(vector);
+        super(vector, false);
         this.createResponsibilityComponent();
     }
 
@@ -82,33 +84,37 @@ public class ModifyFeatureControl extends GPVectorMapControl {
      */
     @Override
     public void createControl() {
-        this.control = new ModifyFeature(vector);
+        if (!initialized) {
+            this.control = new ModifyFeature(vector);
 
-        vector.addVectorBeforeFeatureModifiedListener(
-                new VectorBeforeFeatureModifiedListener() {
+            vector.addVectorBeforeFeatureModifiedListener(
+                    new VectorBeforeFeatureModifiedListener() {
 
-            @Override
-            public void onBeforeFeatureModified(
-                    BeforeFeatureModifiedEvent eventObject) {
-                selectedFeature = eventObject.getVectorFeature().clone();
-            }
+                @Override
+                public void onBeforeFeatureModified(
+                        BeforeFeatureModifiedEvent eventObject) {
+                    selectedFeature = eventObject.getVectorFeature().clone();
+                }
 
-        });
+            });
 
-        vector.addVectorAfterFeatureModifiedListener(
-                new VectorAfterFeatureModifiedListener() {
+            vector.addVectorAfterFeatureModifiedListener(
+                    new VectorAfterFeatureModifiedListener() {
 
-            @Override
-            public void onAfterFeatureModified(
-                    AfterFeatureModifiedEvent eventObject) {
+                @Override
+                public void onAfterFeatureModified(
+                        AfterFeatureModifiedEvent eventObject) {
 
-                VectorFeature feature = eventObject.getVectorFeature();
+                    VectorFeature feature = eventObject.getVectorFeature();
 
-                requestManager.forwardRequest(pointHandler, feature);
+                    requestManager.forwardRequest(pointHandler, feature);
 
-            }
+                }
 
-        });
+            });
+
+            this.initialized = true;
+        }
     }
 
     /**
@@ -138,8 +144,10 @@ public class ModifyFeatureControl extends GPVectorMapControl {
         return this.control.isActive();
     }
 
+    @Override
     public ModifyFeature getControl() {
-        return this.control;
+        return (this.control != null) ? this.control
+                : this.initializeMapControl();
     }
 
     /**
@@ -147,6 +155,13 @@ public class ModifyFeatureControl extends GPVectorMapControl {
      */
     public VectorFeature getSelectedFeature() {
         return selectedFeature;
+    }
+
+    @Override
+    protected ModifyFeature initializeMapControl() {
+        this.createControl();
+
+        return this.control;
     }
 
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.progressbar;
 
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.LayersProgressBarEventHandler;
 
@@ -52,7 +53,8 @@ public class GPLayerProgressBar extends GeoPlatformProgressBar implements
 
     @Override
     public void showProgressBar(String message) {
-        super.createProgressBar("GPLayer ProgressBar", message, "Loading...");
+        super.createProgressBar(LayerModuleConstants.INSTANCE.GPLayerProgressBar_titleText(),
+                message, LayerModuleConstants.INSTANCE.GPLayerProgressBar_progressText());
 //        System.out.println("Show progressbar");
         super.show();
     }
@@ -66,7 +68,8 @@ public class GPLayerProgressBar extends GeoPlatformProgressBar implements
     @Override
     public void updateProgressBarText(String message) {
         if (super.initialized == false) {
-            super.createProgressBar("GPLayer ProgressBar", message, "Loading...");
+            super.createProgressBar(LayerModuleConstants.INSTANCE.GPLayerProgressBar_titleText(), 
+                    message, LayerModuleConstants.INSTANCE.GPLayerProgressBar_progressText());
         } else {
             super.updateText(message);
         }

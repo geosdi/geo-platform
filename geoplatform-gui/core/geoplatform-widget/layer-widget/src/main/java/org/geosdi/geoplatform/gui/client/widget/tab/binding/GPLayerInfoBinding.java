@@ -46,6 +46,7 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.KeyCodes;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
@@ -81,7 +82,8 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         titleField = new TextField<String>();
         titleField.setId(GPLayerKeyValue.TITLE.toString());
         titleField.setName(GPLayerKeyValue.TITLE.toString());
-        titleField.setFieldLabel("Title");
+        titleField.setFieldLabel(LayerModuleConstants.INSTANCE.
+                GPLayerInfoBinding_titleLabelText());
 
         titleField.addListener(Events.Change, new Listener<FieldEvent>() {
             @Override
@@ -95,7 +97,8 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         abstractField = new TextField<String>();
         abstractField.setId(GPLayerKeyValue.ABSTRACT.toString());
         abstractField.setName(GPLayerKeyValue.ABSTRACT.toString());
-        abstractField.setFieldLabel("Abstract");
+        abstractField.setFieldLabel(LayerModuleConstants.INSTANCE.
+                GPLayerInfoBinding_abstractLabelText());
 
         abstractField.addListener(Events.Change, new Listener<FieldEvent>() {
             @Override
@@ -108,7 +111,8 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
 
         aliasField = new TextField<String>();
         aliasField.setName(GPLayerKeyValue.ALIAS.toString());
-        aliasField.setFieldLabel("Alias");
+        aliasField.setFieldLabel(LayerModuleConstants.INSTANCE.
+                GPLayerInfoBinding_aliasLabelText());
         aliasField.setFireChangeEventOnSetValue(true);
         aliasField.addKeyListener(new KeyListener() {
             @Override
@@ -127,7 +131,8 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         serverField = new TextField<String>();
         serverField.setId(GPLayerKeyValue.SERVER.toString());
         serverField.setName(GPLayerKeyValue.SERVER.toString());
-        serverField.setFieldLabel("Server");
+        serverField.setFieldLabel(LayerModuleConstants.INSTANCE.
+                GPLayerInfoBinding_serverLabelText());
 
         serverField.addListener(Events.Change, new Listener<FieldEvent>() {
             @Override

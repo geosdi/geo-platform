@@ -44,6 +44,8 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.KeyCodes;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
@@ -70,7 +72,7 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
         fp.setHeaderVisible(false);
         labelField = new TextField<String>();
         labelField.setName(GPFolderKeyValue.LABEL.toString());
-        labelField.setFieldLabel("Label");
+        labelField.setFieldLabel(LayerModuleConstants.INSTANCE.GPFolderInfoBinding_labelFieldText());
         labelField.setFireChangeEventOnSetValue(true);
         labelField.addKeyListener(new KeyListener() {
             @Override
@@ -123,7 +125,8 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
         public void updateField(boolean updateOriginalValue) {
             FolderTreeNode folder = (FolderTreeNode) model;
             labelField.setValue(folder.getLabel());
-            folderInfo.setHtml("The folder contains " + folder.getNumberOfDescendants() + " descendants.");
+            folderInfo.setHtml(LayerModuleMessages.INSTANCE.
+                    GPFolderNameFieldBinding_folderInfoHTMLMessage(folder.getNumberOfDescendants()));
         }
 
         @Override

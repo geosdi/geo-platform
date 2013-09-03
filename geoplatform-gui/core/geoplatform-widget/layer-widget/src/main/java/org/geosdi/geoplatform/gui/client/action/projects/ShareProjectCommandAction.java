@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.projects;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.img.LayerWidgetImage;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -78,12 +79,12 @@ public class ShareProjectCommandAction<X extends ButtonEvent> extends AbstractCo
                 if (caught.getCause() instanceof GPSessionTimeout) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(null));
                 } else {
-                    GeoPlatformMessage.errorMessage("Error Loading Project",
-                            "An error occurred while making the requested connection.\n"
-                            + "Verify network connections and try again."
-                            + "\nIf the problem persists contact your system administrator.");
+                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                            ShareProjectCommandAction_errorLoadingProjectText(),
+                            LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Error loading project",
+                            LayerModuleConstants.INSTANCE.
+                            ShareProjectCommandAction_errorLoadingProjectText(),
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                     System.out.println("Error loading project: " + caught.toString()
                             + " data: " + caught.getMessage());

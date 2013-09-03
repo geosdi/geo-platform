@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.expander;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
@@ -46,7 +47,7 @@ import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPLayerExpander extends GPTreeExpanderNotifier<IGPNode> {
 
@@ -65,10 +66,11 @@ public class GPLayerExpander extends GPTreeExpanderNotifier<IGPNode> {
     @Override
     protected void defineStatusBarCancelMessage() {
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Add folder operation cancelled.", // TODO change message wrt widget that use this expander
-                                                   // AddFolderWidget ---> folder
-                                                   //   LoadWmsGetMapFromUrlWidget --> layer
-                                                   //   LoadKmlFromUrlWidget --> layer
+                LayerModuleConstants.INSTANCE.GPLayerExpander_statusOperationCancelledText(),
+                // TODO change message wrt widget that use this expander
+                // AddFolderWidget ---> folder
+                //   LoadWmsGetMapFromUrlWidget --> layer
+                //   LoadKmlFromUrlWidget --> layer
                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }
 

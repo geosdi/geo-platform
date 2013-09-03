@@ -36,13 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.toolbar.mediator;
 
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginManager;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.IAddLayerPlugin;

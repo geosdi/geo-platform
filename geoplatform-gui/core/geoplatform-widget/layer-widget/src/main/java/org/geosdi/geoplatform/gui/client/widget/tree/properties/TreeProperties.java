@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.client.widget.LayerTreeWidget;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface TreeProperties {
-    
-    void bind(LayerTreeWidget theLayerTreeWidget);
 
+    void bind(LayerTreeWidget theLayerTreeWidget);
 }

@@ -69,7 +69,7 @@ public class MultiSelectionHandler extends SelectionChainHandler {
             List<GPBeanTreeModel> selections) {
         return (selections.size() > 1) ? bindStrategy(strategyManager,
                 selections)
-               : super.forwardBuildMenu(strategyManager, selections);
+                : super.forwardBuildMenu(strategyManager, selections);
     }
 
     @Override
@@ -86,5 +86,4 @@ public class MultiSelectionHandler extends SelectionChainHandler {
 
         return compositeKeyBuilder.buildStoreCompositeKey(selections);
     }
-
 }

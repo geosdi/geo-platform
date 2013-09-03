@@ -43,5 +43,4 @@ package org.geosdi.geoplatform.gui.client.widget.tree.menu.loader;
 public interface TreeMenuLoader {
 
     void loadMenu();
-
 }

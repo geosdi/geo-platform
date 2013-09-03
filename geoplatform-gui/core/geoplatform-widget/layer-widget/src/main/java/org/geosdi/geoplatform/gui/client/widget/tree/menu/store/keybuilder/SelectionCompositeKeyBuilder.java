@@ -48,5 +48,4 @@ public abstract class SelectionCompositeKeyBuilder {
 
     public abstract StoreCompositeKey buildStoreCompositeKey(
             List<GPBeanTreeModel> selections);
-
 }

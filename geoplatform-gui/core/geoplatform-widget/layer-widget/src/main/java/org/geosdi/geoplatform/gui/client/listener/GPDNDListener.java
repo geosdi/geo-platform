@@ -3,7 +3,6 @@ package org.geosdi.geoplatform.gui.client.listener;
 import com.extjs.gxt.ui.client.event.EventType;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.store.TreeStore;
@@ -11,6 +10,7 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
@@ -107,8 +107,8 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
                         LayerHandlerManager.fireEvent(
                                 new DisplayLayersProgressBarEvent(false));
                         GeoPlatformMessage.errorMessage(
-                                "Save Folder Drag&Drop Operation Error",
-                                "Problems on saving the new tree state after folder drag&drop operation");
+                                LayerModuleConstants.INSTANCE.GPDNDListener_saveFolderDDErrorTitleText(),
+                                LayerModuleConstants.INSTANCE.GPDNDListener_saveFolderDDErrorBodyText());
                     }
                 }
 
@@ -117,7 +117,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
                     IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                     mementoSave.remove(memento);
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Folder Drag&Drop operation saved successfully.",
+                            LayerModuleConstants.INSTANCE.GPDNDListener_statusSaveFolderDDSuccessText(),
                             EnumSearchStatus.STATUS_SEARCH.toString());
                     LayerHandlerManager.fireEvent(peekCacheEvent);
                 }
@@ -135,8 +135,8 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
                         LayerHandlerManager.fireEvent(
                                 new DisplayLayersProgressBarEvent(false));
                         GeoPlatformMessage.errorMessage(
-                                "Save Layer Drag&Drop Operation Error",
-                                "Problems on saving the new tree state after layer drag&drop operation");
+                                LayerModuleConstants.INSTANCE.GPDNDListener_saveLayerDDErrorTitleText(),
+                                LayerModuleConstants.INSTANCE.GPDNDListener_saveLayerDDErrorBodyText());
                     }
                 }
 
@@ -145,7 +145,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
                     IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                     mementoSave.remove(memento);
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Layer Drag&Drop operation saved successfully.",
+                            LayerModuleConstants.INSTANCE.GPDNDListener_statusSaveLayerDDSuccessText(),
                             EnumSearchStatus.STATUS_SEARCH.toString());
                     LayerHandlerManager.fireEvent(peekCacheEvent);
                 }

@@ -69,5 +69,4 @@ public class SingleSelectionMenuStrategy extends AbstractTreeMenuStrategy {
         return ((tools != null) && (tools.size() > 0)) ? super.buildMenu(key,
                 tools) : null;
     }
-
 }

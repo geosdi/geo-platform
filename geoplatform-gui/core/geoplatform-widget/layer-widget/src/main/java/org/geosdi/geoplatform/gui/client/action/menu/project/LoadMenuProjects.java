@@ -40,6 +40,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
 
 /**
@@ -54,7 +55,8 @@ public class LoadMenuProjects extends MenuBaseAction {
 
     @Inject
     public LoadMenuProjects(GPProjectManagementWidget searchWidget) {
-        super("Open Project", BasicWidgetResources.ICONS.manageProjects());
+        super(LayerModuleConstants.INSTANCE.LoadMenuProjects_titleText(),
+                BasicWidgetResources.ICONS.manageProjects());
         this.searchWidget = searchWidget;
     }
 

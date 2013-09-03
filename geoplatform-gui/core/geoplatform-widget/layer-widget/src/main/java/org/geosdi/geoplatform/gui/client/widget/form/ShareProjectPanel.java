@@ -60,6 +60,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
@@ -74,9 +76,9 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
  */
 public class ShareProjectPanel extends GeoPlatformContentPanel {
 
-    private final static String PROJECT_NAME_LABEL = "Project: ";
-    private final static String OWNER_LABEL = "Owner: ";
-    private final static String ORGANIZATION_LABEL = "Organization: ";
+    private final static String PROJECT_NAME_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_projectNameLabelText() + ": ";
+    private final static String OWNER_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_ownerLabelText() + ": ";
+    private final static String ORGANIZATION_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_organizationLabelText() + ": ";
     private ListStore<GPSimpleUser> fromStore;
     private ListStore<GPSimpleUser> toStore;
     private GPClientProject project;
@@ -105,7 +107,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         VerticalPanel verticalPanel = new VerticalPanel();
         verticalPanel.setSpacing(10);
         FieldSet fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml("Share Project to Users");
+        fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.ShareProjectPanel_fieldSetHeadingText());
         fieldSet.setWidth(GPProjectManagementWidget.COMPONENT_WIDTH - 25);
         this.projectNameLabel = new Label();
         this.projectNameLabel.setStyleAttribute("font-size", "13");
@@ -122,11 +124,13 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         labelListContainer.setHeight(20);
         labelListContainer.setStyleAttribute("background-color", "white");
         labelListContainer.setWidth(GPProjectManagementWidget.COMPONENT_WIDTH - 25);
-        Label organizationUserLabel = new Label("Organization Users:");
+        Label organizationUserLabel = new Label(LayerModuleConstants.INSTANCE.
+                ShareProjectPanel_organizationUserLabelText() + ":");
         organizationUserLabel.setStyleAttribute("font-size", "13");
         organizationUserLabel.setStyleAttribute("font-weight", "bold");
         labelListContainer.add(organizationUserLabel, new BorderLayoutData(Style.LayoutRegion.WEST));
-        Label projectSharedUserLabel = new Label("Project Shared Users:");
+        Label projectSharedUserLabel = new Label(LayerModuleConstants.INSTANCE.
+                ShareProjectPanel_projectSharedUserLabelText() + ":");
         projectSharedUserLabel.setStyleAttribute("font-size", "13");
         projectSharedUserLabel.setStyleAttribute("font-weight", "bold");
         labelListContainer.add(projectSharedUserLabel, new BorderLayoutData(Style.LayoutRegion.EAST));
@@ -146,62 +150,65 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         to.setDisplayField(GPSimpleUserKeyValue.NAME.toString());
         this.toStore = new ListStore<GPSimpleUser>();
         to.setStore(this.toStore);
-        Button cancelButton = new Button("GoTo Search Project", BasicWidgetResources.ICONS.gear(),
+        Button cancelButton = new Button(LayerModuleConstants.INSTANCE.
+                ShareProjectPanel_cancelButtonText(), BasicWidgetResources.ICONS.gear(),
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        ShareProjectPanel.this.reset();
-                        projectManagementWidget.showSearchProjectPanel();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                ShareProjectPanel.this.reset();
+                projectManagementWidget.showSearchProjectPanel();
+            }
+        });
         super.addButton(cancelButton);
-        saveButton = new Button("Save", BasicWidgetResources.ICONS.save(),
+        saveButton = new Button(ButtonsConstants.INSTANCE.saveText(), BasicWidgetResources.ICONS.save(),
                 new SelectionListener<ButtonEvent>() {
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                toStore.commitChanges();
+                List<Long> accountIDsProject = Lists.<Long>newArrayListWithCapacity(toStore.getModels().size());
+                IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                boolean test = false;
+                for (GPSimpleUser user : toStore.getModels()) {
+                    if (user.getId().equals(accountDetail.getId())) {
+                        test = true;
+                    }
+                    accountIDsProject.add(user.getId());
+                }
+                final boolean isShared = test;
+                ShareProjectPanel.this.reset();
+                LayerRemote.Util.getInstance().shareProjectToUsers(project.getId(),
+                        accountIDsProject, new AsyncCallback<Boolean>() {
                     @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        toStore.commitChanges();
-                        List<Long> accountIDsProject = Lists.newArrayListWithCapacity(toStore.getModels().size());
-                        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                        boolean test = false;
-                        for (GPSimpleUser user : toStore.getModels()) {
-                            if (user.getId().equals(accountDetail.getId())) {
-                                test = true;
-                            }
-                            accountIDsProject.add(user.getId());
-                        }
-                        final boolean isShared = test;
-                        ShareProjectPanel.this.reset();
-                        LayerRemote.Util.getInstance().shareProjectToUsers(project.getId(),
-                                accountIDsProject, new AsyncCallback<Boolean>() {
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                System.out.println("Error on saving user to share project");
-                            }
+                    public void onFailure(Throwable caught) {
+                        System.out.println("Error on saving user to share project");
+                    }
 
-                            @Override
-                            public void onSuccess(Boolean result) {
+                    @Override
+                    public void onSuccess(Boolean result) {
 //                                System.out.println("Project is Shared: " + isShared);
-                                if (project.isDefaultProject()) {
-                                    GPClientProject projInSession = Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-                                    if (isShared) {
-                                        projInSession.setShared(Boolean.TRUE);
-                                    } else {
-                                        projInSession.setShared(Boolean.FALSE);
-                                    }
-                                }
-                                project.setShared(Boolean.TRUE);
-                                loadData(project);
+                        if (project.isDefaultProject()) {
+                            GPClientProject projInSession = Registry.get(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+                            if (isShared) {
+                                projInSession.setShared(Boolean.TRUE);
+                            } else {
+                                projInSession.setShared(Boolean.FALSE);
                             }
-                        });
+                        }
+                        project.setShared(Boolean.TRUE);
+                        loadData(project);
                     }
                 });
+            }
+        });
         super.addButton(saveButton);
         super.add(verticalPanel);
         super.add(lists, new FormData("98%"));
         LayoutContainer filterContainer = new LayoutContainer(new BorderLayout());
-        this.fromFilter = this.createServerFilter(this.fromFilter, fromStore, "Organization Users");
+        this.fromFilter = this.createServerFilter(this.fromFilter, fromStore,
+                LayerModuleConstants.INSTANCE.ShareProjectPanel_fromFilterLabelText());
         filterContainer.add(this.fromFilter, new BorderLayoutData(Style.LayoutRegion.WEST));
-        this.toFilter = this.createServerFilter(this.toFilter, toStore, "Sharing User List");
+        this.toFilter = this.createServerFilter(this.toFilter, toStore,
+                LayerModuleConstants.INSTANCE.ShareProjectPanel_toFilterLabelText());
         filterContainer.add(this.toFilter, new BorderLayoutData(Style.LayoutRegion.EAST));
         filterContainer.setStyleAttribute("margin", "11px");
         super.add(filterContainer);
@@ -226,7 +233,8 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 return Boolean.FALSE;
             }
         };
-        storeFilterField.setEmptyText("Type the user to filter");
+        storeFilterField.setEmptyText(LayerModuleConstants.INSTANCE.
+                ShareProjectPanel_storeFilterEmptyText());
         storeFilterField.bind(store);
         storeFilterField.setFieldLabel(filterLabel);
         return storeFilterField;

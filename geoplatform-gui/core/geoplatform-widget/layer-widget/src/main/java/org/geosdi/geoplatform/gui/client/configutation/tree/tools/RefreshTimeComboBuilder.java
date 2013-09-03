@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.action.menu.RefreshLayerAction;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -55,7 +56,6 @@ public class RefreshTimeComboBuilder {
 
     public RefreshTimeComboBuilder() {
         this.combo = new ComboBox() {
-
             @Override
             protected void onSelect(ModelData model, int index) {
                 super.onSelect(model, index);
@@ -68,7 +68,7 @@ public class RefreshTimeComboBuilder {
     }
 
     protected ComboBox build(TreePanel tree) {
-        combo.setEmptyText("Refresh Time");
+        combo.setEmptyText(LayerModuleConstants.INSTANCE.RefreshTimeComboBuilder_comboEmptyText());
         ListStore<LayerRefreshTimeValue> store = new ListStore<LayerRefreshTimeValue>();
         store.add(LayerRefreshTimeValue.getLayerRefreshTimeList());
         combo.setStore(store);

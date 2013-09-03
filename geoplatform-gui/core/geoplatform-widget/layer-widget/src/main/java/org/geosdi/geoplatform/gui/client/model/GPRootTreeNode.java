@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
@@ -58,7 +59,7 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
     }
 
     public GPRootTreeNode(TreePanel<GPBeanTreeModel> theTree) {
-        super.setLabel("Geo-Platform Tree");
+        super.setLabel(LayerModuleConstants.INSTANCE.GPRootTreeNode_labelText());
     }
 
     /**

@@ -46,6 +46,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.CreateViewportEvent;
@@ -124,9 +125,9 @@ public class CreateFolderViewportAction extends MenuBaseAction {
             createViewportEvent.setViewportName(folderName);
             MapHandlerManager.fireEvent(createViewportEvent);
         } else {
-            GeoPlatformMessage.errorMessage("No Layer(s)",
-                    "The selected folder does not contains layer(s).\n"
-                    + "Impossible to create a viewport without layers.");
+            GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                    CreateFolderViewportAction_errorNoLayerTitleText(),
+                    LayerModuleConstants.INSTANCE.CreateFolderViewportAction_errorNoLayerBodyText());
         }
     }
 
@@ -134,10 +135,10 @@ public class CreateFolderViewportAction extends MenuBaseAction {
      * Confirm Expand Operation on the Folder Element.
      */
     private void confirmExpandingMessage() {
-        GeoPlatformMessage.confirmMessage("Expand Folder",
-                "The folder you are trying to put elements "
-                + "must be expanded before the adding operation. "
-                + "Do you want to expand it?",
+        GeoPlatformMessage.confirmMessage(LayerModuleConstants.INSTANCE.
+                CreateFolderViewportAction_confirmExpandTitleText(),
+                LayerModuleConstants.INSTANCE.
+                CreateFolderViewportAction_confirmExpandBodyText(),
                 this.message);
     }
 }

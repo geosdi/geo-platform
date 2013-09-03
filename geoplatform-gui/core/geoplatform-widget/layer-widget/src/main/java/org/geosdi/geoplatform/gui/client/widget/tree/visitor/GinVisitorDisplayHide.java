@@ -59,8 +59,7 @@ public class GinVisitorDisplayHide implements GinVisitorDisplayHideBuilder {
     @Override
     public VisitorDisplayHide get() {
         return (visitorDisplay = (visitorDisplay == null)
-                                 ? new VisitorDisplayHide(tree.get())
-                                 : visitorDisplay);
+                ? new VisitorDisplayHide(tree.get())
+                : visitorDisplay);
     }
-
 }

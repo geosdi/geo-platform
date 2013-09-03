@@ -41,6 +41,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -64,7 +65,7 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
     @Inject
     public ShareProjectMenuAction(
             GPProjectManagementWidget projectManagementWidget) {
-        super(GPTrustedLevel.HIGH, "Share Project",
+        super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareProjectMenuAction_titleText(),
                 LayerResources.ICONS.arrowRefresh());
         this.projectManagementWidget = projectManagementWidget;
     }
@@ -73,28 +74,26 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
     public void componentSelected(MenuEvent e) {
         LayerRemote.Util.getInstance().loadDefaultProject(
                 new AsyncCallback<GPClientProject>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(null));
                 } else {
-                    GeoPlatformMessage.errorMessage("Error Sharing",
-                            "An error occurred while making the requested connection.\n"
-                            + "Verify network connections and try again."
-                            + "\nIf the problem persists contact your system administrator.");
+                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                            ShareProjectMenuAction_errorSharingTitleText(),
+                            LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Error sharing the layer tree project",
+                            LayerModuleConstants.INSTANCE.ShareProjectMenuAction_statusErrorSharingText(),
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 }
             }
 
             @Override
             public void onSuccess(GPClientProject result) {
+                //This call is necessary to support i18n
+                result.setLabelDefaultProject(result.isDefaultProject());
                 projectManagementWidget.showSharingPanel(result);
             }
-
         });
     }
-
 }

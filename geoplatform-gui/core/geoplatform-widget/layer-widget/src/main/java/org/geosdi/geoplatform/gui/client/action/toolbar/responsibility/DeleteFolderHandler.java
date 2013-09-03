@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
@@ -83,7 +84,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
     @Override
     public void displayMessage() {
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "The selected folder was deleted succesfully",
+                LayerModuleConstants.INSTANCE.DeleteFolderHandler_statusFolderDeletedText(),
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
@@ -101,8 +102,8 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
                             new DisplayLayersProgressBarEvent(
                             false));
                     GeoPlatformMessage.errorMessage(
-                            "Save Delete Operation Error",
-                            "Problems on saving the new tree state after deleting elements");
+                            LayerModuleConstants.INSTANCE.errorSaveDeleteOperationTitleText(),
+                            LayerModuleConstants.INSTANCE.DeleteFolderHandler_errorSaveDeleteBodyText());
                 }
             }
 
@@ -111,7 +112,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
                 IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                 mementoSave.remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Elements deleted successfully.",
+                        LayerModuleConstants.INSTANCE.DeleteFolderHandler_statusSaveDeleteSuccessText(),
                         EnumSearchStatus.STATUS_SEARCH.toString());
                 LayerHandlerManager.fireEvent(peekCacheEvent);
             }

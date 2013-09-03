@@ -47,6 +47,7 @@ import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -76,7 +77,6 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
     private ListView<IAddLayerPlugin> generateListView() {
         listView = new ListView<IAddLayerPlugin>() {
-
             @Override
             protected IAddLayerPlugin prepareData(IAddLayerPlugin plugin) {
                 plugin.set("shortName", Format.ellipse(plugin.getTooltip(), 30));
@@ -92,22 +92,24 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
         listView.getSelectionModel().addSelectionChangedListener(
                 new SelectionChangedListener<IAddLayerPlugin>() {
-
-                    @Override
-                    public void selectionChanged(SelectionChangedEvent<IAddLayerPlugin> se) {
-                        if (se.getSelectedItem() != null) {
-                            if (se.getSelectedItem().getAction(tree).isEnabled()) {
-                                ButtonEvent be = new ButtonEvent(null);
-                                be.setType(Events.Select);
-                                se.getSelectedItem().getAction(tree).handleEvent(be);
-                                hide();
-                            } else {
-                                GeoPlatformMessage.errorMessage("Function Disabled", se.getSelectedItem().getMessageToEnable());
-                            }
-                        }
-                        listView.getSelectionModel().deselectAll();
+            @Override
+            public void selectionChanged(SelectionChangedEvent<IAddLayerPlugin> se) {
+                if (se.getSelectedItem() != null) {
+                    if (se.getSelectedItem().getAction(tree).isEnabled()) {
+                        ButtonEvent be = new ButtonEvent(null);
+                        be.setType(Events.Select);
+                        se.getSelectedItem().getAction(tree).handleEvent(be);
+                        hide();
+                    } else {
+                        GeoPlatformMessage.errorMessage(
+                                LayerModuleConstants.INSTANCE.
+                                AddLayerWidget_errorDisabledFunctionText(),
+                                se.getSelectedItem().getMessageToEnable());
                     }
-                });
+                }
+                listView.getSelectionModel().deselectAll();
+            }
+        });
 
         setListViewProperties();
 
@@ -129,7 +131,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml("Add Layers Window");
+        super.setHeadingHtml(LayerModuleConstants.INSTANCE.AddLayerWidget_headingText());
         super.setScrollMode(Scroll.AUTOY);
         super.setResizable(false);
         this.store = new ListStore<IAddLayerPlugin>();

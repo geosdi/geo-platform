@@ -42,6 +42,8 @@ import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingFolderHandler;
 import org.geosdi.geoplatform.gui.client.widget.tab.FolderTabWidget;
@@ -58,7 +60,7 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
     private FolderTabWidget foldersTabWidget;
     private VerticalPanel vp;
     private FolderTreeNode model;
-   
+
     public FolderPropertiesWidget() {
         super(true);
     }
@@ -73,14 +75,13 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
 
         super.add(this.vp);
 
-        Button close = new Button("Close",
+        Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        hide();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                hide();
+            }
+        });
 
         super.addButton(close);
     }
@@ -93,7 +94,7 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        setHeadingHtml("GP Folder Properties Widget");
+        setHeadingHtml(LayerModuleConstants.INSTANCE.FolderPropertiesWidget_headingText());
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());
@@ -101,7 +102,6 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
         setCollapsible(true);
 
         addWindowListener(new WindowListener() {
-
             @Override
             public void windowShow(WindowEvent we) {
                 foldersTabWidget.bind(model);
@@ -122,9 +122,9 @@ public class FolderPropertiesWidget extends GeoPlatformWindow
     }
 
     /**
-     * Add Handler to manage TreeNode Binding on Widget
-     * and window adjusts its height based on the tab is clicked
-     * 
+     * Add Handler to manage TreeNode Binding on Widget and window adjusts its
+     * height based on the tab is clicked
+     *
      */
     public void addHandlers() {
         WidgetPropertiesHandlerManager.addHandler(GPTreeBindingFolderHandler.TYPE, this);

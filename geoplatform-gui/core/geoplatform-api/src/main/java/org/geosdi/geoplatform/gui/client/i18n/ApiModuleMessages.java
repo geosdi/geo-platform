@@ -44,7 +44,7 @@ import com.google.gwt.i18n.client.Messages;
  */
 public interface ApiModuleMessages extends Messages {
 
-    public ApiModuleMessages INSTANCE = GWT.create(ApiModuleMessages.class);
+    public final static ApiModuleMessages INSTANCE = GWT.create(ApiModuleMessages.class);
 
     String GeoPlatformLayoutManager_wellcomeMessage(String moduleName);
 }

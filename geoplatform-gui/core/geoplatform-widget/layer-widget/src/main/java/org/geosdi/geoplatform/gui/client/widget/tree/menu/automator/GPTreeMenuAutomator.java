@@ -63,5 +63,4 @@ public class GPTreeMenuAutomator implements TreeMenuAutomator {
         this.menuActivator.addTreeMenuActivatorHandler();
         this.menuLoader.loadMenu();
     }
-
 }

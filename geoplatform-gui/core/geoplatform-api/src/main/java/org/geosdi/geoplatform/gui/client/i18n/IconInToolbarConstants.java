@@ -44,7 +44,7 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
  */
 public interface IconInToolbarConstants extends ConstantsWithLookup {
 
-    public IconInToolbarConstants INSTANCE = GWT.create(IconInToolbarConstants.class);
+    public final static IconInToolbarConstants INSTANCE = GWT.create(IconInToolbarConstants.class);
 
     @DefaultStringValue("Not signed on Google Earth Builder")
     String googleToolbarIconText();

@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.form.LoadKmlFromUrlWidget;
 
 /**
@@ -50,7 +51,8 @@ public class LoadKmlFromUrlTreeAction extends ToolbarLayerTreeAction {
     private LoadKmlFromUrlWidget kmlWidget;
 
     public LoadKmlFromUrlTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.loadKmlFromURL(), "Load KML from URL");
+        super(theTree, LayerResources.ICONS.loadKmlFromURL(), 
+                LayerModuleConstants.INSTANCE.LoadKmlFromUrlTreeAction_tooltipText());
         this.kmlWidget = new LoadKmlFromUrlWidget(theTree);
     }
 

@@ -60,7 +60,6 @@ public class GinDragSource implements GinDragSourceBuilder {
     @Override
     public TreePanelDragSource get() {
         return dragSource = (dragSource == null) ? new TreePanelDragSource(tree)
-                            : dragSource;
+                : dragSource;
     }
-
 }

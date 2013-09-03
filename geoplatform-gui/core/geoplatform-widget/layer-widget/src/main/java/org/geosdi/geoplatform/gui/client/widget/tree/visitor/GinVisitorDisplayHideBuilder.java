@@ -40,10 +40,9 @@ import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GinVisitorDisplayHideBuilder {
-    
-    VisitorDisplayHide get();
 
+    VisitorDisplayHide get();
 }

@@ -65,12 +65,10 @@ public class LayerTreeBasicMenu implements GPCompositeBasicMenu {
                 "aboutGeoPlatform");
 
         SelectionListener selectionListener = (baseAction != null) ? baseAction
-                                              : new SelectionListener<MenuEvent>() {
-
+                : new SelectionListener<MenuEvent>() {
             @Override
             public void componentSelected(MenuEvent ce) {
             }
-
         };
 
         MenuItem item = new MenuItem(baseAction.getTitle(),
@@ -80,5 +78,4 @@ public class LayerTreeBasicMenu implements GPCompositeBasicMenu {
 
         return m;
     }
-
 }

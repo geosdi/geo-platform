@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.form.LoadWmsGetMapFromUrlWidget;
 
 /**
@@ -50,7 +51,8 @@ public class LoadWmsGetMapFromUrlTreeAction extends ToolbarLayerTreeAction {
     private LoadWmsGetMapFromUrlWidget getMapWidget;
 
     public LoadWmsGetMapFromUrlTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.loadWmsGetMapFromUrl(), "Add WMS from URL");
+        super(theTree, LayerResources.ICONS.loadWmsGetMapFromUrl(),
+                LayerModuleConstants.INSTANCE.LoadWmsGetMapFromUrlTreeAction_tooltipText());
         this.getMapWidget = new LoadWmsGetMapFromUrlWidget(theTree);
     }
 

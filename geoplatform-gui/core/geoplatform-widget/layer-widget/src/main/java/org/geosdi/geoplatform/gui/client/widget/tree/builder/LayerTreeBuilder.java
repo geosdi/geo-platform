@@ -44,6 +44,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
@@ -103,7 +104,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             Registry.register(UserSessionEnum.TREE_LOADED.name(), initialized);
 
             LayoutManager.getInstance().getStatusMap().setBusy(
-                    "Loading tree elements: please, wait untill contents fully loads.");
+                    LayerModuleConstants.INSTANCE.statusLoadingTreeElementsText());
 
             LayerRemote.Util.getInstance().loadDefaultProjectElements(
                     new AsyncCallback<GPClientProject>() {
@@ -112,12 +113,10 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
                     if (caught.getCause() instanceof GPSessionTimeout) {
                         GPHandlerManager.fireEvent(new GPLoginEvent(buildEvent));
                     } else {
-                        GeoPlatformMessage.errorMessage("Error loading",
-                                "An error occurred while making the requested connection.\n"
-                                + "Verify network connections and try again."
-                                + "\nIf the problem persists contact your system administrator.");
+                        GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorLoadingTitleText(),
+                                LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Error loading tree elements.",
+                                LayerModuleConstants.INSTANCE.statusErrorLoadingTreeElementsText(),
                                 SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                         System.out.println(
                                 "Error loading tree elements: " + caught.toString()
@@ -146,7 +145,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
         insertElementsOfTheRootFolders(
                 clientProject.getRootFolders());
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Tree elements loaded successfully.",
+                LayerModuleConstants.INSTANCE.statusSuccessLoadingTreeElementsText(),
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
         Registry.register(UserSessionEnum.TREE_LOADED.name(),
                 initialized);
@@ -167,7 +166,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             List<IGPFolderElements> folderElements) {
         final VisitorPosition visitorPosition = new VisitorPosition();
         parentFolder.modelConverter(folderElements);
-        List<GPBeanTreeModel> childrenList = Lists.newArrayList();
+        List<GPBeanTreeModel> childrenList = Lists.<GPBeanTreeModel>newArrayList();
         visitorPosition.assignTmpIndex(parentFolder);
         for (Iterator<ModelData> it = parentFolder.getChildren().iterator(); it.hasNext();) {
             GPBeanTreeModel element = (GPBeanTreeModel) it.next();

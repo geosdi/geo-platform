@@ -44,6 +44,7 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
@@ -82,13 +83,13 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         this.comboBoxStore = new ListStore<GPStyleStringBeanModel>();
         this.comboBox.setWidth(200);
         this.comboBox.setStore(this.comboBoxStore);
-        this.comboBox.setEmptyText("Select a style...");
+        this.comboBox.setEmptyText(LayerModuleConstants.INSTANCE.GPLayerStyleBinding_comboEmptyText());
         this.comboBox.setTypeAhead(true);
         this.comboBox.setTriggerAction(TriggerAction.ALL);
         this.comboBox.setDisplayField(GPStyleStringKeyValue.StyleString.getValue());
 
         FieldSet fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml("Select a style");
+        fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.GPLayerStyleBinding_fieldSetHeadingText());
 
         fieldSet.add(this.comboBox);
         fp.add(fieldSet);

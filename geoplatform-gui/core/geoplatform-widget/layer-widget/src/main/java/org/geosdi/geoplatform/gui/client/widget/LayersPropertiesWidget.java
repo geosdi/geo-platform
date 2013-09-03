@@ -42,6 +42,8 @@ import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingLayerHandler;
 import org.geosdi.geoplatform.gui.client.widget.tab.LayersTabWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -51,7 +53,7 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class LayersPropertiesWidget extends GeoPlatformWindow
         implements GPTreeBindingLayerHandler, GPWidgetSizeHandler {
@@ -59,7 +61,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
     private LayersTabWidget layersTabWidget;
     private VerticalPanel vp;
     private GPLayerBean model;
-   
+
     public LayersPropertiesWidget() {
         super(true);
     }
@@ -74,14 +76,13 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
 
         super.add(this.vp);
 
-        Button close = new Button("Close",
+        Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        hide();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                hide();
+            }
+        });
 
         super.addButton(close);
     }
@@ -94,7 +95,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        setHeadingHtml("GP Layers Properties Widget");
+        setHeadingHtml(LayerModuleConstants.INSTANCE.LayersPropertiesWidget_headingText());
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());
@@ -102,7 +103,6 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
         setCollapsible(true);
 
         addWindowListener(new WindowListener() {
-
             @Override
             public void windowShow(WindowEvent we) {
                 layersTabWidget.buildWidget();
@@ -124,9 +124,9 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
     }
 
     /**
-     * Add Handler to manage TreeNode Binding on Widget
-     * and window adjusts its height based on the tab is clicked
-     * 
+     * Add Handler to manage TreeNode Binding on Widget and window adjusts its
+     * height based on the tab is clicked
+     *
      */
     public void addHandlers() {
         WidgetPropertiesHandlerManager.addHandler(GPTreeBindingLayerHandler.TYPE, this);

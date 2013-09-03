@@ -61,5 +61,4 @@ public class GinGPDNDListener implements GinGPDNDListenerBuilder {
         return gpDndLinstener = (gpDndLinstener == null) ? new GPDNDListener(
                 ginVisitorDisplay.get()) : gpDndLinstener;
     }
-
 }

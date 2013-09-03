@@ -35,14 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.pagination.projects;
 
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public enum EnumProjectMessage {
 
-    DEFAUTL_PROJECT_MESSAGE("Default Project set correctly");
+    DEFAUTL_PROJECT_MESSAGE(LayerModuleConstants.INSTANCE.EnumProjectMessage_defaultProjectText());
     //
     private String value;
 

@@ -41,6 +41,8 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -76,10 +78,9 @@ public class ExportoToShpZip extends MenuBaseAction {
             Window.open(shpZipURL, shpZipURL, shpZipURL);
         }
         {
-            Info.display("WARNING",
-                    "Il layer selezionato non è un layer vettoriale");
+            Info.display(WindowsConstants.INSTANCE.warningTitleText(),
+                    LayerModuleConstants.INSTANCE.ExportoToShpZip_warningBodyText());
         }
 
     }
-
 }

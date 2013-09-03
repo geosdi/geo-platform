@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -62,19 +63,21 @@ public class DeleteProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
     @Override
     public void componentSelected(ButtonEvent ce) {
         if (searchPanel.isDefaultSelectedProject()) {
-            GeoPlatformMessage.alertMessage("Delete Project",
-                    "Attention you could not delete Default Project.");
+            GeoPlatformMessage.alertMessage(LayerModuleConstants.INSTANCE.
+                    deleteProjectTitleText(),
+                    LayerModuleConstants.INSTANCE.DeleteProjectAction_warningDeletionBodyText());
         } else {
-            GeoPlatformMessage.confirmMessage("Delete Project",
-                    "Are you sure you want to delete the Selected Project ?",
+            GeoPlatformMessage.confirmMessage(LayerModuleConstants.INSTANCE.
+                    deleteProjectTitleText(),
+                    LayerModuleConstants.INSTANCE.DeleteProjectAction_confirmDeletionBodyText(),
                     new Listener<MessageBoxEvent>() {
-                        @Override
-                        public void handleEvent(MessageBoxEvent be) {
-                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                                searchPanel.deleteProject();
-                            }
-                        }
-                    });
+                @Override
+                public void handleEvent(MessageBoxEvent be) {
+                    if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                        searchPanel.deleteProject();
+                    }
+                }
+            });
         }
     }
 }

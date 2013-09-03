@@ -49,7 +49,6 @@ import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.mvc.LayerController;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
-//import org.geosdi.geoplatform.gui.client.plugin.PrintLayersTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddRasterLayerPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddVectorLayerPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.GetMapLayerPlugin;
@@ -97,22 +96,18 @@ public class LayerWidgetUI implements EntryPoint {
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
         menuRegistar.put("layerMenu",
                 new MenuActionCreator() {
-
             @Override
             public MenuAction createAction() {
                 return new LayerMenuAction();
             }
-
         });
 
         menuRegistar.put("manageProjects",
                 new MenuActionCreator() {
-
             @Override
             public MenuAction createAction() {
                 return loadMenuProjects;
             }
-
         });
 
     }
@@ -132,5 +127,4 @@ public class LayerWidgetUI implements EntryPoint {
         AddLayerPluginManager.addWindowPlugin(new AddVectorLayerPlugin());
         AddLayerPluginManager.addWindowPlugin(new GetMapLayerPlugin());
     }
-
 }

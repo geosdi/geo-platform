@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
-import java.util.HashMap;
+import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor {
 
@@ -60,7 +60,7 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
     private int tmpIndex;
     private GPRootTreeNode rootElement;
     private boolean stopIterating;
-    private Map<FolderTreeNode, Integer> folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
+    private Map<FolderTreeNode, Integer> folderDescendantMap = Maps.<FolderTreeNode, Integer>newHashMap();
 
     public VisitorDeleteElement(GPRootTreeNode root) {
         this.rootElement = root;
@@ -173,5 +173,4 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
     public void setFolderDescendantMap(Map<FolderTreeNode, Integer> folderDescendantMap) {
         this.folderDescendantMap = folderDescendantMap;
     }
-    
 }

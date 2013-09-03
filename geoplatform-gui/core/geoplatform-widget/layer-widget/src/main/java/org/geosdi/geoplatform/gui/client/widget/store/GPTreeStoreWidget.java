@@ -43,6 +43,8 @@ import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
@@ -88,8 +90,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     @Override
     public void executeSave(final MementoSaveAddedLayers memento) {
         MementoSaveOperations.mementoSaveAddedLayer(memento,
-                "Layers saved successfully.",
-                "Problems on saving the new tree state after layers creation");
+                LayerModuleConstants.INSTANCE.GPTreeStoreWidget_mementoSuccessMessageText(),
+                LayerModuleConstants.INSTANCE.GPTreeStoreWidget_mementoFailMessageText());
     }
 
     @Override
@@ -100,7 +102,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     @Override
     public void addVectorLayersFromCapabilities(List<GPVectorBean> layers) {
-        this.changeProgressBarMessage("Load Vector Layers in the Store");
+        this.changeProgressBarMessage(LayerModuleConstants.INSTANCE.
+                GPTreeStoreWidget_progressBarMessageText());
     }
 
     @Override
@@ -115,8 +118,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     @Override
     public void addLayersFromCopyMenu(List<? extends GPLayerBean> layers) {
-        List<GPRasterBean> rasterBeanList = Lists.newArrayList();
-        List<GPVectorBean> vectorBeanList = Lists.newArrayList();
+        List<GPRasterBean> rasterBeanList = Lists.<GPRasterBean>newArrayList();
+        List<GPVectorBean> vectorBeanList = Lists.<GPVectorBean>newArrayList();
         for (GPLayerBean layer : layers) {
             if (layer instanceof GPRasterBean) {
                 rasterBeanList.add((GPRasterBean) layer);
@@ -170,7 +173,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
             super.tree.setExpanded(parentDestination, true);
         }
 
-        List<GPBeanTreeModel> layerList = Lists.newArrayList();
+        List<GPBeanTreeModel> layerList = Lists.<GPBeanTreeModel>newArrayList();
         StringBuilder existingLayers = new StringBuilder();
         for (GPLayerBean layer : layers) {
             boolean duplicatedLayer = this.checkDuplicatedLayer(layer, parentDestination);
@@ -196,7 +199,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         }
 
         GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
-        List<GPBeanTreeModel> layerList = Lists.newArrayList();
+        List<GPBeanTreeModel> layerList = Lists.<GPBeanTreeModel>newArrayList();
 
         for (GPShortLayerBean layer : layers) {
             boolean duplicatedLayer = this.checkDuplicatedLayer(layer, parentDestination);
@@ -234,7 +237,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
     }
 
     private String buildAlias(String originalName, GPBeanTreeModel parentDestination) {
-        final String COPY_STRING = " - Copy (";
+        final String COPY_STRING = " - "
+                + LayerModuleConstants.INSTANCE.GPTreeStoreWidget_copyStringText() + " (";
         int suffix = 1;
         int copyIndex = originalName.indexOf(COPY_STRING);
         String modifiedName;
@@ -322,9 +326,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
     private void createAlertMessage(StringBuilder existingLayers) {
         if (existingLayers.length() != 0) {
-            GeoPlatformMessage.alertMessage("Add Layers Notification",
-                    "The following layers will be renamed because they already exsists in this folder:"
-                    + "\n" + existingLayers);
+            GeoPlatformMessage.alertMessage(LayerModuleConstants.INSTANCE.GPTreeStoreWidget_renameAlertTitleText(),
+                    LayerModuleMessages.INSTANCE.GPTreeStoreWidget_renameAlertBodyMessage(existingLayers.toString()));
         }
     }
 
@@ -387,12 +390,12 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
         raster.setTitle(layer.getTitle());
         raster.setBbox(layer.getBbox());
         raster.setLayerType(layer.getLayerType());
-        raster.setStyles(Lists.newArrayList(layer.getStyles()));
+        raster.setStyles(Lists.<GPStyleStringBeanModel>newArrayList(layer.getStyles()));
         return raster;
     }
 
     private Map<String, List<GPShortLayerBean>> getLayerMapDataSource(List<? extends GPShortLayerBean> layers) {
-        Map<String, List<GPShortLayerBean>> layerMap = Maps.newHashMap();
+        Map<String, List<GPShortLayerBean>> layerMap = Maps.<String, List<GPShortLayerBean>>newHashMap();
 
         for (GPShortLayerBean layer : layers) {
             String dataSource = layer.getLayerDataSource();
@@ -400,7 +403,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget
 
             List<GPShortLayerBean> layersByDataSource = layerMap.get(dataSource);
             if (layersByDataSource == null) {
-                layersByDataSource = Lists.newArrayList();
+                layersByDataSource = Lists.<GPShortLayerBean>newArrayList();
                 layerMap.put(dataSource, layersByDataSource);
             }
             layersByDataSource.add(layer);

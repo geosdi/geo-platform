@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
+import com.google.common.collect.Maps;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
 
@@ -67,7 +68,8 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     }
 
     /**
-     *  @param If possible is better for CC reasons to use constructor with parm root.
+     * @param If possible is better for CC reasons to use constructor with parm
+     * root.
      */
     public VisitorAddElement() {
     }
@@ -79,7 +81,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.endPosition = super.getNextUnvisitedElement(newElement);
         this.rootElement = super.findRootElement(parentDestination);
         this.preorderTraversal();
-        this.folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
+        this.folderDescendantMap = Maps.<FolderTreeNode, Integer>newHashMap();
         this.updateNumberOfDescendants(parentDestination);
     }
 
@@ -96,7 +98,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
             this.rootElement = super.findRootElement(parentDestination);
         }
         this.preorderTraversal(listNewElements.size());
-        this.folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
+        this.folderDescendantMap = Maps.<FolderTreeNode, Integer>newHashMap();
         this.updateNumberOfDescendants(parentDestination, listNewElements.size());
     }
 
@@ -112,8 +114,8 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     }
 
     /**
-     * 
-     * @return automatically increase the number of descendant +1 
+     *
+     * @return automatically increase the number of descendant +1
      */
     private void updateNumberOfDescendants(GPBeanTreeModel parentDestination) {
         this.updateNumberOfDescendants(parentDestination, 1);

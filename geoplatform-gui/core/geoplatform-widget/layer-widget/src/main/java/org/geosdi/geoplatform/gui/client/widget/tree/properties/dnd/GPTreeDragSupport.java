@@ -77,13 +77,12 @@ public class GPTreeDragSupport implements TreeDragSupport {
     @Override
     public void enableDrag() {
         dragSource.addDNDListener(new DNDListener() {
-
             @Override
             public void dragStart(DNDEvent e) {
                 ModelData sel = tree.getSelectionModel().getSelectedItem();
                 if (tree.getSelectionModel().getSelectedItems().size() > 1
                         || (sel != null && sel == tree.getStore().getRootItems().get(
-                            0))) {
+                        0))) {
                     e.setCancelled(Boolean.TRUE);
                     e.getStatus().setStatus(Boolean.FALSE);
                 } else {
@@ -94,7 +93,6 @@ public class GPTreeDragSupport implements TreeDragSupport {
                             tree.getStore()));
                 }
             }
-
         });
 
         dragSource.addListener(LayerEvents.GP_DRAG_START, gpDNDListener);
@@ -102,7 +100,6 @@ public class GPTreeDragSupport implements TreeDragSupport {
 
         //Listener for launch Drag Lost Events
         Listener listenerDragLost = new Listener() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 ((TreePanelDragSource) be.getSource()).fireEvent(
@@ -111,12 +108,10 @@ public class GPTreeDragSupport implements TreeDragSupport {
                         tree.getStore()));
                 //System.out.println("DragSource: Ho intercettato il drag cancelled");
             }
-
         };
         //Intercepting Drag Lost Events
         dragSource.addListener(Events.DragCancel, listenerDragLost);
         dragSource.addListener(Events.DragEnd, listenerDragLost);
         dragSource.addListener(Events.DragFail, listenerDragLost);
     }
-
 }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.state.LayerStateEnum;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
@@ -55,7 +56,7 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
 
     public enum GPRasterKeyValue {
 
-        OPACITY("opacity");
+        OPACITY(LayerModuleConstants.INSTANCE.RasterTreeNode_opacityText());
         //
         private String value;
 

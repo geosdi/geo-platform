@@ -43,5 +43,4 @@ package org.geosdi.geoplatform.gui.client.widget.tree.properties.dnd;
 public interface TreeDropSupport {
 
     void enableDrop();
-
 }

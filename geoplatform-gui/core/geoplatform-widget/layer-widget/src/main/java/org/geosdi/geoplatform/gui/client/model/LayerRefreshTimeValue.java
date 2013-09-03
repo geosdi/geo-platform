@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import com.google.common.collect.Lists;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.LayerRefreshTimeConstants;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
@@ -46,7 +47,8 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 public class LayerRefreshTimeValue extends GeoPlatformBeanModel {
 
     private static final long serialVersionUID = -1598149409078479846L;
-    public final static List<LayerRefreshTimeValue> refreshTimeList = Lists.newArrayList();
+    public final static List<LayerRefreshTimeValue> refreshTimeList =
+            Lists.<LayerRefreshTimeValue>newArrayList();
 //    public final static String REFRESH_TIME_KEY_LABEL = "refreshTimeKeyLabel";
     public final static String REFRESH_TIME_KEY = "refreshTimeKey";
     public final static int NO_REFRESH_VALUE = -1;
@@ -82,12 +84,19 @@ public class LayerRefreshTimeValue extends GeoPlatformBeanModel {
 
     public enum LayerRefreshTimeEnum {
 
-        NO_REFRESH("NO REFRESH", NO_REFRESH_VALUE), FIVE_SECONDS("5 SECONDS", 5),
-        TEN_SECONDS("10 SECONDS", 10), TWENTY_SECONDS("20 SECONDS", 20),
-        THIRTY_SECONDS("30 SECONDS", 30), FORTY_FIVE_SECONDS("45 SECONDS", 45),
-        ONE_MINUTE("1 MINUTE", 60), FIVE_MINUTES("5 MINUTES", 300),
-        FIFTEEN_MINUTES("15 MINUTES", 900), THIRTY_MINUTES("30 MINUTES", 1800),
-        ONE_HOUR("1 HOUR", 3600), THREE_HOUR("3 HOUR", 10800), SIX_HOUR("6 HOUR", 21600);
+        NO_REFRESH(LayerRefreshTimeConstants.INSTANCE.NO_REFRESH(), NO_REFRESH_VALUE),
+        FIVE_SECONDS(LayerRefreshTimeConstants.INSTANCE.FIVE_SECONDS(), 5),
+        TEN_SECONDS(LayerRefreshTimeConstants.INSTANCE.TEN_SECONDS(), 10),
+        TWENTY_SECONDS(LayerRefreshTimeConstants.INSTANCE.TWENTY_SECONDS(), 20),
+        THIRTY_SECONDS(LayerRefreshTimeConstants.INSTANCE.THIRTY_SECONDS(), 30),
+        FORTY_FIVE_SECONDS(LayerRefreshTimeConstants.INSTANCE.FORTY_FIVE_SECONDS(), 45),
+        ONE_MINUTE(LayerRefreshTimeConstants.INSTANCE.ONE_MINUTE(), 60),
+        FIVE_MINUTES(LayerRefreshTimeConstants.INSTANCE.FIVE_MINUTES(), 300),
+        FIFTEEN_MINUTES(LayerRefreshTimeConstants.INSTANCE.FIFTEEN_MINUTES(), 900),
+        THIRTY_MINUTES(LayerRefreshTimeConstants.INSTANCE.THIRTY_MINUTES(), 1800),
+        ONE_HOUR(LayerRefreshTimeConstants.INSTANCE.ONE_HOUR(), 3600),
+        THREE_HOUR(LayerRefreshTimeConstants.INSTANCE.THREE_HOURS(), 10800),
+        SIX_HOUR(LayerRefreshTimeConstants.INSTANCE.SIX_HOURS(), 21600);
         private String label;
         private int value;
 

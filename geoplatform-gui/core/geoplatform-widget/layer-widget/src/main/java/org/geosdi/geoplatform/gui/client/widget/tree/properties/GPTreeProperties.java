@@ -90,5 +90,4 @@ public class GPTreeProperties implements TreeProperties {
         this.layerTreeWidget = theLayerTreeWidget;
         this.setTreeProperties();
     }
-
 }

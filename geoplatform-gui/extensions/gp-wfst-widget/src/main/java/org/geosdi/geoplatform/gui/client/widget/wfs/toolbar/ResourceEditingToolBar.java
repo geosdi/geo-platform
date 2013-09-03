@@ -46,26 +46,28 @@ import com.google.gwt.resources.client.TextResource;
  */
 public interface ResourceEditingToolBar extends ClientBundle {
 
-    public ResourceEditingToolBar INSTANCE = GWT.create(ResourceEditingToolBar.class);
+    public static final ResourceEditingToolBar INSTANCE = GWT.create(
+            ResourceEditingToolBar.class);
 
     @ClientBundle.Source("css/wfst.css")
     TextResource wfstCss();
 
     @Source("images/info.png")
     ImageResource info();
-    
+
     @Source("images/edit.png")
     ImageResource edit();
-    
+
     @Source("images/reshape.png")
     ImageResource reshape();
-    
+
     @Source("images/rotate.png")
     ImageResource rotate();
-    
+
     @Source("images/drag.png")
     ImageResource drag();
-    
+
     @Source("images/resize.png")
     ImageResource resize();
+
 }

@@ -46,8 +46,8 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public abstract class WFSMapControl extends GPVectorMapControl {
 
-    public WFSMapControl(Vector vector) {
-        super(vector);
+    public WFSMapControl(Vector vector, boolean lazy) {
+        super(vector, lazy);
     }
 
     /**
@@ -56,5 +56,7 @@ public abstract class WFSMapControl extends GPVectorMapControl {
      * @return Control
      */
     public abstract <C extends Control> C getWFSMapControl();
+
+    public abstract void resetWFSMapControl();
 
 }

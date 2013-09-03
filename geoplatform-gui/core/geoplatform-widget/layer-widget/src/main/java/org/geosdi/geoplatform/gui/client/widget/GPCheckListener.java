@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
@@ -103,8 +104,8 @@ public class GPCheckListener implements
                         LayerHandlerManager.fireEvent(
                                 new DisplayLayersProgressBarEvent(false));
                         GeoPlatformMessage.errorMessage(
-                                "Save Check Operation on Folder Error",
-                                "Problems on saving the new tree state after checking folder");
+                                LayerModuleConstants.INSTANCE.GPCheckListener_saveCheckErrorTitleText(),
+                                LayerModuleConstants.INSTANCE.GPCheckListener_saveCheckErrorBodyText());
                     }
                 }
 
@@ -113,7 +114,7 @@ public class GPCheckListener implements
                     IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                     mementoSave.remove(memento);
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Save Check Folder Operation completed successfully.",
+                            LayerModuleConstants.INSTANCE.GPCheckListener_statusSaveCheckSuccessText(),
                             EnumSearchStatus.STATUS_SEARCH.toString());
                     LayerHandlerManager.fireEvent(peekCacheEvent);
                 }

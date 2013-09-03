@@ -72,12 +72,10 @@ public class GPTreeMenuLoader implements TreeMenuLoader {
     @Override
     public void loadMenu() {
         this.tree.addListener(Events.Render, new Listener() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 ClientCommandDispatcher.getInstance().execute(
                         new GPClientCommand<GetCompositeMenuResponse>() {
-
                     private static final long serialVersionUID = 2887781730841655720L;
 
                     {
@@ -104,12 +102,9 @@ public class GPTreeMenuLoader implements TreeMenuLoader {
                         System.out.println("TreeLayer Dynamic Menu "
                                 + "Loading Error : " + exception);
                     }
-
                 });
 
             }
-
         });
     }
-
 }

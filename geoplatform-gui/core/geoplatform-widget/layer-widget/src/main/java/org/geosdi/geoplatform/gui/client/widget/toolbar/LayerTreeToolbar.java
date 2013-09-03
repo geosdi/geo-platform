@@ -87,7 +87,7 @@ public class LayerTreeToolbar extends GPTreeToolbar {
     }
 
     private void addElementsByRegion(TreeToolbarRegion region) {
-        List<ITreeToolbarPlugin> pluginsExcluded = Lists.newArrayList();
+        List<ITreeToolbarPlugin> pluginsExcluded = Lists.<ITreeToolbarPlugin>newArrayList();
 
         for (ITreeToolbarPlugin element : TreeToolbarPluginManager.getToolbarPluginByRegion(
                 region)) {

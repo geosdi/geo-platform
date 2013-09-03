@@ -67,5 +67,4 @@ public class GPTreeCheckChange implements TreeCheckChange {
         tree.addListener(Events.CheckChange, new GPCheckListener(
                 visitorDisplay));
     }
-
 }

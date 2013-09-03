@@ -50,6 +50,7 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.SliderField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode.GPRasterKeyValue;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
@@ -84,7 +85,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         setSliderProperties();
 
         final FieldSet opacityFieldSet = new FieldSet();
-        opacityFieldSet.setHeadingHtml("Layer Opacity");
+        opacityFieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.
+                GPLayerDisplayBinding_opacityHeadingText());
         opacityFieldSet.setCollapsible(true);
 
         opacityFieldSet.addListener(Events.Collapse, new Listener<ComponentEvent>() {
@@ -123,7 +125,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
         slider.addPlugin(createSliderPlugin());
 
-        slider.setMessage("{0}% opacity");
+        slider.setMessage("{0}% " + LayerModuleConstants.INSTANCE.
+                GPLayerDisplayBinding_sliderMessageText());
 
         slider.addListener(Events.Change, new Listener<SliderEvent>() {
             @Override
@@ -132,7 +135,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
             }
         });
 
-        slider.setData("text", "Choose Opacity Value for Layer");
+        slider.setData("text", LayerModuleConstants.INSTANCE.
+                GPLayerDisplayBinding_sliderDataText());
     }
 
     /**
@@ -176,8 +180,10 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
             IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
-            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties((GPLayerTreeModel) GPLayerDisplayBinding.this.getModel());
-            ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).setOpacity(((Integer) val).floatValue() / 100);
+            AbstractMementoOriginalProperties memento = mementoSave.copyOriginalProperties(
+                    (GPLayerTreeModel) GPLayerDisplayBinding.this.getModel());
+            ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).
+                    setOpacity(((Integer) val).floatValue() / 100);
             mementoSave.putOriginalPropertiesInCache(memento);
             opacityEvent.setLayerBean((GPRasterBean) GPLayerDisplayBinding.this.getModel());
             GPHandlerManager.fireEvent(opacityEvent);

@@ -45,5 +45,4 @@ import org.geosdi.geoplatform.gui.client.listener.GPDNDListener;
 public interface GinGPDNDListenerBuilder {
 
     GPDNDListener get();
-
 }

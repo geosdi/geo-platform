@@ -44,6 +44,7 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -85,13 +86,12 @@ public class LayerManagementWidget extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-        setHeadingHtml("GeoPlatform - Layer Widget");
+        setHeadingHtml(LayerModuleConstants.INSTANCE.LayerManagementWidget_headingText());
         setLayout(new BorderLayout());
 
         setLayoutOnChange(true);
 
         addWidgetListener(new WidgetListener() {
-
             @Override
             public void widgetResized(ComponentEvent ce) {
                 if (getHeight() > 0) {

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPLayerStyleBinding;
 import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericTabItem;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -48,7 +49,7 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
 public class StylesLayerTabItem extends GenericTabItem<GPLayerBean> {
 
     public StylesLayerTabItem() {
-        super("Layer Styles");
+        super(LayerModuleConstants.INSTANCE.StylesLayerTabItem_titleText());
         this.subclassCallToInit();
     }
 

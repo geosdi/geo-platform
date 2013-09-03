@@ -54,6 +54,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
@@ -102,7 +104,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     @Override
     public void initSize() {
-        setHeadingHtml("Add KML from direct URL");
+        setHeadingHtml(LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_headingText());
         setSize(330, 170);
     }
 
@@ -115,14 +117,15 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
     @Override
     public void addComponentToForm() {
         super.fieldSet = new FieldSet();
-        super.fieldSet.setHeadingHtml("Load KML from URL");
+        super.fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.
+                LoadKmlFromUrlWidget_fieldSetHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);
         super.fieldSet.setLayout(layout);
 
         urlText = new TextField<String>();
-        urlText.setFieldLabel("URL");
+        urlText.setFieldLabel(LayerModuleConstants.INSTANCE.urlLabelText());
 
         this.addListenerToUrlText();
 
@@ -137,27 +140,27 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
         super.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        buttonAdd = new Button("Add", LayerResources.ICONS.addRasterLayer(),
+        buttonAdd = new Button(ButtonsConstants.INSTANCE.addText(),
+                LayerResources.ICONS.addRasterLayer(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        execute();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                execute();
+            }
+        });
 
         buttonAdd.setEnabled(false);
 
         super.formPanel.addButton(buttonAdd);
 
-        Button buttonCancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
+        Button buttonCancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
+                BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        clearComponents();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                clearComponents();
+            }
+        });
 
         super.formPanel.addButton(buttonCancel);
 
@@ -166,7 +169,6 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     private void addListenerToUrlText() {
         urlText.addListener(Events.OnPaste, new Listener() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 if (checkUrl()) {
@@ -181,7 +183,6 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         });
 
         urlText.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (urlText.getValue() == null) {
@@ -232,7 +233,8 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     @Override
     public void execute() {
-        super.saveStatus.setBusy("Adding KML from URL");
+        super.saveStatus.setBusy(LayerModuleConstants.INSTANCE.
+                LoadKmlFromUrlWidget_statusAddingKMLText());
         parentDestination = this.getTree().getSelectionModel().getSelectedItem();
 //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";    \
 
@@ -249,14 +251,15 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
         clearComponents();
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Added KML on tree succesfully.",
+                LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_statusAddedKMLSuccessText(),
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
     @Override
     public void executeSave(final MementoSaveAddedLayers memento) {
-        MementoSaveOperations.mementoSaveAddedLayer(memento, "KML saved successfully.",
-                "Problems on saving the new tree state after KML creation");
+        MementoSaveOperations.mementoSaveAddedLayer(memento,
+                LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_mementoSuccessMessageText(),
+                LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_mementoFailMessageText());
     }
 
     private boolean checkUrl() {
@@ -275,22 +278,22 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         System.out.println("*** URL encoding:\n" + GPRegEx.printPrettyURL(urlEncoding));
 
         if (!urlEncoding.startsWith("http://")) {
-            suggestion = "URL must be start with \"http://\"";
+            suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionURLStartText();
         } else if (GPRegEx.RE_FUSION_TABLES_URL.test(urlEncoding)) { // URL Fusion Tables
             if (!GPRegEx.RE_FUSION_TABLES_QS_QUERY.test(urlEncoding)) {
-                suggestion = "Query String of Fusion Tables URL is incorrect: check field \"query\"";
+                suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionCheckFieldQueryText();
             } else if (!GPRegEx.RE_FUSION_TABLES_QS_O.test(urlEncoding)) {
-                suggestion = "Query String of Fusion Tables URL is incorrect: check field \"o\"";
+                suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionCheckFieldOText();
             } else if (!GPRegEx.RE_FUSION_TABLES_QS_G.test(urlEncoding)) {
-                suggestion = "Query String of Fusion Tables URL is incorrect: check field \"g\"";
+                suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionCheckFieldGText();
             }
         } else if (!urlEncoding.toUpperCase().endsWith(GPExtensions.KML.toString())) { // URL direct KML
-            suggestion = "URL must refer to KML file";
+            suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionURLMustReferKMLText();
         }
 
         if (suggestion == null) { // No suggestion -> NO syntax error
             check = true;
-            suggestion = "URL syntax is OK";
+            suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionURLOKText();
         }
         System.out.println("*** Suggestion = " + suggestion + "\n### ### ###");
 
@@ -299,16 +302,14 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     private void verifyUrl(final boolean runExecute) {
         LayerRemoteImpl.Util.getInstance().checkKmlUrl(urlEncoding, new AsyncCallback<Boolean>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 buttonAdd.disable();
-                GeoPlatformMessage.errorMessage("Error checking URL",
-                        "An error occurred while making the requested connection.\n"
-                        + "Verify network connections and try again.\n"
-                        + "If the problem persists contact your system administrator.");
+                GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                        errorCheckingURLTitleText(),
+                        LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Error checking the WMS URL.",
+                        LayerModuleConstants.INSTANCE.statusErrorCheckingURLText(),
                         EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 System.out.println("Error checking the WMS URL: " + caught.toString()
                         + " data: " + caught.getMessage());

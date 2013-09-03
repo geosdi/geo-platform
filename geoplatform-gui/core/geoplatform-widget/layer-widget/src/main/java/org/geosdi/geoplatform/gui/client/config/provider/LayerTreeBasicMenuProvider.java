@@ -50,7 +50,6 @@ public class LayerTreeBasicMenuProvider implements Provider<LayerTreeBasicMenu> 
     @Override
     public LayerTreeBasicMenu get() {
         return this.treeBasicMenu = (this.treeBasicMenu == null)
-                                    ? new LayerTreeBasicMenu() : treeBasicMenu;
+                ? new LayerTreeBasicMenu() : treeBasicMenu;
     }
-
 }

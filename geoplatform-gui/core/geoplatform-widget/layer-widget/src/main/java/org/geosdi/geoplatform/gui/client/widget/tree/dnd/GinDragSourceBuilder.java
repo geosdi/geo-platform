@@ -40,7 +40,7 @@ import com.extjs.gxt.ui.client.dnd.TreePanelDragSource;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GinDragSourceBuilder {
 

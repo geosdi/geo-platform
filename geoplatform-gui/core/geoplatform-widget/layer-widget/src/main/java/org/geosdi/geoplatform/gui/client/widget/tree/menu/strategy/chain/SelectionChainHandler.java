@@ -75,5 +75,4 @@ public abstract class SelectionChainHandler {
     public void setSuccessor(SelectionChainHandler successor) {
         this.successor = successor;
     }
-
 }

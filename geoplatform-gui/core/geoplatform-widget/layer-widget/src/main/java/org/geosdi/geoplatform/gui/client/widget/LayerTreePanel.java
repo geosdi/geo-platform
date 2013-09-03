@@ -77,7 +77,6 @@ public class LayerTreePanel extends GeoPlatformContentPanel {
 
         //This code fix a scroll problem on IE9
         super.addScrollListener(new ScrollListener() {
-
             int posV = 0;
 
             /**

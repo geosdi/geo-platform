@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
 
@@ -69,7 +70,7 @@ public class AddVectorLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTre
     @Override
     public void initPlugin(TreePanel treePanel) {
         this.setImage(LayerResources.ICONS.mappAdd().getHTML());
-        this.setTooltip("Adds one or more WFS layers to the tree from the get capabilities");
+        this.setTooltip(LayerModuleConstants.INSTANCE.AddVectorLayerPlugin_tooltipText());
         action = new AddVectorTreeAction(treePanel);
         action.setEnabled(true);
         this.setName(action.getTooltip());
@@ -77,6 +78,6 @@ public class AddVectorLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTre
 
     @Override
     public String getMessageToEnable() {
-        return "Ever enabled";
+        return LayerModuleConstants.INSTANCE.pluginEnabledEverMessageText();
     }
 }

@@ -81,15 +81,14 @@ public class MultiSelectionCompositeKeyBuilder extends SelectionCompositeKeyBuil
 
         return (allSelected) ? new MultiSelectionCompositeKey(
                 MultiSelectionElementType.ALL)
-               : ((compositeSelected) && (leafSelected))
-                 ? new MultiSelectionCompositeKey(
+                : ((compositeSelected) && (leafSelected))
+                ? new MultiSelectionCompositeKey(
                 MultiSelectionElementType.COMPOSITE_LEAF)
-                 : (compositeSelected)
-                   ? new MultiSelectionCompositeKey(
+                : (compositeSelected)
+                ? new MultiSelectionCompositeKey(
                 MultiSelectionElementType.ONLY_COMPOSITE)
-                   : (leafSelected)
-                     ? new MultiSelectionCompositeKey(
+                : (leafSelected)
+                ? new MultiSelectionCompositeKey(
                 MultiSelectionElementType.ONLY_LEAF) : null;
     }
-
 }

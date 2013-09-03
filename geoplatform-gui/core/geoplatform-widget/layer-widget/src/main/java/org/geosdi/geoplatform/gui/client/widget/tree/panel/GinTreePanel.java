@@ -68,29 +68,24 @@ public class GinTreePanel implements GinTreePanelBuilder {
     @Override
     public GPTreePanel get() {
         return tree = (tree == null) ? new GPTreePanel(store) {
-
             {
                 super.setIconProvider(
                         new ModelIconProvider<GPBeanTreeModel>() {
-
                     @Override
                     public AbstractImagePrototype getIcon(
                             GPBeanTreeModel model) {
                         return model.getIcon();
                     }
-
                 });
 
                 super.setLabelProvider(
                         new ModelStringProvider<GPBeanTreeModel>() {
-
                     @Override
                     public String getStringValue(
                             GPBeanTreeModel model,
                             String property) {
                         return model.getLabel();
                     }
-
                 });
             }
 
@@ -98,8 +93,6 @@ public class GinTreePanel implements GinTreePanelBuilder {
             protected boolean hasChildren(ModelData model) {
                 return model instanceof FolderTreeNode || model instanceof GPRootTreeNode;
             }
-
         } : tree;
     }
-
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPFolderInfoBinding;
 import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericTabItem;
@@ -46,11 +47,11 @@ import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericTabItem;
 public class FolderInfoTabItem extends GenericTabItem<FolderTreeNode> {
 
     public FolderInfoTabItem() {
-        super("Folder Info");
+        super(LayerModuleConstants.INSTANCE.FolderInfoTabItem_titleText());
         this.subclassCallToInit();
     }
-    
-        @Override
+
+    @Override
     public final void subclassCallToInit() {
         super.init();
     }

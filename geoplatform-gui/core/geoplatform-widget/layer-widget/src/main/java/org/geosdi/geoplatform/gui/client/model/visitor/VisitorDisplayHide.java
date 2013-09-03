@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -201,7 +201,7 @@ public class VisitorDisplayHide implements IVisitor {
         for (ModelData item : element.getChildren()) {
             GPBeanTreeModel gpBean = (GPBeanTreeModel) item;
             if (gpBean.isChecked() && (gpBean instanceof FolderTreeNode || this.isAllParentsChecked(
-                                       gpBean))) {
+                    gpBean))) {
                 this.isInternalFolderCheck = true;
                 gpBean.setChecked(false);
                 this.treePanel.setChecked(gpBean, true);
@@ -245,7 +245,7 @@ public class VisitorDisplayHide implements IVisitor {
     }
 
     public List<GPBeanTreeModel> getVisibleLayersOnTree() {
-        List<GPBeanTreeModel> visibleLayers = new ArrayList<GPBeanTreeModel>();
+        List<GPBeanTreeModel> visibleLayers = Lists.<GPBeanTreeModel>newArrayList();
         GPRootTreeNode root = (GPRootTreeNode) this.treePanel.getStore().getRootItems().get(
                 0);
         assert (root != null) : "VisitorDisplayHide on getVisibleLayers(): Impossible to retrieve root element";
@@ -280,5 +280,4 @@ public class VisitorDisplayHide implements IVisitor {
     public boolean isCacheableCheck() {
         return isCacheableCheck;
     }
-
 }

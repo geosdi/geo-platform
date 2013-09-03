@@ -56,5 +56,4 @@ public class GPTreeHandlerManager implements TreeHandlerManager {
         TimeoutHandlerManager.addHandler(IGPExpandTreeNodeHandler.TYPE,
                 layerTreeWidget);
     }
-
 }

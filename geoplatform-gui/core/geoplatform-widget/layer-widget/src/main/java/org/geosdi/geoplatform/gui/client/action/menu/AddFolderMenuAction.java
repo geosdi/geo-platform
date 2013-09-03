@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.form.AddFolderWidget;
 
 /**
@@ -51,7 +52,8 @@ public class AddFolderMenuAction extends MenuBaseAction {
     private TreePanel treePanel;
 
     public AddFolderMenuAction(TreePanel theTreePanel) {
-        super("Add Folder", LayerResources.ICONS.addFolder());
+        super(LayerModuleConstants.INSTANCE.AddFolderMenuAction_titleText(),
+                LayerResources.ICONS.addFolder());
         treePanel = theTreePanel;
         addFolder = new AddFolderWidget(treePanel);
     }

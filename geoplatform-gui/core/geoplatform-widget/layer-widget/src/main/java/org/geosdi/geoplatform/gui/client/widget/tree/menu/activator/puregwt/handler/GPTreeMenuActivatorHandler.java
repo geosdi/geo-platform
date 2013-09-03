@@ -46,6 +46,6 @@ import com.google.gwt.event.shared.GwtEvent;
 public interface GPTreeMenuActivatorHandler extends EventHandler {
 
     GwtEvent.Type<GPTreeMenuActivatorHandler> TYPE = new GwtEvent.Type<GPTreeMenuActivatorHandler>();
-    
+
     void activeTreeContextMenu();
 }

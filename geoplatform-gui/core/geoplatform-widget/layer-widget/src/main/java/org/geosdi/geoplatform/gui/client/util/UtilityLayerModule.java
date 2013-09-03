@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class UtilityLayerModule {
 
     public static String getJsonFormat(List<GPBeanTreeModel> layerList) {
-        List<GPLayerBean> layers = Lists.newArrayList();
+        List<GPLayerBean> layers = Lists.<GPLayerBean>newArrayList();
         for (Iterator iterator = layerList.iterator(); iterator.hasNext();) {
             layers.add((GPLayerBean) iterator);
         }

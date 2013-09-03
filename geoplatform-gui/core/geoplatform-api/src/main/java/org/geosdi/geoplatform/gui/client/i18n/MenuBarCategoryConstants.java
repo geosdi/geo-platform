@@ -44,7 +44,7 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
  */
 public interface MenuBarCategoryConstants extends ConstantsWithLookup {
 
-    public MenuBarCategoryConstants INSTANCE = GWT.create(MenuBarCategoryConstants.class);
+    public final static MenuBarCategoryConstants INSTANCE = GWT.create(MenuBarCategoryConstants.class);
 
     @DefaultStringValue("Geo-Platform")
     String geoPlatformText();

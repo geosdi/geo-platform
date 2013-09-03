@@ -43,5 +43,4 @@ package org.geosdi.geoplatform.gui.client.widget.tree.properties.expand;
 public interface TreeExpandListener {
 
     void addExpandListener();
-
 }

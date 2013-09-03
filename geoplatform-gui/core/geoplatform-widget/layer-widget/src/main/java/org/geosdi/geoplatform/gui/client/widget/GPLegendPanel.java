@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.legend.GPLegendWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -70,7 +71,7 @@ public class GPLegendPanel extends GeoPlatformContentPanel implements
 
     @Override
     public void setPanelProperties() {
-        setHeadingHtml("GeoPlatform - Legend Widget");
+        setHeadingHtml(LayerModuleConstants.INSTANCE.GPLegendPanel_headingText());
         setScrollMode(Scroll.AUTOY);
 
         LayerHandlerManager.addHandler(LegendLayerHandler.TYPE, this);

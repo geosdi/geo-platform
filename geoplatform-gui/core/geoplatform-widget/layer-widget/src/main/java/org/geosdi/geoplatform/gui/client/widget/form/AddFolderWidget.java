@@ -51,6 +51,9 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.status.SaveStatusConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
@@ -105,14 +108,16 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
-        this.fieldSet.setHeadingHtml("Folder Name");
+        this.fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.
+                AddFolderWidget_fieldSetHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);
         fieldSet.setLayout(layout);
 
         this.folderText = new TextField<String>();
-        this.folderText.setFieldLabel("Folder");
+        this.folderText.setFieldLabel(LayerModuleConstants.INSTANCE.
+                AddFolderWidget_folderLabelText());
 
         this.folderText.addKeyListener(new KeyListener() {
             @Override
@@ -152,7 +157,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        save = new Button("Create", LayerResources.ICONS.addFolder(),
+        save = new Button(ButtonsConstants.INSTANCE.createText(), LayerResources.ICONS.addFolder(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -164,7 +169,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         this.formPanel.addButton(save);
 
-        this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
+        this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(), 
+                BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -179,7 +185,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
     @Override
     public void initSize() {
-        setHeadingHtml("Add Folder");
+        setHeadingHtml(LayerModuleConstants.INSTANCE.AddFolderWidget_headingText());
         setSize(330, 170);
     }
 
@@ -191,7 +197,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
     @Override
     public void execute() {
-        this.saveStatus.setBusy("Adding Folder");
+        this.saveStatus.setBusy(LayerModuleConstants.INSTANCE.
+                AddFolderWidget_statusAddingFolderText());
         this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
 //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
         this.entity = new FolderTreeNode(this.folderText.getValue());
@@ -210,7 +217,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         clearComponents();
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Added folder on tree succesfully.",
+                LayerModuleConstants.INSTANCE.AddFolderWidget_statusAddedFolderSuccessText(),
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
@@ -258,9 +265,10 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                 } else {
                     LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
                     setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-                            EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
-                    GeoPlatformMessage.errorMessage("Save Folder Error",
-                            "Problems on saving the new tree state after folder creation");
+                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE_ERROR().toString());
+                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                            AddFolderWidget_saveFolderErrorTitleText(),
+                            LayerModuleConstants.INSTANCE.AddFolderWidget_saveFolderErrorBodyText());
                 }
             }
 
@@ -269,7 +277,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                 IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                 mementoSave.remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Folders saved successfully.",
+                        LayerModuleConstants.INSTANCE.AddFolderWidget_statusSaveFolderSuccessText(),
                         EnumSearchStatus.STATUS_SEARCH.toString());
                 MementoFolder mementoAdded = memento.getAddedFolder();
                 mementoAdded.getRefBaseElement().setId(result);

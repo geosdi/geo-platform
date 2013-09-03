@@ -54,5 +54,4 @@ public class GPTreeMenuActivatorEvent extends GwtEvent<GPTreeMenuActivatorHandle
     protected void dispatch(GPTreeMenuActivatorHandler handler) {
         handler.activeTreeContextMenu();
     }
-
 }

@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -59,10 +60,10 @@ public class DeleteRequestManager {
     }
 
     public void processRequest() {
-        GeoPlatformMessage.confirmMessage("Delete Layer",
-                "Are you sure you want to delete the selected element(s)?",
+        GeoPlatformMessage.confirmMessage(LayerModuleConstants.INSTANCE.
+                DeleteRequestManager_confirmDeleteTitleText(),
+                LayerModuleConstants.INSTANCE.DeleteRequestManager_confirmDeleteBodyText(),
                 new Listener<MessageBoxEvent>() {
-
             @Override
             public void handleEvent(MessageBoxEvent be) {
                 if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {

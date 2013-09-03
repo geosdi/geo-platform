@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.LayerModuleInjector;
 import org.geosdi.geoplatform.gui.client.widget.progressbar.GPLayerProgressBar;
 

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPLayerInfoBinding;
 import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericTabItem;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -42,12 +43,12 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class LayersInfoTabItem extends GenericTabItem<GPLayerBean> {
 
     public LayersInfoTabItem() {
-        super("Layer Info");
+        super(LayerModuleConstants.INSTANCE.LayersInfoTabItem_titleText());
         this.subclassCallToInit();
     }
 

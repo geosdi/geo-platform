@@ -47,5 +47,4 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public interface GPSelectionChainManager {
 
     Menu bindSelection(List<GPBeanTreeModel> selections);
-
 }

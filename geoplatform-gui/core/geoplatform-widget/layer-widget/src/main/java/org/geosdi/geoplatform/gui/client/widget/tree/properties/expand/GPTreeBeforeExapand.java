@@ -43,6 +43,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.event.GPExpandTreeNodeEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -79,7 +80,6 @@ public class GPTreeBeforeExapand implements TreeBeforeExpand {
     public void beforeExpand() {
         tree.addListener(Events.BeforeExpand,
                 new Listener<TreePanelEvent<ModelData>>() {
-
             @Override
             public void handleEvent(TreePanelEvent<ModelData> be) {
                 if ((be.getItem() instanceof FolderTreeNode)
@@ -88,12 +88,11 @@ public class GPTreeBeforeExapand implements TreeBeforeExpand {
                     final FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
                     parentFolder.setLoading(Boolean.TRUE);
                     LayoutManager.getInstance().getStatusMap().setBusy(
-                            "Loading tree elements: please, wait untill contents fully loads.");
+                            LayerModuleConstants.INSTANCE.statusLoadingTreeElementsText());
 
                     LayerRemoteImpl.Util.getInstance().loadFolderElements(
                             parentFolder.getId(),
                             new AsyncCallback<ArrayList<IGPFolderElements>>() {
-
                         @Override
                         public void onFailure(Throwable caught) {
                             if (caught.getCause() instanceof GPSessionTimeout) {
@@ -101,12 +100,10 @@ public class GPTreeBeforeExapand implements TreeBeforeExpand {
                                         new GPExpandTreeNodeEvent(parentFolder)));
                             } else {
                                 parentFolder.setLoading(Boolean.FALSE);
-                                GeoPlatformMessage.errorMessage("Error loading",
-                                        "An error occurred while making the requested connection.\n"
-                                        + "Verify network connections and try again.\n"
-                                        + "If the problem persists contact your system administrator.");
+                                GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorLoadingTitleText(),
+                                        LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
                                 LayoutManager.getInstance().getStatusMap().setStatus(
-                                        "Error loading tree elements.",
+                                        LayerModuleConstants.INSTANCE.statusErrorLoadingTreeElementsText(),
                                         SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                                 System.out.println(
                                         "Error loading tree elements: " + caught.toString()
@@ -120,15 +117,12 @@ public class GPTreeBeforeExapand implements TreeBeforeExpand {
                             treeBuilder.insertElementsOnTree(
                                     parentFolder, result);
                             LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Tree elements loaded successfully.",
+                                    LayerModuleConstants.INSTANCE.statusSuccessLoadingTreeElementsText(),
                                     SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
                         }
-
                     });
                 }
             }
-
         });
     }
-
 }

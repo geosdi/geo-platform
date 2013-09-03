@@ -64,6 +64,9 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerDimensionRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerDimensionResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
@@ -93,7 +96,6 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
     public final static String LAYER_TIME_DELIMITER = " - [";
     private final static short WIDGET_HEIGHT = 230;
     private final static short WIDGET_WIDTH = 400;
-    private final static String TIME_FILTER_HEADING = "TIME FILTER EDITOR";
     private final TimeFilterLayerMapEvent timeFilterLayerMapEvent = new TimeFilterLayerMapEvent();
     private final GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
     private NumberField startFilterNumberField;
@@ -125,11 +127,14 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
     @Override
     public void addComponent() {
         this.dimensionRadioGroup = new RadioGroup();
-        this.dimensionRadioGroup.setFieldLabel("Dimension strategy");
-        fixedDimensionRadio.setBoxLabel("Fixed Dimension");
+        this.dimensionRadioGroup.setFieldLabel(LayerModuleConstants.INSTANCE.
+                LayerTimeFilterWidget_dimensionRadioLabelText());
+        fixedDimensionRadio.setBoxLabel(LayerModuleConstants.INSTANCE.
+                LayerTimeFilterWidget_fixedDimensionRadioLabelText());
         fixedDimensionRadio.setHideLabel(Boolean.TRUE);
         this.dimensionRadioGroup.add(fixedDimensionRadio);
-        variableDimensionRadio.setBoxLabel("Variable Dimension");
+        variableDimensionRadio.setBoxLabel(LayerModuleConstants.INSTANCE.
+                LayerTimeFilterWidget_variableDimensionRadioLabelText());
         variableDimensionRadio.setHideLabel(Boolean.TRUE);
         this.dimensionRadioGroup.add(variableDimensionRadio);
         this.fixedDimensionContainer.setVisible(Boolean.FALSE);
@@ -155,7 +160,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
         this.startStore = new ListStore<DimensionData>();
         this.startDimensionComboBox = new ComboBox<DimensionData>();
-        this.startDimensionComboBox.setFieldLabel("Start Fixed dimension");
+        this.startDimensionComboBox.setFieldLabel(LayerModuleConstants.INSTANCE.
+                LayerTimeFilterWidget_startDimensionComboLabelText());
         this.startDimensionComboBox.setStore(this.startStore);
         this.startDimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
         this.startDimensionComboBox.setEditable(Boolean.FALSE);
@@ -180,14 +186,16 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         });
         this.endStore = new ListStore<DimensionData>();
         this.endDimensionComboBox = new ComboBox<DimensionData>();
-        this.endDimensionComboBox.setFieldLabel("End Fixed dimension");
+        this.endDimensionComboBox.setFieldLabel(LayerModuleConstants.INSTANCE.
+                LayerTimeFilterWidget_endDimensionComboLabelText());
         this.endDimensionComboBox.setStore(this.endStore);
         this.endDimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
         this.endDimensionComboBox.disable();
         this.endDimensionComboBox.setEditable(Boolean.FALSE);
         dimensionSizeLabel = new Label();
         dimensionSizeLabel.setStyleAttribute("font-size", "12px");
-        Label startFilterLabel = new Label("T1");
+        Label startFilterLabel = new Label(LayerModuleConstants.INSTANCE.
+                LayerTimeFilterWidget_startFieldLabelText());
         startFilterLabel.setStyleAttribute("font-size", "1.8em");
         startFilterLabel.setStyleAttribute("background-color", "green");
         startFilterLabel.setStyleAttribute("color", "#fff");
@@ -230,7 +238,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.startFilterNumberField.setSize(50, 30);
         this.endFilterNumberField = new NumberField();
         this.endFilterNumberField.setFireChangeEventOnSetValue(Boolean.TRUE);
-        Label endFilterLabel = new Label("T2");
+        Label endFilterLabel = new Label(LayerModuleConstants.INSTANCE.
+                LayerTimeFilterWidget_endFieldLabelText());
         endFilterLabel.setStyleAttribute("font-size", "1.8em");
         endFilterLabel.setStyleAttribute("background-color", "red");
         endFilterLabel.setStyleAttribute("color", "#fff");
@@ -328,8 +337,10 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                     endFilterNumberField.setValue(fieldValue);
                     applyFilterSelectionListener.componentSelected(ce);
                 } else if (fieldValue + 1 >= startFieldValue) {
-                    GeoPlatformMessage.alertMessage("Dimension Warning",
-                            "The T2 time must be lesser than T1 time");
+                    GeoPlatformMessage.alertMessage(LayerModuleConstants.INSTANCE.
+                            LayerTimeFilterWidget_dimensionWarningTitleText(),
+                            LayerModuleConstants.INSTANCE.
+                            LayerTimeFilterWidget_dimensionWarningBodyText());
                 }
             }
         });
@@ -359,24 +370,28 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         panel.add(this.variableDimensionContainer, new FormData("100%"));
         super.add(panel);
 
-        this.shuffleButton = new ToggleButton("Shuffle", LayerResources.ICONS.shuffleTime());
+        this.shuffleButton = new ToggleButton(ButtonsConstants.INSTANCE.shuffleText(),
+                LayerResources.ICONS.shuffleTime());
         shuffleButton.setHeight(30);
         super.addButton(shuffleButton);
 
-        playButton = new ToggleButton("Play", LayerResources.ICONS.playTime());
+        playButton = new ToggleButton(ButtonsConstants.INSTANCE.playText(),
+                LayerResources.ICONS.playTime());
         this.playSelectioListener = new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 System.out.println("Play button status: ");
                 if (!playButton.isPressed()) {
-                    playButton.setText("Play");
+                    playButton.setText(ButtonsConstants.INSTANCE.playText());
                     playButton.setIcon(LayerResources.ICONS.playTime());
                     animationTimer.cancel();
                 } else {
                     Number startValueNumber = startFilterNumberField.getValue();
                     if (startValueNumber == null) {
-                        GeoPlatformMessage.alertMessage("Time Filter Warning",
-                                "Impossible to show time sequence, the T1 time must be set");
+                        GeoPlatformMessage.alertMessage(LayerModuleConstants.INSTANCE.
+                                LayerTimeFilterWidget_timeFilterWarningTitleText(),
+                                LayerModuleConstants.INSTANCE.
+                                LayerTimeFilterWidget_timeFilterWarningBodyText());
                     } else {
                         Number endValueNumber = endFilterNumberField.getValue();
                         int endValue = -1;
@@ -384,7 +399,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                             endValue = endValueNumber.intValue();
                         }
                         playButton.setIcon(LayerResources.ICONS.pauseTime());
-                        playButton.setText("Pause");
+                        playButton.setText(ButtonsConstants.INSTANCE.pauseText());
                         playTimeFilter(endValue);
                     }
                 }
@@ -394,7 +409,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         playButton.setHeight(30);
         super.addButton(playButton);
 
-        Button apply = new Button("Apply");
+        Button apply = new Button(ButtonsConstants.INSTANCE.applyText());
         this.applyFilterSelectionListener = new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -425,18 +440,25 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                     if (fromFilter < 0 || fromFilter > startStore.getModels().size() - 1
                             || (toFilter != null && (toFilter.intValue() >= fromFilter
                             || toFilter.intValue() < 0))) {
-                        GeoPlatformMessage.errorMessage("Time Filter Error", "Incorrect Position time, you must specify a valid position in size range");
+                        GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                                LayerTimeFilterWidget_timeFilterErrorTitleText(),
+                                LayerModuleConstants.INSTANCE.
+                                LayerTimeFilterWidget_timeFilterErrorBodyText());
                         return;
                     } else {
                         String timeFilter = "" + startFilterNumberField.getValue().intValue();
-                        String variableTimeFilter = (String) startStore.getModels().get(startStore.getModels().size() - fromFilter - 1).get(DimensionData.DIMENSION_KEY);
+                        String variableTimeFilter = (String) startStore.getModels().get(
+                                startStore.getModels().size() - fromFilter - 1).get(DimensionData.DIMENSION_KEY);
                         if (endFilterNumberField.getValue() != null) {
                             timeFilter += "/" + endFilterNumberField.getValue().intValue();
-                            variableTimeFilter += "/" + (String) startStore.getModels().get(startStore.getModels().size() - toFilter.intValue() - 1).get(DimensionData.DIMENSION_KEY);
+                            variableTimeFilter += "/" + (String) startStore.getModels().get(
+                                    startStore.getModels().size() - toFilter.intValue() - 1).get(
+                                    DimensionData.DIMENSION_KEY);
                         }
                         layerSelected.setTimeFilter(timeFilter);
                         layerSelected.setVariableTimeFilter(variableTimeFilter);
-                        layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getVariableTimeFilter() + "]");
+                        layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER
+                                + layerSelected.getVariableTimeFilter() + "]");
                         WidgetPropertiesHandlerManager.fireEvent(labelEvent);
                     }
                 }
@@ -450,7 +472,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         apply.addSelectionListener(applyFilterSelectionListener);
 
         super.addButton(apply);
-        Button close = new Button("Close",
+        Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -537,7 +559,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
             @Override
             public void onCommandSuccess(GetLayerDimensionResponse response) {
                 List<String> dimensionList = Lists.<String>newArrayList(response.getResult().split(","));
-                dimensionSizeLabel.setHtml("Dimension Size: " + dimensionList.size());
+                dimensionSizeLabel.setHtml(LayerModuleMessages.INSTANCE.
+                        LayerTimeFilterWidget_dimensionSizeHTMLMessage(dimensionList.size()));
                 dimensionSizeLabel.setStyleAttribute("font-size", "1.3em");
                 dimensionSizeLabel.setStyleAttribute("text-align", "right");
                 startStore.removeAll();
@@ -555,12 +578,11 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                 if (exception.getCause() instanceof GPSessionTimeout) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(null));
                 } else {
-                    GeoPlatformMessage.errorMessage("Error Loading Time Filter",
-                            "An error occurred while making the requested connection.\n"
-                            + "Verify network connections and try again."
-                            + "\nIf the problem persists contact your system administrator.");
+                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                            LayerTimeFilterWidget_timeFilterErrorTitleText(),
+                            LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Error Loading Time Filter",
+                            LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_statusTimeFilterErrorLoadingText(),
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                     System.out.println("Error Loading Time Filter: " + exception.toString()
                             + " data: " + exception.getMessage());
@@ -606,7 +628,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml(TIME_FILTER_HEADING);
+        super.setHeadingHtml(LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_timeFilderHeadingText());
         super.setLayout(new FormLayout());
         super.setModal(Boolean.TRUE);
     }

@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
@@ -70,8 +71,9 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
     private SaveTreeToolbarPlugin savePlugin;
 
     public SaveTreeAction(TreePanel theTree, SaveTreeToolbarPlugin savePlugin) {
-        super(theTree, BasicWidgetResources.ICONS.save(), "Save Tree State");
-        displayEvent.setMessage("Saving Operations On Service");
+        super(theTree, BasicWidgetResources.ICONS.save(),
+                LayerModuleConstants.INSTANCE.SaveTreeAction_tooltipText());
+        displayEvent.setMessage(LayerModuleConstants.INSTANCE.savingOperationsText());
         TimeoutHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
         LayerHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
 

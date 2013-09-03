@@ -86,14 +86,11 @@ public class GPTreeDropSupport implements TreeDropSupport {
         store.addListener(Store.Add, gpDNDListener);
         //Important code to fix problem with D&D scroll support
         tree.addListener(Events.Render, new Listener() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 dropTarget.getScrollSupport().setScrollElement(
                         LayerModuleInjector.MainInjector.getInstance().getLayerTreePanel().getLayoutTarget());
             }
-
         });
     }
-
 }

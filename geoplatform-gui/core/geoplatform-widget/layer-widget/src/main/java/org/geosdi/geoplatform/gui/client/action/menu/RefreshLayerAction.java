@@ -39,6 +39,9 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue.LayerRefreshTimeEnum;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -88,12 +91,10 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
 
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error Reloading",
-                        "An error occurred while making the requested connection.\n"
-                        + "Verify network connections and try again."
-                        + "\nIf the problem persists contact your system administrator.");
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorReloadingTitleText(),
+                        LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Error setting the reload time",
+                        LayerModuleConstants.INSTANCE.RefreshLayerAction_statusReloadTimeErrorText(),
                         SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 System.out.println(
                         "Error setting the reload time for layer: " + caught.toString()
@@ -104,11 +105,12 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
             public void onSuccess(Object result) {
                 if (refreshTimeEnum.getValue() != LayerRefreshTimeValue.NO_REFRESH_VALUE) {
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "The Layer will be reloaded every " + refreshTimeEnum.getValue() + " seconds",
+                            LayerModuleMessages.INSTANCE.
+                            RefreshLayerAction_statusReloadTimeInfoMessage(refreshTimeEnum.getValue()),
                             SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
                 } else {
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "The Layer will not be reloaded any more",
+                            LayerModuleConstants.INSTANCE.RefreshLayerAction_statusStopReloadTimeText(),
                             SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
                 }
                 layerSelected.setRefreshTime(refreshTimeEnum.getValue());

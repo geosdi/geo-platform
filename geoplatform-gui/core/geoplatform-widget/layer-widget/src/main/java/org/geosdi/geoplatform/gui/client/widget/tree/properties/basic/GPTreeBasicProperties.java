@@ -81,14 +81,12 @@ public class GPTreeBasicProperties implements TreeBasicProperties {
 
         tree.getSelectionModel().addSelectionChangedListener(
                 new SelectionChangedListener<GPBeanTreeModel>() {
-
             @Override
             public void selectionChanged(
                     SelectionChangedEvent<GPBeanTreeModel> se) {
                 MediatorToolbarTreeAction.getInstance().elementChanged(
                         se.getSelection());
             }
-
         });
 
         tree.setAutoHeight(Boolean.TRUE);
@@ -97,5 +95,4 @@ public class GPTreeBasicProperties implements TreeBasicProperties {
 
         tree.setContextMenu(this.basicMenu.getBasicMenu());
     }
-
 }

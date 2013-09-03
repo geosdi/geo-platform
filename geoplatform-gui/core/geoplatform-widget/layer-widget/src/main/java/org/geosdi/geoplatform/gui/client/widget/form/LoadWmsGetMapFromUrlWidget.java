@@ -48,17 +48,21 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
@@ -94,7 +98,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     private GPBeanTreeModel parentDestination;
     private GPLayerExpander expander;
     //
-    private Map<String, String> fieldMap = new HashMap<String, String>(); // TODO <GetMap, String> --> booolean GetMap.valid(String field)
+    private Map<String, String> fieldMap = Maps.<String, String>newHashMap(); // TODO <GetMap, String> --> booolean GetMap.valid(String field)
     private String urlEncoding = "";
     private String suggestion = "";
 
@@ -112,14 +116,15 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
-        this.fieldSet.setHeadingHtml("WMS GetMap URL");
+        this.fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.
+                LoadWmsGetMapFromUrlWidget_fieldSetHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);
         fieldSet.setLayout(layout);
 
         this.urlText = new TextField<String>();
-        this.urlText.setFieldLabel("URL");
+        this.urlText.setFieldLabel(LayerModuleConstants.INSTANCE.urlLabelText());
 
         this.addListenerToUrlText();
 
@@ -134,7 +139,8 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         this.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        this.save = new Button("Add", LayerResources.ICONS.addRasterLayer(),
+        this.save = new Button(ButtonsConstants.INSTANCE.addText(),
+                LayerResources.ICONS.addRasterLayer(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -146,7 +152,8 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         this.formPanel.addButton(save);
 
-        this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
+        this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
+                BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -205,7 +212,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
     @Override
     public void initSize() {
-        setHeadingHtml("Add WMS from GetMap direct URL");
+        setHeadingHtml(LayerModuleConstants.INSTANCE.LoadWmsGetMapFromUrlWidget_headingText());
         setSize(330, 170);
     }
 
@@ -217,7 +224,8 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
     @Override
     public void execute() {
-        this.saveStatus.setBusy("Adding WMS from URL");
+        this.saveStatus.setBusy(LayerModuleConstants.INSTANCE.
+                LoadWmsGetMapFromUrlWidget_statusAddingWMSText());
         this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
 //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";    
 
@@ -237,7 +245,8 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         clearComponents();
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Added WMS on tree succesfully.",
+                LayerModuleConstants.INSTANCE.
+                LoadWmsGetMapFromUrlWidget_statusAddedWMSSuccessText(),
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
@@ -271,7 +280,8 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     @Override
     public void executeSave(final MementoSaveAddedLayers memento) {
         MementoSaveOperations.mementoSaveAddedLayer(memento,
-                "WMS saved successfully.", "Problems on saving the new tree state after WMS creation");
+                LayerModuleConstants.INSTANCE.LoadWmsGetMapFromUrlWidget_mementoSuccessMessageText(),
+                LayerModuleConstants.INSTANCE.LoadWmsGetMapFromUrlWidget_mementoFailMessageText());
     }
 
     private void retrieveDataFromQueryString() {
@@ -314,27 +324,35 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 //        System.out.println("*** URL re-encoding:\n" + urlEncoding + "\n");
 
         if (!urlEncoding.startsWith("http://")) {
-            suggestion = "URL must be start with \"http://\"";
+            suggestion = LayerModuleConstants.INSTANCE.LoadWmsGetMapFromUrlWidget_suggestionURLStartText();
 //        } else if (!url.contains("/wms?")) { // TODO DEL ?
 //            suggestion = "URL must contain \"/wms?\"";
         } else if (!GPRegEx.RE_REQUEST.test(urlEncoding)) {
-            suggestion = "Query String must have \"" + GetMap.REQUEST + "=GetMap\"";
+            suggestion = LayerModuleMessages.INSTANCE.
+                    LoadWmsGetMapFromUrlWidget_suggestionCheckGetMapRequestMessage(GetMap.REQUEST.toString());
         } else if (!GPRegEx.RE_VERSION.test(urlEncoding)) {
-            suggestion = "Query String must have \"" + GetMap.VERSION + "=1.0.0, 1.1.0, or 1.1.1\"";
+            suggestion = LayerModuleMessages.INSTANCE.
+                    LoadWmsGetMapFromUrlWidget_suggestionCheckGetMapVersionMessage(GetMap.VERSION.toString());
         } else if (!GPRegEx.RE_LAYERS.test(urlEncoding)) {
-            suggestion = "Query String must have \"" + GetMap.LAYERS + "=value[,value,...]\"";
+            suggestion = LayerModuleMessages.INSTANCE.
+                    LoadWmsGetMapFromUrlWidget_suggestionCheckGetMapLayersMessage(GetMap.LAYERS.toString());
         } else if (!GPRegEx.RE_SRS.test(urlEncoding)) {
-            suggestion = "Query String must have \"" + GetMap.SRS + "=EPSG:id_code\"";
+            suggestion = LayerModuleMessages.INSTANCE.
+                    LoadWmsGetMapFromUrlWidget_suggestionCheckGetMapSRSMessage(GetMap.SLD.toString());
         } else if (!GPRegEx.RE_BBOX.test(urlEncoding)) {
-            suggestion = "Query String must have \"" + GetMap.BBOX + "=minx,miny,maxx,maxy\"";
+            suggestion = LayerModuleMessages.INSTANCE.
+                    LoadWmsGetMapFromUrlWidget_suggestionCheckGetMapBBOXMessage(GetMap.BBOX.toString());
         } else if (!GPRegEx.RE_WIDTH.test(urlEncoding)) {
-            suggestion = "Query String must have \"" + GetMap.WIDTH + "=output_width\"";
+            suggestion = LayerModuleMessages.INSTANCE.
+                    LoadWmsGetMapFromUrlWidget_suggestionCheckGetMapWidthMessage(GetMap.WIDTH.toString());
         } else if (!GPRegEx.RE_HEIGHT.test(urlEncoding)) {
-            suggestion = "Query String must have \"" + GetMap.HEIGHT + "=output_height\"";
+            suggestion = LayerModuleMessages.INSTANCE.
+                    LoadWmsGetMapFromUrlWidget_suggestionCheckGetMapHeightMessage(GetMap.HEIGHT.toString());
         } else if (!GPRegEx.RE_FORMAT.test(urlEncoding)) {
-            suggestion = "Query String must have \"" + GetMap.FORMAT + "=image/(png|gif|jpeg)\"";
+            suggestion = LayerModuleMessages.INSTANCE.
+                    LoadWmsGetMapFromUrlWidget_suggestionCheckGetMapFormatMessage(GetMap.FORMAT.toString());
         } else {
-            suggestion = "WMS URL is Syntactically Correct";
+            suggestion = LayerModuleConstants.INSTANCE.LoadWmsGetMapFromUrlWidget_suggestionURLOKText();
             check = true;
         }
         System.out.println("*** Suggestion = " + suggestion);
@@ -347,12 +365,10 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
             @Override
             public void onFailure(Throwable caught) {
                 save.disable();
-                GeoPlatformMessage.errorMessage("Error checking URL",
-                        "An error occurred while making the requested connection.\n"
-                        + "Verify network connections and try again.\n"
-                        + "If the problem persists contact your system administrator.");
+                GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorCheckingURLTitleText(),
+                        LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Error checking the WMS URL.",
+                        LayerModuleConstants.INSTANCE.statusErrorCheckingURLText(),
                         EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 System.out.println("Error checking the WMS URL: " + caught.toString()
                         + " data: " + caught.getMessage());
@@ -377,7 +393,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     private List<GPBeanTreeModel> createRasterList() {
-        List<GPBeanTreeModel> rasterList = new ArrayList<GPBeanTreeModel>();
+        List<GPBeanTreeModel> rasterList = Lists.<GPBeanTreeModel>newArrayList();
 
         String layersValue = fieldMap.get(GetMap.LAYERS.toString());
         if (layersValue.contains(",")) { // More than one raster
@@ -431,7 +447,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     private ArrayList<GPStyleStringBeanModel> mapStyles() {
-        ArrayList<GPStyleStringBeanModel> styleList = new ArrayList<GPStyleStringBeanModel>();
+        ArrayList<GPStyleStringBeanModel> styleList = Lists.<GPStyleStringBeanModel>newArrayList();
 
         String stylesValue = fieldMap.get(GetMap.STYLES.toString());
         if (stylesValue != null && stylesValue.length() > 0) {

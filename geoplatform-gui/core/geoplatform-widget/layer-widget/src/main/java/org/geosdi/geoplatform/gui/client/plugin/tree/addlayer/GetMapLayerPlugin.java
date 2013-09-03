@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.LoadWmsGetMapFromUrlTreeAction;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
 
@@ -73,13 +74,13 @@ public class GetMapLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAc
     @Override
     public void initPlugin(TreePanel treePanel) {
         this.setImage(LayerResources.ICONS.mappAdd().getHTML());
-        this.setTooltip("Adds one or more WMS layers to the tree from Get Map direct URL");
+        this.setTooltip(LayerModuleConstants.INSTANCE.GetMapLayerPlugin_tooltipText());
         action = new LoadWmsGetMapFromUrlTreeAction(treePanel);
         this.setName(action.getTooltip());
     }
 
     @Override
     public String getMessageToEnable() {
-        return "Enabled only on Folder Selected";
+        return LayerModuleConstants.INSTANCE.GetMapLayerPlugin_pluginMessageToEnableText();
     }
 }

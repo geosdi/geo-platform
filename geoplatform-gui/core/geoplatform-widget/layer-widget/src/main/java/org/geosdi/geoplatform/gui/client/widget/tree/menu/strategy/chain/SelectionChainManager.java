@@ -64,5 +64,4 @@ public class SelectionChainManager implements GPSelectionChainManager {
     public String toString() {
         return "SelectionChainManager{" + "singleSelection=" + singleSelection + '}';
     }
-
 }

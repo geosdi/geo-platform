@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.form;
 
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
@@ -68,7 +69,7 @@ public class GPProjectManagementWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml("GeoPlatform Project Management");
+        super.setHeadingHtml(LayerModuleConstants.INSTANCE.GPProjectManagementWidget_headingText());
     }
 
     public void showSharingPanel(GPClientProject clientProject) {

@@ -61,7 +61,7 @@ public class VisitorPosition extends AbstractVisitTree
     private GPBeanTreeModel startPosition;
     private GPBeanTreeModel endPosition;
     private GPBeanTreeModel tmpElement;
-    private Map<FolderTreeNode, Integer> folderDescendantMap = Maps.newHashMap();
+    private Map<FolderTreeNode, Integer> folderDescendantMap = Maps.<FolderTreeNode, Integer>newHashMap();
 
     public void fixPosition(GPBeanTreeModel changedElement,
             GPBeanTreeModel parentDestination, int newIndex) {

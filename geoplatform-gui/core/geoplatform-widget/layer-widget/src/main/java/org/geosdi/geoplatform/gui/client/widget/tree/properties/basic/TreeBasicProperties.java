@@ -43,5 +43,4 @@ package org.geosdi.geoplatform.gui.client.widget.tree.properties.basic;
 public interface TreeBasicProperties {
 
     void setTreeBasicProperties();
-
 }

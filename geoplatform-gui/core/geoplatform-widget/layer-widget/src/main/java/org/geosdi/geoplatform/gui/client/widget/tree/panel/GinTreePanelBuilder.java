@@ -45,5 +45,4 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 public interface GinTreePanelBuilder {
 
     GPTreePanel get();
-
 }

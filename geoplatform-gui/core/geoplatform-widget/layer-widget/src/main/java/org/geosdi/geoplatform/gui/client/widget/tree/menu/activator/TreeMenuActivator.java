@@ -46,5 +46,4 @@ import org.geosdi.geoplatform.gui.client.widget.tree.menu.activator.puregwt.hand
 public interface TreeMenuActivator extends GPTreeMenuActivatorHandler {
 
     HandlerRegistration addTreeMenuActivatorHandler();
-
 }

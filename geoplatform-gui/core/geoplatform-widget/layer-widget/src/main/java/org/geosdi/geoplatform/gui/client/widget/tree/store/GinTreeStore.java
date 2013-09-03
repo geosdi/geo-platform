@@ -57,12 +57,9 @@ public class GinTreeStore implements GinTreeStoreBuilder {
     @Override
     public GPTreeStore get() {
         return store = (store == null) ? new GPTreeStore() {
-
             {
                 super.setKeyProvider(new GPModelKeyProvider());
             }
-
         } : store;
     }
-
 }

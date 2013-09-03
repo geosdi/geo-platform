@@ -54,5 +54,4 @@ public class SingleSelectionCompositeKeyBuilder extends SelectionCompositeKeyBui
         return new SingleSelectionCompositeKey(
                 selections.get(0).getTreeCompositeType());
     }
-
 }

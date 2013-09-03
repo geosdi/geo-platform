@@ -45,7 +45,7 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
  */
 public interface BaseMenuGenericToolConstants extends ConstantsWithLookup {
 
-    public BaseMenuGenericToolConstants INSTANCE = GWT.create(BaseMenuGenericToolConstants.class);
+    public final static BaseMenuGenericToolConstants INSTANCE = GWT.create(BaseMenuGenericToolConstants.class);
 
     //Menu voices
     @DefaultStringValue("About")

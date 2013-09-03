@@ -65,5 +65,4 @@ public class GPTreeExpandListener implements TreeExpandListener {
         this.treeExpand.expand();
         this.treeCollapse.collapse();
     }
-
 }

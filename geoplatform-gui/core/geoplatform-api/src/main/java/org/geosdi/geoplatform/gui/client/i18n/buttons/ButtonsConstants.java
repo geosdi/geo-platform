@@ -45,7 +45,7 @@ import com.google.gwt.i18n.client.Constants.DefaultStringValue;
  */
 public interface ButtonsConstants extends Constants {
 
-    public ButtonsConstants INSTANCE = GWT.create(ButtonsConstants.class);
+    public final static ButtonsConstants INSTANCE = GWT.create(ButtonsConstants.class);
 
     @DefaultStringValue("Select")
     String selectText();
@@ -79,6 +79,30 @@ public interface ButtonsConstants extends Constants {
 
     @DefaultStringValue("Verify")
     String verifyText();
+    
+    @DefaultStringValue("Create")
+    String createText();
+
+    @DefaultStringValue("Add")
+    String addText();
+
+    @DefaultStringValue("Edit")
+    String editText();
+
+    @DefaultStringValue("Delete")
+    String deleteText();
+    
+    @DefaultStringValue("Share")
+    String shareText();
+
+    @DefaultStringValue("Shuffle")
+    String shuffleText();
+
+    @DefaultStringValue("Play")
+    String playText();
+
+    @DefaultStringValue("Pause")
+    String pauseText();
 
     @DefaultStringValue("Add To Layers Tree")
     String addToLayersTreeText();

@@ -44,7 +44,7 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
  */
 public interface MenuInToolBarConstants extends ConstantsWithLookup {
 
-    public MenuInToolBarConstants INSTANCE = GWT.create(MenuInToolBarConstants.class);
+    public final static MenuInToolBarConstants INSTANCE = GWT.create(MenuInToolBarConstants.class);
 
     @DefaultStringValue("User")
     String userMenuText();

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
+import org.geosdi.geoplatform.gui.client.i18n.WMSUrlStatusConstants;
 import org.geosdi.geoplatform.gui.client.widget.StatusWidget;
 
 /**
@@ -48,9 +49,9 @@ public class WmsUrlStatus extends StatusWidget {
         STATUS_CHECKED("x-status-ok"),
         STATUS_NO_CHECKED("x-status-not-ok"),
         STATUS_CHECK_ERROR("x-status-error"),
-        STATUS_MESSAGE_CHECKED("WMS URL Correct"),
-        STATUS_MESSAGE_NOT_CHECKED("WMS URL Incorrect"),
-        STATUS_MESSAGE_CHECK_ERROR("WMS URL Error");
+        STATUS_MESSAGE_CHECKED(WMSUrlStatusConstants.INSTANCE.STATUS_MESSAGE_CHECKED()),
+        STATUS_MESSAGE_NOT_CHECKED(WMSUrlStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_CHECKED()),
+        STATUS_MESSAGE_CHECK_ERROR(WMSUrlStatusConstants.INSTANCE.STATUS_MESSAGE_CHECK_ERROR());
         //
         private String value;
 

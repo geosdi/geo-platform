@@ -97,5 +97,4 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     public void rebuildTree() {
         this.treeBuilder.rebuildTree();
     }
-
 }

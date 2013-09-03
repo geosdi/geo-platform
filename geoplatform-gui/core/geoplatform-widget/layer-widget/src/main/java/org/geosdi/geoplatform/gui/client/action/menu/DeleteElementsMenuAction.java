@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.responsibility.DeleteRequestManager;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -50,7 +51,8 @@ public class DeleteElementsMenuAction extends MenuBaseAction {
     private DeleteRequestManager deleteManager;
 
     public DeleteElementsMenuAction(TreePanel theTree) {
-        super("Delete Selected Elements", BasicWidgetResources.ICONS.delete());
+        super(LayerModuleConstants.INSTANCE.deleteSelectedElementsText(), 
+                BasicWidgetResources.ICONS.delete());
         this.deleteManager = new DeleteRequestManager(theTree);
     }
 

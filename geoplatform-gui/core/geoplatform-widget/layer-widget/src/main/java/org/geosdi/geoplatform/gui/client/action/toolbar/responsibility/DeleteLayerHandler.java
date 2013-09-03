@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
@@ -83,7 +84,7 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
     @Override
     public void displayMessage() {
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "The selected layer was deleted succesfully",
+                LayerModuleConstants.INSTANCE.DeleteLayerHandler_statusLayerDeletedText(),
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
@@ -101,8 +102,9 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
                 } else {
                     LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(
                             false));
-                    GeoPlatformMessage.errorMessage("Save Delete Operation Error",
-                            "Problems on saving the new tree state after deleting layer");
+                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
+                            errorSaveDeleteOperationTitleText(),
+                            LayerModuleConstants.INSTANCE.DeleteLayerHandler_errorSaveDeleteBodyText());
                 }
             }
 
@@ -111,7 +113,7 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
                 IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                 mementoSave.remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Layer deleted successfully.",
+                        LayerModuleConstants.INSTANCE.DeleteLayerHandler_statusSaveDeleteSuccessText(),
                         EnumSearchStatus.STATUS_SEARCH.toString());
                 LayerHandlerManager.fireEvent(peekCacheEvent);
             }

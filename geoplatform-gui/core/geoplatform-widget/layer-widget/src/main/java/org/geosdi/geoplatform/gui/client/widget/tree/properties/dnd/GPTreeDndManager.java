@@ -61,5 +61,4 @@ public class GPTreeDndManager implements TreeDndManager {
         this.dragSupport.enableDrag();
         this.dropSupport.enableDrop();
     }
-
 }

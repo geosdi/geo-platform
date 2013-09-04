@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.event.GPExpandTreeNodeEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -101,7 +102,7 @@ public class GPTreeBeforeExapand implements TreeBeforeExpand {
                             } else {
                                 parentFolder.setLoading(Boolean.FALSE);
                                 GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorLoadingTitleText(),
-                                        LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
+                                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                                 LayoutManager.getInstance().getStatusMap().setStatus(
                                         LayerModuleConstants.INSTANCE.statusErrorLoadingTreeElementsText(),
                                         SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());

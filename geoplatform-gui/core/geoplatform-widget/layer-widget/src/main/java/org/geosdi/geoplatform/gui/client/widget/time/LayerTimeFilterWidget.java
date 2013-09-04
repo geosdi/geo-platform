@@ -67,6 +67,7 @@ import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
@@ -580,7 +581,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                 } else {
                     GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
                             LayerTimeFilterWidget_timeFilterErrorTitleText(),
-                            LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             LayerModuleConstants.INSTANCE.LayerTimeFilterWidget_statusTimeFilterErrorLoadingText(),
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());

@@ -49,7 +49,21 @@ public interface WindowsConstants extends Constants {
 
     @DefaultStringValue("WARNING")
     String warningTitleText();
-    
+
+    @DefaultStringValue("ERROR")
+    String errorTitleText();
+
     @DefaultStringValue("Error Reloading")
     String errorReloadingTitleText();
+
+    @DefaultStringValue("Error Loading")
+    String errorLoadingTitleText();
+
+    @DefaultStringValue("Error Saving")
+    String errorSavingTitleText();
+
+    @DefaultStringValue("An error occurred while making the requested connection.\n"
+            + "Verify network connections and try again.\n"
+            + "If the problem persists contact your system administrator.")
+    String errorMakingConnectionBodyText();
 }

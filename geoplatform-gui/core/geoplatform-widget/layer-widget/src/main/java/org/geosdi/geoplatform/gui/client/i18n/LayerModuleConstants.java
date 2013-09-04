@@ -48,11 +48,6 @@ public interface LayerModuleConstants extends Constants {
     public static final LayerModuleConstants INSTANCE =
             GWT.create(LayerModuleConstants.class);
 
-    @DefaultStringValue("An error occurred while making the requested connection.\n"
-            + "Verify network connections and try again.\n"
-            + "If the problem persists contact your system administrator.")
-    String errorMakingConnectionBodyText();
-
     @DefaultStringValue("Save Delete Operation Error")
     String errorSaveDeleteOperationTitleText();
 

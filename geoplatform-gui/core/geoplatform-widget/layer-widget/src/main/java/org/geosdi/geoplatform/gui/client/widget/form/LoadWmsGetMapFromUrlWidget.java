@@ -63,6 +63,7 @@ import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
@@ -366,7 +367,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
             public void onFailure(Throwable caught) {
                 save.disable();
                 GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorCheckingURLTitleText(),
-                        LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
+                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         LayerModuleConstants.INSTANCE.statusErrorCheckingURLText(),
                         EnumSearchStatus.STATUS_NO_SEARCH.toString());

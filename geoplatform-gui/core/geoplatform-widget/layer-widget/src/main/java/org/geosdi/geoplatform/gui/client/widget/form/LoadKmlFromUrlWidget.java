@@ -56,6 +56,7 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
@@ -307,7 +308,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
                 buttonAdd.disable();
                 GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
                         errorCheckingURLTitleText(),
-                        LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
+                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         LayerModuleConstants.INSTANCE.statusErrorCheckingURLText(),
                         EnumSearchStatus.STATUS_NO_SEARCH.toString());

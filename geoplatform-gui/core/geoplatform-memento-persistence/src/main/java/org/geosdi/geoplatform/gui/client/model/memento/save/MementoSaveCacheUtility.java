@@ -65,7 +65,6 @@ public class MementoSaveCacheUtility {
         for (ListIterator<IMemento<ISave>> it = mementoSave.listIterator(); it.hasNext();) {
             memento = it.next();
             if (verifyCondition(element, memento)) {
-                System.out.println("Ho trovato la creazione");
                 mementoSave.remove(memento);
                 condition = true;
                 break;

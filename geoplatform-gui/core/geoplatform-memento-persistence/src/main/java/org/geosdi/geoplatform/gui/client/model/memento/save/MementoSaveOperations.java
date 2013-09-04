@@ -40,6 +40,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveAddedLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveAddedLayersAndTreeModificationsResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.MementoPersistenceConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
@@ -102,7 +103,7 @@ public class MementoSaveOperations {
                     LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
 //                            setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
 //                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
-                    GeoPlatformMessage.errorMessage("Save Layers Error",
+                    GeoPlatformMessage.errorMessage(MementoPersistenceConstants.INSTANCE.MementoSaveOperations_errorSavingfLayersTitleText(),
                             messageFail);
                 }
             }

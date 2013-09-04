@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.MementoPersistenceConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -56,8 +57,6 @@ import org.geosdi.geoplatform.gui.puregwt.savecache.SaveCacheHandlerManager;
  */
 public class MementoSaveCacheManager implements GPSaveCacheHandler {
 
-    private final String MESSAGE = "There are unsaved operations on tree.\n"
-            + "Do you want to save your changes before proceed?";
     private static PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
     public MementoSaveCacheManager() {
@@ -73,11 +72,15 @@ public class MementoSaveCacheManager implements GPSaveCacheHandler {
         } else {
 //            messageBox.show();
             LayoutManager.getInstance().getStatusMap().setStatus(
-                    "Unsaved Operations on Tree.",
+                    MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_statusUnsavedOperationsText(),
                     EnumSearchStatus.STATUS_NO_SEARCH.toString());
-            LayoutManager.getInstance().getViewport().mask("Unsaved Operations",
+            LayoutManager.getInstance().getViewport().mask(
+                    MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_unsavedOperationsText(),
                     SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-            GeoPlatformMessage.confirmMessage("Unsaved Operations", MESSAGE, new Listener<MessageBoxEvent>() {
+            GeoPlatformMessage.confirmMessage(
+                    MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_unsavedOperationsText(),
+                    MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_unsavedOperationMessageText(),
+                    new Listener<MessageBoxEvent>() {
                 @Override
                 public void handleEvent(MessageBoxEvent be) {
                     if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {

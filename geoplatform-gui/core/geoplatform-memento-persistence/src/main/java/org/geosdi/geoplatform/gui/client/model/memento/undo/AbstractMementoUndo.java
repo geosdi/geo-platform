@@ -42,11 +42,11 @@ import org.geosdi.geoplatform.gui.model.memento.IMemento;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractMementoUndo implements IMemento<IUndo>{
-    
+public abstract class AbstractMementoUndo implements IMemento<IUndo> {
+
     private IUndo undoAction;
-    
-    public AbstractMementoUndo(IUndo undoAction){
+
+    public AbstractMementoUndo(IUndo undoAction) {
         this.undoAction = undoAction;
     }
 
@@ -59,6 +59,4 @@ public abstract class AbstractMementoUndo implements IMemento<IUndo>{
     public void setAction(IUndo undoAction) {
         this.undoAction = undoAction;
     }
-
-    
 }

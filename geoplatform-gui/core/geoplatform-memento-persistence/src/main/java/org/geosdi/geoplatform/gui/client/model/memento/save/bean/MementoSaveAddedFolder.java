@@ -72,6 +72,4 @@ public class MementoSaveAddedFolder extends AbstractMementoSave {
     public void setAddedFolder(MementoFolder addedFolder) {
         this.addedFolder = addedFolder;
     }
-    
-
 }

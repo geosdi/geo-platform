@@ -55,7 +55,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * 
+ *
  * @email nazzareno.sileno@geosdi.org
  */
 public class MementoSaveBuilder {
@@ -105,7 +105,7 @@ public class MementoSaveBuilder {
 
     private static List<String> convertStyles(
             ArrayList<GPStyleStringBeanModel> styles) {
-        List<String> stringList = Lists.newArrayList();
+        List<String> stringList = Lists.<String>newArrayList();
         for (GPStyleStringBeanModel gPStyleStringBeanModel : styles) {
             stringList.add(gPStyleStringBeanModel.getStyleString());
         }

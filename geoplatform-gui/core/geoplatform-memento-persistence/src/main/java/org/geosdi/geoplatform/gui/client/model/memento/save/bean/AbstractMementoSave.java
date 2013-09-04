@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
+import com.google.common.collect.Maps;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
@@ -58,8 +58,9 @@ public abstract class AbstractMementoSave<T extends GPBeanTreeModel>
     private transient ISave saveAction;
     private transient T refBaseElement;
     private Long idBaseElement;
-    private transient Map<AbstractFolderTreeNode, Integer> descendantMap = new HashMap<AbstractFolderTreeNode, Integer>();
-    private Map<Long, Integer> wsDescendantMap = new HashMap<Long, Integer>();
+    private transient Map<AbstractFolderTreeNode, Integer> descendantMap =
+            Maps.<AbstractFolderTreeNode, Integer>newHashMap();
+    private Map<Long, Integer> wsDescendantMap = Maps.<Long, Integer>newHashMap();
 
     public AbstractMementoSave() {
     }

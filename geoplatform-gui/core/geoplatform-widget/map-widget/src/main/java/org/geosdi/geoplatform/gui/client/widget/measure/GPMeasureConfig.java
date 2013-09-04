@@ -41,47 +41,41 @@ import com.extjs.gxt.ui.client.util.Params;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
- * 
+ *
  */
 public class GPMeasureConfig {
 
-	/**
-	 * The info title (defaults to null).
-	 */
-	public String title;
+    /**
+     * The info title (defaults to null).
+     */
+    public String title;
+    /**
+     * The info text (defaults to null).
+     */
+    public String text;
+    /**
+     * The index or key based substitution values.
+     */
+    public Params params;
+    /**
+     * The info width (defaults to 180).
+     */
+    public int width = 180;
+    /**
+     * The info height (defaults to 55).
+     */
+    public int height = 55;
+    /**
+     * Listener to be notified when the info is displayed (defaults to null).
+     */
+    public Listener<ComponentEvent> listener;
 
-	/**
-	 * The info text (defaults to null).
-	 */
-	public String text;
+    public GPMeasureConfig(String title) {
+        this.title = title;
+    }
 
-	/**
-	 * The index or key based substitution values.
-	 */
-	public Params params;
-
-	/**
-	 * The info width (defaults to 180).
-	 */
-	public int width = 180;
-
-	/**
-	 * The info height (defaults to 55).
-	 */
-	public int height = 55;
-
-	/**
-	 * Listener to be notified when the info is displayed (defaults to null).
-	 */
-	public Listener<ComponentEvent> listener;
-
-	public GPMeasureConfig(String title) {
-		this.title = title;
-	}
-
-	public GPMeasureConfig(String title, String text) {
-		this.title = title;
-		this.text = text;
-	}
-
+    public GPMeasureConfig(String title, String text) {
+        this.title = title;
+        this.text = text;
+    }
 }

@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.client.widget.map.responsibility.LineRequestHa
 import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PointRequestHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PolygonRequestHandler;
 import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
-import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener;
 import org.gwtopenmaps.openlayers.client.event.VectorBeforeFeatureModifiedListener;
@@ -89,18 +88,15 @@ public class ModifyFeatureControl extends GPVectorMapControl {
 
             vector.addVectorBeforeFeatureModifiedListener(
                     new VectorBeforeFeatureModifiedListener() {
-
                 @Override
                 public void onBeforeFeatureModified(
                         BeforeFeatureModifiedEvent eventObject) {
                     selectedFeature = eventObject.getVectorFeature().clone();
                 }
-
             });
 
             vector.addVectorAfterFeatureModifiedListener(
                     new VectorAfterFeatureModifiedListener() {
-
                 @Override
                 public void onAfterFeatureModified(
                         AfterFeatureModifiedEvent eventObject) {
@@ -110,7 +106,6 @@ public class ModifyFeatureControl extends GPVectorMapControl {
                     requestManager.forwardRequest(pointHandler, feature);
 
                 }
-
             });
 
             this.initialized = true;
@@ -163,5 +158,4 @@ public class ModifyFeatureControl extends GPVectorMapControl {
 
         return this.control;
     }
-
 }

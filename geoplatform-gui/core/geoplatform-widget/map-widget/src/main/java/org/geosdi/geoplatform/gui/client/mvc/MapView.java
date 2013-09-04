@@ -86,8 +86,9 @@ public class MapView extends GeoPlatformView {
 
     /**
      * (non-Javadoc)
-     * 
-     * @see com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     *
+     * @see
+     * com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     protected void handleEvent(AppEvent event) {

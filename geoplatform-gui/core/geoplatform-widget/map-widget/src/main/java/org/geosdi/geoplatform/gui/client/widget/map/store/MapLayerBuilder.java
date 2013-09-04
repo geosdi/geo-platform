@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientIn
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.AbstractMapLayerBuilder;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
@@ -167,8 +166,8 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
 
     /**
      * TODO : MORE CONTROL HERE
-     * 
-     * @param wmsParams 
+     *
+     * @param wmsParams
      */
     private void addAuthTuple(WMSParams wmsParams) {
         IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());

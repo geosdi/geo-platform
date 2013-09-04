@@ -39,7 +39,7 @@ import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class ZoomPreviousEvent extends GwtEvent<ZoomPreviousEventHandler> {
 

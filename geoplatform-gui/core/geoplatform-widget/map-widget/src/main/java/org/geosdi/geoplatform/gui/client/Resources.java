@@ -47,6 +47,5 @@ import org.geosdi.geoplatform.gui.client.images.GeoPlatformImages;
 public class Resources {
 
     public static final GeoPlatformIcons ICONS = GWT.create(GeoPlatformIcons.class);
-    
     public static final GeoPlatformImages IMAGES = GWT.create(GeoPlatformImages.class);
 }

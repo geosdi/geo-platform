@@ -58,12 +58,13 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Accessibility;
 import com.google.gwt.user.client.ui.RootPanel;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleSelectorEvent;
 import org.geosdi.geoplatform.gui.model.scale.GPScaleBean;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
- * 
+ *
  */
 public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
@@ -111,9 +112,8 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
     /**
      * Displays the ScaleBar.
-     * 
-     * @param config
-     *            the info config
+     *
+     * @param config the info config
      */
     public void show(GPScaleConfig config) {
         this.config = config;
@@ -141,7 +141,7 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         scaleStore.add(scales);
 
         ComboBox<GPScaleBean> comboScale = new ComboBox<GPScaleBean>();
-        comboScale.setEmptyText("Select a scale...");
+        comboScale.setEmptyText(MapModuleConstants.INSTANCE.GPScaleWidget_comboScaleEmptyText());
         comboScale.setDisplayField("scale");
         comboScale.setWidth(150);
         comboScale.setStore(scaleStore);
@@ -155,7 +155,6 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         setSize(config.width, config.height);
 
         comboScale.addListener(Events.Select, new Listener<FieldEvent>() {
-
             @Override
             public void handleEvent(FieldEvent fe) {
                 ComboBox cb = (ComboBox) fe.getComponent();

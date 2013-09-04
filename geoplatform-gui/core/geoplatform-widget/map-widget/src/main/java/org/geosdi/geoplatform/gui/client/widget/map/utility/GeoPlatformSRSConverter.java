@@ -46,99 +46,98 @@ import org.gwtopenmaps.openlayers.client.geometry.Polygon;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class GeoPlatformSRSConverter {
 
-	/**
-	 * Convert Geometry Polygon SRS from Projection Source to Dest This
-	 * Operation is possible but remember to add PROJ4 in your project to have
-	 * support for conversion that you want to do.
-	 * 
-	 * @param geom
-	 * @param source
-	 * @param dest
-	 * @return
-	 */
-	public static String polygonWKTConverter(Geometry geom, Projection source,
-			Projection dest) {
+    /**
+     * Convert Geometry Polygon SRS from Projection Source to Dest This
+     * Operation is possible but remember to add PROJ4 in your project to have
+     * support for conversion that you want to do.
+     *
+     * @param geom
+     * @param source
+     * @param dest
+     * @return
+     */
+    public static String polygonWKTConverter(Geometry geom, Projection source,
+            Projection dest) {
 
-		Polygon pol = Polygon.narrowToPolygon(geom.getJSObject());
-		pol.transform(source, dest);
+        Polygon pol = Polygon.narrowToPolygon(geom.getJSObject());
+        pol.transform(source, dest);
 
-		return pol.toString();
-	}
+        return pol.toString();
+    }
 
-	/**
-	 * Convert Geometry LineString SRS from Projection Source to Dest This
-	 * Operation is possible but remember to add PROJ4 in your project to have
-	 * support for conversion that you want to do.
-	 * 
-	 * @param geom
-	 * @param source
-	 * @param dest
-	 * @return
-	 */
-	public static String lineWKTConverter(Geometry geom, Projection source,
-			Projection dest) {
+    /**
+     * Convert Geometry LineString SRS from Projection Source to Dest This
+     * Operation is possible but remember to add PROJ4 in your project to have
+     * support for conversion that you want to do.
+     *
+     * @param geom
+     * @param source
+     * @param dest
+     * @return
+     */
+    public static String lineWKTConverter(Geometry geom, Projection source,
+            Projection dest) {
 
-		LineString line = LineString.narrowToLineString(geom.getJSObject());
-		line.transform(source, dest);
+        LineString line = LineString.narrowToLineString(geom.getJSObject());
+        line.transform(source, dest);
 
-		return line.toString();
-	}
+        return line.toString();
+    }
 
-	/**
-	 * Convert Geometry Point SRS from Projection Source to Dest Operation is
-	 * possible but remember to add PROJ4 in your project to have support for
-	 * conversion that you want to do.
-	 * 
-	 * @param geom
-	 * @param source
-	 * @param dest
-	 * @return
-	 */
-	public static String pointWKTConverter(Geometry geom, Projection source,
-			Projection dest) {
+    /**
+     * Convert Geometry Point SRS from Projection Source to Dest Operation is
+     * possible but remember to add PROJ4 in your project to have support for
+     * conversion that you want to do.
+     *
+     * @param geom
+     * @param source
+     * @param dest
+     * @return
+     */
+    public static String pointWKTConverter(Geometry geom, Projection source,
+            Projection dest) {
 
-		Point point = Point.narrowToPoint(geom.getJSObject());
-		point.transform(source, dest);
+        Point point = Point.narrowToPoint(geom.getJSObject());
+        point.transform(source, dest);
 
-		return point.toString();
-	}
+        return point.toString();
+    }
 
-	/**
-	 * 
-	 * @param geom
-	 * @param source
-	 * @param dest
-	 * @return
-	 */
-	public static String multiPolygonWKTConverter(Geometry geom,
-			Projection source, Projection dest) {
+    /**
+     *
+     * @param geom
+     * @param source
+     * @param dest
+     * @return
+     */
+    public static String multiPolygonWKTConverter(Geometry geom,
+            Projection source, Projection dest) {
 
-		MultiPolygon multiPol = MultiPolygon.narrowToMultiPolygon(geom
-				.getJSObject());
-		multiPol.transform(source, dest);
+        MultiPolygon multiPol = MultiPolygon.narrowToMultiPolygon(geom
+                .getJSObject());
+        multiPol.transform(source, dest);
 
-		return multiPol.toString();
-	}
+        return multiPol.toString();
+    }
 
-	/**
-	 * 
-	 * @param geom
-	 * @param source
-	 * @param dest
-	 * @return
-	 */
-	public static String multiLineWKTConverter(Geometry geom,
-			Projection source, Projection dest) {
+    /**
+     *
+     * @param geom
+     * @param source
+     * @param dest
+     * @return
+     */
+    public static String multiLineWKTConverter(Geometry geom,
+            Projection source, Projection dest) {
 
-		MultiLineString multiLine = MultiLineString.narrowToMultiLineString(geom
-				.getJSObject());
-		multiLine.transform(source, dest);
+        MultiLineString multiLine = MultiLineString.narrowToMultiLineString(geom
+                .getJSObject());
+        multiLine.transform(source, dest);
 
-		return multiLine.toString();
-	}
-
+        return multiLine.toString();
+    }
 }

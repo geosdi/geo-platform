@@ -90,5 +90,4 @@ public class DrawLineFeature extends DrawGenericFeatureControl {
     public boolean isEnabled() {
         return this.control.isActive();
     }
-
 }

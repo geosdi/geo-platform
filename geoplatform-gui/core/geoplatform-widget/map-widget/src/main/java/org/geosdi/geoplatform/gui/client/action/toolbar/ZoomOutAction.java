@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.LonLat;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,7 +54,8 @@ public class ZoomOutAction extends ToolbarMapAction {
     private int zoomFactor = 1;
 
     public ZoomOutAction(GeoPlatformMap mapWidget) {
-        super(Resources.ICONS.zoomOut(), "Zoom Out");
+        super(Resources.ICONS.zoomOut(), 
+                MapModuleConstants.INSTANCE.ZoomOutAction_tooltipText());
         this.mapWidget = mapWidget;
     }
 

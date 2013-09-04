@@ -47,6 +47,7 @@ import com.extjs.gxt.ui.client.util.Format;
 import com.extjs.gxt.ui.client.util.Point;
 import com.extjs.gxt.ui.client.util.Size;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.google.common.collect.Lists;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Accessibility;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -59,7 +60,7 @@ public class GPMeasureWidget extends ContentPanel implements
         MeasureChangeHandler {
 
     private static Stack<GPMeasureWidget> infoStack = new Stack<GPMeasureWidget>();
-    private static ArrayList<GPMeasureWidget> slots = new ArrayList<GPMeasureWidget>();
+    private static ArrayList<GPMeasureWidget> slots = Lists.<GPMeasureWidget>newArrayList();
     protected GPMeasureConfig config;
     protected int level;
     private Size size;
@@ -189,5 +190,4 @@ public class GPMeasureWidget extends ContentPanel implements
         }
 
     }
-
 }

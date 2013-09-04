@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
@@ -48,7 +49,8 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 public class MeasureAreaAction extends MapToggleAction {
 
     public MeasureAreaAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, Resources.ICONS.measureArea(), "Measure Area");
+        super(mapWidget, Resources.ICONS.measureArea(),
+                MapModuleConstants.INSTANCE.MeasureAreaAction_tooltipText());
     }
 
     /**

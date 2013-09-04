@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.control.GotoXYWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
@@ -50,7 +51,8 @@ public class GotoXYAction extends ToolbarMapAction {
     private GotoXYWidget gotoXYWidget;
 
     public GotoXYAction(GeoPlatformMap theMapWidget) {
-        super(BasicWidgetResources.ICONS.gotoXY(), "Goto X - Y");
+        super(BasicWidgetResources.ICONS.gotoXY(), 
+                MapModuleConstants.INSTANCE.GotoXYAction_tooltipText());
         this.gotoXYWidget = new GotoXYWidget(Boolean.TRUE, theMapWidget);
     }
 

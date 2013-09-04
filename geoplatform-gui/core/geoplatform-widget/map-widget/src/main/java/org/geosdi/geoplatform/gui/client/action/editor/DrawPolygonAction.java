@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.action.toggle.editor.EditorMapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.action.annotation.PersistButton;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -53,7 +54,8 @@ import org.gwtopenmaps.openlayers.client.control.Control;
 public class DrawPolygonAction extends EditorMapToggleAction {
 
     public DrawPolygonAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, Resources.ICONS.drawFeature(), "Draw Polygon");
+        super(mapWidget, Resources.ICONS.drawFeature(),
+                MapModuleConstants.INSTANCE.DrawPolygonAction_tooltipText());
     }
 
     /**

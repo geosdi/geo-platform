@@ -57,12 +57,13 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.viewport.SaveViewportAction;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.fieldset.GPFieldSet;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.ViewportEnum;
-import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.gwtopenmaps.openlayers.client.Map;
 
@@ -99,7 +100,9 @@ public class ViewportGridFieldSet extends GPFieldSet {
         this.add(this.generateGrid(), new FormData("100%"));
         ButtonBar buttonBar = new ButtonBar();
 
-        Button addEntryButton = new Button("Add Viewport", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
+        Button addEntryButton = new Button(MapModuleConstants.INSTANCE.
+                ViewportGridFieldSet_buttonAddViewportText(),
+                BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 ViewportGridFieldSet.this.store.add(ViewportUtility.generateViewportFromMap(map));
@@ -109,71 +112,83 @@ public class ViewportGridFieldSet extends GPFieldSet {
         });
         buttonBar.add(addEntryButton);
 
-        this.deleteViewportButton = new Button("Delete Viewport", BasicWidgetResources.ICONS.delete(), new SelectionListener<ButtonEvent>() {
+        this.deleteViewportButton = new Button(MapModuleConstants.INSTANCE.
+                ViewportGridFieldSet_buttonDeleteViewportText(),
+                BasicWidgetResources.ICONS.delete(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
                 if (viewportList != null) {
-                    GeoPlatformMessage.confirmMessage("Delete Viewport",
-                            "Are you sure you want to delete the selected Element?",
+                    GeoPlatformMessage.confirmMessage(MapModuleConstants.INSTANCE.
+                            ViewportGridFieldSet_confirmDeleteViewportTitleText(),
+                            MapModuleConstants.INSTANCE.
+                            ViewportGridFieldSet_confirmDeleteViewportBodyText(),
                             new Listener<MessageBoxEvent>() {
-                                @Override
-                                public void handleEvent(MessageBoxEvent be) {
-                                    if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                                        for (GPClientViewport viewport : viewportList) {
-                                            store.remove(viewport);
-                                            ViewportGridFieldSet.this.saveButton.enable();
-                                        }
-                                    }
+                        @Override
+                        public void handleEvent(MessageBoxEvent be) {
+                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                                for (GPClientViewport viewport : viewportList) {
+                                    store.remove(viewport);
+                                    ViewportGridFieldSet.this.saveButton.enable();
                                 }
-                            });
+                            }
+                        }
+                    });
                 }
             }
         });
         deleteViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(deleteViewportButton);
 
-        this.gotoViewportButton = new Button("GoTo Viewport", BasicWidgetResources.ICONS.gotoXY(), new SelectionListener<ButtonEvent>() {
+        this.gotoViewportButton = new Button(MapModuleConstants.INSTANCE.
+                ViewportGridFieldSet_buttonGoToViewportText(),
+                BasicWidgetResources.ICONS.gotoXY(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
                 if (viewportList != null && viewportList.size() == 1) {
                     ViewportUtility.gotoViewportLocation(map, viewportList.get(0));
                 } else {
-                    GeoPlatformMessage.alertMessage("GoTo Viewport Allert", "You must select "
-                            + "only one viewport at time.");
+                    GeoPlatformMessage.alertMessage(MapModuleConstants.INSTANCE.
+                            ViewportGridFieldSet_singleSelectionAlertTitleText(),
+                            MapModuleConstants.INSTANCE.
+                            ViewportGridFieldSet_singleSelectionAlertBodyText());
                 }
             }
         });
         gotoViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(gotoViewportButton);
 
-        this.setDefaultViewportButton = new Button("Set Default", BasicWidgetResources.ICONS.select(),
+        this.setDefaultViewportButton = new Button(ButtonsConstants.INSTANCE.setDefautlText(),
+                BasicWidgetResources.ICONS.select(),
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
-                        if (viewportList != null && viewportList.size() == 1) {
-                            GPClientViewport selectedViewport = viewportList.get(0);
-                            for (GPClientViewport viewport : ViewportGridFieldSet.this.store.getModels()) {
-                                if (viewport.isDefault()) {
-                                    viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.FALSE);
-                                    store.update(viewport);
-                                } else if (selectedViewport.equals(viewport)) {
-                                    viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.TRUE);
-                                    store.update(viewport);
-                                }
-                            }
-                        } else {
-                            GeoPlatformMessage.alertMessage("Set Default Viewport Allert", "You must select "
-                                    + "only one viewport at time.");
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                final List<GPClientViewport> viewportList = viewportGrid.getSelectionModel().getSelectedItems();
+                if (viewportList != null && viewportList.size() == 1) {
+                    GPClientViewport selectedViewport = viewportList.get(0);
+                    for (GPClientViewport viewport : ViewportGridFieldSet.this.store.getModels()) {
+                        if (viewport.isDefault()) {
+                            viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.FALSE);
+                            store.update(viewport);
+                        } else if (selectedViewport.equals(viewport)) {
+                            viewport.set(ViewportEnum.IS_DEFAULT.toString(), Boolean.TRUE);
+                            store.update(viewport);
                         }
                     }
-                });
+                } else {
+                    GeoPlatformMessage.alertMessage(MapModuleConstants.INSTANCE.
+                            ViewportGridFieldSet_setDefaultViewportAlertTitleText(),
+                            MapModuleConstants.INSTANCE.
+                            ViewportGridFieldSet_singleSelectionAlertBodyText());
+                }
+            }
+        });
         setDefaultViewportButton.setEnabled(Boolean.FALSE);
         buttonBar.add(setDefaultViewportButton);
         SaveViewportAction saveViewportAction = new SaveViewportAction(GPTrustedLevel.LOW, this.store);
-        this.saveButton = new GPSecureButton("Save", BasicWidgetResources.ICONS.save(), saveViewportAction);
+        this.saveButton = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(),
+                BasicWidgetResources.ICONS.save(), saveViewportAction);
         buttonBar.add(this.saveButton);
         this.add(buttonBar, new FormData("100%"));
     }
@@ -191,9 +206,11 @@ public class ViewportGridFieldSet extends GPFieldSet {
                 return Boolean.FALSE;
             }
         };
-        viewportFilter.setEmptyText("Type the viewport to search");
+        viewportFilter.setEmptyText(MapModuleConstants.INSTANCE.
+                ViewportGridFieldSet_viewportFilterEmptyTextText());
         viewportFilter.bind(this.store);
-        viewportFilter.setFieldLabel("Filter");
+        viewportFilter.setFieldLabel(MapModuleConstants.INSTANCE.
+                ViewportGridFieldSet_viewportFilterLabelText());
         return this.viewportFilter;
     }
 
@@ -211,23 +228,26 @@ public class ViewportGridFieldSet extends GPFieldSet {
     }
 
     private Grid generateGrid() {
-        List<ColumnConfig> configs = Lists.newArrayList();
-        final String idIsDefaultColumn = "Default";
+        List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
+        final String idIsDefaultColumn = MapModuleConstants.INSTANCE.
+                ViewportGridFieldSet_defaultViewportText();
         CheckColumnConfig isDefaultColumn = new CheckColumnConfig(ViewportEnum.IS_DEFAULT.toString(),
                 idIsDefaultColumn, 50);
         configs.add(isDefaultColumn);
-        final String idNameColumn = "Name";
+        final String idNameColumn = MapModuleConstants.INSTANCE.
+                ViewportGridFieldSet_nameColumnText();
         ColumnConfig nameColumnConfig = new ColumnConfig(ViewportEnum.NAME.toString(),
                 idNameColumn, 80);
         nameColumnConfig.setEditor(new CellEditor(new TextField<String>()));
         configs.add(nameColumnConfig);
-        final String idDescriptionColumn = "Description";
+        final String idDescriptionColumn = MapModuleConstants.INSTANCE.
+                ViewportGridFieldSet_descriptionColumnText();
         ColumnConfig descriptionColumnConfig = new ColumnConfig(ViewportEnum.DESCRIPTION.toString(),
                 idDescriptionColumn, 80);
         descriptionColumnConfig.setEditor(new CellEditor(new TextField<String>()));
         configs.add(descriptionColumnConfig);
         ColumnConfig minXColumnConfig = new ColumnConfig(ViewportEnum.LOWER_LEFT_X.toString(),
-                "Min X", 70);
+                MapModuleConstants.INSTANCE.ViewportGridFieldSet_minXColumnText(), 70);
         minXColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
         NumberField numberFieldBBOX = new NumberField();
         numberFieldBBOX.setMaxValue(180);
@@ -235,7 +255,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
         minXColumnConfig.setEditor(new CellEditor(numberFieldBBOX));
         configs.add(minXColumnConfig);
         ColumnConfig minYColumnConfig = new ColumnConfig(ViewportEnum.LOWER_LEFT_Y.toString(),
-                "Min Y", 70);
+                MapModuleConstants.INSTANCE.ViewportGridFieldSet_minYColumnText(), 70);
         minYColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
         NumberField numberFieldBBOX2 = new NumberField();
         numberFieldBBOX2.setMaxValue(90);
@@ -243,7 +263,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
         minYColumnConfig.setEditor(new CellEditor(numberFieldBBOX2));
         configs.add(minYColumnConfig);
         ColumnConfig maxXColumnConfig = new ColumnConfig(ViewportEnum.UPPER_RIGHT_X.toString(),
-                "Max X", 70);
+                MapModuleConstants.INSTANCE.ViewportGridFieldSet_maxXColumnText(), 70);
         maxXColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
         NumberField numberFieldBBOX3 = new NumberField();
         numberFieldBBOX3.setMaxValue(180);
@@ -251,7 +271,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
         maxXColumnConfig.setEditor(new CellEditor(numberFieldBBOX3));
         configs.add(maxXColumnConfig);
         ColumnConfig maxYColumnConfig = new ColumnConfig(ViewportEnum.UPPER_RIGHT_Y.toString(),
-                "Max Y", 70);
+                MapModuleConstants.INSTANCE.ViewportGridFieldSet_maxYColumnText(), 70);
         maxYColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
         NumberField numberFieldBBOX4 = new NumberField();
         numberFieldBBOX4.setMaxValue(90);
@@ -260,7 +280,7 @@ public class ViewportGridFieldSet extends GPFieldSet {
         configs.add(maxYColumnConfig);
 
         ColumnConfig zoomLevelColumnConfig = new ColumnConfig(ViewportEnum.ZOOM_LEVEL.toString(),
-                "Zoom Level", 70);
+                MapModuleConstants.INSTANCE.ViewportGridFieldSet_zoomLevelColumnText(), 70);
         zoomLevelColumnConfig.setNumberFormat(NumberFormat.getDecimalFormat());
         NumberField numberFieldZoom = new NumberField();
         numberFieldZoom.setAllowNegative(Boolean.FALSE);

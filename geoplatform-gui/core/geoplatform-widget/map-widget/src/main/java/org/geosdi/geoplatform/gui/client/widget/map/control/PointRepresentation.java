@@ -58,5 +58,4 @@ public class PointRepresentation extends GeoPlatformBeanModel {
     public void setYCoordinate(double y) {
         super.set(PointRepresentationKeyValue.Y_COORDINATE.toString(), y);
     }
-
 }

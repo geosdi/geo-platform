@@ -43,14 +43,14 @@ import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformEventHandler;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class ZoomPreviousAction extends ToolbarMapAction
         implements GeoPlatformEventHandler {
@@ -59,7 +59,8 @@ public class ZoomPreviousAction extends ToolbarMapAction
     private HandlerRegistration handlerRegistration;
 
     public ZoomPreviousAction(GeoPlatformMap theMapWidget) {
-        super(Resources.ICONS.zoomPrevious(), "Zoom Previous");
+        super(Resources.ICONS.zoomPrevious(),
+                MapModuleConstants.INSTANCE.ZoomPreviousAction_tooltipText());
         this.mapWidget = theMapWidget;
         this.addHandler();
     }
@@ -67,7 +68,8 @@ public class ZoomPreviousAction extends ToolbarMapAction
     /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
@@ -78,7 +80,6 @@ public class ZoomPreviousAction extends ToolbarMapAction
     public void addHandler() {
         this.handlerRegistration = GPHandlerManager.addHandler(
                 ZoomPreviousEvent.TYPE, new ZoomPreviousEventHandler() {
-
             @Override
             public void onActivation(boolean activate) {
                 if (activate) {

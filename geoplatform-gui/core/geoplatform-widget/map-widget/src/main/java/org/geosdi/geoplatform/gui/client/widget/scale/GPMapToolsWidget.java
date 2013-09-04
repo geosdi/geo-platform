@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.model.scale.GPScaleBean;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public class GPMapToolsWidget implements GPMapToolsHandler {
@@ -56,7 +56,7 @@ public class GPMapToolsWidget implements GPMapToolsHandler {
     public GPMapToolsWidget(GeoPlatformMap geoPlatformMap) {
         this.geoPlatformMap = geoPlatformMap;
         this.graticuleTool = new GPGraticuleMapTool(this.geoPlatformMap);
-        
+
         MapHandlerManager.addHandler(GPMapToolsHandler.TYPE, this);
     }
 
@@ -76,7 +76,7 @@ public class GPMapToolsWidget implements GPMapToolsHandler {
 
     @Override
     public void onManageGraticuleTool(boolean activation) {
-        if(activation) {
+        if (activation) {
             this.graticuleTool.activateControl();
         } else {
             this.graticuleTool.deactivateControl();

@@ -47,7 +47,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class MapModel extends GPMapModel implements HasLayerChangedHandler {
 

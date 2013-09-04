@@ -57,12 +57,12 @@ public class MapBaseLayerAdapter implements GPBaseLayerAdapter {
             throw new IllegalArgumentException("The Map passed must not be null");
         }
 
-        EnumMap<BaseLayerValue, GPBaseLayer> adapterMap = Maps.newEnumMap(
-                BaseLayerValue.class);
+        EnumMap<BaseLayerValue, GPBaseLayer> adapterMap = Maps.
+                <BaseLayerValue, GPBaseLayer>newEnumMap(BaseLayerValue.class);
 
         for (Map.Entry<BaseLayerValue, GPBaseLayerCreator> entry : baseLayerMap.entrySet()) {
             adapterMap.put(entry.getKey(), adaptBaseLayer(entry.getKey(),
-                                                          entry.getValue().createBaseLayer()));
+                    entry.getValue().createBaseLayer()));
         }
 
         return adapterMap;
@@ -72,8 +72,8 @@ public class MapBaseLayerAdapter implements GPBaseLayerAdapter {
     public GPBaseLayer adaptBaseLayer(BaseLayerValue key,
             Layer value) {
         return new GPBaseLayer(value,
-                               GPBaseLayerIconAdapter.adaptBaseLayerIcon(key),
-                               GPBaseLayerProjectionAdapter.adaptBaseLayerProjection(
+                GPBaseLayerIconAdapter.adaptBaseLayerIcon(key),
+                GPBaseLayerProjectionAdapter.adaptBaseLayerProjection(
                 key), key);
     }
 }

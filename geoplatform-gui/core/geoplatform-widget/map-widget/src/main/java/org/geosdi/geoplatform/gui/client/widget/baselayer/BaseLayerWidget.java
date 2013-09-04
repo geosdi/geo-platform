@@ -51,6 +51,8 @@ import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.baselayer.SaveBaseLayerAction;
 import org.geosdi.geoplatform.gui.client.event.ChangeBaseLayerEvent;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
@@ -82,9 +84,11 @@ public class BaseLayerWidget extends GeoPlatformWindow {
     public void addComponent() {
         this.store.add(GPMapBaseLayerFactory.getBaseLayerList());
         GeoPlatformSecureAction saveBaseLayerAction = new SaveBaseLayerAction(GPTrustedLevel.LOW, this);
-        this.saveButton = new GPSecureButton("Save", BasicWidgetResources.ICONS.save(), saveBaseLayerAction);
+        this.saveButton = new GPSecureButton(ButtonsConstants.INSTANCE.saveText(),
+                BasicWidgetResources.ICONS.save(), saveBaseLayerAction);
         this.saveButton.disable();
-        Button applyButton = new Button("Apply/Close", BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
+        Button applyButton = new Button(ButtonsConstants.INSTANCE.applyCloseText(),
+                BasicWidgetResources.ICONS.done(), new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 BaseLayerWidget.super.hide();
@@ -101,7 +105,7 @@ public class BaseLayerWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml("Base Layer Selection");
+        super.setHeadingHtml(MapModuleConstants.INSTANCE.BaseLayerWidget_headingText());
         super.setScrollMode(Style.Scroll.NONE);
         super.setResizable(Boolean.FALSE);
     }
@@ -123,23 +127,23 @@ public class BaseLayerWidget extends GeoPlatformWindow {
 
         listView.getSelectionModel().addSelectionChangedListener(
                 new SelectionChangedListener<GPBaseLayer>() {
-                    ChangeBaseLayerEvent event;
+            ChangeBaseLayerEvent event;
 
-                    @Override
-                    public void selectionChanged(SelectionChangedEvent<GPBaseLayer> se) {
-                        GPBaseLayer selectedBaseLayer = se.getSelectedItem();
-                        if (selectedBaseLayer != null) {
-                            event = new ChangeBaseLayerEvent(selectedBaseLayer);
-                            MapHandlerManager.fireEvent(event);
-                            IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                            accountDetail.setBaseLayer(selectedBaseLayer.getBaseLayerEnumName().toString());
+            @Override
+            public void selectionChanged(SelectionChangedEvent<GPBaseLayer> se) {
+                GPBaseLayer selectedBaseLayer = se.getSelectedItem();
+                if (selectedBaseLayer != null) {
+                    event = new ChangeBaseLayerEvent(selectedBaseLayer);
+                    MapHandlerManager.fireEvent(event);
+                    IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                    accountDetail.setBaseLayer(selectedBaseLayer.getBaseLayerEnumName().toString());
 //                            Registry.register(GlobalRegistryEnum.BASE_LAYER.toString(),
 //                                    selectedBaseLayer.getBaseLayerEnumName().toString());
-                        }
-                        listView.getSelectionModel().deselectAll();
-                        BaseLayerWidget.this.saveButton.enable();
-                    }
-                });
+                }
+                listView.getSelectionModel().deselectAll();
+                BaseLayerWidget.this.saveButton.enable();
+            }
+        });
 
         setListViewProperties();
 

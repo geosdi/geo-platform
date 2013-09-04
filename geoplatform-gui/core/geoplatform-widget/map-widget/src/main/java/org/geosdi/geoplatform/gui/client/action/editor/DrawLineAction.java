@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.action.toggle.editor.EditorMapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.control.Control;
@@ -55,7 +56,8 @@ public class DrawLineAction extends EditorMapToggleAction {
      *
      */
     public DrawLineAction(GeoPlatformMap theMapWidget) {
-        super(theMapWidget, Resources.ICONS.drawLineFeature(), "Draw Line");
+        super(theMapWidget, Resources.ICONS.drawLineFeature(), 
+                MapModuleConstants.INSTANCE.DrawLineAction_tooltipText());
     }
 
     /**

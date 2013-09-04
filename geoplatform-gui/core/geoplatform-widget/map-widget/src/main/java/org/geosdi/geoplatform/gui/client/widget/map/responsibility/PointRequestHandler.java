@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -50,7 +51,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class PointRequestHandler extends GeometryRequestHandler {
 
@@ -91,21 +92,20 @@ public class PointRequestHandler extends GeometryRequestHandler {
         final VectorFeature selectedFeature = getSelectedFeaure();
 
         GeoPlatformMessage.confirmMessage(
-                "Point Feature Status",
-                "The Geometry Point Feature is changed. Do you want to apply the changes?",
+                MapModuleConstants.INSTANCE.PointRequestHandler_confirmFeatureChangesTitleText(),
+                MapModuleConstants.INSTANCE.PointRequestHandler_confirmFeatureChangesBodyText(),
                 new Listener<MessageBoxEvent>() {
-
-                    @Override
-                    public void handleEvent(MessageBoxEvent be) {
-                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                            Dispatcher.forwardEvent(
-                                    MapWidgetEvents.UPDATE_POINT_GEOMETRY,
-                                    feature);
-                        } else {
-                            vector.removeFeature(feature);
-                            vector.addFeature(selectedFeature);
-                        }
-                    }
-                });
+            @Override
+            public void handleEvent(MessageBoxEvent be) {
+                if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                    Dispatcher.forwardEvent(
+                            MapWidgetEvents.UPDATE_POINT_GEOMETRY,
+                            feature);
+                } else {
+                    vector.removeFeature(feature);
+                    vector.addFeature(selectedFeature);
+                }
+            }
+        });
     }
 }

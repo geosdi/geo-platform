@@ -82,87 +82,70 @@ public class MapWidgetUI implements EntryPoint {
         ToolbarActionRegistar toolbarRegistar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
         toolbarRegistar.put("ZoomIn",
                 new ToolbarActionCreator() {
-
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                 return new ZoomInAction(mapWidget);
             }
-
         });
 
         toolbarRegistar.put("ZoomOut",
                 new ToolbarActionCreator() {
-
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                 return new ZoomOutAction(mapWidget);
             }
-
         });
 
         toolbarRegistar.put("ZoomPrevious",
                 new ToolbarActionCreator() {
-
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                 return new ZoomPreviousAction(mapWidget);
             }
-
         });
 
         toolbarRegistar.put("ZoomNext",
                 new ToolbarActionCreator() {
-
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                 return new ZoomNextAction(mapWidget);
             }
-
         });
 
         toolbarRegistar.put("GetFeatureInfo",
                 new ToolbarActionCreator() {
-
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                 return new GetFeatureInfoAction(mapWidget);
             }
-
         });
 
         toolbarRegistar.put("Measure",
                 new ToolbarActionCreator() {
-
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                 return new MeasureAction(mapWidget);
             }
-
         });
 
         toolbarRegistar.put("MeasureArea",
                 new ToolbarActionCreator() {
-
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                 return new MeasureAreaAction(mapWidget);
             }
-
         });
 
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
 
         menuRegistar.put("viewport",
                 new MenuActionCreator() {
-
             @Override
             public MenuAction createAction() {
                 MapLayoutWidget mapLayoutWidget = Registry.get(
                         MapRegistryEnum.MAP_LAYOUT_WIDGET.toString());
                 return new ViewportAction(mapLayoutWidget.getMap());
             }
-
         });
     }
-
 }

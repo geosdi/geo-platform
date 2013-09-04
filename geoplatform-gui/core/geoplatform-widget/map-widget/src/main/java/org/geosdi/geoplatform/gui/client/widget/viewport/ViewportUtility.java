@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.viewport;
 
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
@@ -59,10 +59,10 @@ public class ViewportUtility {
         LonLat center = bounds.getCenterLonLat();
         if (GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection().equals(
                 GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
-            center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), 
+            center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
                     GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
         }
-        
+
         double zoomLevel = viewport.getZoomLevel();
         map.setCenter(center, (int) zoomLevel);
     }
@@ -73,8 +73,9 @@ public class ViewportUtility {
                 GPCoordinateReferenceSystem.WGS_84.getCode());
         Bounds bounds = map.getExtent().transform(currentProjection, destinationProjection);
         BBoxClientInfo bbox = generateBBOXFromBounds(bounds);
-        GPClientViewport viewport = new GPClientViewport("New Viewport",
-                "Insert description", bbox, map.getZoom(), Boolean.FALSE);
+        GPClientViewport viewport = new GPClientViewport(MapModuleConstants.INSTANCE.ViewportUtility_newViewportBeanNameText(),
+                MapModuleConstants.INSTANCE.ViewportUtility_newViewportDescriptionText(),
+                bbox, map.getZoom(), Boolean.FALSE);
         return viewport;
     }
 

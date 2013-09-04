@@ -41,6 +41,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.NotificationModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.service.NotificationRemote;
 import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -62,7 +64,8 @@ public class NotificationCenterAction extends ToolbarMapAction {
     private NotificationPopupPanel notificationPopupPanel;
 
     public NotificationCenterAction(NotificationPopupPanel notificationPopupPanel) {
-        super(BasicWidgetResources.ICONS.info(), "Notification Center");
+        super(BasicWidgetResources.ICONS.info(),
+                NotificationModuleConstants.INSTANCE.NotificationCenterAction_tooltipText());
         this.notificationPopupPanel = notificationPopupPanel;
     }
 
@@ -83,12 +86,11 @@ public class NotificationCenterAction extends ToolbarMapAction {
                     if (caught.getCause() instanceof GPSessionTimeout) {
                         GPHandlerManager.fireEvent(new GPLoginEvent(null));
                     } else {
-                        GeoPlatformMessage.errorMessage("Error Saving the read messages",
-                                "An error occurred while making the requested connection.\n"
-                                + "Verify network connections and try again."
-                                + "\nIf the problem persists contact your system administrator.");
+                        GeoPlatformMessage.errorMessage(
+                                NotificationModuleConstants.INSTANCE.NotificationCenterAction_errorSavingReadMessagesText(),
+                                WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Error Saving the read messages",
+                                NotificationModuleConstants.INSTANCE.NotificationCenterAction_errorSavingReadMessagesText(),
                                 SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                         System.out.println("Error Saving the read messages: " + caught.toString()
                                 + " data: " + caught.getMessage());

@@ -47,6 +47,12 @@ public interface ButtonsConstants extends Constants {
 
     public final static ButtonsConstants INSTANCE = GWT.create(ButtonsConstants.class);
 
+    @DefaultStringValue("Next >")
+    String nextText();
+
+    @DefaultStringValue("Preview")
+    String previewText();
+    
     @DefaultStringValue("Select")
     String selectText();
 
@@ -115,4 +121,7 @@ public interface ButtonsConstants extends Constants {
 
     @DefaultStringValue("Set Default")
     String setDefautlText();
+
+    @DefaultStringValue("Print")
+    String printText();
 }

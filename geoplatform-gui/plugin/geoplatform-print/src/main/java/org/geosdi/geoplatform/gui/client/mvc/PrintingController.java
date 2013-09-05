@@ -45,10 +45,10 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @mail francesco.izzi@geosdi.org
  */
 public class PrintingController extends GeoPlatformController {
-    
+
     /**
      * @Constructor
-     * 
+     *
      */
     public PrintingController() {
         registerEventTypes(GeoPlatformEvents.SHOW_PRINTING_WIDGET);
@@ -63,5 +63,4 @@ public class PrintingController extends GeoPlatformController {
     public void handleEvent(AppEvent event) {
         super.handleEvent(event);
     }
-    
 }

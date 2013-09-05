@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class PrintTitleFieldBinding extends GPFieldBinding {
 
@@ -58,6 +58,6 @@ public class PrintTitleFieldBinding extends GPFieldBinding {
 
     @Override
     public void setRecordProperty(Record r, Object val) {
-       r.set(property, val);
+        r.set(property, val);
     }
 }

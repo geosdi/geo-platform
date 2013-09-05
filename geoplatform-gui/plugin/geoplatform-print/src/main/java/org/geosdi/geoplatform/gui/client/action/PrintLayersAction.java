@@ -40,18 +40,20 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.PrintResources;
 import org.geosdi.geoplatform.gui.client.form.GPPrintWidget;
+import org.geosdi.geoplatform.gui.client.i18n.PrintModuleConstants;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class PrintLayersAction extends ToolbarLayerTreeAction {
 
     private GPPrintWidget formPrint;
 
     public PrintLayersAction(TreePanel theTree) {
-        super(theTree, PrintResources.ICONS.print(), "Print Visible Layers");
+        super(theTree, PrintResources.ICONS.print(),
+                PrintModuleConstants.INSTANCE.PrintLayersAction_tooltipText());
         this.formPrint = new GPPrintWidget(theTree);
     }
 

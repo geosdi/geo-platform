@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
@@ -64,14 +63,12 @@ public class Scale extends GeoPlatformBeanModel {
         setScale(scale);
     }
 
-    
     public String getScale() {
         return get(Scale.ScaleEnum.SCALE.getValue());
     }
 
     /**
-     * @param scale
-     *            the template to set
+     * @param scale the template to set
      */
     public void setScale(String scale) {
         set(Scale.ScaleEnum.SCALE.getValue(), scale);
@@ -81,8 +78,6 @@ public class Scale extends GeoPlatformBeanModel {
     public String toString() {
         return "Scale{" + getScale() + '}';
     }
-    
-    
     private static List<Integer> scales;
 
 //    static {
@@ -112,7 +107,6 @@ public class Scale extends GeoPlatformBeanModel {
 //        scales.add(18000000);
 //        scales.add(20000000);
 //    }
-
     public static double searchValue(double scale) {
         int j = 0;
         for (int i = 0; i < scales.size(); i++) {

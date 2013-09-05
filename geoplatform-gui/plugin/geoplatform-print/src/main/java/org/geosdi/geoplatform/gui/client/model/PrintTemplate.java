@@ -58,7 +58,7 @@ public class PrintTemplate extends GeoPlatformBeanModel {
         }
     }
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 7794981335181739804L;
 
@@ -74,8 +74,7 @@ public class PrintTemplate extends GeoPlatformBeanModel {
     }
 
     /**
-     * @param template
-     *            the template to set
+     * @param template the template to set
      */
     public void setTemplate(String template) {
         set(PrintEnumTemplate.TEMPLATE.getValue(), template);
@@ -83,7 +82,7 @@ public class PrintTemplate extends GeoPlatformBeanModel {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

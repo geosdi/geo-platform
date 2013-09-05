@@ -43,14 +43,14 @@ import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class MapCommentFieldBinding extends GPFieldBinding {
-    
+
     public MapCommentFieldBinding(Field field, String property) {
         super(field, property);
     }
-    
+
     @Override
     public void setModelProperty(Object val) {
         ((GPPrintBean) this.model).setComments(val.toString());

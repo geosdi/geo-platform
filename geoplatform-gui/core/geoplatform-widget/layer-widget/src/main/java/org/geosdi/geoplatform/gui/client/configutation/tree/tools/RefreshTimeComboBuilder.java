@@ -60,7 +60,7 @@ public class RefreshTimeComboBuilder {
             protected void onSelect(ModelData model, int index) {
                 super.onSelect(model, index);
                 combo.clearSelections();
-                if (combo.getParent() != null) {
+                if (combo.getParent() != null && combo.getParent().getParent() != null) {
                     combo.getParent().setVisible(false);
                 }
             }

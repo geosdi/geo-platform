@@ -95,5 +95,4 @@ public class BasicLoginRequest implements GPCommandRequest {
         return "BasicLoginRequest{ " + "userName = " + getUserName()
                 + ", password = " + getPassword() + '}';
     }
-
 }

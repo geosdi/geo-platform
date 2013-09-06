@@ -81,5 +81,4 @@ public class ApplicationLoginRequest implements GPCommandRequest {
     public String toString() {
         return "ApplicationLoginRequest{" + "appID=" + appID + '}';
     }
-
 }

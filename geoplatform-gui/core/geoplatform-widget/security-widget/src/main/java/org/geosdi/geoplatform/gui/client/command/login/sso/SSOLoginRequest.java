@@ -50,5 +50,4 @@ public class SSOLoginRequest implements GPCommandRequest {
     public String getCommandName() {
         return "command.login.SSOLoginCommand";
     }
-
 }

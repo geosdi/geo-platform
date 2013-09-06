@@ -47,6 +47,8 @@ import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
+import org.geosdi.geoplatform.gui.client.i18n.SecurityModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPAdvancedSecurityWidget;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
@@ -114,7 +116,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements
 
     @Override
     public void onSubmit() {
-        status.setBusy("please wait...");
+        status.setBusy(WindowsConstants.INSTANCE.pleaseWaitText());
         login.setEnabled(Boolean.FALSE);
         super.showProgressBar();
         super.loginError.setText("");
@@ -122,7 +124,6 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements
         ClientCommandDispatcher.getInstance().execute(
                 new GPClientCommand<BasicLoginResponse>(new BasicLoginRequest(
                 this.userName.getValue(), this.password.getValue())) {
-
             private static final long serialVersionUID = -1178797454775088815L;
 
             @Override
@@ -143,7 +144,6 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements
                         LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.
                         getValue());
             }
-
         });
     }
 
@@ -164,7 +164,6 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements
     public void loginDone() {
         if (loginFailureMessage != null && loginFailureMessage.equals("")) {
             final Timer t = new Timer() {
-
                 @Override
                 public void run() {
                     Dispatcher.forwardEvent(eventOnSuccess);
@@ -172,14 +171,13 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements
                     reset();
                     LoginWidget.super.progressBar.hide();
                 }
-
             };
             t.schedule(2000);
         } else {
             System.out.println("Login failure message: " + loginFailureMessage);
             this.getParent().getElement().getStyle().clearDisplay();
             LoginWidget.super.progressBar.hide();
-            super.loginError.setText("Nome utente o password errati");
+            super.loginError.setText(SecurityModuleConstants.INSTANCE.LoginWidget_loginUsernamePasswordErrorText());
             login.setEnabled(Boolean.TRUE);
         }
     }
@@ -207,5 +205,4 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements
     public final void generateLoginManager() {
         UserLoginManager loginManager = new UserLoginManager(this);
     }
-
 }

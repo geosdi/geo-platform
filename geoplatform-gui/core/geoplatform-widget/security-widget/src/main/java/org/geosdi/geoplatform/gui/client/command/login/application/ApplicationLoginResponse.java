@@ -67,5 +67,4 @@ public class ApplicationLoginResponse implements
         return "ApplicationLoginResponse{ " + "accountDetail = "
                 + accountDetail + '}';
     }
-
 }

@@ -41,11 +41,11 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionResponse;
+import org.geosdi.geoplatform.gui.client.i18n.SecurityModuleConstants;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -58,13 +58,16 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 public class UserLogout extends MenuBaseAction {
 
     public UserLogout() {
-        super("Logout", BasicWidgetResources.ICONS.logout());
+        super(SecurityModuleConstants.INSTANCE.UserLogout_tileText(),
+                BasicWidgetResources.ICONS.logout());
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        GeoPlatformMessage.confirmMessage("Log-out message",
-                "Do you really want to leave the application?",
+        GeoPlatformMessage.confirmMessage(SecurityModuleConstants.INSTANCE.
+                UserLogout_logoutMessageTitleText(),
+                SecurityModuleConstants.INSTANCE.
+                UserLogout_logoutMessageBodyText(),
                 new Listener<MessageBoxEvent>() {
             @Override
             public void handleEvent(MessageBoxEvent be) {

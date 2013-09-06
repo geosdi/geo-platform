@@ -33,36 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.login.sso;
+package org.geosdi.geoplatform.gui.client.i18n;
 
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class SSOLoginResponse implements GPCommandResponse<IGPAccountDetail> {
+public interface EnumLoginStatusConstants extends Constants {
 
-    private static final long serialVersionUID = 934448621485412681L;
-    //
-    private IGPAccountDetail accountDetail;
+    public static final EnumLoginStatusConstants INSTANCE =
+            GWT.create(EnumLoginStatusConstants.class);
 
-    public SSOLoginResponse() {
-    }
+    @DefaultStringValue("Login Succesfull")
+    String STATUS_MESSAGE_LOGIN();
 
-    public SSOLoginResponse(IGPAccountDetail theAccountDetail) {
-        this.accountDetail = theAccountDetail;
-    }
+    @DefaultStringValue("Login Failed")
+    String STATUS_MESSAGE_NOT_LOGIN();
 
-    @Override
-    public IGPAccountDetail getResult() {
-        return this.accountDetail;
-    }
-
-    @Override
-    public String toString() {
-        return "SSOLoginResponse{ " + "accountDetail = " + accountDetail + '}';
-    }
+    @DefaultStringValue("Login Service Error")
+    String STATUS_MESSAGE_LOGIN_ERROR();
 }

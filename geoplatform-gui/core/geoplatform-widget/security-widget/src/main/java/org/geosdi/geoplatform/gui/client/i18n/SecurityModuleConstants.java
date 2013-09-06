@@ -33,36 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.login.sso;
+package org.geosdi.geoplatform.gui.client.i18n;
 
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
-import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class SSOLoginResponse implements GPCommandResponse<IGPAccountDetail> {
+public interface SecurityModuleConstants extends Constants {
 
-    private static final long serialVersionUID = 934448621485412681L;
-    //
-    private IGPAccountDetail accountDetail;
+    public static final SecurityModuleConstants INSTANCE =
+            GWT.create(SecurityModuleConstants.class);
 
-    public SSOLoginResponse() {
-    }
+    @DefaultStringValue("Session Timeout")
+    String sessionTimeoutText();
 
-    public SSOLoginResponse(IGPAccountDetail theAccountDetail) {
-        this.accountDetail = theAccountDetail;
-    }
+    @DefaultStringValue("Login Error")
+    String loginErrorText();
 
-    @Override
-    public IGPAccountDetail getResult() {
-        return this.accountDetail;
-    }
+    /**
+     * start LoginWidget
+     */
+    @DefaultStringValue("Nome utente o password errati")
+    String LoginWidget_loginUsernamePasswordErrorText();
 
-    @Override
-    public String toString() {
-        return "SSOLoginResponse{ " + "accountDetail = " + accountDetail + '}';
-    }
+
+    /**
+     * start SessionLoginWidget
+     */
+    @DefaultStringValue("A different user from the previous one is trying to connect to the application.")
+    String SessionLoginWidget_differentLoginUserText();
+
+    @DefaultStringValue("Application Logout")
+    String SessionLoginWidget_applicationLogoutText();
+
+    /**
+     * start UserLogout
+     */
+    @DefaultStringValue("Log-out Message")
+    String UserLogout_logoutMessageTitleText();
+
+    @DefaultStringValue("Do you really want to leave the application?")
+    String UserLogout_logoutMessageBodyText();
+
+    @DefaultStringValue("Logout")
+    String UserLogout_tileText();
 }

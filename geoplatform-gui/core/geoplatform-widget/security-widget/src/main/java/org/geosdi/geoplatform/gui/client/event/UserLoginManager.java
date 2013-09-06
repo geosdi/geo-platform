@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
+import org.geosdi.geoplatform.gui.client.i18n.SecurityModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.LoginWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -60,9 +61,10 @@ public class UserLoginManager implements GPLoginHandler {
     @Override
     public void showUserLogin(GwtEvent event) {
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Session Timeout.",
+                SecurityModuleConstants.INSTANCE.sessionTimeoutText(),
                 EnumSearchStatus.STATUS_NO_SEARCH.toString());
-        LayoutManager.getInstance().getViewport().mask("Session Timeout",
+        LayoutManager.getInstance().getViewport().mask(
+                SecurityModuleConstants.INSTANCE.sessionTimeoutText(),
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
         SecurityGinInjector.MainInjector.getInstance().getSessionLoginWidget()
                 .setGwtEventOnSuccess(event);

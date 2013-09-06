@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.client.i18n.EnumLoginStatusConstants;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -46,9 +48,9 @@ public class LoginStatus extends StatusWidget {
         STATUS_LOGIN("x-status-ok"),
         STATUS_NO_LOGIN("x-status-not-ok"),
         STATUS_LOGIN_ERROR("x-status-error"),
-        STATUS_MESSAGE_LOGIN("Login Succesfull"),
-        STATUS_MESSAGE_NOT_LOGIN("Login Failed"),
-        STATUS_MESSAGE_LOGIN_ERROR("Login Service Error");
+        STATUS_MESSAGE_LOGIN(EnumLoginStatusConstants.INSTANCE.STATUS_MESSAGE_LOGIN()),
+        STATUS_MESSAGE_NOT_LOGIN(EnumLoginStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_LOGIN()),
+        STATUS_MESSAGE_LOGIN_ERROR(EnumLoginStatusConstants.INSTANCE.STATUS_MESSAGE_LOGIN_ERROR());
         //
         private String value;
 

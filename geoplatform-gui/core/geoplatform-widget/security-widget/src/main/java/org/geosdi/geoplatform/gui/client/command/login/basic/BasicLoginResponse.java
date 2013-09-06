@@ -65,5 +65,4 @@ public class BasicLoginResponse implements GPCommandResponse<IGPAccountDetail> {
     public String toString() {
         return "BasicLoginResponse{ " + "accountDetail = " + accountDetail + '}';
     }
-
 }

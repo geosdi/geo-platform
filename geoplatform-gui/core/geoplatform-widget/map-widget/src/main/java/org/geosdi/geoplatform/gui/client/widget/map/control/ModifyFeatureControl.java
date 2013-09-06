@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.client.widget.map.responsibility.LineRequestHa
 import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PointRequestHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PolygonRequestHandler;
 import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
-import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener;
 import org.gwtopenmaps.openlayers.client.event.VectorBeforeFeatureModifiedListener;

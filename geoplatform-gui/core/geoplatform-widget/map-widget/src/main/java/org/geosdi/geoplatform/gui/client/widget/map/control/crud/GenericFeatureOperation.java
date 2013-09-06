@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
 import org.gwtopenmaps.openlayers.client.control.SelectFeature;
@@ -74,14 +75,12 @@ public class GenericFeatureOperation extends GPVectorMapControl {
             SelectFeatureOptions selectFeatureOptions = new SelectFeatureOptions();
 
             selectFeatureOptions.clickFeature(new ClickFeatureListener() {
-
                 @Override
                 public void onFeatureClicked(final VectorFeature vectorFeature) {
                     GeoPlatformMessage.confirmMessage(
-                            "Delete Feature",
-                            "Are you sure you want to delete the selected feature ?",
+                            MapModuleConstants.INSTANCE.GenericFeatureOperation_confirmDeletionTitleText(),
+                            MapModuleConstants.INSTANCE.GenericFeatureOperation_confirmDeletionBodyText(),
                             new Listener<MessageBoxEvent>() {
-
                         @Override
                         public void handleEvent(MessageBoxEvent be) {
                             if (Dialog.YES.equals(
@@ -92,10 +91,8 @@ public class GenericFeatureOperation extends GPVectorMapControl {
                             }
 
                         }
-
                     });
                 }
-
             });
 
             control = new SelectFeature(vector, selectFeatureOptions);
@@ -147,5 +144,4 @@ public class GenericFeatureOperation extends GPVectorMapControl {
 
         return this.control;
     }
-
 }

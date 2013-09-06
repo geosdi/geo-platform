@@ -81,5 +81,4 @@ public class DrawPointFeature extends DrawGenericFeatureControl {
         super.activateControl();
         this.control.getLayer().setZIndex(9000);
     }
-
 }

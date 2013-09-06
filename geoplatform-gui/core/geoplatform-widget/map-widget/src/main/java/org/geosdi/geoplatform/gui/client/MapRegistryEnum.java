@@ -40,5 +40,6 @@ package org.geosdi.geoplatform.gui.client;
  * @email nazzareno.sileno@geosdi.org
  */
 public enum MapRegistryEnum {
+
     MAP_LAYOUT_WIDGET;
 }

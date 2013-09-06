@@ -40,7 +40,6 @@ package org.geosdi.geoplatform.gui.client.widget.map.control.crud;
  *
  */
 public enum OperationType {
-	
-	DELETE, EDIT;
 
+    DELETE, EDIT;
 }

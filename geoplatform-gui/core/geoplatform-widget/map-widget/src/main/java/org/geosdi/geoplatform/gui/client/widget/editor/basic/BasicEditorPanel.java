@@ -179,7 +179,7 @@ public class BasicEditorPanel extends GeoPlatformContentPanel implements
         this.actionTools = actionTools;
         this.geoPlatformMap = theGeoPlatformMap;
     }
-    
+
     public void resetEditorObserver() {
         this.editorObserver.changeButtonState();
     }

@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveFolderPropertiesRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveFolderPropertiesResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.MementoPersistenceConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -84,7 +85,7 @@ public class SaveFoldersPropertiesAction implements ISave<MementoFolderOriginalP
                 IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                 mementoSave.remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Save Folder Properties Operation completed successfully.",
+                        MementoPersistenceConstants.INSTANCE.SaveFoldersPropertiesAction_statusSaveSuccessText(),
                         EnumSearchStatus.STATUS_SEARCH.toString());
                 LayerHandlerManager.fireEvent(peekCacheEvent);
             }
@@ -95,8 +96,9 @@ public class SaveFoldersPropertiesAction implements ISave<MementoFolderOriginalP
                     GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
                 } else {
                     LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                    GeoPlatformMessage.errorMessage("Save Folder Properties Error",
-                            "Problems on saving the new folder properties");
+                    GeoPlatformMessage.errorMessage(
+                            MementoPersistenceConstants.INSTANCE.SaveFoldersPropertiesAction_errorSaveFolderTitleText(),
+                            MementoPersistenceConstants.INSTANCE.SaveFoldersPropertiesAction_errorSaveFolderBodyText());
                 }
             }
         });

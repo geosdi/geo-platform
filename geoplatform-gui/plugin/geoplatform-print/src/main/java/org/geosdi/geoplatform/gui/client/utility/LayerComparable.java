@@ -47,13 +47,12 @@ public class LayerComparable implements Comparator<GPLayerBean> {
 
     @Override
     public int compare(GPLayerBean t, GPLayerBean t1) {
-        if (t.getzIndex() <  t1.getzIndex()) {
+        if (t.getzIndex() < t1.getzIndex()) {
             return -1;
-        } else if (t.getzIndex() >  t1.getzIndex()) {
+        } else if (t.getzIndex() > t1.getzIndex()) {
             return 1;
         } else {
             return 0;
         }
     }
-    
 }

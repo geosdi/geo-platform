@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.utility;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.PrintTemplateConstants;
 import org.geosdi.geoplatform.gui.client.model.DPI;
 import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
 import org.geosdi.geoplatform.gui.client.model.Scale;
@@ -63,37 +64,33 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public class PrintUtility {
 
     public static List<DPI> getDPI() {
-        List<DPI> dpi = new ArrayList<DPI>();
-
+        List<DPI> dpi = Lists.<DPI>newArrayList();
         dpi.add(new DPI("72"));
         dpi.add(new DPI("127"));
         dpi.add(new DPI("190"));
         dpi.add(new DPI("254"));
         dpi.add(new DPI("300"));
         dpi.add(new DPI("600"));
-
         return dpi;
     }
 
     public static List<PrintTemplate> getTemplate() {
-        List<PrintTemplate> templates = new ArrayList<PrintTemplate>();
-
-        templates.add(new PrintTemplate("A4 Portrait"));
-        templates.add(new PrintTemplate("A3 Portrait"));
-        templates.add(new PrintTemplate("A2 Portrait"));
-        templates.add(new PrintTemplate("A1 Portrait"));
-        templates.add(new PrintTemplate("A0 Portrait"));
-        templates.add(new PrintTemplate("A4 Landscape"));
-        templates.add(new PrintTemplate("A3 Landscape"));
-        templates.add(new PrintTemplate("A2 Landscape"));
-        templates.add(new PrintTemplate("A1 Landscape"));
-        templates.add(new PrintTemplate("A0 Landscape"));
+        List<PrintTemplate> templates = Lists.<PrintTemplate>newArrayList();
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A4_Portrait()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A3_Portrait()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A2_Portrait()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A1_Portrait()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A0_Portrait()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A4_Landscape()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A3_Landscape()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A2_Landscape()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A1_Landscape()));
+        templates.add(new PrintTemplate(PrintTemplateConstants.INSTANCE.A0_Landscape()));
         return templates;
     }
 
     public static List<Scale> getScale() {
-        List<Scale> scales = new ArrayList<Scale>();
-
+        List<Scale> scales = Lists.<Scale>newArrayList();
         scales.add(new Scale("1:1.000"));
         scales.add(new Scale("1:1.600"));
         scales.add(new Scale("1:2.000"));
@@ -113,7 +110,6 @@ public class PrintUtility {
     }
 
     public static Vector createRectangle(LonLat center, float scale, Map map, double sizeFactor, boolean portrait) {
-
         Bounds extent = getExtent(center, scale, map, sizeFactor, portrait);
         Geometry rect = extent.toGeometry();
         VectorFeature features = new VectorFeature(rect);

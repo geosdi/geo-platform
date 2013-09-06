@@ -40,6 +40,8 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -93,7 +95,7 @@ public class ViewportWidget extends GeoPlatformWindow implements CreateViewportH
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml("Viewport Widget");
+        super.setHeadingHtml(MapModuleConstants.INSTANCE.ViewportWidget_headingText());
         super.setScrollMode(Style.Scroll.NONE);
         super.setResizable(Boolean.FALSE);
     }
@@ -107,16 +109,14 @@ public class ViewportWidget extends GeoPlatformWindow implements CreateViewportH
     @Override
     public void show() {
         ViewportWidget.super.show();
-        this.centralPanel.mask("Loading Viewport...");
+        this.centralPanel.mask(MapModuleConstants.INSTANCE.ViewportWidget_loadingMaskText());
         MapRemote.Util.getInstance().loadViewportElements(new AsyncCallback<List<GPClientViewport>>() {
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error loading",
-                        "An error occurred while making the requested connection.\n"
-                        + "Verify network connections and try again."
-                        + "\nIf the problem persists contact your system administrator.");
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorLoadingTitleText(),
+                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Error loading the viewport elements.",
+                        MapModuleConstants.INSTANCE.ViewportWidget_statusErrorLoadingText(),
                         SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 System.out.println("Error saving loading the viewport elements: " + caught.toString()
                         + " data: " + caught.getMessage());
@@ -148,7 +148,8 @@ public class ViewportWidget extends GeoPlatformWindow implements CreateViewportH
 
         BBoxClientInfo bbox = ViewportUtility.generateBBOXFromBounds(bounds);
         this.viewportToAdd = new GPClientViewport(viewportName,
-                "Insert description", bbox, zoom, Boolean.FALSE);
+                MapModuleConstants.INSTANCE.ViewportUtility_newViewportDescriptionText(),
+                bbox, zoom, Boolean.FALSE);
         this.show();
     }
 }

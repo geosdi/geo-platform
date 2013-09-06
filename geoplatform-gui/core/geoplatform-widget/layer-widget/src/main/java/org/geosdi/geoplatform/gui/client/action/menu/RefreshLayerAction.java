@@ -88,11 +88,10 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
                 GlobalRegistryEnum.EMITE_RESOURCE.getValue()),
                 layerSelected.getUUID(),
                 refreshTimeEnum.getValue(), new AsyncCallback<Object>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorReloadingTitleText(),
-                        LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
+                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         LayerModuleConstants.INSTANCE.RefreshLayerAction_statusReloadTimeErrorText(),
                         SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
@@ -131,7 +130,6 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
                     (String) Registry.get(
                     GlobalRegistryEnum.EMITE_RESOURCE.getValue()),
                     messageBody, 0, new AsyncCallback<Object>() {
-
                 @Override
                 public void onFailure(Throwable caught) {
 //                    System.out.println("Fallita rimozione layer xmpp in ascolto: " + messageBody);

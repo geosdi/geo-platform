@@ -88,18 +88,15 @@ public class ModifyFeatureControl extends GPVectorMapControl {
 
             vector.addVectorBeforeFeatureModifiedListener(
                     new VectorBeforeFeatureModifiedListener() {
-
                 @Override
                 public void onBeforeFeatureModified(
                         BeforeFeatureModifiedEvent eventObject) {
                     selectedFeature = eventObject.getVectorFeature().clone();
                 }
-
             });
 
             vector.addVectorAfterFeatureModifiedListener(
                     new VectorAfterFeatureModifiedListener() {
-
                 @Override
                 public void onAfterFeatureModified(
                         AfterFeatureModifiedEvent eventObject) {
@@ -109,7 +106,6 @@ public class ModifyFeatureControl extends GPVectorMapControl {
                     requestManager.forwardRequest(pointHandler, feature);
 
                 }
-
             });
 
             this.initialized = true;
@@ -162,5 +158,4 @@ public class ModifyFeatureControl extends GPVectorMapControl {
 
         return this.control;
     }
-
 }

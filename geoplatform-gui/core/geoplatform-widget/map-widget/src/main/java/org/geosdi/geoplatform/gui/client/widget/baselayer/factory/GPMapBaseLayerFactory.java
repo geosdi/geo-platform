@@ -44,10 +44,10 @@ import org.geosdi.geoplatform.gui.factory.baselayer.GPBaseLayerFactory;
 import org.geosdi.geoplatform.gui.global.enumeration.BaseLayerValue;
 
 /**
-
+ *
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -61,7 +61,7 @@ public class GPMapBaseLayerFactory {
     private static EnumMap<BaseLayerValue, GPBaseLayer> baseLayerMap;
 
     public static List<GPBaseLayer> getBaseLayerList() {
-        return Lists.newArrayList(baseLayerMap.values());
+        return Lists.<GPBaseLayer>newArrayList(baseLayerMap.values());
     }
 
     public static GPBaseLayer getGPBaseLayer(BaseLayerValue baseLayerEnum) {

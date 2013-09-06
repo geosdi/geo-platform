@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.control.crud.OperationType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -51,14 +52,15 @@ public class DeleteFeatureAction extends EditorFeatureAction {
 
     public DeleteFeatureAction(GeoPlatformMap theMapWidget) {
         super(theMapWidget, BasicWidgetResources.ICONS.erase(),
-                "Delete Feature");
+                MapModuleConstants.INSTANCE.DeleteFeatureAction_tooltipText());
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
         if (((MapLayoutWidget) this.mapWidget).getFeaturesNumber() == 0) {
-            GeoPlatformMessage.alertMessage("Feaures Service",
-                    "There are no Features to erase.");
+            GeoPlatformMessage.alertMessage(MapModuleConstants.INSTANCE.
+                    DeleteFeatureAction_alertNoFeatureTitleText(),
+                    MapModuleConstants.INSTANCE.DeleteFeatureAction_alertNoFeatureBodyText());
             return;
         }
 
@@ -79,5 +81,4 @@ public class DeleteFeatureAction extends EditorFeatureAction {
     public void disableControl() {
         this.featureOperation.deactivateControl();
     }
-
 }

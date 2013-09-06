@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportWidget;
 import org.gwtopenmaps.openlayers.client.Map;
 
@@ -50,7 +51,8 @@ public class ViewportAction extends MenuBaseAction {
     private ViewportWidget viewportWidget;
 
     public ViewportAction(Map map) {
-        super("Viewport", BasicWidgetResources.ICONS.viewport());
+        super(MapModuleConstants.INSTANCE.ViewportAction_titleText(), 
+                BasicWidgetResources.ICONS.viewport());
         this.viewportWidget = new ViewportWidget(Boolean.TRUE, map);
     }
 

@@ -63,10 +63,10 @@ public class OAuth2WidgetUI implements EntryPoint {
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
         menuRegistar.put("googleSignOnButton",
                 new MenuActionCreator() {
-                    @Override
-                    public MenuAction createAction() {
-                        return new GoogleSignOnAction();
-                    }
-                });
+            @Override
+            public MenuAction createAction() {
+                return new GoogleSignOnAction();
+            }
+        });
     }
 }

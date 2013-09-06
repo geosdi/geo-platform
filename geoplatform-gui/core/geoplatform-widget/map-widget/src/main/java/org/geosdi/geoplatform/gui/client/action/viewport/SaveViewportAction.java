@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.action.viewport;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformSecureAction;
@@ -83,12 +85,10 @@ public class SaveViewportAction extends GeoPlatformSecureAction<ButtonEvent> {
             MapRemote.Util.getInstance().replaceViewportList(store.getModels(), new AsyncCallback<Object>() {
                 @Override
                 public void onFailure(Throwable caught) {
-                    GeoPlatformMessage.errorMessage("Error saving",
-                            "An error occurred while making the requested connection.\n"
-                            + "Verify network connections and try again."
-                            + "\nIf the problem persists contact your system administrator.");
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorSavingTitleText(),
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Error saving the viewport list.",
+                            MapModuleConstants.INSTANCE.SaveViewportAction_statusErrorSavingText(),
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                     System.out.println("Error saving the viewport list: " + caught.toString()
                             + " data: " + caught.getMessage());
@@ -98,14 +98,14 @@ public class SaveViewportAction extends GeoPlatformSecureAction<ButtonEvent> {
                 public void onSuccess(Object result) {
                     store.commitChanges();
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Succesfully saved the viewport list.",
+                            MapModuleConstants.INSTANCE.SaveViewportAction_statusSaveSuccesfullText(),
                             SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
                 }
             });
         } else {
-            GeoPlatformMessage.errorMessage("Viewport Incorrect",
-                    "Before to save it is necessary to correct or fill "
-                    + "the: Name, zoom or BBOX values");
+            GeoPlatformMessage.errorMessage(MapModuleConstants.INSTANCE.
+                    SaveViewportAction_errorViewportTitleText(),
+                    MapModuleConstants.INSTANCE.SaveViewportAction_errorViewportBodyText());
         }
     }
 }

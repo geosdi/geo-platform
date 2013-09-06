@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.widget.Info;
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.Timer;
 import org.geosdi.geoplatform.gui.client.event.IChangeBaseLayerHandler;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.model.GPBaseLayer;
@@ -202,7 +203,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.measure.addMeasureListener(new MeasureListener() {
             @Override
             public void onMeasure(MeasureEvent eventObject) {
-                Info.display("Distance is: ", eventObject.getMeasure() + " "
+                Info.display(MapModuleConstants.INSTANCE.MapLayoutWidget_infoDiscanceText()
+                        + ": ", eventObject.getMeasure() + " "
                         + eventObject.getUnits());
             }
         });
@@ -217,7 +219,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.measureArea.addMeasureListener(new MeasureListener() {
             @Override
             public void onMeasure(MeasureEvent eventObject) {
-                Info.display("Area is: ", eventObject.getMeasure() + " "
+                Info.display(MapModuleConstants.INSTANCE.MapLayoutWidget_infoAreaText()
+                        + ": ", eventObject.getMeasure() + " "
                         + eventObject.getUnits());
             }
         });
@@ -231,7 +234,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.map.addMapLayerChangedListener(this.featureInfoLayerChangedListener);
         this.map.addMapLayerRemovedListener(this.featureInfoLayerRemovedListener);
         MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive,
-                Lists.newArrayList(map.getLayers())));
+                Lists.<Layer>newArrayList(map.getLayers())));
     }
 
     @Override
@@ -554,7 +557,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         Timer t = new Timer() {
             @Override
             public void run() {
-                GPScaleWidget.display("Scale");
+                GPScaleWidget.display(MapModuleConstants.INSTANCE.MapLayoutWidget_scaleText());
             }
         };
         t.schedule(3000);
@@ -607,7 +610,10 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
             GPHandlerManager.fireEvent(this.changeBaseLayerMapEvent);
         } else {
-            GeoPlatformMessage.infoMessage("Base Layer", "The selected base layer is already displayed");
+            GeoPlatformMessage.infoMessage(MapModuleConstants.INSTANCE.
+                    MapLayoutWidget_baseLayerAlreadyDisplayedTitleText(),
+                    MapModuleConstants.INSTANCE.
+                    MapLayoutWidget_baseLayerAlreadyDisplayedBodyText());
         }
     }
 }

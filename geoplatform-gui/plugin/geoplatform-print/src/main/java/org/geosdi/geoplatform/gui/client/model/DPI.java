@@ -70,8 +70,7 @@ public class DPI extends GeoPlatformBeanModel {
     }
 
     /**
-     * @param dpi
-     *            the dpi to set
+     * @param dpi the dpi to set
      */
     public void setDpi(String dpi) {
         set(EnumDPI.DPI.getValue(), dpi);
@@ -79,7 +78,7 @@ public class DPI extends GeoPlatformBeanModel {
 
     /**
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

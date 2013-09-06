@@ -63,7 +63,7 @@ import org.springframework.stereotype.Component;
 public class DTOMementoConverter {
 
     public List<GPLayer> convertMementoLayers(List<AbstractMementoLayer> addedLayers) {
-        List<GPLayer> layersList = Lists.newArrayList();
+        List<GPLayer> layersList = Lists.<GPLayer>newArrayList();
         GPFolder folder = new GPFolder();
         for (AbstractMementoLayer memento : addedLayers) {
             GPLayer layer = null;
@@ -116,7 +116,7 @@ public class DTOMementoConverter {
         dto.setOpacity(memento.getOpacity());
         dto.setCqlFilter(memento.getCqlFilter());
         dto.setTimeFilter(memento.getTimeFilter());
-        List<String> styleList = Lists.newArrayList();
+        List<String> styleList = Lists.<String>newArrayList();
         if (memento.getStyleList() != null) {
             for (GPStyleStringBeanModel beanModel : memento.getStyleList()) {
                 styleList.add(beanModel.getStyleString());

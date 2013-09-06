@@ -42,6 +42,7 @@ import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -81,7 +82,7 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
                 } else {
                     GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
                             ShareProjectMenuAction_errorSharingTitleText(),
-                            LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             LayerModuleConstants.INSTANCE.ShareProjectMenuAction_statusErrorSharingText(),
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());

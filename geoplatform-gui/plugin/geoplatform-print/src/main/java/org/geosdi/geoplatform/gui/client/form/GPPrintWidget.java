@@ -52,6 +52,7 @@ import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -61,7 +62,6 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -73,6 +73,9 @@ import org.geosdi.geoplatform.gui.client.form.binding.GPComboBoxFieldBinding;
 import org.geosdi.geoplatform.gui.client.form.binding.MapCommentFieldBinding;
 import org.geosdi.geoplatform.gui.client.form.binding.MapTitleFieldBinding;
 import org.geosdi.geoplatform.gui.client.form.binding.PrintTitleFieldBinding;
+import org.geosdi.geoplatform.gui.client.i18n.PrintModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.PrintTemplateConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.DPI;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean.GPPrintEnumBean;
@@ -141,7 +144,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     @Override
     public void initSize() {
-        super.setHeadingHtml("GeoPlatform Print Widget");
+        super.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_headingText());
         super.setPosition(RootPanel.get().getOffsetWidth() - 400 - 6, 55);
         setSize(400, 650);
     }
@@ -229,10 +232,10 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             builder.setHeader("Content-Type",
                     "application/x-www-form-urlencoded");
             try {
-                Info.display("Print", "Print Started");
+                Info.display(PrintModuleConstants.INSTANCE.printText(),
+                        PrintModuleConstants.INSTANCE.GPPrintWidget_infoStartPringBodyText());
                 Request response = builder.sendRequest(jsonData,
                         new RequestCallback() {
-
                     @Override
                     public void onError(Request request, Throwable exception) {
                         Window.alert(exception.getLocalizedMessage());
@@ -241,14 +244,14 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                     @Override
                     public void onResponseReceived(Request request,
                             Response response) {
-                        Info.display("Print", "Print Finished");
+                        Info.display(PrintModuleConstants.INSTANCE.printText(),
+                                PrintModuleConstants.INSTANCE.GPPrintWidget_infoFinishPrintBodyText());
                         String downloadURL = response.getText().substring(11,
                                 response.getText().indexOf("printout") + 8);
 
                         Window.open(downloadURL, "_blank", "");
 
                     }
-
                 });
             } catch (RequestException ex) {
                 Logger.getLogger(GPPrintWidget.class.getName()).log(Level.SEVERE,
@@ -443,7 +446,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addEditPrintSettings() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml("Edit Print Settings");
+        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_editFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -452,20 +455,20 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         title = new TextField<String>();
         title.setAllowBlank(false);
         title.setName(GPPrintEnumBean.GPPRINT_TITLE.toString());
-        title.setFieldLabel("Title");
+        title.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_titleLabelText());
 
         fieldSet.add(title);
 
         mapTitle = new TextField<String>();
         mapTitle.setName(GPPrintEnumBean.GPPRINT_MAP_TITLE.toString());
-        mapTitle.setFieldLabel("Map Title");
+        mapTitle.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_mapTitleLabelText());
 
         fieldSet.add(mapTitle);
 
         comments = new TextArea();
         comments.setName(GPPrintEnumBean.GPPRINT_COMMENTS.toString());
         comments.setPreventScrollbars(true);
-        comments.setFieldLabel("Comments");
+        comments.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_commentsLabelText());
 
         comments.setSize(150, 150);
         fieldSet.add(comments);
@@ -475,7 +478,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addComboDPI() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml("DPI");
+        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_DPIFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -485,8 +488,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         this.storeDPI.add(PrintUtility.getDPI());
 
         this.comboDPI = new ComboBox<DPI>();
-        this.comboDPI.setFieldLabel("Select DPI");
-        this.comboDPI.setEmptyText("Choose DPI....");
+        this.comboDPI.setFieldLabel(PrintModuleConstants.INSTANCE.GPPrintWidget_comboDPIFieldLabelText());
+        this.comboDPI.setEmptyText(PrintModuleConstants.INSTANCE.GPPrintWidget_comboDPIEmptyText());
         this.comboDPI.setDisplayField(DPI.EnumDPI.DPI.getValue());
         this.comboDPI.setEditable(false);
         this.comboDPI.setAllowBlank(false);
@@ -503,7 +506,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addComboTemplate() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml("Template");
+        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_templateFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -513,9 +516,11 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         this.storeTemplate.add(PrintUtility.getTemplate());
 
         this.comboTemplate = new ComboBox<PrintTemplate>();
-        this.comboTemplate.setFieldLabel("Select Template");
+        this.comboTemplate.setFieldLabel(
+                PrintModuleConstants.INSTANCE.GPPrintWidget_comboTemplateFieldLabelText());
 //        this.comboTemplate.setEmptyText("Choose Template....");
-        this.comboTemplate.setValue(new PrintTemplate("A4 Portrait"));
+        this.comboTemplate.setValue(new PrintTemplate(
+                PrintTemplateConstants.INSTANCE.A4_Portrait()));
 
         this.comboTemplate.setDisplayField(
                 PrintTemplate.PrintEnumTemplate.TEMPLATE.getValue());
@@ -533,7 +538,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         comboTemplate.addSelectionChangedListener(
                 new SelectionChangedListener<PrintTemplate>() {
-
             @Override
             public void selectionChanged(SelectionChangedEvent<PrintTemplate> se) {
                 if (se != null) {
@@ -570,13 +574,12 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
                 }
             }
-
         });
     }
 
     private void addScaleCombo() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml("Scale");
+        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.GPPrintWidget_scaleFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
@@ -586,7 +589,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         this.storeScale.add(PrintUtility.getScale());
 
         this.comboScale = new ComboBox<Scale>();
-        this.comboScale.setFieldLabel("Select Scale");
+        this.comboScale.setFieldLabel(PrintModuleConstants.INSTANCE.
+                GPPrintWidget_comboScaleFieldLabelText());
 //        this.comboScale.setEmptyText("Choose Scale....");
         this.comboScale.setValue(new Scale("1:4.000.000"));
         this.comboScale.setDisplayField(
@@ -605,7 +609,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
         comboScale.addSelectionChangedListener(
                 new SelectionChangedListener<Scale>() {
-
             @Override
             public void selectionChanged(SelectionChangedEvent<Scale> se) {
                 if (se != null) {
@@ -640,7 +643,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
                 }
             }
-
         });
 
 
@@ -648,14 +650,17 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void addCheckPrintBaseMap() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml("Base Map");
+        fieldSet.setHeadingHtml(PrintModuleConstants.INSTANCE.
+                GPPrintWidget_checkPrintFieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(100);
         layout.setLabelPad(5);
         fieldSet.setLayout(layout);
         this.checkPrintBaseMap = new CheckBox();
-        this.checkPrintBaseMap.setFieldLabel("Print Base Map");
-        this.checkPrintBaseMap.setToolTip("Warning: only for 4326 base map!");
+        this.checkPrintBaseMap.setFieldLabel(PrintModuleConstants.INSTANCE.
+                GPPrintWidget_checkBoxPrintBaseMapFieldLabelText());
+        this.checkPrintBaseMap.setToolTip(PrintModuleConstants.INSTANCE.
+                GPPrintWidget_checkBoxPrintBaseMapTooltipText());
         fieldSet.add(this.checkPrintBaseMap);
         super.formPanel.add(fieldSet);
     }
@@ -663,21 +668,20 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private void addButtons() {
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        print = new Button("Print", PrintResources.ICONS.print(),
+        print = new Button(ButtonsConstants.INSTANCE.printText(),
+                PrintResources.ICONS.print(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 execute();
             }
-
         });
 
         this.formPanel.addButton(print);
 
-        this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
+        this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
+                BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (GPApplicationMap.getInstance().getApplicationMap().getMap().
@@ -693,7 +697,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                 }
                 hide();
             }
-
         });
 
         this.formPanel.addButton(cancel);
@@ -716,7 +719,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     }
 
     public List<GPLayerBean> buildLayerList() {
-        layerList = new ArrayList<GPLayerBean>();
+        layerList = Lists.<GPLayerBean>newArrayList();
         AbstractRootTreeNode root = (AbstractRootTreeNode) this.tree.getStore().
                 getRootItems().get(
                 0);
@@ -744,34 +747,34 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     private void updateRotationAndSizeForPrint(String template) {
 
-        if (template.contains("A4 Landscape")) {
+        if (template.contains(PrintTemplateConstants.INSTANCE.A4_Landscape())) {
             sizeFactor = .5;
             rotation = false;
-        } else if (template.contains("A4 Portrait")) {
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A4_Portrait())) {
             sizeFactor = .5;
             rotation = true;
-        } else if (template.contains("A3 Landscape")) {
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A3_Landscape())) {
             sizeFactor = 1;
             rotation = false;
-        } else if (template.contains("A3 Portrait")) {
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A3_Portrait())) {
             sizeFactor = 1;
             rotation = true;
-        } else if (template.contains("A2 Landscape")) {
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A2_Landscape())) {
             sizeFactor = 2;
             rotation = false;
-        } else if (template.contains("A2 Portrait")) {
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A2_Portrait())) {
             sizeFactor = 2;
             rotation = true;
-        } else if (template.contains("A1 Landscape")) {
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A1_Landscape())) {
             sizeFactor = 3;
             rotation = false;
-        } else if (template.contains("A1 Portrait")) {
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A1_Portrait())) {
             sizeFactor = 3;
             rotation = true;
-        } else if (template.contains("A0 Landscape")) {
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A0_Landscape())) {
             sizeFactor = 4;
             rotation = false;
-        } else if (template.contains("A0 Portrait")) {
+        } else if (template.contains(PrintTemplateConstants.INSTANCE.A0_Portrait())) {
             sizeFactor = 4;
             rotation = true;
         }
@@ -785,5 +788,4 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                 replaceAll("\\.", "");
         return Float.parseFloat(scaleStringWithoutDot);
     }
-
 }

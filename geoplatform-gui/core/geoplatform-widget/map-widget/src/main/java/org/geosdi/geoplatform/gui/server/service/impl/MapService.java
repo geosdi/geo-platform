@@ -118,7 +118,7 @@ public class MapService implements IMapService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        
+
         ArrayList<GPViewport> viewportListElements = null;
         try {
             GPAccountProject accountProject = this.geoPlatformServiceClient
@@ -156,7 +156,7 @@ public class MapService implements IMapService {
     }
 
     private List<GPClientViewport> convertServerViewportToDTO(ArrayList<GPViewport> viewportList) {
-        List<GPClientViewport> clientViewportList = Lists.newArrayList();
+        List<GPClientViewport> clientViewportList = Lists.<GPClientViewport>newArrayList();
         GPClientViewport clientViewport;
         GPBBox serverBBOX;
         BBoxClientInfo clientBBOX;
@@ -174,7 +174,7 @@ public class MapService implements IMapService {
     }
 
     private ArrayList<GPViewport> convertClientViewportToDTO(List<GPClientViewport> viewportList) {
-        ArrayList<GPViewport> serverViewportList = Lists.newArrayList();
+        ArrayList<GPViewport> serverViewportList = Lists.<GPViewport>newArrayList();
         GPViewport serverViewport;
         GPBBox serverBBOX;
         BBoxClientInfo clientBBOX;

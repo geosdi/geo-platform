@@ -76,5 +76,4 @@ public class VectorFeatureStyle {
     public void setVectorStyle(Style vectorStyle) {
         this.vectorStyle = vectorStyle;
     }
-
 }

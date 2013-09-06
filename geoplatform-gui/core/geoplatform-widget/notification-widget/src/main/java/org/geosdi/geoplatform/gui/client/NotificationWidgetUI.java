@@ -19,7 +19,7 @@ public class NotificationWidgetUI implements EntryPoint {
 //        NotificationGinInjector.MainInjector.getInstance().getNotificationCenterMenuAction();
         ToolbarActionRegistar registar = BasicGinInjector.MainInjector.getInstance().getToolbarActionRegistar();
         registar.put("notificationMenu",
-                     new ToolbarActionCreator() {
+                new ToolbarActionCreator() {
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap map) {
                 return NotificationGinInjector.MainInjector.getInstance().

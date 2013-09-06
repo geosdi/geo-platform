@@ -50,6 +50,7 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.annotation.ResetButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.SaveButton;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.EditingToolBarDialog;
@@ -172,14 +173,13 @@ public class FeatureWidget extends GeoPlatformWindow
 
         this.disableButtons();
 
-        Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
+        Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
+                BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 hide();
             }
-
         });
         super.addButton(close);
     }
@@ -265,5 +265,4 @@ public class FeatureWidget extends GeoPlatformWindow
         resetButton.enable();
         saveButton.enable();
     }
-
 }

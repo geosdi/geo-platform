@@ -39,7 +39,7 @@ import com.google.gwt.event.shared.EventHandler;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public interface ZoomPreviousEventHandler extends EventHandler {
 

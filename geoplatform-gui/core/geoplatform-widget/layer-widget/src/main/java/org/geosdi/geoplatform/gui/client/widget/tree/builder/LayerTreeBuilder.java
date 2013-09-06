@@ -45,6 +45,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
@@ -114,7 +115,7 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
                         GPHandlerManager.fireEvent(new GPLoginEvent(buildEvent));
                     } else {
                         GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorLoadingTitleText(),
-                                LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
+                                WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                         LayoutManager.getInstance().getStatusMap().setStatus(
                                 LayerModuleConstants.INSTANCE.statusErrorLoadingTreeElementsText(),
                                 SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());

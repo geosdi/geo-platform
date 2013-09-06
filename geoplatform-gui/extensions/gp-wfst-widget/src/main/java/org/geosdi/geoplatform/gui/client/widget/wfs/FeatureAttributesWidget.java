@@ -111,7 +111,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     public void bind(LayerSchemaDTO theSchemaDTO) {
-        assert (theSchemaDTO.getAttributes() != null) : "Attributes must not bu null.";
+        assert (theSchemaDTO.getAttributes() != null) : "Attributes must not be null.";
         this.schemaDTO = theSchemaDTO;
     }
 

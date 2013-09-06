@@ -26,6 +26,8 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.GPEPSGContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
@@ -78,19 +80,21 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
 
     @Override
     public void addComponentToForm() {
-        super.setHeadingHtml("Find Position");
+        super.setHeadingHtml(MapModuleConstants.INSTANCE.GotoXYWidget_headingText());
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml("Goto X - Y");
+        fieldSet.setHeadingHtml(MapModuleConstants.INSTANCE.GotoXYWidget_fieldSetHeadingText());
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         fieldSet.setLayout(layout);
         this.epsgPanel = new GPEPSGContentPanel(Boolean.FALSE);
         fieldSet.add(this.epsgPanel);
         this.xNumberField = new NumberField();
-        this.xNumberField.setFieldLabel("X");
+        this.xNumberField.setFieldLabel(MapModuleConstants.INSTANCE.
+                GotoXYWidget_xFieldLabelText());
         fieldSet.add(this.xNumberField);
         this.yNumberField = new NumberField();
-        this.yNumberField.setFieldLabel("Y");
+        this.yNumberField.setFieldLabel(MapModuleConstants.INSTANCE.
+                GotoXYWidget_yFieldLabelText());
         fieldSet.add(this.yNumberField);
         this.formPanel.add(fieldSet);
         saveStatus = new SaveStatus();
@@ -98,7 +102,8 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
         formPanel.setButtonAlign(HorizontalAlignment.LEFT);
         formPanel.getButtonBar().add(saveStatus);
         formPanel.getButtonBar().add(new FillToolItem());
-        this.find = new Button("Find", new SelectionListener<ButtonEvent>() {
+        this.find = new Button(ButtonsConstants.INSTANCE.findText(),
+                new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (formPanel.isValid()) {
@@ -107,13 +112,13 @@ public class GotoXYWidget extends GeoPlatformFormWidget<PointRepresentation> imp
             }
         });
         formPanel.addButton(this.find);
-        this.close = new Button("Close",
+        this.close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 new SelectionListener<ButtonEvent>() {
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        GotoXYWidget.this.hide(GotoXYWidget.this.close);
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                GotoXYWidget.this.hide(GotoXYWidget.this.close);
+            }
+        });
         formPanel.addButton(this.close);
     }
 

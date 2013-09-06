@@ -41,6 +41,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.action.IOpenEditorMapAction;
 import org.geosdi.geoplatform.gui.action.toggle.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.editor.basic.BasicEditorWidget;
 import org.geosdi.geoplatform.gui.configuration.widget.EditorActionTool;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -60,7 +61,7 @@ public class OpenEditorMapAction extends MapToggleAction
 
     public OpenEditorMapAction(GeoPlatformMap theMapWidget) {
         super(theMapWidget, Resources.ICONS.editorAOE(),
-              "Open Basic Map Editor");
+              MapModuleConstants.INSTANCE.OpenEditorMapAction_tooltipText());
     }
 
     @Override

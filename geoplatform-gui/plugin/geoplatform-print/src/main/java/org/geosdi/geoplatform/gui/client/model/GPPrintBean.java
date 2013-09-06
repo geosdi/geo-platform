@@ -108,7 +108,7 @@ public class GPPrintBean extends GeoPlatformBeanModel {
                 + mapTitle + ", comments=" + comments
                 + ", dpi=" + dpi + '}';
     }
-    
+
     public void reset() {
         this.setTitle(null);
         this.setMapTitle(null);

@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.action.baselayer;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.service.MapRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.BaseLayerWidget;
@@ -46,7 +48,6 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
@@ -69,12 +70,10 @@ public class SaveBaseLayerAction extends GeoPlatformSecureAction<ComponentEvent>
         MapRemote.Util.getInstance().saveBaseLayer(baseLayer, new AsyncCallback<Object>() {
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error saving",
-                        "An error occurred while making the requested connection.\n"
-                        + "Verify network connections and try again."
-                        + "\nIf the problem persists contact your system administrator.");
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorSavingTitleText(),
+                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Error saving the new base layer.",
+                        MapModuleConstants.INSTANCE.SaveBaseLayerAction_statusErrorSavingText(),
                         SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 System.out.println("Error saving the new base layer: " + caught.toString()
                         + " data: " + caught.getMessage());
@@ -84,7 +83,7 @@ public class SaveBaseLayerAction extends GeoPlatformSecureAction<ComponentEvent>
             public void onSuccess(Object result) {
                 widget.hide();
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Base Layer successfully saved.",
+                        MapModuleConstants.INSTANCE.SaveBaseLayerAction_statusSaveSuccesfullText(),
                         SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
             }
         });

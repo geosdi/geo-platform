@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveLayerPropertiesRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveLayerPropertiesResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.MementoPersistenceConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -84,7 +85,8 @@ public class SaveLayersPropertiesAction implements ISave<MementoLayerOriginalPro
                 IMementoSave mementoSave = MementoModuleInjector.MainInjector.getInstance().getMementoSave();
                 mementoSave.remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "Save Layer Properties Operation completed successfully.",
+                        MementoPersistenceConstants.INSTANCE.
+                        SaveLayersPropertiesAction_statusSaveLayerSuccessText(),
                         EnumSearchStatus.STATUS_SEARCH.toString());
                 LayerHandlerManager.fireEvent(peekCacheEvent);
             }
@@ -95,8 +97,10 @@ public class SaveLayersPropertiesAction implements ISave<MementoLayerOriginalPro
                     GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
                 } else {
                     LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                    GeoPlatformMessage.errorMessage("Save Layer Properties Error",
-                            "Problems on saving the new layer properties");
+                    GeoPlatformMessage.errorMessage(MementoPersistenceConstants.INSTANCE.
+                            SaveLayersPropertiesAction_errorSaveLayerPropertiesTitleText(),
+                            MementoPersistenceConstants.INSTANCE.
+                            SaveLayersPropertiesAction_errorSaveLayerPropertiesBodyText());
                 }
             }
         });

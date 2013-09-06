@@ -73,14 +73,12 @@ public abstract class DrawGenericFeatureControl extends GPVectorMapControl {
      */
     protected FeatureAddedListener createFeatureAddedListener() {
         return new FeatureAddedListener() {
-
             @Override
             public void onFeatureAdded(VectorFeature vf) {
 
                 Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
 
             }
-
         };
     }
 
@@ -112,5 +110,4 @@ public abstract class DrawGenericFeatureControl extends GPVectorMapControl {
 
         return this.control;
     }
-
 }

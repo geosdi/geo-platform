@@ -40,10 +40,11 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.Window;
+import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
- * 
+ *
  */
 public class LegendWindow extends Window {
 
@@ -55,7 +56,7 @@ public class LegendWindow extends Window {
     public LegendWindow() {
         setMaximizable(false);
         setCollapsible(true);
-        setHeadingHtml("Legend Window");
+        setHeadingHtml(MapModuleConstants.INSTANCE.LegendWindow_headingText());
         setHeight(300);
         setWidth(200);
         setScrollMode(Scroll.AUTOY);

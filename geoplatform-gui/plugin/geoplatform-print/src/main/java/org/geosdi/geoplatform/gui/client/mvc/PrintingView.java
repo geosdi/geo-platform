@@ -47,15 +47,14 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @mail francesco.izzi@geosdi.org
  */
 public class PrintingView extends GeoPlatformView {
-    
+
     private GPPrintWidget printWidget;
-    
-    
+
     public PrintingView(Controller controller) {
         super(controller);
         this.printWidget = new GPPrintWidget();
     }
-    
+
     @Override
     protected void handleEvent(AppEvent event) {
         if (event.getType() == GeoPlatformEvents.SHOW_PRINTING_WIDGET) {

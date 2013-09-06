@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.img.LayerWidgetImage;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
@@ -81,7 +82,7 @@ public class ShareProjectCommandAction<X extends ButtonEvent> extends AbstractCo
                 } else {
                     GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
                             ShareProjectCommandAction_errorLoadingProjectText(),
-                            LayerModuleConstants.INSTANCE.errorMakingConnectionBodyText());
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             LayerModuleConstants.INSTANCE.
                             ShareProjectCommandAction_errorLoadingProjectText(),

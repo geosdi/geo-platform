@@ -47,6 +47,12 @@ public interface ButtonsConstants extends Constants {
 
     public final static ButtonsConstants INSTANCE = GWT.create(ButtonsConstants.class);
 
+    @DefaultStringValue("Next >")
+    String nextText();
+
+    @DefaultStringValue("Preview")
+    String previewText();
+    
     @DefaultStringValue("Select")
     String selectText();
 
@@ -58,28 +64,34 @@ public interface ButtonsConstants extends Constants {
 
     @DefaultStringValue("Close")
     String closeText();
-    
+
     @DefaultStringValue("Reset")
     String resetText();
-    
+
     @DefaultStringValue("Login")
     String loginText();
-    
+
     @DefaultStringValue("Save")
     String saveText();
-    
+
     @DefaultStringValue("Search")
     String searchText();
-    
+
+    @DefaultStringValue("Find")
+    String findText();
+
     @DefaultStringValue("Insert")
     String insertText();
 
     @DefaultStringValue("Apply")
     String applyText();
 
+    @DefaultStringValue("Apply/Close")
+    String applyCloseText();
+
     @DefaultStringValue("Verify")
     String verifyText();
-    
+
     @DefaultStringValue("Create")
     String createText();
 
@@ -91,7 +103,7 @@ public interface ButtonsConstants extends Constants {
 
     @DefaultStringValue("Delete")
     String deleteText();
-    
+
     @DefaultStringValue("Share")
     String shareText();
 
@@ -106,4 +118,10 @@ public interface ButtonsConstants extends Constants {
 
     @DefaultStringValue("Add To Layers Tree")
     String addToLayersTreeText();
+
+    @DefaultStringValue("Set Default")
+    String setDefautlText();
+
+    @DefaultStringValue("Print")
+    String printText();
 }

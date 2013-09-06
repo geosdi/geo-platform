@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import com.extjs.gxt.ui.client.Registry;
+import com.google.common.collect.Maps;
 import com.google.gwt.core.client.GWT;
-import java.util.HashMap;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SendSharedProjectNotificationRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SendSharedProjectNotificationResponse;
@@ -132,7 +132,7 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMe
                 <SendSharedProjectNotificationRequest>create(SendSharedProjectNotificationRequest.class);
 
         sharedProjectNotificationRequest.setProjectId(project.getId());
-        sharedProjectNotificationRequest.setAttributesMap(new HashMap<String, String>());
+        sharedProjectNotificationRequest.setAttributesMap(Maps.<String, String>newHashMap());
         sharedProjectNotificationRequest.setSubject(XMPPSubjectEnum.RELOAD_TREE);
         sharedProjectNotificationRequest.setText("Reload proj");
 

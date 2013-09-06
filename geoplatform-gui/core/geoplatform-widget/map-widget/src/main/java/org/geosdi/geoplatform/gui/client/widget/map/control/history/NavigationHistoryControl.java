@@ -72,43 +72,35 @@ public class NavigationHistoryControl implements GeoPlatformMapControl {
 
         this.control.getPrevious().addControlActivateListener(
                 new ControlActivateListener() {
-
             @Override
             public void onActivate(ControlActivateEvent eventObject) {
                 GPHandlerManager.fireEvent(new ZoomPreviousEvent(true));
             }
-
         });
 
         this.control.getPrevious().addControlDeactivateListener(
                 new ControlDeactivateListener() {
-
             @Override
             public void onDeactivate(ControlDeactivateEvent eventObject) {
                 GPHandlerManager
                         .fireEvent(new ZoomPreviousEvent(false));
             }
-
         });
 
         this.control.getNext().addControlActivateListener(
                 new ControlActivateListener() {
-
             @Override
             public void onActivate(ControlActivateEvent eventObject) {
                 GPHandlerManager.fireEvent(new ZoomNextEvent(true));
             }
-
         });
 
         this.control.getNext().addControlDeactivateListener(
                 new ControlDeactivateListener() {
-
             @Override
             public void onDeactivate(ControlDeactivateEvent eventObject) {
                 GPHandlerManager.fireEvent(new ZoomNextEvent(false));
             }
-
         });
     }
 
@@ -152,5 +144,4 @@ public class NavigationHistoryControl implements GeoPlatformMapControl {
     public boolean isEnabled() {
         return this.control.isActive();
     }
-
 }

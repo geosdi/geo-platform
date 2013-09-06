@@ -34,7 +34,7 @@ public class NotificationCenter extends Composite implements IBackNotifyHandler,
     VerticalPanel verticalPanel;
     //
     private DeckLayoutPanel deckLayoutPanel = new DeckLayoutPanel();
-    private List<SingleNotify> listComponent = Lists.newArrayList();
+    private List<SingleNotify> listComponent = Lists.<SingleNotify>newArrayList();
 
     public NotificationCenter() {
         super.initWidget(uiBinder.createAndBindUi(this));

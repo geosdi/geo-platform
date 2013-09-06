@@ -58,7 +58,7 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> implements IMem
     //
     private ObservableGPLayerSaveCache observable;
     private Map<GPBeanTreeModel, AbstractMementoOriginalProperties> modifiedLayersMap =
-            Maps.newHashMap();
+            Maps.<GPBeanTreeModel, AbstractMementoOriginalProperties>newHashMap();
 
     public GPMementoSaveCache(ObservableGPLayerSaveCache observable) {
         this.observable = observable;

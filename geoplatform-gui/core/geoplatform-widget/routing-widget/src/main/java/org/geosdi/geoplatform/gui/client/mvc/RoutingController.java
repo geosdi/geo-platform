@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.client.service.RoutingRemoteAsync;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 
 /**
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  *
@@ -77,7 +77,8 @@ public class RoutingController extends GeoPlatformController {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     public void handleEvent(AppEvent event) {

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
+import org.geosdi.geoplatform.gui.client.i18n.RoutingModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
@@ -46,7 +47,7 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveFinalRoutingPointE
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class FinalPointSearchWidget extends StartPointSearchRouting {
 
@@ -63,13 +64,14 @@ public class FinalPointSearchWidget extends StartPointSearchRouting {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#setComboToolTip()
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#setComboToolTip()
      */
     @Override
     public void setComboToolTip() {
         ToolTipConfig config = new ToolTipConfig();
-        config.setTitle("Usage");
-        config.setText("Enter Address - click INVIO to set Final Point.");
+        config.setTitle(RoutingModuleConstants.INSTANCE.usageText());
+        config.setText(RoutingModuleConstants.INSTANCE.usageInstructionsText());
         config.setTrackMouse(true);
         this.combo.setToolTip(config);
     }
@@ -77,7 +79,8 @@ public class FinalPointSearchWidget extends StartPointSearchRouting {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
      */
     @Override
     public void changeSelection(SelectionChangedEvent<GeocodingBean> se) {
@@ -88,7 +91,8 @@ public class FinalPointSearchWidget extends StartPointSearchRouting {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#clearGeoPlatformMap()
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#clearGeoPlatformMap()
      */
     @Override
     public void cleanGeoPlatformMap() {

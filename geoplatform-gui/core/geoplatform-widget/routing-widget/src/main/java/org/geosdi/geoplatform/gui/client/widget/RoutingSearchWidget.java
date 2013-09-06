@@ -46,6 +46,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.RoutingModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.RoutingBean;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -58,7 +60,7 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.TraceRoutingLineEvent;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class RoutingSearchWidget implements HasCleanEvent {
 
@@ -120,34 +122,35 @@ public class RoutingSearchWidget implements HasCleanEvent {
         HorizontalPanel buttonPanel = new HorizontalPanel();
         buttonPanel.setSpacing(5);
 
-        this.traceRoute = new Button("Route",
+        this.traceRoute = new Button(ButtonsConstants.INSTANCE.routeText(),
                 BasicWidgetResources.ICONS.routing(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        if (!(startPoint.getComboBox().getRawValue().equals(""))
-                                && !(finalPoint.getComboBox().getRawValue().equals(""))) {
-                            findDirections(startPoint.getComboBox().getSelection().get(0), finalPoint.getComboBox().getSelection().get(0));
-                        } else {
-                            GeoPlatformMessage.alertMessage("GeoPlatform Routing",
-                                    "Please, insert the Start Point and End Point!");
-                        }
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                if (!(startPoint.getComboBox().getRawValue().equals(""))
+                        && !(finalPoint.getComboBox().getRawValue().equals(""))) {
+                    findDirections(startPoint.getComboBox().getSelection().get(0), 
+                            finalPoint.getComboBox().getSelection().get(0));
+                } else {
+                    GeoPlatformMessage.alertMessage(RoutingModuleConstants.
+                            INSTANCE.routingText(), RoutingModuleConstants.INSTANCE.
+                            RoutingSearchWidget_warningInsertDataText());
+                }
+            }
+        });
 
         buttonPanel.add(this.traceRoute);
 
-        this.clear = new Button("Clear", BasicWidgetResources.ICONS.erase(),
+        this.clear = new Button(ButtonsConstants.INSTANCE.clearText(),
+                BasicWidgetResources.ICONS.erase(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        startPoint.clearStatus();
-                        finalPoint.clearStatus();
-                        gridWidget.cleanUpTheStore();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                startPoint.clearStatus();
+                finalPoint.clearStatus();
+                gridWidget.cleanUpTheStore();
+            }
+        });
 
         buttonPanel.add(this.clear);
 
@@ -167,24 +170,23 @@ public class RoutingSearchWidget implements HasCleanEvent {
         this.controller.getRoutingService().findDirections(start.getLon(),
                 start.getLat(), end.getLon(), end.getLat(),
                 new AsyncCallback<RoutingBean>() {
+            @Override
+            public void onSuccess(RoutingBean result) {
+                if (result != null) {
+                    gridWidget.unMaskGrid();
+                    gridWidget.fillStore(result.getDirections());
+                    event.setWktLine(result.getCompleteLine());
+                    RoutingHandlerManager.fireEvent(event);
+                }
+            }
 
-                    @Override
-                    public void onSuccess(RoutingBean result) {
-                        if (result != null) {
-                            gridWidget.unMaskGrid();
-                            gridWidget.fillStore(result.getDirections());
-                            event.setWktLine(result.getCompleteLine());
-                            RoutingHandlerManager.fireEvent(event);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        gridWidget.unMaskGrid();
-                        GeoPlatformMessage.errorMessage("GeoPlatform Routing",
-                                "An Error occured with Routing Service. Please Try Again.");
-                    }
-                });
+            @Override
+            public void onFailure(Throwable caught) {
+                gridWidget.unMaskGrid();
+                GeoPlatformMessage.errorMessage(RoutingModuleConstants.INSTANCE.routingText(), 
+                        RoutingModuleConstants.INSTANCE.RoutingSearchWidget_errorRoutingServiceText());
+            }
+        });
     }
 
     /**
@@ -197,7 +199,8 @@ public class RoutingSearchWidget implements HasCleanEvent {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent#addCleanEventHandler()
+     * @see
+     * org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent#addCleanEventHandler()
      */
     @Override
     public void addCleanEventHandler(CleanComboEventHandler handler,
@@ -207,8 +210,7 @@ public class RoutingSearchWidget implements HasCleanEvent {
     }
 
     /**
-     * @param gridWidget
-     *            the gridWidget to set
+     * @param gridWidget the gridWidget to set
      */
     public void setGridWidget(RoutingGridWidget gridWidget) {
         this.gridWidget = gridWidget;

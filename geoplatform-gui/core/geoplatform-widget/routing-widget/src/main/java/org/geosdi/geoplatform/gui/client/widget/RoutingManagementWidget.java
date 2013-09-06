@@ -42,13 +42,14 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.geosdi.geoplatform.gui.client.i18n.RoutingModuleConstants;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 
 /**
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class RoutingManagementWidget extends ContentPanel {
 
@@ -61,13 +62,12 @@ public class RoutingManagementWidget extends ContentPanel {
      * @param controller
      */
     public RoutingManagementWidget(RoutingController controller) {
-        setHeadingHtml("Routing Widget");
+        setHeadingHtml(RoutingModuleConstants.INSTANCE.RoutingManagementWidget_headingText());
         setLayout(new FitLayout());
 
         this.initWidget(controller);
 
         addWidgetListener(new WidgetListener() {
-
             @Override
             public void widgetResized(ComponentEvent ce) {
                 if (getHeight() > 0) {

@@ -40,6 +40,8 @@ import com.extjs.gxt.ui.client.event.KeyListener;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.i18n.RoutingModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
@@ -109,14 +111,15 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
             public void onSuccess(ArrayList<GeocodingBean> result) {
 
                 if (result.size() > 0) {
-                    GeoPlatformMessage.infoMessage("Geocoding Service",
-                            "Results loaded with success.");
+                    GeoPlatformMessage.infoMessage(RoutingModuleConstants.INSTANCE.geocodingServiceText(),
+                            WindowsConstants.INSTANCE.resultsLoadedWithSuccessText());
                     loadImage(TypeImage.IMAGE_RESULT_FOUND, true);
                     fillStore(result);
                     expand();
                 } else {
                     GeoPlatformMessage.alertMessage(
-                            "Geocoding Service", "No Results found!");
+                            RoutingModuleConstants.INSTANCE.geocodingServiceText(),
+                            WindowsConstants.INSTANCE.noResultsFoundText());
                     loadImage(TypeImage.IMAGE_RESULT_NOT_FOUND, true);
                     clearStore();
                 }
@@ -125,8 +128,8 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
 
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Geocoding Service",
-                        "An Error occurred while dispatching request.");
+                GeoPlatformMessage.errorMessage(RoutingModuleConstants.INSTANCE.geocodingServiceText(),
+                        WindowsConstants.INSTANCE.errorDispatchingRequestBodyText());
                 loadImage(TypeImage.IMAGE_SERVICE_ERROR, true);
                 clearStore();
             }

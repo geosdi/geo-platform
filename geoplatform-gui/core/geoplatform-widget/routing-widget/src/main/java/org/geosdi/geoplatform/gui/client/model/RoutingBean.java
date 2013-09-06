@@ -35,25 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import com.google.common.collect.Lists;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class RoutingBean implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -2280183309581214426L;
     private String totalLength;
     private String totaEstimatedTime;
     private String completeLine;
-    private List<Directions> directions = new ArrayList<Directions>();
+    private List<Directions> directions = Lists.<Directions>newArrayList();
 
     public RoutingBean() {
     }
@@ -66,8 +63,7 @@ public class RoutingBean implements Serializable {
     }
 
     /**
-     * @param totalLength
-     *            the totalLength to set
+     * @param totalLength the totalLength to set
      */
     public void setTotalLength(String totalLength) {
         this.totalLength = totalLength;
@@ -81,8 +77,7 @@ public class RoutingBean implements Serializable {
     }
 
     /**
-     * @param totaEstimatedTime
-     *            the totaEstimatedTime to set
+     * @param totaEstimatedTime the totaEstimatedTime to set
      */
     public void setTotaEstimatedTime(String totaEstimatedTime) {
         this.totaEstimatedTime = totaEstimatedTime;
@@ -96,8 +91,7 @@ public class RoutingBean implements Serializable {
     }
 
     /**
-     * @param completeLine
-     *            the completeLine to set
+     * @param completeLine the completeLine to set
      */
     public void setCompleteLine(String completeLine) {
         this.completeLine = completeLine;
@@ -111,8 +105,7 @@ public class RoutingBean implements Serializable {
     }
 
     /**
-     * @param directions
-     *            the directions to set
+     * @param directions the directions to set
      */
     public void setDirections(List<Directions> directions) {
         this.directions = directions;

@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.RoutingModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.Directions;
 import org.geosdi.geoplatform.gui.client.model.Directions.DirectionsKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
@@ -48,7 +49,7 @@ import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 
@@ -61,7 +62,8 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 
     private void initWidget() {
         directionsField = new FieldSet();
-        directionsField.setHeadingHtml("Directions");
+        directionsField.setHeadingHtml(RoutingModuleConstants.INSTANCE.
+                RoutingGridWidget_directionsText());
         directionsField.setCollapsible(false);
 
         directionsField.add(this.grid);
@@ -82,7 +84,8 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
         List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
         ColumnConfig dirColumn = new ColumnConfig(
-                DirectionsKeyValue.ROUTE.getValue(), "Directions", 100);
+                DirectionsKeyValue.ROUTE.getValue(),
+                RoutingModuleConstants.INSTANCE.RoutingGridWidget_directionsText(), 100);
         dirColumn.setMenuDisabled(true);
         dirColumn.setSortable(false);
 
@@ -110,7 +113,7 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
      * Create mask effect on Grid
      */
     public void maskGrid() {
-        this.grid.getView().getBody().mask("Loading Directions");
+        this.grid.getView().getBody().mask(RoutingModuleConstants.INSTANCE.RoutingGridWidget_loadingMaskText());
     }
 
     /**
@@ -122,8 +125,7 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 
     /**
      *
-     * @param beans
-     *            {@link ArrayList} of Directions to fill the Store
+     * @param beans {@link ArrayList} of Directions to fill the Store
      */
     public void fillStore(List<Directions> beans) {
         this.store.add(beans);

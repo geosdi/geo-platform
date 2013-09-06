@@ -50,10 +50,10 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 
 /**
- * 
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public class RoutingView extends GeoPlatformView {
 
@@ -79,7 +79,8 @@ public class RoutingView extends GeoPlatformView {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     protected void handleEvent(AppEvent event) {

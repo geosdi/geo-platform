@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
+import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.GPPublisherWidget;
 
 /**
@@ -50,7 +51,8 @@ public class UploadShapeAction extends ToolbarLayerTreeAction {
     private GPPublisherWidget publisherWidget;
 
     public UploadShapeAction(TreePanel theTree) {
-        super(theTree, PublisherResources.ICONS.uploadShape(), "Upload Geotiff - Shape Files");
+        super(theTree, PublisherResources.ICONS.uploadShape(), 
+                PublisherWidgetConstants.INSTANCE.UploadShapeAction_tooltipText());
          this.publisherWidget = new GPPublisherWidget(true, theTree);
     }
 

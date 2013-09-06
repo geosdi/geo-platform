@@ -41,11 +41,14 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.collect.Lists;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.kml.UploadKmlEvent;
+import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
@@ -57,13 +60,13 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 /**
  * TODO This widget is not used because the relative action is not registered
- * 
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class UploadKmlWidget extends GeoPlatformWindow {
 
     private TreePanel tree;
-    private FieldSet panelSet;
+    private FieldSet fieldSet;
     private GPFileUploader fileUploader;
     private Button buttonAdd;
     private UploadKmlEvent uploadKMLEvent = new UploadKmlEvent();
@@ -88,7 +91,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml("Upload KML file");
+        super.setHeadingHtml(PublisherWidgetConstants.INSTANCE.UploadKmlWidget_headingText());
         super.setResizable(false);
     }
 
@@ -100,46 +103,46 @@ public class UploadKmlWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
-        panelSet = new FieldSet();
-        panelSet.setHeadingHtml("Load KML from URL");
+        fieldSet = new FieldSet();
+        fieldSet.setHeadingHtml(PublisherWidgetConstants.INSTANCE.
+                UploadKmlWidget_fieldSetHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);
-        panelSet.setLayout(layout);
-        this.add(panelSet);
+        fieldSet.setLayout(layout);
+        this.add(fieldSet);
 
         fileUploader = new GPFileUploader("UploadKml", this.uploadKMLEvent, GPExtensions.KML);
         fileUploader.getButtonSubmit().setVisible(false);
-        panelSet.add(fileUploader.getComponent());
+        fieldSet.add(fileUploader.getComponent());
 
         this.addFooterButton();
     }
 
     private void addFooterButton() {
-        buttonAdd = new Button("Add", BasicWidgetResources.ICONS.done());
+        buttonAdd = new Button(ButtonsConstants.INSTANCE.addText(),
+                BasicWidgetResources.ICONS.done());
         buttonAdd.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
                     //expander.checkNodeState();
-                    List<String> layersName = new ArrayList<String>();
+                    List<String> layersName = Lists.<String>newArrayList();
 //                    for (PreviewLayer layer : layerList) {
 //                        layersName.add(layer.getName());
 //                    }
                     PublisherRemote.Util.getInstance().publishLayerPreview(layersName, false, new AsyncCallback<String>() {
-
                         @Override
                         public void onFailure(Throwable caught) {
                             if (caught.getCause() instanceof GPSessionTimeout) {
 //                                GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
                             } else {
-                                GeoPlatformMessage.errorMessage("Error Publishing",
-                                        "An error occurred while making the requested connection.\n"
-                                        + "Verify network connections and try again."
-                                        + "\nIf the problem persists contact your system administrator.");
+                                GeoPlatformMessage.errorMessage(
+                                        PublisherWidgetConstants.INSTANCE.errorPublishingText(),
+                                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                                 LayoutManager.getInstance().getStatusMap().setStatus(
-                                        "Error Publishing previewed shape.",
+                                        PublisherWidgetConstants.INSTANCE.
+                                        statusErrorShapePublishingText(),
                                         EnumSearchStatus.STATUS_NO_SEARCH.toString());
                                 System.out.println("Error Publishing previewed shape: " + caught.toString()
                                         + " data: " + caught.getMessage());
@@ -156,17 +159,17 @@ public class UploadKmlWidget extends GeoPlatformWindow {
                         }
                     });
                 } else {
-                    GeoPlatformMessage.alertMessage("Upload KML",
-                            "You can put layers into Folders only.\n"
-                            + "Please select the correct node from the tree.");
+                    GeoPlatformMessage.alertMessage(PublisherWidgetConstants.INSTANCE.
+                            UploadKmlWidget_headingText(),
+                            WindowsConstants.INSTANCE.warningLayerInToFolderText());
                 }
             }
         });
         buttonAdd.disable();
         super.addButton(this.buttonAdd);
-        Button resetButton = new Button("Reset", BasicWidgetResources.ICONS.cancel());
+        Button resetButton = new Button(ButtonsConstants.INSTANCE.resetText(),
+                BasicWidgetResources.ICONS.cancel());
         resetButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 reset();

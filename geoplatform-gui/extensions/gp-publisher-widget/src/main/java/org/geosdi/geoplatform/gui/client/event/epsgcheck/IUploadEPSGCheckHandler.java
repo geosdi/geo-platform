@@ -43,9 +43,8 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @email nazzareno.sileno@geosdi.org
  */
 public interface IUploadEPSGCheckHandler extends EventHandler {
-    
+
     Type<IUploadEPSGCheckHandler> TYPE = new Type<IUploadEPSGCheckHandler>();
-    
+
     public void showEPSGTable(String jsonString);
-    
 }

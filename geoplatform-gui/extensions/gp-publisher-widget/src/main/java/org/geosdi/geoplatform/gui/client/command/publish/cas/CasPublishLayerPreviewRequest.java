@@ -50,5 +50,4 @@ public class CasPublishLayerPreviewRequest extends PublishLayerPreviewRequest {
     public String getCommandName() {
         return "command.publish.cas.CasPublishLayerPreviewCommand";
     }
-
 }

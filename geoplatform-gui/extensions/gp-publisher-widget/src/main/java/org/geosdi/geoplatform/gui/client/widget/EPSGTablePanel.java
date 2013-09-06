@@ -50,6 +50,8 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultRequest;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultResponse;
 import org.geosdi.geoplatform.gui.client.event.shapepreview.FeaturePreviewEvent;
+import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
@@ -65,7 +67,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
     private EditorGrid<EPSGLayerData> grid;
     private ListStore<EPSGLayerData> store = new ListStore<EPSGLayerData>();
-    private Button processEPSGButton = new Button("Next >",
+    private Button processEPSGButton = new Button(ButtonsConstants.INSTANCE.nextText(),
             BasicWidgetResources.ICONS.done());
     private ProcessEPSGResultRequest processEPSGRequest = GWT.
             <ProcessEPSGResultRequest>create(ProcessEPSGResultRequest.class);
@@ -90,12 +92,12 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
     public void addComponent() {
         List<ColumnConfig> configs = Lists.newArrayList();
         ColumnConfig featureNameColumnConfig = new ColumnConfig(
-                EPSGLayerData.NAME, "Feature Name", 80);
+                EPSGLayerData.NAME, PublisherWidgetConstants.INSTANCE.EPSGTablePanel_columnFeatureNameText(), 80);
         configs.add(featureNameColumnConfig);
         ColumnConfig epsgColumnConfig = new ColumnConfig(EPSGLayerData.CRS,
-                "EPSG Code", 80);
+                PublisherWidgetConstants.INSTANCE.EPSGTablePanel_columnEPSGCodeText(), 80);
         TextField<String> epsgTextField = new TextField<String>();
-        epsgTextField.setEmptyText("EPSG:UNKNOWN");
+        epsgTextField.setEmptyText(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_epsgTextFieldEmptyText());
         epsgTextField.setAllowBlank(Boolean.FALSE);
         epsgColumnConfig.setEditor(new CellEditor(epsgTextField));
         configs.add(epsgColumnConfig);
@@ -113,7 +115,6 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         super.add(this.grid);
         this.processEPSGButton.addSelectionListener(
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 store.commitChanges();
@@ -121,13 +122,11 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
                 ClientCommandDispatcher.getInstance().execute(
                         new GPClientCommand<ProcessEPSGResultResponse>() {
-
                     private static final long serialVersionUID = -8303308816796000537L;
 
                     {
                         super.setCommandRequest(processEPSGRequest);
                     }
-
                     private FeaturePreviewEvent event = new FeaturePreviewEvent();
 
                     @Override
@@ -141,12 +140,10 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                     public void onCommandFailure(Throwable exception) {
                         System.out.println("Error: " + exception);
                     }
-
                 });
             }
-
         });
-        this.processEPSGButton.setToolTip("Proceed to the feature preview");
+        this.processEPSGButton.setToolTip(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_processEPSGButtonTooltipText());
         super.addButton(this.processEPSGButton);
     }
 
@@ -178,7 +175,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
             processEPSGButton.enable();
         } else {
             LayoutManager.getInstance().getStatusMap().setStatus(
-                    "Fill all the EPSG codes to proceed",
+                    PublisherWidgetConstants.INSTANCE.EPSGTablePanel_statusEPSGFillRequiredText(),
                     SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
             processEPSGButton.disable();
         }
@@ -186,9 +183,8 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
-        super.setHeadingHtml("Feature EPSG Code Analisys");
+        super.setHeadingHtml(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_headingText());
         this.store.addStoreListener(new StoreListener<EPSGLayerData>() {
-
             @Override
             public void storeUpdate(StoreEvent<EPSGLayerData> se) {
                 se.getModel().setEpsgCode(se.getModel().getEpsgCode().
@@ -196,8 +192,6 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
                 super.storeUpdate(se);
                 manageProcessEPSGButton();
             }
-
         });
     }
-
 }

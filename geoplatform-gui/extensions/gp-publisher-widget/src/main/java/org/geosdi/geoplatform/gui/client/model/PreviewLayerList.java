@@ -45,13 +45,12 @@ import name.pehl.piriti.json.client.JsonReader;
  * @email nazzareno.sileno@geosdi.org
  */
 public class PreviewLayerList implements Serializable {
-    
+
     private static final long serialVersionUID = -1536465231614858900L;
 
     public interface PreviewLayerListReader extends JsonReader<PreviewLayerList> {
     }
     public static final PreviewLayerListReader JSON = GWT.create(PreviewLayerListReader.class);
-    
     private List<PreviewLayer> previewLayers;
 
     public PreviewLayerList() {

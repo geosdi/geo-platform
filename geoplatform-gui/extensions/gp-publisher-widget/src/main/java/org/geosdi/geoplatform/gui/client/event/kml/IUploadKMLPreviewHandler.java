@@ -43,9 +43,8 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @email nazzareno.sileno@geosdi.org
  */
 public interface IUploadKMLPreviewHandler extends EventHandler {
-    
+
     Type<IUploadKMLPreviewHandler> TYPE = new Type<IUploadKMLPreviewHandler>();
-    
+
     public void showKMLPreview(String jsonString);
-    
 }

@@ -33,53 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.publish.basic;
+package org.geosdi.geoplatform.gui.client.i18n;
 
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
-import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.Messages;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class ProcessEPSGResultRequest implements GPCommandRequest {
+public interface PublisherWidgetMessages extends Messages {
 
-    private static final long serialVersionUID = 2775585167487746885L;
-    //
-    private List<EPSGLayerData> previewLayerList;
+    public final static PublisherWidgetMessages INSTANCE = GWT.create(PublisherWidgetMessages.class);
 
-    public ProcessEPSGResultRequest() {
-    }
-
-    public ProcessEPSGResultRequest(List<EPSGLayerData> thePreviewLayerList) {
-        this.previewLayerList = thePreviewLayerList;
-    }
-
-    /**
-     * @return the previewLayerList
-     */
-    public List<EPSGLayerData> getPreviewLayerList() {
-        return previewLayerList;
-    }
-
-    /**
-     * @param previewLayerList the previewLayerList to set
-     */
-    public void setPreviewLayerList(
-            List<EPSGLayerData> previewLayerList) {
-        this.previewLayerList = previewLayerList;
-    }
-
-    @Override
-    public String getCommandName() {
-        return "command.publish.basic.ProcessEPSGResultCommand";
-    }
-
-    @Override
-    public String toString() {
-        return this.getClass().getName() + " { " + "previewLayerList = "
-                + previewLayerList + '}';
-    }
+    String GPPublisherWidget_errorUploadShapeBodyMessage(String layerProblems);
+    
+    String GPPublisherWidget_errorReloadClusterBodyMessage(String errprMessage);
 }

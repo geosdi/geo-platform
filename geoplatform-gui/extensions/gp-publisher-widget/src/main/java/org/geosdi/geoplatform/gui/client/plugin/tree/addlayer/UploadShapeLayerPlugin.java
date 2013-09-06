@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
 import org.geosdi.geoplatform.gui.client.action.UploadShapeAction;
+import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
 
@@ -70,13 +71,13 @@ public class UploadShapeLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerT
     @Override
     public void initPlugin(TreePanel treePanel) {
         this.setImage(PublisherResources.ICONS.fromShape().getHTML());
-        this.setTooltip("Adds one or more layers to the tree from shape or geotiff files");
+        this.setTooltip(PublisherWidgetConstants.INSTANCE.UploadShapeLayerPlugin_tooltipText());
         action = new UploadShapeAction(treePanel);
         this.setName(action.getTooltip());
     }
 
     @Override
     public String getMessageToEnable() {
-        return "Ever enabled";
+        return PublisherWidgetConstants.INSTANCE.UploadShapeLayerPlugin_messageToEnableText();
     }
 }

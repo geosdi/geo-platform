@@ -390,11 +390,11 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     @Override
     public String getVariableTimeFilter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void setVariableTimeFilter(String variableTimeFilter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

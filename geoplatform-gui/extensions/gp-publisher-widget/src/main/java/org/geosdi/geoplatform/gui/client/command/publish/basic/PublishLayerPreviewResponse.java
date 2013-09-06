@@ -64,5 +64,4 @@ public class PublishLayerPreviewResponse implements GPCommandResponse<String> {
     public String toString() {
         return this.getClass().getName() + " {" + "result = " + result + '}';
     }
-
 }

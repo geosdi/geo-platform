@@ -43,9 +43,8 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @email nazzareno.sileno@geosdi.org
  */
 public interface IFeaturePreviewHandler extends EventHandler {
-    
+
     Type<IFeaturePreviewHandler> TYPE = new Type<IFeaturePreviewHandler>();
-    
+
     public void showLayerPreview(String jsonString);
-    
 }

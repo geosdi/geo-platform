@@ -48,7 +48,7 @@ public class CasPublishLayerPreviewResponse extends PublishLayerPreviewResponse 
 
     public CasPublishLayerPreviewResponse() {
     }
-    
+
     public CasPublishLayerPreviewResponse(String theResult) {
         super(theResult);
     }

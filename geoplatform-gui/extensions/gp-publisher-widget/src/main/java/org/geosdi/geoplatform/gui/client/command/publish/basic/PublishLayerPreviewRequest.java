@@ -98,5 +98,4 @@ public class PublishLayerPreviewRequest implements GPCommandRequest {
     public String getCommandName() {
         return "command.publish.basic.PublishLayerPreviewCommand";
     }
-
 }

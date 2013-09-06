@@ -55,5 +55,4 @@ public class CasProcessEPSGResultRequest extends ProcessEPSGResultRequest {
     public String toString() {
         return super.toString();
     }
-
 }

@@ -43,6 +43,6 @@ import org.geosdi.geoplatform.gui.client.icons.PublisherIcons;
  * @email nazzareno.sileno@geosdi.org
  */
 public class PublisherResources {
-    
-     public static final PublisherIcons ICONS = GWT.create(PublisherIcons.class);
+
+    public static final PublisherIcons ICONS = GWT.create(PublisherIcons.class);
 }

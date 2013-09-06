@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
  * @email nazzareno.sileno@geosdi.org
  */
 public class UploadKmlEvent extends AbstractUploadEvent<IUploadKMLPreviewHandler> {
-    
+
     private String result;
 
     @Override
@@ -60,5 +60,4 @@ public class UploadKmlEvent extends AbstractUploadEvent<IUploadKMLPreviewHandler
     public void setResult(String result) {
         this.result = result;
     }
-    
 }

@@ -53,5 +53,4 @@ public class GPPublishShapePreviewEvent extends GwtEvent<IGPPublishShapePreviewH
     protected void dispatch(IGPPublishShapePreviewHandler handler) {
         handler.publishShapePreview();
     }
-    
 }

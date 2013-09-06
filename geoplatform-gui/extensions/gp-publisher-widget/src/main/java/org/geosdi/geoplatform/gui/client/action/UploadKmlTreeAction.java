@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
+import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.UploadKmlWidget;
 
 /**
@@ -51,7 +52,8 @@ public class UploadKmlTreeAction extends ToolbarLayerTreeAction {
     private UploadKmlWidget kmlWidget;
 
     public UploadKmlTreeAction(TreePanel theTree) {
-        super(theTree, PublisherResources.ICONS.previewKML(), "Upload KML");
+        super(theTree, PublisherResources.ICONS.previewKML(),
+                PublisherWidgetConstants.INSTANCE.UploadKmlTreeAction_tooltipText());
         this.kmlWidget = new UploadKmlWidget(true, theTree);
     }
 

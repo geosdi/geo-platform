@@ -357,24 +357,6 @@ public interface LayerModuleConstants extends Constants {
     /**
      * start LoadKmlFromUrlWidget
      */
-    @DefaultStringValue("URL must be start with \"http://\"")
-    String LoadKmlFromUrlWidget_suggestionURLStartText();
-
-    @DefaultStringValue("Query String of Fusion Tables URL is incorrect: check field \"query\"")
-    String LoadKmlFromUrlWidget_suggestionCheckFieldQueryText();
-
-    @DefaultStringValue("Query String of Fusion Tables URL is incorrect: check field \"o\"")
-    String LoadKmlFromUrlWidget_suggestionCheckFieldOText();
-
-    @DefaultStringValue("Query String of Fusion Tables URL is incorrect: check field \"g\"")
-    String LoadKmlFromUrlWidget_suggestionCheckFieldGText();
-
-    @DefaultStringValue("Query String of Fusion Tables URL is incorrect: check field \"g\"")
-    String LoadKmlFromUrlWidget_suggestionURLMustReferKMLText();
-
-    @DefaultStringValue("URL syntax is OK")
-    String LoadKmlFromUrlWidget_suggestionURLOKText();
-
     @DefaultStringValue("Problems on saving the new tree state after KML creation")
     String LoadKmlFromUrlWidget_mementoFailMessageText();
 

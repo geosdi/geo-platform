@@ -93,7 +93,7 @@ public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
     }
 
     private void createButtonComponent() {
-        this.addLayersToTreeButton = new Button(ButtonsConstants.INSTANCE.addToLayersTreeText(),
+        this.addLayersToTreeButton = new Button(ButtonsConstants.INSTANCE.addOnTreeText(),
                 CatalogFinderWidgetResources.ICONS.addLayer());
         this.addLayersToTreeButton.setStyleAttribute("padding-top", "10px");
 

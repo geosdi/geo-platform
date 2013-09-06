@@ -116,8 +116,14 @@ public interface ButtonsConstants extends Constants {
     @DefaultStringValue("Pause")
     String pauseText();
 
-    @DefaultStringValue("Add To Layers Tree")
-    String addToLayersTreeText();
+    @DefaultStringValue("Clear")
+    String clearText();
+
+    @DefaultStringValue("Route")
+    String routeText();
+
+    @DefaultStringValue("Add on Tree")
+    String addOnTreeText();
 
     @DefaultStringValue("Set Default")
     String setDefautlText();

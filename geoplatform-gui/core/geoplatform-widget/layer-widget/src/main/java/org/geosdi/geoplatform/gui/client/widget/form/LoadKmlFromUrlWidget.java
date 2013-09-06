@@ -56,6 +56,7 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.kml.KMLErrorMessageConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
@@ -279,22 +280,22 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         System.out.println("*** URL encoding:\n" + GPRegEx.printPrettyURL(urlEncoding));
 
         if (!urlEncoding.startsWith("http://")) {
-            suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionURLStartText();
+            suggestion = KMLErrorMessageConstants.INSTANCE.suggestionURLStartText();
         } else if (GPRegEx.RE_FUSION_TABLES_URL.test(urlEncoding)) { // URL Fusion Tables
             if (!GPRegEx.RE_FUSION_TABLES_QS_QUERY.test(urlEncoding)) {
-                suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionCheckFieldQueryText();
+                suggestion = KMLErrorMessageConstants.INSTANCE.suggestionCheckFieldQueryText();
             } else if (!GPRegEx.RE_FUSION_TABLES_QS_O.test(urlEncoding)) {
-                suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionCheckFieldOText();
+                suggestion = KMLErrorMessageConstants.INSTANCE.suggestionCheckFieldOText();
             } else if (!GPRegEx.RE_FUSION_TABLES_QS_G.test(urlEncoding)) {
-                suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionCheckFieldGText();
+                suggestion = KMLErrorMessageConstants.INSTANCE.suggestionCheckFieldGText();
             }
         } else if (!urlEncoding.toUpperCase().endsWith(GPExtensions.KML.toString())) { // URL direct KML
-            suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionURLMustReferKMLText();
+            suggestion = KMLErrorMessageConstants.INSTANCE.suggestionURLMustReferKMLText();
         }
 
         if (suggestion == null) { // No suggestion -> NO syntax error
             check = true;
-            suggestion = LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_suggestionURLOKText();
+            suggestion = KMLErrorMessageConstants.INSTANCE.suggestionURLOKText();
         }
         System.out.println("*** Suggestion = " + suggestion + "\n### ### ###");
 

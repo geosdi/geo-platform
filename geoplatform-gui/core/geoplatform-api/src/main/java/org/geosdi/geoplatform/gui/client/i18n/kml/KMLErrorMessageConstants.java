@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.i18n.windows;
+package org.geosdi.geoplatform.gui.client.i18n.kml;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
@@ -43,52 +43,26 @@ import com.google.gwt.i18n.client.Constants.DefaultStringValue;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface WindowsConstants extends Constants {
+public interface KMLErrorMessageConstants extends Constants {
 
-    public final static WindowsConstants INSTANCE = GWT.create(WindowsConstants.class);
+    public final static KMLErrorMessageConstants INSTANCE = GWT.create(
+            KMLErrorMessageConstants.class);
 
-    @DefaultStringValue("please wait...")
-    String pleaseWaitText();
+    @DefaultStringValue("URL must be start with \"http://\"")
+    String suggestionURLStartText();
 
-    @DefaultStringValue("Loading Layers.....")
-    String loadingLayersText();
+    @DefaultStringValue("Query String of Fusion Tables URL is incorrect: check field \"query\"")
+    String suggestionCheckFieldQueryText();
 
-    @DefaultStringValue("WARNING")
-    String warningTitleText();
+    @DefaultStringValue("Query String of Fusion Tables URL is incorrect: check field \"o\"")
+    String suggestionCheckFieldOText();
 
-    @DefaultStringValue("Function is not yet implemented")
-    String functionNotYetImplementedText();
+    @DefaultStringValue("Query String of Fusion Tables URL is incorrect: check field \"g\"")
+    String suggestionCheckFieldGText();
 
-    @DefaultStringValue("Results loaded with success")
-    String resultsLoadedWithSuccessText();
+    @DefaultStringValue("URL must refer to KML file")
+    String suggestionURLMustReferKMLText();
 
-    @DefaultStringValue("No Results found")
-    String noResultsFoundText();
-
-    @DefaultStringValue("ERROR")
-    String errorTitleText();
-
-    @DefaultStringValue("Error Reloading")
-    String errorReloadingTitleText();
-
-    @DefaultStringValue("Error Loading")
-    String errorLoadingTitleText();
-
-    @DefaultStringValue("Error Saving")
-    String errorSavingTitleText();
-
-    @DefaultStringValue("An Error occurred while dispatching request")
-    String errorDispatchingRequestBodyText();
-
-    @DefaultStringValue("An error occurred while making the requested connection.\n"
-            + "Verify network connections and try again.\n"
-            + "If the problem persists contact your system administrator.")
-    String errorMakingConnectionBodyText();
-
-    @DefaultStringValue("You can put layers into Folders only.\n"
-            + "Please select the correct node from the tree.")
-    String warningLayerInToFolderText();
-
-    @DefaultStringValue("There are unsaved changes, save or reset before exit.")
-    String unsavedChangesToSaveOrResetText();
+    @DefaultStringValue("URL syntax is OK")
+    String suggestionURLOKText();
 }

@@ -35,15 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.client.i18n.EnumSearchServerConstants;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public enum EnumSearchServer {
 
-    STATUS_MESSAGE_LOAD("Servers Loaded"),
-    STATUS_MESSAGE_SERVER_EXISTING("Server already existing");
+    STATUS_MESSAGE_LOAD(EnumSearchServerConstants.INSTANCE.STATUS_MESSAGE_LOAD()),
+    STATUS_MESSAGE_SERVER_EXISTING(
+    EnumSearchServerConstants.INSTANCE.STATUS_MESSAGE_SERVER_EXISTING());
     //
     private String value;
 

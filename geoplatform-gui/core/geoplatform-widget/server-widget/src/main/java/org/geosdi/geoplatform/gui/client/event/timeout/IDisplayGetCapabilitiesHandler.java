@@ -42,10 +42,9 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface IDisplayGetCapabilitiesHandler extends EventHandler{
-    
+public interface IDisplayGetCapabilitiesHandler extends EventHandler {
+
     Type<IDisplayGetCapabilitiesHandler> TYPE = new Type<IDisplayGetCapabilitiesHandler>();
-    
+
     public void activateManageServersButton();
-    
 }

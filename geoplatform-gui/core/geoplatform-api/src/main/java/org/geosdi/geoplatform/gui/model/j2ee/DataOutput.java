@@ -33,60 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.form;
+package org.geosdi.geoplatform.gui.model.j2ee;
 
-import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.event.GridEvent;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
-import java.util.List;
-import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import java.io.IOException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPCheckColumnConfig extends CheckColumnConfig {
+public interface DataOutput {
 
-//    private int selectedItems = 0;
-    ListStore<GPServerBeanModel> store;
-    Button deleteServerButton;
+    public void write(int i) throws IOException;
 
-    public GPCheckColumnConfig(String id, String name, int width,
-            ListStore<GPServerBeanModel> store, Button deleteServerButton) {
-        super(id, name, width);
-        this.store = store;
-        this.deleteServerButton = deleteServerButton;
-    }
+    public void write(byte[] bytes) throws IOException;
 
-    @Override
-    public String getCheckState(ModelData model, String property, int rowIndex, int colIndex) {
-        return super.getCheckState(model, property, rowIndex, colIndex);
-    }
+    public void write(byte[] bytes, int i, int i1) throws IOException;
 
-    @Override
-    protected void onMouseDown(GridEvent<ModelData> ge) {
-        super.onMouseDown(ge);
-        this.manageDeleteButton();
-    }
+    public void writeBoolean(boolean bln) throws IOException;
 
-    public void manageDeleteButton() {
-        List<GPServerBeanModel> serverList = store.getModels();
-        for (int i = 0; i < serverList.size(); i++) {
-            String check = this.getCheckState(serverList.get(i), "delete", i, 0);
-            if (check.equals("-on")) {
-                this.deleteServerButton.enable();
-                return;
-            }
-        }
-        this.deleteServerButton.disable();
-    }
-//    public int getSelectedItems() {
-//        return this.selectedItems;
-//    }
-//
-//    public void setSelectedItems(int selectedItems) {
-//        this.selectedItems = selectedItems;
-//    }
+    public void writeByte(int i) throws IOException;
+
+    public void writeShort(int i) throws IOException;
+
+    public void writeChar(int i) throws IOException;
+
+    public void writeInt(int i) throws IOException;
+
+    public void writeLong(long l) throws IOException;
+
+    public void writeFloat(float f) throws IOException;
+
+    public void writeDouble(double d) throws IOException;
+
+    public void writeBytes(String string) throws IOException;
+
+    public void writeChars(String string) throws IOException;
+
+    public void writeUTF(String string) throws IOException;
 }

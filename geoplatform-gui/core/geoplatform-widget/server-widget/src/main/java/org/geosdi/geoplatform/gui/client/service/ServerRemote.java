@@ -39,7 +39,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.List;
-import javax.jws.WebParam;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -57,7 +56,6 @@ public interface ServerRemote extends RemoteService {
             return instance;
         }
     }
-    
+
     public List<String> getUserAuthorities() throws GeoPlatformException;
-    
 }

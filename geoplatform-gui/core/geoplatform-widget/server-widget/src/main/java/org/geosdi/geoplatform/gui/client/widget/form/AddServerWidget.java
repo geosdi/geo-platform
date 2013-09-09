@@ -51,7 +51,9 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
-
+import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.ServerModuleMessages;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
 import org.geosdi.geoplatform.gui.client.widget.EnumSearchServer;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
@@ -66,7 +68,7 @@ import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
@@ -86,8 +88,9 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
-        this.fieldSet.setHeadingHtml("Server");
-        this.fieldSet.setToolTip("Insert a valid WMS Url and name for the server.");
+        this.fieldSet.setHeadingHtml(ServerModuleConstants.INSTANCE.serverText());
+        this.fieldSet.setToolTip(ServerModuleConstants.INSTANCE.
+                AddServerWidget_tooltipServerInsertionText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(70);
@@ -95,11 +98,12 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
         this.serverUrlTextField = new TextField<String>();
         this.serverNameTextField = new TextField<String>();
-        this.serverUrlTextField.setFieldLabel("Address");
-        this.serverNameTextField.setFieldLabel("Name");
+        this.serverUrlTextField.setFieldLabel(ServerModuleConstants.INSTANCE.
+                AddServerWidget_serverAddressText());
+        this.serverNameTextField.setFieldLabel(ServerModuleConstants.INSTANCE.
+                AddServerWidget_serverNameText());
 
         this.serverUrlTextField.addListener(Events.OnPaste, new Listener() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 if (serverNameTextField.isDirty()) {
@@ -108,7 +112,6 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
             }
         });
         this.serverNameTextField.addListener(Events.OnPaste, new Listener() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 if (serverUrlTextField.isDirty()) {
@@ -118,7 +121,6 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         });
 
         this.serverUrlTextField.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (serverUrlTextField.getValue() == null) {
@@ -127,8 +129,8 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
                         reset();
                     }
                 } else {
-                    if (serverUrlTextField.getValue().length() > 15 && 
-                            serverNameTextField.isDirty()) {
+                    if (serverUrlTextField.getValue().length() > 15
+                            && serverNameTextField.isDirty()) {
                         save.enable();
                     } else {
                         save.disable();
@@ -138,15 +140,14 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if (event.getKeyCode() == KeyCodes.KEY_ENTER && 
-                        serverUrlTextField.isDirty() && serverNameTextField.isDirty()
+                if (event.getKeyCode() == KeyCodes.KEY_ENTER
+                        && serverUrlTextField.isDirty() && serverNameTextField.isDirty()
                         && serverUrlTextField.getValue().length() > 15) {
                     execute();
                 }
             }
         });
         this.serverNameTextField.addKeyListener(new KeyListener() {
-
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (serverNameTextField.getValue() == null) {
@@ -165,9 +166,9 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if (event.getKeyCode() == KeyCodes.KEY_ENTER && 
-                        serverUrlTextField.isDirty() && 
-                        serverUrlTextField.getValue().length() > 15) {
+                if (event.getKeyCode() == KeyCodes.KEY_ENTER
+                        && serverUrlTextField.isDirty()
+                        && serverUrlTextField.getValue().length() > 15) {
                     execute();
                 }
             }
@@ -185,35 +186,35 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        save = new Button("Save", ServerWidgetResources.ICONS.addServer(),
+        save = new Button(ButtonsConstants.INSTANCE.saveText(),
+                ServerWidgetResources.ICONS.addServer(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        execute();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                execute();
+            }
+        });
 
         save.setEnabled(false);
 
         this.formPanel.addButton(save);
 
-        this.cancel = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
+        this.cancel = new Button(ButtonsConstants.INSTANCE.cancelText(),
+                BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        clearComponents();
-                        clearStatusBarStatus();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                clearComponents();
+                clearStatusBarStatus();
+            }
+        });
 
         this.formPanel.addButton(cancel);
     }
 
     @Override
     public void initSize() {
-        setHeadingHtml("Add Server");
+        setHeadingHtml(ServerModuleConstants.INSTANCE.addServerText());
         setSize(380, 210);
     }
 
@@ -225,9 +226,11 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
     @Override
     public void execute() {
-        this.saveStatus.setBusy("Adding Server");
+        this.saveStatus.setBusy(ServerModuleConstants.INSTANCE.
+                AddServerWidget_statusAddingServerText());
 
-        LayoutManager.getInstance().getStatusMap().setBusy("Saving Server");
+        LayoutManager.getInstance().getStatusMap().setBusy(
+                ServerModuleConstants.INSTANCE.savingServerText());
         this.performSaveServer.addServer();
     }
 
@@ -256,7 +259,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
     /**
      * Internal Class for Business Logic
-     * 
+     *
      */
     private class PerformOperation {
 
@@ -275,34 +278,35 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
                     serverUrlTextField.getValue().trim(),
                     GPAccountLogged.getInstance().getOrganization(),
                     new AsyncCallback<GPServerBeanModel>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
+                            EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            ServerModuleMessages.INSTANCE.
+                            AddServerWidget_saveServerErrorMessage(caught.getMessage()),
+                            EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                }
 
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
-                                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Save Server Error. " + caught.getMessage(),
-                                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                        }
-
-                        @Override
-                        public void onSuccess(GPServerBeanModel server) {
-                            clearComponents();
-                            displayServerWidget.addServer(server);
-                        }
-                    });
+                @Override
+                public void onSuccess(GPServerBeanModel server) {
+                    clearComponents();
+                    displayServerWidget.addServer(server);
+                }
+            });
         }
 
         private void notifyServerPresence(GPServerBeanModel server) {
             setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
                     EnumSearchServer.STATUS_MESSAGE_SERVER_EXISTING.toString());
             LayoutManager.getInstance().getStatusMap().setStatus(
-                    "Save Server",
+                    ServerModuleConstants.INSTANCE.
+                    AddServerWidget_saveServerText(),
                     EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-            GeoPlatformMessage.alertMessage("Server Present",
-                    "The Server with url : " + serverUrlTextField.getValue()
-                    + " is already present in Combo Box with the name " +
-                    server.getAlias() + ".");
+            GeoPlatformMessage.alertMessage(ServerModuleConstants.INSTANCE.
+                    AddServerWidget_serverPresentText(),
+                    ServerModuleMessages.INSTANCE.AddServerWidget_serverAlreadyPresentMessage(
+                    serverUrlTextField.getValue(), server.getAlias()));
         }
     }
 }

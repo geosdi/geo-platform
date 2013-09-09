@@ -54,11 +54,14 @@ import com.extjs.gxt.ui.client.widget.grid.RowExpander;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.common.collect.Lists;
 import com.google.gwt.regexp.shared.RegExp;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -70,7 +73,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L>
@@ -112,17 +115,17 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.formPanel.add(this.grid);
 
         StoreFilterField<L> filter = this.createFilter();
-        filter.setToolTip("Filter in ignore case");
+        filter.setToolTip(ServerModuleConstants.INSTANCE.GridLayersWidget_filterTooltipText());
         filter.bind(super.store);
 
         this.formPanel.setButtonAlign(HorizontalAlignment.LEFT);
         this.formPanel.getButtonBar().add(filter);
         this.formPanel.getButtonBar().add(new FillToolItem());
 
-        this.done = new Button("Done", BasicWidgetResources.ICONS.done());
+        this.done = new Button(ButtonsConstants.INSTANCE.doneText(),
+                BasicWidgetResources.ICONS.done());
 
         this.done.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 expander.executeActionRequest();
@@ -147,7 +150,6 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         grid.getSelectionModel().setSelectionMode(SelectionMode.MULTI);
 
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
-
             @Override
             public void handleEvent(BaseEvent be) {
                 done.enable();
@@ -157,7 +159,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
     @Override
     public ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
 
         XTemplate tpl = XTemplate.create(
                 "<p><b>Abstract:</b> {abstractText}</p>");
@@ -168,13 +170,13 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
         ColumnConfig name = new ColumnConfig();
         name.setId(GPLayerBeanKeyValue.GPLAYER_NAME.getValue());
-        name.setHeaderHtml("Layer Name");
+        name.setHeaderHtml(ServerModuleConstants.INSTANCE.GridLayersWidget_layerNameHeaderText());
         name.setWidth(200);
         configs.add(name);
 
         ColumnConfig title = new ColumnConfig();
         title.setId(GPLayerBeanKeyValue.GPLAYER_LABEL.getValue());
-        title.setHeaderHtml("Title");
+        title.setHeaderHtml(ServerModuleConstants.INSTANCE.GridLayersWidget_titleHeaderText());
         title.setWidth(150);
         configs.add(title);
 
@@ -187,7 +189,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     }
 
     /**
-     * 
+     *
      */
     public void loadServers() {
         this.displayServerWidget.loadServers();
@@ -207,7 +209,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
      * Create mask effect on Grid
      */
     public void maskGrid() {
-        this.grid.getView().getBody().mask("Loading Layers");
+        this.grid.getView().getBody().mask(WindowsConstants.INSTANCE.loadingLayersText());
     }
 
     /**
@@ -219,8 +221,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
     /**
      *
-     * @param beans
-     *            {@link ArrayList} of GeocodingBean to fill the Store
+     * @param beans {@link ArrayList} of GeocodingBean to fill the Store
      */
     public void fillStore(ArrayList<L> beans) {
         this.store.add(beans);
@@ -233,7 +234,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     }
 
     /**
-     * 
+     *
      */
     public void cleanStore() {
         this.store.removeAll();
@@ -274,7 +275,6 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
     private StoreFilterField<L> createFilter() {
         return new StoreFilterField<L>() {
-
             @Override
             protected boolean doSelect(Store<L> store, L parent, L record,
                     String property, String filter) {

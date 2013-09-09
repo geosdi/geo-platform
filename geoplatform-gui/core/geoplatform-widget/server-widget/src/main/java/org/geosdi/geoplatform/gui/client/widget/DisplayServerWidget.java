@@ -56,6 +56,10 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.timeout.DisplayGetCapabilitiesEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHandler;
+import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.ServerModuleMessages;
+import org.geosdi.geoplatform.gui.client.i18n.status.SearchStatusConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
@@ -127,7 +131,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         this.store.setStoreSorter(storeSorter);
         this.comboServer = new ComboBox<GPServerBeanModel>();
 
-        comboServer.setEmptyText("Select a Server...");
+        comboServer.setEmptyText(ServerModuleConstants.INSTANCE.
+                DisplayServerWidget_comboServerEmptyText());
         comboServer.setDisplayField(GPServerKeyValue.ALIAS.getValue());
         comboServer.setTemplate(getTemplate());
         comboServer.setWidth(250);
@@ -145,7 +150,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
             }
         });
 
-        this.manageServersButton = new Button("Manage Servers",
+        this.manageServersButton = new Button(ServerModuleConstants.INSTANCE.
+                DisplayServerWidget_manageServerButtonText(),
                 ServerWidgetResources.ICONS.addServer(),
                 new SelectionListener<ButtonEvent>() {
             @Override
@@ -166,12 +172,10 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                             new DisplayGetCapabilitiesEvent()));
                 } else {
                     manageServersButton.setEnabled(false);
-                    GeoPlatformMessage.errorMessage("Error",
-                            "An error occurred while making the requested operation.\n"
-                            + "Verify network connections and try again."
-                            + "\nIf the problem persists contact your system administrator.");
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Error opening Get Capabilities window.",
+                            ServerModuleConstants.INSTANCE.DisplayServerWidget_statusErrorOpeningWindowText(),
                             EnumSearchStatus.STATUS_NO_SEARCH.toString());
                     System.out.println("Error opening Get Capabilities window: " + caught.toString()
                             + " data: " + caught.getMessage());
@@ -221,16 +225,16 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @param status
      * @param message
      */
-    public void setSearchStatus(Enum status, Enum message) {
+    public void setSearchStatus(Enum status, String message) {
         this.searchStatus.setIconStyle(status.toString());
-        this.searchStatus.setText(message.toString());
+        this.searchStatus.setText(message);
     }
 
     /**
      * Load All Server from WS
      */
     public void loadServers() {
-        this.searchStatus.setBusy("Loading Server...");
+        this.searchStatus.setBusy(ServerModuleConstants.INSTANCE.loadingServersText());
         this.store.removeAll();
         this.comboServer.clear();
         this.gridWidget.cleanStore();
@@ -241,21 +245,23 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
             @Override
             public void onFailure(Throwable caught) {
                 setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                        EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
-                GeoPlatformMessage.errorMessage("Server Service",
-                        "An Error occured loading Servers.");
+                        SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
+                GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
+                        serverServiceText(),
+                        ServerModuleConstants.INSTANCE.errorLoadingServerBodyText());
             }
 
             @Override
             public void onSuccess(ArrayList<GPServerBeanModel> result) {
                 if (result.isEmpty()) {
                     setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
-                    GeoPlatformMessage.alertMessage("Server Service",
-                            "There are no Servers.");
+                            SearchStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
+                    GeoPlatformMessage.alertMessage(ServerModuleConstants.INSTANCE.
+                            serverServiceText(), ServerModuleConstants.INSTANCE.
+                            DisplayServerWidget_alerThereAreNoServerText());
                 } else {
                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                            EnumSearchServer.STATUS_MESSAGE_LOAD);
+                            EnumSearchServer.STATUS_MESSAGE_LOAD.toString());
                     store.add(result);
                     store.sort(GPServerKeyValue.ALIAS.getValue(), Style.SortDir.ASC);
                 }
@@ -275,7 +281,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      */
     private void changeSelection(GPServerBeanModel selected) {
         this.gridWidget.cleanComponentForSelection();
-        LayoutManager.getInstance().getStatusMap().setBusy("Loading Layers.....");
+        LayoutManager.getInstance().getStatusMap().setBusy(WindowsConstants.INSTANCE.loadingLayersText());
         if (selected != null) {
             this.gridWidget.maskGrid();
         }
@@ -321,7 +327,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         gridWidget.unMaskGrid();
         gridWidget.fillStore(layers);
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Layers have been loaded correctly by the service",
+                ServerModuleConstants.INSTANCE.DisplayServerWidget_statusLayerLoadedCorrectlyText(),
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
@@ -378,16 +384,19 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
                     if (selectedServer.getUrlServer().contains(
                             EnumOAuth2.GEB_STRING.getValue())) {
-                        GeoPlatformMessage.infoMessage(
-                                "Google sign on required",
-                                "Is necessary to sign on Google account for access the Google Earth Builder functionality");
+                        GeoPlatformMessage.infoMessage(ServerModuleConstants.INSTANCE.
+                                googleSignOnRequiredTitleText(),
+                                ServerModuleConstants.INSTANCE.
+                                googleSignOnRequiredBodyText());
                         OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(
                                 EnumOAuth2.LOAD_CAPABILITIES.getValue()));
                     } else {
-                        GeoPlatformMessage.errorMessage("Server Service",
+                        GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
+                                serverServiceText(),
                                 exception.getMessage());
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Server Error. " + exception.getMessage(),
+                                ServerModuleMessages.INSTANCE.DisplayServerWidget_serverErrorMessage(
+                                exception.getMessage()),
                                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                     }
                 }

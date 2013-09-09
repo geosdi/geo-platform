@@ -47,12 +47,15 @@ public interface ButtonsConstants extends Constants {
 
     public final static ButtonsConstants INSTANCE = GWT.create(ButtonsConstants.class);
 
+    @DefaultStringValue("Done")
+    String doneText();
+
     @DefaultStringValue("Next >")
     String nextText();
 
     @DefaultStringValue("Preview")
     String previewText();
-    
+
     @DefaultStringValue("Select")
     String selectText();
 

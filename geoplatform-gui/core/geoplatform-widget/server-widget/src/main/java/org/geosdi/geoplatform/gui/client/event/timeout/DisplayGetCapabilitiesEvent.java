@@ -53,5 +53,4 @@ public class DisplayGetCapabilitiesEvent extends GwtEvent<IDisplayGetCapabilitie
     protected void dispatch(IDisplayGetCapabilitiesHandler handler) {
         handler.activateManageServersButton();
     }
-    
 }

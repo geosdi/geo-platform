@@ -33,60 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.form;
+package org.geosdi.geoplatform.gui.client.i18n;
 
-import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.event.GridEvent;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
-import java.util.List;
-import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPCheckColumnConfig extends CheckColumnConfig {
+public interface EnumSearchServerConstants extends Constants {
 
-//    private int selectedItems = 0;
-    ListStore<GPServerBeanModel> store;
-    Button deleteServerButton;
+    public static final EnumSearchServerConstants INSTANCE =
+            GWT.create(EnumSearchServerConstants.class);
 
-    public GPCheckColumnConfig(String id, String name, int width,
-            ListStore<GPServerBeanModel> store, Button deleteServerButton) {
-        super(id, name, width);
-        this.store = store;
-        this.deleteServerButton = deleteServerButton;
-    }
+    @DefaultStringValue("Servers Loaded")
+    String STATUS_MESSAGE_LOAD();
 
-    @Override
-    public String getCheckState(ModelData model, String property, int rowIndex, int colIndex) {
-        return super.getCheckState(model, property, rowIndex, colIndex);
-    }
-
-    @Override
-    protected void onMouseDown(GridEvent<ModelData> ge) {
-        super.onMouseDown(ge);
-        this.manageDeleteButton();
-    }
-
-    public void manageDeleteButton() {
-        List<GPServerBeanModel> serverList = store.getModels();
-        for (int i = 0; i < serverList.size(); i++) {
-            String check = this.getCheckState(serverList.get(i), "delete", i, 0);
-            if (check.equals("-on")) {
-                this.deleteServerButton.enable();
-                return;
-            }
-        }
-        this.deleteServerButton.disable();
-    }
-//    public int getSelectedItems() {
-//        return this.selectedItems;
-//    }
-//
-//    public void setSelectedItems(int selectedItems) {
-//        this.selectedItems = selectedItems;
-//    }
+    @DefaultStringValue("Server already existing")
+    String STATUS_MESSAGE_SERVER_EXISTING();
 }

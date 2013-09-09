@@ -41,11 +41,10 @@ import org.geosdi.geoplatform.gui.client.icons.ServerWidgetIcons;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class ServerWidgetResources {
-    
+
     public static final ServerWidgetIcons ICONS = GWT.create(
             ServerWidgetIcons.class);
-
 }

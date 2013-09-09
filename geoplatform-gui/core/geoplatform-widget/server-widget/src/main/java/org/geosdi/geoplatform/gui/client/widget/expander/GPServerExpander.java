@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.expander;
 
+import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GridLayersWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
@@ -48,7 +50,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
 
@@ -58,7 +60,8 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     public GPServerExpander(GridLayersWidget theWidget) {
         super(theWidget.getTree());
         this.gridLayers = theWidget;
-        this.showProgressBar.setMessage("Search Layers");
+        this.showProgressBar.setMessage(ServerModuleConstants.INSTANCE.
+                GPServerExpander_progressBarSearchLayersText());
     }
 
     @Override
@@ -71,8 +74,8 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
 
     @Override
     protected void defineStatusBarCancelMessage() {
-        LayoutManager.getInstance().getStatusMap().setStatus(
-                "Add layer operation cancelled.",
+        LayoutManager.getInstance().getStatusMap().setStatus(ServerModuleConstants.INSTANCE.
+                GPServerExpander_statusAddLayerOperationCancelledText(),
                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }
 
@@ -85,9 +88,8 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
         if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
             super.checkNodeState();
         } else {
-            GeoPlatformMessage.alertMessage("GPCapabilitiesWidget",
-                    "You can put layers into folders only.\n"
-                    + "Please select the correct node.");
+            GeoPlatformMessage.alertMessage(WindowsConstants.INSTANCE.warningTitleText(),
+                    WindowsConstants.INSTANCE.warningLayerInToFolderText());
         }
     }
 }

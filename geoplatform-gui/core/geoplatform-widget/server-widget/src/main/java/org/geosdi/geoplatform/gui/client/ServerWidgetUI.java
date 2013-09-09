@@ -41,10 +41,9 @@ import com.google.gwt.core.client.EntryPoint;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class ServerWidgetUI implements EntryPoint{
+public class ServerWidgetUI implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
     }
-    
 }

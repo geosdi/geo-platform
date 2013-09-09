@@ -41,11 +41,12 @@ import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPCapabilitiesWidget extends GeoPlatformWindow {
 
@@ -58,10 +59,9 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
 
     /**
      *
-     * @param lazy
-     *       If true the component will not build in Construction Fase
-     *       otherwise set to False
-     * @param theTree 
+     * @param lazy If true the component will not build in Construction Fase
+     * otherwise set to False
+     * @param theTree
      */
     public GPCapabilitiesWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
@@ -85,7 +85,8 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
     @Override
     public void initSize() {
         super.setSize(600, 530);
-        super.setHeadingHtml("Server Capabilities");
+        super.setHeadingHtml(ServerModuleConstants.INSTANCE.
+                GPCapabilitiesWidget_headingText());
     }
 
     @Override
@@ -93,7 +94,6 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
         super.setResizable(false);
 
         super.addWindowListener(new WindowListener() {
-
             @Override
             public void windowShow(WindowEvent we) {
                 gridLayers.loadServers();
@@ -101,7 +101,6 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
         });
 
         super.addWidgetListener(new WidgetListener() {
-
             @Override
             public void widgetAttached(ComponentEvent ce) {
                 gridLayers.getGrid().setHeight(400);

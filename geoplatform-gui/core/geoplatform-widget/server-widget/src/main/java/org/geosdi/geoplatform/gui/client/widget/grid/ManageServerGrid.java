@@ -41,8 +41,9 @@ import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowEditor;
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 
 /**
@@ -67,10 +68,11 @@ public class ManageServerGrid extends GeoPlatformGridWidget<GPServerBeanModel> {
 
     @Override
     public ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
         ColumnConfig aliasColumn = new ColumnConfig();
         aliasColumn.setId("alias");
-        aliasColumn.setHeaderHtml("Server Alias");
+        aliasColumn.setHeaderHtml(ServerModuleConstants.INSTANCE.
+                serverAliasText());
         aliasColumn.setWidth(220);
 
         TextField<String> aliasTextfield = new TextField<String>();
@@ -80,7 +82,8 @@ public class ManageServerGrid extends GeoPlatformGridWidget<GPServerBeanModel> {
 
         ColumnConfig urlColumn = new ColumnConfig();
         urlColumn.setId("urlServer");
-        urlColumn.setHeaderHtml("URL server");
+        urlColumn.setHeaderHtml(ServerModuleConstants.INSTANCE.
+                serverURLText());
         urlColumn.setWidth(400);
 
         TextField<String> urlTextfield = new TextField<String>();

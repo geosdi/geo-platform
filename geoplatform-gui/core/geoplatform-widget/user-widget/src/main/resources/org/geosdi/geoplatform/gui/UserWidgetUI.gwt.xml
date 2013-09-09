@@ -9,6 +9,8 @@
     
     <define-property name="gssm.presence" values="true,false"/>
     
+    <set-property name="gssm.presence" value="false"/> 
+    
     <replace-with class="org.geosdi.geoplatform.gui.client.widget.GSSecurityManagerWidget">
         <when-type-is class="org.geosdi.geoplatform.gui.client.widget.UserPropertiesManagerWidget"/>
         <when-property-is name="gssm.presence" value="true"/>

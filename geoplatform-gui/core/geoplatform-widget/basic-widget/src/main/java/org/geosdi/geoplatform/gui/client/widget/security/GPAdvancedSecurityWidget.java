@@ -51,7 +51,7 @@ import com.google.gwt.user.client.ui.SubmitButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
-import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.img.BasicWidgetImage;
 import org.geosdi.geoplatform.gui.client.widget.progressbar.ProgressBar;
 
@@ -156,7 +156,7 @@ public abstract class GPAdvancedSecurityWidget extends Composite {
                         getInstance().getBasicWidgetMessages().
                         GPAdvancedSecurityWidget_loginMessage(userName.getValue()));
                 if (progres > 1.0) {
-                    progressBar.setRunProgress(1.0, BasicWidgetConstants.INSTANCE.GPAdvancedSecurityWidget_doneText());
+                    progressBar.setRunProgress(1.0, ButtonsConstants.INSTANCE.doneText());
                     timer.cancel();
                     loginDone();
                 }

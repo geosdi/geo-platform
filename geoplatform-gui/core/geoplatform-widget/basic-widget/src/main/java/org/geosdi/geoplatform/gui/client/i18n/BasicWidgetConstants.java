@@ -51,21 +51,6 @@ public interface BasicWidgetConstants extends Constants {
     String GPAboutWidget_headingText();
 
     /**
-     * Start GPAdvancedSecurityWidget
-     */
-    @DefaultStringValue("Entering into geoSDI")
-    String GPAdvancedSecurityWidget_geoSDIAccessText();
-
-    @DefaultStringValue("Sign in")
-    String GPAdvancedSecurityWidget_signInText();
-
-    @DefaultStringValue("Download")
-    String GPAdvancedSecurityWidget_downloadText();
-
-    @DefaultStringValue("the Android application for alerts.")
-    String GPAdvancedSecurityWidget_androidAppText();
-
-    /**
      * Start GPTreeExpanderNotifier
      */
     @DefaultStringValue("Expand Folder")
@@ -91,8 +76,17 @@ public interface BasicWidgetConstants extends Constants {
     /**
      * Start GPAdvancedSecurityWidget
      */
-    @DefaultStringValue("Done")
-    String GPAdvancedSecurityWidget_doneText();
+    @DefaultStringValue("Entering into geoSDI")
+    String GPAdvancedSecurityWidget_geoSDIAccessText();
+
+    @DefaultStringValue("Sign in")
+    String GPAdvancedSecurityWidget_signInText();
+
+    @DefaultStringValue("Download")
+    String GPAdvancedSecurityWidget_downloadText();
+
+    @DefaultStringValue("the Android application for alerts.")
+    String GPAdvancedSecurityWidget_androidAppText();
 
     /**
      * Start ComboSearchWindow

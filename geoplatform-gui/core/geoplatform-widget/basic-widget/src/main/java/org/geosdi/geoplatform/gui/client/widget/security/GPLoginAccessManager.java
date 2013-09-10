@@ -41,7 +41,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
-import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.progressbar.ProgressBar;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -93,7 +93,7 @@ public class GPLoginAccessManager extends GeoPlatformContentPanel {
 
     public void hideProgressBar(boolean isSuccess) {
         timer.cancel();
-        this.progressBar.setRunProgress(1.0, BasicWidgetConstants.INSTANCE.GPAdvancedSecurityWidget_doneText());
+        this.progressBar.setRunProgress(1.0, ButtonsConstants.INSTANCE.doneText());
         LayoutManager.getInstance().getViewport().unmask();
         this.progressBar.hide();
         if (isSuccess) {

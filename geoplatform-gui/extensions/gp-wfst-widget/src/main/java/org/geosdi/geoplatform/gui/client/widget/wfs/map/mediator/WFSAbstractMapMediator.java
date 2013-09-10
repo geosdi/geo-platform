@@ -33,30 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleagueKey;
+import com.google.common.collect.Maps;
+import java.util.Map;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IFeatureMapWidget extends IFeatureMapSizeHandler {
+public abstract class WFSAbstractMapMediator implements WFSMapMediator {
 
-    /**
-     * Build WMS from {@link GPLayerBean}
-     *
-     */
-    void bindLayerSchema();
+    protected final Map<WFSColleagueKey, WFSMapControlColleague> wfsColleagueRegistry = Maps.newEnumMap(
+            WFSColleagueKey.class);
 
-    /**
-     * <p>This Method call {@link MapWidget} updateSize() to prevent problem
-     * when the {@link FeatureWidget} is Moved</p>
-     */
-    void updateSize();
+    protected boolean isWFSColleagueRegistered(WFSColleagueKey controlKey) {
+        return this.wfsColleagueRegistry.containsKey(controlKey);
+    }
+
+    @Override
+    public WFSMapControlColleague getWFSColleague(WFSColleagueKey controlKey) {
+        return isWFSColleagueRegistered(controlKey)
+                ? this.wfsColleagueRegistry.get(
+                controlKey) : null;
+    }
 
 }

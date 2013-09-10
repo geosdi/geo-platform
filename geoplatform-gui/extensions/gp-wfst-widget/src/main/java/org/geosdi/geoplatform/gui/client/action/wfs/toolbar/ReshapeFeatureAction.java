@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.wfs.toolbar;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import org.geosdi.geoplatform.gui.client.action.wfs.WFSChangeFeatureAction;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
@@ -49,9 +49,9 @@ import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
  */
 public class ReshapeFeatureAction extends WFSChangeFeatureAction {
 
-    public ReshapeFeatureAction(WFSMapControlMediator theMapControlManager,
+    public ReshapeFeatureAction(WFSBaseMapMediator theBaseMapMediator,
             WFSToolbarObserver theButtonObserver) {
-        super(theMapControlManager, theButtonObserver);
+        super(theBaseMapMediator, theButtonObserver);
     }
 
     @Override

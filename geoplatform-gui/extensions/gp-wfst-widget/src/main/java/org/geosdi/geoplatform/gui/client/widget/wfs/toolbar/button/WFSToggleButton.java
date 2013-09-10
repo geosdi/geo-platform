@@ -35,10 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button;
 
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ToggleButton;
 import org.geosdi.geoplatform.gui.client.action.wfs.WFSToggleAction;
+import org.geosdi.geoplatform.gui.client.puregwt.togglebutton.event.ToggleStateEvent;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
 /**
  *
@@ -47,6 +51,9 @@ import org.geosdi.geoplatform.gui.client.action.wfs.WFSToggleAction;
  */
 public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
 
+    private static final GPEventBus toggleStateBus = new GPEventBusImpl();
+    private static final ToggleStateEvent toggleStateEvent = new ToggleStateEvent();
+    //
     private final String id;
     private WFSToggleAction action;
 
@@ -83,6 +90,24 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
     }
 
     @Override
+    public void enableToggleDown() {
+        super.setDown(true);
+
+        if (this.action != null) {
+            action.onClick(new WFSClickEvent(this));
+        }
+    }
+
+    @Override
+    public HandlerRegistration addToggleStateHandler() {
+        return toggleStateBus.addHandlerToSource(TYPE, id, this);
+    }
+
+    public static void fireToggleStateEvent(String source) {
+        toggleStateBus.fireEventFromSource(toggleStateEvent, source);
+    }
+
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 71 * hash + (this.id != null ? this.id.hashCode() : 0);
@@ -107,6 +132,14 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
     @Override
     public String toString() {
         return "WFSToggleButton{ " + "id = " + id + '}';
+    }
+
+    class WFSClickEvent extends ClickEvent {
+
+        protected WFSClickEvent(Object theSource) {
+            super.setSource(theSource);
+        }
+
     }
 
 }

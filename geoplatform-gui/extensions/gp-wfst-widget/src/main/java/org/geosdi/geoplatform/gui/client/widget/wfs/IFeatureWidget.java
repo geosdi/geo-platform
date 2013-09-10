@@ -44,9 +44,6 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface IFeatureWidget {
-
-    void bind(GPLayerBean theSelectedLayer,
-            LayerSchemaDTO theSchemaDTO);
     
     void manageWidgetsSize();
 }

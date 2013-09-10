@@ -35,13 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button;
 
+import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.client.puregwt.togglebutton.handler.ToggleStateHandler;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface WFSEditorButton {
-    
+public interface WFSEditorButton extends ToggleStateHandler {
+
     void disableEditorControl();
+    
+    HandlerRegistration addToggleStateHandler();
 
 }

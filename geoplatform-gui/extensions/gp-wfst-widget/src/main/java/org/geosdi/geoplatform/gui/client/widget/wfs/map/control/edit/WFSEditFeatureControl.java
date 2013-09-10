@@ -33,30 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.control.Control;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IFeatureMapWidget extends IFeatureMapSizeHandler {
+public interface WFSEditFeatureControl {
 
-    /**
-     * Build WMS from {@link GPLayerBean}
-     *
-     */
-    void bindLayerSchema();
+    void activate();
 
-    /**
-     * <p>This Method call {@link MapWidget} updateSize() to prevent problem
-     * when the {@link FeatureWidget} is Moved</p>
-     */
-    void updateSize();
+    void deactivate();
+
+    <C extends Control> C getEditFeatureControl();
+
+    String[] getEditFeatureKeys();
 
 }

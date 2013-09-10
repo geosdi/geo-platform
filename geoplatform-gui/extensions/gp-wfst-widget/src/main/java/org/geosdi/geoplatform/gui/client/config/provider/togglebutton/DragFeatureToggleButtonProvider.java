@@ -40,7 +40,7 @@ import com.google.gwt.user.client.ui.ToggleButton;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.DragFeatureAction;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.ResourceEditingToolBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
@@ -52,30 +52,30 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFST
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class DragFeatureToggleButtonProvider implements Provider<ToggleButton> {
-    
+
     private WFSToolbarObserver buttonObserver;
-    private WFSMapControlMediator mapControlManager;
-    
+    private WFSBaseMapMediator mapControlManager;
+
     @Inject
     public DragFeatureToggleButtonProvider(
-            WFSMapControlMediator theMapControlManager,
+            WFSBaseMapMediator theMapControlManager,
             WFSToolbarObserver theButtonObserver) {
         this.buttonObserver = theButtonObserver;
         this.mapControlManager = theMapControlManager;
     }
-    
+
     @Override
     public ToggleButton get() {
         return new WFSToggleButton(
                 new Image(ResourceEditingToolBar.INSTANCE.drag()),
                 new DragFeatureAction(mapControlManager, buttonObserver),
                 WFSButtonKeyProvider.DRAG_FEATURE.name()) {
-            
+
             {
                 super.setTitle("Drag");
             }
-            
+
         };
     }
-    
+
 }

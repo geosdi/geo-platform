@@ -51,15 +51,13 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.annotation.ResetButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.SaveButton;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.EditingToolBarDialog;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -82,12 +80,10 @@ public class FeatureWidget extends GeoPlatformWindow
     private BorderLayout layout;
     @Inject
     private EditingToolBarDialog editToolbarDialog;
+    @Inject
+    private ILayerSchemaBinder layerSchemaBinder;
     private Button saveButton;
     private Button resetButton;
-    //
-    private GPLayerBean selectedLayer;
-    private LayerSchemaDTO schemaDTO;
-    //
     private GPEventBus bus;
 
     @Inject
@@ -176,10 +172,12 @@ public class FeatureWidget extends GeoPlatformWindow
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 hide();
             }
+
         });
         super.addButton(close);
     }
@@ -197,10 +195,13 @@ public class FeatureWidget extends GeoPlatformWindow
 
     @Override
     public void show() {
-        if ((this.selectedLayer == null) || (this.schemaDTO == null)) {
+        if ((this.layerSchemaBinder.getSelectedLayer() == null)
+                || (this.layerSchemaBinder.getLayerSchemaDTO() == null)) {
             throw new IllegalArgumentException(
                     "Both SchemaDTO and GPLayerBean must not be null");
         }
+
+        this.selectionWidget.reconfigureAttributes();
 
         super.show();
     }
@@ -211,7 +212,7 @@ public class FeatureWidget extends GeoPlatformWindow
 
         this.statusBar.setBusy("Loading Layer as WFS");
 
-        this.mapWidget.bind(selectedLayer, schemaDTO);
+        this.mapWidget.bindLayerSchema();
         this.attributesWidget.reconfigureEditorGrid();
     }
 
@@ -220,21 +221,6 @@ public class FeatureWidget extends GeoPlatformWindow
         super.endDrag(de, canceled);
 
         this.mapWidget.updateSize();
-    }
-
-    @Override
-    public void bind(GPLayerBean theSelectedLayer, LayerSchemaDTO theSchemaDTO) {
-        this.selectedLayer = theSelectedLayer;
-        this.schemaDTO = theSchemaDTO;
-
-        if (this.selectedLayer instanceof GPVectorBean) {
-            GPVectorBean vector = (GPVectorBean) this.selectedLayer;
-            vector.setFeatureNameSpace(this.schemaDTO.getTargetNamespace());
-            vector.setGeometryName(this.schemaDTO.getGeometry().getName());
-        }
-
-        this.attributesWidget.bind(schemaDTO);
-        this.selectionWidget.bind(schemaDTO);
     }
 
     @Override
@@ -265,4 +251,5 @@ public class FeatureWidget extends GeoPlatformWindow
         resetButton.enable();
         saveButton.enable();
     }
+
 }

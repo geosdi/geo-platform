@@ -37,12 +37,15 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.initializer;
 
 import com.google.gwt.user.client.Timer;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureSelectListener;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureUnSelectListener;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.FeatureMapLayerBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -77,6 +80,8 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private FeatureUnSelectListener unSelectFeature;
     @Inject
     private LonLat italyLonLat;
+    @Inject
+    private ILayerSchemaBinder layerSchemaBinder;
     private GPEventBus bus;
     private Layer wms;
     private GetFeature controlFeature;
@@ -87,7 +92,10 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     }
     
     @Override
-    public void bind(final GPLayerBean layer, final LayerSchemaDTO schema) {
+    public void bindLayerSchema() {
+        final GPLayerBean layer = layerSchemaBinder.getSelectedLayer();
+        final LayerSchemaDTO schema = layerSchemaBinder.getLayerSchemaDTO();
+        
         this.wms = this.mapLayerBuilder.buildLayer(layer);
         
         this.controlFeature = this.featureControlBuilder.buildControl(
@@ -177,8 +185,11 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
         
         this.mapWidget.getMap().zoomToExtent(bb);
+
+//        this.controlFeature.activate();
         
-        this.controlFeature.activate();
+        WFSToggleButton.fireToggleStateEvent(
+                WFSButtonKeyProvider.GET_FEATURE.name());
     }
     
     protected void notifyStatus() {

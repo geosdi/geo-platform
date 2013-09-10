@@ -33,36 +33,73 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.wfs.toolbar;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import org.geosdi.geoplatform.gui.client.action.wfs.WFSChangeFeatureAction;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEditFeatureControl;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.WFSEditFeatureRepository;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
-import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
-import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
-import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
+import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.control.Control;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class RotateFeatureAction extends WFSChangeFeatureAction {
+public class WFSEditFeatureColleague implements WFSMapControlColleague {
 
-    public RotateFeatureAction(WFSBaseMapMediator theBaseMapMediator,
-            WFSToolbarObserver theButtonObserver) {
-        super(theBaseMapMediator, theButtonObserver);
+    @Inject
+    private WFSEditFeatureRepository editFeatureRepository;
+    @Inject
+    private ILayerSchemaBinder layerSchemaBinder;
+    @Inject
+    private MapWidget mapWidget;
+    private Control defaultFeatureControl;
+
+    @Inject
+    public WFSEditFeatureColleague(WFSBaseMapMediator baseMapMediator) {
+        baseMapMediator.registerWFSColleague(this);
     }
 
     @Override
-    public void onClick(ClickEvent event) {
-        WFSToggleButton button = (WFSToggleButton) event.getSource();
+    public void activateColleague() {
+        WFSEditFeatureControl efc = this.editFeatureRepository.getWFSEditFeatureControl(
+                layerSchemaBinder.getLayerSchemaDTO().getGeometry().getType());
 
-        super.changeButtonState();
+        if (efc == null) {
+            throw new IllegalArgumentException("There is no "
+                    + "EditorFeatureControl registered in the "
+                    + "WFSEditFeatureRepository");
+        }
 
-        if (button.isDown()) {
-            super.activateChangeFeature(ModifyFeature.ROTATE);
-            buttonObserver.setButtonPressed(button);
+        defaultFeatureControl = efc.getEditFeatureControl();
+
+        this.mapWidget.getMap().addControl(defaultFeatureControl);
+        this.defaultFeatureControl.activate();
+    }
+
+    @Override
+    public void deactivateColleague() {
+        resetControl();
+    }
+
+    @Override
+    public void resetColleague() {
+        resetControl();
+    }
+
+    @Override
+    public WFSColleagueKey getWFSColleagueKey() {
+        return WFSColleagueKey.EDIT_FEATURE;
+    }
+
+    final void resetControl() {
+        if (this.defaultFeatureControl != null) {
+            this.defaultFeatureControl.deactivate();
+            this.mapWidget.getMap().removeControl(defaultFeatureControl);
+            this.defaultFeatureControl = null;
         }
     }
 

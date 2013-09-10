@@ -33,30 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague;
 
-import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
-import org.gwtopenmaps.openlayers.client.control.Control;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSMapMediator;
 
 /**
+ * <p>Basis Enum used by {@link WFSMapControlColleague} Colleague to register
+ * themsels on {@link WFSMapMediator} Mediator</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WFSMapControl extends GPVectorMapControl {
+public enum WFSColleagueKey {
 
-    public WFSMapControl(Vector vector, boolean lazy) {
-        super(vector, lazy);
-    }
-
-    /**
-     *
-     * @param <C> the {@link Control} Map Control
-     * @return Control
-     */
-    public abstract <C extends Control> C getWFSMapControl();
-
-    public abstract void resetWFSMapControl();
-
+    EDIT_FEATURE,
+    GET_FEATURE,
+    MODIFY_FEATURE;
 }

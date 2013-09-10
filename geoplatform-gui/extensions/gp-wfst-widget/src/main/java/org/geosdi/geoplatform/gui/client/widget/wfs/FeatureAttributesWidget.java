@@ -53,6 +53,7 @@ import com.google.gwt.event.dom.client.FocusHandler;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureAttributeValuesDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapHeightEvent;
@@ -67,7 +68,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
@@ -86,11 +86,10 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
     private static final ColumnModel mockColumnModel;
     //
+    @Inject
+    private ILayerSchemaBinder layerSchemaBinder;
     private GPEventBus bus;
     private TimeInputWidget timeInputWidget;
-    //
-    private LayerSchemaDTO schemaDTO;
-    //
     private ListStore<FeatureAttributeValuesDetail> store;
     private EditorGrid<FeatureAttributeValuesDetail> grid;
     //
@@ -108,11 +107,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget,
                 this);
         this.bus.addHandler(FeatureAttributesHandler.TYPE, this);
-    }
-
-    public void bind(LayerSchemaDTO theSchemaDTO) {
-        assert (theSchemaDTO.getAttributes() != null) : "Attributes must not be null.";
-        this.schemaDTO = theSchemaDTO;
     }
 
     public void reconfigureEditorGrid() {
@@ -223,7 +217,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     }
 
     private ColumnModel prepareColumnModel() {
-        List<AttributeDTO> attributesDTO = this.schemaDTO.getAttributes();
+        List<AttributeDTO> attributesDTO = this.layerSchemaBinder.getLayerSchemaDTO().getAttributes();
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(
                 attributesDTO.size());
 

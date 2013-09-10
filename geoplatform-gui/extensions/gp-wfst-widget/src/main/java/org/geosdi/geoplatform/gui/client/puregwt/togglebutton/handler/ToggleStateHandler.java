@@ -33,12 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control;
+package org.geosdi.geoplatform.gui.client.puregwt.togglebutton.handler;
+
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSMapControlMediator {
+public interface ToggleStateHandler extends EventHandler {
+
+    Type<ToggleStateHandler> TYPE = new Type<ToggleStateHandler>();
+
+    void enableToggleDown();
+
 }

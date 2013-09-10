@@ -33,30 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleagueKey;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IFeatureMapWidget extends IFeatureMapSizeHandler {
+public class WFSBaseMapMediator extends WFSAbstractMapMediator {
 
-    /**
-     * Build WMS from {@link GPLayerBean}
-     *
-     */
-    void bindLayerSchema();
+    @Override
+    public void registerWFSColleague(WFSMapControlColleague mapControl) {
+        if (!super.isWFSColleagueRegistered(mapControl.getWFSColleagueKey())) {
+            wfsColleagueRegistry.put(mapControl.getWFSColleagueKey(), mapControl);
+        }
+    }
 
-    /**
-     * <p>This Method call {@link MapWidget} updateSize() to prevent problem
-     * when the {@link FeatureWidget} is Moved</p>
-     */
-    void updateSize();
+    @Override
+    public void activateWFSColleague(WFSColleagueKey controlKey) {
+        WFSMapControlColleague colleague = super.getWFSColleague(controlKey);
+        if (colleague != null) {
+            colleague.activateColleague();
+        }
+    }
+
+    @Override
+    public void deactivateWFSColleague(WFSColleagueKey controlKey) {
+        WFSMapControlColleague colleague = super.getWFSColleague(controlKey);
+        if (colleague != null) {
+            colleague.deactivateColleague();
+        }
+    }
 
 }

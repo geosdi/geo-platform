@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -50,6 +51,8 @@ import org.geosdi.geoplatform.gui.shared.GPLayerType;
  */
 public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
 
+    @Inject
+    private ILayerSchemaBinder layerSchemaBinder;
     private FeatureWidget featureWidget;
 
     @Inject
@@ -77,7 +80,8 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
                 + geometryType + " geometry type.",
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
-        featureWidget.bind(layer, schemaDTO);
+        layerSchemaBinder.bind(layer, schemaDTO);
         featureWidget.show();
     }
+
 }

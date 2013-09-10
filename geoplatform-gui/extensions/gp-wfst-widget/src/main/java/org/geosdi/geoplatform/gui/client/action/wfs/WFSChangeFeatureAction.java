@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.action.wfs;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleagueKey;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
@@ -46,7 +47,7 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFST
 public abstract class WFSChangeFeatureAction extends BaseWFSToggleAction
         implements WFSChangeFeature {
 
-    public WFSChangeFeatureAction(WFSMapControlMediator theMapControlManager,
+    public WFSChangeFeatureAction(WFSBaseMapMediator theMapControlManager,
             WFSToolbarObserver theButtonObserver) {
         super(theMapControlManager, theButtonObserver);
     }
@@ -61,6 +62,11 @@ public abstract class WFSChangeFeatureAction extends BaseWFSToggleAction
     public final void activateChangeFeature(int changeMode) {
         System.out.println(getClass().getName() + " - ACTIVATE CONTROL ###"
                 + "###########################");
+    }
+
+    @Override
+    public WFSColleagueKey getWFSColleagueKey() {
+        return WFSColleagueKey.MODIFY_FEATURE;
     }
 
 }

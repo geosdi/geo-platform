@@ -47,7 +47,7 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
-import org.geosdi.geoplatform.gui.client.model.LayerSchemaBinder;
+import org.geosdi.geoplatform.gui.client.model.binder.LayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;

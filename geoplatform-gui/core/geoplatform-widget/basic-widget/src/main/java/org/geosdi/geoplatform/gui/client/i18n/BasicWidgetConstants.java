@@ -51,14 +51,29 @@ public interface BasicWidgetConstants extends Constants {
     String GPAboutWidget_headingText();
 
     /**
+     * Start GPAdvancedSecurityWidget
+     */
+    @DefaultStringValue("Entering into geoSDI")
+    String GPAdvancedSecurityWidget_geoSDIAccessText();
+
+    @DefaultStringValue("Sign in")
+    String GPAdvancedSecurityWidget_signInText();
+
+    @DefaultStringValue("Download")
+    String GPAdvancedSecurityWidget_downloadText();
+
+    @DefaultStringValue("the Android application for alerts.")
+    String GPAdvancedSecurityWidget_androidAppText();
+
+    /**
      * Start GPTreeExpanderNotifier
      */
     @DefaultStringValue("Expand Folder")
     String GPTreeExpanderNotifier_confirmMessageTitleText();
 
     @DefaultStringValue("The folder you are trying to put elements "
-                + "must be expanded before the adding operation. "
-                + "Do you want to expand it?")
+            + "must be expanded before the adding operation. "
+            + "Do you want to expand it?")
     String GPTreeExpanderNotifier_confirmMessageBodyText();
 
     /**

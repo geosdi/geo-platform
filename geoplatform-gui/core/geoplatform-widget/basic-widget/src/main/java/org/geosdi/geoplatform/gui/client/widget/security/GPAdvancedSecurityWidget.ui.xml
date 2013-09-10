@@ -3,34 +3,42 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
     <ui:style src="GPLoginUi.css" />
     <ui:with field='resources' type='org.geosdi.geoplatform.gui.client.img.BasicWidgetImage'/>
+    <ui:with field='basicWidgetConstants' type='org.geosdi.geoplatform.gui.client.i18n.BasicWidgetConstants'/>
 	
     <g:HTMLPanel>
         <div class="{style.geoSDISign-in}">
             <div class="{style.geoSDISignin-box}">
-                <h2>Accesso a geoSDI
+                <h2>
+                    <ui:text from='{basicWidgetConstants.GPAdvancedSecurityWidget_geoSDIAccessText}'/>
                     <strong></strong>
                 </h2>
     
                 <strong class="{style.geoSDIEmail-label}">
-                    <g:Label>Nome Utente</g:Label>
+                    <g:Label>
+                        <ui:text from='{basicWidgetConstants.GPSecurityWidget_usernameText}'/>
+                    </g:Label>
                 </strong>
                 <g:TextBox stylePrimaryName="{style.inputGeoSdi}" ui:field="userName"></g:TextBox>
                 <p></p>
                 <strong class="{style.geoSDIPassword-label}">
-                    <g:Label>Password</g:Label>
+                    <g:Label>
+                        <ui:text from='{basicWidgetConstants.GPSecurityWidget_passwordText}'/>
+                    </g:Label>
                 </strong>
                 <g:PasswordTextBox stylePrimaryName="{style.inputGeoSdi}" ui:field="password">
                 </g:PasswordTextBox>
                 <p></p>
                 <p></p>
-                <g:SubmitButton stylePrimaryName="{style.geoSDI-Button} {style.geoSDI-Button-submit}" ui:field="login">Accedi</g:SubmitButton>
+                <g:SubmitButton stylePrimaryName="{style.geoSDI-Button} {style.geoSDI-Button-submit}" ui:field="login">
+                    <ui:text from='{basicWidgetConstants.GPAdvancedSecurityWidget_signInText}'/>
+                </g:SubmitButton>
                 <g:Label stylePrimaryName="{style.loginError}" ui:field="loginError"></g:Label>
                 <p class="{style.geosdiPromoBody}">
                     <a href="http://www.geosdi.org/geoSDIcollect.apk" alt="Scarica l'App geoPoints" target="_blank">
                         <g:Image stylePrimaryName="{style.geosdiPromoIcon}" resource='{resources.androidSmall}'></g:Image>
-                        Scarica
+                        <ui:text from='{basicWidgetConstants.GPAdvancedSecurityWidget_downloadText}'/>
                     </a>
-                    l'App Android per le segnalazioni.
+                    <ui:text from='{basicWidgetConstants.GPAdvancedSecurityWidget_androidAppText}'/>
                 </p>
             </div>
         </div>

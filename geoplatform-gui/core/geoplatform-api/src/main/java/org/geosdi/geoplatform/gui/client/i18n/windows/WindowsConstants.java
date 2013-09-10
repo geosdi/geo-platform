@@ -53,8 +53,14 @@ public interface WindowsConstants extends Constants {
     @DefaultStringValue("Loading Layers.....")
     String loadingLayersText();
 
+    @DefaultStringValue("Loading Data...")
+    String loadingDataText();
+
     @DefaultStringValue("WARNING")
     String warningTitleText();
+
+    @DefaultStringValue("Label")
+    String labelText();
 
     @DefaultStringValue("Function is not yet implemented")
     String functionNotYetImplementedText();

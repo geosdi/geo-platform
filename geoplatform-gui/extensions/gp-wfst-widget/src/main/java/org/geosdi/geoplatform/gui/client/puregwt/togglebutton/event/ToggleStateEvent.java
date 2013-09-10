@@ -33,30 +33,26 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.puregwt.togglebutton.event;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.togglebutton.handler.ToggleStateHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IFeatureMapWidget extends IFeatureMapSizeHandler {
+public class ToggleStateEvent extends GwtEvent<ToggleStateHandler> {
 
-    /**
-     * Build WMS from {@link GPLayerBean}
-     *
-     */
-    void bindLayerSchema();
+    @Override
+    public Type<ToggleStateHandler> getAssociatedType() {
+        return ToggleStateHandler.TYPE;
+    }
 
-    /**
-     * <p>This Method call {@link MapWidget} updateSize() to prevent problem
-     * when the {@link FeatureWidget} is Moved</p>
-     */
-    void updateSize();
+    @Override
+    protected void dispatch(ToggleStateHandler handler) {
+        handler.enableToggleDown();
+    }
 
 }

@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.initializer;
 
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -45,7 +42,7 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  */
 public interface IFeatureMapInitializer {
 
-    void bind(final GPLayerBean layer, final LayerSchemaDTO schema);
+    void bindLayerSchema();
 
     void resetMapWidget();
 

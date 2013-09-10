@@ -33,25 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
-
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class LayerSchemaBinder {
+public interface WFSColleague {
 
-    private LayerSchemaDTO layerSchemaDTO;
-
-    public LayerSchemaDTO getLayerSchemaDTO() {
-        return layerSchemaDTO;
-    }
-
-    public void setLayerSchemaDTO(LayerSchemaDTO layerSchemaDTO) {
-        this.layerSchemaDTO = layerSchemaDTO;
-    }
+    WFSColleagueKey getWFSColleagueKey();
 }

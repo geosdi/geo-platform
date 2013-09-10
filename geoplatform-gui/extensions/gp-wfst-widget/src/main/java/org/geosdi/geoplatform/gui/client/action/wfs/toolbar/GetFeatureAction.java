@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.gui.client.action.wfs.toolbar;
 import com.google.gwt.event.dom.client.ClickEvent;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.action.wfs.BaseWFSToggleAction;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleagueKey;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
@@ -50,9 +51,9 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFST
 public class GetFeatureAction extends BaseWFSToggleAction {
 
     @Inject
-    public GetFeatureAction(WFSMapControlMediator theMapControlManager,
+    public GetFeatureAction(WFSBaseMapMediator theBaseMapMediator,
             WFSToolbarObserver theButtonObserver) {
-        super(theMapControlManager, theButtonObserver);
+        super(theBaseMapMediator, theButtonObserver);
     }
 
     @Override
@@ -71,6 +72,11 @@ public class GetFeatureAction extends BaseWFSToggleAction {
                     + "@@@@@@@@@@@@@@@");
             buttonObserver.setButtonPressed(button);
         }
+    }
+
+    @Override
+    public WFSColleagueKey getWFSColleagueKey() {
+        return WFSColleagueKey.GET_FEATURE;
     }
 
 }

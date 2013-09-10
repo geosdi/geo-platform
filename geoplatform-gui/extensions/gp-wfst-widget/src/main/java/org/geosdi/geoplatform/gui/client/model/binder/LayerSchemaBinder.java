@@ -33,30 +33,42 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.model.binder;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface IFeatureMapWidget extends IFeatureMapSizeHandler {
+public class LayerSchemaBinder implements ILayerSchemaBinder {
 
-    /**
-     * Build WMS from {@link GPLayerBean}
-     *
-     */
-    void bindLayerSchema();
+    private LayerSchemaDTO layerSchemaDTO;
+    private GPLayerBean selectedLayer;
 
-    /**
-     * <p>This Method call {@link MapWidget} updateSize() to prevent problem
-     * when the {@link FeatureWidget} is Moved</p>
-     */
-    void updateSize();
+    @Override
+    public LayerSchemaDTO getLayerSchemaDTO() {
+        return layerSchemaDTO;
+    }
+
+    @Override
+    public void bind(GPLayerBean theSelectedLayer,
+            LayerSchemaDTO theLayerSchemaDTO) {
+        this.selectedLayer = theSelectedLayer;
+        this.layerSchemaDTO = theLayerSchemaDTO;
+
+        if (this.selectedLayer instanceof GPVectorBean) {
+            GPVectorBean vector = (GPVectorBean) this.selectedLayer;
+            vector.setFeatureNameSpace(this.layerSchemaDTO.getTargetNamespace());
+            vector.setGeometryName(this.layerSchemaDTO.getGeometry().getName());
+        }
+    }
+
+    @Override
+    public GPLayerBean getSelectedLayer() {
+        return this.selectedLayer;
+    }
 
 }

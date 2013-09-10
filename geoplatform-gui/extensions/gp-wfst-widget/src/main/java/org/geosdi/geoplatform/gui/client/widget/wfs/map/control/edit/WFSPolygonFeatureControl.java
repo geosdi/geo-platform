@@ -33,30 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.editor.map.control.DrawEditorPolygonFeature;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.WFSEditFeatureRepository;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IFeatureMapWidget extends IFeatureMapSizeHandler {
+public class WFSPolygonFeatureControl extends DrawEditorPolygonFeature
+        implements WFSEditFeatureControl {
 
-    /**
-     * Build WMS from {@link GPLayerBean}
-     *
-     */
-    void bindLayerSchema();
+    @Inject
+    public WFSPolygonFeatureControl(Vector vector,
+            WFSEditFeatureRepository editFeatureRepository) {
+        super(vector, true);
 
-    /**
-     * <p>This Method call {@link MapWidget} updateSize() to prevent problem
-     * when the {@link FeatureWidget} is Moved</p>
-     */
-    void updateSize();
+        editFeatureRepository.bindWFSEditFeatureControl(this);
+    }
+
+    @Override
+    protected void manageAddedFeature(VectorFeature vf) {
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+                + " Feature Created : " + vf);
+    }
+
+    @Override
+    public void activate() {
+        super.activateControl();
+    }
+
+    @Override
+    public void deactivate() {
+        super.deactivateControl();
+    }
+
+    @Override
+    public String[] getEditFeatureKeys() {
+        return new String[]{"Polygon", "MultiPolygon"};
+    }
+
+    @Override
+    public DrawFeature getEditFeatureControl() {
+        return super.getControl();
+    }
 
 }

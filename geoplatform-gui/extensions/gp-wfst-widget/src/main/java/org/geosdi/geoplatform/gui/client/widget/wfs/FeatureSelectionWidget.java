@@ -62,6 +62,7 @@ import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureResponse;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapWidthEvent;
@@ -78,7 +79,6 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.FeatureDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.responce.QueryDTO;
 import org.geosdi.geoplatform.gui.responce.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
@@ -96,7 +96,9 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     //
     private GPEventBus bus;
     //
-    private LayerSchemaDTO schemaDTO;
+//    private LayerSchemaDTO schemaDTO;
+    @Inject
+    private ILayerSchemaBinder layerSchemaBinder;
     private List<AttributeDetail> attributes;
     private List<FeatureAttributeConditionField> attributeConditions;
     //
@@ -119,15 +121,9 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         this.attributeConditions = Lists.<FeatureAttributeConditionField>newArrayList();
     }
 
-    public void bind(LayerSchemaDTO theSchemaDTO) {
-        assert (theSchemaDTO != null) : "Schema must not bu null.";
-        assert (theSchemaDTO.getScope() != null) : "Scope must not bu null.";
-        assert (theSchemaDTO.getTypeName() != null) : "TypeName must not bu null.";
-        assert (theSchemaDTO.getTargetNamespace() != null) : "TargetNamespace must not bu null.";
-        assert (theSchemaDTO.getAttributes() != null) : "Attributes must not bu null.";
-        this.schemaDTO = theSchemaDTO;
+    public void reconfigureAttributes() {
         this.attributes = FeatureConverter.convertDTOs(
-                this.schemaDTO.getAttributes());
+                this.layerSchemaBinder.getLayerSchemaDTO().getAttributes());
     }
 
     @Override
@@ -269,8 +265,10 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
             public void componentSelected(ButtonEvent ce) {
                 queryEnabled(false);
 
-                getAllFeatureRequest.setServerUrl(schemaDTO.getScope());
-                getAllFeatureRequest.setTypeName(schemaDTO.getTypeName());
+                getAllFeatureRequest.setServerUrl(
+                        layerSchemaBinder.getLayerSchemaDTO().getScope());
+                getAllFeatureRequest.setTypeName(
+                        layerSchemaBinder.getLayerSchemaDTO().getTypeName());
                 getAllFeatureRequest.setMaxFeatures(50);
 
                 ClientCommandDispatcher.getInstance().execute(
@@ -308,7 +306,9 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                                 errorMessage + " - " + exception.getMessage());
 
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for " + schemaDTO.getTypeName() + " layer.",
+                                errorMessage + " for "
+                                + layerSchemaBinder.getLayerSchemaDTO().getTypeName()
+                                + " layer.",
                                 SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                     }
 

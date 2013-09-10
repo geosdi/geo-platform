@@ -35,8 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.wfs;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
-import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.EditToolbarBaseObserver;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
@@ -48,9 +47,9 @@ public abstract class BaseWFSToggleAction extends WFSToggleAction {
 
     protected final WFSToolbarObserver buttonObserver;
 
-    public BaseWFSToggleAction(WFSMapControlMediator theMapControlManager,
+    public BaseWFSToggleAction(WFSBaseMapMediator theBaseMapMediator,
             WFSToolbarObserver theButtonObserver) {
-        super(theMapControlManager);
+        super(theBaseMapMediator);
 
         this.buttonObserver = theButtonObserver;
     }

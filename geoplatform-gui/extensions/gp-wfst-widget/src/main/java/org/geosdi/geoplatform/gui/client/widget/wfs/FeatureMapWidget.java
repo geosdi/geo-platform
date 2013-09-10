@@ -39,9 +39,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
@@ -91,8 +89,8 @@ public class FeatureMapWidget extends GeoPlatformContentPanel
     }
 
     @Override
-    public void bind(GPLayerBean layer, LayerSchemaDTO schema) {
-        this.featureMapInitializer.bind(layer, schema);
+    public void bindLayerSchema() {
+        this.featureMapInitializer.bindLayerSchema();
     }
 
     @Override

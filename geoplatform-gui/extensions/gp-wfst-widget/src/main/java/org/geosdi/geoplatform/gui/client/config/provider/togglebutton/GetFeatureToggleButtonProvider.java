@@ -66,6 +66,7 @@ public class GetFeatureToggleButtonProvider implements Provider<ToggleButton> {
 
             {
                 super.setTitle("Info");
+                super.addToggleStateHandler();
             }
 
         };

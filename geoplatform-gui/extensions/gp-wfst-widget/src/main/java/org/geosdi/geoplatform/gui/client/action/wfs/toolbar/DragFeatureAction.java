@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.wfs.toolbar;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import org.geosdi.geoplatform.gui.client.action.wfs.WFSChangeFeatureAction;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
@@ -48,22 +48,22 @@ import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class DragFeatureAction extends WFSChangeFeatureAction {
-    
-    public DragFeatureAction(WFSMapControlMediator theMapControlManager,
+
+    public DragFeatureAction(WFSBaseMapMediator theBaseMapMediator,
             WFSToolbarObserver theButtonObserver) {
-        super(theMapControlManager, theButtonObserver);
+        super(theBaseMapMediator, theButtonObserver);
     }
-    
+
     @Override
     public void onClick(ClickEvent event) {
         WFSToggleButton button = (WFSToggleButton) event.getSource();
-        
+
         super.changeButtonState();
-        
+
         if (button.isDown()) {
             super.activateChangeFeature(ModifyFeature.DRAG);
             buttonObserver.setButtonPressed(button);
         }
     }
-    
+
 }

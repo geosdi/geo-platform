@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.wfs;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 
 /**
  *
@@ -43,13 +43,21 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.WFSMapControlMed
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class WFSToggleAction implements WFSEditorAction {
-
-    protected final WFSMapControlMediator mapControlManager;
-
-    public WFSToggleAction(WFSMapControlMediator theMapControlManager) {
-        this.mapControlManager = theMapControlManager;
+    
+    private final WFSBaseMapMediator baseMapMediator;
+    
+    public WFSToggleAction(WFSBaseMapMediator theBaseMapMediator) {
+        this.baseMapMediator = theBaseMapMediator;
     }
-
+    
     protected abstract void changeButtonState();
-
+    
+    protected final void activateWFSColleague() {
+        this.baseMapMediator.activateWFSColleague(getWFSColleagueKey());
+    }
+    
+    protected final void deactivateWFSColleague() {
+        this.baseMapMediator.deactivateWFSColleague(getWFSColleagueKey());
+    }
+    
 }

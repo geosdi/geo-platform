@@ -138,6 +138,7 @@ public abstract class GeoPlatformSearchPanel<C extends Widget, T extends GeoPlat
         layout.setLabelWidth(80);
         searchFieldSet.setLayout(layout);
         search = new TextField<String>();
+        search.setLabelStyle("width:100px");
         search.setFieldLabel(BasicWidgetConstants.INSTANCE.GeoPlatformSearchPanel_searchFieldLabelText());
         search.addKeyListener(new KeyListener() {
             @Override

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureTransactionEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
@@ -46,7 +47,6 @@ import org.gwtopenmaps.openlayers.client.protocol.Response;
 import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -70,7 +70,8 @@ public class FeatureProtocolCRUDOptionsProvider implements
                     bus.fireEvent(transactionEvent);
                 } else {
                     bus.fireEvent(new FeatureStatusBarEvent(
-                            "Transaction Error",
+                            WFSTWidgetConstants.INSTANCE.
+                            FeatureProtocolCRUDOptionsProvider_transactionErrorText(),
                             FeatureStatusBar.FeatureStatusBarType.STATUS_NOT_OK));
                 }
             }

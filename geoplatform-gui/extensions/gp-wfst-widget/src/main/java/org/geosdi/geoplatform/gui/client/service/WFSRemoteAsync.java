@@ -55,5 +55,4 @@ public interface WFSRemoteAsync {
     @Deprecated
     void getAllFeature(String serverUrl, String typeName, int maxFeatures,
             AsyncCallback<FeatureCollectionDTO> callback) throws GeoPlatformException;
-
 }

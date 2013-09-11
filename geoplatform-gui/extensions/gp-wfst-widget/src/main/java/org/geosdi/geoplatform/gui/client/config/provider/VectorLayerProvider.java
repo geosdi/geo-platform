@@ -37,32 +37,32 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.gwtopenmaps.openlayers.client.Style;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class VectorLayerProvider implements Provider<Vector> {
-    
+
     private Style style;
-    
+
     @Inject
     public VectorLayerProvider(Style theStyle) {
         this.style = theStyle;
     }
-    
+
     @Override
     public Vector get() {
         VectorOptions vectorOptions = new VectorOptions();
         vectorOptions.setStyle(style);
         vectorOptions.setIsBaseLayer(false);
         vectorOptions.setDisplayInLayerSwitcher(false);
-        
-        return new Vector("Basic GeoPlatform WFS", vectorOptions);
+
+        return new Vector(WFSTWidgetConstants.INSTANCE.
+                VectorLayerProvider_basicVectorNameText(), vectorOptions);
     }
-    
 }

@@ -41,12 +41,12 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureSaveAttributesEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+F * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class SaveButtonProvider implements Provider<Button> {
@@ -61,7 +61,8 @@ public class SaveButtonProvider implements Provider<Button> {
 
     @Override
     public Button get() {
-        return new Button("Save", BasicWidgetResources.ICONS.save(),
+        return new Button(ButtonsConstants.INSTANCE.saveText(), 
+                BasicWidgetResources.ICONS.save(),
                 new SelectionListener<ButtonEvent>() {
 
             @Override

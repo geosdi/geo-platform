@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.command.wfst.basic;
 import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -53,5 +52,4 @@ public class DescribeFeatureTypeRequest extends WFSTRequest {
     public String getCommandName() {
         return "command.wfst.basic.DescribeFeatureTypeCommand";
     }
-
 }

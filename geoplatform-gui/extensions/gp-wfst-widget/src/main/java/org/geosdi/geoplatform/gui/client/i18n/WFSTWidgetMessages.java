@@ -33,20 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.annotation;
+package org.geosdi.geoplatform.gui.client.i18n;
 
-import com.google.inject.BindingAnnotation;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.Messages;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@BindingAnnotation
-public @interface SaveButton {
+public interface WFSTWidgetMessages extends Messages {
+
+    public final static WFSTWidgetMessages INSTANCE = GWT.create(WFSTWidgetMessages.class);
+
+    String layerWFSOfGeometryTypeMessage(String layerName, String geometryType);
+    
+    String layerIsNotAVectorMessage(String layerName);
+    
+    String checkingIfLayerIsAVectorMessage(String layerName);
+    
+    String attributeValuesErrorValidatoMessage(String typeName);
+    
+    String errorFeatureTypeRequestForLayerMessage(String errorMessage, String layerName);
+
 }

@@ -39,6 +39,8 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.LayerSchemaHandlerManager;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
@@ -47,7 +49,6 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -69,7 +70,6 @@ public class GPDescribeFeatureDispatcher implements DescribeFeatureDispatcher {
 
         ClientCommandDispatcher.getInstance().execute(
                 new GPClientCommand<DescribeFeatureTypeResponse>() {
-
             private static final long serialVersionUID = 6130617748457405063L;
 
             {
@@ -84,18 +84,18 @@ public class GPDescribeFeatureDispatcher implements DescribeFeatureDispatcher {
 
             @Override
             public void onCommandFailure(Throwable exception) {
-                String errorMessage = "Error on WFS DescribeFeatureType request";
+                String errorMessage = WFSTWidgetConstants.INSTANCE.
+                        GPDescribeFeatureDispatcher_errorDescribeFeatureTypeRequestText();
 
-                GeoPlatformMessage.errorMessage(
-                        "DescribeFetureType Service Error",
+                GeoPlatformMessage.errorMessage(WFSTWidgetConstants.INSTANCE.
+                        GPDescribeFeatureDispatcher_errorDescribeFeatureTypeTitleText(),
                         errorMessage + " - " + exception.getMessage());
 
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        errorMessage + " for " + layer.getName() + " layer.",
+                        WFSTWidgetMessages.INSTANCE.errorFeatureTypeRequestForLayerMessage(
+                        errorMessage, layer.getName()),
                         SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
             }
-
         });
     }
-
 }

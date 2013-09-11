@@ -40,12 +40,12 @@ import com.google.gwt.user.client.ui.ToggleButton;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.EditFeatureAction;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.ResourceEditingToolBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -63,12 +63,10 @@ public class EditFeatureToggleButtonProvider implements Provider<ToggleButton> {
         return new WFSToggleButton(
                 new Image(ResourceEditingToolBar.INSTANCE.edit()),
                 editAction, WFSButtonKeyProvider.EDIT_FEATURE.name()) {
-
             {
-                super.setTitle("Create New Feature");
+                super.setTitle(WFSTWidgetConstants.INSTANCE.
+                        EditFeatureToggleButtonProvider_titleText());
             }
-
         };
     }
-
 }

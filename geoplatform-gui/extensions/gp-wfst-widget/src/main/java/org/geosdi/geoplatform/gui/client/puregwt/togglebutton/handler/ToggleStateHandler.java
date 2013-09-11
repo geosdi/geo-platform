@@ -39,7 +39,6 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -48,5 +47,4 @@ public interface ToggleStateHandler extends EventHandler {
     Type<ToggleStateHandler> TYPE = new Type<ToggleStateHandler>();
 
     void enableToggleDown();
-
 }

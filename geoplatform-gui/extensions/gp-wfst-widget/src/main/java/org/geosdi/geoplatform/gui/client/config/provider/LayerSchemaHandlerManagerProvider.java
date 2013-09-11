@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.NullLayerSchemaHandler;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

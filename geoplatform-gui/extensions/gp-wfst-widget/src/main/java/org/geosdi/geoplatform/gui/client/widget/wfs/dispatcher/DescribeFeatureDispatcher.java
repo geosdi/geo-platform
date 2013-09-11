@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

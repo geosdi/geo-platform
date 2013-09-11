@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility;
 
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -42,7 +44,6 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -51,15 +52,14 @@ public class RasterTypeHandler extends LayerTypeHandler {
     @Override
     public void layerType(GPLayerBean layer) {
         if (layer.getLayerType() == GPLayerType.RASTER) {
-            String alertMessage = "The Layer " + layer.getName()
-                    + " isn't a Vector.";
+            String alertMessage = WFSTWidgetMessages.INSTANCE.
+                    layerIsNotAVectorMessage(layer.getName());
             LayoutManager.getInstance().getStatusMap().setStatus(
                     alertMessage,
                     SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
 
-            GeoPlatformMessage.alertMessage(
-                    "DescribeFeatureType Service",
-                    alertMessage);
+            GeoPlatformMessage.alertMessage(WFSTWidgetConstants.INSTANCE.
+                describeFeatureTypeServiceText(), alertMessage);
         } else {
             super.forwardLayerType(layer);
         }

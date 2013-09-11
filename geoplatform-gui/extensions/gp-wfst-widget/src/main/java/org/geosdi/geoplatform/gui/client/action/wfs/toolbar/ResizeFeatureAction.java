@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFST
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -65,5 +64,4 @@ public class ResizeFeatureAction extends WFSChangeFeatureAction {
             buttonObserver.setButtonPressed(button);
         }
     }
-
 }

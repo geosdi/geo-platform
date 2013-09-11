@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.Describ
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.GPDescribeFeatureDispatcher;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

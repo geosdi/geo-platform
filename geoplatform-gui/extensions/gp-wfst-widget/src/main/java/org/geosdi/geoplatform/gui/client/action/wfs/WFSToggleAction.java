@@ -38,26 +38,24 @@ package org.geosdi.geoplatform.gui.client.action.wfs;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class WFSToggleAction implements WFSEditorAction {
-    
+
     private final WFSBaseMapMediator baseMapMediator;
-    
+
     public WFSToggleAction(WFSBaseMapMediator theBaseMapMediator) {
         this.baseMapMediator = theBaseMapMediator;
     }
-    
+
     protected abstract void changeButtonState();
-    
+
     protected final void activateWFSColleague() {
         this.baseMapMediator.activateWFSColleague(getWFSColleagueKey());
     }
-    
+
     protected final void deactivateWFSColleague() {
         this.baseMapMediator.deactivateWFSColleague(getWFSColleagueKey());
     }
-    
 }

@@ -59,7 +59,6 @@ public interface WFSRemote extends RemoteService {
         public static WFSRemoteAsync getInstance() {
             return instance;
         }
-
     }
 
     @Deprecated
@@ -69,5 +68,4 @@ public interface WFSRemote extends RemoteService {
     @Deprecated
     FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
             int maxFeatures) throws Exception;
-
 }

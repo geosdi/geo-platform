@@ -48,11 +48,11 @@ public class AttributeCustomFields {
     private Validator validator;
     private List<OperatorType> operatorList;
 
-    public AttributeCustomFields( List<OperatorType> operatorList, Validator validator) {
+    public AttributeCustomFields(List<OperatorType> operatorList, Validator validator) {
         this.validator = validator;
         this.operatorList = operatorList;
     }
-    
+
     public Validator getValidator() {
         return validator;
     }
@@ -68,5 +68,4 @@ public class AttributeCustomFields {
     public void setOperatorList(List<OperatorType> operatorList) {
         this.operatorList = operatorList;
     }
-    
 }

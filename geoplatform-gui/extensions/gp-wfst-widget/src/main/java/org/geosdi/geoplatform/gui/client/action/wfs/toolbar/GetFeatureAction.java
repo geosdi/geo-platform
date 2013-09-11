@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButt
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -78,5 +77,4 @@ public class GetFeatureAction extends BaseWFSToggleAction {
     public WFSColleagueKey getWFSColleagueKey() {
         return WFSColleagueKey.GET_FEATURE;
     }
-
 }

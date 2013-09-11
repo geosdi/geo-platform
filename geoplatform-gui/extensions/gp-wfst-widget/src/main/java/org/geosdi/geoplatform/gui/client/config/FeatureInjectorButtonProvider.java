@@ -57,7 +57,6 @@ import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.ResizeFeat
 import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.RotateFeatureToggleButtonProvider;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -89,5 +88,4 @@ public class FeatureInjectorButtonProvider extends AbstractGinModule {
         bind(ToggleButton.class).annotatedWith(RotateFeatureToggleButton.class).toProvider(
                 RotateFeatureToggleButtonProvider.class).in(Singleton.class);
     }
-
 }

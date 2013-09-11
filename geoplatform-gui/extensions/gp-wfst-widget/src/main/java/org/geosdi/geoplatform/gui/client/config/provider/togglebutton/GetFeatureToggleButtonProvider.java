@@ -40,12 +40,13 @@ import com.google.gwt.user.client.ui.ToggleButton;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.GetFeatureAction;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.ResourceEditingToolBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -63,13 +64,10 @@ public class GetFeatureToggleButtonProvider implements Provider<ToggleButton> {
         return new WFSToggleButton(
                 new Image(ResourceEditingToolBar.INSTANCE.info()),
                 action, WFSButtonKeyProvider.GET_FEATURE.name()) {
-
             {
-                super.setTitle("Info");
+                super.setTitle(WindowsConstants.INSTANCE.infoTitleText());
                 super.addToggleStateHandler();
             }
-
         };
     }
-
 }

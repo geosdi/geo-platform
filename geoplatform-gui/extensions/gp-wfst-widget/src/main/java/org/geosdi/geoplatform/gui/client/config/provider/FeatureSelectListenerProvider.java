@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -62,5 +61,4 @@ public class FeatureSelectListenerProvider implements
     public FeatureSelectListener get() {
         return new FeatureSelectListener(vectorLayer, bus);
     }
-
 }

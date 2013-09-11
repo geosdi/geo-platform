@@ -70,5 +70,4 @@ public class LayerSchemaBinder implements ILayerSchemaBinder {
     public GPLayerBean getSelectedLayer() {
         return this.selectedLayer;
     }
-
 }

@@ -41,11 +41,11 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureResetAttributesEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -61,15 +61,13 @@ public class ResetButtonProvider implements Provider<Button> {
 
     @Override
     public Button get() {
-        return new Button("Reset", BasicWidgetResources.ICONS.delete(),
+        return new Button(ButtonsConstants.INSTANCE.resetText(), 
+                BasicWidgetResources.ICONS.delete(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 bus.fireEvent(resetEvent);
             }
-
         });
     }
-
 }

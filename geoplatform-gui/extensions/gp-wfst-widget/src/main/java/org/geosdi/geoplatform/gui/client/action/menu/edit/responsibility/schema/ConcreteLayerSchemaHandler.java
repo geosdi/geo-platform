@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
@@ -45,7 +46,6 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -76,12 +76,11 @@ public class ConcreteLayerSchemaHandler extends LayerSchemaParserHandler {
                 GPLayerType.valueOf(geometryType.toUpperCase()));
 
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "The Layer " + layer.getName() + " is a WFS layer of "
-                + geometryType + " geometry type.",
+                WFSTWidgetMessages.INSTANCE.layerWFSOfGeometryTypeMessage(
+                layer.getName(), geometryType),
                 SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
 
         layerSchemaBinder.bind(layer, schemaDTO);
         featureWidget.show();
     }
-
 }

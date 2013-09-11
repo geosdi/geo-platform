@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMedia
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -58,5 +57,4 @@ public abstract class BaseWFSToggleAction extends WFSToggleAction {
     protected final void changeButtonState() {
         buttonObserver.changeButtonState();
     }
-
 }

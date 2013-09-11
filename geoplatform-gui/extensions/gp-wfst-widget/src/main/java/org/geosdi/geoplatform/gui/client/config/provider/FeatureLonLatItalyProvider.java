@@ -42,7 +42,6 @@ import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -63,5 +62,4 @@ public class FeatureLonLatItalyProvider implements Provider<LonLat> {
 
         return italy;
     }
-
 }

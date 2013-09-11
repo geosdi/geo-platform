@@ -41,6 +41,8 @@ import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.LayerTypeHandlerManager;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -55,7 +57,8 @@ public class EditWFSAction extends MenuBaseAction {
     private LayerTypeHandlerManager layerTypeHandlerManager;
 
     public EditWFSAction(TreePanel<GPBeanTreeModel> treePanel) {
-        super("Edit WFS Mode", BasicWidgetResources.ICONS.vector());
+        super(WFSTWidgetConstants.INSTANCE.EditWFSAction_titleText(), 
+                BasicWidgetResources.ICONS.vector());
         this.treePanel = treePanel;
         this.layerTypeHandlerManager = FeatureInjector.MainInjector.getInstance().getLayerTypeHandlerManager();
     }
@@ -65,7 +68,7 @@ public class EditWFSAction extends MenuBaseAction {
         final GPLayerBean layer = (GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem();
 
         LayoutManager.getInstance().getStatusMap().setBusy(
-                "Checking if " + layer.getName() + " is a Vector Layer.");
+                WFSTWidgetMessages.INSTANCE.checkingIfLayerIsAVectorMessage(layer.getName()));
 
         this.layerTypeHandlerManager.forwardLayerType(layer);
     }

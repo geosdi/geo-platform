@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.puregwt.map.event;
 import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -48,5 +47,4 @@ public class IncreaseWidthEvent extends FeatureMapWidthEvent {
     protected void dispatch(IFeatureMapSizeHandler handler) {
         handler.increaseWidth(width);
     }
-
 }

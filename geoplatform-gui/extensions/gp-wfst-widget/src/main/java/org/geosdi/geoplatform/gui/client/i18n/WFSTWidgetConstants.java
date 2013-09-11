@@ -48,12 +48,69 @@ public interface WFSTWidgetConstants extends Constants {
     public static final WFSTWidgetConstants INSTANCE =
             GWT.create(WFSTWidgetConstants.class);
 
+    @DefaultStringValue("DescribeFeatureType Service")
+    String describeFeatureTypeServiceText();
+    
+    /**
+     * start GPDescribeFeatureDispatcher
+     */
+    @DefaultStringValue("DescribeFeatureType Service Error")
+    String GPDescribeFeatureDispatcher_errorDescribeFeatureTypeTitleText();
+    
+    @DefaultStringValue("Error on WFS DescribeFeatureType request")
+    String GPDescribeFeatureDispatcher_errorDescribeFeatureTypeRequestText();
+    
+    /**
+     * start VectorLayerProvider
+     */
+    @DefaultStringValue("Basic GeoPlatform WFS")
+    String VectorLayerProvider_basicVectorNameText();
+    
+    /**
+     * start FeatureProtocolCRUDOptionsProvider
+     */
+    @DefaultStringValue("Transaction Error")
+    String FeatureProtocolCRUDOptionsProvider_transactionErrorText();
+    
+    /**
+     * start RotateFeatureToggleButtonProvider
+     */
+    @DefaultStringValue("Rotate")
+    String RotateFeatureToggleButtonProvider_titleText();
+    
+    /**
+     * start ResizeFeatureToggleButtonProvider
+     */
+    @DefaultStringValue("Resize")
+    String ResizeFeatureToggleButtonProvider_titleText();
+    
+    /**
+     * start ReshapeFeatureToggleButtonProvider
+     */
+    @DefaultStringValue("Reshape")
+    String ReshapeFeatureToggleButtonProvider_titleText();
+    
+    /**
+     * start EditFeatureToggleButtonProvider
+     */
+    @DefaultStringValue("Create New Feature")
+    String EditFeatureToggleButtonProvider_titleText();
+    
+    /**
+     * start DragFeatureToggleButtonProvider
+     */
+    @DefaultStringValue("Drag")
+    String DragFeatureToggleButtonProvider_titleText();
+    
+    /**
+     * start EditWFSAction
+     */
+    @DefaultStringValue("Edit WFS Mode")
+    String EditWFSAction_titleText();
+
     /**
      * start FeatureAttributesWindow
      */
-//    @DefaultStringValue("Insert all the required attributes")
-//    String FeatureAttributesWindow_formPanelHeadingText();
-
     @DefaultStringValue("Feature Attribute Window")
     String FeatureAttributesWindow_headingText();
 

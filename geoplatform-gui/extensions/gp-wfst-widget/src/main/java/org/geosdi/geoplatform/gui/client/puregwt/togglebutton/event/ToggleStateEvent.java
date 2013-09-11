@@ -39,7 +39,6 @@ import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.togglebutton.handler.ToggleStateHandler;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -54,5 +53,4 @@ public class ToggleStateEvent extends GwtEvent<ToggleStateHandler> {
     protected void dispatch(ToggleStateHandler handler) {
         handler.enableToggleDown();
     }
-
 }

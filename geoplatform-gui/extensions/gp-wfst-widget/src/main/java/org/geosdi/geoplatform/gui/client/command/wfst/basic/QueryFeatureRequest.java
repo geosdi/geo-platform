@@ -56,7 +56,6 @@ public class QueryFeatureRequest implements GPCommandRequest {
         this.query = query;
     }
 
-    
     @Override
     public String getCommandName() {
         return "command.wfst.basic.QueryFeatureCommand";

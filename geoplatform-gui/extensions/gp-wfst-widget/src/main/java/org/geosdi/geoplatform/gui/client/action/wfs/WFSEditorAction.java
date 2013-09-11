@@ -39,12 +39,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleague;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface WFSEditorAction extends ClickHandler, WFSColleague {
 
     void disableEditorControl();
-
 }

@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.command.wfst;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -86,5 +85,4 @@ public abstract class WFSTRequest implements GPCommandRequest {
                 + ", typeName = " + getTypeName() + ", commandName = "
                 + getCommandName() + '}';
     }
-
 }

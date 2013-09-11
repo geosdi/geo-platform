@@ -60,5 +60,4 @@ public class MapWidgetProvider implements Provider<MapWidget> {
         return this.mapFactory.createMap("665", "410",
                 GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
     }
-
 }

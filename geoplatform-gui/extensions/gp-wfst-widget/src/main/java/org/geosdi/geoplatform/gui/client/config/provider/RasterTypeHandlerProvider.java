@@ -39,7 +39,6 @@ import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.RasterTypeHandler;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

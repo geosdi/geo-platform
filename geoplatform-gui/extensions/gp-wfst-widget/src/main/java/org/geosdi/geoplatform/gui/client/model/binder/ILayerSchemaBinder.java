@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -50,5 +49,4 @@ public interface ILayerSchemaBinder {
     GPLayerBean getSelectedLayer();
 
     LayerSchemaDTO getLayerSchemaDTO();
-
 }

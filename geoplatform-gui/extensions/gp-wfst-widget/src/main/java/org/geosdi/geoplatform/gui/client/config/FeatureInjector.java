@@ -64,7 +64,6 @@ public interface FeatureInjector extends Ginjector {
         public static FeatureInjector getInstance() {
             return INSTANCE;
         }
-
     }
 
     GPEventBus getEventBus();
@@ -72,5 +71,4 @@ public interface FeatureInjector extends Ginjector {
     LayerTypeHandlerManager getLayerTypeHandlerManager();
 
     FeatureWidget getFeatureWidget();
-
 }

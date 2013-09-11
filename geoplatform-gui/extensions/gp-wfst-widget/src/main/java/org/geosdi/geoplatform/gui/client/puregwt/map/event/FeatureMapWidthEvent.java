@@ -39,13 +39,12 @@ import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class FeatureMapWidthEvent
         extends GwtEvent<IFeatureMapSizeHandler> {
-    
+
     protected int width;
 
     /**

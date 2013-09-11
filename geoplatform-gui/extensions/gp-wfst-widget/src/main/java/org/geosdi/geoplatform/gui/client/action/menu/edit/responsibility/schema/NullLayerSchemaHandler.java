@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -43,7 +45,6 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -60,11 +61,10 @@ public class NullLayerSchemaHandler extends LayerSchemaParserHandler {
     }
 
     private void showAlertMessage(GPLayerBean layer) {
-        String alertMessage = "The Layer " + layer.getName()
-                + " isn't a Vector.";
-        GeoPlatformMessage.alertMessage(
-                "DescribeFeatureType Service",
-                alertMessage);
+        String alertMessage = WFSTWidgetMessages.INSTANCE.
+                layerIsNotAVectorMessage(layer.getName());
+        GeoPlatformMessage.alertMessage(WFSTWidgetConstants.INSTANCE.
+                describeFeatureTypeServiceText(), alertMessage);
 
         LayoutManager.getInstance().getStatusMap().setStatus(
                 alertMessage,

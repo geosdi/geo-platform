@@ -43,7 +43,6 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.control.GetFeature;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -66,7 +65,7 @@ public class GetFeatureControlBuilder extends AbstractGetFeatureControlBuilder {
     @Override
     public GetFeature buildControl(GetFeatureModel featureModel) {
         this.gfc = super.buildControl(featureModel);
-        
+
         return this.gfc;
     }
 
@@ -78,5 +77,4 @@ public class GetFeatureControlBuilder extends AbstractGetFeatureControlBuilder {
     public GetFeature getGfc() {
         return gfc;
     }
-
 }

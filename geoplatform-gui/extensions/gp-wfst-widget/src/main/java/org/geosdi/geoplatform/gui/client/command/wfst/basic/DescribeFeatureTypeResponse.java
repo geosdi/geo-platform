@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -67,5 +66,4 @@ public class DescribeFeatureTypeResponse implements
         return getClass().getName() + " {" + "layerSchemaDTO = "
                 + layerSchemaDTO + '}';
     }
-
 }

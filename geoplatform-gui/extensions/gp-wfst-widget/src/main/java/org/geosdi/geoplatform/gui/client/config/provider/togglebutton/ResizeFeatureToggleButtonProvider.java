@@ -40,6 +40,7 @@ import com.google.gwt.user.client.ui.ToggleButton;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.ResizeFeatureAction;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.ResourceEditingToolBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
@@ -47,15 +48,14 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButt
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class ResizeFeatureToggleButtonProvider implements Provider<ToggleButton> {
-    
+
     private WFSToolbarObserver buttonObserver;
     private WFSBaseMapMediator mapControlManager;
-    
+
     @Inject
     public ResizeFeatureToggleButtonProvider(
             WFSBaseMapMediator theMapControlManager,
@@ -63,19 +63,17 @@ public class ResizeFeatureToggleButtonProvider implements Provider<ToggleButton>
         this.buttonObserver = theButtonObserver;
         this.mapControlManager = theMapControlManager;
     }
-    
+
     @Override
     public ToggleButton get() {
         return new WFSToggleButton(new Image(
                 ResourceEditingToolBar.INSTANCE.resize()),
                 new ResizeFeatureAction(mapControlManager, buttonObserver),
                 WFSButtonKeyProvider.RESIZE_FEATURE.name()) {
-            
             {
-                super.setTitle("Resize");
+                super.setTitle(WFSTWidgetConstants.INSTANCE.
+                        ResizeFeatureToggleButtonProvider_titleText());
             }
-            
         };
     }
-    
 }

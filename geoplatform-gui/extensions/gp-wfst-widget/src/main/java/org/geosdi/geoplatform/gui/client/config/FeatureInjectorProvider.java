@@ -67,7 +67,6 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -118,5 +117,4 @@ public class FeatureInjectorProvider extends AbstractGinModule {
         bind(BorderLayout.class).toProvider(BorderLayoutProvider.class).in(
                 Singleton.class);
     }
-
 }

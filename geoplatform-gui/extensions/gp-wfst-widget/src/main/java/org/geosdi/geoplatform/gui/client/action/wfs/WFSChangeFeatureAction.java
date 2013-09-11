@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSCo
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -68,5 +67,4 @@ public abstract class WFSChangeFeatureAction extends BaseWFSToggleAction
     public WFSColleagueKey getWFSColleagueKey() {
         return WFSColleagueKey.MODIFY_FEATURE;
     }
-
 }

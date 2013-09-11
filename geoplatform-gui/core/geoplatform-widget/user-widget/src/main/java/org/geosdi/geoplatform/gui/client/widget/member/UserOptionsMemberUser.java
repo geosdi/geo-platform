@@ -49,6 +49,9 @@ import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
@@ -82,7 +85,8 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     private boolean validPassword;
 
     public UserOptionsMemberUser() {
-        super("User");
+        super(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_userText());
     }
 
     @Override
@@ -102,25 +106,28 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private FieldSet createPropertiesSetting() {
         FieldSet userFieldSet = new FieldSet();
-        userFieldSet.setHeadingHtml("User");
+        userFieldSet.setHeadingHtml(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_userText());
         userFieldSet.setSize(400, 110);
         userFieldSet.setLayout(this.getFormLayoutTemplate());
 
         usernameField = new TextField<String>();
-        usernameField.setFieldLabel("Username");
+        usernameField.setFieldLabel(UserModuleConstants.INSTANCE.usernameFieldText());
         usernameField.setEnabled(false);
 
         userFieldSet.add(usernameField);
 
         roleField = new TextField<String>();
-        roleField.setFieldLabel("Role");
+        roleField.setFieldLabel(UserModuleConstants.INSTANCE.
+                userRoleLabelText());
         roleField.setEnabled(false);
 
         userFieldSet.add(roleField);
 
         nameField = new TextField<String>();
-        nameField.setFieldLabel("Name");
-        nameField.setToolTip("Your complete name");
+        nameField.setFieldLabel(UserModuleConstants.INSTANCE.nameFieldText());
+        nameField.setToolTip(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_nameFieldTooltipText());
         nameField.setSelectOnFocus(true);
         nameField.setAllowBlank(false);
         nameField.setAutoValidate(true);
@@ -132,15 +139,17 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private FieldSet createEmailSetting() {
         FieldSet emailResultSet = new FieldSet();
-        emailResultSet.setHeadingHtml("Change email");
+        emailResultSet.setHeadingHtml(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_changeEmailHeadingText());
         emailResultSet.setSize(400, 50);
         emailResultSet.setCheckboxToggle(true);
         emailResultSet.setExpanded(false);
         emailResultSet.setLayout(this.getFormLayoutTemplate());
 
         emailField = new TextField<String>();
-        emailField.setFieldLabel("Email");
-        emailField.setToolTip("Your email");
+        emailField.setFieldLabel(UserModuleConstants.INSTANCE.emailFieldText());
+        emailField.setToolTip(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_emailFieldTooltipText());
         emailField.setAutoValidate(true);
         emailField.setAllowBlank(false);
         emailField.setValidator(validatorUpdateEmail());
@@ -148,14 +157,12 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
         emailResultSet.addListener(Events.Collapse,
                 new Listener<FieldSetEvent>() {
-
             @Override
             public void handleEvent(FieldSetEvent be) {
                 updateEmail(null, true);
 
                 emailField.setValue(user.getEmail());
             }
-
         });
 
         return emailResultSet;
@@ -163,15 +170,18 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private FieldSet createPasswordSetting() {
         FieldSet passwordFieldSet = new FieldSet();
-        passwordFieldSet.setHeadingHtml("Change password");
+        passwordFieldSet.setHeadingHtml(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_changePasswordHeadingText());
         passwordFieldSet.setSize(400, 100);
         passwordFieldSet.setCheckboxToggle(true);
         passwordFieldSet.setExpanded(false);
         passwordFieldSet.setLayout(this.getFormLayoutTemplate());
 
         oldPasswordField = new TextField<String>();
-        oldPasswordField.setFieldLabel("Current");
-        oldPasswordField.setToolTip("Your current password");
+        oldPasswordField.setFieldLabel(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_oldPasswordLabelText());
+        oldPasswordField.setToolTip(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_oldPasswordLabelText());
         oldPasswordField.setPassword(true);
         oldPasswordField.setAutoValidate(true);
         oldPasswordField.setAllowBlank(false);
@@ -179,8 +189,9 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         passwordFieldSet.add(oldPasswordField);
 
         newPasswordField = new TextField<String>();
-        newPasswordField.setFieldLabel("New");
-        newPasswordField.setToolTip("Enter a new password");
+        newPasswordField.setFieldLabel(ButtonsConstants.INSTANCE.newText());
+        newPasswordField.setToolTip(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_newPasswordTooltipText());
         newPasswordField.setPassword(true);
         newPasswordField.setAutoValidate(true);
         newPasswordField.setAllowBlank(false);
@@ -189,8 +200,10 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         passwordFieldSet.add(newPasswordField);
 
         newRePasswordField = new TextField<String>();
-        newRePasswordField.setFieldLabel("Retype new");
-        newRePasswordField.setToolTip("Retype the new password");
+        newRePasswordField.setFieldLabel(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_newRePasswordLabelText());
+        newRePasswordField.setToolTip(UserModuleConstants.INSTANCE.
+                UserOptionsMemberUser_newRePasswordTooltipText());
         newRePasswordField.setPassword(true);
         newRePasswordField.setAutoValidate(true);
         newRePasswordField.setAllowBlank(false);
@@ -200,7 +213,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
         passwordFieldSet.addListener(Events.Collapse,
                 new Listener<FieldSetEvent>() {
-
             @Override
             public void handleEvent(FieldSetEvent be) {
                 updatePassword(null, true);
@@ -212,16 +224,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 newPasswordField.setEnabled(false);
                 newRePasswordField.setEnabled(false);
             }
-
         });
         passwordFieldSet.addListener(Events.Expand,
                 new Listener<FieldSetEvent>() {
-
             @Override
             public void handleEvent(FieldSetEvent be) {
                 updatePassword(null, false);
             }
-
         });
 
         return passwordFieldSet;
@@ -236,20 +245,20 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         UserRemoteImpl.Util.getInstance().updateOwnUser(user,
                 currentPlainPassword, newPlainPassword,
                 new AsyncCallback<Long>() {
-
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
+                        caught.getMessage());
             }
 
             @Override
             public void onSuccess(Long result) {
                 saveButton.disable();
 
-                GeoPlatformMessage.infoMessage("User successfully modify",
+                GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.
+                        infoUserSuccesfullyModifiedText(),
                         "<ul><li>" + user.getUsername() + "</li></ul>");
             }
-
         });
     }
 
@@ -275,7 +284,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private Validator validatorUpdateName() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(user.getName())) {
@@ -284,18 +292,16 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 }
                 if (!GPRegEx.RE_COMPLETE_NAME.test(value)) {
                     updateName(null, false);
-                    return "Complete name is not valid (example: John Steam)";
+                    return UserModuleConstants.INSTANCE.errorValidatingCompleteNameUpdateText();
                 }
                 updateName(value, true);
                 return null;
             }
-
         };
     }
 
     private Validator validatorUpdateEmail() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(user.getEmail())) {
@@ -304,18 +310,16 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                 }
                 if (!GPRegEx.RE_EMAIL.test(value)) {
                     updateEmail(null, false);
-                    return "Email is not valid (example: any@foo.org)";
+                    return UserModuleConstants.INSTANCE.errorValidatingEmailUpdateText();
                 }
                 updateEmail(value, true);
                 return null;
             }
-
         };
     }
 
     private Validator validatorPassword() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
@@ -326,41 +330,38 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
                     newPasswordField.setEnabled(false);
                     newRePasswordField.setEnabled(false);
-                    return "The minimun lenght for old password is 4";
+                    return UserModuleConstants.INSTANCE.errorValidatingPasswordUpdateText();
                 }
                 newPasswordField.setEnabled(true);
                 return null;
             }
-
         };
     }
 
     private Validator validatorUpdatePassword() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
                     updatePassword(null, false);
                     newRePasswordField.reset();
                     newRePasswordField.setEnabled(false);
-                    return "The minimun lenght for new password is 4";
+                    return UserModuleConstants.INSTANCE.errorValidatingPasswordUpdateText();
                 } else if (value.equals(oldPasswordField.getValue())) {
                     updatePassword(null, false);
                     newRePasswordField.reset();
                     newRePasswordField.setEnabled(false);
-                    return "The new password must be different from the old password";
+                    return UserModuleConstants.INSTANCE.
+                            UserOptionsMemberUser_errorValidatingNewPasswordDifferenceUpdateText();
                 }
                 newRePasswordField.setEnabled(true);
                 return null;
             }
-
         };
     }
 
     private Validator validatorUpdateConfirmPassword() {
         return new Validator() {
-
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(newPasswordField.getValue())) {
@@ -368,9 +369,9 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                     return null;
                 }
                 updatePassword(null, false);
-                return "Retyped new password don't match";
+                return UserModuleConstants.INSTANCE.
+                        UserOptionsMemberUser_errorValidatingRetypedPasswordUpdateText();
             }
-
         };
     }
 
@@ -411,5 +412,4 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             user.setEmail(newEmail);
         }
     }
-
 }

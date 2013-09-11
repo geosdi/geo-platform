@@ -43,6 +43,8 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -63,7 +65,7 @@ public class UserOptionsMemberView extends UserOptionsMember {
     private CheckBox startupStrategyCheckBox;
 
     public UserOptionsMemberView() {
-        super("View");
+        super(UserModuleConstants.INSTANCE.UserOptionsMemberView_titleText());
     }
 
     @Override
@@ -74,7 +76,8 @@ public class UserOptionsMemberView extends UserOptionsMember {
         UserTreeOptions userTreeOptions = Registry.get(UserSessionEnum.USER_TREE_OPTIONS.name());
         FormPanel formPanel = new FormPanel();
         startupStrategyCheckBox = new CheckBox();
-        startupStrategyCheckBox.setFieldLabel("Load expanded folders at start-up");
+        startupStrategyCheckBox.setFieldLabel(UserModuleConstants.INSTANCE.
+                UserOptionsMemberView_startupStrategyLabelText());
         startupStrategyCheckBox.addListener(Events.Change, new Listener<BaseEvent>() {
             @Override
             public void handleEvent(BaseEvent be) {
@@ -102,12 +105,12 @@ public class UserOptionsMemberView extends UserOptionsMember {
                 if (caught.getCause() instanceof GPSessionTimeout) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(null));
                 } else {
-                    GeoPlatformMessage.errorMessage("Error saving",
-                                                    "An error occurred while making the requested connection.\n"
-                            + "Verify network connections and try again."
-                            + "\nIf the problem persists contact your system administrator.");
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.
+                            errorSavingTitleText(),
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Error saving view options.",
+                            UserModuleConstants.INSTANCE.
+                            UserOptionsMemberView_statusErrorSavingText(),
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                     System.out.println("Error saving view options: " + caught.toString()
                             + " data: " + caught.getMessage());
@@ -117,9 +120,10 @@ public class UserOptionsMemberView extends UserOptionsMember {
             @Override
             public void onSuccess(Long result) {
                 UserOptionsMemberView.super.saveButton.disable();
-                
+
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                        "View options saved succesfully.",
+                        UserModuleConstants.INSTANCE.
+                        UserOptionsMemberView_statusSaveOptionSuccesfullyText(),
                         SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
             }
         });

@@ -48,6 +48,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageDeleteUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageDeleteUserEvent;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleMessages;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -78,9 +82,10 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
             @Override
             public void componentSelected(ButtonEvent ce) {
 
-                GeoPlatformMessage.confirmMessage("Delete User",
-                                                  "Are you sure you want to delete the User \"" + user.getUsername() + "\" ?",
-                                                  new Listener<MessageBoxEvent>() {
+                GeoPlatformMessage.confirmMessage(UserModuleConstants.INSTANCE.
+                        DeleteUserRenderer_deleteUserTitleText(),
+                        UserModuleMessages.INSTANCE.confirmDeleteUserBodyMessage(user.getUsername()),
+                        new Listener<MessageBoxEvent>() {
                     @Override
                     public void handleEvent(MessageBoxEvent be) {
                         if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
@@ -90,7 +95,7 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
                 });
             }
         });
-        button.setToolTip("Delete User");
+        button.setToolTip(UserModuleConstants.INSTANCE.DeleteUserRenderer_deleteUserTitleText());
         button.setIcon(BasicWidgetResources.ICONS.delete());
         button.setAutoWidth(true);
 
@@ -109,15 +114,17 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
                     manageDeleteUserEvent.setStore(store);
                     GPHandlerManager.fireEvent(new GPLoginEvent(manageDeleteUserEvent));
                 } else {
-                    GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
+                            caught.getMessage());
                 }
             }
 
             @Override
             public void onSuccess(Boolean result) {
                 store.remove(user);
-                GeoPlatformMessage.infoMessage("User successfully deleted",
-                                               "<ul><li>" + user.getUsername() + "</li></ul>");
+                GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.
+                        DeleteUserRenderer_infoUserSuccesfullyDeletedText(),
+                        "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }

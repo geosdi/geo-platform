@@ -40,6 +40,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.ManageRolesWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
@@ -54,7 +55,8 @@ public class ManageRolesMenuAction extends MenuBaseAction {
     private ManageRolesWidget rolesWidget = new ManageRolesWidget();
 
     public ManageRolesMenuAction() {
-        super("Manage Roles", BasicWidgetResources.ICONS.role());
+        super(UserModuleConstants.INSTANCE.ManageRolesMenuAction_titleText(),
+                BasicWidgetResources.ICONS.role());
     }
 
     @Override
@@ -64,11 +66,12 @@ public class ManageRolesMenuAction extends MenuBaseAction {
 
     private void retrieveRoles() {
         UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
-                                                      new AsyncCallback<ArrayList<String>>() {
+                new AsyncCallback<ArrayList<String>>() {
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error retrieving roles",
-                                                caught.getMessage());
+                GeoPlatformMessage.errorMessage(UserModuleConstants.INSTANCE.
+                        ManageRolesMenuAction_errorRetrievingRoleTitleText(),
+                        caught.getMessage());
             }
 
             @Override
@@ -87,8 +90,9 @@ public class ManageRolesMenuAction extends MenuBaseAction {
         UserRemoteImpl.Util.getInstance().getAllGuiComponentIDs(new AsyncCallback<ArrayList<String>>() {
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error retrieving permissions IDs",
-                                                caught.getMessage());
+                GeoPlatformMessage.errorMessage(UserModuleConstants.INSTANCE.
+                        ManageRolesMenuAction_errorRetrievingPermissionsIDsTitleText(),
+                        caught.getMessage());
             }
 
             @Override

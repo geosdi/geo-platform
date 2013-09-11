@@ -64,6 +64,6 @@ public interface UserModuleInjector extends Ginjector {
     UserPropertiesTabWidget getUserPropertiesTabWidget();
 
     ManageUsersPagWidget getManageUsersPagWidget();
-    
+
     UserPropertiesWidget getUserPropertiesWidget();
 }

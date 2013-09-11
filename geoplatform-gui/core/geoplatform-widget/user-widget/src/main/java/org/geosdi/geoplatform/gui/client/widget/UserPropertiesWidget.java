@@ -55,6 +55,9 @@ import org.geosdi.geoplatform.gui.client.event.timeout.IManageUpdateUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageInsertUserEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageUpdateUserEvent;
 import org.geosdi.geoplatform.gui.client.form.binding.UserPropertiesBinding;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -91,7 +94,7 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
     private UserPropertiesManagerWidget userPropertiesManagerWidget;
 
     public UserPropertiesWidget() {
-        super("User Properties");
+        super(UserModuleConstants.INSTANCE.UserPropertiesWidget_headingText());
 //        super.setSize(340, 350);
         this.setWidgetProperties();
         super.setLayout(new FitLayout());
@@ -108,7 +111,8 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
     private void addCentralPanel() {
         this.centralPanel = new ContentPanel(new FlowLayout());
         this.centralPanel.setHeaderVisible(Boolean.FALSE);
-        this.saveButton = new Button("Save", BasicWidgetResources.ICONS.save(),
+        this.saveButton = new Button(ButtonsConstants.INSTANCE.saveText(), 
+                BasicWidgetResources.ICONS.save(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -126,7 +130,8 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
         });
         this.userPropertiesBinding = new UserPropertiesBinding(store, saveButton);
 
-        Button closeButton = new Button("Close", BasicWidgetResources.ICONS.cancel(),
+        Button closeButton = new Button(ButtonsConstants.INSTANCE.closeText(), 
+                BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -171,7 +176,8 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
                     GPHandlerManager.fireEvent(new GPLoginEvent(
                             manageInsertUserEvent));
                 } else {
-                    GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.
+                            errorTitleText(), caught.getMessage());
                 }
             }
 
@@ -183,7 +189,8 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
                 userPropertiesManagerWidget.hide();
 
                 // TODO statusbar...
-                GeoPlatformMessage.infoMessage("User successfully added",
+                GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.
+                        infoUserSuccesfullyAddedText(),
                         "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
@@ -199,7 +206,8 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
                     GPHandlerManager.fireEvent(new GPLoginEvent(
                             manageUpdateUserEvent));
                 } else {
-                    GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.
+                            errorTitleText(), caught.getMessage());
                 }
             }
 
@@ -209,7 +217,8 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
                 userPropertiesManagerWidget.hide();
 
                 // TODO statusbar...
-                GeoPlatformMessage.infoMessage("User successfully modified",
+                GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.
+                        infoUserSuccesfullyModifiedText(),
                         "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });

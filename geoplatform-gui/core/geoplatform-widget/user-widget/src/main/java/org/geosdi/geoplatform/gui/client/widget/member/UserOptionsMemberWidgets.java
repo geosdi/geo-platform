@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
@@ -49,13 +50,14 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 public class UserOptionsMemberWidgets extends UserOptionsMember {
 
     public UserOptionsMemberWidgets() {
-        super("Widgets");
+        super(UserModuleConstants.INSTANCE.UserOptionsMemberWidgets_titleText());
     }
 
     @Override
     protected void creteLayoutData(ContentPanel panel) {
         VBoxLayoutData layoutData = new VBoxLayoutData(new Margins(0, 0, 5, 0));
-        panel.add(new Label("Active WIDGETS"), layoutData);
+        panel.add(new Label(UserModuleConstants.INSTANCE.
+                UserOptionsMemberWidgets_activeWidgetsLabelText()), layoutData);
     }
 
     @Override

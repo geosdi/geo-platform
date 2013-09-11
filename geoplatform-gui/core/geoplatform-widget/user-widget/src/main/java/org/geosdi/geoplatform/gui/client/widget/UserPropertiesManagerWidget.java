@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import org.geosdi.geoplatform.gui.client.config.UserModuleInjector;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -46,7 +47,6 @@ public class UserPropertiesManagerWidget extends GeoPlatformWindow {
 
     public final static short WIDGET_HEIGHT = 395;
     public final static short WIDGET_WIDTH = 341;
-    private final static String WIDGET_HEADING = "User Properties Management";
 
     public UserPropertiesManagerWidget() {
         super(Boolean.TRUE);
@@ -69,7 +69,8 @@ public class UserPropertiesManagerWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingText(WIDGET_HEADING);
+        super.setHeadingText(UserModuleConstants.INSTANCE.
+            UserPropertiesManagerWidget_headingText());
         super.setLayout(new FitLayout());
         super.setModal(Boolean.TRUE);
         super.setResizable(Boolean.FALSE);

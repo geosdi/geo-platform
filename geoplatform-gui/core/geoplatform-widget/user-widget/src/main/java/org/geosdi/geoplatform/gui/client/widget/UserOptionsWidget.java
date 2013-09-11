@@ -44,6 +44,8 @@ import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMainPanel;
 
 /**
@@ -65,7 +67,7 @@ public class UserOptionsWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml("User Options");
+        super.setHeadingHtml(UserModuleConstants.INSTANCE.UserOptionsWidget_headingText());
         super.setResizable(Boolean.FALSE);
         super.setLayout(new BorderLayout());
         super.setModal(Boolean.TRUE);
@@ -73,12 +75,10 @@ public class UserOptionsWidget extends GeoPlatformWindow {
         super.setPlain(Boolean.TRUE);
 
         super.addListener(Events.Show, new Listener<WindowEvent>() {
-
             @Override
             public void handleEvent(WindowEvent be) {
                 optionsMainPanel.createMembers();
             }
-
         });
     }
 
@@ -89,18 +89,16 @@ public class UserOptionsWidget extends GeoPlatformWindow {
     }
 
     private void addButtons() {
-        Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
+        Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
+                BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-
             @Override
             public void componentSelected(ButtonEvent ce) {
                 hide();
             }
-
         });
 
         super.setButtonAlign(HorizontalAlignment.RIGHT);
         super.addButton(close);
     }
-
 }

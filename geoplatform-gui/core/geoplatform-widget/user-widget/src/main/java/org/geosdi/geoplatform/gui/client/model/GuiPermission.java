@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import org.geosdi.geoplatform.gui.client.i18n.GuiPermissionConstants;
+
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -44,15 +46,15 @@ public enum GuiPermission {
     /**
      * GuiComponent will be not visible
      */
-    NONE("NONE"),
+    NONE(GuiPermissionConstants.INSTANCE.NONE()),
     /**
      * GuiComponent will be read-only (visible and not enable)
      */
-    READ("READ"),
+    READ(GuiPermissionConstants.INSTANCE.READ()),
     /**
      * GuiComponent will be enable (and visible)
      */
-    WRITE("WRITE");
+    WRITE(GuiPermissionConstants.INSTANCE.WRITE());
     //
     private String permission;
 

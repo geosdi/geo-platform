@@ -51,6 +51,7 @@ import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
@@ -58,6 +59,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
+import org.geosdi.geoplatform.gui.client.i18n.status.SearchStatusConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
@@ -97,10 +101,13 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         this.userPropertiesManagerWidget = GWT.create(UserPropertiesManagerWidget.class);
         this.userPropertiesWidget.setWindowToClose(this.userPropertiesManagerWidget);
         //
-        super.selectButton.setText("Modify User");
-        super.search.setFieldLabel("Find User");
+        super.selectButton.setText(UserModuleConstants.INSTANCE.
+                ManageUsersPagWidget_modifyUserText());
+        super.search.setFieldLabel(UserModuleConstants.INSTANCE.
+                ManageUsersPagWidget_findUserText());
         this.userPropertiesWidget.setStore(super.store);
-        super.addButton(1, new Button("Add User",
+        super.addButton(1, new Button(UserModuleConstants.INSTANCE.
+                ManageUsersPagWidget_addUserText(),
                 BasicWidgetResources.ICONS.logged_user(),
                 new SelectionListener<ButtonEvent>() {
             @Override
@@ -118,7 +125,8 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml("GeoPlatform Users Management");
+        super.setHeadingHtml(UserModuleConstants.INSTANCE.
+                ManageUsersPagWidget_headingText());
         super.setSize(670, 490);
 
         super.addWindowListener(new WindowListener() {
@@ -157,48 +165,49 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
     @Override
     public ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
 
         ColumnConfig nameColumn = new ColumnConfig();
         nameColumn.setId(GPSimpleUserKeyValue.NAME.toString());
-        nameColumn.setHeaderHtml("Name");
+        nameColumn.setHeaderHtml(UserModuleConstants.INSTANCE.nameFieldText());
         configs.add(nameColumn);
 
         ColumnConfig usernameColumn = new ColumnConfig();
         usernameColumn.setId(GPSimpleUserKeyValue.USERNAME.toString());
-        usernameColumn.setHeaderHtml("Username");
+        usernameColumn.setHeaderHtml(UserModuleConstants.INSTANCE.usernameFieldText());
         usernameColumn.setWidth(120);
         configs.add(usernameColumn);
 
         CheckColumnConfig enabledColumn = new CheckColumnConfig();
         enabledColumn.setId(GPUserManageDetailKeyValue.ENABLED.toString());
-        enabledColumn.setHeaderHtml("Enabled");
+        enabledColumn.setHeaderHtml(UserModuleConstants.INSTANCE.enabledFieldLabelText());
         enabledColumn.setWidth(50);
         enabledColumn.setFixed(true);
         configs.add(enabledColumn);
 
         CheckColumnConfig tempColumn = new CheckColumnConfig();
         tempColumn.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
-        tempColumn.setHeaderHtml("Temporary");
+        tempColumn.setHeaderHtml(UserModuleConstants.INSTANCE.temporaryFieldLabelText());
         tempColumn.setWidth(65);
         tempColumn.setFixed(true);
         configs.add(tempColumn);
 
         ColumnConfig roleColumn = new ColumnConfig();
         roleColumn.setId(GPSimpleUserKeyValue.AUTORITHY.toString());
-        roleColumn.setHeaderHtml("Role");
+        roleColumn.setHeaderHtml(UserModuleConstants.INSTANCE.userRoleLabelText());
         roleColumn.setWidth(80);
         configs.add(roleColumn);
 
         ColumnConfig trustedLevelColumn = new ColumnConfig();
         trustedLevelColumn.setId(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
-        trustedLevelColumn.setHeaderHtml("Trusted");
+        trustedLevelColumn.setHeaderHtml(UserModuleConstants.INSTANCE.
+                ManageUsersPagWidget_trustedFieldLabelText());
         trustedLevelColumn.setWidth(70);
         configs.add(trustedLevelColumn);
 
         ColumnConfig delColumn = new ColumnConfig();
         delColumn.setId("delColumn");
-        delColumn.setHeaderHtml("Delete");
+        delColumn.setHeaderHtml(ButtonsConstants.INSTANCE.deleteText());
         delColumn.setWidth(40);
         delColumn.setFixed(true);
         delColumn.setResizable(false);
@@ -223,7 +232,8 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     }
 
     private void showUserPropertiesWidget(final boolean isNewUser) {
-        searchStatus.setBusy("Retrive roles");
+        searchStatus.setBusy(UserModuleConstants.INSTANCE.
+                ManageUsersPagWidget_statusRetrievingRolesText());
 
         UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<ArrayList<String>>() {
@@ -231,13 +241,14 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
             public void onFailure(Throwable caught) {
                 setSearchStatus(
                         SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
-                        "Error retrieving roles");
+                        UserModuleConstants.INSTANCE.
+                        ManageUsersPagWidget_statusErrorRetrievingRolesText());
             }
 
             @Override
             public void onSuccess(ArrayList<String> result) {
                 setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
-                        SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+                        SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH());
 
                 GPUserManageDetail userDetail;
                 if (isNewUser) {

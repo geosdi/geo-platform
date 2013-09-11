@@ -40,6 +40,8 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.UserOptionsWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
@@ -55,7 +57,8 @@ public class UserOptionsMenuAction extends MenuBaseAction {
     private UserOptionsWidget userOptionsWidget = new UserOptionsWidget(true);
 
     public UserOptionsMenuAction() {
-        super("Options", BasicWidgetResources.ICONS.gear());
+        super(UserModuleConstants.INSTANCE.UserOptionsMenuAction_titleText(),
+                BasicWidgetResources.ICONS.gear());
     }
 
     @Override
@@ -74,7 +77,8 @@ public class UserOptionsMenuAction extends MenuBaseAction {
         UserRemoteImpl.Util.getInstance().getOwnUser(new AsyncCallback<IGPUserManageDetail>() {
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
+                        caught.getMessage());
             }
 
             @Override

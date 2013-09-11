@@ -71,6 +71,9 @@ public interface WindowsConstants extends Constants {
     @DefaultStringValue("No Results found")
     String noResultsFoundText();
 
+    @DefaultStringValue("Info")
+    String infoTitleText();
+    
     @DefaultStringValue("ERROR")
     String errorTitleText();
 

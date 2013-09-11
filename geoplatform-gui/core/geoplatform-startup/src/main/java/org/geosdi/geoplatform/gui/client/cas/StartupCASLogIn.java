@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.cas;
 
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.handler.CASLoginHandler;
+import org.geosdi.geoplatform.gui.client.i18n.StartupStrategyModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
 import org.geosdi.geoplatform.gui.configuration.startup.IStartupConfigurationStrategy;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
@@ -55,7 +56,7 @@ public class StartupCASLogIn implements IStartupConfigurationStrategy {
         ILoginHandler cASLoginHandler = new CASLoginHandler();
         injector.getSecurityLoginChainOfResponsibility().setLoginHandler(cASLoginHandler);
         injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM,
-                "CAS login in corso...");
+                StartupStrategyModuleConstants.INSTANCE.StartupCASLogIn_casLoginMessageText());
 
         //Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
 

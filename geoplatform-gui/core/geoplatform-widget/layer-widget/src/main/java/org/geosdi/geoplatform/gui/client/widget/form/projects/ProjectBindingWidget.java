@@ -68,10 +68,8 @@ import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  */
 public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> {
 
@@ -270,7 +268,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
             GPClientProject gPClientProject = projects.get(i);
             if (gPClientProject.isDefaultProject()) {
                 gPClientProject.setDefaultProject(Boolean.FALSE);
-                gPClientProject.setLabelDefaultProject(Boolean.FALSE);
+//                gPClientProject.setLabelDefaultProject(Boolean.FALSE);
                 return;
             }
         }

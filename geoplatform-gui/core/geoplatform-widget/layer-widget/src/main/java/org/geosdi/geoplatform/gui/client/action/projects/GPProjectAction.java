@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.projects;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
@@ -59,7 +60,7 @@ public class GPProjectAction extends GeoPlatformSecureAction<ButtonEvent> {
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if (ce.getButton().getHtml().equalsIgnoreCase("Add")) {
+        if (ce.getButton().getHtml().equalsIgnoreCase(ButtonsConstants.INSTANCE.addText())) {
             this.bindingProject.showForm(Boolean.TRUE);
         } else {
             this.bindingProject.showForm(Boolean.FALSE);

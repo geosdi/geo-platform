@@ -55,7 +55,7 @@ public class ProjectDefaultFieldBinding extends GPFieldBinding {
     @Override
     public void setModelProperty(Object val) {
         ((GPClientProject) model).setDefaultProject((Boolean) val);
-        ((GPClientProject) model).setLabelDefaultProject((Boolean) val);
+//        ((GPClientProject) model).setLabelDefaultProject((Boolean) val);
     }
 
     @Override

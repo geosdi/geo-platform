@@ -91,8 +91,8 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
 
             @Override
             public void onSuccess(GPClientProject result) {
-                //This call is necessary to support i18n
-                result.setLabelDefaultProject(result.isDefaultProject());
+//                //This call is necessary to support i18n
+//                result.setLabelDefaultProject(result.isDefaultProject());
                 projectManagementWidget.showSharingPanel(result);
             }
         });

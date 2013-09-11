@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.model.projects;
 
 import org.geosdi.geoplatform.gui.model.project.IGPClientProject;
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
@@ -153,7 +152,8 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
 
     @Override
     public String getSharedLabel() {
-        return shared ? LayerModuleConstants.INSTANCE.GPClientProject_sharedLabelText() : "";
+        return shared ? "Shared" : "";
+//        return shared ? LayerModuleConstants.INSTANCE.GPClientProject_sharedLabelText() : "";
     }
 
     /**
@@ -179,14 +179,15 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
      */
     public void setDefaultProject(boolean defaultProject) {
         set(GPClientProjectKey.DEFAULT_PROJECT.toString(), defaultProject);
-    }
-
-    public void setLabelDefaultProject(boolean defaultProject) {
-        set(GPClientProjectKey.DEFAULT_PROJECT.toString(), defaultProject);
         set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(),
                 this.getDefaultProjectLabel());
     }
 
+//    public void setLabelDefaultProject(boolean defaultProject){
+//        set(GPClientProjectKey.DEFAULT_PROJECT.toString(), defaultProject);
+//        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(),
+//                this.getDefaultProjectLabel(defaultProject));
+//    }
     @Override
     public String getDefaultProjectLabel() {
         return this.isDefaultProject() ? "DEFAULT PROJECT" : "";

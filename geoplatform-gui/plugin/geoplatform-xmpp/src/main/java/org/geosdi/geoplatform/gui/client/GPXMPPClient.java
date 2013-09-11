@@ -55,6 +55,8 @@ import com.calclab.emite.im.client.roster.XmppRoster;
 import com.extjs.gxt.ui.client.Registry;
 import com.google.gwt.core.client.GWT;
 import java.util.Collection;
+import org.geosdi.geoplatform.gui.client.i18n.XMPPModuleConstants;
+import org.geosdi.geoplatform.gui.client.i18n.XMPPModuleMessages;
 import org.geosdi.geoplatform.gui.client.model.XMPPSessionGinjector;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
@@ -101,7 +103,10 @@ public class GPXMPPClient {
             public void onPresence(PresenceEvent event) {
                 Presence presence = event.getPresence();
                 System.out.println("Presence received from " + presence.getFrom() + ": " + presence.toString());
-                GeoPlatformMessage.infoMessage("XMPP Connection", "Presence received from " + presence.getFrom() + ": " + presence.toString());
+                GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.
+                        GPXMPPClient_xmppConnectionInfoText(),
+                        XMPPModuleMessages.INSTANCE.presenceReceivedFromMessage(
+                        presence.getFromAsString(), presence.toString()));
                 Registry.register(GlobalRegistryEnum.EMITE_RESOURCE.getValue(), sessionXmpp.getCurrentUserURI().getResource());
             }
         });
@@ -136,7 +141,9 @@ public class GPXMPPClient {
                     }
                 }
 
-                String subject = message.getSubject() == null ? "NEW Message" : message.getSubject();
+                String subject = message.getSubject() == null ? 
+                        XMPPModuleConstants.INSTANCE.GPXMPPClient_newMessageText() 
+                        : message.getSubject();
                 GeoPlatformMessage.infoMessage(subject, message.getBody());
             }
         });

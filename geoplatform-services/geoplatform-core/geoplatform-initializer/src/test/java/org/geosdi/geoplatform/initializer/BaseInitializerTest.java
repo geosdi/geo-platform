@@ -35,18 +35,18 @@
  */
 package org.geosdi.geoplatform.initializer;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.WKTReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -421,6 +421,7 @@ public abstract class BaseInitializerTest {
 //        return server;
 //    }
 //
+
     private GeoPlatformServer createServer1CSW() {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl("http://catalog.geosdi.org/geonetwork/srv/en/csw");
@@ -459,25 +460,25 @@ public abstract class BaseInitializerTest {
 
     private void insertProjects() {
         this.adminProject = this.createProject("admin_project", false, 0,
-                                               new Date(System.currentTimeMillis()));
+                new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
-                                              new Date(System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(5)));
+                new Date(System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(5)));
         this.viewerProject = this.createProject("viewer_project", false, 0,
-                                                new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1)));
+                new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1)));
         this.gsUserProject = this.createProject("gp_user_project", false, 0,
-                                                new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(3)));
+                new Date(System.currentTimeMillis() - TimeUnit.HOURS.toMillis(3)));
         projectDAO.persist(adminProject, userProject, viewerProject, gsUserProject);
         //
         this.insertBindingUserProject(adminTest, adminProject,
-                                      BasePermission.ADMINISTRATION.getMask(), true);
+                BasePermission.ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(userTest, adminProject,
-                                      BasePermission.READ.getMask(), false);
+                BasePermission.READ.getMask(), false);
         this.insertBindingUserProject(userTest, userProject,
-                                      BasePermission.ADMINISTRATION.getMask(), true);
+                BasePermission.ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(viewerTest, viewerProject,
-                                      BasePermission.ADMINISTRATION.getMask(), true);
+                BasePermission.ADMINISTRATION.getMask(), true);
         this.insertBindingUserProject(gsUserTest, gsUserProject,
-                                      BasePermission.ADMINISTRATION.getMask(), true);
+                BasePermission.ADMINISTRATION.getMask(), true);
         //
         accountDAO.merge(adminTest, userTest, viewerTest, gsUserTest);
     }
@@ -500,10 +501,10 @@ public abstract class BaseInitializerTest {
         // Projects of admin
         for (int i = 1; i <= 41; i++) {
             GPProject projectIth = this.createProject("project_admin_k_" + i, false,
-                                                      i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
+                    i, new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(i)));
             projectDAO.persist(projectIth);
             this.insertBindingUserProject(adminTest, projectIth,
-                                          BasePermission.ADMINISTRATION.getMask(), false);
+                    BasePermission.ADMINISTRATION.getMask(), false);
         }
 
         // Project of user -> root folder: "server layer"
@@ -619,7 +620,7 @@ public abstract class BaseInitializerTest {
     }
 
     private List<GPAuthority> createAuthorities(GPAccount account, GPRole... roles) {
-        List<GPAuthority> authorities = new ArrayList<GPAuthority>();
+        List<GPAuthority> authorities = Lists.<GPAuthority>newArrayList();
         for (GPRole role : roles) {
             GPTrustedLevel trustedLevel = this.getTrustedLevelByRole(role);
             authorities.add(new GPAuthority(account, trustedLevel, role.getRole()));
@@ -710,13 +711,13 @@ public abstract class BaseInitializerTest {
         raster.setLayerType(GPLayerType.WMS);
         // GPLayerInfo
         GPLayerInfo info = new GPLayerInfo();
-        List<String> keywords = new ArrayList<String>();
+        List<String> keywords = Lists.<String>newArrayList();
         keywords.add("IGM");
         info.setKeywords(keywords);
         info.setQueryable(true);
         raster.setLayerInfo(info);
         // Styles
-        List<String> styles = new ArrayList<String>();
+        List<String> styles = Lists.<String>newArrayList();
         styles.add("Default Style");
         styles.add("Style k");
         raster.setStyles(styles);
@@ -780,7 +781,7 @@ public abstract class BaseInitializerTest {
 
     private List<GPRasterLayer> loadRasterLayer(List<Layer> layers,
             GPFolder folder, GPProject project, int position) {
-        List<GPRasterLayer> rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
+        List<GPRasterLayer> rasterLayers = Lists.<GPRasterLayer>newArrayListWithCapacity(layers.size());
 
         for (int i = 0; i < layers.size(); i++) {
             Layer layer = layers.get(i);
@@ -853,7 +854,7 @@ public abstract class BaseInitializerTest {
     }
 
     private Map<String, GuiComponent> createGuiComponents() {
-        Map<String, GuiComponent> gcMap = new HashMap<String, GuiComponent>();
+        Map<String, GuiComponent> gcMap = Maps.<String, GuiComponent>newHashMap();
 
         for (String ID : GuiComponentIDs.LIST_ALL) {
             gcMap.put(ID, new GuiComponent(ID));
@@ -864,8 +865,9 @@ public abstract class BaseInitializerTest {
         return gcMap;
     }
 
-    private Map<String, AclObjectIdentity> createObjectIdentities(Map<String, GuiComponent> gcMap) {
-        Map<String, AclObjectIdentity> objIdMap = new HashMap<String, AclObjectIdentity>();
+    private Map<String, AclObjectIdentity> createObjectIdentities(
+            Map<String, GuiComponent> gcMap) {
+        Map<String, AclObjectIdentity> objIdMap = Maps.<String, AclObjectIdentity>newHashMap();
 
         for (String componentID : GuiComponentIDs.LIST_ALL) {
             Long id = gcMap.get(componentID).getId();
@@ -882,17 +884,17 @@ public abstract class BaseInitializerTest {
         // ACE
         int enable = GeoPlatformPermission.ENABLE.getMask();
         //
-        Map<String, AclEntry> entriesMap = new HashMap<String, AclEntry>();
+        Map<String, AclEntry> entriesMap = Maps.<String, AclEntry>newHashMap();
         // Admin
         for (String componentID : GuiComponentIDs.LIST_ALL) {
             entriesMap.put(GPRole.ADMIN + componentID,
-                           new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
+                    new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
         }
         // User
         for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_USER.entrySet()) {
             if (e.getValue() != null) {
                 entriesMap.put(GPRole.USER + e.getKey(),
-                               new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
+                        new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
             }
         }
         // Viewer
@@ -900,7 +902,7 @@ public abstract class BaseInitializerTest {
             if (e.getValue() != null) {
                 // Ace Order is 3 because the entries of admin and user should be added before
                 entriesMap.put(GPRole.VIEWER + e.getKey(),
-                               new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
+                        new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
             }
         }
         //

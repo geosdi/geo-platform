@@ -111,4 +111,8 @@ public class GPGraticuleMapTool implements GeoPlatformMapControl {
         return this.graticule.isActive();
     }
 
+    @Override
+    public void resetControl() {
+    }
+
 }

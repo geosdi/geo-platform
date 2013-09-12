@@ -60,8 +60,6 @@ public class FeatureSelectListener extends AbastractFeatureListener implements
 
     @Override
     public void onFeatureSelected(FeatureSelectedEvent event) {
-        System.out.println("FeatureSelectHandler @@@@@@@@@@@@@@@@");
-
         VectorFeature vectorFeature = event.getFeature();
 
         vectorFeature.toState(

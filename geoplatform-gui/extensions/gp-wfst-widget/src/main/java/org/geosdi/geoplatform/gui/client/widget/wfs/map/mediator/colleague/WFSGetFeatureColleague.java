@@ -33,54 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureTransactionEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.protocol.CRUDOptions;
-import org.gwtopenmaps.openlayers.client.protocol.Response;
-import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.getfeature.WFSGetFeatureControl;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
- * <p>This Class is not used. The Transaction will do with WFSConnector Module
- * and not directly with OpenLayers.</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureProtocolCRUDOptionsProvider implements
-        Provider<WFSProtocolCRUDOptions> {
-
-    private GPEventBus bus;
-    private FeatureTransactionEvent transactionEvent = new FeatureTransactionEvent();
+public class WFSGetFeatureColleague implements WFSMapControlColleague {
 
     @Inject
-    public FeatureProtocolCRUDOptionsProvider(GPEventBus theBus) {
-        this.bus = theBus;
+    private WFSGetFeatureControl wfsGetFeatureControl;
+    @Inject
+    private MapWidget mapWidget;
+    private boolean addedControlToMap;
+
+    @Inject
+    public WFSGetFeatureColleague(WFSBaseMapMediator baseMapMediator) {
+        baseMapMediator.registerWFSColleague(this);
     }
 
     @Override
-    public WFSProtocolCRUDOptions get() {
-        return new WFSProtocolCRUDOptions(new CRUDOptions.Callback() {
+    public void activateColleague() {
+        if (!addedControlToMap) {
+            this.mapWidget.getMap().addControl(wfsGetFeatureControl.getControl());
+            addedControlToMap = true;
+        }
 
-            @Override
-            public void computeResponse(Response response) {
-                if (response.success()) {
-                    bus.fireEvent(transactionEvent);
-                } else {
-                    bus.fireEvent(new FeatureStatusBarEvent(
-                            WFSTWidgetConstants.INSTANCE.
-                            FeatureProtocolCRUDOptionsProvider_transactionErrorText(),
-                            FeatureStatusBar.FeatureStatusBarType.STATUS_NOT_OK));
-                }
-            }
+        this.wfsGetFeatureControl.activateControl();
+    }
 
-        });
+    @Override
+    public void deactivateColleague() {
+        this.wfsGetFeatureControl.deactivateControl();
+    }
+
+    @Override
+    public void resetColleague() {
+        this.mapWidget.getMap().removeControl(wfsGetFeatureControl.getControl());
+        this.wfsGetFeatureControl.resetControl();
+        addedControlToMap = false;
+    }
+
+    @Override
+    public WFSColleagueKey getWFSColleagueKey() {
+        return WFSColleagueKey.GET_FEATURE;
     }
 
 }

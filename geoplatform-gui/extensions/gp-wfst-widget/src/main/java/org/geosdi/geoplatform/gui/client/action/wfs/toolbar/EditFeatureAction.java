@@ -67,11 +67,14 @@ public class EditFeatureAction extends BaseWFSToggleAction {
         super.changeButtonState();
 
         if (button.isDown()) {
-//            System.out.println("EDIT FEATURE UP @@@@@@@@@"
-//                    + "@@@@@@@@@@@@@@@");
             super.activateWFSColleague();
             buttonObserver.setButtonPressed(button);
         }
+    }
+
+    @Override
+    public void resetEditorControl() {
+        super.resetWFSColleague();
     }
 
     @Override

@@ -135,7 +135,7 @@ public class GuiComponentIDs {
         /**
          * ALL
          */
-        List<String> all = Lists.newArrayList();
+        List<String> all = Lists.<String>newArrayList();
         // Menubar
         all.add(MANAGE_PROJECTS);
         all.add(INGEST_DATA);
@@ -193,11 +193,11 @@ public class GuiComponentIDs {
         all.add(PREVIEW_KML);
         all.add(LAYER_STYLER);
         //
-        LIST_ALL = Collections.unmodifiableList(all);
+        LIST_ALL = Collections.<String>unmodifiableList(all);
         /**
          * USER
          */
-        Map<String, Boolean> mapUser = Maps.newHashMap();
+        Map<String, Boolean> mapUser = Maps.<String, Boolean>newHashMap();
         // Menubar
         mapUser.put(MANAGE_PROJECTS, Boolean.TRUE);
         mapUser.put(INGEST_DATA, Boolean.TRUE);
@@ -250,11 +250,11 @@ public class GuiComponentIDs {
         mapUser.put(PREVIEW_KML, Boolean.TRUE);
         mapUser.put(LAYER_STYLER, Boolean.TRUE);
         //
-        MAP_USER = Collections.unmodifiableMap(mapUser);
+        MAP_USER = Collections.<String, Boolean>unmodifiableMap(mapUser);
         /**
          * VIEWER
          */
-        Map<String, Boolean> mapViewer = Maps.newHashMap();
+        Map<String, Boolean> mapViewer = Maps.<String, Boolean>newHashMap();
         // Menubar
         mapViewer.put(MANAGE_PROJECTS, Boolean.TRUE);
         mapViewer.put(ABOUT_GEOPLATFORM, Boolean.TRUE);

@@ -38,23 +38,19 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.initializer;
 import com.google.gwt.user.client.Timer;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
+import org.geosdi.geoplatform.gui.client.puregwt.observer.event.ResetToolbarObserverEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureSelectListener;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureUnSelectListener;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.InjectGetFeatureModelEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.FeatureMapLayerBuilder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.builder.GetFeatureControlBuilder;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.getfeature.WFSGetFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
-import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.control.GetFeature;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -65,7 +61,9 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureMapInitializer implements IFeatureMapInitializer {
-    
+
+    private static final ResetToolbarObserverEvent resetToolbarObserver = new ResetToolbarObserverEvent();
+    //
     @Inject
     private MapWidget mapWidget;
     @Inject
@@ -73,128 +71,73 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     @Inject
     private Vector vectorLayer;
     @Inject
-    private GetFeatureControlBuilder featureControlBuilder;
-    @Inject
-    private FeatureSelectListener selectFeature;
-    @Inject
-    private FeatureUnSelectListener unSelectFeature;
-    @Inject
     private LonLat italyLonLat;
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
+    @Inject
+    private InjectGetFeatureModelEvent injectGetFeatureModelEvent;
     private GPEventBus bus;
     private Layer wms;
-    private GetFeature controlFeature;
-    
+
     @Inject
     public FeatureMapInitializer(GPEventBus theBus) {
         this.bus = theBus;
     }
-    
+
     @Override
     public void bindLayerSchema() {
         final GPLayerBean layer = layerSchemaBinder.getSelectedLayer();
-        final LayerSchemaDTO schema = layerSchemaBinder.getLayerSchemaDTO();
-        
         this.wms = this.mapLayerBuilder.buildLayer(layer);
+        this.injectGetFeatureModelEvent.setWms(wms);
         
-        this.controlFeature = this.featureControlBuilder.buildControl(
-                new GetFeatureModel() {
-            
-            @Override
-            public String getFeatureNameSpace() {
-                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).
-                        getFeatureNameSpace()
-                        : schema.getTargetNamespace();
-            }
-            
-            @Override
-            public String getFeatureType() {
-                int pos = layer.getName().indexOf(":");
-                
-                return pos > 0 ? layer.getName().substring(pos + 1,
-                        layer.getName().length()) : layer.getName();
-            }
-            
-            @Override
-            public String getSrsName() {
-                return layer.getCrs();
-            }
-            
-            @Override
-            public String getGeometryName() {
-                return (layer instanceof GPVectorBean)
-                        ? ((GPVectorBean) layer).getGeometryName()
-                        : schema.getGeometry().getName();
-            }
-            
-            @Override
-            public WMS getWMSLayer() {
-                return (WMS) wms;
-            }
-            
-        });
-        
+        WFSGetFeatureControl.fireInjectGetFeatureModelEvent(
+                injectGetFeatureModelEvent);
+
         Timer t = new Timer() {
-            
+
             @Override
             public void run() {
                 loadLayerOnMap();
                 notifyStatus();
             }
-            
+
         };
-        
+
         t.schedule(1000);
     }
-    
+
     @Override
     public void resetMapWidget() {
-        this.controlFeature.removeListener(selectFeature);
-        this.controlFeature.removeListener(unSelectFeature);
-        
-        this.controlFeature.deactivate();
-        this.mapWidget.getMap().removeControl(controlFeature);
-        
+        this.bus.fireEvent(resetToolbarObserver);
         this.vectorLayer.destroyFeatures();
-        
+
         if (wms != null) {
             this.mapWidget.getMap().removeLayer(wms);
         }
-        
+
         this.mapWidget.getMap().removeLayer(vectorLayer);
-        
         this.initMapWidget();
     }
-    
+
     @Override
     public void initMapWidget() {
         this.mapWidget.getMap().setCenter(italyLonLat, 4);
     }
-    
+
     protected void loadLayerOnMap() {
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
-        
-        this.mapWidget.getMap().addControl(controlFeature);
-        
-        controlFeature.addFeatureSelectedListener(selectFeature);
-        
-        controlFeature.addFeatureUnselectedListener(unSelectFeature);
-        
+
         Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
-        
         this.mapWidget.getMap().zoomToExtent(bb);
 
-//        this.controlFeature.activate();
-        
         WFSToggleButton.fireToggleStateEvent(
                 WFSButtonKeyProvider.GET_FEATURE.name());
     }
-    
+
     protected void notifyStatus() {
         this.bus.fireEvent(new FeatureStatusBarEvent("WFS Layer loaded",
                 FeatureStatusBar.FeatureStatusBarType.STATUS_OK));
     }
-    
+
 }

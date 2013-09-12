@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @GinModules(value = {FeatureInjectorModule.class, FeatureInjectorProvider.class,
-    FeatureInjectorButtonProvider.class})
+    FeatureInjectorButtonProvider.class, FeatureInjectorToolbar.class})
 public interface FeatureInjector extends Ginjector {
 
     public static class MainInjector {

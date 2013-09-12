@@ -33,54 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.puregwt.observer.handler;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureTransactionEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.protocol.CRUDOptions;
-import org.gwtopenmaps.openlayers.client.protocol.Response;
-import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * <p>This Class is not used. The Transaction will do with WFSConnector Module
- * and not directly with OpenLayers.</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureProtocolCRUDOptionsProvider implements
-        Provider<WFSProtocolCRUDOptions> {
+public interface ResetToolbarObserverHandler extends EventHandler {
 
-    private GPEventBus bus;
-    private FeatureTransactionEvent transactionEvent = new FeatureTransactionEvent();
+    GwtEvent.Type<ResetToolbarObserverHandler> TYPE = new GwtEvent.Type<ResetToolbarObserverHandler>();
 
-    @Inject
-    public FeatureProtocolCRUDOptionsProvider(GPEventBus theBus) {
-        this.bus = theBus;
-    }
-
-    @Override
-    public WFSProtocolCRUDOptions get() {
-        return new WFSProtocolCRUDOptions(new CRUDOptions.Callback() {
-
-            @Override
-            public void computeResponse(Response response) {
-                if (response.success()) {
-                    bus.fireEvent(transactionEvent);
-                } else {
-                    bus.fireEvent(new FeatureStatusBarEvent(
-                            WFSTWidgetConstants.INSTANCE.
-                            FeatureProtocolCRUDOptionsProvider_transactionErrorText(),
-                            FeatureStatusBar.FeatureStatusBarType.STATUS_NOT_OK));
-                }
-            }
-
-        });
-    }
+    void resetButtonPressed();
 
 }

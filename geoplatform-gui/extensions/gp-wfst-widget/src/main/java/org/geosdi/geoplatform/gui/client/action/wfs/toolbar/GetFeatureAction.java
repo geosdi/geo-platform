@@ -57,7 +57,7 @@ public class GetFeatureAction extends BaseWFSToggleAction {
 
     @Override
     public void disableEditorControl() {
-        System.out.println("DISABLE CONTROL GetFeatureAction############");
+        super.deactivateWFSColleague();
     }
 
     @Override
@@ -67,14 +67,19 @@ public class GetFeatureAction extends BaseWFSToggleAction {
         super.changeButtonState();
 
         if (button.isDown()) {
-            System.out.println("GET FEATURE UP @@@@@@@@@"
-                    + "@@@@@@@@@@@@@@@");
+            super.activateWFSColleague();
             buttonObserver.setButtonPressed(button);
         }
+    }
+
+    @Override
+    public void resetEditorControl() {
+        super.resetWFSColleague();
     }
 
     @Override
     public WFSColleagueKey getWFSColleagueKey() {
         return WFSColleagueKey.GET_FEATURE;
     }
+
 }

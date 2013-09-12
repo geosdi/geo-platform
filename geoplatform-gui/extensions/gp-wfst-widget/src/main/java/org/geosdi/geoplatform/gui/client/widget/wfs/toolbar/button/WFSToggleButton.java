@@ -52,6 +52,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
 
     private static final GPEventBus toggleStateBus = new GPEventBusImpl();
+    private static final WFSClickEvent wfsClickEvent = new WFSClickEvent();
     private static final ToggleStateEvent toggleStateEvent = new ToggleStateEvent();
     //
     private final String id;
@@ -94,13 +95,26 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
         super.setDown(true);
 
         if (this.action != null) {
-            action.onClick(new WFSClickEvent(this));
+            wfsClickEvent.setSource(this);
+            action.onClick(wfsClickEvent);
         }
     }
 
     @Override
     public HandlerRegistration addToggleStateHandler() {
         return toggleStateBus.addHandlerToSource(TYPE, id, this);
+    }
+
+    @Override
+    public void resetEditorControl() {
+        System.out.println("CODICE ESEGUITO resetEditorControl "
+                + "WFSToggleButton ##################");
+        if (isDown()) {
+            super.setDown(false);
+        }
+        if (action != null) {
+            action.resetEditorControl();
+        }
     }
 
     public static void fireToggleStateEvent(String source) {
@@ -134,9 +148,13 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
         return "WFSToggleButton{ " + "id = " + id + '}';
     }
 
-    class WFSClickEvent extends ClickEvent {
+    static class WFSClickEvent extends ClickEvent {
 
-        protected WFSClickEvent(Object theSource) {
+        protected WFSClickEvent() {
+        }
+
+        @Override
+        public void setSource(Object theSource) {
             super.setSource(theSource);
         }
 

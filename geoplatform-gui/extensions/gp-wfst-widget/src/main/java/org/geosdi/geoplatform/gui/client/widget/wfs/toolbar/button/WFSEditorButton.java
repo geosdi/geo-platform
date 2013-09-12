@@ -47,6 +47,8 @@ public interface WFSEditorButton extends ToggleStateHandler {
 
     void disableEditorControl();
     
+    void resetEditorControl();
+    
     HandlerRegistration addToggleStateHandler();
 
 }

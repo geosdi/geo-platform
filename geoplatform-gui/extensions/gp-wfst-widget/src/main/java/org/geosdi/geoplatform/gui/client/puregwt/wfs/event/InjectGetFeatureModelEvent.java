@@ -33,81 +33,82 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
+import com.google.gwt.event.shared.GwtEvent;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEditFeatureControl;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.WFSEditFeatureRepository;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
-import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.gwtopenmaps.openlayers.client.control.Control;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.InjectGetFeatureModelHandler;
+import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.WMS;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSEditFeatureColleague implements WFSMapControlColleague {
+public class InjectGetFeatureModelEvent extends GwtEvent<InjectGetFeatureModelHandler> {
 
-    @Inject
-    private WFSEditFeatureRepository editFeatureRepository;
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
-    @Inject
-    private MapWidget mapWidget;
-    private Control defaultFeatureControl;
-    private boolean addedControlToMap;
+    private Layer wms;
 
-    @Inject
-    public WFSEditFeatureColleague(WFSBaseMapMediator baseMapMediator) {
-        baseMapMediator.registerWFSColleague(this);
+    @Override
+    public Type<InjectGetFeatureModelHandler> getAssociatedType() {
+        return InjectGetFeatureModelHandler.TYPE;
     }
 
     @Override
-    public void activateColleague() {
-        WFSEditFeatureControl efc = this.editFeatureRepository.getWFSEditFeatureControl(
-                layerSchemaBinder.getLayerSchemaDTO().getGeometry().getType());
+    protected void dispatch(InjectGetFeatureModelHandler handler) {
+        final GPLayerBean layer = layerSchemaBinder.getSelectedLayer();
+        final LayerSchemaDTO schema = layerSchemaBinder.getLayerSchemaDTO();
 
-        if (efc == null) {
-            throw new IllegalArgumentException("There is no "
-                    + "EditorFeatureControl registered in the "
-                    + "WFSEditFeatureRepository");
-        }
+        handler.injectGetFeatureModel(new GetFeatureModel() {
 
-        defaultFeatureControl = efc.getEditFeatureControl();
-
-        if (!addedControlToMap) {
-            this.mapWidget.getMap().addControl(defaultFeatureControl);
-            this.addedControlToMap = true;
-        }
-        this.defaultFeatureControl.activate();
-    }
-
-    @Override
-    public void deactivateColleague() {
-        resetControl(false);
-    }
-
-    @Override
-    public void resetColleague() {
-        resetControl(true);
-    }
-
-    @Override
-    public WFSColleagueKey getWFSColleagueKey() {
-        return WFSColleagueKey.EDIT_FEATURE;
-    }
-
-    final void resetControl(boolean removeControlFromMap) {
-        if (this.defaultFeatureControl != null) {
-            this.defaultFeatureControl.deactivate();
-            if (removeControlFromMap) {
-                this.mapWidget.getMap().removeControl(defaultFeatureControl);
-                this.defaultFeatureControl = null;
-                this.addedControlToMap = false;
+            @Override
+            public String getFeatureNameSpace() {
+                return layer instanceof GPVectorBean ? ((GPVectorBean) layer).
+                        getFeatureNameSpace()
+                        : schema.getTargetNamespace();
             }
-        }
+
+            @Override
+            public String getFeatureType() {
+                int pos = layer.getName().indexOf(":");
+
+                return pos > 0 ? layer.getName().substring(pos + 1,
+                        layer.getName().length()) : layer.getName();
+            }
+
+            @Override
+            public String getSrsName() {
+                return layer.getCrs();
+            }
+
+            @Override
+            public String getGeometryName() {
+                return (layer instanceof GPVectorBean)
+                        ? ((GPVectorBean) layer).getGeometryName()
+                        : schema.getGeometry().getName();
+            }
+
+            @Override
+            public WMS getWMSLayer() {
+                return (WMS) wms;
+            }
+
+        });
+    }
+
+    /**
+     * @param wms the wms to set
+     */
+    public void setWms(Layer wms) {
+        this.wms = wms;
     }
 
 }

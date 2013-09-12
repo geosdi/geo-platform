@@ -64,6 +64,11 @@ public abstract class WFSChangeFeatureAction extends BaseWFSToggleAction
     }
 
     @Override
+    public void resetEditorControl() {
+        super.resetWFSColleague();
+    }
+
+    @Override
     public WFSColleagueKey getWFSColleagueKey() {
         return WFSColleagueKey.MODIFY_FEATURE;
     }

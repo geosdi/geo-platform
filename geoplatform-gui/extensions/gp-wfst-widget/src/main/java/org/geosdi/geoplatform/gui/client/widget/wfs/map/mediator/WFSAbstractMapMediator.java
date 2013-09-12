@@ -61,4 +61,12 @@ public abstract class WFSAbstractMapMediator implements WFSMapMediator {
                 controlKey) : null;
     }
 
+    @Override
+    public void resetWFSColleague(WFSColleagueKey controlKey) {
+        WFSMapControlColleague colleague = this.getWFSColleague(controlKey);
+        if (colleague != null) {
+            colleague.resetColleague();
+        }
+    }
+
 }

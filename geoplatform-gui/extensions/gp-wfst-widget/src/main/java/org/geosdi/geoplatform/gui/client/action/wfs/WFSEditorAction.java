@@ -45,4 +45,7 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSCo
 public interface WFSEditorAction extends ClickHandler, WFSColleague {
 
     void disableEditorControl();
+
+    void resetEditorControl();
+
 }

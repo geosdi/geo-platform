@@ -58,4 +58,9 @@ public abstract class WFSToggleAction implements WFSEditorAction {
     protected final void deactivateWFSColleague() {
         this.baseMapMediator.deactivateWFSColleague(getWFSColleagueKey());
     }
+
+    protected final void resetWFSColleague() {
+        this.baseMapMediator.resetWFSColleague(getWFSColleagueKey());
+    }
+
 }

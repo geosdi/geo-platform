@@ -60,6 +60,10 @@ public abstract class GPVectorMapControl implements GeoPlatformMapControl {
         return this.initialized;
     }
 
+    @Override
+    public void resetControl() {
+    }
+
     protected abstract <C extends Control> C initializeMapControl();
 
     public abstract <C extends Control> C getControl();

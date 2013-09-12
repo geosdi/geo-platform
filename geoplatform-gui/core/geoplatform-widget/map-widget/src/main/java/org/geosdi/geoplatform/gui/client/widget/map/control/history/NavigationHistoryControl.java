@@ -144,4 +144,8 @@ public class NavigationHistoryControl implements GeoPlatformMapControl {
     public boolean isEnabled() {
         return this.control.isActive();
     }
+
+    @Override
+    public void resetControl() {
+    }
 }

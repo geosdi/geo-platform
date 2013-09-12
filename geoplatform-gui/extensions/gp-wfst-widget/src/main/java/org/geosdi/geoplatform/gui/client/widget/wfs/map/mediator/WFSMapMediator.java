@@ -52,5 +52,7 @@ public interface WFSMapMediator {
     void activateWFSColleague(WFSColleagueKey controlKey);
 
     void deactivateWFSColleague(WFSColleagueKey controlKey);
+    
+    void resetWFSColleague(WFSColleagueKey controlKey);
 
 }

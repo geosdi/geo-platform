@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer;
 
+import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 
 /**
  *
@@ -45,6 +47,12 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButt
 public class EditToolbarBaseObserver implements WFSToolbarObserver {
 
     private WFSToggleButton buttonPressed;
+    private WFSToggleButton lastButtonPressed;
+
+    @Inject
+    public EditToolbarBaseObserver(GPEventBus bus) {
+        bus.addHandler(TYPE, this);
+    }
 
     @Override
     public WFSToggleButton getButtonPressed() {
@@ -65,6 +73,7 @@ public class EditToolbarBaseObserver implements WFSToolbarObserver {
     public void changeButtonState() {
         if (isButtonPressed()) {
             this.buttonPressed.disableEditorControl();
+            this.lastButtonPressed = buttonPressed;
             this.buttonPressed = null;
         }
     }
@@ -73,6 +82,17 @@ public class EditToolbarBaseObserver implements WFSToolbarObserver {
     public boolean isSameButton(String buttonId) {
         return this.buttonPressed != null
                 ? this.buttonPressed.getId().equalsIgnoreCase(buttonId) : false;
+    }
+
+    @Override
+    public void resetButtonPressed() {
+        if (isButtonPressed()) {
+            this.buttonPressed.resetEditorControl();
+            this.buttonPressed = null;
+        } else {
+            this.lastButtonPressed.resetEditorControl();
+            this.lastButtonPressed = null;
+        }
     }
 
 }

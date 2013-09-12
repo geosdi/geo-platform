@@ -307,6 +307,6 @@ public class GuiComponentIDs {
         mapViewer.put(PREVIEW_KML, Boolean.TRUE);
         mapViewer.put(LAYER_STYLER, Boolean.TRUE);
         //
-        MAP_VIEWER = Collections.unmodifiableMap(mapViewer);
+        MAP_VIEWER = Collections.<String, Boolean>unmodifiableMap(mapViewer);
     }
 }

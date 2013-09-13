@@ -88,7 +88,8 @@ public abstract class PolygonEditorHandler extends GeometryEditorHandler {
 
         GeoPlatformMessage.confirmMessage(
                 "Polygon Feature Status",
-                "The Geometry Polygon Feature is changed. Do you want to apply the changes?",
+                "The Geometry Polygon Feature is changed. "
+                + "Do you want to apply the changes?",
                 new Listener<MessageBoxEvent>() {
 
             @Override

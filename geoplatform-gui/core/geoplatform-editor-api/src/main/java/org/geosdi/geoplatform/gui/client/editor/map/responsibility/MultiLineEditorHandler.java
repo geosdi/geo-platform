@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 import org.gwtopenmaps.openlayers.client.geometry.LineString;
+import org.gwtopenmaps.openlayers.client.geometry.MultiLineString;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -50,16 +51,16 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class LineEditorHandler extends GeometryEditorHandler {
+public abstract class MultiLineEditorHandler extends GeometryEditorHandler {
 
-    public LineEditorHandler(ModifyEditorFeature theModifyEditorControl) {
+    public MultiLineEditorHandler(ModifyEditorFeature theModifyEditorControl) {
         super(theModifyEditorControl);
     }
 
     @Override
     public void geometryRequest(VectorFeature feature, Vector vector) {
         if (feature.getGeometry().getClassName().equals(
-                Geometry.LINESTRING_CLASS_NAME)) {
+                Geometry.MULTI_LINE_STRING_CLASS_NAME)) {
 
             if (!checkModifications(feature)) {
                 showConfirmMessage(feature, vector);
@@ -72,13 +73,13 @@ public abstract class LineEditorHandler extends GeometryEditorHandler {
 
     @Override
     protected boolean checkModifications(VectorFeature feature) {
-        LineString oldLine = LineString.narrowToLineString(
+        MultiLineString oldMultiLine = MultiLineString.narrowToMultiLineString(
                 modifyEditorControl.getSelectedFeature().getGeometry().getJSObject());
 
-        LineString li = LineString.narrowToLineString(
+        MultiLineString multiLine = MultiLineString.narrowToMultiLineString(
                 feature.getGeometry().getJSObject());
 
-        return li.equals(oldLine);
+        return multiLine.equals(oldMultiLine);
     }
 
     @Override
@@ -87,8 +88,8 @@ public abstract class LineEditorHandler extends GeometryEditorHandler {
         final VectorFeature selectedFeature = getSelectedFeaure();
 
         GeoPlatformMessage.confirmMessage(
-                "Line Feature Status",
-                "The Geometry Line Feature is changed. Do you want "
+                "Multi Line Feature Status",
+                "The Geometry Multi Line Feature is changed. Do you want "
                 + "to apply the changes?",
                 new Listener<MessageBoxEvent>() {
 

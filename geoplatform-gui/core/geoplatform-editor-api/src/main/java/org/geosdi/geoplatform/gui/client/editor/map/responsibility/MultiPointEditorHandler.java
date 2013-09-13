@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
-import org.gwtopenmaps.openlayers.client.geometry.LineString;
+import org.gwtopenmaps.openlayers.client.geometry.MultiPoint;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -50,16 +50,16 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class LineEditorHandler extends GeometryEditorHandler {
+public abstract class MultiPointEditorHandler extends GeometryEditorHandler {
 
-    public LineEditorHandler(ModifyEditorFeature theModifyEditorControl) {
+    public MultiPointEditorHandler(ModifyEditorFeature theModifyEditorControl) {
         super(theModifyEditorControl);
     }
 
     @Override
     public void geometryRequest(VectorFeature feature, Vector vector) {
         if (feature.getGeometry().getClassName().equals(
-                Geometry.LINESTRING_CLASS_NAME)) {
+                Geometry.MULTI_POINT_CLASS_NAME)) {
 
             if (!checkModifications(feature)) {
                 showConfirmMessage(feature, vector);
@@ -72,13 +72,13 @@ public abstract class LineEditorHandler extends GeometryEditorHandler {
 
     @Override
     protected boolean checkModifications(VectorFeature feature) {
-        LineString oldLine = LineString.narrowToLineString(
+        MultiPoint oldMultiPoint = MultiPoint.narrowToMultiPoint(
                 modifyEditorControl.getSelectedFeature().getGeometry().getJSObject());
 
-        LineString li = LineString.narrowToLineString(
+        MultiPoint multiPoint = MultiPoint.narrowToMultiPoint(
                 feature.getGeometry().getJSObject());
 
-        return li.equals(oldLine);
+        return multiPoint.equals(oldMultiPoint);
     }
 
     @Override
@@ -87,9 +87,9 @@ public abstract class LineEditorHandler extends GeometryEditorHandler {
         final VectorFeature selectedFeature = getSelectedFeaure();
 
         GeoPlatformMessage.confirmMessage(
-                "Line Feature Status",
-                "The Geometry Line Feature is changed. Do you want "
-                + "to apply the changes?",
+                "Multi Point Feature Status",
+                "The Geometry Multi Point Feature is changed. "
+                + "Do you want to apply the changes?",
                 new Listener<MessageBoxEvent>() {
 
             @Override

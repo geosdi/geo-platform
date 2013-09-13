@@ -64,7 +64,6 @@ public class RoutingBoxes extends GeoPlatformBoxesWidget {
      * Init Component
      */
     public void init() {
-        this.bounds = new Bounds(6.627, 35.492, 18.521, 47.092);
         this.layer = new Boxes("Geo-Platform Routing Boxes Layer");
     }
 
@@ -74,6 +73,7 @@ public class RoutingBoxes extends GeoPlatformBoxesWidget {
      */
     @Override
     public void activate() {
+        this.bounds = new Bounds(6.627, 35.492, 18.521, 47.092);
         if (geoPlatformMap.getMap().getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
             this.marker = new Box(this.bounds.transform(
                     new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()),

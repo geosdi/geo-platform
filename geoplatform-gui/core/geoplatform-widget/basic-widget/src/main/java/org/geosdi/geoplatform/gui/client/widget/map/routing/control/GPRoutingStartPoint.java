@@ -64,7 +64,7 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
     public GPRoutingStartPoint(Vector theLayer,
             GeoPlatformBoxesWidget boxesWidget, GeoPlatformMap geoPlatformMap) {
         super(theLayer, boxesWidget, geoPlatformMap);
-
+        
         RoutingHandlerManager.addHandler(StartRoutingPointEventHandler.TYPE,
                 this);
         RoutingHandlerManager.addHandler(
@@ -89,17 +89,20 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
     @Override
     public void drawFeature(IGeoPlatformLocation location) {
         LonLat ll = new LonLat(location.getLon(), location.getLat());
-        ll.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), geoPlatformMap.getMap().getProjection());
+        
+        if (geoPlatformMap.getMap().getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+            ll.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
+        }
         if (!this.boxesWidget.containsLonLat(ll)) {
             GeoPlatformMessage.errorMessage("GeoPlatform Routing",
                     "The chosen location is out of Range.");
             return;
         }
-
+        
         if (feature != null) {
             layer.removeFeature(feature);
         }
-
+        
         Point p = new Point(ll.lon(), ll.lat());
         feature = new VectorFeature(p);
         feature.setStyle(style);

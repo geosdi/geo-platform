@@ -33,39 +33,63 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague;
 
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.WFSModifyFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WFSToggleAction implements WFSEditorAction {
+public class WFSModifyFeatureColleague implements IWFSModifyFeatureColleague {
 
-    private final WFSBaseMapMediator baseMapMediator;
+    @Inject
+    private WFSModifyFeatureControl wfsModifyFeatureControl;
+    @Inject
+    private MapWidget mapWidget;
+    private boolean addedControlToMap;
 
-    public WFSToggleAction(WFSBaseMapMediator theBaseMapMediator) {
-        this.baseMapMediator = theBaseMapMediator;
+    @Inject
+    public WFSModifyFeatureColleague(WFSBaseMapMediator baseMapMediator) {
+        baseMapMediator.registerWFSColleague(this);
     }
 
-    protected abstract void changeButtonState();
+    @Override
+    public void activateColleague() {
+        if (!addedControlToMap) {
+            this.mapWidget.getMap().addControl(
+                    wfsModifyFeatureControl.getControl());
+            addedControlToMap = true;
+        }
 
-    protected final void activateWFSColleague() {
-        this.baseMapMediator.activateWFSColleague(getWFSColleagueKey());
+        this.wfsModifyFeatureControl.activateControl();
     }
 
-    protected final void deactivateWFSColleague() {
-        this.baseMapMediator.deactivateWFSColleague(getWFSColleagueKey());
+    @Override
+    public void deactivateColleague() {
+        this.wfsModifyFeatureControl.deactivateControl();
     }
 
-    protected final void resetWFSColleague() {
-        this.baseMapMediator.resetWFSColleague(getWFSColleagueKey());
+    @Override
+    public void resetColleague() {
+        this.mapWidget.getMap().removeControl(
+                wfsModifyFeatureControl.getControl());
+        this.wfsModifyFeatureControl.deactivateControl();
+        addedControlToMap = false;
     }
 
-    protected final WFSMapControlColleague getWFSColleague() {
-        return this.baseMapMediator.getWFSColleague(getWFSColleagueKey());
+    @Override
+    public WFSColleagueKey getWFSColleagueKey() {
+        return WFSColleagueKey.MODIFY_FEATURE;
+    }
+
+    @Override
+    public void setMode(int... modes) {
+        this.wfsModifyFeatureControl.setMode(modes);
     }
 
 }

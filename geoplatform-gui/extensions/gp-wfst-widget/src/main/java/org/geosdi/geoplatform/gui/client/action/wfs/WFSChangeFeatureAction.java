@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.client.action.wfs;
 
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleagueKey;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSModifyFeatureColleague;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
@@ -46,21 +48,23 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFST
 public abstract class WFSChangeFeatureAction extends BaseWFSToggleAction
         implements WFSChangeFeature {
 
-    public WFSChangeFeatureAction(WFSBaseMapMediator theMapControlManager,
+    public WFSChangeFeatureAction(WFSBaseMapMediator theBaseMapMediator,
             WFSToolbarObserver theButtonObserver) {
-        super(theMapControlManager, theButtonObserver);
+        super(theBaseMapMediator, theButtonObserver);
     }
 
     @Override
     public void disableEditorControl() {
-        System.out.println(getClass().getName() + " - DISABLE CONTROL "
-                + "####################");
+        super.deactivateWFSColleague();
     }
 
     @Override
     public final void activateChangeFeature(int changeMode) {
-        System.out.println(getClass().getName() + " - ACTIVATE CONTROL ###"
-                + "###########################");
+        WFSMapControlColleague colleague = super.getWFSColleague();
+        if (colleague != null) {
+            colleague.activateColleague();
+            ((WFSModifyFeatureColleague) colleague).setMode(changeMode);
+        }
     }
 
     @Override
@@ -72,4 +76,5 @@ public abstract class WFSChangeFeatureAction extends BaseWFSToggleAction
     public WFSColleagueKey getWFSColleagueKey() {
         return WFSColleagueKey.MODIFY_FEATURE;
     }
+
 }

@@ -33,39 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.responsibility;
 
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
+import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
+import org.geosdi.geoplatform.gui.client.editor.map.responsibility.PolygonEditorHandler;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WFSToggleAction implements WFSEditorAction {
+public class WFSPolygonFeatureHandler extends PolygonEditorHandler {
 
-    private final WFSBaseMapMediator baseMapMediator;
-
-    public WFSToggleAction(WFSBaseMapMediator theBaseMapMediator) {
-        this.baseMapMediator = theBaseMapMediator;
+    public WFSPolygonFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
+        super(theModifyEditorControl);
+        
+        super.setSuperiorRequestHandler(new WFSMultiPointFeatureHandler(
+                theModifyEditorControl));
     }
 
-    protected abstract void changeButtonState();
-
-    protected final void activateWFSColleague() {
-        this.baseMapMediator.activateWFSColleague(getWFSColleagueKey());
-    }
-
-    protected final void deactivateWFSColleague() {
-        this.baseMapMediator.deactivateWFSColleague(getWFSColleagueKey());
-    }
-
-    protected final void resetWFSColleague() {
-        this.baseMapMediator.resetWFSColleague(getWFSColleagueKey());
-    }
-
-    protected final WFSMapControlColleague getWFSColleague() {
-        return this.baseMapMediator.getWFSColleague(getWFSColleagueKey());
+    @Override
+    protected void manageUpdatedFeature(VectorFeature vf) {
+        System.out.println("WFSPolygonFeatureHandler manageUpdatedFeature@@@"
+                + "@@@@@@@@@@@@@@@@@@@@@" + vf);
     }
 
 }

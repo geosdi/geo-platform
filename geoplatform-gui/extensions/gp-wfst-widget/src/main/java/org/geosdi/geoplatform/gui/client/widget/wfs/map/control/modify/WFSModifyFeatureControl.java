@@ -33,16 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.editor.map.responsibility;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify;
 
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-import com.extjs.gxt.ui.client.widget.Dialog;
+import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.responsibility.IWFSModifyFeatureManager;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.responsibility.WFSModifyFeatureManager;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.responsibility.WFSPointFeatureHandler;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.geometry.Geometry;
-import org.gwtopenmaps.openlayers.client.geometry.LineString;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -50,59 +48,21 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class LineEditorHandler extends GeometryEditorHandler {
+public class WFSModifyFeatureControl extends ModifyEditorFeature {
 
-    public LineEditorHandler(ModifyEditorFeature theModifyEditorControl) {
-        super(theModifyEditorControl);
+    private IWFSModifyFeatureManager modifyFeatureManager;
+
+    @Inject
+    public WFSModifyFeatureControl(Vector vector) {
+        super(vector, true);
+
+        this.modifyFeatureManager = new WFSModifyFeatureManager(vector,
+                new WFSPointFeatureHandler(this));
     }
 
     @Override
-    public void geometryRequest(VectorFeature feature, Vector vector) {
-        if (feature.getGeometry().getClassName().equals(
-                Geometry.LINESTRING_CLASS_NAME)) {
-
-            if (!checkModifications(feature)) {
-                showConfirmMessage(feature, vector);
-            }
-
-        } else {
-            forwardGeometryRequest(feature, vector);
-        }
-    }
-
-    @Override
-    protected boolean checkModifications(VectorFeature feature) {
-        LineString oldLine = LineString.narrowToLineString(
-                modifyEditorControl.getSelectedFeature().getGeometry().getJSObject());
-
-        LineString li = LineString.narrowToLineString(
-                feature.getGeometry().getJSObject());
-
-        return li.equals(oldLine);
-    }
-
-    @Override
-    protected void showConfirmMessage(final VectorFeature feature,
-            final Vector vector) {
-        final VectorFeature selectedFeature = getSelectedFeaure();
-
-        GeoPlatformMessage.confirmMessage(
-                "Line Feature Status",
-                "The Geometry Line Feature is changed. Do you want "
-                + "to apply the changes?",
-                new Listener<MessageBoxEvent>() {
-
-            @Override
-            public void handleEvent(MessageBoxEvent be) {
-                if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                    manageUpdatedFeature(feature);
-                } else {
-                    vector.removeFeature(feature);
-                    vector.addFeature(selectedFeature);
-                }
-            }
-
-        });
+    protected void manageModifyFeature(VectorFeature vf) {
+        modifyFeatureManager.forwardRequest(vf);
     }
 
 }

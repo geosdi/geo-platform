@@ -33,39 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.wfs;
-
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSMapControlColleague;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WFSToggleAction implements WFSEditorAction {
+public interface IWFSModifyFeatureColleague extends WFSMapControlColleague {
 
-    private final WFSBaseMapMediator baseMapMediator;
-
-    public WFSToggleAction(WFSBaseMapMediator theBaseMapMediator) {
-        this.baseMapMediator = theBaseMapMediator;
-    }
-
-    protected abstract void changeButtonState();
-
-    protected final void activateWFSColleague() {
-        this.baseMapMediator.activateWFSColleague(getWFSColleagueKey());
-    }
-
-    protected final void deactivateWFSColleague() {
-        this.baseMapMediator.deactivateWFSColleague(getWFSColleagueKey());
-    }
-
-    protected final void resetWFSColleague() {
-        this.baseMapMediator.resetWFSColleague(getWFSColleagueKey());
-    }
-
-    protected final WFSMapControlColleague getWFSColleague() {
-        return this.baseMapMediator.getWFSColleague(getWFSColleagueKey());
-    }
+    void setMode(int... modes);
 
 }

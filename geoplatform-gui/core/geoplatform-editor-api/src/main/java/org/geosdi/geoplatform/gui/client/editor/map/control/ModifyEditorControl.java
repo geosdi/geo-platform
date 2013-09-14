@@ -45,5 +45,7 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 public interface ModifyEditorControl {
 
     VectorFeature getSelectedFeature();
+    
+    void setMode(int... modes);
 
 }

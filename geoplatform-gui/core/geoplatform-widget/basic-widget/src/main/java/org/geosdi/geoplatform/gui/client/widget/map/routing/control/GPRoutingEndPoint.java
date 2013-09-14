@@ -91,7 +91,9 @@ public class GPRoutingEndPoint extends GenericRoutingPoint implements
     @Override
     public void drawFeature(IGeoPlatformLocation location) {
         LonLat ll = new LonLat(location.getLon(), location.getLat());
-        ll.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), geoPlatformMap.getMap().getProjection());
+        if (geoPlatformMap.getMap().getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+            ll.transform(GPCoordinateReferenceSystem.WGS_84.getCode(), GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
+        }
         if (!this.boxesWidget.containsLonLat(ll)) {
             GeoPlatformMessage.errorMessage(BasicWidgetConstants.INSTANCE.GPRoutingEndPoint_errorMessageTitleText(),
                     BasicWidgetConstants.INSTANCE.GPRoutingEndPoint_errorMessageBodyText());

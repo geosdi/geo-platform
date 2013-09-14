@@ -51,7 +51,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public abstract class ModifyEditorFeature extends GPVectorMapControl implements
         ModifyEditorControl {
 
-    protected ModifyFeature modifyEditoControl;
+    protected ModifyFeature modifyEditorControl;
     private VectorFeature selectedFeature;
 
     public ModifyEditorFeature(Vector vector, boolean lazy) {
@@ -62,19 +62,19 @@ public abstract class ModifyEditorFeature extends GPVectorMapControl implements
     protected ModifyFeature initializeMapControl() {
         this.createControl();
 
-        return this.modifyEditoControl;
+        return this.modifyEditorControl;
     }
 
     @Override
     public ModifyFeature getControl() {
-        return (this.modifyEditoControl != null) ? this.modifyEditoControl
+        return (this.modifyEditorControl != null) ? this.modifyEditorControl
                 : this.initializeMapControl();
     }
 
     @Override
     public void createControl() {
         if (!initialized) {
-            this.modifyEditoControl = new ModifyFeature(vector);
+            this.modifyEditorControl = new ModifyFeature(vector);
 
             vector.addVectorBeforeFeatureModifiedListener(
                     new VectorBeforeFeatureModifiedListener() {
@@ -107,17 +107,22 @@ public abstract class ModifyEditorFeature extends GPVectorMapControl implements
 
     @Override
     public void activateControl() {
-        this.modifyEditoControl.activate();
+        this.modifyEditorControl.activate();
     }
 
     @Override
     public void deactivateControl() {
-        this.modifyEditoControl.deactivate();
+        this.modifyEditorControl.deactivate();
     }
 
     @Override
     public boolean isEnabled() {
-        return this.modifyEditoControl.isActive();
+        return this.modifyEditorControl.isActive();
+    }
+
+    @Override
+    public void setMode(int... modes) {
+        this.modifyEditorControl.setMode(modes);
     }
 
     /**

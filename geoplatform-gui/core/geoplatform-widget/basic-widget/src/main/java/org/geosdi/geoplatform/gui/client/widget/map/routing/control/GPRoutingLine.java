@@ -90,10 +90,10 @@ public class GPRoutingLine extends GPRoutingControl implements
         }
 
         MultiLineString geometry = MultiLineString.narrowToMultiLineString(Geometry.fromWKT(wkt).getJSObject());
-
-        geometry.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()),
-                new Projection(geoPlatformMap.getMap().getProjection()));
-
+        if (geoPlatformMap.getMap().getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+            geometry.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()),
+                    new Projection(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
+        }
         this.feature = new VectorFeature(geometry);
         this.feature.setStyle(style);
         this.layer.addFeature(feature);

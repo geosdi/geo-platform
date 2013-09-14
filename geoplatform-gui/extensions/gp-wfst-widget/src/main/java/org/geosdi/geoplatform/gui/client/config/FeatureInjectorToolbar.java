@@ -44,11 +44,13 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSLineFeat
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSPointFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSPolygonFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.getfeature.WFSGetFeatureControl;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.WFSModifyFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.SimpleEditFeatureRepository;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.WFSEditFeatureRepository;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSEditFeatureColleague;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSGetFeatureColleague;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSModifyFeatureColleague;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.EditingToolBarDialog;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.EditToolbarBaseObserver;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
@@ -59,32 +61,35 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFST
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureInjectorToolbar extends AbstractGinModule {
-
+    
     @Override
     protected void configure() {
         bind(EditingToolBarDialog.class).in(Singleton.class);
-
+        
         bind(WFSToolbarObserver.class).to(EditToolbarBaseObserver.class).in(
                 Singleton.class);
-
+        
         bind(WFSBaseMapMediator.class).in(Singleton.class);
-
+        
         bind(WFSEditFeatureColleague.class).asEagerSingleton();
-
+        
         bind(WFSPointFeatureControl.class).asEagerSingleton();
         bind(WFSLineFeatureControl.class).asEagerSingleton();
         bind(WFSPolygonFeatureControl.class).asEagerSingleton();
-
+        
         bind(WFSGetFeatureColleague.class).asEagerSingleton();
         bind(WFSGetFeatureControl.class).in(Singleton.class);
-
+        
+        bind(WFSModifyFeatureColleague.class).asEagerSingleton();
+        bind(WFSModifyFeatureControl.class).in(Singleton.class);
+        
         bind(WFSEditFeatureRepository.class).to(
                 SimpleEditFeatureRepository.class).in(Singleton.class);
-
+        
         bind(EditFeatureAction.class).in(Singleton.class);
         bind(GetFeatureAction.class).in(Singleton.class);
-
+        
         bind(InjectGetFeatureModelEvent.class).in(Singleton.class);
     }
-
+    
 }

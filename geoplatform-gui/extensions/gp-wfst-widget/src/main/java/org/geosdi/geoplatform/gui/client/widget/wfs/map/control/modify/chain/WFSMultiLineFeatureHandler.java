@@ -33,10 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.responsibility;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
 
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.client.editor.map.responsibility.PolygonEditorHandler;
+import org.geosdi.geoplatform.gui.client.editor.map.chain.MultiLineEditorHandler;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
@@ -44,18 +44,18 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSPolygonFeatureHandler extends PolygonEditorHandler {
+public class WFSMultiLineFeatureHandler extends MultiLineEditorHandler {
 
-    public WFSPolygonFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
+    public WFSMultiLineFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
         super(theModifyEditorControl);
         
-        super.setSuperiorRequestHandler(new WFSMultiPointFeatureHandler(
+        super.setSuperiorRequestHandler(new WFSMultiPolygonFeatureHandler(
                 theModifyEditorControl));
     }
 
     @Override
     protected void manageUpdatedFeature(VectorFeature vf) {
-        System.out.println("WFSPolygonFeatureHandler manageUpdatedFeature@@@"
+        System.out.println("WFSMultiLineFeatureHandler manageUpdatedFeature@@@"
                 + "@@@@@@@@@@@@@@@@@@@@@" + vf);
     }
 

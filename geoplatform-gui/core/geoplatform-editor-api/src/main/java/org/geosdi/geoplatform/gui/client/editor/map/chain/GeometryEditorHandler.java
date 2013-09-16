@@ -33,16 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.editor.map.responsibility;
+package org.geosdi.geoplatform.gui.client.editor.map.chain;
 
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-import com.extjs.gxt.ui.client.widget.Dialog;
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.geometry.Geometry;
-import org.gwtopenmaps.openlayers.client.geometry.MultiPoint;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -50,59 +44,37 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class MultiPointEditorHandler extends GeometryEditorHandler {
+public abstract class GeometryEditorHandler {
 
-    public MultiPointEditorHandler(ModifyEditorFeature theModifyEditorControl) {
-        super(theModifyEditorControl);
+    protected ModifyEditorFeature modifyEditorControl;
+    private GeometryEditorHandler successor;
+
+    public GeometryEditorHandler(ModifyEditorFeature theModifyEditorControl) {
+        this.modifyEditorControl = theModifyEditorControl;
     }
 
-    @Override
-    public void geometryRequest(VectorFeature feature, Vector vector) {
-        if (feature.getGeometry().getClassName().equals(
-                Geometry.MULTI_POINT_CLASS_NAME)) {
+    public void setSuperiorRequestHandler(GeometryEditorHandler theSuperior) {
+        this.successor = theSuperior;
+    }
 
-            if (!checkModifications(feature)) {
-                showConfirmMessage(feature, vector);
-            }
+    public abstract void geometryRequest(VectorFeature feature, Vector vector);
 
-        } else {
-            forwardGeometryRequest(feature, vector);
+    protected void forwardGeometryRequest(VectorFeature feature, Vector vector) {
+        if (successor != null) {
+            successor.geometryRequest(feature, vector);
         }
     }
 
-    @Override
-    protected boolean checkModifications(VectorFeature feature) {
-        MultiPoint oldMultiPoint = MultiPoint.narrowToMultiPoint(
-                modifyEditorControl.getSelectedFeature().getGeometry().getJSObject());
-
-        MultiPoint multiPoint = MultiPoint.narrowToMultiPoint(
-                feature.getGeometry().getJSObject());
-
-        return multiPoint.equals(oldMultiPoint);
+    public VectorFeature getSelectedFeaure() {
+        return VectorFeature.narrowToVectorFeature(
+                modifyEditorControl.getSelectedFeature().getJSObject());
     }
 
-    @Override
-    protected void showConfirmMessage(final VectorFeature feature,
-            final Vector vector) {
-        final VectorFeature selectedFeature = getSelectedFeaure();
+    protected abstract boolean checkModifications(VectorFeature feature);
 
-        GeoPlatformMessage.confirmMessage(
-                "Multi Point Feature Status",
-                "The Geometry Multi Point Feature is changed. "
-                + "Do you want to apply the changes?",
-                new Listener<MessageBoxEvent>() {
+    protected abstract void showConfirmMessage(final VectorFeature feature,
+            final Vector vector);
 
-            @Override
-            public void handleEvent(MessageBoxEvent be) {
-                if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                    manageUpdatedFeature(feature);
-                } else {
-                    vector.removeFeature(feature);
-                    vector.addFeature(selectedFeature);
-                }
-            }
-
-        });
-    }
+    protected abstract void manageUpdatedFeature(VectorFeature vf);
 
 }

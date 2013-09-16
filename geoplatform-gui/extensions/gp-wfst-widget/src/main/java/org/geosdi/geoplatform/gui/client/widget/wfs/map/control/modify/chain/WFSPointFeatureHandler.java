@@ -33,10 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.responsibility;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
 
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.client.editor.map.responsibility.PointEditorHandler;
+import org.geosdi.geoplatform.gui.client.editor.map.chain.PointEditorHandler;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**

@@ -33,30 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.responsibility;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
 
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class WFSModifyFeatureManager implements IWFSModifyFeatureManager {
-
-    private Vector vector;
-    private WFSPointFeatureHandler wfsPointHandler;
-
-    public WFSModifyFeatureManager(Vector theVector,
-            WFSPointFeatureHandler theWfsPointHandler) {
-        this.vector = theVector;
-        this.wfsPointHandler = theWfsPointHandler;
-    }
-
-    @Override
-    public void forwardRequest(VectorFeature vf) {
-        wfsPointHandler.geometryRequest(vf, vector);
-    }
+public interface IWFSModifyFeatureManager {
+    
+    void forwardRequest(VectorFeature vf);
 
 }

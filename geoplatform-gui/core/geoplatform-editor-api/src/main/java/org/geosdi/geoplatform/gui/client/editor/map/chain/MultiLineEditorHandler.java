@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.editor.map.responsibility;
+package org.geosdi.geoplatform.gui.client.editor.map.chain;
 
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
@@ -42,7 +42,8 @@ import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
-import org.gwtopenmaps.openlayers.client.geometry.Polygon;
+import org.gwtopenmaps.openlayers.client.geometry.LineString;
+import org.gwtopenmaps.openlayers.client.geometry.MultiLineString;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -50,16 +51,16 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class PolygonEditorHandler extends GeometryEditorHandler {
+public abstract class MultiLineEditorHandler extends GeometryEditorHandler {
 
-    public PolygonEditorHandler(ModifyEditorFeature theModifyEditorControl) {
+    public MultiLineEditorHandler(ModifyEditorFeature theModifyEditorControl) {
         super(theModifyEditorControl);
     }
 
     @Override
     public void geometryRequest(VectorFeature feature, Vector vector) {
         if (feature.getGeometry().getClassName().equals(
-                Geometry.POLYGON_CLASS_NAME)) {
+                Geometry.MULTI_LINE_STRING_CLASS_NAME)) {
 
             if (!checkModifications(feature)) {
                 showConfirmMessage(feature, vector);
@@ -72,13 +73,13 @@ public abstract class PolygonEditorHandler extends GeometryEditorHandler {
 
     @Override
     protected boolean checkModifications(VectorFeature feature) {
-        Polygon oldPolygon = Polygon.narrowToPolygon(
+        MultiLineString oldMultiLine = MultiLineString.narrowToMultiLineString(
                 modifyEditorControl.getSelectedFeature().getGeometry().getJSObject());
 
-        Polygon pol = Polygon.narrowToPolygon(
+        MultiLineString multiLine = MultiLineString.narrowToMultiLineString(
                 feature.getGeometry().getJSObject());
 
-        return pol.equals(oldPolygon);
+        return multiLine.equals(oldMultiLine);
     }
 
     @Override
@@ -87,9 +88,9 @@ public abstract class PolygonEditorHandler extends GeometryEditorHandler {
         final VectorFeature selectedFeature = getSelectedFeaure();
 
         GeoPlatformMessage.confirmMessage(
-                "Polygon Feature Status",
-                "The Geometry Polygon Feature is changed. "
-                + "Do you want to apply the changes?",
+                "Multi Line Feature Status",
+                "The Geometry Multi Line Feature is changed. Do you want "
+                + "to apply the changes?",
                 new Listener<MessageBoxEvent>() {
 
             @Override

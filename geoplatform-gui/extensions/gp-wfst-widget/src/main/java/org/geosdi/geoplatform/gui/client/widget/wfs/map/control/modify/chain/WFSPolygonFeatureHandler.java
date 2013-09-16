@@ -33,48 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.editor.map.responsibility;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
 
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
+import org.geosdi.geoplatform.gui.client.editor.map.chain.PolygonEditorHandler;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeometryEditorHandler {
+public class WFSPolygonFeatureHandler extends PolygonEditorHandler {
 
-    protected ModifyEditorFeature modifyEditorControl;
-    private GeometryEditorHandler successor;
-
-    public GeometryEditorHandler(ModifyEditorFeature theModifyEditorControl) {
-        this.modifyEditorControl = theModifyEditorControl;
+    public WFSPolygonFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
+        super(theModifyEditorControl);
+        
+        super.setSuperiorRequestHandler(new WFSMultiPointFeatureHandler(
+                theModifyEditorControl));
     }
 
-    public void setSuperiorRequestHandler(GeometryEditorHandler theSuperior) {
-        this.successor = theSuperior;
+    @Override
+    protected void manageUpdatedFeature(VectorFeature vf) {
+        System.out.println("WFSPolygonFeatureHandler manageUpdatedFeature@@@"
+                + "@@@@@@@@@@@@@@@@@@@@@" + vf);
     }
-
-    public abstract void geometryRequest(VectorFeature feature, Vector vector);
-
-    protected void forwardGeometryRequest(VectorFeature feature, Vector vector) {
-        if (successor != null) {
-            successor.geometryRequest(feature, vector);
-        }
-    }
-
-    public VectorFeature getSelectedFeaure() {
-        return VectorFeature.narrowToVectorFeature(
-                modifyEditorControl.getSelectedFeature().getJSObject());
-    }
-
-    protected abstract boolean checkModifications(VectorFeature feature);
-
-    protected abstract void showConfirmMessage(final VectorFeature feature,
-            final Vector vector);
-
-    protected abstract void manageUpdatedFeature(VectorFeature vf);
 
 }

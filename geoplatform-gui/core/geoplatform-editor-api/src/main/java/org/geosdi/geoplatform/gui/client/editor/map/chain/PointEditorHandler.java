@@ -33,14 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify;
+package org.geosdi.geoplatform.gui.client.editor.map.chain;
 
-import javax.inject.Inject;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain.IWFSModifyFeatureManager;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain.WFSModifyFeatureManager;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain.WFSPointFeatureHandler;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -48,21 +50,57 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSModifyFeatureControl extends ModifyEditorFeature {
+public abstract class PointEditorHandler extends GeometryEditorHandler {
 
-    private IWFSModifyFeatureManager modifyFeatureManager;
-
-    @Inject
-    public WFSModifyFeatureControl(Vector vector) {
-        super(vector, true);
-
-        this.modifyFeatureManager = new WFSModifyFeatureManager(vector,
-                new WFSPointFeatureHandler(this));
+    public PointEditorHandler(ModifyEditorFeature theModifyEditorControl) {
+        super(theModifyEditorControl);
     }
 
     @Override
-    protected void manageModifyFeature(VectorFeature vf) {
-        modifyFeatureManager.forwardRequest(vf);
+    protected boolean checkModifications(VectorFeature feature) {
+        Point oldPoint = Point.narrowToPoint(
+                modifyEditorControl.getSelectedFeature().getGeometry().getJSObject());
+
+        Point po = Point.narrowToPoint(feature.getGeometry().getJSObject());
+
+        return ((po.getX() == oldPoint.getX()) && (po.getY() == oldPoint.getY()));
+    }
+
+    @Override
+    protected void showConfirmMessage(final VectorFeature feature,
+            final Vector vector) {
+        final VectorFeature selectedFeature = getSelectedFeaure();
+
+        GeoPlatformMessage.confirmMessage(
+                "Point Feature Status",
+                "The Geometry Point Feature is changed. Do you want to apply the changes?",
+                new Listener<MessageBoxEvent>() {
+
+            @Override
+            public void handleEvent(MessageBoxEvent be) {
+                if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                    manageUpdatedFeature(feature);
+                } else {
+                    vector.removeFeature(feature);
+                    vector.addFeature(selectedFeature);
+                }
+            }
+
+        });
+    }
+
+    @Override
+    public void geometryRequest(VectorFeature feature, Vector vector) {
+        if (feature.getGeometry().getClassName().equals(
+                Geometry.POINT_CLASS_NAME)) {
+
+            if (!checkModifications(feature)) {
+                showConfirmMessage(feature, vector);
+            }
+
+        } else {
+            forwardGeometryRequest(feature, vector);
+        }
     }
 
 }

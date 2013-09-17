@@ -33,30 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.converter.chain;
 
-import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.client.editor.map.chain.LineEditorHandler;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.geosdi.geoplatform.gui.client.editor.map.converter.chain.BaseConverterHandler;
+import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.MultiPoint;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSLineFeatureHandler extends LineEditorHandler {
+class MultiPointCoverterHandler extends BaseConverterHandler {
 
-    public WFSLineFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
-        super(theModifyEditorControl);
+    public MultiPointCoverterHandler(MapWidget theMapWidget) {
+        super(theMapWidget);
 
-        super.setSuperiorRequestHandler(new WFSPolygonFeatureHandler(
-                theModifyEditorControl));
+        super.setSuccessor(new MultiLineCoverterHandler(theMapWidget));
     }
 
     @Override
-    protected void manageUpdatedFeature(VectorFeature vf) {
-        System.out.println("WFSLineFeatureHandler manageUpdatedFeature@@@"
-                + "@@@@@@@@@@@@@@@@@@@@@" + vf);
+    protected String generateGeometryWKT(Geometry geom, Projection dest) {
+        MultiPoint multiPoint = MultiPoint.narrowToMultiPoint(geom.getJSObject());
+        multiPoint.transform(new Projection(mapWidget.getMap().getProjection()),
+                dest);
+
+        return multiPoint.toString();
+    }
+
+    @Override
+    public String convertRequest(Geometry geom, Projection dest) {
+        return (isPossibleToConvert(geom)) ? generateGeometryWKT(geom, dest)
+                : super.forwardConvertRequest(geom, dest);
+    }
+
+    @Override
+    protected boolean isPossibleToConvert(Geometry geom) {
+        return geom.getClassName().equalsIgnoreCase(
+                Geometry.MULTI_POINT_CLASS_NAME);
     }
 
 }

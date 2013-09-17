@@ -33,36 +33,48 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.converter.chain;
 
-import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.client.editor.map.chain.PolygonEditorHandler;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.client.editor.map.converter.chain.BaseConverterHandler;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.Point;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSPolygonFeatureHandler extends PolygonEditorHandler {
+@Singleton
+public class PointCoverterHandler extends BaseConverterHandler {
 
-    public WFSPolygonFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
-        super(theModifyEditorControl);
-
-        super.setSuperiorEditorHandler(new WFSMultiPointFeatureHandler(
-                theModifyEditorControl));
+    @Inject
+    public PointCoverterHandler(MapWidget theMapWidget) {
+        super(theMapWidget);
+        
+        super.setSuccessor(new LineStringConverterHandler(theMapWidget));
     }
 
     @Override
-    protected void manageUpdatedFeature(VectorFeature vf) {
-        Geometry geom = vf.getGeometry().clone();
-        System.out.println("WFSPolygonFeatureHandler manageUpdatedFeature@@@"
-                + "@@@@@@@@@@@@@@@@@@@@@" + modifyEditorControl.getWKTEditorConverter().convertGeometry(
-                geom, new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode())));
+    public String convertRequest(Geometry geom, Projection dest) {
+        return (isPossibleToConvert(geom)) ? generateGeometryWKT(geom, dest)
+                : super.forwardConvertRequest(geom, dest);
+    }
+
+    @Override
+    protected boolean isPossibleToConvert(Geometry geom) {
+        return geom.getClassName().equalsIgnoreCase(Geometry.POINT_CLASS_NAME);
+    }
+
+    @Override
+    protected String generateGeometryWKT(Geometry geom, Projection dest) {
+        Point point = Point.narrowToPoint(geom.getJSObject());
+        point.transform(new Projection(mapWidget.getMap().getProjection()), dest);
+
+        return point.toString();
     }
 
 }

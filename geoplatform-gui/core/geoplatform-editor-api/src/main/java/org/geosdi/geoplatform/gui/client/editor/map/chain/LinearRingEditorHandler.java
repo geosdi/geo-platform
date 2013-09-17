@@ -33,36 +33,76 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
+package org.geosdi.geoplatform.gui.client.editor.map.chain;
 
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.client.editor.map.chain.PolygonEditorHandler;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.gwtopenmaps.openlayers.client.Projection;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.LinearRing;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSPolygonFeatureHandler extends PolygonEditorHandler {
+public abstract class LinearRingEditorHandler extends GeometryEditorHandler {
 
-    public WFSPolygonFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
+    public LinearRingEditorHandler(ModifyEditorFeature theModifyEditorControl) {
         super(theModifyEditorControl);
-
-        super.setSuperiorEditorHandler(new WFSMultiPointFeatureHandler(
-                theModifyEditorControl));
     }
 
     @Override
-    protected void manageUpdatedFeature(VectorFeature vf) {
-        Geometry geom = vf.getGeometry().clone();
-        System.out.println("WFSPolygonFeatureHandler manageUpdatedFeature@@@"
-                + "@@@@@@@@@@@@@@@@@@@@@" + modifyEditorControl.getWKTEditorConverter().convertGeometry(
-                geom, new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode())));
+    public void geometryRequest(VectorFeature feature, Vector vector) {
+        if (feature.getGeometry().getClassName().equals(
+                Geometry.LINEARRING_CLASS_NAME)) {
+
+            if (!checkModifications(feature)) {
+                showConfirmMessage(feature, vector);
+            }
+
+        } else {
+            forwardGeometryRequest(feature, vector);
+        }
+    }
+
+    @Override
+    protected boolean checkModifications(VectorFeature feature) {
+        LinearRing oldLinearRing = LinearRing.narrowToLinearRing(
+                modifyEditorControl.getSelectedFeature().getGeometry().getJSObject());
+
+        LinearRing linearRing = LinearRing.narrowToLinearRing(
+                feature.getGeometry().getJSObject());
+
+        return linearRing.equals(oldLinearRing);
+    }
+
+    @Override
+    protected void showConfirmMessage(final VectorFeature feature,
+            final Vector vector) {
+        final VectorFeature selectedFeature = getSelectedFeaure();
+
+        GeoPlatformMessage.confirmMessage(
+                "Line Feature Status",
+                "The Geometry Linear Ring Feature is changed. Do you want "
+                + "to apply the changes?",
+                new Listener<MessageBoxEvent>() {
+
+            @Override
+            public void handleEvent(MessageBoxEvent be) {
+                if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                    manageUpdatedFeature(feature);
+                } else {
+                    vector.removeFeature(feature);
+                    vector.addFeature(selectedFeature);
+                }
+            }
+
+        });
     }
 
 }

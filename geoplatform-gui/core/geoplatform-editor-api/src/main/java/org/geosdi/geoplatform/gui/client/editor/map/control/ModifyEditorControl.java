@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.editor.map.control;
 
+import org.geosdi.geoplatform.gui.client.editor.map.converter.WKTEditorConverter;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
@@ -45,7 +46,9 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 public interface ModifyEditorControl {
 
     VectorFeature getSelectedFeature();
-    
+
     void setMode(int... modes);
+
+    WKTEditorConverter getWKTEditorConverter();
 
 }

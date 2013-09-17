@@ -37,7 +37,10 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
 
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
 import org.geosdi.geoplatform.gui.client.editor.map.chain.MultiPolygonEditorHandler;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 
 /**
  *
@@ -53,8 +56,11 @@ public class WFSMultiPolygonFeatureHandler extends MultiPolygonEditorHandler {
 
     @Override
     protected void manageUpdatedFeature(VectorFeature vf) {
+        Geometry geom = vf.getGeometry().clone();
         System.out.println("WFSMultiPolygonFeatureHandler manageUpdatedFeature"
-                + "@@@@@@@@@@@@@@@@@@@@@@@@" + vf);
+                + "@@@@@@@@@@@@@@@@@@@@@" + modifyEditorControl.getWKTEditorConverter().convertGeometry(
+                geom, new Projection(
+                GPCoordinateReferenceSystem.WGS_84.getCode())));
     }
 
 }

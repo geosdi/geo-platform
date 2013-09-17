@@ -53,7 +53,7 @@ public abstract class GeometryEditorHandler {
         this.modifyEditorControl = theModifyEditorControl;
     }
 
-    public void setSuperiorRequestHandler(GeometryEditorHandler theSuperior) {
+    public void setSuperiorEditorHandler(GeometryEditorHandler theSuperior) {
         this.successor = theSuperior;
     }
 

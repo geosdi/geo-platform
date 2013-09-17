@@ -33,13 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
+package org.geosdi.geoplatform.gui.client.editor.map.converter.chain;
 
-import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.client.editor.map.chain.PolygonEditorHandler;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 
 /**
@@ -47,22 +44,14 @@ import org.gwtopenmaps.openlayers.client.geometry.Geometry;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSPolygonFeatureHandler extends PolygonEditorHandler {
+public abstract class BaseConverterHandler extends EditorConverterHandler {
 
-    public WFSPolygonFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
-        super(theModifyEditorControl);
+    protected final MapWidget mapWidget;
 
-        super.setSuperiorEditorHandler(new WFSMultiPointFeatureHandler(
-                theModifyEditorControl));
+    public BaseConverterHandler(MapWidget theMapWidget) {
+        this.mapWidget = theMapWidget;
     }
 
-    @Override
-    protected void manageUpdatedFeature(VectorFeature vf) {
-        Geometry geom = vf.getGeometry().clone();
-        System.out.println("WFSPolygonFeatureHandler manageUpdatedFeature@@@"
-                + "@@@@@@@@@@@@@@@@@@@@@" + modifyEditorControl.getWKTEditorConverter().convertGeometry(
-                geom, new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode())));
-    }
+    protected abstract String generateGeometryWKT(Geometry geom, Projection dest);
 
 }

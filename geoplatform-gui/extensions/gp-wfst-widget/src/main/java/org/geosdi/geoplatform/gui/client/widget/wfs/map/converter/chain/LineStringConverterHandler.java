@@ -33,76 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.editor.map.chain;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.converter.chain;
 
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-import com.extjs.gxt.ui.client.widget.Dialog;
-import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.geosdi.geoplatform.gui.client.editor.map.converter.chain.BaseConverterHandler;
+import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 import org.gwtopenmaps.openlayers.client.geometry.LineString;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class LineEditorHandler extends GeometryEditorHandler {
+class LineStringConverterHandler extends BaseConverterHandler {
 
-    public LineEditorHandler(ModifyEditorFeature theModifyEditorControl) {
-        super(theModifyEditorControl);
+    public LineStringConverterHandler(MapWidget theMapWidget) {
+        super(theMapWidget);
+
+        super.setSuccessor(new LinearRingConverterHandler(theMapWidget));
     }
 
     @Override
-    public void geometryRequest(VectorFeature feature, Vector vector) {
-        if (feature.getGeometry().getClassName().equals(
-                Geometry.LINESTRING_CLASS_NAME)) {
-
-            if (!checkModifications(feature)) {
-                showConfirmMessage(feature, vector);
-            }
-
-        } else {
-            forwardGeometryRequest(feature, vector);
-        }
+    public String convertRequest(Geometry geom, Projection dest) {
+        return (isPossibleToConvert(geom)) ? generateGeometryWKT(geom, dest)
+                : super.forwardConvertRequest(geom, dest);
     }
 
     @Override
-    protected boolean checkModifications(VectorFeature feature) {
-        LineString oldLine = LineString.narrowToLineString(
-                modifyEditorControl.getSelectedFeature().getGeometry().getJSObject());
-
-        LineString li = LineString.narrowToLineString(
-                feature.getGeometry().getJSObject());
-
-        return li.equals(oldLine);
+    protected boolean isPossibleToConvert(Geometry geom) {
+        return geom.getClassName().equalsIgnoreCase(
+                Geometry.LINESTRING_CLASS_NAME);
     }
 
     @Override
-    protected void showConfirmMessage(final VectorFeature feature,
-            final Vector vector) {
-        final VectorFeature selectedFeature = getSelectedFeaure();
+    protected String generateGeometryWKT(Geometry geom, Projection dest) {
+        LineString lineString = LineString.narrowToLineString(geom.getJSObject());
+        lineString.transform(new Projection(mapWidget.getMap().getProjection()),
+                dest);
 
-        GeoPlatformMessage.confirmMessage(
-                "Line Feature Status",
-                "The Geometry Line Feature is changed. Do you want "
-                + "to apply the changes?",
-                new Listener<MessageBoxEvent>() {
-
-            @Override
-            public void handleEvent(MessageBoxEvent be) {
-                if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                    manageUpdatedFeature(feature);
-                } else {
-                    vector.removeFeature(feature);
-                    vector.addFeature(selectedFeature);
-                }
-            }
-
-        });
+        return lineString.toString();
     }
 
 }

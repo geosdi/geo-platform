@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
 
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.client.editor.map.chain.PolygonEditorHandler;
+import org.geosdi.geoplatform.gui.client.editor.map.chain.LineStringEditorHandler;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -47,19 +47,20 @@ import org.gwtopenmaps.openlayers.client.geometry.Geometry;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSPolygonFeatureHandler extends PolygonEditorHandler {
+public class WFSLineStringFeatureHandler extends LineStringEditorHandler {
 
-    public WFSPolygonFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
+    public WFSLineStringFeatureHandler(
+            ModifyEditorFeature theModifyEditorControl) {
         super(theModifyEditorControl);
 
-        super.setSuperiorEditorHandler(new WFSMultiPointFeatureHandler(
+        super.setSuperiorEditorHandler(new WFSLinearRingFeatureHandler(
                 theModifyEditorControl));
     }
 
     @Override
     protected void manageUpdatedFeature(VectorFeature vf) {
         Geometry geom = vf.getGeometry().clone();
-        System.out.println("WFSPolygonFeatureHandler manageUpdatedFeature@@@"
+        System.out.println("WFSLineStringFeatureHandler manageUpdatedFeature@@@"
                 + "@@@@@@@@@@@@@@@@@@@@@" + modifyEditorControl.getWKTEditorConverter().convertGeometry(
                 geom, new Projection(
                 GPCoordinateReferenceSystem.WGS_84.getCode())));

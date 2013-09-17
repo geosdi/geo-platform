@@ -37,7 +37,10 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
 
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
 import org.geosdi.geoplatform.gui.client.editor.map.chain.PointEditorHandler;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 
 /**
  *
@@ -45,18 +48,21 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class WFSPointFeatureHandler extends PointEditorHandler {
-
+    
     public WFSPointFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
         super(theModifyEditorControl);
-
-        super.setSuperiorRequestHandler(new WFSLineFeatureHandler(
+        
+        super.setSuperiorEditorHandler(new WFSLineStringFeatureHandler(
                 theModifyEditorControl));
     }
-
+    
     @Override
     protected void manageUpdatedFeature(VectorFeature vf) {
+        Geometry geom = vf.getGeometry().clone();
         System.out.println("WFSPointFeatureHandler manageUpdatedFeature@@@"
-                + "@@@@@@@@@@@@@@@@@@@@@" + vf);
+                + "@@@@@@@@@@@@@@@@@@@@@" + modifyEditorControl.getWKTEditorConverter().convertGeometry(
+                geom, new Projection(
+                GPCoordinateReferenceSystem.WGS_84.getCode())));
     }
-
+    
 }

@@ -33,36 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.converter.chain;
 
-import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
-import org.geosdi.geoplatform.gui.client.editor.map.chain.PolygonEditorHandler;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.client.editor.map.converter.chain.BaseConverterHandler;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.MultiLineString;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSPolygonFeatureHandler extends PolygonEditorHandler {
+class MultiLineCoverterHandler extends BaseConverterHandler {
 
-    public WFSPolygonFeatureHandler(ModifyEditorFeature theModifyEditorControl) {
-        super(theModifyEditorControl);
+    public MultiLineCoverterHandler(MapWidget theMapWidget) {
+        super(theMapWidget);
 
-        super.setSuperiorEditorHandler(new WFSMultiPointFeatureHandler(
-                theModifyEditorControl));
+        super.setSuccessor(new MultiPolygonCoverterHandler(theMapWidget));
     }
 
     @Override
-    protected void manageUpdatedFeature(VectorFeature vf) {
-        Geometry geom = vf.getGeometry().clone();
-        System.out.println("WFSPolygonFeatureHandler manageUpdatedFeature@@@"
-                + "@@@@@@@@@@@@@@@@@@@@@" + modifyEditorControl.getWKTEditorConverter().convertGeometry(
-                geom, new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode())));
+    protected String generateGeometryWKT(Geometry geom, Projection dest) {
+        MultiLineString mls = MultiLineString.narrowToMultiLineString(
+                geom.getJSObject());
+        mls.transform(new Projection(mapWidget.getMap().getProjection()), dest);
+
+        return mls.toString();
+    }
+
+    @Override
+    public String convertRequest(Geometry geom, Projection dest) {
+        return (isPossibleToConvert(geom)) ? generateGeometryWKT(geom, dest)
+                : super.forwardConvertRequest(geom, dest);
+    }
+
+    @Override
+    protected boolean isPossibleToConvert(Geometry geom) {
+        return geom.getClassName().equalsIgnoreCase(
+                Geometry.MULTI_LINE_STRING_CLASS_NAME);
     }
 
 }

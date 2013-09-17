@@ -37,9 +37,11 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify;
 
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
+import org.geosdi.geoplatform.gui.client.editor.map.converter.WKTEditorConverter;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain.IWFSModifyFeatureManager;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain.WFSModifyFeatureManager;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain.WFSPointFeatureHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.converter.WKTBaseEditorConverter;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
@@ -50,6 +52,8 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public class WFSModifyFeatureControl extends ModifyEditorFeature {
 
+    @Inject
+    private WKTBaseEditorConverter wktEditorConverter;
     private IWFSModifyFeatureManager modifyFeatureManager;
 
     @Inject
@@ -63,6 +67,11 @@ public class WFSModifyFeatureControl extends ModifyEditorFeature {
     @Override
     protected void manageModifyFeature(VectorFeature vf) {
         modifyFeatureManager.forwardRequest(vf);
+    }
+
+    @Override
+    public WKTEditorConverter getWKTEditorConverter() {
+        return this.wktEditorConverter;
     }
 
 }

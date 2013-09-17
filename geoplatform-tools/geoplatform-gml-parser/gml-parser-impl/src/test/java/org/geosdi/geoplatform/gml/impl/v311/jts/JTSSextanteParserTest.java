@@ -69,7 +69,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
         jaxbContext.acquireMarshaller().marshal(point, writer);
 
-        logger.info("GML V311 Point : \n" + writer);
+        logger.info("GML V311 Point : \n\n" + writer);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
         jaxbContext.acquireMarshaller().marshal(lineString, writer);
 
-        logger.info("GML V311 LineString : \n" + writer);
+        logger.info("GML V311 LineString : \n\n" + writer);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(linearRing, writer);
 
-        logger.info("GML V311 LinearRing : \n " + writer);
+        logger.info("GML V311 LinearRing : \n\n" + writer);
     }
 
     @Test
@@ -127,7 +127,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
         jaxbContext.acquireMarshaller().marshal(polygon, writer);
 
-        logger.info("GML V311 Polygon : \n  " + writer);
+        logger.info("GML V311 Polygon : \n\n" + writer);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(multiPoint, writer);
 
-        logger.info("GML V311 MultiPoint : \n " + writer);
+        logger.info("GML V311 MultiPoint : \n\n" + writer);
     }
 
     @Test
@@ -151,7 +151,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(multiLineString, writer);
 
-        logger.info("GML V311 MultiLineString : \n " + writer);
+        logger.info("GML V311 MultiLineString : \n\n" + writer);
     }
 
     @Test
@@ -164,7 +164,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(multiPolygon, writer);
 
-        logger.info("GML V311 MultiPolygon : \n " + writer);
+        logger.info("GML V311 MultiPolygon : \n\n" + writer);
     }
 
     @Test
@@ -179,6 +179,6 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(geometryCollection, writer);
 
-        logger.info("GML V311 Geometry Collection : \n " + writer);
+        logger.info("GML V311 Geometry Collection : \n\n" + writer);
     }
 }

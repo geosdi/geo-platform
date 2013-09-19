@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
+import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
@@ -87,6 +88,9 @@ public class SecurityService implements ISecurityService {
     private @Value("casProp{cas_admin_emails}")
     String casAdminEmails;
     //
+    private @Value("configurator{host_xmpp_server}")
+    String hostXmppServer;
+    //
     private GeoPlatformService geoPlatformServiceClient;
     //
     @Autowired
@@ -124,6 +128,29 @@ public class SecurityService implements ISecurityService {
             throw new GeoPlatformException(
                     ex.getMessage() + ", contact the administrator");
         }
+    }
+
+    @Override
+    public XMPPLoginDetails xmppGetDataLogin(String userName, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        XMPPLoginDetails xMPPLoginDetails = null;
+        if (userName != null) {
+            GPUser user;
+            try {
+                user = geoPlatformServiceClient.getUserDetailByUsername(
+                        new SearchRequest(userName, LikePatternType.CONTENT_EQUALS));
+                xMPPLoginDetails = new XMPPLoginDetails();
+                xMPPLoginDetails.setUsername(user.getUsername());
+                xMPPLoginDetails.setPassword(user.getPassword());
+                xMPPLoginDetails.setHostXmppServer(this.hostXmppServer);
+            } catch (ResourceNotFoundFault ex) {
+                logger.error("SecurityService", "Unable to find user with username: "
+                        + userName + " Error: " + ex);
+                throw new GeoPlatformException("Unable to find user with username: "
+                        + userName);
+            }
+        }
+        return xMPPLoginDetails;
     }
 
     @Override

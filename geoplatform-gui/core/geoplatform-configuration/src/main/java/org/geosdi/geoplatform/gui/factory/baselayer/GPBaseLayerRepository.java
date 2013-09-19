@@ -102,69 +102,89 @@ class GPBaseLayerRepository {
     private void lookupBaseLayers() {
         baseLayerMap.put(BaseLayerValue.OPEN_STREET_MAP,
                 new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createOSMBaseLayer();
             }
+
         });
         baseLayerMap.put(BaseLayerValue.GOOGLE_NORMAL,
                 new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createGoogleNormalBaseLayer();
             }
+
         });
         baseLayerMap.put(BaseLayerValue.GOOGLE_SATELLITE,
                 new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createGoogleSatelliteBaseLayer();
             }
+
         });
         baseLayerMap.put(BaseLayerValue.GOOGLE_HYBRID,
                 new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createGoogleHybridBaseLayer();
             }
+
         });
         baseLayerMap.put(BaseLayerValue.BING_ROAD_LAYER,
                 new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createBingRoadBaseLayer();
             }
+
         });
         baseLayerMap.put(BaseLayerValue.BING_HYBRID, new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createBingHybridBaseLayer();
             }
+
         });
         baseLayerMap.put(BaseLayerValue.BING_AERIAL, new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createBingAerialBaseLayer();
             }
+
         });
         baseLayerMap.put(BaseLayerValue.METACARTA, new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createMetacartaBaseLayer();
             }
+
         });
         baseLayerMap.put(BaseLayerValue.GEOSDI_BASE, new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createGeoSdiBaseLayer();
             }
+
         });
         baseLayerMap.put(BaseLayerValue.GEOSDI_NULL_BASE,
                 new GPBaseLayerCreator() {
+
             @Override
             public Layer createBaseLayer() {
                 return createGeoSdiNullMapBaseLayer();
             }
+
         });
     }
 
@@ -304,4 +324,5 @@ class GPBaseLayerRepository {
 
         return aerial;
     }
+
 }

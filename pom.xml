@@ -846,7 +846,7 @@
             <dependency>
                 <groupId>org.apache.santuario</groupId>
                 <artifactId>xmlsec</artifactId>
-                <version>1.5.3</version>
+                <version>1.5.5</version>
             </dependency>
             
 
@@ -1627,7 +1627,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         
-        <cxf-version>2.7.5</cxf-version>
+        <cxf-version>2.7.6</cxf-version>
         <spring-version>3.2.3.RELEASE</spring-version>
         
         <activemq-version>5.8.0</activemq-version>

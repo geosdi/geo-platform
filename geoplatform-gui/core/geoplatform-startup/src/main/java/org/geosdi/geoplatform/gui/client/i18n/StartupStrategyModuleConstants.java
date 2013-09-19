@@ -48,6 +48,12 @@ public interface StartupStrategyModuleConstants extends Constants {
     public static final StartupStrategyModuleConstants INSTANCE =
             GWT.create(StartupStrategyModuleConstants.class);
 
+    @DefaultStringValue("XMPP Connection Error")
+    String XMPPConnectionErrorTitleText();
+
+    @DefaultStringValue("Failed to connect to xmpp server")
+    String XMPPConnectionErrorBodyText();
+    
     /**
      * start StartupCASLogIn
      */

@@ -76,4 +76,5 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(ILayerSchemaBinder.class).to(LayerSchemaBinder.class).in(
                 Singleton.class);
     }
+
 }

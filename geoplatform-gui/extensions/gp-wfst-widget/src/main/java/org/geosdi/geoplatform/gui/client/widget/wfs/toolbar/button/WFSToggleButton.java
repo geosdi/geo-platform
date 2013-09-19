@@ -107,8 +107,6 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
 
     @Override
     public void resetEditorControl() {
-        System.out.println("CODICE ESEGUITO resetEditorControl "
-                + "WFSToggleButton ##################");
         if (isDown()) {
             super.setDown(false);
         }

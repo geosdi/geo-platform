@@ -78,7 +78,8 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private InjectGetFeatureModelEvent injectGetFeatureModelEvent;
     private GPEventBus bus;
     private Layer wms;
-
+    private ResetToolbarObserverEvent reset;
+    
     @Inject
     public FeatureMapInitializer(GPEventBus theBus) {
         this.bus = theBus;
@@ -89,10 +90,10 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         final GPLayerBean layer = layerSchemaBinder.getSelectedLayer();
         this.wms = this.mapLayerBuilder.buildLayer(layer);
         this.injectGetFeatureModelEvent.setWms(wms);
-        
+             
         WFSGetFeatureControl.fireInjectGetFeatureModelEvent(
                 injectGetFeatureModelEvent);
-
+        
         Timer t = new Timer() {
 
             @Override

@@ -56,9 +56,9 @@ public abstract class AbstractJTSSextanteLineHandler extends JTSSextanteHandler 
                 + "not compatible. The parser must be an instance of "
                 + "JTSLineStringParser and not : " + acquireParser());
 
-        return isCompatibleParser()
-               ? acquireParser().parseGeometry((LineString) geometry)
-               : super.forwardParseGeometry(geometry);
+        return isCompatibleGeometry(geometry)
+                ? acquireParser().parseGeometry((LineString) geometry)
+                : super.forwardParseGeometry(geometry);
     }
 
     @Override
@@ -76,7 +76,8 @@ public abstract class AbstractJTSSextanteLineHandler extends JTSSextanteHandler 
             Geometry geometry) throws ParserException {
 
         return isCompatibleGeometry(geometry)
-               ? acquireParser().buildJAXBElement((LineString) geometry)
-               : super.forwardBuildJAXBElement(geometry);
+                ? acquireParser().buildJAXBElement((LineString) geometry)
+                : super.forwardBuildJAXBElement(geometry);
     }
+
 }

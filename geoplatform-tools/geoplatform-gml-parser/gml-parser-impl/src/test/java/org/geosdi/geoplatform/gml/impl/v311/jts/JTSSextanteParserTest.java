@@ -119,9 +119,8 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
     @Test
     public void testPolygon() throws Exception {
-
-        Geometry polygon = reader.read("POLYGON ((35 10, 10 20, 15 40, 45 45, 35 10), "
-                + "(20 30, 35 35, 30 20, 20 30))");
+        Geometry polygon = reader.read("POLYGON ((35 10, 10 20, 15 40,"
+                + " 45 45, 35 10), (20 30, 35 35, 30 20, 20 30))");
 
         StringWriter writer = new StringWriter();
 
@@ -145,7 +144,8 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     @Test
     public void testMultiLineString() throws Exception {
 
-        Geometry multiLineString = reader.read("MULTILINESTRING ((10 10, 20 20, 10 40), "
+        Geometry multiLineString = reader.read(
+                "MULTILINESTRING ((10 10, 20 20, 10 40), "
                 + "(40 40, 30 30, 40 20, 30 10))");
 
         StringWriter writer = new StringWriter();
@@ -170,7 +170,8 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     @Test
     public void testGeometryCollection() throws Exception {
 
-        Geometry geometryCollection = reader.read("GEOMETRYCOLLECTION(POINT(0 0), "
+        Geometry geometryCollection = reader.read(
+                "GEOMETRYCOLLECTION(POINT(0 0), "
                 + "POINT(1 0), POINT(1 1), POINT(0 1), LINESTRING(4 6,7 10), "
                 + "POLYGON ((35 10, 10 20, 15 40, 45 45, 35 10),"
                 + "(20 30, 35 35, 30 20, 20 30)), LINEARRING (7 7, 6 9, 6 11,"
@@ -181,4 +182,5 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
         logger.info("GML V311 Geometry Collection : \n\n" + writer);
     }
+
 }

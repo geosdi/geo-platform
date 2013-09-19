@@ -35,9 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.cas;
 
+import org.geosdi.geoplatform.gui.client.GPXMPPClient;
+import org.geosdi.geoplatform.gui.client.command.login.cas.XMPPCASGetDataLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.handler.CASLoginHandler;
+import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
 import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.startup.IStartupConfigurationStrategy;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -79,22 +86,28 @@ public class StartupCASLogIn implements IStartupConfigurationStrategy {
 //        Dispatcher.get().dispatch(GeoPlatformEvents.INIT_GEO_PLATFORM);
 //        Window.open("http://150.146.160.61/cas/login", "_self", ""); 
         //
-//        SecurityRemoteImpl.Util.getInstance().ssoLogin(new AsyncCallback<IGPAccountDetail>() {
-//            @Override
-//            public void onFailure(Throwable caught) {
-//                System.out.println("Error login on IVUser: " + caught.getMessage());
-//            }
-//
-//            @Override
-//            public void onSuccess(IGPAccountDetail resultDetails) {
-//                boolean result = false;
-//                if (resultDetails != null) {
-//                    executeLoginOperations(resultDetails);
-//                    result = true;
-//                    //loginXMPPClient(ivUser, password.getValue(), result.getHostXmppServer());
-//                }
-//                LoginWidget.super.continueLoginProcesFromSSo(result);
-//            }
-//        });
+        XMPPCASGetDataLoginRequest xMPPCASGetDataLoginRequest = new XMPPCASGetDataLoginRequest();
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<XMPPGetDataLoginResponse>(xMPPCASGetDataLoginRequest) {
+            private static final long serialVersionUID = -1178797454775088815L;
+
+            @Override
+            public void onCommandSuccess(XMPPGetDataLoginResponse response) {
+                XMPPLoginDetails xMPPLoginDetails = response.getResult();
+                if (xMPPLoginDetails != null) {
+
+                    GPXMPPClient xMPPClient = new GPXMPPClient();
+                    xMPPClient.userXMPPLogin(xMPPLoginDetails.getUsername(),
+                            xMPPLoginDetails.getPassword(), xMPPLoginDetails.getHostXmppServer());
+                }
+            }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.infoMessage("XMPP Connection Error",
+                        "Failed to connect to xmpp server");
+            }
+        });
+
     }
 }

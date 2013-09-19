@@ -35,9 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.startup;
 
+import org.geosdi.geoplatform.gui.client.GPXMPPClient;
+import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.handler.SSOLoginHandler;
+import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
 import org.geosdi.geoplatform.gui.client.widget.security.ILoginHandler;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.startup.IStartupConfigurationStrategy;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -52,9 +59,30 @@ public class StartupConfigurationLogIn implements IStartupConfigurationStrategy 
     @Override
     public void initGeoPlatformConfiguration() {
         BasicGinInjector injector = BasicGinInjector.MainInjector.getInstance();
-        ILoginHandler cASLoginHandler = new SSOLoginHandler();
-        injector.getSecurityLoginChainOfResponsibility().setLoginHandler(cASLoginHandler);
+        ILoginHandler ssoLoginHandler = new SSOLoginHandler();
+        injector.getSecurityLoginChainOfResponsibility().setLoginHandler(ssoLoginHandler);
         injector.getLoginAccessManager().doLogin(GeoPlatformEvents.INIT_GEO_PLATFORM, "Login in corso...");
-//        Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
+        XMPPGetDataLoginRequest xMPPCASGetDataLoginRequest = new XMPPGetDataLoginRequest();
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<XMPPGetDataLoginResponse>(xMPPCASGetDataLoginRequest) {
+            private static final long serialVersionUID = -1178797454775088815L;
+
+            @Override
+            public void onCommandSuccess(XMPPGetDataLoginResponse response) {
+                XMPPLoginDetails xMPPLoginDetails = response.getResult();
+                if (xMPPLoginDetails != null) {
+
+                    GPXMPPClient xMPPClient = new GPXMPPClient();
+                    xMPPClient.userXMPPLogin(xMPPLoginDetails.getUsername(),
+                            xMPPLoginDetails.getPassword(), xMPPLoginDetails.getHostXmppServer());
+                }
+            }
+
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.infoMessage("XMPP Connection Error",
+                        "Failed to connect to xmpp server");
+            }
+        });
     }
 }

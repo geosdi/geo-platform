@@ -51,7 +51,7 @@ public interface SecurityRemoteAsync {
 
     void ssoLogin(AsyncCallback<IGPAccountDetail> callback)
             throws GeoPlatformException;
-    
+
     void casLogin(AsyncCallback<IGPAccountDetail> callback)
             throws GeoPlatformException;
 

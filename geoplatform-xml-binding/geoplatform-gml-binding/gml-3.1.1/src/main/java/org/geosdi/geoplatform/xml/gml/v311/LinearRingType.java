@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.LinearRing;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
@@ -53,6 +54,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *
  *
  */
+@XmlRootElement(name = "LinearRing")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LinearRingType", propOrder = {
     "posOrPointPropertyOrPointRep",

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.MultiPoint;
 import org.geosdi.geoplatform.gml.api.PointProperty;
@@ -42,6 +43,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *
  *
  */
+@XmlRootElement(name = "MultiPoint")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MultiPointType", propOrder = {
     "pointMember",

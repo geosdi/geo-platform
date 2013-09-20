@@ -4,8 +4,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2012.10.26 at 03:16:42 PM CEST 
 //
-
-
 package org.geosdi.geoplatform.xml.wfs.v110;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,12 +16,12 @@ import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
-
 /**
  * <p>Java class for PropertyType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="PropertyType">
  *   &lt;complexContent>
@@ -36,30 +34,26 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PropertyType", propOrder = {
     "name",
-    "value"
+    "pValueType"
 })
-public class PropertyType
-    implements ToString
-{
+public class PropertyType implements ToString {
 
     @XmlElement(name = "Name", required = true)
     protected QName name;
     @XmlElement(name = "Value")
-    protected Object value;
+    protected PropertyValueType pValueType;
 
     /**
      * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link QName }
-     *     
+     *
+     * @return possible object is {@link QName }
+     *
      */
     public QName getName() {
         return name;
@@ -67,11 +61,9 @@ public class PropertyType
 
     /**
      * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link QName }
-     *     
+     *
+     * @param value allowed object is {@link QName }
+     *
      */
     public void setName(QName value) {
         this.name = value;
@@ -79,28 +71,26 @@ public class PropertyType
 
     /**
      * Gets the value of the value property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
+     *
+     * @return possible object is {@link Object }
+     *
      */
     public Object getValue() {
-        return value;
+        return pValueType.getPropertyValue();
     }
 
     /**
      * Sets the value of the value property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
+     *
+     * @param value allowed object is {@link Object }
+     *
      */
     public void setValue(Object value) {
-        this.value = value;
+        PropertyValueType thePValueType = new PropertyValueType(value);
+        this.pValueType = thePValueType;
     }
 
+    @Override
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
@@ -108,14 +98,18 @@ public class PropertyType
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer,
+            ToStringStrategy strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator,
+            StringBuilder buffer, ToStringStrategy strategy) {
         {
             QName theName;
             theName = this.getName();

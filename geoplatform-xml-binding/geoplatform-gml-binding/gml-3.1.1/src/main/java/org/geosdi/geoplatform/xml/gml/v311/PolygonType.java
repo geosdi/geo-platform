@@ -12,6 +12,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.AbstractRingProperty;
 import org.geosdi.geoplatform.gml.api.Polygon;
@@ -46,6 +47,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *
  *
  */
+@XmlRootElement(name = "Polygon")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PolygonType", propOrder = {
     "exterior",

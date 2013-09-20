@@ -72,9 +72,8 @@ public class StartupConfigurationLogIn implements IStartupConfigurationStrategy 
 
             @Override
             public void onCommandSuccess(XMPPGetDataLoginResponse response) {
-                XMPPLoginDetails xMPPLoginDetails = response.getResult();
-                if (xMPPLoginDetails != null) {
-
+                if (response != null && response.getResult() != null) {
+                    XMPPLoginDetails xMPPLoginDetails = response.getResult();
                     GPXMPPClient xMPPClient = new GPXMPPClient();
                     xMPPClient.userXMPPLogin(xMPPLoginDetails.getUsername(),
                             xMPPLoginDetails.getPassword(), xMPPLoginDetails.getHostXmppServer());

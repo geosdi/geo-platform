@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.cas;
 
-import org.geosdi.geoplatform.gui.server.command.login.sso.*;
 import com.google.common.base.Preconditions;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginRequest;
+import org.geosdi.geoplatform.gui.client.command.login.cas.XMPPCASGetDataLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -62,24 +61,33 @@ import org.springframework.stereotype.Component;
 @Component(value = "command.login.XMPPCASGetDataLoginCommand")
 @Profile(value = "cas")
 public class XMPPCASGetDataLoginCommand implements
-        GPCommand<XMPPGetDataLoginRequest, XMPPGetDataLoginResponse> {
+        GPCommand<XMPPCASGetDataLoginRequest, XMPPGetDataLoginResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            SSOLoginCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(XMPPCASGetDataLoginCommand.class);
     //
     @Autowired
     private ISecurityService securityService;
 
     @Override
-    public XMPPGetDataLoginResponse execute(XMPPGetDataLoginRequest request,
+    public XMPPGetDataLoginResponse execute(XMPPCASGetDataLoginRequest request,
             HttpServletRequest httpServletRequest) {
 
         Assertion assertion = (AssertionImpl) httpServletRequest.getSession().getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
+        if (assertion == null) {
+            logger.error("Cas assertion is null");
+        }
+
         String userName = assertion.getPrincipal().getName();
+
+        logger.info("Username retrieved: " + userName);
         XMPPLoginDetails xMPPLoginDetails = this.securityService.xmppGetDataLogin(
                 userName, httpServletRequest);
 
+        logger.info(xMPPLoginDetails.toString());
+
         return new XMPPGetDataLoginResponse(xMPPLoginDetails);
+
+
     }
 
     @PostConstruct

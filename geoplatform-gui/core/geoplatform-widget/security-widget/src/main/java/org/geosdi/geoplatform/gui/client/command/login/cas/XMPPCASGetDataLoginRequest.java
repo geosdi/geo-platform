@@ -33,36 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.i18n;
+package org.geosdi.geoplatform.gui.client.command.login.cas;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface StartupStrategyModuleConstants extends Constants {
+public class XMPPCASGetDataLoginRequest implements GPCommandRequest {
 
-    public static final StartupStrategyModuleConstants INSTANCE =
-            GWT.create(StartupStrategyModuleConstants.class);
+    private static final long serialVersionUID = -6434996345908209113L;
+    private String userNameToRetrieve;
 
-    @DefaultStringValue("XMPP Connection Error")
-    String XMPPConnectionErrorTitleText();
+    public String getUserNameToRetrieve() {
+        return userNameToRetrieve;
+    }
 
-    @DefaultStringValue("Failed to connect to xmpp server")
-    String XMPPConnectionErrorBodyText();
-    
-    /**
-     * start StartupCASLogIn
-     */
-    @DefaultStringValue("CAS login in corso...")
-    String StartupCASLogIn_casLoginMessageText();
+    public void setUserNameToRetrieve(String userNameToRetrieve) {
+        this.userNameToRetrieve = userNameToRetrieve;
+    }
 
-    /**
-     * start StartupConfigurationLogIn
-     */
-    @DefaultStringValue("Login in corso...")
-    String StartupConfigurationLogIn_basicLoginMessageText();
+    @Override
+    public String getCommandName() {
+        return "command.login.XMPPCASGetDataLoginCommand";
+    }
 }

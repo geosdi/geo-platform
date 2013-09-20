@@ -33,36 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.i18n;
+package org.geosdi.geoplatform.gui.client.command.login.xmpp;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
+import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface StartupStrategyModuleConstants extends Constants {
+public class XMPPGetDataLoginResponse implements GPCommandResponse<XMPPLoginDetails> {
 
-    public static final StartupStrategyModuleConstants INSTANCE =
-            GWT.create(StartupStrategyModuleConstants.class);
+    private static final long serialVersionUID = 934448621485412681L;
+    //
+    private XMPPLoginDetails xMPPLoginDetails;
 
-    @DefaultStringValue("XMPP Connection Error")
-    String XMPPConnectionErrorTitleText();
+    public XMPPGetDataLoginResponse() {
+    }
 
-    @DefaultStringValue("Failed to connect to xmpp server")
-    String XMPPConnectionErrorBodyText();
-    
-    /**
-     * start StartupCASLogIn
-     */
-    @DefaultStringValue("CAS login in corso...")
-    String StartupCASLogIn_casLoginMessageText();
+    public XMPPGetDataLoginResponse(XMPPLoginDetails xMPPLoginDetails) {
+        this.xMPPLoginDetails = xMPPLoginDetails;
+    }
 
-    /**
-     * start StartupConfigurationLogIn
-     */
-    @DefaultStringValue("Login in corso...")
-    String StartupConfigurationLogIn_basicLoginMessageText();
+    @Override
+    public XMPPLoginDetails getResult() {
+        return this.xMPPLoginDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "XMPPGetDataLoginResponse{" + "xMPPLoginDetails=" + xMPPLoginDetails + '}';
+    }
 }

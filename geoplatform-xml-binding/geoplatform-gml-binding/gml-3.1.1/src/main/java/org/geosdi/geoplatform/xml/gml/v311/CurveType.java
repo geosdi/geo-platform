@@ -9,6 +9,7 @@ package org.geosdi.geoplatform.xml.gml.v311;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.Curve;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
@@ -44,6 +45,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *
  *
  */
+@XmlRootElement(name = "Curve")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CurveType", propOrder = {
     "segments"

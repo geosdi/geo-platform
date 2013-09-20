@@ -33,41 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.jts;
-
-import com.google.common.base.Preconditions;
-import com.vividsolutions.jts.geom.Geometry;
-import java.text.MessageFormat;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+package org.geosdi.geoplatform.xml.wfs.v110;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DefaultJTSSRSParser extends AbstractJTSSRSParser {
+public interface PropertyValue {
 
-    public DefaultJTSSRSParser() {
-        super("http://www.opengis.net/gml/srs/epsg.xml#{0,number,#}");
-    }
+    Object getPropertyValue();
 
-    @Override
-    public void parseSRS(Geometry jtsGeometry,
-            AbstractGeometry gmlGeometry) throws ParserException {
-
-        Preconditions.checkNotNull(gmlGeometry,
-                "GML Geometry must not be null.");
-        Preconditions.checkNotNull(jtsGeometry,
-                "JTS Geometry must not be null.");
-
-        if ((jtsGeometry.getUserData() != null)
-                && (jtsGeometry.getUserData() instanceof String)) {
-            gmlGeometry.setSrsName((String) jtsGeometry.getUserData());
-        } else if (jtsGeometry.getSRID() != 0) {
-            gmlGeometry.setSrsName(MessageFormat.format(pattern,
-                    jtsGeometry.getSRID()));
-        }
-    }
+    void setPropertyValue(Object propertyValue);
 
 }

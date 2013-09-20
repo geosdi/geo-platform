@@ -33,41 +33,79 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gml.api.parser.jts;
+package org.geosdi.geoplatform.xml.wfs.v110;
 
-import com.google.common.base.Preconditions;
-import com.vividsolutions.jts.geom.Geometry;
-import java.text.MessageFormat;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
-import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlMixed;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DefaultJTSSRSParser extends AbstractJTSSRSParser {
+@XmlAccessorType(value = XmlAccessType.FIELD)
+@XmlType(name = "PropertyValueType", propOrder = {"propertyValue"})
+public class PropertyValueType implements PropertyValue {
 
-    public DefaultJTSSRSParser() {
-        super("http://www.opengis.net/gml/srs/epsg.xml#{0,number,#}");
+    @XmlMixed
+    @XmlAnyElement(lax = true)
+    private Object propertyValue;
+
+    public PropertyValueType() {
+    }
+
+    public PropertyValueType(Object value) {
+        this.propertyValue = value;
+    }
+
+    /**
+     * @return the propertyValue
+     */
+    @Override
+    public Object getPropertyValue() {
+        return (propertyValue instanceof JAXBElement)
+                ? ((JAXBElement) propertyValue).getValue() : propertyValue;
+    }
+
+    /**
+     * @param propertyValue the propertyValue to set
+     */
+    @Override
+    public void setPropertyValue(Object propertyValue) {
+        this.propertyValue = propertyValue;
     }
 
     @Override
-    public void parseSRS(Geometry jtsGeometry,
-            AbstractGeometry gmlGeometry) throws ParserException {
+    public String toString() {
+        return "PropertyValueType{ " + "value = " + getPropertyValue() + '}';
+    }
 
-        Preconditions.checkNotNull(gmlGeometry,
-                "GML Geometry must not be null.");
-        Preconditions.checkNotNull(jtsGeometry,
-                "JTS Geometry must not be null.");
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + (this.getPropertyValue() != null
+                ? this.getPropertyValue().hashCode() : 0);
+        return hash;
+    }
 
-        if ((jtsGeometry.getUserData() != null)
-                && (jtsGeometry.getUserData() instanceof String)) {
-            gmlGeometry.setSrsName((String) jtsGeometry.getUserData());
-        } else if (jtsGeometry.getSRID() != 0) {
-            gmlGeometry.setSrsName(MessageFormat.format(pattern,
-                    jtsGeometry.getSRID()));
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
         }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PropertyValueType other = (PropertyValueType) obj;
+        if (this.getPropertyValue() != other.getPropertyValue() && (this.getPropertyValue() == null || !this.propertyValue.equals(
+                other.propertyValue))) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.gml.api.LineStringProperty;
 import org.geosdi.geoplatform.gml.api.MultiLineString;
@@ -42,6 +43,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *
  *
  */
+@XmlRootElement(name = "MultiLineString")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MultiLineStringType", propOrder = {
     "lineStringMember"

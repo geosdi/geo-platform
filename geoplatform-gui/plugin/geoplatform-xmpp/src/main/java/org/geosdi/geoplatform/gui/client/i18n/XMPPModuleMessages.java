@@ -47,4 +47,6 @@ public interface XMPPModuleMessages extends Messages {
     public final static XMPPModuleMessages INSTANCE = GWT.create(XMPPModuleMessages.class);
 
     String presenceReceivedFromMessage(String from, String presente);
+
+    String xmppCurrentStatusMessage(String status);
 }

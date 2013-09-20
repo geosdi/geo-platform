@@ -83,19 +83,26 @@ public class GPXMPPClient {
 
         // Usefull to debug the code
         sessionXmpp.addSessionStateChangedHandler(true, new StateChangedHandler() {
+
             @Override
             public void onStateChanged(StateChangedEvent event) {
                 if (event.is(SessionStates.loggedIn)) {
-                    GeoPlatformMessage.infoMessage("XMPP Connection",
-                            "We are now online");
+                    GeoPlatformMessage.infoMessage(XMPPModuleConstants.
+                            INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
+                            XMPPModuleConstants.
+                            INSTANCE.GPXMPPClient_statusOnlineText());
                     System.out.println("We are now online");
                 } else if (event.is(SessionStates.disconnected)) {
-                    GeoPlatformMessage.infoMessage("XMPP Connection",
-                            "We are now offline");
+                    GeoPlatformMessage.infoMessage(XMPPModuleConstants.
+                            INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
+                            XMPPModuleConstants.
+                            INSTANCE.GPXMPPClient_statusOffLineText());
                     System.out.println("We are now offline");
                 } else {
-                    GeoPlatformMessage.infoMessage("XMPP Connection",
-                            "Current state: " + event.getState());
+                    GeoPlatformMessage.infoMessage(XMPPModuleConstants.
+                            INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
+                            XMPPModuleMessages.INSTANCE.
+                            xmppCurrentStatusMessage(event.getState()));
                     System.out.println("Current state: " + event.getState());
                 }
             }
@@ -105,6 +112,7 @@ public class GPXMPPClient {
          * We show (log) every incoming presence stanzas
          */
         sessionXmpp.addPresenceReceivedHandler(new PresenceHandler() {
+
             @Override
             public void onPresence(PresenceEvent event) {
                 Presence presence = event.getPresence();
@@ -121,6 +129,7 @@ public class GPXMPPClient {
          * We show every incoming message in the GWT log console
          */
         sessionXmpp.addMessageReceivedHandler(new MessageHandler() {
+
             @Override
             public void onMessage(MessageEvent event) {
                 Message message = event.getMessage();
@@ -147,8 +156,8 @@ public class GPXMPPClient {
                     }
                 }
 
-                String subject = message.getSubject() == null ? 
-                        XMPPModuleConstants.INSTANCE.GPXMPPClient_newMessageText() 
+                String subject = message.getSubject() == null
+                        ? XMPPModuleConstants.INSTANCE.GPXMPPClient_newMessageText()
                         : message.getSubject();
                 GeoPlatformMessage.infoMessage(subject, message.getBody());
             }

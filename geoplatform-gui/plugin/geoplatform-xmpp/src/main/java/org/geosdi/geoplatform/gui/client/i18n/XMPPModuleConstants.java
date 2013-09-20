@@ -53,6 +53,12 @@ public interface XMPPModuleConstants extends Constants {
     @DefaultStringValue("XMPP Connection")
     String GPXMPPClient_xmppConnectionInfoText();
 
+    @DefaultStringValue("We are now online")
+    String GPXMPPClient_statusOnlineText();
+
+    @DefaultStringValue("We are now offline")
+    String GPXMPPClient_statusOffLineText();
+
     @DefaultStringValue("NEW Message")
     String GPXMPPClient_newMessageText();
 }

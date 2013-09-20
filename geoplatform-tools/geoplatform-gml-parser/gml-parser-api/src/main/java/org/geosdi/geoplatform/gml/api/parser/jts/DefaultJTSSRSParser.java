@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 public class DefaultJTSSRSParser extends AbstractJTSSRSParser {
 
     public DefaultJTSSRSParser() {
-        super("urn:ogc:def:crs:EPSG::{0,number,#}");
+        super("http://www.opengis.net/gml/srs/epsg.xml#{0,number,#}");
     }
 
     @Override
@@ -69,4 +69,5 @@ public class DefaultJTSSRSParser extends AbstractJTSSRSParser {
                     jtsGeometry.getSRID()));
         }
     }
+
 }

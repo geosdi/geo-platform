@@ -86,10 +86,16 @@ public class GPXMPPClient {
             @Override
             public void onStateChanged(StateChangedEvent event) {
                 if (event.is(SessionStates.loggedIn)) {
+                    GeoPlatformMessage.infoMessage("XMPP Connection",
+                            "We are now online");
                     System.out.println("We are now online");
                 } else if (event.is(SessionStates.disconnected)) {
+                    GeoPlatformMessage.infoMessage("XMPP Connection",
+                            "We are now offline");
                     System.out.println("We are now offline");
                 } else {
+                    GeoPlatformMessage.infoMessage("XMPP Connection",
+                            "Current state: " + event.getState());
                     System.out.println("Current state: " + event.getState());
                 }
             }

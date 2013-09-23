@@ -167,7 +167,7 @@ public class DTOLayerConverter {
             try {
                 String dimension = this.sharedRestReader.getDimensions(layerDTO.getTitle());
                 if (!dimension.contains("<h2>")) {
-                    List<String> dimensionList = Lists.newArrayList(dimension.split(","));
+                    List<String> dimensionList = Lists.<String>newArrayList(dimension.split(","));
 
                     String[] timeFilterSplitted = layerDTO.getTimeFilter().split("/");
                     int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);

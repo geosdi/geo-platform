@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.xml.wfs.v110;
 
+import java.util.Arrays;
+import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -53,13 +55,13 @@ public class PropertyValueType implements PropertyValue {
 
     @XmlMixed
     @XmlAnyElement(lax = true)
-    private Object propertyValue;
+    private List<Object> propertyValue;
 
     public PropertyValueType() {
     }
 
     public PropertyValueType(Object value) {
-        this.propertyValue = value;
+        this.propertyValue = Arrays.asList(value);
     }
 
     /**
@@ -67,8 +69,12 @@ public class PropertyValueType implements PropertyValue {
      */
     @Override
     public Object getPropertyValue() {
-        return (propertyValue instanceof JAXBElement)
-                ? ((JAXBElement) propertyValue).getValue() : propertyValue;
+        if (propertyValue.size() == 1) {
+            return (propertyValue.get(0) instanceof JAXBElement)
+                    ? ((JAXBElement) propertyValue.get(0)).getValue()
+                    : propertyValue.get(0);
+        }
+        return propertyValue;
     }
 
     /**
@@ -76,7 +82,7 @@ public class PropertyValueType implements PropertyValue {
      */
     @Override
     public void setPropertyValue(Object propertyValue) {
-        this.propertyValue = propertyValue;
+        this.propertyValue = Arrays.asList(propertyValue);
     }
 
     @Override

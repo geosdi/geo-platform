@@ -123,6 +123,9 @@ public interface LayerModuleConstants extends Constants {
     /**
      * start LayerTimeFilterWidget
      */
+    @DefaultStringValue("Time Filter Message")
+    String LayerTimeFilterWidget_timeFilterMessageTitleText();
+    
     @DefaultStringValue("Time Filter Warning")
     String LayerTimeFilterWidget_timeFilterWarningTitleText();
 

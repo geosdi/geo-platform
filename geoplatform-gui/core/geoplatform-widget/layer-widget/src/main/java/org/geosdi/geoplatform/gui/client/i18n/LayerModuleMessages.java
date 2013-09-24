@@ -71,4 +71,6 @@ public interface LayerModuleMessages extends Messages {
     String GPFolderNameFieldBinding_folderInfoHTMLMessage(int numberOfDescendants);
     
     String LayerTimeFilterWidget_dimensionSizeHTMLMessage(int dimensionSize);
+    
+    String LayerTimeFilterWidget_layerStatusShowedMessage(String timeFilter);
 }

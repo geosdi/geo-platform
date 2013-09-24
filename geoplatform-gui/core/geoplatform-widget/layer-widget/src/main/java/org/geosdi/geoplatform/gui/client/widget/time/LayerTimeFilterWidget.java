@@ -469,10 +469,12 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
     }
 
     private void stopPlayer() {
-        playButton.toggle(Boolean.FALSE);
-        playSelectioListener.componentSelected(null);
-        //This call produce the update in map
-        applyFilterSelectionListener.componentSelected(null);
+        if (playButton.isPressed()) {
+            playButton.toggle(Boolean.FALSE);
+            playSelectioListener.componentSelected(null);
+            //This call produce the update in map
+            applyFilterSelectionListener.componentSelected(null);
+        }
     }
 
     private boolean checkStartFieldValue() {

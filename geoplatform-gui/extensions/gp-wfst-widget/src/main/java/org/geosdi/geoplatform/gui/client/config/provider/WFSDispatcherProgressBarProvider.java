@@ -33,18 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.WFSDispatcherProgressBar;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
+public class WFSDispatcherProgressBarProvider implements
+        Provider<WFSDispatcherProgressBar> {
 
     @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
+    public WFSDispatcherProgressBar get() {
+        return new WFSDispatcherProgressBar();
     }
+
 }

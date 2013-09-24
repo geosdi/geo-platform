@@ -33,18 +33,57 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import com.extjs.gxt.ui.client.widget.ProgressBar;
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
-
-    @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
+public class WFSDispatcherProgressBar extends GeoPlatformWindow {
+    
+    private final ProgressBar pb = new ProgressBar();
+    
+    public WFSDispatcherProgressBar() {
+        super(true);
+        
+        super.setMinHeight(50);
+        
+        super.setFocusWidget(pb);
     }
+    
+    @Override
+    public void addComponent() {
+        super.add(pb);
+    }
+    
+    @Override
+    public void initSize() {
+        super.setSize(300, 50);
+    }
+    
+    @Override
+    public void show() {
+        super.show();
+        pb.auto();
+    }
+    
+    @Override
+    public void hide() {
+        this.pb.reset();
+        super.hide();
+    }
+    
+    @Override
+    public void setWindowProperties() {
+        super.setHeadingHtml("WFS Progress Bar");
+        super.setClosable(false);
+
+        super.setResizable(false);
+        super.setPlain(true);
+    }
+    
 }

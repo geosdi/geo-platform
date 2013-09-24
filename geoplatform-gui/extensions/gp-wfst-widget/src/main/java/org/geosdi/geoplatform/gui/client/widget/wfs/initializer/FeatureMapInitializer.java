@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.initializer;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Timer;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
@@ -78,11 +79,12 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     private InjectGetFeatureModelEvent injectGetFeatureModelEvent;
     private GPEventBus bus;
     private Layer wms;
-    private ResetToolbarObserverEvent reset;
-    
+
     @Inject
     public FeatureMapInitializer(GPEventBus theBus) {
         this.bus = theBus;
+
+        addFeatureMapInitializerHandler();
     }
 
     @Override
@@ -90,10 +92,10 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         final GPLayerBean layer = layerSchemaBinder.getSelectedLayer();
         this.wms = this.mapLayerBuilder.buildLayer(layer);
         this.injectGetFeatureModelEvent.setWms(wms);
-             
+
         WFSGetFeatureControl.fireInjectGetFeatureModelEvent(
                 injectGetFeatureModelEvent);
-        
+
         Timer t = new Timer() {
 
             @Override
@@ -125,9 +127,21 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         this.mapWidget.getMap().setCenter(italyLonLat, 4);
     }
 
+    @Override
+    public final HandlerRegistration addFeatureMapInitializerHandler() {
+        return this.bus.addHandler(TYPE, this);
+    }
+
+    @Override
+    public void redrawWMSLayer() {
+        ((WMS) this.wms).redraw(true);
+    }
+
     protected void loadLayerOnMap() {
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
+        
+        ((WMS) wms).redraw(true);
 
         Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
         this.mapWidget.getMap().zoomToExtent(bb);

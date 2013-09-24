@@ -33,18 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.server.command.wfst.feature;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import java.util.Arrays;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.server.IWFSLayerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
+@Lazy(true)
+@Component(value = "command.wfst.feature.UpdateFeatureGeometryCommand")
+public class UpdateFeatureGeometryCommand implements
+        GPCommand<UpdateFeatureGeometryRequest, UpdateFeatureGeometryResponse> {
+
+    private static final Logger logger = LoggerFactory.getLogger(
+            UpdateFeatureGeometryCommand.class);
+    //
+    @Autowired
+    private IWFSLayerService wfsLayerService;
 
     @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
+    public UpdateFeatureGeometryResponse execute(
+            UpdateFeatureGeometryRequest request,
+            HttpServletRequest httpServletRequest) {
+
+        logger.debug("##################### Executing {} Command", this.
+                getClass().getSimpleName());
+
+        boolean result = this.wfsLayerService.transactionUpdate(
+                request.getServerUrl(), request.getTypeName(), request.getFid(),
+                Arrays.asList(request.buildGeometryAttribute()));
+
+        logger.debug("##################### Geometry Update : {}", result);
+
+        return new UpdateFeatureGeometryResponse(result);
     }
+
 }

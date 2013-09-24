@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.gwtopenmaps.openlayers.client.MapWidget;
@@ -45,7 +45,7 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IFeatureMapWidget extends IFeatureMapSizeHandler {
+public interface IFeatureMapWidget extends IFeatureMapHandler {
 
     /**
      * Build WMS from {@link GPLayerBean}

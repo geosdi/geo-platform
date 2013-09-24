@@ -35,17 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.initializer;
 
+import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.IFeatureMapInitializerHandler;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IFeatureMapInitializer {
+public interface IFeatureMapInitializer extends IFeatureMapInitializerHandler {
 
     void bindLayerSchema();
 
     void resetMapWidget();
 
     void initMapWidget();
+
+    HandlerRegistration addFeatureMapInitializerHandler();
 
 }

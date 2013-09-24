@@ -33,18 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.client.config.annotation;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import com.google.inject.BindingAnnotation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
+@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@BindingAnnotation
+public @interface StatusBarLoadingEvent {
 
-    @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
-    }
 }

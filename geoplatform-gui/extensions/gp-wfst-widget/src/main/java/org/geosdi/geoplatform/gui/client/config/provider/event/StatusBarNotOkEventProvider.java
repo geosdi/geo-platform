@@ -33,18 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.client.config.provider.event;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
+public class StatusBarNotOkEventProvider extends GenericStatusBarEventProvider {
 
     @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
+    public FeatureStatusBarEvent get() {
+        return new FeatureStatusBarEvent("WFS Update Geometry not done.",
+                FeatureStatusBar.FeatureStatusBarType.STATUS_NOT_OK);
     }
+
 }

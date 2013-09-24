@@ -33,18 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.client.puregwt.map.initializer;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.event.RedrawWMSLayerEvent;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
+public interface IFeatureMapInitializerHandler extends EventHandler {
 
-    @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
-    }
+    public static final RedrawWMSLayerEvent REDRAW_EVENT = new RedrawWMSLayerEvent();
+    //
+    GwtEvent.Type<IFeatureMapInitializerHandler> TYPE = new GwtEvent.Type<IFeatureMapInitializerHandler>();
+
+    void redrawWMSLayer();
+
 }

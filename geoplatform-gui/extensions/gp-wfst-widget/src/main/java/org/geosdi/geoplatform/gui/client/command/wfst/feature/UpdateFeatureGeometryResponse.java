@@ -33,18 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.client.command.wfst.feature;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
+public class UpdateFeatureGeometryResponse implements GPCommandResponse<Boolean> {
+
+    private static final long serialVersionUID = -3860149957871244521L;
+    //
+    private boolean result;
+
+    public UpdateFeatureGeometryResponse() {
+    }
+
+    public UpdateFeatureGeometryResponse(boolean theResult) {
+        this.result = theResult;
+    }
 
     @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
+    public Boolean getResult() {
+        return this.result;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName() + " {" + "result = " + result + '}';
+    }
+
 }

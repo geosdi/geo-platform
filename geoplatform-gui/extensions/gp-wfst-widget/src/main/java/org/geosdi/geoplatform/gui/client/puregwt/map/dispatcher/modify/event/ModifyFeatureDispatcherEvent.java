@@ -33,24 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map;
+package org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.modify.event;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler;
+import static org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler.TYPE;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IFeatureMapSizeHandler extends EventHandler {
+public class ModifyFeatureDispatcherEvent extends FeatureDispatcherHandler.FeatureDispatcherEvent {
 
-    public static final Type<IFeatureMapSizeHandler> TYPE = new Type<IFeatureMapSizeHandler>();
+    private VectorFeature modifiedFeature;
+    private String wktGeometry;
+    private VectorFeature oldFeature;
 
-    void increaseWidth(int width);
+    /**
+     * @param theModifiedFeature the modifiedFeature to set
+     */
+    public void setModifiedFeature(VectorFeature theModifiedFeature) {
+        this.modifiedFeature = theModifiedFeature;
+    }
 
-    void decreaseWidth();
+    /**
+     * @param theWKTGeometry the wktGeometry to set
+     */
+    public void setWktGeometry(String theWKTGeometry) {
+        this.wktGeometry = theWKTGeometry;
+    }
 
-    void increaseHeight(int height);
+    /**
+     * @param theOldFeature the oldFeature to set
+     */
+    public void setOldFeature(VectorFeature theOldFeature) {
+        this.oldFeature = theOldFeature;
+    }
 
-    void decreaseHeight();
+    @Override
+    public Type<FeatureDispatcherHandler> getAssociatedType() {
+        return TYPE;
+    }
+
+    @Override
+    protected void dispatch(FeatureDispatcherHandler handler) {
+        handler.updateGeometry(modifiedFeature, wktGeometry, oldFeature);
+    }
+
 }

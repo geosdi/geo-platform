@@ -37,6 +37,10 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain;
 
 import org.geosdi.geoplatform.gui.client.editor.map.control.ModifyEditorFeature;
 import org.geosdi.geoplatform.gui.client.editor.map.chain.MultiPointEditorHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.modify.event.ModifyFeatureDispatcherEvent;
+import static org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.chain.WFSMultiPolygonFeatureHandler.event;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.WFSFeatureDispatcher;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -49,6 +53,8 @@ import org.gwtopenmaps.openlayers.client.geometry.Geometry;
  */
 public class WFSMultiPointFeatureHandler extends MultiPointEditorHandler {
 
+    public static final ModifyFeatureDispatcherEvent event = FeatureDispatcherHandler.MODIFY_FEATURE_EVENT;
+
     public WFSMultiPointFeatureHandler(
             ModifyEditorFeature theModifyEditorControl) {
         super(theModifyEditorControl);
@@ -58,12 +64,18 @@ public class WFSMultiPointFeatureHandler extends MultiPointEditorHandler {
     }
 
     @Override
-    protected void manageUpdatedFeature(VectorFeature vf) {
-        Geometry geom = vf.getGeometry().clone();
-        System.out.println("WFSMultiPointFeatureHandler manageUpdatedFeature@@@"
-                + "@@@@@@@@@@@@@@@@@@@@@" + modifyEditorControl.getWKTEditorConverter().convertGeometry(
+    protected void manageUpdatedFeature(VectorFeature modifiedFeature,
+            VectorFeature oldFeature) {
+        Geometry geom = modifiedFeature.getGeometry().clone();
+        String wktGeometry = modifyEditorControl.getWKTEditorConverter().convertGeometry(
                 geom, new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode())));
+                GPCoordinateReferenceSystem.WGS_84.getCode()));
+
+        event.setModifiedFeature(modifiedFeature);
+        event.setOldFeature(oldFeature);
+        event.setWktGeometry(wktGeometry);
+
+        WFSFeatureDispatcher.fireFeatureDispatcherEvent(event);
     }
 
 }

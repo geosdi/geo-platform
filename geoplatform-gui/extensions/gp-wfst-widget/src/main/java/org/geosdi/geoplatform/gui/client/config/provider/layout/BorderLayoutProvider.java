@@ -62,23 +62,30 @@ public class BorderLayoutProvider implements Provider<BorderLayout> {
     @Override
     public BorderLayout get() {
         return new BorderLayout() {
+
             {
                 super.addListener(Events.Expand,
                         new Listener<BorderLayoutEvent>() {
+
                     @Override
                     public void handleEvent(BorderLayoutEvent be) {
                         selectionLayoutHandler.manageLayout(be.getPanel());
                     }
+
                 });
 
                 super.addListener(Events.AfterLayout,
                         new Listener<LayoutEvent>() {
+
                     @Override
                     public void handleEvent(LayoutEvent be) {
                         ((IFeatureWidget) be.getContainer()).manageWidgetsSize();
                     }
+
                 });
             }
+
         };
     }
+
 }

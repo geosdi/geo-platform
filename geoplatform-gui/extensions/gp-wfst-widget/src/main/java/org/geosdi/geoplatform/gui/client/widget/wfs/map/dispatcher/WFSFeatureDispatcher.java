@@ -33,69 +33,62 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher;
 
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.LayerSchemaHandlerManager;
-import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
-import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
-import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryResponse;
+import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarFailedEvent;
+import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarLoadingEvent;
+import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarNotOkEvent;
+import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarSuccessEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPDescribeFeatureDispatcher implements DescribeFeatureDispatcher {
-
-    private LayerSchemaHandlerManager layerSchemaManager;
-    private DescribeFeatureTypeRequest describeFeatureRequest = new DescribeFeatureTypeRequest();
+public class WFSFeatureDispatcher extends AbstractFeatureDispatcher {
 
     @Inject
-    public GPDescribeFeatureDispatcher(
-            LayerSchemaHandlerManager theLayerSchemaManager) {
-        this.layerSchemaManager = theLayerSchemaManager;
+    public WFSFeatureDispatcher(
+            @StatusBarLoadingEvent FeatureStatusBarEvent theLoadingEvent,
+            @StatusBarSuccessEvent FeatureStatusBarEvent theSuccessEvent,
+            @StatusBarNotOkEvent FeatureStatusBarEvent theStatusNotOk,
+            @StatusBarFailedEvent FeatureStatusBarEvent theFailedEvent) {
+        super(theLoadingEvent, theSuccessEvent, theStatusNotOk, theFailedEvent);
+
+        super.addFeatureDispatcherHandler();
     }
 
     @Override
-    public void dispatchDescribeFeatureRequest(final GPLayerBean layer) {
-        this.describeFeatureRequest.setServerUrl(layer.getDataSource());
-        this.describeFeatureRequest.setTypeName(layer.getName());
+    public void updateGeometry(final VectorFeature modifiedFeature,
+            String wktGeometry, final VectorFeature oldFeature) {
+        progressBar.show();
+
+        super.setUpRequest(modifiedFeature, wktGeometry);
 
         ClientCommandDispatcher.getInstance().execute(
-                new GPClientCommand<DescribeFeatureTypeResponse>() {
+                new GPClientCommand<UpdateFeatureGeometryResponse>() {
 
-            private static final long serialVersionUID = 6130617748457405063L;
+            private static final long serialVersionUID = 5836033208636357032L;
 
             {
-                super.setCommandRequest(describeFeatureRequest);
+                super.setCommandRequest(updateGeometryRequest);
             }
 
             @Override
-            public void onCommandSuccess(DescribeFeatureTypeResponse response) {
-                layerSchemaManager.forwardLayerSchema(response.getResult(),
-                        layer);
+            public void onCommandSuccess(UpdateFeatureGeometryResponse response) {
+                manageCommandSuccess(response.getResult(), modifiedFeature,
+                        oldFeature);
             }
 
             @Override
             public void onCommandFailure(Throwable exception) {
-                String errorMessage = WFSTWidgetConstants.INSTANCE.
-                        GPDescribeFeatureDispatcher_errorDescribeFeatureTypeRequestText();
-
-                GeoPlatformMessage.errorMessage(WFSTWidgetConstants.INSTANCE.
-                        GPDescribeFeatureDispatcher_errorDescribeFeatureTypeTitleText(),
-                        errorMessage + " - " + exception.getMessage());
-
-                LayoutManager.getInstance().getStatusMap().setStatus(
-                        WFSTWidgetMessages.INSTANCE.errorFeatureTypeRequestForLayerMessage(
-                        errorMessage, layer.getName()),
-                        SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                manageCommandFailure(modifiedFeature, oldFeature, exception);
             }
 
         });

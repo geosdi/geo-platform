@@ -35,9 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import java.util.List;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.server.IWFSLayerService;
@@ -81,8 +83,7 @@ public class WFSLayerService implements IWFSLayerService {
 
     @Override
     public FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
-            int maxFeatures)
-            throws GeoPlatformException {
+            int maxFeatures) throws GeoPlatformException {
 
         try {
             return geoPlatformWFSClient.getAllFeatureDirect(serverUrl, typeName,
@@ -93,6 +94,20 @@ public class WFSLayerService implements IWFSLayerService {
         } catch (IllegalParameterFault ex) {
             logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
             throw new GeoPlatformException(ex.getMessage());
+        } catch (Exception ex) {
+            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
+            throw new GeoPlatformException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public boolean transactionUpdate(String serverURL, String typeName,
+            String fid, List<? extends AttributeDTO> attributes)
+            throws GeoPlatformException {
+
+        try {
+            return this.geoPlatformWFSClient.transactionUpdate(serverURL,
+                    typeName, fid, attributes);
         } catch (Exception ex) {
             logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
             throw new GeoPlatformException(ex.getMessage());

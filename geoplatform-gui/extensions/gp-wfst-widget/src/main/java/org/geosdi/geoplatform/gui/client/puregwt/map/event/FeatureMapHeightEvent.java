@@ -36,14 +36,14 @@
 package org.geosdi.geoplatform.gui.client.puregwt.map.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class FeatureMapHeightEvent
-        extends GwtEvent<IFeatureMapSizeHandler> {
+        extends GwtEvent<IFeatureMapHandler> {
 
     protected int height;
 
@@ -55,7 +55,7 @@ public abstract class FeatureMapHeightEvent
     }
 
     @Override
-    public Type<IFeatureMapSizeHandler> getAssociatedType() {
-        return IFeatureMapSizeHandler.TYPE;
+    public Type<IFeatureMapHandler> getAssociatedType() {
+        return IFeatureMapHandler.TYPE;
     }
 }

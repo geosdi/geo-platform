@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.puregwt.map.event;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapSizeHandler;
 public class DecreaseHeightEvent extends FeatureMapHeightEvent {
 
     @Override
-    protected void dispatch(IFeatureMapSizeHandler handler) {
+    protected void dispatch(IFeatureMapHandler handler) {
         handler.decreaseHeight();
     }
 }

@@ -33,18 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.modify.event.ModifyFeatureDispatcherEvent;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
+public interface FeatureDispatcherHandler extends EventHandler {
 
-    @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
+    static final ModifyFeatureDispatcherEvent MODIFY_FEATURE_EVENT = new ModifyFeatureDispatcherEvent();
+    //
+    GwtEvent.Type<FeatureDispatcherHandler> TYPE = new GwtEvent.Type<FeatureDispatcherHandler>();
+
+    void updateGeometry(VectorFeature modifiedFeature, String wktGeometry,
+            VectorFeature oldFeature);
+
+    abstract class FeatureDispatcherEvent extends GwtEvent<FeatureDispatcherHandler> {
+
+        @Override
+        public GwtEvent.Type<FeatureDispatcherHandler> getAssociatedType() {
+            return FeatureDispatcherHandler.TYPE;
+        }
+
     }
+
 }

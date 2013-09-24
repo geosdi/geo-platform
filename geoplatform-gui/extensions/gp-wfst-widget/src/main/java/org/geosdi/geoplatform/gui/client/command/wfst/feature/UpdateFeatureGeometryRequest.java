@@ -33,18 +33,81 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.client.command.wfst.feature;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
+import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
+public class UpdateFeatureGeometryRequest extends WFSTRequest {
+
+    private static final long serialVersionUID = 6508383449603270966L;
+    //
+    private String fid;
+    private String geometryAttributeName;
+    private String wktGeometry;
+
+    public UpdateFeatureGeometryRequest() {
+    }
+
+    /**
+     * @return the fid
+     */
+    public String getFid() {
+        return fid;
+    }
+
+    /**
+     * @param fid the fid to set
+     */
+    public void setFid(String fid) {
+        this.fid = fid;
+    }
+
+    /**
+     * @return the geometryAttributeName
+     */
+    public String getGeometryAttributeName() {
+        return geometryAttributeName;
+    }
+
+    /**
+     * @param geometryAttributeName the geometryAttributeName to set
+     */
+    public void setGeometryAttributeName(String geometryAttributeName) {
+        this.geometryAttributeName = geometryAttributeName;
+    }
+
+    /**
+     * @return the wktGeometry
+     */
+    public String getWktGeometry() {
+        return wktGeometry;
+    }
+
+    /**
+     * @param wktGeometry the wktGeometry to set
+     */
+    public void setWktGeometry(String wktGeometry) {
+        this.wktGeometry = wktGeometry;
+    }
+
+    public GeometryAttributeDTO buildGeometryAttribute() {
+        GeometryAttributeDTO geometryAttr = new GeometryAttributeDTO();
+        geometryAttr.setName(this.geometryAttributeName);
+        geometryAttr.setValue(wktGeometry);
+        geometryAttr.setSrid(new Integer(4326));
+
+        return geometryAttr;
+    }
 
     @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
+    public String getCommandName() {
+        return "command.wfst.feature.UpdateFeatureGeometryCommand";
     }
+
 }

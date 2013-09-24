@@ -33,18 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.map.event;
+package org.geosdi.geoplatform.gui.client.config;
 
-import org.geosdi.geoplatform.gui.client.puregwt.map.IFeatureMapHandler;
+import com.google.gwt.inject.client.AbstractGinModule;
+import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarFailedEvent;
+import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarLoadingEvent;
+import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarNotOkEvent;
+import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarSuccessEvent;
+import org.geosdi.geoplatform.gui.client.config.provider.event.StatusBarFailedEventProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.event.StatusBarLoadingEventProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.event.StatusBarNotOkEventProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.event.StatusBarSuccessEventProvider;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DecreaseWidthEvent extends FeatureMapWidthEvent {
+public class FeatureInjectorEventProvider extends AbstractGinModule {
 
     @Override
-    protected void dispatch(IFeatureMapHandler handler) {
-        handler.decreaseWidth();
+    protected void configure() {
+        bind(FeatureStatusBarEvent.class).annotatedWith(
+                StatusBarFailedEvent.class).toProvider(
+                StatusBarFailedEventProvider.class);
+
+        bind(FeatureStatusBarEvent.class).annotatedWith(
+                StatusBarLoadingEvent.class).toProvider(
+                StatusBarLoadingEventProvider.class);
+
+        bind(FeatureStatusBarEvent.class).annotatedWith(
+                StatusBarNotOkEvent.class).toProvider(
+                StatusBarNotOkEventProvider.class);
+
+        bind(FeatureStatusBarEvent.class).annotatedWith(
+                StatusBarSuccessEvent.class).toProvider(
+                StatusBarSuccessEventProvider.class);
     }
+
 }

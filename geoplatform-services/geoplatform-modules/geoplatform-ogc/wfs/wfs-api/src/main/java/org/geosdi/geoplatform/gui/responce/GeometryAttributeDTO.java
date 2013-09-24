@@ -38,8 +38,28 @@ package org.geosdi.geoplatform.gui.responce;
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeometryAttributeDTO extends AttributeDTO {
 
     private static final long serialVersionUID = -6072427480605619374L;
+    //
+    private Integer srid;
+
+    /**
+     * @return the srid
+     */
+    public Integer getSrid() {
+        return srid;
+    }
+
+    /**
+     * @param srid the srid to set
+     */
+    public void setSrid(Integer srid) {
+        this.srid = srid;
+    }
+
 }

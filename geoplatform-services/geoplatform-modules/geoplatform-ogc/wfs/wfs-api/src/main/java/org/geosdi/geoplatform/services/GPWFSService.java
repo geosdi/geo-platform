@@ -53,7 +53,7 @@ import org.geosdi.geoplatform.gui.shared.bean.BBox;
  * @email francesco.izzi@geosdi.org
  */
 @WebService(name = "GPWFSService",
-            targetNamespace = "http://services.geo-platform.org/")
+        targetNamespace = "http://services.geo-platform.org/")
 public interface GPWFSService {
 
     @Get
@@ -106,6 +106,7 @@ public interface GPWFSService {
             @WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName,
             @WebParam(name = "fid") String fid,
-            @WebParam(name = "attributes") List<AttributeDTO> attributes)
+            @WebParam(name = "attributes") List<? extends AttributeDTO> attributes)
             throws Exception;
+
 }

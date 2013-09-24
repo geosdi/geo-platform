@@ -76,10 +76,12 @@ public class GPWFSServiceImpl implements GPWFSService {
     }
 
     @Override
-    public FeatureDTO getFeatureByFIDDirect(String serverURL, String typeName, String fid)
+    public FeatureDTO getFeatureByFIDDirect(String serverURL, String typeName,
+            String fid)
             throws Exception {
 
-        LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName);
+        LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL,
+                typeName);
         return this.getFeatureByFID(layerSchema, fid);
     }
 
@@ -91,38 +93,46 @@ public class GPWFSServiceImpl implements GPWFSService {
     }
 
     @Override
-    public FeatureCollectionDTO getFeatureByBBoxDirect(String serverURL, String typeName, BBox bBox)
+    public FeatureCollectionDTO getFeatureByBBoxDirect(String serverURL,
+            String typeName, BBox bBox)
             throws Exception {
 
-        LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName);
+        LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL,
+                typeName);
         return this.getFeatureByBBox(layerSchema, bBox);
     }
 
     @Override
-    public FeatureCollectionDTO getFeatureByBBox(LayerSchemaDTO layerSchema, BBox bBox)
+    public FeatureCollectionDTO getFeatureByBBox(LayerSchemaDTO layerSchema,
+            BBox bBox)
             throws Exception {
 
         return gpGetFeatureService.getFeature(layerSchema, bBox);
     }
 
     @Override
-    public FeatureCollectionDTO getAllFeatureDirect(String serverURL, String typeName, int maxFeatures)
+    public FeatureCollectionDTO getAllFeatureDirect(String serverURL,
+            String typeName, int maxFeatures)
             throws Exception {
-        LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL, typeName);
+        LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL,
+                typeName);
         return this.getAllFeature(layerSchema, maxFeatures);
     }
 
     @Override
-    public FeatureCollectionDTO getAllFeature(LayerSchemaDTO layerSchema, int maxFeatures)
+    public FeatureCollectionDTO getAllFeature(LayerSchemaDTO layerSchema,
+            int maxFeatures)
             throws Exception {
         return gpGetFeatureService.getFeature(layerSchema, maxFeatures);
     }
 
     @Override
     public boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<AttributeDTO> attributes)
+            String fid, List<? extends AttributeDTO> attributes)
             throws Exception {
 
-        return gpTransactionService.transactionUpdate(serverURL, typeName, fid, attributes);
+        return gpTransactionService.transactionUpdate(serverURL, typeName, fid,
+                attributes);
     }
+
 }

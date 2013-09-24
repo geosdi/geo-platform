@@ -58,8 +58,7 @@ public class GPTransactionService extends AbstractFeatureService
 
     @Override
     public boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<AttributeDTO> attributes)
-            throws Exception {
+            String fid, List<? extends AttributeDTO> attributes) throws Exception {
         assert (serverURL != null);
         assert (typeName != null);
         assert (fid != null);
@@ -79,7 +78,8 @@ public class GPTransactionService extends AbstractFeatureService
         }
 
         try {
-            GPWFSConnectorStore serverConnector = super.createWFSConnector(serverURL);
+            GPWFSConnectorStore serverConnector = super.createWFSConnector(
+                    serverURL);
             WFSTransactionRequest<TransactionResponseType> request =
                     serverConnector.createTransactionRequest();
 
@@ -104,4 +104,5 @@ public class GPTransactionService extends AbstractFeatureService
 
         return false;
     }
+
 }

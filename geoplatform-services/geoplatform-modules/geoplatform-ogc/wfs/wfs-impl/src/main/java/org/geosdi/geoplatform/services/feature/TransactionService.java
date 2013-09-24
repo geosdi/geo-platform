@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 public interface TransactionService {
 
     boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<AttributeDTO> attributes)
+            String fid, List<? extends AttributeDTO> attributes)
             throws Exception;
+
 }

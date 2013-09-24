@@ -68,7 +68,8 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
         jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
     }
     //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(
+            WFSGetFeatureStaxReader.class);
     //
     private static final GPJAXBContextBuilder jaxbContextBuilder;
     //
@@ -124,7 +125,8 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
 
                     super.goToEndTag(geometryName);
 
-                    FeatureAttributesMap attributes = this.readAttributes(name, attributeNames);
+                    FeatureAttributesMap attributes = this.readAttributes(name,
+                            attributeNames);
                     feature.setAttributes(attributes);
                 }
             }
@@ -150,7 +152,8 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
     }
 
     private FeatureDTO readFID() {
-        String featureID = reader.getAttributeValue("http://www.opengis.net/gml", "id");
+        String featureID = reader.getAttributeValue("http://www.opengis.net/gml",
+                "id");
         logger.debug("\n\n@@@ FEATURE_ID: {} @@@", featureID);
 
         FeatureDTO feature = new FeatureDTO(featureID);
@@ -173,7 +176,8 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
 
             wktWriter.setFormatted(true);
             try {
-                geometryWKT = wktWriter.writeFormatted(this.sextanteParser.parseGeometry(
+                geometryWKT = wktWriter.writeFormatted(
+                        this.sextanteParser.parseGeometry(
                         geometry));
 
                 logger.trace("WKT GEOMETRY @@@@@@@@@@@@@@@@ " + geometryWKT);
@@ -228,4 +232,5 @@ public class WFSGetFeatureStaxReader extends AbstractStaxStreamReader<FeatureCol
 
         return fMap;
     }
+
 }

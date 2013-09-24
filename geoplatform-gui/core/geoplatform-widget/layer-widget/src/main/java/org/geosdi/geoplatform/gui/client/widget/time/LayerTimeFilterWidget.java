@@ -119,13 +119,41 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
     private Label startTimeLabel;
     private Timer animationTimer;
     private SelectionListener<ButtonEvent> playSelectioListener;
-    private ToggleButton playButton;
+    private ToggleButton playButton = new ToggleButton("Play",
+            LayerResources.ICONS.playTime());
     private Slider slider;
     private CheckBox rangeCheckBox;
 
     public LayerTimeFilterWidget(boolean lazy, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(lazy);
-        this.variableDimensionContainer = new LayoutContainer(new FormLayout());
+        this.variableDimensionContainer = new LayoutContainer(new FormLayout()) {
+
+            @Override
+            protected void onAttach() {
+                super.onAttach();
+                playButton.enable();
+            }
+
+            @Override
+            protected void onHide() {
+                super.onHide();
+                stopPlayer();
+                playButton.disable();
+            }
+
+            @Override
+            protected void onShow() {
+                super.onShow();
+                playButton.enable();
+            }
+
+            @Override
+            protected void onDetach() {
+                super.onDetach();
+                stopPlayer();
+                playButton.disable();
+            }
+        };
         this.treePanel = treePanel;
     }
 
@@ -142,6 +170,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.fixedDimensionContainer.setVisible(Boolean.FALSE);
         this.variableDimensionContainer.setVisible(Boolean.FALSE);
         this.fixedDimensionRadio.addListener(Events.Change, new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent fe) {
                 if (fixedDimensionRadio.getValue()) {
@@ -151,6 +180,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
             }
         });
         this.variableDimensionRadio.addListener(Events.Change, new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent fe) {
                 if (variableDimensionRadio.getValue()) {
@@ -167,6 +197,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.startDimensionComboBox.setDisplayField(DimensionData.DIMENSION_KEY);
         this.startDimensionComboBox.setEditable(Boolean.FALSE);
         this.startDimensionComboBox.addSelectionChangedListener(new SelectionChangedListener<DimensionData>() {
+
             @Override
             public void selectionChanged(SelectionChangedEvent<DimensionData> se) {
                 if (se.getSelectedItem() != null) {
@@ -197,6 +228,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.startFilterNumberField = new NumberField();
         this.startFilterNumberField.setFireChangeEventOnSetValue(Boolean.TRUE);
         this.startFilterNumberField.addListener(Events.Change, new Listener<BaseEvent>() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 if (checkStartFieldValue()) {
@@ -223,6 +255,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         endTimeLabel = new Label();
         endTimeLabel.setStyleAttribute("font-size", "1.3em");
         this.endFilterNumberField.addListener(Events.Change, new Listener<BaseEvent>() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 if (checkEndFieldValue()) {
@@ -279,6 +312,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.variableDimensionContainer.add(portal, new FormData("99%"));
         //
         this.slider = new Slider() {
+
             @Override
             public void setValue(int value) {
                 super.setValue(value);
@@ -293,8 +327,8 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         panel.add(this.fixedDimensionContainer, new FormData("100%"));
         panel.add(this.variableDimensionContainer, new FormData("100%"));
         super.add(panel);
-        playButton = new ToggleButton("Play", LayerResources.ICONS.playTime());
         this.playSelectioListener = new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 System.out.println("Play button status: ");
@@ -327,6 +361,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
         Button apply = new Button("Apply");
         this.applyFilterSelectionListener = new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
@@ -402,6 +437,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         super.addButton(apply);
         Button close = new Button("Close",
                 new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 startFilterNumberField.clear();
@@ -417,6 +453,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
     private void playTimeFilter(final int t2Time) {
         animationTimer = new Timer() {
+
             @Override
             public void run() {
 //                    int startValue = getFielValueDecrement(startFilterNumberField);
@@ -426,15 +463,21 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                         && (startStore.getModels().size() - startValue - 1)
                         != (endFilterNumberField.getValue().intValue() - 1))) {
                     slider.setValue(++startValue);
+                    //This call produce the update in map
+                    applyFilterSelectionListener.componentSelected(null);
                 } else {
-                    playButton.toggle(Boolean.FALSE);
-                    playSelectioListener.componentSelected(null);
+                    stopPlayer();
                 }
-                //This call produce the update in map
-                applyFilterSelectionListener.componentSelected(null);
             }
         };
         animationTimer.scheduleRepeating(2000);
+    }
+
+    private void stopPlayer() {
+        playButton.toggle(Boolean.FALSE);
+        playSelectioListener.componentSelected(null);
+        //This call produce the update in map
+        applyFilterSelectionListener.componentSelected(null);
     }
 
     private boolean checkStartFieldValue() {
@@ -500,6 +543,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
         ClientCommandDispatcher.getInstance().execute(
                 new GPClientCommand<GetLayerDimensionResponse>() {
+
             private static final long serialVersionUID = 4372276287420606744L;
 
             {

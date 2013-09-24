@@ -49,10 +49,6 @@ public class WFSDispatcherProgressBar extends GeoPlatformWindow {
     
     public WFSDispatcherProgressBar() {
         super(true);
-        
-        super.setMinHeight(50);
-        
-        super.setFocusWidget(pb);
     }
     
     @Override
@@ -62,7 +58,7 @@ public class WFSDispatcherProgressBar extends GeoPlatformWindow {
     
     @Override
     public void initSize() {
-        super.setSize(300, 50);
+        super.setSize(300, 60);
     }
     
     @Override
@@ -84,6 +80,8 @@ public class WFSDispatcherProgressBar extends GeoPlatformWindow {
 
         super.setResizable(false);
         super.setPlain(true);
+        super.setFocusWidget(pb);
+        super.setMinHeight(60);
     }
     
 }

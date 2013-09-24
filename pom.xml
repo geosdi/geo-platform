@@ -1628,7 +1628,7 @@
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         
         <cxf-version>2.7.6</cxf-version>
-        <spring-version>3.2.3.RELEASE</spring-version>
+        <spring-version>3.2.4.RELEASE</spring-version>
         
         <activemq-version>5.8.0</activemq-version>
 

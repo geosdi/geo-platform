@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.oxm.jaxb;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Reader;
 import javax.xml.transform.dom.DOMResult;
@@ -106,7 +107,8 @@ public class GPJaxbMarshaller implements GenericJaxbMarshaller {
 
     @Override
     public Object unmarshal(java.io.File f) throws IOException {
-        return this.marshaller.unmarshal(new StreamSource(f));
+        return this.marshaller.unmarshal(
+                new StreamSource(new FileInputStream(f)));
     }
 
     @Override
@@ -136,9 +138,10 @@ public class GPJaxbMarshaller implements GenericJaxbMarshaller {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        if(this.marshaller == null)
+        if (this.marshaller == null) {
             throw new IllegalArgumentException("The property marshaller "
                     + "must not be null");
+        }
     }
 
 }

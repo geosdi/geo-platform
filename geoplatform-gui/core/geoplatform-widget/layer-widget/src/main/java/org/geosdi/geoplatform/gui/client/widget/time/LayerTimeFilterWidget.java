@@ -44,16 +44,21 @@ import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.Slider;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.extjs.gxt.ui.client.widget.custom.Portal;
+import com.extjs.gxt.ui.client.widget.custom.Portlet;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.NumberField;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
+import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.common.collect.Lists;
@@ -91,7 +96,7 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 public class LayerTimeFilterWidget extends GeoPlatformWindow {
 
     public final static String LAYER_TIME_DELIMITER = " - [";
-    private final static short WIDGET_HEIGHT = 230;
+    private final static short WIDGET_HEIGHT = 250;
     private final static short WIDGET_WIDTH = 400;
     private final static String TIME_FILTER_HEADING = "TIME FILTER EDITOR";
     private final TimeFilterLayerMapEvent timeFilterLayerMapEvent = new TimeFilterLayerMapEvent();
@@ -107,7 +112,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
     private final Radio fixedDimensionRadio = new Radio();
     private final Radio variableDimensionRadio = new Radio();
     private final LayoutContainer fixedDimensionContainer = new LayoutContainer(new FormLayout());
-    private final LayoutContainer variableDimensionContainer = new LayoutContainer(new FormLayout());
+    private final LayoutContainer variableDimensionContainer;
     private RadioGroup dimensionRadioGroup;
     private SelectionListener<ButtonEvent> applyFilterSelectionListener;
     private Label endTimeLabel;
@@ -115,10 +120,12 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
     private Timer animationTimer;
     private SelectionListener<ButtonEvent> playSelectioListener;
     private ToggleButton playButton;
-    private ToggleButton shuffleButton;
+    private Slider slider;
+    private CheckBox rangeCheckBox;
 
     public LayerTimeFilterWidget(boolean lazy, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(lazy);
+        this.variableDimensionContainer = new LayoutContainer(new FormLayout());
         this.treePanel = treePanel;
     }
 
@@ -187,38 +194,21 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.endDimensionComboBox.setEditable(Boolean.FALSE);
         dimensionSizeLabel = new Label();
         dimensionSizeLabel.setStyleAttribute("font-size", "12px");
-        Label startFilterLabel = new Label("T1");
-        startFilterLabel.setStyleAttribute("font-size", "1.8em");
-        startFilterLabel.setStyleAttribute("background-color", "green");
-        startFilterLabel.setStyleAttribute("color", "#fff");
-        startFilterLabel.setStyleAttribute("padding", "3px");
-        final Button buttonBackwardT1 = new Button();
-        final Button buttonForwardT1 = new Button();
-        final Button buttonBackwardT2 = new Button();
-        final Button buttonForwardT2 = new Button();
         this.startFilterNumberField = new NumberField();
         this.startFilterNumberField.setFireChangeEventOnSetValue(Boolean.TRUE);
         this.startFilterNumberField.addListener(Events.Change, new Listener<BaseEvent>() {
             @Override
             public void handleEvent(BaseEvent be) {
-                Number valueNumber = startFilterNumberField.getValue();
-                if (valueNumber != null) {
-                    int fromFilter = valueNumber.intValue();
+                if (checkStartFieldValue()) {
+                    int fromFilter = startFilterNumberField.getValue().intValue();
+                    int position = startStore.getModels().size() - fromFilter - 1;
                     String tooltip = (String) startStore.getModels().get(
-                            startStore.getModels().size() - fromFilter - 1).get(
+                            position).get(
                             DimensionData.DIMENSION_KEY);
+//                            startStore.getModels().size() - fromFilter - 1).get(
                     startFilterNumberField.setToolTip(tooltip);
                     startTimeLabel.setText(tooltip);
-                    if (fromFilter != 0) {
-                        buttonBackwardT1.setEnabled(Boolean.TRUE);
-                    } else {
-                        buttonBackwardT1.setEnabled(Boolean.FALSE);
-                    }
-                    if (fromFilter != startStore.getModels().size() - 1) {
-                        buttonForwardT1.setEnabled(Boolean.TRUE);
-                    } else {
-                        buttonForwardT1.setEnabled(Boolean.FALSE);
-                    }
+                    slider.setValue(position);
                 } else {
                     startTimeLabel.setText("");
                     startFilterNumberField.setToolTip("");
@@ -230,34 +220,19 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         this.startFilterNumberField.setSize(50, 30);
         this.endFilterNumberField = new NumberField();
         this.endFilterNumberField.setFireChangeEventOnSetValue(Boolean.TRUE);
-        Label endFilterLabel = new Label("T2");
-        endFilterLabel.setStyleAttribute("font-size", "1.8em");
-        endFilterLabel.setStyleAttribute("background-color", "red");
-        endFilterLabel.setStyleAttribute("color", "#fff");
-        endFilterLabel.setStyleAttribute("padding", "3px");
         endTimeLabel = new Label();
         endTimeLabel.setStyleAttribute("font-size", "1.3em");
         this.endFilterNumberField.addListener(Events.Change, new Listener<BaseEvent>() {
             @Override
             public void handleEvent(BaseEvent be) {
-                Number valueNumber = endFilterNumberField.getValue();
-                if (valueNumber != null) {
-                    int endFilter = valueNumber.intValue();
+                if (checkEndFieldValue()) {
+                    int endFilter = endFilterNumberField.getValue().intValue();
                     String tooltip = (String) startStore.getModels().get(
-                            startStore.getModels().size() - endFilter - 1).
+                            endFilter).
                             get(DimensionData.DIMENSION_KEY);
+//                            startStore.getModels().size() - endFilter - 1).
                     endFilterNumberField.setToolTip(tooltip);
                     endTimeLabel.setText(tooltip);
-                    if (endFilter != 0) {
-                        buttonBackwardT2.setEnabled(Boolean.TRUE);
-                    } else {
-                        buttonBackwardT2.setEnabled(Boolean.FALSE);
-                    }
-                    if (endFilter != startStore.getModels().size() - 1) {
-                        buttonForwardT2.setEnabled(Boolean.TRUE);
-                    } else {
-                        buttonForwardT2.setEnabled(Boolean.FALSE);
-                    }
                 } else {
                     endTimeLabel.setText("");
                     endFilterNumberField.setToolTip("");
@@ -274,95 +249,50 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         panel.setStyleAttribute("background-color", "white");
         this.variableDimensionContainer.add(dimensionSizeLabel, new FormData("100%"));
 
-        buttonBackwardT1.setIcon(LayerResources.ICONS.backwardTime());
-        buttonBackwardT1.setSize(30, 30);
-        buttonBackwardT1.disable();
-        buttonBackwardT1.addSelectionListener(new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                int fieldValue = startFilterNumberField.getValue().intValue();
-                if (!(fieldValue < 0)) {
-                    --fieldValue;
-                    startFilterNumberField.setValue(fieldValue);
-                    applyFilterSelectionListener.componentSelected(ce);
-                }
-            }
-        });
-        buttonForwardT1.setIcon(LayerResources.ICONS.forwardTime());
-        buttonForwardT1.addSelectionListener(new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                int fieldValue = startFilterNumberField.getValue().intValue();
-                int maxValue = startStore.getModels().size() - 1;
-                if (!(fieldValue > maxValue)) {
-                    ++fieldValue;
-                    startFilterNumberField.setValue(fieldValue);
-                    applyFilterSelectionListener.componentSelected(ce);
-                }
-            }
-        });
-        buttonForwardT1.setSize(30, 30);
+        Portal portal = new Portal(3);
+        portal.setBorders(false);
+        portal.setColumnWidth(0, .20);
+        portal.setColumnWidth(1, .60);
+        portal.setColumnWidth(2, .20);
 
-        buttonBackwardT2.setIcon(LayerResources.ICONS.backwardTime());
-        buttonBackwardT2.setSize(30, 30);
-        buttonBackwardT2.addSelectionListener(new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                int fieldValue = endFilterNumberField.getValue().intValue();
-                if (!(fieldValue < 0)) {
-                    fieldValue = --fieldValue;
-                    endFilterNumberField.setValue(fieldValue);
-                    applyFilterSelectionListener.componentSelected(ce);
-                }
-            }
-        });
-        buttonForwardT2.setIcon(LayerResources.ICONS.forwardTime());
-        buttonForwardT2.addSelectionListener(new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                int fieldValue = endFilterNumberField.getValue().intValue();
-                int maxValue = startStore.getModels().size() - 1;
-                int startFieldValue = startFilterNumberField.getValue().intValue();
-                if ((fieldValue + 1 < startFieldValue) && !(fieldValue > maxValue)) {
-                    fieldValue = ++fieldValue;
-                    endFilterNumberField.setValue(fieldValue);
-                    applyFilterSelectionListener.componentSelected(ce);
-                } else if (fieldValue + 1 >= startFieldValue) {
-                    GeoPlatformMessage.alertMessage("Dimension Warning",
-                            "The T2 time must be lesser than T1 time");
-                }
-            }
-        });
-        buttonForwardT2.setSize(30, 30);
+        Portlet portlet = new Portlet();
+        portlet.setLayout(new FitLayout());
+        portlet.setHeaderVisible(false);
+        portlet.setSize(50, 30);
+        portlet.add(this.startFilterNumberField);
+        portal.add(portlet, 0);
+        portlet = new Portlet(new CenterLayout());
+        portlet.setHeaderVisible(false);
+        portlet.setSize(100, 30);
+        this.rangeCheckBox = new CheckBox();
+        rangeCheckBox.setValue(true);
+        rangeCheckBox.setBoxLabel("range");
+        portlet.add(rangeCheckBox);
+        portlet.setBorders(false);
+        portal.add(portlet, 1);
+        portlet = new Portlet();
+        portlet.setHeaderVisible(false);
+        portlet.setSize(50, 30);
+        portlet.add(this.endFilterNumberField);
+        portal.add(portlet, 2);
 
-        HorizontalPanel startRow = new HorizontalPanel();
-        startRow.setSpacing(3);
-        startRow.add(startFilterLabel);
-        startRow.add(buttonBackwardT1);
-        startRow.add(this.startFilterNumberField);
-        startRow.add(buttonForwardT1);
-        startRow.add(startTimeLabel);
-        HorizontalPanel endRow = new HorizontalPanel();
-        endRow.setSpacing(3);
-        endRow.add(endFilterLabel);
-        endRow.add(buttonBackwardT2);
-        endRow.add(this.endFilterNumberField);
-        endRow.add(buttonForwardT2);
-        endRow.add(endTimeLabel);
-
-        this.variableDimensionContainer.add(startRow);
-        this.variableDimensionContainer.add(endRow);
+        this.variableDimensionContainer.add(portal, new FormData("99%"));
+        //
+        this.slider = new Slider() {
+            @Override
+            public void setValue(int value) {
+                super.setValue(value);
+                super.setMessage("" + (startStore.getModels().size() - value));
+            }
+        };
+        slider.setIncrement(1);
+        this.variableDimensionContainer.add(slider, new FormData("98%"));
 
         this.fixedDimensionContainer.add(this.startDimensionComboBox);
         this.fixedDimensionContainer.add(this.endDimensionComboBox);
         panel.add(this.fixedDimensionContainer, new FormData("100%"));
         panel.add(this.variableDimensionContainer, new FormData("100%"));
         super.add(panel);
-
-        this.shuffleButton = new ToggleButton("Shuffle", LayerResources.ICONS.shuffleTime());
-        shuffleButton.setHeight(30);
-        super.addButton(shuffleButton);
-
         playButton = new ToggleButton("Play", LayerResources.ICONS.playTime());
         this.playSelectioListener = new SelectionListener<ButtonEvent>() {
             @Override
@@ -383,6 +313,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                         if (endValueNumber != null) {
                             endValue = endValueNumber.intValue();
                         }
+                        slider.setValue(startStore.getModels().size() - startValueNumber.intValue() - 1);
                         playButton.setIcon(LayerResources.ICONS.pauseTime());
                         playButton.setText("Pause");
                         playTimeFilter(endValue);
@@ -419,25 +350,44 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                     layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getTimeFilter() + "]");
                     WidgetPropertiesHandlerManager.fireEvent(labelEvent);
                 } else {
-                    int fromFilter = startFilterNumberField.getValue().intValue();
-                    Number toFilter = endFilterNumberField.getValue();
-//                            System.out.println("End filter: " + endFilter);
-                    if (fromFilter < 0 || fromFilter > startStore.getModels().size() - 1
-                            || (toFilter != null && (toFilter.intValue() >= fromFilter
-                            || toFilter.intValue() < 0))) {
+                    if ((rangeCheckBox.getValue() && !checkEndFieldValue())
+                            || !checkStartFieldValue()) {
                         GeoPlatformMessage.errorMessage("Time Filter Error", "Incorrect Position time, you must specify a valid position in size range");
                         return;
                     } else {
-                        String timeFilter = "" + startFilterNumberField.getValue().intValue();
-                        String variableTimeFilter = (String) startStore.getModels().get(startStore.getModels().size() - fromFilter - 1).get(DimensionData.DIMENSION_KEY);
-                        if (endFilterNumberField.getValue() != null) {
+                        int fromFilter = slider.getValue();
+                        String timeFilter = "" + (startStore.getModels().size() - fromFilter - 1);
+                        String variableTimeFilter = (String) startStore.getModels().get(
+                                fromFilter).get(DimensionData.DIMENSION_KEY);
+                        if (rangeCheckBox.getValue() && playButton.isPressed()) {
+                            fromFilter = startStore.getModels().size() - startFilterNumberField.getValue().intValue() - 1;
+                            timeFilter = "" + startFilterNumberField.getValue().intValue();
+                            variableTimeFilter = (String) startStore.getModels().get(
+                                    fromFilter).get(DimensionData.DIMENSION_KEY);
+                            //
+                            int toFilter = slider.getValue();
+                            timeFilter += "/" + (startStore.getModels().size() - slider.getValue() - 1);
+                            variableTimeFilter += "/" + (String) startStore.getModels().get(
+                                    toFilter).get(DimensionData.DIMENSION_KEY);
+                        } //This is usefull when press Apply button to show all the elements in range
+                        else if (rangeCheckBox.getValue() && endFilterNumberField.getValue() != null) {
+                            fromFilter = startStore.getModels().size() - startFilterNumberField.getValue().intValue() - 1;
+                            timeFilter = "" + startFilterNumberField.getValue().intValue();
+                            variableTimeFilter = (String) startStore.getModels().get(
+                                    fromFilter).get(DimensionData.DIMENSION_KEY);
+                            //
+                            int toFilter = startStore.getModels().size() - endFilterNumberField.getValue().intValue() - 1;
                             timeFilter += "/" + endFilterNumberField.getValue().intValue();
-                            variableTimeFilter += "/" + (String) startStore.getModels().get(startStore.getModels().size() - toFilter.intValue() - 1).get(DimensionData.DIMENSION_KEY);
+                            variableTimeFilter += "/" + (String) startStore.getModels().get(
+                                    toFilter).get(DimensionData.DIMENSION_KEY);
                         }
                         layerSelected.setTimeFilter(timeFilter);
                         layerSelected.setVariableTimeFilter(variableTimeFilter);
                         layerSelected.setAlias(layerName + LAYER_TIME_DELIMITER + layerSelected.getVariableTimeFilter() + "]");
                         WidgetPropertiesHandlerManager.fireEvent(labelEvent);
+                        slider.setMessage(variableTimeFilter);
+                        GeoPlatformMessage.infoMessage("Time Filter Message",
+                                "Showing the layer status at: " + timeFilter);
                     }
                 }
                 mementoSave.putOriginalPropertiesInCache(memento);
@@ -469,26 +419,48 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         animationTimer = new Timer() {
             @Override
             public void run() {
-                if (shuffleButton.isPressed()) {
-                    int startValue = getFielValueIncrement(startFilterNumberField);
-                    if (t2Time != -1 && startValue == 0) {
-                        playButton.toggle(Boolean.FALSE);
-                        playSelectioListener.componentSelected(null);
-                    } else {
-                        startFilterNumberField.setValue(startValue);
-                    }
+//                    int startValue = getFielValueDecrement(startFilterNumberField);
+                int startValue = slider.getValue();
+                if (startValue != startStore.getModels().size() - 1
+                        && (endFilterNumberField.getValue() != null
+                        && (startStore.getModels().size() - startValue - 1)
+                        != (endFilterNumberField.getValue().intValue() - 1))) {
+                    slider.setValue(++startValue);
                 } else {
-                    int startValue = getFielValueDecrement(startFilterNumberField);
-                    startFilterNumberField.setValue(startValue);
-                    if (t2Time != -1 && (startValue - 1 == t2Time)) {
-                        playButton.toggle(Boolean.FALSE);
-                        playSelectioListener.componentSelected(null);
-                    }
+                    playButton.toggle(Boolean.FALSE);
+                    playSelectioListener.componentSelected(null);
                 }
+                //This call produce the update in map
                 applyFilterSelectionListener.componentSelected(null);
             }
         };
         animationTimer.scheduleRepeating(2000);
+    }
+
+    private boolean checkStartFieldValue() {
+        boolean condition = false;
+//        System.out.println("Start store size: " + startStore.getModels().size());
+        if (startFilterNumberField.getValue() != null) {
+            int fromFilter = startFilterNumberField.getValue().intValue();
+//            System.out.println("From filter: " + fromFilter);
+            if (fromFilter >= 0 && fromFilter <= startStore.getModels().size() - 1) {
+                condition = true;
+            }
+        }
+        return condition;
+    }
+
+    private boolean checkEndFieldValue() {
+        boolean condition = false;
+        if (this.checkStartFieldValue() && endFilterNumberField.getValue() != null) {
+            int fromFilter = startFilterNumberField.getValue().intValue();
+            int toFilter = endFilterNumberField.getValue().intValue();
+//            System.out.println("To filter: " + toFilter);
+            if (toFilter < fromFilter && toFilter >= 0) {
+                condition = true;
+            }
+        }
+        return condition;
     }
 
     private int getFielValueDecrement(NumberField numberField) {
@@ -523,7 +495,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
         final GetLayerDimensionRequest getLayerDimensionRequest = GWT.
                 <GetLayerDimensionRequest>create(GetLayerDimensionRequest.class);
 
-        GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
+        final GPLayerTreeModel layerSelected = (GPLayerTreeModel) treePanel.getSelectionModel().getSelectedItem();
         getLayerDimensionRequest.setLayerName(layerSelected.getName());
 
         ClientCommandDispatcher.getInstance().execute(
@@ -546,7 +518,21 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                     startStore.add(new DimensionData(dimension));
                 }
                 if (!dimensionList.isEmpty()) {
-                    startFilterNumberField.setValue(0);
+                    slider.setMaxValue(dimensionList.size());
+                    slider.setMinValue(0);
+                    endFilterNumberField.setValue(0);
+                    if (layerSelected.getTimeFilter() != null) {
+                        String[] timeFilterSplitted = layerSelected.getTimeFilter().split("/");
+                        int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);
+                        slider.setValue(startStore.getModels().size() - startDimensionPosition - 1);
+                        startFilterNumberField.setValue(startDimensionPosition);
+                        if (timeFilterSplitted.length > 1) {
+                            int endDimensionPosition = Integer.parseInt(timeFilterSplitted[1]);
+                            endFilterNumberField.setValue(endDimensionPosition);
+                        }
+                    } else {
+                        startFilterNumberField.setValue(dimensionList.size() - 1);
+                    }
                 }
             }
 

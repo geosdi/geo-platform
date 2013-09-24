@@ -70,6 +70,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -81,9 +82,13 @@ import org.springframework.stereotype.Component;
 @Component(value = "dtoLayerConverter")
 public class DTOLayerConverter {
 
-    @Autowired
     private GeoServerRESTReader sharedRestReader;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public void setRestReader(@Qualifier(value = "sharedRestReader") GeoServerRESTReader sharedRestReader) {
+        this.sharedRestReader = sharedRestReader;
+    }
 
     public ArrayList<GPFolderClientInfo> convertOnlyFolders(Collection<FolderDTO> folders) {
         ArrayList<GPFolderClientInfo> foldersClient = Lists.newArrayList();
@@ -167,7 +172,7 @@ public class DTOLayerConverter {
             try {
                 String dimension = this.sharedRestReader.getDimensions(layerDTO.getTitle());
                 if (!dimension.contains("<h2>")) {
-                    List<String> dimensionList = Lists.newArrayList(dimension.split(","));
+                    List<String> dimensionList = Lists.<String>newArrayList(dimension.split(","));
 
                     String[] timeFilterSplitted = layerDTO.getTimeFilter().split("/");
                     int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);

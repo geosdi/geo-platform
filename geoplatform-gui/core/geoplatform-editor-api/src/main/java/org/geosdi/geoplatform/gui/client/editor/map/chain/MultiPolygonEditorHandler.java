@@ -85,7 +85,7 @@ public abstract class MultiPolygonEditorHandler extends GeometryEditorHandler {
     @Override
     protected void showConfirmMessage(final VectorFeature feature,
             final Vector vector) {
-        final VectorFeature selectedFeature = getSelectedFeaure();
+        final VectorFeature selectedFeature = getSelectedFeature();
 
         GeoPlatformMessage.confirmMessage(
                 "Multi Polygon Feature Status",
@@ -96,7 +96,7 @@ public abstract class MultiPolygonEditorHandler extends GeometryEditorHandler {
             @Override
             public void handleEvent(MessageBoxEvent be) {
                 if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                    manageUpdatedFeature(feature);
+                    manageUpdatedFeature(feature, selectedFeature);
                 } else {
                     vector.removeFeature(feature);
                     vector.addFeature(selectedFeature);

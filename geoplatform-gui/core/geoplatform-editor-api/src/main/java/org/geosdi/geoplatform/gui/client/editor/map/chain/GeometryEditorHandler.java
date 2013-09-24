@@ -65,7 +65,7 @@ public abstract class GeometryEditorHandler {
         }
     }
 
-    public VectorFeature getSelectedFeaure() {
+    public VectorFeature getSelectedFeature() {
         return VectorFeature.narrowToVectorFeature(
                 modifyEditorControl.getSelectedFeature().getJSObject());
     }
@@ -75,6 +75,7 @@ public abstract class GeometryEditorHandler {
     protected abstract void showConfirmMessage(final VectorFeature feature,
             final Vector vector);
 
-    protected abstract void manageUpdatedFeature(VectorFeature vf);
+    protected abstract void manageUpdatedFeature(VectorFeature modifiedFeature,
+            VectorFeature oldFeature);
 
 }

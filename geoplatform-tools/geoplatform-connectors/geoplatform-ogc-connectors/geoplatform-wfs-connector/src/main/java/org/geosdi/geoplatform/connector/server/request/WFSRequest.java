@@ -78,7 +78,7 @@ public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
         return new StringEntity(writer.toString(), ContentType.APPLICATION_XML);
     }
 
-    protected abstract Object createRequest() throws IllegalParameterFault;
+    protected abstract Object createRequest() throws Exception;
 
     @Override
     public Marshaller getMarshaller() throws Exception {

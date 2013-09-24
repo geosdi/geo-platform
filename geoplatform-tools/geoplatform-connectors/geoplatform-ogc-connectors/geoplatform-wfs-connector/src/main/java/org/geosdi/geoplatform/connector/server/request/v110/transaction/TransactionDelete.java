@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.server.request.v110.transaction;
 
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.wfs.v110.DeleteElementType;
 
 /**
@@ -48,7 +47,7 @@ public class TransactionDelete implements ITransactionOperationStrategy {
 
     @Override
     public Object getOperation(WFSTransactionRequest request)
-            throws IllegalParameterFault {
+            throws Exception {
         assert (request.getTypeName() != null);
 
         DeleteElementType elementType = new DeleteElementType();
@@ -56,4 +55,5 @@ public class TransactionDelete implements ITransactionOperationStrategy {
 
         return elementType;
     }
+
 }

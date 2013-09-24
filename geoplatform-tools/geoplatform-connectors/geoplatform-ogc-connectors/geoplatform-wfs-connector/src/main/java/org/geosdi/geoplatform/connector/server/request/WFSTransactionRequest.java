@@ -114,10 +114,10 @@ public interface WFSTransactionRequest<T> extends GPConnectorRequest<T> {
     /**
      * Gets the value of the attributes property.
      */
-    List<AttributeDTO> getAttributes();
+    List<? extends AttributeDTO> getAttributes();
 
     /**
      * Sets the values of the attributes property.
      */
-    void setAttributes(List<AttributeDTO> attributes);
+    void setAttributes(List<? extends AttributeDTO> attributes);
 }

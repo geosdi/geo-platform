@@ -39,6 +39,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.List;
 import javax.xml.bind.Marshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
@@ -49,6 +50,7 @@ import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStra
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.GPTransactionMediator;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeatureStreamWriter;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionType;
@@ -68,11 +70,11 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
             Exception, UnsupportedEncodingException {
 
         return operation == TransactionOperation.INSERT
-               ? preparePostEntityWithStax() : super.preparePostEntity();
+                ? preparePostEntityWithStax() : super.preparePostEntity();
     }
 
     @Override
-    protected Object createRequest() throws IllegalParameterFault {
+    protected Object createRequest() throws Exception {
         if (operation == null) {
             throw new IllegalArgumentException("Transaction Operation "
                     + "must not be null.");
@@ -91,13 +93,13 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
     @Override
     public String showRequestAsString() throws Exception {
         return operation == TransactionOperation.INSERT ? showRequestWithStax()
-               : super.showRequestAsString();
+                : super.showRequestAsString();
     }
 
     /**
-     * 
+     *
      * @return String
-     * @throws Exception 
+     * @throws Exception
      */
     protected final String showRequestWithStax() throws Exception {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -128,4 +130,5 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
 
         return new StringEntity(request, ContentType.APPLICATION_XML);
     }
+
 }

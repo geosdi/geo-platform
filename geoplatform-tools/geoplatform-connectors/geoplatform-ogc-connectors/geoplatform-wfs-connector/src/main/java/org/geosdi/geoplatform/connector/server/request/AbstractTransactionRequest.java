@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 
 /**
+ * @TODO : Change Attributes type from AttributeDTO to GPFeatureDescriptor
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
@@ -54,7 +55,7 @@ public abstract class AbstractTransactionRequest<T> extends WFSRequest<T>
     protected String srs;
     protected String inputFormat;
     protected String fid;
-    protected List<AttributeDTO> attributes;
+    protected List<? extends AttributeDTO> attributes;
 
     public AbstractTransactionRequest(GPServerConnector server) {
         super(server);
@@ -76,7 +77,7 @@ public abstract class AbstractTransactionRequest<T> extends WFSRequest<T>
     @Override
     public TransactionIdGen getTransactionIdGen() {
         return transactionIdGen != null ? transactionIdGen
-               : TransactionIdGen.GENERATE_NEW;
+                : TransactionIdGen.GENERATE_NEW;
     }
 
     /**
@@ -128,12 +129,12 @@ public abstract class AbstractTransactionRequest<T> extends WFSRequest<T>
     }
 
     @Override
-    public List<AttributeDTO> getAttributes() {
+    public List<? extends AttributeDTO> getAttributes() {
         return attributes;
     }
 
     @Override
-    public void setAttributes(List<AttributeDTO> attributes) {
+    public void setAttributes(List<? extends AttributeDTO> attributes) {
         this.attributes = attributes;
     }
 
@@ -147,4 +148,5 @@ public abstract class AbstractTransactionRequest<T> extends WFSRequest<T>
                 + ", attributes=" + attributes
                 + '}';
     }
+
 }

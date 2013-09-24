@@ -35,15 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.transaction;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.xml.filter.v110.AbstractIdType;
 import org.geosdi.geoplatform.xml.filter.v110.FeatureIdType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
@@ -53,8 +49,11 @@ import org.geosdi.geoplatform.xml.wfs.v110.UpdateElementType;
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class TransactionUpdate implements ITransactionOperationStrategy {
+public class TransactionUpdate extends AbstractTranctionUpdate {
 
     private org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
 
@@ -64,13 +63,14 @@ public class TransactionUpdate implements ITransactionOperationStrategy {
 
     @Override
     public Object getOperation(WFSTransactionRequest request)
-            throws IllegalParameterFault {
+            throws Exception {
         UpdateElementType elementType = new UpdateElementType();
 
         assert (request.getTypeName() != null);
         elementType.setTypeName(request.getTypeName());
 
-        List<PropertyType> properties = this.getPropertyToUpdate(request.getAttributes());
+        List<PropertyType> properties = super.getPropertyToUpdate(
+                request.getAttributes());
         elementType.setProperty(properties);
 
         if (request.getSRS() != null) {
@@ -84,33 +84,16 @@ public class TransactionUpdate implements ITransactionOperationStrategy {
         FeatureIdType fid = new FeatureIdType();
         fid.setFid(request.getFID());
 
-        JAXBElement<FeatureIdType> fidElement = filterFactory.createFeatureId(fid);
+        JAXBElement<FeatureIdType> fidElement = filterFactory.createFeatureId(
+                fid);
 
         FilterType filter = new FilterType();
-        filter.setId(Arrays.<JAXBElement<? extends AbstractIdType>>asList(fidElement));
+        filter.setId(Arrays.<JAXBElement<? extends AbstractIdType>>asList(
+                fidElement));
 
         elementType.setFilter(filter);
 
         return elementType;
     }
 
-    private List<PropertyType> getPropertyToUpdate(List<AttributeDTO> attributes)
-            throws IllegalParameterFault {
-        assert (attributes != null && attributes.size() > 0);
-
-        List<PropertyType> properties = new ArrayList<PropertyType>(attributes.size());
-        for (AttributeDTO attribute : attributes) {
-            if (!attribute.isNillable() && attribute.getValue() == null) {
-                throw new IllegalParameterFault("Property '" + attribute.getName() + "' cannot be null.");
-            }
-
-            PropertyType property = new PropertyType();
-            QName qName = new QName(attribute.getName());
-            property.setName(qName);
-            property.setValue(attribute.getValue()); // TODO Check wrt type
-            properties.add(property);
-        }
-
-        return properties;
-    }
 }

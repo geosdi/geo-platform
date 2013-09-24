@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -44,5 +42,5 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 public interface ITransactionOperationStrategy {
 
     Object getOperation(WFSTransactionRequest request)
-            throws IllegalParameterFault;
+            throws Exception;
 }

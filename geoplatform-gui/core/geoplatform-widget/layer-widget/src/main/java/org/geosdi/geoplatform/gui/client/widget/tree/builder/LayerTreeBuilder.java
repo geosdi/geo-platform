@@ -38,11 +38,13 @@ package org.geosdi.geoplatform.gui.client.widget.tree.builder;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.common.collect.Lists;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.core.client.GWT;
 import java.util.Iterator;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectElementsRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectElementsResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
@@ -53,13 +55,14 @@ import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.event.GPBuildTreeEvent;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GinTreeStore;
 import org.geosdi.geoplatform.gui.client.widget.tree.visitor.GinVisitorDisplayHide;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -107,10 +110,24 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
             LayoutManager.getInstance().getStatusMap().setBusy(
                     LayerModuleConstants.INSTANCE.statusLoadingTreeElementsText());
 
-            LayerRemote.Util.getInstance().loadDefaultProjectElements(
-                    new AsyncCallback<GPClientProject>() {
+            final LoadDefaultProjectElementsRequest loadDefaultProjectElementsRequest = GWT.
+                    <LoadDefaultProjectElementsRequest>create(LoadDefaultProjectElementsRequest.class);
+
+            ClientCommandDispatcher.getInstance().execute(
+                    new GPClientCommand<LoadDefaultProjectElementsResponse>() {
+                private static final long serialVersionUID = 3109256773218160485L;
+
+                {
+                    super.setCommandRequest(loadDefaultProjectElementsRequest);
+                }
+
                 @Override
-                public void onFailure(Throwable caught) {
+                public void onCommandSuccess(LoadDefaultProjectElementsResponse response) {
+                    onBuildSuccess(response.getResult());
+                }
+
+                @Override
+                public void onCommandFailure(Throwable caught) {
                     if (caught.getCause() instanceof GPSessionTimeout) {
                         GPHandlerManager.fireEvent(new GPLoginEvent(buildEvent));
                     } else {
@@ -123,11 +140,6 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
                                 "Error loading tree elements: " + caught.toString()
                                 + " data: " + caught.getMessage());
                     }
-                }
-
-                @Override
-                public void onSuccess(GPClientProject result) {
-                    onBuildSuccess(result);
                 }
             });
         }

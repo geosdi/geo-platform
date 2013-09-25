@@ -39,10 +39,11 @@ import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
+import com.google.gwt.core.client.GWT;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadFolderElementsRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadFolderElementsResponse;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -51,12 +52,12 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.builder.LayerTreeBuilder;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
@@ -91,11 +92,30 @@ public class GPTreeBeforeExapand implements TreeBeforeExpand {
                     LayoutManager.getInstance().getStatusMap().setBusy(
                             LayerModuleConstants.INSTANCE.statusLoadingTreeElementsText());
 
-                    LayerRemoteImpl.Util.getInstance().loadFolderElements(
-                            parentFolder.getId(),
-                            new AsyncCallback<ArrayList<IGPFolderElements>>() {
+                    final LoadFolderElementsRequest loadFolderElementsRequest = GWT.
+                            <LoadFolderElementsRequest>create(LoadFolderElementsRequest.class);
+
+                    loadFolderElementsRequest.setFolderID(parentFolder.getId());
+                    
+                    ClientCommandDispatcher.getInstance().execute(
+                            new GPClientCommand<LoadFolderElementsResponse>() {
+                        private static final long serialVersionUID = 3109256773218160485L;
+
+                        {
+                            super.setCommandRequest(loadFolderElementsRequest);
+                        }
+
                         @Override
-                        public void onFailure(Throwable caught) {
+                        public void onCommandSuccess(LoadFolderElementsResponse response) {
+                            treeBuilder.insertElementsOnTree(
+                                    parentFolder, response.getResult());
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                    LayerModuleConstants.INSTANCE.statusSuccessLoadingTreeElementsText(),
+                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                        }
+
+                        @Override
+                        public void onCommandFailure(Throwable caught) {
                             if (caught.getCause() instanceof GPSessionTimeout) {
                                 GPHandlerManager.fireEvent(new GPLoginEvent(
                                         new GPExpandTreeNodeEvent(parentFolder)));
@@ -110,16 +130,6 @@ public class GPTreeBeforeExapand implements TreeBeforeExpand {
                                         "Error loading tree elements: " + caught.toString()
                                         + " data: " + caught.getMessage());
                             }
-                        }
-
-                        @Override
-                        public void onSuccess(
-                                ArrayList<IGPFolderElements> result) {
-                            treeBuilder.insertElementsOnTree(
-                                    parentFolder, result);
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    LayerModuleConstants.INSTANCE.statusSuccessLoadingTreeElementsText(),
-                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
                         }
                     });
                 }

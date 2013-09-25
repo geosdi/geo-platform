@@ -68,18 +68,39 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Autowired
     private ILayerService layerService;
 
+    /**
+     * @deprecated Using command
+     * @return
+     * @throws GeoPlatformException
+     * @deprecated
+     */
+    @Deprecated
     @Override
     public GPClientProject loadDefaultProjectElements() throws GeoPlatformException {
         return this.layerService.loadDefaultProjectElements(
                 super.getThreadLocalRequest());
     }
 
-    @Override
-    public ArrayList<GPFolderClientInfo> loadProject(long projectId) throws GeoPlatformException {
-        return this.layerService.loadProject(projectId,
-                super.getThreadLocalRequest());
-    }
+//    /**
+//     * @deprecated Using command
+//     * @param projectId
+//     * @return
+//     * @throws GeoPlatformException
+//     */
+//    @Deprecated
+//    @Override
+//    public ArrayList<GPFolderClientInfo> loadProject(long projectId) throws GeoPlatformException {
+//        return this.layerService.loadProject(projectId,
+//                super.getThreadLocalRequest());
+//    }
 
+    /**
+     * @deprecated Using command
+     * @param folderID
+     * @return
+     * @throws GeoPlatformException
+     */
+    @Deprecated
     @Override
     public ArrayList<IGPFolderElements> loadFolderElements(Long folderID)
             throws GeoPlatformException {
@@ -195,6 +216,15 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
                 super.getThreadLocalRequest());
     }
 
+    /**
+     * @deprecated Using command
+     * @param config
+     * @param searchText
+     * @param imageURL
+     * @return
+     * @throws GeoPlatformException
+     */
+    @Deprecated
     @Override
     public PagingLoadResult<GPClientProject> searchProjects(
             PagingLoadConfig config,
@@ -274,7 +304,6 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
      * @param layerName
      * @return
      * @throws GeoPlatformException
-     * @deprecated
      */
     @Deprecated
     @Override
@@ -287,7 +316,6 @@ public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
      * @param layerName
      * @return
      * @throws GeoPlatformException
-     * @deprecated
      */
     @Deprecated
     @Override

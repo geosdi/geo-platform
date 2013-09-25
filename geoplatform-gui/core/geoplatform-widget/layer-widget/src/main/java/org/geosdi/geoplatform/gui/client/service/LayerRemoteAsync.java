@@ -75,8 +75,8 @@ public interface LayerRemoteAsync {
 
     void loadDefaultProjectElements(AsyncCallback<GPClientProject> callback);
 
-    void loadProject(long projectId,
-            AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
+//    void loadProject(long projectId,
+//            AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
 
     void loadFolderElements(Long folderID,
             AsyncCallback<ArrayList<IGPFolderElements>> callback);

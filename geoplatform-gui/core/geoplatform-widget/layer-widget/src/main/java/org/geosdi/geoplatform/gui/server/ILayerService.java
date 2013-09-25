@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -126,7 +126,7 @@ public interface ILayerService {
 
     boolean checkKmlUrl(String url) throws GeoPlatformException;
 
-    PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
+    BasePagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
             String searchText, String imageURL,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;

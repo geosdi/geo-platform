@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import java.io.IOException;
@@ -560,7 +559,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
+    public BasePagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
             String searchText, String imageURL, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPAccount account = null;
@@ -815,7 +814,7 @@ public class LayerService implements ILayerService {
 
     @Override
     public List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException {
-        List<GPLayerAttributes> attributeList = Lists.newArrayList();
+        List<GPLayerAttributes> attributeList = Lists.<GPLayerAttributes>newArrayList();
         try {
             List<LayerAttribute> result = this.geoPlatformPublishClient.describeFeatureType(
                     layerName);

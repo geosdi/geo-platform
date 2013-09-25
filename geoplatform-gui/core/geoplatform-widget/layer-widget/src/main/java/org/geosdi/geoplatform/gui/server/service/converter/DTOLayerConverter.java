@@ -91,7 +91,7 @@ public class DTOLayerConverter {
     }
 
     public ArrayList<GPFolderClientInfo> convertOnlyFolders(Collection<FolderDTO> folders) {
-        ArrayList<GPFolderClientInfo> foldersClient = Lists.newArrayList();
+        ArrayList<GPFolderClientInfo> foldersClient = Lists.<GPFolderClientInfo>newArrayList();
         if (folders != null) {
             for (Iterator<FolderDTO> it = folders.iterator(); it.hasNext();) {
                 GPFolderClientInfo folder = this.convertFolderElement(it.next());
@@ -102,7 +102,7 @@ public class DTOLayerConverter {
     }
 
     private List<IGPFolderElements> convertFolderElements(List<IElementDTO> folderElements) {
-        List<IGPFolderElements> clientFolderElements = Lists.newArrayList();
+        List<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
         Iterator<IElementDTO> iterator = folderElements.iterator();
         while (iterator.hasNext()) {
             clientFolderElements.add(this.convertElement(iterator.next()));
@@ -111,7 +111,7 @@ public class DTOLayerConverter {
     }
 
     public ArrayList<IGPFolderElements> convertFolderElements(TreeFolderElements folderElements) {
-        ArrayList<IGPFolderElements> clientFolderElements = Lists.newArrayList();
+        ArrayList<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
         Iterator<IElementDTO> iterator = folderElements.iterator();
         while (iterator.hasNext()) {
             clientFolderElements.add(this.convertElement(iterator.next()));
@@ -137,7 +137,7 @@ public class DTOLayerConverter {
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
         raster.setLayerType(GPLayerType.WMS);
         raster.setOpacity(rasterDTO.getOpacity());
-        ArrayList<GPStyleStringBeanModel> styles = Lists.newArrayList();
+        ArrayList<GPStyleStringBeanModel> styles = Lists.<GPStyleStringBeanModel>newArrayList();
         GPStyleStringBeanModel style;
         for (String styleString : rasterDTO.getStyleList()) {
             style = new GPStyleStringBeanModel();
@@ -309,7 +309,7 @@ public class DTOLayerConverter {
     }
 
     public List<GPSimpleUser> convertToGPSimpleUser(List<ShortAccountDTO> shortAccountList) {
-        List<GPSimpleUser> listSimpleUser = Lists.newArrayList();
+        List<GPSimpleUser> listSimpleUser = Lists.<GPSimpleUser>newArrayList();
         for (ShortAccountDTO shortAccont : shortAccountList) {
             if (shortAccont instanceof UserDTO) {
                 listSimpleUser.add(this.convertToGPSimpleUser((UserDTO) shortAccont));

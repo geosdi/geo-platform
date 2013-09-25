@@ -36,15 +36,17 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.core.client.GWT;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectResponse;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -71,11 +73,25 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
 
     @Override
     public void componentSelected(MenuEvent e) {
-        LayerRemote.Util.getInstance().loadDefaultProject(
-                new AsyncCallback<GPClientProject>() {
+        final LoadDefaultProjectRequest loadDefaultProjectRequest = GWT.
+                <LoadDefaultProjectRequest>create(LoadDefaultProjectRequest.class);
+
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<LoadDefaultProjectResponse>() {
+
+            private static final long serialVersionUID = 3109256773218160485L;
+
+            {
+                super.setCommandRequest(loadDefaultProjectRequest);
+            }
 
             @Override
-            public void onFailure(Throwable caught) {
+            public void onCommandSuccess(LoadDefaultProjectResponse response) {
+                projectManagementWidget.showSharingPanel(response.getResult());
+            }
+
+            @Override
+            public void onCommandFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(null));
                 } else {
@@ -88,13 +104,6 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 }
             }
-
-            @Override
-            public void onSuccess(GPClientProject result) {
-                projectManagementWidget.showSharingPanel(result);
-            }
-
         });
     }
-
 }

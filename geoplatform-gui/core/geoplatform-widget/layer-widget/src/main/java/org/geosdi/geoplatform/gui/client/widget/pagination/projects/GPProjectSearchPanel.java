@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.data.*;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -48,17 +49,26 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.projects.DeleteProjectAction;
 import org.geosdi.geoplatform.gui.client.action.projects.GPProjectAction;
 import org.geosdi.geoplatform.gui.client.action.projects.ShareProjectAction;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.SearchProjectsRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.basic.SearchProjectsResponse;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
  *
@@ -138,13 +148,43 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     public void createStore() {
         super.toolBar = new PagingToolBar(super.getPageSize());
         super.proxy = new RpcProxy<PagingLoadResult<GPClientProject>>() {
+
             @Override
-            protected void load(Object loadConfig,
+            protected void load(final Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPClientProject>> callback) {
-                LayerRemote.Util.getInstance().searchProjects(
-                        (PagingLoadConfig) loadConfig,
-                        searchText, LayerResources.ICONS.gpProject().getHTML(),
-                        callback);
+                final SearchProjectsRequest searchProjectsRequest = GWT.
+                        <SearchProjectsRequest>create(SearchProjectsRequest.class);
+
+                searchProjectsRequest.setConfig((PagingLoadConfig) loadConfig);
+                searchProjectsRequest.setSearchText(searchText);
+                searchProjectsRequest.setImageURL(LayerResources.ICONS.gpProject().getHTML());
+
+                ClientCommandDispatcher.getInstance().execute(
+                        new GPClientCommand<SearchProjectsResponse>() {
+
+                    private static final long serialVersionUID = 3109256773218160485L;
+
+                    {
+                        super.setCommandRequest(searchProjectsRequest);
+                    }
+
+                    @Override
+                    public void onCommandSuccess(SearchProjectsResponse response) {
+                        loader.fireEvent(Loader.Load, new LoadEvent(loader,
+                                loadConfig, response.getResult()));
+                    }
+
+                    @Override
+                    public void onCommandFailure(Throwable caught) {
+                        if (caught.getCause() instanceof GPSessionTimeout) {
+                            GPHandlerManager.fireEvent(new GPLoginEvent(null));
+                        } else {
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                    "Error searching the projects",
+                                    SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                        }
+                    }
+                });
             }
         };
         super.loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
@@ -207,18 +247,19 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     public void deleteProject() {
         LayerRemote.Util.getInstance().deleteProject(getSelectionModel().getSelectedItem().getId(),
                 new AsyncCallback<Object>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                    }
 
-                    @Override
-                    public void onSuccess(Object result) {
-                        GeoPlatformMessage.infoMessage("Delete Project",
-                                "The Project " + getSelectionModel().getSelectedItem().getName()
-                                + "was successfully removed.");
-                        store.remove(getSelectionModel().getSelectedItem());
-                    }
-                });
+            @Override
+            public void onFailure(Throwable caught) {
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                GeoPlatformMessage.infoMessage("Delete Project",
+                        "The Project " + getSelectionModel().getSelectedItem().getName()
+                        + "was successfully removed.");
+                store.remove(getSelectionModel().getSelectedItem());
+            }
+        });
     }
 
     public void shareProject(GPClientProject clientProject) {
@@ -235,6 +276,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
             searchStatus.setBusy("Setting Default Project");
             LayerRemote.Util.getInstance().setDefaultProject(getListView().getSelectionModel().
                     getSelectedItem().getId(), new AsyncCallback<Object>() {
+
                 /**
                  * TODO MANAGE FOR SESSION TIMEOUT EXCEPTION *
                  */

@@ -66,13 +66,13 @@ public class WFSPointFeatureHandler extends PointEditorHandler {
     protected void manageUpdatedFeature(VectorFeature modifiedFeature,
             VectorFeature oldFeature) {
         Geometry geom = modifiedFeature.getGeometry().clone();
-        String wktGeometry = modifyEditorControl.getWKTEditorConverter().convertGeometry(
-                geom, new Projection(
-                GPCoordinateReferenceSystem.WGS_84.getCode()));
+//        String wktGeometry = modifyEditorControl.getWKTEditorConverter().convertGeometry(
+//                geom, new Projection(
+//                GPCoordinateReferenceSystem.WGS_84.getCode()));
 
         event.setModifiedFeature(modifiedFeature);
         event.setOldFeature(oldFeature);
-        event.setWktGeometry(wktGeometry);
+        event.setWktGeometry(geom.toString());
 
         WFSFeatureDispatcher.fireFeatureDispatcherEvent(event);
     }

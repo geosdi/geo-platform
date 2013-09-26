@@ -100,7 +100,7 @@ public class UpdateFeatureGeometryRequest extends WFSTRequest {
         GeometryAttributeDTO geometryAttr = new GeometryAttributeDTO();
         geometryAttr.setName(this.geometryAttributeName);
         geometryAttr.setValue(wktGeometry);
-        geometryAttr.setSrid(new Integer(4326));
+        geometryAttr.setSrid(new Integer(900913));
 
         return geometryAttr;
     }

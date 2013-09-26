@@ -58,6 +58,6 @@ public class MapWidgetProvider implements Provider<MapWidget> {
     @Override
     public MapWidget get() {
         return this.mapFactory.createMap("665", "410",
-                GPBaseLayerFactory.getBaseLayer(BaseLayerValue.EMPTY));
+                GPBaseLayerFactory.getBaseLayer(BaseLayerValue.OPEN_STREET_MAP));
     }
 }

@@ -124,6 +124,7 @@ public final class WFSGetFeatureControl extends GPVectorMapControl implements
     public void resetControl() {
         deactivateControl();
         this.initialized = false;
+        this.wfsGetFeature.destroy();
         this.wfsGetFeature = null;
     }
 

@@ -96,6 +96,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         if (bbox != null) {
             wmsOption.setMaxExtent(bbox);
         }
+        
         wmsOption.setIsBaseLayer(Boolean.FALSE);
         wmsOption.setDisplayInLayerSwitcher(Boolean.FALSE);
         wmsOption.setDisplayOutsideMaxExtent(Boolean.TRUE);

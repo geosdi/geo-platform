@@ -43,10 +43,10 @@ import static org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDi
 import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.IFeatureMapInitializerHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.WFSDispatcherProgressBar;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
@@ -56,7 +56,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class AbstractFeatureDispatcher implements FeatureDispatcher {
-
+    
     private static final GPEventBus dispatcherBus = new GPEventBusImpl();
     //
     @Inject
@@ -73,7 +73,7 @@ public abstract class AbstractFeatureDispatcher implements FeatureDispatcher {
     private final FeatureStatusBarEvent successEvent;
     private final FeatureStatusBarEvent statusNotOk;
     private final FeatureStatusBarEvent failedEvent;
-
+    
     public AbstractFeatureDispatcher(FeatureStatusBarEvent theLoadingEvent,
             FeatureStatusBarEvent theSuccessEvent,
             FeatureStatusBarEvent theStatusNotOk,
@@ -83,47 +83,46 @@ public abstract class AbstractFeatureDispatcher implements FeatureDispatcher {
         this.statusNotOk = theStatusNotOk;
         this.failedEvent = theFailedEvent;
     }
-
+    
     @Override
     public final HandlerRegistration addFeatureDispatcherHandler() {
         return dispatcherBus.addHandler(TYPE, this);
     }
-
+    
     public static void fireFeatureDispatcherEvent(FeatureDispatcherEvent event) {
         dispatcherBus.fireEvent(event);
     }
-
+    
     protected void manageCommandSuccess(Boolean result,
             VectorFeature modifiedFeature, VectorFeature oldFeature) {
         progressBar.hide();
         if (result) {
-            bus.fireEvent(successEvent);
-            bus.fireEvent(IFeatureMapInitializerHandler.REDRAW_EVENT);
+            fireEvents();
         } else {
             vector.removeFeature(modifiedFeature);
             vector.addFeature(oldFeature);
             bus.fireEvent(statusNotOk);
         }
     }
-
+    
     protected void manageCommandFailure(VectorFeature modifiedFeature,
             VectorFeature oldFeature, Throwable exception) {
         String errorMessage = "Error on WFS GetFeature request";
         GeoPlatformMessage.errorMessage(
                 "GetFeture Service Error",
                 errorMessage + " - " + exception.getMessage());
-
+        
         progressBar.hide();
         vector.removeFeature(modifiedFeature);
         vector.addFeature(oldFeature);
-
+        
         bus.fireEvent(failedEvent);
     }
-
+    
     protected void setUpRequest(VectorFeature modifiedFeature,
             String wktGeometry) {
         bus.fireEvent(loadingEvent);
-
+        
         updateGeometryRequest.setFid(modifiedFeature.getFID());
         updateGeometryRequest.setWktGeometry(wktGeometry);
         updateGeometryRequest.setServerUrl(
@@ -133,5 +132,12 @@ public abstract class AbstractFeatureDispatcher implements FeatureDispatcher {
         updateGeometryRequest.setGeometryAttributeName(
                 layerSchemaBinder.getLayerSchemaDTO().getGeometry().getName());
     }
-
+    
+    private void fireEvents() {
+        bus.fireEvent(successEvent);
+        bus.fireEvent(IFeatureMapInitializerHandler.REDRAW_EVENT);
+        GPHandlerManager.fireEvent(
+                this.layerSchemaBinder.getReloadLayerMapEvent());
+    }
+    
 }

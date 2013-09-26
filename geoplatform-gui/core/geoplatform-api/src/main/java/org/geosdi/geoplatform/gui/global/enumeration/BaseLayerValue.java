@@ -50,5 +50,6 @@ public enum BaseLayerValue {
     BING_AERIAL,
     METACARTA,
     GEOSDI_BASE,
-    GEOSDI_NULL_BASE;
+    GEOSDI_NULL_BASE,
+    EMPTY;
 }

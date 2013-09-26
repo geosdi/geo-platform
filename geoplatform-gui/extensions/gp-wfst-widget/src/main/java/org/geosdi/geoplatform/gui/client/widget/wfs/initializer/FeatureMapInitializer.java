@@ -97,13 +97,11 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
                 injectGetFeatureModelEvent);
 
         Timer t = new Timer() {
-
             @Override
             public void run() {
                 loadLayerOnMap();
                 notifyStatus();
             }
-
         };
 
         t.schedule(1000);
@@ -140,7 +138,7 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
     protected void loadLayerOnMap() {
         this.mapWidget.getMap().addLayer(wms);
         this.mapWidget.getMap().addLayer(vectorLayer);
-        
+
         ((WMS) wms).redraw(true);
 
         Bounds bb = ((WMS) this.wms).getOptions().getMaxExtent();
@@ -154,5 +152,4 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         this.bus.fireEvent(new FeatureStatusBarEvent("WFS Layer loaded",
                 FeatureStatusBar.FeatureStatusBarType.STATUS_OK));
     }
-
 }

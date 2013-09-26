@@ -45,6 +45,7 @@ import org.gwtopenmaps.openlayers.client.Size;
 import org.gwtopenmaps.openlayers.client.layer.Bing;
 import org.gwtopenmaps.openlayers.client.layer.BingOptions;
 import org.gwtopenmaps.openlayers.client.layer.BingType;
+import org.gwtopenmaps.openlayers.client.layer.EmptyLayer;
 import org.gwtopenmaps.openlayers.client.layer.GoogleV3;
 import org.gwtopenmaps.openlayers.client.layer.GoogleV3MapType;
 import org.gwtopenmaps.openlayers.client.layer.GoogleV3Options;
@@ -186,6 +187,16 @@ class GPBaseLayerRepository {
             }
 
         });
+        
+        baseLayerMap.put(BaseLayerValue.EMPTY,
+                new GPBaseLayerCreator() {
+
+            @Override
+            public Layer createBaseLayer() {
+                return createGeoSdiEmptyMapBaseLayer();
+            }
+
+        });
     }
 
     private Layer createOSMBaseLayer() {
@@ -324,5 +335,15 @@ class GPBaseLayerRepository {
 
         return aerial;
     }
-
+    
+    private Layer createGeoSdiEmptyMapBaseLayer() {
+         //And now lets create an EmptyLayer and add it to the map.
+        EmptyLayer.Options emptyLayerOptions = new EmptyLayer.Options();
+        emptyLayerOptions.setAttribution("EmptyLayer (c) geoSDI"); //lets set some copyright msg as attribution
+        emptyLayerOptions.setIsBaseLayer(true); //make it a baselayer.
+        emptyLayerOptions.setProjection(GPCoordinateReferenceSystem.WGS_84.getCode());
+        EmptyLayer emptyLayer = new EmptyLayer("Empty layer", emptyLayerOptions);
+        return emptyLayer;
+    }
+    
 }

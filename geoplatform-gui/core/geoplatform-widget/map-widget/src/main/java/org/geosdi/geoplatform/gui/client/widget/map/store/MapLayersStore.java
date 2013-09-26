@@ -136,12 +136,14 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
                     != rasterBean.getzIndex()) {
                 layer.setZIndex(rasterBean.getzIndex());
                 layer.setIsVisible(true);
+                layer.redraw(true);
             }
         } else {
             WMS layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
             this.layers.put(rasterBean, layer);
             this.mapWidget.getMap().addLayer(layer);
             layer.setZIndex(rasterBean.getzIndex());
+            layer.redraw(true);
         }
     }
 

@@ -38,10 +38,13 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
+import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.IFeatureMapInitializerHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureTransactionEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.gwtopenmaps.openlayers.client.protocol.CRUDOptions;
 import org.gwtopenmaps.openlayers.client.protocol.Response;
 import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
@@ -58,10 +61,12 @@ public class FeatureProtocolCRUDOptionsProvider implements
 
     private GPEventBus bus;
     private FeatureTransactionEvent transactionEvent = new FeatureTransactionEvent();
+    private ILayerSchemaBinder layerSchemaBinder;
 
     @Inject
-    public FeatureProtocolCRUDOptionsProvider(GPEventBus theBus) {
+    public FeatureProtocolCRUDOptionsProvider(GPEventBus theBus, ILayerSchemaBinder layerSchemaBinder) {
         this.bus = theBus;
+        this.layerSchemaBinder = layerSchemaBinder;
     }
 
     @Override
@@ -72,6 +77,9 @@ public class FeatureProtocolCRUDOptionsProvider implements
             public void computeResponse(Response response) {
                 if (response.success()) {
                     bus.fireEvent(transactionEvent);
+                    GPHandlerManager.fireEvent(
+                    layerSchemaBinder.getReloadLayerMapEvent());
+                    bus.fireEvent(IFeatureMapInitializerHandler.REDRAW_EVENT);
                 } else {
                     bus.fireEvent(new FeatureStatusBarEvent(
                             WFSTWidgetConstants.INSTANCE.

@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema.
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
 import org.geosdi.geoplatform.gui.client.config.provider.DescribeFeatureTypeHandlerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureLonLatItalyProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.FeatureProtocolCRUDOptionsProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.MapWidgetProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureSelectListenerProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.FeatureUnSelectListenerProvider;
@@ -67,6 +68,7 @@ import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Style;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -121,6 +123,9 @@ public class FeatureInjectorProvider extends AbstractGinModule {
         
         bind(UpdateFeatureGeometryRequest.class).toProvider(
                 UpdateFeatureGeometryRequestProvider.class).in(Singleton.class);
+        
+        bind(WFSProtocolCRUDOptions.class).toProvider(
+                FeatureProtocolCRUDOptionsProvider.class).in(Singleton.class);
     }
     
 }

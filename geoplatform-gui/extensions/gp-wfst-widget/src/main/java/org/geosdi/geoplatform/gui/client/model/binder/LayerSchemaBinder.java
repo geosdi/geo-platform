@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model.binder;
 
+import org.geosdi.geoplatform.gui.impl.map.event.ReloadLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
@@ -47,6 +48,7 @@ public class LayerSchemaBinder implements ILayerSchemaBinder {
 
     private LayerSchemaDTO layerSchemaDTO;
     private GPLayerBean selectedLayer;
+    private ReloadLayerMapEvent reloadLayerMapEvent;
 
     @Override
     public LayerSchemaDTO getLayerSchemaDTO() {
@@ -58,6 +60,7 @@ public class LayerSchemaBinder implements ILayerSchemaBinder {
             LayerSchemaDTO theLayerSchemaDTO) {
         this.selectedLayer = theSelectedLayer;
         this.layerSchemaDTO = theLayerSchemaDTO;
+        this.reloadLayerMapEvent = new ReloadLayerMapEvent(theSelectedLayer);
 
         if (this.selectedLayer instanceof GPVectorBean) {
             GPVectorBean vector = (GPVectorBean) this.selectedLayer;
@@ -70,4 +73,10 @@ public class LayerSchemaBinder implements ILayerSchemaBinder {
     public GPLayerBean getSelectedLayer() {
         return this.selectedLayer;
     }
+
+    @Override
+    public ReloadLayerMapEvent getReloadLayerMapEvent() {
+        return this.reloadLayerMapEvent;
+    }
+
 }

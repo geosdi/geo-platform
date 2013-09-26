@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model.binder;
 
+import org.geosdi.geoplatform.gui.impl.map.event.ReloadLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
@@ -49,4 +50,6 @@ public interface ILayerSchemaBinder {
     GPLayerBean getSelectedLayer();
 
     LayerSchemaDTO getLayerSchemaDTO();
+    
+    ReloadLayerMapEvent getReloadLayerMapEvent();
 }

@@ -69,7 +69,7 @@ public abstract class AbstractGetFeatureControlBuilder {
                 wfsProtocolOptions);
 
 
-        gfo.setProtocol(getWfsProtocol());
+        gfo.setProtocol(wfsProtocol);
         return new GetFeature(gfo);
     }
 

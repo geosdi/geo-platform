@@ -33,57 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.wfst.feature;
-
-import java.util.Arrays;
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
-import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryResponse;
-import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.IWFSLayerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
+package org.geosdi.geoplatform.gui.client.model.binder;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
-@Component(value = "command.wfst.feature.UpdateFeatureGeometryCommand")
-public class UpdateFeatureGeometryCommand implements
-        GPCommand<UpdateFeatureGeometryRequest, UpdateFeatureGeometryResponse> {
+public class FeatureIdBinder implements IFeatureIdBinder {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            UpdateFeatureGeometryCommand.class);
-    //
-    @Autowired
-    private IWFSLayerService wfsLayerService;
+    private String fid;
 
     @Override
-    public UpdateFeatureGeometryResponse execute(
-            UpdateFeatureGeometryRequest request,
-            HttpServletRequest httpServletRequest) {
+    public void setFID(String fid) {
+        this.fid = fid;
+    }
 
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
+    @Override
+    public String getFID() {
+        return this.fid;
+    }
 
-        if ((request.getFid() == null) || (request.getFid().equals(""))) {
-            throw new GeoPlatformException("Feature ID must not be null "
-                    + "or Empty String");
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (this.fid != null ? this.fid.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
         }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FeatureIdBinder other = (FeatureIdBinder) obj;
+        if ((this.fid == null) ? (other.fid != null)
+                : !this.fid.equals(other.fid)) {
+            return false;
+        }
+        return true;
+    }
 
-        boolean result = this.wfsLayerService.transactionUpdate(
-                request.getServerUrl(), request.getTypeName(), request.getFid(),
-                Arrays.asList(request.buildGeometryAttribute()));
-
-        logger.debug("##################### Geometry Update : {}", result);
-
-        return new UpdateFeatureGeometryResponse(result);
+    @Override
+    public String toString() {
+        return "FeatureIdBinder{ " + "fid = " + fid + '}';
     }
 
 }

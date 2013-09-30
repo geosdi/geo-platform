@@ -67,7 +67,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  */
 public class FeatureWidget extends GeoPlatformWindow
         implements IFeatureWidget, ActionEnableHandler {
-    
+
     @Inject
     private FeatureSelectionWidget selectionWidget;
     @Inject
@@ -85,7 +85,7 @@ public class FeatureWidget extends GeoPlatformWindow
     private Button saveButton;
     private Button resetButton;
     private GPEventBus bus;
-    
+
     @Inject
     public FeatureWidget(GPEventBus theBus, @ResetButton Button theResetButton,
             @SaveButton Button theSaveButton) {
@@ -93,10 +93,10 @@ public class FeatureWidget extends GeoPlatformWindow
         this.bus = theBus;
         this.resetButton = theResetButton;
         this.saveButton = theSaveButton;
-        
+
         bus.addHandler(ActionEnableEvent.TYPE, this);
     }
-    
+
     @Override
     public void addComponent() {
         this.addSelectionWidget();
@@ -105,41 +105,41 @@ public class FeatureWidget extends GeoPlatformWindow
         this.createStatusBar();
         this.createEditingBar();
     }
-    
+
     @Override
     public void initSize() {
         super.setSize(1000, 650);
         super.setHeadingHtml("GeoPlatform WFS-T Widget");
         super.setIcon(BasicWidgetResources.ICONS.vector());
     }
-    
+
     @Override
     public void setWindowProperties() {
         super.setCollapsible(false);
         super.setResizable(false);
         super.setModal(true);
         super.setPlain(true);
-        
+
         super.setLayout(layout);
     }
-    
+
     private void addSelectionWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.EAST,
                 300);
         layoutData.setMargins(new Margins(5, 5, 5, 5));
         layoutData.setCollapsible(true);
-        
+
         super.add(this.selectionWidget, layoutData);
     }
-    
+
     private void addMapWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.CENTER,
                 700);
         layoutData.setMargins(new Margins(5));
-        
+
         super.add(this.mapWidget, layoutData);
     }
-    
+
     private void addAttributesWidget() {
         BorderLayoutData layoutData = new BorderLayoutData(LayoutRegion.SOUTH,
                 150);
@@ -148,51 +148,51 @@ public class FeatureWidget extends GeoPlatformWindow
         layoutData.setSplit(true);
         layoutData.setMinSize(150);
         layoutData.setMaxSize(500);
-        
+
         attributesWidget.setHeaderVisible(true);
         attributesWidget.getHeader().setText("Feature Attributes");
         attributesWidget.getHeader().setStyleAttribute("textAlign",
                 "center");
         attributesWidget.setScrollMode(Style.Scroll.AUTOY);
-        
+
         super.add(this.attributesWidget, layoutData);
     }
-    
+
     private void createStatusBar() {
         super.setButtonAlign(Style.HorizontalAlignment.LEFT);
-        
+
         super.getButtonBar().add(this.statusBar);
         super.getButtonBar().add(new FillToolItem());
-        
+
         super.addButton(resetButton);
         super.addButton(saveButton);
-        
+
         this.disableButtons();
-        
+
         Button close = new Button(ButtonsConstants.INSTANCE.closeText(),
                 BasicWidgetResources.ICONS.cancel(),
                 new SelectionListener<ButtonEvent>() {
-            
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 hide();
             }
-            
+
         });
         super.addButton(close);
     }
-    
+
     private void createEditingBar() {
         super.add(editToolbarDialog);
     }
-    
+
     @Override
     public void reset() {
         this.mapWidget.reset();
         this.attributesWidget.reset();
         this.statusBar.reset();
     }
-    
+
     @Override
     public void show() {
         if ((this.layerSchemaBinder.getSelectedLayer() == null)
@@ -200,29 +200,29 @@ public class FeatureWidget extends GeoPlatformWindow
             throw new IllegalArgumentException(
                     "Both SchemaDTO and GPLayerBean must not be null");
         }
-        
+
         this.selectionWidget.reconfigureAttributes();
-        
+
         super.show();
     }
-    
+
     @Override
     protected void afterShow() {
         super.afterShow();
-        
+
         this.statusBar.setBusy("Loading Layer as WFS");
-        
+
         this.mapWidget.bindLayerSchema();
         this.attributesWidget.reconfigureEditorGrid();
     }
-    
+
     @Override
     protected void endDrag(DragEvent de, boolean canceled) {
         super.endDrag(de, canceled);
-        
+
         this.mapWidget.updateSize();
     }
-    
+
     @Override
     public void onActionEnabled(ActionEnableEvent event) {
         if (event.isEnabled()) {
@@ -231,25 +231,25 @@ public class FeatureWidget extends GeoPlatformWindow
             disableButtons();
         }
     }
-    
+
     @Override
     public void manageWidgetsSize() {
         SplitBar bar = attributesWidget.getData("splitBar");
-        
+
         if (bar != null) {
             this.attributesWidget.manageGridSize();
             this.mapWidget.manageMapSize();
         }
     }
-    
+
     private void disableButtons() {
         resetButton.disable();
         saveButton.disable();
     }
-    
+
     private void enableButtons() {
         resetButton.enable();
         saveButton.enable();
     }
-    
+
 }

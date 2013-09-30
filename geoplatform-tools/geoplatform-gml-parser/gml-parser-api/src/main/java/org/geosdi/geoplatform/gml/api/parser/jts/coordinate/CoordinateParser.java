@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gml.api.parser.jts.coordinate;
 import com.vividsolutions.jts.geom.Coordinate;
 import java.util.List;
 import org.geosdi.geoplatform.gml.api.DirectPosition;
+import org.geosdi.geoplatform.gml.api.DirectPositionList;
 
 /**
  *
@@ -46,7 +47,10 @@ import org.geosdi.geoplatform.gml.api.DirectPosition;
  */
 public interface CoordinateParser {
 
-    DirectPosition parseCoordiante(Coordinate coordinate);
+    DirectPosition parseCoordinate(Coordinate coordinate);
 
     List<DirectPosition> parseCoordinates(Coordinate[] coordinates);
+
+    DirectPositionList parseCoordinates(List<Coordinate> coordinates);
+
 }

@@ -46,8 +46,11 @@ import java.util.List;
 public interface DirectPositionList {
 
     List<Double> getValue();
-    
+
+    void setValue(List<Double> value);
+
     boolean isSetSrsDimension();
-    
+
     BigInteger getSrsDimension();
+
 }

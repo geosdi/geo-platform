@@ -66,8 +66,7 @@ public abstract class GeometryEditorHandler {
     }
 
     public VectorFeature getSelectedFeature() {
-        return VectorFeature.narrowToVectorFeature(
-                modifyEditorControl.getSelectedFeature().getJSObject());
+        return modifyEditorControl.getSelectedFeature();
     }
 
     protected abstract boolean checkModifications(VectorFeature feature);

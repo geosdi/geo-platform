@@ -36,10 +36,8 @@
 package org.geosdi.geoplatform.gui.client.editor.map.control;
 
 import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
-import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
-import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener;
-import org.gwtopenmaps.openlayers.client.event.VectorBeforeFeatureModifiedListener;
+import org.gwtopenmaps.openlayers.client.control.ModifyFeatureOptions;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
@@ -74,31 +72,29 @@ public abstract class ModifyEditorFeature extends GPVectorMapControl implements
     @Override
     public void createControl() {
         if (!initialized) {
-            this.modifyEditorControl = new ModifyFeature(vector);
+            ModifyFeatureOptions modifyOptions = new ModifyFeatureOptions();
 
-            vector.addVectorBeforeFeatureModifiedListener(
-                    new VectorBeforeFeatureModifiedListener() {
+            modifyOptions.onModificationStart(
+                    new ModifyFeature.OnModificationStartListener() {
 
                 @Override
-                public void onBeforeFeatureModified(
-                        VectorBeforeFeatureModifiedListener.BeforeFeatureModifiedEvent eventObject) {
-                    selectedFeature = eventObject.getVectorFeature().clone();
+                public void onModificationStart(VectorFeature vectorFeature) {
+                    selectedFeature = vectorFeature.clone();
                 }
 
             });
 
-            vector.addVectorAfterFeatureModifiedListener(
-                    new VectorAfterFeatureModifiedListener() {
+            modifyOptions.onModificationEnd(
+                    new ModifyFeature.OnModificationEndListener() {
 
                 @Override
-                public void onAfterFeatureModified(
-                        VectorAfterFeatureModifiedListener.AfterFeatureModifiedEvent eventObject) {
-                    VectorFeature feature = eventObject.getVectorFeature();
-                    manageModifyFeature(feature);
+                public void onModificationEnd(VectorFeature vectorFeature) {
+                    manageModifyFeature(vectorFeature);
                 }
 
             });
 
+            this.modifyEditorControl = new ModifyFeature(vector, modifyOptions);
             this.initialized = true;
         }
     }
@@ -123,6 +119,12 @@ public abstract class ModifyEditorFeature extends GPVectorMapControl implements
     @Override
     public void setMode(int... modes) {
         this.modifyEditorControl.setMode(modes);
+    }
+
+    @Override
+    public void resetControl() {
+        deactivateControl();
+        this.selectedFeature.destroy();
     }
 
     /**

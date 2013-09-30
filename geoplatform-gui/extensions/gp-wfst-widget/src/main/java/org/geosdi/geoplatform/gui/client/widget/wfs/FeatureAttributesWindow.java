@@ -47,7 +47,7 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
-import org.geosdi.geoplatform.gui.client.model.binder.LayerSchemaBinder;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
@@ -61,7 +61,7 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 public class FeatureAttributesWindow extends GeoPlatformWindow {
 
     @Inject
-    private LayerSchemaBinder layerSchemaBinder;
+    private ILayerSchemaBinder layerSchemaBinder;
     private FormPanel attributesFormPanel;
     private GPEventBus bus;
     private List<FeatureAttributeRow> featureAttributeRowList;
@@ -75,13 +75,15 @@ public class FeatureAttributesWindow extends GeoPlatformWindow {
     @Override
     public void reset() {
         super.reset();
-        for (FeatureAttributeRow featureAttributeRow : GeoPlatformUtils.safeList(featureAttributeRowList)) {
+        for (FeatureAttributeRow featureAttributeRow : GeoPlatformUtils.safeList(
+                featureAttributeRowList)) {
             featureAttributeRow.resetValue();
         }
     }
 
     public void bindValues() {
-        for (FeatureAttributeRow featureAttributeRow : GeoPlatformUtils.safeList(featureAttributeRowList)) {
+        for (FeatureAttributeRow featureAttributeRow : GeoPlatformUtils.safeList(
+                featureAttributeRowList)) {
             featureAttributeRow.bindAttributeValue();
         }
     }
@@ -92,22 +94,29 @@ public class FeatureAttributesWindow extends GeoPlatformWindow {
         this.attributesFormPanel.setHeaderVisible(false);
         super.add(this.attributesFormPanel);
         Button saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
-                BasicWidgetResources.ICONS.save(), new SelectionListener<ButtonEvent>() {
+                BasicWidgetResources.ICONS.save(),
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 bindValues();
                 //And now you can add save logic using featureAttributeRowList elements
             }
+
         });
         saveButton.disable();
-        FormButtonBinding formButtonBinding = new FormButtonBinding(attributesFormPanel);
+        FormButtonBinding formButtonBinding = new FormButtonBinding(
+                attributesFormPanel);
         formButtonBinding.addButton(saveButton);
         Button resetButton = new Button(ButtonsConstants.INSTANCE.resetText(),
-                BasicWidgetResources.ICONS.reset(), new SelectionListener<ButtonEvent>() {
+                BasicWidgetResources.ICONS.reset(),
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 FeatureAttributesWindow.this.reset();
             }
+
         });
         super.addButton(saveButton);
     }
@@ -127,7 +136,6 @@ public class FeatureAttributesWindow extends GeoPlatformWindow {
     @Override
     protected void beforeRender() {
         super.beforeRender();
-        this.attributesFormPanel.removeAll();
         this.buildFields();
     }
 
@@ -136,11 +144,15 @@ public class FeatureAttributesWindow extends GeoPlatformWindow {
         if (layerSchemaDTO != null) {
             this.featureAttributeRowList = Lists.<FeatureAttributeRow>newArrayListWithCapacity(
                     layerSchemaDTO.getAttributes().size());
-            for (AttributeDTO attribute : GeoPlatformUtils.safeList(layerSchemaDTO.getAttributes())) {
-                FeatureAttributeRow featureAttributeRow = new FeatureAttributeRow(attribute, this.bus);
+            for (AttributeDTO attribute : GeoPlatformUtils.safeList(
+                    layerSchemaDTO.getAttributes())) {
+                FeatureAttributeRow featureAttributeRow = new FeatureAttributeRow(
+                        attribute, this.bus);
                 this.featureAttributeRowList.add(featureAttributeRow);
-                this.attributesFormPanel.add(featureAttributeRow.getConditionAttributeField());
+                this.attributesFormPanel.add(
+                        featureAttributeRow.getConditionAttributeField());
             }
         }
     }
+
 }

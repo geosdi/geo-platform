@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureSelectListener;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
@@ -50,15 +51,19 @@ public class FeatureSelectListenerProvider implements
 
     private Vector vectorLayer;
     private GPEventBus bus;
+    private IFeatureIdBinder fidBinder;
 
     @Inject
-    public FeatureSelectListenerProvider(Vector theVectorLayer, GPEventBus bus) {
+    public FeatureSelectListenerProvider(Vector theVectorLayer, GPEventBus bus,
+            IFeatureIdBinder theFidBinder) {
         this.vectorLayer = theVectorLayer;
         this.bus = bus;
+        this.fidBinder = theFidBinder;
     }
 
     @Override
     public FeatureSelectListener get() {
-        return new FeatureSelectListener(vectorLayer, bus);
+        return new FeatureSelectListener(vectorLayer, bus, fidBinder);
     }
+
 }

@@ -77,6 +77,7 @@ public class WFSDispatcherProgressBar extends GeoPlatformWindow {
     public void setWindowProperties() {
         super.setHeadingHtml("WFS Progress Bar");
         super.setClosable(false);
+        super.setModal(true);
 
         super.setResizable(false);
         super.setPlain(true);

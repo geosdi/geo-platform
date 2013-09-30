@@ -47,6 +47,9 @@ public class ReloadLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
 
     private GPLayerBean layerBean;
 
+    public ReloadLayerMapEvent() {
+    }
+
     public ReloadLayerMapEvent(GPLayerBean theLayerBean) {
         this.layerBean = theLayerBean;
     }
@@ -58,6 +61,13 @@ public class ReloadLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
         return layerBean;
     }
 
+    /**
+     * @param layerBean the layerBean to set
+     */
+    public void setLayerBean(GPLayerBean layerBean) {
+        this.layerBean = layerBean;
+    }
+
     @Override
     public Type<LayerMapChangedHandler> getAssociatedType() {
         return LayerMapChangedHandler.TYPE;
@@ -67,4 +77,5 @@ public class ReloadLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
     protected void dispatch(LayerMapChangedHandler handler) {
         handler.onReloadLayer(this.layerBean);
     }
+
 }

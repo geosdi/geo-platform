@@ -33,57 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.wfst.feature;
-
-import java.util.Arrays;
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
-import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryResponse;
-import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.IWFSLayerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
+package org.geosdi.geoplatform.gui.client.model.binder;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
-@Component(value = "command.wfst.feature.UpdateFeatureGeometryCommand")
-public class UpdateFeatureGeometryCommand implements
-        GPCommand<UpdateFeatureGeometryRequest, UpdateFeatureGeometryResponse> {
+public interface IFeatureIdBinder {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            UpdateFeatureGeometryCommand.class);
-    //
-    @Autowired
-    private IWFSLayerService wfsLayerService;
+    void setFID(String fid);
 
-    @Override
-    public UpdateFeatureGeometryResponse execute(
-            UpdateFeatureGeometryRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        if ((request.getFid() == null) || (request.getFid().equals(""))) {
-            throw new GeoPlatformException("Feature ID must not be null "
-                    + "or Empty String");
-        }
-
-        boolean result = this.wfsLayerService.transactionUpdate(
-                request.getServerUrl(), request.getTypeName(), request.getFid(),
-                Arrays.asList(request.buildGeometryAttribute()));
-
-        logger.debug("##################### Geometry Update : {}", result);
-
-        return new UpdateFeatureGeometryResponse(result);
-    }
+    String getFID();
 
 }

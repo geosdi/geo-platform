@@ -65,8 +65,7 @@ public class JTSLineStringParser extends AbstractJTSParser<LineString, LineStrin
 
     @Override
     protected LineString canParseGeometry(
-            com.vividsolutions.jts.geom.LineString jtsGeometry)
-            throws ParserException {
+            com.vividsolutions.jts.geom.LineString jtsGeometry) throws ParserException {
 
         LineString lineString = gmlObjectFactory.createLineStringType();
 
@@ -100,4 +99,5 @@ public class JTSLineStringParser extends AbstractJTSParser<LineString, LineStrin
             throws ParserException {
         return gmlObjectFactory.createLineString(super.parseGeometry(geometry));
     }
+
 }

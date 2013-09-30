@@ -37,9 +37,12 @@ package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.model.binder.FeatureIdBinder;
+import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.LayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.IFeatureMapWidget;
@@ -77,6 +80,11 @@ public class FeatureInjectorModule extends AbstractGinModule {
         
         bind(ILayerSchemaBinder.class).to(LayerSchemaBinder.class).in(
                 Singleton.class);
+        
+        bind(IFeatureIdBinder.class).to(FeatureIdBinder.class).in(
+                Singleton.class);
+        
+        bind(FeatureAttributesWindow.class).in(Singleton.class);
     }
     
 }

@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
-import org.gwtopenmaps.openlayers.client.geometry.Polygon;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -52,47 +51,47 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class MultiPolygonEditorHandler extends GeometryEditorHandler {
-
+    
     public MultiPolygonEditorHandler(ModifyEditorFeature theModifyEditorControl) {
         super(theModifyEditorControl);
     }
-
+    
     @Override
     public void geometryRequest(VectorFeature feature, Vector vector) {
         if (feature.getGeometry().getClassName().equals(
                 Geometry.MULTI_POLYGON_CLASS_NAME)) {
-
+            
             if (!checkModifications(feature)) {
                 showConfirmMessage(feature, vector);
             }
-
+            
         } else {
             forwardGeometryRequest(feature, vector);
         }
     }
-
+    
     @Override
     protected boolean checkModifications(VectorFeature feature) {
         MultiPolygon oldMultiPolygon = MultiPolygon.narrowToMultiPolygon(
                 modifyEditorControl.getSelectedFeature().getGeometry().getJSObject());
-
+        
         MultiPolygon multiPolyon = MultiPolygon.narrowToMultiPolygon(
                 feature.getGeometry().getJSObject());
-
+        
         return multiPolyon.equals(oldMultiPolygon);
     }
-
+    
     @Override
     protected void showConfirmMessage(final VectorFeature feature,
             final Vector vector) {
         final VectorFeature selectedFeature = getSelectedFeature();
-
+        
         GeoPlatformMessage.confirmMessage(
                 "Multi Polygon Feature Status",
                 "The Geometry Multi Polygon Feature is changed. "
                 + "Do you want to apply the changes?",
                 new Listener<MessageBoxEvent>() {
-
+            
             @Override
             public void handleEvent(MessageBoxEvent be) {
                 if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
@@ -102,8 +101,8 @@ public abstract class MultiPolygonEditorHandler extends GeometryEditorHandler {
                     vector.addFeature(selectedFeature);
                 }
             }
-
+            
         });
     }
-
+    
 }

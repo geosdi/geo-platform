@@ -73,7 +73,7 @@ public class JTSPointParser extends AbstractJTSParser<Point, PointProperty, com.
         Point point = gmlObjectFactory.createPointType();
 
         if (!jtsGeometry.isEmpty()) {
-            DirectPosition directPosition = coordinateParser.parseCoordiante(
+            DirectPosition directPosition = coordinateParser.parseCoordinate(
                     jtsGeometry.getCoordinate());
             point.setPos(directPosition);
         }

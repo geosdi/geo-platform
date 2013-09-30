@@ -40,6 +40,7 @@ import com.vividsolutions.jts.geom.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gml.api.DirectPosition;
+import org.geosdi.geoplatform.gml.api.DirectPositionList;
 import org.geosdi.geoplatform.gml.api.jaxb.GMLObjectFactory;
 
 /**
@@ -56,7 +57,7 @@ public class JTSCoordinateParser implements CoordinateParser {
     }
 
     @Override
-    public DirectPosition parseCoordiante(Coordinate coordinate) {
+    public DirectPosition parseCoordinate(Coordinate coordinate) {
         Preconditions.checkNotNull(coordinate, "The Coordinate must not "
                 + "be null.");
 
@@ -81,9 +82,29 @@ public class JTSCoordinateParser implements CoordinateParser {
                 coordinates.length);
 
         for (int i = 0; i < coordinates.length; i++) {
-            directPositions.add(this.parseCoordiante(coordinates[i]));
+            directPositions.add(this.parseCoordinate(coordinates[i]));
         }
 
         return directPositions;
     }
+
+    @Override
+    public DirectPositionList parseCoordinates(List<Coordinate> coordinates) {
+        Preconditions.checkNotNull(coordinates, "The Coordinate List must "
+                + "not be null.");
+
+        DirectPositionList directPositionList = gmlObjectFactory.createDirectPositionListType();
+
+        for (Coordinate coordinate : coordinates) {
+            directPositionList.getValue().add(coordinate.x);
+            directPositionList.getValue().add(coordinate.y);
+
+            if (!Double.isNaN(coordinate.z)) {
+                directPositionList.getValue().add(coordinate.z);
+            }
+        }
+
+        return directPositionList;
+    }
+
 }

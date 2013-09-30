@@ -78,7 +78,7 @@ public class WFSModifyFeatureColleague implements IWFSModifyFeatureColleague {
     public void resetColleague() {
         this.mapWidget.getMap().removeControl(
                 wfsModifyFeatureControl.getControl());
-        this.wfsModifyFeatureControl.deactivateControl();
+        this.wfsModifyFeatureControl.resetControl();
         addedControlToMap = false;
     }
 

@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.mock.ClassToXMLMap;
 import org.geosdi.geoplatform.twitter.SearchResults;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -124,6 +125,7 @@ public class GeoPlatformJsonTest {
     }
 
     @Test
+    @Ignore(value = "With api 1.1.0 Authentication required on all endpoints")
     public void testTwitterSearch() throws Exception {
         URL url = new URL("http://search.twitter.com/search.json?q=jenkins");
 

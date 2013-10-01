@@ -36,20 +36,9 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher;
 
 import com.google.gwt.event.shared.HandlerRegistration;
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
-import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
-import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import static org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler.TYPE;
-import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.IFeatureMapInitializerHandler;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.WFSDispatcherProgressBar;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
@@ -59,33 +48,6 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public abstract class AbstractFeatureDispatcher implements FeatureDispatcher {
 
     private static final GPEventBus dispatcherBus = new GPEventBusImpl();
-    //
-    @Inject
-    protected GPEventBus bus;
-    @Inject
-    protected ILayerSchemaBinder layerSchemaBinder;
-    @Inject
-    protected WFSDispatcherProgressBar progressBar;
-    @Inject
-    protected Vector vector;
-    @Inject
-    private IFeatureIdBinder fidBinder;
-    @Inject
-    protected UpdateFeatureGeometryRequest updateGeometryRequest;
-    private final FeatureStatusBarEvent loadingEvent;
-    private final FeatureStatusBarEvent successEvent;
-    private final FeatureStatusBarEvent statusNotOk;
-    private final FeatureStatusBarEvent failedEvent;
-
-    public AbstractFeatureDispatcher(FeatureStatusBarEvent theLoadingEvent,
-            FeatureStatusBarEvent theSuccessEvent,
-            FeatureStatusBarEvent theStatusNotOk,
-            FeatureStatusBarEvent theFailedEvent) {
-        this.loadingEvent = theLoadingEvent;
-        this.successEvent = theSuccessEvent;
-        this.statusNotOk = theStatusNotOk;
-        this.failedEvent = theFailedEvent;
-    }
 
     @Override
     public final HandlerRegistration addFeatureDispatcherHandler() {
@@ -94,53 +56,6 @@ public abstract class AbstractFeatureDispatcher implements FeatureDispatcher {
 
     public static void fireFeatureDispatcherEvent(FeatureDispatcherEvent event) {
         dispatcherBus.fireEvent(event);
-    }
-
-    protected void manageCommandSuccess(Boolean result,
-            VectorFeature modifiedFeature, VectorFeature oldFeature) {
-        progressBar.hide();
-        if (result) {
-            fireEvents();
-        } else {
-            vector.removeFeature(modifiedFeature);
-            vector.addFeature(oldFeature);
-            bus.fireEvent(statusNotOk);
-        }
-    }
-
-    protected void manageCommandFailure(VectorFeature modifiedFeature,
-            VectorFeature oldFeature, Throwable exception) {
-        String errorMessage = "Error on WFS GetFeature request";
-        GeoPlatformMessage.errorMessage(
-                "GetFeture Service Error",
-                errorMessage + " - " + exception.getMessage());
-
-        progressBar.hide();
-        vector.removeFeature(modifiedFeature);
-        vector.addFeature(oldFeature);
-
-        bus.fireEvent(failedEvent);
-    }
-
-    protected void setUpRequest(VectorFeature modifiedFeature,
-            String wktGeometry) {
-        bus.fireEvent(loadingEvent);
-
-        updateGeometryRequest.setFid(fidBinder.getFID());
-        updateGeometryRequest.setWktGeometry(wktGeometry);
-        updateGeometryRequest.setServerUrl(
-                layerSchemaBinder.getLayerSchemaDTO().getScope());
-        updateGeometryRequest.setTypeName(
-                layerSchemaBinder.getLayerSchemaDTO().getTypeName());
-        updateGeometryRequest.setGeometryAttributeName(
-                layerSchemaBinder.getLayerSchemaDTO().getGeometry().getName());
-    }
-
-    private void fireEvents() {
-        bus.fireEvent(successEvent);
-        bus.fireEvent(IFeatureMapInitializerHandler.REDRAW_EVENT);
-        GPHandlerManager.fireEvent(
-                this.layerSchemaBinder.getReloadLayerMapEvent());
     }
 
 }

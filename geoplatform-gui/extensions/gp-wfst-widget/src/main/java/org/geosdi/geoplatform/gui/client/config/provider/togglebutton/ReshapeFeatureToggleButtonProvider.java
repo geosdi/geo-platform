@@ -70,11 +70,14 @@ public class ReshapeFeatureToggleButtonProvider implements
         return new WFSToggleButton(new Image(
                 ResourceEditingToolBar.INSTANCE.reshape()),
                 new ReshapeFeatureAction(mapControlManager, buttonObserver),
-                WFSButtonKeyProvider.RESHAPE_FEATURE.name()) {
+                WFSButtonKeyProvider.RESHAPE_FEATURE.name(), false) {
+
             {
                 super.setTitle(WFSTWidgetConstants.INSTANCE.
                         ReshapeFeatureToggleButtonProvider_titleText());
             }
+
         };
     }
+
 }

@@ -33,50 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider.togglebutton;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.ToggleButton;
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.RotateFeatureAction;
-import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
-import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.ResourceEditingToolBar;
-import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
-import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
-import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class RotateFeatureToggleButtonProvider implements Provider<ToggleButton> {
+public interface WFSGetFeatureHandler extends EventHandler {
 
-    private WFSToolbarObserver buttonObserver;
-    private WFSBaseMapMediator mapControlManager;
+    GwtEvent.Type<WFSGetFeatureHandler> TYPE = new GwtEvent.Type<WFSGetFeatureHandler>();
 
-    @Inject
-    public RotateFeatureToggleButtonProvider(
-            WFSBaseMapMediator theMapControlManager,
-            WFSToolbarObserver theButtonObserver) {
-        this.buttonObserver = theButtonObserver;
-        this.mapControlManager = theMapControlManager;
-    }
-
-    @Override
-    public ToggleButton get() {
-        return new WFSToggleButton(new Image(
-                ResourceEditingToolBar.INSTANCE.rotate()),
-                new RotateFeatureAction(mapControlManager, buttonObserver),
-                WFSButtonKeyProvider.ROTATE_FEATURE.name(), false) {
-
-            {
-                super.setTitle(WFSTWidgetConstants.INSTANCE.
-                        RotateFeatureToggleButtonProvider_titleText());
-            }
-
-        };
-    }
+    void injectGetFeatureModel(GetFeatureModel theFeatureModel);
 
 }

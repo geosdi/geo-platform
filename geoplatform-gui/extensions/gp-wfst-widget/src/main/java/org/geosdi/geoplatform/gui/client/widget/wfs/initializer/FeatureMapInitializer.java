@@ -97,11 +97,13 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
                 injectGetFeatureModelEvent);
 
         Timer t = new Timer() {
+
             @Override
             public void run() {
                 loadLayerOnMap();
                 notifyStatus();
             }
+
         };
 
         t.schedule(1000);
@@ -152,4 +154,5 @@ public class FeatureMapInitializer implements IFeatureMapInitializer {
         this.bus.fireEvent(new FeatureStatusBarEvent("WFS Layer loaded",
                 FeatureStatusBar.FeatureStatusBarType.STATUS_OK));
     }
+
 }

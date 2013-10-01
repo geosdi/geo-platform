@@ -66,20 +66,25 @@ public class WFSEditFeatureColleague implements WFSMapControlColleague {
 
     @Override
     public void activateColleague() {
-        WFSEditFeatureControl efc = this.editFeatureRepository.getWFSEditFeatureControl(
-                layerSchemaBinder.getLayerSchemaDTO().getGeometry().getType());
+        if (defaultFeatureControl == null) {
+            String geometryType = layerSchemaBinder.getGeometryType();
 
-        if (efc == null) {
-            throw new IllegalArgumentException("There is no "
-                    + "EditorFeatureControl registered in the "
-                    + "WFSEditFeatureRepository");
-        }
+            WFSEditFeatureControl efc = this.editFeatureRepository.getWFSEditFeatureControl(
+                    geometryType);
 
-        defaultFeatureControl = efc.getEditFeatureControl();
+            if (efc == null) {
+                throw new IllegalArgumentException("There is no "
+                        + "EditorFeatureControl registered in the "
+                        + "WFSEditFeatureRepository for TYPE : " + geometryType);
+            }
 
-        if (!addedControlToMap) {
-            this.mapWidget.getMap().addControl(defaultFeatureControl);
-            this.addedControlToMap = true;
+            defaultFeatureControl = efc.getEditFeatureControl();
+
+            if (!addedControlToMap) {
+                this.mapWidget.getMap().addControl(defaultFeatureControl);
+                this.addedControlToMap = true;
+            }
+
         }
         this.defaultFeatureControl.activate();
     }

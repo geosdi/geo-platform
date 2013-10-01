@@ -51,5 +51,7 @@ public interface ILayerSchemaBinder {
 
     LayerSchemaDTO getLayerSchemaDTO();
     
+    String getGeometryType();
+    
     ReloadLayerMapEvent getReloadLayerMapEvent();
 }

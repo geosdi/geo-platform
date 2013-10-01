@@ -63,11 +63,14 @@ public class GetFeatureToggleButtonProvider implements Provider<ToggleButton> {
     public ToggleButton get() {
         return new WFSToggleButton(
                 new Image(ResourceEditingToolBar.INSTANCE.info()),
-                action, WFSButtonKeyProvider.GET_FEATURE.name()) {
+                action, WFSButtonKeyProvider.GET_FEATURE.name(), true) {
+
             {
                 super.setTitle(WindowsConstants.INSTANCE.infoTitleText());
                 super.addToggleStateHandler();
             }
+
         };
     }
+
 }

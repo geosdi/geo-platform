@@ -36,14 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher;
 
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryResponse;
-import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarFailedEvent;
-import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarLoadingEvent;
-import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarNotOkEvent;
-import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarSuccessEvent;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
-import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.IWFSUpdateGeometryExecutor;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
@@ -52,46 +45,20 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class WFSFeatureDispatcher extends AbstractFeatureDispatcher {
-
+    
     @Inject
-    public WFSFeatureDispatcher(
-            @StatusBarLoadingEvent FeatureStatusBarEvent theLoadingEvent,
-            @StatusBarSuccessEvent FeatureStatusBarEvent theSuccessEvent,
-            @StatusBarNotOkEvent FeatureStatusBarEvent theStatusNotOk,
-            @StatusBarFailedEvent FeatureStatusBarEvent theFailedEvent) {
-        super(theLoadingEvent, theSuccessEvent, theStatusNotOk, theFailedEvent);
+    private IWFSUpdateGeometryExecutor updateGeometryExecutor;
 
+    public WFSFeatureDispatcher() {
         super.addFeatureDispatcherHandler();
     }
 
     @Override
     public void updateGeometry(final VectorFeature modifiedFeature,
             String wktGeometry, final VectorFeature oldFeature) {
-        progressBar.show();
-
-        super.setUpRequest(modifiedFeature, wktGeometry);
-
-        ClientCommandDispatcher.getInstance().execute(
-                new GPClientCommand<UpdateFeatureGeometryResponse>() {
-
-            private static final long serialVersionUID = 5836033208636357032L;
-
-            {
-                super.setCommandRequest(updateGeometryRequest);
-            }
-
-            @Override
-            public void onCommandSuccess(UpdateFeatureGeometryResponse response) {
-                manageCommandSuccess(response.getResult(), modifiedFeature,
-                        oldFeature);
-            }
-
-            @Override
-            public void onCommandFailure(Throwable exception) {
-                manageCommandFailure(modifiedFeature, oldFeature, exception);
-            }
-
-        });
+        
+        this.updateGeometryExecutor.executeGeometryUpdate(modifiedFeature,
+                wktGeometry, oldFeature);
     }
 
 }

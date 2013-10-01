@@ -75,7 +75,7 @@ public class WFSGetFeatureColleague implements WFSMapControlColleague {
 
     @Override
     public void resetColleague() {
-        this.mapWidget.getMap().removeControl(wfsGetFeatureControl.getControl());
+//        this.mapWidget.getMap().removeControl(wfsGetFeatureControl.getControl());
         this.wfsGetFeatureControl.resetControl();
         addedControlToMap = false;
     }

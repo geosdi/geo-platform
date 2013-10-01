@@ -69,11 +69,14 @@ public class DragFeatureToggleButtonProvider implements Provider<ToggleButton> {
         return new WFSToggleButton(
                 new Image(ResourceEditingToolBar.INSTANCE.drag()),
                 new DragFeatureAction(mapControlManager, buttonObserver),
-                WFSButtonKeyProvider.DRAG_FEATURE.name()) {
+                WFSButtonKeyProvider.DRAG_FEATURE.name(), false) {
+
             {
                 super.setTitle(WFSTWidgetConstants.INSTANCE.
                         DragFeatureToggleButtonProvider_titleText());
             }
+
         };
     }
+
 }

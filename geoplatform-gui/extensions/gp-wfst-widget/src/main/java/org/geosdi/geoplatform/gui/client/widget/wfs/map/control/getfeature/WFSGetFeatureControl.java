@@ -56,7 +56,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public final class WFSGetFeatureControl extends GPVectorMapControl implements
         IWFSGetFeatureControl {
 
-    private static final GPEventBus featureModelBus = new GPEventBusImpl();
+    private static final GPEventBus getFeatureBus = new GPEventBusImpl();
     //
     @Inject
     private GetFeatureControlBuilder featureControlBuilder;
@@ -71,7 +71,7 @@ public final class WFSGetFeatureControl extends GPVectorMapControl implements
     public WFSGetFeatureControl(Vector vector) {
         super(vector, true);
 
-        addInjectGetFeatureModelHandler();
+        addGetFeatureHandler();
     }
 
     @Override
@@ -122,15 +122,17 @@ public final class WFSGetFeatureControl extends GPVectorMapControl implements
 
     @Override
     public void resetControl() {
-        deactivateControl();
-        this.initialized = false;
-        this.wfsGetFeature.destroy();
-        this.wfsGetFeature = null;
+        if (this.wfsGetFeature != null) {
+            deactivateControl();
+            this.initialized = false;
+            this.wfsGetFeature.destroy();
+            this.wfsGetFeature = null;
+        }
     }
 
     @Override
-    public HandlerRegistration addInjectGetFeatureModelHandler() {
-        return featureModelBus.addHandler(TYPE, this);
+    public HandlerRegistration addGetFeatureHandler() {
+        return getFeatureBus.addHandler(TYPE, this);
     }
 
     @Override
@@ -140,7 +142,7 @@ public final class WFSGetFeatureControl extends GPVectorMapControl implements
 
     public static void fireInjectGetFeatureModelEvent(
             InjectGetFeatureModelEvent event) {
-        featureModelBus.fireEvent(event);
+        getFeatureBus.fireEvent(event);
     }
 
 }

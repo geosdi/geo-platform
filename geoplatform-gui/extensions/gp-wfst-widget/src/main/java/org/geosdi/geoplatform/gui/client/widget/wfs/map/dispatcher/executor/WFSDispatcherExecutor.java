@@ -33,21 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
+import org.geosdi.geoplatform.gui.client.puregwt.map.initializer.IFeatureMapInitializerHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.WFSDispatcherProgressBar;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface InjectGetFeatureModelHandler extends EventHandler {
+public class WFSDispatcherExecutor {
 
-    GwtEvent.Type<InjectGetFeatureModelHandler> TYPE = new GwtEvent.Type<InjectGetFeatureModelHandler>();
+    @Inject
+    protected GPEventBus bus;
+    @Inject
+    protected ILayerSchemaBinder layerSchemaBinder;
+    @Inject
+    protected WFSDispatcherProgressBar progressBar;
+    @Inject
+    protected Vector vector;
+    private final FeatureStatusBarEvent successEvent;
 
-    void injectGetFeatureModel(GetFeatureModel theFeatureModel);
+    public WFSDispatcherExecutor(FeatureStatusBarEvent theSuccessEvent) {
+        this.successEvent = theSuccessEvent;
+    }
+
+    protected final void fireEvents() {
+        bus.fireEvent(successEvent);
+        bus.fireEvent(IFeatureMapInitializerHandler.REDRAW_EVENT);
+        GPHandlerManager.fireEvent(
+                this.layerSchemaBinder.getReloadLayerMapEvent());
+    }
 
 }

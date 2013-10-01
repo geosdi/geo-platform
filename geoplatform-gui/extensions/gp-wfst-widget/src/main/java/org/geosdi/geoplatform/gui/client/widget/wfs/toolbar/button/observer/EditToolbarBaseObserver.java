@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer;
 
+import com.google.common.collect.Maps;
+import java.util.Map;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -46,6 +48,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  */
 public class EditToolbarBaseObserver implements WFSToolbarObserver {
 
+    private final Map<String, WFSToggleButton> forceResetButtons = Maps.newHashMap();
     private WFSToggleButton buttonPressed;
     private WFSToggleButton lastButtonPressed;
 
@@ -62,6 +65,10 @@ public class EditToolbarBaseObserver implements WFSToolbarObserver {
     @Override
     public void setButtonPressed(WFSToggleButton btnPressed) {
         this.buttonPressed = btnPressed;
+        if ((buttonPressed.isForceReset()) && !(forceResetButtons.containsKey(
+                buttonPressed.getId()))) {
+            forceResetButtons.put(buttonPressed.getId(), buttonPressed);
+        }
     }
 
     @Override
@@ -92,6 +99,13 @@ public class EditToolbarBaseObserver implements WFSToolbarObserver {
         } else {
             this.lastButtonPressed.resetEditorControl();
             this.lastButtonPressed = null;
+        }
+        this.forceResetButtons();
+    }
+
+    protected final void forceResetButtons() {
+        for (Map.Entry<String, WFSToggleButton> entry : forceResetButtons.entrySet()) {
+            entry.getValue().resetEditorControl();
         }
     }
 

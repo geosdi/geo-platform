@@ -56,17 +56,20 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
     private static final ToggleStateEvent toggleStateEvent = new ToggleStateEvent();
     //
     private final String id;
+    private final boolean forceReset;
     private WFSToggleAction action;
 
-    public WFSToggleButton(String theId) {
+    public WFSToggleButton(String theId, boolean isForceReset) {
         super();
         this.id = theId;
+        this.forceReset = isForceReset;
     }
 
     public WFSToggleButton(Image upImage, WFSToggleAction theAction,
-            String theId) {
+            String theId, boolean isForceReset) {
         super(upImage, theAction);
         this.id = theId;
+        this.forceReset = isForceReset;
         this.action = theAction;
     }
 
@@ -115,6 +118,13 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
         }
     }
 
+    /**
+     * @return the forceReset
+     */
+    public boolean isForceReset() {
+        return forceReset;
+    }
+
     public static void fireToggleStateEvent(String source) {
         toggleStateBus.fireEventFromSource(toggleStateEvent, source);
     }
@@ -143,7 +153,8 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
 
     @Override
     public String toString() {
-        return "WFSToggleButton{ " + "id = " + id + '}';
+        return "WFSToggleButton{ " + "id = " + id + ", forceReset = "
+                + forceReset + '}';
     }
 
     static class WFSClickEvent extends ClickEvent {

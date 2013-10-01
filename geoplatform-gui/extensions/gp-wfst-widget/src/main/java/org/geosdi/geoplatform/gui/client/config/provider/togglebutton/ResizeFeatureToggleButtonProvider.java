@@ -69,11 +69,14 @@ public class ResizeFeatureToggleButtonProvider implements Provider<ToggleButton>
         return new WFSToggleButton(new Image(
                 ResourceEditingToolBar.INSTANCE.resize()),
                 new ResizeFeatureAction(mapControlManager, buttonObserver),
-                WFSButtonKeyProvider.RESIZE_FEATURE.name()) {
+                WFSButtonKeyProvider.RESIZE_FEATURE.name(), false) {
+
             {
                 super.setTitle(WFSTWidgetConstants.INSTANCE.
                         ResizeFeatureToggleButtonProvider_titleText());
             }
+
         };
     }
+
 }

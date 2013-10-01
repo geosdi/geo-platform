@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 import com.google.gwt.event.shared.GwtEvent;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.InjectGetFeatureModelHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.WFSGetFeatureHandler;
 import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -51,19 +51,19 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class InjectGetFeatureModelEvent extends GwtEvent<InjectGetFeatureModelHandler> {
+public class InjectGetFeatureModelEvent extends GwtEvent<WFSGetFeatureHandler> {
 
     @Inject
     private ILayerSchemaBinder layerSchemaBinder;
     private Layer wms;
 
     @Override
-    public Type<InjectGetFeatureModelHandler> getAssociatedType() {
-        return InjectGetFeatureModelHandler.TYPE;
+    public Type<WFSGetFeatureHandler> getAssociatedType() {
+        return WFSGetFeatureHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(InjectGetFeatureModelHandler handler) {
+    protected void dispatch(WFSGetFeatureHandler handler) {
         final GPLayerBean layer = layerSchemaBinder.getSelectedLayer();
         final LayerSchemaDTO schema = layerSchemaBinder.getLayerSchemaDTO();
 

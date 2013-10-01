@@ -124,7 +124,6 @@ public abstract class ModifyEditorFeature extends GPVectorMapControl implements
     @Override
     public void resetControl() {
         deactivateControl();
-        this.selectedFeature.destroy();
     }
 
     /**

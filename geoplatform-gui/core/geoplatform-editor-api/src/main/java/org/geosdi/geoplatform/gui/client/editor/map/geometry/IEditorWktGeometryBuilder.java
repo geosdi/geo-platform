@@ -33,34 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.editor.map.control;
+package org.geosdi.geoplatform.gui.client.editor.map.geometry;
 
-import org.geosdi.geoplatform.gui.client.editor.map.geometry.EditorWktGeometryBuilder;
-import org.geosdi.geoplatform.gui.client.editor.map.geometry.GeometryTypeBinder;
-import org.geosdi.geoplatform.gui.client.editor.map.geometry.WktPolygonGeometryBuilder;
-import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class DrawEditorPolygonFeature extends DrawEditorFeatureControl {
+public interface IEditorWktGeometryBuilder {
 
-    protected final EditorWktGeometryBuilder wktGeometryBuilder;
-
-    public DrawEditorPolygonFeature(Vector vector, boolean lazy,
-            GeometryTypeBinder theGeometryBinder) {
-        super(vector, lazy);
-
-        this.wktGeometryBuilder = new WktPolygonGeometryBuilder(
-                theGeometryBinder);
-    }
-
-    @Override
-    protected final PolygonHandler buildHandler() {
-        return new PolygonHandler();
-    }
+    String buildWktGeometry(VectorFeature feature);
+    
+    boolean isMultiGeometry();
 
 }

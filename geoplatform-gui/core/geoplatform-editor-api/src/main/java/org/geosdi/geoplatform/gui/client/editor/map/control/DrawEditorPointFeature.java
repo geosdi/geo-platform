@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.editor.map.control;
 
+import org.geosdi.geoplatform.gui.client.editor.map.geometry.EditorWktGeometryBuilder;
+import org.geosdi.geoplatform.gui.client.editor.map.geometry.GeometryTypeBinder;
+import org.geosdi.geoplatform.gui.client.editor.map.geometry.WktPointGeometryBuilder;
 import org.gwtopenmaps.openlayers.client.handler.PointHandler;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
@@ -45,12 +48,17 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public abstract class DrawEditorPointFeature extends DrawEditorFeatureControl {
 
-    public DrawEditorPointFeature(Vector vector, boolean lazy) {
+    protected final EditorWktGeometryBuilder wktGeometryBuilder;
+
+    public DrawEditorPointFeature(Vector vector, boolean lazy,
+            GeometryTypeBinder theGeometryBinder) {
         super(vector, lazy);
+
+        this.wktGeometryBuilder = new WktPointGeometryBuilder(theGeometryBinder);
     }
 
     @Override
-    public PointHandler buildHandler() {
+    protected final PointHandler buildHandler() {
         return new PointHandler();
     }
 

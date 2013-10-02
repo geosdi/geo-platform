@@ -33,34 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.editor.map.control;
+package org.geosdi.geoplatform.gui.client.editor.map.geometry;
 
-import org.geosdi.geoplatform.gui.client.editor.map.geometry.EditorWktGeometryBuilder;
-import org.geosdi.geoplatform.gui.client.editor.map.geometry.GeometryTypeBinder;
-import org.geosdi.geoplatform.gui.client.editor.map.geometry.WktPolygonGeometryBuilder;
-import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.MultiPoint;
+import org.gwtopenmaps.openlayers.client.geometry.Point;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class DrawEditorPolygonFeature extends DrawEditorFeatureControl {
+public class WktPointGeometryBuilder extends EditorWktGeometryBuilder {
 
-    protected final EditorWktGeometryBuilder wktGeometryBuilder;
-
-    public DrawEditorPolygonFeature(Vector vector, boolean lazy,
-            GeometryTypeBinder theGeometryBinder) {
-        super(vector, lazy);
-
-        this.wktGeometryBuilder = new WktPolygonGeometryBuilder(
-                theGeometryBinder);
+    public WktPointGeometryBuilder(GeometryTypeBinder theGeometryBinder) {
+        super(theGeometryBinder);
     }
 
     @Override
-    protected final PolygonHandler buildHandler() {
-        return new PolygonHandler();
+    public String buildWktGeometry(VectorFeature feature) {
+        return super.isMultiGeometry() ? buildWktMultiGeometry(feature)
+                : buildWktSimpleGeometry(feature);
+    }
+
+    @Override
+    protected final String buildWktMultiGeometry(VectorFeature feature) {
+        Point point = Point.narrowToPoint(feature.getGeometry().getJSObject());
+        MultiPoint multiPoint = new MultiPoint(new Point[]{point});
+
+        return multiPoint.toString();
+    }
+
+    @Override
+    protected final String buildWktSimpleGeometry(VectorFeature feature) {
+        return feature.getGeometry().toString();
     }
 
 }

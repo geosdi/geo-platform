@@ -111,7 +111,7 @@ public abstract class DrawEditorFeatureControl extends GPVectorMapControl {
         return this.drawEditorControl.isActive();
     }
 
-    public abstract <H extends Handler> H buildHandler();
+    protected abstract <H extends Handler> H buildHandler();
 
     /**
      * <p>This method must be implemented by all Sub Classes.</>

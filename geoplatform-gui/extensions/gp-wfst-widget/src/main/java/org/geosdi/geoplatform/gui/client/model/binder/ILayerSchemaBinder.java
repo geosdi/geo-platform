@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model.binder;
 
+import org.geosdi.geoplatform.gui.client.editor.map.geometry.GeometryTypeBinder;
 import org.geosdi.geoplatform.gui.impl.map.event.ReloadLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
@@ -43,15 +44,14 @@ import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface ILayerSchemaBinder {
+public interface ILayerSchemaBinder extends GeometryTypeBinder {
 
     void bind(GPLayerBean theSelectedLayer, LayerSchemaDTO theLayerSchemaDTO);
 
     GPLayerBean getSelectedLayer();
 
     LayerSchemaDTO getLayerSchemaDTO();
-    
-    String getGeometryType();
-    
+
     ReloadLayerMapEvent getReloadLayerMapEvent();
+
 }

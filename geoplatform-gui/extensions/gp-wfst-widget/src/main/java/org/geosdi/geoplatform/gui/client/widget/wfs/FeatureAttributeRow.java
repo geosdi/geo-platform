@@ -70,13 +70,13 @@ public class FeatureAttributeRow implements IDateSelectedHandler {
     public boolean isValid() {
         return this.conditionAttributeField.isValid();
     }
-    
-    public void bindAttributeValue(){
+
+    public void bindAttributeValue() {
         this.attributeDTO.setValue(
-        this.conditionAttributeField.getValue());
+                this.conditionAttributeField.getValue());
     }
-    
-    public void resetValue(){
+
+    public void resetValue() {
         this.conditionAttributeField.setValue(this.attributeDTO.getValue());
     }
 
@@ -86,16 +86,22 @@ public class FeatureAttributeRow implements IDateSelectedHandler {
                 this.attributeDTO.getType());
         this.conditionAttributeField = new TextField<String>();
         conditionAttributeField.setValidator(customFields.getValidator());
-        System.out.println("Nillable: " + this.attributeDTO.isNillable() + this.attributeDTO.getName());
+        
+        System.out.println(
+                "Nillable: " + this.attributeDTO.isNillable() + this.attributeDTO.getName());
+        
         conditionAttributeField.setAllowBlank(this.attributeDTO.isNillable());
         conditionAttributeField.setToolTip(
                 "Datatype: " + this.attributeDTO.getType());
+        
         if (this.attributeDTO.isDateType()) {
             conditionAttributeField.addHandler(new ClickHandler() {
+
                 @Override
                 public void onClick(ClickEvent event) {
                     timeInputWidget.show();
                 }
+
             }, ClickEvent.getType());
         }
         conditionAttributeField.setFieldLabel(this.attributeDTO.getName());
@@ -105,4 +111,5 @@ public class FeatureAttributeRow implements IDateSelectedHandler {
     public void dateSelected(String date) {
         this.conditionAttributeField.setValue(date);
     }
+
 }

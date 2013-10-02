@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit;
 
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.editor.map.control.DrawEditorLineFeature;
+import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.WFSEditFeatureRepository;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -52,8 +53,9 @@ public class WFSLineFeatureControl extends DrawEditorLineFeature implements
 
     @Inject
     public WFSLineFeatureControl(Vector vector,
+            ILayerSchemaBinder layerSchemaBinder,
             WFSEditFeatureRepository editFeatureRepository) {
-        super(vector, true);
+        super(vector, true, layerSchemaBinder);
 
         editFeatureRepository.bindWFSEditFeatureControl(this);
     }

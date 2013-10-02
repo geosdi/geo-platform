@@ -76,7 +76,7 @@ public class FeatureInjectorToolbar extends AbstractGinModule {
         bind(WFSBaseMapMediator.class).in(Singleton.class);
         
         bind(WFSEditFeatureColleague.class).asEagerSingleton();
-        
+            
         bind(WFSPointFeatureControl.class).asEagerSingleton();
         bind(WFSLineFeatureControl.class).asEagerSingleton();
         bind(WFSPolygonFeatureControl.class).asEagerSingleton();

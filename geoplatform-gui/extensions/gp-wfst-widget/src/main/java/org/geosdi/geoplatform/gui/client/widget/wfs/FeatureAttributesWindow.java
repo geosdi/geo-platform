@@ -93,6 +93,7 @@ public class FeatureAttributesWindow extends GeoPlatformWindow {
         this.attributesFormPanel = new FormPanel();
         this.attributesFormPanel.setHeaderVisible(false);
         super.add(this.attributesFormPanel);
+        
         Button saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
                 BasicWidgetResources.ICONS.save(),
                 new SelectionListener<ButtonEvent>() {
@@ -104,17 +105,20 @@ public class FeatureAttributesWindow extends GeoPlatformWindow {
             }
 
         });
+        
         saveButton.disable();
+        
         FormButtonBinding formButtonBinding = new FormButtonBinding(
                 attributesFormPanel);
         formButtonBinding.addButton(saveButton);
+        
         Button resetButton = new Button(ButtonsConstants.INSTANCE.resetText(),
                 BasicWidgetResources.ICONS.reset(),
                 new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                FeatureAttributesWindow.this.reset();
+                reset();
             }
 
         });
@@ -144,7 +148,7 @@ public class FeatureAttributesWindow extends GeoPlatformWindow {
         if (layerSchemaDTO != null) {
             this.featureAttributeRowList = Lists.<FeatureAttributeRow>newArrayListWithCapacity(
                     layerSchemaDTO.getAttributes().size());
-            for (AttributeDTO attribute : GeoPlatformUtils.safeList(
+            for (AttributeDTO attribute : GeoPlatformUtils.copyList(
                     layerSchemaDTO.getAttributes())) {
                 FeatureAttributeRow featureAttributeRow = new FeatureAttributeRow(
                         attribute, this.bus);

@@ -61,13 +61,16 @@ public class ResetButtonProvider implements Provider<Button> {
 
     @Override
     public Button get() {
-        return new Button(ButtonsConstants.INSTANCE.resetText(), 
+        return new Button(ButtonsConstants.INSTANCE.resetText(),
                 BasicWidgetResources.ICONS.delete(),
                 new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 bus.fireEvent(resetEvent);
             }
+
         });
     }
+
 }

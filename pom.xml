@@ -1632,8 +1632,8 @@
         
         <activemq-version>5.8.0</activemq-version>
 
-        <httpcomponents-core-version>4.2.4</httpcomponents-core-version>
-        <httpcomponents-client-version>4.2.5</httpcomponents-client-version>
+        <httpcomponents-core-version>4.3</httpcomponents-core-version>
+        <httpcomponents-client-version>4.3</httpcomponents-client-version>
 
         <jibx-version>1.2.4.5</jibx-version>
 

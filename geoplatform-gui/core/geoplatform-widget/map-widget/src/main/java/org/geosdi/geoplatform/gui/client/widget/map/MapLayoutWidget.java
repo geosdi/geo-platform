@@ -37,8 +37,10 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.Info;
+
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.client.event.IChangeBaseLayerHandler;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.baselayer.factory.GPMapBaseLayerFactory;
@@ -202,8 +204,9 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.measure.addMeasureListener(new MeasureListener() {
             @Override
             public void onMeasure(MeasureEvent eventObject) {
-                Info.display("Distance is: ", eventObject.getMeasure() + " "
+                Window.alert("Distance is "+ eventObject.getMeasure() + " "
                         + eventObject.getUnits());
+                
             }
         });
     }
@@ -217,8 +220,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.measureArea.addMeasureListener(new MeasureListener() {
             @Override
             public void onMeasure(MeasureEvent eventObject) {
-                Info.display("Area is: ", eventObject.getMeasure() + " "
-                        + eventObject.getUnits());
+                 Window.alert("Area is "+ eventObject.getMeasure() + " "
+                        + eventObject.getUnits() + "2");
             }
         });
     }

@@ -36,9 +36,10 @@
 package org.geosdi.geoplatform.gui.client.widget.map;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.widget.Info;
+
 import com.google.common.collect.Lists;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.client.event.IChangeBaseLayerHandler;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
@@ -175,18 +176,21 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.map.setOptions(this.mapOptions);
 //        System.out.println("Map Projection " + this.map.getProjection());
         this.featureInfoLayerAddedListener = new MapLayerAddedListener() {
+
             @Override
             public void onLayerAdded(MapLayerAddedEvent eventObject) {
                 MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(eventObject.getLayer()));
             }
         };
         this.featureInfoLayerRemovedListener = new MapLayerRemovedListener() {
+
             @Override
             public void onLayerRemoved(MapLayerRemovedEvent eventObject) {
                 MapHandlerManager.fireEvent(new FeatureInfoRemoveLayer(eventObject.getLayer()));
             }
         };
         this.featureInfoLayerChangedListener = new MapLayerChangedListener() {
+
             @Override
             public void onLayerChanged(MapLayerChangedEvent eventObject) {
                 MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(eventObject.getLayer()));
@@ -201,10 +205,11 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.measure = new Measure(new PathHandler(), measOpts);
         this.map.addControl(measure);
         this.measure.addMeasureListener(new MeasureListener() {
+
             @Override
             public void onMeasure(MeasureEvent eventObject) {
-                Info.display(MapModuleConstants.INSTANCE.MapLayoutWidget_infoDiscanceText()
-                        + ": ", eventObject.getMeasure() + " "
+                Window.alert(MapModuleConstants.INSTANCE.MapLayoutWidget_infoDiscanceText()
+                        + ": " + eventObject.getMeasure() + " "
                         + eventObject.getUnits());
             }
         });
@@ -217,10 +222,11 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         this.measureArea = new Measure(new PolygonHandler(), measOpts);
         this.map.addControl(measureArea);
         this.measureArea.addMeasureListener(new MeasureListener() {
+
             @Override
             public void onMeasure(MeasureEvent eventObject) {
-                Info.display(MapModuleConstants.INSTANCE.MapLayoutWidget_infoAreaText()
-                        + ": ", eventObject.getMeasure() + " "
+                Window.alert(MapModuleConstants.INSTANCE.MapLayoutWidget_infoAreaText()
+                        + ": " + eventObject.getMeasure() + " "
                         + eventObject.getUnits());
             }
         });
@@ -555,6 +561,7 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void showScaleWidget() {
 
         Timer t = new Timer() {
+
             @Override
             public void run() {
                 GPScaleWidget.display(MapModuleConstants.INSTANCE.MapLayoutWidget_scaleText());

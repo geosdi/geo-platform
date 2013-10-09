@@ -52,7 +52,9 @@ public class XmlStreamWriterBuilder {
     private XmlStreamWriterHandler writerHandler = new XmlStreamWriterHandler();
 
     private XmlStreamWriterBuilder() {
-        factory = XMLOutputFactory.newInstance();
+        factory = XMLOutputFactory.newFactory(
+                "com.sun.xml.internal.stream.XMLOutputFactoryImpl",
+                Thread.currentThread().getContextClassLoader());
         factory.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES,
                 Boolean.TRUE);
     }
@@ -85,4 +87,5 @@ public class XmlStreamWriterBuilder {
     public XMLStreamWriter build(Object o) throws XMLStreamException {
         return writerHandler.buildXmlWriter(o, factory);
     }
+
 }

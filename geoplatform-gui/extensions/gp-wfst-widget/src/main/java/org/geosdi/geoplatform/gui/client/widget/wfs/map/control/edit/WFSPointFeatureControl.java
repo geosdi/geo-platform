@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.editor.map.control.DrawEditorPointFeature;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.ShowAttributesWindowEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.WFSEditFeatureRepository;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -49,7 +51,11 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class WFSPointFeatureControl extends DrawEditorPointFeature implements
-        WFSEditFeatureControl {
+        WFSEditFeatureControl, WFSEdit {
+
+    @Inject
+    private ShowAttributesWindowEvent event;
+    private VectorFeature lastFeatureInserted;
 
     @Inject
     public WFSPointFeatureControl(Vector vector,
@@ -62,8 +68,10 @@ public class WFSPointFeatureControl extends DrawEditorPointFeature implements
 
     @Override
     protected void manageAddedFeature(VectorFeature vf) {
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-                + " Feature Created : " + vf);
+        this.lastFeatureInserted = vf;
+
+        this.event.setEditorSource(this);
+        FeatureAttributesWindowBuilder.fireAttributesWindowEvent(event);
     }
 
     @Override
@@ -87,8 +95,19 @@ public class WFSPointFeatureControl extends DrawEditorPointFeature implements
     }
 
     @Override
-    public String toString() {
-        return "WFSPointFeatureControl{" + '}';
+    public void resetWFSEditing() {
+        if (lastFeatureInserted != null) {
+            this.vector.removeFeature(lastFeatureInserted);
+        }
+    }
+
+    @Override
+    public String buildWktGeometry() {
+        if (lastFeatureInserted == null) {
+            throw new IllegalStateException("The Last Feature added is null.");
+        }
+
+        return this.wktGeometryBuilder.buildWktGeometry(lastFeatureInserted);
     }
 
 }

@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -49,13 +49,13 @@ import org.geosdi.geoplatform.gui.responce.AttributeDTO;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class FeatureAttributeRow implements IDateSelectedHandler {
+class FeatureAttributeRow implements IDateSelectedHandler {
 
     private AttributeDTO attributeDTO;
     private TextField<String> conditionAttributeField;
     private TimeInputWidget timeInputWidget;
 
-    public FeatureAttributeRow(AttributeDTO attributeDTO, GPEventBus bus) {
+    protected FeatureAttributeRow(AttributeDTO attributeDTO, GPEventBus bus) {
         this.timeInputWidget = new TimeInputWidget(bus);
         bus.addHandlerToSource(IDateSelectedHandler.TYPE, timeInputWidget,
                 this);
@@ -77,23 +77,22 @@ public class FeatureAttributeRow implements IDateSelectedHandler {
     }
 
     public void resetValue() {
-        this.conditionAttributeField.setValue(this.attributeDTO.getValue());
+        this.attributeDTO.setValue(null);
+        this.conditionAttributeField.setValue(null);
     }
 
     private void buildRow() {
         AttributeCustomFields customFields =
                 AttributeCustomFieldsMap.getAttributeCustomFields(
                 this.attributeDTO.getType());
+
         this.conditionAttributeField = new TextField<String>();
         conditionAttributeField.setValidator(customFields.getValidator());
-        
-        System.out.println(
-                "Nillable: " + this.attributeDTO.isNillable() + this.attributeDTO.getName());
-        
+
         conditionAttributeField.setAllowBlank(this.attributeDTO.isNillable());
         conditionAttributeField.setToolTip(
                 "Datatype: " + this.attributeDTO.getType());
-        
+
         if (this.attributeDTO.isDateType()) {
             conditionAttributeField.addHandler(new ClickHandler() {
 
@@ -104,12 +103,22 @@ public class FeatureAttributeRow implements IDateSelectedHandler {
 
             }, ClickEvent.getType());
         }
+
         conditionAttributeField.setFieldLabel(this.attributeDTO.getName());
+
+//        conditionAttributeField.setWidth(80);
     }
 
     @Override
     public void dateSelected(String date) {
         this.conditionAttributeField.setValue(date);
+    }
+
+    /**
+     * @return the attributeDTO
+     */
+    public AttributeDTO getAttributeDTO() {
+        return attributeDTO;
     }
 
 }

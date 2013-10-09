@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.List;
+import java.util.logging.Level;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -109,7 +110,24 @@ public class WFSLayerService implements IWFSLayerService {
             return this.geoPlatformWFSClient.transactionUpdate(serverURL,
                     typeName, fid, attributes);
         } catch (Exception ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
+            logger.error("@@@@\n WFSLayerService Transaction Update Error {} "
+                    + "@@@@@@@@@@@@@", ex);
+            throw new GeoPlatformException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public boolean transactionInsert(String serverURL, String typeName,
+            String targetNamespace,
+            List<AttributeDTO> attributes) throws GeoPlatformException {
+
+        try {
+            return this.geoPlatformWFSClient.transactionInsert(serverURL,
+                    typeName,
+                    targetNamespace, attributes);
+        } catch (Exception ex) {
+            logger.error("@@@@\n WFSLayerService Transaction Insert Error {} "
+                    + "@@@@@@@@@@@@@", ex);
             throw new GeoPlatformException(ex.getMessage());
         }
     }

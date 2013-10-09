@@ -608,7 +608,7 @@
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
-                <version>1.4.3</version>
+                <version>1.4.5</version>
             </dependency>
             
             <!-- =========================================================== -->
@@ -811,7 +811,7 @@
             <dependency>
                 <groupId>org.apache.ws.security</groupId>
                 <artifactId>wss4j</artifactId>
-                <version>1.6.10</version>
+                <version>1.6.12</version>
             </dependency>
             
             <dependency>
@@ -1627,7 +1627,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         
-        <cxf-version>2.7.6</cxf-version>
+        <cxf-version>2.7.7</cxf-version>
         <spring-version>3.2.4.RELEASE</spring-version>
         
         <activemq-version>5.8.0</activemq-version>

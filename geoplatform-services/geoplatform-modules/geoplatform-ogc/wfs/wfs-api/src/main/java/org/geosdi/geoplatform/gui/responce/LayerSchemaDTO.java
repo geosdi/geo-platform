@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.responce;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -117,7 +118,16 @@ public class LayerSchemaDTO implements Serializable {
     }
 
     public List<AttributeDTO> getAttributes() {
-        return attributes;
+        return Collections.unmodifiableList(attributes);
+    }
+
+    public List<AttributeDTO> getAttributesCopy() {
+        List<AttributeDTO> copyAttributes = new ArrayList<AttributeDTO>();
+        for (AttributeDTO attributeDTO : attributes) {
+            copyAttributes.add(attributeDTO.copy());
+        }
+
+        return copyAttributes;
     }
 
     public List<String> getAttributeNames() {

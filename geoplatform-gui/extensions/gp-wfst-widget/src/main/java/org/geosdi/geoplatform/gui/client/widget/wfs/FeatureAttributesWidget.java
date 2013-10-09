@@ -88,6 +88,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     static {
         mockColumnModel = new ColumnModel(new ArrayList<ColumnConfig>());
     }
+
     public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
     private static final ColumnModel mockColumnModel;
     //
@@ -108,7 +109,9 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
     @Inject
     public FeatureAttributesWidget(GPEventBus bus,
-            TimeInputWidget timeInputWidget, GetFeatureControlBuilder featureControlBuilder, WFSProtocolCRUDOptions featureCRUDProtocol) {
+            TimeInputWidget timeInputWidget,
+            GetFeatureControlBuilder featureControlBuilder,
+            WFSProtocolCRUDOptions featureCRUDProtocol) {
         super(true);
         this.bus = bus;
         this.timeInputWidget = timeInputWidget;
@@ -185,6 +188,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         store = new ListStore<FeatureAttributeValuesDetail>();
         store.addStoreListener(
                 new StoreListener<FeatureAttributeValuesDetail>() {
+
             @Override
             public void storeClear(StoreEvent<FeatureAttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(false));
@@ -194,6 +198,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             public void storeUpdate(StoreEvent<FeatureAttributeValuesDetail> se) {
                 bus.fireEvent(new ActionEnableEvent(true));
             }
+
         });
     }
 
@@ -212,11 +217,13 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SIMPLE);
 
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
+
             @Override
             public void handleEvent(BaseEvent be) {
                 System.out.println("SELECTED @@@@@@@@@@ "
                         + grid.getSelectionModel().getSelectedItem());
             }
+
         });
 
         super.add(grid);
@@ -236,6 +243,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
 
             valueTextField.setAutoValidate(true);
             CellEditor valueEditor = new CellEditor(valueTextField) {
+
                 @Override
                 public Object postProcessValue(Object value) {
                     if (value == null) {
@@ -246,14 +254,17 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                             FeatureStatusBarType.STATUS_OK));
                     return value;
                 }
+
             };
             if (att.isDateType()) {
                 FocusHandler focusHandler = new FocusHandler() {
+
                     @Override
                     public void onFocus(FocusEvent event) {
                         dataAttributeName = att.getName();
                         timeInputWidget.show();
                     }
+
                 };
 
                 valueTextField.addHandler(focusHandler, FocusEvent.getType());
@@ -280,9 +291,10 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             FeatureAttributeValuesDetail attribute = (FeatureAttributeValuesDetail) model;
 
             for (String name : attribute.getProperties().keySet()) {
-                this.vectors.get(0).getAttributes().setAttribute(name, attribute.getValue(name));
+                this.vectors.get(0).getAttributes().setAttribute(name,
+                        attribute.getValue(name));
             }
-            
+
         }
 
         this.vectors.get(0).toState(VectorFeature.State.Update);
@@ -291,11 +303,13 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                 FeatureStatusBarType.STATUS_LOADING));
 
         Timer t = new Timer() {
+
             @Override
             public void run() {
                 featureControlBuilder.getWfsProtocol().commit(vectors.get(0),
                         featureCRUDProtocol);
             }
+
         };
 
         t.schedule(2000);
@@ -362,4 +376,5 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             grid.unmask();
         }
     }
+
 }

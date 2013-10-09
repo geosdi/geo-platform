@@ -33,34 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.insert;
 
 import java.util.List;
-import javax.jws.WebParam;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IWFSLayerService {
+public class InsertFeatureDispatcherEvent extends FeatureDispatcherHandler.FeatureDispatcherEvent {
 
-    LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
-            throws GeoPlatformException;
+    private WFSEdit editorSource;
+    private List<AttributeDTO> featureAttributes;
 
-    FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
-            int maxFeatures) throws GeoPlatformException;
+    /**
+     * @param editorSource the editorSource to set
+     */
+    public void setEditorSource(WFSEdit editorSource) {
+        this.editorSource = editorSource;
+    }
 
-    boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<? extends AttributeDTO> attributes)
-            throws GeoPlatformException;
+    /**
+     * @param featureAttributes the featureAttributes to set
+     */
+    public void setFeatureAttributes(List<AttributeDTO> featureAttributes) {
+        this.featureAttributes = featureAttributes;
+    }
 
-    boolean transactionInsert(String serverURL, String typeName,
-            String targetNamespace, List<AttributeDTO> attributes)
-            throws GeoPlatformException;
+    @Override
+    protected void dispatch(FeatureDispatcherHandler handler) {
+        handler.insertFeature(editorSource, featureAttributes);
+    }
 
 }

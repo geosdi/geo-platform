@@ -33,22 +33,26 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs;
+package org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature;
 
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.common.collect.Lists;
 import java.util.List;
-import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.insert.InsertFeatureDispatcherEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.WFSFeatureDispatcher;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
@@ -57,43 +61,68 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureAttributesWindow extends GeoPlatformWindow {
+class FeatureAttributesWindow extends GeoPlatformWindow implements
+        WfsAttributesWindow {
 
-    @Inject
-    private ILayerSchemaBinder layerSchemaBinder;
+    private static final InsertFeatureDispatcherEvent insertFeatureEvent = WFSFeatureDispatcher.INSERT_FEATURE_EVENT;
+    //
+    private final ILayerSchemaBinder layerSchemaBinder;
+    private final GPEventBus bus;
     private FormPanel attributesFormPanel;
-    private GPEventBus bus;
+    private List<AttributeDTO> attributeDTOs;
     private List<FeatureAttributeRow> featureAttributeRowList;
+    private WFSEdit editorSource;
+    private FormData formData = new FormData("-20");
+    private boolean fieldsState = false;
+    private boolean resetEditorSource = true;
 
-    @Inject
-    public FeatureAttributesWindow(GPEventBus bus) {
+    protected FeatureAttributesWindow(GPEventBus theBus,
+            ILayerSchemaBinder theLayerSchemaBinder) {
         super(Boolean.TRUE);
-        this.bus = bus;
+
+        this.bus = theBus;
+        this.layerSchemaBinder = theLayerSchemaBinder;
     }
 
     @Override
     public void reset() {
         super.reset();
-        for (FeatureAttributeRow featureAttributeRow : GeoPlatformUtils.safeList(
-                featureAttributeRowList)) {
-            featureAttributeRow.resetValue();
+        resetFields();
+        if (resetEditorSource) {
+            this.editorSource.resetWFSEditing();
         }
+        this.resetEditorSource = true;
+        this.fieldsState = true;
     }
 
-    public void bindValues() {
+    protected final void bindValues() {
         for (FeatureAttributeRow featureAttributeRow : GeoPlatformUtils.safeList(
                 featureAttributeRowList)) {
             featureAttributeRow.bindAttributeValue();
         }
+        this.fireInsertFeatureEvent();
+    }
+
+    final void fireInsertFeatureEvent() {
+        insertFeatureEvent.setEditorSource(editorSource);
+        insertFeatureEvent.setFeatureAttributes(attributeDTOs);
+        WFSFeatureDispatcher.fireFeatureDispatcherEvent(insertFeatureEvent);
     }
 
     @Override
     public void addComponent() {
+        VerticalPanel vp = new VerticalPanel();
+
         this.attributesFormPanel = new FormPanel();
+        this.attributesFormPanel.setWidth(340);
+        this.attributesFormPanel.setFieldWidth(180);
         this.attributesFormPanel.setHeaderVisible(false);
         super.add(this.attributesFormPanel);
-        
+
         Button saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
                 BasicWidgetResources.ICONS.save(),
                 new SelectionListener<ButtonEvent>() {
@@ -101,28 +130,32 @@ public class FeatureAttributesWindow extends GeoPlatformWindow {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 bindValues();
-                //And now you can add save logic using featureAttributeRowList elements
             }
 
         });
-        
-        saveButton.disable();
-        
-        FormButtonBinding formButtonBinding = new FormButtonBinding(
-                attributesFormPanel);
-        formButtonBinding.addButton(saveButton);
-        
+
         Button resetButton = new Button(ButtonsConstants.INSTANCE.resetText(),
                 BasicWidgetResources.ICONS.reset(),
                 new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                reset();
+                resetFields();
             }
 
         });
+
         super.addButton(saveButton);
+        super.addButton(resetButton);
+        super.setButtonAlign(Style.HorizontalAlignment.CENTER);
+
+        FormButtonBinding formButtonBinding = new FormButtonBinding(
+                attributesFormPanel);
+        formButtonBinding.addButton(saveButton);
+
+        vp.add(this.attributesFormPanel);
+
+        super.add(vp);
     }
 
     @Override
@@ -135,28 +168,92 @@ public class FeatureAttributesWindow extends GeoPlatformWindow {
         super.setHeadingHtml(WFSTWidgetConstants.INSTANCE.
                 FeatureAttributesWindow_headingText());
         super.setScrollMode(Style.Scroll.AUTOY);
+
+        super.setModal(true);
+        super.setResizable(false);
     }
 
     @Override
     protected void beforeRender() {
         super.beforeRender();
         this.buildFields();
+        this.fieldsState = true;
     }
 
-    private void buildFields() {
-        LayerSchemaDTO layerSchemaDTO = this.layerSchemaBinder.getLayerSchemaDTO();
-        if (layerSchemaDTO != null) {
-            this.featureAttributeRowList = Lists.<FeatureAttributeRow>newArrayListWithCapacity(
-                    layerSchemaDTO.getAttributes().size());
-            for (AttributeDTO attribute : GeoPlatformUtils.copyList(
-                    layerSchemaDTO.getAttributes())) {
-                FeatureAttributeRow featureAttributeRow = new FeatureAttributeRow(
-                        attribute, this.bus);
-                this.featureAttributeRowList.add(featureAttributeRow);
-                this.attributesFormPanel.add(
-                        featureAttributeRow.getConditionAttributeField());
-            }
+    @Override
+    protected void afterShow() {
+        if (!fieldsState) {
+            cleanFormPanel();
+            buildFields();
         }
+        super.afterShow();
+    }
+
+    final void cleanFormPanel() {
+        this.attributesFormPanel.removeAll();
+        this.featureAttributeRowList.clear();
+    }
+
+    final void resetFields() {
+        for (FeatureAttributeRow featureAttributeRow : GeoPlatformUtils.safeList(
+                featureAttributeRowList)) {
+            featureAttributeRow.resetValue();
+        }
+    }
+
+    /**
+     * <p>
+     * We must use a copy of AttributeDTO List in {@link LayerSchemaDTO}
+     * </p>
+     */
+    final void buildFields() {
+        LayerSchemaDTO layerSchemaDTO = this.layerSchemaBinder.getLayerSchemaDTO();
+
+        assert (layerSchemaDTO != null) : "The LayerSchemaDTO must not be null.";
+
+        this.featureAttributeRowList = Lists.<FeatureAttributeRow>newArrayListWithCapacity(
+                layerSchemaDTO.getAttributes().size());
+
+        this.attributeDTOs = layerSchemaDTO.getAttributesCopy();
+
+        for (AttributeDTO attribute : attributeDTOs) {
+            FeatureAttributeRow featureAttributeRow = new FeatureAttributeRow(
+                    attribute, this.bus);
+            this.featureAttributeRowList.add(featureAttributeRow);
+            this.attributesFormPanel.add(
+                    featureAttributeRow.getConditionAttributeField(), formData);
+        }
+
+        this.reconfigureWindowHeight();
+    }
+
+    final void reconfigureWindowHeight() {
+        if (this.featureAttributeRowList.size() < 10) {
+            super.setHeight(0);
+            super.setAutoHeight(true);
+        } else {
+            super.setHeight(380);
+        }
+
+        super.doLayout();
+    }
+
+    @Override
+    public void bindWFSEdit(WFSEdit theEditorSource) {
+        this.editorSource = theEditorSource;
+
+        super.show();
+    }
+
+    @Override
+    public void setFieldsState(boolean fieldsState) {
+        this.fieldsState = fieldsState;
+    }
+
+    @Override
+    public void closeWfsAttributeWindow() {
+        this.resetEditorSource = false;
+        super.hide();
     }
 
 }

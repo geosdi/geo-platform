@@ -36,15 +36,20 @@
 package org.geosdi.geoplatform.gui.client.config;
 
 import com.google.gwt.inject.client.AbstractGinModule;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarFailedEvent;
 import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarLoadingEvent;
 import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarNotOkEvent;
 import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarSuccessEvent;
+import org.geosdi.geoplatform.gui.client.config.provider.event.CloseAttributesWindowEventProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.event.ShowAttributesWindowEventProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.event.StatusBarFailedEventProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.event.StatusBarLoadingEventProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.event.StatusBarNotOkEventProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.event.StatusBarSuccessEventProvider;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.CloseAttributesWindowEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.ShowAttributesWindowEvent;
 
 /**
  *
@@ -70,6 +75,12 @@ public class FeatureInjectorEventProvider extends AbstractGinModule {
         bind(FeatureStatusBarEvent.class).annotatedWith(
                 StatusBarSuccessEvent.class).toProvider(
                 StatusBarSuccessEventProvider.class);
+
+        bind(ShowAttributesWindowEvent.class).toProvider(
+                ShowAttributesWindowEventProvider.class).in(Singleton.class);
+
+        bind(CloseAttributesWindowEvent.class).toProvider(
+                CloseAttributesWindowEventProvider.class).in(Singleton.class);
     }
 
 }

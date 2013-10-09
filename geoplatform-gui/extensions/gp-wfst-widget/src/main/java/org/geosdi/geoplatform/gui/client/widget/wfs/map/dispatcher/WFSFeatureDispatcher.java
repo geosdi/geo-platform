@@ -35,8 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher;
 
+import java.util.List;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.IWFSInsertFeatureExecutor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.IWFSUpdateGeometryExecutor;
+import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
@@ -48,11 +52,13 @@ public class WFSFeatureDispatcher extends AbstractFeatureDispatcher {
     
     @Inject
     private IWFSUpdateGeometryExecutor updateGeometryExecutor;
-
+    @Inject
+    private IWFSInsertFeatureExecutor insertFeatureExecutor;
+    
     public WFSFeatureDispatcher() {
         super.addFeatureDispatcherHandler();
     }
-
+    
     @Override
     public void updateGeometry(final VectorFeature modifiedFeature,
             String wktGeometry, final VectorFeature oldFeature) {
@@ -60,5 +66,11 @@ public class WFSFeatureDispatcher extends AbstractFeatureDispatcher {
         this.updateGeometryExecutor.executeGeometryUpdate(modifiedFeature,
                 wktGeometry, oldFeature);
     }
-
+    
+    @Override
+    public void insertFeature(WFSEdit editorSource,
+            List<AttributeDTO> featureAttributes) {
+        this.insertFeatureExecutor.insertFeature(editorSource, featureAttributes);
+    }
+    
 }

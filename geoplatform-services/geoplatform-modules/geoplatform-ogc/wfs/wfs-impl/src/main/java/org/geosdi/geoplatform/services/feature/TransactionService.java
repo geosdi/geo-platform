@@ -48,4 +48,8 @@ public interface TransactionService {
             String fid, List<? extends AttributeDTO> attributes)
             throws Exception;
 
+    boolean transactionInsert(String serverURL, String typeName,
+            String targetNamespace, List<AttributeDTO> attributes)
+            throws Exception;
+
 }

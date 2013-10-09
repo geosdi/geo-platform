@@ -92,7 +92,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
     private void writeStartDocument(QName typeName) throws XMLStreamException {
         writer.writeStartDocument("UTF-8", "1.0");
 
-        writer.setDefaultNamespace(FeaturesNamespace.WFS.NAMESPACE());
+//        writer.setDefaultNamespace(FeaturesNamespace.WFS.NAMESPACE());
         writer.setPrefix(FeaturesNamespace.GML.PREFIX(),
                 FeaturesNamespace.GML.NAMESPACE());
 
@@ -109,8 +109,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
     }
 
     private <T extends WFSTransactionRequest> void writeTransactionRequest(
-            T request)
-            throws XMLStreamException, Exception {
+            T request) throws XMLStreamException, Exception {
 
         writer.writeStartElement(FeaturesNamespace.WFS.PREFIX(),
                 TransactionParameters.getParam(WFSTransactionParam.TRANSACTION),
@@ -207,4 +206,5 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
                 + ", wfsVersion = " + wfsVersion
                 + ", gmlVersion = " + gmlVersion + '}';
     }
+
 }

@@ -44,4 +44,6 @@ public interface GeometryTypeBinder {
 
     String getGeometryType();
 
+    String getGeometryName();
+
 }

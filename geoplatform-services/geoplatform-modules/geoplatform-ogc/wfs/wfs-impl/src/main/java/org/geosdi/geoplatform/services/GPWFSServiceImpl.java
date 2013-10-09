@@ -135,4 +135,12 @@ public class GPWFSServiceImpl implements GPWFSService {
                 attributes);
     }
 
+    @Override
+    public boolean transactionInsert(String serverURL, String typeName,
+            String targetNamespace, List<AttributeDTO> attributes)
+            throws Exception {
+        return gpTransactionService.transactionInsert(serverURL, typeName,
+                targetNamespace, attributes);
+    }
+
 }

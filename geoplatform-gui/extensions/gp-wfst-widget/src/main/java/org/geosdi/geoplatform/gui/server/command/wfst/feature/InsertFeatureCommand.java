@@ -33,34 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.gui.server.command.wfst.feature;
 
-import java.util.List;
-import javax.jws.WebParam;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.server.IWFSLayerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IWFSLayerService {
+@Lazy(true)
+@Component(value = "command.wfst.feature.InsertFeatureCommand")
+public class InsertFeatureCommand implements
+        GPCommand<InsertFeatureRequest, InsertFeatureResponse> {
 
-    LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
-            throws GeoPlatformException;
+    private static final Logger logger = LoggerFactory.getLogger(
+            InsertFeatureCommand.class);
+    //
+    @Autowired
+    private IWFSLayerService wfsLayerService;
 
-    FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
-            int maxFeatures) throws GeoPlatformException;
+    @Override
+    public InsertFeatureResponse execute(InsertFeatureRequest request,
+            HttpServletRequest httpServletRequest) {
 
-    boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<? extends AttributeDTO> attributes)
-            throws GeoPlatformException;
+        logger.debug("##################### Executing {} Command", this.
+                getClass().getSimpleName());
 
-    boolean transactionInsert(String serverURL, String typeName,
-            String targetNamespace, List<AttributeDTO> attributes)
-            throws GeoPlatformException;
+        boolean result = this.wfsLayerService.transactionInsert(
+                request.getServerUrl(), request.getTypeName(),
+                request.getTargetNamespace(), request.getAttributes());
+
+        logger.debug("##################### Geometry Insert Resulet : {}",
+                result);
+
+        return new InsertFeatureResponse(result);
+    }
 
 }

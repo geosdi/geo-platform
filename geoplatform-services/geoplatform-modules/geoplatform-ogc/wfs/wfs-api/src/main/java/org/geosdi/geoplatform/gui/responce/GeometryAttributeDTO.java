@@ -62,4 +62,18 @@ public class GeometryAttributeDTO extends AttributeDTO {
         this.srid = srid;
     }
 
+    @Override
+    public AttributeDTO copy() {
+        GeometryAttributeDTO copy = new GeometryAttributeDTO();
+        copy.setName(this.getName());
+        copy.setValue(this.getValue());
+        copy.setType(this.getType());
+        copy.setMaxOccurs(this.getMaxOccurs());
+        copy.setMinOccurs(this.getMinOccurs());
+        copy.setNillable(this.isNillable());
+        copy.setSrid(this.getSrid());
+        
+        return super.copy();
+    }
+
 }

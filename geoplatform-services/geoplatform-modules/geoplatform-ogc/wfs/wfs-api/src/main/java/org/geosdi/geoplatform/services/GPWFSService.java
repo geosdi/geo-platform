@@ -109,4 +109,10 @@ public interface GPWFSService {
             @WebParam(name = "attributes") List<? extends AttributeDTO> attributes)
             throws Exception;
 
+    boolean transactionInsert(@WebParam(name = "serverURL") String serverURL,
+            @WebParam(name = "typeName") String typeName,
+            @WebParam(name = "targetNamespace") String targetNamespace,
+            @WebParam(name = "attributes") List<AttributeDTO> attributes)
+            throws Exception;
+
 }

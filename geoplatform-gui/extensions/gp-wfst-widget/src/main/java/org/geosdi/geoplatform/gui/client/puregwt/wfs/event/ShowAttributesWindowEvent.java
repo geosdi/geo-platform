@@ -33,34 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
-import java.util.List;
-import javax.jws.WebParam;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.AttributesWindowBuilderHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.AttributesWindowBuilderHandler.AttributesWindowEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IWFSLayerService {
+public class ShowAttributesWindowEvent extends AttributesWindowEvent {
 
-    LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
-            throws GeoPlatformException;
+    private WFSEdit editorSource;
 
-    FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
-            int maxFeatures) throws GeoPlatformException;
+    @Override
+    protected void dispatch(AttributesWindowBuilderHandler handler) {
+        handler.showFeatureAttributesWindow(editorSource);
+    }
 
-    boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<? extends AttributeDTO> attributes)
-            throws GeoPlatformException;
-
-    boolean transactionInsert(String serverURL, String typeName,
-            String targetNamespace, List<AttributeDTO> attributes)
-            throws GeoPlatformException;
+    /**
+     * @param editorSource the editorSource to set
+     */
+    public void setEditorSource(WFSEdit editorSource) {
+        this.editorSource = editorSource;
+    }
 
 }

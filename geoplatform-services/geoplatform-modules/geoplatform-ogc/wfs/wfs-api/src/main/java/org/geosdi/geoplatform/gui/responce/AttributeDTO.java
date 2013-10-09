@@ -103,9 +103,21 @@ public class AttributeDTO implements Serializable {
     public void setNillable(boolean nillable) {
         this.nillable = nillable;
     }
-    
+
     public boolean isDateType() {
         return this.type.equals("dateTime");
+    }
+
+    public AttributeDTO copy() {
+        AttributeDTO copy = new AttributeDTO();
+        copy.setName(this.getName());
+        copy.setValue(this.getValue());
+        copy.setType(this.getType());
+        copy.setMaxOccurs(this.getMaxOccurs());
+        copy.setMinOccurs(this.getMinOccurs());
+        copy.setNillable(this.isNillable());
+
+        return copy;
     }
 
     @Override

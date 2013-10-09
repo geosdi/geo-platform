@@ -73,7 +73,8 @@ public class FeatureReaderTest {
 
     static {
         try {
-            pathFile = new File(".").getCanonicalPath() + File.separator + "src/test/resources/";
+            pathFile = new File(".").getCanonicalPath() + File.separator
+                    + "src/test/resources/";
         } catch (IOException ex) {
             logger.error("\n### Error: {}", ex.getMessage());
         }
@@ -102,12 +103,12 @@ public class FeatureReaderTest {
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                    {"restricted", 1, 4},
-                    {"restricted-null", 1, 4},
-                    {"states", 22, 49},
-                    {"giant_polygon", 0, 1},
-                    {"tiger_roads", 2, 1000}
-                });
+            {"restricted", 1, 4},
+            {"restricted-null", 1, 4},
+            {"states", 22, 49},
+            {"giant_polygon", 0, 1},
+            {"tiger_roads", 2, 1000}
+        });
     }
 
     @Test
@@ -171,30 +172,5 @@ public class FeatureReaderTest {
             }
         }
     }
-//    
-//    @Test
-//    public void readRestrictedAllNet() throws Exception {
-//        featureReader.read(new URL("http://150.146.160.92/geoserver/wfs"
-//                + "?service=wfs"
-//                + "&version=1.1.0"
-//                + "&request=GetFeature"
-//                + "&typeName=sf:restricted"));
-//    }
-//    @Test
-//    public void readTigerRoadsAllNet() throws IOException, XMLStreamException {
-//        featureReader.read(
-//                new URL("http://150.146.160.92/geoserver/wfs?service=wfs"
-//                + "&version=1.1.0"
-//                + "&request=GetFeature"
-//                + "&typeName=tiger:tiger_roads"
-//                + "&maxFeatures=1000"));
-//    }
-//    @Test
-//    public void readStatesAllNet() throws IOException, XMLStreamException {
-//        featureReader.read(new URL("http://150.146.160.92/geoserver/wfs"
-//                + "?servicewfs"
-//                + "&version=1.1.0"
-//                + "&request=GetFeature"
-//                + "&typeName=topp:states"));
-//    }
+
 }

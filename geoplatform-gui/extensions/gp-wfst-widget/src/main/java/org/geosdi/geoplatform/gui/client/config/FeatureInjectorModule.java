@@ -42,10 +42,10 @@ import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.model.binder.LayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWidget;
-import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureAttributesWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.FeatureWidget;
 import org.geosdi.geoplatform.gui.client.widget.wfs.IFeatureMapWidget;
+import org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.FeatureMapInitializer;
 import org.geosdi.geoplatform.gui.client.widget.wfs.initializer.IFeatureMapInitializer;
 import org.geosdi.geoplatform.gui.client.widget.wfs.layout.responsibility.FeatureAttributesLayoutHandler;
@@ -62,7 +62,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class FeatureInjectorModule extends AbstractGinModule {
-    
+
     @Override
     protected void configure() {
         bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
@@ -71,20 +71,20 @@ public class FeatureInjectorModule extends AbstractGinModule {
         bind(IFeatureMapWidget.class).to(FeatureMapWidget.class).in(
                 Singleton.class);
         bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
-        
+
         bind(IFeatureMapInitializer.class).to(FeatureMapInitializer.class).in(
                 Singleton.class);
-        
+
         bind(FeatureSelectionLayoutHandler.class).in(Singleton.class);
         bind(FeatureAttributesLayoutHandler.class).in(Singleton.class);
-        
+
         bind(ILayerSchemaBinder.class).to(LayerSchemaBinder.class).in(
                 Singleton.class);
-        
+
         bind(IFeatureIdBinder.class).to(FeatureIdBinder.class).in(
                 Singleton.class);
-        
-        bind(FeatureAttributesWindow.class).in(Singleton.class);
+
+        bind(FeatureAttributesWindowBuilder.class).asEagerSingleton();
     }
-    
+
 }

@@ -33,34 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.gui.client.command.wfst.feature;
 
 import java.util.List;
-import javax.jws.WebParam;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
 import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IWFSLayerService {
+public class InsertFeatureRequest extends WFSTRequest {
 
-    LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
-            throws GeoPlatformException;
+    private static final long serialVersionUID = -4559441562395136604L;
+    //
+    private String targetNamespace;
+    private List<AttributeDTO> attributes;
 
-    FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
-            int maxFeatures) throws GeoPlatformException;
+    public InsertFeatureRequest() {
+    }
 
-    boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<? extends AttributeDTO> attributes)
-            throws GeoPlatformException;
+    /**
+     * @return the targetNamespace
+     */
+    public String getTargetNamespace() {
+        return targetNamespace;
+    }
 
-    boolean transactionInsert(String serverURL, String typeName,
-            String targetNamespace, List<AttributeDTO> attributes)
-            throws GeoPlatformException;
+    /**
+     * @param targetNamespace the targetNamespace to set
+     */
+    public void setTargetNamespace(String targetNamespace) {
+        this.targetNamespace = targetNamespace;
+    }
+
+    /**
+     * @return the attributes
+     */
+    public List<AttributeDTO> getAttributes() {
+        return attributes;
+    }
+
+    /**
+     * @param theAttributes the attributes to set
+     */
+    public void setAttributes(List<AttributeDTO> theAttributes) {
+        this.attributes = theAttributes;
+    }
+
+    @Override
+    public String getCommandName() {
+        return "command.wfst.feature.InsertFeatureCommand";
+    }
 
 }

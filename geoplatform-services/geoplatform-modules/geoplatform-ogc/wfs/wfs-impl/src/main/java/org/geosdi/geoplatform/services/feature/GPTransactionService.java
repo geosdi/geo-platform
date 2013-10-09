@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services.feature;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
@@ -51,6 +52,9 @@ import org.springframework.stereotype.Service;
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Service("gpTransactionService")
 public class GPTransactionService extends AbstractFeatureService
@@ -100,6 +104,61 @@ public class GPTransactionService extends AbstractFeatureService
             throw new ResourceNotFoundFault(
                     "Error to execute the WFS Transacion Update for the layer "
                     + typeName + " - fid: " + fid);
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean transactionInsert(String serverURL, String typeName,
+            String targetNamespace, List<AttributeDTO> attributes)
+            throws Exception {
+        assert (serverURL != null);
+        assert (typeName != null);
+        assert (targetNamespace != null);
+        assert (attributes != null && attributes.size() > 0);
+
+        logger.debug("\n\n*** WFS Transaction INSERT for layer '{}' ***",
+                typeName);
+        if (!typeName.contains(":")) {
+            throw new IllegalParameterFault(
+                    "typeName must contain the char \":\"");
+        }
+
+        serverURL = serverURL.replace("wms", "wfs");
+        if (!wfsConfigurator.matchDefaultDataSource(serverURL)) {
+            throw new ResourceNotFoundFault(
+                    "Edit Mode cannot be applied to the server with url "
+                    + wfsConfigurator.getDefaultWFSDataSource());
+        }
+
+        try {
+            GPWFSConnectorStore serverConnector = super.createWFSConnector(
+                    serverURL);
+            WFSTransactionRequest<TransactionResponseType> request =
+                    serverConnector.createTransactionRequest();
+
+            StringTokenizer st = new StringTokenizer(typeName, ":");
+            String wk = st.nextToken();
+
+            QName qName = new QName(targetNamespace, typeName, wk);
+
+            request.setOperation(TransactionOperation.INSERT);
+            request.setTypeName(qName);
+            request.setAttributes(attributes);
+
+            TransactionResponseType response = request.getResponse();
+            if (response.getTransactionSummary().getTotalInserted().intValue() == 1) {
+                return true;
+            }
+
+        } catch (ServerInternalFault ex) {
+            logger.error("\n### ServerInternalFault: {} ###", ex.getMessage());
+        } catch (IOException ex) {
+            logger.error("\n### IOException: {} ###", ex.getMessage());
+            throw new ResourceNotFoundFault(
+                    "Error to execute the WFS Transacion Insert for the layer "
+                    + typeName);
         }
 
         return false;

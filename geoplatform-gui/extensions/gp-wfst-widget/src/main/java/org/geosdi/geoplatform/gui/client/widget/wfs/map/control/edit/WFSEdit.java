@@ -33,34 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server;
-
-import java.util.List;
-import javax.jws.WebParam;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IWFSLayerService {
+public interface WFSEdit {
 
-    LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
-            throws GeoPlatformException;
+    void resetWFSEditing();
 
-    FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
-            int maxFeatures) throws GeoPlatformException;
-
-    boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<? extends AttributeDTO> attributes)
-            throws GeoPlatformException;
-
-    boolean transactionInsert(String serverURL, String typeName,
-            String targetNamespace, List<AttributeDTO> attributes)
-            throws GeoPlatformException;
+    String buildWktGeometry();
 
 }

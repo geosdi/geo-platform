@@ -62,7 +62,7 @@ public class EditFeatureToggleButtonProvider implements Provider<ToggleButton> {
     public ToggleButton get() {
         return new WFSToggleButton(
                 new Image(ResourceEditingToolBar.INSTANCE.edit()),
-                editAction, WFSButtonKeyProvider.EDIT_FEATURE.name(), false) {
+                editAction, WFSButtonKeyProvider.EDIT_FEATURE.name(), true) {
 
             {
                 super.setTitle(WFSTWidgetConstants.INSTANCE.

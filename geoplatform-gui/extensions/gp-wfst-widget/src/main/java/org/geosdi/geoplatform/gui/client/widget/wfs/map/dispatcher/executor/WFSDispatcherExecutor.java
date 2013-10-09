@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent
 import org.geosdi.geoplatform.gui.client.widget.wfs.dispatcher.WFSDispatcherProgressBar;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
@@ -57,12 +56,19 @@ public class WFSDispatcherExecutor {
     protected ILayerSchemaBinder layerSchemaBinder;
     @Inject
     protected WFSDispatcherProgressBar progressBar;
-    @Inject
-    protected Vector vector;
     private final FeatureStatusBarEvent successEvent;
+    protected final FeatureStatusBarEvent loadingEvent;
+    protected final FeatureStatusBarEvent statusNotOk;
+    protected final FeatureStatusBarEvent failedEvent;
 
-    public WFSDispatcherExecutor(FeatureStatusBarEvent theSuccessEvent) {
+    public WFSDispatcherExecutor(FeatureStatusBarEvent theLoadingEvent,
+            FeatureStatusBarEvent theSuccessEvent,
+            FeatureStatusBarEvent theStatusNotOk,
+            FeatureStatusBarEvent theFailedEvent) {
         this.successEvent = theSuccessEvent;
+        this.loadingEvent = theLoadingEvent;
+        this.statusNotOk = theStatusNotOk;
+        this.failedEvent = theFailedEvent;
     }
 
     protected final void fireEvents() {

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.utility;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -80,10 +79,6 @@ public class GeoPlatformUtils {
 
     public static <TK, TV> Map<TK, TV> safeMap(Map<TK, TV> map) {
         return map == null ? Collections.EMPTY_MAP : map;
-    }
-
-    public static <T> List<T> copyList(List<T> list) {
-        return (list != null) ? new ArrayList<T>(list) : Collections.EMPTY_LIST;
     }
 
 }

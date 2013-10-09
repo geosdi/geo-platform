@@ -33,81 +33,61 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit;
+package org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.editor.map.control.DrawEditorPolygonFeature;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.ShowAttributesWindowEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.WFSEditFeatureRepository;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.ReconfigureAttributesFieldsEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSPolygonFeatureControl extends DrawEditorPolygonFeature
-        implements WFSEditFeatureControl, WFSEdit {
+public final class FeatureAttributesWindowBuilder implements
+        WFSAttributesWindowBuilder {
+
+    private static final GPEventBus bus = new GPEventBusImpl();
+    public static final ReconfigureAttributesFieldsEvent RECONFIGURE_STATE = new ReconfigureAttributesFieldsEvent();
+    //
+    private final WfsAttributesWindow attributesWindow;
 
     @Inject
-    private ShowAttributesWindowEvent event;
-    private VectorFeature lastFeatureInserted;
+    public FeatureAttributesWindowBuilder(GPEventBus theBus,
+            ILayerSchemaBinder theLayerSchemaBinder) {
 
-    @Inject
-    public WFSPolygonFeatureControl(Vector vector,
-            ILayerSchemaBinder layerSchemaBinder,
-            WFSEditFeatureRepository editFeatureRepository) {
-        super(vector, true, layerSchemaBinder);
+        this.attributesWindow = new FeatureAttributesWindow(theBus,
+                theLayerSchemaBinder);
 
-        editFeatureRepository.bindWFSEditFeatureControl(this);
+        addAttributesWindowBuilderHandler();
     }
 
     @Override
-    protected void manageAddedFeature(VectorFeature vf) {
-        this.lastFeatureInserted = vf;
-
-        this.event.setEditorSource(this);
-        FeatureAttributesWindowBuilder.fireAttributesWindowEvent(event);
+    public HandlerRegistration addAttributesWindowBuilderHandler() {
+        return bus.addHandler(TYPE, this);
     }
 
     @Override
-    public void activate() {
-        super.activateControl();
+    public void showFeatureAttributesWindow(WFSEdit editorSource) {
+        this.attributesWindow.bindWFSEdit(editorSource);
     }
 
     @Override
-    public void deactivate() {
-        super.deactivateControl();
+    public void closeFeatureAttributesWindow() {
+        this.attributesWindow.closeWfsAttributeWindow();
     }
 
     @Override
-    public String[] getEditFeatureKeys() {
-        return new String[]{"Polygon", "MultiPolygon"};
+    public void reconfigureAttributesWidgetFields() {
+        this.attributesWindow.setFieldsState(false);
     }
 
-    @Override
-    public DrawFeature getEditFeatureControl() {
-        return super.getControl();
-    }
-
-    @Override
-    public void resetWFSEditing() {
-        if (lastFeatureInserted != null) {
-            this.vector.removeFeature(lastFeatureInserted);
-        }
-    }
-
-    @Override
-    public String buildWktGeometry() {
-        if (lastFeatureInserted == null) {
-            throw new IllegalStateException("The Last Feature added is null.");
-        }
-
-        return this.wktGeometryBuilder.buildWktGeometry(lastFeatureInserted);
+    public static void fireAttributesWindowEvent(AttributesWindowEvent event) {
+        bus.fireEvent(event);
     }
 
 }

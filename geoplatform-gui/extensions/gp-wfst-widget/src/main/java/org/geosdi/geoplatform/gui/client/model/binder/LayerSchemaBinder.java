@@ -84,4 +84,9 @@ public class LayerSchemaBinder implements ILayerSchemaBinder {
         return this.layerSchemaDTO.getGeometry().getType();
     }
 
+    @Override
+    public String getGeometryName() {
+        return this.layerSchemaDTO.getGeometry().getName();
+    }
+
 }

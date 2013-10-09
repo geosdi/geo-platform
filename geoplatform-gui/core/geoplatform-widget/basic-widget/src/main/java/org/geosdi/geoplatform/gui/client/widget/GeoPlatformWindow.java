@@ -62,7 +62,7 @@ public abstract class GeoPlatformWindow extends Window {
     /**
      * Initialize the Widget
      */
-    protected void init() {
+    protected final void init() {
         if (!initialized) {
             this.initializeWindow();
             this.finalizeInitOperations();
@@ -78,10 +78,12 @@ public abstract class GeoPlatformWindow extends Window {
         this.initSize();
 
         addWindowListener(new WindowListener() {
+
             @Override
             public void windowHide(WindowEvent we) {
                 reset();
             }
+
         });
 
         setWindowProperties();
@@ -103,4 +105,5 @@ public abstract class GeoPlatformWindow extends Window {
     public boolean isInitialized() {
         return initialized;
     }
+
 }

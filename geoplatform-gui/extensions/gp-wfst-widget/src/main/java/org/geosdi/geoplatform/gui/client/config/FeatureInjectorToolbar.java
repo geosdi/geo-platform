@@ -49,7 +49,9 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.FeatureDispat
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.WFSFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.SimpleEditFeatureRepository;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.WFSEditFeatureRepository;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.IWFSInsertFeatureExecutor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.IWFSUpdateGeometryExecutor;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.WFSInsertFeatureExecutor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.WFSUpdateGeometryExecutor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSEditFeatureColleague;
@@ -76,7 +78,7 @@ public class FeatureInjectorToolbar extends AbstractGinModule {
         bind(WFSBaseMapMediator.class).in(Singleton.class);
         
         bind(WFSEditFeatureColleague.class).asEagerSingleton();
-            
+        
         bind(WFSPointFeatureControl.class).asEagerSingleton();
         bind(WFSLineFeatureControl.class).asEagerSingleton();
         bind(WFSPolygonFeatureControl.class).asEagerSingleton();
@@ -97,7 +99,11 @@ public class FeatureInjectorToolbar extends AbstractGinModule {
         
         bind(FeatureDispatcher.class).to(WFSFeatureDispatcher.class).asEagerSingleton();
         
-        bind(IWFSUpdateGeometryExecutor.class).to(WFSUpdateGeometryExecutor.class).in(
+        bind(IWFSUpdateGeometryExecutor.class).to(
+                WFSUpdateGeometryExecutor.class).in(
+                Singleton.class);
+        
+        bind(IWFSInsertFeatureExecutor.class).to(WFSInsertFeatureExecutor.class).in(
                 Singleton.class);
     }
     

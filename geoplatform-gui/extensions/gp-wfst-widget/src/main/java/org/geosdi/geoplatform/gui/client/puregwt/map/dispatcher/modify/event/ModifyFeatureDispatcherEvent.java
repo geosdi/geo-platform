@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.modify.event;
 
-import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler;
-import static org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler.TYPE;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
@@ -70,11 +68,6 @@ public class ModifyFeatureDispatcherEvent extends FeatureDispatcherHandler.Featu
      */
     public void setOldFeature(VectorFeature theOldFeature) {
         this.oldFeature = theOldFeature;
-    }
-
-    @Override
-    public Type<FeatureDispatcherHandler> getAssociatedType() {
-        return TYPE;
     }
 
     @Override

@@ -33,34 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.gui.client.puregwt.wfs.handler;
 
-import java.util.List;
-import javax.jws.WebParam;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IWFSLayerService {
+public interface AttributesWindowBuilderHandler extends EventHandler {
 
-    LayerSchemaDTO describeFeatureType(String serverUrl, String typeName)
-            throws GeoPlatformException;
+    GwtEvent.Type<AttributesWindowBuilderHandler> TYPE = new GwtEvent.Type<AttributesWindowBuilderHandler>();
 
-    FeatureCollectionDTO getAllFeature(String serverUrl, String typeName,
-            int maxFeatures) throws GeoPlatformException;
+    void showFeatureAttributesWindow(WFSEdit editorSource);
+    
+    void closeFeatureAttributesWindow();
+    
+    void reconfigureAttributesWidgetFields();
 
-    boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<? extends AttributeDTO> attributes)
-            throws GeoPlatformException;
+    abstract class AttributesWindowEvent extends GwtEvent<AttributesWindowBuilderHandler> {
 
-    boolean transactionInsert(String serverURL, String typeName,
-            String targetNamespace, List<AttributeDTO> attributes)
-            throws GeoPlatformException;
+        @Override
+        public Type<AttributesWindowBuilderHandler> getAssociatedType() {
+            return TYPE;
+        }
+
+    }
 
 }

@@ -39,8 +39,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import java.util.List;
-import javax.xml.bind.Marshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -50,7 +48,6 @@ import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStra
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.GPTransactionMediator;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeatureStreamWriter;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionType;
@@ -102,12 +99,12 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
      * @throws Exception
      */
     protected final String showRequestWithStax() throws Exception {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        StringWriter stringWriter = new StringWriter();
 
         FeatureStreamWriter streamWriter = new FeatureStreamWriter();
-        streamWriter.write(this, outputStream);
+        streamWriter.write(this, stringWriter);
 
-        return outputStream.toString("UTF-8");
+        return stringWriter.toString();
     }
 
     /**
@@ -126,7 +123,7 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
 
         String request = outputStream.toString("UTF-8");
 
-        logger.trace("\n*** Request TRANSACTION INSERT ***\n{}\n\n", request);
+        logger.debug("\n*** Request TRANSACTION INSERT ***\n{}\n\n", request);
 
         return new StringEntity(request, ContentType.APPLICATION_XML);
     }

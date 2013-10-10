@@ -44,7 +44,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -100,13 +99,13 @@ public abstract class GPPostConnectorRequest<T>
     public T getResponse() throws IllegalParameterFault,
             ServerInternalFault, Exception {
         T response = null;
-        CloseableHttpResponse httpResponse = null;
 
         try {
             HttpPost httpPost = this.getPostMethod();
-            httpResponse = super.securityConnector.secure(this,
+            CloseableHttpResponse httpResponse = super.securityConnector.secure(
+                    this,
                     httpPost);
-            
+
             HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
@@ -139,10 +138,6 @@ public abstract class GPPostConnectorRequest<T>
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
 
-        } finally {
-            if (httpResponse != null) {
-                httpResponse.close();
-            }
         }
 
         return response;
@@ -152,11 +147,11 @@ public abstract class GPPostConnectorRequest<T>
     public String getResponseAsString() throws ServerInternalFault, Exception,
             IllegalParameterFault {
         String content = null;
-        CloseableHttpResponse httpResponse = null;
 
         try {
             HttpPost httpPost = this.getPostMethod();
-            httpResponse = super.securityConnector.secure(this,
+            CloseableHttpResponse httpResponse = super.securityConnector.secure(
+                    this,
                     httpPost);
             HttpEntity responseEntity = httpResponse.getEntity();
 
@@ -183,10 +178,6 @@ public abstract class GPPostConnectorRequest<T>
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
 
-        } finally {
-            if (httpResponse != null) {
-                httpResponse.close();
-            }
         }
 
         return content;
@@ -195,13 +186,13 @@ public abstract class GPPostConnectorRequest<T>
     @Override
     public InputStream getResponseAsStream() throws ServerInternalFault,
             Exception, IllegalParameterFault {
-        CloseableHttpResponse httpResponse = null;
-        
+
         try {
             HttpPost httpPost = this.getPostMethod();
-            httpResponse = super.securityConnector.secure(this,
+            CloseableHttpResponse httpResponse = super.securityConnector.secure(
+                    this,
                     httpPost);
-            
+
             HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
                 return responseEntity.getContent();
@@ -221,10 +212,6 @@ public abstract class GPPostConnectorRequest<T>
                     "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
-        } finally {
-            if(httpResponse != null) {
-                httpResponse.close();
-            }
         }
     }
 

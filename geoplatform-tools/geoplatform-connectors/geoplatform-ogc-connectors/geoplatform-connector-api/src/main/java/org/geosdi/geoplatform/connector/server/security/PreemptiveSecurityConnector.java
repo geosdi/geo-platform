@@ -38,15 +38,13 @@ package org.geosdi.geoplatform.connector.server.security;
 import java.io.IOException;
 import java.net.URI;
 import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.auth.AuthSchemeBase;
 import org.apache.http.impl.client.BasicAuthCache;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 /**
@@ -58,7 +56,7 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
 
     private HttpHost httpHost;
     protected AuthCache authCache;
-    protected HttpContext localcontext = new BasicHttpContext();
+    protected HttpClientContext localcontext = HttpClientContext.create();
 
     public PreemptiveSecurityConnector(String theUserName,
             String thePassword) {
@@ -66,11 +64,11 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
     }
 
     @Override
-    public <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(
-            C connectorRequest,
-            H httpRequest) throws ClientProtocolException, IOException {
-        super.bindCredentials(
-                connectorRequest.getCredentialsProvider(),
+    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(
+            C connectorRequest, H httpRequest)
+            throws ClientProtocolException, IOException {
+
+        super.bindCredentials(connectorRequest.getCredentialsProvider(),
                 connectorRequest.getURI());
 
         HttpHost targetHost = this.extractHost(connectorRequest.getURI());
@@ -78,16 +76,14 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
         this.preparePreemptiveParameters(targetHost);
 
         return connectorRequest.getClientConnection().execute(targetHost,
-                httpRequest,
-                localcontext);
+                httpRequest, localcontext);
     }
 
     protected void preparePreemptiveParameters(HttpHost targetHost) {
         if (this.authCache == null) {
             this.authCache = new BasicAuthCache();
             this.authCache.put(targetHost, createScheme());
-            this.localcontext.setAttribute(ClientContext.AUTH_CACHE,
-                    this.authCache);
+            this.localcontext.setAuthCache(authCache);
         }
     }
 
@@ -127,4 +123,5 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
 
         return port;
     }
+
 }

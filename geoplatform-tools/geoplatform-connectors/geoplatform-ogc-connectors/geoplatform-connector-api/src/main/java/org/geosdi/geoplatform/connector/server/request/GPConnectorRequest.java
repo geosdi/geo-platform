@@ -40,7 +40,7 @@ import java.net.URI;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
 
@@ -59,7 +59,7 @@ public interface GPConnectorRequest<T> {
 
     CredentialsProvider getCredentialsProvider();
 
-    DefaultHttpClient getClientConnection();
+    CloseableHttpClient getClientConnection();
 
     /**
      * <p>Method to generate Response AS a {@link String} string.</p>
@@ -102,14 +102,15 @@ public interface GPConnectorRequest<T> {
      * <p>Shuts down this connection manager and releases allocated
      * resources.</p>
      */
-    void shutdown();
+    void shutdown() throws Exception;
 
     /**
      * Show the XML Object created for the Request to send to Server
      *
      * @return Request as a String
-     * 
+     *
      * @throws Exception
      */
     String showRequestAsString() throws Exception;
+
 }

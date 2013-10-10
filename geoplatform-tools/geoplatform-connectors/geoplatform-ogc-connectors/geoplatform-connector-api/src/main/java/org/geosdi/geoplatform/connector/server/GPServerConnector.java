@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.connector.server;
 
 import java.net.URI;
 import java.net.URL;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 /**
@@ -50,7 +51,9 @@ public interface GPServerConnector {
 
     URI getURI();
     
-    DefaultHttpClient getClientConnection();
+    CredentialsProvider getCredentialsProvider();
+    
+    CloseableHttpClient getClientConnection();
 
     GPSecurityConnector getSecurityConnector();
     

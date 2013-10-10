@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.connector.server.security;
 
 import java.io.IOException;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
@@ -49,9 +49,11 @@ import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 public class GPMockSecurityConnector implements GPSecurityConnector {
 
     @Override
-    public <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(
-            C connectorRequest,
-            H httpRequest) throws ClientProtocolException, IOException {
+    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(
+            C connectorRequest, H httpRequest)
+            throws ClientProtocolException, IOException {
+        
         return connectorRequest.getClientConnection().execute(httpRequest);
     }
+
 }

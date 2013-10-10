@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.connector.server.security;
 
 import java.io.IOException;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
@@ -58,10 +58,11 @@ public interface GPSecurityConnector {
      * @param H an instance of {@link HttpUriRequest} class (HttpPost or
      * HttpGet)
      *
-     * @return HttpResponse
+     * @return CloseableHttpResponse
      *
      */
-    <C extends GPConnectorRequest, H extends HttpUriRequest> HttpResponse secure(
-            C connectorRequest,
-            H httpRequest) throws ClientProtocolException, IOException;
+    <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(
+            C connectorRequest, H httpRequest)
+            throws ClientProtocolException, IOException;
+
 }

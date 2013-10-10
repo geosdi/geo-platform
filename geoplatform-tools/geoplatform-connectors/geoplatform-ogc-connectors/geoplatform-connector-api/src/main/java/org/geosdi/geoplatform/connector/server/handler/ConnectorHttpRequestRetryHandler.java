@@ -37,13 +37,14 @@ package org.geosdi.geoplatform.connector.server.handler;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.net.UnknownHostException;
 import javax.net.ssl.SSLException;
 import net.jcip.annotations.Immutable;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
-import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.HttpRequestRetryHandler;
-import org.apache.http.protocol.ExecutionContext;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.protocol.HttpContext;
 
 /**
@@ -78,40 +79,35 @@ public class ConnectorHttpRequestRetryHandler implements HttpRequestRetryHandler
                     "Parameter HttpContext must not be null");
         }
 
-        if (exception == null) {
-            throw new IllegalArgumentException(
-                    "Parameter Exception must not be null");
-        }
-
         if (executionCount >= this.attemptsCount) {
-            return false;
-        }
-
-        if (exception instanceof NoHttpResponseException) {
-            // Retry if the server dropped connection on us
-            return true;
-        }
-        if (exception instanceof SSLException) {
-            // Do not retry on SSL handshake exception
             return false;
         }
 
         if (exception instanceof InterruptedIOException) {
             // Timeout
-            return true;
+            return false;
         }
-
-        HttpRequest request = (HttpRequest) context.getAttribute(
-                ExecutionContext.HTTP_REQUEST);
-
-        if (processIdempotent(request)) {
+        if (exception instanceof UnknownHostException) {
+            // Unknown host
+            return false;
+        }
+        if (exception instanceof ConnectTimeoutException) {
+            // Connection refused
+            return false;
+        }
+        if (exception instanceof SSLException) {
+            // SSL handshake exception
+            return false;
+        }
+        HttpClientContext clientContext = HttpClientContext.adapt(context);
+        HttpRequest request = clientContext.getRequest();
+        boolean idempotent = !(request instanceof HttpEntityEnclosingRequest);
+        if (idempotent) {
+            // Retry if the request is considered idempotent
             return true;
         }
 
         return false;
     }
 
-    private boolean processIdempotent(HttpRequest request) {
-        return !(request instanceof HttpEntityEnclosingRequest);
-    }
 }

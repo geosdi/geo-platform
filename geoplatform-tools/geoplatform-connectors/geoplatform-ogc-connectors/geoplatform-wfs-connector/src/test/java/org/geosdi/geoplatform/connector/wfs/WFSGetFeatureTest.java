@@ -39,6 +39,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
+import static org.geosdi.geoplatform.connector.wfs.WFSTestConfigurator.logger;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
@@ -64,8 +65,21 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setTypeName(statesName);
 
         FeatureCollectionType response = request.getResponse();
-        logger.info("\n\n@@@@@@@@@@@@@@@ Features Found : @@@@@@@@@@@@@@@@@ {}",
-                response.getNumberOfFeatures());
+        logger.info("@@@@@@@@@@@@@@@ STATES Features Found : "
+                + "@@@@@@@@@@@@@@@@@ {}\n\n", response.getNumberOfFeatures());
+    }
+
+    @Test
+    public void secureStatesHits() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request =
+                super.secureServerConnector.createGetFeatureRequest();
+
+        request.setResultType(ResultTypeType.HITS.value());
+        request.setTypeName(statesName);
+
+        FeatureCollectionType response = request.getResponse();
+        logger.info("@@@@@@@@@@@@@@@ SECURE STATES Features Found : "
+                + "@@@@@@@@@@@@@@@@@ {}\n\n", response.getNumberOfFeatures());
     }
 
     @Test
@@ -77,7 +91,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setTypeName(statesName);
         request.setMaxFeatures(BigInteger.ONE);
 
-        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n",
                 request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
@@ -89,7 +103,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("----------- {}", featureMembers.getFeature());
         logger.info("----------- {}", featureMembers.getFeature().size());
         logger.info("+++++++++++ {}", response.getFeatureMember());
-        logger.info("+++++++++++ {}", response.getFeatureMember().size());
+        logger.info("+++++++++++ {}\n\n", response.getFeatureMember().size());
     }
 
     @Test
@@ -102,7 +116,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
         request.setFeatureIDs(Arrays.asList("states.1", "states.49"));
 
-        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n",
                 request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();
@@ -119,7 +133,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
 
-        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+        logger.info("RESPONSE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n",
                 request.getResponseAsString());
 
         FeatureCollectionType response = request.getResponse();

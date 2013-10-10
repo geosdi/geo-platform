@@ -40,9 +40,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import org.apache.http.HttpHost;
-import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
+import org.geosdi.geoplatform.connector.server.handler.ConnectorHttpRequestRetryHandler;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,9 +60,10 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected final URL url;
+    private final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
     protected final GPSecurityConnector securityConnector;
     private final HttpClientProxyConfiguration proxyConfiguration;
-    private DefaultHttpClient httpClient;
+    private CloseableHttpClient httpClient;
 
     protected GPAbstractServerConnector(URL theUrl,
             GPSecurityConnector theSecurityConnector) {
@@ -95,18 +99,22 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     }
 
     @Override
-    public DefaultHttpClient getClientConnection() {
-        return httpClient = (httpClient == null)
-                            ? proxyConfiguration != null
-                              ? proxyConfiguration.isUseProxy()
-                                ? configureProxy() : new DefaultHttpClient()
-                              : new DefaultHttpClient()
-                            : httpClient;
+    public CloseableHttpClient getClientConnection() {
+        return httpClient = (httpClient != null)
+                ? httpClient : proxyConfiguration != null
+                ? proxyConfiguration.isUseProxy()
+                ? configureProxy() : createDefaultHttpClient()
+                : createDefaultHttpClient();
     }
 
     @Override
     public void dispose() throws Exception {
-        this.httpClient.getConnectionManager().shutdown();
+        this.httpClient.close();
+    }
+
+    @Override
+    public CredentialsProvider getCredentialsProvider() {
+        return this.credentialsProvider;
     }
 
     /**
@@ -131,6 +139,27 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         return null;
     }
 
+    private CloseableHttpClient configureProxy() {
+        logger.debug("SetUp Proxy Configuration @@@@@@@@@@@@@@@@ "
+                + proxyConfiguration);
+
+        /**
+         * TODO HERE THE CODE FOR PROXY AUTHENTICATION *
+         */
+        HttpHost proxy = new HttpHost(proxyConfiguration.getProxyUrl(),
+                proxyConfiguration.getProxyPort());
+
+        CloseableHttpClient httpclient = HttpClients.custom().setProxy(proxy).build();
+
+        return httpclient;
+    }
+
+    private CloseableHttpClient createDefaultHttpClient() {
+        return HttpClients.custom().setDefaultCredentialsProvider(
+                credentialsProvider).setRetryHandler(
+                new ConnectorHttpRequestRetryHandler(5)).build();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -141,7 +170,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         }
         final GPAbstractServerConnector other = (GPAbstractServerConnector) obj;
         if (this.url != other.url && (this.url == null || !this.url.equals(
-                                      other.url))) {
+                other.url))) {
             return false;
         }
         return true;
@@ -160,17 +189,4 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                 + ", securityConnector = " + securityConnector + '}';
     }
 
-    private DefaultHttpClient configureProxy() {
-        logger.trace("SetUp Proxy Configuratio @@@@@@@@@@@@@@@@ "
-                + proxyConfiguration);
-
-        DefaultHttpClient httpclient = new DefaultHttpClient();
-
-        HttpHost proxy = new HttpHost(proxyConfiguration.getProxyUrl(),
-                proxyConfiguration.getProxyPort());
-        httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
-                proxy);
-
-        return httpclient;
-    }
 }

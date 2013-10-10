@@ -85,7 +85,7 @@ public abstract class GPConnectorStore<T extends GPAbstractServerConnector>
 
     @Override
     public void dispose() throws Exception {
-        logger.trace("########################## Disposing GeoPlatformConnector "
+        logger.debug("########################## Disposing GeoPlatformConnector "
                 + "[ {} ]", this);
         this.server.dispose();
     }

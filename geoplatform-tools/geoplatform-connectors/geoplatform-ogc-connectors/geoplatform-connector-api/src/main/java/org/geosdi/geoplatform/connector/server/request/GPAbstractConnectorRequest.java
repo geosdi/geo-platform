@@ -37,13 +37,10 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import java.net.URI;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.geosdi.geoplatform.connector.protocol.GeoPlatformHTTP;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.handler.ConnectorHttpRequestRetryHandler;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,18 +58,22 @@ public abstract class GPAbstractConnectorRequest<T>
     //
     protected final URI serverURI;
     protected final GPSecurityConnector securityConnector;
-    protected final DefaultHttpClient clientConnection;
+    protected final CloseableHttpClient clientConnection;
+    private final CredentialsProvider credentialProvider;
+    private RequestConfig requestConfig;
 
     public GPAbstractConnectorRequest(GPServerConnector server) {
         this(server.getClientConnection(), server.getURI(),
+                server.getCredentialsProvider(),
                 server.getSecurityConnector());
     }
 
-    public GPAbstractConnectorRequest(DefaultHttpClient theClientConnection,
-            URI theServerURI,
+    public GPAbstractConnectorRequest(CloseableHttpClient theClientConnection,
+            URI theServerURI, CredentialsProvider theCredentialProvider,
             GPSecurityConnector theSecurityConnector) {
         this.clientConnection = theClientConnection;
         this.serverURI = theServerURI;
+        this.credentialProvider = theCredentialProvider;
         this.securityConnector = (theSecurityConnector == null
                 ? GPSecurityConnector.MOCK_SECURITY
                 : theSecurityConnector);
@@ -83,20 +84,17 @@ public abstract class GPAbstractConnectorRequest<T>
      * Setting basic configuration for HttpParams
      * </p>
      */
-    protected void prepareHttpParams() {
-        HttpParams httpParams = this.clientConnection.getParams();
+    protected RequestConfig prepareRequestConfig() {
+        return this.requestConfig = (requestConfig != null) ? requestConfig
+                : createRequestConfig();
 
-        httpParams.setParameter(GeoPlatformHTTP.CONTENT_TYPE_PARAMETER,
-                GeoPlatformHTTP.CONTENT_TYPE_XML);
+    }
 
-        httpParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, "UTF-8");
-
-        int timeout = 10000; // 10 seconds
-        HttpConnectionParams.setConnectionTimeout(httpParams, timeout);
-        HttpConnectionParams.setSoTimeout(httpParams, timeout);
-
-        this.clientConnection.setHttpRequestRetryHandler(
-                new ConnectorHttpRequestRetryHandler(5));
+    private RequestConfig createRequestConfig() {
+        return RequestConfig.custom()
+                .setCookieSpec(CookieSpecs.BEST_MATCH).setSocketTimeout(5000)
+                .setConnectTimeout(5000)
+                .setConnectionRequestTimeout(5000).build();
     }
 
     @Override
@@ -105,17 +103,18 @@ public abstract class GPAbstractConnectorRequest<T>
     }
 
     @Override
-    public DefaultHttpClient getClientConnection() {
+    public CloseableHttpClient getClientConnection() {
         return this.clientConnection;
     }
 
     @Override
     public CredentialsProvider getCredentialsProvider() {
-        return this.clientConnection.getCredentialsProvider();
+        return this.credentialProvider;
     }
 
     @Override
-    public void shutdown() {
-        this.clientConnection.getConnectionManager().shutdown();
+    public void shutdown() throws Exception {
+        this.clientConnection.close();
     }
+
 }

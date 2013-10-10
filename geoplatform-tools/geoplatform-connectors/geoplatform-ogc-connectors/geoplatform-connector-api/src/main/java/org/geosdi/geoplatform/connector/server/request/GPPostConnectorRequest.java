@@ -46,6 +46,7 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -56,6 +57,7 @@ import org.geosdi.geoplatform.exception.ServerInternalFault;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class GPPostConnectorRequest<T>
@@ -79,8 +81,8 @@ public abstract class GPPostConnectorRequest<T>
     private void preparePostMethod()
             throws IllegalParameterFault, Exception, ServerInternalFault {
 
-        super.prepareHttpParams();
         this.postMethod = new HttpPost(super.serverURI);
+        this.postMethod.setConfig(super.prepareRequestConfig());
 
         try {
             HttpEntity httpEntity = this.preparePostEntity();
@@ -98,10 +100,12 @@ public abstract class GPPostConnectorRequest<T>
     public T getResponse() throws IllegalParameterFault,
             ServerInternalFault, Exception {
         T response = null;
+        CloseableHttpResponse httpResponse = null;
 
         try {
             HttpPost httpPost = this.getPostMethod();
-            HttpResponse httpResponse = super.securityConnector.secure(this,
+
+            httpResponse = super.securityConnector.secure(this,
                     httpPost);
             HttpEntity responseEntity = httpResponse.getEntity();
             if (responseEntity != null) {
@@ -136,6 +140,10 @@ public abstract class GPPostConnectorRequest<T>
                     ex.getMessage());
             throw new ServerInternalFault("*** ClientProtocolException ***");
 
+        } finally {
+            if(httpResponse != null) {
+                httpResponse.close();
+            }
         }
 
         return response;
@@ -210,4 +218,5 @@ public abstract class GPPostConnectorRequest<T>
 
     protected abstract HttpEntity preparePostEntity()
             throws IllegalParameterFault, Exception, UnsupportedEncodingException;
+
 }

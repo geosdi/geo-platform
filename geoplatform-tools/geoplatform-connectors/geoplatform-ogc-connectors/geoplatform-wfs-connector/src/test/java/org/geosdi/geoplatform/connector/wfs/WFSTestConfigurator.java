@@ -49,23 +49,25 @@ import org.slf4j.LoggerFactory;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class WFSTestConfigurator {
-    
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    protected static final Logger logger = LoggerFactory.getLogger(
+            WFSTestConfigurator.class);
     //
     private final String wfsURL = "http://150.146.160.92/geoserver/wfs";
     private final String wfsSecureURL = "http://150.146.160.180/geoserver/wfs";
     protected GPWFSConnectorStore serverConnector;
     protected GPWFSConnectorStore secureServerConnector;
-    
+
     @Before
     public void setUp() throws Exception {
         this.serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
                 new URL(wfsURL)).build();
-        
+
         this.secureServerConnector = WFSConnectorBuilder.newConnector().
                 withServerUrl(
                 new URL(wfsSecureURL)).withClientSecurity(
                 new BasicPreemptiveSecurityConnector(
                 "admin", "geoservertest")).build();
-    }    
+    }
+
 }

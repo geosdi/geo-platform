@@ -41,6 +41,7 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
+import static org.geosdi.geoplatform.connector.wfs.WFSTestConfigurator.logger;
 import org.geosdi.geoplatform.xml.xsd.v2001.LocalElement;
 import org.geosdi.geoplatform.xml.xsd.v2001.OpenAttrs;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
@@ -60,17 +61,15 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
         WFSDescribeFeatureTypeRequest<Schema> request = super.serverConnector.createDescribeFeatureTypeRequest();
 
         QName name = new QName("sf:firesat");
-
         request.setTypeName(Arrays.asList(name));
-
         Schema s = request.getResponse();
 
-        logger.info("TARGET NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+        logger.info("TARGET NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n\n",
                 s.getTargetNamespace());
 
         for (OpenAttrs o : s.getSimpleTypeOrComplexTypeOrGroup()) {
             if (o instanceof TopLevelElement) {
-                logger.info("TopLevelElement @@@@@@@@@@@@@@@@ {}", o);
+                logger.info("TopLevelElement @@@@@@@@@@@@@@@@ {}\n\n", o);
             }
 
             if (o instanceof TopLevelComplexType) {
@@ -96,4 +95,44 @@ public class WFSDescribeFeatureTypeTest extends WFSTestConfigurator {
             }
         }
     }
+
+    @Test
+    public void testSecureV110() throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> request = super.secureServerConnector.createDescribeFeatureTypeRequest();
+
+        QName name = new QName("tiger:poi");
+        request.setTypeName(Arrays.asList(name));
+        Schema s = request.getResponse();
+
+        logger.info("TARGET SECURE NAMESPACE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}",
+                s.getTargetNamespace());
+
+        for (OpenAttrs o : s.getSimpleTypeOrComplexTypeOrGroup()) {
+            if (o instanceof TopLevelElement) {
+                logger.info("SECURE TopLevelElement @@@@@@@@@@@@@@@@ {}\n\n", o);
+            }
+
+            if (o instanceof TopLevelComplexType) {
+                List<Object> particles = ((TopLevelComplexType) o).getComplexContent().getExtension().getSequence().getParticle();
+                for (Object p : particles) {
+
+                    LocalElement l = ((JAXBElement<LocalElement>) p).getValue();
+                    logger.info("SECURE TopLevelComplexType @@@@@@@@@@@@@@@@ {}",
+                            l.getType().getLocalPart());
+                }
+            }
+        }
+
+        String wfsDescribeFeatureFile = "target/wfsSecureDescribeFeaturev110.xml";
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(wfsDescribeFeatureFile);
+            request.getMarshaller().marshal(s, fos);
+        } finally {
+            if (fos != null) {
+                fos.close();
+            }
+        }
+    }
+
 }

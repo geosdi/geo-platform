@@ -60,10 +60,7 @@ public abstract class GPVectorFeatureLayer extends GPGenericFeatureLayer {
 
     protected void drawFeature(VectorFeature feature) {
         if (feature != null && ((Vector) featureLayer).getNumberOfFeatures() >= 1) {
-            for (VectorFeature vf : ((Vector) featureLayer).getFeatures()) {
-                System.out.println("Removing features ... " + feature.getFeatureId());
-                ((Vector) featureLayer).removeFeature(feature);
-            }
+            ((Vector)featureLayer).destroyFeatures();
         }
 
         ((Vector) featureLayer).addFeature(feature);

@@ -107,8 +107,7 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
             GPCoordinateReferenceSystem crs, Object provider) {
 
 
-        removeMarker();
-
+        this.geocoderMarker.removeMarker();
 
         this.mapWidget.getMap().addLayer(this.geocoderFeature.geFeatureLayer());
         MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(bean.getWkt()).getJSObject());
@@ -127,9 +126,10 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
         this.geocoderFeature.addFeature(vectorFeature, this.mapWidget.getMap());
     }
 
-    public void clearFeature() {
+    final void clearFeature() {
         this.mapWidget.getMap().removeLayer(this.geocoderFeature.geFeatureLayer());
         geocoderFeature = new GeocodingVectorFeature();
+//        this.mapWidget.getMap().addLayer(this.geocoderFeature.geFeatureLayer());
     }
 
     @Override

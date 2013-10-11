@@ -35,13 +35,8 @@
  */
 package org.geosdi.geoplatform.services.utility;
 
-import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.encoder.datastore.GSPostGISDatastoreEncoder;
 import it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -78,12 +73,13 @@ public class PostGISUtility {
 //        System.out.println(store);
         //GeoServerRESTStoreManager manager = null;
 //        if (store == null) {
-        /**try {
-            manager = new GeoServerRESTStoreManager(
-                    new URL(geoserverUrl), geoserverUser, geoserverPassword);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(PostGISUtility.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        /**
+         * try { manager = new GeoServerRESTStoreManager( new URL(geoserverUrl),
+         * geoserverUser, geoserverPassword); } catch (MalformedURLException ex)
+         * { Logger.getLogger(PostGISUtility.class.getName()).log(Level.SEVERE,
+         * null, ex);
+        }
+         */
         GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder(storeName);
         encoder.setEnabled(true);
         encoder.setHost(hostPostgisDatastore);
@@ -97,7 +93,7 @@ public class PostGISUtility {
         encoder.setMinConnections(1);
         encoder.setFetchSize(1000);
         encoder.setConnectionTimeout(20);
-        encoder.setValidateConnections(false);
+        encoder.setValidateConnections(Boolean.TRUE);
         encoder.setLooseBBox(Boolean.TRUE);
         encoder.setPreparedStatements(false);
         encoder.setMaxOpenPreparedStatements(50);

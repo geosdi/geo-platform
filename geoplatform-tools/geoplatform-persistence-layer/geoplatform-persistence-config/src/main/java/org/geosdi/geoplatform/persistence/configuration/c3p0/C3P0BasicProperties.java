@@ -46,79 +46,89 @@ import org.springframework.stereotype.Component;
 @Component(value = "c3p0BasicProperties")
 public class C3P0BasicProperties {
 
-    @Value("persistence{c3p0_acquireIncrement}")
-    private int acquireIncrement;
-    @Value("persistence{c3p0_acquireRetryAttempts}")
-    private int acquireRetryAttempts;
-    @Value("persistence{c3p0_minPoolSize}")
-    private int minPoolSize;
-    @Value("persistence{c3p0_maxPoolSize}")
-    private int maxPoolSize;
-    @Value("persistence{c3p0_maxIdleTime}")
-    private int maxIdleTime;
-    @Value("persistence{c3p0_maxConnectionAge}")
-    private int maxConnectionAge;
-    @Value("persistence{c3p0_connectionCustomizerClassName}")
+    private static final String BASE_CONNECTION_CUSTOMIZE_CLASS = "org.geosdi.geoplatform.persistence.configuration.c3p0.C3P0ConnectionLogger";
+    //
+    @Value("persistence{c3p0_acquireIncrement:@null}")
+    private Integer acquireIncrement;
+    @Value("persistence{c3p0_acquireRetryAttempts:@null}")
+    private Integer acquireRetryAttempts;
+    @Value("persistence{c3p0_minPoolSize:@null}")
+    private Integer minPoolSize;
+    @Value("persistence{c3p0_maxPoolSize:@null}")
+    private Integer maxPoolSize;
+    @Value("persistence{c3p0_maxIdleTime:@null}")
+    private Integer maxIdleTime;
+    @Value("persistence{c3p0_maxConnectionAge:@null}")
+    private Integer maxConnectionAge;
+    @Value("persistence{c3p0_connectionCustomizerClassName:@null}")
     private String connectionCustomizerClassName;
 
     /**
      * @return the acquireIncrement
      */
-    public int getAcquireIncrement() {
-        return acquireIncrement;
+    public Integer getAcquireIncrement() {
+        return acquireIncrement = (acquireIncrement == null)
+                ? new Integer(3) : acquireIncrement;
     }
 
     /**
      * @return the acquireRetryAttempts
      */
-    public int getAcquireRetryAttempts() {
-        return acquireRetryAttempts;
+    public Integer getAcquireRetryAttempts() {
+        return acquireRetryAttempts = (acquireRetryAttempts == null)
+                ? new Integer(30) : acquireRetryAttempts;
     }
 
     /**
      * @return the minPoolSize
      */
-    public int getMinPoolSize() {
-        return minPoolSize;
+    public Integer getMinPoolSize() {
+        return minPoolSize = (minPoolSize == null) ? new Integer(3)
+                : minPoolSize;
     }
 
     /**
      * @return the maxPoolSize
      */
-    public int getMaxPoolSize() {
-        return maxPoolSize;
+    public Integer getMaxPoolSize() {
+        return maxPoolSize = (maxPoolSize == null) ? new Integer(15)
+                : maxPoolSize;
     }
 
     /**
      * @return the maxIdleTime
      */
-    public int getMaxIdleTime() {
-        return maxIdleTime;
+    public Integer getMaxIdleTime() {
+        return maxIdleTime = (maxIdleTime == null) ? new Integer(0)
+                : maxIdleTime;
     }
 
     /**
      * @return the maxConnectionAge
      */
-    public int getMaxConnectionAge() {
-        return maxConnectionAge;
+    public Integer getMaxConnectionAge() {
+        return maxConnectionAge = (maxConnectionAge == null) ? new Integer(0)
+                : maxConnectionAge;
     }
 
     /**
      * @return the connectionCustomizerClassName
      */
     public String getConnectionCustomizerClassName() {
-        return connectionCustomizerClassName;
+        return connectionCustomizerClassName = (connectionCustomizerClassName == null)
+                ? BASE_CONNECTION_CUSTOMIZE_CLASS
+                : connectionCustomizerClassName;
     }
 
     @Override
     public String toString() {
         return "C3P0BasicProperties{ " + "acquireIncrement = "
-                + acquireIncrement + ", acquireRetryAttempts = "
-                + acquireRetryAttempts + ", minPoolSize = "
-                + minPoolSize + ", maxPoolSize = " + maxPoolSize
-                + ", maxIdleTime = " + maxIdleTime + ", maxConnectionAge = "
-                + maxConnectionAge + ", connectionCustomizerClassName = "
-                + connectionCustomizerClassName + '}';
+                + getAcquireIncrement() + ", acquireRetryAttempts = "
+                + getAcquireRetryAttempts() + ", minPoolSize = "
+                + getMinPoolSize() + ", maxPoolSize = " + getMaxPoolSize()
+                + ", maxIdleTime = " + getMaxIdleTime() + ", maxConnectionAge = "
+                + getMaxConnectionAge() + ", connectionCustomizerClassName = "
+                + getConnectionCustomizerClassName() + '}';
     }
 
 }

@@ -39,6 +39,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import javax.sql.DataSource;
 import org.geosdi.geoplatform.persistence.configuration.c3p0.C3P0BasicProperties;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,6 +53,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PersistenceDataSourceConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(
+            PersistenceDataSourceConfig.class);
+    //
     @Autowired
     private GPPersistenceConnector gpPersistenceConnector;
     //
@@ -70,6 +75,9 @@ public class PersistenceDataSourceConfig {
         /**
          * ************************ Poll Settings ****************************
          */
+        logger.debug("\n\n C3P0 POOL SETTINGS @@@@@@@@@@@@@@@ {}\n\n",
+                c3p0BasicProperties);
+
         dataSource.setAcquireIncrement(c3p0BasicProperties
                 .getAcquireIncrement());
         dataSource.setAcquireRetryAttempts(c3p0BasicProperties.

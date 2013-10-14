@@ -33,26 +33,67 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.httpclient.proxy;
+package org.geosdi.geoplatform.connector.proxy;
+
+import org.geosdi.geoplatform.configurator.httpclient.proxy.GPProxyCredentialProvider;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface HttpClientProxyConfiguration {
+@Component(value = "cswProxyCredentialProvider")
+public class CSWProxyCredentialProvider implements GPProxyCredentialProvider {
 
-    Boolean isUseProxy();
+    private @Value("configurator{csw_proxy_user:@null}")
+    String userName;
+    private @Value("configurator{csw_proxy_password:@null}")
+    String password;
 
-    String getProxyUrl();
+    @Override
+    public boolean isUseCredentialProvider() {
+        return ((this.userName != null) && (this.password != null));
+    }
 
-    Integer getProxyPort();
-    
-    boolean isUseCredentialProvider();
-    
-    String getUserName();
-    
-    String getPassword();
-    
-    boolean matchServerURL(String serverURL);
+    @Override
+    public String getUserName() {
+        return this.userName;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + (this.userName != null ? this.userName.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CSWProxyCredentialProvider other = (CSWProxyCredentialProvider) obj;
+        if ((this.userName == null) ? (other.userName != null)
+                : !this.userName.equals(other.userName)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "CSWProxyCredentialProvider{ " + "userName = " + userName
+                + ", password = " + password + '}';
+    }
+
 }

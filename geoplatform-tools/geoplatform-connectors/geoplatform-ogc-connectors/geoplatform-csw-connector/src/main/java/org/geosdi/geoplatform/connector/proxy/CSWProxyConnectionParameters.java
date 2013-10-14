@@ -35,11 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.proxy;
 
-import javax.annotation.Resource;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.GPNoProxyHostsMatcher;
 import org.geosdi.geoplatform.configurator.httpclient.proxy.GPProxyConnectionParamaters;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.GPProxyCredentialProvider;
-import org.geosdi.geoplatform.configurator.httpclient.proxy.HttpClientProxyConfiguration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -47,81 +44,68 @@ import org.springframework.stereotype.Component;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "cswProxyConnectionConfiguration")
-public class CSWProxyConnectionConfiguration implements
-        HttpClientProxyConfiguration {
+@Component(value = "cswProxyConnectionParameters")
+public class CSWProxyConnectionParameters implements GPProxyConnectionParamaters {
 
-    @Resource(name = "cswProxyConnectionParameters")
-    private GPProxyConnectionParamaters cswProxyConnectionParameters;
-    @Resource(name = "cswProxyCredentialProvider")
-    private GPProxyCredentialProvider cswProxyCredentialProvider;
-    @Resource(name = "cswNoProxyHostsMatcher")
-    private GPNoProxyHostsMatcher cswNoProxyHostsMatcher;
+    private @Value("configurator{csw_use_proxy:@null}")
+    Boolean cswUseProxy;
+    private @Value("configurator{csw_proxy_url:@null}")
+    String cswProxyUrl;
+    private @Value("configurator{csw_proxy_port:@null}")
+    Integer cswProxyPort;
 
-    /**
-     * @return the cswUseProxy
-     */
     @Override
     public Boolean isUseProxy() {
-        return cswProxyConnectionParameters.isUseProxy();
+        return this.cswUseProxy = (cswUseProxy != null) ? cswUseProxy
+                : Boolean.FALSE;
     }
 
-    /**
-     * @return the cswProxyUrl
-     */
     @Override
     public String getProxyUrl() {
-        String proxyURL = cswProxyConnectionParameters.getProxyUrl();
-
-        if ((proxyURL == null) || (proxyURL.equals(""))) {
-            throw new IllegalStateException("The Proxy URL Parameter must not"
-                    + "be NULL Value or Empty String.");
-        }
-
-        return cswProxyConnectionParameters.getProxyUrl();
+        return this.cswProxyUrl = (cswProxyUrl != null) ? cswProxyUrl : null;
     }
 
-    /**
-     * @return the csw_proxy_port
-     */
     @Override
     public Integer getProxyPort() {
-        Integer proxyPort = cswProxyConnectionParameters.getProxyPort();
+        return this.cswProxyPort = (cswProxyPort != null) ? cswProxyPort : null;
+    }
 
-        if ((proxyPort == null) || (proxyPort == 0)) {
-            throw new IllegalStateException("The Proxy PORT Parameter must not "
-                    + "be NULL Value or 0.");
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + (this.cswProxyUrl != null
+                ? this.cswProxyUrl.hashCode()
+                : 0);
+        hash = 37 * hash + (this.cswProxyPort != null
+                ? this.cswProxyPort.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
         }
-
-        return cswProxyConnectionParameters.getProxyPort();
-    }
-
-    @Override
-    public boolean isUseCredentialProvider() {
-        return cswProxyCredentialProvider.isUseCredentialProvider();
-    }
-
-    @Override
-    public String getUserName() {
-        return cswProxyCredentialProvider.getUserName();
-    }
-
-    @Override
-    public String getPassword() {
-        return cswProxyCredentialProvider.getPassword();
-    }
-
-    @Override
-    public boolean matchServerURL(String serverURL) {
-        return this.cswNoProxyHostsMatcher.matchServerURL(serverURL);
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CSWProxyConnectionParameters other = (CSWProxyConnectionParameters) obj;
+        if ((this.cswProxyUrl == null) ? (other.cswProxyUrl != null)
+                : !this.cswProxyUrl.equals(other.cswProxyUrl)) {
+            return false;
+        }
+        if (this.cswProxyPort != other.cswProxyPort && (this.cswProxyPort == null || !this.cswProxyPort.equals(
+                other.cswProxyPort))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{ cswProxyConnectionParameters = "
-                + cswProxyConnectionParameters + ", cswProxyCredentialProvider = "
-                + cswProxyCredentialProvider + ", cswNoProxyHostsMatcher = "
-                + cswNoProxyHostsMatcher + '}';
+        return "CSWProxyConnectionParameters{ " + "cswUseProxy = "
+                + cswUseProxy + ", cswProxyUrl = " + cswProxyUrl
+                + ", cswProxyPort = " + cswProxyPort + '}';
     }
 
 }

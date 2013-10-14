@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.utility;
 
 import com.google.common.collect.Lists;
+import com.google.gwt.core.shared.GWT;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.i18n.PrintTemplateConstants;
 import org.geosdi.geoplatform.gui.client.model.DPI;
@@ -132,12 +133,21 @@ public class PrintUtility {
 
         return vectorLayer;
     }
+    
+    public static VectorFeature updateRectangle(LonLat center, float scale, Map map, double sizeFactor, boolean portrait) {
+        Bounds extent = getExtent(center, scale, map, sizeFactor, portrait);
+        Geometry rect = extent.toGeometry();
+        VectorFeature features = new VectorFeature(rect);
+       
+
+        return features;
+    }
+    
 
     public static DragFeature enableDragPrintArea(Map map, Vector vectorLayer) {
         DragFeature dragFeature = createDragFeature(vectorLayer);
         map.addControl(dragFeature);
         dragFeature.activate();
-
         return dragFeature;
     }
 
@@ -177,7 +187,7 @@ public class PrintUtility {
         return new DragFeatureListener() {
             @Override
             public void onDragEvent(VectorFeature vectorFeature,
-                    Pixel pixel) {
+                    Pixel pixel) {     
             }
         };
     }

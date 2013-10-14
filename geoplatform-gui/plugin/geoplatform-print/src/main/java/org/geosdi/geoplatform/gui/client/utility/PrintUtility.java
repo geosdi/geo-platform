@@ -60,6 +60,8 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * 
+ * 
  */
 public class PrintUtility {
 
@@ -144,7 +146,7 @@ public class PrintUtility {
     }
 
     public static Bounds getExtent(LonLat center, float scale, Map map, double sizeFactor, boolean portrait) {
-        double unitRatio = OpenLayers.getInchesPerUnitMeter();
+        double unitRatio = OpenLayers.getInchesPerUnit(map.getCurrentUnits());
         Size size = map.getSize();
         double w, h;
         if (!portrait) {

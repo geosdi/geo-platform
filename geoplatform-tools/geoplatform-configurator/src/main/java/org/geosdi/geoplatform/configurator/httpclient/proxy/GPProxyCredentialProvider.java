@@ -40,19 +40,15 @@ package org.geosdi.geoplatform.configurator.httpclient.proxy;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface HttpClientProxyConfiguration {
+public interface GPProxyCredentialProvider {
 
-    Boolean isUseProxy();
-
-    String getProxyUrl();
-
-    Integer getProxyPort();
-    
     boolean isUseCredentialProvider();
-    
+
     String getUserName();
-    
+
+    /**
+     * TODO : Introduces JASYPT Meccanism to Crypt and Decrypt Password
+     */
     String getPassword();
-    
-    boolean matchServerURL(String serverURL);
+
 }

@@ -40,19 +40,12 @@ package org.geosdi.geoplatform.configurator.httpclient.proxy;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface HttpClientProxyConfiguration {
+public interface GPProxyConnectionParamaters {
 
     Boolean isUseProxy();
 
     String getProxyUrl();
 
     Integer getProxyPort();
-    
-    boolean isUseCredentialProvider();
-    
-    String getUserName();
-    
-    String getPassword();
-    
-    boolean matchServerURL(String serverURL);
+
 }

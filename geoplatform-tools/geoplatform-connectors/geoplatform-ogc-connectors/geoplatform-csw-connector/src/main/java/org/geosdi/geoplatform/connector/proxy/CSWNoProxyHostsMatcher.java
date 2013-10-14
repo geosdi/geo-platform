@@ -33,26 +33,63 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.httpclient.proxy;
+package org.geosdi.geoplatform.connector.proxy;
+
+import java.util.HashSet;
+import java.util.StringTokenizer;
+import org.geosdi.geoplatform.configurator.httpclient.proxy.GPNoProxyHostsMatcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface HttpClientProxyConfiguration {
+@Component(value = "cswNoProxyHostsMatcher")
+public class CSWNoProxyHostsMatcher implements GPNoProxyHostsMatcher,
+        InitializingBean {
 
-    Boolean isUseProxy();
+    private static final Logger logger = LoggerFactory.getLogger(
+            CSWNoProxyHostsMatcher.class);
+    //
+    private @Value("configurator{csw_no_proxy_hosts:@null}")
+    String cswNoProxyHosts;
+    private final HashSet<String> noProxySetHosts = new HashSet<String>();
 
-    String getProxyUrl();
+    @Override
+    public boolean matchServerURL(String serverURL) {
+        return ((canMatchHosts())
+                && (this.noProxySetHosts.contains(serverURL)));
+    }
 
-    Integer getProxyPort();
-    
-    boolean isUseCredentialProvider();
-    
-    String getUserName();
-    
-    String getPassword();
-    
-    boolean matchServerURL(String serverURL);
+    final boolean canMatchHosts() {
+        return !this.noProxySetHosts.isEmpty();
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        if (cswNoProxyHosts != null) {
+            StringTokenizer st = new StringTokenizer(cswNoProxyHosts, ",");
+            while (st.hasMoreTokens()) {
+                String serverURL = st.nextToken();
+                if (serverURL != null) {
+                    this.noProxySetHosts.add(serverURL);
+                }
+            }
+        }
+
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n\n", this);
+    }
+
+    @Override
+    public String toString() {
+        return "CSWNoProxyHostsMatcher{ " + "cswNoProxyHosts = "
+                + cswNoProxyHosts + ", noProxySetHosts = "
+                + noProxySetHosts + '}';
+    }
+
 }

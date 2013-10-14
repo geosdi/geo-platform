@@ -140,18 +140,26 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     }
 
     private CloseableHttpClient configureProxy() {
-        logger.debug("SetUp Proxy Configuration @@@@@@@@@@@@@@@@ "
+        logger.info("SetUp Proxy Configuration @@@@@@@@@@@@@@@@ "
                 + proxyConfiguration);
 
-        /**
-         * TODO HERE THE CODE FOR PROXY AUTHENTICATION *
-         */
-        HttpHost proxy = new HttpHost(proxyConfiguration.getProxyUrl(),
-                proxyConfiguration.getProxyPort());
+        if (this.proxyConfiguration.matchServerURL(this.url.toString())) {
+            logger.info("@@@@@@@@@@@ Skipping Proxy Configuration for Server : "
+                    + "{}", this.url.toString());
+            return createDefaultHttpClient();
+        } else {
+            logger.info("@@@@@@@@@@@@@@@ Setting UP Proxy Configuration for "
+                    + "Server : {}", this.url.toString());
+            /**
+             * TODO HERE THE CODE FOR PROXY AUTHENTICATION *
+             */
+            HttpHost proxy = new HttpHost(proxyConfiguration.getProxyUrl(),
+                    proxyConfiguration.getProxyPort());
 
-        CloseableHttpClient httpclient = HttpClients.custom().setProxy(proxy).build();
+            CloseableHttpClient httpclient = HttpClients.custom().setProxy(proxy).build();
 
-        return httpclient;
+            return httpclient;
+        }
     }
 
     private CloseableHttpClient createDefaultHttpClient() {

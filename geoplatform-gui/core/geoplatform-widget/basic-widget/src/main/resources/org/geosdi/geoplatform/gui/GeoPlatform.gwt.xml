@@ -4,6 +4,8 @@
     <inherits name="com.google.gwt.i18n.I18N" />
     <extend-property name="locale" values="en, it"/>
     
+    <inherits name="com.google.gwt.logging.Logging"/>
+     
     <inherits name='com.google.gwt.user.User' />
     <inherits name='com.extjs.gxt.ui.GXT' />
 	
@@ -45,6 +47,19 @@
     
     <servlet path="/GeoPlatformOGCRemote"
              class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />
+    
+    <!--Logging configuration-->
+    <set-property name="gwt.logging.enabled" value="TRUE"/>
+    <set-property name="gwt.logging.logLevel" value="INFO"/>
+    <set-property name="gwt.logging.developmentModeHandler" value="ENABLED" />  
+    <set-property name="gwt.logging.systemHandler" value="ENABLED" />
+    <set-property name="gwt.logging.consoleHandler" value="ENABLED"/> 
+    <!-- Disable the firebug handler as an example -->
+    <set-property name="gwt.logging.firebugHandler" value="DISABLED" />
+    <!-- Enable the simple remote handler -->
+    <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />
+    <set-property name="gwt.logging.popupHandler" value="DISABLED" />
+    <!--END Logging configuration-->
     
     <!-- TEMP FIX UNTIL GOING TO GWT 2.5 -->
     <!-- Fallback implementation, based on a timer -->

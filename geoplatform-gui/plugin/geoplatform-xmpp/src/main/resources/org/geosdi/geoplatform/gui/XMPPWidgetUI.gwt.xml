@@ -3,7 +3,7 @@
 <module>
     <inherits name="com.calclab.emite.im.EmiteIM" />
     <inherits name='com.calclab.emite.browser.EmiteBrowser' />
-
+    
     <entry-point class="org.geosdi.geoplatform.gui.client.XMPPWidgetUI" />
 
     <!--    <servlet path="/proxy" class="de.spieleck.servlets.ProxyServlet"/>-->

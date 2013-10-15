@@ -4,7 +4,7 @@
     
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-ogc-connectors</artifactId>
+        <artifactId>geoplatform-wfs-connector-module</artifactId>
         <version>1.6-SNAPSHOT</version>
     </parent>
     

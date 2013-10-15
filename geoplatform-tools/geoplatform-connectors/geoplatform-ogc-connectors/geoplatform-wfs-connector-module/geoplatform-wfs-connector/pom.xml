@@ -27,9 +27,11 @@
             <artifactId>wfs-1.1.0</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-wfs-api</artifactId>
+            <artifactId>geoplatform-wfs-api-connector</artifactId>
+            <version>${project.version}</version>
         </dependency>
         
         <dependency>

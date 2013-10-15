@@ -39,10 +39,10 @@ import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import org.codehaus.jra.Get;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
 /**

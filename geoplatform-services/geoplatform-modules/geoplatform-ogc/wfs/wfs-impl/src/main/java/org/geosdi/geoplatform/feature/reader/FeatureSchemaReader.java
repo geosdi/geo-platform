@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.feature.reader;
 
 import java.io.InputStream;
 import java.util.List;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 
 /**

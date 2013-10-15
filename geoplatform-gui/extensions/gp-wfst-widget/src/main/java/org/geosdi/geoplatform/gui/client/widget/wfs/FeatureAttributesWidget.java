@@ -56,8 +56,8 @@ import com.google.gwt.user.client.Timer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
-import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureAttributeValuesDetail;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapHeightEvent;
@@ -72,7 +72,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar.F
 import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 

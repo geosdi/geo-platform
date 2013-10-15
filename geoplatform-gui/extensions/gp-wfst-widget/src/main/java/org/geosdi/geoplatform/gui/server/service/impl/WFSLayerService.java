@@ -36,13 +36,12 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.List;
-import java.util.logging.Level;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.server.IWFSLayerService;
 import org.geosdi.geoplatform.services.GPWFSService;
 import org.slf4j.Logger;

@@ -38,10 +38,10 @@ package org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import java.util.List;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.insert.InsertFeatureDispatcherEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.modify.event.ModifyFeatureDispatcherEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**

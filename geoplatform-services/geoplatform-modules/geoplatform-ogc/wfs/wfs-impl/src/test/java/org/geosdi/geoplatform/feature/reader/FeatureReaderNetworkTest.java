@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.feature.reader;
 
 import java.net.URL;
 import java.util.List;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

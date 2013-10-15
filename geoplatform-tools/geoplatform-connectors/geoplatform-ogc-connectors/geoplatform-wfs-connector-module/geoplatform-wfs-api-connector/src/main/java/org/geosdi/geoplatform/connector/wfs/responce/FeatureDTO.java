@@ -33,13 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.responce;
+package org.geosdi.geoplatform.connector.wfs.responce;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.gui.responce.collection.FeatureAttributesMap;
+import org.geosdi.geoplatform.connector.wfs.responce.collection.FeatureAttributesMap;
 
 /**
  *
@@ -94,4 +94,5 @@ public class FeatureDTO implements Serializable {
                 + ", geometry=" + geometry
                 + ", attributes=" + attributes + '}';
     }
+
 }

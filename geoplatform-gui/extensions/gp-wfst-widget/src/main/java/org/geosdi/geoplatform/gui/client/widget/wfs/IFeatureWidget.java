@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs;
 
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

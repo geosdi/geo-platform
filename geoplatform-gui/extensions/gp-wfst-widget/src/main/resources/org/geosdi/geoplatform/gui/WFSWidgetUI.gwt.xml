@@ -2,9 +2,9 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">
 <module>
     <inherits name="com.google.gwt.inject.Inject"/>
+    <inherits name="org.geosdi.geoplatform.connector.wfs.WFSSharedUI"/>
     
     <source path="client" />
-    <source path="responce" />
     <!-- =============================== -->
     
     <entry-point class="org.geosdi.geoplatform.gui.client.WFSWidgetUI" />

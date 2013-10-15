@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

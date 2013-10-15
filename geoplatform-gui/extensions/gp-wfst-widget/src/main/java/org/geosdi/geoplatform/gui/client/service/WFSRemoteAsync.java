@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

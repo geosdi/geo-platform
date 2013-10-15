@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.command.wfst.basic;
 
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

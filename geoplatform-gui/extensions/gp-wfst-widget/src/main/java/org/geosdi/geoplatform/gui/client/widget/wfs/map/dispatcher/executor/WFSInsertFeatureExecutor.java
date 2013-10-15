@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor;
 
 import java.util.List;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureResponse;
 import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarFailedEvent;
@@ -50,8 +52,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 
 /**
  *

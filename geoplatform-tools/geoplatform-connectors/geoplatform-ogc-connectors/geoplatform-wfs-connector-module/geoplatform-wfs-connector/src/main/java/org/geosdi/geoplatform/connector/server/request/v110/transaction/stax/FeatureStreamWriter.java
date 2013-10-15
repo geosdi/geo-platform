@@ -41,11 +41,11 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import org.geosdi.geoplatform.connector.AbstractFeatureStreamWriter;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.connector.wfs.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
-import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
 
 /**
  *

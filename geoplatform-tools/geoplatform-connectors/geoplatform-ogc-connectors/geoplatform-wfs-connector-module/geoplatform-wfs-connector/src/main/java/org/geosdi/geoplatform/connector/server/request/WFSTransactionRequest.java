@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import java.util.List;
 import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 
 /**

@@ -45,6 +45,8 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.common.collect.Lists;
 import java.util.List;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
@@ -54,8 +56,6 @@ import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.WFSFeatureDispatcher;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 /**

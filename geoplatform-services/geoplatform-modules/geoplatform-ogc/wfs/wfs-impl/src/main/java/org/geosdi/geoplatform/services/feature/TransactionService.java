@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.services.feature;
 
 import java.util.List;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 
 /**
  *

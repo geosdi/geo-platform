@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.model.binder;
 
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.impl.map.event.ReloadLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

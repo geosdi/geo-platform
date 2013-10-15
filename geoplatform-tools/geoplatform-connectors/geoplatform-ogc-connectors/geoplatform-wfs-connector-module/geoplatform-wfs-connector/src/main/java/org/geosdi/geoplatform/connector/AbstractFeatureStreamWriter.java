@@ -45,8 +45,8 @@ import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeaturesNamespace;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.TransactionParameters;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.WFSTransactionParam;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.GeometryAttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.stax.writer.AbstractStaxStreamWriter;
 
 /**

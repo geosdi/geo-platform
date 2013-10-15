@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.service.WFSRemote;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.server.IWFSLayerService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;

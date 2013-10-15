@@ -37,12 +37,12 @@ package org.geosdi.geoplatform.gui.client.puregwt.wfs.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.model.binder.ILayerSchemaBinder;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.WFSGetFeatureHandler;
 import org.geosdi.geoplatform.gui.impl.map.control.feature.GetFeatureModel;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 

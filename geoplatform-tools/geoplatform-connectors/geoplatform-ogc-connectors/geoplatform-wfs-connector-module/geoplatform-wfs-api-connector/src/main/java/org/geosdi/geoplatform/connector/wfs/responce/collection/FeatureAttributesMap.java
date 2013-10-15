@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.responce.collection;
+package org.geosdi.geoplatform.connector.wfs.responce.collection;
 
 import java.io.Serializable;
 import java.util.Map;

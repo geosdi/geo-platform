@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.gui.server.command.wfst.basic;
 
 import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.server.IWFSLayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -23,6 +23,12 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-wfs-api-connector</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-connector</artifactId>
             <version>${project.version}</version>
         </dependency>

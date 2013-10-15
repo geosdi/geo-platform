@@ -40,10 +40,10 @@ import java.util.Arrays;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 import org.springframework.stereotype.Service;
 

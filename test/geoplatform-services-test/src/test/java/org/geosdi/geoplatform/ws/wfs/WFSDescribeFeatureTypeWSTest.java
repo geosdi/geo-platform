@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.ws.wfs;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.apache.cxf.binding.soap.SoapFault;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.junit.Assert;
 import org.junit.Test;
 

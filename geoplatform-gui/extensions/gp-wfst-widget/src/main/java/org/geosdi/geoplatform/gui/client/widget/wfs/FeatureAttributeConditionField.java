@@ -51,6 +51,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import java.util.List;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.config.FeatureInjector;
 import org.geosdi.geoplatform.gui.client.model.wfs.AttributeDetail;
@@ -62,8 +64,6 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomField
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.QueryRestrictionDTO;
 
 /**
  *

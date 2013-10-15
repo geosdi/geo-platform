@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.services;
 
 import java.util.List;
 import javax.jws.WebService;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureCollectionDTO;
-import org.geosdi.geoplatform.gui.responce.FeatureDTO;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.services.feature.DescribeFeatureService;
 import org.geosdi.geoplatform.services.feature.GetFeaureService;

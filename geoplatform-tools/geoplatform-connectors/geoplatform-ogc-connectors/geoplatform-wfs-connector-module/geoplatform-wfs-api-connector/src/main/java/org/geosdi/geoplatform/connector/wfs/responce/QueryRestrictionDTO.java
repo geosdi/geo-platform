@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.responce;
+package org.geosdi.geoplatform.connector.wfs.responce;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

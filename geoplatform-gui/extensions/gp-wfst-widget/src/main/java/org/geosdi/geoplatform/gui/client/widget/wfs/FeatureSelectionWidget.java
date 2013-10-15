@@ -57,6 +57,9 @@ import com.google.gwt.core.client.GWT;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.QueryDTO;
+import org.geosdi.geoplatform.connector.wfs.responce.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
@@ -78,9 +81,6 @@ import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.FeatureDTO;
-import org.geosdi.geoplatform.gui.responce.QueryDTO;
-import org.geosdi.geoplatform.gui.responce.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 /**

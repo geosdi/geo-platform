@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.command.wfst.basic;
 
+import org.geosdi.geoplatform.connector.wfs.responce.QueryDTO;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
-import org.geosdi.geoplatform.gui.responce.QueryDTO;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

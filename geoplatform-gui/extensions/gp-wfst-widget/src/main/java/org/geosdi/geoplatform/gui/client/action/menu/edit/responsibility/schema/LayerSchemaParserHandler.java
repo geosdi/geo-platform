@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 
 /**
 F * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

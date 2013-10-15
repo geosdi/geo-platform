@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.action.menu.edit.responsibility.schema;
 
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetMessages;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 
 /**

@@ -38,12 +38,12 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.IDateSelectedHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFields;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
 import org.geosdi.geoplatform.gui.client.widget.wfs.time.TimeInputWidget;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor;
 
 import java.util.List;
+import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
-import org.geosdi.geoplatform.gui.responce.AttributeDTO;
 
 /**
  *

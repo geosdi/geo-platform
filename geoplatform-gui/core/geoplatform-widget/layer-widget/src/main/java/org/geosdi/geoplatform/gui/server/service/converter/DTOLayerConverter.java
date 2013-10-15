@@ -86,11 +86,13 @@ public class DTOLayerConverter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    public void setRestReader(@Qualifier(value = "sharedRestReader") GeoServerRESTReader sharedRestReader) {
+    public void setRestReader(
+            @Qualifier(value = "sharedRestReader") GeoServerRESTReader sharedRestReader) {
         this.sharedRestReader = sharedRestReader;
     }
 
-    public ArrayList<GPFolderClientInfo> convertOnlyFolders(Collection<FolderDTO> folders) {
+    public ArrayList<GPFolderClientInfo> convertOnlyFolders(
+            Collection<FolderDTO> folders) {
         ArrayList<GPFolderClientInfo> foldersClient = Lists.<GPFolderClientInfo>newArrayList();
         if (folders != null) {
             for (Iterator<FolderDTO> it = folders.iterator(); it.hasNext();) {
@@ -101,7 +103,8 @@ public class DTOLayerConverter {
         return foldersClient;
     }
 
-    private List<IGPFolderElements> convertFolderElements(List<IElementDTO> folderElements) {
+    private List<IGPFolderElements> convertFolderElements(
+            List<IElementDTO> folderElements) {
         List<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
         Iterator<IElementDTO> iterator = folderElements.iterator();
         while (iterator.hasNext()) {
@@ -110,11 +113,14 @@ public class DTOLayerConverter {
         return clientFolderElements;
     }
 
-    public ArrayList<IGPFolderElements> convertFolderElements(TreeFolderElements folderElements) {
+    public ArrayList<IGPFolderElements> convertFolderElements(
+            TreeFolderElements folderElements) {
         ArrayList<IGPFolderElements> clientFolderElements = Lists.<IGPFolderElements>newArrayList();
         Iterator<IElementDTO> iterator = folderElements.iterator();
         while (iterator.hasNext()) {
-            clientFolderElements.add(this.convertElement(iterator.next()));
+            IElementDTO elementDTO = iterator.next();
+            logger.debug("@@@@@@@@@@@@@@@@@@ Element in HashSet {}", elementDTO);
+            clientFolderElements.add(this.convertElement(elementDTO));
         }
         return clientFolderElements;
     }
@@ -156,7 +162,8 @@ public class DTOLayerConverter {
         return vector;
     }
 
-    private void convertToLayerElementFromLayerDTO(GPLayerClientInfo layer, ShortLayerDTO layerDTO) {
+    private void convertToLayerElementFromLayerDTO(GPLayerClientInfo layer,
+            ShortLayerDTO layerDTO) {
         layer.setAbstractText(layerDTO.getAbstractText());
         layer.setBbox(this.convertBbox(layerDTO.getBbox()));
         layer.setChecked(layerDTO.isChecked());
@@ -167,36 +174,48 @@ public class DTOLayerConverter {
         layer.setTitle(layerDTO.getTitle());
         layer.setAlias(layerDTO.getAlias());
         layer.setCqlFilter(layerDTO.getCqlFilter());
-        if (layerDTO.getTimeFilter() != null) {
+        if ((layerDTO.getTimeFilter() != null) && !(layerDTO.getTimeFilter().equals(
+                ""))) {
             layer.setTimeFilter(layerDTO.getTimeFilter());
             try {
-                String dimension = this.sharedRestReader.getDimensions(layerDTO.getTitle());
-                if (!dimension.contains("<h2>")) {
-                    List<String> dimensionList = Lists.<String>newArrayList(dimension.split(","));
+                String dimension = this.sharedRestReader.getDimensions(
+                        layerDTO.getTitle());
+                if ((dimension != null) && (!dimension.contains("<h2>"))) {
+                    List<String> dimensionList = Lists.<String>newArrayList(
+                            dimension.split(","));
 
-                    String[] timeFilterSplitted = layerDTO.getTimeFilter().split("/");
-                    int startDimensionPosition = Integer.parseInt(timeFilterSplitted[0]);
+                    String[] timeFilterSplitted = layerDTO.getTimeFilter().split(
+                            "/");
+                    int startDimensionPosition = Integer.parseInt(
+                            timeFilterSplitted[0]);
 
-                    String variableTimeFilter = dimensionList.get(dimensionList.size() - startDimensionPosition - 1);
+                    String variableTimeFilter = dimensionList.get(
+                            dimensionList.size() - startDimensionPosition - 1);
                     if (timeFilterSplitted.length > 1) {
-                        int endDimensionPosition = Integer.parseInt(timeFilterSplitted[1]);
-                        variableTimeFilter += "/" + dimensionList.get(dimensionList.size() - endDimensionPosition - 1);
+                        int endDimensionPosition = Integer.parseInt(
+                                timeFilterSplitted[1]);
+                        variableTimeFilter += "/" + dimensionList.get(
+                                dimensionList.size() - endDimensionPosition - 1);
                     }
                     layer.setVariableTimeFilter(variableTimeFilter);
                     String layerAlias;
                     if (layerDTO.getAlias() != null
-                            && layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
+                            && layerDTO.getAlias().indexOf(
+                            LayerTimeFilterWidget.LAYER_TIME_DELIMITER) != -1) {
                         layerAlias = layerDTO.getAlias().substring(0,
-                                layerDTO.getAlias().indexOf(LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
+                                layerDTO.getAlias().indexOf(
+                                LayerTimeFilterWidget.LAYER_TIME_DELIMITER));
                     } else {
                         layerAlias = layerDTO.getTitle();
                     }
-                    layer.setAlias(layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
+                    layer.setAlias(
+                            layerAlias + LayerTimeFilterWidget.LAYER_TIME_DELIMITER
                             + layer.getVariableTimeFilter() + "]");
                 }
             } catch (NumberFormatException nfe) {
             } catch (MalformedURLException nfe) {
-                logger.error("Impossible to retrieve time filter executing call with "
+                logger.error(
+                        "Impossible to retrieve time filter executing call with "
                         + "geoServerManager: " + nfe);
             }
         }
@@ -211,7 +230,8 @@ public class DTOLayerConverter {
         folder.setNumberOfDescendants(folderDTO.getNumberOfDescendants());
         folder.setChecked(folderDTO.isChecked());
         folder.setExpanded(folderDTO.isExpanded());
-        folder.setFolderElements(this.convertFolderElements(folderDTO.getElementList()));
+        folder.setFolderElements(this.convertFolderElements(
+                folderDTO.getElementList()));
         return folder;
     }
 
@@ -220,7 +240,8 @@ public class DTOLayerConverter {
                 gpBbox.getMaxX(), gpBbox.getMaxY());
     }
 
-    private void setVectorLayerType(ClientVectorInfo vector, GPLayerType layerType) {
+    private void setVectorLayerType(ClientVectorInfo vector,
+            GPLayerType layerType) {
         switch (layerType) {
             case POINT:
                 vector.setLayerType(GPLayerType.POINT);
@@ -270,7 +291,8 @@ public class DTOLayerConverter {
         return project;
     }
 
-    public AccountProjectPropertiesDTO convertToAccountProjectPropertiesDTO(Long accountID,
+    public AccountProjectPropertiesDTO convertToAccountProjectPropertiesDTO(
+            Long accountID,
             GPClientProject project) {
         AccountProjectPropertiesDTO dto = new AccountProjectPropertiesDTO();
         dto.setAccountID(accountID);
@@ -297,7 +319,8 @@ public class DTOLayerConverter {
         if (owner != null && owner instanceof UserDTO) {
             clientProject.setOwner(this.convertToGPSimpleUser((UserDTO) owner));
         }
-        clientProject.setRootFolders(this.convertOnlyFolders(projectDTO.getRootFolders()));
+        clientProject.setRootFolders(this.convertOnlyFolders(
+                projectDTO.getRootFolders()));
         return clientProject;
     }
 
@@ -308,11 +331,13 @@ public class DTOLayerConverter {
         return clientProject;
     }
 
-    public List<GPSimpleUser> convertToGPSimpleUser(List<ShortAccountDTO> shortAccountList) {
+    public List<GPSimpleUser> convertToGPSimpleUser(
+            List<ShortAccountDTO> shortAccountList) {
         List<GPSimpleUser> listSimpleUser = Lists.<GPSimpleUser>newArrayList();
         for (ShortAccountDTO shortAccont : shortAccountList) {
             if (shortAccont instanceof UserDTO) {
-                listSimpleUser.add(this.convertToGPSimpleUser((UserDTO) shortAccont));
+                listSimpleUser.add(this.convertToGPSimpleUser(
+                        (UserDTO) shortAccont));
             }
         }
         return listSimpleUser;
@@ -327,4 +352,5 @@ public class DTOLayerConverter {
         user.setEmail(userDTO.getEmailAddress());
         return user;
     }
+
 }

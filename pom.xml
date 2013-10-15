@@ -192,7 +192,7 @@
         <module>geoplatform-gui</module>
         <module>geoplatform-tools</module>
         <module>geoplatform-xml-binding</module>
-        <module>geoplatform-sharing</module>
+        <module>geoplatform-shared</module>
         <module>test</module>
     </modules>
 

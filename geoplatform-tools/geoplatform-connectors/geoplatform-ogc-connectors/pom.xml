@@ -18,7 +18,7 @@
     <modules>
         <module>geoplatform-connector-api</module>
         <module>geoplatform-csw-connector</module>
-        <module>geoplatform-wfs-connector</module>
+        <module>geoplatform-wfs-connector-module</module>
         <module>geoplatform-wps-connector</module>
     </modules>
 

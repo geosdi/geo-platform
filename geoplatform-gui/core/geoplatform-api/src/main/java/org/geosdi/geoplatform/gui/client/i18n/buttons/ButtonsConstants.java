@@ -56,6 +56,9 @@ public interface ButtonsConstants extends Constants {
     @DefaultStringValue("Next >")
     String nextText();
 
+    @DefaultStringValue("< Prev")
+    String prevText();
+
     @DefaultStringValue("Preview")
     String previewText();
 

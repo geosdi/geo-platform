@@ -71,13 +71,15 @@ public class LoadFolderElementsCommand implements
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
-        logger.debug("Folder id: " + request.getFolderID());
+        logger.info("Folder id: " + request.getFolderID());
 
         ArrayList<IGPFolderElements> result = this.layerService.loadFolderElements(
                 request.getFolderID(), httpServletRequest);
 
-        logger.debug("#################### Found {} ", result);
+        logger.debug("\n\n##################################### Found {} ",
+                result);
 
         return new LoadFolderElementsResponse(result);
     }
+
 }

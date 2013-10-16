@@ -63,21 +63,26 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
     //
     private Button nextButton;
     private Button previuosButton;
-    private Button commitButton = new Button(ButtonsConstants.INSTANCE.saveText());
+    private Button commitButton = new Button(
+            ButtonsConstants.INSTANCE.saveText());
     private List<GeoPlatformWizardPanel> wizardPanelsStack = Lists.
             <GeoPlatformWizardPanel>newArrayList();
     protected ContentPanel contentPanel;
+    protected boolean closeForCommit;
 
-    public GeoPlatformWizard(boolean lazy, String commitButtonName, IWizardCommitAction finalAction,
+    public GeoPlatformWizard(boolean lazy, String commitButtonName,
+            IWizardCommitAction finalAction,
             List<GeoPlatformWizardPanel> wizardPanelsStack) {
         super(lazy);
         this.finalAction = finalAction;
-        this.prepareWizardPanels(wizardPanelsStack.toArray(new GeoPlatformWizardPanel[]{}));
+        this.prepareWizardPanels(wizardPanelsStack.toArray(
+                new GeoPlatformWizardPanel[]{}));
         this.wizardPanelsStack = wizardPanelsStack;
         this.commitButton.setHtml(commitButtonName);
     }
 
-    public GeoPlatformWizard(boolean lazy, String commitButtonName, IWizardCommitAction finalAction) {
+    public GeoPlatformWizard(boolean lazy, String commitButtonName,
+            IWizardCommitAction finalAction) {
         super(lazy);
         this.finalAction = finalAction;
         this.commitButton.setHtml(commitButtonName);
@@ -106,6 +111,7 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         logger.log(Level.FINEST, "Executing addButtons on GeoPlatformWizard");
         this.previuosButton = new Button(ButtonsConstants.INSTANCE.prevText(),
                 new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 Component component = contentPanel.getItemByItemId(WIZARD_ID);
@@ -113,7 +119,8 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
                     GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) component;
                     int indexPrevElement = wizardPanelsStack.indexOf(panel);
                     if (indexPrevElement > 0) {
-                        GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(--indexPrevElement);
+                        GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(
+                                --indexPrevElement);
                         placeWizardPanel(panelToDispay);
                         if (indexPrevElement == 0) {
                             previuosButton.disable();
@@ -122,11 +129,13 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
                     }
                 }
             }
+
         });
         this.previuosButton.disable();
         logger.log(Level.FINEST, "Created button previous on GeoPlatformWizard");
         this.nextButton = new Button(ButtonsConstants.INSTANCE.nextText(),
                 new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 Component component = contentPanel.getItemByItemId(WIZARD_ID);
@@ -135,7 +144,8 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
                     panel.onNextAction();
                     int indexPrevElement = wizardPanelsStack.indexOf(panel);
                     if (indexPrevElement < wizardPanelsStack.size() - 1) {
-                        GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(++indexPrevElement);
+                        GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(
+                                ++indexPrevElement);
                         placeWizardPanel(panelToDispay);
                         if (indexPrevElement == wizardPanelsStack.size() - 1) {
                             nextButton.disable();
@@ -144,16 +154,21 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
                     }
                 }
             }
+
         });
         logger.log(Level.FINEST, "Created button next on GeoPlatformWizard");
-        this.commitButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+        this.commitButton.addSelectionListener(
+                new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
-                GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) contentPanel.getItemByItemId(WIZARD_ID);
+                GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) contentPanel.getItemByItemId(
+                        WIZARD_ID);
                 if (panel != null && panel.executeCommitAction(finalAction)) {
                     GeoPlatformWizard.super.hide();
                 }
             }
+
         });
         logger.log(Level.FINEST, "Created commit next on GeoPlatformWizard");
         super.getButtonBar().add(this.previuosButton);
@@ -168,8 +183,10 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         this.removeWizardScreen();
         contentPanel.add(panelToDisplay.asWidget());
         contentPanel.layout(Boolean.TRUE);
-        logger.log(Level.FINEST, "Panel header: " + panelToDisplay.getHeadingHtml());
-        logger.log(Level.FINEST, "Panel displayed is final: " + panelToDisplay.isCommitAction());
+        logger.log(Level.FINEST,
+                "Panel header: " + panelToDisplay.getHeadingHtml());
+        logger.log(Level.FINEST,
+                "Panel displayed is final: " + panelToDisplay.isCommitAction());
         if (panelToDisplay.isCommitAction()) {
             this.commitButton.enable();
         } else {
@@ -184,17 +201,20 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         if (component != null) {
             GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) component;
             contentPanel.remove(panel);
-            logger.log(Level.FINEST, "Removed wizardScreen: on GeoPlatformWizard");
+            logger.log(Level.FINEST,
+                    "Removed wizardScreen: on GeoPlatformWizard");
         }
     }
 
     @Override
     public void finalizeInitOperations() {
-        logger.log(Level.FINEST, "Executing finalize Init Operations on GeoPlatformWizard");
+        logger.log(Level.FINEST,
+                "Executing finalize Init Operations on GeoPlatformWizard");
         super.finalizeInitOperations();
         this.addButtons();
         this.showFirstWizardScreen();
-        logger.log(Level.FINEST, "Finalized Init Operations on GeoPlatformWizard");
+        logger.log(Level.FINEST,
+                "Finalized Init Operations on GeoPlatformWizard");
     }
 
     protected void showFirstWizardScreen() {
@@ -203,7 +223,8 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
             this.placeWizardPanel(this.wizardPanelsStack.get(0));
             this.nextButton.enable();
             this.previuosButton.disable();
-            logger.log(Level.FINEST, "After placing first panel on GeoPlatformWizard");
+            logger.log(Level.FINEST,
+                    "After placing first panel on GeoPlatformWizard");
         }
     }
 
@@ -213,6 +234,7 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         super.show();
         this.showFirstWizardScreen();
         logger.log(Level.FINEST, "After Show on GeoPlatformWizard");
+        this.closeForCommit = true;
     }
 
     @Override
@@ -221,7 +243,7 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         super.reset();
         removeWizardScreen();
         for (GeoPlatformWizardPanel panel : this.wizardPanelsStack) {
-            panel.reset();
+            panel.reset(this.closeForCommit);
         }
     }
 
@@ -246,4 +268,5 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
 //        return super.addText(text);
         return new Html();
     }
+
 }

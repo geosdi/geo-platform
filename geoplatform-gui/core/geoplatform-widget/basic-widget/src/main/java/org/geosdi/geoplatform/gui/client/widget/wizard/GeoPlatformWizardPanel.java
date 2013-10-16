@@ -52,8 +52,7 @@ public abstract class GeoPlatformWizardPanel extends GeoPlatformContentPanel {
         this.commitAction = isFinalAction;
     }
 
-    @Override
-    public abstract void reset();
+    public abstract void reset(boolean closeForCommit);
 
     public abstract boolean executeCommitAction(IWizardCommitAction commitAction);
 

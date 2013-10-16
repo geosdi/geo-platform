@@ -60,12 +60,12 @@ public class DrawPointFeature extends DrawGenericFeatureControl {
     @Override
     public void createControl() {
         if (!initialized) {
-            DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
-            drawPolygonFeatureOptions.onFeatureAdded(
+            DrawFeatureOptions drawPointFeatureOptions = new DrawFeatureOptions();
+            drawPointFeatureOptions.onFeatureAdded(
                     super.createFeatureAddedListener());
 
             this.control = new DrawFeature(this.vector, new PointHandler(),
-                    drawPolygonFeatureOptions);
+                    drawPointFeatureOptions);
             initialized = true;
         }
     }

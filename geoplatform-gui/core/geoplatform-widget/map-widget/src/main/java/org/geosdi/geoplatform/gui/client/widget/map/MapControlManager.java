@@ -133,7 +133,7 @@ public class MapControlManager {
         MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
                 wkt).getJSObject());
         geom.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()), new Projection(
-                GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
+                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode()));
 
         VectorFeature vectorFeature = new VectorFeature(geom);
         this.vector.addFeature(vectorFeature);

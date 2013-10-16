@@ -41,6 +41,6 @@ package org.geosdi.geoplatform.gui.client.widget.wizard;
  */
 public interface IWizardCommitAction {
 
-    boolean executeFinalAction();
+    boolean executeCommitAction();
     
 }

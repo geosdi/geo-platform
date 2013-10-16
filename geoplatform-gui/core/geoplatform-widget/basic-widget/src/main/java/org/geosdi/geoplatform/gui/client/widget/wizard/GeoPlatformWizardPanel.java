@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 public abstract class GeoPlatformWizardPanel extends GeoPlatformContentPanel {
 
     protected final static Logger logger = Logger.getLogger("");
-    private boolean commitAction;
+    private final boolean commitAction;
 
     public GeoPlatformWizardPanel(boolean lazy, boolean isFinalAction) {
         super(lazy);
@@ -55,7 +55,7 @@ public abstract class GeoPlatformWizardPanel extends GeoPlatformContentPanel {
     @Override
     public abstract void reset();
 
-    public abstract boolean executeCommitAction(IWizardCommitAction finalAction);
+    public abstract boolean executeCommitAction(IWizardCommitAction commitAction);
 
     public abstract boolean isNextEnabled();
 

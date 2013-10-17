@@ -59,7 +59,7 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
     protected final static Logger logger = Logger.getLogger("");
     private final static String WIZARD_ID = "wizardID";
     //
-    private IWizardCommitAction finalAction;
+    private IWizardCommitAction commitAction;
     //
     private Button nextButton;
     private Button previuosButton;
@@ -71,10 +71,10 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
     protected boolean closeForCommit;
 
     public GeoPlatformWizard(boolean lazy, String commitButtonName,
-            IWizardCommitAction finalAction,
+            IWizardCommitAction commitAction,
             List<GeoPlatformWizardPanel> wizardPanelsStack) {
         super(lazy);
-        this.finalAction = finalAction;
+        this.commitAction = commitAction;
         this.prepareWizardPanels(wizardPanelsStack.toArray(
                 new GeoPlatformWizardPanel[]{}));
         this.wizardPanelsStack = wizardPanelsStack;
@@ -84,7 +84,7 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
     public GeoPlatformWizard(boolean lazy, String commitButtonName,
             IWizardCommitAction finalAction) {
         super(lazy);
-        this.finalAction = finalAction;
+        this.commitAction = finalAction;
         this.commitButton.setHtml(commitButtonName);
     }
 
@@ -112,64 +112,69 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         this.previuosButton = new Button(ButtonsConstants.INSTANCE.prevText(),
                 new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                Component component = contentPanel.getItemByItemId(WIZARD_ID);
-                if (component != null) {
-                    GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) component;
-                    int indexPrevElement = wizardPanelsStack.indexOf(panel);
-                    if (indexPrevElement > 0) {
-                        GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(
-                                --indexPrevElement);
-                        placeWizardPanel(panelToDispay);
-                        if (indexPrevElement == 0) {
-                            previuosButton.disable();
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        Component component = contentPanel.getItemByItemId(
+                                WIZARD_ID);
+                        if (component != null) {
+                            GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) component;
+                            int indexPrevElement = wizardPanelsStack.indexOf(
+                                    panel);
+                            if (indexPrevElement > 0) {
+                                GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(
+                                        --indexPrevElement);
+                                placeWizardPanel(panelToDispay);
+                                if (indexPrevElement == 0) {
+                                    previuosButton.disable();
+                                }
+                                nextButton.enable();
+                            }
                         }
-                        nextButton.enable();
                     }
-                }
-            }
 
-        });
+                });
         this.previuosButton.disable();
         logger.log(Level.FINEST, "Created button previous on GeoPlatformWizard");
         this.nextButton = new Button(ButtonsConstants.INSTANCE.nextText(),
                 new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                Component component = contentPanel.getItemByItemId(WIZARD_ID);
-                if (component != null && ((GeoPlatformWizardPanel) component).isNextEnabled()) {
-                    GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) component;
-                    panel.onNextAction();
-                    int indexPrevElement = wizardPanelsStack.indexOf(panel);
-                    if (indexPrevElement < wizardPanelsStack.size() - 1) {
-                        GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(
-                                ++indexPrevElement);
-                        placeWizardPanel(panelToDispay);
-                        if (indexPrevElement == wizardPanelsStack.size() - 1) {
-                            nextButton.disable();
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        Component component = contentPanel.getItemByItemId(
+                                WIZARD_ID);
+                        if (component != null && ((GeoPlatformWizardPanel) component).isNextEnabled()) {
+                            GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) component;
+                            panel.onNextAction();
+                            int indexPrevElement = wizardPanelsStack.indexOf(
+                                    panel);
+                            if (indexPrevElement < wizardPanelsStack.size() - 1) {
+                                GeoPlatformWizardPanel panelToDispay = wizardPanelsStack.get(
+                                        ++indexPrevElement);
+                                placeWizardPanel(panelToDispay);
+                                if (indexPrevElement == wizardPanelsStack.size() - 1) {
+                                    nextButton.disable();
+                                }
+                                previuosButton.enable();
+                            }
                         }
-                        previuosButton.enable();
                     }
-                }
-            }
 
-        });
+                });
         logger.log(Level.FINEST, "Created button next on GeoPlatformWizard");
         this.commitButton.addSelectionListener(
                 new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) contentPanel.getItemByItemId(
-                        WIZARD_ID);
-                if (panel != null && panel.executeCommitAction(finalAction)) {
-                    closeWindow(true);
-                }
-            }
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) contentPanel.getItemByItemId(
+                                WIZARD_ID);
+                        if (panel != null && panel.executeCommitAction(
+                                commitAction)) {
+                            closeWindow(true);
+                        }
+                    }
 
-        });
+                });
         logger.log(Level.FINEST, "Created commit next on GeoPlatformWizard");
         super.getButtonBar().add(this.previuosButton);
         super.getButtonBar().add(this.nextButton);
@@ -247,8 +252,8 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         }
     }
 
-    public IWizardCommitAction getFinalAction() {
-        return finalAction;
+    public IWizardCommitAction getCommitAction() {
+        return commitAction;
     }
 
     @Override
@@ -270,4 +275,5 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
     }
 
     public abstract void closeWindow(boolean theCloseForCommit);
+
 }

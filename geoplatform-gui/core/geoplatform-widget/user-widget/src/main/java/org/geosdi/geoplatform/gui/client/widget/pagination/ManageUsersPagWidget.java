@@ -98,8 +98,10 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     public void finalizeInitOperations() {
         super.finalizeInitOperations();
         //Using defered binding will be select the right widget to show
-        this.userPropertiesManagerWidget = GWT.create(UserPropertiesManagerWidget.class);
-        this.userPropertiesWidget.setWindowToClose(this.userPropertiesManagerWidget);
+        this.userPropertiesManagerWidget = GWT.create(
+                UserPropertiesManagerWidget.class);
+        this.userPropertiesWidget.setWindowToClose(
+                this.userPropertiesManagerWidget);
         //
         super.selectButton.setText(UserModuleConstants.INSTANCE.
                 ManageUsersPagWidget_modifyUserText());
@@ -110,16 +112,17 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
                 ManageUsersPagWidget_addUserText(),
                 BasicWidgetResources.ICONS.logged_user(),
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                showUserPropertiesWidget(true);
-            }
-        }));
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        showUserPropertiesWidget(true);
+                    }
+
+                }));
     }
 
     @Override
     public void show() {
-        super.init();
         super.show();
     }
 
@@ -130,11 +133,13 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.setSize(670, 490);
 
         super.addWindowListener(new WindowListener() {
+
             @Override
             public void windowShow(WindowEvent we) {
                 searchText = "";
                 loader.load(0, getPageSize());
             }
+
         });
     }
 
@@ -143,6 +148,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.toolBar = new PagingToolBar(super.getPageSize());
 
         super.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
+
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
@@ -152,6 +158,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
                         GPAccountLogged.getInstance().getOrganization(),
                         callback);
             }
+
         };
 
         super.loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
@@ -174,27 +181,31 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
         ColumnConfig usernameColumn = new ColumnConfig();
         usernameColumn.setId(GPSimpleUserKeyValue.USERNAME.toString());
-        usernameColumn.setHeaderHtml(UserModuleConstants.INSTANCE.usernameFieldText());
+        usernameColumn.setHeaderHtml(
+                UserModuleConstants.INSTANCE.usernameFieldText());
         usernameColumn.setWidth(120);
         configs.add(usernameColumn);
 
         CheckColumnConfig enabledColumn = new CheckColumnConfig();
         enabledColumn.setId(GPUserManageDetailKeyValue.ENABLED.toString());
-        enabledColumn.setHeaderHtml(UserModuleConstants.INSTANCE.enabledFieldLabelText());
+        enabledColumn.setHeaderHtml(
+                UserModuleConstants.INSTANCE.enabledFieldLabelText());
         enabledColumn.setWidth(50);
         enabledColumn.setFixed(true);
         configs.add(enabledColumn);
 
         CheckColumnConfig tempColumn = new CheckColumnConfig();
         tempColumn.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
-        tempColumn.setHeaderHtml(UserModuleConstants.INSTANCE.temporaryFieldLabelText());
+        tempColumn.setHeaderHtml(
+                UserModuleConstants.INSTANCE.temporaryFieldLabelText());
         tempColumn.setWidth(65);
         tempColumn.setFixed(true);
         configs.add(tempColumn);
 
         ColumnConfig roleColumn = new ColumnConfig();
         roleColumn.setId(GPSimpleUserKeyValue.AUTORITHY.toString());
-        roleColumn.setHeaderHtml(UserModuleConstants.INSTANCE.userRoleLabelText());
+        roleColumn.setHeaderHtml(
+                UserModuleConstants.INSTANCE.userRoleLabelText());
         roleColumn.setWidth(80);
         configs.add(roleColumn);
 
@@ -235,32 +246,41 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         searchStatus.setBusy(UserModuleConstants.INSTANCE.
                 ManageUsersPagWidget_statusRetrievingRolesText());
 
-        UserRemoteImpl.Util.getInstance().getAllRoles(GPAccountLogged.getInstance().getOrganization(),
+        UserRemoteImpl.Util.getInstance().getAllRoles(
+                GPAccountLogged.getInstance().getOrganization(),
                 new AsyncCallback<ArrayList<String>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                setSearchStatus(
-                        SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
-                        UserModuleConstants.INSTANCE.
-                        ManageUsersPagWidget_statusErrorRetrievingRolesText());
-            }
 
-            @Override
-            public void onSuccess(ArrayList<String> result) {
-                setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
-                        SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH());
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        setSearchStatus(
+                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                UserModuleConstants.INSTANCE.
+                                ManageUsersPagWidget_statusErrorRetrievingRolesText());
+                    }
 
-                GPUserManageDetail userDetail;
-                if (isNewUser) {
-                    userDetail = new GPUserManageDetail();
-                    Registry.register(UserSessionEnum.USER_NAME_TO_SEARCH.name(), "");
-                } else {
-                    userDetail = widget.getSelectionModel().getSelectedItem();
-                    Registry.register(UserSessionEnum.USER_NAME_TO_SEARCH.name(), userDetail.getUsername());
-                }
-                userPropertiesWidget.setData(userDetail, result);
-                userPropertiesManagerWidget.show();
-            }
-        });
+                    @Override
+                    public void onSuccess(ArrayList<String> result) {
+                        setSearchStatus(
+                                SearchStatus.EnumSearchStatus.STATUS_SEARCH,
+                                SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH());
+
+                        GPUserManageDetail userDetail;
+                        if (isNewUser) {
+                            userDetail = new GPUserManageDetail();
+                            Registry.register(
+                                    UserSessionEnum.USER_NAME_TO_SEARCH.name(),
+                                    "");
+                        } else {
+                            userDetail = widget.getSelectionModel().getSelectedItem();
+                            Registry.register(
+                                    UserSessionEnum.USER_NAME_TO_SEARCH.name(),
+                                    userDetail.getUsername());
+                        }
+                        userPropertiesWidget.setData(userDetail, result);
+                        userPropertiesManagerWidget.show();
+                    }
+
+                });
     }
+
 }

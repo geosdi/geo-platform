@@ -102,7 +102,7 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
         }
     }
 
-    protected void init() {
+    protected final void init() {
         if (!isInitialized()) {
             initWindow();
             initVerticalPanel();
@@ -110,6 +110,12 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
             this.finalizeInitOperations();
             this.initialized = true;
         }
+    }
+
+    @Override
+    protected void beforeRender() {
+        super.beforeRender();
+        init();
     }
 
     /**
@@ -127,10 +133,12 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
         setMaximizable(false);
 
         addWindowListener(new WindowListener() {
+
             @Override
             public void windowHide(WindowEvent we) {
                 executeClose();
             }
+
         });
 
         setWindowProperties();
@@ -151,16 +159,19 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
         formPanel.setLayout(new FlowLayout());
 
         FieldSet searchFieldSet = new FieldSet();
-        searchFieldSet.setHeadingHtml(BasicWidgetConstants.INSTANCE.GeoPlatformSearchWindow_headingText());
+        searchFieldSet.setHeadingHtml(
+                BasicWidgetConstants.INSTANCE.GeoPlatformSearchWindow_headingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         searchFieldSet.setLayout(layout);
 
         search = new TextField<String>();
-        search.setFieldLabel(BasicWidgetConstants.INSTANCE.GeoPlatformSearchWindow_searchFieldLabelText());
+        search.setFieldLabel(
+                BasicWidgetConstants.INSTANCE.GeoPlatformSearchWindow_searchFieldLabelText());
 
         search.addKeyListener(new KeyListener() {
+
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
@@ -173,10 +184,12 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)) {
-                    searchText = search.getValue() == null ? "" : search.getValue();
+                    searchText = search.getValue() == null ? ""
+                            : search.getValue();
                     loader.load(0, 25);
                 }
             }
+
         });
 
         BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
@@ -188,7 +201,8 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
         initWidget();
         if (widget == null) {
-            throw new NullPointerException("Widget must be not null (create widget into initWidget method).");
+            throw new NullPointerException(
+                    "Widget must be not null (create widget into initWidget method).");
         }
         formPanel.add(widget);
 
@@ -201,24 +215,30 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        selectButton = new Button(ButtonsConstants.INSTANCE.selectText(), new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                executeSelect();
-            }
-        });
+        selectButton = new Button(ButtonsConstants.INSTANCE.selectText(),
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        executeSelect();
+                    }
+
+                });
 
         selectButton.setIcon(BasicWidgetResources.ICONS.select());
         selectButton.disable();
 
         formPanel.addButton(this.selectButton);
 
-        closeButton = new Button(ButtonsConstants.INSTANCE.closeText(), new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                executeClose();
-            }
-        });
+        closeButton = new Button(ButtonsConstants.INSTANCE.closeText(),
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        executeClose();
+                    }
+
+                });
 
         closeButton.setIcon(BasicWidgetResources.ICONS.cancel());
 
@@ -282,9 +302,11 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
 
     private void setUpLoadListener() {
         loader.addLoadListener(new LoadListener() {
+
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
-                searchStatus.setBusy(BasicWidgetConstants.INSTANCE.GeoPlatformSearchWindow_connectionBusyStatusText());
+                searchStatus.setBusy(
+                        BasicWidgetConstants.INSTANCE.GeoPlatformSearchWindow_connectionBusyStatusText());
                 if (selectButton.isEnabled()) {
                     selectButton.disable();
                 }
@@ -309,6 +331,7 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
                             SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
                 }
             }
+
         });
     }
 
@@ -325,4 +348,5 @@ public abstract class GeoPlatformSearchWindow<C extends Widget, T extends GeoPla
     public int getPageSize() {
         return pageSize;
     }
+
 }

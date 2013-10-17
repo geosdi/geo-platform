@@ -165,7 +165,7 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
                 GeoPlatformWizardPanel panel = (GeoPlatformWizardPanel) contentPanel.getItemByItemId(
                         WIZARD_ID);
                 if (panel != null && panel.executeCommitAction(finalAction)) {
-                    GeoPlatformWizard.super.hide();
+                    closeWindow(true);
                 }
             }
 
@@ -269,4 +269,5 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         return new Html();
     }
 
+    public abstract void closeWindow(boolean theCloseForCommit);
 }

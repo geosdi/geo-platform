@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
@@ -57,21 +58,15 @@ public class DeleteFeatureAction extends EditorFeatureAction {
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if (((MapLayoutWidget) this.mapWidget).getFeaturesNumber() == 0) {
-            GeoPlatformMessage.alertMessage(MapModuleConstants.INSTANCE.
-                    DeleteFeatureAction_alertNoFeatureTitleText(),
-                    MapModuleConstants.INSTANCE.DeleteFeatureAction_alertNoFeatureBodyText());
-            return;
-        }
+        ToggleButton button = (ToggleButton) ce.getSource();
+        
+        super.changeButtonState();
 
-        if (this.editorOberver.isButtonPressed()) {
-            super.changeButtonState();
-        }
-
-        ((MapLayoutWidget) mapWidget).deactivateModifyFeature();
-
-        if (!((MapLayoutWidget) mapWidget).isFeatureOperationEnable()) {
-            ((MapLayoutWidget) mapWidget).activateFeatureOperation();
+        if (button.isPressed()) {
+            editorOberver.setButtonPressed(button);
+            this.featureOperation.activateControl();
+        } else {
+            this.featureOperation.deactivateControl();
         }
 
         this.featureOperation.setOperation(OperationType.DELETE);

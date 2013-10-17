@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ModifyFeatureAction;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
@@ -50,7 +51,7 @@ import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 public class ResizeAction extends ModifyFeatureAction {
 
     public ResizeAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, Resources.ICONS.resize(), 
+        super(mapWidget, Resources.ICONS.resize(),
                 MapModuleConstants.INSTANCE.ResizeAction_tooltipText());
     }
 
@@ -62,17 +63,16 @@ public class ResizeAction extends ModifyFeatureAction {
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if (this.editorOberver.isButtonPressed()) {
-            super.changeButtonState();
-        }
+        ToggleButton button = (ToggleButton) ce.getSource();
 
-//        if (mapWidget.isFeatureOperationEnable()) {
-//            mapWidget.deactivateFeatureOperation();
-//        }
-//
-//        // if (!mapWidget.isModifyFeatureEnable())
-//        mapWidget.deactivateModifyFeature();
-        mapWidget.activateModifyFeature();
+        super.changeButtonState();
+
+        if (button.isPressed()) {
+            editorOberver.setButtonPressed(button);
+            mapWidget.activateModifyFeature();
+        } else {
+            mapWidget.deactivateModifyFeature();
+        }
 
         this.control.setMode(ModifyFeature.RESIZE);
     }

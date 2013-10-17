@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.editor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ModifyFeatureAction;
 import org.geosdi.geoplatform.gui.client.i18n.MapModuleConstants;
@@ -62,11 +63,16 @@ public class DragAction extends ModifyFeatureAction {
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if (this.editorOberver.isButtonPressed()) {
-            super.changeButtonState();
-        }
+        ToggleButton button = (ToggleButton) ce.getSource();
 
-        mapWidget.activateModifyFeature();
+        super.changeButtonState();
+
+        if (button.isPressed()) {
+            editorOberver.setButtonPressed(button);
+            mapWidget.activateModifyFeature();
+        } else {
+            mapWidget.deactivateModifyFeature();
+        }
 
         this.control.setMode(ModifyFeature.DRAG);
     }

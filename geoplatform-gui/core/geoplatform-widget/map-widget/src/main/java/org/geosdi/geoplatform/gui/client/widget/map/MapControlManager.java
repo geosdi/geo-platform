@@ -121,7 +121,7 @@ public class MapControlManager {
         this.map.addControl(this.featureOperation.getControl());
         this.map.addControl(this.navigationHistory.getControl());
 
-        this.modifyFeature.activateControl();
+//        this.modifyFeature.activateControl();
     }
 
     /**

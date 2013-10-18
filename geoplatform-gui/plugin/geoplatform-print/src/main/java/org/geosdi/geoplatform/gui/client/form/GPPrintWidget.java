@@ -105,6 +105,8 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     public final static String PRINT_VECTOR_NAME = "VectorPrintExtent";
 
+    private final static Logger logger = Logger.getLogger("");
+    
     private ListStore<DPI> storeDPI;
     private ListStore<PrintTemplate> storeTemplate;
     private ListStore<Scale> storeScale;
@@ -162,7 +164,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     @Override
     public void execute() {
         if (formPanel.isValid()) {
-            System.out.println("Execute ......");
+            logger.log(Level.FINEST, "Execute ......");
             // Center on correct ViewPort
             LonLat center = printExtent.getDataExtent().getCenterLonLat();
             if (GPApplicationMap.getInstance().getApplicationMap().getMap().
@@ -214,7 +216,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             try {
                 Info.display(PrintModuleConstants.INSTANCE.printText(),
                         PrintModuleConstants.INSTANCE.GPPrintWidget_infoStartPringBodyText());
-                System.out.println(jsonData);
+                logger.log(Level.INFO, jsonData);
                 Request response = builder.sendRequest(jsonData,
                         new RequestCallback() {
                             @Override
@@ -401,7 +403,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
     @Override
     public void reset() {
-        System.out.println("Reset window ...");
+        logger.log(Level.FINEST, "Reset window ...");
         this.entity.reset();
         this.formBinding.unbind();
         this.title.reset();
@@ -409,7 +411,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         this.comments.reset();
 
         if (printExtent != null && dragPrintArea != null) {
-            System.out.println("******* On Hide: Removing controll");
             PrintUtility.disableDragPrintArea(GPApplicationMap.getInstance().
                     getApplicationMap().getMap(),
                     dragPrintArea);

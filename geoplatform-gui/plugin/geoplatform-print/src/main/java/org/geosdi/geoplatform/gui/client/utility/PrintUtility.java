@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.client.utility;
 
 import com.google.common.collect.Lists;
-import com.google.gwt.core.shared.GWT;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.form.GPPrintWidget;
 import org.geosdi.geoplatform.gui.client.i18n.PrintTemplateConstants;
 import org.geosdi.geoplatform.gui.client.model.DPI;
 import org.geosdi.geoplatform.gui.client.model.PrintTemplate;
@@ -61,10 +61,12 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
- * 
+ *
+ *
  */
 public class PrintUtility {
+
+    private static DragFeature dragFeature;
 
     public static List<DPI> getDPI() {
         List<DPI> dpi = Lists.<DPI>newArrayList();
@@ -116,7 +118,7 @@ public class PrintUtility {
         Bounds extent = getExtent(center, scale, map, sizeFactor, portrait);
         Geometry rect = extent.toGeometry();
         VectorFeature features = new VectorFeature(rect);
-        Vector vectorLayer = new Vector("VectorPrintExtent");
+        Vector vectorLayer = new Vector(GPPrintWidget.PRINT_VECTOR_NAME);
         vectorLayer.addFeature(features);
 
         //Define a style for the vectors
@@ -133,16 +135,14 @@ public class PrintUtility {
 
         return vectorLayer;
     }
-    
+
     public static VectorFeature updateRectangle(LonLat center, float scale, Map map, double sizeFactor, boolean portrait) {
         Bounds extent = getExtent(center, scale, map, sizeFactor, portrait);
         Geometry rect = extent.toGeometry();
         VectorFeature features = new VectorFeature(rect);
-       
 
         return features;
     }
-    
 
     public static DragFeature enableDragPrintArea(Map map, Vector vectorLayer) {
         DragFeature dragFeature = createDragFeature(vectorLayer);
@@ -152,7 +152,10 @@ public class PrintUtility {
     }
 
     public static void disableDragPrintArea(Map map, DragFeature dragFeature) {
-        map.removeControl(dragFeature);
+        if (dragFeature != null) {
+            dragFeature.deactivate();
+            map.removeControl(dragFeature);
+        }
     }
 
     public static Bounds getExtent(LonLat center, float scale, Map map, double sizeFactor, boolean portrait) {
@@ -170,16 +173,16 @@ public class PrintUtility {
         Bounds bbox = new Bounds(center.lon() - w, center.lat() - h, center.lon() + w, center.lat() + h);
         return bbox;
 
-
     }
 
     private static DragFeature createDragFeature(Vector layer) {
-        DragFeatureOptions dragFeatureOptions = new DragFeatureOptions();
-        dragFeatureOptions.onDrag(createDragFeatureListener("onDrag"));
-        dragFeatureOptions.onStart(createDragFeatureListener("onStart"));
-        dragFeatureOptions.onComplete(createDragFeatureListener("onComplete"));
-
-        DragFeature dragFeature = new DragFeature(layer, dragFeatureOptions);
+        if (dragFeature == null) {
+            DragFeatureOptions dragFeatureOptions = new DragFeatureOptions();
+            dragFeatureOptions.onDrag(createDragFeatureListener("onDrag"));
+            dragFeatureOptions.onStart(createDragFeatureListener("onStart"));
+            dragFeatureOptions.onComplete(createDragFeatureListener("onComplete"));
+            dragFeature = new DragFeature(layer, dragFeatureOptions);
+        }
         return dragFeature;
     }
 
@@ -187,7 +190,7 @@ public class PrintUtility {
         return new DragFeatureListener() {
             @Override
             public void onDragEvent(VectorFeature vectorFeature,
-                    Pixel pixel) {     
+                    Pixel pixel) {
             }
         };
     }

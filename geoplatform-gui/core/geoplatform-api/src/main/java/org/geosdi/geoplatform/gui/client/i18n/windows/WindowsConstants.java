@@ -100,4 +100,10 @@ public interface WindowsConstants extends Constants {
 
     @DefaultStringValue("There are unsaved changes, save or reset before exit.")
     String unsavedChangesToSaveOrResetText();
+
+    @DefaultStringValue("Warning: There are unsaved operations on the tree. ")
+    String unsavedOperationsOnTreeText();
+    
+    @DefaultStringValue("Do you really want to leave the application?")
+    String leaveApplicationQuestionText();
 }

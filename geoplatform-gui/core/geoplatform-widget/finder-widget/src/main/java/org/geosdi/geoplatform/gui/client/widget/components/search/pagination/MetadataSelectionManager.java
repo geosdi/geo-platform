@@ -62,10 +62,10 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  */
 public class MetadataSelectionManager implements CatalogMetadataSelectionManager {
 
-    private GPEventBus bus;
-    private GPCatalogRecordsToolTip recordsToolTip;
-    private CatalogTreeLayerEnableEvent event = new CatalogTreeLayerEnableEvent();
-    private List<FullRecord> recordsExcluded = Lists.<FullRecord>newArrayList();
+    private final GPEventBus bus;
+    private final GPCatalogRecordsToolTip recordsToolTip;
+    private final CatalogTreeLayerEnableEvent event = new CatalogTreeLayerEnableEvent();
+    private final List<FullRecord> recordsExcluded = Lists.<FullRecord>newArrayList();
 
     public MetadataSelectionManager(GPEventBus theBus,
             GPCatalogRecordsToolTip theRecordsToolTip) {
@@ -119,9 +119,8 @@ public class MetadataSelectionManager implements CatalogMetadataSelectionManager
 
     /**
      * Activate Button to add Metadata on GPTreeLayerWidget
-     *
-     * @param {
-     * @} enable
+     * 
+     * @param enable 
      */
     protected void fireCatalogTreeLayerHandler(boolean enable) {
         this.event.setEnable(enable);
@@ -131,7 +130,7 @@ public class MetadataSelectionManager implements CatalogMetadataSelectionManager
     /**
      * Activate {@link CatalogRecordsToolTip} ToolTip
      *
-     * @param records
+     * @param enable
      */
     protected void fireCatalogRecordsToolTip(boolean enable) {
         if (enable) {

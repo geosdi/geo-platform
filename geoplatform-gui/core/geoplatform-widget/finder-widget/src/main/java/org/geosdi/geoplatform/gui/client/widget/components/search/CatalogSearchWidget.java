@@ -66,9 +66,9 @@ import org.geosdi.geoplatform.gui.responce.TextInfo;
 public class CatalogSearchWidget extends LayoutContainer
         implements ActionEnableHandler, GPCatalogFinderComponent {
 
-    private TextInfo textInfo;
-    private RecordsContainer recordsContainer;
-    private GPEventBus bus;
+    private final TextInfo textInfo;
+    private final RecordsContainer recordsContainer;
+    private final GPEventBus bus;
     //
     private TextField<String> searchTextField;
     private Button searchButton;
@@ -98,7 +98,8 @@ public class CatalogSearchWidget extends LayoutContainer
         LayoutContainer left = new LayoutContainer();
         left.setLayout(new ColumnLayout());
 
-        Label searchLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_searchLabelText());
+        Label searchLabel = new Label(
+                CatalogFinderConstants.INSTANCE.CatalogSearchWidget_searchLabelText());
         searchLabel.setStyleName("catalogSearch-Label");
 
         left.add(searchLabel, new ColumnData(300.0));
@@ -109,6 +110,7 @@ public class CatalogSearchWidget extends LayoutContainer
         searchTextField = new TextField<String>();
         searchTextField.setWidth(250);
         searchTextField.addKeyListener(new KeyListener() {
+
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if (searchButton.isEnabled()
@@ -126,18 +128,22 @@ public class CatalogSearchWidget extends LayoutContainer
                     }
                 }
             }
+
         });
         panel.add(searchTextField);
 
         searchButton = new Button(ButtonsConstants.INSTANCE.searchText(),
                 new SelectionListener<ButtonEvent>() {
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 String searchText = searchTextField.getValue();
                 if (searchText != null && !optionsCheckboxgroup.isValid(
                         true)) {
-                    GeoPlatformMessage.alertMessage(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_errorSearchTitleText(),
-                            CatalogFinderMessages.INSTANCE.CatalogSearchWidget_errorSearchBodyMessage(searchText));
+                    GeoPlatformMessage.alertMessage(
+                            CatalogFinderConstants.INSTANCE.CatalogSearchWidget_errorSearchTitleText(),
+                            CatalogFinderMessages.INSTANCE.CatalogSearchWidget_errorSearchBodyMessage(
+                            searchText));
                     return;
                 }
                 // Manual binding
@@ -151,6 +157,7 @@ public class CatalogSearchWidget extends LayoutContainer
                 // Performing the search
                 recordsContainer.searchRecords();
             }
+
         });
         searchButton.setStyleAttribute("margin-left", "20px");
         searchButton.disable();
@@ -162,7 +169,8 @@ public class CatalogSearchWidget extends LayoutContainer
         LayoutContainer right = new LayoutContainer();
         right.setLayout(new ColumnLayout());
 
-        Label optionsLabel = new Label(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_optionsLabelText());
+        Label optionsLabel = new Label(
+                CatalogFinderConstants.INSTANCE.CatalogSearchWidget_optionsLabelText());
         optionsLabel.setStyleName("catalogOptions-Label");
 
         right.add(optionsLabel, new ColumnData(240.0));
@@ -170,6 +178,7 @@ public class CatalogSearchWidget extends LayoutContainer
         optionsCheckboxgroup = new CheckBoxGroup();
         optionsCheckboxgroup.setOrientation(Orientation.VERTICAL);
         optionsCheckboxgroup.setValidator(new Validator() {
+
             @Override
             public String validate(Field<?> field, String value) {
                 CheckBoxGroup group = (CheckBoxGroup) field;
@@ -178,29 +187,35 @@ public class CatalogSearchWidget extends LayoutContainer
                 }
                 return null;
             }
+
         });
 
         Listener<FieldEvent> checkBoxListener = new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent fe) {
                 manageAllSelectedCheckbox();
             }
+
         };
 
         titleCheckbox = new CheckBox();
-        titleCheckbox.setBoxLabel(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_titleLabelText());
+        titleCheckbox.setBoxLabel(
+                CatalogFinderConstants.INSTANCE.CatalogSearchWidget_titleLabelText());
         titleCheckbox.setValue(true); // Enabled by default
         titleCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(titleCheckbox);
 
         abstractCheckbox = new CheckBox();
-        abstractCheckbox.setBoxLabel(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_abstractLabelText());
+        abstractCheckbox.setBoxLabel(
+                CatalogFinderConstants.INSTANCE.CatalogSearchWidget_abstractLabelText());
         abstractCheckbox.setValue(true); // Enabled by default
         abstractCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(abstractCheckbox);
 
         subjectsCheckbox = new CheckBox();
-        subjectsCheckbox.setBoxLabel(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_keywordsLabelText());
+        subjectsCheckbox.setBoxLabel(
+                CatalogFinderConstants.INSTANCE.CatalogSearchWidget_keywordsLabelText());
         subjectsCheckbox.setValue(true); // Enabled by default
         subjectsCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(subjectsCheckbox);
@@ -208,10 +223,12 @@ public class CatalogSearchWidget extends LayoutContainer
         right.add(optionsCheckboxgroup);
 
         allSelectedCheckbox = new CheckBox();
-        allSelectedCheckbox.setBoxLabel(CatalogFinderConstants.INSTANCE.CatalogSearchWidget_allSelectLabelText());
+        allSelectedCheckbox.setBoxLabel(
+                CatalogFinderConstants.INSTANCE.CatalogSearchWidget_allSelectLabelText());
         allSelectedCheckbox.setValue(true); // Enabled by default
         allSelectedCheckbox.addListener(Events.Change,
                 new Listener<FieldEvent>() {
+
             @Override
             public void handleEvent(FieldEvent fe) {
                 Boolean allSelected = (Boolean) fe.getValue();
@@ -220,6 +237,7 @@ public class CatalogSearchWidget extends LayoutContainer
                 abstractCheckbox.setValue(allSelected);
                 subjectsCheckbox.setValue(allSelected);
             }
+
         });
         right.add(allSelectedCheckbox);
 
@@ -253,4 +271,5 @@ public class CatalogSearchWidget extends LayoutContainer
         searchTextField.clear();
         recordsContainer.reset();
     }
+
 }

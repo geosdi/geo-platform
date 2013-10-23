@@ -56,8 +56,8 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
  */
 public class CatalogTreeLayerWidgetSupport implements GPTreeLayerWidgetSupport {
 
-    private TreePanel<GPBeanTreeModel> tree;
-    private GPCatalogExpander expander;
+    private final TreePanel<GPBeanTreeModel> tree;
+    private final GPCatalogExpander expander;
     private Label operationLabel;
     private Button addLayersToTreeButton;
 

@@ -76,12 +76,13 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         implements RecordsContainerSelectionListener, DeselectGridRecordHandler {
 
     protected GPEventBus bus;
-    private CatalogFinderBean catalogFinder;
+    private final CatalogFinderBean catalogFinder;
     private CheckBoxSelectionModel<FullRecord> selectionModel;
     private RowExpander rowExpander;
     private boolean selectionContainer;
-    private CatalogMetadataSelectionManager metadataSelection;
-    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(false);
+    private final CatalogMetadataSelectionManager metadataSelection;
+    private final DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(
+            false);
 
     @Inject
     public RecordsContainer(CatalogFinderBean theCatalogFinder,
@@ -112,7 +113,8 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     }
 
     private Menu createRecordContextMenu() {
-        ShowFullMetadataAction showFullMetadata = new ShowFullMetadataAction(this);
+        ShowFullMetadataAction showFullMetadata = new ShowFullMetadataAction(
+                this);
 
         MenuItem fullMetadata = new MenuItem();
         fullMetadata.addSelectionListener(showFullMetadata);
@@ -131,10 +133,12 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
         StringBuilder templateBuilder = new StringBuilder();
         templateBuilder.append("<p><b>");
-        templateBuilder.append(CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateAbstractText());
+        templateBuilder.append(
+                CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateAbstractText());
         templateBuilder.append(":</b> {ABSTRACT_TEXT}</p><br>");
         templateBuilder.append("<p><b>");
-        templateBuilder.append(CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateKeywordsText());
+        templateBuilder.append(
+                CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateKeywordsText());
         templateBuilder.append(":</b><br></p>");
         templateBuilder.append("<tpl for=\"SUBJECTS\">");
         templateBuilder.append("<div>{.}</div>");
@@ -147,7 +151,8 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(RecordKeyValue.TITLE.toString());
-        titleColumn.setHeaderHtml(CatalogFinderConstants.INSTANCE.RecordsContainer_titleColumnHeaderText());
+        titleColumn.setHeaderHtml(
+                CatalogFinderConstants.INSTANCE.RecordsContainer_titleColumnHeaderText());
         titleColumn.setWidth(490);
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
@@ -163,12 +168,14 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     public void createStore() {
         super.proxy = new RpcProxy<PagingLoadResult<FullRecord>>() {
+
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<FullRecord>> callback) {
                 GPCatalogFinderRemote.Util.getInstance().searchFullRecords(
                         (PagingLoadConfig) loadConfig, catalogFinder, callback);
             }
+
         };
 
         super.loader = new BasePagingLoader<PagingLoadResult<FullRecord>>(proxy);
@@ -180,7 +187,8 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     protected void onLoaderBeforeLoad(LoadEvent le) {
         this.metadataSelection.clearRecordsExcludedList();
-        widget.mask(CatalogFinderConstants.INSTANCE.RecordsContainer_gridLoadingMaskText());
+        widget.mask(
+                CatalogFinderConstants.INSTANCE.RecordsContainer_gridLoadingMaskText());
     }
 
     @Override
@@ -188,10 +196,12 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
 
         if (result.getTotalLength() == 0) {
-            getBus().fireEvent(new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.RecordsContainer_eventNoRecordsLoaderText(),
+            getBus().fireEvent(new CatalogStatusBarEvent(
+                    CatalogFinderConstants.INSTANCE.RecordsContainer_eventNoRecordsLoaderText(),
                     GPCatalogStatusBarType.STATUS_NOT_OK));
         } else {
-            getBus().fireEvent(new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.RecordsContainer_eventRecordsCorrectlyLoaderText(),
+            getBus().fireEvent(new CatalogStatusBarEvent(
+                    CatalogFinderConstants.INSTANCE.RecordsContainer_eventRecordsCorrectlyLoaderText(),
                     GPCatalogStatusBarType.STATUS_OK));
         }
 
@@ -201,9 +211,11 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     protected void onLoaderLoadException(LoadEvent le) {
         System.out.println("\n*** " + le.exception); // TODO logger
-        GeoPlatformMessage.errorMessage(CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownTitleText(),
+        GeoPlatformMessage.errorMessage(
+                CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownTitleText(),
                 CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText());
-        getBus().fireEvent(new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText(),
+        getBus().fireEvent(new CatalogStatusBarEvent(
+                CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText(),
                 GPCatalogStatusBarType.STATUS_ERROR));
 
         this.reset();
@@ -233,6 +245,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
 
             this.selectionModel.addListener(Events.BeforeSelect,
                     new Listener<SelectionEvent<FullRecord>>() {
+
                 @Override
                 public void handleEvent(SelectionEvent<FullRecord> se) {
                     FullRecord record = se.getModel();
@@ -243,14 +256,18 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
                         metadataSelection.fireCatalogRecordToolTip(record);
                     }
                 }
+
             });
 
             this.selectionModel.addSelectionChangedListener(
                     new SelectionChangedListener<FullRecord>() {
+
                 @Override
-                public void selectionChanged(SelectionChangedEvent<FullRecord> se) {
+                public void selectionChanged(
+                        SelectionChangedEvent<FullRecord> se) {
                     metadataSelection.manageSelectionChanged(se);
                 }
+
             });
         }
     }
@@ -285,4 +302,5 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     public GPEventBus getBus() {
         return bus;
     }
+
 }

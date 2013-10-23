@@ -57,11 +57,11 @@ import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPC
  */
 public class ShowFullMetadataAction extends MenuBaseAction {
 
-    private RecordsContainer rc;
+    private final RecordsContainer rc;
 
     public ShowFullMetadataAction(RecordsContainer rc) {
         super(CatalogFinderConstants.INSTANCE.
-                        ShowFullMetadataAction_titleActionText(),
+                ShowFullMetadataAction_titleActionText(),
                 CatalogFinderWidgetResources.ICONS.metadata());
 
         this.rc = rc;
@@ -88,11 +88,13 @@ public class ShowFullMetadataAction extends MenuBaseAction {
                 record.getIdentifier(),
                 GWT.getModuleName(),
                 new AsyncCallback<String>() {
+
             @Override
             public void onFailure(Throwable caught) {
                 System.out.println("Error @@@@@@@@@@@@@@@@ " + caught);
                 rc.getBus().fireEvent(
-                        new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.
+                        new CatalogStatusBarEvent(
+                        CatalogFinderConstants.INSTANCE.
                         ShowFullMetadataAction_errorRecordRequestText(),
                         GPCatalogStatusBarType.STATUS_ERROR));
             }
@@ -101,12 +103,16 @@ public class ShowFullMetadataAction extends MenuBaseAction {
             public void onSuccess(String result) {
                 Window.open(
                         GWT.getModuleBaseURL() + "csw-template/" + result,
-                        CatalogFinderConstants.INSTANCE.ShowFullMetadataAction_windowText(), "");
+                        CatalogFinderConstants.INSTANCE.ShowFullMetadataAction_windowText(),
+                        "");
                 rc.getBus().fireEvent(
-                        new CatalogStatusBarEvent(CatalogFinderConstants.INSTANCE.
+                        new CatalogStatusBarEvent(
+                        CatalogFinderConstants.INSTANCE.
                         ShowFullMetadataAction_recordRequestExecutedText(),
                         GPCatalogStatusBarType.STATUS_OK));
             }
+
         });
     }
+
 }

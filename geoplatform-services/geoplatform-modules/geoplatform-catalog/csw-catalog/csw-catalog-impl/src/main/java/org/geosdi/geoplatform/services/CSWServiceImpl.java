@@ -680,7 +680,8 @@ class CSWServiceImpl {
         try {
             URL url = new URL(serverUrl);
             GPCSWConnectorBuilder builder = GPCSWConnectorBuilder.newConnector()
-                    .withServerUrl(url);
+                    .withServerUrl(url).withProxyConfiguration(
+                            cswProxyConfiguration);
 
             if (serverUrl.contains("snipc.protezionecivile.it")) {
                 GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(

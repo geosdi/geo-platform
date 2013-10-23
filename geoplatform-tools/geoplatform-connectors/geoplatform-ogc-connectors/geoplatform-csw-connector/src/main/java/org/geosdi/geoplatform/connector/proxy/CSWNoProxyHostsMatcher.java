@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.proxy;
 
+import java.net.URL;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 import org.geosdi.geoplatform.configurator.httpclient.proxy.GPNoProxyHostsMatcher;
@@ -77,12 +78,13 @@ public class CSWNoProxyHostsMatcher implements GPNoProxyHostsMatcher,
             while (st.hasMoreTokens()) {
                 String serverURL = st.nextToken();
                 if (serverURL != null) {
-                    this.noProxySetHosts.add(serverURL);
+                    this.noProxySetHosts.add((serverURL.contains("http://"))
+                            ? new URL(serverURL).getHost() : serverURL);
                 }
             }
         }
 
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n\n", this);
+        logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n\n", this);
     }
 
     @Override

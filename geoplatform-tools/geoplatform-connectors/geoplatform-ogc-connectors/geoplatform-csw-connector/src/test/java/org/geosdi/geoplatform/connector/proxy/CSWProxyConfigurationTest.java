@@ -55,29 +55,30 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath:applicationContextScan-Test.xml"})
 public class CSWProxyConfigurationTest {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(
             CSWProxyConfigurationTest.class);
     //
     @Autowired
     private HttpClientProxyConfiguration cswProxyConnectionConfiguration;
-    
+
     @Test
     public void testCSWProxyConfigutation() {
         Assert.assertNotNull(cswProxyConnectionConfiguration);
-        
-        logger.info("ECCOLO ########## {}", cswProxyConnectionConfiguration);
-        
+
+        logger.info("PROXY CONFIGURATiON TO USE ######################### {}",
+                cswProxyConnectionConfiguration);
+
         Assert.assertEquals(false, cswProxyConnectionConfiguration.isUseProxy());
         Assert.assertEquals(false,
                 cswProxyConnectionConfiguration.isUseCredentialProvider());
-        
+
         Assert.assertEquals(false,
                 cswProxyConnectionConfiguration.matchServerURL("http://url1"));
-        
+
         Assert.assertEquals(false,
                 cswProxyConnectionConfiguration.matchServerURL(
-                "http://www.google.it"));
+                        "http://www.google.it"));
     }
-    
+
 }

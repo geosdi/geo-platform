@@ -118,8 +118,9 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     }
 
     /**
-     * <p> Analyzes the url of the server by eliminating everything that comes
-     * after the ? character </p>
+     * <p>
+     * Analyzes the url of the server by eliminating everything that comes after
+     * the ? character </p>
      *
      * @param urlServer
      *
@@ -143,13 +144,18 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         logger.info("SetUp Proxy Configuration @@@@@@@@@@@@@@@@ "
                 + proxyConfiguration);
 
-        if (this.proxyConfiguration.matchServerURL(this.url.toString())) {
+        String host = this.url.getHost();
+
+        logger.info("\n\n HOST TO MATCH ######################### {}\n\n",
+                host);
+
+        if (this.proxyConfiguration.matchServerURL(host)) {
             logger.info("@@@@@@@@@@@ Skipping Proxy Configuration for Server : "
-                    + "{}", this.url.toString());
+                    + "{}", host);
             return createDefaultHttpClient();
         } else {
             logger.info("@@@@@@@@@@@@@@@ Setting UP Proxy Configuration for "
-                    + "Server : {}", this.url.toString());
+                    + "Server : {}", host);
             /**
              * TODO HERE THE CODE FOR PROXY AUTHENTICATION *
              */
@@ -165,7 +171,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     private CloseableHttpClient createDefaultHttpClient() {
         return HttpClients.custom().setDefaultCredentialsProvider(
                 credentialsProvider).setRetryHandler(
-                new ConnectorHttpRequestRetryHandler(5)).build();
+                        new ConnectorHttpRequestRetryHandler(5)).build();
     }
 
     @Override

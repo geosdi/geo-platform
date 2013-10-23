@@ -83,6 +83,7 @@ public abstract class GPAbstractConnectorRequest<T>
      * <p>
      * Setting basic configuration for HttpParams
      * </p>
+     * @return RequestConfig
      */
     protected RequestConfig prepareRequestConfig() {
         return this.requestConfig = (requestConfig != null) ? requestConfig

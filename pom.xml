@@ -1024,6 +1024,7 @@
                 <version>1.13</version>
             </dependency>
 
+
             <!-- =========================================================== -->
             <!-- JAI & ImageIO -->
             <!-- =========================================================== -->
@@ -1654,7 +1655,7 @@
         
         <jasypt-version>1.9.1</jasypt-version>
         
-        <guava-version>14.0.1</guava-version>
+        <guava-version>15.0</guava-version>
         <guice-version>3.0</guice-version>
         
         <ehcache-version>2.6.3</ehcache-version>

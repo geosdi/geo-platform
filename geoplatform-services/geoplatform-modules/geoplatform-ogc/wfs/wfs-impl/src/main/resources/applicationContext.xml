@@ -19,10 +19,7 @@
 
     <context:annotation-config />
     
-    <context:component-scan base-package="org.geosdi.geoplatform.configurator.wfs,
-                            org.geosdi.geoplatform.services.feature" />
-    
-    <import resource="classpath:applicationContext-jasypt.xml" />
+    <import resource="classpath:applicationContext-WFS-Support.xml" />
 
     <!--===================================================================== -->
     <!-- Services -->

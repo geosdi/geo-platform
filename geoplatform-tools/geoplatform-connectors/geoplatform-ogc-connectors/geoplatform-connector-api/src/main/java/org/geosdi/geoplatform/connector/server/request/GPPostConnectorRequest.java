@@ -39,18 +39,13 @@ import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
 
 /**
  *
@@ -68,8 +63,7 @@ public abstract class GPPostConnectorRequest<T>
         super(server);
     }
 
-    private HttpPost getPostMethod() throws IllegalParameterFault,
-            Exception, ServerInternalFault {
+    private HttpPost getPostMethod() throws Exception {
         if (postMethod == null) {
             this.preparePostMethod();
         }
@@ -77,145 +71,93 @@ public abstract class GPPostConnectorRequest<T>
         return postMethod;
     }
 
-    private void preparePostMethod()
-            throws IllegalParameterFault, Exception, ServerInternalFault {
+    private void preparePostMethod() throws Exception {
 
         this.postMethod = new HttpPost(super.serverURI);
         this.postMethod.setConfig(super.prepareRequestConfig());
 
-        try {
-            HttpEntity httpEntity = this.preparePostEntity();
-            this.postMethod.setEntity(httpEntity);
+        HttpEntity httpEntity = this.preparePostEntity();
+        this.postMethod.setEntity(httpEntity);
 
-        } catch (UnsupportedEncodingException ex) {
-            logger.error(
-                    "\n@@@@@@@@@@@@@@@@@@ UnsupportedEncodingException *** {} ***",
-                    ex.getMessage());
-            throw new ServerInternalFault("*** UnsupportedEncodingException ***");
-        }
     }
 
     @Override
-    public T getResponse() throws IllegalParameterFault,
-            ServerInternalFault, Exception {
+    public T getResponse() throws Exception {
         T response = null;
 
-        try {
-            HttpPost httpPost = this.getPostMethod();
-            CloseableHttpResponse httpResponse = super.securityConnector.secure(
-                    this,
-                    httpPost);
+        HttpPost httpPost = this.getPostMethod();
+        CloseableHttpResponse httpResponse = super.securityConnector.secure(
+                this,
+                httpPost);
 
-            HttpEntity responseEntity = httpResponse.getEntity();
-            if (responseEntity != null) {
-                InputStream is = responseEntity.getContent();
+        HttpEntity responseEntity = httpResponse.getEntity();
+        if (responseEntity != null) {
+            InputStream is = responseEntity.getContent();
 
-                Unmarshaller unmarshaller = getUnmarshaller();
-                Object content = unmarshaller.unmarshal(is);
-                if (!(content instanceof JAXBElement)) { // ExceptionReport
-                    logger.error("\n#############\n{}\n#############", content);
-                    throw new ServerInternalFault(
-                            "Connector Server Error: incorrect responce");
-                }
-
-                JAXBElement<T> elementType = (JAXBElement<T>) content;
-                response = elementType.getValue();
-
-                EntityUtils.consume(responseEntity);
-            } else {
-                throw new ServerInternalFault(
-                        "Connector Server Error: Connection problem");
+            Unmarshaller unmarshaller = getUnmarshaller();
+            Object content = unmarshaller.unmarshal(is);
+            if (!(content instanceof JAXBElement)) { // ExceptionReport
+                logger.error("\n#############\n{}\n#############", content);
+                throw new IllegalStateException("Connector Server Error: "
+                        + "incorrect responce");
             }
 
-        } catch (JAXBException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                    ex.getMessage());
-            throw new ServerInternalFault("*** JAXBException ***" + ex);
+            JAXBElement<T> elementType = (JAXBElement<T>) content;
+            response = elementType.getValue();
 
-        } catch (ClientProtocolException ex) {
-            logger.error(
-                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
-                    ex.getMessage());
-            throw new ServerInternalFault("*** ClientProtocolException ***");
-
+            EntityUtils.consume(responseEntity);
+        } else {
+            throw new IllegalStateException("Connector Server Error: "
+                    + "Connection problem");
         }
 
         return response;
     }
 
     @Override
-    public String getResponseAsString() throws ServerInternalFault, Exception,
-            IllegalParameterFault {
+    public String getResponseAsString() throws Exception {
         String content = null;
 
-        try {
-            HttpPost httpPost = this.getPostMethod();
-            CloseableHttpResponse httpResponse = super.securityConnector.secure(
-                    this,
-                    httpPost);
-            HttpEntity responseEntity = httpResponse.getEntity();
+        HttpPost httpPost = this.getPostMethod();
+        CloseableHttpResponse httpResponse = super.securityConnector.secure(
+                this,
+                httpPost);
+        HttpEntity responseEntity = httpResponse.getEntity();
 
-            if (responseEntity != null) {
-                InputStream is = responseEntity.getContent();
+        if (responseEntity != null) {
+            InputStream is = responseEntity.getContent();
 
-                content = CharStreams.toString(new InputStreamReader(is,
-                        Charsets.UTF_8));
+            content = CharStreams.toString(new InputStreamReader(is,
+                    Charsets.UTF_8));
 
-                EntityUtils.consume(responseEntity);
-            } else {
-                throw new ServerInternalFault(
-                        "Connector Server Error: Connection problem");
-            }
-
-        } catch (JAXBException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                    ex.getMessage());
-            throw new ServerInternalFault("*** JAXBException ***");
-
-        } catch (ClientProtocolException ex) {
-            logger.error(
-                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
-                    ex.getMessage());
-            throw new ServerInternalFault("*** ClientProtocolException ***");
-
+            EntityUtils.consume(responseEntity);
+        } else {
+            throw new IllegalStateException(
+                    "Connector Server Error: Connection problem");
         }
 
         return content;
     }
 
     @Override
-    public InputStream getResponseAsStream() throws ServerInternalFault,
-            Exception, IllegalParameterFault {
+    public InputStream getResponseAsStream() throws Exception {
 
-        try {
-            HttpPost httpPost = this.getPostMethod();
-            CloseableHttpResponse httpResponse = super.securityConnector.secure(
-                    this,
-                    httpPost);
+        HttpPost httpPost = this.getPostMethod();
+        CloseableHttpResponse httpResponse = super.securityConnector.secure(
+                this,
+                httpPost);
 
-            HttpEntity responseEntity = httpResponse.getEntity();
-            if (responseEntity != null) {
-                return responseEntity.getContent();
+        HttpEntity responseEntity = httpResponse.getEntity();
+        if (responseEntity != null) {
+            return responseEntity.getContent();
 
-            } else {
-                throw new ServerInternalFault(
-                        "Connector Server Error: Connection problem");
-            }
-
-        } catch (JAXBException ex) {
-            logger.error("\n@@@@@@@@@@@@@@@@@@ JAXBException *** {} ***",
-                    ex.getMessage());
-            throw new ServerInternalFault("*** JAXBException ***" + ex);
-
-        } catch (ClientProtocolException ex) {
-            logger.error(
-                    "\n@@@@@@@@@@@@@@@@@@ ClientProtocolException *** {} ***",
-                    ex.getMessage());
-            throw new ServerInternalFault("*** ClientProtocolException ***");
+        } else {
+            throw new IllegalStateException("Connector Server Error: "
+                    + "Connection problem");
         }
+
     }
 
-    protected abstract HttpEntity preparePostEntity()
-            throws IllegalParameterFault, Exception, UnsupportedEncodingException;
+    protected abstract HttpEntity preparePostEntity() throws Exception;
 
 }

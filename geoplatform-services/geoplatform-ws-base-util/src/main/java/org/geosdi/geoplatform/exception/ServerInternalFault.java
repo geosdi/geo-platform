@@ -42,7 +42,7 @@ import javax.xml.ws.WebFault;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebFault(name = "ServerInternalFault",
-          faultBean = "org.geosdi.geoplatform.exception.ServerInternalFault")
+        faultBean = "org.geosdi.geoplatform.exception.ServerInternalFault")
 public class ServerInternalFault extends Exception {
 
     private static final long serialVersionUID = -7788747032539948057L;
@@ -57,4 +57,10 @@ public class ServerInternalFault extends Exception {
     public ServerInternalFault(String message, Throwable cause) {
         super(message, cause);
     }
+
+    @Override
+    public String getMessage() {
+        return super.getMessage();
+    }
+
 }

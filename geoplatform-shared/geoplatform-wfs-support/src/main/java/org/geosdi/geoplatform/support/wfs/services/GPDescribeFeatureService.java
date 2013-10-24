@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.feature;
+package org.geosdi.geoplatform.support.wfs.services;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -41,9 +41,6 @@ import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 import org.springframework.stereotype.Service;
 
@@ -63,21 +60,21 @@ public class GPDescribeFeatureService extends AbstractFeatureService
         serverURL = serverURL.replace("wms", "wfs");
 
         if (!typeName.contains(":")) {
-            throw new IllegalParameterFault(
+            throw new IllegalArgumentException(
                     "typeName must contain the char \":\"");
         }
 
         if (!this.wfsConfigurator.matchDefaultDataSource(serverURL)) {
-            throw new ResourceNotFoundFault(
-                    "Edit Mode cannot be applied to the server with url "
-                    + wfsConfigurator.getDefaultWFSDataSource());
+            throw new IllegalStateException("Edit Mode cannot be applied to "
+                    + "the server with url : " + serverURL);
         }
 
         LayerSchemaDTO layerSchema = null;
         try {
-            GPWFSConnectorStore serverConnector = super.createWFSConnector(serverURL);
-            WFSDescribeFeatureTypeRequest<Schema> request =
-                    serverConnector.createDescribeFeatureTypeRequest();
+            GPWFSConnectorStore serverConnector = super.createWFSConnector(
+                    serverURL);
+            WFSDescribeFeatureTypeRequest<Schema> request
+                    = serverConnector.createDescribeFeatureTypeRequest();
 
             QName qName = new QName(typeName);
             request.setTypeName(Arrays.asList(qName));
@@ -87,20 +84,20 @@ public class GPDescribeFeatureService extends AbstractFeatureService
             layerSchema = featureReaderXSD.getFeature(response, name);
 
             if (layerSchema == null) {
-                logger.error("\n### The layer \"{}\" isn't a feature ###", typeName);
+                logger.error("\n### The layer \"{}\" isn't a feature ###",
+                        typeName);
             } else {
                 layerSchema.setScope(serverURL);
             }
 
-        } catch (ServerInternalFault ex) {
-            logger.error("\n### ServerInternalFault: {} ###", ex.getMessage());
         } catch (IOException ex) {
             logger.error("\n### IOException: {} ###", ex.getMessage());
-            throw new ResourceNotFoundFault(
-                    "Error to execute the WFS DescribeFeatureType for the layer " + typeName);
+            throw new IllegalStateException("Error to execute the WFS "
+                    + "DescribeFeatureType for the layer " + typeName);
         }
 
         return layerSchema;
 
     }
+
 }

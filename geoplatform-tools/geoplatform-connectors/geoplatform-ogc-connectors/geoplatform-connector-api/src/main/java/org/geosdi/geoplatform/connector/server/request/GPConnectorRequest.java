@@ -41,8 +41,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
 
 /**
  *
@@ -54,33 +52,30 @@ public interface GPConnectorRequest<T> {
 
     URI getURI();
 
-    T getResponse() throws IllegalParameterFault, ServerInternalFault,
-            Exception;
+    T getResponse() throws Exception;
 
     CredentialsProvider getCredentialsProvider();
 
     CloseableHttpClient getClientConnection();
 
     /**
-     * <p>Method to generate Response AS a {@link String} string.</p>
+     * <p>
+     * Method to generate Response AS a {@link String} string.</p>
      *
      * @return {@link String}
-     *
-     * @throws ServerInternalFault, Exception, IllegalParameterFault
+     * @throws java.lang.Exception
      */
-    String getResponseAsString() throws ServerInternalFault, Exception,
-            IllegalParameterFault;
+    String getResponseAsString() throws Exception;
 
     /**
-     * <p>Method to generate Response AS a {@link InputStream} Stream. Remember
-     * to close the Stream</p>
+     * <p>
+     * Method to generate Response AS a {@link InputStream} Stream. Remember to
+     * close the Stream</p>
      *
      * @return {@link InputStream} stream
-     *
-     * @throws ServerInternalFault, Exception, IllegalParameterFault
+     * @throws java.lang.Exception
      */
-    InputStream getResponseAsStream() throws ServerInternalFault, Exception,
-            IllegalParameterFault;
+    InputStream getResponseAsStream() throws Exception;
 
     /**
      *
@@ -99,8 +94,10 @@ public interface GPConnectorRequest<T> {
     Unmarshaller getUnmarshaller() throws Exception;
 
     /**
-     * <p>Shuts down this connection manager and releases allocated
-     * resources.</p>
+     * <p>
+     * Shuts down this connection manager and releases allocated resources.</p>
+     * 
+     * @throws java.lang.Exception
      */
     void shutdown() throws Exception;
 

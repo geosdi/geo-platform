@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.feature.reader;
+package org.geosdi.geoplatform.support.wfs.feature.reader;
 
 import com.vividsolutions.jts.io.WKTWriter;
 import java.io.IOException;

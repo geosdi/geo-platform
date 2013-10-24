@@ -33,24 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.configurator.wfs;
+package org.geosdi.geoplatform.support.wfs.feature.reader;
+
+import java.io.InputStream;
+import java.util.List;
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
+import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPWFSConfigurator {
+public interface FeatureSchemaReader {
 
-    /**
-     * <p>This method compares the data source passed with the default included
-     * in the Configurator Module</p>
-     *
-     * @param dataSource
-     *
-     * @return boolean
-     */
-    boolean matchDefaultDataSource(String dataSource);
+    List<LayerSchemaDTO> read(final String xml) throws Exception;
 
-    String getDefaultWFSDataSource();
+    List<LayerSchemaDTO> read(final InputStream in) throws Exception;
+
+    LayerSchemaDTO read(final String xml,
+            final String name) throws Exception;
+
+    LayerSchemaDTO read(final InputStream in,
+            final String name) throws Exception;
+
+    List<LayerSchemaDTO> getAllFeature(final Schema schema);
+
+    LayerSchemaDTO getFeature(final Schema schema,
+            final String name);
 }

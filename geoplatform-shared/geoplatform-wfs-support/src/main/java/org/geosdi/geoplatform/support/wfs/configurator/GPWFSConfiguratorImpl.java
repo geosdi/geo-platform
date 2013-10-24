@@ -33,32 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.feature.reader;
+package org.geosdi.geoplatform.support.wfs.configurator;
 
-import java.io.InputStream;
-import java.util.List;
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface FeatureSchemaReader {
+@Component(value = "gpWFSConfigurator")
+public class GPWFSConfiguratorImpl implements GPWFSConfigurator {
 
-    List<LayerSchemaDTO> read(final String xml) throws Exception;
+    protected @Value("configurator{default_wfs_datasource}")
+    String defaultWFSDataSource;
 
-    List<LayerSchemaDTO> read(final InputStream in) throws Exception;
+    @Override
+    public boolean matchDefaultDataSource(String dataSource) {
+        return getDefaultWFSDataSource().equalsIgnoreCase(dataSource);
+    }
 
-    LayerSchemaDTO read(final String xml,
-            final String name) throws Exception;
-
-    LayerSchemaDTO read(final InputStream in,
-            final String name) throws Exception;
-
-    List<LayerSchemaDTO> getAllFeature(final Schema schema);
-
-    LayerSchemaDTO getFeature(final Schema schema,
-            final String name);
+    /**
+     * @return the defaultWFSDataSource
+     */
+    @Override
+    public String getDefaultWFSDataSource() {
+        return defaultWFSDataSource;
+    }
 }

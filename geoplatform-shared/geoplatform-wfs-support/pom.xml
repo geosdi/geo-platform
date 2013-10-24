@@ -1,26 +1,30 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-ogc-wfs</artifactId>
+        <artifactId>geoplatform-shared</artifactId>
         <version>1.6-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>geoplatform-wfs-impl</artifactId>
+    <artifactId>geoplatform-wfs-support</artifactId>
     <version>1.6-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == WFS Module Implementation</name>
+    <name>Geo-Platform :: == WFS Module Support</name>
+    <url>http://maven.apache.org</url>
+    
+    <description>This module was created to have an utility module which can 
+        be used either in the CXF stack Services or in standalone mode
+    </description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-wfs-api</artifactId>
-        </dependency>
-        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-api-connector</artifactId>
@@ -30,12 +34,6 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-wfs-connector</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-wfs-support</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -97,16 +95,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
         </dependency>
-
-        <!-- CXF -->
-        <dependency>
-            <groupId>javax.xml.ws</groupId>
-            <artifactId>jaxws-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-ws-security</artifactId>
-        </dependency>
         
         <!-- JTS -->
         <dependency>
@@ -127,8 +115,8 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-    </dependencies>    
-	
+    </dependencies>
+    
     <build>
         <plugins>
             <plugin>
@@ -151,5 +139,5 @@
             </plugin>
         </plugins>
     </build>
-	
+    
 </project>

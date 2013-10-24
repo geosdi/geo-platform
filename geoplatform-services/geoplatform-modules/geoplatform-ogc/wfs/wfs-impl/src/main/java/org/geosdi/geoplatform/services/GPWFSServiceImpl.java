@@ -37,14 +37,17 @@ package org.geosdi.geoplatform.services;
 
 import java.util.List;
 import javax.jws.WebService;
+import org.apache.cxf.binding.soap.SoapFault;
 import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.services.feature.DescribeFeatureService;
-import org.geosdi.geoplatform.services.feature.GetFeaureService;
-import org.geosdi.geoplatform.services.feature.TransactionService;
+import org.geosdi.geoplatform.support.wfs.services.DescribeFeatureService;
+import org.geosdi.geoplatform.support.wfs.services.GetFeaureService;
+import org.geosdi.geoplatform.support.wfs.services.TransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -59,6 +62,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPWFSService")
 public class GPWFSServiceImpl implements GPWFSService {
 
+    private static final Logger logger = LoggerFactory.getLogger(
+            GPWFSServiceImpl.class);
+    //
     @Autowired
     private DescribeFeatureService gpDescribeFeatureService;
     //
@@ -71,14 +77,22 @@ public class GPWFSServiceImpl implements GPWFSService {
     @Override
     public LayerSchemaDTO describeFeatureType(String serverURL, String typeName)
             throws Exception {
+        try {
 
-        return gpDescribeFeatureService.describeFeatureType(serverURL, typeName);
+            return gpDescribeFeatureService.describeFeatureType(serverURL,
+                    typeName);
+        } catch (Exception ex) {
+            logger.error("##################DescribeFeatureType Request Error "
+                    + "for Layer : {} ", typeName + " - Cause : {}",
+                    ex.getMessage());
+            throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
+        }
+
     }
 
     @Override
     public FeatureDTO getFeatureByFIDDirect(String serverURL, String typeName,
-            String fid)
-            throws Exception {
+            String fid) throws Exception {
 
         LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL,
                 typeName);
@@ -89,31 +103,45 @@ public class GPWFSServiceImpl implements GPWFSService {
     public FeatureDTO getFeatureByFID(LayerSchemaDTO layerSchema, String fid)
             throws Exception {
 
-        return gpGetFeatureService.getFeature(layerSchema, fid);
+        try {
+            return gpGetFeatureService.getFeature(layerSchema, fid);
+        } catch (Exception ex) {
+            logger.error("##################GetFeatureByID Request Error "
+                    + "for Feature ID : {}", fid + " - Cause : {}",
+                    ex.getMessage());
+
+            throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
+        }
     }
 
     @Override
     public FeatureCollectionDTO getFeatureByBBoxDirect(String serverURL,
-            String typeName, BBox bBox)
-            throws Exception {
+            String typeName, BBox bBox) throws Exception {
 
         LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL,
                 typeName);
+
         return this.getFeatureByBBox(layerSchema, bBox);
     }
 
     @Override
     public FeatureCollectionDTO getFeatureByBBox(LayerSchemaDTO layerSchema,
-            BBox bBox)
-            throws Exception {
+            BBox bBox) throws Exception {
 
-        return gpGetFeatureService.getFeature(layerSchema, bBox);
+        try {
+            return gpGetFeatureService.getFeature(layerSchema, bBox);
+        } catch (Exception ex) {
+            logger.error("##################GetFeatureByBBox Request error - "
+                    + "Cause : {}", ex.getMessage());
+
+            throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
+        }
     }
 
     @Override
     public FeatureCollectionDTO getAllFeatureDirect(String serverURL,
-            String typeName, int maxFeatures)
-            throws Exception {
+            String typeName, int maxFeatures) throws Exception {
+
         LayerSchemaDTO layerSchema = this.describeFeatureType(serverURL,
                 typeName);
         return this.getAllFeature(layerSchema, maxFeatures);
@@ -121,9 +149,16 @@ public class GPWFSServiceImpl implements GPWFSService {
 
     @Override
     public FeatureCollectionDTO getAllFeature(LayerSchemaDTO layerSchema,
-            int maxFeatures)
-            throws Exception {
-        return gpGetFeatureService.getFeature(layerSchema, maxFeatures);
+            int maxFeatures) throws Exception {
+
+        try {
+            return gpGetFeatureService.getFeature(layerSchema, maxFeatures);
+        } catch (Exception ex) {
+            logger.error("##################GetAllFeatures Request error - "
+                    + "Cause : {}", ex.getMessage());
+
+            throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
+        }
     }
 
     @Override
@@ -131,16 +166,34 @@ public class GPWFSServiceImpl implements GPWFSService {
             String fid, List<? extends AttributeDTO> attributes)
             throws Exception {
 
-        return gpTransactionService.transactionUpdate(serverURL, typeName, fid,
-                attributes);
+        try {
+            return gpTransactionService.transactionUpdate(serverURL, typeName,
+                    fid,
+                    attributes);
+        } catch (Exception ex) {
+            logger.error("###################TranctionUpdate Request error for "
+                    + "Feature : {}", typeName + " - Cause : {}",
+                    ex.getMessage());
+
+            throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
+        }
     }
 
     @Override
     public boolean transactionInsert(String serverURL, String typeName,
             String targetNamespace, List<AttributeDTO> attributes)
             throws Exception {
-        return gpTransactionService.transactionInsert(serverURL, typeName,
-                targetNamespace, attributes);
+
+        try {
+            return gpTransactionService.transactionInsert(serverURL, typeName,
+                    targetNamespace, attributes);
+        } catch (Exception ex) {
+            logger.error("###################TransactionInsert error for "
+                    + "Feature : {}", typeName + " - Cause : {}",
+                    ex.getMessage());
+
+            throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
+        }
     }
 
 }

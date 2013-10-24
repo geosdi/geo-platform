@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.feature;
+package org.geosdi.geoplatform.support.wfs.services;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,11 +47,10 @@ import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
-import org.geosdi.geoplatform.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +71,8 @@ public class GPGetFeatureService extends AbstractFeatureService
         WFSGetFeatureRequest request = this.createRequest(layerSchema);
         request.setFeatureIDs(Arrays.asList(fid));
 
-        FeatureCollectionDTO featureCollection = this.getFeatureCollection(request, layerSchema);
+        FeatureCollectionDTO featureCollection = this.getFeatureCollection(
+                request, layerSchema);
         List<FeatureDTO> features = featureCollection.getFeatures();
         assert (features != null);
         assert (features.size() == 1);
@@ -91,7 +91,8 @@ public class GPGetFeatureService extends AbstractFeatureService
     }
 
     @Override
-    public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures)
+    public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema,
+            int maxFeatures)
             throws Exception {
         assert (maxFeatures > 0);
 
@@ -109,7 +110,7 @@ public class GPGetFeatureService extends AbstractFeatureService
         assert (typeName != null);
         logger.debug("\n*** WFS GetFeature for layer {} ***", typeName);
         if (!typeName.contains(":")) {
-            throw new IllegalParameterFault(
+            throw new IllegalArgumentException(
                     "typeName must contain the char \":\"");
         }
 
@@ -117,7 +118,7 @@ public class GPGetFeatureService extends AbstractFeatureService
         assert (serverURL != null);
         serverURL = serverURL.replace("wms", "wfs");
         if (!this.wfsConfigurator.matchDefaultDataSource(serverURL)) {
-            throw new ResourceNotFoundFault(
+            throw new IllegalStateException(
                     "Edit Mode cannot be applied to the server with url "
                     + wfsConfigurator.getDefaultWFSDataSource());
         }
@@ -134,30 +135,31 @@ public class GPGetFeatureService extends AbstractFeatureService
         return request;
     }
 
-    private FeatureCollectionDTO getFeatureCollection(WFSGetFeatureRequest request, LayerSchemaDTO layerSchema)
+    private FeatureCollectionDTO getFeatureCollection(
+            WFSGetFeatureRequest request, LayerSchemaDTO layerSchema)
             throws Exception {
+
         FeatureCollectionDTO featureCollection = null;
         try {
             InputStream is = request.getResponseAsStream();
             if (is == null) { // TODO check if the is can be null
-                logger.error("\n### The layer \"{}\" isn't a feature ###", layerSchema.getTypeName());
+                logger.error("\n### The layer \"{}\" isn't a feature ###",
+                        layerSchema.getTypeName());
             }
 
-            final WFSGetFeatureStaxReader featureReaderStAX =
-                    new WFSGetFeatureStaxReader(layerSchema);
+            final WFSGetFeatureStaxReader featureReaderStAX
+                    = new WFSGetFeatureStaxReader(layerSchema);
 
             featureCollection = featureReaderStAX.read(is);
 
-        } catch (ServerInternalFault ex) {
-            logger.error("\n### ServerInternalFault: {} ###", ex.getMessage());
-        } catch (XMLStreamException ex) {
-            logger.error("\n### XMLStreamException: {} ###", ex.getMessage());
         } catch (IOException ex) {
             logger.error("\n### IOException: {} ###", ex.getMessage());
-            throw new ResourceNotFoundFault(
-                    "Error to execute the WFS GetFeature for the layer " + layerSchema.getTypeName());
+            throw new IllegalStateException(
+                    "Error to execute the WFS GetFeature for the layer "
+                    + layerSchema.getTypeName());
         }
 
         return featureCollection;
     }
+
 }

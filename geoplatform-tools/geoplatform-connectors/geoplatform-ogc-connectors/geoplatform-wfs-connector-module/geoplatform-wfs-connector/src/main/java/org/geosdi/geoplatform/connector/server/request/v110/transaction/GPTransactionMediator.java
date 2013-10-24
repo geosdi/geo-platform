@@ -46,8 +46,8 @@ import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
  */
 public class GPTransactionMediator {
 
-    private static GPTransactionMediator INSTANCE = new GPTransactionMediator();
-    private Map<TransactionOperation, ITransactionOperationStrategy> map;
+    private static final GPTransactionMediator INSTANCE = new GPTransactionMediator();
+    private final Map<TransactionOperation, ITransactionOperationStrategy> map;
 
     private GPTransactionMediator() {
         map = new EnumMap<TransactionOperation, ITransactionOperationStrategy>(TransactionOperation.class);

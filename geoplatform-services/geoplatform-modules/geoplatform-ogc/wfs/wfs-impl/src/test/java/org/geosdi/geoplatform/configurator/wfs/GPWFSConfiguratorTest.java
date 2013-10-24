@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.configurator.wfs;
 
+import org.geosdi.geoplatform.support.wfs.configurator.GPWFSConfigurator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -63,8 +63,7 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
     }
 
     @Override
-    protected HttpEntity preparePostEntity() throws IllegalParameterFault,
-            Exception, UnsupportedEncodingException {
+    protected HttpEntity preparePostEntity() throws Exception {
 
         return operation == TransactionOperation.INSERT
                 ? preparePostEntityWithStax() : super.preparePostEntity();
@@ -110,12 +109,10 @@ public class WFSTransactionRequestV110 extends AbstractTransactionRequest<Transa
     /**
      *
      * @return HttpEntity
-     * @throws IllegalParameterFault
+     *
      * @throws Exception
-     * @throws UnsupportedEncodingException
      */
-    protected final HttpEntity preparePostEntityWithStax() throws IllegalParameterFault,
-            Exception, UnsupportedEncodingException {
+    protected final HttpEntity preparePostEntityWithStax() throws Exception {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
         FeatureStreamWriter streamWriter = new FeatureStreamWriter();

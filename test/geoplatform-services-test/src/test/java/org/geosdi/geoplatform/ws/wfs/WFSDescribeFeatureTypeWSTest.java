@@ -49,18 +49,23 @@ import org.junit.Test;
  */
 public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
 
-    private final static QName TOPP_STATES = new QName("http://www.openplans.org/topp", "topp:states");
-    private final static QName SF_COMUNI = new QName("http://www.openplans.org/spearfish", "sf:comuni2001");
+    private final static QName TOPP_STATES = new QName(
+            "http://www.openplans.org/topp", "topp:states");
+    private final static QName SF_COMUNI = new QName(
+            "http://www.openplans.org/spearfish", "sf:comuni2001");
 
     @Test
     public void statesFeatureV110() throws Exception {
-        LayerSchemaDTO layerSchema =
-                wfsService.describeFeatureType(addressDatastore, TOPP_STATES.getLocalPart());
+        LayerSchemaDTO layerSchema
+                = wfsService.describeFeatureType(addressDatastore,
+                        TOPP_STATES.getLocalPart());
         logger.info("\n\n\n@@@ {}", layerSchema);
 
         Assert.assertNotNull(layerSchema);
-        Assert.assertEquals(TOPP_STATES.getLocalPart(), layerSchema.getTypeName());
-        Assert.assertEquals(TOPP_STATES.getNamespaceURI(), layerSchema.getTargetNamespace());
+        Assert.assertEquals(TOPP_STATES.getLocalPart(),
+                layerSchema.getTypeName());
+        Assert.assertEquals(TOPP_STATES.getNamespaceURI(),
+                layerSchema.getTargetNamespace());
         Assert.assertEquals(addressDatastore, layerSchema.getScope());
 
         AttributeDTO geometry = layerSchema.getGeometry();
@@ -83,13 +88,15 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
 
     @Test
     public void comuniFeatureV110() throws Exception {
-        LayerSchemaDTO layerSchema =
-                wfsService.describeFeatureType(addressDatastore, SF_COMUNI.getLocalPart());
+        LayerSchemaDTO layerSchema
+                = wfsService.describeFeatureType(addressDatastore,
+                        SF_COMUNI.getLocalPart());
         logger.info("\n\n\n@@@ {}", layerSchema);
 
         Assert.assertNotNull(layerSchema);
         Assert.assertEquals(SF_COMUNI.getLocalPart(), layerSchema.getTypeName());
-        Assert.assertEquals(SF_COMUNI.getNamespaceURI(), layerSchema.getTargetNamespace());
+        Assert.assertEquals(SF_COMUNI.getNamespaceURI(),
+                layerSchema.getTargetNamespace());
         Assert.assertEquals(addressDatastore, layerSchema.getScope());
 
         AttributeDTO geometry = layerSchema.getGeometry();
@@ -108,18 +115,30 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
     }
 
     @Test
-    public void incorrectFeatureV110() throws Exception {
-        LayerSchemaDTO layerSchema =
-                wfsService.describeFeatureType(addressDatastore, "sf:sfdem");
+    public void incorrectFeatureV110() {
+        LayerSchemaDTO layerSchema = null;
+        try {
+            layerSchema = wfsService.describeFeatureType(addressDatastore,
+                    "sf:sfdem");
+        } catch (Exception ex) {
+            logger.error("###############Exception ############### {}",
+                    ex.getMessage());
+        }
 
         Assert.assertNull(layerSchema);
     }
 
     @Test
-    public void absentFeatureV110() throws Exception {
-        LayerSchemaDTO layerSchema =
-                wfsService.describeFeatureType(addressDatastore, "none:foo");
-
+    public void absentFeatureV110() {
+        LayerSchemaDTO layerSchema = null;
+        try {
+            layerSchema
+                    = wfsService.describeFeatureType(addressDatastore,
+                            "none:foo");
+        } catch (Exception ex) {
+            logger.error("###############Exception ############### {}",
+                    ex.getMessage());
+        }
         Assert.assertNull(layerSchema);
     }
 
@@ -128,4 +147,5 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         LayerSchemaDTO layerSchema = // typeName must contain the char ":"
                 wfsService.describeFeatureType(addressDatastore, "error");
     }
+
 }

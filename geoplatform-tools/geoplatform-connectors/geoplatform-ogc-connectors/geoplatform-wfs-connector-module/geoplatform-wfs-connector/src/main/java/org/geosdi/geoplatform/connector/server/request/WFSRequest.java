@@ -66,8 +66,7 @@ public abstract class WFSRequest<T> extends GPPostConnectorRequest<T> {
     }
 
     @Override
-    protected HttpEntity preparePostEntity()
-            throws IllegalParameterFault, Exception, UnsupportedEncodingException {
+    protected HttpEntity preparePostEntity() throws Exception {
 
         Marshaller marshaller = this.getMarshaller();
 

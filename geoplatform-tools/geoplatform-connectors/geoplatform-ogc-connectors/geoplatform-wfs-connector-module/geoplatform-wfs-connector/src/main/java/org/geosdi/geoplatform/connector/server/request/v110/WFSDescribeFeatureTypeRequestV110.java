@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.server.request.v110;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractDescribeFeatureTypeRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.wfs.v110.DescribeFeatureTypeType;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
 
@@ -56,7 +55,7 @@ public class WFSDescribeFeatureTypeRequestV110
     }
 
     @Override
-    protected Object createRequest() throws IllegalParameterFault {
+    protected Object createRequest() throws IllegalArgumentException {
         DescribeFeatureTypeType request = new DescribeFeatureTypeType();
 
         if ((typeName == null) || (typeName.isEmpty())) {

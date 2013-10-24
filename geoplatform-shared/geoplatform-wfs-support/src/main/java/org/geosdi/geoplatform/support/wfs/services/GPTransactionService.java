@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.feature;
+package org.geosdi.geoplatform.support.wfs.services;
 
 import java.io.IOException;
 import java.util.List;
@@ -70,13 +70,13 @@ public class GPTransactionService extends AbstractFeatureService
 
         logger.debug("\n*** WFS Transaction UPDATE for layer '{}' ***", typeName);
         if (!typeName.contains(":")) {
-            throw new IllegalParameterFault(
+            throw new IllegalArgumentException(
                     "typeName must contain the char \":\"");
         }
 
         serverURL = serverURL.replace("wms", "wfs");
         if (!wfsConfigurator.matchDefaultDataSource(serverURL)) {
-            throw new ResourceNotFoundFault(
+            throw new IllegalStateException(
                     "Edit Mode cannot be applied to the server with url "
                     + wfsConfigurator.getDefaultWFSDataSource());
         }
@@ -84,8 +84,8 @@ public class GPTransactionService extends AbstractFeatureService
         try {
             GPWFSConnectorStore serverConnector = super.createWFSConnector(
                     serverURL);
-            WFSTransactionRequest<TransactionResponseType> request =
-                    serverConnector.createTransactionRequest();
+            WFSTransactionRequest<TransactionResponseType> request
+                    = serverConnector.createTransactionRequest();
 
             request.setOperation(TransactionOperation.UPDATE);
             request.setTypeName(new QName(typeName));
@@ -135,8 +135,8 @@ public class GPTransactionService extends AbstractFeatureService
         try {
             GPWFSConnectorStore serverConnector = super.createWFSConnector(
                     serverURL);
-            WFSTransactionRequest<TransactionResponseType> request =
-                    serverConnector.createTransactionRequest();
+            WFSTransactionRequest<TransactionResponseType> request
+                    = serverConnector.createTransactionRequest();
 
             StringTokenizer st = new StringTokenizer(typeName, ":");
             String wk = st.nextToken();

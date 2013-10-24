@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.feature;
+package org.geosdi.geoplatform.support.wfs.services;
 
 import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 

@@ -33,52 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.feature;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import javax.annotation.PostConstruct;
-import org.geosdi.geoplatform.configurator.wfs.GPWFSConfigurator;
-import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
-import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.feature.reader.FeatureSchemaReader;
-import org.geosdi.geoplatform.feature.reader.GPFeatureSchemaReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+package org.geosdi.geoplatform.support.wfs.configurator;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractFeatureService {
+public interface GPWFSConfigurator {
 
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    protected GPWFSConfigurator wfsConfigurator;
-    //
-    protected FeatureSchemaReader featureReaderXSD;
+    /**
+     * <p>This method compares the data source passed with the default included
+     * in the Configurator Module</p>
+     *
+     * @param dataSource
+     *
+     * @return boolean
+     */
+    boolean matchDefaultDataSource(String dataSource);
 
-    protected GPWFSConnectorStore createWFSConnector(String serverUrl)
-            throws Exception {
-        GPWFSConnectorStore serverConnector;
-        try {
-            URL url = new URL(serverUrl);
-            WFSConnectorBuilder builder = WFSConnectorBuilder.newConnector()
-                    .withServerUrl(url);
-            serverConnector = builder.build();
-        } catch (MalformedURLException ex) {
-            logger.error("### MalformedURLException: {}", ex.getMessage());
-            throw new IllegalParameterFault("Malformed URL");
-        }
-        return serverConnector;
-    }
-
-    @PostConstruct
-    public void init() {
-        this.featureReaderXSD = new GPFeatureSchemaReader();
-    }
+    String getDefaultWFSDataSource();
 }

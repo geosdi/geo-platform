@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.connector.server.request.v110;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSRequest;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.xml.wfs.v110.GetCapabilitiesType;
 import org.geosdi.geoplatform.xml.wfs.v110.WFSCapabilitiesType;
 
@@ -54,7 +53,8 @@ public class WFSGetCapabilitiesRequestV110 extends WFSRequest<WFSCapabilitiesTyp
     }
 
     @Override
-    protected Object createRequest() throws IllegalParameterFault {
+    protected Object createRequest() {
         return new GetCapabilitiesType();
     }
+
 }

@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.feature.reader;
+package org.geosdi.geoplatform.support.wfs.feature.reader;
 
 import java.io.InputStream;
 import java.io.StringReader;
@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.connector.jaxb.WFSConnectorJAXBContext;
 import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.feature.geometry.GeometryBinding;
+import org.geosdi.geoplatform.support.wfs.feature.geometry.GeometryBinding;
 import org.geosdi.geoplatform.xml.xsd.v2001.ComplexContent;
 import org.geosdi.geoplatform.xml.xsd.v2001.Element;
 import org.geosdi.geoplatform.xml.xsd.v2001.ExplicitGroup;

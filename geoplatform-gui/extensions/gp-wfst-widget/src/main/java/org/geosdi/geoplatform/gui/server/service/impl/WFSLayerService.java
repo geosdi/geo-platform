@@ -39,8 +39,6 @@ import java.util.List;
 import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.IWFSLayerService;
 import org.geosdi.geoplatform.services.GPWFSService;
@@ -68,15 +66,10 @@ public class WFSLayerService implements IWFSLayerService {
 
         try {
             return geoPlatformWFSClient.describeFeatureType(serverUrl, typeName);
-
-        } catch (ResourceNotFoundFault ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
-            throw new GeoPlatformException(ex.getMessage());
-        } catch (IllegalParameterFault ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
-            throw new GeoPlatformException(ex.getMessage());
         } catch (Exception ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
+            logger.error("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
+                    + "WFSLayerService#describeFeatureType Error {} @@@@@@@@@@@@@",
+                    ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
     }
@@ -88,14 +81,9 @@ public class WFSLayerService implements IWFSLayerService {
         try {
             return geoPlatformWFSClient.getAllFeatureDirect(serverUrl, typeName,
                     maxFeatures);
-        } catch (ResourceNotFoundFault ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
-            throw new GeoPlatformException(ex.getMessage());
-        } catch (IllegalParameterFault ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
-            throw new GeoPlatformException(ex.getMessage());
         } catch (Exception ex) {
-            logger.error("@@@@\n WFSLayerService Error {} @@@@@@@@@@@@@", ex);
+            logger.error("\n\n@@@@@@@@@@@@@@@@@@@ WFSLayerService#getAllFeature "
+                    + "Error {} @@@@@@@@@@@@@", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
     }
@@ -109,8 +97,8 @@ public class WFSLayerService implements IWFSLayerService {
             return this.geoPlatformWFSClient.transactionUpdate(serverURL,
                     typeName, fid, attributes);
         } catch (Exception ex) {
-            logger.error("@@@@\n WFSLayerService Transaction Update Error {} "
-                    + "@@@@@@@@@@@@@", ex);
+            logger.error("\n\n@@@@ WFSLayerService Transaction Update Error {} "
+                    + "@@@@@@@@@@@@@", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
     }
@@ -122,11 +110,10 @@ public class WFSLayerService implements IWFSLayerService {
 
         try {
             return this.geoPlatformWFSClient.transactionInsert(serverURL,
-                    typeName,
-                    targetNamespace, attributes);
+                    typeName, targetNamespace, attributes);
         } catch (Exception ex) {
-            logger.error("@@@@\n WFSLayerService Transaction Insert Error {} "
-                    + "@@@@@@@@@@@@@", ex);
+            logger.error("\n\n@@@@ WFSLayerService Transaction Insert Error {} "
+                    + "@@@@@@@@@@@@@", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
     }

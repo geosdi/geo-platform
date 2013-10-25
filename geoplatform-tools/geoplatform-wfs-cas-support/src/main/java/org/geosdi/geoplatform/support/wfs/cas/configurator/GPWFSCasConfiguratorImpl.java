@@ -47,4 +47,20 @@ import org.springframework.stereotype.Component;
 @Component(value = "gpCasWFSConfigurator")
 @Profile(value = "cas")
 public class GPWFSCasConfiguratorImpl extends GPWFSConfiguratorImpl {
+
+    @Override
+    public boolean matchDefaultDataSource(String dataSource) {
+        return (dataSource.contains("?")) ? canMatch(dataSource)
+                : super.matchDefaultDataSource(dataSource);
+    }
+
+    final boolean canMatch(String dataSource) {
+        int index = dataSource.indexOf("?");
+        if (index != -1) {
+            dataSource = dataSource.substring(0, index);
+        }
+
+        return defaultWFSDataSource.equalsIgnoreCase(dataSource);
+    }
+
 }

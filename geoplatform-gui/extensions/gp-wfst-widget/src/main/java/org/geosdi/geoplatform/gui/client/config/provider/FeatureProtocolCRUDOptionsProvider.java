@@ -50,8 +50,9 @@ import org.gwtopenmaps.openlayers.client.protocol.Response;
 import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 
 /**
- * <p>This Class is not used. The Transaction will do with WFSConnector Module
- * and not directly with OpenLayers.</p>
+ * <p>
+ * This Class is not used. The Transaction will do with WFSConnector Module and
+ * not directly with OpenLayers.</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -59,12 +60,13 @@ import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
 public class FeatureProtocolCRUDOptionsProvider implements
         Provider<WFSProtocolCRUDOptions> {
 
-    private GPEventBus bus;
-    private FeatureTransactionEvent transactionEvent = new FeatureTransactionEvent();
-    private ILayerSchemaBinder layerSchemaBinder;
+    private final GPEventBus bus;
+    private final FeatureTransactionEvent transactionEvent = new FeatureTransactionEvent();
+    private final ILayerSchemaBinder layerSchemaBinder;
 
     @Inject
-    public FeatureProtocolCRUDOptionsProvider(GPEventBus theBus, ILayerSchemaBinder layerSchemaBinder) {
+    public FeatureProtocolCRUDOptionsProvider(GPEventBus theBus,
+            ILayerSchemaBinder layerSchemaBinder) {
         this.bus = theBus;
         this.layerSchemaBinder = layerSchemaBinder;
     }
@@ -78,7 +80,7 @@ public class FeatureProtocolCRUDOptionsProvider implements
                 if (response.success()) {
                     bus.fireEvent(transactionEvent);
                     GPHandlerManager.fireEvent(
-                    layerSchemaBinder.getReloadLayerMapEvent());
+                            layerSchemaBinder.getReloadLayerMapEvent());
                     bus.fireEvent(IFeatureMapInitializerHandler.REDRAW_EVENT);
                 } else {
                     bus.fireEvent(new FeatureStatusBarEvent(

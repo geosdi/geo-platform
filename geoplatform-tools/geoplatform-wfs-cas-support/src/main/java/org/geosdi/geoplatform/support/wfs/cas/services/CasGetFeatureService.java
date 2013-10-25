@@ -33,29 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.wfst.basic;
+package org.geosdi.geoplatform.support.wfs.cas.services;
 
-import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
+import org.geosdi.geoplatform.support.wfs.services.GPGetFeatureService;
+import org.springframework.context.annotation.Profile;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DescribeFeatureTypeRequest extends WFSTRequest {
-
-    private static final long serialVersionUID = -1550460474375215870L;
-
-    public DescribeFeatureTypeRequest() {
-    }
-
-    @Override
-    public String getCommandName() {
-        return "command.wfst.basic.DescribeFeatureTypeCommand";
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
+@Profile(value = "cas")
+public class CasGetFeatureService extends GPGetFeatureService {
 }

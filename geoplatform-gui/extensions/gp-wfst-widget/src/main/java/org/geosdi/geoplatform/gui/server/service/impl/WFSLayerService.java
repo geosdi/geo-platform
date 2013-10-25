@@ -82,7 +82,8 @@ public class WFSLayerService implements IWFSLayerService {
             return geoPlatformWFSClient.getAllFeatureDirect(serverUrl, typeName,
                     maxFeatures);
         } catch (Exception ex) {
-            logger.error("\n\n@@@@@@@@@@@@@@@@@@@ WFSLayerService#getAllFeature "
+            logger.error(
+                    "\n\n@@@@@@@@@@@@@@@@@@@ WFSLayerService#getAllFeature "
                     + "Error {} @@@@@@@@@@@@@", ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }

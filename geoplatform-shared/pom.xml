@@ -18,6 +18,7 @@
     <modules>
         <module>geoplatform-sharing</module>
         <module>geoplatform-wfs-shared</module>
+        <module>geoplatform-wfs-support</module>
     </modules>
     
 </project>

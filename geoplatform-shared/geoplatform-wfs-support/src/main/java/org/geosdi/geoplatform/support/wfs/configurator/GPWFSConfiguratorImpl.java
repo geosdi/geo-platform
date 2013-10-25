@@ -51,7 +51,7 @@ public class GPWFSConfiguratorImpl implements GPWFSConfigurator {
 
     @Override
     public boolean matchDefaultDataSource(String dataSource) {
-        return getDefaultWFSDataSource().equalsIgnoreCase(dataSource);
+        return defaultWFSDataSource.equalsIgnoreCase(dataSource);
     }
 
     /**

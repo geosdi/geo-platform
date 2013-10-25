@@ -33,24 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.wfst.basic;
+package org.geosdi.geoplatform.gui.client.command.wfst.cas.basic;
 
-import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DescribeFeatureTypeRequest extends WFSTRequest {
+public class CasDescribeFeatureTypeRequest extends DescribeFeatureTypeRequest {
 
-    private static final long serialVersionUID = -1550460474375215870L;
-
-    public DescribeFeatureTypeRequest() {
-    }
+    private static final long serialVersionUID = 1149500056053517339L;
 
     @Override
     public String getCommandName() {
-        return "command.wfst.basic.DescribeFeatureTypeCommand";
+        return "command.wfst.cas.basic.CasDescribeFeatureTypeCommand";
     }
 
     @Override

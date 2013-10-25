@@ -38,6 +38,12 @@
             <artifactId>geoplatform-sharing</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-wfs-cas-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>

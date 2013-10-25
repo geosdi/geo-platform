@@ -33,29 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.command.wfst.basic;
+package org.geosdi.geoplatform.gui.server.command.wfst.cas;
 
-import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import org.jasig.cas.client.validation.Assertion;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class DescribeFeatureTypeRequest extends WFSTRequest {
+public class WFSCasUtility {
 
-    private static final long serialVersionUID = -1550460474375215870L;
+    private static final Logger logger = LoggerFactory.getLogger(
+            WFSCasUtility.class);
 
-    public DescribeFeatureTypeRequest() {
+    private WFSCasUtility() {
     }
 
-    @Override
-    public String getCommandName() {
-        return "command.wfst.basic.DescribeFeatureTypeCommand";
-    }
+    public static String appendProxyTicketToURL(String url,
+            Assertion casAssertion) throws Exception {
+        if (casAssertion == null) {
+            throw new NullPointerException("Cas Assertion must not be null.");
+        }
 
-    @Override
-    public String toString() {
-        return super.toString();
+        String proxyTicket = casAssertion.getPrincipal().getProxyTicketFor(url);
+        if (proxyTicket == null || proxyTicket.isEmpty()) {
+            throw new IllegalArgumentException("********************* "
+                    + "Impossible to obtain proxy ticket for URL: " + url);
+        }
+        try {
+            char parameterSeparator = '?';
+            if (url.contains("?")) {
+                parameterSeparator = '&';
+            }
+            url += parameterSeparator + "ticket=" + URLEncoder.
+                    encode(proxyTicket, "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            logger.error("Error on encoding proxy ticket {}", ex);
+            throw ex;
+        }
+        return url;
+
     }
 
 }

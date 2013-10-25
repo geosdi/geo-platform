@@ -26,6 +26,7 @@
         <module>geoplatform-cas-jms-mock</module>
         <module>geoplatform-cas-jms-producer</module>
         <module>geoplatform-cas-jms-consumer</module>
+        <module>geoplatform-wfs-cas-support</module>
     </modules>
 
 </project>

@@ -3,10 +3,16 @@
 <module>
     <inherits name="com.google.gwt.inject.Inject"/>
     <inherits name="org.geosdi.geoplatform.connector.wfs.WFSSharedUI"/>
+    <inherits name="org.geosdi.geoplatform.gui.GPCASProperties" />
     
     <source path="client" />
     <!-- =============================== -->
     
     <entry-point class="org.geosdi.geoplatform.gui.client.WFSWidgetUI" />
+    
+    <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasDescribeFeatureTypeRequest">
+        <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest"/>
+        <when-property-is name="security.strategy" value="cas"/>
+    </replace-with>
 
 </module>

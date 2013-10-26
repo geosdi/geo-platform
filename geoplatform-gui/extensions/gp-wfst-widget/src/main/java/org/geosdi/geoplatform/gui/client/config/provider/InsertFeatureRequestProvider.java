@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider;
 
+import com.google.gwt.core.client.GWT;
 import javax.inject.Provider;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureRequest;
 
@@ -45,10 +46,10 @@ import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureReque
  */
 public class InsertFeatureRequestProvider implements
         Provider<InsertFeatureRequest> {
-
+    
     @Override
     public InsertFeatureRequest get() {
-        return new InsertFeatureRequest();
+        return GWT.<InsertFeatureRequest>create(InsertFeatureRequest.class);
     }
-
+    
 }

@@ -94,7 +94,7 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
 
     public static final String ID = WFSWidgetNames.FEATURE_SELECTION.name();
     //
-    private GPEventBus bus;
+    private final GPEventBus bus;
     //
 //    private LayerSchemaDTO schemaDTO;
     @Inject
@@ -109,9 +109,11 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
     private Button resetConditionsButton;
     private Button selectAllButton;
     private Button queryButton;
-    private GetAllFeatureRequest getAllFeatureRequest = new GetAllFeatureRequest();
-    private FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
-    private QueryFeatureRequest queryFeatureRequest;
+    private final GetAllFeatureRequest getAllFeatureRequest = GWT.<GetAllFeatureRequest>create(
+            GetAllFeatureRequest.class);
+    private final FeatureMapWidthEvent increaseWidthEvent = new IncreaseWidthEvent();
+    private final QueryFeatureRequest queryFeatureRequest = GWT.<QueryFeatureRequest>create(
+            QueryFeatureRequest.class);
 
     @Inject
     public FeatureSelectionWidget(GPEventBus theBus) {
@@ -195,21 +197,21 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         matchResultSet.addListener(Events.Collapse,
                 new Listener<FieldSetEvent>() {
 
-            @Override
-            public void handleEvent(FieldSetEvent be) {
-                selectionEnabled(false);
-            }
+                    @Override
+                    public void handleEvent(FieldSetEvent be) {
+                        selectionEnabled(false);
+                    }
 
-        });
+                });
         matchResultSet.addListener(Events.Expand,
                 new Listener<FieldSetEvent>() {
 
-            @Override
-            public void handleEvent(FieldSetEvent be) {
-                selectionEnabled(true);
-            }
+                    @Override
+                    public void handleEvent(FieldSetEvent be) {
+                        selectionEnabled(true);
+                    }
 
-        });
+                });
 
         formPanel.add(matchResultSet);
     }
@@ -221,37 +223,38 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                 BasicWidgetResources.ICONS.done(),
                 new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                FeatureAttributeConditionField attributeCondition =
-                        new FeatureAttributeConditionField(bus, attributes);
-                attributeConditions.add(attributeCondition);
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        FeatureAttributeConditionField attributeCondition
+                        = new FeatureAttributeConditionField(bus, attributes);
+                        attributeConditions.add(attributeCondition);
 
-                matchResultSet.add(attributeCondition, new VBoxLayoutData(0, 0,
-                        1, 0));
-                matchResultSet.layout();
+                        matchResultSet.add(attributeCondition,
+                                new VBoxLayoutData(0, 0,
+                                        1, 0));
+                        matchResultSet.layout();
 
-                int vScrollPosition = FeatureSelectionWidget.super.getVScrollPosition();
-                FeatureSelectionWidget.super.setVScrollPosition(
-                        vScrollPosition + 30);
-            }
+                        int vScrollPosition = FeatureSelectionWidget.super.getVScrollPosition();
+                        FeatureSelectionWidget.super.setVScrollPosition(
+                                vScrollPosition + 30);
+                    }
 
-        });
+                });
         formPanel.addButton(addConditionButton);
 
         this.resetConditionsButton = new Button("Reset Conditions",
                 BasicWidgetResources.ICONS.delete(),
                 new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                for (FeatureAttributeConditionField attCondition : attributeConditions) {
-                    matchResultSet.remove(attCondition);
-                }
-                attributeConditions.clear();
-            }
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        for (FeatureAttributeConditionField attCondition : attributeConditions) {
+                            matchResultSet.remove(attCondition);
+                        }
+                        attributeConditions.clear();
+                    }
 
-        });
+                });
         formPanel.addButton(resetConditionsButton);
     }
 
@@ -261,110 +264,116 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
         this.selectAllButton = new Button("Select All",
                 new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                queryEnabled(false);
-
-                getAllFeatureRequest.setServerUrl(
-                        layerSchemaBinder.getLayerSchemaDTO().getScope());
-                getAllFeatureRequest.setTypeName(
-                        layerSchemaBinder.getLayerSchemaDTO().getTypeName());
-                getAllFeatureRequest.setMaxFeatures(50);
-
-                ClientCommandDispatcher.getInstance().execute(
-                        new GPClientCommand<GetAllFeatureResponse>() {
-
-                    private static final long serialVersionUID = 9028489214099941178L;
-
-                    {
-                        super.setCommandRequest(getAllFeatureRequest);
-                    }
-
                     @Override
-                    public void onCommandSuccess(GetAllFeatureResponse response) {
-                        List<FeatureDetail> instances = Lists.newArrayListWithCapacity(
-                                response.getResult().getFeatures().size());
-                        for (FeatureDTO feature : response.getResult().getFeatures()) {
-                            Map<String, String> attributes = feature.getAttributes().getAttributesMap();
-                            FeatureDetail featureDetail = new FeatureDetail(null,
-                                    attributes);
-                            instances.add(featureDetail);
-                        }
+                    public void componentSelected(ButtonEvent ce) {
+                        queryEnabled(false);
 
-                        FeatureInstancesEvent e = new FeatureInstancesEvent();
-                        e.setInstances(instances);
-                        bus.fireEvent(e);
-                        queryEnabled(true);
-                    }
+                        getAllFeatureRequest.setServerUrl(
+                                layerSchemaBinder.getLayerSchemaDTO().getScope());
+                        getAllFeatureRequest.setTypeName(
+                                layerSchemaBinder.getLayerSchemaDTO().getTypeName());
+                        getAllFeatureRequest.setMaxFeatures(50);
 
-                    @Override
-                    public void onCommandFailure(Throwable exception) {
-                        String errorMessage = "Error on WFS GetFeature request";
+                        ClientCommandDispatcher.getInstance().execute(
+                                new GPClientCommand<GetAllFeatureResponse>() {
 
-                        GeoPlatformMessage.errorMessage(
-                                "GetFeture Service Error",
-                                errorMessage + " - " + exception.getMessage());
+                                    private static final long serialVersionUID = 9028489214099941178L;
 
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                errorMessage + " for "
-                                + layerSchemaBinder.getLayerSchemaDTO().getTypeName()
-                                + " layer.",
-                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                    {
+                                        super.setCommandRequest(
+                                                getAllFeatureRequest);
+                                    }
+
+                                    @Override
+                                    public void onCommandSuccess(
+                                            GetAllFeatureResponse response) {
+                                                List<FeatureDetail> instances = Lists.newArrayListWithCapacity(
+                                                        response.getResult().getFeatures().size());
+                                                for (FeatureDTO feature : response.getResult().getFeatures()) {
+                                                    Map<String, String> attributes = feature.getAttributes().getAttributesMap();
+                                                    FeatureDetail featureDetail = new FeatureDetail(
+                                                            null,
+                                                            attributes);
+                                                    instances.add(featureDetail);
+                                                }
+
+                                                FeatureInstancesEvent e = new FeatureInstancesEvent();
+                                                e.setInstances(instances);
+                                                bus.fireEvent(e);
+                                                queryEnabled(true);
+                                            }
+
+                                            @Override
+                                            public void onCommandFailure(
+                                                    Throwable exception) {
+                                                        String errorMessage = "Error on WFS GetFeature request";
+
+                                                        GeoPlatformMessage.errorMessage(
+                                                                "GetFeture Service Error",
+                                                                errorMessage + " - " + exception.getMessage());
+
+                                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                                errorMessage + " for "
+                                                                + layerSchemaBinder.getLayerSchemaDTO().getTypeName()
+                                                                + " layer.",
+                                                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                                    }
+
+                                });
                     }
 
                 });
-            }
-
-        });
         super.addButton(selectAllButton);
-
-        queryFeatureRequest = GWT.create(QueryFeatureRequest.class);
 
         this.queryButton = new Button("Query",
                 new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                QueryDTO queryDTO = new QueryDTO();
-                queryDTO.setMatchOperator(
-                        FeatureSelectionWidget.this.matchComboField.getValue().getValue());
-                List<QueryRestrictionDTO> queryRestrictions = Lists.
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        QueryDTO queryDTO = new QueryDTO();
+                        queryDTO.setMatchOperator(
+                                FeatureSelectionWidget.this.matchComboField.getValue().getValue());
+                        List<QueryRestrictionDTO> queryRestrictions = Lists.
                         <QueryRestrictionDTO>newArrayListWithExpectedSize(
-                        attributeConditions.size());
-                for (FeatureAttributeConditionField conditionField : GeoPlatformUtils.safeList(
-                        attributeConditions)) {
-                    QueryRestrictionDTO queryRestriction = conditionField.getQueryRestriction();
-                    if (queryRestriction != null) {
-                        queryRestrictions.add(queryRestriction);
-                    }
-                }
-                queryFeatureRequest.setQuery(queryDTO);
+                                attributeConditions.size());
+                        for (FeatureAttributeConditionField conditionField : GeoPlatformUtils.safeList(
+                                attributeConditions)) {
+                            QueryRestrictionDTO queryRestriction = conditionField.getQueryRestriction();
+                            if (queryRestriction != null) {
+                                queryRestrictions.add(queryRestriction);
+                            }
+                        }
+                        queryFeatureRequest.setQuery(queryDTO);
 
-                ClientCommandDispatcher.getInstance().execute(
-                        new GPClientCommand<QueryFeatureResponse>() {
+                        ClientCommandDispatcher.getInstance().execute(
+                                new GPClientCommand<QueryFeatureResponse>() {
 
-                    private static final long serialVersionUID = 7052499099859652678L;
+                                    private static final long serialVersionUID = 7052499099859652678L;
 
-                    {
-                        super.setCommandRequest(queryFeatureRequest);
-                    }
+                                    {
+                                        super.setCommandRequest(
+                                                queryFeatureRequest);
+                                    }
 
-                    @Override
-                    public void onCommandSuccess(QueryFeatureResponse response) {
-                        //TODO: Show response result
-                        System.out.println("On success");
-                    }
+                                    @Override
+                                    public void onCommandSuccess(
+                                            QueryFeatureResponse response) {
+                                                //TODO: Show response result
+                                                System.out.println("On success");
+                                            }
 
-                    @Override
-                    public void onCommandFailure(Throwable exception) {
-                        GeoPlatformMessage.errorMessage("Query Error",
-                                exception.getMessage());
+                                            @Override
+                                            public void onCommandFailure(
+                                                    Throwable exception) {
+                                                        GeoPlatformMessage.errorMessage(
+                                                                "Query Error",
+                                                                exception.getMessage());
+                                                    }
+
+                                });
                     }
 
                 });
-            }
-
-        });
         super.addButton(queryButton);
     }
 

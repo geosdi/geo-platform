@@ -36,13 +36,15 @@
 package org.geosdi.geoplatform.gui.server.command.wfst.cas.basic;
 
 import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.connector.wfs.responce.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
-import org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasDescribeFeatureTypeRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureResponse;
+import org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasGetAllFeatureRequest;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.command.wfst.cas.WFSCasUtility;
 import org.geosdi.geoplatform.support.wfs.cas.services.CasDescribeFeatureService;
+import org.geosdi.geoplatform.support.wfs.cas.services.CasGetFeatureService;
 import org.jasig.cas.client.util.AbstractCasFilter;
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.AssertionImpl;
@@ -59,22 +61,22 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
-@Component(value = "command.wfst.cas.basic.CasDescribeFeatureTypeCommand")
+@Component(value = "command.wfst.cas.basic.CasGetAllFeatureCommand")
 @Profile(value = "cas")
-public class CasDescribeFeatureTypeCommand implements
-        GPCommand<CasDescribeFeatureTypeRequest, DescribeFeatureTypeResponse> {
+public class CasGetAllFeatureCommand implements
+        GPCommand<CasGetAllFeatureRequest, GetAllFeatureResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            CasDescribeFeatureTypeCommand.class);
+            CasGetAllFeatureCommand.class);
     //
+    @Autowired
+    private CasGetFeatureService gpCasGetFeatureService;
     @Autowired
     private CasDescribeFeatureService gpCasDescribeFeatureService;
 
     @Override
-    public DescribeFeatureTypeResponse execute(
-            CasDescribeFeatureTypeRequest request,
+    public GetAllFeatureResponse execute(CasGetAllFeatureRequest request,
             HttpServletRequest httpServletRequest) {
-
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
@@ -89,12 +91,15 @@ public class CasDescribeFeatureTypeCommand implements
                     request.getServerUrl(),
                     casAssertion);
 
-            LayerSchemaDTO result = this.gpCasDescribeFeatureService.describeFeatureType(
+            LayerSchemaDTO layerSchema = this.gpCasDescribeFeatureService.describeFeatureType(
                     url, request.getTypeName());
+
+            FeatureCollectionDTO result = this.gpCasGetFeatureService.getFeature(
+                    layerSchema, request.getMaxFeatures());
 
             logger.debug("#################### Found {} ", result);
 
-            return new DescribeFeatureTypeResponse(result);
+            return new GetAllFeatureResponse(result);
 
         } catch (Exception ex) {
             throw new GeoPlatformException(ex.getMessage());

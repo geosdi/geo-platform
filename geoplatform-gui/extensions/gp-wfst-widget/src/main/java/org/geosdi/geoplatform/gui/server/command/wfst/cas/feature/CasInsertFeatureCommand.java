@@ -33,46 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.command.wfst.cas.basic;
+package org.geosdi.geoplatform.gui.server.command.wfst.cas.feature;
 
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
-import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
-import org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasDescribeFeatureTypeRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.cas.feature.CasInsertFeatureRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.command.wfst.cas.WFSCasUtility;
-import org.geosdi.geoplatform.support.wfs.cas.services.CasDescribeFeatureService;
+import org.geosdi.geoplatform.support.wfs.cas.services.CasTransactionService;
 import org.jasig.cas.client.util.AbstractCasFilter;
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.AssertionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
-@Component(value = "command.wfst.cas.basic.CasDescribeFeatureTypeCommand")
-@Profile(value = "cas")
-public class CasDescribeFeatureTypeCommand implements
-        GPCommand<CasDescribeFeatureTypeRequest, DescribeFeatureTypeResponse> {
+public class CasInsertFeatureCommand implements
+        GPCommand<CasInsertFeatureRequest, InsertFeatureResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            CasDescribeFeatureTypeCommand.class);
+            CasInsertFeatureCommand.class);
     //
     @Autowired
-    private CasDescribeFeatureService gpCasDescribeFeatureService;
+    private CasTransactionService gpCasTransactionService;
 
     @Override
-    public DescribeFeatureTypeResponse execute(
-            CasDescribeFeatureTypeRequest request,
+    public InsertFeatureResponse execute(CasInsertFeatureRequest request,
             HttpServletRequest httpServletRequest) {
 
         logger.debug("##################### Executing {} Command", this.
@@ -89,12 +81,13 @@ public class CasDescribeFeatureTypeCommand implements
                     request.getServerUrl(),
                     casAssertion);
 
-            LayerSchemaDTO result = this.gpCasDescribeFeatureService.describeFeatureType(
-                    url, request.getTypeName());
+            boolean result = this.gpCasTransactionService.transactionInsert(
+                    url, request.getTypeName(), request.getTargetNamespace(),
+                    request.getAttributes());
 
             logger.debug("#################### Found {} ", result);
 
-            return new DescribeFeatureTypeResponse(result);
+            return new InsertFeatureResponse(result);
 
         } catch (Exception ex) {
             throw new GeoPlatformException(ex.getMessage());

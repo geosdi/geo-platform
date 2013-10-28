@@ -33,24 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.command.wfst.cas.basic;
 
-import com.google.gwt.core.client.GWT;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class UpdateFeatureGeometryRequestProvider implements
-        Provider<UpdateFeatureGeometryRequest> {
-    
+public class CasQueryFeatureRequest extends QueryFeatureRequest {
+
+    private static final long serialVersionUID = -2773311376532880182L;
+
     @Override
-    public UpdateFeatureGeometryRequest get() {
-        return GWT.<UpdateFeatureGeometryRequest>create(
-                UpdateFeatureGeometryRequest.class);
+    public String getCommandName() {
+        return "command.wfst.cas.basic.CasQueryFeatureCommand";
     }
-    
+
 }

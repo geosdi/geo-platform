@@ -14,5 +14,25 @@
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest"/>
         <when-property-is name="security.strategy" value="cas"/>
     </replace-with>
+    
+    <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasGetAllFeatureRequest">
+        <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.basic.GetAllFeatureRequest"/>
+        <when-property-is name="security.strategy" value="cas"/>
+    </replace-with>
+    
+    <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.basic.CasQueryFeatureRequest">
+        <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.basic.QueryFeatureRequest"/>
+        <when-property-is name="security.strategy" value="cas"/>
+    </replace-with>
+    
+    <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.feature.CasInsertFeatureRequest">
+        <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureRequest"/>
+        <when-property-is name="security.strategy" value="cas"/>
+    </replace-with>
+    
+    <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.feature.CasUpdateFeatureGeometryRequest">
+        <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest"/>
+        <when-property-is name="security.strategy" value="cas"/>
+    </replace-with>
 
 </module>

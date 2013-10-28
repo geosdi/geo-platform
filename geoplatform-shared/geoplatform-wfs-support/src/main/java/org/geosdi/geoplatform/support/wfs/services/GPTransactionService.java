@@ -42,9 +42,7 @@ import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.springframework.stereotype.Service;
@@ -97,11 +95,9 @@ public class GPTransactionService extends AbstractFeatureService
                 return true;
             }
 
-        } catch (ServerInternalFault ex) {
-            logger.error("\n### ServerInternalFault: {} ###", ex.getMessage());
         } catch (IOException ex) {
             logger.error("\n### IOException: {} ###", ex.getMessage());
-            throw new ResourceNotFoundFault(
+            throw new IllegalStateException(
                     "Error to execute the WFS Transacion Update for the layer "
                     + typeName + " - fid: " + fid);
         }
@@ -121,7 +117,7 @@ public class GPTransactionService extends AbstractFeatureService
         logger.debug("\n\n*** WFS Transaction INSERT for layer '{}' ***",
                 typeName);
         if (!typeName.contains(":")) {
-            throw new IllegalParameterFault(
+            throw new IllegalArgumentException(
                     "typeName must contain the char \":\"");
         }
 
@@ -152,11 +148,9 @@ public class GPTransactionService extends AbstractFeatureService
                 return true;
             }
 
-        } catch (ServerInternalFault ex) {
-            logger.error("\n### ServerInternalFault: {} ###", ex.getMessage());
         } catch (IOException ex) {
             logger.error("\n### IOException: {} ###", ex.getMessage());
-            throw new ResourceNotFoundFault(
+            throw new IllegalStateException(
                     "Error to execute the WFS Transacion Insert for the layer "
                     + typeName);
         }

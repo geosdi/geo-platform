@@ -93,9 +93,9 @@ public abstract class GPAbstractConnectorRequest<T>
 
     private RequestConfig createRequestConfig() {
         return RequestConfig.custom()
-                .setCookieSpec(CookieSpecs.BEST_MATCH).setSocketTimeout(5000)
-                .setConnectTimeout(5000)
-                .setConnectionRequestTimeout(5000).build();
+                .setCookieSpec(CookieSpecs.BEST_MATCH).setSocketTimeout(8000)
+                .setConnectTimeout(8000)
+                .setConnectionRequestTimeout(8000).build();
     }
 
     @Override

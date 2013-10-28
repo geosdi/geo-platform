@@ -48,12 +48,18 @@ import org.jasig.cas.client.validation.AssertionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Lazy(true)
+@Component(value = "command.wfst.cas.feature.CasInsertFeatureCommand")
+@Profile(value = "cas")
 public class CasInsertFeatureCommand implements
         GPCommand<CasInsertFeatureRequest, InsertFeatureResponse> {
 

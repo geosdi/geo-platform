@@ -42,14 +42,13 @@ import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
-import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Service(value = "gpDescribeFeatureService")
+//@Service(value = "gpDescribeFeatureService")
 public class GPDescribeFeatureService extends AbstractFeatureService
         implements DescribeFeatureService {
 

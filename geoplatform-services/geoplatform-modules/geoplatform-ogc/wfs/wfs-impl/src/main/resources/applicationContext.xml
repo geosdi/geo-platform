@@ -19,7 +19,7 @@
 
     <context:annotation-config />
     
-    <import resource="classpath:applicationContext-WFS-Support.xml" />
+    <import resource="applicationContext-WFS-Support.xml" />
 
     <!--===================================================================== -->
     <!-- Services -->

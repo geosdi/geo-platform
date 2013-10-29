@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -54,7 +53,7 @@ import org.springframework.stereotype.Service;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Service("gpTransactionService")
+//@Service("gpTransactionService")
 public class GPTransactionService extends AbstractFeatureService
         implements TransactionService {
 

@@ -7,11 +7,16 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context-3.2.xsd"
        default-autowire="byName" profile="cas">
-
-    <context:annotation-config />
-    
-    <context:component-scan base-package="org.geosdi.geoplatform.support.wfs.cas.configurator,
-                            org.geosdi.geoplatform.support.wfs.cas.services" />
     
     <import resource="classpath:applicationContext-jasypt.xml" />
+    
+    <bean id="gpCasWFSConfigurator" class="org.geosdi.geoplatform.support.wfs.cas.configurator.GPWFSCasConfiguratorImpl">
+        <property name="defaultWFSDataSource" value="configurator{default_wfs_datasource}"/>
+    </bean>
+    
+    <bean id="gpCasDescribeFeatureService" class="org.geosdi.geoplatform.support.wfs.cas.services.CasDescribeFeatureService" />
+    
+    <bean id="gpCasGetFeatureService" class="org.geosdi.geoplatform.support.wfs.cas.services.CasGetFeatureService" />
+    
+    <bean id="gpCasTransactionService" class="org.geosdi.geoplatform.support.wfs.cas.services.CasTransactionService" />
 </beans>

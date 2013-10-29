@@ -35,19 +35,14 @@
  */
 package org.geosdi.geoplatform.support.wfs.configurator;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component(value = "gpWFSConfigurator")
 public class GPWFSConfiguratorImpl implements GPWFSConfigurator {
 
-    protected @Value("configurator{default_wfs_datasource}")
-    String defaultWFSDataSource;
+    protected String defaultWFSDataSource;
 
     @Override
     public boolean matchDefaultDataSource(String dataSource) {
@@ -61,4 +56,12 @@ public class GPWFSConfiguratorImpl implements GPWFSConfigurator {
     public String getDefaultWFSDataSource() {
         return defaultWFSDataSource;
     }
+
+    /**
+     * @param defaultWFSDataSource the defaultWFSDataSource to set
+     */
+    public void setDefaultWFSDataSource(String defaultWFSDataSource) {
+        this.defaultWFSDataSource = defaultWFSDataSource;
+    }
+
 }

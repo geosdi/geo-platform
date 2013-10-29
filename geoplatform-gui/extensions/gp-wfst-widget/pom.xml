@@ -38,12 +38,6 @@
             <artifactId>geoplatform-sharing</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-wfs-cas-support</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -75,6 +69,14 @@
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        
+        <!-- TODO  REMOVE SCOPE PROVIDED WITH SPRING 3.2.5.RELEASE-->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-wfs-cas-support</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -133,9 +135,20 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
         </dependency>
         
         <dependency>

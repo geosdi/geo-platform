@@ -36,15 +36,11 @@
 package org.geosdi.geoplatform.support.wfs.cas.services;
 
 import org.geosdi.geoplatform.support.wfs.services.GPGetFeatureService;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Service(value = "gpCasGetFeatureService")
-@Profile(value = "cas")
 public class CasGetFeatureService extends GPGetFeatureService {
 }

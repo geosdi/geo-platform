@@ -49,14 +49,13 @@ import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
-import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Service(value = "gpGetFeatureService")
+//@Service(value = "gpGetFeatureService")
 public class GPGetFeatureService extends AbstractFeatureService
         implements GetFeaureService {
 

@@ -13,11 +13,17 @@
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-3.2.xsd"
        default-autowire="byName">
-            
-    <context:annotation-config />
     
-    <context:component-scan base-package="org.geosdi.geoplatform.support.wfs.configurator" />
-            
     <import resource="classpath:applicationContext-jasypt.xml" />
+    
+    <bean id="gpWFSConfigurator" class="org.geosdi.geoplatform.support.wfs.configurator.GPWFSConfiguratorImpl">
+        <property name="defaultWFSDataSource" value="configurator{default_wfs_datasource}"/>
+    </bean>
+    
+    <bean id="gpDescribeFeatureService" class="org.geosdi.geoplatform.support.wfs.services.GPDescribeFeatureService" />
+    
+    <bean id="gpGetFeatureService" class="org.geosdi.geoplatform.support.wfs.services.GPGetFeatureService" />
+    
+    <bean id="gpTransactionService" class="org.geosdi.geoplatform.support.wfs.services.GPTransactionService" />
 
 </beans>

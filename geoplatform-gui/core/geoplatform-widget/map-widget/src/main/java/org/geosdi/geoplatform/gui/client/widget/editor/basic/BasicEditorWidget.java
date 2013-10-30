@@ -81,7 +81,7 @@ public class BasicEditorWidget extends GeoPlatformWindow {
     @Override
     public void initSize() {
         super.setAutoWidth(true);
-        super.setHeight(235);
+        super.setAutoHeight(true);
     }
 
     @Override

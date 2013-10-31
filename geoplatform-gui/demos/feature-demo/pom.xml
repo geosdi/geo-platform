@@ -73,7 +73,7 @@
             <groupId>org.geosdi</groupId>
             <artifactId>gp-wfst-widget</artifactId>
         </dependency>
-        
+       
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>

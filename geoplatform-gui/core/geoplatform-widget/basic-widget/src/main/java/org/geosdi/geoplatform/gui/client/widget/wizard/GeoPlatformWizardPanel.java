@@ -59,6 +59,8 @@ public abstract class GeoPlatformWizardPanel extends GeoPlatformContentPanel {
     public abstract boolean isNextEnabled();
 
     public abstract void onNextAction();
+    
+    public abstract void onPreviewWizard();
 
     public final boolean isCommitAction() {
         return commitAction;

@@ -187,6 +187,7 @@ public abstract class GeoPlatformWizard extends GeoPlatformWindow {
         logger.log(Level.FINEST, "Placing wizardPanel on GeoPlatformWizard");
         this.removeWizardScreen();
         contentPanel.add(panelToDisplay.asWidget());
+        panelToDisplay.onPreviewWizard();
         contentPanel.layout(Boolean.TRUE);
         logger.log(Level.FINEST,
                 "Panel header: " + panelToDisplay.getHeadingHtml());

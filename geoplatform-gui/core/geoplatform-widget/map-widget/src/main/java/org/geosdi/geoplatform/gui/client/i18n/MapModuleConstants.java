@@ -308,10 +308,16 @@ public interface MapModuleConstants extends Constants {
     String ReshapeAction_tooltipText();
 
     /**
-     * start DrawPointAction
+     * start DrawPolygonAction
      */
     @DefaultStringValue("Draw Polygon")
     String DrawPolygonAction_tooltipText();
+    
+    /**
+     * start DrawCircleAction
+     */
+    @DefaultStringValue("Draw Polygon")
+    String DrawCircleAction_tooltipText();
 
     /**
      * start DrawPointAction

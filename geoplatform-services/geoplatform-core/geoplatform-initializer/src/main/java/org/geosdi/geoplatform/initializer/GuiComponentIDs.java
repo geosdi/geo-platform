@@ -85,6 +85,7 @@ public class GuiComponentIDs {
     //
     public static final String EDITOR_AOE = "editorAOE";
     public static final String DRAW_FEATURE = "drawFeature";
+    public static final String DRAW_CIRCLE = "drawCircle";
     public static final String DRAW_LINE_FEATURE = "drawLineFeature";
     public static final String DRAW_POINT_FEATURE = "drawPointFeature";
     public static final String RESHAPE_FEATURE = "reshapeFeature";
@@ -162,6 +163,7 @@ public class GuiComponentIDs {
         all.add(MEASURE_AREA);
         all.add(EDITOR_AOE);
         all.add(DRAW_FEATURE);
+        all.add(DRAW_CIRCLE);
         all.add(DRAW_LINE_FEATURE);
         all.add(DRAW_POINT_FEATURE);
         all.add(RESHAPE_FEATURE);
@@ -220,6 +222,7 @@ public class GuiComponentIDs {
         mapUser.put(MEASURE_AREA, Boolean.TRUE);
         mapUser.put(EDITOR_AOE, Boolean.TRUE);
         mapUser.put(DRAW_FEATURE, Boolean.TRUE);
+        mapUser.put(DRAW_CIRCLE, Boolean.TRUE);
         mapUser.put(DRAW_LINE_FEATURE, Boolean.TRUE);
         mapUser.put(DRAW_POINT_FEATURE, Boolean.TRUE);
         mapUser.put(RESHAPE_FEATURE, Boolean.TRUE);
@@ -276,6 +279,7 @@ public class GuiComponentIDs {
         mapViewer.put(MEASURE_AREA, Boolean.TRUE);
         mapViewer.put(EDITOR_AOE, Boolean.TRUE);
         mapViewer.put(DRAW_FEATURE, Boolean.TRUE);
+        mapViewer.put(DRAW_CIRCLE, Boolean.TRUE);
         mapViewer.put(DRAW_LINE_FEATURE, Boolean.TRUE);
         mapViewer.put(DRAW_POINT_FEATURE, Boolean.TRUE);
         mapViewer.put(RESHAPE_FEATURE, Boolean.TRUE);
@@ -309,4 +313,5 @@ public class GuiComponentIDs {
         //
         MAP_VIEWER = Collections.<String, Boolean>unmodifiableMap(mapViewer);
     }
+
 }

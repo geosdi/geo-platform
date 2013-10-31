@@ -119,18 +119,24 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void setBaseMapOptions() {
         this.mapOptions = new MapOptions();
         this.mapOptions.setNumZoomLevels(MapLayoutWidget.NUM_ZOOM_LEVEL);
-        this.mapOptions.setDisplayProjection(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()));
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        this.mapOptions.setDisplayProjection(new Projection(
+                GPCoordinateReferenceSystem.WGS_84.getCode()));
+        IGPAccountDetail accountDetail = Registry.get(
+                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         String baseLayerKey = accountDetail.getBaseLayer();
         GPBaseLayer baseLayer;
         if (baseLayerKey != null) {
-            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.valueOf(baseLayerKey));
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(
+                    BaseLayerValue.valueOf(baseLayerKey));
         } else {
-            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.GOOGLE_SATELLITE);
-            accountDetail.setBaseLayer(baseLayer.getBaseLayerEnumName().toString());
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(
+                    BaseLayerValue.GOOGLE_SATELLITE);
+            accountDetail.setBaseLayer(
+                    baseLayer.getBaseLayerEnumName().toString());
 //            Registry.register(GlobalRegistryEnum.BASE_LAYER.getValue(), baseLayer.getBaseLayerEnumName().toString());
         }
-        if (baseLayer.getProjection().getProjectionCode().equals(GPCoordinateReferenceSystem.WGS_84.getCode())) {
+        if (baseLayer.getProjection().getProjectionCode().equals(
+                GPCoordinateReferenceSystem.WGS_84.getCode())) {
             set4326MapOptions();
         } else {
             set3857MapOptions();
@@ -156,16 +162,20 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
     private void initMapWidget() {
         this.mapWidget = new MapWidget("100%", "100%", mapOptions);
         this.map = mapWidget.getMap();
-        this.mapWidget.getElement().getFirstChildElement().getStyle().setZIndex(0);
+        this.mapWidget.getElement().getFirstChildElement().getStyle().setZIndex(
+                0);
         this.map.addControl(new ScaleLine());
         this.map.addControl(new MousePosition());
         this.addMeasureControl();
         this.addMeasureAreaControl();
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(
+                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         String baseLayerKey = accountDetail.getBaseLayer();
-        GPBaseLayer baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.valueOf(baseLayerKey));
+        GPBaseLayer baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(
+                BaseLayerValue.valueOf(baseLayerKey));
         if (baseLayer == null) {
-            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(BaseLayerValue.GOOGLE_SATELLITE);
+            baseLayer = GPMapBaseLayerFactory.getGPBaseLayer(
+                    BaseLayerValue.GOOGLE_SATELLITE);
         }
 
 //        System.out.println("Base layer projection: " + baseLayer.getProjection().getProjectionCode());
@@ -179,22 +189,28 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
             @Override
             public void onLayerAdded(MapLayerAddedEvent eventObject) {
-                MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(eventObject.getLayer()));
+                MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(
+                        eventObject.getLayer()));
             }
+
         };
         this.featureInfoLayerRemovedListener = new MapLayerRemovedListener() {
 
             @Override
             public void onLayerRemoved(MapLayerRemovedEvent eventObject) {
-                MapHandlerManager.fireEvent(new FeatureInfoRemoveLayer(eventObject.getLayer()));
+                MapHandlerManager.fireEvent(new FeatureInfoRemoveLayer(
+                        eventObject.getLayer()));
             }
+
         };
         this.featureInfoLayerChangedListener = new MapLayerChangedListener() {
 
             @Override
             public void onLayerChanged(MapLayerChangedEvent eventObject) {
-                MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(eventObject.getLayer()));
+                MapHandlerManager.fireEvent(new FeatureInfoAddModifyLayer(
+                        eventObject.getLayer()));
             }
+
         };
     }
 
@@ -208,10 +224,12 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
             @Override
             public void onMeasure(MeasureEvent eventObject) {
-                Window.alert(MapModuleConstants.INSTANCE.MapLayoutWidget_infoDiscanceText()
+                Window.alert(
+                        MapModuleConstants.INSTANCE.MapLayoutWidget_infoDiscanceText()
                         + ": " + eventObject.getMeasure() + " "
                         + eventObject.getUnits());
             }
+
         });
     }
 
@@ -225,10 +243,12 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
             @Override
             public void onMeasure(MeasureEvent eventObject) {
-                Window.alert(MapModuleConstants.INSTANCE.MapLayoutWidget_infoAreaText()
+                Window.alert(
+                        MapModuleConstants.INSTANCE.MapLayoutWidget_infoAreaText()
                         + ": " + eventObject.getMeasure() + " "
                         + eventObject.getUnits());
             }
+
         });
     }
 
@@ -299,13 +319,15 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
      * Set center of the Map on Italy
      */
     public void setMapCenter() {
-        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(
+                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         GPClientViewport viewport = accountDetail.getViewport();
         if (viewport != null) {
             ViewportUtility.gotoViewportLocation(map, viewport);
         } else {
             LonLat center = new LonLat(13.375, 42.329);
-            if (map.getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+            if (map.getProjection().equals(
+                    GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
                 center.transform(GPCoordinateReferenceSystem.WGS_84.getCode(),
                         GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode());
             }
@@ -418,6 +440,10 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
     public DrawFeature getDrawPolygonFeature() {
         return this.mapControl.getDrawFeatureControl();
+    }
+
+    public DrawFeature getDrawCircleFeature() {
+        return this.mapControl.getDrawCircleFeatureControl();
     }
 
     public DrawFeature getDrawPointFeature() {
@@ -549,9 +575,11 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
         if (!map.getProjection().equals(crs)) {
             System.out.println(">> Changed projection from: " + crs
                     + ", to: " + map.getProjection());
-            if (map.getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+            if (map.getProjection().equals(
+                    GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
                 b.transform(new Projection(crs),
-                        new Projection(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
+                        new Projection(
+                                GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
             }
         }
 
@@ -564,8 +592,10 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
             @Override
             public void run() {
-                GPScaleWidget.display(MapModuleConstants.INSTANCE.MapLayoutWidget_scaleText());
+                GPScaleWidget.display(
+                        MapModuleConstants.INSTANCE.MapLayoutWidget_scaleText());
             }
+
         };
         t.schedule(3000);
     }
@@ -577,7 +607,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
 
     @Override
     public void changeBaseLayer(GPBaseLayer gpBaseLayer) {
-        if (!gpBaseLayer.getGwtOlBaseLayer().getName().equals(map.getBaseLayer().getName())) {
+        if (!gpBaseLayer.getGwtOlBaseLayer().getName().equals(
+                map.getBaseLayer().getName())) {
             int zoomLevel = this.map.getZoom();
             double scale = this.map.getScale();
 
@@ -585,17 +616,23 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
             boolean projectionChanged = Boolean.FALSE;
             if (gpBaseLayer.getProjection().getProjectionCode().equals(
                     GPCoordinateReferenceSystem.WGS_84.getCode())
-                    && !this.map.getProjection().equals(GPCoordinateReferenceSystem.WGS_84.getCode())) {
+                    && !this.map.getProjection().equals(
+                            GPCoordinateReferenceSystem.WGS_84.getCode())) {
                 this.set4326MapOptions();
-                bounds.transform(new Projection(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()),
-                        new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()));
+                bounds.transform(new Projection(
+                        GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()),
+                        new Projection(
+                                GPCoordinateReferenceSystem.WGS_84.getCode()));
                 projectionChanged = Boolean.TRUE;
             } else if (gpBaseLayer.getProjection().getProjectionCode().equals(
                     GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())
-                    && !this.map.getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
+                    && !this.map.getProjection().equals(
+                            GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
                 this.set3857MapOptions();
-                bounds.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()),
-                        new Projection(GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
+                bounds.transform(new Projection(
+                        GPCoordinateReferenceSystem.WGS_84.getCode()),
+                        new Projection(
+                                GPCoordinateReferenceSystem.EPSG_GOOGLE.getCode()));
                 projectionChanged = Boolean.TRUE;
             }
             Layer newBaseLayer = gpBaseLayer.getGwtOlBaseLayer();
@@ -611,7 +648,8 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
                 this.map.zoomTo(zoomLevel);
                 this.map.zoomToExtent(bounds);
             }
-            this.changeBaseLayerMapEvent = new ChangeBaseLayerMapEvent(gpBaseLayer.getProjection());
+            this.changeBaseLayerMapEvent = new ChangeBaseLayerMapEvent(
+                    gpBaseLayer.getProjection());
 
             System.out.println("Map Projection " + this.map.getProjection());
 
@@ -623,4 +661,15 @@ public class MapLayoutWidget implements GeoPlatformMap, IChangeBaseLayerHandler 
                     MapLayoutWidget_baseLayerAlreadyDisplayedBodyText());
         }
     }
+
+    @Override
+    public void activateDrawCircleFeature() {
+        this.mapControl.activateDrawCircleFeature();
+    }
+
+    @Override
+    public void deactivateDrawCircleFeature() {
+        this.mapControl.deactivateDrawCircleFeature();
+    }
+
 }

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawLineFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPointFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPolygonControl;
+import org.geosdi.geoplatform.gui.client.widget.map.control.DrawRegularPolygonControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureOperation;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
@@ -64,10 +65,11 @@ import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
  */
 public class MapControlManager {
 
-    private Map map;
+    private final Map map;
     private Vector vector;
-    private VectorFeatureStyle style;
+    private final VectorFeatureStyle style;
     private DrawPolygonControl drawFeature;
+    private DrawRegularPolygonControl drawCircle;
     private DrawPointFeature drawPointFeature;
     private DrawLineFeature drawLineFeature;
     private ModifyFeatureControl modifyFeature;
@@ -102,6 +104,7 @@ public class MapControlManager {
      */
     private void initControl() {
         this.drawFeature = new DrawPolygonControl(vector);
+        this.drawCircle = new DrawRegularPolygonControl(vector);
         this.drawPointFeature = new DrawPointFeature(vector);
         this.drawLineFeature = new DrawLineFeature(vector);
         this.modifyFeature = new ModifyFeatureControl(vector);
@@ -115,6 +118,7 @@ public class MapControlManager {
      */
     private void addMapControl() {
         this.map.addControl(this.drawFeature.getControl());
+        this.map.addControl(this.drawCircle.getControl());
         this.map.addControl(this.drawLineFeature.getControl());
         this.map.addControl(this.drawPointFeature.getControl());
         this.map.addControl(this.modifyFeature.getControl());
@@ -132,16 +136,19 @@ public class MapControlManager {
     public void drawFeatureOnMap(String wkt) {
         MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
                 wkt).getJSObject());
-        geom.transform(new Projection(GPCoordinateReferenceSystem.WGS_84.getCode()), new Projection(
-                GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode()));
+        geom.transform(new Projection(
+                GPCoordinateReferenceSystem.WGS_84.getCode()), new Projection(
+                        GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode()));
 
         VectorFeature vectorFeature = new VectorFeature(geom);
         this.vector.addFeature(vectorFeature);
         this.map.zoomToExtent(geom.getBounds());
 
-        Projection projection = new Projection(GPCoordinateReferenceSystem.WGS_84.getCode());
+        Projection projection = new Projection(
+                GPCoordinateReferenceSystem.WGS_84.getCode());
         Projection mapProjection = new Projection(map.getProjection());
-        Bounds mapBounds = this.map.getExtent().transform(mapProjection, projection);
+        Bounds mapBounds = this.map.getExtent().transform(mapProjection,
+                projection);
         BBoxClientInfo bbox = ViewportUtility.generateBBOXFromBounds(mapBounds);
     }
 
@@ -188,11 +195,29 @@ public class MapControlManager {
     }
 
     /**
+     * activate draw feature control on the map
+     */
+    public void activateDrawCircleFeature() {
+        this.drawCircle.activateControl();
+    }
+
+    /**
+     * deactivate draw feature control on the map
+     */
+    public void deactivateDrawCircleFeature() {
+        this.drawCircle.deactivateControl();
+    }
+
+    /**
      *
      * @return DrawFeature
      */
     public DrawFeature getDrawFeatureControl() {
         return this.drawFeature.getControl();
+    }
+    
+     public DrawFeature getDrawCircleFeatureControl() {
+        return this.drawCircle.getControl();
     }
 
     public DrawFeature getDrawPointFeaureControl() {
@@ -298,4 +323,5 @@ public class MapControlManager {
     public void deactivateDrawLineFeature() {
         this.drawLineFeature.deactivateControl();
     }
+
 }

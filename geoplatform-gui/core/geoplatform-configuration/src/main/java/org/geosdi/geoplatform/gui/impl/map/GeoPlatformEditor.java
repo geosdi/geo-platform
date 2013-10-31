@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.impl.map;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
 public interface GeoPlatformEditor {
 
@@ -63,4 +63,9 @@ public interface GeoPlatformEditor {
     public void deactivateModifyFeature();
 
     public boolean isModifyFeatureEnable();
+
+    public void activateDrawCircleFeature();
+
+    public void deactivateDrawCircleFeature();
+
 }

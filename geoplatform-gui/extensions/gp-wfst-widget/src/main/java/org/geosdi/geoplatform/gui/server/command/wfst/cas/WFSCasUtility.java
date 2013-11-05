@@ -60,7 +60,8 @@ public class WFSCasUtility {
             throw new NullPointerException("Cas Assertion must not be null.");
         }
 
-        String proxyTicket = casAssertion.getPrincipal().getProxyTicketFor(url);
+        String proxyTicket = casAssertion.getPrincipal().getProxyTicketFor(
+                url.replace("wms", "wfs"));
         if (proxyTicket == null || proxyTicket.isEmpty()) {
             throw new IllegalArgumentException("********************* "
                     + "Impossible to obtain proxy ticket for URL: " + url);

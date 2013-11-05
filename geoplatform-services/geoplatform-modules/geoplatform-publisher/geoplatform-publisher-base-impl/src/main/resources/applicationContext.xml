@@ -15,7 +15,7 @@
             http://cxf.apache.org/schemas/core.xsd
             http://cxf.apache.org/jaxws
             http://cxf.apache.org/schemas/jaxws.xsd"
-       default-autowire="byName" profile="cas">
+       default-autowire="byName" profile="gs_cas">
 
     <context:annotation-config />
     

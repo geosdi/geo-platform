@@ -59,7 +59,7 @@ import org.springframework.stereotype.Component;
  */
 @Lazy(true)
 @Component(value = "command.wfst.cas.feature.CasInsertFeatureCommand")
-@Profile(value = "cas")
+@Profile(value = "gs_cas")
 public class CasInsertFeatureCommand implements
         GPCommand<CasInsertFeatureRequest, InsertFeatureResponse> {
 

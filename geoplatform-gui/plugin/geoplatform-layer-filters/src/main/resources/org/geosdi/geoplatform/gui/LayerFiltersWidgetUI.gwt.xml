@@ -13,7 +13,7 @@
     
     <replace-with class="org.geosdi.geoplatform.gui.client.command.filter.cas.CASFilterDescribeFeatureRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.filter.basic.FilterDescribeFeatureRequest"/>
-        <when-property-is name="security.strategy" value="cas"/>
+        <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
     
 </module>

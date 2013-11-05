@@ -10,7 +10,7 @@
     
     <replace-with class="org.geosdi.geoplatform.gui.command.capabilities.cas.CASCapabilitiesRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesRequest"/>
-        <when-property-is name="security.strategy" value="cas"/>
+        <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
 
     <replace-with class="org.geosdi.geoplatform.gui.client.command.session.cas.CASInvalidateSessionRequest">

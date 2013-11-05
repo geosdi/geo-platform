@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server.command.session.cas;
 
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
-import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionResponse;
 import org.geosdi.geoplatform.gui.client.command.session.cas.CASInvalidateSessionResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.server.ISecurityService;

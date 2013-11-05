@@ -61,7 +61,7 @@ import org.springframework.stereotype.Component;
  */
 @Lazy(true)
 @Component(value = "command.filter.cas.CASFilterDescribeFeatureCommand")
-@Profile(value = "cas")
+@Profile(value = "gs_cas")
 public class CASFilterDescribeFeatureCommand implements
         GPCommand<FilterDescribeFeatureRequest, FilterDescribeFeatureResponse> {
 

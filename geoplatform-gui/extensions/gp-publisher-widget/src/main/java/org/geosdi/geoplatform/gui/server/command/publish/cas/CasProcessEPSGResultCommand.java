@@ -67,7 +67,7 @@ import org.springframework.stereotype.Component;
  */
 @Lazy(true)
 @Component(value = "command.publish.cas.CasProcessEPSGResultCommand")
-@Profile(value = "cas")
+@Profile(value = "gs_cas")
 public class CasProcessEPSGResultCommand implements
         GPCommand<CasProcessEPSGResultRequest, ProcessEPSGResultResponse> {
 

@@ -6,4 +6,8 @@
     
     <set-property name="security.strategy" value="basic" /> 
     
+    <define-property name="security.geoserver" values="basic,gs_cas"/>
+    
+    <set-property name="security.geoserver" value="basic" /> 
+    
 </module>

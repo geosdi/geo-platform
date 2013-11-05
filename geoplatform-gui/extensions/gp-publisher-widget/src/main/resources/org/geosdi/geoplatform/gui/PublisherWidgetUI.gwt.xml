@@ -14,12 +14,12 @@
     
     <replace-with class="org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultRequest"/>
-        <when-property-is name="security.strategy" value="cas"/>
+        <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
     
     <replace-with class="org.geosdi.geoplatform.gui.client.command.publish.cas.CasPublishLayerPreviewRequest">
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewRequest"/>
-        <when-property-is name="security.strategy" value="cas"/>
+        <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
 
 </module>

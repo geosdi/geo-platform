@@ -52,7 +52,7 @@ import org.springframework.stereotype.Component;
  */
 @Lazy(true)
 @Component(value = "command.wfst.cas.basic.CasQueryFeatureCommand")
-@Profile(value = "cas")
+@Profile(value = "gs_cas")
 public class CasQueryFeatureCommand implements
         GPCommand<CasQueryFeatureRequest, QueryFeatureResponse> {
 

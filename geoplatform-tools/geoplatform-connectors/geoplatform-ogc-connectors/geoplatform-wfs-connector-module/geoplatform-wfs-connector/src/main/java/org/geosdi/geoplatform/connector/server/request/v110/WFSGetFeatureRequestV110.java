@@ -83,15 +83,6 @@ public class WFSGetFeatureRequestV110
             FilterType filter = new FilterType();
 
             for (String featureID : featureIDs) {
-                // Chech featureID (only one single query is permitted)
-                int ind = featureID.lastIndexOf(".");
-                String title = featureID.substring(0, ind - 1);
-                logger.trace("\n*** Layer title (from featureID): " + title);
-                if (!typeName.getLocalPart().contains(title)) {
-                    throw new IllegalArgumentException(
-                            "featureID must be referer to typeName (one single query).");
-                }
-
                 // Add featureID to filter
                 GmlObjectIdType obj = new GmlObjectIdType();
                 obj.setId(featureID);

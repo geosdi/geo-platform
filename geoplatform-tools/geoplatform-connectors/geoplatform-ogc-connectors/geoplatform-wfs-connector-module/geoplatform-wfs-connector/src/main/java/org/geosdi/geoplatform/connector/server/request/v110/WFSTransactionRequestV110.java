@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.server.request.v110;
 
 import java.io.ByteArrayOutputStream;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
@@ -47,7 +46,6 @@ import org.geosdi.geoplatform.connector.server.request.AbstractTransactionReques
 import org.geosdi.geoplatform.connector.server.request.ITransactionOperationStrategy;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.GPTransactionMediator;
 import org.geosdi.geoplatform.connector.server.request.v110.transaction.stax.FeatureStreamWriter;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
 import org.geosdi.geoplatform.xml.wfs.v110.TransactionType;

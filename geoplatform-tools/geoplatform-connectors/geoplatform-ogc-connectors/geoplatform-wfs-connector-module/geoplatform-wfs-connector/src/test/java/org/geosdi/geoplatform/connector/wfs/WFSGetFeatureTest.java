@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.wfs;
 
 import java.math.BigInteger;
 import java.util.Arrays;
-import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import static org.geosdi.geoplatform.connector.wfs.WFSTestConfigurator.logger;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
@@ -54,12 +53,10 @@ import org.junit.Test;
  */
 public class WFSGetFeatureTest extends WFSTestConfigurator {
 
-    private QName statesName = new QName("topp:states");
-
     @Test
     public void statesHits() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request =
-                super.serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollectionType> request
+                = super.serverConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
@@ -71,8 +68,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
     @Test
     public void secureStatesHits() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request =
-                super.secureServerConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollectionType> request
+                = super.secureServerConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
@@ -84,8 +81,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
     @Test
     public void statesResults() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request =
-                super.serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollectionType> request
+                = super.serverConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
@@ -108,8 +105,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
     @Test
     public void statesFeatureIDs() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request =
-                super.serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollectionType> request
+                = super.serverConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
@@ -125,8 +122,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
     @Test
     public void statesBBox() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request =
-                super.serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollectionType> request
+                = super.serverConnector.createGetFeatureRequest();
 
         request.setResultType(ResultTypeType.HITS.value());
         request.setTypeName(statesName);
@@ -143,8 +140,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     @Ignore("ToDo complete with assertion")
     @Test
     public void statesSRS() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request =
-                super.serverConnector.createGetFeatureRequest();
+        WFSGetFeatureRequest<FeatureCollectionType> request
+                = super.serverConnector.createGetFeatureRequest();
 
         request.setTypeName(statesName);
         request.setResultType(ResultTypeType.RESULTS.value());

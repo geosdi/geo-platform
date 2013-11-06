@@ -55,11 +55,11 @@ import org.geosdi.geoplatform.xml.wfs.v110.UpdateElementType;
  */
 public class TransactionUpdate extends AbstractTranctionUpdate {
 
-    private org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
-
-    public TransactionUpdate() {
+    static {
         filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
     }
+
+    static final org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory;
 
     @Override
     public Object getOperation(WFSTransactionRequest request)

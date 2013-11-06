@@ -126,7 +126,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
             throws XMLStreamException, Exception {
         writer.writeStartElement(FeaturesNamespace.WFS.PREFIX(),
                 TransactionParameters.getParam(
-                WFSTransactionParam.TRANSACTION_INSERT),
+                        WFSTransactionParam.TRANSACTION_INSERT),
                 FeaturesNamespace.WFS.NAMESPACE());
 
         TransactionIdGen idGen = request.getTransactionIdGen();
@@ -135,7 +135,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
             writer.writeAttribute(FeaturesNamespace.WFS.PREFIX(),
                     FeaturesNamespace.WFS.NAMESPACE(),
                     TransactionParameters.getParam(
-                    WFSTransactionParam.ID_GEN),
+                            WFSTransactionParam.ID_GEN),
                     idGen.value());
         }
 
@@ -145,7 +145,7 @@ public abstract class AbstractFeatureStreamWriter<T extends Object>
             writer.writeAttribute(FeaturesNamespace.WFS.PREFIX(),
                     FeaturesNamespace.WFS.NAMESPACE(),
                     TransactionParameters.getParam(
-                    WFSTransactionParam.INPUT_FORMAT),
+                            WFSTransactionParam.INPUT_FORMAT),
                     inputFormat);
         }
 

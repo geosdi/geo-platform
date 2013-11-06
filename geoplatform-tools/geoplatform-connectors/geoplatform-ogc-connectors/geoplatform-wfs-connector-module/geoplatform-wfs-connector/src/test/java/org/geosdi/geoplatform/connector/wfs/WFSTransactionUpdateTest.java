@@ -61,9 +61,6 @@ public class WFSTransactionUpdateTest extends WFSTestConfigurator {
     //
     private final static QName FIRESAT = new QName(
             "http://www.openplans.org/spearfish", "sf:firesat");
-    //
-    private static final QName statesName = new QName("topp:states");
-    private static final QName sfRoads = new QName("sf:roads");
 
     @Test
     public void polyLandmarks() throws Exception {

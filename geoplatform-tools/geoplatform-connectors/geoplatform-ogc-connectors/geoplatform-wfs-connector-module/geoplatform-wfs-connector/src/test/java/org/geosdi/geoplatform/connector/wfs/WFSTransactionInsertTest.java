@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.wfs;
 import java.util.Arrays;
 import javax.xml.namespace.QName;
 import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import static org.geosdi.geoplatform.connector.wfs.WFSTestConfigurator.logger;
 import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
@@ -49,32 +50,32 @@ import org.junit.Test;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WFSTransactionInsertTest extends WFSTestConfigurator {
-    
+
     private final static QName TASMANIA_ROADS = new QName(
             "http://www.openplans.org/topp",
             "topp:tasmania_roads", "topp");
-    
+
     @Test
 //    @Ignore
     public void tasmaniaRoads() throws Exception {
-        WFSTransactionRequest<TransactionResponseType> request =
-                super.serverConnector.createTransactionRequest();
-        
+        WFSTransactionRequest<TransactionResponseType> request
+                = super.serverConnector.createTransactionRequest();
+
         request.setOperation(TransactionOperation.INSERT);
         request.setTypeName(TASMANIA_ROADS);
-        
+
         AttributeDTO att = new AttributeDTO();
         att.setName("TYPE");
-        att.setValue("NEW attribute value TYPE");
+        att.setValue("NEW attribute");
 
         // TODO Geometry attribute
         GeometryAttributeDTO geometry = new GeometryAttributeDTO();
         geometry.setName("the_geom");
         geometry.setValue("MULTILINESTRING ((10 10, 20 20, 10 40), "
                 + "(40 40, 30 30, 40 20, 30 10))");
-        
+
         request.setAttributes(Arrays.asList(att, geometry));
-        
+
         logger.info("\n*** Request TRANSACTION INSERT ***\n{}\n\n",
                 request.showRequestAsString());
 
@@ -87,4 +88,5 @@ public class WFSTransactionInsertTest extends WFSTestConfigurator {
 //        Assert.assertEquals(1, transactionSummary.getTotalInserted().intValue());
 //        Assert.assertEquals("1.1.0", response.getVersion());
     }
+
 }

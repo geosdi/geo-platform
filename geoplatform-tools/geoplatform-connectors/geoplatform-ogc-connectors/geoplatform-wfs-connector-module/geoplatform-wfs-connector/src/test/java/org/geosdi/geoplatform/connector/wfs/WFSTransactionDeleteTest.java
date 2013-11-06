@@ -35,43 +35,44 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
-import java.net.URL;
-import javax.xml.namespace.QName;
-import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
-import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
-import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
-import org.junit.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
+import org.geosdi.geoplatform.gui.shared.wfs.TransactionOperation;
+import org.geosdi.geoplatform.xml.wfs.v110.TransactionResponseType;
+import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSTestConfigurator {
+public class WFSTransactionDeleteTest extends WFSTestConfigurator {
 
-    protected static final Logger logger = LoggerFactory.getLogger(
-            WFSTestConfigurator.class);
-    //
-    protected static final QName statesName = new QName("topp:states");
-    protected static final QName sfRoads = new QName("sf:roads");
-    //
-    private final String wfsURL = "http://150.146.160.92/geoserver/wfs";
-    private final String wfsSecureURL = "http://150.146.160.180/geoserver/wfs";
-    protected GPWFSConnectorStore serverConnector;
-    protected GPWFSConnectorStore secureServerConnector;
+    @Test
+    public void deleteState() throws Exception {
+        WFSTransactionRequest<TransactionResponseType> request
+                = super.serverConnector.createTransactionRequest();
 
-    @Before
-    public void setUp() throws Exception {
-        this.serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(
-                new URL(wfsURL)).build();
+        request.setOperation(TransactionOperation.DELETE);
+        request.setTypeName(statesName);
+        request.setFID("states.15");
 
-        this.secureServerConnector = WFSConnectorBuilder.newConnector().
-                withServerUrl(
-                        new URL(wfsSecureURL)).withClientSecurity(
-                        new BasicPreemptiveSecurityConnector(
-                                "admin", "geoservertest")).build();
+        logger.info("\n\nTRANSACTION DELETE STATE REQUEST "
+                + "########################## \n {}",
+                request.showRequestAsString());
+    }
+
+    @Test
+    public void deteteSF_Roads() throws Exception {
+        WFSTransactionRequest<TransactionResponseType> request
+                = super.serverConnector.createTransactionRequest();
+
+        request.setOperation(TransactionOperation.DELETE);
+        request.setTypeName(sfRoads);
+        request.setFID("roads.23");
+
+        logger.info("\n\nTRANSACTION DELETE SF:ROADS REQUEST "
+                + "########################## \n {}",
+                request.showRequestAsString());
     }
 
 }

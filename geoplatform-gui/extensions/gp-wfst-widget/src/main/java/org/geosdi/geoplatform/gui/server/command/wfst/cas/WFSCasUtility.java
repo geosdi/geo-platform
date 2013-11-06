@@ -47,21 +47,22 @@ import org.slf4j.LoggerFactory;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class WFSCasUtility {
-
+    
     private static final Logger logger = LoggerFactory.getLogger(
             WFSCasUtility.class);
-
+    
     private WFSCasUtility() {
     }
-
+    
     public static String appendProxyTicketToURL(String url,
             Assertion casAssertion) throws Exception {
         if (casAssertion == null) {
             throw new NullPointerException("Cas Assertion must not be null.");
         }
-
-        String proxyTicket = casAssertion.getPrincipal().getProxyTicketFor(
-                url.replace("wms", "wfs"));
+        
+        url = url.replace("wms", "wfs");
+        
+        String proxyTicket = casAssertion.getPrincipal().getProxyTicketFor(url);
         if (proxyTicket == null || proxyTicket.isEmpty()) {
             throw new IllegalArgumentException("********************* "
                     + "Impossible to obtain proxy ticket for URL: " + url);
@@ -77,8 +78,11 @@ public class WFSCasUtility {
             logger.error("Error on encoding proxy ticket {}", ex);
             throw ex;
         }
+        
+        logger.debug("########################URL Generated : {}", url);
+        
         return url;
-
+        
     }
-
+    
 }

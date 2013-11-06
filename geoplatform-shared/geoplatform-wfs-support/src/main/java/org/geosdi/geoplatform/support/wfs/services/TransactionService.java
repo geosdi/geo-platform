@@ -51,5 +51,8 @@ public interface TransactionService {
     boolean transactionInsert(String serverURL, String typeName,
             String targetNamespace, List<AttributeDTO> attributes)
             throws Exception;
+    
+    boolean transactionDelete(String serverURL, String typeName,
+            String fid) throws Exception;
 
 }

@@ -59,7 +59,8 @@ public class GPTransactionService extends AbstractFeatureService
 
     @Override
     public boolean transactionUpdate(String serverURL, String typeName,
-            String fid, List<? extends AttributeDTO> attributes) throws Exception {
+            String fid, List<? extends AttributeDTO> attributes) throws
+            Exception {
         assert (serverURL != null);
         assert (typeName != null);
         assert (fid != null);
@@ -152,6 +153,52 @@ public class GPTransactionService extends AbstractFeatureService
             throw new IllegalStateException(
                     "Error to execute the WFS Transacion Insert for the layer "
                     + typeName);
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean transactionDelete(String serverURL, String typeName,
+            String fid) throws Exception {
+        assert (serverURL != null);
+        assert (typeName != null);
+        assert (fid != null);
+
+        logger.debug("\n\n*** WFS Transaction DELETE for Feature '{}' ***",
+                fid);
+        if (!typeName.contains(":")) {
+            throw new IllegalArgumentException(
+                    "typeName must contain the char \":\"");
+        }
+
+        serverURL = serverURL.replace("wms", "wfs");
+        if (!wfsConfigurator.matchDefaultDataSource(serverURL)) {
+            throw new ResourceNotFoundFault(
+                    "Edit Mode cannot be applied to the server with url "
+                    + wfsConfigurator.getDefaultWFSDataSource());
+        }
+
+        try {
+            GPWFSConnectorStore serverConnector = super.createWFSConnector(
+                    serverURL);
+            WFSTransactionRequest<TransactionResponseType> request
+                    = serverConnector.createTransactionRequest();
+
+            request.setOperation(TransactionOperation.DELETE);
+            request.setTypeName(new QName(typeName));
+            request.setFID(fid);
+
+            TransactionResponseType response = request.getResponse();
+            if (response.getTransactionSummary().getTotalDeleted().intValue() == 1) {
+                return true;
+            }
+
+        } catch (IOException ex) {
+            logger.error("\n### IOException: {} ###", ex.getMessage());
+            throw new IllegalStateException(
+                    "Error to execute the WFS Transacion DELETE for the layer "
+                    + typeName + " - fid: " + fid);
         }
 
         return false;

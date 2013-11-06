@@ -168,8 +168,7 @@ public class GPWFSServiceImpl implements GPWFSService {
 
         try {
             return gpTransactionService.transactionUpdate(serverURL, typeName,
-                    fid,
-                    attributes);
+                    fid, attributes);
         } catch (Exception ex) {
             logger.error("###################TranctionUpdate Request error for "
                     + "Feature : {}", typeName + " - Cause : {}",
@@ -191,6 +190,22 @@ public class GPWFSServiceImpl implements GPWFSService {
             logger.error("###################TransactionInsert error for "
                     + "Feature : {}", typeName + " - Cause : {}",
                     ex.getMessage());
+
+            throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
+        }
+    }
+
+    @Override
+    public boolean transactionDelete(String serverURL, String typeName,
+            String fid) throws Exception {
+
+        try {
+            return gpTransactionService.transactionDelete(serverURL, typeName,
+                    fid);
+        } catch (Exception ex) {
+            logger.error("###################TranctionDelete Request error for "
+                    + "Feature : {}", typeName + " - FID : " + fid
+                    + " - Cause : {}", ex.getMessage());
 
             throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
         }

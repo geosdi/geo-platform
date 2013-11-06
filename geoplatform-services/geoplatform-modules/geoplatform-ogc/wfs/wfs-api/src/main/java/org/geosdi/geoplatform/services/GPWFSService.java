@@ -102,17 +102,22 @@ public interface GPWFSService {
             throws Exception;
 
     @Get
-    boolean transactionUpdate(
-            @WebParam(name = "serverURL") String serverURL,
+    boolean transactionUpdate(@WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName,
             @WebParam(name = "fid") String fid,
             @WebParam(name = "attributes") List<? extends AttributeDTO> attributes)
             throws Exception;
 
+    @Get
     boolean transactionInsert(@WebParam(name = "serverURL") String serverURL,
             @WebParam(name = "typeName") String typeName,
             @WebParam(name = "targetNamespace") String targetNamespace,
             @WebParam(name = "attributes") List<AttributeDTO> attributes)
             throws Exception;
+
+    @Get
+    boolean transactionDelete(@WebParam(name = "serverURL") String serverURL,
+            @WebParam(name = "typeName") String typeName,
+            @WebParam(name = "fid") String fid) throws Exception;
 
 }

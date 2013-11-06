@@ -33,22 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider.event;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
+import com.google.gwt.core.client.GWT;
+import javax.inject.Provider;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureRequest;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class StatusBarNotOkEventProvider extends GenericStatusBarEventProvider {
-
+public class EraseFeatureRequestProvider implements
+        Provider<EraseFeatureRequest> {
+    
     @Override
-    public FeatureStatusBarEvent get() {
-        return new FeatureStatusBarEvent("WFS Update Geometry not done.",
-                FeatureStatusBar.FeatureStatusBarType.STATUS_NOT_OK);
+    public EraseFeatureRequest get() {
+        return GWT.<EraseFeatureRequest>create(EraseFeatureRequest.class);
     }
-
+    
 }

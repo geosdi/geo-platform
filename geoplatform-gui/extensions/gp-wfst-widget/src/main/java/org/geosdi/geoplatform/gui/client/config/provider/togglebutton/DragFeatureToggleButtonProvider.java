@@ -53,8 +53,8 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFST
  */
 public class DragFeatureToggleButtonProvider implements Provider<ToggleButton> {
 
-    private WFSToolbarObserver buttonObserver;
-    private WFSBaseMapMediator mapControlManager;
+    private final WFSToolbarObserver buttonObserver;
+    private final WFSBaseMapMediator mapControlManager;
 
     @Inject
     public DragFeatureToggleButtonProvider(

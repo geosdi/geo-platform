@@ -287,37 +287,37 @@ public class FeatureSelectionWidget extends GeoPlatformContentPanel
                                     @Override
                                     public void onCommandSuccess(
                                             GetAllFeatureResponse response) {
-                                                List<FeatureDetail> instances = Lists.newArrayListWithCapacity(
-                                                        response.getResult().getFeatures().size());
-                                                for (FeatureDTO feature : response.getResult().getFeatures()) {
-                                                    Map<String, String> attributes = feature.getAttributes().getAttributesMap();
-                                                    FeatureDetail featureDetail = new FeatureDetail(
-                                                            null,
-                                                            attributes);
-                                                    instances.add(featureDetail);
-                                                }
+                                        List<FeatureDetail> instances = Lists.newArrayListWithCapacity(
+                                                response.getResult().getFeatures().size());
+                                        for (FeatureDTO feature : response.getResult().getFeatures()) {
+                                            Map<String, String> attributes = feature.getAttributes().getAttributesMap();
+                                            FeatureDetail featureDetail = new FeatureDetail(
+                                                    null,
+                                                    attributes);
+                                            instances.add(featureDetail);
+                                        }
 
-                                                FeatureInstancesEvent e = new FeatureInstancesEvent();
-                                                e.setInstances(instances);
-                                                bus.fireEvent(e);
-                                                queryEnabled(true);
-                                            }
+                                        FeatureInstancesEvent e = new FeatureInstancesEvent();
+                                        e.setInstances(instances);
+                                        bus.fireEvent(e);
+                                        queryEnabled(true);
+                                    }
 
-                                            @Override
-                                            public void onCommandFailure(
-                                                    Throwable exception) {
-                                                        String errorMessage = "Error on WFS GetFeature request";
+                                    @Override
+                                    public void onCommandFailure(
+                                            Throwable exception) {
+                                        String errorMessage = "Error on WFS GetFeature request";
 
-                                                        GeoPlatformMessage.errorMessage(
-                                                                "GetFeture Service Error",
-                                                                errorMessage + " - " + exception.getMessage());
+                                        GeoPlatformMessage.errorMessage(
+                                                "GetFeture Service Error",
+                                                errorMessage + " - " + exception.getMessage());
 
-                                                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                                                errorMessage + " for "
-                                                                + layerSchemaBinder.getLayerSchemaDTO().getTypeName()
-                                                                + " layer.",
-                                                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                                                    }
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                errorMessage + " for "
+                                                + layerSchemaBinder.getLayerSchemaDTO().getTypeName()
+                                                + " layer.",
+                                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                                    }
 
                                 });
                     }

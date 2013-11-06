@@ -33,22 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider.event;
+package org.geosdi.geoplatform.gui.client.config.annotation;
 
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
+import com.google.inject.BindingAnnotation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class StatusBarFailedEventProvider extends GenericStatusBarEventProvider {
-
-    @Override
-    public FeatureStatusBarEvent get() {
-        return new FeatureStatusBarEvent("WFS Update Geometry Failed.",
-                FeatureStatusBar.FeatureStatusBarType.STATUS_ERROR);
-    }
-
+@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@BindingAnnotation
+public @interface EraseFeatureToggleButton {
 }

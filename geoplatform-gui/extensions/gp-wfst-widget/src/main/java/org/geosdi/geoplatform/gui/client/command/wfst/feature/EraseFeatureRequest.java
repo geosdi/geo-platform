@@ -33,37 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.command.wfst.feature;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureUnSelectListener;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.client.command.wfst.WFSTRequest;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectListenerProvider implements
-        Provider<FeatureUnSelectListener> {
+public class EraseFeatureRequest extends WFSTRequest {
 
-    private final Vector vectorLayer;
-    private final GPEventBus bus;
-    private final IFeatureIdBinder fidBinder;
+    private static final long serialVersionUID = -4092537906420120135L;
+    //
+    private String fid;
 
-    @Inject
-    public FeatureUnSelectListenerProvider(Vector theVectorLayer, GPEventBus bus,
-            IFeatureIdBinder theFidBinder) {
-        this.vectorLayer = theVectorLayer;
-        this.bus = bus;
-        this.fidBinder = theFidBinder;
+    public EraseFeatureRequest() {
+    }
+
+    /**
+     * @return the fid
+     */
+    public String getFid() {
+        return fid;
+    }
+
+    /**
+     * @param fid the fid to set
+     */
+    public void setFid(String fid) {
+        this.fid = fid;
     }
 
     @Override
-    public FeatureUnSelectListener get() {
-        return new FeatureUnSelectListener(vectorLayer, bus, fidBinder);
+    public String getCommandName() {
+        return "command.wfst.feature.EraseFeatureCommand";
     }
 
 }

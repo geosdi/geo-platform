@@ -39,6 +39,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import java.util.List;
 import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.erase.EraseFeatureDispatcherEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.insert.InsertFeatureDispatcherEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.modify.event.ModifyFeatureDispatcherEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
@@ -53,6 +54,7 @@ public interface FeatureDispatcherHandler extends EventHandler {
 
     static final InsertFeatureDispatcherEvent INSERT_FEATURE_EVENT = new InsertFeatureDispatcherEvent();
     static final ModifyFeatureDispatcherEvent MODIFY_FEATURE_EVENT = new ModifyFeatureDispatcherEvent();
+    static final EraseFeatureDispatcherEvent ERASE_FEATURE_EVENT = new EraseFeatureDispatcherEvent();
     //
     GwtEvent.Type<FeatureDispatcherHandler> TYPE = new GwtEvent.Type<FeatureDispatcherHandler>();
 
@@ -61,6 +63,8 @@ public interface FeatureDispatcherHandler extends EventHandler {
 
     void updateGeometry(VectorFeature modifiedFeature, String wktGeometry,
             VectorFeature oldFeature);
+    
+    void eraseFeature(VectorFeature feature);
 
     abstract class FeatureDispatcherEvent extends GwtEvent<FeatureDispatcherHandler> {
 

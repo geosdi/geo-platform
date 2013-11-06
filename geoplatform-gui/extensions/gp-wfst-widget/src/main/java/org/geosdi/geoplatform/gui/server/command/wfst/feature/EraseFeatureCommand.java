@@ -33,22 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.annotation;
+package org.geosdi.geoplatform.gui.server.command.wfst.feature;
 
-import com.google.inject.BindingAnnotation;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureResponse;
+import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.IWFSLayerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@BindingAnnotation
-public @interface StatusBarNotOkEvent {
-
+@Lazy(true)
+@Component(value = "command.wfst.feature.EraseFeatureCommand")
+public class EraseFeatureCommand implements
+        GPCommand<EraseFeatureRequest, EraseFeatureResponse> {
+    
+    private static final Logger logger = LoggerFactory.getLogger(
+            EraseFeatureCommand.class);
+    //
+    @Autowired
+    private IWFSLayerService wfsLayerService;
+    
+    @Override
+    public EraseFeatureResponse execute(EraseFeatureRequest request,
+            HttpServletRequest httpServletRequest) {
+        
+        logger.debug("##################### Executing {} Command", this.
+                getClass().getSimpleName());
+        
+        if (request.getFid() == null) {
+            logger.error("##############Feature FID is NULL.");
+            throw new GeoPlatformException("The Feature FID must not be null.");
+        }
+        
+        boolean result = this.wfsLayerService.transactionDelete(
+                request.getServerUrl(), request.getTypeName(),
+                request.getFid());
+        
+        logger.debug("#####################Erase Feature Result : {}",
+                result);
+        
+        return new EraseFeatureResponse(result);
+    }
+    
 }

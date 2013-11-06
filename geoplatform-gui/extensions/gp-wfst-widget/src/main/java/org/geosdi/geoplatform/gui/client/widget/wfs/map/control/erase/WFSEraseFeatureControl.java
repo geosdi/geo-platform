@@ -33,22 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.annotation;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.control.erase;
 
-import com.google.inject.BindingAnnotation;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.editor.map.control.DeleteEditorFeature;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.erase.EraseFeatureDispatcherEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.WFSFeatureDispatcher;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@BindingAnnotation
-public @interface StatusBarLoadingEvent {
+public class WFSEraseFeatureControl extends DeleteEditorFeature {
+
+    static final EraseFeatureDispatcherEvent event = FeatureDispatcherHandler.ERASE_FEATURE_EVENT;
+
+    @Inject
+    public WFSEraseFeatureControl(Vector vector) {
+        super(vector, true);
+    }
+
+    @Override
+    protected final void deleteFeature(VectorFeature feature) {
+        event.setFeature(feature);
+        
+        WFSFeatureDispatcher.fireFeatureDispatcherEvent(event);
+    }
 
 }

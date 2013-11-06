@@ -49,9 +49,9 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public class FeatureSelectListenerProvider implements
         Provider<FeatureSelectListener> {
 
-    private Vector vectorLayer;
-    private GPEventBus bus;
-    private IFeatureIdBinder fidBinder;
+    private final Vector vectorLayer;
+    private final GPEventBus bus;
+    private final IFeatureIdBinder fidBinder;
 
     @Inject
     public FeatureSelectListenerProvider(Vector theVectorLayer, GPEventBus bus,

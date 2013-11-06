@@ -33,37 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider;
+package org.geosdi.geoplatform.gui.client.config.provider.togglebutton;
 
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.ToggleButton;
 import javax.inject.Inject;
 import javax.inject.Provider;
-import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
-import org.geosdi.geoplatform.gui.client.widget.wfs.map.listener.FeatureUnSelectListener;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.EraseFeatureAction;
+import org.geosdi.geoplatform.gui.client.i18n.WFSTWidgetConstants;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.ResourceEditingToolBar;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSButtonKeyProvider;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectListenerProvider implements
-        Provider<FeatureUnSelectListener> {
+public class EraseFeatureToggleButtonProvider implements Provider<ToggleButton> {
 
-    private final Vector vectorLayer;
-    private final GPEventBus bus;
-    private final IFeatureIdBinder fidBinder;
+    private final EraseFeatureAction eraseFeatureAction;
 
     @Inject
-    public FeatureUnSelectListenerProvider(Vector theVectorLayer, GPEventBus bus,
-            IFeatureIdBinder theFidBinder) {
-        this.vectorLayer = theVectorLayer;
-        this.bus = bus;
-        this.fidBinder = theFidBinder;
+    public EraseFeatureToggleButtonProvider(
+            EraseFeatureAction theEraseFeatureAction) {
+        this.eraseFeatureAction = theEraseFeatureAction;
     }
 
     @Override
-    public FeatureUnSelectListener get() {
-        return new FeatureUnSelectListener(vectorLayer, bus, fidBinder);
+    public ToggleButton get() {
+        return new WFSToggleButton(
+                new Image(ResourceEditingToolBar.INSTANCE.erase()),
+                eraseFeatureAction, WFSButtonKeyProvider.ERASE_FEATURE.name(),
+                false) {
+
+                    {
+                        super.setTitle(WFSTWidgetConstants.INSTANCE.
+                                EraseFeatureToggleButtonProvider_titleText());
+                    }
+
+                };
     }
 
 }

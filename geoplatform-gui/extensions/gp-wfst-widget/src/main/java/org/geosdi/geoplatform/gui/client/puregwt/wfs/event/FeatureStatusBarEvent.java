@@ -53,12 +53,15 @@ public class FeatureStatusBarEvent extends GwtEvent<FeatureStatusBarHandler> {
         this.iconStyle = iconStyle;
     }
 
-    public String getText() {
-        return text;
+    public FeatureStatusBarEvent(FeatureStatusBarType iconStyle) {
+        this("", iconStyle);
     }
 
-    public FeatureStatusBarType getIconStyle() {
-        return iconStyle;
+    /**
+     * @param text the text to set
+     */
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override
@@ -70,4 +73,5 @@ public class FeatureStatusBarEvent extends GwtEvent<FeatureStatusBarHandler> {
     protected void dispatch(FeatureStatusBarHandler handler) {
         handler.setStatus(text, iconStyle);
     }
+
 }

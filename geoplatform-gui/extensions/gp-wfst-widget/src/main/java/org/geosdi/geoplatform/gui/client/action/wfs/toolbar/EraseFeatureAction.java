@@ -33,22 +33,54 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider.event;
+package org.geosdi.geoplatform.gui.client.action.wfs.toolbar;
 
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
+import com.google.gwt.event.dom.client.ClickEvent;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.action.wfs.BaseWFSToggleAction;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSColleagueKey;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFSToolbarObserver;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class StatusBarSuccessEventProvider extends GenericStatusBarEventProvider {
+public class EraseFeatureAction extends BaseWFSToggleAction {
+
+    @Inject
+    public EraseFeatureAction(WFSBaseMapMediator theBaseMapMediator,
+            WFSToolbarObserver theButtonObserver) {
+        super(theBaseMapMediator, theButtonObserver);
+    }
 
     @Override
-    public FeatureStatusBarEvent get() {
-        return new FeatureStatusBarEvent("WFS Update Geometry Done.",
-                FeatureStatusBar.FeatureStatusBarType.STATUS_OK);
+    public void disableEditorControl() {
+        super.deactivateWFSColleague();
+    }
+
+    @Override
+    public void resetEditorControl() {
+        super.resetWFSColleague();
+    }
+
+    @Override
+    public void onClick(ClickEvent event) {
+        WFSToggleButton button = (WFSToggleButton) event.getSource();
+
+        super.changeButtonState();
+
+        if (button.isDown()) {
+            super.activateWFSColleague();
+            buttonObserver.setButtonPressed(button);
+        }
+    }
+
+    @Override
+    public WFSColleagueKey getWFSColleagueKey() {
+        return WFSColleagueKey.ERASE_FEATURE;
     }
 
 }

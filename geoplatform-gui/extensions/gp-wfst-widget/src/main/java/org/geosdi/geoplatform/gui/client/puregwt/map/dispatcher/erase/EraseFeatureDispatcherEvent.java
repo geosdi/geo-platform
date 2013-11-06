@@ -33,21 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.annotation;
+package org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.erase;
 
-import com.google.inject.BindingAnnotation;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.geosdi.geoplatform.gui.client.puregwt.map.dispatcher.FeatureDispatcherHandler;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@BindingAnnotation
-public @interface StatusBarSuccessEvent {
+public class EraseFeatureDispatcherEvent
+        extends FeatureDispatcherHandler.FeatureDispatcherEvent {
+    
+    private VectorFeature feature;
+
+    /**
+     * @param theFeature the feature to set
+     */
+    public void setFeature(VectorFeature theFeature) {
+        this.feature = theFeature;
+    }
+
+    @Override
+    protected void dispatch(FeatureDispatcherHandler handler) {
+        handler.eraseFeature(feature);
+    }
+
 }

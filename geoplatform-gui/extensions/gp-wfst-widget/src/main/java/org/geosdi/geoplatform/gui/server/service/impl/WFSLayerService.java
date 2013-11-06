@@ -105,6 +105,20 @@ public class WFSLayerService implements IWFSLayerService {
     }
 
     @Override
+    public boolean transactionDelete(String serverURL, String typeName,
+            String fid) throws GeoPlatformException {
+
+        try {
+            return this.geoPlatformWFSClient.transactionDelete(serverURL,
+                    typeName, fid);
+        } catch (Exception ex) {
+            logger.error("\n\n@@@@ WFSLayerService Transaction Delete Error {} "
+                    + "@@@@@@@@@@@@@", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        }
+    }
+
+    @Override
     public boolean transactionInsert(String serverURL, String typeName,
             String targetNamespace,
             List<AttributeDTO> attributes) throws GeoPlatformException {

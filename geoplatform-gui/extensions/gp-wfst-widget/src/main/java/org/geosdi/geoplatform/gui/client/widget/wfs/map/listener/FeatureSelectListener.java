@@ -54,40 +54,44 @@ import org.gwtopenmaps.openlayers.client.util.Attributes;
  */
 public class FeatureSelectListener extends AbastractFeatureListener implements
         FeatureSelectedListener {
-    
+
     private final IFeatureIdBinder fidBinder;
-    
+
     public FeatureSelectListener(Vector theVectorLayer, GPEventBus bus,
             IFeatureIdBinder theFidBinder) {
         super(theVectorLayer, bus);
         this.fidBinder = theFidBinder;
     }
-    
+
     @Override
     public void onFeatureSelected(FeatureSelectedEvent event) {
         VectorFeature vectorFeature = event.getFeature();
-        
+
         vectorFeature.toState(
                 VectorFeature.State.Unknown);
-        
+
+        if (vectorLayer.getNumberOfFeatures() > 0) {
+            vectorLayer.removeAllFeatures();
+        }
+
         vectorLayer.addFeature(vectorFeature);
-        
+
         this.fidBinder.setFID(vectorFeature.getFID());
-        
+
         Attributes attributes = vectorFeature.getAttributes();
         List<String> attributeNames = attributes.getAttributeNames();
-        
+
         Map<String, String> attributeMap = Maps.<String, String>newHashMapWithExpectedSize(
                 attributeNames.size());
         for (String name : attributeNames) {
             String value = attributes.getAttributeAsString(name);
             attributeMap.put(name, value);
         }
-        
+
         FeatureDetail instance = new FeatureDetail(vectorFeature, attributeMap);
         this.attributeValuesEvent.setInstances(Arrays.asList(instance));
-        
+
         super.bus.fireEvent(this.attributeValuesEvent);
     }
-    
+
 }

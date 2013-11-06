@@ -96,6 +96,9 @@ public interface WFSTWidgetConstants extends Constants {
     @DefaultStringValue("Create New Feature")
     String EditFeatureToggleButtonProvider_titleText();
     
+    @DefaultStringValue("Erase Feature")
+    String EraseFeatureToggleButtonProvider_titleText();
+    
     /**
      * start DragFeatureToggleButtonProvider
      */

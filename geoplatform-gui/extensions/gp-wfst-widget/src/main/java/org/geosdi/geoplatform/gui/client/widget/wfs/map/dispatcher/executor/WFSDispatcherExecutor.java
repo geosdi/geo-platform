@@ -56,7 +56,7 @@ public class WFSDispatcherExecutor {
     protected ILayerSchemaBinder layerSchemaBinder;
     @Inject
     protected WFSDispatcherProgressBar progressBar;
-    private final FeatureStatusBarEvent successEvent;
+    protected final FeatureStatusBarEvent successEvent;
     protected final FeatureStatusBarEvent loadingEvent;
     protected final FeatureStatusBarEvent statusNotOk;
     protected final FeatureStatusBarEvent failedEvent;

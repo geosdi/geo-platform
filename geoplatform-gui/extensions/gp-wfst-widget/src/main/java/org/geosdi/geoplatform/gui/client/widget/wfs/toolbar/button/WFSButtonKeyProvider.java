@@ -47,5 +47,6 @@ public enum WFSButtonKeyProvider {
     GET_FEATURE, 
     RESHAPE_FEATURE, 
     RESIZE_FEATURE, 
-    ROTATE_FEATURE;
+    ROTATE_FEATURE,
+    ERASE_FEATURE;
 }

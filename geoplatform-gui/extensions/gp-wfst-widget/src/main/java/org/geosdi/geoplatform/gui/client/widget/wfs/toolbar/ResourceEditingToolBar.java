@@ -69,5 +69,8 @@ public interface ResourceEditingToolBar extends ClientBundle {
 
     @Source("images/resize.png")
     ImageResource resize();
+    
+    @Source("images/delete.png")
+    ImageResource erase();
 
 }

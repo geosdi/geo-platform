@@ -54,56 +54,56 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPDescribeFeatureDispatcher implements DescribeFeatureDispatcher {
-    
+
     private final LayerSchemaHandlerManager layerSchemaManager;
     private final DescribeFeatureTypeRequest describeFeatureRequest = GWT.<DescribeFeatureTypeRequest>create(
             DescribeFeatureTypeRequest.class);
-    
+
     @Inject
     public GPDescribeFeatureDispatcher(
             LayerSchemaHandlerManager theLayerSchemaManager) {
         this.layerSchemaManager = theLayerSchemaManager;
     }
-    
+
     @Override
     public void dispatchDescribeFeatureRequest(final GPLayerBean layer) {
         this.describeFeatureRequest.setServerUrl(layer.getDataSource());
         this.describeFeatureRequest.setTypeName(layer.getName());
-        
+
         ClientCommandDispatcher.getInstance().execute(
                 new GPClientCommand<DescribeFeatureTypeResponse>() {
-                    
+
                     private static final long serialVersionUID = 6130617748457405063L;
-                    
+
                     {
                         super.setCommandRequest(describeFeatureRequest);
                     }
-                    
+
                     @Override
                     public void onCommandSuccess(
                             DescribeFeatureTypeResponse response) {
-                                layerSchemaManager.forwardLayerSchema(
-                                        response.getResult(),
-                                        layer);
-                            }
-                            
-                            @Override
-                            public void onCommandFailure(Throwable exception) {
-                                String errorMessage = WFSTWidgetConstants.INSTANCE.
+                        layerSchemaManager.forwardLayerSchema(
+                                response.getResult(),
+                                layer);
+                    }
+
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        String errorMessage = WFSTWidgetConstants.INSTANCE.
                                 GPDescribeFeatureDispatcher_errorDescribeFeatureTypeRequestText();
-                                
-                                GeoPlatformMessage.errorMessage(
-                                        WFSTWidgetConstants.INSTANCE.
-                                        GPDescribeFeatureDispatcher_errorDescribeFeatureTypeTitleText(),
-                                        errorMessage + " - " + exception.getMessage());
-                                
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        WFSTWidgetMessages.INSTANCE.errorFeatureTypeRequestForLayerMessage(
-                                                errorMessage, layer.getName()),
-                                        SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                            }
-                            
+
+                        GeoPlatformMessage.errorMessage(
+                                WFSTWidgetConstants.INSTANCE.
+                                GPDescribeFeatureDispatcher_errorDescribeFeatureTypeTitleText(),
+                                errorMessage + " - " + exception.getMessage());
+
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                WFSTWidgetMessages.INSTANCE.errorFeatureTypeRequestForLayerMessage(
+                                        errorMessage, layer.getName()),
+                                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                    }
+
                 });
     }
-    
+
 }

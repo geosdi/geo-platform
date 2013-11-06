@@ -45,6 +45,7 @@ import com.google.gwt.user.client.ui.Widget;
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.annotation.DragFeatureToggleButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.EditFeatureToggleButton;
+import org.geosdi.geoplatform.gui.client.config.annotation.EraseFeatureToggleButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.GetFeatureToggleButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.ReshapeFeatureToggleButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.ResizeFeatureToggleButton;
@@ -72,7 +73,8 @@ public class EditingToolBarDialog extends Composite {
             @GetFeatureToggleButton ToggleButton info,
             @ReshapeFeatureToggleButton ToggleButton reshape,
             @ResizeFeatureToggleButton ToggleButton resize,
-            @RotateFeatureToggleButton ToggleButton rotate) {
+            @RotateFeatureToggleButton ToggleButton rotate,
+            @EraseFeatureToggleButton ToggleButton erase) {
 
         GeoPlatformStyleInjector.injectCss(
                 ResourceEditingToolBar.INSTANCE.wfstCss());
@@ -85,6 +87,7 @@ public class EditingToolBarDialog extends Composite {
         toolbarEditorPanel.add(rotate);
         toolbarEditorPanel.add(drag);
         toolbarEditorPanel.add(resize);
+        toolbarEditorPanel.add(erase);
 
     }
 

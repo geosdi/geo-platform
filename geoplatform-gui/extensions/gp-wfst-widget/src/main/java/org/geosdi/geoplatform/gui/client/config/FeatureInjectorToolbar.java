@@ -38,23 +38,28 @@ package org.geosdi.geoplatform.gui.client.config;
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.EditFeatureAction;
+import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.EraseFeatureAction;
 import org.geosdi.geoplatform.gui.client.action.wfs.toolbar.GetFeatureAction;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.InjectGetFeatureModelEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSLineFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSPointFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSPolygonFeatureControl;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.erase.WFSEraseFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.getfeature.WFSGetFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.modify.WFSModifyFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.FeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.WFSFeatureDispatcher;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.SimpleEditFeatureRepository;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.repository.WFSEditFeatureRepository;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.IWFSEraseFeatureExecutor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.IWFSInsertFeatureExecutor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.IWFSUpdateGeometryExecutor;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.WFSEraseFeatureExecutor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.WFSInsertFeatureExecutor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor.WFSUpdateGeometryExecutor;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSEditFeatureColleague;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSEraseFeatureColleague;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSGetFeatureColleague;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague.WFSModifyFeatureColleague;
 import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.EditingToolBarDialog;
@@ -89,11 +94,15 @@ public class FeatureInjectorToolbar extends AbstractGinModule {
         bind(WFSModifyFeatureColleague.class).asEagerSingleton();
         bind(WFSModifyFeatureControl.class).in(Singleton.class);
         
+        bind(WFSEraseFeatureColleague.class).asEagerSingleton();
+        bind(WFSEraseFeatureControl.class).in(Singleton.class);
+        
         bind(WFSEditFeatureRepository.class).to(
                 SimpleEditFeatureRepository.class).in(Singleton.class);
         
         bind(EditFeatureAction.class).in(Singleton.class);
         bind(GetFeatureAction.class).in(Singleton.class);
+        bind(EraseFeatureAction.class).in(Singleton.class);
         
         bind(InjectGetFeatureModelEvent.class).in(Singleton.class);
         
@@ -101,6 +110,9 @@ public class FeatureInjectorToolbar extends AbstractGinModule {
         
         bind(IWFSUpdateGeometryExecutor.class).to(
                 WFSUpdateGeometryExecutor.class).in(
+                        Singleton.class);
+        
+        bind(IWFSEraseFeatureExecutor.class).to(WFSEraseFeatureExecutor.class).in(
                 Singleton.class);
         
         bind(IWFSInsertFeatureExecutor.class).to(WFSInsertFeatureExecutor.class).in(

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.listener;
 
+import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.event.FeatureUnselectedListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -48,8 +49,12 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public class FeatureUnSelectListener extends AbastractFeatureListener implements
         FeatureUnselectedListener {
 
-    public FeatureUnSelectListener(Vector theVectorLayer, GPEventBus bus) {
+    private final IFeatureIdBinder fidBinder;
+
+    public FeatureUnSelectListener(Vector theVectorLayer, GPEventBus bus,
+            IFeatureIdBinder theFidBinder) {
         super(theVectorLayer, bus);
+        this.fidBinder = theFidBinder;
     }
 
     @Override
@@ -59,6 +64,8 @@ public class FeatureUnSelectListener extends AbastractFeatureListener implements
         vectorFeature.toState(VectorFeature.State.Unknown);
 
         vectorLayer.removeFeature(vectorFeature);
+        
+        this.fidBinder.setFID(null);
 
         this.attributeValuesEvent.clear();
         super.bus.fireEvent(this.attributeValuesEvent);

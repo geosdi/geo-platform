@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButt
  */
 public class EditFeatureToggleButtonProvider implements Provider<ToggleButton> {
 
-    private EditFeatureAction editAction;
+    private final EditFeatureAction editAction;
 
     @Inject
     public EditFeatureToggleButtonProvider(EditFeatureAction theEditAction) {

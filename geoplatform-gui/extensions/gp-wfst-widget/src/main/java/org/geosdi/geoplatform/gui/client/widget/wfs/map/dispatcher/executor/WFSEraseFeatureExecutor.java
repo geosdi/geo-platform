@@ -35,10 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.wfs.map.dispatcher.executor;
 
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest;
-import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryResponse;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureRequest;
+import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureResponse;
 import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureInstancesEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
@@ -52,99 +56,114 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WFSUpdateGeometryExecutor extends WFSDispatcherExecutor implements
-        IWFSUpdateGeometryExecutor {
+public class WFSEraseFeatureExecutor extends WFSDispatcherExecutor implements
+        IWFSEraseFeatureExecutor {
 
     @Inject
-    private UpdateFeatureGeometryRequest updateGeometryRequest;
+    private EraseFeatureRequest eraseFeatureRequest;
     @Inject
     private IFeatureIdBinder fidBinder;
     @Inject
     private Vector vector;
+    private final FeatureInstancesEvent resetGridEvent = new FeatureInstancesEvent();
 
     @Inject
-    public WFSUpdateGeometryExecutor() {
-        super(new FeatureStatusBarEvent("WFS Geometry Updating....",
+    public WFSEraseFeatureExecutor() {
+        super(new FeatureStatusBarEvent("WFS Erase Feature....",
                 FeatureStatusBar.FeatureStatusBarType.STATUS_LOADING),
-                new FeatureStatusBarEvent("WFS Update Geometry Done.",
+                new FeatureStatusBarEvent("WFS Erase Feature Done.",
                         FeatureStatusBar.FeatureStatusBarType.STATUS_OK),
-                new FeatureStatusBarEvent("WFS Update Geometry not done.",
+                new FeatureStatusBarEvent("WFS Erase Feature not done.",
                         FeatureStatusBar.FeatureStatusBarType.STATUS_NOT_OK),
-                new FeatureStatusBarEvent("WFS Update Geometry Failed.",
+                new FeatureStatusBarEvent("WFS Erase Feature Failed.",
                         FeatureStatusBar.FeatureStatusBarType.STATUS_ERROR));
     }
 
     @Override
-    public void executeGeometryUpdate(final VectorFeature modifiedFeature,
-            String wktGeometry, final VectorFeature oldFeature) {
-        progressBar.show();
+    public void eraseFeature(final VectorFeature feature) {
+        if (checkFIDState(feature)) {
+            GeoPlatformMessage.alertMessage("WFS-T Service",
+                    "The Selected Feature FID is null. Reactivate Get Feature "
+                    + "Control and then the Feature can be deleted.");
+            return;
+        }
 
-        setUpRequest(modifiedFeature, wktGeometry);
+        GeoPlatformMessage.confirmMessage("WFS-T Erase Feature", "Are you sure "
+                + "you want to delete the feature?",
+                new Listener<MessageBoxEvent>() {
+
+                    @Override
+                    public void handleEvent(MessageBoxEvent be) {
+                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                            doIt(feature);
+                        }
+                    }
+
+                });
+
+    }
+
+    final void doIt(final VectorFeature feature) {
+        progressBar.show();
+        setUpRequest(feature);
 
         GPClientCommandExecutor.executeCommand(
-                new GPClientCommand<UpdateFeatureGeometryResponse>() {
+                new GPClientCommand<EraseFeatureResponse>() {
 
-                    private static final long serialVersionUID = 5836033208636357032L;
+                    private static final long serialVersionUID = 5479389376112532915L;
 
                     {
-                        super.setCommandRequest(updateGeometryRequest);
+                        super.setCommandRequest(eraseFeatureRequest);
                     }
 
                     @Override
-                    public void onCommandSuccess(
-                            UpdateFeatureGeometryResponse response) {
-                                manageUpdateGeometryCommandSuccess(
-                                        response.getResult(),
-                                        modifiedFeature, oldFeature);
-                            }
+                    public void onCommandSuccess(EraseFeatureResponse response) {
+                        manageEraseFeatureCommandSuccess(response.getResult(),
+                                feature);
+                    }
 
-                            @Override
-                            public void onCommandFailure(Throwable exception) {
-                                manageUpdateGeometryCommandFailure(
-                                        modifiedFeature, oldFeature,
-                                        exception);
-                            }
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        manageEraseFeatureCommandFailure(exception);
+                    }
 
                 });
     }
 
-    final void setUpRequest(VectorFeature modifiedFeature,
-            String wktGeometry) {
-        bus.fireEvent(loadingEvent);
-
-        updateGeometryRequest.setFid(fidBinder.getFID());
-        updateGeometryRequest.setWktGeometry(wktGeometry);
-        updateGeometryRequest.setServerUrl(
-                layerSchemaBinder.getLayerSchemaDTO().getScope());
-        updateGeometryRequest.setTypeName(
-                layerSchemaBinder.getLayerSchemaDTO().getTypeName());
-        updateGeometryRequest.setGeometryAttributeName(
-                layerSchemaBinder.getLayerSchemaDTO().getGeometry().getName());
+    final boolean checkFIDState(VectorFeature feature) {
+        return (fidBinder.getFID() == null) && (feature.getFID() == null);
     }
 
-    final void manageUpdateGeometryCommandFailure(
-            VectorFeature modifiedFeature,
-            VectorFeature oldFeature, Throwable exception) {
-        String errorMessage = "Error on WFS Update Geometry request";
+    final void setUpRequest(VectorFeature feature) {
+        bus.fireEvent(loadingEvent);
+
+        eraseFeatureRequest.setFid((fidBinder.getFID() != null)
+                ? fidBinder.getFID() : feature.getFID());
+        eraseFeatureRequest.setServerUrl(
+                layerSchemaBinder.getLayerSchemaDTO().getScope());
+        eraseFeatureRequest.setTypeName(
+                layerSchemaBinder.getLayerSchemaDTO().getTypeName());
+    }
+
+    final void manageEraseFeatureCommandFailure(Throwable exception) {
+        String errorMessage = "Error on WFS Erase Feature request";
         GeoPlatformMessage.errorMessage(
                 "WFS Service Error",
                 errorMessage + " - " + exception.getMessage());
 
         progressBar.hide();
-        vector.removeFeature(modifiedFeature);
-        vector.addFeature(oldFeature);
 
         bus.fireEvent(failedEvent);
     }
 
-    final void manageUpdateGeometryCommandSuccess(Boolean result,
-            VectorFeature modifiedFeature, VectorFeature oldFeature) {
+    final void manageEraseFeatureCommandSuccess(Boolean result,
+            VectorFeature feature) {
         progressBar.hide();
         if (result) {
-            fireEvents();
+            vector.removeFeature(feature);
+            super.fireEvents();
+            bus.fireEvent(resetGridEvent);
         } else {
-            vector.removeFeature(modifiedFeature);
-            vector.addFeature(oldFeature);
             bus.fireEvent(statusNotOk);
         }
     }

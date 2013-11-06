@@ -62,4 +62,7 @@ public interface IWFSLayerService {
             String targetNamespace, List<AttributeDTO> attributes)
             throws GeoPlatformException;
 
+    boolean transactionDelete(String serverURL, String typeName, String fid)
+            throws GeoPlatformException;
+
 }

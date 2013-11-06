@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSMapMediator;
 
 /**
- * <p>Basis Enum used by {@link WFSMapControlColleague} Colleague to register
+ * <p>
+ * Basis Enum used by {@link WFSMapControlColleague} Colleague to register
  * themsels on {@link WFSMapMediator} Mediator</p>
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -48,5 +49,6 @@ public enum WFSColleagueKey {
 
     EDIT_FEATURE,
     GET_FEATURE,
-    MODIFY_FEATURE;
+    MODIFY_FEATURE,
+    ERASE_FEATURE;
 }

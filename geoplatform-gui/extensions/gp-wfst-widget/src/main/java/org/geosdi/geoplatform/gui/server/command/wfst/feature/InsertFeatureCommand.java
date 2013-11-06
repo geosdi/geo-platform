@@ -73,7 +73,7 @@ public class InsertFeatureCommand implements
                 request.getServerUrl(), request.getTypeName(),
                 request.getTargetNamespace(), request.getAttributes());
 
-        logger.debug("##################### Geometry Insert Resulet : {}",
+        logger.debug("##################### Geometry Insert Result : {}",
                 result);
 
         return new InsertFeatureResponse(result);

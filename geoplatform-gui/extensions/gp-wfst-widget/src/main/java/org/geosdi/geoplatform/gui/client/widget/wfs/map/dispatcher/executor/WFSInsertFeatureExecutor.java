@@ -41,14 +41,12 @@ import org.geosdi.geoplatform.connector.wfs.responce.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.responce.GeometryAttributeDTO;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.InsertFeatureResponse;
-import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarFailedEvent;
-import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarLoadingEvent;
-import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarNotOkEvent;
-import org.geosdi.geoplatform.gui.client.config.annotation.StatusBarSuccessEvent;
+import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.CloseAttributesWindowEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.feature.FeatureAttributesWindowBuilder;
 import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.edit.WFSEdit;
+import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -60,54 +58,60 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  */
 public class WFSInsertFeatureExecutor extends WFSDispatcherExecutor implements
         IWFSInsertFeatureExecutor {
-    
+
     @Inject
     private InsertFeatureRequest insertFeatureRequest;
     @Inject
     private CloseAttributesWindowEvent closeAttributesWindow;
-    
     @Inject
-    public WFSInsertFeatureExecutor(
-            @StatusBarLoadingEvent FeatureStatusBarEvent theLoadingEvent,
-            @StatusBarSuccessEvent FeatureStatusBarEvent theSuccessEvent,
-            @StatusBarNotOkEvent FeatureStatusBarEvent theStatusNotOk,
-            @StatusBarFailedEvent FeatureStatusBarEvent theFailedEvent) {
-        super(theLoadingEvent, theSuccessEvent, theStatusNotOk, theFailedEvent);
+    private IFeatureIdBinder fidBinder;
+
+    @Inject
+    public WFSInsertFeatureExecutor() {
+        super(new FeatureStatusBarEvent("WFS Insert Feature....",
+                FeatureStatusBar.FeatureStatusBarType.STATUS_LOADING),
+                new FeatureStatusBarEvent("WFS Insert Feature Done.",
+                        FeatureStatusBar.FeatureStatusBarType.STATUS_OK),
+                new FeatureStatusBarEvent("WFS Insert Feature not done.",
+                        FeatureStatusBar.FeatureStatusBarType.STATUS_NOT_OK),
+                new FeatureStatusBarEvent("WFS Insert Feature Failed.",
+                        FeatureStatusBar.FeatureStatusBarType.STATUS_ERROR));
     }
-    
+
     @Override
     public void insertFeature(final WFSEdit editorSource,
             List<AttributeDTO> featureAttributes) {
         progressBar.show();
-        
+
         setUpRequest(editorSource, featureAttributes);
-        
+
         GPClientCommandExecutor.executeCommand(
                 new GPClientCommand<InsertFeatureResponse>() {
-            
-            private static final long serialVersionUID = 6578231272584552338L;
-            
-            {
-                super.setCommandRequest(insertFeatureRequest);
-            }
-            
-            @Override
-            public void onCommandSuccess(InsertFeatureResponse response) {
-                manageInsertFeatureCommandSuccess(response.getResult(),
-                        editorSource);
-            }
-            
-            @Override
-            public void onCommandFailure(Throwable exception) {
-                manageInsertFeatureCommandFailure(exception, editorSource);
-            }
-            
-        });
+
+                    private static final long serialVersionUID = 6578231272584552338L;
+
+                    {
+                        super.setCommandRequest(insertFeatureRequest);
+                    }
+
+                    @Override
+                    public void onCommandSuccess(InsertFeatureResponse response) {
+                        manageInsertFeatureCommandSuccess(response.getResult(),
+                                editorSource);
+                    }
+
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        manageInsertFeatureCommandFailure(exception,
+                                editorSource);
+                    }
+
+                });
     }
-    
+
     final void setUpRequest(WFSEdit editorSource, List<AttributeDTO> attributes) {
         bus.fireEvent(loadingEvent);
-        
+
         insertFeatureRequest.setServerUrl(
                 layerSchemaBinder.getLayerSchemaDTO().getScope());
         insertFeatureRequest.setTypeName(
@@ -116,18 +120,18 @@ public class WFSInsertFeatureExecutor extends WFSDispatcherExecutor implements
                 layerSchemaBinder.getLayerSchemaDTO().getTargetNamespace());
         attributes.add(this.buildGeometryAttribute(editorSource));
         insertFeatureRequest.setAttributes(attributes);
-        
+
     }
-    
+
     final AttributeDTO buildGeometryAttribute(WFSEdit editorSource) {
         GeometryAttributeDTO geom = new GeometryAttributeDTO();
         geom.setName(layerSchemaBinder.getGeometryName());
         geom.setValue(editorSource.buildWktGeometry());
         geom.setSrid(new Integer(900913));
-        
+
         return geom;
     }
-    
+
     final void manageInsertFeatureCommandSuccess(Boolean result,
             WFSEdit editorSource) {
         progressBar.hide();
@@ -135,23 +139,24 @@ public class WFSInsertFeatureExecutor extends WFSDispatcherExecutor implements
             FeatureAttributesWindowBuilder.fireAttributesWindowEvent(
                     closeAttributesWindow);
             super.fireEvents();
+            fidBinder.setFID(null);
         } else {
             editorSource.resetWFSEditing();
             bus.fireEvent(statusNotOk);
         }
     }
-    
+
     final void manageInsertFeatureCommandFailure(Throwable exception,
             WFSEdit editorSource) {
         String errorMessage = "Error on WFS Insert Feature request";
         GeoPlatformMessage.errorMessage(
                 "WFS Service Error",
                 errorMessage + " - " + exception.getMessage());
-        
+
         progressBar.hide();
         editorSource.resetWFSEditing();
-        
+
         bus.fireEvent(failedEvent);
     }
-    
+
 }

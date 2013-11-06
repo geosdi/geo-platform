@@ -41,6 +41,7 @@ import com.google.gwt.user.client.ui.ToggleButton;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.config.annotation.DragFeatureToggleButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.EditFeatureToggleButton;
+import org.geosdi.geoplatform.gui.client.config.annotation.EraseFeatureToggleButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.GetFeatureToggleButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.ResetButton;
 import org.geosdi.geoplatform.gui.client.config.annotation.ReshapeFeatureToggleButton;
@@ -51,6 +52,7 @@ import org.geosdi.geoplatform.gui.client.config.provider.button.ResetButtonProvi
 import org.geosdi.geoplatform.gui.client.config.provider.button.SaveButtonProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.DragFeatureToggleButtonProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.EditFeatureToggleButtonProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.EraseFeatureToggleButtonProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.GetFeatureToggleButtonProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.ReshapeFeatureToggleButtonProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.ResizeFeatureToggleButtonProvider;
@@ -61,31 +63,35 @@ import org.geosdi.geoplatform.gui.client.config.provider.togglebutton.RotateFeat
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class FeatureInjectorButtonProvider extends AbstractGinModule {
-
+    
     @Override
     protected void configure() {
         bind(Button.class).annotatedWith(ResetButton.class).toProvider(
                 ResetButtonProvider.class);
-
+        
         bind(Button.class).annotatedWith(SaveButton.class).toProvider(
                 SaveButtonProvider.class);
-
+        
         bind(ToggleButton.class).annotatedWith(DragFeatureToggleButton.class).toProvider(
                 DragFeatureToggleButtonProvider.class).in(Singleton.class);
-
+        
         bind(ToggleButton.class).annotatedWith(EditFeatureToggleButton.class).toProvider(
                 EditFeatureToggleButtonProvider.class).in(Singleton.class);
-
+        
         bind(ToggleButton.class).annotatedWith(GetFeatureToggleButton.class).toProvider(
                 GetFeatureToggleButtonProvider.class).in(Singleton.class);
-
+        
         bind(ToggleButton.class).annotatedWith(ReshapeFeatureToggleButton.class).toProvider(
                 ReshapeFeatureToggleButtonProvider.class).in(Singleton.class);
-
+        
         bind(ToggleButton.class).annotatedWith(ResizeFeatureToggleButton.class).toProvider(
                 ResizeFeatureToggleButtonProvider.class).in(Singleton.class);
-
+        
         bind(ToggleButton.class).annotatedWith(RotateFeatureToggleButton.class).toProvider(
                 RotateFeatureToggleButtonProvider.class).in(Singleton.class);
+        
+        bind(ToggleButton.class).annotatedWith(EraseFeatureToggleButton.class).toProvider(
+                EraseFeatureToggleButtonProvider.class).in(Singleton.class);
     }
+
 }

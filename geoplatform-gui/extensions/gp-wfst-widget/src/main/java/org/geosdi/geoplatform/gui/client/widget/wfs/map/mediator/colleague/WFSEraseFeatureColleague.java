@@ -33,22 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config.provider.event;
+package org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.colleague;
 
-import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.statusbar.FeatureStatusBar;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.control.erase.WFSEraseFeatureControl;
+import org.geosdi.geoplatform.gui.client.widget.wfs.map.mediator.WFSBaseMapMediator;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class StatusBarLoadingEventProvider extends GenericStatusBarEventProvider {
+public class WFSEraseFeatureColleague implements WFSMapControlColleague {
+
+    @Inject
+    private WFSEraseFeatureControl wfsEraseFeatureControl;
+    @Inject
+    private MapWidget mapWidget;
+    private boolean addedControlToMap;
+
+    @Inject
+    public WFSEraseFeatureColleague(WFSBaseMapMediator baseMapMediator) {
+        baseMapMediator.registerWFSColleague(this);
+    }
 
     @Override
-    public FeatureStatusBarEvent get() {
-        return new FeatureStatusBarEvent("WFS Geometry Updating....",
-                FeatureStatusBar.FeatureStatusBarType.STATUS_LOADING);
+    public void activateColleague() {
+        if (!addedControlToMap) {
+            this.mapWidget.getMap().addControl(
+                    wfsEraseFeatureControl.getControl());
+            addedControlToMap = true;
+        }
+
+        this.wfsEraseFeatureControl.activateControl();
+    }
+
+    @Override
+    public void deactivateColleague() {
+        this.wfsEraseFeatureControl.deactivateControl();
+    }
+
+    @Override
+    public void resetColleague() {
+        this.mapWidget.getMap().removeControl(
+                wfsEraseFeatureControl.getControl());
+        this.wfsEraseFeatureControl.resetControl();
+        addedControlToMap = false;
+    }
+
+    @Override
+    public WFSColleagueKey getWFSColleagueKey() {
+        return WFSColleagueKey.ERASE_FEATURE;
     }
 
 }

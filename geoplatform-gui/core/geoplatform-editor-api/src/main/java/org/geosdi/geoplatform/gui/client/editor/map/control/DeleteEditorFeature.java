@@ -36,10 +36,9 @@
 package org.geosdi.geoplatform.gui.client.editor.map.control;
 
 import org.geosdi.geoplatform.gui.impl.map.control.GPVectorMapControl;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature;
-import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
+import org.gwtopenmaps.openlayers.client.control.SelectFeature;
+import org.gwtopenmaps.openlayers.client.control.SelectFeatureOptions;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.handler.Handler;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -47,76 +46,70 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class DrawEditorFeatureControl extends GPVectorMapControl {
+public abstract class DeleteEditorFeature extends GPVectorMapControl {
 
-    protected DrawFeature drawEditorControl;
+    protected SelectFeature deleteFeatureControl;
 
-    public DrawEditorFeatureControl(Vector vector, boolean lazy) {
+    public DeleteEditorFeature(Vector vector, boolean lazy) {
         super(vector, lazy);
     }
 
     @Override
-    protected DrawFeature initializeMapControl() {
+    protected SelectFeature initializeMapControl() {
         this.createControl();
 
-        return this.drawEditorControl;
+        return this.deleteFeatureControl;
     }
 
-    protected final DrawFeature.FeatureAddedListener createFeatureAddedListener() {
-        return new DrawFeature.FeatureAddedListener() {
-
-            @Override
-            public void onFeatureAdded(VectorFeature vf) {
-
-                manageAddedFeature(vf);
-
-            }
-
-        };
+    @Override
+    public SelectFeature getControl() {
+        return (this.deleteFeatureControl != null) ? this.deleteFeatureControl
+                : initializeMapControl();
     }
 
     @Override
     public void createControl() {
         if (!initialized) {
-            DrawFeatureOptions drawLineFeatureOption = new DrawFeatureOptions();
-            drawLineFeatureOption.onFeatureAdded(
-                    this.createFeatureAddedListener());
+            SelectFeatureOptions selectFeatureOptions = new SelectFeatureOptions();
 
-            this.drawEditorControl = new DrawFeature(vector, buildHandler(),
-                    drawLineFeatureOption);
+            selectFeatureOptions.clickFeature(
+                    new SelectFeature.ClickFeatureListener() {
 
-            initialized = true;
+                        @Override
+                        public void onFeatureClicked(VectorFeature vectorFeature) {
+                            deleteFeature(vectorFeature);
+                        }
+
+                    });
+
+            this.deleteFeatureControl = new SelectFeature(vector,
+                    selectFeatureOptions);
+
+            this.initialized = true;
         }
-    }
 
-    @Override
-    public DrawFeature getControl() {
-        return (this.drawEditorControl != null) ? this.drawEditorControl
-                : initializeMapControl();
     }
 
     @Override
     public void activateControl() {
-        this.drawEditorControl.activate();
+        this.deleteFeatureControl.activate();
     }
 
     @Override
     public void deactivateControl() {
-        this.drawEditorControl.deactivate();
+        this.deleteFeatureControl.deactivate();
+    }
+
+    @Override
+    public void resetControl() {
+        deactivateControl();
     }
 
     @Override
     public boolean isEnabled() {
-        return this.drawEditorControl.isActive();
+        return this.deleteFeatureControl.isActive();
     }
 
-    protected abstract <H extends Handler> H buildHandler();
-
-    /**
-     * <p>This method must be implemented by all Sub Classes.</>
-     *
-     * @param VectorFeature vf
-     */
-    protected abstract void manageAddedFeature(VectorFeature vf);
+    protected abstract void deleteFeature(final VectorFeature feature);
 
 }

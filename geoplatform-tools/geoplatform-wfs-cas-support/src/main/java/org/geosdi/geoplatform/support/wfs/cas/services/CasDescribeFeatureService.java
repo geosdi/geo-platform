@@ -45,6 +45,6 @@ import org.springframework.stereotype.Service;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Service(value = "gpCasDescribeFeatureService")
-@Profile(value = "cas")
+@Profile(value = "gs_cas")
 public class CasDescribeFeatureService extends GPDescribeFeatureService {
 }

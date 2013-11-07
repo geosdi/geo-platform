@@ -34,5 +34,10 @@
         <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryRequest"/>
         <when-property-is name="security.geoserver" value="gs_cas"/>
     </replace-with>
+    
+    <replace-with class="org.geosdi.geoplatform.gui.client.command.wfst.cas.feature.CasEraseFeatureRequest">
+        <when-type-is class="org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureRequest"/>
+        <when-property-is name="security.geoserver" value="gs_cas"/>
+    </replace-with>
 
 </module>

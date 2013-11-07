@@ -1634,7 +1634,7 @@
         <ubl-version>2.0</ubl-version>
         <jetty-version>7.6.8.v20121106</jetty-version>
 
-        <postgresql-version>9.2-1002-jdbc4</postgresql-version>
+        <postgresql-version>9.2-1003-jdbc4</postgresql-version>
         <postgis-jdbc-version>1.5.2</postgis-jdbc-version>
 
         <hibernate-version>3.6.10.Final</hibernate-version>

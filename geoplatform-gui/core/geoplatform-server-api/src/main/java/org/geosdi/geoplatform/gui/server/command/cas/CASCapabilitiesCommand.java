@@ -89,7 +89,7 @@ public class CASCapabilitiesCommand implements
 //            String proxyTicket = attributePrincipal.getProxyTicketFor("https://localhost:6443/geoserver/wms?request=GetCapabilities");
             String proxyTicket = attributePrincipal.getProxyTicketFor(
                     geoserverUrl + "/wms?wmtver=1.0.0&request=capabilities");
-            logger.info("Proxy ticket ***************: " + proxyTicket);
+            logger.debug("Proxy ticket ***************: " + proxyTicket);
             try {
                 serverUrl += "?ticket=" + URLEncoder.
                         encode(proxyTicket, "UTF-8");
@@ -99,13 +99,13 @@ public class CASCapabilitiesCommand implements
             logger.info("serverURL: " + serverUrl);
         }
 
-        logger.info("##################### Executing {} Command", this.
+        logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
         ArrayList<? extends GPLayerGrid> capabilitiesResult = this.ogcService.getCapabilities(
                 serverUrl, httpServletRequest, request.getIdServer());
 
-        logger.info("##################### FOUND {} ", capabilitiesResult);
+        logger.debug("##################### FOUND {} ", capabilitiesResult);
 
         return new BasicCapabilitiesResponse(capabilitiesResult);
     }

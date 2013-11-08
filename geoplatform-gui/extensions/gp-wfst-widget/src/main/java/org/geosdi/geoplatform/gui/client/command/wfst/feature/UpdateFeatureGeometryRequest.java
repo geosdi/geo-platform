@@ -110,4 +110,11 @@ public class UpdateFeatureGeometryRequest extends WFSTRequest {
         return "command.wfst.feature.UpdateFeatureGeometryCommand";
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " {" + "fid = " + fid 
+                + ", geometryAttributeName = " + geometryAttributeName 
+                + ", wktGeometry = " + wktGeometry + '}';
+    }
+
 }

@@ -78,6 +78,16 @@ public class CasUpdateFeatureGeometryCommand implements
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
+        logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@REQUEST UPDATE : {}",
+                request.getFid() + " - " + request.getWktGeometry() 
+                        + " - " + request.getGeometryAttributeName() 
+                        + " - " + request.getTypeName());
+
+        if (request.getFid() == null) {
+            logger.error("##############Feature FID is NULL.");
+            throw new GeoPlatformException("The Feature FID must not be null.");
+        }
+
         Assertion casAssertion = null;
         if (httpServletRequest != null) {
             casAssertion = (AssertionImpl) httpServletRequest.getSession().getAttribute(

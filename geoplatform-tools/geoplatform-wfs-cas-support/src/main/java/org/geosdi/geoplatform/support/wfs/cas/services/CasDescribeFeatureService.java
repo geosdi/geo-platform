@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.wfs.cas.services;
 
+import org.geosdi.geoplatform.connector.wfs.responce.LayerSchemaDTO;
 import org.geosdi.geoplatform.support.wfs.services.GPDescribeFeatureService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -47,4 +48,14 @@ import org.springframework.stereotype.Service;
 @Service(value = "gpCasDescribeFeatureService")
 @Profile(value = "gs_cas")
 public class CasDescribeFeatureService extends GPDescribeFeatureService {
+
+    @Override
+    public LayerSchemaDTO describeFeatureType(String serverURL, String typeName) throws Exception {
+        LayerSchemaDTO layerSchemaDTO = super.describeFeatureType(serverURL, typeName);
+        int paramIndex = serverURL.indexOf("?");
+        serverURL = (paramIndex != -1) ? serverURL.substring(0, paramIndex) : serverURL;
+        layerSchemaDTO.setScope(serverURL);
+        return layerSchemaDTO;
+    }
+
 }

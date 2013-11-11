@@ -236,7 +236,6 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         for (final AttributeDTO att : attributesDTO) {
             TextField<String> valueTextField = new TextField<String>();
             
-            valueTextField.setToolTip("Datatype: " + att.getType());
             
             valueTextField.setValidator(
                     AttributeCustomFieldsMap.getValidatorForAttributeType(
@@ -277,6 +276,8 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             valueColumn.setHeaderHtml(name);
             valueColumn.setEditor(valueEditor);
             valueColumn.setWidth(100);
+            
+            valueColumn.setToolTip("Datatype: " + att.getType());
             
             configs.add(valueColumn);
         }

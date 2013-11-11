@@ -79,9 +79,7 @@ public class CasUpdateFeatureGeometryCommand implements
                 getClass().getSimpleName());
 
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@REQUEST UPDATE : {}",
-                request.getFid() + " - " + request.getWktGeometry() 
-                        + " - " + request.getGeometryAttributeName() 
-                        + " - " + request.getTypeName());
+                request);
 
         if (request.getFid() == null) {
             logger.error("##############Feature FID is NULL.");

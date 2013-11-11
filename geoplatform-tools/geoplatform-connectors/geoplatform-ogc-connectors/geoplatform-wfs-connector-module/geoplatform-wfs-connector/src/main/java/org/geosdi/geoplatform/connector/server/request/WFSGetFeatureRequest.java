@@ -43,61 +43,70 @@ import org.geosdi.geoplatform.gui.shared.bean.BBox;
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @param <T>
  */
 public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
 
     /**
      * Gets the value of the type name query property.
+     * 
+     * @return QName
      */
     QName getTypeName();
 
     /**
      * Sets the value of the type name query property.
+     * 
+     * @param typeName
      */
     void setTypeName(QName typeName);
 
     /**
      * Gets the value of the feature ID query property.
+     * 
+     * @return List<String>
      */
     List<String> getFeatureIDs();
 
     /**
      * Sets the value of the feature ID query property.
+     * 
+     * @param FeatureIDs
      */
     void setFeatureIDs(List<String> FeatureIDs);
 
     /**
      * Gets the value of the BBox query property.
+     * 
+     * @return BBox
      */
     BBox getBBox();
 
     /**
      * Sets the value of the BBox query property.
+     * 
+     * @param bBox
      */
     void setBBox(BBox bBox);
 
     /**
      * Gets the value of the SRS query property.
+     * 
+     * @return srs
      */
     String getSRS();
 
     /**
      * Sets the value of the SRS query property.
+     * 
+     * @param srs
      */
     void setSRS(String srs);
-
-    /**
-     * Gets the value of the query property.
-     */
-//    List<QueryType> getQuery();
-//    
-    /**
-     * Sets the value of the query property.
-     */
-//    void setQuery(List<QueryType> value);
-//    
+    
     /**
      * Gets the value of the resultType property.
+     * 
+     * @return ResultType
      */
     String getResultType();
 
@@ -109,11 +118,15 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
      * <ul> <li>results</li> <li>hits</li> </ul>
      *
      * <p>Default value is "results".</p>
+     * 
+     * @param resultType
      */
     void setResultType(String resultType);
 
     /**
      * Gets the value of the outputFormat property.
+     * 
+     * @return OutputFormat
      */
     String getOutputFormat();
 
@@ -121,11 +134,15 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
      * Sets the value of the outputFormat property.
      *
      * <p>Default value is "text/xml; subtype=gml/3.1.1".</p>
+     * 
+     * @param outputFormat
      */
     void setOutputFormat(String outputFormat);
 
     /**
      * Gets the value of the maxFeatures property.
+     * 
+     * @return MaxFeatures Number
      */
     BigInteger getMaxFeatures();
 
@@ -135,6 +152,8 @@ public interface WFSGetFeatureRequest<T> extends GPConnectorRequest<T> {
      * <p>There is no default value defined and the absence of the attribute
      * means that all feature type instances in the result should should be
      * returned to the client.</p>
+     * 
+     * @param value
      */
     void setMaxFeatures(BigInteger value);
 }

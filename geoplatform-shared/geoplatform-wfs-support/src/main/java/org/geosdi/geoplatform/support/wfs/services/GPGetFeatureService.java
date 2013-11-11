@@ -126,7 +126,6 @@ public class GPGetFeatureService extends AbstractFeatureService
         request.setTypeName(qName);
         request.setSRS("EPSG:4326");
         request.setResultType(ResultTypeType.RESULTS.value());
-        request.setMaxFeatures(BigInteger.valueOf(1000L)); // TODO pass it as argument?
 
         return request;
     }

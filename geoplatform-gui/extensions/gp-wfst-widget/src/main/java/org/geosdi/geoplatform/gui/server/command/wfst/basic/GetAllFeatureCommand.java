@@ -71,11 +71,12 @@ public class GetAllFeatureCommand implements
                 getClass().getSimpleName());
 
         FeatureCollectionDTO result = this.wfsLayerService.getAllFeature(
-                request.getServerUrl(),
-                request.getTypeName(), request.getMaxFeatures());
+                request.getServerUrl(), request.getTypeName(),
+                request.getMaxFeatures());
 
         logger.debug("#################### Found {} ", result);
 
         return new GetAllFeatureResponse(result);
     }
+
 }

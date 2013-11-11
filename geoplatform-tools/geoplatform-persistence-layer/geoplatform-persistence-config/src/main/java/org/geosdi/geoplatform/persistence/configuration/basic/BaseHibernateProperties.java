@@ -53,7 +53,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BaseHibernateProperties
         implements PersistenceHibernateStrategy {
-    
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
@@ -61,19 +61,26 @@ public class BaseHibernateProperties
     //
     @Autowired(required = false)
     private GPHibernateCacheProvider gpCacheProviderSupport;
-    
+
     @Bean
     @Override
     public Properties hibernateProperties() {
         return new Properties() {
-            
+
             private static final long serialVersionUID = 3109256773218160485L;
-            
+
             {
                 logger.debug("Hibernate Properties " + gpHibernateProperties);
                 assert (gpHibernateProperties != null) : "The Persistence Hibernate Properties obj must not be null";
+
+                if (gpHibernateProperties.getHibDatabasePlatform() == null) {
+                    throw new IllegalStateException("Database Dialect must not "
+                            + "be null.");
+                }
+
                 this.put("hibernate.dialect",
                         gpHibernateProperties.getHibDatabasePlatform());
+
                 this.put("hibernate.hbm2ddl.auto",
                         gpHibernateProperties.getHibHbm2ddlAuto());
                 this.put("hibernate.show_sql",
@@ -103,9 +110,10 @@ public class BaseHibernateProperties
 //                }
                 this.put("hibernate.default_schema",
                         gpHibernateProperties.getHibDefaultSchema());
-                
+
                 if (gpCacheProviderSupport != null) {
-                    this.putAll(gpCacheProviderSupport.getCacheProviderProperties());
+                    this.putAll(
+                            gpCacheProviderSupport.getCacheProviderProperties());
                 }
             }
 

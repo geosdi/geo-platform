@@ -46,7 +46,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "gpHibernateProperties")
 public class GPPersistenceHibProperties {
 
-    @Value("persistence{db_databasePlatform}")
+    @Value("persistence{db_databasePlatform:@null}")
     private String hibDatabasePlatform;
     @Value("persistence{db_showSql:@null}")
     private Boolean hibShowSql;

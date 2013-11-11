@@ -21,7 +21,7 @@
         <db.url>${db.baseurl}/gp</db.url>
         <db.driverClassName>org.postgresql.Driver</db.driverClassName>
         <db.username>postgres</db.username>
-        <db.password>0x,postgres,0x</db.password>
+        <db.password></db.password>
         
         <dataset.file>src/test/resources/bootstrap-db.xml</dataset.file>
     </properties>
@@ -169,16 +169,29 @@
             <groupId>com.googlecode.genericdao</groupId>
             <artifactId>search-jpa-hibernate</artifactId>
         </dependency>
+        
+        <!-- H2 and GEODB -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.hibernatespatial</groupId>
+            <artifactId>hibernate-spatial-h2-geodb</artifactId>
+        </dependency>
 
         <!-- POSTGRES - POSTGIS -->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>org.postgis</groupId>
             <artifactId>postgis-jdbc</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -226,6 +239,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
         
         <dependency>

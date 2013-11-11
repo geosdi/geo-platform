@@ -83,11 +83,11 @@ import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
  */
 public class FeatureAttributesWidget extends GeoPlatformContentPanel
         implements FeatureAttributesHandler, IDateSelectedHandler {
-
+    
     static {
         mockColumnModel = new ColumnModel(new ArrayList<ColumnConfig>());
     }
-
+    
     public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
     private static final ColumnModel mockColumnModel;
     //
@@ -105,7 +105,7 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     //
     private GetFeatureControlBuilder featureControlBuilder;
     private WFSProtocolCRUDOptions featureCRUDProtocol;
-
+    
     @Inject
     public FeatureAttributesWidget(GPEventBus bus,
             TimeInputWidget timeInputWidget,
@@ -120,59 +120,59 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.featureControlBuilder = featureControlBuilder;
         this.featureCRUDProtocol = featureCRUDProtocol;
     }
-
+    
     public void reconfigureEditorGrid() {
         this.grid.reconfigure(store, this.prepareColumnModel());
     }
-
+    
     @Override
     protected void beforeRender() {
         super.beforeRender();
         this.grid.reconfigure(store, this.prepareColumnModel());
     }
-
+    
     @Override
     protected void afterRender() {
         super.afterRender();
         super.setId(ID);
     }
-
+    
     @Override
     public void addComponent() {
         this.createStore();
         this.createEditorGrid();
     }
-
+    
     @Override
     public void initSize() {
     }
-
+    
     protected void manageGridSize() {
         this.grid.setHeight(super.getHeight() - 25);
     }
-
+    
     @Override
     public void collapse() {
         this.increaseHeightEvent.setHeight(getHeight());
         this.bus.fireEvent(increaseHeightEvent);
         super.collapse();
     }
-
+    
     @Override
     public void setPanelProperties() {
         super.setScrollMode(Style.Scroll.AUTOX);
     }
-
+    
     @Override
     public void reset() {
         grid.stopEditing(true);
         store.removeAll();
-
+        
         vectors = null;
         bus.fireEvent(new ActionEnableEvent(false));
         super.setVScrollPosition(0);
     }
-
+    
     @Override
     public void dateSelected(String date) {
         FeatureAttributeValuesDetail featureAttributeValuesDetail = this.grid.
@@ -182,67 +182,69 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             store.update(featureAttributeValuesDetail);
         }
     }
-
+    
     private void createStore() {
         store = new ListStore<FeatureAttributeValuesDetail>();
         store.addStoreListener(
                 new StoreListener<FeatureAttributeValuesDetail>() {
-
-            @Override
-            public void storeClear(StoreEvent<FeatureAttributeValuesDetail> se) {
-                bus.fireEvent(new ActionEnableEvent(false));
-            }
-
-            @Override
-            public void storeUpdate(StoreEvent<FeatureAttributeValuesDetail> se) {
-                bus.fireEvent(new ActionEnableEvent(true));
-            }
-
-        });
+                    
+                    @Override
+                    public void storeClear(StoreEvent<FeatureAttributeValuesDetail> se) {
+                        bus.fireEvent(new ActionEnableEvent(false));
+                    }
+                    
+                    @Override
+                    public void storeUpdate(StoreEvent<FeatureAttributeValuesDetail> se) {
+                        bus.fireEvent(new ActionEnableEvent(true));
+                    }
+                    
+                });
     }
-
+    
     private void createEditorGrid() {
         grid = new EditorGrid<FeatureAttributeValuesDetail>(store,
                 mockColumnModel);
-
+        
         grid.setBorders(true);
         grid.setStripeRows(true);
         grid.setColumnLines(true);
         grid.setColumnResize(true);
         grid.setHeight(125);
         grid.setAutoWidth(true);
-
+        
         grid.setClicksToEdit(EditorGrid.ClicksToEdit.TWO);
         grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SIMPLE);
-
+        
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
-
+            
             @Override
             public void handleEvent(BaseEvent be) {
                 System.out.println("SELECTED @@@@@@@@@@ "
                         + grid.getSelectionModel().getSelectedItem());
             }
-
+            
         });
-
+        
         super.add(grid);
     }
-
+    
     private ColumnModel prepareColumnModel() {
         List<AttributeDTO> attributesDTO = this.layerSchemaBinder.getLayerSchemaDTO().getAttributes();
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(
                 attributesDTO.size());
-
+        
         for (final AttributeDTO att : attributesDTO) {
             TextField<String> valueTextField = new TextField<String>();
-
+            
+            valueTextField.setToolTip("Datatype: " + att.getType());
+            
             valueTextField.setValidator(
                     AttributeCustomFieldsMap.getValidatorForAttributeType(
-                    att.getType()));
-
+                            att.getType()));
+            
             valueTextField.setAutoValidate(true);
             CellEditor valueEditor = new CellEditor(valueTextField) {
-
+                
                 @Override
                 public Object postProcessValue(Object value) {
                     if (value == null) {
@@ -253,74 +255,74 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                             FeatureStatusBarType.STATUS_OK));
                     return value;
                 }
-
+                
             };
             if (att.isDateType()) {
                 FocusHandler focusHandler = new FocusHandler() {
-
+                    
                     @Override
                     public void onFocus(FocusEvent event) {
                         dataAttributeName = att.getName();
                         timeInputWidget.show();
                     }
-
+                    
                 };
-
+                
                 valueTextField.addHandler(focusHandler, FocusEvent.getType());
             }
-
+            
             ColumnConfig valueColumn = new ColumnConfig();
             String name = att.getName();
             valueColumn.setId(name);
             valueColumn.setHeaderHtml(name);
             valueColumn.setEditor(valueEditor);
             valueColumn.setWidth(100);
-
+            
             configs.add(valueColumn);
         }
-
+        
         return new ColumnModel(configs);
     }
-
+    
     @Override
     public void saveAttributes() {
-
+        
         for (Record record : store.getModifiedRecords()) {
             ModelData model = record.getModel();
             FeatureAttributeValuesDetail attribute = (FeatureAttributeValuesDetail) model;
-
+            
             for (String name : attribute.getProperties().keySet()) {
                 this.vectors.get(0).getAttributes().setAttribute(name,
                         attribute.getValue(name));
             }
-
+            
         }
-
+        
         this.vectors.get(0).toState(VectorFeature.State.Update);
-
+        
         this.bus.fireEvent(new FeatureStatusBarEvent("Transaction in Progress",
                 FeatureStatusBarType.STATUS_LOADING));
-
+        
         Timer t = new Timer() {
-
+            
             @Override
             public void run() {
                 featureControlBuilder.getWfsProtocol().commit(vectors.get(0),
                         featureCRUDProtocol);
             }
-
+            
         };
-
+        
         t.schedule(2000);
     }
-
+    
     @Override
     public void resetAttributes() {
         grid.stopEditing(true);
         store.rejectChanges();
         bus.fireEvent(new ActionEnableEvent(false));
     }
-
+    
     @Override
     public void postInstances(List<FeatureDetail> instaces) {
         assert (instaces != null) : "Feature instances must not be null.";
@@ -329,44 +331,43 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             System.out.println("*** NO FEATURE"); // TODO
             return;
         }
-
-
+        
         grid.mask("Retrieve " + numFeature + " feature instance attributes");
-
+        
         this.vectors = Lists.<VectorFeature>newArrayListWithCapacity(numFeature);
         List<FeatureAttributeValuesDetail> attValues = Lists.<FeatureAttributeValuesDetail>newArrayListWithCapacity(
                 numFeature);
-
+        
         for (FeatureDetail instace : instaces) {
             vectors.add(instace.getVector());
             attValues.add(new FeatureAttributeValuesDetail(
                     instace.getAttributes()));
         }
-
+        
         this.populateStore(attValues);
-
+        
         grid.unmask();
     }
-
+    
     private void populateStore(List<FeatureAttributeValuesDetail> attValues) {
         store.removeAll();
         store.add(attValues);
     }
-
+    
     @Override
     public void resetInstances() {
         this.reset();
     }
-
+    
     @Override
     public void successfulTransaction() {
         this.bus.fireEvent(new FeatureStatusBarEvent("Successful Transaction",
                 FeatureStatusBarType.STATUS_OK));
-
+        
         store.commitChanges();
         bus.fireEvent(new ActionEnableEvent(false));
     }
-
+    
     @Override
     public void maskAttributes(boolean mask) {
         if (mask) {
@@ -375,5 +376,5 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             grid.unmask();
         }
     }
-
+    
 }

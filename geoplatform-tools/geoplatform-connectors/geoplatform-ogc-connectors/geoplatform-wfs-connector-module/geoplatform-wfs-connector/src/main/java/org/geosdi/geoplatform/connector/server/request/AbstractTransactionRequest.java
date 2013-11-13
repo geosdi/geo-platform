@@ -110,7 +110,8 @@ public abstract class AbstractTransactionRequest<T> extends WFSRequest<T>
 
     @Override
     public String getInputFormat() {
-        return inputFormat;
+        return ((inputFormat != null) && !(inputFormat.isEmpty())) ? inputFormat
+                : "text/xml; subtype=gml/3.1.1";
     }
 
     @Override

@@ -46,6 +46,7 @@ public enum WFSTransactionParam {
     TRANSACTION_INSERT,
     ID_GEN,
     INPUT_FORMAT,
+    SRS_NAME,
     LOCKID,
     RELEASE_ACTION;
 }

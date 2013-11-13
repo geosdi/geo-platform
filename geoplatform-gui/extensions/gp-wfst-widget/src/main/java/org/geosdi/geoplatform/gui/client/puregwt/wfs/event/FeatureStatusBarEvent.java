@@ -48,6 +48,9 @@ public class FeatureStatusBarEvent extends GwtEvent<FeatureStatusBarHandler> {
     private String text;
     private FeatureStatusBarType iconStyle;
 
+    protected FeatureStatusBarEvent() {
+    }
+
     public FeatureStatusBarEvent(String text, FeatureStatusBarType iconStyle) {
         this.text = text;
         this.iconStyle = iconStyle;

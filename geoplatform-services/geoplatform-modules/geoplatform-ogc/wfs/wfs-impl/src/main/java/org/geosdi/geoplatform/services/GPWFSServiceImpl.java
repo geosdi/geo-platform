@@ -83,8 +83,8 @@ public class GPWFSServiceImpl implements GPWFSService {
                     typeName);
         } catch (Exception ex) {
             logger.error("##################DescribeFeatureType Request Error "
-                    + "for Layer : {} ", typeName + " - Cause : {}",
-                    ex.getMessage());
+                    + "for Layer : {} ", typeName + " - Cause : "
+                    + ex.getMessage());
             throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
         }
 
@@ -107,8 +107,8 @@ public class GPWFSServiceImpl implements GPWFSService {
             return gpGetFeatureService.getFeature(layerSchema, fid);
         } catch (Exception ex) {
             logger.error("##################GetFeatureByID Request Error "
-                    + "for Feature ID : {}", fid + " - Cause : {}",
-                    ex.getMessage());
+                    + "for Feature ID : {}", fid + " - Cause : "
+                    + ex.getMessage());
 
             throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
         }
@@ -155,7 +155,7 @@ public class GPWFSServiceImpl implements GPWFSService {
             return gpGetFeatureService.getFeature(layerSchema, maxFeatures);
         } catch (Exception ex) {
             logger.error("##################GetAllFeatures Request error - "
-                    + "Cause : {}", ex.getMessage());
+                    + "Cause : " + ex.getMessage());
 
             throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
         }
@@ -171,8 +171,8 @@ public class GPWFSServiceImpl implements GPWFSService {
                     fid, attributes);
         } catch (Exception ex) {
             logger.error("###################TranctionUpdate Request error for "
-                    + "Feature : {}", typeName + " - Cause : {}",
-                    ex.getMessage());
+                    + "Feature : {}", typeName + " - Cause : "
+                    + ex.getMessage());
 
             throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
         }
@@ -188,8 +188,7 @@ public class GPWFSServiceImpl implements GPWFSService {
                     targetNamespace, attributes);
         } catch (Exception ex) {
             logger.error("###################TransactionInsert error for "
-                    + "Feature : {}", typeName + " - Cause : {}",
-                    ex.getMessage());
+                    + "Feature : {}", typeName + " - Cause : " + ex.getMessage());
 
             throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
         }
@@ -205,7 +204,7 @@ public class GPWFSServiceImpl implements GPWFSService {
         } catch (Exception ex) {
             logger.error("###################TranctionDelete Request error for "
                     + "Feature : {}", typeName + " - FID : " + fid
-                    + " - Cause : {}", ex.getMessage());
+                    + " - Cause : " + ex.getMessage());
 
             throw new SoapFault(ex.getMessage(), SoapFault.FAULT_CODE_SERVER);
         }

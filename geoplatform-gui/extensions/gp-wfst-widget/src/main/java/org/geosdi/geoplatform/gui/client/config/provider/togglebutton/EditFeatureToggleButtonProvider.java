@@ -67,6 +67,7 @@ public class EditFeatureToggleButtonProvider implements Provider<ToggleButton> {
             {
                 super.setTitle(WFSTWidgetConstants.INSTANCE.
                         EditFeatureToggleButtonProvider_titleText());
+                super.addStyleName("midButton");
             }
 
         };

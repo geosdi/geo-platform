@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider.togglebutton;
 
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ToggleButton;
 import javax.inject.Inject;
@@ -52,10 +53,10 @@ import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.observer.WFST
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class DragFeatureToggleButtonProvider implements Provider<ToggleButton> {
-
+    
     private final WFSToolbarObserver buttonObserver;
     private final WFSBaseMapMediator mapControlManager;
-
+    
     @Inject
     public DragFeatureToggleButtonProvider(
             WFSBaseMapMediator theMapControlManager,
@@ -63,20 +64,33 @@ public class DragFeatureToggleButtonProvider implements Provider<ToggleButton> {
         this.buttonObserver = theButtonObserver;
         this.mapControlManager = theMapControlManager;
     }
-
+    
     @Override
     public ToggleButton get() {
         return new WFSToggleButton(
                 new Image(ResourceEditingToolBar.INSTANCE.drag()),
                 new DragFeatureAction(mapControlManager, buttonObserver),
                 WFSButtonKeyProvider.DRAG_FEATURE.name(), false) {
-
+            
             {
                 super.setTitle(WFSTWidgetConstants.INSTANCE.
                         DragFeatureToggleButtonProvider_titleText());
+                
+                super.addEnableToggleStateHandler();
+                super.addStyleName("midButton");
+                super.addAttachHandler(new AttachEvent.Handler() {
+                    
+                    @Override
+                    public void onAttachOrDetach(AttachEvent event) {
+                        if (event.isAttached()) {
+                            setEnabled(false);
+                        }
+                    }
+                    
+                });
             }
-
+            
         };
     }
-
+    
 }

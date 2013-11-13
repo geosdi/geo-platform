@@ -35,16 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.puregwt.togglebutton.handler;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface ToggleStateHandler extends EventHandler {
+public interface ToggleStateHandler extends EnableToggleStateHandler {
 
     Type<ToggleStateHandler> TYPE = new Type<ToggleStateHandler>();
 
     void enableToggleDown();
+
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider.togglebutton;
 
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ToggleButton;
 import javax.inject.Inject;
@@ -67,12 +68,27 @@ public class EraseFeatureToggleButtonProvider implements Provider<ToggleButton> 
                 eraseFeatureAction, WFSButtonKeyProvider.ERASE_FEATURE.name(),
                 false) {
 
-                    {
-                        super.setTitle(WFSTWidgetConstants.INSTANCE.
-                                EraseFeatureToggleButtonProvider_titleText());
+            {
+                super.setTitle(WFSTWidgetConstants.INSTANCE.
+                        EraseFeatureToggleButtonProvider_titleText());
+
+                super.addEnableToggleStateHandler();
+                
+                super.addStyleName("lastButton");
+                
+                super.addAttachHandler(new AttachEvent.Handler() {
+                    
+                    @Override
+                    public void onAttachOrDetach(AttachEvent event) {
+                        if (event.isAttached()) {
+                            setEnabled(false);
+                        }
                     }
 
-                };
+                });
+            }
+
+        };
     }
 
 }

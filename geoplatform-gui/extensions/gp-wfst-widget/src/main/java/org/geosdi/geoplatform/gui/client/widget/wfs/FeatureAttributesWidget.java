@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.wfs;
 
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.EditorEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -64,6 +64,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.map.event.FeatureMapHeightEvent
 import org.geosdi.geoplatform.gui.client.puregwt.map.event.IncreaseHeightEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.FeatureStatusBarEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.wfs.event.ResetStatusBarEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.FeatureAttributesHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.wfs.handler.IDateSelectedHandler;
 import org.geosdi.geoplatform.gui.client.widget.wfs.builder.AttributeCustomFieldsMap;
@@ -83,11 +84,11 @@ import org.gwtopenmaps.openlayers.client.protocol.WFSProtocolCRUDOptions;
  */
 public class FeatureAttributesWidget extends GeoPlatformContentPanel
         implements FeatureAttributesHandler, IDateSelectedHandler {
-    
+
     static {
         mockColumnModel = new ColumnModel(new ArrayList<ColumnConfig>());
     }
-    
+
     public static final String ID = WFSWidgetNames.FEATURE_ATTRIBUTES.name();
     private static final ColumnModel mockColumnModel;
     //
@@ -105,7 +106,10 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
     //
     private GetFeatureControlBuilder featureControlBuilder;
     private WFSProtocolCRUDOptions featureCRUDProtocol;
-    
+    private final FeatureStatusBarEvent successStatusBarEvent = new FeatureStatusBarEvent(
+            "", FeatureStatusBarType.STATUS_OK);
+    ResetStatusBarEvent resetStatusBarEvent = new ResetStatusBarEvent();
+
     @Inject
     public FeatureAttributesWidget(GPEventBus bus,
             TimeInputWidget timeInputWidget,
@@ -120,59 +124,59 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
         this.featureControlBuilder = featureControlBuilder;
         this.featureCRUDProtocol = featureCRUDProtocol;
     }
-    
+
     public void reconfigureEditorGrid() {
         this.grid.reconfigure(store, this.prepareColumnModel());
     }
-    
+
     @Override
     protected void beforeRender() {
         super.beforeRender();
         this.grid.reconfigure(store, this.prepareColumnModel());
     }
-    
+
     @Override
     protected void afterRender() {
         super.afterRender();
         super.setId(ID);
     }
-    
+
     @Override
     public void addComponent() {
         this.createStore();
         this.createEditorGrid();
     }
-    
+
     @Override
     public void initSize() {
     }
-    
+
     protected void manageGridSize() {
         this.grid.setHeight(super.getHeight() - 25);
     }
-    
+
     @Override
     public void collapse() {
         this.increaseHeightEvent.setHeight(getHeight());
         this.bus.fireEvent(increaseHeightEvent);
         super.collapse();
     }
-    
+
     @Override
     public void setPanelProperties() {
         super.setScrollMode(Style.Scroll.AUTOX);
     }
-    
+
     @Override
     public void reset() {
         grid.stopEditing(true);
         store.removeAll();
-        
+
         vectors = null;
         bus.fireEvent(new ActionEnableEvent(false));
         super.setVScrollPosition(0);
     }
-    
+
     @Override
     public void dateSelected(String date) {
         FeatureAttributeValuesDetail featureAttributeValuesDetail = this.grid.
@@ -182,151 +186,132 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             store.update(featureAttributeValuesDetail);
         }
     }
-    
+
     private void createStore() {
         store = new ListStore<FeatureAttributeValuesDetail>();
         store.addStoreListener(
                 new StoreListener<FeatureAttributeValuesDetail>() {
-                    
-                    @Override
-                    public void storeClear(StoreEvent<FeatureAttributeValuesDetail> se) {
-                        bus.fireEvent(new ActionEnableEvent(false));
-                    }
-                    
-                    @Override
-                    public void storeUpdate(StoreEvent<FeatureAttributeValuesDetail> se) {
-                        bus.fireEvent(new ActionEnableEvent(true));
-                    }
-                    
-                });
+
+            @Override
+            public void storeClear(StoreEvent<FeatureAttributeValuesDetail> se) {
+                bus.fireEvent(new ActionEnableEvent(false));
+            }
+
+            @Override
+            public void storeUpdate(StoreEvent<FeatureAttributeValuesDetail> se) {
+                bus.fireEvent(new ActionEnableEvent(true));
+            }
+
+        });
     }
-    
+
     private void createEditorGrid() {
         grid = new EditorGrid<FeatureAttributeValuesDetail>(store,
                 mockColumnModel);
-        
+
         grid.setBorders(true);
         grid.setStripeRows(true);
         grid.setColumnLines(true);
         grid.setColumnResize(true);
         grid.setHeight(125);
         grid.setAutoWidth(true);
-        
+
         grid.setClicksToEdit(EditorGrid.ClicksToEdit.TWO);
         grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SIMPLE);
-        
-        grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
-            
-            @Override
-            public void handleEvent(BaseEvent be) {
-                System.out.println("SELECTED @@@@@@@@@@ "
-                        + grid.getSelectionModel().getSelectedItem());
-            }
-            
-        });
-        
+
         super.add(grid);
     }
-    
+
     private ColumnModel prepareColumnModel() {
         List<AttributeDTO> attributesDTO = this.layerSchemaBinder.getLayerSchemaDTO().getAttributes();
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayListWithCapacity(
                 attributesDTO.size());
-        
+
         for (final AttributeDTO att : attributesDTO) {
-            TextField<String> valueTextField = new TextField<String>();
-            
-            
+            final TextField<String> valueTextField = new TextField<String>();
+
             valueTextField.setValidator(
                     AttributeCustomFieldsMap.getValidatorForAttributeType(
-                            att.getType()));
-            
+                    att.getType()));
+
             valueTextField.setAutoValidate(true);
-            CellEditor valueEditor = new CellEditor(valueTextField) {
-                
-                @Override
-                public Object postProcessValue(Object value) {
-                    if (value == null) {
-                        bus.fireEvent(new FeatureStatusBarEvent(
-                            "The value \"" + value + "\" is not correct",
-                            FeatureStatusBarType.STATUS_NOT_OK));
-                        return value;
-                    }
-                    bus.fireEvent(new FeatureStatusBarEvent(
-                            "The value \"" + value + "\" is correct",
-                            FeatureStatusBarType.STATUS_OK));
-                    return value;
-                }
-                
-            };
+
             if (att.isDateType()) {
                 FocusHandler focusHandler = new FocusHandler() {
-                    
+
                     @Override
                     public void onFocus(FocusEvent event) {
                         dataAttributeName = att.getName();
                         timeInputWidget.show();
                     }
-                    
+
                 };
-                
+
                 valueTextField.addHandler(focusHandler, FocusEvent.getType());
             }
-            
+
             ColumnConfig valueColumn = new ColumnConfig();
             String name = att.getName();
             valueColumn.setId(name);
             valueColumn.setHeaderHtml(name);
-            valueColumn.setEditor(valueEditor);
+            valueColumn.setEditor(buildCellEditor(valueTextField));
             valueColumn.setWidth(100);
-            
+
             valueColumn.setToolTip("Datatype: " + att.getType());
-            
+
             configs.add(valueColumn);
         }
-        
+
         return new ColumnModel(configs);
     }
-    
+
     @Override
     public void saveAttributes() {
-        
+        /**
+         * TODO FIXE ME PASSING TO COMMNAD PATTERN *
+         */
         for (Record record : store.getModifiedRecords()) {
             ModelData model = record.getModel();
             FeatureAttributeValuesDetail attribute = (FeatureAttributeValuesDetail) model;
-            
+
             for (String name : attribute.getProperties().keySet()) {
-                this.vectors.get(0).getAttributes().setAttribute(name,
-                        attribute.getValue(name));
+
+                System.out.println("############ Name : " + name
+                        + " - Value : " + attribute.getValue(name));
+
+                if ((name != null) && !(name.isEmpty())) {
+                    this.vectors.get(0).getAttributes().setAttribute(name,
+                            attribute.getValue(name));
+                }
             }
-            
+
         }
-        
+
         this.vectors.get(0).toState(VectorFeature.State.Update);
-        
+
         this.bus.fireEvent(new FeatureStatusBarEvent("Transaction in Progress",
                 FeatureStatusBarType.STATUS_LOADING));
-        
+
         Timer t = new Timer() {
-            
+
             @Override
             public void run() {
                 featureControlBuilder.getWfsProtocol().commit(vectors.get(0),
                         featureCRUDProtocol);
             }
-            
+
         };
-        
+
         t.schedule(2000);
     }
-    
+
     @Override
     public void resetAttributes() {
         grid.stopEditing(true);
         store.rejectChanges();
         bus.fireEvent(new ActionEnableEvent(false));
     }
-    
+
     @Override
     public void postInstances(List<FeatureDetail> instaces) {
         assert (instaces != null) : "Feature instances must not be null.";
@@ -335,43 +320,43 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             System.out.println("*** NO FEATURE"); // TODO
             return;
         }
-        
+
         grid.mask("Retrieve " + numFeature + " feature instance attributes");
-        
+
         this.vectors = Lists.<VectorFeature>newArrayListWithCapacity(numFeature);
         List<FeatureAttributeValuesDetail> attValues = Lists.<FeatureAttributeValuesDetail>newArrayListWithCapacity(
                 numFeature);
-        
+
         for (FeatureDetail instace : instaces) {
             vectors.add(instace.getVector());
             attValues.add(new FeatureAttributeValuesDetail(
                     instace.getAttributes()));
         }
-        
+
         this.populateStore(attValues);
-        
+
         grid.unmask();
     }
-    
+
     private void populateStore(List<FeatureAttributeValuesDetail> attValues) {
         store.removeAll();
         store.add(attValues);
     }
-    
+
     @Override
     public void resetInstances() {
         this.reset();
     }
-    
+
     @Override
     public void successfulTransaction() {
         this.bus.fireEvent(new FeatureStatusBarEvent("Successful Transaction",
                 FeatureStatusBarType.STATUS_OK));
-        
+
         store.commitChanges();
         bus.fireEvent(new ActionEnableEvent(false));
     }
-    
+
     @Override
     public void maskAttributes(boolean mask) {
         if (mask) {
@@ -380,5 +365,35 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
             grid.unmask();
         }
     }
-    
+
+    final CellEditor buildCellEditor(TextField<String> textField) {
+        CellEditor valueEditor = new CellEditor(textField) {
+
+            @Override
+            public Object postProcessValue(Object value) {
+                if (value == null) {
+                    return value;
+                }
+                successStatusBarEvent.setText("The value \"" + value
+                        + "\" is correct");
+                bus.fireEvent(successStatusBarEvent);
+
+                return value;
+            }
+
+        };
+
+        valueEditor.addListener(Events.CancelEdit,
+                new Listener<EditorEvent>() {
+
+            @Override
+            public void handleEvent(EditorEvent be) {
+                bus.fireEvent(resetStatusBarEvent);
+            }
+
+        });
+
+        return valueEditor;
+    }
+
 }

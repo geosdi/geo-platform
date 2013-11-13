@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.config.provider.togglebutton;
 
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ToggleButton;
 import javax.inject.Inject;
@@ -74,6 +75,19 @@ public class RotateFeatureToggleButtonProvider implements Provider<ToggleButton>
             {
                 super.setTitle(WFSTWidgetConstants.INSTANCE.
                         RotateFeatureToggleButtonProvider_titleText());
+
+                super.addEnableToggleStateHandler();
+                super.addStyleName("midButton");
+                super.addAttachHandler(new AttachEvent.Handler() {
+
+                    @Override
+                    public void onAttachOrDetach(AttachEvent event) {
+                        if (event.isAttached()) {
+                            setEnabled(false);
+                        }
+                    }
+
+                });
             }
 
         };

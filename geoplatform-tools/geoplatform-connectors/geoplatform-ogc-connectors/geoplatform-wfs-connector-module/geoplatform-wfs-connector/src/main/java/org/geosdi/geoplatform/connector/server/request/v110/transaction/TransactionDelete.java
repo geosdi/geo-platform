@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.connector.server.request.WFSTransactionRequest;
 import org.geosdi.geoplatform.xml.filter.v110.AbstractIdType;
 import org.geosdi.geoplatform.xml.filter.v110.FeatureIdType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
+import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
 import org.geosdi.geoplatform.xml.wfs.v110.DeleteElementType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,10 +80,10 @@ public class TransactionDelete implements ITransactionOperationStrategy {
         DeleteElementType elementType = new DeleteElementType();
         elementType.setTypeName(request.getTypeName());
 
-        FeatureIdType fid = new FeatureIdType();
-        fid.setFid(request.getFID());
+        GmlObjectIdType fid = new GmlObjectIdType();
+        fid.setId(request.getFID());
 
-        JAXBElement<FeatureIdType> fidElement = filterFactory.createFeatureId(
+        JAXBElement<GmlObjectIdType> fidElement = filterFactory.createGmlObjectId(
                 fid);
 
         FilterType filter = new FilterType();

@@ -40,6 +40,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ToggleButton;
 import org.geosdi.geoplatform.gui.client.action.wfs.WFSToggleAction;
+import org.geosdi.geoplatform.gui.client.puregwt.togglebutton.event.EnableToggleStateEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.togglebutton.event.ToggleStateEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
@@ -51,13 +52,13 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
  */
 public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
 
-    private static final GPEventBus toggleStateBus = new GPEventBusImpl();
-    private static final WFSClickEvent wfsClickEvent = new WFSClickEvent();
-    private static final ToggleStateEvent toggleStateEvent = new ToggleStateEvent();
+    static final GPEventBus toggleStateBus = new GPEventBusImpl();
+    static final WFSClickEvent wfsClickEvent = new WFSClickEvent();
+    static final ToggleStateEvent toggleStateEvent = new ToggleStateEvent();
     //
-    private final String id;
-    private final boolean forceReset;
-    private WFSToggleAction action;
+    final String id;
+    final boolean forceReset;
+    WFSToggleAction action;
 
     public WFSToggleButton(String theId, boolean isForceReset) {
         super();
@@ -104,8 +105,19 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
     }
 
     @Override
+    public void enableToggleState(boolean state) {
+        super.setEnabled(state);
+    }
+
+    @Override
     public HandlerRegistration addToggleStateHandler() {
         return toggleStateBus.addHandlerToSource(TYPE, id, this);
+    }
+
+    @Override
+    public HandlerRegistration addEnableToggleStateHandler() {
+        return toggleStateBus.addHandlerToSource(TYPE,
+                EnableToggleEnum.ENABLE_STATE, this);
     }
 
     @Override
@@ -127,6 +139,10 @@ public class WFSToggleButton extends ToggleButton implements WFSEditorButton {
 
     public static void fireToggleStateEvent(String source) {
         toggleStateBus.fireEventFromSource(toggleStateEvent, source);
+    }
+
+    public static void fireEnableToggleStateEvent(EnableToggleStateEvent event) {
+        toggleStateBus.fireEventFromSource(event, EnableToggleEnum.ENABLE_STATE);
     }
 
     @Override

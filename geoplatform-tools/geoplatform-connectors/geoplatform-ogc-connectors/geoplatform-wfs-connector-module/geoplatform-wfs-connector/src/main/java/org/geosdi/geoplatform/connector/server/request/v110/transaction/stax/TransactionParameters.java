@@ -53,6 +53,7 @@ public class TransactionParameters {
         parameters.put(WFSTransactionParam.TRANSACTION_INSERT, "Insert");
         parameters.put(WFSTransactionParam.ID_GEN, "idgen");
         parameters.put(WFSTransactionParam.INPUT_FORMAT, "inputFormat");
+        parameters.put(WFSTransactionParam.SRS_NAME, "srsName");
         parameters.put(WFSTransactionParam.LOCKID, "LockId");
         parameters.put(WFSTransactionParam.RELEASE_ACTION, "releaseAction");
     }

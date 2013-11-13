@@ -33,48 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.wfs.map.listener;
+package org.geosdi.geoplatform.gui.client.puregwt.togglebutton.handler;
 
-import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
-import org.geosdi.geoplatform.gui.client.puregwt.togglebutton.event.EnableToggleStateEvent;
-import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
-import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.gwtopenmaps.openlayers.client.event.FeatureUnselectedListener;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FeatureUnSelectListener extends AbastractFeatureListener implements
-        FeatureUnselectedListener {
+public interface EnableToggleStateHandler extends EventHandler {
 
-    private final IFeatureIdBinder fidBinder;
-    final EnableToggleStateEvent disableToggleState = new EnableToggleStateEvent(
-            false);
+    enum EnableToggleEnum {
 
-    public FeatureUnSelectListener(Vector theVectorLayer, GPEventBus bus,
-            IFeatureIdBinder theFidBinder) {
-        super(theVectorLayer, bus);
-        this.fidBinder = theFidBinder;
+        ENABLE_STATE;
     }
 
-    @Override
-    public void onFeatureUnselected(FeatureUnselectedEvent event) {
-        VectorFeature vectorFeature = event.getFeature();
-
-        vectorFeature.toState(VectorFeature.State.Unknown);
-
-        vectorLayer.removeFeature(vectorFeature);
-
-        WFSToggleButton.fireEnableToggleStateEvent(disableToggleState);
-
-        this.fidBinder.setFID(null);
-
-        this.attributeValuesEvent.clear();
-        super.bus.fireEvent(this.attributeValuesEvent);
-    }
+    void enableToggleState(boolean state);
 
 }

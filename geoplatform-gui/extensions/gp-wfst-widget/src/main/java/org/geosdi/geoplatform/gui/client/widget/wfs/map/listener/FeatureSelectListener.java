@@ -41,6 +41,8 @@ import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.binder.IFeatureIdBinder;
 import org.geosdi.geoplatform.gui.client.model.wfs.FeatureDetail;
+import org.geosdi.geoplatform.gui.client.puregwt.togglebutton.event.EnableToggleStateEvent;
+import org.geosdi.geoplatform.gui.client.widget.wfs.toolbar.button.WFSToggleButton;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.gwtopenmaps.openlayers.client.event.FeatureSelectedListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -56,6 +58,8 @@ public class FeatureSelectListener extends AbastractFeatureListener implements
         FeatureSelectedListener {
 
     private final IFeatureIdBinder fidBinder;
+    private final EnableToggleStateEvent enableToggleState = new EnableToggleStateEvent(
+            true);
 
     public FeatureSelectListener(Vector theVectorLayer, GPEventBus bus,
             IFeatureIdBinder theFidBinder) {
@@ -77,6 +81,8 @@ public class FeatureSelectListener extends AbastractFeatureListener implements
         vectorLayer.addFeature(vectorFeature);
 
         this.fidBinder.setFID(vectorFeature.getFID());
+
+        WFSToggleButton.fireEnableToggleStateEvent(enableToggleState);
 
         Attributes attributes = vectorFeature.getAttributes();
         List<String> attributeNames = attributes.getAttributeNames();

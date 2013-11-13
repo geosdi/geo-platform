@@ -68,6 +68,7 @@ public class GetFeatureToggleButtonProvider implements Provider<ToggleButton> {
             {
                 super.setTitle(WindowsConstants.INSTANCE.infoTitleText());
                 super.addToggleStateHandler();
+                super.addStyleName("fistButton");
             }
 
         };

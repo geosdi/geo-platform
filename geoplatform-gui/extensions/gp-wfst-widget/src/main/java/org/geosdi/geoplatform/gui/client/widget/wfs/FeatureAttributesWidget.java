@@ -247,6 +247,9 @@ public class FeatureAttributesWidget extends GeoPlatformContentPanel
                 @Override
                 public Object postProcessValue(Object value) {
                     if (value == null) {
+                        bus.fireEvent(new FeatureStatusBarEvent(
+                            "The value \"" + value + "\" is not correct",
+                            FeatureStatusBarType.STATUS_NOT_OK));
                         return value;
                     }
                     bus.fireEvent(new FeatureStatusBarEvent(

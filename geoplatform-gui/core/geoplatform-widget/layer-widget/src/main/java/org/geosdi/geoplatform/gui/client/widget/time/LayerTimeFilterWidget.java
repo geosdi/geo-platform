@@ -465,7 +465,7 @@ public class LayerTimeFilterWidget extends GeoPlatformWindow {
                 }
             }
         };
-        animationTimer.scheduleRepeating(2000);
+        animationTimer.scheduleRepeating(5000);
     }
 
     private void stopPlayer() {

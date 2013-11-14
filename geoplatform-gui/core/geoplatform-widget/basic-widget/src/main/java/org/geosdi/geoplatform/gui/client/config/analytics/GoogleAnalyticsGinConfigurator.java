@@ -33,25 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config;
+package org.geosdi.geoplatform.gui.client.config.analytics;
 
 import com.google.gwt.inject.client.AbstractGinModule;
-import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.event.RefreshLayerXMPPEvent;
-import org.geosdi.geoplatform.gui.puregwt.xmpp.event.ReloadTreeXMPPEvent;
+import com.google.inject.Singleton;
+import org.geosdi.geoplatform.gui.googleanalytics.GPGoogleAnalytics;
+import org.geosdi.geoplatform.gui.googleanalytics.GPGoogleAnalyticsImpl;
+import org.geosdi.geoplatform.gui.googleanalytics.GPGoogleAnalyticsNavigationTracker;
+import org.geosdi.geoplatform.gui.googleanalytics.annotations.GPGaAccount;
+import org.geosdi.geoplatform.gui.googleanalytics.dispatcher.GPAnalyticsDispatcher;
+import org.geosdi.geoplatform.gui.googleanalytics.dispatcher.GPAnalyticsDispatcherImpl;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class BasicGinConfigurator extends AbstractGinModule {
+public class GoogleAnalyticsGinConfigurator extends AbstractGinModule {
 
     @Override
     protected void configure() {
-        bind(ReloadTreeXMPPEvent.class).asEagerSingleton();
-        bind(RefreshLayerXMPPEvent.class).asEagerSingleton();
-        bind(ToolbarActionRegistar.class).asEagerSingleton();
-        bind(MenuActionRegistar.class).asEagerSingleton();
+        bind(GPEventBus.class).to(GPEventBusImpl.class).in(Singleton.class);
+        bind(GPAnalyticsDispatcher.class).to(GPAnalyticsDispatcherImpl.class).in(Singleton.class);
+        
+        bind(GPGoogleAnalytics.class).to(GPGoogleAnalyticsImpl.class).asEagerSingleton();
+        bind(GPGoogleAnalyticsNavigationTracker.class).asEagerSingleton();
+        
+        bindConstant().annotatedWith(GPGaAccount.class).to("UA-3919470-7");
     }
 }

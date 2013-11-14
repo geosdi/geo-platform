@@ -33,50 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.config;
+package org.geosdi.geoplatform.gui.client.config.analytics;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
-import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetMessages;
-import org.geosdi.geoplatform.gui.client.widget.security.GPLoginAccessManager;
-import org.geosdi.geoplatform.gui.client.widget.security.SecurityLoginChainOfResponsibility;
-import org.geosdi.geoplatform.gui.model.message.CommandActionMediator;
+import org.geosdi.geoplatform.gui.googleanalytics.dispatcher.GPAnalyticsDispatcher;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@GinModules(value = {BasicGinConfigurator.class})
-public interface BasicGinInjector extends Ginjector {
+@GinModules(value = {GoogleAnalyticsGinConfigurator.class})
+public interface GoogleAnalyticsGinInjector extends Ginjector {
 
     public static class MainInjector {
 
-        private static BasicGinInjector instance;
+        private static GoogleAnalyticsGinInjector instance;
 
         private MainInjector() {
         }
 
-        public static BasicGinInjector getInstance() {
+        public static GoogleAnalyticsGinInjector getInstance() {
             if (instance == null) {
-                instance = GWT.create(BasicGinInjector.class);
+                instance = GWT.create(GoogleAnalyticsGinInjector.class);
             }
 
             return instance;
         }
     }
 
-    public ToolbarActionRegistar getToolbarActionRegistar();
-
-    public MenuActionRegistar getMenuActionRegistar();
-
-    public CommandActionMediator getCommandActionMediator();
-
-    public SecurityLoginChainOfResponsibility getSecurityLoginChainOfResponsibility();
-
-    public GPLoginAccessManager getLoginAccessManager();
-
-    public BasicWidgetMessages getBasicWidgetMessages();
+    
+    GPAnalyticsDispatcher getAnalyticsDispatcher();
 }

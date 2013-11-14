@@ -24,6 +24,7 @@
 	
     <source path="client" />
     <source path="shared" />
+    <source path="googleanalytics" />
 	
     <source path="configuration" />
     <source path="configuration/mvc" />

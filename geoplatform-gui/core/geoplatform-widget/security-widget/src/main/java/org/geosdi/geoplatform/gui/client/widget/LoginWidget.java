@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.gui.client.GPXMPPClient;
 import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.basic.BasicLoginResponse;
 import org.geosdi.geoplatform.gui.client.config.SecurityGinInjector;
+import org.geosdi.geoplatform.gui.client.config.analytics.GoogleAnalyticsGinInjector;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.i18n.SecurityModuleConstants;
@@ -56,7 +57,10 @@ import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.googleanalytics.dispatcher.GPAnalyticsDispatcher;
+import org.geosdi.geoplatform.gui.googleanalytics.request.GPGoogleModuleRequest;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.googleanalytics.event.GPGoogleNavigationEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -64,6 +68,13 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
  */
 public class LoginWidget extends GPAdvancedSecurityWidget implements
         ILoginManager {
+
+    static {
+        analyticsDispatcher = GoogleAnalyticsGinInjector.MainInjector.getInstance().getAnalyticsDispatcher();
+    }
+
+    static final GPAnalyticsDispatcher analyticsDispatcher;
+    //
 
     private LoginStatus status;
     private EventType eventOnSuccess;
@@ -123,28 +134,28 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements
 
         ClientCommandDispatcher.getInstance().execute(
                 new GPClientCommand<BasicLoginResponse>(new BasicLoginRequest(
-                this.userName.getValue(), this.password.getValue())) {
-            private static final long serialVersionUID = -1178797454775088815L;
+                                this.userName.getValue(), this.password.getValue())) {
+                                    private static final long serialVersionUID = -1178797454775088815L;
 
-            @Override
-            public void onCommandSuccess(BasicLoginResponse response) {
-                loginFailureMessage = "";
-                executeLoginOperations(response.getResult());
-                loginXMPPClient(userName.getValue(), password.getValue(),
-                        response.getResult().getHostXmppServer());
-            }
+                                    @Override
+                                    public void onCommandSuccess(BasicLoginResponse response) {
+                                        loginFailureMessage = "";
+                                        executeLoginOperations(response.getResult());
+                                        loginXMPPClient(userName.getValue(), password.getValue(),
+                                                response.getResult().getHostXmppServer());
+                                    }
 
-            @Override
-            public void onCommandFailure(Throwable exception) {
-                loginFailureMessage = exception.getMessage();
-                errorConnection();
-                status.setStatus(
-                        LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.
-                        getValue(),
-                        LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.
-                        getValue());
-            }
-        });
+                                    @Override
+                                    public void onCommandFailure(Throwable exception) {
+                                        loginFailureMessage = exception.getMessage();
+                                        errorConnection();
+                                        status.setStatus(
+                                                LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.
+                                                getValue(),
+                                                LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.
+                                                getValue());
+                                    }
+                                });
     }
 
     private void executeLoginOperations(IGPAccountDetail resultDetails) {
@@ -158,6 +169,7 @@ public class LoginWidget extends GPAdvancedSecurityWidget implements
                 resultDetails.getTreeOptions());
         Registry.register(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name(),
                 resultDetails);
+        analyticsDispatcher.dispatchEvent(new GPGoogleNavigationEvent(new GPGoogleModuleRequest("#" + resultDetails.getUsername() + "-login-sucess")));
     }
 
     @Override

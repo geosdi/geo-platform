@@ -20,6 +20,11 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-sharing</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>gp-shared-beans</artifactId>
             <version>${project.version}</version>
         </dependency>

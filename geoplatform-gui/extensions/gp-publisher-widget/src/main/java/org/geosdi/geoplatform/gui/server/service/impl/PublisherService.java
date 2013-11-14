@@ -71,9 +71,9 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IPublisherService;
 import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
+import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.slf4j.LoggerFactory;
@@ -130,7 +130,7 @@ public class PublisherService implements IPublisherService {
         credsProvider.setCredentials(
                 new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
                 new UsernamePasswordCredentials(userNameClusterReload,
-                passwordClusterReload));
+                        passwordClusterReload));
         httpclient.setCredentialsProvider(credsProvider);
     }
 
@@ -147,10 +147,10 @@ public class PublisherService implements IPublisherService {
         try {
             resultList = geoPlatformPublishClient.processEPSGResult(
                     account.getNaturalID(), this.trasformPreviewLayerList(
-                    previewLayerList));
+                            previewLayerList));
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);
-            throw new GeoPlatformException("Error on publish shape.");
+            throw new GeoPlatformException("Error on publish shape: " + ex.getMessage());
         }
         return PublisherFileUtils.generateJSONObjects(resultList);
     }
@@ -161,9 +161,13 @@ public class PublisherService implements IPublisherService {
         InfoPreview infoPreview;
         for (EPSGLayerData previewLayer : previewLayerList) {
             infoPreview = new InfoPreview(null, null,
-                    previewLayer.getFeatureName(),
-                    0d, 0d, 0d, 0d, previewLayer.getEpsgCode(),
-                    previewLayer.getStyleName(), previewLayer.isIsShape());
+                    previewLayer.getFeatureName(), 0d, 0d, 0d, 0d,
+                    previewLayer.getEpsgCode(), previewLayer.getStyleName(),
+                    previewLayer.isIsShape(), previewLayer.isIsPresent());
+            if (previewLayer.getPublishAction() != null) {
+                infoPreview.setLayerPublishAction(LayerPublishAction.valueOf(previewLayer.getPublishAction()));
+                infoPreview.setNewName(previewLayer.getNewName());
+            }
             infoPreviewList.add(infoPreview);
             logger.info("Layer preview transformed: " + infoPreview.toString());
         }

@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import com.google.common.collect.Lists;
+import java.util.List;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -44,20 +47,27 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 public class EPSGLayerData extends GeoPlatformBeanModel {
 
     public static final String NAME = "name";
+    public static final String NEW_NAME = "newName";
     public static final String CRS = "crs";
     public static final String IS_SHAPE = "isShape";
+    public static final String IS_PRESENT = "isPresent";
     public static final String STYLE_NAME = "styleName";
+//    public static final String PUBLISH_ACTION_LIST = "publishActionList";
+    public static final String PUBLISH_ACTION = "publishAction";
     private static final long serialVersionUID = 3153334351994515962L;
+
+    private transient List<LayerPublishAction> layerPublishActions;
 
     public EPSGLayerData() {
     }
 
     public EPSGLayerData(String featureName, String epsgCode, String styleName,
-            boolean isShape) {
+            boolean isShape, boolean isPresent) {
         this.setFeatureName(featureName);
         this.setEpsgCode(epsgCode);
         this.setStyleName(styleName);
         this.setIsShape(isShape);
+        this.setIsPresent(isPresent);
     }
 
     public String getEpsgCode() {
@@ -84,11 +94,48 @@ public class EPSGLayerData extends GeoPlatformBeanModel {
         super.set(EPSGLayerData.IS_SHAPE, isShape);
     }
 
+    public Boolean isIsPresent() {
+        return super.get(EPSGLayerData.IS_PRESENT);
+    }
+
+    public final void setIsPresent(boolean isPresent) {
+        super.set(EPSGLayerData.IS_PRESENT, isPresent);
+        if (isPresent) {
+            List<LayerPublishAction> publishActionList = Lists.
+                    <LayerPublishAction>newArrayList(LayerPublishAction.RENAME,
+                            LayerPublishAction.OVERRIDE);
+            if (isIsShape()) {
+                publishActionList.add(LayerPublishAction.APPEND);
+            }
+            this.setPublishActions(publishActionList);
+        }
+    }
+
     public String getStyleName() {
         return super.get(EPSGLayerData.STYLE_NAME);
     }
 
     public final void setStyleName(String styleName) {
         super.set(EPSGLayerData.STYLE_NAME, styleName);
+    }
+
+    public void setPublishActions(List<LayerPublishAction> layerPublishActions) {
+        this.layerPublishActions = layerPublishActions;
+    }
+
+    public List<LayerPublishAction> getPublishActions() {
+        return this.layerPublishActions;
+    }
+
+    public String getPublishAction() {
+        return super.get(EPSGLayerData.PUBLISH_ACTION);
+    }
+
+    public void setPublishAction(String publishAction) {
+        super.set(EPSGLayerData.PUBLISH_ACTION, publishAction);
+    }
+
+    public String getNewName() {
+        return super.get(EPSGLayerData.NEW_NAME);
     }
 }

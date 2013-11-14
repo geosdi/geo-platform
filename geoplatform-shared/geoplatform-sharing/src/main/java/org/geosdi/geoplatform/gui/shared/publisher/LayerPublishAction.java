@@ -33,54 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.List;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.responce.InfoPreview;
-import org.geosdi.geoplatform.responce.LayerAttribute;
+package org.geosdi.geoplatform.gui.shared.publisher;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface IGPPublisherService {
+public enum LayerPublishAction {
 
-    List<InfoPreview> analyzeZIPEPSG(String sessionID, String userName, File file)
-            throws ResourceNotFoundFault;
+    OVERRIDE, APPEND, RENAME;
 
-    List<InfoPreview> processEPSGResult(String userName, List<InfoPreview> previewLayerList)
-            throws ResourceNotFoundFault;
-
-    String loadStyle(String layerDatasource, String styleName)
-            throws ResourceNotFoundFault;
-
-    List<LayerAttribute> describeFeatureType(String layerName)
-            throws ResourceNotFoundFault;
-
-    boolean publishStyle(String styleToPublish)
-            throws ResourceNotFoundFault;
-
-    boolean putStyle(String styleToPublish, String styleName)
-            throws ResourceNotFoundFault;
-
-    public boolean existsStyle(String styleName);
-
-    InfoPreview analyzeTIFInPreview(String sessionID, File file, boolean overwrite)
-            throws ResourceNotFoundFault;
-
-    List<InfoPreview> getPreviewDataStores(String userName) throws ResourceNotFoundFault;
-
-    boolean publish(String sessionID, String workspace, String dataStoreName,
-            String layerName)
-            throws ResourceNotFoundFault, FileNotFoundException;
-
-    boolean publishAll(String sessionID, String workspace, String dataStoreName,
-            List<String> layerNames) throws ResourceNotFoundFault, FileNotFoundException;
-
-    boolean publishAllofPreview(String sessionID, String workspace,
-            String dataStoreName)
-            throws ResourceNotFoundFault, FileNotFoundException;
 }

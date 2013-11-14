@@ -207,7 +207,7 @@ public class UploadServlet extends HttpServlet {
         } else if (extension.equalsIgnoreCase(GPExtensions.TIF.toString())
                 || extension.equalsIgnoreCase(GPExtensions.TIFF.toString())) {
             try {
-                previewList = Lists.newArrayList();
+                previewList = Lists.<InfoPreview>newArrayList();
                 previewList.add(this.gpPublisherUploader.
                         analyzeTIFInPreview(
                         username, uploadedFile, true));

@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
+import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl;
@@ -92,7 +93,7 @@ public class CasProcessEPSGResultCommand implements
         try {
             resultList = casPublisherService.processEPSGResult(
                     account.getNaturalID(), this.trasformPreviewLayerList(
-                    previewLayerList));
+                            previewLayerList));
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);
             throw new GeoPlatformException("Error on publish shape.");
@@ -108,7 +109,12 @@ public class CasProcessEPSGResultCommand implements
             infoPreview = new InfoPreview(null, null,
                     previewLayer.getFeatureName(),
                     0d, 0d, 0d, 0d, previewLayer.getEpsgCode(),
-                    previewLayer.getStyleName(), previewLayer.isIsShape());
+                    previewLayer.getStyleName(), previewLayer.isIsShape(),
+                    previewLayer.isIsPresent());
+            if (previewLayer.getPublishAction() != null) {
+                infoPreview.setLayerPublishAction(LayerPublishAction.valueOf(previewLayer.getPublishAction()));
+                infoPreview.setNewName(previewLayer.getNewName());
+            }
             infoPreviewList.add(infoPreview);
             logger.info("Layer preview transformed: " + infoPreview.toString());
         }

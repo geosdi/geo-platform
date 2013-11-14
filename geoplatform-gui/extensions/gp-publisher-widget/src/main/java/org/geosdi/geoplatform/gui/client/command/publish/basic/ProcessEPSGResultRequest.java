@@ -67,8 +67,7 @@ public class ProcessEPSGResultRequest implements GPCommandRequest {
     /**
      * @param previewLayerList the previewLayerList to set
      */
-    public void setPreviewLayerList(
-            List<EPSGLayerData> previewLayerList) {
+    public void setPreviewLayerList(List<EPSGLayerData> previewLayerList) {
         this.previewLayerList = previewLayerList;
     }
 

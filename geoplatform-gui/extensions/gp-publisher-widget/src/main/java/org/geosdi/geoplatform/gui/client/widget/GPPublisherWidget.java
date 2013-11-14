@@ -148,7 +148,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
     @Override
     public void showEPSGTable(String jsonString) {
         StringBuilder layerProblems = new StringBuilder();
-        List<PreviewLayer> epsgLayerList = Lists.newArrayList();
+        List<PreviewLayer> epsgLayerList = Lists.<PreviewLayer>newArrayList();
         PreviewLayerList previewLayers = PreviewLayerList.JSON.read(jsonString);
         for (PreviewLayer previewLayer : previewLayers.getPreviewLayers()) {
             if (previewLayer.getMessage().contains("Some problems")) {

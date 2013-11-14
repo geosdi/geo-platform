@@ -66,13 +66,13 @@ public class ProcessEPSGResultCommand implements
     public ProcessEPSGResultResponse execute(ProcessEPSGResultRequest request,
             HttpServletRequest httpServletRequest) {
 
-        logger.debug("##################### Executing {} Command", this.
+        logger.info("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
         String result = this.publisherService.processEPSGResult(
                 httpServletRequest, request.getPreviewLayerList());
 
-        logger.debug("#################### Found {} ", result);
+        logger.info("#################### Found {} ", result);
 
         return new ProcessEPSGResultResponse(result);
     }

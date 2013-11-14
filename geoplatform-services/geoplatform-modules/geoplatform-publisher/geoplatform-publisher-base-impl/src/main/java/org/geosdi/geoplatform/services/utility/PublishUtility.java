@@ -36,11 +36,15 @@
 package org.geosdi.geoplatform.services.utility;
 
 import java.io.*;
+import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
+import org.geosdi.geoplatform.responce.InfoPreview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -152,6 +156,141 @@ public class PublishUtility {
         return destination;
     }
 
+    private static boolean renameZipShp(String userName, InfoPreview infoPreview,
+            String tempUserDir) throws ResourceNotFoundFault {
+        String tempUserZipDir = PublishUtility.createDir(tempUserDir + PublishUtility.ZIP_DIR_NAME);
+        boolean result = false;
+        LayerPublishAction layerPublishAction = infoPreview.getLayerPublishAction();
+        String newName = userName + "_shp_" + infoPreview.getNewName();
+        if (layerPublishAction != null && layerPublishAction.equals(LayerPublishAction.RENAME)
+                && newName != null && !newName.equalsIgnoreCase(infoPreview.getDataStoreName())) {
+            String fileName = tempUserZipDir + infoPreview.getDataStoreName() + ".zip";
+            File previousFile = new File(fileName);
+            ZipFile zipSrc = null;
+            String renameDirPath = tempUserZipDir + "rename" + System.getProperty("file.separator");
+            try {
+                PublishUtility.createDir(renameDirPath);
+                logger.debug("********* ManageRename renameDirPath: " + renameDirPath);
+                //Decomprime il contenuto dello zip nella cartella rename
+                zipSrc = new ZipFile(previousFile);
+                Enumeration<? extends ZipEntry> entries = zipSrc.entries();
+                while (entries.hasMoreElements()) {
+                    ZipEntry entry = entries.nextElement();
+                    PublishUtility.extractEntryToFile(entry, zipSrc, renameDirPath);
+                }
+                logger.debug("********* ManageRename element unzipped");
+                //Dopo l'estrazione rinominare e creare zip
+                compressFiles(tempUserZipDir, renameDirPath, newName + ".zip",
+                        infoPreview.getDataStoreName(), newName);
+                logger.debug("********* ManageRename after compress file");
+                //Cancellare vecchio zip
+                previousFile.delete();
+                logger.debug("********* ManageRename after delete previous file");
+                result = Boolean.TRUE;
+            } catch (Exception e) {
+                logger.error("ERRORE : " + e);
+                throw new ResourceNotFoundFault(e.getMessage());
+            } finally {
+                try {
+                    zipSrc.close();
+                    //Cancella cartella rename
+                    File renameDir = new File(renameDirPath);
+                    PublishUtility.deleteDir(renameDir);
+                    logger.debug("********* ManageRename succesfully removed rename dir");
+                } catch (IOException ex) {
+                }
+            }
+            logger.debug("Layer renamed: " + result);
+            if (result) {
+                infoPreview.setDataStoreName(newName);
+            }
+        }
+        return result;
+    }
+
+    private static boolean renameTif(String userName, InfoPreview infoPreview,
+            String tempUserDir) throws ResourceNotFoundFault {
+        boolean result = false;
+        String tempUserTifDir = PublishUtility.createDir(tempUserDir + PublishUtility.TIF_DIR_NAME);
+        LayerPublishAction layerPublishAction = infoPreview.getLayerPublishAction();
+        String newName = userName + "_" + infoPreview.getNewName();
+        if (layerPublishAction != null && layerPublishAction.equals(LayerPublishAction.RENAME)
+                && newName != null && !newName.equalsIgnoreCase(infoPreview.getDataStoreName())) {
+            String origName = infoPreview.getDataStoreName();
+            String fileName = tempUserTifDir + origName + ".tif";
+            File previousFile = new File(fileName);
+            previousFile.renameTo(new File(tempUserTifDir + newName + ".tif"));
+            previousFile.delete();
+            //
+            String SLDFileName = origName + ".sld";
+            File fileSLD = new File(tempUserTifDir, SLDFileName);
+            if (fileSLD.exists()) {
+                File filePublished = PublishUtility.copyFile(fileSLD,
+                        tempUserTifDir, newName + ".sld", true);
+                fileSLD.delete();
+//                info.sld = this.publishSLD(filePublished, info.name);
+            }
+//            } else {
+//                info.sld = "default_raster";
+//            }
+            //
+            String TFWFileName = origName + ".tfw";
+            File fileTFW = new File(tempUserTifDir, TFWFileName);
+            if (fileTFW.exists()) {
+                PublishUtility.copyFile(fileTFW,
+                        tempUserTifDir, newName + ".tfw", true);
+                fileTFW.delete();
+            }
+            String PRJFileName = origName + ".prj";
+            File filePRJ = new File(tempUserTifDir, PRJFileName);
+            if (filePRJ.exists()) {
+                PublishUtility.copyFile(filePRJ,
+                        tempUserTifDir, newName + ".prj", true);
+                filePRJ.delete();
+            }
+            result = Boolean.TRUE;
+        }
+        return result;
+    }
+
+    public static boolean manageRename(String userName, InfoPreview infoPreview,
+            String tempUserDir) throws ResourceNotFoundFault {
+        boolean result;
+        if (infoPreview.isIsShape()) {
+            result = renameZipShp(userName, infoPreview, tempUserDir);
+        } else {
+            result = renameTif(userName, infoPreview, tempUserDir);
+        }
+        return result;
+    }
+
+//    public static void copyTifFiles(String origName, String tempUserTifDir,
+//            String userName, LayerInfo info) {
+//        String SLDFileName = origName + ".sld";
+//        File fileSLD = new File(tempUserTifDir, SLDFileName);
+//        if (fileSLD.exists()) {
+//            File filePublished = PublishUtility.copyFile(fileSLD,
+//                    tempUserTifDir, userName + "_" + info.name + ".sld", true);
+//            fileSLD.delete();
+//            info.sld = this.publishSLD(filePublished, info.name);
+//        } else {
+//            info.sld = "default_raster";
+//        }
+//        String TFWFileName = origName + ".tfw";
+//        File fileTFW = new File(tempUserTifDir, TFWFileName);
+//        if (fileTFW.exists()) {
+//            PublishUtility.copyFile(fileTFW,
+//                    tempUserTifDir, userName + "_" + info.name + ".tfw", true);
+//            fileTFW.delete();
+//        }
+//        String PRJFileName = origName + ".prj";
+//        File filePRJ = new File(tempUserTifDir, PRJFileName);
+//        if (filePRJ.exists()) {
+//            PublishUtility.copyFile(filePRJ,
+//                    tempUserTifDir, userName + "_" + info.name + ".prj", true);
+//            filePRJ.delete();
+//        }
+//    }
     public static File getFileNameToLowerCase(File file) {
         File fileToReturn = new File(FilenameUtils.getFullPath(file.getAbsolutePath())
                 + file.getName().toLowerCase());
@@ -163,7 +302,8 @@ public class PublishUtility {
         return fileToReturn;
     }
 
-    public static void extractEntryToFile(ZipEntry entry, ZipFile zipSrc, String tempUserDir) {
+    public static void extractEntryToFile(ZipEntry entry, ZipFile zipSrc,
+            String tempUserDir) throws ResourceNotFoundFault {
         String entryName;
         FileOutputStream fileoutputstream = null;
         InputStream zipinputstream = null;
@@ -179,6 +319,8 @@ public class PublishUtility {
                 fileoutputstream.write(buf, 0, n);
             }
         } catch (IOException ioe) {
+            logger.error("ERROR on extractEntryToFile(): " + ioe.getMessage());
+            throw new ResourceNotFoundFault(ioe.getMessage());
         } finally {
             try {
                 fileoutputstream.close();

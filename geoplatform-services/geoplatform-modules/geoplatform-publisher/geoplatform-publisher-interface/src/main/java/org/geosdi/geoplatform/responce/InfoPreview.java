@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.responce;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -53,12 +54,17 @@ public class InfoPreview {
     private double upperY = 0.0d;
     private String crs = "";
     private boolean isShape;
+    private boolean isPresent;
     private String message = "ok";
     private String styleName;
+    //
+    private LayerPublishAction layerPublishAction;
+    private String newName = "";
 
+    
     public InfoPreview(String url, String workspace, String layerName,
             double minX, double minY, double maxX, double maxY, String crs,
-            String styleName, boolean isShape) {
+            String styleName, boolean isShape, boolean isPresent) {
         this.dataSource = url;
         this.workspace = workspace;
         this.title = layerName;
@@ -69,6 +75,7 @@ public class InfoPreview {
         this.crs = crs;
         this.isShape = isShape;
         this.styleName = styleName;
+        this.isPresent = isPresent;
     }
 
     public InfoPreview() {
@@ -117,6 +124,14 @@ public class InfoPreview {
 
     public void setIsShape(boolean isShape) {
         this.isShape = isShape;
+    }
+
+    public boolean isIsPresent() {
+        return isPresent;
+    }
+
+    public void setIsPresent(boolean isPresent) {
+        this.isPresent = isPresent;
     }
 
     public double getMaxX() {
@@ -173,8 +188,30 @@ public class InfoPreview {
         this.styleName = styleName;
     }
 
+    public LayerPublishAction getLayerPublishAction() {
+        return layerPublishAction;
+    }
+
+    public void setLayerPublishAction(LayerPublishAction layerPublishAction) {
+        this.layerPublishAction = layerPublishAction;
+    }
+
+    public String getNewName() {
+        return newName;
+    }
+
+    public void setNewName(String newName) {
+        this.newName = newName;
+    }
+
     @Override
     public String toString() {
-        return "InfoPreview{" + "dataSource=" + dataSource + ", workspace=" + workspace + ", title=" + title + ", lowerX=" + lowerX + ", lowerY=" + lowerY + ", upperX=" + upperX + ", upperY=" + upperY + ", crs=" + crs + ", isShape=" + isShape + ", message=" + message + ", styleName=" + styleName + '}';
+        return "InfoPreview{" + "dataSource=" + dataSource + ", workspace="
+                + workspace + ", title=" + title + ", lowerX=" + lowerX
+                + ", lowerY=" + lowerY + ", upperX=" + upperX + ", upperY="
+                + upperY + ", crs=" + crs + ", isShape=" + isShape
+                + ", isPresent=" + isPresent + ", newName=" + newName
+                + ", layerPublishAction=" + layerPublishAction 
+                + ", message=" + message + ", styleName=" + styleName + '}';
     }
 }

@@ -19,6 +19,10 @@
     <dependencies>
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-sharing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-base-util</artifactId>
         </dependency>
         <!-- JUnit -->

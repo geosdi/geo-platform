@@ -35,12 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.StoreEvent;
 import com.extjs.gxt.ui.client.store.StoreListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.*;
 import com.google.common.collect.Lists;
@@ -56,8 +60,10 @@ import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -71,6 +77,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
             BasicWidgetResources.ICONS.done());
     private ProcessEPSGResultRequest processEPSGRequest = GWT.
             <ProcessEPSGResultRequest>create(ProcessEPSGResultRequest.class);
+    private TextField<String> newNameTextField = new TextField<String>();
 
     public EPSGTablePanel() {
         super(Boolean.TRUE);
@@ -80,9 +87,8 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         this.store.removeAll();
         for (PreviewLayer previewLayer : epsgLayerList) {
             EPSGLayerData epsgLayerData = new EPSGLayerData(previewLayer.
-                    getTitle(),
-                    previewLayer.getCrs(), previewLayer.getStyleName(),
-                    previewLayer.isIsShape());
+                    getTitle(), previewLayer.getCrs(), previewLayer.getStyleName(),
+                    previewLayer.isIsShape(), previewLayer.isIsPresent());
             this.store.add(epsgLayerData);
         }
         this.manageProcessEPSGButton();
@@ -90,7 +96,7 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
 
     @Override
     public void addComponent() {
-        List<ColumnConfig> configs = Lists.newArrayList();
+        List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
         ColumnConfig featureNameColumnConfig = new ColumnConfig(
                 EPSGLayerData.NAME, PublisherWidgetConstants.INSTANCE.EPSGTablePanel_columnFeatureNameText(), 80);
         configs.add(featureNameColumnConfig);
@@ -101,6 +107,72 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         epsgTextField.setAllowBlank(Boolean.FALSE);
         epsgColumnConfig.setEditor(new CellEditor(epsgTextField));
         configs.add(epsgColumnConfig);
+
+        ColumnConfig newNameColumnConfig = new ColumnConfig(EPSGLayerData.NEW_NAME,
+                "New Name", 120);//ToDo: i18n
+        newNameTextField.setEmptyText(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_epsgTextFieldEmptyText());
+        newNameTextField.setEnabled(Boolean.FALSE);
+        newNameTextField.setAllowBlank(Boolean.TRUE);
+        final CellEditor newNameCellEditor = new CellEditor(newNameTextField);
+        newNameColumnConfig.setEditor(newNameCellEditor);
+
+        ColumnConfig publishColumnConfig = new ColumnConfig(EPSGLayerData.PUBLISH_ACTION,
+                "Publish Action", 100);//ToDo: i18n
+        GridCellRenderer<EPSGLayerData> renderer = new GridCellRenderer<EPSGLayerData>() {
+
+            private boolean init = false;
+            private SimpleComboBox<String> publishActionComboBox;
+            private EPSGLayerData model;
+
+            @Override
+            public Object render(final EPSGLayerData model, String property,
+                    ColumnData config, int rowIndex, int colIndex,
+                    final ListStore<EPSGLayerData> store, Grid<EPSGLayerData> grid) {
+                if (!init || (this.model != null && !this.model.equals(model))) {
+                    this.publishActionComboBox = new SimpleComboBox<String>();
+                    newNameTextField.setAllowBlank(Boolean.TRUE);
+                    newNameTextField.setEnabled(Boolean.FALSE);
+                    publishActionComboBox.setEditable(Boolean.FALSE);
+                    publishActionComboBox.setWidth(grid.getColumnModel().getColumnWidth(colIndex) - 5);
+                    List<LayerPublishAction> l = model.getPublishActions();
+                    if (l != null) {
+                        for (LayerPublishAction publishAction : l) {
+                            publishActionComboBox.add(publishAction.toString());
+                        }
+                        publishActionComboBox.setAllowBlank(Boolean.FALSE);
+                        publishActionComboBox.addListener(Events.Select, new Listener<BaseEvent>() {
+
+                            @Override
+                            public void handleEvent(BaseEvent be) {
+                                if (publishActionComboBox.isValid()) {
+                                    model.setPublishAction(publishActionComboBox.getValue().getValue());
+                                    String publishAction = publishActionComboBox.getValue().getValue();
+                                    if (LayerPublishAction.valueOf(publishAction).equals(LayerPublishAction.RENAME)) {
+                                        newNameTextField.setEnabled(Boolean.TRUE);
+                                        newNameTextField.setAllowBlank(Boolean.FALSE);
+                                    } else {
+                                        store.getRecord(model).reject(Boolean.FALSE);
+                                        newNameTextField.setAllowBlank(Boolean.TRUE);
+                                        newNameTextField.setEnabled(Boolean.FALSE);
+                                    }
+                                } else {
+                                    model.setPublishAction(null);
+                                }
+                                manageProcessEPSGButton();
+                            }
+                        });
+                    }
+                    init = true;
+                    this.model = model;
+                }
+                return publishActionComboBox;
+            }
+        };
+        publishColumnConfig.setRenderer(renderer);
+        configs.add(publishColumnConfig);
+
+        configs.add(newNameColumnConfig);
+
         this.grid = new EditorGrid<EPSGLayerData>(store,
                 new ColumnModel(configs));
         grid.setBorders(Boolean.TRUE);
@@ -115,34 +187,38 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         super.add(this.grid);
         this.processEPSGButton.addSelectionListener(
                 new SelectionListener<ButtonEvent>() {
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                store.commitChanges();
-                processEPSGRequest.setPreviewLayerList(store.getModels());
-
-                ClientCommandDispatcher.getInstance().execute(
-                        new GPClientCommand<ProcessEPSGResultResponse>() {
-                    private static final long serialVersionUID = -8303308816796000537L;
-
-                    {
-                        super.setCommandRequest(processEPSGRequest);
-                    }
-                    private FeaturePreviewEvent event = new FeaturePreviewEvent();
-
                     @Override
-                    public void onCommandSuccess(
-                            ProcessEPSGResultResponse response) {
-                        event.setResult(response.getResult());
-                        GPHandlerManager.fireEvent(event);
-                    }
+                    public void componentSelected(ButtonEvent ce) {
+                        store.commitChanges();
+                        processEPSGRequest.setPreviewLayerList(store.getModels());
+                        ClientCommandDispatcher.getInstance().execute(
+                                new GPClientCommand<ProcessEPSGResultResponse>() {
+                                    private static final long serialVersionUID = -8303308816796000537L;
 
-                    @Override
-                    public void onCommandFailure(Throwable exception) {
-                        System.out.println("Error: " + exception);
+                                    {
+                                        super.setCommandRequest(processEPSGRequest);
+                                    }
+                                    private FeaturePreviewEvent event = new FeaturePreviewEvent();
+
+                                    @Override
+                                    public void onCommandSuccess(
+                                            ProcessEPSGResultResponse response) {
+                                                event.setResult(response.getResult());
+                                                GPHandlerManager.fireEvent(event);
+                                            }
+
+                                            @Override
+                                            public void onCommandFailure(Throwable exception) {
+                                                GeoPlatformMessage.errorMessage("Publisher Error", 
+                                                        exception.getMessage());//TODO:i18n
+                                                System.out.println("EPSGTablePanel Exception: " + exception.toString());
+                                                System.out.println("Stack Trace Exception: " + exception.getStackTrace());
+                                                System.out.println("Message Exception: " + exception.getMessage());
+                                                exception.printStackTrace();
+                                            }
+                                });
                     }
                 });
-            }
-        });
         this.processEPSGButton.setToolTip(PublisherWidgetConstants.INSTANCE.EPSGTablePanel_processEPSGButtonTooltipText());
         super.addButton(this.processEPSGButton);
     }
@@ -157,12 +233,14 @@ public class EPSGTablePanel extends GeoPlatformContentPanel {
         boolean result = Boolean.TRUE;
         for (EPSGLayerData epsgLayerData : store.getModels()) {
             String epsgCode = epsgLayerData.getEpsgCode();
-            String test = "x";
+            String test = "";
             if (epsgCode.length() > 5) {
                 test = epsgCode.substring(0, 5);
             }
             if (epsgCode == null || epsgCode.isEmpty()
-                    || !test.equalsIgnoreCase("EPSG:")) {
+                    || !test.equalsIgnoreCase("EPSG:")
+                    || (epsgLayerData.getPublishAction() == null && epsgLayerData.isIsPresent())
+                    || !this.newNameTextField.isValid()) {
                 result = Boolean.FALSE;
                 break;
             }

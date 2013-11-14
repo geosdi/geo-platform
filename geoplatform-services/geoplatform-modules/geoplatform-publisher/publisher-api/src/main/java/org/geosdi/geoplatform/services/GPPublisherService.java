@@ -121,19 +121,6 @@ public interface GPPublisherService extends IGPPublisherService {
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/preview/uploadShpInPreview")
-    @WebResult(name = "Result")
-    List<InfoPreview> uploadShapeInPreview(
-            @WebParam(name = "sessionID") String sessionID,
-            @WebParam(name = "username") String username,
-            @WebParam(name = "shpFileName") File shpFile,
-            @WebParam(name = "dbfFileName") File dbfFile,
-            @WebParam(name = "shxFileName") File shxFile,
-            @WebParam(name = "prjFileName") File prjFile,
-            @WebParam(name = "sldFileName") File sldFile)
-            throws ResourceNotFoundFault;
-
-    @Get
     @HttpResource(location = "/preview/getPreviewDataStores")
     @WebResult(name = "Result")
     List<InfoPreview> getPreviewDataStores(

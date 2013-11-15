@@ -498,7 +498,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             File fileSLD = new File(tempUserTifDir, SLDFileName);
             if (fileSLD.exists()) {
                 File filePublished = PublishUtility.copyFile(fileSLD,
-                        tempUserTifDir, userName + "_" + info.name + ".sld", true);
+                        tempUserTifDir, info.name + ".sld", true);
                 fileSLD.delete();
                 info.sld = this.publishSLD(filePublished, info.name);
             } else {
@@ -508,14 +508,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
             File fileTFW = new File(tempUserTifDir, TFWFileName);
             if (fileTFW.exists()) {
                 PublishUtility.copyFile(fileTFW,
-                        tempUserTifDir, userName + "_" + info.name + ".tfw", true);
+                        tempUserTifDir, info.name + ".tfw", true);
                 fileTFW.delete();
             }
             String PRJFileName = origName + ".prj";
             File filePRJ = new File(tempUserTifDir, PRJFileName);
             if (filePRJ.exists()) {
                 PublishUtility.copyFile(filePRJ,
-                        tempUserTifDir, userName + "_" + info.name + ".prj", true);
+                        tempUserTifDir, info.name + ".prj", true);
                 filePRJ.delete();
             }
             infoTifList.add(info);
@@ -868,9 +868,15 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService,
                         || this.restReader.getLayer(userWorkspace, userName + "_" + infoPreview.getNewName()) != null) {
                     throw new ResourceNotFoundFault("A layer named: " + infoPreview.getNewName() + " already exists");
                 }
-                PublishUtility.manageRename(userName, infoPreview, tempUserDir);
-                        //TODO Pubblicare lo stile se duplicato il tif
-                //this.publishSLD(fileInTifDir, userName);
+                boolean result = PublishUtility.manageRename(userName, infoPreview, tempUserDir);
+                //Pubblicare lo stile se ho duplicato il tif
+                if (result && !infoPreview.isIsShape()) {
+                    String SLDFileName = infoPreview.getDataStoreName() + ".sld";
+                    File fileSLD = new File(tempUserTifDir, SLDFileName);
+                    if (fileSLD.exists()) {
+                        infoPreview.setStyleName(this.publishSLD(fileSLD, infoPreview.getDataStoreName()));
+                    }
+                }
             }
             LayerInfo info = new LayerInfo();
             info.epsg = infoPreview.getCrs();

@@ -200,7 +200,7 @@ public class PublishUtility {
                 } catch (IOException ex) {
                 }
             }
-            logger.debug("Layer renamed: " + result);
+            logger.debug("Shape Zip renamed: " + result);
             if (result) {
                 infoPreview.setDataStoreName(newName);
             }
@@ -228,11 +228,7 @@ public class PublishUtility {
                 File filePublished = PublishUtility.copyFile(fileSLD,
                         tempUserTifDir, newName + ".sld", true);
                 fileSLD.delete();
-//                info.sld = this.publishSLD(filePublished, info.name);
             }
-//            } else {
-//                info.sld = "default_raster";
-//            }
             //
             String TFWFileName = origName + ".tfw";
             File fileTFW = new File(tempUserTifDir, TFWFileName);
@@ -248,7 +244,9 @@ public class PublishUtility {
                         tempUserTifDir, newName + ".prj", true);
                 filePRJ.delete();
             }
+            infoPreview.setDataStoreName(newName);
             result = Boolean.TRUE;
+            logger.debug("Tif renamed: " + result);
         }
         return result;
     }
